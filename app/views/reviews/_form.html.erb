@@ -1,0 +1,22 @@
+<%= link_to "Back to Review List", reviews_path %>
+
+<%= form_for @review do |a| %>
+
+  <% if @review.errors.any? %>
+    <% @review.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  <% end %>
+
+  <p>
+    <%= a.label :building_review_title %><br>
+    <%= a.text_field :building_review_title %>
+  </p>
+
+  <p>
+    <%= a.label :building %><br>
+    <%= collection_select(:review, :building_id, Building.all, :id, :building_name, include_blank: true) %>
+  </p>
+
+  <%= a.submit %>
+<% end %>

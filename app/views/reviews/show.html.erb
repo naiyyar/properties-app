@@ -1,0 +1,13 @@
+<%= link_to "Back to Review List", reviews_path %>
+
+<h1>Review</h1>
+
+  <p>
+
+  <%= @review.building_review_title %>
+
+  </p>
+
+<p>
+  <strong>Building:</strong> <%= @review.building.try(:building_name) %>
+</p>

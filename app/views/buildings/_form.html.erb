@@ -1,0 +1,26 @@
+<%= link_to "Back to Building List", buildings_path %>
+
+<%= form_for @building, html: { multipart: true } do |a| %>
+
+  <% if @building.errors.any? %>
+    <% @building.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  <% end %>
+
+  <p>
+    <%= a.label :building_name %><br>
+    <%= a.text_field :building_name %>
+  </p>
+
+  <p>
+    <%= a.label :building_street_address %><br>
+    <%= a.text_field :building_street_address %>
+  </p>
+
+  <p>
+    <%= a.file_field :photo  %>
+  </p>
+
+  <%= a.submit %>
+<% end %>

@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="pull-left">
+    <h4>  
+    <%= form_tag buildings_path, method: :get do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag "Search" %>
+    <% end %>
+    </h4>
+  </div>
+  <div class="pull-right">  
+    <h4>
+    <% if current_user %>
+    <%= link_to "Create New Building", new_building_path%>
+    <% end %>
+    </h4>
+  </div>
+</div>
+
+</br>
+</br>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Building Name</th>
+        <th>Building Street Address</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @buildings.each do |building| %>
+      <tr>
+        <td><%= link_to(building.building_name, building_path(building)) %></td>
+        <td><%= building.building_street_address %></td>
+        <td><%= link_to "edit", edit_building_path(building) %></td>
+        <td><%= link_to "delete", building_path(building), method: :delete, data: {confirm: "Are you sure you want to delete this building?"}%></td>  
+        <td><%= building.latitude %></td>
+        <td><%= building.longitude %></td>
+        <%end%>   
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
