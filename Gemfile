@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem "font-awesome-rails"
 
 gem "paperclip", "~> 4.3"
 
@@ -8,6 +9,10 @@ gem 'gmaps4rails'
 
 gem 'geocoder'
 
+gem 'mysql2'
+
+#Role management
+gem "rolify"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -39,6 +44,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -53,6 +60,8 @@ group :development do
   gem 'spring'
   gem 'sqlite3'
   gem 'pry'
+  gem "better_errors"
+  gem 'binding_of_caller'
 end
 
 group :production do
@@ -63,4 +72,4 @@ group :production do
 
 end
 
-ruby "2.2.1"
+ruby "2.2.2"

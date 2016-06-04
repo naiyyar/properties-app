@@ -1,0 +1,10 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.login-modal{
+	max-width: 330px;
+}
+.modal-dialog {
+  width: 400px !important;
+  margin: 30px auto !important;
+}

@@ -11,45 +11,71 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403222518) do
+ActiveRecord::Schema.define(version: 20160604061926) do
 
   create_table "buildings", force: :cascade do |t|
-    t.string   "building_name"
-    t.string   "building_street_address"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
+    t.string   "building_name",           limit: 255
+    t.string   "building_street_address", limit: 255
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "photo_file_name",         limit: 255
+    t.string   "photo_content_type",      limit: 255
+    t.integer  "photo_file_size",         limit: 4
     t.datetime "photo_updated_at"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "latitude",                limit: 24
+    t.float    "longitude",               limit: 24
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string   "building_review_title"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "building_id"
-    t.integer  "user_id"
+    t.string   "building_review_title", limit: 255
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "building_id",           limit: 4
+    t.integer  "user_id",               limit: 4
   end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",          limit: 255
+    t.integer  "resource_id",   limit: 4
+    t.string   "resource_type", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "name",                   limit: 255
+    t.string   "avatar_file_name",       limit: 255
+    t.string   "avatar_content_type",    limit: 255
+    t.integer  "avatar_file_size",       limit: 4
+    t.datetime "avatar_updated_at"
+    t.string   "provider",               limit: 255
+    t.string   "uid",                    limit: 255
+    t.string   "image_url",              limit: 255
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id", limit: 4
+    t.integer "role_id", limit: 4
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
 end

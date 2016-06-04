@@ -9,14 +9,12 @@
 <body>
 
   <%= render 'layouts/shared/navbar' %>
-    <div class="container">
-    <% flash.each do |name, msg| %>
-      <div class="<%= name %>">
-        <%= msg %>
-      </div>
-    <% end %>  
-
-<%= yield %>
+  <div class="container">
+    <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
+        
+    <%= yield %>
   </div>
+  <%= render partial: "layouts/shared/login_modal" %>
+
 </body>
 </html>

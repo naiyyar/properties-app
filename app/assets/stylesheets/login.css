@@ -1,0 +1,57 @@
+.login-tab {
+	margin: 0 auto;
+	max-width: 380px;
+}
+
+.login-modal i {
+	color: #000;
+}
+
+.login-modal form {
+	max-width: 340px;
+}
+
+.tab-pane form {
+	margin: 0 auto;
+}
+.login-modal-footer{
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+.social-btns a{
+	margin: 0px 10px;
+}
+
+.social-btns a > span{
+  margin-right: 20px;
+}
+
+div.hr {
+  position: relative;
+  display: block;
+  height: 0;
+  width: 100%;
+  margin: 19px 0;
+  text-align: center;
+  color: #999;
+}
+
+div.hr span.center {
+  display: inline-block;
+  position: relative;
+  top: -2.30em;
+  padding: 4px 10px;
+  margin: 0 auto;
+  background-color: #FFF;
+  line-height: 1em;
+}
+
+#loginModal ul.nav li a{
+  padding: 10px 40px !important;
+}
+
+#user-image img{
+  width: 30px;
+  border: 1px solid #777;
+}
