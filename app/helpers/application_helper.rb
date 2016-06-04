@@ -1,7 +1,7 @@
 module ApplicationHelper
 	
-	def flash_class(level)
-    case level.to_sym
+	def flash_class(flash_type)
+    case flash_type.to_sym
       when :notice then "alert alert-success"
       when :info then "alert alert-info"
       when :error then "alert alert-danger"
