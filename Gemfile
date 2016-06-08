@@ -4,6 +4,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem "font-awesome-rails"
 
 gem "paperclip", "~> 4.3"
+gem 'dropzonejs-rails'
 
 gem 'gmaps4rails'
 
@@ -13,6 +14,9 @@ gem 'mysql2'
 
 #Role management
 gem "rolify"
+
+#rating
+gem 'ratyrate'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'

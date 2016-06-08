@@ -1,16 +1,16 @@
 <div class="container">
   <div class="pull-left">
     <h4>  
-    <%= form_tag buildings_path, method: :get do %>
-    <%= text_field_tag :search %>
-    <%= submit_tag "Search" %>
+      <%= form_tag buildings_path, method: :get do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag "Search" %>
     <% end %>
     </h4>
   </div>
   <div class="pull-right">  
     <h4>
     <% if current_user %>
-    <%= link_to "Create New Building", new_building_path%>
+      <%= link_to "Create New Building", new_building_path%>
     <% end %>
     </h4>
   </div>

@@ -20,8 +20,8 @@ class BuildingsController < ApplicationController
     @building = Building.create(building_params)
 
     if @building.save
-      flash[:notice] = "Building Created"
-      redirect_to building_path(@building)
+      flash[:notice] = "Building Created."
+      redirect_to buildings_path
     else
       flash.now[:error] = "Error Creating"
       render :new
@@ -54,7 +54,8 @@ class BuildingsController < ApplicationController
 
 
   def building_params
-    params.require(:building).permit(:building_name, :building_street_address, :photo, :latitude, :longitude)
+    params.require(:building).permit(:building_name, :building_street_address, :photo, :latitude, :longitude,:city,:state,:phone, :zipcode, :address2,:weburl,
+                                      uploads_attributes:[:id,:image,:imageable_id,:imageable_type])
   end
 
 end

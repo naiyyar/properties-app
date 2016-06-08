@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>AptreviewApp</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>AptreviewApp</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-  <%= render 'layouts/shared/navbar' %>
-  <div class="container">
-    <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
-        
-    <%= yield %>
-  </div>
-  <%= render partial: "layouts/shared/login_modal" %>
+    <%= render 'layouts/shared/navbar' %>
+    <div class="container">
+      <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
+      <%= yield %>
+    </div>
+    <%= render partial: "layouts/shared/login_modal" %>
 
-</body>
+  </body>
 </html>

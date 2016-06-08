@@ -19,8 +19,8 @@ class ReviewsController < ApplicationController
     @building = Building.find(params[:review][:building_id])
 
     if @review.save
-      flash[:notice] = "Review Created"
-      redirect_to building_path(@building)
+      flash[:notice] = "Review Created Successfully."
+      redirect_to :back
       # redirect_to review_path(@review)
     else
       flash.now[:error] = "Error Creating"

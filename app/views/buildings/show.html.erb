@@ -1,66 +1,129 @@
-<div class="container">  
-  <h1>
-    <%= @building.building_name %>
-  </h1>
-  <h4> 
-    <%= @building.building_street_address %>
-  </h4>
-  <p>
-    <%= image_tag @building.photo.url(:large), class: "profile-image" %>  
-  </p>
+<div class="row">  
+  <div class="col-lg-6 col-md-6">
+    <div class="address-area">
+      <h1>
+        <%= @building.building_name %>
+      </h1>
+      <ul class="total-reviews list-inline">
+        <li><%= rating_for @building, "building" %></li> |
+        <li>20% recommended</li> |
+        <li><%= link_to "#{@building.reviews.count} reviews", "#" %> </li> |
+        <li>1233 unit reviews</li>
+      </ul>
+      
+      <div class="address">
+        <p> <b><%= @building.building_street_address %> </b></p>
+        <p> <b><%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %> </b></p>
+        <%#= image_tag @building.photo.url(:medium), class: "profile-image" %>  
+      </div>
 
-
-<!-- </div>
-
-  <form role="form">
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email">
+      <div class="map"> 
+        <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@building.latitude},#{@building.longitude}&markers=#{@building.latitude},#{@building.longitude}&zoom=12&size=550x235&key=AIzaSyA4BHW3txEdqfxzdTlPwaHsYRSZbfeIcd8", class: 'img-fluid img-rounded', alt: "#{@building.building_name} on the map" %>
+      </div>
+      
     </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+  </div>
+
+  <div class="col-lg-6 col-md-6">
+    <div style="padding:1px 0;margin-top:71px;">
+      <div class="btn-group" role="group">
+      <%= link_to '<span class="fa fa-camera"><span> Add photo'.html_safe, '#', class: "btn btn-info"  %>
+      <%= link_to '<span class="fa fa-share-square-o"><span> Share'.html_safe, '#', class: "btn btn-default"  %>
+      <%= link_to '<span class="fa fa-bookmark"><span> Bookmark'.html_safe, '#', class: "btn btn-default"  %>
     </div>
+      <div id="thumbnail-slider">
+        <div class="inner">
+          <ul>
+            <li>
+              <%= image_tag "6.jpg", class: "thumb" %>
+            </li>
+            <li>
+                <%= image_tag "7.jpg", class: "thumb" %>
+            </li>
+            <li>
+                <%= image_tag "2.jpg", class: "thumb" %>
+            </li>
+            <li>
+                <%= image_tag "3.jpg", class: "thumb" %>
+            </li>
+            <li>
+                <%= image_tag "4.jpg", class: "thumb" %>
+            </li>
+            <li>
+                <%= image_tag "5.jpg", class: "thumb" %>
+            </li>
+            <li>
+                <%= image_tag "8.jpg", class: "thumb" %>
+            </li>
+            <li>
+                <%= image_tag "9.jpg", class: "thumb" %>
+            </li>
+            <li>
+                <%= image_tag "10.jpg", class: "thumb" %>
+            </li>
+            <li>
+                <%= image_tag "11.jpg", class: "thumb" %>
+            </li>
+          </ul>
+          <div class="pull-right">
+            <span class="fa fa-th-large"></span> <%= link_to 'See all'.html_safe, '#' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
-</div> -->
-
-
-<div class="container">  
+<div class="row">  
+  <div class="col-lg-6 col-md-6">
   <% if current_user %>
-    <h3>Add Your Review</h3>
+    <h3>Add Your Review For <b><%= @building.building_name %><b></h3>
+      <hr/>
       <%= form_for @review do |f| %>
-      
-          <%= f.label :building_review_title %><br/>
-          <%= f.text_field :building_review_title %>
-      
+        <%= f.text_area :building_review_title,  class: 'form-control' %>
         <%= f.hidden_field :building_id, value: @building.id %>
         <%= f.hidden_field :user_id, value: current_user.id %>
-
-
-        <%= f.submit %>
+        <br />
+        <%= f.submit 'Submit', class: "btn btn-primary" %>
       <% end %>
      <% end %>
-
+  </div>
 </div>
+<br />
+<% if current_user %>
+  <div class="row">  
+    <div class="col-lg-6 col-md-6">
+      <% if current_user.reviews.present? %>
+        <div class="well">
+          <% current_user.reviews.each do |review| %>
+            <div class="media">
+              <div class="media-left">
+                <a href="#">
+                  <% if current_user.avatar.present? %>
+                    <%= image_tag current_user.avatar %>
+                  <% elsif current_user.image_url.present? %>
+                    <%= image_tag current_user.image_url %>
+                  <%else%>
+                    <span class="fa fa-user fa-2x"></span>
+                  <%end%>
+                </a>
+              </div>
 
-
-</br>
-</br>
-
-
-<div class="container">  
-
-  <% @reviews.each do |review| %>
-    <p> title: <%= review.building_review_title %></p>
-<!--     <p> userID: <%= review.user_id %></p> -->
-    <p> user: <%= review.user.email %></p>
-    <p> <%= review.created_at %></p>
-    <hr/>
-  <% end %>
-
-</div>
+              <div class="media-body">
+                <h4 class="media-heading"><%= current_user.name %></h4>
+                <%= rating_for_user @building, current_user,"building", star: 5 %>
+                <p> <%= simple_format(review.building_review_title) %></p>
+              </div>
+            </div>
+            <hr/>
+          <% end %>
+        </div>
+      <%end%>
+    </div>
+  </div>
+<%else%>
+  <!-- TODO: all user reviews for current building -->
+<%end%>
 
 
 

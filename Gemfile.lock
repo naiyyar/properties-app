@@ -72,6 +72,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dropzonejs-rails (0.7.3)
+      rails (> 3.1)
     erubis (2.7.0)
     execjs (2.6.0)
     faraday (0.9.2)
@@ -169,6 +171,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.1.1)
+    ratyrate (1.2.2.alpha)
     rdoc (4.2.2)
       json (~> 1.4)
     responders (2.1.1)
@@ -221,6 +224,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  dropzonejs-rails
   font-awesome-rails
   geocoder
   gmaps4rails
@@ -234,6 +238,7 @@ DEPENDENCIES
   pry
   rails (= 4.2.5.1)
   rails_12factor
+  ratyrate
   rolify
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
