@@ -6,15 +6,15 @@
 #
 default: &default
   host: localhost
-  adapter: mysql2
+  adapter: postgresql
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  database: aptreview_app
-  username: root
-  password: root
+  database: apt_reviews
+  username: postgres
+  password: postgres
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

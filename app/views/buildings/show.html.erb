@@ -2,25 +2,31 @@
   <div class="col-lg-6 col-md-6">
     <div class="address-area">
       <h1>
-        <%= @building.building_name %>
+        <%= @building.building_name %> |
       </h1>
+
       <ul class="total-reviews list-inline">
-        <li><%= rating_for @building, "building" %></li> |
+        <li><%= rating_for @building, "building", :disable_before_rate => true %></li> |
         <li>20% recommended</li> |
         <li><%= link_to "#{@building.reviews.count} reviews", "#" %> </li> |
         <li>1233 unit reviews</li>
+        <% if current_user %>
+          | <li><%= link_to "Edit", edit_building_path(@building)%></li>
+        <%end%>
       </ul>
       
       <div class="address">
         <p> <b><%= @building.building_street_address %> </b></p>
         <p> <b><%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %> </b></p>
-        <%#= image_tag @building.photo.url(:medium), class: "profile-image" %>  
       </div>
 
       <div class="map"> 
         <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@building.latitude},#{@building.longitude}&markers=#{@building.latitude},#{@building.longitude}&zoom=12&size=550x235&key=AIzaSyA4BHW3txEdqfxzdTlPwaHsYRSZbfeIcd8", class: 'img-fluid img-rounded', alt: "#{@building.building_name} on the map" %>
       </div>
-      
+     
+    </div>
+    <div id="building-info">
+      <%= render partial: 'amenities' %>
     </div>
   </div>
 
@@ -77,7 +83,9 @@
 <div class="row">  
   <div class="col-lg-6 col-md-6">
   <% if current_user %>
-    <h3>Add Your Review For <b><%= @building.building_name %><b></h3>
+    <h3>Add Reviews For <b><%= @building.building_name %><b></h3>
+      <!-- <hr/> -->
+      <%= rating_for_user @building, current_user, "building", :star => 5 %>
       <hr/>
       <%= form_for @review do |f| %>
         <%= f.text_area :building_review_title,  class: 'form-control' %>
@@ -111,7 +119,7 @@
 
               <div class="media-body">
                 <h4 class="media-heading"><%= current_user.name %></h4>
-                <%= rating_for_user @building, current_user,"building", star: 5 %>
+                <%#= rating_for_user @building, current_user,"building", star: 5 %>
                 <p> <%= simple_format(review.building_review_title) %></p>
               </div>
             </div>

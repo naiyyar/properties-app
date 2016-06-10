@@ -11,50 +11,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607155140) do
+ActiveRecord::Schema.define(version: 20160610033440) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "average_caches", force: :cascade do |t|
-    t.integer  "rater_id",      limit: 4
-    t.integer  "rateable_id",   limit: 4
-    t.string   "rateable_type", limit: 255
-    t.float    "avg",           limit: 24,  null: false
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "avg",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "buildings", force: :cascade do |t|
-    t.string   "building_name",           limit: 255
-    t.string   "building_street_address", limit: 255
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "photo_file_name",         limit: 255
-    t.string   "photo_content_type",      limit: 255
-    t.integer  "photo_file_size",         limit: 4
+    t.string   "building_name"
+    t.string   "building_street_address"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.float    "latitude",                limit: 24
-    t.float    "longitude",               limit: 24
-    t.string   "address2",                limit: 255
-    t.string   "zipcode",                 limit: 255
-    t.string   "webaddress",              limit: 255
-    t.string   "city",                    limit: 255
-    t.string   "phone",                   limit: 255
-    t.string   "state",                   limit: 255
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address2"
+    t.string   "zipcode"
+    t.string   "webaddress"
+    t.string   "city"
+    t.string   "phone"
+    t.string   "state"
+    t.boolean  "pets_allowed"
+    t.boolean  "laundry_facility"
+    t.boolean  "parking"
+    t.boolean  "doorman"
+    t.boolean  "elevator"
+    t.text     "description"
   end
 
   create_table "overall_averages", force: :cascade do |t|
-    t.integer  "rateable_id",   limit: 4
-    t.string   "rateable_type", limit: 255
-    t.float    "overall_avg",   limit: 24,  null: false
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "overall_avg",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "rates", force: :cascade do |t|
-    t.integer  "rater_id",      limit: 4
-    t.integer  "rateable_id",   limit: 4
-    t.string   "rateable_type", limit: 255
-    t.float    "stars",         limit: 24,  null: false
-    t.string   "dimension",     limit: 255
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "stars",         null: false
+    t.string   "dimension"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,11 +72,11 @@ ActiveRecord::Schema.define(version: 20160607155140) do
   add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
 
   create_table "rating_caches", force: :cascade do |t|
-    t.integer  "cacheable_id",   limit: 4
-    t.string   "cacheable_type", limit: 255
-    t.float    "avg",            limit: 24,  null: false
-    t.integer  "qty",            limit: 4,   null: false
-    t.string   "dimension",      limit: 255
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -75,17 +84,17 @@ ActiveRecord::Schema.define(version: 20160607155140) do
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
   create_table "reviews", force: :cascade do |t|
-    t.string   "building_review_title", limit: 255
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.integer  "building_id",           limit: 4
-    t.integer  "user_id",               limit: 4
+    t.string   "building_review_title"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "building_id"
+    t.integer  "user_id"
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.integer  "resource_id",   limit: 4
-    t.string   "resource_type", limit: 255
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -94,45 +103,45 @@ ActiveRecord::Schema.define(version: 20160607155140) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "uploads", force: :cascade do |t|
-    t.string   "image_file_name",    limit: 255
-    t.string   "image_content_type", limit: 255
-    t.integer  "image_file_size",    limit: 4
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "imageable_id",       limit: 4
-    t.string   "imageable_type",     limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "name",                   limit: 255
-    t.string   "avatar_file_name",       limit: 255
-    t.string   "avatar_content_type",    limit: 255
-    t.integer  "avatar_file_size",       limit: 4
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "image_url"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "provider",               limit: 255
-    t.string   "uid",                    limit: 255
-    t.string   "image_url",              limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id", limit: 4
-    t.integer "role_id", limit: 4
+    t.integer "user_id"
+    t.integer "role_id"
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree

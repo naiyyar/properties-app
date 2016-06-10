@@ -10,7 +10,7 @@ gem 'gmaps4rails'
 
 gem 'geocoder'
 
-gem 'mysql2'
+gem 'pg'
 
 #Role management
 gem "rolify"

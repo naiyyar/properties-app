@@ -55,6 +55,7 @@ class BuildingsController < ApplicationController
 
   def building_params
     params.require(:building).permit(:building_name, :building_street_address, :photo, :latitude, :longitude,:city,:state,:phone, :zipcode, :address2,:weburl,
+                                      :pets_allowed,:laundry_facility,:parking,:doorman,:elevator,:description,
                                       uploads_attributes:[:id,:image,:imageable_id,:imageable_type])
   end
 
