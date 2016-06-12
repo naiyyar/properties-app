@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610033440) do
+ActiveRecord::Schema.define(version: 20160612065550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +89,11 @@ ActiveRecord::Schema.define(version: 20160610033440) do
     t.datetime "updated_at",            null: false
     t.integer  "building_id"
     t.integer  "user_id"
+    t.integer  "reviewable_id"
+    t.string   "reviewable_type"
   end
+
+  add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -101,6 +105,27 @@ ActiveRecord::Schema.define(version: 20160610033440) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "units", force: :cascade do |t|
+    t.integer  "building_id"
+    t.string   "name"
+    t.text     "pros"
+    t.text     "cons"
+    t.integer  "number_of_bedrooms"
+    t.integer  "number_of_bathrooms"
+    t.decimal  "monthly_rent",        default: 0.0
+    t.decimal  "square_feet",         default: 0.0
+    t.decimal  "total_upfront_cost",  default: 0.0
+    t.date     "rent_start_date"
+    t.date     "rent_end_date"
+    t.decimal  "security_deposit",    default: 0.0
+    t.decimal  "broker_fee",          default: 0.0
+    t.decimal  "move_in_fee",         default: 0.0
+    t.decimal  "rent_upfront_cost",   default: 0.0
+    t.decimal  "processing_fee",      default: 0.0
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
 
   create_table "uploads", force: :cascade do |t|
     t.string   "image_file_name"

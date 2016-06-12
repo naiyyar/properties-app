@@ -15,13 +15,13 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
-    @building = Building.find(params[:review][:building_id])
+    @reviewable = find_reviewable
+    @review = @reviewable.reviews.build(review_params)
+    @review.user_id = current_user.id
 
     if @review.save
       flash[:notice] = "Review Created Successfully."
       redirect_to :back
-      # redirect_to review_path(@review)
     else
       flash.now[:error] = "Error Creating"
       render :new
@@ -54,7 +54,15 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:building_review_title, :building_id, :user_id)
+    params.require(:review).permit(:building_review_title, :building_id, :user_id, :reviewable_id, :reviewable_type)
+  end
+
+  def find_reviewable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+          return $1.classify.constantize.find(value)
+      end
+    end
   end
 
 end

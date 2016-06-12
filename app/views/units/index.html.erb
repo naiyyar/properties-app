@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="pull-right">  
+    <h4>
+    <% if current_user %>
+      <%= link_to "Create New unit", new_unit_path%>
+    <% end %>
+    </h4>
+  </div>
+</div>
+
+</br>
+</br>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Unit Name</th>
+        <th>Building</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @units.each do |unit| %>
+      <tr>
+        <td><%= link_to(unit.name, unit_path(unit)) %></td>
+        <td><%= link_to unit.building.building_name, building_path(unit.building) %></td>
+        <td><%= %></td>
+        <td><%= %></td>
+        <% if current_user %>
+        <td><%= link_to "edit", edit_unit_path(unit) %></td>
+        <td><%= link_to "delete", unit_path(unit), method: :delete, data: { confirm: "Are you sure you want to delete this building?"}%></td>  
+        <% end %>
+        <%end%>   
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
