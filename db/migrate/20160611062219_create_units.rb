@@ -5,6 +5,7 @@ class CreateUnits < ActiveRecord::Migration
     	t.string :name
     	t.text :pros
     	t.text :cons
+      t.text :description
     	t.integer :number_of_bedrooms
     	t.integer :number_of_bathrooms
     	t.decimal :monthly_rent, default: 0.0
@@ -17,7 +18,6 @@ class CreateUnits < ActiveRecord::Migration
     	t.decimal :move_in_fee, default: 0.0
     	t.decimal :rent_upfront_cost, default: 0.0
     	t.decimal :processing_fee, default: 0.0
-
 
       t.timestamps null: false
     end

@@ -64,25 +64,43 @@
        <div class="col-sm-6">
         <div class="form-group">
           <label for="description">Security Deposit</label>
-           <%= f.number_field :security_deposit, class: "form-control datepicker", min: 0 %>
+           <%= f.number_field :security_deposit, class: "form-control", min: 0 %>
         </div>
       </div>
        <div class="col-sm-6">
         <div class="form-group">
           <label for="description">Broker Fee</label>
-           <%= f.number_field :broker_fee, class: "form-control datepicker", min: 0 %>
+           <%= f.number_field :broker_fee, class: "form-control", min: 0 %>
         </div>
       </div>
        <div class="col-sm-6">
         <div class="form-group">
-          <label for="description">Move In Fee</label>
-           <%= f.number_field :move_in_fee, class: "form-control datepicker", min: 0 %>
+          <label>Move In Fee</label>
+           <%= f.number_field :move_in_fee, class: "form-control", min: 0 %>
         </div>
       </div>
        <div class="col-sm-6">
         <div class="form-group">
-          <label for="description">Processing Fee</label>
-           <%= f.number_field :processing_fee, class: "form-control datepicker", min: 0 %>
+          <labe>Processing Fee</label>
+           <%= f.number_field :processing_fee, class: "form-control", min: 0 %>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Description</label>
+           <%= f.text_area :description, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Pros</label>
+           <%= f.text_area :pros, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label>Cons</label>
+           <%= f.text_area :cons, class: "form-control"%>
         </div>
       </div>
       

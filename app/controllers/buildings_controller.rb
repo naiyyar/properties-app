@@ -12,7 +12,6 @@ class BuildingsController < ApplicationController
     @building.units.each do |unit|
       @unit_review_count = @unit_review_count + unit.reviews.count
     end
-    #@building.reviews.create()
     @reviews = @building.reviews.order(created_at: :desc)
   end
 

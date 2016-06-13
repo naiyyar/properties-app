@@ -1,4 +1,56 @@
-<p id="notice"><%= notice %></p>
+<div class="row">  
+  <div class="col-lg-6 col-md-6">
+    <div class="address-area">
+      <h1>
+        <%= @unit.name %> - <%= @unit.building.building_street_address %>
+      </h1>
 
-<%= link_to 'Edit', edit_unit_path(@unit) %> |
-<%= link_to 'Back', units_path %>
+      <ul class="total-reviews list-inline">
+        <li><%= rating_for @unit, "unit"%></li> |
+        <li>20% recommended</li> |
+        <li><%= link_to "#{@unit.reviews.count} reviews", "#" %> </li>
+        <% if current_user %>
+          | <li><%= link_to "Edit", edit_unit_path(@unit)%></li>
+        <%end%>
+      </ul>
+      
+      <div class="address">
+        <p class="font-large">Building: <%= link_to @unit.building.building_name, building_path(@unit.building) %></p>
+        <p> <b><%= @unit.building.building_street_address %> </b></p>
+        <p> <b><%= @unit.building.city %>, <%= @unit.building.state %>, <%= @unit.building.zipcode %> </b></p>
+      </div>
+      <hr />
+      <ul class="list-inline">
+        <li><%= @unit.number_of_bedrooms %> Bedrooms</li> |
+        <li><%= @unit.number_of_bathrooms %> Bathrooms </li> |
+        <li><%= @unit.square_feet.to_i %> ft<sup>2</sup></li>
+      </ul>
+      <hr />
+
+      <div class="map"> 
+        <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@unit.building.latitude},#{@unit.building.longitude}&markers=#{@unit.building.latitude},#{@unit.building.longitude}&zoom=12&size=550x235&key=AIzaSyA4BHW3txEdqfxzdTlPwaHsYRSZbfeIcd8", class: 'img-fluid img-rounded', alt: "#{@unit.building.building_name}-#{@unit.name} on the map" %>
+      </div>
+     
+    </div>
+    <div id="unit-info">
+      <%= render partial: 'unit_amenities' %>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-6">
+    <%= render partial: "buildings/image_slider" %>
+  </div>
+</div>
+
+
+<br />
+<br />
+<% if current_user %>
+  <div class="row">  
+    <div class="col-lg-6 col-md-6">
+      <h3>Add Reviews For <b><%= @unit.name %><b></h3>
+      <%= rating_for_user @unit, current_user, "unit", :star => 5 %>
+      <%= render partial: "reviews/form", locals: { reviewable: @unit } %>
+    </div>
+  </div>
+<%end%>

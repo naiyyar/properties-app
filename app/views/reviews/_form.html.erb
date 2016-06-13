@@ -1,16 +1,8 @@
-<div class="row">  
-  <div class="col-lg-6 col-md-6">
-  <% if current_user %>
-    <h3>Add Reviews For <b><%= @building.building_name %><b></h3>
-      <!-- <hr/> -->
-      <%= rating_for_user @building, current_user, "building", :star => 5 %>
-      <hr/>
-      <%= form_for [reviewable, Review.new] do |f| %>
-        <%= f.text_area :building_review_title,  class: 'form-control' %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <br />
-        <%= f.submit 'Submit', class: "btn btn-primary" %>
-      <% end %>
-     <% end %>
-  </div>
-</div>
+<hr/>
+<%= form_for [reviewable, Review.new] do |f| %>
+  <%= f.text_area :building_review_title,  class: 'form-control' %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+    <br />
+    <%= f.submit 'Submit', class: "btn btn-primary" %>
+<% end %>
+  

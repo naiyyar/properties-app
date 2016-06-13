@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20160612065550) do
     t.string   "name"
     t.text     "pros"
     t.text     "cons"
+    t.text     "description"
     t.integer  "number_of_bedrooms"
     t.integer  "number_of_bathrooms"
     t.decimal  "monthly_rent",        default: 0.0

@@ -69,6 +69,6 @@ class UnitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def unit_params
-      params.require(:unit).permit(:building_id,:name,:pros,:cons,:number_of_bedrooms,:number_of_bathrooms,:monthly_rent,:square_feet,:total_upfront_cost,:rent_start_date,:rent_end_date,:security_deposit,:broker_fee,:move_in_fee,:rent_upfront_cost,:processing_fee)
+      params.require(:unit).permit(:building_id,:name,:description,:pros,:cons,:number_of_bedrooms,:number_of_bathrooms,:monthly_rent,:square_feet,:total_upfront_cost,:rent_start_date,:rent_end_date,:security_deposit,:broker_fee,:move_in_fee,:rent_upfront_cost,:processing_fee)
     end
 end
