@@ -4,7 +4,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem "font-awesome-rails"
 
 gem "paperclip", "~> 4.3"
-gem 'dropzonejs-rails'
 
 gem 'gmaps4rails'
 

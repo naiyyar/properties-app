@@ -1,46 +1,23 @@
-<div style="padding:1px 0;margin-top:71px;">
-      <div class="btn-group" role="group">
-      <%= link_to '<span class="fa fa-camera"><span> Add photo'.html_safe, '#', class: "btn btn-info"  %>
-      <%= link_to '<span class="fa fa-share-square-o"><span> Share'.html_safe, '#', class: "btn btn-default"  %>
-      <%= link_to '<span class="fa fa-bookmark"><span> Bookmark'.html_safe, '#', class: "btn btn-default"  %>
-    </div>
-      <div id="thumbnail-slider">
-        <div class="inner">
-          <ul>
+    <%= link_to '<span class="fa fa-share-square-o"><span> Share'.html_safe, '#', class: "btn btn-default"  %>
+    <%= link_to '<span class="fa fa-bookmark"><span> Bookmark'.html_safe, '#', class: "btn btn-default"  %>
+  </div>
+  <div id="thumbnail-slider">
+    <div class="inner">
+      <% if @uploads.present? %>
+        <ul>
+          <% @uploads.each do |upload| %>
             <li>
-              <%= image_tag "6.jpg", class: "thumb" %>
+              <%= image_tag upload.image.url, class: "thumb" %>
             </li>
-            <li>
-                <%= image_tag "7.jpg", class: "thumb" %>
-            </li>
-            <li>
-                <%= image_tag "2.jpg", class: "thumb" %>
-            </li>
-            <li>
-                <%= image_tag "3.jpg", class: "thumb" %>
-            </li>
-            <li>
-                <%= image_tag "4.jpg", class: "thumb" %>
-            </li>
-            <li>
-                <%= image_tag "5.jpg", class: "thumb" %>
-            </li>
-            <li>
-                <%= image_tag "8.jpg", class: "thumb" %>
-            </li>
-            <li>
-                <%= image_tag "9.jpg", class: "thumb" %>
-            </li>
-            <li>
-                <%= image_tag "10.jpg", class: "thumb" %>
-            </li>
-            <li>
-                <%= image_tag "11.jpg", class: "thumb" %>
-            </li>
-          </ul>
-          <div class="pull-right">
-            <span class="fa fa-th-large"></span> <%= link_to 'See all'.html_safe, '#' %>
-          </div>
-        </div>
+          <%end%>
+        </ul>
+      <%else%>
+        <span>No image Found! Please <%= link_to 'Upload', upload_path %> images.</span>
+      <%end%>
+      
+      <div class="pull-right">
+        <span class="fa fa-th-large"></span> <%= link_to 'See all'.html_safe, '#' %>
       </div>
     </div>
+  </div>
+</div>

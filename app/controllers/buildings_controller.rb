@@ -13,6 +13,7 @@ class BuildingsController < ApplicationController
       @unit_review_count = @unit_review_count + unit.reviews.count
     end
     @reviews = @building.reviews.order(created_at: :desc)
+    @uploads = @building.uploads.order("created_at desc")
   end
 
   def new

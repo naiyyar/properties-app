@@ -10,6 +10,7 @@ class UnitsController < ApplicationController
   # GET /units/1
   # GET /units/1.json
   def show
+    @uploads = @unit.uploads.order("created_at desc")
   end
 
   # GET /units/new

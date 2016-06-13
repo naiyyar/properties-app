@@ -38,10 +38,14 @@
   </div>
 
   <div class="col-lg-6 col-md-6">
-    <%= render partial: "buildings/image_slider" %>
+    <div style="padding:1px 0;margin-top:71px;">
+      <div class="btn-group" role="group">
+        <%= link_to '<span class="fa fa-camera"><span> Add photo'.html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-info"  %>
+        <%= render partial: "buildings/image_slider"%>
+      </div>
+    </div>
   </div>
 </div>
-
 
 <br />
 <br />

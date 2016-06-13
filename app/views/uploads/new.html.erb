@@ -1,0 +1,13 @@
+<div class="row">
+	<%= render partial: 'form' %>
+</div>
+<br />
+<div class="row">
+	<div class="pull-right">
+		<% if params[:unit_id] %>
+			<%= link_to 'Done', unit_path(params[:unit_id]), class: 'btn btn-primary' %>
+		<%else%>
+			<%= link_to 'Done', building_path(params[:building_id]), class: 'btn btn-primary' %>
+		<%end%>
+	</div>
+</div>
