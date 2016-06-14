@@ -15,6 +15,13 @@
 //= require jquery_ujs
 //= require dropzone
 //= require turbolinks
+//= require jquery.rotateSlider
 //= require jquery.raty
 //= require ratyrate
 //= require_tree .
+
+//$(function() {
+  
+
+//});
+

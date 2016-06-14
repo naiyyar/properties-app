@@ -1,23 +1,20 @@
     <%= link_to '<span class="fa fa-share-square-o"><span> Share'.html_safe, '#', class: "btn btn-default"  %>
     <%= link_to '<span class="fa fa-bookmark"><span> Bookmark'.html_safe, '#', class: "btn btn-default"  %>
   </div>
-  <div id="thumbnail-slider">
-    <div class="inner">
-      <% if @uploads.present? %>
-        <ul>
-          <% @uploads.each do |upload| %>
-            <li>
-              <%= image_tag upload.image.url, class: "thumb" %>
-            </li>
-          <%end%>
-        </ul>
-      <%else%>
-        <span>No image Found! Please <%= link_to 'Upload', upload_path %> images.</span>
-      <%end%>
-      
-      <div class="pull-right">
-        <span class="fa fa-th-large"></span> <%= link_to 'See all'.html_safe, '#' %>
-      </div>
-    </div>
+  <div class="rotateslider-container" id="slider">
+    <% if @uploads.present? %>
+      <!-- <ul> -->
+        <% @uploads.each do |upload| %>
+          <div class="rotateslider-item"> <%= image_tag upload.image.url, size: '211x311' %></div>
+        <%end%>
+      <!-- </ul> -->
+        <span class="arrow right js-rotateslider-arrow" data-action="next"><i class="fa fa-angle-right fa-3x"></i></span>
+        <span class="arrow left js-rotateslider-arrow" data-action="prev"><i class="fa fa-angle-left fa-3x"></i></span>
+    <%else%>
+      <span>No image Found! Please <%= link_to 'Upload', '#' %> images.</span>
+    <%end%>
   </div>
+  <div class="pull-right">
+      <span class="fa fa-th-large"></span> <%= link_to 'See all'.html_safe, '#' %>
+    </div>
 </div>
