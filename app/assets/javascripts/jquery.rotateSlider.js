@@ -12,13 +12,13 @@
     changeIndex(defaultIndex);
     
     $item.on('mouseenter', function(){
-      $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 9999});
+      $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 1000});
      if(!$(this).hasClass('now')){
         $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(0.9, 0.6)','z-index': 0});
       }
       
     }).on('mouseleave', function(){
-      $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 9999});
+      $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 1000});
       $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(0.9, 0.6)','z-index': 0});
     })
     

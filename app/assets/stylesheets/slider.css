@@ -58,7 +58,7 @@
   cursor: pointer;
   color: #fff;
   text-align: center;
-  z-index: 9999;
+  z-index: 1000;
 }
 
 .rotateslider-container .arrow.left { left: 0; }
