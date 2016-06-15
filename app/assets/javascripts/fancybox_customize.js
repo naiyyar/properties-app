@@ -15,10 +15,10 @@ $('.fancybox').fancybox({
   },
   afterLoad: function(){
     data = this.element.data()
-    building_name = data.building
+    name = data.imageable
     var image_src = this.element.attr('href')
     var description = "<div class='links'> \
-                      <img src="+image_src+" class='overlay-image' />"+"<b>"+ building_name +"</b>"+"</div>"
+                      <img src="+image_src+" class='overlay-image' />"+"<b>"+ name +"</b>"+"</div>"
     $('.fancybox-overlay').append(description);
   },
   nextEffect: 'fade',

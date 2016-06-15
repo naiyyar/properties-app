@@ -19,4 +19,8 @@ module BuildingsHelper
 	  "data-readonly" => readonly,
 	  "data-star-count" => star
 	end
+
+	def imageable upload
+		upload.imageable_type == 'Building' ? upload.imageable.building_name : upload.imageable.name
+	end
 end

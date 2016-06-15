@@ -6,7 +6,7 @@
       <!-- <ul> -->
         <% @uploads.each do |upload| %>
           <div class="rotateslider-item">
-            <a href="<%= upload.image.url %>" data-building="<%= upload.imageable.building_name %>" class="fancybox">
+            <a href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox">
               <%= image_tag upload.image.url, size: '211x311' %>
             </a> 
           </div>
