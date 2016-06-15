@@ -5,7 +5,11 @@
     <% if @uploads.present? %>
       <!-- <ul> -->
         <% @uploads.each do |upload| %>
-          <div class="rotateslider-item"> <%= image_tag upload.image.url, size: '211x311' %></div>
+          <div class="rotateslider-item">
+            <a href="<%= upload.image.url %>" data-building="<%= upload.imageable.building_name %>" class="fancybox">
+              <%= image_tag upload.image.url, size: '211x311' %>
+            </a> 
+          </div>
         <%end%>
       <!-- </ul> -->
         <span class="arrow right js-rotateslider-arrow" data-action="next"><i class="fa fa-angle-right fa-3x"></i></span>

@@ -1,0 +1,36 @@
+
+.links {
+  position: absolute; 
+  z-index: 99999;
+  top: 0;
+  right: 0;
+  background: #ffffff;
+  width: 230px;
+  height: 100%;
+  display: block;
+  padding: 4px;
+}
+
+.links img{
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+.links b{
+  padding: 6px;
+  color: #3B3B3B;
+}
+.links .inner {
+  padding: 50px 10px 10px 15px;
+  font-size: 12px;
+  position: relative;
+}
+.links .inner a.filename{
+  position: absolute;
+  top: 121px;
+}
+
+.fancybox-wrap{
+  left: 40px !important;
+}
+</style>

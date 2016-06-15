@@ -16,12 +16,9 @@
 //= require dropzone
 //= require turbolinks
 //= require jquery.rotateSlider
+//= require fancybox
+//= require fancybox_customize
 //= require jquery.raty
 //= require ratyrate
 //= require_tree .
-
-//$(function() {
-  
-
-//});
 

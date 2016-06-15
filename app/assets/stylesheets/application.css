@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  *= require font-awesome
+ *= require fancybox
+ *= require fancybox_overlay
  *= require dropzone
  *= require slider
  */
