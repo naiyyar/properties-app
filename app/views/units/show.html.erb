@@ -15,25 +15,24 @@
       </ul>
       
       <div class="address">
-        <p class="font-large">Building: <%= link_to @unit.building.building_name, building_path(@unit.building) %></p>
         <p> <b><%= @unit.building.building_street_address %> </b></p>
         <p> <b><%= @unit.building.city %>, <%= @unit.building.state %>, <%= @unit.building.zipcode %> </b></p>
+        <p> <b><%= @unit.building.building_name %></b></p>
       </div>
-      <hr />
+      <br />
       <ul class="list-inline">
         <li><%= @unit.number_of_bedrooms %> Bedrooms</li> |
         <li><%= @unit.number_of_bathrooms %> Bathrooms </li> |
         <li><%= @unit.square_feet.to_i %> ft<sup>2</sup></li>
       </ul>
-      <hr />
 
-      <div class="map"> 
+      <div id="map"> 
         <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@unit.building.latitude},#{@unit.building.longitude}&markers=#{@unit.building.latitude},#{@unit.building.longitude}&zoom=12&size=550x235&key=AIzaSyA4BHW3txEdqfxzdTlPwaHsYRSZbfeIcd8", class: 'img-fluid img-rounded', alt: "#{@unit.building.building_name}-#{@unit.name} on the map" %>
       </div>
      
     </div>
     <div id="unit-info">
-      <%= render partial: 'unit_amenities' %>
+      <%= render partial: 'about_unit' %>
     </div>
   </div>
 
@@ -41,18 +40,56 @@
     <div style="padding:1px 0;margin-top:71px;">
       <div class="btn-group" role="group">
         <%= link_to '<span class="fa fa-camera"><span> Add photo'.html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-info"  %>
-        <%= render partial: "buildings/image_slider"%>
+        <%= render partial: "buildings/image_slider", locals: { object: @unit } %>
+        <div class="pull-right">
+          <span class="fa fa-th-large"></span> <%= link_to 'See all'.html_safe, unit_uploads_path(unit_id: @unit.id) %>
+        </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-3 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><b>Building Amenities</b></div>
+      <div class="panel-body">
+        <% if @unit.building.pets_allowed %>
+          <p><span class="fa fa-paw"> Cats and Dogs Allowed</p>
+        <%end%>
+        <% if @unit.building.elevator %>
+          <p><span class="fa fa-arrows-v"> &nbsp;&nbsp;Elevator</p>
+        <%end%>
+        <% if @unit.building.doorman %>
+          <p><span class="fa fa-male"> &nbsp;&nbsp;Doorman</p>
+        <%end%>
+        <p> <%= @unit.building.laundry_facility ? 'Laundry in Building' : '' %></p>
+        <p> <%= @unit.building.parking ? 'Parking' : '' %></p>
       </div>
     </div>
+  </div>
+
+  <div class="col-lg-3 col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><b>Unit Amenities</b></div>
+      
+      <div class="panel-body"> 
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <%= render partial: 'price_history' %>
   </div>
 </div>
 
 <br />
 <br />
+
 <% if current_user %>
   <div class="row">  
     <div class="col-lg-6 col-md-6">
-      <h3>Add Reviews For <b><%= @unit.name %><b></h3>
+      <h3>Add Reviews For <b><%= @unit.name %></b></h3>
       <%= rating_for_user @unit, current_user, "unit", :star => 5 %>
       <%= render partial: "reviews/form", locals: { reviewable: @unit } %>
     </div>

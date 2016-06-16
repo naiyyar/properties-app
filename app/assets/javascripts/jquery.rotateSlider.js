@@ -21,7 +21,6 @@
       $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 1000});
       $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(0.9, 0.6)','z-index': 0});
     })
-    
 
     $arrow.on('click', function() {
       var action = $(this).data('action'),

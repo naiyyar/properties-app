@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="col-lg-12">
+	<%if @building.present? %>
+		<h4><%= @building.building_name %></h4>
+		<p> <b><%= @building.building_street_address %> </b></p>
+	  <p> <b><%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %> </b></p>
+	<%else%>
+		<h4><%= @unit.building.building_name %></h4>
+		<p> <b><%= @unit.building.building_street_address %> </b></p>
+	  <p> <b><%= @unit.building.city %>, <%= @unit.building.state %>, <%= @unit.building.zipcode %> </b></p>
+	  <p> <b><%= @unit.name %></b> </p>
+	<%end%>
+		
+	</div>
+</div>
+<hr />
+<div class="row">
+	<div class="col-lg-12">
+		<% @uploads.each do |upload| %>
+			<a href="<%=upload.image.url%>", data-imageable = "<%= imageable(upload) %>" class="fancybox" rel="gallery">
+				<%= image_tag upload.image.url, size: '222x200', class: "img-rounded" %>
+			</a>
+		<%end %>
+	</div>
+</div>

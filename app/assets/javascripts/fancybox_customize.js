@@ -20,7 +20,7 @@ $('.fancybox').fancybox({
     var description = "<div class='links'> \
                       <img src="+image_src+" class='overlay-image' />"+"<b>"+ name +"</b>"+"</div>"
     $('.fancybox-overlay').append(description);
-  },
-  nextEffect: 'fade',
-  prevEffect: 'fade'
+  }
+  // nextEffect: 'fade',
+  // prevEffect: 'fade'
 });
