@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController 
-  before_action :authenticate_user!, except: [:index, :show]
+  #before_action :authenticate_user!, except: [:index, :show]
 
 
   def index
@@ -11,7 +11,11 @@ class ReviewsController < ApplicationController
   end
 
   def new
-    @review = Review.new
+    if params[:building_id]
+      @reviewable = Building.find(params[:building_id])
+    else
+      @reviewable = Unit.find(params[:unit_id])
+    end
   end
 
   def create
