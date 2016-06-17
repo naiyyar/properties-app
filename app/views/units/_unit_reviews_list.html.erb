@@ -15,7 +15,7 @@
     <div class="media-body">
       <h4 class="media-heading"><%= review.user.name %></h4>
       <p class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %> by <%= review.user.name %></p>
-      <p> <%= simple_format(review.building_review_title) %></p>
+      <p> <%= simple_format(review.review_title) %></p>
     </div>
     <span class="pull-left"><%= rating_for_user unit, review.user, "unit", star: 5 %></span> - Doesn't recommended - Current Tenant(2 years)
   </div>
