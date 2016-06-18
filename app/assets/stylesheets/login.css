@@ -7,8 +7,13 @@
 	color: #000;
 }
 
-.login-modal form {
+.login-modal form, .login-page {
 	max-width: 340px;
+}
+
+.login-page{
+  padding: 30px;
+  border: 1px solid #ddd;
 }
 
 .tab-pane form {
