@@ -15,9 +15,11 @@
         <%end%>
       </a>
       <div class="media-body">
-        <b class="media-heading"><%= link_to @reviewable.building_name,building_path(@reviewable) %></b>
-        <p class="text-muted"><%= @reviewable.building_street_address %>
-        <p class="text-muted"> <%= "#{@reviewable.city}, #{@reviewable.state} #{@reviewable.zipcode}" %> </p>
+        <b class="media-heading"><%= link_to @reviewable.building_name,building_path(@reviewable) %></b> <br />
+        <small class="text-muted">
+        	<%= @reviewable.building_street_address %> <br />
+        	<%= "#{@reviewable.city}, #{@reviewable.state} #{@reviewable.zipcode}" %> 
+        </small>
       </div>
     </div>
   </div>
