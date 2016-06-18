@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController 
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, :except => [:create, :new]
 
 
   def index
@@ -19,16 +19,21 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @reviewable = find_reviewable
-    @review = @reviewable.reviews.build(review_params)
-    @review.user_id = current_user.id
-
-    if @review.save
-      flash[:notice] = "Review Created Successfully."
-      redirect_to :back
+    if current_user.blank?
+      session[:form_data] = params
+      redirect_to new_user_session_path
     else
-      flash.now[:error] = "Error Creating"
-      render :new
+      @reviewable = find_reviewable
+      @review = @reviewable.reviews.build(review_params)
+      @review.user_id = current_user.id
+
+      if @review.save
+        flash[:notice] = "Review Created Successfully."
+        redirect_to :back
+      else
+        flash.now[:error] = "Error Creating"
+        render :new
+      end
     end
   end
 

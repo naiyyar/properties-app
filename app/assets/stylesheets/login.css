@@ -52,11 +52,16 @@ div.hr span.center {
   line-height: 1em;
 }
 
-#loginModal ul.nav li a{
+.login-form ul.nav li a{
   padding: 10px 40px !important;
 }
 
 #user-image img{
   width: 30px;
   border: 1px solid #777;
+}
+#page-login .login-tab{
+  border: 1px solid #ddd;
+  padding: 20px 25px;
+  border-radius: 4px;
 }

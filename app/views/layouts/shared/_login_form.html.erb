@@ -1,0 +1,58 @@
+<div class="text-center">
+	<div role="tabpanel" class="login-tab">
+	<!-- Nav tabs -->
+  	<ul class="nav nav-tabs" role="tablist">
+    	<li role="presentation" class="active"><a id="signin-taba" href="#home" aria-controls="home" role="tab" data-toggle="tab">Sign In</a></li>
+    	<li role="presentation"><a id="signup-taba" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
+  	</ul>
+
+	<!-- Tab panes -->
+	 	<div class="tab-content">
+    	<div role="tabpanel" class="tab-pane active text-center" id="home">
+    		&nbsp;&nbsp;
+    		<span id="login_fail" class="response_error" style="display: none;">Loggin failed, please try again.</span>
+    		<div class="clearfix"></div>
+    		<div class="social-btns">
+	    		<%= link_to "<span class='fa fa-facebook'></span> Sign In".html_safe, user_omniauth_authorize_path(:facebook), class: "btn btn-facebook" %>
+					<a class="btn btn-google-plus">
+					  <span class="fa fa-google-plus"></span>
+					  Sign In
+					</a>
+				</div>
+				<div class="clearfix"></div>
+				<div class="hr text-center">
+					<hr>
+					<span class="center">Or</span>
+				</div>
+    		<!-- here render singhin partial -->
+    		<%= render partial: 'devise/sessions/new' %>
+    	</div>
+    	<div role="tabpanel" class="tab-pane" id="profile">
+    	    &nbsp;&nbsp;
+    	  <span id="registration_fail" class="response_error" style="display: none;">Registration failed, please try again.</span>
+    		<div class="clearfix"></div>
+    		<div class="social-btns">
+	    		<%= link_to "<span class='fa fa-facebook'></span> Sign up".html_safe, user_omniauth_authorize_path(:facebook), class: "btn btn-facebook" %>
+					<a class="btn btn-google-plus">
+					  <span class="fa fa-google-plus"></span>
+					  Sign up
+					</a>
+				</div>
+				<div class="clearfix"></div>
+				<div class="hr text-center">
+					<hr>
+					<span class="center">Or</span>
+				</div>
+    		<!-- render register partial -->
+    		<%= render partial: 'devise/registrations/new' %>
+    	</div>
+    	<div role="tabpanel" class="tab-pane text-center" id="forget_password">
+    		&nbsp;&nbsp;
+    	    <span id="reset_fail" class="response_error" style="display: none;"></span>
+	    		<div class="clearfix"></div>
+	    		<!-- forget password form -->
+	    		<%= render partial: 'devise/passwords/new' %>
+	    </div>
+	  </div>
+	</div>
+</div>

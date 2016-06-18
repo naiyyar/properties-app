@@ -17,7 +17,15 @@
         <p class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %> by <%= review.user.name %></p>
         <p> <%= simple_format(review.review_title) %></p>
       </div>
-      <span class="pull-left"><%= rating_for_user @building, review.user,"building", star: 5 %></span> - Doesn't recommended - Current Tenanet(2 years)
+      <ul class="list-inline">
+        <li><%#= rating_for_user @building, review.user,"building", star: 5 %></li> |
+        <li>
+          <span class='fa fa-thumbs-o-up fa-1x'><%= review.reviewable.get_upvotes.size %></span> &nbsp;
+          <span class='fa fa-thumbs-o-down fa-1x'><%= review.reviewable.get_downvotes.size %></span>
+        </li> |
+        <li>Tenant: <%= "#{review.tenant_status}" " (#{review.stay_time})" %></li>
+      </ul>
+     <!--  <span class="pull-left"><%#= rating_for_user @building, review.user,"building", star: 5 %></span> - <span class='fa fa-thumbs-o-up fa-1x'><%#= review.reviewable.get_upvotes.size %></span> <span class='fa fa-thumbs-o-down fa-1x'><%#= review.reviewable.get_downvotes.size %></span> - Current Tenanet(2 years) -->
     </div>
     <hr />
 <% end %>

@@ -1,15 +1,9 @@
 <%= form_for [@reviewable, Review.new] do |f| %>
-
-	<!-- <div class="form-group">
-    <label>Building Address</label>
-     <%#= f.text_field :building_address, value: current_user.present? ? @reviewable.building_street_address : nil,  class: "form-control"%>
-  </div> -->
-
-   <div class="media">
+  <div class="media">
     <div class="media-left">
       <a href="#" class="pull-left">
         <% if @reviewable.uploads.present? %>
-          <%= image_tag @reviewable.uploads.first.image %>
+          <%= image_tag @reviewable.uploads.first.image, size: '60x60', class: 'img-rounded' %>
         <%else%>
           <span class="fa fa-building fa-3x"></span>
         <%end%>
@@ -26,10 +20,10 @@
   <hr />
   <div class="form-group">
     <label>Rating</label>
-    <% if @reviewable.building_name %>
-			<%= rating_for @reviewable, "building"%>
-		<%else%>
-			<%= rating_for @reviewable, "unit"%>
+    <% if current_user %>
+    	<%= rating_for_user @reviewable, current_user, @reviewable.class.name.downcase, star: 5 %>
+    <%else%>
+			<%= rating_for_user @reviewable, nil, @reviewable.class.name.downcase, star: 5 %>
 		<%end%>
 	</div>
 
@@ -38,10 +32,10 @@
 		<br />
 		<div class="btn-group" data-toggle="buttons">
 		  <label class="btn btn-default">
-		  	<%= f.radio_button :tenant_status, id: 'current_tenant' %> Current
+		  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant' %> Current
 		  </label>
 		  <label class="btn btn-default">
-		  	<%= f.radio_button :tenant_status, id: 'former_tenant' %> Former
+		  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant' %> Former
 		  </label>
 		</div>
 	</div>
@@ -76,10 +70,10 @@
 		<br />
 		<div class="btn-group" data-toggle="buttons">
 		  <label class="btn btn-default">
-		  	<%= link_to "<span class='fa fa-thumbs-o-up fa-2x'></span>".html_safe, '#' %>
+		  	<%= radio_button_tag 'vote', true, id: 'current_tenant' %> <span class='fa fa-thumbs-o-up fa-2x'></span>
 		  </label>
 		  <label class="btn btn-default">
-		  	<%= link_to "<span class='fa fa-thumbs-o-down fa-2x'></span>".html_safe, '#' %>
+		  	<%= radio_button_tag 'vote', false, id: 'current_tenant' %> <span class='fa fa-thumbs-o-down fa-2x'></span>
 		  </label>
 		</div>
 	</div>
