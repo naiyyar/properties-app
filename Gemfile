@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.2.5.1'
+
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "font-awesome-rails"
 
@@ -11,6 +14,7 @@ gem 'geocoder'
 
 gem 'pg'
 
+
 #Role management
 gem "rolify"
 
@@ -20,8 +24,7 @@ gem 'ratyrate'
 #fancybox
 gem 'fancybox2-rails', '~> 0.2.8'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.1'
+
 # Use sqlite3 as the database for Active Record
 
 # Use SCSS for stylesheets

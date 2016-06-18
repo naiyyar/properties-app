@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   rolify
   ratyrate_rater
-  acts_as_voter
   
   has_many :reviews
 

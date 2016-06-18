@@ -1,10 +1,27 @@
 <%= form_for [@reviewable, Review.new] do |f| %>
 
-	<div class="form-group">
+	<!-- <div class="form-group">
     <label>Building Address</label>
-     <%= f.text_field :building_address, value: current_user.present? ? @reviewable.building_street_address : nil,  class: "form-control"%>
-  </div>
+     <%#= f.text_field :building_address, value: current_user.present? ? @reviewable.building_street_address : nil,  class: "form-control"%>
+  </div> -->
 
+   <div class="media">
+    <div class="media-left">
+      <a href="#" class="pull-left">
+        <% if @reviewable.uploads.present? %>
+          <%= image_tag @reviewable.uploads.first.image %>
+        <%else%>
+          <span class="fa fa-building fa-3x"></span>
+        <%end%>
+      </a>
+      <div class="media-body">
+        <b class="media-heading"><%= link_to @reviewable.building_name,building_path(@reviewable) %></b>
+        <p class="text-muted"><%= @reviewable.building_street_address %>
+        <p class="text-muted"> <%= "#{@reviewable.city}, #{@reviewable.state} #{@reviewable.zipcode}" %> </p>
+      </div>
+    </div>
+  </div>
+  <hr />
   <div class="form-group">
     <label>Rating</label>
     <% if @reviewable.building_name %>
