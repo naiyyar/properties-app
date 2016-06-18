@@ -2,7 +2,7 @@
 
 	<div class="form-group">
     <label>Building Address</label>
-     <%= f.text_field :building_address, class: "form-control"%>
+     <%= f.text_field :building_address, value: current_user.present? ? @reviewable.building_street_address : nil,  class: "form-control"%>
   </div>
 
   <div class="form-group">
@@ -51,11 +51,25 @@
 		<label>Other TranspaRENTcy and advice to share</label>
 		<%= f.text_area :other_advice,  class: 'form-control' %>
 	</div>
+
+	<div class="form-group">
+		<label>Would you recommended this building?</label>
+		<br />
+		<div class="btn-group" data-toggle="buttons">
+		  <label class="btn btn-default">
+		  	<%= link_to "<span class='fa fa-thumbs-o-up fa-2x'></span>".html_safe, '#' %>
+		  </label>
+		  <label class="btn btn-default">
+		  	<%= link_to "<span class='fa fa-thumbs-o-down fa-2x'></span>".html_safe, '#' %>
+		  </label>
+		</div>
+	</div>
   
   <% if current_user %>
   	<%= f.hidden_field :user_id, value: current_user.id %>
   <%end%>
-    <br />
-    <%= f.submit 'Submit', class: "btn btn-primary" %>
+  <br />
+  <%= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default" %>
+  <%= f.submit 'Submit Review', class: "btn btn-primary" %>
 <% end %>
   

@@ -12,14 +12,12 @@
     <div class="container">
       <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
       <%= yield %>
+      <br />
     </div>
     <%= render partial: "layouts/shared/login_modal" %>
 
     <script type="text/javascript">
       $('#slider').rotateSlider({});
-      //$(document).ready(function() {
-       
-      //});
     </script>
 
   </body>
