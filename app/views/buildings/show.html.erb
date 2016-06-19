@@ -6,7 +6,7 @@
       </h1>
 
       <ul class="total-reviews list-inline">
-        <li><%= rating_for @building, "building"%></li> |
+        <li><%= rating_for @building, "building", disable_after_rate: true %></li> |
         <li><%#= @building.weighted_average.round(2) %>20% recommended</li> |
         <li><%= link_to "#{@building.reviews.count} reviews", "#" %> </li> |
         <li><%= @unit_review_count %> unit reviews</li>

@@ -11,7 +11,7 @@ module BuildingsHelper
 		  disable_after_rate = options[:disable_after_rate] || false
 
 		  if disable_after_rate
-		    readonly = current_user.present? ? !rateable_obj.can_rate?(current_user.id, dimension) : true
+		    readonly = current_user.present? ? !rateable_obj.can_rate?(current_user, dimension) : true
 		  end
 
 		  content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => stars,

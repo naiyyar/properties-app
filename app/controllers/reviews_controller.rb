@@ -29,7 +29,7 @@ class ReviewsController < ApplicationController
 
       if @review.save
         flash[:notice] = "Review Created Successfully."
-        redirect_to :back
+        redirect_to building_path(@reviewable)
       else
         flash.now[:error] = "Error Creating"
         render :new
@@ -63,7 +63,8 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:building_review_title, :building_id, :user_id, :reviewable_id, :reviewable_type)
+    params.require(:review).permit(:review_title, :building_id, :user_id, :reviewable_id, :reviewable_type,
+                                    :pros, :cons, :other_advice, :tenant_status, :stay_time)
   end
 
   def find_reviewable

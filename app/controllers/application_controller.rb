@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 	    reviewable = find_reviewable
       review = reviewable.reviews.build(session[:form_data]['review'])
       review.user_id = current_user.id
+
+      if session[:form_data]['score']
+      	current_user.create_rating(session[:form_data]['score'], reviewable)
+      end
       
       if session[:form_data]['vote']
       	reviewable.liked_by current_user
