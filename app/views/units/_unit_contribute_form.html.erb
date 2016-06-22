@@ -1,0 +1,42 @@
+<%= form_tag "/buildings", method: :post, id: "new_unit_building", class: 'hide' do %>
+	<div id="new_unit_fields">
+		<div class="col-sm-12">
+			<label>Add Unit</label>
+		</div>
+		<div class="col-sm-6">
+      <div class="form-group">
+        <%= text_field_tag 'building[building_name]', nil, class: "form-control", placeholder: 'Building name'%>
+       
+      </div>
+    </div>
+    <div class="col-sm-6">
+       <div class="form-group">
+        <%= text_field_tag 'building[building_street_address]', nil, class: "form-control", placeholder: 'Address' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= text_field_tag 'unit_name', nil, name: "building[units_attributes][0][name]", class: "form-control", placeholder: 'Unit #'%>
+         <%= hidden_field_tag :unit_contribution, nil, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= text_field_tag 'unit_square_feet', nil, name: "building[units_attributes][0][square_feet]", class: "form-control", placeholder: 'Squre feet'%>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= text_field_tag 'unit_number_of_bedrooms',nil, name: "building[units_attributes][0][number_of_bedrooms]", class: "form-control", placeholder: 'Bedrooms'%>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= text_field_tag 'unit_number_of_bathrooms',nil, name: "building[units_attributes][0][number_of_bathrooms]", class: "form-control", placeholder: 'Bathrooms'%>
+      </div>
+    </div>
+  </div>
+  <div class="pull-right">
+  	<%= submit_tag 'Next', class: 'btn btn-primary' %>
+  </div>
+<%end%>

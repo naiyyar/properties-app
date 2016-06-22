@@ -11,9 +11,9 @@ class UserStepsController < ApplicationController
 		render_wizard
 	end
 
-	def update
-		# @building = Building.find(params[:id])
-		# @building.attributes = params[:building]
-		# render_wizard @building
-	end
+	# def update
+	# 	# @building = Building.find(params[:id])
+	# 	# @building.attributes = params[:building]
+	# 	# render_wizard @building
+	# end
 end

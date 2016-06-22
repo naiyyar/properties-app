@@ -37,7 +37,14 @@ class BuildingsController < ApplicationController
 
     if @building.save
       flash[:notice] = "Building Created."
-      redirect_to user_steps_path(building_id: @building.id, contribution_for: params[:contribution])
+      if params[:unit_contribution]
+        contribute = params[:unit_contribution]
+        unit_id = @building.units.last.id
+      else
+        contribute = params[:contribution]
+        building_id = @building.id
+      end
+      redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
     else
       flash.now[:error] = "Error Creating"
       render :new
@@ -72,7 +79,8 @@ class BuildingsController < ApplicationController
   def building_params
     params.require(:building).permit(:building_name, :building_street_address, :photo, :latitude, :longitude,:city,:state,:phone, :zipcode, :address2,:weburl,
                                       :pets_allowed,:laundry_facility,:parking,:doorman,:elevator,:description,
-                                      uploads_attributes:[:id,:image,:imageable_id,:imageable_type])
+                                      uploads_attributes:[:id,:image,:imageable_id,:imageable_type], 
+                                      units_attributes: [:id, :building_id, :name, :square_feet, :number_of_bedrooms, :number_of_bathrooms])
   end
 
 end
