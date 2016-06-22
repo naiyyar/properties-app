@@ -19,21 +19,21 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    if current_user.blank?
-      session[:form_data] = params
-      redirect_to new_user_session_path
-    else
-      @reviewable = find_reviewable
-      @review = @reviewable.reviews.build(review_params)
-      @review.user_id = current_user.id
+    @reviewable = find_reviewable
+    @review = @reviewable.reviews.build(review_params)
+    @review.user_id = current_user.id
 
-      if @review.save
-        flash[:notice] = "Review Created Successfully."
-        redirect_to building_path(@reviewable)
+    if @review.save
+      if params[:vote]
+        @reviewable.liked_by current_user
       else
-        flash.now[:error] = "Error Creating"
-        render :new
+        @reviewable.downvote_from current_user
       end
+      flash[:notice] = "Review Created Successfully."
+      redirect_to building_path(@reviewable)
+    else
+      flash.now[:error] = "Error Creating"
+      render :new
     end
   end
 

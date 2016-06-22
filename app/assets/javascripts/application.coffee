@@ -3,4 +3,5 @@
 #= require bootstrap
 #= require turbolinks
 #= require login
+#= require contribute
 #= require_tree .

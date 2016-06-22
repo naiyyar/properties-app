@@ -1,0 +1,13 @@
+<% if params[:contribution_for] == 'building_review' %>
+	<div class="row">
+		<div class="col-lg-6">
+			<%= render partial: 'reviews/form' %>
+		</div>
+	</div>
+<%elsif params[:contribution_for] == 'building_photos' %>
+	<div class="row">
+		<%= render partial: 'uploads/form' %>
+	</div>
+<%elsif params[:contribution_for] == 'building_amenities' %>
+	<%#= render partial: '' %>
+<%end%>

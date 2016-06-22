@@ -1,13 +1,32 @@
 <div class="row">
-	<%= render partial: 'form' %>
+	<div class="col-lg-12">
+		<div class="media">
+	    <div class="media-left">
+	      <a href="#" class="pull-left">
+	        <% if @imageable.uploads.present? %>
+	          <%= image_tag @imageable.uploads.first.image, size: '60x60', class: 'img-rounded' %>
+	        <%else%>
+	          <span class="fa fa-building fa-3x"></span>
+	        <%end%>
+	      </a>
+	      <div class="media-body">
+	        <b class="media-heading"><%= link_to @imageable.building_name,building_path(@imageable) %></b> <br />
+	        <small class="text-muted">
+	        	<%= @imageable.building_street_address %> <br />
+	        	<%= "#{@imageable.city}, #{@imageable.state} #{@imageable.zipcode}" %> 
+	        </small>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
 </div>
-<br />
-<div class="row">
-	<div class="pull-right">
-		<% if params[:unit_id] %>
-			<%= link_to 'Done', unit_path(params[:unit_id]), class: 'btn btn-primary' %>
-		<%else%>
-			<%= link_to 'Done', building_path(params[:building_id]), class: 'btn btn-primary' %>
-		<%end%>
+
+<div class="row margin-top-10">
+	<div class="col-lg-12">
+		<%= link_to 'View all photos', building_uploads_path(building_id: @imageable.id) %>
 	</div>
+</div>
+
+<div class="row margin-top-10">
+	<%= render partial: 'form' %>
 </div>

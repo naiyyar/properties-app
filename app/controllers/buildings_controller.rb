@@ -1,9 +1,21 @@
 class BuildingsController < ApplicationController 
-  before_action :authenticate_user!, except: [:index, :show]
-
+  before_action :authenticate_user!, except: [:index, :show, :contribute,:create]
 
   def index
-    @buildings = Building.search(params[:search])
+    @buildings = Building.order('created_at desc')
+    respond_to do |format|
+      format.html
+      format.json { 
+        render json: Building.search(params[:term])
+      }
+    end
+  end
+
+  def contribute
+    respond_to do |format|
+      format.html
+      format.json { render json: @buildings = Building.search(params[:term]) }
+    end
   end
 
   def show
@@ -21,11 +33,12 @@ class BuildingsController < ApplicationController
   end
 
   def create
+    debugger
     @building = Building.create(building_params)
 
-    if @building.save
+    if @building.savee
       flash[:notice] = "Building Created."
-      redirect_to buildings_path
+      redirect_to user_steps_path(building_id: @building.id, contribution_for: params[:contribution])
     else
       flash.now[:error] = "Error Creating"
       render :new

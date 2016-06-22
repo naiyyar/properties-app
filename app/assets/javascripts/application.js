@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui/autocomplete
+//= require app
+//= require buildings
 //= require dropzone
 //= require turbolinks
 //= require jquery.rotateSlider

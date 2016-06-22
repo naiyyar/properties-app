@@ -1,15 +1,20 @@
-<div class="row">
-	<div class="col-lg-12">
-		<div>
-			<%= form_for([@imageable, Upload.new], html: { multipart: true, class: "dropzone" }) do |f|  %>
-			  <div class="fallback">
-			    <%= f.file_field :image %> <br />
-			    <%= f.hidden_field :user_id, value: current_user.id %> <br />
-			    
-			    <%= f.submit "Upload" %>
-			  </div>
-			<% end %>
+<div class="col-lg-12">
+	<div>
+		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: "dropzone" }) do |f|  %>
+		  <div class="fallback">
+		    <%= f.file_field :image %> <br />
+		    <%= f.hidden_field :user_id, value: current_user.id %> <br />
+		    
+		    <%= f.submit "Upload" %>
+		  </div>
+		<% end %>
+	</div>
 
-		</div>
+	<div class="pull-right margin-top-10">
+		<% if params[:unit_id] %>
+			<%= link_to 'Done', unit_path(params[:unit_id]), class: 'btn btn-primary' %>
+		<%else%>
+			<%= link_to 'Done', building_path(params[:building_id]), class: 'btn btn-primary' %>
+		<%end%>
 	</div>
 </div>

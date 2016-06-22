@@ -36,21 +36,20 @@ class User < ActiveRecord::Base
 
     #populate rating cache table
     rating_cache = RatingCache.where(cacheable_id: rateable.id)
-    qty = Rate.where(rateable_id: rateable.id, rateable_type: rateable.class.name).count
-    total_score = Rate.sum(:stars)
+    rateables = Rate.where(rateable_id: rateable.id, rateable_type: rateable.class.name)
     if rating_cache.present?
       #updating if rateable is already present
       rating_cache = rating_cache.first
-      rating_cache.avg = total_score/qty
-      rating_cache.qty = qty
+      rating_cache.avg = rateables.sum(:stars)/rateables.count
+      rating_cache.qty = rateables.count
       rating_cache.save
     else
       rating_cache = RatingCache.new
       rating_cache.cacheable_id = rateable.id
       rating_cache.cacheable_type = rateable.class.name
       rating_cache.dimension = rateable.class.name.downcase
-      rating_cache.avg = total_score/qty
-      rating_cache.qty = qty
+      rating_cache.avg = rateables.sum(:stars)/rateables.count
+      rating_cache.qty = rateables.count
       rating_cache.save
     end
 

@@ -12,10 +12,15 @@ Rails.application.routes.draw do
   
   resources :reviews
   resources :uploads
+  resources :user_steps
   
   resources :buildings do
     resources :reviews
     resources :uploads
+
+    collection do
+      get :contribute
+    end
   end
 
   resources :units do

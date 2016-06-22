@@ -16,6 +16,12 @@ gem 'pg'
 
 gem 'acts_as_votable', '~> 0.10.0'
 
+#Multistep
+gem 'wicked'
+
+#
+gem 'jquery-ui-rails'
+
 
 #Role management
 gem "rolify"

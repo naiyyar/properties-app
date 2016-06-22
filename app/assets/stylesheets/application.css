@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui/autocomplete
  *= require font-awesome
  *= require fancybox
  *= require fancybox_overlay
