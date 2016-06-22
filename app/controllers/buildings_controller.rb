@@ -33,10 +33,9 @@ class BuildingsController < ApplicationController
   end
 
   def create
-    debugger
     @building = Building.create(building_params)
 
-    if @building.savee
+    if @building.save
       flash[:notice] = "Building Created."
       redirect_to user_steps_path(building_id: @building.id, contribution_for: params[:contribution])
     else

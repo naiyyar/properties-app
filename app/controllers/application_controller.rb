@@ -23,9 +23,12 @@ class ApplicationController < ActionController::Base
       
       if review.save
         flash[:notice] = "Review Created Successfully."
-        return building_path(reviewable)
+        if reviewable.kind_of? Building 
+          return building_path(reviewable)
+        else
+          return unit_path(reviewable)
+        end
       end
-
 	  else
 	    super
 	  end

@@ -1,22 +1,5 @@
 <%= form_for [@reviewable, Review.new] do |f| %>
-  <div class="media">
-    <div class="media-left">
-      <a href="#" class="pull-left">
-        <% if @reviewable.uploads.present? %>
-          <%= image_tag @reviewable.uploads.first.image, size: '60x60', class: 'img-rounded' %>
-        <%else%>
-          <span class="fa fa-building fa-3x"></span>
-        <%end%>
-      </a>
-      <div class="media-body">
-        <b class="media-heading"><%= link_to @reviewable.building_name,building_path(@reviewable) %></b> <br />
-        <small class="text-muted">
-        	<%= @reviewable.building_street_address %> <br />
-        	<%= "#{@reviewable.city}, #{@reviewable.state} #{@reviewable.zipcode}" %> 
-        </small>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'reviews/reviewable_info' %>
   <hr />
   <div class="form-group">
     <label>Rating</label>

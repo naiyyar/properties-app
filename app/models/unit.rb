@@ -1,5 +1,5 @@
 class Unit < ActiveRecord::Base
-	
+	acts_as_votable
 	ratyrate_rateable "unit"
 	
 	validates :name, presence: true
