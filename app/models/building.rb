@@ -6,7 +6,7 @@ class Building < ActiveRecord::Base
   ratyrate_rateable "building"
   
   has_many :reviews, as: :reviewable
-  has_many :units
+  has_many :units,  :dependent => :destroy
   has_many :uploads, as: :imageable
   accepts_nested_attributes_for :uploads, :allow_destroy => true
   accepts_nested_attributes_for :units, :allow_destroy => true
