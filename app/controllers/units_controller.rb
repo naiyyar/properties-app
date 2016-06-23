@@ -11,6 +11,10 @@ class UnitsController < ApplicationController
   # GET /units/1.json
   def show
     @uploads = @unit.uploads.order("created_at desc")
+    @hash = Gmaps4rails.build_markers(@unit.building) do |building, marker|
+      marker.lat building.latitude
+      marker.lng building.longitude
+    end
   end
 
   # GET /units/new

@@ -14,6 +14,8 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
+//= require underscore
+//= require gmaps/google
 //= require app
 //= require buildings
 //= require dropzone

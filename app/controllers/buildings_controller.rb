@@ -26,6 +26,16 @@ class BuildingsController < ApplicationController
     end
     @reviews = @building.reviews.order(created_at: :desc)
     @uploads = @building.uploads.order("created_at desc")
+    
+    @hash = Gmaps4rails.build_markers(@building) do |building, marker|
+      marker.lat building.latitude
+      marker.lng building.longitude
+      #To add own marker
+      # marker.picture ({
+      #       "url" => "assets/marker.png",
+      #       "width" => 32,
+      #       "height" => 32})
+    end
   end
 
   def new

@@ -20,8 +20,8 @@
         <p> <b><%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %> </b></p>
       </div>
 
-      <div id="map"> 
-        <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@building.latitude},#{@building.longitude}&markers=#{@building.latitude},#{@building.longitude}&zoom=12&size=550x235&key=AIzaSyA4BHW3txEdqfxzdTlPwaHsYRSZbfeIcd8", class: 'img-fluid img-rounded', alt: "#{@building.building_name} on the map" %>
+      <div style='width: 550px;'>
+        <div id="map" style='width: 550px; height: 250px;'></div>
       </div>
      
     </div>
@@ -67,6 +67,17 @@
 </div>
 
 <br />
+
+<script type="text/javascript" charset="utf-8">
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(15);
+  });
+  
+</script>
 
 
 
