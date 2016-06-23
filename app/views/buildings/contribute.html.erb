@@ -16,7 +16,8 @@
 
 <div class="row">
 	<div class="col-lg-6" id="search-form">
-		<%= form_tag "/buildings", method: :post, id: "existing_building_form" do %>
+		<%= form_tag "/reviews/new", method: :get, id: "existing_buildings_form" do %>
+			<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution", id: "building_contribution" %>
 			<section class="app-content">
 		    <div class="buildings-search">
 		      <%= text_field_tag 'buildings-search-txt', nil, class: "form-control", placeholder: 'Search building by name or address'%>
@@ -24,7 +25,7 @@
 		      <ul id="buildings-search-no-results"></ul>
 		    </div>
 		  </section>
-		  <div class="pull-right">
+		  <div class="pull-right margin-top-20">
 	    	<%= submit_tag 'Next',id: 'next_btn', class: 'btn btn-primary' %>
 	    </div>
 	  <%end%>
@@ -35,7 +36,7 @@
 	<div class="col-lg-6">
 		<div class="form-group">
 			<%= form_tag "/buildings", method: :post, id: "new_building", class: 'hide' do %>
-				<%= hidden_field_tag :contribution, 'building_review', class: "form-control" %>
+				<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution" %>
 				<%= render partial: 'buildings/building_contribute_form' %>
 		    <div class="pull-right">
 	      	<%= submit_tag 'Next', class: 'btn btn-primary' %>

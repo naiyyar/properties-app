@@ -12,11 +12,15 @@ class UploadsController < ApplicationController
 	end
 
 	def new
-		if params[:building_id]
-			@imageable = Building.find(params[:building_id])
-		else
-			@imageable = Unit.find(params[:unit_id])
-		end
+    if params['buildings-search-txt'].present?
+      @imageable = Building.find_by_building_street_address(params['buildings-search-txt'])
+  	else	
+      if params[:building_id]
+  			@imageable = Building.find(params[:building_id])
+  		else
+  			@imageable = Unit.find(params[:unit_id])
+  		end
+    end
   end
 
 	def create
