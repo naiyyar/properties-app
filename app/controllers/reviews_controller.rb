@@ -34,7 +34,7 @@ class ReviewsController < ApplicationController
       @review.user_id = current_user.id
 
       if @review.save
-        if params[:vote]
+        if params[:vote] == 'true'
           @reviewable.liked_by current_user
         else
           @reviewable.downvote_from current_user

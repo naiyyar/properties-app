@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   
   resources :reviews
   resources :uploads
+
+  #multisteps Forms
   resources :user_steps
+  resources :building_steps
+  resources :unit_steps
   
   resources :buildings do
     resources :reviews

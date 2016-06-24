@@ -56,63 +56,15 @@
            <%= f.text_area :description, class: "form-control" %>
         </div>
       </div>
-      <!-- <div class="form-group">
-        <label for="exampleInputEmail1">Photo</label>
-         <%#= f.file_field :photo, class: "form-control" %>
-      </div> -->
-
-      <!-- <div class="form-group">
-        <label for="exampleInputEmail1">Photo</label>
-        <%#= f.fields_for :uploads do |builder| %>
-          <%#= builder.text_field :image, class: "form-control dropzone"%>
-        <%#end%>
-      </div> -->
       
-      <div class="form-group">
-        <div class="col-sm-4">
-          <label>Services</label>
-          <div class="checkbox">
-            <label>
-              <%= f.check_box :laundry_facility %> Laundry Facilities
-            </label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <%= f.check_box :doorman %> Doorman
-            </label>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <label>Pet Policy</label>
-          <div class="checkbox">
-            <label>
-              <%= f.check_box :pets_allowed %> Pets Allowed?
-            </label>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <label>Interior</label>
-          <div class="checkbox">
-            <label>
-              <%= f.check_box :elevator %> Elevator
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-12">
-          <!-- <label>Parking</label> -->
-          <div class="checkbox">
-            <label>
-              <%= f.check_box :parking %> Parking
-            </label>
-          </div>
-        </div>
-      </div>
       <div class="form-group">
         <div class="col-sm-12">
           <div class="pull-right">
-            <%= f.submit 'Save', class: "btn btn-primary" %>
+            <% if @building.present? %>
+              <%= f.submit 'Next', class: "btn btn-primary", name: "subaction" %>
+            <%else%>
+              <%= f.submit 'Next', class: "btn btn-primary" %>
+            <%end%>
           </div>
         </div>
       </div>

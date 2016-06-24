@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
       end
       
       if session[:form_data]['vote']
-      	reviewable.liked_by current_user
+      	reviewable.liked_by current_user, :vote_scope => reviewable.class.name.downcase
     	else
-				reviewable.downvote_from current_user
+				reviewable.downvote_from current_user, :vote_scope => reviewable.class.name.downcase
       end
       
       session[:form_data] = nil

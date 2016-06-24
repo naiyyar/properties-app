@@ -24,3 +24,6 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 			href = '#'
 
 		$('#existing_buildings_form').attr('action', href);
+
+$(document).on 'click', '#elevator',(e) ->
+	$('#building_elevator').toggleClass('hide')

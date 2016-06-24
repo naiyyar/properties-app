@@ -6,11 +6,14 @@
 <div class="panel panel-default" id="highlights">
   <div class="panel-heading"><b>HIGHLIGHTS</b></div>
   <div class="panel-body">
-	  <% if @building.pets_allowed %>
-	  	<p><span class="fa fa-paw"> Cats and Dogs Allowed</p>
+	  <% if @building.pets_allowed_cats %>
+	  	<p><span class="fa fa-paw"> Cats Allowed</p>
 	  <%end%>
+    <% if @building.pets_allowed_dogs %>
+      <p><span class="fa fa-paw"> Dogs Allowed</p>
+    <%end%>
 	  <% if @building.elevator %>
-	  	<p><span class="fa fa-arrows-v"> &nbsp;&nbsp;Elevator</p>
+	  	<p><span class="fa fa-arrows-v"> &nbsp;&nbsp;Elevator (<%= @building.elevator %>)</p>
 	  <%end%>
 	  <% if @building.doorman %>
 	  	<p><span class="fa fa-male"> &nbsp;&nbsp;Doorman</p>

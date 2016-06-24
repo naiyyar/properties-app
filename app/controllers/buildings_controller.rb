@@ -54,7 +54,11 @@ class BuildingsController < ApplicationController
         contribute = params[:contribution]
         building_id = @building.id
       end
-      redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+      if contribute.present?
+        redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+      else
+        redirect_to building_steps_path(building_id: @building.id)
+      end
     else
       flash.now[:error] = "Error Creating"
       render :new
@@ -67,9 +71,12 @@ class BuildingsController < ApplicationController
 
   def update
     @building = Building.find(params[:id])
-
     if @building.update(building_params)
-      redirect_to building_path(@building), notice: "Successfully Updated"
+      if params[:subaction].blank?
+        redirect_to building_path(@building), notice: "Successfully Updated"
+      else
+        redirect_to building_steps_path(building_id: @building.id)
+      end
     else
       flash.now[:error] = "Error Updating"
       render :edit
@@ -89,6 +96,7 @@ class BuildingsController < ApplicationController
   def building_params
     params.require(:building).permit(:building_name, :building_street_address, :photo, :latitude, :longitude,:city,:state,:phone, :zipcode, :address2,:weburl,
                                       :pets_allowed,:laundry_facility,:parking,:doorman,:elevator,:description,
+                                      :deck,:elevator,:garage,:gym,:live_in_super,:pets_allowed_cats,:pets_allowed_dogs,:roof_deck,:swimming_pool,:walk_up,
                                       uploads_attributes:[:id,:image,:imageable_id,:imageable_type], 
                                       units_attributes: [:id, :building_id, :name, :square_feet, :number_of_bedrooms, :number_of_bathrooms])
   end

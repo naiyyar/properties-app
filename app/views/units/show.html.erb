@@ -59,11 +59,14 @@
     <div class="panel panel-default">
       <div class="panel-heading"><b>Building Amenities</b></div>
       <div class="panel-body">
-        <% if @unit.building.pets_allowed %>
-          <p><span class="fa fa-paw"> Cats and Dogs Allowed</p>
+        <% if @unit.building.pets_allowed_cats %>
+          <p><span class="fa fa-paw"> Cats Allowed</p>
+        <%end%>
+        <% if @unit.building.pets_allowed_dogs %>
+          <p><span class="fa fa-paw"> Dogs Allowed</p>
         <%end%>
         <% if @unit.building.elevator %>
-          <p><span class="fa fa-arrows-v"> &nbsp;&nbsp;Elevator</p>
+          <p><span class="fa fa-arrows-v"> &nbsp;&nbsp;Elevator(@unit.building.elevator)</p>
         <%end%>
         <% if @unit.building.doorman %>
           <p><span class="fa fa-male"> &nbsp;&nbsp;Doorman</p>

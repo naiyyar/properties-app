@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="media">
+    <div class="media-left">
+      <a href="#" class="pull-left">
+        <% if @building.uploads.present? %>
+          <%= image_tag @building.uploads.first.image, size: '60x60', class: 'img-rounded' %>
+        <%else%>
+          <span class="fa fa-building fa-3x"></span>
+        <%end%>
+      </a>
+      <div class="media-body">
+        <b class="media-heading"><%= link_to_building_show @building %></b> <br />
+        <small class="text-muted">
+          <%= building_street_address @building %> <br />
+          <%= city_state_zip @building %> <br />
+          <% if @building.kind_of? Unit %>
+           <%= link_to_unit_show @building  %> 
+          <%end%>
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="row">
+  <%= form_for @building do |f| %>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <div class="col-sm-6">
+          <label>Building Information</label>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :deck %> Deck
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :doorman %> Doorman
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <%= check_box_tag :elevator,'yes', @building.elevator ? true : false %> Elevator <br />
+              <% if @building.elevator %>
+                <%= f.number_field :elevator, class: 'form-control', min: 1 %>
+              <%else%>
+                <%= f.number_field :elevator, class: 'form-control hide', placeholder: '#Elevators', min: 1 %>
+              <%end%>
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :garage %> Garage
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :gym %> Gym
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :live_in_super %> Live in super
+            </label>
+          </div>
+           <div class="checkbox">
+            <label>
+              <%= f.check_box :pets_allowed_cats %> Pets Allowed Cats
+            </label>
+          </div>
+           <div class="checkbox">
+            <label>
+              <%= f.check_box :pets_allowed_dogs %> Pets Allowed Dogs
+            </label>
+          </div>
+           <div class="checkbox">
+            <label>
+              <%= f.check_box :roof_deck %> Roof Deck
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :swimming_pool %> Swimming Pool
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :walk_up %> Walk up
+            </label>
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="form-group">
+        <div class="col-sm-12">
+          <div class="pull-right">
+            <%= link_to 'Cancel', building_path(@building), class: 'btn btn-default'%>
+            <%= f.submit 'Submit', class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+      
+    </div>    
+  <% end %>
+</div>

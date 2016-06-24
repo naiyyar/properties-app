@@ -33,7 +33,7 @@ class UnitsController < ApplicationController
 
     respond_to do |format|
       if @unit.save
-        format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
+        format.html { redirect_to unit_steps_path(unit_id: @unit.id), notice: 'Unit was successfully created.' }
         format.json { render :show, status: :created, location: @unit }
       else
         format.html { render :new }
@@ -74,6 +74,13 @@ class UnitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def unit_params
-      params.require(:unit).permit(:building_id,:name,:description,:pros,:cons,:number_of_bedrooms,:number_of_bathrooms,:monthly_rent,:square_feet,:total_upfront_cost,:rent_start_date,:rent_end_date,:security_deposit,:broker_fee,:move_in_fee,:rent_upfront_cost,:processing_fee)
+      params.require(:unit).permit(:building_id,:name,:description,:pros,:cons,:number_of_bedrooms,
+                                   :number_of_bathrooms,:monthly_rent,:square_feet,:total_upfront_cost,
+                                   :rent_start_date,:rent_end_date,:security_deposit,:broker_fee,
+                                   :move_in_fee,:rent_upfront_cost,:processing_fee,:balcony,:board_approval_required,
+                                   :converted_unit,:courtyard,:dishwasher,:fireplace,:furnished,:guarantors_accepted,
+                                   :loft,:management_company_run,:rent_controlled,:private_landlord,:storage_available,
+                                   :sublet,:terrace
+                                   )
     end
 end

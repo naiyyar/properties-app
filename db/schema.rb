@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160617060524) do
+ActiveRecord::Schema.define(version: 20160624044221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20160617060524) do
   create_table "buildings", force: :cascade do |t|
     t.string   "building_name"
     t.string   "building_street_address"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -42,12 +42,20 @@ ActiveRecord::Schema.define(version: 20160617060524) do
     t.string   "city"
     t.string   "phone"
     t.string   "state"
-    t.boolean  "pets_allowed"
+    t.text     "description"
     t.boolean  "laundry_facility"
     t.boolean  "parking"
     t.boolean  "doorman"
-    t.boolean  "elevator"
-    t.text     "description"
+    t.boolean  "deck",                    default: false
+    t.integer  "elevator"
+    t.boolean  "garage",                  default: false
+    t.boolean  "gym",                     default: false
+    t.boolean  "live_in_super",           default: false
+    t.boolean  "pets_allowed_cats",       default: false
+    t.boolean  "pets_allowed_dogs",       default: false
+    t.boolean  "roof_deck",               default: false
+    t.boolean  "swimming_pool",           default: false
+    t.boolean  "walk_up",                 default: false
   end
 
   create_table "overall_averages", force: :cascade do |t|
@@ -120,18 +128,35 @@ ActiveRecord::Schema.define(version: 20160617060524) do
     t.text     "description"
     t.integer  "number_of_bedrooms"
     t.integer  "number_of_bathrooms"
-    t.decimal  "monthly_rent",        default: 0.0
-    t.decimal  "square_feet",         default: 0.0
-    t.decimal  "total_upfront_cost",  default: 0.0
+    t.decimal  "monthly_rent",            default: 0.0
+    t.decimal  "square_feet",             default: 0.0
+    t.decimal  "total_upfront_cost",      default: 0.0
     t.date     "rent_start_date"
     t.date     "rent_end_date"
-    t.decimal  "security_deposit",    default: 0.0
-    t.decimal  "broker_fee",          default: 0.0
-    t.decimal  "move_in_fee",         default: 0.0
-    t.decimal  "rent_upfront_cost",   default: 0.0
-    t.decimal  "processing_fee",      default: 0.0
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.decimal  "security_deposit",        default: 0.0
+    t.decimal  "broker_fee",              default: 0.0
+    t.decimal  "move_in_fee",             default: 0.0
+    t.decimal  "rent_upfront_cost",       default: 0.0
+    t.decimal  "processing_fee",          default: 0.0
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.boolean  "balcony",                 default: false
+    t.boolean  "board_approval_required", default: false
+    t.boolean  "converted_unit",          default: false
+    t.boolean  "courtyard",               default: false
+    t.boolean  "dishwasher",              default: false
+    t.boolean  "fireplace",               default: false
+    t.boolean  "furnished",               default: false
+    t.boolean  "guarantors_accepted",     default: false
+    t.boolean  "loft",                    default: false
+    t.boolean  "management_company_run",  default: false
+    t.boolean  "rent_controlled",         default: false
+    t.boolean  "private_landlord",        default: false
+    t.boolean  "storage_available",       default: false
+    t.boolean  "sublet",                  default: false
+    t.boolean  "terrace",                 default: false
+    t.boolean  "can_be_converted",        default: false
+    t.boolean  "dryer_in_unit",           default: false
   end
 
   create_table "uploads", force: :cascade do |t|
