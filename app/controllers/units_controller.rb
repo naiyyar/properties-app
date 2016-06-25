@@ -15,6 +15,7 @@ class UnitsController < ApplicationController
       marker.lat building.latitude
       marker.lng building.longitude
     end
+    @unit_rental_price_histories = @unit.rental_price_histories.order('created_at desc')
   end
 
   # GET /units/new

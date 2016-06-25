@@ -10,7 +10,7 @@
   <div class="pull-right">  
     <h4>
     <% if current_user %>
-      <%= link_to "Create New Building", new_building_path%>
+      <%= link_to "Create New Building", new_building_path %>
     <% end %>
     </h4>
   </div>
@@ -34,17 +34,17 @@
     </thead>
     <tbody>
       <% @buildings.each do |building| %>
-      <tr>
-        <td><%= link_to(building.building_name, building_path(building)) %></td>
-        <td><%= building.building_street_address %></td>
-        <td><%= building.latitude %></td>
-        <td><%= building.longitude %></td>
-        <% if current_user %>
-        <td><%= link_to "edit", edit_building_path(building) %></td>
-        <td><%= link_to "Delete", building_path(building), method: :delete, data: {confirm: "Are you sure you want to delete this building?"}, class: 'text-danger'%></td>  
-        <% end %>
-        <%end%>   
-      </tr>
+        <tr>
+          <td><%= link_to(building.building_name, building_path(building)) %></td>
+          <td><%= building.building_street_address %></td>
+          <td><%= building.latitude %></td>
+          <td><%= building.longitude %></td>
+          <% if current_user && current_user.has_role?(:admin) %>
+            <td><%= link_to "edit", edit_building_path(building) %></td>
+            <td><%= link_to "Delete", building_path(building), method: :delete, data: {confirm: "Are you sure you want to delete this building?"}, class: 'text-danger'%></td>  
+          <% end %>
+        </tr>
+      <%end%>
     </tbody>
   </table>
 </div>

@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5.1'
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-datepicker-rails'
 gem "font-awesome-rails"
 
 gem "paperclip", "~> 4.3"

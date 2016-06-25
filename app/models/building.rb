@@ -2,7 +2,7 @@ class Building < ActiveRecord::Base
   acts_as_votable
   validates :building_name, presence: true
   validates :building_street_address, presence: true
-  
+  resourcify
   ratyrate_rateable "building"
   
   has_many :reviews, as: :reviewable

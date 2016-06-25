@@ -25,5 +25,6 @@
 //= require fancybox_customize
 //= require jquery.raty
 //= require ratyrate
+//= require bootstrap-datepicker
 //= require_tree .
 

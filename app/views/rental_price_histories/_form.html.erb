@@ -1,0 +1,58 @@
+<%= form_for(@rental_price_history) do |f| %>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Residence Start Date</label>
+          <%= f.text_field :residence_start_date, class: "form-control datepicker"%>
+          <% if @unit.present? %>
+            <%= f.hidden_field :unit_id, value: @unit.id%>
+          <%end%>
+        </div>
+      </div>
+      <div class="col-sm-6">
+         <div class="form-group">
+          <label for="exampleInputEmail1">Residence End Date</label>
+           <%= f.text_field :residence_end_date, class: "form-control datepicker"%>
+        </div>
+      </div>
+      <div class="col-sm-6">
+         <div class="form-group">
+          <label for="exampleInputEmail1">Monthly Rent $</label>
+           <%= f.number_field :monthly_rent, class: "form-control"%>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Broker Fee $</label>
+           <%= f.number_field :broker_fee, class: "form-control"%>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Non Refundable Costs $</label>
+           <%= f.number_field :non_refundable_costs, class: "form-control"%>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Rent Up Front $</label>
+           <%= f.number_field :rent_upfront, class: "form-control"%>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Refundable Deposits $</label>
+           <%= f.number_field :refundable_deposits, class: "form-control"%>
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <div class="col-sm-12">
+          <div class="pull-right">
+            <%= f.submit 'Submit', class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+<% end %>

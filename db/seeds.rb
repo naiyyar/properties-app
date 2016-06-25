@@ -7,5 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-user = User.find(1)
+user = User.find(2)
 user.add_role :admin

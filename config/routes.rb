@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :rental_price_histories
   post '/rate' => 'rater#create', :as => 'rate'
   
   devise_for :users,:skip => [:sessions], controllers: { omniauth_callbacks: "omniauth_callbacks" }

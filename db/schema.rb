@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624044221) do
+ActiveRecord::Schema.define(version: 20160625031034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,19 @@ ActiveRecord::Schema.define(version: 20160624044221) do
   end
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
+
+  create_table "rental_price_histories", force: :cascade do |t|
+    t.date     "residence_start_date"
+    t.date     "residence_end_date"
+    t.decimal  "monthly_rent",         default: 0.0
+    t.decimal  "broker_fee",           default: 0.0
+    t.decimal  "non_refundable_costs", default: 0.0
+    t.decimal  "rent_upfront",         default: 0.0
+    t.decimal  "refundable_deposits",  default: 0.0
+    t.integer  "unit_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.string   "review_title"

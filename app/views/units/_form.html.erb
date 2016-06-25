@@ -4,13 +4,13 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label>Unit Name</label>
-           <%= f.text_field :name, class: "form-control"%>
+           <%= f.text_field :name, class: "form-control", required: 'required'%>
         </div>
       </div>
       <div class="col-sm-6">
          <div class="form-group">
           <label>Building</label>
-           <%= f.collection_select(:building_id, Building.all, :id, :building_name, {:prompt => :true}, {class: "form-control"}) %>
+           <%= f.collection_select(:building_id, Building.all, :id, :building_name, {:prompt => :true}, {class: "form-control", required: 'required'}) %>
         </div>
       </div>
       <div class="col-sm-6">
@@ -19,61 +19,21 @@
            <%= f.text_field :number_of_bedrooms, class: "form-control"%>
         </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <div class="form-group">
           <label>Bathrooms</label>
            <%= f.text_field :number_of_bathrooms, class: "form-control"%>
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label>Monthly Rent</label>
-           <%= f.number_field :monthly_rent, class: "form-control", min: 0 %>
-        </div>
-      </div>
-      <div class="col-sm-4">
+      
+      <div class="col-sm-6">
         <div class="form-group">
           <label>sqaure Feet</label>
            <%= f.text_field :square_feet, class: "form-control"%>
         </div>
       </div>
+     
       <div class="col-sm-6">
-        <div class="form-group">
-          <label>Rent upfront cost</label>
-           <%= f.number_field :rent_upfront_cost, class: "form-control", min: 0 %>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="webaddress">Total upfront cost</label>
-           <%= f.text_field :total_upfront_cost, class: "form-control", placeholder: "https://www.abc.com"%>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="description">Rent Start Date</label>
-           <%= f.text_field :rent_start_date, class: "form-control datepicker" %>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="description">Rent End Date</label>
-           <%= f.text_field :rent_end_date, class: "form-control datepicker" %>
-        </div>
-      </div>
-       <div class="col-sm-6">
-        <div class="form-group">
-          <label for="description">Security Deposit</label>
-           <%= f.number_field :security_deposit, class: "form-control", min: 0 %>
-        </div>
-      </div>
-       <div class="col-sm-6">
-        <div class="form-group">
-          <label for="description">Broker Fee</label>
-           <%= f.number_field :broker_fee, class: "form-control", min: 0 %>
-        </div>
-      </div>
-       <div class="col-sm-6">
         <div class="form-group">
           <label>Move In Fee</label>
            <%= f.number_field :move_in_fee, class: "form-control", min: 0 %>
@@ -81,7 +41,7 @@
       </div>
        <div class="col-sm-6">
         <div class="form-group">
-          <labe>Processing Fee</label>
+          <label>Processing Fee</label>
            <%= f.number_field :processing_fee, class: "form-control", min: 0 %>
         </div>
       </div>
