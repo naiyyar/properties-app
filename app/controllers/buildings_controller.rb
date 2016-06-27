@@ -12,10 +12,7 @@ class BuildingsController < ApplicationController
   end
 
   def contribute
-    respond_to do |format|
-      format.html
-      format.json { render json: @buildings = Building.search(params[:term]) }
-    end
+    @buildings = Building.search(params[:term])
   end
 
   def show
@@ -43,10 +40,35 @@ class BuildingsController < ApplicationController
   end
 
   def create
-    @building = Building.create(building_params)
+    @building = Building.find_by_building_street_address(params[:building][:building_street_address])
+    
+    if @building.blank?
+      @building = Building.create(building_params)
 
-    if @building.save
-      flash[:notice] = "Building Created."
+      if @building.save
+        flash[:notice] = "Building Created."
+        if params[:unit_contribution]
+          contribute = params[:unit_contribution]
+          unit_id = @building.units.last.id
+        else
+          contribute = params[:contribution]
+          building_id = @building.id
+        end
+        if contribute.present?
+          redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+        else
+          redirect_to building_steps_path(building_id: @building.id)
+        end
+      else
+        flash.now[:error] = "Error Creating"
+        render :new
+      end
+    else
+      if params[:unit_id].present?
+        @unit = Unit.find(params[:unit_id])
+      else
+        @unit = @building.fetch_or_create_unit(params[:building][:units_attributes])
+      end
       if params[:unit_contribution]
         contribute = params[:unit_contribution]
         unit_id = @building.units.last.id
@@ -54,14 +76,7 @@ class BuildingsController < ApplicationController
         contribute = params[:contribution]
         building_id = @building.id
       end
-      if contribute.present?
-        redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
-      else
-        redirect_to building_steps_path(building_id: @building.id)
-      end
-    else
-      flash.now[:error] = "Error Creating"
-      render :new
+      redirect_to user_steps_path(building_id: @building.id, unit_id: @unit.id, contribution_for: contribute)
     end
   end
 

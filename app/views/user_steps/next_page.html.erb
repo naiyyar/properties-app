@@ -12,4 +12,6 @@
 	</div>
 <%elsif params[:contribution_for] == 'building_amenities' %>
 	<%#= render partial: '' %>
+<%elsif params[:contribution_for] == 'unit_price_history' %>
+	<%= render partial: 'unit_price_histories/form' %>
 <%end%>

@@ -29,4 +29,8 @@ module ReviewsHelper
 			"#{reviewable.building.city}, #{reviewable.building.state} #{reviewable.building.zipcode}"
 		end
 	end
+
+	def number_of_months
+		['1-6 Months', '6-12 Months', '2-3 Years', '4-5 Years', '6-7 Years', '8-10 Years', '10+ Years' ]
+	end
 end
