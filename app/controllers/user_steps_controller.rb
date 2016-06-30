@@ -4,9 +4,9 @@ class UserStepsController < ApplicationController
 
 	def show
 		if params[:building_id]
-			@reviewable = @imageable = Building.find(params[:building_id])
+			@building = @reviewable = @imageable = Building.find(params[:building_id])
 		else
-			@reviewable = @imageable = Unit.find(params[:unit_id])
+			@unit = @reviewable = @imageable = Unit.find(params[:unit_id])
 		end
 		render_wizard
 	end

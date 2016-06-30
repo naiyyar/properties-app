@@ -30,9 +30,16 @@ app.buildings.prototype = {
   _select: function(e, ui) {
     this._input.val(ui.item.building_street_address);
     var unitContri = $("#unit_contribution").val();
+    var buildingContri = $("#contribution").val();
+    if(buildingContri == 'building_amenities'){
+        href = "/buildings/"+ui.item.id+"/edit"
+        $('#search_buildings_form').attr('action', href);
+      }
     if(unitContri == 'unit_review' || unitContri == 'unit_photos' || unitContri == 'unit_amenities' || unitContri == 'unit_price_history'){
+      $("#new_unit_building").removeClass('hide');
       $("#new_unit_building #building_building_street_address").val(ui.item.building_street_address);
       $("#new_unit_building #building_building_name").val(ui.item.building_name)
+
       if(ui.item.units.length > 0){
         if(ui.item.units.length == 1){
           if($("#unit_name").hasClass('hide')){
@@ -45,6 +52,10 @@ app.buildings.prototype = {
           $("#unit_number_of_bedrooms").val(unit.number_of_bedrooms);
           $("#unit_number_of_bathrooms").val(unit.number_of_bathrooms);
           $("#unit_names_list_select").removeAttr('name');
+          if(unitContri == 'unit_amenities'){
+            href = "/units/"+unit.id+"/edit"
+            $('#search_buildings_form').attr('action', href);
+          }
         }
         else{
           $("#unit_name").addClass('hide');
@@ -61,6 +72,10 @@ app.buildings.prototype = {
           $("#unit_number_of_bedrooms").val(ui.item.units[0].number_of_bedrooms);
           $("#unit_number_of_bathrooms").val(ui.item.units[0].number_of_bathrooms);
           unit_select.removeClass('hide');
+          if(unitContri == 'unit_amenities'){
+            href = "/units/"+ui.item.units[0].id+"/edit"
+            $('#search_buildings_form').attr('action', href);
+          }
         }
       }
       else{

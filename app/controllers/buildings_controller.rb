@@ -1,5 +1,5 @@
 class BuildingsController < ApplicationController 
-  before_action :authenticate_user!, except: [:index, :show, :contribute,:create]
+  before_action :authenticate_user!, except: [:index, :show, :contribute,:create,:edit]
 
   def index
     @buildings = Building.order('created_at desc')
@@ -36,12 +36,20 @@ class BuildingsController < ApplicationController
   end
 
   def new
-    @building = Building.new
+    if params['buildings-search-txt'].present?
+      @building = Building.find_by_building_street_address(params['buildings-search-txt'])
+    else
+      @building = Building.new
+    end
+    
   end
 
   def create
-    @building = Building.find_by_building_street_address(params[:building][:building_street_address])
-    
+    if params[:building][:building_street_address].present?
+      @building = Building.find_by_building_street_address(params[:building][:building_street_address])
+    else
+      @building = Building.find_by_building_street_address(params['buildings-search-txt'])
+    end
     if @building.blank?
       @building = Building.create(building_params)
 
@@ -71,12 +79,12 @@ class BuildingsController < ApplicationController
       end
       if params[:unit_contribution]
         contribute = params[:unit_contribution]
-        unit_id = @building.units.last.id
+        unit_id = @unit.id
       else
         contribute = params[:contribution]
         building_id = @building.id
       end
-      redirect_to user_steps_path(building_id: @building.id, unit_id: @unit.id, contribution_for: contribute)
+      redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
     end
   end
 

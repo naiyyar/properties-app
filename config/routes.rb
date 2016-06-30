@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   resources :rental_price_histories
   post '/rate' => 'rater#create', :as => 'rate'
   
-  devise_for :users,:skip => [:sessions], controllers: { omniauth_callbacks: "omniauth_callbacks" }
-  as :user do
-    get "/signin" => "devise/sessions#new", :as => :new_user_session
-    post "/signup" => "devise/sessions#create", :as => :user_session
-    delete "/" => "devise/sessions#destroy", :as => :destroy_user_session,
-      :via => Devise.mappings[:user].sign_out_via
-  end
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  # as :user do
+  #   get "/signin" => "devise/sessions#new", :as => :new_user_session
+  #   post "/signup" => "devise/sessions#create", :as => :user_session
+  #   delete "/" => "devise/sessions#destroy", :as => :destroy_user_session,
+  #     :via => Devise.mappings[:user].sign_out_via
+  # end
   
   resources :reviews
   resources :uploads
