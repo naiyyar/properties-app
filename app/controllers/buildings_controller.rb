@@ -75,7 +75,9 @@ class BuildingsController < ApplicationController
       if params[:unit_id].present?
         @unit = Unit.find(params[:unit_id])
       else
-        @unit = @building.fetch_or_create_unit(params[:building][:units_attributes])
+        if params[:building][:units_attributes].present?
+          @unit = @building.fetch_or_create_unit(params[:building][:units_attributes])
+        end
       end
       if params[:unit_contribution]
         contribute = params[:unit_contribution]
