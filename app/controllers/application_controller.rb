@@ -13,12 +13,10 @@ class ApplicationController < ActionController::Base
       	current_user.create_rating(session[:form_data]['score'], reviewable)
       end
       
-      if session[:form_data]['vote'] == true || session[:form_data]['vote'] == 'true'
+      if session[:form_data]['vote'] == true
         current_user.vote_exclusively_for(reviewable)
-      	#reviewable.vote_by :voter => current_user, :vote => 'like'
     	else
         current_user.vote_exclusively_against(reviewable)
-				#reviewable.vote_by :voter => current_user, :vote => 'bad'
       end
       
       session[:form_data] = nil
