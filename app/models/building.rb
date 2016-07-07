@@ -1,5 +1,5 @@
 class Building < ActiveRecord::Base
-  acts_as_votable
+  acts_as_voteable
   validates :building_street_address, presence: true
   resourcify
   ratyrate_rateable "building"
@@ -28,7 +28,6 @@ class Building < ActiveRecord::Base
     unit = Unit.new(params.values[0])
     unit.building_id = self.id
     unit.save
-
     return unit
   end
 end

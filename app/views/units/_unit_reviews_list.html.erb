@@ -24,7 +24,11 @@
     </div>
     <ul class="list-inline margin-top-10">
       <li><%= rating_for_user unit, review.user, "unit", star: 5 %></li> -
-      <li>Doesn't recommended</li> -
+      <%if review.user.voted_for?(unit) %>
+        <span class='fa fa-thumbs-o-up fa-1x'></span> Recommended
+      <%else%>
+        <span class='fa fa-thumbs-o-down fa-1x'></span> Not recommended
+      <%end%>-
       <li>Current Tenant(2 years)</li>
     </ul>
   </div>

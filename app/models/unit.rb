@@ -1,5 +1,5 @@
 class Unit < ActiveRecord::Base
-	acts_as_votable
+	acts_as_voteable
 	ratyrate_rateable "unit"
 	resourcify
 	validates :name, presence: true

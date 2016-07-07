@@ -16,7 +16,7 @@ gem 'geocoder'
 
 gem 'pg'
 
-gem 'acts_as_votable', '~> 0.10.0'
+gem 'thumbs_up'
 
 #Multistep
 gem 'wicked'

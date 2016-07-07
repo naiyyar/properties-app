@@ -25,7 +25,7 @@
       <ul class="list-inline margin-top-10">
         <li><%= rating_for_user @building, review.user, 'building', disable_after_rate: true %></li> |
         <li>
-          <%if @building.liked_by review.user %>
+          <%if review.user.voted_for?(@building) %>
             <span class='fa fa-thumbs-o-up fa-1x'></span> Recommended
           <%else%>
             <span class='fa fa-thumbs-o-down fa-1x'></span> Not recommended
