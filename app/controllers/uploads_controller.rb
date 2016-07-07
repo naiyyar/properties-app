@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
 	def index
     if params[:building_id]
       @building = Building.find(params[:building_id])
-      @uploads = Upload.order('created_at desc')
+      @uploads = @building.uploads.order('created_at desc')
     else
       @unit = Unit.find(params[:unit_id])
       @uploads = @unit.uploads.order('created_at desc')

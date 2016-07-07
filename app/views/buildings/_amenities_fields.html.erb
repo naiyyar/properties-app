@@ -1,27 +1,24 @@
 <div class="row">
-  <div class="media">
-    <div class="media-left">
-      <a href="#" class="pull-left">
-        <% if @building.uploads.present? %>
-          <%= image_tag @building.uploads.first.image, size: '60x60', class: 'img-rounded' %>
-        <%else%>
-          <span class="fa fa-building fa-3x"></span>
-        <%end%>
-      </a>
-      <div class="media-body">
-        <b class="media-heading"><%= link_to_building_show @building %></b> <br />
-        <small class="text-muted">
-          <%= building_street_address @building %> <br />
-          <%= city_state_zip @building %> <br />
-          <% if @building.kind_of? Unit %>
-           <%= link_to_unit_show @building  %> 
-          <%end%>
-        </small>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="media">
+      <div class="media-left">
+        <div class="media-body">
+          <b class="media-heading"><%= link_to_building_show @building %></b> <br />
+          <small class="text-muted">
+            <%= building_street_address @building %> <br />
+            <%= city_state_zip @building %> <br />
+            <% if @building.kind_of? Unit %>
+             <%= link_to_unit_show @building  %> 
+            <%end%>
+          </small>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 <br />
+
 <div class="row">
   <%= form_for @building do |f| %>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -100,7 +97,6 @@
           </div>
         </div>
       </div>
-      
     </div>    
   <% end %>
 </div>

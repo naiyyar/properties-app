@@ -18,11 +18,15 @@
       <p> <%= simple_format(review.review_title) %></p>
     </div>
     <div>
-      <b>Pros:</b><span> <%= review.pros %></span> <br />
-      <b>Cons:</b><span> <%= review.cons %></span> <br />
-      <b>Other TranspaRENTcy and Advice to Share:</b><span> <%= review.other_advice %></span>
+      <b>Pros:</b><div class="col-xs-offset-1"> <%= simple_format(review.pros) %></div>
+      <b>Cons:</b><div class="col-xs-offset-1"> <%= simple_format(review.cons) %></div> <br />
+      <b>Other TranspaRENTcy and Advice to Share:</b><div class="col-xs-offset-1"> <%= simple_format(review.other_advice) %></div>
     </div>
-    <span class="pull-left margin-top-10"><%= rating_for_user unit, review.user, "unit", star: 5 %></span> - Doesn't recommended - Current Tenant(2 years)
+    <ul class="list-inline margin-top-10">
+      <li><%= rating_for_user unit, review.user, "unit", star: 5 %></li> -
+      <li>Doesn't recommended</li> -
+      <li>Current Tenant(2 years)</li>
+    </ul>
   </div>
   <hr />
 <% end %>

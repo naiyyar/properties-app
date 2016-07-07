@@ -59,20 +59,7 @@
     <div class="panel panel-default">
       <div class="panel-heading"><b>Building Amenities</b></div>
       <div class="panel-body">
-        <% if @unit.building.pets_allowed_cats %>
-          <p><span class="fa fa-paw"> Cats Allowed</p>
-        <%end%>
-        <% if @unit.building.pets_allowed_dogs %>
-          <p><span class="fa fa-paw"> Dogs Allowed</p>
-        <%end%>
-        <% if @unit.building.elevator %>
-          <p><span class="fa fa-arrows-v"> &nbsp;&nbsp;Elevator(@unit.building.elevator)</p>
-        <%end%>
-        <% if @unit.building.doorman %>
-          <p><span class="fa fa-male"> &nbsp;&nbsp;Doorman</p>
-        <%end%>
-        <p> <%= @unit.building.laundry_facility ? 'Laundry in Building' : '' %></p>
-        <p> <%= @unit.building.parking ? 'Parking' : '' %></p>
+        <%= render partial: 'unit_amenities', locals: {building: @unit.building} %>
       </div>
     </div>
   </div>
@@ -82,7 +69,7 @@
       <div class="panel-heading"><b>Unit Amenities</b></div>
       
       <div class="panel-body"> 
-        
+        <%= render partial: 'unit_amenities' %>
       </div>
     </div>
   </div>

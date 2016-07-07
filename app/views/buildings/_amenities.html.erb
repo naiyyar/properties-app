@@ -25,8 +25,7 @@
 <div class="panel panel-default" id="amenities">
   <div class="panel-heading"><b>BUILDING AMENITIES</b></div>
   <div class="panel-body">
-  	<p> <%= @building.laundry_facility ? 'Laundry in Building' : '' %></p>
-	  <p> <%= @building.parking ? 'Parking' : '' %></p>
+  	<%= render partial: 'building_amenities', locals: { building: @building } %>
   </div>
 </div>
 

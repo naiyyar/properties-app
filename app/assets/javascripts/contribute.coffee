@@ -24,6 +24,8 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 
 $(document).on 'click', '#elevator',(e) ->
 	$('#building_elevator').toggleClass('hide')
+	if($('#building_elevator').hasClass('hide'))
+		$('#building_elevator').val('')
 
 #On Unit Change
 $(document).on 'change', '#unit_names_list_select',(e) ->
