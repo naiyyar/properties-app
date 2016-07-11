@@ -37,7 +37,7 @@
             <span class='fa fa-thumbs-o-down fa-1x'></span> Not recommended
           <%end%>
         </li> |
-        <li>Tenant: <%= "#{review.tenant_status}" " (#{review.stay_time})" %></li>
+        <li>Tenant: <%= "#{review.tenant_status.present? ? review.tenant_status.capitalize : '' }" " (#{review.stay_time})" %></li>
       </ul>
     </div>
     <hr />

@@ -1,71 +1,108 @@
 <%= form_for [@reviewable, Review.new] do |f| %>
-  <%= render partial: 'reviews/reviewable_info' %>
-  <hr />
-  <div class="form-group">
-    <label>Rating</label>
-    <% if current_user %>
-    	<%= rating_for_user @reviewable, current_user, @reviewable.class.name.downcase, star: 5 %>
-    <%else%>
-			<%= rating_for_user @reviewable, nil, @reviewable.class.name.downcase, star: 5 %>
+  <div class="row">
+	  <% unless @reviewable.kind_of? Unit %>
+	  	<div class="col-sm-12">
+			  <div class="form-group">
+					<label>Building Address</label>
+					<%= text_field_tag 'building_street_address', building_street_address(@reviewable),  class: 'form-control' %>
+				</div>
+			</div>
+		<%else%>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Building Address</label>
+					<%= text_field_tag 'building_street_address', building_street_address(@reviewable),  class: 'form-control' %>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Unit</label>
+					<%= text_field_tag 'unit', @reviewable.name,  class: 'form-control' %>
+				</div>
+			</div>
 		<%end%>
-	</div>
-
-	<div class="form-group">
-		<label>Current or Formar Tenant ?</label>
-		<br />
-		<div class="btn-group" data-toggle="buttons">
-		  <label class="btn btn-default">
-		  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant' %> Current
-		  </label>
-		  <label class="btn btn-default">
-		  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant' %> Former
-		  </label>
+	  <div class="col-sm-12">
+		  <div class="form-group">
+		    <label>Rating</label>
+		    <% if current_user %>
+		    	<%= rating_for_user @reviewable, current_user, @reviewable.class.name.downcase, star: 5 %>
+		    <%else%>
+					<%= rating_for_user @reviewable, nil, @reviewable.class.name.downcase, star: 5 %>
+				<%end%>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label>Reviewer Type </label>
+				<br />
+				<div class="btn-group" data-toggle="buttons">
+				  <label class="btn btn-default">
+				  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant' %> Current Tenant
+				  </label>
+				  <label class="btn btn-default">
+				  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant' %> Former Tenant
+				  </label>
+				   <label class="btn btn-default">
+				  	<%= f.radio_button :tenant_status,'visitor', id: 'former_tenant' %> Visitor
+				  </label>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label></label>
+				<%= f.select :stay_time, options_for_select(number_of_months),{prompt: 'Number of Months in Residence	'},  { class: 'form-control' } %>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label>Review Title</label>
+				<%= f.text_field :review_title,  class: 'form-control' %>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label>Pros</label>
+				<%= f.text_area :pros,  class: 'form-control' %>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label>Cons</label>
+				<%= f.text_area :cons,  class: 'form-control' %>
+			</div>
+		</div>
+		
+		<div class="col-sm-12">
+		  <div class="form-group">
+				<label>Other TranspaRENTcy and advice to share</label>
+				<%= f.text_area :other_advice,  class: 'form-control' %>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label>Would you recommended this building?</label>
+				<br />
+				<div class="btn-group" data-toggle="buttons">
+				  <label class="btn btn-default">
+				  	<%= radio_button_tag 'vote', true %> <span class='fa fa-thumbs-o-up fa-2x'></span>
+				  </label>
+				  <label class="btn btn-default">
+				  	<%= radio_button_tag 'vote', false %> <span class='fa fa-thumbs-o-down fa-2x'></span>
+				  </label>
+				</div>
+			</div>
+	  </div>
+	  <div class="col-sm-12">
+	  	<div class="pull-right">
+			  <% if current_user %>
+			  	<%= f.hidden_field :user_id, value: current_user.id %>
+			  <%end%>
+			  <br />
+			  <%= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default" %>
+			  <%= f.submit 'Submit Review', class: "btn btn-primary" %>
+		  </div>
 		</div>
 	</div>
-	
-	<div class="form-group">
-		<label></label>
-		<%= f.select :stay_time, options_for_select(number_of_months),{prompt: 'Number of Months in Residence	'},  { class: 'form-control' } %>
-	</div>
-
-	<div class="form-group">
-		<label>Review Title</label>
-		<%= f.text_field :review_title,  class: 'form-control' %>
-	</div>
-
-	<div class="form-group">
-		<label>Pros</label>
-		<%= f.text_area :pros,  class: 'form-control' %>
-	</div>
-
-	<div class="form-group">
-		<label>Cons</label>
-		<%= f.text_area :cons,  class: 'form-control' %>
-	</div>
-	
-  <div class="form-group">
-		<label>Other TranspaRENTcy and advice to share</label>
-		<%= f.text_area :other_advice,  class: 'form-control' %>
-	</div>
-
-	<div class="form-group">
-		<label>Would you recommended this building?</label>
-		<br />
-		<div class="btn-group" data-toggle="buttons">
-		  <label class="btn btn-default">
-		  	<%= radio_button_tag 'vote', true %> <span class='fa fa-thumbs-o-up fa-2x'></span>
-		  </label>
-		  <label class="btn btn-default">
-		  	<%= radio_button_tag 'vote', false %> <span class='fa fa-thumbs-o-down fa-2x'></span>
-		  </label>
-		</div>
-	</div>
-  
-  <% if current_user %>
-  	<%= f.hidden_field :user_id, value: current_user.id %>
-  <%end%>
-  <br />
-  <%= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default" %>
-  <%= f.submit 'Submit Review', class: "btn btn-primary" %>
 <% end %>
   
