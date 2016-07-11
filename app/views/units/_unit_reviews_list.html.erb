@@ -17,11 +17,6 @@
       <p class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %> by <%= review.user.name %></p>
       <p> <%= simple_format(review.review_title) %></p>
     </div>
-    <div>
-      <b>Pros:</b><div class="col-xs-offset-1"> <%= simple_format(review.pros) %></div>
-      <b>Cons:</b><div class="col-xs-offset-1"> <%= simple_format(review.cons) %></div> <br />
-      <b>Other TranspaRENTcy and Advice to Share:</b><div class="col-xs-offset-1"> <%= simple_format(review.other_advice) %></div>
-    </div>
     <ul class="list-inline margin-top-10">
       <li><%= rating_for_user unit, review.user, "unit", star: 5 %></li> -
       <%if review.user.voted_for?(unit) %>
@@ -31,6 +26,17 @@
       <%end%>-
       <li>Current Tenant(2 years)</li>
     </ul>
+    <div>
+      <% if review.pros.present? %>
+        <b>Pros:</b><div class="col-xs-offset-1"> <%= simple_format(review.pros) %></div>
+      <%end%>
+      <%if review.cons.present? %>
+        <b>Cons:</b><div class="col-xs-offset-1"> <%= simple_format(review.cons) %></div> <br />
+      <%end%>
+      <%if review.other_advice.present? %>
+        <b>Other TranspaRENTcy and Advice to Share:</b><div class="col-xs-offset-1"> <%= simple_format(review.other_advice) %></div>
+      <%end%>
+    </div>
   </div>
   <hr />
 <% end %>
