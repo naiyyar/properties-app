@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       	current_user.create_rating(session[:form_data]['score'], reviewable)
       end
       
-      if session[:form_data]['vote'] == true
+      if session[:form_data]['vote'] == 'true'
         current_user.vote_exclusively_for(reviewable)
     	else
         current_user.vote_exclusively_against(reviewable)
