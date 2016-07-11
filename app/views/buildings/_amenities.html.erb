@@ -1,37 +1,6 @@
-<div class="panel panel-default" id="description">
-  <div class="panel-heading"><b>BUILDING DESCRIPTION</b></div>
-  <div class="panel-body"> <p><%= @building.description%></p> </div>
-</div>
-
-<div class="panel panel-default" id="highlights">
-  <div class="panel-heading"><b>HIGHLIGHTS</b></div>
-  <div class="panel-body">
-	  <% if @building.pets_allowed_cats %>
-	  	<p><span class="fa fa-paw"> Cats Allowed</p>
-	  <%end%>
-    <% if @building.pets_allowed_dogs %>
-      <p><span class="fa fa-paw"> Dogs Allowed</p>
-    <%end%>
-	  <% if @building.elevator %>
-	  	<p><span class="fa fa-arrows-v"> &nbsp;&nbsp;Elevator (<%= @building.elevator %>)</p>
-	  <%end%>
-	  <% if @building.doorman %>
-	  	<p><span class="fa fa-male"> &nbsp;&nbsp;Doorman</p>
-	  <%end%>
-
-  </div>
-</div>
-
 <div class="panel panel-default" id="amenities">
   <div class="panel-heading"><b>BUILDING AMENITIES</b></div>
   <div class="panel-body">
   	<%= render partial: 'building_amenities', locals: { building: @building } %>
-  </div>
-</div>
-
-<div class="panel panel-default" id="amenities">
-  <div class="panel-heading"><b>BUILDING FACTS</b></div>
-  <div class="panel-body">
-  	
   </div>
 </div>
