@@ -99,7 +99,11 @@
 			  	<%= f.hidden_field :user_id, value: current_user.id %>
 			  <%end%>
 			  <br />
-			  <%= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default" %>
+			  <% if params[:unit_id].present? %>
+			  	<%= link_to 'Cancel', unit_path(@reviewable), class: "btn btn-default" %>
+			  <%else%>
+			  	<%= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default" %>
+			  <%end%>
 			  <%= f.submit 'Submit Review', class: "btn btn-primary" %>
 		  </div>
 		</div>

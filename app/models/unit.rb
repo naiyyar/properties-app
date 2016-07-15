@@ -10,4 +10,12 @@ class Unit < ActiveRecord::Base
 
 	has_many :uploads, as: :imageable
   accepts_nested_attributes_for :uploads, :allow_destroy => true
+
+  def self.search(term)
+    if term
+      self.where("name ILIKE ?", "%#{term}%")
+    else
+      self.all
+    end
+  end
 end

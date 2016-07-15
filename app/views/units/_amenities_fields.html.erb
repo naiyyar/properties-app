@@ -1,20 +1,15 @@
 <div class="row">
-  <div class="media">
-    <div class="media-left">
-      <a href="#" class="pull-left">
-        <% if @unit.uploads.present? %>
-          <%= image_tag @unit.uploads.first.image, size: '60x60', class: 'img-rounded' %>
-        <%else%>
-          <span class="fa fa-building fa-3x"></span>
-        <%end%>
-      </a>
-      <div class="media-body">
-        <b class="media-heading"><%= link_to_building_show @unit.building %></b> <br />
-        <small class="text-muted">
-          <%= building_street_address @unit.building %> <br />
-          <%= city_state_zip @unit.building %> <br />
-          <%= link_to @unit.name, unit_path(@unit) %>
-        </small>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="media">
+      <div class="media-left">
+        <div class="media-body">
+          <b class="media-heading"><%= link_to_building_show @unit.building %></b> <br />
+          <small class="text-muted">
+            <%= building_street_address @unit.building %> <br />
+            <%= city_state_zip @unit.building %> <br />
+            <%= link_to @unit.name, unit_path(@unit) %>
+          </small>
+        </div>
       </div>
     </div>
   </div>
@@ -123,7 +118,6 @@
           </div>
         </div>
       </div>
-      
     </div>    
   <% end %>
 </div>

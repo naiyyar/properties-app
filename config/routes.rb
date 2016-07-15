@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   resources :units do
     resources :reviews
     resources :uploads
+    collection do
+      get :units_search
+    end
   end
   
   root "home#index"

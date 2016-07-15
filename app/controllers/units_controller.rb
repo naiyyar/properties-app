@@ -18,6 +18,10 @@ class UnitsController < ApplicationController
     @unit_rental_price_histories = @unit.rental_price_histories.order('created_at desc')
   end
 
+  def units_search
+    @units = Unit.where(building_id: params[:building_id]).search(params[:term])
+  end
+
   # GET /units/new
   def new
     @unit = Unit.new

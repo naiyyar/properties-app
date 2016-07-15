@@ -1,5 +1,5 @@
 class UploadsController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, only: :destroy
 
 	def index
     if params[:building_id]
@@ -26,7 +26,7 @@ class UploadsController < ApplicationController
 	def create
     @imageable = find_imageable
     @upload = @imageable.uploads.build(upload_params)
-    @upload.user_id = current_user.id
+    @upload.user_id = current_user.id if current_user.present?
     if @upload.save
       # send success header
       render json: { message: "success", fileID: @upload.id }, :status => 200

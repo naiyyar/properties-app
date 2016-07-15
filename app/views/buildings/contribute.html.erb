@@ -23,19 +23,31 @@
 
 <div class="row">
 	<div class="col-lg-6" id="search-form">
-		<%= form_tag "/reviews/new", method: :get, id: "search_buildings_form" do %>
+		<%= form_tag "/reviews/new", method: :get, id: "search_item_form" do %>
 			<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution", id: "building_contribution" %>
 			<section class="app-content">
 		    <div class="buildings-search">
 		      <%= text_field_tag 'buildings-search-txt', nil, class: "form-control", placeholder: 'Search building by name or address'%>
 		      <div class="results" id="buildings-search-results"></div>
-		      <ul id="buildings-search-no-results"></ul>
+		      <ul id="buildings-search-no-results" class="search-no-result"></ul>
 		    </div>
 		  </section>
 		  <div class="pull-right margin-top-20">
 	    	<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary' %>
 	    </div>
 	  <%end%>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6 hide" id="unit-search">
+		<section class="app-content">
+	    <div class="buildings-search unit-search">
+	      <%= text_field_tag 'units-search-txt', nil, class: "form-control", placeholder: 'Search unit by name'%>
+	      <div class="results" id="units-search-results"></div>
+	      <ul id="units-search-no-results" class="search-no-result"></ul>
+	    </div>
+	  </section>
 	</div>
 </div>
 

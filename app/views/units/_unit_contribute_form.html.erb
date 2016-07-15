@@ -17,7 +17,6 @@
     <div class="col-sm-6">
       <div class="form-group">
         <%= text_field_tag 'unit_name', nil, name: "building[units_attributes][0][name]", class: "form-control", placeholder: 'Unit #'%>
-        <%= select_tag 'unit_name', options_for_select('1'), name: "building[units_attributes][0][name]", class: "form-control hide", placeholder: 'Select a unit', id: 'unit_names_list_select'%>
         <%= hidden_field_tag :unit_contribution, nil %>
       </div>
     </div>
