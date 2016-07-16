@@ -14,6 +14,10 @@ gem 'underscore-rails'
 
 gem 'geocoder'
 
+#Error Messages, Form validations
+gem "dynamic_form"
+gem 'client_side_validations'
+
 gem 'pg'
 
 gem 'thumbs_up'

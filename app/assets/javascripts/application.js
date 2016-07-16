@@ -26,5 +26,6 @@
 //= require jquery.raty
 //= require ratyrate
 //= require bootstrap-datepicker
+//= require rails.validations
 //= require_tree .
 

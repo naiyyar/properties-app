@@ -3,6 +3,16 @@ $(document).on 'click', '#add_new_building',(e) ->
 	$("#search-form").hide();
 	$("#new_building").removeClass('hide');
 
+$(document).on 'click', '#submit_review',(e) ->
+	if($("input[name='score']").val()== '')
+		e.preventDefault();
+		$(".rating-not-selected").removeClass('hide')
+		return false
+	else
+		$(".rating-not-selected").addClass('hide')
+		return true
+
+
 $(document).on 'click', '#add_new_unit',(e) ->
 	e.preventDefault();
 	$("#unit_id").val('');

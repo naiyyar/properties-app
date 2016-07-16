@@ -25,3 +25,13 @@
 .text-col-black{
 	color: #333;
 }
+
+.message {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+div.field_with_errors div.ui-effects-wrapper {
+  display: inline-block !important;
+}
