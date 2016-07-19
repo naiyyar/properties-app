@@ -25,7 +25,6 @@ $(document).on 'click', '#add_new_unit',(e) ->
 
 
 $(document).on 'click', "input[name='contribute_to']",(e) ->
-	
 	if(this.value=='unit_review' || this.value=='unit_photos' || this.value=='unit_amenities' || this.value=='unit_price_history')
 		$("#next_btn").hide()
 		$("#unit_contribution").val(this.value)
@@ -47,3 +46,10 @@ $(document).on 'click', '#elevator',(e) ->
 	$('#building_elevator').toggleClass('hide')
 	if($('#building_elevator').hasClass('hide'))
 		$('#building_elevator').val('')
+
+$(document).on 'click', '.reviewer_type',(e) ->
+	id= $(this).children().attr('id')
+	if(id == 'visitor')
+		$("#review_stay_time").addClass('hide')
+	else
+		$("#review_stay_time").removeClass('hide')

@@ -38,14 +38,14 @@
 				<label>Reviewer Type </label>
 				<br />
 				<div class="btn-group" data-toggle="buttons">
-				  <label class="btn btn-default">
-				  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant' %> Current Tenant
+				  <label class="btn btn-default reviewer_type">
+				  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant', class: 'reviewer_type1' %> Current Tenant
 				  </label>
-				  <label class="btn btn-default">
-				  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant' %> Former Tenant
+				  <label class="btn btn-default reviewer_type">
+				  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant', class: 'reviewer_type1' %> Former Tenant
 				  </label>
-				   <label class="btn btn-default">
-				  	<%= f.radio_button :tenant_status,'visitor', id: 'former_tenant' %> Visitor
+				   <label class="btn btn-default reviewer_type">
+				  	<%= f.radio_button :tenant_status,'visitor', id: 'visitor', class: 'reviewer_type1'   %> Visitor
 				  </label>
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 		<div class="col-sm-12">
 			<div class="form-group">
 				<label></label>
-				<%= f.select :stay_time, options_for_select(number_of_months), { prompt: 'Number of Years in Residence' },  { class: 'form-control', validate: true } %>
+				<%= f.select :stay_time, options_for_select(number_of_months), { prompt: 'Number of Years in Residence' },  { class: 'form-control' } %>
 			</div>
 		</div>
 		<div class="col-sm-12">
