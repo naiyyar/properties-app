@@ -1,24 +1,11 @@
-<table class="table table-bordered table-striped">
-	<thead>
-		<tr>
-			<th>Resident SD</th>
-			<th>Resident ED</th>
-			<th>Rent</th>
-			<th>Refundable deposits</th>
-			<th>Broker Fee</th>
-			<th>Non Refundable costs</th>
-			<th>Total Money upfront</th>
-		</tr>
-	</thead>
-	<% @unit_rental_price_histories.each do |rental_price| %>
-		<tr>
-			<td><%= rental_price.residence_start_date %></td>
-			<td><%= rental_price.residence_end_date %></td>
-			<td><%= number_to_currency(rental_price.monthly_rent) %></td>
-			<td><%= number_to_currency(rental_price.broker_fee) %></td>
-			<td><%= number_to_currency(rental_price.non_refundable_costs) %></td>
-			<td><%= number_to_currency(rental_price.rent_upfront) %></td>
-			<td><%= number_to_currency(rental_price.refundable_deposits) %></td>
-		</tr>
-	<%end%>
-</table>
+<% price_histories.each do |rental_price| %>
+	<tr>
+		<td><%= rental_price.residence_start_date %></td>
+		<td><%= rental_price.residence_end_date %></td>
+		<td><%= number_to_currency(rental_price.monthly_rent) %></td>
+		<td><%= number_to_currency(rental_price.broker_fee) %></td>
+		<td><%= number_to_currency(rental_price.non_refundable_costs) %></td>
+		<td><%= number_to_currency(rental_price.rent_upfront) %></td>
+		<td><%= number_to_currency(rental_price.refundable_deposits) %></td>
+	</tr>
+<%end%>

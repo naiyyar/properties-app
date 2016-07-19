@@ -1,0 +1,3 @@
+<% @building.units.each do |unit| %>
+	<%= render partial: 'rental_price_histories/price_history', locals: { price_histories: unit.rental_price_histories.order('created_at desc')} %>
+<%end%>

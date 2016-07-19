@@ -65,7 +65,20 @@
     <div class="pull-right">
       <%= link_to 'New rental price', new_rental_price_history_path(unit_id: @unit), class: 'btn btn-info btn-sm' %>
     </div>
-    <%= render partial: 'rental_price_histories/price_history' %>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Resident SD</th>
+          <th>Resident ED</th>
+          <th>Rent</th>
+          <th>Refundable deposits</th>
+          <th>Broker Fee</th>
+          <th>Non Refundable costs</th>
+          <th>Total Money upfront</th>
+        </tr>
+      </thead>
+      <%= render partial: 'rental_price_histories/price_history', locals: { price_histories: @unit_rental_price_histories} %>
+    </table>
   </div>
 </div>
 <br />
