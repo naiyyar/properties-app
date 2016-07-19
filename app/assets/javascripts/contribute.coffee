@@ -8,8 +8,12 @@ $(document).on 'click', '#submit_review',(e) ->
 		e.preventDefault();
 		$(".rating-not-selected").removeClass('hide')
 		return false
+	else if(!$('.reviewer_type').hasClass('active'))
+		$(".status-not-selected").removeClass('hide')
+		return false
 	else
 		$(".rating-not-selected").addClass('hide')
+		$(".status-not-selected").addClass('hide')
 		return true
 
 
@@ -51,5 +55,6 @@ $(document).on 'click', '.reviewer_type',(e) ->
 	id= $(this).children().attr('id')
 	if(id == 'visitor')
 		$("#review_stay_time").addClass('hide')
+		$("#review_stay_time").next().hide()
 	else
 		$("#review_stay_time").removeClass('hide')
