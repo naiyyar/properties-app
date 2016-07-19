@@ -15,9 +15,13 @@
       </ul>
       
       <div class="address">
-        <p> <b><%= @unit.building.building_street_address %> </b></p>
-        <p> <b><%= @unit.building.city %>, <%= @unit.building.state %>, <%= @unit.building.zipcode %> </b></p>
-        <p> <b><%= @unit.building.building_name %></b></p>
+        <%= link_to building_path(@unit.building) do %>
+          <b>
+            <%= @unit.building.building_street_address %> <br />
+            <%= @unit.building.city %>, <%= @unit.building.state %>, <%= @unit.building.zipcode %> <br />
+            <%= @unit.building.building_name %>
+          </b>
+        <%end%>
       </div>
       <br />
       <ul class="list-inline">
