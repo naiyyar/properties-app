@@ -2,21 +2,26 @@
 	<div class="col-lg-12">
 		<div class="media">
 	    <div class="media-left">
-	      <!-- <a href="#" class="pull-left">
-	        <%# if @imageable.uploads.present? %>
-	          <%#= image_tag @imageable.uploads.first.image, size: '60x60', class: 'img-rounded' %>
-	        <%#else%>
-	           <span class="fa fa-building fa-3x"></span>
-	        <%#end%>
-	      </a> -->
 	      <div class="media-body">
-	        <b class="media-heading"><%= link_to @imageable.building_name, building_path(@imageable) %></b> <br />
-	        <small class="text-muted">
-	        	<%= link_to building_path(@imageable) do %>
-	        		<%= @imageable.building_street_address %> <br />
-	        		<%= "#{@imageable.city}, #{@imageable.state} #{@imageable.zipcode}" %> 
-	        	<%end%>
-	        </small>
+        	<% if @imageable.kind_of? Unit %>
+        		<b class="media-heading"><%= link_to @imageable.building.building_name, building_path(@imageable.building) %></b>
+        		<br />
+        		<small class="text-muted">
+	        		<%= link_to building_path(@imageable.building) do %>
+		        		<%= @imageable.building.building_street_address %> <br />
+		        		<%= "#{@imageable.building.city}, #{@imageable.building.state} #{@imageable.building.zipcode}" %> 
+	        		<%end%>
+	        		<%= link_to @imageable.name, unit_path(@imageable)%>
+	        	</small>
+        	<%else%>
+        		<b class="media-heading"><%= link_to @imageable.building_name, building_path(@imageable) %></b>  <br />
+        		<small class="text-muted">
+	        		<%= link_to building_path(@imageable) do %>
+		        		<%= @imageable.building_street_address %> <br />
+		        		<%= "#{@imageable.city}, #{@imageable.state} #{@imageable.zipcode}" %> 
+	        		<%end%> 
+	        	</small>
+        	<%end%>
 	      </div>
 	    </div>
 	  </div>
