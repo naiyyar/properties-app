@@ -1,6 +1,6 @@
 $(document).on 'click', '#add_new_building',(e) ->
 	e.preventDefault();
-	$("#search-form").hide();
+	$("#search-form").addClass('hide');
 	$("#new_building").removeClass('hide');
 
 $(document).on 'click', '#submit_review',(e) ->
@@ -30,12 +30,19 @@ $(document).on 'click', '#add_new_unit',(e) ->
 
 $(document).on 'click', "input[name='contribute_to']",(e) ->
 	if(this.value=='unit_review' || this.value=='unit_photos' || this.value=='unit_amenities' || this.value=='unit_price_history')
-		$("#next_btn").hide()
+		$("#next_btn").addClass('hide')
 		$("#unit_contribution").val(this.value)
 		if(!$("#new_building").hasClass('hide'))
 			$("#new_building").addClass('hide');
+		#For new building creation
+		$("#contribution").val(this.value)
+		$("#new_building_submit").val('Submit')
+		if($("#search-form").hasClass('hide'))
+			$("#search-form").removeClass('hide')
+			$("#buildings-search-txt").val('')
+			$(".no-result-li").hide()
 	else
-		$("#search-form, #next_btn").show()
+		$("#search-form, #next_btn").removeClass('hide')
 		$("#new_unit_building").addClass('hide')
 		$("#new_building").addClass('hide');
 		$(".building_contribution").val(this.value)

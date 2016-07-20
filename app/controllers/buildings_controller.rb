@@ -63,10 +63,15 @@ class BuildingsController < ApplicationController
           building_id = @building.id
         end
         if contribute.present?
-          redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+          if ['unit_review', 'unit_photos', 'unit_amenities', 'unit_price_history'].include? contribute
+            redirect_to contribute_buildings_path(contribution_for: contribute)
+          else
+            redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+          end
         else
           redirect_to building_steps_path(building_id: @building.id)
         end
+        
       else
         flash.now[:error] = "Error Creating"
         render :new

@@ -5,10 +5,10 @@
  		<%= radio_button_tag :contribute_to, 'building_photos' %> Building Photos <br />
 		<%= radio_button_tag :contribute_to, 'building_amenities' %> Building Amenities <br />
 		<br />
-		<%= radio_button_tag :contribute_to, 'unit_review' %> Unit Review <br />
-		<%= radio_button_tag :contribute_to, 'unit_photos' %> Unit Photos <br />
-		<%= radio_button_tag :contribute_to, 'unit_amenities' %> Unit Amenities <br />
-		<%= radio_button_tag :contribute_to, 'unit_price_history' %> Unit Price History
+		<%= radio_button_tag :contribute_to, 'unit_review', params[:contribution_for]=='unit_review' ? true : false %> Unit Review <br />
+		<%= radio_button_tag :contribute_to, 'unit_photos', params[:contribution_for]=='unit_photos' ? true : false %> Unit Photos <br />
+		<%= radio_button_tag :contribute_to, 'unit_amenities', params[:contribution_for]=='unit_amenities' ? true : false %> Unit Amenities <br />
+		<%= radio_button_tag :contribute_to, 'unit_price_history', params[:contribution_for]=='unit_price_history' ? true : false %> Unit Price History
 	</div>
 </div>
 
@@ -33,7 +33,9 @@
 		    </div>
 		  </section>
 		  <div class="pull-right margin-top-20">
-	    	<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary' %>
+		  	<% if params[:contribution_for].blank? %>
+		  		<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary' %>
+		  	<%end%>
 	    </div>
 	  <%end%>
 	</div>
@@ -58,7 +60,7 @@
 				<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution" %>
 				<%= render partial: 'buildings/building_contribute_form' %>
 		    <div class="pull-right">
-	      	<%= submit_tag 'Next', class: 'btn btn-primary' %>
+	      	<%= submit_tag 'Next', class: 'btn btn-primary', id: 'new_building_submit' %>
 	      </div>
 			<%end%>
 		</div>

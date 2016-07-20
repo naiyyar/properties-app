@@ -17,7 +17,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <%= text_field_tag 'unit_name', nil, name: "building[units_attributes][0][name]", class: "form-control", placeholder: 'Unit #'%>
-        <%= hidden_field_tag :unit_contribution, nil %>
+        <%= hidden_field_tag :unit_contribution, params[:contribution_for].present? ? params[:contribution_for] : nil %>
       </div>
     </div>
     <div class="col-sm-6">
