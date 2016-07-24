@@ -25,7 +25,7 @@ $(document).on 'click', '#add_new_unit',(e) ->
 	$("#unit_number_of_bedrooms").val('');
 	$("#unit_number_of_bathrooms").val('');
 	$("#new_unit_building").removeClass('hide')
-	$("#unit-search").addClass('hide');
+	$(".unit-search").addClass('hide');
 
 
 $(document).on 'click', "input[name='contribute_to']",(e) ->

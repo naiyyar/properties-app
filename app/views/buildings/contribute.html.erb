@@ -27,7 +27,7 @@
 			<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution", id: "building_contribution" %>
 			<section class="app-content">
 		    <div class="buildings-search">
-		      <%= text_field_tag 'buildings-search-txt', nil, class: "form-control", placeholder: 'Search building by name or address'%>
+		      <%= text_field_tag 'buildings-search-txt',@building.present? ? @building.building_street_address : nil, class: "form-control", placeholder: 'Search building by name or address'%>
 		      <div class="results" id="buildings-search-results"></div>
 		      <ul id="buildings-search-no-results" class="search-no-result"></ul>
 		    </div>
@@ -42,10 +42,14 @@
 </div>
 
 <div class="row">
-	<div class="col-lg-6 hide" id="unit-search">
+	<div class="col-lg-6">
 		<section class="app-content">
 	    <div class="buildings-search unit-search">
-	      <%= text_field_tag 'units-search-txt', nil, class: "form-control", placeholder: 'Search unit by name'%>
+	      <% unless @building.present? %>
+	      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search hide", placeholder: 'Search unit by name'%>
+	      <%else%>
+	      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search", placeholder: 'Search unit by name'%>
+	      <%end%>
 	      <div class="results" id="units-search-results"></div>
 	      <ul id="units-search-no-results" class="search-no-result"></ul>
 	    </div>
@@ -80,6 +84,10 @@
 <script type="text/javascript">
   $(function() {
     new app.buildings;
+    building_id = '<%= @building.id %>'
+    if(building_id != '' || building_id != undefined){
+    	new app.units(building_id)
+    }
   });
    
 </script>

@@ -41,7 +41,7 @@ app.buildings.prototype = {
     if(unitContri == 'unit_review' || unitContri == 'unit_photos' || unitContri == 'unit_amenities' || unitContri == 'unit_price_history'){
       $("#new_unit_building #building_building_street_address").val(ui.item.building_street_address);
       $("#new_unit_building #building_building_name").val(ui.item.building_name);
-      $("#unit-search").removeClass('hide');
+      $(".unit-search").removeClass('hide');
     }
     return false;
   },

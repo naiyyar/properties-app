@@ -13,6 +13,7 @@ class BuildingsController < ApplicationController
 
   def contribute
     @buildings = Building.search(params[:term])
+    @building = Building.where(id: params[:building_id]).first if params[:building_id].present?
   end
 
   def show
@@ -64,7 +65,7 @@ class BuildingsController < ApplicationController
         end
         if contribute.present?
           if ['unit_review', 'unit_photos', 'unit_amenities', 'unit_price_history'].include? contribute
-            redirect_to contribute_buildings_path(contribution_for: contribute)
+            redirect_to contribute_buildings_path(contribution_for: contribute, building_id: @building.id)  
           else
             redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
           end
