@@ -23,7 +23,7 @@ class BuildingsController < ApplicationController
       @unit_review_count = @unit_review_count + unit.reviews.count
     end
     @reviews = @building.reviews.order(created_at: :desc)
-    @uploads = @building.uploads.order("created_at desc")
+    @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id})
     
     @hash = Gmaps4rails.build_markers(@building) do |building, marker|
       marker.lat building.latitude

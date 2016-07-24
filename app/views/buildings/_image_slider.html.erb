@@ -3,17 +3,15 @@
   </div>
   <div class="rotateslider-container" id="slider">
     <% if @uploads.present? %>
-      <!-- <ul> -->
-        <% @uploads.each do |upload| %>
-          <div class="rotateslider-item">
-            <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox">
-              <%= image_tag upload.image.url, size: '211x311' %>
-            </a> 
-          </div>
-        <%end%>
-      <!-- </ul> -->
-        <span class="arrow right js-rotateslider-arrow" data-action="next"><i class="fa fa-angle-right fa-3x"></i></span>
-        <span class="arrow left js-rotateslider-arrow" data-action="prev"><i class="fa fa-angle-left fa-3x"></i></span>
+      <% @uploads.each do |upload| %>
+        <div class="rotateslider-item">
+          <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox">
+            <%= image_tag upload.image.url, size: '211x311' %>
+          </a> 
+        </div>
+      <%end%>
+      <span class="arrow right js-rotateslider-arrow" data-action="next"><i class="fa fa-angle-right fa-3x"></i></span>
+      <span class="arrow left js-rotateslider-arrow" data-action="prev"><i class="fa fa-angle-left fa-3x"></i></span>
     <%else%>
       <span>No image Found! Please <%= link_to 'Upload', '#' %> images.</span>
     <%end%>

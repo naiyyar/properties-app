@@ -44,8 +44,8 @@
         <%= link_to '<span class="fa fa-camera"><span> Add photo'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-info"  %>
         <%= render partial: "buildings/image_slider"%>
         <div class="pull-right">
-          <% if @building.uploads.count > 0 %>
-            <span class="fa fa-th-large"></span> <%= link_to "See all(#{@building.uploads.count})", building_uploads_path(building_id: @building.id) %>
+          <% if @uploads.count > 0 %>
+            <span class="fa fa-th-large"></span> <%= link_to "See all(#{@uploads.count})", building_uploads_path(building_id: @building.id) %>
           <%end%>
         </div>
   </div>

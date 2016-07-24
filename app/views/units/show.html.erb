@@ -3,16 +3,10 @@
     <div class="address-area">
       <h1>
         <%= @unit.name %> - <%= @unit.building.building_street_address %>
-      </h1>
-
-      <ul class="total-reviews list-inline">
-        <li><%= rating_for @unit, "unit"%></li> |
-        <li>20% recommended</li> |
-        <li><%= link_to "#{@unit.reviews.count} reviews", "#" %> </li>
-        <% if current_user %>
-          | <li><%= link_to "Edit", edit_unit_path(@unit)%></li>
+         <% if current_user %>
+          <small><%= link_to "edit", edit_unit_path(@unit)%></small>
         <%end%>
-      </ul>
+      </h1>
       
       <div class="address">
         <%= link_to building_path(@unit.building) do %>
