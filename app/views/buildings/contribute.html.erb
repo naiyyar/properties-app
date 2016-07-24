@@ -27,7 +27,7 @@
 			<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution", id: "building_contribution" %>
 			<section class="app-content">
 		    <div class="buildings-search">
-		      <%= text_field_tag 'buildings-search-txt',@building.present? ? @building.building_street_address : nil, class: "form-control", placeholder: 'Search building by name or address'%>
+		      <%= text_field_tag 'buildings-search-txt',@building.present? ? @building.building_street_address : nil, class: "form-control", placeholder: 'Search building by name or address', "data-buildingid" => @building.present? ? @building.id : '' %>
 		      <div class="results" id="buildings-search-results"></div>
 		      <ul id="buildings-search-no-results" class="search-no-result"></ul>
 		    </div>
@@ -84,10 +84,10 @@
 <script type="text/javascript">
   $(function() {
     new app.buildings;
-    building_id = '<%= @building.id %>'
-    if(building_id != '' || building_id != undefined){
-    	new app.units(building_id)
-    }
+    var building_id = $("#buildings-search-txt").data('buildingid');
+    if(building_id != ''){
+	    new app.units(building_id)
+	  }
   });
    
 </script>
