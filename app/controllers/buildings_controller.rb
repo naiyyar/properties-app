@@ -80,6 +80,7 @@ class BuildingsController < ApplicationController
     else
       if params[:unit_id].present?
         @unit = Unit.find(params[:unit_id])
+        @unit.update(unit_params)
       else
         if params[:building][:units_attributes].present?
           @unit = @building.fetch_or_create_unit(params[:building][:units_attributes])
@@ -130,6 +131,11 @@ class BuildingsController < ApplicationController
                                       :deck,:elevator,:garage,:gym,:live_in_super,:pets_allowed_cats,:pets_allowed_dogs,:roof_deck,:swimming_pool,:walk_up,
                                       uploads_attributes:[:id,:image,:imageable_id,:imageable_type], 
                                       units_attributes: [:id, :building_id, :name, :square_feet, :number_of_bedrooms, :number_of_bathrooms])
+  end
+
+  def unit_params
+    params[:unit] = params[:building][:units_attributes]['0']
+    params.require(:unit).permit(:name, :square_feet, :number_of_bathrooms, :number_of_bedrooms)
   end
 
 end

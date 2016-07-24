@@ -5,13 +5,13 @@
 		</div>
 		<div class="col-sm-6">
       <div class="form-group">
-        <%= text_field_tag 'building[building_name]', nil, class: "form-control", placeholder: 'Building name'%>
+        <%= hidden_field_tag 'building[building_name]', nil, class: "form-control", placeholder: 'Building name'%>
         <%= hidden_field_tag 'unit_id', nil %>
       </div>
     </div>
     <div class="col-sm-6">
        <div class="form-group">
-        <%= text_field_tag 'building[building_street_address]', nil, class: "form-control", placeholder: 'Address' %>
+        <%= hidden_field_tag 'building[building_street_address]', nil, class: "form-control", placeholder: 'Address' %>
       </div>
     </div>
     <div class="col-sm-6">
