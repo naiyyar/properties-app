@@ -1,33 +1,3 @@
-<div class="row">
-	<div class="col-lg-12">
-		<div class="media">
-	    <div class="media-left">
-	      <div class="media-body">
-        	<% if @imageable.kind_of? Unit %>
-        		<b class="media-heading"><%= link_to @imageable.building.building_name, building_path(@imageable.building) %></b>
-        		<br />
-        		<small class="text-muted">
-	        		<%= link_to building_path(@imageable.building) do %>
-		        		<%= @imageable.building.building_street_address %> <br />
-		        		<%= "#{@imageable.building.city}, #{@imageable.building.state} #{@imageable.building.zipcode}" %> 
-	        		<%end%>
-	        		<%= link_to @imageable.name, unit_path(@imageable)%>
-	        	</small>
-        	<%else%>
-        		<b class="media-heading"><%= link_to @imageable.building_name, building_path(@imageable) %></b>  <br />
-        		<small class="text-muted">
-	        		<%= link_to building_path(@imageable) do %>
-		        		<%= @imageable.building_street_address %> <br />
-		        		<%= "#{@imageable.city}, #{@imageable.state} #{@imageable.zipcode}" %> 
-	        		<%end%> 
-	        	</small>
-        	<%end%>
-	      </div>
-	    </div>
-	  </div>
-	</div>	
-</div>
-
 <div class="row margin-top-10">
 	<div class="col-lg-12">
 		<% if @imageable.uploads.present? %>
