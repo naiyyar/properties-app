@@ -31,9 +31,9 @@ app.units.prototype = {
     var unitContri = $("#unit_contribution").val();
     if(unitContri == 'unit_review' || unitContri == 'unit_photos' || unitContri == 'unit_amenities' || unitContri == 'unit_price_history'){
       $("#new_unit_building").removeClass('hide');
-      if($("#unit_name").hasClass('hide')){
-        $("#unit_name").removeClass('hide');
-      }
+      // if($("#unit_name").hasClass('hide')){
+      //   $("#unit_name").removeClass('hide');
+      // }
       var unit = ui.item;
       $("#unit_id").val(unit.id);
       $("#unit_name").val(unit.name);

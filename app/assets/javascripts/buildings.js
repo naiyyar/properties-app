@@ -42,6 +42,9 @@ app.buildings.prototype = {
       $("#new_unit_building #building_building_street_address").val(ui.item.building_street_address);
       $("#new_unit_building #building_building_name").val(ui.item.building_name);
       $(".unit-search").removeClass('hide');
+      if(!$("#unit_name").parent().parent().hasClass('hide')){
+        $("#unit_name").parent().parent().addClass('hide')
+      }
     }
     return false;
   },

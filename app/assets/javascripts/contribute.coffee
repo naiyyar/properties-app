@@ -16,7 +16,18 @@ $(document).on 'click', '#submit_review',(e) ->
 		$(".status-not-selected").addClass('hide')
 		return true
 
+#To add validation on unit name when creating new unit on contribution page
+#$(document).on 'click', '#unit_contribution_next_btn',(e) ->
+#	elem = $("#unit_name").parent().find('.message')
+#	if($("#unit_name").val() == '')
+#		e.preventDefault()
+#		elem.removeClass('hide')
+#		return false
+#	else
+#		elem.addClass('hide')
+#		return true
 
+#Adding new unit contribution page
 $(document).on 'click', '#add_new_unit',(e) ->
 	e.preventDefault();
 	$("#unit_id").val('');
@@ -26,6 +37,8 @@ $(document).on 'click', '#add_new_unit',(e) ->
 	$("#unit_number_of_bathrooms").val('');
 	$("#new_unit_building").removeClass('hide')
 	$(".unit-search").addClass('hide');
+	if($("#unit_name").parent().parent().hasClass('hide'))
+		$("#unit_name").parent().parent().removeClass('hide')
 
 
 $(document).on 'click', "input[name='contribute_to']",(e) ->

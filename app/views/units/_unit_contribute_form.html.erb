@@ -14,9 +14,9 @@
         <%= hidden_field_tag 'building[building_street_address]', @building.present? ? @building.building_street_address : nil, class: "form-control", placeholder: 'Address' %>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 hide">
       <div class="form-group">
-        <%= text_field_tag 'unit_name', nil, name: "building[units_attributes][0][name]", class: "form-control", placeholder: 'Unit #'%>
+        <%= text_field_tag 'unit_name', nil, name: "building[units_attributes][0][name]", class: "form-control", placeholder: 'Unit #', required: 'required' %>
         <%= hidden_field_tag :unit_contribution, params[:contribution_for].present? ? params[:contribution_for] : nil %>
       </div>
     </div>
