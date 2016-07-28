@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
         vote = current_user.vote_against(reviewable)
       end
       if vote.present?
-        vote.review_id = @review.id
+        vote.review_id = review.id
         vote.save
       end
       
