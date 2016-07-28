@@ -35,9 +35,13 @@ class ReviewsController < ApplicationController
 
       if @review.save
         if params[:vote] == 'true'
-          current_user.vote_exclusively_for(@reviewable)
+          vote = current_user.vote_for(@reviewable)
         else
-          current_user.vote_exclusively_against(@reviewable)
+          vote = current_user.vote_against(@reviewable)
+        end
+        if vote.present?
+          vote.review_id = @review.id
+          vote.save
         end
         flash[:notice] = "Review Created Successfully."
         if @reviewable.kind_of? Unit

@@ -76,5 +76,7 @@ $(document).on 'click', '.reviewer_type',(e) ->
 	if(id == 'visitor')
 		$("#review_stay_time").addClass('hide')
 		$("#review_stay_time").next().hide()
+		if($("#review_stay_time").data('validate'))
+			$("#review_stay_time").removeAttr('data-validate')
 	else
 		$("#review_stay_time").removeClass('hide')

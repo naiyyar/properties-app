@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
       end
       
       if session[:form_data]['vote'] == 'true'
-        current_user.vote_exclusively_for(reviewable)
+        current_user.vote_for(reviewable)
     	else
-        current_user.vote_exclusively_against(reviewable)
+        current_user.vote_against(reviewable)
       end
       
       session[:form_data] = nil

@@ -1,6 +1,6 @@
 <%= form_for [@reviewable, Review.new], validate: true do |f| %>
   <div class="row">
-  	<%= f.validate :pros, :cons, :review_title, :tenant_status, :stay_time %>
+  	<%= f.validate :pros, :cons, :review_title, :tenant_status %>
 	  <% unless @reviewable.kind_of? Unit %>
 	  	<div class="col-sm-12">
 			  <div class="form-group">

@@ -35,7 +35,7 @@
     <tbody>
       <% @buildings.each do |building| %>
         <tr>
-          <td><%= link_to(building.building_name, building_path(building)) %></td>
+          <td><%= link_to(building.building_name, building_path(building)) %>(<%= building.reviews.count %>)</td>
           <td><%= building.building_street_address %></td>
           <td><%= building.latitude %></td>
           <td><%= building.longitude %></td>
