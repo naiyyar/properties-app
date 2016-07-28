@@ -14,9 +14,13 @@ class ApplicationController < ActionController::Base
       end
       
       if session[:form_data]['vote'] == 'true'
-        current_user.vote_for(reviewable)
+        vote = current_user.vote_for(reviewable)
     	else
-        current_user.vote_against(reviewable)
+        vote = current_user.vote_against(reviewable)
+      end
+      if vote.present?
+        vote.review_id = @review.id
+        vote.save
       end
       
       session[:form_data] = nil
