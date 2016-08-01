@@ -5,7 +5,8 @@ module BuildingsHelper
 	  if rating_user.present?
 		  @object = rateable_obj
 		  @user = rating_user
-		  @rating = Rate.find_by_rater_id_and_rateable_id_and_dimension(@user.id, @object.id, dimension)
+		  review_id = options[:review_id] || nil
+		  @rating = Rate.find_by_rater_id_and_rateable_id_and_dimension_and_review_id(@user.id, @object.id, dimension,review_id)
 		  stars = @rating ? @rating.stars : 0
 
 		  disable_after_rate = options[:disable_after_rate] || false

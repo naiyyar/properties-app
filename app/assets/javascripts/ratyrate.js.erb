@@ -37,26 +37,27 @@ $(function(){
       targetFormat: $(this).attr('data-target-format'),
       targetScoret: $(this).attr('data-target-score'),
       readOnly: $readonly,
-      click: function(score, evt) {
-        var _this = this;
-        if (score == null) { score = 0; }
-        $.post('<%= Rails.application.class.routes.url_helpers.rate_path %>',
-        {
-          score: score,
-          dimension: $(this).attr('data-dimension'),
-          id: $(this).attr('data-id'),
-          klass: $(this).attr('data-classname')
-        },
-        function(data) {
-          if(data) {
-            // success code goes here ...
+      // click: function(score, evt) {
+      //   var _this = this;
+      //   if (score == null) { score = 0; }
+      //   $.post('<%= Rails.application.class.routes.url_helpers.rate_path %>',
+      //   {
+      //     score: score,
+      //     dimension: $(this).attr('data-dimension'),
+      //     id: $(this).attr('data-id'),
+      //     klass: $(this).attr('data-classname'),
+      //     review_id: ''
+      //   },
+      //   function(data) {
+      //     if(data) {
+      //       // success code goes here ...
 
-            if ($(_this).attr('data-disable-after-rate') == 'true') {
-              $(_this).raty('set', { readOnly: true, score: score });
-            }
-          }
-        });
-      }
+      //       if ($(_this).attr('data-disable-after-rate') == 'true') {
+      //         $(_this).raty('set', { readOnly: true, score: score });
+      //       }
+      //     }
+      //   });
+      // }
     });
   });
 });

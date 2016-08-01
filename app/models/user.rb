@@ -25,13 +25,14 @@ class User < ActiveRecord::Base
     end
   end
 
-  def create_rating score, rateable
+  def create_rating score, rateable, review_id = nil
     rate = Rate.new
     rate.rater_id = self.id
     rate.rateable_id = rateable.id
     rate.rateable_type = rateable.class.name
     rate.dimension = rateable.class.name.downcase
     rate.stars = score
+    rate.review_id = review_id
     rate.save
 
     #populate rating cache table
