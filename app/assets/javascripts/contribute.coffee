@@ -4,17 +4,35 @@ $(document).on 'click', '#add_new_building',(e) ->
 	$("#new_building").removeClass('hide');
 
 $(document).on 'click', '#submit_review',(e) ->
-	if($("input[name='score']").val()== '')
+	score = $("input[name='score']").val()
+	reviewer_type = $('.reviewer_type').hasClass('active')
+	residence_years = $("#review_stay_time option:selected").val()
+	submit = false
+
+	if(score == '')
 		e.preventDefault();
 		$(".rating-not-selected").removeClass('hide')
-		return false
-	else if(!$('.reviewer_type').hasClass('active'))
-		$(".status-not-selected").removeClass('hide')
-		return false
+		submit = false
 	else
 		$(".rating-not-selected").addClass('hide')
+		submit = true
+
+	if(!reviewer_type)
+		$(".status-not-selected").removeClass('hide')
+		submit = false
+	else
 		$(".status-not-selected").addClass('hide')
-		return true
+		submit = true
+	
+	if(residence_years == '')
+		if($(".reviewer_status:checked").val() != 'visitor')
+			$(".years-not-selected").removeClass('hide')
+			submit = false
+	else
+		$(".years-not-selected").addClass('hide')
+		submit = true
+	
+	return submit
 
 #To add validation on unit name when creating new unit on contribution page
 #$(document).on 'click', '#unit_contribution_next_btn',(e) ->
