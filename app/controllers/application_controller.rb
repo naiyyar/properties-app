@@ -8,24 +8,23 @@ class ApplicationController < ActionController::Base
 	    reviewable = find_reviewable
       review = reviewable.reviews.build(session[:form_data]['review'])
       review.user_id = current_user.id
-
-      if session[:form_data]['score']
-      	current_user.create_rating(session[:form_data]['score'], reviewable)
-      end
-      
+      rating_score = session[:form_data]['score']
       if session[:form_data]['vote'] == 'true'
         vote = current_user.vote_for(reviewable)
     	else
         vote = current_user.vote_against(reviewable)
       end
-      if vote.present?
-        vote.review_id = review.id
-        vote.save
-      end
-      
       session[:form_data] = nil
       
       if review.save
+        if rating_score.present?
+          current_user.create_rating(rating_score, reviewable, review.id)
+        end
+
+        if vote.present?
+          vote.review_id = review.id
+          vote.save
+        end
         flash[:notice] = "Review Created Successfully."
         if reviewable.kind_of? Building 
           return building_path(reviewable)
