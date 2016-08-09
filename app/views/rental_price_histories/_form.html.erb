@@ -1,5 +1,5 @@
 <%= form_for(@rental_price_history) do |f| %>
-  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+  <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
       <div class="col-sm-6">
         <div class="form-group">
           <label>Residence Start Date</label>
@@ -12,37 +12,62 @@
       <div class="col-sm-6">
          <div class="form-group">
           <label for="exampleInputEmail1">Residence End Date</label>
-           <%= f.text_field :residence_end_date, class: "form-control datepicker"%>
+            <%= f.text_field :residence_end_date, class: "form-control datepicker"%>
         </div>
       </div>
       <div class="col-sm-6">
          <div class="form-group">
           <label for="exampleInputEmail1">Monthly Rent $</label>
-           <%= f.number_field :monthly_rent, class: "form-control"%>
+           <div class="input-group">
+             <%= f.number_field :monthly_rent, class: "form-control"%>
+             <span class="input-group-addon">
+                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="exampleInputEmail1">Broker Fee $</label>
-           <%= f.number_field :broker_fee, class: "form-control"%>
+           <div class="input-group">
+             <%= f.number_field :broker_fee, class: "form-control"%>
+             <span class="input-group-addon">
+                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="exampleInputEmail1">Non Refundable Costs $</label>
-           <%= f.number_field :non_refundable_costs, class: "form-control"%>
+           <div class="input-group">
+             <%= f.number_field :non_refundable_costs, class: "form-control"%>
+             <span class="input-group-addon">
+                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="exampleInputEmail1">Rent Up Front $</label>
-           <%= f.number_field :rent_upfront, class: "form-control"%>
+           <div class="input-group">
+             <%= f.number_field :rent_upfront, class: "form-control"%>
+             <span class="input-group-addon">
+                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="exampleInputEmail1">Refundable Deposits $</label>
-           <%= f.number_field :refundable_deposits, class: "form-control"%>
+           <div class="input-group">
+             <%= f.number_field :refundable_deposits, class: "form-control"%>
+             <span class="input-group-addon">
+                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
+            </span>
+          </div>
         </div>
       </div>
      
