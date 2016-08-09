@@ -27,7 +27,7 @@
     <tbody>
       <% @units.each do |unit| %>
       <tr>
-        <td><%= link_to(unit.name, unit_path(unit)) %></td>
+        <td><%= link_to unit.name, unit_path(unit) %><%=unit.reviews.present? ? unit.reviews.count : ''%></td>
         <td><%= link_to unit.building.building_name, building_path(unit.building) %></td>
         <td><%= link_to 'Price Histories', rental_price_histories_path(unit_id: unit.id) %></td>
         <td></td>

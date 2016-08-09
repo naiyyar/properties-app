@@ -1,0 +1,46 @@
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+      <% if review.user.avatar.present? %>
+        <%= image_tag review.user.avatar %>
+      <% elsif review.user.image_url.present? %>
+        <%= image_tag review.user.image_url %>
+      <%else%>
+        <span class="fa fa-user fa-2x"></span>
+      <%end%>
+    </a>
+  </div>
+
+  <div class="media-body">
+    <h4 class="media-heading"><%= review.user.name %></h4>
+    <p class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %> by <%= review.user.name %></p>
+    <p><%= simple_format(review.review_title) %></p>
+  </div>
+  
+  <div>
+    <% if review.pros.present? %>
+      <b>Pros:</b><span> <%= review.pros %></span> <br />
+    <%end%>
+    <% if review.cons.present? %>
+      <b>Cons:</b><span> <%= review.cons %></span> <br />
+    <%end%>
+    <% if review.other_advice.present? %>
+      <b>Other TranspaRENTcy and Advice to Share:</b><span> <%= review.other_advice %></span>
+    <%end%>
+  </div>
+  
+  <ul class="list-inline margin-top-10">
+    <li><%= rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %></li> |
+    <li>
+      <%if review.user.votes.where(vote: true, review_id: review.id).present? %>
+        <span class='fa fa-thumbs-o-up fa-1x'></span> Recommended
+      <%else%>
+        <span class='fa fa-thumbs-o-down fa-1x'></span> Not recommended
+      <%end%>
+    </li> |
+    <li>
+      Tenant: <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> 
+      <%= (review.stay_time) if review.tenant_status != 'visitor' %>
+    </li>
+  </ul>
+</div>

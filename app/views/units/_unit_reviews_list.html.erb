@@ -1,42 +1,4 @@
-<% unit.reviews.each do |review| %>
-  <div class="media">
-    <div class="media-left">
-      <a href="#">
-        <% if review.user.avatar.present? %>
-          <%= image_tag review.user.avatar %>
-        <% elsif review.user.image_url.present? %>
-          <%= image_tag review.user.image_url %>
-        <%else%>
-          <span class="fa fa-user fa-2x"></span>
-        <%end%>
-      </a>
-    </div>
-
-    <div class="media-body">
-      <h4 class="media-heading"><%= review.user.name %></h4>
-      <p class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %> by <%= review.user.name %></p>
-      <p> <%= simple_format(review.review_title) %></p>
-    </div>
-    <ul class="list-inline margin-top-10">
-      <li><%= rating_for_user unit, review.user, "unit", star: 5 %></li> -
-      <%if review.user.voted_for?(unit) %>
-        <span class='fa fa-thumbs-o-up fa-1x'></span> Recommended
-      <%else%>
-        <span class='fa fa-thumbs-o-down fa-1x'></span> Not recommended
-      <%end%>-
-      <li>Current Tenant(2 years)</li>
-    </ul>
-    <div>
-      <% if review.pros.present? %>
-        <b>Pros:</b><div class="col-xs-offset-1"> <%= simple_format(review.pros) %></div>
-      <%end%>
-      <%if review.cons.present? %>
-        <b>Cons:</b><div class="col-xs-offset-1"> <%= simple_format(review.cons) %></div> <br />
-      <%end%>
-      <%if review.other_advice.present? %>
-        <b>Other TranspaRENTcy and Advice to Share:</b><div class="col-xs-offset-1"> <%= simple_format(review.other_advice) %></div>
-      <%end%>
-    </div>
-  </div>
+<% unit.reviews.order('created_at desc').each do |review| %>
+  <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: unit } %>
   <hr />
 <% end %>
