@@ -18,23 +18,13 @@
       <div class="col-sm-6">
          <div class="form-group">
           <label for="exampleInputEmail1">Monthly Rent $</label>
-           <div class="input-group">
-             <%= f.number_field :monthly_rent, class: "form-control"%>
-             <span class="input-group-addon">
-                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
-            </span>
-          </div>
+          <%= f.number_field :monthly_rent, class: "form-control"%>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="exampleInputEmail1">Broker Fee $</label>
-           <div class="input-group">
-             <%= f.number_field :broker_fee, class: "form-control"%>
-             <span class="input-group-addon">
-                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
-            </span>
-          </div>
+            <%= f.number_field :broker_fee, class: "form-control"%>
         </div>
       </div>
       <div class="col-sm-6">
@@ -43,7 +33,7 @@
            <div class="input-group">
              <%= f.number_field :non_refundable_costs, class: "form-control"%>
              <span class="input-group-addon">
-                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
+                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Combined non refundable costs upfront, not including broker fee. Ex. Building Processing Fee, Credit Check Fees, General Misc Fees"></i>
             </span>
           </div>
         </div>
@@ -54,7 +44,7 @@
            <div class="input-group">
              <%= f.number_field :rent_upfront, class: "form-control"%>
              <span class="input-group-addon">
-                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
+                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Usually, rent for the first and last month. Refundable deposits are separate such as security deposits"></i>
             </span>
           </div>
         </div>
@@ -65,7 +55,7 @@
            <div class="input-group">
              <%= f.number_field :refundable_deposits, class: "form-control"%>
              <span class="input-group-addon">
-                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Some content inside"></i>
+                <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Combined refundable deposits upfront. Ex. Security deposits, Move In deposit"></i>
             </span>
           </div>
         </div>

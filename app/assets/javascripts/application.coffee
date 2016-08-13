@@ -10,4 +10,4 @@ jQuery ->
 	$('.datepicker').datepicker({
 		format: 'dd-mm-yyyy'
 	});
-	$('[data-toggle="popover"]').popover()
+	$('[data-toggle="popover"]').popover({ trigger: "hover" })
