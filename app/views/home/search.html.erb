@@ -1,0 +1,38 @@
+<div class="row">
+	<div class="col-lg-12">
+		
+	</div>
+</div>
+
+<div class="row">
+	<% if @buildings.present? %>
+		<div class="col-lg-8">
+			<div>
+        <div id="map" style='height: 350px;'></div>
+      </div>
+		</div>
+
+		<div class="col-lg-4">
+			<div id='apt_sidebar_container' class="list-group">
+			</div>
+		</div>
+	<%end%>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    json_array = <%=raw @hash.to_json %>
+    markers = handler.addMarkers(json_array);
+    _.each(json_array, function(json, index){
+		  json.marker = markers[index];
+		  bindMarker(json.marker)
+		});
+
+		createSidebar(json_array);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    //handler.getMap().setZoom(15);
+  });
+  
+</script>

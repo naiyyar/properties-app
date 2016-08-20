@@ -18,7 +18,7 @@ class Building < ActiveRecord::Base
 
   def self.search(term)
     if term
-      self.where("building_name ILIKE ? or building_street_address ILIKE ?", "%#{term}%", "%#{term}%")
+      self.where("building_name ILIKE ? or building_street_address ILIKE ? or city ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%")
     else
       self.all
     end

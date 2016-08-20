@@ -1,5 +1,31 @@
 <h1>TranspaRENTcity</h1>
 
-<p><%= link_to "Building List", buildings_path %></p>
-<p><%= link_to "Reviews", reviews_path %></p>
-<p><%= link_to "Units", units_path %></p>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="col-lg-8">
+			<ul class="list-inline">
+				<li><%= link_to "Building List", buildings_path %></li>
+				<li><%= link_to "Reviews", reviews_path %></li>
+				<li><%= link_to "Units", units_path %></li>
+			</ul>
+		</div>
+		
+		<%= form_tag "/search", method: :get, id: "apt-search-form" do %>
+			<div class="col-lg-8 buildings-search">
+        <%= text_field_tag 'buildings-search-txt', nil, class: "form-control", placeholder: 'Search' %>
+        <%= hidden_field_tag 'term', nil, class: "form-control", placeholder: 'Search' %>
+        <div class="results" id="buildings-search-results"></div>
+      </div>
+		  <div class="col-lg-4">
+		  	<%= submit_tag 'Search', class: 'btn btn-primary' %>
+	 		</div>
+	 	<%end%>
+	</div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    new app.buildings;
+  });
+   
+</script>

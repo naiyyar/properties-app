@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   #   delete "/" => "devise/sessions#destroy", :as => :destroy_user_session,
   #     :via => Devise.mappings[:user].sign_out_via
   # end
+
+  get '/search', to: 'home#search'
   
   resources :reviews
   resources :uploads

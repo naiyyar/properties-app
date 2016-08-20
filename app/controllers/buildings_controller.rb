@@ -28,6 +28,10 @@ class BuildingsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@building) do |building, marker|
       marker.lat building.latitude
       marker.lng building.longitude
+      building_link = view_context.link_to building.building_name, building_path(building)
+      marker.title building.building_name
+      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", :locals => { building_link: building_link, :building => building })
+    
       #To add own marker
       # marker.picture ({
       #       "url" => "assets/marker.png",
