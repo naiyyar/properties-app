@@ -147,6 +147,10 @@ GEM
       mime-types
       mimemagic (= 0.3.0)
     pg (0.18.4)
+    pg_search (1.0.6)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -260,6 +264,7 @@ DEPENDENCIES
   omniauth-facebook
   paperclip (~> 4.3)
   pg
+  pg_search
   pry
   rails (= 4.2.5.1)
   rails_12factor

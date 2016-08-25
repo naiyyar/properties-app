@@ -15,8 +15,9 @@ app.buildings.prototype = {
   },
 
   _render: function(ul, item) {
+    window.data = item
     var markup = [
-      '<p class="address"><b>' + item.city +', ' + item.state + '</b></p>'
+      '<p class="address"><b>' + item.search_term + '</b></p>'
     ];
     
     return $('<li>')
@@ -25,8 +26,7 @@ app.buildings.prototype = {
   },
 
   _select: function(e, ui) {
-    window.data = ui
-    this._input.val(ui.item.city + ', ' + ui.item.state);
+    this._input.val(ui.item.search_term);
     $("#term").val(ui.item.city)
     return false;
   }

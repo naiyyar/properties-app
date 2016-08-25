@@ -10,9 +10,9 @@
 			</ul>
 		</div>
 		
-		<%= form_tag "/search", method: :get, id: "apt-search-form" do %>
+		<%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search' do %>
 			<div class="col-lg-8 buildings-search">
-        <%= text_field_tag 'buildings-search-txt', nil, class: "form-control", placeholder: 'Search' %>
+        <%= text_field_tag 'buildings-search-txt', nil, class: "form-control", placeholder: 'Neighborhood, Zip Code, Address, Building name' %>
         <%= hidden_field_tag 'term', nil, class: "form-control", placeholder: 'Search' %>
         <div class="results" id="buildings-search-results"></div>
       </div>

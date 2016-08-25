@@ -20,6 +20,8 @@ gem 'client_side_validations'
 
 gem 'pg'
 
+gem 'pg_search'
+
 gem 'thumbs_up'
 
 #Multistep

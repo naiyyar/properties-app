@@ -14,11 +14,23 @@ class Building < ActiveRecord::Base
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 
   geocoded_by :building_street_address
-  after_validation :geocode 
+  after_validation :geocode
 
-  def self.search(term)
-    if term
-      self.where("building_name ILIKE ? or building_street_address ILIKE ? or city ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%")
+  include PgSearch
+  pg_search_scope :search, against: [:building_name, :zipcode, :building_street_address, :city],
+    using: {tsearch: {dictionary: 'english'} }
+
+  # def self.search(term)
+  #   if term
+  #     self.where("zipcode @@ :q or building_name @@ :q or building_street_address @@ :q or city @@ :q", q: term)
+  #   else
+  #     self.all
+  #   end
+  # end
+
+  def self.text_search(term)
+    if term.present?
+      search(term)
     else
       self.all
     end

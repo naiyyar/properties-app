@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   #     :via => Devise.mappings[:user].sign_out_via
   # end
 
-  get '/search', to: 'home#search'
+  get '/search', to: 'home#search', as: 'search'
   
   resources :reviews
   resources :uploads
