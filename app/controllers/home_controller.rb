@@ -3,21 +3,30 @@ class HomeController < ApplicationController
   end
 
   def search
-  	@buildings = Building.text_search(params['term'])
-  		
-  	@autosearch_buildings = Building.where('building_name @@ :q', q: params[:term])
-    if @autosearch_buildings.present?
-      @result_type = 'buildings'
-    else
-      # second search with city names
-      @autosearch_buildings = Building.where('city @@ :q', q: params[:term])
-      if @autosearch_buildings.present?
-        @result_type = 'cities'
-      else
-        # in last search with building names
-        @autosearch_buildings = Building.where('zipcode @@ :q', q: params[:term])
-        @result_type = 'zipcode'
-      end
+  	#debugger
+  	#if params[:term].blank?
+  		@buildings = Building.text_search(params[:term])
+  	#else
+  		# second search with building name
+	  	@autosearch_buildings = Building.where('building_name @@ :q', q: params[:term])
+	    if @autosearch_buildings.present?
+	      @result_type = 'buildings'
+	    else
+	      # second search with city names
+	      @autosearch_buildings = Building.where('city @@ :q', q: params[:term])
+	      if @autosearch_buildings.present?
+	        @result_type = 'cities'
+	      else
+	        # in last search with building address
+	        @autosearch_buildings = Building.where('building_street_address @@ :q', q: params[:term])
+	        if @autosearch_buildings.present?
+	        	 @result_type = 'address'
+	        else
+	        	@autosearch_buildings = Building.where('zipcode @@ :q', q: params[:term])
+	        	@result_type = 'zipcode'
+	      	end
+	      end
+	    #end
     end
 
 

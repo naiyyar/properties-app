@@ -27,7 +27,7 @@ app.buildings.prototype = {
 
   _select: function(e, ui) {
     this._input.val(ui.item.search_term);
-    $("#term").val(ui.item.city)
+    $("#term").val(ui.item.term)
     return false;
   }
 
