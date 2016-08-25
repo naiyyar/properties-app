@@ -12,7 +12,7 @@ class BuildingsController < ApplicationController
   end
 
   def contribute
-    @buildings = Building.search(params[:term])
+    @buildings = Building.text_search(params[:term])
     @building = Building.where(id: params[:building_id]).first if params[:building_id].present?
   end
 
