@@ -27,9 +27,12 @@
 		  json.marker = markers[index];
 		  bindMarker(json.marker)
 		});
+    //window.data = <%=raw @polylines.to_json %>
+		//var polygons = handler.addPolylines(<%=raw @polylines.to_json %>,{ strokeColor: '#FF0000'})
 
 		createSidebar(json_array);
     handler.bounds.extendWith(markers);
+    //handler.bounds.extendWith(polygons);
     handler.fitMapToBounds();
     //handler.getMap().setZoom(15);
   });
