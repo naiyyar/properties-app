@@ -3,7 +3,11 @@ class HomeController < ApplicationController
   end
 
   def search
-		@buildings = Building.text_search(params[:term])
+    if params['buildings-search-txt'].present?
+		  @buildings = Building.near(params['buildings-search-txt'], 100)
+    else
+      @buildings = Building.text_search(params[:term])
+    end
 		# second search with building name
   	@autosearch_buildings = Building.where('building_name @@ :q', q: params[:term])
     if @autosearch_buildings.present?
@@ -24,11 +28,6 @@ class HomeController < ApplicationController
       	end
       end
     end
-    # @polylines = []
-    # @buildings.each do |building|
-    #   @polylines << { 'lng': building.longitude, 'lat': building.latitude }
-    # end
-    # @polylines = [@polylines]
       
   	if @buildings.present?
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
