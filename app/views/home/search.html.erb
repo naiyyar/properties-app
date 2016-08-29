@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="col-lg-5">
-			<div class="pre-scrollable" style="max-height: 100%;">
+			<div class="pre-scrollable" style="max-height: 70vh;">
 				<% @buildings.each do |building| %>
 					<div class="row search-result-container">
 						<div class="search-slider">
@@ -45,11 +45,15 @@
 							<a href="#" id="apt_sidebar_container<%=building.id%>">
 								
 							</a>
+							<br />
 							<ul class="list-inline">
-						 		<li><%= building.reviews.count %></li> |
-						 		<li><%= building.unit_reviews_count %></li> |
-						 		<li><%= rating_for building, "building", disable_after_rate: true %></li> |
-						 		<li><%= "% Recommended" %></li>
+						 		<li>Reviews <%= building.reviews.count %></li> |
+						 		<li>Unit reviews <%= building.unit_reviews_count %></li> |
+						 		<li>Photos(<%= building.uploads ? building.uploads.count : '' %>)</li>
+							</ul>
+							<ul class="list-inline">
+						 		<li><%= rating_for building, "building", disable_after_rate: true, cancel: false %></li> |
+						 		<li><%= "20% Recommended" %></li>
 							</ul>
 						</div>
 					</div>
@@ -66,13 +70,10 @@
     markers = handler.addMarkers(json_array);
     _.each(json_array, function(json, index){
 		  json.marker = markers[index];
-		  bindMarker(json.marker)
+		  bindMarker(json.marker, markers)
 		});
     
 		createSidebar(json_array);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    //handler.getMap().setZoom(15);
   });
   
 </script>

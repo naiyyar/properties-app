@@ -1,4 +1,4 @@
-function createSidebarLi(json){
+function createSidebarElem(json){
   title = json.marker_title.split(',')
   building_name = title[1]
   address = title[2]
@@ -7,7 +7,7 @@ function createSidebarLi(json){
           );
 };
 
-function bindLiToMarker(elem, marker){
+function bindElemToMarker(elem, marker){
   elem.on('click', function(){
     handler.getMap().setZoom(15);
     marker.setMap(handler.getMap()); //because clusterer removes map property from marker
@@ -16,20 +16,22 @@ function bindLiToMarker(elem, marker){
   })
 };
 
-function bindMarker(marker){
+function bindMarker(marker, markers){
   $(window).on('load', function(){
     handler.getMap().setZoom(11);
     marker.setMap(handler.getMap());
     marker.panTo();
     google.maps.event.trigger(marker.getServiceObject(), 'load');
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
   })
 };
 
 function createSidebar(json_array){
   _.each(json_array, function(json){
-    var $li = $( createSidebarLi(json) );
-    id = json.marker_title.split(',')[0]
-    $li.appendTo('#apt_sidebar_container'+id);
-    bindLiToMarker($li, json.marker);
+    var elem = $( createSidebarElem(json) );
+    var id = json.marker_title.split(',')[0]
+    elem.appendTo('#apt_sidebar_container'+id);
+    bindElemToMarker(elem, json.marker);
   });
 };
