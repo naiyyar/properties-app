@@ -1,17 +1,14 @@
 function createSidebarLi(json){
-  //return ("<li class='list-group-item'><a>" + json.marker_title + "</a></li>");
   title = json.marker_title.split(',')
-  window.data = json_array
-  building_name = title[0]
-  address = title[1]
-  return ("<a href='#' class='list-group-item'>" +
-  					"<h4 class='list-group-item-heading'>" + building_name + "</h4>" +
-  					"<p class='list-group-item-text'>"+ address +"</p>" +
-  				"</a>");
+  building_name = title[1]
+  address = title[2]
+  return ("<h4 class='list-group-item-heading'>" + building_name + "</h4>" +
+  					"<p class='list-group-item-text'>"+ address +"</p>"
+          );
 };
 
-function bindLiToMarker($li, marker){
-  $li.on('click', function(){
+function bindLiToMarker(elem, marker){
+  elem.on('click', function(){
     handler.getMap().setZoom(15);
     marker.setMap(handler.getMap()); //because clusterer removes map property from marker
     marker.panTo();
@@ -31,7 +28,8 @@ function bindMarker(marker){
 function createSidebar(json_array){
   _.each(json_array, function(json){
     var $li = $( createSidebarLi(json) );
-    $li.appendTo('#apt_sidebar_container');
+    id = json.marker_title.split(',')[0]
+    $li.appendTo('#apt_sidebar_container'+id);
     bindLiToMarker($li, json.marker);
   });
 };

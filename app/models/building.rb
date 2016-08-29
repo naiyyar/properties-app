@@ -34,4 +34,12 @@ class Building < ActiveRecord::Base
     unit.save
     return unit
   end
+
+  def unit_reviews_count
+    count = 0
+    self.units.each do |unit|
+      count = count + unit.reviews.count
+    end
+    return count
+  end
 end

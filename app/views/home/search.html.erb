@@ -2,16 +2,58 @@
 	<%= render partial: 'search' %>
 </div>
 
-<div class="row voffset50">
+<div class="row voffset50 search-results-container">
 	<% if @buildings.present? %>
-		<div class="col-lg-8">
-			<div>
-        <div id="map" style='height: 350px;'></div>
+		<div class="col-lg-7">
+			<div class="map-continer">
+        <div id="map" style="height: 400px;"></div>
       </div>
 		</div>
 
-		<div class="col-lg-4">
-			<div id='apt_sidebar_container' class="list-group">
+		<div class="col-lg-5">
+			<div class="pre-scrollable" style="max-height: 100%;">
+				<% @buildings.each do |building| %>
+					<div class="row search-result-container">
+						<div class="search-slider">
+						  <div id="myCarousel<%= building.id %>" class="carousel slide" data-ride="carousel">
+						    <!-- Wrapper for slides -->
+						    <div class="carousel-inner" role="listbox">
+					    		<%if building.uploads.present? %>
+						    		<% building.uploads.each_with_index do |upload, index| %>
+								      <div class="item <%= index == 0 ? 'active' : '' %>" data-slide-number="<%= index %>">
+								        <%= image_tag upload.image.url, alt: upload.image_file_name, style: "width: 460; height: 345;" %>
+								      </div>
+								    <%end%>
+								  <%else%>
+								  	<div class="item active" data-slide-number="0">
+								  		<%= image_tag 'no-photo-available.jpg', alt: 'No image', style: "width: 460; height: 345;" %>
+							      </div>
+								  <%end%>
+						    </div>
+						    <!-- Left and right controls -->
+						    <a class="left carousel-control" href="#myCarousel<%= building.id %>" role="button" data-slide="prev">
+						      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						      <span class="sr-only">Previous</span>
+						    </a>
+						    <a class="right carousel-control" href="#myCarousel<%= building.id %>" role="button" data-slide="next">
+						      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						      <span class="sr-only">Next</span>
+						    </a>
+						  </div>
+						</div>
+						<div>
+							<a href="#" id="apt_sidebar_container<%=building.id%>">
+								
+							</a>
+							<ul class="list-inline">
+						 		<li><%= building.reviews.count %></li> |
+						 		<li><%= building.unit_reviews_count %></li> |
+						 		<li><%= rating_for building, "building", disable_after_rate: true %></li> |
+						 		<li><%= "% Recommended" %></li>
+							</ul>
+						</div>
+					</div>
+				<%end%>
 			</div>
 		</div>
 	<%end%>
