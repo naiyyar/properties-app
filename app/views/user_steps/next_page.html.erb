@@ -10,7 +10,7 @@
 	<div class="row">
 		<%= render partial: 'uploads/form' %>
 	</div>
-<%elsif params[:contribution_for] == 'building_amenities' %>
+<%elsif params[:contribution_for] == 'building_amenities' or params[:building_id].present? %>
 	<%= render partial: 'buildings/amenities_fields' %>
 <%elsif params[:contribution_for] == 'unit_amenities' %>
 	<%= render partial: 'units/amenities_fields' %>
