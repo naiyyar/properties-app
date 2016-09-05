@@ -51,7 +51,7 @@
 						 		<li>Unit reviews: <%= building.unit_reviews_count %></li> |
 						 		<li>Photos(<%= building.uploads ? building.uploads.count : '' %>)</li>
 							</ul>
-							<ul class="list-inline">
+							<ul class="list-inline" style="margin-left: 126px;">
 						 		<li><%= rating_for building, "building", disable_after_rate: true, cancel: false %></li> |
 						 		<li><%= "20% Recommended" %></li>
 							</ul>
@@ -74,6 +74,7 @@
 		});
     
 		createSidebar(json_array);
+		handler.getMap().setZoom(80);
   });
   
 </script>

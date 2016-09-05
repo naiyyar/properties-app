@@ -18,13 +18,31 @@ class Building < ActiveRecord::Base
 
   include PgSearch
   pg_search_scope :search, against: [:building_name, :zipcode, :building_street_address, :city],
-    using: {tsearch: {dictionary: 'english'} }
+    using: { tsearch: {dictionary: 'english'} }
+
+  DISTANCE = 100
 
   def self.text_search(term)
     if term.present?
       search(term)
     else
       self.all
+    end
+  end
+
+  def self.neighborhood_search_by_street_address search, params
+    if search.types.include? 'street_address'
+      near(search.coordinates, Building::DISTANCE).to_a.uniq(&:building_street_address)
+    else
+      where('building_street_address @@ :q', q: params[:term])
+    end
+  end
+
+  def self.neighborhood_search_by_zipcode search, params
+    if search.types.include? 'postal_code'
+      near(search.coordinates, Building::DISTANCE).to_a.uniq(&:zipcode)
+    else
+      where('zipcode @@ :q', q: params[:term])
     end
   end
 
@@ -42,4 +60,5 @@ class Building < ActiveRecord::Base
     end
     return count
   end
+
 end

@@ -2,8 +2,9 @@ function createSidebarElem(json){
   title = json.marker_title.split(',')
   building_name = title[1]
   address = title[2]
+  zipcode = title[3]
   return ("<h4 class='list-group-item-heading'>" + building_name + "</h4>" +
-  					"<p class='list-group-item-text'>"+ address +"</p>"
+  					"<p class='list-group-item-text'>"+ address +', '+zipcode+"</p>"
           );
 };
 
@@ -18,7 +19,7 @@ function bindElemToMarker(elem, marker){
 
 function bindMarker(marker, markers){
   $(window).on('load', function(){
-    handler.getMap().setZoom(11);
+    //handler.getMap().setZoom(50);
     marker.setMap(handler.getMap());
     marker.panTo();
     google.maps.event.trigger(marker.getServiceObject(), 'load');

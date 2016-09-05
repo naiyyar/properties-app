@@ -15,7 +15,7 @@ app.buildings.prototype = {
   },
 
   _render: function(ul, item) {
-    window.data = item
+    //window.data = item
     var markup = [
       '<p class="address"><b>' + item.search_term + '</b></p>'
     ];
