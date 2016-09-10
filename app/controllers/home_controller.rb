@@ -12,18 +12,19 @@ class HomeController < ApplicationController
       end
     else
       search = Geocoder.search(params[:term]).first
+  
       if params[:term].present?
-    		# second search with building name
-      	@buildings = Building.where('building_name @@ :q', q: params[:term]).to_a.uniq(&:building_name)
+    		# Search with building name
+      	@buildings = Building.text_search(params[:term]).to_a.uniq(&:building_name)
         if @buildings.present?
           @result_type = 'buildings'
         else
-          # second search with city names
+          # Search with city names
           @buildings = Building.where('city @@ :q', q: params[:term]).to_a.uniq(&:city)
           if @buildings.present?
             @result_type = 'cities'
           else
-            # in last search with building address
+            # Search with building address
             @buildings = Building.neighborhood_search_by_street_address(search, params)
             if @buildings.present?
             	@result_type = 'address'

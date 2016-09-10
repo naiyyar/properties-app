@@ -17,8 +17,11 @@ class Building < ActiveRecord::Base
   after_validation :geocode
 
   include PgSearch
-  pg_search_scope :search, against: [:building_name, :city],
-    using: { tsearch: {dictionary: 'english'} }
+  pg_search_scope :search, against: :building_name,
+    :using => { :trigram => {
+                  :threshold => 0.1
+                }
+              }
 
   DISTANCE = 15
 
