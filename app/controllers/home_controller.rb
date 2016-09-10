@@ -4,7 +4,12 @@ class HomeController < ApplicationController
 
   def search
     if params['apt-search-txt'].present?
-		  @buildings = Building.near(params['apt-search-txt'], Building::DISTANCE)
+      if params[:term].present?
+        building = Building.text_search(params[:term])
+        redirect_to building_path(building.first) if building.present?
+      else
+        @buildings = Building.near(params['apt-search-txt'], Building::DISTANCE)
+      end
     else
       search = Geocoder.search(params[:term]).first
       if params[:term].present?
