@@ -35,10 +35,11 @@ class Building < ActiveRecord::Base
 
   def self.neighborhood_search_by_street_address search, params
     if search.types.include? 'street_address'
-      near(search.coordinates, Building::DISTANCE).to_a.uniq(&:building_street_address)
+      @buildings = near(search.coordinates, Building::DISTANCE)
     else
-      where('building_street_address @@ :q', q: params[:term])
+      @buildings = where('building_street_address @@ :q', q: params[:term])
     end
+    @buildings = @buildings.to_a.uniq(&:building_street_address)
   end
 
   def self.neighborhood_search_by_zipcode search, params

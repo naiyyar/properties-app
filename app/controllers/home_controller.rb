@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   def search
     if params['apt-search-txt'].present?
       if params[:term].present?
-        building = Building.text_search(params[:term])
+        building = Building.where('building_street_address = ? or building_name = ?', params[:term], params[:term])
         redirect_to building_path(building.first) if building.present?
       else
         @buildings = Building.near(params['apt-search-txt'], Building::DISTANCE)
