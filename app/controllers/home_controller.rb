@@ -3,18 +3,18 @@ class HomeController < ApplicationController
   end
 
   def search
-    if params['buildings-search-txt'].present?
-		  @buildings = Building.near(params['buildings-search-txt'], Building::DISTANCE)
+    if params['apt-search-txt'].present?
+		  @buildings = Building.near(params['apt-search-txt'], Building::DISTANCE)
     else
       search = Geocoder.search(params[:term]).first
       if params[:term].present?
     		# second search with building name
-      	@buildings = Building.where('building_name @@ :q', q: params[:term])
+      	@buildings = Building.where('building_name @@ :q', q: params[:term]).to_a.uniq(&:building_name)
         if @buildings.present?
           @result_type = 'buildings'
         else
           # second search with city names
-          @buildings = Building.where('city @@ :q', q: params[:term])
+          @buildings = Building.where('city @@ :q', q: params[:term]).to_a.uniq(&:city)
           if @buildings.present?
             @result_type = 'cities'
           else
@@ -30,7 +30,7 @@ class HomeController < ApplicationController
         end
       end
     end
-  	
+    
     if @buildings.present?
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
         marker.lat building.latitude

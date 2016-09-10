@@ -17,10 +17,10 @@ class Building < ActiveRecord::Base
   after_validation :geocode
 
   include PgSearch
-  pg_search_scope :search, against: [:building_name, :zipcode, :building_street_address, :city],
+  pg_search_scope :search, against: [:building_name, :city],
     using: { tsearch: {dictionary: 'english'} }
 
-  DISTANCE = 100
+  DISTANCE = 15
 
   def self.text_search(term)
     if term.present?

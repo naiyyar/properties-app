@@ -19,7 +19,7 @@ function bindElemToMarker(elem, marker){
 
 function bindMarker(marker, markers){
   $(window).on('load', function(){
-    //handler.getMap().setZoom(50);
+    handler.getMap().setZoom(15);
     marker.setMap(handler.getMap());
     marker.panTo();
     google.maps.event.trigger(marker.getServiceObject(), 'load');
