@@ -65,12 +65,12 @@
 
 <script type="text/javascript" charset="utf-8">
   handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}, function(){
-    json_array = <%=raw @hash.to_json %>
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  	json_array = <%= raw @hash.to_json %> ;
     markers = handler.addMarkers(json_array);
     _.each(json_array, function(json, index){
 		  json.marker = markers[index];
-		  bindMarker(json.marker, markers, handler)
+		  bindMarker(json.marker, markers, handler);
 		});
 		createSidebar(json_array);
   });

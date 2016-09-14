@@ -19,6 +19,7 @@ function bindElemToMarker(elem, marker){
 
 function bindMarker(marker, markers){
   $(window).on('load', function(){
+    //var kmls = handler.addKml({ url: "http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml" });
     handler.getMap().setZoom(15);
     marker.setMap(handler.getMap());
     marker.panTo();
