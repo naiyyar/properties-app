@@ -8,19 +8,40 @@ class HomeController < ApplicationController
         building = Building.where('building_street_address = ? or building_name = ?', params[:term], params[:term])
         redirect_to building_path(building.first) if building.present?
       else
+        search = Geocoder.search(params['apt-search-txt'])
+        coordinates = Geocoder.coordinates(params['apt-search-txt'])
+        if coordinates.present?
+          @lat = coordinates[0]
+          @lng = coordinates[1]
+        end
         @buildings = Building.near(params['apt-search-txt'], Building::DISTANCE)
+        if search.present?
+           @boundary_coords = []
+          if search.first.types[0] == 'postal_code'
+            search_term = params['apt-search-txt'].split(' - ')
+            if(search_term.length > 1)
+              zipcode = search_term[0]
+            else
+              zipcode = params['apt-search-txt']
+            end
+            @boundary_coords << Gcoordinate.where(zipcode: zipcode).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
+            @zoom = 14
+          else
+            @boundary_coords << Gcoordinate.where(zipcode: nil).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
+            @zoom = 6
+          end
+        end
       end
     else
       search = Geocoder.search(params[:term]).first
-  
       if params[:term].present?
     		# Search with building name
-      	@buildings = Building.text_search(params[:term]).to_a.uniq(&:building_name)
+      	#@buildings = Building.text_search(params[:term]).to_a.uniq(&:building_name)
         if @buildings.present?
           @result_type = 'buildings'
         else
           # Search with city names
-          @buildings = Building.where('city @@ :q', q: params[:term]).to_a.uniq(&:city)
+          @buildings = Building.text_search(params[:term]).to_a.uniq(&:city)
           if @buildings.present?
             @result_type = 'cities'
           else

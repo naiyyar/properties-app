@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910063611) do
+ActiveRecord::Schema.define(version: 20160919125226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 20160910063611) do
     t.boolean  "roof_deck",               default: false
     t.boolean  "swimming_pool",           default: false
     t.boolean  "walk_up",                 default: false
+  end
+
+  create_table "gcoordinates", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "zipcode"
+    t.string   "state"
+    t.string   "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "overall_averages", force: :cascade do |t|

@@ -1,12 +1,12 @@
-function createSidebarElem(json){
-  title = json.marker_title.split(',')
-  building_name = title[1]
-  address = title[2]
-  zipcode = title[3]
-  return ("<h4 class='list-group-item-heading'>" + building_name + "</h4>" +
-  					"<p class='list-group-item-text'>"+ address +', '+zipcode+"</p>"
-          );
-};
+// function createSidebarElem(json){
+//   // title = json.marker_title.split(',')
+//   // building_name = title[1]
+//   // address = title[2]
+//   // zipcode = title[3]
+//   // return ("<h4 class='list-group-item-heading'>" + building_name + "</h4>" +
+//   // 					"<p class='list-group-item-text'>"+ address +', '+zipcode+"</p>"
+//   //         );
+// };
 
 function bindElemToMarker(elem, marker){
   elem.on('click', function(){
@@ -17,15 +17,17 @@ function bindElemToMarker(elem, marker){
   })
 };
 
-function bindMarker(marker, markers){
+function bindMarker(marker, markers, handler, lat, lng, zoom){
   $(window).on('load', function(){
-    //var kmls = handler.addKml({ url: "http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml" });
-    handler.getMap().setZoom(15);
+    //kmls = handler.addKml({ url: "http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml" });
     marker.setMap(handler.getMap());
     marker.panTo();
     google.maps.event.trigger(marker.getServiceObject(), 'load');
     handler.bounds.extendWith(markers);
+    //handler.bounds.extendWith(kmls);
     handler.fitMapToBounds();
+    handler.map.centerOn({lat: lat, lng: lng})
+    handler.getMap().setZoom(zoom);
   })
 };
 
