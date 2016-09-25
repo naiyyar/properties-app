@@ -23,11 +23,13 @@ function bindMarker(marker, markers, handler, lat, lng, zoom){
     marker.setMap(handler.getMap());
     marker.panTo();
     google.maps.event.trigger(marker.getServiceObject(), 'load');
-    handler.bounds.extendWith(markers);
+    
     //handler.bounds.extendWith(kmls);
     handler.fitMapToBounds();
     handler.map.centerOn({lat: lat, lng: lng})
     handler.getMap().setZoom(zoom);
+    handler.bounds.extendWith(polygons);
+    handler.bounds.extendWith(markers);
   })
 };
 

@@ -78,10 +78,10 @@
 		  json.marker = markers[index];
 		  bindMarker(json.marker, markers, handler, lat, lng, <%= @zoom %>);
 		});
-		var polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
+		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
     	{ strokeColor: '#FF0000'}
 	  );
-		handler.bounds.extendWith(polygons);
+		
 		//createSidebar(json_array);
 		// var kmls = handler.addKml(
 	 //    { url: "https://www.dropbox.com/s/o3bfjuo1xhziolm/apt_cta.kml?dl=0" }

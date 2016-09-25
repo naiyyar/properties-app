@@ -21,6 +21,7 @@ class HomeController < ApplicationController
             search_term = params['apt-search-txt'].split(' - ')
             if(search_term.length > 1)
               zipcode = search_term[0]
+              @buildings = Building.where('zipcode = ?',zipcode).to_a.uniq(&:building_street_address)
             else
               zipcode = params['apt-search-txt']
             end
@@ -57,7 +58,6 @@ class HomeController < ApplicationController
         end
       end
     end
-    
     if @buildings.present?
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
         marker.lat building.latitude
