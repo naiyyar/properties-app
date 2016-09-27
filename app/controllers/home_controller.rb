@@ -37,6 +37,7 @@ class HomeController < ApplicationController
       search = Geocoder.search(params[:term]).first
       if params[:term].present?
     		# Search with building name
+        @buildings = Building.where('building_name ILIKE ?',"%#{params[:term].downcase}%")
       	#@buildings = Building.text_search(params[:term]).to_a.uniq(&:building_name)
         if @buildings.present?
           @result_type = 'buildings'

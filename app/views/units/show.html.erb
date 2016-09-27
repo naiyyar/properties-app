@@ -2,7 +2,7 @@
   <div class="col-lg-6 col-md-6">
     <div class="address-area">
       <h1>
-        <%= @unit.name %> - <%= @unit.building.building_street_address %>
+         <%= @unit.building.building_street_address %> - <%= @unit.name.split('')[0] == '#' ? "#{@unit.name}" : "##{@unit.name}" %>
          <% if current_user %>
           <small><%= link_to "edit", edit_unit_path(@unit)%></small>
         <%end%>
@@ -12,7 +12,7 @@
         <%= link_to building_path(@unit.building) do %>
           <b>
             <%= @unit.building.building_street_address %> <br />
-            <%= @unit.building.city %>, <%= @unit.building.state %>, <%= @unit.building.zipcode %> <br />
+            <%= @unit.building.city %>, <%= @unit.building.state %> <%= @unit.building.zipcode %> <br />
             <%= @unit.building.building_name %>
           </b>
         <%end%>
