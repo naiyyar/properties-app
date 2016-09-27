@@ -10,15 +10,15 @@ class HomeController < ApplicationController
       else
         search = Geocoder.search(params['apt-search-txt'])
         coordinates = Geocoder.coordinates(params['apt-search-txt'])
-        if coordinates.present?
-          @lat = coordinates[0]
-          @lng = coordinates[1]
-        end
         @buildings = Building.near(params['apt-search-txt'], Building::DISTANCE)
         if search.present?
            @boundary_coords = []
           if search.first.types[0] == 'postal_code'
             search_term = params['apt-search-txt'].split(' - ')
+            if coordinates.present?
+              @lat = coordinates[0]
+              @lng = coordinates[1]
+            end
             if(search_term.length > 1)
               zipcode = search_term[0]
               @buildings = Building.where('zipcode = ?',zipcode).to_a.uniq(&:building_street_address)
@@ -28,8 +28,8 @@ class HomeController < ApplicationController
             @boundary_coords << Gcoordinate.where(zipcode: zipcode).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
             @zoom = 14
           else
-            @boundary_coords << Gcoordinate.where(zipcode: nil).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-            @zoom = 6
+            @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}
+            @zoom = 12
           end
         end
       end

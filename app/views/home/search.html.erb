@@ -6,7 +6,7 @@
 	<% if @buildings.present? %>
 		<div class="col-lg-7">
 			<div class="map-continer">
-        <div id="map" style="height: 400px;"></div>
+        <div id="map" style="height: 500px;"></div>
       </div>
 		</div>
 
@@ -42,12 +42,12 @@
 						  </div>
 						</div>
 						<div>
-							<!-- <a href="#" id="apt_sidebar_container<%=building.id%>"> -->
-								<%= link_to building_path(building) do %>
-									<h4 class='list-group-item-heading'> <%= building.building_name %> </h4>
-	  							<p class='list-group-item-text'><%= "#{building.building_street_address} #{building.zipcode}" %></p>
-	  						<%end%>
-							<!-- </a> -->
+							<a href="<%=building_path(building)%>" id="apt_sidebar_container<%=building.id%>">
+								<%#= link_to building_path(building) do %>
+									<!-- <h4 class='list-group-item-heading'> <%#= building.building_name %> </h4> -->
+	  							<!-- <p class='list-group-item-text'><%#= "#{building.building_street_address} #{building.zipcode}" %></p> -->
+	  						<%#end%>
+							</a>
 							<br />
 							<ul class="list-inline">
 						 		<li>Reviews: <%= building.reviews.count %></li> |
@@ -70,22 +70,24 @@
 	lat = <%= raw @lat.to_json %>
 	lng = <%= raw @lng.to_json %>
 	zoom = <%= @zoom %>
+  
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  	
   	json_array = <%= raw @hash.to_json %> ;
+    
     markers = handler.addMarkers(json_array);
+    
     _.each(json_array, function(json, index){
 		  json.marker = markers[index];
 		  bindMarker(json.marker, markers, handler, lat, lng, <%= @zoom %>);
 		});
+		
 		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
-    	{ strokeColor: '#FF0000'}
+    	{ strokeColor: '#FF0000' }
 	  );
 		
-		//createSidebar(json_array);
-		// var kmls = handler.addKml(
-	 //    { url: "https://www.dropbox.com/s/o3bfjuo1xhziolm/apt_cta.kml?dl=0" }
-	 //  );
+		createSidebar(json_array);
   });
   
 </script>
