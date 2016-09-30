@@ -25,6 +25,7 @@
       <tr>
         <th>Building Name</th>
         <th>Building Street Address</th>
+        <th>Zipcode</th>
         <th>Latitude</th>
         <th>Longitude</th>
         <th></th>
@@ -37,6 +38,7 @@
         <tr>
           <td><%= link_to(building.building_name, building_path(building)) %>(<%= building.reviews.count %>)</td>
           <td><%= building.building_street_address %></td>
+          <td><%= building.zipcode %></td>
           <td><%= building.latitude %></td>
           <td><%= building.longitude %></td>
           <% if current_user && current_user.has_role?(:admin) %>
