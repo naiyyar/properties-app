@@ -17,7 +17,7 @@ class Building < ActiveRecord::Base
   after_validation :geocode
 
   include PgSearch
-  pg_search_scope :search, against: [:building_name, :city],
+  pg_search_scope :search, against: [:building_name, :building_street_address],
     :using => { :trigram => {
                   :threshold => 0.1
                 }
@@ -31,6 +31,14 @@ class Building < ActiveRecord::Base
     else
       self.all
     end
+  end
+
+  def self.text_search_by_city search_term
+    where('city @@ :q', q: search_term)
+  end
+  
+  def self.text_search_by_building_name search_term
+    where('building_name @@ :q', q: search_term)
   end
 
   def self.neighborhood_search_by_street_address search, params

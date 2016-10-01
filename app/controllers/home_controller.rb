@@ -36,16 +36,16 @@ class HomeController < ApplicationController
     else
       search = Geocoder.search(params[:term]).first
       if params[:term].present?
-    		# Search with building name
-        @buildings = Building.where('building_name ILIKE ?',"%#{params[:term].downcase}%")
-      	#@buildings = Building.text_search(params[:term]).to_a.uniq(&:building_name)
+    		# Search with city name
+      	@buildings = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
         if @buildings.present?
-          @result_type = 'buildings'
+          @result_type = 'cities'
         else
-          # Search with city names
-          @buildings = Building.text_search(params[:term]).to_a.uniq(&:city)
+          # Search with building names
+          @buildings = Building.text_search_by_building_name(params[:term])
           if @buildings.present?
-            @result_type = 'cities'
+            #@result_type = 'cities'
+            @result_type = 'buildings'
           else
             # Search with building address
             @buildings = Building.neighborhood_search_by_street_address(search, params)
