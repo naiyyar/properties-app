@@ -23,7 +23,11 @@ class Building < ActiveRecord::Base
                 }
               }
 
-  DISTANCE = 15
+  DISTANCE = 8
+
+  def zipcode=(val)
+     write_attribute(:zipcode, val.gsub(/\s+/,''))
+  end
 
   def self.text_search(term)
     if term.present?
@@ -41,6 +45,10 @@ class Building < ActiveRecord::Base
     where('building_name @@ :q', q: search_term)
   end
 
+  def self.text_search_by_zipcode search_term
+    where('zipcode @@ :q', q: search_term)
+  end
+
   def self.neighborhood_search_by_street_address search, params
     if search.types.include? 'street_address'
       @buildings = near(search.coordinates, Building::DISTANCE)
@@ -48,14 +56,6 @@ class Building < ActiveRecord::Base
       @buildings = where('building_street_address @@ :q', q: params[:term])
     end
     @buildings = @buildings.to_a.uniq(&:building_street_address)
-  end
-
-  def self.neighborhood_search_by_zipcode search, params
-    if search.types.include? 'postal_code'
-      near(search.coordinates, Building::DISTANCE).to_a.uniq(&:zipcode)
-    else
-      where('zipcode @@ :q', q: params[:term])
-    end
   end
 
   def fetch_or_create_unit params

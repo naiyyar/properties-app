@@ -19,6 +19,11 @@ case @result_type
   when 'zipcode'
     json.array! @buildings do |building|
       json.id building.id
-      json.search_term "#{building.zipcode} - #{building.city}, #{building.state}"
+      if building.id == @buildings.first.id
+        json.search_term "#{building.zipcode} - #{building.city}, #{building.state}"
+      else
+        json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
+        json.term "#{building.building_street_address}"
+      end
     end
 end
