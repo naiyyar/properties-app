@@ -32,4 +32,39 @@ module BuildingsHelper
 	def imageable upload
 		upload.imageable_type == 'Building' ? upload.imageable.building_name : upload.imageable.name
 	end
+
+	# def cross_street address
+	# 	number = address.split(' ')[0]
+	# 	ave_address = address.split(' ') - [number]
+	# 	ave_address = ave_address.join(' ')
+	# 	number_to_add = number.to_i / 10 #Removing Last digit
+	# 	number_to_add = number_to_add / 2
+		
+	# 	case ave_address
+	# 		when '1st Ave'
+	# 			number_to_add + 3
+	# 		when '2nd Ave'
+	# 			number_to_add + 3
+	# 		when '3rd Ave'
+	# 			number_to_add + 10
+	# 			when '4th ave'
+	# 			number_to_add + 8
+	# 		when '5th Ave'
+	# 			if number.to_i <= 200
+	# 				number_to_add + 13
+	# 			elsif number.to_i <= 400
+	# 				number_to_add + 16
+	# 			elsif number.to_i <= 600
+	# 				number_to_add + 18
+	# 			elsif number.to_i <= 775
+	# 				number_to_add + 20
+	# 			elsif number.to_i >= 775 && number.to_i <= 1286
+	# 				number - 18
+	# 			else
+	# 				''
+	# 			end
+	# 		else
+	# 			''
+	# 		end
+	# end
 end

@@ -2,7 +2,7 @@
   <div class="col-lg-6 col-md-6">
     <div class="address-area">
       <% if @building.building_name.present? %>
-        <h1><%= @building.building_name %> </h1>  
+        <h1><%= @building.building_name %> </h1>
       <%else%>
         <h1> <%= @building.building_street_address %></h1>
       <%end%>
@@ -24,6 +24,7 @@
       <div class="address">
         <p> <b><%= @building.building_street_address %> </b></p>
         <p> <b><%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %> </b></p>
+        <!-- <p> Near <%#= cross_street(@building.building_street_address) %>th st</p>  -->
       </div>
 
       <div style='width: 550px;'>
