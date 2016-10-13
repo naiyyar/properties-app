@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   def search
     if params['apt-search-txt'].present?
       if params[:term].present?
-        building = Building.where('building_street_address = ? or building_name = ?', params[:term], params[:term])
+        building = Building.text_search(params[:term])
         redirect_to building_path(building.first) if building.present?
       else
         search = Geocoder.search(params['apt-search-txt'])
