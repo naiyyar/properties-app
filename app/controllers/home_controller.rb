@@ -34,25 +34,26 @@ class HomeController < ApplicationController
         end
       end
     else
-      search = Geocoder.search(params[:term]).first
+     # search = Geocoder.search(params[:term]).first
       if params[:term].present?
     		# Search with city name
       	@buildings = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
         if @buildings.present?
           @result_type = 'cities'
         else
-          # Search with building names
-          @buildings = Building.text_search_by_building_name(params[:term])
+          # Search with zipcode
+          @buildings = Building.text_search_by_zipcode(params[:term])
           if @buildings.present?
-            @result_type = 'buildings'
+            @result_type = 'zipcode'
           else
             # Search with building address
-            @buildings = Building.neighborhood_search_by_street_address(search, params)
+            @buildings = Building.search_by_street_address(params[:term])
             if @buildings.present?
             	@result_type = 'address'
             else
-              @buildings = Building.text_search_by_zipcode(params[:term])
-            	@result_type = 'zipcode'
+              # Search with building names
+              @buildings = Building.text_search_by_building_name(params[:term])
+            	@result_type = 'buildings'
           	end
           end
         end

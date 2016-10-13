@@ -17,11 +17,22 @@ class Building < ActiveRecord::Base
   after_validation :geocode
 
   include PgSearch
-  pg_search_scope :search, against: [:building_name, :building_street_address],
+  pg_search_scope :text_search, against: [:building_name, :building_street_address],
     :using => { :trigram => {
                   :threshold => 0.1
                 }
               }
+  pg_search_scope :text_search_by_building_name, against: [:building_name],
+    :using => { :trigram => {
+                  :threshold => 0.1
+                }
+              }
+  
+  pg_search_scope :search_by_street_address, against: [:building_street_address],
+    :using => { :trigram => { :threshold => 0.1 } }
+
+  pg_search_scope :text_search_by_city, against: [:city],
+    :using => { :trigram => { :threshold => 0.1 } }
 
   DISTANCE = 8
 
@@ -37,25 +48,8 @@ class Building < ActiveRecord::Base
     end
   end
 
-  def self.text_search_by_city search_term
-    where('city @@ :q', q: search_term)
-  end
-  
-  def self.text_search_by_building_name search_term
-    where('building_name @@ :q', q: search_term)
-  end
-
   def self.text_search_by_zipcode search_term
     where('zipcode @@ :q', q: search_term)
-  end
-
-  def self.neighborhood_search_by_street_address search, params
-    if search.types.include? 'street_address'
-      @buildings = near(search.coordinates, Building::DISTANCE)
-    else
-      @buildings = where('building_street_address @@ :q', q: params[:term])
-    end
-    @buildings = @buildings.to_a.uniq(&:building_street_address)
   end
 
   def fetch_or_create_unit params
