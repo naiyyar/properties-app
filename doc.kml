@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>Untitled map</name>
+		<description><![CDATA[]]></description>
+		<Folder>
+			<name>Untitled layer</name>
+			<Placemark>
+				<name>10128</name>
+				<styleUrl>#poly-000000-1-77-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>-73.9670849,40.7845059,0.0 -73.9635658,40.7830111,0.0 -73.9631367,40.7817113,0.0 -73.9618063,40.7812238,0.0 -73.9606905,40.7810614,0.0 -73.9603472,40.7815488,0.0 -73.9586306,40.7808014,0.0 -73.9581156,40.7816463,0.0 -73.9577293,40.7821987,0.0 -73.9544678,40.7807364,0.0 -73.9549398,40.7800215,0.0 -73.9512062,40.7785266,0.0 -73.9507771,40.7791766,0.0 -73.9460993,40.7771942,0.0 -73.9442968,40.7764143,0.0 -73.9446831,40.7757643,0.0 -73.9442539,40.7756668,0.0 -73.9429235,40.7774867,0.0 -73.9424086,40.7778442,0.0 -73.9426231,40.7786241,0.0 -73.9423227,40.7795015,0.0 -73.943224,40.7799565,0.0 -73.9436102,40.7815488,0.0 -73.9432669,40.7827511,0.0 -73.9472151,40.7842784,0.0 -73.9464855,40.7850258,0.0 -73.9503908,40.786553,0.0 -73.9509487,40.7856756,0.0 -73.9560986,40.7880801,0.0 -73.9567423,40.7891524,0.0 -73.9588881,40.7900946,0.0 -73.9601326,40.7903546,0.0 -73.9618063,40.7913943,0.0 -73.9631796,40.7918492,0.0 -73.9646816,40.7901271,0.0 -73.9647245,40.7892174,0.0 -73.9657974,40.7888275,0.0 -73.9669132,40.7879177,0.0 -73.9676857,40.786553,0.0 -73.9679003,40.7855457,0.0 -73.9670849,40.7845059,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+		</Folder>
+		<Style id='poly-000000-1-77-nodesc-normal'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>1</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4D000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='poly-000000-1-77-nodesc-highlight'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>2.0</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4D000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='poly-000000-1-77-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#poly-000000-1-77-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#poly-000000-1-77-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+	</Document>
+</kml>
