@@ -26,4 +26,9 @@ case @result_type
         json.term "#{building.building_street_address}"
       end
     end
+  when 'neighborhood'
+    json.array! @buildings do |building|
+      json.id building.id
+      json.search_term "#{building.neighborhood}, #{building.city}, #{building.state}"
+    end
 end

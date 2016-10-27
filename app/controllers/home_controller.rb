@@ -27,6 +27,15 @@ class HomeController < ApplicationController
             end
             @boundary_coords << Gcoordinate.where(zipcode: zipcode).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
             @zoom = 14
+          elsif search.first.types[0] == 'neighborhood'
+            if coordinates.present?
+              @lat = coordinates[0]
+              @lng = coordinates[1]
+            end
+            neighborhoods = params['apt-search-txt'].split(',')[0]
+            @buildings = Building.where(neighborhood: neighborhoods).to_a.uniq(&:building_street_address)
+            @boundary_coords << Gcoordinate.where(neighborhood: neighborhoods).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
+            @zoom = 14
           else
             @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}
             @zoom = 12
@@ -51,9 +60,15 @@ class HomeController < ApplicationController
             if @buildings.present?
             	@result_type = 'address'
             else
-              # Search with building names
-              @buildings = Building.text_search_by_building_name(params[:term])
-            	@result_type = 'buildings'
+              # Search with Neighborhood
+              @buildings = Building.text_search_by_neighborhood(params[:term])
+            	if @buildings.present?
+                @result_type = 'neighborhood'
+              else
+                # Search with building names
+                @buildings = Building.text_search_by_building_name(params[:term])
+                @result_type = 'buildings'
+              end
           	end
           end
         end

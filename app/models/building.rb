@@ -38,6 +38,9 @@ class Building < ActiveRecord::Base
   pg_search_scope :text_search_by_city, against: [:city],
     :using => { :trigram => { :threshold => 0.1 } }
 
+  pg_search_scope :text_search_by_neighborhood, against: [:neighborhood],
+    :using => { :trigram => { :threshold => 0.1 } }
+
   DISTANCE = 8
 
   def zipcode=(val)
