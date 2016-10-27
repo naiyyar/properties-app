@@ -9,315 +9,103 @@
 
 # user = User.find(2)
 # user.add_role :admin
-Gcoordinate.where(zipcode: ['10021','10009','10018']).destroy_all
 
-coords_10031 = [{ lng: -73.958008, lat: 40.822795 },
-								{ lng: -73.960007, lat: 40.820422 },
-								{ lng: -73.952273, lat: 40.817221 },
-								{ lng: -73.949734, lat: 40.817922 },
-								{ lng: -73.947552, lat: 40.820301 },
-								{ lng: -73.948083, lat: 40.822108 },
-								{ lng: -73.946078, lat: 40.821264 },
-								{ lng: -73.944756, lat: 40.824032 },
-								{ lng: -73.942924, lat: 40.82326 },
-								{ lng: -73.939248, lat: 40.828296 },
-								{ lng: -73.938588, lat: 40.829717 },
-								{ lng: -73.940167, lat: 40.830383 },
-								{ lng: -73.941078, lat: 40.829083 },
-								{ lng: -73.949714, lat: 40.832697 },
-								{ lng: -73.949342, lat: 40.833982},
-								{ lng: -73.950279, lat: 40.834326 },
-								{ lng: -73.95383,  lat: 40.828652 },
-								{ lng: -73.957275, lat: 40.827145 },
-								{ lng: -73.959648, lat: 40.823677 },
-								{ lng: -73.958008, lat: 40.822795 }]
-coords_10031.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10031')
+coords_midtown_manhattan = [{ lat: 40.772885, lng: -73.993642 },
+														{ lat: 40.742447, lng: -74.008984 },
+														{ lat: 40.726891, lng: -73.971881 },
+														{ lat: 40.758343, lng: -73.958909 }]
+
+coords_midtown_manhattan.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown Manhattan')
 end
 
-coords_10032 = [{ lng: -73.950279, lat: 40.834326 },{ lng: -73.949342, lat: 40.833982 },{ lng: -73.949714, lat: 40.832697 },{ lng: -73.941078, lat: 40.829083 },{ lng: -73.940167, lat: 40.830383 },{ lng: -73.940346, lat: 40.830458 },{ lng: -73.940309, lat: 40.831711 },{ lng: -73.937936, lat: 40.834458 },{ lng: -73.935079, lat: 40.839267 },{ lng: -73.935628, lat: 40.841279 },{ lng: -73.934671, lat: 40.842958 },{ lng: -73.938855, lat: 40.844679 },{ lng: -73.940241, lat: 40.846048 },{ lng: -73.94261, lat: 40.846231 },{ lng: -73.943779, lat: 40.845054 },{ lng: -73.944882, lat: 40.844959 },{ lng:-73.943187, lat: 40.849755 },{ lng: -73.947005, lat: 40.850459 },{ lng: -73.946701, lat: 40.847673 },{ lng: -73.946813, lat: 40.846828 },{ lng: -73.946049, lat: 40.84458 },{ lng: -73.947721, lat: 40.841448 },{ lng: -73.950279, lat: 40.834326 }]
-coords_10032.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10032')
+coords_midtown_east = [ { lat: 40.753494, lng: -73.980858 },
+												{ lat: 40.764173, lng: -73.973112 },
+												{ lat: 40.758391, lng: -73.959106 },
+												{ lat: 40.748166, lng: -73.968096 }]
+
+coords_midtown_east.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown East')
 end
 
-coords_10033 = [{ lng: -73.944882, lat: 40.844959 },{ lng: -73.943779, lat: 40.845054 },{ lng: -73.94261, lat: 40.846231 },{ lng: -73.940241, lat: 40.846048 },{ lng: -73.938855, lat: 40.844679 },{ lng: -73.934671, lat: 40.842958 },{ lng: -73.93201, lat: 40.846576 },{ lng: -73.929303, lat: 40.845788 },{ lng: -73.923016, lat: 40.854702 },{ lng: -73.92216, lat: 40.855607 },{ lng: -73.922867, lat: 40.855872 },{ lng: -73.922888, lat: 40.858857 },{ lng: -73.924742, lat: 40.861594 },{ lng: -73.927122, lat: 40.85811 },{ lng: -73.924692, lat: 40.856642 },{ lng: -73.928151, lat: 40.851863 },{ lng:-73.939012, lat: 40.856109 },{ lng: -73.942799, lat: 40.851172 },{ lng: -73.943187, lat: 40.849755 },{ lng: -73.944882, lat: 40.844959 }]
-coords_10033.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10033')
+coords_kips_bay = [ { lat: 40.746376, lng: -73.979737 },
+										{ lat: 40.742979, lng: -73.971755 },
+										{ lat: 40.739500, lng: -73.984736 },
+										{ lat: 40.734931, lng: -73.973428 }]
+
+coords_kips_bay.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Kips Bay')
 end
 
-coords_10034 = [{ lng: -73.943301, lat: 40.852489 },{ lng: -73.947005, lat: 40.850459 },{ lng: -73.943187, lat: 40.849755 },{ lng: -73.942799, lat: 40.851172 },{ lng: -73.939012, lat: 40.856109 },{ lng: -73.935195, lat: 40.860266 },{ lng: -73.934209, lat: 40.862503 },{ lng: -73.933292, lat: 40.862995 },{ lng: -73.932429, lat: 40.861221 },{ lng: -73.933022, lat: 40.859819 },{ lng: -73.931215, lat: 40.859665 },{ lng: -73.929364, lat: 40.864284 },{ lng: -73.925005, lat: 40.866336 },{ lng: -73.924385, lat: 40.865365 },{ lng: -73.92662, lat: 40.864525 },{ lng: -73.924742, lat: 40.861594 },{ lng:-73.922888, lat: 40.858857 },{ lng: -73.922867, lat: 40.855872 },{ lng: -73.92216, lat: 40.855607 },{ lng: -73.921098, lat: 40.857567 },{ lng: -73.921992, lat: 40.859563 },{ lng: -73.919594, lat: 40.85883 },{ lng: -73.917143, lat: 40.862032 },{ lng: -73.914429, lat: 40.864186 },{ lng: -73.911182, lat: 40.868729 },{ lng: -73.910587, lat: 40.872456 },{ lng: -73.91146, lat: 40.873322 },{ lng: -73.914865, lat: 40.874409 },{ lng: -73.918824, lat: 40.874694 },{ lng: -73.921011, lat: 40.875549 },{ lng: -73.920276, lat: 40.873107 },{ lng: -73.921673, lat: 40.873283 },{ lng: -73.922667, lat: 40.874908 },{ lng: -73.92312, lat: 40.877314 },{ lng: -73.926406, lat: 40.877645 },{ lng: -73.929351, lat: 40.875358 },{ lng: -73.932521, lat: 40.869914 },{ lng: -73.932466, lat: 40.867615 },{ lng: -73.937789, lat: 40.859812 },{ lng: -73.943301, lat: 40.852489 }]
-coords_10034.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10034')
+coords_murray_hill = [{lat: 40.743761, lng: -73.973522 },
+											{lat: 40.747777, lng: -73.982921 },
+											{lat: 40.748793, lng: -73.969883 },
+											{lat: 40.752810, lng: -73.979289 }]
+
+coords_murray_hill.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Murray Hill')
 end
 
-coords_10021 = [{ lng: -73.9684582, lat: 40.7705643 },
-								{ lng: -73.9635658, lat: 40.7685167 },
-								{ lng: -73.9641237, lat: 40.7678667 },
-								{ lng: -73.9622784, lat: 40.7671516 },
-								{ lng: -73.9618492, lat: 40.7678017 },
-								{ lng: -73.9551115, lat: 40.7648114 },
-								{ lng: -73.9546394, lat: 40.765624 },
-								{ lng: -73.950305, lat: 40.7637388 },
-								{ lng: -73.9460993, lat: 40.7687443 },
-								{ lng: -73.9495754, lat: 40.7700443 },
-								{ lng: -73.9500046, lat: 40.7693943 },
-								{ lng: -73.9515495, lat: 40.7701743 },
-								{ lng: -73.9520216, lat: 40.7693618 },
-								{ lng: -73.9652395, lat: 40.7751468 },
-								{ lng: -73.9636946, lat: 40.7771292 },
-								{ lng: -73.9648962, lat: 40.7778767 },
-								{ lng: -73.9655399, lat: 40.7781367 },
-								{ lng: -73.9664841, lat: 40.7781692 },
-								{ lng: -73.9672995, lat: 40.7762518 },
-								{ lng: -73.9672995, lat: 40.7756018 },
-								{ lng: -73.9677715, lat: 40.7751468 },
-								{ lng: -73.9689732, lat: 40.7744969 },
-								{ lng: -73.9692736, lat: 40.7737169 },
-								{ lng: -73.9688015, lat: 40.7730669 },
-								{ lng: -73.969059,  lat: 40.7719619 },
-								{ lng: -73.9698315, lat: 40.7713769 },
-								{ lng: -73.9708185, lat: 40.7707918 },
-								{ lng: -73.9712906, lat: 40.7700443 },
-								{ lng: -73.9708614, lat: 40.7699793 },
-								{ lng: -73.9702177, lat: 40.7701418 },
-								{ lng: -73.9697027, lat: 40.7705318 },
-								{ lng: -73.9687157, lat: 40.7709219 },
-								{ lng: -73.9684582, lat: 40.7705643 }]
-coords_10021.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10021')
+coords_sutton_place = [{ lat: 40.758385, lng: -73.971005 },
+											 { lat: 40.762213, lng: -73.968183 },
+											 { lat: 40.758347, lng: -73.958982 }, 
+											 { lat: 40.758347, lng: -73.958982 }]
+
+coords_sutton_place.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Sutton Place')
 end
 
-coords_10009 = [{ lng: -73.982564, lat: 40.731361 },
-								{ lng: -73.988643, lat: 40.722933 },
-								{ lng: -73.978753, lat: 40.719934 },
-								{ lng: -73.974995, lat: 40.719784 },
-								{ lng: -73.975119, lat: 40.718753 },
-								{ lng: -73.973635, lat: 40.718612 },
-								{ lng: -73.971396, lat: 40.726662 },
-								{ lng: -73.971282, lat: 40.729251 },
-								{ lng: -73.97365,  lat: 40.73231 },
-								{ lng: -73.974243, lat: 40.732536 },
-								{ lng: -73.979864, lat: 40.734975 },
-								{ lng: -73.982564, lat: 40.731361 }]
-coords_10009.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10009')
+coords_turtle_bay = [ { lat: 40.751487, lng: -73.976041 },
+											{ lat: 40.748114, lng: -73.968220 },
+											{ lat: 40.754754, lng: -73.962223 },
+											{ lat: 40.758370, lng: -73.971010 }]
+
+coords_turtle_bay.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Turtle Bay')
 end
 
-coords_10018 = [{ lng: -74.007203, lat: 40.75927 },
-								{ lng: -74.004957, lat: 40.757872 },
-								{ lng: -74.006145, lat: 40.756189 },
-								{ lng: -74.005593, lat: 40.755893 },
-								{ lng: -74.0028434,lat: 40.759686 },
-								{ lng: -74.000067, lat: 40.758403 },
-								{ lng: -74.0015,   lat: 40.756452 },
-								{ lng: -73.998661, lat: 40.755252 },
-								{ lng: -73.992979, lat: 40.752854 },
-								{ lng: -73.992528, lat: 40.753474 },
-								{ lng: -73.989694, lat: 40.75228 },
-								{ lng: -73.990134, lat: 40.751659 },
-								{ lng: -73.984076, lat: 40.749102 },
-								{ lng: -73.981822, lat: 40.752197 },
-								{ lng: -73.985043, lat: 40.753554 },
-								{ lng: -73.984596, lat: 40.754177 },
-								{ lng: -73.994378, lat: 40.758377 },
-								{ lng: -73.996801, lat: 40.757789 },
-								{ lng: -73.998615, lat: 40.758737 },
-								{ lng: -73.996942, lat: 40.759377 },
-								{ lng: -74.001622, lat: 40.761347 },
-								{ lng: -74.001036, lat: 40.761968 },
-								{ lng: -74.001716, lat: 40.762208 },
-								{ lng: -74.004743, lat: 40.759033 },
-								{ lng: -74.007203, lat: 40.75927 } ]
-coords_10018.each do |coord|
- 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10018')
+coords_midtown_north = [{ lat: 40.757208, lng: -73.989783 },
+												{ lat: 40.751474, lng: -73.976142 },
+												{ lat: 40.762226, lng: -73.968203 },
+												{ lat: 40.768060, lng: -73.981925 }]
+
+coords_midtown_north.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown North')
 end
 
-# coords_10037 = [{ lng: -73.941803, lat: 40.812815 },
-# 								{ lng: -73.943398, lat: 40.81063 },
-# 								{ lng: -73.940404, lat: 40.808958 },
-# 								{ lng: -73.939949, lat: 40.809582 },
-# 								{ lng: -73.936725, lat: 40.808224 },
-# 								{ lng: -73.934919, lat: 40.806679 },
-# 								{ lng: -73.933219, lat: 40.807255 },
-# 								{ lng: -73.93427, lat: 40.809327 },
-# 								{ lng: -73.933831, lat: 40.814192 },
-# 								{ lng: -73.933823, lat: 40.819491 },
-# 								{ lng: -73.934338, lat: 40.818757 },
-# 								{ lng: -73.934264, lat: 40.817914 },
-# 								{ lng: -73.937181, lat: 40.819144 },
-# 								{ lng: -73.940855, lat: 40.814106 },
-# 								{ lng: -73.942477, lat: 40.813912 },
-# 								{ lng: -73.941803, lat: 40.812815 }]
-# coords_10037.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10037')
-# end
+coords_midtown_south = [{ lat: 40.749669, lng: -73.995295 },
+												{ lat: 40.743857, lng: -73.981584 },
+												{ lat: 40.751416, lng: -73.976144 },
+												{ lat: 40.757194, lng: -73.989791 }]
 
-# coords_10038 = [{ lng: -74.009988, lat: 40.709806 },
-# 								{ lng: -74.010542, lat: 40.709154 },
-# 								{ lng: -74.009126, lat: 40.709294 },
-# 								{ lng: -74.008645, lat: 40.70734 },
-# 								{ lng: -74.005194, lat: 40.704945 },
-# 								{ lng: -74.00456,  lat: 40.705105 },
-# 								{ lng: -74.007855, lat: 40.703108 },
-# 								{ lng: -74.0067847421372, lat: 40.701975625768 },
-# 								{ lng: -74.004051, lat: 40.703653 },
-# 								{ lng: -74.0037653576436, lat: 40.7035348973466 },
-# 								{ lng: -74.004552, lat: 40.704838 },
-# 								{ lng: -73.999177, lat: 40.708022 },
-# 								{ lng: -73.998184, lat: 40.708483 },
-# 								{ lng: -73.991939, lat: 40.709528 },
-# 								{ lng: -73.992192, lat: 40.710892 },
-# 								{ lng: -73.994022, lat: 40.709485 },
-# 								{ lng: -73.996222, lat: 40.709181 },
-# 								{ lng: -73.997504, lat: 40.714069 },
-# 								{ lng: -73.998584, lat: 40.713468 },
-# 								{ lng: -74.000455, lat: 40.714365 },
-# 								{ lng: -74.000891, lat: 40.713015 },
-# 								{ lng: -74.004076, lat: 40.711739 },
-# 								{ lng: -74.004858, lat: 40.712453 },
-# 								{ lng: -74.005589, lat: 40.71217 },
-# 								{ lng: -74.008601, lat: 40.711392 },
-# 								{ lng: -74.009988, lat: 40.709806 }]
-# coords_10038.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10038')
-# end
+coords_midtown_south.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown South')
+end
 
-# coords_10039 = [{ lng: -73.942924, lat: 40.82326 },
-# 								{ lng: -73.943506, lat: 40.822628 },
-# 								{ lng: -73.942411, lat: 40.822164 },
-# 								{ lng: -73.941917, lat: 40.822837 },
-# 								{ lng: -73.936227, lat: 40.820438 },
-# 								{ lng: -73.937181, lat: 40.819144 },
-# 								{ lng: -73.934264, lat: 40.817914 },
-# 								{ lng: -73.934338, lat: 40.818757 },
-# 								{ lng: -73.933823, lat: 40.819491 },
-# 								{ lng: -73.935041, lat: 40.834014 },
-# 								{ lng: -73.934705, lat: 40.835626 },
-# 								{ lng: -73.934402, lat: 40.836054 },
-# 								{ lng: -73.929303, lat: 40.845788 },
-# 								{ lng: -73.93201,  lat: 40.846576 },
-# 								{ lng: -73.934671, lat: 40.842958 },
-# 								{ lng: -73.935628, lat: 40.841279 },
-# 								{ lng: -73.935079, lat: 40.839267 },
-# 								{ lng: -73.937936, lat: 40.834458 },
-# 								{ lng: -73.940309, lat: 40.831711 },
-# 								{ lng: -73.940346, lat: 40.830458 },
-# 								{ lng: -73.940167, lat: 40.830383 },
-# 								{ lng: -73.938588, lat: 40.829717 },
-# 								{ lng: -73.939248, lat: 40.828296 },
-# 								{ lng: -73.942924, lat: 40.82326 }]
-# coords_10039.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10039')
-# end
+coords_midtown_west = [ { lat: 40.757151, lng: -74.004719 },
+												{ lat: 40.772798, lng: -73.993723 },
+												{ lat: 40.767435, lng: -73.982479 },
+												{ lat: 40.752230, lng: -73.993486 }]
 
-# coords_10044 = [{ lng: -73.961588, lat: 40.749823 },
-# 								{ lng: -73.961491, lat: 40.749494 },
-# 								{ lng: -73.956924, lat: 40.752961 },
-# 								{ lng: -73.952548, lat: 40.757111 },
-# 								{ lng: -73.942852, lat: 40.768296 },
-# 								{ lng: -73.940559, lat: 40.770119 },
-# 								{ lng: -73.94029,  lat: 40.772929 },
-# 								{ lng: -73.942146, lat: 40.772037 },
-# 								{ lng: -73.951517, lat: 40.761974 },
-# 								{ lng: -73.955527, lat: 40.757243 },
-# 								{ lng: -73.958482, lat: 40.753932 },
-# 								{ lng: -73.959016, lat: 40.753595 },
-# 								{ lng: -73.960214, lat: 40.752033 },
-# 								{ lng: -73.961588, lat: 40.749823 }]
-# coords_10044.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10044')
-# end
+coords_midtown_west.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown West')
+end
 
-# coords_10065 = [{ lng: -73.968441, lat: 40.770517 },
-# 								{ lng: -73.972553, lat: 40.764898 },
-# 								{ lng: -73.963884, lat: 40.761233 },
-# 								{ lng: -73.96244,  lat: 40.761443 },
-# 								{ lng: -73.959263, lat: 40.759284 },
-# 								{ lng: -73.958809, lat: 40.759913 },
-# 								{ lng: -73.956313, lat: 40.760477 },
-# 								{ lng: -73.952308, lat: 40.764555 },
-# 								{ lng: -73.953609, lat: 40.76347 },
-# 								{ lng: -73.955616, lat: 40.76429 },
-# 								{ lng: -73.95516,  lat: 40.764918 },
-# 								{ lng: -73.968441, lat: 40.770517 }]
-# coords_10065.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10065')
-# end
+coords_hells_kitchen = [{ lat: 40.772765, lng: -73.993680 },
+												{ lat: 40.761440, lng: -74.001876 },
+												{ lat: 40.756588, lng: -73.990289 },
+												{ lat: 40.767447, lng: -73.982438 }]
 
-# coords_10075 = [{ lng: -73.96323,  lat: 40.777677 },
-# 								{ lng: -73.965148, lat: 40.775045 },
-# 								{ lng: -73.961475, lat: 40.774324 },
-# 								{ lng: -73.953649, lat: 40.771024 },
-# 								{ lng: -73.951858, lat: 40.769441 },
-# 								{ lng: -73.951398, lat: 40.770073 },
-# 								{ lng: -73.949936, lat: 40.769469 },
-# 								{ lng: -73.949454, lat: 40.770085 },
-# 								{ lng: -73.948202, lat: 40.769544 },
-# 								{ lng: -73.947973, lat: 40.769512 },
-# 								{ lng: -73.947502, lat: 40.770121 },
-# 								{ lng: -73.94701,  lat: 40.770814 },
-# 								{ lng: -73.956798, lat: 40.774967 },
-# 								{ lng: -73.96323,  lat: 40.777677 }]
-# coords_10075.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10075')
-# end
+coords_hells_kitchen.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Hells Kitchen')
+end
 
-# coords_10280 = [{ lng: -74.018589, lat: 40.712201 },
-# 								{ lng: -74.0194854329352, lat: 40.706907749951 },
-# 								{ lng: -74.0168, lat: 40.701794 },
-# 								{ lng: -74.0142519151327, lat: 40.7003146857495 },
-# 								{ lng: -74.015678, lat: 40.701256 },
-# 								{ lng: -74.016628, lat: 40.704799 },
-# 								{ lng: -74.018019, lat: 40.705803 },
-# 								{ lng: -74.017575, lat: 40.70684 },
-# 								{ lng: -74.015956, lat: 40.70668 },
-# 								{ lng: -74.014697, lat: 40.709779 },
-# 								{ lng: -74.013597, lat: 40.713623 },
-# 								{ lng: -74.016198, lat: 40.714767 },
-# 								{ lng: -74.017368, lat: 40.713378 },
-# 								{ lng: -74.016508, lat: 40.713224 },
-# 								{ lng: -74.018589, lat: 40.712201 }]
-# coords_10280.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10280')
-# end
+coords_hudson_yard = [{ lat: 40.754417, lng: -74.006641 },
+											{ lat: 40.749662, lng: -73.995333 },
+											{ lat: 40.756578, lng: -73.990280 },
+											{ lat: 40.761332, lng: -74.001599 }]
 
-# coords_10128 = [{ lng: -73.9670849, lat: 40.7845059 },
-# 							 { lng: -73.9635658, lat: 40.7830111 },
-# 							 { lng: -73.9631367, lat: 40.7817113 },
-# 							 { lng: -73.9618063, lat: 40.7812238 },
-# 							 { lng: -73.9606905, lat: 40.7810614 },
-# 							 { lng: -73.9603472, lat: 40.7815488 },
-# 							 { lng: -73.9586306, lat: 40.7808014 },
-# 							 { lng: -73.9581156, lat: 40.7816463 },
-# 							 { lng: -73.9577293, lat: 40.7821987 },
-# 							 { lng: -73.9544678, lat: 40.7807364 },
-# 							 { lng: -73.9549398, lat: 40.7800215 },
-# 							 { lng: -73.9512062, lat: 40.7785266 },
-# 							 { lng: -73.9507771, lat: 40.7791766 },
-# 							 { lng: -73.9460993, lat: 40.7771942 },
-# 							 { lng: -73.9442968, lat: 40.7764143 },
-# 							 { lng: -73.9446831, lat: 40.7757643 },
-# 							 { lng: -73.9442539, lat: 40.7756668 },
-# 							 { lng: -73.9429235, lat: 40.7774867 },
-# 							 { lng: -73.9424086, lat: 40.7778442 },
-# 							 { lng: -73.9426231, lat: 40.7786241 },
-# 							 { lng: -73.9423227, lat: 40.7795015 },
-# 							 { lng: -73.943224,  lat: 40.7799565 },
-# 							 { lng: -73.9436102, lat: 40.7815488 },
-# 							 { lng: -73.9432669, lat: 40.7827511 },
-# 							 { lng: -73.9472151, lat: 40.7842784 },
-# 							 { lng: -73.9464855, lat: 40.7850258 },
-# 							 { lng: -73.9503908, lat: 40.786553 },
-# 							 { lng: -73.9509487, lat: 40.7856756 },
-# 							 { lng: -73.9560986, lat: 40.7880801 },
-# 							 { lng: -73.9567423, lat: 40.7891524 },
-# 							 { lng: -73.9588881, lat: 40.7900946 },
-# 							 { lng: -73.9601326, lat: 40.7903546 },
-# 							 { lng: -73.9618063, lat: 40.7913943 },
-# 							 { lng: -73.9631796, lat: 40.7918492 },
-# 							 { lng: -73.9646816, lat: 40.7901271 },
-# 							 { lng: -73.9647245, lat: 40.7892174 },
-# 							 { lng: -73.9657974, lat: 40.7888275 },{ lng: -73.9669132, lat: 40.7879177 },{ lng: -73.9676857, lat: 40.786553 },{ lng: -73.9679003, lat: 40.7855457 },{ lng: -73.9670849, lat: 40.7845059 }]
-# coords_10128.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10128')
-# end
+coords_hudson_yard.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Hudson Yards')
+end
+

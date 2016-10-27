@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001063210) do
+ActiveRecord::Schema.define(version: 20161027052924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20161001063210) do
     t.boolean  "roof_deck",               default: false
     t.boolean  "swimming_pool",           default: false
     t.boolean  "walk_up",                 default: false
+    t.string   "neighborhood"
   end
 
   add_index "buildings", ["building_name"], name: "index_buildings_on_building_name", using: :btree
@@ -71,8 +72,9 @@ ActiveRecord::Schema.define(version: 20161001063210) do
     t.string   "zipcode"
     t.string   "state"
     t.string   "city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "neighborhood"
   end
 
   create_table "overall_averages", force: :cascade do |t|

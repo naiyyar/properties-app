@@ -13,8 +13,12 @@ class Building < ActiveRecord::Base
   has_attached_file :photo, styles: { large: "600x600>", medium: "400x400>", thumb: "100x100>", small: "32x32>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 
-  geocoded_by :building_street_address
+  geocoded_by :street_address
   after_validation :geocode
+
+  #
+  after_create :save_neighborhood
+  after_update :update_neighborhood
 
   include PgSearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
@@ -38,6 +42,10 @@ class Building < ActiveRecord::Base
 
   def zipcode=(val)
      write_attribute(:zipcode, val.gsub(/\s+/,''))
+  end
+
+  def street_address
+    [building_street_address, city, state].compact.join(', ')
   end
 
   def self.text_search(term)
@@ -65,6 +73,45 @@ class Building < ActiveRecord::Base
       count = count + unit.reviews.count
     end
     return count
+  end
+
+  private
+
+  def neighborhoods
+    search = Geocoder.search([building.latitude, building.longitude])
+    neighborhoods = nil
+    if search.present?
+      neighborhood = search.first.address_components[2]['long_name']
+      if neighborhood == 'Midtown'
+        address = self.building_street_address
+        east_side = address.scan(Regexp.union(/E/,/East/,/east/))
+        west_side = address.scan(Regexp.union(/W/,/West/,/west/))
+        south_side = address.scan(Regexp.union(/S/,/South/,/south/))
+        if east_side.present?
+          neighborhoods = 'Midtown East'
+        elsif west_side.present?
+          neighborhoods = 'Midtown West'
+        elsif south_side.present?
+          neighborhoods = 'Midtown South'
+        else
+          neighborhoods = 'Midtown North'
+        end
+      else
+        neighborhoods = neighborhood
+      end
+    end
+    return neighborhoods
+  end
+
+  def save_neighborhood
+    if neighborhoods.present?
+      self.neighborhood = neighborhoods
+      self.save
+    end
+  end
+
+  def update_neighborhood
+    self.update_columns(neighborhood: neighborhoods) if neighborhoods.present? and self.neighborhood.blank?
   end
 
 end

@@ -130,7 +130,7 @@ class BuildingsController < ApplicationController
 
 
   def building_params
-    params.require(:building).permit(:building_name, :building_street_address, :photo, :latitude, :longitude,:city,:state,:phone, :zipcode, :address2,:weburl,
+    params.require(:building).permit(:neighborhood,:building_name, :building_street_address, :photo, :latitude, :longitude,:city,:state,:phone, :zipcode, :address2,:weburl,
                                       :pets_allowed,:laundry_facility,:parking,:doorman,:elevator,:description,
                                       :deck,:elevator,:garage,:gym,:live_in_super,:pets_allowed_cats,:pets_allowed_dogs,:roof_deck,:swimming_pool,:walk_up,
                                       uploads_attributes:[:id,:image,:imageable_id,:imageable_type], 
