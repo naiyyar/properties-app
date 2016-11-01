@@ -31,7 +31,6 @@ class Building < ActiveRecord::Base
                   :threshold => 0.1
                 }
               }
-  
   pg_search_scope :search_by_street_address, against: [:building_street_address],
     :using => { :trigram => { :threshold => 0.1 } }
 
@@ -81,25 +80,11 @@ class Building < ActiveRecord::Base
   private
 
   def neighborhoods
-    search = Geocoder.search([building.latitude, building.longitude])
+    search = Geocoder.search([latitude, longitude])
     neighborhoods = nil
     if search.present?
       neighborhood = search.first.address_components[2]['long_name']
-      if neighborhood == 'Midtown'
-        address = self.building_street_address
-        east_side = address.scan(Regexp.union(/E/,/East/,/east/))
-        west_side = address.scan(Regexp.union(/W/,/West/,/west/))
-        south_side = address.scan(Regexp.union(/S/,/South/,/south/))
-        if east_side.present?
-          neighborhoods = 'Midtown East'
-        elsif west_side.present?
-          neighborhoods = 'Midtown West'
-        elsif south_side.present?
-          neighborhoods = 'Midtown South'
-        else
-          neighborhoods = 'Midtown North'
-        end
-      else
+      if neighborhood.present?
         neighborhoods = neighborhood
       end
     end
