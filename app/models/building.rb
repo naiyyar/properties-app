@@ -40,7 +40,6 @@ class Building < ActiveRecord::Base
   pg_search_scope :text_search_by_neighborhood, against: [:neighborhood],
     :using => { :trigram => { :threshold => 0.1 } }
 
-  DISTANCE = 8
 
   def zipcode=(val)
      write_attribute(:zipcode, val.gsub(/\s+/,''))
@@ -60,6 +59,10 @@ class Building < ActiveRecord::Base
 
   def self.text_search_by_zipcode search_term
     where('zipcode @@ :q', q: search_term)
+  end
+
+  def self.buildings_in_neighborhood neighborhoods
+    where("neighborhood @@ :q" , q: "%#{neighborhoods}").to_a.uniq(&:building_street_address)
   end
 
   def fetch_or_create_unit params
