@@ -28,6 +28,7 @@ app.apartments.prototype = {
   _select: function(e, ui) {
     this._input.val(ui.item.search_term);
     $("#term").val(ui.item.term)
+    $("#neighborhoods").val(ui.item.neighborhoods)
     return false;
   }
 

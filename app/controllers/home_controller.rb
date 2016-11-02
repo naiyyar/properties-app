@@ -7,6 +7,12 @@ class HomeController < ApplicationController
       if params[:term].present?
         building = Building.where(building_street_address: params[:term])
         redirect_to building_path(building.first) if building.present?
+      elsif params[:neighborhoods].present?
+        @boundary_coords = []
+        neighborhoods = params['apt-search-txt'].split(',')[0]
+        @buildings = Building.where(neighborhood: neighborhoods).to_a.uniq(&:building_street_address)
+        @boundary_coords << Gcoordinate.where(neighborhood: neighborhoods).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
+        @zoom = 14
       else
         search = Geocoder.search(params['apt-search-txt'])
         coordinates = Geocoder.coordinates(params['apt-search-txt'])
@@ -26,15 +32,6 @@ class HomeController < ApplicationController
               zipcode = params['apt-search-txt']
             end
             @boundary_coords << Gcoordinate.where(zipcode: zipcode).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-            @zoom = 14
-          elsif search.first.types[0] == 'neighborhood'
-            if coordinates.present?
-              @lat = coordinates[0]
-              @lng = coordinates[1]
-            end
-            neighborhoods = params['apt-search-txt'].split(',')[0]
-            @buildings = Building.where(neighborhood: neighborhoods).to_a.uniq(&:building_street_address)
-            @boundary_coords << Gcoordinate.where(neighborhood: neighborhoods).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
             @zoom = 14
           else
             @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}

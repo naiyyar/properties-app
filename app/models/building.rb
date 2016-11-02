@@ -77,15 +77,37 @@ class Building < ActiveRecord::Base
     return count
   end
 
+  def predifined_neighborhoods
+    [ 'Midtown Manhattan',
+      'Midtown East',
+      'Kips Bay',
+      'Murray Hill',
+      'Sutton Place',
+      'Turtle Bay',
+      'Midtown North',
+      'Midtown South',
+      'Midtown West',
+      "Hell's Kitchen",
+      'Hudson Yards'
+    ]
+  end
+
   private
 
   def neighborhoods
     search = Geocoder.search([latitude, longitude])
     neighborhoods = nil
     if search.present?
-      neighborhood = search.first.address_components[2]['long_name']
-      if neighborhood.present?
-        neighborhoods = neighborhood
+      search.each do |geo_result|
+        neighborhood = geo_result.address_components_of_type(:neighborhood).first['long_name']
+        if predifined_neighborhoods.include? neighborhood
+          neighborhoods = neighborhood
+        end
+      end
+      if neighborhoods.present?
+        neighborhoods = neighborhoods
+      else
+        neighborhoods = search.first.address_components_of_type(:neighborhood).first['long_name']
       end
     end
     return neighborhoods
@@ -99,7 +121,7 @@ class Building < ActiveRecord::Base
   end
 
   def update_neighborhood
-    self.update_columns(neighborhood: neighborhoods) if neighborhoods.present? and self.neighborhood.blank?
+    self.update_columns(neighborhood: neighborhoods) if neighborhoods.present?
   end
 
 end

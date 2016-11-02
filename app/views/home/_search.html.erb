@@ -1,7 +1,8 @@
 <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search' do %>
 	<div class="col-lg-6 buildings-search">
     <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: "form-control", placeholder: 'Neighborhood, Zip Code, Address, Building name' %>
-    <%= hidden_field_tag 'term', nil, class: "form-control", placeholder: 'Search' %>
+    <%= hidden_field_tag 'term', nil %>
+    <%= hidden_field_tag 'neighborhoods', nil %>
     <div class="results" id="apt-search-results"></div>
   </div>
   <div class="col-lg-4">
