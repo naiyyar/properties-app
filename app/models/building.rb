@@ -102,9 +102,12 @@ class Building < ActiveRecord::Base
     neighborhoods = nil
     if search.present?
       search.each do |geo_result|
-        neighborhood = geo_result.address_components_of_type(:neighborhood).first['long_name']
-        if predifined_neighborhoods.include? neighborhood
-          neighborhoods = neighborhood
+        neighborhood = geo_result.address_components_of_type(:neighborhood)
+        if neighborhood.present?
+          neighborhood = neighborhood.first['long_name']
+          if predifined_neighborhoods.include? neighborhood
+            neighborhoods = neighborhood
+          end
         end
       end
       if neighborhoods.present?

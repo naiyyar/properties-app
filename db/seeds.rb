@@ -41,10 +41,17 @@
 # 											{lat: 40.747777, lng: -73.982921 },
 # 											{lat: 40.748793, lng: -73.969883 },
 # 											{lat: 40.752810, lng: -73.979289 }]
+Gcoordinate.where(neighborhood: 'Murray Hill').destroy_all
 
-# coords_murray_hill.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Murray Hill')
-# end
+coords_murray_hill = [{ lng: -73.9828992, lat: 40.7477934 }, 
+											{ lng: -73.973608,  lat: 40.7437293 }, 
+											{ lng: -73.9699388, lat: 40.7488663 },
+											{ lng: -73.9792299, lat: 40.7528489 },
+											{ lng: -73.9828992, lat: 40.7477934 }]											
+
+coords_murray_hill.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Murray Hill')
+end
 
 # coords_sutton_place = [{ lat: 40.758385, lng: -73.971005 },
 # 											 { lat: 40.762213, lng: -73.968183 },
@@ -91,15 +98,15 @@
 # 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown West')
 # end
 
-Gcoordinate.where(neighborhood: 'Hells Kitchen').destroy_all
-coords_hells_kitchen = [{ lat: 40.772765, lng: -73.993680 },
-												{ lat: 40.761440, lng: -74.001876 },
-												{ lat: 40.756588, lng: -73.990289 },
-												{ lat: 40.767447, lng: -73.982438 }]
+#Gcoordinate.where(neighborhood: 'Hells Kitchen').destroy_all
+# coords_hells_kitchen = [{ lat: 40.772765, lng: -73.993680 },
+# 												{ lat: 40.761440, lng: -74.001876 },
+# 												{ lat: 40.756588, lng: -73.990289 },
+# 												{ lat: 40.767447, lng: -73.982438 }]
 
-coords_hells_kitchen.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: "Hell's Kitchen")
-end
+# coords_hells_kitchen.each do |coord|
+# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: "Hell's Kitchen")
+# end
 
 # coords_hudson_yard = [{ lat: 40.754417, lng: -74.006641 },
 # 											{ lat: 40.749662, lng: -73.995333 },
