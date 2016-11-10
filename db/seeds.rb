@@ -32,10 +32,19 @@
 # 										{ lat: 40.742979, lng: -73.971755 },
 # 										{ lat: 40.739500, lng: -73.984736 },
 # 										{ lat: 40.734931, lng: -73.973428 }]
+Gcoordinate.where(neighborhood: 'Kips Bay').destroy_all
+coords_kips_bay = [	{ lng: -73.984766, 	lat: 40.7395185 },
+										{ lng: -73.9737368, lat: 40.7347385 },
+										{ lng: -73.9724064, lat: 40.7357791 },
+										{ lng: -73.9727068, lat: 40.7391609 },
+										{ lng: -73.9716768, lat: 40.7429977 },
+										{ lng: -73.9796591, lat: 40.7464116 },
+										{ lng: -73.984766,  lat: 40.7395185 }
+									]
 
-# coords_kips_bay.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Kips Bay')
-# end
+coords_kips_bay.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Kips Bay')
+end
 
 # coords_murray_hill = [{lat: 40.743761, lng: -73.973522 },
 # 											{lat: 40.747777, lng: -73.982921 },
