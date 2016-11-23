@@ -59,7 +59,7 @@ class HomeController < ApplicationController
             	@result_type = 'address'
             else
               # Search with Neighborhood
-              @buildings = Building.text_search_by_neighborhood(params[:term])
+              @buildings = Building.text_search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
             	if @buildings.present?
                 @result_type = 'neighborhood'
               else
