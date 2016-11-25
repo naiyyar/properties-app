@@ -3,7 +3,7 @@ case @result_type
     json.array! @buildings do |building|
       json.id building.id
       json.search_term "#{building.building_name} - #{building.building_street_address}, #{building.city}, #{building.state}, #{building.zipcode}"
-      json.term "#{building.building_name}"
+      json.term "#{building.building_street_address}"
     end
   when 'cities'
     json.array! @buildings do |building|
