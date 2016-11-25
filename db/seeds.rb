@@ -10,119 +10,69 @@
 # user = User.find(2)
 # user.add_role :admin
 
-# coords_midtown_manhattan = [{ lat: 40.772885, lng: -73.993642 },
-# 														{ lat: 40.742447, lng: -74.008984 },
-# 														{ lat: 40.726891, lng: -73.971881 },
-# 														{ lat: 40.758343, lng: -73.958909 }]
-
-# coords_midtown_manhattan.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown Manhattan')
-# end
-
-# coords_midtown_east = [ { lat: 40.753494, lng: -73.980858 },
-# 												{ lat: 40.764173, lng: -73.973112 },
-# 												{ lat: 40.758391, lng: -73.959106 },
-# 												{ lat: 40.748166, lng: -73.968096 }]
-
-# coords_midtown_east.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown East')
-# end
-
-# coords_kips_bay = [ { lat: 40.746376, lng: -73.979737 },
-# 										{ lat: 40.742979, lng: -73.971755 },
-# 										{ lat: 40.739500, lng: -73.984736 },
-# 										{ lat: 40.734931, lng: -73.973428 }]
-Gcoordinate.where(neighborhood: 'Kips Bay').destroy_all
-coords_kips_bay = [	{ lng: -73.984766, 	lat: 40.7395185 },
-										{ lng: -73.9737368, lat: 40.7347385 },
-										{ lng: -73.9724064, lat: 40.7357791 },
-										{ lng: -73.9727068, lat: 40.7391609 },
-										{ lng: -73.9716768, lat: 40.7429977 },
-										{ lng: -73.9796591, lat: 40.7464116 },
-										{ lng: -73.984766,  lat: 40.7395185 }
-									]
-
-coords_kips_bay.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Kips Bay')
+Gcoordinate.where(zipcode: ['10004','10023','10024','10025']).destroy_all
+coords_10004 = [	{ lng: -74.0155363, lat: 40.7004062 },
+									{ lng: -74.0152144, lat: 40.7002598 },
+									{ lng: -74.0148711, lat: 40.7001785 },
+									{ lng: -74.0096569, lat: 40.7001947 },
+									{ lng: -74.0104294, lat: 40.7012033 },
+									{ lng: -74.0102577, lat: 40.7012847 },
+									{ lng: -74.0094209, lat: 40.7002761 },
+									{ lng: -74.009335,  lat: 40.7005364 },
+									{ lng: -74.0098715, lat: 40.7014311 },
+									{ lng: -74.0076828, lat: 40.7025047 },
+									{ lng: -74.0066314, lat: 40.7015775 },
+									{ lng: -74.0062881, lat: 40.7017401 },
+									{ lng: -74.0076828, lat: 40.7030253 },
+									{ lng: -74.0080261, lat: 40.7032367 },
+									{ lng: -74.0084982, lat: 40.7036597 },
+									{ lng: -74.0083265, lat: 40.7037898 },
+									{ lng: -74.0087128, lat: 40.7041639 },
+									{ lng: -74.0089488, lat: 40.7040989 },
+									{ lng: -74.0094638, lat: 40.7045218 },
+									{ lng: -74.0088415, lat: 40.7048309 },
+									{ lng: -74.0088844, lat: 40.7049447 },
+									{ lng: -74.0096354, lat: 40.7047495 },
+									{ lng: -74.0099788, lat: 40.7051725 },
+									{ lng: -74.0115666, lat: 40.7049447 },
+									{ lng: -74.0111589, lat: 40.7062949 },
+									{ lng: -74.0124893, lat: 40.7068154 },
+									{ lng: -74.013176,  lat: 40.7058557 },
+									{ lng: -74.0142488, lat: 40.7063111 },
+									{ lng: -74.0143776, lat: 40.7060834 },
+									{ lng: -74.0151501, lat: 40.7062623 },
+									{ lng: -74.0151072, lat: 40.7064575 },
+									{ lng: -74.0158367, lat: 40.706669  },
+									{ lng: -74.0158796, lat: 40.7064738 },
+									{ lng: -74.0166521, lat: 40.7064413 },
+									{ lng: -74.0175748, lat: 40.7068642 },
+									{ lng: -74.0179396, lat: 40.706181  },
+									{ lng: -74.0180254, lat: 40.7058231 },
+									{ lng: -74.0179181, lat: 40.7053189 },
+									{ lng: -74.0174246, lat: 40.7049447 },
+									{ lng: -74.0166092, lat: 40.7046357 },
+									{ lng: -74.0171885, lat: 40.7043429 },
+									{ lng: -74.0174031, lat: 40.7042453 },
+									{ lng: -74.0180898, lat: 40.7034157 },
+									{ lng: -74.0176606, lat: 40.7020167 },
+									{ lng: -74.0155363, lat: 40.7004062 }]
+ 
+coords_10004.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10004')
 end
 
-# coords_murray_hill = [{lat: 40.743761, lng: -73.973522 },
-# 											{lat: 40.747777, lng: -73.982921 },
-# 											{lat: 40.748793, lng: -73.969883 },
-# 											{lat: 40.752810, lng: -73.979289 }]
-Gcoordinate.where(neighborhood: 'Murray Hill').destroy_all
-
-coords_murray_hill = [{ lng: -73.9828992, lat: 40.7477934 }, 
-											{ lng: -73.973608,  lat: 40.7437293 }, 
-											{ lng: -73.9699388, lat: 40.7488663 },
-											{ lng: -73.9792299, lat: 40.7528489 },
-											{ lng: -73.9828992, lat: 40.7477934 }]											
-
-coords_murray_hill.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Murray Hill')
+coords_10023 = [{ lng: -73.988774, lat: 40.776673 },{ lng: -73.989994, lat: 40.772242 },{ lng: -73.984769, lat: 40.769218 },{ lng: -73.982067, lat: 40.768481 },{lng: -73.981648, lat: 40.768436 },{ lng: -73.974067, lat: 40.778805 },{ lng: -73.977562, lat: 40.780909 },{ lng: -73.981064, lat: 40.781751 },{ lng: -73.982126, lat: 40.783027 },{ lng: -73.984452, lat: 40.783192 },{ lng: -73.985679, lat: 40.780313 },{ lng: -73.986544, lat: 40.780658 },{ lng: -73.988774, lat: 40.776673 }]
+coords_10023.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10023')
 end
 
-# coords_sutton_place = [{ lat: 40.758385, lng: -73.971005 },
-# 											 { lat: 40.762213, lng: -73.968183 },
-# 											 { lat: 40.758347, lng: -73.958982 }, 
-# 											 { lat: 40.758347, lng: -73.958982 }]
+coords_10024 = [{ lng: -73.98814, lat: 40.781409 },{ lng: -73.987308, lat: 40.781041 },{ lng: -73.986544, lat: 40.780658 },{ lng: -73.985679, lat: 40.780313 },{lng: -73.984452, lat: 40.783192 },{ lng: -73.982126, lat: 40.783027 },{ lng: -73.981064, lat: 40.781751 },{ lng: -73.977562, lat: 40.780909 },{ lng: -73.974067, lat: 40.778805 },{ lng: -73.96701, lat: 40.788476 },{ lng: -73.977092, lat: 40.792724 },{ lng: -73.976795, lat: 40.794315 },{ lng: -73.974256, lat: 40.796588 },{ lng: -73.973736, lat: 40.798608 },{ lng: -73.970273, lat: 40.80236 },{ lng: -73.966518, lat: 40.808226 },{ lng: -73.9659, lat: 40.808806 },{ lng: -73.964424, lat: 40.810755 },{ lng: -73.964019, lat: 40.811331 },{ lng: -73.961398, lat: 40.815146 },{ lng: -73.961276, lat: 40.816607 },{ lng: -73.960687, lat: 40.817511 },{ lng: -73.962067, lat: 40.818099 },{ lng: -73.964167, lat: 40.81579 },{ lng: -73.972899, lat: 40.803383 },{ lng: -73.98814, lat: 40.781409 } ]
+coords_10024.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10024')
+end
 
-# coords_sutton_place.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Sutton Place')
-# end
-
-# coords_turtle_bay = [ { lat: 40.751487, lng: -73.976041 },
-# 											{ lat: 40.748114, lng: -73.968220 },
-# 											{ lat: 40.754754, lng: -73.962223 },
-# 											{ lat: 40.758370, lng: -73.971010 }]
-
-# coords_turtle_bay.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Turtle Bay')
-# end
-
-# coords_midtown_north = [{ lat: 40.757208, lng: -73.989783 },
-# 												{ lat: 40.751474, lng: -73.976142 },
-# 												{ lat: 40.762226, lng: -73.968203 },
-# 												{ lat: 40.768060, lng: -73.981925 }]
-
-# coords_midtown_north.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown North')
-# end
-
-# coords_midtown_south = [{ lat: 40.749669, lng: -73.995295 },
-# 												{ lat: 40.743857, lng: -73.981584 },
-# 												{ lat: 40.751416, lng: -73.976144 },
-# 												{ lat: 40.757194, lng: -73.989791 }]
-
-# coords_midtown_south.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown South')
-# end
-
-# coords_midtown_west = [ { lat: 40.757151, lng: -74.004719 },
-# 												{ lat: 40.772798, lng: -73.993723 },
-# 												{ lat: 40.767435, lng: -73.982479 },
-# 												{ lat: 40.752230, lng: -73.993486 }]
-
-# coords_midtown_west.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Midtown West')
-# end
-
-#Gcoordinate.where(neighborhood: 'Hells Kitchen').destroy_all
-# coords_hells_kitchen = [{ lat: 40.772765, lng: -73.993680 },
-# 												{ lat: 40.761440, lng: -74.001876 },
-# 												{ lat: 40.756588, lng: -73.990289 },
-# 												{ lat: 40.767447, lng: -73.982438 }]
-
-# coords_hells_kitchen.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: "Hell's Kitchen")
-# end
-
-# coords_hudson_yard = [{ lat: 40.754417, lng: -74.006641 },
-# 											{ lat: 40.749662, lng: -73.995333 },
-# 											{ lat: 40.756578, lng: -73.990280 },
-# 											{ lat: 40.761332, lng: -74.001599 }]
-
-# coords_hudson_yard.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Hudson Yards')
-# end
+coords_10025 = [{ lng: -73.976795, lat: 40.794315 },{ lng: -73.977092, lat: 40.792724 },{ lng: -73.96701, lat: 40.788476 },{ lng: -73.960037, lat: 40.798038 },{lng: -73.958195, lat: 40.800553 },{ lng: -73.959647, lat: 40.801156 },{ lng: -73.958249, lat: 40.803107 },{ lng: -73.958182, lat: 40.805597 },{ lng: -73.956806, lat: 40.807546 },{ lng: -73.954966, lat: 40.810064 },{ lng: -73.957808, lat: 40.811264 },{ lng: -73.957091, lat: 40.81008 },{ lng: -73.959826, lat: 40.805435 },{ lng: -73.962008, lat: 40.805509 },{ lng: -73.964848, lat: 40.806707 },{ lng: -73.963903, lat: 40.808004 },{ lng: -73.9659, lat: 40.808806 },{ lng: -73.966518, lat: 40.808226 },{ lng: -73.970273, lat: 40.80236 },{ lng: -73.973736, lat: 40.798608 },{ lng: -73.974256, lat: 40.796588 },{ lng: -73.976795, lat: 40.794315 }]
+coords_10025.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10025')
+end
 
