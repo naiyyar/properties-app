@@ -113,7 +113,12 @@ class Building < ActiveRecord::Base
       if neighborhoods.present?
         neighborhoods = neighborhoods
       else
-        neighborhoods = search.first.address_components_of_type(:neighborhood).first['long_name']
+        neighborhoods = search.first.address_components_of_type(:neighborhood)
+        if neighborhoods.present?
+          neighborhoods = neighborhoods.first['long_name']
+        else
+          neighborhoods = search.first.address_components_of_type(:locality).first['long_name']
+        end
       end
     end
     return neighborhoods

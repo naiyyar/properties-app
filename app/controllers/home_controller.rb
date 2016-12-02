@@ -17,7 +17,6 @@ class HomeController < ApplicationController
         @zoom = 14
       else
         search = Geocoder.search(params['apt-search-txt'])
-        #@buildings = Building.near(params['apt-search-txt'], Building::DISTANCE)
         if search.present?
            @boundary_coords = []
           if search.first.types[0] == 'postal_code'

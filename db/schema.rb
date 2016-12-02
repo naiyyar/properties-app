@@ -44,10 +44,10 @@ ActiveRecord::Schema.define(version: 20161027052924) do
     t.string   "city"
     t.string   "phone"
     t.string   "state"
-    t.text     "description"
     t.boolean  "laundry_facility"
     t.boolean  "parking"
     t.boolean  "doorman"
+    t.text     "description"
     t.boolean  "deck",                    default: false
     t.integer  "elevator"
     t.boolean  "garage",                  default: false
