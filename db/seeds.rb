@@ -117,13 +117,33 @@ roosevelt.each do |coord|
 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Roosevelt Island')
 end
 
-stuyevesant = [ {lng: -73.9825988, lat: 40.731389 },
-				{lng: -73.9757323, lat: 40.7284621 },
-				{lng: -73.9740372, lat: 40.7309012 },
-				{lng: -73.9745951, lat: 40.7327711 },
-				{lng: -73.9799166, lat: 40.7350637 },
-				{lng: -73.9825988, lat: 40.731389 }]
-stuyevesant.each do |coord|
+stuyvesant = [  { lng: -73.7828064, lat: 42.3128621 },
+				{ lng: -73.7677002, lat: 42.308292 },
+				{ lng: -73.7580872, lat: 42.3164163 },
+				{ lng: -73.7512207, lat: 42.3113388 },
+				{ lng: -73.7464142, lat: 42.3184472 },
+				{ lng: -73.7450409, lat: 42.334692 },
+				{ lng: -73.7450409, lat: 42.3392601 },
+				{ lng: -73.7422943, lat: 42.3448428 },
+				{ lng: -73.7340546, lat: 42.3473803 },
+				{ lng: -73.7148285, lat: 42.3702128 },
+				{ lng: -73.7477875, lat: 42.3818796 },
+				{ lng: -73.7374878, lat: 42.4062207 },
+				{ lng: -73.7223816, lat: 42.4117975 },
+				{ lng: -73.7347412, lat: 42.4199083 },
+				{ lng: -73.7210083, lat: 42.4234565 },
+				{ lng: -73.719635,  lat: 42.4351134 },
+				{ lng: -73.7436676, lat: 42.4361269 },
+				{ lng: -73.7477875, lat: 42.4599404 },
+				{ lng: -73.7814331, lat: 42.4619666 },
+				{ lng: -73.7793732, lat: 42.4244702 },
+				{ lng: -73.7848663, lat: 42.3960797 },
+				{ lng: -73.7931061, lat: 42.3788363 },
+				{ lng: -73.7917328, lat: 42.3549921 },
+				{ lng: -73.7841797, lat: 42.3377374 },
+				{ lng: -73.7828064, lat: 42.3128621 }
+			  ]
+stuyvesant.each do |coord|
 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Stuyvesant')
 end
 
