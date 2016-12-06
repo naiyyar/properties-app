@@ -67,61 +67,28 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-	lat = <%= raw @lat.to_json %>
-	lng = <%= raw @lng.to_json %>
-	zoom = <%= @zoom %>
-	//src = "https://developers.google.com/maps/documentation/javascript/examples/kml/westcampus.kml"
-	// function initMap() {
-	// 	src = "https://developers.google.com/maps/documentation/javascript/examples/kml/westcampus.kml"
- //        map = new google.maps.Map(document.getElementById('map'), {
- //          center: new google.maps.LatLng(lng, lat),
- //          zoom: 2,
- //          mapTypeId: 'terrain'
- //        });
- //        loadKmlLayer(src, map);
- //    }
-
- //    function loadKmlLayer(src, map) {
-	//     var ctaLayer = new google.maps.KmlLayer({
- //            //url: 'https://www.dropbox.com/s/0grhlim3q4572jp/ROU_adm2%20-%20Copy.kml?dl=1'
- //            //url: 'https://www.dropbox.com/s/oheen11js2srxsz/rou.kml?dl=1'
- //            //url: 'https://www.dropbox.com/s/xnpmp4nqq3bz3w0/10040_1.kml?dl=1'
- //            //url: 'https://www.dropbox.com/s/1ovesqadpzmclch/10040.kml?dl=1'
- //            url: 'https://www.dropbox.com/s/9l4cjqm5rwlxmsv/doc_10040.kml?dl=1'
-
-	// 	});
-	//     ctaLayer.setMap(map);
- //  	}
-
- //  	function loadScript(){
- //  		var script = document.createElement('script')
- //  		script.src = "//maps.google.com/maps/api/js?v=3.23&key=AIzaSyDZtWN-GlVsIjuQMP8xN5dit3PmlMb-qjA&callback=initMap"
- //  		document.body.appendChild(script)
- //  	}
-
- //  	window.onload = loadScript;
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+	var lat = <%= raw @lat.to_json %>
+	var lng = <%= raw @lng.to_json %>
+	var zoom = <%= raw @zoom.to_json %>
+	
+   	handler = Gmaps.build('Google');
+   	handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
   	
-  	json_array = <%= raw @hash.to_json %> ;
-    
-    markers = handler.addMarkers(json_array);
-    
-    _.each(json_array, function(json, index){
+	  	json_array = <%= raw @hash.to_json %> ;
+	    
+	    markers = handler.addMarkers(json_array);
+	    
+	    _.each(json_array, function(json, index){
 		  json.marker = markers[index];
-		  bindMarker(json.marker, markers, handler, lat, lng, <%= @zoom %>);
+		  bindMarker(json.marker, markers, handler, lat, lng, zoom );
 		});
-		
+			
 		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
-    	{ strokeColor: '#FF0000' }
-	  );
+	    	{ strokeColor: '#FF0000' }
+		);
 
-		// var kmls = handler.addKml(
-  //   		{ url: "https://www.dropbox.com/s/9l4cjqm5rwlxmsv/doc_10040.kml?dl=1" }
-  // 		);
-		
-	  createSidebar(json_array);
-  });
+	  	createSidebar(json_array);
+  	});
   
   
 </script>

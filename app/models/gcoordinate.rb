@@ -1,6 +1,10 @@
 class Gcoordinate < ActiveRecord::Base
 
 	def self.neighbohood_boundary_coordinates neighborhoods
-		where("neighborhood @@ :q" , q: "%#{neighborhoods}").map{|rec| { lat: rec.latitude, lng: rec.longitude} }
+		neighborhood_coords = self.where("neighborhood @@ :q", q: "%#{neighborhoods}")
+		if neighborhood_coords.blank?
+			neighborhood_coords = self.where("neighborhood = ?", neighborhoods)
+		end
+		return neighborhood_coords.map{|rec| { lat: rec.latitude, lng: rec.longitude} }
 	end
 end

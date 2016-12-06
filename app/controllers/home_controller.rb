@@ -10,9 +10,9 @@ class HomeController < ApplicationController
         redirect_to building_path(building.first) if building.present?
       elsif params[:neighborhoods].present?
         @boundary_coords = []
-        neighborhoods = params['apt-search-txt'].split(',')[0]
-        @buildings = Building.buildings_in_neighborhood(neighborhoods)
-        geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(neighborhoods)
+        #neighborhoods = params['apt-search-txt'].split(',')[0]
+        @buildings = Building.buildings_in_neighborhood(params[:neighborhoods])
+        geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
         @boundary_coords << geo_coordinates
         @zoom = 14
       else
