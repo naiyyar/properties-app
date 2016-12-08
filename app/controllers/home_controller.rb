@@ -14,7 +14,7 @@ class HomeController < ApplicationController
         @buildings = Building.buildings_in_neighborhood(params[:neighborhoods])
         geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
         @boundary_coords << geo_coordinates
-        @zoom = 13
+        @zoom = params[:neighborhoods] != 'Stuyvesant' ? 14 : 11
       else
         search = Geocoder.search(params['apt-search-txt'])
         if search.present?
