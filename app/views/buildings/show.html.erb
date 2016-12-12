@@ -2,7 +2,8 @@
   <div class="col-lg-6 col-md-6">
     <div class="address-area">
       <% if @building.building_name.present? %>
-        <h1><%= @building.building_name %> </h1>
+        <h1><%= @building.building_name %></h1>
+        <small><%=@building.neighborhood%></small>
       <%else%>
         <h1> <%= @building.building_street_address %></h1>
       <%end%>
