@@ -93,6 +93,30 @@ stuyvesant_town.each do |coord|
 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Stuyvesant Town')
 end
 
+east_harlem = [ { lng: -73.9414215, lat: 40.7821012 },
+				{ lng: -73.9300919, lat: 40.7932787 },
+				{ lng: -73.9282036, lat: 40.7966576 },
+				{ lng: -73.9292336, lat: 40.8026352 },
+				{ lng: -73.9342117, lat: 40.8096517 },
+				{ lng: -73.9340401, lat: 40.8184862 },
+				{ lng: -73.9551544, lat: 40.78873 },
+				{ lng: -73.9414215, lat: 40.7821012 }]
+east_harlem.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'East Harlem')
+end
+
+east_harlem_10035 = [	{ lng: -73.9312077, lat: 40.7939935 },
+						{ lng: -73.9300919, lat: 40.7932787 },
+						{ lng: -73.9282036, lat: 40.7966576 },
+						{ lng: -73.9292336, lat: 40.8026352 },
+						{ lng: -73.9342117, lat: 40.8096517 },
+						{ lng: -73.9340401, lat: 40.8184862 },
+						{ lng: -73.9464855, lat: 40.800686 },
+						{ lng: -73.9312077, lat: 40.7939935 }]
+east_harlem_10035.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], zipcode: '10035')
+end
+
 chinatown = [{ lng: -73.9987779, lat: 40.713533 },
 			{ lng: -73.9981556, lat: 40.7137281 },
 			{ lng: -73.9976406, lat: 40.7134516 },
