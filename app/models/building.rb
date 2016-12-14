@@ -81,20 +81,11 @@ class Building < ActiveRecord::Base
   end
 
   def predifined_neighborhoods
-    [ 'Midtown Manhattan',
-      'Midtown East',
-      'Kips Bay',
-      'Murray Hill',
-      'Sutton Place',
-      'Turtle Bay',
-      'Midtown North',
-      'Midtown South',
-      'Midtown West',
-      "Hell's Kitchen",
-      'Hudson Yards',
-      'Stuyvesant Town',
-      'West Village','Stuyevesant','Roosevelt Island','Chelsea','Greenwich Village','East Village', 'Gramercy Park', 'Battery Park City', 'Flatiron District', 'Financial District'
-    ]
+    arr = []
+    File.open("#{Rails.root}/public/neighborhoods.txt", "r").each_line do |line|
+      arr << line.split(/\n/)
+    end
+    return arr.flatten
   end
 
   private
