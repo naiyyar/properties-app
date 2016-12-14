@@ -92,6 +92,7 @@ class Building < ActiveRecord::Base
       'Midtown West',
       "Hell's Kitchen",
       'Hudson Yards',
+      'Stuyvesant Town',
       'West Village','Stuyevesant','Roosevelt Island','Chelsea','Greenwich Village','East Village', 'Gramercy Park', 'Battery Park City', 'Flatiron District', 'Financial District'
     ]
   end
