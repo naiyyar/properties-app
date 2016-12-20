@@ -31,6 +31,7 @@
 # Morningside Heights
 
 Gcoordinate.where(zipcode: ['10035']).destroy_all
+Gcoordinate.where(neighborhood: ['Soho']).destroy_all
 
 
 # gramercy = [{ lng: -73.9863539, lat: 40.7402339 },
@@ -84,22 +85,22 @@ Gcoordinate.where(zipcode: ['10035']).destroy_all
 # 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Lower East Side')
 # end
 
-# soho = [{ lng: -74.0018463, lat: 40.7194204 },
-# 		{ lng: -73.9999151, lat: 40.7180543 },
-# 		{ lng: -73.9976406, lat: 40.720819 },
-# 		{ lng: -73.9966536, lat: 40.7233885 },
-# 		{ lng: -73.9953232, lat: 40.7251123 },
-# 		{ lng: -73.9967823, lat: 40.725405 },
-# 		{ lng: -74.0026617, lat: 40.728397 },
-# 		{ lng: -74.0092707, lat: 40.7290149 },
-# 		{ lng: -74.0094852, lat: 40.7278116 },
-# 		{ lng: -74.0150213, lat: 40.7282995 },
-# 		{ lng: -74.0154076, lat: 40.7263481 },
-# 		{ lng: -74.0109444, lat: 40.7257952 },
-# 		{ lng: -74.0018463, lat: 40.7194204 }]
-# soho.each do |coord|
-# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Soho')
-# end
+soho = [{ lng: -74.0018463, lat: 40.7194204 },
+		{ lng: -73.9999151, lat: 40.7180543 },
+		{ lng: -73.9976406, lat: 40.720819 },
+		{ lng: -73.9966536, lat: 40.7233885 },
+		{ lng: -73.9953232, lat: 40.7251123 },
+		{ lng: -73.9967823, lat: 40.725405 },
+		{ lng: -74.0026617, lat: 40.728397 },
+		{ lng: -74.0092707, lat: 40.7290149 },
+		{ lng: -74.0094852, lat: 40.7278116 },
+		{ lng: -74.0150213, lat: 40.7282995 },
+		{ lng: -74.0154076, lat: 40.7263481 },
+		{ lng: -74.0109444, lat: 40.7257952 },
+		{ lng: -74.0018463, lat: 40.7194204 }]
+soho.each do |coord|
+	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'SoHo')
+end
 # stuyvesant_town = [ { lng: -73.9799595, lat: 40.7349661 },
 # 					{ lng: -73.9825988, lat: 40.7313402 },
 # 					{ lng: -73.9757109, lat: 40.7283808 },

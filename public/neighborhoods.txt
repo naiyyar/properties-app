@@ -15,6 +15,7 @@ West Village
 Stuyevesant
 Roosevelt Island
 Chelsea
+SoHo
 Greenwich Village
 East Village
 Gramercy Park
@@ -27,6 +28,8 @@ South Harlem
 East Harlem
 Hamilton Heights
 Inwood
+Tribeca
+Lower East Side
 Manhattanville
 Marble Hill
 Washington Heights
