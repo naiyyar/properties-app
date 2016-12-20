@@ -88,12 +88,17 @@ class Building < ActiveRecord::Base
     return arr.flatten
   end
 
+  def midtown_neighborhoods
+    ['Midtown East','Midtown North','Midtown South','Midtown West']
+  end
+
   private
 
   def neighborhoods
     search = Geocoder.search([latitude, longitude])
     neighborhoods = nil
     if search.present?
+      #search for other neighborhoods except midtown
       search.each do |geo_result|
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
@@ -103,6 +108,19 @@ class Building < ActiveRecord::Base
           end
         end
       end
+      #search for midtown neighborhoods if nothing found for others
+      if neighborhoods.blank?
+        search.each do |geo_result|
+        neighborhood = geo_result.address_components_of_type(:neighborhood)
+        if neighborhood.present?
+          neighborhood = neighborhood.first['long_name']
+          if midtown_neighborhoods.include? neighborhood
+            neighborhoods = neighborhood
+          end
+        end
+      end
+      end
+      
       if neighborhoods.present?
         neighborhoods = neighborhoods
       else

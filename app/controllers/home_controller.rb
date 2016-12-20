@@ -10,7 +10,6 @@ class HomeController < ApplicationController
         redirect_to building_path(building.first) if building.present?
       elsif params[:neighborhoods].present?
         @boundary_coords = []
-        #neighborhoods = params['apt-search-txt'].split(',')[0]
         @buildings = Building.buildings_in_neighborhood(params[:neighborhoods])
         geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
         @boundary_coords << geo_coordinates
@@ -40,12 +39,11 @@ class HomeController < ApplicationController
         @lng = coordinates[1]
       end
     else
-     # search = Geocoder.search(params[:term]).first
       if params[:term].present?
-    		# Search with city name
-      	@buildings = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
+    		# Search with neighborhood
+        @buildings = Building.text_search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
         if @buildings.present?
-          @result_type = 'cities'
+          @result_type = 'neighborhood'
         else
           # Search with zipcode
           @buildings = Building.text_search_by_zipcode(params[:term])
@@ -57,10 +55,10 @@ class HomeController < ApplicationController
             if @buildings.present?
             	@result_type = 'address'
             else
-              # Search with Neighborhood
-              @buildings = Building.text_search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
+              # Search with city
+              @buildings = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
             	if @buildings.present?
-                @result_type = 'neighborhood'
+                @result_type = 'cities'
               else
                 # Search with building names
                 @buildings = Building.text_search_by_building_name(params[:term])

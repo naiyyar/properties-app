@@ -1,12 +1,7 @@
-Midtown Manhattan
-Midtown East
 Kips Bay
 Murray Hill
 Sutton Place
 Turtle Bay
-Midtown North
-Midtown South
-Midtown West
 Hell's Kitchen
 Hudson Yards
 Stuyvesant Town
@@ -14,7 +9,6 @@ Chinatown
 Civic Center
 Little Italy
 Nolita
-Sutton Place
 Upper West Side
 Upper East Side
 West Village
@@ -28,3 +22,22 @@ Battery Park City
 Flatiron District 
 Financial District
 East Harlem
+Central Harlem
+South Harlem
+East Harlem
+Hamilton Heights
+Inwood
+Manhattanville
+Marble Hill
+Washington Heights
+Fort George
+Hudson Heights
+West Harlem
+Carnegie Hill
+Lenox Hill
+Upper Carnegie Hill
+Yorkville
+Lincoln Square
+Manhattan Valley
+Morningside Heights
+Midtown Manhattan
