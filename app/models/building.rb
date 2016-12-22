@@ -89,7 +89,7 @@ class Building < ActiveRecord::Base
   end
 
   def midtown_neighborhoods
-    ['Midtown East','Midtown North','Midtown South','Midtown West']
+    ['Midtown East','Midtown North','Midtown South','Midtown West','Upper Manhattan']
   end
 
   private
