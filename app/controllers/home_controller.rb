@@ -75,7 +75,7 @@ class HomeController < ApplicationController
 	      marker.lng building.longitude
 	      building_link = view_context.link_to building.building_name, building_path(building)
 	      marker.title "#{building.id}, #{building.building_name}, #{building.building_street_address}, #{building.zipcode}"
-
+        
 	      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", :locals => { building_link: building_link, :building => building })
 	    end
 	  end

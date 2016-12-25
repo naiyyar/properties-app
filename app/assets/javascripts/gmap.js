@@ -8,17 +8,21 @@ function createSidebarElem(json){
           );
 };
 
-// function bindElemToMarker(elem, marker){
-//   elem.on('click', function(){
-//     handler.getMap().setZoom(15);
-//     marker.setMap(handler.getMap()); //because clusterer removes map property from marker
-//     marker.panTo();
-//     google.maps.event.trigger(marker.getServiceObject(), 'click');
-//   })
-// };
+function bindElemToMarker(elem, marker){
+  elem.on('mouseover', function(){
+    //handler.getMap().setZoom(15);
+    marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
+    marker.setMap(handler.getMap()); //because clusterer removes map property from marker
+    marker.panTo();
+    //google.maps.event.trigger(marker.getServiceObject(), 'click');
+  }).on('mouseout', function(){
+    marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
+  })
+};
 
 function bindMarker(marker, markers, handler, lat, lng, zoom){
   $(window).on('load', function(){
+    marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
     marker.setMap(handler.getMap());
     marker.panTo();
     google.maps.event.trigger(marker.getServiceObject(), 'load');
@@ -36,6 +40,6 @@ function createSidebar(json_array){
     var elem = $( createSidebarElem(json) );
     var id = json.marker_title.split(',')[0]
     elem.appendTo('#apt_sidebar_container'+id);
-    //bindElemToMarker(elem, json.marker);
+    bindElemToMarker(elem, json.marker);
   });
 };
