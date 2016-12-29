@@ -1,6 +1,7 @@
 class Building < ActiveRecord::Base
   acts_as_voteable
   validates :building_street_address, presence: true
+  validates_uniqueness_of :building_street_address, scope: :zipcode
   resourcify
   ratyrate_rateable "building"
   
