@@ -9,8 +9,6 @@ Chinatown
 Civic Center
 Little Italy
 Nolita
-Upper West Side
-Upper East Side
 West Village
 Stuyevesant
 Roosevelt Island
@@ -37,7 +35,6 @@ Hudson Heights
 West Harlem
 Carnegie Hill
 Lenox Hill
-Upper Carnegie Hill
 Yorkville
 Lincoln Square
 Manhattan Valley

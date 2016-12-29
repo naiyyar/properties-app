@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="col-lg-5">
-			<div class="pre-scrollable" style="max-height: 70vh;">
+			<div class="pre-scrollable" style="max-height: 82vh;">
 				<% @buildings.each do |building| %>
 					<div class="row search-result-container">
 						<div class="search-slider">
@@ -83,6 +83,8 @@
 		  bindMarker(json.marker, markers, handler, lat, lng, zoom );
 		});
 			
+		//Plogon pptions
+		//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }
 		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
 	    	{ strokeColor: '#FF0000' }
 		);

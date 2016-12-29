@@ -12,8 +12,8 @@ function bindElemToMarker(elem, marker){
   elem.on('mouseover', function(){
     //handler.getMap().setZoom(15);
     marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
-    marker.setMap(handler.getMap()); //because clusterer removes map property from marker
-    marker.panTo();
+    //marker.setMap(handler.getMap()); //because clusterer removes map property from marker
+    //marker.panTo();
     //google.maps.event.trigger(marker.getServiceObject(), 'click');
   }).on('mouseout', function(){
     marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
