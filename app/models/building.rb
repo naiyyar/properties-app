@@ -42,7 +42,7 @@ class Building < ActiveRecord::Base
 
 
   def zipcode=(val)
-     write_attribute(:zipcode, val.gsub(/\s+/,''))
+    write_attribute(:zipcode, val.gsub(/\s+/,''))
   end
 
   def street_address
@@ -80,6 +80,7 @@ class Building < ActiveRecord::Base
     return count
   end
 
+  #child neighbohoods
   def predifined_neighborhoods
     arr = []
     File.open("#{Rails.root}/public/neighborhoods.txt", "r").each_line do |line|
@@ -88,6 +89,7 @@ class Building < ActiveRecord::Base
     return arr.flatten
   end
 
+  #Parent neighbohoods
   def midtown_neighborhoods
     ['Midtown East','Midtown North','Midtown South','Midtown West','Upper Manhattan','Upper West Side','Upper East Side']
   end
@@ -98,7 +100,7 @@ class Building < ActiveRecord::Base
     search = Geocoder.search([latitude, longitude])
     neighborhoods = nil
     if search.present?
-      #search for other neighborhoods except midtown
+      #search for child neighborhoods
       search.each do |geo_result|
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
@@ -108,7 +110,7 @@ class Building < ActiveRecord::Base
           end
         end
       end
-      #search for midtown neighborhoods if nothing found for others
+      #search for midtown parent neighborhoods if nothning find for child
       if neighborhoods.blank?
         search.each do |geo_result|
         neighborhood = geo_result.address_components_of_type(:neighborhood)

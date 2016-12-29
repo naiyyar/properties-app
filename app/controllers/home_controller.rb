@@ -62,7 +62,11 @@ class HomeController < ApplicationController
               else
                 # Search with building names
                 @buildings = Building.text_search_by_building_name(params[:term])
-                @result_type = 'buildings'
+                if @buildings.present?
+                  @result_type = 'buildings'
+                else
+                  @result_type = 'no_match_found'
+                end
               end
           	end
           end

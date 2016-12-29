@@ -15,9 +15,14 @@ app.apartments.prototype = {
   },
 
   _render: function(ul, item) {
-    //window.data = item
+    if(item.search_term == undefined){
+      search_term = item.value
+    }
+    else{
+      search_term = item.search_term
+    }
     var markup = [
-      '<p class="address"><b>' + item.search_term + '</b></p>'
+      '<p class="address"><b>' + search_term + '</b></p>'
     ];
     
     return $('<li>')
