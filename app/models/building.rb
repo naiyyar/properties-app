@@ -38,7 +38,7 @@ class Building < ActiveRecord::Base
   pg_search_scope :text_search_by_city, against: [:city],
     :using => { :trigram => { :threshold => 0.1 } }
 
-  pg_search_scope :text_search_by_neighborhood, against: [:neighborhood],
+  pg_search_scope :text_search_by_neighborhood, against: [:neighborhood, :neighborhoods_parent],
     :using => { :trigram => { :threshold => 0.1 } }
 
 
@@ -63,7 +63,7 @@ class Building < ActiveRecord::Base
   end
 
   def self.buildings_in_neighborhood neighborhoods
-    where("neighborhood @@ :q" , q: "%#{neighborhoods}").to_a.uniq(&:building_street_address)
+    where("neighborhood @@ :q or neighborhoods_parent @@ :q" , q: "%#{neighborhoods}").to_a.uniq(&:building_street_address)
   end
 
   def fetch_or_create_unit params
@@ -92,7 +92,12 @@ class Building < ActiveRecord::Base
 
   #Parent neighbohoods
   def midtown_neighborhoods
-    ['Midtown East','Midtown North','Midtown South','Midtown West','Upper Manhattan','Upper West Side','Upper East Side']
+    [ 'Midtown East','Midtown North',
+      'Midtown South','Midtown West',
+      'Upper Manhattan','Upper West Side',
+      'Upper East Side','Lower East Side',
+      'Lower Manhattan'
+    ]
   end
 
   private
@@ -100,6 +105,7 @@ class Building < ActiveRecord::Base
   def neighborhoods
     search = Geocoder.search([latitude, longitude])
     neighborhoods = nil
+    neighborhoods_parent = ''
     if search.present?
       #search for child neighborhoods
       search.each do |geo_result|
@@ -109,19 +115,25 @@ class Building < ActiveRecord::Base
           if predifined_neighborhoods.include? neighborhood
             neighborhoods = neighborhood
           end
-        end
-      end
-      #search for midtown parent neighborhoods if nothning find for child
-      if neighborhoods.blank?
-        search.each do |geo_result|
-        neighborhood = geo_result.address_components_of_type(:neighborhood)
-        if neighborhood.present?
-          neighborhood = neighborhood.first['long_name']
           if midtown_neighborhoods.include? neighborhood
-            neighborhoods = neighborhood
+            neighborhoods_parent = neighborhood
+          else
+            neighborhoods_parent = search.first.address_components_of_type(:neighborhood).first['long_name']
           end
         end
       end
+      
+      #search for midtown parent neighborhoods if nothning find for child
+      if neighborhoods.blank?
+        search.each do |geo_result|
+          neighborhood = geo_result.address_components_of_type(:neighborhood)
+          if neighborhood.present?
+            neighborhood = neighborhood.first['long_name']
+            if midtown_neighborhoods.include? neighborhood
+              neighborhoods = neighborhood
+            end
+          end
+        end
       end
       
       if neighborhoods.present?
@@ -135,18 +147,19 @@ class Building < ActiveRecord::Base
         end
       end
     end
-    return neighborhoods
+    return neighborhoods, neighborhoods_parent
   end
 
   def save_neighborhood
     if neighborhoods.present?
-      self.neighborhood = neighborhoods
+      self.neighborhood = neighborhoods[0]
+      self.neighborhoods_parent = neighborhoods[1]
       self.save
     end
   end
 
   def update_neighborhood
-    self.update_columns(neighborhood: neighborhoods) if neighborhoods.present?
+    self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1] ) if neighborhoods.present?
   end
 
 end

@@ -29,7 +29,7 @@ function bindMarker(marker, markers, handler, lat, lng, zoom){
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
     handler.getMap().setZoom(zoom);
-    handler.map.centerOn({ lat: lat, lng: lng });
+    //handler.map.centerOn({ lat: lat, lng: lng });
     handler.bounds.extendWith(polygons);
     
   })

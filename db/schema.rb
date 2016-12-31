@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027052924) do
+ActiveRecord::Schema.define(version: 20161231055439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20161027052924) do
     t.boolean  "swimming_pool",           default: false
     t.boolean  "walk_up",                 default: false
     t.string   "neighborhood"
+    t.string   "neighborhoods_parent"
   end
 
   add_index "buildings", ["building_name"], name: "index_buildings_on_building_name", using: :btree

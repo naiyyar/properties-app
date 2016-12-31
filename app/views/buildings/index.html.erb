@@ -27,6 +27,7 @@
         <th>Building Street Address</th>
         <th>Zipcode</th>
         <th>Neighborhood</th>
+        <th>Parent Neighborhood</th>
         <th>Latitude</th>
         <th>Longitude</th>
         <th></th>
@@ -41,12 +42,13 @@
           <td><%= building.building_street_address %></td>
           <td><%= building.zipcode %></td>
           <td><%= building.neighborhood %></td>
+          <td><%= building.neighborhoods_parent %></td>
           <td><%= building.latitude %></td>
           <td><%= building.longitude %></td>
-          <% if current_user && current_user.has_role?(:admin) %>
+          <%# if current_user && current_user.has_role?(:admin) %>
             <td><%= link_to "edit", edit_building_path(building) %></td>
             <td><%= link_to "Delete", building_path(building), method: :delete, data: {confirm: "Are you sure you want to delete this building?"}, class: 'text-danger'%></td>  
-          <% end %>
+          <%# end %>
         </tr>
       <%end%>
     </tbody>
