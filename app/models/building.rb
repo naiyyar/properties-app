@@ -2,6 +2,7 @@ class Building < ActiveRecord::Base
   acts_as_voteable
   validates :building_street_address, presence: true
   validates_uniqueness_of :building_street_address, scope: :zipcode
+  validates_uniqueness_of :building_name
   resourcify
   ratyrate_rateable "building"
   
@@ -38,7 +39,10 @@ class Building < ActiveRecord::Base
   pg_search_scope :text_search_by_city, against: [:city],
     :using => { :trigram => { :threshold => 0.1 } }
 
-  pg_search_scope :text_search_by_neighborhood, against: [:neighborhood, :neighborhoods_parent],
+  pg_search_scope :text_search_by_neighborhood, against: [:neighborhood],
+    :using => { :trigram => { :threshold => 0.1 } }
+
+  pg_search_scope :text_search_by_parent_neighborhood, against: [:neighborhoods_parent],
     :using => { :trigram => { :threshold => 0.1 } }
 
 
@@ -96,7 +100,7 @@ class Building < ActiveRecord::Base
       'Midtown South','Midtown West',
       'Upper Manhattan','Upper West Side',
       'Upper East Side','Lower East Side',
-      'Lower Manhattan'
+      'Lower Manhattan', 'Greenwich Village'
     ]
   end
 

@@ -27,11 +27,9 @@ function bindMarker(marker, markers, handler, lat, lng, zoom){
     marker.panTo();
     google.maps.event.trigger(marker.getServiceObject(), 'load');
     handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
+    //handler.fitMapToBounds();
     handler.getMap().setZoom(zoom);
-    //handler.map.centerOn({ lat: lat, lng: lng });
-    handler.bounds.extendWith(polygons);
-    
+    handler.map.centerOn(marker);
   })
 };
 

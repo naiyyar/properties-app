@@ -32,6 +32,12 @@ when 'neighborhood'
     json.search_term "#{building.neighborhood}, #{building.city}, #{building.state}"
     json.neighborhoods "#{building.neighborhood}"
   end
+when 'pneighborhood'
+  json.array! @buildings do |building|
+    json.id building.id
+    json.search_term "#{building.neighborhoods_parent}, #{building.city}, #{building.state}"
+    json.neighborhoods "#{building.neighborhoods_parent}"
+  end
 when 'no_match_found'
     json.no_match_found "No matches found"
 end
