@@ -31,21 +31,21 @@
 # # Morningside Heights
 
 # # Gcoordinate.where(zipcode: ['10035']).destroy_all
-Gcoordinate.where(neighborhood: ['Lower Manhattan']).destroy_all
+# Gcoordinate.where(neighborhood: ['Lower Manhattan']).destroy_all
 
-manhattan = [	{ lng: -74.0088844, lat: 40.7424449 },
-				{ lng: -74.0128326, lat: 40.7438756 },
-				{ lng: -74.0205574, lat: 40.7044567 },
-				{ lng: -74.0178108, lat: 40.7001622 },
-				{ lng: -74.0162659, lat: 40.6992512 },
-				{ lng: -74.0095711, lat: 40.6997718 },
-				{ lng: -73.9990997, lat: 40.7064087 },
-				{ lng: -73.9748955, lat: 40.7099221 },
-				{ lng: -73.9714622, lat: 40.7256652 },
-				{ lng: -74.0088844, lat: 40.7424449 }]
-manhattan.each do |coord|
-	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Lower Manhattan')
-end
+# manhattan = [	{ lng: -74.0088844, lat: 40.7424449 },
+# 				{ lng: -74.0128326, lat: 40.7438756 },
+# 				{ lng: -74.0205574, lat: 40.7044567 },
+# 				{ lng: -74.0178108, lat: 40.7001622 },
+# 				{ lng: -74.0162659, lat: 40.6992512 },
+# 				{ lng: -74.0095711, lat: 40.6997718 },
+# 				{ lng: -73.9990997, lat: 40.7064087 },
+# 				{ lng: -73.9748955, lat: 40.7099221 },
+# 				{ lng: -73.9714622, lat: 40.7256652 },
+# 				{ lng: -74.0088844, lat: 40.7424449 }]
+# manhattan.each do |coord|
+# 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Lower Manhattan')
+# end
 
 # s_harlem = [	{ lng: -73.9500904, lat: 40.8346581 },
 # 				{ lng: -73.9602184, lat: 40.8229679 },

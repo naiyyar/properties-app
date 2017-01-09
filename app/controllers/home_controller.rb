@@ -4,6 +4,7 @@ class HomeController < ApplicationController
 
   def search
     if params['apt-search-txt'].present?
+      @brooklyn_neighborhoods = params['apt-search-txt'].split(',')[0]
       coordinates = Geocoder.coordinates(params['apt-search-txt'])
       if params[:term].present?
         building = Building.where(building_street_address: params[:term])

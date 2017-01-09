@@ -67,6 +67,7 @@
 	var lat = <%= raw @lat.to_json %>
 	var lng = <%= raw @lng.to_json %>
 	var zoom = <%= @zoom %>
+	seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
 	
    	handler = Gmaps.build('Google');
    	handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
@@ -80,11 +81,12 @@
 		  bindMarker(json.marker, markers, handler, lat, lng, zoom );
 		});
 			
-		//Plogon pptions
+		//Plogon options
 		//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }
 		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
-	    	{ strokeColor: '#FF0000' }
+	    	{ strokeColor: '#2e2e2e', strokeWeight: 2 }
 		);
+		brookly_boundaries(seach_term)
 
 	  	createSidebar(json_array);
   	});
