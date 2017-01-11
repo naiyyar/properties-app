@@ -56,6 +56,34 @@ Yorkville
 Lincoln Square
 Manhattan Valley
 Morningside Heights
+Bedford-Stuyvesant
+Williamsburg
+Bushwick
+Crown Heights
+Park Slope
+Greenpoint
+Flatbush
+Clinton Hill
+Downtown Brooklyn
+Prospect Lefferts Gardens
+Brooklyn Heights
+Fort Greene
+Bay Ridge
+Prospect Heights
+Carroll Gardens
+Northeast Flatbush
+Sheepshead Bay
+Ditmas Park
+Boerum Hill
+DUMBO
+Kensington
+Cobble Hill
+Sunset Park
+Prospect Park South
+Windsor Terrace
+Gowanus
+Greenwood
+Midwood
 Greenpoint
 Borough Park
 Canarsie
@@ -67,3 +95,14 @@ Bushwick
 Williamsburg
 Jamaica
 Rockaways
+Astoria
+Long Island City
+Forest Hills
+Sunnyside
+Ridgewood
+Rego Park
+Kew Gardens
+Flushing
+Woodside
+Jackson Heights
+Elmhurst
