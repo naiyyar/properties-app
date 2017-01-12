@@ -26,7 +26,7 @@
 // Gowanus
 // Greenwood
 // Midwood
-var brooklyn_neighborhoods = [
+var brooklyn_and_queens_neighborhoods_hash = [
 	{ key: 'Borough Park', 				url: 'https://www.dropbox.com/s/9o3c7fb2wb9je05/borough_park.kml?dl=1' },
 	{ key: 'Canarsie', 					url: 'https://www.dropbox.com/s/24qjmce32do2tsv/canarsie.kml?dl=1' },
 	{ key: 'Flatlands', 				url: 'https://www.dropbox.com/s/dxwxqmhl84ohh4b/flatlands.kml?dl=1' },
@@ -62,28 +62,25 @@ var brooklyn_neighborhoods = [
 	{ key: 'Windsor Terrace',			url: 'https://www.dropbox.com/s/xvzeul9ezvtidud/windsor_terrace.kml?dl=1'},
 	{ key: 'Gowanus',					url: 'https://www.dropbox.com/s/bxscyssry09uf55/gowanus.kml?dl=1'},
 	{ key: 'Greenwood',					url: 'https://www.dropbox.com/s/j0a0isws8f4br8i/greenwood.kml?dl=1'},
-	{ key: 'Midwood', 					url: 'https://www.dropbox.com/s/uz21mxzlpxd9mhq/midwood.kml?dl=1'}
+	{ key: 'Midwood', 					url: 'https://www.dropbox.com/s/uz21mxzlpxd9mhq/midwood.kml?dl=1'},
+	{ key: 'Astoria', 					url: 'https://www.dropbox.com/s/byecxgngp60stis/astoria.kml?dl=1'},
+	{ key: 'Long Island City', 			url: 'https://www.dropbox.com/s/lqcj3gzdb17ddrk/long_island_city.kml?dl=1'},
+	{ key: 'Forest Hills', 				url: 'https://www.dropbox.com/s/4f6qatuh7c7lnje/forest_hill.kml?dl=1'},
+	{ key: 'Sunnyside', 				url: 'https://www.dropbox.com/s/hi5h07h5rt0y2i8/sunnyside.kml?dl=1'},
+	{ key: 'Ridgewood', 				url: 'https://www.dropbox.com/s/5ij98le5k6hzy6n/ridgewood.kml?dl=1'},
+	{ key: 'Rego Park', 				url: 'https://www.dropbox.com/s/440gzk0gt644n08/rego_park.kml?dl=1'},
+	{ key: 'Kew Gardens', 				url: 'https://www.dropbox.com/s/ki7k9ht6x37ut7i/kew_garden.kml?dl=1'},
+	{ key: 'Flushing', 					url: 'https://www.dropbox.com/s/cqh4slnzbeq03dw/flushing.kml?dl=1'},
+	{ key: 'Woodside', 					url: 'https://www.dropbox.com/s/ohflj1urwh92w44/woodside.kml?dl=1'},
+	{ key: 'Jackson Heights', 			url: 'https://www.dropbox.com/s/7r1wbb8e0ud65mp/jackson_heights.kml?dl=1'},
+	{ key: 'Elmhurst', 					url: 'https://www.dropbox.com/s/byecxgngp60stis/astoria.kml?dl=1'}
 ]
 
-var queens_neighborhoods = [
-	{ key: 'Astoria', 					url: ''},
-	{ key: 'Long Island City', 			url: ''},
-	{ key: 'Forest Hills', 				url: ''},
-	{ key: 'Sunnyside', 				url: ''},
-	{ key: 'Ridgewood', 				url: ''},
-	{ key: 'Rego Park', 				url: ''},
-	{ key: 'Kew Gardens', 				url: ''},
-	{ key: 'Flushing', 					url: ''},
-	{ key: 'Woodside', 					url: ''},
-	{ key: 'Jackson Heights', 			url: ''},
-	{ key: 'Elmhurst', 					url: ''}
-]
-
-function brookly_boundaries(term){
+function brooklyn_and_queens_neighborhoods(term){
 	
 	var url = '';
 	
-	$.each( brooklyn_neighborhoods, function(index, value ) {
+	$.each(brooklyn_and_queens_neighborhoods_hash, function(index, value ) {
 	  if(term == value.key){
 			url = value.url;
 		}

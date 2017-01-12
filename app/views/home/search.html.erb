@@ -86,7 +86,8 @@
 		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
 	    	{ strokeColor: '#2e2e2e', strokeWeight: 2 }
 		);
-		brookly_boundaries(seach_term)
+		
+		brooklyn_and_queens_neighborhoods(seach_term)
 
 	  	createSidebar(json_array);
   	});
