@@ -100,7 +100,8 @@ class Building < ActiveRecord::Base
       'Midtown South','Midtown West',
       'Upper Manhattan','Upper West Side',
       'Upper East Side','Lower East Side',
-      'Lower Manhattan', 'Greenwich Village'
+      'Lower Manhattan', 'Greenwich Village',
+      'Flatbush - Ditmas Park'
     ]
   end
 
@@ -147,7 +148,12 @@ class Building < ActiveRecord::Base
         if neighborhoods.present?
           neighborhoods = neighborhoods.first['long_name']
         else
-          neighborhoods = search.first.address_components_of_type(:locality).first['long_name']
+          type_locality = search.first.address_components_of_type(:locality)
+          if type_locality.present?
+            neighborhoods = type_locality.first['long_name']
+          else
+            neighborhoods = ''
+          end
         end
       end
     end
