@@ -10,4 +10,9 @@ class Review < ActiveRecord::Base
   def can_validate?
     true
   end
+
+  #reviewer
+  def user_name
+  	self.user.name ? self.user.name : self.user.email[/[^@]+/]
+  end
 end

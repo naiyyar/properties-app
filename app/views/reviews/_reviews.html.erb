@@ -12,8 +12,8 @@
   </div>
 
   <div class="media-body">
-    <h4 class="media-heading"><%= review.user.name %></h4>
-    <p class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %> by <%= review.user.name %></p>
+    <h4 class="media-heading"><%= review.user_name.capitalize %></h4>
+    <p class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %> by <%= review.user_name.capitalize %></p>
     <p><%= simple_format(review.review_title) %></p>
   </div>
   
