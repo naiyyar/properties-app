@@ -95,7 +95,7 @@ class Building < ActiveRecord::Base
   end
 
   #Parent neighbohoods
-  def midtown_neighborhoods
+  def parent_neighborhoods
     [ 'Midtown East','Midtown North',
       'Midtown South','Midtown West',
       'Upper Manhattan','Upper West Side',
@@ -118,9 +118,11 @@ class Building < ActiveRecord::Base
         if neighborhood.present?
           neighborhood = neighborhood.first['long_name']
           if predifined_neighborhoods.include? neighborhood
-            neighborhoods = neighborhood
+            neighborhoods = neighborhood #child neighborhoods
           end
-          if midtown_neighborhoods.include? neighborhood
+          
+          #parent neighborhoods
+          if parent_neighborhoods.include? neighborhood
             neighborhoods_parent = neighborhood
           else
             neighborhoods_parent = search.first.address_components_of_type(:neighborhood).first['long_name']
@@ -134,7 +136,7 @@ class Building < ActiveRecord::Base
           neighborhood = geo_result.address_components_of_type(:neighborhood)
           if neighborhood.present?
             neighborhood = neighborhood.first['long_name']
-            if midtown_neighborhoods.include? neighborhood
+            if parent_neighborhoods.include? neighborhood
               neighborhoods = neighborhood
             end
           end
