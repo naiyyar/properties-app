@@ -113,7 +113,7 @@ class Building < ActiveRecord::Base
     neighborhoods_parent = ''
     if search.present?
       #search for child neighborhoods
-      search.each do |geo_result|
+      search[0..2].each do |geo_result|
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
           neighborhood = neighborhood.first['long_name']
