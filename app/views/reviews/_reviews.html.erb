@@ -14,19 +14,10 @@
   <div class="media-body">
     <h4 class="media-heading"><%= review.user_name.capitalize %></h4>
     <p class="text-muted"><%= review.created_at.strftime("%b %d, %Y") %> by <%= review.user_name.capitalize %></p>
+    <% if reviewable.kind_of? Unit %>
+      <%= link_to reviewable.name, unit_path(reviewable)  %>
+    <%end%>
     <p><%= simple_format(review.review_title) %></p>
-  </div>
-  
-  <div>
-    <% if review.pros.present? %>
-      <b>Pros:</b><span> <%= review.pros %></span> <br />
-    <%end%>
-    <% if review.cons.present? %>
-      <b>Cons:</b><span> <%= review.cons %></span> <br />
-    <%end%>
-    <% if review.other_advice.present? %>
-      <b>Other TranspaRENTcy and Advice to Share:</b><span> <%= review.other_advice %></span>
-    <%end%>
   </div>
   
   <ul class="list-inline margin-top-10">
@@ -43,4 +34,16 @@
       <%= (review.stay_time) if review.tenant_status != 'visitor' %>
     </li>
   </ul>
+
+  <div>
+    <% if review.pros.present? %>
+      <b>Pros:</b><span> <%= review.pros %></span> <br />
+    <%end%>
+    <% if review.cons.present? %>
+      <b>Cons:</b><span> <%= review.cons %></span> <br />
+    <%end%>
+    <% if review.other_advice.present? %>
+      <b>Other TranspaRENTcy and Advice to Share:</b><span> <%= review.other_advice %></span>
+    <%end%>
+  </div>
 </div>
