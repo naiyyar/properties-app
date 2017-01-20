@@ -125,7 +125,8 @@ class Building < ActiveRecord::Base
           if parent_neighborhoods.include? neighborhood
             neighborhoods_parent = neighborhood
           else
-            neighborhoods_parent = search.first.address_components_of_type(:neighborhood).first['long_name']
+            search_result = search.first.address_components_of_type(:neighborhood)
+            neighborhoods_parent = search_result.first['long_name'] if search_result.present?
           end
         end
       end
