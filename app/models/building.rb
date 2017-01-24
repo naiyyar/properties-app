@@ -97,72 +97,77 @@ class Building < ActiveRecord::Base
   #Parent neighbohoods
   def parent_neighborhoods
     [ 'Midtown East','Midtown North',
-      'Midtown South','Midtown West',
-      'Upper Manhattan','Upper West Side',
+      'Midtown South','Midtown West','Upper West Side',
       'Upper East Side','Lower East Side',
-      'Greenwich Village','Lower Manhattan',
-      'Flatbush - Ditmas Park'
+      'Greenwich Village','Flatbush - Ditmas Park'
     ]
+  end
+
+  def grandparent_neighborhoods
+    ['Lower Manhattan', 'Upper Manhattan']
   end
 
   private
 
   def neighborhoods
     search = Geocoder.search([latitude, longitude])
-    neighborhoods = nil
+    child_neighborhoods = nil
     neighborhoods_parent = nil
     if search.present?
       #search for child neighborhoods
-      search[0..2].each do |geo_result|
+      search[0..3].each do |geo_result|
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
           neighborhood = neighborhood.first['long_name']
-          if predifined_neighborhoods.include? neighborhood
-            neighborhoods = neighborhood #child neighborhoods
+          unless child_neighborhoods.present?
+            if predifined_neighborhoods.include? neighborhood
+              child_neighborhoods = neighborhood #child neighborhoods
+            end
           end
-          
           #parent neighborhoods
-          unless neighborhoods_parent.present?
+          #unless neighborhoods_parent.present?
             if parent_neighborhoods.include? neighborhood
+              neighborhoods_parent = neighborhood
+            elsif grandparent_neighborhoods.include? neighborhood
               neighborhoods_parent = neighborhood
             else
               search_result = search.first.address_components_of_type(:neighborhood)
               neighborhoods_parent = search_result.first['long_name'] if search_result.present?
             end
-          end
+          #end
         end
       end
       
       #search for midtown parent neighborhoods if nothning find for child
-      if neighborhoods.blank?
-        search[0..2].each do |geo_result|
+      if child_neighborhoods.blank?
+        search[0..3].each do |geo_result|
           neighborhood = geo_result.address_components_of_type(:neighborhood)
           if neighborhood.present?
             neighborhood = neighborhood.first['long_name']
             if parent_neighborhoods.include? neighborhood
-              neighborhoods = neighborhood
+              child_neighborhoods = neighborhood
             end
           end
         end
       end
       
-      if neighborhoods.present?
-        neighborhoods = neighborhoods
+      if child_neighborhoods.present?
+        child_neighborhoods = child_neighborhoods
       else
-        neighborhoods = search.first.address_components_of_type(:neighborhood)
-        if neighborhoods.present?
-          neighborhoods = neighborhoods.first['long_name']
+        child_neighborhoodschild_neighborhoods = search.first.address_components_of_type(:neighborhood)
+        if child_neighborhoods.present?
+          child_neighborhoods = child_neighborhoods.first['long_name']
         else
           type_locality = search.first.address_components_of_type(:locality)
           if type_locality.present?
-            neighborhoods = type_locality.first['long_name']
+            child_neighborhoods = type_locality.first['long_name']
           else
-            neighborhoods = ''
+            child_neighborhoods = ''
           end
         end
       end
     end
-    return neighborhoods, neighborhoods_parent
+    return child_neighborhoods, neighborhoods_parent
   end
 
   def save_neighborhood
