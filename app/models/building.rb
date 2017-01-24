@@ -100,7 +100,7 @@ class Building < ActiveRecord::Base
       'Midtown South','Midtown West',
       'Upper Manhattan','Upper West Side',
       'Upper East Side','Lower East Side',
-      'Lower Manhattan', 'Greenwich Village',
+      'Greenwich Village','Lower Manhattan',
       'Flatbush - Ditmas Park'
     ]
   end
@@ -110,7 +110,7 @@ class Building < ActiveRecord::Base
   def neighborhoods
     search = Geocoder.search([latitude, longitude])
     neighborhoods = nil
-    neighborhoods_parent = ''
+    neighborhoods_parent = nil
     if search.present?
       #search for child neighborhoods
       search[0..2].each do |geo_result|
@@ -122,18 +122,20 @@ class Building < ActiveRecord::Base
           end
           
           #parent neighborhoods
-          if parent_neighborhoods.include? neighborhood
-            neighborhoods_parent = neighborhood
-          else
-            search_result = search.first.address_components_of_type(:neighborhood)
-            neighborhoods_parent = search_result.first['long_name'] if search_result.present?
+          unless neighborhoods_parent.present?
+            if parent_neighborhoods.include? neighborhood
+              neighborhoods_parent = neighborhood
+            else
+              search_result = search.first.address_components_of_type(:neighborhood)
+              neighborhoods_parent = search_result.first['long_name'] if search_result.present?
+            end
           end
         end
       end
       
       #search for midtown parent neighborhoods if nothning find for child
       if neighborhoods.blank?
-        search.each do |geo_result|
+        search[0..2].each do |geo_result|
           neighborhood = geo_result.address_components_of_type(:neighborhood)
           if neighborhood.present?
             neighborhood = neighborhood.first['long_name']
