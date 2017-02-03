@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require bootstrap
 #= require turbolinks
 #= require login
 #= require contribute
@@ -11,3 +10,5 @@ jQuery ->
 		format: 'dd-mm-yyyy'
 	});
 	$('[data-toggle="popover"]').popover({ trigger: "hover" })
+
+	$('input, textarea').placeholder()

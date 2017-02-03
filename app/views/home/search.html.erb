@@ -1,67 +1,7 @@
-<div class="row">
-	<%= render partial: 'search' %>
-</div>
-
-<div class="row voffset50 search-results-container">
-	<% if @buildings.present? %>
-		<div class="col-lg-7">
-			<div class="map-continer">
-	        	<div id="map" style="height: 500px;"></div>
-	      	</div>
-		</div>
-
-		<div class="col-lg-5">
-			<div class="pre-scrollable" style="max-height: 82vh;">
-				<% @buildings.each do |building| %>
-					<div class="row search-result-container">
-						<div class="search-slider">
-						  <div id="myCarousel<%= building.id %>" class="carousel slide" data-ride="carousel">
-						    <!-- Wrapper for slides -->
-						    <div class="carousel-inner" role="listbox">
-					    		<%if building.uploads.present? %>
-						    		<% building.uploads.each_with_index do |upload, index| %>
-								      <div class="item <%= index == 0 ? 'active' : '' %>" data-slide-number="<%= index %>">
-								        <%= image_tag upload.image.url, alt: upload.image_file_name, style: "width: 460; height: 345;" %>
-								      </div>
-								    <%end%>
-								  <%else%>
-								  	<div class="item active" data-slide-number="0">
-								  		<%= image_tag 'no-photo-available.jpg', alt: 'No image', style: "width: 460; height: 345;" %>
-							      </div>
-								  <%end%>
-						    </div>
-						    <!-- Left and right controls -->
-						    <a class="left carousel-control" href="#myCarousel<%= building.id %>" role="button" data-slide="prev">
-						      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						      <span class="sr-only">Previous</span>
-						    </a>
-						    <a class="right carousel-control" href="#myCarousel<%= building.id %>" role="button" data-slide="next">
-						      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						      <span class="sr-only">Next</span>
-						    </a>
-						  </div>
-						</div>
-						<div>
-							<a href="<%=building_path(building)%>" id="apt_sidebar_container<%=building.id%>">
-								
-							</a>
-							<br />
-							<ul class="list-inline">
-						 		<li>Reviews: <%= building.reviews.count %></li> |
-						 		<li>Unit reviews: <%= building.unit_reviews_count %></li> |
-						 		<li>Photos(<%= building.uploads ? building.uploads.count : '' %>)</li>
-							</ul>
-							<ul class="list-inline" style="margin-left: 126px;">
-						 		<li><%= rating_for building, "building", disable_after_rate: true, cancel: false %></li> |
-						 		<li><%= "20% Recommended" %></li>
-							</ul>
-						</div>
-					</div>
-				<%end%>
-			</div>
-		</div>
-	<%end%>
-</div>
+<%= render partial: 'search_header' %>
+<%= render partial: 'search_leftside' %>
+<div class="closeLeftSide"></div>
+<%= render partial: 'search_wrapper' %>
 
 <script type="text/javascript" charset="utf-8">
 	var lat = <%= raw @lat.to_json %>
@@ -69,28 +9,28 @@
 	var zoom = <%= @zoom %>
 	seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
 	
-   	handler = Gmaps.build('Google');
-   	handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-  	
-	  	json_array = <%= raw @hash.to_json %> ;
-	    
-	    markers = handler.addMarkers(json_array);
-	    
-	    _.each(json_array, function(json, index){
-		  json.marker = markers[index];
-		  bindMarker(json.marker, markers, handler, lat, lng, zoom );
-		});
-			
-		//Plogon options
-		//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }
-		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
-	    	{ strokeColor: '#2e2e2e', strokeWeight: 2 }
-		);
+ 	handler = Gmaps.build('Google');
+ 	handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
+	
+  	json_array = <%= raw @hash.to_json %> ;
+    
+    markers = handler.addMarkers(json_array);
+    
+    _.each(json_array, function(json, index){
+	  json.marker = markers[index];
+	  bindMarker(json.marker, markers, handler, lat, lng, zoom );
+	});
 		
-		brooklyn_and_queens_neighborhoods(seach_term)
+	//Plogon options
+	//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }
+	polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
+    { strokeColor: '#2e2e2e', strokeWeight: 2 }
+	);
+	
+	brooklyn_and_queens_neighborhoods(seach_term)
 
-	  	createSidebar(json_array);
-  	});
+  	createSidebar(json_array);
+	});
   
   
 </script>

@@ -54,6 +54,10 @@ class Building < ActiveRecord::Base
     [building_street_address, city, state].compact.join(', ')
   end
 
+  def building_name_or_address
+    self.building_name ? self.building_name : street_address
+  end
+
   def self.text_search(term)
     if term.present?
       search(term)
@@ -66,8 +70,8 @@ class Building < ActiveRecord::Base
     where('zipcode @@ :q', q: search_term)
   end
 
-  def self.buildings_in_neighborhood neighborhoods
-    where("neighborhood @@ :q or neighborhoods_parent @@ :q" , q: "%#{neighborhoods}").to_a.uniq(&:building_street_address)
+  def self.buildings_in_neighborhood params
+    where("neighborhood @@ :q or neighborhoods_parent @@ :q" , q: "%#{params[:neighborhoods]}").paginate(:page => params[:page], :per_page => 5) #.to_a.uniq(&:building_street_address)
   end
 
   def fetch_or_create_unit params

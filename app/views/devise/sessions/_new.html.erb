@@ -1,31 +1,37 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f| %>
   <div class="form-group">
-    <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-at"></i></div>
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    <div class="btn-group-justified">
+      <%= link_to "<span class='fa fa-facebook pull-left'></span> Sign In".html_safe, user_omniauth_authorize_path(:facebook), class: "btn btn-lg btn-facebook" %>
     </div>
-    <span class="help-block has-error" id="email-error"></span>
   </div>
-  
   <div class="form-group">
-    <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-lock"></i></div>
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    <div class="btn-group-justified">
+      <a href="#" class="btn btn-lg btn-google"><span class="fa fa-google-plus pull-left"></span>Sign In with Google</a>
     </div>
-    <span class="help-block has-error" id="password-error"></span>
   </div>
-    
-  <%= f.submit "Sign In", class: "btn btn-block btn-primary", id: 'login_btn' , disabled_with: "Signing In...." %>
-    
-  <div class="clearfix"></div>
-  <div class="login-modal-footer">
+  <div class="signOr">OR-</div>
+  <div class="form-group">
+    <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: 'Email address' %>
+  </div>
+  <div class="form-group">
+    <%= f.password_field :password, autocomplete: "off", class: "form-control" , placeholder: "Password"%>
+  </div>
+  <div class="form-group">
     <div class="row">
-      <div class="col-xs-8 col-sm-8 col-md-8">
-        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-           <a id="forgetpass-taba" href="#forget_password" aria-controls="forget_password" role="tab" data-toggle="tab" onclick="$('#signin-taba').parent().removeClass('active')">Forget Password?</a>
-        <% end -%>
-      
+      <div class="col-xs-6">
+        <div class="checkbox custom-checkbox"><label><input type="checkbox"><span class="fa fa-check"></span> Remember me</label></div>
+      </div>
+      <div class="col-xs-6 align-right">
+        <p class="help-block">
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <a href="#" class="text-green">Forget Password?</a>
+          <% end -%>
+        </p>
       </div>
     </div>
   </div>
-<% end %>
+  <div class="form-group">
+    <%= f.submit "Sign In", class: "btn btn-block btn-primary", disabled_with: "Signing In...." %>
+  </div>
+  <p class="help-block">Don't have an account? <a href="#" class="modal-su text-green">Sign Up</a></p>
+<%end%>

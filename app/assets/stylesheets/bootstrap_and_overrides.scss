@@ -1,47 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.login-modal{
-	max-width: 330px;
-}
-.modal-dialog {
-  width: 400px !important;
-  margin: 30px auto !important;
-}
-.navbar-default .navbar-nav > li  {
-  a.btn-plus{
-  	color: #FFF;
-	  font-size: 18px;
-	  padding: 5px 8px;
-	  margin: 10px 0px;
-  }
-  a.btn-plus:hover{
-  	background-color: #23527c;
-  	color: #fff;
-  }
-	  
-}
-
-#map img { 
-  max-width: none;
-}
-#map label { 
-  width: auto; display:inline; 
-} 
-
 #new_review{
   .media{
     margin-top: 15px;
   }
 }
 
-.media-body{
-  padding: 0px 0px 0px 7px;
-}
-.voffset10 { margin-top: 10px; }
-.voffset15 { margin-top: 15px; }
-.voffset20 { margin-top: 20px; }
-.voffset25 { margin-top: 25px; }
-.voffset30 { margin-top: 30px; }
-.voffset40 { margin-top: 40px; }
-.voffset50 { margin-top: 50px; }

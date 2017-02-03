@@ -11,10 +11,10 @@ class HomeController < ApplicationController
         redirect_to building_path(building.first) if building.present?
       elsif params[:neighborhoods].present?
         @boundary_coords = []
-        @buildings = Building.buildings_in_neighborhood(params[:neighborhoods])
+        @buildings = Building.buildings_in_neighborhood(params)
         geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
         @boundary_coords << geo_coordinates
-        @zoom = 13
+        @zoom = 14
       else
         search = Geocoder.search(params['apt-search-txt'])
         if search.present?
@@ -23,7 +23,7 @@ class HomeController < ApplicationController
             search_term = params['apt-search-txt'].split(' - ')
             if(search_term.length > 1)
               zipcode = search_term[0]
-              @buildings = Building.where('zipcode = ?',zipcode).to_a.uniq(&:building_street_address)
+              @buildings = Building.where('zipcode = ?',zipcode).paginate(:page => params[:page], :per_page => 10).to_a.uniq(&:building_street_address)
             else
               zipcode = params['apt-search-txt']
             end

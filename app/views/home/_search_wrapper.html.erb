@@ -1,0 +1,133 @@
+<div id="wrapper">
+  <div id="mapView">
+    <div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div>
+  </div>
+  
+  <div id="content">
+    <div class="filter">
+        <h1 class="osLight">Filter your results</h1>
+        <a href="#" class="handleFilter"><span class="icon-equalizer"></span></a>
+        <div class="clearfix"></div>
+        <form class="filterForm">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
+                    <div class="formField">
+                        <label>Property Type</label>
+                        <a href="#" data-toggle="dropdown" class="btn btn-gray dropdown-btn dropdown-toggle propTypeSelect">
+                            <span class="dropdown-label">All</span>
+                            <span class="fa fa-angle-down dsArrow"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-select full" role="menu">
+                            <li class="active"><input type="radio" name="pType" checked="checked"><a href="#">All</a></li>
+                            <li><input type="radio" name="pType"><a href="#">Rent</a></li>
+                            <li><input type="radio" name="pType"><a href="#">Sale</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
+                    <div class="formField">
+                        <label>Price Range</label>
+                        <div class="slider priceSlider">
+                            <div class="sliderTooltip">
+                                <div class="stArrow"></div>
+                                <div class="stLabel"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
+                    <div class="formField">
+                        <label>Area Range</label>
+                        <div class="slider areaSlider">
+                            <div class="sliderTooltip">
+                                <div class="stArrow"></div>
+                                <div class="stLabel"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
+                    <div class="formField">
+                        <label>Bedrooms</label>
+                        <div class="volume">
+                            <a href="#" class="btn btn-gray btn-round-left"><span class="fa fa-angle-left"></span></a>
+                            <input type="text" class="form-control" readonly="readonly" value="1">
+                            <a href="#" class="btn btn-gray btn-round-right"><span class="fa fa-angle-right"></span></a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
+                    <div class="formField">
+                        <label>Bathrooms</label>
+                        <div class="volume">
+                            <a href="#" class="btn btn-gray btn-round-left"><span class="fa fa-angle-left"></span></a>
+                            <input type="text" class="form-control" readonly="readonly" value="1">
+                            <a href="#" class="btn btn-gray btn-round-right"><span class="fa fa-angle-right"></span></a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="resultsList">
+      <div class="row">
+        <% @buildings.each do |building| %>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <a href="<%=building_path(building)%>" class="card">
+              <div class="figure">
+                  <%if building.uploads.present? %>
+                    <%= image_tag building.uploads.last.image.url, alt: upload.image_file_name %>
+                  <%else%>
+                    <%= image_tag 'no-photo-available.jpg', alt: 'No image'%>
+                  <%end%>
+                  <div class="figCaption">
+                      <div>$1,550,000</div>
+                      <span class="icon-eye"> 200</span>
+                      <span class="icon-heart"> 54</span>
+                      <span class="icon-bubble"> 13</span>
+                  </div>
+                  <div class="figView"><span class="icon-eye"></span></div>
+                  <div class="figType">FOR SALE</div>
+              </div>
+              <h2><%= building.building_name_or_address %></h2>
+              <div class="cardAddress"><span class="icon-location-pin"></span><%= "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}" %></div>
+              <div class="cardRating">
+                <%= rating_for building, "building", disable_after_rate: true, cancel: false %>
+                <!-- <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star-o"></span>
+                (146) -->
+              </div>
+              <ul class="cardFeat">
+                <li><span class="fa fa-star-o"></span> <%= building.reviews.count %></li>
+                <li><span>Unit Reviews:</span> <%= building.unit_reviews_count %></li>
+                <li><span class="icon-like"></span> <%= building.votes_for %></li>
+                <li><span class="icon-dislike"></span> <%= building.votes_against %></li>
+              </ul>
+              <div class="clearfix"></div>
+            </a>
+          </div>
+        <%end%>
+      </div>
+      <%= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
+      <!-- <ul class="pagination">
+        <li class="disabled"><a href="#"><span class="fa fa-angle-left"></span></a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#"><span class="fa fa-angle-right"></span></a></li>
+      </ul> -->
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>

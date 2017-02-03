@@ -5,7 +5,10 @@ gem 'rails', '4.2.5.1'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-datepicker-rails'
+gem 'will_paginate-bootstrap'
+#icons
 gem "font-awesome-rails"
+gem 'simple-line-icons-rails'
 
 gem "paperclip", "~> 4.3"
 
@@ -28,7 +31,7 @@ gem 'thumbs_up'
 gem 'wicked'
 
 #
-gem 'jquery-ui-rails'
+#gem 'jquery-ui-rails'
 
 
 #Role management
@@ -39,6 +42,9 @@ gem 'ratyrate'
 
 #fancybox
 gem 'fancybox2-rails', '~> 0.2.8'
+
+gem 'momentjs-rails'
+gem 'jquery-placeholder-rails'
 
 
 # Use sqlite3 as the database for Active Record

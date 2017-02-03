@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def user_name
+    self.name ? self.name : self.email[/[^@]+/]
+  end
+
   def create_rating score, rateable, review_id = nil
     rate = Rate.new
     rate.rater_id = self.id

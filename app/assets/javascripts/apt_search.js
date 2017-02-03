@@ -1,5 +1,5 @@
 app.apartments = function() {
-  this._input = $('#apt-search-txt');
+  this._input = $('#apt-search-txt, #apt-search-txt-searchpage');
   this._initAutocomplete();
 };
 
@@ -34,6 +34,8 @@ app.apartments.prototype = {
     this._input.val(ui.item.search_term);
     $("#term").val(ui.item.term)
     $("#neighborhoods").val(ui.item.neighborhoods)
+    $("#apt-search-txt-form").val(ui.item.search_term)
+    $('.apt-searchpage-form > input[type="submit"]').click();
     return false;
   }
 

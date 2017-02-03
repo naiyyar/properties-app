@@ -1,15 +1,20 @@
-<h1>TranspaRENTcity</h1>
+<div id="hero-container">
+    <%= render 'layouts/home/slider' %>
+    <%= render 'layouts/home/header' %>
+    <%= render 'layouts/home/caption' %>
+    <div class="search-panel">
+      <%= render 'layouts/home/search_panel' %>
+      <br />
+    </div>
+  </div>
+  <div class="highlight">
+    <div class="h-title osLight">Find your new place with Transparentcity</div>
+    <div class="h-text osLight">Fusce risus metus, placerat in consectetur eu, porttitor a est sed sed dolor lorem cras adipiscing</div>
+  </div>
 
-<div class="row">
-	<div class="col-lg-12">
-		<div class="col-lg-8">
-			<ul class="list-inline">
-				<li><%= link_to "Building List", buildings_path %></li>
-				<li><%= link_to "Reviews", reviews_path %></li>
-				<li><%= link_to "Units", units_path %></li>
-			</ul>
-		</div>
-		
-		<%= render partial: 'search' %>
-	</div>
-</div>
+  <!-- Content -->
+  <%= render 'layouts/home/content' %>
+  <%= render 'layouts/home/footer' %>
+
+  <%= render 'layouts/shared/login_form' %>
+  <%= render 'layouts/shared/signup' %>

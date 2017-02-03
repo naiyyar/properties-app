@@ -13,7 +13,14 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require jquery-ui/autocomplete
+//= require jquery-2.1.1.min
+//= require jquery-ui.min
+//= require jquery-ui-touch-punch
+//= require jquery-placeholder
+//= require bootstrap
+//= require jquery.touchSwipe.min
+//= require jquery.slimscroll.min
+//= require jquery.tagsinput.min
 //= require underscore
 //= require gmaps/google
 //= require app
@@ -27,5 +34,5 @@
 //= require ratyrate
 //= require bootstrap-datepicker
 //= require rails.validations
+//= require moment
 //= require_tree .
-
