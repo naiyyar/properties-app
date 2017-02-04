@@ -33,10 +33,11 @@ class BuildingsController < ApplicationController
       marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", :locals => { building_link: building_link, :building => building })
     
       #To add own marker
-      # marker.picture ({
-      #       "url" => "assets/marker.png",
-      #       "width" => 32,
-      #       "height" => 32})
+      marker.picture ({
+            "url" => ActionController::Base.helpers.asset_path("marker-blue.png"),
+            "width" => 50,
+            "height" => 50
+            })
     end
   end
 
