@@ -21,6 +21,14 @@
     text-align: center !important;
 }
 
+/* custome */
+.recommended{
+    color: #0075c9;
+}
+.not-recommended{
+    color: black;
+}
+
 /* Buttons */
 
 .btn {
@@ -28,7 +36,7 @@
     text-decoration: none;
 }
 .btn-round {
-    border-radius: 50px;
+    border-radius: 50px !important;
 }
 .btn-o {
     border-width: 1px;

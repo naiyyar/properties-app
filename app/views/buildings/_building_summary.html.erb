@@ -5,7 +5,7 @@
           <h1 class="pageTitle">
             <%= @building.building_name_or_address %> 
             <% if user_signed_in? %>
-              <%= link_to "Edit", edit_building_path(@building), class: 'btn btn-warning' %>
+              <%= link_to "Edit", edit_building_path(@building), class: 'btn btn-default btn-xs' %>
             <%end%>
           </h1>
           <div class="address"><span class="icon-pointer"></span> <%= @building.building_street_address %> <%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %></div>
@@ -31,7 +31,7 @@
           <div class="clearfix"></div>
           <%= image_tag 'avatar-2.png', class: "avatar agentAvatarImg", alt: 'Avatar' %>
           <div class="agentName">Jane Smith</div>
-          <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-round btn-blue contactBtn">Contact Agent</a>
+          <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-blue contactBtn">Contact Agent</a>
       </div>
     </div>
   </div>
