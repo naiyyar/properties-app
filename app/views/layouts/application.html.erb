@@ -16,16 +16,14 @@
   <body class="notransition no-hidden">
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= yield %>
-    
-    <script src="assets/infobox.js"></script>
-    <script src="assets/jquery.visible.js"></script>
-    <script src="assets/home.js" type="text/javascript"></script>
-    <script src="assets/zapp.js" type="text/javascript"></script>
-
-  
+    <%= render 'layouts/shared/signin' %>
+    <%= render 'layouts/shared/signup' %>
+    <%= javascript_include_tag 'infobox' %>
+    <%= javascript_include_tag 'home' %>
+    <%= javascript_include_tag 'zapp' %>
     
     <script type="text/javascript">
-      $('#slider').rotateSlider({});
+      //$('#slider').rotateSlider({});
       $(function() {
         new app.apartments;
       });

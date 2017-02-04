@@ -21,6 +21,7 @@
 //= require jquery.touchSwipe.min
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
+//= require zapp
 //= require underscore
 //= require gmaps/google
 //= require app

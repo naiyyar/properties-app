@@ -2,43 +2,11 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="signupLabel">Sign Up</h4>
       </div>
       <div class="modal-body">
-        <form role="form">
-          <div class="form-group">
-            <div class="btn-group-justified">
-              <a href="explore.html" class="btn btn-lg btn-facebook"><span class="fa fa-facebook pull-left"></span>Sign Up with Facebook</a>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="btn-group-justified">
-              <a href="explore.html" class="btn btn-lg btn-google"><span class="fa fa-google-plus pull-left"></span>Sign Up with Google</a>
-            </div>
-          </div>
-          <div class="signOr">OR</div>
-          <div class="form-group">
-            <input type="text" placeholder="First Name" class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="text" placeholder="Last Name" class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="text" placeholder="Email Address" class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Password" class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Confirm Password" class="form-control">
-          </div>
-          <div class="form-group">
-            <div class="btn-group-justified">
-              <a href="explore.html" class="btn btn-lg btn-green">Sign Up</a>
-            </div>
-          </div>
-          <p class="help-block">Already a Reales member? <a href="#" class="modal-si text-green">Sign In</a></p>
-        </form>
+        <%= render partial: 'devise/registrations/new' %>
       </div>
     </div>
   </div>

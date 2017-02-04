@@ -1,0 +1,24 @@
+<div id="carouselFull" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselFull" data-slide-to="1"></li>
+    <li data-target="#carouselFull" data-slide-to="2"></li>
+    <li data-target="#carouselFull" data-slide-to="3"></li>
+  </ol>
+  <div class="carousel-inner">
+    <%# @building.uploads.present?%>
+      <% 1.upto(4) do |val| %>
+        <div class="item <%= val == 1 ? 'active' : ''%>">
+          <%= image_tag 'prop/4-1.png', alt: "" %>
+          <div class="container">
+              <div class="carousel-caption">
+                  
+              </div>
+          </div>
+        </div>
+      <%end%>
+    <%#end%>
+  </div>
+  <a class="left carousel-control" href="#carouselFull" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+  <a class="right carousel-control" href="#carouselFull" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+</div>

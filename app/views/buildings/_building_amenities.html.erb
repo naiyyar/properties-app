@@ -1,13 +1,42 @@
-<p> <%= building.laundry_facility ? 'Laundry in Building' : '' %></p>
-<p> <%= building.parking ? 'Parking' : '' %></p>
-<p> <%= building.deck ? 'Deck' : '' %></p>
-<p> <%= building.elevator ? "Elevator(#{building.elevator})" : '' %></p>
-<p> <%= building.garage ? 'Garage' : '' %></p>
-<p> <%= building.gym ? 'Gym' : '' %></p>
-<p> <%= building.live_in_super ? 'Live in Super' : '' %></p>
-<p> <%= building.pets_allowed_cats ? '<span class="fa fa-paw"> Cats Allowed'.html_safe : '' %></p>
-<p> <%= building.pets_allowed_dogs ? '<span class="fa fa-paw"> Dogs Allowed'.html_safe : '' %></p>
-<p> <%= building.roof_deck ? 'Roof Deck' : '' %></p>
-<p> <%= building.swimming_pool ? 'Swimming Pool' : '' %></p>
-<p> <%= building.doorman ? '<span class="fa fa-male"> Doorman'.html_safe : '' %></p>
-<p> <%= building.walk_up ? 'Walk up' : '' %></p>
+<div class="amenities">
+  <h3>Amenities</h3>
+  <div class="row">
+    <% if @building.laundry_facility.present? %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Laundry in Building' %></div>
+    <%end%>
+     <% if @building.parking %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-car"></span> <%= 'Parking' %></div>
+    <%end%>
+     <% if @building.deck %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-shower"></span> <%= 'Deck' %></div>
+    <%end%>
+    <% if @building.elevator %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-arrows-v"></span> <%= "Elevator(#{building.elevator})" %></div>
+    <%end%>
+    <% if @building.live_in_super.present? %>
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Live in super' %></div>
+    <%end%>
+    <% if @building.gym %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Gym' %></div>
+    <%end%>
+    <% if @building.doorman %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-male"></span> <%= "Doorman" %></div>
+    <%end%>
+    <% if @building.pets_allowed_cats %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-paw"></span> <%= 'Cats Allowed' %></div>
+    <%end%>
+    <% if @building.pets_allowed_dogs %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-paw"></span> <%= 'Dogs Allowed' %></div>
+    <%end%>
+    <% if @building.roof_deck %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Roof Deck' %></div>
+    <%end%>
+    <% if @building.swimming_pool %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-bath"></span> <%= 'Swimming Pool' %></div>
+    <%end%>
+    <% if @building.walk_up %>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-road"></span> <%= 'Walk up' %></div>
+    <%end%>
+    
+  </div>
+</div>

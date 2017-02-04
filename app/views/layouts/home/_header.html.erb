@@ -3,9 +3,15 @@
   <a href="#" class="home-navHandler visible-xs"><span class="fa fa-bars"></span></a>
   <div class="home-nav">
     <ul>
-      <li><a href="#" data-toggle="modal" data-target="#signup">Sign Up</a></li>
-      <li><a href="#" data-toggle="modal" data-target="#signin">Sign In</a></li>
-      <li><a href="add.html" class="btn btn-green">List a Property</a></li>
+    	<li><%=link_to 'Buildings', buildings_path %></li>
+    	<li><%=link_to 'Units', units_path %></li>
+    	<% unless current_user.present? %>
+    		<li><a href="#">|</a></li>
+	      <li><a href="#" data-toggle="modal" data-target="#signup">Sign Up</a></li>
+	      <li><a href="#" data-toggle="modal" data-target="#signin">Sign In</a></li>
+	    <%end%>
+      <li><a href="#">|</a></li>
+      <li class="list_property"><%=link_to '<b>List a Property</b>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
     </ul>
   </div>
 </div>

@@ -1,0 +1,38 @@
+<div class="summary">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <div class="summaryItem">
+          <h1 class="pageTitle">
+            <%= @building.building_name_or_address %> 
+            <% if user_signed_in? %>
+              <%= link_to "Edit", edit_building_path(@building), class: 'btn btn-warning' %>
+            <%end%>
+          </h1>
+          <div class="address"><span class="icon-pointer"></span> <%= @building.building_street_address %> <%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %></div>
+          <ul class="rating">
+            <%= rating_for @building, "building", disable_after_rate: true %>
+          </ul>
+          <div class="favLink"><a href="#"><span class="icon-heart"></span></a>54</div>
+          <ul class="stats">
+            <li><span class="icon-eye"></span> 200</li>
+            <li><span class="icon-bubble"></span> 13</li>
+          </ul>
+          <div class="clearfix"></div>
+          <ul class="features">
+            <li><span class="fa fa-moon-o"></span><div>2 Bedrooms</div></li>
+            <li><span class="icon-drop"></span><div>2 Bathrooms</div></li>
+            <li><span class="icon-frame"></span><div>2750 Sq Ft</div></li>
+          </ul>
+          <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="agentAvatar summaryItem">
+          <div class="clearfix"></div>
+          <%= image_tag 'avatar-2.png', class: "avatar agentAvatarImg", alt: 'Avatar' %>
+          <div class="agentName">Jane Smith</div>
+          <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-round btn-blue contactBtn">Contact Agent</a>
+      </div>
+    </div>
+  </div>
+</div>
