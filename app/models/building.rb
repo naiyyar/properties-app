@@ -12,8 +12,8 @@ class Building < ActiveRecord::Base
   accepts_nested_attributes_for :uploads, :allow_destroy => true
   accepts_nested_attributes_for :units, :allow_destroy => true
 
-  has_attached_file :photo, styles: { large: "600x600>", medium: "400x400>", thumb: "100x100>", small: "32x32>" }, default_url: "/images/:style/missing.png"
-  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
+  #has_attached_file :photo, styles: { large: "600x600>", medium: "400x400>", thumb: "100x100>", small: "32x32>" }
+  #validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 
   geocoded_by :street_address
   after_validation :geocode
