@@ -62,6 +62,8 @@ $(document).on 'click', '#add_new_unit',(e) ->
 $(document).on 'click', "input[name='contribute_to']",(e) ->
 	if(this.value=='unit_review' || this.value=='unit_photos' || this.value=='unit_amenities' || this.value=='unit_price_history')
 		$("#next_btn").addClass('hide')
+		$("#buildings-search-txt").val('')
+		$("#buildings-search-no-results > li.no-result-li").hide()
 		$("#unit_contribution").val(this.value)
 		if(!$("#new_building").hasClass('hide'))
 			$("#new_building").addClass('hide');

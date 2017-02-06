@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>TransparentCity</title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
     
     <script src="//maps.google.com/maps/api/js?v=3.23&key=AIzaSyDZtWN-GlVsIjuQMP8xN5dit3PmlMb-qjA"></script>
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
@@ -19,7 +19,9 @@
       <%= render partial: 'layouts/shared/left_side' %>
       <div class="closeLeftSide"></div>
       <div id="wrapper">
-        <%= yield %>
+        <div class="content">
+          <%= yield %>
+        </div>
       </div>
     <%else%>
        <%= yield %>

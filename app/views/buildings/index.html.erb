@@ -1,42 +1,50 @@
-<div id="content" class="max">
-  <div class="tables">
-    <h4>Tables</h4>
+<div class="tables">
+  <% if current_user.present? %>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="table-overflow">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>PROPERTY</th>
-                <th>ADDRESS</th>
-                <th>RATING</th>
-                <th>FAVS</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody class="table">
-              <% @buildings.each do |building| %>
-                <tr>
-                  <td><span class="propName"><%= link_to(building_name_or_address(building), building_path(building)) %></span></td>
-                  <td><%= building.street_address %> <%=building.zipcode%></td>
-                  <td>
-                    <%= rating_for building, "building", noRatedMsg: true %>
-                  </td>
-                  <td><span class="icon-heart text-red"></span> 54</td>
-                  <%# if current_user && current_user.has_role?(:admin) %>
-                  <td><%= link_to "edit", edit_building_path(building) %></td>
-                  <td><%= link_to "Delete", building_path(building), method: :delete, data: {confirm: "Are you sure you want to delete this building?"}, class: 'text-danger'%></td>  
-                  <%# end %>
-                </tr>
-              <%end%>
-            </tbody>
-          </table>
+        <div class="pull-right">
+          <%= link_to "Add new building", new_building_path, class: 'btn btn-blue' %>
         </div>
+      </div>
+    </div>
+    <h2></h2>
+  <%end%>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="table-overflow">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>PROPERTY</th>
+              <th>ADDRESS</th>
+              <th>RATING</th>
+              <th>FAVS</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="table">
+            <% @buildings.each do |building| %>
+              <tr>
+                <td><span class="propName"><%= link_to(building_name_or_address(building), building_path(building)) %></span></td>
+                <td><%= building.street_address %> <%=building.zipcode%></td>
+                <td>
+                  <%= rating_for building, "building", noRatedMsg: true %>
+                </td>
+                <td><span class="icon-heart text-red"></span> 54</td>
+                <%# if current_user && current_user.has_role?(:admin) %>
+                <td><%= link_to "edit", edit_building_path(building) %></td>
+                <td><%= link_to "Delete", building_path(building), method: :delete, data: {confirm: "Are you sure you want to delete this building?"}, class: 'text-danger'%></td>  
+                <%# end %>
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
+
 
 
 

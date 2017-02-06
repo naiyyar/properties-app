@@ -1,82 +1,98 @@
-<div class="row">
-	<div class="col col-lg-6">
-		<h3>What would you like to contribute ?</h3>
-		<%= radio_button_tag :contribute_to, 'building_review', true %> Building Review <br />
- 		<%= radio_button_tag :contribute_to, 'building_photos' %> Building Photos <br />
-		<%= radio_button_tag :contribute_to, 'building_amenities' %> Building Amenities <br />
-		<br />
-		<%= radio_button_tag :contribute_to, 'unit_review', params[:contribution_for]=='unit_review' ? true : false %> Unit Review <br />
-		<%= radio_button_tag :contribute_to, 'unit_photos', params[:contribution_for]=='unit_photos' ? true : false %> Unit Photos <br />
-		<%= radio_button_tag :contribute_to, 'unit_amenities', params[:contribution_for]=='unit_amenities' ? true : false %> Unit Amenities <br />
-		<%= radio_button_tag :contribute_to, 'unit_price_history', params[:contribution_for]=='unit_price_history' ? true : false %> Unit Price History
-	</div>
-</div>
-
-<br />
-<div class="row">
-	<div class="col-lg-6">
-		<div>
-			<label><h2>Building Name</h2></label>
+<div class="tables">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="panel-heading"><h3>What would you like to contribute ?</h3></div>
+	    <div class="panel-body">
+	    	<div class="form-group">
+	        <div class="col-sm-10">
+	          <div class="radio custom-radio">
+	          	<label>
+	          		<%= radio_button_tag :contribute_to, 'building_review', true %><span class="fa fa-circle"></span> Building Review
+	          	</label>
+	          </div>
+	          <div class="radio custom-radio">
+	          	<label>
+	          		<%= radio_button_tag :contribute_to, 'building_photos' %><span class="fa fa-circle"></span> Building Photos
+	          	</label>
+	          </div>
+	          <div class="radio custom-radio">
+	          	<label>
+	          		<%= radio_button_tag :contribute_to, 'building_amenities' %><span class="fa fa-circle"></span> Building Amenities
+	          	</label>
+	          </div>
+	          <div class="radio custom-radio">
+	          	<label>
+	          		<%= radio_button_tag :contribute_to, 'unit_review', params[:contribution_for]=='unit_review' ? true : false %><span class="fa fa-circle"></span> Unit Review
+	          	</label>
+	          </div>
+	          <div class="radio custom-radio">
+	          	<label>
+	          		<%= radio_button_tag :contribute_to, 'unit_photos', params[:contribution_for]=='unit_photos' ? true : false %> <span class="fa fa-circle"></span> Unit Photos
+	          	</label>
+	          </div>
+	          <div class="radio custom-radio">
+	          	<label>
+	          		<%= radio_button_tag :contribute_to, 'unit_amenities', params[:contribution_for]=='unit_amenities' ? true : false %> <span class="fa fa-circle"></span> Unit Amenities
+	          	</label>
+	          </div>
+	          <div class="radio custom-radio">
+	          	<label>
+	          		<%= radio_button_tag :contribute_to, 'unit_price_history', params[:contribution_for]=='unit_price_history' ? true : false %> <span class="fa fa-circle"></span> Unit Price History
+	          	</label>
+	          </div>
+	        </div>
+	    	</div>
+			</div>
 		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-lg-6" id="search-form">
-		<%= form_tag "/reviews/new", method: :get, id: "search_item_form" do %>
-			<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution", id: "building_contribution" %>
-			<section class="app-content">
-		    <div class="buildings-search">
-		      <%= text_field_tag 'buildings-search-txt',@building.present? ? @building.building_street_address : nil, class: "form-control", placeholder: 'Search building by name or address', "data-buildingid" => @building.present? ? @building.id : '' %>
-		      <div class="results" id="buildings-search-results"></div>
-		      <ul id="buildings-search-no-results" class="search-no-result"></ul>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="panel-heading"><h3>Building</h3></div>
+	    <div class="panel-body">
+				<div id="search-form">
+					<%= form_tag "/reviews/new", method: :get, id: "search_item_form", class: "form-horizontal" do %>
+						<!-- <div class="form-group"> -->
+		          <%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution", id: "building_contribution" %>
+		        <!-- </div> -->
+						
+						<section class="app-content">
+					    <div class="buildings-search">
+					      <%= text_field_tag 'buildings-search-txt',@building.present? ? @building.building_street_address : nil, class: "form-control", placeholder: 'Search building by name or address', "data-buildingid" => @building.present? ? @building.id : '' %>
+					      <div class="results" id="buildings-search-results"></div>
+					      <ul id="buildings-search-no-results" class="search-no-result"></ul>
+					    </div>
+					  </section>
+					  <div class="pull-right margin-top-20">
+					  	<% if params[:contribution_for].blank? %>
+					  		<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary' %>
+					  	<%end%>
+				    </div>
+				  <%end%>
+				</div>
+				<br />
+		    <div class="buildings-search unit-search">
+		      <% unless @building.present? %>
+		      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search hide", placeholder: 'Search unit by name'%>
+		      <%else%>
+		      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search", placeholder: 'Search unit by name'%>
+		      <%end%>
+		      <div class="results" id="units-search-results"></div>
+		      <ul id="units-search-no-results" class="search-no-result"></ul>
 		    </div>
-		  </section>
-		  <div class="pull-right margin-top-20">
-		  	<% if params[:contribution_for].blank? %>
-		  		<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary' %>
-		  	<%end%>
-	    </div>
-	  <%end%>
-	</div>
-</div>
+		  </div>
 
-<div class="row">
-	<div class="col-lg-6">
-		<section class="app-content">
-	    <div class="buildings-search unit-search">
-	      <% unless @building.present? %>
-	      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search hide", placeholder: 'Search unit by name'%>
-	      <%else%>
-	      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search", placeholder: 'Search unit by name'%>
-	      <%end%>
-	      <div class="results" id="units-search-results"></div>
-	      <ul id="units-search-no-results" class="search-no-result"></ul>
-	    </div>
-	  </section>
-	</div>
-</div>
+			<div class="col-xs-11">
+				<%= form_tag "/buildings", method: :post, id: "new_building", class: 'hide' do %>
+					<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution" %>
+					<%= render partial: 'buildings/building_contribute_form' %>
+			    <div class="pull-right">
+		      	<%= submit_tag 'Next', class: 'btn btn-primary', id: 'new_building_submit' %>
+		      </div>
+				<%end%>
+			</div>
+			
+			<div class="col-xs-10">
+				<%= render partial: 'units/unit_contribute_form' %>
+			</div>
 
-<div class="row">
-	<div class="col-lg-6">
-		<div class="form-group">
-			<%= form_tag "/buildings", method: :post, id: "new_building", class: 'hide' do %>
-				<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution" %>
-				<%= render partial: 'buildings/building_contribute_form' %>
-		    <div class="pull-right">
-	      	<%= submit_tag 'Next', class: 'btn btn-primary', id: 'new_building_submit' %>
-	      </div>
-			<%end%>
-		</div>
-	</div>
-</div>
-
-<br />
-
-<div class="row">
-	<div class="col-lg-6">
-		<div class="form-group">
-			<%= render partial: 'units/unit_contribute_form' %>
 		</div>
 	</div>
 </div>

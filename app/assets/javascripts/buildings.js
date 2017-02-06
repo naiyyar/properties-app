@@ -18,7 +18,7 @@ app.buildings.prototype = {
   _render: function(ul, item) {
     $("#buildings-search-no-results").css('display','none');
     var markup = [
-      '<p class="address"><b>' + item.building_street_address + '</b></p>',
+      '<p class="address"><b>' + item.building_street_address + '</b></p><br/>',
       '<small class="building_name">' + item.building_name + '</small>'
     ];
     

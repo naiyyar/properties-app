@@ -6,7 +6,7 @@
           <div class="clearfix"></div>
       </div>
       <ul>
-          <li><a href="explore.html"><span class="navIcon icon-compass"></span><span class="navLabel">Explore</span></a></li>
+          <li><a href="/buildings"><span class="navIcon fa fa-building"></span><span class="navLabel">Buildings</span></a></li>
           <li><a href="single.html"><span class="navIcon icon-home"></span><span class="navLabel">Single</span></a></li>
           <li><a href="add.html"><span class="navIcon icon-plus"></span><span class="navLabel">New</span></a></li>
           <li class="hasSub">
@@ -46,22 +46,22 @@
           </li>
       </ul>
   </nav>
-  <div class="leftUserWraper dropup">
+  <% if user_signed_in? %>
+    <div class="leftUserWraper dropup">
       <a href="#" class="avatarAction dropdown-toggle" data-toggle="dropdown">
-          <img class="avatar" src="images/avatar-1.png" alt="avatar"><span class="counter">5</span>
-          <div class="userBottom pull-left">
-              <span class="bottomUserName">John Smith</span> <span class="fa fa-angle-up pull-right arrowUp"></span>
-          </div>
-          <div class="clearfix"></div>
+        <img class="avatar" src="assets/avatar-1.png" alt="avatar"><span class="counter">5</span>
+        <div class="userBottom pull-left">
+            <span class="bottomUserName">John Smith</span> <span class="fa fa-angle-up pull-right arrowUp"></span>
+        </div>
+        <div class="clearfix"></div>
       </a>
       <ul class="dropdown-menu" role="menu">
-          <li><a href="#"><span class="icon-settings"></span>Settings</a></li>
-          <li><a href="profile.html"><span class="icon-user"></span>Profile</a></li>
-          <li><a href="#"><span class="icon-bell"></span>Notifications <span class="badge pull-right bg-red">5</span></a></li>
-          <% if user_signed_in? %>
-            <li class="divider"></li>
-            <li><a href="#"><span class="icon-power"></span>Logout</a></li>
-          <%end%>
+        <li><a href="#"><span class="icon-settings"></span>Settings</a></li>
+        <li><a href="profile.html"><span class="icon-user"></span>Profile</a></li>
+        <li><a href="#"><span class="icon-bell"></span>Notifications <span class="badge pull-right bg-red">5</span></a></li>
+        <li class="divider"></li>
+        <li><a href="#"><span class="icon-power"></span>Logout</a></li>
       </ul>
-  </div>
+    </div>
+  <%end%>
 </div>
