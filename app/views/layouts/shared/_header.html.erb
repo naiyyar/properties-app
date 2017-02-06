@@ -2,24 +2,14 @@
   <div class="logo">
     <a href="/">
       <span class="fa fa-home marker"></span>
-      <span class="logoText">TCHome</span>
+      <span class="logoText">TC</span>
     </a>
   </div>
     
   <a href="#" class="navHandler"><span class="fa fa-bars"></span></a>
     
   <div class="search">
-    <span class="searchIcon icon-magnifier"></span>
-    <%= text_field_tag 'apt-search-txt-searchpage', params['apt-search-txt'], placeholder: 'Neighborhood, Zip Code, Address, Building name' %>
-    <div class="results" id="apt-search-results"></div>
-    
-    <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search apt-searchpage-form hide' do %>
-      <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], placeholder: 'Neighborhood, Zip Code, Address, Building name' %>
-      <%= hidden_field_tag 'term', nil %>
-      <%= hidden_field_tag 'neighborhoods', nil %>
-  
-      <%= submit_tag 'Search', class: 'btn btn-primary hide' %>
-    <%end%>
+    <%= render partial: 'layouts/shared/search_form' %>
   </div>
   <% if user_signed_in? %>
     <div class="headerUserWraper">
@@ -106,9 +96,9 @@
             <a href="#" class="notifyAll">See All</a>
         </div>
     </div>
-    <a href="#" class="mapHandler"><span class="icon-map"></span></a>
-    <div class="clearfix"></div>
   <%else%>
+    <a href="#" class="mapHandler"><span class="icon-map"></span></a>
+    <!-- <div class="clearfix"></div> -->
     <div class="home-nav">
     <ul>
       <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a></li>

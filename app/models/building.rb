@@ -6,6 +6,7 @@ class Building < ActiveRecord::Base
   resourcify
   ratyrate_rateable "building"
   
+  belongs_to :user
   has_many :reviews, as: :reviewable
   has_many :units,  :dependent => :destroy
   has_many :uploads, as: :imageable
