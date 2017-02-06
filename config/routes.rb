@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   resources :rental_price_histories
   post '/rate' => 'rater#create', :as => 'rate'
   
-  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  devise_for :users, controllers: { 
+    omniauth_callbacks: "omniauth_callbacks",
+    sessions: 'users/sessions'
+  }
   # as :user do
   #   get "/signin" => "devise/sessions#new", :as => :new_user_session
   #   post "/signup" => "devise/sessions#create", :as => :user_session

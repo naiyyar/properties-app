@@ -5,22 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>TransparentCity</title>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     
     <script src="//maps.google.com/maps/api/js?v=3.23&key=AIzaSyDZtWN-GlVsIjuQMP8xN5dit3PmlMb-qjA"></script>
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag %>
   </head>
   <body class="notransition no-hidden">
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
-    <%= yield %>
-    <%= render 'layouts/shared/signin' %>
-    <%= render 'layouts/shared/signup' %>
+    <% unless params[:controller] == 'home' and params[:action] == 'index'%>
+      <%= render partial: 'layouts/shared/header' %>
+      <%= render partial: 'layouts/shared/left_side' %>
+      <div class="closeLeftSide"></div>
+      <div id="wrapper">
+        <%= yield %>
+      </div>
+    <%else%>
+       <%= yield %>
+    <%end%>
+  
     <%= javascript_include_tag 'infobox' %>
     <%= javascript_include_tag 'home' %>
     <%= javascript_include_tag 'zapp' %>
+
+    <%= render 'layouts/shared/signin' %>
+    <%= render 'layouts/shared/signup' %>
     
     <script type="text/javascript">
       //$('#slider').rotateSlider({});
@@ -31,18 +41,18 @@
     </script>
 
     <script type="text/javascript">
-    var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-      _gaq.push(['_trackPageview']);
+    // var _gaq = _gaq || [];
+    //   _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+    //   _gaq.push(['_trackPageview']);
     
-    (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-    })();
+    // (function() {
+    //   var ga = document.createElement('script');
+    //   ga.type = 'text/javascript';
+    //   ga.async = true;
+    //   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    //   var s = document.getElementsByTagName('script')[0];
+    //   s.parentNode.insertBefore(ga, s);
+    // })();
 
   </script>
   </body>

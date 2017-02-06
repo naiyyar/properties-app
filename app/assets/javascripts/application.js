@@ -27,7 +27,6 @@
 //= require app
 //= require buildings
 //= require dropzone
-//= require turbolinks
 //= require jquery.rotateSlider
 //= require fancybox
 //= require fancybox_customize
@@ -36,4 +35,5 @@
 //= require bootstrap-datepicker
 //= require rails.validations
 //= require moment
+//= require turbolinks
 //= require_tree .

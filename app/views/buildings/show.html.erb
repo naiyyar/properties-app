@@ -1,68 +1,58 @@
-<%= render 'layouts/shared/header' %>
-
-<!-- Left Side Navigation -->
-<%= render partial: 'layouts/shared/left_side' %>
-<div class="closeLeftSide"></div>
-
-<!-- Content -->
-
-<div id="wrapper">
-  <div id="mapView" class="mob-min"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
-  <div id="content" class="mob-max">
-    <div class="btn-group btn-group-justified" style="padding: 10px 100px;">
-      <div class="btn-group">
-        <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-info"  %>
-      </div>
-      <div class="btn-group">
-        <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-warning" %>
-      </div>
+<div id="mapView" class="mob-min"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
+<div id="content" class="mob-max">
+  <div class="btn-group btn-group-justified" style="padding: 10px 100px;">
+    <div class="btn-group">
+      <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-info"  %>
     </div>
-    <div class="singleTop">
-      <%= render partial: 'show_page_slider' %>
-      <%= render partial: 'building_summary' %>
+    <div class="btn-group">
+      <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-warning" %>
     </div>
-    <div class="clearfix"></div>
-    <div class="description">
-        <h3>Description</h3>
-        <p><%= @building.description ? simple_format(@building.description) : 'No description available' %></p>
-    </div>
-    <div class="share">
-        <h3>Share on Social Networks</h3>
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
-                <a href="#" class="btn btn-sm btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span> Facebook</a>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
-                <a href="#" class="btn btn-sm btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span> Twitter</a>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
-                <a href="#" class="btn btn-sm btn-round btn-o btn-google"><span class="fa fa-google-plus"></span> Google+</a>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
-                <a href="#" class="btn btn-sm btn-round btn-o btn-pinterest"><span class="fa fa-pinterest"></span> Pinterest</a>
-            </div>
-        </div>
-    </div>
-    <%= render partial: 'building_amenities' %>
-    <%= render partial: 'similiar_properties' %>
-    <% @building.reviews.order('created_at desc').each do |review| %>
-      <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
-    <% end %>
   </div>
-  <!-- <div class="commentsFormWrapper">
-      <div class="cfAvatar">
-          <img class="avatar" src="assets/avatar-1.png" alt="avatar">
-      </div>
-      <form class="commentsForm">
-          <div class="input-group">
-              <input type="text" class="form-control" placeholder="Write a comment...">
-              <span class="input-group-btn"><a class="btn btn-blue">Post</a></span>
-          </div>
-      </form>
-      <div class="clearfix"></div>
-  </div> -->
+  <div class="singleTop">
+    <%= render partial: 'show_page_slider' %>
+    <%= render partial: 'building_summary' %>
+  </div>
   <div class="clearfix"></div>
+  <div class="description">
+      <h3>Description</h3>
+      <p><%= @building.description ? simple_format(@building.description) : 'No description available' %></p>
+  </div>
+  <div class="share">
+      <h3>Share on Social Networks</h3>
+      <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+              <a href="#" class="btn btn-sm btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span> Facebook</a>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+              <a href="#" class="btn btn-sm btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span> Twitter</a>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+              <a href="#" class="btn btn-sm btn-round btn-o btn-google"><span class="fa fa-google-plus"></span> Google+</a>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+              <a href="#" class="btn btn-sm btn-round btn-o btn-pinterest"><span class="fa fa-pinterest"></span> Pinterest</a>
+          </div>
+      </div>
+  </div>
+  <%= render partial: 'building_amenities' %>
+  <%= render partial: 'similiar_properties' %>
+  <% @building.reviews.order('created_at desc').each do |review| %>
+    <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
+  <% end %>
 </div>
+<!-- <div class="commentsFormWrapper">
+    <div class="cfAvatar">
+        <img class="avatar" src="assets/avatar-1.png" alt="avatar">
+    </div>
+    <form class="commentsForm">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Write a comment...">
+            <span class="input-group-btn"><a class="btn btn-blue">Post</a></span>
+        </div>
+    </form>
+    <div class="clearfix"></div>
+</div> -->
+<div class="clearfix"></div>
 
 <div class="modal fade" id="contactAgent" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
   <div class="modal-dialog">

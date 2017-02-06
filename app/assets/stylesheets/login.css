@@ -60,8 +60,13 @@ div.hr span.center {
   width: 30px;
   border: 1px solid #777;
 }
-#page-login .login-tab{
+#page-login{
+  width: 300px;
+  margin: 0 auto;
+}
+
+#page-login form{
   border: 1px solid #ddd;
-  padding: 20px 25px;
-  border-radius: 4px;
+  padding: 20px;
+  margin-top: 50px;
 }
