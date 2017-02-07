@@ -1,7 +1,7 @@
 module ReviewsHelper
 	def link_to_building_show reviewable
 		if reviewable.kind_of? Building
-			name = reviewable.building_name
+			name = reviewable.building_name.present? ? reviewable.building_name : reviewable.building_street_address
 			path = building_path(reviewable)
 		else
 			name = reviewable.building.building_name

@@ -23,82 +23,48 @@
   <div class="row">
     <%= form_for @building do |f| %>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <div class="form-group">
-          <div class="col-sm-6">
-            <label>Building Information</label>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :deck %> Deck
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :doorman %> Doorman
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= check_box_tag :elevator,'yes', @building.elevator ? true : false %> Elevator <br />
-                <% if @building.elevator %>
-                  <%= f.number_field :elevator, class: 'form-control', min: 1 %>
-                <%else%>
-                  <%= f.number_field :elevator, class: 'form-control hide', placeholder: '#Elevators', min: 1 %>
-                <%end%>
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :garage %> Garage
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :gym %> Gym
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :live_in_super %> Live in super
-              </label>
-            </div>
-             <div class="checkbox">
-              <label>
-                <%= f.check_box :pets_allowed_cats %> Pets Allowed Cats
-              </label>
-            </div>
-             <div class="checkbox">
-              <label>
-                <%= f.check_box :pets_allowed_dogs %> Pets Allowed Dogs
-              </label>
-            </div>
-             <div class="checkbox">
-              <label>
-                <%= f.check_box :roof_deck %> Roof Deck
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :swimming_pool %> Swimming Pool
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :walk_up %> Walk up
-              </label>
-            </div>
+        <div class="col-sm-6">
+          <h3>Building Information</h3>
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :deck %> <span class="fa fa-check"></span> Deck</label></div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :doorman %> <span class="fa fa-check"></span> Doorman</label></div>
+
+          <div class="checkbox custom-checkbox">
+            <label>
+              <%= check_box_tag :elevator,'yes', @building.elevator ? true : false %>
+              <span class="fa fa-check"></span> Elevator</label>
+              <% if @building.elevator %>
+                <%= f.number_field :elevator, class: 'form-control', min: 1 %>
+              <%else%>
+                <%= f.number_field :elevator, class: 'form-control hide', placeholder: '#Elevators', min: 1 %>
+              <%end%>
+          </div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :garage %> <span class="fa fa-check"></span> Garage</label></div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :gym %> <span class="fa fa-check"></span> Gym</label></div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :live_in_super %> <span class="fa fa-check"></span> Live in super</label></div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :pets_allowed_cats %> <span class="fa fa-check"></span> Pets Allowed Cats</label></div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :pets_allowed_dogs %> <span class="fa fa-check"></span> Pets Allowed Dogs</label></div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :roof_deck %> <span class="fa fa-check"></span> Roof Deck</label></div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :walk_up %> <span class="fa fa-check"></span> Walk up</label></div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :swimming_pool %> <span class="fa fa-check"></span> Swimming Pool</label></div>
+      </div>
+      <br />
+      <div class="form-group">
+        <div class="col-sm-12">
+          <div class="pull-right">
+            <%= link_to 'Cancel', building_path(@building), class: 'btn btn-default'%>
+            <%= f.submit 'Submit', class: "btn btn-primary" %>
           </div>
         </div>
-        <br />
-        <br />
-        <div class="form-group">
-          <div class="col-sm-12">
-            <div class="pull-right">
-              <%= link_to 'Cancel', building_path(@building), class: 'btn btn-default'%>
-              <%= f.submit 'Submit', class: "btn btn-primary" %>
-            </div>
-          </div>
-        </div>
-      </div>    
+      </div>  
     <% end %>
   </div>
 </div>
