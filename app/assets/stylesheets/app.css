@@ -451,9 +451,9 @@
     border-bottom: 1px solid #eee;
 }
 .logo {
-    background-color: #0075c9;
+    background-color: rgba(25, 25, 25, 0.86);
     float: left;
-    width: 70px;
+    width: 200px;
     height: 60px;
     overflow: hidden;
 }
@@ -911,7 +911,7 @@ a.userHandler .counter {
     left: 12px;
 }
 #leftSide {
-    background-color: #014271;
+    background-color: rgba(33, 33, 33, 0.95);
     position: absolute;
     top: 60px;
     left: 0;
@@ -975,8 +975,8 @@ a.userHandler .counter {
     text-align: left;
 }
 .no-touch .leftNav ul li:hover a, .leftNav ul li.onTap a {
-    background-color: #0075c9;
-    color: #fff;
+    background-color: #ffffff;
+    color: #0075c9;
 }
 .expanded .leftNav > ul > li.onTap > a {
     background-color: transparent;
@@ -1591,7 +1591,7 @@ a.btn.dropdown-btn.btn-gray {
     z-index: 90;
 }
 .stLabel {
-    background-color: #0eaaa6;
+    background-color: #0075c9;
     font-size: 11px;
     line-height: 12px;
     color: #fff;
@@ -1610,10 +1610,10 @@ a.btn.dropdown-btn.btn-gray {
     position: absolute;
     width: 0;
     height: 0;
-    border-top-color: #0eaaa6;
+    border-top-color: #0075c9;
 }
 .ui-slider .ui-slider-range {
-    background-color: #0eaaa6;
+    background-color: #0075c9;
 }
 .volume {
     width: 100%;
