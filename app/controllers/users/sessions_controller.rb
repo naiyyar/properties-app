@@ -14,6 +14,8 @@ class Users::SessionsController < Devise::SessionsController
     if resource.valid_password?(params[:user][:password])
       sign_in :user, resource
       redirect_to :back, notice: 'Successfully signed in!'
+    else
+      redirect_to :back, notice: 'Incorrect user name or passwoerd.'
     end
 
   end

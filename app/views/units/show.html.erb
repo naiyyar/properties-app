@@ -37,9 +37,34 @@
   <%= render partial: 'buildings/building_amenities', locals: { building: @unit.building } %>
   <%= render partial: 'unit_amenities' %>
   <%#= render partial: 'similiar_units' %>
-  <% @unit.reviews.order('created_at desc').each do |review| %>
-    <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit } %>
-  <% end %>
+  <!-- <div class="pull-right">
+    <%#= link_to 'New rental price', new_rental_price_history_path(unit_id: @unit), class: 'btn btn-info btn-sm' %>
+    <%#= link_to 'New rental price', new_rental_price_history_path(unit_id: @unit), class: 'btn btn-info btn-sm' %>
+  </div> -->
+  
+  <div class="tabsContainer">
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="active"><a href="#ur" role="tab" data-toggle="tab"><span class="icon-home"></span> Unit Reviews</a></li>
+        <li class=""><a href="#br" role="tab" data-toggle="tab"><span class="icon-user"></span> Building</a></li>
+        <li><a href="#ph" role="tab" data-toggle="tab"><span class="icon-bubbles"></span> Price history</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="ur">
+          <% @unit.reviews.order('created_at desc').each do |review| %>
+          <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit } %>
+        <% end %>
+        </div>
+        <div class="tab-pane fade" id="br">
+          <% @unit.building.reviews.order('created_at desc').each do |review| %>
+            <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit.building } %>
+          <% end %>
+        </div>
+        <div class="tab-pane fade" id="ph" style="padding: 2px;">
+          <%= link_to 'New rental price', new_rental_price_history_path(unit_id: @unit), class: 'btn btn-info btn-xs pull-right', style: 'margin-bottom: 4px;' %>
+          <%= render partial: 'rental_price_histories/price_history' %>
+        </div>
+    </div>
+  </div>
 </div>
 
 <div class="clearfix"></div>
