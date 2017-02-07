@@ -11,6 +11,11 @@ class BuildingsController < ApplicationController
     end
   end
 
+  def units
+    @building = Building.find(params[:id])
+    @units = @building.units.order('created_at desc')
+  end
+
   def contribute
     @buildings = Building.text_search(params[:term])
     @building = Building.where(id: params[:building_id]).first if params[:building_id].present?

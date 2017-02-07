@@ -1,76 +1,67 @@
 <div class="row">
-  <%= form_for(@unit) do |f| %>
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label>Unit Name</label>
-           <%= f.text_field :name, class: "form-control", required: 'required'%>
-        </div>
-      </div>
-      <div class="col-sm-6">
-         <div class="form-group">
-          <label>Building</label>
-           <%= f.collection_select(:building_id, Building.all, :id, :building_name, {:prompt => :true}, {class: "form-control", required: 'required'}) %>
-        </div>
-      </div>
-      <div class="col-sm-6">
-         <div class="form-group">
-          <label>Bedrooms</label>
-           <%= f.text_field :number_of_bedrooms, class: "form-control"%>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label>Bathrooms</label>
-           <%= f.text_field :number_of_bathrooms, class: "form-control"%>
-        </div>
-      </div>
-      
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label>sqaure Feet</label>
-           <%= f.text_field :square_feet, class: "form-control"%>
-        </div>
-      </div>
-     
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label>Move In Fee</label>
-           <%= f.number_field :move_in_fee, class: "form-control", min: 0 %>
-        </div>
-      </div>
-       <div class="col-sm-6">
-        <div class="form-group">
-          <label>Processing Fee</label>
-           <%= f.number_field :processing_fee, class: "form-control", min: 0 %>
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label>Description</label>
-           <%= f.text_area :description, class: "form-control" %>
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label>Pros</label>
-           <%= f.text_area :pros, class: "form-control" %>
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label>Cons</label>
-           <%= f.text_area :cons, class: "form-control"%>
-        </div>
-      </div>
-     
-      <div class="form-group">
-        <div class="col-sm-12">
-          <div class="pull-right">
-            <%= f.submit 'Next', class: "btn btn-primary" %>
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><b>New Unit</b></div>
+      <div class="panel-body">                       
+        <%= form_for @unit, class: 'form-horizontal' do |f| %>
+          <div class="form-group">
+            <label>Unit Name</label>
+             <%= f.text_field :name, class: "form-control", required: 'required'%>
           </div>
-        </div>
+    
+          <div class="form-group">
+            <label>Building</label>
+            <%= f.collection_select(:building_id, Building.all, :id, :building_name, {:prompt => :true}, {class: "form-control", required: 'required'}) %>
+          </div>
+         
+          <div class="form-group">
+            <label>Bedrooms</label>
+             <%= f.text_field :number_of_bedrooms, class: "form-control"%>
+          </div>
+        
+          <div class="form-group">
+            <label>Bathrooms</label>
+             <%= f.text_field :number_of_bathrooms, class: "form-control"%>
+          </div>
+        
+          <div class="form-group">
+            <label>sqaure Feet</label>
+             <%= f.text_field :square_feet, class: "form-control"%>
+          </div>
+            
+          <div class="form-group">
+            <label>Move In Fee</label>
+             <%= f.number_field :move_in_fee, class: "form-control", min: 0 %>
+          </div>
+         
+          <div class="form-group">
+            <label>Processing Fee</label>
+             <%= f.number_field :processing_fee, class: "form-control", min: 0 %>
+          </div>
+        
+          <div class="form-group">
+            <label>Description</label>
+             <%= f.text_area :description, class: "form-control" %>
+          </div>
+        
+          <div class="form-group">
+            <label>Pros</label>
+             <%= f.text_area :pros, class: "form-control" %>
+          </div>
+        
+          <div class="form-group">
+            <label>Cons</label>
+             <%= f.text_area :cons, class: "form-control"%>
+          </div>
+            
+          <div class="form-group">
+            <div class="pull-right">
+              <%= f.submit 'Next', class: "btn btn-primary" %>
+            </div>
+          </div> 
+        <% end %>
       </div>
-    </div>   
-  <% end %>
+    </div>
+  </div>
 </div>
+

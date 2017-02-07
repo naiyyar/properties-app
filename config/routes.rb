@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     resources :reviews
     resources :uploads
 
+    member do 
+      get :units
+    end
+
     collection do
       get :contribute
     end

@@ -1,0 +1,47 @@
+<div class="tables">
+  <% if current_user.present? %>
+    <!-- <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="pull-right">
+          <%#= link_to "Add new building", new_unit_path, class: 'btn btn-blue' %>
+        </div>
+      </div>
+    </div>
+    <h2></h2> -->
+  <%end%>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="table-overflow">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Beds</th>
+              <th>Baths</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="table">
+            <% @units.each do |unit| %>
+              <tr>
+                <td><span class="propName"><b><%= link_to unit.name, unit_path(unit) %></span></td>
+                <td><%= unit.number_of_bedrooms %></td>
+                <td><%= unit.number_of_bathrooms %></td>
+                <%# if current_user && current_user.has_role?(:admin) %>
+                <td><%= link_to "edit", edit_unit_path(unit) %></td>
+                <td><%= link_to "Delete", unit_path(unit), method: :delete, data: { confirm: "Are you sure you want to delete this unit?" }, class: 'text-danger'%></td>  
+                <%# end %>
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

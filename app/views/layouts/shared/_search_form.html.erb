@@ -3,9 +3,8 @@
 <div class="results" id="apt-search-results"></div>
 
 <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search apt-searchpage-form hide' do %>
-  <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], placeholder: 'Neighborhood, Zip Code, Address, Building name' %>
+  <%= text_field_tag 'apt-search-txt', params['apt-search-txt'] %>
   <%= hidden_field_tag 'term', nil %>
   <%= hidden_field_tag 'neighborhoods', nil %>
-
-  <%= submit_tag 'Search', class: 'btn btn-primary hide' %>
+  <%= submit_tag 'Search', class: 'btn btn-primary' %>
 <%end%>

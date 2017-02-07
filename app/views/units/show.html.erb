@@ -1,77 +1,89 @@
-<div class="row">  
-  <div class="col-lg-6 col-md-6">
-    <div class="address-area">
-      <h1>
-         <%= @unit.building.building_street_address %> - <%= @unit.name.split('')[0] == '#' ? "#{@unit.name}" : "##{@unit.name}" %>
-         <% if current_user %>
-          <small><%= link_to "edit", edit_unit_path(@unit)%></small>
-        <%end%>
-      </h1>
-      
-      <div class="address">
-        <%= link_to building_path(@unit.building) do %>
-          <b>
-            <%= @unit.building.building_street_address %> <br />
-            <%= @unit.building.city %>, <%= @unit.building.state %> <%= @unit.building.zipcode %> <br />
-            <%= @unit.building.building_name %>
-          </b>
-        <%end%>
-      </div>
-      <br />
-      <ul class="list-inline">
-        <li><%= @unit.number_of_bedrooms %> Bedrooms</li> |
-        <li><%= @unit.number_of_bathrooms %> Bathrooms </li> |
-        <li><%= @unit.square_feet.to_i %> ft<sup>2</sup></li>
-      </ul>
-
-      <div style='width: 550px;'>
-        <div id="map" style='width: 550px; height: 250px;'></div>
-      </div>
-     
+<div id="mapView" class="mob-min"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
+<div id="content" class="mob-max">
+  <div class="btn-group btn-group-justified" style="padding: 10px 100px;">
+    <div class="btn-group">
+      <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-info"  %>
     </div>
-    <div id="unit-info">
-      <%= render partial: 'units/amenities' %>
-    </div>
-  </div>
-
-  <div class="col-lg-6 col-md-6">
-    <div style="padding:1px 0;margin-top:71px;">
+    <div class="btn-group">
       <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_unit_review_path(unit_id: @unit), class: "btn btn-warning" %>
-      <div class="btn-group" role="group">
-        <%= link_to '<span class="fa fa-camera"><span> Add photo'.html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-info"  %>
-        <%= render partial: "buildings/image_slider", locals: { object: @unit } %>
-        <div class="pull-right">
-          <% if @unit.uploads.count > 0 %>
-            <span class="fa fa-th-large"></span> <%= link_to "See all(#{@unit.uploads.count})", unit_uploads_path(unit_id: @unit.id) %>
-          <%end%>
-        </div>
-    <br />
-    <br />
-    <br />
-    <div class="well pre-scrollable">
-      <%= render partial: 'individual_unit_reviews', locals: { unit: @unit } %>
     </div>
+  </div>
+  <div class="singleTop">
+    <%= render partial: 'uploads/show_page_slider', locals: { object: @unit } %>
+    <%= render partial: 'unit_summary' %>
+  </div>
+  <div class="clearfix"></div>
+  <div class="description">
+      <h3>Description</h3>
+      <p><%= @unit.description ? simple_format(@unit.description) : 'No description available' %></p>
+  </div>
+  <div class="share">
+      <h3>Share on Social Networks</h3>
+      <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+              <a href="#" class="btn btn-sm btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span> Facebook</a>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+              <a href="#" class="btn btn-sm btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span> Twitter</a>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+              <a href="#" class="btn btn-sm btn-round btn-o btn-google"><span class="fa fa-google-plus"></span> Google+</a>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+              <a href="#" class="btn btn-sm btn-round btn-o btn-pinterest"><span class="fa fa-pinterest"></span> Pinterest</a>
+          </div>
+      </div>
+  </div>
+  <%= render partial: 'buildings/building_amenities', locals: { building: @unit.building } %>
+  <%= render partial: 'unit_amenities' %>
+  <%#= render partial: 'similiar_units' %>
+  <% @unit.reviews.order('created_at desc').each do |review| %>
+    <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit } %>
+  <% end %>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="modal fade" id="contactAgent" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="contactLabel">Contact Agent</h4>
+          </div>
+          <div class="modal-body">
+              <form class="contactForm">
+                  <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
+                          <input type="text" placeholder="Name" class="form-control">
+                       </div>
+                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
+                          <input type="text" placeholder="Email" class="form-control">
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
+                          <input type="text" placeholder="Subject" class="form-control">
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
+                          <textarea placeholder="Message" rows="3" class="form-control"></textarea>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <a href="#" data-dismiss="modal" class="btn btn-round btn-o btn-gray">Close</a>
+              <a href="#" class="btn btn-round btn-green">Send message</a>
+          </div>
+      </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="pull-right">
-      <%= link_to 'New rental price', new_rental_price_history_path(unit_id: @unit), class: 'btn btn-info btn-sm' %>
-    </div>
-    
-    <%= render partial: 'rental_price_histories/price_history' %>
-    
-  </div>
-</div>
-<br />
-
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8">
   handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
     markers = handler.addMarkers(<%=raw @hash.to_json %>);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
-    handler.getMap().setZoom(15);
+    handler.getMap().setZoom(14);
   });
+  
 </script>

@@ -13,10 +13,9 @@ class Users::SessionsController < Devise::SessionsController
 
     if resource.valid_password?(params[:user][:password])
       sign_in :user, resource
-      return render nothing: true
+      redirect_to :back, notice: 'Successfully signed in!'
     end
 
-    invalid_login_attempt
   end
 
   # DELETE /resource/sign_out
@@ -24,12 +23,7 @@ class Users::SessionsController < Devise::SessionsController
     super
   end
 
-  protected
-  
-  def invalid_login_attempt
-    set_flash_message(:alert, :invalid)
-    render json: flash[:alert], status: 401
-  end
+  #protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

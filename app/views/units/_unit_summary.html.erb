@@ -1,0 +1,46 @@
+<div class="summary">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <div class="summaryItem">
+          <h1 class="pageTitle">
+            <%= @unit.building.building_street_address %> - <%= @unit.name.split('')[0] == '#' ? "#{@unit.name}" : "##{@unit.name}" %>
+            <% if user_signed_in? %>
+              <%= link_to "Edit", edit_unit_path(@unit), class: 'btn btn-default btn-xs' %>
+            <%end%>
+          </h1>
+          <div class="address"><span class="icon-pointer"></span> 
+            <%= link_to building_path(@unit.building) do %>
+              <b>
+                <%= @unit.building.building_street_address %> <br />
+                <%= @unit.building.city %>, <%= @unit.building.state %> <%= @unit.building.zipcode %> <br />
+                <%= @unit.building.building_name %>
+              </b>
+            <%end%>
+          </div>
+          <ul class="rating">
+            <%= rating_for @unit, "unit", disable_after_rate: true %>
+          </ul>
+          <div class="favLink"><a href="#"><span class="icon-heart"></span></a>54</div>
+          <ul class="stats">
+            <li><span class="icon-eye"></span> 200</li>
+            <li><span class="icon-bubble"></span> 13</li>
+          </ul>
+          <div class="clearfix"></div>
+          <ul class="features">
+            <li><span class="fa fa-moon-o"></span><div><%= @unit.number_of_bedrooms %> Bedrooms</div></li>
+            <li><span class="icon-drop"></span><div><%= @unit.number_of_bathrooms %> Bathrooms</div></li>
+            <li><span class="icon-frame"></span><div><%= @unit.square_feet.to_i %> Sq Ft</div></li>
+          </ul>
+          <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="agentAvatar summaryItem">
+          <div class="clearfix"></div>
+          <%= image_tag 'avatar-2.png', class: "avatar agentAvatarImg", alt: 'Avatar' %>
+          <div class="agentName">Jane Smith</div>
+          <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-blue contactBtn">Contact Agent</a>
+      </div>
+    </div>
+  </div>
+</div>

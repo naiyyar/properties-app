@@ -1,5 +1,6 @@
+<% @building ||= building %>
 <div class="amenities">
-  <h3>Amenities</h3>
+  <h3>Building Amenities</h3>
   <div class="row">
     <% if @building.laundry_facility.present? %>
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Laundry in Building' %></div>
