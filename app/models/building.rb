@@ -4,7 +4,7 @@ class Building < ActiveRecord::Base
   validates_uniqueness_of :building_street_address, scope: :zipcode
   validates_uniqueness_of :building_name, :allow_blank => true, :allow_nil => true
   resourcify
-  ratyrate_rateable "building"
+  ratyrate_rateable 'building'
   
   belongs_to :user
   has_many :reviews, as: :reviewable

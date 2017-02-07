@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/wazery/ratyrate.git
+  revision: b738c56a4b53260d4083bbbc7895d7d32f3c0264
+  specs:
+    ratyrate (1.2.2.alpha)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -196,7 +202,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.1.1)
-    ratyrate (1.2.2.alpha)
     rdoc (4.2.2)
       json (~> 1.4)
     regexp_parser (0.3.6)
@@ -284,7 +289,7 @@ DEPENDENCIES
   pry
   rails (= 4.2.5.1)
   rails_12factor
-  ratyrate
+  ratyrate!
   rolify
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

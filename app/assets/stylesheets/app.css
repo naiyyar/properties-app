@@ -5188,10 +5188,11 @@ blockquote {
     .logo, .logo.expanded {
         position: absolute;
         top: 0;
-        left: 50%;
-        width: 80px;
+        left: 36%;
+        width: 200px;
         height: 49px;
         margin-left: -40px;
+        background-color: rgba(25, 25, 25, 0.39)
     }
     .logo a, .logo.expanded a {
         width: 70px;

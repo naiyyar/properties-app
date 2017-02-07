@@ -43,7 +43,7 @@ gem 'wicked'
 gem "rolify"
 
 #rating
-gem 'ratyrate'
+gem 'ratyrate', github: 'wazery/ratyrate'
 
 #fancybox
 gem 'fancybox2-rails', '~> 0.2.8'
