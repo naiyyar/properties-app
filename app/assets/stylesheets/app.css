@@ -911,7 +911,7 @@ a.userHandler .counter {
     left: 12px;
 }
 #leftSide {
-    background-color: #213837;
+    background-color: #014271;
     position: absolute;
     top: 60px;
     left: 0;
@@ -975,7 +975,7 @@ a.userHandler .counter {
     text-align: left;
 }
 .no-touch .leftNav ul li:hover a, .leftNav ul li.onTap a {
-    background-color: #067670;
+    background-color: #0075c9;
     color: #fff;
 }
 .expanded .leftNav > ul > li.onTap > a {
@@ -1168,7 +1168,7 @@ a.userHandler .counter {
     color: #fff;
 }
 .leftUserWraper {
-    background-color: #213837;
+    background-color: #014271;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -1220,7 +1220,7 @@ a.userHandler .counter {
     left: 50px;
 }
 .no-touch .leftUserWraper a:hover {
-    background-color: #067670;
+    background-color: #0075c9;
 }
 .no-touch .leftUserWraper a:hover .userBottom, .leftUserWraper.open a .userBottom {
     color: #fff;

@@ -27,6 +27,9 @@
       </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <% if @uploads.count > 0 %>
+        <%= link_to "<span class='fa fa-th-large'></span> See all(#{@uploads.count})</span>".html_safe, building_uploads_path(building_id: @building.id), class: 'pull-right' %>
+      <%end%>
       <div class="agentAvatar summaryItem">
           <div class="clearfix"></div>
           <%= image_tag 'avatar-2.png', class: "avatar agentAvatarImg", alt: 'Avatar' %>
