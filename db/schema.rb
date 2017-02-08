@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20170206172451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
   enable_extension "fuzzystrmatch"
+  enable_extension "pg_trgm"
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -160,7 +160,6 @@ ActiveRecord::Schema.define(version: 20170206172451) do
     t.string   "name"
     t.text     "pros"
     t.text     "cons"
-    t.text     "description"
     t.integer  "number_of_bedrooms"
     t.integer  "number_of_bathrooms"
     t.decimal  "monthly_rent",            default: 0.0
