@@ -12,7 +12,7 @@
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-shower"></span> <%= 'Deck' %></div>
     <%end%>
     <% if @building.elevator %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-arrows-v"></span> <%= "Elevator(#{building.elevator})" %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-arrows-v"></span> <%= "Elevator(#{@building.elevator})" %></div>
     <%end%>
     <% if @building.live_in_super.present? %>
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Live in super' %></div>
