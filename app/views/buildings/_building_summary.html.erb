@@ -10,7 +10,7 @@
           </h1>
           <div class="address"><span class="icon-pointer"></span> <%= @building.building_street_address %> <%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %></div>
           <ul class="rating">
-            <%= rating_for @building, "building", disable_after_rate: true %>
+            <%= rating_for @building, "building", disable_after_rate: true, readonly: true %>
           </ul>
           <div class="favLink"><a href="#"><span class="icon-heart"></span></a>54</div>
           <ul class="stats">

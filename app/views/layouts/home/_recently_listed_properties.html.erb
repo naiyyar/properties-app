@@ -1,123 +1,30 @@
 <h2 class="osLight">Recently Listed Properties</h2>
 <div class="row pb40">
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <a href="single.html" class="propWidget-2">
-      <div class="fig">
-        <%= image_tag 'prop/1-1.png', alt: 'Modern Residence in New York' %>
-        <%= image_tag 'prop/1-1.png', alt: 'Modern Residence in New York', class: 'blur' %>
-        <div class="opac"></div>
-        <div class="priceCap osLight"><span>$1,750,000</span></div>
-        <div class="figType">FOR SALE</div>
-        <h3 class="osLight">Modern Residence in New York</h3>
-        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-        <ul class="rating">
-          <li><span class="fa fa-star star-1"></span></li>
-          <li><span class="fa fa-star star-2"></span></li>
-          <li><span class="fa fa-star star-3"></span></li>
-          <li><span class="fa fa-star star-4"></span></li>
-          <li><span class="fa fa-star-o star-5"></span></li>
-        </ul>
+  <% if @recntly_listed_properties.present? %>
+    <% @recntly_listed_properties.each do |building| %>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <a href="<%=building_path(building)%>" class="propWidget-2">
+          <div class="fig">
+            <% if building.uploads.present? %>
+              <%= image_tag building.uploads.last.image.url, alt: '' %>
+              <%= image_tag building.uploads.last.image.url, alt: '', class: 'blur' %>
+            <%else%>
+              <%= image_tag 'prop/1-1.png', alt: '' %>
+              <%= image_tag 'prop/1-1.png', alt: '', class: 'blur' %>
+            <%end%>
+            <div class="opac"></div>
+            <!-- <div class="priceCap osLight"><span>$1,750,000</span></div> -->
+            <!-- <div class="figType">FOR SALE</div> -->
+            <h3 class="osLight"><%= building.building_name_or_address %></h3>
+            <div class="address"><%= building.street_address %>, <%= building.zipcode %></div>
+            <ul class="rating">
+              <%#= rating_for building, "building", disable_after_rate: true,readonly: true, cancel: false %>
+            </ul>
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <a href="single.html" class="propWidget-2">
-      <div class="fig">
-        <%= image_tag 'prop/2-1.png', alt: 'Hauntingly Beautiful Estate' %>
-        <%= image_tag 'prop/2-1.png', alt: 'Hauntingly Beautiful Estate', class: 'blur' %>
-        <div class="opac"></div>
-        <div class="priceCap osLight"><span>$1,550,000</span></div>
-        <div class="figType">FOR RENT</div>
-        <h3 class="osLight">Hauntingly Beautiful Estate</h3>
-        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-        <ul class="rating">
-          <li><span class="fa fa-star star-1"></span></li>
-          <li><span class="fa fa-star star-2"></span></li>
-          <li><span class="fa fa-star star-3"></span></li>
-          <li><span class="fa fa-star star-4"></span></li>
-          <li><span class="fa fa-star star-5"></span></li>
-        </ul>
-      </div>
-    </a>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <a href="single.html" class="propWidget-2">
-      <div class="fig">
-        <%= image_tag 'prop/3-1.png', alt: 'Luxury Mansion' %>
-        <%= image_tag 'prop/3-1.png', alt: 'Luxury Mansion', class: 'blur' %>
-        <div class="opac"></div>
-        <div class="priceCap osLight"><span>$2,350,000</span></div>
-        <div class="figType">FOR SALE</div>
-        <h3 class="osLight">Luxury Mansion</h3>
-        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-        <ul class="rating">
-          <li><span class="fa fa-star star-1"></span></li>
-          <li><span class="fa fa-star star-2"></span></li>
-          <li><span class="fa fa-star star-3"></span></li>
-          <li><span class="fa fa-star star-4"></span></li>
-          <li><span class="fa fa-star star-5"></span></li>
-        </ul>
-      </div>
-    </a>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <a href="single.html" class="propWidget-2">
-      <div class="fig">
-        <%= image_tag 'prop/4-1.png', alt: 'Sophisticated Residence' %>
-        <%= image_tag 'prop/4-1.png', alt: 'Sophisticated Residence', class: 'blur' %>
-        <div class="opac"></div>
-        <div class="priceCap osLight"><span>$1,340,000</span></div>
-        <div class="figType">FOR RENT</div>
-        <h3 class="osLight">Sophisticated Residence</h3>
-        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-        <ul class="rating">
-          <li><span class="fa fa-star star-1"></span></li>
-          <li><span class="fa fa-star star-2"></span></li>
-          <li><span class="fa fa-star star-3"></span></li>
-          <li><span class="fa fa-star star-4"></span></li>
-          <li><span class="fa fa-star star-5"></span></li>
-        </ul>
-      </div>
-    </a>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <a href="single.html" class="propWidget-2">
-      <div class="fig">
-        <%= image_tag 'prop/5-1.png', alt: 'House With a Lovely Glass' %>
-        <%= image_tag 'prop/5-1.png', alt: 'House With a Lovely Glass', class: 'blur' %>
-        <div class="opac"></div>
-        <div class="priceCap osLight"><span>$1,930,000</span></div>
-        <div class="figType">FOR SALE</div>
-        <h3 class="osLight">House With a Lovely Glass</h3>
-        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-        <ul class="rating">
-          <li><span class="fa fa-star star-1"></span></li>
-          <li><span class="fa fa-star star-2"></span></li>
-          <li><span class="fa fa-star star-3"></span></li>
-          <li><span class="fa fa-star star-4"></span></li>
-          <li><span class="fa fa-star star-5"></span></li>
-        </ul>
-      </div>
-    </a>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <a href="single.html" class="propWidget-2">
-      <div class="fig">
-        <%= image_tag 'prop/1-1.png', alt: 'Modern Residence in New York' %>
-        <%= image_tag 'prop/1-1.png', alt: 'Modern Residence in New York', class: 'blur' %>
-        <div class="opac"></div>
-        <div class="priceCap osLight"><span>$1,750,000</span></div>
-        <div class="figType">FOR SALE</div>
-        <h3 class="osLight">Modern Residence in New York</h3>
-        <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-        <ul class="rating">
-          <li><span class="fa fa-star star-1"></span></li>
-          <li><span class="fa fa-star star-2"></span></li>
-          <li><span class="fa fa-star star-3"></span></li>
-          <li><span class="fa fa-star star-4"></span></li>
-          <li><span class="fa fa-star-o star-5"></span></li>
-        </ul>
-      </div>
-    </a>
-  </div>
+    <%end%>
+  <%else%>
+
+  <%end%>
 </div>

@@ -1,7 +1,7 @@
 module BuildingsHelper
 	def rating_for_user(rateable_obj, rating_user, dimension = nil, options = {})
 	   star = options[:star] || 5
-	   readonly = false
+	   readonly = true
 	  if rating_user.present?
 		  @object = rateable_obj
 		  @user = rating_user
@@ -12,7 +12,7 @@ module BuildingsHelper
 		  disable_after_rate = options[:disable_after_rate] || false
 
 		  if disable_after_rate
-		    readonly = current_user.present? ? rateable_obj.can_rate?(current_user, dimension) : true
+		    readonly = rating_user.present? ? !rateable_obj.can_rate?(rating_user, dimension) : true
 		  end
 
 		  content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => stars,

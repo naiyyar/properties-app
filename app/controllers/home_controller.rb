@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @recntly_listed_properties = Building.order('created_at desc').limit(6)
   end
 
   def search
