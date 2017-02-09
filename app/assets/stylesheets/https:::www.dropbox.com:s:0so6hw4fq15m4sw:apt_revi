@@ -1,6 +1,0 @@
-https://www.dropbox.com/s/0so6hw4fq15m4sw/apt_reviews?dl=0
-
-heroku pgbackups:restore HEROKU_POSTGRESQL_PURPLE_URL 'https://www.dropbox.com/s/0so6hw4fq15m4sw/apt_reviews?dl=0'
-
- pg_restore --verbose --clean --no-acl --no-owner -h 'https://www.dropbox.com/s/0so6hw4fq15m4sw/apt_reviews?dl=1' -U myuser -d mydb latest.dump
-
