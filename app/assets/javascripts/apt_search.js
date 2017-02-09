@@ -35,7 +35,7 @@ app.apartments.prototype = {
     $("#term").val(ui.item.term);
     $("#neighborhoods").val(ui.item.neighborhoods);
     $("#apt-search-txt-form").val(ui.item.search_term);
-    $('#apt-search-form').find('input[type="submit"]').click();
+    $('#apt-search-form').find('.in_header').click();
     return false;
   }
 
