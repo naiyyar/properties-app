@@ -1,6 +1,6 @@
 <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search', role: 'form' do %>
   <div class="row">
-    <div class="col-lg-8 col-md-8 col-xs-12 col-lg-offset-1">
+    <div class="col-lg-6 col-md-6 col-xs-12 col-lg-offset-2">
       <div class="form-group">
         <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: "form-control", placeholder: 'Search by Neighborhood, Zip Code, Address, Building name' %>
         <%= hidden_field_tag 'term', nil %>
@@ -51,7 +51,7 @@
   <div class="form-group hidden-xs adv">
     <div class="checkbox custom-checkbox"><label><input type="checkbox"><span class="fa fa-check"></span> For Sale</label></div>
   </div> -->
-    <div class="col-lg-2">
+    <div class="col-lg-2 col-lg-2">
       <div class="form-group">
         <%= submit_tag 'Search', class: 'btn btn-blue' %>
         <a href="#" class="btn btn-o btn-white pull-right visible-xs visible-sm" id="advanced">Advanced Search <span class="fa fa-angle-up"></span></a>
