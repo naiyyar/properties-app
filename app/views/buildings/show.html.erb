@@ -36,9 +36,11 @@
   </div>
   <%= render partial: 'building_amenities' %>
   <%= render partial: 'similiar_properties' %>
-  <% @building.reviews.order('created_at desc').each do |review| %>
-    <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
-  <% end %>
+  <div class="comments">
+    <% @building.reviews.order('created_at desc').each do |review| %>
+      <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
+    <% end %>
+  </div>
 </div>
 <!-- <div class="commentsFormWrapper">
     <div class="cfAvatar">
