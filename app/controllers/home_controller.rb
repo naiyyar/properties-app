@@ -42,7 +42,7 @@ class HomeController < ApplicationController
     else
       if params[:term].present?
     		# Search with parent neighborhood
-        @buildings = Building.text_search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
+        @buildings = Building.text_search_by_neighborhood(params[:term]).order(:building_name).to_a.uniq(&:neighborhood)
         if @buildings.present?
           @result_type = 'neighborhood'
         else
@@ -67,7 +67,7 @@ class HomeController < ApplicationController
                   @result_type = 'cities'
                 else
                   # Search with building names
-                  @buildings = Building.text_search_by_building_name(params[:term])
+                  @buildings = Building.text_search_by_building_name(params[:term]).order(:building_name)
                   if @buildings.present?
                     @result_type = 'buildings'
                   else
