@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   
   resources :reviews
   resources :uploads
+  resources :users
 
   #multisteps Forms
   resources :user_steps

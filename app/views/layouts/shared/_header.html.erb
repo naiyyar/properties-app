@@ -16,9 +16,9 @@
     <div class="headerUserWraper">
       <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span><span class="counter">5</span></a>
       <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">
-          <%= image_tag 'avatar-1.png', class: "avatar headerAvatar pull-left", alt: 'Avatar'%>
+          <%= image_tag current_user.avatar, class: "avatar headerAvatar pull-left", alt: 'Avatar'%>
           <div class="userTop pull-left">
-              <span class="headerUserName"><%= current_user.present? ? current_user.user_name : '' %> </span> <span class="fa fa-angle-down"></span>
+              <span class="headerUserName"><%= current_user.present? ? current_user.user_name.capitalize : '' %> </span> <span class="fa fa-angle-down"></span>
           </div>
           <div class="clearfix"></div>
       </a>
@@ -28,9 +28,9 @@
             <div class="mobAvatarName"><%= current_user.present? ? current_user.user_name : '' %></div>
         </div>
         <ul>
-          <li><a href="#"><span class="icon-settings"></span>Settings</a></li>
-          <li><a href="profile.html"><span class="icon-user"></span>Profile</a></li>
-          <li><a href="#"><span class="icon-bell"></span>Notifications <span class="badge pull-right bg-red">5</span></a></li>
+          <li><a href="<%= edit_user_path(current_user) %>"><span class="icon-settings"></span>Settings</a></li>
+          <li><a href="<%= user_path(current_user) %>"><span class="icon-user"></span>Profile</a></li>
+          <!-- <li><a href="#"><span class="icon-bell"></span>Notifications <span class="badge pull-right bg-red">5</span></a></li> -->
           <li class="divider"></li>
           <li><%= link_to '<span class="icon-power"></span>Logout'.html_safe, destroy_user_session_path, :method => :delete %> </li>
         </ul>

@@ -67,6 +67,10 @@ class Building < ActiveRecord::Base
     end
   end
 
+  def reviews_count
+    self.reviews.present? ? self.reviews.count : 0
+  end
+
   def self.text_search_by_zipcode search_term
     where('zipcode @@ :q', q: search_term)
   end

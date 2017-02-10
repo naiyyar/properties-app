@@ -8,7 +8,7 @@
               <%= link_to "Edit", edit_building_path(@building), class: 'btn btn-default btn-xs' %>
             <%end%>
           </h1>
-          <div class="address"><span class="icon-pointer"></span> <%= @building.building_street_address %> <%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %></div>
+          <div class="address"><span class="icon-pointer"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>
           <ul class="rating">
             <%= rating_for @building, "building", disable_after_rate: true, readonly: true %>
           </ul>
