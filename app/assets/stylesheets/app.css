@@ -29,6 +29,11 @@
     color: black;
 }
 
+.user_property_listing h3 {
+    padding: 5px !important;
+    line-height: 27px !important;
+}
+
 /* Buttons */
 
 .btn {

@@ -1,44 +1,7 @@
 <div id="wrapper">
     <div class="row">
     	<div class="col-lg-6">
-    		<% if @buildings.present? %>
-	    		<h3>Listed Properties (<%= @buildings.count %>)</h3>
-	    		<% @buildings.each do |building| %>
-	    			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-			            <a href="<%= building_path(building) %>" class="card">
-			                <div class="figure">
-			                    <img src="/assets/prop/1-1.png" alt="image">
-			                    <div class="figCaption">
-			                        <div>$1,550,000</div>
-			                        <span class="icon-eye"> 200</span>
-			                        <span class="icon-heart"> 54</span>
-			                        <span class="icon-bubble"> 13</span>
-			                    </div>
-			                    <div class="figView"><span class="icon-eye"></span></div>
-			                    <div class="figType">FOR SALE</div>
-			                </div>
-			                <h2><%= building.building_name_or_address %></h2>
-			                <div class="cardAddress"><span class="icon-pointer"></span> <%= building.street_address %>, <%= building.zipcode %></div>
-			                <div class="cardRating">
-			                    <%= rating_for building, "building", disable_after_rate: true, readonly: true %>
-			                </div>
-			                <ul class="cardFeat">
-			                    <li><span class="fa fa-star-o"></span> <%= building.reviews_count %></li>
-			                    <li><span class="icon-drop"></span> 2</li>
-			                    <li><span class="icon-frame"></span> 3430 Sq Ft</li>
-			                </ul>
-			                <div class="clearfix"></div>
-			            </a>
-			        </div>
-	    		<%end%>
-	    	<%else%>
-	    		<h3>Listed Properties(0)</h3>
-	    		<%= link_to 'Add a property', new_building_path, class: 'btn btn-blue' %>
-	    	<%end%>
-    	</div>
-    	
-		<div id="content" class="mob-max">
-	        <div class="singleTop whiteBg">
+    		<div class="singleTop whiteBg">
 	            <div class="row mb20">
 	                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pb20">
 	                    <div class="row">
@@ -128,6 +91,46 @@
 	                </div>
 	            </div>
 	        </div>
+    	</div>
+
+		<div id="content" class="mob-max user_property_listing">
+			<h3>Listed Properties (<%= @buildings.count %>)</h3>
+	      	<div class="row">
+	       		<% if @buildings.present? %>
+		    		<% @buildings.each do |building| %>
+		    			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				            <a href="<%= building_path(building) %>" class="card">
+				                <div class="figure">
+				                    <img src="/assets/prop/1-1.png" alt="image">
+				                    <div class="figCaption">
+				                        <div>$1,550,000</div>
+				                        <span class="icon-eye"> 200</span>
+				                        <span class="icon-heart"> 54</span>
+				                        <span class="icon-bubble"> 13</span>
+				                    </div>
+				                    <div class="figView"><span class="icon-eye"></span></div>
+				                    <div class="figType">FOR SALE</div>
+				                </div>
+				                <h2><%= building.building_name_or_address %></h2>
+				                <div class="cardAddress"><span class="icon-pointer"></span> <%= building.street_address %>, <%= building.zipcode %></div>
+				                <div class="cardRating">
+				                    <%= rating_for building, "building", disable_after_rate: true, readonly: true %>
+				                </div>
+				                <ul class="cardFeat">
+				                    <li><span class="fa fa-star-o"></span> <%= building.reviews_count %></li>
+				                    <li><span class="icon-drop"></span> 2</li>
+				                    <li><span class="icon-frame"></span> 3430 Sq Ft</li>
+				                </ul>
+				                <div class="clearfix"></div>
+				            </a>
+				        </div>
+		    		<%end%>
+		    	<%else%>
+		    		<h3>Listed Properties(0)</h3>
+		    		<%= link_to 'Add a property', new_building_path, class: 'btn btn-blue' %>
+		    	<%end%>
+	    	</div>
+	    	<%= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
 	    </div>
     	<div class="clearfix"></div>
     </div>
