@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@buildings = @user.buildings.paginate(:page => params[:page], :per_page => 20).order('created_at desc')
+		@buildings = @user.buildings.paginate(:page => params[:page], :per_page => 20)
 	end
 
 	def edit

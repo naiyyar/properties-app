@@ -13,6 +13,8 @@ class Building < ActiveRecord::Base
   accepts_nested_attributes_for :uploads, :allow_destroy => true
   accepts_nested_attributes_for :units, :allow_destroy => true
 
+  default_scope { order('updated_at desc') } 
+
   #has_attached_file :photo, styles: { large: "600x600>", medium: "400x400>", thumb: "100x100>", small: "32x32>" }
   #validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 
@@ -76,7 +78,7 @@ class Building < ActiveRecord::Base
   end
 
   def self.buildings_in_neighborhood params
-    where("neighborhood @@ :q or neighborhoods_parent @@ :q" , q: "%#{params[:neighborhoods]}").paginate(:page => params[:page], :per_page => 5) #.to_a.uniq(&:building_street_address)
+    where("neighborhood @@ :q or neighborhoods_parent @@ :q" , q: "%#{params[:neighborhoods]}").paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
   end
 
   def fetch_or_create_unit params

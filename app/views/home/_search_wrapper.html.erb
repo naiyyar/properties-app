@@ -4,7 +4,7 @@
 
 <div id="content">
   <div class="filter">
-      <h1 class="osLight">Filter your results - <b><%= "@buildings.present? ? #{@buildings.count} Properties Available : '' "%> </b></h1>
+      <h1 class="osLight">Filter your results - <b><%= @buildings.present? ? "#{@buildings.count} Properties Available" : '' %> </b></h1>
       <a href="#" class="handleFilter"><span class="icon-equalizer"></span></a>
       <div class="clearfix"></div>
       <form class="filterForm">

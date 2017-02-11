@@ -94,14 +94,14 @@
     	</div>
 
 		<div id="content" class="mob-max user_property_listing">
-			<h3>Listed Properties (<%= @buildings.count %>)</h3>
-	      	<div class="row">
-	       		<% if @buildings.present? %>
+			<% if @buildings.present? %>
+				<h3>Listed Properties (<%= @buildings.count %>)</h3>
+	      		<div class="row">
 		    		<% @buildings.each do |building| %>
 		    			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 				            <a href="<%= building_path(building) %>" class="card">
 				                <div class="figure">
-				                    <img src="/assets/prop/1-1.png" alt="image">
+				                    <%= image_tag single_image(building), alt: 'image' %>
 				                    <div class="figCaption">
 				                        <div>$1,550,000</div>
 				                        <span class="icon-eye"> 200</span>
@@ -125,11 +125,11 @@
 				            </a>
 				        </div>
 		    		<%end%>
-		    	<%else%>
-		    		<h3>Listed Properties(0)</h3>
-		    		<%= link_to 'Add a property', new_building_path, class: 'btn btn-blue' %>
-		    	<%end%>
-	    	</div>
+		    	</div>
+	    	<%else%>
+	    		<h3>Listed Properties(0)</h3>
+	    		<%= link_to 'Add a property', new_building_path, class: 'btn btn-blue' %>
+	    	<%end%>
 	    	<%= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
 	    </div>
     	<div class="clearfix"></div>

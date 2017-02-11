@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @recntly_listed_properties = Building.order('created_at desc').limit(6)
+    @recently_listed_properties = Building.all.limit(6)
   end
 
   def search
@@ -15,7 +15,7 @@ class HomeController < ApplicationController
           search_term = params['apt-search-txt'].split(' - ')
           if(search_term.length > 1)
             zipcode = search_term[0]
-            @buildings = Building.where('zipcode = ?',zipcode).paginate(:page => params[:page], :per_page => 10) #.to_a.uniq(&:building_street_address)
+            @buildings = Building.where('zipcode = ?',zipcode).paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
             @zoom = 14
           else
             zipcode = params['apt-search-txt']

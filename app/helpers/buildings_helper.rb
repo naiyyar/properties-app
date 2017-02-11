@@ -36,4 +36,8 @@ module BuildingsHelper
 	def building_name_or_address building
 		building.building_name.present? ? building.building_name : building.building_street_address
 	end
+
+	def single_image(building)
+		building.uploads.present? ? building.uploads.last.image.url : 'no-photo-available.jpg'
+	end
 end
