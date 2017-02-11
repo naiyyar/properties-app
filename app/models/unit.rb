@@ -7,6 +7,7 @@ class Unit < ActiveRecord::Base
 	belongs_to :building
 	has_many :reviews, as: :reviewable
 	has_many :rental_price_histories
+	belongs_to :user
 
 	has_many :uploads, as: :imageable
   	accepts_nested_attributes_for :uploads, :allow_destroy => true

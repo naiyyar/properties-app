@@ -4,10 +4,12 @@
 
 <div id="content">
   <div class="filter">
-      <h1 class="osLight">Filter your results - <b><%= @buildings.present? ? "#{@buildings.count} Properties Available" : '' %> </b></h1>
-      <a href="#" class="handleFilter"><span class="icon-equalizer"></span></a>
+      <h1 class="osLight"> 
+      <!-- Filter your results -  -->
+      <b><%= @buildings.present? ? "#{@buildings.count} Properties Available" : '' %> </b></h1>
+      <a href="#" class="handleFilter hidden"><span class="icon-equalizer"></span></a>
       <div class="clearfix"></div>
-      <form class="filterForm">
+      <!-- <form class="filterForm">
           <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
                   <div class="formField">
@@ -72,7 +74,7 @@
                   </div>
               </div>
           </div>
-      </form>
+      </form> -->
   </div>
   
   <div class="resultsList">

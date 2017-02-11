@@ -11,3 +11,10 @@ jQuery ->
 	$('[data-toggle="popover"]').popover({ trigger: "hover" })
 
 	$('input, textarea').placeholder()
+
+	$(document).on "page:change", ->
+  		$(".dropzone").dropzone()
+	    	paramName: "upload[image][]",
+	    	uploadMultiple: true,
+	    	parallelUploads: 100,
+	    	maxFiles: 100
