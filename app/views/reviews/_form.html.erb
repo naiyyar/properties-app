@@ -24,7 +24,8 @@
   <div class="col-sm-12">
 	  <div class="form-group">
 	    <label>Rating</label>
-	    	<%= rating_for_user @reviewable, nil, @reviewable.class.name.downcase, star: 5 %>
+	    	<% rating_user = current_user.present? ? current_user : nil %>
+	    	<%= rating_for_user @reviewable, rating_user, @reviewable.class.name.downcase, star: 5 %>
 			<span class='message hide rating-not-selected'>Please choose an answer for 'Rating'.</span>
 		</div>
 	</div>

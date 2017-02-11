@@ -3,14 +3,13 @@
   <a href="#" class="home-navHandler visible-xs"><span class="fa fa-bars"></span></a>
   <div class="home-nav">
     <ul>
-    	<li class="hidden-xs"><%=link_to 'Buildings', buildings_path %></li>
-    	<li class="hidden-xs"><%=link_to 'Units', units_path %></li>
+    	<li class="hidden-xs"><%#=link_to 'Buildings', buildings_path %></li>
+    	<li class="hidden-xs"><%#=link_to 'Units', units_path %></li>
     	<% unless current_user.present? %>
-    		<li class="hidden-xs"><a href="#">|</a></li>
 	      <li><a href="#" data-toggle="modal" data-target="#signup">Sign Up</a></li>
 	      <li><a href="#" data-toggle="modal" data-target="#signin">Sign In</a></li>
 	    <%end%>
-      <li><a href="#">|</a></li>
+      <li class="hidden-xs"><a href="#">|</a></li>
       <li class="list_property"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
     </ul>
   </div>

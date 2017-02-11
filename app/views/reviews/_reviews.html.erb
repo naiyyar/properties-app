@@ -2,9 +2,9 @@
 <div class="comment">
     <div class="commentAvatar">
       <% if review.user.avatar.present? %>
-        <%= image_tag review.user.avatar %>
+        <%= image_tag review.user.avatar, class: 'avatar' %>
       <% elsif review.user.image_url.present? %>
-        <%= image_tag review.user.image_url %>
+        <%= image_tag review.user.image_url, class: 'avatar' %>
       <%else%>
         <span class="fa fa-user fa-2x"></span>
       <%end%>

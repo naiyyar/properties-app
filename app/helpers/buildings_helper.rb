@@ -1,7 +1,7 @@
 module BuildingsHelper
 	def rating_for_user(rateable_obj, rating_user, dimension = nil, options = {})
 	   star = options[:star] || 5
-	   readonly = true
+	   #readonly = true
 	  if rating_user.present?
 		  @object = rateable_obj
 		  @user = rating_user
