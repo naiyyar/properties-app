@@ -57,9 +57,9 @@ class HomeController < ApplicationController
               @result_type = 'zipcode'
             else
               # Search with building address
-              @buildings = Building.search_by_street_address(params[:term])
+              @buildings = Building.text_search_by_building_name(params[:term]).order(:building_name)
               if @buildings.present?
-            	 @result_type = 'address'
+            	 @result_type = 'buildings'
               else
                 # Search with city
                 @buildings = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
@@ -67,9 +67,9 @@ class HomeController < ApplicationController
                   @result_type = 'cities'
                 else
                   # Search with building names
-                  @buildings = Building.text_search_by_building_name(params[:term]).order(:building_name)
+                  @buildings = Building.search_by_street_address(params[:term])
                   if @buildings.present?
-                    @result_type = 'buildings'
+                    @result_type = 'address'
                   else
                     @result_type = 'no_match_found'
                   end

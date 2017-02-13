@@ -2,14 +2,14 @@
 <div id="content" class="mob-max">
   <div class="btn-group btn-group-justified" style="padding: 10px 100px;">
     <div class="btn-group">
-      <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-info"  %>
+      <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-info", "data-no-turbolink" => false  %>
     </div>
     <div class="btn-group">
-      <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-warning" %>
+      <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-warning", "data-no-turbolink" => false %>
     </div>
   </div>
   <div class="singleTop">
-    <%= render partial: 'uploads/show_page_slider', locals: { object: @building } %>
+    <%= render partial: 'uploads/show_page_slider', locals: { object: @building, path: new_building_upload_path(building_id: @building) } %>
     <%= render partial: 'building_summary' %>
   </div>
   <div class="clearfix"></div>

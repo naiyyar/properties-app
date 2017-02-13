@@ -1,30 +1,40 @@
-<% if object.uploads.present? %>
-  <div id="carouselFull" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselFull" data-slide-to="1"></li>
-      <li data-target="#carouselFull" data-slide-to="2"></li>
-      <li data-target="#carouselFull" data-slide-to="3"></li>
-    </ol>
-    <div class="carousel-inner">
-      <% object.uploads.each_with_index do |asset, index| %>
-        <div class="item <%= index == 0 ? 'active' : ''%>">
-          <%= image_tag asset.image.url, alt: "" %>
-          <div class="container">
-              <div class="carousel-caption">
-                  
-              </div>
+
+  <% if object.uploads.present? %>
+    <% if object.uploads.count >= 3 %>
+      <div class="rotateslider-container" id="slider">
+        <% object.uploads.each do |upload| %>
+          <div class="rotateslider-item">
+            <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox">
+              <%= image_tag upload.image.url, size: '211x311' %>
+            </a> 
           </div>
+        <%end%>
+        <span class="arrow right js-rotateslider-arrow" data-action="next"><i class="fa fa-angle-right fa-3x"></i></span>
+        <span class="arrow left js-rotateslider-arrow" data-action="prev"><i class="fa fa-angle-left fa-3x"></i></span>
+      </div>
+    <%else%>
+      <div id="carouselFull" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselFull" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+          <% object.uploads.each_with_index do |asset, index| %>
+            <div class="item <%= index == 0 ? 'active' : ''%>">
+              <%= image_tag asset.image.url, alt: "" %>
+              <div class="container">
+                  <div class="carousel-caption">
+                      
+                  </div>
+              </div>
+            </div>
+          <%end%>
         </div>
-      <%end%>
-    </div>
-    <a class="left carousel-control" href="#carouselFull" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
-    <a class="right carousel-control" href="#carouselFull" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
-  </div>
-<%else%>
- <!-- <div class="alert alert-warning alert-dismissible fade in" role="alert">
-    <div class="icon"><span class="fa fa-warning"></span></div>
-    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-    <strong>Warning!</strong> No image available yet, click to add photos to upload images.
-  </div> -->
-<%end%>
+        <a class="left carousel-control" href="#carouselFull" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+        <a class="right carousel-control" href="#carouselFull" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+      </div>
+    <%end%>
+  <%else%>
+    <%= image_tag 'no-photo-available.jpg', size: '311x211', class: 'pull-left' %>
+    <div class="pull-right">No image Found! Please <%= link_to 'Upload', path, "data-no-turbolink" => false %> images.</div>
+  <%end%>

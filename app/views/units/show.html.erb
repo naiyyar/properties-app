@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="singleTop">
-    <%= render partial: 'uploads/show_page_slider', locals: { object: @unit } %>
+    <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
     <%= render partial: 'unit_summary' %>
   </div>
   <div class="clearfix"></div>

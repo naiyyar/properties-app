@@ -1,4 +1,5 @@
 class Building < ActiveRecord::Base
+  include PgSearch
   acts_as_voteable
   validates :building_street_address, presence: true
   validates_uniqueness_of :building_street_address, scope: :zipcode
@@ -25,28 +26,25 @@ class Building < ActiveRecord::Base
   after_create :save_neighborhood
   after_update :update_neighborhood
 
-  include PgSearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
     :using => { :trigram => {
                   :threshold => 0.1
                 }
               }
   pg_search_scope :text_search_by_building_name, against: [:building_name],
-    :using => { :trigram => {
-                  :threshold => 0.1
-                }
-              }
+    :using =>[:tsearch, :trigram]
+
   pg_search_scope :search_by_street_address, against: [:building_street_address],
-    :using => { :trigram => { :threshold => 0.1 } }
+    :using => [:tsearch, :trigram]
 
   pg_search_scope :text_search_by_city, against: [:city],
-    :using => { :trigram => { :threshold => 0.1 } }
+    :using => [:tsearch, :trigram]
 
   pg_search_scope :text_search_by_neighborhood, against: [:neighborhood],
-    :using => { :trigram => { :threshold => 0.1 } }
+    :using => [:tsearch, :trigram]
 
   pg_search_scope :text_search_by_parent_neighborhood, against: [:neighborhoods_parent],
-    :using => { :trigram => { :threshold => 0.1 } }
+    :using => [:tsearch, :trigram]
 
 
   def zipcode=(val)
@@ -59,6 +57,15 @@ class Building < ActiveRecord::Base
 
   def building_name_or_address
     self.building_name.present? ? self.building_name : street_address
+  end
+
+  def marker_image
+    no_image = 'no-photo-available.jpg'
+    if self.uploads.present?
+      self.uploads.last.image_file_name.present? ? self.uploads.last.image : no_image
+    else
+      no_image
+    end
   end
 
   def self.text_search(term)

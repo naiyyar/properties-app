@@ -6,25 +6,23 @@
         <a href="<%=building_path(building)%>" class="propWidget-2">
           <div class="fig">
             <% if building.uploads.present? %>
-              <%= image_tag building.uploads.last.image.url, alt: '' %>
-              <%= image_tag building.uploads.last.image.url, alt: '', class: 'blur' %>
+              <%= image_tag building.uploads.last.image, alt: 'image', style: "width: 353px; height: 210px;" %>
+              <%= image_tag building.uploads.last.image, alt: 'image', class: 'blur', style: "width: 353px; height: 210px;" %>
             <%else%>
-              <%= image_tag 'prop/1-1.png', alt: '' %>
-              <%= image_tag 'prop/1-1.png', alt: '', class: 'blur' %>
+              <%= image_tag 'prop/1-1.png', alt: 'image' %>
+              <%= image_tag 'prop/1-1.png', alt: 'image', class: 'blur' %>
             <%end%>
             <div class="opac"></div>
             <!-- <div class="priceCap osLight"><span>$1,750,000</span></div> -->
             <!-- <div class="figType">FOR SALE</div> -->
             <h3 class="osLight"><%= building.building_name_or_address %></h3>
             <div class="address"><%= building.street_address %>, <%= building.zipcode %></div>
-            <ul class="rating">
+            <!-- <ul class="rating"> -->
               <%#= rating_for building, "building", disable_after_rate: true,readonly: true, cancel: false %>
-            </ul>
+            <!-- </ul> -->
           </div>
         </a>
       </div>
     <%end%>
-  <%else%>
-
   <%end%>
 </div>
