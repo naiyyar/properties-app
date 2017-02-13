@@ -4196,7 +4196,6 @@ body.black {
 .home-header {
     position: absolute;
     width: 100%;
-    /*padding: 16px; old*/
     padding: 9px 16px 5px;
     color: #fff;
     top: 0;

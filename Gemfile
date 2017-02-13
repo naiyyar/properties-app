@@ -19,9 +19,6 @@ gem 'underscore-rails'
 
 gem 'geocoder'
 
-#for heroku
-gem 'rails_12factor', group: :production
-
 #Error Messages, Form validations
 gem "dynamic_form"
 gem 'client_side_validations'
@@ -103,7 +100,7 @@ end
 
 group :production do
 
-  gem 'rails_12factor', group: :production
+  gem 'rails_12factor'
 
 end
 
