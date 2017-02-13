@@ -4217,7 +4217,6 @@ body.black {
 }
 .home-nav {
     float: right;
-    /*background-color: #0075c9;*/
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;

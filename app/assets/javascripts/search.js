@@ -149,18 +149,33 @@ var brooklyn_and_queens_zipcodes_hash = [
 	{ key: '11436', 				url: 'https://www.dropbox.com/s/xlf5t0uidcamzvf/11436.kml?dl=1' }
 ]
 
+var manhattan_neightborhoods_hash = [
+	{ key: 'Midtown', 				url: 'https://www.dropbox.com/s/6dslyuv4hc4nz5k/midtown.kml?dl=1' }
+]
+
+
+
+//Methods
 
 function brooklyn_and_queens_neighborhoods(term){
 	
 	url = '';
-	
-	$.each(brooklyn_and_queens_neighborhoods_hash, function(index, value ) {
+
+	$.each(manhattan_neightborhoods_hash, function(index, value ) {
 	  if(term == value.key){
 			url = value.url;
 		}
 	});
 	
-	if(url==''){
+	if(url == '' || url == undefined){
+		$.each(brooklyn_and_queens_neighborhoods_hash, function(index, value ) {
+		  if(term == value.key){
+				url = value.url;
+			}
+		});
+	}
+
+	if(url == '' || url == undefined){
 		term = term.split(' - ')[0]
 		$.each(brooklyn_and_queens_zipcodes_hash, function(index, value ) {
 		  if(term == value.key){

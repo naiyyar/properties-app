@@ -27,9 +27,11 @@ class HomeController < ApplicationController
           redirect_to building_path(building.first) if building.present?
         elsif params[:neighborhoods].present?
           @buildings = Building.buildings_in_neighborhood(params)
-          geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
-          @boundary_coords << geo_coordinates
-          @zoom = 14
+          if @brooklyn_neighborhoods != 'Midtown'
+            geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
+            @boundary_coords << geo_coordinates
+            @zoom = 14
+          end
         else
           @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}
           @zoom = 12
