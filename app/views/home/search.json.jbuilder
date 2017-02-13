@@ -1,5 +1,5 @@
 case @result_type
-when 'buildings'
+when 'building_name'
   json.array! @buildings do |building|
     json.id building.id
     json.search_term "#{building.building_name} - #{building.building_street_address}, #{building.city}, #{building.state}, #{building.zipcode}"

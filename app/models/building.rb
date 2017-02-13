@@ -22,30 +22,35 @@ class Building < ActiveRecord::Base
   geocoded_by :street_address
   after_validation :geocode
 
-  #
+  #callbacks
   after_create :save_neighborhood
   after_update :update_neighborhood
 
-  pg_search_scope :search, against: [:building_name, :building_street_address],
-    :using => { :trigram => {
-                  :threshold => 0.1
-                }
-              }
+  #pgsearch
   pg_search_scope :text_search_by_building_name, against: [:building_name],
-    :using =>[:tsearch, :trigram]
+     :using => { :trigram => { :threshold => 0.1 } }
 
   pg_search_scope :search_by_street_address, against: [:building_street_address],
-    :using => [:tsearch, :trigram]
+    :using => {:tsearch=> {}, :trigram=> {
+                  :threshold => 0.3
+                }}
 
   pg_search_scope :text_search_by_city, against: [:city],
-    :using => [:tsearch, :trigram]
+    :using => {:tsearch=> {}, :trigram=> {
+                  :threshold => 0.1
+                }}
 
-  pg_search_scope :text_search_by_neighborhood, against: [:neighborhood],
-    :using => [:tsearch, :trigram]
+  def self.text_search_by_neighborhood(query)
+    where("similarity(neighborhood, ?) > 0.2", query)
+  end
 
-  pg_search_scope :text_search_by_parent_neighborhood, against: [:neighborhoods_parent],
-    :using => [:tsearch, :trigram]
+  def self.text_search_by_parent_neighborhood(query)
+    where("similarity(neighborhoods_parent, ?) > 0.3", query)
+  end
 
+  def self.text_search_by_zipcode query
+    where("similarity(zipcode, ?) > 0.5", query)
+  end
 
   def zipcode=(val)
     write_attribute(:zipcode, val.gsub(/\s+/,''))
@@ -78,10 +83,6 @@ class Building < ActiveRecord::Base
 
   def reviews_count
     self.reviews.present? ? self.reviews.count : 0
-  end
-
-  def self.text_search_by_zipcode search_term
-    where('zipcode @@ :q', q: search_term)
   end
 
   def self.buildings_in_neighborhood params

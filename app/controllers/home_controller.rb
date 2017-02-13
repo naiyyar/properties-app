@@ -41,32 +41,32 @@ class HomeController < ApplicationController
       end
     else
       if params[:term].present?
-    		# Search with parent neighborhood
-        @buildings = Building.text_search_by_neighborhood(params[:term]).order(:building_name).to_a.uniq(&:neighborhood)
+    		# Search with zipcode
+        @buildings = Building.text_search_by_zipcode(params[:term])
         if @buildings.present?
-          @result_type = 'neighborhood'
+          @result_type = 'zipcode'
         else
-          # Search with neighborhood
-          @buildings = Building.text_search_by_parent_neighborhood(params[:term]).to_a.uniq(&:neighborhoods_parent)
+          
+          @buildings = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
           if @buildings.present?
-            @result_type = 'pneighborhood'
+            @result_type = 'cities'
           else
-            # Search with zipcode
-            @buildings = Building.text_search_by_zipcode(params[:term])
+            
+            @buildings = Building.text_search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
             if @buildings.present?
-              @result_type = 'zipcode'
+              @result_type = 'neighborhood'
             else
-              # Search with building address
+              
               @buildings = Building.text_search_by_building_name(params[:term]).order(:building_name)
               if @buildings.present?
-            	 @result_type = 'buildings'
+            	 @result_type = 'building_name'
               else
-                # Search with city
-                @buildings = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
+               
+                @buildings = Building.text_search_by_parent_neighborhood(params[:term]).to_a.uniq(&:neighborhoods_parent)
             	  if @buildings.present?
-                  @result_type = 'cities'
+                  @result_type = 'pneighborhood'
                 else
-                  # Search with building names
+                  # Search with address
                   @buildings = Building.search_by_street_address(params[:term])
                   if @buildings.present?
                     @result_type = 'address'
