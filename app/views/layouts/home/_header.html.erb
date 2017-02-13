@@ -3,14 +3,27 @@
   <a href="#" class="home-navHandler visible-xs"><span class="fa fa-bars"></span></a>
   <div class="home-nav">
     <ul>
-    	<li class="hidden-xs"><%#=link_to 'Buildings', buildings_path %></li>
-    	<li class="hidden-xs"><%#=link_to 'Units', units_path %></li>
-    	<% unless current_user.present? %>
-	      <li><a href="#" data-toggle="modal" data-target="#signup">Sign Up</a></li>
-	      <li><a href="#" data-toggle="modal" data-target="#signin">Sign In</a></li>
-	    <%end%>
-      <li class="hidden-xs"><a href="#">|</a></li>
-      <li class="list_property"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
+      <% unless user_signed_in? %>
+        <li><a href="#" data-toggle="modal" data-target="#signup">Sign Up</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#signin">Sign In</a></li>
+      <%end%>
+      <% if user_signed_in? %>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="headerUserName"><%= current_user.present? ? current_user.user_name.capitalize : '' %> </span> <span class="fa fa-angle-down"></span>
+            <div class="clearfix"></div>
+          </a>
+          <div class="dropdown-menu pull-right userMenu homeUserMenu" style="background-color: #2c2d2e; border: 0px solid #2c2d2e;" role="menu">
+            <ul>
+              <li class="no-hover-underline"><a href="<%= edit_user_path(current_user) %>"><span class="icon-settings"></span>Settings</a></li>
+              <li class="no-hover-underline"><a href="<%= user_path(current_user) %>"><span class="icon-user"></span>Profile</a></li>
+              <li class="divider"></li>
+              <li class="no-hover-underline"><%= link_to '<span class="icon-power"></span>Logout'.html_safe, destroy_user_session_path, :method => :delete %> </li>
+            </ul>
+          </div>
+        </li>
+      <%end%>
+      <li class="no-hover-underline"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
     </ul>
   </div>
 </div>

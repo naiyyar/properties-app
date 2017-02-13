@@ -13,7 +13,6 @@
     <%= csrf_meta_tags %>
   </head>
   <body class="notransition no-hidden">
-    <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <% unless params[:controller] == 'home' and params[:action] == 'index'%>
       <%= render partial: 'layouts/shared/header' %>
       <%= render partial: 'layouts/shared/left_side' %>
@@ -24,7 +23,8 @@
         </div>
       </div>
     <%else%>
-       <%= yield %>
+      <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
+      <%= yield %>
     <%end%>
   
     <%= javascript_include_tag 'infobox' %>

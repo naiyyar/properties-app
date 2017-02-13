@@ -15,7 +15,7 @@ class HomeController < ApplicationController
           search_term = params['apt-search-txt'].split(' - ')
           if(search_term.length > 1)
             zipcode = search_term[0]
-            @buildings = Building.where('zipcode = ?',zipcode).paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
+            @buildings = Building.where('zipcode = ?',zipcode).paginate(:page => params[:page], :per_page => 20)
             @zoom = 14
           else
             zipcode = params['apt-search-txt']
@@ -57,7 +57,7 @@ class HomeController < ApplicationController
               @result_type = 'neighborhood'
             else
               
-              @buildings = Building.text_search_by_building_name(params[:term]).order(:building_name)
+              @buildings = Building.text_search_by_building_name(params[:term]).reorder(:building_name)
               if @buildings.present?
             	 @result_type = 'building_name'
               else
