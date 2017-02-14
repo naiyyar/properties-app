@@ -8,9 +8,12 @@
         <li><a href="#" data-toggle="modal" data-target="#signin">Sign In</a></li>
       <%end%>
       <% if user_signed_in? %>
-        <li>
+        <li class="no-hover-underline" style="padding-top: 3px;">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="headerUserName"><%= current_user.present? ? current_user.user_name.capitalize : '' %> </span> <span class="fa fa-angle-down"></span>
+            <%= image_tag current_user.avatar, class: "avatar homeHeaderAvatar pull-left", alt: 'Avatar'%>
+            <div class="userTop pull-left" style="margin: 8px 0 0 7px;">
+              <span class="headerUserName"><%= current_user.present? ? current_user.user_name.capitalize : '' %> </span> <span class="fa fa-angle-down"></span>
+            </div>
             <div class="clearfix"></div>
           </a>
           <div class="dropdown-menu pull-right userMenu homeUserMenu" style="background-color: #2c2d2e; border: 0px solid #2c2d2e;" role="menu">

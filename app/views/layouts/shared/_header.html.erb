@@ -1,9 +1,7 @@
 <div id="header">
   <div class="logo">
     <a href="/">
-      <!-- <span class="fa fa-home marker"></span> -->
       <%=image_tag 'logo1.png', alt: 'logo', width: '200' %>
-      <!-- <span class="logoText">TCHome</span> -->
     </a>
   </div>
     
@@ -13,6 +11,9 @@
     <%= render partial: 'layouts/shared/search_form' %>
   </div>
   <% if user_signed_in? %>
+    <div class="pull-right shared_contribute_btn">
+      <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
+    </div>
     <div class="headerUserWraper">
       <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span><span class="counter">5</span></a>
       <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">
@@ -30,7 +31,6 @@
         <ul>
           <li><a href="<%= edit_user_path(current_user) %>"><span class="icon-settings"></span>Settings</a></li>
           <li><a href="<%= user_path(current_user) %>"><span class="icon-user"></span>Profile</a></li>
-          <!-- <li><a href="#"><span class="icon-bell"></span>Notifications <span class="badge pull-right bg-red">5</span></a></li> -->
           <li class="divider"></li>
           <li><%= link_to '<span class="icon-power"></span>Logout'.html_safe, destroy_user_session_path, :method => :delete %> </li>
         </ul>
@@ -99,7 +99,6 @@
     </div> -->
   <%else%>
     <a href="#" class="mapHandler"><span class="icon-map"></span></a>
-    <!-- <div class="clearfix"></div> -->
     <div class="home-nav">
     <ul>
       <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a></li>
