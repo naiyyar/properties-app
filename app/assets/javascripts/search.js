@@ -150,7 +150,8 @@ var brooklyn_and_queens_zipcodes_hash = [
 ]
 
 var manhattan_neightborhoods_hash = [
-	{ key: 'Midtown', 				url: 'https://www.dropbox.com/s/6dslyuv4hc4nz5k/midtown.kml?dl=1' }
+	{ key: 'Midtown', 				url: 'https://www.dropbox.com/s/6dslyuv4hc4nz5k/midtown.kml?dl=1' },
+	{ key: 'Sutton Place', 			url: 'https://www.dropbox.com/s/z67m9imvezwtx4k/sutton_place.kml?dl=1' }
 ]
 
 

@@ -27,7 +27,7 @@ class HomeController < ApplicationController
           redirect_to building_path(building.first) if building.present?
         elsif params[:neighborhoods].present?
           @buildings = Building.buildings_in_neighborhood(params)
-          if @brooklyn_neighborhoods != 'Midtown'
+          if !manhattan_kmls.include? @brooklyn_neighborhoods
             geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
             @boundary_coords << geo_coordinates
             @zoom = 14
@@ -92,6 +92,11 @@ class HomeController < ApplicationController
 	      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", :locals => { building_link: building_link, :building => building })
 	    end
 	  end
+  end
+
+  private
+  def manhattan_kmls
+    ['Midtown', 'Sutton Place']
   end
 
 end
