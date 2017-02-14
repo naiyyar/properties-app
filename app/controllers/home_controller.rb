@@ -31,6 +31,8 @@ class HomeController < ApplicationController
             geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
             @boundary_coords << geo_coordinates
             @zoom = 14
+          else
+            @zoom = 16 if @brooklyn_neighborhoods == 'Sutton Place'
           end
         else
           @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}

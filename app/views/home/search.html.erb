@@ -3,11 +3,11 @@
 <script type="text/javascript" charset="utf-8">
 	var lat = <%= raw @lat.to_json %>
 	var lng = <%= raw @lng.to_json %>
-	var zoom = <%= @zoom ||= 16 %>
+	var zoom = <%= @zoom %>
 	seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
 	
  	handler = Gmaps.build('Google');
- 	handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
+ 	handler.buildMap({ provider: {disableDoubleClickZoom: true}, internal: {id: 'mapView'}}, function(){
 	
   	json_array = <%= raw @hash.to_json %> ;
     
@@ -21,7 +21,7 @@
 	//Plogon options
 	//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }
 	polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
-    	{ strokeColor: '#2e2e2e', strokeWeight: 2 }
+    	{ strokeColor: '#0e5c9a', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
 	);
 	
 	brooklyn_and_queens_neighborhoods(seach_term) //In search.js
