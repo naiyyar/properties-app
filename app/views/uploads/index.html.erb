@@ -19,11 +19,18 @@
 	</div>
 	<hr />
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-lg-12 col-md-6 col-xs-12">
 			<% @uploads.each do |upload| %>
-				<a href="<%=upload.image.url%>", data-imageable = "<%= imageable(upload) %>" class="fancybox" rel="gallery">
-					<%= image_tag upload.image.url, size: '222x200', class: "img-rounded" %>
-				</a>
+				<div class="col-sm-3">
+                    <a href="<%=upload.image.url%>" data-imageable="<%= imageable(upload) %>" class="propWidget-1 fancybox" rel="gallery">
+                        <div class="fig">
+                            <%= image_tag upload.image.url, alt: 'Image'%>
+                        </div>
+                    </a>
+                    <% if current_user && current_user.has_role?(:admin) %>
+                    	<%= link_to 'Remove', upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs pull-right delete_image' %>
+                    <%end%>
+                </div>
 			<%end %>
 		</div>
 	</div>

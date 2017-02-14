@@ -33,9 +33,10 @@
                 <td><%= link_to 'Price Histories', rental_price_histories_path(unit_id: unit.id) %></td>
                 <td></td>
                 <% if current_user %>
-                <td><%= link_to "edit", edit_unit_path(unit) %></td>
-                <td><%= link_to "delete", unit_path(unit), method: :delete, data: { confirm: "Are you sure you want to delete this building?"}%></td>  
-                <% end %>
+                  <td><%= link_to "edit", edit_unit_path(unit) %></td>
+                  <% if current_user.has_role?(:admin) %>
+                    <td><%= link_to "delete", unit_path(unit), method: :delete, data: { confirm: "Are you sure you want to delete this building?"}%></td>  
+                  <% end %>
                 <%end%>   
               </tr>
             <%end%>
