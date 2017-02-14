@@ -2,7 +2,7 @@ class BuildingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :contribute,:create,:edit, :autocomplete]
 
   def index
-    @buildings = current_user.buildings
+    @buildings = Building.order('created_at desc')
     respond_to do |format|
       format.html
       format.json { 
