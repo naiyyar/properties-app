@@ -1,61 +1,19 @@
-<%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search', role: 'form' do %>
-  <div class="row">
-    <div class="col-lg-6 col-md-6 col-xs-12 col-lg-offset-2">
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-xs-12 col-lg-offset-2">
+    <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search', role: 'form' do %>
+ 
       <div class="form-group">
         <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: "form-control", placeholder: 'Search by Neighborhood, Zip Code, Address, Building name' %>
         <%= hidden_field_tag 'term', nil %>
         <%= hidden_field_tag 'neighborhoods', nil %>
         <div class="results" id="apt-search-results"></div>
       </div>
-    </div>
-  
-    <div class="form-group hidden-lg hidden-xs hidden-md adv">
-    <a href="#" data-toggle="dropdown" class="btn btn-white dropdown-toggle">
-      <span class="dropdown-label">Bedrooms</span> <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu dropdown-select">
-      <li class="active"><input type="radio" name="bedno" checked="checked"><a href="#">Bedrooms</a></li>
-      <li><input type="radio" name="bedno"><a href="#">1</a></li>
-      <li><input type="radio" name="bedno"><a href="#">2</a></li>
-      <li><input type="radio" name="bedno"><a href="#">3</a></li>
-      <li><input type="radio" name="bedno"><a href="#">4</a></li>
-    </ul>
-    </div>
-    <div class="form-group hidden-lg hidden-xs hidden-md adv">
-      <a href="#" data-toggle="dropdown" class="btn btn-white dropdown-toggle">
-        <span class="dropdown-label">Bathrooms</span> <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu dropdown-select">
-        <li class="active"><input type="radio" name="bathno" checked="checked"><a href="#">Bathrooms</a></li>
-        <li><input type="radio" name="bathno"><a href="#">1</a></li>
-        <li><input type="radio" name="bathno"><a href="#">2</a></li>
-        <li><input type="radio" name="bathno"><a href="#">3</a></li>
-        <li><input type="radio" name="bathno"><a href="#">4</a></li>
-      </ul>
-    </div>
-    <div class="form-group hidden-lg hidden-xs hidden-md adv">
-      <div class="input-group">
-        <div class="input-group-addon">$</div>
-        <input class="form-control price" type="text" placeholder="From">
+
+      <div class="col-lg-1 col-xs-12">
+        <div class="form-group">
+          <%= submit_tag 'Search', class: 'btn btn-blue' %>
+        </div>
       </div>
-    </div>
-    <div class="form-group hidden-lg hidden-xs hidden-md adv">
-      <div class="input-group">
-        <div class="input-group-addon">$</div>
-        <input class="form-control price" type="text" placeholder="To">
-      </div>
-    </div>
-  <!-- <div class="form-group hidden-xs adv">
-    <div class="checkbox custom-checkbox"><label><input type="checkbox"><span class="fa fa-check"></span> For Rent</label></div>
+    <%end%>
   </div>
-  <div class="form-group hidden-xs adv">
-    <div class="checkbox custom-checkbox"><label><input type="checkbox"><span class="fa fa-check"></span> For Sale</label></div>
-  </div> -->
-    <div class="col-lg-1">
-      <div class="form-group">
-        <%= submit_tag 'Search', class: 'btn btn-blue' %>
-        <a href="#" class="btn btn-o btn-white pull-right visible-xs visible-sm" id="advanced">Advanced Search <span class="fa fa-angle-up"></span></a>
-      </div>
-    </div>
-  </div>
-<%end%>
+</div>
