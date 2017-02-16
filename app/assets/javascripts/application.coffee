@@ -8,7 +8,6 @@ jQuery ->
 	$('.datepicker').datepicker({
 		format: 'dd-mm-yyyy'
 	});
-	
 	$('[data-toggle="popover"]').popover({ trigger: "hover" })
 
 	$('input, textarea').placeholder()

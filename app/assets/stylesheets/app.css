@@ -553,7 +553,7 @@ a.navHandler {
     background-color: #f3f3f3;
     text-decoration: none;
 }
-a.mapHandler {
+a.mapHandler, a.listHandler {
     float: right;
     text-align: center;
     font-size: 20px;
@@ -4309,7 +4309,7 @@ body.black {
     border: 1px solid #dfdfdf;
     font-family: 'open_sansregular';
     -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
-          box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -5224,6 +5224,9 @@ blockquote {
         background-color: #fff;
         color: #333;
     }
+    .center-xs{
+        text-align: center;
+    }
     .rotateslider-container {
         width: 380px !important;
     }
@@ -5268,7 +5271,7 @@ blockquote {
         display: block;
     }
     #leftSide {
-        top: 50px;
+        top: 98px;
         visibility: hidden;
         opacity: 0;
         margin-left: -87%;
@@ -5314,7 +5317,7 @@ blockquote {
         width: 50px;
         color: #fff;
     }
-    a.mapHandler {
+    a.listHandler {
         display: block;
     }
     .no-touch a.mapHandler:hover {

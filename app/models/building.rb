@@ -27,7 +27,7 @@ class Building < ActiveRecord::Base
   after_update :update_neighborhood
 
   #pgsearch
-  pg_search_scope :search, against: [:building_name],
+  pg_search_scope :search, against: [:building_name, :building_street_address],
      :using => { :trigram => { :threshold => 0.1 } }
 
   pg_search_scope :text_search_by_building_name, against: [:building_name],

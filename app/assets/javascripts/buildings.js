@@ -17,9 +17,15 @@ app.buildings.prototype = {
 
   _render: function(ul, item) {
     $("#buildings-search-no-results").css('display','none');
+    building_name = ''
+    if(item.building_name == '' || item.building_name == undefined){
+      building_name = item.building_street_address;
+    }else{
+      building_name = item.building_name;
+    }
     var markup = [
       '<p class="address"><b>' + item.building_street_address + '</b></p><br/>',
-      '<small class="building_name">' + item.building_name + '</small>'
+      '<small class="building_name">' + building_name + '</small>'
     ];
     
     return $('<li>')

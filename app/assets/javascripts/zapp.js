@@ -438,7 +438,7 @@
     });
 
     // functionality for map manipulation icon on mobile devices
-    $('.mapHandler').click(function() {
+    var listMapView = function(){
         if ($('#mapView').hasClass('mob-min') || 
             $('#mapView').hasClass('mob-max') || 
             $('#content').hasClass('mob-min') || 
@@ -449,6 +449,17 @@
             $('#mapView').toggleClass('min');
             $('#content').toggleClass('max');
         }
+    }
+    $('.listHandler').click(function(){
+        $(this).hide();
+        $('.mapHandler').show();
+        listMapView();
+    })
+    
+    $('.mapHandler').click(function() {
+        $(this).hide();
+        $('.listHandler').show();
+        listMapView();
 
         setTimeout(function() {
             var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
