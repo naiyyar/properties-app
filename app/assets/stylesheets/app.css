@@ -857,8 +857,14 @@ a.headerUser {
     text-align: center;
     padding: 0 8px;
 }
+.home-header a.headerUser, .home-header a.headerUser:hover{
+    color: #fff;
+}
 .no-touch a.headerUser:hover, .headerUserWraper.open a.headerUser {
     background-color: #f3f3f3;
+}
+.no-touch .home-header a.headerUser:hover, .home-header .headerUserWraper.open a.headerUser {
+    background-color: rgba(0,0,0,0) !important;
 }
 .headerUserWraper .dropdown-menu {
     border-radius: 3px;
@@ -4238,7 +4244,7 @@ body.black {
 }
 .home-nav ul {
     margin: 0;
-    padding: 0;
+    padding: 10px 0px;
     list-style-type: none;
     float: right;
     -webkit-transition: all .2s ease-in-out;
@@ -4360,7 +4366,7 @@ a.home-navHandler {
     font-size: 24px;
     line-height: 24px;
     color: #fff;
-    padding: 5px;
+    padding: 11px 0px 0px 9px;
     -webkit-transition: all .5s ease-in-out;
     -o-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
@@ -5326,6 +5332,7 @@ blockquote {
     }
     a.userHandler {
         display: block;
+        padding-top: 8px;
     }
     .no-touch a.userHandler:hover {
         color: #c6e4e3;
