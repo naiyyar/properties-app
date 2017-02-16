@@ -5472,6 +5472,9 @@ blockquote {
     .search-panel form {
         text-align: left;
     }
+    .search-panel {
+        padding: 20px 0px 0 0px;
+    }
     .home-title {
         font-size: 26px;
         line-height: 30px;
