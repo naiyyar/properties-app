@@ -16,5 +16,7 @@
       <li class="no-hover-underline"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
     </ul>
   </div>
-  <%=render partial: 'layouts/shared/user_profile' %>
+  <% if user_signed_in? %>
+    <%=render partial: 'layouts/shared/user_profile' %>
+  <%end%>
 </div>

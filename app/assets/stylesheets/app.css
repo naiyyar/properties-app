@@ -860,6 +860,9 @@ a.headerUser {
 .home-header a.headerUser, .home-header a.headerUser:hover{
     color: #fff;
 }
+.mobAvatarName{
+    color: #333;
+}
 .no-touch a.headerUser:hover, .headerUserWraper.open a.headerUser {
     background-color: #f3f3f3;
 }

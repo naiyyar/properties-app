@@ -1,5 +1,5 @@
 <span class="searchIcon icon-magnifier"></span>
-<%= text_field_tag 'apt-search-txt-searchpage', params['apt-search-txt'], placeholder: 'Neighborhood, Zip Code, Address, Building name' %>
+<%= text_field_tag 'apt-search-txt-searchpage', params['apt-search-txt'], placeholder: 'Neighborhood, ZipCode, Address, Building' %>
 <div class="results" id="apt-search-results"></div>
 
 <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search hide' do %>
