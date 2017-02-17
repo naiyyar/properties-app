@@ -11,7 +11,7 @@
     <%= render partial: 'layouts/shared/search_form' %>
   </div>
   <% if user_signed_in? %>
-    <div class="pull-right shared_contribute_btn">
+    <div class="pull-right shared_contribute_btn hidden-xs">
       <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
     </div>
     

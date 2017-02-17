@@ -678,6 +678,11 @@
 
     $('#datepicker').datepicker();
 
+    //clear text search
+    $('.clearSearchText').click(function(){
+        $("#apt-search-txt-searchpage").val('');
+    })
+
     // functionality for autocomplete address field
     if ($('#address').length > 0) {
         var address = document.getElementById('address');

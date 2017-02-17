@@ -1,6 +1,7 @@
 <div class="home-header">
-  <div class="home-logo osLight"><%=image_tag 'logo1.png', alt: 'logo', width: '200' %></div>
   <a href="#" class="home-navHandler visible-xs"><span class="fa fa-bars"></span></a>
+  <div class="home-logo osLight"><%=image_tag 'logo1.png', alt: 'logo', width: '200' %></div>
+  
 
   <div class="home-nav">
     <ul>
@@ -10,10 +11,16 @@
       <%end%>
       <% if user_signed_in? %>
         <li>
-          <a href="<%= buildings_path %>">Buildings</a></li>
+          <a href="/buildings/contribute" class="visible-xs"><span class="icon-plus"></span><span class="navLabel"> Add a property</span></a>
+        </li>
+        <li>
+          <a href="<%= buildings_path %>"><span class="fa fa-building"></span> Buildings</a></li>
         </li>
       <%end%>
-      <li class="no-hover-underline"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
+      <li class="no-hover-underline hover-underline-xs">
+        <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue hidden-xs' %> 
+        <!-- <a href="/buildings/contribute" class="hidden-xs"><span class="icon-plus"></span><span class="navLabel"> Add a property</span></a> -->
+      </li>
     </ul>
   </div>
   <% if user_signed_in? %>

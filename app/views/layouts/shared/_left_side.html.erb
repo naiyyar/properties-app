@@ -1,28 +1,16 @@
 <div id="leftSide" class="visible-xs1">
   <nav class="leftNav scrollable">
-      <div class="search">
-          <%= render partial: 'layouts/shared/search_form' %>
-          <div class="clearfix"></div>
-      </div>
-      <% if user_signed_in? %>
-        <ul>
-          <li><a href="/buildings"><span class="navIcon fa fa-building"></span><span class="navLabel">Buildings</span></a></li>
-          <li><a href="/units"><span class="navIcon icon-home"></span><span class="navLabel">Units</span></a></li>
-          <li><a href="<%=contribute_buildings_path%>"><span class="navIcon icon-plus"></span><span class="navLabel">Add</span></a></li>
-         <!--  <li class="hasSub">
-            <a href="#"><span class="navIcon icon-link"></span><span class="navLabel">Pages</span><span class="fa fa-angle-left arrowRight"></span></a>
-            <ul>
-                <li><a href="signin.html">Sign In</a></li>
-                <li><a href="signup.html">Sign Up</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="index.html">Homepage Slideshow</a></li>
-                <li><a href="index-map.html">Homepage Map</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="blog-post.html">Blog Post</a></li>
-            </ul>
-          </li> -->
-        </ul>
-      <% end %>
+    <div class="search">
+        <%= render partial: 'layouts/shared/search_form' %>
+        <div class="clearfix"></div>
+    </div>
+    
+    <ul>
+      <li><a href="<%=contribute_buildings_path%>"><span class="navIcon icon-plus"></span><span class="navLabel">Add</span></a></li>
+      <li><a href="/buildings"><span class="navIcon fa fa-building"></span><span class="navLabel">Buildings</span></a></li>
+      <li><a href="/units"><span class="navIcon icon-home"></span><span class="navLabel">Units</span></a></li>
+    </ul>
+    
   </nav>
   <% if user_signed_in? %>
     <div class="leftUserWraper dropup hidden">
