@@ -5310,7 +5310,7 @@ blockquote {
         transition: all .2s ease-in-out;
     }
     #leftSide.expanded {
-        width: 80%;
+        width: 50%;
         opacity: 1;
         visibility: visible;
         margin-left: 0;
