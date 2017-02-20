@@ -19,6 +19,7 @@ class BuildingsController < ApplicationController
   def contribute
     @buildings = Building.text_search(params[:term])
     @building = Building.where(id: params[:building_id]).first if params[:building_id].present?
+    @search_bar_hidden = :hidden
   end
 
   def show

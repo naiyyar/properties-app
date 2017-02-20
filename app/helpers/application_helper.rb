@@ -9,6 +9,10 @@ module ApplicationHelper
     end
   end
 
+  def search_bar(status)
+    @search_bar_hidden == status ? 'hidden' : ''
+  end
+
 	def resource_name
     :user
   end

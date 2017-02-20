@@ -5216,6 +5216,13 @@ blockquote {
     }
 }
 
+@media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {  
+    .logo, .logo.expanded {
+        left: 39% !important;
+    }
+        
+}
+
 @media screen and (max-width: 767px) {  
     a {
         -webkit-transition: none;
@@ -5246,15 +5253,20 @@ blockquote {
         text-align: center;
     }
     .rotateslider-container {
-        width: 380px !important;
+        width: 350px !important;
+        height: 184px !important;
+    }
+    .rotateslider-container img {
+        height: 180px;
+        width: 130px;
     }
     .logo, .logo.expanded {
         position: absolute;
         top: 0;
-        /*left: 25%;*/
+        left: 31%;
         width: 140px;
         height: 49px;
-        margin-left: 51px;
+        /*margin-left: 51px;*/
         background-color: rgba(25, 25, 25, 0.39)
     }
     .logo a > img, .logo.expanded a > img{
@@ -5298,10 +5310,11 @@ blockquote {
         transition: all .2s ease-in-out;
     }
     #leftSide.expanded {
-        width: 87%;
+        width: 80%;
         opacity: 1;
         visibility: visible;
         margin-left: 0;
+        z-index: 9999;
     }
     .closeLeftSide {
         width: 13%;
@@ -5324,7 +5337,7 @@ blockquote {
     }
     .headerUserWraper {
         height: 50px;
-        margin-left: 20px;
+        margin-left: 40px;
     }
     a.headerUser {
         display: none;
@@ -5511,7 +5524,7 @@ blockquote {
         margin-top: -17px;
     }
     .home-header a.home-navHandler {
-        margin-right: 20px;
+        margin-right: 25px;
         padding: 0px;
     }
     .home-caption {

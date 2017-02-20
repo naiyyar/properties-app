@@ -10,16 +10,17 @@
         <li><a href="#" data-toggle="modal" data-target="#signin">Sign In</a></li>
       <%end%>
       <% if user_signed_in? %>
-        <li>
-          <a href="/buildings/contribute" class="visible-xs"><span class="icon-plus"></span><span class="navLabel"> Add a property</span></a>
-        </li>
-        <li>
-          <a href="<%= buildings_path %>"><span class="fa fa-building"></span> Buildings</a></li>
-        </li>
+        <% if current_user.has_role?(:admin) %>
+          <li>
+            <a href="/buildings/contribute" class="visible-xs"><span class="icon-plus"></span><span class="navLabel"> Write a review</span></a>
+          </li>
+          <li>
+            <a href="<%= buildings_path %>"><span class="fa fa-building"></span> Buildings</a></li>
+          </li>
+        <%end%>
       <%end%>
       <li class="no-hover-underline hover-underline-xs">
         <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue hidden-xs' %> 
-        <!-- <a href="/buildings/contribute" class="hidden-xs"><span class="icon-plus"></span><span class="navLabel"> Add a property</span></a> -->
       </li>
     </ul>
   </div>

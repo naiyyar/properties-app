@@ -1,27 +1,29 @@
 <div id="header">
+  <a href="#" class="navHandler"><span class="fa fa-bars"></span></a>
   <div class="logo">
-    <a href="/">
-      <%=image_tag 'logo1.png', alt: 'logo' %>
-    </a>
+    <a href="/"><%=image_tag 'logo1.png', alt: 'logo' %></a>
   </div>
     
-  <a href="#" class="navHandler"><span class="fa fa-bars"></span></a>
-    
-  <div class="search">
+  
+  <div class="search <%= search_bar(:hidden) %>">
     <%= render partial: 'layouts/shared/search_form' %>
   </div>
   <% if user_signed_in? %>
     <div class="pull-right shared_contribute_btn hidden-xs">
       <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
     </div>
-    
-    <%=render partial: 'layouts/shared/user_profile' %>
-    
-    <a href="#" class="mapHandler"><span class="icon-map"></span></a>
-    <a href="#" class="listHandler"><span class="icon-list"></span></a>
+    <% if params[:controller] == 'home' and params[:action] == 'index' %>
+      <%=render partial: 'layouts/shared/user_profile' %>
+    <%end%>
+    <% if params[:action] == 'search' %>
+      <a href="#" class="mapHandler"><span class="icon-map"></span></a>
+      <a href="#" class="listHandler"><span class="icon-list"></span></a>
+    <%end%>
   <%else%>
-    <a href="#" class="mapHandler"><span class="icon-map"></span></a>
-    <a href="#" class="listHandler"><span class="icon-list"></span></a>
+    <% if params[:action] == 'search' %>
+      <a href="#" class="mapHandler"><span class="icon-map"></span></a>
+      <a href="#" class="listHandler"><span class="icon-list"></span></a>
+    <%end%>
     <div class="home-nav">
     <ul>
       <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a></li>
