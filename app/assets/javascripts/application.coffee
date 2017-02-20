@@ -11,3 +11,8 @@ jQuery ->
 	$('[data-toggle="popover"]').popover({ trigger: "hover" })
 
 	$('input, textarea').placeholder()
+
+	$(document).on 'click', '.left-side-zindex', (e) ->
+		parentElem = $(this).parents().find('#leftSide')
+		if(parentElem.hasClass('expanded'))
+			parentElem.css('z-index', 999)
