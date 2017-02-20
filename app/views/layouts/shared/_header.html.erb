@@ -1,10 +1,9 @@
 <div id="header">
   <a href="#" class="navHandler"><span class="fa fa-bars"></span></a>
   <div class="logo">
-    <a href="/"><%=image_tag 'logo1.png', alt: 'logo' %></a>
+    <a href="/"><%=image_tag 'logo1.png', alt: 'logo', class: 'hidden-xs' %><%=image_tag 'logo_white.png', alt: 'logo', class: 'visible-xs' %></a>
   </div>
     
-  
   <div class="search <%= search_bar(:hidden) %>">
     <%= render partial: 'layouts/shared/search_form' %>
   </div>

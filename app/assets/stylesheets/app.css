@@ -5267,7 +5267,8 @@ blockquote {
         width: 140px;
         height: 49px;
         /*margin-left: 51px;*/
-        background-color: rgba(25, 25, 25, 0.39)
+        /*old bg color rgba(25, 25, 25, 0.39)*/
+        background-color: transparent; 
     }
     .logo a > img, .logo.expanded a > img{
         width: 135px;
@@ -5336,8 +5337,13 @@ blockquote {
         display: none;
     }
     .headerUserWraper {
-        height: 50px;
-        margin-left: 40px;
+        /*height: 50px;*/
+        /*margin-left: 40px;*/
+        position: absolute;
+        float: right;
+        top: 10px;
+        right: 0px;
+        z-index: 9999;
     }
     a.headerUser {
         display: none;
@@ -5526,6 +5532,12 @@ blockquote {
     .home-header a.home-navHandler {
         margin-right: 25px;
         padding: 0px;
+    }
+    a.home-navHandler{
+        position: absolute;
+        z-index: 9999;
+        top: 10px;
+        left: 0;
     }
     .home-caption {
         top: 150px;
