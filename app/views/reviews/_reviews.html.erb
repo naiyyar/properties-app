@@ -1,4 +1,3 @@
-<h3><span><%=reviewable.reviews.count%></span> Reviews</h3>
 <div class="comment">
     <div class="commentAvatar">
       <% if review.user.avatar.present? %>
@@ -37,7 +36,9 @@
               <%end%>
               <li><a href="#">
                 Tenant: <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> 
-                (<%= review.stay_time if review.tenant_status != 'visitor' %>)
+                <% if review.tenant_status != 'visitor' %>
+                  (<%= review.stay_time %>)
+                <%end%>
               </a></li> 
             </ul>
             <div class="clearfix"></div>

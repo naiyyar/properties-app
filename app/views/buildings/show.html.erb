@@ -1,5 +1,6 @@
-<div id="mapView" class="mob-min"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
-<div id="content" class="mob-max">
+<div id="mapView" class="mob-min11"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
+
+<div id="content" class="mob-max11">
   <div class="btn-group btn-group-justified" style="padding: 10px 100px;">
     <div class="btn-group">
       <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-info", "data-no-turbolink" => false  %>
@@ -9,38 +10,65 @@
     </div>
   </div>
   <div class="singleTop">
-    <%= render partial: 'uploads/show_page_slider', locals: { object: @building, path: new_building_upload_path(building_id: @building) } %>
     <%= render partial: 'building_summary' %>
-  </div>
-  <div class="clearfix"></div>
+    <%= render partial: 'uploads/show_page_slider', locals: { object: @building, path: new_building_upload_path(building_id: @building) } %>
+
   <div class="description">
-      <h3>Description</h3>
-      <p><%= @building.description ? simple_format(@building.description) : 'No description available' %></p>
-  </div>
-  <div class="share">
-      <h3>Share on Social Networks</h3>
-      <div class="row">
-          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
-              <a href="#" class="btn btn-sm btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span> Facebook</a>
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
-              <a href="#" class="btn btn-sm btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span> Twitter</a>
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
-              <a href="#" class="btn btn-sm btn-round btn-o btn-google"><span class="fa fa-google-plus"></span> Google+</a>
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
-              <a href="#" class="btn btn-sm btn-round btn-o btn-pinterest"><span class="fa fa-pinterest"></span> Pinterest</a>
-          </div>
-      </div>
+    <h3>Description</h3>
+    <p><%= @building.description ? simple_format(@building.description) : 'No description available' %></p>
   </div>
   <%= render partial: 'building_amenities' %>
-  <%= render partial: 'similiar_properties' %>
-  <div class="comments">
-    <% @building.reviews.order('created_at desc').each do |review| %>
-      <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
-    <% end %>
+  <!-- <div class="share">
+    <h3>Share on Social Networks</h3>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+            <a href="#" class="btn btn-sm btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span> Facebook</a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+            <a href="#" class="btn btn-sm btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span> Twitter</a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+            <a href="#" class="btn btn-sm btn-round btn-o btn-google"><span class="fa fa-google-plus"></span> Google+</a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
+            <a href="#" class="btn btn-sm btn-round btn-o btn-pinterest"><span class="fa fa-pinterest"></span> Pinterest</a>
+        </div>
+    </div>
+  </div> -->
+    
   </div>
+  <div class="clearfix"></div>
+  
+  <%= render partial: 'similiar_properties' %>
+
+  <div class="tabsContainer">
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="active"><a href="#buildings" role="tab" data-toggle="tab">Building Reviews (<%=@building.reviews.count%>)</a></li>
+        <li><a href="#units" role="tab" data-toggle="tab">Unit Reviews</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="buildings">
+          <div class="comments">
+            <!-- <h3><span><%#=@building.reviews.count%></span> Reviews</h3> -->
+            <% @building.reviews.order('created_at desc').each do |review| %>
+              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
+            <% end %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="units">
+          <div class="comments">
+            <% @building.units.each do |unit| %>
+              <h3 class="unit_name_header"><%= link_to unit.name, unit_path(unit) %> (<span><%=unit.reviews.count%></span> Reviews)</h3>
+              <% unit.reviews.order('created_at desc').each do |review| %>
+                <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: unit } %>
+              <%end%>
+            <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  
 </div>
 <!-- <div class="commentsFormWrapper">
     <div class="cfAvatar">

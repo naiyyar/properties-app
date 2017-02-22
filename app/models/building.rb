@@ -55,6 +55,12 @@ class Building < ActiveRecord::Base
     where("similarity(zipcode, ?) > 0.5", query)
   end
 
+  def recommended_percent
+    total_votes = self.votes.count
+    like_votes = self.votes.where(vote: true).count
+    recommended = (like_votes / total_votes.to_f) * 100
+  end
+
   def zipcode=(val)
     write_attribute(:zipcode, val.gsub(/\s+/,''))
   end

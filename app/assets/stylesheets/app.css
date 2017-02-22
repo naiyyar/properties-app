@@ -57,6 +57,14 @@
 .clearSearchText:hover{
     color: #a00;
 }
+h3.unit_name_header{
+    background-color: #eee;
+    padding: 10px 4px !important;
+}
+.unit_name_header a{
+    color: #0075c9;
+    text-decoration: underline;
+}
 
 /* Buttons */
 
@@ -2036,7 +2044,7 @@ h1.pageTitle {
     font-size: 12px;
     line-height: 14px;
     color: #999;
-    padding: 0 0 15px 0;
+    padding: 0 0 8px 0;
 }
 .singleTop ul.rating {
     list-style-type: none;
@@ -5220,6 +5228,9 @@ blockquote {
     .logo, .logo.expanded {
         left: 39% !important;
     }
+    .rotateslider-container {
+        margin-top: 10px !important;
+    }
         
 }
 
@@ -5253,7 +5264,7 @@ blockquote {
         text-align: center;
     }
     .rotateslider-container {
-        width: 350px !important;
+        width: 326px !important;
         height: 184px !important;
     }
     .rotateslider-container img {

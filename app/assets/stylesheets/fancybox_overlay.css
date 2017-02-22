@@ -30,6 +30,10 @@
   top: 121px;
 }
 
-.fancybox-wrap{
-  left: 40px !important;
+#fancybox-buttons{
+  display: none;
 }
+
+/*.fancybox-wrap{
+  left: 40px !important;
+}*/

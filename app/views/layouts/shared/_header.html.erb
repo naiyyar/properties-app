@@ -14,12 +14,12 @@
     <% if params[:controller] == 'home' and params[:action] == 'index' %>
       <%=render partial: 'layouts/shared/user_profile' %>
     <%end%>
-    <% if params[:action] == 'search' %>
+    <% if params[:action] == 'search' or (params[:controller] == 'buildings' and params[:action] == 'show') %>
       <a href="#" class="mapHandler"><span class="icon-map"></span></a>
       <a href="#" class="listHandler"><span class="icon-list"></span></a>
     <%end%>
   <%else%>
-    <% if params[:action] == 'search' %>
+    <% if params[:action] == 'search' or (params[:controller] == 'buildings' and params[:action] == 'show') %>
       <a href="#" class="mapHandler"><span class="icon-map"></span></a>
       <a href="#" class="listHandler"><span class="icon-list"></span></a>
     <%end%>

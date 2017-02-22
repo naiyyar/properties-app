@@ -1,14 +1,17 @@
 function createSidebarElem(json){
+  window.data3 = json;
   title = json.marker_title.split(',');
   building_name = title[1];
   address = title[2];
-  zipcode = title[3];
-  full_address = address +', '+zipcode
+  city = title[3];
+  state = title[4];
+  zipcode = title[5];
+
   if(building_name == ' '){
-    building_name = full_address
+    building_name = address
   }
   return ("<h2>" + building_name + "</h2>" +
-  					"<div class='cardAddress'><span class='icon-location-pin'></span>"+ full_address +"</div>"
+  					"<div class='cardAddress'><span class='icon-location-pin'></span>"+ address+','+city+','+state+' '+zipcode +"</div>"
           );
 };
 
