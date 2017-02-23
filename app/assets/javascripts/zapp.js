@@ -450,6 +450,19 @@
             $('#content').toggleClass('max');
         }
     }
+    /* for show page view */
+    $('.listHandlerShow').click(function(){
+        $(this).hide();
+        $('.mapHandlerShow').show();
+        listMapView();
+    })
+
+    $('.mapHandlerShow').click(function(){
+        $(this).hide();
+        $('.listHandlerShow').show();
+        listMapView();
+    })
+    /* end show page */
     $('.listHandler').click(function(){
         $(this).hide();
         $('.mapHandler').show();

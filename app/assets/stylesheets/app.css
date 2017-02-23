@@ -583,7 +583,7 @@ a.navHandler {
     background-color: #f3f3f3;
     text-decoration: none;
 }
-a.mapHandler, a.listHandler {
+a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     float: right;
     text-align: center;
     font-size: 20px;
@@ -595,6 +595,7 @@ a.mapHandler, a.listHandler {
     margin-right: 15px;
     text-decoration: none;
 }
+
 .no-touch a.mapHandler:hover {
     background-color: transparent;
 }
@@ -5376,7 +5377,7 @@ blockquote {
         width: 50px;
         color: #fff;
     }
-    a.listHandler {
+    a.listHandler, a.mapHandlerShow {
         display: block;
     }
     .no-touch a.mapHandler:hover {
