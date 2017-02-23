@@ -3,12 +3,14 @@ class UserStepsController < ApplicationController
 	steps :next_page
 
 	def show
-		if params[:building_id]
+		if params[:building_id].present?
 			@building = @reviewable = @imageable = Building.find(params[:building_id])
 		else
 			@unit = @reviewable = @imageable = Unit.find(params[:unit_id])
 		end
 		@rental_price_history = RentalPriceHistory.new if params[:contribution_for] == 'unit_price_history'
+		@search_bar_hidden = :hidden
+		
 		render_wizard
 	end
 

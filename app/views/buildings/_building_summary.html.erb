@@ -8,16 +8,17 @@
               <%= link_to "Edit", edit_building_path(@building), class: 'btn btn-default btn-xs' %>
             <%end%>
           </h1>
-          <div class="address"><span class="icon-pointer"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>
-          <div class="address"><span class="icon-pointer"></span> <%= @building.neighborhood %></div>
+          <div class="address"><span class="icon-location-pin"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>
+          <div class="address"><%= @building.neighborhood %></div>
           
           <ul class="rating">
             <%= rating_for @building, "building", disable_after_rate: true, readonly: true %>
           </ul>
-          
-          <div class="favLink"><span class="icon-pipe">|</span>
-            <%= @building.votes.present? ? "#{@building.recommended_percent.to_i}% Recommended" : '' %> 
-          </div>
+          <% if @building.votes.present? %>
+            <div class="favLink"><span class="icon-pipe">|</span>
+              <%= "#{@building.recommended_percent.to_i}% Recommended" %> 
+            </div>
+          <%end%>
           <!-- <ul class="stats">
             <li><span class="icon-eye"></span> 200</li>
             <li><span class="icon-bubble"></span> 13</li>

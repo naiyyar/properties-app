@@ -24,8 +24,8 @@ app.buildings.prototype = {
       building_name = item.building_name;
     }
     var markup = [
-      '<p class="address"><b>' + item.building_street_address + '</b></p><br/>',
-      '<small class="building_name">' + building_name + '</small>'
+      '<p class="address"><b>'+item.building_street_address+', '+item.city+', '+item.state+' '+item.zipcode+'</b></p><br/>',
+      '<small class="building_name">'+building_name+'</small>'
     ];
     
     return $('<li>')

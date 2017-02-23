@@ -2,22 +2,22 @@
 <div id="content" class="mob-max">
   <div class="btn-group btn-group-justified" style="padding: 10px 100px;">
     <div class="btn-group">
-      <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-info"  %>
+      <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-info", "data-no-turbolink" => false  %>
     </div>
     <div class="btn-group">
-      <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_unit_review_path(unit_id: @unit), class: "btn btn-warning" %>
+      <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_unit_review_path(unit_id: @unit), class: "btn btn-warning", "data-no-turbolink" => false %>
     </div>
   </div>
   <div class="singleTop">
-    <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
     <%= render partial: 'unit_summary' %>
+    <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
   </div>
   <div class="clearfix"></div>
-  <div class="description">
+  <!-- <div class="description">
       <h3>Description</h3>
       <p><%#= @unit.description ? simple_format(@unit.description) : 'No description available' %></p>
-  </div>
-  <div class="share">
+  </div> -->
+  <!-- <div class="share">
       <h3>Share on Social Networks</h3>
       <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 shareItem">
@@ -33,7 +33,7 @@
               <a href="#" class="btn btn-sm btn-round btn-o btn-pinterest"><span class="fa fa-pinterest"></span> Pinterest</a>
           </div>
       </div>
-  </div>
+  </div> -->
   <%= render partial: 'buildings/building_amenities', locals: { building: @unit.building } %>
   <%= render partial: 'unit_amenities' %>
   <%#= render partial: 'similiar_units' %>

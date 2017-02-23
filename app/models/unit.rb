@@ -21,4 +21,8 @@ class Unit < ActiveRecord::Base
 	      self.all
 	    end
   	end
+
+  	def recommended_percent
+  		Vote.recommended_percent(self)
+  	end
 end

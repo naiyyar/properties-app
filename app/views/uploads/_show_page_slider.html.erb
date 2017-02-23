@@ -37,9 +37,14 @@
       <%end%>
     </div>
   <%end%>
-  <% if @uploads.count > 0 %>
+  <% if object.uploads.count > 0 %>
     <div class="pull-right" style="padding: 10px 20px;">
-      <span class="fa fa-th-large"></span> <%= link_to "See all(#{@uploads.count})", building_uploads_path(building_id: @building.id), "data-no-turbolink" => false %>
+      <span class="fa fa-th-large"></span> 
+      <% if object.kind_of? Building %>
+        <%= link_to "See all(#{object.uploads.count})", building_uploads_path(building_id: object.id), "data-no-turbolink" => false %>
+      <%else%>
+        <%= link_to "See all(#{object.uploads.count})", unit_uploads_path(unit_id: object.id), "data-no-turbolink" => false %>
+      <%end%>
     </div>
   <%end%>
 <%else%>

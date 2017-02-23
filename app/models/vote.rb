@@ -10,5 +10,11 @@ class Vote < ActiveRecord::Base
 
   attr_accessible :vote, :voter, :voteable if ActiveRecord::VERSION::MAJOR < 4
 
+  def self.recommended_percent object
+  	total_votes = object.votes.count
+	like_votes = object.votes.where(vote: true).count
+	recommended = (like_votes / total_votes.to_f) * 100
+  end
+
 
 end

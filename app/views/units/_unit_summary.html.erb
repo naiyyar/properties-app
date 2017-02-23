@@ -8,23 +8,26 @@
               <%= link_to "Edit", edit_unit_path(@unit), class: 'btn btn-default btn-xs' %>
             <%end%>
           </h1>
-          <div class="address"><span class="icon-pointer"></span> 
+          <div class="address"><span class="icon-location-pin"></span> 
             <%= link_to building_path(@unit.building) do %>
               <b>
-                <%= @unit.building.building_street_address %> <br />
-                <%= @unit.building.city %>, <%= @unit.building.state %> <%= @unit.building.zipcode %> <br />
-                <%= @unit.building.building_name %>
+                <%= @unit.building.street_address %>, <%= @unit.building.zipcode %> <br />  
               </b>
             <%end%>
           </div>
+          <div class="address"><span class="fa fa-building"></span> <%= @unit.building.building_name %></div>
           <ul class="rating">
-            <%= rating_for @unit, "unit", disable_after_rate: true %>
+            <%= rating_for @unit, "unit", disable_after_rate: true, readonly: true %>
           </ul>
-          <div class="favLink"><a href="#"><span class="icon-heart"></span></a>54</div>
-          <ul class="stats">
+          <% if @unit.votes.present? %>
+            <div class="favLink"><span class="icon-pipe">|</span>
+              <%= "#{@unit.recommended_percent.to_i}% Recommended" %> 
+            </div>
+          <%end%>
+          <!-- <ul class="stats">
             <li><span class="icon-eye"></span> 200</li>
             <li><span class="icon-bubble"></span> 13</li>
-          </ul>
+          </ul> -->
           <div class="clearfix"></div>
           <ul class="features">
             <li><span class="fa fa-moon-o"></span><div><%= @unit.number_of_bedrooms %> Bedrooms</div></li>
@@ -35,9 +38,6 @@
       </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-      <% if @uploads.count > 0 %>
-        <%= link_to "<span class='fa fa-th-large'></span> See all(#{@uploads.count})</span>".html_safe, unit_uploads_path(unit_id: @unit.id), class: 'pull-right' %>
-      <%end%>
       <div class="agentAvatar summaryItem">
           <div class="clearfix"></div>
           <%= image_tag 'avatar-2.png', class: "avatar agentAvatarImg", alt: 'Avatar' %>

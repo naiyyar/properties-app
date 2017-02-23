@@ -7,9 +7,7 @@
 		</div>
 	</div>
 <%elsif params[:contribution_for] == 'building_photos' or params[:contribution_for] == 'unit_photos' %>
-	<div class="row">
-		<%= render partial: 'uploads/form' %>
-	</div>
+	<%= render partial: 'uploads/form' %>
 <%elsif params[:contribution_for] == 'building_amenities' or params[:building_id].present? %>
 	<%= render partial: 'buildings/amenities_fields' %>
 <%elsif params[:contribution_for] == 'unit_amenities' %>

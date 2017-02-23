@@ -1,5 +1,5 @@
 class UploadsController < ApplicationController
-	before_action :authenticate_user!, only: :destroy
+	before_action :authenticate_user!, only: [:destroy, :create]
 
 	def index
     if params[:building_id]
@@ -15,7 +15,7 @@ class UploadsController < ApplicationController
     if params['buildings-search-txt'].present?
       @imageable = Building.find_by_building_street_address(params['buildings-search-txt'])
   	else	
-      if params[:building_id]
+      if params[:building_id].present?
   			@imageable = Building.find(params[:building_id])
   		else
   			@imageable = Unit.find(params[:unit_id])

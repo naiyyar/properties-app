@@ -56,9 +56,7 @@ class Building < ActiveRecord::Base
   end
 
   def recommended_percent
-    total_votes = self.votes.count
-    like_votes = self.votes.where(vote: true).count
-    recommended = (like_votes / total_votes.to_f) * 100
+    Vote.recommended_percent(self)
   end
 
   def zipcode=(val)

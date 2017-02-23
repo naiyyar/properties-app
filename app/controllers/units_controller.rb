@@ -4,7 +4,7 @@ class UnitsController < ApplicationController
   # GET /units
   # GET /units.json
   def index
-    @units = current_user.units if current_user.present?
+    @units = Unit.order('created_at desc')
   end
 
   # GET /units/1
@@ -15,6 +15,7 @@ class UnitsController < ApplicationController
       marker.lat building.latitude
       marker.lng building.longitude
     end
+    @imageable = @unit
     @unit_rental_price_histories = @unit.rental_price_histories.order('created_at desc')
   end
 
