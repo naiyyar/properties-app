@@ -43,8 +43,8 @@
 
   <div class="tabsContainer" style="margin-top: 25px;">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li class="active"><a href="#buildings" role="tab" data-toggle="tab">Building Reviews (<%=@building.reviews.count%>)</a></li>
-        <li><a href="#units" role="tab" data-toggle="tab">Unit Reviews</a></li>
+        <li class="active"><a href="#buildings" role="tab" data-toggle="tab">Building Reviews (<%= @building.reviews.count %>)</a></li>
+        <li><a href="#units" role="tab" data-toggle="tab">Unit Reviews (<%= @unit_review_count %>)</a></li>
         <li><a href="#rent_amount" role="tab" data-toggle="tab">Unit Price Histories</a></li>
     </ul>
     <div class="tab-content">
@@ -58,7 +58,7 @@
         </div>
         <div class="tab-pane fade" id="units">
           <div class="comments">
-            <% @building.units.each do |unit| %>
+            <% @building_units.each do |unit| %>
               <h3 class="unit_name_header"><%= link_to unit.name, unit_path(unit) %> (<span><%=unit.reviews.count%></span> Reviews)</h3>
               <% unit.reviews.order('created_at desc').each do |review| %>
                 <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: unit } %>
@@ -68,7 +68,7 @@
         </div>
         <div class="tab-pane fade" id="rent_amount">
           <!-- <div class="comments"> -->
-            <% @building.units.each do |unit| %>
+            <% @building_units.each do |unit| %>
               <% if current_user.present? %>
                 <%= link_to 'New rental price', new_rental_price_history_path(unit_id: unit), class: 'btn btn-info btn-xs pull-right', style: 'margin-bottom: 4px;' %>
               <%end%>

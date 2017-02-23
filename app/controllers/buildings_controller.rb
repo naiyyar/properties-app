@@ -30,6 +30,15 @@ class BuildingsController < ApplicationController
     end
     @reviews = @building.reviews.order(created_at: :desc)
     @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id})
+
+    #calculating unit reviews count for a building
+    @building_units = @building.units
+    @unit_review_count = 0
+    @building_units.each do |unit|
+      @unit_review_count += unit.reviews.count
+    end
+    
+    #google Map
     @hash = Gmaps4rails.build_markers(@building) do |building, marker|
       marker.lat building.latitude
       marker.lng building.longitude
