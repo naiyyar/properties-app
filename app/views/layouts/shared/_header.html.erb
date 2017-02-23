@@ -11,8 +11,10 @@
     <div class="pull-right shared_contribute_btn hidden-xs">
       <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
     </div>
-    <% if params[:controller] == 'home' and params[:action] == 'index' %>
-      <%=render partial: 'layouts/shared/user_profile' %>
+    <% if params[:controller] != 'home' and params[:action] != 'index' %>
+      <div class="hidden-xs">
+        <%=render partial: 'layouts/shared/user_profile' %>
+      </div>
     <%end%>
     <% if params[:action] == 'search' or (params[:controller] == 'buildings' and params[:action] == 'show') %>
       <a href="#" class="mapHandler"><span class="icon-map"></span></a>
@@ -24,7 +26,7 @@
       <a href="#" class="listHandler"><span class="icon-list"></span></a>
     <%end%>
     <div class="home-nav">
-      <ul>
+      <ul class="homeNavUl">
         <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a></li>
         <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signin">Sign In</a></li>
         <li class="list_property"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
