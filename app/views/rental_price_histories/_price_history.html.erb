@@ -1,26 +1,28 @@
-<table class="table table-bordered table-striped price-history-table">
-  <thead>
-    <tr>
-      <th width="12%">Resident SD</th>
-      <th width="12%">Resident ED</th>
-      <th>Rent</th>
-      <th>Rent Up Front</th>
-      <th>Refundable deposits</th>
-      <th>Broker Fee</th>
-      <th>Non-refundable costs</th>
-      <th>Total Money upfront</th>
-    </tr>
-  </thead>
-  <% unit.rental_price_histories.order('created_at desc').each do |rental_price| %>
-		<tr>
-			<td><%= rental_price.residence_start_date %></td>
-			<td><%= rental_price.residence_end_date %></td>
-			<td class="text-right"><%= number_to_currency(rental_price.monthly_rent, precision: 0) %></td>
-			<td class="text-right"><%= number_to_currency(rental_price.rent_upfront, precision: 0) %></td>
-			<td class="text-right"><%= number_to_currency(rental_price.refundable_deposits, precision: 0) %></td>
-			<td class="text-right"><%= number_to_currency(rental_price.broker_fee, precision: 0) %></td>
-			<td class="text-right"><%= number_to_currency(rental_price.non_refundable_costs, precision: 0) %></td>
-			<td class="text-right"><%= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits, precision: 0) %></td>
-		</tr>
-	<%end%>
-</table>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped price-history-table">
+    <thead>
+      <tr>
+        <th width="12%">Resident SD</th>
+        <th width="12%">Resident ED</th>
+        <th>Rent</th>
+        <th>Rent Up Front</th>
+        <th>Refundable deposits</th>
+        <th>Broker Fee</th>
+        <th>Non-refundable costs</th>
+        <th>Total Money upfront</th>
+      </tr>
+    </thead>
+    <% unit.rental_price_histories.order('created_at desc').each do |rental_price| %>
+  		<tr>
+  			<td><%= rental_price.residence_start_date %></td>
+  			<td><%= rental_price.residence_end_date %></td>
+  			<td class="text-right"><%= number_to_currency(rental_price.monthly_rent, precision: 0) %></td>
+  			<td class="text-right"><%= number_to_currency(rental_price.rent_upfront, precision: 0) %></td>
+  			<td class="text-right"><%= number_to_currency(rental_price.refundable_deposits, precision: 0) %></td>
+  			<td class="text-right"><%= number_to_currency(rental_price.broker_fee, precision: 0) %></td>
+  			<td class="text-right"><%= number_to_currency(rental_price.non_refundable_costs, precision: 0) %></td>
+  			<td class="text-right"><%= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits, precision: 0) %></td>
+  		</tr>
+  	<%end%>
+  </table>
+</div>

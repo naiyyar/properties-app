@@ -12,12 +12,12 @@
         <div class="item <%= index==0 ? 'active' : '' %>">
           <div class="row">
             <div class="col-xs-12">
-              <div data-linkto="single.html" class="card">
+              <a href="<%= upload.image.url %>" class="card fancybox" rel='gallery'>
                 <div class="figure">
                     <%= image_tag upload.image, alt: 'unit image' %>
                 </div>
                 <div class="clearfix"></div>
-              </div>
+              </a>
             </div>
           </div>
         </div>

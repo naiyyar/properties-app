@@ -12,7 +12,8 @@
       <span class="arrow left js-rotateslider-arrow" data-action="prev"><i class="fa fa-angle-left fa-3x"></i></span>
     </div>
   <%else%>
-    <div id="carouselFull" class="carousel slide hidden-sm hidden-xs" data-ride="carousel">
+    <div class="col-lg-12">
+    <div id="propWidget-3" class="carousel slide propWidget-3 hidden-sm hidden-xs" data-ride="carousel">
       <% if object.uploads.count > 1 %>
         <ol class="carousel-indicators">
           <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
@@ -20,9 +21,11 @@
         </ol>
       <%end%>
       <div class="carousel-inner">
-        <% object.uploads.each_with_index do |asset, index| %>
+        <% object.uploads.each_with_index do |upload, index| %>
           <div class="item <%= index == 0 ? 'active' : ''%>">
-            <%= image_tag asset.image.url, alt: "" %>
+            <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" >
+              <%= image_tag upload.image.url, alt: "" %>
+            </a>
             <div class="container">
                 <div class="carousel-caption">
                     
@@ -32,9 +35,10 @@
         <%end%>
       </div>
       <% if object.uploads.count > 1 %>
-        <a class="left carousel-control" href="#carouselFull" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
-        <a class="right carousel-control" href="#carouselFull" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+        <a class="left carousel-control" href="#propWidget-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+        <a class="right carousel-control" href="#propWidget-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
       <%end%>
+    </div>
     </div>
   <%end%>
   <% if object.uploads.count > 0 %>
