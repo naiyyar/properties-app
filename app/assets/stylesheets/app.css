@@ -2143,8 +2143,8 @@ h1.pageTitle {
 .favLink {
     float: left;
     font-size: 13px;
-    line-height: 14px;
-    margin-left: 10px;
+    line-height: 18px;
+    margin-left: 6px;
 }
 .favLink a {
     width: 100%;

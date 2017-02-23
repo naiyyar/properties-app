@@ -19,6 +19,7 @@
           <ul class="rating">
             <%= rating_for @unit, "unit", disable_after_rate: true, readonly: true %>
           </ul>
+          <div class="favLink">(<%=@unit.reviews.count%>)</div>
           <% if @unit.votes.present? %>
             <div class="favLink"><span class="icon-pipe">|</span>
               <%= "#{@unit.recommended_percent.to_i}% Recommended" %> 
@@ -37,13 +38,16 @@
           <div class="clearfix"></div>
       </div>
     </div>
-    <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <div class="agentAvatar summaryItem">
           <div class="clearfix"></div>
           <%#= image_tag 'avatar-2.png', class: "avatar agentAvatarImg", alt: 'Avatar' %>
-          <div class="agentName">Jane Smith</div>
-          <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-blue contactBtn">Contact Agent</a>
+          <!-- <div class="agentName">Jane Smith</div> -->
+          <!-- <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-warning contactBtn">Contact Agent</a> -->
+          <%= link_to '<span class="fa fa-star"><span> Write a review'.html_safe, new_unit_review_path(unit_id: @unit), class: "btn btn-o btn-yellow contactBtn", "data-no-turbolink" => false  %>
+          <%= link_to "<i class='fa fa-camera'></i> Upload photos".html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-o btn-gray contactBtn", "data-no-turbolink" => false %>
+          
       </div>
-    </div> -->
+    </div>
   </div>
 </div>
