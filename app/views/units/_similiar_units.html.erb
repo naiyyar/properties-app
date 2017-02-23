@@ -1,0 +1,29 @@
+<div class="similar">
+  <h3 class="pull-right visible-xs visible-sm"><%= link_to "See all(#{@unit_uploads.count})", unit_uploads_path(unit_id: @unit.id), "data-no-turbolink" => false %></h3>
+  <!-- carousel for extra-small devices -->
+  <div id="carouselSimilar-3" class="carousel slide visible-xs visible-sm carousel-col">
+    <ol class="carousel-indicators">
+      <%@unit_uploads.each_with_index do |upload, index| %>
+        <li data-target="#carouselSimilar-3" data-slide-to="<%=index%>" class="<%=index==0 ? 'active' : '' %>"></li>
+      <%end%>
+    </ol>
+    <div class="carousel-inner"> 
+      <%@unit_uploads.each_with_index do |upload, index| %>
+        <div class="item <%= index==0 ? 'active' : '' %>">
+          <div class="row">
+            <div class="col-xs-12">
+              <div data-linkto="single.html" class="card">
+                <div class="figure">
+                    <%= image_tag upload.image, alt: 'unit image' %>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </div>
+    <a class="left carousel-control" href="#carouselSimilar-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+    <a class="right carousel-control" href="#carouselSimilar-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+  </div>
+</div>

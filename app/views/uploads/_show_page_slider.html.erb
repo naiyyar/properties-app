@@ -1,6 +1,6 @@
 <% if object.uploads.present? %>
   <% if object.uploads.count >= 3 %>
-    <div class="rotateslider-container" id="slider">
+    <div class="rotateslider-container hidden-sm hidden-xs" id="slider">
       <% object.uploads.each do |upload| %>
         <div class="rotateslider-item">
           <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox">
@@ -12,7 +12,7 @@
       <span class="arrow left js-rotateslider-arrow" data-action="prev"><i class="fa fa-angle-left fa-3x"></i></span>
     </div>
   <%else%>
-    <div id="carouselFull" class="carousel slide" data-ride="carousel">
+    <div id="carouselFull" class="carousel slide hidden-sm hidden-xs" data-ride="carousel">
       <% if object.uploads.count > 1 %>
         <ol class="carousel-indicators">
           <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
@@ -38,7 +38,7 @@
     </div>
   <%end%>
   <% if object.uploads.count > 0 %>
-    <div class="pull-right" style="padding: 10px 20px;">
+    <div class="pull-right hidden-sm hidden-xs" style="padding: 10px 20px;">
       <span class="fa fa-th-large"></span> 
       <% if object.kind_of? Building %>
         <%= link_to "See all(#{object.uploads.count})", building_uploads_path(building_id: object.id), "data-no-turbolink" => false %>

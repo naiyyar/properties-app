@@ -10,7 +10,12 @@
   </div> -->
   <div class="singleTop">
     <%= render partial: 'unit_summary' %>
-    <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
+    <% if @unit_uploads.present? %>
+      <%= render partial: 'similiar_units' %>
+      <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
+    <%end%>
+    <%= render partial: 'unit_amenities' %>
+    <%= render partial: 'buildings/building_amenities', locals: { building: @unit.building } %>
   </div>
   <div class="clearfix"></div>
   <!-- <div class="description">
@@ -34,8 +39,7 @@
           </div>
       </div>
   </div> -->
-  <%= render partial: 'buildings/building_amenities', locals: { building: @unit.building } %>
-  <%= render partial: 'unit_amenities' %>
+  
   <%#= render partial: 'similiar_units' %>
   <!-- <div class="pull-right">
     <%#= link_to 'New rental price', new_rental_price_history_path(unit_id: @unit), class: 'btn btn-info btn-sm' %>
