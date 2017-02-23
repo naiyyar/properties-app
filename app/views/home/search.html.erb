@@ -5,7 +5,7 @@
 	var lng = <%= raw @lng.to_json %>
 	var zoom = '<%= @zoom %>'
 	seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
-	
+	console.log(lat +' , '+ lng)
  	handler = Gmaps.build('Google');
  	handler.buildMap({ provider: {disableDoubleClickZoom: true}, internal: {id: 'mapView'}}, function(){
 	
