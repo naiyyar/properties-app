@@ -14,7 +14,7 @@
         <div class="commentBody">
           <p class="user-rating"><%= rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %></p>
           <%= simple_format(review.review_title) %>
-          <div>
+          <div class="prosCons">
             <% if review.pros.present? %>
               <b>Pros:</b><span> <%= simple_format(review.pros) %></span>
             <%end%>

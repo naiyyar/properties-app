@@ -22,6 +22,9 @@
 }
 
 /* custome */
+.prosCons{
+    word-wrap: break-word;
+}
 .price-history-table tr td {
     padding: 4px !important;
     font-size: 11px !important;

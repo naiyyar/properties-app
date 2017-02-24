@@ -118,6 +118,7 @@ class BuildingsController < ApplicationController
 
   def edit
     @building = Building.find(params[:id])
+    @search_bar_hidden = :hidden
   end
 
   def update

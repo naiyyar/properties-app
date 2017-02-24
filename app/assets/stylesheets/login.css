@@ -62,11 +62,14 @@ div.hr span.center {
 }
 #page-login{
   width: 300px;
-  margin: 0 auto;
+  margin: 70px auto;
+}
+#page-login h3{
+  color: #43609c;
 }
 
 #page-login form{
   border: 1px solid #ddd;
   padding: 20px;
-  margin-top: 50px;
+  margin-top: 20px;
 }

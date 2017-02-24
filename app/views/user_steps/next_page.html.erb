@@ -7,7 +7,14 @@
 		</div>
 	</div>
 <%elsif params[:contribution_for] == 'building_photos' or params[:contribution_for] == 'unit_photos' %>
-	<%= render partial: 'uploads/form' %>
+	<% if user_signed_in? %>
+		<%= render partial: 'uploads/form' %>
+	<%else%>
+		<div class="login-form" id="page-login">
+			<h3>Please sign in / sign up to uplaod photos.</h3>
+			<%= render partial: 'devise/sessions/new' %>
+		</div>
+	<%end%>
 <%elsif params[:contribution_for] == 'building_amenities' or params[:building_id].present? %>
 	<%= render partial: 'buildings/amenities_fields' %>
 <%elsif params[:contribution_for] == 'unit_amenities' %>

@@ -29,6 +29,7 @@ class UnitsController < ApplicationController
 
   # GET /units/1/edit
   def edit
+    @search_bar_hidden = :hidden
   end
 
   # POST /units

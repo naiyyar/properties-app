@@ -112,11 +112,14 @@
 
 <script type="text/javascript" charset="utf-8">
   handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    handler.getMap().setZoom(14);
-  });
+  marker_hash = <%=raw @hash.to_json %>;
   
+  // loadMap = function(){
+  //   handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
+  //       markers = handler.addMarkers(marker_hash);
+  //       handler.bounds.extendWith(markers);
+  //       handler.fitMapToBounds();
+  //       handler.getMap().setZoom(14);
+  //   });
+  // }
 </script>

@@ -28,7 +28,11 @@ class User < ActiveRecord::Base
   end
 
   def user_name
-    self.name ? self.name : self.email[/[^@]+/]
+    self.name.present? ? self.name : self.email[/[^@]+/]
+  end
+
+  def property_owner? object
+    self.id == object.user_id
   end
 
   def create_rating score, rateable, review_id = nil
@@ -59,7 +63,6 @@ class User < ActiveRecord::Base
       rating_cache.qty = rateables.count
       rating_cache.save
     end
-
   end
 
 end

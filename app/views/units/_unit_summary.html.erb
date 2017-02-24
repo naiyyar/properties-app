@@ -5,7 +5,9 @@
           <h1 class="pageTitle">
             <%= @unit.building.building_street_address %> - <%= @unit.name.split('')[0] == '#' ? "#{@unit.name}" : "##{@unit.name}" %>
             <% if user_signed_in? %>
-              <%= link_to "Edit", edit_unit_path(@unit), class: 'btn btn-default btn-xs' %>
+              <% if current_user.property_owner?(@unit) %>
+                <%= link_to "Edit", edit_unit_path(@unit), class: 'btn btn-o btn-default btn-xs' %>
+              <%end%>
             <%end%>
           </h1>
           <div class="address"><span class="icon-location-pin"></span> 

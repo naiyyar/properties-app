@@ -21,6 +21,7 @@ class UploadsController < ApplicationController
   			@imageable = Unit.find(params[:unit_id])
   		end
     end
+    @search_bar_hidden = :hidden
   end
 
 	def create

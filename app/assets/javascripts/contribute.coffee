@@ -60,6 +60,7 @@ $(document).on 'click', '#add_new_unit',(e) ->
 
 
 $(document).on 'click', "input[name='contribute_to']",(e) ->
+	user_id = $("#user_id").val();
 	if(this.value=='unit_review' || this.value=='unit_photos' || this.value=='unit_amenities' || this.value=='unit_price_history')
 		$("#next_btn").addClass('hide')
 		$("#buildings-search-txt").val('')
@@ -82,7 +83,10 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 		if(this.value=='building_review')
 			href = '/reviews/new'
 		else if(this.value=='building_photos')
-			href = '/uploads/new'
+			if(user_id!='')
+				href = '/uploads/new'
+			else
+				href = '/users/sign_in'
 
 		$('#search_item_form').attr('action', href);
 
