@@ -38,50 +38,50 @@
           <li data-target="#carouselSimilar-2" data-slide-to="2"></li>
       </ol>
       <div class="carousel-inner"> 
-          <div class="item active">
-            <div class="row">
-              <% @similar_properties[0..1].each do |building| %>
-                <div class="col-xs-6">
-                  <%= render partial: 'building_card', locals: { building: building } %>
-                </div>
-              <%end%>
-            </div>
+        <div class="item active">
+          <div class="row">
+            <% @similar_properties[0..1].each do |building| %>
+              <div class="col-xs-6">
+                <%= render partial: 'building_card', locals: { building: building } %>
+              </div>
+            <%end%>
           </div>
-          <div class="item">
-            <div class="row">
-              <% @similar_properties[2..3].each do |building| %>
-                <div class="col-xs-6">
-                  <%= render partial: 'building_card', locals: { building: building } %>
-                </div>
-              <%end%>
-            </div>
+        </div>
+        <div class="item">
+          <div class="row">
+            <% @similar_properties[2..3].each do |building| %>
+              <div class="col-xs-6">
+                <%= render partial: 'building_card', locals: { building: building } %>
+              </div>
+            <%end%>
           </div>
-          <div class="item">
-            <div class="row">
-              <% @similar_properties[3..4].each do |building| %>
-                <div class="col-xs-6">
-                  <%= render partial: 'building_card', locals: { building: building } %>
-                </div>
-              <%end%>
-            </div>
+        </div>
+        <div class="item">
+          <div class="row">
+            <% @similar_properties[3..4].each do |building| %>
+              <div class="col-xs-6">
+                <%= render partial: 'building_card', locals: { building: building } %>
+              </div>
+            <%end%>
           </div>
+        </div>
       </div><!-- carousel-inner -->
       <a class="left carousel-control" href="#carouselSimilar-2" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
       <a class="right carousel-control" href="#carouselSimilar-2" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
   </div>
 
   <!-- carousel for extra-small devices -->
-  <div id="carouselSimilar-3" class="carousel slide visible-xs visible-sm carousel-col">
+  <div id="carouselSimilar-4" class="carousel slide visible-xs visible-sm carousel-col">
       <ol class="carousel-indicators">
-          <li data-target="#carouselSimilar-3" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselSimilar-3" data-slide-to="1"></li>
-          <li data-target="#carouselSimilar-3" data-slide-to="2"></li>
-          <li data-target="#carouselSimilar-3" data-slide-to="3"></li>
-          <li data-target="#carouselSimilar-3" data-slide-to="4"></li>
-          <li data-target="#carouselSimilar-3" data-slide-to="5"></li>
+          <li data-target="#carouselSimilar-4" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselSimilar-4" data-slide-to="1"></li>
+          <li data-target="#carouselSimilar-4" data-slide-to="2"></li>
+          <li data-target="#carouselSimilar-4" data-slide-to="3"></li>
+          <li data-target="#carouselSimilar-4" data-slide-to="4"></li>
+          <li data-target="#carouselSimilar-4" data-slide-to="5"></li>
       </ol>
       <div class="carousel-inner">
-        <% (0..5).each do |num| %>
+        <% 0.upto(5) do |num| %>
           <div class="item <%= num == 0 ? 'active' : '' %>">
             <div class="row">
               <div class="col-xs-12">
@@ -91,7 +91,7 @@
           </div>
         <%end%>
       </div>
-      <a class="left carousel-control" href="#carouselSimilar-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
-      <a class="right carousel-control" href="#carouselSimilar-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+      <a class="left carousel-control" href="#carouselSimilar-4" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+      <a class="right carousel-control" href="#carouselSimilar-4" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
   </div>
 </div>

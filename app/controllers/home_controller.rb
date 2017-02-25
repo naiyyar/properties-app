@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @recently_listed_properties = Building.order('created_at desc').limit(6)
+    @recently_listed_properties = Building.joins(:uploads).order('created_at desc').limit(6)
   end
 
   def search
