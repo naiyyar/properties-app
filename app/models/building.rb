@@ -95,6 +95,10 @@ class Building < ActiveRecord::Base
     where("neighborhood @@ :q or neighborhoods_parent @@ :q" , q: "%#{params[:neighborhoods]}").paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
   end
 
+  def self.buildings_in_city params, city
+    where("city @@ :q" , q: city).paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
+  end
+
   def fetch_or_create_unit params
     unit = Unit.new(params.values[0])
     unit.building_id = self.id

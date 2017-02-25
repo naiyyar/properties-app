@@ -35,8 +35,15 @@ class HomeController < ApplicationController
             @zoom = 16 if @brooklyn_neighborhoods == 'Sutton Place'
           end
         else
-          @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-          @zoom = 12
+          city = params['apt-search-txt'].split(',')[0]
+          if city ==  'New York' || city == 'Manhattan'
+            @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}
+            @zoom = 12
+          else
+            @buildings = Building.buildings_in_city(params, city)
+            @zoom = 13
+          end
+          
         end
       end
       if coordinates.present?

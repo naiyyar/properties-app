@@ -8,9 +8,11 @@
             <small class="text-muted">
               <%= building_street_address @building %> <br />
               <%= city_state_zip @building %> <br />
+              <%= @building.neighborhood %>
               <% if @building.kind_of? Unit %>
                <%= link_to_unit_show @building  %> 
               <%end%>
+
             </small>
           </div>
         </div>
