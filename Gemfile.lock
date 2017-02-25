@@ -42,6 +42,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    american_date (1.1.0)
     arel (6.0.3)
     autoprefixer-rails (6.3.5)
       execjs
@@ -261,6 +262,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  american_date
   aws-sdk (< 2)
   better_errors
   binding_of_caller

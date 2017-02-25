@@ -23,6 +23,8 @@ gem 'geocoder'
 gem "dynamic_form"
 gem 'client_side_validations'
 
+gem 'american_date'
+
 gem 'pg'
 
 gem 'pg_search'
