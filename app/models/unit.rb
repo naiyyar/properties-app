@@ -9,8 +9,7 @@ class Unit < ActiveRecord::Base
 	has_many :rental_price_histories
 	belongs_to :user
 
-	has_many :uploads, as: :imageable
-  	accepts_nested_attributes_for :uploads, :allow_destroy => true
+  	include Imageable
 
   	default_scope { order('updated_at desc') } 
 

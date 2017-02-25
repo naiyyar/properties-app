@@ -12,8 +12,8 @@ class Vote < ActiveRecord::Base
 
   def self.recommended_percent object
   	total_votes = object.votes.count
-	like_votes = object.votes.where(vote: true).count
-	recommended = (like_votes / total_votes.to_f) * 100
+	  like_votes = object.votes.where(vote: true).count
+	  recommended = (like_votes / total_votes.to_f) * 100
   end
 
 

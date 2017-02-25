@@ -10,8 +10,7 @@ class Building < ActiveRecord::Base
   belongs_to :user
   has_many :reviews, as: :reviewable
   has_many :units,  :dependent => :destroy
-  has_many :uploads, as: :imageable
-  accepts_nested_attributes_for :uploads, :allow_destroy => true
+  include Imageable
   accepts_nested_attributes_for :units, :allow_destroy => true
 
   default_scope { order('updated_at desc') } 
@@ -109,6 +108,21 @@ class Building < ActiveRecord::Base
       count = count + unit.reviews.count
     end
     return count
+  end
+
+  #finding similar properties may be on the basis amenities
+  def similar_properties
+    buildings = Building.where('id <> ?', self.id)
+    # buildings = buildings.where('parking = ? or 
+    #                               deck = ? or 
+    #                               elevator = ? or
+    #                               live_in_super = ? or
+    #                               gym = ? or
+    #                               doorman = ? or
+    #                               pets_allowed_cats = ? or
+    #                               pets_allowed_dogs = ? or
+    #                               swimming_pool = ? or
+    #                               roof_deck = ?', parking, deck, elevator,live_in_super,gym,doorman,pets_allowed_cats,pets_allowed_dogs,swimming_pool,roof_deck)
   end
 
   #child neighbohoods

@@ -1,0 +1,15 @@
+<a href="<%=building_path(building)%>" class="card">
+  <div class="figure">
+    <% if building.uploads.present? %>
+      <%= image_tag building.uploads.first.image, alt: "image"%>
+    <%else%>
+      <%= image_tag 'prop/1-1.png', alt: "image"%>
+    <%end%>
+  </div>
+  <h2><%= building.building_name_or_address %></h2>
+  <div class="cardAddress"><span class="icon-pointer"></span> <%= building.street_address %> <%= building.zipcode %></div>
+  <ul class="cardFeat">
+      <%= rating_for building, "building", disable_after_rate: true, readonly: true %>
+  </ul>
+  <div class="clearfix"></div>
+</a>

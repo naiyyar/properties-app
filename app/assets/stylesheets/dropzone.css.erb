@@ -412,7 +412,7 @@
   display: none;
 }
 
-/*@media all and (-webkit-min-device-pixel-ratio:1.5),(min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:1.5/1),(min-device-pixel-ratio:1.5),(min-resolution:138dpi),(min-resolution:1.5dppx) {
+@media all and (-webkit-min-device-pixel-ratio:1.5),(min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:1.5/1),(min-device-pixel-ratio:1.5),(min-resolution:138dpi),(min-resolution:1.5dppx) {
   .dropzone .dz-message {
     background-image: url("<%= asset_path('spritemap@2x.png') %>");
     -webkit-background-size: 428px 406px;
@@ -420,6 +420,13 @@
     background-size: 428px 406px;
   }
 }
-.dropzone .dz-default.dz-message span {
+
+@media screen and (max-width: 767px) { 
+  .dropzone .dz-message {
+    background-position: 72px -292px;
+    margin-left: -214px;
+  }
+ }
+/*.dropzone .dz-default.dz-message span {
   display: none;
 }*/
