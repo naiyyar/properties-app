@@ -12,7 +12,7 @@
     <%= render partial: 'unit_summary' %>
     <% if @unit_uploads.present? %>
       <!-- for small and xtra small devices -->
-      <%= render partial: 'unit_image_slider' %>
+      <%= render partial: 'uploads/image_slider_mobile', locals: { uploads: @unit_uploads, path: unit_uploads_path(unit_id: @unit.id) } %>
       <!-- for Lasrge devices -->
       <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
     <%end%>
@@ -43,10 +43,6 @@
   </div> -->
   
   <%#= render partial: 'similiar_units' %>
-  <!-- <div class="pull-right">
-    <%#= link_to 'New rental price', new_rental_price_history_path(unit_id: @unit), class: 'btn btn-info btn-sm' %>
-    <%#= link_to 'New rental price', new_rental_price_history_path(unit_id: @unit), class: 'btn btn-info btn-sm' %>
-  </div> -->
   
   <div class="tabsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -76,39 +72,6 @@
 </div>
 
 <div class="clearfix"></div>
-
-<div class="modal fade" id="contactAgent" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title" id="contactLabel">Contact Agent</h4>
-          </div>
-          <div class="modal-body">
-              <form class="contactForm">
-                  <div class="row">
-                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
-                          <input type="text" placeholder="Name" class="form-control">
-                       </div>
-                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
-                          <input type="text" placeholder="Email" class="form-control">
-                      </div>
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
-                          <input type="text" placeholder="Subject" class="form-control">
-                      </div>
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
-                          <textarea placeholder="Message" rows="3" class="form-control"></textarea>
-                      </div>
-                  </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn btn-round btn-o btn-gray">Close</a>
-              <a href="#" class="btn btn-round btn-green">Send message</a>
-          </div>
-      </div>
-  </div>
-</div>
 
 <script type="text/javascript" charset="utf-8">
   handler = Gmaps.build('Google');
