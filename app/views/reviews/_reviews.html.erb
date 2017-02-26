@@ -10,8 +10,12 @@
       <div class="commentArrow"><span class="fa fa-caret-left"></span></div>
     </div>
     <div class="commentContent">
-        <div class="commentName"><%= review.user_name.capitalize %></div>
+        <div class="commentName">
+          <%= review.user_name.capitalize %>
+        </div>
+
         <div class="commentBody">
+          <div class="commentTime" style="float: none;"><span class="icon-clock"></span> <%= review.created_at.strftime("%b %d, %Y") %></div>
           <p class="user-rating"><%= rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %></p>
           <%= simple_format(review.review_title) %>
           <div class="prosCons">

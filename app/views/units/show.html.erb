@@ -77,12 +77,11 @@
   handler = Gmaps.build('Google');
   marker_hash = <%=raw @hash.to_json %>;
   
-  // loadMap = function(){
-  //   handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
-  //       markers = handler.addMarkers(marker_hash);
-  //       handler.bounds.extendWith(markers);
-  //       handler.fitMapToBounds();
-  //       handler.getMap().setZoom(14);
-  //   });
-  // }
+  handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
+      markers = handler.addMarkers(marker_hash);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(14);
+  });
+  
 </script>

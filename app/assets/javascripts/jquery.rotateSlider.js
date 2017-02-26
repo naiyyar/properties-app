@@ -12,13 +12,14 @@
     changeIndex(defaultIndex);
     
     $item.on('mouseenter', function(){
-      $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 1000});
+      $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 9999});
       if(!$(this).hasClass('now')){
         $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(0.9, 0.6)','z-index': 0});
       }
-      
+      //console.log($(this).hasClass('now'))
+      //console.log($(this))
     }).on('mouseleave', function(){
-      $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 1000});
+      $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 9999});
       if(!$(this).hasClass('now')){
         $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(0.9, 0.6)','z-index': 0});
       }
@@ -48,11 +49,11 @@
       $this.find('.now').removeClass('now');
       $this.find('.next').removeClass('next');
       $this.find('.prev').removeClass('prev');
-      if(nowIndex == itemCount -1){
+      if(nowIndex == itemCount - 1){
         $item.eq(0).addClass('next');
       }
       if(nowIndex == 0) {
-        $item.eq(itemCount -1).addClass('prev');
+        $item.eq(itemCount - 1).addClass('prev');
       }
 
       $item.each(function(index) {

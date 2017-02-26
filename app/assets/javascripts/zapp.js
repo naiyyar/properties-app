@@ -350,13 +350,13 @@
         $('body').removeClass('notransition');
 
         //map = new google.maps.Map(document.getElementById('mapView'), options);
-        handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
-            var hash = marker_hash
-            markers = handler.addMarkers(hash);
-            handler.bounds.extendWith(markers);
-            handler.fitMapToBounds();
-            handler.getMap().setZoom(14);
-        });
+        // handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
+        //     var hash = marker_hash
+        //     markers = handler.addMarkers(hash);
+        //     handler.bounds.extendWith(markers);
+        //     handler.fitMapToBounds();
+        //     handler.getMap().setZoom(14);
+        // });
         // var styledMapType = new google.maps.StyledMapType(styles, {
         //     name : 'Styled'
         // });
@@ -469,10 +469,10 @@
         $('.listHandlerShow').show();
         listMapView();
         
-        if (handler) {
-            google.maps.event.trigger(handler, 'resize');
+        // if (handler) {
+        //     google.maps.event.trigger(handler, 'resize');
 
-        }
+        // }
     })
     /* end show page */
     
