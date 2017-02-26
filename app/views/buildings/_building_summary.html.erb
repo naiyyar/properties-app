@@ -18,8 +18,8 @@
           </ul>
           <div class="favLink">(<%=@building.reviews.count%>)</div>
           <% if @building.votes.present? %>
-            <div class="favLink"><span class="icon-pipe">|</span>
-              <%= "#{@building.recommended_percent.to_i}% Recommended" %> 
+            <div class="favLink"><span class="icon-pipe"></span>
+              <%= @building.recommended_percent.nan? ? '| None recommended yet' :  "| #{@building.recommended_percent.to_i}% Recommended" %>
             </div>
           <%end%>
           <!-- <ul class="stats">
