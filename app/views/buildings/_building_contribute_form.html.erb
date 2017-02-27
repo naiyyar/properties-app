@@ -5,6 +5,21 @@
       <%= text_field_tag 'building[building_name]', nil, class: "form-control", placeholder: 'Name'%>
     </div>
   </div>
+  <div class="col-sm-4">
+     <div class="form-group">
+      <%= text_field_tag 'building[floors]', nil, class: "form-control", placeholder: 'Floors(optional)' %>
+    </div>
+  </div>
+  <div class="col-sm-4">
+     <div class="form-group">
+      <%= text_field_tag 'building[built_in]', nil, class: "form-control", placeholder: 'Built in year(optional)' %>
+    </div>
+  </div>
+  <div class="col-sm-4">
+     <div class="form-group">
+      <%= text_field_tag 'building[number_of_units]', nil, class: "form-control", placeholder: 'Units(optional)' %>
+    </div>
+  </div>
   <div class="col-sm-6">
      <div class="form-group">
       <%= text_field_tag 'building[building_street_address]', nil, class: "form-control", placeholder: 'Address', required: 'required' %>

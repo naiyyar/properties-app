@@ -82,6 +82,18 @@ h3.unit_name_header{
     padding-left: 16px;
 }
 
+.firstLetter{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ddd;
+    text-align: center;
+    display: table;
+    color: #fff;
+    background: #393939;
+    border-radius: 50%;
+    font-size: 25px;
+}
+
 /* Buttons */
 
 .btn {

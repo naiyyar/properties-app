@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
       <div class="summaryItem">
           <h1 class="pageTitle">
-            <%= @unit.building.building_street_address %> - <%= @unit.name.split('')[0] == '#' ? "#{@unit.name}" : "##{@unit.name}" %>
+            <%= "#{@unit.name}" %> <%#= @unit.building.building_street_address %>
             <% if user_signed_in? %>
               <% if current_user.property_owner?(@unit) %>
                 <%= link_to "Edit", edit_unit_path(@unit), class: 'btn btn-o btn-default btn-xs' %>
@@ -17,7 +17,7 @@
               </b>
             <%end%>
           </div>
-          <div class="address"><span class="fa fa-building"></span> <%= @unit.building.building_name %></div>
+          <div class="address"><span class="fa fa-building"></span> <%= link_to @unit.building.building_name, building_path(@unit.building) %></div>
           <ul class="rating">
             <%= rating_for @unit, "unit", disable_after_rate: true, readonly: true %>
           </ul>

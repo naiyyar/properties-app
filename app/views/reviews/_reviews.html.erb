@@ -5,7 +5,8 @@
       <% elsif review.user.image_url.present? %>
         <%= image_tag review.user.image_url, class: 'avatar' %>
       <%else%>
-        <span class="fa fa-user fa-2x"></span>
+        <!-- <span class="fa fa-user fa-2x"></span> -->
+        <div class="firstLetter"><%= review.user.user_name.split('')[0].capitalize %></div>
       <%end%>
       <div class="commentArrow"><span class="fa fa-caret-left"></span></div>
     </div>
