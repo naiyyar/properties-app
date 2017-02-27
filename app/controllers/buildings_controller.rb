@@ -32,7 +32,7 @@ class BuildingsController < ApplicationController
     @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id})
 
     #finding similar properties
-    @similar_properties = @building.similar_properties
+    #@similar_properties = @building.similar_properties
 
     #calculating unit reviews count for a building
     @building_units = @building.units

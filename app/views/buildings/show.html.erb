@@ -11,19 +11,19 @@
       <%= render partial: 'uploads/show_page_slider', locals: { object: @building, path: new_building_upload_path(building_id: @building) } %>
     <%end%>
 
-    <div class="description">
+    <!-- <div class="description">
       <h3>Description</h3>
-      <p><%= @building.description ? simple_format(@building.description) : 'No description available' %></p>
-    </div>
+      <p><%#= @building.description ? simple_format(@building.description) : 'No description available' %></p>
+    </div> -->
   
     <%= render partial: 'building_amenities' %>
   </div>
 
   <div class="clearfix"></div>
   
-  <%= render partial: 'similiar_properties' %>
+  <%#= render partial: 'similiar_properties' %>
 
-  <div class="tabsContainer" style="margin-top: 25px;" id="reviewsContainer">
+  <div class="tabsContainer" style="margin-top: 8px;" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="active"><a href="#buildings" role="tab" data-toggle="tab">Building Reviews (<%= @building.reviews.count %>)</a></li>
         <li><a href="#units" role="tab" data-toggle="tab">Unit Reviews (<%= @unit_review_count %>)</a></li>
