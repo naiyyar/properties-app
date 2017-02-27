@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="commentActions">
-            <div class="commentTime"><span class="icon-clock"></span> <%= review.created_at.strftime("%b %d, %Y") %></div>
+            <!-- <div class="commentTime"><span class="icon-clock"></span> <%#= review.created_at.strftime("%b %d, %Y") %></div> -->
             <ul>
               <%if review.user.votes.where(vote: true, review_id: review.id).present? %>
                 <li><a href="#"><span class="fa fa-thumbs-up recommended"></span></a></li>

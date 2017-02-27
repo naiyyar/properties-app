@@ -28,9 +28,9 @@
           </ul> -->
           <div class="clearfix"></div>
           <ul class="features">
-            <li><span class="fa fa-square-o"></span><div><%= @building.units.count %> Unit(s)</div></li>
-            <!-- <li><span class="fa fa-building-o"></span><div></div></li> -->
-            <!-- <li><span class="fa fa-history"></span><div></div></li> -->
+            <li>Units<div><%= @building.units.count %></div></li>
+            <li>Floors<div><%= @building.floors ? @building.floors : 'Not specified' %></div></li>
+            <li>Built in year<div><%= @building.built_in ? @building.built_in : 'Not specified' %></div></li>
           </ul>
           <div class="clearfix"></div>
       </div>

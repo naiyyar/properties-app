@@ -24,7 +24,7 @@ class HomeController < ApplicationController
           @zoom = 14
         elsif params[:term].present?
           building = Building.where(building_street_address: params[:term])
-          redirect_to building_path(building.first) if building.present?
+          redirect_to building_path(building.first, 'apt-search-txt' => params['apt-search-txt']) if building.present?
         elsif params[:neighborhoods].present?
           @buildings = Building.buildings_in_neighborhood(params)
           if !manhattan_kmls.include? @brooklyn_neighborhoods
