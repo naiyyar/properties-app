@@ -32,27 +32,29 @@
 			<br />
 			
 			<div class="col-xs-12 col-md-12 col-lg-12">
-		    <div class="buildings-search unit-search">
-		    	<div class="col-xs-12">
-     				 <div class="form-group">
-				      <% unless @building.present? %>
-				      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search hide", placeholder: 'Search unit by name'%>
-				      <%else%>
-				      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search", placeholder: 'Search unit by name'%>
-				      <%end%>
-			      </div>
+			    <div class="buildings-search unit-search">
+			    	<div class="col-xs-12">
+	     				 <div class="form-group">
+					      <% unless @building.present? %>
+					      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search hide", placeholder: 'Search unit by name'%>
+					      <%else%>
+					      	<%= text_field_tag 'units-search-txt', nil, class: "form-control unit-search", placeholder: 'Search unit by name'%>
+					      <%end%>
+				      </div>
+				    </div>
+			      	<div class="results" id="units-search-results"></div>
+			      	<div class="col-xs-12">
+			      		<ul id="units-search-no-results" class="search-no-result"></ul>
+			      	</div>
 			    </div>
-		      <div class="results" id="units-search-results"></div>
-		      <ul id="units-search-no-results" class="search-no-result"></ul>
 		    </div>
-	    </div>
 			<div class="col-xs-11">
 				<%= form_tag "/buildings", method: :post, id: "new_building", class: 'hide' do %>
 					<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution" %>
 					<%= render partial: 'buildings/building_contribute_form' %>
-			    <div class="pull-right">
-		      	<%= submit_tag 'Next', class: 'btn btn-primary', id: 'new_building_submit' %>
-		      </div>
+				    <div class="pull-right">
+			      		<%= submit_tag 'Next', class: 'btn btn-primary', id: 'new_building_submit' %>
+			      	</div>
 				<%end%>
 			</div>
 			

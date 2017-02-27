@@ -42,7 +42,7 @@
   border-left: 5px solid transparent;
   position: relative;
   height: 5.5em;
-  border-top: 1px solid #ddd;
+  /*border-top: 1px solid #ddd;*/
 }
 
 .buildings-search .results .ui-state-focus {
