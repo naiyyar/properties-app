@@ -31,7 +31,7 @@
 						<td class="text-right"><%= number_to_currency(rental_price.refundable_deposits, precision: 0) %></td>
 						<td class="text-right"><%= number_to_currency(rental_price.broker_fee, precision: 0) %></td>
 						<td class="text-right"><%= number_to_currency(rental_price.non_refundable_costs, precision: 0) %></td>
-						<td class="text-right"><%= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits) %></td>
+						<td class="text-right"><%= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits, precision: 0) %></td>
 					</tr>
 				<%end%>
 			<%end%>

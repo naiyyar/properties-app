@@ -2118,6 +2118,10 @@ h1.pageTitle {
     float: left;
     width: 100%;
 }
+.singleTop ul.features a{
+    text-decoration: underline;
+    /*font-weight: bold;*/
+}
 .singleTop ul.features li {
     float: left;
     width: 33.33%;
@@ -5748,6 +5752,12 @@ blockquote {
     }
     .notificationsWidget .notification .notifyContent .notifyBody .notify .name .label {
         display: inline !important;
+    }
+    .comments {
+        padding: 42px 20px 83px 20px;
+    }
+    .sliderLink{
+        padding: 20px;
     }
 }
 /*@media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape)  {  

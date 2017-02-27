@@ -25,5 +25,8 @@
     <a class="left carousel-control" href="#carouselSimilar-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
     <a class="right carousel-control" href="#carouselSimilar-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
   </div>
-  <h3 class="pull-right visible-xs visible-sm"><%= link_to "See all(#{uploads.count})", path, "data-no-turbolink" => false %></h3>
+  <div class="sliderLink pull-right visible-xs visible-sm">
+    <%= link_to "See all(#{uploads.count})", path, "data-no-turbolink" => false %> | &nbsp;
+    <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_upload_path, class: "", "data-no-turbolink" => false  %>
+  </div>
 </div>

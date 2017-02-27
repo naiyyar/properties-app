@@ -12,7 +12,7 @@
     <%= render partial: 'unit_summary' %>
     <% if @unit_uploads.present? %>
       <!-- for small and xtra small devices -->
-      <%= render partial: 'uploads/image_slider_mobile', locals: { uploads: @unit_uploads, path: unit_uploads_path(unit_id: @unit.id) } %>
+      <%= render partial: 'uploads/image_slider_mobile', locals: { uploads: @unit_uploads, path: unit_uploads_path(unit_id: @unit.id), new_upload_path: new_unit_upload_path(unit_id: @unit) } %>
       <!-- for Lasrge devices -->
       <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
     <%end%>
@@ -44,7 +44,7 @@
   
   <%#= render partial: 'similiar_units' %>
   
-  <div class="tabsContainer">
+  <div class="tabsContainer" style="margin-top: 25px;">
     <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="active"><a href="#ur" role="tab" data-toggle="tab"><span class="icon-hash">#</span> Unit Reviews</a></li>
         <li class=""><a href="#br" role="tab" data-toggle="tab"><span class="icon-home"></span> Building Reviews</a></li>
@@ -52,9 +52,12 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade active in" id="ur">
-          <% @unit.reviews.order('created_at desc').each do |review| %>
-          <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit } %>
-        <% end %>
+          <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_unit_review_path(unit_id: @unit), class: "btn btn-o btn-yellow contactBtn reviewBtnMobile pull-right", "data-no-turbolink" => false %>
+          <div class="comments">
+            <% @unit.reviews.order('created_at desc').each do |review| %>
+              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit } %>
+            <% end %>
+          </div>
         </div>
         <div class="tab-pane fade" id="br">
           <div class="comments">
