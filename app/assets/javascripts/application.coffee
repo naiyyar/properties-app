@@ -5,9 +5,12 @@
 #= require_tree .
 
 jQuery ->
-	$('.datepicker').datepicker({
-		format: 'dd-mm-yyyy'
-	});
+	$('.datepicker').datepicker
+		format: 'mm-dd-yyyy'
+
+	$('.datepicker').on 'changeDate',(e) ->
+		$(this).datepicker('hide');
+
 	$('[data-toggle="popover"]').popover({ trigger: "hover" })
 
 	$('input, textarea').placeholder()
