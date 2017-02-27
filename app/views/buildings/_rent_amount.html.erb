@@ -1,9 +1,10 @@
-<div class="table-responsive">
-	<table class="table table-bordered table-striped price-history-table">
+<% if @building.units.present? %>
+	<div class="table-responsive table-responsive-lg">
+		<table class="table table-bordered table-striped price-history-table">
 	  	<thead>
 	    	<tr>
-		      <th><span class="fa fa-sort sortIcon"></span><span class="fa fa-caret-up sortIconAsc"></span><span class="fa fa-caret-down sortIconDesc"></span> Resident SD</th>
-		      <th>Resident ED</th>
+		      <th width="12%">Resident SD</th>
+		      <th width="12%">Resident ED</th>
 		      <th>Unit</th>
 		      <th>Beds</th>
 		      <th>Baths</th>
@@ -19,22 +20,23 @@
 	  	<tbody>
 		  	<% @building.units.each do |unit| %>
 			  	<% unit.rental_price_histories.order('created_at desc').each do |rental_price| %>
-					<tr>
-						<td><%= rental_price.residence_start_date %></td>
-						<td><%= rental_price.residence_end_date %></td>
-						<td class="text-center"><%= link_to unit.name, unit_path(unit) %></td>
-						<td class="text-center"><%= unit.number_of_bedrooms %></td>
-						<td class="text-center"><%= unit.number_of_bathrooms %></td>
-						<td class="text-center"><%= unit.square_feet %></td>
-						<td class="text-right"><%= number_to_currency(rental_price.monthly_rent, precision: 0) %></td>
-						<td class="text-right"><%= number_to_currency(rental_price.rent_upfront, precision: 0) %></td>
-						<td class="text-right"><%= number_to_currency(rental_price.refundable_deposits, precision: 0) %></td>
-						<td class="text-right"><%= number_to_currency(rental_price.broker_fee, precision: 0) %></td>
-						<td class="text-right"><%= number_to_currency(rental_price.non_refundable_costs, precision: 0) %></td>
-						<td class="text-right"><%= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits, precision: 0) %></td>
-					</tr>
+						<tr>
+							<td><%= rental_price.residence_start_date %></td>
+							<td><%= rental_price.residence_end_date %></td>
+							<td class="text-center"><%= link_to unit.name, unit_path(unit) %></td>
+							<td class="text-center"><%= unit.number_of_bedrooms %></td>
+							<td class="text-center"><%= unit.number_of_bathrooms %></td>
+							<td class="text-center"><%= unit.square_feet %></td>
+							<td class="text-right"><%= number_to_currency(rental_price.monthly_rent, precision: 0) %></td>
+							<td class="text-right"><%= number_to_currency(rental_price.rent_upfront, precision: 0) %></td>
+							<td class="text-right"><%= number_to_currency(rental_price.refundable_deposits, precision: 0) %></td>
+							<td class="text-right"><%= number_to_currency(rental_price.broker_fee, precision: 0) %></td>
+							<td class="text-right"><%= number_to_currency(rental_price.non_refundable_costs, precision: 0) %></td>
+							<td class="text-right"><%= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits, precision: 0) %></td>
+						</tr>
+					<%end%>
 				<%end%>
-			<%end%>
-		</tbody>
-	</table>
-</div>
+			</tbody>
+		</table>
+	</div>
+<%end%>

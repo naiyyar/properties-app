@@ -1,13 +1,5 @@
 <div id="mapView" class="mob-min"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
 <div id="content" class="mob-max">
-  <!-- <div class="btn-group btn-group-justified" style="padding: 10px 100px;">
-    <div class="btn-group">
-      <%#= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-info", "data-no-turbolink" => false  %>
-    </div>
-    <div class="btn-group">
-      <%#= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_unit_review_path(unit_id: @unit), class: "btn btn-warning", "data-no-turbolink" => false %>
-    </div>
-  </div> -->
   <div class="singleTop">
     <%= render partial: 'unit_summary' %>
     <% if @unit_uploads.present? %>

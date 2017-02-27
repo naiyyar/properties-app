@@ -13,10 +13,7 @@ class Building < ActiveRecord::Base
   include Imageable
   accepts_nested_attributes_for :units, :allow_destroy => true
 
-  default_scope { order('updated_at desc') } 
-
-  #has_attached_file :photo, styles: { large: "600x600>", medium: "400x400>", thumb: "100x100>", small: "32x32>" }
-  #validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
+  default_scope { order('updated_at desc') }
 
   geocoded_by :street_address
   after_validation :geocode
