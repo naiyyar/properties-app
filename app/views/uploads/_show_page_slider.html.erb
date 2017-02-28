@@ -1,6 +1,6 @@
 <% if object.uploads.present? %>
   <% if object.uploads.count >= 3 %>
-    <div class="rotateslider-container" id="slider">
+    <div class="rotateslider-container hidden-sm hidden-xs" id="slider">
       <% object.uploads.each do |upload| %>
         <div class="rotateslider-item">
           <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox">

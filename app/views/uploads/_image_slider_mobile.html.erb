@@ -1,32 +1,28 @@
 <div class="similar">
-  <!-- carousel for extra-small devices -->
-  <div id="carouselSimilar-3" class="carousel slide visible-xs visible-sm carousel-col">
-    <ol class="carousel-indicators">
-      <% uploads.each_with_index do |upload, index| %>
-        <li data-target="#carouselSimilar-3" data-slide-to="<%=index%>" class="<%=index==0 ? 'active' : '' %>"></li>
-      <%end%>
-    </ol>
-    <div class="carousel-inner"> 
-      <% uploads.each_with_index do |upload, index| %>
-        <div class="item <%= index==0 ? 'active' : '' %>">
-          <div class="row">
-            <div class="col-xs-12">
-              <a href="<%= upload.image.url %>" class="card fancybox" rel='gallery'>
-                <div class="figure">
-                    <%= image_tag upload.image, alt: 'Image' %>
-                </div>
-                <div class="clearfix"></div>
-              </a>
+  <div class="swiper-container visible-xs visible-sm">
+    <div class="swiper-wrapper">
+        <% uploads.each_with_index do |upload, index| %>
+            <div class="swiper-slide">
+                <a href="<%= upload.image.url %>" class="card fancybox" rel='gallery'>
+                    <div class="figure">
+                        <%= image_tag upload.image, alt: 'Image' %>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
             </div>
-          </div>
-        </div>
-      <%end%>
+        <%end%>
     </div>
-    <a class="left carousel-control" href="#carouselSimilar-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
-    <a class="right carousel-control" href="#carouselSimilar-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+    <div class="swiper-pagination"></div>
   </div>
-  <div class="sliderLink pull-right visible-xs visible-sm">
+  <div class="sliderLink visible-xs visible-sm">
     <%= link_to "See all(#{uploads.count})", path, "data-no-turbolink" => false %> |
     <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_upload_path, class: "", "data-no-turbolink" => false  %>
   </div>
 </div>
+
+ <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true
+    });
+</script>

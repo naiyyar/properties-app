@@ -5769,7 +5769,8 @@ blockquote {
     }
     
     .sliderLink{
-        padding: 20px;
+        padding: 10px 0px 10px;
+        text-align: right;
     }
 }
 /*@media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape)  {  

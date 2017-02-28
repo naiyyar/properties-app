@@ -35,5 +35,6 @@
 //= require bootstrap-datepicker
 //= require rails.validations
 //= require moment
+//= require swiper
 //= require turbolinks
 //= require_tree .
