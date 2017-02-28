@@ -5302,12 +5302,18 @@ blockquote {
         text-align: center;
     }
     .rotateslider-container {
-        width: 326px !important;
-        height: 184px !important;
+        width: 280px !important;
+        height: 140px !important;
     }
     .rotateslider-container img {
-        height: 180px;
-        width: 130px;
+        height: 170px;
+        width: 120px;
+    }
+    .rotateslider-container .arrow{
+        width: 22px;
+        height: 33px;
+        margin-top: -17px;
+        font-size: 10px;
     }
     .logo, .logo.expanded {
         position: absolute;
