@@ -19,3 +19,8 @@ jQuery ->
 		parentElem = $(this).parents().find('#leftSide')
 		if(parentElem.hasClass('expanded'))
 			parentElem.css('z-index', 999)
+
+	window.setTimeout (->
+       	$('.alert').slideUp 500, ->
+         	$(this).remove()
+     	), 5000

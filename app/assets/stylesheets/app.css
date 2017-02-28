@@ -3720,14 +3720,15 @@ h1.pageTitle {
 }
 .alert {
     padding: 15px 15px 15px 63px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     border: 0 none;
     border-radius: 2px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
-    background-color: #fff;
+    background-color: #fff !important;
     font-size: 13px;
     position: relative;
     z-index: 10000;
+    float: right;
 }
 .alert-dismissable .close, .alert-dismissible .close {
     right: 0;

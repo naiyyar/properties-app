@@ -10,7 +10,7 @@
 
 .rotateslider-container .rotateslider-item {
   position: absolute;
-  left: 50%;
+  left: 150%;
   top: 50%;
   -webkit-transform: translateY(-50%) translateX(-50%) scale(0.9, 0.6);
   -ms-transform: translateY(-50%) translateX(-50%) scale(0.9, 0.6);
