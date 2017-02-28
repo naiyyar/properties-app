@@ -5,9 +5,7 @@
           <h1 class="pageTitle">
             <%= "#{@unit.name}" %> <%#= @unit.building.building_street_address %>
             <% if user_signed_in? %>
-              <% if current_user.property_owner?(@unit) %>
                 <%= link_to "Edit", edit_unit_path(@unit), class: 'btn btn-o btn-default btn-xs' %>
-              <%end%>
             <%end%>
           </h1>
           <div class="address"><span class="icon-location-pin"></span> 
