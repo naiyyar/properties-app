@@ -64,7 +64,7 @@ class Building < ActiveRecord::Base
   end
 
   def building_name_or_address
-    self.building_name.present? ? self.building_name : street_address
+    building_name.present? ? building_name : building_street_address
   end
 
   def marker_image

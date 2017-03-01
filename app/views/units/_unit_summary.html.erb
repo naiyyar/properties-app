@@ -5,14 +5,14 @@
           <h1 class="pageTitle">
             <%= "#{@unit.name}" %> <%#= @unit.building.building_street_address %>
             <% if user_signed_in? %>
-                <%= link_to "Edit", edit_unit_path(@unit), class: 'btn btn-o btn-default btn-xs' %>
+                <%= link_to "Edit", edit_unit_path(@unit), class: 'btn btn-o btn-default btn-xs pull-right' %>
             <%end%>
           </h1>
           <div class="address"><span class="icon-location-pin"></span> 
             <%= link_to building_path(@unit.building) do %>
-              <b>
+              <!-- <b> -->
                 <%= @unit.building.street_address %>, <%= @unit.building.zipcode %> <br />  
-              </b>
+              <!-- </b> -->
             <%end%>
           </div>
           <div class="address"><span class="fa fa-building"></span> <%= link_to @unit.building.building_name, building_path(@unit.building) %></div>
