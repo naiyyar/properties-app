@@ -6,22 +6,21 @@
     <%= render partial: 'building_summary' %>
     <% if @building.uploads.present? %>
       <!-- for small and xtra small devices -->
-      <%= render partial: 'uploads/image_slider_mobile', locals: { uploads: @building.uploads, path: building_uploads_path(building_id: @building.id, new_upload_path: new_building_upload_path(building_id: @building)) } %>
+      <%= render partial: 'uploads/image_slider_mobile', locals: { uploads: @building.uploads, path: building_uploads_path(building_id: @building.id), new_upload_path: new_building_upload_path(building_id: @building) } %>
       <!-- for Lasrge devices -->
       <%= render partial: 'uploads/show_page_slider', locals: { object: @building, path: new_building_upload_path(building_id: @building) } %>
+    <%else%>
+      <div class="sliderLink visible-xs visible-sm">
+        <%#= link_to "See all(#{@building.uploads.count})", building_uploads_path(building_id: @building.id), "data-no-turbolink" => false %>
+        <span class="text-danger">No photos available</span>
+        <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_building_upload_path(building_id: @building),class: "btn btn-o btn-default", "data-no-turbolink" => false  %>
+      </div>
     <%end%>
-
-    <!-- <div class="description">
-      <h3>Description</h3>
-      <p><%#= @building.description ? simple_format(@building.description) : 'No description available' %></p>
-    </div> -->
-  
-    <%= render partial: 'building_amenities' %>
   </div>
 
+  <%= render partial: 'building_amenities' %>
+
   <div class="clearfix"></div>
-  
-  <%#= render partial: 'similiar_properties' %>
 
   <div class="tabsContainer" style="margin-top: 8px;" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">

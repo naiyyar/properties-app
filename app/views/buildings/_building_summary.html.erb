@@ -27,8 +27,8 @@
           <div class="clearfix"></div>
           <ul class="features">
             <li>Reviews<div><%= link_to @building.reviews.count, '#reviewsContainer' %></div></li>
-            <li>Floors<div><%= @building.floors ? @building.floors : 'Not specified' %></div></li>
-            <li>Built in year<div><%= @building.built_in ? @building.built_in : 'Not specified' %></div></li>
+            <li>Number of Floors<div><%= @building.floors ? @building.floors : '<span style="visibility:hidden;">--</span>'.html_safe %></div></li>
+            <li>Built in year<div><%= @building.built_in ? @building.built_in : '' %></div></li>
           </ul>
           <div class="clearfix"></div>
       </div>

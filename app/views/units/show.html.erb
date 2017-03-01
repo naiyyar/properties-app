@@ -7,10 +7,15 @@
       <%= render partial: 'uploads/image_slider_mobile', locals: { uploads: @unit_uploads, path: unit_uploads_path(unit_id: @unit.id), new_upload_path: new_unit_upload_path(unit_id: @unit) } %>
       <!-- for Lasrge devices -->
       <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
+    <%else%>
+      <span class="text-danger">No photos available</span>
+        <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-o btn-default", "data-no-turbolink" => false  %>
+      </div>
     <%end%>
-    <%= render partial: 'unit_amenities' %>
-    <%= render partial: 'buildings/building_amenities', locals: { building: @unit.building } %>
+   
   </div>
+   <%= render partial: 'unit_amenities' %>
+    <%= render partial: 'buildings/building_amenities', locals: { building: @unit.building } %>
   <div class="clearfix"></div>
   <!-- <div class="description">
       <h3>Description</h3>
@@ -36,7 +41,7 @@
   
   <%#= render partial: 'similiar_units' %>
   
-  <div class="tabsContainer" style="margin-top: 8px;">
+  <div class="tabsContainer" style="margin-top: 8px;" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="active"><a href="#ur" role="tab" data-toggle="tab"><span class="icon-hash">#</span> Unit Reviews</a></li>
         <li class=""><a href="#br" role="tab" data-toggle="tab"><span class="icon-home"></span> Building Reviews</a></li>

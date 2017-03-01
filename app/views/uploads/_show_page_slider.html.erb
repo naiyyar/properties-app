@@ -13,44 +13,42 @@
     </div>
   <%else%>
     <div class="col-lg-12">
-    <div id="propWidget-3" class="carousel slide propWidget-3 hidden-sm hidden-xs" data-ride="carousel">
-      <% if object.uploads.count > 1 %>
-        <ol class="carousel-indicators">
-          <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselFull" data-slide-to="1"></li>
-        </ol>
-      <%end%>
-      <div class="carousel-inner">
-        <% object.uploads.each_with_index do |upload, index| %>
-          <div class="item <%= index == 0 ? 'active' : ''%>">
-            <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" >
-              <%= image_tag upload.image.url, alt: "" %>
-            </a>
-            <div class="container">
+      <div id="propWidget-3" class="carousel slide propWidget-3 hidden-sm hidden-xs" data-ride="carousel">
+        <% if object.uploads.count > 1 %>
+          <ol class="carousel-indicators">
+            <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselFull" data-slide-to="1"></li>
+          </ol>
+        <%end%>
+        <div class="carousel-inner">
+          <% object.uploads.each_with_index do |upload, index| %>
+            <div class="item <%= index == 0 ? 'active' : ''%>">
+              <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" >
+                <%= image_tag upload.image.url, alt: "" %>
+              </a>
+              <div class="container">
                 <div class="carousel-caption">
                     
                 </div>
+              </div>
             </div>
-          </div>
+          <%end%>
+        </div>
+        <% if object.uploads.count > 1 %>
+          <a class="left carousel-control" href="#propWidget-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+          <a class="right carousel-control" href="#propWidget-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
         <%end%>
       </div>
-      <% if object.uploads.count > 1 %>
-        <a class="left carousel-control" href="#propWidget-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
-        <a class="right carousel-control" href="#propWidget-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
-      <%end%>
-    </div>
     </div>
   <%end%>
-  <% if object.uploads.count > 0 %>
-    <div class="pull-right hidden-sm hidden-xs" style="padding: 10px 20px;">
-      <span class="fa fa-th-large"></span> 
-      <% if object.kind_of? Building %>
-        <%= link_to "See all(#{object.uploads.count})", building_uploads_path(building_id: object.id), "data-no-turbolink" => false %>
-      <%else%>
-        <%= link_to "See all(#{object.uploads.count})", unit_uploads_path(unit_id: object.id), "data-no-turbolink" => false %>
-      <%end%>
-    </div>
-  <%end%>
+  <div class="see_all hidden-sm hidden-xs" style="">
+    <span class="fa fa-th-large"></span> 
+    <% if object.kind_of? Building %>
+      <%= link_to "See all(#{object.uploads.count})", building_uploads_path(building_id: object.id), "data-no-turbolink" => false %>
+    <%else%>
+      <%= link_to "See all(#{object.uploads.count})", unit_uploads_path(unit_id: object.id), "data-no-turbolink" => false %>
+    <%end%>
+  </div>
 <%else%>
   <%= image_tag 'no-photo-available.jpg', size: '311x211', class: 'pull-left' %>
   <div class="pull-right">No image Found! Please <%= link_to 'Upload', path, "data-no-turbolink" => false %> images.</div>

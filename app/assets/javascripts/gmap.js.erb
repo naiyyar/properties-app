@@ -17,21 +17,14 @@ function createSidebarElem(json){
 
 function bindElemToMarker(elem, marker){
   elem.on('mouseover', function(){
-    //handler.getMap().setZoom(15);
-    //marker.serviceObject.setIcon("<%= asset_path 'marker-green.png' %>");
-    marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
-    //marker.setMap(handler.getMap()); //because clusterer removes map property from marker
-    //marker.panTo();
-    //google.maps.event.trigger(marker.getServiceObject(), 'click');
+    marker.serviceObject.setIcon("<%= asset_path 'green-dot.png' %>");
   }).on('mouseout', function(){
-    //marker.serviceObject.setIcon("<%= asset_path 'marker-blue.png' %>")
-    marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
+    marker.serviceObject.setIcon("<%= asset_path 'red-dot.png' %>")
   })
 };
 
 function bindMarker(marker, markers, handler, lat, lng, zoom){
   $(window).on('load', function(){
-    //marker.serviceObject.setIcon("<%= asset_path 'marker-blue.png' %>")
     marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
     marker.setMap(handler.getMap());
     marker.panTo();

@@ -22,6 +22,12 @@
 }
 
 /* custome */
+#reviewsContainer .tab-content{
+    background-color: #f3f3f3 !important;
+}
+.see_all{
+    padding: 0px 20px 10px; text-align: right;
+}
 .table-responsive-lg {
     width: 100%;
     margin-bottom: 10px;
@@ -662,7 +668,7 @@ a.userHandler {
     border: 0 none;
     font-size: 13px;
     margin: 19px 0 0 5px;
-    width: 280px;
+    width: 350px;
     -webkit-appearance: none;
 }
 .headerNotifyWraper {
@@ -2134,8 +2140,9 @@ h1.pageTitle {
     float: left;
     width: 33.33%;
     text-align: center;
-    padding: 15px 0;
+    padding: 4px 0;
     border-right: 1px solid #e8e8e8;
+    font-size: 11px;
 }
 .singleTop ul.features li:last-child {
     border-right: 0 none;
@@ -2144,11 +2151,11 @@ h1.pageTitle {
     color: #999;
     display: block;
     height: 24px;
-    font-size: 24px;
+    font-size: 12px;
     line-height: 24px;
 }
 .singleTop ul.features li div {
-    font-size: 13px;
+    font-size: 12px;
 }
 .agentAvatar {
     text-align: center;
@@ -5292,6 +5299,7 @@ blockquote {
         height: 49px;
         padding: 0 20px;
         left: 0;
+        border-bottom: 1px solid #96a9b8;
     }
     .search > input[type=text] {
         margin-top: 2px;
@@ -5442,7 +5450,7 @@ blockquote {
         width: 100%;
     }
     #wrapper {
-        margin: 82px 0 0 0;
+        margin: 89px 0 0 0;
     }
     #mapView {
         width: 100%;
@@ -5772,6 +5780,7 @@ blockquote {
     .sliderLink{
         padding: 10px 0px 10px;
         text-align: right;
+        margin-right: 20px;
     }
 }
 /*@media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape)  {  
