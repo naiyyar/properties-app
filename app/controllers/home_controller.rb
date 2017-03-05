@@ -98,7 +98,12 @@ class HomeController < ApplicationController
 	      building_link = view_context.link_to building.building_name_or_address, building_path(building)
 	      marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
         
-	      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", :locals => { building_link: building_link, :building => building })
+	      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", 
+                                           :locals => { building_link: building_link, 
+                                                        building: building,
+                                                        image: Upload.marker_image(building)
+                                                      }
+                                          )
 	    end
 	  end
   end

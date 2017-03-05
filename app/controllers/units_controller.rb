@@ -11,11 +11,40 @@ class UnitsController < ApplicationController
   # GET /units/1.json
   def show
     @unit_uploads = @unit.uploads.order("created_at desc")
-    @hash = Gmaps4rails.build_markers(@unit.building) do |building, marker|
-      marker.lat building.latitude
-      marker.lng building.longitude
-    end
-    #@unit_rental_price_histories = @unit.rental_price_histories.order('created_at desc')
+    @lat = @unit.building.latitude
+    @lng = @unit.building.longitude
+    @gmaphash = [
+                  {
+                    title: @unit.name,
+                    image: Upload.marker_image(@unit),
+                    address: @unit.building.street_address,
+                    position: {
+                      lat: @unit.building.latitude,
+                      lng: @unit.building.longitude
+                    },
+                    markerIcon: ActionController::Base.helpers.asset_path("marker-blue.png")
+
+                  }
+                ]
+    # @hash = Gmaps4rails.build_markers(@unit.building) do |building, marker|
+    #   marker.lat building.latitude
+    #   marker.lng building.longitude
+    #   building_link = view_context.link_to building.building_name, building_path(building)
+    #   marker.title "#{@unit.name}-#{building.building_name}"
+    #   marker.infowindow render_to_string(:partial => '/layouts/shared/marker_infowindow', 
+    #                                      :locals => { 
+    #                                                   building_link: building_link, 
+    #                                                   building: building,
+    #                                                   image: Upload.marker_image(@unit)
+    #                                                 }
+    #                                      )
+    #   #To add own marker
+    #   marker.picture ({
+    #         'url' => ActionController::Base.helpers.asset_path('marker-blue.png'),
+    #         'width' => 50,
+    #         'height' => 50
+    #       })
+    # end
   end
 
   def units_search

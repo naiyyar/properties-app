@@ -12,7 +12,7 @@
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
     <%= csrf_meta_tags %>
   </head>
-  <body class="notransition no-hidden">
+  <body class="notransition no-hidden" <%= "data-no-turbolinks='true'".html_safe %> >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <% unless params[:controller] == 'home' and params[:action] == 'index'%>
       <%= render partial: 'layouts/shared/header' %>
@@ -26,8 +26,7 @@
     <%else%>
       <%= yield %>
     <%end%>
-  
-    <%= javascript_include_tag 'infobox' %>
+
     <%= javascript_include_tag 'home' %>
     <%= javascript_include_tag 'zapp' %>
 

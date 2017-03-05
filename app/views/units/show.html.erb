@@ -8,7 +8,8 @@
       <!-- for Lasrge devices -->
       <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
     <%else%>
-      <span class="text-danger">No photos available</span>
+      <div class="sliderLink visible-xs visible-sm">
+        <span class="text-danger">No photos available</span>
         <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_unit_upload_path(unit_id: @unit), class: "btn btn-o btn-default", "data-no-turbolink" => false  %>
       </div>
     <%end%>
@@ -74,16 +75,4 @@
 </div>
 
 <div class="clearfix"></div>
-
-<script type="text/javascript" charset="utf-8">
-  handler = Gmaps.build('Google');
-  marker_hash = <%=raw @hash.to_json %>;
-  
-  handler.buildMap({ provider: {}, internal: {id: 'mapView'}}, function(){
-      markers = handler.addMarkers(marker_hash);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-      handler.getMap().setZoom(14);
-  });
-  
-</script>
+<div data-map="<%= @gmaphash.to_json %>" data-lat="<%= @lat.to_json %>" data-lng="<%= @lng.to_json %>" id="mapHash"></div>

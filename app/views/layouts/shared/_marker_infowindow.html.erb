@@ -1,3 +1,10 @@
-<%= image_tag building.marker_image, width: '200', height: '120' %>
-<h4><u><%= building_link %></u></h4> 
-<i><%= building.street_address %> <%= building.zipcode %></i>
+<div class="infoW">
+    <div class="propImg">
+        <%= image_tag image , alt: 'Image'%>
+    </div>
+    <div class="paWrapper">
+        <div class="propTitle"><%= building_link %></div>
+        <div class="propAddress"><%= building.street_address %> <%= building.zipcode %></div>
+    </div>
+    <div class="clearfix"></div>
+</div>

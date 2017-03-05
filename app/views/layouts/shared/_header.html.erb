@@ -15,11 +15,11 @@
       <%=render partial: 'layouts/shared/user_profile' %>
     </div>
     <% if params[:action] == 'search' %>
-      <a href="#" class="mapHandler"><span class="icon-map"></span></a>
-      <a href="#" class="listHandler"><span class="icon-list"></span></a>
+      <a href="javascript:void(0);" class="mapHandler"><span class="icon-map"></span></a>
+      <a href="javascript:void(0);" class="listHandler"><span class="icon-list"></span></a>
     <%elsif (params[:controller] == 'buildings' and params[:action] == 'show') or (params[:controller] == 'units' and params[:action] == 'show') %>
-      <a href="#" class="mapHandlerShow"><span class="icon-map"></span></a>
-      <a href="#" class="listHandlerShow"><span class="icon-list"></span></a>
+      <a href="javascript:void(0);" class="mapHandlerShow"><span class="icon-map"></span></a>
+      <a href="javascript:void(0);" class="listHandlerShow"><span class="icon-list"></span></a>
     <%end%>
   <%else%>
     <% if params[:action] == 'search' %>

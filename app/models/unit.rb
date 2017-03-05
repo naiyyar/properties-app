@@ -24,4 +24,5 @@ class Unit < ActiveRecord::Base
   	def recommended_percent
   		Vote.recommended_percent(self)
   	end
+
 end

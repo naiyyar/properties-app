@@ -1424,11 +1424,11 @@ a.userHandler .counter {
 #wrapper.full.m-full {
     margin-left: 200px;
 }
-#mapView {
+#mapView, #mapViewSearch {
     width: 50%;
     float: left;
 }
-#mapView.min {
+#mapView.min, #mapViewSearch.min {
     width: 0%;
 }
 .mapPlaceholder {
@@ -1438,7 +1438,7 @@ a.userHandler .counter {
     float: left;
     overflow: hidden;
 }
-#mapView.min .mapPlaceholder {
+#mapView.min .mapPlaceholder, #mapViewSearch.min .mapPlaceholder  {
     display: none;
 }
 .mapPlaceholder span {
@@ -5452,7 +5452,7 @@ blockquote {
     #wrapper {
         margin: 89px 0 0 0;
     }
-    #mapView {
+    #mapView, #mapViewSearch {
         width: 100%;
         -webkit-transition: all .2s ease-in-out;
         -o-transition: all .2s ease-in-out;
@@ -5473,16 +5473,19 @@ blockquote {
     #mapView.min, #mapView.mob-min {
         width: 0%;
     }
+    #mapViewSearch.min, #mapViewSearch.mob-min {
+        width: 0%;
+    }
     #content.max, #content.mob-max {
         width: 100%;
     }
-    #mapView.mob-max {
+    #mapView.mob-max, #mapViewSearch.mob-max {
         width: 100%;
     }
     #content.mob-min {
         width: 0%;
     }
-    #mapView.mob-min .mapPlaceholder {
+    #mapView.mob-min .mapPlaceholder, #mapViewSearch.mob-min .mapPlaceholder {
         display: none;
     }
     .carousel-control .glyphicon-chevron-left,

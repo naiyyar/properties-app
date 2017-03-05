@@ -31,31 +31,50 @@ class BuildingsController < ApplicationController
     @reviews = @building.reviews.order(created_at: :desc)
     @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id})
 
-    #finding similar properties
-    #@similar_properties = @building.similar_properties
-
     #calculating unit reviews count for a building
     @building_units = @building.units
     @unit_review_count = 0
     @building_units.each do |unit|
       @unit_review_count += unit.reviews.count
     end
+
+    @lat = @building.latitude
+    @lng = @building.longitude
+
+    @gmaphash = [
+                  {
+                    title: @building.building_name,
+                    image: @building.uploads.last.image,
+                    address: @building.street_address,
+                    position: {
+                      lat: @building.latitude,
+                      lng: @building.longitude
+                    },
+                    markerIcon: ActionController::Base.helpers.asset_path("marker-blue.png")
+
+                  }
+                ]
     
     #google Map
-    @hash = Gmaps4rails.build_markers(@building) do |building, marker|
-      marker.lat building.latitude
-      marker.lng building.longitude
-      building_link = view_context.link_to building.building_name, building_path(building)
-      marker.title building.building_name
-      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", :locals => { building_link: building_link, :building => building })
+    # @hash = Gmaps4rails.build_markers(@building) do |building, marker|
+    #   marker.lat building.latitude
+    #   marker.lng building.longitude
+    #   building_link = view_context.link_to building.building_name, building_path(building)
+    #   marker.title building.building_name
+    #   marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", 
+    #                                      :locals => { building_link: building_link, 
+    #                                                   building: building,
+    #                                                   image: Upload.marker_image(@building)
+    #                                                 }
+    #                                     )
     
-      #To add own marker
-      marker.picture ({
-            "url" => ActionController::Base.helpers.asset_path("marker-blue.png"),
-            "width" => 50,
-            "height" => 50
-            })
-    end
+    #   #To add own marker
+    #   marker.picture ({
+    #         "url" => ActionController::Base.helpers.asset_path("marker-blue.png"),
+    #         "width" => 50,
+    #         "height" => 50
+    #         })
+    # end
   end
 
   def new

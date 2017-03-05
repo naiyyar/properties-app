@@ -67,15 +67,6 @@ class Building < ActiveRecord::Base
     building_name.present? ? building_name : building_street_address
   end
 
-  def marker_image
-    no_image = 'no-photo-available.jpg'
-    if self.uploads.present?
-      self.uploads.last.image_file_name.present? ? self.uploads.last.image : no_image
-    else
-      no_image
-    end
-  end
-
   def self.text_search(term)
     if term.present?
       search(term)

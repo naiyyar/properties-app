@@ -7,4 +7,13 @@ class Upload < ActiveRecord::Base
 	validates_attachment 	:image, 
 				:presence => true,
 				:content_type => { :content_type => /\Aimage\/.*\Z/ }
+
+	def self.marker_image object
+	    no_image = 'no-photo-available.jpg'
+	    if object.uploads.present?
+	      object.uploads.last.image_file_name.present? ? object.uploads.last.image : no_image
+	    else
+	      no_image
+	    end
+	end
 end
