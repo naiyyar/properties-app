@@ -10,9 +10,14 @@ app.buildings.prototype = {
         source: '/buildings/contribute',
         appendTo: '#buildings-search-results',
         select: $.proxy(this._select, this),
-        response: $.proxy(this._response, this)
+        response: $.proxy(this._response, this),
+        open: $.proxy(this._open, this)
       })
       .autocomplete('instance')._renderItem = $.proxy(this._render, this);
+  },
+
+  _open: function(event, ui) {
+    $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building"> Add a building</a></li>');
   },
 
   _render: function(ul, item) {
@@ -56,6 +61,8 @@ app.buildings.prototype = {
   },
 
   _response: function(event, ui){
+    //$('.ui-autocomplete').append('<li><a href="javascript:alert(\'redirecting...\')">See All Result</a></li>'); //See all results
+         
     if(ui.content.length===0){
       var ul = $("#buildings-search-no-results");
       var markup = [

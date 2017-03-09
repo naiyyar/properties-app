@@ -69,3 +69,19 @@
 .buildings-search .results .ui-state-focus .address {
   color: #08c;
 }
+
+.buildings-search ul.ui-autocomplete li.building_link_li{
+  background-color: #eee;
+  height: 4.5em;
+  text-align: center;
+  line-height: 20px;
+  border: none;
+}
+.buildings-search ul.ui-autocomplete li.building_link_li a{
+  color: #3071a9
+}
+.buildings-search ul.ui-autocomplete li.building_link_li a:hover{
+  color: #3071a9;
+  text-decoration: underline;
+  font-size: 14px;
+}
