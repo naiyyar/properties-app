@@ -44,7 +44,7 @@ class BuildingsController < ApplicationController
     @gmaphash = [
                   {
                     title: @building.building_name,
-                    image: @building.uploads.last.image,
+                    image: Upload.marker_image(@building),
                     address: @building.street_address,
                     position: {
                       lat: @building.latitude,

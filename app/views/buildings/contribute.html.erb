@@ -14,11 +14,11 @@
 					<%= form_tag "/reviews/new", method: :get, id: "search_item_form", class: "form-horizontal" do %>
 	        	<%= hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution', id: 'building_contribution' %>
 	        	<%= hidden_field_tag :user_id, current_user.present? ? current_user.id : '' %>
-						<section class="app-content">
+					<section class="app-content">
 					    <div class="buildings-search">
-				      	<%= text_field_tag 'buildings-search-txt',@building.present? ? @building.building_street_address : nil, class: "form-control", placeholder: 'Search building by name or address', "data-buildingid" => @building.present? ? @building.id : '' %>
-				      	<div class="results" id="buildings-search-results"></div>
-				      	<ul id="buildings-search-no-results" class="search-no-result"></ul>
+					      	<%= text_field_tag 'buildings-search-txt',@building.present? ? @building.building_street_address : nil, class: "form-control", placeholder: 'Search building by name or address', "data-buildingid" => @building.present? ? @building.id : '' %>
+					      	<div class="results" id="buildings-search-results"></div>
+					      	<ul id="buildings-search-no-results" class="search-no-result"></ul>
 					    </div>
 				  	</section>
 				  	<div class="pull-right margin-top-20">
@@ -75,3 +75,13 @@
   });
    
 </script>
+
+<style type="text/css">
+	#wrapper{
+		margin: 20px 0 0 0;
+	}
+	
+	#leftSide {
+    	top: 49px;
+    }
+</style>

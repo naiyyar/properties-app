@@ -5606,6 +5606,12 @@ blockquote {
         top: 10px;
         left: 0;
     }
+    .btn-contribute-home{
+        position: absolute;
+        z-index: 9999;
+        right: 5px;
+        top: 3px;
+    }
     .home-caption {
         top: 150px;
     }
