@@ -8,10 +8,10 @@
     <%= render partial: 'layouts/shared/search_form' %>
   </div>
   
-  <div class="pull-right shared_contribute_btn <%=search_bar(:hidden)%>">
-    <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
-  </div>
   <% if user_signed_in? %>
+    <div class="pull-right shared_contribute_btn <%=search_bar(:hidden)%>">
+      <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
+    </div>
     <div class="hidden-xs">
       <%=render partial: 'layouts/shared/user_profile' %>
     </div>
@@ -34,7 +34,7 @@
       <ul class="homeNavUl">
         <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a></li>
         <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signin">Sign In</a></li>
-        <li class="list_property"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
+        <li class="<%=search_bar(:hidden)%>"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
         <li></li>
       </ul>
     </div>
