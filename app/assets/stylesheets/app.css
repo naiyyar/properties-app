@@ -1094,6 +1094,10 @@ a.userHandler .counter {
     bottom: 10px;
     left: -70px;
 }
+.leftNav ul li.btn_contribute a span.navLabel {
+    bottom: 0px;
+}
+
 .expanded .leftNav ul li a span.navLabel {
     bottom: 2px;
     left: 0;
@@ -5381,6 +5385,9 @@ blockquote {
         margin-left: 0;
         z-index: 9999;
     }
+    .contributeLeftSide {
+        top: 49px !important;
+    }
     .closeLeftSide {
         width: 13%;
         position: absolute;
@@ -5451,6 +5458,9 @@ blockquote {
     }
     #wrapper {
         margin: 89px 0 0 0;
+    }
+    .contribute-wrapper{
+        margin: 31px 0 0 0 !important;
     }
     #mapView, #mapViewSearch {
         width: 100%;

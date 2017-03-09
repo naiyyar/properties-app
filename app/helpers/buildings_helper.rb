@@ -40,4 +40,20 @@ module BuildingsHelper
 	def single_image(building)
 		building.uploads.present? ? building.uploads.last.image.url : 'no-photo-available.jpg'
 	end
+
+	def contribution? params
+		params[:action] == 'contribute' || params[:contribution].present?
+	end
+
+	def contribute_left_side params
+		if contribution?(params)
+			'contributeLeftSide'
+		end
+	end
+
+	def contribute_wrapper params
+		if contribution?(params)
+			'contribute-wrapper'
+		end
+	end
 end

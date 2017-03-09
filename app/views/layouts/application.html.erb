@@ -18,7 +18,7 @@
       <%= render partial: 'layouts/shared/header' %>
       <%= render partial: 'layouts/shared/left_side' %>
       <div class="closeLeftSide"></div>
-      <div id="wrapper">
+      <div id="wrapper" class="<%=contribute_wrapper(params)%>">
         <div class="content">
           <%= yield %>
         </div>
