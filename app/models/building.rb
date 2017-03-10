@@ -24,7 +24,7 @@ class Building < ActiveRecord::Base
 
   #pgsearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
-     :using => { :trigram => { :threshold => 0.1 } }
+     :using => { :tsearch => {} }
 
   pg_search_scope :text_search_by_building_name, against: [:building_name],
      :using => { :trigram => { :threshold => 0.1 } }
