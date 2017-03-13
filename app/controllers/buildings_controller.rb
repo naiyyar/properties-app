@@ -17,7 +17,7 @@ class BuildingsController < ApplicationController
   end
 
   def contribute
-    @buildings = Building.text_search(params[:term]).order('created_at desc')
+    @buildings = Building.text_search(params[:term]).reorder('building_street_address ASC')
     @building = Building.where(id: params[:building_id]).first if params[:building_id].present?
     @search_bar_hidden = :hidden
   end
