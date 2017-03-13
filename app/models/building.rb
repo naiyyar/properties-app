@@ -24,18 +24,18 @@ class Building < ActiveRecord::Base
 
   #pgsearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
-     :using => { :tsearch => {} }
+     :using => { :tsearch => {prefix: true} }
 
   pg_search_scope :text_search_by_building_name, against: [:building_name],
-     :using => { :trigram => { :threshold => 0.1 } }
+     :using => { :tsearch => {prefix: true}, :trigram => { :threshold => 0.1 } }
 
   pg_search_scope :search_by_street_address, against: [:building_street_address],
-    :using => {:tsearch=> {}, :trigram=> {
+    :using => {:tsearch=> {prefix: true}, :trigram=> {
                   :threshold => 0.3
                 }}
 
   pg_search_scope :text_search_by_city, against: [:city],
-    :using => {:tsearch=> {}, :trigram=> {
+    :using => {:tsearch=> {prefix: true}, :trigram=> {
                   :threshold => 0.1
                 }}
 
@@ -105,16 +105,6 @@ class Building < ActiveRecord::Base
   #finding similar properties may be on the basis amenities
   def similar_properties
     buildings = Building.where('id <> ?', self.id)
-    # buildings = buildings.where('parking = ? or 
-    #                               deck = ? or 
-    #                               elevator = ? or
-    #                               live_in_super = ? or
-    #                               gym = ? or
-    #                               doorman = ? or
-    #                               pets_allowed_cats = ? or
-    #                               pets_allowed_dogs = ? or
-    #                               swimming_pool = ? or
-    #                               roof_deck = ?', parking, deck, elevator,live_in_super,gym,doorman,pets_allowed_cats,pets_allowed_dogs,swimming_pool,roof_deck)
   end
 
   #child neighbohoods

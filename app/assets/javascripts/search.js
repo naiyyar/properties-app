@@ -45,7 +45,7 @@ var brooklyn_and_queens_neighborhoods_hash = [
 	{ key: 'Flushing', 					url: 'https://www.dropbox.com/s/cqh4slnzbeq03dw/flushing.kml?dl=1'},
 	{ key: 'Woodside', 					url: 'https://www.dropbox.com/s/ohflj1urwh92w44/woodside.kml?dl=1'},
 	{ key: 'Jackson Heights', 			url: 'https://www.dropbox.com/s/7r1wbb8e0ud65mp/jackson_heights.kml?dl=1'},
-	{ key: 'Elmhurst', 					url: 'https://www.dropbox.com/s/byecxgngp60stis/astoria.kml?dl=1'}
+	{ key: 'Elmhurst', 					url: 'https://www.dropbox.com/s/ntrv4zmdvwp45sh/elmhurst.kml?dl=1'}
 ]
 
 var brooklyn_and_queens_zipcodes_hash = [

@@ -61,7 +61,6 @@ app.buildings.prototype = {
   },
 
   _response: function(event, ui){
-    //$('.ui-autocomplete').append('<li><a href="javascript:alert(\'redirecting...\')">See All Result</a></li>'); //See all results
          
     if(ui.content.length===0){
       var ul = $("#buildings-search-no-results");
@@ -70,7 +69,7 @@ app.buildings.prototype = {
         'Contribute by<a href="javascript:void(0)" id="add_new_building"> adding a new building</a>'
       ];
       
-      ul_li = $('<li class="no-result-li">').append(markup.join(''));
+      ul_li = $('<li class="ui-menu-item no-result-li">').append(markup.join(''));
       ul.html(ul_li);
       ul.css({'display': 'block','width': '555px','top': '36px','left': '15px'});
       

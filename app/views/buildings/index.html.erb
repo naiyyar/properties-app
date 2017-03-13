@@ -18,7 +18,6 @@
               <th>PROPERTY</th>
               <th>ADDRESS</th>
               <th>RATING</th>
-              <th>FAVS</th>
               <th></th>
               <th></th>
             </tr>
@@ -31,7 +30,6 @@
                 <td>
                   <%= rating_for building, "building", disabled_after_rate: true, readonly: true %>
                 </td>
-                <td><span class="icon-heart text-red"></span> 54</td>
                 <% if current_user %>
                   <td><%= link_to "edit", edit_building_path(building) %></td>
                   <% if current_user.has_role?(:admin) %>
