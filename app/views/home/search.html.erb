@@ -18,9 +18,10 @@
 		});
 		
 		//Plogon options
-		//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }
+		//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }#1a69a9
 		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
-	    	{ strokeColor: '#0e5c9a', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
+	    	//{ strokeColor: '#0e5c9a', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
+	    	{ strokeColor: '#1664a4', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
 		);
 		
 		brooklyn_and_queens_neighborhoods(seach_term) //In search.js

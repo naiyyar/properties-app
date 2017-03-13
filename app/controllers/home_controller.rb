@@ -78,7 +78,7 @@ class HomeController < ApplicationController
                   @result_type = 'pneighborhood'
                 else
                   # Search with address
-                  @buildings = Building.search_by_street_address(params[:term]).to_a.sort_by{|b| b.building_street_address} #.reorder('building_street_address ASC').order('building_street_address ASC')
+                  @buildings = Building.search_by_street_address(params[:term]).to_a.sort_by{ |b| b.building_street_address }
                   if @buildings.present?
                     @result_type = 'address'
                   else
