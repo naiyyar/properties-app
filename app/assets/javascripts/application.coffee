@@ -21,6 +21,6 @@ jQuery ->
 			parentElem.css('z-index', 999)
 
 	window.setTimeout (->
-       	$('.alert').slideUp 500, ->
+       	$('.alert').slideUp 300, ->
          	$(this).remove()
-     	), 5000
+     	), 2000
