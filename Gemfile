@@ -27,8 +27,10 @@ gem 'american_date'
 
 gem 'pg'
 
+#searching
 gem 'pg_search'
 
+#voting
 gem 'thumbs_up'
 
 #Multistep

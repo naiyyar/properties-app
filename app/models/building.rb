@@ -27,11 +27,11 @@ class Building < ActiveRecord::Base
      :using => { :tsearch => {prefix: true} }
 
   pg_search_scope :text_search_by_building_name, against: [:building_name],
-     :using => { :tsearch => {prefix: true}, :trigram => { :threshold => 0.1 } }
+     :using => { :tsearch => {prefix: true}, :trigram => { :threshold => 0.3 } }
 
   pg_search_scope :search_by_street_address, against: [:building_street_address],
-    :using => {:tsearch=> {prefix: true}, :trigram=> {
-                  :threshold => 0.3
+    :using => {:tsearch=> { prefix: true }, :trigram=> {
+                  :threshold => 0.1
                 }}
 
   pg_search_scope :text_search_by_city, against: [:city],

@@ -1,5 +1,5 @@
 class BuildingsController < ApplicationController 
-  before_action :authenticate_user!, except: [:index, :show, :contribute,:create,:edit, :autocomplete]
+  before_action :authenticate_user!, except: [:index, :show, :contribute,:create,:edit, :autocomplete, :apt_search]
 
   def index
     @buildings = Building.order('created_at desc')

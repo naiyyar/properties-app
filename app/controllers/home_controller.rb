@@ -58,27 +58,32 @@ class HomeController < ApplicationController
           @result_type = 'zipcode'
         else
           
-          @buildings = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
+          #@buildings = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
+          @buildings = Building.where('city ILIKE ?', "%#{params[:term]}%").to_a.uniq(&:city)
           if @buildings.present?
             @result_type = 'cities'
           else
             
-            @buildings = Building.text_search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
+            #@buildings = Building.text_search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
+            @buildings = Building.where('neighborhood ILIKE ? or neighborhoods_parent ILIKE ?', "%#{params[:term]}%", "%#{params[:term]}%").to_a.uniq(&:neighborhood)
             if @buildings.present?
               @result_type = 'neighborhood'
             else
               
-              @buildings = Building.text_search_by_building_name(params[:term]).reorder(:building_name)
+              #@buildings = Building.text_search_by_building_name(params[:term]).reorder(:building_name)
+              @buildings = Building.where('building_name ILIKE ?', "%#{params[:term]}%").reorder(:building_name)
               if @buildings.present?
-            	 @result_type = 'building_name'
+            	  @result_type = 'building_name'
               else
                
-                @buildings = Building.text_search_by_parent_neighborhood(params[:term]).to_a.uniq(&:neighborhoods_parent)
+                #@buildings = Building.text_search_by_parent_neighborhood(params[:term]).to_a.uniq(&:neighborhoods_parent)
+                @buildings = Building.where('neighborhoods_parent ILIKE ?', "%#{params[:term]}%").to_a.uniq(&:neighborhoods_parent)
             	  if @buildings.present?
                   @result_type = 'pneighborhood'
                 else
                   # Search with address
-                  @buildings = Building.search_by_street_address(params[:term]).to_a.sort_by{ |b| b.building_street_address }
+                  #@buildings = Building.search_by_street_address(params[:term]).to_a.sort_by{ |b| b.building_street_address }
+                  @buildings = Building.where('building_street_address ILIKE ?', "%#{params[:term]}%").to_a.sort_by{ |b| b.building_street_address }
                   if @buildings.present?
                     @result_type = 'address'
                   else
