@@ -40,7 +40,12 @@
           <!-- <div class="agentName">Jane Smith</div> -->
           <!-- <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-warning contactBtn">Contact Agent</a> -->
           <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-o btn-yellow contactBtn hidden-xs", "data-no-turbolink" => false %>
-          <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-o btn-gray contactBtn hidden-xs", "data-no-turbolink" => false  %>
+          <% if user_signed_in? %>
+            <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-o btn-gray contactBtn hidden-xs", "data-no-turbolink" => false  %>
+          <%else%>
+            <%#= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '#signin', 'data-toggle' => 'modal', class: "btn btn-o btn-gray contactBtn hidden-xs", "data-no-turbolink" => false  %>
+            <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '/users/sign_in', class: "btn btn-o btn-gray contactBtn hidden-xs" %>
+          <%end%>
       </div>
     </div>
   </div>

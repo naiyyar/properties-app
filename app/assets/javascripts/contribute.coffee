@@ -104,3 +104,7 @@ $(document).on 'click', '.reviewer_type',(e) ->
 			$("#review_stay_time").removeAttr('data-validate')
 	else
 		$("#review_stay_time").removeClass('hide')
+
+#adding search to building address if building on present
+$(document).on 'click', '#add_new_building', (e) ->
+	$('#building_building_street_address').val($('#buildings-search-txt').val())

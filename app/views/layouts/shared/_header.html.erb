@@ -7,11 +7,11 @@
   <div class="search <%= search_bar(:hidden) %>">
     <%= render partial: 'layouts/shared/search_form' %>
   </div>
-  <div class="pull-right shared_contribute_btn <%=search_bar(:hidden)%>">
+  <div class="pull-right shared_contribute_btn hidden-xs <%=search_bar(:hidden)%>">
     <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
   </div>
+
   <% if user_signed_in? %>
-    
     <div class="hidden-xs">
       <%=render partial: 'layouts/shared/user_profile' %>
     </div>
@@ -31,7 +31,7 @@
       <a href="javascript:void(0)" class="listHandlerShow"><span class="icon-list"></span></a>
     <%end%>
     <div class="home-nav">
-      <ul class="homeNavUl">
+      <ul class="homeNavUl" style="padding: 3px 0px;">
         <li><a href="javascript:void(0)" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a></li>
         <li><a href="javascript:void(0)" class='btn btn-default' data-toggle="modal" data-target="#signin">Sign In</a></li>
         <li class="<%=search_bar(:hidden)%>"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>

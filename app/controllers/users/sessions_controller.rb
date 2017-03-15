@@ -9,16 +9,17 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    resource = User.find_for_database_authentication(email: params[:user][:email])
-    #return invalid_login_attempt unless resource
+    super
+    # resource = User.find_for_database_authentication(email: params[:user][:email])
+    # #return invalid_login_attempt unless resource
 
-    if resource && resource.valid_password?(params[:user][:password])
-      sign_in :user, resource
-      redirect_to :back, notice: 'Successfully signed in.'
-    else
-      redirect_to :back
-      flash[:error] = 'Incorrect user name or password.'
-    end
+    # if resource && resource.valid_password?(params[:user][:password])
+    #   sign_in :user, resource
+    #   redirect_to :back, notice: 'Successfully signed in.'
+    # else
+    #   redirect_to :back
+    #   flash[:error] = 'Incorrect user name or password.'
+    # end
 
   end
 
