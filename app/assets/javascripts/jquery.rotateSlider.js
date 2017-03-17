@@ -23,11 +23,11 @@
       }
     })
 
-    $this.on('mouseenter', function(){
-      $arrow.css({'display': 'block'});
-    }).on('mouseleave', function(){
-      $arrow.css({'display': 'none'});
-    })
+    // $this.on('mouseenter', function(){
+    //   $arrow.css({'display': 'block'});
+    // }).on('mouseleave', function(){
+    //   $arrow.css({'display': 'none'});
+    // })
 
     $arrow.on('click', function() {
       var action = $(this).data('action'),
