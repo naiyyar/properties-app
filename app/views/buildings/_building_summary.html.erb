@@ -5,14 +5,14 @@
           <h1 class="pageTitle">
             <%= @building.building_name_or_address %> 
             <% if user_signed_in? %>
-                <%= link_to "Edit", edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right' %>
+              <%= link_to "Edit", edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right' %>
             <%end%>
           </h1>
           <div class="address"><span class="icon-location-pin"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>
           <div class="address"><span class="icon-location-pin"></span> <%= @building.neighborhood %></div>
           
           <ul class="rating">
-            <%= rating_for @building, "building", disable_after_rate: true, readonly: true %>
+            <%= rating_for @building, 'building', disable_after_rate: true, readonly: true %>
           </ul>
           <div class="favLink">(<%=@building.reviews.count%>)</div>
           <% if @building.votes.present? %>
@@ -40,11 +40,13 @@
           <!-- <div class="agentName">Jane Smith</div> -->
           <!-- <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-warning contactBtn">Contact Agent</a> -->
           <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-o btn-yellow contactBtn hidden-xs", "data-no-turbolink" => false %>
-          <% if user_signed_in? %>
-            <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-o btn-gray contactBtn hidden-xs", "data-no-turbolink" => false  %>
-          <%else%>
-            <%#= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '#signin', 'data-toggle' => 'modal', class: "btn btn-o btn-gray contactBtn hidden-xs", "data-no-turbolink" => false  %>
-            <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '/users/sign_in', class: "btn btn-o btn-gray contactBtn hidden-xs" %>
+          <% if @building.uploads.present? %>
+            <% if user_signed_in? %>
+              <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-o btn-gray contactBtn hidden-xs", "data-no-turbolink" => false  %>
+            <%else%>
+              <%#= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '#signin', 'data-toggle' => 'modal', class: "btn btn-o btn-gray contactBtn hidden-xs", "data-no-turbolink" => false  %>
+              <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '/users/sign_in?contribution=building_photos', class: "btn btn-o btn-gray contactBtn hidden-xs" %>
+            <%end%>
           <%end%>
       </div>
     </div>

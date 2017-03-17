@@ -23,4 +23,4 @@ jQuery ->
 	window.setTimeout (->
        	$('.alert').slideUp 300, ->
          	$(this).remove()
-     	), 2000
+     	), 3000

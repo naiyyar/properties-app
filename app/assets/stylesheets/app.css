@@ -22,6 +22,7 @@
 }
 
 /* custome */
+.sliderLink{text-align: center; padding: 8px;}
 #reviewsContainer .tab-content{
     background-color: #f3f3f3 !important;
 }
