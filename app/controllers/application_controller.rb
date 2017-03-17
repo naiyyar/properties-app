@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   def store_location
   # store last url as long as it isn't a /users path
     session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/
+    session[:contribution_for] = params[:contribution]
+    session[:search_term] = params['buildings-search-txt']
   end
 
   def after_sign_in_path_for(resource)
@@ -41,8 +43,13 @@ class ApplicationController < ActionController::Base
         end
       end
 	  else
-	    super
-      session[:previous_url] || root_path
+	    if session[:contribution_for] == 'building_photos'
+        search_text = session[:search_term]
+        "/uploads/new?buildings-search-txt=#{search_text}"
+      else
+        session[:previous_url] || root_path
+      end
+      
 	  end
 	end
 
