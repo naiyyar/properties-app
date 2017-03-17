@@ -5280,15 +5280,6 @@ blockquote {
     }
 }
 
-@media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {  
-    .logo, .logo.expanded {
-        left: 39% !important;
-    }
-    .rotateslider-container {
-        margin-top: 10px !important;
-    }
-        
-}
 
 @media screen and (max-width: 767px) {  
     a {
@@ -5808,13 +5799,34 @@ blockquote {
         margin-right: 20px;
     }
 }
-/*@media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape)  {  
-    
-    .leftNav .search {
-        display: none;
+
+@media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {  
+    .rotateslider-container {
+        width: 288px !important;
+        height: 180px !important;
     }
-    
-}*/
+    .rotateslider-container img {
+        height: 170px !important;
+        width: 130px !important;
+    }
+            
+}
+
+@media screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {  
+    .logo, .logo.expanded {
+        left: 39% !important;
+    }
+    .rotateslider-container {
+        width: 400px !important;
+        height: 220px !important;
+    }
+    .rotateslider-container img {
+        height: 250px !important;
+        width: 200px !important;
+    }
+            
+}
+
 @media screen and (max-width: 480px) {
     .agentAvatarImg {
         width: 30%;
