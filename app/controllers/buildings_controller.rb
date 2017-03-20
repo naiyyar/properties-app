@@ -24,10 +24,13 @@ class BuildingsController < ApplicationController
 
   def show
     @building = Building.find(params[:id])
+    
     @unit_review_count = 0
-    @building.units.each do |unit|
-      @unit_review_count = @unit_review_count + unit.reviews.count
-    end
+
+    @unit_rent_summary_count = @building.unit_rent_summary_count
+    @unit_rent_summary_count = @building.unit_reviews_count
+    
+    
     @reviews = @building.reviews.order(created_at: :desc)
     @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id})
 

@@ -102,6 +102,33 @@ class Building < ActiveRecord::Base
     return count
   end
 
+  def unit_rent_summary_count
+    unit_rent_summary_count = 0
+    self.units.each do |unit|
+      unit_rent_summary_count += unit.rental_price_histories.count
+    end
+    unit_rent_summary_count
+  end
+
+  def unit_reviews_count
+    unit_review_count = 0
+    self.units.each do |unit|
+      unit_review_count += unit.reviews.count
+    end
+    unit_review_count
+  end
+
+
+
+  def photos
+    building_counts = self.uploads.count
+    unit_counts = 0
+    self.units.each do |unit|
+      unit_counts += unit.uploads.count
+    end
+    return building_counts + unit_counts
+  end
+
   #finding similar properties may be on the basis amenities
   def similar_properties
     buildings = Building.where('id <> ?', self.id)

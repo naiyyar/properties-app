@@ -53,8 +53,12 @@
 					<%= hidden_field_tag :contribution, 'building_review', class: "form-control building_contribution" %>
 					<%= render partial: 'buildings/building_contribute_form' %>
 				    <div class="pull-right">
+				    	<% if user_signed_in? %>
 			      		<%= submit_tag 'Next', class: 'btn btn-primary', id: 'new_building_submit' %>
-			      	</div>
+			      	<%else%>
+			      		<%= link_to 'Next','/users/sign_in', class: 'btn btn-primary'%>
+			      	<%end%>
+			      </div>
 				<%end%>
 			</div>
 			

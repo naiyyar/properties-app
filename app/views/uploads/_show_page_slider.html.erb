@@ -42,6 +42,7 @@
     </div>
   <%end%>
   <div class="see_all" style="">
+    <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_upload_path, class: 'btn btn-o btn-gray btn-sm hidden-lg', 'data-no-turbolink' => false  %> &nbsp;&nbsp;
     <span class="fa fa-th-large"></span> 
     <% if object.kind_of? Building %>
       <%= link_to "See all(#{object.uploads.count})", building_uploads_path(building_id: object.id), "data-no-turbolink" => false %>

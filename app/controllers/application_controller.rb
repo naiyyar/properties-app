@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
 
   def store_location
-  # store last url as long as it isn't a /users path
+    # store last url as long as it isn't a /users path
     session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/
     session[:contribution_for] = params[:contribution]
     session[:search_term] = params['buildings-search-txt']
@@ -49,8 +49,8 @@ class ApplicationController < ActionController::Base
       else
         session[:previous_url] || root_path
       end
-      
 	  end
+    
 	end
 
 	private
@@ -66,4 +66,5 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
 end
