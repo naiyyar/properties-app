@@ -30,7 +30,7 @@ module ReviewsHelper
 		end
 	end
 
-	def number_of_months
+	def number_of_years
 		['< 1 Year', '1-2 Years', '2-3 Years', '3-4 Years', '4-5 Years', '> 5 Years' ]
 	end
 end

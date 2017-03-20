@@ -26,7 +26,7 @@
 	    <label>Rating</label>
 	    	<% rating_user = current_user.present? ? current_user : nil %>
 	    	<%= rating_for_user @reviewable, rating_user, @reviewable.class.name.downcase, star: 5 %>
-			<span class='message hide rating-not-selected'>Please choose an answer for 'Rating'.</span>
+			<span class='message hide rating-not-selected text-red'>Please choose an answer for 'Rating'.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">
@@ -41,17 +41,17 @@
 			  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant', class: 'reviewer_status' %> Former Tenant
 			  </label>
 			   <label class="btn btn-default reviewer_type">
-			  	<%= f.radio_button :tenant_status,'visitor', id: 'visitor', class: 'reviewer_status'   %> Visitor
+			  	<%= f.radio_button :tenant_status,'visitor', id: 'visitor', class: 'reviewer_status' %> Visitor
 			  </label> <br/>
-			  <span class='message hide status-not-selected'>Please select your reviewer type.</span>
+			  <span class='message hide status-not-selected text-red'>Please select your reviewer type.</span>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label></label>
-			<%= f.select :stay_time, options_for_select(number_of_months), { prompt: 'Number of Years in Residence' },  { class: 'form-control' } %>
-			 <span class='message hide years-not-selected'>Please select your reviewer type.</span>
+			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: 'Number of Years in Residence' },  { class: 'form-control' } %> <i></i>
+			 <span class='message hide years-not-selected text-red'>Please select your reviewer type.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">

@@ -1,76 +1,77 @@
-<div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-    <div class="panel panel-default">
-      <div class="panel-heading"><b>New Unit</b></div>
-      <div class="panel-body">                       
-        <%= form_for @unit, class: 'form-horizontal' do |f| %>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <div class="form-group">
-                <label>Unit Name</label>
-                 <%= f.text_field :name, class: "form-control", required: 'required'%>
-                 <%= f.hidden_field :user_id, value: current_user.id %>
+<div class="tables">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading"><b>Unit</b></div>
+        <div class="panel-body">                       
+          <%= form_for @unit, class: 'form-horizontal' do |f| %>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label>Unit Name</label>
+                   <%= f.text_field :name, class: "form-control", required: 'required'%>
+                   <%= f.hidden_field :user_id, value: current_user.id %>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label>Building</label>
+                  <%= f.collection_select(:building_id, Building.where('building_name <> ?', ''), :id, :building_name, {:prompt => :true}, { class: "form-control", required: 'required' }) %>
+                </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <div class="form-group">
-                <label>Building</label>
-                <%= f.collection_select(:building_id, Building.where('building_name <> ?', ''), :id, :building_name, {:prompt => :true}, { class: "form-control", required: 'required' }) %>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <label>Bedrooms</label>
+                   <%= f.number_field :number_of_bedrooms, class: "form-control", min: 1 %>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <label>Bathrooms</label>
+                   <%= f.number_field :number_of_bathrooms, class: "form-control", min: 1 %>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <label>sqaure Feet</label>
+                   <%= f.number_field :square_feet, class: "form-control", min: 0 %>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="form-group">
-                <label>Bedrooms</label>
-                 <%= f.number_field :number_of_bedrooms, class: "form-control", min: 1 %>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label>Move In Fee</label>
+                   <%= f.number_field :move_in_fee, class: "form-control", min: 0 %>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label>Processing Fee</label>
+                   <%= f.number_field :processing_fee, class: "form-control", min: 0 %>
+                </div>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="form-group">
-                <label>Bathrooms</label>
-                 <%= f.number_field :number_of_bathrooms, class: "form-control", min: 1 %>
+            <div class="form-group">
+              <label>Pros</label>
+               <%= f.text_area :pros, class: "form-control" %>
+            </div>
+          
+            <div class="form-group">
+              <label>Cons</label>
+               <%= f.text_area :cons, class: "form-control"%>
+            </div>
+              
+            <div class="form-group">
+              <div class="pull-right">
+                <%= f.submit 'Next', class: "btn btn-primary" %>
               </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="form-group">
-                <label>sqaure Feet</label>
-                 <%= f.number_field :square_feet, class: "form-control", min: 0 %>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <div class="form-group">
-                <label>Move In Fee</label>
-                 <%= f.number_field :move_in_fee, class: "form-control", min: 0 %>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <div class="form-group">
-                <label>Processing Fee</label>
-                 <%= f.number_field :processing_fee, class: "form-control", min: 0 %>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Pros</label>
-             <%= f.text_area :pros, class: "form-control" %>
-          </div>
-        
-          <div class="form-group">
-            <label>Cons</label>
-             <%= f.text_area :cons, class: "form-control"%>
-          </div>
-            
-          <div class="form-group">
-            <div class="pull-right">
-              <%= f.submit 'Next', class: "btn btn-primary" %>
-            </div>
-          </div> 
-        <% end %>
+            </div> 
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-

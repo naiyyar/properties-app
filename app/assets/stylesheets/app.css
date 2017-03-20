@@ -22,6 +22,11 @@
 }
 
 /* custome */
+input[type=select] {
+   -webkit-appearance: menulist;
+   -moz-appearance:    menulist;
+   appearance:         menulist;
+}
 .sliderLink{text-align: center; padding: 8px;}
 #reviewsContainer .tab-content{
     background-color: #f3f3f3 !important;
@@ -1757,7 +1762,7 @@ a.btn.dropdown-btn.btn-gray {
     border-bottom: 1px solid #dfdfdf;
     border-left: 0 none;
     border-right: 0 none;
-    -webkit-appearance: none;
+    /*-webkit-appearance: none;*/
     background-color: #fff;
     color: #333;
     font-size: 13px;
