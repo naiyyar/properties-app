@@ -26,7 +26,7 @@
 	    <label>Rating</label>
 	    	<% rating_user = current_user.present? ? current_user : nil %>
 	    	<%= rating_for_user @reviewable, rating_user, @reviewable.class.name.downcase, star: 5 %>
-			<span class='message hide rating-not-selected text-red'>Please choose an answer for 'Rating'.</span>
+			<span class='message hide rating-not-selected text-red'>Please select a rating.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">
@@ -35,23 +35,23 @@
 			<br />
 			<div class="btn-group" data-toggle="buttons">
 			  <label class="btn btn-default reviewer_type">
-			  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant', class: 'reviewer_status' %> Current Tenant
+			  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant', class: 'reviewer_status', validate: true %> Current Tenant
 			  </label>
 			  <label class="btn btn-default reviewer_type">
-			  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant', class: 'reviewer_status' %> Former Tenant
+			  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant', class: 'reviewer_status', validate: true %> Former Tenant
 			  </label>
 			   <label class="btn btn-default reviewer_type">
-			  	<%= f.radio_button :tenant_status,'visitor', id: 'visitor', class: 'reviewer_status' %> Visitor
+			  	<%= f.radio_button :tenant_status,'visitor', id: 'visitor', class: 'reviewer_status', validate: true %> Visitor
 			  </label> <br/>
-			  <span class='message hide status-not-selected text-red'>Please select your reviewer type.</span>
+			  <span class='message hide status-not-selected text-red'>Please select a reviewer type.</span>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label></label>
-			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: 'Number of Years in Residence' },  { class: 'form-control' } %> <i></i>
-			 <span class='message hide years-not-selected text-red'>Please select your reviewer type.</span>
+			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: 'Number of Years in Residence' },  { class: 'form-control', validate: true } %> <i></i>
+			 <span class='message hide years-not-selected text-red'>Please select number of years in residence.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">
@@ -64,14 +64,14 @@
 		<div class="form-group">
 			<label>Pros</label>
 			<small class="pull-right">10 words minimum</small>
-			<%= f.text_area :pros,  class: 'form-control', validate: true, placeholder: "Enter 10 words minimum" %>
+			<%= f.text_area :pros,  class: 'form-control', validate: true, placeholder: "Enter 10 words minimum", min: 10 %>
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Cons</label>
 			<small class="pull-right">10 words minimum</small>
-			<%= f.text_area :cons,  class: 'form-control', validate: true, placeholder: "Enter 10 words minimum" %>
+			<%= f.text_area :cons,  class: 'form-control', validate: true, placeholder: "Enter 10 words minimum", min: 10 %>
 		</div>
 	</div>
 	

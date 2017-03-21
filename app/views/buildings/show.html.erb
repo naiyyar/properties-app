@@ -19,7 +19,7 @@
         <% if user_signed_in? %>
           <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_building_upload_path(building_id: @building),class: 'btn btn-o btn-gray contactBtn', 'data-no-turbolink' => false  %>
         <%else%>
-          <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '/users/sign_in?contribution=building_photos', class: 'btn btn-o btn-gray contactBtn', 'data-no-turbolink' => false  %>
+          <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '#signin', class: 'btn btn-o btn-gray contactBtn', 'data-toggle' => 'modal'  %>
         <%end%>
       </div>
     <%end%>

@@ -5,7 +5,7 @@
 		    <div class="media-left">
 		      <div class="media-body">
 		      	<% if @imageable.kind_of? Unit %>
-		      		<b class="media-heading"><%= link_to @imageable.building.building_name, building_path(@imageable.building) %></b>
+		      		<b class="media-heading"><%= link_to @imageable.building.building_name_or_address, building_path(@imageable.building) %></b>
 		      		<br />
 		      		<small class="text-muted">
 		        		<%= link_to building_path(@imageable.building) do %>
@@ -15,7 +15,7 @@
 		        		<%= link_to @imageable.name, unit_path(@imageable)%>
 		        	</small>
 		      	<%else%>
-		      		<b class="media-heading"><%= link_to @imageable.building_name, building_path(@imageable) %></b>  <br />
+		      		<b class="media-heading"><%= link_to @imageable.building_name_or_address, building_path(@imageable) %></b>  <br />
 		      		<small class="text-muted">
 		        		<%= link_to building_path(@imageable) do %>
 			        		<%= @imageable.building_street_address %> <br />

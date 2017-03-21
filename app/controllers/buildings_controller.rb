@@ -24,12 +24,9 @@ class BuildingsController < ApplicationController
 
   def show
     @building = Building.find(params[:id])
-    
-    @unit_review_count = 0
 
     @unit_rent_summary_count = @building.unit_rent_summary_count
-    @unit_rent_summary_count = @building.unit_reviews_count
-    
+    @unit_review_count = @building.unit_reviews_count
     
     @reviews = @building.reviews.order(created_at: :desc)
     @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id})
@@ -90,54 +87,72 @@ class BuildingsController < ApplicationController
   end
 
   def create
-    if params[:building][:building_street_address].present?
-      @building = Building.find_by_building_street_address(params[:building][:building_street_address])
+    if current_user.nil?
+      # case params[:contribution]
+      # when 'building_photos'
+      #   session[:contribution_for] = 'building_photos'
+      # when 'building_amenities'
+      #   session[:contribution_for] = 'building_amenities'
+      # when 'unit_photos'
+      #   session[:contribution_for] = 'unit_photos'
+      # when 'unit_amenities'
+      #   session[:contribution_for] = 'unit_amenities'
+      # end
+      # Store the form data in the session so we can retrieve it after login
+      session[:form_data] = params
+      session[:object_type] = params[:unit_contribution].present? ? 'unit' : 'building'
+      # Redirect the user to register/login
+      redirect_to new_user_session_path
     else
-      @building = Building.find_by_building_street_address(params['buildings-search-txt'])
-    end
-    if @building.blank?
-      @building = Building.create(building_params)
+      if params[:building][:building_street_address].present?
+        @building = Building.find_by_building_street_address(params[:building][:building_street_address])
+      else
+        @building = Building.find_by_building_street_address(params['buildings-search-txt'])
+      end
+      if @building.blank?
+        @building = Building.create(building_params)
 
-      if @building.save
-        flash[:notice] = "Building Created."
+        if @building.save
+          flash[:notice] = "Building Created."
+          if params[:unit_contribution]
+            contribute = params[:unit_contribution]
+            unit_id = @building.units.last.id
+          else
+            contribute = params[:contribution]
+            building_id = @building.id
+          end
+          if contribute.present?
+            if ['unit_review', 'unit_photos', 'unit_amenities', 'unit_price_history'].include? contribute
+              redirect_to contribute_buildings_path(contribution_for: contribute, building_id: @building.id)  
+            else
+              redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+            end
+          else
+            redirect_to building_steps_path(building_id: @building.id)
+          end
+          
+        else
+          flash.now[:error] = "Error Creating"
+          render :new
+        end
+      else
+        if params[:unit_id].present?
+          @unit = Unit.find(params[:unit_id])
+          @unit.update(unit_params)
+        else
+          if params[:building][:units_attributes].present?
+            @unit = @building.fetch_or_create_unit(params[:building][:units_attributes])
+          end
+        end
         if params[:unit_contribution]
           contribute = params[:unit_contribution]
-          unit_id = @building.units.last.id
+          unit_id = @unit.id
         else
           contribute = params[:contribution]
           building_id = @building.id
         end
-        if contribute.present?
-          if ['unit_review', 'unit_photos', 'unit_amenities', 'unit_price_history'].include? contribute
-            redirect_to contribute_buildings_path(contribution_for: contribute, building_id: @building.id)  
-          else
-            redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
-          end
-        else
-          redirect_to building_steps_path(building_id: @building.id)
-        end
-        
-      else
-        flash.now[:error] = "Error Creating"
-        render :new
+        redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
       end
-    else
-      if params[:unit_id].present?
-        @unit = Unit.find(params[:unit_id])
-        @unit.update(unit_params)
-      else
-        if params[:building][:units_attributes].present?
-          @unit = @building.fetch_or_create_unit(params[:building][:units_attributes])
-        end
-      end
-      if params[:unit_contribution]
-        contribute = params[:unit_contribution]
-        unit_id = @unit.id
-      else
-        contribute = params[:contribution]
-        building_id = @building.id
-      end
-      redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
     end
   end
 

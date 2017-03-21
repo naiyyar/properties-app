@@ -82,7 +82,7 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 		$(".building_contribution").val(this.value)
 		if(this.value=='building_review')
 			href = '/reviews/new'
-		else if(this.value=='building_photos')
+		else if(this.value == 'building_photos')
 			if(user_id!='')
 				href = '/uploads/new'
 			else
