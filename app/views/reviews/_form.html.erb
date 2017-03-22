@@ -1,5 +1,5 @@
 <%= form_for [@reviewable, Review.new], validate: true do |f| %>
-	<%= f.validate :pros, :cons, :review_title, :tenant_status %>
+	<%= f.validate :pros, :cons %>
 	<% unless @reviewable.kind_of? Unit %>
   	<div class="col-sm-12">
 		  <div class="form-group">
@@ -35,13 +35,13 @@
 			<br />
 			<div class="btn-group" data-toggle="buttons">
 			  <label class="btn btn-default reviewer_type">
-			  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant', class: 'reviewer_status', validate: true %> Current Tenant
+			  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant', class: 'reviewer_status' %> Current Tenant
 			  </label>
 			  <label class="btn btn-default reviewer_type">
-			  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant', class: 'reviewer_status', validate: true %> Former Tenant
+			  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant', class: 'reviewer_status' %> Former Tenant
 			  </label>
 			   <label class="btn btn-default reviewer_type">
-			  	<%= f.radio_button :tenant_status,'visitor', id: 'visitor', class: 'reviewer_status', validate: true %> Visitor
+			  	<%= f.radio_button :tenant_status,'visitor', id: 'visitor', class: 'reviewer_status' %> Visitor
 			  </label> <br/>
 			  <span class='message hide status-not-selected text-red'>Please select a reviewer type.</span>
 			</div>
@@ -50,28 +50,31 @@
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label></label>
-			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: 'Number of Years in Residence' },  { class: 'form-control', validate: true } %> <i></i>
+			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: 'Number of Years in Residence' },  { class: 'form-control' } %> <i></i>
 			 <span class='message hide years-not-selected text-red'>Please select number of years in residence.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Review Title</label>
-			<%= f.text_field :review_title,  class: 'form-control', validate: true %>
+			<%= f.text_field :review_title,  class: 'form-control' %>
+			<span class='message hide title_blank text-red'>Please add review title.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Pros</label>
 			<small class="pull-right">10 words minimum</small>
-			<%= f.text_area :pros,  class: 'form-control', validate: true, placeholder: "Enter 10 words minimum", min: 10 %>
+			<%= f.text_area :pros,  class: 'form-control', placeholder: "Enter 10 words minimum", validate: true %>
+			<span class='message hide pros_blank text-red'>Please add pros.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Cons</label>
 			<small class="pull-right">10 words minimum</small>
-			<%= f.text_area :cons,  class: 'form-control', validate: true, placeholder: "Enter 10 words minimum", min: 10 %>
+			<%= f.text_area :cons,  class: 'form-control', placeholder: "Enter 10 words minimum", validate: true %>
+			<span class='message hide cons_blank text-red'>Please add cons.</span>
 		</div>
 	</div>
 	

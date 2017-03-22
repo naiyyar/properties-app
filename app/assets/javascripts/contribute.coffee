@@ -3,10 +3,14 @@ $(document).on 'click', '#add_new_building',(e) ->
 	$("#search-form").addClass('hide');
 	$("#new_building").removeClass('hide');
 
+#adding validations to review form
 $(document).on 'click', '#submit_review',(e) ->
 	score = $("input[name='score']").val()
 	reviewer_type = $('.reviewer_type').hasClass('active')
 	residence_years = $("#review_stay_time option:selected").val()
+	review_title = $("#review_review_title").val()
+	pros = $("#review_pros").val()
+	cons = $("#review_cons").val()
 	submit = false
 
 	if(score == '')
@@ -30,6 +34,27 @@ $(document).on 'click', '#submit_review',(e) ->
 			submit = false
 	else
 		$(".years-not-selected").addClass('hide')
+		submit = true
+
+	if(review_title == '')
+		$(".title_blank").removeClass('hide')
+		submit = false
+	else
+		$(".title_blank").addClass('hide')
+		submit = true
+
+	if(pros == '')
+		$(".pros_blank").removeClass('hide')
+		submit = false
+	else
+		$(".pros_blank").addClass('hide')
+		submit = true
+
+	if(cons == '')
+		$(".cons_blank").removeClass('hide')
+		submit = false
+	else
+		$(".cons_blank").addClass('hide')
 		submit = true
 	
 	return submit

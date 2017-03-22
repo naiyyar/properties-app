@@ -73,6 +73,7 @@ class ApplicationController < ActionController::Base
 	private
 
   def sign_in_redirect_path object
+    flash[:notice] = "#{object.class} created Successfully."
     if session[:form_data].present?
       case session[:form_data]['contribution']
       when 'building_photos'
