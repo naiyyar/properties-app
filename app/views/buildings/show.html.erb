@@ -16,11 +16,7 @@
     <%else%>
       <div class="sliderLink">
         <span class="text-danger">No photos available</span>
-        <% if user_signed_in? %>
-          <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_building_upload_path(building_id: @building),class: 'btn btn-o btn-gray contactBtn', 'data-no-turbolink' => false  %>
-        <%else%>
-          <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '#signin', class: 'btn btn-o btn-gray contactBtn', 'data-toggle' => 'modal'  %>
-        <%end%>
+        <%= render partial: 'uploads/upload_link', locals: { object: @building }%>
       </div>
     <%end%>
   </div>

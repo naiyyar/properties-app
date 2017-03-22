@@ -60,9 +60,9 @@ class ApplicationController < ActionController::Base
       if session[:contribution_for] == 'building_photos' && session[:search_term].present?
         "/uploads/new?buildings-search-txt=#{session[:search_term]}"
       elsif session[:building_id].present?
-        sign_in_redirect_path(session[:building_id])
+        return "/uploads/new?building_id=#{session[:building_id]}"
       elsif session[:unit_id].present?
-        sign_in_redirect_path(nil, session[:unit_id])
+        return "/uploads/new?unit_id=#{session[:unit_id]}"
       else
         session[:previous_url] || root_path
       end
@@ -73,8 +73,8 @@ class ApplicationController < ActionController::Base
 	private
 
   def sign_in_redirect_path object
-    flash[:notice] = "#{object.class} created Successfully."
     if session[:form_data].present?
+      flash[:notice] = "#{object.class} created Successfully."
       case session[:form_data]['contribution']
       when 'building_photos'
         return "/uploads/new?building_id=#{object.id}"
