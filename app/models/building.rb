@@ -231,7 +231,11 @@ class Building < ActiveRecord::Base
   end
 
   def update_neighborhood
-    self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1] ) if neighborhoods.present?
+    if neighborhoods.present?
+      if self.neighborhood != neighborhoods[0] or self.neighborhoods_parent != neighborhoods[1]
+        self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1] )
+      end
+    end
   end
 
 end
