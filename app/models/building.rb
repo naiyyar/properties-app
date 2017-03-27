@@ -180,8 +180,11 @@ class Building < ActiveRecord::Base
             elsif grandparent_neighborhoods.include? neighborhood
               neighborhoods_parent = neighborhood
             else
-              search_result = search.first.address_components_of_type(:neighborhood)
-              neighborhoods_parent = search_result.first['long_name'] if search_result.present?
+              search_result = geo_result.address_components_of_type(:neighborhood)
+              if search_result.present?
+                child_neighborhoods = search_result.first['short_name']
+                neighborhoods_parent = search_result.first['long_name']
+              end
             end
           #end
         end
@@ -203,7 +206,7 @@ class Building < ActiveRecord::Base
       if child_neighborhoods.present?
         child_neighborhoods = child_neighborhoods
       else
-        child_neighborhoodschild_neighborhoods = search.first.address_components_of_type(:neighborhood)
+        child_neighborhoods = search.first.address_components_of_type(:neighborhood)
         if child_neighborhoods.present?
           child_neighborhoods = child_neighborhoods.first['long_name']
         else
