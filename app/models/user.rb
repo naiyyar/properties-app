@@ -10,9 +10,14 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable, 
+         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/avatar.png"
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
+  #validates_email_format_of :email, :message => 'is not looking good'
+
+
+  has_attached_file :avatar, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: '/assets/avatar.png'
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   
 
@@ -25,6 +30,10 @@ class User < ActiveRecord::Base
       user.name = auth.info.name   # assuming the user model has a name
       user.image_url = auth.info.image # assuming the user model has an image
     end
+  end
+
+  def profile_image
+    self.image_url.present? ? self.image_url : self.avatar
   end
 
   def user_name

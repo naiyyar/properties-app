@@ -4190,6 +4190,20 @@ body.black {
     padding-top: 10px;
 }
 
+.authentication-form{
+  width: 300px;
+  margin: 70px auto;
+}
+.authentication-form h3{
+  color: #43609c;
+}
+
+.authentication-form form{
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-top: 20px;
+}
+
 /* Profile Page */
 
 .pc-avatar {

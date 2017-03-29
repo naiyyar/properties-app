@@ -60,16 +60,3 @@ div.hr span.center {
   width: 30px;
   border: 1px solid #777;
 }
-#page-login{
-  width: 300px;
-  margin: 70px auto;
-}
-#page-login h3{
-  color: #43609c;
-}
-
-#page-login form{
-  border: 1px solid #ddd;
-  padding: 20px;
-  margin-top: 20px;
-}
