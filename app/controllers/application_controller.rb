@@ -91,8 +91,12 @@ class ApplicationController < ActionController::Base
         end
       else
         case session[:form_data]['unit_contribution']
+        when 'unit_photos'
+          return "/uploads/new?unit_id=#{object.id}"
         when 'unit_price_history'
           return "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}"
+        when 'unit_amenities'
+          return "/user_steps/next_page?contribution_for=unit_amenities&unit_id=#{object.id}"
         else
           return unit_path(object)
         end

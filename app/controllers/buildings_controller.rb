@@ -106,6 +106,8 @@ class BuildingsController < ApplicationController
     else
       if params[:building][:building_street_address].present? and params[:building][:zipcode].present?
         @building = Building.find_by_building_street_address_and_zipcode(params[:building][:building_street_address], params[:building][:zipcode])
+      elsif params[:building][:building_street_address].present?
+        @building = Building.find_by_building_street_address(params[:building][:building_street_address])
       else
         @building = Building.find_by_building_street_address(params['buildings-search-txt'])
       end

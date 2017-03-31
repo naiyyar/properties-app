@@ -2,7 +2,7 @@ class Unit < ActiveRecord::Base
 	acts_as_voteable
 	ratyrate_rateable 'unit'
 	resourcify
-	#validates_uniqueness_of :name, scope: :building_id, presence: true
+	validates_uniqueness_of :name, scope: :building_id, presence: true
   
 	belongs_to :building
 	has_many :reviews, as: :reviewable
