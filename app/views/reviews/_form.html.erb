@@ -23,7 +23,7 @@
 	<%end%>
   <div class="col-sm-12">
 	  <div class="form-group">
-	    <label>Rating</label>
+	    <label>Rating*</label>
 	    	<% rating_user = current_user.present? ? current_user : nil %>
 	    	<%= rating_for_user @reviewable, rating_user, @reviewable.class.name.downcase, star: 5 %>
 			<span class='message hide rating-not-selected text-red'>Please select a rating.</span>
@@ -31,7 +31,7 @@
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
-			<label>Reviewer Type </label>
+			<label>Reviewer Type* </label>
 			<br />
 			<div class="btn-group" data-toggle="buttons">
 			  <label class="btn btn-default reviewer_type">
@@ -49,21 +49,21 @@
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
-			<label></label>
-			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: 'Number of Years in Residence' },  { class: 'form-control' } %> <i></i>
+			<label>Number of Years in Residence*</label>
+			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: '' },  { class: 'form-control' } %> <i></i>
 			 <span class='message hide years-not-selected text-red'>Please select number of years in residence.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
-			<label>Review Title</label>
+			<label>Review Title*</label>
 			<%= f.text_field :review_title,  class: 'form-control' %>
 			<span class='message hide title_blank text-red'>Please add review title.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
-			<label>Pros</label>
+			<label>Pros*</label>
 			<small class="pull-right">10 words minimum</small>
 			<%= f.text_area :pros,  class: 'form-control', placeholder: "Enter 10 words minimum", validate: true %>
 			<span class='message hide pros_blank text-red'>Please add pros.</span>
@@ -71,7 +71,7 @@
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
-			<label>Cons</label>
+			<label>Cons*</label>
 			<small class="pull-right">10 words minimum</small>
 			<%= f.text_area :cons,  class: 'form-control', placeholder: "Enter 10 words minimum", validate: true %>
 			<span class='message hide cons_blank text-red'>Please add cons.</span>
@@ -80,13 +80,13 @@
 	
 	<div class="col-sm-12">
 	  <div class="form-group">
-			<label>Other TranspaRENTcy and advice to share</label>
+			<label>Other comments</label>
 			<%= f.text_area :other_advice,  class: 'form-control' %>
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
-			<label>Would you recommended this building?</label>
+			<label>Would you recommend this building*?</label>
 			<br />
 			<div class="btn-group" data-toggle="buttons">
 			  <label class="btn btn-default">
@@ -97,6 +97,7 @@
 			  </label>
 			</div>
 		</div>
+		<span class='message hide recommend-not-selected text-red'>This is required.</span>
   </div>
   <div class="col-sm-12">
   	<div class="pull-right">

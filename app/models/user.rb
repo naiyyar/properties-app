@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
+  #validates_email_realness_of :email
   #validates_email_format_of :email, :message => 'is not looking good'
 
 

@@ -56,6 +56,13 @@ $(document).on 'click', '#submit_review',(e) ->
 	else
 		$(".cons_blank").addClass('hide')
 		submit = true
+
+	if($("input[name=vote]").is(':checked') == false)
+		$(".recommend-not-selected").removeClass('hide')
+		submit = false
+	else
+		$(".recommend-not-selected").addClass('hide')
+		submit = true
 	
 	return submit
 

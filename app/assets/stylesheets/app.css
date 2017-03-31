@@ -4088,8 +4088,8 @@ li.list-ns-collapsed.list-ns-hovering div {
 }
 .checkbox.custom-checkbox input:checked+span,
 .radio.custom-radio input:checked+span {
-    background-color: #5cb85c;
-    border-color: #5cb85c;
+    background-color: #0075c9;
+    border-color: #0075c9;
 }
 .checkbox.custom-checkbox input[disabled]+span,
 fieldset[disabled] .checkbox.custom-checkbox input+span,

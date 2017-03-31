@@ -90,7 +90,10 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dnsruby (1.60.0)
     dynamic_form (1.1.4)
+    email_verifier (0.1.0)
+      dnsruby (>= 1.5)
     erubis (2.7.0)
     execjs (2.6.0)
     fancybox2-rails (0.2.8)
@@ -278,6 +281,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   dynamic_form
+  email_verifier
   fancybox2-rails (~> 0.2.8)
   figaro
   font-awesome-rails

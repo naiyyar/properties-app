@@ -19,6 +19,9 @@ gem 'underscore-rails'
 
 gem 'geocoder'
 
+#checking if given email address is real
+gem 'email_verifier'
+
 #Error Messages, Form validations
 gem 'dynamic_form'
 gem 'client_side_validations'
