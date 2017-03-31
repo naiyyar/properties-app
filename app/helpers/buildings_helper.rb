@@ -45,6 +45,12 @@ module BuildingsHelper
 		params[:action] == 'contribute' || params[:contribution].present?
 	end
 
+	def disabled(current_user)
+		if current_user && !current_user.has_role?(:admin)
+			true
+		end
+	end
+
 	def contribute_left_side params
 		if contribution?(params)
 			'contributeLeftSide'
