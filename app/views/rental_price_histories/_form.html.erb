@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <b>Add Price for #<%= link_to @unit.name, unit_path(@unit) if @unit.present?%> 
+          <b>Add Rent Information For #<%= link_to @unit.name, unit_path(@unit) if @unit.present?%> 
           </b></div>
         <div class="panel-body">
           <%= form_for(@rental_price_history) do |f| %>
@@ -11,7 +11,7 @@
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                   <label>Resident From</label>
-                  <%= f.text_field :residence_start_date, class: "form-control datepicker"%>
+                  <%= f.text_field :residence_start_date, class: "form-control datepicker", required: 'required'%>
                   <% if @unit.present? %>
                     <%= f.hidden_field :unit_id, value: @unit.id %>
                   <%end%>
@@ -21,7 +21,7 @@
               <div class="form-group">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                   <label>Resident To</label>
-                  <%= f.text_field :residence_end_date, class: "form-control datepicker"%>
+                  <%= f.text_field :residence_end_date, class: "form-control datepicker", required: 'required'%>
                 </div>
               </div>
             </div>

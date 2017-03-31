@@ -1,8 +1,8 @@
 class Unit < ActiveRecord::Base
 	acts_as_voteable
-	ratyrate_rateable "unit"
+	ratyrate_rateable 'unit'
 	resourcify
-	validates :name, presence: true
+	#validates_uniqueness_of :name, scope: :building_id, presence: true
   
 	belongs_to :building
 	has_many :reviews, as: :reviewable

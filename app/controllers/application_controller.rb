@@ -25,7 +25,8 @@ class ApplicationController < ActionController::Base
       elsif session[:object_type].present? and session[:object_type] == 'unit'
         building = Building.find_by_building_street_address(session[:form_data]['building']['building_street_address'])
         session[:form_data]['building']['units_attributes']['0']['building_id'] = building.id if building.present?
-        unit = Unit.create(session[:form_data]['building']['units_attributes']['0'])
+        
+        unit = Unit.first_or_create(session[:form_data]['building']['units_attributes']['0'])
         sign_in_redirect_path(unit)
       else
   	    reviewable = find_reviewable
@@ -74,15 +75,24 @@ class ApplicationController < ActionController::Base
 
   def sign_in_redirect_path object
     if session[:form_data].present?
-      flash[:notice] = "#{object.class} created Successfully."
-      case session[:form_data]['contribution']
-      when 'building_photos'
-        return "/uploads/new?building_id=#{object.id}"
-      when 'unit_photos'
-        return "/uploads/new?unit_id=#{object.id}"
+      if session[:form_data]['contribution'].present?
+        flash[:notice] = "#{object.class} created Successfully."
+        case session[:form_data]['contribution']
+        when 'building_photos'
+          return "/uploads/new?building_id=#{object.id}"
+        when 'unit_photos'
+          return "/uploads/new?unit_id=#{object.id}"
+        else
+          if object.kind_of? Building 
+            return building_path(object)
+          else
+            return unit_path(object)
+          end
+        end
       else
-        if object.kind_of? Building 
-          return building_path(object)
+        case session[:form_data]['unit_contribution']
+        when 'unit_price_history'
+          return "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}"
         else
           return unit_path(object)
         end

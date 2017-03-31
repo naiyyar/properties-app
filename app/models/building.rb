@@ -75,6 +75,10 @@ class Building < ActiveRecord::Base
     end
   end
 
+  def no_of_units
+    self.number_of_units.present? ? self.number_of_units : self.units.count
+  end
+
   def reviews_count
     self.reviews.present? ? self.reviews.count : 0
   end

@@ -26,7 +26,7 @@
           </ul> -->
           <div class="clearfix"></div>
           <ul class="features">
-            <li>Units<div><%= @building.number_of_units ? @building.number_of_units : '--' %></div></li>
+            <li>Units<div><%= @building.no_of_units ? @building.no_of_units : '--' %></div></li>
             <li>Number of Floors<div><%= @building.floors ? @building.floors : '<span style="visibility:hidden;">--</span>'.html_safe %></div></li>
             <li>Built in year<div><%= @building.built_in ? @building.built_in : '----' %></div></li>
           </ul>
