@@ -1,16 +1,18 @@
 class Building < ActiveRecord::Base
   include PgSearch
+  include Imageable
   acts_as_voteable
-  validates :building_street_address, presence: true
-  validates_uniqueness_of :building_street_address, scope: :zipcode
-  validates_uniqueness_of :building_name, :allow_blank => true, :allow_nil => true
   resourcify
   ratyrate_rateable 'building'
-  
+
+  validates :building_street_address, presence: true
+  validates_uniqueness_of :building_street_address, scope: [:zipcode]
+  validates_uniqueness_of :building_name, :allow_blank => true, :allow_nil => true
+
   belongs_to :user
   has_many :reviews, as: :reviewable
   has_many :units,  :dependent => :destroy
-  include Imageable
+  
   accepts_nested_attributes_for :units, :allow_destroy => true
 
   default_scope { order('updated_at desc') }

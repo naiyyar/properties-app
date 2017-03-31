@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    session[:previous_url] = nil
     #@recently_listed_properties = Building.joins(:uploads).order('created_at desc').limit(6)
   end
 
