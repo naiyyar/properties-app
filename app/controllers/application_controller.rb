@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       session[:building_id] = params[:id] if params[:controller] == 'buildings'
       session[:unit_id] = params[:id] if params[:controller] == 'units'
     end
-    session[:search_term] = params['buildings-search-txt'] 
+    session[:search_term] = params['buildings-search-txt']
   end
 
   def after_sign_in_path_for(resource)

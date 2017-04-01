@@ -10,7 +10,7 @@
               </div>
               <div class="col-xs-6">
                 <div class="profile-card">
-                  <div class="pc-avatar"><%=image_tag current_user.profile_image, alt: 'avatar' %></div>
+                  <div class="pc-avatar"><%=image_tag current_user.profile_image(session[:provider]), alt: 'avatar' %></div>
                   <div class="pc-name"><%= current_user.user_name %></div>
                 </div>
               </div>

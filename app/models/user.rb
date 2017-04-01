@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :buildings
   has_many :units
+  has_many :authorizations
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -16,7 +17,11 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
   #validates_email_realness_of :email
   #validates_email_format_of :email, :message => 'is not looking good'
-
+  SOCIALS = {
+    facebook: 'Facebook',
+    google_oauth2: 'Google',
+    linkedin: 'Linkedin'
+  }
 
   has_attached_file :avatar, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: '/assets/avatar.png'
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
@@ -24,17 +29,49 @@ class User < ActiveRecord::Base
 
   #methods
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.image_url = auth.info.image # assuming the user model has an image
+  def self.from_omniauth(auth, current_user)
+    authorization = Authorization.where(:provider => auth.provider, 
+                                        :uid => auth.uid).first_or_initialize
+    if authorization.user.blank?
+      user = current_user || User.where('email = ?', auth["info"]["email"]).first
+      if user.blank?
+        user = User.new
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+        user.name = auth.info.name
+       #if auth.provider == "twitter" 
+       #  user.save(:validate => false) 
+       #else
+         user.save
+       #end
+      end
+      authorization.name = auth.info.name
+      authorization.user_id = user.id
+      authorization.image_url = auth.info.image
+      authorization.save
     end
+    authorization.user
   end
 
-  def profile_image
-    self.image_url.present? ? self.image_url : self.avatar
+  # dosn't work with same email for multiple providers
+  # def self.from_omniauth(auth)
+  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  #     user.email = auth.info.email
+  #     user.password = Devise.friendly_token[0,20]
+  #     user.name = auth.info.name   # assuming the user model has a name
+  #     user.image_url = auth.info.image # assuming the user model has an image
+  #   end
+  # end
+
+  def profile_image provider=nil
+    if provider == 'Google'
+      provider = 'google_oauth2'
+    else
+      provider = 'facebook'
+    end
+    authorizations = self.authorizations.where(provider: provider)
+    provider_image = authorizations.last.image_url if authorizations.present?
+    provider_image.present? ? provider_image : self.avatar
   end
 
   def user_name
