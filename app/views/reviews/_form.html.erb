@@ -47,10 +47,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-12">
+	<div class="col-sm-12 years_in_residence">
 		<div class="form-group">
 			<label>Number of Years in Residence*</label>
-			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: '' },  { class: 'form-control' } %> <i></i>
+			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: '' },  { class: 'form-control' } %>
 			 <span class='message hide years-not-selected text-red'>Please select number of years in residence.</span>
 		</div>
 	</div>
@@ -86,18 +86,18 @@
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
-			<label>Would you recommend this building*?</label>
+			<label>Would you recommend this building? *</label>
 			<br />
 			<div class="btn-group" data-toggle="buttons">
 			  <label class="btn btn-default">
-			  	<%= radio_button_tag 'vote', true %> <span class='fa fa-thumbs-o-up fa-2x'></span>
+			  	<%= radio_button_tag 'vote', true %> <span class='icon-like'></span>
 			  </label>
 			  <label class="btn btn-default">
-			  	<%= radio_button_tag 'vote', false %> <span class='fa fa-thumbs-o-down fa-2x'></span>
+			  	<%= radio_button_tag 'vote', false %> <span class='icon-dislike'></span>
 			  </label>
 			</div>
 		</div>
-		<span class='message hide recommend-not-selected text-red'>This is required.</span>
+		<span class='message hide recommend-not-selected text-red'>Please select recommendation.</span>
   </div>
   <div class="col-sm-12">
   	<div class="pull-right">

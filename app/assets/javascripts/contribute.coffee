@@ -132,10 +132,13 @@ $(document).on 'click', '.reviewer_type',(e) ->
 	if(id == 'visitor')
 		$("#review_stay_time").addClass('hide')
 		$("#review_stay_time").next().hide()
+		$("#review_stay_time").prev().hide()
 		if($("#review_stay_time").data('validate'))
 			$("#review_stay_time").removeAttr('data-validate')
 	else
 		$("#review_stay_time").removeClass('hide')
+		$("#review_stay_time").prev().show()
+		$("#review_stay_time").next().show()
 
 #adding search to building address if building on present
 $(document).on 'click', '#add_new_building', (e) ->

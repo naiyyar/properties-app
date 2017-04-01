@@ -28,6 +28,9 @@ input[type=select] {
    appearance:         menulist;
 }
 .sliderLink{text-align: center; padding: 8px;}
+a.link_underlined:hover{
+    text-decoration: underline !important;
+}
 #reviewsContainer .tab-content{
     background-color: #f3f3f3 !important;
 }

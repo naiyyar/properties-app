@@ -23,3 +23,12 @@
     padding-right: 50px;
 }
 
+.nav-tabs.nav-justified > li > a {
+	border: none !important;
+	border-radius: 0px;
+}
+
+.nav-tabs.nav-justified > li.active > a, .nav-tabs.nav-justified > li.active:hover > a {
+	color: #0075c9;
+}
+

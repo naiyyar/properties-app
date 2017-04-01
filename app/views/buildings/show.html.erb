@@ -27,9 +27,9 @@
 
   <div class="tabsContainer" style="margin-top: 8px;" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#buildings" role="tab" data-toggle="tab">Building Reviews (<%= @building.reviews.count %>)</a></li>
-      <li><a href="#units" role="tab" data-toggle="tab">Unit Reviews (<%= @unit_review_count %>)</a></li>
-      <li><a href="#rent_amount" role="tab" data-toggle="tab">Rent Information (<%= @unit_rent_summary_count %>)</li>
+      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= 'Building Reviews' .upcase%> (<%= @building.reviews.count %>)</a></li>
+      <li><a href="#units" role="tab" data-toggle="tab"><%= 'Unit Reviews' .upcase%> (<%= @unit_review_count %>)</a></li>
+      <li><a href="#rent_amount" role="tab" data-toggle="tab"><%= 'Rent Information' .upcase%> (<%= @unit_rent_summary_count %>)</li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane fade in active" id="buildings">
