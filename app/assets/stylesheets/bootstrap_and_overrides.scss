@@ -24,8 +24,9 @@
 }
 
 .nav-tabs.nav-justified > li > a {
-	border: none !important;
+	border-bottom: 1px solid #ddd;
 	border-radius: 0px;
+  margin-bottom: 1px;
 }
 
 .nav-tabs.nav-justified > li.active > a, .nav-tabs.nav-justified > li.active:hover > a {
