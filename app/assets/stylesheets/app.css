@@ -5405,6 +5405,9 @@ blockquote {
         margin-left: 0;
         z-index: 9999;
     }
+    #leftSide{
+        height: 127px !important;
+    }
     .contributeLeftSide {
         top: 49px !important;
     }

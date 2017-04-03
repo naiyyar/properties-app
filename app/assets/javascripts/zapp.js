@@ -271,8 +271,7 @@
         contentHeight = windowHeight - $('#header').height();
         contentWidth = $('#content').width();
 
-        //$('#leftSide').height(contentHeight);
-        $('#leftSide').height(127);
+        $('#leftSide').height(contentHeight);
         $('.closeLeftSide').height(contentHeight);
         $('#wrapper').height(contentHeight);
         $('#mapView, #mapViewSearch').height(contentHeight);
