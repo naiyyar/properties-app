@@ -12,6 +12,7 @@
                 <div class="form-group">
                   <label>Resident From</label>
                   <%= f.text_field :residence_start_date, class: "form-control datepicker", required: 'required'%>
+                  <span class="text-red hidden start_validation_error_message">Date must be earlier</span>
                   <% if @unit.present? %>
                     <%= f.hidden_field :unit_id, value: @unit.id %>
                   <%end%>
@@ -22,7 +23,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                   <label>Resident To</label>
                   <%= f.text_field :residence_end_date, class: "form-control datepicker", required: 'required'%>
-                  <span class="text-red hidden validation_error_message">Must be after resident from</span>
+                  <span class="text-red hidden validation_error_message">Date must be later</span>
                 </div>
                 
               </div>

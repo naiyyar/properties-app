@@ -2,6 +2,7 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require contribute
+#= require buildings_form_validations
 #= require_tree .
 
 jQuery ->

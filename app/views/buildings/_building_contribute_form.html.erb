@@ -7,22 +7,26 @@
   </div>
   <div class="col-sm-6">
      <div class="form-group">
-      <%= text_field_tag 'building[building_street_address]', nil, class: 'form-control', placeholder: 'Address', required: 'required' %>
+      <%= text_field_tag 'building[building_street_address]', nil, class: 'form-control validate', placeholder: 'Address*', required: 'required' %>
+      <p class="help-block">This field is required</p>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="form-group">
-      <%= text_field_tag 'building[city]', nil, class: 'form-control', placeholder: 'City'%>
+      <%= text_field_tag 'building[city]', nil, class: 'form-control validate', placeholder: 'City*', required: 'required'%>
+      <p class="help-block">This field is required</p>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="form-group">
-      <%= text_field_tag 'building[state]', nil, class: 'form-control', placeholder: 'State'%>
+      <%= text_field_tag 'building[state]', nil, class: 'form-control validate', placeholder: 'State*', required: 'required'%>
+      <p class="help-block">This field is required</p>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="form-group">
-      <%= text_field_tag 'building[zipcode]', nil, class: 'form-control', placeholder: 'Zip'%>
+      <%= text_field_tag 'building[zipcode]', nil, class: 'form-control validate', placeholder: 'Zip*', required: 'required'%>
+      <p class="help-block">This field is required</p>
     </div>
   </div>
   <div class="col-sm-4">

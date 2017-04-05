@@ -41,6 +41,7 @@ app.buildings.prototype = {
   _select: function(e, ui) {
     $('#units-search-txt').val('');
     $("#new_unit_building").addClass('hide');
+    $("#search_item_form").find('#next_btn').removeClass('disabled')
     new app.units(ui.item.id);
     this._input.val(ui.item.building_street_address);
     var unitContri = $("#unit_contribution").val();

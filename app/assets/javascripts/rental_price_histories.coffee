@@ -12,3 +12,12 @@ jQuery ->
 			$("#rental_price_history_residence_end_date").val('')
 		else
 			$('.validation_error_message').addClass('hidden');
+
+	$('#rental_price_history_residence_start_date').on 'changeDate',(e) ->
+		start_date = $("#rental_price_history_residence_start_date").val()
+		end_date = $("#rental_price_history_residence_end_date").val()
+		if((Date.parse(start_date) > Date.parse(end_date)))
+			$('.start_validation_error_message').removeClass('hidden');
+			$("#rental_price_history_residence_start_date").val('')
+		else
+			$('.start_validation_error_message').addClass('hidden');

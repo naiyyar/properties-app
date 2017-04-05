@@ -51,4 +51,5 @@ Rails.application.configure do
     }
     #:path => '/:class/:attachment/:id_partition/:style/:filename'
   }
+  config.action_mailer.delivery_method = :letter_opener
 end

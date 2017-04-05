@@ -15,10 +15,12 @@ module ReviewsHelper
 	end
 
 	def building_street_address reviewable
-		if reviewable.kind_of? Building
-			reviewable.building_street_address 
-		else
-			reviewable.building.building_street_address
+		if reviewable.present?
+			if reviewable.kind_of? Building
+				reviewable.building_street_address 
+			else
+				reviewable.building.building_street_address
+			end
 		end
 	end
 
