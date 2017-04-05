@@ -22,10 +22,9 @@ class ApplicationController < ActionController::Base
       if session[:object_type].present? and session[:object_type] == 'building'
         building = Building.create(session[:form_data]['building'])
         sign_in_redirect_path(building)
-      elsif session[:object_type].present? and session[:object_type] == 'unit'
+      elsif session[:object_type].present? and session[:object_type] == 'unit' and session[:form_data]['building'].present?
         building = Building.find_by_building_street_address(session[:form_data]['building']['building_street_address'])
         session[:form_data]['building']['units_attributes']['0']['building_id'] = building.id if building.present?
-        
         unit = Unit.first_or_create(session[:form_data]['building']['units_attributes']['0'])
         sign_in_redirect_path(unit)
       else

@@ -30,6 +30,11 @@ app.units.prototype = {
     this._input.val(ui.item.name);
     var unitContri = $("#unit_contribution").val();
     if(unitContri == 'unit_review' || unitContri == 'unit_photos' || unitContri == 'unit_amenities' || unitContri == 'unit_price_history'){
+      if(unitContri == 'unit_review'){
+        href = '/reviews/new'
+        $("#new_unit_building").attr('action', href);
+        $("#new_unit_building").attr('method', 'get');
+      }
       $("#new_unit_building").removeClass('hide');
       // if($("#unit_name").hasClass('hide')){
       //   $("#unit_name").removeClass('hide');
