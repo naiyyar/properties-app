@@ -94,6 +94,7 @@ $(document).on 'click', '#add_new_unit',(e) ->
 $(document).on 'click', "input[name='contribute_to']",(e) ->
 	user_id = $("#user_id").val();
 	if(this.value=='unit_review' || this.value=='unit_photos' || this.value=='unit_amenities' || this.value=='unit_price_history')
+		$(".unit-search").removeClass('hide').attr('readonly','readonly');
 		$("#next_btn").addClass('hide')
 		$("#buildings-search-txt").val('')
 		$("#buildings-search-no-results > li.no-result-li").hide()

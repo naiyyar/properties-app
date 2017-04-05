@@ -37,9 +37,9 @@
 			    	<div class="col-xs-12">
 	     				 <div class="form-group">
 					      <% unless @building.present? %>
-					      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search hide', placeholder: 'Search unit by name'%>
+					      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search hide', placeholder: 'Search unit number'%>
 					      <%else%>
-					      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search', placeholder: 'Search unit by name'%>
+					      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search', placeholder: 'Search unit number'%>
 					      <%end%>
 				      </div>
 				    </div>

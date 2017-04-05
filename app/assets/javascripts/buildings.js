@@ -47,15 +47,15 @@ app.buildings.prototype = {
     var unitContri = $("#unit_contribution").val();
     var buildingContri = $("#contribution").val();
     if(buildingContri == 'building_amenities'){
-      href = "/buildings/"+ui.item.id+"/edit"
+      href = "/buildings/"+ui.item.id+"/edit";
       $('#search_item_form').attr('action', href);
     }
     if(unitContri == 'unit_review' || unitContri == 'unit_photos' || unitContri == 'unit_amenities' || unitContri == 'unit_price_history'){
       $("#new_unit_building #building_building_street_address").val(ui.item.building_street_address);
       $("#new_unit_building #building_building_name").val(ui.item.building_name);
-      $(".unit-search").removeClass('hide');
+      $(".unit-search").removeAttr('readonly');
       if(!$("#unit_name").parent().parent().hasClass('hide')){
-        $("#unit_name").parent().parent().addClass('hide')
+        $("#unit_name").parent().parent().addClass('hide');
       }
     }
     return false;
