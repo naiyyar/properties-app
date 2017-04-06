@@ -4,16 +4,17 @@
       <div class="media">
         <div class="media-left">
           <div class="media-body">
-            <b class="media-heading"><%= link_to_building_show @building %></b> <br />
-            <small class="text-muted">
-              <%= building_street_address @building %> <br />
-              <%= city_state_zip @building %> <br />
-              <%= @building.neighborhood %>
+            <h1 class="pageTitle"><%= link_to_building_show @building %></h1>
+            <div class="address text-muted">
+              <%= link_to building_path(@building) do %>
+                <%= building_street_address @building %> <br />
+                <%= city_state_zip @building %> <br />
+                <%= @building.neighborhood %>
+              <%end%>
               <% if @building.kind_of? Unit %>
                <%= link_to_unit_show @building  %> 
               <%end%>
-
-            </small>
+            </div>
           </div>
         </div>
       </div>

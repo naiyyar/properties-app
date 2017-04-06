@@ -110,6 +110,7 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 			$(".no-result-li").hide()
 	else
 		$("#search-form, #next_btn").removeClass('hide')
+		$(".unit-search").addClass('hide')
 		$("#new_unit_building").addClass('hide')
 		$("#new_building").addClass('hide');
 		$(".building_contribution").val(this.value)
@@ -144,3 +145,8 @@ $(document).on 'click', '.reviewer_type',(e) ->
 #adding search to building address if building on present
 $(document).on 'click', '#add_new_building', (e) ->
 	$('#building_building_street_address').val($('#buildings-search-txt').val())
+
+#preventing enter key to submit form 
+$(document).on 'keypress', 'form',(e) ->
+	if e.keyCode == 13
+		return false

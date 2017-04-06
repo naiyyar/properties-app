@@ -33,3 +33,14 @@
 	color: #0075c9;
 }
 
+.media-body{
+  .pageTitle{
+    a{
+      color: #333 !important;
+    }
+    a:hover{
+      text-decoration: underline;
+    }
+  }
+}
+

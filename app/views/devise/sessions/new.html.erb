@@ -1,10 +1,10 @@
 <div class="login-form authentication-form" id="page-login">
   <h3><%= 'Please sign in / sign up to upload photos.' if params[:contribution] == 'building_photos' %></h3>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <%#= devise_error_messages! %>
+  <%= devise_error_messages! %>
   <div class="form-group">
     <div class="btn-group-justified">
-      <%= link_to "<span class='fa fa-facebook pull-left'></span> Sign In".html_safe, user_omniauth_authorize_path(:facebook), class: "btn btn-lg btn-facebook disabled" %>
+      <%= link_to "<span class='fa fa-facebook pull-left'></span> Sign In".html_safe, user_omniauth_authorize_path(:facebook), class: "btn btn-lg btn-facebook" %>
     </div>
   </div>
   <div class="form-group">

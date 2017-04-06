@@ -4,12 +4,14 @@
       <div class="media">
         <div class="media-left">
           <div class="media-body">
-            <h3 class="media-heading"><%= link_to_building_show @unit.building %></h3>
-            <small class="text-muted">
-              <%= building_street_address @unit.building %> <br />
-              <%= city_state_zip @unit.building %> <br />
-              <%= link_to @unit.name, unit_path(@unit) %>
-            </small>
+            <h1 class="pageTitle"><%= "#{@unit.building.building_name} #" if @unit.building.building_name.present? %><%= link_to @unit.name, unit_path(@unit) %> </h1>
+            <div class="text-muted address">
+              <%= link_to building_path(@unit.building) do %>
+                <%= building_street_address @unit.building %> <br />
+                <%= city_state_zip @unit.building %> <br />
+                <%= @unit.building.neighborhood %>
+              <%end%>
+            </div>
           </div>
         </div>
       </div>
@@ -21,7 +23,7 @@
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
           <div class="col-sm-6">
-            <h4>Unit Information</h4>
+            <h3>Unit Information</h3>
             <div class="checkbox custom-checkbox"><label><%= f.check_box :balcony %> <span class="fa fa-check"></span> Balcony</label></div>
 
             <div class="checkbox custom-checkbox"><label><%= f.check_box :board_approval_required %> <span class="fa fa-check"></span> Board Approval Required</label></div>
