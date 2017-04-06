@@ -115,7 +115,8 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 			$("#new_unit_building").addClass('hide')
 		
 		$(".unit-search").removeClass('hide').attr('readonly','readonly');
-		$("#next_btn, #next_to_review_btn").addClass('hide')
+		$("#next_btn").addClass('hide')
+		$("#next_to_review_btn").remove()
 		$("#buildings-search-txt").val('')
 		$("#buildings-search-no-results > li.no-result-li").hide()
 		$("#unit_contribution").val(this.value)
@@ -132,7 +133,12 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 			$('.unit-search').find('.form-group').append(search_input)
 	else
 		$("#search-form").removeClass('hide')
-		$("#next_to_review_btn").removeClass('hide')
+		$('#buildings-search-txt').val('')
+		next_btn = $("#next_to_review_btn")
+		next_input = '<a id="next_to_review_btn" class="btn btn-primary add_new_building" href="javascript:;">Next</a>'
+		if(next_btn.length == 0)
+			$('.next_btn_container').append(next_input)
+		
 		$(".unit-search").addClass('hide')
 		$("#new_unit_building").addClass('hide')
 		$("#new_building").addClass('hide');

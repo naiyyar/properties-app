@@ -22,7 +22,8 @@
 				      	<ul id="buildings-search-no-results" class="search-no-result"></ul>
 					    </div>
 				  	</section>
-				  	<div class="pull-right margin-top-20">
+
+				  	<div class="pull-right next_btn_container" style="padding: 10px 0px;">
 					  	<% if params[:contribution_for].blank? %>
 					  		<!-- when wrong building is selected -->
 					  		<%= link_to 'Next','javascript:;', id: 'next_to_review_btn', class: 'btn btn-primary add_new_building' %>
