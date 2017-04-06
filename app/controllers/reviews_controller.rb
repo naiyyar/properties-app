@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
 
   def new
     if params['buildings-search-txt'].present?
-      @reviewable = Building.find_by_building_street_address(params['buildings-search-txt'])
+      @reviewable = Building.find_by_building_street_address_and_zipcode(params['buildings-search-txt'], params[:zip])
     else
       if params[:building_id]
         @reviewable = Building.find(params[:building_id])

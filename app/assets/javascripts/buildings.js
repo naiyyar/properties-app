@@ -44,6 +44,7 @@ app.buildings.prototype = {
     $("#search_item_form").find('#next_btn').removeClass('disabled')
     new app.units(ui.item.id);
     this._input.val(ui.item.building_street_address);
+    $('#zip').val(ui.item.zipcode)
     var unitContri = $("#unit_contribution").val();
     var buildingContri = $("#contribution").val();
     if(buildingContri == 'building_amenities'){
