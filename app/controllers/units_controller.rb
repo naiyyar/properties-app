@@ -80,15 +80,20 @@ class UnitsController < ApplicationController
   # PATCH/PUT /units/1
   # PATCH/PUT /units/1.json
   def update
-    respond_to do |format|
-      if @unit.update(unit_params)
-        format.html { redirect_to @unit, notice: 'Unit was successfully updated.' }
-        format.json { render :show, status: :ok, location: @unit }
-      else
-        format.html { render :edit }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
-      end
+    @unit.update(unit_params)
+    if params[:amenities].present?
+      redirect_to unit_path(@unit), notice: 'Unit was successfully updated.'
+    else
+      redirect_to unit_steps_path(unit_id: @unit.id), notice: 'Unit was successfully updated.'
     end
+    # respond_to do |format|
+    #   if 
+    #     format.json { render :show, status: :ok, location: @unit }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @unit.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /units/1
@@ -105,6 +110,7 @@ class UnitsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_unit
       @unit = Unit.find(params[:id])
+      @unit = Unit.find(params[:unit_id]) if @unit.blank? and params[:unit_id].present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -115,7 +121,7 @@ class UnitsController < ApplicationController
                                    :move_in_fee,:rent_upfront_cost,:processing_fee,:balcony,:board_approval_required,
                                    :converted_unit,:courtyard,:dishwasher,:fireplace,:furnished,:guarantors_accepted,
                                    :loft,:management_company_run,:rent_controlled,:private_landlord,:storage_available,
-                                   :sublet,:terrace
+                                   :sublet,:terrace,:can_be_converted,:dryer_in_unit
                                    )
     end
 end
