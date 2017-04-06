@@ -42,6 +42,11 @@ app.buildings.prototype = {
     $('#units-search-txt').val('');
     $("#new_unit_building").addClass('hide');
     $("#search_item_form").find('#next_btn').removeClass('disabled')
+    if($('.no-result-li').length == 1){
+      $('.no-result-li').remove();
+    }
+    $('#next_to_review_btn').remove()
+    $('#next_btn').removeClass('hidden')
     new app.units(ui.item.id);
     this._input.val(ui.item.building_street_address);
     $('#zip').val(ui.item.zipcode)
@@ -64,11 +69,11 @@ app.buildings.prototype = {
 
   _response: function(event, ui){
          
-    if(ui.content.length===0){
+    if(ui.content.length === 0){
       var ul = $("#buildings-search-no-results");
       var markup = [
         '<p class="address"><b>Building Not Here?</b></p>',
-        'Contribute by<a href="javascript:void(0)" id="add_new_building"> adding a new building</a>'
+        'Contribute by<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> adding a new building</a>'
       ];
       
       ul_li = $('<li class="ui-menu-item no-result-li">').append(markup.join(''));

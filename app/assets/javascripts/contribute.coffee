@@ -1,7 +1,15 @@
-$(document).on 'click', '#add_new_building',(e) ->
+$(document).on 'click', '.add_new_building',(e) ->
 	e.preventDefault();
-	$("#search-form").addClass('hide');
-	$("#new_building").removeClass('hide');
+	search_value = $('#buildings-search-txt').val()
+	if(search_value == '')
+		$('#buildings-search-txt').parent().addClass('has-error')
+	else
+		$("#search-form").addClass('hide');
+		$("#new_building").removeClass('hide');
+		$('#building_building_street_address').val(search_value)
+	
+	if($("#units-search-txt").length == 1)
+		$("#units-search-txt").remove()
 
 #adding validations to review form
 $(document).on 'click', '#submit_review',(e) ->
@@ -92,10 +100,22 @@ $(document).on 'click', '#add_new_unit',(e) ->
 
 
 $(document).on 'click', "input[name='contribute_to']",(e) ->
+	search_input = '<input name="units-search-txt" id="units-search-txt" type="text" class="unit-search form-control" placeholder="Search unit number" readonly="readonly"/>'
+	unit_search_text_box = $('.unit-search').find('.form-group').find('input')
 	user_id = $("#user_id").val();
+
+	if($('#buildings-search-txt').parent().hasClass('has-error'))
+		$('#buildings-search-txt').parent().removeClass('has-error')
+
 	if(this.value=='unit_review' || this.value=='unit_photos' || this.value=='unit_amenities' || this.value=='unit_price_history')
+		if($("#units-search-txt").val() != '')
+			$("#units-search-txt").val('')
+		#hiding unit form 
+		if(!$("#new_unit_building").hasClass('hide'))
+			$("#new_unit_building").addClass('hide')
+		
 		$(".unit-search").removeClass('hide').attr('readonly','readonly');
-		$("#next_btn").addClass('hide')
+		$("#next_btn, #next_to_review_btn").addClass('hide')
 		$("#buildings-search-txt").val('')
 		$("#buildings-search-no-results > li.no-result-li").hide()
 		$("#unit_contribution").val(this.value)
@@ -108,8 +128,11 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 			$("#search-form").removeClass('hide')
 			$("#buildings-search-txt").val('')
 			$(".no-result-li").hide()
+		if(unit_search_text_box.length == 0)
+			$('.unit-search').find('.form-group').append(search_input)
 	else
-		$("#search-form, #next_btn").removeClass('hide')
+		$("#search-form").removeClass('hide')
+		$("#next_to_review_btn").removeClass('hide')
 		$(".unit-search").addClass('hide')
 		$("#new_unit_building").addClass('hide')
 		$("#new_building").addClass('hide');
@@ -141,10 +164,6 @@ $(document).on 'click', '.reviewer_type',(e) ->
 		$("#review_stay_time").removeClass('hide')
 		$("#review_stay_time").prev().show()
 		$("#review_stay_time").next().show()
-
-#adding search to building address if building on present
-$(document).on 'click', '#add_new_building', (e) ->
-	$('#building_building_street_address').val($('#buildings-search-txt').val())
 
 #preventing enter key to submit form 
 $(document).on 'keypress', 'form',(e) ->
