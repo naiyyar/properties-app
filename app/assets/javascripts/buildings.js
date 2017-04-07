@@ -40,15 +40,17 @@ app.buildings.prototype = {
 
   _select: function(e, ui) {
     $('#units-search-txt').val('');
+    
     $("#new_unit_building").addClass('hide');
     $("#search_item_form").find('#next_btn').removeClass('disabled')
+    
     if($('.no-result-li').length == 1){
       $('.no-result-li').remove();
     }
-    $('#next_to_review_btn').remove()
-    $('#next_btn').removeClass('hidden')
+    $('#next_to_review_btn').remove();
+    $('#next_btn').removeClass('hidden');
     new app.units(ui.item.id);
-    this._input.val(ui.item.building_street_address);
+    this._input.val(ui.item.building_street_address + ', ' + ui.item.city + ', ' + ui.item.state + ' ' + ui.item.zipcode);
     $('#zip').val(ui.item.zipcode)
     var unitContri = $("#unit_contribution").val();
     var buildingContri = $("#contribution").val();

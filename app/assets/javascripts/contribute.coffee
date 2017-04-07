@@ -115,7 +115,7 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 			$("#new_unit_building").addClass('hide')
 		
 		$(".unit-search").removeClass('hide').attr('readonly','readonly');
-		$("#next_btn").addClass('hide')
+		$("#next_btn").addClass('hidden')
 		$("#next_to_review_btn").remove()
 		$("#buildings-search-txt").val('')
 		$("#buildings-search-no-results > li.no-result-li").hide()

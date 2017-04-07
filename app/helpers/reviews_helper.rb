@@ -17,9 +17,9 @@ module ReviewsHelper
 	def building_street_address reviewable
 		if reviewable.present?
 			if reviewable.kind_of? Building
-				"#{reviewable.building_street_address }, #{reviewable.city}, #{reviewable.state}"
+				"#{reviewable.building_street_address }, #{city_state_zip(reviewable)}"
 			else
-				"#{reviewable.building.building_street_address} #{reviewable.building.city}"
+				"#{reviewable.building.building_street_address}, #{city_state_zip(reviewable)}"
 			end
 		end
 	end

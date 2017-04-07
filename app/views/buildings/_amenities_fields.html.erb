@@ -8,7 +8,6 @@
             <div class="address text-muted">
               <%= link_to building_path(@building) do %>
                 <%= building_street_address @building %> <br />
-                <%= city_state_zip @building %> <br />
                 <%= @building.neighborhood %>
               <%end%>
               <% if @building.kind_of? Unit %>

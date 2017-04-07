@@ -5,7 +5,9 @@
 		    <div class="media-left">
 		      <div class="media-body">
 		      	<% if @imageable.kind_of? Unit %>
-		      		<h1 class="pageTitle"><%= "#{@unit.building.building_name} #" if @imageable.building.building_name.present? %> <%= link_to @imageable.name, unit_path(@imageable)%></h1>
+		      		<h1 class="pageTitle">
+		      			<%= "#{@unit.building.building_name} #" if @imageable.building.building_name.present? %> <%= link_to @imageable.name, unit_path(@imageable)%>
+		      		</h1>
 		      		<div class=" address text-muted">
 		        		<%= link_to building_path(@imageable.building) do %>
 			        		<%= @imageable.building.building_street_address %> <br />

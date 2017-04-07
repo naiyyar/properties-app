@@ -1,23 +1,23 @@
 <%= form_for [@reviewable, Review.new], validate: true do |f| %>
 	<%= f.validate :pros, :cons %>
 	<% unless @reviewable.kind_of? Unit %>
-  	<div class="col-sm-12">
-		  <div class="form-group">
+  		<div class="col-sm-12">
+		  	<div class="form-group">
 				<label>Building Address</label>
 				<%= text_field_tag 'building_street_address', building_street_address(@reviewable),  class: 'form-control', disabled: 'disabled' %>
 			</div>
 		</div>
 	<%else%>
-		<div class="col-sm-6">
+		<div class="col-sm-8">
 			<div class="form-group">
 				<label>Building Address</label>
 				<%= text_field_tag 'building_street_address', building_street_address(@reviewable),  class: 'form-control', disabled: 'disabled' %>
 			</div>
 		</div>
-		<div class="col-sm-6">
+		<div class="col-sm-4">
 			<div class="form-group">
 				<label>Unit</label>
-				<%= text_field_tag 'unit', @reviewable.name,  class: 'form-control' %>
+				<%= text_field_tag 'unit', @reviewable.name,  class: 'form-control', disabled: 'disabled' %>
 			</div>
 		</div>
 	<%end%>
