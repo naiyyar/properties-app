@@ -48,17 +48,43 @@ app.buildings.prototype = {
       $('.no-result-li').remove();
     }
     $('#next_to_review_btn').remove();
-    $('#next_btn').removeClass('hidden');
+    
     new app.units(ui.item.id);
+    
     this._input.val(ui.item.building_street_address + ', ' + ui.item.city + ', ' + ui.item.state + ' ' + ui.item.zipcode);
+    
     $('#zip').val(ui.item.zipcode)
+    
     var unitContri = $("#unit_contribution").val();
-    var buildingContri = $("#contribution").val();
-    if(buildingContri == 'building_amenities'){
+    
+    var contribution_for = $("#contribution").val();
+    
+    if(contribution_for == 'building_amenities'){
       href = "/buildings/"+ui.item.id+"/edit";
       $('#search_item_form').attr('action', href);
     }
-    if(unitContri == 'unit_review' || unitContri == 'unit_photos' || unitContri == 'unit_amenities' || unitContri == 'unit_price_history'){
+
+    //Adding and removing next btn with next page link
+    if(contribution_for == 'unit_review' 
+      || contribution_for == 'unit_photos' 
+      || contribution_for == 'unit_amenities' 
+      || contribution_for == 'unit_price_history'){
+
+      if(!$('#next_btn').hasClass('hidden')){
+        $('#next_btn').addClass('hidden');
+      }
+    }
+    else{
+      if($('#next_btn').hasClass('hidden')){
+        $('#next_btn').removeClass('hidden');
+      }
+    }
+
+    if(unitContri == 'unit_review' 
+      || unitContri == 'unit_photos' 
+      || unitContri == 'unit_amenities' 
+      || unitContri == 'unit_price_history'){
+      
       $("#new_unit_building #building_building_street_address").val(ui.item.building_street_address);
       $("#new_unit_building #building_building_name").val(ui.item.building_name);
       $(".unit-search").removeAttr('readonly');

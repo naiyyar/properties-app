@@ -17,7 +17,7 @@ class BuildingsController < ApplicationController
   end
 
   def contribute
-    @buildings = Building.text_search(params[:term]).reorder('building_street_address ASC')
+    @buildings = Building.text_search(params[:term]).reorder('building_street_address ASC').limit(10)
     @building = Building.where(id: params[:building_id]).first if params[:building_id].present?
     @search_bar_hidden = :hidden
   end
@@ -88,16 +88,6 @@ class BuildingsController < ApplicationController
 
   def create
     if current_user.nil?
-      # case params[:contribution]
-      # when 'building_photos'
-      #   session[:contribution_for] = 'building_photos'
-      # when 'building_amenities'
-      #   session[:contribution_for] = 'building_amenities'
-      # when 'unit_photos'
-      #   session[:contribution_for] = 'unit_photos'
-      # when 'unit_amenities'
-      #   session[:contribution_for] = 'unit_amenities'
-      # end
       # Store the form data in the session so we can retrieve it after login
       session[:form_data] = params
       session[:object_type] = params[:unit_contribution].present? ? 'unit' : 'building'

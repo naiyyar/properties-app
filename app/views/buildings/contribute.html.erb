@@ -12,8 +12,11 @@
   		<div class="panel-body">
 				<div id="search-form">
 					<%= form_tag '/reviews/new', method: :get, id: 'search_item_form', class: 'form-horizontal' do %>
+	        	<!-- adding value on the basis of selected radio button -->
 	        	<%= hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution', id: 'building_contribution' %>
+	        	
 	        	<%= hidden_field_tag :user_id, current_user.present? ? current_user.id : '' %>
+						
 						<section class="app-content">
 					    <div class="buildings-search">
 				      	<%= text_field_tag 'buildings-search-txt', @building.present? ? @building.building_street_address : nil, class: 'form-control', placeholder: 'Search building by name or address', 'data-buildingid' => @building.present? ? @building.id : '', required: 'required' %>
@@ -38,22 +41,23 @@
 			<br />
 			
 			<div class="col-xs-12 col-md-12 col-lg-12">
-			    <div class="buildings-search unit-search">
-			    	<div class="col-xs-12">
-	     				<div class="form-group">
-					      <% unless @building.present? %>
-					      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search hide', placeholder: 'Search unit number'%>
-					      <%else%>
-					      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search', placeholder: 'Search unit number'%>
-					      <%end%>
-				      </div>
-				    </div>
-			      	<div class="results" id="units-search-results"></div>
-			      	<div class="col-xs-12">
-			      		<ul id="units-search-no-results" class="search-no-result"></ul>
-			      	</div>
+		    <div class="buildings-search unit-search">
+		    	<div class="col-xs-12">
+     				<div class="form-group">
+				      <% unless @building.present? %>
+				      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search hide', placeholder: 'Search unit number'%>
+				      <%else%>
+				      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search', placeholder: 'Search unit number'%>
+				      <%end%>
+			      </div>
 			    </div>
+		      	<div class="results" id="units-search-results"></div>
+		      	<div class="col-xs-12">
+		      		<ul id="units-search-no-results" class="search-no-result"></ul>
+		      	</div>
 		    </div>
+	    </div>
+	    
 			<div class="col-xs-11">
 				<%= form_tag '/buildings', method: :post, id: 'new_building', class: 'hide' do %>
 					<%= hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution' %>

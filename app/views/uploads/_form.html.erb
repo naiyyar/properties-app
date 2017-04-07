@@ -6,12 +6,12 @@
 		      <div class="media-body">
 		      	<% if @imageable.kind_of? Unit %>
 		      		<h1 class="pageTitle">
-		      			<%= "#{@unit.building.building_name} #" if @imageable.building.building_name.present? %> <%= link_to @imageable.name, unit_path(@imageable)%>
+		      			<%= "#{@unit.building.building_name} #" if @imageable.building.building_name.present? %><%= link_to @imageable.name, unit_path(@imageable)%>
 		      		</h1>
 		      		<div class=" address text-muted">
 		        		<%= link_to building_path(@imageable.building) do %>
-			        		<%= @imageable.building.building_street_address %> <br />
-			        		<%= "#{@imageable.building.city}, #{@imageable.building.state} #{@imageable.building.zipcode}" %><br />
+		        			<!-- method on reviews helper -->
+			        		<%= building_street_address @imageable %> <br />
 			        		<%= @imageable.building.neighborhood %>
 		        		<%end%>
 		        	</div>
@@ -19,8 +19,8 @@
 		      		<h1 class="pageTitle"><%= link_to @imageable.building_name_or_address, building_path(@imageable) %></h1> 
 		      		<div class="address text-muted">
 		        		<%= link_to building_path(@imageable) do %>
-			        		<%= @imageable.building_street_address %> <br />
-			        		<%= "#{@imageable.city}, #{@imageable.state} #{@imageable.zipcode}" %> <br />
+		        			<!-- method on reviews helper -->
+			        		<%= building_street_address @imageable %> <br />
 			        		<%= @imageable.neighborhood %>
 		        		<%end%> 
 		        	</div>

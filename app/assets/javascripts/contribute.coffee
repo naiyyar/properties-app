@@ -104,6 +104,11 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 	unit_search_text_box = $('.unit-search').find('.form-group').find('input')
 	user_id = $("#user_id").val();
 
+	#hiding Building Not Here? li
+	if($(".search-no-result li").length != 0)
+		$(".search-no-result li").hide()
+
+	#adding error class if submitting without selecting a building
 	if($('#buildings-search-txt').parent().hasClass('has-error'))
 		$('#buildings-search-txt').parent().removeClass('has-error')
 
@@ -134,6 +139,13 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 	else
 		$("#search-form").removeClass('hide')
 		$('#buildings-search-txt').val('')
+		
+		#hidding next submit button if no building selected
+		next_btn_submit = $("#next_btn")
+		if next_btn_submit.length > 0
+			next_btn_submit.addClass('hidden')
+		
+		#append next link if no building selected
 		next_btn = $("#next_to_review_btn")
 		next_input = '<a id="next_to_review_btn" class="btn btn-primary add_new_building" href="javascript:;">Next</a>'
 		if(next_btn.length == 0)
