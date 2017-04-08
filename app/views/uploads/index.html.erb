@@ -2,11 +2,14 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<%if @building.present? %>
-				<%= link_to building_path(@building), class: 'text-col-black' do %>
-					<h3><%= @building.building_name %></h3>
-					<p> <b><%= @building.building_street_address %> </b></p>
-				  <p> <b><%= @building.city %>, <%= @building.state %>, <%= @building.zipcode %> </b></p>
-				<%end%>
+				<h1 class="pageTitle"><%= link_to @building.building_name_or_address, building_path(@building) %></h1> 
+      		<div class="address text-muted">
+        		<%= link_to building_path(@building) do %>
+        			<!-- method on reviews helper -->
+	        		<%= building_street_address @building %> <br />
+	        		<%= @building.neighborhood %>
+        		<%end%> 
+        	</div>
 			<%else%>
 				<%= link_to unit_path(@unit), class: 'text-col-black' do %>
 					<h4><%= @unit.building.building_name %></h4>
