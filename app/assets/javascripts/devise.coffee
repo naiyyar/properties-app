@@ -2,6 +2,7 @@
 #submitting sign in form
 
 $(document).bind 'ajax:success', "form#sign_in_user, form#sign_up_user", (e, data, status, xhr) ->
+	window.data = data
 	if(data.success)
 		$('#error_explanation b').html('')
 		$('#user_password').next().html('')
@@ -13,6 +14,8 @@ $(document).bind 'ajax:success', "form#sign_in_user, form#sign_up_user", (e, dat
 			$('#user_email_signup').parent().addClass('has-error')
 			if(data.data.message.email[0] == 'is invalid')
 				$('#user_email_signup').next().append('Please enter a valid email address')
+			else if(data.data.message.email[0] == "can't be blank")
+				$('#user_email_signup').next().append("can't be blank")
 			else if(data.data.message.email[0] == 'has already been taken')
 				$('#user_email_signup').next().append('Email has already been taken')
 			else
@@ -32,7 +35,6 @@ $(document).bind 'ajax:success', "form#sign_in_user, form#sign_up_user", (e, dat
 
 $(document).bind 'ajax:error', 'form#sign_in_user, form#sign_up_user', (e, data, status, xhr) ->
 	console.log(status)
-	window.data = data
 	$('#user_password').next().html('')
 	$('#error_explanation b').html('')
 	$('#error_explanation b').hide().show().append(data.responseText)
