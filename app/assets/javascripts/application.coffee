@@ -3,6 +3,7 @@
 #= require turbolinks
 #= require contribute
 #= require buildings_form_validations
+#= require devise
 #= require_tree .
 
 jQuery ->

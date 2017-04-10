@@ -80,6 +80,10 @@ class BuildingsController < ApplicationController
   def new
     if params['buildings-search-txt'].present?
       @building = Building.find_by_building_street_address(params['buildings-search-txt'])
+      if @building.blank?
+        address = params['buildings-search-txt'].split(',')[0]
+        @building = Building.find_by_building_street_address(address)
+      end
     else
       @building = Building.new
     end

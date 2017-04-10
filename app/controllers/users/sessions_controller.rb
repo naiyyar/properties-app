@@ -1,6 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
 # before_filter :configure_sign_in_params, only: [:create]
-
+   respond_to :html, :json
   # GET /resource/sign_in
   def new
     @search_bar_hidden = :hidden
@@ -9,18 +9,34 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    super
-    # resource = User.find_for_database_authentication(email: params[:user][:email])
-    # #return invalid_login_attempt unless resource
 
-    # if resource && resource.valid_password?(params[:user][:password])
-    #   sign_in :user, resource
-    #   redirect_to :back, notice: 'Successfully signed in.'
-    # else
-    #   redirect_to :back
-    #   flash[:error] = 'Incorrect user name or password.'
-    # end
+    session['user_auth'] = params[:user]
+    resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
 
+    sign_in(resource_name, resource)
+    message = I18n.t 'devise.sessions.signed_in'
+
+    yield resource if block_given?
+
+    if request.xhr?
+      return render :json => {:success => true, :login => true, :data =>  {:message => message}}
+    else
+      respond_with resource, location: after_sign_in_path_for(resource)
+    end
+  end
+
+  def failure
+    user = User.where(email: session['user_auth'][:email]).first rescue nil
+    message = I18n.t 'devise.failure.invalid', authentication_keys: 'email'
+
+    respond_to do |format|
+      format.json {
+        render :json => { :success => false, :errors => ["Login failed."] }
+      }
+      # format.html {
+      #   redirect_to '/users/sign_in'
+      # }
+    end
   end
 
   # DELETE /resource/sign_out

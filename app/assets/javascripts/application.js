@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require rails.validations
 //= require jquery_ujs
 //= require jquery-2.1.1.min
 //= require jquery-ui.min

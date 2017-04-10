@@ -1,5 +1,8 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <%#= devise_error_messages! %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { :id => 'sign_in_user', format: :json, remote: true }) do |f| %>
+  <div id="error_explanation" class="text-center">
+    <b class="text-red"></b>
+    <ul></ul>
+  </div>
   <div class="form-group">
     <div class="btn-group-justified">
       <a href="<%=user_omniauth_authorize_path(:facebook)%>" class="btn btn-lg btn-facebook"><span class="fa fa-facebook pull-left"></span>Sign In with Facebook</a>
@@ -13,9 +16,11 @@
   <div class="signOr">OR</div>
   <div class="form-group">
     <%= f.email_field :email, class: "form-control", placeholder: "Email", required: true %>
+    <p class="help-block"></p>
   </div>
   <div class="form-group">
     <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: 'Password', required: true %>
+    <p class="help-block"></p>
   </div>
   
   <div class="form-group">
@@ -34,7 +39,7 @@
   </div>
   
   <div class="form-group">
-    <%= f.submit "Sign In", class: "btn btn-block btn-blue login-btn-submit", disabled_with: "Signing in...." %>
+    <%= f.submit "Sign In", class: "btn btn-block btn-blue login-btn-submit", data: { disable_with: "Signing in ..." } %>
   </div>
   <p class="help-block">Not a transparentcity member? <a href="javascript:void(0)" data-target="#signup" class="modal-su text-green">Sign Up</a></p>
 <%end%>
