@@ -34,9 +34,21 @@ $(document).bind 'ajax:success', "form#sign_in_user, form#sign_up_user", (e, dat
 
 
 $(document).bind 'ajax:error', 'form#sign_in_user, form#sign_up_user', (e, data, status, xhr) ->
-	console.log(status)
-	$('#user_password').next().html('')
+	password_field = $('#user_password')
+	email_field = $('#user_email')
+	$('#user_email, #user_password').next().html('')
+
+	if(email_field.val() == '')
+		email_field.next().append("can't be blank")
+	else
+		$('#user_email').next().html('')
+
+	#if password is blank
+	if(password_field.val() == '')
+		password_field.next().append("can't be blank")
+	else
+		password_field.next().append('Login failed. Please try again')
+
 	$('#error_explanation b').html('')
 	$('#error_explanation b').hide().show().append(data.responseText)
 	$('#user_email, #user_password').parent().addClass('has-error')
-	$('#user_password').next().append('Login failed. Please try again')
