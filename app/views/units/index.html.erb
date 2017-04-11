@@ -17,6 +17,7 @@
             <tr>
               <th>Unit Name</th>
               <th>Building</th>
+              <th>Building Address</th>
               <th>Price Histories</th>
               <th></th>
               <th></th>
@@ -29,7 +30,8 @@
               <% @units.each do |unit| %>
                 <tr>
                   <td><%= link_to unit.name, unit_path(unit) %></td>
-                  <td><%= link_to unit.building.building_name, building_path(unit.building) %></td>
+                  <td><%= link_to unit.building.building_name_or_address, building_path(unit.building) %></td>
+                  <td><%= link_to building_street_address(unit.building), building_path(unit.building) %></td>
                   <td><%= link_to 'Price Histories', rental_price_histories_path(unit_id: unit.id) %></td>
                   <td></td>
                   <% if current_user %>

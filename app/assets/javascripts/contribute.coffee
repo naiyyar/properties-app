@@ -4,12 +4,13 @@ $(document).on 'click', '.add_new_building',(e) ->
 	if(search_value == '')
 		$('#buildings-search-txt').parent().addClass('has-error')
 	else
-		$("#search-form").addClass('hide');
-		$("#new_building").removeClass('hide');
+		$("#search-form").addClass('hide')
+		$("#new_building").removeClass('hide')
 		$('#building_building_street_address').val(search_value)
 	
 	if($("#units-search-txt").length == 1)
 		$("#units-search-txt").remove()
+
 
 #adding validations to review form
 $(document).on 'click', '#submit_review',(e) ->
@@ -87,14 +88,15 @@ $(document).on 'click', '#submit_review',(e) ->
 
 #Adding new unit contribution page
 $(document).on 'click', '#add_new_unit',(e) ->
-	e.preventDefault();
-	$("#unit_id").val('');
-	$("#unit_name").val('');
-	$("#unit_square_feet").val('');
-	$("#unit_number_of_bedrooms").val('');
-	$("#unit_number_of_bathrooms").val('');
+	e.preventDefault()
+	search_value = $('#units-search-txt').val()
+	$("#unit_id").val('')
+	$("#unit_name").val(search_value)
+	$("#unit_square_feet").val('')
+	$("#unit_number_of_bedrooms").val('')
+	$("#unit_number_of_bathrooms").val('')
 	$("#new_unit_building").removeClass('hide')
-	$(".unit-search").addClass('hide');
+	$(".unit-search").addClass('hide')
 	if($("#unit_name").parent().parent().hasClass('hide'))
 		$("#unit_name").parent().parent().removeClass('hide')
 

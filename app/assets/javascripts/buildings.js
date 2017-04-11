@@ -86,6 +86,7 @@ app.buildings.prototype = {
       || unitContri == 'unit_price_history'){
       
       $("#new_unit_building #building_building_street_address").val(ui.item.building_street_address);
+      $('#new_unit_building #building_zipcode').val(ui.item.zipcode);
       $("#new_unit_building #building_building_name").val(ui.item.building_name);
       $(".unit-search").removeAttr('readonly');
       if(!$("#unit_name").parent().parent().hasClass('hide')){

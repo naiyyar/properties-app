@@ -11,7 +11,8 @@
     </div>
     <div class="col-sm-6">
        <div class="form-group">
-        <%= hidden_field_tag 'building[building_street_address]', @building.present? ? @building.building_street_address : nil, class: "form-control", placeholder: 'Address' %>
+        <%= hidden_field_tag 'building[building_street_address]', @building.present? ? @building.building_street_address : nil, class: "form-control" %>
+        <%= hidden_field_tag 'building[zipcode]', @building.present? ? @building.zipcode : nil, class: "form-control" %>
       </div>
     </div>
     <div class="col-sm-6 hide">

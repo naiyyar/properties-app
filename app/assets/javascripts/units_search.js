@@ -40,9 +40,10 @@ app.units.prototype = {
       //   $("#unit_name").removeClass('hide');
       // }
       var unit = ui.item;
+      var square_feet = unit.square_feet == null ? '' : parseInt(unit.square_feet)
       $("#unit_id").val(unit.id);
       $("#unit_name").val(unit.name);
-      $("#unit_square_feet").val(parseInt(unit.square_feet));
+      $("#unit_square_feet").val(square_feet);
       $("#unit_number_of_bedrooms").val(unit.number_of_bedrooms);
       $("#unit_number_of_bathrooms").val(unit.number_of_bathrooms);
       if(unitContri == 'unit_amenities'){

@@ -14,7 +14,7 @@ class UploadsController < ApplicationController
 	def new
     if params['buildings-search-txt'].present?
       address = params['buildings-search-txt'].split(',')[0]
-      @imageable = Building.find_by_building_street_address(address)
+      @imageable = Building.find_by_building_street_address_and_zipcode(address, params[:zip])
   	else	
       if params[:building_id].present?
   			@imageable = Building.find(params[:building_id])
