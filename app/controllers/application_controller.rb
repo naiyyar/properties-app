@@ -59,6 +59,8 @@ class ApplicationController < ActionController::Base
 	  else
       if session[:contribution_for] == 'building_photos' && session[:search_term].present?
         "/uploads/new?buildings-search-txt=#{session[:search_term]}"
+      elsif params[:contribution] == 'building_photos'
+        "/uploads/new?buildings-search-txt=#{params['buildings-search-txt']}"
       elsif session[:building_id].present?
         return "/uploads/new?building_id=#{session[:building_id]}"
       elsif session[:unit_id].present?
