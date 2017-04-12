@@ -17,7 +17,8 @@
     </div>
     <div class="col-sm-6 hide">
       <div class="form-group">
-        <%= text_field_tag 'unit_name', nil, name: 'building[units_attributes][0][name]', class: 'form-control', placeholder: 'Unit #', required: 'required' %>
+        <%= text_field_tag 'unit_name', nil, name: 'building[units_attributes][0][name]', class: 'form-control validate', placeholder: 'Unit #' %>
+        <p class="help-block">This field is required</p>
         <%= hidden_field_tag :unit_contribution, params[:contribution_for].present? ? params[:contribution_for] : nil %>
       </div>
     </div>
@@ -25,6 +26,7 @@
       <div class="form-group">
         <!-- <label>ft<sup>2</sup>  </label> -->
         <%= text_field_tag 'unit_square_feet', nil, name: 'building[units_attributes][0][square_feet]', class: 'form-control', placeholder: 'Square feet'%>
+        <p class="help-block" style="visibility: hidden">Optional</p>
       </div>
     </div>
     <div class="col-sm-6">

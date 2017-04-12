@@ -18,9 +18,10 @@
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                  <label>Resident From</label>
-                  <%= f.text_field :residence_start_date, class: "form-control datepicker", required: 'required'%>
+                  <label>Resident From*</label>
+                  <%= f.text_field :residence_start_date, class: "form-control datepicker validate" %>
                   <span class="text-red hidden start_validation_error_message">Date must be earlier</span>
+                  <p class="help-block">This field is required</p>
                   <% if @unit.present? %>
                     <%= f.hidden_field :unit_id, value: @unit.id %>
                   <%end%>
@@ -30,7 +31,7 @@
               <div class="form-group">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                   <label>Resident To</label>
-                  <%= f.text_field :residence_end_date, class: "form-control datepicker", required: 'required'%>
+                  <%= f.text_field :residence_end_date, class: "form-control datepicker" %>
                   <span class="text-red hidden validation_error_message">Date must be later</span>
                 </div>
                 
@@ -40,14 +41,15 @@
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                  <label>Monthly Rent $</label>
-                  <%= f.number_field :monthly_rent, class: "form-control"%>
+                  <label>Monthly Rent $*</label>
+                  <%= f.number_field :monthly_rent, class: "form-control validate"%>
+                  <p class="help-block">This field is required</p>
                 </div>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                   <label>Broker Fee $</label>
-                    <%= f.number_field :broker_fee, class: "form-control"%>
+                  <%= f.number_field :broker_fee, class: "form-control"%>  
                 </div>
               </div>
             </div>
