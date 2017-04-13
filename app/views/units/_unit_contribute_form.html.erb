@@ -1,20 +1,25 @@
 <%= form_tag '/buildings', method: :post, id: 'new_unit_building', class: 'hide' do %>
 	<div id="new_unit_fields">
 		<div class="col-sm-12">
-			<label><b>Unit</b></label>
+			<label><b>New unit</b></label>
+      <%= hidden_field_tag 'building[building_name]', nil, class: "form-control", placeholder: 'Building name'%>
+      <%= hidden_field_tag 'unit_id', nil %>
+      <%= hidden_field_tag 'building[building_street_address]', @building.present? ? @building.building_street_address : nil, class: "form-control" %>
+      <%= hidden_field_tag 'building[zipcode]', @building.present? ? @building.zipcode : nil, class: "form-control" %>
 		</div>
-		<div class="col-sm-6">
+		<!-- <div class="col-sm-6">
       <div class="form-group">
-        <%= hidden_field_tag 'building[building_name]', nil, class: "form-control", placeholder: 'Building name'%>
-        <%= hidden_field_tag 'unit_id', nil %>
+        <%#= hidden_field_tag 'building[building_name]', nil, class: "form-control", placeholder: 'Building name'%>
+        <%#= hidden_field_tag 'unit_id', nil %>
       </div>
     </div>
     <div class="col-sm-6">
        <div class="form-group">
-        <%= hidden_field_tag 'building[building_street_address]', @building.present? ? @building.building_street_address : nil, class: "form-control" %>
-        <%= hidden_field_tag 'building[zipcode]', @building.present? ? @building.zipcode : nil, class: "form-control" %>
+        <%#= hidden_field_tag 'building[building_street_address]', @building.present? ? @building.building_street_address : nil, class: "form-control" %>
+        <%#= hidden_field_tag 'building[zipcode]', @building.present? ? @building.zipcode : nil, class: "form-control" %>
       </div>
-    </div>
+    </div> -->
+
     <div class="col-sm-6 hide">
       <div class="form-group">
         <%= text_field_tag 'unit_name', nil, name: 'building[units_attributes][0][name]', class: 'form-control validate', placeholder: 'Unit #' %>
@@ -26,7 +31,7 @@
       <div class="form-group">
         <!-- <label>ft<sup>2</sup>  </label> -->
         <%= text_field_tag 'unit_square_feet', nil, name: 'building[units_attributes][0][square_feet]', class: 'form-control', placeholder: 'Square feet'%>
-        <p class="help-block" style="visibility: hidden">Optional</p>
+        <p class="help-block square_feet_help_block">Optional</p>
       </div>
     </div>
     <div class="col-sm-6">

@@ -1,4 +1,4 @@
-<div class="tables">
+<div class="tables contribute">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<div class="panel-heading"><h3>What would you like to contribute ?</h3></div>
@@ -6,59 +6,55 @@
 		    	<%= render partial: 'layouts/shared/contribution_for' %>
 			</div>
 		</div>
-		
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-			<div class="panel-heading"><h3>Building</h3></div>
-  		<div class="panel-body">
-				<div id="search-form">
-					<%= form_tag '/reviews/new', method: :get, id: 'search_item_form', class: 'form-horizontal' do %>
-	        	<!-- adding value on the basis of selected radio button -->
-	        	<%= hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution', id: 'building_contribution' %>
-	        	
-	        	<%= hidden_field_tag :user_id, current_user.present? ? current_user.id : '' %>
-						
-						<section class="app-content">
-					    <div class="buildings-search">
-				      	<%= text_field_tag 'buildings-search-txt', @building.present? ? @building.building_street_address : nil, class: 'form-control', placeholder: 'Search building by name or address', 'data-buildingid' => @building.present? ? @building.id : '', required: 'required' %>
-				      	<%= hidden_field_tag 'zip', @building.present? ? @building.zipcode : '' %>
-				      	<div class="results" id="buildings-search-results"></div>
-				      	<ul id="buildings-search-no-results" class="search-no-result"></ul>
-					    </div>
-				  	</section>
 
-				  	<div class="pull-right next_btn_container" style="padding: 10px 0px;">
-					  	<% if params[:contribution_for].blank? %>
-					  		<!-- when wrong building is selected -->
-					  		<%= link_to 'Next','javascript:;', id: 'next_to_review_btn', class: 'btn btn-primary add_new_building' %>
-					  		<!-- when correct building is selected -->
-					  		<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary hidden' %>
-					  	<%end%>
-			    	</div>
-			  	<%end%>
-				</div>
-			</div>
-			
-			<br />
-			
-			<div class="col-xs-12 col-md-12 col-lg-12">
-		    <div class="buildings-search unit-search">
-		    	<div class="col-xs-12">
-     				<div class="form-group">
+		
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<div class="panel-heading"><h3>Building</h3></div>
+	  		<div class="panel-body">
+					<div id="search-form">
+						<%= form_tag '/reviews/new', method: :get, id: 'search_item_form', class: 'form-horizontal' do %>
+		        	<!-- adding value on the basis of selected radio button -->
+		        	<%= hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution', id: 'building_contribution' %>
+		        	
+		        	<%= hidden_field_tag :user_id, current_user.present? ? current_user.id : '' %>
+							
+							<section class="app-content">
+						    <div class="buildings-search">
+					      	<%= text_field_tag 'buildings-search-txt', @building.present? ? @building.building_street_address : nil, class: 'form-control', placeholder: 'Search building by name or address', 'data-buildingid' => @building.present? ? @building.id : '', required: 'required' %>
+					      	<%= hidden_field_tag 'zip', @building.present? ? @building.zipcode : '' %>
+					      	<div class="results" id="buildings-search-results"></div>
+					      	<ul id="buildings-search-no-results" class="search-no-result"></ul>
+						    </div>
+					  	</section>
+
+					  	<div class="pull-right next_btn_container">
+						  	<% if params[:contribution_for].blank? %>
+						  		<!-- when wrong building is selected -->
+						  		<%= link_to 'Next','javascript:;', id: 'next_to_review_btn', class: 'btn btn-primary add_new_building' %>
+						  		<!-- when correct building is selected -->
+						  		<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary hidden' %>
+						  	<%end%>
+				    	</div>
+				  	<%end%>
+					</div>
+				
+			    <div class="buildings-search unit-search">
+	   				<div class="form-group">
 				      <% unless @building.present? %>
 				      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search hide', placeholder: 'Search unit number'%>
 				      <%else%>
 				      	<%= text_field_tag 'units-search-txt', nil, class: 'form-control unit-search', placeholder: 'Search unit number'%>
 				      <%end%>
 			      </div>
-			    </div>
 		      	<div class="results" id="units-search-results"></div>
 		      	<div class="col-xs-12">
 		      		<ul id="units-search-no-results" class="search-no-result"></ul>
 		      	</div>
+			    </div>
 		    </div>
-	    </div>
-	    
-			<div class="col-xs-11">
+			  
+			<!-- <div class="col-xs-11"> -->
 				<%= form_tag '/buildings', method: :post, id: 'new_building', class: 'hide' do %>
 					<%= hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution' %>
 					<%= render partial: 'buildings/building_contribute_form' %>
@@ -66,10 +62,11 @@
 			      	<%= submit_tag 'Next', class: 'btn btn-primary', id: 'new_building_submit' %>
 			      </div>
 				<%end%>
-			</div>
+			<!-- </div> -->
 			
-			<div class="col-xs-12">
-				<%= render partial: 'units/unit_contribute_form' %>
+				<div class="col-xs-12 col-sm-12">
+					<%= render partial: 'units/unit_contribute_form' %>
+				</div>
 			</div>
 		</div>
 	</div>

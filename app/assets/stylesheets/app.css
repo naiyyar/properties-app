@@ -28,6 +28,9 @@ input[type=select] {
    appearance:         menulist;
 }
 .sliderLink{text-align: center; padding: 8px;}
+.square_feet_help_block{
+    visibility: hidden;
+}
 a.link_underlined:hover{
     text-decoration: underline !important;
 }
@@ -5824,6 +5827,19 @@ blockquote {
         text-align: right;
         margin-right: 20px;
     }
+    .contribute .panel-heading, .contribute .panel-body{
+        padding: 1px;
+    }
+    .contribute .panel-heading h3{
+        margin: 5px !important;
+    }
+    .square_feet_help_block{
+        display: none !important;
+    }
+    #new_unit_fields{
+        margin-top: 10px;
+    }
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {  
