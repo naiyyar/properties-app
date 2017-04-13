@@ -160,6 +160,7 @@ class BuildingsController < ApplicationController
   def update
     @building = Building.find(params[:id])
     if @building.update(building_params)
+      session[:after_conribute] = 'amenities' if params[:contribution].present?
       if params[:subaction].blank?
         redirect_to building_path(@building), notice: "Successfully Updated"
       else

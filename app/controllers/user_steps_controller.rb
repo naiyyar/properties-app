@@ -9,6 +9,7 @@ class UserStepsController < ApplicationController
 			@unit = @reviewable = @imageable = Unit.find(params[:unit_id])
 		end
 		@rental_price_history = RentalPriceHistory.new if params[:contribution_for] == 'unit_price_history'
+
 		@search_bar_hidden = :hidden
 		
 		render_wizard

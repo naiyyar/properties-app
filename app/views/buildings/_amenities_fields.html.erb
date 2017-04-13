@@ -28,7 +28,7 @@
         <div class="col-sm-6">
           <h3>Building Information</h3>
           <div class="checkbox custom-checkbox"><label><%= f.check_box :deck %> <span class="fa fa-check"></span> Deck</label></div>
-
+          <%= hidden_field_tag 'contribution', params[:contribution] %>
           <div class="checkbox custom-checkbox"><label><%= f.check_box :doorman %> <span class="fa fa-check"></span> Doorman</label></div>
 
           <div class="checkbox custom-checkbox">

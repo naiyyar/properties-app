@@ -23,6 +23,7 @@ class UploadsController < ApplicationController
   			@imageable = Unit.find(params[:unit_id])
   		end
     end
+    session[:after_conribute] = 'upload' if params[:contribution].present?
     @search_bar_hidden = :hidden
   end
 

@@ -12,6 +12,7 @@
                 <div class="form-group">
                   <label>Building Address</label>
                   <%= text_field_tag 'building_street_address', building_street_address(@unit.building),  class: 'form-control', disabled: 'disabled' %>
+                  <%= hidden_field_tag 'contribution', params[:contribution_for] %>
                 </div>
               </div>
             </div>

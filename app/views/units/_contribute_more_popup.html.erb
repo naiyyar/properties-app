@@ -1,0 +1,58 @@
+<div class="modal fade" id="contribute_more" role="dialog" aria-labelledby="contirbuteMoreLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="contirbuteMoreLabel">Would you like to contirbute more?</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="media">
+              <div class="media-left">
+                <div class="media-body">
+                  <h1 class="pageTitle"><%= @unit.name %></h1> 
+                  <div class="address text-muted">
+                    <%= building_street_address @unit.building %> <br />
+                    <%= @unit.building.neighborhood %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2></h2>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <%= link_to 'Unit Review', new_review_path(contribution: 'unit_review', user_id: current_user.id, unit_id: @unit.id), class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <%= link_to 'Unit Photos', "/user_steps/next_page?contribution_for=unit_photos&unit_id=#{@unit.id}", class: 'btn btn-primary', "data-no-turbolink" => false %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <%= link_to 'Unit Amenities', "/user_steps/next_page?contribution_for=unit_amenities&unit_id=#{@unit.id}", class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <%= link_to 'Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{@unit.id}", class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -17,7 +17,7 @@ app.buildings.prototype = {
   },
 
   _open: function(event, ui) {
-    $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building"> Add a building</a></li>');
+    $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
   },
 
   _render: function(ul, item) {
