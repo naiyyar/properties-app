@@ -1,10 +1,12 @@
-<div class="form-group">
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+  <h3>What would you like to contribute ?</h3>
+  <div class="form-group">
     <div class="col-sm-10">
       <div class="radio custom-radio">
       	<label>
       		<%= radio_button_tag :contribute_to, 'building_review', true %><span class="fa fa-circle"></span> Building Review
       	</label>
-      </div>
+      </div>  
       <div class="radio custom-radio">
       	<label>
       		<%= radio_button_tag :contribute_to, 'building_photos' %><span class="fa fa-circle"></span> Building Photos
@@ -36,4 +38,5 @@
       	</label>
       </div>
     </div>
+  </div>
 </div>

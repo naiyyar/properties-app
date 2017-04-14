@@ -5669,7 +5669,7 @@ blockquote {
         position: absolute;
         top: 64px;
         width: 45%;
-        left: 0;
+        right: 0;
         overflow-y: scroll;
         overflow-x:hidden;
         z-index: 1100;
@@ -5828,7 +5828,7 @@ blockquote {
         margin-right: 20px;
     }
     .contribute .panel-heading, .contribute .panel-body{
-        padding: 8px 1px;
+        padding: 18px 1px;
     }
     .contribute .panel-heading h3{
         margin: 5px !important;
