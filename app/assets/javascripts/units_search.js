@@ -39,6 +39,7 @@ app.units.prototype = {
       // if($("#unit_name").hasClass('hide')){
       //   $("#unit_name").removeClass('hide');
       // }
+      $('.square_feet_help_block').addClass('hidden');
       var unit = ui.item;
       var square_feet = unit.square_feet == null ? '' : parseInt(unit.square_feet)
       $("#unit_id").val(unit.id);

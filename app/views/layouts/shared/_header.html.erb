@@ -14,7 +14,7 @@
   <% if user_signed_in? %>
     <div class="home-nav">
       <ul class="homeNavUl" style="padding: 3px 0px;">
-        <li class="<%#=search_bar(:hidden)%>"><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
+        <li><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
         <li></li>
       </ul>
     </div>
@@ -22,19 +22,22 @@
       <%=render partial: 'layouts/shared/user_profile' %>
     </div>
     <% if params[:action] == 'search' %>
-      <a href="javascript:void(0);" class="mapHandler"><span class="icon-map"></span></a>
-      <a href="javascript:void(0);" class="listHandler"><span class="icon-list"></span></a>
+      <!-- old implementation was using map anfd list icons -->
+      <!-- <a href="javascript:void(0);" class="mapHandler"><span class="icon-map">Map</span></a> -->
+      <!-- <a href="javascript:void(0);" class="listHandler"><span class="icon-list">List</span></a> -->
+      <a href="javascript:void(0);" class="mapHandler">Map</a>
+      <a href="javascript:void(0);" class="listHandler">List</a>
     <%elsif (params[:controller] == 'buildings' and params[:action] == 'show') or (params[:controller] == 'units' and params[:action] == 'show') %>
-      <a href="javascript:void(0);" class="mapHandlerShow"><span class="icon-map"></span></a>
-      <a href="javascript:void(0);" class="listHandlerShow"><span class="icon-list"></span></a>
+      <a href="javascript:void(0);" class="mapHandlerShow">Map</a>
+      <a href="javascript:void(0);" class="listHandlerShow">List</a>
     <%end%>
   <%else%>
     <% if params[:action] == 'search' %>
-      <a href="javascript:void(0)" class="mapHandler"><span class="icon-map"></span></a>
-      <a href="javascript:void(0)" class="listHandler"><span class="icon-list"></span></a>
+      <a href="javascript:void(0)" class="mapHandler">Map</a>
+      <a href="javascript:void(0)" class="listHandler">List</a>
     <%elsif (params[:controller] == 'buildings' and params[:action] == 'show') or (params[:controller] == 'units' and params[:action] == 'show') %>
-      <a href="javascript:void(0)" class="mapHandlerShow"><span class="icon-map"></span></a>
-      <a href="javascript:void(0)" class="listHandlerShow"><span class="icon-list"></span></a>
+      <a href="javascript:void(0)" class="mapHandlerShow">Map</a>
+      <a href="javascript:void(0)" class="listHandlerShow">List</a>
     <%end%>
     <div class="home-nav">
       <ul class="homeNavUl" style="padding: 3px 0px;">

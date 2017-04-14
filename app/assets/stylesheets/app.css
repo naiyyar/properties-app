@@ -628,8 +628,8 @@ a.navHandler {
 a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     float: right;
     text-align: center;
-    font-size: 20px;
-    padding-top: 13px;
+    font-size: 14px;
+    padding-top: 15px;
     height: 50px;
     width: 20px;
     color: #fff;
@@ -5828,7 +5828,7 @@ blockquote {
         margin-right: 20px;
     }
     .contribute .panel-heading, .contribute .panel-body{
-        padding: 1px;
+        padding: 8px 1px;
     }
     .contribute .panel-heading h3{
         margin: 5px !important;
