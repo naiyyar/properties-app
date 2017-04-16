@@ -24,7 +24,7 @@ app.apartments.prototype = {
     var markup = [
       '<p class="address"><b>' + search_term + '</b></p>'
     ];
-    
+    $('ul.ui-autocomplete').css('left','10');
     return $('<li>')
       .append(markup.join(''))
       .appendTo(ul);
