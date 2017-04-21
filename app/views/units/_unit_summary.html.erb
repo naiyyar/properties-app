@@ -9,10 +9,8 @@
             <%end%>
           </h1>
           <div class="address"><span class="icon-location-pin"></span> 
-            <%= link_to building_path(@unit.building) do %>
-              <!-- <b> -->
-                <%= @unit.building.street_address %>, <%= @unit.building.zipcode %> <br />  
-              <!-- </b> -->
+            <%= link_to building_path(@unit.building) do %>  
+              <%= @unit.building.street_address %>, <%= @unit.building.zipcode %> <br />  
             <%end%>
           </div>
           <div class="address"><span class="fa fa-building"></span> <%= link_to @unit.building.building_name, building_path(@unit.building) %></div>
@@ -25,16 +23,17 @@
               <%= "#{@unit.recommended_percent.to_i}% Recommended" %> 
             </div>
           <%end%>
-          <!-- <ul class="stats">
-            <li><span class="icon-eye"></span> 200</li>
-            <li><span class="icon-bubble"></span> 13</li>
-          </ul> -->
+          
           <div class="clearfix"></div>
-          <ul class="features">
-            <li><span class="fa fa-bed"></span><div><%= @unit.number_of_bedrooms %> Bedrooms</div></li>
-            <li><span class="fa fa-bath"></span><div><%= @unit.number_of_bathrooms %> Bathrooms</div></li>
-            <li><span class="icon-frame"></span><div><%= @unit.square_feet.to_i %> Sq Ft</div></li>
-          </ul>
+          
+          <div class="property_information">
+            <span><%= @unit.number_of_bedrooms %> Bedrooms</span> -
+            <span><%= @unit.number_of_bathrooms %> Bathrooms</span> -
+            <span><%= @unit.square_feet.to_i %> Ft<sup>2</sup></span>
+          </div>
+          
+          <div class="clearfix"></div>
+            <%= render partial: 'buildings/property_contribute_links', locals: { object: @unit } %>
           <div class="clearfix"></div>
       </div>
     </div>

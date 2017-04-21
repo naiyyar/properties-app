@@ -13,7 +13,7 @@ jQuery ->
 	$('.datepicker').on 'changeDate',(e) ->
 		$(this).datepicker('hide');
 
-	$('[data-toggle="popover"]').popover({ trigger: "hover" })
+	$('[data-toggle="popover"]').popover({ trigger: "click" })
 
 	$('input, textarea').placeholder()
 

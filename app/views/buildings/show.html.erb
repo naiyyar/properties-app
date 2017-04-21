@@ -15,8 +15,8 @@
       </div>
     <%else%>
       <div class="sliderLink">
-        <span class="text-danger">No photos are available</span>
-        <%= render partial: 'uploads/upload_link', locals: { object: @building }%>
+        <span class="text-danger">No photos are available.</span>
+        <%#= render partial: 'uploads/upload_link', locals: { object: @building }%>
       </div>
     <%end%>
   </div>
@@ -33,7 +33,7 @@
     </ul>
     <div class="tab-content">
       <div class="tab-pane fade in active" id="buildings">
-        <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-o btn-yellow contactBtn reviewBtnMobile pull-right", "data-no-turbolink" => false %>
+        <%#= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-o btn-yellow contactBtn reviewBtnMobile pull-right", "data-no-turbolink" => false %>
         <div class="comments">
           <% @building.reviews.order('created_at desc').each do |review| %>
             <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
@@ -58,6 +58,7 @@
 </div>
 
 <div data-map="<%= @gmaphash.to_json %>" id="mapHash" data-lat="<%= @lat.to_json %>" data-lng="<%= @lng.to_json %>"></div>
+
 <% if session[:after_conribute].present? %>
   <%= render partial: 'contribute_more_popup' %>
   <script type="text/javascript">

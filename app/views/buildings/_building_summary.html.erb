@@ -15,21 +15,24 @@
             <%= rating_for @building, 'building', disable_after_rate: true, readonly: true %>
           </ul>
           <div class="favLink">(<%=@building.reviews.count%>)</div>
+          
           <% if @building.votes.present? %>
             <div class="favLink"><span class="icon-pipe"></span>
               <%= @building.recommended_percent.nan? ? '| None recommended yet' :  "| #{@building.recommended_percent.to_i}% Recommended" %>
             </div>
           <%end%>
-          <!-- <ul class="stats">
-            <li><span class="icon-eye"></span> 200</li>
-            <li><span class="icon-bubble"></span> 13</li>
-          </ul> -->
           <div class="clearfix"></div>
-          <ul class="features">
-            <li>Units<div><%= @building.no_of_units ? @building.no_of_units : '--' %></div></li>
-            <li>Number of Floors<div><%= @building.floors ? @building.floors : '<span style="visibility:hidden;">--</span>'.html_safe %></div></li>
-            <li>Built in year<div><%= @building.built_in ? @building.built_in : '----' %></div></li>
-          </ul>
+          
+          <div class="stats1 property_information">
+            <span><%= @building.no_of_units ? "#{@building.no_of_units} Unit(s) -" : ' -- Units' %></span>
+            <span><%= @building.floors ? "#{@building.floors} Floors -" : ' 0 Floors -' %></span>
+            <span><%= @building.built_in ? "Built in #{@building.built_in}" : ' Built in 0000' %></span>
+          </div>
+          
+          <div class="clearfix"></div>
+          
+          <%= render partial: 'property_contribute_links', locals: { object: @building } %>
+          
           <div class="clearfix"></div>
       </div>
     </div>
@@ -41,10 +44,10 @@
           <!-- <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-warning contactBtn">Contact Agent</a> -->
           <%= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-o btn-yellow contactBtn hidden-xs", 'data-no-turbolink' => false %>
             <% if user_signed_in? %>
-              <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-o btn-gray contactBtn hidden-xs", 'data-no-turbolink' => false  %>
+              <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-o btn-gray contactBtn hidden-xs", 'data-no-turbolink' => false  %>
             <%else%>
               <%#= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '#signin', 'data-toggle' => 'modal', class: "btn btn-o btn-gray contactBtn hidden-xs", "data-no-turbolink" => false  %>
-              <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '#signin', class: 'btn btn-o btn-gray contactBtn hidden-xs', 'data-toggle' => 'modal'  %>
+              <%= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, '#signin', class: 'btn btn-o btn-gray contactBtn hidden-xs', 'data-toggle' => 'modal'  %>
             <%end%>
       </div>
     </div>

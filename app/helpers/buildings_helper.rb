@@ -62,4 +62,5 @@ module BuildingsHelper
 			'contribute-wrapper'
 		end
 	end
+
 end
