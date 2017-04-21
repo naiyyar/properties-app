@@ -39,8 +39,8 @@
         <!-- <label>Bedrooms </label> -->
         <div class="input-group">
           <%= text_field_tag 'unit_number_of_bedrooms',nil, name: "building[units_attributes][0][number_of_bedrooms]", class: "form-control", placeholder: 'Bedrooms'%>
-          <span class="input-group-addon">
-            <i data-toggle="popover" data-placement="left" class="fa fa-question-circle" aria-hidden="true" data-content="Use 0 for a studio."></i>
+          <span class="input-group-addon" data-toggle="tooltip" data-placement="left" aria-hidden="true" title="Use 0 for a studio.">
+            <i class="fa fa-question-circle" ></i>
           </span>
         </div>
       </div>

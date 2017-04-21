@@ -14,6 +14,7 @@ jQuery ->
 		$(this).datepicker('hide');
 
 	$('[data-toggle="popover"]').popover({ trigger: "click" })
+	$('[data-toggle="tooltip"]').tooltip({trigger: 'click'}); 
 
 	$('input, textarea').placeholder()
 
