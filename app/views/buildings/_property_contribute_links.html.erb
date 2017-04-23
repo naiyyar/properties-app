@@ -1,4 +1,8 @@
 <div class="visible-xs">
+  <% if object.kind_of? Unit %>
+    <%= link_to '+ Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}", class: 'btn btn-blue btn-block' %>
+  <%end%>
+  <h2></h2>
   <div class="contribute_links">
     <ul class="features">
       <% if object.kind_of? Building %>
@@ -17,8 +21,9 @@
           <%end%> 
         </li>
       <%else%>
-         <li><%= link_to "+ Review".html_safe, new_unit_review_path(unit_id: object), "data-no-turbolink" => false %></li>
-        <li><% if user_signed_in? %>
+        <li><%= link_to "+ Review".html_safe, new_unit_review_path(unit_id: object), "data-no-turbolink" => false %></li>
+        <li>
+          <% if user_signed_in? %>
             <%= link_to '+ Photo'.html_safe, new_unit_upload_path(unit_id: object), 'data-no-turbolink' => false  %>
           <%else%>
             <%= link_to '+ Photo'.html_safe, '#signin', 'data-toggle' => 'modal'  %>
@@ -30,9 +35,6 @@
           <%else%>
             <%= link_to '+ Amenities'.html_safe, '#signin', 'data-toggle' => 'modal'  %>
           <%end%> 
-        </li>
-        <li>
-          <%= link_to '+ Rent Info', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}" %>
         </li>
       <%end%>
     </ul>

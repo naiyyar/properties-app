@@ -1,6 +1,6 @@
 <% if object.uploads.present? %>
   <% if object.uploads.count >= 3 %>
-    <div class="rotateslider-container" id="slider">
+    <div class="rotateslider-container hidden-xs" id="slider">
       <% object.uploads.each do |upload| %>
         <div class="rotateslider-item">
           <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox">
@@ -13,7 +13,7 @@
     </div>
   <%else%>
     <div class="col-lg-12">
-      <div id="propWidget-3" class="carousel slide propWidget-3" data-ride="carousel">
+      <div id="propWidget-3" class="carousel slide propWidget-3 hidden-xs" data-ride="carousel">
         <% if object.uploads.count > 1 %>
           <ol class="carousel-indicators">
             <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
@@ -51,6 +51,6 @@
     <%end%>
   </div>
 <%else%>
-  <%= image_tag 'no-photo-available.jpg', size: '311x211', class: 'pull-left' %>
-  <div class="pull-right">No image Found! Please <%= link_to 'Upload', path, "data-no-turbolink" => false %> images.</div>
+  <%#= image_tag 'no-photo-available.jpg', size: '311x211', class: 'pull-left' %>
+  <!-- <div class="pull-right">No image Found! Please <%#= link_to 'Upload', path, "data-no-turbolink" => false %> images.</div> -->
 <%end%>

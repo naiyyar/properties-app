@@ -10,6 +10,7 @@
       <!-- for Lasrge devices -->
       <div class="row">
         <div class="col-lg-12 col-sm-12 col-xs-12">
+          <%=render partial: 'uploads/mobile_touch_slider', locals: { object: @building }%>
           <%= render partial: 'uploads/show_page_slider', locals: { object: @building, path: new_building_upload_path(building_id: @building) } %>
         </div>
       </div>

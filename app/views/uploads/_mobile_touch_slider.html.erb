@@ -1,0 +1,15 @@
+ <div class="swiper-container visible-xs">
+    <div class="swiper-wrapper">
+      <% object.uploads.each_with_index do |upload, index| %>
+        <div class="swiper-slide"> 
+          <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" >
+            <%= image_tag upload.image.url, alt: "" %>
+          </a>
+        </div>
+      <%end%>
+    </div>
+    <!-- <div class="swiper-button-next"></div> -->
+    <!-- <div class="swiper-button-prev"></div> -->
+    <!-- Add Pagination -->
+    <!-- <div class="swiper-pagination"></div> -->
+  </div>

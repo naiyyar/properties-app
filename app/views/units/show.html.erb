@@ -4,7 +4,8 @@
     <%= render partial: 'unit_summary' %>
     <% if @unit_uploads.present? %>
       <!-- for small and xtra small devices -->
-      <%= render partial: 'uploads/image_slider_mobile', locals: { uploads: @unit_uploads, path: unit_uploads_path(unit_id: @unit.id), new_upload_path: new_unit_upload_path(unit_id: @unit) } %>
+      <%=render partial: 'uploads/mobile_touch_slider', locals: { object: @unit }%>
+      <%#= render partial: 'uploads/image_slider_mobile', locals: { uploads: @unit_uploads, path: unit_uploads_path(unit_id: @unit.id), new_upload_path: new_unit_upload_path(unit_id: @unit) } %>
       <!-- for Lasrge devices -->
       <%= render partial: 'uploads/show_page_slider', locals: { object: @unit, path: new_unit_upload_path(unit_id: @unit) } %>
     <%else%>
@@ -86,9 +87,3 @@
   </script>
   <% session[:after_conribute] = nil %>
 <%end%>
-
-<style type="text/css">
-  .singleTop ul.features li {
-    width: 25%;
-  }
-</style>

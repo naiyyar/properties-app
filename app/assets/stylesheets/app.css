@@ -5321,6 +5321,16 @@ blockquote {
         -o-transition: none;
         transition: none;
     }
+    /* mobile Touch slider */
+    .swiper-container{
+        height:190px; 
+        width:367px;
+    }
+    .swiper-slide img{
+        height: 100px !important;
+    }
+
+    /*end mobile touch */
     .contribute_links{
         width: 100%;
         border-top: 1px solid #999;
@@ -5889,6 +5899,9 @@ blockquote {
     .rotateslider-container img {
         height: 250px !important;
         width: 200px !important;
+    }
+    .swiper-slide img{
+        height: 122px !important;
     }
             
 }
