@@ -10,9 +10,14 @@ app.units.prototype = {
         source: '/units/units_search?building_id='+building_id,
         appendTo: '#units-search-results',
         select: $.proxy(this._select, this),
-        response: $.proxy(this._response, this)
+        response: $.proxy(this._response, this),
+        open: $.proxy(this._open, this)
       })
       .autocomplete('instance')._renderItem = $.proxy(this._render, this);
+  },
+
+  _open: function(event, ui) {
+    $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Unit Not Here?</b></span> <a href="javascript:void(0)" id="add_new_unit" class="add_new_unit"> Add a Unit</a></li>');
   },
 
   _render: function(ul, item) {
