@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 	before_filter :set_user, only: [:edit, :update, :show]
 
 	def index
+		@users = User.order('created_at desc')
 	end
 
 	def new
