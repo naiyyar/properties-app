@@ -6,7 +6,7 @@
   <div class="contribute_links">
     <ul class="features">
       <% if object.kind_of? Building %>
-        <li><%= link_to "+ Review".html_safe, new_building_review_path(building_id: object), "data-no-turbolink" => false %></li>
+        <li><%= link_to "+ Review".html_safe, new_building_review_path(building_id: object, contribution: 'building_review'), "data-no-turbolink" => false %></li>
         <li><% if user_signed_in? %>
             <%= link_to '+ Photo'.html_safe, new_building_upload_path(building_id: object), 'data-no-turbolink' => false  %>
           <%else%>
@@ -21,7 +21,7 @@
           <%end%> 
         </li>
       <%else%>
-        <li><%= link_to "+ Review".html_safe, new_unit_review_path(unit_id: object), "data-no-turbolink" => false %></li>
+        <li><%= link_to "+ Review".html_safe, new_unit_review_path(unit_id: object, contribution: 'unit_review'), "data-no-turbolink" => false %></li>
         <li>
           <% if user_signed_in? %>
             <%= link_to '+ Photo'.html_safe, new_unit_upload_path(unit_id: object), 'data-no-turbolink' => false  %>
