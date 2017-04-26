@@ -2,7 +2,7 @@
   <% if object.kind_of? Unit %>
     <%= link_to '+ Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}", class: 'btn btn-blue btn-block' %>
   <%end%>
-  <h2></h2>
+  
   <div class="contribute_links">
     <ul class="features">
       <% if object.kind_of? Building %>

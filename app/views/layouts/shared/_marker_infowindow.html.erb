@@ -1,5 +1,5 @@
 <div class="infoW">
-	<%= link_to building_path(building) do %>
+	<%#= link_to building_path(building) do %>
 	    <div class="propImg">
 	        <%= image_tag image , alt: 'Image'%>
 	    </div>
@@ -7,17 +7,18 @@
 	        <div class="propTitle"><%= building.building_name_or_address %></div>
 	        <div class="propAddress"><%= building.street_address %> <%= building.zipcode %></div>
 	    </div>
-	<%end%>
-    <!-- <div class="propRating">
-		<%#= rating_for building, 'building', disable_after_rate: true, readonly: true, cancel: false %>
-	</div> -->
-    <ul class="propFeat">
+	<%#end%>
+  <div class="propRating">
+		<%= rating_for building, 'building', disable_after_rate: true, readonly: true, cancel: false %>
+	</div>
+  <ul class="propFeat">
 		<li>Building reviews: <%= building.reviews.count %></li>
 		<li>Unit reviews: <%=building.unit_reviews_count%></li>
 	</ul> <br />
+	
 	<ul class="propFeat">
 	    <li><%= "Photos: #{building.photos}" %></li>
-	    <li><%="Unit rent summary: #{building.unit_rent_summary_count}"%></li>
+	    <li><%="Rent Information: #{building.unit_rent_summary_count}"%></li>
 	</ul>
 	
     <div class="clearfix"></div>

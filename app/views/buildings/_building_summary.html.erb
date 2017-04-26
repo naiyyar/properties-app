@@ -14,7 +14,7 @@
           <ul class="rating">
             <%= rating_for @building, 'building', disable_after_rate: true, readonly: true %>
           </ul>
-          <div class="favLink">(<%=@building.reviews.count%>)</div>
+          <!-- <div class="favLink">(<%#=@building.reviews.count%>)</div> -->
           
           <% if @building.votes.present? %>
             <div class="favLink"><span class="icon-pipe"></span>

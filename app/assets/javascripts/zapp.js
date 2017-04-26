@@ -263,6 +263,7 @@
     var contentHeight;
     var contentWidth;
     var isDevice = true;
+    var panorama;
 
     // calculations for elements that changes size on window resize
     var windowResizeHandler = function() {
@@ -351,7 +352,28 @@
         map.setZoom(14);
 
         addMarkers(props, map);
+
+        panorama = map.getStreetView();
+        panorama.setPosition({ lat: lat, lng: lng });
+        panorama.setPov(/** @type {google.maps.StreetViewPov} */({
+          heading: 265,
+          pitch: 0
+        }));
+
     }, 300);
+    
+    $("#toggleStreetView").click(function(){
+        var toggle = panorama.getVisible();
+        if (toggle == false) {
+          panorama.setVisible(true);
+          $(this).val('Map View');
+        } else {
+          panorama.setVisible(false);
+          $(this).val('Street View');
+        }
+        
+    })
+    
 
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
         $('body').addClass('no-touch');
