@@ -5724,7 +5724,6 @@ blockquote {
     }
     .home-nav {
         position: absolute;
-        top: 143px;
         width: 45%;
         right: 0%;
         overflow-y: scroll;
@@ -5736,6 +5735,10 @@ blockquote {
     }
     .home-header .home-nav{
         left: 0;
+        top: 64px;
+    }
+    #header .home-nav{
+        top: 143px;
     }
     .home-nav ul.homeNavUl {
         position: relative;
