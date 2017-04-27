@@ -455,6 +455,7 @@
             $('#content').hasClass('mob-max')) {
                 $('#mapView').toggleClass('mob-max');
                 $('#content').toggleClass('mob-min');
+                $("#street_view_btn").toggleClass('hidden-xs')
         } else {
             $('#mapView').toggleClass('min');
             $('#content').toggleClass('max');
