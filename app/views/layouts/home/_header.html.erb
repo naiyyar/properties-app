@@ -1,11 +1,11 @@
-<a href="javascript:void(0)" class="home-navHandler visible-xs"><span class="fa fa-bars"></span></a>
+<a href="javascript:void(0)" class="home-navHandler visible-xs visible-sm"><span class="fa fa-bars"></span></a>
 <div class="home-header">
   <div class="home-logo osLight"><%=image_tag 'logo1.png', alt: 'logo', width: '200' %></div>
 
   <!-- Should only be visible on home page when user is not logged in -->
-  <% if !user_signed_in? %>
+  <% if user_signed_in? %>
     <% if params[:controller] == 'home' and params[:action] == 'index' %>
-      <div class="pull-right btn-contribute btn-contribute-home hidden-xs1">
+      <div class="pull-right btn-contribute btn-contribute-home hidden-xs hidden-sm">
         <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
       </div>
     <%end%>
@@ -13,13 +13,13 @@
   
   <div class="home-nav">
     <% if user_signed_in? %>
-      <div class="pull-right hidden-xs home-header-userProfile">
+      <div class="pull-right hidden-xs hidden-sm home-header-userProfile">
         <%=render partial: 'layouts/shared/user_profile' %>
       </div>
     <%end%>
     <ul class="homeNavUl">
       <li>
-        <a href="/buildings/contribute" class="visible-xs"><span class="icon-plus"></span><span class="navLabel"> Write a review</span></a>
+        <a href="/buildings/contribute" class="visible-xs visible-sm"><span class="icon-plus"></span><span class="navLabel"> Write a review</span></a>
       </li>
       <% unless user_signed_in? %>
         <li><a href="#" data-toggle="modal" data-target="#signin"><span class="navIcon fa fa-sign-in"></span> Sign In</a></li>
@@ -41,7 +41,7 @@
 </div>
 
 <% if user_signed_in? %>
-  <div class="mobView visible-xs">
+  <div class="mobView visible-xs visible-sm">
     <%=render partial: 'layouts/shared/user_profile' %>
   </div>
 <%end%>

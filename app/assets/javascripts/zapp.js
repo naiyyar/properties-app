@@ -6,6 +6,18 @@
             zoom : 14,
             // mapTypeId : 'Styled',
             disableDefaultUI: false,
+            mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              position: google.maps.ControlPosition.LEFT_TOP
+            },
+            zoomControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+            },
+            scaleControl: true,
+            streetViewControl: true,
+            streetViewControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+            },
             // mapTypeControlOptions : {
             //     mapTypeIds : [ 'Styled' ]
             // }
