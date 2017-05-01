@@ -15718,522 +15718,6 @@ overflow:"hidden",width:a.width,height:a.height});b.css({overflow:"hidden",width
 b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});return!1}).bind("selectstart.slimscroll",function(a){a.stopPropagation();a.preventDefault();return!1});g.hover(function(){v()},function(){p()});c.hover(function(){x=!0},function(){x=!1});b.hover(function(){s=!0;v();p()},function(){s=!1;p()});b.bind("touchstart",function(a,b){a.originalEvent.touches.length&&(z=a.originalEvent.touches[0].pageY)});b.bind("touchmove",function(b){k||b.originalEvent.preventDefault();b.originalEvent.touches.length&&
 (m((z-b.originalEvent.touches[0].pageY)/a.touchScrollStep,!0),z=b.originalEvent.touches[0].pageY)});w();"bottom"===a.start?(c.css({top:b.outerHeight()-c.outerHeight()}),m(0,!0)):"top"!==a.start&&(m(f(a.start).position().top,null,!0),a.alwaysVisible||c.hide());C()}});return this}});jQuery.fn.extend({slimscroll:jQuery.fn.slimScroll})})(jQuery);
 (function(a){var b=new Array;var c=new Array;a.fn.doAutosize=function(b){var c=a(this).data("minwidth"),d=a(this).data("maxwidth"),e="",f=a(this),g=a("#"+a(this).data("tester_id"));if(e===(e=f.val())){return}var h=e.replace(/&/g,"&").replace(/\s/g," ").replace(/</g,"<").replace(/>/g,">");g.html(h);var i=g.width(),j=i+b.comfortZone>=c?i+b.comfortZone:c,k=f.width(),l=j<k&&j>=c||j>c&&j<d;if(l){f.width(j)}};a.fn.resetAutosize=function(b){var c=a(this).data("minwidth")||b.minInputWidth||a(this).width(),d=a(this).data("maxwidth")||b.maxInputWidth||a(this).closest(".tagsinput").width()-b.inputPadding,e="",f=a(this),g=a("<tester/>").css({position:"absolute",top:-9999,left:-9999,width:"auto",fontSize:f.css("fontSize"),fontFamily:f.css("fontFamily"),fontWeight:f.css("fontWeight"),letterSpacing:f.css("letterSpacing"),whiteSpace:"nowrap"}),h=a(this).attr("id")+"_autosize_tester";if(!a("#"+h).length>0){g.attr("id",h);g.appendTo("body")}f.data("minwidth",c);f.data("maxwidth",d);f.data("tester_id",h);f.css("width",c)};a.fn.addTag=function(d,e){e=jQuery.extend({focus:false,callback:true},e);this.each(function(){var f=a(this).attr("id");var g=a(this).val().split(b[f]);if(g[0]==""){g=new Array}d=jQuery.trim(d);if(e.unique){var h=a(g).tagExist(d);if(h==true){a("#"+f+"_tag").addClass("not_valid")}}else{var h=false}if(d!=""&&h!=true){a("<span>").addClass("tag").append(a("<span>").text(d).append("  "),a("<a>",{href:"#",title:"Removing tag",text:"x"}).click(function(){return a("#"+f).removeTag(escape(d))})).insertBefore("#"+f+"_addTag");g.push(d);a("#"+f+"_tag").val("");if(e.focus){a("#"+f+"_tag").focus()}else{a("#"+f+"_tag").blur()}a.fn.tagsInput.updateTagsField(this,g);if(e.callback&&c[f]&&c[f]["onAddTag"]){var i=c[f]["onAddTag"];i.call(this,d)}if(c[f]&&c[f]["onChange"]){var j=g.length;var i=c[f]["onChange"];i.call(this,a(this),g[j-1])}}});return false};a.fn.removeTag=function(d){d=unescape(d);this.each(function(){var e=a(this).attr("id");var f=a(this).val().split(b[e]);a("#"+e+"_tagsinput .tag").remove();str="";for(i=0;i<f.length;i++){if(f[i]!=d){str=str+b[e]+f[i]}}a.fn.tagsInput.importTags(this,str);if(c[e]&&c[e]["onRemoveTag"]){var g=c[e]["onRemoveTag"];g.call(this,d)}});return false};a.fn.tagExist=function(b){return jQuery.inArray(b,a(this))>=0};a.fn.importTags=function(b){id=a(this).attr("id");a("#"+id+"_tagsinput .tag").remove();a.fn.tagsInput.importTags(this,b)};a.fn.tagsInput=function(d){var e=jQuery.extend({interactive:true,defaultText:"add a tag",minChars:0,width:"300px",height:"100px",autocomplete:{selectFirst:false},hide:true,delimiter:",",unique:true,removeWithBackspace:true,placeholderColor:"#666666",autosize:true,comfortZone:20,inputPadding:6*2},d);this.each(function(){if(e.hide){a(this).hide()}var d=a(this).attr("id");if(!d||b[a(this).attr("id")]){d=a(this).attr("id","tags"+(new Date).getTime()).attr("id")}var f=jQuery.extend({pid:d,real_input:"#"+d,holder:"#"+d+"_tagsinput",input_wrapper:"#"+d+"_addTag",fake_input:"#"+d+"_tag"},e);b[d]=f.delimiter;if(e.onAddTag||e.onRemoveTag||e.onChange){c[d]=new Array;c[d]["onAddTag"]=e.onAddTag;c[d]["onRemoveTag"]=e.onRemoveTag;c[d]["onChange"]=e.onChange}var g='<div id="'+d+'_tagsinput" class="tagsinput"><div id="'+d+'_addTag">';if(e.interactive){g=g+'<input id="'+d+'_tag" value="" data-default="'+e.defaultText+'" />'}g=g+'</div><div class="tags_clear"></div></div>';a(g).insertAfter(this);a(f.holder).css("width",e.width);a(f.holder).css("height",e.height);if(a(f.real_input).val()!=""){a.fn.tagsInput.importTags(a(f.real_input),a(f.real_input).val())}if(e.interactive){a(f.fake_input).val(a(f.fake_input).attr("data-default"));a(f.fake_input).css("color",e.placeholderColor);a(f.fake_input).resetAutosize(e);a(f.holder).bind("click",f,function(b){a(b.data.fake_input).focus()});a(f.fake_input).bind("focus",f,function(b){if(a(b.data.fake_input).val()==a(b.data.fake_input).attr("data-default")){a(b.data.fake_input).val("")}a(b.data.fake_input).css("color","#000000")});if(e.autocomplete_url!=undefined){autocomplete_options={source:e.autocomplete_url};for(attrname in e.autocomplete){autocomplete_options[attrname]=e.autocomplete[attrname]}if(jQuery.Autocompleter!==undefined){a(f.fake_input).autocomplete(e.autocomplete_url,e.autocomplete);a(f.fake_input).bind("result",f,function(b,c,f){if(c){a("#"+d).addTag(c[0]+"",{focus:true,unique:e.unique})}})}else if(jQuery.ui.autocomplete!==undefined){a(f.fake_input).autocomplete(autocomplete_options);a(f.fake_input).bind("autocompleteselect",f,function(b,c){a(b.data.real_input).addTag(c.item.value,{focus:true,unique:e.unique});return false})}}else{a(f.fake_input).bind("blur",f,function(b){var c=a(this).attr("data-default");if(a(b.data.fake_input).val()!=""&&a(b.data.fake_input).val()!=c){if(b.data.minChars<=a(b.data.fake_input).val().length&&(!b.data.maxChars||b.data.maxChars>=a(b.data.fake_input).val().length))a(b.data.real_input).addTag(a(b.data.fake_input).val(),{focus:true,unique:e.unique})}else{a(b.data.fake_input).val(a(b.data.fake_input).attr("data-default"));a(b.data.fake_input).css("color",e.placeholderColor)}return false})}a(f.fake_input).bind("keypress",f,function(b){if(b.which==b.data.delimiter.charCodeAt(0)||b.which==13){b.preventDefault();if(b.data.minChars<=a(b.data.fake_input).val().length&&(!b.data.maxChars||b.data.maxChars>=a(b.data.fake_input).val().length))a(b.data.real_input).addTag(a(b.data.fake_input).val(),{focus:true,unique:e.unique});a(b.data.fake_input).resetAutosize(e);return false}else if(b.data.autosize){a(b.data.fake_input).doAutosize(e)}});f.removeWithBackspace&&a(f.fake_input).bind("keydown",function(b){if(b.keyCode==8&&a(this).val()==""){b.preventDefault();var c=a(this).closest(".tagsinput").find(".tag:last").text();var d=a(this).attr("id").replace(/_tag$/,"");c=c.replace(/[\s]+x$/,"");a("#"+d).removeTag(escape(c));a(this).trigger("focus")}});a(f.fake_input).blur();if(f.unique){a(f.fake_input).keydown(function(b){if(b.keyCode==8||String.fromCharCode(b.which).match(/\w+|[áéíóúÁÉÍÓÚñÑ,/]+/)){a(this).removeClass("not_valid")}})}}});return this};a.fn.tagsInput.updateTagsField=function(c,d){var e=a(c).attr("id");a(c).val(d.join(b[e]))};a.fn.tagsInput.importTags=function(d,e){a(d).val("");var f=a(d).attr("id");var g=e.split(b[f]);for(i=0;i<g.length;i++){a(d).addTag(g[i],{focus:false,callback:false})}if(c[f]&&c[f]["onChange"]){var h=c[f]["onChange"];h.call(d,d,g[i])}}})(jQuery);
-(function($) {
-    "use strict";
-
-    // Custom options for map
-    var options = {
-        zoom : 14,
-        disableDefaultUI: false,
-        zoomControlOptions: {
-          position: google.maps.ControlPosition.RIGHT_CENTER
-        },
-        scaleControl: true,
-        streetViewControl: true,
-        streetViewControlOptions: {
-          position: google.maps.ControlPosition.RIGHT_CENTER
-        },
-    };
-    
-    var props = $("#mapHash").data('map');
-    var lat = $("#mapHash").data('lat');
-    var lng = $("#mapHash").data('lng');
-
-    //custom infowindow object
-    // var infobox = new google.maps.InfoWindow({
-    //     disableAutoPan: false,
-    //     maxWidth: 202,
-    //     pixelOffset: new google.maps.Size(-101, -285),
-    //     zIndex: null,
-    //     boxStyle: {
-    //         background: "url('assets/infobox-bg.png') no-repeat",
-    //         opacity: 1,
-    //         width: "202px",
-    //         height: "245px"
-    //     },
-    //     closeBoxMargin: "28px 26px 0px 0px",
-    //     closeBoxURL: "",
-    //     infoBoxClearance: new google.maps.Size(1, 1),
-    //     pane: "floatPane",
-    //     enableEventPropagation: false
-    // });
-
-    //diabling right click on buidlign edit form
-    $(".edit_building").on("contextmenu",function(e){
-        return false;
-    });
-
-    // function that adds the markers on map
-    var addMarkers = function(props, map) {
-        $.each(props, function(i,prop) {
-            var latlng = new google.maps.LatLng(prop.position.lat,prop.position.lng);
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                icon: new google.maps.MarkerImage( 
-                    prop.markerIcon,
-                    null,
-                    null,
-                    null,
-                    new google.maps.Size(36, 36)
-                ),
-                draggable: false,
-                animation: google.maps.Animation.DROP,
-            });
-            var infoboxContent = '<div class="infoW">' +
-                                    '<div class="propImg">' +
-                                        '<img src=' + prop.image + '>' +
-                                    '</div>' +
-                                    '<div class="paWrapper">' +
-                                        '<div class="propTitle">' + prop.title + '</div>' +
-                                        '<div class="propAddress">' + prop.address + '</div>' +
-                                    '</div>' +
-                                    '<div class="clearfix"></div>' +
-                                 '</div>';
-
-            var infowindow = new google.maps.InfoWindow({
-                content: infoboxContent
-            });
-
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    //infowindow.setContent(infoboxContent);
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
-
-            $(document).on('click', '.closeInfo', function() {
-                infowindow.open(null,null);
-            });
-
-            //markers.push(marker);
-        });
-    }
-
-    var map;
-    var windowHeight;
-    var windowWidth;
-    var contentHeight;
-    var contentWidth;
-    var isDevice = true;
-    var panorama;
-
-    // calculations for elements that changes size on window resize
-    var windowResizeHandler = function() {
-        windowHeight = window.innerHeight;
-        windowWidth = $(window).width();
-        contentHeight = windowHeight - $('#header').height();
-        contentWidth = $('#content').width();
-
-        $('#leftSide').height(contentHeight);
-        $('.closeLeftSide').height(contentHeight);
-        $('#wrapper').height(contentHeight);
-        $('#mapView, #mapViewSearch').height(contentHeight);
-        $('#content').height(contentHeight);
-
-        if (map) {
-            google.maps.event.trigger(map, 'resize');
-        }
-
-        // Add custom scrollbar for left side navigation
-        if(windowWidth > 767) {
-            $('.bigNav').slimScroll({
-                height : contentHeight - $('.leftUserWraper').height()
-            });
-        } else {
-            $('.bigNav').slimScroll({
-                height : contentHeight
-            });
-        }
-        if($('.bigNav').parent('.slimScrollDiv').size() > 0) {
-            $('.bigNav').parent().replaceWith($('.bigNav'));
-            if(windowWidth > 767) {
-                $('.bigNav').slimScroll({
-                    height : contentHeight - $('.leftUserWraper').height()
-                });
-            } else {
-                $('.bigNav').slimScroll({
-                    height : contentHeight
-                });
-            }
-        }
-    }
-
-    var repositionTooltip = function( e, ui ){
-        var div = $(ui.handle).data("bs.tooltip").$tip[0];
-        var pos = $.extend({}, $(ui.handle).offset(), { 
-                        width: $(ui.handle).get(0).offsetWidth,
-                        height: $(ui.handle).get(0).offsetHeight
-                    });
-        var actualWidth = div.offsetWidth;
-
-        var tp = {left: pos.left + pos.width / 2 - actualWidth / 2}
-        $(div).offset(tp);
-
-        $(div).find(".tooltip-inner").text( ui.value );
-    }
-
-    windowResizeHandler();
-    $(window).resize(function() {
-        windowResizeHandler();
-    });
-
-    setTimeout(function() {
-        $('body').removeClass('notransition');
-
-        map = new google.maps.Map(document.getElementById('mapView'), options);
-        map.setCenter(new google.maps.LatLng(lat, lng));
-        map.setZoom(14);
-
-        addMarkers(props, map);
-
-        panorama = map.getStreetView();
-        panorama.setPosition({ lat: lat, lng: lng });
-        panorama.setPov(/** @type {google.maps.StreetViewPov} */({
-          heading: 265,
-          pitch: 0
-        }));
-
-    }, 300);
-    
-    $("#toggleStreetView").click(function(){
-        var toggle = panorama.getVisible();
-        if (toggle == false) {
-          panorama.setVisible(true);
-          $(this).val('Map View');
-        } else {
-          panorama.setVisible(false);
-          $(this).val('Street View');
-        }
-        
-    })
-    
-
-    if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
-        $('body').addClass('no-touch');
-        isDevice = false;
-    }
-
-    // Header search icon transition
-    $('.search input').focus(function() {
-        $('.searchIcon').addClass('active');
-    });
-    $('.search input').blur(function() {
-        $('.searchIcon').removeClass('active');
-    });
-
-    // Notifications list items pulsate animation
-    $('.notifyList a').hover(
-        function() {
-            $(this).children('.pulse').addClass('pulsate');
-        },
-        function() {
-            $(this).children('.pulse').removeClass('pulsate');
-        }
-    );
-
-    // Exapnd left side navigation
-    var navExpanded = false;
-    $('.navHandler, .closeLeftSide').click(function() {
-        if(!navExpanded) {
-            $('.logo').addClass('expanded');
-            $('#leftSide').addClass('expanded');
-            if(windowWidth < 768) {
-                $('.closeLeftSide').show();
-            }
-            $('.hasSub').addClass('hasSubActive');
-            $('.leftNav').addClass('bigNav');
-            if(windowWidth > 767) {
-                $('.full').addClass('m-full');
-            }
-            windowResizeHandler();
-            navExpanded = true;
-        } else {
-            $('.logo').removeClass('expanded');
-            $('#leftSide').removeClass('expanded');
-            $('.closeLeftSide').hide();
-            $('.hasSub').removeClass('hasSubActive');
-            $('.bigNav').slimScroll({ destroy: true });
-            $('.leftNav').removeClass('bigNav');
-            $('.leftNav').css('overflow', 'visible');
-            $('.full').removeClass('m-full');
-            navExpanded = false;
-        }
-    });
-
-    // functionality for map manipulation icon on mobile devices
-    var listMapView = function(){
-        if ($('#mapView, #mapViewSearch').hasClass('mob-min') || 
-            $('#mapView, #mapViewSearch').hasClass('mob-max') || 
-            $('#content').hasClass('mob-min') || 
-            $('#content').hasClass('mob-max')) {
-                $('#mapView, #mapViewSearch').toggleClass('mob-max');
-                $('#content').toggleClass('mob-min');
-        } else {
-            $('#mapView, #mapViewSearch').toggleClass('min');
-            $('#content').toggleClass('max');
-        }
-        setTimeout(function() {
-            if (map) {
-                google.maps.event.trigger(map, 'resize');
-            }
-            map.setCenter(new google.maps.LatLng(lat, lng));
-
-        }, 300);
-    }
-
-    var listMapViewShow = function(){
-        if ($('#mapView').hasClass('mob-min') || 
-            $('#mapView').hasClass('mob-max') || 
-            $('#content').hasClass('mob-min') || 
-            $('#content').hasClass('mob-max')) {
-                $('#mapView').toggleClass('mob-max');
-                $('#content').toggleClass('mob-min');
-                $("#street_view_btn").toggleClass('hidden-xs')
-        } else {
-            $('#mapView').toggleClass('min');
-            $('#content').toggleClass('max');
-        }
-        setTimeout(function() {
-            if (map) {
-                google.maps.event.trigger(map, 'resize');
-            }
-            map.setCenter(new google.maps.LatLng(lat, lng));
-
-        }, 300);
-    }
-    
-    /* for show page view */
-    $('.listHandlerShow').click(function(){
-        $(this).hide();
-        $('.mapHandlerShow').show();
-        listMapViewShow();
-    })
-
-    $('.mapHandlerShow').click(function(){
-        $(this).hide();
-        $('.listHandlerShow').show();
-
-        listMapViewShow();
-    })
-    /* end show page */
-    
-    $('.listHandler').click(function(){
-        $(this).hide();
-        $('.mapHandler').show();
-        listMapView();
-    })
-    
-    $('.mapHandler').click(function() {
-        $(this).hide();
-        $('.listHandler').show();
-        listMapView();
-
-    });
-
-    // Expand left side sub navigation menus
-    $(document).on("click", '.hasSubActive', function() {
-        $(this).toggleClass('active');
-        $(this).children('ul').toggleClass('bigList');
-        $(this).children('a').children('.arrowRight').toggleClass('fa-angle-down');
-    });
-
-    if(isDevice) {
-        $('.hasSub').click(function() {
-            $('.leftNav ul li').not(this).removeClass('onTap');
-            $(this).toggleClass('onTap');
-        });
-    }
-
-    // functionality for custom dropdown select list
-    $('.dropdown-select li a').click(function() {
-        if (!($(this).parent().hasClass('disabled'))) {
-            $(this).prev().prop("checked", true);
-            $(this).parent().siblings().removeClass('active');
-            $(this).parent().addClass('active');
-            $(this).parent().parent().siblings('.dropdown-toggle').children('.dropdown-label').html($(this).text());
-        }
-    });
-
-    $('.priceSlider').slider({
-        range: true,
-        min: 0,
-        max: 2000000,
-        values: [500000, 1500000],
-        step: 10000,
-        slide: function(event, ui) {
-            $('.priceSlider .sliderTooltip .stLabel').html(
-                '$' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
-                ' <span class="fa fa-arrows-h"></span> ' +
-                '$' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-            );
-            var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-            var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-            var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-            $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
-        }
-    });
-    $('.priceSlider .sliderTooltip .stLabel').html(
-        '$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
-        ' <span class="fa fa-arrows-h"></span> ' +
-        '$' + $('.priceSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-    );
-    var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-    var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-    var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-    $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
-
-    $('.areaSlider').slider({
-        range: true,
-        min: 0,
-        max: 20000,
-        values: [5000, 10000],
-        step: 10,
-        slide: function(event, ui) {
-            $('.areaSlider .sliderTooltip .stLabel').html(
-                ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft' +
-                ' <span class="fa fa-arrows-h"></span> ' +
-                ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft'
-            );
-            var areaSliderRangeLeft = parseInt($('.areaSlider .ui-slider-range').css('left'));
-            var areaSliderRangeWidth = $('.areaSlider .ui-slider-range').width();
-            var areaSliderLeft = areaSliderRangeLeft + ( areaSliderRangeWidth / 2 ) - ( $('.areaSlider .sliderTooltip').width() / 2 );
-            $('.areaSlider .sliderTooltip').css('left', areaSliderLeft);
-        }
-    });
-    $('.areaSlider .sliderTooltip .stLabel').html(
-        $('.areaSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft' +
-        ' <span class="fa fa-arrows-h"></span> ' +
-        $('.areaSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft'
-    );
-    var areaSliderRangeLeft = parseInt($('.areaSlider .ui-slider-range').css('left'));
-    var areaSliderRangeWidth = $('.areaSlider .ui-slider-range').width();
-    var areaSliderLeft = areaSliderRangeLeft + ( areaSliderRangeWidth / 2 ) - ( $('.areaSlider .sliderTooltip').width() / 2 );
-    $('.areaSlider .sliderTooltip').css('left', areaSliderLeft);
-
-    $('.volume .btn-round-right').click(function() {
-        var currentVal = parseInt($(this).siblings('input').val());
-        if (currentVal < 10) {
-            $(this).siblings('input').val(currentVal + 1);
-        }
-    });
-    $('.volume .btn-round-left').click(function() {
-        var currentVal = parseInt($(this).siblings('input').val());
-        if (currentVal > 1) {
-            $(this).siblings('input').val(currentVal - 1);
-        }
-    });
-
-    $('.handleFilter').click(function() {
-        $('.filterForm').slideToggle(200);
-    });
-
-    //Enable swiping
-    $(".carousel-inner").swipe( {
-        swipeLeft:function(event, direction, distance, duration, fingerCount) {
-            $(this).parent().carousel('next'); 
-        },
-        swipeRight: function() {
-            $(this).parent().carousel('prev');
-        }
-    });
-
-    $(".carousel-inner .card").click(function() {
-        window.open($(this).attr('data-linkto'), '_self');
-    });
-
-    $('#content').scroll(function() {
-        if ($('.comments').length > 0) {
-            var visible = $('.comments').visible(true);
-            if (visible) {
-                $('.commentsFormWrapper').addClass('active');
-            } else {
-                $('.commentsFormWrapper').removeClass('active');
-            }
-        }
-    });
-
-    $('.btn').click(function() {
-        if ($(this).is('[data-toggle-class]')) {
-            $(this).toggleClass('active ' + $(this).attr('data-toggle-class'));
-        }
-    });
-
-    $('.tabsWidget .tab-scroll').slimScroll({
-        height: '235px',
-        size: '5px',
-        position: 'right',
-        color: '#939393',
-        alwaysVisible: false,
-        distance: '5px',
-        railVisible: false,
-        railColor: '#222',
-        railOpacity: 0.3,
-        wheelStep: 10,
-        allowPageScroll: true,
-        disableFadeOut: false
-    });
-
-    $('.progress-bar[data-toggle="tooltip"]').tooltip();
-    $('.tooltipsContainer .btn').tooltip();
-
-    $("#slider1").slider({
-        range: "min",
-        value: 50,
-        min: 1,
-        max: 100,
-        slide: repositionTooltip,
-        stop: repositionTooltip
-    });
-    $("#slider1 .ui-slider-handle:first").tooltip({ title: $("#slider1").slider("value"), trigger: "manual"}).tooltip("show");
-
-    $("#slider2").slider({
-        range: "max",
-        value: 70,
-        min: 1,
-        max: 100,
-        slide: repositionTooltip,
-        stop: repositionTooltip
-    });
-    $("#slider2 .ui-slider-handle:first").tooltip({ title: $("#slider2").slider("value"), trigger: "manual"}).tooltip("show");
-
-    $("#slider3").slider({
-        range: true,
-        min: 0,
-        max: 500,
-        values: [ 190, 350 ],
-        slide: repositionTooltip,
-        stop: repositionTooltip
-    });
-    $("#slider3 .ui-slider-handle:first").tooltip({ title: $("#slider3").slider("values", 0), trigger: "manual"}).tooltip("show");
-    $("#slider3 .ui-slider-handle:last").tooltip({ title: $("#slider3").slider("values", 1), trigger: "manual"}).tooltip("show");
-
-    $('#autocomplete').autocomplete({
-        source: ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"],
-        focus: function (event, ui) {
-            var label = ui.item.label;
-            var value = ui.item.value;
-            var me = $(this);
-            setTimeout(function() {
-                me.val(value);
-            }, 1);
-        }
-    });
-
-    $('#tags').tagsInput({
-        'height': 'auto',
-        'width': '100%',
-        'defaultText': 'Add a tag',
-    });
-
-    $('#datepicker').datepicker();
-
-    //clear text search
-    $('.clearSearchText').click(function(){
-        $("#apt-search-txt-searchpage").val('');
-    })
-
-})(jQuery);
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -18778,163 +18262,6 @@ b.bind("mouseup.slimscroll",function(a){y=!1;p();b.unbind(".slimscroll")});retur
 
 
 }).call(this);
-app.buildings = function() {
-  this._input = $('#buildings-search-txt');
-  this._initAutocomplete();
-};
-
-app.buildings.prototype = {
-  _initAutocomplete: function() {
-    this._input
-      .autocomplete({
-        source: '/buildings/contribute',
-        appendTo: '#buildings-search-results',
-        select: $.proxy(this._select, this),
-        response: $.proxy(this._response, this),
-        open: $.proxy(this._open, this)
-      })
-      .autocomplete('instance')._renderItem = $.proxy(this._render, this);
-  },
-
-  _open: function(event, ui) {
-    $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
-  },
-
-  _render: function(ul, item) {
-    $("#buildings-search-no-results").css('display','none');
-    building_name = ''
-    if(item.building_name == '' || item.building_name == undefined){
-      building_name = item.building_street_address;
-    }else{
-      building_name = item.building_name;
-    }
-    var markup = [
-      '<p class="address"><b>'+item.building_street_address+', '+item.city+', '+item.state+' '+item.zipcode+'</b></p><br/>',
-      '<small class="building_name">'+building_name+'</small>'
-    ];
-    
-    return $('<li>')
-      .append(markup.join(''))
-      .appendTo(ul);
-  },
-
-  _select: function(e, ui) {
-    $('#units-search-txt').val('');
-    
-    $("#new_unit_building").addClass('hide');
-    $("#search_item_form").find('#next_btn').removeClass('disabled')
-    
-    if($('.no-result-li').length == 1){
-      $('.no-result-li').remove();
-    }
-    $('#next_to_review_btn').remove();
-    
-    new app.units(ui.item.id);
-    
-    this._input.val(ui.item.building_street_address + ', ' + ui.item.city + ', ' + ui.item.state + ' ' + ui.item.zipcode);
-    
-    $('#zip').val(ui.item.zipcode)
-    
-    var unitContri = $("#unit_contribution").val();
-    
-    var contribution_for = $("#contribution").val();
-    
-    if(contribution_for == 'building_amenities'){
-      href = "/buildings/"+ui.item.id+"/edit";
-      $('#search_item_form').attr('action', href);
-    }
-
-    //Adding and removing next btn with next page link
-    if(contribution_for == 'unit_review' 
-      || contribution_for == 'unit_photos' 
-      || contribution_for == 'unit_amenities' 
-      || contribution_for == 'unit_price_history'){
-
-      if(!$('#next_btn').hasClass('hidden')){
-        $('#next_btn').addClass('hidden');
-      }
-    }
-    else{
-      if($('#next_btn').hasClass('hidden')){
-        $('#next_btn').removeClass('hidden');
-      }
-    }
-
-    if(unitContri == 'unit_review' 
-      || unitContri == 'unit_photos' 
-      || unitContri == 'unit_amenities' 
-      || unitContri == 'unit_price_history'){
-      
-      $("#new_unit_building #building_building_street_address").val(ui.item.building_street_address);
-      $('#new_unit_building #building_zipcode').val(ui.item.zipcode);
-      $("#new_unit_building #building_building_name").val(ui.item.building_name);
-      $(".unit-search").removeAttr('readonly');
-      if(!$("#unit_name").parent().parent().hasClass('hide')){
-        $("#unit_name").parent().parent().addClass('hide');
-      }
-    }
-    return false;
-  },
-
-  _response: function(event, ui){
-         
-    if(ui.content.length === 0){
-      var ul = $("#buildings-search-no-results");
-      var markup = [
-        '<p class="address"><b>Building Not Here?</b></p>',
-        'Contribute by<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> adding a new building</a>'
-      ];
-      
-      ul_li = $('<li class="ui-menu-item no-result-li">').append(markup.join(''));
-      ul.html(ul_li);
-      ul.css({'display': 'block','width': '555px','top': '36px','left': '15px'});
-      
-    }
-  }
-
-};
-app.apartments = function() {
-  this._input = $('#apt-search-txt, #apt-search-txt-searchpage');
-  this._initAutocomplete();
-};
-
-app.apartments.prototype = {
-  _initAutocomplete: function() {
-    this._input
-      .autocomplete({
-        source: '/search',
-        appendTo: '#apt-search-results',
-        select: $.proxy(this._select, this)
-      })
-      .autocomplete('instance')._renderItem = $.proxy(this._render, this);
-  },
-
-  _render: function(ul, item) {
-    if(item.search_term == undefined){
-      search_term = item.value
-    }
-    else{
-      search_term = item.search_term
-    }
-    var markup = [
-      '<p class="address"><b>' + search_term + '</b></p>'
-    ];
-    $('ul.ui-autocomplete').css('left','10');
-    return $('<li>')
-      .append(markup.join(''))
-      .appendTo(ul);
-  },
-
-  _select: function(e, ui) {
-    this._input.val(ui.item.search_term);
-    $("#term").val(ui.item.term);
-    $("#neighborhoods").val(ui.item.neighborhoods);
-    $("#apt-search-txt-form").val(ui.item.search_term);
-    $('#apt-search-form').find('.in_header').click();
-    return false;
-  }
-
-};
 
 /*
  *
@@ -20703,76 +20030,6 @@ app.apartments.prototype = {
   contentLoaded(window, Dropzone._autoDiscoverFunction);
 
 }).call(this);
-(function($) {
-  $.fn.rotateSlider = function(opt) {
-    var $this = this,
-        itemClass = opt.itemClass || 'rotateslider-item',
-        arrowClass = opt.arrowClass || 'js-rotateslider-arrow',
-        $item = $this.find('.' + itemClass),
-        $arrow = $this.find('.' + arrowClass),
-        itemCount = $item.length;
-
-
-    var defaultIndex = 0;
-    changeIndex(defaultIndex);
-    
-    $item.on('mouseenter', function(){
-      $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 1000});
-      if(!$(this).hasClass('now')){
-        $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(0.9, 0.6)','z-index': 0});
-      }
-    }).on('mouseleave', function(){
-      $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 1000});
-      if(!$(this).hasClass('now')){
-        $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(0.9, 0.6)','z-index': 0});
-      }
-    })
-
-    $arrow.on('click', function() {
-      var action = $(this).data('action'),
-        nowIndex = $item.index($this.find('.now'));
-        $item.attr('style', ''); // To remove style on next, prev click
-      if(action == 'next') {
-        if(nowIndex == itemCount - 1) {
-          changeIndex(0);
-        } else {
-          changeIndex(nowIndex + 1);
-        }
-      } else if (action == 'prev') {
-        if(nowIndex == 0) {
-          changeIndex(itemCount - 1);
-        } else {
-          changeIndex(nowIndex - 1);
-        }
-      }
-    });
-
-    function changeIndex (nowIndex) {
-      // clern all class
-      $this.find('.now').removeClass('now');
-      $this.find('.next').removeClass('next');
-      $this.find('.prev').removeClass('prev');
-      if(nowIndex == itemCount - 1){
-        $item.eq(0).addClass('next');
-      }
-      if(nowIndex == 0) {
-        $item.eq(itemCount - 1).addClass('prev');
-      }
-
-      $item.each(function(index) {
-        if(index == nowIndex) {
-          $item.eq(index).addClass('now');
-        }
-        if(index == nowIndex + 1 ) {
-          $item.eq(index).addClass('next');
-        }
-        if(index == nowIndex - 1 ) {
-          $item.eq(index).addClass('prev');
-        }
-      });
-    }
-  };
-})(jQuery);
 /*!
  * fancyBox - jQuery Plugin
  * version: 2.1.5 (Fri, 14 Jun 2013)
@@ -23284,33 +22541,6 @@ app.apartments.prototype = {
 
 
 
-$('.fancybox').fancybox({
-  padding: 0,
-  fitToView: true,
-  maxWidth: "100%",
-  modal: false,
-  helpers: {
-    buttons: {},
-    overlay: {
-      opacity: 0.5,  
-      css: {'background-color': '#111'} 
-    }  
-  },
-  // beforeShow: function () {
-  //   this.width = 1000;
-  //   this.height = 550;
-  // },
-  afterLoad: function(){
-    data = this.element.data()
-    name = data.imageable
-    var image_src = this.element.attr('href')
-    var description = "<div class='links hidden'> \
-                      <img src="+image_src+" class='overlay-image' />"+"<b>"+ name +"</b>"+"</div>"
-    $('.fancybox-overlay').append(description);
-  }
-  // nextEffect: 'fade',
-  // prevEffect: 'fade'
-});
 /*!
  * jQuery Raty - A Star Rating Plugin
  *
@@ -28844,6 +28074,1020 @@ $(document).on("page:change",function(){
     return _moment;
 
 }));
+(function() {
+  jQuery(function() {
+    $('.datepicker').datepicker({
+      format: 'mm-dd-yyyy'
+    });
+    $('.datepicker').on('changeDate', function(e) {
+      return $(this).datepicker('hide');
+    });
+    $('[data-toggle="popover"]').popover({
+      trigger: "click"
+    });
+    $('[data-toggle="tooltip"]').tooltip({
+      trigger: 'click'
+    });
+    $('input, textarea').placeholder();
+    $(document).on('click', '.left-side-zindex', function(e) {
+      var parentElem;
+      parentElem = $(this).parents().find('#leftSide');
+      if (parentElem.hasClass('expanded')) {
+        return parentElem.css('z-index', 999);
+      }
+    });
+    return window.setTimeout((function() {
+      return $('.alert').slideUp(300, function() {
+        return $(this).remove();
+      });
+    }), 1000);
+  });
+
+}).call(this);
+app.apartments = function() {
+  this._input = $('#apt-search-txt, #apt-search-txt-searchpage');
+  this._initAutocomplete();
+};
+
+app.apartments.prototype = {
+  _initAutocomplete: function() {
+    this._input
+      .autocomplete({
+        source: '/search',
+        appendTo: '#apt-search-results',
+        select: $.proxy(this._select, this)
+      })
+      .autocomplete('instance')._renderItem = $.proxy(this._render, this);
+  },
+
+  _render: function(ul, item) {
+    if(item.search_term == undefined){
+      search_term = item.value
+    }
+    else{
+      search_term = item.search_term
+    }
+    var markup = [
+      '<p class="address"><b>' + search_term + '</b></p>'
+    ];
+    $('ul.ui-autocomplete').css('left','10');
+    return $('<li>')
+      .append(markup.join(''))
+      .appendTo(ul);
+  },
+
+  _select: function(e, ui) {
+    this._input.val(ui.item.search_term);
+    $("#term").val(ui.item.term);
+    $("#neighborhoods").val(ui.item.neighborhoods);
+    $("#apt-search-txt-form").val(ui.item.search_term);
+    $('#apt-search-form').find('.in_header').click();
+    return false;
+  }
+
+};
+(function() {
+
+
+}).call(this);
+app.buildings = function() {
+  this._input = $('#buildings-search-txt');
+  this._initAutocomplete();
+};
+
+app.buildings.prototype = {
+  _initAutocomplete: function() {
+    this._input
+      .autocomplete({
+        source: '/buildings/contribute',
+        appendTo: '#buildings-search-results',
+        select: $.proxy(this._select, this),
+        response: $.proxy(this._response, this),
+        open: $.proxy(this._open, this)
+      })
+      .autocomplete('instance')._renderItem = $.proxy(this._render, this);
+  },
+
+  _open: function(event, ui) {
+    $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
+  },
+
+  _render: function(ul, item) {
+    $("#buildings-search-no-results").css('display','none');
+    building_name = ''
+    if(item.building_name == '' || item.building_name == undefined){
+      building_name = item.building_street_address;
+    }else{
+      building_name = item.building_name;
+    }
+    var markup = [
+      '<p class="address"><b>'+item.building_street_address+', '+item.city+', '+item.state+' '+item.zipcode+'</b></p><br/>',
+      '<small class="building_name">'+building_name+'</small>'
+    ];
+    
+    return $('<li>')
+      .append(markup.join(''))
+      .appendTo(ul);
+  },
+
+  _select: function(e, ui) {
+    $('#units-search-txt').val('');
+    
+    $("#new_unit_building").addClass('hide');
+    $("#search_item_form").find('#next_btn').removeClass('disabled')
+    
+    if($('.no-result-li').length == 1){
+      $('.no-result-li').remove();
+    }
+    $('#next_to_review_btn').remove();
+    
+    new app.units(ui.item.id);
+    
+    this._input.val(ui.item.building_street_address + ', ' + ui.item.city + ', ' + ui.item.state + ' ' + ui.item.zipcode);
+    
+    $('#zip').val(ui.item.zipcode)
+    
+    var unitContri = $("#unit_contribution").val();
+    
+    var contribution_for = $("#contribution").val();
+    
+    if(contribution_for == 'building_amenities'){
+      href = "/buildings/"+ui.item.id+"/edit";
+      $('#search_item_form').attr('action', href);
+    }
+
+    //Adding and removing next btn with next page link
+    if(contribution_for == 'unit_review' 
+      || contribution_for == 'unit_photos' 
+      || contribution_for == 'unit_amenities' 
+      || contribution_for == 'unit_price_history'){
+
+      if(!$('#next_btn').hasClass('hidden')){
+        $('#next_btn').addClass('hidden');
+      }
+    }
+    else{
+      if($('#next_btn').hasClass('hidden')){
+        $('#next_btn').removeClass('hidden');
+      }
+    }
+
+    if(unitContri == 'unit_review' 
+      || unitContri == 'unit_photos' 
+      || unitContri == 'unit_amenities' 
+      || unitContri == 'unit_price_history'){
+      
+      $("#new_unit_building #building_building_street_address").val(ui.item.building_street_address);
+      $('#new_unit_building #building_zipcode').val(ui.item.zipcode);
+      $("#new_unit_building #building_building_name").val(ui.item.building_name);
+      $(".unit-search").removeAttr('readonly');
+      if(!$("#unit_name").parent().parent().hasClass('hide')){
+        $("#unit_name").parent().parent().addClass('hide');
+      }
+    }
+    return false;
+  },
+
+  _response: function(event, ui){
+         
+    if(ui.content.length === 0){
+      var ul = $("#buildings-search-no-results");
+      var markup = [
+        '<p class="address"><b>Building Not Here?</b></p>',
+        'Contribute by<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> adding a new building</a>'
+      ];
+      
+      ul_li = $('<li class="ui-menu-item no-result-li">').append(markup.join(''));
+      ul.html(ul_li);
+      ul.css({'display': 'block','width': '555px','top': '36px','left': '15px'});
+      
+    }
+  }
+
+};
+$('.fancybox').fancybox({
+  padding: 0,
+  fitToView: true,
+  maxWidth: "100%",
+  modal: false,
+  helpers: {
+    buttons: {},
+    overlay: {
+      opacity: 0.5,  
+      css: {'background-color': '#111'} 
+    }  
+  },
+  // beforeShow: function () {
+  //   this.width = 1000;
+  //   this.height = 550;
+  // },
+  afterLoad: function(){
+    data = this.element.data()
+    name = data.imageable
+    var image_src = this.element.attr('href')
+    var description = "<div class='links hidden'> \
+                      <img src="+image_src+" class='overlay-image' />"+"<b>"+ name +"</b>"+"</div>"
+    $('.fancybox-overlay').append(description);
+  }
+  // nextEffect: 'fade',
+  // prevEffect: 'fade'
+});
+/*!
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2013
+ * bootstrap-fileinput
+ * For more JQuery Plugins visit http://plugins.krajee.com
+ */
+(function(e){var t="{preview}\n"+'<div class="input-group {class}">\n'+"   {caption}\n"+'   <div class="input-group-btn">\n'+"       {remove}\n"+"       {upload}\n"+"       {browse}\n"+"   </div>\n"+"</div>";var n="{preview}\n{remove}\n{upload}\n{browse}\n";var r='<div class="file-preview {class}">\n'+'   <div class="file-preview-status text-center text-success"></div>\n'+'   <div class="close fileinput-remove text-right">&times;</div>\n'+'   <div class="file-preview-thumbnails"></div>\n'+'   <div class="clearfix"></div>'+"</div>";var i='<div class="form-control file-caption {class}">\n'+'   <span class="glyphicon glyphicon-file"></span> <span class="file-caption-name"></span>\n'+"</div>";var s='<div id="{id}" class="modal fade">\n'+'  <div class="modal-dialog modal-lg">\n'+'    <div class="modal-content">\n'+'      <div class="modal-header">\n'+'        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n'+'        <h3 class="modal-title">Detailed Preview <small>{title}</small></h3>\n'+"      </div>\n"+'      <div class="modal-body">\n'+'        <textarea class="form-control" style="font-family:Monaco,Consolas,monospace; height: {height}px;" readonly>{body}</textarea>\n'+"      </div>\n"+"    </div>\n"+"  </div>\n"+"</div>\n";var o=function(t,n){return t===null||t===undefined||t==[]||t===""||n&&e.trim(t)===""};var u=function(e,t,n){return o(e)||o(e[t])?n:e[t]};var a=function(e,t){return typeof e!=="undefined"?e.match("image.*"):t.match(/\.(gif|png|jpe?g)$/i)};var f=function(e,t){return typeof e!=="undefined"?e.match("text.*"):t.match(/\.(txt|md|csv|htm|html|php|ini)$/i)};var l=function(){return Math.round((new Date).getTime()+Math.random()*100)};var c=function(r,i){this.$element=e(r);this.showCaption=i.showCaption;this.showPreview=i.showPreview;this.showRemove=i.showRemove;this.showUpload=i.showUpload;this.captionClass=i.captionClass;this.previewClass=i.previewClass;this.mainClass=i.mainClass;if(o(i.mainTemplate)){this.mainTemplate=this.showCaption?t:n}else{this.mainTemplate=i.mainTemplate}this.previewTemplate=this.showPreview?i.previewTemplate:"";this.captionTemplate=i.captionTemplate;this.browseLabel=i.browseLabel;this.browseIcon=i.browseIcon;this.browseClass=i.browseClass;this.removeLabel=i.removeLabel;this.removeIcon=i.removeIcon;this.removeClass=i.removeClass;this.uploadLabel=i.uploadLabel;this.uploadIcon=i.uploadIcon;this.uploadClass=i.uploadClass;this.uploadUrl=i.uploadUrl;this.msgLoading=i.msgLoading;this.msgProgress=i.msgProgress;this.msgSelected=i.msgSelected;this.previewFileType=i.previewFileType;this.wrapTextLength=i.wrapTextLength;this.wrapIndicator=i.wrapIndicator;this.isDisabled=this.$element.attr("disabled")||this.$element.attr("readonly");if(o(this.$element.attr("id"))){this.$element.attr("id",l())}this.$container=this.createContainer();this.$captionContainer=u(i,"elCaptionContainer",this.$container.find(".file-caption"));this.$caption=u(i,"elCaptionText",this.$container.find(".file-caption-name"));this.$previewContainer=u(i,"elPreviewContainer",this.$container.find(".file-preview"));this.$preview=u(i,"elPreviewImage",this.$container.find(".file-preview-thumbnails"));this.$previewStatus=u(i,"elPreviewStatus",this.$container.find(".file-preview-status"));this.$name=this.$element.attr("name")||i.name;this.$hidden=this.$container.find('input[type=hidden][name="'+this.$name+'"]');if(this.$hidden.length===0){this.$hidden=e('<input type="hidden" />');this.$container.prepend(this.$hidden)}this.original={preview:this.$preview.html(),hiddenVal:this.$hidden.val()};this.listen()};c.prototype={constructor:c,listen:function(){var t=this;t.$element.on("change",e.proxy(t.change,t));e(t.$element[0].form).on("reset",e.proxy(t.reset,t));t.$container.find(".fileinput-remove").on("click",e.proxy(t.clear,t))},trigger:function(e){var t=this;t.$element.trigger("click");e.preventDefault()},clear:function(e){var t=this;if(e){e.preventDefault()}t.$hidden.val("");t.$hidden.attr("name",t.name);t.$element.attr("name","");t.$element.val("");if(e!==false){t.$element.trigger("change");t.$element.trigger("fileclear")}t.$preview.html("");t.$caption.html("");t.$container.removeClass("file-input-new").addClass("file-input-new")},reset:function(e){var t=this;t.clear(false);t.$hidden.val(t.original.hiddenVal);t.$preview.html(t.original.preview);t.$container.find(".fileinput-filename").text("");t.$element.trigger("filereset")},change:function(e){var t=this;var n=t.$element,r=n.get(0).files,i=r?r.length:1,o=n.val().replace(/\\/g,"/").replace(/.*\//,""),u=t.$preview,c=t.$previewContainer,h=t.$previewStatus,p=t.msgLoading,d=t.msgProgress,v=t.msgSelected,m,g=t.previewFileType,y=parseInt(t.wrapTextLength),b=t.wrapIndicator;if(e.target.files===undefined){m=e.target&&e.target.value?[{name:e.target.value.replace(/^.+\\/,"")}]:[]}else{m=e.target.files}if(m.length===0){return}u.html("");var w=m.length,t=t;for(var E=0;E<w;E++){(function(e){var t=e.name;var n=a(e.type,e.name);var r=f(e.type,e.name);if(u.length>0&&(g=="any"?n||r:g=="text"?r:n)&&typeof FileReader!=="undefined"){var i=new FileReader;h.html(p);c.addClass("loading");i.onload=function(e){var n="",i="";if(r){var o=e.target.result;if(o.length>y){var a=l(),f=window.innerHeight*.75,i=s.replace("{id}",a).replace("{title}",t).replace("{body}",o).replace("{height}",f);b=b.replace("{title}",t).replace("{dialog}","$('#"+a+"').modal('show')");o=o.substring(0,y-1)+b}n='<div class="file-preview-frame"><div class="file-preview-text" title="'+t+'">'+o+"</div></div>"+i}else{n='<div class="file-preview-frame"><img src="'+e.target.result+'" class="file-preview-image" title="'+t+'" alt="'+t+'"></div>'}u.append("\n"+n);if(E>=w-1){c.removeClass("loading");h.html("")}};i.onprogress=function(t){if(t.lengthComputable){var n=parseInt(t.loaded/t.total*100,10);var r=d.replace("{percent}",n).replace("{file}",e.name);h.html(r)}};if(r){i.readAsText(e)}else{i.readAsDataURL(e)}}else{u.append("\n"+'<div class="file-preview-frame"><div class="file-preview-other"><h2><i class="glyphicon glyphicon-file"></i></h2>'+t+"</div></div>")}})(m[E])}var S=i>1?v.replace("{n}",i):o;t.$caption.html(S);t.$container.removeClass("file-input-new");n.trigger("fileselect",[i,o])},createContainer:function(){var t=this;var n=e(document.createElement("div")).attr({"class":"file-input file-input-new"}).html(t.renderMain());t.$element.before(n);n.find(".btn-file").append(t.$element);return n},renderMain:function(){var e=this;var t=e.previewTemplate.replace("{class}",e.previewClass);var n=e.isDisabled?e.captionClass+" file-caption-disabled":e.captionClass;var r=e.captionTemplate.replace("{class}",n);return e.mainTemplate.replace("{class}",e.mainClass).replace("{preview}",t).replace("{caption}",r).replace("{upload}",e.renderUpload()).replace("{remove}",e.renderRemove()).replace("{browse}",e.renderBrowse())},renderBrowse:function(){var e=this,t=e.browseClass+" btn-file",n="";if(e.isDisabled){n=" disabled "}return'<div class="'+t+'"'+n+"> "+e.browseIcon+e.browseLabel+" </div>"},renderRemove:function(){var e=this,t=e.removeClass+" fileinput-remove fileinput-remove-button",n="";if(!e.showRemove){return""}if(e.isDisabled){n=" disabled "}return'<button type="button" class="'+t+'"'+n+">"+e.removeIcon+e.removeLabel+"</button>"},renderUpload:function(){var e=this,t="",n="";if(!e.showUpload){return""}if(e.isDisabled){n=" disabled "}if(o(e.uploadUrl)){t='<button type="submit" class="'+e.uploadClass+'"'+n+">"+e.uploadIcon+e.uploadLabel+"</button>"}else{t='<a href="'+e.uploadUrl+'" class="'+e.uploadClass+'"'+n+">"+e.uploadIcon+e.uploadLabel+"</a>"}return t}};e.fn.fileinput=function(t){return this.each(function(){var n=e(this),r=n.data("fileinput");if(!r){n.data("fileinput",r=new c(this,t))}if(typeof t=="string"){r[t]()}})};e.fn.fileinput=function(t){var n=Array.apply(null,arguments);n.shift();return this.each(function(){var r=e(this),i=r.data("fileinput"),s=typeof t==="object"&&t;if(!i){r.data("fileinput",i=new c(this,e.extend({},e.fn.fileinput.defaults,s,e(this).data())))}if(typeof t==="string"){i[t].apply(i,n)}})};e.fn.fileinput.defaults={showCaption:true,showPreview:true,showRemove:true,showUpload:true,captionClass:"",previewClass:"",mainClass:"",mainTemplate:null,previewTemplate:r,captionTemplate:i,browseLabel:"Browse &hellip;",browseIcon:'<i class="glyphicon glyphicon-folder-open"></i> &nbsp;',browseClass:"btn btn-primary",removeLabel:"Remove",removeIcon:'<i class="glyphicon glyphicon-ban-circle"></i> ',removeClass:"btn btn-default",uploadLabel:"Upload",uploadIcon:'<i class="glyphicon glyphicon-upload"></i> ',uploadClass:"btn btn-default",uploadUrl:null,msgLoading:"Loading &hellip;",msgProgress:"Loaded {percent}% of {file}",msgSelected:"{n} files selected",previewFileType:"image",wrapTextLength:250,wrapIndicator:' <span class="wrap-indicator" title="{title}" onclick="{dialog}">[&hellip;]</span>',elCaptionContainer:null,elCaptionText:null,elPreviewContainer:null,elPreviewImage:null,elPreviewStatus:null};e(function(){var t=e("input.file[type=file]");if(t.length>0){t.fileinput()}})})(window.jQuery)
+;
+function createSidebarElem(json){
+  title = json.marker_title.split(',');
+  building_name = title[1];
+  address = title[2];
+  city = title[3];
+  state = title[4];
+  zipcode = title[5];
+
+  if(building_name == ' '){
+    building_name = address
+  }
+  return ("<h2>" + building_name + "</h2>" +
+  					"<div class='cardAddress'><span class='icon-location-pin'></span>"+ address+','+city+','+state+' '+zipcode +"</div>"
+          );
+};
+
+function bindElemToMarker(elem, marker){
+  elem.on('mouseover', function(){
+    marker.serviceObject.setIcon("/assets/green-dot-5e6775e65a5ce15a392cf5589aeec9d9940918b36837324d62394c281bbc8851.png");
+  }).on('mouseout', function(){
+    marker.serviceObject.setIcon("/assets/red-dot-6e85e9db33319a2df8e8c233d830282ce3c7795dd1d27841fffc7288622548d3.png")
+  })
+};
+
+function bindMarker(marker, markers, handler, lat, lng, zoom){
+  $(window).on('load', function(){
+    marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
+    marker.setMap(handler.getMap());
+    marker.panTo();
+    google.maps.event.trigger(marker.getServiceObject(), 'load');
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(zoom);
+    //handler.map.centerOn(markers[0]);
+  })
+};
+
+function createSidebar(json_array){
+  _.each(json_array, function(json){
+    var elem = $( createSidebarElem(json) );
+    var id = json.marker_title.split(',')[0]
+    elem.appendTo('#building_details'+id);
+    bindElemToMarker(elem, json.marker);
+  });
+};
+// jQuery(function() {
+//   return $.ajax({
+//     url: 'https://apis.google.com/js/client:plus.js?onload=gpAsyncInit',
+//     dataType: 'script',
+//     cache: true
+//   });
+// });
+
+// window.gpAsyncInit = function() {
+//   gapi.auth.authorize({
+//     immediate: true,
+//     response_type: 'code',
+//     cookie_policy: 'single_host_origin',
+//     client_id: '913993827153-msctm5mn0a3rf90l1h4u6nl3u4d0kkae.apps.googleusercontent.com',
+//     scope: 'email'
+//   }, function(response) {
+//     return;
+//   });
+//   $('.btn-google').click(function(e) {
+//     e.preventDefault();
+//     gapi.auth.authorize({
+//       immediate: false,
+//       response_type: 'code',
+//       cookie_policy: 'single_host_origin',
+//       client_id: '913993827153-msctm5mn0a3rf90l1h4u6nl3u4d0kkae.apps.googleusercontent.com',
+//       scope: 'email'
+//     }, function(response) {
+//       if (response && !response.error) {
+//         // google authentication succeed, now post data to server.
+//         jQuery.ajax({type: 'POST', url: "/users/auth/google_oauth2", data: response,
+//           success: function(data) {
+//             // response from server
+//             console.log(data)
+//           }
+//         });
+//       } else {
+//         // google authentication failed
+//         console.log('Failed!')
+//       }
+//     });
+//   });
+// };
+(function($) {
+    "use strict";
+
+    // var options = {
+    //         zoom : 14,
+    //         mapTypeId : 'Styled',
+    //         disableDefaultUI: true,
+    //         mapTypeControlOptions : {
+    //             mapTypeIds : [ 'Styled' ]
+    //         },
+    //         scrollwheel: false
+    //     };
+    // var styles = [{
+    //     stylers : [ {
+    //         hue : "#cccccc"
+    //     }, {
+    //         saturation : -100
+    //     }]
+    // }, {
+    //     featureType : "road",
+    //     elementType : "geometry",
+    //     stylers : [ {
+    //         lightness : 100
+    //     }, {
+    //         visibility : "simplified"
+    //     }]
+    // }, {
+    //     featureType : "road",
+    //     elementType : "labels",
+    //     stylers : [ {
+    //         visibility : "on"
+    //     }]
+    // }, {
+    //     featureType: "poi",
+    //     stylers: [ {
+    //         visibility: "off"
+    //     }]
+    // }];
+
+    // var markers = [];
+    // var props = [{
+    //     title : 'Modern Residence in New York',
+    //     image : '1-1-thmb.png',
+    //     type : 'For Sale',
+    //     price : '$1,550,000',
+    //     address : '39 Remsen St, Brooklyn, NY 11201, USA',
+    //     bedrooms : '3',
+    //     bathrooms : '2',
+    //     area : '3430 Sq Ft',
+    //     position : {
+    //         lat : 40.696047,
+    //         lng : -73.997159
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }, {
+    //     title : 'Hauntingly Beautiful Estate',
+    //     image : '2-1-thmb.png',
+    //     type : 'For Rent',
+    //     price : '$1,750,000',
+    //     address : '169 Warren St, Brooklyn, NY 11201, USA',
+    //     bedrooms : '2',
+    //     bathrooms : '2',
+    //     area : '4430 Sq Ft',
+    //     position : {
+    //         lat : 40.688042,
+    //         lng : -73.996472
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }, {
+    //     title : 'Sophisticated Residence',
+    //     image : '3-1-thmb.png',
+    //     type : 'For Sale',
+    //     price : '$1,340,000',
+    //     address : '38-62 Water St, Brooklyn, NY 11201, USA',
+    //     bedrooms : '2',
+    //     bathrooms : '3',
+    //     area : '2640 Sq Ft',
+    //     position : {
+    //         lat : 40.702620,
+    //         lng : -73.989682
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }, {
+    //     title : 'House With a Lovely Glass-Roofed Pergola',
+    //     image : '4-1-thmb.png',
+    //     type : 'For Sale',
+    //     price : '$1,930,000',
+    //     address : 'Wunsch Bldg, Brooklyn, NY 11201, USA',
+    //     bedrooms : '3',
+    //     bathrooms : '2',
+    //     area : '2800 Sq Ft',
+    //     position : {
+    //         lat : 40.694355,
+    //         lng : -73.985229
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }, {
+    //     title : 'Luxury Mansion',
+    //     image : '5-1-thmb.png',
+    //     type : 'For Rent',
+    //     price : '$2,350,000',
+    //     address : '95 Butler St, Brooklyn, NY 11231, USA',
+    //     bedrooms : '2',
+    //     bathrooms : '2',
+    //     area : '2750 Sq Ft',
+    //     position : {
+    //         lat : 40.686838,
+    //         lng : -73.990078
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }, {
+    //     title : 'Modern Residence in New York',
+    //     image : '1-1-thmb.png',
+    //     type : 'For Sale',
+    //     price : '$1,550,000',
+    //     address : '39 Remsen St, Brooklyn, NY 11201, USA',
+    //     bedrooms : '3',
+    //     bathrooms : '2',
+    //     area : '3430 Sq Ft',
+    //     position : {
+    //         lat : 40.703686,
+    //         lng : -73.982910
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }, {
+    //     title : 'Hauntingly Beautiful Estate',
+    //     image : '2-1-thmb.png',
+    //     type : 'For Rent',
+    //     price : '$1,750,000',
+    //     address : '169 Warren St, Brooklyn, NY 11201, USA',
+    //     bedrooms : '2',
+    //     bathrooms : '2',
+    //     area : '4430 Sq Ft',
+    //     position : {
+    //         lat : 40.702189,
+    //         lng : -73.995098
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }, {
+    //     title : 'Sophisticated Residence',
+    //     image : '3-1-thmb.png',
+    //     type : 'For Sale',
+    //     price : '$1,340,000',
+    //     address : '38-62 Water St, Brooklyn, NY 11201, USA',
+    //     bedrooms : '2',
+    //     bathrooms : '3',
+    //     area : '2640 Sq Ft',
+    //     position : {
+    //         lat : 40.687417,
+    //         lng : -73.982653
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }, {
+    //     title : 'House With a Lovely Glass-Roofed Pergola',
+    //     image : '4-1-thmb.png',
+    //     type : 'For Sale',
+    //     price : '$1,930,000',
+    //     address : 'Wunsch Bldg, Brooklyn, NY 11201, USA',
+    //     bedrooms : '3',
+    //     bathrooms : '2',
+    //     area : '2800 Sq Ft',
+    //     position : {
+    //         lat : 40.694120,
+    //         lng : -73.974413
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }, {
+    //     title : 'Luxury Mansion',
+    //     image : '5-1-thmb.png',
+    //     type : 'For Rent',
+    //     price : '$2,350,000',
+    //     address : '95 Butler St, Brooklyn, NY 11231, USA',
+    //     bedrooms : '2',
+    //     bathrooms : '2',
+    //     area : '2750 Sq Ft',
+    //     position : {
+    //         lat : 40.682665,
+    //         lng : -74.000934
+    //     },
+    //     markerIcon : "marker-green.png"
+    // }];
+
+    // var infobox = new InfoBox({
+    //     disableAutoPan: false,
+    //     maxWidth: 202,
+    //     pixelOffset: new google.maps.Size(-101, -285),
+    //     zIndex: null,
+    //     boxStyle: {
+    //         background: "url('assets/infobox-bg.png') no-repeat",
+    //         opacity: 1,
+    //         width: "202px",
+    //         height: "245px"
+    //     },
+    //     closeBoxMargin: "28px 26px 0px 0px",
+    //     closeBoxURL: "",
+    //     infoBoxClearance: new google.maps.Size(1, 1),
+    //     pane: "floatPane",
+    //     enableEventPropagation: false
+    // });
+
+    // var addMarkers = function(props, map) {
+    //     $.each(props, function(i,prop) {
+    //         var latlng = new google.maps.LatLng(prop.position.lat,prop.position.lng);
+    //         var marker = new google.maps.Marker({
+    //             position: latlng,
+    //             map: map,
+    //             icon: new google.maps.MarkerImage( 
+    //                 'assets/' + prop.markerIcon,
+    //                 null,
+    //                 null,
+    //                 // new google.maps.Point(0,0),
+    //                 null,
+    //                 new google.maps.Size(36, 36)
+    //             ),
+    //             draggable: false,
+    //             animation: google.maps.Animation.DROP,
+    //         });
+    //         var infoboxContent = '<div class="infoW">' +
+    //                                 '<div class="propImg">' +
+    //                                     '<img src="assets/prop/' + prop.image + '">' +
+    //                                     '<div class="propBg">' +
+    //                                         '<div class="propPrice">' + prop.price + '</div>' +
+    //                                         '<div class="propType">' + prop.type + '</div>' +
+    //                                     '</div>' +
+    //                                 '</div>' +
+    //                                 '<div class="paWrapper">' +
+    //                                     '<div class="propTitle">' + prop.title + '</div>' +
+    //                                     '<div class="propAddress">' + prop.address + '</div>' +
+    //                                 '</div>' +
+    //                                 '<div class="propRating">' +
+    //                                     '<span class="fa fa-star"></span>' +
+    //                                     '<span class="fa fa-star"></span>' +
+    //                                     '<span class="fa fa-star"></span>' +
+    //                                     '<span class="fa fa-star"></span>' +
+    //                                     '<span class="fa fa-star-o"></span>' +
+    //                                 '</div>' +
+    //                                 '<ul class="propFeat">' +
+    //                                     '<li><span class="fa fa-moon-o"></span> ' + prop.bedrooms + '</li>' +
+    //                                     '<li><span class="icon-drop"></span> ' + prop.bathrooms + '</li>' +
+    //                                     '<li><span class="icon-frame"></span> ' + prop.area + '</li>' +
+    //                                 '</ul>' +
+    //                                 '<div class="clearfix"></div>' +
+    //                                 '<div class="infoButtons">' +
+    //                                     '<a class="btn btn-sm btn-round btn-gray btn-o closeInfo">Close</a>' +
+    //                                     '<a href="single.html" class="btn btn-sm btn-round btn-green viewInfo">View</a>' +
+    //                                 '</div>' +
+    //                              '</div>';
+
+    //         google.maps.event.addListener(marker, 'click', (function(marker, i) {
+    //             return function() {
+    //                 infobox.setContent(infoboxContent);
+    //                 infobox.open(map, marker);
+    //             }
+    //         })(marker, i));
+
+    //         $(document).on('click', '.closeInfo', function() {
+    //             infobox.open(null,null);
+    //         });
+
+    //         markers.push(marker);
+    //     });
+    // }
+
+    // var map;
+
+    // setTimeout(function() {
+    //     $('body').removeClass('notransition');
+
+    //     if ($('#home-map').length > 0) {
+    //         map = new google.maps.Map(document.getElementById('home-map'), options);
+    //         var styledMapType = new google.maps.StyledMapType(styles, {
+    //             name : 'Styled'
+    //         });
+
+    //         map.mapTypes.set('Styled', styledMapType);
+    //         map.setCenter(new google.maps.LatLng(40.6984237,-73.9890044));
+    //         map.setZoom(14);
+
+    //         addMarkers(props, map);
+    //     }
+    // }, 300);
+
+    if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
+        $('body').addClass('no-touch');
+    }
+
+     $('.dropdown-select li a').click(function() {
+        if (!($(this).parent().hasClass('disabled'))) {
+            $(this).prev().prop("checked", true);
+            $(this).parent().siblings().removeClass('active');
+            $(this).parent().addClass('active');
+            $(this).parent().parent().siblings('.dropdown-toggle').children('.dropdown-label').html($(this).text());
+        }
+    });
+
+    // var cityOptions = {
+    //     types : [ '(cities)' ]
+    // };
+    // var city = document.getElementById('city');
+    // var cityAuto = new google.maps.places.Autocomplete(city, cityOptions);
+
+    $('#advanced').click(function() {
+        $('.adv').toggleClass('hidden-xs');
+    });
+
+    $('.home-navHandler').click(function() {
+        $('.home-nav').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+
+    //Enable swiping
+    $(".carousel-inner").swipe( {
+        swipeLeft:function(event, direction, distance, duration, fingerCount) {
+            $(this).parent().carousel('next'); 
+        },
+        swipeRight: function() {
+            $(this).parent().carousel('prev');
+        }
+    });
+
+    $('.modal-su').click(function() {
+        $('#signin').modal('hide');
+        $('#signup').modal('show');
+    });
+
+    $('.modal-si').click(function() {
+        $('#signup').modal('hide');
+        $('#signin').modal('show');
+    });
+
+})(jQuery);
+(function($) {
+  $.fn.rotateSlider = function(opt) {
+    var $this = this,
+        itemClass = opt.itemClass || 'rotateslider-item',
+        arrowClass = opt.arrowClass || 'js-rotateslider-arrow',
+        $item = $this.find('.' + itemClass),
+        $arrow = $this.find('.' + arrowClass),
+        itemCount = $item.length;
+
+
+    var defaultIndex = 0;
+    changeIndex(defaultIndex);
+    
+    $item.on('mouseenter', function(){
+      $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 1000});
+      if(!$(this).hasClass('now')){
+        $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(0.9, 0.6)','z-index': 0});
+      }
+    }).on('mouseleave', function(){
+      $item.filter('.now').css({'transform': 'translateY(-50%) translateX(-50%) scale(1.1, 0.7)', 'z-index': 1000});
+      if(!$(this).hasClass('now')){
+        $(this).css({'transform': 'translateY(-50%) translateX(-50%) scale(0.9, 0.6)','z-index': 0});
+      }
+    })
+
+    $arrow.on('click', function() {
+      var action = $(this).data('action'),
+        nowIndex = $item.index($this.find('.now'));
+        $item.attr('style', ''); // To remove style on next, prev click
+      if(action == 'next') {
+        if(nowIndex == itemCount - 1) {
+          changeIndex(0);
+        } else {
+          changeIndex(nowIndex + 1);
+        }
+      } else if (action == 'prev') {
+        if(nowIndex == 0) {
+          changeIndex(itemCount - 1);
+        } else {
+          changeIndex(nowIndex - 1);
+        }
+      }
+    });
+
+    function changeIndex (nowIndex) {
+      // clern all class
+      $this.find('.now').removeClass('now');
+      $this.find('.next').removeClass('next');
+      $this.find('.prev').removeClass('prev');
+      if(nowIndex == itemCount - 1){
+        $item.eq(0).addClass('next');
+      }
+      if(nowIndex == 0) {
+        $item.eq(itemCount - 1).addClass('prev');
+      }
+
+      $item.each(function(index) {
+        if(index == nowIndex) {
+          $item.eq(index).addClass('now');
+        }
+        if(index == nowIndex + 1 ) {
+          $item.eq(index).addClass('next');
+        }
+        if(index == nowIndex - 1 ) {
+          $item.eq(index).addClass('prev');
+        }
+      });
+    }
+  };
+})(jQuery);
+(function($){
+
+    /**
+     * Copyright 2012, Digital Fusion
+     * Licensed under the MIT license.
+     * http://teamdf.com/jquery-plugins/license/
+     *
+     * @author Sam Sehnert
+     * @desc A small plugin that checks whether elements are within
+     *       the user visible viewport of a web browser.
+     *       only accounts for vertical position, not horizontal.
+     */
+    $.fn.visible = function(partial){
+        
+        var $t              = $(this),
+            $w              = $(window),
+            viewTop         = $w.scrollTop() - 150,
+            viewBottom      = viewTop + $w.height(),
+            _top            = $t.offset().top,
+            _bottom         = _top + $t.height(),
+            compareTop      = partial === true ? _bottom : _top,
+            compareBottom   = partial === true ? _top : _bottom;
+        
+        return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
+    };
+    
+})(jQuery);
+(function() {
+
+
+}).call(this);
+(function() {
+  jQuery(function() {
+    $('#rental_price_history_residence_end_date').on('changeDate', function(e) {
+      var end_date, start_date;
+      start_date = $("#rental_price_history_residence_start_date").val();
+      end_date = $("#rental_price_history_residence_end_date").val();
+      if (Date.parse(start_date) > Date.parse(end_date)) {
+        $('.validation_error_message').removeClass('hidden');
+        return $("#rental_price_history_residence_end_date").val('');
+      } else {
+        return $('.validation_error_message').addClass('hidden');
+      }
+    });
+    return $('#rental_price_history_residence_start_date').on('changeDate', function(e) {
+      var end_date, start_date;
+      start_date = $("#rental_price_history_residence_start_date").val();
+      end_date = $("#rental_price_history_residence_end_date").val();
+      if (Date.parse(start_date) > Date.parse(end_date)) {
+        $('.start_validation_error_message').removeClass('hidden');
+        return $("#rental_price_history_residence_start_date").val('');
+      } else {
+        return $('.start_validation_error_message').addClass('hidden');
+      }
+    });
+  });
+
+}).call(this);
+var brooklyn_and_queens_neighborhoods_hash = [
+	{ key: 'Borough Park', 				url: 'https://www.dropbox.com/s/iu4ih0c0xag21p3/borough_park.kml?dl=1' },
+	{ key: 'Canarsie', 					url: 'https://www.dropbox.com/s/23ufopq3v4p1fie/canarsie.kml?dl=1' },
+	{ key: 'Flatlands', 				url: 'https://www.dropbox.com/s/dxwxqmhl84ohh4b/flatlands.kml?dl=1' },
+	{ key: 'Flatbush', 					url: 'https://www.dropbox.com/s/4ou6qumzl1fl7xa/flatlands.kml?dl=1' },
+	{ key: 'East New York', 			url: 'https://www.dropbox.com/s/l81v31jmlv6n67c/east_new_york.kml?dl=1' },
+	{ key: 'Greenpoint', 				url: 'https://www.dropbox.com/s/ayj6os0lrrq8bbv/greenpoint.kml?dl=1' },
+	{ key: 'Sunset Park', 				url: 'https://www.dropbox.com/s/t0yjbnvqqkbcswd/sunset_park.kml?dl=1' },
+	{ key: 'Bushwick', 					url: 'https://www.dropbox.com/s/nfl2c4boxadlwh0/bushwick.kml?dl=1' },
+	{ key: 'Williamsburg', 				url: 'https://www.dropbox.com/s/iji8ng3hjsxzram/williamsburg.kml?dl=1' },
+	{ key: 'Jamaica', 					url: 'https://www.dropbox.com/s/9sp6snzk64lhxpn/jamica.kml?dl=1'},
+	{ key: 'Rockaways', 				url: 'https://www.dropbox.com/s/sgiyzb9s6t4j4hq/rockaways.kml?dl=1'},
+	{ key: 'Bedford-Stuyvesant', 		url: 'https://www.dropbox.com/s/yabx4ou89sowaas/bedford.kml?dl=1'},
+	{ key: 'Crown Heights', 			url: 'https://www.dropbox.com/s/irgob4ie8dqecfh/crown_heights.kml?dl=1'},
+	{ key: 'Park Slope', 				url: 'https://www.dropbox.com/s/xx23k5f37tsaevq/slop_park.kml?dl=1'},
+	{ key: 'Clinton Hill', 				url: 'https://www.dropbox.com/s/leaq54qo7dnfd6d/clinton_hill.kml?dl=1'},
+	{ key: 'Downtown Brooklyn', 		url: 'https://www.dropbox.com/s/4poh1z6gdxdv0vi/downtown_brooklyn.kml?dl=1'},
+	{ key: 'Prospect Lefferts Gardens', url: 'https://www.dropbox.com/s/l4i37qkeoiu4y3b/plg.kml?dl=1'},
+	{ key: 'Brooklyn Heights', 			url: 'https://www.dropbox.com/s/c1hr7mhyouztvm2/brooklyn_heights.kml?dl=1'},
+	{ key: 'Fort Greene', 				url: 'https://www.dropbox.com/s/civeisfgflbya3d/fort_greene.kml?dl=1'},
+	{ key: 'Bay Ridge', 				url: 'https://www.dropbox.com/s/a3yn7euxrd3z2ub/bay_ridge.kml?dl=1'},
+	{ key: 'Prospect Heights', 			url: 'https://www.dropbox.com/s/0do2re0swjgt782/prospect_heights.kml?dl=1'},
+	{ key: 'Carroll Gardens', 			url: 'https://www.dropbox.com/s/huj4rtrxpkdeb4h/carroll_garden.kml?dl=1'},
+	{ key: 'East Flatbush', 			url: 'https://www.dropbox.com/s/b5nln8oqpchoshd/east_flatbush.kml?dl=1'},
+	{ key: 'Sheepshead Bay', 			url: 'https://www.dropbox.com/s/arysngqj1pc6sdq/sheepshead_bay.kml?dl=1'},
+	{ key: 'Flatbush - Ditmas Park', 	url: 'https://www.dropbox.com/s/46isyxw5x1a7kv0/flatbush2.kml?dl=1'},
+	{ key: 'Ditmas Park', 				url: 'https://www.dropbox.com/s/9oibl4vu84i0ii3/flatbush2.kml?dl=1'},
+	{ key: 'Boerum Hill',				url: 'https://www.dropbox.com/s/r0tj5b0wussf4nj/boerum_hill.kml?dl=1'},
+	{ key: 'DUMBO',						url: 'https://www.dropbox.com/s/igdrzymwwm5esq0/dumbo.kml?dl=1'},
+	{ key: 'Dumbo',						url: 'https://www.dropbox.com/s/igdrzymwwm5esq0/dumbo.kml?dl=1'},
+	{ key: 'Kensington',				url: 'https://www.dropbox.com/s/y8a8ugp3aq1l6f2/kensington.kml?dl=1'},
+	{ key: 'Cobble Hill',				url: 'https://www.dropbox.com/s/3e3s19wcfh9mnwv/cobble_hill.kml?dl=1'},
+	{ key: 'Prospect Park South',		url: 'https://www.dropbox.com/s/eitchhzx3bqvie0/prospect_park_south.kml?dl=1'},
+	{ key: 'Windsor Terrace',			url: 'https://www.dropbox.com/s/7i2m8ieccpc9us1/windsor_terrace.kml?dl=1'},
+	{ key: 'Gowanus',					url: 'https://www.dropbox.com/s/yrml1u2h9hvfgpf/gowanus.kml?dl=1'},
+	{ key: 'Greenwood',					url: 'https://www.dropbox.com/s/dy78d8lm5r33bqs/greenwood.kml?dl=1'},
+	{ key: 'Midwood', 					url: 'https://www.dropbox.com/s/wv036dqmx09ejcd/midwood.kml?dl=1'},
+	{ key: 'Astoria', 					url: 'https://www.dropbox.com/s/25zs1vea5o4akfn/astoria.kml?dl=1'},
+	{ key: 'Long Island City', 			url: 'https://www.dropbox.com/s/klybj3i5kj73a7j/long_island_city.kml?dl=1'},
+	{ key: 'Forest Hills', 				url: 'https://www.dropbox.com/s/791dsjnweb836ms/forest_hill.kml?dl=1'},
+	{ key: 'Sunnyside', 				url: 'https://www.dropbox.com/s/01wrtxd7a5ca2k5/sunnyside.kml?dl=1'},
+	{ key: 'Ridgewood', 				url: 'https://www.dropbox.com/s/pz8ox4d4wjbsex3/ridgewood.kml?dl=1'},
+	{ key: 'Rego Park', 				url: 'https://www.dropbox.com/s/bkb5c14qds94jh4/rego_park.kml?dl=1'},
+	{ key: 'Kew Gardens', 				url: 'https://www.dropbox.com/s/siu61nwc8m32bo3/kew_garden.kml?dl=1'},
+	{ key: 'Flushing', 					url: 'https://www.dropbox.com/s/u4c9se83vzij9c0/flushing.kml?dl=1'},
+	{ key: 'Woodside', 					url: 'https://www.dropbox.com/s/kq9p6o4hrfohw32/woodside.kml?dl=1'},
+	{ key: 'Jackson Heights', 			url: 'https://www.dropbox.com/s/8zk62hfkfxyapdm/jackson_heights.kml?dl=1'},
+	{ key: 'Elmhurst', 					url: 'https://www.dropbox.com/s/ks2lrjd1idhrag3/elmhurst.kml?dl=1'}
+]
+
+var brooklyn_and_queens_zipcodes_hash = [
+	{ key: '11201', 				url: 'https://www.dropbox.com/s/wjscg7dfog7aofw/11201.kml?dl=1' },
+	{ key: '11203', 				url: 'https://www.dropbox.com/s/kqrmva4cwie82qd/11203.kml?dl=1' },
+	{ key: '11204', 				url: 'https://www.dropbox.com/s/558eqzsg272ba1o/11204.kml?dl=1' },
+	{ key: '11205', 				url: 'https://www.dropbox.com/s/fogolx59289jla2/11205.kml?dl=1' },
+	{ key: '11206', 				url: 'https://www.dropbox.com/s/nysqkpsvz3uwvch/11206.kml?dl=1' },
+	{ key: '11207', 				url: 'https://www.dropbox.com/s/uu1kgc0kbrezt13/11207.kml?dl=1' },
+	{ key: '11208', 				url: 'https://www.dropbox.com/s/rl5v7rysosjfj06/11208.kml?dl=1' },
+	{ key: '11209', 				url: 'https://www.dropbox.com/s/a812udy3cps2dfm/11209.kml?dl=1' },
+	{ key: '11210', 				url: 'https://www.dropbox.com/s/2bgnlgvjp0ayu1b/11210.kml?dl=1' },
+	{ key: '11211', 				url: 'https://www.dropbox.com/s/kslkmvm4i07ma1a/11211.kml?dl=1'	},
+	{ key: '11212', 				url: 'https://www.dropbox.com/s/iyr31ea63x3o8tp/11212.kml?dl=1' },
+	{ key: '11213', 				url: 'https://www.dropbox.com/s/qtfz6orct8er4j1/11213.kml?dl=1'	},
+	{ key: '11214', 				url: 'https://www.dropbox.com/s/n9mkyv7qfr3zqu9/11214.kml?dl=1'	},
+	{ key: '11215', 				url: 'https://www.dropbox.com/s/iefzrml1dfolkna/11215.kml?dl=1'	},
+	{ key: '11216', 				url: 'https://www.dropbox.com/s/tnuakupto09yot3/11216.kml?dl=1'	},
+	{ key: '11217', 				url: 'https://www.dropbox.com/s/u6oo9h6513olqv5/11217.kml?dl=1'	},
+	{ key: '11218', 				url: 'https://www.dropbox.com/s/slglbc0n72j6fqr/11218.kml?dl=1'	},
+	{ key: '11219', 				url: 'https://www.dropbox.com/s/0451r66edy63qoz/11219.kml?dl=1' },
+	{ key: '11220', 				url: 'https://www.dropbox.com/s/r643n86kbr3mo97/11220.kml?dl=1' },
+	{ key: '11221', 				url: 'https://www.dropbox.com/s/wnmv0noi0ude441/11221.kml?dl=1' },
+	{ key: '11222', 				url: 'https://www.dropbox.com/s/80vuo3bjwh8neic/11222.kml?dl=1' },
+	{ key: '11223', 				url: 'https://www.dropbox.com/s/gdve4amdezvs7pm/11223.kml?dl=1' },
+	{ key: '11224', 				url: 'https://www.dropbox.com/s/9x2o595ghgppy2n/11224.kml?dl=1' },
+	{ key: '11225', 				url: 'https://www.dropbox.com/s/8vkvtn559m2l5ei/11225.kml?dl=1' },
+	{ key: '11226', 				url: 'https://www.dropbox.com/s/dhvyeim8rurlcux/11226.kml?dl=1' },
+	{ key: '11228',					url: 'https://www.dropbox.com/s/med4fon0z1vzriu/11228.kml?dl=1' },
+	{ key: '11229',					url: 'https://www.dropbox.com/s/t7x0rwxeql0vm4w/11229.kml?dl=1' },
+	{ key: '11230',					url: 'https://www.dropbox.com/s/sn3po0fl3zfwm7r/11230.kml?dl=1' },
+	{ key: '11231',					url: 'https://www.dropbox.com/s/fro9egbd1gmqx75/11231.kml?dl=1'	},
+	{ key: '11232',					url: 'https://www.dropbox.com/s/qdprt44j52eaw3f/11232.kml?dl=1'	},
+	{ key: '11233',					url: 'https://www.dropbox.com/s/ui9aufr3ufh7zme/11233.kml?dl=1' },
+	{ key: '11234',					url: 'https://www.dropbox.com/s/gb0pi3cugi7mfbo/11234.kml?dl=1' },
+	{ key: '11235',					url: 'https://www.dropbox.com/s/dc9co0fhk1jmblw/11235.kml?dl=1' },
+	{ key: '11236',					url: 'https://www.dropbox.com/s/nq280d57ya15a7l/11236.kml?dl=1' },
+	{ key: '11237', 				url: 'https://www.dropbox.com/s/uy8ml7a8usu1udd/11237.kml?dl=1' },
+	{ key: '11238', 				url: 'https://www.dropbox.com/s/27t4xx65liu5kxl/11238.kml?dl=1' },
+	{ key: '11239', 				url: 'https://www.dropbox.com/s/ij9wf01j63xop5k/11239.kml?dl=1' },
+	{ key: '11004', 				url: 'https://www.dropbox.com/s/tuxynwlyai35x1n/11004.kml?dl=1' },
+	{ key: '11005', 				url: 'https://www.dropbox.com/s/a5qp7l519dk0uy6/11005.kml?dl=1' },
+	{ key: '11101', 				url: 'https://www.dropbox.com/s/j4q2z52tmhh79r1/11101.kml?dl=1' },
+	{ key: '11102', 				url: 'https://www.dropbox.com/s/9fkwgh83v61ur6o/11102.kml?dl=1' },
+	{ key: '11103', 				url: 'https://www.dropbox.com/s/0rb6tkg6dctidq3/11103.kml?dl=1' },
+	{ key: '11104', 				url: 'https://www.dropbox.com/s/kx8ecd0bm8uq6pn/11104.kml?dl=1' },
+	{ key: '11105', 				url: 'https://www.dropbox.com/s/669n0d70thzmky5/11105.kml?dl=1' },
+	{ key: '11106', 				url: 'https://www.dropbox.com/s/l7k66tmr968hhg8/11106.kml?dl=1' },
+	{ key: '11354', 				url: 'https://www.dropbox.com/s/6l0tu8u8llo44vl/11354.kml?dl=1' },
+	{ key: '11355', 				url: 'https://www.dropbox.com/s/yb1h1az2mpuklcd/11355.kml?dl=1' },
+	{ key: '11356', 				url: 'https://www.dropbox.com/s/vqtuzbr681zskn0/11356.kml?dl=1' },
+	{ key: '11357', 				url: 'https://www.dropbox.com/s/jg5qwljdhdmxbeh/11357.kml?dl=1' },
+	{ key: '11358', 				url: 'https://www.dropbox.com/s/rodl63quswwo50o/11358.kml?dl=1' },
+	{ key: '11359', 				url: 'https://www.dropbox.com/s/z6cjsk1oqlostoc/11359.kml?dl=1' },
+	{ key: '11360', 				url: 'https://www.dropbox.com/s/yinw1tqir8cwl6h/11360.kml?dl=1' },
+	{ key: '11361', 				url: 'https://www.dropbox.com/s/4dzta7qzp4zf1gz/11361.kml?dl=1' },
+	{ key: '11362', 				url: 'https://www.dropbox.com/s/8h10zv20i01oap8/11362.kml?dl=1' },
+	{ key: '11363', 				url: 'https://www.dropbox.com/s/v4ce7hs5ljhqumb/11363.kml?dl=1' },
+	{ key: '11364', 				url: 'https://www.dropbox.com/s/eikmtuvpb4xwq91/11364.kml?dl=1' },
+	{ key: '11365', 				url: 'https://www.dropbox.com/s/lfsfykdmlrljpqq/11365.kml?dl=1' },
+	{ key: '11366', 				url: 'https://www.dropbox.com/s/lbb97615bsgac9m/11366.kml?dl=1' },
+	{ key: '11367', 				url: 'https://www.dropbox.com/s/la41gyrrgqtuzeu/11367.kml?dl=1' },
+	{ key: '11368', 				url: 'https://www.dropbox.com/s/u5g7zk6weturyvd/11368.kml?dl=1' },
+	{ key: '11369', 				url: 'https://www.dropbox.com/s/dpf91g3hbhrytdt/11369.kml?dl=1' },
+	{ key: '11370', 				url: 'https://www.dropbox.com/s/o1jijvcq5tqzc7n/11370.kml?dl=1' },
+	{ key: '11372', 				url: 'https://www.dropbox.com/s/cl6lfjw3arm58ji/11372.kml?dl=1' },
+	{ key: '11373', 				url: 'https://www.dropbox.com/s/gvtgbfx1d82dlve/11373.kml?dl=1' },
+	{ key: '11374', 				url: 'https://www.dropbox.com/s/ett5l200cfoeyp5/11374.kml?dl=1' },
+	{ key: '11375', 				url: 'https://www.dropbox.com/s/49m885d2ww5rn8n/11375.kml?dl=1' },
+	{ key: '11377', 				url: 'https://www.dropbox.com/s/ype6gdqbp94e8z9/11377.kml?dl=1' },
+	{ key: '11378', 				url: 'https://www.dropbox.com/s/b1ko849vxpjcuqt/11378.kml?dl=1' },
+	{ key: '11379', 				url: 'https://www.dropbox.com/s/p76oxli3udcyj73/11379.kml?dl=1' },
+	{ key: '11385', 				url: 'https://www.dropbox.com/s/guc3rzm9x9yp8k0/11385.kml?dl=1' },
+	{ key: '11691', 				url: 'https://www.dropbox.com/s/gfdfwlz0wwp60eg/11691.kml?dl=1' },
+	{ key: '11692', 				url: 'https://www.dropbox.com/s/p47c6ddnxwrfgk9/11692.kml?dl=1' },
+	{ key: '11693', 				url: 'https://www.dropbox.com/s/k9xinhrajtk33l9/11693.kml?dl=1' },
+	{ key: '11694', 				url: 'https://www.dropbox.com/s/518vkfajzjiqoui/11694.kml?dl=1' },
+	{ key: '11695', 				url: 'https://www.dropbox.com/s/gkxpe4zcp1p2qu7/11695.kml?dl=1' },
+	{ key: '11697', 				url: 'https://www.dropbox.com/s/093ynlia9iugj1g/11697.kml?dl=1' },
+	{ key: '11411', 				url: 'https://www.dropbox.com/s/rptwxpskx6dla71/11411.kml?dl=1' },
+	{ key: '11412', 				url: 'https://www.dropbox.com/s/rzmbbvdv1iib2mo/11412.kml?dl=1' },
+	{ key: '11413', 				url: 'https://www.dropbox.com/s/jsd0yjf0klam1pm/11413.kml?dl=1' },
+	{ key: '11414', 				url: 'https://www.dropbox.com/s/b3whannxq632gys/11414.kml?dl=1' },
+	{ key: '11415', 				url: 'https://www.dropbox.com/s/3903e1gsh54ujpi/11415.kml?dl=1' },
+	{ key: '11416', 				url: 'https://www.dropbox.com/s/lmebivez9zf74q4/11416.kml?dl=1' },
+	{ key: '11417', 				url: 'https://www.dropbox.com/s/q2vju31awb4ltij/11417.kml?dl=1' },
+	{ key: '11418', 				url: 'https://www.dropbox.com/s/iqnufeo9fl9m2v8/11418.kml?dl=1' },
+	{ key: '11419', 				url: 'https://www.dropbox.com/s/ncgjfkq0dojg00d/11419.kml?dl=1' },
+	{ key: '11420', 				url: 'https://www.dropbox.com/s/q2b8ocpnn6eibvk/11420.kml?dl=1' },
+	{ key: '11421', 				url: 'https://www.dropbox.com/s/zrmvsso8sk4w3b2/11421.kml?dl=1' },
+	{ key: '11422', 				url: 'https://www.dropbox.com/s/g01gm1hro0f87rm/11422.kml?dl=1' },
+	{ key: '11423', 				url: 'https://www.dropbox.com/s/w0y2maf9qyd36yl/11423.kml?dl=1' },
+	{ key: '11426',					url: 'https://www.dropbox.com/s/8h5gl9ce5l26zpf/11426.kml?dl=1' },
+	{ key: '11427', 				url: 'https://www.dropbox.com/s/nyxlilj4jkajz7g/11427.kml?dl=1' },
+	{ key: '11428', 				url: 'https://www.dropbox.com/s/xr6ul7bezchfypb/11428.kml?dl=1' },
+	{ key: '11429', 				url: 'https://www.dropbox.com/s/ct99b7pb9lqzpno/11429.kml?dl=1' },
+	{ key: '11432', 				url: 'https://www.dropbox.com/s/bwzg2uz4fw3xup8/11432.kml?dl=1' },
+	{ key: '11433', 				url: 'https://www.dropbox.com/s/6k62qspojcrfpq4/11433.kml?dl=1' },
+	{ key: '11434', 				url: 'https://www.dropbox.com/s/za8q0g2637waxis/11434.kml?dl=1' },
+	{ key: '11435', 				url: 'https://www.dropbox.com/s/cdkdepq82fx49s3/11435.kml?dl=1' },
+	{ key: '11436', 				url: 'https://www.dropbox.com/s/spst4jlynx0rxe0/11436.kml?dl=1' }
+]
+
+var manhattan_neightborhoods_hash = [
+	{ key: 'Midtown', 				url: 'https://www.dropbox.com/s/6dslyuv4hc4nz5k/midtown.kml?dl=1' },
+	{ key: 'Sutton Place', 			url: 'https://www.dropbox.com/s/z67m9imvezwtx4k/sutton_place.kml?dl=1' }
+]
+
+
+
+//Methods
+
+function brooklyn_and_queens_neighborhoods(term){
+	
+	url = '';
+
+	$.each(manhattan_neightborhoods_hash, function(index, value ) {
+	  if(term == value.key){
+			url = value.url;
+		}
+	});
+	
+	if(url == '' || url == undefined){
+		$.each(brooklyn_and_queens_neighborhoods_hash, function(index, value ) {
+		  if(term == value.key){
+				url = value.url;
+			}
+		});
+	}
+
+	if(url == '' || url == undefined){
+		term = term.split(' - ')[0]
+		$.each(brooklyn_and_queens_zipcodes_hash, function(index, value ) {
+		  if(term == value.key){
+				url = value.url;
+			}
+		});
+	}
+	
+	add_kml(url)
+}
+
+function add_kml(url){
+	var kmls = handler.addKml(
+			{ url: url }
+		);
+}
+;
+function displayMap(hash){
+	handler = Gmaps.build('Google');
+	handler.buildMap({ provider: {}, internal: { id: 'mapView' } }, function(){
+	    markers = handler.addMarkers(hash);
+	    handler.bounds.extendWith(markers);
+	    handler.fitMapToBounds();
+	    handler.getMap().setZoom(14);
+	});
+	//google.maps.event.trigger(handler, 'load');
+}
+;
+(function($) {
+    "use strict";
+
+    setTimeout(function() {
+        $('body').removeClass('notransition');
+    }, 300);
+
+    if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
+        $('body').addClass('no-touch');
+    }
+
+    $('#signin').modal({
+        backdrop: 'static',
+        keyboard: false
+    }).modal('show');
+
+})(jQuery);
+(function($) {
+    "use strict";
+
+    setTimeout(function() {
+        $('body').removeClass('notransition');
+    }, 300);
+
+    if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
+        $('body').addClass('no-touch');
+    }
+
+    $('#signup').modal({
+        backdrop: 'static',
+        keyboard: false
+    }).modal('show');
+
+    //$('input, textarea').placeholder();
+
+})(jQuery);
 /**
  * Swiper 3.4.2
  * Most modern mobile touch slider and framework with hardware accelerated transitions
@@ -33535,768 +33779,6 @@ else if (typeof define === 'function' && define.amd) {
 //# sourceMappingURL=maps/swiper.jquery.js.map
 ;
 (function() {
-  jQuery(function() {
-    $('.datepicker').datepicker({
-      format: 'mm-dd-yyyy'
-    });
-    $('.datepicker').on('changeDate', function(e) {
-      return $(this).datepicker('hide');
-    });
-    $('[data-toggle="popover"]').popover({
-      container: 'body',
-      trigger: "click"
-    });
-    $('[data-toggle="tooltip"]').tooltip({
-      container: 'body',
-      trigger: 'click'
-    });
-    $('input, textarea').placeholder();
-    $(document).on('click', '.left-side-zindex', function(e) {
-      var parentElem;
-      parentElem = $(this).parents().find('#leftSide');
-      if (parentElem.hasClass('expanded')) {
-        return parentElem.css('z-index', 999);
-      }
-    });
-    return window.setTimeout((function() {
-      return $('.alert').slideUp(300, function() {
-        return $(this).remove();
-      });
-    }), 1000);
-  });
-
-}).call(this);
-(function() {
-
-
-}).call(this);
-/*!
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2013
- * bootstrap-fileinput
- * For more JQuery Plugins visit http://plugins.krajee.com
- */
-(function(e){var t="{preview}\n"+'<div class="input-group {class}">\n'+"   {caption}\n"+'   <div class="input-group-btn">\n'+"       {remove}\n"+"       {upload}\n"+"       {browse}\n"+"   </div>\n"+"</div>";var n="{preview}\n{remove}\n{upload}\n{browse}\n";var r='<div class="file-preview {class}">\n'+'   <div class="file-preview-status text-center text-success"></div>\n'+'   <div class="close fileinput-remove text-right">&times;</div>\n'+'   <div class="file-preview-thumbnails"></div>\n'+'   <div class="clearfix"></div>'+"</div>";var i='<div class="form-control file-caption {class}">\n'+'   <span class="glyphicon glyphicon-file"></span> <span class="file-caption-name"></span>\n'+"</div>";var s='<div id="{id}" class="modal fade">\n'+'  <div class="modal-dialog modal-lg">\n'+'    <div class="modal-content">\n'+'      <div class="modal-header">\n'+'        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n'+'        <h3 class="modal-title">Detailed Preview <small>{title}</small></h3>\n'+"      </div>\n"+'      <div class="modal-body">\n'+'        <textarea class="form-control" style="font-family:Monaco,Consolas,monospace; height: {height}px;" readonly>{body}</textarea>\n'+"      </div>\n"+"    </div>\n"+"  </div>\n"+"</div>\n";var o=function(t,n){return t===null||t===undefined||t==[]||t===""||n&&e.trim(t)===""};var u=function(e,t,n){return o(e)||o(e[t])?n:e[t]};var a=function(e,t){return typeof e!=="undefined"?e.match("image.*"):t.match(/\.(gif|png|jpe?g)$/i)};var f=function(e,t){return typeof e!=="undefined"?e.match("text.*"):t.match(/\.(txt|md|csv|htm|html|php|ini)$/i)};var l=function(){return Math.round((new Date).getTime()+Math.random()*100)};var c=function(r,i){this.$element=e(r);this.showCaption=i.showCaption;this.showPreview=i.showPreview;this.showRemove=i.showRemove;this.showUpload=i.showUpload;this.captionClass=i.captionClass;this.previewClass=i.previewClass;this.mainClass=i.mainClass;if(o(i.mainTemplate)){this.mainTemplate=this.showCaption?t:n}else{this.mainTemplate=i.mainTemplate}this.previewTemplate=this.showPreview?i.previewTemplate:"";this.captionTemplate=i.captionTemplate;this.browseLabel=i.browseLabel;this.browseIcon=i.browseIcon;this.browseClass=i.browseClass;this.removeLabel=i.removeLabel;this.removeIcon=i.removeIcon;this.removeClass=i.removeClass;this.uploadLabel=i.uploadLabel;this.uploadIcon=i.uploadIcon;this.uploadClass=i.uploadClass;this.uploadUrl=i.uploadUrl;this.msgLoading=i.msgLoading;this.msgProgress=i.msgProgress;this.msgSelected=i.msgSelected;this.previewFileType=i.previewFileType;this.wrapTextLength=i.wrapTextLength;this.wrapIndicator=i.wrapIndicator;this.isDisabled=this.$element.attr("disabled")||this.$element.attr("readonly");if(o(this.$element.attr("id"))){this.$element.attr("id",l())}this.$container=this.createContainer();this.$captionContainer=u(i,"elCaptionContainer",this.$container.find(".file-caption"));this.$caption=u(i,"elCaptionText",this.$container.find(".file-caption-name"));this.$previewContainer=u(i,"elPreviewContainer",this.$container.find(".file-preview"));this.$preview=u(i,"elPreviewImage",this.$container.find(".file-preview-thumbnails"));this.$previewStatus=u(i,"elPreviewStatus",this.$container.find(".file-preview-status"));this.$name=this.$element.attr("name")||i.name;this.$hidden=this.$container.find('input[type=hidden][name="'+this.$name+'"]');if(this.$hidden.length===0){this.$hidden=e('<input type="hidden" />');this.$container.prepend(this.$hidden)}this.original={preview:this.$preview.html(),hiddenVal:this.$hidden.val()};this.listen()};c.prototype={constructor:c,listen:function(){var t=this;t.$element.on("change",e.proxy(t.change,t));e(t.$element[0].form).on("reset",e.proxy(t.reset,t));t.$container.find(".fileinput-remove").on("click",e.proxy(t.clear,t))},trigger:function(e){var t=this;t.$element.trigger("click");e.preventDefault()},clear:function(e){var t=this;if(e){e.preventDefault()}t.$hidden.val("");t.$hidden.attr("name",t.name);t.$element.attr("name","");t.$element.val("");if(e!==false){t.$element.trigger("change");t.$element.trigger("fileclear")}t.$preview.html("");t.$caption.html("");t.$container.removeClass("file-input-new").addClass("file-input-new")},reset:function(e){var t=this;t.clear(false);t.$hidden.val(t.original.hiddenVal);t.$preview.html(t.original.preview);t.$container.find(".fileinput-filename").text("");t.$element.trigger("filereset")},change:function(e){var t=this;var n=t.$element,r=n.get(0).files,i=r?r.length:1,o=n.val().replace(/\\/g,"/").replace(/.*\//,""),u=t.$preview,c=t.$previewContainer,h=t.$previewStatus,p=t.msgLoading,d=t.msgProgress,v=t.msgSelected,m,g=t.previewFileType,y=parseInt(t.wrapTextLength),b=t.wrapIndicator;if(e.target.files===undefined){m=e.target&&e.target.value?[{name:e.target.value.replace(/^.+\\/,"")}]:[]}else{m=e.target.files}if(m.length===0){return}u.html("");var w=m.length,t=t;for(var E=0;E<w;E++){(function(e){var t=e.name;var n=a(e.type,e.name);var r=f(e.type,e.name);if(u.length>0&&(g=="any"?n||r:g=="text"?r:n)&&typeof FileReader!=="undefined"){var i=new FileReader;h.html(p);c.addClass("loading");i.onload=function(e){var n="",i="";if(r){var o=e.target.result;if(o.length>y){var a=l(),f=window.innerHeight*.75,i=s.replace("{id}",a).replace("{title}",t).replace("{body}",o).replace("{height}",f);b=b.replace("{title}",t).replace("{dialog}","$('#"+a+"').modal('show')");o=o.substring(0,y-1)+b}n='<div class="file-preview-frame"><div class="file-preview-text" title="'+t+'">'+o+"</div></div>"+i}else{n='<div class="file-preview-frame"><img src="'+e.target.result+'" class="file-preview-image" title="'+t+'" alt="'+t+'"></div>'}u.append("\n"+n);if(E>=w-1){c.removeClass("loading");h.html("")}};i.onprogress=function(t){if(t.lengthComputable){var n=parseInt(t.loaded/t.total*100,10);var r=d.replace("{percent}",n).replace("{file}",e.name);h.html(r)}};if(r){i.readAsText(e)}else{i.readAsDataURL(e)}}else{u.append("\n"+'<div class="file-preview-frame"><div class="file-preview-other"><h2><i class="glyphicon glyphicon-file"></i></h2>'+t+"</div></div>")}})(m[E])}var S=i>1?v.replace("{n}",i):o;t.$caption.html(S);t.$container.removeClass("file-input-new");n.trigger("fileselect",[i,o])},createContainer:function(){var t=this;var n=e(document.createElement("div")).attr({"class":"file-input file-input-new"}).html(t.renderMain());t.$element.before(n);n.find(".btn-file").append(t.$element);return n},renderMain:function(){var e=this;var t=e.previewTemplate.replace("{class}",e.previewClass);var n=e.isDisabled?e.captionClass+" file-caption-disabled":e.captionClass;var r=e.captionTemplate.replace("{class}",n);return e.mainTemplate.replace("{class}",e.mainClass).replace("{preview}",t).replace("{caption}",r).replace("{upload}",e.renderUpload()).replace("{remove}",e.renderRemove()).replace("{browse}",e.renderBrowse())},renderBrowse:function(){var e=this,t=e.browseClass+" btn-file",n="";if(e.isDisabled){n=" disabled "}return'<div class="'+t+'"'+n+"> "+e.browseIcon+e.browseLabel+" </div>"},renderRemove:function(){var e=this,t=e.removeClass+" fileinput-remove fileinput-remove-button",n="";if(!e.showRemove){return""}if(e.isDisabled){n=" disabled "}return'<button type="button" class="'+t+'"'+n+">"+e.removeIcon+e.removeLabel+"</button>"},renderUpload:function(){var e=this,t="",n="";if(!e.showUpload){return""}if(e.isDisabled){n=" disabled "}if(o(e.uploadUrl)){t='<button type="submit" class="'+e.uploadClass+'"'+n+">"+e.uploadIcon+e.uploadLabel+"</button>"}else{t='<a href="'+e.uploadUrl+'" class="'+e.uploadClass+'"'+n+">"+e.uploadIcon+e.uploadLabel+"</a>"}return t}};e.fn.fileinput=function(t){return this.each(function(){var n=e(this),r=n.data("fileinput");if(!r){n.data("fileinput",r=new c(this,t))}if(typeof t=="string"){r[t]()}})};e.fn.fileinput=function(t){var n=Array.apply(null,arguments);n.shift();return this.each(function(){var r=e(this),i=r.data("fileinput"),s=typeof t==="object"&&t;if(!i){r.data("fileinput",i=new c(this,e.extend({},e.fn.fileinput.defaults,s,e(this).data())))}if(typeof t==="string"){i[t].apply(i,n)}})};e.fn.fileinput.defaults={showCaption:true,showPreview:true,showRemove:true,showUpload:true,captionClass:"",previewClass:"",mainClass:"",mainTemplate:null,previewTemplate:r,captionTemplate:i,browseLabel:"Browse &hellip;",browseIcon:'<i class="glyphicon glyphicon-folder-open"></i> &nbsp;',browseClass:"btn btn-primary",removeLabel:"Remove",removeIcon:'<i class="glyphicon glyphicon-ban-circle"></i> ',removeClass:"btn btn-default",uploadLabel:"Upload",uploadIcon:'<i class="glyphicon glyphicon-upload"></i> ',uploadClass:"btn btn-default",uploadUrl:null,msgLoading:"Loading &hellip;",msgProgress:"Loaded {percent}% of {file}",msgSelected:"{n} files selected",previewFileType:"image",wrapTextLength:250,wrapIndicator:' <span class="wrap-indicator" title="{title}" onclick="{dialog}">[&hellip;]</span>',elCaptionContainer:null,elCaptionText:null,elPreviewContainer:null,elPreviewImage:null,elPreviewStatus:null};e(function(){var t=e("input.file[type=file]");if(t.length>0){t.fileinput()}})})(window.jQuery)
-;
-function createSidebarElem(json){
-  title = json.marker_title.split(',');
-  building_name = title[1];
-  address = title[2];
-  city = title[3];
-  state = title[4];
-  zipcode = title[5];
-
-  if(building_name == ' '){
-    building_name = address
-  }
-  return ("<h2>" + building_name + "</h2>" +
-  					"<div class='cardAddress'><span class='icon-location-pin'></span>"+ address+','+city+','+state+' '+zipcode +"</div>"
-          );
-};
-
-function bindElemToMarker(elem, marker){
-  elem.on('mouseover', function(){
-    marker.serviceObject.setIcon("/assets/green-dot-5e6775e65a5ce15a392cf5589aeec9d9940918b36837324d62394c281bbc8851.png");
-  }).on('mouseout', function(){
-    marker.serviceObject.setIcon("/assets/red-dot-6e85e9db33319a2df8e8c233d830282ce3c7795dd1d27841fffc7288622548d3.png")
-  })
-};
-
-function bindMarker(marker, markers, handler, lat, lng, zoom){
-  $(window).on('load', function(){
-    marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
-    marker.setMap(handler.getMap());
-    marker.panTo();
-    google.maps.event.trigger(marker.getServiceObject(), 'load');
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    handler.getMap().setZoom(zoom);
-    //handler.map.centerOn(markers[0]);
-  })
-};
-
-function createSidebar(json_array){
-  _.each(json_array, function(json){
-    var elem = $( createSidebarElem(json) );
-    var id = json.marker_title.split(',')[0]
-    elem.appendTo('#building_details'+id);
-    bindElemToMarker(elem, json.marker);
-  });
-};
-// jQuery(function() {
-//   return $.ajax({
-//     url: 'https://apis.google.com/js/client:plus.js?onload=gpAsyncInit',
-//     dataType: 'script',
-//     cache: true
-//   });
-// });
-
-// window.gpAsyncInit = function() {
-//   gapi.auth.authorize({
-//     immediate: true,
-//     response_type: 'code',
-//     cookie_policy: 'single_host_origin',
-//     client_id: '913993827153-msctm5mn0a3rf90l1h4u6nl3u4d0kkae.apps.googleusercontent.com',
-//     scope: 'email'
-//   }, function(response) {
-//     return;
-//   });
-//   $('.btn-google').click(function(e) {
-//     e.preventDefault();
-//     gapi.auth.authorize({
-//       immediate: false,
-//       response_type: 'code',
-//       cookie_policy: 'single_host_origin',
-//       client_id: '913993827153-msctm5mn0a3rf90l1h4u6nl3u4d0kkae.apps.googleusercontent.com',
-//       scope: 'email'
-//     }, function(response) {
-//       if (response && !response.error) {
-//         // google authentication succeed, now post data to server.
-//         jQuery.ajax({type: 'POST', url: "/users/auth/google_oauth2", data: response,
-//           success: function(data) {
-//             // response from server
-//             console.log(data)
-//           }
-//         });
-//       } else {
-//         // google authentication failed
-//         console.log('Failed!')
-//       }
-//     });
-//   });
-// };
-(function($) {
-    "use strict";
-
-    // var options = {
-    //         zoom : 14,
-    //         mapTypeId : 'Styled',
-    //         disableDefaultUI: true,
-    //         mapTypeControlOptions : {
-    //             mapTypeIds : [ 'Styled' ]
-    //         },
-    //         scrollwheel: false
-    //     };
-    // var styles = [{
-    //     stylers : [ {
-    //         hue : "#cccccc"
-    //     }, {
-    //         saturation : -100
-    //     }]
-    // }, {
-    //     featureType : "road",
-    //     elementType : "geometry",
-    //     stylers : [ {
-    //         lightness : 100
-    //     }, {
-    //         visibility : "simplified"
-    //     }]
-    // }, {
-    //     featureType : "road",
-    //     elementType : "labels",
-    //     stylers : [ {
-    //         visibility : "on"
-    //     }]
-    // }, {
-    //     featureType: "poi",
-    //     stylers: [ {
-    //         visibility: "off"
-    //     }]
-    // }];
-
-    // var markers = [];
-    // var props = [{
-    //     title : 'Modern Residence in New York',
-    //     image : '1-1-thmb.png',
-    //     type : 'For Sale',
-    //     price : '$1,550,000',
-    //     address : '39 Remsen St, Brooklyn, NY 11201, USA',
-    //     bedrooms : '3',
-    //     bathrooms : '2',
-    //     area : '3430 Sq Ft',
-    //     position : {
-    //         lat : 40.696047,
-    //         lng : -73.997159
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }, {
-    //     title : 'Hauntingly Beautiful Estate',
-    //     image : '2-1-thmb.png',
-    //     type : 'For Rent',
-    //     price : '$1,750,000',
-    //     address : '169 Warren St, Brooklyn, NY 11201, USA',
-    //     bedrooms : '2',
-    //     bathrooms : '2',
-    //     area : '4430 Sq Ft',
-    //     position : {
-    //         lat : 40.688042,
-    //         lng : -73.996472
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }, {
-    //     title : 'Sophisticated Residence',
-    //     image : '3-1-thmb.png',
-    //     type : 'For Sale',
-    //     price : '$1,340,000',
-    //     address : '38-62 Water St, Brooklyn, NY 11201, USA',
-    //     bedrooms : '2',
-    //     bathrooms : '3',
-    //     area : '2640 Sq Ft',
-    //     position : {
-    //         lat : 40.702620,
-    //         lng : -73.989682
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }, {
-    //     title : 'House With a Lovely Glass-Roofed Pergola',
-    //     image : '4-1-thmb.png',
-    //     type : 'For Sale',
-    //     price : '$1,930,000',
-    //     address : 'Wunsch Bldg, Brooklyn, NY 11201, USA',
-    //     bedrooms : '3',
-    //     bathrooms : '2',
-    //     area : '2800 Sq Ft',
-    //     position : {
-    //         lat : 40.694355,
-    //         lng : -73.985229
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }, {
-    //     title : 'Luxury Mansion',
-    //     image : '5-1-thmb.png',
-    //     type : 'For Rent',
-    //     price : '$2,350,000',
-    //     address : '95 Butler St, Brooklyn, NY 11231, USA',
-    //     bedrooms : '2',
-    //     bathrooms : '2',
-    //     area : '2750 Sq Ft',
-    //     position : {
-    //         lat : 40.686838,
-    //         lng : -73.990078
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }, {
-    //     title : 'Modern Residence in New York',
-    //     image : '1-1-thmb.png',
-    //     type : 'For Sale',
-    //     price : '$1,550,000',
-    //     address : '39 Remsen St, Brooklyn, NY 11201, USA',
-    //     bedrooms : '3',
-    //     bathrooms : '2',
-    //     area : '3430 Sq Ft',
-    //     position : {
-    //         lat : 40.703686,
-    //         lng : -73.982910
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }, {
-    //     title : 'Hauntingly Beautiful Estate',
-    //     image : '2-1-thmb.png',
-    //     type : 'For Rent',
-    //     price : '$1,750,000',
-    //     address : '169 Warren St, Brooklyn, NY 11201, USA',
-    //     bedrooms : '2',
-    //     bathrooms : '2',
-    //     area : '4430 Sq Ft',
-    //     position : {
-    //         lat : 40.702189,
-    //         lng : -73.995098
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }, {
-    //     title : 'Sophisticated Residence',
-    //     image : '3-1-thmb.png',
-    //     type : 'For Sale',
-    //     price : '$1,340,000',
-    //     address : '38-62 Water St, Brooklyn, NY 11201, USA',
-    //     bedrooms : '2',
-    //     bathrooms : '3',
-    //     area : '2640 Sq Ft',
-    //     position : {
-    //         lat : 40.687417,
-    //         lng : -73.982653
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }, {
-    //     title : 'House With a Lovely Glass-Roofed Pergola',
-    //     image : '4-1-thmb.png',
-    //     type : 'For Sale',
-    //     price : '$1,930,000',
-    //     address : 'Wunsch Bldg, Brooklyn, NY 11201, USA',
-    //     bedrooms : '3',
-    //     bathrooms : '2',
-    //     area : '2800 Sq Ft',
-    //     position : {
-    //         lat : 40.694120,
-    //         lng : -73.974413
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }, {
-    //     title : 'Luxury Mansion',
-    //     image : '5-1-thmb.png',
-    //     type : 'For Rent',
-    //     price : '$2,350,000',
-    //     address : '95 Butler St, Brooklyn, NY 11231, USA',
-    //     bedrooms : '2',
-    //     bathrooms : '2',
-    //     area : '2750 Sq Ft',
-    //     position : {
-    //         lat : 40.682665,
-    //         lng : -74.000934
-    //     },
-    //     markerIcon : "marker-green.png"
-    // }];
-
-    // var infobox = new InfoBox({
-    //     disableAutoPan: false,
-    //     maxWidth: 202,
-    //     pixelOffset: new google.maps.Size(-101, -285),
-    //     zIndex: null,
-    //     boxStyle: {
-    //         background: "url('assets/infobox-bg.png') no-repeat",
-    //         opacity: 1,
-    //         width: "202px",
-    //         height: "245px"
-    //     },
-    //     closeBoxMargin: "28px 26px 0px 0px",
-    //     closeBoxURL: "",
-    //     infoBoxClearance: new google.maps.Size(1, 1),
-    //     pane: "floatPane",
-    //     enableEventPropagation: false
-    // });
-
-    // var addMarkers = function(props, map) {
-    //     $.each(props, function(i,prop) {
-    //         var latlng = new google.maps.LatLng(prop.position.lat,prop.position.lng);
-    //         var marker = new google.maps.Marker({
-    //             position: latlng,
-    //             map: map,
-    //             icon: new google.maps.MarkerImage( 
-    //                 'assets/' + prop.markerIcon,
-    //                 null,
-    //                 null,
-    //                 // new google.maps.Point(0,0),
-    //                 null,
-    //                 new google.maps.Size(36, 36)
-    //             ),
-    //             draggable: false,
-    //             animation: google.maps.Animation.DROP,
-    //         });
-    //         var infoboxContent = '<div class="infoW">' +
-    //                                 '<div class="propImg">' +
-    //                                     '<img src="assets/prop/' + prop.image + '">' +
-    //                                     '<div class="propBg">' +
-    //                                         '<div class="propPrice">' + prop.price + '</div>' +
-    //                                         '<div class="propType">' + prop.type + '</div>' +
-    //                                     '</div>' +
-    //                                 '</div>' +
-    //                                 '<div class="paWrapper">' +
-    //                                     '<div class="propTitle">' + prop.title + '</div>' +
-    //                                     '<div class="propAddress">' + prop.address + '</div>' +
-    //                                 '</div>' +
-    //                                 '<div class="propRating">' +
-    //                                     '<span class="fa fa-star"></span>' +
-    //                                     '<span class="fa fa-star"></span>' +
-    //                                     '<span class="fa fa-star"></span>' +
-    //                                     '<span class="fa fa-star"></span>' +
-    //                                     '<span class="fa fa-star-o"></span>' +
-    //                                 '</div>' +
-    //                                 '<ul class="propFeat">' +
-    //                                     '<li><span class="fa fa-moon-o"></span> ' + prop.bedrooms + '</li>' +
-    //                                     '<li><span class="icon-drop"></span> ' + prop.bathrooms + '</li>' +
-    //                                     '<li><span class="icon-frame"></span> ' + prop.area + '</li>' +
-    //                                 '</ul>' +
-    //                                 '<div class="clearfix"></div>' +
-    //                                 '<div class="infoButtons">' +
-    //                                     '<a class="btn btn-sm btn-round btn-gray btn-o closeInfo">Close</a>' +
-    //                                     '<a href="single.html" class="btn btn-sm btn-round btn-green viewInfo">View</a>' +
-    //                                 '</div>' +
-    //                              '</div>';
-
-    //         google.maps.event.addListener(marker, 'click', (function(marker, i) {
-    //             return function() {
-    //                 infobox.setContent(infoboxContent);
-    //                 infobox.open(map, marker);
-    //             }
-    //         })(marker, i));
-
-    //         $(document).on('click', '.closeInfo', function() {
-    //             infobox.open(null,null);
-    //         });
-
-    //         markers.push(marker);
-    //     });
-    // }
-
-    // var map;
-
-    // setTimeout(function() {
-    //     $('body').removeClass('notransition');
-
-    //     if ($('#home-map').length > 0) {
-    //         map = new google.maps.Map(document.getElementById('home-map'), options);
-    //         var styledMapType = new google.maps.StyledMapType(styles, {
-    //             name : 'Styled'
-    //         });
-
-    //         map.mapTypes.set('Styled', styledMapType);
-    //         map.setCenter(new google.maps.LatLng(40.6984237,-73.9890044));
-    //         map.setZoom(14);
-
-    //         addMarkers(props, map);
-    //     }
-    // }, 300);
-
-    if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
-        $('body').addClass('no-touch');
-    }
-
-     $('.dropdown-select li a').click(function() {
-        if (!($(this).parent().hasClass('disabled'))) {
-            $(this).prev().prop("checked", true);
-            $(this).parent().siblings().removeClass('active');
-            $(this).parent().addClass('active');
-            $(this).parent().parent().siblings('.dropdown-toggle').children('.dropdown-label').html($(this).text());
-        }
-    });
-
-    // var cityOptions = {
-    //     types : [ '(cities)' ]
-    // };
-    // var city = document.getElementById('city');
-    // var cityAuto = new google.maps.places.Autocomplete(city, cityOptions);
-
-    $('#advanced').click(function() {
-        $('.adv').toggleClass('hidden-xs');
-    });
-
-    $('.home-navHandler').click(function() {
-        $('.home-nav').toggleClass('active');
-        $(this).toggleClass('active');
-    });
-
-    //Enable swiping
-    $(".carousel-inner").swipe( {
-        swipeLeft:function(event, direction, distance, duration, fingerCount) {
-            $(this).parent().carousel('next'); 
-        },
-        swipeRight: function() {
-            $(this).parent().carousel('prev');
-        }
-    });
-
-    $('.modal-su').click(function() {
-        $('#signin').modal('hide');
-        $('#signup').modal('show');
-    });
-
-    $('.modal-si').click(function() {
-        $('#signup').modal('hide');
-        $('#signin').modal('show');
-    });
-
-})(jQuery);
-(function($){
-
-    /**
-     * Copyright 2012, Digital Fusion
-     * Licensed under the MIT license.
-     * http://teamdf.com/jquery-plugins/license/
-     *
-     * @author Sam Sehnert
-     * @desc A small plugin that checks whether elements are within
-     *       the user visible viewport of a web browser.
-     *       only accounts for vertical position, not horizontal.
-     */
-    $.fn.visible = function(partial){
-        
-        var $t              = $(this),
-            $w              = $(window),
-            viewTop         = $w.scrollTop() - 150,
-            viewBottom      = viewTop + $w.height(),
-            _top            = $t.offset().top,
-            _bottom         = _top + $t.height(),
-            compareTop      = partial === true ? _bottom : _top,
-            compareBottom   = partial === true ? _top : _bottom;
-        
-        return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
-    };
-    
-})(jQuery);
-(function() {
-
-
-}).call(this);
-(function() {
-  jQuery(function() {
-    $('#rental_price_history_residence_end_date').on('changeDate', function(e) {
-      var end_date, start_date;
-      start_date = $("#rental_price_history_residence_start_date").val();
-      end_date = $("#rental_price_history_residence_end_date").val();
-      if (Date.parse(start_date) > Date.parse(end_date)) {
-        $('.validation_error_message').removeClass('hidden');
-        return $("#rental_price_history_residence_end_date").val('');
-      } else {
-        return $('.validation_error_message').addClass('hidden');
-      }
-    });
-    return $('#rental_price_history_residence_start_date').on('changeDate', function(e) {
-      var end_date, start_date;
-      start_date = $("#rental_price_history_residence_start_date").val();
-      end_date = $("#rental_price_history_residence_end_date").val();
-      if (Date.parse(start_date) > Date.parse(end_date)) {
-        $('.start_validation_error_message').removeClass('hidden');
-        return $("#rental_price_history_residence_start_date").val('');
-      } else {
-        return $('.start_validation_error_message').addClass('hidden');
-      }
-    });
-  });
-
-}).call(this);
-var brooklyn_and_queens_neighborhoods_hash = [
-	{ key: 'Borough Park', 				url: 'https://www.dropbox.com/s/iu4ih0c0xag21p3/borough_park.kml?dl=1' },
-	{ key: 'Canarsie', 					url: 'https://www.dropbox.com/s/23ufopq3v4p1fie/canarsie.kml?dl=1' },
-	{ key: 'Flatlands', 				url: 'https://www.dropbox.com/s/dxwxqmhl84ohh4b/flatlands.kml?dl=1' },
-	{ key: 'Flatbush', 					url: 'https://www.dropbox.com/s/4ou6qumzl1fl7xa/flatlands.kml?dl=1' },
-	{ key: 'East New York', 			url: 'https://www.dropbox.com/s/l81v31jmlv6n67c/east_new_york.kml?dl=1' },
-	{ key: 'Greenpoint', 				url: 'https://www.dropbox.com/s/ayj6os0lrrq8bbv/greenpoint.kml?dl=1' },
-	{ key: 'Sunset Park', 				url: 'https://www.dropbox.com/s/t0yjbnvqqkbcswd/sunset_park.kml?dl=1' },
-	{ key: 'Bushwick', 					url: 'https://www.dropbox.com/s/nfl2c4boxadlwh0/bushwick.kml?dl=1' },
-	{ key: 'Williamsburg', 				url: 'https://www.dropbox.com/s/iji8ng3hjsxzram/williamsburg.kml?dl=1' },
-	{ key: 'Jamaica', 					url: 'https://www.dropbox.com/s/9sp6snzk64lhxpn/jamica.kml?dl=1'},
-	{ key: 'Rockaways', 				url: 'https://www.dropbox.com/s/sgiyzb9s6t4j4hq/rockaways.kml?dl=1'},
-	{ key: 'Bedford-Stuyvesant', 		url: 'https://www.dropbox.com/s/yabx4ou89sowaas/bedford.kml?dl=1'},
-	{ key: 'Crown Heights', 			url: 'https://www.dropbox.com/s/irgob4ie8dqecfh/crown_heights.kml?dl=1'},
-	{ key: 'Park Slope', 				url: 'https://www.dropbox.com/s/xx23k5f37tsaevq/slop_park.kml?dl=1'},
-	{ key: 'Clinton Hill', 				url: 'https://www.dropbox.com/s/leaq54qo7dnfd6d/clinton_hill.kml?dl=1'},
-	{ key: 'Downtown Brooklyn', 		url: 'https://www.dropbox.com/s/4poh1z6gdxdv0vi/downtown_brooklyn.kml?dl=1'},
-	{ key: 'Prospect Lefferts Gardens', url: 'https://www.dropbox.com/s/l4i37qkeoiu4y3b/plg.kml?dl=1'},
-	{ key: 'Brooklyn Heights', 			url: 'https://www.dropbox.com/s/c1hr7mhyouztvm2/brooklyn_heights.kml?dl=1'},
-	{ key: 'Fort Greene', 				url: 'https://www.dropbox.com/s/civeisfgflbya3d/fort_greene.kml?dl=1'},
-	{ key: 'Bay Ridge', 				url: 'https://www.dropbox.com/s/a3yn7euxrd3z2ub/bay_ridge.kml?dl=1'},
-	{ key: 'Prospect Heights', 			url: 'https://www.dropbox.com/s/0do2re0swjgt782/prospect_heights.kml?dl=1'},
-	{ key: 'Carroll Gardens', 			url: 'https://www.dropbox.com/s/huj4rtrxpkdeb4h/carroll_garden.kml?dl=1'},
-	{ key: 'East Flatbush', 			url: 'https://www.dropbox.com/s/b5nln8oqpchoshd/east_flatbush.kml?dl=1'},
-	{ key: 'Sheepshead Bay', 			url: 'https://www.dropbox.com/s/arysngqj1pc6sdq/sheepshead_bay.kml?dl=1'},
-	{ key: 'Flatbush - Ditmas Park', 	url: 'https://www.dropbox.com/s/46isyxw5x1a7kv0/flatbush2.kml?dl=1'},
-	{ key: 'Ditmas Park', 				url: 'https://www.dropbox.com/s/9oibl4vu84i0ii3/flatbush2.kml?dl=1'},
-	{ key: 'Boerum Hill',				url: 'https://www.dropbox.com/s/r0tj5b0wussf4nj/boerum_hill.kml?dl=1'},
-	{ key: 'DUMBO',						url: 'https://www.dropbox.com/s/igdrzymwwm5esq0/dumbo.kml?dl=1'},
-	{ key: 'Dumbo',						url: 'https://www.dropbox.com/s/igdrzymwwm5esq0/dumbo.kml?dl=1'},
-	{ key: 'Kensington',				url: 'https://www.dropbox.com/s/y8a8ugp3aq1l6f2/kensington.kml?dl=1'},
-	{ key: 'Cobble Hill',				url: 'https://www.dropbox.com/s/3e3s19wcfh9mnwv/cobble_hill.kml?dl=1'},
-	{ key: 'Prospect Park South',		url: 'https://www.dropbox.com/s/eitchhzx3bqvie0/prospect_park_south.kml?dl=1'},
-	{ key: 'Windsor Terrace',			url: 'https://www.dropbox.com/s/7i2m8ieccpc9us1/windsor_terrace.kml?dl=1'},
-	{ key: 'Gowanus',					url: 'https://www.dropbox.com/s/yrml1u2h9hvfgpf/gowanus.kml?dl=1'},
-	{ key: 'Greenwood',					url: 'https://www.dropbox.com/s/dy78d8lm5r33bqs/greenwood.kml?dl=1'},
-	{ key: 'Midwood', 					url: 'https://www.dropbox.com/s/wv036dqmx09ejcd/midwood.kml?dl=1'},
-	{ key: 'Astoria', 					url: 'https://www.dropbox.com/s/25zs1vea5o4akfn/astoria.kml?dl=1'},
-	{ key: 'Long Island City', 			url: 'https://www.dropbox.com/s/klybj3i5kj73a7j/long_island_city.kml?dl=1'},
-	{ key: 'Forest Hills', 				url: 'https://www.dropbox.com/s/791dsjnweb836ms/forest_hill.kml?dl=1'},
-	{ key: 'Sunnyside', 				url: 'https://www.dropbox.com/s/01wrtxd7a5ca2k5/sunnyside.kml?dl=1'},
-	{ key: 'Ridgewood', 				url: 'https://www.dropbox.com/s/pz8ox4d4wjbsex3/ridgewood.kml?dl=1'},
-	{ key: 'Rego Park', 				url: 'https://www.dropbox.com/s/bkb5c14qds94jh4/rego_park.kml?dl=1'},
-	{ key: 'Kew Gardens', 				url: 'https://www.dropbox.com/s/siu61nwc8m32bo3/kew_garden.kml?dl=1'},
-	{ key: 'Flushing', 					url: 'https://www.dropbox.com/s/u4c9se83vzij9c0/flushing.kml?dl=1'},
-	{ key: 'Woodside', 					url: 'https://www.dropbox.com/s/kq9p6o4hrfohw32/woodside.kml?dl=1'},
-	{ key: 'Jackson Heights', 			url: 'https://www.dropbox.com/s/8zk62hfkfxyapdm/jackson_heights.kml?dl=1'},
-	{ key: 'Elmhurst', 					url: 'https://www.dropbox.com/s/ks2lrjd1idhrag3/elmhurst.kml?dl=1'}
-]
-
-var brooklyn_and_queens_zipcodes_hash = [
-	{ key: '11201', 				url: 'https://www.dropbox.com/s/wjscg7dfog7aofw/11201.kml?dl=1' },
-	{ key: '11203', 				url: 'https://www.dropbox.com/s/kqrmva4cwie82qd/11203.kml?dl=1' },
-	{ key: '11204', 				url: 'https://www.dropbox.com/s/558eqzsg272ba1o/11204.kml?dl=1' },
-	{ key: '11205', 				url: 'https://www.dropbox.com/s/fogolx59289jla2/11205.kml?dl=1' },
-	{ key: '11206', 				url: 'https://www.dropbox.com/s/nysqkpsvz3uwvch/11206.kml?dl=1' },
-	{ key: '11207', 				url: 'https://www.dropbox.com/s/uu1kgc0kbrezt13/11207.kml?dl=1' },
-	{ key: '11208', 				url: 'https://www.dropbox.com/s/rl5v7rysosjfj06/11208.kml?dl=1' },
-	{ key: '11209', 				url: 'https://www.dropbox.com/s/a812udy3cps2dfm/11209.kml?dl=1' },
-	{ key: '11210', 				url: 'https://www.dropbox.com/s/2bgnlgvjp0ayu1b/11210.kml?dl=1' },
-	{ key: '11211', 				url: 'https://www.dropbox.com/s/kslkmvm4i07ma1a/11211.kml?dl=1'	},
-	{ key: '11212', 				url: 'https://www.dropbox.com/s/iyr31ea63x3o8tp/11212.kml?dl=1' },
-	{ key: '11213', 				url: 'https://www.dropbox.com/s/qtfz6orct8er4j1/11213.kml?dl=1'	},
-	{ key: '11214', 				url: 'https://www.dropbox.com/s/n9mkyv7qfr3zqu9/11214.kml?dl=1'	},
-	{ key: '11215', 				url: 'https://www.dropbox.com/s/iefzrml1dfolkna/11215.kml?dl=1'	},
-	{ key: '11216', 				url: 'https://www.dropbox.com/s/tnuakupto09yot3/11216.kml?dl=1'	},
-	{ key: '11217', 				url: 'https://www.dropbox.com/s/u6oo9h6513olqv5/11217.kml?dl=1'	},
-	{ key: '11218', 				url: 'https://www.dropbox.com/s/slglbc0n72j6fqr/11218.kml?dl=1'	},
-	{ key: '11219', 				url: 'https://www.dropbox.com/s/0451r66edy63qoz/11219.kml?dl=1' },
-	{ key: '11220', 				url: 'https://www.dropbox.com/s/r643n86kbr3mo97/11220.kml?dl=1' },
-	{ key: '11221', 				url: 'https://www.dropbox.com/s/wnmv0noi0ude441/11221.kml?dl=1' },
-	{ key: '11222', 				url: 'https://www.dropbox.com/s/80vuo3bjwh8neic/11222.kml?dl=1' },
-	{ key: '11223', 				url: 'https://www.dropbox.com/s/gdve4amdezvs7pm/11223.kml?dl=1' },
-	{ key: '11224', 				url: 'https://www.dropbox.com/s/9x2o595ghgppy2n/11224.kml?dl=1' },
-	{ key: '11225', 				url: 'https://www.dropbox.com/s/8vkvtn559m2l5ei/11225.kml?dl=1' },
-	{ key: '11226', 				url: 'https://www.dropbox.com/s/dhvyeim8rurlcux/11226.kml?dl=1' },
-	{ key: '11228',					url: 'https://www.dropbox.com/s/med4fon0z1vzriu/11228.kml?dl=1' },
-	{ key: '11229',					url: 'https://www.dropbox.com/s/t7x0rwxeql0vm4w/11229.kml?dl=1' },
-	{ key: '11230',					url: 'https://www.dropbox.com/s/sn3po0fl3zfwm7r/11230.kml?dl=1' },
-	{ key: '11231',					url: 'https://www.dropbox.com/s/fro9egbd1gmqx75/11231.kml?dl=1'	},
-	{ key: '11232',					url: 'https://www.dropbox.com/s/qdprt44j52eaw3f/11232.kml?dl=1'	},
-	{ key: '11233',					url: 'https://www.dropbox.com/s/ui9aufr3ufh7zme/11233.kml?dl=1' },
-	{ key: '11234',					url: 'https://www.dropbox.com/s/gb0pi3cugi7mfbo/11234.kml?dl=1' },
-	{ key: '11235',					url: 'https://www.dropbox.com/s/dc9co0fhk1jmblw/11235.kml?dl=1' },
-	{ key: '11236',					url: 'https://www.dropbox.com/s/nq280d57ya15a7l/11236.kml?dl=1' },
-	{ key: '11237', 				url: 'https://www.dropbox.com/s/uy8ml7a8usu1udd/11237.kml?dl=1' },
-	{ key: '11238', 				url: 'https://www.dropbox.com/s/27t4xx65liu5kxl/11238.kml?dl=1' },
-	{ key: '11239', 				url: 'https://www.dropbox.com/s/ij9wf01j63xop5k/11239.kml?dl=1' },
-	{ key: '11004', 				url: 'https://www.dropbox.com/s/tuxynwlyai35x1n/11004.kml?dl=1' },
-	{ key: '11005', 				url: 'https://www.dropbox.com/s/a5qp7l519dk0uy6/11005.kml?dl=1' },
-	{ key: '11101', 				url: 'https://www.dropbox.com/s/j4q2z52tmhh79r1/11101.kml?dl=1' },
-	{ key: '11102', 				url: 'https://www.dropbox.com/s/9fkwgh83v61ur6o/11102.kml?dl=1' },
-	{ key: '11103', 				url: 'https://www.dropbox.com/s/0rb6tkg6dctidq3/11103.kml?dl=1' },
-	{ key: '11104', 				url: 'https://www.dropbox.com/s/kx8ecd0bm8uq6pn/11104.kml?dl=1' },
-	{ key: '11105', 				url: 'https://www.dropbox.com/s/669n0d70thzmky5/11105.kml?dl=1' },
-	{ key: '11106', 				url: 'https://www.dropbox.com/s/l7k66tmr968hhg8/11106.kml?dl=1' },
-	{ key: '11354', 				url: 'https://www.dropbox.com/s/6l0tu8u8llo44vl/11354.kml?dl=1' },
-	{ key: '11355', 				url: 'https://www.dropbox.com/s/yb1h1az2mpuklcd/11355.kml?dl=1' },
-	{ key: '11356', 				url: 'https://www.dropbox.com/s/vqtuzbr681zskn0/11356.kml?dl=1' },
-	{ key: '11357', 				url: 'https://www.dropbox.com/s/jg5qwljdhdmxbeh/11357.kml?dl=1' },
-	{ key: '11358', 				url: 'https://www.dropbox.com/s/rodl63quswwo50o/11358.kml?dl=1' },
-	{ key: '11359', 				url: 'https://www.dropbox.com/s/z6cjsk1oqlostoc/11359.kml?dl=1' },
-	{ key: '11360', 				url: 'https://www.dropbox.com/s/yinw1tqir8cwl6h/11360.kml?dl=1' },
-	{ key: '11361', 				url: 'https://www.dropbox.com/s/4dzta7qzp4zf1gz/11361.kml?dl=1' },
-	{ key: '11362', 				url: 'https://www.dropbox.com/s/8h10zv20i01oap8/11362.kml?dl=1' },
-	{ key: '11363', 				url: 'https://www.dropbox.com/s/v4ce7hs5ljhqumb/11363.kml?dl=1' },
-	{ key: '11364', 				url: 'https://www.dropbox.com/s/eikmtuvpb4xwq91/11364.kml?dl=1' },
-	{ key: '11365', 				url: 'https://www.dropbox.com/s/lfsfykdmlrljpqq/11365.kml?dl=1' },
-	{ key: '11366', 				url: 'https://www.dropbox.com/s/lbb97615bsgac9m/11366.kml?dl=1' },
-	{ key: '11367', 				url: 'https://www.dropbox.com/s/la41gyrrgqtuzeu/11367.kml?dl=1' },
-	{ key: '11368', 				url: 'https://www.dropbox.com/s/u5g7zk6weturyvd/11368.kml?dl=1' },
-	{ key: '11369', 				url: 'https://www.dropbox.com/s/dpf91g3hbhrytdt/11369.kml?dl=1' },
-	{ key: '11370', 				url: 'https://www.dropbox.com/s/o1jijvcq5tqzc7n/11370.kml?dl=1' },
-	{ key: '11372', 				url: 'https://www.dropbox.com/s/cl6lfjw3arm58ji/11372.kml?dl=1' },
-	{ key: '11373', 				url: 'https://www.dropbox.com/s/gvtgbfx1d82dlve/11373.kml?dl=1' },
-	{ key: '11374', 				url: 'https://www.dropbox.com/s/ett5l200cfoeyp5/11374.kml?dl=1' },
-	{ key: '11375', 				url: 'https://www.dropbox.com/s/49m885d2ww5rn8n/11375.kml?dl=1' },
-	{ key: '11377', 				url: 'https://www.dropbox.com/s/ype6gdqbp94e8z9/11377.kml?dl=1' },
-	{ key: '11378', 				url: 'https://www.dropbox.com/s/b1ko849vxpjcuqt/11378.kml?dl=1' },
-	{ key: '11379', 				url: 'https://www.dropbox.com/s/p76oxli3udcyj73/11379.kml?dl=1' },
-	{ key: '11385', 				url: 'https://www.dropbox.com/s/guc3rzm9x9yp8k0/11385.kml?dl=1' },
-	{ key: '11691', 				url: 'https://www.dropbox.com/s/gfdfwlz0wwp60eg/11691.kml?dl=1' },
-	{ key: '11692', 				url: 'https://www.dropbox.com/s/p47c6ddnxwrfgk9/11692.kml?dl=1' },
-	{ key: '11693', 				url: 'https://www.dropbox.com/s/k9xinhrajtk33l9/11693.kml?dl=1' },
-	{ key: '11694', 				url: 'https://www.dropbox.com/s/518vkfajzjiqoui/11694.kml?dl=1' },
-	{ key: '11695', 				url: 'https://www.dropbox.com/s/gkxpe4zcp1p2qu7/11695.kml?dl=1' },
-	{ key: '11697', 				url: 'https://www.dropbox.com/s/093ynlia9iugj1g/11697.kml?dl=1' },
-	{ key: '11411', 				url: 'https://www.dropbox.com/s/rptwxpskx6dla71/11411.kml?dl=1' },
-	{ key: '11412', 				url: 'https://www.dropbox.com/s/rzmbbvdv1iib2mo/11412.kml?dl=1' },
-	{ key: '11413', 				url: 'https://www.dropbox.com/s/jsd0yjf0klam1pm/11413.kml?dl=1' },
-	{ key: '11414', 				url: 'https://www.dropbox.com/s/b3whannxq632gys/11414.kml?dl=1' },
-	{ key: '11415', 				url: 'https://www.dropbox.com/s/3903e1gsh54ujpi/11415.kml?dl=1' },
-	{ key: '11416', 				url: 'https://www.dropbox.com/s/lmebivez9zf74q4/11416.kml?dl=1' },
-	{ key: '11417', 				url: 'https://www.dropbox.com/s/q2vju31awb4ltij/11417.kml?dl=1' },
-	{ key: '11418', 				url: 'https://www.dropbox.com/s/iqnufeo9fl9m2v8/11418.kml?dl=1' },
-	{ key: '11419', 				url: 'https://www.dropbox.com/s/ncgjfkq0dojg00d/11419.kml?dl=1' },
-	{ key: '11420', 				url: 'https://www.dropbox.com/s/q2b8ocpnn6eibvk/11420.kml?dl=1' },
-	{ key: '11421', 				url: 'https://www.dropbox.com/s/zrmvsso8sk4w3b2/11421.kml?dl=1' },
-	{ key: '11422', 				url: 'https://www.dropbox.com/s/g01gm1hro0f87rm/11422.kml?dl=1' },
-	{ key: '11423', 				url: 'https://www.dropbox.com/s/w0y2maf9qyd36yl/11423.kml?dl=1' },
-	{ key: '11426',					url: 'https://www.dropbox.com/s/8h5gl9ce5l26zpf/11426.kml?dl=1' },
-	{ key: '11427', 				url: 'https://www.dropbox.com/s/nyxlilj4jkajz7g/11427.kml?dl=1' },
-	{ key: '11428', 				url: 'https://www.dropbox.com/s/xr6ul7bezchfypb/11428.kml?dl=1' },
-	{ key: '11429', 				url: 'https://www.dropbox.com/s/ct99b7pb9lqzpno/11429.kml?dl=1' },
-	{ key: '11432', 				url: 'https://www.dropbox.com/s/bwzg2uz4fw3xup8/11432.kml?dl=1' },
-	{ key: '11433', 				url: 'https://www.dropbox.com/s/6k62qspojcrfpq4/11433.kml?dl=1' },
-	{ key: '11434', 				url: 'https://www.dropbox.com/s/za8q0g2637waxis/11434.kml?dl=1' },
-	{ key: '11435', 				url: 'https://www.dropbox.com/s/cdkdepq82fx49s3/11435.kml?dl=1' },
-	{ key: '11436', 				url: 'https://www.dropbox.com/s/spst4jlynx0rxe0/11436.kml?dl=1' }
-]
-
-var manhattan_neightborhoods_hash = [
-	{ key: 'Midtown', 				url: 'https://www.dropbox.com/s/6dslyuv4hc4nz5k/midtown.kml?dl=1' },
-	{ key: 'Sutton Place', 			url: 'https://www.dropbox.com/s/z67m9imvezwtx4k/sutton_place.kml?dl=1' }
-]
-
-
-
-//Methods
-
-function brooklyn_and_queens_neighborhoods(term){
-	
-	url = '';
-
-	$.each(manhattan_neightborhoods_hash, function(index, value ) {
-	  if(term == value.key){
-			url = value.url;
-		}
-	});
-	
-	if(url == '' || url == undefined){
-		$.each(brooklyn_and_queens_neighborhoods_hash, function(index, value ) {
-		  if(term == value.key){
-				url = value.url;
-			}
-		});
-	}
-
-	if(url == '' || url == undefined){
-		term = term.split(' - ')[0]
-		$.each(brooklyn_and_queens_zipcodes_hash, function(index, value ) {
-		  if(term == value.key){
-				url = value.url;
-			}
-		});
-	}
-	
-	add_kml(url)
-}
-
-function add_kml(url){
-	var kmls = handler.addKml(
-			{ url: url }
-		);
-}
-;
-function displayMap(hash){
-	handler = Gmaps.build('Google');
-	handler.buildMap({ provider: {}, internal: { id: 'mapView' } }, function(){
-	    markers = handler.addMarkers(hash);
-	    handler.bounds.extendWith(markers);
-	    handler.fitMapToBounds();
-	    handler.getMap().setZoom(14);
-	});
-	//google.maps.event.trigger(handler, 'load');
-}
-;
-(function($) {
-    "use strict";
-
-    setTimeout(function() {
-        $('body').removeClass('notransition');
-    }, 300);
-
-    if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
-        $('body').addClass('no-touch');
-    }
-
-    $('#signin').modal({
-        backdrop: 'static',
-        keyboard: false
-    }).modal('show');
-
-})(jQuery);
-(function($) {
-    "use strict";
-
-    setTimeout(function() {
-        $('body').removeClass('notransition');
-    }, 300);
-
-    if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
-        $('body').addClass('no-touch');
-    }
-
-    $('#signup').modal({
-        backdrop: 'static',
-        keyboard: false
-    }).modal('show');
-
-    //$('input, textarea').placeholder();
-
-})(jQuery);
-(function() {
 
 
 }).call(this);
@@ -34429,6 +33911,522 @@ $(document).ready(function(){
 
 
 }).call(this);
+(function($) {
+    "use strict";
+
+    // Custom options for map
+    var options = {
+        zoom: 14,
+        // disableDefaultUI: false,
+        zoomControlOptions: {
+          position: google.maps.ControlPosition.RIGHT_CENTER
+        }
+        // scaleControl: true,
+        // streetViewControl: true,
+        // streetViewControlOptions: {
+        //   position: google.maps.ControlPosition.RIGHT_CENTER
+        // },
+    };
+    
+    var props = $("#mapHash").data('map');
+    var lat = $("#mapHash").data('lat');
+    var lng = $("#mapHash").data('lng');
+
+    //custom infowindow object
+    // var infobox = new google.maps.InfoWindow({
+    //     disableAutoPan: false,
+    //     maxWidth: 202,
+    //     pixelOffset: new google.maps.Size(-101, -285),
+    //     zIndex: null,
+    //     boxStyle: {
+    //         background: "url('assets/infobox-bg.png') no-repeat",
+    //         opacity: 1,
+    //         width: "202px",
+    //         height: "245px"
+    //     },
+    //     closeBoxMargin: "28px 26px 0px 0px",
+    //     closeBoxURL: "",
+    //     infoBoxClearance: new google.maps.Size(1, 1),
+    //     pane: "floatPane",
+    //     enableEventPropagation: false
+    // });
+
+    //diabling right click on buidlign edit form
+    $(".edit_building").on("contextmenu",function(e){
+        return false;
+    });
+
+    // function that adds the markers on map
+    var addMarkers = function(props, map) {
+        $.each(props, function(i,prop) {
+            var latlng = new google.maps.LatLng(prop.position.lat,prop.position.lng);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                icon: new google.maps.MarkerImage( 
+                    prop.markerIcon,
+                    null,
+                    null,
+                    null,
+                    new google.maps.Size(36, 36)
+                ),
+                draggable: false,
+                animation: google.maps.Animation.DROP,
+            });
+            var infoboxContent = '<div class="infoW">' +
+                                    '<div class="propImg">' +
+                                        '<img src=' + prop.image + '>' +
+                                    '</div>' +
+                                    '<div class="paWrapper">' +
+                                        '<div class="propTitle">' + prop.title + '</div>' +
+                                        '<div class="propAddress">' + prop.address + '</div>' +
+                                    '</div>' +
+                                    '<div class="clearfix"></div>' +
+                                 '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: infoboxContent
+            });
+
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    //infowindow.setContent(infoboxContent);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+
+            $(document).on('click', '.closeInfo', function() {
+                infowindow.open(null,null);
+            });
+
+            //markers.push(marker);
+        });
+    }
+
+    var map;
+    var windowHeight;
+    var windowWidth;
+    var contentHeight;
+    var contentWidth;
+    var isDevice = true;
+    var panorama;
+
+    // calculations for elements that changes size on window resize
+    var windowResizeHandler = function() {
+        windowHeight = window.innerHeight;
+        windowWidth = $(window).width();
+        contentHeight = windowHeight - $('#header').height();
+        contentWidth = $('#content').width();
+
+        $('#leftSide').height(contentHeight);
+        $('.closeLeftSide').height(contentHeight);
+        $('#wrapper').height(contentHeight);
+        $('#mapView, #mapViewSearch').height(contentHeight);
+        $('#content').height(contentHeight);
+
+        if (map) {
+            google.maps.event.trigger(map, 'resize');
+        }
+
+        // Add custom scrollbar for left side navigation
+        if(windowWidth > 767) {
+            $('.bigNav').slimScroll({
+                height : contentHeight - $('.leftUserWraper').height()
+            });
+        } else {
+            $('.bigNav').slimScroll({
+                height : contentHeight
+            });
+        }
+        if($('.bigNav').parent('.slimScrollDiv').size() > 0) {
+            $('.bigNav').parent().replaceWith($('.bigNav'));
+            if(windowWidth > 767) {
+                $('.bigNav').slimScroll({
+                    height : contentHeight - $('.leftUserWraper').height()
+                });
+            } else {
+                $('.bigNav').slimScroll({
+                    height : contentHeight
+                });
+            }
+        }
+    }
+
+    var repositionTooltip = function( e, ui ){
+        var div = $(ui.handle).data("bs.tooltip").$tip[0];
+        var pos = $.extend({}, $(ui.handle).offset(), { 
+                        width: $(ui.handle).get(0).offsetWidth,
+                        height: $(ui.handle).get(0).offsetHeight
+                    });
+        var actualWidth = div.offsetWidth;
+
+        var tp = {left: pos.left + pos.width / 2 - actualWidth / 2}
+        $(div).offset(tp);
+
+        $(div).find(".tooltip-inner").text( ui.value );
+    }
+
+    windowResizeHandler();
+    $(window).resize(function() {
+        windowResizeHandler();
+    });
+
+    setTimeout(function() {
+        $('body').removeClass('notransition');
+
+        map = new google.maps.Map(document.getElementById('mapView'), options);
+        map.setCenter(new google.maps.LatLng(lat, lng));
+        map.setZoom(14);
+
+        addMarkers(props, map);
+
+        panorama = map.getStreetView();
+        panorama.setPosition({ lat: lat, lng: lng });
+        panorama.setPov(/** @type {google.maps.StreetViewPov} */({
+          heading: 265,
+          pitch: 0
+        }));
+
+    }, 300);
+    
+    $("#toggleStreetView").click(function(){
+        var toggle = panorama.getVisible();
+        if (toggle == false) {
+          panorama.setVisible(true);
+          $(this).val('Map View');
+        } else {
+          panorama.setVisible(false);
+          $(this).val('Street View');
+        }
+        
+    })
+    
+
+    if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
+        $('body').addClass('no-touch');
+        isDevice = false;
+    }
+
+    // Header search icon transition
+    $('.search input').focus(function() {
+        $('.searchIcon').addClass('active');
+    });
+    $('.search input').blur(function() {
+        $('.searchIcon').removeClass('active');
+    });
+
+    // Notifications list items pulsate animation
+    $('.notifyList a').hover(
+        function() {
+            $(this).children('.pulse').addClass('pulsate');
+        },
+        function() {
+            $(this).children('.pulse').removeClass('pulsate');
+        }
+    );
+
+    // Exapnd left side navigation
+    var navExpanded = false;
+    $('.navHandler, .closeLeftSide').click(function() {
+        if(!navExpanded) {
+            $('.logo').addClass('expanded');
+            $('#leftSide').addClass('expanded');
+            if(windowWidth < 768) {
+                $('.closeLeftSide').show();
+            }
+            $('.hasSub').addClass('hasSubActive');
+            $('.leftNav').addClass('bigNav');
+            if(windowWidth > 767) {
+                $('.full').addClass('m-full');
+            }
+            windowResizeHandler();
+            navExpanded = true;
+        } else {
+            $('.logo').removeClass('expanded');
+            $('#leftSide').removeClass('expanded');
+            $('.closeLeftSide').hide();
+            $('.hasSub').removeClass('hasSubActive');
+            $('.bigNav').slimScroll({ destroy: true });
+            $('.leftNav').removeClass('bigNav');
+            $('.leftNav').css('overflow', 'visible');
+            $('.full').removeClass('m-full');
+            navExpanded = false;
+        }
+    });
+
+    // functionality for map manipulation icon on mobile devices
+    var listMapView = function(){
+        if ($('#mapView, #mapViewSearch').hasClass('mob-min') || 
+            $('#mapView, #mapViewSearch').hasClass('mob-max') || 
+            $('#content').hasClass('mob-min') || 
+            $('#content').hasClass('mob-max')) {
+                $('#mapView, #mapViewSearch').toggleClass('mob-max');
+                $('#content').toggleClass('mob-min');
+        } else {
+            $('#mapView, #mapViewSearch').toggleClass('min');
+            $('#content').toggleClass('max');
+        }
+        setTimeout(function() {
+            if (map) {
+                google.maps.event.trigger(map, 'resize');
+            }
+            map.setCenter(new google.maps.LatLng(lat, lng));
+
+        }, 300);
+    }
+
+    var listMapViewShow = function(){
+        if ($('#mapView').hasClass('mob-min') || 
+            $('#mapView').hasClass('mob-max') || 
+            $('#content').hasClass('mob-min') || 
+            $('#content').hasClass('mob-max')) {
+                $('#mapView').toggleClass('mob-max');
+                $('#content').toggleClass('mob-min');
+                $("#street_view_btn").toggleClass('hidden-xs')
+        } else {
+            $('#mapView').toggleClass('min');
+            $('#content').toggleClass('max');
+        }
+        setTimeout(function() {
+            if (map) {
+                google.maps.event.trigger(map, 'resize');
+            }
+            map.setCenter(new google.maps.LatLng(lat, lng));
+
+        }, 300);
+    }
+    
+    /* for show page view */
+    $('.listHandlerShow').click(function(){
+        $(this).hide();
+        $('.mapHandlerShow').show();
+        listMapViewShow();
+    })
+
+    $('.mapHandlerShow').click(function(){
+        $(this).hide();
+        $('.listHandlerShow').show();
+
+        listMapViewShow();
+    })
+    /* end show page */
+    
+    $('.listHandler').click(function(){
+        $(this).hide();
+        $('.mapHandler').show();
+        listMapView();
+    })
+    
+    $('.mapHandler').click(function() {
+        $(this).hide();
+        $('.listHandler').show();
+        listMapView();
+
+    });
+
+    // Expand left side sub navigation menus
+    $(document).on("click", '.hasSubActive', function() {
+        $(this).toggleClass('active');
+        $(this).children('ul').toggleClass('bigList');
+        $(this).children('a').children('.arrowRight').toggleClass('fa-angle-down');
+    });
+
+    if(isDevice) {
+        $('.hasSub').click(function() {
+            $('.leftNav ul li').not(this).removeClass('onTap');
+            $(this).toggleClass('onTap');
+        });
+    }
+
+    // functionality for custom dropdown select list
+    $('.dropdown-select li a').click(function() {
+        if (!($(this).parent().hasClass('disabled'))) {
+            $(this).prev().prop("checked", true);
+            $(this).parent().siblings().removeClass('active');
+            $(this).parent().addClass('active');
+            $(this).parent().parent().siblings('.dropdown-toggle').children('.dropdown-label').html($(this).text());
+        }
+    });
+
+    $('.priceSlider').slider({
+        range: true,
+        min: 0,
+        max: 2000000,
+        values: [500000, 1500000],
+        step: 10000,
+        slide: function(event, ui) {
+            $('.priceSlider .sliderTooltip .stLabel').html(
+                '$' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
+                ' <span class="fa fa-arrows-h"></span> ' +
+                '$' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+            );
+            var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
+            var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
+            var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+            $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+        }
+    });
+    $('.priceSlider .sliderTooltip .stLabel').html(
+        '$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
+        ' <span class="fa fa-arrows-h"></span> ' +
+        '$' + $('.priceSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+    );
+    var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
+    var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
+    var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+    $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+
+    $('.areaSlider').slider({
+        range: true,
+        min: 0,
+        max: 20000,
+        values: [5000, 10000],
+        step: 10,
+        slide: function(event, ui) {
+            $('.areaSlider .sliderTooltip .stLabel').html(
+                ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft' +
+                ' <span class="fa fa-arrows-h"></span> ' +
+                ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft'
+            );
+            var areaSliderRangeLeft = parseInt($('.areaSlider .ui-slider-range').css('left'));
+            var areaSliderRangeWidth = $('.areaSlider .ui-slider-range').width();
+            var areaSliderLeft = areaSliderRangeLeft + ( areaSliderRangeWidth / 2 ) - ( $('.areaSlider .sliderTooltip').width() / 2 );
+            $('.areaSlider .sliderTooltip').css('left', areaSliderLeft);
+        }
+    });
+    $('.areaSlider .sliderTooltip .stLabel').html(
+        $('.areaSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft' +
+        ' <span class="fa fa-arrows-h"></span> ' +
+        $('.areaSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' Sq Ft'
+    );
+    var areaSliderRangeLeft = parseInt($('.areaSlider .ui-slider-range').css('left'));
+    var areaSliderRangeWidth = $('.areaSlider .ui-slider-range').width();
+    var areaSliderLeft = areaSliderRangeLeft + ( areaSliderRangeWidth / 2 ) - ( $('.areaSlider .sliderTooltip').width() / 2 );
+    $('.areaSlider .sliderTooltip').css('left', areaSliderLeft);
+
+    $('.volume .btn-round-right').click(function() {
+        var currentVal = parseInt($(this).siblings('input').val());
+        if (currentVal < 10) {
+            $(this).siblings('input').val(currentVal + 1);
+        }
+    });
+    $('.volume .btn-round-left').click(function() {
+        var currentVal = parseInt($(this).siblings('input').val());
+        if (currentVal > 1) {
+            $(this).siblings('input').val(currentVal - 1);
+        }
+    });
+
+    $('.handleFilter').click(function() {
+        $('.filterForm').slideToggle(200);
+    });
+
+    //Enable swiping
+    $(".carousel-inner").swipe( {
+        swipeLeft:function(event, direction, distance, duration, fingerCount) {
+            $(this).parent().carousel('next'); 
+        },
+        swipeRight: function() {
+            $(this).parent().carousel('prev');
+        }
+    });
+
+    $(".carousel-inner .card").click(function() {
+        window.open($(this).attr('data-linkto'), '_self');
+    });
+
+    $('#content').scroll(function() {
+        if ($('.comments').length > 0) {
+            var visible = $('.comments').visible(true);
+            if (visible) {
+                $('.commentsFormWrapper').addClass('active');
+            } else {
+                $('.commentsFormWrapper').removeClass('active');
+            }
+        }
+    });
+
+    $('.btn').click(function() {
+        if ($(this).is('[data-toggle-class]')) {
+            $(this).toggleClass('active ' + $(this).attr('data-toggle-class'));
+        }
+    });
+
+    $('.tabsWidget .tab-scroll').slimScroll({
+        height: '235px',
+        size: '5px',
+        position: 'right',
+        color: '#939393',
+        alwaysVisible: false,
+        distance: '5px',
+        railVisible: false,
+        railColor: '#222',
+        railOpacity: 0.3,
+        wheelStep: 10,
+        allowPageScroll: true,
+        disableFadeOut: false
+    });
+
+    $('.progress-bar[data-toggle="tooltip"]').tooltip();
+    $('.tooltipsContainer .btn').tooltip();
+
+    $("#slider1").slider({
+        range: "min",
+        value: 50,
+        min: 1,
+        max: 100,
+        slide: repositionTooltip,
+        stop: repositionTooltip
+    });
+    $("#slider1 .ui-slider-handle:first").tooltip({ title: $("#slider1").slider("value"), trigger: "manual"}).tooltip("show");
+
+    $("#slider2").slider({
+        range: "max",
+        value: 70,
+        min: 1,
+        max: 100,
+        slide: repositionTooltip,
+        stop: repositionTooltip
+    });
+    $("#slider2 .ui-slider-handle:first").tooltip({ title: $("#slider2").slider("value"), trigger: "manual"}).tooltip("show");
+
+    $("#slider3").slider({
+        range: true,
+        min: 0,
+        max: 500,
+        values: [ 190, 350 ],
+        slide: repositionTooltip,
+        stop: repositionTooltip
+    });
+    $("#slider3 .ui-slider-handle:first").tooltip({ title: $("#slider3").slider("values", 0), trigger: "manual"}).tooltip("show");
+    $("#slider3 .ui-slider-handle:last").tooltip({ title: $("#slider3").slider("values", 1), trigger: "manual"}).tooltip("show");
+
+    $('#autocomplete').autocomplete({
+        source: ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"],
+        focus: function (event, ui) {
+            var label = ui.item.label;
+            var value = ui.item.value;
+            var me = $(this);
+            setTimeout(function() {
+                me.val(value);
+            }, 1);
+        }
+    });
+
+    $('#tags').tagsInput({
+        'height': 'auto',
+        'width': '100%',
+        'defaultText': 'Add a tag',
+    });
+
+    $('#datepicker').datepicker();
+
+    //clear text search
+    $('.clearSearchText').click(function(){
+        $("#apt-search-txt-searchpage").val('');
+    })
+
+})(jQuery);
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -34441,12 +34439,6 @@ $(document).ready(function(){
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-
-
-
-
-
-
 
 
 

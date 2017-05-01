@@ -3,16 +3,16 @@
 
     // Custom options for map
     var options = {
-        zoom : 14,
-        disableDefaultUI: false,
+        zoom: 14,
+        // disableDefaultUI: false,
         zoomControlOptions: {
           position: google.maps.ControlPosition.RIGHT_CENTER
-        },
-        scaleControl: true,
-        streetViewControl: true,
-        streetViewControlOptions: {
-          position: google.maps.ControlPosition.RIGHT_CENTER
-        },
+        }
+        // scaleControl: true,
+        // streetViewControl: true,
+        // streetViewControlOptions: {
+        //   position: google.maps.ControlPosition.RIGHT_CENTER
+        // },
     };
     
     var props = $("#mapHash").data('map');

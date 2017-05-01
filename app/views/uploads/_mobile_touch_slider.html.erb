@@ -13,7 +13,17 @@
 </div>
 
 <script type="text/javascript">
-  //facncybox without a tag
+    
+    //touch siwpe for mobiles
+    var swiper = new Swiper('.swiper-container', {
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 3,
+        spaceBetween: 0,
+        loop: true
+    });
+  
+  //fancybox without a tag
   $(".swiper-slide").each(function(){
 
      $(this).fancybox({

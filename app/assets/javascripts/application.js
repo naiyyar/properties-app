@@ -22,21 +22,15 @@
 //= require jquery.touchSwipe.min
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
-//= require zapp
 //= require underscore
 //= require gmaps/google
 //= require app
-//= require buildings
-//= require apt_search
 //= require dropzone
-//= require jquery.rotateSlider
 //= require fancybox
-//= require fancybox_customize
 //= require jquery.raty
 //= require ratyrate
 //= require bootstrap-datepicker
 //= require moment
-//= require swiper.jquery
 //= require turbolinks
 
 //= require_tree .
