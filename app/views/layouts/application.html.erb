@@ -34,18 +34,17 @@
     <%= render 'layouts/shared/signup' %>
     
     <script type="text/javascript">
-      $('#slider').rotateSlider({});
       $(function() {
         new app.apartments;
       });
 
     //touch siwpe for mobiles
     var swiper = new Swiper('.swiper-container', {
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        slidesPerView: 3,
-        spaceBetween: 0,
-        loop: true
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+      slidesPerView: 3,
+      spaceBetween: 0,
+      loop: true
     });
    
     </script>
