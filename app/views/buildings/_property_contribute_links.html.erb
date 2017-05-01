@@ -1,6 +1,10 @@
-<div class="visible-xs">
+<div class="visible-xs1">
   <% if object.kind_of? Unit %>
-    <%= link_to '+ Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}", class: 'btn btn-default btn-block' %>
+    <div class="contribute_links">
+      <ul class="features">
+        <li style="width:100%;"><%= link_to '+ Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}" %></li>
+      </ul>
+    </div>
   <%end%>
   
   <div class="contribute_links">
