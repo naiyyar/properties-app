@@ -27,6 +27,7 @@
 //= require gmaps/google
 //= require app
 //= require buildings
+//= require apt_search
 //= require dropzone
 //= require jquery.rotateSlider
 //= require fancybox
