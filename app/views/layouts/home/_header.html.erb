@@ -3,12 +3,10 @@
   <div class="home-logo osLight"><%=image_tag 'logo1.png', alt: 'logo', width: '200' %></div>
 
   <!-- Should only be visible on home page when user is not logged in -->
-  <% if user_signed_in? %>
-    <% if params[:controller] == 'home' and params[:action] == 'index' %>
-      <div class="pull-right btn-contribute btn-contribute-home hidden-xs hidden-sm">
-        <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
-      </div>
-    <%end%>
+  <% if params[:controller] == 'home' and params[:action] == 'index' %>
+    <div class="pull-right btn-contribute btn-contribute-home <%= user_signed_in? ? 'hidden-xs' : '' %>">
+      <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
+    </div>
   <%end%>
   
   <div class="home-nav">
