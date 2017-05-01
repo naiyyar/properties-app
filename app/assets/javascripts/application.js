@@ -34,8 +34,8 @@
 //= require jquery.raty
 //= require ratyrate
 //= require bootstrap-datepicker
-//= require rails.validations
 //= require moment
 //= require swiper.jquery
 //= require turbolinks
+
 //= require_tree .
