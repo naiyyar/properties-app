@@ -5300,6 +5300,11 @@ blockquote {
     }
 }
 @media screen and (max-width: 991px) {
+    .clearSearchText{
+        right: 54px;
+        top: 18px;
+        z-index: 9999;
+    }
     .agentAvatarImg {
         width: 20%;
     }
@@ -6056,6 +6061,10 @@ blockquote {
     .swiper-slide img {
       width: 165px !important;
       height: 100%;
+    }
+    .clearSearchText{
+        right: 280px;
+        top: 18px;
     }
             
 }
