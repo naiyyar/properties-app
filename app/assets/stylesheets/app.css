@@ -729,6 +729,7 @@ a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     display: none;
     margin-right: 15px;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .no-touch a.mapHandler:hover {
@@ -4436,7 +4437,7 @@ body.black {
 .home-header {
     position: absolute;
     width: 100%;
-    padding: 9px 16px 5px;
+    padding: 0px 11px 1px;
     color: #fff;
     top: 0;
     left: 0;
@@ -4450,7 +4451,7 @@ body.black {
     color: #fff;
     font-size: 20px;
     float: left;
-    margin-top: -10px;
+    margin-top: 0px;
 }
 .home-logo span {
     font-size: 34px;
@@ -5616,7 +5617,8 @@ blockquote {
     }
     a.navHandler {
         font-size: 24px;
-        padding-top: 8px;
+        padding-top: 13px;
+        padding-left: 0px;
         height: 50px;
         width: 50px;
         color: #fff;
@@ -6027,6 +6029,14 @@ blockquote {
     .searchContainer{
         position: inherit;
         width: 94%;
+    }
+    .contribute_links{
+        width: 100%;
+        border-top: 1px solid #999;
+        border-bottom: 1px solid #999;
+        display: table;
+        padding-bottom: 8px;
+        margin-top: -1px;
     }
     .rotateslider-container {
         width: 288px !important;
