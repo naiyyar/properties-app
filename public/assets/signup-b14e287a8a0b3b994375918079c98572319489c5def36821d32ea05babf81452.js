@@ -1,0 +1,1 @@
+!function(o){"use strict";setTimeout(function(){o("body").removeClass("notransition")},300),"ontouchstart"in window||window.DocumentTouch&&document instanceof DocumentTouch||o("body").addClass("no-touch"),o("#signup").modal({backdrop:"static",keyboard:!1}).modal("show")}(jQuery);
