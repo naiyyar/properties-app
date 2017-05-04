@@ -1,26 +1,34 @@
-<div id="header">
-  <a href="javascript:void(0)" class="navHandler"><span class="fa fa-bars"></span></a>
-  <div class="logo">
-    <a href="/"><%=image_tag 'logo1.png', alt: 'logo', class: 'hidden-xs' %><%=image_tag 'logo_white.png', alt: 'logo', class: 'visible-xs' %></a>
-  </div>
-    
-  <div class="search <%= search_bar(:hidden) %>">
-    <%= render partial: 'layouts/shared/search_form' %>
-  </div>
-  <!-- <div class="pull-right shared_contribute_btn hidden-xs <%#=search_bar(:hidden)%>"> -->
-    <%#=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
-  <!-- </div> -->
+<a href="javascript:void(0)" class="navHandler"><span class="fa fa-bars"></span></a>
 
+<div id="header">
+  <div class="logoContainer">
+    <div class="logo">
+      <a href="/"><%=image_tag 'logo_white.png', alt: 'logo' %></a>
+    </div>
+      
+    <div class="search <%= search_bar(:hidden) %>">
+      <%= render partial: 'layouts/shared/search_form' %>
+    </div>
+    <div class="pull-right headerLinks hidden-xs <%#=search_bar(:hidden)%>">
+      <% if !user_signed_in? %>
+        <a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a>
+        <a href="#" class='btn btn-default' data-toggle="modal" data-target="#signin">Sign In</a>
+      <%else%>
+        <div class="hidden-xs hidden-sm" style="display: inline-block;">
+          <%=render partial: 'layouts/shared/user_profile' %>
+        </div>
+      <%end%>
+      <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+  
   <% if user_signed_in? %>
-    <div class="home-nav">
+   <!--  <div class="home-nav">
       <ul class="homeNavUl" style="padding: 3px 0px;">
-        <li><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
+        <li><%#=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
         <li></li>
       </ul>
-    </div>
-    <div class="hidden-xs">
-      <%=render partial: 'layouts/shared/user_profile' %>
-    </div>
+    </div> -->
     <% if params[:action] == 'search' %>
       <!-- old implementation was using map anfd list icons -->
       <!-- <a href="javascript:void(0);" class="mapHandler"><span class="icon-map">Map</span></a> -->
@@ -39,13 +47,13 @@
       <a href="javascript:void(0)" class="mapHandlerShow">Map</a>
       <a href="javascript:void(0)" class="listHandlerShow">List</a>
     <%end%>
-    <div class="home-nav">
-      <ul class="homeNavUl" style="padding: 3px 0px;">
-        <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a></li>
-        <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signin">Sign In</a></li>
-        <li><%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
-        <li></li>
-      </ul>
-    </div>
+    <!-- <div class="home-nav"> -->
+      <!-- <ul class="homeNavUl" style="padding: 3px 0px;"> -->
+        <!-- <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a></li> -->
+        <!-- <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signin">Sign In</a></li> -->
+        <!-- <li><%#=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-primary' %></li> -->
+        <!-- <li></li> -->
+      <!-- </ul> -->
+    <!-- </div> -->
   <%end%>
 </div>

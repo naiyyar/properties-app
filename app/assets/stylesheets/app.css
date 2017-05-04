@@ -89,8 +89,15 @@ a.link_underlined:hover{
     padding: 5px !important;
     line-height: 27px !important;
 }
-.shared_contribute_btn{
-   padding: 11px 12px 9px 13px;
+.headerLinks{
+   padding: 8px 12px 9px 13px;
+   position: absolute;
+   right: 0;
+   height: 55px;
+   display: inline-flex;
+}
+.headerLinks a{
+    margin:0px 10px;
 }
 .contribute-fixed-btn{
     position: fixed;
@@ -106,9 +113,10 @@ a.link_underlined:hover{
 }
 .clearSearchText{
     position: absolute;
-    right: 2px;
-    top: 11px;
+    /*right: 38px;*/
+    /*top: 16px;*/
     cursor: pointer;
+    z-index: 9999;
 }
 .clearSearchText:hover{
     color: #a00;
@@ -551,18 +559,70 @@ h3.unit_name_header{
 
 /* Header */
 
+/*.home-header {
+    z-index: 1000;
+    background: rgba(25, 25, 25, 0.86);
+    position: relative;
+    width: 100%;
+    height: 65px;
+    display: -ms-inline-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+
+}*/
+
 #header {
-    background-color: #fff;
-    position: fixed;
+    background-color: #0075c9;
+    /*position: fixed;*/
     top: 0;
     left: 0;
     width: 100%;
     height: 60px;
     z-index: 1040;
-    border-bottom: 1px solid #eee;
+    /*border-bottom: 1px solid #eee;*/
+    z-index: 1000;
+    /*background: rgba(25, 25, 25, 0.86);*/
+    position: relative;
+    display: -ms-inline-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
 }
+.logoContainer{
+    width: 100%;
+    display: flex;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
 .logo {
-    background-color: rgba(25, 25, 25, 0.86);
+    /*background-color: rgba(25, 25, 25, 0.86);*/
     float: left;
     width: 200px;
     height: 60px;
@@ -632,6 +692,20 @@ h3.unit_name_header{
     text-decoration: none;
 }
 a.navHandler {
+    position: absolute;
+    z-index: 9999;
+    display: block;
+    float: right;
+    text-align: center;
+    font-size: 24px;
+    line-height: 24px;
+    color: #fff;
+    padding: 18px 0px 0px 24px;
+    -webkit-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+/*a.navHandler {
     display: block;
     width: 69px;
     height: 60px;
@@ -639,9 +713,9 @@ a.navHandler {
     text-align: center;
     font-size: 18px;
     padding-top: 17px;
-}
+}*/
 .no-touch a.navHandler:hover {
-    background-color: #f3f3f3;
+    background-color: transparent;
     text-decoration: none;
 }
 a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
@@ -660,6 +734,7 @@ a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
 .no-touch a.mapHandler:hover {
     background-color: transparent;
 }
+
 a.userHandler {
     position: relative;
     float: right;
@@ -677,15 +752,27 @@ a.userHandler {
     background-color: transparent;
 }
 .search {
-    float: left;
+    /*float: left;*/
+    position: absolute;
+    top: 59px;
+    width: 100%;
+    height: 55px;
+    background-color: #fff;
+    left: 70px;
+    border-bottom: 1px solid #ddd;
+}
+.searchContainer{
+    position: relative;
+    width: 50%;
 }
 .searchIcon {
-    font-size: 13px;
+    font-size: 1.8rem;
+    font-weight: bold !important;
     float: left;
     color: #999;
-    margin-left: 23px;
+    margin-left: 10px;
     display: block;
-    padding-top: 23px;
+    padding-top: 18px;
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -698,9 +785,14 @@ a.userHandler {
     color: #3a3a3a;
     border: 0 none;
     font-size: 13px;
-    margin: 19px 0 0 5px;
-    width: 350px;
+    margin: 6px 0 0 5px;
+    width: 88%;
     -webkit-appearance: none;
+    padding: 11px 9px;
+}
+.search input:hover{
+    background-color: #f5f8f9;
+    border: 1px solid #ddd;
 }
 .headerNotifyWraper {
     position: relative;
@@ -949,14 +1041,14 @@ a.headerUser {
     text-align: center;
     padding: 0 8px;
 }
-.home-header a.headerUser, .home-header a.headerUser:hover{
+.home-header a.headerUser{
     color: #fff;
 }
 .mobAvatarName{
     color: #333;
 }
 .no-touch a.headerUser:hover, .headerUserWraper.open a.headerUser {
-    background-color: #f3f3f3;
+    /*background-color: #f3f3f3;*/
 }
 .no-touch .home-header a.headerUser:hover, .home-header .headerUserWraper.open a.headerUser {
     background-color: rgba(0,0,0,0) !important;
@@ -965,7 +1057,7 @@ a.headerUser {
     border-radius: 3px;
     border: 1px solid #dfdfdf;
 }
-.headerAvatar {
+.home-header .headerAvatar {
     margin-top: 10px;
 }
 .userTop {
@@ -1040,10 +1132,10 @@ a.userHandler .counter {
 #leftSide {
     background-color: rgba(33, 33, 33, 0.95);
     position: absolute;
-    top: 60px;
+    top: 59px;
     left: 0;
     width: 70px;
-    z-index: 100;
+    z-index: 10000;
 }
 #leftSide.expanded {
     width: 200px;
@@ -1454,7 +1546,7 @@ a.userHandler .counter {
 #wrapper {
     left: 70px;
     top: 60px;
-    margin: 60px 0 0 70px;
+    margin: 53px 0 0 70px;
 }
 #wrapper.full.m-full {
     margin-left: 200px;
@@ -5299,6 +5391,19 @@ blockquote {
         margin: 0;
     }
 }
+@media screen and (min-width: 992px) and (max-width: 1199px){
+    .searchContainer {
+        position: inherit;
+        width: 98% !important;
+    }
+    .search input {
+        width: 90% !important;
+    }
+    .clearSearchText {
+        right: 72px !important;
+        top: 13px !important;
+    }
+}
 @media screen and (max-width: 991px) {
     .agentAvatarImg {
         width: 20%;
@@ -5428,7 +5533,7 @@ blockquote {
     .logo a > img, .logo.expanded a > img{
         width: 135px;
     }
-    .shared_contribute_btn {
+    .headerLinks {
         padding: 8px 3px 6px 4px;
     }
     .logo a, .logo.expanded a {
@@ -5547,7 +5652,7 @@ blockquote {
         width: 100%;
     }
     #wrapper {
-        margin: 89px 0 0 0;
+        margin: 47px 0 0 0;
     }
     .contribute-wrapper{
         margin: 31px 0 0 0 !important;
@@ -5605,6 +5710,10 @@ blockquote {
     .agentAvatarImg {
         width: 20%;
     }
+    .searchContainer{
+        position: inherit;
+        width: 100%;
+    }
     .leftNav .search {
         background-color: #132120;
         display: none;
@@ -5623,13 +5732,12 @@ blockquote {
         color: #333;
     }
     .search input {
-        background-color: #132120;
-        color: #fff;
-        border: 0 none;
-        font-size: 12px;
-        margin: 12px 0 0 10px;
-        width: 88%;
-        padding: 0;
+        margin: 3px 0 0 4px;
+        width: 92%;
+    }
+    .clearSearchText {
+        right: 13px; 
+        top: 11px; 
     }
     .search input::-webkit-input-placeholder {
         color: #adc8c7;
@@ -5913,9 +6021,12 @@ blockquote {
 
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {  
     .clearSearchText{
-        right: 54px;
-        top: 18px;
-        z-index: 9999;
+        right: 55px;
+        top: 15px;
+    }
+    .searchContainer{
+        position: inherit;
+        width: 94%;
     }
     .rotateslider-container {
         width: 288px !important;
@@ -6041,9 +6152,26 @@ blockquote {
             
 }
 
-@media screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {  
+@media screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    .clearSearchText{
+        right: 21px;
+        top: 11px;
+    }
+    .searchContainer{
+        position: inherit;
+        width: 98%;
+    }
+    .search input{
+        width: 93%;
+    }
+    .searchIcon{
+        margin-left: 10px;
+    }  
     .logo, .logo.expanded {
         left: 39% !important;
+    }
+    .home-header .headerAvatar {
+        margin-top: 10px;
     }
     .rotateslider-container {
         width: 400px !important;
@@ -6061,10 +6189,6 @@ blockquote {
     .swiper-slide img {
       width: 165px !important;
       height: 100%;
-    }
-    .clearSearchText{
-        right: 280px;
-        top: 18px;
     }
             
 }

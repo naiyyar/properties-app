@@ -5,8 +5,14 @@
 	var lng = <%= raw @lng.to_json %>
 	var zoom = <%= @zoom || 13 %>
 	var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
+	
+	options = {
+		disableDoubleClickZoom: false,
+		zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER }
+	}
+ 	
  	handler = Gmaps.build('Google');
- 	handler.buildMap({ provider: {disableDoubleClickZoom: true}, internal: {id: 'mapViewSearch'}}, function(){
+ 	handler.buildMap({ provider: options, internal: { id: 'mapViewSearch' } }, function(){
 	
   		json_array = <%= raw @hash.to_json %> ;
     
