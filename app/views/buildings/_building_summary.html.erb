@@ -1,6 +1,6 @@
 <div class="summary">
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
       <div class="summaryItem">
           <h1 class="pageTitle">
             <%= @building.building_name_or_address %> 
@@ -18,7 +18,7 @@
           
           <% if @building.votes.present? %>
             <div class="favLink"><span class="icon-pipe"></span>
-              <%= @building.recommended_percent.nan? ? '| None recommended yet' :  "| #{@building.recommended_percent.to_i}% Recommended" %>
+              <%= @building.recommended_percent.nan? ? '| --% recommended' :  "| #{@building.recommended_percent.to_i}% Recommended" %>
             </div>
           <%end%>
           <div class="clearfix"></div>

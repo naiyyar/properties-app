@@ -15,7 +15,14 @@ function createSidebarElem(json){
 };
 
 function bindElemToMarker(elem, marker){
-  elem.on('mouseover', function(){
+  // window.data = elem
+  // elem.on('mouseover', function(){
+  //   marker.serviceObject.setIcon("<%= asset_path 'green-dot.png' %>");
+  // }).on('mouseout', function(){
+  //   marker.serviceObject.setIcon("<%= asset_path 'red-dot.png' %>")
+  // })
+  card = elem.parent().parent();
+  card.on('mouseover', function(){
     marker.serviceObject.setIcon("<%= asset_path 'green-dot.png' %>");
   }).on('mouseout', function(){
     marker.serviceObject.setIcon("<%= asset_path 'red-dot.png' %>")
