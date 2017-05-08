@@ -47,7 +47,7 @@
               <ul class="cardFeat">
                 <li><span>Building Reviews:</span>  <%= building.reviews.count %></li>
                 <li><span>Unit Reviews:</span> <%= building.unit_reviews_count %></li>
-                <li><span>Photos:</span> <%=link_to "#{building.uploads.count}", building_uploads_path(building_id: building.id), "data-no-turbolink" => false %></li>
+                <li><span>Photos:</span> <%=link_to "#{building.uploads.count}", building_uploads_path(building_id: building.id), "data-no-turbolink" => false, style: 'color: #333;' %></li>
                 <li><a href='#'>Rent Information:</a> <%= building.rent_information %></li>
               </ul>
             </div>
