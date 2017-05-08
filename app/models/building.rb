@@ -182,25 +182,24 @@ class Building < ActiveRecord::Base
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
           neighborhood = neighborhood.first['long_name']
+          #parent neighborhoods
+          if parent_neighborhoods.include? neighborhood
+            neighborhoods_parent = neighborhood
+          elsif grandparent_neighborhoods.include? neighborhood
+            neighborhoods_parent = neighborhood
+          else
+            
           unless child_neighborhoods.present?
             if predifined_neighborhoods.include? neighborhood
               child_neighborhoods = neighborhood #child neighborhoods
             end
           end
-          #parent neighborhoods
-          #unless neighborhoods_parent.present?
-            if parent_neighborhoods.include? neighborhood
-              neighborhoods_parent = neighborhood
-            elsif grandparent_neighborhoods.include? neighborhood
-              neighborhoods_parent = neighborhood
-            else
-              search_result = geo_result.address_components_of_type(:neighborhood)
-              if search_result.present?
-                child_neighborhoods = search_result.first['short_name']
-                neighborhoods_parent = search_result.first['long_name']
-              end
-            end
-          #end
+          search_result = geo_result.address_components_of_type(:neighborhood)
+          if search_result.present?
+            child_neighborhoods = search_result.first['short_name']
+            neighborhoods_parent = search_result.first['long_name']
+          end
+          end
         end
       end
       

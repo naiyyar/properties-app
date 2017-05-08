@@ -25,7 +25,7 @@
           <tbody class="table">
             <% @buildings.each do |building| %>
               <tr>
-                <td><span class="propName"><b><%= link_to(building_name_or_address(building), building_path(building)) %></b> - <%= link_to "(#{building.units.count}) units", units_building_path(building) %> - <%= building.uploads.count %> images</span> <br /><small><%= building.neighborhood %></small> </td>
+                <td><span class="propName"><b><%= link_to(building_name_or_address(building), building_path(building)) %></b> - <%= link_to "(#{building.units.count}) units", units_building_path(building) %> - <%= building.uploads.count %> images</span> <br /><small><%= building.neighborhood %> - <%= building.neighborhoods_parent %></small> </td>
                 <td><%= building.street_address %> <%=building.zipcode%></td>
                 <td>
                   <%= rating_for building, "building", disabled_after_rate: true, readonly: true %>
