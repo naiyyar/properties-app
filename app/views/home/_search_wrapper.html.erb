@@ -46,10 +46,9 @@
               
               <ul class="cardFeat">
                 <li><span>Building Reviews:</span>  <%= building.reviews.count %></li>
-                <!-- <li><span>Units: </span> <%#= building.units.count %></li> -->
                 <li><span>Unit Reviews:</span> <%= building.unit_reviews_count %></li>
                 <li><span>Photos:</span> <%=link_to "#{building.uploads.count}", building_uploads_path(building_id: building.id), "data-no-turbolink" => false %></li>
-                <li><a href='#'>Rent Information</a> <%#= building.votes_against %></li>
+                <li><a href='#'>Rent Information:</a> <%= building.rent_information %></li>
               </ul>
             </div>
             <div class="clearfix"></div>

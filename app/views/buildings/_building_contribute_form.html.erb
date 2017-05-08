@@ -1,46 +1,54 @@
 <div id="new_building_fields">
 	<div class="col-sm-12">
     <div class="form-group">
-    	<label>Add Building</label>
+      <label><b>Add Building</b></label><br />
+    	<label>Name</label>
       <%= text_field_tag 'building[building_name]', nil, class: 'form-control', placeholder: 'Name'%>
     </div>
   </div>
   <div class="col-sm-6">
      <div class="form-group">
-      <%= text_field_tag 'building[building_street_address]', nil, class: 'form-control validate', placeholder: 'Address*', required: 'required' %>
-      <p class="help-block">This field is required</p>
+      <label>Address*</label>
+      <%= text_field_tag 'building[building_street_address]', nil, class: 'form-control validate', placeholder: 'Address', required: 'required' %>
+      <!-- <p class="help-block">This field is required</p> -->
     </div>
   </div>
   <div class="col-sm-6">
     <div class="form-group">
-      <%= text_field_tag 'building[city]', nil, class: 'form-control validate', placeholder: 'City*', required: 'required'%>
-      <p class="help-block">This field is required</p>
+      <label>City*</label>
+      <%= text_field_tag 'building[city]', nil, class: 'form-control validate', placeholder: 'City', required: 'required'%>
+      <!-- <p class="help-block">This field is required</p> -->
     </div>
   </div>
   <div class="col-sm-6">
     <div class="form-group">
-      <%= text_field_tag 'building[state]', nil, class: 'form-control validate', placeholder: 'State*', required: 'required'%>
-      <p class="help-block">This field is required</p>
+      <label>State*</label>
+      <%= text_field_tag 'building[state]', nil, class: 'form-control validate', placeholder: 'State', required: 'required'%>
+      <!-- <p class="help-block">This field is required</p> -->
     </div>
   </div>
   <div class="col-sm-6">
     <div class="form-group">
-      <%= text_field_tag 'building[zipcode]', nil, class: 'form-control validate', placeholder: 'Zip*', required: 'required'%>
-      <p class="help-block">This field is required</p>
+      <label>Zipcode*</label>
+      <%= text_field_tag 'building[zipcode]', nil, class: 'form-control validate', placeholder: 'Zipcode', required: 'required'%>
+      <!-- <p class="help-block">This field is required</p> -->
     </div>
   </div>
   <div class="col-sm-4">
      <div class="form-group">
+      <label>Floors</label>
       <%= text_field_tag 'building[floors]', nil, class: 'form-control', placeholder: 'Floors(optional)' %>
     </div>
   </div>
   <div class="col-sm-4">
      <div class="form-group">
+      <label>Built in year</label>
       <%= text_field_tag 'building[built_in]', nil, class: 'form-control', placeholder: 'Built in year(optional)' %>
     </div>
   </div>
   <div class="col-sm-4">
      <div class="form-group">
+      <label>Number of units</label>
       <%= text_field_tag 'building[number_of_units]', nil, class: 'form-control', placeholder: 'Units(optional)' %>
     </div>
   </div>

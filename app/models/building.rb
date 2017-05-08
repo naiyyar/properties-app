@@ -69,6 +69,14 @@ class Building < ActiveRecord::Base
     building_name.present? ? building_name : building_street_address
   end
 
+  def rent_information
+    info_count = 0
+    self.units.each do |unit|
+      info_count += unit.rental_price_histories.count
+    end
+    info_count
+  end
+
   def self.text_search(term)
     if term.present?
       search(term)

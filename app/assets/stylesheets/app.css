@@ -32,8 +32,8 @@
 }
 #street_view_btn {
     position: absolute;
-    top: 70px;
-    left: 41%;
+    top: 120px;
+    left: 44%;
     z-index: 5;
     /*background-color: #fff;*/
     /*padding: 5px;*/
@@ -6028,6 +6028,9 @@ blockquote {
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {  
+    #street_view_btn{
+        left: 41%;
+    }
     .nav-justified > li a {
         font-size: 11px;
     }
@@ -6167,6 +6170,9 @@ blockquote {
 }
 
 @media screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    #street_view_btn {
+        left: 43%;
+    }
     .clearSearchText{
         right: 21px;
         top: 11px;
