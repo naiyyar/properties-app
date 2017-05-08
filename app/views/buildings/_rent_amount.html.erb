@@ -6,9 +6,9 @@
 	    		<th>Unit</th>
 		      <th width="12%">Resident from</th>
 		      <th width="12%">Resident to</th>
-		      <th>Beds</th>
+		     <!--  <th>Beds</th>
 		      <th>Baths</th>
-		      <th>ft<sup>2</sup></th>
+		      <th>ft<sup>2</sup></th> -->
 		      <th>Rent</th>
 		      <th>Rent Up Front</th>
 		      <th>Refundable deposits</th>
@@ -24,9 +24,9 @@
 							<td class="text-center"><%= link_to unit.name, unit_path(unit), class: 'link_underlined' %></td>
 							<td><%= rental_price.residence_start_date %></td>
 							<td><%= rental_price.residence_end_date %></td>
-							<td class="text-center"><%= unit.number_of_bedrooms %></td>
-							<td class="text-center"><%= unit.number_of_bathrooms %></td>
-							<td class="text-center"><%= unit.square_feet %></td>
+							<!-- <td class="text-center"><%#= unit.number_of_bedrooms %></td>
+							<td class="text-center"><%#= unit.number_of_bathrooms %></td>
+							<td class="text-center"><%#= unit.square_feet %></td> -->
 							<td class="text-right"><%= number_to_currency(rental_price.monthly_rent, precision: 0) %></td>
 							<td class="text-right"><%= number_to_currency(rental_price.rent_upfront, precision: 0) %></td>
 							<td class="text-right"><%= number_to_currency(rental_price.refundable_deposits, precision: 0) %></td>

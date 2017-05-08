@@ -9,8 +9,6 @@
   <div class="singleTop">
     <%= render partial: 'building_summary' %>
     <% if @building.uploads.present? %>
-      <!-- for small and xtra small devices -->
-      <%#= render partial: 'uploads/image_slider_mobile', locals: { uploads: @building.uploads, path: building_uploads_path(building_id: @building.id), new_upload_path: new_building_upload_path(building_id: @building) } %>
       <!-- for Lasrge devices -->
       <div class="row">
         <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -32,20 +30,22 @@
 
   <div class="tabsContainer" style="margin-top: 8px;" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= 'Building Reviews' .upcase%> (<%= @building.reviews.count %>)</a></li>
-      <li><a href="#units" role="tab" data-toggle="tab"><%= 'Unit Reviews' .upcase%> (<%= @unit_review_count %>)</a></li>
-      <li><a href="#rent_amount" role="tab" data-toggle="tab"><%= 'Rent Information' .upcase%> (<%= @unit_rent_summary_count %>)</li>
+      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "Building Reviews (#{ @building.reviews.count })"%></a></li>
+      <li><a href="#unit_reviews" role="tab" data-toggle="tab"><%= 'Unit Reviews'%> (<%= @unit_review_count %>)</a></li>
+      <li><a href="#rent_amount" role="tab" data-toggle="tab"><%= 'Rent Information'%> (<%= @unit_rent_summary_count %>)</a></li>
+      <li><a href="#units" role="tab" data-toggle="tab"><%= 'Units'%> (<%= @building.units.count %>)</a></li>
     </ul>
+    
     <div class="tab-content">
       <div class="tab-pane fade in active" id="buildings">
-        <%#= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-o btn-yellow contactBtn reviewBtnMobile pull-right", "data-no-turbolink" => false %>
         <div class="comments">
           <% @building.reviews.order('created_at desc').each do |review| %>
             <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
           <% end %>
         </div>
       </div>
-      <div class="tab-pane fade" id="units">
+
+      <div class="tab-pane fade" id="unit_reviews">
         <div class="comments">
           <% @building_units.each do |unit| %>
             <h3 class="unit_name_header"><%= link_to unit.name, unit_path(unit) %> (<span><%=unit.reviews.count%></span> Reviews)</h3>
@@ -55,8 +55,13 @@
           <% end %>
         </div>
       </div>
+
       <div class="tab-pane fade" id="rent_amount">
         <%= render partial: 'rent_amount' %>
+      </div>
+
+      <div class="tab-pane fade" id="units">
+        <%= render partial: 'units' %>
       </div>
     </div>
   </div>

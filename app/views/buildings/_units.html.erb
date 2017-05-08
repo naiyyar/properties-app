@@ -1,0 +1,24 @@
+<% if @building.units.present? %>
+	<div class="table-responsive table-responsive-lg">
+		<table class="table table-bordered table-striped">
+	  	<thead>
+	    	<tr>
+	    		<th>Name</th>
+		      <th>Beds</th>
+		      <th>Baths</th>
+		      <th>Area</th>
+	    	</tr>
+	  	</thead>
+	  	<tbody>
+		  	<% @building.units.each do |unit| %>
+					<tr>
+						<td class="text-center"><%= link_to unit.name, unit_path(unit), class: 'link_underlined' %></td>
+						<td class="text-center"><%=unit.number_of_bedrooms%></td>
+						<td class="text-center"><%=unit.number_of_bathrooms%></td>
+						<td class="text-center"><%=unit.square_feet.to_i%> Ft<sup>2</sup></td>
+					</tr>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+<%end%>
