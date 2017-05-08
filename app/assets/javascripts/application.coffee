@@ -13,8 +13,8 @@ jQuery ->
 	$('.datepicker').on 'changeDate',(e) ->
 		$(this).datepicker('hide');
 
-	$('[data-toggle="popover"]').popover({ trigger: "click" })
-	$('[data-toggle="tooltip"]').tooltip({ trigger: 'click' })
+	#$('[data-toggle="popover"]').popover({ trigger: "click" })
+	
 
 	$('input, textarea').placeholder()
 
@@ -27,3 +27,9 @@ jQuery ->
        	$('.alert').slideUp 300, ->
          	$(this).remove()
      	), 1000
+
+ready = ->
+	$('[data-toggle="tooltip"]').tooltip({ trigger: 'click' })
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
