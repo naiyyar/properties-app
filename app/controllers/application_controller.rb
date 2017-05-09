@@ -21,12 +21,23 @@ class ApplicationController < ActionController::Base
 	  if session[:form_data].present?
       if session[:object_type].present? and session[:object_type] == 'building'
         building = Building.create(session[:form_data]['building'])
-        sign_in_redirect_path(building)
+        flash_message = 'Building created successfully.'
+        sign_in_redirect_path(building, flash_message)
       elsif session[:object_type].present? and session[:object_type] == 'unit' and session[:form_data]['building'].present?
         building = Building.find_by_building_street_address(session[:form_data]['building']['building_street_address'])
         session[:form_data]['building']['units_attributes']['0']['building_id'] = building.id if building.present?
-        unit = Unit.first_or_create(session[:form_data]['building']['units_attributes']['0'])
-        sign_in_redirect_path(unit)
+        unit = Unit.find(session[:form_data]['unit_id']) if session[:form_data]['unit_id'].present?
+        unit_params = session[:form_data]['building']['units_attributes']['0']
+        if unit.present?
+          @unit = unit.update(unit_params)
+          @unit_object = unit
+        else
+          @unit = Unit.create(unit_params)
+          @unit_object = @unit
+          flash_message = 'Unit created successfully.'
+        end
+        
+        sign_in_redirect_path(@unit_object, flash_message)
       else
   	    reviewable = find_reviewable
         review = reviewable.reviews.build(session[:form_data]['review'])
@@ -74,10 +85,10 @@ class ApplicationController < ActionController::Base
 
 	private
 
-  def sign_in_redirect_path object
+  def sign_in_redirect_path object, flash_message
     if session[:form_data].present?
       if session[:form_data]['contribution'].present?
-        flash[:notice] = "#{object.class} created Successfully."
+        flash[:notice] = flash_message
         case session[:form_data]['contribution']
         when 'building_photos'
           return "/uploads/new?building_id=#{object.id}"
@@ -91,6 +102,7 @@ class ApplicationController < ActionController::Base
           end
         end
       else
+        flash[:notice] = flash_message if flash_message.present?
         case session[:form_data]['unit_contribution']
         when 'unit_photos'
           return "/uploads/new?unit_id=#{object.id}"

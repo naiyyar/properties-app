@@ -9,20 +9,20 @@ class Unit < ActiveRecord::Base
 	has_many :rental_price_histories
 	belongs_to :user
 
-  	include Imageable
+	include Imageable
 
-  	default_scope { order('updated_at desc') } 
+	default_scope { order('updated_at desc') } 
 
-  	def self.search(term)
-	    if term
-	      self.where("name ILIKE ?", "%#{term}%")
-	    else
-	      self.all
-	    end
-  	end
+	def self.search(term)
+    if term
+      self.where("name ILIKE ?", "%#{term}%")
+    else
+      self.all
+    end
+	end
 
-  	def recommended_percent
-  		Vote.recommended_percent(self)
-  	end
+	def recommended_percent
+		Vote.recommended_percent(self)
+	end
 
 end

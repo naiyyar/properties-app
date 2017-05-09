@@ -147,7 +147,11 @@ class BuildingsController < ApplicationController
           contribute = params[:contribution]
           building_id = @building.id
         end
-        redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+        if params[:page].present?
+          redirect_to unit_path(@unit)
+        else
+          redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+        end
       end
     end
   end

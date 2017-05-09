@@ -32,21 +32,35 @@ app.units.prototype = {
   },
 
   _select: function(e, ui) {
+    var page = this._input.data('page')
+    var unit = ui.item;
+    var square_feet = unit.square_feet == null ? '' : parseInt(unit.square_feet)
+    if(page == 'show'){
+      $("#new_unit_building").removeClass('hide');
+      $("#unit_id").val(unit.id);
+      $("#unit_name").val(unit.name);
+      $("#unit_square_feet").val(square_feet);
+      $("#unit_number_of_bedrooms").val(unit.number_of_bedrooms);
+      $("#unit_number_of_bathrooms").val(unit.number_of_bathrooms);
+    }
+
     this._input.val(ui.item.name);
     var unitContri = $("#unit_contribution").val();
-    if(unitContri == 'unit_review' || unitContri == 'unit_photos' || unitContri == 'unit_amenities' || unitContri == 'unit_price_history'){
+    if(unitContri == 'unit_review' || 
+       unitContri == 'unit_photos' || 
+       unitContri == 'unit_amenities' || 
+       unitContri == 'unit_price_history'){
+      
       if(unitContri == 'unit_review'){
         href = '/reviews/new'
         $("#new_unit_building").attr('action', href);
         $("#new_unit_building").attr('method', 'get');
       }
+
       $("#new_unit_building").removeClass('hide');
-      // if($("#unit_name").hasClass('hide')){
-      //   $("#unit_name").removeClass('hide');
-      // }
+      
       $('.square_feet_help_block').addClass('hidden');
-      var unit = ui.item;
-      var square_feet = unit.square_feet == null ? '' : parseInt(unit.square_feet)
+      
       $("#unit_id").val(unit.id);
       $("#unit_name").val(unit.name);
       $("#unit_square_feet").val(square_feet);

@@ -68,6 +68,9 @@
 </div>
 
 <div data-map="<%= @gmaphash.to_json %>" id="mapHash" data-lat="<%= @lat.to_json %>" data-lng="<%= @lng.to_json %>"></div>
+<div class="addNewUnit">
+  <%= render partial: "new_unit_modal" %>
+</div>
 
 <% if session[:after_conribute].present? %>
   <%= render partial: 'contribute_more_popup' %>

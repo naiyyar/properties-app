@@ -1,43 +1,45 @@
 <div class="">
-  <% if object.kind_of? Unit %>
-    <div class="contribute_links">
-      <ul class="features">
-        <li style="width:100%;"><%= link_to '+ Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}" %></li>
-      </ul>
-    </div>
-  <%end%>
+  <div class="contribute_links">
+    <ul class="features">
+      <% if object.kind_of? Unit %>
+        <li style='width: 100%;'><%= link_to '+ Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}" %></li>
+      <%else%>
+        <li style='width: 100%;'><%= link_to '+ Unit', '#new_unit_modal', 'data-toggle' => 'modal'  %></li>
+      <%end%>
+    </ul>
+  </div>
   
   <div class="contribute_links">
     <ul class="features">
       <% if object.kind_of? Building %>
-        <li><%= link_to "+ Review".html_safe, new_building_review_path(building_id: object, contribution: 'building_review'), "data-no-turbolink" => false %></li>
+        <li><%= link_to '+ Review', new_building_review_path(building_id: object, contribution: 'building_review'), 'data-no-turbolink' => false %></li>
         <li><% if user_signed_in? %>
-            <%= link_to '+ Photo'.html_safe, new_building_upload_path(building_id: object), 'data-no-turbolink' => false  %>
+            <%= link_to '+ Photo', new_building_upload_path(building_id: object), 'data-no-turbolink' => false  %>
           <%else%>
-            <%= link_to '+ Photo'.html_safe, '#signin', 'data-toggle' => 'modal'  %>
+            <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal'  %>
           <%end%>    
         </li>
         <li>
           <% if user_signed_in? %>
             <%= link_to '+ Amenities', edit_building_path(contribution: 'building_amenities', user_id: current_user.id, id: object.id) %>
           <%else%>
-            <%= link_to '+ Amenities'.html_safe, '#signin', 'data-toggle' => 'modal'  %>
+            <%= link_to '+ Amenities', '#signin', 'data-toggle' => 'modal'  %>
           <%end%> 
         </li>
       <%else%>
-        <li><%= link_to "+ Review".html_safe, new_unit_review_path(unit_id: object, contribution: 'unit_review'), "data-no-turbolink" => false %></li>
+        <li><%= link_to '+ Review', new_unit_review_path(unit_id: object, contribution: 'unit_review'), "data-no-turbolink" => false %></li>
         <li>
           <% if user_signed_in? %>
-            <%= link_to '+ Photo'.html_safe, new_unit_upload_path(unit_id: object), 'data-no-turbolink' => false  %>
+            <%= link_to '+ Photo', new_unit_upload_path(unit_id: object), 'data-no-turbolink' => false  %>
           <%else%>
-            <%= link_to '+ Photo'.html_safe, '#signin', 'data-toggle' => 'modal'  %>
+            <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal'  %>
           <%end%>    
         </li>
         <li>
           <% if user_signed_in? %>
             <%= link_to '+ Amenities', "/user_steps/next_page?contribution_for=unit_amenities&unit_id=#{object.id}" %>
           <%else%>
-            <%= link_to '+ Amenities'.html_safe, '#signin', 'data-toggle' => 'modal'  %>
+            <%= link_to '+ Amenities', '#signin', 'data-toggle' => 'modal'  %>
           <%end%> 
         </li>
       <%end%>
