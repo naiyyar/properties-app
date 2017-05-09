@@ -31,6 +31,7 @@
 //= require ratyrate
 //= require bootstrap-datepicker
 //= require moment
+//= require jquery.slideandswipe
 //= require turbolinks
 
 //= require_tree .

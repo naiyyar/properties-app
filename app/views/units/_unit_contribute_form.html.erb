@@ -11,7 +11,7 @@
     <div class="col-sm-6 hide">
       <div class="form-group">
         <label>Unit name*</label>
-        <%= text_field_tag 'unit_name', nil, name: 'building[units_attributes][0][name]', class: 'form-control validate', placeholder: 'Unit #' %>
+        <%= text_field_tag 'unit_name', nil, name: 'building[units_attributes][0][name]', class: 'form-control validate' %>
         <!-- <p class="help-block">This field is required</p> -->
         <%= hidden_field_tag :unit_contribution, params[:contribution_for].present? ? params[:contribution_for] : 'unit_contribution' %>
         <%= hidden_field_tag :page, page %>
@@ -20,7 +20,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label>Square feet* </label>
-        <%= text_field_tag 'unit_square_feet', nil, name: 'building[units_attributes][0][square_feet]', class: 'form-control validate', placeholder: 'Square feet'%>
+        <%= text_field_tag 'unit_square_feet', nil, name: 'building[units_attributes][0][square_feet]', class: 'form-control validate' %>
         <p class="help-block square_feet_help_block">Optional</p>
       </div>
     </div>
@@ -28,7 +28,7 @@
       <div class="form-group">
         <label>Bedrooms* </label>
         <div class="input-group">
-          <%= text_field_tag 'unit_number_of_bedrooms',nil, name: "building[units_attributes][0][number_of_bedrooms]", class: "form-control validate", placeholder: 'Bedrooms'%>
+          <%= text_field_tag 'unit_number_of_bedrooms',nil, name: "building[units_attributes][0][number_of_bedrooms]", class: "form-control validate" %>
           <span class="input-group-addon" data-toggle="tooltip" data-placement="left" aria-hidden="true" title="Use 0 for a studio.">
             <i class="fa fa-question-circle" ></i>
           </span>
@@ -38,7 +38,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label>Bathrooms* </label>
-        <%= text_field_tag 'unit_number_of_bathrooms',nil, name: "building[units_attributes][0][number_of_bathrooms]", class: "form-control validate", placeholder: 'Bathrooms'%>
+        <%= text_field_tag 'unit_number_of_bathrooms',nil, name: "building[units_attributes][0][number_of_bathrooms]", class: "form-control validate" %>
       </div>
     </div>
   </div>

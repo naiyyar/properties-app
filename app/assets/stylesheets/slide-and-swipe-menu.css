@@ -1,0 +1,41 @@
+/**
+ * Sliding swipe menu CSS
+ */
+nav.swipe-nav {
+    height: 150px;
+    width: 40%;
+    background-color: rgba(0,0,0,0.5);
+    left: 0;
+    top: 65px;
+    z-index: 2;
+    /*position: fixed;*/
+    position: absolute;
+    overflow-y: auto;
+    overflow-x: visible;
+    transform: translate(-280px,0);
+}
+
+.swipe-nav ul{
+    padding: 0px;
+}
+
+.swipe-nav ul li{
+    list-style: none;
+    padding: 13px
+}
+.swipe-nav ul li:hover{
+    background-color: rgba(0, 0, 0, 0.57)
+}
+.swipe-nav ul li a, .swipe-nav ul li a:hover{
+    color: #ffffff;
+}
+/*.ssm-overlay {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.2);
+    display: none;
+    z-index: 1;
+}*/

@@ -328,4 +328,7 @@
         $('#signin').modal('show');
     });
 
+    //Home menu swipe and slide
+    $('.swipe-nav').slideAndSwipe();
+
 })(jQuery);
