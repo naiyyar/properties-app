@@ -4,13 +4,16 @@
       <div class="media">
         <div class="media-left">
           <div class="media-body">
-            <h1 class="pageTitle"><%= "#{@unit.building.building_name} #" if @unit.building.building_name.present? %><%= link_to @unit.name, unit_path(@unit) %> </h1>
-            <div class="text-muted address">
-              <%= link_to building_path(@unit.building) do %>
-                <%= building_street_address @unit.building %> <br />
-                <%= @unit.building.neighborhood %>
-              <%end%>
-            </div>
+              <% if @unit.building.present? %>
+              <h1 class="pageTitle"><%= "#{@unit.building.building_name} #" if @unit.building.building_name.present? %>
+                <%= link_to @unit.name, unit_path(@unit) %> </h1>
+              <div class="text-muted address">
+                <%= link_to building_path(@unit.building) do %>
+                  <%= building_street_address @unit.building %> <br />
+                  <%= @unit.building.neighborhood %>
+                <%end%>
+              </div>
+            <%end%>
           </div>
         </div>
       </div>

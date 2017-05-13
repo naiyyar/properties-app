@@ -96,6 +96,8 @@ $(document).on 'click', '#add_new_unit',(e) ->
 	$("#unit_number_of_bedrooms").val('')
 	$("#unit_number_of_bathrooms").val('')
 	$("#new_unit_building").removeClass('hide')
+	if($('.new_unit_lbl').hasClass('hide'))
+		$('.new_unit_lbl').removeClass('hide');
 	if($('.square_feet_help_block').hasClass('hidden'))
 		$('.square_feet_help_block').removeClass('hidden')
 		$('.square_feet_help_block').css('visibility', 'hidden');

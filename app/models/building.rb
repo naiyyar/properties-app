@@ -132,8 +132,6 @@ class Building < ActiveRecord::Base
     unit_review_count
   end
 
-
-
   def photos
     building_counts = self.uploads.count
     unit_counts = 0

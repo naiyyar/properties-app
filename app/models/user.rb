@@ -55,16 +55,6 @@ class User < ActiveRecord::Base
     authorization.user
   end
 
-  # dosn't work with same email for multiple providers
-  # def self.from_omniauth(auth)
-  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  #     user.email = auth.info.email
-  #     user.password = Devise.friendly_token[0,20]
-  #     user.name = auth.info.name   # assuming the user model has a name
-  #     user.image_url = auth.info.image # assuming the user model has an image
-  #   end
-  # end
-
   def profile_image provider=nil
     if provider == 'Google'
       provider = 'google_oauth2'

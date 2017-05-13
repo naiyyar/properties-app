@@ -32,6 +32,7 @@ app.units.prototype = {
   },
 
   _select: function(e, ui) {
+    $('.new_unit_lbl').addClass('hide');
     var page = this._input.data('page')
     var unit = ui.item;
     var square_feet = unit.square_feet == null ? '' : parseInt(unit.square_feet)

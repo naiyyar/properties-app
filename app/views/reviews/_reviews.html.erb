@@ -1,18 +1,21 @@
 <div class="comment">
     <div class="commentAvatar">
-      <% if review.user.avatar.present? %>
-        <%= image_tag review.user.avatar, class: 'avatar' %>
-      <% elsif review.user.image_url.present? %>
-        <%= image_tag review.user.image_url, class: 'avatar' %>
+      <% unless review.anonymous %>
+        <% if review.user.avatar.present? %>
+          <%= image_tag review.user.avatar, class: 'avatar' %>
+        <% elsif review.user.image_url.present? %>
+          <%= image_tag review.user.image_url, class: 'avatar' %>
+        <%else%>
+          <div class="firstLetter"><%= review.user.user_name.split('')[0].capitalize %></div>
+        <%end%>
       <%else%>
-        <!-- <span class="fa fa-user fa-2x"></span> -->
-        <div class="firstLetter"><%= review.user.user_name.split('')[0].capitalize %></div>
+        <%= image_tag 'anonymous', class: 'avatar' %>
       <%end%>
       <div class="commentArrow"><span class="fa fa-caret-left"></span></div>
     </div>
     <div class="commentContent">
         <div class="commentName">
-          <%= review.user_name.capitalize %>
+          <%= review.anonymous ? 'Anonymous' : review.user_name.capitalize %>
         </div>
 
         <div class="commentBody">

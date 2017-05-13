@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401040758) do
+ActiveRecord::Schema.define(version: 20170512034835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,8 +143,8 @@ ActiveRecord::Schema.define(version: 20170401040758) do
 
   create_table "reviews", force: :cascade do |t|
     t.string   "review_title"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "building_id"
     t.integer  "user_id"
     t.integer  "reviewable_id"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20170401040758) do
     t.string   "pros"
     t.string   "cons"
     t.string   "other_advice"
+    t.boolean  "anonymous",        default: false
   end
 
   add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
@@ -176,7 +177,7 @@ ActiveRecord::Schema.define(version: 20170401040758) do
     t.text     "pros"
     t.text     "cons"
     t.integer  "number_of_bedrooms"
-    t.integer  "number_of_bathrooms"
+    t.decimal  "number_of_bathrooms",     default: 0.0
     t.decimal  "monthly_rent",            default: 0.0
     t.decimal  "square_feet",             default: 0.0
     t.decimal  "total_upfront_cost",      default: 0.0
