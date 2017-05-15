@@ -178,7 +178,7 @@
     
     $("#toggleStreetView").click(function(){
         var toggle = panorama.getVisible();
-        if (toggle == false) {
+        if(toggle == false) {
           panorama.setVisible(true);
           $(this).val('Map View');
         } else {
