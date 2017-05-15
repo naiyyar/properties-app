@@ -1,1 +1,0 @@
-(function(){jQuery(function(){return $(document).on("click","form",function(){var r,a,n,t,e,o;for(o=!0,window.data=$(this),r=$(this).find(".validate"),t=r.length-1,a=n=0,e=t;e>=n;a=n+=1)""===$(r[a]).val()||"0.0"===$(r[a]).val()?($(r[a]).parent().addClass("has-error"),o=!1):$(r[a]).parent().removeClass("has-error");return o})})}).call(this);
