@@ -22,11 +22,6 @@
 			</div>
 		</div>
 	<%end%>
-	<div class="col-sm-12">
-	  <div class="form-group">
-	    <div class="checkbox custom-checkbox"><label><%= f.check_box :anonymous, {}, true, false %> <span class="fa fa-check"></span> Anonymous?</label></div>
-		</div>
-	</div>
   <div class="col-sm-12">
 	  <div class="form-group">
 	    <label>Rating*</label>
@@ -90,7 +85,7 @@
 			<%= f.text_area :other_advice,  class: 'form-control' %>
 		</div>
 	</div>
-	<div class="col-sm-12">
+	<div class="col-sm-6">
 		<div class="form-group">
 			<label>Would you recommend this building? *</label>
 			<br />
@@ -105,6 +100,11 @@
 		</div>
 		<span class='message hide recommend-not-selected text-red'>Please select recommendation.</span>
   </div>
+  <div class="col-sm-12">
+	  <div class="form-group">
+	    <div class="checkbox custom-checkbox"><label><%= f.check_box :anonymous, {}, true, false %> <span class="fa fa-check"></span> Post Anonymously</label></div>
+		</div>
+	</div>
   <div class="col-sm-12">
   	<div class="pull-right">
 		  <% if current_user %>

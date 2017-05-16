@@ -89,6 +89,9 @@ $(document).on 'click', '#submit_review',(e) ->
 #Adding new unit contribution page
 $(document).on 'click', '#add_new_unit',(e) ->
 	e.preventDefault()
+	$("#selection_type").val('new')
+	if($("#new_unit_fields").hasClass('hide'))
+		$("#new_unit_fields").removeClass('hide')
 	search_value = $('#units-search-txt').val()
 	$("#unit_id").val('')
 	$("#unit_name").val(search_value)

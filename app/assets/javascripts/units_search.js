@@ -43,6 +43,11 @@ app.units.prototype = {
       $("#unit_square_feet").val(square_feet);
       $("#unit_number_of_bedrooms").val(unit.number_of_bedrooms);
       $("#unit_number_of_bathrooms").val(unit.number_of_bathrooms);
+      
+      if($("#selection_type").val() != 'new'){
+        $("#new_unit_fields").addClass('hide');
+      }
+
     }
 
     this._input.val(ui.item.name);

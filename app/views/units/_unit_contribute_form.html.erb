@@ -1,4 +1,5 @@
 <%= form_tag '/buildings', method: :post, id: 'new_unit_building', class: 'hide' do %>
+  <%= hidden_field_tag 'selection_type' %>
 	<div id="new_unit_fields">
 		<div class="col-sm-12">
 			<label class='new_unit_lbl'><b>New unit</b></label><br/>
