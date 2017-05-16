@@ -101,6 +101,10 @@ class Building < ActiveRecord::Base
     where("city @@ :q" , q: city).paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
   end
 
+  def rating_cache
+    RatingCache.where(cacheable_id: self.id, cacheable_type: 'Building') 
+  end
+
   def fetch_or_create_unit params
     unit = Unit.new(params.values[0])
     unit.building_id = self.id
