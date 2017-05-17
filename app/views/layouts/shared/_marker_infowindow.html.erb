@@ -13,21 +13,26 @@
   	<% if rating_cache.present? %>
 	  	<% total_rates = rating_cache.first.avg if rating_cache.present? %>
 	  	<% decimal_part = rating_cache.first.avg.modulo(1) %>
-	  <%end%>
-
-  	<ul class="cardRating list-inline">
-  		<% half = true %>
-  		<% 1.upto(5) do |num| %>
-  			<% if num <= total_rates.to_i %>
-  				<li><%= image_tag 'star-on.png' %></li>
-  			<%elsif decimal_part > 0.0 and decimal_part < 1.0 and half %>
-  				<li><%= image_tag 'star-half.png' %></li>
-  				<% half = false %>
-  			<%else%>
-  				<li><%= image_tag 'star-off.png' %></li>
-  			<%end%>
-  		<%end%>
-  	</ul>
+	  	<ul class="cardRating list-inline">
+	  		<% half = true %>
+	  		<% 1.upto(5) do |num| %>
+	  			<% if num <= total_rates.to_i %>
+	  				<li><%= image_tag 'star-on.png' %></li>
+	  			<%elsif decimal_part > 0.32 and decimal_part < 1.0 and half %>
+	  				<li><%= image_tag 'star-half.png' %></li>
+	  				<% half = false %>
+	  			<%else%>
+	  				<li><%= image_tag 'star-off.png' %></li>
+	  			<%end%>
+	  		<%end%>
+	  	</ul>
+	  <%else%>
+	  	<ul class="cardRating list-inline">
+		  	<% 1.upto(5) do |num| %>
+	  			<li><%= image_tag 'star-off.png' %></li>
+	  		<%end%>
+	  	</ul>
+  	<%end%>
   	<%# rating_for not working with info window %>
 		<%#= rating_for building, 'building', disable_after_rate: true, readonly: true, cancel: false %>
 	</div>
