@@ -44,13 +44,13 @@
 		<%#= rating_for building, 'building', disable_after_rate: true, readonly: true, cancel: false %>
 	</div>
   <ul class="propFeat">
-		<li>Building reviews: <%= building.reviews.count %></li>
-		<li>Unit reviews: <%=building.unit_reviews_count%></li>
+		<li><span>Building Reviews:</span> <%= building.reviews.count %></li>
+		<li><span>Unit Reviews:</span> <%= building.unit_reviews_count%></li>
 	</ul> <br />
 	
 	<ul class="propFeat">
-	  <li><%= "Photos: #{building.photos}" %></li>
-	  <li><%="Rent Information: #{building.unit_rent_summary_count}"%></li>
+	  <li><span>Photos:</span> <%=link_to "#{building.uploads.count}", building_uploads_path(building_id: building.id), "data-no-turbolink" => false, style: 'color: #333;' %></li>
+	  <li><%="<span>Rent Information:</span> #{building.unit_rent_summary_count}".html_safe %></li>
 	</ul>
 	
   <div class="clearfix"></div>
