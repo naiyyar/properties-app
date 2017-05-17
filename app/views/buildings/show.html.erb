@@ -72,14 +72,14 @@
   <%= render partial: "new_unit_modal" %>
 </div>
 
-<% if session[:after_conribute].present? %>
+<% if session[:after_contribute].present? %>
   <%= render partial: 'contribute_more_popup' %>
   <script type="text/javascript">
-    window.onload = function(){
+    $(document).ready(function(){
       $("#contribute_more").modal('show');
-    }
+    })
   </script>
-  <% session[:after_conribute] = nil %>
+  <% session[:after_contribute] = nil %>
 <%end%>
 
 <script type="text/javascript">

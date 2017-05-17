@@ -82,12 +82,12 @@
 <div class="clearfix"></div>
 <div data-map="<%= @gmaphash.to_json %>" data-lat="<%= @lat.to_json %>" data-lng="<%= @lng.to_json %>" id="mapHash"></div>
 
-<% if session[:after_conribute].present? %>
+<% if session[:after_contribute].present? %>
   <%= render partial: 'contribute_more_popup' %>
   <script type="text/javascript">
-    window.onload = function(){
+    $(document).ready(function(){
       $("#contribute_more").modal('show');
-    }
+    })
   </script>
-  <% session[:after_conribute] = nil %>
+  <% session[:after_contribute] = nil %>
 <%end%>

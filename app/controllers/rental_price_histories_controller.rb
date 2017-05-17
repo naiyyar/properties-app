@@ -31,7 +31,7 @@ class RentalPriceHistoriesController < ApplicationController
 
     respond_to do |format|
       if @rental_price_history.save
-        session[:after_conribute] = params[:contribution] if params[:contribution].present?
+        session[:after_contribute] = params[:contribution] if params[:contribution].present?
         format.html { redirect_to unit_path(@rental_price_history.unit), notice: 'Rental price history was successfully created.' }
         format.json { render :show, status: :created, location: @rental_price_history }
       else
@@ -46,7 +46,7 @@ class RentalPriceHistoriesController < ApplicationController
   def update
     respond_to do |format|
       if @rental_price_history.update(rental_price_history_params)
-        session[:after_conribute] = params[:contribution] if params[:contribution].present?
+        session[:after_contribute] = params[:contribution] if params[:contribution].present?
         format.html { redirect_to unit_path(@rental_price_history.unit), notice: 'Rental price history was successfully updated.' }
         format.json { render :show, status: :ok, location: @rental_price_history }
       else

@@ -38,7 +38,7 @@ class ReviewsController < ApplicationController
       @review = @reviewable.reviews.build(review_params)
       @review.user_id = current_user.id
       if @review.save
-        session[:after_conribute] = 'reviews' if params[:contribution].present?
+        session[:after_contribute] = 'reviews' if params[:contribution].present?
         current_user.create_rating(params[:score], @reviewable, @review.id) if params[:score].present?
         if params[:vote] == 'true'
           vote = current_user.vote_for(@reviewable)

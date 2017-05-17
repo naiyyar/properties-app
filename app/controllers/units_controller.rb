@@ -81,7 +81,7 @@ class UnitsController < ApplicationController
   # PATCH/PUT /units/1.json
   def update
     @unit.update(unit_params)
-    session[:after_conribute] = params[:contribution] if params[:contribution].present?
+    session[:after_contribute] = params[:contribution] if params[:contribution].present?
     if params[:amenities].present?
       redirect_to unit_path(@unit), notice: 'Unit was successfully updated.'
     else

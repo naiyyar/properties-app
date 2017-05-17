@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
           vote = current_user.vote_against(reviewable)
         end
         session[:form_data] = nil
-        session[:after_conribute] = 'reviews'# if params[:contribution].present?
+        session[:after_contribute] = 'reviews'# if params[:contribution].present?
         if review.save
           if rating_score.present?
             current_user.create_rating(rating_score, reviewable, review.id)
