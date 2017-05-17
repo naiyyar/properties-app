@@ -4,10 +4,9 @@
       <div class="media">
         <div class="media-left">
           <div class="media-body">
-            <%#debugger%>
-              <% if @building.present? %>
+            <% if @building.present? %>
               <h1 class="pageTitle"><%= "#{@building.building_name} #" if @building.building_name.present? %>
-                <%= link_to @unit.name, unit_path(@unit) %> </h1>
+              <%= link_to @unit.name, unit_path(@unit) %> </h1>
               <div class="text-muted address">
                 <%= link_to building_path(@building) do %>
                   <%= building_street_address @building %> <br />
