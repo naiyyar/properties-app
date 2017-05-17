@@ -13,7 +13,7 @@
               <%= @unit.building.street_address %>, <%= @unit.building.zipcode %> <br />  
             <%end%>
           </div>
-          <div class="address"><span class="fa fa-building"></span> <%= link_to @unit.building.building_name, building_path(@unit.building) %></div>
+          <div class="address"><span class="fa fa-building"></span> <%= link_to @unit.building.building_name_or_address, building_path(@unit.building) %></div>
           <ul class="rating">
             <%= rating_for @unit, "unit", disable_after_rate: true, readonly: true %>
           </ul>

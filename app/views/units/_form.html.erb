@@ -20,7 +20,8 @@
                   <% if params[:action] == 'new' %>
                     <%= f.collection_select(:building_id, Building.where('building_name <> ?', ''), :id, :building_name, { :prompt => :true }, { class: "form-control validate" }) %>
                   <%else%>
-                    <%= f.text_field :building_id, value: f.object.building.building_street_address, class: "form-control validate", readonly: true %>
+                    <%= text_field_tag 'building_address',f.object.building.building_street_address, class: "form-control validate", readonly: true %>
+                    <%= f.hidden_field :building_id, value: f.object.building_id %>
                   <%end%>
                   <!-- <p class="help-block">This field is required</p> -->
                 </div>

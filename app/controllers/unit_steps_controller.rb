@@ -4,6 +4,7 @@ class UnitStepsController < ApplicationController
 
 	def show
 		@unit = Unit.find(params[:unit_id])
+		@building = Building.find(@unit.building_id)
 		render_wizard
 	end
 
