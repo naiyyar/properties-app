@@ -7,7 +7,8 @@
         // disableDefaultUI: false,
         zoomControlOptions: {
           position: google.maps.ControlPosition.RIGHT_CENTER
-        }
+        },
+        gestureHandling: 'greedy'
         // scaleControl: true,
         // streetViewControl: true,
         // streetViewControlOptions: {
