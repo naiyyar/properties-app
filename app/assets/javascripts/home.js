@@ -315,6 +315,12 @@
         }
     })
 
+    $(document).on('touchstart', function(){
+        if($('.home-nav').hasClass('active')){
+          $('.home-nav').removeClass('active');
+        }
+    })
+
     //Enable swiping
     $(".carousel-inner").swipe( {
         swipeLeft:function(event, direction, distance, duration, fingerCount) {
