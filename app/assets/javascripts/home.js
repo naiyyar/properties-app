@@ -303,10 +303,17 @@
         $('.adv').toggleClass('hidden-xs');
     });
 
-    $('.home-navHandler').click(function() {
+    $('.home-navHandler').click(function(e) {
+        e.stopPropagation();
         $('.home-nav').toggleClass('active');
         $(this).toggleClass('active');
     });
+
+    $(document).click(function(){
+        if($('.home-nav').hasClass('active')){
+          $('.home-nav').removeClass('active');
+        }
+    })
 
     //Enable swiping
     $(".carousel-inner").swipe( {
