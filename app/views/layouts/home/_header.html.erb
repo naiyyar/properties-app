@@ -8,17 +8,17 @@
       <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %>
     </div>
   <%end%>
-  <!-- <nav class="home-nav hidden-md hidden-lg"> -->
+  <!-- <nav class="swipe-nav hidden-md hidden-lg"> -->
     <!-- for small devices with touch swipe -->
-    <!-- <ul class="homeNavUl"> -->
+    <!-- <ul> -->
       <%#= render partial: 'layouts/home/home_left_nav_items' %>
     <!-- </ul> -->
   <!-- </nav> -->
   
   <!-- for large devices -->
-  <div class="home-nav hidden-md hidden-lg">
+  <div class="home-nav">
     <% if user_signed_in? %>
-      <div class="pull-right home-header-userProfile">
+      <div class="pull-right home-header-userProfile hidden-xs hidden-sm">
         <%=render partial: 'layouts/shared/user_profile' %>
       </div>
     <%end%>
