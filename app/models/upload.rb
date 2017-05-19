@@ -9,7 +9,7 @@ class Upload < ActiveRecord::Base
 				:content_type => { :content_type => /\Aimage\/.*\Z/ }
 
 	def self.marker_image object
-	    no_image = 'no-photo-available.jpg'
+	    no_image = 'no-photo.png'
 	    if object.uploads.present?
 	      object.uploads.last.image_file_name.present? ? object.uploads.last.image : no_image
 	    else

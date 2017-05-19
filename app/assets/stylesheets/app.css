@@ -1595,10 +1595,10 @@ a.userHandler .counter {
     position: relative;
 }
 .propImg img {
-    width: 200px;
-    height: 120px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    width: 230px;
+    height: auto;
+    /*border-top-left-radius: 3px;*/
+    /*border-top-right-radius: 3px;*/
 }
 .propBg {
     position: absolute;
@@ -1629,7 +1629,7 @@ a.userHandler .counter {
     z-index: 3;
 }
 .paWrapper {
-    padding: 10px 10px 0 10px;
+    padding: 10px 10px 0 1px;
 }
 .propPrice {
     position: absolute;
@@ -1655,7 +1655,7 @@ a.userHandler .counter {
     line-height: 11px;
 }
 .propRating {
-    padding: 2px 0 5px 10px;
+    padding: 2px 0 5px 1px;
 }
 .propRating span {
     color: #eab134;

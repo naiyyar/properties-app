@@ -21,7 +21,7 @@
                   <%if building.uploads.present? %>
                     <%= image_tag building.uploads.last.image.url, alt: building.uploads.last.image_file_name, height: '150' %>
                   <%else%>
-                    <%= image_tag 'no-photo-available.jpg', alt: 'No image', height: '150'%>
+                    <%= image_tag 'no-photo.png', alt: 'No image', height: '150'%>
                   <%end%>
                   <!-- <div class="figCaption">
                     <div>$1,550,000</div>
@@ -39,17 +39,18 @@
 
               <ul class="cardRating">
                 <div class="pull-left" style="margin-right: 10px;">
-                  <%= rating_for building, "building", disable_after_rate: true,readonly: true, cancel: false %>
+                  <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
                 </div>
-                <div> <%= building.recommended_percent.nan? ? '| --% recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %> </div>
+                <div> <%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %> </div>
               </ul>
-              
-              <ul class="cardFeat">
-                <li><span>Building Reviews:</span>  <%= building.reviews.count %></li>
-                <li><span>Unit Reviews:</span> <%= building.unit_reviews_count %></li>
-                <li><span>Photos:</span> <%=link_to "#{building.uploads.count}", building_uploads_path(building_id: building.id), "data-no-turbolink" => false, style: 'color: #333;' %></li>
-                <li><a href='#'>Rent Information:</a> <%= building.rent_information %></li>
-              </ul>
+              <%= render partial: 'property_information', locals: { building: building } %>
+              <div class="clearfix"></div>
+              <!-- <ul class="cardFeat">
+                <li><span>Building Reviews:</span>  <%#= building.reviews.count %></li>
+                <li><span>Unit Reviews:</span> <%#= building.unit_reviews_count %></li>
+                <li><span>Photos:</span> <%#=link_to "#{building.uploads.count}", building_uploads_path(building_id: building.id), 'data-no-turbolink' => false, style: 'color: #333;' %></li>
+                <li><a href='#'>Rent Information:</a> <%#= building.rent_information %></li>
+              </ul> -->
             </div>
             <div class="clearfix"></div>
           </div>

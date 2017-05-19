@@ -1,13 +1,14 @@
 <div class="infoW">
 	<%= link_to building_path(building), style: 'color: #333;' do %>
-	    <div class="propImg">
-	        <%= image_tag image , alt: 'Image'%>
-	    </div>
-	    <div class="paWrapper">
-	        <div class="propTitle"><%= building.building_name_or_address %></div>
-	        <div class="propAddress"><%= building.street_address %> <%= building.zipcode %></div>
-	    </div>
+    <div class="propImg">
+        <%= image_tag image , alt: 'Image', style: 'width: 230 !important; height: auto;'%>
+    </div>
+    <div class="paWrapper">
+        <div class="propTitle"><%= building.building_name_or_address %></div>
+        <div class="propAddress"><%= building.street_address %> <%= building.zipcode %></div>
+    </div>
 	<%end%>
+  
   <div class="propRating">
   	<% rating_cache = building.rating_cache %>
   	<% if rating_cache.present? %>
@@ -28,8 +29,8 @@
 	  			<%end%>
 	  		<%end%>
 	  		<% if building.votes.present? %>
-	  			<li><span class="icon-pipe"></span>
-        	<%= building.recommended_percent.nan? ? '| --% recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %></li>
+	  			<li style="font-size: 11px;"><span class="icon-pipe"></span>
+        	<%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %></li>
         <%end%>
 	  	</ul>
 	  <%else%>
@@ -37,23 +38,17 @@
 		  	<% 1.upto(5) do |num| %>
 	  			<li><%= image_tag 'star-off.png' %></li>
 	  		<%end%>
-	  		<li><span class="icon-pipe"></span>
-        <%= building.recommended_percent.nan? ? '| --% recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %></li>
-        
+	  		<li style="font-size: 11px;">
+	  			<span class="icon-pipe"></span>
+        	<%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %>
+        </li>
 	  	</ul>
   	<%end%>
   	<%# rating_for not working with info window %>
 		<%#= rating_for building, 'building', disable_after_rate: true, readonly: true, cancel: false %>
 	</div>
-  <ul class="propFeat">
-		<li><span>Building Reviews:</span> <%= building.reviews.count %></li>
-		<li><span>Unit Reviews:</span> <%= building.unit_reviews_count%></li>
-	</ul> <br />
+  
+  <%= render partial: 'home/property_information', locals: { building: building } %>
 	
-	<ul class="propFeat">
-	  <li><span>Photos:</span> <%=link_to "#{building.uploads.count}", building_uploads_path(building_id: building.id), "data-no-turbolink" => false, style: 'color: #333;' %></li>
-	  <li><%="<span>Rent Information:</span> #{building.unit_rent_summary_count}".html_safe %></li>
-	</ul>
-	
-  <div class="clearfix"></div>
+  <!-- <div class="clearfix"></div> -->
 </div>

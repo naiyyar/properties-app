@@ -67,3 +67,24 @@
   }
 }
 
+.table-bordered-none{
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.table-bordered-none tr td{
+  border: none !important;
+  font-size: 11px;
+  padding: 2px 0px 2px 15px !important;
+}
+
+.table-bordered-none tr td span{
+  color: #999;
+}
+
+.infoW{
+  .table-bordered-none tr td{
+    padding: 2px 0px 2px 1px !important;
+  }
+}
+
