@@ -315,7 +315,7 @@
         }
     })
 
-    $(document).on('touchstart', function(){
+    $(document).on('touchend', function(){
         if($('.home-nav').hasClass('active')){
           $('.home-nav').removeClass('active');
         }

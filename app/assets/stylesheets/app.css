@@ -5855,7 +5855,7 @@ blockquote {
         overflow-y: scroll;
         overflow-x:hidden;
         z-index: 1100;
-        min-height: 85px;
+        min-height: 150px;
         float: none;
         background-color: rgba(0, 0, 0, 0);
     }

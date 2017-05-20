@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def store_location
     # store last url as long as it isn't a /users path
-    session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/
+    session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
     session[:contribution_for] = params[:contribution]
     if params[:id].present?
       session[:building_id] = params[:id] if params[:controller] == 'buildings'
@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
       elsif session[:unit_id].present?
         return "/uploads/new?unit_id=#{session[:unit_id]}"
       else
-        session[:previous_url] || root_path
+        session[:return_to] || root_path
       end
 	  end
     
@@ -115,7 +115,7 @@ class ApplicationController < ActionController::Base
         end
       end
     else
-      session[:previous_url] || root_path
+      session[:return_to] || root_path
     end
   end
 
