@@ -1,43 +1,46 @@
 <% @building ||= building %>
 <div class="amenities">
   <h3>Building Amenities</h3>
-  <div class="row">
-    <% if @building.laundry_facility.present? %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Laundry in Building' %></div>
-    <%end%>
-     <% if @building.parking %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-car"></span> <%= 'Parking' %></div>
-    <%end%>
-     <% if @building.deck %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-shower"></span> <%= 'Deck' %></div>
-    <%end%>
-    <% if @building.elevator %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-arrows-v"></span> <%= "Elevator(#{@building.elevator})" %></div>
-    <%end%>
-    <% if @building.live_in_super.present? %>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Live in super' %></div>
-    <%end%>
-    <% if @building.gym %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Gym' %></div>
-    <%end%>
-    <% if @building.doorman %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-male"></span> <%= "Doorman" %></div>
-    <%end%>
-    <% if @building.pets_allowed_cats %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-paw"></span> <%= 'Cats Allowed' %></div>
-    <%end%>
-    <% if @building.pets_allowed_dogs %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-paw"></span> <%= 'Dogs Allowed' %></div>
-    <%end%>
-    <% if @building.roof_deck %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Roof Deck' %></div>
-    <%end%>
-    <% if @building.swimming_pool %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-bath"></span> <%= 'Swimming Pool' %></div>
-    <%end%>
-    <% if @building.walk_up %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-road"></span> <%= 'Walk up' %></div>
-    <%end%>
+    <div class="row">
+        <% if @building.laundry_facility %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/laundary.png' %></span> <%= 'Laundry in Building' %></div>
+        <%end%>
+         <% if @building.parking %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><%= image_tag 'amenities_icons/garage.png' %> <%= 'Parking' %></div>
+        <%end%>
+        <% if @building.courtyard %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/courtyard.png' %></span> <%= 'Courtyard' %></div>
+        <%end%>
+        <% if @building.elevator %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/elevator.png' %></span> <%= "Elevator(#{@building.elevator})" %></div>
+        <%end%>
+        <% if @building.live_in_super.present? %>
+          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/live_in_super.png' %></span> <%= 'Live in super' %></div>
+        <%end%>
+        <% if @building.gym %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/gym.png' %></span> <%= 'Gym' %></div>
+        <%end%>
+        <% if @building.doorman %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/doorman.png' %></span> <%= "Doorman" %></div>
+        <%end%>
+        <% if @building.pets_allowed_cats %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/cat.png' %></span> <%= 'Cats Allowed' %></div>
+        <%end%>
+        <% if @building.pets_allowed_dogs %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/dog.png' %></span> <%= 'Dogs Allowed' %></div>
+        <%end%>
+        <% if @building.roof_deck %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/roofdeck.png' %></span> <%= 'Roof Deck' %></div>
+        <%end%>
+        <% if @building.swimming_pool %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/swimming_pool.png' %></span> <%= 'Swimming Pool' %></div>
+        <%end%>
+        <% if @building.walk_up %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/walkup.png' %></span> <%= 'Walk up' %></div>
+        <%end%>
+        <% if @building.management_company_run %>
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/management_company.png' %></span> <%= 'Management Company Run' %></div>
+        <%end%>
     
-  </div>
+    </div>
 </div>

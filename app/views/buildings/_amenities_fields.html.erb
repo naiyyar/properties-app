@@ -27,7 +27,7 @@
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="col-sm-6">
           <h3>Building Information</h3>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :deck %> <span class="fa fa-check"></span> Deck</label></div>
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :courtyard %> <span class="fa fa-check"></span> Courtyard</label></div>
           <%= hidden_field_tag 'contribution', params[:contribution] %>
           <div class="checkbox custom-checkbox"><label><%= f.check_box :doorman %> <span class="fa fa-check"></span> Doorman</label></div>
 
@@ -43,7 +43,7 @@
           </div>
 
           <div class="checkbox custom-checkbox"><label><%= f.check_box :garage %> <span class="fa fa-check"></span> Garage</label></div>
-
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :laundry_facility %> <span class="fa fa-check"></span> Laundry in Building</label></div>
           <div class="checkbox custom-checkbox"><label><%= f.check_box :gym %> <span class="fa fa-check"></span> Gym</label></div>
 
           <div class="checkbox custom-checkbox"><label><%= f.check_box :live_in_super %> <span class="fa fa-check"></span> Live in super</label></div>
@@ -57,6 +57,7 @@
           <div class="checkbox custom-checkbox"><label><%= f.check_box :walk_up %> <span class="fa fa-check"></span> Walk up</label></div>
 
           <div class="checkbox custom-checkbox"><label><%= f.check_box :swimming_pool %> <span class="fa fa-check"></span> Swimming Pool</label></div>
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :management_company_run %> <span class="fa fa-check"></span> Management Company Run</label></div>
       </div>
       <br />
       <div class="form-group">

@@ -43,6 +43,8 @@ gem 'wicked'
 #
 #gem 'jquery-ui-rails'
 
+#Rest
+#gem 'rest-client'
 
 #Role management
 gem "rolify"

@@ -1,4 +1,5 @@
 class Building < ActiveRecord::Base
+
   include PgSearch
   include Imageable
   acts_as_voteable

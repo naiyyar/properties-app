@@ -2,55 +2,50 @@
   <h3>Unit Amenities</h3>
   <div class="row">
     <% if @unit.balcony.present? %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Balcony' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/balcony.png' %></span> <%= 'Balcony' %></div>
     <%end%>
     <% if @unit.board_approval_required %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-car"></span> <%= 'Board Approval Required' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/approval.png' %></span> <%= 'Board Approval Required' %></div>
     <%end%>
     <% if @unit.converted_unit %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-shower"></span> <%= 'Converted Unit' %></div>
-    <%end%>
-    <% if @unit.courtyard %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-arrows-v"></span> <%= "Courtyard" %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/split.png' %></span> <%= 'Converted Unit' %></div>
     <%end%>
     <% if @unit.dishwasher? %>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Dishwasher' %></div>
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/dishwasher.png' %></span> <%= 'Dishwasher' %></div>
     <%end%>
     <% if @unit.fireplace %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Fireplace' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/fireplace.png' %></span> <%= 'Fireplace' %></div>
     <%end%>
     <% if @unit.furnished %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-male"></span> <%= "Furnished" %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/furnished.png' %></span> <%= "Furnished" %></div>
     <%end%>
     <% if @unit.guarantors_accepted %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-paw"></span> <%= 'Guarantors Accepted' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/guarentors_accespted.png' %></span> <%= 'Guarantors Accepted' %></div>
     <%end%>
     <% if @unit.loft %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-paw"></span> <%= 'Loft' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/laundary.png' %></span> <%= 'Loft' %></div>
     <%end%>
-    <% if @unit.management_company_run %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-building"></span> <%= 'Management Company Run' %></div>
-    <%end%>
+    
     <% if @unit.rent_controlled %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-bath"></span> <%= 'Rent Controlled' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/rent_controlled.png' %></span> <%= 'Rent Controlled' %></div>
     <%end%>
     <% if @unit.private_landlord %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-road"></span> <%= 'Private Landlord' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/private_landlord.png' %></span> <%= 'Private Landlord' %></div>
     <%end%>
     <% if @unit.storage_available %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-road"></span> <%= 'Storage Available' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/storage_available.png' %></span> <%= 'Storage Available' %></div>
     <%end%>
     <% if @unit.sublet %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-road"></span> <%= 'Sublet' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/sublet.png' %></span> <%= 'Sublet' %></div>
     <%end%>
     <% if @unit.terrace %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-road"></span> <%= 'Terrace' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/terrace.png' %></span> <%= 'Terrace' %></div>
     <%end%>
     <% if @unit.can_be_converted %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-road"></span> <%= 'Can be converted' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/split.png' %></span> <%= 'Can be converted' %></div>
     <%end%>
     <% if @unit.dryer_in_unit %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span class="fa fa-road"></span> <%= 'Dryer in unit' %></div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem"><span><%= image_tag 'amenities_icons/units/washer_dryer.png' %></span> <%= 'Dryer in unit' %></div>
     <%end%>
     
   </div>

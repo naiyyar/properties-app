@@ -120,8 +120,8 @@ class UnitsController < ApplicationController
                                    :number_of_bathrooms,:monthly_rent,:square_feet,:total_upfront_cost,
                                    :rent_start_date,:rent_end_date,:security_deposit,:broker_fee,
                                    :move_in_fee,:rent_upfront_cost,:processing_fee,:balcony,:board_approval_required,
-                                   :converted_unit,:courtyard,:dishwasher,:fireplace,:furnished,:guarantors_accepted,
-                                   :loft,:management_company_run,:rent_controlled,:private_landlord,:storage_available,
+                                   :converted_unit,:dishwasher,:fireplace,:furnished,:guarantors_accepted,
+                                   :loft,:rent_controlled,:private_landlord,:storage_available,
                                    :sublet,:terrace,:can_be_converted,:dryer_in_unit
                                    )
     end
