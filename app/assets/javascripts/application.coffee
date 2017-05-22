@@ -14,7 +14,10 @@ jQuery ->
 		$(this).datepicker('hide');
 
 	#$('[data-toggle="popover"]').popover({ trigger: "click" })
-	
+
+	#removing hash after facebook login
+	if(window.location.hash && window.location.hash == '#_=_')
+    window.location.hash = ''
 
 	$('input, textarea').placeholder()
 
