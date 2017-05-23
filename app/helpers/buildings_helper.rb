@@ -63,4 +63,23 @@ module BuildingsHelper
 		end
 	end
 
+	def building_amenities
+		{
+			laundry_facility: 'Laundry in Building',
+			parking: 'Parking',
+			garage: 'Garage',
+			courtyard: 'Courtyard',
+			elevator: 'Elevator',
+			live_in_super: 'Live in super',
+			gym: 'Gym',
+			doorman: 'Doorman',
+			pets_allowed_cats: 'Cats Allowed',
+			pets_allowed_dogs: 'Dogs Allowed',
+			roof_deck: 'Roof Deck',
+			swimming_pool: 'Swimming Pool',
+			walk_up: 'Walk up',
+			management_company_run: 'Management Company Run'
+		}
+	end
+
 end
