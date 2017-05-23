@@ -7,6 +7,7 @@
           </b></div>
         <div class="panel-body">
           <%= form_for(@rental_price_history) do |f| %>
+            <%= hidden_field_tag 'contribution', params[:contribution] %>
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">

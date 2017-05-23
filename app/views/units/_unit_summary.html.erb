@@ -20,7 +20,7 @@
           <div class="favLink">(<%= @unit.reviews.count %>)</div>
           <% if @unit.votes.present? %>
             <div class="favLink"><span class="icon-pipe">|</span>
-               <%= @unit.recommended_percent.nan? ? '| --% recommended' :  "| #{@unit.recommended_percent.to_i}% Recommended" %>
+               <%= @unit.recommended_percent.nan? ? '--% recommended' :  "#{@unit.recommended_percent.to_i}% Recommended" %>
             </div>
           <%end%>
           
