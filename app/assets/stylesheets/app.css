@@ -5455,6 +5455,9 @@ blockquote {
 
 
 @media screen and (max-width: 767px) {
+    textarea.form-control{
+        height: 100px;
+    }
     .buildings-search .results .ui-widget-content{
       max-height: 200px !important;
     }  

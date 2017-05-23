@@ -4,6 +4,7 @@
     <% unit_amenities.sort.to_h.each_pair do |k, v| %>
       <%if @unit[k].present? %>
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem">
+            <% v = (v == 'Washer/Dryer' ? 'Washer-Dryer' : v) %>
             <span><%= image_tag "amenities_icons/units/#{v}.png" %></span>
             <%= v %>
         </div>

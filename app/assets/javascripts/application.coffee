@@ -7,12 +7,6 @@
 #= require_tree .
 
 jQuery ->
-	$('.datepicker').datepicker
-		format: 'mm-dd-yyyy'
-
-	$('.datepicker').on 'changeDate',(e) ->
-		$(this).datepicker('hide');
-
 	#$('[data-toggle="popover"]').popover({ trigger: "click" })
 
 	#removing hash after facebook login
@@ -33,6 +27,12 @@ jQuery ->
 
 ready = ->
 	$('[data-toggle="tooltip"]').tooltip({ trigger: 'click' })
+
+	$('.datepicker').datepicker
+		format: 'mm-dd-yyyy'
+
+	$('.datepicker').on 'changeDate',(e) ->
+		$(this).datepicker('hide');
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

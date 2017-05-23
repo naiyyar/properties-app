@@ -21,7 +21,7 @@
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                   <label>Resident From*</label>
-                  <%= f.text_field :residence_start_date, class: "form-control datepicker validate" %>
+                  <%= f.text_field :residence_start_date, class: 'form-control datepicker validate' %>
                   <span class="text-red hidden start_validation_error_message">Date must be earlier</span>
                   <p class="help-block">This field is required</p>
                   <% if @unit.present? %>

@@ -15,7 +15,7 @@ module UnitsHelper
 			sublet: 'Sublet',
 			terrace: 'Terrace',
 			can_be_converted: 'Can be converted',
-			dryer_in_unit: 'Dryer in unit'
+			dryer_in_unit: 'Washer/Dryer'
 		}
 	end
 end
