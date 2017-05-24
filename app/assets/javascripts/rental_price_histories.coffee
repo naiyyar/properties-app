@@ -24,4 +24,4 @@ jQuery ->
 
 	#dismiss datepicker on mobile touch
 	$("#new_rental_price_history").on 'touchstart', (e) ->
-		$('datepicker').datepicker('hide')
+		$('.datepicker').datepicker('hide')
