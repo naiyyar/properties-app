@@ -342,6 +342,6 @@
     });
 
     //Home menu swipe and slide
-    $('.swipe-nav').slideAndSwipe();
+    //$('.swipe-nav').slideAndSwipe();
 
 })(jQuery);

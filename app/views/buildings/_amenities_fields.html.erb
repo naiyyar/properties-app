@@ -29,6 +29,9 @@
           <h3>Building Information</h3>
           <div class="checkbox custom-checkbox"><label><%= f.check_box :courtyard %> <span class="fa fa-check"></span> Courtyard</label></div>
           <%= hidden_field_tag 'contribution', params[:contribution] %>
+           <div class="checkbox custom-checkbox"><label><%= f.check_box :pets_allowed_cats %> <span class="fa fa-check"></span> Cats Allowed </label></div>
+
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :pets_allowed_dogs %> <span class="fa fa-check"></span> Dogs Allowed </label></div>
           <div class="checkbox custom-checkbox"><label><%= f.check_box :doorman %> <span class="fa fa-check"></span> Doorman</label></div>
 
           <div class="checkbox custom-checkbox">
@@ -43,22 +46,19 @@
           </div>
 
           <div class="checkbox custom-checkbox"><label><%= f.check_box :garage %> <span class="fa fa-check"></span> Garage</label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :parking %> <span class="fa fa-check"></span> Parking</label></div>
+           <div class="checkbox custom-checkbox"><label><%= f.check_box :gym %> <span class="fa fa-check"></span> Gym</label></div>
           <div class="checkbox custom-checkbox"><label><%= f.check_box :laundry_facility %> <span class="fa fa-check"></span> Laundry in Building</label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :gym %> <span class="fa fa-check"></span> Gym</label></div>
 
           <div class="checkbox custom-checkbox"><label><%= f.check_box :live_in_super %> <span class="fa fa-check"></span> Live in super</label></div>
-
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :pets_allowed_cats %> <span class="fa fa-check"></span> Pets Allowed Cats</label></div>
-
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :pets_allowed_dogs %> <span class="fa fa-check"></span> Pets Allowed Dogs</label></div>
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :management_company_run %> <span class="fa fa-check"></span> Management Company Run</label></div>
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :parking %> <span class="fa fa-check"></span> Parking</label></div>
 
           <div class="checkbox custom-checkbox"><label><%= f.check_box :roof_deck %> <span class="fa fa-check"></span> Roof Deck</label></div>
 
           <div class="checkbox custom-checkbox"><label><%= f.check_box :walk_up %> <span class="fa fa-check"></span> Walk up</label></div>
 
           <div class="checkbox custom-checkbox"><label><%= f.check_box :swimming_pool %> <span class="fa fa-check"></span> Swimming Pool</label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :management_company_run %> <span class="fa fa-check"></span> Management Company Run</label></div>
+         
       </div>
       <br />
       <div class="form-group">

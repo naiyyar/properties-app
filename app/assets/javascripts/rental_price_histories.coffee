@@ -21,3 +21,7 @@ jQuery ->
 			$("#rental_price_history_residence_start_date").val('')
 		else
 			$('.start_validation_error_message').addClass('hidden');
+
+	#dismiss datepicker on mobile touch
+	$("#new_rental_price_history").on 'touchstart', (e) ->
+		$('datepicker').datepicker('hide')

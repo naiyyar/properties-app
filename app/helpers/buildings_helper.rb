@@ -1,6 +1,6 @@
 module BuildingsHelper
 	def rating_for_user(rateable_obj, rating_user, dimension = nil, options = {})
-	   star = options[:star] || 5
+	  star = options[:star] || 5
 	   #readonly = true
 	  if rating_user.present?
 		  @object = rateable_obj
@@ -65,20 +65,21 @@ module BuildingsHelper
 
 	def building_amenities
 		{
-			laundry_facility: 'Laundry in Building',
-			parking: 'Parking',
-			garage: 'Garage',
 			courtyard: 'Courtyard',
-			elevator: 'Elevator',
-			live_in_super: 'Live in super',
-			gym: 'Gym',
-			doorman: 'Doorman',
 			pets_allowed_cats: 'Cats Allowed',
 			pets_allowed_dogs: 'Dogs Allowed',
+			doorman: 'Doorman',
+			elevator: 'Elevator',
+			garage: 'Garage',
+			gym: 'Gym',
+			laundry_facility: 'Laundry in Building',
+			live_in_super: 'Live in super',
+			management_company_run: 'Management Company Run',
+			parking: 'Parking',
 			roof_deck: 'Roof Deck',
 			swimming_pool: 'Swimming Pool',
 			walk_up: 'Walk up',
-			management_company_run: 'Management Company Run'
+			
 		}
 	end
 

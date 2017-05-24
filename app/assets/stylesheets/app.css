@@ -22,6 +22,11 @@
 }
 
 /* custome */
+.gm-iv-address-link {
+    margin-top: 15px;
+    background-color: #ddd;
+    padding: 4px;
+}
 .amenities span img{
     width: 16px;
     height: 16px;

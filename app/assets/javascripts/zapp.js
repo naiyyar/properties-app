@@ -514,4 +514,25 @@
         $("#apt-search-txt-searchpage").val('');
     })
 
+    //clearing out unit modal fields on building show page
+    $("#new_unit_modal .close").click(function(){
+        var search_field = $("#new_unit_modal #units-search-txt");
+        if(search_field.val() != ''){
+          search_field.val('');
+        }
+        if(!$('#new_unit_building').hasClass('hide')){
+          $('#new_unit_building').addClass('hide');
+        }
+        if($(".no-result-li").length > 0){
+          $(".no-result-li").remove();
+        }
+    })
+
+    $('.add_unit').click(function(){
+        if($("#units-search-txt").hasClass('hide') && $(".unit-search").hasClass('hide')){
+          $("#units-search-txt").removeClass('hide');
+          $(".unit-search").removeClass('hide');
+        }
+    })
+
 })(jQuery);
