@@ -27,4 +27,7 @@ jQuery ->
 		$('.datepicker').datepicker('hide')
 
 	$("#rental_price_history_residence_start_date").on 'touchstart', (e) ->
-		e.stopPropagation()
+		$('.datepicker').datepicker('show')
+
+	$("#rental_price_history_residence_end_date").on 'touchstart', (e) ->
+		$('.datepicker').datepicker('show')
