@@ -30,7 +30,7 @@
             <div class="checkbox custom-checkbox"><label><%= f.check_box :balcony %> <span class="fa fa-check"></span> Balcony</label></div>
             <%= hidden_field_tag 'contribution', params[:contribution_for] %>
             <div class="checkbox custom-checkbox"><label><%= f.check_box :board_approval_required %> <span class="fa fa-check"></span> Board Approval Required</label></div>
-
+            <div class="checkbox custom-checkbox"><label><%= f.check_box :can_be_converted %> <span class="fa fa-check"></span> Can Be Converted</label></div>
             <div class="checkbox custom-checkbox"><label><%= f.check_box :converted_unit %> <span class="fa fa-check"></span> Converted unit </label></div>
 
             <div class="checkbox custom-checkbox"><label><%= f.check_box :dishwasher %> <span class="fa fa-check"></span> Dishwasher</label></div>
@@ -42,18 +42,14 @@
             <div class="checkbox custom-checkbox"><label><%= f.check_box :guarantors_accepted %> <span class="fa fa-check"></span> Guarantors Accepted</label></div>
 
             <div class="checkbox custom-checkbox"><label><%= f.check_box :loft %> <span class="fa fa-check"></span> Loft</label></div>
+             <div class="checkbox custom-checkbox"><label><%= f.check_box :private_landlord %> <span class="fa fa-check"></span> Private Landlord</label></div>
 
             <div class="checkbox custom-checkbox"><label><%= f.check_box :rent_controlled %> <span class="fa fa-check"></span> Rent Controlled</label></div>
-
-            <div class="checkbox custom-checkbox"><label><%= f.check_box :private_landlord %> <span class="fa fa-check"></span> Private Landlord</label></div>
-
             <div class="checkbox custom-checkbox"><label><%= f.check_box :storage_available %> <span class="fa fa-check"></span> Storage Available</label></div>
 
             <div class="checkbox custom-checkbox"><label><%= f.check_box :sublet %> <span class="fa fa-check"></span> Sublet</label></div>
 
             <div class="checkbox custom-checkbox"><label><%= f.check_box :terrace %> <span class="fa fa-check"></span> Terrace</label></div>
-
-            <div class="checkbox custom-checkbox"><label><%= f.check_box :can_be_converted %> <span class="fa fa-check"></span> Unit Can Be Converted</label></div>
 
             <div class="checkbox custom-checkbox"><label><%= f.check_box :dryer_in_unit %> <span class="fa fa-check"></span> Washer/Dryer</label></div>
           </div>
