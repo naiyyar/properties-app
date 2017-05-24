@@ -25,3 +25,6 @@ jQuery ->
 	#dismiss datepicker on mobile touch
 	$("#new_rental_price_history").on 'touchstart', (e) ->
 		$('.datepicker').datepicker('hide')
+
+	$("#rental_price_history_residence_start_date").on 'touchstart', (e) ->
+		e.stopPropagation()
