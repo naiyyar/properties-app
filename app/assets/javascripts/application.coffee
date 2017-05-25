@@ -32,7 +32,7 @@ ready = ->
 		format: 'mm-dd-yyyy'
 
 	$('.datepicker').on 'changeDate',(e) ->
-		$(this).datepicker('hide');
+		$(this).datepicker('hide')
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
