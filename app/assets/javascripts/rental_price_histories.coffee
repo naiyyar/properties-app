@@ -26,11 +26,11 @@ jQuery ->
 	$("form#new_rental_price_history").on 'touchend', (e) ->
 		$('.dropdown-menu').css('display', 'none')
 
-	$("#rental_price_history_residence_start_date").on 'touchstart', (e) ->
-		$('.dropdown-menu').css('display', 'block')
+	#$("#rental_price_history_residence_start_date").on 'touchstart', (e) ->
+	#	$('.dropdown-menu').css('display', 'block')
 
-	$("#rental_price_history_residence_end_date").on 'touchstart', (e) ->
-		$('.dropdown-menu').css('display', 'block')
+	#$("#rental_price_history_residence_end_date").on 'touchstart', (e) ->
+	#	$('.dropdown-menu').css('display', 'block')
 
 	$('.hide-datepicker').on 'click', (e) ->
 		$('.dropdown-menu').css('display', 'none')
