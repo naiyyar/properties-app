@@ -77,6 +77,15 @@
             });
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                panorama = map.getStreetView();
+                panorama.setPosition(marker.getPosition());
+                google.maps.event.addListenerOnce(panorama, 'status_changed', function () {
+                    panorama.setPov({
+                        heading: -265,
+                        zoom: 1,
+                        pitch: 0
+                    });
+                });
                 return function() {
                     //infowindow.setContent(infoboxContent);
                     infowindow.open(map, marker);
@@ -168,12 +177,20 @@
 
         addMarkers(props, map);
 
-        panorama = map.getStreetView();
-        panorama.setPosition({ lat: lat, lng: lng });
-        panorama.setPov(/** @type {google.maps.StreetViewPov} */({
-          heading: 265,
-          pitch: 0
-        }));
+        // panorama = map.getStreetView();
+        // //panorama.setPosition({ lat: lat, lng: lng });
+        // panorama.setPosition(marker.getPosition());
+        // google.maps.event.addListenerOnce(panorama, 'status_changed', function () {
+        //     panorama.setPov({
+        //         heading: 265,
+        //         zoom: 1,
+        //         pitch: 0
+        //     });
+        // });
+        // panorama.setPov(/** @type {google.maps.StreetViewPov} */({
+        //   heading: 265,
+        //   pitch: 0
+        // }));
 
     }, 300);
     
