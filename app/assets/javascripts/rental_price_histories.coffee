@@ -23,7 +23,7 @@ jQuery ->
 			$('.start_validation_error_message').addClass('hidden');
 
 	#dismiss datepicker on mobile touch
-	$("document").on 'touchstart', (e) ->
+	$("form#new_rental_price_history").on 'touchstart', (e) ->
 		$('.dropdown-menu').css('display', 'none')
 
 	#$("#rental_price_history_residence_start_date").on 'touchstart', (e) ->
