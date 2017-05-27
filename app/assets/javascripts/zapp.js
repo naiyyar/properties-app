@@ -8,12 +8,12 @@
         zoomControlOptions: {
           position: google.maps.ControlPosition.RIGHT_CENTER
         },
-        gestureHandling: 'greedy'
+        gestureHandling: 'greedy',
         // scaleControl: true,
-        // streetViewControl: true,
-        // streetViewControlOptions: {
-        //   position: google.maps.ControlPosition.RIGHT_CENTER
-        // },
+        streetViewControl: true,
+        streetViewControlOptions: {
+          position: google.maps.ControlPosition.RIGHT_CENTER
+        },
     };
     
     var props = $("#mapHash").data('map');

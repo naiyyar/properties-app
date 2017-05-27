@@ -451,7 +451,7 @@
 		contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>'
 	};
 	DPGlobal.template = '<div class="datepicker dropdown-menu">'+
-							'<a href="#"><i class="fa fa-times-circle-o fa-2x pull-right hide-datepicker visible-sm visible-xs"></i></a>'+
+							'<a href="#" class="hide-datepicker pull-right visible-sm visible-xs"><i class="fa fa-times-circle-o fa-2x"></i></a>'+
 							'<div class="datepicker-days">'+
 								'<table class=" table-condensed">'+
 									DPGlobal.headTemplate+
