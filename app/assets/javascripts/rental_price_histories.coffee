@@ -33,8 +33,10 @@ jQuery ->
 	#	$('.dropdown-menu').css('display', 'block')
 
 	$('.hide-datepicker').on 'click', (e) ->
+		e.preventDefault()
 		$('.dropdown-menu').css('display', 'none')
 
 	#for mobile touch
 	$('.hide-datepicker').on 'touchstart', (e) ->
+		e.preventDefault()
 		$('.dropdown-menu').css('display', 'none')
