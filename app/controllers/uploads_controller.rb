@@ -34,7 +34,7 @@ class UploadsController < ApplicationController
     if @upload.save
       session[:after_contribute] = 'upload'
       # send success header
-      render json: { message: "success", fileID: @upload.id }, :status => 200
+      render json: { message: 'success', fileID: @upload.id }, :status => 200
     else
       #  you need to send an error header, otherwise Dropzone
       #  will not interpret the response as an error:

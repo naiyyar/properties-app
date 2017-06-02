@@ -45,6 +45,7 @@ class UnitsController < ApplicationController
     #         'height' => 50
     #       })
     # end
+    flash[:notice] = "Photos Uploaded Successfully." if params[:from_uploaded].present?
   end
 
   def units_search

@@ -251,6 +251,9 @@
       addedfile: function(file) {
         var node, removeFileEvent, removeLink, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
         if (this.element === this.previewsContainer) {
+          if ($('.btn-done').hasClass('disabled')){
+            $('.btn-done').removeClass('disabled');
+          }
           this.element.classList.add("dz-started");
         }
         if (this.previewsContainer) {

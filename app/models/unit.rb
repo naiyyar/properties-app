@@ -6,7 +6,7 @@ class Unit < ActiveRecord::Base
   
 	belongs_to :building
 	has_many :reviews, as: :reviewable
-	has_many :rental_price_histories
+	has_many :rental_price_histories, dependent: :destroy
 	belongs_to :user
 
 	include Imageable

@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <b>Add Rent Information For #<%= link_to @unit.name, unit_path(@unit) if @unit.present?%> 
+          <b><%=@title %> #<%= link_to @rental_price_history.unit.name, unit_path(@rental_price_history.unit) if @rental_price_history.unit.present?%> 
           </b></div>
         <div class="panel-body">
           <%= form_for(@rental_price_history) do |f| %>
@@ -12,7 +12,7 @@
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
                   <label>Building Address</label>
-                  <%= text_field_tag 'building_street_address', building_street_address(@unit.building),  class: 'form-control', disabled: 'disabled' %>
+                  <%= text_field_tag 'building_street_address', building_street_address(@rental_price_history.unit.building),  class: 'form-control', disabled: 'disabled' %>
                   <%= hidden_field_tag 'contribution', params[:contribution_for] %>
                 </div>
               </div>

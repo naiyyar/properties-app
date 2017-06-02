@@ -18,11 +18,9 @@
               <th>Unit Name</th>
               <th>Building</th>
               <th>Building Address</th>
-              <th>Price Histories</th>
+              <th class="text-center">Rent Information</th>
               <th></th>
               <th></th>
-              <th></th>
-
             </tr>
           </thead>
           <tbody>
@@ -32,12 +30,11 @@
                   <td><%= link_to unit.name, unit_path(unit) %></td>
                   <td><%= link_to unit.building.building_name_or_address, building_path(unit.building) if unit.building.present? %></td>
                   <td><%= link_to building_street_address(unit.building), building_path(unit.building) if unit.building.present? %></td>
-                  <td><%= link_to 'Price Histories', rental_price_histories_path(unit_id: unit.id) %></td>
-                  <td></td>
+                  <td class="text-center"><%= link_to '<span class="fa fa-info-circle fa-2x" />'.html_safe, rental_price_histories_path(unit_id: unit.id) %></td>
                   <% if current_user %>
                     <td><%= link_to "edit", edit_unit_path(unit) %></td>
                     <% if current_user.has_role?(:admin) %>
-                      <td><%= link_to "delete", unit_path(unit), method: :delete, data: { confirm: "Are you sure you want to delete this building?"}%></td>  
+                      <td><%= link_to "delete", unit_path(unit), method: :delete, data: { confirm: "Are you sure you want to delete this building?"}, class: 'text-danger'%></td>  
                     <% end %>
                   <%end%>   
                 </tr>

@@ -4,9 +4,13 @@ class RentalPriceHistoriesController < ApplicationController
   # GET /rental_price_histories
   # GET /rental_price_histories.json
   def index
-    @unit = Unit.find(params[:unit_id])
-    @unit_rental_price_histories = @unit.rental_price_histories.order('created_at desc')
-    @rental_price_histories = RentalPriceHistory.all
+    if params[:unit_id].present?
+      @unit = Unit.find(params[:unit_id])
+      @rental_price_histories = @unit.rental_price_histories.order('created_at desc')
+    else
+      @rental_price_histories = RentalPriceHistory.where('unit_id is not null').order('created_at desc')
+    end
+    
   end
 
   # GET /rental_price_histories/1
@@ -18,10 +22,12 @@ class RentalPriceHistoriesController < ApplicationController
   def new
     @unit = Unit.find(params[:unit_id])
     @rental_price_history = RentalPriceHistory.new
+    @title = 'Add Rent Information For'
   end
 
   # GET /rental_price_histories/1/edit
   def edit
+    @title = 'Update Rent Information For'
   end
 
   # POST /rental_price_histories
@@ -61,7 +67,7 @@ class RentalPriceHistoriesController < ApplicationController
   def destroy
     @rental_price_history.destroy
     respond_to do |format|
-      format.html { redirect_to rental_price_histories_url, notice: 'Rental price history was successfully destroyed.' }
+      format.html { redirect_to rental_price_histories_url, notice: 'Rental price history was successfully deleted.' }
       format.json { head :no_content }
     end
   end

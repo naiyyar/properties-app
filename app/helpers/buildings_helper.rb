@@ -45,8 +45,8 @@ module BuildingsHelper
 		params[:action] == 'contribute' || params[:contribution].present?
 	end
 
-	def disabled(current_user)
-		if current_user && !current_user.has_role?(:admin)
+	def disabled(current_user, val)
+		if val.present? && current_user && current_user.has_role?(:admin)
 			true
 		end
 	end
