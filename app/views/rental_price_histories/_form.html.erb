@@ -11,8 +11,10 @@
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
-                  <label>Building Address</label>
-                  <%= text_field_tag 'building_street_address', building_street_address(@rental_price_history.unit.building),  class: 'form-control', disabled: 'disabled' %>
+                  <% if @rental_price_history.unit.present? %>
+                    <label>Building Address</label>
+                    <%= text_field_tag 'building_street_address', building_street_address(@rental_price_history.unit.building),  class: 'form-control', disabled: 'disabled'%>
+                  <%end%>
                   <%= hidden_field_tag 'contribution', params[:contribution_for] %>
                 </div>
               </div>

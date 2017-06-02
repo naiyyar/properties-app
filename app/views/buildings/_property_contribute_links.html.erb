@@ -2,7 +2,13 @@
   <div class="contribute_links">
     <ul class="features">
       <% if object.kind_of? Unit %>
-        <li style='width: 100%;'><%= link_to '+ Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}" %></li>
+        <li style='width: 100%;'>
+          <% if user_signed_in? %>
+            <%= link_to '+ Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}" %>
+          <%else%>
+            <%= link_to '+ Rent Information', '#signin', 'data-toggle' => 'modal'  %>
+          <%end%>
+        </li>
       <%else%>
         <li style='width: 100%;'><%= link_to '+ Unit', '#new_unit_modal', 'data-toggle' => 'modal', class: 'add_unit'  %></li>
       <%end%>
