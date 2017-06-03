@@ -29,7 +29,7 @@ ready = ->
 	$('[data-toggle="tooltip"]').tooltip({ trigger: 'click' })
 
 	$('.datepicker').datepicker
-		format: 'mm-dd-yyyy'
+		format: 'yyyy-mm-dd'
 
 	$('.datepicker').on 'changeDate',(e) ->
 		$(this).datepicker('hide')

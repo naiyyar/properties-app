@@ -11,26 +11,26 @@
         <th>Broker Fee</th>
         <th>Non-refundable costs</th>
         <th>Total Money upfront</th>
-        <th></th><th></th>
+        <% if current_user and current_user.has_role?(:admin)  %>
+          <th></th><th></th>
+        <%end%>
       </tr>
     </thead>
     <% @rental_price_histories = @unit.rental_price_histories if @unit.present? %>
     <% @rental_price_histories.order('created_at desc').each do |rental_price| %>
   		<tr>
         <td><%= link_to rental_price.unit.name, unit_path(rental_price.unit) if rental_price.unit.present?%></td>
-  			<td><%= rental_price.residence_start_date %></td>
-  			<td><%= rental_price.residence_end_date %></td>
+  			<td><%= rental_price.residence_start_date.strftime("%Y-%m-%d") if rental_price.residence_start_date.present? %></td>
+  			<td><%= rental_price.residence_end_date.strftime("%Y-%m-%d") if rental_price.residence_end_date.present? %></td>
   			<td class="text-right"><%= number_to_currency(rental_price.monthly_rent, precision: 0) %></td>
   			<td class="text-right"><%= number_to_currency(rental_price.rent_upfront, precision: 0) %></td>
   			<td class="text-right"><%= number_to_currency(rental_price.refundable_deposits, precision: 0) %></td>
   			<td class="text-right"><%= number_to_currency(rental_price.broker_fee, precision: 0) %></td>
   			<td class="text-right"><%= number_to_currency(rental_price.non_refundable_costs, precision: 0) %></td>
   			<td class="text-right"><%= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits, precision: 0) %></td>
-        <% if current_user %>
+        <% if current_user and current_user.has_role?(:admin)  %>
           <td><%= link_to "edit", edit_rental_price_history_path(rental_price) %></td>
-          <% if current_user.has_role?(:admin) %>
-            <td><%= link_to "Delete", rental_price_history_path(rental_price), method: :delete, data: {confirm: "Are you sure you want to delete rent information"}, class: 'text-danger'%></td>  
-          <%end%>
+          <td><%= link_to "Delete", rental_price_history_path(rental_price), method: :delete, data: {confirm: "Are you sure you want to delete rent information"}, class: 'text-danger'%></td>  
         <%end%>
   		</tr>
   	<%end%>
