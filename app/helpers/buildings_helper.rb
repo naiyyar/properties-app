@@ -46,7 +46,7 @@ module BuildingsHelper
 	end
 
 	def disabled(current_user, val)
-		if val.present? && current_user && current_user.has_role?(:admin)
+		if val.present? && current_user && !current_user.has_role?(:admin)
 			true
 		end
 	end
