@@ -27,6 +27,7 @@ class RentalPriceHistoriesController < ApplicationController
 
   # GET /rental_price_histories/1/edit
   def edit
+    @unit = @rental_price_history.unit
     @title = 'Update Rent Information For'
   end
 

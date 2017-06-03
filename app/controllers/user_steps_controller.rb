@@ -11,7 +11,7 @@ class UserStepsController < ApplicationController
 		@rental_price_history = RentalPriceHistory.new if params[:contribution_for] == 'unit_price_history'
 
 		@search_bar_hidden = :hidden
-		
+		@title = 'Add Rent Information For'
 		render_wizard
 	end
 
