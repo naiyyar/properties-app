@@ -68,7 +68,7 @@ class RentalPriceHistoriesController < ApplicationController
   def destroy
     @rental_price_history.destroy
     respond_to do |format|
-      format.html { redirect_to rental_price_histories_url, notice: 'Rental price history was successfully deleted.' }
+      format.html { redirect_to :back, notice: 'Rental price history was successfully deleted.' }
       format.json { head :no_content }
     end
   end

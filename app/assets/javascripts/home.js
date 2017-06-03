@@ -341,6 +341,16 @@
         $('#signin').modal('show');
     });
 
+    //Disabling search btn when search field is blank
+    $('#apt-search-txt').on('input', function(){
+        if($('#apt-search-txt').val() == ''){
+            if(!$('#home-search-btn').hasClass('disabled')){
+                $('#home-search-btn').addClass('disabled');
+            }
+        }
+    })
+        
+
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();
 

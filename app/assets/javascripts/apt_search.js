@@ -36,6 +36,9 @@ app.apartments.prototype = {
     $("#neighborhoods").val(ui.item.neighborhoods);
     $("#apt-search-txt-form").val(ui.item.search_term);
     $('#apt-search-form').find('.in_header').click();
+    if($('#home-search-btn').hasClass('disabled')){
+      $('#home-search-btn').removeClass('disabled')
+    }
     return false;
   }
 
