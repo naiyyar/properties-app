@@ -179,7 +179,7 @@ $(document).on 'click', '#elevator',(e) ->
 	$('#building_elevator').toggleClass('hide')
 	if($('#building_elevator').hasClass('hide'))
 		$('#building_elevator').val('')
-		$('#building_elevator').attr('required', '')
+		$('#building_elevator').removeAttr('required')
 	else
 		$('#building_elevator').attr('required', 'required')
 
