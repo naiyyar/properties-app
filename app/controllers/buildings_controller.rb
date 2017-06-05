@@ -120,9 +120,9 @@ class BuildingsController < ApplicationController
           end
           if contribute.present?
             if ['unit_review', 'unit_photos', 'unit_amenities', 'unit_price_history'].include? contribute
-              redirect_to contribute_buildings_path(contribution_for: contribute, building_id: @building.id)  
+              redirect_to contribute_buildings_path(contribution_for: contribute, building_id: @building.id, contribution: contribute)  
             else
-              redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+              redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute, contribution: contribute)
             end
           else
             redirect_to building_steps_path(building_id: @building.id)

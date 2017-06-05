@@ -179,6 +179,9 @@ $(document).on 'click', '#elevator',(e) ->
 	$('#building_elevator').toggleClass('hide')
 	if($('#building_elevator').hasClass('hide'))
 		$('#building_elevator').val('')
+		$('#building_elevator').attr('required', '')
+	else
+		$('#building_elevator').attr('required', 'required')
 
 $(document).on 'click', '.reviewer_type',(e) ->
 	id= $(this).children().attr('id')

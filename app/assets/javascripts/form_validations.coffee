@@ -1,7 +1,7 @@
 jQuery ->
 	$(document).on 'click', "form", (e) ->
 		submit = true
-		window.data = $(this)
+		#window.data = $(this)
 		elems = $(this).find('.validate')
 		#elems = $('input').filter('.validate')
 		len = elems.length - 1
