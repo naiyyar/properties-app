@@ -12,7 +12,7 @@ class UserMailer < ApplicationMailer
 
 	def send_feedback contact
 		mail(
-			to: 'naiyyarabbas@yahoo.com', 
+			to: 'transparentcityllc@gmail.com', 
 			from: contact.email,
 			subject: 'Feedback',
 			body: contact.comment
