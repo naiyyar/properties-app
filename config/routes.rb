@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :contacts
   resources :rental_price_histories
   post '/rate' => 'rater#create', :as => 'rate'
   

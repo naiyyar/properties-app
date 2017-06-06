@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522042126) do
+ActiveRecord::Schema.define(version: 20170606033649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,14 @@ ActiveRecord::Schema.define(version: 20170522042126) do
   add_index "buildings", ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
   add_index "buildings", ["city"], name: "index_buildings_on_city", using: :btree
   add_index "buildings", ["zipcode"], name: "index_buildings_on_zipcode", using: :btree
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "gcoordinates", force: :cascade do |t|
     t.float    "latitude"
