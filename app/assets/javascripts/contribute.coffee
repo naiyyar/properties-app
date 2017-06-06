@@ -198,5 +198,5 @@ $(document).on 'click', '.reviewer_type',(e) ->
 
 #preventing enter key to submit form 
 $(document).on 'keypress', 'form',(e) ->
-	if e.keyCode == 13
+	if e.keyCode == 13 && e.target.tagName.toLowerCase() != 'textarea'
 		return false
