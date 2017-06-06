@@ -1,33 +1,22 @@
-<h1> Review Index </h1>
-
-<%= link_to "Create New Review", new_review_path%>
-<%= link_to "Buildings List", buildings_path%>
-
-
-<br />
-<br />
-<table class="table">
-  <tr>
-    <th>Building Review Title</th>
-    <th>Building Name</th>
-    <th>Building Name<th>
-  </tr>
-  <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
-        <td><%= link_to(review.review_title, review_path(review)) %></td>
-        <td><%= review.reviewable.try(:building_name) %></td>
-        <td>
-        <%  if review.reviewable_type == 'Building' %>
-          <%= link_to review.reviewable.building_name, building_path(review.reviewable) %>
-        <%else%>
-          <%= link_to review.reviewable.name, unit_path(review.reviewable) %>
-        <% end %>
-         </td>
-        <td><%= link_to "edit", edit_review_path(review) %></td>
-        <td><%= link_to "delete", review_path(review), method: :delete, data: {confirm: "Are you sure you want to delete this review?"}%></td>
-
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="tables">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="table-overflow">
+        <table class="table">
+          <tr>
+            <th>Title</th>
+            <th></th>
+          </tr>
+          <tbody>
+            <% @reviews.each do |review| %>
+              <tr>
+                <td><%= link_to(review.review_title, review_path(review)) %></td>
+                <td><%= link_to 'delete', review_path(review), method: :delete, data: { confirm: "Are you sure you want to delete this review?" }, class: 'text-danger'%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
