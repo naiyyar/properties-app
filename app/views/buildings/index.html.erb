@@ -30,7 +30,7 @@
                 <td>
                   <%= rating_for building, "building", disabled_after_rate: true, readonly: true %>
                 </td>
-                <td><%= link_to 'Reviews', building_reviews_path(building_id: building.id) %></td>
+                <td><%= link_to "Reviews(#{building.reviews.count})", building_reviews_path(building_id: building.id) %></td>
                 <% if current_user %>
                   <td><%= link_to "edit", edit_building_path(building) %></td>
                   <% if current_user.has_role?(:admin) %>

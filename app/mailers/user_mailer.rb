@@ -11,11 +11,11 @@ class UserMailer < ApplicationMailer
 	end
 
 	def send_feedback contact
+		@contact = contact
 		mail(
 			to: 'transparentcityllc@gmail.com', 
 			from: contact.email,
-			subject: 'Feedback',
-			body: contact.comment
+			subject: 'Feedback'
 		)
 	end
 

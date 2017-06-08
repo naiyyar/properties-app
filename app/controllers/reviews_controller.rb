@@ -5,6 +5,8 @@ class ReviewsController < ApplicationController
   def index
     if params[:building_id].present?
       @reviews = Review.where(reviewable_id: params[:building_id]).order('created_at desc')
+    elsif params[:unit_id].present?
+      @reviews = Review.where(reviewable_id: params[:unit_id]).order('created_at desc')
     else
       @reviews = Review.order('created_at desc')
     end
