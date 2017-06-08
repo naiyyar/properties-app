@@ -1078,6 +1078,9 @@ a.headerUser {
     border-radius: 3px;
     border: 1px solid #dfdfdf;
 }
+.headerAvatar{
+    border: 1px solid #b1b3b6;
+}
 .home-header .headerAvatar {
     margin-top: 10px;
 }
