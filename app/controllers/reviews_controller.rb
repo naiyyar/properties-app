@@ -86,9 +86,13 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    @review.destroy
-
-    redirect_to reviews_path, notice: "Successfully Deleted"
+    if @review.destroy
+      respond_to do |format|
+         format.html { redirect_to reviews_path, notice: "Successfully Deleted" }
+         format.js
+      end
+    end
+    
   end
 
   private

@@ -1,4 +1,7 @@
-<div class="comment">
+<div class="comment" id="comment<%=review.id%>">
+    <% if current_user and current_user.has_role?(:admin) %>
+      <%= link_to '<span class="fa fa-times"></span>'.html_safe, review_path(review), method: :delete, remote: true, class: 'pull-right text-danger daleteReview', title: 'Delete' %>
+    <%end%>
     <div class="commentAvatar">
       <% unless review.anonymous %>
         <% if review.user.avatar.present? %>

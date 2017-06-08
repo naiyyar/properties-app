@@ -89,10 +89,7 @@ class User < ActiveRecord::Base
     rateables = Rate.where(rateable_id: rateable.id, rateable_type: rateable.class.name)
     if rating_cache.present?
       #updating if rateable is already present
-      rating_cache = rating_cache.first
-      rating_cache.avg = rateables.sum(:stars)/rateables.count
-      rating_cache.qty = rateables.count
-      rating_cache.save
+      RatingCache.update_rating_cache(rating_cache, rateables)
     else
       rating_cache = RatingCache.new
       rating_cache.cacheable_id = rateable.id
