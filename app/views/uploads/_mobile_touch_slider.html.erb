@@ -1,16 +1,47 @@
- <div class="swiper-container visible-xs visible-sm visible-md">
-  <div class="swiper-wrapper">
-    <% object.uploads.each_with_index do |upload, index| %>
-      <div class="swiper-slide" src="<%= upload.image.url %>"> 
-        <%= image_tag upload.image.url, alt: 'Image' %>
-      </div>
-    <%end%>
+ <% if object.uploads.count >= 3 %>
+   <div class="swiper-container visible-xs visible-sm visible-md">
+    <div class="swiper-wrapper">
+      <% object.uploads.each_with_index do |upload, index| %>
+        <div class="swiper-slide" src="<%= upload.image.url %>"> 
+          <%= image_tag upload.image.url, alt: 'Image' %>
+        </div>
+      <%end%>
+    </div>
+    <!-- <div class="swiper-button-next"></div> -->
+    <!-- <div class="swiper-button-prev"></div> -->
+    <!-- Add Pagination -->
+    <!-- <div class="swiper-pagination"></div> -->
   </div>
-  <!-- <div class="swiper-button-next"></div> -->
-  <!-- <div class="swiper-button-prev"></div> -->
-  <!-- Add Pagination -->
-  <!-- <div class="swiper-pagination"></div> -->
-</div>
+<%else%>
+  <div style="width: 60%; margin: 0 auto;">
+      <div id="propWidget-3" class="carousel slide propWidget-3 visible-xs visible-sm visible-md" data-ride="carousel">
+        <% if object.uploads.count > 1 %>
+          <ol class="carousel-indicators">
+            <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselFull" data-slide-to="1"></li>
+          </ol>
+        <%end%>
+        <div class="carousel-inner">
+          <% object.uploads.each_with_index do |upload, index| %>
+            <div class="item <%= index == 0 ? 'active' : ''%>">
+              <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" >
+                <%= image_tag upload.image.url, alt: "" %>
+              </a>
+              <div class="container">
+                <div class="carousel-caption">
+                    
+                </div>
+              </div>
+            </div>
+          <%end%>
+        </div>
+        <% if object.uploads.count > 1 %>
+          <a class="left carousel-control" href="#propWidget-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+          <a class="right carousel-control" href="#propWidget-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+        <%end%>
+      </div>
+    </div>
+<%end%>
 
 <script type="text/javascript">
     
