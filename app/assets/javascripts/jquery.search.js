@@ -159,33 +159,33 @@ var manhattan_neightborhoods_hash = [
 //Methods
 
 function brooklyn_and_queens_neighborhoods(term){
-	
 	url = '';
-
-	$.each(manhattan_neightborhoods_hash, function(index, value ) {
-	  if(term == value.key){
-			url = value.url;
+  if(term != null){
+		$.each(manhattan_neightborhoods_hash, function(index, value ) {
+		  if(term == value.key){
+				url = value.url;
+			}
+		});
+		
+		if(url == '' || url == undefined){
+			$.each(brooklyn_and_queens_neighborhoods_hash, function(index, value ) {
+			  if(term == value.key){
+					url = value.url;
+				}
+			});
 		}
-	});
-	
-	if(url == '' || url == undefined){
-		$.each(brooklyn_and_queens_neighborhoods_hash, function(index, value ) {
-		  if(term == value.key){
-				url = value.url;
-			}
-		});
-	}
 
-	if(url == '' || url == undefined){
-		term = term.split(' - ')[0]
-		$.each(brooklyn_and_queens_zipcodes_hash, function(index, value ) {
-		  if(term == value.key){
-				url = value.url;
-			}
-		});
-	}
-	
+		if(url == '' || url == undefined){
+			term = term.split(' - ')[0]
+			$.each(brooklyn_and_queens_zipcodes_hash, function(index, value ) {
+			  if(term == value.key){
+					url = value.url;
+				}
+			});
+		}
+	}	
 	add_kml(url)
+
 }
 
 function add_kml(url){
