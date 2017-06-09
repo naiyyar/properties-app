@@ -1,4 +1,5 @@
 var brooklyn_and_queens_neighborhoods_hash = [
+	//{ key: 'Brooklyn', 						url: 'https://www.dropbox.com/s/p7bpftzv9e55i0o/brooklyn.kml?dl=1'},
 	{ key: 'Borough Park', 				url: 'https://www.dropbox.com/s/iu4ih0c0xag21p3/borough_park.kml?dl=1' },
 	{ key: 'Canarsie', 					url: 'https://www.dropbox.com/s/23ufopq3v4p1fie/canarsie.kml?dl=1' },
 	{ key: 'Flatlands', 				url: 'https://www.dropbox.com/s/dxwxqmhl84ohh4b/flatlands.kml?dl=1' },

@@ -36,15 +36,19 @@ class Building < ActiveRecord::Base
     :using => {:tsearch=> { prefix: true }, :trigram=> {
                   :threshold => 0.1
                 }}
+  pg_search_scope :search_by_neighborhood, against: [:neighborhood, :neighborhoods_parent],
+    :using => {:tsearch=> { prefix: true }, :trigram=> {
+                  :threshold => 0.2
+                }}
 
   pg_search_scope :text_search_by_city, against: [:city],
     :using => {:tsearch=> {prefix: true}, :trigram=> {
                   :threshold => 0.1
                 }}
 
-  def self.text_search_by_neighborhood(query)
-    where("similarity(neighborhood, ?) > 0.1 or similarity(neighborhoods_parent, ?) > 0.2", query, query)
-  end
+  # def self.text_search_by_neighborhood(query)
+  #   where("similarity(neighborhood, ?) > 0.3 or similarity(neighborhoods_parent, ?) > 0.3", query, query)
+  # end
 
   def self.text_search_by_parent_neighborhood(query)
     where("similarity(neighborhoods_parent, ?) > 0.3", query)

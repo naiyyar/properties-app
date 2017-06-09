@@ -12,7 +12,7 @@ default: &default
 
 development:
   <<: *default
-  database: apt_derrick
+  database: apt_reviews_dev
   username: postgres
   password: postgres
 

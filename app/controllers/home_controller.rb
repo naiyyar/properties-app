@@ -70,7 +70,7 @@ class HomeController < ApplicationController
           if @buildings.present?
             @result_type = 'cities'
           else
-            @buildings = Building.text_search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
+            @buildings = Building.search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
             #@buildings = Building.where('neighborhood ILIKE ? or neighborhoods_parent ILIKE ?', "%#{params[:term]}%", "%#{params[:term]}%").to_a.uniq(&:neighborhood)
             if @buildings.present?
               @result_type = 'neighborhood'
