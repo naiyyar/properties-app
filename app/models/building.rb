@@ -43,7 +43,7 @@ class Building < ActiveRecord::Base
                 }}
 
   def self.text_search_by_neighborhood(query)
-    where("similarity(neighborhood, ?) > 0.2", query)
+    where("similarity(neighborhood, ?) > 0.2 or similarity(neighborhoods_parent, ?) > 0.1", query, query)
   end
 
   def self.text_search_by_parent_neighborhood(query)
