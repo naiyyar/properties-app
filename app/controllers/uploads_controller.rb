@@ -1,4 +1,5 @@
 class UploadsController < ApplicationController
+  load_and_authorize_resource
 	before_action :authenticate_user!, only: [:destroy, :create]
 
 	def index
