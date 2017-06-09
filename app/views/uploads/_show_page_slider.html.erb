@@ -12,7 +12,7 @@
       <span class="arrow left js-rotateslider-arrow" data-action="prev"><i class="fa fa-angle-left fa-3x"></i></span>
     </div>
   <%else%>
-    <div style="width: 60%; margin: 0 auto;">
+    <div style="width: 40%; margin: 0 auto;">
       <div id="propWidget-3" class="carousel slide propWidget-3 hidden-xs hidden-sm hidden-md" data-ride="carousel">
         <% if object.uploads.count > 1 %>
           <ol class="carousel-indicators">
@@ -42,7 +42,6 @@
     </div>
   <%end%>
   <div class="see_all" style="">
-    <%#= render partial: 'uploads/upload_link', locals: { object: object }%>
     <span class="fa fa-th-large"></span> 
     <% if object.kind_of? Building %>
       <%= link_to "See all(#{object.uploads.count})", building_uploads_path(building_id: object.id), "data-no-turbolink" => false %>

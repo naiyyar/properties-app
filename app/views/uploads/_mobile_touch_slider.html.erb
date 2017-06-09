@@ -13,7 +13,7 @@
     <!-- <div class="swiper-pagination"></div> -->
   </div>
 <%else%>
-  <div style="width: 60%; margin: 0 auto;">
+  <div style="width: 40%; margin: 0 auto;">
       <div id="propWidget-3" class="carousel slide propWidget-3 visible-xs visible-sm visible-md" data-ride="carousel">
         <% if object.uploads.count > 1 %>
           <ol class="carousel-indicators">
@@ -24,9 +24,9 @@
         <div class="carousel-inner">
           <% object.uploads.each_with_index do |upload, index| %>
             <div class="item <%= index == 0 ? 'active' : ''%>">
-              <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" >
+              <div src="<%= upload.image.url %>" class="fancybox" >
                 <%= image_tag upload.image.url, alt: "" %>
-              </a>
+              </div>
               <div class="container">
                 <div class="carousel-caption">
                     
@@ -55,7 +55,7 @@
     });
   
   //fancybox without a tag
-  $(".swiper-slide").each(function(){
+  $(".swiper-slide, .fancybox").each(function(){
 
      $(this).fancybox({
         padding: 0,

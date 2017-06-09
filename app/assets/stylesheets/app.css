@@ -2960,7 +2960,7 @@ h1.pageTitle {
     overflow: hidden;
     border-radius: 3px;
 }
-.propWidget-3 .carousel-inner > .item > a > img {
+.propWidget-3 .carousel-inner > .item > a > img, .propWidget-3 .carousel-inner > .item > div.fancybox > img {
     width: 100%;
 }
 .propWidget-3 .carousel-indicators {
