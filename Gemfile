@@ -48,6 +48,7 @@ gem 'wicked'
 
 #Role management
 gem "rolify"
+gem 'cancancan'
 
 #rating
 gem 'ratyrate', github: 'wazery/ratyrate'

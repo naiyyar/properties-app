@@ -85,6 +85,10 @@ class ApplicationController < ActionController::Base
 
 	private
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, notice: exception.message
+  end
+
   def sign_in_redirect_path object, flash_message
     if session[:form_data].present?
       if session[:form_data]['contribution'].present?

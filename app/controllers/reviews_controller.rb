@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController 
+  load_and_authorize_resource
   before_action :authenticate_user!, :except => [:new, :index, :create]
-
 
   def index
     if params[:building_id].present?
