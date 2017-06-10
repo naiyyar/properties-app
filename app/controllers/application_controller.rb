@@ -86,7 +86,7 @@ class ApplicationController < ActionController::Base
 	private
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, notice: exception.message
+    redirect_to :back, notice: exception.message
   end
 
   def sign_in_redirect_path object, flash_message

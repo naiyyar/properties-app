@@ -2962,6 +2962,7 @@ h1.pageTitle {
 }
 .propWidget-3 .carousel-inner > .item > a > img, .propWidget-3 .carousel-inner > .item > div.fancybox > img {
     width: 100%;
+    height: 200px;
 }
 .propWidget-3 .carousel-indicators {
     bottom: 20px;

@@ -13,7 +13,7 @@
     </div>
   <%else%>
     <div style="width: 40%; margin: 0 auto;">
-      <div id="propWidget-3" class="carousel slide propWidget-3 hidden-xs hidden-sm hidden-md" data-ride="carousel">
+      <div id="propWidget-3" class="carousel slide propWidget-3" data-ride="carousel">
         <% if object.uploads.count > 1 %>
           <ol class="carousel-indicators">
             <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
@@ -22,7 +22,7 @@
         <%end%>
         <div class="carousel-inner">
           <% object.uploads.each_with_index do |upload, index| %>
-            <div class="item <%= index == 0 ? 'active' : ''%>" style="height: 200px;">
+            <div class="item <%= index == 0 ? 'active' : ''%>">
               <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" >
                 <%= image_tag upload.image.url, alt: "" %>
               </a>
