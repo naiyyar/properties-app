@@ -22,7 +22,7 @@
         <%end%>
         <div class="carousel-inner">
           <% object.uploads.each_with_index do |upload, index| %>
-            <div class="item <%= index == 0 ? 'active' : ''%>">
+            <div class="item <%= index == 0 ? 'active' : ''%>" style="height: 200px;">
               <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" >
                 <%= image_tag upload.image.url, alt: "" %>
               </a>
