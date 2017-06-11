@@ -22,6 +22,12 @@
 }
 
 /* custome */
+.fixed-layout{
+    table-layout: fixed;
+}
+.fixed-layout tr td.break{
+    word-wrap: break-word;
+}
 .daleteReview{
     padding: 5px 10px;
 }
