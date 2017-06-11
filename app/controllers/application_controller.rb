@@ -86,7 +86,12 @@ class ApplicationController < ActionController::Base
 	private
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to :back, notice: exception.message
+    redirect_to redirect_back_or_default(root_url), notice: exception.message
+  end
+
+  def redirect_back_or_default(default)
+    session[:return_to] || default
+    #session[:return_to] = nil
   end
 
   def sign_in_redirect_path object, flash_message
