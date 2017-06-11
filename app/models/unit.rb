@@ -11,7 +11,13 @@ class Unit < ActiveRecord::Base
 
 	include Imageable
 
-	default_scope { order('updated_at desc') } 
+	default_scope { order('updated_at desc') }
+
+	def to_param
+    if name.present?
+      "#{id} #{name}".parameterize
+    end
+  end 
 
 	def self.search(term)
     if term

@@ -50,6 +50,14 @@ class Building < ActiveRecord::Base
   #   where("similarity(neighborhood, ?) > 0.3 or similarity(neighborhoods_parent, ?) > 0.3", query, query)
   # end
 
+  def to_param
+    if building_name.present?
+      "#{id} #{building_name}".parameterize
+    else
+      "#{id} #{building_street_address}".parameterize
+    end
+  end
+
   def self.text_search_by_parent_neighborhood(query)
     where("similarity(neighborhoods_parent, ?) > 0.3", query)
   end
