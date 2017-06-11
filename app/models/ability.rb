@@ -6,7 +6,7 @@ class Ability
       can :manage, :all
       cannot :index, Building
       cannot :index, Unit
-      # cannot :index, Review
+      cannot :index, Review
       cannot :index, User
       cannot :index, Contact
     elsif user.has_role? :admin
