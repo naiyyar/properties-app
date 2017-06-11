@@ -57,16 +57,26 @@
         <div class="tab-pane fade active in" id="ur">
           <%#= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_unit_review_path(unit_id: @unit), class: "btn btn-o btn-yellow contactBtn reviewBtnMobile pull-right", "data-no-turbolink" => false %>
           <div class="comments">
-            <% @unit.reviews.order('created_at desc').each do |review| %>
-              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit } %>
-            <% end %>
+            <% if @unit.reviews.present? %>
+              <% @unit.reviews.order('created_at desc').each do |review| %>
+                <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit } %>
+              <% end %>
+            <%else%>
+              <p>There are no reviews for this property. Be the first to add a review on this property.</p>
+              <%= link_to 'Write a Review', new_unit_review_path(unit_id: @unit, contribution: 'unit_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
+            <%end%>
           </div>
         </div>
         <div class="tab-pane fade" id="br">
           <div class="comments">
-            <% @unit.building.reviews.order('created_at desc').each do |review| %>
-              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit.building } %>
-            <% end %>
+            <% if @unit.building.reviews.present? %>
+              <% @unit.building.reviews.order('created_at desc').each do |review| %>
+                <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit.building } %>
+              <% end %>
+            <%else%>
+              <p>There are no reviews for this property. Be the first to add a review on this property.</p>
+              <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
+            <%end%>
           </div>
         </div>
         <div class="tab-pane fade" id="ph" style="padding: 2px;">

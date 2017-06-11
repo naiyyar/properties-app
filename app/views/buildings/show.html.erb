@@ -39,9 +39,14 @@
     <div class="tab-content">
       <div class="tab-pane fade in active" id="buildings">
         <div class="comments">
-          <% @building.reviews.order('created_at desc').each do |review| %>
-            <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
-          <% end %>
+          <% if @building.reviews.present? %>
+            <% @building.reviews.order('created_at desc').each do |review| %>
+              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
+            <% end %>
+          <%else%>
+            <p>There are no reviews for this property. Be the first to add a review on this property.</p>
+            <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
+          <%end%>
         </div>
       </div>
 
@@ -72,7 +77,7 @@
   <%= render partial: "new_unit_modal" %>
 </div>
 
-<% if session[:after_contribute].present? %>
+<% if session[:after_contribute].present? || params[:from_uploaded].present? %>
   <%= render partial: 'contribute_more_popup' %>
   <script type="text/javascript">
     $(document).ready(function(){
