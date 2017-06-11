@@ -24,7 +24,7 @@ class UploadsController < ApplicationController
   			@imageable = Unit.find(params[:unit_id])
   		end
     end
-    session[:after_contribute] = 'upload' # if params[:contribution].present?
+    #session[:after_contribute] = 'upload' # if params[:contribution].present?
     @search_bar_hidden = :hidden
   end
 
@@ -33,7 +33,7 @@ class UploadsController < ApplicationController
     @upload = @imageable.uploads.build(upload_params)
     @upload.user_id = current_user.id if current_user.present?
     if @upload.save
-      session[:after_contribute] = 'upload'
+      #session[:after_contribute] = 'upload'
       # send success header
       render json: { message: 'success', fileID: @upload.id }, :status => 200
     else
