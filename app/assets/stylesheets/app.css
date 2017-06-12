@@ -1947,18 +1947,18 @@ a.card, div.card {
     position: relative;
     display: block;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     opacity: 1;
 }
 .no-touch .figure img {
     -webkit-transition: -webkit-transform 0.35s;
     transition: transform 0.35s;
-    -webkit-transform: scale(1.15);
-    transform: scale(1.15);
+    /*-webkit-transform: scale(1.15);*/
+    /*transform: scale(1.15);*/
 }
 .no-touch a.card:hover img, .no-touch div.card:hover img {
-    -webkit-transform: scale(1);
-    transform: scale(1);
+    /*-webkit-transform: scale(1);*/
+    /*transform: scale(1);*/
     opacity: 0.8;
 }
 .figCaption {
