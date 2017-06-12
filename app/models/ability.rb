@@ -13,7 +13,7 @@ class Ability
       can :manage, :all
     else
       can :manage, :all
-      # cannot :index, Building
+      cannot :index, Building
       cannot :index, Unit
       cannot :index, Review
       cannot :index, User
