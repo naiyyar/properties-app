@@ -88,7 +88,7 @@
   }
 }
 
-.img-thumbnail {padding: 1px;}
+.img-thumbnail { padding: 1px; height: 100%; width: 100%;}
 
 @media screen and (max-width: 767px) {
     textarea.form-control{

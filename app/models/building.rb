@@ -36,7 +36,7 @@ class Building < ActiveRecord::Base
     :using => {:tsearch=> { prefix: true }, :trigram=> {
                   :threshold => 0.1
                 }}
-  pg_search_scope :search_by_neighborhood, against: [:neighborhood, :neighborhoods_parent],
+  pg_search_scope :search_by_neighborhood, against: [:neighborhood, :neighborhoods_parent, :neighborhood3],
     :using => {:tsearch=> { prefix: true }, :trigram=> {
                   :threshold => 0.2
                 }}
@@ -46,20 +46,12 @@ class Building < ActiveRecord::Base
                   :threshold => 0.1
                 }}
 
-  # def self.text_search_by_neighborhood(query)
-  #   where("similarity(neighborhood, ?) > 0.3 or similarity(neighborhoods_parent, ?) > 0.3", query, query)
-  # end
-
   def to_param
     if building_name.present?
       "#{id} #{building_name}".parameterize
     else
       "#{id} #{building_street_address}".parameterize
     end
-  end
-
-  def self.text_search_by_parent_neighborhood(query)
-    where("similarity(neighborhoods_parent, ?) > 0.3", query)
   end
 
   def self.text_search_by_zipcode query
@@ -182,87 +174,57 @@ class Building < ActiveRecord::Base
   end
 
   def grandparent_neighborhoods
-    ['Lower Manhattan', 'Upper Manhattan']
+    ['Lower Manhattan', 'Upper Manhattan', 'Midtown']
   end
 
   private
 
   def neighborhoods
     search = Geocoder.search([latitude, longitude])
-    child_neighborhoods = nil
-    neighborhoods_parent = nil
+    neighborhood1 = neighborhood2 = neighborhood3 = ''
     if search.present?
       #search for child neighborhoods
-      search[0..3].each do |geo_result|
+      search[0..4].each do |geo_result|
+        #finding neighborhood
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
           neighborhood = neighborhood.first['long_name']
-          #parent neighborhoods
-          if parent_neighborhoods.include? neighborhood
-            neighborhoods_parent = neighborhood
-          elsif grandparent_neighborhoods.include? neighborhood
-            neighborhoods_parent = neighborhood
-          else
-            
-          unless child_neighborhoods.present?
-            if predifined_neighborhoods.include? neighborhood
-              child_neighborhoods = neighborhood #child neighborhoods
-            end
+          #checking main neighborhood
+          if predifined_neighborhoods.include? neighborhood
+            neighborhood1 = neighborhood
+            neighborhood2 = neighborhood if neighborhood2.blank?
+          elsif parent_neighborhoods.include? neighborhood #checking parent of main neighborhood
+            neighborhood2 = neighborhood
+            neighborhood1 = neighborhood if neighborhood1.blank?
+          elsif grandparent_neighborhoods.include? neighborhood #checking grandparent of main neighborhood
+            neighborhood3 = neighborhood
+            neighborhood1 = neighborhood if neighborhood1.blank?
+            neighborhood2 = neighborhood if neighborhood2.blank?
           end
-          search_result = geo_result.address_components_of_type(:neighborhood)
-          if search_result.present?
-            child_neighborhoods = search_result.first['short_name']
-            neighborhoods_parent = search_result.first['long_name']
-          end
-          end
+          #end if
         end
-      end
+
+      end #end search loop
       
-      #search for midtown parent neighborhoods if nothning find for child
-      if child_neighborhoods.blank?
-        search[0..3].each do |geo_result|
-          neighborhood = geo_result.address_components_of_type(:neighborhood)
-          if neighborhood.present?
-            neighborhood = neighborhood.first['long_name']
-            if parent_neighborhoods.include? neighborhood
-              child_neighborhoods = neighborhood
-            end
-          end
-        end
-      end
-      
-      if child_neighborhoods.present?
-        child_neighborhoods = child_neighborhoods
-      else
-        child_neighborhoods = search.first.address_components_of_type(:neighborhood)
-        if child_neighborhoods.present?
-          child_neighborhoods = child_neighborhoods.first['long_name']
-        else
-          type_locality = search.first.address_components_of_type(:locality)
-          if type_locality.present?
-            child_neighborhoods = type_locality.first['long_name']
-          else
-            child_neighborhoods = ''
-          end
-        end
-      end
-    end
-    return child_neighborhoods, neighborhoods_parent
+    end #end seaech if
+
+    return neighborhood1, neighborhood2, neighborhood3
   end
 
   def save_neighborhood
     if neighborhoods.present?
       self.neighborhood = neighborhoods[0]
       self.neighborhoods_parent = neighborhoods[1]
+      self.neighborhood3 = neighborhoods[2]
       self.save
     end
   end
 
   def update_neighborhood
     if neighborhoods.present?
-      if self.neighborhood != neighborhoods[0] or self.neighborhoods_parent != neighborhoods[1]
-        self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1] )
-      end
+      #if self.neighborhood != neighborhoods[0] or self.neighborhoods_parent != neighborhoods[1]
+      self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1], neighborhood3: neighborhoods[2] )
+      #end
     end
   end
 

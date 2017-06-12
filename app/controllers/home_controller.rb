@@ -75,15 +75,13 @@ class HomeController < ApplicationController
             if @buildings.present?
               @result_type = 'neighborhood'
             else
-              
               #@buildings = Building.text_search_by_building_name(params[:term]).reorder(:building_name)
               @buildings = Building.where('building_name ILIKE ?', "%#{params[:term]}%").reorder(:building_name)
               if @buildings.present?
             	  @result_type = 'building_name'
               else
-               
                 #@buildings = Building.text_search_by_parent_neighborhood(params[:term]).to_a.uniq(&:neighborhoods_parent)
-                @buildings = Building.where('neighborhoods_parent ILIKE ?', "%#{params[:term]}%").to_a.uniq(&:neighborhoods_parent)
+                @buildings = Building.where('neighborhoods_parent ILIKE ? or neighborhood3 ILIKE ?', "%#{params[:term]}%", "%#{params[:term]}%").to_a.uniq(&:neighborhoods_parent)
             	  if @buildings.present?
                   @result_type = 'pneighborhood'
                 else

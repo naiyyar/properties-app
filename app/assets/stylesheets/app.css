@@ -22,6 +22,14 @@
 }
 
 /* custome */
+..image-gallery {
+    position: relative;
+}
+.image-gallery .delete_image{
+    position: absolute;
+    right: 12px;
+    top: 2px;
+}
 .fixed-layout{
     table-layout: fixed;
 }
