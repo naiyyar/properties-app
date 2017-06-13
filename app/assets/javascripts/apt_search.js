@@ -21,6 +21,7 @@ app.apartments.prototype = {
     else{
       search_term = item.search_term
     }
+    this._input.removeClass('loader')
     var markup = [
       '<p class="address"><b>' + search_term + '</b></p>'
     ];

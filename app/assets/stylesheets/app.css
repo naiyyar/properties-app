@@ -22,6 +22,14 @@
 }
 
 /* custome */
+
+.loader{    
+    /*background-color: #ffffff;*/
+    background-image: url("http://loadinggif.com/images/image-selection/3.gif") !important;
+    background-size: 25px 25px;
+    background-position:right center;
+    background-repeat: no-repeat;
+}
 .image-gallery {
     position: relative;
 }
