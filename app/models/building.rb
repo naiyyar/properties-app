@@ -25,24 +25,29 @@ class Building < ActiveRecord::Base
   after_create :save_neighborhood
   after_update :update_neighborhood
 
+  #multisearchable
+  PgSearch.multisearch_options = {
+    :using => [:tsearch, :trigram, :dmetaphone],
+    :ignoring => :accents
+  }
+  multisearchable :against => [:neighborhood, :neighborhoods_parent, :neighborhood3]
+
   #pgsearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
-     :using => { :tsearch => {prefix: true} }
+     :using => { :tsearch => { prefix: true } }
 
   pg_search_scope :text_search_by_building_name, against: [:building_name],
-     :using => { :tsearch => {prefix: true}, :trigram => { :threshold => 0.3 } }
+                  :using => {:tsearch=> { prefix: true }, :trigram=> {
+                  :threshold => 0.1
+                }}
 
   pg_search_scope :search_by_street_address, against: [:building_street_address],
     :using => {:tsearch=> { prefix: true }, :trigram=> {
                   :threshold => 0.1
                 }}
-  pg_search_scope :search_by_neighborhood, against: [:neighborhood, :neighborhoods_parent, :neighborhood3],
-    :using => {:tsearch=> { prefix: true }, :trigram=> {
-                  :threshold => 0.2
-                }}
 
   pg_search_scope :text_search_by_city, against: [:city],
-    :using => {:tsearch=> {prefix: true}, :trigram=> {
+    :using => {:tsearch=> { prefix: true }, :trigram=> {
                   :threshold => 0.1
                 }}
 
