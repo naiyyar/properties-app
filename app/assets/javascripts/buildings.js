@@ -22,6 +22,7 @@ app.buildings.prototype = {
 
   _render: function(ul, item) {
     $("#buildings-search-no-results").css('display','none');
+    this._input.removeClass('loader')
     building_name = ''
     if(item.building_name == '' || item.building_name == undefined){
       building_name = item.building_street_address;

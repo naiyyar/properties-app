@@ -39,5 +39,5 @@ when 'pneighborhood'
     json.neighborhoods "#{building.neighborhoods_parent}"
   end
 when 'no_match_found'
-    json.no_match_found "No matches found"
+    json.no_match_found 'No matches found - Add a new building'
 end

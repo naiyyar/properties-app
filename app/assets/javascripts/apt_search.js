@@ -22,9 +22,14 @@ app.apartments.prototype = {
       search_term = item.search_term
     }
     this._input.removeClass('loader')
-    var markup = [
-      '<p class="address"><b>' + search_term + '</b></p>'
-    ];
+    var items = ''
+    if(search_term == 'No matches found - Add a new building'){
+      items = '<p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p>'
+    }
+    else{
+      items = '<p class="address"><b>' + search_term + '</b></p>'
+    }
+    var markup = [items];
     $('ul.ui-autocomplete').css('left','10');
     return $('<li>')
       .append(markup.join(''))

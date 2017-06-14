@@ -1,4 +1,4 @@
 jQuery ->
 
-	$('#apt-search-txt, #apt-search-txt-searchpage').on 'keypress', (e) ->
+	$('#apt-search-txt, #apt-search-txt-searchpage, #buildings-search-txt').on 'keypress', (e) ->
 		$(this).addClass('loader');
