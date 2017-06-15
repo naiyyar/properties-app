@@ -66,6 +66,12 @@ class Building < ActiveRecord::Base
     results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
+  def self.search_by_pneighborhoods(criteria)
+    regexp = /#{criteria}/i; # case-insensitive regexp based on your string
+    results = order(:neighborhoods_parent).where("neighborhoods_parent ILIKE ?", "%#{criteria}%").to_a.uniq(&:neighborhoods_parent)
+    results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+  end
+
   # def self.search_by_street_address(criteria)
   #   regexp = /#{criteria}/i; # case-insensitive regexp based on your string
   #   results = order(:building_street_address).where("building_street_address ILIKE ?", "%#{criteria}%").to_a.uniq(&:building_street_address)
