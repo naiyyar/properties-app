@@ -9,9 +9,15 @@ app.apartments.prototype = {
       .autocomplete({
         source: '/search',
         appendTo: '#apt-search-results',
-        select: $.proxy(this._select, this)
+        select: $.proxy(this._select, this),
+        open: $.proxy(this._open, this)
       })
       .autocomplete('instance')._renderItem = $.proxy(this._render, this);
+  },
+
+  _open: function(event, ui) {
+    search_term = 'No matches found - Add a new building'
+    $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p></li>');
   },
 
   _render: function(ul, item) {
@@ -21,12 +27,12 @@ app.apartments.prototype = {
     else{
       search_term = item.search_term
     }
-    this._input.removeClass('loader')
+    this._input.removeClass('loader');
     var items = ''
-    if(search_term == 'No matches found - Add a new building'){
-      items = '<p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p>'
-    }
-    else{
+    if(search_term != 'No matches found - Add a new building'){
+      //items = '<p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p>'
+    //}
+    //else{
       items = '<p class="address"><b>' + search_term + '</b></p>'
     }
     var markup = [items];
