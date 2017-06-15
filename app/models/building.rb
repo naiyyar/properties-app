@@ -59,6 +59,21 @@ class Building < ActiveRecord::Base
     end
   end
 
+  #using regexp to put search string on top
+  def self.search_by_neighborhoods(criteria)
+    regexp = /#{criteria}/i; # case-insensitive regexp based on your string
+    results = order(:neighborhood).where("neighborhood ILIKE ?", "%#{criteria}%").to_a.uniq(&:neighborhood)
+    results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+  end
+
+  # def self.search_by_street_address(criteria)
+  #   regexp = /#{criteria}/i; # case-insensitive regexp based on your string
+  #   results = order(:building_street_address).where("building_street_address ILIKE ?", "%#{criteria}%").to_a.uniq(&:building_street_address)
+  #   results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+  # end
+
+
+
   def self.text_search_by_zipcode query
     where("similarity(zipcode, ?) > 0.5", query)
   end
