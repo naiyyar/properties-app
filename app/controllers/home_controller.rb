@@ -70,14 +70,14 @@ class HomeController < ApplicationController
           else
             #results = PgSearch.multisearch(params[:term])
             #@buildings = Building.where(id: results.map(&:searchable_id)).to_a.uniq(&:neighborhood)
-            @buildings = Building.search_by_neighborhoods(params[:term])
+            @buildings = Building.search_by_pneighborhoods(params[:term])
             if @buildings.present?
-              @result_type = 'neighborhood'
+              @result_type = 'pneighborhood'
             else
-              @buildings = Building.search_by_pneighborhoods(params[:term])
+              @buildings = Building.search_by_neighborhoods(params[:term])
               #@buildings = Building.where('neighborhood @@ :q or neighborhoods_parent @@ :q', q: "%#{params[:term]}%").to_a.uniq(&:neighborhood)
               if @buildings.present?
-            	  @result_type = 'pneighborhood'
+            	  @result_type = 'neighborhood'
               else
                 @buildings = Building.text_search_by_building_name(params[:term]).reorder(:building_name)
             	  if @buildings.present?
