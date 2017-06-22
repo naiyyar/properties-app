@@ -72,6 +72,13 @@ $(document).on 'click', '#submit_review',(e) ->
 	else
 		$(".recommend-not-selected").addClass('hide')
 		submit = true
+
+	if($("#review_tos_agreement").is(':checked') == false)
+		$(".tos-not-accepted").removeClass('hide')
+		submit = false
+	else
+		$(".tos-not-accepted").addClass('hide')
+		submit = true
 	
 	return submit
 

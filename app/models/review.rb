@@ -9,12 +9,7 @@ class Review < ActiveRecord::Base
   #validates_presence_of :review_title, :message => 'Please add review title.'
   #validates_presence_of :tenant_status, :message => 'Please select a reviewer type'
   #validates_presence_of :stay_time, :message => 'Please select number of years in residence.'
-  
-  # def can_validate?
-  #   true
-  # end
   validates_acceptance_of :tos_agreement, :allow_nil => false, :accept => true, :on => :create
-  #validates :agreement, acceptance: { accept: true }
 
   after_destroy :destroy_dependents
 

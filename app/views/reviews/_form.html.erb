@@ -85,7 +85,7 @@
 			<%= f.text_area :other_advice,  class: 'form-control' %>
 		</div>
 	</div>
-	<div class="col-sm-6">
+	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Would you recommend this building?*</label>
 			<br />
@@ -96,9 +96,9 @@
 			  <label class="btn btn-default">
 			  	<%= radio_button_tag 'vote', false %> <span class='icon-dislike'></span>
 			  </label>
-			</div>
+			</div><br/>
+			<span class='message hide recommend-not-selected text-red'>Please select recommendation.</span>
 		</div>
-		<span class='message hide recommend-not-selected text-red'>Please select recommendation.</span>
   </div>
   <div class="col-sm-12">
 	  <div class="form-group">
@@ -107,9 +107,15 @@
 	</div>
 	<div class="col-sm-12">
 	  <div class="form-group">
-	    <div class="checkbox custom-checkbox"><label><%= f.check_box :tos_agreement, {}, true, false %> <span class="fa fa-check"></span> I agree to the TransparentCity Terms of Use. This review of my current or former building/unit is truthful</label></div>
+	    <div class="checkbox custom-checkbox">
+	    	<label>
+	    		<%= f.check_box :tos_agreement, {}, true, false %> <span class="fa fa-check"></span> I agree to the TransparentCity Terms of Use. This review of my current or former building/unit is truthful
+	    	</label>
+	    </div>
+	    <span class='message hide tos-not-accepted text-red'>Must be accepted.</span>
 		</div>
 	</div>
+
   <div class="col-sm-12">
   	<div class="pull-right">
 		  <% if current_user %>
