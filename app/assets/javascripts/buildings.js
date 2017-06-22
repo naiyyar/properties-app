@@ -11,18 +11,23 @@ app.buildings.prototype = {
         appendTo: '#buildings-search-results',
         select: $.proxy(this._select, this),
         response: $.proxy(this._response, this),
-        open: $.proxy(this._open, this)
+        open: $.proxy(this._open, this),
+        search: $.proxy(this._search, this)
       })
       .autocomplete('instance')._renderItem = $.proxy(this._render, this);
   },
 
+  _search: function(e,ui){
+    this._input.addClass('loader');
+  },
+
   _open: function(event, ui) {
+    this._input.removeClass('loader');
     $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
   },
 
   _render: function(ul, item) {
     $("#buildings-search-no-results").css('display','none');
-    this._input.removeClass('loader')
     building_name = ''
     if(item.building_name == '' || item.building_name == undefined){
       building_name = item.building_street_address;
@@ -100,6 +105,7 @@ app.buildings.prototype = {
   _response: function(event, ui){
          
     if(ui.content.length === 0){
+      this._input.removeClass('loader');
       var ul = $("#buildings-search-no-results");
       var markup = [
         '<p class="address"><b>Building Not Here?</b></p>',

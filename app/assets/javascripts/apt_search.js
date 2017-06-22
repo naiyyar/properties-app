@@ -10,13 +10,19 @@ app.apartments.prototype = {
         source: '/search',
         appendTo: '#apt-search-results',
         select: $.proxy(this._select, this),
-        open: $.proxy(this._open, this)
+        open: $.proxy(this._open, this),
+        search: $.proxy(this._search, this)
       })
       .autocomplete('instance')._renderItem = $.proxy(this._render, this);
   },
 
+  _search: function(e,ui){
+    this._input.addClass('loader');
+  },
+
   _open: function(event, ui) {
     search_term = 'No matches found - Add a new building'
+    this._input.removeClass('loader');
     $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p></li>');
   },
 
