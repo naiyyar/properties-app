@@ -114,6 +114,9 @@ class HomeController < ApplicationController
 	  end
   end
 
+  def tos
+  end
+
   private
   def manhattan_kmls
     ['Midtown', 'Sutton Place']

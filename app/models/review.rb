@@ -13,6 +13,8 @@ class Review < ActiveRecord::Base
   # def can_validate?
   #   true
   # end
+  validates_acceptance_of :tos_agreement, :allow_nil => false, :accept => true, :on => :create
+  #validates :agreement, acceptance: { accept: true }
 
   after_destroy :destroy_dependents
 

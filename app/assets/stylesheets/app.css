@@ -22,7 +22,10 @@
 }
 
 /* custome */
-
+#tos:hover{
+    color: #ddd;
+    text-decoration: underline;
+}
 .loader{    
     /*background-color: #ffffff;*/
     background-image: url("http://loadinggif.com/images/image-selection/3.gif") !important;

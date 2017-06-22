@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613061343) do
+ActiveRecord::Schema.define(version: 20170622044505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,6 +177,7 @@ ActiveRecord::Schema.define(version: 20170613061343) do
     t.string   "cons"
     t.string   "other_advice"
     t.boolean  "anonymous",        default: false
+    t.boolean  "tos_agreement",    default: false
   end
 
   add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree

@@ -15,7 +15,7 @@ class Unit < ActiveRecord::Base
 
 	def to_param
     if name.present?
-      "#{id} #{name}".parameterize
+      "#{id} #{name}".parameterize.upcase
     end
   end 
 

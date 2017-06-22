@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     linkedin: 'Linkedin'
   }
 
-  has_attached_file :avatar, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: ActionController::Base.helpers.asset_path('user-missing.png')
+  has_attached_file :avatar, styles: { medium: '300x300>', thumb: '100x100>' }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   
 
@@ -63,7 +63,15 @@ class User < ActiveRecord::Base
     end
     authorizations = self.authorizations.where(provider: provider)
     provider_image = authorizations.last.image_url if authorizations.present?
-    provider_image.present? ? provider_image : self.avatar
+    
+    if provider_image.present? 
+      @avatar_url = provider_image
+    elsif self.avatar.present?
+      @avatar_url = self.avatar
+    else
+      @avatar_url = 'missing.png'
+    end
+    @avatar_url
   end
 
   def user_name

@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     if user.nil?
       can :manage, :all
-      #cannot :index, Building
+      cannot :index, Building
       cannot :index, Unit
       cannot :index, Review
       cannot :index, User

@@ -1,5 +1,5 @@
 <div class="headerUserWraper">
-  <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><%= image_tag current_user.profile_image(session[:provider]), alt: 'avatar', class: 'avatar', style: 'width:30px;height:30px;' %></a>
+  <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><%= image_tag current_user.profile_image(session[:provider]), alt: 'avatar', class: 'headerAvatar avatar', style: 'width:30px;height:30px;' %></a>
   <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">
       <%= image_tag current_user.profile_image(session[:provider]), class: "avatar headerAvatar pull-left", alt: 'Avatar'%>
       <!-- <div class="userTop pull-left">
