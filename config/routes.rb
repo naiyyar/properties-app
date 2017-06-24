@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # end
 
   get '/search', to: 'home#search', as: 'search'
-  get '/tos', to: 'home#tos', as: 'tos'
+  get '/terms_of_service', to: 'home#tos', as: 'tos'
   
   resources :reviews
   resources :uploads

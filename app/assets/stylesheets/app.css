@@ -22,10 +22,23 @@
 }
 
 /* custome */
+.tos_box{
+    padding: 10px 20px;
+    box-shadow: 0 1px 1px 1px rgba(127,127,127,0.3);
+}
+
 #tos:hover{
     color: #ddd;
     text-decoration: underline;
 }
+.tos-agreement{
+    background-color: #f2f2f2;
+    padding: 10px 10px 0px;
+}
+.tos-link, .tos-link:visited, .tos-link:hover{
+    color: #0075c9 !important;
+}
+
 .loader{    
     /*background-color: #ffffff;*/
     background-image: url("http://loadinggif.com/images/image-selection/3.gif") !important;
@@ -5398,6 +5411,10 @@ blockquote {
     color: #999;
     font-size: 12px;
     padding-top: 30px;
+}
+
+.copyright a:hover, .copyright a:visited{
+    color: #999 !important;
 }
 
 /* File input */
