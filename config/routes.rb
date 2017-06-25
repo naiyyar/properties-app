@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/terms_of_service', to: 'home#tos', as: 'tos'
   
   resources :reviews
+  resources :useful_reviews
   resources :uploads
   resources :users
 

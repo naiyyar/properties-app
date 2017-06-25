@@ -79,7 +79,7 @@ class HomeController < ApplicationController
               if @buildings.present?
             	  @result_type = 'neighborhood'
               else
-                @buildings = Building.text_search_by_building_name(params[:term]).reorder(:building_name)
+                @buildings = Building.search_by_building_name(params[:term]) #.reorder(:building_name)
             	  if @buildings.present?
                   @result_type = 'building_name'
                 else

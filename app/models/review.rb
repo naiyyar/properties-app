@@ -2,7 +2,7 @@ class Review < ActiveRecord::Base
 	resourcify
   belongs_to :reviewable, polymorphic: true
   belongs_to :user
-
+  has_many :useful_reviews
   validates :pros,:cons, :presence => true, length: { minimum: 10, :message => 'You must enter at least 10 words' } #, if: :can_validate?
   #validates_presence_of :pros, :message => 'Please add pros.'
   #validates_presence_of :cons, :message => 'Please add cons.'

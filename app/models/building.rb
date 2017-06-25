@@ -38,7 +38,7 @@ class Building < ActiveRecord::Base
 
   pg_search_scope :search_by_neighborhood, against: :neighborhood,
      :using => {  :tsearch => { prefix: true }, 
-                  :trigram=> { :threshold => 0.1 } 
+                  :trigram=> { :threshold => 0.2 } 
                 }
 
   pg_search_scope :text_search_by_building_name, against: [:building_name],
@@ -74,6 +74,12 @@ class Building < ActiveRecord::Base
   def self.search_by_pneighborhoods(criteria)
     regexp = /#{criteria}/i;
     results = order(:neighborhoods_parent).where("neighborhoods_parent ILIKE ?", "%#{criteria}%").to_a.uniq(&:neighborhoods_parent)
+    results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+  end
+
+  def self.search_by_building_name(criteria)
+    regexp = /#{criteria}/i;
+    results = Building.text_search_by_building_name(criteria).order(:building_name).to_a.uniq(&:building_name)
     results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 

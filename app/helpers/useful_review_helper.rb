@@ -1,0 +1,2 @@
+module UsefulReviewHelper
+end
