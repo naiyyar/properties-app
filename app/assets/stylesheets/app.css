@@ -23,7 +23,7 @@
 
 /* custome */
 .social-share-button a{
-    margin: 0px 5px;
+    margin: -3px 5px;
 }
 .tos_box{
     padding: 10px 20px;
@@ -6115,6 +6115,14 @@ blockquote {
         padding: 5px 0px;
         float: right;
     }
+    .reviewActions ul li{
+        margin: 0px 3px;
+    }
+
+    .reviewActions ul.list-inline li{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 
 }
 
@@ -6122,6 +6130,9 @@ blockquote {
     .reviewActions ul{
         padding: 5px 0px;
         float: right;
+    }
+    .reviewActions ul li{
+        margin: 0px 3px;
     }
     #street_view_btn{
         left: 41%;
