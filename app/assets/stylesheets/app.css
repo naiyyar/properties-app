@@ -2508,6 +2508,10 @@ h1.pageTitle {
 .reviewActions ul.ricons li a > i {
     font-size: 16px;
 }
+
+.reviewActions ul.ricons li a i:hover{
+    color: #0075c9;
+}
 .commentActions ul li {
     float: right;
     margin-left: 10px;
