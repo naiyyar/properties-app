@@ -62,7 +62,7 @@
                 <%= link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs', 'data-toggle' => 'modal' %>
               <%end%>
             </li>
-            <li><%= social_share_button_tag(review.review_title, :url => "http://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}") %></li>
+            <li><%= social_share_button_tag(review.review_title, :url => "https://aptreviews-app.herokuapp.com/buildings/#{params[:id]}#comment#{review.id}") %></li>
             <li><%=link_to '<i class="icon-flag"></i>'.html_safe, '#' %></li>
           </ul>
           <div class="clearfix"></div>
