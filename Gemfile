@@ -50,6 +50,9 @@ gem 'wicked'
 gem "rolify"
 gem 'cancancan'
 
+#
+gem 'social-share-button'
+
 #rating
 gem 'ratyrate', github: 'wazery/ratyrate'
 

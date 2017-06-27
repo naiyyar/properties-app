@@ -22,6 +22,9 @@
 }
 
 /* custome */
+.social-share-button a{
+    margin: 0px 5px;
+}
 .tos_box{
     padding: 10px 20px;
     box-shadow: 0 1px 1px 1px rgba(127,127,127,0.3);

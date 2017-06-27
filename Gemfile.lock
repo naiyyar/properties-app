@@ -238,6 +238,8 @@ GEM
     simple-line-icons-rails (0.1.1)
       railties (>= 3.2, <= 5.1)
     slop (3.6.0)
+    social-share-button (0.10.0)
+      coffee-rails
     spring (1.6.4)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
@@ -317,6 +319,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple-line-icons-rails
+  social-share-button
   spring
   sqlite3
   thumbs_up

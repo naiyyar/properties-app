@@ -24,7 +24,7 @@
         <div class="commentBody">
           <div class="commentTime" style="float: none;"><span class="icon-clock"></span> <%= review.created_at.strftime("%b %d, %Y") %></div>
           <p class="user-rating"><%= rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %></p>
-          <%= simple_format(review.review_title) %>
+          <%= review.review_title %>
           <div class="prosCons">
             <% if review.pros.present? %>
               <b>Pros:</b><span> <%= simple_format(review.pros) %></span>
@@ -62,8 +62,8 @@
                 <%= link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs', 'data-toggle' => 'modal' %>
               <%end%>
             </li>
+            <li><%= social_share_button_tag(review.review_title, :url => "http://localhost:3000/buildings/#{params[:id]}#comment320") %></li>
             <li><%=link_to '<i class="icon-flag"></i>'.html_safe, '#' %></li>
-            <li><%=link_to '<i class="icon-share"></i>'.html_safe, '#' %></li>
           </ul>
           <div class="clearfix"></div>
         </div>
