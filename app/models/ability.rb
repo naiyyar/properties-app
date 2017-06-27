@@ -7,7 +7,7 @@ class Ability
       cannot :index, Building
       cannot :index, Unit
       cannot :index, Review
-      cannot :index, User
+      cannot [:contribution, :index], User
       cannot :index, Contact
     elsif user.has_role? :admin
       can :manage, :all
@@ -16,7 +16,7 @@ class Ability
       cannot :index, Building
       cannot :index, Unit
       cannot :index, Review
-      cannot :index, User
+      cannot [:contribution, :index], User
       cannot :index, Contact
     end
   end

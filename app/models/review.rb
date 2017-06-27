@@ -18,6 +18,15 @@ class Review < ActiveRecord::Base
   	self.user.name ? self.user.name : self.user.email[/[^@]+/]
   end
 
+  def property_name
+    property = self.reviewable
+    if property.kind_of? Building
+      property.building_name ? property.building_name : property.building_street_address
+    elsif property.kind_of? Unit
+      property.name
+    end
+  end
+
   private
   #To remove rating and votes
   def destroy_dependents

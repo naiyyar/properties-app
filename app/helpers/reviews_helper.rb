@@ -14,6 +14,14 @@ module ReviewsHelper
 		return link_to "#{reviewable.name}", "#{unit_path(reviewable)}"
 	end
 
+	def link_to_property_show reviewable
+		if reviewable.kind_of? Building
+			link_to_building_show(reviewable)
+		elsif reviewable.kind_of? Unit
+			link_to_unit_show(reviewable)
+		end
+	end
+
 	def building_street_address reviewable
 		if reviewable.present?
 			if reviewable.kind_of? Building

@@ -22,7 +22,12 @@ Rails.application.routes.draw do
   resources :reviews
   resources :useful_reviews
   resources :uploads
-  resources :users
+  
+  resources :users do
+    member do
+      get '/contribution', to: 'users#contribution', as: 'contribution'
+    end
+  end
 
   #multisteps Forms
   resources :user_steps

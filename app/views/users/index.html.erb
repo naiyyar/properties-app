@@ -1,4 +1,4 @@
-<% if current_user.has_role?(:admin) %>
+<% if !current_user.has_role?(:admin) %>
   <div class="tables">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -11,6 +11,7 @@
                 <th>Mobile</th>
                 <th>Phone</th>
                 <th>Listed properties</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                   <td><%= "#{user.mobile}" %></td>
                   <td><%= "#{user.phone}" %></td>
                   <td><%= user.buildings.present? ? user.buildings.count : '' %></td>
+                  <td><%=link_to 'Contribution', contribution_user_path(id: user.id) %></td>
                 </tr>
               <%end%>
             </tbody>
