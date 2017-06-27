@@ -17,6 +17,7 @@ jQuery ->
 					xhr.setRequestHeader 'X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')
 				data: { useful_review: { review_id: review_id, user_id: user_id } }
 				success: (response) ->
+					$this.addClass('disabled')
 					count_container = $this.find('span')
 					total_count = parseInt(count_container.text())
 					count_container.text(total_count+1)
