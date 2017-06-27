@@ -2478,7 +2478,7 @@ h1.pageTitle {
     border-bottom: 1px solid #e8e8e8;
 }
 .commentActions {
-    padding: 10px;
+    padding: 6px 10px;
 }
 .commentTime {
     float: left;
@@ -2490,6 +2490,20 @@ h1.pageTitle {
     list-style-type: none;
     margin: 0;
     float: right;
+    padding: 5px 0px;
+}
+.reviewActions{
+    padding: 0px 0px;
+}
+.reviewActions ul{
+    padding: 0px 0px;
+    float: left;
+}
+.reviewActions ul li{
+    margin: 0px 6px; 
+}
+.reviewActions ul.ricons li a > i {
+    font-size: 16px;
 }
 .commentActions ul li {
     float: right;
@@ -6094,9 +6108,18 @@ blockquote {
         margin-top: 10px;
     }
 
+    .reviewActions ul{
+        padding: 5px 0px;
+        float: right;
+    }
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {  
+    .reviewActions ul{
+        padding: 5px 0px;
+        float: right;
+    }
     #street_view_btn{
         left: 41%;
     }
