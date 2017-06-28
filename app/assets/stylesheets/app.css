@@ -22,6 +22,9 @@
 }
 
 /* custome */
+.no-pointer{
+    pointer-events: none;
+}
 .social-share-button a{
     margin: -3px 5px;
 }
@@ -2509,9 +2512,10 @@ h1.pageTitle {
     font-size: 16px;
 }
 
-.reviewActions ul.ricons li a i:hover{
+.reviewActions ul.ricons li a i:hover, .flagged{
     color: #0075c9;
 }
+
 .commentActions ul li {
     float: right;
     margin-left: 10px;

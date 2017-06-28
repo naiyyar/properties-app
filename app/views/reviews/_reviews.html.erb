@@ -1,72 +1,82 @@
 <div class="comment" id="comment<%=review.id%>">
-    <% if current_user and current_user.has_role?(:admin) %>
-      <%= link_to '<span class="fa fa-times"></span>'.html_safe, review_path(review), method: :delete, remote: true, class: 'pull-right text-danger daleteReview', title: 'Delete' %>
-    <%end%>
-    <div class="commentAvatar">
-      <% unless review.anonymous %>
-        <% if review.user.avatar.present? %>
-          <%= image_tag review.user.avatar, class: 'avatar' %>
-        <% elsif review.user.image_url.present? %>
-          <%= image_tag review.user.image_url, class: 'avatar' %>
-        <%else%>
-          <div class="firstLetter"><%= review.user.user_name.split('')[0].capitalize %></div>
-        <%end%>
+  <% if current_user and current_user.has_role?(:admin) %>
+    <%= link_to '<span class="fa fa-times"></span>'.html_safe, review_path(review), method: :delete, remote: true, class: 'pull-right text-danger daleteReview', title: 'Delete' %>
+  <%end%>
+  <div class="commentAvatar">
+    <% unless review.anonymous %>
+      <% if review.user.avatar.present? %>
+        <%= image_tag review.user.avatar, class: 'avatar' %>
+      <% elsif review.user.image_url.present? %>
+        <%= image_tag review.user.image_url, class: 'avatar' %>
       <%else%>
-        <%= image_tag 'anonymous1.png', class: 'avatar' %>
+        <div class="firstLetter"><%= review.user.user_name.split('')[0].capitalize %></div>
       <%end%>
-      <div class="commentArrow"><span class="fa fa-caret-left"></span></div>
+    <%else%>
+      <%= image_tag 'anonymous1.png', class: 'avatar' %>
+    <%end%>
+    <div class="commentArrow"><span class="fa fa-caret-left"></span></div>
+  </div>
+  <div class="commentContent">
+    <div class="commentName">
+      <%= review.anonymous ? 'Anonymous' : review.user_name.capitalize %>
     </div>
-    <div class="commentContent">
-        <div class="commentName">
-          <%= review.anonymous ? 'Anonymous' : review.user_name.capitalize %>
-        </div>
 
-        <div class="commentBody">
-          <div class="commentTime" style="float: none;"><span class="icon-clock"></span> <%= review.created_at.strftime("%b %d, %Y") %></div>
-          <p class="user-rating"><%= rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %></p>
-          <%= review.review_title %>
-          <div class="prosCons">
-            <% if review.pros.present? %>
-              <b>Pros:</b><span> <%= simple_format(review.pros) %></span>
-            <%end%>
-            <% if review.cons.present? %>
-              <b>Cons:</b><span> <%= simple_format(review.cons) %></span>
-            <%end%>
-            <% if review.other_advice.present? %>
-              <b>Other comments:</b><span> <%= simple_format(review.other_advice) %></span>
-            <%end%>
-          </div>
-        </div>
-        <div class="commentActions">
-          <ul>
-            <%if review.user.votes.where(vote: true, review_id: review.id).present? %>
-              <li><a href="#"><span class="fa fa-thumbs-up recommended"></span></a></li>
-            <%else%>
-              <li><a href="#"><span class="fa fa-thumbs-down"></span></a></li>                 
-            <%end%>
-            <li><a href="#">
-              Tenant: <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> 
-              <% if review.tenant_status != 'visitor' %>
-                (<%= review.stay_time %>)
-              <%end%>
-            </a></li> 
-          </ul>
-        </div>
-
-        <div class="reviewActions">
-          <ul class="list-inline ricons">
-            <li class="helpful">
-              <% if current_user.present? %>
-                <%= link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'javascript:;', class: "btn btn-o btn-blue btn-xs usefulButton #{current_user.marked_useful?(review.id) ? 'disabled' : ''}", 'data-reviewid' => "#{review.id}", 'data-userid' => current_user.present? ? current_user.id : nil %>
-              <%else%>
-                <%= link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs', 'data-toggle' => 'modal' %>
-              <%end%>
-            </li>
-            <li><%= social_share_button_tag(review.review_title, :url => "https://aptreviews-app.herokuapp.com/buildings/#{params[:id]}#comment#{review.id}") %></li>
-            <li><%=link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe, '#' %></li>
-          </ul>
-          <div class="clearfix"></div>
-        </div>
+    <div class="commentBody">
+      <div class="commentTime" style="float: none;"><span class="icon-clock"></span> <%= review.created_at.strftime("%b %d, %Y") %></div>
+      <p class="user-rating"><%= rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %></p>
+      <%= review.review_title %>
+      <div class="prosCons">
+        <% if review.pros.present? %>
+          <b>Pros:</b><span> <%= simple_format(review.pros) %></span>
+        <%end%>
+        <% if review.cons.present? %>
+          <b>Cons:</b><span> <%= simple_format(review.cons) %></span>
+        <%end%>
+        <% if review.other_advice.present? %>
+          <b>Other comments:</b><span> <%= simple_format(review.other_advice) %></span>
+        <%end%>
+      </div>
     </div>
-    <div class="clearfix"></div>
+    <div class="commentActions">
+      <ul>
+        <%if review.user.votes.where(vote: true, review_id: review.id).present? %>
+          <li><a href="#"><span class="fa fa-thumbs-up recommended"></span></a></li>
+        <%else%>
+          <li><a href="#"><span class="fa fa-thumbs-down"></span></a></li>                 
+        <%end%>
+        <li><a href="#">
+          Tenant: <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> 
+          <% if review.tenant_status != 'visitor' %>
+            (<%= review.stay_time %>)
+          <%end%>
+        </a></li> 
+      </ul>
+    </div>
+
+    <div class="reviewActions">
+      <ul class="list-inline ricons">
+        <li class="helpful">
+          <% if current_user.present? %>
+            <%= link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'javascript:;', class: "btn btn-o btn-blue btn-xs usefulButton #{current_user.marked_useful?(review.id) ? 'disabled' : ''}", 'data-reviewid' => "#{review.id}", 'data-userid' => current_user.present? ? current_user.id : nil %>
+          <%else%>
+            <%= link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs', 'data-toggle' => 'modal' %>
+          <%end%>
+        </li>
+        
+        <li><%= social_share_button_tag(review.review_title, :url => "https://aptreviews-app.herokuapp.com/buildings/#{params[:id]}#comment#{review.id}") %></li>
+        <li>
+          <% if current_user.present? %>
+            <%=link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe, "#flagDescription#{review.id}", 'data-toggle' => 'modal', class: "#{current_user.marked_flag?(review.id) ? 'no-pointer flagged' : ''}" %>
+          <%else%>
+            <%= link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe,'#signin', 'data-toggle' => 'modal' %>
+          <%end%>
+            
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
 </div>
+
+<%= render partial: 'review_flags/form', locals: { review: review } if current_user.present? %>

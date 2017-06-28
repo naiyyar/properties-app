@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :units
   has_many :authorizations
   has_many :useful_reviews
+  has_many :review_flags
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -113,6 +114,11 @@ class User < ActiveRecord::Base
   def marked_useful? review_id
     useful_review = self.useful_reviews.where(review_id: review_id)
     useful_review.present? ? true : false
+  end
+
+  def marked_flag? review_id
+    flags = self.review_flags.where(review_id: review_id)
+    flags.present? ? true : false
   end
 
 end
