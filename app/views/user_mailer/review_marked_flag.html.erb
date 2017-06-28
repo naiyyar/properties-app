@@ -1,0 +1,7 @@
+<% if @review.reviewable.kind_of? Building %>
+	<% redirect_url = "https://aptreviews-app.herokuapp.com/buildings/#{@review.reviewable.id}#comment#{@review.id}" %>
+<%else%>
+	<% redirect_url = "https://aptreviews-app.herokuapp.com/units/#{@review.reviewable.id}#comment#{@review.id}" %>
+<%end%>
+
+Review with title <%= link_to "#{@review.review_title}", redirect_url, target: '_blank' %> is marked flag by user <%= @user.name %>.

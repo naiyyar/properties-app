@@ -19,4 +19,14 @@ class UserMailer < ApplicationMailer
 		)
 	end
 
+	def review_marked_flag flag_review
+		@user = flag_review.user
+		@review = flag_review.review
+		mail(
+			to: 'transparentcityllc@gmail.com', 
+			from: @user.email,
+			subject: 'Review is marked flag'
+		)
+	end
+
 end
