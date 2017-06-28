@@ -62,8 +62,9 @@ class ReviewsController < ApplicationController
           redirect_to building_path(@reviewable)
         end
       else
-        flash.now[:error] = "Error Creating"
-        render :new
+        # @review.errors.messages[:tos_agreement].first
+        flash.now[:error] = "Error in creating review. #{@review.errors.messages[:tos_agreement].first}"
+        redirect_to :back
       end
     end
   end
@@ -99,7 +100,7 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:review_title, :building_id, :user_id, :reviewable_id, :reviewable_type,
-                                    :pros, :cons, :other_advice, :tenant_status, :stay_time, :anonymous)
+                                    :pros, :cons, :other_advice, :tenant_status, :stay_time, :anonymous, :tos_agreement)
   end
 
   def find_reviewable
