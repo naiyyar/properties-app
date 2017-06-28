@@ -26,7 +26,7 @@
     pointer-events: none;
 }
 .social-share-button a{
-    margin: -3px 5px;
+    margin: 0px 5px;
 }
 .tos_box{
     padding: 10px 20px;
@@ -2484,7 +2484,7 @@ h1.pageTitle {
     border-bottom: 1px solid #e8e8e8;
 }
 .commentActions {
-    padding: 6px 10px;
+    padding: 14px 4px 8px;
 }
 .commentTime {
     float: left;
@@ -2494,25 +2494,16 @@ h1.pageTitle {
 }
 .commentActions ul {
     list-style-type: none;
-    margin: 0;
+    /*margin: 0;*/
     float: right;
-    padding: 5px 0px;
-}
-.reviewActions{
     padding: 0px 0px;
 }
-.reviewActions ul{
-    padding: 0px 0px;
-    float: left;
-}
-.reviewActions ul li{
-    margin: 0px 6px; 
-}
-.reviewActions ul.ricons li a > i {
+
+.commentActions ul.ricons li a > i {
     font-size: 16px;
 }
 
-.reviewActions ul.ricons li a i:hover, .flagged{
+.commentActions ul.ricons li a i:hover, .flagged{
     color: #0075c9;
 }
 
