@@ -32,11 +32,25 @@ when 'neighborhood'
     json.search_term "#{building.neighborhood}, #{building.city}, #{building.state}"
     json.neighborhoods "#{building.neighborhood}"
   end
+  json.array! @buildings do |building|
+    json.id building.id
+    if building.building_name.present?
+      json.search_term "#{building.building_name} - #{building.building_street_address}, #{building.city}, #{building.state}, #{building.zipcode}"
+      json.term "#{building.building_street_address}"
+    end
+  end
 when 'pneighborhood'
   json.array! @buildings do |building|
     json.id building.id
     json.search_term "#{building.neighborhoods_parent}, #{building.city}, #{building.state}"
     json.neighborhoods "#{building.neighborhoods_parent}"
+  end
+  json.array! @buildings do |building|
+    json.id building.id
+    if building.building_name.present?
+      json.search_term "#{building.building_name} - #{building.building_street_address}, #{building.city}, #{building.state}, #{building.zipcode}"
+      json.term "#{building.building_street_address}"
+    end
   end
 when 'no_match_found'
     json.no_match_found 'No matches found - Add a new building'

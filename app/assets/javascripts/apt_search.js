@@ -29,9 +29,11 @@ app.apartments.prototype = {
   _render: function(ul, item) {
     if(item.search_term == undefined){
       search_term = item.value
+      search_term2 = item.value
     }
     else{
       search_term = item.search_term
+      search_term2 = item.search_term2
     }
     this._input.removeClass('loader');
     var items = ''
@@ -39,8 +41,11 @@ app.apartments.prototype = {
       //items = '<p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p>'
     //}
     //else{
-      items = '<p class="address"><b>' + search_term + '</b></p>'
+      if(search_term != undefined){
+        items = '<p class="address"><b>' + search_term + '</b></p>';
+      }
     }
+    
     var markup = [items];
     $('ul.ui-autocomplete').css('left','10');
     return $('<li>')

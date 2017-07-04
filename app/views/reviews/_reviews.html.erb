@@ -55,15 +55,15 @@
 
     <div class="commentActions">
       <ul class="list-inline ricons pull-left">
-        <li><%= social_share_button_tag(review.review_title, :url => "https://aptreviews-app.herokuapp.com/buildings/#{params[:id]}#comment#{review.id}") %></li>
+        <li><%= social_share_button_tag(review.review_title, :url => "http://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}") %></li>
       </ul>
       
       <ul class="list-inline ricons pull-right">
         <li>
           <% if current_user.present? %>
-            <%=link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe, "#flagDescription#{review.id}", 'data-toggle' => 'modal', class: "#{current_user.marked_flag?(review.id) ? 'no-pointer flagged' : ''}" %>
+            <%=link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe, "#flagDescription#{review.id}", 'data-toggle' => 'modal', class: "#{current_user.marked_flag?(review.id) ? 'no-pointer flagged' : ''}", title: 'Flag as inappropriate' %>
           <%else%>
-            <%= link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe,'#signin', 'data-toggle' => 'modal' %>
+            <%= link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe,'#signin', 'data-toggle' => 'modal' , title: 'Flag as inappropriate' %>
           <%end%>
         </li>
         

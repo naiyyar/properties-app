@@ -2504,7 +2504,7 @@ h1.pageTitle {
 }
 
 .commentActions ul.ricons li a i:hover, .flagged{
-    color: #0075c9;
+    color: rgb(204, 39, 39);
 }
 
 .commentActions ul li {

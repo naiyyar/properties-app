@@ -30,7 +30,7 @@ class Building < ActiveRecord::Base
     :using => [:tsearch, :trigram, :dmetaphone],
     :ignoring => :accents
   }
-  multisearchable :against => [:neighborhood]
+  multisearchable :against => [:neighborhood, :building_name]
 
   #pgsearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
