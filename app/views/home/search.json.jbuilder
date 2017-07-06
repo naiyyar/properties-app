@@ -34,7 +34,7 @@ when 'neighborhood'
   end
   json.array! @buildings do |building|
     json.id building.id
-    if building.building_name.present?
+    if building.building_name #.present?
       json.search_term "#{building.building_name} - #{building.building_street_address}, #{building.city}, #{building.state}, #{building.zipcode}"
       json.term "#{building.building_street_address}"
     end
