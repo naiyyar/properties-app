@@ -7,8 +7,8 @@
 # #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-# # user = User.find(2)
-# # user.add_role :admin
+#user = User.find(2)
+#user.add_role :admin
 
 # # TODO:
 # # Central Harlem
