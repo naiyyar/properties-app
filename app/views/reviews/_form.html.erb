@@ -48,6 +48,13 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-sm-12">
+		<div class="form-group last_year_at_residence hide">
+			<label>Last Year at Residence*</label>
+			<%= f.select :last_year_at_residence, options_for_select(years), { prompt: '' },  { class: 'form-control' } %>
+			 <span class='message hide years-not-selected text-red'>Please select last year at residence.</span>
+		</div>
+	</div>
 	<div class="col-sm-12 years_in_residence">
 		<div class="form-group">
 			<label>Number of Years in Residence*</label>

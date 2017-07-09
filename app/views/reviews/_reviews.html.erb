@@ -37,17 +37,18 @@
         <%end%>
       </div>
       <div class="commentActions">
-        <ul>
+        <ul class="tenant_info">
           <%if review.user.votes.where(vote: true, review_id: review.id).present? %>
             <li><a href="#"><span class="fa fa-thumbs-up recommended"></span></a></li>
           <%else%>
             <li><a href="#"><span class="fa fa-thumbs-down"></span></a></li>                 
           <%end%>
-          <li>
-            Tenant: <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> 
+          <li>Tenant: <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> 
             <% if review.tenant_status != 'visitor' %>
               (<%= review.stay_time %>)
             <%end%>
+          </li> 
+          <li>Last year in residence: <%= review.last_year_at_residence.present? ? "#{review.last_year_at_residence}" : '' %> 
           </li> 
         </ul>
       </div>

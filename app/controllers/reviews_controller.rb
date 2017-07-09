@@ -100,7 +100,7 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:review_title, :building_id, :user_id, :reviewable_id, :reviewable_type,
-                                    :pros, :cons, :other_advice, :tenant_status, :stay_time, :anonymous, :tos_agreement)
+                                    :pros, :cons, :other_advice, :tenant_status, :stay_time, :anonymous, :tos_agreement, :last_year_at_residence)
   end
 
   def find_reviewable

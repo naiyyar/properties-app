@@ -2499,6 +2499,13 @@ h1.pageTitle {
     padding: 0px 0px;
 }
 
+.commentActions ul.tenant_info > li + li:after {
+  /*font: normal normal normal 14px/1 FontAwesome;*/
+  /*padding: 0 10px;*/
+  /*color: #ccc;*/
+  content: "|";
+}
+
 .commentActions ul.ricons li a > i {
     font-size: 16px;
 }

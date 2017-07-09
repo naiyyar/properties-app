@@ -43,4 +43,9 @@ module ReviewsHelper
 	def number_of_years
 		['< 1 Year', '1-2 Years', '2-3 Years', '3-4 Years', '4-5 Years', '> 5 Years' ]
 	end
+
+	def years
+		current_year = Date.today.year
+		("2005".."#{current_year}").sort
+	end
 end
