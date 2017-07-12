@@ -48,7 +48,7 @@
               (<%= review.stay_time %>)
             <%end%>
           </li> 
-          <li>Last year in residence: <%= review.last_year_at_residence.present? ? "#{review.last_year_at_residence}" : '' %> 
+          <li><%= "Last year in residence: #{review.last_year_at_residence}" if review.last_year_at_residence.present? %> 
           </li> 
         </ul>
       </div>

@@ -4,7 +4,7 @@ class Review < ActiveRecord::Base
   belongs_to :user
   has_many :useful_reviews
   has_many :review_flags
-  validates :pros,:cons, :presence => true, length: { minimum: 10, :message => 'You must enter at least 10 words' } #, if: :can_validate?
+  #validates :pros,:cons, :presence => true, length: { minimum: 10, :message => 'You must enter at least 10 words' } #, if: :can_validate?
   
   validates :tos_agreement, :allow_nil => false, :acceptance => { :accept => true }, :on => :create #, message: 'Terms not accepted.'
   

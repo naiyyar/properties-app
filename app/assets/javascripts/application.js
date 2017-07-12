@@ -32,6 +32,7 @@
 //= require bootstrap-datepicker
 //= require moment
 //= require jquery.slideandswipe
+//= require jquery.validate
 //= require turbolinks
 
 //= require_tree .

@@ -1,5 +1,4 @@
-<%= form_for [@reviewable, Review.new], validate: true do |f| %>
-	<%= f.validate :pros, :cons %>
+<%= form_for [@reviewable, Review.new] do |f| %>
 	<%= hidden_field_tag 'contribution', params[:contribution] %>
 	<% unless @reviewable.kind_of? Unit %>
   		<div class="col-sm-12">
@@ -27,7 +26,7 @@
 	    <label>Rating*</label>
 	    	<% rating_user = current_user.present? ? current_user : nil %>
 	    	<%= rating_for_user @reviewable, rating_user, @reviewable.class.name.downcase, star: 5 %>
-			<span class='message hide rating-not-selected text-red'>Please select a rating.</span>
+				<span class='message hide rating-not-selected text-red'>Please select a rating.</span>
 		</div>
 	</div>
 	<div class="col-sm-12">
@@ -41,48 +40,49 @@
 			  <label class="btn btn-default reviewer_type">
 			  	<%= f.radio_button :tenant_status,'former', id: 'former_tenant', class: 'reviewer_status' %> Former Tenant
 			  </label>
-			   <label class="btn btn-default reviewer_type">
+			  <label class="btn btn-default reviewer_type">
 			  	<%= f.radio_button :tenant_status,'visitor', id: 'visitor', class: 'reviewer_status' %> Visitor
-			  </label> <br/>
-			  <span class='message hide status-not-selected text-red'>Please select a reviewer type.</span>
+			  </label>
 			</div>
 		</div>
+
+		<!-- <label class='message status-not-selected text-red'>Please select a reviewer type.</label> -->
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group last_year_at_residence hide">
 			<label>Last Year at Residence*</label>
 			<%= f.select :last_year_at_residence, options_for_select(years), { prompt: '' },  { class: 'form-control' } %>
-			 <span class='message hide years-not-selected text-red'>Please select last year at residence.</span>
+			 <!-- <span class='message hide last-year-selected text-red'>Please select last year at residence.</span> -->
 		</div>
 	</div>
 	<div class="col-sm-12 years_in_residence">
 		<div class="form-group">
 			<label>Number of Years in Residence*</label>
 			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: '' },  { class: 'form-control' } %>
-			 <span class='message hide years-not-selected text-red'>Please select number of years in residence.</span>
+			 <!-- <span class='message hide years-not-selected text-red'>Please select number of years in residence.</span> -->
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Review Title*</label>
 			<%= f.text_field :review_title,  class: 'form-control' %>
-			<span class='message hide title_blank text-red'>Please add review title.</span>
+			<!-- <span class='message hide title_blank text-red'>Please add review title.</span> -->
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Pros*</label>
 			<small class="pull-right">10 words minimum</small>
-			<%= f.text_area :pros,  class: 'form-control', placeholder: "Enter 10 words minimum", validate: true %>
-			<span class='message hide pros_blank text-red'>Please add pros.</span>
+			<%= f.text_area :pros,  class: 'form-control', placeholder: "Enter 10 words minimum"%>
+			<!-- <span class='message hide pros_blank text-red'>Please add pros.</span> -->
 		</div>
 	</div>
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Cons*</label>
 			<small class="pull-right">10 words minimum</small>
-			<%= f.text_area :cons,  class: 'form-control', placeholder: "Enter 10 words minimum", validate: true %>
-			<span class='message hide cons_blank text-red'>Please add cons.</span>
+			<%= f.text_area :cons,  class: 'form-control', placeholder: "Enter 10 words minimum" %>
+			<!-- <span class='message hide cons_blank text-red'>Please add cons.</span> -->
 		</div>
 	</div>
 	
@@ -92,6 +92,7 @@
 			<%= f.text_area :other_advice,  class: 'form-control' %>
 		</div>
 	</div>
+	
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Would you recommend this building?*</label>
@@ -103,10 +104,11 @@
 			  <label class="btn btn-default">
 			  	<%= radio_button_tag 'vote', false %> <span class='icon-dislike'></span>
 			  </label>
-			</div><br/>
-			<span class='message hide recommend-not-selected text-red'>Please select recommendation.</span>
+			</div>
+			<!-- <span class='message hide recommend-not-selected text-red'>Please select recommendation.</span> -->
 		</div>
   </div>
+  
   <div class="col-sm-12">
 	  <div class="form-group">
 	    <div class="checkbox custom-checkbox"><label><%= f.check_box :anonymous, {}, true, false %> <span class="fa fa-check"></span> Post Anonymously</label></div>
@@ -119,7 +121,7 @@
 	    		<%= f.check_box :tos_agreement %> <span class="fa fa-check"></span> <a href='http://www.transparentcity.co/terms_of_service' target='_blank' class="tos-link"> I agree to the TransparentCity Terms of Service. </a> This review of my current or former building/unit is truthful.
 	    	</label>
 	    </div>
-	    <span class='message hide tos-not-accepted text-red'>Must be accepted.</span>
+	    <!-- <span class='message hide tos-not-accepted text-red'>Must be accepted.</span> -->
 		</div>
 	</div>
 
@@ -138,4 +140,13 @@
 	  </div>
 	</div>
 <% end %>
+
+<style type="text/css">
+	.form-group {
+    margin-bottom: 6px;
+	}
+	label.error{
+		color: #ea3d36;
+	}
+</style>
   
