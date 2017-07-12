@@ -8,7 +8,7 @@ class Building < ActiveRecord::Base
 
   validates :building_street_address, presence: true
   validates_uniqueness_of :building_street_address, scope: [:zipcode]
-  validates_uniqueness_of :building_name, :allow_blank => true, :allow_nil => true
+  #validates_uniqueness_of :building_name, :allow_blank => true, :allow_nil => true
 
   belongs_to :user
   has_many :reviews, as: :reviewable
