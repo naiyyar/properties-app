@@ -5537,6 +5537,14 @@ blockquote {
 
 
 @media screen and (max-width: 767px) {
+    .lastYearInResidence{
+        color: #a9a9a9;
+        text-align: right;
+        padding: 5px 9px 5px 0px;
+    }
+    .comments{
+        padding: 0px;
+    }
     textarea.form-control{
         height: 100px;
     }
@@ -6137,6 +6145,14 @@ blockquote {
         padding: 5px 0px;
         float: right;
     }
+    .lastYearInResidence{
+        color: #a9a9a9;
+        text-align: right;
+        padding: 5px 9px 5px 0px;
+    }
+    .comments{
+        padding: 0px;
+    }
     .reviewActions ul li{
         margin: 0px 3px;
     }
@@ -6282,6 +6298,9 @@ blockquote {
 }
 
 @media screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    .commentActions ul li {
+        margin-left: 5px;
+    }
     #street_view_btn {
         left: 43%;
     }

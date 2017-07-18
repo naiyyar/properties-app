@@ -37,6 +37,7 @@
         <%end%>
       </div>
       <div class="commentActions">
+        <div class="visible-xs visible-sm lastYearInResidence"><%= "Last year in residence: #{review.last_year_at_residence}" if review.last_year_at_residence.present? %> </div>
         <ul class="tenant_info">
           <%if review.user.votes.where(vote: true, review_id: review.id).present? %>
             <li><a href="#"><span class="fa fa-thumbs-up recommended"></span></a></li>
@@ -48,7 +49,7 @@
               (<%= review.stay_time %>)
             <%end%>
           </li> 
-          <li><%= "Last year in residence: #{review.last_year_at_residence}" if review.last_year_at_residence.present? %> 
+          <li class="hidden-xs hidden-sm"><%= "Last year in residence: #{review.last_year_at_residence}" if review.last_year_at_residence.present? %> 
           </li> 
         </ul>
       </div>
