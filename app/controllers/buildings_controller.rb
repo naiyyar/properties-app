@@ -139,7 +139,7 @@ class BuildingsController < ApplicationController
           @unit.update(unit_params)
         else
           if params[:building][:units_attributes].present?
-            @unit = @building.fetch_or_create_unit(params[:building][:units_attributes])
+            @unit = @building.fetch_or_create_unit(building_params)
           end
         end
         if params[:unit_contribution]

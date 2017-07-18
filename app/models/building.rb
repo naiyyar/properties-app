@@ -145,6 +145,7 @@ class Building < ActiveRecord::Base
   end
 
   def fetch_or_create_unit params
+    params = params[:units_attributes]
     unit = Unit.new(params.values[0])
     unit.building_id = self.id
     unit.save
