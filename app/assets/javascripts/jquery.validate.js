@@ -952,22 +952,22 @@ $.extend( $.validator, {
 					if(score == ''){
 						$('.rating-not-selected').removeClass('hide');
 					}
-					attr_id = element.getAttribute('id');
-					attr_name = element.getAttribute('name');
-					console.log(attr_name)
+					var attr_id = element.getAttribute('id');
+					var attr_name = element.getAttribute('name');
+					var elem;
 					if(attr_id == 'current_tenant' || attr_id == 'vote_true'){
-						place.insertAfter( element.parentElement.parentElement.parentElement );
+						elem = element.parentElement.parentElement.parentElement;
 					}
 					else if(attr_name == 'score'){
-						place.insertAfter( element.parentElement );
+						elem = element.parentElement;
 					}
 					else if(attr_name == 'review[tos_agreement]'){
-						place.insertAfter( element.parentElement.parentElement );
+						elem = element.parentElement.parentElement;
 					}
 					else{
-						place.insertAfter( element );
+						elem = element;
 					}
-					
+					place.insertAfter( elem )
 				}
 
 				// Link error back to the element

@@ -46,6 +46,6 @@ module ReviewsHelper
 
 	def years
 		current_year = Date.today.year
-		("2005".."#{current_year}").sort
+		("2005".."#{current_year}").sort.reverse
 	end
 end
