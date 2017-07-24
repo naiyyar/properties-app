@@ -46,7 +46,7 @@
           <%end%>
           <li>Tenant: <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> 
             <% if review.tenant_status != 'visitor' %>
-              (<%= review.stay_time %>)
+              <%= "(#{review.stay_time})" if review.stay_time.present? %>
             <%end%>
           </li> 
           <li class="hidden-xs hidden-sm"><%= "Last year in residence: #{review.last_year_at_residence}" if review.last_year_at_residence.present? %> 
