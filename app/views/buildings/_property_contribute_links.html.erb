@@ -16,39 +16,48 @@
   </div>
   
   <div class="contribute_links">
-    <ul class="features">
+    <div class="buttonsWrapper">
       <% if object.kind_of? Building %>
-        <li><%= link_to '+ Review', new_building_review_path(building_id: object, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-o btn-gray btn-block' %></li>
-        <li><% if user_signed_in? %>
-            <%= link_to '+ Photo', new_building_upload_path(building_id: object), 'data-no-turbolink' => false , class: 'btn btn-o btn-gray btn-block' %>
-          <%else%>
-            <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-gray btn-block'  %>
-          <%end%>    
-        </li>
-        <li>
-          <% if user_signed_in? %>
-            <%= link_to '+ Amenities', edit_building_path(contribution: 'building_amenities', user_id: current_user.id, id: object.id), class: 'btn btn-o btn-gray btn-block' %>
-          <%else%>
-            <%= link_to '+ Amenities', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-gray btn-block'  %>
-          <%end%> 
-        </li>
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+              <%= link_to '+ Review', new_building_review_path(building_id: object, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-o btn-gray' %>
+          </div>
+          <div class="btn-group">
+            <% if user_signed_in? %>
+              <%= link_to '+ Photo', new_building_upload_path(building_id: object), 'data-no-turbolink' => false , class: 'btn btn-o btn-gray' %>
+            <%else%>
+              <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-gray'  %>
+            <%end%>  
+          </div>
+          <div class="btn-group">
+            <% if user_signed_in? %>
+              <%= link_to '+ Amenities', edit_building_path(contribution: 'building_amenities', user_id: current_user.id, id: object.id), class: 'btn btn-o btn-gray' %>
+            <%else%>
+              <%= link_to '+ Amenities', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-gray'  %>
+            <%end%> 
+          </div>
+        </div>
       <%else%>
-        <li><%= link_to '+ Review', new_unit_review_path(unit_id: object, contribution: 'unit_review'), "data-no-turbolink" => false, class: 'btn btn-o btn-gray btn-block' %></li>
-        <li>
-          <% if user_signed_in? %>
-            <%= link_to '+ Photo', new_unit_upload_path(unit_id: object), 'data-no-turbolink' => false , class: 'btn btn-o btn-gray btn-block' %>
-          <%else%>
-            <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-gray btn-block'  %>
-          <%end%>    
-        </li>
-        <li>
-          <% if user_signed_in? %>
-            <%= link_to '+ Amenities', "/user_steps/next_page?contribution_for=unit_amenities&unit_id=#{object.id}", class: 'btn btn-o btn-gray btn-block' %>
-          <%else%>
-            <%= link_to '+ Amenities', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-gray btn-block'  %>
-          <%end%> 
-        </li>
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+            <%= link_to '+ Review', new_unit_review_path(unit_id: object, contribution: 'unit_review'), "data-no-turbolink" => false, class: 'btn btn-o btn-gray' %>
+          </div>
+          <div class="btn-group">
+            <% if user_signed_in? %>
+              <%= link_to '+ Photo', new_unit_upload_path(unit_id: object), 'data-no-turbolink' => false , class: 'btn btn-o btn-gray' %>
+            <%else%>
+              <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-gray'  %>
+            <%end%>   
+          </div>
+          <div class="btn-group">
+            <% if user_signed_in? %>
+              <%= link_to '+ Amenities', "/user_steps/next_page?contribution_for=unit_amenities&unit_id=#{object.id}", class: 'btn btn-o btn-gray' %>
+            <%else%>
+              <%= link_to '+ Amenities', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-gray'  %>
+            <%end%> 
+          </div>
+        </div>
       <%end%>
-    </ul>
+    </div>
   </div>
 </div>
