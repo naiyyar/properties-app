@@ -29,11 +29,9 @@ app.apartments.prototype = {
   _render: function(ul, item) {
     if(item.search_term == undefined){
       search_term = item.value
-      search_term2 = item.value
     }
     else{
       search_term = item.search_term
-      search_term2 = item.search_term2
     }
     this._input.removeClass('loader');
     var items = ''
