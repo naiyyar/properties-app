@@ -81,6 +81,6 @@ class RentalPriceHistoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rental_price_history_params
-      params.require(:rental_price_history).permit(:residence_start_date,:residence_end_date,:monthly_rent,:broker_fee,:non_refundable_costs,:rent_upfront,:refundable_deposits,:unit_id)
+      params.require(:rental_price_history).permit(:residence_start_date,:residence_end_date,:monthly_rent,:broker_fee,:non_refundable_costs,:rent_upfront,:refundable_deposits,:unit_id, :start_year,:end_year)
     end
 end

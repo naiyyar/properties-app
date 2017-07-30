@@ -10,4 +10,12 @@ class RentalPriceHistory < ActiveRecord::Base
 	# 	  end
 	# 	end
 	# end
+
+	def res_start_year
+		self.residence_start_date.present? ? self.residence_start_date.strftime("%Y") : self.start_year
+	end
+
+	def res_end_year
+		self.residence_end_date.present? ? self.residence_start_date.strftime("%Y") : self.end_year
+	end
 end
