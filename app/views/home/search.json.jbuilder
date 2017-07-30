@@ -32,7 +32,6 @@ when 'neighborhood'
     json.search_term "#{building.neighborhood}, #{building.city}, #{building.state}"
     json.neighborhoods "#{building.neighborhood}"
   end
-  
   json.array! @buildings do |building|
     json.id building.id
     if building.building_name.present?

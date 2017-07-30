@@ -20,11 +20,9 @@
               <%= @building.recommended_percent.nan? ? '| --% recommended' :  "| #{@building.recommended_percent.to_i}% Recommended" %>
             </div>
           <%end%>
-          
           <div class="clearfix"></div>
           
           <div class="stats1 property_information">
-            <%= link_to '<span class="fa fa-globe"> Property Website</span>'.html_safe, @building.web_url, target: '_blank' if @building.web_url.present? %>
             <!-- <span><%#= @building.no_of_units ? "#{@building.no_of_units} Unit(s) -" : ' -- Units' %></span>
             <span><%#= @building.floors ? "#{@building.floors} Floors -" : ' 0 Floors -' %></span>
             <span><%#= @building.built_in ? "Built in #{@building.built_in}" : ' Built in 0000' %></span> -->
