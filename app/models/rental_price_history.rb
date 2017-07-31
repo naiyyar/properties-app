@@ -16,6 +16,6 @@ class RentalPriceHistory < ActiveRecord::Base
 	end
 
 	def res_end_year
-		self.residence_end_date.present? ? self.residence_start_date.strftime("%Y") : self.end_year
+		self.residence_end_date.present? ? self.residence_end_date.strftime("%Y") : self.end_year
 	end
 end

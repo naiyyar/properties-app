@@ -19,8 +19,8 @@
 			  	<% unit.rental_price_histories.order('created_at desc').each do |rental_price| %>
 						<tr>
 							<td class="text-center"><%= link_to unit.name, unit_path(unit), class: 'link_underlined' %></td>
-							<td><%= rental_price.residence_start_date.strftime("%Y-%m-%d") if rental_price.residence_start_date.present? %></td>
-  						<td><%= rental_price.residence_end_date.strftime("%Y-%m-%d") if rental_price.residence_end_date.present? %></td>
+							<td><%= rental_price.res_start_year if rental_price.res_start_year.present? %></td>
+  						<td><%= rental_price.res_end_year if rental_price.res_end_year.present? %></td>
 							<td class="text-right"><%= number_to_currency(rental_price.monthly_rent, precision: 0) %></td>
 							<td class="text-right"><%= number_to_currency(rental_price.rent_upfront, precision: 0) %></td>
 							<td class="text-right"><%= number_to_currency(rental_price.refundable_deposits, precision: 0) %></td>
