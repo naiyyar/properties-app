@@ -58,12 +58,24 @@ class HomeController < ApplicationController
         @zoom = 10
       end
     else
+      results = []
       @buildings_by_pneighborhood = Building.search_by_pneighborhood(params[:term]).to_a.uniq(&:neighborhoods_parent)
+      results << @buildings_by_pneighborhood
       @buildings_by_name = Building.search_by_building_name(params[:term]).to_a.uniq(&:building_name)
+      results << @buildings_by_name
       @buildings_by_neighborhood = Building.search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
+      results << @buildings_by_neighborhood
       @buildings_by_address = Building.search_by_street_address(params[:term]).to_a.uniq(&:building_street_address)
+      results << @buildings_by_address
       @buildings_by_zipcode = Building.search_by_zipcode(params[:term]).to_a.uniq(&:zipcode)
+      results << @buildings_by_zipcode
       @buildings_by_city = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
+      results << @buildings_by_city
+      if !results.flatten.present?
+        @result_type = 'no_match_found'
+      else
+        @result_type = 'match_found'
+      end
       # if params[:term].present?
     		# # Search with zipcode
       #   @buildings = Building.text_search_by_zipcode(params[:term])

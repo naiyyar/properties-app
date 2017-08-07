@@ -57,7 +57,7 @@ if @buildings_by_city.present?
   end
 end
 
-# case @result_type
+case @result_type
 # when 'building_name'
 #   json.array! @buildings do |building|
 #     json.id building.id
@@ -134,6 +134,6 @@ end
 #     end
 #   end
   
-# when 'no_match_found'
-#     json.no_match_found 'No matches found - Add a new building'
-# end
+when 'no_match_found'
+    json.no_match_found 'No matches found - Add a new building'
+end
