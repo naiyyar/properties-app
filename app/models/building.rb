@@ -40,24 +40,29 @@ class Building < ActiveRecord::Base
      :using => {  :tsearch => { prefix: true }, 
                   :trigram=> { :threshold => 0.1 } 
                 }
-  pg_search_scope :search_by_pneighborhood, against: [:neighborhoods_parent, :building_name, :neighborhood],
+  pg_search_scope :search_by_pneighborhood, against: [:neighborhoods_parent],
      :using => {  :tsearch => { prefix: true }, 
-                  :trigram=> { :threshold => 0.2 } 
+                  :trigram=> { :threshold => 0.1 } 
                 }
 
   pg_search_scope :text_search_by_building_name, against: [:building_name],
-                  :using => {:tsearch=> { prefix: true }, :trigram=> {
-                  :threshold => 0.1
+                  :using => {:tsearch=> { prefix: true }, :trigram => {
+                  :threshold => 0.2
                 }}
 
   pg_search_scope :search_by_street_address, against: [:building_street_address],
     :using => {:tsearch=> { prefix: true }, :trigram=> {
-                  :threshold => 0.1
+                  :threshold => 0.2
                 }}
 
   pg_search_scope :text_search_by_city, against: [:city],
     :using => {:tsearch=> { prefix: true }, :trigram=> {
-                  :threshold => 0.1
+                  :threshold => 0.2
+                }}
+
+  pg_search_scope :search_by_zipcode, against: [:zipcode],
+    :using => {:tsearch=> { prefix: true }, :trigram=> {
+                  :threshold => 0.2
                 }}
 
   def to_param
@@ -69,16 +74,15 @@ class Building < ActiveRecord::Base
   end
 
   #using regexp to put search string on top
-  def self.search_by_neighborhoods(criteria)
-    regexp = /#{criteria}/i; # case-insensitive regexp based on your string
-    results = Building.search_by_neighborhood(criteria).order(:neighborhood).to_a.uniq(&:neighborhood)
-    results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
-  end
+  # def self.search_by_neighborhoods(criteria)
+  #   regexp = /#{criteria}/i; # case-insensitive regexp based on your string
+  #   results = Building.search_by_neighborhood(criteria).order(:neighborhood).to_a.uniq(&:neighborhood)
+  #   results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+  # end
 
   def self.search_by_pneighborhoods(criteria)
     regexp = /#{criteria}/i;
     results = Building.search_by_pneighborhood(criteria).order(:neighborhoods_parent).to_a.uniq(&:neighborhoods_parent)
-    #results = order(:neighborhoods_parent).where("neighborhoods_parent ILIKE ?", "%#{criteria}%").to_a.uniq(&:neighborhoods_parent)
     results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
