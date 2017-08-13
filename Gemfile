@@ -56,9 +56,6 @@ gem 'social-share-button'
 #rating
 gem 'ratyrate', github: 'wazery/ratyrate'
 
-#fancybox
-gem 'fancybox2-rails', '~> 0.2.8'
-
 gem 'momentjs-rails'
 gem 'jquery-placeholder-rails'
 
@@ -95,6 +92,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'omniauth'
 gem 'omniauth-facebook' #, '1.4.0'
 gem "omniauth-google-oauth2"
+
+#fancybox
+gem 'fancybox2-rails', '~> 0.2.8'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

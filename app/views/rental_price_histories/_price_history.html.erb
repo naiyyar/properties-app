@@ -19,7 +19,7 @@
     <% @rental_price_histories = @unit.rental_price_histories if @unit.present? %>
     <% @rental_price_histories.order('created_at desc').each do |rental_price| %>
   		<tr>
-        <td><%= link_to rental_price.unit.name, unit_path(rental_price.unit) if rental_price.unit.present?%></td>
+        <td><%= link_to rental_price.unit.name, unit_path(rental_price.unit), 'data-no-turbolink' => false if rental_price.unit.present?%></td>
   			<td><%= rental_price.res_start_year if rental_price.res_start_year.present? %></td>
   			<td><%= rental_price.res_end_year if rental_price.res_end_year.present? %></td>
   			<td class="text-right"><%= number_to_currency(rental_price.monthly_rent, precision: 0) %></td>

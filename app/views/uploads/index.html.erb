@@ -2,16 +2,16 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<%if @building.present? %>
-				<h1 class="pageTitle"><%= link_to @building.building_name_or_address, building_path(@building) %></h1> 
+				<h1 class="pageTitle"><%= link_to @building.building_name_or_address, building_path(@building), 'data-no-turbolink' => false %></h1> 
       		<div class="address text-muted">
-        		<%= link_to building_path(@building) do %>
+        		<%= link_to building_path(@building), 'data-no-turbolink' => false do %>
         			<!-- method on reviews helper -->
 	        		<%= building_street_address @building %> <br />
 	        		<%= @building.neighborhood %>
         		<%end%> 
         	</div>
 			<%else%>
-				<%= link_to unit_path(@unit), class: 'text-col-black' do %>
+				<%= link_to unit_path(@unit), class: 'text-col-black', 'data-no-turbolink' => false do %>
 					<h4><%= @unit.building.building_name %></h4>
 					<p> <b><%= @unit.building.building_street_address %> </b></p>
 				  <p> <b><%= @unit.building.city %>, <%= @unit.building.state %>, <%= @unit.building.zipcode %> </b></p>

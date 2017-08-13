@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <b><%= @title %> #<%= link_to @unit.name, unit_path(@unit) if @unit.present? %> </b>
+          <b><%= @title %> #<%= link_to @unit.name, unit_path(@unit), 'data-no-turbolink' => false if @unit.present? %> </b>
         </div>
         <div class="panel-body">
           <%= form_for(@rental_price_history) do |f| %>

@@ -18,7 +18,7 @@
 		  	<% @building.units.each do |unit| %>
 			  	<% unit.rental_price_histories.order('created_at desc').each do |rental_price| %>
 						<tr>
-							<td class="text-center"><%= link_to unit.name, unit_path(unit), class: 'link_underlined' %></td>
+							<td class="text-center"><%= link_to unit.name, unit_path(unit), class: 'link_underlined', 'data-no-turbolink' => false %></td>
 							<td><%= rental_price.res_start_year if rental_price.res_start_year.present? %></td>
   						<td><%= rental_price.res_end_year if rental_price.res_end_year.present? %></td>
 							<td class="text-right"><%= number_to_currency(rental_price.monthly_rent, precision: 0) %></td>

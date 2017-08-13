@@ -25,7 +25,7 @@
           <tbody class="table">
             <% @units.each do |unit| %>
               <tr>
-                <td><span class="propName"><b><%= link_to unit.name, unit_path(unit) %></span></td>
+                <td><span class="propName"><b><%= link_to unit.name, unit_path(unit), 'data-no-turbolink' => false %></span></td>
                 <td><%= unit.number_of_bedrooms %></td>
                 <td><%= unit.number_of_bathrooms %></td>
                 <%# if current_user && current_user.has_role?(:admin) %>

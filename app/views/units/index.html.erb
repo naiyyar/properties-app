@@ -28,7 +28,7 @@
             <% if @units.present? %>
               <% @units.each do |unit| %>
                 <tr>
-                  <td><%= link_to unit.name, unit_path(unit) %></td>
+                  <td><%= link_to unit.name, unit_path(unit), 'data-no-turbolink' => false %></td>
                   <td><%= link_to unit.building.building_name_or_address, building_path(unit.building) if unit.building.present? %></td>
                   <td><%= link_to building_street_address(unit.building), building_path(unit.building) if unit.building.present? %></td>
                   <td class="text-center"><%= link_to '<span class="fa fa-info-circle fa-2x" />'.html_safe, rental_price_histories_path(unit_id: unit.id) %></td>

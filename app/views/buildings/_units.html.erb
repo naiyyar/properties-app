@@ -12,7 +12,7 @@
 	  	<tbody>
 		  	<% @building.units.each do |unit| %>
 					<tr>
-						<td class="text-center"><%= link_to unit.name, unit_path(unit), class: 'link_underlined' %></td>
+						<td class="text-center"><%= link_to unit.name, unit_path(unit), class: 'link_underlined', 'data-no-turbolink' => false %></td>
 						<td class="text-center"><%=unit.number_of_bedrooms%></td>
 						<td class="text-center"><%=unit.number_of_bathrooms%></td>
 						<td class="text-center"><%=unit.square_feet.to_i%> Ft<sup>2</sup></td>
