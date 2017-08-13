@@ -24,7 +24,7 @@
 	<div class="row">
 		<% @uploads.each do |upload| %>
 			<div class="col-sm-3 image-gallery">
-        <a href="<%=upload.image.url%>" data-imageable="<%= imageable(upload) %>" class="propWidget-1 fancybox" rel="gallery">
+        <a href="<%=upload.image.url%>" data-imageable="<%= imageable(upload) %>" class="propWidget-1 fancybox" rel="gallery" title="<%=date_uploaded(upload)%>">
           <div style="height: 236px;">
             <%= image_tag upload.image.url, alt: 'Image', class: 'img-thumbnail' %>
           </div>

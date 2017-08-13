@@ -3,7 +3,7 @@
     <div class="rotateslider-container hidden-xs hidden-sm hidden-md" id="slider">
       <% object.uploads.each do |upload| %>
         <div class="rotateslider-item">
-          <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox">
+          <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox" title="<%=date_uploaded(upload)%>">
             <%= image_tag upload.image.url, size: '211x311' %>
           </a> 
         </div>
@@ -23,7 +23,7 @@
         <div class="carousel-inner">
           <% object.uploads.each_with_index do |upload, index| %>
             <div class="item <%= index == 0 ? 'active' : ''%>">
-              <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" >
+              <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" title="<%=date_uploaded(upload)%>">
                 <%= image_tag upload.image.url, alt: "" %>
               </a>
               <div class="container">

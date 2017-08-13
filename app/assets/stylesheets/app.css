@@ -3034,6 +3034,9 @@ h1.pageTitle {
     width: 100%;
     height: 200px;
 }
+.fancybox-title {
+    padding: 0 0 10px 3px;
+}
 .propWidget-3 .carousel-indicators {
     bottom: 20px;
     margin-bottom: 0;

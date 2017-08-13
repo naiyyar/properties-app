@@ -6,6 +6,10 @@ $(document).ready(function () {
     modal: false,
     helpers: {
       buttons: {},
+      title : {
+        type : 'inside',
+        position: 'top'
+      }
       // overlay: {
       //   opacity: 0.5,  
       //   css: {'background-color': '#111'} 
@@ -23,7 +27,7 @@ $(document).ready(function () {
                         <img src="+image_src+" class='overlay-image' />"+"<b>"+ name +"</b>"+"</div>"
       $('.fancybox-overlay').append(description);
     }
-    // nextEffect: 'fade',
-    // prevEffect: 'fade'
+    //nextEffect: 'fade',
+    //prevEffect: 'fade'
   });
 })
