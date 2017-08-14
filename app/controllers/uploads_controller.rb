@@ -5,7 +5,7 @@ class UploadsController < ApplicationController
 	def index
     if params[:building_id]
       @building = Building.find(params[:building_id])
-      @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id})
+      @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id}).order(:sort)
     else
       @unit = Unit.find(params[:unit_id])
       @uploads = @unit.uploads.order('created_at desc')
@@ -43,6 +43,15 @@ class UploadsController < ApplicationController
     end     
 	end
 
+  def update
+    @upload = Upload.find(params[:id])
+    if @upload.update(upload_params)
+      render json: { message: 'success' }, :status => 200
+    else
+      render json: { message: @upload.errors.full_messages.join(',') }, :status => 400
+    end
+  end
+
 	def destroy
     @upload = Upload.find(params[:id])
     if @upload.destroy    
@@ -56,7 +65,7 @@ class UploadsController < ApplicationController
 	private
 
 		def upload_params
-			params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id)
+			params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id, :sort)
 		end
 
 		def find_imageable

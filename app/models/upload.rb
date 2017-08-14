@@ -3,6 +3,8 @@ class Upload < ActiveRecord::Base
 	belongs_to :imageable, polymorphic: true
 
 	has_attached_file :image, :styles => { :medium => "300x300>",:thumb => "100x100>" }
+
+	default_scope { order('sort asc') }
 	
 	validates_attachment 	:image, 
 				:presence => true,

@@ -33,6 +33,7 @@
 //= require moment
 //= require jquery.slideandswipe
 //= require jquery.validate
+//= require jquery-sortable-photos
 //= require turbolinks
 
 //= require_tree .

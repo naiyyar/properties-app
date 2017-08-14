@@ -59,6 +59,8 @@ gem 'ratyrate', github: 'wazery/ratyrate'
 gem 'momentjs-rails'
 gem 'jquery-placeholder-rails'
 
+# good to sort a table
+#gem 'rails_sortable'
 
 # Use sqlite3 as the database for Active Record
 
