@@ -26,11 +26,11 @@ class Building < ActiveRecord::Base
   after_update :update_neighborhood
 
   #multisearchable
-  PgSearch.multisearch_options = {
-    :using => [:tsearch, :trigram, :dmetaphone],
-    :ignoring => :accents
-  }
-  multisearchable :against => [:neighborhood, :building_name]
+  # PgSearch.multisearch_options = {
+  #   :using => [:tsearch, :trigram, :dmetaphone],
+  #   :ignoring => :accents
+  # }
+  # multisearchable :against => [:neighborhood, :building_name]
 
   #pgsearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
@@ -46,8 +46,8 @@ class Building < ActiveRecord::Base
                 }
 
   pg_search_scope :text_search_by_building_name, against: [:building_name],
-                  :using => {:tsearch=> { prefix: true }, :trigram => {
-                  :threshold => 0.2
+                  :using => { :tsearch=> { prefix: true }, :trigram => {
+                  :threshold => 0.1
                 }}
 
   pg_search_scope :search_by_street_address, against: [:building_street_address],
@@ -62,7 +62,7 @@ class Building < ActiveRecord::Base
 
   pg_search_scope :search_by_zipcode, against: [:zipcode],
     :using => {:tsearch=> { prefix: true }, :trigram=> {
-                  :threshold => 0.2
+                  :threshold => 0.5
                 }}
 
   def to_param
@@ -73,12 +73,11 @@ class Building < ActiveRecord::Base
     end
   end
 
-  #using regexp to put search string on top
-  # def self.search_by_neighborhoods(criteria)
-  #   regexp = /#{criteria}/i; # case-insensitive regexp based on your string
-  #   results = Building.search_by_neighborhood(criteria).order(:neighborhood).to_a.uniq(&:neighborhood)
-  #   results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
-  # end
+  def self.search_by_zipcodes(criteria)
+    regexp = /#{criteria}/i;
+    results = Building.search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
+    results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+  end
 
   def self.search_by_pneighborhoods(criteria)
     regexp = /#{criteria}/i;
@@ -90,10 +89,6 @@ class Building < ActiveRecord::Base
     regexp = /#{criteria}/i;
     results = Building.text_search_by_building_name(criteria).order(:building_name).to_a.uniq(&:building_name)
     results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
-  end
-
-  def self.text_search_by_zipcode query
-    where("similarity(zipcode, ?) > 0.5", query)
   end
 
   def recommended_percent

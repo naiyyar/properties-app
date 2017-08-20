@@ -59,62 +59,25 @@ class HomeController < ApplicationController
       end
     else
       results = []
-      @buildings_by_pneighborhood = Building.search_by_pneighborhood(params[:term]).to_a.uniq(&:neighborhoods_parent)
+      @buildings_by_pneighborhood = Building.search_by_pneighborhoods(params[:term])
       results << @buildings_by_pneighborhood
-      @buildings_by_name = Building.search_by_building_name(params[:term]).to_a.uniq(&:building_name)
+      @buildings_by_name = Building.search_by_building_name(params[:term])
       results << @buildings_by_name
       @buildings_by_neighborhood = Building.search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
       results << @buildings_by_neighborhood
       @buildings_by_address = Building.search_by_street_address(params[:term]).to_a.uniq(&:building_street_address)
       results << @buildings_by_address
-      @buildings_by_zipcode = Building.search_by_zipcode(params[:term]).to_a.uniq(&:zipcode)
+      @buildings_by_zipcode = Building.search_by_zipcodes(params[:term])
       results << @buildings_by_zipcode
       @buildings_by_city = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
       results << @buildings_by_city
+      
       if !results.flatten.present?
         @result_type = 'no_match_found'
       else
         @result_type = 'match_found'
       end
-      # if params[:term].present?
-    		# # Search with zipcode
-      #   @buildings = Building.text_search_by_zipcode(params[:term])
-      #   if @buildings.present?
-      #     @result_type = 'zipcode'
-      #   else
-      #     @buildings = Building.search_by_pneighborhoods(params[:term])
-      #     @buildings_by_name = Building.search_by_building_name(params[:term])
-      #     @buildings_by_neighborhood = Building.search_by_neighborhood(params[:term])
-      #     if @buildings.present? or @buildings_by_name.present? or @buildings_by_neighborhood.present?
-      #       @result_type = 'pneighborhood'
-      #     else
-      #       #@buildings = Building.search_by_neighborhoods(params[:term])
-      #       #@buildings = Building.where('neighborhood @@ :q or neighborhoods_parent @@ :q', q: "%#{params[:term]}%").to_a.uniq(&:neighborhood)
-      #       if @buildings.present?
-      #     	  #@result_type = 'neighborhood'
-      #       else
-      #        @buildings = Building.search_by_building_name(params[:term]) #.reorder(:building_name)
-      #     	  if @buildings.present?
-      #           @result_type = 'building_name'
-      #         else
-      #           # Search with address
-      #           #@buildings = Building.search_by_street_address(params[:term])
-      #           @buildings = Building.where('building_street_address ILIKE ?', "%#{params[:term]}%").to_a.sort_by{ |b| b.building_street_address }
-      #           if @buildings.present?
-      #             @result_type = 'address'
-      #           else
-      #             @buildings = Building.where('city ILIKE ?', "%#{params[:term]}%").to_a.uniq(&:city)
-      #             if @buildings.present?
-      #               @result_type = 'cities'
-      #             else
-      #               @result_type = 'no_match_found'
-      #             end
-      #           end
-      #         end
-      #       end
-      #   	end
-      #   end
-      # end
+      
     end
     
     if @buildings.present?
