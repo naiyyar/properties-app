@@ -10,7 +10,7 @@
 	        		<%= @building.neighborhood %>
         		<%end%> 
         	</div>
-			<%else%>
+			<%elsif @unit.present? %>
 				<%= link_to unit_path(@unit), class: 'text-col-black', 'data-no-turbolink' => false do %>
 					<h4><%= @unit.building.building_name %></h4>
 					<p> <b><%= @unit.building.building_street_address %> </b></p>
@@ -29,11 +29,12 @@
 	          <%= image_tag upload.image.url, alt: 'Image', class: 'img-thumbnail' %>
 	        </a>
 	        <%= link_to '<span class="fa fa-trash" />'.html_safe, upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs pull-right1 delete_image' %>
+	        <%= link_to '<span class="fa fa-repeat" />'.html_safe, rotate_upload_path(upload), class: 'btn btn-warning btn-xs rotate' %>
 	    	</div>
 	    <%else%>
 	    	<div class="col-sm-3 image-gallery">
 	        <a href="<%=upload.image.url%>" data-imageable="<%= imageable(upload) %>" class="propWidget-1 fancybox" rel="gallery" title="<%=date_uploaded(upload)%>">
-	          <div style="height: 236px;">
+	          <div style="height: 236px;" class="image-rotator">
             	<%= image_tag upload.image.url, alt: 'Image', class: 'img-thumbnail' %>
           	</div>
 	        </a>
@@ -42,6 +43,9 @@
 		<%end %>
 	</div>
 </div>
+
+<!-- jquery click function in zapp.js -->
+<div class="loading hidden">Loading&#8230;</div>
 
 <script type="text/javascript">
 	$('.photo-grid-container').sortablePhotos({

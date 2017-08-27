@@ -9,7 +9,7 @@ module UploadsHelper
 	end
 
 	def date_uploaded object
-		"<b>#{ associated_object(object.imageable) }</b> <p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>"
+		"<b>#{ associated_object(object.imageable) }</b> <p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>".html_safe
 	end
 	
 	def associated_object imageable

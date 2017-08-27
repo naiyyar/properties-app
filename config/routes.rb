@@ -22,7 +22,11 @@ Rails.application.routes.draw do
   
   resources :reviews
   resources :useful_reviews
-  resources :uploads
+  resources :uploads do
+    member do 
+      get :rotate
+    end
+  end
   
   resources :users do
     member do

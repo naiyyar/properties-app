@@ -30,7 +30,9 @@ module BuildingsHelper
 	end
 
 	def imageable upload
-		upload.imageable_type == 'Building' ? upload.imageable.building_name : upload.imageable.name
+		if upload.imageable.present?
+			upload.imageable_type == 'Building' ? upload.imageable.building_name : upload.imageable.name
+		end
 	end
 
 	def building_name_or_address building

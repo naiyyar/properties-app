@@ -580,4 +580,9 @@
     });
     //})
 
+    //Rotating image overlay...
+    $('.rotate').click(function(){
+      $('.loading').removeClass('hidden');
+    })
+
 })(jQuery);

@@ -60,6 +60,11 @@
     right: 2px;
     top: 2px;
 }
+.image-gallery .rotate{
+    position: absolute;
+    left: 2px;
+    top: 2px;
+}
 .fixed-layout{
     table-layout: fixed;
 }

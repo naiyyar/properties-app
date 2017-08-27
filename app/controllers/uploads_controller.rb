@@ -6,11 +6,23 @@ class UploadsController < ApplicationController
     if params[:building_id]
       @building = Building.find(params[:building_id])
       @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id}).order(:sort)
-    else
+    elsif params[:unit_id]
       @unit = Unit.find(params[:unit_id])
       @uploads = @unit.uploads.order('created_at desc')
+    else
+      @uploads = Upload.order('created_at desc')
     end
 	end
+
+  def rotate
+    @image = Upload.find(params[:id])
+    rotation = params[:deg].to_f
+    rotation ||= 90 # Optional, otherwise, check for nil!
+    
+    @image.rotate!(rotation)
+
+    redirect_to :back, flash[:notice] => "The image has been rotated"
+  end
 
 	def new
     if params['buildings-search-txt'].present?
@@ -65,7 +77,7 @@ class UploadsController < ApplicationController
 	private
 
 		def upload_params
-			params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id, :sort)
+			params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id, :sort, :rotation)
 		end
 
 		def find_imageable
