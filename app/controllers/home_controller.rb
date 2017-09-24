@@ -8,9 +8,14 @@ class HomeController < ApplicationController
     if params['apt-search-txt'].present?
       search_string = params['apt-search-txt'].split(',')[0]
       unless search_string == 'New York'
-        @brooklyn_neighborhoods =  search_string#used to add border boundaries of brooklyn and queens
+        @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
         coordinates = Geocoder.coordinates(params['apt-search-txt'])
         search = Geocoder.search(params['apt-search-txt'])
+        if coordinates.blank? and search.blank? and params[:term].present?
+          coordinates = Geocoder.coordinates(params[:term])
+          search = Geocoder.search(params[:term])
+        end
+
         @boundary_coords = []
         
         if search.present?
