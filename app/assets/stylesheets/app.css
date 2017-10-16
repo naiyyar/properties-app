@@ -6378,3 +6378,10 @@ blockquote {
         font-size: 11px;
     }
 }
+
+/*IE specific for header sign-in/signout button*/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+     .headerLinks {
+        margin-top: -25px !important;
+    }
+}
