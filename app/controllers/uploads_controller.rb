@@ -66,8 +66,11 @@ class UploadsController < ApplicationController
 
 	def destroy
     @upload = Upload.find(params[:id])
-    if @upload.destroy    
-      render json: { message: "File deleted from server" }
+    if @upload.destroy
+      respond_to do |format|  
+        format.html{ redirect_to :back, notice: 'File deleted.' }
+        format.json { render json: { message: "File deleted from server" } }
+      end
     else
       render json: { message: @upload.errors.full_messages.join(',') }
     end
@@ -76,14 +79,14 @@ class UploadsController < ApplicationController
 
 	private
 
-		def upload_params
-			params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id, :sort, :rotation)
-		end
+	def upload_params
+		params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id, :sort, :rotation, :document)
+	end
 
-		def find_imageable
+	def find_imageable
     params.each do |name, value|
       if name =~ /(.+)_id$/
-          return $1.classify.constantize.find(value)
+        return $1.classify.constantize.find(value)
       end
     end
   end

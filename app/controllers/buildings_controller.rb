@@ -39,6 +39,8 @@ class BuildingsController < ApplicationController
       @unit_review_count += unit.reviews.count
     end
 
+    @documents = @building.uploads.where('document_file_name is not null')
+
     @lat = @building.latitude
     @lng = @building.longitude
 
@@ -76,7 +78,7 @@ class BuildingsController < ApplicationController
     #         "height" => 50
     #         })
     # end
-    flash[:notice] = "Photos Uploaded Successfully." if params[:from_uploaded].present?
+    flash[:notice] = "Files are uploaded successfully." if params[:from_uploaded].present?
   end
 
   def new

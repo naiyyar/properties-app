@@ -34,6 +34,7 @@
       <li><a href="#unit_reviews" role="tab" data-toggle="tab"><%= 'UNIT REVIEWS'%> (<%= @unit_review_count %>)</a></li>
       <li><a href="#rent_amount" role="tab" data-toggle="tab"><%= 'RENT INFORMATION'%> (<%= @unit_rent_summary_count %>)</a></li>
       <li><a href="#units" role="tab" data-toggle="tab"><%= 'UNITS'%> (<%= @building.units.count %>)</a></li>
+      <li><a href="#documents" role="tab" data-toggle="tab"><%= 'DOCUMENTS'%></a></li>
     </ul>
     
     <div class="tab-content">
@@ -67,6 +68,10 @@
 
       <div class="tab-pane fade" id="units">
         <%= render partial: 'units' %>
+      </div>
+
+      <div class="tab-pane fade" id="documents">
+        <%= render partial: 'uploads/documents' %>
       </div>
     </div>
   </div>
