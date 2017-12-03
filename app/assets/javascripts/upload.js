@@ -23,7 +23,7 @@ $(document).ready(function(){
 		removedfile: function(file){
 			// grap the id of the uploaded file we set earlier
 			var id = $(file.previewTemplate).find('.dz-remove').attr('id'); 
-
+			$(file.previewTemplate).find('.dz-remove').parent().remove();
 			// make a DELETE ajax request to delete the file
 			$.ajax({
 				type: 'DELETE',
