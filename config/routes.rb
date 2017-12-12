@@ -27,6 +27,12 @@ Rails.application.routes.draw do
       get :rotate
     end
   end
+
+  resources :document_downloads do
+    get :downloaders, on: :collection
+  end
+
+  get '/documents', to: 'uploads#documents', as: 'documents'
   
   resources :users do
     member do

@@ -1,0 +1,24 @@
+<div class="tables">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="table-overflow">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th># of downloads</th>
+            </tr>
+          </thead>
+          <tbody class="table table-bordered">
+            <% @downloads.each do |download| %>
+              <tr>
+                <td><%= download.user.name %></td>
+                <td><%= download.total_user_downloads %></td>
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

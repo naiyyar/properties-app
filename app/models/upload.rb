@@ -3,7 +3,8 @@ class Upload < ActiveRecord::Base
 
 	resourcify
 	belongs_to :imageable, polymorphic: true
-
+  has_many :document_downloads
+  belongs_to :user
 	#before_create :set_defaults
 
 	has_attached_file :image, 
@@ -33,6 +34,10 @@ class Upload < ActiveRecord::Base
       no_image
     end
 	end
+
+  def total_downloads
+    self.document_downloads.count
+  end
 
 	def rotate!(degrees = 90)
     self.rotation += degrees

@@ -22,7 +22,13 @@
 							<%elsif doc.document_file_name.split('.')[1] == 'text' %>
 								<span class="fa fa-file-text-o fa-2x"></span>
 							<%end%> &nbsp;
-							<%= link_to doc.document_file_name, doc.document.url, class: 'link_underlined', 'data-no-turbolink' => false, target: '_blank' %></td>
+								<% if current_user.present? %>
+									<%= link_to doc.document_file_name, doc.document.url, class: 'link_underlined document-name', 'data-no-turbolink' => false, target: '_blank', download: "#{doc.document_file_name}", 'data-uploadid' => doc.id, 'data-userid' => current_user.id %>
+								<%else%>
+									<%= link_to doc.document_file_name , '#signin', 'data-toggle' => 'modal' %>
+								<%end%>
+							</td>
+
 							<% if current_user.present? and current_user.has_role? :admin %>
 								<td class="text-right">
 									<%= link_to 'Rename'.html_safe, "#renameDoc#{doc.id}", 'data-toggle' => 'modal' %> | 

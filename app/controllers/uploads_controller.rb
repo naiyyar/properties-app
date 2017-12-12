@@ -14,6 +14,10 @@ class UploadsController < ApplicationController
     end
 	end
 
+  def documents
+    @documents = Upload.where('document_file_name is not null')
+  end
+
   def rotate
     @image = Upload.find(params[:id])
     rotation = params[:deg].to_f

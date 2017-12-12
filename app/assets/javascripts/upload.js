@@ -62,9 +62,29 @@ $(document).ready(function(){
 				type: 'DELETE',
 				url: '/uploads/' + id,
 				success: function(data){
-					console.log(data.message);
+					// console.log(data.message);
 				}
 			});
 		}
 	});
+
+	//Saving document downloads counts
+	$('.document-name').click(function(){
+		var upload_id = $(this).data('uploadid');
+		var user_id = $(this).data('userid');
+
+		$.ajax({
+			url: '/document_downloads',
+			beforeSend: function(xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')) },
+			dataType: 'json',
+			type: 'POST',
+			data: { document_download:{ upload_id: upload_id, user_id: user_id } },
+			success: function(response){
+				// console.log(response);
+			},
+			complete: function(response){
+				console.log('Completed!');
+			}
+		})
+	})
 });
