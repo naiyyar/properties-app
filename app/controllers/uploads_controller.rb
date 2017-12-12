@@ -58,7 +58,10 @@ class UploadsController < ApplicationController
   def update
     @upload = Upload.find(params[:id])
     if @upload.update(upload_params)
-      render json: { message: 'success' }, :status => 200
+      respond_to do |format|  
+        format.html{ redirect_to :back, notice: 'File Updated.' }
+        format.json { render json: { message: 'success' }, :status => 200 }
+      end
     else
       render json: { message: @upload.errors.full_messages.join(',') }, :status => 400
     end
@@ -80,7 +83,7 @@ class UploadsController < ApplicationController
 	private
 
 	def upload_params
-		params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id, :sort, :rotation, :document)
+		params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id, :sort, :rotation, :document, :document_file_name)
 	end
 
 	def find_imageable
