@@ -331,12 +331,12 @@
         }
     });
 
-    $('.modal-su').click(function() {
+    $(document).on('click', '.modal-su', function() {
         $('#signin').modal('hide');
         $('#signup').modal('show');
     });
 
-    $('.modal-si').click(function() {
+    $(document).on('click', '.modal-si', function() {
         $('#signup').modal('hide');
         $('#signin').modal('show');
     });
