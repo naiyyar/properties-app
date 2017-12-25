@@ -10,10 +10,10 @@
 <% if user_signed_in? %>
   <% if current_user.has_role?(:admin) %>
     <li>
-      <a href="<%= buildings_path %>"><span class="fa fa-building"></span> Buildings</a></li>
+      <a href="<%= buildings_path %>"><span class="fa fa-user-secret"></span> Admin</a></li>
     </li>
-    <li>
+    <!-- <li>
       <a href="<%= units_path %>"><span class="fa fa-building"></span> Units</a></li>
-    </li>
+    </li> -->
   <%end%>
 <%end%>

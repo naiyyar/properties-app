@@ -61,6 +61,70 @@ class UploadsController < ApplicationController
 
   def update
     @upload = Upload.find(params[:id])
+    # document = @upload.document
+    # filename = URI.unescape(document.url).split('/').last #bucket file name[ex: 123.jpg]
+    # renamefilename = upload_params[:document_file_name]
+    # document.styles.keys+[:original].each do |style|
+    #   old_path = document.path(style)
+    #   new_path = new_path.gsub!("documents/#{filename}", "documents/#{renamefilename}")
+    #   #rename_attachment(document, old_path, new_path)
+    #   old_path = document.s3_bucket.objects.first
+    #   document.s3_bucket.objects[old_path].move_to(new_path, acl: :public_read)
+    # end
+    # creds = Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
+    # aws_s3 = Aws::S3::Resource.new(credentials: creds, region: 'us-west-2')
+    # bucket = aws_s3.bucket(ENV['AWS_S3_BUCKET'])
+    #filename = URI.unescape(document.url).split('/').last
+    # s3 = Aws::S3::Client.new( region: 'us-west-2',
+    #                           credentials: creds)
+
+    # s3.copy_object(bucket: ENV['AWS_S3_BUCKET'],
+    #                copy_source: ENV['AWS_S3_BUCKET']+'/'+filename,
+    #                key: upload_params[:document_file_name])
+
+    # s3.delete_object(bucket: ENV['AWS_S3_BUCKET'],
+    #                  key: "#{filename}f")
+    
+    #(document.styles.keys+[:original]).each do |style|
+    #   debugger
+    # filename = URI.unescape(document.url).split('/').last #bucket file name[ex: 123.jpg]
+    # renamefilename = upload_params[:document_file_name]
+    # obj = bucket.object(filename) # create object of original file name
+    # # debugger
+    # puts obj.inspect
+    # obj.move_to("aptreviews-app/#{renamefilename}", acl: 'public-read')
+    # puts "OUTPUT: #{obj.inspect}"
+    # obj = bucket.object(renamefilename)
+
+    #   #old_path = document.path(style)
+    #   #new_path = old_path.gsub("#{@upload.document_file_name}", "#{upload_params[:document_file_name]}")
+
+    #   #document.s3_bucket.objects.first.move_to(new_path, acl: :public_read)
+    #   #extension = Paperclip::Interpolations.extension(@upload.document, style)
+    #   # old_path = @upload.document.url
+    #   # common_s3_path = @upload.document.url.split('original/')
+    #   # new_path = common_s3_path[0]+"original/#{upload_params[:document_file_name]}?#{Time.now.to_i}"
+    #   # aws_obj = @upload.document.s3_bucket.objects.first
+    #   #aws_obj.move_to new_path, acl: :public_read, @upload.document.bucket_name
+    # end
+    # #s3 = Aws::S3::Client.new( region: 'us-west-2')
+    #Aws::S3::Base.establish_connection!(:access_key_id =>ENV['AWS_ACCESS_KEY_ID'],:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'])
+    # TODO renaming files on AWS-S3
+    # if params[:renaming_file].present?
+    #   (@upload.document.styles.keys+[:original]).each do |style|
+    #       debugger
+    #       #path = @upload.document.url(style)
+    #       #debugger
+    #       #FileUtils.move(path, File.join(File.dirname(path), new_file_name))
+    #       AWS::S3::S3Object.move_to(path, upload_params[:document_file_name], @upload.document.bucket_name
+    #       #debugger
+    #   end
+    #   @upload.document_file_name = new_file_name
+    #end
+    #@upload.rename_file(params)
+    
+    ####***** RENAMING FILE CODE on AFTER UPDATE callback *****#####
+
     if @upload.update(upload_params)
       respond_to do |format|  
         format.html{ redirect_to :back, notice: 'File Updated.' }

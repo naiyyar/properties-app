@@ -11,6 +11,8 @@
                 <th>Mobile</th>
                 <th>Phone</th>
                 <th>Listed properties</th>
+                <th>Creation date</th>
+                <th>Last login</th>
                 <th></th>
               </tr>
             </thead>
@@ -22,6 +24,8 @@
                   <td><%= "#{user.mobile}" %></td>
                   <td><%= "#{user.phone}" %></td>
                   <td><%= user.buildings.present? ? user.buildings.count : '' %></td>
+                  <td><%= user.created_at.strftime("%Y-%m-%d") %></td>
+                  <td><%= user.last_sign_in_at.strftime("%Y-%m-%d") %></td>
                   <td><%=link_to 'Contribution', contribution_user_path(id: user.id) %></td>
                 </tr>
               <%end%>

@@ -1,4 +1,4 @@
-<div class="modal fade" id="renameDoc<%=upload.id%>" role="dialog" aria-labelledby="signinLabel" aria-hidden="true">
+<div class="modal fade" id="updateDoc<%=upload.id%>" role="dialog" aria-labelledby="signinLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,8 +8,9 @@
       <div class="modal-body">
         <%= form_for upload do |f| %>
           <div class="form-group">
+            <%= f.file_field :document %>
             <%= f.text_field :document_file_name, value: upload.document_file_name, class: 'form-control' %>
-            <%= hidden_field_tag 'renaming_file', 'renaming_file' %>
+            <%#= hidden_field_tag 'renaming_file', 'renaming_file' %>
           </div>
           <div class="form-group">
             <%= f.submit "Submit", class: "btn btn-blue "%>

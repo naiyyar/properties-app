@@ -25,7 +25,7 @@
 //= require underscore
 //= require gmaps/google
 //= require app
-//= require dropzone
+//= require dropzone_v5
 //= require fancybox
 //= require jquery.raty
 //= require ratyrate
