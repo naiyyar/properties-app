@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require turbolinks
 #= require contribute
 #= require form_validations
 #= require devise
