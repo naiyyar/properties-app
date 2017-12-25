@@ -16,12 +16,12 @@
           <tbody>
             <% @reviews.each do |review| %>
               <tr>
-                <td class="break"><%= review.user.email %></td>
-                <td class="break"><%= link_to(building_name_or_address(review.reviewable), building_path(review.reviewable)) %></td>
+                <td class="break"><%= review.user.email if review.user_id.present? %></td>
+                <td class="break"><%= @reviewable.street_address %> <%= @reviewable.zipcode%></td>
                 <td class="break"><%= review.review_title %></td>
                 <td class="break"><%= simple_format(review.pros) %></td>
                 <td class="break"><%= simple_format(review.cons) %></td>
-                <td class="text-center"><%= rating_for_user review.reviewable, review.user, review.reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %></td>
+                <td class="text-center"><%= rating_for_user @reviewable, review.user, @reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %></td>
                 <td><%= review.created_at.strftime("%Y-%m-%d") %></td>
                 <td class="text-center">
                   <% if current_user && current_user.has_role?(:admin) %>
