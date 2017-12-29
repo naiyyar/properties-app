@@ -35,6 +35,14 @@ module BuildingsHelper
 		end
 	end
 
+	def reviewable_path review
+		 if review.reviewable_object.kind_of? Building
+      building_path(review.reviewable_object)
+    elsif review.reviewable_object.kind_of? Unit
+      unit_path(review.reviewable_object)
+    end
+	end
+
 	def building_name_or_address building
 		building.building_name.present? ? building.building_name : building.building_street_address
 	end

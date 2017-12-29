@@ -16,11 +16,22 @@ class Review < ActiveRecord::Base
   end
 
   def property_name
-    property = self.reviewable
-    if property.kind_of? Building
-      property.building_name ? property.building_name : property.building_street_address
-    elsif property.kind_of? Unit
-      property.name
+    if reviewable_object.kind_of? Building
+      reviewable_object.name ? reviewable_object.name : reviewable_object.building_street_address
+    elsif reviewable_object.kind_of? Unit
+      reviewable_object.name
+    end
+  end
+
+  def reviewable_object
+    self.reviewable
+  end
+
+  def property_address
+    if reviewable_object.kind_of? Building
+      "#{reviewable_object.street_address} #{reviewable_object.zipcode}"
+    elsif reviewable_object.kind_of? Unit
+      "#{reviewable_object.building.street_address} #{reviewable_object.building.zipcode}"
     end
   end
 

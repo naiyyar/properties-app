@@ -73,6 +73,10 @@ class Building < ActiveRecord::Base
     end
   end
 
+  def name
+    self.building_name
+  end
+
   def self.search_by_zipcodes(criteria)
     regexp = /#{criteria}/i;
     results = Building.search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
