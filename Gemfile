@@ -15,7 +15,7 @@ gem 'aws-sdk', '~> 2.3'
 #gem 'aws-sdk' #, '< 2'
 #gem 'aws-sdk', '~> 3'
 
-gem 'paperclip-av-transcoder' #for vidoes
+#gem 'paperclip-av-transcoder' #for vidoes
 gem "figaro"
 gem 'gmaps4rails'
 gem 'underscore-rails'
