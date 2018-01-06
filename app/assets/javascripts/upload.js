@@ -3,7 +3,9 @@ $(document).ready(function(){
 	Dropzone.autoDiscover = false;
 
 	// grap our upload form by its id
-	$("#new_upload_photos").dropzone({
+	// #new_upload_photos = from +upload button 
+	// new_upload_ = from contribute page
+	$("#new_upload_photos, #new_upload_").dropzone({
 		// restrict image size to a maximum 1MB
 		//maxFilesize: 1,
 		// changed the passed param to one accepted by

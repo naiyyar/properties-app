@@ -50,9 +50,9 @@
 			<div class="from-group">
 				<div class="pull-right">
 					<% if @imageable.kind_of? Unit %>
-						<%= link_to 'Done', unit_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done', "data-no-turbolink" => false %>
+						<%= link_to 'Done', unit_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done' %>
 					<%else%>
-						<%= link_to 'Done', building_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done disabled', "data-no-turbolink" => false %>
+						<%= link_to 'Done', building_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done disabled' %>
 					<%end%>
 				</div>
 			</div>
