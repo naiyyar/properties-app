@@ -47,6 +47,10 @@ class Upload < ActiveRecord::Base
   # #   end
   # end
 
+  def self.image_uploads_count object
+    object.uploads.where('image_file_name is not null').count
+  end
+
 	def self.marker_image object
     no_image = 'no-photo.png'
     if object.uploads.present?

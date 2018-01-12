@@ -914,7 +914,6 @@ $.extend( $.validator, {
 				error = this.errorsFor( element ),
 				elementID = this.idOrName( element ),
 				describedBy = $( element ).attr( "aria-describedby" );
-				console.log(element)
 				// var score = $("input[name='score']").val();
 				// 	//for rating
 				// if(score != ''){

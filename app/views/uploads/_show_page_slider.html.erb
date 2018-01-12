@@ -44,9 +44,9 @@
   <div class="see_all" style="">
     <span class="fa fa-th-large"></span> 
     <% if object.kind_of? Building %>
-      <%= link_to "See all(#{object.uploads.count})", building_uploads_path(building_id: object.id), "data-no-turbolink" => false %>
+      <%= link_to "See all(#{Upload.image_uploads_count(object)})", building_uploads_path(building_id: object.id), "data-no-turbolink" => false %>
     <%else%>
-      <%= link_to "See all(#{object.uploads.count})", unit_uploads_path(unit_id: object.id), "data-no-turbolink" => false %>
+      <%= link_to "See all(#{Upload.image_uploads_count(object)})", unit_uploads_path(unit_id: object.id), "data-no-turbolink" => false %>
     <%end%>
   </div>
 <%else%>
