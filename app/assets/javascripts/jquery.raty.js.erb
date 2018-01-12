@@ -285,6 +285,8 @@
 
     _buildScoreField: function() {
       return $('<input />', { name: this.opt.scoreName, type: 'hidden' }).appendTo(this);
+       // added syle attribute to work with jquery validation- if hidden won't work
+      //return $('<input />', { name: this.opt.scoreName, type: 'text', style: 'visibility:hidden;' }).appendTo(this);
     },
 
     _createCancel: function() {

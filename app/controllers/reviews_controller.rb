@@ -2,15 +2,26 @@ class ReviewsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!, :except => [:new, :index, :create]
 
+  # def index
+  #   if params[:building_id].present?
+  #     @reviewable = Building.find(params[:building_id])
+  #   elsif params[:unit_id].present?
+  #     @reviewable = Unit.find(params[:unit_id])
+  #   else
+  #     @reviews = Review.order('created_at desc')
+  #   end
+  #   @reviews = @reviewable.reviews.order('created_at desc') if @reviewable.present?
+  # end
+  
+  #from production
   def index
     if params[:building_id].present?
-      @reviewable = Building.find(params[:building_id])
+      @reviews = Review.where(reviewable_id: params[:building_id]).order('created_at desc')
     elsif params[:unit_id].present?
-      @reviewable = Unit.find(params[:unit_id])
+      @reviews = Review.where(reviewable_id: params[:unit_id]).order('created_at desc')
     else
       @reviews = Review.order('created_at desc')
     end
-    @reviews = @reviewable.reviews.order('created_at desc') if @reviewable.present?
   end
 
   def show

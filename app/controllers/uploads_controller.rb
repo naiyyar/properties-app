@@ -12,6 +12,7 @@ class UploadsController < ApplicationController
     else
       @uploads = Upload.order('created_at desc')
     end
+    @uploads = @uploads.where('image_file_name is not null')
 	end
 
   def documents

@@ -914,11 +914,12 @@ $.extend( $.validator, {
 				error = this.errorsFor( element ),
 				elementID = this.idOrName( element ),
 				describedBy = $( element ).attr( "aria-describedby" );
-				var score = $("input[name='score']").val();
-					//for rating
-				if(score != ''){
-					$('.rating-not-selected').addClass('hide');
-				}
+				console.log(element)
+				// var score = $("input[name='score']").val();
+				// 	//for rating
+				// if(score != ''){
+				// 	$('.rating-not-selected').addClass('hide');
+				// }
 			if ( error.length ) {
 
 				// Refresh error/success class
@@ -947,11 +948,11 @@ $.extend( $.validator, {
 				} else if ( this.settings.errorPlacement ) {
 					this.settings.errorPlacement.call( this, place, $( element ) );
 				} else {
-					var score = $("input[name='score']").val();
-					//for rating
-					if(score == ''){
-						$('.rating-not-selected').removeClass('hide');
-					}
+					// var score = $("input[name='score']").val();
+					// //for rating
+					// if(score == ''){
+					// 	$('.rating-not-selected').removeClass('hide');
+					// }
 					var attr_id = element.getAttribute('id');
 					var attr_name = element.getAttribute('name');
 					var elem;

@@ -25,7 +25,7 @@ class UserMailer < ApplicationMailer
 		mail(
 			to: 'transparentcityllc@gmail.com', 
 			from: @user.email,
-			subject: 'Review is marked flag'
+			subject: 'Review flagged as inappropriate'
 		)
 	end
 

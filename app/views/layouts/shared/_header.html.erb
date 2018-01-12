@@ -6,10 +6,10 @@
       <a href="/"><%=image_tag 'logo_white.png', alt: 'logo' %></a>
     </div>
       
-    <div class="search <%= search_bar(:hidden) %>" style="width: 95.5%;">
+    <div class="search <%= search_bar(:hidden) %>" style="width: 94.5%;">
       <%= render partial: 'layouts/shared/search_form' %>
     </div>
-    <div class="pull-right headerLinks hidden-xs <%#=search_bar(:hidden)%>">
+    <div class="pull-right headerLinks hidden-xs">
       <% if !user_signed_in? %>
         <a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a>
         <a href="#" class='btn btn-default' data-toggle="modal" data-target="#signin">Sign In</a>

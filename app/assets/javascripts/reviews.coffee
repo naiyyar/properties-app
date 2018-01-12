@@ -1,4 +1,4 @@
-$(document).on 'click', '#submit_rev1iew',(e) ->
+$(document).on 'click', '#submit_review1',(e) ->
 	score = $("input[name='score']").val()
 	submit = false
 
