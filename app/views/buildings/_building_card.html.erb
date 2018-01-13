@@ -1,7 +1,7 @@
 <a href="<%=building_path(building)%>" class="card">
   <div class="figure">
-    <% if building.uploads.present? %>
-      <%= image_tag building.uploads.first.image, alt: "image"%>
+    <% if building.image_uploads.present? %>
+      <%= image_tag building.image_uploads.first.image, alt: "image"%>
     <%else%>
       <%= image_tag 'prop/1-1.png', alt: "image"%>
     <%end%>

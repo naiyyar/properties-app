@@ -1,7 +1,7 @@
-<% if object.uploads.present? %>
-  <% if object.uploads.count >= 3 %>
+<% if object.image_uploads.present? %>
+  <% if object.image_uploads.count >= 3 %>
     <div class="rotateslider-container hidden-xs hidden-sm hidden-md" id="slider">
-      <% object.uploads.each do |upload| %>
+      <% object.image_uploads.each do |upload| %>
         <div class="rotateslider-item">
           <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox" title="<%=date_uploaded(upload)%>">
             <%= image_tag upload.image.url, size: '211x311' %>
@@ -14,14 +14,14 @@
   <%else%>
     <div style="width: 40%; margin: 0 auto;">
       <div id="propWidget-3" class="carousel slide propWidget-3" data-ride="carousel">
-        <% if object.uploads.count > 1 %>
+        <% if object.image_uploads.count > 1 %>
           <ol class="carousel-indicators">
             <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
             <li data-target="#carouselFull" data-slide-to="1"></li>
           </ol>
         <%end%>
         <div class="carousel-inner">
-          <% object.uploads.each_with_index do |upload, index| %>
+          <% object.image_uploads.each_with_index do |upload, index| %>
             <div class="item <%= index == 0 ? 'active' : ''%>">
               <a rel='gallery' href="<%= upload.image.url %>" class="fancybox" title="<%=date_uploaded(upload)%>">
                 <%= image_tag upload.image.url, alt: "" %>
@@ -34,7 +34,7 @@
             </div>
           <%end%>
         </div>
-        <% if object.uploads.count > 1 %>
+        <% if object.image_uploads.count > 1 %>
           <a class="left carousel-control" href="#propWidget-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
           <a class="right carousel-control" href="#propWidget-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
         <%end%>

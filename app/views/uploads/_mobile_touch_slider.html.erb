@@ -1,7 +1,7 @@
- <% if object.uploads.count >= 3 %>
+ <% if object.image_uploads.count >= 3 %>
    <div class="swiper-container visible-xs visible-sm visible-md">
     <div class="swiper-wrapper">
-      <% object.uploads.each_with_index do |upload, index| %>
+      <% object.image_uploads.each_with_index do |upload, index| %>
         <div class="swiper-slide" src="<%= upload.image.url %>", title="<%=date_uploaded(upload)%>"> 
           <%= image_tag upload.image.url, alt: 'Image' %>
         </div>

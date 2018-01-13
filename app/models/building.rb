@@ -73,6 +73,10 @@ class Building < ActiveRecord::Base
     end
   end
 
+  def image_uploads
+    self.uploads.where('image_file_name is not null')
+  end
+
   def name
     self.building_name
   end

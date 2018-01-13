@@ -18,8 +18,8 @@
             <div class="card">
               <%= link_to building_path(building), class: "card", "data-no-turbolink" => false do %>
                 <div class="figure">
-                  <%if building.uploads.present? %>
-                    <%= image_tag building.uploads.first.image.url, alt: building.uploads.last.image_file_name, height: '150' %>
+                  <%if building.image_uploads.present? %>
+                    <%= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
                   <%else%>
                     <%= image_tag 'no-photo.png', alt: 'No image', height: '150'%>
                   <%end%>

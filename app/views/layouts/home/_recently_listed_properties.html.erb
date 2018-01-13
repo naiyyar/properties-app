@@ -5,9 +5,9 @@
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
         <a href="<%=building_path(building)%>" class="propWidget-2">
           <div class="fig">
-            <% if building.uploads.present? %>
-              <%= image_tag building.uploads.last.image, alt: 'image', style: "width: 353px; height: 210px;" %>
-              <%= image_tag building.uploads.last.image, alt: 'image', class: 'blur', style: "width: 353px; height: 210px;" %>
+            <% if building.image_uploads.present? %>
+              <%= image_tag building.image_uploads.last.image, alt: 'image', style: "width: 353px; height: 210px;" %>
+              <%= image_tag building.image_uploads.last.image, alt: 'image', class: 'blur', style: "width: 353px; height: 210px;" %>
             <%else%>
               <%= image_tag 'prop/1-1.png', alt: 'image' %>
               <%= image_tag 'prop/1-1.png', alt: 'image', class: 'blur' %>

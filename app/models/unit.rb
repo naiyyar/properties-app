@@ -31,4 +31,8 @@ class Unit < ActiveRecord::Base
 		Vote.recommended_percent(self)
 	end
 
+	def image_uploads
+    self.uploads.where('image_file_name is not null')
+  end
+
 end
