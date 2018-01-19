@@ -17,7 +17,9 @@
 						    <div class="buildings-search">
 					      	<%= text_field_tag 'buildings-search-txt', @building.present? ? @building.building_street_address : nil, class: 'form-control', placeholder: 'Search building by name or address', 'data-buildingid' => @building.present? ? @building.id : '', required: 'required' %>
 					      	<%= hidden_field_tag 'zip', @building.present? ? @building.zipcode : '' %>
-					      	<div class="results" id="buildings-search-results"></div>
+					      	<div class="results" id="buildings-search-results" style="position: relative;">
+					      		<div class="no-match-link hidden"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0);" id="add_new_building" class="add_new_building"> Add a building</a></div>
+					      	</div>
 					      	<ul id="buildings-search-no-results" class="search-no-result"></ul>
 						    </div>
 					  	</section>

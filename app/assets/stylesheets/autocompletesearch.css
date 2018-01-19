@@ -56,15 +56,34 @@
 .buildings-search .results .ui-state-focus .address {
   color: #08c;
 }
+.no-match-link{
+  z-index: 9999;
+  background: #eee;
+  color: #333;
+  height: 3.5em;
+  line-height: 44px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
 
-.ui-autocomplete {
-  max-height: 330px !important;
+.ui-autocomplete{
+  max-height: 290px !important;
   overflow-y: scroll;
   /* prevent horizontal scrollbar */
   overflow-x: hidden;
   /* add padding to account for vertical scrollbar */
   padding-right: 20px;
-} 
+  
+  border-radius: 0px !important;
+}
+#buildings-search-results .ui-autocomplete {
+  top: 45px !important;
+}
+
+#apt-search-results .ui-autocomplete {
+  top: 96px !important;
+}
 
 ul.ui-autocomplete li.building_link_li{
   background-color: #eee;
@@ -73,11 +92,12 @@ ul.ui-autocomplete li.building_link_li{
   line-height: 20px;
   border: none;
 }
-ul.ui-autocomplete li.building_link_li a{
-  color: #3071a9
-}
-ul.ui-autocomplete li.building_link_li a:hover{
+
+ul.ui-autocomplete li.building_link_li a, .no-match-link a{
   color: #3071a9;
-  text-decoration: underline;
+}
+ul.ui-autocomplete li.building_link_li a:hover, .no-match-link a:hover{
+  color: #3071a9 !important;
+  text-decoration: underline !important;
   font-size: 14px;
 }

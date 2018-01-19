@@ -5,7 +5,9 @@
         <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: "form-control", placeholder: 'Search by Neighborhood, ZipCode, Address, Building' %>
         <%= hidden_field_tag 'term', nil %>
         <%= hidden_field_tag 'neighborhoods', nil %>
-        <div class="results" id="apt-search-results"></div>
+        <div class="results" id="apt-search-results">
+          <div class="no-match-link hidden"><p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>No matches found - Add a new building</b></a></p></div>
+        </div>
       </div>
     </div>
 

@@ -12,7 +12,8 @@ app.buildings.prototype = {
         select: $.proxy(this._select, this),
         response: $.proxy(this._response, this),
         open: $.proxy(this._open, this),
-        search: $.proxy(this._search, this)
+        search: $.proxy(this._search, this),
+        close: $.proxy(this._close, this)
       })
       .autocomplete('instance')._renderItem = $.proxy(this._render, this);
   },
@@ -23,7 +24,8 @@ app.buildings.prototype = {
 
   _open: function(event, ui) {
     this._input.removeClass('loader');
-    $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
+    $('.no-match-link').removeClass('hidden');
+    // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
   },
 
   _render: function(ul, item) {
@@ -46,7 +48,9 @@ app.buildings.prototype = {
 
   _select: function(e, ui) {
     $('#units-search-txt').val('');
-    
+    if(!$('.no-match-link').hasClass('hidden')){
+      $('.no-match-link').addClass('hidden');
+    }
     $("#new_unit_building").addClass('hide');
     $("#search_item_form").find('#next_btn').removeClass('disabled')
     
@@ -100,6 +104,11 @@ app.buildings.prototype = {
       }
     }
     return false;
+  },
+
+  _close: function(){
+    //Hiding no match found - add new building link
+    //$('.no-match-link').addClass('hidden');
   },
 
   _response: function(event, ui){
