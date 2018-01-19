@@ -62,6 +62,7 @@ app.apartments.prototype = {
     if($('#home-search-btn').hasClass('disabled')){
       $('#home-search-btn').removeClass('disabled')
     }
+    $('.no-match-link').addClass('hidden');
     return false;
   },
   _close: function(){
