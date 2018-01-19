@@ -140,4 +140,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  before_filter :update_last_sign_in_at
+
+  protected
+
+  def update_last_sign_in_at
+    if user_signed_in? && !session[:logged_signin]
+      sign_in(current_user, :force => true)
+      session[:logged_signin] = true
+    end
+  end
+
 end

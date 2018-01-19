@@ -4,7 +4,7 @@
     <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: "form-control", placeholder: 'Neighborhood, Zip Code, Address, Building name' %>
   	<%= hidden_field_tag 'term', nil %>
   	<%= hidden_field_tag 'neighborhoods', nil %>
-  	<div class="results" id="apt-search-results"></div>
+  	<div class="results" id="apt-search-results" style="height: 300px; overflow-y: scroll;"></div>
   </div>
   <!-- <div class="form-group hidden-xs adv">
     <a href="#" data-toggle="dropdown" class="btn btn-white dropdown-toggle">

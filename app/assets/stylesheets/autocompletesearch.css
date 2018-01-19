@@ -57,6 +57,15 @@
   color: #08c;
 }
 
+.ui-autocomplete {
+  max-height: 330px !important;
+  overflow-y: scroll;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  /* add padding to account for vertical scrollbar */
+  padding-right: 20px;
+} 
+
 ul.ui-autocomplete li.building_link_li{
   background-color: #eee;
   height: 4.5em;
