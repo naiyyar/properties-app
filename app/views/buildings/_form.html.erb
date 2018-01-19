@@ -73,7 +73,8 @@
               <div class="col-sm-12">
                 <div class="pull-right">
                   <% if @building.present? %>
-                    <%= f.submit 'Next', class: "btn btn-primary", name: "subaction", id: 'new_building_submit' %>
+                    <%= link_to 'Cancel', building_path(@building), class: 'btn btn-default'%>
+                    <%= f.submit 'Submit', class: "btn btn-primary", name: "subaction", id: 'new_building_submit' %>
                   <%else%>
                     <%= f.submit 'Next', class: "btn btn-primary", id: 'new_building_submit' %>
                   <%end%>

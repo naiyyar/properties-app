@@ -21,8 +21,15 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label>Square feet* </label>
-        <%= text_field_tag 'unit_square_feet', nil, name: 'building[units_attributes][0][square_feet]', class: 'form-control validate' %>
-        <p class="help-block square_feet_help_block">Optional</p>
+        <div class="input-group">
+          <%= text_field_tag 'unit_square_feet', nil, name: 'building[units_attributes][0][square_feet]', class: 'form-control validate' %>
+          <span class="input-group-addon" data-toggle="tooltip" data-placement="left" aria-hidden="true" title="Provide best estimate if unsure
+          studio range: 350-600, 
+          1 bdrm range: 500-800,
+          2 bdrm range: 800-1200">
+            <i class="fa fa-question-circle" ></i>
+          </span>
+        </div>
       </div>
     </div>
     <div class="col-sm-6">

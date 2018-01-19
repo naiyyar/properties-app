@@ -18,6 +18,11 @@
           <%=render partial: 'layouts/shared/user_profile' %>
         </div>
       <%end%>
+      <%#=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-primary' %>
+      <%=link_to '<span class="fa fa-plus"></span>'.html_safe+' Add content', contribute_buildings_path, class: 'btn btn-primary hidden-xs' %>
+      
+    </div>
+    <div class="pull-right headerLinks visible-xs">
       <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-primary' %>
     </div>
   </div>

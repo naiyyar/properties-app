@@ -172,7 +172,9 @@ class BuildingsController < ApplicationController
       if params[:subaction].blank?
         redirect_to building_path(@building), notice: "Successfully Updated"
       else
-        redirect_to building_steps_path(building_id: @building.id)
+        #Redirecting to building amenities form
+        #redirect_to building_steps_path(building_id: @building.id)
+        redirect_to building_path(@building)
       end
     else
       flash.now[:error] = "Error Updating"

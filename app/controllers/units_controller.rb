@@ -84,11 +84,11 @@ class UnitsController < ApplicationController
   def update
     @unit.update(unit_params)
     session[:after_contribute] = params[:contribution] if params[:contribution].present?
-    if params[:amenities].present?
+    #if params[:amenities].present?
       redirect_to unit_path(@unit), notice: 'Unit was successfully updated.'
-    else
-      redirect_to unit_steps_path(unit_id: @unit.id), notice: 'Unit was successfully updated.'
-    end
+    #else
+    #  redirect_to unit_steps_path(unit_id: @unit.id), notice: 'Unit was successfully updated.'
+    #end
     # respond_to do |format|
     #   if 
     #     format.json { render :show, status: :ok, location: @unit }
