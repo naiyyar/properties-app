@@ -350,6 +350,20 @@
         }
     })
         
+    //Hiding not building link element
+    $('#hero-container, .highlight, .contribute-wrapper').click(function() {
+        $('.no-match-link').addClass('hidden');
+    });
+     
+    $('#buildings-search-txt, #apt-search-txt').blur(function(e){
+        setTimeout(function () {
+        if (e.type == 'blur') {
+
+          $('.no-match-link').addClass('hidden');
+
+        }
+        }, 200);
+    })
 
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();

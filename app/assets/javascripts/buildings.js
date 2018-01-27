@@ -8,7 +8,7 @@ app.buildings.prototype = {
     this._input
       .autocomplete({
         source: '/buildings/contribute',
-        appendTo: '#buildings-search-results',
+        prependTo: '#buildings-search-results',
         select: $.proxy(this._select, this),
         response: $.proxy(this._response, this),
         open: $.proxy(this._open, this),
@@ -24,6 +24,8 @@ app.buildings.prototype = {
 
   _open: function(event, ui) {
     this._input.removeClass('loader');
+    var ul_height = $('ul.ui-autocomplete').height();
+    $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
     // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
   },
@@ -37,7 +39,7 @@ app.buildings.prototype = {
       building_name = item.building_name;
     }
     var markup = [
-      '<p class="address"><b>'+item.building_street_address+', '+item.city+', '+item.state+' '+item.zipcode+'</b></p><br/>',
+      '<p class="address"><b>'+item.building_street_address+', '+item.city+', '+item.state+' '+item.zipcode+'</b></p>',
       '<small class="building_name">'+building_name+'</small>'
     ];
     

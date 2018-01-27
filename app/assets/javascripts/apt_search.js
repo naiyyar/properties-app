@@ -8,7 +8,7 @@ app.apartments.prototype = {
     this._input
       .autocomplete({
         source: '/search',
-        appendTo: '#apt-search-results',
+        prependTo: '#apt-search-results',
         select: $.proxy(this._select, this),
         open: $.proxy(this._open, this),
         search: $.proxy(this._search, this),
@@ -24,6 +24,8 @@ app.apartments.prototype = {
   _open: function(event, ui) {
     // search_term = 'No matches found - Add a new building'
     this._input.removeClass('loader');
+    var ul_height = $('ul.ui-autocomplete').height() + 10;
+    $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
     // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p></li>');
   },
