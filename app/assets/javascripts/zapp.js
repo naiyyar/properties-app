@@ -96,6 +96,15 @@
                 infowindow.open(null,null);
             });
 
+            //Hiding infowindow on map or outside click
+            google.maps.event.addListener(map, "click", function(event) {
+                infowindow.open(null,null);
+            });
+
+            $('.mob-max, #header, .search ').click(function(){
+                infowindow.open(null,null);
+            })
+
             //markers.push(marker);
         });
     }

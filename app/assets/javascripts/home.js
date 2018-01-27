@@ -363,7 +363,24 @@
 
         }
         }, 200);
-    })
+    });
+
+    $('#hero-container, .highlight, .contribute-wrapper').click(function() {
+        $('.no-match-link').addClass('hidden');
+    });
+
+    //Hiding neighborhood search page infowindows
+    $('.search, #header').click(function(){
+        closeInfoWindow(handler)
+    });
+
+    function closeInfoWindow(handler){
+      if(handler.currentInfowindow()) {
+        handler.currentInfowindow().close();
+      }
+    }
+
+    google.maps.event.addListener(handler.getMap(), 'click', function(){ closeInfoWindow(handler); });
 
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();
