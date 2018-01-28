@@ -1,0 +1,51 @@
+<div class="modal fade" id="<%=modal_id%>" role="dialog" aria-labelledby="contirbuteMoreLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="contirbuteMoreLabel">Add Neighborhood Link</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for neighborhood_link, class: 'new_neighborhood_link_form' do |f| %>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group">
+                <label>Neighborhood</label>
+                <%= f.select :neighborhood, options_for_select(@neighborhoods), { prompt: 'Please select a neighborhood' }, { class: "form-control" } %>
+              </div>
+            </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group">
+                <label>Date</label>
+                <%= f.text_field :date, class: 'form-control datepicker', id: "neighborhood_link_date#{f.object.id}" %>
+              </div>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label>Title</label>
+            <%= f.text_field :title, class: 'form-control' %>
+          </div>
+          
+          <div class="form-group">
+            <label>Website link</label>
+            <%= f.text_field :web_url, class: 'form-control' %>
+          </div>
+            
+          <div class="form-group">
+            <label>Source</label>
+            <%= f.text_field :source, class: 'form-control'%>
+          </div>
+          
+          <div class="form-group">
+            <div class="text-right">
+              <%= link_to 'Delete', neighborhood_link, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' unless neighborhood_link.new_record? %>
+              <%= f.submit 'Submit', class: "btn btn-primary" %>
+            </div>
+          </div>  
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

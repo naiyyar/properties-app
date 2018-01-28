@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :neighborhood_links
   resources :review_flags
   resources :contacts
   resources :rental_price_histories

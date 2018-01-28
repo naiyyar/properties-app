@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212104637) do
+ActiveRecord::Schema.define(version: 20180128044720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,16 @@ ActiveRecord::Schema.define(version: 20171212104637) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "neighborhood"
+  end
+
+  create_table "neighborhood_links", force: :cascade do |t|
+    t.string   "neighborhood"
+    t.date     "date"
+    t.string   "title"
+    t.text     "web_url"
+    t.string   "source"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "overall_averages", force: :cascade do |t|
