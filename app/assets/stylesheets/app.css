@@ -1297,8 +1297,8 @@ a.userHandler .counter {
 }
 .leftNav ul li a span.navLabel {
     font-size: 12px;
-    bottom: 10px;
-    left: -70px;
+    bottom: 0px;
+    left: -81px;
 }
 .leftNav ul li.btn_contribute a span.navLabel {
     bottom: 0px;
