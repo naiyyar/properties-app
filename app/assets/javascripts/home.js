@@ -381,6 +381,7 @@
     }
 
     google.maps.event.addListener(handler.getMap(), 'click', function(){ closeInfoWindow(handler); });
+    
 
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();

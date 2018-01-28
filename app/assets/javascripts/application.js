@@ -33,5 +33,7 @@
 //= require jquery.slideandswipe
 //= require jquery.validate
 //= require jquery-sortable-photos
+//= require jquery.dataTables.min
+//= require dataTables.bootstrap.min
 
 //= require_tree .

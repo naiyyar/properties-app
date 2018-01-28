@@ -15,6 +15,8 @@ jQuery ->
 
 	$('input, textarea').placeholder()
 
+	$('#sortable').DataTable()
+	
 	$(document).on 'click', '.left-side-zindex', (e) ->
 		parentElem = $(this).parents().find('#leftSide')
 		if(parentElem.hasClass('expanded'))
