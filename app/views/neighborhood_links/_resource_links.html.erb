@@ -1,0 +1,25 @@
+ <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="table-overflow">
+      <table id="sortable" class="table table-bordered table-triped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @neighborhood_links.each do |neighborhood_link| %>
+            <tr>
+              <td><%= neighborhood_link.date %></td>
+              <td><%= link_to neighborhood_link.title, neighborhood_link.web_url, target: '_blank', class: 'color-default link_underlined' %></td>
+              <td><%= neighborhood_link.source %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

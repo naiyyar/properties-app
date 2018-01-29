@@ -3,61 +3,22 @@
 </div>
 
 <div id="content">
-  <div class="filter">
-      <h1 class="osLight"> 
-      <b><%= @buildings.present? ? "#{@buildings.count} Properties Available" : '' %> </b></h1>
-      
-      <div class="clearfix"></div>
-  </div>
-  
-  <%if @buildings.present? %>
-    <div class="resultsList">
-      <div class="row">
-        <% @buildings.each do |building| %>
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <div class="card">
-              <%= link_to building_path(building), class: "card", "data-no-turbolink" => false do %>
-                <div class="figure">
-                  <%if building.image_uploads.present? %>
-                    <%= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
-                  <%else%>
-                    <%= image_tag 'no-photo.png', alt: 'No image', height: '150'%>
-                  <%end%>
-                  <!-- <div class="figCaption">
-                    <div>$1,550,000</div>
-                    <span class="icon-eye"> 200</span>
-                    <span class="icon-heart"> 54</span>
-                    <span class="icon-bubble"> 13</span>
-                  </div> -->
-                  <div class="figView"><span class="icon-eye"></span></div>
-                  <!-- <div class="figType">FOR SALE</div> -->
-                </div>
-                <div id="building_details<%=building.id%>">
-                 
-                </div>
-              <%end%>
-
-              <ul class="cardRating">
-                <div class="pull-left" style="margin-right: 10px;">
-                  <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
-                </div>
-                <div> <%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %> </div>
-              </ul>
-              <%= render partial: 'property_information', locals: { building: building } %>
-              <div class="clearfix"></div>
-              <!-- <ul class="cardFeat">
-                <li><span>Building Reviews:</span>  <%#= building.reviews.count %></li>
-                <li><span>Unit Reviews:</span> <%#= building.unit_reviews_count %></li>
-                <li><span>Photos:</span> <%#=link_to "#{building.uploads.count}", building_uploads_path(building_id: building.id), 'data-no-turbolink' => false, style: 'color: #333;' %></li>
-                <li><a href='#'>Rent Information:</a> <%#= building.rent_information %></li>
-              </ul> -->
-            </div>
-            <div class="clearfix"></div>
-          </div>
-        <%end%>
+  <div class="tabsContainer" id="reviewsContainer">
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "Building (#{ @buildings.count })"%></a></li>
+      <li><a href="#resourceLinks" role="tab" data-toggle="tab"><%= "Resource Links (#{@neighborhood_links.count})"%></a></li>
+    </ul>
+    
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="buildings">
+        <%= render partial: 'search_results' %>
       </div>
-      <%= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
+
+      <div class="tab-pane fade" id="resourceLinks">
+        <%= render partial: 'neighborhood_links/resource_links' %>
+      </div>
+
     </div>
-  <%end%>
+  </div>
 </div>
 <div class="clearfix"></div>

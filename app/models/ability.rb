@@ -8,6 +8,7 @@ class Ability
       cannot :index, Unit
       cannot :index, Review
       cannot [:contribution, :index], User
+      cannot :index, NeighborhoodLink
       cannot :index, Contact
     elsif user.has_role? :admin
       can :manage, :all
@@ -17,7 +18,9 @@ class Ability
       cannot :index, Unit
       cannot :index, Review
       cannot [:contribution, :index], User
+      cannot :index, NeighborhoodLink
       cannot :index, Contact
     end
   end
+  
 end
