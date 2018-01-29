@@ -3,21 +3,20 @@
 </div>
 
 <div id="content">
-  <div class="tabsContainer" id="reviewsContainer">
+  <div class="tabsContainer" id="buildingsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "Building (#{ @buildings.count })"%></a></li>
-      <li><a href="#resourceLinks" role="tab" data-toggle="tab"><%= "Resource Links (#{@neighborhood_links.count})"%></a></li>
+      <li class="active"><a href="#resourceLinks" role="tab" data-toggle="tab"><%= "Resource Links (#{@neighborhood_links.count})"%></a></li>
+      <li><a href="#buildings" role="tab" data-toggle="tab"><%= "Building (#{ @buildings.count })"%></a></li>
     </ul>
     
     <div class="tab-content">
-      <div class="tab-pane fade in active" id="buildings">
-        <%= render partial: 'search_results' %>
-      </div>
-
-      <div class="tab-pane fade" id="resourceLinks">
+      <div class="tab-pane fade in active" id="resourceLinks">
         <%= render partial: 'neighborhood_links/resource_links' %>
       </div>
 
+      <div class="tab-pane fade" id="buildings">
+        <%= render partial: 'search_results' %>
+      </div>
     </div>
   </div>
 </div>

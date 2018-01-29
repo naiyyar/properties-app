@@ -132,8 +132,11 @@ input[type=select] {
 a.link_underlined:hover{
     text-decoration: underline !important;
 }
-#reviewsContainer .tab-content{
+#reviewsContainer .tab-content, #buildingsContainer .tab-content{
     background-color: #f3f3f3 !important;
+}
+#buildingsContainer ul li a{
+    font-size: 14px;
 }
 .see_all{
     padding: 0px 20px 10px; text-align: right;
