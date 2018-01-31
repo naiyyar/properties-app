@@ -369,6 +369,10 @@
         $('.no-match-link').addClass('hidden');
     });
 
+    $('input#apt-search-txt').on('change', function(){
+        console.log($(this).val());
+    })
+
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();
 

@@ -3423,6 +3423,13 @@ h1.pageTitle {
 .tabsWidgetSearch{
     margin-top: -3px;
 }
+.tabsWidgetSearch ul li a{
+    font-size: 14px;
+
+}
+.tabsWidgetSearch ul li.active a, .tabsWidgetSearch ul li a:hover{
+    color: #0075c9;
+}
 .nav-tabs > li > a {
     margin-right: 2px;
     line-height: 1.42857143;

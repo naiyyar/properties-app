@@ -24,7 +24,7 @@ app.apartments.prototype = {
   _open: function(event, ui) {
     // search_term = 'No matches found - Add a new building'
     this._input.removeClass('loader');
-    var ul_height = $('ul.ui-autocomplete').height() + 10;
+    var ul_height = $('ul.ui-autocomplete').height() + 45;
     $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
     // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p></li>');
@@ -69,7 +69,7 @@ app.apartments.prototype = {
   },
   _close: function(){
     //Hiding no match found - add new building link
-    //$('.no-match-link').addClass('hidden');
+    $('.no-match-link').addClass('hidden');
   }
 
 
