@@ -15,7 +15,10 @@ jQuery ->
 
 	$('input, textarea').placeholder()
 
-	$('#sortable').DataTable()
+	$('#sortable').DataTable({
+		paging: false,
+		scrollY: 400
+	})
 	
 	$(document).on 'click', '.left-side-zindex', (e) ->
 		parentElem = $(this).parents().find('#leftSide')
