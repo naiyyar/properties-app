@@ -110,7 +110,9 @@ app.buildings.prototype = {
 
   _close: function(){
     //Hiding no match found - add new building link
-    //$('.no-match-link').addClass('hidden');
+    if(!$('.no-match-link').hasClass('hidden')){
+      $('.no-match-link').addClass('hidden');
+    }
   },
 
   _response: function(event, ui){
