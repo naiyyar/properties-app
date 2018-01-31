@@ -3508,7 +3508,7 @@ h1.pageTitle {
     font-size: 14px;
     line-height: 16px;
     font-weight: bold;
-    letter-spacing: -1px;
+    letter-spacing: 0px;
 }
 .no-touch .tabsWidget ul.propList li a:hover .info .name, .no-touch .tabsWidget ul.userList li a:hover .info .name {
     color: #0075c9;
