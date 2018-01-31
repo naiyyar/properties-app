@@ -11,7 +11,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
               <div class="form-group">
                 <label>Neighborhood</label>
-                <%= f.select :neighborhood, options_for_select(@neighborhoods), { prompt: 'Please select a neighborhood' }, { class: "form-control" } %>
+                <%= f.select :neighborhood, options_for_select(@neighborhoods, f.object.neighborhood), { prompt: 'Please select a neighborhood' }, { class: "form-control" } %>
               </div>
             </div>
             

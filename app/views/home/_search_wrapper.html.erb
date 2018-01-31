@@ -3,13 +3,13 @@
 </div>
 
 <div id="content">
-  <div class="tabsContainer" id="buildingsContainer">
-    <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#resourceLinks" role="tab" data-toggle="tab"><%= "Resource Links (#{@neighborhood_links.count})"%></a></li>
-      <li><a href="#buildings" role="tab" data-toggle="tab"><%= "Building (#{ @buildings.count })"%></a></li>
+  <div class="tabsWidget tabsWidgetSearch">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#resourceLinks" role="tab" data-toggle="tab"><%= "Resource Links (#{@neighborhood_links.count})"%></a></li>
+        <li><a href="#buildings" role="tab" data-toggle="tab"><%= "Building (#{ @buildings.count })"%></a></li>
     </ul>
     
-    <div class="tab-content">
+    <div class="tab-content tab-scroll11">
       <div class="tab-pane fade in active" id="resourceLinks">
         <%= render partial: 'neighborhood_links/resource_links' %>
       </div>

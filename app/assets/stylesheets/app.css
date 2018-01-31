@@ -3395,7 +3395,7 @@ h1.pageTitle {
     margin-bottom: 20px;
     text-decoration: none;
     border-radius: 3px;
-    height: 283px;
+    /*height: 283px;*/
 }
 .nav-tabs, .nav-tabs.nav-justified {
     border-bottom: none;
@@ -3415,6 +3415,13 @@ h1.pageTitle {
 }
 .nav-tabs > li.active {
     background-color: #fff;
+}
+
+.tabsWidgetSearch .nav-tabs > li.active {
+    background-color: transparent;
+}
+.tabsWidgetSearch{
+    margin-top: -3px;
 }
 .nav-tabs > li > a {
     margin-right: 2px;
@@ -3484,9 +3491,9 @@ h1.pageTitle {
 }
 .tabsWidget ul.propList li a .info, .tabsWidget ul.userList li a .info {
     float: left;
-    margin-left: 10px;
+    margin-left: 0px;
     max-width: 70%;
-    padding-top: 7px;
+    padding-top: 1px;
     overflow: hidden;
 }
 .tabsWidget ul.propList li a .info .name, .tabsWidget ul.userList li a .info .name {
@@ -3497,7 +3504,7 @@ h1.pageTitle {
     letter-spacing: -1px;
 }
 .no-touch .tabsWidget ul.propList li a:hover .info .name, .no-touch .tabsWidget ul.userList li a:hover .info .name {
-    color: #0eaaa6;
+    color: #0075c9;
 }
 .tabsWidget ul.propList li a .info .price {
     font-size: 14px;
@@ -3514,10 +3521,10 @@ h1.pageTitle {
     font-weight: normal;
 }
 .tabsWidget ul.propList li a .info .address, .tabsWidget ul.userList li a .info .address {
-    font-size: 11px;
-    line-height: 13px;
+    font-size: 12px;
+    line-height: 16px;
     color: #999;
-    font-style: italic;
+    /*font-style: italic;*/
 }
 .tabsWidget ul.userList li a .info .title {
     font-size: 12px;

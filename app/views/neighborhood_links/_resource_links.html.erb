@@ -1,25 +1,15 @@
- <div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div class="table-overflow">
-      <table id="sortable" class="table table-bordered table-triped">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Source</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @neighborhood_links.each do |neighborhood_link| %>
-            <tr>
-              <td><%= neighborhood_link.date %></td>
-              <td><%= link_to neighborhood_link.title, neighborhood_link.web_url, target: '_blank', class: 'color-default link_underlined' %></td>
-              <td><%= neighborhood_link.source %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<ul class="propList">
+  <% @neighborhood_links.each do |neighborhood_link| %>
+    <li>
+      <a href="<%=neighborhood_link.web_url%>" target='_blank' >
+        <div class="image hidden"><img src="images/prop/1-1-thmb.png" alt="avatar"></div>
+        <div class="info text-nowrap">
+            <div class="name"><%= neighborhood_link.title %></div>
+            <div class="address"><%= neighborhood_link.source %></div>
+            <!-- <div class="price text-red">$1,550,000 <span class="badge">FOR RENT</span></div> -->
+        </div>
+        <div class="clearfix"></div>
+      </a>
+    </li>
+  <%end%>
+</ul>
