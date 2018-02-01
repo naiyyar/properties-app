@@ -7,10 +7,8 @@ class NeighborhoodLink < ActiveRecord::Base
                 			:content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] }
 
 
-
-
   def link_image
-  	self.image.present? ? self.image : 'missing-grey'
+  	self.image.present? ? self.image : 'missing-grey.png'
   end
 
 end
