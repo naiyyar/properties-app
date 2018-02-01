@@ -3507,14 +3507,15 @@ h1.pageTitle {
     color: #2b2b2b;
     font-size: 14px;
     line-height: 16px;
-    font-weight: bold;
+    font-weight: 500;
     letter-spacing: 0px;
+    font-family: "Roboto",sans-serif;
 }
 .no-touch .tabsWidget ul.propList li a:hover .info .name, .no-touch .tabsWidget ul.userList li a:hover .info .name {
     color: #0075c9;
 }
 .no-touch .tabsWidget ul.propList li:hover{
-    background-color: #f2f2f2;
+    background-color: #f6f7f9;
     /*box-shadow: 1px 3px 1px 0 rgba(0, 0, 0, 0.08);*/
 }
 
@@ -3538,6 +3539,7 @@ h1.pageTitle {
     color: #5d5d5d;
     /*font-style: italic;*/
     word-break: break-word;
+    margin-top: 4px;
 }
 .tabsWidget ul.userList li a .info .title {
     font-size: 12px;
