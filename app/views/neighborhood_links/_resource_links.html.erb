@@ -2,8 +2,8 @@
   <% @neighborhood_links.each do |neighborhood_link| %>
     <li>
       <a href="<%=neighborhood_link.web_url%>" target='_blank' >
-        <div class="image hidden"><img src="images/prop/1-1-thmb.png" alt="avatar"></div>
-        <div class="info text-nowrap">
+        <div class="image"><%=image_tag neighborhood_link.link_image, alt: 'Image'%></div>
+        <div class="info text-nowrap1">
             <div class="name"><%= neighborhood_link.title %></div>
             <div class="address"><%= neighborhood_link.source %></div>
             <!-- <div class="price text-red">$1,550,000 <span class="badge">FOR RENT</span></div> -->

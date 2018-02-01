@@ -71,6 +71,6 @@ class NeighborhoodLinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def neighborhood_link_params
-      params.require(:neighborhood_link).permit(:neighborhood,:date,:title,:web_url,:source)
+      params.require(:neighborhood_link).permit(:neighborhood,:date,:title,:web_url,:source, :image)
     end
 end
