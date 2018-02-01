@@ -11,4 +11,9 @@ class NeighborhoodLink < ActiveRecord::Base
   	self.image.present? ? self.image : 'missing-grey.png'
   end
 
+  def save_parent_neighborhood
+  	buildings = Building.where('neighborhoods_parent is not null and neighborhood = ?', self.neighborhood)
+  	self.update(parent_neighborhood: buildings.first.neighborhoods_parent) if buildings.present?
+  end
+
 end

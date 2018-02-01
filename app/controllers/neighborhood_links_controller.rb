@@ -30,6 +30,7 @@ class NeighborhoodLinksController < ApplicationController
 
     respond_to do |format|
       if @neighborhood_link.save
+        @neighborhood_link.save_parent_neighborhood
         format.html { redirect_to :back, notice: 'Neighborhood link was successfully created.' }
         format.json { render :show, status: :created, location: @neighborhood_link }
       else
@@ -42,6 +43,7 @@ class NeighborhoodLinksController < ApplicationController
   # PATCH/PUT /neighborhood_links/1
   # PATCH/PUT /neighborhood_links/1.json
   def update
+    @neighborhood_link.save_parent_neighborhood
     respond_to do |format|
       if @neighborhood_link.update(neighborhood_link_params)
         format.html { redirect_to :back, notice: 'Neighborhood link was successfully updated.' }
@@ -71,6 +73,6 @@ class NeighborhoodLinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def neighborhood_link_params
-      params.require(:neighborhood_link).permit(:neighborhood,:date,:title,:web_url,:source, :image)
+      params.require(:neighborhood_link).permit(:neighborhood,:date,:title,:web_url,:source, :image, :parent_neighborhood)
     end
 end
