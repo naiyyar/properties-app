@@ -5,8 +5,8 @@
 <div id="content">
   <div class="tabsWidget tabsWidgetSearch">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li class="active"><a href="#resourceLinks" role="tab" data-toggle="tab"><b><%= "RESOURCE LINKS (#{@neighborhood_links.count})"%></b></a></li>
-        <li><a href="#buildings" role="tab" data-toggle="tab"><b><%= "BUILDINGS (#{ @buildings.count })"%></b></a></li>
+        <li class="active"><a href="#resourceLinks" role="tab" data-toggle="tab"><b>RESOURCE LINKS <%= "(#{@neighborhood_links.count})" if @neighborhood_links.present? %></b></a></li>
+        <li><a href="#buildings" role="tab" data-toggle="tab"><b>BUILDINGS<%= "(#{ @buildings.count })" if @buildings.present? %></b></a></li>
     </ul>
     
     <div class="tab-content tab-scroll11">
