@@ -3537,6 +3537,7 @@ h1.pageTitle {
     line-height: 16px;
     color: #5d5d5d;
     /*font-style: italic;*/
+    word-break: break-word;
 }
 .tabsWidget ul.userList li a .info .title {
     font-size: 12px;
