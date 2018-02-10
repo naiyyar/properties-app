@@ -6338,6 +6338,9 @@ blockquote {
     a.headerUser{
         display: none;
     }
+    .tabsWidgetSearch ul.propList li a .info {
+        max-width: 79%;
+    }
             
 }
 
@@ -6385,6 +6388,12 @@ blockquote {
       width: 165px !important;
       height: 100%;
     }
+    .tabsWidgetSearch .nav-tabs > li {
+        width: 100%;
+    }
+    .tabsWidgetSearch ul.propList li a .info {
+        max-width: 85%;
+    }
             
 }
 
@@ -6405,6 +6414,12 @@ blockquote {
     }
     .featured.carousel .carousel-inner .item .carousel-caption .caption-subtitle {
         font-size: 11px;
+    }
+    .tabsWidgetSearch .nav-tabs > li {
+        width: 100%;
+    }
+    .tabsWidgetSearch ul.propList li a .info {
+        max-width: 79%;
     }
 }
 

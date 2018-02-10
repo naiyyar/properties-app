@@ -10,7 +10,7 @@
       <% @buildings.each do |building| %>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <div class="card">
-            <%= link_to building_path(building), class: "card", "data-no-turbolink" => false do %>
+            <%= link_to building_path(building), class: "card" do %>
               <div class="figure">
                 <%if building.image_uploads.present? %>
                   <%= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
@@ -29,16 +29,17 @@
               <div id="building_details<%=building.id%>">
                
               </div>
-            <%end%>
+            
 
-            <ul class="cardRating">
-              <div class="pull-left" style="margin-right: 10px;">
-                <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
-              </div>
-              <div> <%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %> </div>
-            </ul>
-            <%= render partial: 'property_information', locals: { building: building } %>
-            <div class="clearfix"></div>
+              <ul class="cardRating">
+                <div class="pull-left" style="margin-right: 10px;">
+                  <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
+                </div>
+                <div> <%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %> </div>
+              </ul>
+              <%= render partial: 'property_information', locals: { building: building } %>
+              <div class="clearfix"></div>
+            <%end%>
             <!-- <ul class="cardFeat">
               <li><span>Building Reviews:</span>  <%#= building.reviews.count %></li>
               <li><span>Unit Reviews:</span> <%#= building.unit_reviews_count %></li>
