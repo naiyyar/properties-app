@@ -53,7 +53,7 @@ end
 if @buildings_by_city.present?
   json.array! @buildings_by_city do |building|
     json.id building.id
-    json.search_term "#{building.city}, #{building.state}"
+    json.search_term "#{building.city}, #{building.state}" if building.city.present? and !arr.include? building.city
   end
 end
 
