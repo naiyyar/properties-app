@@ -53,6 +53,7 @@ end
 if @buildings_by_city.present?
   json.array! @buildings_by_city do |building|
     json.id building.id
+    #condition because if city name and neighborhood name is same then search will have duplicates items
     json.search_term "#{building.city}, #{building.state}" if building.city.present? and !arr.include? building.city
   end
 end

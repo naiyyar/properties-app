@@ -3474,12 +3474,13 @@ h1.pageTitle {
     border-bottom: 0 none;
 }
 .tabsWidget ul.propList li a .image {
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     border-radius: 3px;
     float: left;
     text-align: center;
     overflow: hidden;
+    border: 1px solid #999;
 }
 .tabsWidget ul.userList li a .image {
     border-radius: 50%;
@@ -3488,7 +3489,7 @@ h1.pageTitle {
     float: left;
 }
 .tabsWidget ul.propList li a .image img {
-    height: 60px;
+    height: 90px;
     width: auto;
 }
 .tabsWidget ul.userList li a .image img {
@@ -3499,7 +3500,7 @@ h1.pageTitle {
 .tabsWidget ul.propList li a .info, .tabsWidget ul.userList li a .info {
     float: left;
     margin-left: 8px;
-    max-width: 87%;
+    max-width: 83%;
     padding-top: 1px;
     overflow: hidden;
 }
@@ -6339,7 +6340,7 @@ blockquote {
         display: none;
     }
     .tabsWidgetSearch ul.propList li a .info {
-        max-width: 79%;
+        max-width: 70%;
     }
             
 }
@@ -6392,7 +6393,7 @@ blockquote {
         width: 100%;
     }
     .tabsWidgetSearch ul.propList li a .info {
-        max-width: 85%;
+        max-width: 78%;
     }
             
 }
@@ -6419,7 +6420,7 @@ blockquote {
         width: 100%;
     }
     .tabsWidgetSearch ul.propList li a .info {
-        max-width: 79%;
+        max-width: 72%;
     }
 }
 
