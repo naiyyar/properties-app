@@ -1,6 +1,6 @@
 <ul class="propList">
   <% @neighborhood_links.each do |neighborhood_link| %>
-    <li>
+    <li style="background: #fff;">
       <a href="<%=neighborhood_link.web_url%>" target='_blank' >
         <div class="image"><%=image_tag neighborhood_link.link_image, alt: 'Image'%></div>
         <div class="info text-nowrap1">
