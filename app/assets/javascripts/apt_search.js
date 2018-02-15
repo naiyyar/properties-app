@@ -69,7 +69,8 @@ app.apartments.prototype = {
   },
   _close: function(){
     //Hiding no match found - add new building link
-    $('.no-match-link').addClass('hidden');
+    setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
+    
   }
 
 

@@ -111,7 +111,7 @@ app.buildings.prototype = {
   _close: function(){
     //Hiding no match found - add new building link
     if(!$('.no-match-link').hasClass('hidden')){
-      $('.no-match-link').addClass('hidden');
+      setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
     }
   },
 
