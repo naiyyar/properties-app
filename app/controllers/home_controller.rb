@@ -85,7 +85,7 @@ class HomeController < ApplicationController
       
     end
     
-    @neighborhood_links = NeighborhoodLink.where('neighborhood = ? or parent_neighborhood = ?', params[:neighborhoods], params[:neighborhoods]).order('created_at desc')
+    @neighborhood_links = NeighborhoodLink.where('neighborhood = ? or parent_neighborhood = ?', params[:neighborhoods], params[:neighborhoods]).order({ date: :desc }, { title: :asc })
     
     if @buildings.present?
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|

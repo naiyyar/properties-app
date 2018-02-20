@@ -365,8 +365,17 @@
         }, 200);
     });
 
-    $('#hero-container, .highlight, .contribute-wrapper').click(function() {
+    //Hiding not building link element on home page image slider click
+    $('#hero-container, .highlight, .contribute-wrapper').click(function(){
         $('.no-match-link').addClass('hidden');
+    });
+
+    //#home page search when enter keypressed
+    $("input#apt-search-txt").keypress(function(e){
+      if (e.which == 13) {
+        e.preventDefault();
+        $("#home-search-btn").click();
+      }
     });
 
     //Home menu swipe and slide

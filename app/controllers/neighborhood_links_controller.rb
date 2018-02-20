@@ -4,7 +4,7 @@ class NeighborhoodLinksController < ApplicationController
   # GET /neighborhood_links
   # GET /neighborhood_links.json
   def index
-    @neighborhood_links = NeighborhoodLink.order('created_at desc')
+    @neighborhood_links = NeighborhoodLink.order({ date: :desc }, { title: :asc })
     @neighborhood_link = NeighborhoodLink.new
     @neighborhoods = Building.where('neighborhood is not null').map(&:neighborhood)
   end

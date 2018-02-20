@@ -1971,7 +1971,7 @@ a.btn.dropdown-btn.btn-gray {
     font-size: 13px;
 }
 .resultsList {
-    padding: 11px 2px 0 3px;
+    padding: 11px 11px 0 11px;
 }
 a.color-default:hover{
     color: #1a0dab !important;
