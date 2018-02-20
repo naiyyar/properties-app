@@ -45,6 +45,10 @@
     color: #0075c9 !important;
 }
 
+.contribute_links .buttonsWrapper .btn-group-justified .btn-group{
+    padding: 2px !important;
+}
+
 .loader{    
     /*background-color: #ffffff;*/
     background-image: url("http://loadinggif.com/images/image-selection/3.gif") !important;
