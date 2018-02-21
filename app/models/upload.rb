@@ -54,8 +54,10 @@ class Upload < ActiveRecord::Base
 	def self.marker_image object
     no_image = 'no-photo.png'
     if object.uploads.present?
-      image_obj = object.image_uploads.first
-      image_obj.image_file_name.present? ? image_obj.image : no_image
+      if object.image_uploads.present?
+        image_obj = object.image_uploads.first
+        image_obj.image_file_name.present? ? image_obj.image : no_image if image_obj.present?
+      end
     else
       no_image
     end
