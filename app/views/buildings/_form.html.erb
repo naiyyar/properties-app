@@ -78,7 +78,7 @@
             <div class="form-group">
               <div class="col-sm-12">
                 <div class="pull-right">
-                  <% if @building.present? %>
+                  <% if @building.present? and @building.id.present? %>
                     <%= link_to 'Cancel', building_path(@building), class: 'btn btn-default'%>
                     <%= f.submit 'Submit', class: "btn btn-primary", name: "subaction", id: 'new_building_submit' %>
                   <%else%>
