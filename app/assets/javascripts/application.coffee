@@ -17,7 +17,8 @@ jQuery ->
 
 	$('#sortable').DataTable({
 		paging: false,
-		scrollY: 400
+		scrollY: 400,
+		"order": []
 	})
 	
 	$(document).on 'click', '.left-side-zindex', (e) ->
