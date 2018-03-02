@@ -27,6 +27,7 @@ app.apartments.prototype = {
     var ul_height = $('ul.ui-autocomplete').height() + 45;
     $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
+    $('.no-match-link').css('width', $('ul.ui-autocomplete').width()+2+'px');
     // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p></li>');
   },
 
@@ -61,8 +62,8 @@ app.apartments.prototype = {
     $("#neighborhoods").val(ui.item.neighborhoods);
     $("#apt-search-txt-form").val(ui.item.search_term);
     $('#apt-search-form').find('.in_header').click();
-    if($('#home-search-btn').hasClass('disabled')){
-      $('#home-search-btn').removeClass('disabled')
+    if($('#home-search-btn, #home-search-btn-mob').hasClass('disabled')){
+      $('#home-search-btn, #home-search-btn-mob').removeClass('disabled')
     }
     $('.no-match-link').addClass('hidden');
     return false;

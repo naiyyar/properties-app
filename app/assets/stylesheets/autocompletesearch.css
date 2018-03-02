@@ -63,8 +63,9 @@
   height: 3.5em;
   line-height: 44px;
   position: absolute;
-  width: 100%;
+  width: 86.5%;
   text-align: center;
+  left: 0px;
 }
 
 .ui-autocomplete{

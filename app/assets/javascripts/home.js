@@ -378,6 +378,13 @@
       }
     });
 
+    $('.borough-neighborhood').click(function(e){
+        e.preventDefault();
+        $('#neighborhoods').val($(this).text());
+        $('#apt-search-txt').val($(this).data('nhname'));
+        $('#home-search-btn').removeClass('disabled').click();
+    })
+
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();
 

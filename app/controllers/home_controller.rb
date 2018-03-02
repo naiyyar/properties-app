@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   def index
     session[:return_to] = nil
     #@recently_listed_properties = Building.joins(:uploads).order('created_at desc').limit(6)
+    @manhattan_neighborhoods = view_context.manhattan_neighborhoods
   end
 
   def search
