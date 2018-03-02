@@ -378,12 +378,22 @@
       }
     });
 
+    //Searching building on neighborhood click
     $('.borough-neighborhood').click(function(e){
         e.preventDefault();
         $('#neighborhoods').val($(this).text());
         $('#apt-search-txt').val($(this).data('nhname'));
         $('#home-search-btn').removeClass('disabled').click();
     })
+
+    
+    $('.panel-collapse').on('show.bs.collapse', function () {
+        $(this).prev().find('span').removeClass('fa-angle-down').addClass('fa-angle-up');
+    });
+
+    $('.panel-collapse').on('hide.bs.collapse', function () {
+        $(this).prev().find('span').removeClass('fa-angle-up').addClass('fa-angle-down');
+    });
 
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();
