@@ -1,24 +1,24 @@
 <div class="home-search-form">
   <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search', role: 'form' do %>
     <div class="search-elem-input">
-      <div class="input-group">
+      <!-- <div class="input-group"> -->
         <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: "form-control", placeholder: 'Search by Neighborhood, ZipCode, Address, Building' %>
-        <div class="input-group-btn" style="padding-left: 6px;">
-          <%= submit_tag 'Search', class: 'btn btn-blue disabled', id: 'home-search-btn' %>
-        </div>
+        <!-- <div class="input-group-btn" style="padding-left: 6px;"> -->
+          <%#= submit_tag 'Search', class: 'btn btn-blue hidden', id: 'home-search-btn' %>
+        <!-- </div> -->
         <%= hidden_field_tag 'term', nil %>
         <%= hidden_field_tag 'neighborhoods', nil %>
         <div class="results" id="apt-search-results">
           <!-- //Hiding not building link element in home.js-->
           <div class="no-match-link hidden"><p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>No matches found - Add a new building</b></a></p></div>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
 
-    <!-- <div class="search-elem-sbmt"> -->
-      <!-- <div class="form-group text-center padding-top-10 visible-xs">
-        <%#= submit_tag 'Search', class: 'btn btn-blue disabled', id: 'home-search-btn-mob' %>
-      </div> -->
-    <!-- </div> -->
+    <div class="search-elem-sbmt">
+      <div class="form-group text-center padding-top-10 visible-xs">
+        <%= submit_tag 'Search', class: 'btn btn-blue disabled hidden', id: 'home-search-btn' %>
+      </div>
+    </div>
   <%end%>
 </div>

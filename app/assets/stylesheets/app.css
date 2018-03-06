@@ -4659,10 +4659,12 @@ body.black {
 .home-about-nyc-apt h2{
     font-size: 16px;
     padding: 0px 4px;
+    line-height: 21px;
+    margin-bottom: 1px;
 }
 .home-about-nyc-apt h1{
     font-size: 32px;
-    margin: 20px 0px;
+    margin: 0px 0px;
 }
 .home-caption {
     position: absolute;
@@ -4686,13 +4688,15 @@ body.black {
     font-weight: bold;
 }
 .search-panel {
-    background-color: rgba(0, 0, 0, 0.50);
+    background-color: rgba(0, 0, 0, 0.60);
     position: absolute;
-    left: 0;
-    top: 170px;
-    width: 100%;
+    /*left: 0;*/
+    /*top: 170px;*/
+    /*width: 100%;*/
     color: #fff;
-    padding: 0px 20px 20px 20px;
+    padding: 16px 20px 24px 20px;
+    margin: 170px 311px 0px 311px;
+    /*position: relative;*/
 }
 .search-panel form {
     text-align: center;
@@ -4702,10 +4706,10 @@ body.black {
     position: relative;
 }
 .search-panel .home-about-nyc-apt{
-    padding-bottom: 60px;
+    padding-bottom: 25px;
 }
 .home-search-form{
-    width: 55%;
+    width: 91%;
     margin: 0 auto;
 }
 
@@ -4825,6 +4829,10 @@ a.home-navHandler.active {
     font-style: italic;
     line-height: 18px;
     padding: 0 30%;
+}
+.h-text a{
+    font-style: normal;
+    font-family: sans-serif;
 }
 .home-wrapper {
     width: 1140px;
@@ -5657,7 +5665,7 @@ blockquote {
         text-align: left;
     }
     .home-search-form{
-        width: 80%;
+        width: 77%;
     }
 }
 
@@ -5668,6 +5676,19 @@ blockquote {
         text-align: right;
         padding: 5px 9px 5px 0px;
     }
+    #hero-container {
+        background-color: #000;
+        height: 550px;
+        position: relative;
+    }
+    .search-panel {
+        left: 0;
+        top: 100px;
+        width: 100%;
+        padding: 16px 20px 13px 20px;
+        margin: 0px;
+    }
+
     .comments{
         padding: 0px;
     }
@@ -6009,7 +6030,7 @@ blockquote {
         font-size: 11px;
     }
     #hero-container, #hero-container-map {
-        height: 592px;
+        height: 425px;
     }
     #home-map {
         height: 592px;
@@ -6060,22 +6081,22 @@ blockquote {
     .search-panel form {
         text-align: left;
     }
-    .search-panel {
-        padding: 20px 0px 20px 0px;
-    }
     .search-panel .home-about-nyc-apt {
-        padding-bottom: 50px;
+        padding-bottom: 25px;
     }
     .home-search-form{
         width: 100%;
-        padding: 0px 6px;
+        padding: 0px 0px;
+    }
+    .search-panel .form-group {
+        margin: 0 5px 0px 5px;
     }
     .neighborhood-container .panel{
         margin-bottom: -1px;
     }
     ul.neighborhoods-list li{
         border: 1px solid #ddd;
-        margin: 6px;
+        margin: 4px 0px;
     }
     ul.neighborhoods-list li a{
         color: #333;
@@ -6115,7 +6136,8 @@ blockquote {
         z-index: 1100;
     }
     .home-nav.active {
-        background-color: rgba(0, 0, 0, 0.50);
+        background-color: rgba(25, 25, 25, 0.90);
+        /*#rgba(0, 0, 0, 0.50);*/
     }
     .home-nav.active ul {
         left: 0;
@@ -6284,6 +6306,22 @@ blockquote {
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {  
+    #hero-container {
+        background-color: #000;
+        height: 550px;
+        position: relative;
+    }
+    .search-panel {
+        background-color: rgba(0, 0, 0, 0.60);
+        position: absolute;
+        left: 0;
+        top: 170px;
+        width: 100%;
+        color: #fff;
+        padding: 16px 20px 13px 20px;
+        margin: 0px;
+    }
+
     .reviewActions ul{
         padding: 5px 0px;
         float: right;
@@ -6444,6 +6482,22 @@ blockquote {
 }
 
 @media screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    #hero-container {
+        background-color: #000;
+        height: 550px;
+        position: relative;
+    }
+    .search-panel {
+        background-color: rgba(0, 0, 0, 0.60);
+        position: absolute;
+        left: 0;
+        top: 170px;
+        width: 100%;
+        color: #fff;
+        padding: 16px 20px 20px 20px;
+        margin: 0px;
+    }
+
     .commentActions ul li {
         margin-left: 5px;
     }
@@ -6519,6 +6573,10 @@ blockquote {
     }
     .tabsWidgetSearch ul.propList li a .info {
         max-width: 72%;
+    }
+    .home-about-nyc-apt h1{
+        font-size: 22px;
+        margin: 0px 0px;
     }
 }
 
