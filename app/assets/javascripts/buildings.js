@@ -27,6 +27,7 @@ app.buildings.prototype = {
     var ul_height = $('ul.ui-autocomplete').height();
     $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
+    $('.no-match-link').css('width', $('ul.ui-autocomplete').width()+2+'px');
     // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
   },
 
