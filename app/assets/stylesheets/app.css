@@ -4709,7 +4709,7 @@ body.black {
     padding-bottom: 25px;
 }
 .home-search-form{
-    width: 91%;
+    width: 98%;
     margin: 0 auto;
 }
 
@@ -5685,7 +5685,7 @@ blockquote {
         left: 0;
         top: 100px;
         width: 100%;
-        padding: 16px 20px 13px 20px;
+        padding: 16px 10px 13px 10px;
         margin: 0px;
     }
 
