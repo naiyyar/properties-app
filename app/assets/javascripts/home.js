@@ -352,14 +352,14 @@
         
     //Hiding not building link element
     $('#hero-container, .highlight, .contribute-wrapper').click(function() {
-        $('.no-match-link').addClass('hidden');
+        // $('.no-match-link').addClass('hidden');
     });
      
     $('#buildings-search-txt, #apt-search-txt').blur(function(e){
         setTimeout(function () {
         if (e.type == 'blur') {
 
-          $('.no-match-link').addClass('hidden');
+          // $('.no-match-link').addClass('hidden');
 
         }
         }, 200);
@@ -367,7 +367,7 @@
 
     //Hiding not building link element on home page image slider click
     $('#hero-container, .highlight, .contribute-wrapper').click(function(){
-        $('.no-match-link').addClass('hidden');
+        // $('.no-match-link').addClass('hidden');
     });
 
     //#home page search when enter keypressed

@@ -1,8 +1,10 @@
 <div class="home-search-form">
   <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search', role: 'form' do %>
     <div class="search-elem-input">
-      <!-- <div class="input-group"> -->
+      <div class="input-group">
         <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: "form-control", placeholder: 'Search by Neighborhood, ZipCode, Address, Building' %>
+        <span class="input-group-btn"><a class="btn btn-blue" style="font-size: 15px;"><span class="icon-magnifier"></span></a></span>
+      </div>
         <!-- <div class="input-group-btn" style="padding-left: 6px;"> -->
           <%#= submit_tag 'Search', class: 'btn btn-blue hidden', id: 'home-search-btn' %>
         <!-- </div> -->
