@@ -5746,7 +5746,7 @@ blockquote {
         top: 49px;
         background: #fff;
         width: 100%;
-        height: 49px;
+        height: 50px;
         padding: 0px 20px 0px 1px;
         left: 0;
         border-bottom: 1px solid #96a9b8;
@@ -5988,7 +5988,7 @@ blockquote {
     }
     .search input {
         margin: 3px 0 0 4px;
-        width: 92%;
+        width: 86%;
     }
     .clearSearchText {
         right: 13px; 
