@@ -66,14 +66,14 @@ app.apartments.prototype = {
     if($('#home-search-btn, #home-search-btn-mob').hasClass('disabled')){
       $('#home-search-btn, #home-search-btn-mob').removeClass('disabled')
     }
-    //$('.no-match-link').addClass('hidden');
+    $('.no-match-link').addClass('hidden');
     //home page
     $('#home-search-btn').click();
     return false;
   },
   _close: function(){
     //Hiding no match found - add new building link
-    // setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
+    setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
     
   }
 
