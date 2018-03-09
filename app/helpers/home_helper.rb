@@ -10,7 +10,7 @@ module HomeHelper
 
 	def manhattan_borough
 		[
-			'Central Harlem',
+			'Harlem',
 			'Chelsea',
 			'East Harlem',
 			'East Village',
@@ -25,7 +25,6 @@ module HomeHelper
 			'Midtown East',
 			'Murray Hill',
 			'SoHo',
-			'Sutton Place',
 			'Tribeca',
 			'Upper East Side',
 			'Upper West Side',
@@ -70,23 +69,17 @@ module HomeHelper
 
 	def bronx_borough
 		[
-  	 'Baychester',
 		 'Belmont',
 		 'Bronxdale',
 		 'Bronxwood',
-		 'Castle Hill',
-		 'City Island',
-		 'Claremont',
-		 'Clason Point',
 		 'Concourse',
-		 'Country Club',
-		 'Eastchester',
-		 'Edenwald',
-		 'Fairmont - Claremont Village',
-		 'Fieldston',
-		 'Fleetwood - Concourse Village',
-		 'Fordham Heights',
-		 'Fordham Manor'
+		 'Fordham',
+		 'Kingsbridge',
+		 'Mott Haven',
+		 'Riverdale',
+		 'Spuyten Duyvil',
+		 'Tremont',
+		 'University Heights'
 		]
 	end
 

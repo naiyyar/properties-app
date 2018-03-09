@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20180220070856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
+  enable_extension "fuzzystrmatch"
   enable_extension "unaccent"
 
   create_table "authorizations", force: :cascade do |t|
@@ -233,6 +233,7 @@ ActiveRecord::Schema.define(version: 20180220070856) do
     t.string   "name"
     t.text     "pros"
     t.text     "cons"
+    t.text     "description"
     t.integer  "number_of_bedrooms"
     t.decimal  "number_of_bathrooms",     default: 0.0
     t.decimal  "monthly_rent",            default: 0.0

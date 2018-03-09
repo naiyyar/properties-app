@@ -22,10 +22,14 @@ app.apartments.prototype = {
   },
 
   _open: function(event, ui) {
-    // search_term = 'No matches found - Add a new building'
     this._input.removeClass('loader');
     var ul_height = $('ul.ui-autocomplete').height();
-    $('ul.ui-autocomplete').css('width', $('#apt-search-txt').width()+80+'px');
+    if($('#apt-search-txt-searchpage').length > 0){
+      // $('ul.ui-autocomplete').css('width', $('#apt-search-txt-searchpage').width());
+    }
+    else{
+      $('ul.ui-autocomplete').css('width', $('#apt-search-txt').width()+80+'px');
+    }
     $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
     $('.no-match-link').css('width', $('ul.ui-autocomplete').width()+2+'px');
