@@ -318,7 +318,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   paperclip (~> 5.0.0)
-  pg
+  pg (~> 0.21.0)
   pg_search
   pry
   rack-mini-profiler

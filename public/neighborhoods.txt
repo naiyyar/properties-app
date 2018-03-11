@@ -22,14 +22,12 @@ Financial District
 East Harlem
 Central Harlem
 South Harlem
-Hamilton Heights
 Inwood
 Tribeca
 Manhattanville
 Marble Hill
 Washington Heights
 Fort George
-Hudson Heights
 West Harlem
 Carnegie Hill
 Lenox Hill
@@ -38,24 +36,12 @@ Lincoln Square
 Manhattan Valley
 Morningside Heights
 Midtown Manhattan
-Central Harlem
-South Harlem
-East Harlem
-Harlem
 Hamilton Heights
-Inwood
 Manhattanville
 Marble Hill
 Washington Heights
 Fort George
 Hudson Heights
-West Harlem
-Carnegie Hill
-Lenox Hill
-Yorkville
-Lincoln Square
-Manhattan Valley
-Morningside Heights
 Bedford-Stuyvesant
 Williamsburg
 Bushwick

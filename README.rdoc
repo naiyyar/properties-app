@@ -27,3 +27,6 @@ GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git push origin master
 heroku config:set GOOGLE_CLIENT_ID=joesmith
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+To restore pgdump downloaded from heroku
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d dev_apt_reviews_new e4e909f0-ab0c-49cc-a5c3-8d7503dc61cf.dump

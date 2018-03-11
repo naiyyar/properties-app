@@ -32,7 +32,7 @@ gem 'client_side_validations'
 
 gem 'american_date'
 
-gem 'pg'
+gem 'pg', '~> 0.21.0'
 
 #searching
 gem 'pg_search'

@@ -99,6 +99,14 @@ class Building < ActiveRecord::Base
     results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
+  def self.buildings_in_neighborhood params
+    where("neighborhood = ? or neighborhoods_parent = ?" , params[:neighborhoods], params[:neighborhoods]).paginate(:page => params[:page], :per_page => 20)
+  end
+
+  def self.buildings_in_city params, city
+    where("city @@ :q" , q: city).paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
+  end
+
   def recommended_percent
     Vote.recommended_percent(self)
   end
@@ -109,6 +117,10 @@ class Building < ActiveRecord::Base
 
   def street_address
     [building_street_address, city, state].compact.join(', ')
+  end
+
+  def coordinates
+    [latitude, longitude].compact.join(', ')
   end
 
   def building_name_or_address
@@ -137,14 +149,6 @@ class Building < ActiveRecord::Base
 
   def reviews_count
     self.reviews.present? ? self.reviews.count : 0
-  end
-
-  def self.buildings_in_neighborhood params
-    where("neighborhood @@ :q or neighborhoods_parent @@ :q" , q: "%#{params[:neighborhoods]}").paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
-  end
-
-  def self.buildings_in_city params, city
-    where("city @@ :q" , q: city).paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
   end
 
   def rating_cache
@@ -203,7 +207,11 @@ class Building < ActiveRecord::Base
     File.open("#{Rails.root}/public/neighborhoods.txt", "r").each_line do |line|
       arr << line.split(/\n/)
     end
-    return arr.flatten
+    return arr.flatten.uniq.sort
+  end
+
+  def just_parent_neighborhoods
+    ['Harlem']
   end
 
   #Parent neighbohoods
@@ -235,8 +243,10 @@ class Building < ActiveRecord::Base
           if predifined_neighborhoods.include? neighborhood
             neighborhood1 = neighborhood
             neighborhood2 = neighborhood if neighborhood2.blank?
-          elsif parent_neighborhoods.include? neighborhood #checking parent of main neighborhood
+          elsif just_parent_neighborhoods.include? neighborhood
             neighborhood2 = neighborhood
+          elsif parent_neighborhoods.include? neighborhood #checking parent of main neighborhood
+            neighborhood2 = neighborhood if neighborhood2.blank?
             neighborhood1 = neighborhood if neighborhood1.blank?
           elsif grandparent_neighborhoods.include? neighborhood #checking grandparent of main neighborhood
             neighborhood3 = neighborhood
