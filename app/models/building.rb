@@ -196,12 +196,20 @@ class Building < ActiveRecord::Base
     return building_counts + unit_counts
   end
 
+  def first_neighborhood
+    neighborhood.present? ? neighborhood : neighborhoods_parent
+  end
+
   def property_neighborhods
-   "#{neighborhood} - #{parent_neighbors}"
+   "#{first_neighborhood} - #{parent_neighbors}"
   end
 
   def parent_neighbors
-    ((neighborhoods_parent == neighborhood and neighborhood3.present?) ? neighborhood3 : neighborhoods_parent)
+    if neighborhood.present?
+      ((neighborhoods_parent == neighborhood and neighborhood3.present?) ? neighborhood3 : neighborhoods_parent)
+    else
+      neighborhood3.present? ? neighborhood3 : neighborhoods_parent
+    end
   end
 
 
