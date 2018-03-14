@@ -205,8 +205,8 @@ class Building < ActiveRecord::Base
   end
 
   def parent_neighbors
-    if neighborhood.present?
-      ((neighborhoods_parent == neighborhood and neighborhood3.present?) ? neighborhood3 : neighborhoods_parent)
+    if neighborhood.present? and neighborhoods_parent.present? and neighborhood3.present? 
+      (neighborhoods_parent == neighborhood) ? neighborhood3 : neighborhoods_parent
     else
       neighborhood3.present? ? neighborhood3 : neighborhoods_parent
     end
