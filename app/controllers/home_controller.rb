@@ -102,7 +102,7 @@ class HomeController < ApplicationController
                                           )
 	    end
 	  end
-    @buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
+    @buildings = @buildings.paginate(:page => params[:page], :per_page => 20) if @buildings.present?
   end
 
   def tos

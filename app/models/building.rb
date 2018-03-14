@@ -196,6 +196,15 @@ class Building < ActiveRecord::Base
     return building_counts + unit_counts
   end
 
+  def property_neighborhods
+   "#{neighborhood} - #{parent_neighbors}"
+  end
+
+  def parent_neighbors
+    ((neighborhoods_parent == neighborhood and neighborhood3.present?) ? neighborhood3 : neighborhoods_parent)
+  end
+
+
   #finding similar properties may be on the basis amenities
   def similar_properties
     buildings = Building.where('id <> ?', self.id)
@@ -234,7 +243,7 @@ class Building < ActiveRecord::Base
     neighborhood1 = neighborhood2 = neighborhood3 = ''
     if search.present?
       #search for child neighborhoods
-      search[0..4].each do |geo_result|
+      search[0..4].each_with_index do |geo_result, index|
         #finding neighborhood
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
@@ -242,16 +251,16 @@ class Building < ActiveRecord::Base
           #checking main neighborhood
           if predifined_neighborhoods.include? neighborhood
             neighborhood1 = neighborhood
-            neighborhood2 = neighborhood if neighborhood2.blank?
+            #neighborhood2 = neighborhood if neighborhood2.blank?
           elsif just_parent_neighborhoods.include? neighborhood
             neighborhood2 = neighborhood
           elsif parent_neighborhoods.include? neighborhood #checking parent of main neighborhood
             neighborhood2 = neighborhood if neighborhood2.blank?
-            neighborhood1 = neighborhood if neighborhood1.blank?
+            neighborhood1 = neighborhood if neighborhood1.blank? and index >= 2
           elsif grandparent_neighborhoods.include? neighborhood #checking grandparent of main neighborhood
             neighborhood3 = neighborhood
-            neighborhood1 = neighborhood if neighborhood1.blank?
-            neighborhood2 = neighborhood if neighborhood2.blank?
+            #neighborhood1 = neighborhood if neighborhood1.blank?
+            #neighborhood2 = neighborhood if neighborhood2.blank?
           end
           #end if
         end
