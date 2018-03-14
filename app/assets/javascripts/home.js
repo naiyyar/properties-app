@@ -308,14 +308,12 @@
         $('.home-nav').toggleClass('active');
         $(this).toggleClass('active');
         return false;
-        //$(this).html('').append('<span class="fa fa-times"></span>');
     });
 
     $(document).click(function(){
         if($('.home-nav').hasClass('active')){
           $('.home-nav').removeClass('active');
         }
-        //$(this).html('').append('<span class="fa fa-bars"></span>');
     })
 
     // $(document).on('touchend', function(){

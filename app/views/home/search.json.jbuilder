@@ -14,6 +14,7 @@ if @buildings_by_neighborhood.present?
     if building.neighborhood.present? and !arr.include? building.neighborhood
       json.search_term "#{building.neighborhood}, #{building.city}, #{building.state}"
       json.neighborhoods "#{building.neighborhood}"
+      arr << building.neighborhood
     end
   end
 end

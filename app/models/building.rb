@@ -100,11 +100,11 @@ class Building < ActiveRecord::Base
   end
 
   def self.buildings_in_neighborhood params
-    where("neighborhood = ? or neighborhoods_parent = ?" , params[:neighborhoods], params[:neighborhoods]).paginate(:page => params[:page], :per_page => 20)
+    where("neighborhood = ? or neighborhoods_parent = ?" , params[:neighborhoods], params[:neighborhoods]) #.paginate(:page => params[:page], :per_page => 20)
   end
 
   def self.buildings_in_city params, city
-    where("city @@ :q" , q: city).paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
+    where("city @@ :q" , q: city) #.paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
   end
 
   def recommended_percent
