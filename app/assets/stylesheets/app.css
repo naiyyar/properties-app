@@ -244,8 +244,8 @@ h3.unit_name_header{
 /* Buttons */
 
 .btn {
-    border-radius: 2px;
-    text-decoration: none;
+    border-radius: 2px !important;
+    text-decoration: none !important;
 }
 .btn-round {
     border-radius: 50px !important;
@@ -262,6 +262,10 @@ h3.unit_name_header{
     background-color: transparent;
     color: #999;
     border-color: #999;
+}
+.btn-xlg{
+   padding: 14px 40px !important;
+   font-size: 18px !important;
 }
 .no-touch .btn-gray:hover,
 .btn-gray:focus,
@@ -4814,7 +4818,7 @@ a.home-navHandler.active {
 }
 .highlight {
     background-color: #0075c9;
-    padding: 30px;
+    padding: 16px;
     text-align: center;
 }
 .h-title {
@@ -6573,10 +6577,6 @@ blockquote {
     }
     .tabsWidgetSearch ul.propList li a .info {
         max-width: 72%;
-    }
-    .home-about-nyc-apt h1{
-        font-size: 22px;
-        margin: 0px 0px;
     }
 }
 
