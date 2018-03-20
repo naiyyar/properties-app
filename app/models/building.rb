@@ -224,7 +224,10 @@ class Building < ActiveRecord::Base
     File.open("#{Rails.root}/public/neighborhoods.txt", "r").each_line do |line|
       arr << line.split(/\n/)
     end
-    return arr.flatten.uniq.sort
+    nyc_neighborhoods = arr.flatten.uniq
+    nyc_neighborhoods << ApplicationController.helpers.queens_borough
+    nyc_neighborhoods << ApplicationController.helpers.bronx_borough
+    return  nyc_neighborhoods.flatten.sort
   end
 
   def just_parent_neighborhoods
