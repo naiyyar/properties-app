@@ -5,12 +5,12 @@
       <% ['MANHATTAN', 'BROOKLYN','QUEENS','BRONX'].each do |area| %>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
           <div class="panel panel-default dd">
-            <a href="#mddPanel<%=area%>" class="btn btn-o btn-primary btn-block btn-lg align-center btn-panel-collapsable" data-toggle="collapse"><%=area%><span class="fa fa-angle-down pull-right"></span></a>
+            <a href="#mddPanel<%=area%>" class="btn btn-o btn-primary btn-block btn-lg align-center btn-panel-collapsable" data-toggle="collapse"><%=area%> <%='(Coming Soon)' if area == 'BRONX'%><span class="fa fa-angle-down pull-right"></span></a>
             <div id="mddPanel<%=area%>" class="panel-collapse collapse">
               <div class="panel-body">
                 <ul class="neighborhoods-list list-inline">
                   <% @manhattan_neighborhoods[area].sort.each do |nb| %>
-                    <li><a href="javascript:void(0);" class="borough-neighborhood" data-nhname="<%=nb%>"><%= nb %></a></li>
+                    <li><a href="javascript:void(0);" class="<%= area != 'BRONX' ? 'borough-neighborhood' : '' %>" data-nhname="<%=nb%>"><%= nb %></a></li>
                   <%end%>
                 </ul>
               </div>
