@@ -4830,9 +4830,13 @@ a.home-navHandler.active {
 .h-text {
     color: #fff;
     font-size: 14px;
-    font-style: italic;
-    line-height: 18px;
-    padding: 0 30%;
+    /*font-style: italic;*/
+    line-height: 24px;
+    padding: 0 21%;
+}
+.h-text p{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
 }
 .h-text a{
     font-style: normal;
@@ -5675,6 +5679,16 @@ blockquote {
 
 
 @media screen and (max-width: 767px) {
+    
+    .h-text {
+    /*font-style: italic;*/
+    line-height: 18px;
+    padding: 0 30%;
+    }
+    .h-text p{
+        font-size: 15px;
+    }
+
     .lastYearInResidence{
         color: #a9a9a9;
         text-align: right;

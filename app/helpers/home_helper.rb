@@ -41,12 +41,12 @@ module HomeHelper
 			'Clinton Hill',
 			'Crown Heights',
 			'Downtown Brooklyn',
-			'Flatbush',
+			'Flatbush - Ditmas Park',
 			'Fort Greene',
 			'Greenpoint',
 			'Park Slope',
 			'Prospect Heights',
-			'Prospect Lefferts Garden',
+			'Prospect Lefferts Gardens',
 			'Williamsburg'
 		]
 	end
