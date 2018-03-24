@@ -2,7 +2,7 @@
 
 <input type="text" name="lat" class="hidden lat" value="<%=@lat%>" />
 <input type="text" name="lng" class="hidden lng" value="<%=@lng%>" />
-<input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13%>" />
+<input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13 %>" />
 
 <script type="text/javascript" charset="utf-8">
 	var create_sidebar = true
@@ -10,9 +10,9 @@
 	build_map(create_sidebar);
 	
  	function build_map(sidebar){
- 		var lat = <%= raw @lat.to_json %>
-		var lng = <%= raw @lng.to_json %>
-		var zoom = 13 ;
+ 		var lat = <%= raw @lat.to_json %>;
+		var lng = <%= raw @lng.to_json %>;
+		var zoom = <%= @zoom || 13 %>;
 		var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
 		
 		options = {
