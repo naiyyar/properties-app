@@ -73,6 +73,10 @@ class Building < ActiveRecord::Base
     end
   end
 
+  def neighbohoods
+    first_neighborhood.present? ? first_neighborhood : neighborhood3
+  end
+
   def image_uploads
     self.uploads.where('image_file_name is not null')
   end

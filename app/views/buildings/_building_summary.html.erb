@@ -11,7 +11,7 @@
           <div class="address"><span class="icon-location-pin"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>
           
           <div class="stats1 property_information" style="padding: 0px 5px;">
-            <div><%="#{@building.building_type} in" if @building.building_type.present? %> <%= @building.neighborhood.present? ? @building.neighborhood : @building.neighborhoods_parent %></div>
+            <div><%="#{@building.building_type} in" if @building.building_type.present? %> <%= @building.neighbohoods %></div>
             <span><%= @building.no_of_units ? "#{@building.no_of_units} Units |" : ' -- Units' %></span>
             <span><%= @building.floors ? "#{@building.floors} Floors |" : ' 0 Floors |' %></span>
             <span><%= @building.built_in ? "Built in #{@building.built_in}" : ' Built in 0000' %></span>
