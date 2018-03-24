@@ -5894,7 +5894,7 @@ blockquote {
         width: 50px;
         color: #fff;
     }
-    a.listHandler, a.mapHandlerShow {
+    a.mapHandler, a.mapHandlerShow {
         display: block;
     }
     .no-touch a.mapHandler:hover {
@@ -5931,7 +5931,7 @@ blockquote {
         margin: 31px 0 0 0 !important;
     }
     #mapView, #mapViewSearch {
-        width: 100%;
+        width: 0%;
         -webkit-transition: all .2s ease-in-out;
         -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
@@ -5940,7 +5940,7 @@ blockquote {
         overflow-x: hidden;
         overflow-y: scroll;
         background-color: #f3f3f3;
-        width: 0%;
+        width: 100%;
         border-top: 1px solid #e8e8e8;
         float: right;
         -webkit-overflow-scrolling: touch;
@@ -5951,10 +5951,10 @@ blockquote {
     #mapView.min, #mapView.mob-min {
         width: 0%;
     }
-    #mapViewSearch.min, #mapViewSearch.mob-min {
+    #content.min, #mapViewSearch.mob-min {
         width: 0%;
     }
-    #content.max, #content.mob-max {
+    #mapViewSearch.max, #content.mob-max {
         width: 100%;
     }
     #mapView.mob-max, #mapViewSearch.mob-max {

@@ -1,51 +1,57 @@
 <%= render partial: 'search_wrapper' %>
 
 <script type="text/javascript" charset="utf-8">
-	var lat = <%= raw @lat.to_json %>
-	var lng = <%= raw @lng.to_json %>
-	var zoom = <%= @zoom || 13 %>
-	var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
+	build_map(true);
 	
-	options = {
-		disableDoubleClickZoom: false,
-		zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
-		gestureHandling: 'greedy'
-	}
- 	
- 	handler = Gmaps.build('Google');
- 	handler.buildMap({ provider: options, internal: { id: 'mapViewSearch' } }, function(){
-	
-  		json_array = <%= raw @hash.to_json %> ;
-    
-    	markers = handler.addMarkers(json_array);
-    
+ 	function build_map(create_sidebar){
+ 		var lat = <%= raw @lat.to_json %>
+		var lng = <%= raw @lng.to_json %>
+		var zoom = <%= @zoom || 13 %>
+		var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
+		
+		options = {
+			disableDoubleClickZoom: false,
+			zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+			gestureHandling: 'greedy'
+		}
+	 	handler = Gmaps.build('Google');
+	 	handler.buildMap({ provider: options, internal: { id: 'mapViewSearch' } }, function(){
+		
+			json_array = <%= raw @hash.to_json %> ;
+	  
+	  	markers = handler.addMarkers(json_array);
+	  
 	    _.each(json_array, function(json, index){
 		  	json.marker = markers[index];
 		  	bindMarker(json.marker, markers, handler, lat, lng, zoom );
 			});
-		
-		//Plogon options
-		//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }#1a69a9
-		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
-	    	//{ strokeColor: '#0e5c9a', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
-	    	{ strokeColor: '#1664a4', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
-		);
-		
-		brooklyn_and_queens_neighborhoods(seach_term) //In search.js
+			
+			//Plogon options
+			//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }#1a69a9
+			polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
+		    	//{ strokeColor: '#0e5c9a', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
+		    	{ strokeColor: '#1664a4', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
+			);
+			
+			brooklyn_and_queens_neighborhoods(seach_term) //In search.js
+			if(create_sidebar){
+		  	createSidebar(json_array);
+			}
+		});
+	
+	
+		//Hiding neighborhood search page infowindows
+	  
+	  $('.search, #header').click(function(){
+	    closeInfoWindow(handler)
+	  });
 
-	  createSidebar(json_array);
-	});
-
-	//Hiding neighborhood search page infowindows
-    $('.search, #header').click(function(){
-        closeInfoWindow(handler)
-    });
-
-    function closeInfoWindow(handler){
-      if(handler.currentInfowindow()) {
-        handler.currentInfowindow().close();
-      }
-    }
-    google.maps.event.addListener(handler.getMap(), 'click', function(){ closeInfoWindow(handler); });
+	  function closeInfoWindow(handler){
+	    if(handler.currentInfowindow()) {
+	      handler.currentInfowindow().close();
+	    }
+	  }
+	  google.maps.event.addListener(handler.getMap(), 'click', function(){ closeInfoWindow(handler); });
+	}
   
 </script>

@@ -73,6 +73,9 @@ app.apartments.prototype = {
     $('.no-match-link').addClass('hidden');
     //home page
     $('#home-search-btn').click();
+    if($("ul.ui-autocomplete").is(":visible")) {
+      $("ul.ui-autocomplete").hide();
+    }
     return false;
   },
   _close: function(){

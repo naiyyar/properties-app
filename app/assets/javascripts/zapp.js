@@ -277,16 +277,22 @@
                 $('#mapView, #mapViewSearch').toggleClass('mob-max');
                 $('#content').toggleClass('mob-min');
         } else {
-            $('#mapView, #mapViewSearch').toggleClass('min');
-            $('#content').toggleClass('max');
+            $('#content').toggleClass('min');
+            $('#mapView, #mapViewSearch').toggleClass('max');
         }
-        setTimeout(function() {
-            if (map) {
-                google.maps.event.trigger(map, 'resize');
-            }
-            map.setCenter(new google.maps.LatLng(lat, lng));
+        build_map(false); //For search split view
+        if(handler != ''){
+            map = handler.getMap();
+            setTimeout(function() {
+                if (map) {
+                    google.maps.event.trigger(map, 'resize');
+                }
+                map.setCenter(new google.maps.LatLng(lat, lng));
 
-        }, 300);
+            }, 300);
+        }
+        
+        resize_map();
     }
 
     var listMapViewShow = function(){
@@ -301,6 +307,11 @@
             $('#mapView').toggleClass('min');
             $('#content').toggleClass('max');
         }
+        
+        resize_map();
+    }
+
+    function resize_map(){
         setTimeout(function() {
             if (map) {
                 google.maps.event.trigger(map, 'resize');
