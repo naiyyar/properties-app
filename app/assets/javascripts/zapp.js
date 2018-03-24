@@ -280,19 +280,25 @@
             $('#content').toggleClass('min');
             $('#mapView, #mapViewSearch').toggleClass('max');
         }
-        build_map(false); //For search split view
+        var create_sidebar = false
+        build_map(create_sidebar); //For search split view
         if(handler != ''){
-            map = handler.getMap();
+            var gmap = handler.getMap();
             setTimeout(function() {
-                if (map) {
-                    google.maps.event.trigger(map, 'resize');
+                if (gmap) {
+                    google.maps.event.trigger(gmap, 'resize');
                 }
-                map.setCenter(new google.maps.LatLng(lat, lng));
+                var lat = parseFloat($('.lat').val());
+                var lng = parseFloat($('.lng').val());
+                var zoom = parseInt($('.zoom').val());
+                gmap.setZoom(zoom);
+                gmap.setCenter(new google.maps.LatLng(lat, lng));
 
             }, 300);
-        }
+        }else{
         
-        resize_map();
+            resize_map();
+        }
     }
 
     var listMapViewShow = function(){
