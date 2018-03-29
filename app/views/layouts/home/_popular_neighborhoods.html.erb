@@ -10,7 +10,7 @@
               <div class="panel-body">
                 <ul class="neighborhoods-list list-inline">
                   <% @manhattan_neighborhoods[area].sort.each do |nb| %>
-                    <li><a href="javascript:void(0);" class="<%= area != 'BRONX' ? 'borough-neighborhood' : '' %>" data-nhname="<%=nb%>" data-city="<%= nb_city(area, nb) %>"><%= nb %></a></li>
+                    <li><a href="javascript:void(0);" class="<%= area != 'BRONX' ? 'borough-neighborhood' : '' %>" data-nhname="<%=searchable_text(nb,area)%>"><%= nb %></a></li>
                   <%end%>
                 </ul>
               </div>
@@ -20,7 +20,6 @@
       <%end%>
     </div>
   </div>
-
   <div class="home-content neighborhood-container hidden-xs hidden-sm">
     <h2 class="osLight1">Popular NYC Neighborhoods</h2>
     <div class="row pb40">

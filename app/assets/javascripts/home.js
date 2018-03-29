@@ -382,8 +382,8 @@
         e.preventDefault();
         $('#neighborhoods').val($(this).text());
         var nbh = $(this).data('nhname');
-        var city = $(this).data('city');
-        $('#apt-search-txt').val(nbh+', '+city);
+        //var city = $(this).data('city');
+        $('#apt-search-txt').val(nbh);
         $('#home-search-btn').removeClass('disabled').click();
     })
 
