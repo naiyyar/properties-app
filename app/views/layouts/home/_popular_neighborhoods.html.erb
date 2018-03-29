@@ -10,7 +10,7 @@
               <div class="panel-body">
                 <ul class="neighborhoods-list list-inline">
                   <% @manhattan_neighborhoods[area].sort.each do |nb| %>
-                    <li><a href="javascript:void(0);" class="<%= area != 'BRONX' ? 'borough-neighborhood' : '' %>" data-nhname="<%=nb%>"><%= nb %></a></li>
+                    <li><a href="javascript:void(0);" class="<%= area != 'BRONX' ? 'borough-neighborhood' : '' %>" data-nhname="<%=nb%>" data-city="<%= nb_city(area, nb) %>"><%= nb %></a></li>
                   <%end%>
                 </ul>
               </div>

@@ -61,7 +61,7 @@ class HomeController < ApplicationController
         end
       else
         @buildings = Building.buildings_in_city(params, search_string)
-        @zoom = 10
+        @zoom = 11
       end
     else
       results = []
@@ -85,8 +85,11 @@ class HomeController < ApplicationController
       end
       
     end
-    
-    @neighborhood_links = NeighborhoodLink.where('neighborhood = ? or parent_neighborhood = ?', params[:neighborhoods], params[:neighborhoods]).order({ date: :desc }, { title: :asc })
+    if params['apt-search-txt'].present? and params['apt-search-txt'].split(',')[0] == 'New York'
+      @neighborhood_links = NeighborhoodLink.order({ date: :desc }, { title: :asc })
+    else
+      @neighborhood_links = NeighborhoodLink.where('neighborhood = ? or parent_neighborhood = ?', params[:neighborhoods], params[:neighborhoods]).order({ date: :desc }, { title: :asc })
+    end
     
     if @buildings.present?
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|

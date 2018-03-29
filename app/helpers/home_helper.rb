@@ -8,6 +8,18 @@ module HomeHelper
 		}
 	end
 
+	def nb_city area, nb
+		case area
+		when 'MANHATTAN'
+			'New York, NY'
+		when 'BROOKLYN'
+			'Brooklyn, NY'
+		when 'QUEENS'
+			"#{nb}, NY"
+		else
+		end
+	end
+
 	def manhattan_borough
 		[
 			'Harlem',

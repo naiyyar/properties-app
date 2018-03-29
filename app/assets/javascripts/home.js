@@ -381,7 +381,9 @@
     $('.borough-neighborhood').click(function(e){
         e.preventDefault();
         $('#neighborhoods').val($(this).text());
-        $('#apt-search-txt').val($(this).data('nhname'));
+        var nbh = $(this).data('nhname');
+        var city = $(this).data('city');
+        $('#apt-search-txt').val(nbh+', '+city);
         $('#home-search-btn').removeClass('disabled').click();
     })
 
