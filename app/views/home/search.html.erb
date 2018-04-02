@@ -1,3 +1,5 @@
+<% content_for :page_title do%><%= params['apt-search-txt'] %><%end %>
+
 <%= render partial: 'search_wrapper' %>
 
 <input type="text" name="lat" class="hidden lat" value="<%=@lat%>" />

@@ -4,7 +4,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Transparentcity | NYC Neighborhoods & Apartments</title>
+    <title>
+      <% if content_for? :page_title %>
+        <%= yield :page_title %> – NYC Neighborhoods and Apartments | Transparentcity
+      <% else %>
+        NYC Neighborhoods and Apartments | Transparentcity
+      <% end %>
+      <%#= content_for?(:title) ? yield(:title) : '' %>
+    </title>
+    <meta name="description" content="User ratings, reviews, recommendations, maps, photos and pricing information of NYC neighborhoods, buildings, apartments, management companies and landlords at Transparentcity. Live in New York City (Manhattan, Brooklyn, Queens, Bronx)? Share your experiences with the community and post your review.">
+
+    <meta property="og:url" content="https://www.transparentcity.co" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Transparentcity | NYC Neighborhoods & Apartments" />
+    <meta property="og:description" content="Transparentcity provides the inside scoop on NYC neighborhoods, buildings, apartments, management companies and landlords with ratings, reviews, recommendations, photos and pricing information from current and former residents.  Live in New York City (Manhattan, Brooklyn, Queens, Bronx)?  Share your experiences with the community and post your review." />
+    <!-- <meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
+
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= favicon_link_tag 'favicon.png' %>
