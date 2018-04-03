@@ -97,6 +97,7 @@ GEM
       warden (~> 1.2.3)
     dnsruby (1.60.2)
     dynamic_form (1.1.4)
+    dynamic_sitemaps (2.0.0)
     email_verifier (0.1.0)
       dnsruby (>= 1.5)
     erubi (1.7.0)
@@ -303,6 +304,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   dynamic_form
+  dynamic_sitemaps
   email_verifier
   fancybox2-rails (~> 0.2.8)
   figaro
