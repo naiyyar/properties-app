@@ -99,7 +99,7 @@ class Building < ActiveRecord::Base
 
   def self.search_by_building_name(criteria)
     regexp = /#{criteria}/i;
-    results = Building.text_search_by_building_name(criteria).order(:building_name).to_a.uniq(&:building_name)
+    results = Building.text_search_by_building_name(criteria).order(:building_name)#.to_a.uniq(&:building_name)
     results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
