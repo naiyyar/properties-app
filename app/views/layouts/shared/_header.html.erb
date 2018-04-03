@@ -11,8 +11,14 @@
     </div>
     <div class="pull-right headerLinks hidden-xs">
       <% if !user_signed_in? %>
-        <a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a>
-        <a href="#" class='btn btn-default' data-toggle="modal" data-target="#signin">Sign In</a>
+        <%if params[:controller] == "users/sessions"%>
+          <%= link_to 'Sign Up', '/users/sign_up', class: 'btn btn-default' %>
+        <%elsif params[:controller] == "users/registrations"%>
+          <%= link_to 'Sign In', '/users/sign_in', class: 'btn btn-default' %>
+        <%else%>
+          <%= link_to 'Sign Up', '/users/sign_up', class: 'btn btn-default' %>
+          <%= link_to 'Sign In', '/users/sign_in', class: 'btn btn-default' %>
+        <%end%>
       <%else%>
         <div class="hidden-xs hidden-sm" style="display: inline-block;">
           <%=render partial: 'layouts/shared/user_profile' %>

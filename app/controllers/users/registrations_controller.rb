@@ -3,9 +3,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_account_update_params, only: [:update]
   respond_to :json
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  
+  def new
+    @search_bar_hidden = :hidden
+    super
+  end
 
   #POST /resource
   def create

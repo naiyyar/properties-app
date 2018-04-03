@@ -33,7 +33,7 @@
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <% unless params[:controller] == 'home' and params[:action] == 'index'%>
       <%= render partial: 'layouts/shared/header' %>
-      <%= render partial: 'layouts/shared/left_side' %>
+      <%= render partial: 'layouts/shared/left_side' if current_user.present? %>
       <div class="closeLeftSide"></div>
       <div id="wrapper" class="<%=contribute_wrapper(params)%>">
         <div class="content">
@@ -47,8 +47,8 @@
     <%= javascript_include_tag 'home' %>
     <%= javascript_include_tag 'zapp' %>
 
-    <%= render 'layouts/shared/signin' %>
-    <%= render 'layouts/shared/signup' %>
+    <%#= render 'layouts/shared/signin' %>
+    <%#= render 'layouts/shared/signup' %>
     
     <script type="text/javascript">
       $('#slider').rotateSlider({});

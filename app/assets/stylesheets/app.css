@@ -112,7 +112,7 @@
 #street_view_btn {
     position: absolute;
     top: 120px;
-    left: 44%;
+    left: 41%;
     z-index: 5;
     /*background-color: #fff;*/
     /*padding: 5px;*/
@@ -852,7 +852,7 @@ a.userHandler {
 .search {
     /*float: left;*/
     position: absolute;
-    top: 59px;
+    top: 60px;
     width: 100%;
     height: 55px;
     background-color: #fff;
@@ -1647,7 +1647,7 @@ a.userHandler .counter {
 #wrapper {
     left: 70px;
     top: 60px;
-    margin: 53px 0 0 70px;
+    margin: 53px 0 0 0px;
 }
 #wrapper.full.m-full {
     margin-left: 200px;
@@ -4253,6 +4253,7 @@ li.list-ns-collapsed.list-ns-hovering div {
 
 .tables {
     padding: 20px;
+    margin-left: 53px;
 }
 .table {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
@@ -4470,9 +4471,10 @@ body.black {
 }
 
 .authentication-form form{
-  border: 1px solid #ddd;
+  /*border: 1px solid #ddd;*/
   padding: 20px;
   margin-top: 20px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
 }
 
 /* Profile Page */

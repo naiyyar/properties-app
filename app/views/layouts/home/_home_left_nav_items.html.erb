@@ -2,8 +2,8 @@
   <a href="/buildings/contribute" class="visible-xs visible-sm"><span class="icon-plus"></span><span class="navLabel"> Write a review</span></a>
 </li>
 <% unless user_signed_in? %>
-  <li><a href="#" data-toggle="modal" data-target="#signin"><span class="navIcon fa fa-sign-in"></span> Sign In</a></li>
-  <li><a href="#" data-toggle="modal" data-target="#signup"><span class="navIcon fa fa-user"></span> Sign Up</a></li>
+  <li><a href="/users/sign_in"><span class="navIcon fa fa-sign-in"></span> Sign In</a></li>
+  <li><a href="/users/sign_up"><span class="navIcon fa fa-user"></span> Sign Up</a></li>
   <li class="hidden-lg hidden-md"><a href="#" data-toggle="modal" data-target="#signup1" style="visibility:hidden;"><span class="navIcon fa fa-user"></span> Sign Up</a></li>
 <%end%>
 
