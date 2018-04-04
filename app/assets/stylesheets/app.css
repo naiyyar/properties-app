@@ -264,7 +264,7 @@ h3.unit_name_header{
     border-color: #999;
 }
 .btn-xlg{
-   padding: 14px 40px !important;
+   padding: 14px 26px !important;
    font-size: 18px !important;
 }
 .no-touch .btn-gray:hover,
@@ -5677,10 +5677,19 @@ blockquote {
     .home-search-form{
         width: 77%;
     }
+
 }
 
 
 @media screen and (max-width: 767px) {
+
+    .contribute-wrapper .content .tables {
+        margin-left: 0px !important;
+    }
+
+    .home-content h2 {
+        font-size: 20px;
+    }
     
     .h-text {
     /*font-style: italic;*/
