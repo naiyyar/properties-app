@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :neighborhood_links
   resources :review_flags
   resources :contacts
+  get '/about', to: 'contacts#about'
   resources :rental_price_histories
   post '/rate' => 'rater#create', :as => 'rate'
   
