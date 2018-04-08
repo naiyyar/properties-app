@@ -1,5 +1,5 @@
 app.apartments = function() {
-  this._input = $('#apt-search-txt, #apt-search-txt-searchpage');
+  this._input = $('#apt-search-txt');
   this._initAutocomplete();
 };
 
@@ -23,11 +23,17 @@ app.apartments.prototype = {
 
   _open: function(event, ui) {
     this._input.removeClass('loader');
-    var ul_height = $('ul.ui-autocomplete').height();
-    if($('#apt-search-txt-searchpage').length > 0){
-      //$('ul.ui-autocomplete').css('width', $('#apt-search-txt').width()+80+'px');
-    }
-    else{
+    var ul_height = 0;
+    $.each($('ul.ui-autocomplete'), function(){
+      var height = $(this).height();
+      if(height > 0){
+        ul_height = $(this).height();
+      }
+    })
+    
+    if($('.apt-search-text-shared').length >= 1){
+      $('ul.ui-autocomplete').css('width', $('.apt-search-text-shared').width()+20+'px');
+    }else{
       $('ul.ui-autocomplete').css('width', $('#apt-search-txt').width()+80+'px');
     }
     $('.no-match-link').css('top',ul_height+'px');
@@ -60,7 +66,7 @@ app.apartments.prototype = {
   _select: function(e, ui) {
     this._input.val(ui.item.search_term);
     $("#term").val(ui.item.term);
-    console.log(ui.item)
+    
     $("#term_address").val(ui.item.term_address);
     $("#neighborhoods").val(ui.item.neighborhoods);
     $("#apt-search-txt-form").val(ui.item.search_term);

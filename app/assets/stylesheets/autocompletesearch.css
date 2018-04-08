@@ -103,3 +103,8 @@ ul.ui-autocomplete li.building_link_li a:hover, .no-match-link a:hover{
   text-decoration: underline !important;
   font-size: 14px;
 }
+
+.apt-search-shared .no-match-link{
+  left: 33px;
+  top: 105px;
+}

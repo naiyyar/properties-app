@@ -21,6 +21,26 @@
     text-align: center !important;
 }
 
+.about_us{
+    margin-left: 0px !important;
+    /*background-image: */
+    background-image: url('../assets/aboutus/nyc3.png');
+    /* Set a specified height, or the minimum height for the background image */
+    min-height: 700px;
+    /* Set background image to fixed (don't scroll along with the page) */
+    /*background-attachment: fixed;*/
+    /* Center the background image */
+    background-position: center;
+    /* Set the background image to no repeat */
+    background-repeat: no-repeat;
+    /* Scale the background image to be as large as possible */
+    background-size: cover;
+}
+.about_us p{
+    font-size: 14px;
+    color: #333;
+}
+
 /* custome */
 .no-pointer{
     pointer-events: none;
@@ -5689,6 +5709,11 @@ blockquote {
 
     .home-content h2 {
         font-size: 20px;
+    }
+
+    .apt-search-shared .no-match-link{
+        left: 20px !important;
+        top: 105px;
     }
     
     .h-text {
