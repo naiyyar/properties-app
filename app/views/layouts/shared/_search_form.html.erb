@@ -5,6 +5,7 @@
 	<%= text_field_tag 'apt-search-txt-searchpage', params['apt-search-txt'], placeholder: 'Neighborhood, ZipCode, Address, Building' %>
 	<div class="results" id="apt-search-results"></div>
 </div>
+
 <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search hide' do %>
   <%= text_field_tag 'apt-search-txt', params['apt-search-txt'] %>
   <%= hidden_field_tag 'term', nil %>

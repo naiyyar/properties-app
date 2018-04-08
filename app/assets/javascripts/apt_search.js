@@ -25,7 +25,7 @@ app.apartments.prototype = {
     this._input.removeClass('loader');
     var ul_height = $('ul.ui-autocomplete').height();
     if($('#apt-search-txt-searchpage').length > 0){
-      // $('ul.ui-autocomplete').css('width', $('#apt-search-txt-searchpage').width());
+      //$('ul.ui-autocomplete').css('width', $('#apt-search-txt').width()+80+'px');
     }
     else{
       $('ul.ui-autocomplete').css('width', $('#apt-search-txt').width()+80+'px');

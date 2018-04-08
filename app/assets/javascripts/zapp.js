@@ -609,6 +609,10 @@
     //Rotating image overlay...
     $('.rotate').click(function(){
       $('.loading').removeClass('hidden');
-    })
+    });
+
+    $("#apt-search-txt-searchpage, #apt-search-txt").click(function () {
+        $(this).select();
+    });
 
 })(jQuery);

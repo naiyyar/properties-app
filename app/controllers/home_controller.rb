@@ -6,7 +6,6 @@ class HomeController < ApplicationController
   end
 
   def search
-    #debugger
     if params['apt-search-txt'].present?
       search_string = params['apt-search-txt'].split(',')[0]
       unless params['term_address'].present?
@@ -33,7 +32,10 @@ class HomeController < ApplicationController
               end
               @boundary_coords << Gcoordinate.where(zipcode: zipcode).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
               @zoom = 14
-           elsif params[:neighborhoods].present?
+            elsif params[:term].present?
+              building = Building.where(building_street_address: params[:term])
+              redirect_to building_path(building.first, 'apt-search-txt' => params['apt-search-txt']) if building.present?
+            elsif params[:neighborhoods].present?
               @buildings = Building.buildings_in_neighborhood(params)
               if !manhattan_kmls.include? @brooklyn_neighborhoods
                 geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
@@ -80,7 +82,7 @@ class HomeController < ApplicationController
       results << @buildings_by_zipcode
       @buildings_by_city = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
       results << @buildings_by_city
-      
+      #debugger
       if !results.flatten.present?
         @result_type = 'no_match_found'
       else
