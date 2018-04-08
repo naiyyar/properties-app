@@ -27,9 +27,9 @@ jQuery ->
 			parentElem.css('z-index', 999)
 
 	window.setTimeout (->
-       	$('.alert').slideUp 300, ->
-         	$(this).remove()
-     	), 1000
+   	$('.alert').slideUp 300, ->
+     	$(this).remove()
+ 	), 1000
 
 ready = ->
 	$('[data-toggle="tooltip"]').tooltip({ trigger: 'click' })
