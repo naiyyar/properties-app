@@ -33,7 +33,6 @@ app.apartments.prototype = {
     $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
     $('.no-match-link').css('width', $('ul.ui-autocomplete').width()+2+'px');
-    // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p></li>');
   },
 
   _render: function(ul, item) {
@@ -46,9 +45,6 @@ app.apartments.prototype = {
     this._input.removeClass('loader');
     var items = ''
     if(search_term != 'No matches found - Add a new building'){
-      //items = '<p class="address"><a href="/buildings/contribute?results=no-matches-found"><b>' + search_term + '</b></a></p>'
-    //}
-    //else{
       if(search_term != undefined){
         items = '<p class="address"><b>' + search_term + '</b></p>';
       }
@@ -64,6 +60,8 @@ app.apartments.prototype = {
   _select: function(e, ui) {
     this._input.val(ui.item.search_term);
     $("#term").val(ui.item.term);
+    console.log(ui.item)
+    $("#term_address").val(ui.item.term_address);
     $("#neighborhoods").val(ui.item.neighborhoods);
     $("#apt-search-txt-form").val(ui.item.search_term);
     $('#apt-search-form').find('.in_header').click();
