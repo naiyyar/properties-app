@@ -10,10 +10,6 @@ class ApplicationController < ActionController::Base
     # store last url as long as it isn't a /users path
     session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
     session[:contribution_for] = params[:contribution]
-    # if params[:id].present?
-    #   session[:building_id] = params[:id] if params[:controller] == 'buildings'
-    #   session[:unit_id] = params[:id] if params[:controller] == 'units'
-    # end
     session[:search_term] = params['buildings-search-txt']
   end
 
