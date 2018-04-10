@@ -24,7 +24,8 @@
 .about_us{
     margin-left: 0px !important;
     /*background-image: */
-    background-image: url('../assets/aboutus/nyc3.png');
+    background-image: url('https://www.dropbox.com/s/plza9nkijo0666a/NY_bg.png?dl=1'), 
+                      url('../assets/about_us_bg.png');
     /* Set a specified height, or the minimum height for the background image */
     min-height: 700px;
     /* Set background image to fixed (don't scroll along with the page) */
