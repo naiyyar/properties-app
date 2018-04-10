@@ -4,7 +4,7 @@
 	<div class="search-elem-input">
 		<%#= text_field_tag 'apt-search-txt-searchpage', params['apt-search-txt'], placeholder: 'Neighborhood, ZipCode, Address, Building' %>
 		<%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search apt-search-shared', role: 'form' do %>
-		  <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: 'apt-search-text-shared' %>
+		  <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: 'apt-search-text-shared', placeholder: 'Neighborhood, ZipCode, Address, Building'%>
 		  <%=render partial: 'layouts/shared/no_match' %>
 		  <%= hidden_field_tag 'term', nil %>
 		  <%= hidden_field_tag 'term_address', nil %>

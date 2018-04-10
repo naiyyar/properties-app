@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
       elsif session[:unit_id].present?
         return "/uploads/new?unit_id=#{session[:unit_id]}"
       else
-        flash[:notice] = 'signed in successful'
+        flash[:notice] = 'Signed in successfully'
         session[:return_to] || root_path
       end
 	  end

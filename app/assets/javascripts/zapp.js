@@ -554,7 +554,7 @@
 
     //clear text search
     $('.clearSearchText').click(function(){
-        $("#apt-search-txt-searchpage").val('');
+        $("#apt-search-txt").val('');
     })
 
     //clearing out unit modal fields on building show page

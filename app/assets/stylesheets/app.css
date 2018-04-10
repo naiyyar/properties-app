@@ -6042,7 +6042,7 @@ blockquote {
     }
     .search input {
         margin: 3px 0 0 4px;
-        width: 86%;
+        width: 83%;
     }
     .clearSearchText {
         right: 13px; 
@@ -6392,7 +6392,7 @@ blockquote {
         margin: 0px 3px;
     }
     #street_view_btn{
-        left: 41%;
+        left: 36%;
     }
     .nav-justified > li a {
         font-size: 11px;
@@ -6556,7 +6556,7 @@ blockquote {
         margin-left: 5px;
     }
     #street_view_btn {
-        left: 43%;
+        left: 39%;
     }
     .clearSearchText{
         right: 21px;
