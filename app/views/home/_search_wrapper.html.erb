@@ -5,16 +5,18 @@
 <div id="content">
   <div class="tabsWidget tabsWidgetSearch">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#resourceLinks" role="tab" data-toggle="tab"><b>NEIGHBORHOOD GUIDES <%= "(#{@neighborhood_links.count})" if @neighborhood_links.present? %></b></a></li>
-      <li><a href="#buildings" role="tab" data-toggle="tab"><b>BUILDINGS <%= "(#{ @buildings.count })" if @buildings.present? %></b></a></li>
+      <li class="<%=params[:page].blank? ?  'active' : '' %>">
+        <a href="#resourceLinks" role="tab" data-toggle="tab"><b>NEIGHBORHOOD GUIDES <%= "(#{@neighborhood_links.count})" if @neighborhood_links.present? %></b></a>
+      </li>
+      <li class="<%=params[:page].present? ?  'active' : '' %>"><a href="#buildings" role="tab" data-toggle="tab"><b>BUILDINGS <%= "(#{ @buildings.count })" if @buildings.present? %></b></a></li>
     </ul>
     
     <div class="tab-content tab-scroll11" style="background-color: #f3f3f3;">
-      <div class="tab-pane fade in active" id="resourceLinks">
+      <div class="tab-pane fade <%=params[:page].blank? ?  'in active' : '' %>" id="resourceLinks">
         <%= render partial: 'neighborhood_links/resource_links' %>
       </div>
 
-      <div class="tab-pane fade" id="buildings">
+      <div class="tab-pane fade <%=params[:page].present? ?  'in active' : '' %>" id="buildings">
         <%= render partial: 'search_results' %>
       </div>
     </div>
