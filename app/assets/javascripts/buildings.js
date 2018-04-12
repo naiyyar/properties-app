@@ -24,10 +24,17 @@ app.buildings.prototype = {
 
   _open: function(event, ui) {
     this._input.removeClass('loader');
-    var ul_height = $('ul.ui-autocomplete').height();
+    var ul_height = 0;
+    $.each($('ul.ui-autocomplete'), function(){
+      var height = $(this).height();
+      if(height > 0){
+        ul_height = $(this).height();
+      }
+    })
+
     $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
-    $('.no-match-link').css('width', $('ul.ui-autocomplete').width()+2+'px');
+    $('.no-match-link').css('width', $('#buildings-search-txt').width()+30+'px');
     // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
   },
 
@@ -105,6 +112,11 @@ app.buildings.prototype = {
       if(!$("#unit_name").parent().parent().hasClass('hide')){
         $("#unit_name").parent().parent().addClass('hide');
       }
+    }
+
+    $('#home-search-btn').click();
+    if($("ul.ui-autocomplete").is(":visible")) {
+      $("ul.ui-autocomplete").hide();
     }
     return false;
   },
