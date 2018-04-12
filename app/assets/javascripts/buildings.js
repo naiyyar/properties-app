@@ -109,11 +109,23 @@ app.buildings.prototype = {
     return false;
   },
 
+  // _close: function(){
+  //   //Hiding no match found - add new building link
+  //   if(!$('.no-match-link').hasClass('hidden')){
+  //     setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
+  //   }
+  // },
+
   _close: function(){
     //Hiding no match found - add new building link
-    if(!$('.no-match-link').hasClass('hidden')){
-      setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
-    }
+     if(!$("ul.ui-autocomplete").is(":visible")) {
+        $("ul.ui-autocomplete").show();
+      }
+      else{
+        if(!$('.no-match-link').hasClass('hidden')){
+          setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
+        }
+      }
   },
 
   _response: function(event, ui){
