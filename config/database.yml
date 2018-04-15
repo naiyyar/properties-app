@@ -12,7 +12,7 @@ default: &default
 
 development:
   <<: *default
-  database: dev_apt_reviews_new
+  database: transparentcity15apr
   username: postgres
   password: postgres
 
