@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  
   def index
     session[:return_to] = nil
     @manhattan_neighborhoods = view_context.manhattan_neighborhoods
@@ -10,17 +11,19 @@ class HomeController < ApplicationController
       unless params['term_address'].present?
         unless search_string == 'New York'
           @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
-          coordinates = Geocoder.coordinates(params['apt-search-txt'])
-          search = Geocoder.search(params['apt-search-txt'])
-          if coordinates.blank? and search.blank? and params[:term].present?
-            coordinates = Geocoder.coordinates(params[:term])
-            search = Geocoder.search(params[:term])
+          @coordinates = Geocoder.coordinates(params['apt-search-txt'])
+          @search = Geocoder.search(params['apt-search-txt'])
+          if @coordinates.blank? and @search.blank? and params[:term].present?
+            @coordinates = Geocoder.coordinates(params[:term])
+            @search = Geocoder.search(params[:term])
           end
 
+          search_again_if_empty_results if @search.blank? 
+          
           @boundary_coords = []
           
-          if search.present?
-            if search.first.types[0] == 'postal_code'
+          if @search.present?
+            if @search.first.types[0] == 'postal_code'
               search_term = params['apt-search-txt'].split(' - ')
               if(search_term.length > 1)
                 zipcode = search_term[0]
@@ -55,9 +58,9 @@ class HomeController < ApplicationController
               
             end
           end
-          if coordinates.present?
-            @lat = coordinates[0]
-            @lng = coordinates[1]
+          if @coordinates.present?
+            @lat = @coordinates[0]
+            @lng = @coordinates[1]
           end
         else
           @buildings = Building.buildings_in_city(params, search_string)
@@ -81,7 +84,7 @@ class HomeController < ApplicationController
       results << @buildings_by_zipcode
       @buildings_by_city = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
       results << @buildings_by_city
-      #debugger
+      
       if !results.flatten.present?
         @result_type = 'no_match_found'
       else
@@ -116,8 +119,19 @@ class HomeController < ApplicationController
   end
 
   private
+  
   def manhattan_kmls
     ['Midtown', 'Sutton Place']
+  end
+
+  def search_again_if_empty_results
+    if params[:term].blank?
+      @coordinates = Geocoder.coordinates(params['apt-search-txt'])
+      @search = Geocoder.search(params['apt-search-txt'])
+    elsif @coordinates.blank? and params[:term].present?
+      @coordinates = Geocoder.coordinates(params[:term])
+      @search = Geocoder.search(params[:term])
+    end
   end
 
 end

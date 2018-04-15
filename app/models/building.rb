@@ -222,6 +222,8 @@ class Building < ActiveRecord::Base
     buildings = Building.where('id <> ?', self.id)
   end
 
+  private
+
   #child neighbohoods
   def predifined_neighborhoods
     arr = []
@@ -251,8 +253,6 @@ class Building < ActiveRecord::Base
     ['Lower Manhattan', 'Upper Manhattan', 'Midtown']
   end
 
-  private
-
   def neighborhoods
     search = Geocoder.search([latitude, longitude])
     neighborhood1 = neighborhood2 = neighborhood3 = ''
@@ -263,9 +263,12 @@ class Building < ActiveRecord::Base
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
           neighborhood = neighborhood.first['long_name']
+          locality = search[0].address_components_of_type(:sublocality).first['long_name']
           #checking main neighborhood
-          if predifined_neighborhoods.include? neighborhood
-            neighborhood1 = neighborhood
+          if ['Queens','Brooklyn','Bronx'].include?(locality)
+            neighborhood1 = neighborhood if self.city == neighborhood #because city and neighborhood in queeens, bronx are same
+          elsif predifined_neighborhoods.include? neighborhood
+            neighborhood1 = neighborhood if neighborhood1.blank?
             #neighborhood2 = neighborhood if neighborhood2.blank?
           elsif just_parent_neighborhoods.include? neighborhood
             neighborhood2 = neighborhood

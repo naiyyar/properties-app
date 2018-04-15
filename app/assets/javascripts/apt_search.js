@@ -29,7 +29,7 @@ app.apartments.prototype = {
       if(height > 0){
         ul_height = $(this).height();
       }
-    })
+    });
     
     if($('.apt-search-text-shared').length >= 1){
       $('ul.ui-autocomplete').css('width', $('.apt-search-text-shared').width()+20+'px');
