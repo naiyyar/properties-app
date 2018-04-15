@@ -104,11 +104,11 @@ class Building < ActiveRecord::Base
   end
 
   def self.buildings_in_neighborhood params
-    where("neighborhood = ? or neighborhoods_parent = ?" , params[:neighborhoods], params[:neighborhoods]) #.paginate(:page => params[:page], :per_page => 20)
+    where("neighborhood = ? or neighborhoods_parent = ? or neighborhood3 = ?" , params[:neighborhoods], params[:neighborhoods], params[:neighborhoods])
   end
 
   def self.buildings_in_city params, city
-    where("city @@ :q" , q: city) #.paginate(:page => params[:page], :per_page => 20) #.to_a.uniq(&:building_street_address)
+    where("city @@ :q" , q: city)
   end
 
   def recommended_percent
@@ -278,7 +278,7 @@ class Building < ActiveRecord::Base
           elsif grandparent_neighborhoods.include? neighborhood #checking grandparent of main neighborhood
             neighborhood3 = neighborhood
             #neighborhood1 = neighborhood if neighborhood1.blank?
-            #neighborhood2 = neighborhood if neighborhood2.blank?
+            neighborhood2 = neighborhood if neighborhood2.blank? and neighborhood1.blank?
           end
           #end if
         end

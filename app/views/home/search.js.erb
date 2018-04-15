@@ -1,0 +1,11 @@
+$('#load-more-buildings').append('<%= j render partial: "search_results" %>');
+<% if @buildings.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @buildings %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+  var no_match = '<div style="padding:4px;"><p class="address"><a href="/buildings/contribute?results=no-matches-found" style="color: #0075c9;"><b>No matches found? - Add a new building</b></a></p></div>'
+  $('.pages-container').html(no_match)
+<% end %>
+
+load_rating_stars();

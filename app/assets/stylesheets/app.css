@@ -29,6 +29,13 @@
 .border-success{
     border: 2px solid #4cae4c !important;
 }
+.pages-container{
+    text-align: center !important;
+}
+
+.pagination{
+    box-shadow: none !important;
+}
 
 .about_us{
     margin-left: 0px !important;
