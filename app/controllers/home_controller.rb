@@ -17,11 +17,9 @@ class HomeController < ApplicationController
             @coordinates = Geocoder.coordinates(params[:term])
             @search = Geocoder.search(params[:term])
           end
-
-          search_again_if_empty_results if @search.blank? 
-          
+  
           @boundary_coords = []
-          
+          @search = []
           if @search.present?
             if @search.first.types[0] == 'postal_code'
               search_term = params['apt-search-txt'].split(' - ')
@@ -56,6 +54,12 @@ class HomeController < ApplicationController
                 @zoom = 13
               end
               
+            end
+          else
+            if params[:neighborhoods].present?
+              @boundary_coords << Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
+              @buildings = Building.buildings_in_neighborhood(params)
+              @zoom = 16 if @brooklyn_neighborhoods == 'Sutton Place'
             end
           end
           if @coordinates.present?
@@ -127,16 +131,6 @@ class HomeController < ApplicationController
   
   def manhattan_kmls
     ['Midtown', 'Sutton Place']
-  end
-
-  def search_again_if_empty_results
-    if params[:term].blank?
-      @coordinates = Geocoder.coordinates(params['apt-search-txt'])
-      @search = Geocoder.search(params['apt-search-txt'])
-    elsif @coordinates.blank? and params[:term].present?
-      @coordinates = Geocoder.coordinates(params[:term])
-      @search = Geocoder.search(params[:term])
-    end
   end
 
 end
