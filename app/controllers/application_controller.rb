@@ -5,12 +5,17 @@ class ApplicationController < ActionController::Base
 
   before_filter :allow_iframe_requests
   after_filter :store_location
+  before_action :popular_neighborhoods
 
   def store_location
     # store last url as long as it isn't a /users path
     session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
     session[:contribution_for] = params[:contribution]
     session[:search_term] = params['buildings-search-txt']
+  end
+
+  def popular_neighborhoods
+    @manhattan_neighborhoods = view_context.manhattan_neighborhoods
   end
 
   def after_sign_in_path_for(resource)

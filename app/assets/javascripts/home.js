@@ -385,6 +385,9 @@
         //var city = $(this).data('city');
         $('#apt-search-txt').val(nbh);
         $('#home-search-btn').removeClass('disabled').click();
+        if($('.in_header').length > 0){
+            $('.in_header').click();
+        }
     })
 
     

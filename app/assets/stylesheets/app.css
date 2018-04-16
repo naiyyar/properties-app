@@ -890,11 +890,18 @@ a.userHandler {
 .no-touch a.userHandler:hover {
     background-color: transparent;
 }
+.neighborhoods-dropdown .dropdown-menu{
+    min-width: 610px;padding: 0px 6px;
+}
+.neighborhoods-dropdown .dropdown-menu h2{
+    font-size: 13px;
+    font-weight: bold;
+}
 .search {
     /*float: left;*/
     position: absolute;
     top: 60px;
-    width: 100%;
+    width: 93%;
     height: 55px;
     background-color: #fff;
     left: 70px;

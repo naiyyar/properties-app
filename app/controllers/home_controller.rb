@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   def search
     if params['apt-search-txt'].present?
       search_string = params['apt-search-txt'].split(',')[0]
+
       unless params['term_address'].present?
         unless search_string == 'New York'
           @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
@@ -19,7 +20,6 @@ class HomeController < ApplicationController
           end
   
           @boundary_coords = []
-          @search = []
           if @search.present?
             if @search.first.types[0] == 'postal_code'
               search_term = params['apt-search-txt'].split(' - ')
@@ -53,7 +53,6 @@ class HomeController < ApplicationController
                 @buildings = Building.buildings_in_city(params, city)
                 @zoom = 13
               end
-              
             end
           else
             if params[:neighborhoods].present?
