@@ -96,7 +96,6 @@ class HomeController < ApplicationController
       @neighborhood_links = NeighborhoodLink.all
     elsif view_context.queens_borough.include?(params[:neighborhoods]) #neighborhoods and city is same
       @neighborhood_links = NeighborhoodLink.where('neighborhood = ?',params[:neighborhoods])
-      #@neighborhood_links = NeighborhoodLink.where('parent_neighborhood = ?',params[:neighborhoods]) if @neighborhood_links.blank?
     else
       @neighborhood_links = NeighborhoodLink.where('neighborhood = ? or parent_neighborhood = ?', params[:neighborhoods], params[:neighborhoods])
     end
