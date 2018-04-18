@@ -258,6 +258,7 @@ class Building < ActiveRecord::Base
     neighborhood1 = neighborhood2 = neighborhood3 = ''
     if search.present?
       #search for child neighborhoods
+      #debugger
       search[0..4].each_with_index do |geo_result, index|
         #finding neighborhood
         neighborhood = geo_result.address_components_of_type(:neighborhood)
@@ -265,8 +266,8 @@ class Building < ActiveRecord::Base
           neighborhood = neighborhood.first['long_name']
           locality = search[0].address_components_of_type(:sublocality).first['long_name']
           #checking main neighborhood
-          if ['Queens','Brooklyn','Bronx'].include?(locality)
-            neighborhood1 = neighborhood if self.city == neighborhood #because city and neighborhood in queeens, bronx are same
+          if ['Queens','Brooklyn','Bronx'].include?(locality) and self.city == neighborhood
+            neighborhood1 = neighborhood
           elsif predifined_neighborhoods.include? neighborhood
             neighborhood1 = neighborhood if neighborhood1.blank?
             #neighborhood2 = neighborhood if neighborhood2.blank?
