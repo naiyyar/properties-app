@@ -19,7 +19,7 @@ if @buildings_by_neighborhood.present?
   end
 end
 
-if @buildings_by_name.present? and @buildings_by_address.blank?
+if @buildings_by_name.present? #and @buildings_by_address.blank?
   json.array! @buildings_by_name do |building|
     json.id building.id
     if building.building_name.present?
