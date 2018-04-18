@@ -15,12 +15,6 @@ function createSidebarElem(json){
 };
 
 function bindElemToMarker(elem, marker){
-  // window.data = elem
-  // elem.on('mouseover', function(){
-  //   marker.serviceObject.setIcon("<%= asset_path 'green-dot.png' %>");
-  // }).on('mouseout', function(){
-  //   marker.serviceObject.setIcon("<%= asset_path 'red-dot.png' %>")
-  // })
   card = elem.parent().parent();
   card.on('mouseover', function(){
     marker.serviceObject.setIcon("<%= asset_path 'green-dot.png' %>");
@@ -44,9 +38,17 @@ function bindMarker(marker, markers, handler, lat, lng, zoom){
 
 function createSidebar(json_array){
   _.each(json_array, function(json){
-    var elem = $( createSidebarElem(json) );
-    var id = json.marker_title.split(',')[0]
-    elem.appendTo('#building_details'+id);
-    bindElemToMarker(elem, json.marker);
+    append_html(json)
   });
 };
+
+function append_html(json){
+  var elem = $( createSidebarElem(json) );
+  var id = json.marker_title.split(',')[0]
+  elem.appendTo('#building_details'+id);
+  bindMarketToElem(json, elem);
+}
+
+function bindMarketToElem(json, elem){
+  bindElemToMarker(elem, json.marker);
+}

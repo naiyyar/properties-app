@@ -7,15 +7,12 @@
 <input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13 %>" />
 
 <script type="text/javascript" charset="utf-8">
-	var create_sidebar = true
-
-	build_map(create_sidebar);
-	
  	function build_map(sidebar){
  		var lat = <%= raw @lat.to_json %>;
 		var lng = <%= raw @lng.to_json %>;
 		var zoom = <%= @zoom || 13 %>;
 		var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
+		json_array = <%= raw @hash.to_json %> ;
 		
 		options = {
 			disableDoubleClickZoom: false,
@@ -23,10 +20,9 @@
 			gestureHandling: 'greedy'
 		}
 	 	handler = Gmaps.build('Google');
+	 	
 	 	handler.buildMap({ provider: options, internal: { id: 'mapViewSearch' } }, function(){
 		
-			json_array = <%= raw @hash.to_json %> ;
-	  
 	  	markers = handler.addMarkers(json_array);
 	  
 	    _.each(json_array, function(json, index){
@@ -42,11 +38,12 @@
 			);
 			
 			brooklyn_and_queens_neighborhoods(seach_term) //In search.js
+		
+			
 			if(sidebar){
 		  	createSidebar(json_array);
 			}
 		});
-	
 	
 		//Hiding neighborhood search page infowindows
 	  

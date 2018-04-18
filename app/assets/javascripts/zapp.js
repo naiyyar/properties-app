@@ -281,7 +281,7 @@
             $('#mapView, #mapViewSearch').toggleClass('max');
         }
         var create_sidebar = false
-        build_map(create_sidebar); //For search split view
+        build_map(create_sidebar, true); //For search split view
         if(handler != ''){
             var gmap = handler.getMap();
             setTimeout(function() {
@@ -614,5 +614,7 @@
     $("#apt-search-txt-searchpage, #apt-search-txt").click(function () {
         $(this).select();
     });
+
+    build_map(true);
 
 })(jQuery);
