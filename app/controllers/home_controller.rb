@@ -33,19 +33,21 @@ class HomeController < ApplicationController
       unless search_string == 'New York'
         @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
         @coordinates = Geocoder.coordinates(params['search_term'])
+        if @coordinates.present?
+          @lat = @coordinates[0]
+          @lng = @coordinates[1]
+        end
+
         @boundary_coords = []
         
         if params['term_zipcode'].present?
-          zipcode = params['term_zipcode']
-          @buildings = Building.where('zipcode = ?', zipcode)
-          @boundary_coords << Gcoordinate.where(zipcode: zipcode).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-          @zoom = 14
+          @buildings = Building.where('zipcode = ?', params['term_zipcode'])
+          @boundary_coords << Gcoordinate.where(zipcode: params['term_zipcode']).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
         elsif params[:neighborhoods].present?
           @buildings = Building.buildings_in_neighborhood(params)
+          @zoom = 14
           if !manhattan_kmls.include? @brooklyn_neighborhoods
-            geo_coordinates = Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
-            @boundary_coords << geo_coordinates
-            @zoom = 14
+            @boundary_coords << Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
           else
             @zoom = 16 if @brooklyn_neighborhoods == 'Sutton Place'
           end
@@ -59,11 +61,6 @@ class HomeController < ApplicationController
             @zoom = 13
           end
         end
-        
-        if @coordinates.present?
-          @lat = @coordinates[0]
-          @lng = @coordinates[1]
-        end
       else
         @buildings = Building.buildings_in_city(params, search_string)
         @zoom = 11
@@ -75,13 +72,13 @@ class HomeController < ApplicationController
     
     if params['search_term'].present? and params['search_term'].split(',')[0] == 'New York'
       @neighborhood_links = NeighborhoodLink.all
-    elsif view_context.queens_borough.include?(params[:neighborhoods]) #neighborhoods and city is same
+    elsif view_context.queens_borough.include?(params[:neighborhoods])
       @neighborhood_links = NeighborhoodLink.where('neighborhood = ?',params[:neighborhoods])
     else
-      @neighborhood_links = NeighborhoodLink.where('neighborhood = ? or parent_neighborhood = ?', params[:neighborhoods], params[:neighborhoods])
+      @neighborhood_links = NeighborhoodLink.where('neighborhood @@ :q or parent_neighborhood @@ :q', q: params[:neighborhoods])
     end
 
-    @neighborhood_links = @neighborhood_links.order({ date: :desc }, { title: :asc })
+    @neighborhood_links = @neighborhood_links.order({ date: :desc }, { title: :asc }) if @neighborhood_links.present?
     
     if @buildings.present?
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|

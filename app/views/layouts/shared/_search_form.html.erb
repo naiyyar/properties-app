@@ -16,32 +16,16 @@
 	    </button>
 	    <div class="dropdown-menu dropdown-select">
 	    	<div class="row">
-	    		<div class="col-xs-3 col-md-3 col-lg-3">
-	          <h2 class="osLight h-r">MANHATTAN</h2>
-	          <ul class="blog-r-nav text-left">
-	        		<% @manhattan_neighborhoods['MANHATTAN'].sort.each do |nb| %>
-	            	<li><a href="<%=search_link(nb, 'MANHATTAN')%>"><%= nb %></a></li>
-	            <%end%>
-	          </ul>
-	        </div>
-
-	    		<div class="col-xs-3 col-md-3 col-lg-3">
-	          <h2 class="osLight h-r">BROOKLYN</h2>
-	          <ul class="blog-r-nav text-left">
-	        		<% @manhattan_neighborhoods['BROOKLYN'].sort.each do |nb| %>
-	            	<li><a href="<%=search_link(nb, 'BROOKLYN')%>"><%= nb %></a></li>
-	            <%end%>
-	          </ul>
-	        </div><!-- end brooklyn -->
-
-	        <div class="col-xs-3 col-md-3 col-lg-3">
-	          <h2 class="osLight h-r">QUEENS</h2>
-	          <ul class="blog-r-nav text-left">
-	        		<% @manhattan_neighborhoods['QUEENS'].sort.each do |nb| %>
-	            	<li><a href="<%=search_link(nb, 'QUEENS')%>"><%= nb %></a></li>
-	            <%end%>
-	          </ul>
-	        </div><!-- end queesns -->
+	    		<% ['MANHATTAN', 'BROOKLYN','QUEENS'].each do |area| %>
+		    		<div class="col-xs-3 col-md-3 col-lg-3">
+		          <h2 class="osLight h-r">MANHATTAN</h2>
+		          <ul class="blog-r-nav text-left">
+		        		<% @manhattan_neighborhoods[area].sort.each do |nb| %>
+		            	<li><a href="<%=search_link(nb, area)%>"><%= nb %></a></li>
+		            <%end%>
+		          </ul>
+		        </div>
+		      <%end%>
 
 	         <div class="col-xs-3 col-md-3 col-lg-3">
 	          <h2 class="osLight h-r">BRONX (Coming Soon)</h2>

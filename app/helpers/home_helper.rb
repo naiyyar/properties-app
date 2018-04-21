@@ -8,6 +8,10 @@ module HomeHelper
 		}
 	end
 
+	def ny_cities
+		['MANHATTAN', 'BROOKLYN','QUEENS','BRONX']
+	end
+
 	def manhattan_borough
 		[
 			'Harlem',
