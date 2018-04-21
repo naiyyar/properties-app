@@ -94,7 +94,7 @@ module HomeHelper
 	end
 
 	def search_link neighborhood, borough
-		"/search?apt-search-txt=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
+		"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
 	end
 
 end

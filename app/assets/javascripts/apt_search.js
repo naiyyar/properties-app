@@ -1,5 +1,5 @@
 app.apartments = function() {
-  this._input = $('#apt-search-txt');
+  this._input = $('#search_term');
   this._initAutocomplete();
 };
 
@@ -7,7 +7,7 @@ app.apartments.prototype = {
   _initAutocomplete: function() {
     this._input
       .autocomplete({
-        source: '/search',
+        source: '/auto_search',
         prependTo: '#apt-search-results',
         select: $.proxy(this._select, this),
         open: $.proxy(this._open, this),
@@ -34,7 +34,7 @@ app.apartments.prototype = {
     if($('.apt-search-text-shared').length >= 1){
       $('ul.ui-autocomplete').css('width', $('.apt-search-text-shared').width()+20+'px');
     }else{
-      $('ul.ui-autocomplete').css('width', $('#apt-search-txt').width()+80+'px');
+      $('ul.ui-autocomplete').css('width', $('#search_term').width()+80+'px');
     }
     $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
@@ -68,28 +68,27 @@ app.apartments.prototype = {
     $("#term").val(ui.item.term);
     
     $("#term_address").val(ui.item.term_address);
+    $("#term_zipcode").val(ui.item.term_zipcode);
     $("#neighborhoods").val(ui.item.neighborhoods);
     $("#apt-search-txt-form").val(ui.item.search_term);
-    $('#apt-search-form').find('.in_header').click();
-    if($('#home-search-btn, #home-search-btn-mob').hasClass('disabled')){
-      $('#home-search-btn, #home-search-btn-mob').removeClass('disabled')
-    }
+    $('#apt-search-form').find('.search-btn-submit').click();
     $('.no-match-link').addClass('hidden');
     //home page
-    $('#home-search-btn').click();
+    $('.search-btn-submit').click();
     if($("ul.ui-autocomplete").is(":visible")) {
       $("ul.ui-autocomplete").hide();
     }
     return false;
   },
+  
   _close: function(){
     //Hiding no match found - add new building link
-     if(!$("ul.ui-autocomplete").is(":visible")) {
-        $("ul.ui-autocomplete").show();
-      }
-      else{
-        setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
-      }
+    if(!$("ul.ui-autocomplete").is(":visible")) {
+      $("ul.ui-autocomplete").show();
+    }
+    else{
+      setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
+    }
     
   }
 

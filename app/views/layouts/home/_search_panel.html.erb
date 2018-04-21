@@ -1,20 +1,7 @@
 <div class="home-search-form">
   <%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search', role: 'form' do %>
     <div class="search-elem-input">
-      <div class="input-group">
-        <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: "form-control", placeholder: 'Search by Neighborhood, ZipCode, Address, Building' %>
-        <span class="input-group-btn"><a class="btn btn-blue" style="font-size: 15px;"><span class="icon-magnifier"></span></a></span>
-      </div>
-      <%= hidden_field_tag 'term', nil %>
-      <%= hidden_field_tag 'term_address', nil %>
-      <%= hidden_field_tag 'neighborhoods', nil %>
-      <%=render partial: 'layouts/shared/no_match' %>
-    </div>
-
-    <div class="search-elem-sbmt">
-      <div class="form-group text-center padding-top-10 visible-xs">
-        <%= submit_tag 'Search', class: 'btn btn-blue disabled hidden', id: 'home-search-btn' %>
-      </div>
+      <%=render partial: 'home/search_form' %>
     </div>
   <%end%>
 </div>

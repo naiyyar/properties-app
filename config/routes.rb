@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   # end
 
   get '/search', to: 'home#search', as: 'search'
+  get '/auto_search', to: 'home#auto_search', as: 'auto_search'
   get '/terms_of_service', to: 'home#tos', as: 'tos'
   
   resources :reviews

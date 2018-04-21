@@ -554,7 +554,7 @@
 
     //clear text search
     $('.clearSearchText').click(function(){
-        $("#apt-search-txt").val('');
+        $("#search_term").val('');
     })
 
     //clearing out unit modal fields on building show page
@@ -611,10 +611,12 @@
       $('.loading').removeClass('hidden');
     });
 
-    $("#apt-search-txt-searchpage, #apt-search-txt").click(function () {
+    $("#apt-search-txt-searchpage, #search_term").click(function () {
         $(this).select();
     });
-
-    build_map(true);
+    
+    if($('#mapViewSearch').length > 0){
+        build_map(true);
+    }
 
 })(jQuery);

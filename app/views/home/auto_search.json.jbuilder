@@ -27,7 +27,7 @@ if @buildings_by_name.present? #and @buildings_by_address.blank? => Removed due 
     else
       json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
     end
-    json.term "#{building.building_street_address}"
+    json.term_address "#{building.building_street_address}"
   end
 end
 
@@ -43,7 +43,8 @@ if @buildings_by_zipcode.present?
   json.array! @buildings_by_zipcode do |building|
     json.id building.id
     #if building.id == @buildings_by_zipcode.first.id
-      json.search_term "#{building.zipcode} - #{building.city}, #{building.state}"
+    json.search_term "#{building.zipcode} - #{building.city}, #{building.state}"
+    json.term_zipcode "#{building.zipcode}"
     #else
     #  json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
     #  json.term "#{building.building_street_address}"

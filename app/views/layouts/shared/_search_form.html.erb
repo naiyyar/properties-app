@@ -1,26 +1,13 @@
-<!-- <div class="pull-left neighborhoods-dropdown visible-xs" style="margin-top: 9px;">
-  <div class="btn-group">
-    <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle" style="min-width: 121px;">
-      <span class="dropdown-label"><%#= params[:neighborhoods].present? ? params[:neighborhoods] : 'Neighborhoods'  %></span> &nbsp;<span class="caret"></span>
-    </button>
-  </div>
-</div> -->
-
 <div class="searchContainer pull-left">
 	<span class="searchIcon icon-magnifier"></span>
 	<span class="fa fa-times-circle fa-2x clearSearchText visible-xs visible-sm visible-md"></span>
 	<div class="search-elem-input">
-		<%#= text_field_tag 'apt-search-txt-searchpage', params['apt-search-txt'], placeholder: 'Neighborhood, ZipCode, Address, Building' %>
 		<%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search apt-search-shared', role: 'form' do %>
-		  <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: 'apt-search-text-shared', placeholder: 'Neighborhood, ZipCode, Address, Building'%>
-		  <%=render partial: 'layouts/shared/no_match' %>
-		  <%= hidden_field_tag 'term', nil %>
-		  <%= hidden_field_tag 'term_address', nil %>
-		  <%= hidden_field_tag 'neighborhoods', params[:neighborhoods] %>
-		  <%= submit_tag 'Search', class: 'btn btn-primary in_header hide' %>
+		  <%=render partial: 'home/search_form' %>
 		<%end%>
 	</div>
 </div>
+
 <% if @manhattan_neighborhoods.present? %>
 	<div class="pull-left neighborhoods-dropdown hidden-xs" style="margin-top: 9px;">
 	  <div class="btn-group">
