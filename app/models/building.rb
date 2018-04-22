@@ -46,9 +46,8 @@ class Building < ActiveRecord::Base
                 }
 
   pg_search_scope :text_search_by_building_name, against: [:building_name],
-                  :using => { :tsearch=> { prefix: true }, :trigram => {
-                  :threshold => 0.3
-                }}
+                  :using => { :tsearch=> { prefix: true }#, :trigram => {:threshold => 0.3}
+                  }
 
   pg_search_scope :search_by_street_address, against: [:building_street_address],
     :using => {:tsearch=> { prefix: true }, :trigram=> {
@@ -98,9 +97,7 @@ class Building < ActiveRecord::Base
   end
 
   def self.search_by_building_name(criteria)
-    regexp = /#{criteria}/i;
-    results = Building.text_search_by_building_name(criteria).order(:building_name)#.to_a.uniq(&:building_name)
-    results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+    results = Building.text_search_by_building_name(criteria).reorder('building_name ASC')
   end
 
   def self.buildings_in_neighborhood params
@@ -109,6 +106,15 @@ class Building < ActiveRecord::Base
 
   def self.buildings_in_city params, city
     where("city @@ :q" , q: city)
+  end
+
+  #Contribute search method
+  def self.text_search(term)
+    if term.present?
+      search(term)
+    else
+      self.all
+    end
   end
 
   def recommended_percent
@@ -137,14 +143,6 @@ class Building < ActiveRecord::Base
       info_count += unit.rental_price_histories.count
     end
     info_count
-  end
-
-  def self.text_search(term)
-    if term.present?
-      search(term)
-    else
-      self.all
-    end
   end
 
   def no_of_units
