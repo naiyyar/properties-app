@@ -67,7 +67,7 @@ class HomeController < ApplicationController
       end
     else
       building = Building.where(building_street_address: params[:term_address])
-      redirect_to building_path(building.first, 'search_term' => params['search_term']) if building.present?
+      redirect_to building_path(building.first) if building.present?
     end
     
     if params['search_term'].present? and params['search_term'].split(',')[0] == 'New York'

@@ -1,15 +1,20 @@
-<% if params[:action] == 'index' and params[:controller] == 'home' %>
-	<div class="input-group">
-	  <%= text_field_tag 'search_term', params['search_term'], class: "form-control", placeholder: 'Search by Neighborhood, ZipCode, Address, Building' %>
-	  <span class="input-group-btn"><a class="btn btn-blue" style="font-size: 15px;"><span class="icon-magnifier"></span></a></span>
-	</div>
-<%else%>
-	<%= text_field_tag 'search_term', params['search_term'], class: 'apt-search-text-shared', placeholder: 'Neighborhood, ZipCode, Address, Building'%>
-<%end%>
+<div class="apt-search" id="apt-search-form">
+<%#= form_tag '/search', method: :get, id: 'apt-search-form', class: 'apt-search', role: 'form' do %>
+	<% placeholder = 'Search by Neighborhood, ZipCode, Address, Building'%>
+	<% if params[:action] == 'index' and params[:controller] == 'home' %>
+		<div class="input-group">
+		  <%= text_field_tag 'search_term', searched_term, class: 'form-control', placeholder: placeholder%>
+		  <span class="input-group-btn"><a class="btn btn-blue" style="font-size: 15px;"><span class="icon-magnifier"></span></a></span>
+		</div>
+	<%else%>
+		<%= text_field_tag 'search_term', searched_term, class: 'apt-search-text-shared', placeholder: placeholder %>
+	<%end%>
 
-<%= hidden_field_tag 'term_address', nil %>
-<%= hidden_field_tag 'term_zipcode', nil %>
-<%= hidden_field_tag 'neighborhoods', nil %>
-<%=render partial: 'layouts/shared/no_match' %>
+	<%#= hidden_field_tag 'term_address', nil %>
+	<%#= hidden_field_tag 'term_zipcode', nil %>
+	<%#= hidden_field_tag 'neighborhoods', nil %>
+	<%=render partial: 'layouts/shared/no_match' %>
 
-<%= submit_tag 'Search', class: 'btn btn-primary search-btn-submit hide' %>
+	<%#= submit_tag 'Search', class: 'btn btn-primary search-btn-submit hide' %>
+<%#end%>
+</div>

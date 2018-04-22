@@ -33,12 +33,13 @@ app.apartments.prototype = {
     
     if($('.apt-search-text-shared').length >= 1){
       $('ul.ui-autocomplete').css('width', $('.apt-search-text-shared').width()+20+'px');
+      $('.no-match-link').addClass('no-match-position-left');
     }else{
       $('ul.ui-autocomplete').css('width', $('#search_term').width()+80+'px');
     }
     $('.no-match-link').css('top',ul_height+'px');
     $('.no-match-link').removeClass('hidden');
-    $('.no-match-link').css('width', $('ul.ui-autocomplete').width()+2+'px');
+    $('.no-match-link').css('width',$('ul.ui-autocomplete').width()+2+'px');
   },
 
   _render: function(ul, item) {
@@ -65,16 +66,32 @@ app.apartments.prototype = {
 
   _select: function(e, ui) {
     this._input.val(ui.item.search_term);
-    $("#term").val(ui.item.term);
-    
-    $("#term_address").val(ui.item.term_address);
-    $("#term_zipcode").val(ui.item.term_zipcode);
-    $("#neighborhoods").val(ui.item.neighborhoods);
-    $("#apt-search-txt-form").val(ui.item.search_term);
-    $('#apt-search-form').find('.search-btn-submit').click();
+    //$("#term").val(ui.item.term);
+    term_address = '';
+    term_zipcode = '';
+    neighborhoods = '';
+    url = '';
+    if(ui.item.term_address != undefined){
+      term_address = ui.item.term_address
+      url = '/search?search_term='+ui.item.search_term+'&term_address='+term_address;
+    }else if(ui.item.term_zipcode != undefined){
+      term_zipcode = ui.item.term_zipcode
+      url = '/search?search_term='+ui.item.search_term+'&term_zipcode='+term_zipcode;
+    }else{
+      neighborhoods = ui.item.neighborhoods
+      url = '/search?search_term='+ui.item.search_term+'&neighborhoods='+neighborhoods;
+    }
+    //$("#term_address").val(ui.item.term_address);
+    //$("#term_zipcode").val(ui.item.term_zipcode);
+    //$("#neighborhoods").val(ui.item.neighborhoods);
+    //$("#apt-search-txt-form").val(ui.item.search_term);
     $('.no-match-link').addClass('hidden');
-    //home page
-    $('.search-btn-submit').click();
+    
+    //Submitting search form
+    //$('.search-btn-submit').click();
+    window.location = url;
+
+    //hiding autocomplete search results
     if($("ul.ui-autocomplete").is(":visible")) {
       $("ul.ui-autocomplete").hide();
     }
