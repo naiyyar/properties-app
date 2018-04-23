@@ -8,6 +8,10 @@ module HomeHelper
 		}
 	end
 
+	def ny_cities
+		['MANHATTAN', 'BROOKLYN','QUEENS','BRONX']
+	end
+
 	def manhattan_borough
 		[
 			'Harlem',
@@ -94,7 +98,19 @@ module HomeHelper
 	end
 
 	def search_link neighborhood, borough
-		"/search?apt-search-txt=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
+		"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
+	end
+
+	def searched_term
+		if @building.present?
+			if @building.building_name.present? and @building.building_name != @building.building_street_address
+				"#{@building.building_name} - #{@building.street_address}"
+			else
+				"#{@building.street_address}"
+			end
+		else
+			params['search_term']
+		end
 	end
 
 end

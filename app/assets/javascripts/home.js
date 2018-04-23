@@ -342,15 +342,6 @@
         $('#signin').modal('show');
     });
 
-    //Disabling search btn when search field is blank
-    $('#apt-search-txt').on('input', function(){
-        if($('#apt-search-txt').val() == ''){
-            if(!$('#home-search-btn').hasClass('disabled')){
-                $('#home-search-btn').addClass('disabled');
-            }
-        }
-    })
-        
     // //Hiding not building link element
     $('#hero-container, .highlight, .contribute-wrapper').click(function() {
         if($("ul.ui-autocomplete").is(":visible")) {
@@ -370,12 +361,12 @@
     // });
 
     //#home page search when enter keypressed
-    $("input#apt-search-txt").keypress(function(e){
-      if (e.which == 13) {
-        e.preventDefault();
-        $("#home-search-btn").click();
-      }
-    });
+    // $("input#apt-search-txt").keypress(function(e){
+    //   if (e.which == 13) {
+    //     e.preventDefault();
+    //     $(".search-btn-submit").click();
+    //   }
+    // });
 
     //Searching building on neighborhood click
     $('.borough-neighborhood').click(function(e){
@@ -384,9 +375,9 @@
         var nbh = $(this).data('nhname');
         //var city = $(this).data('city');
         $('#apt-search-txt').val(nbh);
-        $('#home-search-btn').removeClass('disabled').click();
-        if($('.in_header').length > 0){
-            $('.in_header').click();
+        $('.search-btn-submit').click();
+        if($('.search-btn-submit').length > 0){
+            $('.search-btn-submit').click();
         }
     })
 

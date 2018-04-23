@@ -37,6 +37,10 @@
     box-shadow: none !important;
 }
 
+.no-match-position-left{
+    left: 33px !important;
+}
+
 .about_us{
     margin-left: 0px !important;
     background: transparent;
@@ -5729,6 +5733,9 @@ blockquote {
 }
 
 @media screen and (max-width: 767px) {
+    .no-match-position-left{
+        left: 20px !important;
+    }
     .about_us{
         height: 200px;
         width: 100%;

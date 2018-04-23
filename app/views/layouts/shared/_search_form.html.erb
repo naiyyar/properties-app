@@ -1,26 +1,9 @@
-<!-- <div class="pull-left neighborhoods-dropdown visible-xs" style="margin-top: 9px;">
-  <div class="btn-group">
-    <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle" style="min-width: 121px;">
-      <span class="dropdown-label"><%#= params[:neighborhoods].present? ? params[:neighborhoods] : 'Neighborhoods'  %></span> &nbsp;<span class="caret"></span>
-    </button>
-  </div>
-</div> -->
-
 <div class="searchContainer pull-left">
 	<span class="searchIcon icon-magnifier"></span>
 	<span class="fa fa-times-circle fa-2x clearSearchText visible-xs visible-sm visible-md"></span>
-	<div class="search-elem-input">
-		<%#= text_field_tag 'apt-search-txt-searchpage', params['apt-search-txt'], placeholder: 'Neighborhood, ZipCode, Address, Building' %>
-		<%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search apt-search-shared', role: 'form' do %>
-		  <%= text_field_tag 'apt-search-txt', params['apt-search-txt'], class: 'apt-search-text-shared', placeholder: 'Neighborhood, ZipCode, Address, Building'%>
-		  <%=render partial: 'layouts/shared/no_match' %>
-		  <%= hidden_field_tag 'term', nil %>
-		  <%= hidden_field_tag 'term_address', nil %>
-		  <%= hidden_field_tag 'neighborhoods', params[:neighborhoods] %>
-		  <%= submit_tag 'Search', class: 'btn btn-primary in_header hide' %>
-		<%end%>
-	</div>
+	<%=render partial: 'home/search_form' %>
 </div>
+
 <% if @manhattan_neighborhoods.present? %>
 	<div class="pull-left neighborhoods-dropdown hidden-xs" style="margin-top: 9px;">
 	  <div class="btn-group">
@@ -29,32 +12,16 @@
 	    </button>
 	    <div class="dropdown-menu dropdown-select">
 	    	<div class="row">
-	    		<div class="col-xs-3 col-md-3 col-lg-3">
-	          <h2 class="osLight h-r">MANHATTAN</h2>
-	          <ul class="blog-r-nav text-left">
-	        		<% @manhattan_neighborhoods['MANHATTAN'].sort.each do |nb| %>
-	            	<li><a href="<%=search_link(nb, 'MANHATTAN')%>"><%= nb %></a></li>
-	            <%end%>
-	          </ul>
-	        </div>
-
-	    		<div class="col-xs-3 col-md-3 col-lg-3">
-	          <h2 class="osLight h-r">BROOKLYN</h2>
-	          <ul class="blog-r-nav text-left">
-	        		<% @manhattan_neighborhoods['BROOKLYN'].sort.each do |nb| %>
-	            	<li><a href="<%=search_link(nb, 'BROOKLYN')%>"><%= nb %></a></li>
-	            <%end%>
-	          </ul>
-	        </div><!-- end brooklyn -->
-
-	        <div class="col-xs-3 col-md-3 col-lg-3">
-	          <h2 class="osLight h-r">QUEENS</h2>
-	          <ul class="blog-r-nav text-left">
-	        		<% @manhattan_neighborhoods['QUEENS'].sort.each do |nb| %>
-	            	<li><a href="<%=search_link(nb, 'QUEENS')%>"><%= nb %></a></li>
-	            <%end%>
-	          </ul>
-	        </div><!-- end queesns -->
+	    		<% ['MANHATTAN', 'BROOKLYN','QUEENS'].each do |area| %>
+		    		<div class="col-xs-3 col-md-3 col-lg-3">
+		          <h2 class="osLight h-r">MANHATTAN</h2>
+		          <ul class="blog-r-nav text-left">
+		        		<% @manhattan_neighborhoods[area].sort.each do |nb| %>
+		            	<li><a href="<%=search_link(nb, area)%>"><%= nb %></a></li>
+		            <%end%>
+		          </ul>
+		        </div>
+		      <%end%>
 
 	         <div class="col-xs-3 col-md-3 col-lg-3">
 	          <h2 class="osLight h-r">BRONX (Coming Soon)</h2>
