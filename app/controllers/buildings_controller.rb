@@ -23,6 +23,13 @@ class BuildingsController < ApplicationController
     @search_bar_hidden = :hidden
   end
 
+  def import
+    @building = Building.find(params[:building_id])
+    @building.import_reviews(params[:file])
+    
+    redirect_to :back, notice: 'File imported.'
+  end
+
   def show
     @building = Building.find(params[:id])
 

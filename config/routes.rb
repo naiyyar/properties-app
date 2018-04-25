@@ -58,7 +58,9 @@ Rails.application.routes.draw do
 
     collection do
       get :contribute
+      post :import
     end
+    
   end
 
   resources :units do

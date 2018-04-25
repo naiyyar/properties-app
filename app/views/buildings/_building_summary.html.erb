@@ -5,7 +5,11 @@
           <h1 class="pageTitle">
             <%= @building.building_name_or_address %> 
             <% if user_signed_in? %>
-              <%= link_to "Edit", edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right' %>
+              <%= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right' %>
+            <%end%>
+            <% if current_user and current_user.has_role?(:admin) %>
+              <%= link_to 'Import excel', '#importReviews', class: 'btn btn-xs btn-blue pull-right', 'data-toggle' => 'modal' %>
+              <%= render partial: 'reviews/import_reviews_form' %>
             <%end%>
           </h1>
           <div class="address"><span class="icon-location-pin"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>

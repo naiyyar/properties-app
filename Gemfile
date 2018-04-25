@@ -22,6 +22,10 @@ gem 'underscore-rails'
 
 gem 'geocoder'
 
+#importing csv/excel
+gem 'roo'
+gem "iconv", "~> 1.0.3"
+
 #checking if given email address is real
 gem 'email_verifier'
 
