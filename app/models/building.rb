@@ -228,6 +228,7 @@ class Building < ActiveRecord::Base
       row = Hash[[header, spreadsheet.row(i)].transpose ]
       rev = Review.new
       rev.attributes = row.to_hash.slice(*row.to_hash.keys)
+      
       rev[:reviewable_id] = self.id
       rev[:reviewable_type] = 'Building'
       rev[:anonymous] = true
@@ -239,17 +240,19 @@ class Building < ActiveRecord::Base
       rev.save!
 
       # building_id represents score here
-      user.create_rating(row['building_id'], self, rev.id)
+      if rev.present? and rev.id.present?
+        user.create_rating(row['building_id'], self, rev.id)
 
-      if row['building_address'] == 'true' or row['building_address'] == 'Yes'
-        @vote = user.vote_for(self)
-      else
-        @vote = user.vote_against(self)
-      end
-      
-      if @vote.present?
-        @vote.review_id = rev.id
-        @vote.save
+        if row['building_address']
+          @vote = user.vote_for(self)
+        else
+          @vote = user.vote_against(self)
+        end
+        
+        if @vote.present?
+          @vote.review_id = rev.id
+          @vote.save
+        end
       end
 
     end
