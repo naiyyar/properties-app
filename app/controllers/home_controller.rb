@@ -67,6 +67,8 @@ class HomeController < ApplicationController
       end
     else
       building = Building.where(building_street_address: params[:term_address])
+      #searching because some address has extra white space in last so can not match exactly with address params
+      building = Building.where('building_street_address like ?', "%#{params[:term_address]}%") if building.blank?
       redirect_to building_path(building.first) if building.present?
     end
     
