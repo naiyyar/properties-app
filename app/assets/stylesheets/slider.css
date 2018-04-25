@@ -43,7 +43,7 @@
   -ms-transform: translateY(-50%) translateX(-50%) scale(1.1,0.7);
   transform: translateY(-50%) translateX(-50%) scale(1.1,0.7);
   -webkit-transition: all 0.3s ease;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .rotateslider-container .arrow {
@@ -59,7 +59,7 @@
   /*color: #fff;*/
   color: #898989;
   text-align: center;
-  z-index: 1000;
+  z-index: 999;
   font-size: 11px;
 }
 
