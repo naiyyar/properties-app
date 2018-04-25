@@ -111,8 +111,8 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:review_title, :building_id, :user_id, :reviewable_id, :reviewable_type,
-                                    :pros, :cons, :other_advice, :tenant_status, :stay_time, :anonymous, :tos_agreement, :last_year_at_residence)
+    params.require(:review).permit!
+    #(:review_title, :building_id, :user_id, :reviewable_id, :reviewable_type,:pros, :cons, :other_advice, :tenant_status, :stay_time, :anonymous, :tos_agreement, :last_year_at_residence, :scraped)
   end
 
   def find_reviewable
