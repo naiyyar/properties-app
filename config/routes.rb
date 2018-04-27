@@ -23,7 +23,10 @@ Rails.application.routes.draw do
   get '/auto_search', to: 'home#auto_search', as: 'auto_search'
   get '/terms_of_service', to: 'home#tos', as: 'tos'
   
-  resources :reviews
+  resources :reviews do 
+    get :destroy_scraped_reviews, on: :collection
+  end
+  
   resources :useful_reviews
   resources :uploads do
     member do 

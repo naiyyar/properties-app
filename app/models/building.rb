@@ -221,7 +221,7 @@ class Building < ActiveRecord::Base
   end
 
   def import_reviews file
-    user = User.find(16)
+    user = User.find_by_email('reviews@transparentcity.co')
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).each do |i|

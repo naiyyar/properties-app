@@ -24,6 +24,11 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy_scraped_reviews
+    Review.where(scraped: true).destroy_all
+    redirect_to :back, notice: 'Destroyed successfully'
+  end
+
   def show
     @review = Review.find(params[:id])
   end
