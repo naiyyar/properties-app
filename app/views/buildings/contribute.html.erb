@@ -4,16 +4,16 @@
 		<%#= render partial: 'layouts/shared/contribution_for' %>
 		<!-- <div class="row"> -->
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-				<div class="panel-heading">
+				<!-- <div class="panel-heading">
 					<h2>Your Next Review Awaits</h2>
 					<h4>Share your NYC apartment experience with the community</h4>
-				</div>
+				</div> -->
 	  		
 	  		<div class="panel-body">
 					<div id="search-form" class="<%= params[:results].present? ? 'hide' : '' %>">
 						<%= form_tag '/reviews/new', method: :get, id: 'search_item_form', class: 'form-horizontal' do %>
 		        	<!-- adding value on the basis of selected radio button -->
-							<h2>Find your building</h2>
+							<h4>Find Your Building</h4>
 		        	<%= hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution', id: 'building_contribution' %>
 		        	
 		        	<%= hidden_field_tag :user_id, current_user.present? ? current_user.id : '' %>
@@ -23,7 +23,7 @@
 					      	<%= text_field_tag 'buildings-search-txt', @building.present? ? @building.building_street_address : nil, class: 'form-control', placeholder: 'Search building by name or address', 'data-buildingid' => @building.present? ? @building.id : '', required: 'required' %>
 					      	<%= hidden_field_tag 'zip', @building.present? ? @building.zipcode : '' %>
 					      	<div class="results" id="buildings-search-results" style="position: relative;">
-					      		<div class="no-match-link hidden"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0);" id="add_new_building" class="add_new_building"> Add a building</a></div>
+					      		<div class="no-match-link hidden"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0);" id="add_new_building" class="add_new_building"> Add Your Building</a></div>
 					      	</div>
 					      	<ul id="buildings-search-no-results" class="search-no-result"></ul>
 						    </div>

@@ -29,7 +29,13 @@
   border: 0;
   border-left: 5px solid transparent;
   position: relative;
-  height: 5.5em;
+  height: 3.5em;
+}
+
+.buildings-search  .no-result-li{
+  line-height: 3.5em;
+  background-color: #eee;
+  text-align: center;
 }
 
 .buildings-search .results .ui-state-focus {

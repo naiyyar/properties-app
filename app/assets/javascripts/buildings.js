@@ -145,14 +145,19 @@ app.buildings.prototype = {
     if(ui.content.length === 0){
       this._input.removeClass('loader');
       var ul = $("#buildings-search-no-results");
-      var markup = [
-        '<p class="address"><b>Building Not Here?</b></p>',
-        'Contribute by<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> adding a new building</a>'
-      ];
+      // no_match_text = '<div class="no-match-link hidden">\
+      //                   <span class="address"><b>Building Not Here?</b></span>\ 
+      //                   <a href="javascript:void(0);" id="add_new_building" class="add_new_building"> Add Your Building</a>\
+      //                 </div>'
       
+      var markup = [
+        '<span class="address"><b>Building Not Here?</b></span>',
+        '<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add Your Building</a>'
+      ];
+      var search_field_width = $('#buildings-search-txt').width()+30;
       ul_li = $('<li class="ui-menu-item no-result-li">').append(markup.join(''));
       ul.html(ul_li);
-      ul.css({'display': 'block','width': '555px','top': '36px','left': '15px'});
+      ul.css({'display': 'block','width': search_field_width+'px','top': '36px','left': '15px','padding':'0px'});
       
     }
   }
