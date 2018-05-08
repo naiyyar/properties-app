@@ -114,3 +114,11 @@ ul.ui-autocomplete li.building_link_li a:hover, .no-match-link a:hover{
   left: 33px;
   top: 105px;
 }
+.ui-menu .ui-menu-item{
+  border-bottom: 1px solid #eee !important;
+  padding: 12px 10px !important;
+}
+
+.ui-menu-item p{
+  margin: 0px;
+}
