@@ -5,7 +5,7 @@ class UnitsController < ApplicationController
   # GET /units
   # GET /units.json
   def index
-    @units = Unit.order('created_at desc')
+    @units = Unit.order('created_at desc').includes(:building)
   end
 
   # GET /units/1

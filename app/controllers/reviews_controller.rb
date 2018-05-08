@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
     elsif params[:unit_id].present?
       @reviews = Review.where(reviewable_id: params[:unit_id]).order('created_at desc')
     else
-      @reviews = Review.order('created_at desc')
+      @reviews = Review.order('created_at desc').includes(:reviewable, :user)
     end
   end
 

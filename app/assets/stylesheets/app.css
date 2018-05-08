@@ -4,6 +4,9 @@
 *::-moz-focus-inner {
     border: 0;
 }
+body{
+    background-color: #f3f3f3 !important;
+}
 .notransition * {
     -webkit-transition: none !important;
     -moz-transition: none !important;

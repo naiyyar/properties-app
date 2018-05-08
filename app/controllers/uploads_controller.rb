@@ -16,7 +16,7 @@ class UploadsController < ApplicationController
 	end
 
   def documents
-    @documents = Upload.where('document_file_name is not null')
+    @documents = Upload.where('document_file_name is not null').includes(:user, :imageable)
   end
 
   def rotate

@@ -14,7 +14,7 @@
 	    	<div class="row">
 	    		<% ['MANHATTAN', 'BROOKLYN','QUEENS'].each do |area| %>
 		    		<div class="col-xs-3 col-md-3 col-lg-3">
-		          <h2 class="osLight h-r">MANHATTAN</h2>
+		          <h2 class="osLight h-r"><%=area%></h2>
 		          <ul class="blog-r-nav text-left">
 		        		<% @manhattan_neighborhoods[area].sort.each do |nb| %>
 		            	<li><a href="<%=search_link(nb, area)%>"><%= nb %></a></li>

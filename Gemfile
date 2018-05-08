@@ -125,6 +125,7 @@ group :development do
   gem 'binding_of_caller'
   gem "letter_opener"
   gem 'rack-mini-profiler', require: false
+  gem 'bullet'
 end
 
 group :production do
