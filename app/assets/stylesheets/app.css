@@ -5675,6 +5675,12 @@ blockquote {
 }
 
 /* Media Queries */
+@media screen and (min-width: 481px) {
+    /*contribute page next buttons*/
+    .next_btn_container{
+        float: right;
+    }
+}
 
 @media screen and (max-width: 1199px) {
     .home-wrapper {
@@ -6671,6 +6677,7 @@ blockquote {
     .tabsWidgetSearch ul.propList li a .info {
         max-width: 68%;
     }
+    .btn-xs-block { width: 100%; display:block; }
 }
 
 /*IE specific for header sign-in/signout button*/

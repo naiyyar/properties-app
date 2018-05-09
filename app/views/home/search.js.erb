@@ -4,9 +4,9 @@ $('#load-more-buildings').append('<%= j render partial: "search_results" %>');
 <% else %>
   $(window).off('scroll');
   $('.pagination').remove();
-  var no_match = '<div style="padding:4px;"><p class="address"><a href="/buildings/contribute?results=no-matches-found" style="color: #0075c9;"><b>No matches found? - Add a new building</b></a></p></div>'
+  var no_match = '<div style="padding:4px;"><p class="address"><a href="/buildings/contribute?results=no-matches-found" style="color: #0075c9;"><b>No matches found? - Add Your Building</b></a></p></div>'
   $('.pages-container').html(no_match)
 <% end %>
 $('.building-detail-card').html('');
-build_map(true); //Building map on infinite scroll load
+build_map(true, true); //Building map on infinite scroll load
 load_rating_stars();

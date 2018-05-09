@@ -152,7 +152,7 @@ app.buildings.prototype = {
       
       var markup = [
         '<span class="address"><b>Building Not Here?</b></span>',
-        '<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add Your Building</a>'
+        '<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> <b>Add Your Building</b></a>'
       ];
       var search_field_width = $('#buildings-search-txt').width()+30;
       ul_li = $('<li class="ui-menu-item no-result-li">').append(markup.join(''));

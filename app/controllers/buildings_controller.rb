@@ -198,11 +198,12 @@ class BuildingsController < ApplicationController
 
 
   def building_params
-    params.require(:building).permit(:neighborhood,:building_name,:user_id, :building_street_address, :photo, :latitude, :longitude,:city,:state,:phone, :zipcode, :address2,:weburl,
-                                      :pets_allowed,:laundry_facility,:parking,:doorman,:elevator,:description,:floors,:built_in,:number_of_units,:web_url, :building_type,
-                                      :management_company_run,:courtyard,:elevator,:garage,:gym,:live_in_super,:pets_allowed_cats,:pets_allowed_dogs,:roof_deck,:swimming_pool,:walk_up,
-                                      uploads_attributes:[:id,:image,:imageable_id,:imageable_type], 
-                                      units_attributes: [:id, :building_id, :name, :square_feet, :number_of_bedrooms, :number_of_bathrooms])
+    params.require(:building).permit! 
+                                      # (:neighborhood,:building_name,:user_id, :building_street_address, :photo, :latitude, :longitude,:city,:state,:phone, :zipcode, :address2,:weburl,
+                                      # :pets_allowed,:laundry_facility,:parking,:doorman,:elevator,:description,:floors,:built_in,:number_of_units,:web_url, :building_type,
+                                      # :management_company_run,:courtyard,:elevator,:garage,:gym,:live_in_super,:pets_allowed_cats,:pets_allowed_dogs,:roof_deck,:swimming_pool,:walk_up,
+                                      # uploads_attributes:[:id,:image,:imageable_id,:imageable_type], 
+                                      # units_attributes: [:id, :building_id, :name, :square_feet, :number_of_bedrooms, :number_of_bathrooms])
   end
 
   def unit_params

@@ -23,19 +23,19 @@
 					      	<%= text_field_tag 'buildings-search-txt', @building.present? ? @building.building_street_address : nil, class: 'form-control', placeholder: 'Search building by name or address', 'data-buildingid' => @building.present? ? @building.id : '', required: 'required' %>
 					      	<%= hidden_field_tag 'zip', @building.present? ? @building.zipcode : '' %>
 					      	<div class="results" id="buildings-search-results" style="position: relative;">
-					      		<div class="no-match-link hidden"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0);" id="add_new_building" class="add_new_building"> Add Your Building</a></div>
+					      		<div class="no-match-link hidden"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0);" id="add_new_building" class="add_new_building"> <b>Add Your Building</b></a></div>
 					      	</div>
 					      	<ul id="buildings-search-no-results" class="search-no-result"></ul>
 						    </div>
 					  	</section>
 
-					  	<div class="pull-right next_btn_container">
+					  	<div class="next_btn_container">
 						  	<% if params[:contribution_for].blank? %>
 						  		<!-- when wrong building is selected -->
-						  		<%= link_to 'Next','javascript:;', id: 'next_to_review_btn', class: 'btn btn-primary add_new_building' %>
+						  		<%= link_to 'Next','javascript:;', id: 'next_to_review_btn', class: 'btn btn-primary add_new_building btn-xlg btn-lg btn-xs-block' %>
 						  		<!-- when correct building is selected -->
 						  		<p></p>
-						  		<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary hidden' %>
+						  		<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary hidden btn-xlg btn-xs-block' %>
 						  	<%end%>
 				    	</div>
 				  	<%end%>
@@ -60,16 +60,16 @@
 					<%= hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution' %>
 					<%= render partial: 'buildings/building_contribute_form' %>
 					<div class="col-sm-12">
-				    <div class="pull-right">
-			      	<%= submit_tag 'Next', class: 'btn btn-primary', id: 'new_building_submit' %>
+				    <div class="next_btn_container">
+			      	<%= submit_tag 'Next', class: 'btn btn-primary btn-xlg btn-xs-block', id: 'new_building_submit' %>
 			      </div>
 			    </div>
 				<%end%>
 			<!-- </div> -->
 			
-				<div class="col-xs-12 col-sm-12">
-					<%= render partial: 'units/unit_contribute_form', locals: { page: '' }  %>
-				</div>
+				<!-- <div class="col-xs-12 col-sm-12">
+					<%#= render partial: 'units/unit_contribute_form', locals: { page: '' }  %>
+				</div> -->
 			</div>
 		<!-- </div> -->
 	</div>

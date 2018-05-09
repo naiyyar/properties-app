@@ -110,7 +110,6 @@ $(document).on 'click', '#elevator',(e) ->
 
 $(document).on 'click', '.reviewer_type',(e) ->
 	id = $(this).children().attr('id')
-	console.log(id)
 	element = $("#review_stay_time")
 	if(id == 'visitor')
 		element.addClass('hide')

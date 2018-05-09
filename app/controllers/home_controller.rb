@@ -83,6 +83,7 @@ class HomeController < ApplicationController
     @neighborhood_links = @neighborhood_links.order({ date: :desc }, { title: :asc }) if @neighborhood_links.present?
     
     if @buildings.present?
+      @buildings = @buildings.includes(:uploads, :units, :building_average, :votes).paginate(:page => params[:page], :per_page => 20)
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
         marker.lat building.latitude
 	      marker.lng building.longitude
@@ -95,7 +96,6 @@ class HomeController < ApplicationController
                                                       }
                                           )
 	    end
-      @buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
 	  end
 
   end

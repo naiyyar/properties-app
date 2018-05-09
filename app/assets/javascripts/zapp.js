@@ -283,18 +283,19 @@
         var create_sidebar = false
         build_map(create_sidebar, true); //For search split view
         if(handler != ''){
-            var gmap = handler.getMap();
-            setTimeout(function() {
-                if (gmap) {
-                    google.maps.event.trigger(gmap, 'resize');
-                }
-                var lat = parseFloat($('.lat').val());
-                var lng = parseFloat($('.lng').val());
-                var zoom = parseInt($('.zoom').val());
-                gmap.setZoom(zoom);
-                gmap.setCenter(new google.maps.LatLng(lat, lng));
+            resizeMapOnMapIconClick();
+            // var gmap = handler.getMap();
+            // setTimeout(function() {
+            //     if (gmap) {
+            //         google.maps.event.trigger(gmap, 'resize');
+            //     }
+            //     var lat = parseFloat($('.lat').val());
+            //     var lng = parseFloat($('.lng').val());
+            //     var zoom = parseInt($('.zoom').val());
+            //     gmap.setZoom(zoom);
+            //     gmap.setCenter(new google.maps.LatLng(lat, lng));
 
-            }, 300);
+            // }, 300);
         }else{
         
             resize_map();

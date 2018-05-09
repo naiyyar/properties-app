@@ -51,7 +51,7 @@ app.apartments.prototype = {
     }
     this._input.removeClass('loader');
     var items = ''
-    if(search_term != 'No matches found - Add a new building'){
+    if(search_term != 'No matches found - Add Your Building'){
       if(search_term != undefined){
         items = '<p class="address"><b>' + search_term + '</b></p>';
       }

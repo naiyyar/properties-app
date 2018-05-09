@@ -62,5 +62,5 @@ end
 
 case @result_type
 when 'no_match_found'
-  json.no_match_found 'No matches found - Add a new building'
+  json.no_match_found 'No matches found - Add Your Building'
 end

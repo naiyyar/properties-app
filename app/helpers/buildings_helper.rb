@@ -89,7 +89,8 @@ module BuildingsHelper
 			roof_deck: 'Roof Deck',
 			swimming_pool: 'Swimming Pool',
 			walk_up: 'Walk up',
-			
+			childrens_playroom: 'Childrens Playroom',
+			no_fee: 'No Fee',
 		}
 	end
 
