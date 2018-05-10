@@ -49,6 +49,7 @@
 
 		<!-- <label class='message status-not-selected text-red'>Please select a reviewer type.</label> -->
 	</div>
+	
 	<div class="col-sm-12">
 		<div class="form-group last_year_at_residence hide">
 			<label>Last Year at Residence*</label>
@@ -74,7 +75,11 @@
 		<div class="form-group">
 			<label>Pros*</label>
 			<small class="pull-right">10 words minimum</small>
-			<%= f.text_area :pros,  class: 'form-control', placeholder: "Enter 10 words minimum"%>
+			<%= f.text_area :pros,  class: 'form-control', placeholder: 'Example: The building is great for families, newly grads, students, singles, couples, dog lovers, people on a tight budget
+ 
+Great for finance bros, fashionistas, musicians, writers, retirees, software geeks, aspiring models and actresses
+ 
+Only building that allows my 100lb Rottweiler', rows: 8 %>
 			<!-- <span class='message hide pros_blank text-red'>Please add pros.</span> -->
 		</div>
 	</div>
@@ -82,17 +87,22 @@
 		<div class="form-group">
 			<label>Cons*</label>
 			<small class="pull-right">10 words minimum</small>
-			<%= f.text_area :cons,  class: 'form-control', placeholder: "Enter 10 words minimum" %>
+			<%= f.text_area :cons,  class: 'form-control', placeholder: "Example: There are too many tourists, frat bros, loud bars, and cockroaches EVERYWHERE!!!
+Not close enough to a Trader Joe's, Whole Foods
+The rent increases are kiling my seamless and alcohol budget
+Water Pressure never works, Elevators are too slow, Walls are too thin and I hear things no one should hear", rows: 8 %>
 			<!-- <span class='message hide cons_blank text-red'>Please add cons.</span> -->
 		</div>
 	</div>
+
+	<%=render partial: 'reviews/ratings' , locals: {f: f} %>
 	
-	<div class="col-sm-12">
+	<!-- <div class="col-sm-12">
 	  <div class="form-group">
 			<label>Other comments</label>
-			<%= f.text_area :other_advice,  class: 'form-control' %>
+			<%#= f.text_area :other_advice,  class: 'form-control' %>
 		</div>
-	</div>
+	</div> -->
 	
 	<div class="col-sm-12">
 		<div class="form-group">
@@ -127,17 +137,17 @@
 	</div>
 
   <div class="col-sm-12">
-  	<div class="pull-right">
+  	<div class="btn-block-container">
 		  <% if current_user %>
 		  	<%= f.hidden_field :user_id, value: current_user.id %>
 		  <%end%>
 		  <br />
 		  <% if params[:unit_id].present? %>
-		  	<%= link_to 'Cancel', unit_path(@reviewable), class: "btn btn-default" %>
+		  	<%= link_to 'Cancel', unit_path(@reviewable), class: "btn btn-default btn-xlg btn-xs-block margin-top-xs-10 hidden-xs" %>
 		  <%else%>
-		  	<%= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default" %>
+		  	<%= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default btn-xlg btn-xs-block margin-top-xs-10 hidden-xs" %>
 		  <%end%>
-		  <%= f.submit 'Submit Review', class: "btn btn-primary", id: 'submit_review' %>
+		   <%= f.submit 'Submit Review', class: "btn btn-primary btn-xlg btn-xs-block", id: 'submit_review' %>
 	  </div>
 	</div>
 <% end %>

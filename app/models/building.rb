@@ -4,7 +4,7 @@ class Building < ActiveRecord::Base
   include Imageable
   acts_as_voteable
   resourcify
-  ratyrate_rateable 'building'
+  ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
 
   validates :building_street_address, presence: true
   validates_uniqueness_of :building_street_address, scope: [:zipcode]

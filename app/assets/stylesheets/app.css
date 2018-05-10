@@ -5674,10 +5674,18 @@ blockquote {
     height: 55px;
 }
 
+.margin-top-15{
+    margin-top: 15px !important;
+}
+
+.margin-top-20{
+    margin-top: 20px !important;
+}
+
 /* Media Queries */
 @media screen and (min-width: 481px) {
     /*contribute page next buttons*/
-    .next_btn_container{
+    .next_btn_container, .btn-block-container{
         float: right;
     }
 }
@@ -5742,6 +5750,15 @@ blockquote {
 }
 
 @media screen and (max-width: 767px) {
+    textarea.form-control{
+        height: 176px !important;;
+    }
+    .table-xs, .panel-body-xs{
+        padding: 10px 0px !important;
+    }
+    .margin-top-xs-10{
+        margin-top: 10px !important;
+    }
     .no-match-position-left{
         left: 20px !important;
     }

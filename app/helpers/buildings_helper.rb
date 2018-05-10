@@ -10,6 +10,11 @@ module BuildingsHelper
 		  stars = @rating ? @rating.stars : 0
 
 		  disable_after_rate = options[:disable_after_rate] || false
+		  target       = options[:target]       || ''
+	    targetText   = options[:targetText]   || ''
+	    targetType   = options[:targetType]   || 'hint'
+	    targetFormat = options[:targetFormat] || '{score}'
+	    targetScore  = options[:targetScore]  || ''
 
 		  if disable_after_rate
 		    readonly = rating_user.present? ? !rateable_obj.can_rate?(rating_user, dimension) : true
@@ -19,7 +24,11 @@ module BuildingsHelper
 		  "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
 		  "data-disable-after-rate" => disable_after_rate,
 		  "data-readonly" => readonly,
-		  "data-star-count" => star
+		  "data-star-count" => star,
+      "data-target" => target,
+      "data-target-text" => targetText,
+      "data-target-format" => targetFormat,
+      "data-target-score" => targetScore
 		else
 			content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => 0,
 		  "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
