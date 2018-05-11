@@ -21,15 +21,16 @@
 			</div>
 		</div>
 	<%end%>
-  <div class="col-sm-12">
-	  <div class="form-group">
-	    <label>Rating*</label>
-	    	<% rating_user = current_user.present? ? current_user : nil %>
-	    	<%= rating_for_user @reviewable, rating_user, @reviewable.class.name.downcase, star: 5 %>
+  <!-- <div class="col-sm-12"> -->
+	  <!-- <div class="form-group"> -->
+	    <!-- <label>Rating*</label> -->
+	    	<%# rating_user = current_user.present? ? current_user : nil %>
+	    	<%#= rating_for_user @reviewable, rating_user, @reviewable.class.name.downcase, star: 5 %>
 	    	<!-- jqurty error code to show error is in jquery.validation.js -->
 				<!-- <span class='message hide rating-not-selected text-red'>Please select a rating.</span> -->
-		</div>
-	</div>
+		<!-- </div> -->
+	<!-- </div> -->
+	
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Reviewer Type* </label>
@@ -50,31 +51,34 @@
 		<!-- <label class='message status-not-selected text-red'>Please select a reviewer type.</label> -->
 	</div>
 	
-	<div class="col-sm-12">
-		<div class="form-group last_year_at_residence hide">
-			<label>Last Year at Residence*</label>
-			<%= f.select :last_year_at_residence, options_for_select(years), { prompt: '' },  { class: 'form-control' } %>
-			 <!-- <span class='message hide last-year-selected text-red'>Please select last year at residence.</span> -->
+	<div class="col-sm-12 col-lg-6">
+		<div class="form-group last_year_at_residence">
+			<label>Resident From*</label>
+			<%= f.select :last_year_at_residence, options_for_select(years), { prompt: '' },  { class: 'form-control resident_from_year' } %>
+			 <span class="text-red hidden start_validation_error_message">Year must be earlier</span>
 		</div>
 	</div>
-	<div class="col-sm-12 years_in_residence">
+	
+	<div class="col-sm-12 years_in_residence col-lg-6">
 		<div class="form-group">
-			<label>Number of Years in Residence*</label>
-			<%= f.select :stay_time, options_for_select(number_of_years), { prompt: '' },  { class: 'form-control' } %>
-			 <!-- <span class='message hide years-not-selected text-red'>Please select number of years in residence.</span> -->
+			<label>Resident To*</label>
+			<%= f.select :stay_time, options_for_select(years), { prompt: '' },  { class: 'form-control resident_to_year' } %>
+			 <span class="text-red hidden validation_error_message">Year must be later</span>
 		</div>
 	</div>
-	<div class="col-sm-12">
+	
+	<!-- <div class="col-sm-12">
 		<div class="form-group">
-			<label>Review Title*</label>
-			<%= f.text_field :review_title,  class: 'form-control' %>
+			<label>Review Title*</label> -->
+			<%#= f.text_field :review_title,  class: 'form-control' %>
 			<!-- <span class='message hide title_blank text-red'>Please add review title.</span> -->
-		</div>
-	</div>
+		<!-- </div> -->
+	<!-- </div> -->
+
 	<div class="col-sm-12">
 		<div class="form-group">
-			<label>Pros*</label>
-			<small class="pull-right">10 words minimum</small>
+			<label>Pros* &nbsp;&nbsp;&nbsp;<small>(10 words minimum)</small></label>
+			<div class="pull-right"><%= check_box_tag :no_pros %> No Pros</div>
 			<%= f.text_area :pros,  class: 'form-control', placeholder: 'Example: The building is great for families, newly grads, students, singles, couples, dog lovers, people on a tight budget
  
 Great for finance bros, fashionistas, musicians, writers, retirees, software geeks, aspiring models and actresses
@@ -83,10 +87,12 @@ Only building that allows my 100lb Rottweiler', rows: 8 %>
 			<!-- <span class='message hide pros_blank text-red'>Please add pros.</span> -->
 		</div>
 	</div>
+
 	<div class="col-sm-12">
 		<div class="form-group">
-			<label>Cons*</label>
-			<small class="pull-right">10 words minimum</small>
+			<label>Cons* &nbsp;&nbsp;&nbsp;<small>(10 words minimum)</small></label>
+			<!-- removing adding validation rules in zapp.js -->
+			<div class="pull-right"><%= check_box_tag :no_cons %> No Cons</div>
 			<%= f.text_area :cons,  class: 'form-control', placeholder: "Example: There are too many tourists, frat bros, loud bars, and cockroaches EVERYWHERE!!!
 Not close enough to a Trader Joe's, Whole Foods
 The rent increases are kiling my seamless and alcohol budget

@@ -4,22 +4,24 @@
 
 jQuery ->
 
-	$('#rental_price_history_end_year').on 'change',(e) ->
-		start_year = $("#rental_price_history_start_year").val()
-		end_year = $("#rental_price_history_end_year").val()
+	$('.resident_to_year').on 'change',(e) ->
+		
+		start_year = $(".resident_from_year").val()
+		end_year = $(".resident_to_year").val()
 		
 		if(start_year > end_year )
 			$('.validation_error_message').removeClass('hidden')
-			$("#rental_price_history_end_year").val('')
+			$("#resident_to_year").val('')
 		else
 			$('.validation_error_message').addClass('hidden');
 
-	$('#rental_price_history_start_year').on 'change',(e) ->
-		start_year = $("#rental_price_history_start_year").val()
-		end_year = $("#rental_price_history_end_year").val()
+	$('.resident_from_year').on 'change',(e) ->
+		start_year = $(".resident_from_year").val()
+		end_year = $(".resident_to_year").val()
+		
 		if(start_year > end_year && end_year != '')
 			$('.start_validation_error_message').removeClass('hidden');
-			$("#rental_price_history_start_year").val('')
+			$("#resident_from_year").val('')
 		else
 			$('.start_validation_error_message').addClass('hidden');
 
