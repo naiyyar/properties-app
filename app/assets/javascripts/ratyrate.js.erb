@@ -67,4 +67,15 @@ function load_rating_stars(){
 
 $(function(){
   load_rating_stars();
+
+  //setting score input name value
+  $.each($('.star'), function(i, j){
+    var dimension = $(j).data('dimension');
+    console.log($(j).children('input'));
+    //if(dimension != 'building'){
+    $(j).children('input').attr('name', 'score['+dimension+']');
+    //}
+  })
 });
+
+

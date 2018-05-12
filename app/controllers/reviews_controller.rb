@@ -62,7 +62,13 @@ class ReviewsController < ApplicationController
       @review.user_id = current_user.id
       if @review.save
         session[:after_contribute] = 'reviews' if params[:contribution].present?
-        current_user.create_rating(params[:score], @reviewable, @review.id) if params[:score].present?
+        if params[:score].present? 
+          params[:score].keys.each do |dimension|
+            # params[dimension] => score
+            current_user.create_rating(params[:score][dimension], @reviewable, @review.id, dimension) #if params[:score].present?
+          end
+        end
+        
         if params[:vote] == 'true'
           vote = current_user.vote_for(@reviewable)
         else

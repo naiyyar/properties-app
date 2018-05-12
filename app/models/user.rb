@@ -84,19 +84,19 @@ class User < ActiveRecord::Base
     self.id == object.user_id
   end
 
-  def create_rating score, rateable, review_id = nil
+  def create_rating score, rateable, review_id = nil, dimension
     rate = Rate.new
     rate.rater_id = self.id
     rate.rateable_id = rateable.id
     rate.rateable_type = rateable.class.name
-    rate.dimension = rateable.class.name.downcase
+    rate.dimension = dimension #rateable.class.name.downcase
     rate.stars = score
     rate.review_id = review_id
     rate.save
 
     #populate rating cache table
-    rating_cache = RatingCache.where(cacheable_id: rateable.id)
-    rateables = Rate.where(rateable_id: rateable.id, rateable_type: rateable.class.name)
+    rating_cache = RatingCache.where(cacheable_id: rateable.id, dimension: dimension)
+    rateables = Rate.where(rateable_id: rateable.id, rateable_type: rateable.class.name, dimension: dimension)
     if rating_cache.present?
       #updating if rateable is already present
       RatingCache.update_rating_cache(rating_cache, rateables)
@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
       rating_cache = RatingCache.new
       rating_cache.cacheable_id = rateable.id
       rating_cache.cacheable_type = rateable.class.name
-      rating_cache.dimension = rateable.class.name.downcase
+      rating_cache.dimension = dimension #rateable.class.name.downcase
       rating_cache.avg = rateables.sum(:stars)/rateables.count
       rating_cache.qty = rateables.count
       rating_cache.save

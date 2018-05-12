@@ -52,14 +52,14 @@
 	</div>
 	
 	<div class="col-sm-12 col-lg-6">
-		<div class="form-group last_year_at_residence">
+		<div class="form-group start_year_at_residence">
 			<label>Resident From*</label>
 			<%= f.select :last_year_at_residence, options_for_select(years), { prompt: '' },  { class: 'form-control resident_from_year' } %>
 			 <span class="text-red hidden start_validation_error_message">Year must be earlier</span>
 		</div>
 	</div>
 	
-	<div class="col-sm-12 years_in_residence col-lg-6">
+	<div class="col-sm-12 end_year_in_residence col-lg-6">
 		<div class="form-group">
 			<label>Resident To*</label>
 			<%= f.select :stay_time, options_for_select(years), { prompt: '' },  { class: 'form-control resident_to_year' } %>

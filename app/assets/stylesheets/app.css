@@ -40,6 +40,17 @@ body{
     box-shadow: none !important;
 }
 
+.faci-ratings{
+    width: 60%;
+    list-style: none;
+    padding: 8px 6px;
+}
+
+.faci-ratings li .star{
+    display: inline-flex;
+    float: right;
+}
+
 .no-match-position-left{
     left: 33px !important;
 }
@@ -6671,6 +6682,9 @@ blockquote {
 }
 
 @media screen and (max-width: 480px) {
+    .faci-ratings{
+        width: 100%;
+    }
     .agentAvatarImg {
         width: 30%;
     }

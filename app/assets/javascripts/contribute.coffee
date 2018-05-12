@@ -110,23 +110,31 @@ $(document).on 'click', '#elevator',(e) ->
 
 $(document).on 'click', '.reviewer_type',(e) ->
 	id = $(this).children().attr('id')
-	element = $("#review_stay_time")
+	label_year_from = $(".start_year_at_residence")
+	label_year_to = $(".end_year_in_residence")
+
+	element_year_to = $('#review_stay_time')
+	element_year_from = $('#review_last_year_at_residence')
+
+	#when current is selected... Removing default current year from Resident To
+	$('#review_stay_time option:eq(1)').prop('selected', false)
+	
 	if(id == 'visitor')
-		element.addClass('hide')
-		element.next().hide()
-		element.prev().hide()
-		$("div.last_year_at_residence").addClass('hide')
-		if(element.data('validate'))
-			element.removeAttr('data-validate')
+		label_year_from.addClass('hide')
+		label_year_to.addClass('hide')
+		
+		#removing validation rules
+		element_year_from.rules('remove', 'required')
+		element_year_to.rules('remove', 'required')
+
 	else if(id == 'former_tenant') 
-		$("div.last_year_at_residence").removeClass('hide')
-		#$("#review_last_year_at_residence").prev().show()
-		#$("#review_last_year_at_residence").next().show()
+		label_year_from.removeClass('hide')
+		label_year_to.removeClass('hide')
+		element_year_from.rules('add', 'required')
+		element_year_to.rules('add', 'required')
 	else
-		$("div.last_year_at_residence").addClass('hide')
-		$("#review_stay_time").removeClass('hide')
-		$("#review_stay_time").prev().show()
-		$("#review_stay_time").next().show()
+		$('#review_stay_time option:eq(1)').prop('selected', true)
+		element_year_from.rules('add', 'required')
 
 #preventing enter key to submit form 
 $(document).on 'keypress', 'form',(e) ->
