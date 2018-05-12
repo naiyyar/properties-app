@@ -583,7 +583,13 @@
     //$().ready(function(){
     $("#new_review").validate({
         rules: {
-            'score': 'required',
+            'score[building]': 'required',
+            'score[cleanliness]': 'required',
+            'score[noise]': 'required',
+            'score[safe]': 'required',
+            'score[health]': 'required',
+            'score[responsiveness]': 'required',
+            'score[management]': 'required',
             'review[tenant_status]': 'required',
             'review[review_title]': 'required',
             'review[stay_time]': 'required',

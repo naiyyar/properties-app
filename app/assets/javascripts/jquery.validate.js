@@ -958,7 +958,13 @@ $.extend( $.validator, {
 					if(attr_id == 'current_tenant' || attr_id == 'vote_true'){
 						elem = element.parentElement.parentElement.parentElement;
 					}
-					else if(attr_name == 'score'){
+					else if(attr_name == 'score[building]' || 
+									attr_name == 'score[cleanliness]' || 
+									attr_name == 'score[noise]' ||
+									attr_name == 'score[safe]' ||
+									attr_name == 'score[health]' ||
+									attr_name == 'score[responsiveness]' ||
+									attr_name == 'score[management]'){
 						elem = element.parentElement;
 					}
 					else if(attr_name == 'review[tos_agreement]'){

@@ -22,4 +22,4 @@ jQuery ->
 					total_count = parseInt(count_container.text())
 					count_container.text(total_count+1)
 				error: (response) ->
-					console.log(response)
+					#console.log(response)

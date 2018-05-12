@@ -67,14 +67,17 @@ function load_rating_stars(){
 
 $(function(){
   load_rating_stars();
-
-  //setting score input name value
+  //setting score input name value dimension
   $.each($('.star'), function(i, j){
     var dimension = $(j).data('dimension');
-    console.log($(j).children('input'));
-    //if(dimension != 'building'){
-    $(j).children('input').attr('name', 'score['+dimension+']');
-    //}
+    var scrore_elem = $(j).children('input');
+    //scrore_elem.attr
+    scrore_elem.attr('name', 'score['+dimension+']');
+
+    //To apply validations: Need to convert type hidden field to text
+    if($('#new_review').length > 0){
+      scrore_elem.attr('type','text').addClass('invisible');
+    }
   })
 });
 
