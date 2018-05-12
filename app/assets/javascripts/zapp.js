@@ -592,10 +592,10 @@
             'score[management]': 'required',
             'review[tenant_status]': 'required',
             'review[review_title]': 'required',
-            'review[stay_time]': 'required',
+            'review[resident_to]': 'required',
             'review[pros]': { 'required': true, 'minlength': 10 },
             'review[cons]': { 'required': true, 'minlength': 10 },
-            'review[last_year_at_residence]': 'required',
+            'review[resident_from]': 'required',
             'review[tos_agreement]': 'required',
             'vote': 'required'
         },
@@ -603,10 +603,10 @@
             'score': 'Please select a rating.',
             'review[tenant_status]': 'Please select a reviewer type.',
             'review[review_title]': 'Please add review title.',
-            'review[stay_time]': 'Please select number of years in residence.',
+            'review[resident_to]': 'Please select number of years in residence.',
             'review[pros]': {'required': 'Please add pros.', 'minlength': 'You must enter at least 10 words.'},
             'review[cons]': {'required': 'Please add cons.', 'minlength': 'You must enter at least 10 words.'},
-            'review[last_year_at_residence]': 'Please select last year at residence.',
+            'review[resident_from]': 'Please select last year at residence.',
             'vote': 'Please select recommendation.',
             'review[tos_agreement]': 'Must be accepted.'
         }

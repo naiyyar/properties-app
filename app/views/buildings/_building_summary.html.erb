@@ -32,28 +32,16 @@
               </div>
             <%end%>
           </div>
-
-          <ul class="faci-ratings">
-            <li>Cleanliness <%= rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true %></li>
-            
-            <li>Noise <%= rating_for @building, 'noise', disable_after_rate: true, readonly: true %></li>
-            <li>Safe <%= rating_for @building, 'safe', disable_after_rate: true, readonly: true %></li>
-            <li>Heat/Air/Water/Electric <%= rating_for @building, 'health', disable_after_rate: true, readonly: true %></li>
-            <li>Super Responsiveness <%= rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true %></li>
-            <li>Dealings with Management <%= rating_for @building, 'management', disable_after_rate: true, readonly: true %></li>
-          </ul>
-          <!-- <div class="favLink">(<%#=@building.reviews.count%>)</div> -->
-         
           
           <div class="clearfix"></div>
           
           <div class="stats1 property_information">
-            <%= link_to '<span class="fa fa-globe"></span> Property website'.html_safe, @building.web_url, target: '_blank' if @building.web_url.present? %>
+            <%= link_to '<span class="fa fa-globe"></span> Available Apartment Listings'.html_safe, @building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' if @building.web_url.present? %>
           </div>
           
           <div class="clearfix"></div>
           
-          <%= render partial: 'property_contribute_links', locals: { object: @building } %>
+          <%#= render partial: 'property_contribute_links', locals: { object: @building } %>
           
           <div class="clearfix"></div>
       </div>

@@ -42,9 +42,9 @@
           </div>
           <div class="btn-group">
             <% if user_signed_in? %>
-              <%= link_to '+ Photo', new_building_upload_path(building_id: object, upload_type: 'photos'), class: 'btn btn-o btn-primary' %>
+              <%= link_to '+ Photo', new_building_upload_path(building_id: object, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm' %>
             <%else%>
-              <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary'  %>
+              <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm'  %>
             <%end%>  
           </div>
           <div class="btn-group">

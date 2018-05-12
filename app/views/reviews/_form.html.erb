@@ -54,7 +54,7 @@
 	<div class="col-sm-12 col-lg-6">
 		<div class="form-group start_year_at_residence">
 			<label>Resident From*</label>
-			<%= f.select :last_year_at_residence, options_for_select(years), { prompt: '' },  { class: 'form-control resident_from_year' } %>
+			<%= f.select :resident_from, options_for_select(years), { prompt: '' },  { class: 'form-control resident_from_year' } %>
 			 <span class="text-red hidden start_validation_error_message">Year must be earlier</span>
 		</div>
 	</div>
@@ -62,7 +62,7 @@
 	<div class="col-sm-12 end_year_in_residence col-lg-6">
 		<div class="form-group">
 			<label>Resident To*</label>
-			<%= f.select :stay_time, options_for_select(years), { prompt: '' },  { class: 'form-control resident_to_year' } %>
+			<%= f.select :resident_to, options_for_select(years), { prompt: '' },  { class: 'form-control resident_to_year' } %>
 			 <span class="text-red hidden validation_error_message">Year must be later</span>
 		</div>
 	</div>
@@ -116,9 +116,9 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 			<br />
 			<div class="btn-group" data-toggle="buttons">
 			  <label class="btn btn-default">
-			  	<%= radio_button_tag 'vote', true %> <span class='icon-like'></span>
+			  	<%= radio_button_tag 'vote', true %> Yes
 			  </label>
-			  <label class="btn btn-default">
+			  <label class="btn btn-default hidden">
 			  	<%= radio_button_tag 'vote', false %> <span class='icon-dislike'></span>
 			  </label>
 			</div>

@@ -39,14 +39,19 @@ body{
 .pagination{
     box-shadow: none !important;
 }
-
-.faci-ratings{
-    width: 60%;
-    list-style: none;
-    padding: 8px 6px;
+.aggregate-ratings{
+    background-color: #fff;
 }
-
-.faci-ratings li .star{
+.aggregate-ratings ul{
+    width: 70%;
+    list-style: none;
+    padding: 10px 20px;
+    margin: 0px;
+}
+.aggregate-ratings ul li{
+    padding: 4px 0px;
+}
+.aggregate-ratings ul li .star{
     display: inline-flex;
     float: right;
 }
@@ -286,6 +291,10 @@ h3.unit_name_header{
 }
 .home-header-userProfile{
     padding-left: 16px;
+}
+
+.padding-left-20{
+    padding-left: 20px !important;
 }
 
 .firstLetter{
@@ -2370,6 +2379,7 @@ a.card ul.cardFeat li span, div.card ul.cardFeat li span {
 .singleTop {
     background-color: #fff;
     border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 10px;
 }
 .singleTop .summary {
     padding: 20px 20px 0 20px;
@@ -2541,7 +2551,7 @@ h1.pageTitle {
     margin-bottom: 10px;
 }
 .comments {
-    padding: 45px 20px 83px 20px;
+    padding: 0px 14px 83px 20px;
 }
 .comment {
     padding-bottom: 20px;
@@ -5685,6 +5695,10 @@ blockquote {
     height: 55px;
 }
 
+.margin-top-10{
+    margin-top: 10px !important;
+}
+
 .margin-top-15{
     margin-top: 15px !important;
 }
@@ -6682,7 +6696,7 @@ blockquote {
 }
 
 @media screen and (max-width: 480px) {
-    .faci-ratings{
+    .aggregate-ratings ul{
         width: 100%;
     }
     .agentAvatarImg {

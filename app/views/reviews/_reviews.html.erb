@@ -24,8 +24,17 @@
 
     <div class="commentBody">
       <div class="commentTime" style="float: none;"><span class="icon-clock"></span> <%= review.created_at.strftime("%b %d, %Y") %></div>
-      <p class="user-rating"><%= rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %></p>
-      <p><%= review.review_title %> </p>
+      <div class="tenantStatus" style="float: none;">
+        <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> <%= 'Tenant:' if review.tenant_status != 'visitor'%>
+        <% if review.tenant_status != 'visitor' %>
+          <%= "#{review.resident_from} - " if review.resident_from.present? %><%= "(#{review.resident_to})" if review.resident_to.present? %>
+        <%end%>
+      </div>
+
+      <%= rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id %>
+      
+      <p><%#= review.review_title %> </p>
+      
       <div class="prosCons">
         <% if review.pros.present? %>
           <b>Pros:</b><span> <%= simple_format(review.pros) %></span>
@@ -38,20 +47,13 @@
         <%end%>
       </div>
       <div class="commentActions">
-        <div class="visible-xs visible-sm lastYearInResidence"><%= "Last year in residence: #{review.last_year_at_residence}" if review.last_year_at_residence.present? %> </div>
+        <!-- <div class="visible-xs visible-sm lastYearInResidence"><%#= "Last year in residence: #{review.last_year_at_residence}" if review.last_year_at_residence.present? %> </div> -->
         <ul class="tenant_info">
           <%if review.user.votes.where(vote: true, review_id: review.id).present? %>
             <li><a href="#"><span class="fa fa-thumbs-up recommended"></span></a></li>
           <%else%>
             <li><a href="#"><span class="fa fa-thumbs-down"></span></a></li>                 
           <%end%>
-          <li>Tenant: <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> 
-            <% if review.tenant_status != 'visitor' %>
-              <%= "(#{review.stay_time})" if review.stay_time.present? %>
-            <%end%>
-          </li> 
-          <li class="hidden-xs hidden-sm"><%= "Last year in residence: #{review.last_year_at_residence}" if review.last_year_at_residence.present? %> 
-          </li> 
         </ul>
       </div>
     </div>

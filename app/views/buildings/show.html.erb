@@ -19,8 +19,14 @@
       </div>
     <%else%>
       <div class="sliderLink">
-        <span class="text-danger">No photos are available.</span>
-        <%#= render partial: 'uploads/upload_link', locals: { object: @building }%>
+        <p class="text-danger">No photos are available.</p>
+        
+        <% if user_signed_in? %>
+          <%= link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm' %>
+        <%else%>
+          <%= link_to 'Add Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm'  %>
+        <%end%>  
+      
       </div>
     <%end%>
   </div>
@@ -28,8 +34,19 @@
   <%= render partial: 'building_amenities' %>
 
   <div class="clearfix"></div>
-
-  <div class="tabsContainer" style="margin-top: 8px;" id="reviewsContainer">
+  <div class="aggregate-ratings">
+   <ul>
+      <li>Cleanliness <%= rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true %></li>
+      
+      <li>Noise <%= rating_for @building, 'noise', disable_after_rate: true, readonly: true %></li>
+      <li>Do you feel safe in your building? <%= rating_for @building, 'safe', disable_after_rate: true, readonly: true %></li>
+      <li>Heat/Air/Water/Electric <%= rating_for @building, 'health', disable_after_rate: true, readonly: true %></li>
+      <li>Super Responsiveness <%= rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true %></li>
+      <li>Dealings with Management <%= rating_for @building, 'management', disable_after_rate: true, readonly: true %></li>
+    </ul>
+  </div>
+  <div class="clearfix"></div>
+  <div class="tabsContainer" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
       <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "BUILDING REVIEWS (#{ @building.reviews.count })"%></a></li>
       <li><a href="#unit_reviews" role="tab" data-toggle="tab"><%= 'UNIT REVIEWS'%> (<%= @unit_review_count %>)</a></li>
@@ -42,11 +59,14 @@
       <div class="tab-pane fade in active" id="buildings">
         <div class="comments">
           <% if @building.reviews.present? %>
+            <div class="text-right" style="text-align: right;padding-bottom: 15px;">
+              <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
+            </div>
             <% @building.reviews.includes(:user).order('created_at desc').each do |review| %>
               <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
             <% end %>
           <%else%>
-            <p>There are no reviews for this property. Be the first to add a review on this property.</p>
+            <p>There are no reviews for this building. Be the first to add your review for this building.</p>
             <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
           <%end%>
         </div>

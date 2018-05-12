@@ -113,11 +113,11 @@ $(document).on 'click', '.reviewer_type',(e) ->
 	label_year_from = $(".start_year_at_residence")
 	label_year_to = $(".end_year_in_residence")
 
-	element_year_to = $('#review_stay_time')
-	element_year_from = $('#review_last_year_at_residence')
+	element_year_to = $('#review_resident_to')
+	element_year_from = $('#review_resident_from')
 
 	#when current is selected... Removing default current year from Resident To
-	$('#review_stay_time option:eq(1)').prop('selected', false)
+	$('#review_resident_to option:eq(1)').prop('selected', false)
 	
 	if(id == 'visitor')
 		label_year_from.addClass('hide')
@@ -133,7 +133,7 @@ $(document).on 'click', '.reviewer_type',(e) ->
 		element_year_from.rules('add', 'required')
 		element_year_to.rules('add', 'required')
 	else
-		$('#review_stay_time option:eq(1)').prop('selected', true)
+		$('#review_resident_to option:eq(1)').prop('selected', true)
 		element_year_from.rules('add', 'required')
 
 #preventing enter key to submit form 
