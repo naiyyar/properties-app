@@ -1,4 +1,4 @@
-<%= form_for [@reviewable, Review.new] do |f| %>
+<%= form_for [@reviewable, Review.new], html: { multipart: true } do |f| %>
 	<%= hidden_field_tag 'contribution', params[:contribution] %>
 	<% unless @reviewable.kind_of? Unit %>
   		<div class="col-sm-12">
@@ -125,6 +125,19 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 			<!-- <span class='message hide recommend-not-selected text-red'>Please select recommendation.</span> -->
 		</div>
   </div>
+
+  <div class="col-sm-12">
+  	<label>Upload photos</label>
+  	<br />
+		<div class="form-group images-container">
+			<div class="pull-left attachment-icon">
+        <a href="javascript:void(0)" onclick="$('#review_photo_attachments').trigger('click'); return false;" >  
+          <i class="fa fa-image fa-3x"></i>
+        </a>
+      </div>
+      <%= file_field_tag 'review_attachments[image][]', class: 'hidden', id: 'review_photo_attachments', multiple: true %>
+		</div>
+  </div>
   
   <div class="col-sm-12" style="margin-top: 15px;">
 	  <div class="form-group">
@@ -148,11 +161,11 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 		  	<%= f.hidden_field :user_id, value: current_user.id %>
 		  <%end%>
 		  <br />
-		  <% if params[:unit_id].present? %>
-		  	<%= link_to 'Cancel', unit_path(@reviewable), class: "btn btn-default btn-xlg btn-xs-block margin-top-xs-10 hidden-xs" %>
-		  <%else%>
-		  	<%= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default btn-xlg btn-xs-block margin-top-xs-10 hidden-xs" %>
-		  <%end%>
+		  <%# if params[:unit_id].present? %>
+		  	<%#= link_to 'Cancel', unit_path(@reviewable), class: "btn btn-default btn-xlg btn-xs-block margin-top-xs-10 hidden-xs" %>
+		  <%#else%>
+		  	<%#= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default btn-xlg btn-xs-block margin-top-xs-10 hidden-xs" %>
+		  <%#end%>
 		   <%= f.submit 'Submit Review', class: "btn btn-primary btn-xlg btn-xs-block", id: 'submit_review' %>
 	  </div>
 	</div>

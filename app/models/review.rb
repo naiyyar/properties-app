@@ -4,7 +4,7 @@ class Review < ActiveRecord::Base
   belongs_to :user
   has_many :useful_reviews
   has_many :review_flags
-  #validates :pros,:cons, :presence => true, length: { minimum: 10, :message => 'You must enter at least 10 words' } #, if: :can_validate?
+  include Imageable
   
   validates :tos_agreement, :allow_nil => false, :acceptance => { :accept => true }, :on => :create #, message: 'Terms not accepted.'
   
@@ -32,6 +32,12 @@ class Review < ActiveRecord::Base
       "#{reviewable_object.street_address} #{reviewable_object.zipcode}"
     elsif reviewable_object.kind_of? Unit
       "#{reviewable_object.building.street_address} #{reviewable_object.building.zipcode}"
+    end
+  end
+
+  def save_images review_attachments
+    review_attachments['image'].each do |img|
+      self.uploads.create!(image: img)
     end
   end
 

@@ -46,9 +46,22 @@
           <b>Other comments:</b><span> <%= simple_format(review.other_advice) %></span>
         <%end%>
       </div>
-      <div class="commentActions">
-        <!-- <div class="visible-xs visible-sm lastYearInResidence"><%#= "Last year in residence: #{review.last_year_at_residence}" if review.last_year_at_residence.present? %> </div> -->
-        <ul class="tenant_info">
+      
+      <div class="commentActions" style="padding: 0px 0px 8px;">
+        <div class="show-review-images">
+          <h4></h4>
+          <% if review.uploads.present? %>
+            <% review.uploads.each do |asset| %>
+              <div class="pull-left">
+                <a href="<%=asset.image.url%>" class="fancybox">
+                  <%= image_tag asset.image, style: 'width: 100%; height: 100%;', alt: 'Image' %>
+                </a>
+              </div>
+            <%end%>
+          <%end%>
+        </div>
+      
+        <ul class="tenant_info" style="margin: 0px; float: none;">
           <%if review.user.votes.where(vote: true, review_id: review.id).present? %>
             <li><a href="#"><span class="fa fa-thumbs-up recommended"></span></a></li>
           <%else%>

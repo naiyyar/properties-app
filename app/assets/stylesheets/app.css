@@ -36,6 +36,40 @@ body{
     text-align: center !important;
 }
 
+.images-container{
+    width: 100%;
+    display: inline-block;
+}
+
+.images-container div.attachment-icon{
+    padding: 7px;
+    background: #f3f3f3;
+    border: 1px solid #ddd;
+    margin-top: 4px;
+}
+
+.image-preview img{
+    width: 100%;
+    height: 100%;
+}
+.images-container .image-preview{
+    width: 24%;
+    height: auto;
+    margin-right: 4px;
+    margin-top: 4px;
+}
+.commentBody .show-review-images{
+    display: inline-block; 
+    width: 90%;
+}
+
+.commentBody .show-review-images div{
+    width: 100px; 
+    height: auto; 
+    margin-left: 4px; 
+    border: 1px solid #ddd;
+}
+
 .pagination{
     box-shadow: none !important;
 }
