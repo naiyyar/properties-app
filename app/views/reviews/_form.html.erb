@@ -132,7 +132,8 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 		<div class="form-group images-container">
 			<div class="pull-left attachment-icon">
         <a href="javascript:void(0)" onclick="$('#review_photo_attachments').trigger('click'); return false;" >  
-          <i class="fa fa-image fa-3x"></i>
+          <!-- <i class="fa fa-image fa-3x"></i> -->
+          <%= image_tag 'camera_grey_64.png', alt: 'Add images' %>
         </a>
       </div>
       <%= file_field_tag 'review_attachments[image][]', class: 'hidden', id: 'review_photo_attachments', multiple: true %>

@@ -54,7 +54,7 @@
             <% review.uploads.each do |asset| %>
               <div class="pull-left">
                 <a href="<%=asset.image.url%>" class="fancybox">
-                  <%= image_tag asset.image, style: 'width: 100%; height: 100%;', alt: 'Image' %>
+                  <%= image_tag asset.image, alt: 'Image' %>
                 </a>
               </div>
             <%end%>
