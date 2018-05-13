@@ -76,7 +76,7 @@
         <div class="comments">
           <% @building_units.each do |unit| %>
             <h3 class="unit_name_header"><%= link_to unit.name, unit_path(unit), 'data-no-turbolink' => false %> (<span><%=unit.reviews.count%></span> Reviews)</h3>
-            <% unit.reviews.includes(:user).order('created_at desc').each do |review| %>
+            <% unit.reviews.includes(:user, :uploads).order('created_at desc').each do |review| %>
               <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: unit } %>
             <%end%>
           <% end %>
