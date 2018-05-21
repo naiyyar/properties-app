@@ -139,16 +139,6 @@ $(document).on 'click', '.reviewer_type',(e) ->
 		element_year_from.rules('add', 'required')
 		element_year_to.rules('remove', 'required')
 
-#Marking no pros / no cons check box on whole teaxt area tap
-#$(document).on 'click', '.no_check',(e) ->
-#	checkbox = $(this).children()
-#	if checkbox.is(':checked')
-#		checkbox.prop('checked',false)
-#		checkbox.rules('add', 'min required');
-#	else
-#		checkbox.prop('checked',true)
-#		checkbox.rules('remove', 'min required');
-
 #preventing enter key to submit form 
 $(document).on 'keypress', 'form',(e) ->
 	if e.keyCode == 13 && e.target.tagName.toLowerCase() != 'textarea'

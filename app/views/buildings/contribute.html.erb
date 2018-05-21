@@ -31,10 +31,12 @@
 
 					  	<div class="next_btn_container">
 						  	<% if params[:contribution_for].blank? %>
+						  		<h2 class="visible-xs" style="margin-top: 25px;"></h2>
 						  		<!-- when wrong building is selected -->
 						  		<%= link_to 'Next','javascript:;', id: 'next_to_review_btn', class: 'btn btn-primary add_new_building btn-xlg btn-lg btn-xs-block' %>
 						  		<!-- when correct building is selected -->
 						  		<p></p>
+
 						  		<%= submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary hidden btn-xlg btn-xs-block' %>
 						  	<%end%>
 				    	</div>
