@@ -117,7 +117,7 @@ $(document).on 'click', '.reviewer_type',(e) ->
 	element_year_from = $('#review_resident_from')
 
 	#when current is selected... Removing default current year from Resident To
-	$('#review_resident_to option:eq(1)').prop('selected', false)
+	$('#review_resident_to option:eq(1)').prop('selected', false).removeClass('hidden')
 	
 	if(id == 'visitor')
 		label_year_from.addClass('hide')
@@ -134,7 +134,20 @@ $(document).on 'click', '.reviewer_type',(e) ->
 		element_year_to.rules('add', 'required')
 	else
 		$('#review_resident_to option:eq(1)').prop('selected', true)
+		label_year_to.addClass('hide')
+		label_year_from.removeClass('hide')
 		element_year_from.rules('add', 'required')
+		element_year_to.rules('remove', 'required')
+
+#Marking no pros / no cons check box on whole teaxt area tap
+#$(document).on 'click', '.no_check',(e) ->
+#	checkbox = $(this).children()
+#	if checkbox.is(':checked')
+#		checkbox.prop('checked',false)
+#		checkbox.rules('add', 'min required');
+#	else
+#		checkbox.prop('checked',true)
+#		checkbox.rules('remove', 'min required');
 
 #preventing enter key to submit form 
 $(document).on 'keypress', 'form',(e) ->

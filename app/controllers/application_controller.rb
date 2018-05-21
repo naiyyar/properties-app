@@ -52,8 +52,11 @@ class ApplicationController < ActionController::Base
         session[:form_data] = nil
         session[:after_contribute] = 'reviews'# if params[:contribution].present?
         if review.save
-          if rating_score.present?
-            current_user.create_rating(rating_score, reviewable, review.id)
+          if rating_score.present? 
+            rating_score.keys.each do |dimension|
+              # params[dimension] => score
+              current_user.create_rating(rating_score[dimension], reviewable, review.id, dimension)
+            end
           end
 
           if vote.present?

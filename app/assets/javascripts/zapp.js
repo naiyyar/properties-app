@@ -631,7 +631,7 @@
         else{
             $('#review_cons').rules('add', 'min required');
         }
-    })
+    });
 
     //Rotating image overlay...
     $('.rotate').click(function(){

@@ -78,7 +78,7 @@
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label>Pros* &nbsp;&nbsp;&nbsp;<small>(10 words minimum)</small></label>
-			<div class="pull-right"><%= check_box_tag :no_pros %> No Pros</div>
+			<div class="checkbox custom-checkbox pull-right" style="margin: 0px;"><label><%= check_box_tag :no_pros %> <span class="fa fa-check"></span> No Pros</label></div>
 			<%= f.text_area :pros,  class: 'form-control', placeholder: 'Example: The building is great for families, newly grads, students, singles, couples, dog lovers, people on a tight budget
  
 Great for finance bros, fashionistas, musicians, writers, retirees, software geeks, aspiring models and actresses
@@ -92,7 +92,8 @@ Only building that allows my 100lb Rottweiler', rows: 8 %>
 		<div class="form-group">
 			<label>Cons* &nbsp;&nbsp;&nbsp;<small>(10 words minimum)</small></label>
 			<!-- removing adding validation rules in zapp.js -->
-			<div class="pull-right"><%= check_box_tag :no_cons %> No Cons</div>
+			<div class="checkbox custom-checkbox pull-right" style="margin: 0px;"><label><%= check_box_tag :no_cons %> <span class="fa fa-check"></span> No Cons</label></div>
+			<!-- <div class="pull-right no_check"><%#= check_box_tag :no_cons %> No Cons</div> -->
 			<%= f.text_area :cons,  class: 'form-control', placeholder: "Example: There are too many tourists, frat bros, loud bars, and cockroaches EVERYWHERE!!!
 Not close enough to a Trader Joe's, Whole Foods
 The rent increases are kiling my seamless and alcohol budget
@@ -101,7 +102,7 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 		</div>
 	</div>
 
-	<%=render partial: 'reviews/ratings' , locals: {f: f} %>
+	<%=render partial: 'reviews/ratings' , locals: { f: f } %>
 	
 	<!-- <div class="col-sm-12">
 	  <div class="form-group">
@@ -118,8 +119,8 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 			  <label class="btn btn-default">
 			  	<%= radio_button_tag 'vote', true %> Yes
 			  </label>
-			  <label class="btn btn-default hidden">
-			  	<%= radio_button_tag 'vote', false %> <span class='icon-dislike'></span>
+			  <label class="btn btn-default">
+			  	<%= radio_button_tag 'vote', false %> No
 			  </label>
 			</div>
 			<!-- <span class='message hide recommend-not-selected text-red'>Please select recommendation.</span> -->

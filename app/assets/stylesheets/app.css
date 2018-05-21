@@ -35,6 +35,7 @@ body{
 .pages-container{
     text-align: center !important;
 }
+.no_check{cursor: pointer;}
 
 .images-container{
     width: 100%;
