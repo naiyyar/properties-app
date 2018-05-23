@@ -1,8 +1,13 @@
 <div data-dimension="<%=dimension%>" class="starEmoji" data-score='0' data-id="<%=@reviewable.id%>" data-classname="Building" style="cursor: pointer;">
-  <img alt="1" data-rating='1' src="/assets/star-off.png" title="Terrible">&nbsp;
-  <img alt="2" data-rating='2' src="/assets/star-off.png" title="Poor">&nbsp;
-  <img alt="3" data-rating='3' src="/assets/star-off.png" title="Average">&nbsp;
-  <img alt="4" data-rating='4' src="/assets/star-off.png" title="Very Good">&nbsp;
-  <img alt="5" data-rating='5' src="/assets/star-off.png" title="Excellent">
+  <!-- <img alt="1" data-rating='1' src="/assets/star-off.png" title="Terrible">&nbsp; -->
+  <%= image_tag 'star-off.png', alt: '1', 'data-rating' => '1', title: 'Terrible' %>
+  <!-- <img alt="2" data-rating='2' src="/assets/star-off.png" title="Poor">&nbsp; -->
+  <%= image_tag 'star-off.png', alt: '2', 'data-rating' => '2', title: 'Poor' %>
+  <!-- <img alt="3" data-rating='3' src="/assets/star-off.png" title="Average">&nbsp; -->
+  <%= image_tag 'star-off.png', alt: '3', 'data-rating' => '3', title: 'Average' %>
+  <!-- <img alt="4" data-rating='4' src="/assets/star-off.png" title="Very Good">&nbsp; -->
+  <%= image_tag 'star-off.png', alt: '4', 'data-rating' => '4', title: 'Very Good' %>
+  <!-- <img alt="5" data-rating='5' src="/assets/star-off.png" title="Excellent"> -->
+  <%= image_tag 'star-off.png', alt: '5', 'data-rating' => '5', title: 'Excellent' %>
   <input name="score[<%=dimension%>]" type="text" class="invisible score_<%=dimension%>">
 </div>

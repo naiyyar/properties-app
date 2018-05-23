@@ -79,7 +79,7 @@ $(function(){
       scrore_elem.attr('type','text').addClass('invisible');
     }
   });
-
+  var start_off = "<%= asset_path 'star-off.png' %>";
   //Custom emoji icon rating for review forms
   $(document).on('mouseover', '.starEmoji img', function(e){
     var score = parseInt($(this).data('rating'));
@@ -91,7 +91,7 @@ $(function(){
     // setting all all stars to off
     if(final_score != '' || final_score != undefined || final_score != NaN){
       $(this).parent().children('img').each(function(i,j){
-        $(j).attr('src','/assets/star-off.png');
+        $(j).attr('src', start_off);
       })
     }
 
@@ -107,7 +107,7 @@ $(function(){
     //Making stars to off
     for(i=1; i <= score; i++ ){
       var img_elem = $(this).parent().find("[data-rating='" + i + "']"); 
-      img_elem.attr('src','/assets/star-off.png');  
+      img_elem.attr('src', start_off);  
     }
 
     if(final_scoreo != '' || final_scoreo != undefined || final_scoreo != NaN){
@@ -128,7 +128,7 @@ $(function(){
   function setEmojiIcon(elem, score){
     for(i=1; i <= score; i++ ){
       var img_elem = elem.parent().find("[data-rating='" + i + "']"); 
-          img_elem.attr('src','/assets/emojis/star'+i+'-sm.png');
+          img_elem.attr('src','/assets/star'+i+'-sm.png');
     }
   }
 
