@@ -11,42 +11,49 @@
 <div class="col-sm-12">
   <div class="form-group">
     <label>Cleanliness*</label>
-    <%= rating_for_user @reviewable, rating_user, 'cleanliness', star: 5, target: '#hintDiv', targetType: "score" %> <div id="hintDiv"></div>
+    <%#= rating_for_user @reviewable, rating_user, 'cleanliness', star: 5, target: '#hintDiv', targetType: "score" %> 
+    <!-- <div id="hintDiv"></div> -->
+    <%= render partial: 'emoji_rating',locals: { dimension: 'cleanliness' } %>
 	</div>
 </div>
 
 <div class="col-sm-12">
   <div class="form-group">
     <label>Noise*</label>
-    	<%= rating_for_user @reviewable, rating_user, 'noise', star: 5 , target: '#hintNoise', targetType: "score" %>
-    	<div id="hintNoise"></div>
+    	<%#= rating_for_user @reviewable, rating_user, 'noise', star: 5 , target: '#hintNoise', targetType: "score" %>
+    	<!-- <div id="hintNoise"></div> -->
+      <%= render partial: 'emoji_rating',locals: { dimension: 'noise' } %>
 	</div>
 </div>
 
 <div class="col-sm-12">
   <div class="form-group">
     <label>How Safe Do You Feel In Your Building*</label>
-    	<%= rating_for_user @reviewable, rating_user, 'safe', star: 5 %>
+    	<%#= rating_for_user @reviewable, rating_user, 'safe', star: 5 %>
+      <%= render partial: 'emoji_rating',locals: { dimension: 'safe' } %>
 	</div>
 </div>
 
 <div class="col-sm-12">
   <div class="form-group">
     <label>Heat/Air/Water/Electric*</label>
-    	<%= rating_for_user @reviewable, rating_user, 'health', star: 5 %>
+    	<%#= rating_for_user @reviewable, rating_user, 'health', star: 5 %>
+      <%= render partial: 'emoji_rating',locals: { dimension: 'health' } %>
 	</div>
 </div>
 
 <div class="col-sm-12">
   <div class="form-group">
     <label>Super Responsiveness*</label>
-    	<%= rating_for_user @reviewable, rating_user, 'responsiveness', star: 5 %>
+    	<%#= rating_for_user @reviewable, rating_user, 'responsiveness', star: 5 %>
+      <%= render partial: 'emoji_rating',locals: { dimension: 'responsiveness' } %>
 	</div>
 </div>
 
 <div class="col-sm-12">
   <div class="form-group">
     <label>Dealings with Management*</label>
-    	<%= rating_for_user @reviewable, rating_user, 'management', star: 5 %>
+    	<%#= rating_for_user @reviewable, rating_user, 'management', star: 5 %>
+      <%= render partial: 'emoji_rating',locals: { dimension: 'management' } %>
 	</div>
 </div>

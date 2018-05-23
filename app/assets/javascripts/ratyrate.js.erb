@@ -78,7 +78,58 @@ $(function(){
     if($('#new_review').length > 0){
       scrore_elem.attr('type','text').addClass('invisible');
     }
-  })
+  });
+
+  //Custom emoji icon rating for review forms
+  $(document).on('mouseover', '.starEmoji img', function(e){
+    var score = parseInt($(this).data('rating'));
+    var dim = $(this).parent().data('dimension');
+    //$(this).parent().attr('data-score', score);
+    var final_score = parseInt($('.score_'+dim).val());
+    
+    //once clicked and final score set and again try to change the rating then
+    // setting all all stars to off
+    if(final_score != '' || final_score != undefined || final_score != NaN){
+      $(this).parent().children('img').each(function(i,j){
+        $(j).attr('src','/assets/star-off.png');
+      })
+    }
+
+    //setting all all selected stars to on with emoji icons
+    setEmojiIcon($(this), score)
+
+  }).on('mouseout', '.starEmoji img', function(e){
+    var score = parseInt($(this).data('rating'));
+    var dim = $(this).parent().data('dimension');
+    // $(this).parent().attr('data-score', score);
+    var final_scoreo = parseInt($('.score_'+dim).val());
+    
+    //Making stars to off
+    for(i=1; i <= score; i++ ){
+      var img_elem = $(this).parent().find("[data-rating='" + i + "']"); 
+      img_elem.attr('src','/assets/star-off.png');  
+    }
+
+    if(final_scoreo != '' || final_scoreo != undefined || final_scoreo != NaN){
+      setEmojiIcon($(this), final_scoreo)
+    }
+    
+  }).on('click', '.starEmoji img', function(e){
+    var dim = $(this).parent().data('dimension');
+    var score = parseInt($(this).data('rating'));
+    
+    $('.score_'+dim).val(score);
+    
+    if(score != '' || score != undefined || score != NaN){
+      setEmojiIcon($(this), score)
+    }
+  });
+
+  function setEmojiIcon(elem, score){
+    for(i=1; i <= score; i++ ){
+      var img_elem = elem.parent().find("[data-rating='" + i + "']"); 
+          img_elem.attr('src','/assets/emojis/star'+i+'-sm.png');
+    }
+  }
+
 });
-
-
