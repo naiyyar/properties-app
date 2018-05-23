@@ -127,8 +127,24 @@ $(function(){
 
   function setEmojiIcon(elem, score){
     for(i=1; i <= score; i++ ){
-      var img_elem = elem.parent().find("[data-rating='" + i + "']"); 
-          img_elem.attr('src','/assets/star'+i+'-sm.png');
+      console.log("<%= asset_path 'star5-sm.png' %>")
+      var img_elem = elem.parent().find("[data-rating='" + i + "']");
+        if(i==1){
+          img_elem.attr('src',"<%= asset_path 'star1-sm.png' %>");
+        }
+        else if(i==2){
+          img_elem.attr('src',"<%= asset_path 'star2-sm.png' %>");
+        } 
+        else if(i==3){
+          img_elem.attr('src',"<%= asset_path 'star3-sm.png' %>");
+        } 
+        else if(i==4){
+          img_elem.attr('src',"<%= asset_path 'star4-sm.png' %>");
+        } 
+        else if(i==5){
+          img_elem.attr('src',"<%= asset_path 'star5-sm.png' %>");
+        } 
+          
     }
   }
 
