@@ -42,6 +42,10 @@ body{
     display: inline-block;
 }
 
+.review-header-item{
+    margin: 0 0 2px;
+}
+
 .images-container div.attachment-icon{
     padding: 0px 20px;
     background: #f3f3f3;

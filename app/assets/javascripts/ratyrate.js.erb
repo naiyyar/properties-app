@@ -127,7 +127,6 @@ $(function(){
 
   function setEmojiIcon(elem, score){
     for(i=1; i <= score; i++ ){
-      console.log("<%= asset_path 'star5-sm.png' %>")
       var img_elem = elem.parent().find("[data-rating='" + i + "']");
         if(i==1){
           img_elem.attr('src',"<%= asset_path 'star1-sm.png' %>");
