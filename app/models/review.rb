@@ -35,10 +35,14 @@ class Review < ActiveRecord::Base
     end
   end
 
-  def save_images review_attachments
-    review_attachments['image'].each do |img|
-      self.uploads.create!(image: img)
-    end
+  # def save_images review_attachments
+  #   review_attachments['image'].each do |img|
+  #     self.uploads.create!(image: img)
+  #   end
+  # end
+
+  def set_imageable uid
+    Upload.where(file_uid: uid).update_all(imageable_id: self.id, imageable_type: 'Review')
   end
 
   private

@@ -49,9 +49,13 @@ class ApplicationController < ActionController::Base
       	else
           vote = current_user.vote_against(reviewable)
         end
+        
+        udid = session[:form_data]['upload_uid']
         session[:form_data] = nil
         session[:after_contribute] = 'reviews'# if params[:contribution].present?
         if review.save
+          #review.save_images(params[:review_attachments]) if params[:review_attachments].present?
+          review.set_imageable(udid) if udid.present?
           if rating_score.present? 
             rating_score.keys.each do |dimension|
               # params[dimension] => score

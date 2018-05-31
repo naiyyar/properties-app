@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/Springest/jquery-fileupload-rails.git
+  revision: 2ebfdf1cc9a768f36420aaad9668ba68f2a5943b
+  specs:
+    jquery-fileupload-rails (0.4.2)
+      actionpack (>= 4)
+      railties (>= 4)
+
+GIT
   remote: git://github.com/wazery/ratyrate.git
   revision: d61cfb73343e4b461f536e56c7b1bd1f7465d0a4
   specs:
@@ -42,6 +50,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    activesupport-json_encoder (1.1.0)
+      activesupport (>= 4.1.0, < 5.0)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     american_date (1.1.1)
@@ -301,6 +311,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport-json_encoder
   american_date
   aws-sdk (~> 2.3)
   better_errors
@@ -323,6 +334,7 @@ DEPENDENCIES
   gmaps4rails
   iconv (~> 1.0.3)
   jbuilder (~> 2.0)
+  jquery-fileupload-rails!
   jquery-placeholder-rails
   jquery-rails
   letter_opener

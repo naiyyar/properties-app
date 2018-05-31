@@ -30,6 +30,8 @@
             <%= review.tenant_status.present? ? review.tenant_status.capitalize : '' %> <%= 'Tenant:' %>
           
             <%= "#{review.resident_from} - " if review.resident_from.present? %><%= review.resident_to.to_i == Date.today.year ? 'Present' : review.resident_to if review.resident_to.present? %>
+          <%else%>
+            <%= 'Visitor' %>
           <%end%>
         </p>
       </div>

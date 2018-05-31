@@ -61,7 +61,8 @@ class ReviewsController < ApplicationController
       @review = @reviewable.reviews.build(review_params)
       @review.user_id = current_user.id
       if @review.save
-        @review.save_images(params[:review_attachments]) if params[:review_attachments].present?
+        #@review.save_images(params[:review_attachments]) if params[:review_attachments].present?
+        @review.set_imageable(params[:upload_uid])
         session[:after_contribute] = 'reviews' if params[:contribution].present?
         if params[:score].present? 
           params[:score].keys.each do |dimension|

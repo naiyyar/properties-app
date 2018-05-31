@@ -18,7 +18,8 @@ class BuildingsController < ApplicationController
   end
 
   def contribute
-    @buildings = Building.text_search(params[:term]).reorder('building_street_address ASC').limit(10)
+    session[:form_data] = nil if session[:form_data].present?
+    @buildings = Building.text_search(params[:term]).reorder('building_street_address ASC').limit(10).includes(:units)
     @building = Building.where(id: params[:building_id]).first if params[:building_id].present?
     @search_bar_hidden = :hidden
   end

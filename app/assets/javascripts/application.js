@@ -35,5 +35,6 @@
 //= require jquery-sortable-photos
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap.min
+//= require jquery-fileupload/basic
 
 //= require_tree .

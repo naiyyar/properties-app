@@ -15,6 +15,15 @@ gem 'aws-sdk', '~> 2.3'
 #gem 'aws-sdk' #, '< 2'
 #gem 'aws-sdk', '~> 3'
 
+#
+gem 'activesupport-json_encoder'
+
+#To make the :active_record_store functionality works
+#gem 'activerecord-session_store'
+
+gem 'jquery-fileupload-rails', github: 'Springest/jquery-fileupload-rails'
+#gem 'remotipart', '~> 1.2'
+
 #gem 'paperclip-av-transcoder' #for vidoes
 gem "figaro"
 gem 'gmaps4rails'

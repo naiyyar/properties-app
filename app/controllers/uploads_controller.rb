@@ -1,6 +1,6 @@
 class UploadsController < ApplicationController
   load_and_authorize_resource
-	before_action :authenticate_user!, only: [:destroy, :create]
+	before_action :authenticate_user!, only: [:destroy]
 
 	def index
     if params[:building_id]
@@ -46,13 +46,20 @@ class UploadsController < ApplicationController
   end
 
 	def create
-    @imageable = find_imageable
-    @upload = @imageable.uploads.build(upload_params)
-    @upload.user_id = current_user.id if current_user.present?
+    unless upload_params[:file_uid].present?
+      @imageable = find_imageable
+      @upload = @imageable.uploads.build(upload_params)
+      @upload.user_id = current_user.id if current_user.present?
+    else
+      @upload = Upload.new(upload_params)
+    end
     if @upload.save
-      #session[:after_contribute] = 'upload'
-      # send success header
-      render json: { message: 'success', fileID: @upload.id }, :status => 200
+      respond_to do |format|
+        #session[:after_contribute] = 'upload'
+        # send success header
+        format.js
+        format.json { render json: { message: 'success', fileID: @upload.id }, :status => 200 }
+      end
     else
       #  you need to send an error header, otherwise Dropzone
       #  will not interpret the response as an error:
@@ -152,7 +159,7 @@ class UploadsController < ApplicationController
 	private
 
 	def upload_params
-		params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id, :sort, :rotation, :document, :document_file_name)
+		params.require(:upload).permit(:image, :imageable_id, :imageable_type, :user_id, :sort, :rotation, :document, :document_file_name, :file_uid)
 	end
 
 	def find_imageable

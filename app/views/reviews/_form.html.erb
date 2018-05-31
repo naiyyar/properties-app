@@ -132,12 +132,13 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
   	<br />
 		<div class="form-group images-container">
 			<div class="pull-left attachment-icon">
-        <a href="javascript:void(0)" onclick="$('#review_photo_attachments').trigger('click'); return false;" >  
+        <a href="javascript:void(0)" onclick="$('#upload_images').trigger('click'); return false;" >  
           <!-- <i class="fa fa-image fa-3x"></i> -->
           <%= image_tag 'camera_grey_64.png', alt: 'Add images' %>
         </a>
       </div>
-      <%= file_field_tag 'review_attachments[image][]', class: 'hidden', id: 'review_photo_attachments', multiple: true %>
+      <%#= file_field_tag 'review_attachments[image][]', class: 'hidden', id: 'review_photo_attachments', multiple: true %>
+      <%= hidden_field_tag :upload_uid, Time.now.to_i %>
 		</div>
   </div>
   
@@ -173,6 +174,14 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 	</div>
 <% end %>
 
+<%= form_for Upload.new, html: { :multipart => true } do |f| %>
+	<%= f.hidden_field :file_uid, value: Time.now.to_i %>
+	<%= f.file_field :image, multiple: true, id: 'upload_images', class: 'hidden', name: 'upload[image]' %>
+	<%= f.hidden_field :imageable_type, value: nil %>
+	<%= f.hidden_field :imageable_id, value: nil %>
+	<%#= f.submit 'Submit', class: "btn btn-primary hidden", id: 'upload_review_images' %>
+<%end%>
+
 <style type="text/css">
 	.form-group {
     margin-bottom: 6px;
@@ -181,4 +190,15 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 		color: #ea3d36;
 	}
 </style>
+
+<script>
+  $(document).ready(function() {
+    $('#new_upload').fileupload({
+    	dataType: 'script',
+    	done: function (e, data) {
+        showImagePreview(data.files[0]);
+      } 
+    });
+  });
+</script>
   
