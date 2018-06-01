@@ -189,16 +189,33 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 	label.error{
 		color: #ea3d36;
 	}
+	
 </style>
 
 <script>
   $(document).ready(function() {
+  	var xhr;
     $('#new_upload').fileupload({
     	dataType: 'script',
+    	add: function (e, data) {
+    		var file = data.files[0];
+    		showImagePreview(file, file.size);
+        xhr = data.submit();
+      },
+      progressall: function (e, data) {
+        //var progress = parseInt(data.loaded / data.total * 100, 10);
+        //$('.prog_per').html(progress+'%')
+        //$('.progress .bar').css('width', progress + '%');
+      },
     	done: function (e, data) {
-        showImagePreview(data.files[0]);
+        var file = data.files[0];
+        $('.image_file'+file.size).parent().hide();
       } 
     });
+  });
+
+  $('a.abort').click(function (e) {
+    xhr.abort();
   });
 </script>
   

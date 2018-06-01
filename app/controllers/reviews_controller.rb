@@ -34,6 +34,7 @@ class ReviewsController < ApplicationController
   end
 
   def new
+    Upload.where(imageable_id: nil, imageable_type: ['',nil]).destroy_all
     if params['buildings-search-txt'].present?
       address = params['buildings-search-txt'].split(',')[0]
       @reviewable = Building.find_by_building_street_address_and_zipcode(address, params[:zip])

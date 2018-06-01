@@ -67,6 +67,7 @@ body{
     width: 82px;
     height: 70px;
     border: 1px solid #ddd;
+    position: relative;
 }
 .images-container .image-preview img{
     width: 80px;
@@ -74,6 +75,23 @@ body{
     object-fit: contain;
     overflow: hidden;
 }
+
+.images-container .image-preview .progress-loader{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    background-color: rgba(255, 255, 255, 0.9);
+    bottom: 0px;
+    text-align: center;
+    line-height: 70px;
+}
+
+.images-container .image-preview .progress-loader img{
+    width: 20px !important;
+    height: 20px !important;
+}
+
 .commentBody .show-review-images{
     display: inline-block; 
     width: 90%;
