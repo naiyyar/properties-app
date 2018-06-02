@@ -616,20 +616,20 @@
     //Removing rules when no pros check is checked
     $('#no_pros').change(function(){
         if($(this).is(':checked')){
-            $('#review_pros').rules('remove', 'min required');
+            $('#review_pros').rules('remove', 'invalid min required');
         }
         else{
-            $('#review_pros').rules('add', 'min required');
+            $('#review_pros').rules('add', 'invalid min required');
         }
     })
 
     //Removing rules when no cons check is checked and vice versa
     $('#no_cons').change(function(){
         if($(this).is(':checked')){
-            $('#review_cons').rules('remove', 'min required');
+            $('#review_cons').rules('remove', 'invalid min required');
         }
         else{
-            $('#review_cons').rules('add', 'min required');
+            $('#review_cons').rules('add', 'invalid min required');
         }
     });
 
