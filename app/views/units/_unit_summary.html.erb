@@ -15,7 +15,7 @@
           </div>
           <div class="address"><span class="fa fa-building"></span> 
             <%= link_to @unit.building.building_name_or_address, building_path(@unit.building), 'data-no-turbolink' => false %></div>
-          <ul class="rating">
+          <ul class="rating star-sm">
             <%= rating_for @unit, 'unit', disable_after_rate: true, readonly: true %>
           </ul>
           <div class="favLink">(<%= @unit.reviews.count %>)</div>

@@ -135,6 +135,10 @@ body{
     left: 33px !important;
 }
 
+.star-sm .star img, .cardRating li img{
+    height: 18px !important;
+}
+
 .about_us{
     margin-left: 0px !important;
     background: transparent;

@@ -14,7 +14,7 @@
           </h1>
           <div class="address"><span class="icon-location-pin"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>
           
-          <div class="stats1 property_information" style="padding: 0px 5px;">
+          <div class="property_information" style="padding: 0px 5px;">
             <div><%= "#{@building.building_type} in" if @building.building_type.present? %> <%= @building.neighbohoods %></div>
             <span><%= "#{@building.no_of_units} Units" if @building.no_of_units.present? and @building.no_of_units > 0 %></span>
             <span><%= " | #{@building.floors} Floors" if @building.floors.present? %></span>
@@ -22,7 +22,7 @@
           </div>
 
           <div style="display: inline-block;">
-            <ul class="rating">
+            <ul class="rating star-sm">
               <%= rating_for @building, 'building', disable_after_rate: true, readonly: true %>
             </ul>
 
@@ -63,9 +63,3 @@
     </div> -->
   </div>
 </div>
-
-<style type="text/css">
-  .star img{
-    height: 18px;
-  }
-</style>
