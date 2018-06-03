@@ -37,6 +37,7 @@ function bindMarker(marker, markers, handler, lat, lng, zoom){
 };
 
 function createSidebar(json_array){
+  console.log('createSidebarInjs')
   _.each(json_array, function(json){
     append_html(json)
   });
@@ -44,7 +45,7 @@ function createSidebar(json_array){
 
 function append_html(json){
   var elem = $( createSidebarElem(json) );
-  var id = json.marker_title.split(',')[0]
+  var id = json.marker_title.split(',')[0];
   elem.appendTo('#building_details'+id);
   bindMarketToElem(json, elem);
 }

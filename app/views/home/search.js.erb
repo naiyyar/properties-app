@@ -8,5 +8,6 @@ $('#load-more-buildings').append('<%= j render partial: "search_results" %>');
   $('.pages-container').html(no_match)
 <% end %>
 $('.building-detail-card').html('');
-build_map(true, true); //Building map on infinite scroll load
-load_rating_stars();
+//var json_array = <%#=# raw @hash.to_json %>;
+//build_map(true, true, json_array); //Building map on infinite scroll load
+//load_rating_stars();

@@ -7,13 +7,13 @@
 <input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13 %>" />
 
 <script type="text/javascript" charset="utf-8">
- 	function build_map(sidebar, resize=false){
+	json_array = <%= raw @hash.to_json %> ;
+ 	function build_map(sidebar, resize=false, json_array=[]){
  		var lat = <%= raw @lat.to_json %>;
 		var lng = <%= raw @lng.to_json %>;
 		var zoom = <%= @zoom || 13 %>;
-		
+
 		var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>
-		json_array = <%= raw @hash.to_json %> ;
 		
 		options = {
 			disableDoubleClickZoom: false,

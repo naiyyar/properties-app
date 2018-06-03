@@ -18,13 +18,21 @@
 
       <div class="tab-pane fade <%=params[:page].present? ?  'in active' : '' %>" id="buildings">
         <%if @buildings.present? %>
+          <% @buildings = @buildings.paginate(:page => params[:page], :per_page => 20) %>
           <div class="resultsList">
             <div class="row" id="load-more-buildings">
               <%= render partial: 'search_results' %>
             </div>
           </div>
+          
+          <% if @buildings.total_pages == @buildings.current_page%>
+            <div style="padding:4px;" class="text-center"> No Property found?  <a href="/buildings/contribute?results=no-matches-found" style="color: #0075c9;"><b>Add Your Building</b></a></div>
+          <%end%>
+          
+          <br />
+          
           <div class="pages-container">
-            <%= will_paginate @buildings %>
+            <%= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
           </div>
         <%else%>
          <div style="padding:4px;" class="text-center"> No Property found?  <a href="/buildings/contribute?results=no-matches-found" style="color: #0075c9;"><b>Add Your Building</b></a></div>

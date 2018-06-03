@@ -643,7 +643,7 @@
     });
     
     if($('#mapViewSearch').length > 0){
-        build_map(true);
+        build_map(true, false, json_array);
     }
 
 })(jQuery);
