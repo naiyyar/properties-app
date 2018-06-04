@@ -13,7 +13,7 @@
     <label>Cleanliness - Pests/Smell/Trash*</label>
     <%#= rating_for_user @reviewable, rating_user, 'cleanliness', star: 5, target: '#hintDiv', targetType: "score" %> 
     <!-- <div id="hintDiv"></div> -->
-    <%= render partial: 'emoji_rating',locals: { dimension: 'cleanliness' } %>
+    <%= render partial: 'reviews/emoji_rating',locals: { dimension: 'cleanliness' } %>
 	</div>
 </div>
 
@@ -22,7 +22,7 @@
     <label>Is it Noisy?*</label>
     	<%#= rating_for_user @reviewable, rating_user, 'noise', star: 5 , target: '#hintNoise', targetType: "score" %>
     	<!-- <div id="hintNoise"></div> -->
-      <%= render partial: 'emoji_rating',locals: { dimension: 'noise' } %>
+      <%= render partial: 'reviews/emoji_rating',locals: { dimension: 'noise' } %>
 	</div>
 </div>
 
@@ -30,7 +30,7 @@
   <div class="form-group">
     <label>How Safe Do You Feel In Your Building?*</label>
     	<%#= rating_for_user @reviewable, rating_user, 'safe', star: 5 %>
-      <%= render partial: 'emoji_rating',locals: { dimension: 'safe' } %>
+      <%= render partial: 'reviews/emoji_rating',locals: { dimension: 'safe' } %>
 	</div>
 </div>
 
@@ -38,7 +38,7 @@
   <div class="form-group">
     <label>Utilities - AC/Electric/Heat/Water*</label>
     	<%#= rating_for_user @reviewable, rating_user, 'health', star: 5 %>
-      <%= render partial: 'emoji_rating',locals: { dimension: 'health' } %>
+      <%= render partial: 'reviews/emoji_rating',locals: { dimension: 'health' } %>
 	</div>
 </div>
 
@@ -46,7 +46,7 @@
   <div class="form-group">
     <label>Super Responsiveness*</label>
     	<%#= rating_for_user @reviewable, rating_user, 'responsiveness', star: 5 %>
-      <%= render partial: 'emoji_rating',locals: { dimension: 'responsiveness' } %>
+      <%= render partial: 'reviews/emoji_rating',locals: { dimension: 'responsiveness' } %>
 	</div>
 </div>
 
@@ -54,6 +54,12 @@
   <div class="form-group">
     <label>Dealings with Management*</label>
     	<%#= rating_for_user @reviewable, rating_user, 'management', star: 5 %>
-      <%= render partial: 'emoji_rating',locals: { dimension: 'management' } %>
+      <%= render partial: 'reviews/emoji_rating',locals: { dimension: 'management' } %>
 	</div>
 </div>
+
+<style type="text/css">
+  #wrapper {
+    margin: 0px 0 0 0px;
+  }
+</style>

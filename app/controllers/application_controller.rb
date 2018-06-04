@@ -114,7 +114,9 @@ class ApplicationController < ActionController::Base
           return "/uploads/new?unit_id=#{object.id}"
         else
           if object.kind_of? Building 
-            return building_path(object)
+            #Togoto Reviews path
+            return user_steps_path(building_id: object.id, contribution_for: session[:form_data]['contribution'], contribution: session[:form_data]['contribution'])
+            #return building_path(object)
           else
             return unit_path(object)
           end
