@@ -108,7 +108,7 @@ class BuildingsController < ApplicationController
       session[:form_data] = params
       session[:object_type] = params[:unit_contribution].present? ? 'unit' : 'building'
       # Redirect the user to register/login
-      redirect_to new_user_session_path
+      redirect_to new_user_registration_path
     else
       if params[:building][:building_street_address].present? and params[:building][:zipcode].present?
         @building = Building.find_by_building_street_address_and_zipcode(params[:building][:building_street_address], params[:building][:zipcode])
