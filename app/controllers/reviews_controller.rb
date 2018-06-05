@@ -56,7 +56,8 @@ class ReviewsController < ApplicationController
       # Store the form data in the session so we can retrieve it after login
       session[:form_data] = params
       # Redirect the user to register/login
-      redirect_to new_user_session_path
+      #redirect_to new_user_session_path
+      redirect_to new_user_registration_path
     else
       @reviewable = find_reviewable
       @review = @reviewable.reviews.build(review_params)
