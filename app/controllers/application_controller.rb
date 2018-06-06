@@ -18,8 +18,18 @@ class ApplicationController < ActionController::Base
     @manhattan_neighborhoods = view_context.manhattan_neighborhoods
   end
 
+  def after_sign_up_path_for(resource)
+    save_review
+  end
+
   def after_sign_in_path_for(resource)
-	  if session[:form_data].present?
+    save_review
+	end
+
+	private
+
+  def save_review
+    if session[:form_data].present?
       if session[:object_type].present? and session[:object_type] == 'building'
         building = Building.create(session[:form_data]['building'])
         flash_message = 'Building created successfully.'
@@ -40,25 +50,23 @@ class ApplicationController < ActionController::Base
         
         sign_in_redirect_path(@unit_object, flash_message)
       else
-  	    reviewable = find_reviewable
+        reviewable = find_reviewable
         review = reviewable.reviews.build(session[:form_data]['review'])
         review.user_id = current_user.id
         rating_score = session[:form_data]['score']
         if session[:form_data]['vote'] == 'true'
           vote = current_user.vote_for(reviewable)
-      	else
+        else
           vote = current_user.vote_against(reviewable)
         end
         
         udid = session[:form_data]['upload_uid']
         session[:form_data] = nil
-        session[:after_contribute] = 'reviews'# if params[:contribution].present?
+        session[:after_contribute] = 'reviews'
         if review.save
-          #review.save_images(params[:review_attachments]) if params[:review_attachments].present?
           review.set_imageable(udid) if udid.present?
           if rating_score.present? 
             rating_score.keys.each do |dimension|
-              # params[dimension] => score
               current_user.create_rating(rating_score[dimension], reviewable, review.id, dimension)
             end
           end
@@ -75,7 +83,7 @@ class ApplicationController < ActionController::Base
           end
         end
       end
-	  else
+    else
       if session[:contribution_for] == 'building_photos' && session[:search_term].present?
         "/uploads/new?buildings-search-txt=#{session[:search_term]}&contribution=building_photos"
       elsif params[:contribution] == 'building_photos'
@@ -88,11 +96,8 @@ class ApplicationController < ActionController::Base
         flash[:notice] = 'Signed in successfully'
         session[:return_to] || root_path
       end
-	  end
-    
-	end
-
-	private
+    end
+  end
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to redirect_back_or_default(root_url), notice: exception.message
