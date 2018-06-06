@@ -37,7 +37,6 @@ function bindMarker(marker, markers, handler, lat, lng, zoom){
 };
 
 function createSidebar(json_array){
-  console.log('createSidebarInjs')
   _.each(json_array, function(json){
     append_html(json)
   });

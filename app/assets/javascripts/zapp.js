@@ -284,18 +284,6 @@
         build_map(create_sidebar, true); //For search split view
         if(handler != ''){
             resizeMapOnMapIconClick();
-            // var gmap = handler.getMap();
-            // setTimeout(function() {
-            //     if (gmap) {
-            //         google.maps.event.trigger(gmap, 'resize');
-            //     }
-            //     var lat = parseFloat($('.lat').val());
-            //     var lng = parseFloat($('.lng').val());
-            //     var zoom = parseInt($('.zoom').val());
-            //     gmap.setZoom(zoom);
-            //     gmap.setCenter(new google.maps.LatLng(lat, lng));
-
-            // }, 300);
         }else{
         
             resize_map();
@@ -643,7 +631,7 @@
     });
     
     if($('#mapViewSearch').length > 0){
-        build_map(true, false, json_array);
+        build_map(true, false,);
     }
 
 })(jQuery);

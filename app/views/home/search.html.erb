@@ -8,7 +8,7 @@
 
 <script type="text/javascript" charset="utf-8">
 	json_array = <%= raw @hash.to_json %> ;
- 	function build_map(sidebar, resize=false, json_array=[]){
+ 	function build_map(sidebar, resize=false){
  		var lat = <%= raw @lat.to_json %>;
 		var lng = <%= raw @lng.to_json %>;
 		var zoom = <%= @zoom || 13 %>;
