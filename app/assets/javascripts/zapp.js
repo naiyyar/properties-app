@@ -631,7 +631,7 @@
     });
     
     if($('#mapViewSearch').length > 0){
-        build_map(true, false,);
+        build_map(true, false);
     }
 
 })(jQuery);
