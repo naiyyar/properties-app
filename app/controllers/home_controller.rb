@@ -25,6 +25,12 @@ class HomeController < ApplicationController
     else
       @result_type = 'match_found'
     end
+    
+    respond_to do |format|
+      #format.html: because if login from search split view after searching something session was saving auto_search path as looking for auto_search template
+      format.html { redirect_to root_url }
+      format.json
+    end
   end
 
   def search

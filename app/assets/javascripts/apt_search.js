@@ -7,7 +7,7 @@ app.apartments.prototype = {
   _initAutocomplete: function() {
     this._input
       .autocomplete({
-        source: '/auto_search',
+        source: '/auto_search.json',
         prependTo: '#apt-search-results',
         select: $.proxy(this._select, this),
         open: $.proxy(this._open, this),

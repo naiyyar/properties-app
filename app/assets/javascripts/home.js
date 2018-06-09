@@ -343,12 +343,26 @@
     });
 
     // //Hiding not building link element
-    $('#hero-container, .highlight, .contribute-wrapper').click(function() {
+    // $('#hero-container, .highlight, .contribute-wrapper').click(function() {
+    //    hideAutoSearchList()
+    // });
+
+    $('#search_term').blur(function(e){
+        hideAutoSearchList();
+    })
+
+    $('#search_term').keyup(function(e){
+        if($(this).val() == ''){
+            hideAutoSearchList();
+        }
+    })
+
+    function hideAutoSearchList(){
         if($("ul.ui-autocomplete").is(":visible")) {
             $("ul.ui-autocomplete").hide();
         }
         $('.no-match-link').addClass('hidden');
-    });
+    }
      
     // $('#buildings-search-txt, #apt-search-txt').blur(function(e){
     //     setTimeout(function () {

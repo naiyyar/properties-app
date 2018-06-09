@@ -32,6 +32,9 @@ body{
 .border-success{
     border: 2px solid #4cae4c !important;
 }
+.border-green{
+    border: 2px solid #92da23 !important;
+}
 .pages-container{
     text-align: center !important;
 }
@@ -44,6 +47,16 @@ body{
 
 .review-header-item{
     margin: 0 0 2px;
+}
+
+.hyper-link{
+    color: #428bca;
+}
+.hyper-link:hover{
+    text-decoration: underline !important;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 .images-container div.attachment-icon{
@@ -481,7 +494,7 @@ h3.unit_name_header{
     color: #fff;
 }
 .btn-green {
-    background-color: #0075c9;
+    background-color: #83c11f;
     color: #fff;
 }
 .btn-o.btn-green {
@@ -494,8 +507,8 @@ h3.unit_name_header{
 .btn-green:active,
 .btn-green.active,
 .open > .dropdown-toggle.btn-green {
-    background-color: #068b85;
-    color: #fff;
+    background-color: #7aaf25;
+    color: #fff !important;
 }
 .no-touch .btn-o.btn-green:hover,
 .btn-o.btn-green:focus,

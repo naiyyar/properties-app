@@ -145,6 +145,10 @@ class Building < ActiveRecord::Base
     info_count
   end
 
+  def neighborhood_search_string
+    "#{neighbohoods}, #{city}, NY"
+  end
+
   def no_of_units
     self.number_of_units.present? ? self.number_of_units : self.units.count
   end

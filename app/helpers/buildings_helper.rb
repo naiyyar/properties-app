@@ -99,7 +99,7 @@ module BuildingsHelper
 			swimming_pool: 'Swimming Pool',
 			walk_up: 'Walk up',
 			childrens_playroom: 'Childrens Playroom',
-			no_fee: 'No Fee',
+			no_fee: 'No Fee Building',
 		}
 	end
 

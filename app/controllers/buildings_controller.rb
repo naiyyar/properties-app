@@ -3,7 +3,7 @@ class BuildingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :contribute,:create,:edit, :autocomplete, :apt_search]
 
   def index
-    @buildings = Building.order('created_at desc').includes(:building_average).paginate(:page => params[:page], :per_page => 80)
+    @buildings = Building.order('created_at desc').includes(:building_average)#.paginate(:page => params[:page], :per_page => 80)
     respond_to do |format|
       format.html
       format.json { 
