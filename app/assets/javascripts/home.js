@@ -342,10 +342,10 @@
         $('#signin').modal('show');
     });
 
-    // //Hiding not building link element
-    // $('#hero-container, .highlight, .contribute-wrapper').click(function() {
-    //    hideAutoSearchList()
-    // });
+    //Hiding not building link element
+    $('.contribute-wrapper').click(function() {
+       hideAutoSearchList()
+    });
 
     $('#search_term').blur(function(e){
         hideAutoSearchList();
