@@ -138,7 +138,7 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
         </a>
       </div>
       <%#= file_field_tag 'review_attachments[image][]', class: 'hidden', id: 'review_photo_attachments', multiple: true %>
-      <%= hidden_field_tag :upload_uid, Time.now.to_i %>
+      <%= hidden_field_tag :upload_uid, @uid %>
 		</div>
   </div>
   
@@ -175,7 +175,7 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 <% end %>
 
 <%= form_for Upload.new, html: { :multipart => true } do |f| %>
-	<%= f.hidden_field :file_uid, value: Time.now.to_i %>
+	<%= f.hidden_field :file_uid, value: @uid %>
 	<%= f.file_field :image, multiple: true, id: 'upload_images', class: 'hidden', name: 'upload[image]' %>
 	<%= f.hidden_field :imageable_type, value: nil %>
 	<%= f.hidden_field :imageable_id, value: nil %>

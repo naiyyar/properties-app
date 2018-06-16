@@ -48,6 +48,7 @@ class ReviewsController < ApplicationController
         @reviewable = Unit.find(params[:unit_id])
       end
     end
+    @uid = Time.now.to_i
     @search_bar_hidden = :hidden
   end
 

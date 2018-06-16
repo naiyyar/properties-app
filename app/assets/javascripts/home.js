@@ -343,11 +343,12 @@
     });
 
     //Hiding not building link element
-    $('.contribute-wrapper').click(function() {
-       hideAutoSearchList()
-    });
+    // $('.contribute-wrapper').click(function(e) {
+    //     console.log(12)
+    //     hideAutoSearchList();
+    // });
 
-    $('#search_term').blur(function(e){
+    $('#search_term, #buildings-search-txt').blur(function(e){
         hideAutoSearchList();
     })
 
@@ -358,29 +359,15 @@
     })
 
     function hideAutoSearchList(){
-        if($("ul.ui-autocomplete").is(":visible")) {
-            $("ul.ui-autocomplete").hide();
-        }
-        $('.no-match-link').addClass('hidden');
+        //#setInterval because no match link was not working: hiding too early
+        setInterval(function(){
+            if($("ul.ui-autocomplete").is(":visible")) {
+                $("ul.ui-autocomplete").hide();
+            }
+            $('.no-match-link').addClass('hidden');
+        }, 200)
     }
      
-    // $('#buildings-search-txt, #apt-search-txt').blur(function(e){
-    //     setTimeout(function () {
-    //     if (e.type == 'blur') {
-
-    //       $('.no-match-link').addClass('hidden');
-
-    //     }
-    //     }, 200);
-    // });
-
-    //#home page search when enter keypressed
-    // $("input#apt-search-txt").keypress(function(e){
-    //   if (e.which == 13) {
-    //     e.preventDefault();
-    //     $(".search-btn-submit").click();
-    //   }
-    // });
 
     //Searching building on neighborhood click
     $('.borough-neighborhood').click(function(e){
