@@ -348,19 +348,28 @@
     //     hideAutoSearchList();
     // });
 
-    $('#search_term, #buildings-search-txt').blur(function(e){
+    // $('#search_term, #buildings-search-txt').blur(function(e){
+    //     hideAutoSearchList();
+    // })
+
+    $(document).click(function(e){
+        e.stopPropagation();
         hideAutoSearchList();
     })
 
     $('#search_term').keyup(function(e){
-        if($(this).val() == ''){
-            hideAutoSearchList();
+        //e.keyCode != 40 || e.keyCode != 38 for key up / down
+        //home page search
+        if((e.keyCode != 40 && e.keyCode != 38)){
+            if($('#search_term').val() == ''){
+                hideAutoSearchList();
+            }
         }
     })
 
     function hideAutoSearchList(){
         //#setInterval because no match link was not working: hiding too early
-        setInterval(function(){
+        setTimeout(function(){
             if($("ul.ui-autocomplete").is(":visible")) {
                 $("ul.ui-autocomplete").hide();
             }

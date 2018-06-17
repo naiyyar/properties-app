@@ -66,7 +66,6 @@ app.apartments.prototype = {
 
   _select: function(e, ui) {
     this._input.val(ui.item.search_term);
-    //$("#term").val(ui.item.term);
     term_address = '';
     term_zipcode = '';
     neighborhoods = '';
@@ -81,14 +80,10 @@ app.apartments.prototype = {
       neighborhoods = ui.item.neighborhoods
       url = '/search?search_term='+ui.item.search_term+'&neighborhoods='+neighborhoods;
     }
-    //$("#term_address").val(ui.item.term_address);
-    //$("#term_zipcode").val(ui.item.term_zipcode);
-    //$("#neighborhoods").val(ui.item.neighborhoods);
-    //$("#apt-search-txt-form").val(ui.item.search_term);
+    
     $('.no-match-link').addClass('hidden');
     
     //Submitting search form
-    //$('.search-btn-submit').click();
     window.location = url;
 
     //hiding autocomplete search results
