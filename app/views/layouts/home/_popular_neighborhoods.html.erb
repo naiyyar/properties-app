@@ -10,7 +10,7 @@
               <div class="panel-body">
                 <ul class="neighborhoods-list list-inline">
                   <% @manhattan_neighborhoods[area].sort.each do |nb| %>
-                    <li><a href="<%=search_link(nb, area)%>"><%= nb %></a></li>
+                    <li><a href="<%=search_link(nb, area)%>"><%= nb %> (<%= Building.number_of_buildings(nb) %>)</a></li>
                   <%end%>
                 </ul>
               </div>
@@ -28,7 +28,7 @@
           <h3 class="align-left nh-area-name"><%= area %> <%='(Coming Soon)' if area == 'BRONX'%></h3>
           <ul class="neighborhoods-list">
             <% @manhattan_neighborhoods[area].sort.each do |nb| %>
-              <li><a href="<%=search_link(nb, area)%>"><%= nb %></a></li>
+              <li><a href="<%=search_link(nb, area)%>"><%= nb %> (<%= Building.number_of_buildings(nb) %>)</a></li>
             <%end%>
           </ul>
         </div>

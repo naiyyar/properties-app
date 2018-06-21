@@ -17,7 +17,7 @@
 		          <h2 class="osLight h-r"><%=area%></h2>
 		          <ul class="blog-r-nav text-left">
 		        		<% @manhattan_neighborhoods[area].sort.each do |nb| %>
-		            	<li><a href="<%=search_link(nb, area)%>"><%= nb %></a></li>
+		            	<li><a href="<%=search_link(nb, area)%>"><%= nb %> (<%= Building.number_of_buildings(nb) %>)</a></li>
 		            <%end%>
 		          </ul>
 		        </div>

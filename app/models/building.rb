@@ -272,6 +272,10 @@ class Building < ActiveRecord::Base
     end
   end
 
+  def self.number_of_buildings neighbohood
+    where("neighborhood @@ :q or neighborhoods_parent @@ :q or neighborhood3 @@ :q" , q: neighbohood).count
+  end
+
   private
 
   #child neighbohoods
