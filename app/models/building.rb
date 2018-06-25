@@ -244,7 +244,7 @@ class Building < ActiveRecord::Base
         
         if @building.present? and @building.id.present?
           rev = Review.new
-          rev.attributes = row.to_hash.slice(*row.to_hash.keys[4..6]) #excluding building specific attributes
+          rev.attributes = row.to_hash.slice(*row.to_hash.keys[5..8]) #excluding building specific attributes
           
           rev[:reviewable_id] = @building.id
           rev[:reviewable_type] = 'Building'
@@ -259,7 +259,7 @@ class Building < ActiveRecord::Base
           #row['rating'] => score
           if rev.present? and rev.id.present?
             user.create_rating(row['rating'], @building, rev.id, 'building')
-            if @building.present?
+            if row['vote'].present? and row['vote'] == 'yes'.downcase
               @vote = user.vote_for(@building)
             else
               @vote = user.vote_against(@building)
