@@ -287,6 +287,15 @@ body{
     padding-bottom: 3px;
 }
 
+#properties .figure{
+    background-color: #fff;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    height: 200px;
+}
+
 input[type=select] {
    -webkit-appearance: menulist;
    -moz-appearance:    menulist;

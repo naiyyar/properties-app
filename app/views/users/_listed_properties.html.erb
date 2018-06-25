@@ -2,7 +2,7 @@
 	<h3>Listed Properties (<%= @buildings.count %>)</h3>
 	<div class="row">
 		<% @buildings.each do |building| %>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="properties">
         <a href="<%= building_path(building) %>" class="card">
           <div class="figure">
             <%= image_tag single_image(building), alt: 'image' %>

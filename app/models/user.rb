@@ -95,11 +95,13 @@ class User < ActiveRecord::Base
     rate.save
 
     #populate rating cache table
-    rating_cache = RatingCache.where(cacheable_id: rateable.id, dimension: dimension)
+    rating_caches = RatingCache.where(cacheable_id: rateable.id, dimension: dimension)
     rateables = Rate.where(rateable_id: rateable.id, rateable_type: rateable.class.name, dimension: dimension)
-    if rating_cache.present?
+    if rating_caches.present?
       #updating if rateable is already present
-      RatingCache.update_rating_cache(rating_cache, rateables)
+      rating_caches.each do |rating_cache|
+        RatingCache.update_rating_cache(rating_cache)
+      end
     else
       rating_cache = RatingCache.new
       rating_cache.cacheable_id = rateable.id

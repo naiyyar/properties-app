@@ -51,11 +51,14 @@ class Review < ActiveRecord::Base
     Vote.where(review_id: self.id).destroy_all
     rate = Rate.where(review_id: self.id).destroy_all
     #update stars
-    rateable_id = self.reviewable_id
-    rateable_type = self.reviewable_type
-    rating_cache = RatingCache.where(cacheable_id: rateable_id)
-    rateables = Rate.where(rateable_id: rateable_id, rateable_type: rateable_type)
-    RatingCache.update_rating_cache(rating_cache, rateables)
+    #rateable_type = self.reviewable_type
+    rating_caches = RatingCache.where(cacheable_id: self.reviewable_id, cacheable_type: self.reviewable_type)
+    #rateables = Rate.where(dimension: 'building', rateable_id: rateable_id, rateable_type: rateable_type)
+    
+    #updating avg ratign for all dimensions
+    rating_caches.each do |rating_cache|
+      RatingCache.update_rating_cache(rating_cache)
+    end
   end
 
 end

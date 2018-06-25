@@ -34,7 +34,7 @@ class HomeController < ApplicationController
   end
 
   def search
-    search_string = params['search_term'].split(',')[0]
+    search_string = params['search_term'].present? ? params['search_term'].split(',')[0] : 'New York'
     unless params['term_address'].present?
       unless search_string == 'New York'
         @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
@@ -58,7 +58,7 @@ class HomeController < ApplicationController
             @zoom = 16 if @brooklyn_neighborhoods == 'Sutton Place'
           end
         else
-          city = params['search_term'].split(',')[0]
+          city = search_string
           if city == 'Manhattan'
             @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}
             @zoom = 12
@@ -78,7 +78,7 @@ class HomeController < ApplicationController
       redirect_to building_path(building.first) if building.present?
     end
     
-    if params['search_term'].present? and params['search_term'].split(',')[0] == 'New York'
+    if search_string.present? and search_string == 'New York'
       @neighborhood_links = NeighborhoodLink.all
     elsif view_context.queens_borough.include?(params[:neighborhoods])
       @neighborhood_links = NeighborhoodLink.where('neighborhood = ?',params[:neighborhoods])
@@ -103,7 +103,6 @@ class HomeController < ApplicationController
                                           )
 	    end
 	  end
-
   end
 
   def tos
