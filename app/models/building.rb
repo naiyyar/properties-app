@@ -122,7 +122,7 @@ class Building < ActiveRecord::Base
   end
 
   def zipcode=(val)
-    write_attribute(:zipcode, val.gsub(/\s+/,'')) if val.present?
+    write_attribute(:zipcode, val.to_s.gsub(/\s+/,'')) if val.present?
   end
 
   def street_address

@@ -1,51 +1,53 @@
-<div class="modal fade" id="contribute_more" role="dialog" aria-labelledby="contirbuteMoreLabel" aria-hidden="true">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="contirbuteMoreLabel">Would you like to contribute more?</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="media">
-              <div class="media-left">
-                <div class="media-body">
-                  <h1 class="pageTitle"><%= @building.building_name_or_address %></h1> 
-                  <div class="address text-muted">
-                    <%= building_street_address @building %> <br />
-                    <%= @building.neighborhood %>
+<% if current_user.present? %>
+  <div class="modal fade" id="contribute_more" role="dialog" aria-labelledby="contirbuteMoreLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="contirbuteMoreLabel">Would you like to contribute more?</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="media">
+                <div class="media-left">
+                  <div class="media-body">
+                    <h1 class="pageTitle"><%= @building.building_name_or_address %></h1> 
+                    <div class="address text-muted">
+                      <%= building_street_address @building %> <br />
+                      <%= @building.neighborhood %>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <h2></h2>
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="form-group">
-              <%= link_to 'Building Review', new_review_path(contribution: 'building_review', user_id: current_user.id, building_id: @building.id), class: 'btn btn-primary' %>
+          <h2></h2>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="form-group">
+                <%= link_to 'Building Review', new_review_path(contribution: 'building_review', user_id: current_user.id, building_id: @building.id), class: 'btn btn-primary' %>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="form-group">
-              <%= link_to 'Building Photos', new_upload_path(contribution: 'building_photos', user_id: current_user.id, building_id: @building.id), class: 'btn btn-primary', "data-no-turbolink" => false %>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="form-group">
+                <%= link_to 'Building Photos', new_upload_path(contribution: 'building_photos', user_id: current_user.id, building_id: @building.id), class: 'btn btn-primary', "data-no-turbolink" => false %>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="form-group">
-              <%= link_to 'Building Amenities', edit_building_path(contribution: 'building_amenities', user_id: current_user.id, id: @building.id), class: 'btn btn-primary' %>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="form-group">
+                <%= link_to 'Building Amenities', edit_building_path(contribution: 'building_amenities', user_id: current_user.id, id: @building.id), class: 'btn btn-primary' %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<%end%>
