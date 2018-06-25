@@ -11,7 +11,7 @@
               <div class="form-group">
                 <label>Excel/csv file</label>
                  <%= file_field_tag :file, class: "form-control"%>
-                 <%= hidden_field_tag :building_id, @building.id%>
+                 <%= hidden_field_tag :building_id, @building.id if @building.present? %>
                  <small>Only .csv, .xls, .xlsx formats allowed.</small>
               </div>
               

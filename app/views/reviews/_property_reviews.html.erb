@@ -6,7 +6,11 @@
       </div>
 
       <div class="pull-right">
-        <%= link_to 'Destroy scraped reviews', destroy_scraped_reviews_reviews_path, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+        <% if current_user and current_user.has_role?(:admin) %>
+          <%= link_to 'Import excel', '#importReviews', class: 'btn btn-blue pull-right', 'data-toggle' => 'modal' %>
+          <%= render partial: 'reviews/import_reviews_form' %>
+        <%end%>
+        <%= link_to 'Destroy scraped reviews', destroy_scraped_reviews_reviews_path, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %> &nbsp;
       </div>
     </div>
   </div>

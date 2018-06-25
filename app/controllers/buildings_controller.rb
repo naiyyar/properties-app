@@ -25,8 +25,8 @@ class BuildingsController < ApplicationController
   end
 
   def import
-    @building = Building.find(params[:building_id])
-    @building.import_reviews(params[:file])
+    #@building = Building.find(params[:building_id])
+    Building.import_reviews(params[:file])
     
     redirect_to :back, notice: 'File imported.'
   end

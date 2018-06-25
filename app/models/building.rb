@@ -122,7 +122,7 @@ class Building < ActiveRecord::Base
   end
 
   def zipcode=(val)
-    write_attribute(:zipcode, val.gsub(/\s+/,''))
+    write_attribute(:zipcode, val.gsub(/\s+/,'')) if val.present?
   end
 
   def street_address
@@ -224,46 +224,59 @@ class Building < ActiveRecord::Base
     buildings = Building.where('id <> ?', self.id)
   end
 
-  def import_reviews file
+  def self.import_reviews file
     user = User.find_by_email('reviews@transparentcity.co')
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose ]
-      rev = Review.new
-      rev.attributes = row.to_hash.slice(*row.to_hash.keys)
-      
-      rev[:reviewable_id] = self.id
-      rev[:reviewable_type] = 'Building'
-      rev[:anonymous] = true
-      rev[:created_at] = DateTime.parse(row['created_at'])
-      rev[:updated_at] = DateTime.parse(row['updated_at'])
-      rev[:user_id] = user.id
-      rev[:tos_agreement] = true
-      rev[:scraped] = true
-      rev.save!
-
-      # building_id represents score here
-      if rev.present? and rev.id.present?
-        user.create_rating(row['building_id'], self, rev.id)
-
-        if row['building_address']
-          @vote = user.vote_for(self)
+      if row['building_address'].present?
+        @buildings = Building.where(building_street_address: row['building_address'], zipcode: row['zipcode'])
+        unless @buildings.present?
+          @building = Building.create({ building_street_address: row['building_address'], 
+                                      city: row['city'], 
+                                      state: 'NY', 
+                                      zipcode: row['zipcode']
+                                    })
         else
-          @vote = user.vote_against(self)
+          @building = @buildings.first
         end
         
-        if @vote.present?
-          @vote.review_id = rev.id
-          @vote.save
+        if @building.present? and @building.id.present?
+          rev = Review.new
+          rev.attributes = row.to_hash.slice(*row.to_hash.keys[4..6]) #excluding building specific attributes
+          
+          rev[:reviewable_id] = @building.id
+          rev[:reviewable_type] = 'Building'
+          rev[:anonymous] = true
+          rev[:created_at] = DateTime.parse(row['created_at'])
+          rev[:updated_at] = DateTime.parse(row['created_at'])
+          rev[:user_id] = user.id
+          rev[:tos_agreement] = true
+          rev[:scraped] = true
+          rev.save!
+
+          #row['rating'] => score
+          if rev.present? and rev.id.present?
+            user.create_rating(row['rating'], @building, rev.id, 'building')
+            if @building.present?
+              @vote = user.vote_for(@building)
+            else
+              @vote = user.vote_against(@building)
+            end
+            
+            if @vote.present?
+              @vote.review_id = rev.id
+              @vote.save
+            end
+          end
         end
       end
-
     end
 
   end
 
-  def open_spreadsheet(file)
+  def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
      when '.csv' then Roo::CSV.new(file.path)
      when '.xls' then Roo::Excel.new(file.path)

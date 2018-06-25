@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
     self.id == object.user_id
   end
 
-  def create_rating score, rateable, review_id = nil, dimension
+  def create_rating score, rateable, review_id, dimension=nil
     rate = Rate.new
     rate.rater_id = self.id
     rate.rateable_id = rateable.id
