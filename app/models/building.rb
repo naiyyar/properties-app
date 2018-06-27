@@ -84,16 +84,45 @@ class Building < ActiveRecord::Base
     self.building_name
   end
 
+  def self.filtered_buildings buildings, filter_params
+    #filter_params = {"amenities"=>["courtyard", "pets_allowed_cats", "pets_allowed_dogs"], 
+                      #"bedrooms"=>["0", "1"], 
+                      #"type"=>["Condo Building"], "rating"=>["Condo Building"]}
+    units = Unit.where(number_of_bedrooms: filter_params[:bedrooms]) if filter_params[:bedrooms].present?
+    rates = RatingCache.where(cacheable_type: 'Building', avg: filter_params[:rating]) if filter_params[:rating].present?
+    
+    if units.present? and rates.present?
+      @building_ids = units.map(&:building_id) + rates.map(&:cacheable_id)
+    elsif units.present? and !rates.present?
+      @building_ids = units.map(&:building_id)
+    else
+      @building_ids = rates.map(&:cacheable_id)
+    end
+
+    #filter for all
+    buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
+
+    # if filter_params.keys.length >= 4
+    #   #filter for all
+    #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
+    # elsif filter_params[:bedrooms].present? and filter_params[:type].present? and filter_params[:rating].present?
+    #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
+    # elsif filter_params[:bedrooms].present? and filter_params[:rating].present?
+    #   buildings.where('building_type in (?)', building_ids.uniq, filter_params[:type])
+    # end
+
+  end
+
   def self.search_by_zipcodes(criteria)
-    regexp = /#{criteria}/i;
+    #regexp = /#{criteria}/i;
     results = Building.search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
-    results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+    #results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
   def self.search_by_pneighborhoods(criteria)
-    regexp = /#{criteria}/i;
+    #regexp = /#{criteria}/i; remove due to RegexpError: premature end of char-class: /river [a/i
     results = Building.search_by_pneighborhood(criteria).order(:neighborhoods_parent).to_a.uniq(&:neighborhoods_parent)
-    results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+    #results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
   def self.search_by_building_name(criteria)

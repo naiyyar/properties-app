@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   before_filter :allow_iframe_requests
-  after_filter :store_location
+  after_filter :store_location, except: [:auto_search]
   before_action :popular_neighborhoods
 
   def store_location

@@ -437,8 +437,19 @@
         }
     });
 
-    $('.handleFilter').click(function() {
+    $('.handleFilter').click(function(e) {
+        e.preventDefault();
         $('.filterForm').slideToggle(200);
+    });
+
+    $('.applyFilter').click(function(e) {
+        e.preventDefault();
+        $('.btn-submit-filter-form').click();
+    });
+
+    $('.clearFilter').click(function(e) {
+        e.preventDefault();
+        $('.filterForm input[type=checkbox]').attr('checked', false)
     });
 
     //Enable swiping

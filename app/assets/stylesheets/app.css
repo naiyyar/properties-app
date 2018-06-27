@@ -1980,7 +1980,9 @@ a.btn.viewInfo {
 }
 .filter {
     background-color: #fff;
-    border-bottom: 1px solid #e8e8e8;
+    /*border-bottom: 1px solid #e8e8e8;*/
+    float: right;
+    width: 53.2%;
 }
 .filter h1 {
     margin-top: 0;
@@ -1989,6 +1991,7 @@ a.btn.viewInfo {
     padding: 20px;
     float: left;
 }
+
 .rightContainer h1 {
     margin-top: 0;
     margin-bottom: 0;
@@ -2003,15 +2006,15 @@ a.btn.viewInfo {
     padding-bottom: 10px;
     float: left;
 }
-a.handleFilter {
+a.handleFilter, a.handleSort {
     float: right;
     display: block;
     padding: 10px;
     margin: 10px 10px 0 0;
-    font-size: 18px;
+    /*font-size: 18px;*/
     text-decoration: none;
 }
-.no-touch a.handleFilter:hover {
+.no-touch a.handleFilter:hover, .no-touch a.handleSort:hover {
     text-decoration: none;
 }
 .filterForm label {
@@ -2020,7 +2023,9 @@ a.handleFilter {
     color: #333;
 }
 .filterForm {
-    padding: 0 20px;
+    padding: 6px 20px;
+    margin-top: 8px; 
+    border-top: 1px solid #ddd;
 }
 .formItem {
     padding-bottom: 20px;

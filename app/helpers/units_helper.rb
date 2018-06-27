@@ -18,4 +18,8 @@ module UnitsHelper
 			dryer_in_unit: 'Washer/Dryer'
 		}
 	end
+
+	def bedroom_options
+		[['Studio',0],['1 Bed', 1],['2 Bed',2],['3 Bed',3],['4+ Bed',4]]
+	end
 end

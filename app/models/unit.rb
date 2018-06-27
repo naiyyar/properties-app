@@ -35,4 +35,14 @@ class Unit < ActiveRecord::Base
     self.uploads.where('image_file_name is not null')
   end
 
+  def bedrooms
+  	if number_of_bedrooms == 0
+  		'Studio'
+  	elsif number_of_bedrooms == 4
+  		'4+ Bedrooms'
+  	else
+  		"#{number_of_bedrooms} Bedrooms"
+  	end
+  end
+
 end

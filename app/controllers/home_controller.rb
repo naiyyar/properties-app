@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   
+  before_action :reset_session, only: [:index, :auto_search]
+
   def index
-    session[:return_to] = nil
     @manhattan_neighborhoods = view_context.manhattan_neighborhoods
   end
 
@@ -88,6 +89,8 @@ class HomeController < ApplicationController
 
     @neighborhood_links = @neighborhood_links.order({ date: :desc }, { title: :asc }) if @neighborhood_links.present?
     
+    @buildings = Building.filtered_buildings(@buildings, params[:filter]) if params[:filter].present?
+    
     if @buildings.present?
       @buildings = @buildings.includes(:uploads, :units, :building_average, :votes)
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
@@ -112,6 +115,10 @@ class HomeController < ApplicationController
   
   def manhattan_kmls
     ['Midtown', 'Sutton Place']
+  end
+
+  def reset_session
+    session[:return_to] = nil if session[:return_to].present?
   end
 
 end
