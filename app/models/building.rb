@@ -120,12 +120,12 @@ class Building < ActiveRecord::Base
   end
 
   #TODO: 1. filter by amenities and Selected boxes
-  def self.filtered_buildings buildings, filter_params
+  def self.filtered_buildings buildings, params
     #filter_params = {"amenities"=>["courtyard", "pets_allowed_cats", "pets_allowed_dogs"], 
                       #"bedrooms"=>["0", "1"], 
                       #"type"=>["Condo Building"], "rating"=>["Condo Building"]}
-    units = Unit.where(number_of_bedrooms: filter_params[:bedrooms]) if filter_params[:bedrooms].present?
-    rates = RatingCache.where(cacheable_type: 'Building', avg: filter_params[:rating]) if filter_params[:rating].present?
+    units = Unit.where(number_of_bedrooms: params[:filter][:bedrooms]) if params[:filter][:bedrooms].present?
+    rates = RatingCache.where(cacheable_type: 'Building', avg: params[:filter][:rating]) if fparams[:filter][:rating].present?
     
     if units.present? and rates.present?
       @building_ids = units.map(&:building_id) + rates.map(&:cacheable_id)
