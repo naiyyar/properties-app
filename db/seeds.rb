@@ -495,3 +495,8 @@
 # # ues.each do |coord|
 # # 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Upper East Side')
 # # end
+
+Building.all.each do |building|
+	building.reviews_count = building.reviews.count
+	building.save
+end

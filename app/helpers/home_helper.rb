@@ -130,7 +130,7 @@ module HomeHelper
     when '5'
       'Z - A'
     else
-      'Default'
+      'Sort'
     end
 	end
 

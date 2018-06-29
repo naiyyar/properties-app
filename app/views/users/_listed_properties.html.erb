@@ -21,7 +21,7 @@
               <%= rating_for building, 'building', disable_after_rate: true, readonly: true %>
           </div>
           <ul class="cardFeat">
-              <li><span class="fa fa-star-o"></span> <%= building.reviews.count %></li>
+              <li><span class="fa fa-star-o"></span> <%= building.reviews_count %></li>
             <li><span>Units: </span> <%= building.units.count %></li>
             <li><span>Unit Reviews:</span> <%= building.unit_reviews_count %></li>
             <li><span class="icon-like"></span> <%= building.votes_for %></li>

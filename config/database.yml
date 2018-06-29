@@ -12,7 +12,7 @@ default: &default
 
 development:
   <<: *default
-  database: dev_transparentcity25apr
+  database: dev_transparentcity29june
   username: postgres
   password: postgres
 

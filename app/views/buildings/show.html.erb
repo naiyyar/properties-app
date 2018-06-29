@@ -49,7 +49,7 @@
   <div class="clearfix"></div>
   <div class="tabsContainer" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "BUILDING REVIEWS (#{ @building.reviews.count })"%></a></li>
+      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "BUILDING REVIEWS (#{ @building.reviews_count })"%></a></li>
       <li><a href="#unit_reviews" role="tab" data-toggle="tab"><%= 'UNIT REVIEWS'%> (<%= @unit_review_count %>)</a></li>
       <li><a href="#rent_amount" role="tab" data-toggle="tab"><%= 'RENT INFORMATION'%> (<%= @unit_rent_summary_count %>)</a></li>
       <li><a href="#units" role="tab" data-toggle="tab"><%= 'UNITS'%> (<%= @building.units.count %>)</a></li>

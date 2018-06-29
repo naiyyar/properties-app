@@ -97,7 +97,7 @@ class Building < ActiveRecord::Base
     when '2'
       buildings = sorted_buildings_by_rating(buildings, '2')
     when '3'
-      buildings = sorted_buildings_by_reviews(buildings, '3')
+      buildings = buildings.reorder('reviews_count DESC')
     when '4'
       buildings = buildings.reorder('building_name ASC')
     when '5'
@@ -105,7 +105,6 @@ class Building < ActiveRecord::Base
     else
       buildings = buildings
     end
-    
     buildings
   end
 
@@ -120,17 +119,7 @@ class Building < ActiveRecord::Base
     buildings
   end
 
-  def self.sorted_buildings_by_reviews buildings, sort_index
-    # if sort_params == '1'
-    #   @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg desc')
-    # else
-    #   @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg asc')
-    # end
-    # building_ids = @ratings.map(&:cacheable_id)
-    # buildings = buildings.where(id: building_ids).to_a.sort_by{ |b| building_ids.index(u.id) }
-    # buildings
-  end
-
+  #TODO: 1. filter by amenities and Selected boxes
   def self.filtered_buildings buildings, filter_params
     #filter_params = {"amenities"=>["courtyard", "pets_allowed_cats", "pets_allowed_dogs"], 
                       #"bedrooms"=>["0", "1"], 
@@ -227,10 +216,6 @@ class Building < ActiveRecord::Base
 
   def no_of_units
     self.number_of_units.present? ? self.number_of_units : self.units.count
-  end
-
-  def reviews_count
-    self.reviews.present? ? self.reviews.count : 0
   end
 
   def rating_cache
