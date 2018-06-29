@@ -36,10 +36,16 @@
 	  </div>
 	</div>
 <%end%>
+
 <% if params[:neighborhoods].present? %>
 	<div class="pull-right">
-		<a href="#" class="handleFilter btn btn-default btn-sm"><span class="fa fa-filter"></span> Filter</a> &nbsp;
-	 	<div style="margin-top: 8px;margin-right: 4px;" class="pull-right">
+		<div style="margin-top: 8px;margin-right: 18px;" class="pull-right">
+	 		<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle handleFilter">
+	      <span class="dropdown-label"><span class="fa fa-filter"></span> &nbsp;<%= 'Filter' %></span> &nbsp; 
+	    </button>
+	  </div>
+		<!-- <a href="#" class="handleFilter btn btn-default btn-sm"><span class="fa fa-filter"></span> Filter</a> &nbsp; -->
+		<div style="margin-top: 8px;margin-right: 18px;" class="pull-right">
 		 	<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle">
 	      <span class="dropdown-label"><span class="fa fa-sort"></span> &nbsp;<%= params[:sort_by].present? ? sort_string : 'Sort'  %></span> &nbsp; 
 	    </button>
@@ -58,61 +64,60 @@
 	</div>
  
 	<div class="filter">
-	    <!-- <h1 class="osLight">Filter your results</h1> -->
-	    <div class="clearfix"></div>
-	    <form action='/search' class="filterForm" style="display: none;">
-	    	<%= hidden_field_tag :neighborhoods, params[:neighborhoods] %>
-	      <%= hidden_field_tag :search_term, params[:search_term] %>
-	      <div class="row">
-	        <div class="col-xs-6 col-sm-6 col-md-12 col-lg-12 formItem">
-	          <div class="formField">
-	              <div class="volume">
-	                <div class="col-sm-6">
-	                	<label><b>Amenities</b></label>
-	              		<% building_amenities.each_pair do |k, v| %>
-	                  	<div class="checkbox custom-checkbox"><label><%= check_box_tag "filter[amenities][]", "#{k}", false, id: "#{k}" %><span class="fa fa-check"></span> <%=v%></label></div>
-	                  <%end%>                     
-	                </div>
-	              </div>
-	          </div>
-	          
-	          <div class="formField">
-	            <div class="volume">
-	              <div class="col-sm-4">
-	              	<label><b>Bedrooms</b></label>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='0' id="studio"><span class="fa fa-check"></span> Studio</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='1' id="1bed"><span class="fa fa-check"></span> 1 Bed</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='3' id="2beds"><span class="fa fa-check"></span> 2 Beds</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='3' id="3beds"><span class="fa fa-check"></span> 3 Beds</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='4' id="4plusbeds"><span class="fa fa-check"></span> 4+ Beds</label></div>
-	              
-	              	<label><b>Building Type</b></label>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Rental Building"><span class="fa fa-check"></span> Rental</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Condo Building"><span class="fa fa-check"></span> Condo</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Coop Building"><span class="fa fa-check"></span> Coop</label></div>
-	             
-	              	<label><b>Rating</b></label>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="1"><span class="fa fa-check"></span> 1 Star</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="2"><span class="fa fa-check"></span> 2 Star</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="3"><span class="fa fa-check"></span> 3 Star</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="4"><span class="fa fa-check"></span> 4 Star</label></div>
-	                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="5"><span class="fa fa-check"></span> 5 Star</label></div>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	      </div>
+    <div class="clearfix"></div>
+    <form action='/search' class="filterForm" style="display: none;">
+    	<%= hidden_field_tag :neighborhoods, params[:neighborhoods] %>
+      <%= hidden_field_tag :search_term, params[:search_term] %>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-12 col-lg-12 formItem">
+          <div class="formField">
+              <div class="volume">
+                <div class="col-sm-6">
+                	<label><b>Amenities</b></label>
+              		<% building_amenities.each_pair do |k, v| %>
+                  	<div class="checkbox custom-checkbox"><label><%= check_box_tag "filter[amenities][]", "#{k}", false, id: "#{k}" %><span class="fa fa-check"></span> <%=v%></label></div>
+                  <%end%>                     
+                </div>
+              </div>
+          </div>
+          
+          <div class="formField">
+            <div class="volume">
+              <div class="col-sm-4">
+              	<label><b>Bedrooms</b></label>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='0' id="studio"><span class="fa fa-check"></span> Studio</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='1' id="1bed"><span class="fa fa-check"></span> 1 Bed</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='3' id="2beds"><span class="fa fa-check"></span> 2 Beds</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='3' id="3beds"><span class="fa fa-check"></span> 3 Beds</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='4' id="4plusbeds"><span class="fa fa-check"></span> 4+ Beds</label></div>
+              
+              	<label><b>Building Type</b></label>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Rental Building"><span class="fa fa-check"></span> Rental</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Condo Building"><span class="fa fa-check"></span> Condo</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Coop Building"><span class="fa fa-check"></span> Coop</label></div>
+             
+              	<label><b>Rating</b></label>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="1"><span class="fa fa-check"></span> 1 Star</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="2"><span class="fa fa-check"></span> 2 Star</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="3"><span class="fa fa-check"></span> 3 Star</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="4"><span class="fa fa-check"></span> 4 Star</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="5"><span class="fa fa-check"></span> 5 Star</label></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-	      <div class="formField">
-	      	<div class="row">
-	      		<div class="pull-right">
-		      		<a href="#" class="clearFilter btn btn-default btn-xlg">Reset</a>
-		      		<a href="#" class="applyFilter btn btn-green btn-xlg">Apply</a>
-		      	</div>
-		      	<%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden' %>
+      <div class="formField">
+      	<div class="row">
+      		<div class="pull-right">
+	      		<a href="#" class="clearFilter btn btn-default btn-xlg">Reset</a>
+	      		<a href="#" class="applyFilter btn btn-green btn-xlg">Apply</a>
 	      	</div>
-	      </div>
-	    </form>
+	      	<%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden' %>
+      	</div>
+      </div>
+    </form>
 	</div>
 <%end%>
 
