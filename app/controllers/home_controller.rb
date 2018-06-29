@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class HomeController < ApplicationController
   
   before_action :reset_session, only: [:index, :auto_search]
@@ -89,10 +90,16 @@ class HomeController < ApplicationController
 
     @neighborhood_links = @neighborhood_links.order({ date: :desc }, { title: :asc }) if @neighborhood_links.present?
     
-    @buildings = Building.filtered_buildings(@buildings, params[:filter]) if params[:filter].present?
+    if params[:filter].present? and params[:sort_by].present? #filter and sort
+      @buildings = Building.filtered_buildings(@buildings, params)
+    elsif params[:filter].present? and params[:sort_by].blank? #only filter
+      @buildings = Building.filtered_buildings(@buildings, params)
+    elsif params[:filter].blank? and params[:sort_by].present? #only sort
+      @buildings = Building.sort_buildings(@buildings, params[:sort_by])
+    end
     
     if @buildings.present?
-      @buildings = @buildings.includes(:uploads, :units, :building_average, :votes)
+      @buildings = @buildings.includes(:uploads, :units, :building_average, :votes) unless @buildings.kind_of? Array
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
         marker.lat building.latitude
 	      marker.lng building.longitude

@@ -7,6 +7,14 @@
 body{
     background-color: #f3f3f3 !important;
 }
+
+.sortMenu .active, .sortMenu .active a:hover{
+    background: #0075c9 !important;
+}
+.sortMenu .active a, .sortMenu .active a:hover{
+    color: #fff;
+}
+
 .notransition * {
     -webkit-transition: none !important;
     -moz-transition: none !important;
@@ -2009,8 +2017,8 @@ a.btn.viewInfo {
 a.handleFilter, a.handleSort {
     float: right;
     display: block;
-    padding: 10px;
-    margin: 10px 10px 0 0;
+    padding: 11px;
+    margin: 8px 10px 0 0;
     /*font-size: 18px;*/
     text-decoration: none;
 }

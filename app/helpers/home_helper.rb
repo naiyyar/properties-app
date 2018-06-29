@@ -113,4 +113,29 @@ module HomeHelper
 		end
 	end
 
+	def sort_url(sort_index)
+		"/search?search_term=#{params[:search_term]}&neighborhoods=#{params[:neighborhoods]}&sort_by=#{sort_index}"
+	end
+
+	def sort_string
+		case params[:sort_by]
+		when '1'
+      'Rating (high to low)'
+    when '2'
+      'Rating (low to high)'
+    when '3'
+      'Reviews (high to low)'
+    when '4'
+      'A - Z'
+    when '5'
+      'Z - A'
+    else
+      'Default'
+    end
+	end
+
+	def active index
+		params[:sort_by] == index ? 'active' : ''
+	end
+
 end

@@ -84,6 +84,53 @@ class Building < ActiveRecord::Base
     self.building_name
   end
 
+  # 0 => Default
+  # 1 => Rating (high to low)
+  # 2 => Rating (high to low)
+  # 3 => Reviews (high to low)
+  # 4 => A to Z
+  # 5 => Z to A
+  def self.sort_buildings(buildings, sort_params)
+    case sort_params
+    when '1'
+      buildings = sorted_buildings_by_rating(buildings, '1')
+    when '2'
+      buildings = sorted_buildings_by_rating(buildings, '2')
+    when '3'
+      buildings = sorted_buildings_by_reviews(buildings, '3')
+    when '4'
+      buildings = buildings.reorder('building_name ASC')
+    when '5'
+      buildings = buildings.reorder('building_name DESC')
+    else
+      buildings = buildings
+    end
+    
+    buildings
+  end
+
+  def self.sorted_buildings_by_rating buildings, sort_index
+    if sort_index == '1'
+      @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg desc')
+    else
+      @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg asc')
+    end
+    building_ids = @ratings.map(&:cacheable_id)
+    buildings = buildings.where(id: building_ids).to_a.sort_by{ |b| building_ids.index(b.id) }
+    buildings
+  end
+
+  def self.sorted_buildings_by_reviews buildings, sort_index
+    # if sort_params == '1'
+    #   @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg desc')
+    # else
+    #   @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg asc')
+    # end
+    # building_ids = @ratings.map(&:cacheable_id)
+    # buildings = buildings.where(id: building_ids).to_a.sort_by{ |b| building_ids.index(u.id) }
+    # buildings
+  end
+
   def self.filtered_buildings buildings, filter_params
     #filter_params = {"amenities"=>["courtyard", "pets_allowed_cats", "pets_allowed_dogs"], 
                       #"bedrooms"=>["0", "1"], 
