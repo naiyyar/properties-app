@@ -87,23 +87,23 @@
             <div class="volume">
               <div class="col-sm-4">
               	<label><b>Bedrooms</b></label>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='0' id="studio"><span class="fa fa-check"></span> Studio</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='1' id="1bed"><span class="fa fa-check"></span> 1 Bed</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='3' id="2beds"><span class="fa fa-check"></span> 2 Beds</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='3' id="3beds"><span class="fa fa-check"></span> 3 Beds</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value='4' id="4plusbeds"><span class="fa fa-check"></span> 4+ Beds</label></div>
-              
+              	<% ['0','1','2','3','4'].map do |val| %>
+              		<% if val == '0' %>
+                		<div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value="<%=val%>" id="studio" <%= bed_checked('0') %>><span class="fa fa-check"></span> Studio</label></div>
+                	<%else%>
+                		<div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value="<%=val%>" id="<%=val%>beds" <%= bed_checked(val) %>><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Beds</label></div>
+                	<%end%>
+                <%end%>
+                
               	<label><b>Building Type</b></label>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Rental Building"><span class="fa fa-check"></span> Rental</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Condo Building"><span class="fa fa-check"></span> Condo</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Coop Building"><span class="fa fa-check"></span> Coop</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Rental Building" <%= type_checked('Rental Building') %>><span class="fa fa-check"></span> Rental</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Condo Building" <%= type_checked('Condo Building') %>><span class="fa fa-check"></span> Condo</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Coop Building" <%= type_checked('Coop Building') %>><span class="fa fa-check"></span> Coop</label></div>
              
               	<label><b>Rating</b></label>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="1"><span class="fa fa-check"></span> 1 Star</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="2"><span class="fa fa-check"></span> 2 Star</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="3"><span class="fa fa-check"></span> 3 Star</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="4"><span class="fa fa-check"></span> 4 Star</label></div>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="5"><span class="fa fa-check"></span> 5 Star</label></div>
+              	<% 1.upto(5) do |val| %>
+                	<div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="<%=val%>" <%= rating_checked(val) %> ><span class="fa fa-check"></span> <%=val%> Star</label></div>
+                <%end%>
               </div>
             </div>
           </div>

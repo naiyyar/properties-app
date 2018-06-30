@@ -138,4 +138,16 @@ module HomeHelper
 		params[:sort_by] == index ? 'active' : ''
 	end
 
+	def rating_checked val
+		params[:filter][:rating].include?(val.to_s) ? 'checked' : '' if params[:filter].present? and params[:filter][:rating].present?
+	end
+
+	def type_checked val
+		params[:filter][:type].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:type].present?
+	end
+
+	def bed_checked val
+		params[:filter][:bedrooms].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:bedrooms].present?
+	end
+
 end

@@ -7,4 +7,8 @@
     <td><span>Photos:</span> <%=link_to "#{building.image_uploads.count}", building_uploads_path(building_id: building.id), 'data-no-turbolink' => false, style: 'color: #333;' %></td>
     <td><span>Rent Information:</span> <%= building.rent_information %></td>
   </tr>
+  <tr>
+    <td><span>Type:</span> <%= building.building_type %></td>
+    <td><span>units</span> <%= building.units.count %></td>
+  </tr>
 </table>

@@ -93,9 +93,9 @@ class Building < ActiveRecord::Base
   def self.sort_buildings(buildings, sort_params)
     case sort_params
     when '1'
-      buildings = sorted_buildings_by_rating(buildings, '1')
+      buildings = sort_by_rating(buildings, '1')
     when '2'
-      buildings = sorted_buildings_by_rating(buildings, '2')
+      buildings = sort_by_rating(buildings, '2')
     when '3'
       buildings = buildings.reorder('reviews_count DESC')
     when '4'
@@ -108,7 +108,7 @@ class Building < ActiveRecord::Base
     buildings
   end
 
-  def self.sorted_buildings_by_rating buildings, sort_index
+  def self.sort_by_rating buildings, sort_index
     if sort_index == '1'
       @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg desc')
     else
@@ -119,35 +119,69 @@ class Building < ActiveRecord::Base
     buildings
   end
 
-  #TODO: 1. filter by amenities and Selected boxes
-  def self.filtered_buildings buildings, params
-    #filter_params = {"amenities"=>["courtyard", "pets_allowed_cats", "pets_allowed_dogs"], 
-                      #"bedrooms"=>["0", "1"], 
-                      #"type"=>["Condo Building"], "rating"=>["Condo Building"]}
-    units = Unit.where(number_of_bedrooms: params[:filter][:bedrooms]) if params[:filter][:bedrooms].present?
-    rates = RatingCache.where(cacheable_type: 'Building', avg: params[:filter][:rating]) if fparams[:filter][:rating].present?
-    
-    if units.present? and rates.present?
-      @building_ids = units.map(&:building_id) + rates.map(&:cacheable_id)
-    elsif units.present? and !rates.present?
-      @building_ids = units.map(&:building_id)
+  def self.filter_by_rates buildings, rating
+    if rating.present?
+      rates = RatingCache.where(cacheable_type: 'Building', avg: rating)
+      buildings.where('id in (?)', rates.map(&:cacheable_id))
     else
-      @building_ids = rates.map(&:cacheable_id)
+      buildings
     end
-
-    #filter for all
-    buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
-
-    # if filter_params.keys.length >= 4
-    #   #filter for all
-    #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
-    # elsif filter_params[:bedrooms].present? and filter_params[:type].present? and filter_params[:rating].present?
-    #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
-    # elsif filter_params[:bedrooms].present? and filter_params[:rating].present?
-    #   buildings.where('building_type in (?)', building_ids.uniq, filter_params[:type])
-    # end
-
   end
+
+  def self.filter_by_beds buildings, beds
+    # joins('LEFT JOIN events_tags ON (events.id = events_tags.event_id) LEFT JOIN tags ON (tags.id = events_tags.tag_id)')
+    #   .where('tags.label' => tags).group('events.id').having("count(events.id) = #{tags.count}")
+    if beds.present?
+      units = Unit.where(number_of_bedrooms: beds)
+      @buildings = buildings.where('id in (?)', units.map(&:building_id))
+    else
+      @buildings = buildings
+    end
+    @buildings
+  end
+
+  def self.filter_by_types buildings, type
+    if type.present?
+      @buildings = buildings.where(building_type: type)
+    else
+      @buildings = buildings
+    end
+    @buildings
+  end
+
+  #TODO
+  def self.filter_by_amenities
+  end
+
+  #TODO: 1. filter by amenities and Selected boxes
+  # def self.filter_buildings buildings, params
+  #   #filter_params = {"amenities"=>["courtyard", "pets_allowed_cats", "pets_allowed_dogs"], 
+  #                     #"bedrooms"=>["0", "1"], 
+  #                     #"type"=>["Condo Building"], "rating"=>["Condo Building"]}
+  #   units = Unit.where(number_of_bedrooms: params[:filter][:bedrooms]) if params[:filter][:bedrooms].present?
+    
+    
+  #   if units.present? and rates.present?
+  #     @building_ids = units.map(&:building_id) + rates.map(&:cacheable_id)
+  #   elsif units.present? and !rates.present?
+  #     @building_ids = units.map(&:building_id)
+  #   else
+  #     @building_ids = rates.map(&:cacheable_id)
+  #   end
+
+  #   #filter for all
+  #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
+
+  #   # if filter_params.keys.length >= 4
+  #   #   #filter for all
+  #   #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
+  #   # elsif filter_params[:bedrooms].present? and filter_params[:type].present? and filter_params[:rating].present?
+  #   #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
+  #   # elsif filter_params[:bedrooms].present? and filter_params[:rating].present?
+  #   #   buildings.where('building_type in (?)', building_ids.uniq, filter_params[:type])
+  #   # end
+
+  # end
 
   def self.search_by_zipcodes(criteria)
     #regexp = /#{criteria}/i;

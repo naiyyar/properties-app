@@ -90,13 +90,16 @@ class HomeController < ApplicationController
 
     @neighborhood_links = @neighborhood_links.order({ date: :desc }, { title: :asc }) if @neighborhood_links.present?
     
-    if params[:filter].present? and params[:sort_by].present? #filter and sort
-      @buildings = Building.filtered_buildings(@buildings, params)
-    elsif params[:filter].present? and params[:sort_by].blank? #only filter
-      @buildings = Building.filtered_buildings(@buildings, params)
-    elsif params[:filter].blank? and params[:sort_by].present? #only sort
-      @buildings = Building.sort_buildings(@buildings, params[:sort_by])
+    if params[:filter].present?
+      rating = params[:filter][:rating]
+      building_types = params[:filter][:type]
+      beds = params[:filter][:bedrooms]
     end
+    
+    @buildings = Building.filter_by_rates(@buildings, rating)
+    @buildings = Building.filter_by_beds(@buildings, beds)
+    @buildings = Building.filter_by_types(@buildings, building_types)
+    @buildings = Building.sort_buildings(@buildings, params[:sort_by])
     
     if @buildings.present?
       #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
