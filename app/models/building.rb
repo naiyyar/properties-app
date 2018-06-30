@@ -9,7 +9,6 @@ class Building < ActiveRecord::Base
 
   validates :building_street_address, presence: true
   validates_uniqueness_of :building_street_address, scope: [:zipcode]
-  #validates_uniqueness_of :building_name, :allow_blank => true, :allow_nil => true
 
   belongs_to :user
   has_many :reviews, as: :reviewable
@@ -85,24 +84,26 @@ class Building < ActiveRecord::Base
     self.building_name
   end
 
-  # {
-  #     courtyard: 'Courtyard',
-  #     pets_allowed_cats: 'Cats Allowed',
-  #     pets_allowed_dogs: 'Dogs Allowed',
-  #     doorman: 'Doorman',
-  #     elevator: 'Elevator',
-  #     garage: 'Garage',
-  #     gym: 'Gym',
-  #     laundry_facility: 'Laundry in Building',
-  #     live_in_super: 'Live in super',
-  #     management_company_run: 'Management Company Run',
-  #     parking: 'Parking',
-  #     roof_deck: 'Roof Deck',
-  #     swimming_pool: 'Swimming Pool',
-  #     walk_up: 'Walk up',
-  #     childrens_playroom: 'Childrens Playroom',
-  #     no_fee: 'No Fee Building',
-  #   }
+  def create_or_update_amenities building_params
+    amenities = ApplicationController.helpers.building_amenities
+    building_params.each_pair do |key, value|
+      if building_params[:elevator].to_i > 0 and key == 'elevator'
+        @elevators = (amenities[key.to_sym] == 'Elevator' ? building_params[:elevator] : nil)
+        rec = self.amenities.where(name: 'Elevator').first_or_initialize
+        rec.name = 'Elevator'
+        rec.number_of_elevators = @elevators
+        rec.save
+      end
+      
+      if value == '1'
+        amen_name = amenities[key.to_sym]
+        self.amenities.where(name: amen_name).first_or_initialize do |rec|
+          rec.name = amenities[key.to_sym] 
+          rec.save
+        end
+      end
+    end
+  end
 
   def save_amenities
     a_name = ''
@@ -187,13 +188,13 @@ class Building < ActiveRecord::Base
     end
   end
 
-  # 0 => Default
-  # 1 => Rating (high to low)
-  # 2 => Rating (high to low)
-  # 3 => Reviews (high to low)
-  # 4 => A to Z
-  # 5 => Z to A
   def self.sort_buildings(buildings, sort_params)
+    # 0 => Default
+    # 1 => Rating (high to low)
+    # 2 => Rating (high to low)
+    # 3 => Reviews (high to low)
+    # 4 => A to Z
+    # 5 => Z to A
     case sort_params
     when '1'
       buildings = sort_by_rating(buildings, '1')

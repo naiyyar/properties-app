@@ -24,48 +24,25 @@
 
   <div class="row">
     <%= form_for @building do |f| %>
+      <%= hidden_field_tag 'contribution', params[:contribution] %>
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="col-sm-6">
           <h3>Building Information</h3>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :courtyard %> <span class="fa fa-check"></span> Courtyard</label></div>
-          <%= hidden_field_tag 'contribution', params[:contribution] %>
-           <div class="checkbox custom-checkbox"><label><%= f.check_box :pets_allowed_cats %> <span class="fa fa-check"></span> Cats Allowed </label></div>
-
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :pets_allowed_dogs %> <span class="fa fa-check"></span> Dogs Allowed </label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :doorman %> <span class="fa fa-check"></span> Doorman</label></div>
-
-          <div class="checkbox custom-checkbox">
-            
-              <label>
-                <%= check_box_tag :elevator,'yes', @building.elevator ? true : false %>
-                <span class="fa fa-check"></span> Elevator
-              </label>
+          <% building_amenities.each do |key, value| %>
+            <% if value == 'Elevator' %>
+              <div class="checkbox custom-checkbox"><label><%= check_box_tag :elevator,'yes', @building.elevator ? true : false %> <span class="fa fa-check"></span> Elevator</label></div>
               <div>
                 <% if @building.elevator %>
                   <%= f.number_field :elevator, class: 'form-control' %>
                 <%else%>
                   <%= f.number_field :elevator, class: 'form-control hide', placeholder: '#Elevators' %>
                 <%end%>
-
               </div>
-          </div>
-
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :garage %> <span class="fa fa-check"></span> Garage</label></div>
-           <div class="checkbox custom-checkbox"><label><%= f.check_box :gym %> <span class="fa fa-check"></span> Gym</label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :laundry_facility %> <span class="fa fa-check"></span> Laundry in Building</label></div>
-
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :live_in_super %> <span class="fa fa-check"></span> Live in super</label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :management_company_run %> <span class="fa fa-check"></span> Management Company Run</label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :parking %> <span class="fa fa-check"></span> Parking</label></div>
-
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :roof_deck %> <span class="fa fa-check"></span> Roof Deck</label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :walk_up %> <span class="fa fa-check"></span> Walk up</label></div>
-
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :swimming_pool %> <span class="fa fa-check"></span> Swimming Pool</label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :childrens_playroom %> <span class="fa fa-check"></span> Childrens Playroom</label></div>
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :no_fee %> <span class="fa fa-check"></span> No Fee Building</label></div>
-         
-      </div>
+            <%else%>
+              <div class="checkbox custom-checkbox"><label><%= f.check_box key %> <span class="fa fa-check"></span> <%=value%></label></div>
+            <%end%>
+          <%end%>
+        </div>
       <br />
       <div class="form-group">
         <div class="col-sm-12">
@@ -75,6 +52,6 @@
           </div>
         </div>
       </div>  
-    <% end %>
+    <%end%>
   </div>
 </div>

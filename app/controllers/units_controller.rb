@@ -83,20 +83,10 @@ class UnitsController < ApplicationController
   # PATCH/PUT /units/1.json
   def update
     @unit.update(unit_params)
+    @unit.create_or_update_amenities(unit_params)
     session[:after_contribute] = params[:contribution] if params[:contribution].present?
-    #if params[:amenities].present?
-      redirect_to unit_path(@unit), notice: 'Unit was successfully updated.'
-    #else
-    #  redirect_to unit_steps_path(unit_id: @unit.id), notice: 'Unit was successfully updated.'
-    #end
-    # respond_to do |format|
-    #   if 
-    #     format.json { render :show, status: :ok, location: @unit }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @unit.errors, status: :unprocessable_entity }
-    #   end
-    # end
+
+    redirect_to unit_path(@unit), notice: 'Unit was successfully updated.'
   end
 
   # DELETE /units/1

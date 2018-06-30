@@ -1,6 +1,6 @@
 class Unit < ActiveRecord::Base
 	acts_as_voteable
-	ratyrate_rateable 'unit'
+	ratyrate_rateable 'unit','cleanliness','noise','safe','health','responsiveness','management'
 	resourcify
 	validates_uniqueness_of :name, scope: [:id, :building_id], presence: true
   
@@ -28,6 +28,19 @@ class Unit < ActiveRecord::Base
     end
 	end
 
+  def create_or_update_amenities unit_params
+    amenities = ApplicationController.helpers.unit_amenities
+    unit_params.each_pair do |key, value|
+      if value == '1'
+        amen_name = amenities[key.to_sym]
+        self.amenities.where(name: amen_name).first_or_initialize do |rec|
+          rec.name = amenities[key.to_sym] 
+          rec.save
+        end
+      end
+    end
+  end
+
 	def recommended_percent
 		Vote.recommended_percent(self)
 	end
@@ -46,22 +59,7 @@ class Unit < ActiveRecord::Base
   	end
   end
 
-  # balcony: 'Balcony',
-  # board_approval_required: 'Board Approval Required',
-  # can_be_converted: 'Can be converted',
-  # converted_unit: 'Converted Unit',
-  # dishwasher: 'Dishwasher',
-  # fireplace: 'Fireplace',
-  # furnished: 'Furnished',
-  # guarantors_accepted: 'Guarantors Accepted',
-  # loft: 'Loft',
-  # private_landlord: 'Private Landlord',
-  # rent_controlled: 'Rent Controlled',
-  # storage_available: 'Storage Available',
-  # sublet: 'Sublet',
-  # terrace: 'Terrace',
-  # dryer_in_unit: 'Washer/Dryer'
-
+  #Running from seed file need to remove after seeding
   def save_amenities
     if self.balcony
       self.amenities.create!(name: 'Balcony')
