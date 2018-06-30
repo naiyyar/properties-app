@@ -497,6 +497,15 @@
 # # end
 
 Building.all.each do |building|
-	building.reviews_count = building.reviews.count
-	building.save
+	if building.reviews.present? and building.reviews_count.blank?
+		building.reviews_count = building.reviews.count
+		building.save
+	end
+	building.save_amenities
 end
+
+Unit.all.each do |unit|
+	unit.save_amenities
+end
+
+

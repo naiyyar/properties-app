@@ -2,6 +2,7 @@ class Building < ActiveRecord::Base
 
   include PgSearch
   include Imageable
+  include Amenitable
   acts_as_voteable
   resourcify
   ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
@@ -84,6 +85,108 @@ class Building < ActiveRecord::Base
     self.building_name
   end
 
+  # {
+  #     courtyard: 'Courtyard',
+  #     pets_allowed_cats: 'Cats Allowed',
+  #     pets_allowed_dogs: 'Dogs Allowed',
+  #     doorman: 'Doorman',
+  #     elevator: 'Elevator',
+  #     garage: 'Garage',
+  #     gym: 'Gym',
+  #     laundry_facility: 'Laundry in Building',
+  #     live_in_super: 'Live in super',
+  #     management_company_run: 'Management Company Run',
+  #     parking: 'Parking',
+  #     roof_deck: 'Roof Deck',
+  #     swimming_pool: 'Swimming Pool',
+  #     walk_up: 'Walk up',
+  #     childrens_playroom: 'Childrens Playroom',
+  #     no_fee: 'No Fee Building',
+  #   }
+
+  def save_amenities
+    a_name = ''
+    if self.laundry_facility
+      a_name = 'Laundry in Building'
+      self.amenities.create!(name: a_name)
+    end
+    
+    if  self.courtyard
+      a_name = 'Courtyard'
+      self.amenities.create!(name: a_name)
+    end
+    
+    if  self.pets_allowed_dogs
+      a_name = 'Dogs Allowed'
+      self.amenities.create!(name: a_name)
+    end
+
+    if  self.pets_allowed_cats
+      a_name = 'Cats Allowed'
+      self.amenities.create!(name: a_name)
+    end
+
+    if  self.doorman
+      a_name = 'Doorman'
+      self.amenities.create!(name: a_name)
+    end
+
+    if  self.elevator.present?
+      a_name = 'Elevator'
+      self.amenities.create!(name: a_name, number_of_elevators: self.elevator.to_i)
+    end
+
+    if  self.garage
+      a_name = 'Garage'
+      self.amenities.create!(name: a_name)
+    end
+
+    if  self.gym
+      a_name = 'Gym'
+      self.amenities.create!(name: a_name)
+    end
+
+    if  self.live_in_super
+      a_name = 'Live in super'
+      self.amenities.create!(name: a_name)
+    end
+
+    if  self.management_company_run
+      a_name = 'Management Company Run'
+      self.amenities.create!(name: a_name)
+    end
+
+    if  self.roof_deck
+      a_name = 'Roof Deck'
+      self.amenities.create!(name: a_name)
+    end
+
+    if  self.parking
+      a_name = 'Parking'
+      self.amenities.create!(name: a_name)
+    end
+
+    if  self.swimming_pool
+      a_name = 'Swimming Pool'
+      self.amenities.create!(name: a_name)
+    end
+    
+    if  self.walk_up
+      a_name = 'Walk up'
+      self.amenities.create!(name: a_name)
+    end
+    
+    if self.childrens_playroom
+      a_name = 'Childrens Playroom'
+      self.amenities.create!(name: a_name)
+    end
+    
+    if  self.no_fee
+      a_name = 'No Fee Building'
+      self.amenities.create!(name: a_name)
+    end
+  end
+
   # 0 => Default
   # 1 => Rating (high to low)
   # 2 => Rating (high to low)
@@ -149,39 +252,14 @@ class Building < ActiveRecord::Base
     @buildings
   end
 
-  #TODO
-  def self.filter_by_amenities
+  def self.filter_by_amenities buildings, amenities
+    if amenities.present?
+      @building = buildings.where(id: Amenity.where(name: amenities).map(&:amenitable_id))
+    else
+      @buildings = buildings
+    end
+    @building
   end
-
-  #TODO: 1. filter by amenities and Selected boxes
-  # def self.filter_buildings buildings, params
-  #   #filter_params = {"amenities"=>["courtyard", "pets_allowed_cats", "pets_allowed_dogs"], 
-  #                     #"bedrooms"=>["0", "1"], 
-  #                     #"type"=>["Condo Building"], "rating"=>["Condo Building"]}
-  #   units = Unit.where(number_of_bedrooms: params[:filter][:bedrooms]) if params[:filter][:bedrooms].present?
-    
-    
-  #   if units.present? and rates.present?
-  #     @building_ids = units.map(&:building_id) + rates.map(&:cacheable_id)
-  #   elsif units.present? and !rates.present?
-  #     @building_ids = units.map(&:building_id)
-  #   else
-  #     @building_ids = rates.map(&:cacheable_id)
-  #   end
-
-  #   #filter for all
-  #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
-
-  #   # if filter_params.keys.length >= 4
-  #   #   #filter for all
-  #   #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
-  #   # elsif filter_params[:bedrooms].present? and filter_params[:type].present? and filter_params[:rating].present?
-  #   #   buildings.where('id in (?) and building_type in (?)', building_ids.uniq, filter_params[:type])
-  #   # elsif filter_params[:bedrooms].present? and filter_params[:rating].present?
-  #   #   buildings.where('building_type in (?)', building_ids.uniq, filter_params[:type])
-  #   # end
-
-  # end
 
   def self.search_by_zipcodes(criteria)
     #regexp = /#{criteria}/i;

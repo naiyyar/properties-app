@@ -150,4 +150,8 @@ module HomeHelper
 		params[:filter][:bedrooms].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:bedrooms].present?
 	end
 
+	def amen_checked val
+		params[:filter][:amenities].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:amenities].present?
+	end
+
 end
