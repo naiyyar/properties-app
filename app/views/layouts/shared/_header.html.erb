@@ -9,6 +9,13 @@
     <div class="search <%= search_bar(:hidden) %>">
       <%= render partial: 'layouts/shared/search_form' %>
     </div>
+
+    <div class="pull-right btn-hoods visible-xs visible-sm">
+      <button data-toggle="dropdown" class="btn btn-green dropdown-toggle">
+      <span class="dropdown-label"><%= params[:neighborhoods].present? ? params[:neighborhoods] : 'Neighborhoods'  %></span> &nbsp;<span class="caret"></span>
+      </button>
+    </div>
+    
     <div class="pull-right headerLinks hidden-xs">
       <% if !user_signed_in? %>
         <%if params[:controller] == "users/sessions"%>

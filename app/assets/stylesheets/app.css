@@ -5899,6 +5899,13 @@ blockquote {
 }
 
 @media screen and (max-width: 767px) {
+    .btn-hoods{
+        position: absolute;
+        right: 3px;
+    }
+    .btn-hoods button{
+        padding: 10px 3px;
+    }
     textarea.form-control{
         height: 176px !important;;
     }
@@ -6014,7 +6021,7 @@ blockquote {
         position: absolute;
         top: 7px;
         background: transparent;
-        width: 89%;
+        width: 73%;
         height: 35px;
         padding: 0px 20px 0px 1px;
         left: 28px;
@@ -6039,8 +6046,10 @@ blockquote {
     }
     .btn-filter, .btn-sort{
         margin-top: 0px;
-        margin-right: 9px;
+        margin-right: 13px;
+        width: 45%;
     }
+    .btn-filter button, .btn-sort button{width: 100%;}
     .filter-btn-container div{
         padding: 4px;
     }
