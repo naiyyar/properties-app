@@ -494,12 +494,12 @@ class Building < ActiveRecord::Base
     ['Lower Manhattan', 'Upper Manhattan', 'Midtown']
   end
 
+  #saving neighbohoods
   def neighborhoods
     search = Geocoder.search([latitude, longitude])
     neighborhood1 = neighborhood2 = neighborhood3 = ''
     if search.present?
       #search for child neighborhoods
-      #debugger
       search[0..4].each_with_index do |geo_result, index|
         #finding neighborhood
         neighborhood = geo_result.address_components_of_type(:neighborhood)

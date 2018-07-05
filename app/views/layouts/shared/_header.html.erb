@@ -2,9 +2,9 @@
 
 <div id="header">
   <div class="logoContainer">
-    <div class="logo">
-      <a href="/"><%=image_tag 'logo_white.png', alt: 'logo' %></a>
-    </div>
+    <!-- <div class="logo">
+      <a href="/"><%#=image_tag 'logo_white.png', alt: 'logo' %></a>
+    </div> -->
       
     <div class="search <%= search_bar(:hidden) %>">
       <%= render partial: 'layouts/shared/search_form' %>
@@ -34,45 +34,23 @@
   </div>
   
   <% if user_signed_in? %>
-   <!--  <div class="home-nav">
-      <ul class="homeNavUl" style="padding: 3px 0px;">
-        <li><%#=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-blue' %></li>
-        <li></li>
-      </ul>
-    </div> -->
     <% if params[:action] == 'search' %>
-      <!-- old implementation was using map anfd list icons -->
-      <!-- <a href="javascript:void(0);" class="mapHandler"><span class="icon-map">Map</span></a> -->
-      <!-- <a href="javascript:void(0);" class="listHandler"><span class="icon-list">List</span></a> -->
-      <a href="javascript:void(0);" class="mapHandler">Map</a>
-      <a href="javascript:void(0);" class="listHandler">List</a>
+      <!-- <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle">
+        <span class="dropdown-label"><%= params[:neighborhoods].present? ? params[:neighborhoods] : 'Hood'  %></span> &nbsp;<span class="caret"></span>
+      </button> -->
+      <!-- <a href="javascript:void(0);" class="mapHandler">Map</a> -->
+      <!-- <a href="javascript:void(0);" class="listHandler">List</a> -->
     <%elsif (params[:controller] == 'buildings' and params[:action] == 'show') or (params[:controller] == 'units' and params[:action] == 'show') %>
-      <a href="javascript:void(0);" class="mapHandlerShow">Map</a>
-      <a href="javascript:void(0);" class="listHandlerShow">List</a>
+      <!-- <a href="javascript:void(0);" class="mapHandlerShow">Map</a> -->
+      <!-- <a href="javascript:void(0);" class="listHandlerShow">List</a> -->
     <%end%>
   <%else%>
     <% if params[:action] == 'search' %>
-      <a href="javascript:void(0)" class="mapHandler">Map</a>
-      <a href="javascript:void(0)" class="listHandler">List</a>
+      <!-- <a href="javascript:void(0)" class="mapHandler">Map</a> -->
+      <!-- <a href="javascript:void(0)" class="listHandler">List</a> -->
     <%elsif (params[:controller] == 'buildings' and params[:action] == 'show') or (params[:controller] == 'units' and params[:action] == 'show') %>
-      <a href="javascript:void(0)" class="mapHandlerShow">Map</a>
-      <a href="javascript:void(0)" class="listHandlerShow">List</a>
+      <!-- <a href="javascript:void(0)" class="mapHandlerShow">Map</a> -->
+      <!-- <a href="javascript:void(0)" class="listHandlerShow">List</a> -->
     <%end%>
-    <!-- <div class="home-nav"> -->
-      <!-- <ul class="homeNavUl" style="padding: 3px 0px;"> -->
-        <!-- <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signup">Sign Up</a></li> -->
-        <!-- <li><a href="#" class='btn btn-default' data-toggle="modal" data-target="#signin">Sign In</a></li> -->
-        <!-- <li><%#=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-primary' %></li> -->
-        <!-- <li></li> -->
-      <!-- </ul> -->
-    <!-- </div> -->
   <%end%>
 </div>
-
-<!--[if IE]>
-<style>
-  .headerLinks {
-    margin-top: -25px !important;
-  }
-</style>
-<![endif]-->

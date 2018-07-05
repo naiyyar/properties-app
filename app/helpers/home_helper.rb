@@ -154,4 +154,8 @@ module HomeHelper
 		params[:filter][:amenities].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:amenities].present?
 	end
 
+	def sort_options
+		[['Default',0],['Rating (high to low)',1],['Rating (low to high)',2],['Reviews (high to low)',3],['A - Z',4],['Z - A',5]]
+	end
+
 end

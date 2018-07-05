@@ -437,10 +437,16 @@
         }
     });
 
-    $('.handleFilter').click(function(e) {
-        e.preventDefault();
+    $('.handleFilter, .closeFilter').click(function(e) {
+        //e.preventDefault();
         $('.filterForm').slideToggle(200);
     });
+
+     $('.handleSort').click(function(e) {
+        //e.preventDefault();
+        $('.sortMenu').slideToggle(200);
+    });
+
 
     $('.applyFilter').click(function(e) {
         e.preventDefault();

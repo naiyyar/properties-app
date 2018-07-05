@@ -36,7 +36,9 @@
       <%= render partial: 'layouts/shared/left_side' %>
       <div class="closeLeftSide"></div>
       <div id="wrapper" class="<%=contribute_wrapper(params)%>">
+        <%= render partial: 'layouts/shared/filter_buttons' %>
         <div class="content">
+          <%= render partial: 'layouts/shared/filters' %>
           <%= yield %>
         </div>
       </div>

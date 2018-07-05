@@ -1,0 +1,24 @@
+<div class="visible-xs visible-sm filter-btn-container">
+	<div class="pull-right btn-hoods">
+ 		<button data-toggle="dropdown" class="btn btn-green dropdown-toggle">
+    <span class="dropdown-label"><%= params[:neighborhoods].present? ? params[:neighborhoods] : 'Neighborhoods'  %></span> &nbsp;<span class="caret"></span>
+    </button>
+  </div>
+  <% if params[:neighborhoods].present? %>
+		<div class="btn-filter">
+	 		<button class="btn btn-o btn-gray handleFilter">
+	      <span class="dropdown-label"><span class="fa fa-filter"></span> &nbsp;<%= 'Filter' %></span> &nbsp; 
+	    </button>
+	  </div>
+		
+		<div class="pull-right btn-sort">
+			<label class="select" style="margin-bottom: 0px;">
+				<%= select_tag :sort, options_for_select(sort_options, params[:sort_by]), { prompt: 'Sort' } %> <i></i>
+			</label>
+		 	<!-- <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle">
+	      <span class="dropdown-label"><span class="fa fa-sort"></span> &nbsp;<%#= params[:sort_by].present? ? sort_string : 'Sort'  %></span> &nbsp; 
+	    </button> -->
+	    <%#= render partial: 'layouts/shared/sort_list' %>
+	  </div>
+	<%end%>
+</div>
