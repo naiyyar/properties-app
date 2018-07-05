@@ -14,7 +14,7 @@
 		
 		<div class="pull-right btn-sort">
 			<label class="select" style="margin-bottom: 0px;">
-				<%= select_tag :sort, options_for_select(sort_options, params[:sort_by]), { prompt: 'Sort' } %> <i></i>
+				<%= select_tag :sort, options_for_select(sort_options, params[:sort_by]), { prompt: 'Sort', data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] } } %> <i></i>
 			</label>
 		 	<!-- <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle">
 	      <span class="dropdown-label"><span class="fa fa-sort"></span> &nbsp;<%#= params[:sort_by].present? ? sort_string : 'Sort'  %></span> &nbsp; 

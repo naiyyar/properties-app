@@ -443,18 +443,21 @@
     });
 
     $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
-        // if($('.popular-neighborhoods').is(':hidden')){
-        //     $('.popular-neighborhoods').show(200);
-        // }else{
-        //     $('.popular-neighborhoods').hide(200);
-        // }
-            $('.popular-neighborhoods').slideToggle(200);
+        $('.popular-neighborhoods').slideToggle(200);
     });
 
      $('.handleSort').click(function(e) {
         //e.preventDefault();
         $('.sortMenu').slideToggle(200);
     });
+
+     $('select#sort').change(function(){
+        var search_term = $(this).data('searchTerm');
+        var neighborhoods = $(this).data('neighborhoods');
+        var sort_option = $(this).val();
+        var url = "/search?search_term="+search_term+"&neighborhoods="+neighborhoods+"&sort_by="+sort_option;
+        window.location.href = url;
+     })
 
 
     $('.applyFilter').click(function(e) {
