@@ -442,6 +442,15 @@
         $('.filterForm').slideToggle(200);
     });
 
+    $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
+        // if($('.popular-neighborhoods').is(':hidden')){
+        //     $('.popular-neighborhoods').show(200);
+        // }else{
+        //     $('.popular-neighborhoods').hide(200);
+        // }
+            $('.popular-neighborhoods').slideToggle(200);
+    });
+
      $('.handleSort').click(function(e) {
         //e.preventDefault();
         $('.sortMenu').slideToggle(200);

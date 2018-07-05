@@ -39,6 +39,12 @@
         <%= render partial: 'layouts/shared/filter_buttons' %>
         <div class="content">
           <%= render partial: 'layouts/shared/filters' %>
+          <div class="popular-neighborhoods" style="display: none;">
+            <div class="pull-right" style="padding: 4px; cursor: pointer;">
+              <%= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeHoods' %>
+            </div>
+            <%= render partial: 'layouts/home/popular_neighborhoods' %>
+          </div>
           <%= yield %>
         </div>
       </div>

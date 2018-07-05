@@ -2,17 +2,17 @@
 
 <div id="header">
   <div class="logoContainer">
-    <!-- <div class="logo">
-      <a href="/"><%#=image_tag 'logo_white.png', alt: 'logo' %></a>
-    </div> -->
+    <div class="logo hidden-xs hidden-sm">
+      <a href="/"><%=image_tag 'logo_white.png', alt: 'logo' %></a>
+    </div>
       
     <div class="search <%= search_bar(:hidden) %>">
       <%= render partial: 'layouts/shared/search_form' %>
     </div>
 
     <div class="pull-right btn-hoods visible-xs visible-sm">
-      <button data-toggle="dropdown" class="btn btn-green dropdown-toggle">
-      <span class="dropdown-label"><%= params[:neighborhoods].present? ? params[:neighborhoods] : 'Neighborhoods'  %></span> &nbsp;<span class="caret"></span>
+      <button data-toggle="dropdown1" class="btn btn-green dropdown-toggle-neighborhoods <%=params[:neighborhoods].present? ? 'active' : ''%>">
+        <span class="dropdown-label"><%= 'Hood' %></span> &nbsp;<span class="caret"></span>
       </button>
     </div>
     
@@ -33,8 +33,8 @@
       <%end%>
       <%#=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-primary' %>
       <%=link_to '<span class="fa fa-plus"></span>'.html_safe+' Write Review', contribute_buildings_path, class: 'btn btn-green hidden-xs' %>
-      
     </div>
+
     <div class="pull-right headerLinks hidden">
       <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-green' %>
     </div>

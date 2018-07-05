@@ -42,7 +42,7 @@ class UploadsController < ApplicationController
   		end
     end
     #session[:after_contribute] = 'upload' # if params[:contribution].present?
-    @search_bar_hidden = :hidden
+    #@search_bar_hidden = :hidden
   end
 
 	def create
