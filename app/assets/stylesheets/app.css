@@ -5916,7 +5916,7 @@ blockquote {
         margin-top: 10px !important;
     }
     .no-match-position-left{
-        left: 20px !important;
+        left: 0px !important;
     }
     .about_us{
         height: 200px;

@@ -17,7 +17,7 @@
           		<% building_amenities.each_pair do |k, v| %>
               	<div class="checkbox custom-checkbox">
               		<label>
-              			<input type="checkbox" name="filter[amenities][]" value="<%=v%>" id="<=k%>" <%= amen_checked(v) %>> <span class="fa fa-check"></span> <%=v%>
+              			<input type="checkbox" name="filter[amenities][]" value="<%=v%>" id="<%=k%>" <%= amen_checked(v) %>> <span class="fa fa-check"></span> <%=v%>
               		</label>
               	</div>
               <%end%>                     
