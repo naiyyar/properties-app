@@ -2,7 +2,7 @@
 
 <div id="header">
   <div class="logoContainer">
-    <div class="logo hidden-xs hidden-sm">
+    <div class="logo hidden-xs">
       <a href="/"><%=image_tag 'logo_white.png', alt: 'logo' %></a>
     </div>
       
@@ -10,7 +10,7 @@
       <%= render partial: 'layouts/shared/search_form' %>
     </div>
 
-    <div class="pull-right btn-hoods visible-xs visible-sm">
+    <div class="pull-right btn-hoods visible-xs">
       <button data-toggle="dropdown1" class="btn btn-green dropdown-toggle-neighborhoods <%=params[:neighborhoods].present? ? 'active' : ''%>">
         <span class="dropdown-label"><%= 'Hood' %></span> &nbsp;<span class="caret"></span>
       </button>

@@ -7,11 +7,11 @@
 <% if @manhattan_neighborhoods.present? %>
 	<div class="pull-left neighborhoods-dropdown hidden-xs" style="margin-top: 8px;">
 	  <div class="btn-group">
-	    <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle" style="min-width: 121px;">
+	    <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle" style="min-width: 121px;" id='lr2'>
 	      <span class="dropdown-label"><%= params[:neighborhoods].present? ? params[:neighborhoods] : 'Neighborhoods'  %></span> &nbsp;<span class="caret"></span>
 	    </button>
 	    
-	    <div class="dropdown-menu dropdown-select">
+	    <div class="dropdown-menu dropdown-select dropdown-menu-right1" area-labelledby='lr2'>
 	    	<div class="row">
 	    		<% ['MANHATTAN', 'BROOKLYN','QUEENS'].each do |area| %>
 		    		<div class="col-xs-3 col-md-3 col-lg-3">
@@ -39,7 +39,7 @@
 <%end%>
 
 <% if params[:neighborhoods].present? %>
-	<div class="pull-right hidden-xs hidden-sm">
+	<div class="pull-right hidden-xs">
 		<div class="btn-filter">
 	 		<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle handleFilter">
 	      <span class="dropdown-label"><span class="fa fa-filter"></span> &nbsp;<%= 'Filter' %></span> &nbsp; 

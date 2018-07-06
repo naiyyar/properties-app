@@ -1,12 +1,12 @@
 <div id="leftSide" class="<%=contribute_left_side(params)%>">
   <nav class="leftNav scrollable">
-    <div class="search">
+    <div class="logo search1 visible-xs">
         <%#= render partial: 'layouts/shared/search_form' %>
+        <a href="/"><%= image_tag 'logo1.png', alt: 'logo' %></a>
         <div class="clearfix"></div>
     </div>
     
     <ul>
-      <li class="logo visible-xs visible-sm"><a href="/"><%= image_tag 'logo1.png', alt: 'logo' %></a></li>
       
       <li class="btn_contribute"><a href="<%=contribute_buildings_path%>"><span class="navIcon icon-plus"></span><span class="navLabel">Write a review</span></a></li>
       
