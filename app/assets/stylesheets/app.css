@@ -6209,9 +6209,13 @@ blockquote {
         width: 30px;
         color: #fff;
     }
-    a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow {
+    a.mapHandler, a.mapHandlerShow {
         display: block;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.50);
+    }
+
+    a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow {
+        /*box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.50);*/
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 4px 8px 0 rgba(0,0,0,0.20);
     }
     .no-touch a.mapHandler:hover {
         color: #c6e4e3;
