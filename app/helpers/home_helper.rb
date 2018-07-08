@@ -96,9 +96,17 @@ module HomeHelper
 			"#{neighborhood}, #{borough.capitalize}, NY"
 		end
 	end
-
+	
 	def search_link neighborhood, borough
-		"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
+		if params[:sort_by].present? or params[:filter].present?
+			request.fullpath
+		else
+			"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
+		end
+	end
+
+	def neighborhood_class
+		'pop-neighborhood' if params[:sort_by].present? or params[:filter].present?
 	end
 
 	def searched_term

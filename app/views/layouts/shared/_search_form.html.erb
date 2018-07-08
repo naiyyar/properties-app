@@ -18,7 +18,7 @@
 		          <h2 class="osLight h-r"><%=area%></h2>
 		          <ul class="blog-r-nav text-left">
 		        		<% @manhattan_neighborhoods[area].sort.each do |nb| %>
-		            	<li><a href="<%=search_link(nb, area)%>"><%= nb %> (<%= Building.number_of_buildings(nb) %>)</a></li>
+		            	<li><a href="<%= neighborhood_class.present? ? '#' : search_link(nb, area) %>" class="<%=neighborhood_class%>" data-nbname="<%=nb%>" data-st="<%=searchable_text(nb, area)%>"><%= nb %> (<%= Building.number_of_buildings(nb) %>)</a></li>
 		            <%end%>
 		          </ul>
 		        </div>
@@ -28,7 +28,7 @@
 	          <h2 class="osLight h-r">BRONX (Coming Soon)</h2>
 	          <ul class="blog-r-nav text-left">
 	        		<% @manhattan_neighborhoods['BRONX'].sort.each do |nb| %>
-	            	<li><a href="javascript:void(0);"><%= nb %></a></li>
+	            	<li><a href="<%= neighborhood_class.present? ? '#' : '#' %>" class="<%=neighborhood_class%>"><%= nb %></a></li>
 	            <%end%>
 	          </ul>
 	        </div><!-- end BRONX -->
@@ -41,13 +41,13 @@
 <% if params[:neighborhoods].present? %>
 	<div class="pull-right hidden-xs">
 		<div class="btn-filter">
-	 		<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle handleFilter">
+	 		<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle handleFilter <%=params[:filter].present? ? 'active' : ''%>">
 	      <span class="dropdown-label"><span class="fa fa-filter"></span> &nbsp;<%= 'Filter' %></span> &nbsp; 
 	    </button>
 	  </div>
 		<!-- <a href="#" class="handleFilter btn btn-default btn-sm"><span class="fa fa-filter"></span> Filter</a> &nbsp; -->
 		<div class="pull-right btn-sort">
-		 	<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle">
+		 	<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle <%=params[:sort_by].present? ? 'active' : ''%>">
 	      <span class="dropdown-label"><span class="fa fa-sort"></span> &nbsp;<%= params[:sort_by].present? ? sort_string : 'Sort'  %></span> &nbsp; 
 	    </button>
 		    

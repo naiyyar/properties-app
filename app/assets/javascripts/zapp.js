@@ -451,13 +451,13 @@
         $('.sortMenu').slideToggle(200);
     });
 
-     $('select#sort').change(function(){
-        var search_term = $(this).data('searchTerm');
-        var neighborhoods = $(this).data('neighborhoods');
-        var sort_option = $(this).val();
-        var url = "/search?search_term="+search_term+"&neighborhoods="+neighborhoods+"&sort_by="+sort_option;
-        window.location.href = url;
-     })
+     // $('select#sort').change(function(){
+     //    var search_term = $(this).data('searchTerm');
+     //    var neighborhoods = $(this).data('neighborhoods');
+     //    var sort_option = $(this).val();
+     //    var url = "/search?search_term="+search_term+"&neighborhoods="+neighborhoods+"&sort_by="+sort_option;
+     //    window.location.href = url;
+     // });
 
 
     $('.applyFilter').click(function(e) {
@@ -465,10 +465,6 @@
         $('.btn-submit-filter-form').click();
     });
 
-    $('.clearFilter').click(function(e) {
-        e.preventDefault();
-        $('.filterForm input[type=checkbox]').attr('checked', false)
-    });
 
     //Enable swiping
     $(".carousel-inner").swipe( {

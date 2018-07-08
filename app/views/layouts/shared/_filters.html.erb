@@ -6,7 +6,7 @@
     </div>
   	<%= hidden_field_tag :search_term, params[:search_term] %>
   	<%= hidden_field_tag :neighborhoods, params[:neighborhoods] %>
-    <%= hidden_field_tag :sort_by, params[:sort_by] if params[:sort_by].present? %>
+    <%= hidden_field_tag :sort_by, params[:sort_by] || '0' %>
     
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 formItem">

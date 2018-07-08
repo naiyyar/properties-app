@@ -4,6 +4,7 @@
 #= require form_validations
 #= require devise
 #= require social-share-button
+#= require filters
 #= require_tree .
 
 jQuery ->

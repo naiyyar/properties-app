@@ -1011,9 +1011,9 @@ a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     font-weight: bold;
 }
 
-.no-touch a.mapHandler:hover {
+/*.no-touch a.mapHandler:hover {
     background-color: transparent;
-}
+}*/
 
 a.userHandler {
     position: relative;
