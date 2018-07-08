@@ -1000,13 +1000,13 @@ a.navHandler {
 a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     float: right;
     text-align: center;
-    font-size: 18px;
-    padding-top: 11px;
-    height: 45px;
+    font-size: 16px;
+    /*padding-top: 11px;*/
+    height: auto;
     /*width: 20px;*/
     color: #fff;
     display: none;
-    margin-right: 15px;
+    /*margin-right: 15px;*/
     text-decoration: none;
     font-weight: bold;
 }
@@ -6102,7 +6102,7 @@ blockquote {
         cursor: pointer !important;
     }
     .logo a > img, .logo.expanded a > img{
-        width: 160px;
+        width: 100%;
     }
     li.logo{
         z-index: 999;
@@ -6125,6 +6125,7 @@ blockquote {
     .logo a, .logo.expanded a {
         width: 70px;
         height: 50px;
+        width: 100%;
     }
     .logo a span.marker, .logo.expanded a span.marker {
         left: 0;
@@ -6210,6 +6211,7 @@ blockquote {
     }
     a.mapHandler, a.mapHandlerShow {
         display: block;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.50);
     }
     .no-touch a.mapHandler:hover {
         color: #c6e4e3;
