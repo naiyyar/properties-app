@@ -214,12 +214,17 @@ class Building < ActiveRecord::Base
 
   def self.sort_by_rating buildings, sort_index
     if sort_index == '1'
-      @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg desc')
+      @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg DESC')
     else
-      @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg asc')
+      @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg ASC')
     end
+    
     building_ids = @ratings.map(&:cacheable_id)
-    buildings = buildings.where(id: building_ids).to_a.sort_by{ |b| building_ids.index(b.id) }
+    rated_buildings = buildings.where(id: building_ids).sort_by{ |b| building_ids.index(b.id) if !b.id.nil? }
+    non_rated_buildings = buildings.where.not(id: rated_buildings.map(&:id))
+    
+    buildings = rated_buildings+non_rated_buildings
+    
     buildings
   end
 

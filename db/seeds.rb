@@ -499,8 +499,10 @@
 Building.all.each do |building|
 	if building.reviews.present? and building.reviews_count.blank?
 		building.reviews_count = building.reviews.count
-		building.save
+	else
+		building.reviews_count = 0
 	end
+	building.save
 	building.save_amenities
 end
 
