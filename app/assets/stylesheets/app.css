@@ -6054,14 +6054,26 @@ blockquote {
     }
     .filter{
         width: 100%;
-        margin-top: 0px !important;
+        /* margin-top: 0px !important; */
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 9999;
+        height: 100%;
     }
     .filterForm {
         padding: 6px 4px;
         margin-top: 0px;
     }
+    .filterForm .header{
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 6px;
+    }
     .filterForm label {
         font-size: 12px;
+    }
+    .filter-action{
+        margin-top: 20px;
     }
     .btn-filter, .btn-sort{
         margin-top: 0px;

@@ -439,7 +439,8 @@
 
     $('.handleFilter, .closeFilter').click(function(e) {
         //e.preventDefault();
-        $('.filterForm').slideToggle(200);
+        //$('.filterForm').slideToggle(200);
+        $('.filter').slideToggle(200);
     });
 
     $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
