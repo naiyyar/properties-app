@@ -474,6 +474,11 @@ h3.unit_name_header{
     color: #fff;
     border-color: #fff;
 }
+.btn-o.btn-filter{
+    background-color: #fff;
+    color: #636363;
+    border-color: #d3d3d3;
+}
 .no-touch .btn-white:hover,
 .btn-white:focus,
 .btn-white:active,
