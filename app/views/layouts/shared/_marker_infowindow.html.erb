@@ -12,28 +12,29 @@
   <div class="propRating">
   	<% rating_cache = building.rating_cache %>
   	<% if rating_cache.present? %>
-  		<% total_rates = 0 %>
 	  	<% total_rates = rating_cache.first.avg if rating_cache.present? %>
 	  	<% decimal_part = number_with_precision(rating_cache.first.avg.round(2), precision: 2) %>
 	  	<% decimal_part = decimal_part.split('.')[1].to_f/100%>
-	  	<% total_rates = total_rates + 1 if decimal_part >= 0.76 %>
-	  	<ul class="cardRating list-inline">
-	  		<% half = true %>
-	  		<% 1.upto(5) do |num| %>
-	  			<% if num <= total_rates.to_i %>
-	  				<li><%= image_tag 'star-on.png' %></li>
-	  			<%elsif decimal_part >= 0.30 and decimal_part <= 0.75 and half %>
-	  				<li><%= image_tag 'star-half.png' %></li>
-	  				<% half = false %>
-	  			<%else%>
-	  				<li><%= image_tag 'star-off.png' %></li>
-	  			<%end%>
-	  		<%end%>
-	  		<% if building.votes.present? %>
-	  			<li style="font-size: 11px;"><span class="icon-pipe"></span>
-        	<%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %></li>
-        <%end%>
-	  	</ul>
+	  	<% unless rating_cache.first.avg.nan? %>
+	  		<% total_rates = total_rates + 1 if decimal_part >= 0.76 %>
+		  	<ul class="cardRating list-inline">
+		  		<% half = true %>
+		  		<% 1.upto(5) do |num| %>
+		  			<% if num <= total_rates.to_i %>
+		  				<li><%= image_tag 'star-on.png' %></li>
+		  			<%elsif decimal_part >= 0.30 and decimal_part <= 0.75 and half %>
+		  				<li><%= image_tag 'star-half.png' %></li>
+		  				<% half = false %>
+		  			<%else%>
+		  				<li><%= image_tag 'star-off.png' %></li>
+		  			<%end%>
+		  		<%end%>
+		  		<% if building.votes.present? %>
+		  			<li style="font-size: 11px;"><span class="icon-pipe"></span>
+	        	<%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %></li>
+	        <%end%>
+		  	</ul>
+		  <%end%>
 	  <%else%>
 	  	<ul class="cardRating list-inline">
 		  	<% 1.upto(5) do |num| %>
