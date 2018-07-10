@@ -6659,6 +6659,12 @@ blockquote {
         padding: 16px 20px 13px 20px;
         margin: 0px;
     }
+    .headerLinks {
+        padding: 8px 2px 9px 13px;
+    }
+    .headerLinks a {
+        margin: 0px 1px;
+    }
 
     .reviewActions ul{
         padding: 5px 0px;
@@ -6831,8 +6837,26 @@ blockquote {
     }
             
 }
+@media screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    .clearSearchText{
+        top: 6px;
+    }
+    .search{
+        width: 100%;
+    }
+    .search input{
+        width: 100%;
+    }
+    .searchContainer{
+        position: relative;
+        width: 90%;
+    }
+    .tabsWidgetSearch .nav-tabs.nav-justified > li {
+        float: left;
+    }
+}
 
-@media screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+@media screen and (max-width: 1024px) and (min-width: 737px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
     #hero-container {
         background-color: #000;
         height: 550px;
