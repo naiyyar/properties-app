@@ -203,9 +203,9 @@ class Building < ActiveRecord::Base
     when '3'
       buildings = buildings.reorder('reviews_count DESC')
     when '4'
-      buildings = buildings.reorder('building_name ASC')
+      buildings = buildings.reorder('building_name ASC, building_street_address ASC')
     when '5'
-      buildings = buildings.reorder('building_name DESC')
+      buildings = buildings.reorder('building_name DESC, building_street_address DESC')
     else
       buildings = buildings
     end
