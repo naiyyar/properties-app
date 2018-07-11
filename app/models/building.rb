@@ -229,14 +229,26 @@ class Building < ActiveRecord::Base
   end
 
   def self.filter_by_rates buildings, rating
+    # 1 star - means  = 1
+    # 2 star - means  > 1
+    # 3 star - means  > 2
+    # 4 star - means  > 3
+    # 5 star - means  > 4 
     if rating.present?
-      rates = RatingCache.where(cacheable_type: 'Building', avg: rating)
+      rates = RatingCache.where(cacheable_type: 'Building')
+      if rating == '1'
+        rates = rates.where('avg = ?', rating)
+      else
+        #rates = rates.where('avg > ? AND avg <= ?', rating.to_i-1, rating)
+        rates = rates.where('avg > ?', rating.to_i-1)
+      end
       buildings.where('id in (?)', rates.map(&:cacheable_id))
     else
       buildings
     end
   end
 
+  # On Hold Right now
   def self.filter_by_beds buildings, beds
     # joins('LEFT JOIN events_tags ON (events.id = events_tags.event_id) LEFT JOIN tags ON (tags.id = events_tags.tag_id)')
     #   .where('tags.label' => tags).group('events.id').having("count(events.id) = #{tags.count}")

@@ -93,13 +93,13 @@ class HomeController < ApplicationController
     if params[:filter].present?
       @rating = params[:filter][:rating]
       @building_types = params[:filter][:type]
-      @beds = params[:filter][:bedrooms]
+      #@beds = params[:filter][:bedrooms]
       @amenities = params[:filter][:amenities]
     end
     
     @buildings = Building.filter_by_amenities(@buildings, @amenities) if @amenities.present?
     @buildings = Building.filter_by_rates(@buildings, @rating) if @rating.present?
-    @buildings = Building.filter_by_beds(@buildings, @beds)
+    #@buildings = Building.filter_by_beds(@buildings, @beds) #Put on hold for now
     @buildings = Building.filter_by_types(@buildings, @building_types)
     @buildings = Building.sort_buildings(@buildings, params[:sort_by])
     

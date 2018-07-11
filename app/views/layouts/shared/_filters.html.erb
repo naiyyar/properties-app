@@ -46,7 +46,7 @@
            
             	<label><b>Rating</b></label>
             	<% 1.upto(5) do |val| %>
-              	<div class="radio custom-radio"><label><input type="radio" name="filter[rating][]" value="<%=val%>" <%= rating_checked(val) %> ><span class="fa fa-check"></span> <%=val%> Star</label></div>
+              	<div class="radio custom-radio"><label><input type="radio" name="filter[rating]" value="<%=val%>" <%= rating_checked(val) %> ><span class="fa fa-check"></span> <%=val%> Star</label></div>
               <%end%>
             </div>
           </div>
