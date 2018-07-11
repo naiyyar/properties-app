@@ -2045,7 +2045,7 @@ a.handleFilter, a.handleSort {
 .no-touch a.handleFilter:hover, .no-touch a.handleSort:hover {
     text-decoration: none;
 }
-.filter{
+.filter {
     position: absolute;
     right: 3px;
     top: 113px;
@@ -6066,6 +6066,8 @@ blockquote {
         top: 0px;
         z-index: 9999;
         height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
     .filterForm {
         padding: 6px 4px;

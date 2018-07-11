@@ -31,7 +31,6 @@
           </tr>
           <tbody>
             <% reviews.each do |review| %>
-              <% @reviewable = review.reviewable if @reviewable.blank? %>
               <tr>
                 <td class="break"><%= review.user.email if review.user_id.present? %></td>
                 <td class="break">
@@ -40,7 +39,7 @@
                 <td class="break"><%= review.review_title %></td>
                 <td class="break"><%= simple_format(review.pros) %></td>
                 <td class="break"><%= simple_format(review.cons) %></td>
-                <td class="text-center star-sm"><%= rating_for @reviewable, "#{@reviewable.class.name.downcase}", disable_after_rate: true, readonly: true %></td>
+                <td class="text-center star-sm"><%= rating_for review.reviewable, "#{review.reviewable.class.name.downcase}", disable_after_rate: true, readonly: true if review.reviewable.present? %></td>
                 <td><%= review.created_at.strftime("%Y-%m-%d") %></td>
                 <td class="text-center">
                   <% if current_user && current_user.has_role?(:admin) %>
