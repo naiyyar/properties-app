@@ -5921,6 +5921,11 @@ blockquote {
 }
 
 @media screen and (max-width: 767px) {
+    .ui-autocomplete {
+        left: 0px !important;
+        min-width: 414px !important
+        top: 50px !important;
+    }
     .btn-hoods{
         position: absolute;
         right: 3px;
@@ -5938,7 +5943,7 @@ blockquote {
         margin-top: 10px !important;
     }
     .no-match-position-left{
-        left: 0px !important;
+        left: -29px !important;
     }
     .about_us{
         height: 200px;
