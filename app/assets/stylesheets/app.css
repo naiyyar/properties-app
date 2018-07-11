@@ -5923,7 +5923,7 @@ blockquote {
 @media screen and (max-width: 767px) {
     .ui-autocomplete {
         left: 0px !important;
-        min-width: 414px !important
+        min-width: 414px !important;
         top: 50px !important;
     }
     .btn-hoods{
