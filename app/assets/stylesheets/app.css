@@ -5921,10 +5921,8 @@ blockquote {
 }
 
 @media screen and (max-width: 767px) {
-    .ui-autocomplete {
-        left: 0px !important;
+    .searchContainer .apt-search .results .ui-autocomplete {
         min-width: 414px !important;
-        top: 50px !important;
     }
     .btn-hoods{
         position: absolute;
@@ -6040,13 +6038,13 @@ blockquote {
         background-color: #0075c9;
         height: 50px;
     }
-    #apt-search-results .ui-autocomplete {
-        left: 0px !important;
+    .searchContainer .apt-search .results .ui-autocomplete {
+        left: -29px !important;
     }
-    #apt-search-results .ui-menu .ui-menu-item{
+    /*#apt-search-results .ui-menu .ui-menu-item{
         padding: 5px 8px !important;
         font-size: 12px !important;
-    }
+    }*/
     .search {
         display: block;
         position: absolute;

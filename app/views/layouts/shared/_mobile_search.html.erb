@@ -1,11 +1,11 @@
-<div class="mobile-search hidden">
-	<%= text_field_tag 'apt-search-txt-searchpage', params['search_term'], placeholder: 'Neighborhood, Zip Code, Address, Building name' %>
-	<div class="results" id="apt-search-results"></div>
+<!-- <div class="mobile-search hidden"> -->
+	<%#= text_field_tag 'apt-search-txt-searchpage', params['search_term'], placeholder: 'Neighborhood, Zip Code, Address, Building name' %>
+	<!-- <div class="results" id="apt-search-results"></div> -->
 
-	<%= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search hide' do %>
-	  <%= text_field_tag 'search_term', params['search_term'] %>
-	  <%= hidden_field_tag 'term', nil %>
-	  <%= hidden_field_tag 'neighborhoods', nil %>
-	  <%= submit_tag 'Search', class: 'btn btn-primary in_header' %>
-	<%end%>
-</div>
+	<%#= form_tag "/search", method: :get, id: "apt-search-form", class: 'apt-search hide' do %>
+	  <%#= text_field_tag 'search_term', params['search_term'] %>
+	  <%#= hidden_field_tag 'term', nil %>
+	  <%#= hidden_field_tag 'neighborhoods', nil %>
+	  <%#= submit_tag 'Search', class: 'btn btn-primary in_header' %>
+	<%#end%>
+<!-- </div> -->

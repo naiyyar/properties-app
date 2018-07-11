@@ -88,9 +88,9 @@
   top: 45px !important;
 }
 
-#apt-search-results .ui-autocomplete {
+/*#apt-search-results .ui-autocomplete {
   top: 96px !important;
-}
+}*/
 #apt-search-results{position: relative;}
 
 ul.ui-autocomplete li.building_link_li{

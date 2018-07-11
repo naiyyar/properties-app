@@ -1,5 +1,4 @@
 <div class="apt-search" id="apt-search-form">
-<%#= form_tag '/search', method: :get, id: 'apt-search-form', class: 'apt-search', role: 'form' do %>
 	<% placeholder = 'Search by Neighborhood, ZipCode, Address, Building'%>
 	<% if params[:action] == 'index' and params[:controller] == 'home' %>
 		<div class="input-group">
@@ -11,11 +10,5 @@
 		<%= text_field_tag 'search_term', searched_term, class: 'apt-search-text-shared', placeholder: placeholder %>
 	<%end%>
 
-	<%#= hidden_field_tag 'term_address', nil %>
-	<%#= hidden_field_tag 'term_zipcode', nil %>
-	<%#= hidden_field_tag 'neighborhoods', nil %>
-	<%=render partial: 'layouts/shared/no_match' %>
-
-	<%#= submit_tag 'Search', class: 'btn btn-primary search-btn-submit hide' %>
-<%#end%>
+	<%= render partial: 'layouts/shared/no_match' %>
 </div>
