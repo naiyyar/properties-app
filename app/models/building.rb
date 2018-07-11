@@ -230,17 +230,17 @@ class Building < ActiveRecord::Base
 
   def self.filter_by_rates buildings, rating
     # 1 star - means  = 1
-    # 2 star - means  > 1
-    # 3 star - means  > 2
-    # 4 star - means  > 3
-    # 5 star - means  > 4 
+    # 2 star - means  1 <= 2
+    # 3 star - means  2 <= 3
+    # 4 star - means  3 <= 4
+    # 5 star - means  4 <= 5 
     if rating.present?
       rates = RatingCache.where(cacheable_type: 'Building')
       if rating == '1'
         rates = rates.where('avg = ?', rating)
       else
-        #rates = rates.where('avg > ? AND avg <= ?', rating.to_i-1, rating)
-        rates = rates.where('avg > ?', rating.to_i-1)
+        rates = rates.where('avg > ? AND avg <= ?', rating.to_i-1, rating)
+        #rates = rates.where('avg > ?', rating.to_i-1)
       end
       buildings.where('id in (?)', rates.map(&:cacheable_id))
     else
@@ -270,6 +270,7 @@ class Building < ActiveRecord::Base
     @buildings
   end
 
+  #TOFIX: NEED TO APPLY 'AND' INSTED OF 'OR'
   def self.filter_by_amenities buildings, amenities
     if amenities.present?
       @building = buildings.where(id: Amenity.where(name: amenities).map(&:amenitable_id))
