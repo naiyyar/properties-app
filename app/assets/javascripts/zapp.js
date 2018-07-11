@@ -438,9 +438,25 @@
     });
 
     $('.handleFilter, .closeFilter').click(function(e) {
-        //e.preventDefault();
+        e.stopPropagation();
         //$('.filterForm').slideToggle(200);
         $('.filter').slideToggle(200);
+    });
+    
+    //Running this script only on desktop views
+    //var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+
+    $(document).click(function(e) {
+        //if(!isMobile && window.innerWidth > 799){
+        e.stopPropagation();
+        //$(e.target).closest('.filter').length skip hiding filter panel on this click
+        if($(e.target).closest('.filter').length === 0){
+            if($('.filter').is(':visible')){
+                $('.filter').slideUp(200);
+            }
+        }
+        //}
+         
     });
 
     $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
