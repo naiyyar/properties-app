@@ -30,23 +30,23 @@
         <div class="formField">
           <div class="volume">
             <div class="col-sm-12 col-md-12 col-lg-12">
-            	<label><b>Bedrooms</b></label>
+            	<label style="color: #929292;"><b>Bedrooms (Coming soon)</b></label>
             	<% ['0','1','2','3','4'].map do |val| %>
             		<% if val == '0' %>
-              		<div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value="<%=val%>" id="studio" <%= bed_checked('0') %>><span class="fa fa-check"></span> Studio</label></div>
+              		<div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value="<%=val%>" id="studio" <%= bed_checked('0') %> disabled="disabled"><span class="fa fa-check"></span> Studio</label></div>
               	<%else%>
-              		<div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value="<%=val%>" id="<%=val%>beds" <%= bed_checked(val) %>><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Beds</label></div>
+              		<div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[bedrooms][]" value="<%=val%>" id="<%=val%>beds" <%= bed_checked(val) %> disabled="disabled"><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Beds</label></div>
               	<%end%>
               <%end%>
               
             	<label><b>Building Type</b></label>
-              <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Rental Building" <%= type_checked('Rental Building') %>><span class="fa fa-check"></span> Rental</label></div>
-              <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Condo Building" <%= type_checked('Condo Building') %>><span class="fa fa-check"></span> Condo</label></div>
-              <div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[type][]" value="Coop Building" <%= type_checked('Coop Building') %>><span class="fa fa-check"></span> Coop</label></div>
+              <div class="radio custom-radio"><label><input type="radio" class="building_type_filter" name="filter[type]" value="Rental Building" <%= type_checked('Rental Building') %>><span class="fa fa-check"></span> Rental</label></div>
+              <div class="radio custom-radio"><label><input type="radio" class="building_type_filter" name="filter[type]" value="Condo Building" <%= type_checked('Condo Building') %>><span class="fa fa-check"></span> Condo</label></div>
+              <div class="radio custom-radio"><label><input type="radio" class="building_type_filter" name="filter[type]" value="Coop Building" <%= type_checked('Coop Building') %>><span class="fa fa-check"></span> Coop</label></div>
            
             	<label><b>Rating</b></label>
             	<% 1.upto(5) do |val| %>
-              	<div class="checkbox custom-checkbox"><label><input type="checkbox" name="filter[rating][]" value="<%=val%>" <%= rating_checked(val) %> ><span class="fa fa-check"></span> <%=val%> Star</label></div>
+              	<div class="radio custom-radio"><label><input type="radio" name="filter[rating][]" value="<%=val%>" <%= rating_checked(val) %> ><span class="fa fa-check"></span> <%=val%> Star</label></div>
               <%end%>
             </div>
           </div>

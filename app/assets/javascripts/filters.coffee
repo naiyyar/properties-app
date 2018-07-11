@@ -22,3 +22,4 @@ jQuery ->
 	$(document).on 'click', '.clearFilter', (e) ->
 		e.preventDefault
 		$('.filterForm input[type=checkbox]').attr('checked', false)
+		$('.filterForm input[type=radio]').attr('checked', false)
