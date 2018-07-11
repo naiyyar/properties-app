@@ -2045,6 +2045,13 @@ a.handleFilter, a.handleSort {
 .no-touch a.handleFilter:hover, .no-touch a.handleSort:hover {
     text-decoration: none;
 }
+.filter{
+    position: absolute;
+    right: 3px;
+    top: 113px;
+    z-index: 9999;
+    height: 100%
+}
 .filterForm label {
     display: block;
     font-size: 13px;
@@ -6054,7 +6061,6 @@ blockquote {
     }
     .filter{
         width: 100%;
-        /* margin-top: 0px !important; */
         position: absolute;
         left: 0px;
         top: 0px;

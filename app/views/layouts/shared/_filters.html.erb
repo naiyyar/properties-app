@@ -1,7 +1,7 @@
 <div class="filter" style="display: none;">
   <div class="clearfix"></div>
   <form action='/search' class="filterForm">
-    <div class="text-right header" style="padding: 4px; cursor: pointer;">
+    <div class="pull-right header visible-xs" style="padding: 4px; cursor: pointer;">
       <%= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeFilter' %>
     </div>
   	<%= hidden_field_tag :search_term, params[:search_term] %>
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 formItem">
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 formItem">
         <div class="formField">
           <div class="volume">
             <div class="col-sm-12 col-md-12 col-lg-12">
