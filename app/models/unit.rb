@@ -10,7 +10,6 @@ class Unit < ActiveRecord::Base
 	belongs_to :user
 
 	include Imageable
-  include Amenitable
 
 	default_scope { order('updated_at desc') }
 
@@ -28,19 +27,6 @@ class Unit < ActiveRecord::Base
     end
 	end
 
-  def create_or_update_amenities unit_params
-    amenities = ApplicationController.helpers.unit_amenities
-    unit_params.each_pair do |key, value|
-      if value == '1'
-        amen_name = amenities[key.to_sym]
-        self.amenities.where(name: amen_name).first_or_initialize do |rec|
-          rec.name = amenities[key.to_sym] 
-          rec.save
-        end
-      end
-    end
-  end
-
 	def recommended_percent
 		Vote.recommended_percent(self)
 	end
@@ -57,56 +43,6 @@ class Unit < ActiveRecord::Base
   	else
   		"#{number_of_bedrooms} Bedrooms"
   	end
-  end
-
-  #Running from seed file need to remove after seeding
-  def save_amenities
-    if self.balcony
-      self.amenities.create!(name: 'Balcony')
-    end
-    if self.board_approval_required
-      self.amenities.create!(name: 'Board Approval Required')
-    end
-    if self.can_be_converted
-      self.amenities.create!(name: 'Can be converted')
-    end
-    if self.converted_unit
-      self.amenities.create!(name: 'Converted Unit')
-    end
-    if self.dishwasher
-      self.amenities.create!(name: 'Dishwasher')
-    end
-    if self.fireplace
-      self.amenities.create!(name: 'Fireplace')
-    end
-    if self.furnished
-      self.amenities.create!(name: 'Furnished')
-    end
-    if self.guarantors_accepted
-      self.amenities.create!(name: 'Guarantors Accepted')
-    end
-    if self.loft
-      self.amenities.create!(name: 'Loft')
-    end
-    if self.private_landlord
-      self.amenities.create!(name: 'Private Landlord')
-    end
-    if self.rent_controlled
-      self.amenities.create!(name: 'Rent Controlled')
-    end
-    if self.storage_available
-      self.amenities.create!(name: 'Storage Available')
-    end
-    if self.sublet
-      self.amenities.create!(name: 'Sublet')
-    end
-    if self.terrace
-      self.amenities.create!(name: 'Terrace')
-    end
-    if self.dryer_in_unit
-      self.amenities.create!(name: 'Washer/Dryer')
-    end
-    
   end
 
 end

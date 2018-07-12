@@ -2,7 +2,7 @@ class Building < ActiveRecord::Base
 
   include PgSearch
   include Imageable
-  include Amenitable
+  
   acts_as_voteable
   resourcify
   ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
@@ -81,7 +81,6 @@ class Building < ActiveRecord::Base
   scope :walk_up, -> { where(walk_up: true) }
   scope :childrens_playroom, -> { where(childrens_playroom: true) }
   scope :no_fee, -> { where(no_fee: true) }
-  
 
   #Methods
 
@@ -103,110 +102,6 @@ class Building < ActiveRecord::Base
 
   def name
     self.building_name
-  end
-
-  def create_or_update_amenities building_params
-    amenities = ApplicationController.helpers.building_amenities
-    building_params.each_pair do |key, value|
-      if building_params[:elevator].to_i > 0 and key == 'elevator'
-        @elevators = (amenities[key.to_sym] == 'Elevator' ? building_params[:elevator] : nil)
-        rec = self.amenities.where(name: 'Elevator').first_or_initialize
-        rec.name = 'Elevator'
-        rec.number_of_elevators = @elevators
-        rec.save
-      end
-      
-      if value == '1'
-        amen_name = amenities[key.to_sym]
-        self.amenities.where(name: amen_name).first_or_initialize do |rec|
-          rec.name = amenities[key.to_sym] 
-          rec.save
-        end
-      end
-    end
-  end
-
-  def save_amenities
-    a_name = ''
-    if self.laundry_facility
-      a_name = 'Laundry in Building'
-      self.amenities.create!(name: a_name)
-    end
-    
-    if  self.courtyard
-      a_name = 'Courtyard'
-      self.amenities.create!(name: a_name)
-    end
-    
-    if  self.pets_allowed_dogs
-      a_name = 'Dogs Allowed'
-      self.amenities.create!(name: a_name)
-    end
-
-    if  self.pets_allowed_cats
-      a_name = 'Cats Allowed'
-      self.amenities.create!(name: a_name)
-    end
-
-    if  self.doorman
-      a_name = 'Doorman'
-      self.amenities.create!(name: a_name)
-    end
-
-    if  self.elevator.present?
-      a_name = 'Elevator'
-      self.amenities.create!(name: a_name, number_of_elevators: self.elevator.to_i)
-    end
-
-    if  self.garage
-      a_name = 'Garage'
-      self.amenities.create!(name: a_name)
-    end
-
-    if  self.gym
-      a_name = 'Gym'
-      self.amenities.create!(name: a_name)
-    end
-
-    if  self.live_in_super
-      a_name = 'Live in super'
-      self.amenities.create!(name: a_name)
-    end
-
-    if  self.management_company_run
-      a_name = 'Management Company Run'
-      self.amenities.create!(name: a_name)
-    end
-
-    if  self.roof_deck
-      a_name = 'Roof Deck'
-      self.amenities.create!(name: a_name)
-    end
-
-    if  self.parking
-      a_name = 'Parking'
-      self.amenities.create!(name: a_name)
-    end
-
-    if  self.swimming_pool
-      a_name = 'Swimming Pool'
-      self.amenities.create!(name: a_name)
-    end
-    
-    if  self.walk_up
-      a_name = 'Walk up'
-      self.amenities.create!(name: a_name)
-    end
-    
-    if self.childrens_playroom
-      a_name = 'Childrens Playroom'
-      self.amenities.create!(name: a_name)
-    end
-    
-    if  self.no_fee
-      a_name = 'No Fee Building'
-      self.amenities.create!(name: a_name)
-    end
   end
 
   def self.sort_buildings(buildings, sort_params)

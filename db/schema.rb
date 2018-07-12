@@ -11,24 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180630084131) do
+ActiveRecord::Schema.define(version: 20180629053808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
   enable_extension "unaccent"
-
-  create_table "amenities", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "amenitable_id"
-    t.string   "amenitable_type"
-    t.integer  "number_of_elevators"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
-  add_index "amenities", ["amenitable_type", "amenitable_id"], name: "index_amenities_on_amenitable_type_and_amenitable_id", using: :btree
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"

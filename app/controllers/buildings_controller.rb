@@ -175,7 +175,6 @@ class BuildingsController < ApplicationController
     @building = Building.find(params[:id])
     if @building.update(building_params)
       session[:after_contribute] = 'amenities' if params[:contribution].present?
-      @building.create_or_update_amenities(building_params)
       if params[:subaction].blank?
         redirect_to building_path(@building), notice: "Successfully Updated"
       else

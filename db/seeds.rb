@@ -503,11 +503,6 @@ Building.all.each do |building|
 		building.reviews_count = 0
 	end
 	building.save
-	building.save_amenities
-end
-
-Unit.all.each do |unit|
-	unit.save_amenities
 end
 
 
