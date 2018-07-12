@@ -64,6 +64,27 @@ class Building < ActiveRecord::Base
                   :threshold => 0.5
                 }}
 
+  #amenities scopes
+  scope :doorman, -> { where(doorman: true) }
+  scope :courtyard, -> { where(courtyard: true) }
+  scope :laundry_facility, -> { where(laundry_facility: true) }
+  scope :parking, -> { where(parking: true) }
+  scope :elevator, -> { where.not(elevator: nil) }
+  scope :roof_deck, -> { where(roof_deck: true) }
+  scope :swimming_pool, -> { where(swimming_pool: true) }
+  scope :mgmt_company_run, -> { where(management_company_run: true) }
+  scope :garage, -> { where('garage is true') }
+  scope :gym, -> { where('gym is true') }
+  scope :live_in_super, -> { where('live_in_super is true') }
+  scope :pets_allowed_cats, -> { where('pets_allowed_cats is true') }
+  scope :pets_allowed_dogs, -> { where('pets_allowed_dogs is true') }
+  scope :walk_up, -> { where(walk_up: true) }
+  scope :childrens_playroom, -> { where(childrens_playroom: true) }
+  scope :no_fee, -> { where(no_fee: true) }
+  
+
+  #Methods
+
   def to_param
     if building_name.present?
       "#{id} #{building_name}".parameterize
@@ -272,12 +293,31 @@ class Building < ActiveRecord::Base
 
   #TOFIX: NEED TO APPLY 'AND' INSTED OF 'OR'
   def self.filter_by_amenities buildings, amenities
+    @amenities = amenities
     if amenities.present?
-      @building = buildings.where(id: Amenity.where(name: amenities).map(&:amenitable_id))
+      @buildings = buildings.doorman if has_amenity?('doorman')
+      @buildings = @buildings.courtyard if has_amenity?('courtyard')
+      @buildings = @buildings.laundry_facility if has_amenity?('laundry_facility')
+      @buildings = @buildings.parking if has_amenity?('parking')
+      @buildings = @buildings.gym if has_amenity?('gym')
+      @buildings = @buildings.garage if has_amenity?('garage')
+      @buildings = @buildings.mgmt_company_run if has_amenity?('management_company_run')
+      @buildings = @buildings.live_in_super if has_amenity?('live_in_super')
+      @buildings = @buildings.roof_deck if has_amenity?('roof_deck')
+      @buildings = @buildings.pets_allowed_cats if has_amenity?('pets_allowed_cats')
+      @buildings = @buildings.pets_allowed_dogs if has_amenity?('pets_allowed_dogs')
+      @buildings = @buildings.elevator if has_amenity?('elevator')
+      @buildings = @buildings.swimming_pool if has_amenity?('swimming_pool')
+      @buildings = @buildings.childrens_playroom if has_amenity?('childrens_playroom')
+      @buildings = @buildings.no_fee if has_amenity?('no_fee')
     else
       @buildings = buildings
     end
-    @building
+    @buildings
+  end
+
+  def self.has_amenity?(name)
+    @amenities.include?(name)
   end
 
   def self.search_by_zipcodes(criteria)
