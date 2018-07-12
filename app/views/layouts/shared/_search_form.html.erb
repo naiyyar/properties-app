@@ -48,7 +48,7 @@
 		<!-- <a href="#" class="handleFilter btn btn-default btn-sm"><span class="fa fa-filter"></span> Filter</a> &nbsp; -->
 		<div class="pull-right btn-sort">
 		 	<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle <%=params[:sort_by].present? ? 'active' : ''%>">
-	      <span class="dropdown-label"><span class="fa fa-sort"></span> &nbsp;<%= params[:sort_by].present? ? sort_string : 'Sort'  %></span> &nbsp; 
+	      <span class="dropdown-label"><span class="fa fa-sort"></span> &nbsp;<%= params[:sort_by].present? ? sort_string : 'Default sort'  %></span> &nbsp; 
 	    </button>
 		    
 	    <%= render partial: 'layouts/shared/sort_list' %>

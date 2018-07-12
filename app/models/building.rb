@@ -16,7 +16,7 @@ class Building < ActiveRecord::Base
   
   accepts_nested_attributes_for :units, :allow_destroy => true
 
-  default_scope { order('created_at desc') }
+  default_scope { order('building_name ASC, building_street_address ASC') }
 
   geocoded_by :street_address
   after_validation :geocode
