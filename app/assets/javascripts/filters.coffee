@@ -25,8 +25,14 @@ jQuery ->
 		$('.filterForm input[type=radio]').attr('checked', false)
 
 	#making type and rating checkboxed behave like radio button
-	$(document).on 'click', '.building_type_filter, .building_rating_filter', (e) ->
+	$(document).on 'click', '.building_type_filter', (e) ->
 		checked = $(this).is(':checked')
-		$(".building_type_filter, .building_rating_filter").prop('checked',false)
+		$(".building_type_filter").prop('checked',false)
+		if checked
+			$(this).prop('checked',true)
+
+	$(document).on 'click', '.building_rating_filter', (e) ->
+		checked = $(this).is(':checked')
+		$(".building_rating_filter").prop('checked',false)
 		if checked
 			$(this).prop('checked',true)
