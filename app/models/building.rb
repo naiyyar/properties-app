@@ -190,7 +190,8 @@ class Building < ActiveRecord::Base
   def self.filter_by_amenities buildings, amenities
     @amenities = amenities
     if amenities.present?
-      @buildings = buildings.doorman if has_amenity?('doorman')
+      @buildings = buildings
+      @buildings = @buildings.doorman if has_amenity?('doorman')
       @buildings = @buildings.courtyard if has_amenity?('courtyard')
       @buildings = @buildings.laundry_facility if has_amenity?('laundry_facility')
       @buildings = @buildings.parking if has_amenity?('parking')

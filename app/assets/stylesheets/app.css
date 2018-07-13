@@ -2045,6 +2045,10 @@ a.handleFilter, a.handleSort {
 .no-touch a.handleFilter:hover, .no-touch a.handleSort:hover {
     text-decoration: none;
 }
+.form-container{
+    padding: 20px;
+    margin-left: 54px;
+}
 .filter {
     position: absolute;
     right: 3px;
@@ -5927,6 +5931,10 @@ blockquote {
 }
 
 @media screen and (max-width: 767px) {
+    .form-container{
+        padding: 10px;
+        margin-left: 0px;
+    }
     .searchContainer .apt-search .results .ui-autocomplete {
         min-width: 414px !important;
     }
