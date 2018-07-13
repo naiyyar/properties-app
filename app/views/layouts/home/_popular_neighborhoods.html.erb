@@ -10,7 +10,10 @@
               <div class="panel-body">
                 <ul class="neighborhoods-list list-inline">
                   <% @manhattan_neighborhoods[area].sort.each do |nb| %>
-                    <li><a href="<%=search_link(nb, area)%>"><%= nb %> (<%= Building.number_of_buildings(nb) %>)</a></li>
+                    <li>
+                        <!-- <a href="<%#=search_link(nb, area)%>"><%#= nb %> (<%#= Building.number_of_buildings(nb) %>)</a> -->
+                        <a href="<%= neighborhood_class.present? ? '#' : search_link(nb, area) %>" class="<%=neighborhood_class%>" data-nbname="<%=nb%>" data-st="<%=searchable_text(nb, area)%>"><%= nb %> (<%= Building.number_of_buildings(nb) %>)</a>
+                    </li>
                   <%end%>
                 </ul>
               </div>
