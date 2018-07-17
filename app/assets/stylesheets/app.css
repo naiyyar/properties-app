@@ -6130,7 +6130,7 @@ select.custom-arrow {
 
     .btn-filter, .btn-sort{
         margin-top: 0px;
-        margin-right: 13px;
+        margin-right: 10px;
         width: 45%;
     }
     .btn-filter button, .btn-sort button{width: 100%;}
@@ -6771,7 +6771,7 @@ select.custom-arrow {
     }
     .searchContainer{
         position: relative;
-        width: 55%;
+        width: 46%;
     }
     .search .neighborhoods-dropdown{
         margin-left: 8px;

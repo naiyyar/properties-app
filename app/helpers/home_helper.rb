@@ -98,10 +98,14 @@ module HomeHelper
 	end
 	
 	def search_link neighborhood, borough
-		if params[:sort_by].present? or params[:filter].present?
-			request.fullpath
+		unless borough == 'BRONX'
+			if params[:sort_by].present? or params[:filter].present?
+				request.fullpath
+			else
+				"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
+			end
 		else
-			"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
+			'javascript:void(0)'
 		end
 	end
 

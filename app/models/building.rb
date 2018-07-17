@@ -23,7 +23,7 @@ class Building < ActiveRecord::Base
 
   #callbacks
   after_create :save_neighborhood
-  after_update :update_neighborhood
+  #after_update :update_neighborhood
 
   #multisearchable
   # PgSearch.multisearch_options = {
@@ -205,6 +205,7 @@ class Building < ActiveRecord::Base
       @buildings = @buildings.elevator if has_amenity?('elevator')
       @buildings = @buildings.swimming_pool if has_amenity?('swimming_pool')
       @buildings = @buildings.childrens_playroom if has_amenity?('childrens_playroom')
+      @buildings = @buildings.walk_up if has_amenity?('walk_up')
       @buildings = @buildings.no_fee if has_amenity?('no_fee')
     else
       @buildings = buildings
@@ -495,12 +496,12 @@ class Building < ActiveRecord::Base
     end
   end
 
-  def update_neighborhood
-    if neighborhoods.present?
-      #if self.neighborhood != neighborhoods[0] or self.neighborhoods_parent != neighborhoods[1]
-      self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1], neighborhood3: neighborhoods[2] )
-      #end
-    end
-  end
+  # def update_neighborhood
+  #   if neighborhoods.present?
+  #     #if self.neighborhood != neighborhoods[0] or self.neighborhoods_parent != neighborhoods[1]
+  #     self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1], neighborhood3: neighborhoods[2] )
+  #     #end
+  #   end
+  # end
 
 end
