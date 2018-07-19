@@ -35,7 +35,7 @@
                 <td class="star-sm">
                   <%#= rating_for building, "building", disabled_after_rate: true, readonly: true %>
                 </td>
-                <td><%#= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id) %></td>
+                <td><%= company.aggregate_reviews %></td>
                 
                 <td><%= company.created_at.strftime("%Y-%m-%d") %></td>
                 
