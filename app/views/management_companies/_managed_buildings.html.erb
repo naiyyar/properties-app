@@ -1,0 +1,31 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="table-overflow">
+    <table class="table" id="sortable">
+      <thead>
+        <tr>
+          <th>Building Name</th>
+          <th>Building Address</th>
+          <th>Rating</th>
+          <th>Reviews</th>
+          <th>Photos</th>
+          <th>Website</th>
+          <th>Disconnect</th>
+        </tr>
+      </thead>
+      <tbody class="table">
+        <% @manage_buildings.each do |building| %>
+          <tr>
+            <td><span class="propName"><b><%= link_to(building_name_or_address(building), building_path(building)) %></b> </td>
+            <td><%= link_to building.street_address, building_path(building) %></td>
+            <td class="star-sm"><%= rating_for building, 'building', disabled_after_rate: true, readonly: true %></td>
+            <td><%= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id) %></td>
+            <td><%= building.uploads.count if building.uploads.present? %></td>
+            <td class="text-center"><%= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present? %></td>
+            <td class="text-center"><%= link_to 'Disconnect', '#', class: 'text-danger' %></td>
+           
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

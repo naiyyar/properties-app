@@ -1,5 +1,9 @@
 app.buildings = function() {
   this._input = $('#buildings-search-txt');
+  source_url = $('#buildings-search-txt').data('src');
+  if(source_url == undefined){
+    source_url = '/buildings/contribute'
+  }
   this._initAutocomplete();
 };
 
@@ -7,7 +11,7 @@ app.buildings.prototype = {
   _initAutocomplete: function() {
     this._input
       .autocomplete({
-        source: '/buildings/contribute',
+        source: source_url,
         prependTo: '#buildings-search-results',
         select: $.proxy(this._select, this),
         response: $.proxy(this._response, this),
@@ -31,10 +35,12 @@ app.buildings.prototype = {
         ul_height = $(this).height();
       }
     })
-
-    $('.no-match-link').css('top',ul_height+'px');
-    $('.no-match-link').removeClass('hidden');
-    $('.no-match-link').css('width', $('#buildings-search-txt').width()+30+'px');
+    
+    if($('#managed_building_id').length == 0){ // Not showing when creating new management company
+      $('.no-match-link').css('top',ul_height+'px');
+      $('.no-match-link').removeClass('hidden');
+      $('.no-match-link').css('width', $('#buildings-search-txt').width()+30+'px');
+    }
     // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
   },
 
@@ -68,7 +74,9 @@ app.buildings.prototype = {
       $('.no-result-li').remove();
     }
     $('#next_to_review_btn').remove();
-    
+    if($('#managed_building_id').length > 0){
+      $('#managed_building_id').val(ui.item.id)
+    }
     new app.units(ui.item.id);
     
     this._input.val(ui.item.building_street_address + ', ' + ui.item.city + ', ' + ui.item.state + ' ' + ui.item.zipcode);

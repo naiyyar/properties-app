@@ -13,6 +13,7 @@ class Building < ActiveRecord::Base
   belongs_to :user
   has_many :reviews, as: :reviewable
   has_many :units,  :dependent => :destroy
+  belongs_to :management_company
   
   accepts_nested_attributes_for :units, :allow_destroy => true
 

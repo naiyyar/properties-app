@@ -1,0 +1,68 @@
+<div class="form-container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading"><b><%= @management_company.new_record? ? 'New Management' : 'Edit Management' %></b></div>
+        <div class="panel-body"> 
+          <%= form_for @management_company, class: 'form-horizontal' do |f| %>
+            <div class="form-group">
+              <label>Management Name</label>
+               <%= f.text_field :name, class: "form-control" %>
+            </div>
+            
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Property Website</label>
+                  <%= f.text_field :website, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+            
+            <% unless @management_company.new_record? and @manage_buildings.blank? %>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="form-group">
+                    <label>Managed Buildings</label>
+                    <div class="buttonsWrapper">
+                      <% @manage_buildings.each do |building| %>
+                        <a href="#" class="btn btn-default"><%= building.building_name_or_address %></a>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <%end%>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Connect buildings</label>
+                  <%= hidden_field_tag 'managed_building_id', nil, class: 'form-control'%>
+                  <%= text_field_tag 'buildings-search-txt',nil, class: 'form-control', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?management=true' }  %>
+                  <div class="results" id="buildings-search-results" style="position: relative;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <div class="col-sm-12">
+                <div class="pull-right">
+                  <%= link_to 'Cancel', management_companies_path, class: 'btn btn-default' %>
+                  <%= f.submit 'Submit', class: "btn btn-primary", name: "subaction", id: 'new_building_submit' %>
+                </div>
+              </div>
+            </div>  
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    new app.buildings;
+  });
+   
+</script>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :management_companies
   resources :neighborhood_links
   resources :review_flags
   resources :contacts
