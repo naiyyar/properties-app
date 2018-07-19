@@ -17,6 +17,12 @@ class BuildingsController < ApplicationController
     @units = @building.units
   end
 
+  #disconnecting building from a management company
+  def disconnect_building
+    Building.where(id: params[:id]).update_all(management_company_id: nil)
+    redirect_to :back, notice: 'Building disconnected'
+  end
+
   def contribute
     session[:form_data] = nil if session[:form_data].present?
     if params[:management].present?

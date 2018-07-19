@@ -1,6 +1,6 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div class="table-overflow">
-    <table class="table" id="sortable">
+    <table class="table" id="sortable1">
       <thead>
         <tr>
           <th>Building Name</th>
@@ -21,8 +21,7 @@
             <td><%= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id) %></td>
             <td><%= building.uploads.count if building.uploads.present? %></td>
             <td class="text-center"><%= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present? %></td>
-            <td class="text-center"><%= link_to 'Disconnect', '#', class: 'text-danger' %></td>
-           
+            <td class="text-center"><%= link_to 'Disconnect', disconnect_building_building_path(building), class: 'text-danger', data: {confirm: 'Are you sure you want to discconect this building?'} %></td>
           </tr>
         <%end%>
       </tbody>

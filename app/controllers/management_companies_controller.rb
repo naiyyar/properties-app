@@ -10,7 +10,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1
   # GET /management_companies/1.json
   def show
-    @manage_buildings = @management_company.buildings
+    @manage_buildings = @management_company.buildings.includes(:building_average, :uploads)
   end
 
   # GET /management_companies/new

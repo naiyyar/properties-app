@@ -58,13 +58,13 @@ Rails.application.routes.draw do
 
     member do 
       get :units
+      get '/disconnect_building', to: 'buildings#disconnect_building', as: 'disconnect_building'
     end
 
     collection do
       get :contribute
       post :import
     end
-    
   end
 
   resources :units do
