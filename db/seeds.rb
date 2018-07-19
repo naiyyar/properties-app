@@ -496,13 +496,13 @@
 # # 	Gcoordinate.create(latitude: coord[:lat], longitude: coord[:lng], neighborhood: 'Upper East Side')
 # # end
 
-Building.all.each do |building|
-	if building.reviews.present? and building.reviews_count.blank?
-		building.reviews_count = building.reviews.count
-	else
-		building.reviews_count = 0
-	end
-	building.save
-end
+# Building.all.each do |building|
+# 	if building.reviews.present? and building.reviews_count.blank?
+# 		building.reviews_count = building.reviews.count
+# 	else
+# 		building.reviews_count = 0
+# 	end
+# 	building.save
+# end
 
 

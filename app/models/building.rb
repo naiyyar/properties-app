@@ -23,7 +23,7 @@ class Building < ActiveRecord::Base
 
   #callbacks
   after_create :save_neighborhood
-  #after_update :update_neighborhood
+  after_update :update_neighborhood
 
   #multisearchable
   # PgSearch.multisearch_options = {
@@ -186,7 +186,6 @@ class Building < ActiveRecord::Base
     @buildings
   end
 
-  #TOFIX: NEED TO APPLY 'AND' INSTED OF 'OR'
   def self.filter_by_amenities buildings, amenities
     @amenities = amenities
     if amenities.present?
@@ -496,12 +495,12 @@ class Building < ActiveRecord::Base
     end
   end
 
-  # def update_neighborhood
-  #   if neighborhoods.present?
-  #     #if self.neighborhood != neighborhoods[0] or self.neighborhoods_parent != neighborhoods[1]
-  #     self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1], neighborhood3: neighborhoods[2] )
-  #     #end
-  #   end
-  # end
+  def update_neighborhood
+    if neighborhoods.present?
+      #if self.neighborhood != neighborhoods[0] or self.neighborhoods_parent != neighborhoods[1]
+      self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1], neighborhood3: neighborhoods[2] )
+      #end
+    end
+  end
 
 end

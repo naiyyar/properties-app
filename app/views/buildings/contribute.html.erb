@@ -60,6 +60,7 @@
 			<!-- <div class="col-xs-11"> -->
 				<%= form_tag '/buildings', method: :post, id: 'new_building', class: "#{ params[:results].present? ? '' : 'hide' }" do %>
 					<%= hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution' %>
+					<%= hidden_field_tag 'building[user_id]', current_user.id, class: 'form-control' if current_user.present? %>
 					<%= render partial: 'buildings/building_contribute_form' %>
 					<div class="col-sm-12">
 				    <div class="next_btn_container">

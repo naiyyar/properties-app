@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
     if session[:form_data].present?
       if session[:object_type].present? and session[:object_type] == 'building'
         building = Building.create(session[:form_data]['building'])
+        building.update(user_id: current_user.id) if current_user.present?
         flash_message = 'Building created successfully.'
         sign_in_redirect_path(building, flash_message)
       elsif session[:object_type].present? and session[:object_type] == 'unit' and session[:form_data]['building'].present?
