@@ -121,6 +121,8 @@ gem 'fancybox2-rails', '~> 0.2.8'
 gem 'rollbar'
 gem 'oj', '~> 2.16.1'  #Oj for JSON serialization
 
+gem 'valid_url'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

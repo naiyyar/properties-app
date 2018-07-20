@@ -6,6 +6,8 @@
 
 class ManagementCompany < ActiveRecord::Base
 	has_many :buildings
+	validates :website, :url => true, allow_blank: true
+
 
 	#methods
 	
