@@ -10,6 +10,12 @@ class ManagementCompany < ActiveRecord::Base
 
 
 	#methods
+
+	def to_param
+    if name.present?
+      "#{id} #{name}".parameterize
+    end
+  end
 	
 	def add_building building_ids
 		Building.where(id: building_ids).update_all(management_company_id: self.id)

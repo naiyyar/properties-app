@@ -10,6 +10,7 @@ class Ability
       cannot [:contribution, :index], User
       cannot :index, NeighborhoodLink
       cannot :index, Contact
+      cannot [:index, :new, :edit], ManagementCompany
     elsif user.has_role? :admin
       can :manage, :all
     else

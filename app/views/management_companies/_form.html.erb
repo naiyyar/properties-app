@@ -7,7 +7,7 @@
           <%= form_for @management_company, html: { class: 'form-horizontal1 management-company-form' } do |f| %>
             <div class="form-group">
               <label>Management Name</label>
-               <%= f.text_field :name, class: "form-control" %>
+               <%= f.text_field :name, class: "form-control validate1", required: true %>
             </div>
             
             <div class="row">
