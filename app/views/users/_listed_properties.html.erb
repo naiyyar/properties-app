@@ -1,5 +1,5 @@
 <% if @buildings.present? %>
-	<h3>Listed Properties (<%= @buildings.count %>)</h3>
+	<h3><%= @manage_buildings.present? ? 'Connected' : 'Listed' %> Properties (<%= @buildings.count %>)</h3>
 	<div class="row">
 		<% @buildings.each do |building| %>
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="properties">

@@ -27,7 +27,7 @@
                     <div class="buttonsWrapper">
                       <% if @manage_buildings.present? %>
                         <% @manage_buildings.each do |building| %>
-                          <a href="#" class="btn btn-default"><%= building.building_name_or_address %></a>
+                          <a href="<%=building_path(building)%>" class="btn btn-default"><%= building.building_name_or_address %></a>
                         <%end%>
                       <%end%>
                     </div>
@@ -59,6 +59,12 @@
         </div>
       </div>
     </div>
+
+    <% if @buildings.present? %>
+      <div id="content" class="mob-max user_property_listing">
+        <%= render partial: 'users/listed_properties' %>
+      </div>
+    <%end%>
   </div>
 </div>
 

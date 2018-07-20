@@ -20,7 +20,7 @@ class ManagementCompaniesController < ApplicationController
 
   # GET /management_companies/1/edit
   def edit
-    @manage_buildings = @management_company.buildings
+    @buildings = @manage_buildings = @management_company.buildings.paginate(:page => params[:page], :per_page => 20)
   end
 
   # POST /management_companies
