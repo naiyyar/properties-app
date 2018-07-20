@@ -30,7 +30,7 @@ class ManagementCompaniesController < ApplicationController
 
     respond_to do |format|
       if @management_company.save
-        @management_company.add_building(params[:managed_building_id]) if params[:managed_building_id].present?
+        @management_company.add_building(params[:managed_building_ids]) if params[:managed_building_ids].present?
         format.html { redirect_to management_companies_url, notice: 'Management company was successfully created.' }
         format.json { render :show, status: :created, location: @management_company }
       else
@@ -43,7 +43,7 @@ class ManagementCompaniesController < ApplicationController
   # PATCH/PUT /management_companies/1
   # PATCH/PUT /management_companies/1.json
   def update
-    @management_company.add_building(params[:managed_building_id]) if params[:managed_building_id].present?
+    @management_company.add_building(params[:managed_building_ids]) if params[:managed_building_ids].present?
     respond_to do |format|
       if @management_company.update(management_company_params)
         format.html { redirect_to management_companies_url, notice: 'Management company was successfully updated.' }

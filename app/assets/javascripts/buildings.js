@@ -74,9 +74,7 @@ app.buildings.prototype = {
       $('.no-result-li').remove();
     }
     $('#next_to_review_btn').remove();
-    if($('#managed_building_id').length > 0){
-      $('#managed_building_id').val(ui.item.id)
-    }
+
     new app.units(ui.item.id);
     
     this._input.val(ui.item.building_street_address + ', ' + ui.item.city + ', ' + ui.item.state + ' ' + ui.item.zipcode);
@@ -126,6 +124,22 @@ app.buildings.prototype = {
     if($("ul.ui-autocomplete").is(":visible")) {
       $("ul.ui-autocomplete").hide();
     }
+    
+    //when adding buildings to management company
+    if($('#managed_building_id').length > 0){
+      var item = '';
+      //$('#managed_building_id').val(ui.item.id)
+      if(ui.item.building_name != ''){
+        item = ui.item.building_name;
+      }else{
+        item = ui.item.building_street_address;
+      }
+
+      $('.buttonsWrapper').append('<a href="#" class="btn btn-success">'+item+'</a>');
+      $('.management-company-form').append('<input type="hidden" name="managed_building_ids[]" id="managed_building_id" class="form-control" value="'+ui.item.id+'">');
+      this._input.val('');
+    }
+
     return false;
   },
 

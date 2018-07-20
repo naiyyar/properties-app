@@ -9,8 +9,8 @@ class ManagementCompany < ActiveRecord::Base
 
 	#methods
 	
-	def add_building building_id
-		Building.where(id: building_id).update_all(management_company_id: self.id)
+	def add_building building_ids
+		Building.where(id: building_ids).update_all(management_company_id: self.id)
 	end
 
 	def aggregate_reviews
