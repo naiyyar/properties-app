@@ -161,7 +161,7 @@ body{
     left: 5px !important;
 }
 
-.star-sm .star img, .cardRating li img{
+.star-sm .star img, .cardRating li img, .star-sm li img{
     height: 18px !important;
 }
 

@@ -9,26 +9,7 @@
   
   <div class="singleTop">
     <%= render partial: 'building_summary' %>
-    <% if @building.image_uploads.present? %>
-      <!-- for Lasrge devices -->
-      <div class="row">
-        <div class="col-lg-12 col-sm-12 col-xs-12">
-          <%=render partial: 'uploads/mobile_touch_slider', locals: { object: @building }%>
-          <%= render partial: 'uploads/show_page_slider', locals: { object: @building, path: new_building_upload_path(building_id: @building) } %>
-        </div>
-      </div>
-    <%else%>
-      <div class="sliderLink">
-        <p class="text-danger">No photos are available.</p>
-        
-        <% if user_signed_in? %>
-          <%= link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm' %>
-        <%else%>
-          <%= link_to 'Add Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm'  %>
-        <%end%>  
-      
-      </div>
-    <%end%>
+    <%= render partial: 'building_images_slider' %>
   </div>
 
   <%= render partial: 'building_amenities' %>

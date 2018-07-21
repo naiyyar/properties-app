@@ -2,6 +2,7 @@
   <% if current_user and current_user.has_role?(:admin) %>
     <%= link_to '<span class="fa fa-times"></span>'.html_safe, review_path(review), method: :delete, remote: true, class: 'pull-right text-danger daleteReview', title: 'Delete' %>
   <%end%>
+  
   <div class="commentAvatar">
     <% unless review.anonymous %>
       <% if review.user.avatar.present? %>
@@ -19,6 +20,10 @@
   
   <div class="commentContent">
     <div class="commentName">
+      <% if @management_company.present? %>
+        <p><%= link_to reviewable.building_name, building_path(reviewable), class: 'hyper-link', target: '_blank' %></p>
+        <p class="text-muted"><%= reviewable.street_address %>, <%= reviewable.zipcode %></p>
+      <%end%>
       <p class="review-header-item"><%= review.anonymous ? 'Anonymous' : review.user_name.capitalize %></p>
     </div>
 

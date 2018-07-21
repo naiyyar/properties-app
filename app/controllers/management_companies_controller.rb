@@ -12,6 +12,19 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @manage_buildings = @management_company.buildings.includes(:building_average, :uploads)
+    @total_rates = 0
+    @decimal_part = 0
+    @manage_buildings.each do |building|
+      rating_cache = building.rating_cache
+      if rating_cache.present?
+        @total_rates += rating_cache.first.avg if rating_cache.present?
+        @decimal_part = rating_cache.first.avg.round(2)
+        @decimal_part += @decimal_part.to_s.split('.')[1].to_f/10
+        unless rating_cache.first.avg.nan?
+          @total_rates += @total_rates + 1 if @decimal_part >= 0.76
+        end
+      end
+    end
   end
 
   # GET /management_companies/new

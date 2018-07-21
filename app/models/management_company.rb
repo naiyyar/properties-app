@@ -29,6 +29,14 @@ class ManagementCompany < ActiveRecord::Base
 		count
 	end
 
+	def recommended_percent
+		count = 0
+		self.buildings.each do |building|
+			count += building.recommended_percent unless building.recommended_percent.nan?
+		end
+		count/self.buildings.count
+	end
+
 	# def aggregate_rating
 	# 	count = 0
 	# 	self.buildings.each do |building|
