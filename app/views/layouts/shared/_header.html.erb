@@ -41,22 +41,9 @@
   </div>
   
   <div class="visible-xs" style="position: fixed; bottom: 10px;">
-    <% if user_signed_in? %>
-      <% if params[:action] == 'search' %>
-        <a href="javascript:void(0);" class="mapHandler btn btn-green"><span class="icon-map"></span> Map</a>
-        <a href="javascript:void(0);" class="listHandler btn btn-green"><span class="fa fa-list"></span> List</a>
-      <%elsif (params[:controller] == 'buildings' and params[:action] == 'show') or (params[:controller] == 'units' and params[:action] == 'show') %>
-        <a href="javascript:void(0);" class="mapHandlerShow btn btn-green"><span class="icon-map"></span> Map</a>
-        <a href="javascript:void(0);" class="listHandlerShow btn btn-green"><span class="fa fa-list"></span> List</a>
-      <%end%>
-    <%else%>
-      <% if params[:action] == 'search' %>
-        <a href="javascript:void(0);" class="mapHandler btn btn-green"><span class="icon-map"></span> Map</a>
-        <a href="javascript:void(0);" class="listHandler btn btn-green"><span class="fa fa-list"></span> List</a>
-      <%elsif (params[:controller] == 'buildings' and params[:action] == 'show') or (params[:controller] == 'units' and params[:action] == 'show') %>
-        <a href="javascript:void(0)" class="mapHandlerShow btn btn-green"><span class="icon-map"></span> Map</a>
-        <a href="javascript:void(0)" class="listHandlerShow btn btn-green"><span class="fa fa-list"></span> List</a>
-      <%end%>
+    <% if params[:action] == 'search' or @show_map_btn %>
+      <a href="javascript:void(0);" class="mapHandler btn btn-green"><span class="icon-map"></span> Map</a>
+      <a href="javascript:void(0);" class="listHandler btn btn-green"><span class="fa fa-list"></span> List</a>
     <%end%>
   </div>
 </div>

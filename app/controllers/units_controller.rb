@@ -11,6 +11,7 @@ class UnitsController < ApplicationController
   # GET /units/1
   # GET /units/1.json
   def show
+    @show_map_btn = true
     @unit_uploads = @unit.uploads.order("created_at desc")
     @lat = @unit.building.latitude
     @lng = @unit.building.longitude

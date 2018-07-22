@@ -15,6 +15,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1
   # GET /management_companies/1.json
   def show
+    @show_map_btn = true
     @manage_buildings = @management_company.buildings
     if @manage_buildings.present?
       #finding average rating for all managed buildings 
