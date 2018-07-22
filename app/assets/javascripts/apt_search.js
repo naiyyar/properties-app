@@ -65,20 +65,17 @@ app.apartments.prototype = {
   },
 
   _select: function(e, ui) {
-    this._input.val(ui.item.search_term);
-    term_address = '';
-    term_zipcode = '';
-    neighborhoods = '';
+    search_term = ui.item.search_term
+    this._input.val(search_term);
     url = '';
     if(ui.item.term_address != undefined){
-      term_address = ui.item.term_address
-      url = '/search?search_term='+ui.item.search_term+'&term_address='+term_address;
+      url = '/search?search_term='+search_term+'&term_address='+ui.item.term_address;
+    }else if(ui.item.management_company_name != undefined){
+      url = '/search?search_term='+search_term+'&management_company_name='+ui.item.management_company_name;
     }else if(ui.item.term_zipcode != undefined){
-      term_zipcode = ui.item.term_zipcode
-      url = '/search?search_term='+ui.item.search_term+'&term_zipcode='+term_zipcode;
+      url = '/search?search_term='+search_term+'&term_zipcode='+ui.item.term_zipcode;
     }else{
-      neighborhoods = ui.item.neighborhoods
-      url = '/search?search_term='+ui.item.search_term+'&neighborhoods='+neighborhoods;
+      url = '/search?search_term='+search_term+'&neighborhoods='+ui.item.neighborhoods;
     }
     
     $('.no-match-link').addClass('hidden');

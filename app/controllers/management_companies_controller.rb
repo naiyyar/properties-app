@@ -28,6 +28,7 @@ class ManagementCompaniesController < ApplicationController
       #For Gmap
       @lat = @manage_buildings.first.latitude
       @lng = @manage_buildings.first.longitude
+      @zoom = 11
       @manage_buildings = @manage_buildings.includes(:uploads, :units, :building_average, :votes) unless @manage_buildings.kind_of? Array
       @hash = Gmaps4rails.build_markers(@manage_buildings) do |building, marker|
         marker.lat building.latitude

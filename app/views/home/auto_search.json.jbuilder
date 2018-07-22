@@ -60,6 +60,14 @@ if @buildings_by_city.present?
   end
 end
 
+if @search_by_mangement.present?
+  json.array! @search_by_mangement do |company|
+    json.id company.id
+    json.search_term "#{company.name}" #if !arr.include? company.name
+    json.management_company_name "#{company.name}"
+  end
+end
+
 case @result_type
 when 'no_match_found'
   json.no_match_found 'No matches found - Add Your Building'

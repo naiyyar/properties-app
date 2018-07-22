@@ -8,7 +8,12 @@ class ManagementCompany < ActiveRecord::Base
 	has_many :buildings
 	validates :website, :url => true, allow_blank: true
 
+	#pgsearch
+	include PgSearch
+  pg_search_scope :text_search_by_management_company, against: [:name],
+     :using => { :tsearch => { prefix: true } }
 
+	
 	#methods
 
 	def to_param

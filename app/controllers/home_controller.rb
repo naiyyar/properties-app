@@ -21,6 +21,8 @@ class HomeController < ApplicationController
     results << @buildings_by_zipcode
     @buildings_by_city = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
     results << @buildings_by_city
+    @search_by_mangement = ManagementCompany.text_search_by_management_company(params[:term]).to_a.uniq(&:name)
+    results << @search_by_mangement
     
     if !results.flatten.present?
       @result_type = 'no_match_found'
@@ -37,7 +39,7 @@ class HomeController < ApplicationController
 
   def search
     search_string = params['search_term'].present? ? params['search_term'].split(',')[0] : 'New York'
-    unless params['term_address'].present?
+    if params[:term_address].blank? and params[:management_company_name].blank?
       unless search_string == 'New York'
         @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
         @coordinates = Geocoder.coordinates(params['search_term'])
@@ -73,11 +75,14 @@ class HomeController < ApplicationController
         @buildings = Building.buildings_in_city(params, search_string)
         @zoom = 11
       end
-    else
+    elsif params[:term_address].present?
       building = Building.where(building_street_address: params[:term_address])
       #searching because some address has extra white space in last so can not match exactly with address params
       building = Building.where('building_street_address like ?', "%#{params[:term_address]}%") if building.blank?
       redirect_to building_path(building.first) if building.present?
+    elsif params[:management_company_name].present?
+      @company = ManagementCompany.where(name: params[:management_company_name])
+      redirect_to management_company_path(@company.first) if @company.present?
     end
     
     if search_string.present? and search_string == 'New York'

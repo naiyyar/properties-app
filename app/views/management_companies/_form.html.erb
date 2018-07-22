@@ -19,22 +19,20 @@
               </div>
             </div>
             
-            <%# unless @management_company.new_record? and @manage_buildings.blank? %>
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <div class="form-group">
-                    <label>Connected Buildings</label>
-                    <div class="buttonsWrapper">
-                      <% if @manage_buildings.present? %>
-                        <% @manage_buildings.each do |building| %>
-                          <a href="<%=building_path(building)%>" class="btn btn-default"><%= building.building_name_or_address %></a>
-                        <%end%>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Connected Buildings</label>
+                  <div class="buttonsWrapper">
+                    <% if @manage_buildings.present? %>
+                      <% @manage_buildings.each do |building| %>
+                        <a href="<%=building_path(building)%>" class="btn btn-default"><%= building.building_name_or_address %></a>
                       <%end%>
-                    </div>
+                    <%end%>
                   </div>
                 </div>
               </div>
-            <%#end%>
+            </div>
 
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

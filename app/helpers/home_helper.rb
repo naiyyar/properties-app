@@ -114,14 +114,18 @@ module HomeHelper
 	end
 
 	def searched_term
-		if @building.present?
-			if @building.building_name.present? and @building.building_name != @building.building_street_address
-				"#{@building.building_name} - #{@building.street_address}"
+		if @management_company.blank?
+			if @building.present?
+				if @building.building_name.present? and @building.building_name != @building.building_street_address
+					"#{@building.building_name} - #{@building.street_address}"
+				else
+					"#{@building.street_address}"
+				end
 			else
-				"#{@building.street_address}"
+				params['search_term']
 			end
 		else
-			params['search_term']
+			"#{@management_company.name}" 
 		end
 	end
 
