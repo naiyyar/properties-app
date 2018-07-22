@@ -6,13 +6,13 @@
         <h4 class="modal-title" id="contirbuteMoreLabel">Please write the problem with the review.</h4>
       </div>
       <div class="modal-body">
-        <%= form_for ReviewFlag.new, class: 'form-horizontal' do |f| %>
+        <%= form_for ReviewFlag.new, html: { class: 'form-horizontal', id: "review_flag_form#{review.id}" } do |f| %>
           <fieldset>
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <%= f.text_area :flag_description, placeholder: 'Please write the problem...', rows: '3', cols: '5', class: 'form-control' %>
-                <%= f.hidden_field 'review_id', value: review.id %> 
-                <%= f.hidden_field 'user_id', value: current_user.id %>
+                <%= f.text_area :flag_description, placeholder: 'Please write the problem...', rows: '3', cols: '5', class: 'form-control', id: "review_flag_flag_description#{review.id}" %>
+                <%= f.hidden_field 'review_id', value: review.id, id: "review_id_flag_description#{review.id}" %> 
+                <%= f.hidden_field 'user_id', value: current_user.id, id: "user_id_flag_description#{review.id}" %>
               </div>
             </div>
 

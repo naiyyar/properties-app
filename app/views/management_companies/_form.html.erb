@@ -41,7 +41,7 @@
                 <div class="form-group">
                   <label>Connect buildings</label>
                   <%= hidden_field_tag 'managed_building_id', nil, class: 'form-control', name: 'managed_building_id[]'%>
-                  <%= text_field_tag 'buildings-search-txt',nil, class: 'form-control', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?management=true' }  %>
+                  <%= text_field_tag 'buildings-search-txt',nil, class: 'form-control', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?management=true' }, :autocomplete => :off  %>
                   <div class="results" id="buildings-search-results" style="position: relative;"></div>
                 </div>
               </div>

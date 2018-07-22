@@ -11,18 +11,35 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1
   # GET /management_companies/1.json
   def show
-    @manage_buildings = @management_company.buildings.includes(:building_average, :uploads)
-    @total_rates = 0
-    @decimal_part = 0
-    @manage_buildings.each do |building|
-      rating_cache = building.rating_cache
-      if rating_cache.present?
-        @total_rates += rating_cache.first.avg if rating_cache.present?
-        @decimal_part = rating_cache.first.avg.round(2)
-        @decimal_part += @decimal_part.to_s.split('.')[1].to_f/10
-        unless rating_cache.first.avg.nan?
-          @total_rates += @total_rates + 1 if @decimal_part >= 0.76
+    @manage_buildings = @management_company.buildings
+    if @manage_buildings.present?
+      #finding average rating for all managed buildings 
+      @total_rates = 0
+      @stars = []
+      buildings_count = @manage_buildings.count
+      @manage_buildings.each do |building|
+        rating_cache = building.rating_cache
+        if rating_cache.present?
+          @total_rates += rating_cache.first.avg if rating_cache.present?
         end
+      end
+      @stars = (@total_rates.to_f/buildings_count).round(2).to_s.split('.')
+      
+      #For Gmap
+      @lat = @manage_buildings.first.latitude
+      @lng = @manage_buildings.first.longitude
+      @manage_buildings = @manage_buildings.includes(:uploads, :units, :building_average, :votes) unless @manage_buildings.kind_of? Array
+      @hash = Gmaps4rails.build_markers(@manage_buildings) do |building, marker|
+        marker.lat building.latitude
+        marker.lng building.longitude
+        marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
+        
+        marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", 
+                                           :locals => { 
+                                                        building: building,
+                                                        image: Upload.marker_image(building)
+                                                      }
+                                          )
       end
     end
   end

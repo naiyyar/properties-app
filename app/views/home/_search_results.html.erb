@@ -3,10 +3,13 @@
     <div class="card">
       <%= link_to building_path(building), class: "card" do %>
         <div class="figure">
-          <%if building.image_uploads.present? %>
-            <%= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
-          <%else%>
-            <%= image_tag 'no-photo.png', alt: 'No image', height: '150'%>
+          <!-- removing from management company show page because using building only to show market on map -->
+          <% unless @manage_buildings.present? %>
+            <%if building.image_uploads.present? %>
+              <%= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
+            <%else%>
+              <%= image_tag 'no-photo.png', alt: 'No image', height: '150'%>
+            <%end%>
           <%end%>
           <!-- <div class="figCaption">
             <div>$1,550,000</div>
@@ -21,15 +24,16 @@
         <div id="building_details<%=building.id%>" class="building-detail-card">
          
         </div>
-      
-        <ul class="cardRating">
-          <div class="pull-left star-sm" style="margin-right: 10px;">
-            <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
-          </div>
-          <div> <%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %></div>
-        </ul>
-        <%= render partial: 'property_information', locals: { building: building } %>
-        <div class="clearfix"></div>
+        <% unless @manage_buildings.present? %>
+          <ul class="cardRating">
+            <div class="pull-left star-sm" style="margin-right: 10px;">
+              <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
+            </div>
+            <div> <%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %></div>
+          </ul>
+          <%= render partial: 'home/property_information', locals: { building: building } %>
+          <div class="clearfix"></div>
+        <%end%>
       <%end%>
       <!-- <ul class="cardFeat">
         <li><span>Building Reviews:</span></li>
