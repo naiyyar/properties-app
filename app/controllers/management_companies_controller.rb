@@ -1,11 +1,15 @@
 class ManagementCompaniesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_management_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_management_company, only: [:show, :edit, :update, :destroy, :managed_buildings]
 
   # GET /management_companies
   # GET /management_companies.json
   def index
     @management_companies = ManagementCompany.all
+  end
+
+  def managed_buildings
+    @buildings = @management_company.buildings
   end
 
   # GET /management_companies/1
@@ -14,16 +18,7 @@ class ManagementCompaniesController < ApplicationController
     @manage_buildings = @management_company.buildings
     if @manage_buildings.present?
       #finding average rating for all managed buildings 
-      @total_rates = 0
-      @stars = []
-      buildings_count = @manage_buildings.count
-      @manage_buildings.each do |building|
-        rating_cache = building.rating_cache
-        if rating_cache.present?
-          @total_rates += rating_cache.first.avg if rating_cache.present?
-        end
-      end
-      @stars = (@total_rates.to_f/buildings_count).round(2).to_s.split('.')
+      @stars = Rate.get_average_stars(@manage_buildings)
       
       #For Gmap
       @lat = @manage_buildings.first.latitude

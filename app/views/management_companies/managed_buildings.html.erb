@@ -3,20 +3,16 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="pull-right">
-          <%= link_to "Add new building", new_building_path, class: 'btn btn-blue' %>
+          <%= link_to 'Edit', edit_management_company_path(@management_company), class: 'btn btn-default' %>
         </div>
       </div>
     </div>
     <h2></h2>
   <%end%>
+  
   <%= render partial: 'buildings/buildings' %>
 </div>
 
 <div class="text-center" >
   <%#= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
 </div>
-
-
-
-
-

@@ -15,24 +15,13 @@
 		      <div class="summaryItem">
 	          <h1 class="pageTitle"><%= @management_company.name %> </h1>
 	          <!-- <div class="address"><span class="icon-location-pin"></span> <%#= @building.street_address %>, <%#= @building.zipcode %></div> -->
-	          <div class="property_information" style="padding: 0px 5px;">
+	          <div class="property_information" style="padding: 0px 2px;">
 	            <div><%= link_to 'Website', @management_company.website, class: 'hyper-link', target: '_blank' %></div>
 	          </div>
 
 	          <div style="display: inline-block;">
-	            <ul class="rating star-sm">
-	              <% half = true %>
-					  		<% 1.upto(5) do |num| %>
-					  			<% if num <= @stars[0].to_i %>
-					  				<li><%= image_tag 'star-on.png' %></li>
-					  			<%elsif @stars[1].to_f/100 >= 0.30 and @stars[1].to_f/100 <= 0.75 and half %>
-					  				<li><%= image_tag 'star-half.png' %></li>
-					  				<% half = false %>
-					  			<%else%>
-					  				<li><%= image_tag 'star-off.png' %></li>
-					  			<%end%>
-					  		<%end%>
-	            </ul>
+	            
+	            <%= render 'layouts/shared/custom_rating' %>
 
               <div class="favLink"><span class="icon-pipe"></span>
                 <%= @management_company.recommended_percent.nan? ? '| --% recommended' :  "| #{@management_company.recommended_percent.to_i}% Recommended" %>

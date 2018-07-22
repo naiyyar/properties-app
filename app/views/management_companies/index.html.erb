@@ -31,9 +31,10 @@
               <tr>
                 <td><span class="propName"><b><%= link_to company.name, management_company_path(company) %> </td>
                 <td class="text-center"><%= link_to '<span class="fa fa-globe"></span>'.html_safe, company.website, target: '_blank' if company.website.present? %></td>
-                <td class="text-center"><%= company.buildings.count if company.buildings.present? %></td>
+                <td class="text-center"><%= link_to company.buildings.count, managed_buildings_management_company_path(company), class: 'hyper-link' if company.buildings.present? %></td>
                 <td class="star-sm">
-                  <%#= rating_for building, "building", disabled_after_rate: true, readonly: true %>
+                  <% @stars = Rate.get_average_stars(company.buildings) %>
+                  <%= render 'layouts/shared/custom_rating' %>
                 </td>
                 <td><%= company.aggregate_reviews %></td>
                 

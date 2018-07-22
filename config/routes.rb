@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
-  resources :management_companies
+  resources :management_companies do
+    member do
+      get :managed_buildings
+    end
+  end
   resources :neighborhood_links
   resources :review_flags
   resources :contacts

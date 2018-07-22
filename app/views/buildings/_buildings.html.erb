@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="table-overflow">
+      <table class="table" id="sortable">
+        <thead>
+          <tr>
+            <th>PROPERTY (<%= @buildings.count %>)</th>
+            <th>ADDRESS</th>
+            <th>Creation date</th>
+            <th width='12%'>RATING</th>
+            <th>Reviews</th>
+            <th>Website</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="table">
+          <% @buildings.each do |building| %>
+            <tr>
+              <td><span class="propName"><b><%= link_to(building_name_or_address(building), building_path(building)) %></b> - <%= link_to "(#{building.units.count}) units", units_building_path(building) %> - <%= building.image_uploads.count %> images</span> <br /><small><%=building.property_neighborhods%></small> </td>
+              <td><%= building.street_address %> <%=building.zipcode%></td>
+              <td><%= building.created_at.strftime("%Y-%m-%d") %></td>
+              <td class="star-sm">
+                <%= rating_for building, "building", disabled_after_rate: true, readonly: true %>
+              </td>
+              <td><%= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id) %></td>
+              <td><%= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present? %></td>
+              <% if current_user %>
+                <td><%= link_to "edit", edit_building_path(building) %></td>
+                <% if current_user.has_role?(:admin) %>
+                  <td>
+                    <%= link_to "Delete", building_path(building), method: :delete, data: {confirm: "Are you sure you want to delete this building?"}, class: 'text-danger' if @management_company.blank? %>
+                    <%= link_to 'Disconnect', disconnect_building_building_path(building), class: 'text-danger', data: {confirm: 'Are you sure you want to discconect this building?'} if @management_company.present? %>
+                  </td>  
+                <%end%>
+              <%end%>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
