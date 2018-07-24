@@ -15,9 +15,9 @@
           
           <div class="property_information" style="padding: 0px 5px;">
             <div><%= "#{@building.building_type} in" if @building.building_type.present? %> <%= link_to @building.neighbohoods, "/search?search_term=#{@building.neighborhood_search_string}&neighborhoods=#{@building.neighbohoods}", class: 'hyper-link' %></div>
-            <span><%= "#{@building.no_of_units} Units" if @building.no_of_units.present? and @building.no_of_units > 0 %></span>
-            <span><%= " | #{@building.floors} Floors" if @building.floors.present? %></span>
-            <span><%= " | Built in #{@building.built_in}" if @building.built_in.present? %></span>
+            <span><%= "#{@building.no_of_units} Units |" if @building.no_of_units.present? and @building.no_of_units > 0 %></span>
+            <span><%= " #{@building.floors} Floors |" if @building.floors.present? %></span>
+            <span><%= " Built in #{@building.built_in}" if @building.built_in.present? %></span>
           </div>
 
           <div style="display: inline-block;">
@@ -31,15 +31,15 @@
               </div>
             <%end%>
 
-            <% if @building.reviews.present? %>
-              <div class="favLink"><span class="icon-pipe"></span>
-                | Reviews: <%= @building.reviews.count %>
-              </div>
-            <%end%>
+            <%# if @building.reviews.present? %>
+              <!-- <div class="favLink"><span class="icon-pipe"></span>
+                | Reviews: <%#= @building.reviews.count %>
+              </div> -->
+            <%#end%>
           </div>
           
           <div class="clearfix"></div>
-          <% if @building.management_company.present? %>
+          <% if @building.management_company.present? and @management_company.blank? %>
             <div class="stats1 property_information">
               Managed By <%= link_to @building.management_company.name, management_company_path(@building.management_company), class: 'hyper-link'%>
             </div>

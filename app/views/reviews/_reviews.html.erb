@@ -21,8 +21,10 @@
   <div class="commentContent">
     <div class="commentName">
       <% if @management_company.present? %>
-        <p><%= link_to reviewable.building_name, building_path(reviewable), class: 'hyper-link', target: '_blank' %></p>
-        <p class="text-muted"><%= reviewable.street_address %>, <%= reviewable.zipcode %></p>
+        <%= link_to building_path(reviewable), class: 'hyper-link1' do %>
+          <p class='hyper-link'><%= reviewable.building_name %></p>
+          <p class="text-muted"><%= reviewable.street_address %>, <%= reviewable.zipcode %></p>
+        <%end%>
       <%end%>
       <p class="review-header-item"><%= review.anonymous ? 'Anonymous' : review.user_name.capitalize %></p>
     </div>

@@ -24,7 +24,7 @@
 	            <%= render 'layouts/shared/custom_rating' %>
 
               <div class="favLink"><span class="icon-pipe"></span>
-                <%= @management_company.recommended_percent.nan? ? '| --% recommended' :  "| #{@management_company.recommended_percent.to_i}% Recommended" %>
+                <%= @management_company.recommended_percent.nan? ? '| --% recommended' :  "| #{@management_company.recommended_percent.to_i}% <span class='fa fa-thumbs-up recommended'></span>".html_safe %>
               </div>
 	            
 	          </div>
@@ -40,7 +40,7 @@
   <div class="tabsContainer" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
       <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "BUILDING REVIEWS (#{ @management_company.aggregate_reviews })"%></a></li>
-      <li><a href="#building_managed" role="tab" data-toggle="tab"><%= 'BUILDING MANAGED'%> (<%= @manage_buildings.count %>)</a></li>
+      <li><a href="#building_managed" role="tab" data-toggle="tab"><%= 'BUILDINGS MANAGED'%> (<%= @manage_buildings.count %>)</a></li>
     </ul>
     
     <div class="tab-content">
@@ -62,7 +62,9 @@
         		<% @building = building %>
         		<div style="border-bottom: 6px solid #f3f3f3; padding: 6px 0px 0px;">
 	        		<%= render partial: 'buildings/building_images_slider' %>
-		          <%= render partial: 'buildings/building_summary' %>
+	        		<a href="<%= building_path(building) %>">
+		          	<%= render partial: 'buildings/building_summary' %>
+		          </a>
 	          </div>
 	         <%end%>
         </div>
