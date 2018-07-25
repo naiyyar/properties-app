@@ -2,8 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="summaryItem">
-          <h1 class="pageTitle">
-            <%= @building.building_name_or_address %> 
+          <h1 class="pageTitle"><%= @building.building_name_or_address %> 
             <% if user_signed_in? %>
               <%= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right' %>
             <%end%>
@@ -42,17 +41,19 @@
               <%end%>
             </div>
             
+            <div class="clearfix"></div>
+            
             <% if @building.management_company.present? and @management_company.blank? %>
               <div class="stats1 property_information">
                 Managed By <%= link_to @building.management_company.name, management_company_path(@building.management_company), class: 'hyper-link'%>
               </div>
             <%end%>
+            
             <div class="clearfix"></div><div class="clearfix"></div>
             <div class="stats1 property_information">
               <%= link_to 'Available Apartment Listings'.html_safe, @building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' if @building.web_url.present? %>
             </div>
           </div>
-          <!-- <div class="clearfix"></div> -->
           
           <%#= render partial: 'property_contribute_links', locals: { object: @building } %>
           
