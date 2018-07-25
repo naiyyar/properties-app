@@ -293,11 +293,13 @@ body{
 }
 
 .property_information{
-    padding: 5px;
-    margin-bottom: 2px;
+    /*padding: 5px;*/
+    /*margin-bottom: 2px;*/
+    padding: 2px 0px;
 }
-.property_information > div{
-    padding-bottom: 3px;
+.property_information div, .property_information span {
+    /*padding-bottom: 3px;*/
+    padding: 2px 0px;
 }
 
 #properties .figure{
@@ -350,7 +352,7 @@ a.link_underlined:hover{
     display: none;
 }
 .recommended{
-    color: #0075c9;
+    color: #0075c9 !important;
 }
 .not-recommended{
     color: black;
@@ -2540,7 +2542,7 @@ a.card ul.cardFeat li span, div.card ul.cardFeat li span {
 }
 h1.pageTitle {
     margin: 0;
-    padding: 0 0 5px 0;
+    padding: 0 0 2px 0;
     font-size: 24px;
     line-height: 24px;
     font-weight: normal;
@@ -2549,7 +2551,7 @@ h1.pageTitle {
     font-size: 13px;
     line-height: 14px;
     color: #999;
-    padding: 2px 0 4px 0;
+    /*padding: 2px 0 4px 0;*/
 }
 .singleTop ul.rating {
     list-style-type: none;

@@ -29,7 +29,7 @@
             <div class="pull-left star-sm" style="margin-right: 10px;">
               <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
             </div>
-            <div> <%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %></div>
+            <div> <%= building.recommended_percent.nan? ? "| --% <span class='fa fa-thumbs-up recommended'></span>".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{building.recommended_percent.to_i}%".html_safe %></div>
           </ul>
           <%= render partial: 'home/property_information', locals: { building: building } %>
           <div class="clearfix"></div>

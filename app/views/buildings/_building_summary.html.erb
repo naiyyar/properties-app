@@ -11,44 +11,48 @@
               <%= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs', data: {confirm: 'Are you sure you want to discconect this building?'} %>
             <%end%>
           </h1>
-          <div class="address"><span class="icon-location-pin"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>
           
-          <div class="property_information" style="padding: 0px 5px;">
-            <div><%= "#{@building.building_type} in" if @building.building_type.present? %> <%= link_to @building.neighbohoods, "/search?search_term=#{@building.neighborhood_search_string}&neighborhoods=#{@building.neighbohoods}", class: 'hyper-link' %></div>
-            <span><%= "#{@building.no_of_units} Units |" if @building.no_of_units.present? and @building.no_of_units > 0 %></span>
-            <span><%= " #{@building.floors} Floors |" if @building.floors.present? %></span>
-            <span><%= " Built in #{@building.built_in}" if @building.built_in.present? %></span>
-          </div>
-
-          <div style="display: inline-block;">
-            <ul class="rating star-sm">
-              <%= rating_for @building, 'building', disable_after_rate: true, readonly: true %>
-            </ul>
-
-            <% if @building.votes.present? %>
-              <div class="favLink"><span class="icon-pipe"></span>
-                <%= @building.recommended_percent.nan? ? '| --% recommended' :  "| #{@building.recommended_percent.to_i}% Recommended" %>
+          <div class="property_information">
+            <div class="address" style="margin-left: -1px;"><span class="icon-location-pin"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>
+            <% if @building.building_type.present? or @building.neighbohoods.present? %>
+              <div>
+                <%= "#{@building.building_type} in" if @building.building_type.present? %> 
+                <%= link_to @building.neighbohoods, "/search?search_term=#{@building.neighborhood_search_string}&neighborhoods=#{@building.neighbohoods}", class: 'hyper-link' if @building.neighbohoods.present?%>
               </div>
             <%end%>
+            <%= "<span> #{@building.no_of_units} Units | </span>".html_safe if @building.no_of_units.present? and @building.no_of_units > 0 %>
+            <%= "<span> #{@building.floors} Floors | </span>".html_safe if @building.floors.present? %>
+            <%= "<span> Built in #{@building.built_in} </span>".html_safe if @building.built_in.present? %>
 
-            <%# if @building.reviews.present? %>
-              <!-- <div class="favLink"><span class="icon-pipe"></span>
-                | Reviews: <%#= @building.reviews.count %>
-              </div> -->
-            <%#end%>
-          </div>
-          
-          <div class="clearfix"></div>
-          <% if @building.management_company.present? and @management_company.blank? %>
-            <div class="stats1 property_information">
-              Managed By <%= link_to @building.management_company.name, management_company_path(@building.management_company), class: 'hyper-link'%>
+            <div style="margin-left: -3px;">
+              <ul class="rating star-sm">
+                <%= rating_for @building, 'building', disable_after_rate: true, readonly: true %>
+              </ul>
+
+              <% if @building.votes.present? %>
+                <div class="favLink"><span class="icon-pipe"></span>
+                  <%= @building.recommended_percent.nan? ? "| --% <span class='fa fa-thumbs-up recommended'></span>".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@building.recommended_percent.to_i}%".html_safe %>
+                </div>
+              <%end%>
+
+              <% if @building.reviews.present? and @management_company.present? %>
+                <div class="favLink"><span class="icon-pipe"></span>
+                  | Reviews: <%= @building.reviews.count %>
+                </div>
+              <%end%>
             </div>
-          <%end%>
-          <div class="stats1 property_information">
-            <%= link_to 'Available Apartment Listings'.html_safe, @building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' if @building.web_url.present? %>
+            
+            <% if @building.management_company.present? and @management_company.blank? %>
+              <div class="stats1 property_information">
+                Managed By <%= link_to @building.management_company.name, management_company_path(@building.management_company), class: 'hyper-link'%>
+              </div>
+            <%end%>
+            <div class="clearfix"></div><div class="clearfix"></div>
+            <div class="stats1 property_information">
+              <%= link_to 'Available Apartment Listings'.html_safe, @building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' if @building.web_url.present? %>
+            </div>
           </div>
-          
-          <div class="clearfix"></div>
+          <!-- <div class="clearfix"></div> -->
           
           <%#= render partial: 'property_contribute_links', locals: { object: @building } %>
           
