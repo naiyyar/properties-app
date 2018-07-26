@@ -11,9 +11,7 @@ class Rate < ActiveRecord::Base
     buildings_count = buildings.count
     buildings.each do |building|
       rating_cache = building.rating_cache
-      if rating_cache.present?
-        @total_rates += rating_cache.first.avg if rating_cache.present?
-      end
+      @total_rates += rating_cache.first.avg.to_f if rating_cache.present? and !rating_cache.first.avg.nan?
     end
     star_counts = (@total_rates.to_f/buildings_count).round(2).to_s.split('.')
     return star_counts

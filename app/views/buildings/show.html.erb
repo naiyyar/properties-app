@@ -40,11 +40,11 @@
     <div class="tab-content">
       <div class="tab-pane fade in active" id="buildings">
         <div class="comments">
-          <% if @building.reviews.present? %>
+          <% if @reviews.present? %>
             <div class="text-right" style="text-align: right;padding-bottom: 15px;">
               <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
             </div>
-            <% @building.reviews.includes(:user, :uploads).order('created_at desc').each do |review| %>
+            <% @reviews.each do |review| %>
               <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
             <% end %>
           <%else%>

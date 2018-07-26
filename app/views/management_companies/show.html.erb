@@ -12,7 +12,7 @@
     <div class="summary">
 		  <div class="row">
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		      <div class="summaryItem">
+		      <div class="summaryItem" style="margin-bottom: 0px;">
 	          <h1 class="pageTitle"><%= @management_company.name %> </h1>
 	          <div class="property_information" style="padding: 0px 2px;">
 	            <div><%= link_to 'Website', @management_company.website, class: 'hyper-link', target: '_blank' %></div>
@@ -20,7 +20,7 @@
 		            <%= render 'layouts/shared/custom_rating' %>
 	              <div class="favLink">
 	              	<span class="icon-pipe"></span>
-	                <%= @management_company.recommended_percent == 0 ? '| --% recommended' :  "| <span class='fa fa-thumbs-up recommended'></span> #{@management_company.recommended_percent.to_i}%".html_safe %>
+	                <%= @management_company.recommended_percent == 0 ? "| --% <span class='fa fa-thumbs-up recommended'></span>".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@management_company.recommended_percent.to_i}%".html_safe %>
 	              </div>
 		          </div>
 		        </div>
@@ -30,8 +30,6 @@
 		  </div>
 		</div>
   </div>
-  
-  <div class="clearfix"></div>
   
   <div class="tabsContainer" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -43,8 +41,9 @@
       <div class="tab-pane fade in active" id="buildings">
         <div class="comments">
         	<% @manage_buildings.each do |building| %>
-	          <% if building.reviews.present? %>
-	            <% building.reviews.includes(:user, :uploads).order('created_at desc').each do |review| %>
+        		<% reviews = building.reviews.includes(:user, :uploads).order('created_at desc') %>
+	          <% if reviews.present? %>
+	            <% reviews.each do |review| %>
 	              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: building } %>
 	            <% end %>
 	          <%end%>
