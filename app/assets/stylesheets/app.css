@@ -18,7 +18,7 @@ body{
     width: 100%;
     overflow: hidden;
     position: relative;
-    height: 180px;
+    height: 220px;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -2480,11 +2480,19 @@ a.card ul.cardFeat li span, div.card ul.cardFeat li span {
     z-index: 5;
     display: inline-block;
 }
-.carousel-control .fa-chevron-left {
+
+.carousel-control .fa-angle-left,
+.carousel-control .fa-angle-right{
+    position: absolute;
+    top: 34%;
+    z-index: 5;
+    display: inline-block;
+}
+.carousel-control .fa-chevron-left, .carousel-control .fa-angle-left {
     left: 50%;
     margin-left: -10px;
 }
-.carousel-control .fa-chevron-right {
+.carousel-control .fa-chevron-right, .carousel-control .fa-angle-right {
     right: 50%;
     margin-right: -10px;
 }
