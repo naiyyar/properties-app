@@ -2,7 +2,7 @@
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
     <div class="card">
       <div class="figure">
-          <%= link_to building_path(building), class: 'card' do %>
+          <%= link_to building_path(building) do %>
           <!-- removing from management company show page because using building only to show market on map -->
             <%if building.image_uploads.present? %>
               <%#= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
