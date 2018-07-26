@@ -14,6 +14,15 @@ body{
 .sortMenu .active a, .sortMenu .active a:hover{
     color: #fff;
 }
+.bg-size-cover{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 180px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
 
 .notransition * {
     -webkit-transition: none !important;
@@ -2224,7 +2233,7 @@ a.card, div.card {
     display: block;
     background-color: #fff;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     cursor: pointer;
     text-decoration: none;
 }
@@ -5960,6 +5969,9 @@ select.custom-arrow {
 }
 
 @media screen and (max-width: 767px) {
+    .resultsList {
+        padding: 8px 0px 0 0px;
+    }
     .form-container{
         padding: 10px;
         margin-left: 0px;

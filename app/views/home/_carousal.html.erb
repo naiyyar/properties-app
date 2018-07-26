@@ -1,0 +1,26 @@
+ <div id="carouselFull" class="carousel slide" data-ride="carousel">
+    <!-- <ol class="carousel-indicators">
+        <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselFull" data-slide-to="1"></li>
+        <li data-target="#carouselFull" data-slide-to="2"></li>
+        <li data-target="#carouselFull" data-slide-to="3"></li>
+    </ol> -->
+    
+    <div class="carousel-inner">
+        <% uploads.each_with_index do |upload, index| %>
+            <div class="bg-size-cover item <%= 'active' if index == 0%>" style='background-image: url("<%=upload.image.url%>");'>
+                <%#= image_tag upload.image.url, alt: upload.image_file_name, class: 'hidden' %>
+                <!-- <img src="images/prop/4-1.png" alt="First slide"> -->
+                <!-- <div class="container">
+                    <div class="carousel-caption">
+                       
+                    </div>
+                </div> -->
+            </div>
+        <%end%>
+    </div>
+    <% if uploads.count > 1 %>
+        <a class="left carousel-control" href="#carouselFull" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+        <a class="right carousel-control" href="#carouselFull" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+    <%end%>
+</div>

@@ -1,15 +1,14 @@
 <% @buildings.each do |building| %>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
     <div class="card">
-      <%= link_to building_path(building), class: "card" do %>
-        <div class="figure">
+      <div class="figure">
           <!-- removing from management company show page because using building only to show market on map -->
-          <% unless @manage_buildings.present? %>
-            <%if building.image_uploads.present? %>
-              <%= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
-            <%else%>
-              <%= image_tag 'no-photo.png', alt: 'No image', height: '150'%>
-            <%end%>
+          <%if building.image_uploads.present? %>
+            <%#= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
+            <%= render partial: 'home/carousal', locals: { uploads: building.image_uploads } %>
+          <%else%>
+            <%#= image_tag 'no-photo.png', alt: 'No image', height: '200'%>
+            <div style="background-image: url('/assets/no-photo.png');" class="bg-size-cover"></div>
           <%end%>
           <!-- <div class="figCaption">
             <div>$1,550,000</div>
@@ -17,23 +16,23 @@
             <span class="icon-heart"> 54</span>
             <span class="icon-bubble"> 13</span>
           </div> -->
-          <div class="figView"><span class="icon-eye"></span></div>
+          <!-- <div class="figView"><span class="icon-eye"></span></div> -->
           <!-- <div class="figType">FOR SALE</div> -->
         </div>
 
+      <%= link_to building_path(building), class: 'card', style: 'display:block;' do %>
+        
         <div id="building_details<%=building.id%>" class="building-detail-card">
          
         </div>
-        <% unless @manage_buildings.present? %>
-          <ul class="cardRating">
-            <div class="pull-left star-sm" style="margin-right: 10px;">
-              <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
-            </div>
-            <div> <%= building.recommended_percent.nan? ? "| --% <span class='fa fa-thumbs-up recommended'></span>".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{building.recommended_percent.to_i}%".html_safe %></div>
-          </ul>
-          <%= render partial: 'home/property_information', locals: { building: building } %>
-          <div class="clearfix"></div>
-        <%end%>
+        <ul class="cardRating">
+          <div class="pull-left star-sm" style="margin-right: 10px;">
+            <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
+          </div>
+          <div> <%= building.recommended_percent.nan? ? "| --% <span class='fa fa-thumbs-up recommended'></span>".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{building.recommended_percent.to_i}%".html_safe %></div>
+        </ul>
+        <%= render partial: 'home/property_information', locals: { building: building } %>
+        <div class="clearfix"></div>
       <%end%>
       <!-- <ul class="cardFeat">
         <li><span>Building Reviews:</span></li>
