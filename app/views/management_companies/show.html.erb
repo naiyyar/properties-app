@@ -20,7 +20,7 @@
 		            <%= render 'layouts/shared/custom_rating' %>
 	              <div class="favLink">
 	              	<span class="icon-pipe"></span>
-	                <%= @management_company.recommended_percent.nan? ? '| --% recommended' :  "| <span class='fa fa-thumbs-up recommended'></span> #{@management_company.recommended_percent.to_i}%".html_safe %>
+	                <%= @management_company.recommended_percent == 0 ? '| --% recommended' :  "| <span class='fa fa-thumbs-up recommended'></span> #{@management_company.recommended_percent.to_i}%".html_safe %>
 	              </div>
 		          </div>
 		        </div>

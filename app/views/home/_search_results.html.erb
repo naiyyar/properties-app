@@ -2,13 +2,15 @@
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
     <div class="card">
       <div class="figure">
+          <%= link_to building_path(building), class: 'card' do %>
           <!-- removing from management company show page because using building only to show market on map -->
-          <%if building.image_uploads.present? %>
-            <%#= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
-            <%= render partial: 'home/carousal', locals: { building: building } %>
-          <%else%>
-            <%#= image_tag 'no-photo.png', alt: 'No image', height: '200'%>
-            <div style="background-image: url('/assets/no-photo.png');" class="bg-size-cover"></div>
+            <%if building.image_uploads.present? %>
+              <%#= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
+              <%= render partial: 'home/carousal', locals: { building: building } %>
+            <%else%>
+              <%#= image_tag 'no-photo.png', alt: 'No image', height: '200'%>
+              <div style="background-image: url('/assets/no-photo.png');" class="bg-size-cover"></div>
+            <%end%>
           <%end%>
           <!-- <div class="figCaption">
             <div>$1,550,000</div>
