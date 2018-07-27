@@ -303,7 +303,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   Carousel.VERSION  = '3.2.0'
 
   Carousel.DEFAULTS = {
-    interval: 5000,
+    interval: 500000,
     pause: 'hover',
     wrap: true
   }
@@ -361,6 +361,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   }
 
   Carousel.prototype.next = function () {
+    console.log(this)
     if (this.sliding) return
     return this.slide('next')
   }
