@@ -15,12 +15,12 @@ function createSidebarElem(json){
 };
 
 function bindElemToMarker(elem, marker){
-  card = elem.parent().parent();
+  var card = elem.parent().parent().parent();
   card.on('mouseover', function(){
     marker.serviceObject.setIcon("<%= asset_path 'green-dot.png' %>");
   }).on('mouseout', function(){
-    marker.serviceObject.setIcon("<%= asset_path 'red-dot.png' %>")
-  })
+    marker.serviceObject.setIcon("<%= asset_path 'red-dot.png' %>");
+  });
 };
 
 function bindMarker(marker, markers, handler, lat, lng, zoom){

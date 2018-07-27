@@ -383,6 +383,10 @@
         $('#signin').modal('show');
     });
 
+    // $('.carousel').mouseover(function(){
+    //     $('.building-detail-card').hover();
+    // })
+
     //Hiding not building link element
     // $('.contribute-wrapper').click(function(e) {
     //     console.log(12)
