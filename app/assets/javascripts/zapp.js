@@ -474,15 +474,15 @@
     });
 
 
-    //Enable swiping
-    $(".carousel-inner").swipe( {
-        swipeLeft:function(event, direction, distance, duration, fingerCount) {
-            $(this).parent().carousel('next'); 
-        },
-        swipeRight: function() {
-            $(this).parent().carousel('prev');
-        }
-    });
+    // //Enable swiping
+    // $(".carousel-inner").swipe( {
+    //     // swipeLeft:function(event, direction, distance, duration, fingerCount) {
+    //     //     $(this).parent().carousel('next'); 
+    //     // },
+    //     // swipeRight: function() {
+    //     //     $(this).parent().carousel('prev');
+    //     // }
+    // });
 
     $(".carousel-inner .card").click(function() {
         window.open($(this).attr('data-linkto'), '_self');

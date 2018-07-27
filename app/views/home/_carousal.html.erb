@@ -5,10 +5,13 @@
         <li data-target="#carouselFull" data-slide-to="2"></li>
         <li data-target="#carouselFull" data-slide-to="3"></li>
     </ol> -->
-    <div class="carousal-image-counts">
-        <span class="img-num">1</span> /
-        <span class="img-count"><%= building.image_uploads.count %></span>
-    </div>
+    <% if building.image_uploads.count > 1 %>
+        <div class="carousal-image-counts">
+            <span class="img-num">1</span> /
+            <span class="img-count"><%= building.image_uploads.count %></span>
+        </div>
+    <%end%>
+
     <div class="carousel-inner">
         <% building.image_uploads.each_with_index do |upload, index| %>
             <div class="bg-size-cover item <%= 'active' if index == 0%>" style='background-image: url("<%=upload.image.url%>");'>
@@ -23,7 +26,7 @@
         <%end%>
     </div>
     <% if building.image_uploads.count > 1 %>
-        <a class="left carousel-control" href="#carouselFull<%=building.id%>" role="button" data-slide="prev"><span class="fa fa-angle-left fa-2x"></span></a>
-        <a class="right carousel-control" href="#carouselFull<%=building.id%>" role="button" data-slide="next"><span class="fa fa-angle-right fa-2x"></span></a>
+        <a class="left carousel-control hidden-xs1" href="#carouselFull<%=building.id%>" role="button" data-slide="prev"><span class="fa fa-angle-left fa-2x"></span></a>
+        <a class="right carousel-control hidden-xs1" href="#carouselFull<%=building.id%>" role="button" data-slide="next"><span class="fa fa-angle-right fa-2x"></span></a>
     <%end%>
 </div>

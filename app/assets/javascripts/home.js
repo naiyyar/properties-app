@@ -323,14 +323,55 @@
     // })
 
     //Enable swiping
+    var elem;
+    var visted_count;
+    var total_count ;
     $(".carousel-inner").swipe( {
         swipeLeft:function(event, direction, distance, duration, fingerCount) {
             $(this).parent().carousel('next'); 
+            decreaseSliderImageNumCount($(this).parent());
         },
         swipeRight: function() {
             $(this).parent().carousel('prev');
+            increaseSliderImageNumCount($(this).parent());
         }
     });
+
+    function decreaseSliderImageNumCount(inner_carousal){
+        elem = inner_carousal.parent().find('.img-num');
+        visted_count = parseInt($(elem).text());
+        total_count = inner_carousal.find('div.item').length;
+
+        if(visted_count == 1){
+            $(elem).text(total_count);
+        }else{
+            $(elem).text(visted_count-1);
+        }
+    }
+
+    function increaseSliderImageNumCount(inner_carousal){
+        elem = inner_carousal.parent().find('.img-num');
+        visted_count = parseInt($(elem).text());
+        console.log(visted_count)
+        total_count = inner_carousal.find('.item').length;
+        window.data = inner_carousal;
+        console.log(total_count)
+        
+        if(visted_count == total_count){
+            $(elem).text('1');
+        }else{
+            $(elem).text(visted_count+1);
+        }
+    }
+
+    $('.carousel .left').click(function(){
+        decreaseSliderImageNumCount($(this).parent().find('.carousel-inner'));
+    });
+
+    $('.carousel .right').click(function(){
+        increaseSliderImageNumCount($(this).parent().find('.carousel-inner'));
+    });
+
 
     $(document).on('click', '.modal-su', function() {
         $('#signin').modal('hide');
