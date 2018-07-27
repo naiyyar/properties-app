@@ -1,5 +1,5 @@
 <div class="comments">
-  <h3><span><%=@building.reviews_count%></span> Reviews</h3>
+  <h3><span><%=@building.reviews.count%></span> Reviews</h3>
   <div class="comment">
       <div class="commentAvatar">
         <% if review.user.avatar.present? %>

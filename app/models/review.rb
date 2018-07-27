@@ -46,8 +46,12 @@ class Review < ActiveRecord::Base
   end
 
   private
+  def update_building_reviews_count
+    self.reviewable.update(reviews_count: self.reviewable.reviews_count-1) if self.reviewable.reviews_count > 0
+  end
   #To remove rating and votes
   def destroy_dependents
+    update_building_reviews_count
     Vote.where(review_id: self.id).destroy_all
     rate = Rate.where(review_id: self.id).destroy_all
     #update stars

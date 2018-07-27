@@ -109,7 +109,7 @@ module BuildingsHelper
 			if building.recommended_percent.nan? || building.recommended_percent == 0
 				"#{thumb_icon} --%"
 			else
-			"#{thumb_icon} #{building.recommended_percent.to_i}%  &nbsp; | Reviews: #{building.reviews_count}"
+			"#{thumb_icon} #{building.recommended_percent.to_i}%  &nbsp; | Reviews: #{building.reviews.count}"
 			end
 		end
 	end
