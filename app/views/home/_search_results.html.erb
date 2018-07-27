@@ -9,7 +9,7 @@
               <%= render partial: 'home/carousal', locals: { building: building } %>
             <%else%>
               <%#= image_tag 'no-photo.png', alt: 'No image', height: '200'%>
-              <div style="background-image: url('/assets/no-photo.png');" class="bg-size-cover"></div>
+              <div style="background-image: url(<%= image_url('no-photo.png') %>)" class="bg-size-cover"></div>
             <%end%>
           <%end%>
           <!-- <div class="figCaption">
@@ -22,7 +22,7 @@
           <!-- <div class="figType">FOR SALE</div> -->
         </div>
 
-      <%= link_to building_path(building), class: 'card', style: 'display:block;' do %>
+      <%= link_to building_path(building), style: 'display:block;' do %>
         
         <div id="building_details<%=building.id%>" class="building-detail-card">
          
@@ -31,11 +31,19 @@
           <div class="pull-left star-sm" style="margin-right: 10px;">
             <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
           </div>
-          <div> <%= building.recommended_percent.nan? ? "| --% <span class='fa fa-thumbs-up recommended'></span>".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{building.recommended_percent.to_i}%".html_safe %></div>
+          <div> <%= building.recommended_percent.nan? ? "| --% <span class='fa fa-thumbs-up recommended'></span>".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{building.recommended_percent.to_i}%".html_safe %> &nbsp;<%= " | Reviews: #{building.reviews_count}" %> </div> 
+          
+          <div class="clearfix"></div>         
+          
         </ul>
-        <%= render partial: 'home/property_information', locals: { building: building } %>
+        <%#= render partial: 'home/property_information', locals: { building: building } %>
+        <!-- <div class="clearfix"></div> -->
+
         <div class="clearfix"></div>
       <%end%>
+      <div style="padding: 8px;">
+        <%= link_to 'Available Apartment Listings'.html_safe, building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' if building.web_url.present? %>
+      </div>
       <!-- <ul class="cardFeat">
         <li><span>Building Reviews:</span></li>
         <li><span>Unit Reviews:</span></li>

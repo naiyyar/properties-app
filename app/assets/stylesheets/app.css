@@ -23,6 +23,19 @@ body{
     background-position: center center;
     background-repeat: no-repeat;
 }
+.carousal-image-counts{
+    position: absolute;
+    color: #fff;
+    background-color: rgba(0,0,0,.6);
+    padding: .25rem;
+    z-index: 10;
+    right: 0;
+    font-size: 1.3rem !important;
+    min-width: 3.5rem;
+    height: auto;
+    padding: .125rem .125rem .25rem;
+    font-weight: bold;
+}
 
 .notransition * {
     -webkit-transition: none !important;
@@ -2408,7 +2421,7 @@ a.card .cardAddress, div.card .cardAddress {
     font-size: 11px;
     line-height: 13px;
     color: #999;
-    padding: 0 0 10px 10px;
+    padding: 0 0 5px 10px;
     margin: 0 10px 0 0;
     overflow: hidden;
     white-space: nowrap;
@@ -2418,7 +2431,7 @@ a.card .cardAddress span, div.card .cardAddress span {
     line-height: 13px;
 }
 a.card .cardRating, div.card .cardRating {
-    padding: 0 0 10px 10px;
+    padding: 0px 8px 0px 8px;
     font-size: 12px;
     line-height: 12px;
     color: #333;
@@ -2484,7 +2497,7 @@ a.card ul.cardFeat li span, div.card ul.cardFeat li span {
 .carousel-control .fa-angle-left,
 .carousel-control .fa-angle-right{
     position: absolute;
-    top: 34%;
+    top: 40%;
     z-index: 5;
     display: inline-block;
 }
