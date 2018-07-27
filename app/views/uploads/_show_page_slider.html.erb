@@ -12,15 +12,38 @@
       <span class="arrow left js-rotateslider-arrow" data-action="prev"><i class="fa fa-angle-left fa-3x"></i></span>
     </div>
   <%else%>
-    <!-- <div style="width: 40%; margin: 0 auto;"> -->
-      <!-- <div id="propWidget-3" class="carousel slide propWidget-3" data-ride="carousel"> -->
-    <%= render partial: 'home/carousal', locals: { building: object } %>
-      <!-- </div> -->
-    <!-- </div> -->
+    <% object.image_uploads.each_with_index do |upload, index| %>
+      <a href="<%=upload.image.url%>" title="<%=date_uploaded(upload)%>" class="fancybox" rel='gallery'>
+        <div class="bg-size-cover" style='background-image: url("<%=upload.image.url%>"); width: 48%; float: left; cursor: pointer; margin: 0px 0px 0px 6px;' ></div>
+      </a>
+    <%end%>
+
+    <!-- <div class="hidden" style="width: 100%; margin: 0 auto;">
+      <div id="propWidget-3" class="carousel slide propWidget-3" data-ride="carousel">
+        <div class="carousel-inner">
+          <%# object.image_uploads.each_with_index do |upload, index| %>
+            <div class="item <%#= index == 0 ? 'active' : ''%>">
+              <a rel='gallery' href="<%#= upload.image.url %>" class="fancybox" title="<%#=#date_uploaded(upload)%>">
+                <%#=# image_tag upload.image.url, alt: "" %>
+              </a>
+              <div class="container">
+                <div class="carousel-caption">
+                    
+                </div>
+              </div>
+            </div>
+          <%#end%>
+        </div>
+        <%# if object.image_uploads.count > 1 %>
+          <a class="left carousel-control" href="#propWidget-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+          <a class="right carousel-control" href="#propWidget-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+        <%#end%>
+      </div>
+    </div> -->
+    <div class="clearfix"></div>
   <%end%>
-  
-  <div style="margin-top: 8px;">
-    <% unless @management_company.present? %>
+  <% unless @management_company.present? %>
+    <div style="margin-top: 8px;">
       <div class="pull-left padding-left-20">
         <% if user_signed_in? %>
           <%= link_to 'Add Photo', new_building_upload_path(building_id: object, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm' %>
@@ -37,6 +60,9 @@
           <%= link_to "See all(#{Upload.image_uploads_count(object)})", unit_uploads_path(unit_id: object.id), "data-no-turbolink" => false %>
         <%end%>
       </div>
-    <%end%>
-  </div>
+    </div>
+  <%end%>
+<%else%>
+  <%#= image_tag 'no-photo-available.jpg', size: '311x211', class: 'pull-left' %>
+  <!-- <div class="pull-right">No image Found! Please <%#= link_to 'Upload', path, "data-no-turbolink" => false %> images.</div> -->
 <%end%>
