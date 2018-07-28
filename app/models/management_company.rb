@@ -39,7 +39,7 @@ class ManagementCompany < ActiveRecord::Base
 		self.buildings.each do |building|
 			count += building.recommended_percent unless building.recommended_percent.nan?
 		end
-		count/self.buildings.count
+		count/self.aggregate_reviews
 	end
 
 	def get_average_stars
