@@ -42,12 +42,20 @@ class ManagementCompany < ActiveRecord::Base
 		count/self.buildings.count
 	end
 
-	# def aggregate_rating
-	# 	count = 0
-	# 	self.buildings.each do |building|
-	# 		count += building.reviews.count
-	# 	end
-	# 	count
-	# end
+	def get_average_stars
+  	@total_rates = 0
+    star_counts = []
+
+    @total_rates = RatingCache.where(cacheable_id: buildings.pluck(:id))
+                              .joins('LEFT JOIN buildings on rating_caches.cacheable_id = buildings.id')
+                              .where.not(avg: [nil, 'NaN']).sum(:avg)
+    # buildings.each do |building|
+    #   rating_cache = building.rating_cache
+    #   @total_rates += rating_cache.first.avg.to_f if rating_cache.present? and !rating_cache.first.avg.nan?
+    # end
+    
+    star_counts = (@total_rates.to_f/aggregate_reviews).round(2).to_s.split('.')
+    return star_counts
+  end
 
 end

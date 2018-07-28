@@ -20,7 +20,7 @@
 		            <%= render 'layouts/shared/custom_rating' %>
 	              <div class="favLink">
 	              	<span class="icon-pipe"></span>
-	                <%= @management_company.recommended_percent == 0 ? "| --% <span class='fa fa-thumbs-up recommended'></span>".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@management_company.recommended_percent.to_i}%".html_safe %>
+	                <%= @management_company.recommended_percent == 0 ? "| <span class='fa fa-thumbs-up recommended'></span> --%".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@management_company.recommended_percent.to_i}%".html_safe %>
 	              </div>
 		          </div>
 		        </div>
@@ -52,7 +52,7 @@
       </div>
 
       <div class="tab-pane fade" id="building_managed">
-        <div class="singleTop" style="padding-bottom: 0px;">
+        <!-- <div class="singleTop" style="padding-bottom: 0px;"> -->
         	<% @buildings = @manage_buildings.paginate(:page => params[:page], :per_page => 20) %>
           <div class="row" id="load-more-buildings">
             <%= render partial: 'home/search_results' %>
@@ -66,7 +66,7 @@
 		          <!-- </a> -->
 	          <!-- </div> -->
 	         <%#end%>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>

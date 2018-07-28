@@ -19,7 +19,7 @@ class ManagementCompaniesController < ApplicationController
     @manage_buildings = @management_company.buildings
     if @manage_buildings.present?
       #finding average rating for all managed buildings 
-      @stars = Rate.get_average_stars(@manage_buildings)
+      @stars = @management_company.get_average_stars
       
       #For Gmap
       @lat = @manage_buildings.first.latitude
