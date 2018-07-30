@@ -3,7 +3,7 @@
 	<% 1.upto(5) do |num| %>
 		<% if @stars.present? and num <= @stars[0].to_i %>
 			<li><%= image_tag 'star-on.png' %></li>
-		<%elsif @stars.present? and @stars[1].to_f/10 >= 0.30 and @stars[1].to_f/10 <= 0.75 and half %>
+		<%elsif @stars.present? and @stars[1].to_f/100 >= 0.30 and @stars[1].to_f/100 <= 0.75 and half %>
 			<li><%= image_tag 'star-half.png' %></li>
 			<% half = false %>
 		<%else%>
