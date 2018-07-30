@@ -35,24 +35,29 @@ class ManagementCompany < ActiveRecord::Base
 	end
 
 	def recommended_percent
-		count = 0
+		downcount = total_reviews = 0
 		self.buildings.each do |building|
-			count += building.recommended_percent unless building.recommended_percent.nan?
+			if building.reviews.present?
+				downcount += building.downvotes_count
+				total_reviews += building.reviews.count
+			end
 		end
-		count/self.aggregate_reviews
+		upcount = total_reviews - downcount
+		return (upcount.to_f / total_reviews) * 100
 	end
 
 	def get_average_stars
   	@total_rates = 0
     star_counts = []
 
-    @total_rates = RatingCache.where(cacheable_id: buildings.pluck(:id))
-                              .joins('LEFT JOIN buildings on rating_caches.cacheable_id = buildings.id')
-                              .where.not(avg: [nil, 'NaN']).sum(:avg)
-    # buildings.each do |building|
-    #   rating_cache = building.rating_cache
-    #   @total_rates += rating_cache.first.avg.to_f if rating_cache.present? and !rating_cache.first.avg.nan?
-    # end
+    # @total_rates = RatingCache.where(cacheable_id: buildings.pluck(:id))
+    #                           .joins('LEFT JOIN buildings on rating_caches.cacheable_id = buildings.id')
+    #                           .where(dimension: 'building')
+    #                           .where.not(avg: [nil, 'NaN']).sum(:avg)
+    buildings.each do |building|
+      rating_cache = building.rating_cache.where(dimension: 'building')
+      @total_rates += rating_cache.first.avg.to_f if rating_cache.present? and !rating_cache.first.avg.nan?
+    end
     
     star_counts = (@total_rates.to_f/aggregate_reviews).round(2).to_s.split('.')
     return star_counts

@@ -9,7 +9,7 @@ class ManagementCompaniesController < ApplicationController
   end
 
   def managed_buildings
-    @buildings = @management_company.buildings
+    @buildings = @management_company.buildings.reorder('neighborhood ASC, building_name ASC')
   end
 
   # GET /management_companies/1

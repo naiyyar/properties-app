@@ -1,4 +1,4 @@
-<% content_for :page_title do%><%= "#{@management_company.name}-" if @management_company.name.present? %> <%="#{@management_company.name}" %><%end %>
+<% content_for :page_title do%><%= "#{@management_company.name}" if @management_company.name.present? %> <%end %>
 
 <div id="street_view_btn" class="hidden-xs">
   <input type="button" id="toggleStreetView" value="Street View" class="btn btn-info"></input>
@@ -20,7 +20,7 @@
 		            <%= render 'layouts/shared/custom_rating' %>
 	              <div class="favLink">
 	              	<span class="icon-pipe"></span>
-	                <%= @management_company.recommended_percent == 0 ? "| <span class='fa fa-thumbs-up recommended'></span> --%".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@management_company.recommended_percent.to_i}%".html_safe %>
+	                <%= !@management_company.recommended_percent.present? or @management_company.recommended_percent.nan? ? "| <span class='fa fa-thumbs-up recommended'></span> --%".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@management_company.recommended_percent.to_i}%".html_safe %>
 	              </div>
 		          </div>
 		        </div>

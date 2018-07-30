@@ -27,6 +27,16 @@
         <div id="building_details<%=building.id%>" class="building-detail-card">
          
         </div>
+        
+        <% if @management_company.present? %>
+          <div style="padding: 0px 0px 0px 11px;height: 23px;">
+            <% if building.building_type.present? or building.neighbohoods.present? %>
+              <%= "#{building.building_type} in" if building.building_type.present? %> 
+              <%= link_to building.neighbohoods, "/search?search_term=#{building.neighborhood_search_string}&neighborhoods=#{building.neighbohoods}", class: 'hyper-link' if building.neighbohoods.present?%>
+            <%end%>
+          </div>
+        <%end%>
+
         <ul class="cardRating">
           <div class="pull-left star-sm" style="margin-right: 10px;">
             <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
