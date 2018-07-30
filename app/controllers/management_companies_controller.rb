@@ -9,14 +9,14 @@ class ManagementCompaniesController < ApplicationController
   end
 
   def managed_buildings
-    @buildings = @management_company.buildings.reorder('neighborhood ASC, building_name ASC')
+    @buildings = @management_company.buildings #.reorder('neighborhood ASC, building_name ASC')
   end
 
   # GET /management_companies/1
   # GET /management_companies/1.json
   def show
     @show_map_btn = true
-    @manage_buildings = @management_company.buildings
+    @manage_buildings = @management_company.buildings.reorder('neighborhood ASC, building_name ASC')
     if @manage_buildings.present?
       #finding average rating for all managed buildings 
       @stars = @management_company.get_average_stars

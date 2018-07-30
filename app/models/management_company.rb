@@ -54,7 +54,8 @@ class ManagementCompany < ActiveRecord::Base
     #                           .joins('LEFT JOIN buildings on rating_caches.cacheable_id = buildings.id')
     #                           .where(dimension: 'building')
     #                           .where.not(avg: [nil, 'NaN']).sum(:avg)
-    @total_rates = Rate.where(rateable_id: buildings.pluck(:id), rateable_type: 'Building', dimension: 'building').sum(:stars)
+    rateables = Rate.where(rateable_id: buildings.pluck(:id), rateable_type: 'Building', dimension: 'building')
+    @total_rates = rateables.where('stars > ?', 0).sum(:stars)
 
     # buildings.each do |building|
     # 	#debugger
