@@ -54,11 +54,15 @@ class ManagementCompany < ActiveRecord::Base
     #                           .joins('LEFT JOIN buildings on rating_caches.cacheable_id = buildings.id')
     #                           .where(dimension: 'building')
     #                           .where.not(avg: [nil, 'NaN']).sum(:avg)
-    buildings.each do |building|
-      rating_cache = building.rating_cache.where(dimension: 'building')
-      @total_rates += rating_cache.first.avg.to_f if rating_cache.present? and !rating_cache.first.avg.nan?
-    end
-    
+    @total_rates = Rate.where(rateable_id: buildings.pluck(:id), rateable_type: 'Building', dimension: 'building').sum(:stars)
+
+    # buildings.each do |building|
+    # 	#debugger
+    # 	star_count = Rate.where(rateable_id: building.id, rateable_type: 'Building', dimension: 'building').sum(:stars)
+    #   #rating_cache = building.rating_cache.where(dimension: 'building')
+    #   @total_rates += star_count.to_f #if star_count.present? and star_count
+    # end
+
     star_counts = (@total_rates.to_f/aggregate_reviews).round(2).to_s.split('.')
     return star_counts
   end
