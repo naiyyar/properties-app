@@ -6,7 +6,12 @@
         <!-- removing from management company show page because using building only to show market on map -->
           <%if building.image_uploads.present? %>
             <%#= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
-            <%= render partial: 'home/carousal', locals: { building: building } %>
+            <div class="hidden-xs1">
+              <%= render partial: 'home/carousal', locals: { building: building } %>
+            </div>
+            <!-- <div class="visible-xs">
+              <%#= render partial: 'layouts/shared/image_carousal', locals: { building: building } %>
+            </div> -->
           <%else%>
             <%#= image_tag 'no-photo.png', alt: 'No image', height: '200'%>
             <div style="background-image: url(<%= image_url('no-photo.png') %>)" class="bg-size-cover"></div>

@@ -36,5 +36,7 @@
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap.min
 //= require jquery-fileupload/basic
+//= require blueimp-helper
+//= require blueimp-gallery
 
 //= require_tree .
