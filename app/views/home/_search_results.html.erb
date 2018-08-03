@@ -7,7 +7,8 @@
           <%if building.image_uploads.present? %>
             <%#= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
             <div class="hidden-xs1">
-              <%= render partial: 'home/carousal', locals: { building: building } %>
+              <%#= render partial: 'home/carousal', locals: { building: building } %>
+              <%= render partial: 'home/lightslider', locals: { building: building } %>
             </div>
             <!-- <div class="visible-xs">
               <%#= render partial: 'layouts/shared/image_carousal', locals: { building: building } %>

@@ -38,5 +38,7 @@
 //= require jquery-fileupload/basic
 //= require blueimp-helper
 //= require blueimp-gallery
+//= require progressive_render
+//= require lightslider.min
 
 //= require_tree .

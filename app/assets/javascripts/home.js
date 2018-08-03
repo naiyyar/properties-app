@@ -328,12 +328,18 @@
     var total_count ;
     $(".carousel-inner").swipe( {
         swipeLeft:function(event, direction, distance, duration, fingerCount) {
-            $(this).parent().carousel('next'); 
-            increaseSliderImageNumCount($(this).parent());
+            $(this).parent().carousel('next');
+            var carousel = $(this).parent(); 
+            increaseSliderImageNumCount(carousel);
+            var building_id = $(this).data('buildingid');
+            appendBuildingImages(building_id, carousel)
         },
         swipeRight: function() {
             $(this).parent().carousel('prev');
-            decreaseSliderImageNumCount($(this).parent());
+            var carousel = $(this).parent();
+            decreaseSliderImageNumCount(carousel);
+            var building_id = $(this).data('buildingid');
+            appendBuildingImages(building_id, carousel)
         }
     });
 
@@ -365,13 +371,47 @@
     }
 
     $('.carousel .left').click(function(){
-        decreaseSliderImageNumCount($(this).parent().find('.carousel-inner'));
+        var carousel_inner = $(this).parent().find('.carousel-inner')
+        decreaseSliderImageNumCount(carousel_inner);
+        var building_id = $(this).data('buildingid');
+        appendBuildingImages(building_id, carousel_inner);
     });
 
     $('.carousel .right').click(function(){
-        increaseSliderImageNumCount($(this).parent().find('.carousel-inner'));
+        var carousel_inner = $(this).parent().find('.carousel-inner');
+        increaseSliderImageNumCount(carousel_inner);
+        var building_id = $(this).data('buildingid');
+        appendBuildingImages(building_id, carousel_inner);
     });
 
+    function appendBuildingImages(building_id, carousel_inner){
+        $.ajax({
+            url: '/buildings/'+building_id+'/uploads',
+            type: 'get',
+            dataType: 'json',
+            //data: { upload: { sort: droppable_sort_id } },
+            success: function(response){
+                console.log('success')
+                console.log(response)
+            }
+
+        })
+    }
+
+    //Light slider
+      $('.gallery').lightSlider({
+        item:1,
+        slideMargin: 0,
+        //auto:true,
+        loop:true,
+        //pauseOnHover: true,
+        onBeforeSlide: function (el) {
+            var show_count_elem = el.parent().parent().prev();
+            var current_elem = show_count_elem.find('.current');
+            current_elem.text(el.getCurrentSlideCount());
+        } 
+    });
+    
 
     $(document).on('click', '.modal-su', function() {
         $('#signin').modal('hide');

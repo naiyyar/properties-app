@@ -1,0 +1,15 @@
+<div class="item">            
+    <div class="clearfix" style="width:100%;">
+        <h4 class="lightslider-slides-counts">
+            <span class="current">1</span> / <span class="total"><%=building.image_uploads.count%></span>
+        </h4>
+        <ul id="image-gallery<%=building.id%>" class="gallery list-unstyled" style="height: 165px;">
+
+            <% building.image_uploads.each_with_index do |upload, index| %>
+                <li>
+                    <div class="bg-size-cover" style='background-image: url("<%=upload.image.url%>");'></div>
+                </li>
+            <%end%>
+        </ul>
+    </div>
+</div>

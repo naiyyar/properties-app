@@ -12,10 +12,10 @@
             <span class="img-count"><%= building.image_uploads.count %></span>
         </div>
     <%end%>
-
+    <%#= progressive_render do %>
     <div class="carousel-inner">
-        <% building.image_uploads.each_with_index do |upload, index| %>
-            <div class="bg-size-cover item <%= 'active' if index == 0%>" style='background-image: url("<%=upload.image.url%>");'>
+        <%# building.image_uploads.each_with_index do |upload, index| %>
+            <div class="bg-size-cover item active" style='background-image: url("<%=building.image_uploads.first.image.url%>");'>
                 <%#= image_tag upload.image.url, alt: upload.image_file_name, class: 'hidden' %>
                 <!-- <img src="images/prop/4-1.png" alt="First slide"> -->
                 <!-- <div class="container">
@@ -24,10 +24,12 @@
                     </div>
                 </div> -->
             </div>
-        <%end%>
+        <%#end%>
     </div>
+        <%# sleep 5%>
+    <%#end%>
     <% if building.image_uploads.count > 1 %>
-        <a class="left carousel-control hidden-xs1" href="#carouselFull<%=building.id%>" role="button" data-slide="prev"><span class="fa fa-angle-left fa-2x"></span></a>
-        <a class="right carousel-control hidden-xs1" href="#carouselFull<%=building.id%>" role="button" data-slide="next"><span class="fa fa-angle-right fa-2x"></span></a>
+        <a class="left carousel-control hidden-xs1" href="#carouselFull<%=building.id%>" role="button" data-slide="prev" data-buildingid="<%=building.id%>"><span class="fa fa-angle-left fa-2x"></span></a>
+        <a class="right carousel-control hidden-xs1" href="#carouselFull<%=building.id%>" role="button" data-slide="next" data-buildingid="<%=building.id%>"><span class="fa fa-angle-right fa-2x"></span></a>
     <%end%>
 </div>
