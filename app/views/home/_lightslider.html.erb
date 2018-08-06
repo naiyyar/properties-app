@@ -1,15 +1,19 @@
 <div class="item">            
     <div class="clearfix" style="width:100%;">
         <h4 class="lightslider-slides-counts">
-            <span class="current">1</span> / <span class="total"><%=building.image_uploads.count%></span>
+            <span class="current">1</span> / <span class="total"><%=images_count = building.image_uploads.count%></span>
         </h4>
-        <ul id="image-gallery<%=building.id%>" class="gallery list-unstyled" style="height: 165px;">
-
-            <% building.image_uploads.each_with_index do |upload, index| %>
-                <li>
-                    <div class="bg-size-cover" style='background-image: url("<%=upload.image.url%>");'></div>
-                </li>
+        <ul id="image-gallery<%=building.id%>" class="gallery list-unstyled" style="height: 165px;" data-buildingid="<%=building.id%>" data-lefturl="<%#=building.image_uploads[images_count-1].image.url%>">
+            <%# building.image_uploads.each_with_index do |upload, index| %>
+            <li>
+                <div class="bg-size-cover" style='background-image: url("<%=building.image_uploads.first.image.url%>");' data-imageid="<%=building.image_uploads.first.id%>"></div>
+            </li>
+            <% if images_count > 1 %>
+                <% 1.upto(images_count-1) do |count| %>
+                    <li data-listindex="<%= count %>"></li>
+                <%end%>
             <%end%>
+            <%#end%>
         </ul>
     </div>
 </div>

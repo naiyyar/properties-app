@@ -13,6 +13,11 @@ class UploadsController < ApplicationController
       @uploads = Upload.order('created_at desc')
     end
     @uploads = @uploads.where('image_file_name is not null')
+
+    respond_to do |format|
+      format.html
+      format.json { render json: { uploads: uploads_hash }, :status => 200 }
+    end
 	end
 
   def documents
@@ -168,6 +173,16 @@ class UploadsController < ApplicationController
         return $1.classify.constantize.find(value)
       end
     end
+  end
+
+  #[{id: 12, image_url: ''},{id: 123, image_url: ''},{id: 124, image_url: ''}]
+
+  def uploads_hash
+    records = []
+    @uploads.each do |upload|
+      records << { id: upload.id, image_url: upload.image.url }
+    end
+    records
   end
 
 end

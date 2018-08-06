@@ -384,7 +384,9 @@
         appendBuildingImages(building_id, carousel_inner);
     });
 
-    function appendBuildingImages(building_id, carousel_inner){
+    function appendBuildingImages(building_id, elem, active_image_id){
+        console.log(building_id)
+        console.log(active_image_id)
         $.ajax({
             url: '/buildings/'+building_id+'/uploads',
             type: 'get',
@@ -405,10 +407,14 @@
         //auto:true,
         loop:true,
         //pauseOnHover: true,
+        onSliderLoad: function(el){
+            //el.fetchAssets('onSlLoad');
+        },
         onBeforeSlide: function (el) {
             var show_count_elem = el.parent().parent().prev();
             var current_elem = show_count_elem.find('.current');
             current_elem.text(el.getCurrentSlideCount());
+            el.fetchAssets();
         } 
     });
     
