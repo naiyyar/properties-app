@@ -963,7 +963,8 @@
       		var building_id = this.data('buildingid');
           var slides = $el.find('.lslide');
           var left_li = $el.find('.clone.left');
-          var loader = '<div class="slide-loader"><img src="/assets/ajax-loader.gif" /></div>';
+          var loader_img = "<%= image_path('ajax-loader.gif') %>";
+          var loader = '<div class="slide-loader"><img src="'+loader_img+'" /></div>';
 
         	if(left_li.children().length == 0){
         		$el.parent().append(loader);
