@@ -41,14 +41,14 @@
     <div class="tab-content">
       <div class="tab-pane fade" id="buildings">
         <div class="comments">
-        	<% @manage_buildings.each do |building| %>
-        		<% reviews = building.reviews.includes(:user, :uploads).order('created_at desc') %>
-	          <% if reviews.present? %>
-	            <% reviews.each do |review| %>
-	              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: building } %>
+        	<%# @manage_buildings.each do |building| %>
+        		<%# reviews = building.reviews.includes(:user, :uploads).order('created_at desc') %>
+	          <% if @reviews.present? %>
+	            <% @reviews.each do |review| %>
+	              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: review.reviewable } %>
 	            <% end %>
 	          <%end%>
-	         <%end%>
+	         <%#end%>
         </div>
       </div>
 
