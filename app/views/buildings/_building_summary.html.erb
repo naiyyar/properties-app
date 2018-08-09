@@ -29,8 +29,10 @@
               </ul>
 
               <% if @building.votes.present? %>
-                <div class="favLink"><span class="icon-pipe"></span>
-                  <%= @building.recommended_percent.nan? ? "| <span class='fa fa-thumbs-up recommended'></span> --%".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@building.recommended_percent.to_i}%".html_safe %>
+                <div class="favLink">
+                  <!-- <span class="icon-pipe"></span> -->
+                  <%#= @building.recommended_percent.nan? ? "| <span class='fa fa-thumbs-up recommended'></span> --%".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@building.recommended_percent.to_i}%".html_safe %>
+                  <%= recommended_percent(@building).html_safe %>
                 </div>
               <%end%>
 
