@@ -3,8 +3,7 @@
         <h4 class="lightslider-slides-counts">
             <span class="current">1</span> / <span class="total"><%=images_count = building.image_uploads.count%></span>
         </h4>
-        <ul id="image-gallery<%=building.id%>" class="gallery list-unstyled" style="height: 165px;" data-buildingid="<%=building.id%>" data-lefturl="<%#=building.image_uploads[images_count-1].image.url%>">
-            <%# building.image_uploads.each_with_index do |upload, index| %>
+        <ul id="image-gallery<%=building.id%>" class="gallery list-unstyled" style="height: 165px;" data-buildingid="<%=building.id%>">
             <li>
                 <div class="bg-size-cover" style='background-image: url("<%=building.image_uploads.first.image.url%>");' data-imageid="<%=building.image_uploads.first.id%>"></div>
             </li>
@@ -13,7 +12,6 @@
                     <li data-listindex="<%= count %>"></li>
                 <%end%>
             <%end%>
-            <%#end%>
         </ul>
     </div>
 </div>

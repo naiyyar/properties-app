@@ -5,6 +5,7 @@
 #= require devise
 #= require social-share-button
 #= require filters
+#= require light_slider
 #= require_tree .
 
 jQuery ->

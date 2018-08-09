@@ -22,7 +22,7 @@
           <% @buildings = @buildings.paginate(:page => params[:page], :per_page => 20) %>
           <div class="resultsList">
             <div class="row" id="load-more-buildings">
-              <%= render partial: 'search_results' %>
+              <%= render partial: 'search_results', locals: { buildings: @buildings } %>
             </div>
           </div>
           

@@ -400,25 +400,6 @@
         })
     }
 
-    //Light slider
-      $('.gallery').lightSlider({
-        item:1,
-        slideMargin: 0,
-        //auto:true,
-        loop:true,
-        //pauseOnHover: true,
-        onSliderLoad: function(el){
-            //el.fetchAssets('onSlLoad');
-        },
-        onBeforeSlide: function (el) {
-            var show_count_elem = el.parent().parent().prev();
-            var current_elem = show_count_elem.find('.current');
-            current_elem.text(el.getCurrentSlideCount());
-            el.fetchAssets();
-        } 
-    });
-    
-
     $(document).on('click', '.modal-su', function() {
         $('#signin').modal('hide');
         $('#signup').modal('show');

@@ -16,7 +16,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn = true
-    @manage_buildings = @management_company.buildings.reorder('neighborhood ASC, building_name ASC')
+    @manage_buildings = @management_company.buildings.paginate(:page => params[:page], :per_page => 20).reorder('neighborhood ASC, building_name ASC')
     if @manage_buildings.present?
       #finding average rating for all managed buildings 
       @stars = @management_company.get_average_stars

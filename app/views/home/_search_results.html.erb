@@ -1,4 +1,4 @@
-<% @buildings.each do |building| %>
+<% buildings.each do |building| %>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
     <div class="card">
       <div class="figure" style="position: relative;">
@@ -6,7 +6,7 @@
         <!-- removing from management company show page because using building only to show market on map -->
           <%if building.image_uploads.present? %>
             <%#= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
-            <div class="hidden-xs1">
+            <div>
               <%#= render partial: 'home/carousal', locals: { building: building } %>
               <%= render partial: 'home/lightslider', locals: { building: building } %>
             </div>
