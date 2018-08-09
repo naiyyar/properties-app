@@ -400,6 +400,7 @@
         })
     }
 
+
     $(document).on('click', '.modal-su', function() {
         $('#signin').modal('hide');
         $('#signup').modal('show');

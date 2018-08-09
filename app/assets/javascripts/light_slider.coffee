@@ -9,3 +9,7 @@ jQuery ->
 			current_elem = show_count_elem.find('.current')
 			current_elem.text(el.getCurrentSlideCount)
 			el.fetchAssets
+
+	#when slider is not loading on tab active so NEED TO RESIZE
+	#$('[href="#building_managed"]').on 'shown.bs.tab', ->
+	#	$('.gallery').resize()
