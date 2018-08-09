@@ -1097,7 +1097,7 @@ a.userHandler {
     color: #3a3a3a;
 }
 .search input {
-    background-color: #fff;
+    background-color: #e8e8e8;
     color: #3a3a3a;
     border: 0 none;
     font-size: 13px;
@@ -1108,7 +1108,7 @@ a.userHandler {
     border-bottom: 1px solid #ebebeb;
 }
 .search input:hover{
-    background-color: #f5f8f9;
+    /*background-color: #f5f8f9;*/
     /*border: 1px solid #ddd;*/
 }
 .icon-search-shared{
@@ -6433,6 +6433,7 @@ select.custom-arrow {
         color: #333;
     }
     .search input {
+        background-color: #fff;
         margin: 0px;
         width: 100%;
         padding: 9px;
