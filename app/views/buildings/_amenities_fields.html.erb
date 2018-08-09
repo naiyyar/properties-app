@@ -39,7 +39,7 @@
                 <%end%>
               </div>
             <%else%>
-              <div class="checkbox custom-checkbox"><label><%= f.check_box key %> <span class="fa fa-check"></span> <%=value%></label></div>
+              <div class="checkbox custom-checkbox"><label><%= f.check_box key, {:checked => (value == 'No Fee Building' ? true : false) } %> <span class="fa fa-check"></span> <%= value == 'No Fee Building' ? "<b>#{value}</b>".html_safe : value%></label></div>
             <%end%>
           <%end%>
         </div>
