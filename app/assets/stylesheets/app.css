@@ -5080,7 +5080,7 @@ a.home-navHandler.active {
 }
 .highlight {
     background-color: #0075c9;
-    padding: 16px;
+    padding: 12px;
     text-align: center;
 }
 .h-title {
@@ -5094,7 +5094,7 @@ a.home-navHandler.active {
     font-size: 14px;
     /*font-style: italic;*/
     line-height: 24px;
-    padding: 0 21%;
+    padding: 0 18%;
 }
 .h-text p{
     font-family: 'Source Sans Pro', sans-serif;
@@ -6050,7 +6050,7 @@ select.custom-arrow {
     padding: 0 30%;
     }
     .h-text p{
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .lastYearInResidence{
