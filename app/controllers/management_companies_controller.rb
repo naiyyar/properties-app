@@ -16,18 +16,19 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn = true
-    @manage_buildings = @management_company.buildings.paginate(:page => params[:page], :per_page => 20).reorder('neighborhood ASC, building_name ASC')
-    @reviews = Review.where(reviewable_id: @manage_buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads).order('created_at desc')
-    if @manage_buildings.present?
+    buildings = @management_company.buildings
+    @manage_buildings = buildings.paginate(:page => params[:page], :per_page => 20).reorder('neighborhood ASC, building_name ASC')
+    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads).order('created_at desc')
+    if buildings.present?
       #finding average rating for all managed buildings 
       @stars = @management_company.get_average_stars
       
       #For Gmap
-      @lat = @manage_buildings.first.latitude
-      @lng = @manage_buildings.first.longitude
+      @lat = buildings.first.latitude
+      @lng = buildings.first.longitude
       @zoom = 11
-      @manage_buildings = @manage_buildings.includes(:uploads, :units, :building_average, :votes) unless @manage_buildings.kind_of? Array
-      @hash = Gmaps4rails.build_markers(@manage_buildings) do |building, marker|
+      @managed_buildings = buildings.includes(:uploads, :units, :building_average, :votes) unless buildings.kind_of? Array
+      @hash = Gmaps4rails.build_markers(managed_buildings) do |building, marker|
         marker.lat building.latitude
         marker.lng building.longitude
         marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
