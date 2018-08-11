@@ -84,6 +84,7 @@ module BuildingsHelper
 
 	def building_amenities
 		{
+			no_fee: 'No Fee Building',
 			courtyard: 'Courtyard',
 			pets_allowed_cats: 'Cats Allowed',
 			pets_allowed_dogs: 'Dogs Allowed',
@@ -99,7 +100,6 @@ module BuildingsHelper
 			swimming_pool: 'Swimming Pool',
 			walk_up: 'Walk up',
 			childrens_playroom: 'Childrens Playroom',
-			no_fee: 'No Fee Building',
 		}
 	end
 
