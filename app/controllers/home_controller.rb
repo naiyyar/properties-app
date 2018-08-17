@@ -85,16 +85,6 @@ class HomeController < ApplicationController
       redirect_to management_company_path(@company.first) if @company.present?
     end
     
-    if search_string.present? and search_string == 'New York'
-      @neighborhood_links = NeighborhoodLink.all
-    elsif view_context.queens_borough.include?(params[:neighborhoods])
-      @neighborhood_links = NeighborhoodLink.where('neighborhood = ?',params[:neighborhoods])
-    else
-      @neighborhood_links = NeighborhoodLink.where('neighborhood @@ :q or parent_neighborhood @@ :q', q: params[:neighborhoods])
-    end
-
-    @neighborhood_links = @neighborhood_links.order({ date: :desc }, { title: :asc }) if @neighborhood_links.present?
-    
     if params[:filter].present?
       @rating = params[:filter][:rating]
       @building_types = params[:filter][:type]
@@ -124,6 +114,8 @@ class HomeController < ApplicationController
                                           )
 	    end
 	  end
+
+    @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(search_string, view_context.queens_borough, params[:neighborhoods])
   end
 
   def tos

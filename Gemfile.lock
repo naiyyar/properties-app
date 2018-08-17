@@ -82,6 +82,9 @@ GEM
     bullet (4.14.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
+    buttercms-rails (1.2.1)
+      buttercms-ruby (~> 1.3.1)
+    buttercms-ruby (1.3.1)
     byebug (9.1.0)
     cancancan (2.1.2)
     client_side_validations (4.2.12)
@@ -325,6 +328,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-sass (~> 3.3.6)
   bullet
+  buttercms-rails
   byebug
   cancancan
   client_side_validations

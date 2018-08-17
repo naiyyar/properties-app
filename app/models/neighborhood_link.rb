@@ -7,6 +7,8 @@ class NeighborhoodLink < ActiveRecord::Base
                 			:content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] }
 
 
+  default_scope { order('date desc, title ASC') }
+
   def link_image
   	self.image.present? ? self.image : 'missing-grey.png'
   end
@@ -14,6 +16,16 @@ class NeighborhoodLink < ActiveRecord::Base
   def save_parent_neighborhood
   	buildings = Building.where('neighborhoods_parent is not null and neighborhood = ?', self.neighborhood)
   	self.update(parent_neighborhood: buildings.first.neighborhoods_parent) if buildings.present?
+  end
+
+  def self.neighborhood_guide_links(search_string, queens_borough, neighborhoods)
+    if search_string.present? and search_string == 'New York'
+      @neighborhood_links = NeighborhoodLink.all
+    elsif queens_borough.include?(neighborhoods)
+      @neighborhood_links = NeighborhoodLink.where('neighborhood = ?', neighborhoods)
+    else
+      @neighborhood_links = NeighborhoodLink.where('neighborhood @@ :q or parent_neighborhood @@ :q', q: neighborhoods)
+    end
   end
 
 end
