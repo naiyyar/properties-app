@@ -6,8 +6,6 @@
 <!-- Recent posts -->
 <h4>Recent posts</h4>
 
-<ul>
   <% @category.recent_posts.each do |post| %>
-    <li><%= render :partial => 'buttercms/posts/post', :locals => {:post => post} %></li>
+    <%= render :partial => 'buttercms/posts/post', :locals => {:post => post} %>
   <% end %>
-</ul>

@@ -28,7 +28,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                         <%= yield %>
                     </div>
-                    <%= render partial: 'buttercms/posts/category_panel' %>
+                    <%= render partial: 'buttercms/posts/category_panel' if @categories.present? %>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@
             <ul class="blog-r-nav">
         		<% @categories.each do |category| %>
 				    <%= link_to category.name, buttercms_category_path(category.slug), :title => category.name %>
+                    <%#= "(#{category.recent_posts.count})" if category.recent_posts.present?%>
 				<% end %>
             </ul>
         </div>
