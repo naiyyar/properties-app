@@ -1,29 +1,78 @@
 <%= content_for :html_title, @post.seo_title %>
 <%= content_for :meta_description, @post.meta_description %>
 
-<!-- Post title -->
-<h2><%= @post.title %></h2>
-
-<!-- Post author -->
-<p>
-  <%= link_to "#{@post.author.first_name} #{@post.author.last_name}", buttercms_author_path(@post.author.slug) %>
-</p>
-
-<!-- Post categories -->
-<% @post.categories.each do |category| %>
-  <%= link_to category.name, buttercms_category_path(category.slug), :title => category.name %>
-<% end %>
-
-<!-- Publish date -->
-<p><%= Time.parse(@post.published).strftime('%B %d, %Y') %></p>
-
-<!-- Post body -->
-<%= @post.body.html_safe %>
-
-<!-- Link to Next Post -->
-<% if @next_post %>
-  <%= link_to @next_post.title, buttercms_post_path(@next_post.slug), :title => @next_post.title %>
-<% end %>
+<div class="post-top">
+    <div class="post-author">
+        <!-- <img src="images/avatar-1.png" alt="avatar"> -->
+        <%= image_tag (@post.author.profile_image.present? ? @post.author.profile_image : 'user-missing2.png') %>
+        <div class="pa-user">
+            <div class="pa-name"><%="#{@post.author.first_name} #{@post.author.last_name}"%> on <%= Time.parse(@post.published).strftime('%B %d, %Y') %></div>
+            <!-- <div class="pa-title">Senior Blog Editor</div> -->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- <div class="post-share">
+        <div class="ps-social"><a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-google"><span class="fa fa-google-plus"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-blue"><span class="fa fa-linkedin"></span></a></div>
+        <div class="ps-stats">
+            <span>245</span> Shares&nbsp;&nbsp;&nbsp;
+            <span>4</span> Comments
+        </div>
+    </div> -->
+    <div class="clearfix"></div>
+</div>
+<div class="post-content">
+    <h2 class="osLight"><%= @post.title %></h2>
+    <div class="image-block">
+        <%= image_tag(@post.featured_image) if @post.featured_image %>
+        <!-- <div class="ib-title"><span class="osLight">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit</span></div> -->
+    </div>
+    
+    <p><%= simple_format(@post.body.html_safe) %></p>
+</div>
+<div class="f-pn-articles">
+    <% if @previous_post %>
+      <a href="<%=buttercms_post_path(@previous_post.slug)%>" class="f-p-article", title="<%=@previous_post.title%>">
+          <div class="fpna-title">Previous post</div>
+          <span class="fpna-header"><%=truncate(@previous_post.title, length: 40)%></span>
+          <span class="fa fa-angle-left pull-left pn-icon"></span>
+      </a>
+    <%end%>
+    <% if @next_post %>
+      <a href="<%=buttercms_post_path(@next_post.slug)%>" class="f-n-article", title="<%=@next_post.title%>">
+        <div class="fpna-title">Next post</div>
+        <span class="fpna-header"><%=truncate(@next_post.title, length: 40)%></span>
+        <span class="fa fa-angle-right pull-right pn-icon"></span>
+      </a>
+    <% end %>
+    <div class="clearfix"></div>
+</div>
+<!-- <h2 class="osLight align-left">Related Articles</h2>
+<div class="row pb20 hidden">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="article bg-w">
+            <a href="blog-post.html" class="image"><img src="images/post-5.jpg" alt="blog image"></a>
+            <div class="article-category"><a href="#" class="text-green">Architecture</a></div>
+            <h3 class="osLight"><a href="blog-post.html">Stylish Modern Ranch Exuding a Welcoming Feel</a></h3>
+            <div class="footer"><a href="#">John Smith</a>, <a href="#">Sep 3, 2014</a></div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="article bg-w">
+            <a href="blog-post.html" class="image"><img src="images/post-6.jpg" alt="blog image"></a>
+            <div class="article-category"><a href="#" class="text-green">Architecture</a></div>
+            <h3 class="osLight"><a href="blog-post.html">Private Contemporary Home Balancing Openness</a></h3>
+            <div class="footer"><a href="#">John Smith</a>, <a href="#">Sep 2, 2014</a></div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="article bg-w">
+            <a href="blog-post.html" class="image"><img src="images/post-1.jpg" alt="blog image"></a>
+            <div class="article-category"><a href="#" class="text-green">Architecture</a></div>
+            <h3 class="osLight"><a href="blog-post.html">Modern Two-Level Pool House in Los Angeles</a></h3>
+            <div class="footer"><a href="#">John Smith</a>, <a href="#">Sep 1, 2014</a></div>
+        </div>
+    </div>
+</div> -->
 
 <!--
 // For sharing, we recommend https://www.addthis.com/get/sharing or https://sumome.com/app/share

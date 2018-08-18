@@ -1,18 +1,13 @@
-<div>
-  <!-- Featured image -->
-  <%= image_tag(post.featured_image) if post.featured_image %>
-
-  <!-- Post title -->
-  <h4><%= link_to post.title, buttercms_post_path(post.slug), :title => post.title %></h4>
-
-  <!-- Post author -->
-  by <%= link_to "#{post.author.first_name} #{post.author.last_name}", buttercms_author_path(post.author.slug) %>
-
-  <!-- Post summary -->
-  <p><%= post.summary %></p>
-
-  <!-- Post categories -->
-  <% post.categories.each do |category| %>
-    <%= link_to category.name, buttercms_category_path(category.slug), :title => category.name %>
-  <% end %>
+<div class="row">
+  <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    <div class="article">
+        <a href="<%=buttercms_post_path(post.slug)%>" class="image"><%= image_tag(post.featured_image) if post.featured_image %></a>
+        <div class="article-category invisible"><a href="#" class="text-green">Architecture</a></div>
+        
+        <h3 class="osLight"><%= link_to post.title, buttercms_post_path(post.slug), :title => post.title %></h3>
+        
+        <p><%= post.summary %></p>
+        <!-- <div class="footer"><a href="#">John Smith</a>, <a href="#">Sep 4, 2014</a></div> -->
+    </div>
+  </div>
 </div>

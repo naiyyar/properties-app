@@ -1,21 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title><%= content_for?(:html_title) ? "#{content_for(:html_title)} | My Blog" : "My Blog" %></title>
+    <head>
+        <title><%= content_for?(:html_title) ? "#{content_for(:html_title)} | My Blog" : "My Blog" %></title>
 
-    <meta name="description" content="<%= content_for?(:meta_description) ? content_for(:meta_description) : "My Blog" %>">
+        <meta name="description" content="<%= content_for?(:meta_description) ? content_for(:meta_description) : "My Blog" %>">
 
-    <link rel="alternate" type="application/atom+xml" title="My Blog - Atom" href="<%= buttercms_blog_atom_path %>">
-    <link rel="alternate" type="application/rss+xml" title="My Blog - RSS" href="<%= buttercms_blog_rss_path %>">
+        <link rel="alternate" type="application/atom+xml" title="My Blog - Atom" href="<%= buttercms_blog_atom_path %>">
+        <link rel="alternate" type="application/rss+xml" title="My Blog - RSS" href="<%= buttercms_blog_rss_path %>">
 
-    <!-- See https://buttercms.com/docs/#cssstyling -->
-    <link rel="stylesheet" href="http://d2z2rr99bkshyr.cloudfront.net/buttercms-post-defaults.css">
-</head>
-<body>
-    <div>
-      <%= link_to "Blog home", buttercms_blog_path %>
-    </div>
-
-    <%= yield %>
-</body>
+        <!-- See https://buttercms.com/docs/#cssstyling -->
+        <!-- <link rel="stylesheet" href="http://d2z2rr99bkshyr.cloudfront.net/buttercms-post-defaults.css"> -->
+        <%= stylesheet_link_tag 'application', media: 'all' %>
+        <%= favicon_link_tag 'favicon.png' %>
+    </head>
+    <body class="notransition no-hidden" >
+        <div class="home-header">
+            <div class="blog-nav">
+                <ul>
+                    <li><%= link_to 'All posts', '/blog' %></li>
+                </ul>
+             </div>
+        </div>
+        
+        <div class="blog-content">
+            <div class="home-wrapper">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                        <%= yield %>
+                    </div>
+                    <%= render partial: 'buttercms/posts/category_panel' %>
+                </div>
+            </div>
+        </div>
+        <style type="text/css">
+            .blog-nav {
+                float: left;
+                margin-left: 65px;
+            }
+            .home-header {
+                padding: 0px 11px 8px;
+            }
+            a{
+                color: #1a0dab;
+            }
+            .pn-icon {
+                position: absolute;
+                font-size: 36px;
+                line-height: 36px;
+                top: 50%;
+                margin-top: -18px;
+                color: #333 !important;
+            }
+        </style>
+    </body>
 </html>
