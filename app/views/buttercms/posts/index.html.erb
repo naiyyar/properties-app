@@ -1,7 +1,10 @@
 <h2 class="osLight">Latest Posts</h2>
-<% @posts.each_with_index do |post, index| %>
-  <%= render :partial => 'post', :locals => {:post => post} %>
-<% end %>
+<div class="row">
+	<% @posts.each_with_index do |post, index| %>
+		<% @count = index %>
+	  <%= render :partial => 'post', :locals => {:post => post} %>
+	<% end %>
+</div>
 
 <div class="blog-pagination">
   <!-- <a href="#" class="btn btn-o btn-round btn-green"><span class="fa fa-angle-left"></span> Older Articles</a> -->

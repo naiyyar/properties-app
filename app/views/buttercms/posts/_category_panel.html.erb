@@ -4,7 +4,7 @@
             <h2 class="osLight h-r">Categories</h2>
             <ul class="blog-r-nav">
         		<% @categories.each do |category| %>
-				    <%= link_to category.name, buttercms_category_path(category.slug), :title => category.name %>
+				    <li><%= link_to category.name, buttercms_category_path(category.slug), :title => category.name %></li>
                     <%#= "(#{category.recent_posts.count})" if category.recent_posts.present?%>
 				<% end %>
             </ul>
