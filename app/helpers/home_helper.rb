@@ -99,14 +99,19 @@ module HomeHelper
 	
 	def search_link neighborhood, borough
 		unless borough == 'BRONX'
-			if params[:sort_by].present? or params[:filter].present?
-				request.fullpath
+			borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase)
+			search_term = "#{neighborhood.downcase.gsub(' ', '-')}-#{borough}"
+			search_url = "/neighborhoods/#{search_term}"
+			if params[:sort_by].present? and params[:filter].present?
+				"#{search_url}?sort_by=#{params[:sort_by]}"
+			elsif params[:sort_by].present?
+				#request.fullpath
+				"#{search_url}?sort_by=#{params[:sort_by]}"
+			elsif params[:filter].present?
+				"#{search_url}"
 			else
 				#"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
-				borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase)
-				search_term = "#{neighborhood.downcase.gsub(' ', '-')}-#{borough}"
-				
-				"/neighborhoods/#{search_term}"
+				"#{search_url}"
 			end
 		else
 			'javascript:void(0)'
@@ -114,7 +119,7 @@ module HomeHelper
 	end
 
 	def neighborhood_class
-		'pop-neighborhood' if params[:sort_by].present? or params[:filter].present?
+		#'pop-neighborhood' if params[:sort_by].present? or params[:filter].present?
 	end
 
 	def searched_term
@@ -131,10 +136,6 @@ module HomeHelper
 		else
 			"#{@management_company.name}" 
 		end
-	end
-
-	def sort_url(sort_index)
-		"/search?search_term=#{params[:search_term]}&neighborhoods=#{params[:neighborhoods]}&sort_by=#{sort_index}"
 	end
 
 	def sort_string

@@ -45,8 +45,8 @@ class HomeController < ApplicationController
       search_string = terms_arr.pop #removing last elements-name of city
       search_string = terms_arr.join(' ').titleize #join neighborhoods
       borough_city = (borough_city == 'newyork' ? 'New York' : borough_city.capitalize)
-      
-      @search_input_value = "#{search_string} - #{borough_city}, NY"
+      @searched_neighborhoods = "#{search_string}"
+      @search_input_value = "#{@searched_neighborhoods} - #{borough_city}, NY"
       unless search_string == 'New York'
         @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
         @coordinates = Geocoder.coordinates("#{search_term}, #{borough_city}, NY")
@@ -57,10 +57,10 @@ class HomeController < ApplicationController
 
         @boundary_coords = []
         
-        if params['searched_by'] == 'zipcode'
+        if params[:searched_by] == 'zipcode'
           @buildings = Building.where('zipcode = ?', search_string)
           @boundary_coords << Gcoordinate.where(zipcode: search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-        elsif params['searched_by'] == 'neighborhoods'
+        elsif params[:searched_by] == 'neighborhoods'
           @buildings = Building.buildings_in_neighborhood(search_string)
           @zoom = 14
           if !manhattan_kmls.include? search_string

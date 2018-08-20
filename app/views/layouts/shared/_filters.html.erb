@@ -1,11 +1,11 @@
 <div class="filter" style="display: none;">
   <div class="clearfix"></div>
-  <form action='/search' class="filterForm">
+  <form action="/<%=params[:searched_by]%>/<%=params[:search_term]%>" class="filterForm">
     <div class="text-right header visible-xs" style="padding: 4px; cursor: pointer;">
       <%= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeFilter' %>
     </div>
-  	<%= hidden_field_tag :search_term, params[:search_term] %>
-  	<%= hidden_field_tag :neighborhoods, params[:neighborhoods] %>
+  	<%#= hidden_field_tag :search_term, params[:search_term] %>
+  	<%#= hidden_field_tag :neighborhoods, params[:neighborhoods] %>
     <%= hidden_field_tag :sort_by, params[:sort_by] || '4' %>
     
     <div class="row">
@@ -62,7 +62,7 @@
           <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-xlg clearFilter' %>
       		<a href="#" class="applyFilter btn btn-green btn-xlg">Apply</a>
       	</div>
-      	<%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden' %>
+      	<%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden', name: nil %>
     	</div>
     </div>
   </form>

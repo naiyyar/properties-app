@@ -1,12 +1,12 @@
 <div class="dropdown-menu dropdown-select userMenu" role='menu'>
 	<ul class="sortMenu">
 		<% if params[:sort_by].present? and params[:sort_by] != '0' %>
-  		<li class="<%=active('0')%>"><a href="#<%#=sort_url(0)%>" data-sortIndex="0" rel='sort' class="sort-item">Default Sort</a></li>
+  		<li class="<%=active('0')%>"><a href="javascript:void(0)" data-sortIndex="0" rel='sort' class="sort-item">Default Sort</a></li>
   	<%end%>
-  	<li class="<%=active('1')%>"><a href="#<%#=sort_url(1)%>" data-sortIndex="1" rel='sort' class="sort-item">Rating (high to low)</a></li>
-  	<li class="<%=active('2')%>"><a href="#<%#=sort_url(2)%>" data-sortIndex="2" rel='sort' class="sort-item">Rating (low to high)</a></li>
-  	<li class="<%=active('3')%>"><a href="#<%#=sort_url(3)%>" data-sortIndex="3" rel='sort' class="sort-item">Reviews (high to low)</a></li>
-  	<li class="<%=active('4')%> <%= 'active' if params[:sort_by] == '0' %>"><a href="#<%#=sort_url(4)%>" data-sortIndex="4" rel='sort' class="sort-item">A - Z</a></li>
-  	<li class="<%=active('5')%>"><a href="#<%#=sort_url(5)%>" data-sortIndex="5" rel='sort' class="sort-item">Z - A</a></li>
+  	<li class="<%=active('1')%>"><a href="javascript:void(0)" data-sortIndex="1" rel='sort' class="sort-item">Rating (high to low)</a></li>
+  	<li class="<%=active('2')%>"><a href="javascript:void(0)" data-sortIndex="2" rel='sort' class="sort-item">Rating (low to high)</a></li>
+  	<li class="<%=active('3')%>"><a href="javascript:void(0)" data-sortIndex="3" rel='sort' class="sort-item">Reviews (high to low)</a></li>
+  	<li class="<%=active('4')%> <%= 'active' if params[:sort_by] == '0' %>"><a href="javascript:void(0)" data-sortIndex="4" rel='sort' class="sort-item">A - Z</a></li>
+  	<li class="<%=active('5')%>"><a href="javascript:void(0)" data-sortIndex="5" rel='sort' class="sort-item">Z - A</a></li>
   </ul>
 </div>
