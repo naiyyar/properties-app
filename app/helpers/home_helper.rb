@@ -102,7 +102,11 @@ module HomeHelper
 			if params[:sort_by].present? or params[:filter].present?
 				request.fullpath
 			else
-				"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
+				#"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
+				borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase)
+				search_term = "#{neighborhood.downcase.gsub(' ', '-')}-#{borough}"
+				
+				"/neighborhoods/#{search_term}"
 			end
 		else
 			'javascript:void(0)'
@@ -122,7 +126,7 @@ module HomeHelper
 					"#{@building.street_address}"
 				end
 			else
-				params['search_term']
+				@search_input_value
 			end
 		else
 			"#{@management_company.name}" 

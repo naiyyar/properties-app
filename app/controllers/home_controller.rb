@@ -38,11 +38,18 @@ class HomeController < ApplicationController
   end
 
   def search
-    search_string = params['search_term'].present? ? params['search_term'].split(',')[0] : 'New York'
-    if params[:term_address].blank? and params[:management_company_name].blank?
+    search_term = params['search_term']
+    if params[:searched_by] != 'address' and params[:searched_by] != 'management_company'
+      terms_arr =  search_term.split('-')
+      borough_city = terms_arr.last
+      search_string = terms_arr.pop #removing last elements-name of city
+      search_string = terms_arr.join(' ').titleize #join neighborhoods
+      borough_city = (borough_city == 'newyork' ? 'New York' : borough_city.capitalize)
+      
+      @search_input_value = "#{search_string} - #{borough_city}, NY"
       unless search_string == 'New York'
         @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
-        @coordinates = Geocoder.coordinates(params['search_term'])
+        @coordinates = Geocoder.coordinates("#{search_term}, #{borough_city}, NY")
         if @coordinates.present?
           @lat = @coordinates[0]
           @lng = @coordinates[1]
@@ -50,16 +57,16 @@ class HomeController < ApplicationController
 
         @boundary_coords = []
         
-        if params['term_zipcode'].present?
-          @buildings = Building.where('zipcode = ?', params['term_zipcode'])
-          @boundary_coords << Gcoordinate.where(zipcode: params['term_zipcode']).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-        elsif params[:neighborhoods].present?
-          @buildings = Building.buildings_in_neighborhood(params)
+        if params['searched_by'] == 'zipcode'
+          @buildings = Building.where('zipcode = ?', search_string)
+          @boundary_coords << Gcoordinate.where(zipcode: search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
+        elsif params['searched_by'] == 'neighborhoods'
+          @buildings = Building.buildings_in_neighborhood(search_string)
           @zoom = 14
-          if !manhattan_kmls.include? @brooklyn_neighborhoods
-            @boundary_coords << Gcoordinate.neighbohood_boundary_coordinates(params[:neighborhoods])
+          if !manhattan_kmls.include? search_string
+            @boundary_coords << Gcoordinate.neighbohood_boundary_coordinates(search_string)
           else
-            @zoom = 16 if @brooklyn_neighborhoods == 'Sutton Place'
+            @zoom = 16 if search_string == 'Sutton Place'
           end
         else
           city = search_string
@@ -67,21 +74,21 @@ class HomeController < ApplicationController
             @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}
             @zoom = 12
           else
-            @buildings = Building.buildings_in_city(params, city)
+            @buildings = Building.buildings_in_city(city)
             @zoom = 13
           end
         end
       else
-        @buildings = Building.buildings_in_city(params, search_string)
+        @buildings = Building.buildings_in_city(search_string)
         @zoom = 11
       end
-    elsif params[:term_address].present?
-      building = Building.where(building_street_address: params[:term_address])
-      #searching because some address has extra white space in last so can not match exactly with address params
-      building = Building.where('building_street_address like ?', "%#{params[:term_address]}%") if building.blank?
+    elsif params[:searched_by] == 'address'
+      building = Building.where(building_street_address: search_term)
+      #searching because some address has extra white space in last so can not match exactly with address search_term
+      building = Building.where('building_street_address like ?', "%#{search_term}%") if building.blank?
       redirect_to building_path(building.first) if building.present?
-    elsif params[:management_company_name].present?
-      @company = ManagementCompany.where(name: params[:management_company_name])
+    elsif params[:searched_by] == 'management_company'
+      @company = ManagementCompany.where(name: search_term)
       redirect_to management_company_path(@company.first) if @company.present?
     end
     

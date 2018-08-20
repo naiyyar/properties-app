@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get :managed_buildings
     end
   end
+  
   resources :neighborhood_links
   resources :review_flags
   resources :contacts
@@ -37,7 +38,22 @@ Rails.application.routes.draw do
   #     :via => Devise.mappings[:user].sign_out_via
   # end
 
-  get '/search', to: 'home#search', as: 'search'
+  resources :buildings do
+    resources :reviews
+    resources :uploads
+
+    member do 
+      get :units
+      get '/disconnect_building', to: 'buildings#disconnect_building', as: 'disconnect_building'
+    end
+
+    collection do
+      get :contribute
+      post :import
+    end
+  end
+
+  get '/:searched_by/:search_term', to: 'home#search', as: 'search' #must be after buildings resource
   get '/auto_search', to: 'home#auto_search', as: 'auto_search'
   get '/terms_of_service', to: 'home#tos', as: 'tos'
   
@@ -68,21 +84,6 @@ Rails.application.routes.draw do
   resources :user_steps
   resources :building_steps
   resources :unit_steps
-  
-  resources :buildings do
-    resources :reviews
-    resources :uploads
-
-    member do 
-      get :units
-      get '/disconnect_building', to: 'buildings#disconnect_building', as: 'disconnect_building'
-    end
-
-    collection do
-      get :contribute
-      post :import
-    end
-  end
 
   resources :units do
     resources :reviews

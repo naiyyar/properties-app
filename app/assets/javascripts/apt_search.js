@@ -67,15 +67,20 @@ app.apartments.prototype = {
   _select: function(e, ui) {
     search_term = ui.item.search_term
     this._input.val(search_term);
+    window.data = ui
     url = '';
     if(ui.item.term_address != undefined){
-      url = '/search?search_term='+search_term+'&term_address='+ui.item.term_address;
+      //url = '/search?search_term='+search_term+'&term_address='+ui.item.term_address;
+      url = '/address/'+ui.item.term_address;
     }else if(ui.item.management_company_name != undefined){
-      url = '/search?search_term='+search_term+'&management_company_name='+ui.item.management_company_name;
+      //url = '/search?search_term='+search_term+'&management_company_name='+ui.item.management_company_name;
+      url = '/management_company/'+ui.item.management_company_name;
     }else if(ui.item.term_zipcode != undefined){
-      url = '/search?search_term='+search_term+'&term_zipcode='+ui.item.term_zipcode;
+      //url = '/search?search_term='+search_term+'&term_zipcode='+ui.item.term_zipcode;
+      url = '/zipcode/'+ui.item.term_zipcode;
     }else{
-      url = '/search?search_term='+search_term+'&neighborhoods='+ui.item.neighborhoods;
+      //url = '/search?search_term='+search_term+'&neighborhoods='+ui.item.neighborhoods;
+      url = '/neighborhoods/'+ui.item.neighborhoods;
     }
     
     $('.no-match-link').addClass('hidden');

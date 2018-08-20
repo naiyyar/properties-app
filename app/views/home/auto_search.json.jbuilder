@@ -11,7 +11,7 @@ if @buildings_by_pneighborhood.present?
   json.array! @buildings_by_pneighborhood do |building|
     json.id building.id
     json.search_term "#{building.neighborhoods_parent}, #{building.city}, #{building.state}"
-    json.neighborhoods "#{building.neighborhoods_parent}"
+    json.neighborhoods "#{building.formatted_neighborhood('parent')}"
     arr << building.neighborhoods_parent
   end
 end
@@ -21,7 +21,7 @@ if @buildings_by_neighborhood.present?
     json.id building.id
     if building.neighborhood.present? and !arr.include? building.neighborhood
       json.search_term "#{building.neighborhood}, #{building.city}, #{building.state}"
-      json.neighborhoods "#{building.neighborhood}"
+      json.neighborhoods "#{building.formatted_neighborhood}"
       arr << building.neighborhood
     end
   end
@@ -52,7 +52,7 @@ if @buildings_by_zipcode.present?
     json.id building.id
     #if building.id == @buildings_by_zipcode.first.id
     json.search_term "#{building.zipcode} - #{building.city}, #{building.state}"
-    json.term_zipcode "#{building.zipcode}"
+    json.term_zipcode "#{building.zipcode}-#{building.formatted_city}"
     #else
     #  json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
     #  json.term "#{building.building_street_address}"

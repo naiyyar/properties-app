@@ -237,11 +237,11 @@ class Building < ActiveRecord::Base
     results = Building.text_search_by_building_name(criteria).reorder('building_name ASC')
   end
 
-  def self.buildings_in_neighborhood params
-    where("neighborhood = ? or neighborhoods_parent = ? or neighborhood3 = ?" , params[:neighborhoods], params[:neighborhoods], params[:neighborhoods])
+  def self.buildings_in_neighborhood search_term
+    where("neighborhood @@ :q OR neighborhoods_parent @@ :q OR neighborhood3 @@ :q", q: search_term)
   end
 
-  def self.buildings_in_city params, city
+  def self.buildings_in_city city
     where("city @@ :q" , q: city)
   end
 
@@ -432,6 +432,20 @@ class Building < ActiveRecord::Base
 
   def self.number_of_buildings neighbohood
     where("neighborhood @@ :q or neighborhoods_parent @@ :q or neighborhood3 @@ :q" , q: neighbohood).count
+  end
+
+  def formatted_neighborhood type=''
+    if type == 'parent'
+      @neighborhood = self.neighborhoods_parent
+    else
+      @neighborhood = self.neighborhood
+    end
+
+    return "#{@neighborhood.downcase.gsub(' ', '-')}-#{formatted_city}"
+  end
+
+  def formatted_city
+    self.city.downcase.gsub(' ', '')
   end
 
   private
