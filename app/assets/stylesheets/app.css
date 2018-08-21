@@ -5481,7 +5481,7 @@ a.toggle-search:hover {
 }
 .blog-content h2 {
     margin: 0;
-    padding: 20px 0 20px 0;
+    padding: 0px 0 20px 0;
     font-size: 22px;
     line-height: 22px;
     text-align: left;
@@ -5618,7 +5618,6 @@ a.toggle-search:hover {
     padding-bottom: 30px;
     margin-bottom: 30px;
     border-bottom: 1px solid #e8e8e8;
-    padding: 20px 0 20px 0;
 }
 .post-share {
     float: right;
