@@ -6614,7 +6614,7 @@ select.custom-arrow {
     .blog-nav {
         top: 0px;
         /*width: 100%;*/
-        left: -24px;
+        left: -16px;
         overflow: hidden;
         z-index: 1100;
         float: none;
@@ -6631,7 +6631,7 @@ select.custom-arrow {
     }
     .blog-nav ul {
         float: none;
-        padding: 10px 0;
+        padding: 5px 0;
     }
     .blog-nav.active ul {
         margin-right: 0;
@@ -6643,7 +6643,7 @@ select.custom-arrow {
         font-size: 20px;
     }
     .blog-nav ul li span.fa-home{
-        font-size: 28px
+        font-size: 35px
     }
     .h-text {
         padding: 0;
