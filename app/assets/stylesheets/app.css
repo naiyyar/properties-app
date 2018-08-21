@@ -6239,7 +6239,7 @@ select.custom-arrow {
     }
     .blog-view .logo a{
         margin: 0 auto;
-        width: 55% !important;
+        width: 50% !important;
     }
     .logo a span.marker, .logo.expanded a span.marker {
         left: 0;
