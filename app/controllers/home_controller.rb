@@ -47,6 +47,7 @@ class HomeController < ApplicationController
       borough_city = (borough_city == 'newyork' ? 'New York' : borough_city.capitalize)
       @searched_neighborhoods = "#{search_string}"
       @search_input_value = "#{@searched_neighborhoods} - #{borough_city}, NY"
+      @tab_title_text = "#{@searched_neighborhoods} #{borough_city}"
       unless search_string == 'New York'
         @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
         @coordinates = Geocoder.coordinates("#{search_term}, #{borough_city}, NY")
