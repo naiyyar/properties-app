@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><%= content_for?(:html_title) ? "#{content_for(:html_title)}" : "Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City" %>
+        <title><%= content_for?(:html_title) ? "#{content_for(:html_title)} Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City" : "Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City" %>
         </title>
 
         <meta name="description" content="<%= content_for?(:meta_description) ? content_for(:meta_description) : "Transparentcity Blog is the place to find the latest rental housing research, market data, news, and stories on renting and living in New York City." %>">
@@ -18,7 +18,9 @@
         <div class="home-header">
             <div class="blog-nav">
                 <ul>
-                    <li><%= link_to 'All posts', '/blog' %></li>
+                    <a href="/blog">
+                      <li><span class="fa fa-home"></span> Blog</li>
+                    </a>
                 </ul>
              </div>
         </div>
@@ -29,7 +31,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                         <%= yield %>
                     </div>
-                    <%= render partial: 'buttercms/posts/category_panel' if @categories.present? %>
+                    <%= render partial: 'buttercms/posts/category_panel' %>
                 </div>
             </div>
         </div>
@@ -51,6 +53,10 @@
                 top: 50%;
                 margin-top: -18px;
                 color: #333 !important;
+            }
+            .blog-nav ul li{
+                color: #fff;
+                font-size: 18px;
             }
         </style>
     </body>

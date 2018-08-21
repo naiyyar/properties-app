@@ -11,68 +11,63 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <!-- <div class="post-share">
+    <div class="post-share">
         <div class="ps-social"><a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-google"><span class="fa fa-google-plus"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-blue"><span class="fa fa-linkedin"></span></a></div>
-        <div class="ps-stats">
+        <!-- <div class="ps-stats">
             <span>245</span> Shares&nbsp;&nbsp;&nbsp;
             <span>4</span> Comments
-        </div>
-    </div> -->
+        </div> -->
+    </div>
     <div class="clearfix"></div>
 </div>
 <div class="post-content">
-    <h2 class="osLight"><%= @post.title %></h2>
-    <div class="image-block">
-        <%= image_tag(@post.featured_image) if @post.featured_image %>
+    <h2 class="osLight" style="padding: 0 0 10px 0;"><%= @post.title %></h2>
+    <ul class="list-inline">
+        <% @post_categories.each do |cat| %>
+            <li><a href='#'><%= cat.name %></a>&nbsp;</li>
+        <%end%>
+    </ul>
+    <!-- <div class="image-block"> -->
+        <%#= image_tag(@post.featured_image) if @post.featured_image %>
         <!-- <div class="ib-title"><span class="osLight">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit</span></div> -->
-    </div>
+    <!-- </div> -->
     
     <p><%= simple_format(@post.body.html_safe) %></p>
 </div>
 <div class="f-pn-articles">
-    <% if @previous_post %>
-      <a href="<%=buttercms_post_path(@previous_post.slug)%>" class="f-p-article", title="<%=@previous_post.title%>">
+    <%# if @previous_post %>
+      <!-- <a href="<%#=buttercms_post_path(@previous_post.slug)%>" class="f-p-article", title="<%#=@previous_post.title%>">
           <div class="fpna-title">Previous post</div>
-          <span class="fpna-header"><%=truncate(@previous_post.title, length: 40)%></span>
+          <span class="fpna-header"><%#=truncate(@previous_post.title, length: 40)%></span>
           <span class="fa fa-angle-left pull-left pn-icon"></span>
-      </a>
-    <%end%>
-    <% if @next_post %>
-      <a href="<%=buttercms_post_path(@next_post.slug)%>" class="f-n-article", title="<%=@next_post.title%>">
+      </a> -->
+    <%#end%>
+    <%# if @next_post %>
+      <!-- <a href="<%#=buttercms_post_path(@next_post.slug)%>" class="f-n-article", title="<%#=@next_post.title%>">
         <div class="fpna-title">Next post</div>
-        <span class="fpna-header"><%=truncate(@next_post.title, length: 40)%></span>
+        <span class="fpna-header"><%#=truncate(@next_post.title, length: 40)%></span>
         <span class="fa fa-angle-right pull-right pn-icon"></span>
-      </a>
-    <% end %>
+      </a> -->
+    <%# end %>
     <div class="clearfix"></div>
 </div>
-<!-- <h2 class="osLight align-left">Related Articles</h2>
-<div class="row pb20 hidden">
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <div class="article bg-w">
-            <a href="blog-post.html" class="image"><img src="images/post-5.jpg" alt="blog image"></a>
-            <div class="article-category"><a href="#" class="text-green">Architecture</a></div>
-            <h3 class="osLight"><a href="blog-post.html">Stylish Modern Ranch Exuding a Welcoming Feel</a></h3>
-            <div class="footer"><a href="#">John Smith</a>, <a href="#">Sep 3, 2014</a></div>
-        </div>
+<% if @has_related_posts %>
+    <h2 class="osLight align-left">Related Articles</h2>
+    <div class="row pb20">
+        <% @related_posts.each do |post| %>
+            <% if post.slug != @post.slug and @post.categories.map(&:name) == post.categories.map(&:name) %>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="article bg-w">
+                        <a href="<%=buttercms_post_path(post.slug)%>" class="image"><%= image_tag(post.featured_image) if post.featured_image %></a>
+                        <!-- <div class="article-category"><a href="#" class="text-green">Architecture</a></div> -->
+                        <h3 class="osLight"><a href="<%=buttercms_post_path(post.slug)%>"><%= post.title %></a></h3>
+                        <div class="footer"><span class="text-muted"><%="#{post.author.first_name} #{post.author.last_name}, " if post.author.present? and post.author.first_name.present? %> <%= Time.parse(post.published).strftime('%B %d, %Y') %></span></div>
+                    </div>
+                </div>
+            <%end%>
+        <%end%>
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <div class="article bg-w">
-            <a href="blog-post.html" class="image"><img src="images/post-6.jpg" alt="blog image"></a>
-            <div class="article-category"><a href="#" class="text-green">Architecture</a></div>
-            <h3 class="osLight"><a href="blog-post.html">Private Contemporary Home Balancing Openness</a></h3>
-            <div class="footer"><a href="#">John Smith</a>, <a href="#">Sep 2, 2014</a></div>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <div class="article bg-w">
-            <a href="blog-post.html" class="image"><img src="images/post-1.jpg" alt="blog image"></a>
-            <div class="article-category"><a href="#" class="text-green">Architecture</a></div>
-            <h3 class="osLight"><a href="blog-post.html">Modern Two-Level Pool House in Los Angeles</a></h3>
-            <div class="footer"><a href="#">John Smith</a>, <a href="#">Sep 1, 2014</a></div>
-        </div>
-    </div>
-</div> -->
+<%end%>
 
 <!--
 // For sharing, we recommend https://www.addthis.com/get/sharing or https://sumome.com/app/share

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   scope :module => 'buttercms' do
     get '/categories/:slug' => 'categories#show', :as => :buttercms_category
+    get '/tags/:slug' => 'tags#show', :as => :buttercms_tag
     get '/author/:slug' => 'authors#show', :as => :buttercms_author
 
     get '/blog/rss' => 'feeds#rss', :format => 'rss', :as => :buttercms_blog_rss

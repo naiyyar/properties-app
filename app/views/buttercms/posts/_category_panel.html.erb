@@ -1,13 +1,18 @@
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
-            <h2 class="osLight h-r">Categories</h2>
-            <ul class="blog-r-nav">
-        		<% @categories.each do |category| %>
-				    <li><%= link_to category.name, buttercms_category_path(category.slug), :title => category.name %></li>
-                    <%#= "(#{category.recent_posts.count})" if category.recent_posts.present?%>
-				<% end %>
-            </ul>
+            <% if @categories.present? %>
+                <h2 class="osLight h-r">Categories</h2>
+                <ul class="blog-r-nav">
+            		<% @categories.each do |category| %>
+    				    <li>
+                            <%= link_to category.name, buttercms_category_path(category.slug), :title => category.name, style: "#{params[:slug] == category.slug ? 'font-weight:bolder;': ''}" %>
+                            <%= "(#{category.recent_posts.length})" if category.recent_posts.present? %>
+                        </li>
+                            
+    				<% end %>
+                </ul>
+            <%end%>
         </div>
         <!-- <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
             <h2 class="osLight h-r">Archive</h2>
@@ -24,11 +29,15 @@
                 <li><a href="#">January 2014</a></li>
             </ul>
         </div> -->
-        <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <h2 class="osLight h-r">Popular Tags</h2>
             <div class="blog-tags">
-                <a href="#" class="label label-default">furniture</a><a href="#" class="label label-default">architect</a><a href="#" class="label label-default">chair</a><a href="#" class="label label-default">modern</a><a href="#" class="label label-default">bathroom</a><a href="#" class="label label-default">table</a><a href="#" class="label label-default">sofa</a><a href="#" class="label label-default">bed</a><a href="#" class="label label-default">design</a><a href="#" class="label label-default">apartment</a><a href="#" class="label label-default">leather</a><a href="#" class="label label-default">lamp</a>
+                <% if @tags.present? %>
+                    <% @tags.each do |tag| %>
+                        <a href="<%=buttercms_tag_path(tag.slug)%>" title="<%=tag.name%>" class="label label-<%= params[:slug] == tag.slug ? 'success' : 'default' %>"><%=tag.name%></a>
+                    <%end%>
+                <%end%>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>

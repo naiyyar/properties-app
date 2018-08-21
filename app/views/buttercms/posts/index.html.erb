@@ -10,11 +10,11 @@
   <!-- <a href="#" class="btn btn-o btn-round btn-green"><span class="fa fa-angle-left"></span> Older Articles</a> -->
   <!-- <a href="#" class="btn btn-o btn-round btn-green pull-right">Newer Articles <span class="fa fa-angle-right"></span></a> -->
   <% if @previous_page %>
-    <%= link_to "Prev", buttercms_blog_path(:page => @previous_page), class: "btn btn-o btn-round btn-green" %>
+    <%= link_to "Older Articles", buttercms_blog_path(:page => @previous_page), class: "btn btn-o btn-round btn-green" %>
   <% end %>
 
   <% if @next_page %>
-    <%= link_to "Next", buttercms_blog_path(:page => @next_page), class: "btn btn-o btn-round btn-green" %>
+    <%= link_to "Newer Articles", buttercms_blog_path(:page => @next_page), class: "btn btn-o btn-round btn-green" %>
   <% end %>
   <div class="clearfix"></div>
 </div>
