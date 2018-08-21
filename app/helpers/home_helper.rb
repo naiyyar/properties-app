@@ -97,6 +97,8 @@ module HomeHelper
 		end
 	end
 	
+	#TODO1: Retain already added filter and sort when selecting new neighborhoods
+	#TODO2: Test with zipcode search
 	def search_link neighborhood, borough
 		unless borough == 'BRONX'
 			borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase)
@@ -120,6 +122,7 @@ module HomeHelper
 
 	def neighborhood_class
 		#'pop-neighborhood' if params[:sort_by].present? or params[:filter].present?
+		nil
 	end
 
 	def searched_term

@@ -1,4 +1,4 @@
-<% content_for :page_title do%><%= params['search_term'].gsub('-','') if params['search_term'].present? %><%end %>
+<% content_for :page_title do%><%= params['search_term'].gsub('-',' ').titleize if params['search_term'].present? %><%end %>
 
 <%= render partial: 'search_wrapper' %>
 
