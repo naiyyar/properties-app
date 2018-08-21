@@ -1,0 +1,19 @@
+<div class="post-top">
+    <div class="post-author">
+        <!-- <img src="images/avatar-1.png" alt="avatar"> -->
+        <%= image_tag (@post.author.profile_image.present? ? @post.author.profile_image : 'user-missing2.png') %>
+        <div class="pa-user">
+            <div class="pa-name"><%="#{@post.author.first_name} #{@post.author.last_name}"%> on <%= Time.parse(@post.published).strftime('%B %d, %Y') %></div>
+            <!-- <div class="pa-title">Senior Blog Editor</div> -->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="post-share">
+        <div class="ps-social"><a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-google"><span class="fa fa-google-plus"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-blue"><span class="fa fa-linkedin"></span></a></div>
+        <!-- <div class="ps-stats">
+            <span>245</span> Shares&nbsp;&nbsp;&nbsp;
+            <span>4</span> Comments
+        </div> -->
+    </div>
+    <div class="clearfix"></div>
+</div>

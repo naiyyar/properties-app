@@ -15,8 +15,12 @@
         <%= favicon_link_tag 'favicon.png' %>
     </head>
     <body class="notransition no-hidden" >
-        <div class="home-header">
-            <div class="blog-nav">
+        <div class="header" style="background: rgba(25, 25, 25, 0.86); position: relative;">
+            <div class="logoContainer">
+                <div class="logo osLight"><%=image_tag 'logo1.png', alt: 'logo', width: '200' %></div>
+            </div>
+            
+            <div class="blog-nav" style="position: absolute;top: 10px;left: -10px;">
                 <ul>
                     <a href="/blog">
                       <li><span class="fa fa-home"></span> Blog</li>

@@ -9,7 +9,7 @@ class Buttercms::PostsController < Buttercms::BaseController
 
   def show
     @post = ButterCMS::Post.find(params[:slug])
-    @post_categories = @post.categories
+    @categories = @post.categories
     @related_posts = ButterCMS::Post.all
     @tags = @post.tags
     @has_related_posts = false
