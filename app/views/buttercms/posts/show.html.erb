@@ -7,8 +7,8 @@
 
 <div class="post-content">
     <ul class="list-inline visible-xs">
-        <% @categories.each do |cat| %>
-            <li><a href='#'><%= cat.name %></a>&nbsp;</li>
+        <% @post_categories.each do |cat| %>
+            <li><a href='#' class="text-color-blue"><%= cat.name %></a>&nbsp;</li>
         <%end%>
     </ul>
     <h2 class="osLight" style="padding: 0 0 10px 0;"><%= @post.title %></h2>

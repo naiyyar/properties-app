@@ -5423,6 +5423,8 @@ h3.s-sub {
 .blog-nav {
     float: right;
     margin-right: 5px;
+    position: absolute;
+    top: 10px;
 }
 .blog-nav ul {
     margin: 0;
@@ -6235,6 +6237,10 @@ select.custom-arrow {
         height: 50px;
         width: 100%;
     }
+    .blog-view .logo a{
+        margin: 0 auto;
+        width: 63% !important;
+    }
     .logo a span.marker, .logo.expanded a span.marker {
         left: 0;
         top: 10px;
@@ -6601,16 +6607,19 @@ select.custom-arrow {
     li.hover-underline-xs:hover{
         border-bottom: 1px solid #fff;
     }
+    .article .image {
+        height: 136px;
+    }
+    article {min-height: 320px;}
     .blog-nav {
-        position: absolute;
-        top: 76px;
-        width: 100%;
-        right: 0;
+        top: 0px;
+        /*width: 100%;*/
+        left: -24px;
         overflow: hidden;
         z-index: 1100;
         float: none;
-        max-height: 0;
-        background-color: #333;
+        /*max-height: 0;*/
+        /*background-color: #333;*/
         margin-right: 0;
         padding: 0;
         -webkit-transition: all .2s ease-in-out;
@@ -6631,6 +6640,10 @@ select.custom-arrow {
         padding: 10px 20px;
         float: none;
         text-align: right;
+        font-size: 20px;
+    }
+    .blog-nav ul li span.fa-home{
+        font-size: 28px
     }
     .h-text {
         padding: 0;
