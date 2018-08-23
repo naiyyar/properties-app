@@ -6029,7 +6029,7 @@ select.custom-arrow {
     }
 
     #hero-container-blog, .featured.carousel{
-        height: 230px;
+        min-height: 230px;
     }
     textarea.form-control{
         height: 176px !important;;
