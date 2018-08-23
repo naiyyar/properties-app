@@ -18,19 +18,8 @@
         <%= favicon_link_tag 'favicon.png' %>
     </head>
     <body class="notransition no-hidden" >
-        <div class="header" style="background: rgba(25, 25, 25, 0.86); position: relative;">
-            <div class="logoContainer blog-view">
-                <div class="logo osLight"><a href="/"><%=image_tag 'logo1.png', alt: 'logo', width: '200' %></a></div>
-            </div>
-            
-            <div class="blog-nav">
-                <ul>
-                    <a href="/blog">
-                      <li><span class="fa fa-home"></span> <span class="hidden-xs">Blog</span></li>
-                    </a>
-                </ul>
-             </div>
-        </div>
+        
+        <%= render 'layouts/buttercms/blog_header' %>
         
         <div class="blog-content">
             <div class="home-wrapper">
@@ -44,8 +33,8 @@
         </div>
         <%= render 'layouts/home/footer' %>
         <style type="text/css">
-            .home-header {
-                padding: 0px 11px 8px;
+            .home-logo {
+                margin-top: 13px;
             }
             a.text-color-blue{
                 color: #1a0dab;
@@ -58,9 +47,12 @@
                 margin-top: -18px;
                 color: #333 !important;
             }
-            .blog-nav ul li{
-                color: #fff;
-                font-size: 18px;
+            
+            .home-wrapper {
+                padding: 20px 20px;
+            }
+            .profiler-results{
+                display: none;
             }
         </style>
     </body>

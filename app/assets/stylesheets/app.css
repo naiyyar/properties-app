@@ -4838,7 +4838,7 @@ body.black {
     position: relative;
 }
 #hero-container-blog {
-    height: 600px;
+    height: 300px;
     position: relative;
 }
 #home-map {
@@ -5349,7 +5349,7 @@ h3.s-sub {
 /* Blog */
 
 .featured.carousel {
-    height: 600px;
+    height: 300px;
     background: #000;
 }
 .featured.carousel .carousel-inner {
@@ -5363,11 +5363,11 @@ h3.s-sub {
 }
 .featured.carousel .carousel-inner .item .carousel-caption {
     bottom: auto;
-    top: 160px;
+    top: 100px;
     padding-top: 0;
 }
 .featured.carousel .carousel-inner .item .carousel-caption .carousel-title {
-    color: #fff;
+    color: #333;
     text-transform: uppercase;
     font-size: 11px;
     letter-spacing: 2px;
@@ -5377,11 +5377,12 @@ h3.s-sub {
 .featured.carousel .carousel-inner .item .container {
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.25);
+    background-color: #f3f3f3; 
+    /*rgba(0,0,0,0.25);*/
 }
 .featured.carousel .carousel-inner .item .carousel-caption .caption-title {
     font-size: 40px;
-    color: #fff;
+    color: #333;
     font-weight: bold;
     line-height: 46px;
 }
@@ -5925,6 +5926,14 @@ select.custom-arrow {
   background-repeat: no-repeat;
 }
 
+#hero-container-blog .home-header .logo{
+    width: 77%;
+}
+
+#hero-container-blog .home-header .logo a{
+    margin: 0 auto;
+}
+
 /* Media Queries */
 @media screen and (min-width: 481px) {
     /*contribute page next buttons*/
@@ -6009,6 +6018,18 @@ select.custom-arrow {
     }
     .btn-hoods button{
         padding: 10px 3px;
+    }
+    #hero-container-blog .home-header .logo{
+        width: 84%;
+    }
+
+    #hero-container-blog .home-header .logo a{
+        width: 66%;
+        height: 61px;
+    }
+
+    #hero-container-blog, .featured.carousel{
+        height: 230px;
     }
     textarea.form-control{
         height: 176px !important;;
@@ -6488,7 +6509,7 @@ select.custom-arrow {
     #home-map {
         height: 592px;
     }
-    .home-header {
+    #hero-container .home-header {
         z-index: 1000;
         background: rgba(25, 25, 25, 0.86);
         position: relative;
@@ -6509,10 +6530,10 @@ select.custom-arrow {
         align-items: center;
 
     }
-    .home-header .home-logo{
+    #hero-container .home-header .home-logo{
         margin-top: -17px;
     }
-    .home-header a.home-navHandler {
+    #hero-container .home-header a.home-navHandler {
         margin-right: 25px;
         padding: 0px;
     }
@@ -6847,7 +6868,7 @@ select.custom-arrow {
     .mobAvatar {
         display: block;
     }
-    .home-header {
+    #hero-container .home-header {
         z-index: 1000;
         background: rgba(25, 25, 25, 0.86);
         position: relative;
@@ -6867,10 +6888,10 @@ select.custom-arrow {
         -webkit-align-items: center;
         align-items: center;
     }
-    .home-header .home-logo{
+    #hero-container  .home-header .home-logo{
         margin-top: -17px;
     }
-    .home-header a.home-navHandler {
+    #hero-container  .home-header a.home-navHandler {
         margin-right: 25px;
         padding: 0px;
     }
