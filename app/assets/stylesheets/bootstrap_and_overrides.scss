@@ -108,9 +108,32 @@
 
 .img-thumbnail { padding: 1px; height: 100%; width: 100%;}
 
+.carousel-caption {
+    position: relative;
+    right: 0%;
+    left: 0%;
+    margin-right: 20%;
+    margin-left: 20%;
+    z-index: 9999;
+    text-align: center;
+    margin-top: 60px;
+  }
+
+
 @media screen and (max-width: 767px) {
     textarea.form-control{
         height: 100px;
     }
+
+  .carousel-caption {
+    position: relative;
+    right: 0%;
+    left: 0%;
+    margin-right: 0%;
+    margin-left: 0%;
+    z-index: 9999;
+    text-align: center;
+    margin-top: 60px;
+  }
 }
 

@@ -23,17 +23,17 @@
     
     <p><%= simple_format(@post.body.html_safe) %></p>
 </div>
-<div class="f-pn-articles hidden-xs">
+<div class="f-pn-articles">
     <% if @previous_post %>
       <a href="<%=buttercms_post_path(@previous_post.slug)%>" class="f-p-article", title="<%=@previous_post.title%>">
-          <div class="fpna-title">Previous post</div>
+          <!-- <div class="fpna-title">Older Articles</div> -->
           <span class="fpna-header"><%=truncate(@previous_post.title, length: 40)%></span>
           <span class="fa fa-angle-left pull-left pn-icon"></span>
       </a>
     <%end%>
     <% if @next_post %>
       <a href="<%=buttercms_post_path(@next_post.slug)%>" class="f-n-article", title="<%=@next_post.title%>">
-        <div class="fpna-title">Next post</div>
+        <!-- <div class="fpna-title">Newer Articles</div> -->
         <span class="fpna-header"><%=truncate(@next_post.title, length: 40)%></span>
         <span class="fa fa-angle-right pull-right pn-icon"></span>
       </a>

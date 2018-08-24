@@ -4838,7 +4838,7 @@ body.black {
     position: relative;
 }
 #hero-container-blog {
-    height: 300px;
+    /*height: 300px;*/
     position: relative;
 }
 #home-map {
@@ -5349,8 +5349,8 @@ h3.s-sub {
 /* Blog */
 
 .featured.carousel {
-    height: 300px;
-    background: #000;
+    /*height: 300px;*/
+    background: #f3f3f3;
 }
 .featured.carousel .carousel-inner {
     height: 100%;
@@ -5363,8 +5363,16 @@ h3.s-sub {
 }
 .featured.carousel .carousel-inner .item .carousel-caption {
     bottom: auto;
-    top: 100px;
+    top: 20px;
     padding-top: 0;
+}
+#hero-container-blog, .featured.carousel{
+    min-height: 200px;
+    max-height: 430px;
+}
+.hero-container-blog-index{
+    min-height: 58px !important;  
+    max-height: 58px !important;   
 }
 .featured.carousel .carousel-inner .item .carousel-caption .carousel-title {
     color: #333;
@@ -6028,9 +6036,21 @@ select.custom-arrow {
         height: 61px;
     }
 
-    #hero-container-blog, .featured.carousel{
-        min-height: 230px;
+    .featured.carousel .carousel-inner .item .carousel-caption {
+        top: 0px;
+        padding-top: 20px;
     }
+
+    /*#hero-container-blog, .featured.carousel{
+        height: 0px;
+    }*/
+    .hero-container-blog-show, .hero-container-blog-show .featured.carousel {
+        min-height: 148px !important;
+        max-height: 230px !important;
+    }
+    /*.hero-container-blog-index, .featured.carousel{
+        min-height: 56px !important
+    }*/
     textarea.form-control{
         height: 176px !important;;
     }

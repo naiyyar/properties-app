@@ -1,12 +1,12 @@
-<div id="hero-container-blog" style="<%= @posts.present? ? 'height: 68px;' : '' %>">
+<div id="hero-container-blog" class="hero-container-blog-<%=params[:action]%>">
     <% if @post.present? %>
         <div id="carouselBlog" class="carousel slide featured" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="item active" style="background-color: #f3f3f3;">
                     <div class="container">
                         <div class="carousel-caption">
-                            <div class="carousel-title"><%=@post_categories.first.name%></div>
-                            <div class="caption-title"><%= @post.title %></div>
+                            <div class="carousel-title"><%=@post_categories.first.try(:name) %></div>
+                            <div class="caption-title"><%= @post.title if @post.title.present? %></div>
                             <div class="p-n-articles hidden">
                                 <div class="p-article">
                                     <div class="pna-title">Previous article</div>
@@ -40,17 +40,3 @@
         </div>
     </div>
 </div>
-
-<div class="header hidden" style="background: rgba(25, 25, 25, 0.86); position: relative;">
-            <div class="logoContainer blog-view">
-                <div class="logo osLight"><a href="/"><%#=image_tag 'logo1.png', alt: 'logo', width: '200' %></a></div>
-            </div>
-            
-            <div class="blog-nav">
-                <ul>
-                    <a href="/blog">
-                      <li><span class="fa fa-home"></span> <span class="hidden-xs">Blog</span></li>
-                    </a>
-                </ul>
-             </div>
-        </div>
