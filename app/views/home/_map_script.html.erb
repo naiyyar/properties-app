@@ -14,6 +14,11 @@
 		options = {
 			disableDoubleClickZoom: false,
 			zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+			mapTypeControl: true,
+			mapTypeControlOptions: { 
+																style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+																position: google.maps.ControlPosition.TOP_CENTER 
+															},
 			gestureHandling: 'greedy'
 		}
 	 	handler = Gmaps.build('Google');
