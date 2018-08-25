@@ -1,6 +1,6 @@
 class Buttercms::PostsController < Buttercms::BaseController
   def index
-    @posts = ButterCMS::Post.all(:page => params[:page], :page_size => 10)
+    @posts = ButterCMS::Post.all(:page => params[:page], :page_size => 8)
     @categories = ButterCMS::Category.all
     @tags = ButterCMS::Tag.all
     @next_page = @posts.meta.next_page
