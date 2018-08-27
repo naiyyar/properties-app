@@ -54,10 +54,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/:searched_by/:search_term', to: 'home#search', as: 'search' #must be after buildings resource
-  get '/auto_search', to: 'home#auto_search', as: 'auto_search'
-  get '/terms_of_service', to: 'home#tos', as: 'tos'
-  
   resources :reviews do 
     get :destroy_scraped_reviews, on: :collection
   end
@@ -93,6 +89,10 @@ Rails.application.routes.draw do
       get :units_search
     end
   end
+  
+  get '/:searched_by/:search_term', to: 'home#search', as: 'search' #must be after buildings resource
+  get '/auto_search', to: 'home#auto_search', as: 'auto_search'
+  get '/terms_of_service', to: 'home#tos', as: 'tos'
   
   root "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
