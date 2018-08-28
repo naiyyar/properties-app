@@ -44,6 +44,9 @@ class HomeController < ApplicationController
       borough_city = terms_arr.last
       search_string = terms_arr.pop #removing last elements-name of city
       search_string = terms_arr.join(' ').titleize #join neighborhoods
+      search_string = search_string.gsub('  ', ' -') if search_string == 'Flatbush   Ditmas Park'
+      search_string = search_string.gsub(' ', '-') if search_string == 'Bedford Stuyvesant'
+      
       borough_city = (borough_city == 'newyork' ? 'New York' : borough_city.capitalize)
       @searched_neighborhoods = "#{search_string}"
       @search_input_value = "#{@searched_neighborhoods} - #{borough_city}, NY"
@@ -98,14 +101,15 @@ class HomeController < ApplicationController
       @building_types = params[:filter][:type]
       #@beds = params[:filter][:bedrooms]
       @amenities = params[:filter][:amenities]
+    
+    
+      @buildings = Building.filter_by_amenities(@buildings, @amenities) if @amenities.present?
+      @buildings = Building.filter_by_rates(@buildings, @rating) if @rating.present?
+      #@buildings = Building.filter_by_beds(@buildings, @beds) #Put on hold for now
+      @buildings = Building.filter_by_types(@buildings, @building_types)
     end
-    
-    @buildings = Building.filter_by_amenities(@buildings, @amenities) if @amenities.present?
-    @buildings = Building.filter_by_rates(@buildings, @rating) if @rating.present?
-    #@buildings = Building.filter_by_beds(@buildings, @beds) #Put on hold for now
-    @buildings = Building.filter_by_types(@buildings, @building_types)
-    @buildings = Building.sort_buildings(@buildings, params[:sort_by])
-    
+    @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if params[:sort_by]
+
     if @buildings.present?
       #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
       @buildings = @buildings.includes(:uploads, :building_average, :votes) unless @buildings.kind_of? Array
@@ -123,7 +127,7 @@ class HomeController < ApplicationController
 	    end
 	  end
 
-    @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(search_string, view_context.queens_borough, params[:neighborhoods])
+    @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(search_string, view_context.queens_borough)
   end
 
   def tos

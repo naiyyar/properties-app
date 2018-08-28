@@ -16,7 +16,8 @@
             <% if @building.building_type.present? or @building.neighbohoods.present? %>
               <div>
                 <%= "#{@building.building_type} in" if @building.building_type.present? %> 
-                <%= link_to @building.neighbohoods, "/search?search_term=#{@building.neighborhood_search_string}&neighborhoods=#{@building.neighbohoods}", class: 'hyper-link' if @building.neighbohoods.present?%>
+                
+                <%= link_to @building.neighbohoods, borough_search_link(@building.neighbohoods), class: 'hyper-link' if @building.neighbohoods.present?%>
               </div>
             <%end%>
             <%= "<span> #{@building.no_of_units} Units | </span>".html_safe if @building.no_of_units.present? and @building.no_of_units > 0 %>

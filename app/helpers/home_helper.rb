@@ -101,7 +101,7 @@ module HomeHelper
 	#TODO2: Test with zipcode search
 	def search_link neighborhood, borough
 		unless borough == 'BRONX'
-			borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase)
+			borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase.gsub(' ', '-'))
 			search_term = "#{neighborhood.downcase.gsub(' ', '-')}-#{borough}"
 			search_url = "/neighborhoods/#{search_term}"
 			if params[:sort_by].present? and params[:filter].present?
@@ -118,6 +118,19 @@ module HomeHelper
 		else
 			'javascript:void(0)'
 		end
+	end
+
+	#on show page neighborhoods
+	def borough_search_link borough
+		if queens_borough.include?(borough)
+      search_link(borough, 'QUEENS')
+    elsif brookly_borough.include?(borough)
+      search_link(borough, 'BROOKLYN')
+    elsif brookly_borough.include?(borough)
+      search_link(borough, 'MANHATTAN')
+    else
+      search_link(borough, 'MANHATTAN')
+    end
 	end
 
 	def neighborhood_class

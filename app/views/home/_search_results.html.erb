@@ -1,10 +1,11 @@
 <% buildings.each do |building| %>
+  <% @uploads = building.image_uploads %>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
     <div class="card">
       <div class="figure" style="position: relative;">
         <%= link_to building_path(building) do %>
         <!-- removing from management company show page because using building only to show market on map -->
-          <%if building.image_uploads.present? %>
+          <%if @uploads.present? %>
             <%#= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
             <div>
               <%#= render partial: 'home/carousal', locals: { building: building } %>
@@ -39,7 +40,7 @@
           <div style="padding: 0px 0px 0px 11px;height: 23px;">
             <% if building.building_type.present? or building.neighbohoods.present? %>
               <%= "#{building.building_type} in" if building.building_type.present? %> 
-              <%= link_to building.neighborhood_name, "/search?search_term=#{building.neighborhood_search_string}&neighborhoods=#{building.neighbohoods}", class: 'hyper-link' if building.neighbohoods.present?%>
+              <%= link_to building.neighborhood_name, borough_search_link(building.neighbohoods), class: 'hyper-link' if building.neighbohoods.present?%>
             <%end%>
           </div>
         <%end%>

@@ -18,13 +18,13 @@ class NeighborhoodLink < ActiveRecord::Base
   	self.update(parent_neighborhood: buildings.first.neighborhoods_parent) if buildings.present?
   end
 
-  def self.neighborhood_guide_links(search_string, queens_borough, neighborhoods)
+  def self.neighborhood_guide_links(search_string, queens_borough)
     if search_string.present? and search_string == 'New York'
       @neighborhood_links = NeighborhoodLink.all
-    elsif queens_borough.include?(neighborhoods)
-      @neighborhood_links = NeighborhoodLink.where('neighborhood = ?', neighborhoods)
+    elsif queens_borough.include?(search_string)
+      @neighborhood_links = NeighborhoodLink.where('neighborhood = ?', search_string)
     else
-      @neighborhood_links = NeighborhoodLink.where('neighborhood @@ :q or parent_neighborhood @@ :q', q: neighborhoods)
+      @neighborhood_links = NeighborhoodLink.where('neighborhood @@ :q or parent_neighborhood @@ :q', q: search_string)
     end
   end
 
