@@ -8,7 +8,8 @@ class Upload < ActiveRecord::Base
   default_scope { order('sort asc') }
 
 	has_attached_file :image, 
-                    :styles => { :original => '' },
+                    :styles => { :original => '700x600' },
+                    #:convert_options => {:medium => '-quality 80 -strip' },
                     processors: [:rotator]
 	
 	validates_attachment :image, 
