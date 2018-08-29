@@ -8,7 +8,7 @@ class Upload < ActiveRecord::Base
   default_scope { order('sort asc') }
 
 	has_attached_file :image, 
-                    :styles => { :original => '700x600' },
+                    :styles => { :original => '900x800', :medium => '650x550' },
                     #:convert_options => {:medium => '-quality 80 -strip' },
                     processors: [:rotator]
 	
@@ -47,6 +47,14 @@ class Upload < ActiveRecord::Base
   # #     end
   # #   end
   # end
+
+  def uploaded_img_url
+    if self.image.styles[:medium]
+      self.image.url(:medium)
+    else
+      self.image.url(:original)
+    end
+  end
 
   def self.image_uploads_count object
     object.uploads.where('image_file_name is not null').count

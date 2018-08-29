@@ -5,7 +5,7 @@
         </h4>
         <ul id="image-gallery<%=building.id%>" class="gallery list-unstyled" style="height: 165px;" data-buildingid="<%=building.id%>">
             <li>
-                <div class="bg-size-cover" style='background-image: url("<%=@uploads.first.image.url%>");' data-imageid="<%= @uploads.first.id%>"></div>
+                <div class="bg-size-cover" style='background-image: url("<%=@uploads.first.uploaded_img_url%>");' data-imageid="<%= @uploads.first.id%>"></div>
             </li>
             <% if images_count > 1 %>
                 <% 1.upto(images_count-1) do |count| %>

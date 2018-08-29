@@ -180,7 +180,7 @@ class UploadsController < ApplicationController
   def uploads_hash
     records = []
     @uploads.each do |upload|
-      records << { id: upload.id, image_url: upload.image.url }
+      records << { id: upload.id, image_url: upload.uploaded_img_url }
     end
     records
   end
