@@ -24,4 +24,5 @@
  *= require slide-and-swipe-menu
  *= require bootstrap-datepicker3
  *= require social-share-button
+ *= require progressive_render
  */

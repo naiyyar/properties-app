@@ -1,7 +1,9 @@
 require 'will_paginate/array'
 class HomeController < ApplicationController
-  
+  include ActionController::Caching
   before_action :reset_session, only: [:index, :auto_search]
+  caches_page :search
+  caches_action :search, :expires_in => 1.hour
 
   def index
     @manhattan_neighborhoods = view_context.manhattan_neighborhoods

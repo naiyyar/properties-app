@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     # store last url as long as it isn't a /users path
     session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
     session[:contribution_for] = params[:contribution]
-    session[:search_term] = params['buildings-search-txt']
+    session[:search_term] = params[:search_term]
   end
 
   def popular_neighborhoods

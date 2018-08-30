@@ -49,7 +49,7 @@ class Upload < ActiveRecord::Base
   # end
 
   def uploaded_img_url
-    if self.image.styles[:medium]
+    if self.image.exists?(:medium) #self.image.styles[:medium]
       self.image.url(:medium)
     else
       self.image.url(:original)
@@ -65,7 +65,7 @@ class Upload < ActiveRecord::Base
     if object.uploads.present?
       if object.image_uploads.present?
         image_obj = object.image_uploads.first
-        image_obj.image_file_name.present? ? image_obj.image : no_image if image_obj.present?
+        image_obj.image_file_name.present? ? image_obj.uploaded_img_url : no_image if image_obj.present?
       end
     else
       no_image
