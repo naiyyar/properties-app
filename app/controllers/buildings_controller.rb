@@ -95,6 +95,13 @@ class BuildingsController < ApplicationController
     #         "height" => 50
     #         })
     # end
+    # if params[:from_uploaded].present?
+    #   #expire_action "/neighborhoods/#{view_context.borough_search_link(@building.neighbohoods)}"
+    #   #expire_page "/neighborhoods/#{view_context.borough_search_link(@building.neighbohoods)}"
+
+    #   expire_action(controller: 'home', action: 'search', searched_by: 'neighborhoods', search_term: "#{view_context.borough_search_link(@building.neighbohoods)}")
+    #   expire_page(controller: 'home', action: 'search', searched_by: 'neighborhoods', search_term: "#{view_context.borough_search_link(@building.neighbohoods)}")
+    # end
     flash[:notice] = "Files are uploaded successfully." if params[:from_uploaded].present?
   end
 
@@ -112,7 +119,6 @@ class BuildingsController < ApplicationController
   end
 
   def create
-    expire_action controller: 'home', action: 'index'
     if current_user.nil?
       # Store the form data in the session so we can retrieve it after login
       session[:form_data] = params

@@ -4,23 +4,23 @@
         <%= image_tag image , alt: 'Image', style: 'width: 230 !important; height: 137px;'%>
     </div>
     <div class="paWrapper">
-        <div class="propTitle"><%= building.building_name_or_address %></div>
-        <div class="propAddress"><%= building.street_address %> <%= building.zipcode %></div>
+      <div class="propTitle"><%= building.building_name_or_address %></div>
+      <div class="propAddress"><%= building.street_address %> <%= building.zipcode %></div>
     </div>
 	<%end%>
   
   <div class="propRating">
-  	<% rating_cache = building.rating_cache %>
   	<% if rating_cache.present? %>
-	  	<% total_rates = rating_cache.first.avg if rating_cache.present? %>
-	  	<% decimal_part = number_with_precision(rating_cache.first.avg.round(2), precision: 2) %>
+	  	<% cache_avg = rating_cache.first.avg %>
+	  	<%# cache_avg = rating_cache.first.avg %>
+	  	<% decimal_part = number_with_precision(cache_avg.round(2), precision: 2) %>
 	  	<% decimal_part = decimal_part.split('.')[1].to_f/100%>
-	  	<% unless rating_cache.first.avg.nan? %>
-	  		<% total_rates = total_rates + 1 if decimal_part >= 0.76 %>
+	  	<% unless cache_avg.nan? %>
+	  		<% cache_avg = cache_avg + 1 if decimal_part >= 0.76 %>
 		  	<ul class="cardRating list-inline">
 		  		<% half = true %>
 		  		<% 1.upto(5) do |num| %>
-		  			<% if num <= total_rates.to_i %>
+		  			<% if num <= cache_avg.to_i %>
 		  				<li><%= image_tag 'star-on.png' %></li>
 		  			<%elsif decimal_part >= 0.30 and decimal_part <= 0.75 and half %>
 		  				<li><%= image_tag 'star-half.png' %></li>
@@ -31,7 +31,7 @@
 		  		<%end%>
 		  		<% if building.votes.present? %>
 		  			<li style="font-size: 11px;"><span class="icon-pipe"></span>
-	        	<%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %></li>
+	        	<%= recomended_per.nan? ? '| --% Recommended' :  "| #{recomended_per.to_i}% Recommended" %></li>
 	        <%end%>
 		  	</ul>
 		  <%end%>
@@ -42,15 +42,11 @@
 	  		<%end%>
 	  		<li style="font-size: 11px;">
 	  			<span class="icon-pipe"></span>
-        	<%= building.recommended_percent.nan? ? '| --% Recommended' :  "| #{building.recommended_percent.to_i}% Recommended" %>
+        	<%= recomended_per.nan? ? '| --% Recommended' :  "| #{recomended_per.to_i}% Recommended" %>
         </li>
 	  	</ul>
   	<%end%>
-  	<%# rating_for not working with info window %>
-		<%#= rating_for building, 'building', disable_after_rate: true, readonly: true, cancel: false %>
 	</div>
-  
   <%= render partial: 'home/property_information', locals: { building: building } %>
-	
   <!-- <div class="clearfix"></div> -->
 </div>

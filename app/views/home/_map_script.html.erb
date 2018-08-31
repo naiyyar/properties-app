@@ -25,13 +25,7 @@
 	 	
 	 	handler.buildMap({ provider: options, internal: { id: 'mapViewSearch' } }, function(){
 		
-	  	markers = handler.addMarkers(json_array);
-	  
-	    _.each(json_array, function(json, index){
-		  	json.marker = markers[index];
-		  	bindMarker(json.marker, markers, handler, lat, lng, zoom );
-			});
-			
+	  	create_marker(json_array)
 			//Plogon options
 			//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }#1a69a9
 			polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
@@ -47,6 +41,14 @@
 		  	createSidebar(json_array);
 			}
 		});
+
+		function create_marker(json_array){
+			markers = handler.addMarkers(json_array);
+			_.each(json_array, function(json, index){
+		  	json.marker = markers[index];
+		  	bindMarker(json.marker, markers, handler, lat, lng, zoom );
+			});
+		}
 	
 		//Hiding neighborhood search page infowindows
 	  

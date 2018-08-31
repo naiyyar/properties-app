@@ -6,41 +6,28 @@
         <%= link_to building_path(building) do %>
         <!-- removing from management company show page because using building only to show market on map -->
           <%if @uploads.present? %>
-            <%#= image_tag building.image_uploads.first.image.url, alt: building.image_uploads.first.image_file_name, height: '150' %>
             <div>
               <%#= render partial: 'home/carousal', locals: { building: building } %>
               <%= render partial: 'home/lightslider', locals: { building: building } %>
             </div>
-            <!-- <div class="visible-xs">
-              <%#= render partial: 'layouts/shared/image_carousal', locals: { building: building } %>
-            </div> -->
           <%else%>
-            <%#= image_tag 'no-photo.png', alt: 'No image', height: '200'%>
             <div style="background-image: url(<%= image_url('no-photo.png') %>)" class="bg-size-cover"></div>
           <%end%>
         <%end%>
-        
-        <!-- <div class="figCaption">
-          <div>$1,550,000</div>
-          <span class="icon-eye"> 200</span>
-          <span class="icon-heart"> 54</span>
-          <span class="icon-bubble"> 13</span>
-        </div> -->
-        <!-- <div class="figView"><span class="icon-eye"></span></div> -->
-        <!-- <div class="figType">FOR SALE</div> -->
       </div>
 
       <%= link_to building_path(building) do %>
-        
         <div id="building_details<%=building.id%>" class="building-detail-card">
          
         </div>
         
         <% if @management_company.present? %>
+          <% building_type = building.building_type %>
+          <% neighbohoods = building.neighbohoods %>
           <div style="padding: 0px 0px 0px 11px;height: 23px;">
-            <% if building.building_type.present? or building.neighbohoods.present? %>
-              <%= "#{building.building_type} in" if building.building_type.present? %> 
-              <%= link_to building.neighborhood_name, borough_search_link(building.neighbohoods), class: 'hyper-link' if building.neighbohoods.present?%>
+            <% if building_type.present? or neighbohoods.present? %>
+              <%= "#{building_type} in" if building_type.present? %> 
+              <%= link_to building.neighborhood_name, borough_search_link(neighbohoods), class: 'hyper-link' if neighbohoods.present?%>
             <%end%>
           </div>
         <%end%>
@@ -57,7 +44,6 @@
           <div class="clearfix"></div>         
           
         </ul>
-        <%#= render partial: 'home/property_information', locals: { building: building } %>
         <div class="clearfix"></div>
       <%end%>
       <div style="padding: 8px;">
@@ -67,12 +53,6 @@
           <%= link_to 'Available Listings'.html_safe, '#', class: 'btn btn-block btn-primary invisible' %>
         <%end%>
       </div>
-      <!-- <ul class="cardFeat">
-        <li><span>Building Reviews:</span></li>
-        <li><span>Unit Reviews:</span></li>
-        <li><span>Photos:</span> <%#=link_to "#{building.uploads.count}", building_uploads_path(building_id: building.id), 'data-no-turbolink' => false, style: 'color: #333;' %></li>
-        <li><a href='#'>Rent Information:</a> <%#= building.rent_information %></li>
-      </ul> -->
     </div>
     <div class="clearfix"></div>
   </div>

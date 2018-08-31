@@ -46,8 +46,6 @@ class UploadsController < ApplicationController
   			@imageable = Unit.find(params[:unit_id])
   		end
     end
-    #session[:after_contribute] = 'upload' # if params[:contribution].present?
-    #@search_bar_hidden = :hidden
   end
 
 	def create
@@ -60,7 +58,6 @@ class UploadsController < ApplicationController
     end
     if @upload.save
       respond_to do |format|
-        #session[:after_contribute] = 'upload'
         # send success header
         format.js
         format.json { render json: { message: 'success', fileID: @upload.id }, :status => 200 }

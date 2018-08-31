@@ -1,9 +1,8 @@
 require 'will_paginate/array'
 class HomeController < ApplicationController
-  include ActionController::Caching
   before_action :reset_session, only: [:index, :auto_search]
-  caches_page :search
-  caches_action :search, :expires_in => 1.hour
+  caches_page :search, :cache_path => Proc.new { |c| c.params }
+  caches_action :search, :cache_path => Proc.new { |c| c.params }
 
   def index
     @manhattan_neighborhoods = view_context.manhattan_neighborhoods
@@ -55,10 +54,15 @@ class HomeController < ApplicationController
       @tab_title_text = "#{@searched_neighborhoods} #{borough_city}"
       unless search_string == 'New York'
         @brooklyn_neighborhoods =  search_string #used to add border boundaries of brooklyn and queens
-        @coordinates = Geocoder.coordinates("#{search_term}, #{borough_city}, NY")
-        if @coordinates.present?
+        @neighborhood_coordinates = Gcoordinate.neighbohood_boundary_coordinates(search_string)
+        
+        if @neighborhood_coordinates.blank?
+          @coordinates = Geocoder.coordinates("#{search_string}, #{borough_city}, NY")
           @lat = @coordinates[0]
           @lng = @coordinates[1]
+        else
+          @lat = @neighborhood_coordinates[0][:lat]
+          @lng = @neighborhood_coordinates[0][:lng]
         end
 
         @boundary_coords = []
@@ -70,7 +74,7 @@ class HomeController < ApplicationController
           @buildings = Building.buildings_in_neighborhood(search_string)
           @zoom = 14
           if !manhattan_kmls.include? search_string
-            @boundary_coords << Gcoordinate.neighbohood_boundary_coordinates(search_string)
+            @boundary_coords << @neighborhood_coordinates
           else
             @zoom = 16 if search_string == 'Sutton Place'
           end
@@ -110,10 +114,10 @@ class HomeController < ApplicationController
       @buildings = Building.filter_by_types(@buildings, @building_types)
     end
     @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if params[:sort_by]
-
+    #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
+    @buildings = @buildings.includes(:uploads, :building_average, :votes) unless @buildings.kind_of? Array
+    @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 5)
     if @buildings.present?
-      #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
-      @buildings = @buildings.includes(:uploads, :building_average, :votes) unless @buildings.kind_of? Array
 	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
         marker.lat building.latitude
 	      marker.lng building.longitude
@@ -122,13 +126,20 @@ class HomeController < ApplicationController
 	      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", 
                                            :locals => { 
                                                         building: building,
-                                                        image: Upload.marker_image(building)
+                                                        image: Upload.marker_image(building),
+                                                        rating_cache: building.rating_cache,
+                                                        recomended_per: building.recommended_percent
                                                       }
                                           )
 	    end
 	  end
 
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(search_string, view_context.queens_borough)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def tos
