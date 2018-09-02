@@ -127,8 +127,9 @@ gem 'buttercms-rails'
 
 gem 'progressive_render'
 
-gem 'actionpack-page_caching'
-gem 'actionpack-action_caching'
+#gem 'actionpack-page_caching'
+#gem 'actionpack-action_caching'
+gem 'dalli'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -102,4 +102,6 @@ Rails.application.configure do
     :authentication => :plain,
     :enable_starttls_auto => true
   }
+
+  config.cache_store = :dalli_store, nil, { :namespace => 'aptreviews-app.herokuapp.com', :expires_in => 1.day, :compress => true }
 end

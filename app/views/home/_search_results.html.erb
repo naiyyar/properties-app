@@ -1,59 +1,61 @@
-<% buildings.each do |building| %>
-  <% @uploads = building.image_uploads %>
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-    <div class="card">
-      <div class="figure" style="position: relative;">
-        <%= link_to building_path(building) do %>
-        <!-- removing from management company show page because using building only to show market on map -->
-          <%if @uploads.present? %>
-            <div>
-              <%#= render partial: 'home/carousal', locals: { building: building } %>
-              <%= render partial: 'home/lightslider', locals: { building: building } %>
-            </div>
-          <%else%>
-            <div style="background-image: url(<%= image_url('no-photo.png') %>)" class="bg-size-cover"></div>
-          <%end%>
-        <%end%>
-      </div>
-
-      <%= link_to building_path(building) do %>
-        <div id="building_details<%=building.id%>" class="building-detail-card">
-         
-        </div>
-        
-        <% if @management_company.present? %>
-          <% building_type = building.building_type %>
-          <% neighbohoods = building.neighbohoods %>
-          <div style="padding: 0px 0px 0px 11px;height: 23px;">
-            <% if building_type.present? or neighbohoods.present? %>
-              <%= "#{building_type} in" if building_type.present? %> 
-              <%= link_to building.neighborhood_name, borough_search_link(neighbohoods), class: 'hyper-link' if neighbohoods.present?%>
+<% cache do "#{params[:searched_by]}_#{params[:search_term]}" %>
+  <% buildings.each do |building| %>
+    <% @uploads = building.image_uploads %>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="card">
+        <div class="figure" style="position: relative;">
+          <%= link_to building_path(building) do %>
+          <!-- removing from management company show page because using building only to show market on map -->
+            <%if @uploads.present? %>
+              <div>
+                <%#= render partial: 'home/carousal', locals: { building: building } %>
+                <%= render partial: 'home/lightslider', locals: { building: building } %>
+              </div>
+            <%else%>
+              <div style="background-image: url(<%= image_url('no-photo.png') %>)" class="bg-size-cover"></div>
             <%end%>
-          </div>
-        <%end%>
+          <%end%>
+        </div>
 
-        <ul class="cardRating">
-          <div class="pull-left star-sm" style="margin-right: 10px;">
-            <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
+        <%= link_to building_path(building) do %>
+          <div id="building_details<%=building.id%>" class="building-detail-card">
+           
           </div>
           
-          <div> 
-            <%= recommended_percent(building).html_safe %> 
-          </div> 
-          
-          <div class="clearfix"></div>         
-          
-        </ul>
-        <div class="clearfix"></div>
-      <%end%>
-      <div style="padding: 8px;">
-        <% if building.web_url.present? %>
-          <%= link_to 'Available Apartment Listings'.html_safe, building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' %>
-        <%else%>
-          <%= link_to 'Available Listings'.html_safe, '#', class: 'btn btn-block btn-primary invisible' %>
+          <% if @management_company.present? %>
+            <% building_type = building.building_type %>
+            <% neighbohoods = building.neighbohoods %>
+            <div style="padding: 0px 0px 0px 11px;height: 23px;">
+              <% if building_type.present? or neighbohoods.present? %>
+                <%= "#{building_type} in" if building_type.present? %> 
+                <%= link_to building.neighborhood_name, borough_search_link(neighbohoods), class: 'hyper-link' if neighbohoods.present?%>
+              <%end%>
+            </div>
+          <%end%>
+
+          <ul class="cardRating">
+            <div class="pull-left star-sm" style="margin-right: 10px;">
+              <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
+            </div>
+            
+            <div> 
+              <%= recommended_percent(building).html_safe %> 
+            </div> 
+            
+            <div class="clearfix"></div>         
+            
+          </ul>
+          <div class="clearfix"></div>
         <%end%>
+        <div style="padding: 8px;">
+          <% if building.web_url.present? %>
+            <%= link_to 'Available Apartment Listings'.html_safe, building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' %>
+          <%else%>
+            <%= link_to 'Available Listings'.html_safe, '#', class: 'btn btn-block btn-primary invisible' %>
+          <%end%>
+        </div>
       </div>
+      <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
-  </div>
+  <%end%>
 <%end%>

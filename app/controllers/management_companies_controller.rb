@@ -36,7 +36,9 @@ class ManagementCompaniesController < ApplicationController
         marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", 
                                            :locals => { 
                                                         building: building,
-                                                        image: Upload.marker_image(building)
+                                                        image: Upload.marker_image(building),
+                                                        rating_cache: building.rating_cache,
+                                                        recomended_per: building.recommended_percent
                                                       }
                                           )
       end

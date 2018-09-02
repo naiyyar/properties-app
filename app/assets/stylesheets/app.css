@@ -5367,7 +5367,7 @@ h3.s-sub {
     padding-top: 0;
 }
 #hero-container-blog, .featured.carousel{
-    min-height: 200px;
+    min-height: 65px;
     max-height: 430px;
 }
 .hero-container-blog-index{
