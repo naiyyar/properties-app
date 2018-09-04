@@ -116,7 +116,7 @@ class HomeController < ApplicationController
     #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
     if @buildings.present?
       @buildings = @buildings.includes(:uploads, :building_average, :votes) unless @buildings.kind_of? Array
-      @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 5)
+      @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
       if @buildings.present?
   	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
           marker.lat building.latitude
