@@ -129,6 +129,7 @@ gem 'progressive_render'
 
 #gem 'actionpack-page_caching'
 #gem 'actionpack-action_caching'
+gem 'memcachier'
 gem 'dalli'
 
 group :development, :test do

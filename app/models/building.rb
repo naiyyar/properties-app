@@ -239,6 +239,7 @@ class Building < ActiveRecord::Base
 
   def self.buildings_in_neighborhood search_term
     #where("neighborhood @@ :q OR neighborhoods_parent @@ :q OR neighborhood3 @@ :q", q: search_term)
+    search_term = (search_term == 'Soho' ? 'SoHo' : search_term)
     where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
   end
 

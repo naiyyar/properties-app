@@ -1,5 +1,5 @@
-<% cache do "#{params[:searched_by]}_#{params[:search_term]}" %>
-  <% buildings.each do |building| %>
+<% buildings.each do |building| %>
+  <% cache(building) do %>
     <% @uploads = building.image_uploads %>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <div class="card">
