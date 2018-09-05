@@ -105,7 +105,7 @@ module HomeHelper
 			search_term = "#{neighborhood.downcase.gsub(' ', '-')}-#{borough}"
 			search_url = "/neighborhoods/#{search_term}"
 			if params[:sort_by].present? and params[:filter].present?
-				"#{search_url}?sort_by=#{params[:sort_by]}"
+				"#{search_url}?sort_by=#{params[:sort_by]}&#{filter_params}"
 			elsif params[:sort_by].present?
 				#request.fullpath
 				"#{search_url}?sort_by=#{params[:sort_by]}"
@@ -113,10 +113,16 @@ module HomeHelper
 				"#{search_url}"
 			else
 				#"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
-				"#{search_url}"
+				"#{search_url}?#{filter_params}"
 			end
 		else
 			'javascript:void(0)'
+		end
+	end
+
+	def filter_params
+		if params[:filter].present?
+			params[:filter].to_query('filter')
 		end
 	end
 
