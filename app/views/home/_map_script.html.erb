@@ -4,6 +4,12 @@
 
 <script type="text/javascript" charset="utf-8">
 	json_array = <%= raw @hash.to_json %> ;
+	var position = '';
+	<% if browser.device.mobile? %>
+		position = google.maps.ControlPosition.TOP_LEFT
+	<%else%>
+		position = google.maps.ControlPosition.TOP_CENTER
+	<%end%>
  	function build_map(sidebar, resize=false){
  		var lat = <%= raw @lat.to_json %>;
 		var lng = <%= raw @lng.to_json %>;
@@ -17,7 +23,7 @@
 			mapTypeControl: true,
 			mapTypeControlOptions: { 
 																style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-																position: google.maps.ControlPosition.TOP_CENTER 
+																position: position
 															},
 			gestureHandling: 'greedy'
 		}

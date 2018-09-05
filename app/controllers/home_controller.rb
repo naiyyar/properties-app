@@ -4,7 +4,8 @@ class HomeController < ApplicationController
   #caches_action :search, :cache_path => Proc.new { |c| c.params }
 
   def index
-    @manhattan_neighborhoods = view_context.manhattan_neighborhoods
+    #@manhattan_neighborhoods = view_context.manhattan_neighborhoods
+    @home_view = true
   end
 
   def auto_search
@@ -57,8 +58,10 @@ class HomeController < ApplicationController
         
         if @neighborhood_coordinates.blank?
           @coordinates = Geocoder.coordinates("#{search_string}, #{borough_city}, NY")
-          @lat = @coordinates[0]
-          @lng = @coordinates[1]
+          if @coordinates.present?
+            @lat = @coordinates[0]
+            @lng = @coordinates[1]
+          end
         else
           @lat = @neighborhood_coordinates[0][:lat]
           @lng = @neighborhood_coordinates[0][:lng]
