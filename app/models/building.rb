@@ -23,8 +23,10 @@ class Building < ActiveRecord::Base
   after_validation :geocode
 
   #callbacks
-  after_create :save_neighborhood
-  after_update :update_neighborhood
+  after_create :save_neighborhood, :update_neighborhood_counts
+  after_update :update_neighborhood, :update_neighborhood_counts
+
+  after_destroy :update_neighborhood_counts
 
   #multisearchable
   # PgSearch.multisearch_options = {
@@ -432,12 +434,6 @@ class Building < ActiveRecord::Base
     end
   end
 
-  def self.number_of_buildings neighbohood, area=''
-    b_count = 0
-    b_count = where("neighborhood @@ :q or neighborhoods_parent @@ :q or neighborhood3 @@ :q" , q: neighbohood).count
-    Neighborhood.create(name: neighbohood, buildings_count: b_count, boroughs: area)
-  end
-
   def formatted_neighborhood type=''
     if type == 'parent'
       @neighborhood = self.neighborhoods_parent
@@ -450,6 +446,14 @@ class Building < ActiveRecord::Base
 
   def formatted_city
     self.city.downcase.gsub(' ', '')
+  end
+
+  def self.number_of_buildings neighbohood
+    where("neighborhood @@ :q OR neighborhoods_parent @@ :q OR neighborhood3 @@ :q" , q: neighbohood).count
+  end
+
+  def popular_neighborhoods
+    Neighborhood.where('name = ? OR name = ? OR name = ?', self.neighborhood, self.neighborhoods_parent, self.neighborhood3)
   end
 
   private
@@ -516,7 +520,7 @@ class Building < ActiveRecord::Base
 
       end #end search loop
       
-    end #end seaech if
+    end #end search if
 
     return neighborhood1, neighborhood2, neighborhood3
   end
@@ -533,8 +537,17 @@ class Building < ActiveRecord::Base
   def update_neighborhood
     if neighborhoods.present?
       #if self.neighborhood != neighborhoods[0] or self.neighborhoods_parent != neighborhoods[1]
-      self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1], neighborhood3: neighborhoods[2] )
+      self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1], neighborhood3: neighborhoods[2])
       #end
+    end
+  end
+
+  def update_neighborhood_counts
+    popular_neighborhoods.each do |hood|
+      if hood.buildings_count > 0
+        hood.buildings_count = Building.number_of_buildings(hood.name)
+        hood.save
+      end
     end
   end
 

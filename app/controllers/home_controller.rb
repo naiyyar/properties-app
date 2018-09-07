@@ -1,12 +1,11 @@
 require 'will_paginate/array'
 class HomeController < ApplicationController
   before_action :reset_session, only: [:index, :auto_search]
-  before_action :get_neighborhoods, only: [:index, :search]
+  before_action :get_neighborhoods, only: [:index]
   #caches_action :search, :cache_path => Proc.new { |c| c.params }
 
   def index
     @home_view = true
-    
     Neighborhood.save_building_counts(view_context.ny_cities, view_context.manhattan_neighborhoods)
   end
 
