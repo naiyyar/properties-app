@@ -97,8 +97,7 @@ module HomeHelper
 		end
 	end
 	
-	#TODO1: Retain already added filter and sort when selecting new neighborhoods
-	#TODO2: Test with zipcode search
+	#To retain filters when switching neighborhoods
 	def search_link neighborhood, borough
 		unless borough == 'BRONX'
 			borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase.gsub(' ', '-'))
@@ -113,7 +112,7 @@ module HomeHelper
 				"#{search_url}"
 			else
 				#"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
-				"#{search_url}?#{filter_params}"
+				filter_params.present? ? "#{search_url}?#{filter_params}" : "#{search_url}"
 			end
 		else
 			'javascript:void(0)'
@@ -139,9 +138,11 @@ module HomeHelper
     end
 	end
 
-	def neighborhood_class
-		#'pop-neighborhood' if params[:sort_by].present? or params[:filter].present?
-		nil
+	def search_by_neighborhood_link nb, area
+		name = nb.name
+		link_to search_link(name, area), data: { nbname: name, st: searchable_text(name, area) } do
+			nb.nb_name_with_counts
+		end
 	end
 
 	def searched_term

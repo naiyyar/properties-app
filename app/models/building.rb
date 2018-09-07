@@ -432,8 +432,10 @@ class Building < ActiveRecord::Base
     end
   end
 
-  def self.number_of_buildings neighbohood
-    where("neighborhood @@ :q or neighborhoods_parent @@ :q or neighborhood3 @@ :q" , q: neighbohood).count
+  def self.number_of_buildings neighbohood, area=''
+    b_count = 0
+    b_count = where("neighborhood @@ :q or neighborhoods_parent @@ :q or neighborhood3 @@ :q" , q: neighbohood).count
+    Neighborhood.create(name: neighbohood, buildings_count: b_count, boroughs: area)
   end
 
   def formatted_neighborhood type=''

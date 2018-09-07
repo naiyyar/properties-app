@@ -1,11 +1,13 @@
 require 'will_paginate/array'
 class HomeController < ApplicationController
   before_action :reset_session, only: [:index, :auto_search]
+  before_action :get_neighborhoods, only: [:index, :search]
   #caches_action :search, :cache_path => Proc.new { |c| c.params }
 
   def index
-    #@manhattan_neighborhoods = view_context.manhattan_neighborhoods
     @home_view = true
+    
+    Neighborhood.save_building_counts(view_context.ny_cities, view_context.manhattan_neighborhoods)
   end
 
   def auto_search
@@ -120,22 +122,22 @@ class HomeController < ApplicationController
     if @buildings.present?
       @buildings = @buildings.includes(:uploads, :building_average, :votes) unless @buildings.kind_of? Array
       @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
-      if @buildings.present?
-  	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
-          marker.lat building.latitude
-  	      marker.lng building.longitude
-  	      marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
-          
-  	      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", 
-                                             :locals => { 
-                                                          building: building,
-                                                          image: Upload.marker_image(building),
-                                                          rating_cache: building.rating_cache,
-                                                          recomended_per: building.recommended_percent
-                                                        }
-                                            )
-  	    end
-  	  end
+      #if @buildings.present?
+	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
+        marker.lat building.latitude
+	      marker.lng building.longitude
+	      marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
+        
+	      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", 
+                                           :locals => { 
+                                                        building: building,
+                                                        image: Upload.marker_image(building),
+                                                        rating_cache: building.rating_cache,
+                                                        recomended_per: building.recommended_percent
+                                                      }
+                                          )
+	    end
+  	  #end
     end
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(search_string, view_context.queens_borough)
   end
@@ -151,6 +153,10 @@ class HomeController < ApplicationController
 
   def reset_session
     session[:return_to] = nil if session[:return_to].present?
+  end
+
+  def get_neighborhoods
+    @neighborhoods = Neighborhood.all
   end
 
 end

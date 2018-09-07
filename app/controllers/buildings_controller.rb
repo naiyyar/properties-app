@@ -42,7 +42,7 @@ class BuildingsController < ApplicationController
 
   def show
     @building = Building.find(params[:id])
-
+    @buiding_uploads = @building.image_uploads.includes(:imageable)
     @unit_rent_summary_count = @building.unit_rent_summary_count
     @unit_review_count = @building.unit_reviews_count
     @show_map_btn = true
