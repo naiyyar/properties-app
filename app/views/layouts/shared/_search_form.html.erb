@@ -4,7 +4,7 @@
 	<%=render partial: 'home/search_form' %>
 </div>
 
-<% unless @manhattan_neighborhoods.blank? and browser.device.mobile? %>
+<% unless @pop_neighborhoods.blank? and browser.device.mobile? %>
 	<div class="pull-left neighborhoods-dropdown hidden-xs" style="margin-top: 8px;">
 	  <div class="btn-group">
 	    <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle" style="min-width: 121px;" id='lr2'>
@@ -17,7 +17,7 @@
 		    		<div class="col-xs-3 col-md-3 col-lg-3">
 		          <h2 class="osLight h-r"><%=area%></h2>
 		          <ul class="blog-r-nav text-left">
-		        		<% Neighborhood.all.where(boroughs: area).order(:name).each do |nb| %>
+		        		<% @pop_neighborhoods.where(boroughs: area).order(:name).each do |nb| %>
 		            	<li><%= search_by_neighborhood_link(nb, area) %></li>
 		            <%end%>
 		          </ul>

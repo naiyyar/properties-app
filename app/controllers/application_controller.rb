@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
 
   def popular_neighborhoods
     @manhattan_neighborhoods = view_context.manhattan_neighborhoods
+    @pop_neighborhoods = Neighborhood.all
   end
 
   def after_sign_up_path_for(resource)
