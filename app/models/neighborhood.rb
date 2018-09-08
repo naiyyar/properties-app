@@ -9,7 +9,7 @@ class Neighborhood < ActiveRecord::Base
       neighborhoods = Neighborhood.where(boroughs: borough)
       if neighborhoods.blank?
         borough_neighborhoods[borough].each do |hoods|
-          Neighborhood.create(name: hoods, buildings_count: Building.number_of_buildings(hoods, borough), boroughs: borough)
+          Neighborhood.create(name: hoods, buildings_count: Building.number_of_buildings(hoods), boroughs: borough)
         end
       end
     end

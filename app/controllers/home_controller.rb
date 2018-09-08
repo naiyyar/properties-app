@@ -6,7 +6,20 @@ class HomeController < ApplicationController
 
   def index
     @home_view = true
-    Neighborhood.save_building_counts(view_context.ny_cities, view_context.manhattan_neighborhoods)
+    #Neighborhood.save_building_counts(view_context.ny_cities, view_context.manhattan_neighborhoods)
+  end
+
+  def load_infobox
+    building = Building.find(params[:object_id]) #includes(:uploads, :building_average, :votes)
+
+    render json: { html: render_to_string(:partial => "/layouts/shared/marker_infowindow", 
+                     :locals => { 
+                                  building: building,
+                                  image: Upload.marker_image(building),
+                                  rating_cache: building.rating_cache,
+                                  recomended_per: building.recommended_percent
+                                }) 
+                  }
   end
 
   def auto_search
@@ -119,24 +132,17 @@ class HomeController < ApplicationController
     @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if params[:sort_by].present?
     #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
     if @buildings.present?
-      @buildings = @buildings.includes(:uploads, :building_average, :votes) unless @buildings.kind_of? Array
+      @buildings = @buildings unless @buildings.kind_of? Array
       @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
       #if @buildings.present?
-	  	@hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
+      @hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
         marker.lat building.latitude
-	      marker.lng building.longitude
-	      marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
+        marker.lng building.longitude
+        marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
         
-	      marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", 
-                                           :locals => { 
-                                                        building: building,
-                                                        image: Upload.marker_image(building),
-                                                        rating_cache: building.rating_cache,
-                                                        recomended_per: building.recommended_percent
-                                                      }
-                                          )
-	    end
-  	  #end
+        marker.infowindow render_to_string(:partial => '/home/placeholder_infowindow')
+      end
+      #end
     end
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(search_string, view_context.queens_borough)
   end

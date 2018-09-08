@@ -10,6 +10,7 @@
 	<%else%>
 		position = google.maps.ControlPosition.TOP_CENTER
 	<%end%>
+	var markers = '';
  	function build_map(sidebar, resize=false){
  		var lat = <%= raw @lat.to_json %>;
 		var lng = <%= raw @lng.to_json %>;
@@ -53,6 +54,17 @@
 			_.each(json_array, function(json, index){
 		  	json.marker = markers[index];
 		  	bindMarker(json.marker, markers, handler, lat, lng, zoom );
+		  	google.maps.event.addListener(json.marker.getServiceObject(), 'click', function(){
+          var infowindow = json.marker.infowindow;
+          var building_id = json_array[index].marker_title.split(',')[0];
+          $.post('/load_infobox', {
+            object_id: building_id
+          }, function(data){
+            infowindow.setContent(data.html);
+            infowindow.open(handler.getMap(), google.maps.markers[index]);
+          });
+
+        });
 			});
 		}
 	
@@ -89,5 +101,5 @@
 
       }, 300);
   }
-  
+ 
 </script>
