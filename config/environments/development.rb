@@ -11,7 +11,7 @@ Rails.application.configure do
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = true
+  config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -37,7 +37,7 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # Use a different cache store in production.
-  config.cache_store = :dalli_store, nil, { :namespace => 'dev_apt_reviews', :expires_in => 1.day, :compress => true }
+  #config.cache_store = :dalli_store, nil, { :namespace => 'dev_apt_reviews', :expires_in => 1.day, :compress => true }
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

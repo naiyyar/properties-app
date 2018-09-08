@@ -39,6 +39,9 @@ class Building < ActiveRecord::Base
   pg_search_scope :search, against: [:building_name, :building_street_address],
      :using => { :tsearch => { prefix: true } }
 
+  pg_search_scope :search_query, against: [:building_name, :building_street_address],
+     :using => { :tsearch => { prefix: true } }
+
   pg_search_scope :search_by_neighborhood, against: [:neighborhood],
      :using => {  :tsearch => { prefix: true }, 
                   :trigram=> { :threshold => 0.2 } 
@@ -67,6 +70,28 @@ class Building < ActiveRecord::Base
                   :threshold => 0.5
                 }}
 
+  filterrific(
+   default_filter_params: { },
+   available_filters: [
+     :search_query
+    ]
+  )
+  
+  # scope :sorted_by, -> (sort_option) {
+  #   return if sort_option.nil?
+  #   direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+  #   case sort_option.to_s
+  #   when /^building_name_/
+  #     order("LOWER(buildings.building_name) #{ direction }")
+  #   when /^building_street_address_/
+  #     order("LOWER(buildings.building_street_address) #{ direction }")
+  #   when /^created_at_/
+  #     order("LOWER(buildings.created_at) #{ direction }")
+  #   else
+  #     raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+  #   end
+  # }
+
   #amenities scopes
   scope :doorman, -> { where(doorman: true) }
   scope :courtyard, -> { where(courtyard: true) }
@@ -86,6 +111,15 @@ class Building < ActiveRecord::Base
   scope :no_fee, -> { where(no_fee: true) }
 
   #Methods
+
+  def self.options_for_sorted_by
+    [
+      ['Name (a-z)', 'building_name_asc'],
+      ['Name (z-a)', 'building_name_desc'],
+      ['Creating date (newest first)', 'created_at_desc'],
+      ['Creating date (oldest first)', 'created_at_asc']
+    ]
+  end
 
   def to_param
     if building_name.present?

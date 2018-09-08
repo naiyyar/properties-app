@@ -9,11 +9,26 @@
     </div>
     <h2></h2>
   <%end%>
-  <%= render partial: 'buildings/buildings' %>
+  <div class="pull-right">
+    <%= form_for_filterrific @filterrific do |f| %>
+      <div class="form-field">
+        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+        <%= f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search' %>
+      </div>
+
+      <div class="form-field">
+        <%#= f.select :sorted_by, @filterrific.select_options[:sorted_by] %>
+      </div>
+      <%# add an automated spinner to your form when the list is refreshed %>
+      <%#= render_filterrific_spinner %>
+    <% end %>
+  </div>
+  
+  <%= render partial: 'buildings/buildings', locals: { buildings: @buildings} %>
 </div>
 
 <div class="text-center" >
-  <%#= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
+  <%= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
 </div>
 
 

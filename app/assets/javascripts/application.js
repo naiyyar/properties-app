@@ -39,5 +39,6 @@
 //= require lightslider
 //= require progressive_render
 //= require blog
+//= require filterrific/filterrific-jquery
 
 //= require_tree .

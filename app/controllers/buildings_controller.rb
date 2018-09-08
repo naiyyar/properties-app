@@ -3,12 +3,26 @@ class BuildingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search]
 
   def index
-    @buildings = Building.order('created_at desc').includes(:building_average)#.paginate(:page => params[:page], :per_page => 80)
+    # @buildings = Building.order('created_at desc').includes(:building_average) #.paginate(:page => params[:page], :per_page => 20)
+    # respond_to do |format|
+    #   format.html
+    #   format.json { 
+    #     render json: Building.search(params[:term])
+    #   }
+    # end
+    @filterrific = initialize_filterrific(
+      Building,
+      params[:filterrific],
+      # select_options: {
+      #   sorted_by: Building.options_for_sorted_by,
+      # },
+      available_filters: [:search_query]
+    ) or return
+    @buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 250).includes(:building_average).reorder('created_at desc') #.sorted_by(params[:sorted_by])
+
     respond_to do |format|
       format.html
-      format.json { 
-        render json: Building.search(params[:term])
-      }
+      format.js
     end
   end
 
