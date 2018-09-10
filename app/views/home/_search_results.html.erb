@@ -1,3 +1,4 @@
+<%# debugger%>
 <% buildings.each do |building| %>
   <% cache(building) do %>
     <% @uploads = building.image_uploads %>
@@ -22,7 +23,7 @@
            
           </div>
           
-          <% if @management_company.present? %>
+          <% if @management_company.present? and params[:controller] == 'management_companies' %>
             <% building_type = building.building_type %>
             <% neighbohoods = building.neighbohoods %>
             <div style="padding: 0px 0px 0px 11px;height: 23px;">
