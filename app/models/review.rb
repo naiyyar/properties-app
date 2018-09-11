@@ -10,6 +10,8 @@ class Review < ActiveRecord::Base
   
   after_destroy :destroy_dependents
 
+  default_scope { order('created_at DESC') }
+
   #reviewer
   def user_name
   	self.user.name ? self.user.name : self.user.email[/[^@]+/]

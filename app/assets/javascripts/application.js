@@ -40,5 +40,6 @@
 //= require progressive_render
 //= require blog
 //= require filterrific/filterrific-jquery
+//= require load_more
 
 //= require_tree .

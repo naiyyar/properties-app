@@ -292,10 +292,6 @@ class Building < ActiveRecord::Base
     end
   end
 
-  def recommended_percent
-    (upvotes_count / total_votes.to_f) * 100
-  end
-
   def upvotes_count
     self.votes.where(vote: true).count
   end

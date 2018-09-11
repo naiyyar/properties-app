@@ -10,7 +10,7 @@
     <h2></h2>
   <%end%>
   
-  <%= render partial: 'buildings/buildings' %>
+  <%= render partial: 'buildings/buildings', locals: { buildings: @buildings } %>
 </div>
 
 <div class="text-center" >

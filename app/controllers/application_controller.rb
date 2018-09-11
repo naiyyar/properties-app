@@ -3,15 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
-  before_filter :allow_iframe_requests
-  after_filter :store_location, except: [:auto_search]
+  before_action :allow_iframe_requests
+  after_action :store_location, unless: :skip_store_location
   before_action :popular_neighborhoods
 
   def store_location
     # store last url as long as it isn't a /users path
     session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
-    session[:contribution_for] = params[:contribution]
-    session[:search_term] = params[:search_term]
   end
 
   def popular_neighborhoods
@@ -86,18 +84,18 @@ class ApplicationController < ActionController::Base
         end
       end
     else
-      if session[:contribution_for] == 'building_photos' && session[:search_term].present?
-        "/uploads/new?buildings-search-txt=#{session[:search_term]}&contribution=building_photos"
-      elsif params[:contribution] == 'building_photos'
-        "/uploads/new?buildings-search-txt=#{params['buildings-search-txt']}&contribution=building_photos"
-      elsif session[:building_id].present?
-        return "/uploads/new?building_id=#{session[:building_id]}"
-      elsif session[:unit_id].present?
-        return "/uploads/new?unit_id=#{session[:unit_id]}"
-      else
-        flash[:notice] = 'Signed in successfully'
-        session[:return_to] || root_path
-      end
+      # if session[:contribution_for] == 'building_photos' && session[:search_term].present?
+      #   "/uploads/new?buildings-search-txt=#{session[:search_term]}&contribution=building_photos"
+      # elsif params[:contribution] == 'building_photos'
+      #   "/uploads/new?buildings-search-txt=#{params['buildings-search-txt']}&contribution=building_photos"
+      # elsif session[:building_id].present?
+      #   return "/uploads/new?building_id=#{session[:building_id]}"
+      # elsif session[:unit_id].present?
+      #   return "/uploads/new?unit_id=#{session[:unit_id]}"
+      # else
+      flash[:notice] = 'Signed in successfully'
+      session[:return_to] || root_path
+      #end
     end
   end
 
@@ -167,6 +165,10 @@ class ApplicationController < ActionController::Base
       sign_in(current_user, :force => true)
       session[:logged_signin] = true
     end
+  end
+
+  def skip_store_location
+    request.format.json? || request.format.js?
   end
 
 end

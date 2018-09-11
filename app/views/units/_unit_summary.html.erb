@@ -8,33 +8,39 @@
                 <%= link_to 'Edit', edit_unit_path(@unit), class: 'btn btn-o btn-default btn-xs pull-right' %>
             <%end%>
           </h1>
-          <div class="address"><span class="icon-location-pin"></span> 
-            <%= link_to building_path(@unit.building), 'data-no-turbolink' => false do %>  
-              <%= @unit.building.street_address %>, <%= @unit.building.zipcode %> <br />  
-            <%end%>
-          </div>
-          <div class="address"><span class="fa fa-building"></span> 
-            <%= link_to @unit.building.building_name_or_address, building_path(@unit.building), 'data-no-turbolink' => false %></div>
-          <ul class="rating star-sm">
-            <%= rating_for @unit, 'unit', disable_after_rate: true, readonly: true %>
-          </ul>
-          <div class="favLink">(<%= @unit.reviews.count %>)</div>
-          <% if @unit.votes.present? %>
-            <div class="favLink"><span class="icon-pipe">|</span>
-               <%= @unit.recommended_percent.nan? ? '--% recommended' :  "#{@unit.recommended_percent.to_i}% Recommended" %>
+          <div class="property_information">
+            <div class="address"><span class="icon-location-pin"></span> 
+              <%= link_to building_path(@unit.building), 'data-no-turbolink' => false do %>  
+                <%= @unit.building.street_address %>, <%= @unit.building.zipcode %> <br />  
+              <%end%>
             </div>
-          <%end%>
+            <div class="address"><span class="fa fa-building"></span> 
+              <%= link_to @unit.building.building_name_or_address, building_path(@unit.building), 'data-no-turbolink' => false %></div>
+            
+            <div style="margin-left: -3px;">
+              <ul class="rating star-sm">
+                <%= rating_for @unit, 'unit', disable_after_rate: true, readonly: true %>
+              </ul>
+
+              <% if @unit.votes.present? %>
+                <div class="favLink">
+                  <!-- reviews_count + votes -->
+                  <%= recommended_percent(@unit).html_safe %>
+                </div>
+              <%end%>
+            </div>
+          </div>
           
           <div class="clearfix"></div>
           
           <div class="property_information">
-            <span><%= @unit.bedrooms %></span> -
+            <span><%= @unit.number_of_bedrooms %> Bedrooms</span> -
             <span><%= @unit.number_of_bathrooms %> Bathrooms</span> -
             <span><%= @unit.square_feet.to_i %> Ft<sup>2</sup></span>
           </div>
           
           <div class="clearfix"></div>
-            <%= render partial: 'buildings/property_contribute_links', locals: { object: @unit } %>
+            <%#= render partial: 'buildings/property_contribute_links', locals: { object: @unit } %>
           <div class="clearfix"></div>
       </div>
     </div>

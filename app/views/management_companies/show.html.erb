@@ -35,21 +35,24 @@
     <ul class="nav nav-tabs nav-justified" role="tablist">
     	<li class="active"><a href="#building_managed" role="tab" data-toggle="tab"><%= 'BUILDINGS MANAGED'%> (<%= @manage_buildings.count %>)</a></li>
 
-      <li><a href="#buildings" role="tab" data-toggle="tab"><%= "BUILDING REVIEWS (#{ @management_company.aggregate_reviews })"%></a></li>
+      <li><a href="#buildings_reviews_tab" role="tab" data-toggle="tab"><%= "BUILDING REVIEWS (#{ @management_company.aggregate_reviews })"%></a></li>
     </ul>
     
     <div class="tab-content">
-      <div class="tab-pane fade" id="buildings">
-        <div class="comments">
-        	<%# @manage_buildings.each do |building| %>
-        		<%# reviews = building.reviews.includes(:user, :uploads).order('created_at desc') %>
-	          <% if @reviews.present? %>
-	            <% @reviews.each do |review| %>
-	              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: review.reviewable } %>
-	            <% end %>
-	          <%end%>
-	         <%#end%>
+      <div class="tab-pane fade" id="buildings_reviews_tab" style="overflow-y: scroll;height: 500px;">
+        <div class="comments objects-container" style="padding: 0px 14px 34px 20px;">
+          <% if @reviews.present? %>
+            <%# @reviews.each do |review| %>
+              <%#= render partial: 'reviews/reviews', locals: { review: review, reviewable: review.reviewable } %>
+              <%= render partial: @reviews %>
+            <%# end %>
+          <%end%>
         </div>
+        <div class="load-more-container text-center">
+    			<!-- hide our loading gif image so that we show it when making ajax call via jquery -->
+					<%= image_tag 'loader.gif', style: 'display:none;', class: 'loading-gif' %>
+					<%= link_to 'Show More ...', load_more_reviews_path(id: @management_company.id), class: 'load-more', style: 'padding: 6px 27px;border: 1px solid #ddd;' %>
+				</div>
       </div>
 
       <div class="tab-pane fade  in active" id="building_managed">

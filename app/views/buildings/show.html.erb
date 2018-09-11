@@ -44,9 +44,7 @@
             <div class="text-right" style="text-align: right;padding-bottom: 15px;">
               <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
             </div>
-            <% @reviews.each do |review| %>
-              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
-            <% end %>
+            <%= render partial: @reviews %>
           <%else%>
             <p>There are no reviews for this building. Be the first to add your review for this building.</p>
             <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
@@ -58,9 +56,8 @@
         <div class="comments">
           <% @building_units.each do |unit| %>
             <h3 class="unit_name_header"><%= link_to unit.name, unit_path(unit), 'data-no-turbolink' => false %> (<span><%=unit.reviews.count%></span> Reviews)</h3>
-            <% unit.reviews.includes(:user, :uploads).order('created_at desc').each do |review| %>
-              <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: unit } %>
-            <%end%>
+            <% @reviews = unit.reviews.includes(:user, :uploads) %>
+            <%= render partial: @reviews  %>
           <% end %>
         </div>
       </div>

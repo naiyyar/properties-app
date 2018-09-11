@@ -103,15 +103,16 @@ module BuildingsHelper
 		}
 	end
 
-	def recommended_percent building
+	def recommended_percent object
 		thumb_icon = "| <span class='fa fa-thumbs-up recommended'></span>"
-		if building.present?
-			if building.recommended_percent.nan? 
+		if object.present?
+			rec_percent = Vote.recommended_percent(object)
+			if rec_percent.nan? 
 				"#{thumb_icon} --%"
-			elsif building.recommended_percent == 0
+			elsif rec_percent == 0
 				"#{thumb_icon} 0%"
 			else
-				"#{thumb_icon} #{building.recommended_percent.to_i}%  &nbsp; | Reviews: #{building.reviews.count}"
+				"#{thumb_icon} #{rec_percent.to_i}%  &nbsp; | Reviews: #{object.reviews.count}"
 			end
 		end
 	end

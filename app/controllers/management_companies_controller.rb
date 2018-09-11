@@ -12,13 +12,24 @@ class ManagementCompaniesController < ApplicationController
     @buildings = @management_company.buildings #.reorder('neighborhood ASC, building_name ASC')
   end
 
+  def load_more_reviews
+    buildings = @management_company.buildings
+    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads)
+    @reviews = @reviews.where('id < ?', params[:object_id]).limit(10) if params[:object_id].present?
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /management_companies/1
   # GET /management_companies/1.json
   def show
     @show_map_btn = true
     buildings = @management_company.buildings
-    @manage_buildings = buildings.paginate(:page => params[:page], :per_page => 20).reorder('neighborhood ASC, building_name ASC')
-    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads).order('created_at desc')
+    @manage_buildings = buildings.paginate(:page => params[:page], :per_page => 20).reorder('neighborhood ASC, building_name ASC') if !params[:object_id].present?
+    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads).limit(10)
+
     if buildings.present?
       #finding average rating for all managed buildings 
       @stars = @management_company.get_average_stars

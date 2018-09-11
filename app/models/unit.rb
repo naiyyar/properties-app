@@ -27,9 +27,17 @@ class Unit < ActiveRecord::Base
     end
 	end
 
-	def recommended_percent
-		Vote.recommended_percent(self)
-	end
+	def upvotes_count
+    self.votes.where(vote: true).count
+  end
+
+  def downvotes_count
+    self.votes.where(vote: false).count
+  end
+
+  def total_votes
+    self.votes.count
+  end
 
 	def image_uploads
     self.uploads.where('image_file_name is not null')

@@ -50,7 +50,7 @@
   <div class="tabsContainer" style="margin-top: 8px;" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
         <li class="active"><a href="#ur" role="tab" data-toggle="tab"><%='Unit Reviews'.upcase %> (<%= @unit.reviews.count %>)</a></li>
-        <li class=""><a href="#br" role="tab" data-toggle="tab"><%='Building Reviews'.upcase %> (<%= @unit.building.reviews_count %>)</a></li>
+        <li class=""><a href="#br" role="tab" data-toggle="tab"><%='Building Reviews'.upcase %> (<%= @unit.building.reviews.count %>)</a></li>
         <li><a href="#ph" role="tab" data-toggle="tab"><%='Rent Information'.upcase %> (<%= @unit.rental_price_histories.count %>)</a></li>
     </ul>
     <div class="tab-content">
@@ -58,9 +58,8 @@
           <%#= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_unit_review_path(unit_id: @unit), class: "btn btn-o btn-yellow contactBtn reviewBtnMobile pull-right", "data-no-turbolink" => false %>
           <div class="comments">
             <% if @unit.reviews.present? %>
-              <% @unit.reviews.order('created_at desc').each do |review| %>
-                <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit } %>
-              <% end %>
+              <%@reviews = @unit.reviews %>
+              <%= render partial: @reviews %>
             <%else%>
               <p>There are no reviews for this property. Be the first to add a review on this property.</p>
               <%= link_to 'Write a Review', new_unit_review_path(unit_id: @unit, contribution: 'unit_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
@@ -70,9 +69,8 @@
         <div class="tab-pane fade" id="br">
           <div class="comments">
             <% if @unit.building.reviews.present? %>
-              <% @unit.building.reviews.order('created_at desc').each do |review| %>
-                <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @unit.building } %>
-              <% end %>
+              <%@reviews = @unit.building.reviews %>
+              <%= render partial: @reviews %>
             <%else%>
               <p>There are no reviews for this property. Be the first to add a review on this property.</p>
               <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>

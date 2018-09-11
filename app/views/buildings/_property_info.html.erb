@@ -1,0 +1,45 @@
+<div class="property_information">
+  <div class="address" style="margin-left: -1px;"><span class="icon-location-pin"></span> <%= @building.street_address %>, <%= @building.zipcode %></div>
+  <% if @building.building_type.present? or @building.neighbohoods.present? %>
+    <div>
+      <%= "#{@building.building_type} in" if @building.building_type.present? %> 
+      
+      <%= link_to @building.neighbohoods, borough_search_link(@building.neighbohoods), class: 'hyper-link' if @building.neighbohoods.present?%>
+    </div>
+  <%end%>
+  
+  <%= "<span> #{@building.no_of_units} Units | </span>".html_safe if @building.no_of_units.present? and @building.no_of_units > 0 %>
+  <%= "<span> #{@building.floors} Floors | </span>".html_safe if @building.floors.present? %>
+  <%= "<span> Built in #{@building.built_in} </span>".html_safe if @building.built_in.present? %>
+
+  <div style="margin-left: -3px;">
+    <ul class="rating star-sm">
+      <%= rating_for @building, 'building', disable_after_rate: true, readonly: true %>
+    </ul>
+
+    <% if @building.votes.present? %>
+      <div class="favLink">
+        <%= recommended_percent(@building).html_safe %>
+      </div>
+    <%end%>
+
+    <% if @building.reviews.present? and @management_company.present? %>
+      <div class="favLink"><span class="icon-pipe"></span>
+        | Reviews: <%= @building.reviews.count %>
+      </div>
+    <%end%>
+  </div>
+  
+  <div class="clearfix"></div>
+  
+  <% if @building.management_company.present? and @management_company.blank? %>
+    <div class="stats1 property_information">
+      Managed By <%= link_to @building.management_company.name, management_company_path(@building.management_company), class: 'hyper-link'%>
+    </div>
+  <%end%>
+  
+  <div class="clearfix"></div><div class="clearfix"></div>
+  <div class="stats1 property_information">
+    <%= link_to 'Available Apartment Listings'.html_safe, @building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' if @building.web_url.present? %>
+  </div>
+</div>
