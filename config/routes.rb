@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       get :managed_buildings
     end
   end
+
+  get 'load_more_reviews', to: 'management_companies#load_more_reviews', as: :load_more_reviews
   
   resources :neighborhood_links
   resources :review_flags
