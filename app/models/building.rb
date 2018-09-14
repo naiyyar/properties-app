@@ -520,15 +520,20 @@ class Building < ActiveRecord::Base
   #saving neighbohoods
   def neighborhoods
     search = Geocoder.search([latitude, longitude])
-    neighborhood1 = neighborhood2 = neighborhood3 = ''
-    if search.present?
+    if search.present? and first_neighborhood.blank?
+      neighborhood1 = neighborhood2 = neighborhood3 = ''
       #search for child neighborhoods
       search[0..4].each_with_index do |geo_result, index|
         #finding neighborhood
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
           neighborhood = neighborhood.first['long_name']
-          locality = search[0].address_components_of_type(:sublocality).first['long_name']
+          sublocality = search[0].address_components_of_type(:sublocality)
+          if sublocality.present?
+            locality = sublocality.first['long_name']
+          else
+            locality = search[0].address_components_of_type(:locality).first['long_name']
+          end
           #checking main neighborhood
           if ['Queens','Brooklyn','Bronx'].include?(locality) and self.city == neighborhood
             neighborhood1 = neighborhood
@@ -547,9 +552,11 @@ class Building < ActiveRecord::Base
           end
           #end if
         end
-
       end #end search loop
-      
+    else
+      neighborhood1 = self.neighborhood
+      neighborhood2 = self.neighborhoods_parent
+      neighborhood3 = self.neighborhood3
     end #end search if
 
     return neighborhood1, neighborhood2, neighborhood3
@@ -579,6 +586,13 @@ class Building < ActiveRecord::Base
         hood.save
       end
     end
+    
+    #Rails.application.load_tasks
+    #This first resets the task's already_invoked state, allowing the task to then be executed again, dependencies
+    Rake::Task['sitemap:generate'].reenable
+
+    #This one executes the dependencies, but it only executes the task if it has not already been invoked:
+    Rake::Task['sitemap:generate'].invoke
   end
 
 end

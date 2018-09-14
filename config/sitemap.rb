@@ -1,13 +1,17 @@
 # Change this to your host. See the readme at https://github.com/lassebunk/dynamic_sitemaps
 # for examples of multiple hosts and folders.
 
-host "https://www.transparentcity.co"
+host "www.transparentcity.co"
 
 sitemap :site do
   url root_url, last_mod: Time.now, change_freq: 'daily', priority: 1.0
   url buildings_url, last_mod: Time.now, change_freq: 'weekly', priority: 1.0
   Building.all.each do |building|
     url building, last_mod: building.updated_at, priority: 1.0
+    if building.first_neighborhood.present?
+      url search_url(:searched_by => 'neighborhoods', search_term: "#{building.first_neighborhood.downcase.gsub(' ', '-')}")
+    end
+    url search_url(:searched_by => 'zipcode', search_term: building.zipcode), last_mod: Time.now
   end
   
   url units_url, last_mod: Time.now, change_freq: 'weekly', priority: 1.0
@@ -15,8 +19,9 @@ sitemap :site do
     url unit, last_mod: unit.updated_at, priority: 1.0
   end
 
-  url '/buildings/contribute', last_mod: Time.now, change_freq: 'weekly', priority: 1.0
-  url '/contacts/new', last_mod: Time.now, change_freq: 'weekly', priority: 1.0
+  url "#{host}/buildings/contribute", last_mod: Time.now, change_freq: 'weekly', priority: 1.0
+  url "#{host}/contacts/new", last_mod: Time.now, change_freq: 'weekly', priority: 1.0
+  url "#{host}/about", last_mod: Time.now, change_freq: 'weekly', priority: 1.0
   #url '/search', last_mod: Time.now, change_freq: "weekly", priority: 1.0
 end
 
@@ -51,4 +56,4 @@ end
 
 # Ping search engines after sitemap generation:
 #
-  ping_with "http://#{host}/sitemap.xml"
+  ping_with "https://#{host}/sitemap.xml"

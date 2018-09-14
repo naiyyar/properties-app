@@ -17,7 +17,7 @@ class HomeController < ApplicationController
                                   building: building,
                                   image: Upload.marker_image(building),
                                   rating_cache: building.rating_cache,
-                                  recomended_per: building.recommended_percent
+                                  recomended_per: Vote.recommended_percent(building)
                                 }) 
                   }
   end
