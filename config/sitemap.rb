@@ -56,4 +56,4 @@ end
 
 # Ping search engines after sitemap generation:
 #
-  ping_with "https://#{host}/sitemap.xml"
+  #ping_with "https://#{host}/sitemap.xml"
