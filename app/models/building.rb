@@ -589,10 +589,11 @@ class Building < ActiveRecord::Base
     
     #Rails.application.load_tasks
     #This first resets the task's already_invoked state, allowing the task to then be executed again, dependencies
-    Rake::Task['sitemap:generate'].reenable
+    #Rake::Task['sitemap:generate'].reenable
 
     #This one executes the dependencies, but it only executes the task if it has not already been invoked:
-    Rake::Task['sitemap:generate'].invoke
+    #Rake::Task['sitemap:generate'].invoke
+    DynamicSitemaps.generate_sitemap
   end
 
 end
