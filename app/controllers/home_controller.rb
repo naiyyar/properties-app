@@ -119,15 +119,17 @@ class HomeController < ApplicationController
     end
     
     if params[:filter].present?
-      @rating = params[:filter][:rating]
-      @building_types = params[:filter][:type]
-      #@beds = params[:filter][:bedrooms]
-      @amenities = params[:filter][:amenities]
+      rating = params[:filter][:rating]
+      building_types = params[:filter][:type]
+      price = params[:filter][:price]
+      beds = params[:filter][:bedrooms]
+      amenities = params[:filter][:amenities]
     
-      @buildings = Building.filter_by_amenities(@buildings, @amenities) if @amenities.present?
-      @buildings = Building.filter_by_rates(@buildings, @rating) if @rating.present?
-      #@buildings = Building.filter_by_beds(@buildings, @beds) #Put on hold for now
-      @buildings = Building.filter_by_types(@buildings, @building_types)
+      @buildings = Building.filter_by_amenities(@buildings, amenities) if amenities.present?
+      @buildings = Building.filter_by_rates(@buildings, rating) if rating.present?
+      @buildings = Building.filter_by_prices(@buildings, price) if price.present?
+      @buildings = Building.filter_by_beds(@buildings, beds) if beds.present?
+      @buildings = Building.filter_by_types(@buildings, building_types)
     end
     @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if params[:sort_by].present?
     #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array

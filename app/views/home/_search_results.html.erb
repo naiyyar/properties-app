@@ -19,11 +19,9 @@
       </div>
 
       <%= link_to building_path(building) do %>
-        <%#= cache("#{building.id}_#{@buildings.count}") do %>
-          <div id="building_details<%=building.id%>" class="building-detail-card">
-           
-          </div>
-        <%#end%>
+        <div id="building_details<%=building.id%>" class="building-detail-card">
+         
+        </div>
         
         <% if @management_company.present? and params[:controller] == 'management_companies' %>
           <div style="padding: 0px 0px 0px 11px;height: 23px;">
@@ -31,6 +29,12 @@
             <%= link_to building.neighborhood_name, borough_search_link(building.neighbohoods), class: 'hyper-link' if building.neighbohoods.present?%>
           </div>
         <%end%>
+        
+        <%# if building.price.present? or building.bedroom_types?%>
+          <div style="padding: 0px 0px 0px 11px;height: 23px;"">
+            <%= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building } %>
+          </div>
+        <%#end%>
 
         <ul class="cardRating">
           <div class="pull-left star-sm" style="margin-right: 10px;">

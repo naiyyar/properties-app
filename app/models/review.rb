@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id               :integer          not null, primary key
+#  review_title     :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  building_id      :integer
+#  user_id          :integer
+#  reviewable_id    :integer
+#  reviewable_type  :string
+#  building_address :string
+#  tenant_status    :string
+#  resident_to      :string
+#  pros             :string
+#  cons             :string
+#  other_advice     :string
+#  anonymous        :boolean          default(FALSE)
+#  tos_agreement    :boolean          default(FALSE)
+#  resident_from    :string
+#  scraped          :boolean          default(FALSE)
+#
+
 class Review < ActiveRecord::Base
 	resourcify
   belongs_to :reviewable, polymorphic: true

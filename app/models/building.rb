@@ -1,3 +1,59 @@
+# == Schema Information
+#
+# Table name: buildings
+#
+#  id                      :integer          not null, primary key
+#  building_name           :string
+#  building_street_address :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  photo_file_name         :string
+#  photo_content_type      :string
+#  photo_file_size         :integer
+#  photo_updated_at        :datetime
+#  latitude                :float
+#  longitude               :float
+#  address2                :string
+#  zipcode                 :string
+#  webaddress              :string
+#  city                    :string
+#  phone                   :string
+#  state                   :string
+#  laundry_facility        :boolean
+#  parking                 :boolean
+#  doorman                 :boolean
+#  description             :text
+#  elevator                :integer
+#  garage                  :boolean          default(FALSE)
+#  gym                     :boolean          default(FALSE)
+#  live_in_super           :boolean          default(FALSE)
+#  pets_allowed_cats       :boolean          default(FALSE)
+#  pets_allowed_dogs       :boolean          default(FALSE)
+#  roof_deck               :boolean          default(FALSE)
+#  swimming_pool           :boolean          default(FALSE)
+#  walk_up                 :boolean          default(FALSE)
+#  neighborhood            :string
+#  neighborhoods_parent    :string
+#  user_id                 :integer
+#  floors                  :integer
+#  built_in                :integer
+#  number_of_units         :integer
+#  courtyard               :boolean          default(FALSE)
+#  management_company_run  :boolean          default(FALSE)
+#  neighborhood3           :string
+#  web_url                 :string
+#  building_type           :string
+#  childrens_playroom      :boolean          default(FALSE)
+#  no_fee                  :boolean          default(FALSE)
+#  reviews_count           :integer
+#  management_company_id   :integer
+#  studio                  :integer
+#  one_bed                 :integer
+#  two_bed                 :integer
+#  three_bed               :integer
+#  four_plus_bed           :integer
+#  price                   :integer
+
 class Building < ActiveRecord::Base
 
   include PgSearch
@@ -110,6 +166,13 @@ class Building < ActiveRecord::Base
   scope :childrens_playroom, -> { where(childrens_playroom: true) }
   scope :no_fee, -> { where(no_fee: true) }
 
+  #bedrooms types
+  scope :studio, -> { where(studio: 0) }
+  scope :one_bed, -> { where(one_bed: 1) }
+  scope :two_bed, -> { where(two_bed: 2) }
+  scope :three_bed, -> { where(three: 3) }
+  scope :four_bed, -> { where(four_plus_bed: 4) }
+
   #Methods
 
   def self.options_for_sorted_by
@@ -152,17 +215,21 @@ class Building < ActiveRecord::Base
     # 3 => Reviews (high to low)
     # 4 => A to Z
     # 5 => Z to A
-    case sort_params
-    when '1'
-      buildings = sort_by_rating(buildings, '1')
-    when '2'
-      buildings = sort_by_rating(buildings, '2')
-    when '3'
-      buildings = buildings.reorder('reviews_count DESC')
-    when '4'
-      buildings = buildings.reorder('building_name ASC, building_street_address ASC')
-    when '5'
-      buildings = buildings.reorder('building_name DESC, building_street_address DESC')
+    if buildings.present?
+      case sort_params
+      when '1'
+        buildings = sort_by_rating(buildings, '1')
+      when '2'
+        buildings = sort_by_rating(buildings, '2')
+      when '3'
+        buildings = buildings.reorder('reviews_count DESC')
+      when '4'
+        buildings = buildings.reorder('building_name ASC, building_street_address ASC')
+      when '5'
+        buildings = buildings.reorder('building_name DESC, building_street_address DESC')
+      else
+        buildings = buildings
+      end
     else
       buildings = buildings
     end
@@ -205,17 +272,26 @@ class Building < ActiveRecord::Base
     end
   end
 
-  # On Hold Right now
-  def self.filter_by_beds buildings, beds
-    # joins('LEFT JOIN events_tags ON (events.id = events_tags.event_id) LEFT JOIN tags ON (tags.id = events_tags.tag_id)')
-    #   .where('tags.label' => tags).group('events.id').having("count(events.id) = #{tags.count}")
-    if beds.present?
-      units = Unit.where(number_of_bedrooms: beds)
-      @buildings = buildings.where('id in (?)', units.map(&:building_id))
+  def self.filter_by_prices buildings, price
+    if price.present?
+      @buildings = buildings.where(price: price)
     else
       @buildings = buildings
     end
     @buildings
+  end
+
+  def self.filter_by_beds buildings, beds
+    @beds = beds
+    @buildings = @buildings.studio if bed_type?('0')
+    @buildings = @buildings.one_bed if bed_type?('1')
+    @buildings = @buildings.two_bed if bed_type?('2')
+    @buildings = @buildings.three_bed if bed_type?('3')
+    @buildings = @buildings.four_bed if bed_type?('4')
+  end
+
+  def self.bed_type? val
+    @beds.include?(val)
   end
 
   def self.filter_by_types buildings, type
@@ -486,6 +562,27 @@ class Building < ActiveRecord::Base
     Neighborhood.where('name = ? OR name = ? OR name = ?', self.neighborhood, self.neighborhoods_parent, self.neighborhood3)
   end
 
+  def prices
+    case price
+    when 1
+      '$'
+    when 2
+      '$$'
+    when 3
+      '$$$'
+    else
+      '$$$$'
+    end
+  end
+
+  def bedroom_types?
+    studio.present? || 
+    one_bed.present? || 
+    two_bed.present? || 
+    three_bed.present? || 
+    four_plus_bed.present?
+  end
+
   private
 
   #child neighbohoods
@@ -523,7 +620,7 @@ class Building < ActiveRecord::Base
     if search.present? and first_neighborhood.blank?
       neighborhood1 = neighborhood2 = neighborhood3 = ''
       #search for child neighborhoods
-      search[0..4].each_with_index do |geo_result, index|
+      search[0..5].each_with_index do |geo_result, index|
         #finding neighborhood
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?
@@ -549,6 +646,8 @@ class Building < ActiveRecord::Base
             neighborhood3 = neighborhood
             #neighborhood1 = neighborhood if neighborhood1.blank?
             neighborhood2 = neighborhood if neighborhood2.blank? and neighborhood1.blank?
+          else
+            neighborhood1 = neighborhood if neighborhood1.blank?
           end
           #end if
         end

@@ -151,19 +151,20 @@ class BuildingsController < ApplicationController
         @building = Building.create(building_params)
 
         if @building.save
-          flash[:notice] = "Building Created."
+          
           if params[:unit_contribution]
             contribute = params[:unit_contribution]
             unit_id = @building.units.last.id
           else
             contribute = params[:contribution]
-            building_id = @building.id
+            #building_id = @building.id
           end
+          flash[:notice] = "Building Created."
           if contribute.present?
             if ['unit_review', 'unit_photos', 'unit_amenities', 'unit_price_history'].include? contribute
               redirect_to contribute_buildings_path(contribution_for: contribute, building_id: @building.id, contribution: contribute)  
             else
-              redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute, contribution: contribute)
+              redirect_to user_steps_path(building_id: @building.id, unit_id: unit_id, contribution_for: contribute, contribution: contribute)
             end
           else
             redirect_to building_steps_path(building_id: @building.id)
@@ -192,7 +193,7 @@ class BuildingsController < ApplicationController
         if params[:page].present?
           redirect_to unit_path(@unit)
         else
-          redirect_to user_steps_path(building_id: building_id, unit_id: unit_id, contribution_for: contribute)
+          redirect_to user_steps_path(building_id: @building.id, unit_id: unit_id, contribution_for: contribute)
         end
       end
     end

@@ -158,6 +158,7 @@ group :development do
   gem "letter_opener"
   gem 'rack-mini-profiler', require: false
   gem 'bullet'
+  gem 'annotate'
 end
 
 group :production do

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: gcoordinates
+#
+#  id           :integer          not null, primary key
+#  latitude     :float
+#  longitude    :float
+#  zipcode      :string
+#  state        :string
+#  city         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  neighborhood :string
+#
+
 class Gcoordinate < ActiveRecord::Base
 
 	def self.neighbohood_boundary_coordinates neighborhoods

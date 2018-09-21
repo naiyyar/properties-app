@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: management_companies
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  website    :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 =begin 
 	======Schema =======
 	name 			string
@@ -13,7 +24,7 @@ class ManagementCompany < ActiveRecord::Base
   pg_search_scope :text_search_by_management_company, against: [:name],
      :using => { :tsearch => { prefix: true } }
 
-	
+	after_save :update_sitemap
 	#methods
 
 	def to_param
@@ -66,6 +77,12 @@ class ManagementCompany < ActiveRecord::Base
 
     star_counts = (@total_rates.to_f/aggregate_reviews).round(2).to_s.split('.')
     return star_counts
+  end
+
+  private
+
+  def update_sitemap
+  	DynamicSitemaps.generate_sitemap
   end
 
 end

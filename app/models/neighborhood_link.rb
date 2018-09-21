@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: neighborhood_links
+#
+#  id                  :integer          not null, primary key
+#  neighborhood        :string
+#  date                :date
+#  title               :string
+#  web_url             :text
+#  source              :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  image_file_name     :string
+#  image_content_type  :string
+#  image_file_size     :integer
+#  image_updated_at    :datetime
+#  parent_neighborhood :string
+#
+
 class NeighborhoodLink < ActiveRecord::Base
 
 	has_attached_file :image, 

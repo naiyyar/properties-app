@@ -194,6 +194,10 @@ module HomeHelper
 		params[:filter][:bedrooms].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:bedrooms].present?
 	end
 
+	def price_checked val
+		params[:filter][:price].include?(val.to_s) ? 'checked' : '' if params[:filter].present? and params[:filter][:price].present?
+	end
+
 	def amen_checked val
 		params[:filter][:amenities].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:amenities].present?
 	end

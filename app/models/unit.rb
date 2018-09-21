@@ -1,3 +1,46 @@
+# == Schema Information
+#
+# Table name: units
+#
+#  id                      :integer          not null, primary key
+#  building_id             :integer
+#  name                    :string
+#  pros                    :text
+#  cons                    :text
+#  number_of_bedrooms      :integer
+#  number_of_bathrooms     :decimal(, )      default(0.0)
+#  monthly_rent            :decimal(, )      default(0.0)
+#  square_feet             :decimal(, )      default(0.0)
+#  total_upfront_cost      :decimal(, )      default(0.0)
+#  rent_start_date         :date
+#  rent_end_date           :date
+#  security_deposit        :decimal(, )      default(0.0)
+#  broker_fee              :decimal(, )      default(0.0)
+#  move_in_fee             :decimal(, )      default(0.0)
+#  rent_upfront_cost       :decimal(, )      default(0.0)
+#  processing_fee          :decimal(, )      default(0.0)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  balcony                 :boolean          default(FALSE)
+#  board_approval_required :boolean          default(FALSE)
+#  converted_unit          :boolean          default(FALSE)
+#  courtyard               :boolean          default(FALSE)
+#  dishwasher              :boolean          default(FALSE)
+#  fireplace               :boolean          default(FALSE)
+#  furnished               :boolean          default(FALSE)
+#  guarantors_accepted     :boolean          default(FALSE)
+#  loft                    :boolean          default(FALSE)
+#  management_company_run  :boolean          default(FALSE)
+#  rent_controlled         :boolean          default(FALSE)
+#  private_landlord        :boolean          default(FALSE)
+#  storage_available       :boolean          default(FALSE)
+#  sublet                  :boolean          default(FALSE)
+#  terrace                 :boolean          default(FALSE)
+#  can_be_converted        :boolean          default(FALSE)
+#  dryer_in_unit           :boolean          default(FALSE)
+#  user_id                 :integer
+#
+
 class Unit < ActiveRecord::Base
 	acts_as_voteable
 	ratyrate_rateable 'unit','cleanliness','noise','safe','health','responsiveness','management'

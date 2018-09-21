@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: votes
+#
+#  id            :integer          not null, primary key
+#  vote          :boolean          default(FALSE), not null
+#  voteable_id   :integer          not null
+#  voteable_type :string           not null
+#  voter_id      :integer
+#  voter_type    :string
+#  created_at    :datetime
+#  updated_at    :datetime
+#  review_id     :integer
+#
+
 class Vote < ActiveRecord::Base
 
   scope :for_voter, lambda { |*args| where(["voter_id = ? AND voter_type = ?", args.first.id, args.first.class.base_class.name]) }

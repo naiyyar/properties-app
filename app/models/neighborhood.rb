@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: neighborhoods
+#
+#  id              :integer          not null, primary key
+#  name            :string
+#  boroughs        :string
+#  buildings_count :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class Neighborhood < ActiveRecord::Base
 
 	def nb_name_with_counts

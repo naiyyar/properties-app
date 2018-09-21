@@ -8,6 +8,10 @@
       <div class="propAddress"><%= building.street_address %> <%= building.zipcode %></div>
     </div>
 	<%end%>
+
+	<div style="">
+    <%= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building } %>
+  </div>
   
   <div class="propRating">
   	<% if rating_cache.present? %>

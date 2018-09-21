@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: uploads
+#
+#  id                    :integer          not null, primary key
+#  image_file_name       :string
+#  image_content_type    :string
+#  image_file_size       :integer
+#  image_updated_at      :datetime
+#  imageable_id          :integer
+#  imageable_type        :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  user_id               :integer
+#  sort                  :integer
+#  rotation              :integer          default(0), not null
+#  document_file_name    :string
+#  document_content_type :string
+#  document_file_size    :integer
+#  document_updated_at   :datetime
+#  file_uid              :string
+#
+
 class Upload < ActiveRecord::Base
 	attr_accessor :rotation_degrees, :rotate
 	resourcify

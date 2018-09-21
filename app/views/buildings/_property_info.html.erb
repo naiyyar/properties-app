@@ -7,10 +7,12 @@
       <%= link_to @building.neighbohoods, borough_search_link(@building.neighbohoods), class: 'hyper-link' if @building.neighbohoods.present?%>
     </div>
   <%end%>
-  
-  <%= "<span> #{@building.no_of_units} Units | </span>".html_safe if @building.no_of_units.present? and @building.no_of_units > 0 %>
-  <%= "<span> #{@building.floors} Floors | </span>".html_safe if @building.floors.present? %>
-  <%= "<span> Built in #{@building.built_in} </span>".html_safe if @building.built_in.present? %>
+
+  <% if @building.price.present? or @building.bedroom_types?%>
+    <div>
+      <%= render partial: 'buildings/bedroom_types_and_prices', locals: { building: @building } %>
+    </div>
+  <%end%>
 
   <div style="margin-left: -3px;">
     <ul class="rating star-sm">
@@ -28,6 +30,12 @@
         | Reviews: <%= @building.reviews.count %>
       </div>
     <%end%>
+  </div>
+  <div class="clearfix"></div>
+  <div>
+    <%= "<span> #{@building.no_of_units} Units | </span>".html_safe if @building.no_of_units.present? and @building.no_of_units > 0 %>
+    <%= "<span> #{@building.floors} Floors | </span>".html_safe if @building.floors.present? %>
+    <%= "<span> Built in #{@building.built_in} </span>".html_safe if @building.built_in.present? %>
   </div>
   
   <div class="clearfix"></div>
