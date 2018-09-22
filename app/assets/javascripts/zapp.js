@@ -39,10 +39,10 @@
     //     enableEventPropagation: false
     // });
 
-    //diabling right click on buidlign edit form
-    $(".edit_building").on("contextmenu",function(e){
-        return false;
-    });
+    //diabling right click on building edit form
+    // $(".edit_building").on("contextmenu",function(e){
+    //     return false;
+    // });
 
     // function that adds the markers on map
     var addMarkers = function(props, map) {

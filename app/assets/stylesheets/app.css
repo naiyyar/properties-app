@@ -4944,15 +4944,16 @@ body.black {
     padding-top: 40px;
 }
 .home-about-nyc-apt h2{
-    font-size: 16px;
+    font-size: 15px;
     padding: 0px 4px;
     line-height: 21px;
     margin-bottom: 1px;
+    font-family: sans-serif;
 }
 .home-about-nyc-apt h1{
-    font-size: 32px;
+    font-size: 28px;
     margin: 0px 0px;
-    font-family: serif;
+    font-family: sans-serif;
 }
 .home-caption {
     position: absolute;
@@ -5119,7 +5120,8 @@ a.home-navHandler.active {
     padding: 0 18%;
 }
 .h-text p{
-    font-family: 'Source Sans Pro', sans-serif;
+    /*font-family: 'Source Sans Pro', sans-serif;*/
+    font-family: sans-serif;
     font-size: 20px;
 }
 .h-text a{

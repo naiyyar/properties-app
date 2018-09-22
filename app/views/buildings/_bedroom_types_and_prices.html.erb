@@ -1,6 +1,10 @@
 <%= "<span> #{building.prices} | </span>".html_safe if building.price.present? %>
-<%= "<span> S </span>".html_safe if building.studio.present? %> <%= ',' if building.one_bed.present? %>
+<% if building.studio.present? %>
+	<%= "<span> Studio </span>".html_safe %> 
+	<%= ',' if building.one_bed.present? %>
+<%end%>
 <%= "<span> 1 </span>".html_safe if building.one_bed.present? %> <%= ',' if building.two_bed.present? %>
 <%= "<span> 2 </span>".html_safe if building.two_bed.present? %> <%= ',' if building.three_bed.present? %>
 <%= "<span> 3 </span>".html_safe if building.three_bed.present? %> <%= ',' if building.four_plus_bed.present? %>
 <%= "<span> 4+ </span>".html_safe if building.four_plus_bed.present? %>
+<%= 'Bed' if building.bedroom_types? %>

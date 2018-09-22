@@ -170,7 +170,7 @@ class Building < ActiveRecord::Base
   scope :studio, -> { where(studio: 0) }
   scope :one_bed, -> { where(one_bed: 1) }
   scope :two_bed, -> { where(two_bed: 2) }
-  scope :three_bed, -> { where(three: 3) }
+  scope :three_bed, -> { where(three_bed: 3) }
   scope :four_bed, -> { where(four_plus_bed: 4) }
 
   #Methods
@@ -283,11 +283,15 @@ class Building < ActiveRecord::Base
 
   def self.filter_by_beds buildings, beds
     @beds = beds
-    @buildings = @buildings.studio if bed_type?('0')
-    @buildings = @buildings.one_bed if bed_type?('1')
-    @buildings = @buildings.two_bed if bed_type?('2')
-    @buildings = @buildings.three_bed if bed_type?('3')
-    @buildings = @buildings.four_bed if bed_type?('4')
+    if buildings.present?
+      @buildings = buildings
+      @buildings = @buildings.studio if bed_type?('0')
+      @buildings = @buildings.one_bed if bed_type?('1')
+      @buildings = @buildings.two_bed if bed_type?('2')
+      @buildings = @buildings.three_bed if bed_type?('3')
+      @buildings = @buildings.four_bed if bed_type?('4')
+    end
+    @buildings
   end
 
   def self.bed_type? val
