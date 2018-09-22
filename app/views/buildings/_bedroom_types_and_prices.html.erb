@@ -1,14 +1,14 @@
 <%= "<span> #{building.prices} | </span>".html_safe if building.price.present? %>
 <% if building.studio.present? %>
-	<%= "<span> Studio </span>".html_safe %><%= ',' if building.one_bed.present? %>
+	<%= "<span>Studio</span>".html_safe %><%= ',' if building.either_of_four? %>
 <%end%>
 
 <% if building.one_bed.present? %>
-	<%= "<span>1</span>".html_safe %><%= ',' if building.two_bed.present? %>
+	<%= "<span>1</span>".html_safe %><%= ',' if building.either_of_three? %>
 <%end%>
 
 <% if building.two_bed.present? %>
-	<%= "<span>2</span>".html_safe %><%= ',' if building.three_bed.present? %>
+	<%= "<span>2</span>".html_safe %><%= ',' if building.either_of_two? %>
 <%end%>
 
 <% if building.three_bed.present? %>

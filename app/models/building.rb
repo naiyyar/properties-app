@@ -587,6 +587,18 @@ class Building < ActiveRecord::Base
     four_plus_bed.present?
   end
 
+  def either_of_two?
+    three_bed.present? || four_plus_bed.present?
+  end
+
+  def either_of_three?
+    either_of_two? || two_bed.present?
+  end
+
+  def either_of_four?
+    either_of_three? || one_bed.present?
+  end
+
   def unit_information?
     (no_of_units.present? and self.no_of_units > 0) || floors.present? || built_in.present?
   end
