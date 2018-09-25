@@ -160,7 +160,7 @@ var manhattan_neightborhoods_hash = [
 
 //Methods
 
-function brooklyn_and_queens_neighborhoods(term){
+function brooklyn_and_queens_neighborhoods(term, map){
 	url = '';
   if(term != null){
 		$.each(manhattan_neightborhoods_hash, function(index, value ) {
@@ -186,12 +186,14 @@ function brooklyn_and_queens_neighborhoods(term){
 			});
 		}
 	}	
-	add_kml(url)
+	add_kml(url, map)
 
 }
 
-function add_kml(url){
-	var kmls = handler.addKml(
-			{ url: url }
-		);
+function add_kml(url, map){
+	// var kmls = handler.addKml(
+	// 		{ url: url }
+	// 	);
+	myLayer = new google.maps.KmlLayer(url,{suppressInfoWindows: true, map: map}); 
+	myLayer.setMap(map);
 }

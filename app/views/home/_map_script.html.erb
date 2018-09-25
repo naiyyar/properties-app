@@ -225,7 +225,7 @@
 		  fillColor: '#0e5c9a', 
 		  fillOpacity: 0.15, 
 		  clickable:false 
-		}); 
+		});
 
     setTimeout(function() {
       $('body').removeClass('notransition');
@@ -234,15 +234,9 @@
       map.setCenter(new google.maps.LatLng(lat,lng));
       map.setZoom(zoom);
       polylines.setMap(map);
-
-   //    //{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }#1a69a9
-			// polygons = map.addPolygons( <%= raw @boundary_coords.to_json %> ,
-		 //    	//{ strokeColor: '#0e5c9a', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
-		 //    	{ strokeColor: '#1664a4', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
-			// );
 			
 			// Setting up boundaries using kml file
-			//	brooklyn_and_queens_neighborhoods(seach_term) //In search.js
+			brooklyn_and_queens_neighborhoods(seach_term, map) //In search.js
 
       addMarkers(props, map);
   }, 300);
