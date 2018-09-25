@@ -1,54 +1,66 @@
+// function bindMarker(marker, markers, handler, lat, lng, zoom){
+//   $(window).on('load', function(){
+//     marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
+//     marker.setMap(handler.getMap());
+//     marker.panTo();
+//     google.maps.event.trigger(marker.getServiceObject(), 'load');
+//     handler.bounds.extendWith(markers);
+//     handler.fitMapToBounds();
+//     handler.getMap().setZoom(zoom);
+//     //handler.map.centerOn(markers[0]);
+//   })
+// };
+
+// function createSidebar(json_array){
+//   _.each(json_array, function(json){
+//     append_html(json)
+//   });
+// };
+
+// function append_html(json){
+//   var elem = $( createSidebarElem(json) );
+//   var id = json.marker_title.split(',')[0];
+//   elem.appendTo('#building_details'+id);
+//   bindMarketToElem(json, elem);
+// }
+
+
+//Binding markers
+
 function createSidebarElem(json){
-  title = json.marker_title.split(',');
-  building_name = title[1];
-  address = title[2];
-  city = title[3];
-  state = title[4];
-  zipcode = title[5];
+  building_name = ''
+  console.log(json.building_name)
+  if(json.building_name == undefined || json.building_name == ''){
+    building_name = json.building_street_address  
+  }else{
+    building_name = json.building_name
+  }
+
+  address = json.building_street_address;
+  city = json.city;
+  state = json.state;
+  zipcode = json.zipcode;
 
   if(building_name == ' '){
     building_name = address
   }
   return ("<h2>" + building_name + "</h2>" +
-  					"<div class='cardAddress'><span class='icon-location-pin'></span>"+ address+','+city+','+state+' '+zipcode +"</div>"
+            "<div class='cardAddress'><span class='icon-location-pin'></span>"+ address+','+city+','+state+' '+zipcode +"</div>"
           );
 };
 
 function bindElemToMarker(elem, marker){
+  window.data = marker
   var card = elem.parent().parent().parent();
   card.on('mouseover', function(){
-    marker.serviceObject.setIcon("<%= asset_path 'green-dot.png' %>");
+    marker.setIcon("<%= asset_path 'green-dot.png' %>");
   }).on('mouseout', function(){
-    marker.serviceObject.setIcon("<%= asset_path 'red-dot.png' %>");
+    marker.setIcon("<%= asset_path 'red-dot.png' %>");
   });
 };
 
-function bindMarker(marker, markers, handler, lat, lng, zoom){
-  $(window).on('load', function(){
-    marker.serviceObject.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
-    marker.setMap(handler.getMap());
-    marker.panTo();
-    google.maps.event.trigger(marker.getServiceObject(), 'load');
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    handler.getMap().setZoom(zoom);
-    //handler.map.centerOn(markers[0]);
-  })
+function createSidebar(object, marker){
+  var elem = $( createSidebarElem(object) );
+  elem.appendTo('#building_details'+object.id);
+  bindElemToMarker(elem, marker);
 };
-
-function createSidebar(json_array){
-  _.each(json_array, function(json){
-    append_html(json)
-  });
-};
-
-function append_html(json){
-  var elem = $( createSidebarElem(json) );
-  var id = json.marker_title.split(',')[0];
-  elem.appendTo('#building_details'+id);
-  bindMarketToElem(json, elem);
-}
-
-function bindMarketToElem(json, elem){
-  bindElemToMarker(elem, json.marker);
-}

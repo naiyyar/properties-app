@@ -35,7 +35,9 @@
 		  		<%end%>
 		  		<% if building.votes.present? %>
 		  			<li style="font-size: 11px;"><span class="icon-pipe"></span>
-	        	<%= recomended_per.nan? ? '| --% Recommended' :  "| #{recomended_per.to_i}% Recommended" %></li>
+	        	<%#= recomended_per.nan? ? '| --% Recommended' :  "| #{recomended_per.to_i}% Recommended" %>
+	        		<%= recommended_percent(building).html_safe %> 
+	        	</li>
 	        <%end%>
 		  	</ul>
 		  <%end%>

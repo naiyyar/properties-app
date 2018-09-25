@@ -1939,8 +1939,11 @@ a.userHandler .counter {
 .propImg img {
     width: 230px;
     height: auto;
-    /*border-top-left-radius: 3px;*/
-    /*border-top-right-radius: 3px;*/
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.infoW-property-info{
+    cursor: pointer;
 }
 .propBg {
     position: absolute;
@@ -1971,7 +1974,7 @@ a.userHandler .counter {
     z-index: 3;
 }
 .paWrapper {
-    padding: 10px 10px 0 1px;
+    padding: 8px 6px 0 6px;
 }
 .propPrice {
     position: absolute;
@@ -1997,7 +2000,7 @@ a.userHandler .counter {
     line-height: 11px;
 }
 .propRating {
-    padding: 2px 0 5px 1px;
+    padding: 1px 0 5px 6px;
 }
 .propRating span {
     color: #eab134;
@@ -2008,11 +2011,11 @@ a.userHandler .counter {
 ul.propFeat {
     list-style-type: none;
     margin: 0;
-    padding: 0 10px 0 10px;
+    padding: 0 10px 0 6px;
 }
 ul.propFeat li {
     float: left;
-    margin-right: 15px;
+    margin-right: 10px;
     font-size: 11px;
     line-height: 11px;
 }
@@ -2020,10 +2023,13 @@ ul.propFeat li span {
     color: #999;
 }
 .infoButtons {
-    padding: 10px;
+    padding: 3px 6px;
+}
+.bd-types {
+    padding: 1px 6px;
 }
 a.btn.viewInfo, a.btn.closeInfo {
-    width: 85px;
+    width: 100%;
     padding: 6px 12px;
 }
 a.btn.viewInfo {

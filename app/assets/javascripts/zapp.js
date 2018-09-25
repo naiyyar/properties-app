@@ -281,7 +281,7 @@
             $('#mapView, #mapViewSearch').toggleClass('max');
         }
         var create_sidebar = false
-        build_map(create_sidebar, true); //For search split view
+        //build_map(create_sidebar, true); //For search split view
         if(handler != ''){
             resizeMapOnMapIconClick();
         }else{
@@ -664,7 +664,7 @@
     });
     
     if($('#mapViewSearch').length > 0){
-        build_map(true, false);
+        //build_map(true, false);
     }
 
 })(jQuery);

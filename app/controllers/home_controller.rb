@@ -10,9 +10,9 @@ class HomeController < ApplicationController
   end
 
   def load_infobox
-    building = Building.find(params[:object_id]) #includes(:uploads, :building_average, :votes)
+    building = Building.find(params[:object_id] || 93) #includes(:uploads, :building_average, :votes)
 
-    render json: { html: render_to_string(:partial => "/layouts/shared/marker_infowindow", 
+    render json: { html: render_to_string(:partial => "/layouts/shared/custom_infowindow", 
                      :locals => { 
                                   building: building,
                                   image: Upload.marker_image(building),
@@ -136,15 +136,18 @@ class HomeController < ApplicationController
     if @buildings.present?
       @buildings = @buildings unless @buildings.kind_of? Array
       @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
+      #debugger
       #if @buildings.present?
-      @hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
-        marker.lat building.latitude
-        marker.lng building.longitude
-        marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
+      # @hash = Gmaps4rails.build_markers(@buildings) do |building, marker|
+      #   marker.lat building.latitude
+      #   marker.lng building.longitude
+      #   #marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
         
-        marker.infowindow render_to_string(:partial => '/home/placeholder_infowindow')
-      end
+      #   #marker.infowindow render_to_string(:partial => '/home/placeholder_infowindow')
+      # end
       #end
+      @hash = @buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
+
     end
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(search_string, view_context.queens_borough)
   end

@@ -580,11 +580,7 @@ class Building < ActiveRecord::Base
   end
 
   def bedroom_types?
-    studio.present? || 
-    one_bed.present? || 
-    two_bed.present? || 
-    three_bed.present? || 
-    four_plus_bed.present?
+    studio.present? || either_of_four?
   end
 
   def either_of_two?
