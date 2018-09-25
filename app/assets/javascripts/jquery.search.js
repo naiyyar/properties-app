@@ -194,6 +194,6 @@ function add_kml(url, map){
 	// var kmls = handler.addKml(
 	// 		{ url: url }
 	// 	);
-	myLayer = new google.maps.KmlLayer(url,{suppressInfoWindows: true, map: map}); 
-	myLayer.setMap(map);
+	var kml_layer = new google.maps.KmlLayer(url,{suppressInfoWindows: false, map: map}); 
+	kml_layer.setMap(map);
 }

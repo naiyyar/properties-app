@@ -28,18 +28,17 @@
 //Binding markers
 
 function createSidebarElem(json){
-  building_name = ''
-  console.log(json.building_name)
+  var building_name = ''
   if(json.building_name == undefined || json.building_name == ''){
     building_name = json.building_street_address  
   }else{
     building_name = json.building_name
   }
 
-  address = json.building_street_address;
-  city = json.city;
-  state = json.state;
-  zipcode = json.zipcode;
+  var address = json.building_street_address;
+  var city = json.city;
+  var state = json.state;
+  var zipcode = json.zipcode;
 
   if(building_name == ' '){
     building_name = address

@@ -39,13 +39,14 @@ class ManagementCompaniesController < ApplicationController
       @lng = buildings.first.longitude
       @zoom = 11
       @managed_buildings = buildings.includes(:uploads, :units, :building_average, :votes) unless buildings.kind_of? Array
-      @hash = Gmaps4rails.build_markers(managed_buildings) do |building, marker|
-        marker.lat building.latitude
-        marker.lng building.longitude
-        marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
+      # @hash = Gmaps4rails.build_markers(managed_buildings) do |building, marker|
+      #   marker.lat building.latitude
+      #   marker.lng building.longitude
+      #   marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
         
-        marker.infowindow render_to_string(:partial => '/home/placeholder_infowindow')
-      end
+      #   marker.infowindow render_to_string(:partial => '/home/placeholder_infowindow')
+      # end
+      @hash = @managed_buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
     end
   end
 
