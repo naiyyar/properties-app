@@ -23,14 +23,13 @@
         var lng = $("#mapHash").data('lng');
 
         //custom infowindow object
-        //var infobox_bg = "<%=asset_path('infobox-bg.png')%>";
         var infobox = new InfoBox({
             disableAutoPan: false,
             maxWidth: 202,
             pixelOffset: new google.maps.Size(-101, -220),
             zIndex: null,
             boxStyle: {
-                background: '#fff', //"url("+infobox_bg+") no-repeat",
+                background: '#fff',
                 opacity: 1,
                 width: "202px",
                 height: "auto"
