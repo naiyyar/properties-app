@@ -37,6 +37,7 @@
 //= require jquery-fileupload/basic
 //= require lightslider
 //= require jquery.rotateSlider
+//= require gmap
 //= require blog
 //= require filterrific/filterrific-jquery
 //= require load_more

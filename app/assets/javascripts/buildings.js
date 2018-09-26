@@ -75,7 +75,7 @@ app.buildings.prototype = {
     }
     $('#next_to_review_btn').remove();
 
-    new app.units(ui.item.id);
+    //new app.units(ui.item.id);
     
     this._input.val(ui.item.building_street_address + ', ' + ui.item.city + ', ' + ui.item.state + ' ' + ui.item.zipcode);
     
