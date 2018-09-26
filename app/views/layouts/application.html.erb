@@ -61,7 +61,9 @@
     <%= render 'layouts/shared/signup' if current_user.blank? %>
     
     <script type="text/javascript">
-      $('#slider').rotateSlider({});
+      if($('#slider').length > 0){
+        $('#slider').rotateSlider({});
+      }
       
       $(function() {
         new app.apartments;

@@ -36,6 +36,7 @@
 //= require dataTables.bootstrap.min
 //= require jquery-fileupload/basic
 //= require lightslider
+//= require jquery.rotateSlider
 //= require blog
 //= require filterrific/filterrific-jquery
 //= require load_more
