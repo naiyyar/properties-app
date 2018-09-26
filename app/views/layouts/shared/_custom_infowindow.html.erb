@@ -13,46 +13,48 @@
       <div class="propAddress"><%= building.street_address %> <%= building.zipcode %> </div>
     </div>
 
-    <div class="bd-types">
-      <%= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building } %>
-    </div>
+    <% if building_show  == 'false' %>
+      <div class="bd-types">
+        <%= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building } %>
+      </div>
 
-    <div class="propRating">
-      <% if rating_cache.present? %>
-        <% cache_avg = rating_cache.first.avg %>
-        <% decimal_part = number_with_precision(cache_avg.round(2), precision: 2) %>
-        <% decimal_part = decimal_part.split('.')[1].to_f/100%>
-        <% unless cache_avg.nan? %>
-          <% cache_avg = cache_avg + 1 if decimal_part >= 0.76 %>
-          <% half = true %>
-          <% 1.upto(5) do |num| %>
-            <% if num <= cache_avg.to_i %>
-                <span class="fa fa-star"></span>
-            <%elsif decimal_part >= 0.30 and decimal_part <= 0.75 and half %>
-                <span class="fa fa-star-half"></span>
-                <% half = false %>
-            <%else%>
-                <span class="fa fa-star-o" style="color: #ddd;"></span>
+      <div class="propRating">
+        <% if rating_cache.present? %>
+          <% cache_avg = rating_cache.first.avg %>
+          <% decimal_part = number_with_precision(cache_avg.round(2), precision: 2) %>
+          <% decimal_part = decimal_part.split('.')[1].to_f/100%>
+          <% unless cache_avg.nan? %>
+            <% cache_avg = cache_avg + 1 if decimal_part >= 0.76 %>
+            <% half = true %>
+            <% 1.upto(5) do |num| %>
+              <% if num <= cache_avg.to_i %>
+                  <span class="fa fa-star"></span>
+              <%elsif decimal_part >= 0.30 and decimal_part <= 0.75 and half %>
+                  <span class="fa fa-star-half"></span>
+                  <% half = false %>
+              <%else%>
+                  <span class="fa fa-star-o" style="color: #ddd;"></span>
+              <%end%>
             <%end%>
           <%end%>
+        <%else%>
+          <% 1.upto(5) do |num| %>
+            <span class="fa fa-star-o" style="color: #ddd;"></span>
+          <%end%>
         <%end%>
-      <%else%>
-        <% 1.upto(5) do |num| %>
-          <span class="fa fa-star-o" style="color: #ddd;"></span>
-        <%end%>
-      <%end%>
-    </div>
+      </div>
 
-    <ul class="propFeat">
-      <li><%= (recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe) %> </li>
-      <li><%= "| &nbsp; Reviews: #{building.reviews.count}".html_safe %></li>
-    </ul>
+      <ul class="propFeat">
+        <li><%= (recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe) %> </li>
+        <li><%= "| &nbsp; Reviews: #{building.reviews.count}".html_safe %></li>
+      </ul>
+    <%end%>
   </div>
-
-  <div class="clearfix"></div>
   
+  <div class="clearfix"></div>
+    
   <div class="infoButtons">
-    <%= link_to 'Available Apartment Listings'.html_safe, '#', target: '_blank' , class: 'btn btn-block btn-sm btn-primary', style: 'padding: 4px 6px;' %>
+    <%= link_to 'Available Apartment Listings'.html_safe, '#', target: '_blank' , class: 'btn btn-block btn-sm btn-primary', style: 'padding: 4px 6px;' if building_show  == 'false' %>
   </div>
   
 </div>

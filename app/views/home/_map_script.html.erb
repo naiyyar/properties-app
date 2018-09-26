@@ -9,120 +9,30 @@
 	<%else%>
 		var position = google.maps.ControlPosition.TOP_CENTER
 	<%end%>
-	// var markers = '';
- // 	function build_map(sidebar, resize=false){
- 		var lat = <%= raw @lat.to_json %>;
-		var lng = <%= raw @lng.to_json %>;
-		var zoom = <%= @zoom || 13 %>;
-		var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
-		
-	// 	options = {
-	// 		disableDoubleClickZoom: false,
-	// 		zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
-	// 		mapTypeControl: true,
-	// 		mapTypeControlOptions: { 
-	// 															style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-	// 															position: position
-	// 														},
-	// 		gestureHandling: 'greedy',
-	// 		custom_infowindow_class: 'yellow'
-	// 	}
-	//  	handler = Gmaps.build('Google');
-	 	
-	//  	handler.buildMap({ provider: options, internal: { id: 'mapViewSearch' } }, function(){
-		
-	//   	create_marker(json_array)
-	// 		//Plogon options
-	// 		//{ strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 2, fillColor: '#FFFFFF', fillOpacity: 0.15 }#1a69a9
-	// 		polygons = handler.addPolygons( <%= raw @boundary_coords.to_json %> ,
-	// 	    	//{ strokeColor: '#0e5c9a', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
-	// 	    	{ strokeColor: '#1664a4', strokeWeight: 2.5, fillColor: '#0e5c9a', fillOpacity: 0.15  }
-	// 		);
-			
-	// 		// Setting up boundaries using kml file
-	// 		brooklyn_and_queens_neighborhoods(seach_term) //In search.js
-		
-			
-	// 		if(sidebar){
-	// 	  	createSidebar(json_array);
-	// 		}
-	// 	});
-
-	// 	function create_marker(json_array){
-	// 		markers = handler.addMarkers(json_array);
-	// 		_.each(json_array, function(json, index){
-	// 	  	json.marker = markers[index];
-	// 	  	bindMarker(json.marker, markers, handler, lat, lng, zoom );
-	// 	  	google.maps.event.addListener(json.marker.getServiceObject(), 'click', function(){
- //          var infowindow = json.marker.infowindow;
- //          var building_id = json_array[index].marker_title.split(',')[0];
- //          $.post('/load_infobox', {
- //            object_id: building_id
- //          }, function(data){
- //            infowindow.setContent(data.html);
- //            infowindow.open(handler.getMap(), google.maps.markers[index]);
- //          });
-
- //        });
-	// 		});
-	// 	}
 	
-	// 	//Hiding neighborhood search page infowindows
-	  
-	//   $('.search, #header').click(function(){
-	//     closeInfoWindow(handler)
-	//   });
-
-	//   function closeInfoWindow(handler){
-	//     if(handler.currentInfowindow()) {
-	//       handler.currentInfowindow().close();
-	//     }
-	//   }
-	//   google.maps.event.addListener(handler.getMap(), 'click', function(){ closeInfoWindow(handler); });
-	  
-	//   // Resizing map on ajax buiilding load
-	//   if(resize){
-	//   	resizeMapOnMapIconClick();
-	//   }
-	// }
-
-	// function resizeMapOnMapIconClick(){
- //    var gmap = handler.getMap();
- //    setTimeout(function() {
- //        if (gmap) {
- //            google.maps.event.trigger(gmap, 'resize');
- //        }
- //        var lat = parseFloat($('.lat').val());
- //        var lng = parseFloat($('.lng').val());
- //        var zoom = parseInt($('.zoom').val());
- //        gmap.setZoom(zoom);
- //        gmap.setCenter(new google.maps.LatLng(lat, lng));
-
- //    }, 300);
- //  };
-
+	var lat = <%= raw @lat.to_json %>;
+	var lng = <%= raw @lng.to_json %>;
+	var zoom = <%= @zoom || 13 %>;
+	var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
 	var marker_green = "<%=asset_path('marker-green.png')%>";
  
- function initialize() {
-
+  function initialize() {
     // Custom options for map
     var options = {
-            disableDoubleClickZoom: false,
-						zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
-						mapTypeControl: true,
-						mapTypeControlOptions: { 
-																			style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-																			position: position
-																		},
-						gestureHandling: 'greedy',
-        };
+      disableDoubleClickZoom: false,
+			zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+			mapTypeControl: true,
+			mapTypeControlOptions: { 
+																style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+																position: position
+															},
+			gestureHandling: 'greedy',
+    };
 
     var newMarker = null;
     var markers = [];
-
     // json for properties markers on map
     var props = json_array;
-
     // custom infowindow object
     var infobox_bg = "<%=asset_path('infobox-bg.png')%>";
     var infobox = new InfoBox({
@@ -165,7 +75,7 @@
                 return function() {
                 	var building_id = json_array[i].id
 				          $.post('/load_infobox', {
-				            object_id: building_id
+				            object_id: building_id, building_show: false
 				          }, function(data){
 				            infobox.setContent(data.html);
 				            //infowindow.open(handler.getMap(), google.maps.markers[index]);
@@ -175,6 +85,7 @@
                   //infobox.setContent(infoboxContent);
                   //infobox.open(map, marker);
                 }
+                
             })(marker, i));
 
             $(document).on('click', '.closeInfo', function() {
@@ -243,8 +154,8 @@
 			brooklyn_and_queens_neighborhoods(seach_term, map) //In search.js
 
       addMarkers(props, map);
-  }, 300);
-}
+  	}, 300);
+	}
 
 	// Initialize the map
 	google.maps.event.addDomListener(window, 'load', initialize);

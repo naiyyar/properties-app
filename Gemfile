@@ -12,8 +12,6 @@ gem 'simple-line-icons-rails'
 
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2.3'
-#gem 'aws-sdk' #, '< 2'
-#gem 'aws-sdk', '~> 3'
 
 gem 'puma'
 
@@ -28,7 +26,7 @@ gem 'jquery-fileupload-rails', github: 'Springest/jquery-fileupload-rails'
 
 #gem 'paperclip-av-transcoder' #for vidoes
 gem "figaro"
-gem 'gmaps4rails'
+#gem 'gmaps4rails'
 gem 'underscore-rails'
 
 gem 'geocoder'
@@ -127,7 +125,7 @@ gem 'valid_url'
 
 gem 'buttercms-rails'
 
-gem 'progressive_render'
+#gem 'progressive_render'
 
 #gem 'actionpack-page_caching'
 #gem 'actionpack-action_caching'

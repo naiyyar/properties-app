@@ -22,7 +22,6 @@
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
 //= require underscore
-//= require gmaps/google
 //= require app
 //= require dropzone_v5
 //= require fancybox

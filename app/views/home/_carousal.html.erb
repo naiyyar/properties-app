@@ -1,33 +1,17 @@
  <!-- set data-ride=carousal if need to auto slide images -->
  <div id="carouselFull<%=building.id%>" class="carousel slide" data-ride="carousel1">
-    <!-- <ol class="carousel-indicators">
-        <li data-target="#carouselFull" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselFull" data-slide-to="1"></li>
-        <li data-target="#carouselFull" data-slide-to="2"></li>
-        <li data-target="#carouselFull" data-slide-to="3"></li>
-    </ol> -->
     <% if building.image_uploads.count > 1 %>
         <div class="carousal-image-counts">
             <span class="img-num">1</span> /
             <span class="img-count"><%= building.image_uploads.count %></span>
         </div>
     <%end%>
-    <%#= progressive_render do %>
     <div class="carousel-inner">
-        <%# building.image_uploads.each_with_index do |upload, index| %>
-            <div class="bg-size-cover item active" style='background-image: url("<%=building.image_uploads.first.image.url%>");'>
-                <%#= image_tag upload.image.url, alt: upload.image_file_name, class: 'hidden' %>
-                <!-- <img src="images/prop/4-1.png" alt="First slide"> -->
-                <!-- <div class="container">
-                    <div class="carousel-caption">
-                       
-                    </div>
-                </div> -->
-            </div>
-        <%#end%>
+        <div class="bg-size-cover item active" style='background-image: url("<%=building.image_uploads.first.image.url%>");'>
+            
+        </div>
     </div>
-        <%# sleep 5%>
-    <%#end%>
+        
     <% if building.image_uploads.count > 1 %>
         <a class="left carousel-control hidden-xs1" href="#carouselFull<%=building.id%>" role="button" data-slide="prev" data-buildingid="<%=building.id%>"><span class="fa fa-angle-left fa-2x"></span></a>
         <a class="right carousel-control hidden-xs1" href="#carouselFull<%=building.id%>" role="button" data-slide="next" data-buildingid="<%=building.id%>"><span class="fa fa-angle-right fa-2x"></span></a>

@@ -77,6 +77,7 @@ class BuildingsController < ApplicationController
 
     @gmaphash = [
                   {
+                    id: @building.id,
                     title: @building.building_name,
                     image: Upload.marker_image(@building),
                     address: @building.street_address,
@@ -88,6 +89,12 @@ class BuildingsController < ApplicationController
 
                   }
                 ]
+
+    # @hash = Building.where(id: params[:id]).select(:id, 
+    #                                                :building_name, 
+    #                                                :building_street_address, 
+    #                                                :latitude, :longitude, 
+    #                                                :zipcode, :city, :state).as_json
     
     #google Map
     # @hash = Gmaps4rails.build_markers(@building) do |building, marker|
@@ -108,13 +115,6 @@ class BuildingsController < ApplicationController
     #         "width" => 50,
     #         "height" => 50
     #         })
-    # end
-    # if params[:from_uploaded].present?
-    #   #expire_action "/neighborhoods/#{view_context.borough_search_link(@building.neighbohoods)}"
-    #   #expire_page "/neighborhoods/#{view_context.borough_search_link(@building.neighbohoods)}"
-
-    #   expire_action(controller: 'home', action: 'search', searched_by: 'neighborhoods', search_term: "#{view_context.borough_search_link(@building.neighbohoods)}")
-    #   expire_page(controller: 'home', action: 'search', searched_by: 'neighborhoods', search_term: "#{view_context.borough_search_link(@building.neighbohoods)}")
     # end
     flash[:notice] = "Files are uploaded successfully." if params[:from_uploaded].present?
   end

@@ -26,7 +26,8 @@ jQuery ->
 	#using to open property show page on infowindow click
 	$(document).on 'click', '.infoW-property-info', (e) ->
 		url = $(this).data('href')
-		window.open(url)
+		#window.open(url)
+		window.location.href = url
 	
 	$(document).on 'click', '.left-side-zindex', (e) ->
 		parentElem = $(this).parents().find('#leftSide')

@@ -10,14 +10,15 @@ class HomeController < ApplicationController
   end
 
   def load_infobox
-    building = Building.find(params[:object_id] || 93) #includes(:uploads, :building_average, :votes)
+    building = Building.find(params[:object_id])
 
     render json: { html: render_to_string(:partial => "/layouts/shared/custom_infowindow", 
                      :locals => { 
                                   building: building,
                                   image: Upload.marker_image(building),
                                   rating_cache: building.rating_cache,
-                                  recomended_per: Vote.recommended_percent(building)
+                                  recomended_per: Vote.recommended_percent(building),
+                                  building_show: params[:building_show]
                                 }) 
                   }
   end
