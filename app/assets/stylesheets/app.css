@@ -1998,6 +1998,7 @@ a.userHandler .counter {
     color: #999;
     font-size: 11px;
     line-height: 11px;
+    padding: 2px 0px;
 }
 .propRating {
     padding: 1px 0 5px 6px;
