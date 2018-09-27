@@ -1931,7 +1931,7 @@ a.userHandler .counter {
 .infoW {
     font-family: 'open_sansregular', sans-serif, Arial;
     color: #333;
-    padding: 0 1px;
+    padding: 0 0px;
 }
 .propImg {
     position: relative;
@@ -2003,7 +2003,7 @@ a.userHandler .counter {
 .propRating {
     padding: 1px 0 5px 6px;
 }
-.propRating span {
+.propRating span.star {
     color: #eab134;
     padding-right: 2px;
     display: inline-block;

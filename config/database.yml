@@ -18,9 +18,9 @@ development:
 
 production:
   <<: *default
-  database: apt_reviews
+  database: dev_transparentcity10jul
   username: postgres
-  password: 
+  password: postgres
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

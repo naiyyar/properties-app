@@ -23,7 +23,7 @@
           </thead>
           <tbody class="table">
             <% buildings.each do |building| %>
-              <%# cache(building) do %>
+              
               <tr>
                 <td><span class="propName"><b><%= link_to(building_name_or_address(building), building_path(building)) %></b> - <%= link_to "(#{building.units.count}) units", units_building_path(building) %> - <%= building.image_uploads.count %> images</span> <br /><small><%=building.property_neighborhods%></small> </td>
                 <td><%= building.street_address %> <%=building.zipcode%></td>
@@ -43,7 +43,7 @@
                   <%end%>
                 <%end%>
               </tr>
-              <%#end%>
+              
             <%end%>
           </tbody>
         </table>

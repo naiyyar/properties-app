@@ -25,13 +25,13 @@
         //custom infowindow object
         var infobox = new InfoBox({
             disableAutoPan: false,
-            maxWidth: 202,
+            maxWidth: 230,
             pixelOffset: new google.maps.Size(-101, -220),
             zIndex: null,
             boxStyle: {
                 background: '#fff',
                 opacity: 1,
-                width: "202px",
+                width: "230px",
                 height: "auto"
             },
             closeBoxMargin: "28px 26px 0px 0px",
