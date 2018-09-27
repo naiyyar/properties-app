@@ -110,6 +110,10 @@
                 infobox.open(null,null);
             });
 
+             $('.mob-max, #header, .search, #content').click(function(){
+                infobox.open(null,null);
+              })
+
             markers.push(marker);
         });
 
@@ -162,12 +166,11 @@
 
     setTimeout(function() {
       $('body').removeClass('notransition');
-
       map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
       map.setCenter(new google.maps.LatLng(lat,lng));
       map.setZoom(zoom);
       polylines.setMap(map);
-			
+			//google.maps.event.trigger(map, 'resize');
 			// Setting up boundaries using kml file
       addMarkers(props, map);
       brooklyn_and_queens_neighborhoods(seach_term, map) //In search.js
