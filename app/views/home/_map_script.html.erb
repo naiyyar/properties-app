@@ -15,6 +15,7 @@
 	var zoom = <%= @zoom || 13 %>;
 	var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
 	var marker_green = "<%=asset_path('marker-green.png')%>";
+	var star_off = "<%=asset_path('star-off.png')%>";
  
   function initialize() {
     // Custom options for map
@@ -37,7 +38,7 @@
     var infobox = new InfoBox({
         disableAutoPan: false,
         maxWidth: 230,
-        pixelOffset: new google.maps.Size(-101, -285),
+        pixelOffset: new google.maps.Size(-118, -265),
         zIndex: null,
         boxStyle: {
             background: '#fff',
@@ -67,17 +68,35 @@
                     new google.maps.Size(36, 36)
                 ),
                 draggable: false,
-                animation: google.maps.Animation.DROP,
+                //animation: google.maps.Animation.DROP,
             });
+            // var placeholder_content = '<div class="infoW">'+
+												// 						    '<div class="propImg animated-background" style="width: 230px !important; height: 137px;background-color: #ddd;"></div>'+
+												// 						    '<div class="paWrapper">'+
+												// 						      '<div class="propTitle animated-background" style="width: 100px !important; height: 15px;background-color: #ddd;"></div>'+
+												// 						      '<div class="propAddress animated-background" style="width: 150 !important; height: 15px;background-color: #ddd;"></div>'+
+												// 						    '</div>'+
+												// 						  '<div class="propRating">'+
+												// 						  	'<ul class="cardRating list-inline">'+
+												// 						  			'<li><img src='+star_off+' /></li>'+
+												// 						  			'<li><img src='+star_off+' /></li>'+
+												// 						  			'<li><img src='+star_off+' /></li>'+
+												// 						  			'<li><img src='+star_off+' /></li>'+
+												// 						  			'<li><img src='+star_off+' /></li>'+
+												// 						  	'</ul>'+	  
+												// 							'</div>'+
+												// 						'</div>'
             createSidebar(prop, marker);
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
                 	var building_id = json_array[i].id
+                	//infobox.setContent(placeholder_content); //placeholder content
 				          $.post('/load_infobox', {
 				            object_id: building_id, building_show: false
 				          }, function(data){
 				            infobox.setContent(data.html);
 				            //infowindow.open(handler.getMap(), google.maps.markers[index]);
+				            infobox.setPosition(latlng);
 				            infobox.open(map, marker);
 				          });
                   
