@@ -23,22 +23,40 @@
         var lng = $("#mapHash").data('lng');
 
         //custom infowindow object
-        var infobox = new InfoBox({
-            disableAutoPan: false,
-            maxWidth: 230,
-            pixelOffset: new google.maps.Size(-101, -220),
-            zIndex: null,
-            boxStyle: {
-                background: '#fff',
-                opacity: 1,
-                width: "230px",
-                height: "auto"
-            },
-            closeBoxMargin: "28px 26px 0px 0px",
-            closeBoxURL: "",
-            infoBoxClearance: new google.maps.Size(1, 1),
-            pane: "floatPane",
-            enableEventPropagation: false
+        // var infobox = new InfoBox({
+        //     disableAutoPan: false,
+        //     maxWidth: 230,
+        //     pixelOffset: new google.maps.Size(-101, -220),
+        //     zIndex: null,
+        //     boxStyle: {
+        //         background: '#fff',
+        //         opacity: 1,
+        //         width: "230px",
+        //         height: "auto"
+        //     },
+        //     closeBoxMargin: "28px 26px 0px 0px",
+        //     closeBoxURL: "",
+        //     infoBoxClearance: new google.maps.Size(1, 1),
+        //     pane: "floatPane",
+        //     enableEventPropagation: false
+        // });
+
+        var infobox = new InfoBubble({
+          maxWidth: 230,
+          position: new google.maps.LatLng(lng, lat),
+          shadowStyle: 3,
+          padding: 0,
+          backgroundColor: 'rgb(255,255,255)',
+          borderRadius: 2,
+          arrowSize: 10,
+          borderWidth: 0,
+          borderColor: '#2c2c2c',
+          disableAutoPan: true,
+          hideCloseButton: false,
+          //closeSrc: close_src
+          // arrowPosition: 30,
+          // backgroundClassName: 'phoney',
+          // arrowStyle: 1
         });
 
         //diabling right click on building edit form
@@ -100,18 +118,19 @@
                     }
                 })(marker, i));
 
-                $(document).on('click', '.closeInfo', function() {
-                    infobox.open(null,null);
+                google.maps.event.addDomListener(document.getElementById('header'),
+                'click', function() {
+                  infobox.close();
                 });
 
-                //Hiding infowindow on map or outside click
-                google.maps.event.addListener(map, "click", function(event) {
-                    infobox.open(null,null);
+                google.maps.event.addDomListener(document.getElementById('content'),
+                'click', function() {
+                  infobox.close();
                 });
 
-                $('.mob-max, #header, .search ').click(function(){
-                    infobox.open(null,null);
-                })
+                google.maps.event.addListener(map, 'click', function() {
+                  infobox.close();
+                });         
 
                 //markers.push(marker);
             });

@@ -1,5 +1,5 @@
 class UploadsController < ApplicationController
-  load_and_authorize_resource
+  #load_and_authorize_resource
 	before_action :authenticate_user!, only: [:destroy]
 
 	def index
@@ -161,7 +161,15 @@ class UploadsController < ApplicationController
 	private
 
 	def upload_params
-		params.require(:upload).permit! #(:image, :imageable_id, :imageable_type, :user_id, :sort, :rotation, :document, :document_file_name, :file_uid)
+		params.require(:upload).permit(:image, 
+                                    :imageable_id, 
+                                    :imageable_type, 
+                                    :user_id, 
+                                    :sort, 
+                                    :rotation, 
+                                    :document, 
+                                    :document_file_name, 
+                                    :file_uid)
 	end
 
 	def find_imageable

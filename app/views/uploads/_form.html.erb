@@ -40,9 +40,9 @@
 			    <%else%>
 			    	<%= f.file_field :document %>
 			    <%end%><br />
-			    <% if current_user.present? %>
-			    	<%= f.hidden_field :user_id, value: current_user.id %> <br />
-			    <%end%>
+			    
+			    <%= f.hidden_field :user_id, value: current_user.id if current_user.present?%> <br />
+			    
 			    <%= f.submit 'Upload' %>
 			  </div>
 			<% end %>
