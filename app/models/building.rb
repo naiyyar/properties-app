@@ -664,17 +664,27 @@ class Building < ActiveRecord::Base
             neighborhood2 = neighborhood if neighborhood2.blank? and neighborhood1.blank?
           else
             neighborhood1 = neighborhood if neighborhood1.blank?
+            neighborhood2 = parent_neighborhood
           end
           #end if
         end
       end #end search loop
     else
       neighborhood1 = self.neighborhood
-      neighborhood2 = self.neighborhoods_parent
+      neighborhood2 = parent_neighborhood
       neighborhood3 = self.neighborhood3
     end #end search if
 
     return neighborhood1, neighborhood2, neighborhood3
+  end
+
+  def parent_neighborhood
+    if self.neighborhoods_parent.present?
+      return self.neighborhoods_parent
+    else
+      buildings = Building.where('neighborhoods_parent is not null and neighborhood = ?', self.neighborhood)
+      return buildings.present? ? buildings.first.neighborhoods_parent : nil
+    end
   end
 
   def save_neighborhood

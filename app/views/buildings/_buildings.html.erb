@@ -17,6 +17,7 @@
               <th width='12%'>RATING</th>
               <th>Reviews</th>
               <th>Website</th>
+              <!-- <th>latlng</th> -->
               <th></th>
               <th></th>
             </tr>
@@ -25,7 +26,12 @@
             <% buildings.each do |building| %>
               
               <tr>
-                <td><span class="propName"><b><%= link_to(building_name_or_address(building), building_path(building)) %></b> - <%= link_to "(#{building.units.count}) units", units_building_path(building) %> - <%= building.image_uploads.count %> images</span> <br /><small><%=building.property_neighborhods%></small> </td>
+                <td><span class="propName">
+                  <b><%= link_to(building_name_or_address(building), building_path(building)) %></b> - 
+                  <%= link_to "(#{building.units.count}) units", units_building_path(building) %> - 
+                  <%= building.image_uploads.count %> images</span> <br /> 
+                  <small><%= building.first_neighborhood %> <%= '-' if (building.parent_neighbors.present? and building.first_neighborhood.present? )%> <%= "#{building.parent_neighbors}" %></small> 
+                </td>
                 <td><%= building.street_address %> <%=building.zipcode%></td>
                 <td><%= building.created_at.strftime("%Y-%m-%d") %></td>
                 <td class="star-sm">
@@ -33,6 +39,7 @@
                 </td>
                 <td><%= link_to "Reviews(#{building.reviews.count})", building_reviews_path(building_id: building.id) %></td>
                 <td><%= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present? %></td>
+                <!-- <td><%#= building.latitude %>, <%#= building.longitude %></td> -->
                 <% if current_user %>
                   <td><%= link_to "edit", edit_building_path(building) %></td>
                   <% if current_user.has_role?(:admin) %>
