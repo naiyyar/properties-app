@@ -9,7 +9,7 @@
 	<%else%>
 		var position = google.maps.ControlPosition.TOP_CENTER
 	<%end%>
-	
+	var map;
 	var lat = <%= raw @lat.to_json %>;
 	var lng = <%= raw @lng.to_json %>;
 	var zoom = <%= @zoom || 13 %>;
@@ -35,24 +35,6 @@
     var markers = [];
     // json for properties markers on map
     var props = json_array;
-    // custom infowindow object
-    // var infobox = new InfoBox({
-    //     disableAutoPan: false,
-    //     maxWidth: 230,
-    //     pixelOffset: new google.maps.Size(-118, -265),
-    //     zIndex: null,
-    //     boxStyle: {
-    //         background: '#fff',
-    //         opacity: 1,
-    //         width: "230px",
-    //         height: "auto"
-    //     },
-    //     closeBoxMargin: "10px 26px 0px 0px",
-    //     closeBoxURL: "",
-    //     infoBoxClearance: new google.maps.Size(1, 1),
-    //     pane: "floatPane",
-    //     enableEventPropagation: false
-    // });
 
     var infobox = new InfoBubble({
       maxWidth: 230,
@@ -65,11 +47,7 @@
       borderWidth: 0,
       borderColor: '#2c2c2c',
       disableAutoPan: true,
-      hideCloseButton: false,
-      //closeSrc: close_src
-      // arrowPosition: 30,
-      // backgroundClassName: 'phoney',
-      // arrowStyle: 1
+      hideCloseButton: false
     });
 
     // function that adds the markers on map
@@ -89,22 +67,7 @@
                 draggable: false,
                 //animation: google.maps.Animation.DROP,
             });
-            // var placeholder_content = '<div class="infoW">'+
-												// 						    '<div class="propImg animated-background" style="width: 230px !important; height: 137px;background-color: #ddd;"></div>'+
-												// 						    '<div class="paWrapper">'+
-												// 						      '<div class="propTitle animated-background" style="width: 100px !important; height: 15px;background-color: #ddd;"></div>'+
-												// 						      '<div class="propAddress animated-background" style="width: 150 !important; height: 15px;background-color: #ddd;"></div>'+
-												// 						    '</div>'+
-												// 						  '<div class="propRating">'+
-												// 						  	'<ul class="cardRating list-inline">'+
-												// 						  			'<li><img src='+star_off+' /></li>'+
-												// 						  			'<li><img src='+star_off+' /></li>'+
-												// 						  			'<li><img src='+star_off+' /></li>'+
-												// 						  			'<li><img src='+star_off+' /></li>'+
-												// 						  			'<li><img src='+star_off+' /></li>'+
-												// 						  	'</ul>'+	  
-												// 							'</div>'+
-												// 						'</div>'
+            
             createSidebar(prop, marker);
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
@@ -127,10 +90,6 @@
                 
             })(marker, i));
 
-            // $(document).on('click', '.closeInfo', function() {
-            //   infobox.close();
-            // }); 
-
             google.maps.event.addDomListener(document.getElementById('header'),
             'click', function() {
               infobox.close();
@@ -151,7 +110,7 @@
     }
 
 
-    var map;
+    
     var windowHeight;
     var windowWidth;
     var contentHeight;
@@ -211,5 +170,6 @@
 
 	// Initialize the map
 	google.maps.event.addDomListener(window, 'load', initialize);
+
 
 </script>

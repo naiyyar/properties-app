@@ -22,25 +22,6 @@
         var lat = $("#mapHash").data('lat');
         var lng = $("#mapHash").data('lng');
 
-        //custom infowindow object
-        // var infobox = new InfoBox({
-        //     disableAutoPan: false,
-        //     maxWidth: 230,
-        //     pixelOffset: new google.maps.Size(-101, -220),
-        //     zIndex: null,
-        //     boxStyle: {
-        //         background: '#fff',
-        //         opacity: 1,
-        //         width: "230px",
-        //         height: "auto"
-        //     },
-        //     closeBoxMargin: "28px 26px 0px 0px",
-        //     closeBoxURL: "",
-        //     infoBoxClearance: new google.maps.Size(1, 1),
-        //     pane: "floatPane",
-        //     enableEventPropagation: false
-        // });
-
         var infobox = new InfoBubble({
           maxWidth: 230,
           position: new google.maps.LatLng(lng, lat),
@@ -53,10 +34,6 @@
           borderColor: '#2c2c2c',
           disableAutoPan: true,
           hideCloseButton: false,
-          //closeSrc: close_src
-          // arrowPosition: 30,
-          // backgroundClassName: 'phoney',
-          // arrowStyle: 1
         });
 
         //diabling right click on building edit form
@@ -81,20 +58,6 @@
                     draggable: false,
                     animation: google.maps.Animation.DROP,
                 });
-                // var infoboxContent = '<div class="infoW">' +
-                //                         '<div class="propImg">' +
-                //                             '<img src=' + prop.image + '>' +
-                //                         '</div>' +
-                //                         '<div class="paWrapper">' +
-                //                             '<div class="propTitle">' + prop.title + '</div>' +
-                //                             '<div class="propAddress">' + prop.address + '</div>' +
-                //                         '</div>' +
-                //                         '<div class="clearfix"></div>' +
-                //                      '</div>';
-
-                // var infowindow = new google.maps.InfoWindow({
-                //     content: infoboxContent
-                // });
 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     panorama = map.getStreetView();
@@ -107,14 +70,12 @@
                         });
                     });
                     return function() {
-                        //infowindow.setContent(infoboxContent);
-                          $.post('/load_infobox', {
-                            object_id: prop.id, building_show: true
-                          }, function(data){
-                            infobox.setContent(data.html);
-                            infobox.open(map, marker);
-                          });
-                        //infowindow.open(map, marker);
+                      $.post('/load_infobox', {
+                        object_id: prop.id, building_show: true
+                      }, function(data){
+                        infobox.setContent(data.html);
+                        infobox.open(map, marker);
+                      });
                     }
                 })(marker, i));
 
@@ -132,7 +93,6 @@
                   infobox.close();
                 });         
 
-                //markers.push(marker);
             });
         }
 
@@ -258,14 +218,14 @@
     });
 
     // Notifications list items pulsate animation
-    $('.notifyList a').hover(
-        function() {
-            $(this).children('.pulse').addClass('pulsate');
-        },
-        function() {
-            $(this).children('.pulse').removeClass('pulsate');
-        }
-    );
+    // $('.notifyList a').hover(
+    //     function() {
+    //         $(this).children('.pulse').addClass('pulsate');
+    //     },
+    //     function() {
+    //         $(this).children('.pulse').removeClass('pulsate');
+    //     }
+    // );
 
     // Exapnd left side navigation
     var navExpanded = false;
@@ -308,14 +268,8 @@
             $('#content').toggleClass('min');
             $('#mapView, #mapViewSearch').toggleClass('max');
         }
-        var create_sidebar = false
-        //build_map(create_sidebar, true); //For search split view
-        if(handler != ''){
-            resizeMapOnMapIconClick();
-        }else{
-        
-            resize_map();
-        }
+        initialize();
+        //resize_map();
     }
 
     var listMapViewShow = function(){
@@ -330,7 +284,6 @@
             $('#mapView').toggleClass('min');
             $('#content').toggleClass('max');
         }
-        
         resize_map();
     }
 
@@ -338,8 +291,8 @@
         setTimeout(function() {
             if (map) {
                 google.maps.event.trigger(map, 'resize');
+                map.setCenter(new google.maps.LatLng(lat, lng));
             }
-            map.setCenter(new google.maps.LatLng(lat, lng));
 
         }, 300);
     }
@@ -354,7 +307,6 @@
     $('.mapHandlerShow').click(function(){
         $(this).hide();
         $('.listHandlerShow').show();
-
         listMapViewShow();
     })
     /* end show page */
