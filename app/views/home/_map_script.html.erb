@@ -36,9 +36,9 @@
       var markers = [];
       // json for properties markers on map
       var props = json_array;
-
+      var bounds = new google.maps.LatLngBounds();
       var infobox = new InfoBubble({
-        maxWidth: 230,
+        maxWidth: 229,
         position: new google.maps.LatLng(lng, lat),
         shadowStyle: 3,
         padding: 0,
@@ -68,6 +68,7 @@
                   draggable: false,
                   //animation: google.maps.Animation.DROP,
               });
+              bounds.extend(marker.position);
               if(sidebar){
                 createSidebar(prop, marker);
               }
@@ -108,7 +109,11 @@
 
               markers.push(marker);
           });
-
+          map.fitBounds(bounds);
+          var listener = google.maps.event.addListener(map, "idle", function () {
+              map.setZoom(zoom);
+              google.maps.event.removeListener(listener);
+          });
         }
       
       var polylineoptons = {};
@@ -135,6 +140,7 @@
       map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
       map.setCenter(new google.maps.LatLng(lat,lng));
       map.setZoom(zoom);
+
       polylines.setMap(map);
 			
 			// Setting up boundaries using kml file
