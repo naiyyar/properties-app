@@ -132,6 +132,7 @@ class HomeController < ApplicationController
       @buildings = Building.filter_by_types(@buildings, building_types)
     end
     @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if params[:sort_by].present?
+    #@buildings = @buildings.includes(:building_average)
     #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
     if @buildings.present?
       @buildings = @buildings unless @buildings.kind_of? Array
@@ -146,7 +147,11 @@ class HomeController < ApplicationController
       #   #marker.infowindow render_to_string(:partial => '/home/placeholder_infowindow')
       # end
       #end
-      @hash = @buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
+      unless @buildings.class == Array
+        @hash = @buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
+      else
+        @hash = @buildings.as_json
+      end
 
     end
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(search_string, view_context.queens_borough)

@@ -246,9 +246,12 @@ class Building < ActiveRecord::Base
     building_ids = @ratings.map(&:cacheable_id)
     rated_buildings = buildings.where(id: building_ids).sort_by{ |b| building_ids.index(b.id) if !b.id.nil? }
     non_rated_buildings = buildings.where.not(id: rated_buildings.map(&:id))
-    
-    buildings = rated_buildings+non_rated_buildings
-    
+    if sort_index == '1'
+      buildings = rated_buildings + non_rated_buildings
+    else
+      buildings = non_rated_buildings + rated_buildings
+    end
+
     buildings
   end
 
