@@ -268,8 +268,8 @@
             $('#content').toggleClass('min');
             $('#mapView, #mapViewSearch').toggleClass('max');
         }
-        initialize();
-        //resize_map();
+        initialize(false)
+        resize_map();
     }
 
     var listMapViewShow = function(){
