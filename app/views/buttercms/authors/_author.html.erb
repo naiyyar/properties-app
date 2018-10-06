@@ -9,7 +9,14 @@
         <div class="clearfix"></div>
     </div>
     <div class="post-share">
-        <div class="ps-social"><a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-google"><span class="fa fa-google-plus"></span></a> <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-blue"><span class="fa fa-linkedin"></span></a></div>
+        <div class="ps-social">
+            <%#= social_share_button_tag(@post.title, :url => "http://www.transparentcity.co/blog/here-are-the-average-broker-fees-in-nyc-for-rentals") %>
+            <div class="addthis_inline_share_toolbox"></div>
+            <!-- <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-facebook"><span class="fa fa-facebook"></span></a> 
+            <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-twitter"><span class="fa fa-twitter"></span></a> 
+            <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-google"><span class="fa fa-google-plus"></span></a> 
+            <a href="#" class="btn btn-sm btn-icon btn-round btn-o btn-blue"><span class="fa fa-linkedin"></span></a> -->
+        </div>
         <!-- <div class="ps-stats">
             <span>245</span> Shares&nbsp;&nbsp;&nbsp;
             <span>4</span> Comments
