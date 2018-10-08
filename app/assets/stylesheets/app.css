@@ -700,7 +700,7 @@ h3.unit_name_header{
     color: #43609c;
     border-color: #43609c;
 }
-.no-touch .btn-facebook:hover,
+/*.no-touch .btn-facebook:hover,
 .btn-facebook:focus,
 .btn-facebook:active,
 .btn-facebook.active,
@@ -715,7 +715,7 @@ h3.unit_name_header{
 .open > .dropdown-toggle.btn-o.btn-facebook {
     background-color: #43609c;
     color: #fff;
-}
+}*/
 .btn-twitter {
     background-color: #55acee;
     color: #fff;
