@@ -1,26 +1,20 @@
 class ReviewsController < ApplicationController 
   load_and_authorize_resource
   before_action :authenticate_user!, :except => [:new, :index, :create]
-
-  # def index
-  #   if params[:building_id].present?
-  #     @reviewable = Building.find(params[:building_id])
-  #   elsif params[:unit_id].present?
-  #     @reviewable = Unit.find(params[:unit_id])
-  #   else
-  #     @reviews = Review.order('created_at desc')
-  #   end
-  #   @reviews = @reviewable.reviews.order('created_at desc') if @reviewable.present?
-  # end
   
   #from production
   def index
+    @filterrific = initialize_filterrific(
+      Review,
+      params[:filterrific],
+      available_filters: [:search_query]
+    ) or return
+    @reviews = @filterrific.find.paginate(:page => params[:page], :per_page => 100).order('created_at desc').includes(:reviewable, :user)
+
     if params[:building_id].present?
-      @reviews = Review.where(reviewable_id: params[:building_id]).order('created_at desc')
+      @reviews = @reviews.where(reviewable_id: params[:building_id])
     elsif params[:unit_id].present?
-      @reviews = Review.where(reviewable_id: params[:unit_id]).order('created_at desc')
-    else
-      @reviews = Review.order('created_at desc').includes(:reviewable, :user)
+      @reviews = @reviews.where(reviewable_id: params[:unit_id])
     end
   end
 

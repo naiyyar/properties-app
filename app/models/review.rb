@@ -28,13 +28,25 @@ class Review < ActiveRecord::Base
   belongs_to :user
   has_many :useful_reviews
   has_many :review_flags
+  
   include Imageable
+  include PgSearch
   
   validates :tos_agreement, :allow_nil => false, :acceptance => { :accept => true }, :on => :create #, message: 'Terms not accepted.'
   
   after_destroy :destroy_dependents
 
   default_scope { order('created_at DESC') }
+
+  pg_search_scope :search_query, against: [:review_title, :pros, :cons],
+     :using => { :tsearch => { prefix: true } }
+
+  filterrific(
+   default_filter_params: { },
+   available_filters: [
+     :search_query
+    ]
+  )
 
   #reviewer
   def user_name
