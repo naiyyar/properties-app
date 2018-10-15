@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   has_many :authorizations
   has_many :useful_reviews
   has_many :review_flags
+  has_many :favorites, as: :favoriter, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -62,6 +63,10 @@ class User < ActiveRecord::Base
   
 
   #methods
+
+  def saved_obejct? obejct
+    true
+  end
 
   def self.from_omniauth(auth, current_user)
     authorization = Authorization.where(:provider => auth.provider, 
@@ -151,6 +156,21 @@ class User < ActiveRecord::Base
   def marked_flag? review_id
     flags = self.review_flags.where(review_id: review_id)
     flags.present? ? true : false
+  end
+
+  def favorite?(favorable)
+    favorites.find_by(favorable_id: favorable.id, favorable_type: favorable.class.base_class.name).present?
+  end  
+
+  def favorite(favorable)
+    unless favorite?(favorable)
+      favorites.create(favorable_id: favorable.id, favorable_type: favorable.class.base_class.name)
+    end
+  end
+
+  def unfavorite(favorable)
+    records = favorites.find_by(favorable_id: favorable.id, favorable_type: favorable.class.base_class.name)
+    records.try(:destroy)
   end
 
 end

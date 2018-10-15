@@ -128,4 +128,20 @@ module BuildingsHelper
 		]
 	end
 
+	def heart_icon
+		'<span class="fa fa-heart"></span>'.html_safe
+	end
+
+	def heart_link object
+		link_to heart_icon, favorite_path(object_id: object.id), remote: true, class: "save_link_#{object.id} #{saved_color_class(object)} favourite", title: heart_link_title(object)
+	end
+
+	def heart_link_title(object)
+		(current_user.present? and object.favorite_by?(current_user)) ? 'Unsave' : 'Save'
+	end
+
+	def saved_color_class(object)
+		(current_user.present? and object.favorite_by?(current_user)) ? 'filled-heart' : 'unfilled-heart'
+	end
+
 end

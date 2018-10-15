@@ -35,6 +35,12 @@ body{
     margin-left: 18px;
     margin-right: 21px;
 }
+.fa-heart, .fa-heart:focus{
+    color: #b1b3b6;
+}
+.filled-heart .fa-heart, .unfilled-heart .fa-heart:hover{
+    color: #f16980 !important;
+}
 
 .animated-background {
     animation-duration: 1s;

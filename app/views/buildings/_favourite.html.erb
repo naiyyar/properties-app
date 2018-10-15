@@ -1,0 +1,5 @@
+<div class="pull-right" style="padding-right: 8px;font-size: 22px;">
+  <%= heart_link(building) if user_signed_in? %>
+  <%#= link_to heart_icon, '/users/sign_in', class: "save_link_#{building.id}" if !user_signed_in? %>
+  <%= link_to heart_icon, '#signin', class: "save_link_#{building.id} modal-si favourite" if !user_signed_in? %>
+</div>

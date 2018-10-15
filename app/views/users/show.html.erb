@@ -94,7 +94,13 @@
   	</div>
 
 		<div id="content" class="mob-max user_property_listing">
-			<%= render partial: 'listed_properties' %>
+      <% if @buildings.present? %>
+        <h3><%= @manage_buildings.present? ? 'Connected' : 'Listed' %> Properties (<%= @buildings.count %>)</h3>
+			 <%= render partial: 'listed_properties' %>
+      <%else%>
+        <h3>Listed Properties(0)</h3>
+        <%= link_to 'Add a property', new_building_path, class: 'btn btn-blue' %>
+      <%end%>
 		</div>
     <div class="clearfix"></div>
  	</div>

@@ -26,6 +26,21 @@ class BuildingsController < ApplicationController
     end
   end
 
+  def favorite
+    @building = Building.find(params[:object_id])
+    @favourite = @building.favorite_by?(current_user)
+    @saved_as_favourite = true
+    if @favourite
+      current_user.unfavorite(@building)
+      @saved_as_favourite = false
+    else
+      current_user.favorite(@building)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def units
     @building = Building.find(params[:id])
     @units = @building.units

@@ -13,6 +13,7 @@
         <div class="mobAvatarName"><%= current_user.present? ? current_user.user_name.capitalize : '' %></div>
     </div>
     <ul>
+      <li><a href="<%= saved_buildings_user_path(current_user) %>"><span class="icon-settings"></span>Saved buildings</a></li>
       <li><a href="<%= edit_user_path(current_user) %>"><span class="icon-settings"></span>Settings</a></li>
       <li><a href="<%= user_path(current_user) %>"><span class="icon-user"></span>Profile</a></li>
       <li class="divider"></li>

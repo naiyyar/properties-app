@@ -1,40 +1,30 @@
-<% if @buildings.present? %>
-	<h3><%= @manage_buildings.present? ? 'Connected' : 'Listed' %> Properties (<%= @buildings.count %>)</h3>
-	<div class="row">
-		<% @buildings.each do |building| %>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="properties">
-        <a href="<%= building_path(building) %>" class="card">
-          <div class="figure">
+<div class="row">
+	<% @buildings.each do |building| %>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="properties">
+      <div class="card">
+        <%= link_to building_path(building) do %>
+          <div class="figure" style="position: relative;">
             <%= image_tag single_image(building), alt: 'image' %>
-              <!-- <div class="figCaption">
-                  <div>$1,550,000</div>
-                  <span class="icon-eye"> 200</span>
-                  <span class="icon-heart"> 54</span>
-                  <span class="icon-bubble"> 13</span>
-              </div> -->
-              <!-- <div class="figView"><span class="icon-eye"></span></div>
-              <div class="figType">FOR SALE</div> -->
+            <div class="figCaption fill-heart">
+              <span class="fa fa-heart"> <%= building.favorites.count%></span>
+            </div>
           </div>
           <h2><%= building.building_name_or_address %></h2>
           <div class="cardAddress"><span class="icon-pointer"></span> <%= building.street_address %>, <%= building.zipcode %></div>
-          <div class="cardRating star-sm">
-              <%= rating_for building, 'building', disable_after_rate: true, readonly: true %>
-          </div>
-          <ul class="cardFeat">
-              <li><span class="fa fa-star-o"></span> <%= building.reviews.count %></li>
-            <li><span>Units: </span> <%= building.units.count %></li>
-            <li><span>Unit Reviews:</span> <%= building.unit_reviews_count %></li>
-            <li><span class="icon-like"></span> <%= building.votes_for %></li>
-            <li><span class="icon-dislike"></span> <%= building.votes_against %></li>
-          </ul>
-          <div class="clearfix"></div>
-        </a>
+          <%= render partial: 'home/building_detail', locals: {building: building} %>
+        <%end%>
+
+        <div style="padding: 8px;">
+          <% if building.web_url.present? %>
+            <%= link_to 'Available Apartment Listings'.html_safe, building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' %>
+          <%else%>
+            <%= link_to 'Available Listings'.html_safe, '#', class: 'btn btn-block btn-primary invisible' %>
+          <%end%>
+        </div>
       </div>
-		<%end%>
-  </div>
-<%else%>
-	<h3>Listed Properties(0)</h3>
-	<%= link_to 'Add a property', new_building_path, class: 'btn btn-blue' %>
-<%end%>
+    </div>
+	<%end%>
+</div>
+
 <%= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
 	    

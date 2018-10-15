@@ -1,0 +1,7 @@
+var object_id = "<%= @building.id %>";
+var save_link = $('.save_link_'+object_id);
+<% unless @saved_as_favourite %>
+	save_link.removeClass('filled-heart');
+<%else%>
+	save_link.addClass('filled-heart');
+<%end%>

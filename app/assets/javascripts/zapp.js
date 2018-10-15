@@ -642,6 +642,6 @@
     $("#apt-search-txt-searchpage, #search_term").click(function () {
         $(this).select();
     });
-    
+
 
 })(jQuery);

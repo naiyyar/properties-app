@@ -76,6 +76,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get '/contribution', to: 'users#contribution', as: 'contribution'
+      get :saved_buildings
     end
   end
 
@@ -96,6 +97,8 @@ Rails.application.routes.draw do
   get '/auto_search', to: 'home#auto_search', as: 'auto_search'
   get '/terms_of_service', to: 'home#tos', as: 'tos'
   post '/load_infobox', to: 'home#load_infobox', as: 'load_infobox'
+
+  get '/favorite' => 'buildings#favorite', as: :favorite
   
   root "home#index"
   # The priority is based upon order of creation: first created -> highest priority.

@@ -9,6 +9,7 @@
             <% if current_user and current_user.has_role?(:admin) and @manage_buildings.present? %>
               <%= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs', data: {confirm: 'Are you sure you want to discconect this building?'} %>
             <%end%>
+            <%= render partial: 'buildings/favourite', locals: { building: @building } %>
           </h1>
           
           <%= render partial: 'property_info', locals: { object: @building } %>

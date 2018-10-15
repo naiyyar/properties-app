@@ -58,7 +58,6 @@ class Building < ActiveRecord::Base
 
   include PgSearch
   include Imageable
-  
   acts_as_voteable
   resourcify
   ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
@@ -68,6 +67,7 @@ class Building < ActiveRecord::Base
 
   belongs_to :user
   has_many :reviews, as: :reviewable
+  has_many :favorites, as: :favorable, dependent: :destroy
   has_many :units,  :dependent => :destroy
   belongs_to :management_company
   
@@ -601,6 +601,10 @@ class Building < ActiveRecord::Base
   def unit_information?
     (no_of_units.present? and self.no_of_units > 0) || floors.present? || built_in.present?
   end
+
+  def favorite_by?(favoriter)
+    favorites.find_by(favoriter_id: favoriter.id, favoriter_type: favoriter.class.base_class.name).present?
+  end  
 
   private
 

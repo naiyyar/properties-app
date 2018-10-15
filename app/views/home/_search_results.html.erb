@@ -1,55 +1,37 @@
 <% buildings.each do |building| %>
   <% @uploads = building.image_uploads %>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-    <div class="card">
-      <div class="figure" style="position: relative;">
-        <%= link_to building_path(building) do %>
-        <!-- removing from management company show page because using building only to show market on map -->
-          <%if @uploads.present? %>
-            <div>
-              <%#= render partial: 'home/carousal', locals: { building: building } %>
-              <%= cache("#{building.id}_#{@uploads.count}") do %>
-                <%= render partial: 'home/lightslider', locals: { building: building } %>
-              <%end%>
-            </div>
-          <%else%>
-            <div style="background-image: url(<%= image_url('no-photo.png') %>)" class="bg-size-cover"></div>
-          <%end%>
-        <%end%>
-      </div>
-
+    <div class="card search-view-card">
       <%= link_to building_path(building) do %>
-        <div id="building_details<%=building.id%>" class="building-detail-card">
-         
+        <div class="figure" style="position: relative;">
+          <%#= link_to building_path(building) do %>
+          <!-- removing from management company show page because using building only to show market on map -->
+            <%if @uploads.present? %>
+              <div>
+                <%#= render partial: 'home/carousal', locals: { building: building } %>
+                <%= cache("#{building.id}_#{@uploads.count}") do %>
+                  <%= render partial: 'home/lightslider', locals: { building: building } %>
+                <%end%>
+              </div>
+            <%else%>
+              <div style="background-image: url(<%= image_url('no-photo.png') %>)" class="bg-size-cover"></div>
+            <%end%>
+          <%end%>
         </div>
-        
-        <% if @management_company.present? and params[:controller] == 'management_companies' %>
-          <div style="padding: 0px 0px 0px 11px;height: 23px;">
-            <%= "#{building.building_type} in" if building.building_type.present? %> 
-            <%= link_to building.neighborhood_name, borough_search_link(building.neighbohoods), class: 'hyper-link' if building.neighbohoods.present?%>
+
+        <%= link_to building_path(building) do %>
+          <div id="building_details<%=building.id%>" class="building-detail-card">
+              
           </div>
         <%end%>
-        
-        <%# if building.price.present? or building.bedroom_types?%>
-          <div style="padding: 0px 0px 0px 11px;height: 23px;color: #333;">
-            <%= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building } %>
-          </div>
-        <%#end%>
-
-        <ul class="cardRating">
-          <div class="pull-left star-sm" style="margin-right: 10px;">
-            <%= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false %>
-          </div>
-          
-          <div> 
-            <%= recommended_percent(building).html_safe %> 
-          </div> 
-          
-          <div class="clearfix"></div>         
-          
-        </ul>
-        <div class="clearfix"></div>
-      <%end%>
+        <div style="float: right;margin-top: -43px;">
+          <%= render partial: 'buildings/favourite', locals: { building: building } %>
+        </div>
+        <%= link_to building_path(building) do %>
+          <%= render partial: 'home/building_detail', locals: {building: building} %>
+        <%end%>
+      <%#end%>
+      
       <div style="padding: 8px;">
         <% if building.web_url.present? %>
           <%= link_to 'Available Apartment Listings'.html_safe, building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' %>

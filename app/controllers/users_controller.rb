@@ -1,12 +1,17 @@
 class UsersController < ApplicationController
 	load_and_authorize_resource
-	before_filter :set_user, only: [:edit, :update, :show, :contribution]
+	before_filter :set_user, only: [:edit, :update, :show, :contribution, :saved_buildings]
 
 	def index
 		@users = User.order('created_at desc').includes(:buildings)
 	end
 
 	def contribution
+	end
+
+	def saved_buildings
+		favorable_ids = @user.favorites.pluck(:favorable_id)
+		@buildings = Building.where(id: favorable_ids).includes(:uploads, :building_average, :units).paginate(:page => params[:page], :per_page => 20)
 	end
 
 	def new
