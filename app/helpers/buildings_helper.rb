@@ -133,7 +133,7 @@ module BuildingsHelper
 	end
 
 	def heart_link object
-		link_to heart_icon, favorite_path(object_id: object.id), remote: true, class: "save_link_#{object.id} #{saved_color_class(object)} favourite", title: heart_link_title(object)
+		link_to heart_icon, favorite_path(object_id: object.id), remote: true, class: "save_link_#{object.id} #{saved_color_class(object)} favourite", title: heart_link_title(object), data: { objectid: object.id }
 	end
 
 	def heart_link_title(object)

@@ -643,5 +643,17 @@
         $(this).select();
     });
 
+    $('.favourite').click(function(){
+        var object_id = $(this).data('objectid');
+        var save_link = $('.save_link_'+object_id);
+        if($(this).hasClass('unfilled-heart')){
+            save_link.removeClass('unfilled-heart').addClass('filled-heart');
+            save_link.css('color','#f16980');
+        }else{
+            save_link.removeClass('filled-heart').addClass('unfilled-heart');
+            save_link.css('color','#b1b3b6');
+        }
+    })
+
 
 })(jQuery);
