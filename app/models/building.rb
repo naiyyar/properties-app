@@ -175,6 +175,14 @@ class Building < ActiveRecord::Base
 
   #Methods
 
+  def self.buildings_json_hash(buildings)
+    unless buildings.class == Array
+      buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
+    else
+      buildings.as_json
+    end
+  end
+
   def self.options_for_sorted_by
     [
       ['Name (a-z)', 'building_name_asc'],
@@ -334,6 +342,22 @@ class Building < ActiveRecord::Base
       @buildings = buildings
     end
     @buildings
+  end
+
+  def filtered_buildings buildings, filter_params
+    rating = filter_params[:rating]
+    building_types = filter_params[:type]
+    price = filter_params[:price]
+    beds = filter_params[:bedrooms]
+    amenities = filter_params[:amenities]
+  
+    @buildings = Building.filter_by_amenities(@buildings, amenities) if amenities.present?
+    @buildings = Building.filter_by_rates(@buildings, rating) if rating.present?
+    @buildings = Building.filter_by_prices(@buildings, price) if price.present?
+    @buildings = Building.filter_by_beds(@buildings, beds) if beds.present?
+    @buildings = Building.filter_by_types(@buildings, building_types)
+
+    return @buildings
   end
 
   def self.has_amenity?(name)

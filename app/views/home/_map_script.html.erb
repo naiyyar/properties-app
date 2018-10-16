@@ -17,14 +17,23 @@
 	var marker_green = "<%=asset_path('marker-green.png')%>";
 	var star_off = "<%=asset_path('star-off.png')%>";
   var close_src = "<%=asset_path('close-24.png')%>";
+
+  var width = window.innerWidth;
  
   function initialize(sidebar = true) {
     // Custom options for map
+    var show_controls = true;
+    var zoom_ctrl = true;
+    if(width < 414){
+      show_controls = false;
+      zoom_ctrl = false;
+    }
     
       var options = {
+        zoomControl: zoom_ctrl,
         disableDoubleClickZoom: false,
   			zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
-  			mapTypeControl: true,
+  			mapTypeControl: show_controls,
   			mapTypeControlOptions: { 
   																style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
   																position: position

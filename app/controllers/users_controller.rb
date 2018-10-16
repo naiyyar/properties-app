@@ -11,7 +11,9 @@ class UsersController < ApplicationController
 
 	def saved_buildings
 		favorable_ids = @user.favorites.pluck(:favorable_id)
-		@buildings = Building.where(id: favorable_ids).includes(:uploads, :building_average, :units).paginate(:page => params[:page], :per_page => 20)
+		@buildings = Building.where(id: favorable_ids).paginate(:page => params[:page], :per_page => 20)
+		@hash = Building.buildings_json_hash(@buildings)
+    @zoom = 12
 	end
 
 	def new
