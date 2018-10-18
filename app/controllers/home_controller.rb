@@ -87,7 +87,7 @@ class HomeController < ApplicationController
     end
     
     @buildings = Building.filtered_buildings(@buildings, params[:filter]) if params[:filter].present?
-    @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if params[:sort_by].present?
+    @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if (params[:sort_by].present? and @buildings.present?)
   
     #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
     if @buildings.present?

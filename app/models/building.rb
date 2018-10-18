@@ -285,7 +285,7 @@ class Building < ActiveRecord::Base
 
   def self.filter_by_prices buildings, price
     if price.present?
-      @buildings = buildings.where(price: price)
+      @buildings = buildings.where(price: price) if buildings.present?
     else
       @buildings = buildings
     end
@@ -344,20 +344,20 @@ class Building < ActiveRecord::Base
     @buildings
   end
 
-  def filtered_buildings buildings, filter_params
+  def self.filtered_buildings buildings, filter_params
     rating = filter_params[:rating]
     building_types = filter_params[:type]
     price = filter_params[:price]
     beds = filter_params[:bedrooms]
     amenities = filter_params[:amenities]
   
-    @buildings = Building.filter_by_amenities(@buildings, amenities) if amenities.present?
-    @buildings = Building.filter_by_rates(@buildings, rating) if rating.present?
-    @buildings = Building.filter_by_prices(@buildings, price) if price.present?
-    @buildings = Building.filter_by_beds(@buildings, beds) if beds.present?
-    @buildings = Building.filter_by_types(@buildings, building_types)
+    buildings = Building.filter_by_amenities(buildings, amenities) if amenities.present?
+    buildings = Building.filter_by_rates(buildings, rating) if rating.present?
+    buildings = Building.filter_by_prices(buildings, price) if price.present?
+    buildings = Building.filter_by_beds(buildings, beds) if beds.present?
+    buildings = Building.filter_by_types(buildings, building_types)
 
-    return @buildings
+    return buildings
   end
 
   def self.has_amenity?(name)
