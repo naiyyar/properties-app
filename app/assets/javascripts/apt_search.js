@@ -67,7 +67,7 @@ app.apartments.prototype = {
   _select: function(e, ui) {
     search_term = ui.item.search_term
     this._input.val(search_term);
-    window.data = ui
+    
     url = '';
     if(ui.item.term_address != undefined){
       //url = '/search?search_term='+search_term+'&term_address='+ui.item.term_address;
@@ -78,9 +78,12 @@ app.apartments.prototype = {
     }else if(ui.item.term_zipcode != undefined){
       //url = '/search?search_term='+search_term+'&term_zipcode='+ui.item.term_zipcode;
       url = '/zipcode/'+ui.item.term_zipcode;
-    }else{
+    }else if(ui.item.neighborhoods != undefined){
       //url = '/search?search_term='+search_term+'&neighborhoods='+ui.item.neighborhoods;
       url = '/neighborhoods/'+ui.item.neighborhoods;
+    }
+    else{
+      url = '/city/'+ui.item.term_city;
     }
     
     $('.no-match-link').addClass('hidden');

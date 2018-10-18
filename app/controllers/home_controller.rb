@@ -95,7 +95,7 @@ class HomeController < ApplicationController
       @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
       @hash = Building.buildings_json_hash(@buildings)
     end
-    @zoom = 14
+    @zoom = (@search_string == 'New York' ? 12 : 14)
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
   end
 
@@ -123,6 +123,7 @@ class HomeController < ApplicationController
     @search_string = terms_arr.join(' ').titleize #join neighborhoods
     @search_string = @search_string.gsub('  ', ' -') if @search_string == 'Flatbush   Ditmas Park'
     @search_string = @search_string.gsub(' ', '-') if @search_string == 'Bedford Stuyvesant'
+    @search_string = 'New York' if @search_string == 'Newyork'
     
     @borough_city = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
     @searched_neighborhoods = "#{@search_string}"
