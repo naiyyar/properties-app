@@ -25,7 +25,7 @@
                   <td><%= "#{user.phone}" %></td>
                   <td><%= user.buildings.present? ? user.buildings.count : '' %></td>
                   <td><%= user.created_at.strftime("%Y-%m-%d") %></td>
-                  <td><%= user.last_sign_in_at.strftime("%Y-%m-%d") %></td>
+                  <td><%= user.last_sign_in_at.strftime("%Y-%m-%d") if user.last_sign_in_at.present? %></td>
                   <td><%=link_to 'Contribution', contribution_user_path(id: user.id) %></td>
                 </tr>
               <%end%>

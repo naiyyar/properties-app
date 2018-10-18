@@ -15,3 +15,7 @@
     }).modal('show');
 
 })(jQuery);
+
+$(document).on('click', '.favourite', function(){
+    $('.modal-si0').prop('href','javascript:void(0);').addClass('modal-si')
+});

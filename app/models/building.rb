@@ -667,7 +667,7 @@ class Building < ActiveRecord::Base
     if search.present? and first_neighborhood.blank?
       neighborhood1 = neighborhood2 = neighborhood3 = ''
       #search for child neighborhoods
-      search[0..5].each_with_index do |geo_result, index|
+      search[0..6].each_with_index do |geo_result, index|
         #finding neighborhood
         neighborhood = geo_result.address_components_of_type(:neighborhood)
         if neighborhood.present?

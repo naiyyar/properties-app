@@ -14,6 +14,8 @@
         keyboard: false
     }).modal('show');
 
-    //$('input, textarea').placeholder();
-
 })(jQuery);
+
+$(document).on('click', '.modal-si0', function(){
+    $('.modal-suii').prop('href','javascript:void(0);').addClass('modal-su')
+});
