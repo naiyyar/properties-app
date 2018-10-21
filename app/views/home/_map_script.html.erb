@@ -1,21 +1,21 @@
-<input type="text" name="lat" class="hidden lat" value="<%=@lat%>" />
-<input type="text" name="lng" class="hidden lng" value="<%=@lng%>" />
+<input type="text" name="lat" class="hidden lat" value="<%=@hash.last['latitude']%>" />
+<input type="text" name="lng" class="hidden lng" value="<%=@hash.last['longitude']%>" />
 <input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13 %>" />
 
 <script type="text/javascript" charset="utf-8">
-	json_array = <%= raw @hash.to_json %> ;
-	<% if browser.device.mobile? %>
-		var position = google.maps.ControlPosition.TOP_LEFT
-	<%else%>
-		var position = google.maps.ControlPosition.TOP_CENTER
-	<%end%>
-	var map;
-	var lat = <%= raw @lat.to_json %>;
-	var lng = <%= raw @lng.to_json %>;
-	var zoom = <%= @zoom || 13 %>;
-	var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
-	var marker_green = "<%=asset_path('marker-green.png')%>";
-	var star_off = "<%=asset_path('star-off.png')%>";
+  json_array = <%= raw @hash.to_json %> ;
+  <% if browser.device.mobile? %>
+    var position = google.maps.ControlPosition.TOP_LEFT
+  <%else%>
+    var position = google.maps.ControlPosition.TOP_CENTER
+  <%end%>
+  var map;
+  var lat = <%= raw @hash[0]['latitude'].to_json %>;
+  var lng = <%= raw @hash[0]['longitude'].to_json %>;
+  var zoom = <%= @zoom || 13 %>;
+  var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
+  var marker_green = "<%=asset_path('marker-green.png')%>";
+  var star_off = "<%=asset_path('star-off.png')%>";
   var close_src = "<%=asset_path('close-24.png')%>";
 
   var width = window.innerWidth;
@@ -32,13 +32,13 @@
       var options = {
         zoomControl: zoom_ctrl,
         disableDoubleClickZoom: false,
-  			zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
-  			mapTypeControl: show_controls,
-  			mapTypeControlOptions: { 
-  																style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-  																position: position
-  															},
-  			gestureHandling: 'greedy',
+        zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+        mapTypeControl: show_controls,
+        mapTypeControlOptions: { 
+                                  style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                                  position: position
+                                },
+        gestureHandling: 'greedy',
       };
 
       var newMarker = null;
@@ -83,18 +83,18 @@
               }
               google.maps.event.addListener(marker, 'click', (function(marker, i) {
                   return function() {
-                  	var building_id = json_array[i].id
-                  	//infobox.setContent(placeholder_content); //placeholder content
-  				          $.post('/load_infobox', {
-  				            object_id: building_id, building_show: false
-  				          }, function(data){
-  				            infobox.setContent(data.html);
-  				            //infowindow.open(handler.getMap(), google.maps.markers[index]);
-  				            //infobox.setPosition(latlng);
+                    var building_id = json_array[i].id
+                    //infobox.setContent(placeholder_content); //placeholder content
+                    $.post('/load_infobox', {
+                      object_id: building_id, building_show: false
+                    }, function(data){
+                      infobox.setContent(data.html);
+                      //infowindow.open(handler.getMap(), google.maps.markers[index]);
+                      //infobox.setPosition(latlng);
                       //if (!infobox.isOpen()) {
-  				              infobox.open(map, marker);
+                        infobox.open(map, marker);
                       //}
-  				          });
+                    });
                     
                     //infobox.setContent(infoboxContent);
                     //infobox.open(map, marker);
@@ -127,16 +127,16 @@
       
       var polylineoptons = {};
       <% if @boundary_coords.present? %>
-  	    polylineoptons = { 
-  			  paths: <%= raw @boundary_coords.to_json %>, 
-  			  strokeColor: '#1664a4', 
-  			  strokeOpacity: 0.7, 
-  			  strokeWeight: 2.5, 
-  			  fillColor: '#0e5c9a', 
-  			  fillOpacity: 0.15, 
-  			  clickable:false 
-  			}
-  		<%end%>
+        polylineoptons = { 
+          paths: <%= raw @boundary_coords.to_json %>, 
+          strokeColor: '#1664a4', 
+          strokeOpacity: 0.7, 
+          strokeWeight: 2.5, 
+          fillColor: '#0e5c9a', 
+          fillOpacity: 0.15, 
+          clickable:false 
+        }
+      <%end%>
 
       var polylines = new google.maps.Polygon(polylineoptons);
 
@@ -151,15 +151,15 @@
       map.setZoom(zoom);
 
       polylines.setMap(map);
-			
-			// Setting up boundaries using kml file
+      
+      // Setting up boundaries using kml file
       addMarkers(props, map);
       set_boundaries(map)
       
-  	}, 300);
+    }, 300);
 
     
-	}
+  }
 
   // Initialize the map
   google.maps.event.addDomListener(window, 'load', initialize);
