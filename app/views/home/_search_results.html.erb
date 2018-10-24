@@ -33,11 +33,7 @@
       <%#end%>
       
       <div style="padding: 8px;">
-        <% if building.web_url.present? %>
-          <%= link_to 'Available Apartment Listings'.html_safe, building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' %>
-        <%else%>
-          <%= link_to 'Available Listings'.html_safe, '#', class: 'btn btn-block btn-primary invisible' %>
-        <%end%>
+        <%= check_availability_link(building) %>
       </div>
     </div>
     <div class="clearfix"></div>

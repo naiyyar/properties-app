@@ -7,7 +7,7 @@
 <% unless @pop_neighborhoods.blank? and browser.device.mobile? %>
 	<div class="pull-left neighborhoods-dropdown hidden-xs" style="margin-top: 8px;">
 	  <div class="btn-group">
-	    <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle" style="min-width: 121px;" id='lr2'>
+	    <button data-toggle="dropdown" class="btn btn-o btn-primary dropdown-toggle" style="min-width: 121px;" id='lr2'>
 	      <span class="dropdown-label"><%= params[:searched_by] == 'neighborhoods' ? @searched_neighborhoods : 'Neighborhoods'  %></span> &nbsp;<span class="caret"></span>
 	    </button>
 	    
@@ -41,13 +41,13 @@
 	<% if params[:searched_by] == 'neighborhoods' or params[:searched_by] == 'zipcode' %>
 		<div class="pull-right hidden-xs">
 			<div class="btn-filter">
-		 		<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle handleFilter <%=params[:filter].present? ? 'active' : ''%>">
+		 		<button data-toggle="dropdown" class="btn btn-o btn-primary dropdown-toggle handleFilter <%=params[:filter].present? ? 'active' : ''%>">
 		      <span class="dropdown-label"><span class="fa fa-filter"></span> &nbsp;<%= 'Filter' %> <span class="filter-counts"></span></span> &nbsp;
 		    </button>
 		  </div>
 			<!-- <a href="#" class="handleFilter btn btn-default btn-sm"><span class="fa fa-filter"></span> Filter</a> &nbsp; -->
 			<div class="pull-right btn-sort">
-			 	<button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle <%=params[:sort_by].present? ? 'active' : ''%>">
+			 	<button data-toggle="dropdown" class="btn btn-o btn-primary dropdown-toggle <%=params[:sort_by].present? ? 'active' : ''%>">
 		      <span class="dropdown-label"><span class="fa fa-sort"></span> &nbsp;<%= params[:sort_by].present? ? sort_string : 'Default sort'  %></span> &nbsp; 
 		    </button>
 		    <%= render partial: 'layouts/shared/sort_list' %>

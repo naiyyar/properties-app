@@ -1,195 +1,195 @@
-<input type="text" name="lat" class="hidden lat" value="<%=@hash.last['latitude']%>" />
-<input type="text" name="lng" class="hidden lng" value="<%=@hash.last['longitude']%>" />
-<input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13 %>" />
+<% if @hash.present? %>
+  <input type="text" name="lat" class="hidden lat" value="<%=@hash.last['latitude'] %>" />
+  <input type="text" name="lng" class="hidden lng" value="<%=@hash.last['longitude'] %>" />
+  <input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13 %>" />
+  <script type="text/javascript" charset="utf-8">
+    json_array = <%= raw @hash.to_json %> ;
+    <% if browser.device.mobile? %>
+      var position = google.maps.ControlPosition.TOP_LEFT
+    <%else%>
+      var position = google.maps.ControlPosition.TOP_CENTER
+    <%end%>
+    var map;
+    var lat = <%= raw @hash[0]['latitude'].to_json %>;
+    var lng = <%= raw @hash[0]['longitude'].to_json %>;
+    var zoom = <%= @zoom || 13 %>;
+    var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
+    var marker_green = "<%=asset_path('marker-green.png')%>";
+    var star_off = "<%=asset_path('star-off.png')%>";
+    var close_src = "<%=asset_path('close-24.png')%>";
 
-<script type="text/javascript" charset="utf-8">
-  json_array = <%= raw @hash.to_json %> ;
-  <% if browser.device.mobile? %>
-    var position = google.maps.ControlPosition.TOP_LEFT
-  <%else%>
-    var position = google.maps.ControlPosition.TOP_CENTER
-  <%end%>
-  var map;
-  var lat = <%= raw @hash[0]['latitude'].to_json %>;
-  var lng = <%= raw @hash[0]['longitude'].to_json %>;
-  var zoom = <%= @zoom || 13 %>;
-  var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
-  var marker_green = "<%=asset_path('marker-green.png')%>";
-  var star_off = "<%=asset_path('star-off.png')%>";
-  var close_src = "<%=asset_path('close-24.png')%>";
-
-  var width = window.innerWidth;
- 
-  function initialize(sidebar = true) {
-    // Custom options for map
-    var show_controls = true;
-    var zoom_ctrl = true;
-    if(width < 414){
-      show_controls = false;
-      zoom_ctrl = false;
-    }
-    
-      var options = {
-        zoomControl: zoom_ctrl,
-        disableDoubleClickZoom: false,
-        zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
-        mapTypeControl: show_controls,
-        mapTypeControlOptions: { 
-                                  style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                                  position: position
-                                },
-        gestureHandling: 'greedy',
-      };
-
-      var newMarker = null;
-      var markers = [];
-      // json for properties markers on map
-      var props = json_array;
-      var bounds = new google.maps.LatLngBounds();
-      var infobox = new InfoBubble({
-        maxWidth: 229,
-        position: new google.maps.LatLng(lng, lat),
-        shadowStyle: 3,
-        padding: 0,
-        backgroundColor: 'rgb(255,255,255)',
-        borderRadius: 2,
-        arrowSize: 10,
-        borderWidth: 0,
-        borderColor: '#2c2c2c',
-        disableAutoPan: true,
-        hideCloseButton: false
-      });
-
-      // function that adds the markers on map
-      var addMarkers = function(props, map) {
-          $.each(props, function(i,prop) {
-              var latlng = new google.maps.LatLng(prop.latitude, prop.longitude);
-              var marker = new google.maps.Marker({
-                  position: latlng,
-                  map: map,
-                  icon: new google.maps.MarkerImage( 
-                      "<%=asset_path('red-dot.png')%>",
-                      null,
-                      null,
-                      null,
-                      new google.maps.Size(36, 36)
-                  ),
-                  draggable: false,
-                  //animation: google.maps.Animation.DROP,
-              });
-              bounds.extend(marker.position);
-              if(sidebar){
-                createSidebar(prop, marker);
-              }
-              google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                  return function() {
-                    var building_id = json_array[i].id
-                    //infobox.setContent(placeholder_content); //placeholder content
-                    $.post('/load_infobox', {
-                      object_id: building_id, building_show: false
-                    }, function(data){
-                      infobox.setContent(data.html);
-                      //infowindow.open(handler.getMap(), google.maps.markers[index]);
-                      //infobox.setPosition(latlng);
-                      //if (!infobox.isOpen()) {
-                        infobox.open(map, marker);
-                      //}
-                    });
-                    
-                    //infobox.setContent(infoboxContent);
-                    //infobox.open(map, marker);
-                  }
-                  
-              })(marker, i));
-
-              google.maps.event.addDomListener(document.getElementById('header'),
-              'click', function() {
-                infobox.close();
-              });
-
-              google.maps.event.addDomListener(document.getElementById('content'),
-              'click', function() {
-                infobox.close();
-              });
-
-              google.maps.event.addListener(map, 'click', function() {
-                infobox.close();
-              });         
-
-              markers.push(marker);
-          });
-          map.fitBounds(bounds);
-          var listener = google.maps.event.addListener(map, "idle", function () {
-              map.setZoom(zoom);
-              google.maps.event.removeListener(listener);
-          });
-        }
-      
-      var polylineoptons = {};
-      <% if @boundary_coords.present? %>
-        polylineoptons = { 
-          paths: <%= raw @boundary_coords.to_json %>, 
-          strokeColor: '#1664a4', 
-          strokeOpacity: 0.7, 
-          strokeWeight: 2.5, 
-          fillColor: '#0e5c9a', 
-          fillOpacity: 0.15, 
-          clickable:false 
-        }
-      <%end%>
-
-      var polylines = new google.maps.Polygon(polylineoptons);
-
-      var set_boundaries = function(map){
-        brooklyn_and_queens_neighborhoods(seach_term, map) //In search.js
+    var width = window.innerWidth;
+   
+    function initialize(sidebar = true) {
+      // Custom options for map
+      var show_controls = true;
+      var zoom_ctrl = true;
+      if(width < 414){
+        show_controls = false;
+        zoom_ctrl = false;
       }
-
-    setTimeout(function() {
-      $('body').removeClass('notransition');
-      map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
-      map.setCenter(new google.maps.LatLng(lat,lng));
-      map.setZoom(zoom);
-
-      polylines.setMap(map);
       
-      // Setting up boundaries using kml file
-      addMarkers(props, map);
-      set_boundaries(map)
+        var options = {
+          zoomControl: zoom_ctrl,
+          disableDoubleClickZoom: false,
+          zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+          mapTypeControl: show_controls,
+          mapTypeControlOptions: { 
+                                    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                                    position: position
+                                  },
+          gestureHandling: 'greedy',
+        };
+
+        var newMarker = null;
+        var markers = [];
+        // json for properties markers on map
+        var props = json_array;
+        var bounds = new google.maps.LatLngBounds();
+        var infobox = new InfoBubble({
+          maxWidth: 229,
+          position: new google.maps.LatLng(lng, lat),
+          shadowStyle: 3,
+          padding: 0,
+          backgroundColor: 'rgb(255,255,255)',
+          borderRadius: 2,
+          arrowSize: 10,
+          borderWidth: 0,
+          borderColor: '#2c2c2c',
+          disableAutoPan: true,
+          hideCloseButton: false
+        });
+
+        // function that adds the markers on map
+        var addMarkers = function(props, map) {
+            $.each(props, function(i,prop) {
+                var latlng = new google.maps.LatLng(prop.latitude, prop.longitude);
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    icon: new google.maps.MarkerImage( 
+                        "<%=asset_path('red-dot.png')%>",
+                        null,
+                        null,
+                        null,
+                        new google.maps.Size(36, 36)
+                    ),
+                    draggable: false,
+                    //animation: google.maps.Animation.DROP,
+                });
+                bounds.extend(marker.position);
+                if(sidebar){
+                  createSidebar(prop, marker);
+                }
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                      var building_id = json_array[i].id
+                      //infobox.setContent(placeholder_content); //placeholder content
+                      $.post('/load_infobox', {
+                        object_id: building_id, building_show: false
+                      }, function(data){
+                        infobox.setContent(data.html);
+                        //infowindow.open(handler.getMap(), google.maps.markers[index]);
+                        //infobox.setPosition(latlng);
+                        //if (!infobox.isOpen()) {
+                          infobox.open(map, marker);
+                        //}
+                      });
+                      
+                      //infobox.setContent(infoboxContent);
+                      //infobox.open(map, marker);
+                    }
+                    
+                })(marker, i));
+
+                google.maps.event.addDomListener(document.getElementById('header'),
+                'click', function() {
+                  infobox.close();
+                });
+
+                google.maps.event.addDomListener(document.getElementById('content'),
+                'click', function() {
+                  infobox.close();
+                });
+
+                google.maps.event.addListener(map, 'click', function() {
+                  infobox.close();
+                });         
+
+                markers.push(marker);
+            });
+            map.fitBounds(bounds);
+            var listener = google.maps.event.addListener(map, "idle", function () {
+                map.setZoom(zoom);
+                google.maps.event.removeListener(listener);
+            });
+          }
+        
+        var polylineoptons = {};
+        <% if @boundary_coords.present? %>
+          polylineoptons = { 
+            paths: <%= raw @boundary_coords.to_json %>, 
+            strokeColor: '#1664a4', 
+            strokeOpacity: 0.7, 
+            strokeWeight: 2.5, 
+            fillColor: '#0e5c9a', 
+            fillOpacity: 0.15, 
+            clickable:false 
+          }
+        <%end%>
+
+        var polylines = new google.maps.Polygon(polylineoptons);
+
+        var set_boundaries = function(map){
+          brooklyn_and_queens_neighborhoods(seach_term, map) //In search.js
+        }
+
+      setTimeout(function() {
+        $('body').removeClass('notransition');
+        map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
+        map.setCenter(new google.maps.LatLng(lat,lng));
+        map.setZoom(zoom);
+
+        polylines.setMap(map);
+        
+        // Setting up boundaries using kml file
+        addMarkers(props, map);
+        set_boundaries(map)
+        
+      }, 300);
+
       
-    }, 300);
-
-    
-  }
-
-  // Initialize the map
-  google.maps.event.addDomListener(window, 'load', initialize);
-
-  var windowHeight;
-  var windowWidth;
-  var contentHeight;
-  var contentWidth;
-  var isDevice = true;
-
-  // calculations for elements that changes size on window resize
-  var windowResizeHandler = function() {
-    windowHeight = window.innerHeight;
-    windowWidth = $(window).width();
-    contentHeight = windowHeight - $('#header').height();
-    contentWidth = $('#content').width();
-
-    $('#leftSide').height(contentHeight);
-    $('.closeLeftSide').height(contentHeight);
-    $('#wrapper').height(contentHeight);
-    $('#mapViewSearch').height(contentHeight);
-    $('#content').height(contentHeight);
-    if(map){
-      google.maps.event.trigger(map, 'resize');
     }
-  }
 
-  windowResizeHandler();
-  $(window).resize(function() {
-      windowResizeHandler();
-  });
+    // Initialize the map
+    google.maps.event.addDomListener(window, 'load', initialize);
 
-</script>
+    var windowHeight;
+    var windowWidth;
+    var contentHeight;
+    var contentWidth;
+    var isDevice = true;
+
+    // calculations for elements that changes size on window resize
+    var windowResizeHandler = function() {
+      windowHeight = window.innerHeight;
+      windowWidth = $(window).width();
+      contentHeight = windowHeight - $('#header').height();
+      contentWidth = $('#content').width();
+
+      $('#leftSide').height(contentHeight);
+      $('.closeLeftSide').height(contentHeight);
+      $('#wrapper').height(contentHeight);
+      $('#mapViewSearch').height(contentHeight);
+      $('#content').height(contentHeight);
+      if(map){
+        google.maps.event.trigger(map, 'resize');
+      }
+    }
+
+    windowResizeHandler();
+    $(window).resize(function() {
+        windowResizeHandler();
+    });
+  </script>
+<%end%>

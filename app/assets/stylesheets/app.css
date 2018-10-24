@@ -496,6 +496,14 @@ h3.unit_name_header{
 
 /* Buttons */
 
+.btn-filter .btn{
+    padding: 10px 48px !important;
+}
+
+.btn-sort .btn{
+    padding: 10px 30px !important;
+}
+
 .btn {
     border-radius: 2px !important;
     text-decoration: none !important;
@@ -516,6 +524,7 @@ h3.unit_name_header{
     color: #999;
     border-color: #999;
 }
+
 .btn-xlg{
    padding: 14px 26px !important;
    font-size: 18px !important;

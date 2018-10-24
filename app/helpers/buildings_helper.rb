@@ -144,4 +144,12 @@ module BuildingsHelper
 		(current_user.present? and object.favorite_by?(current_user)) ? 'filled-heart' : 'unfilled-heart'
 	end
 
+	def check_availability_link building
+		if building.web_url.present? 
+      link_to 'Check Availability', building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' 
+    else
+      link_to 'Check Availability', '#', class: 'btn btn-block btn-primary invisible'
+    end
+	end
+
 end

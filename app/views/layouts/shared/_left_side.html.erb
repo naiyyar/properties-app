@@ -14,6 +14,7 @@
         <li><a href="#" class="left-side-zindex" data-toggle="modal" data-target="#signin"><span class="navIcon fa fa-sign-in"></span><span class="navLabel">Sign In</span></a></li>
         <li><a href="#" class="left-side-zindex" data-toggle="modal" data-target="#signup"><span class="navIcon fa fa-user"></span><span class="navLabel">Sign Up</span></a></li>
       <%end%>
+      
       <%if current_user and current_user.has_role?(:admin) %>
         <li><a href="/buildings"><span class="navIcon fa fa-building"></span><span class="navLabel">Buildings</span></a></li>
         <li><a href="/units"><span class="navIcon icon-home"></span><span class="navLabel">Units</span></a></li>
@@ -22,6 +23,10 @@
         <li><a href="/reviews"><span class="navIcon icon-star"></span><span class="navLabel">Reviews</span></a></li>
         <li><a href="/neighborhood_links"><span class="navIcon icon-link"></span><span class="navLabel">Neighborhood guides</span></a></li>
         <li><a href="<%=management_companies_path%>"><span class="navIcon fa fa-building"></span><span class="navLabel">Management companies</span></a></li>
+      <%elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank? %>
+        <li><a href="/blog"><span class="navIcon fa fa-hashtag"></span><span class="navLabel">Blog</span></a></li>
+        <li><a href="/about"><span class="navIcon icon-info"></span><span class="navLabel">About us</span></a></li>
+        <li><a href="<%=new_contact_path%>"><span class="navIcon fa fa-comment"></span><span class="navLabel">Send feedback</span></a></li>
       <%end%>
     </ul>
     
