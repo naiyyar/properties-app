@@ -3,17 +3,33 @@
 </li>
 <% unless user_signed_in? %>
   <li><a href="/users/sign_in"><span class="navIcon fa fa-sign-in"></span> Sign In</a></li>
-  <li><a href="/users/sign_up"><span class="navIcon fa fa-user"></span> Sign Up</a></li>
-  <li class="hidden-lg hidden-md"><a href="#" data-toggle="modal" data-target="#signup1" style="visibility:hidden;"><span class="navIcon fa fa-user"></span> Sign Up</a></li>
+  <li><a href="/users/sign_up"><span class="navIcon fa fa-user"></span> Sign Up</a></li>  
 <%end%>
 
-<% if user_signed_in? %>
-  <% if current_user.has_role?(:admin) %>
-    <li>
-      <a href="<%= buildings_path %>"><span class="fa fa-user-secret"></span> Admin</a></li>
-    </li>
+<%if current_user and current_user.has_role?(:admin) %>
+  <li><a href="/buildings"><span class="fa fa-building"></span> Buildings</a></li>
+  <li><a href="/units"><span class="icon-home"></span> Units</a></li>
+  <li><a href="/users"><span class="icon-user"></span> Users</a></li>
+  <li><a href="/documents"><span class="icon-docs"></span> Documents</a></li>
+  <li><a href="/reviews"><span class="icon-star"></span> Reviews</a></li>
+  <li><a href="/neighborhood_links"><span class="icon-link"></span> Neighborhood guides</a></li>
+  <li><a href="<%=management_companies_path%>"><span class="fa fa-building"></span> Management companies</a></li>
+<%elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank? %>
+  <li class="visible-xs"><a href="/blog"><span class="fa fa-hashtag"></span> Blog</a></li>
+  <li class="visible-xs"><a href="/about"><span class="icon-info"></span> About us</a></li>
+  <li class="visible-xs"><a href="<%=new_contact_path%>"><span class="fa fa-comment"></span> Send feedback</a></li>
+<%end%>
+<% if current_user.present? %>
+  <li><a href="<%=saved_buildings_user_path(current_user) %>"><span class="icon-heart"></span>  Saved buildings</a></li>
+<%end%>
+
+<%# if user_signed_in? %>
+  <%# if current_user.has_role?(:admin) %>
+    <!-- <li>
+      <a href="<%#= buildings_path %>"><span class="fa fa-user-secret"></span> Admin</a></li>
+    </li> -->
     <!-- <li>
       <a href="<%= units_path %>"><span class="fa fa-building"></span> Units</a></li>
     </li> -->
-  <%end%>
-<%end%>
+  <%#end%>
+<%#end%>
