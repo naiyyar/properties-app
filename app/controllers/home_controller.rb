@@ -115,7 +115,7 @@ class HomeController < ApplicationController
   private
   
   def manhattan_kmls
-    ['Midtown', 'Sutton Place', 'Upper East Side']
+    ['Midtown', 'Sutton Place', 'Upper East Side', 'Yorkville']
   end
 
   def reset_session
