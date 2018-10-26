@@ -7,13 +7,13 @@
   
   <% if params[:searched_by] == 'neighborhoods' or params[:searched_by] == 'zipcode' %>
 		<div class="btn-filter">
-	 		<button class="btn btn-o btn-filter handleFilter">
+	 		<button class="btn btn-o btn-primary btn-filter handleFilter">
 	      <span class="dropdown-label"><span class="fa fa-filter"></span> &nbsp;<%= 'Filter' %> <span class="filter-counts"></span> &nbsp; </span>
 	    </button>
 	  </div>
 		
 		<div class="pull-right btn-sort">
-			<label class="select" style="margin-bottom: 0px;">
+			<label class="select select-blue" style="margin-bottom: 0px;">
 				<%= select_tag :sort, options_for_select(sort_options, params[:sort_by]), { prompt: 'Sort', data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] } } %> <i></i>
 			</label>
 		 	<!-- <button data-toggle="dropdown" class="btn btn-o btn-gray dropdown-toggle">

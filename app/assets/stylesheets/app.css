@@ -496,12 +496,21 @@ h3.unit_name_header{
 
 /* Buttons */
 
-.btn-filter .btn{
-    padding: 10px 48px !important;
+.btn-filter .btn.sc-lg, .btn-sort .btn.sc-lg{
+    /*padding: 10px 48px !important;*/
+    width: 11em;
+}
+
+.btn-filter .btn .dropdown-label, .btn-sort .btn .dropdown-label{
+    float: none;
 }
 
 .btn-sort .btn{
     padding: 10px 30px !important;
+}
+
+.btn-sort .dropdown-menu.sc-lg{
+    right: 123px;
 }
 
 .btn {
@@ -6048,6 +6057,9 @@ select.custom-arrow {
     }
     .nav-justified > li {
      width: 0% !important; 
+    }
+    .btn-filter .btn.sc-lg, .btn-sort .btn.sc-lg {
+        width: 10em;
     }
 }
 @media screen and (max-width: 991px) {

@@ -41,13 +41,13 @@
 	<% if params[:searched_by] == 'neighborhoods' or params[:searched_by] == 'zipcode' %>
 		<div class="pull-right hidden-xs">
 			<div class="btn-filter">
-		 		<button data-toggle="dropdown" class="btn btn-o btn-primary dropdown-toggle handleFilter <%=params[:filter].present? ? 'active' : ''%>">
+		 		<button data-toggle="dropdown" class="btn sc-lg btn-o btn-primary dropdown-toggle handleFilter <%=params[:filter].present? ? 'active' : ''%>">
 		      <span class="dropdown-label"><span class="fa fa-filter"></span> &nbsp;<%= 'Filter' %> <span class="filter-counts"></span></span> &nbsp;
 		    </button>
 		  </div>
 			<!-- <a href="#" class="handleFilter btn btn-default btn-sm"><span class="fa fa-filter"></span> Filter</a> &nbsp; -->
 			<div class="pull-right btn-sort">
-			 	<button data-toggle="dropdown" class="btn btn-o btn-primary dropdown-toggle <%=params[:sort_by].present? ? 'active' : ''%>">
+			 	<button data-toggle="dropdown" class="btn sc-lg btn-o btn-primary dropdown-toggle <%=params[:sort_by].present? ? 'active' : ''%>">
 		      <span class="dropdown-label"><span class="fa fa-sort"></span> &nbsp;<%= params[:sort_by].present? ? sort_string : 'Default sort'  %></span> &nbsp; 
 		    </button>
 		    <%= render partial: 'layouts/shared/sort_list' %>
