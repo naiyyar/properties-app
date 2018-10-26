@@ -1,17 +1,17 @@
-<% if @hash.present? %>
-  <input type="text" name="lat" class="hidden lat" value="<%=@hash.last['latitude'] %>" />
-  <input type="text" name="lng" class="hidden lng" value="<%=@hash.last['longitude'] %>" />
+<%# if @hash.present? %>
+  <input type="text" name="lat" class="hidden lat" value="<%#=@lat %>" />
+  <input type="text" name="lng" class="hidden lng" value="<%#=@lng %>" />
   <input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13 %>" />
   <script type="text/javascript" charset="utf-8">
-    json_array = <%= raw @hash.to_json %> ;
+    json_array = <%= raw @hash.to_json %>;
     <% if browser.device.mobile? %>
       var position = google.maps.ControlPosition.TOP_LEFT
     <%else%>
       var position = google.maps.ControlPosition.TOP_CENTER
     <%end%>
     var map;
-    var lat = <%= raw @hash[0]['latitude'].to_json %>;
-    var lng = <%= raw @hash[0]['longitude'].to_json %>;
+    var lat =  <%= raw @lat.to_json %>; 
+    var lng= <%= raw @lng.to_json %>;
     var zoom = <%= @zoom || 13 %>;
     var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
     var marker_green = "<%=asset_path('marker-green.png')%>";
@@ -149,15 +149,12 @@
         map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
         map.setCenter(new google.maps.LatLng(lat,lng));
         map.setZoom(zoom);
-
         polylines.setMap(map);
-        
         // Setting up boundaries using kml file
-        addMarkers(props, map);
         set_boundaries(map)
+        addMarkers(props, map);
         
       }, 300);
-
       
     }
 
@@ -192,4 +189,4 @@
         windowResizeHandler();
     });
   </script>
-<%end%>
+<%#end%>

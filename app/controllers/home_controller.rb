@@ -61,10 +61,10 @@ class HomeController < ApplicationController
 
         @boundary_coords = []
         if params[:searched_by] == 'zipcode'
-          @buildings = Building.where('zipcode = ?', @search_string)
+          @buildings = @searched_buildings = Building.where('zipcode = ?', @search_string)
           @boundary_coords << Gcoordinate.where(zipcode: @search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
         elsif params[:searched_by] == 'neighborhoods'
-          @buildings = Building.buildings_in_neighborhood(@search_string)
+          @buildings = @searched_buildings = Building.buildings_in_neighborhood(@search_string)
           @boundary_coords << @neighborhood_coordinates unless manhattan_kmls.include?(@search_string)
         else
           if @search_string == 'Manhattan'
@@ -94,6 +94,16 @@ class HomeController < ApplicationController
       @buildings = @buildings unless @buildings.kind_of? Array
       @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
       @hash = Building.buildings_json_hash(@buildings)
+      @lat = @hash[0]['latitude']
+      @lng = @hash[0]['longitude']
+    else
+      if @boundary_coords.present? and @boundary_coords.first.length > 1
+        @lat = @boundary_coords.first.first[:lat]
+        @lng = @boundary_coords.first.first[:lng]
+      else
+        @lat = @searched_buildings.first.latitude
+        @lng = @searched_buildings.first.longitude
+      end
     end
     @zoom = (@search_string == 'New York' ? 12 : 14)
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)

@@ -5,7 +5,7 @@
 <div id="content" class="searched-properties">
   <div class="tabsWidget tabsWidgetSearch">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><b>BUILDINGS <%= "(#{ @buildings.count })" %></b></a></li>
+      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><b>BUILDINGS <%= "(#{ @buildings.present? ? @buildings.count : 0 })" %></b></a></li>
 
       <li class="">
         <a href="#resourceLinks" role="tab" data-toggle="tab"><b>NEIGHBORHOOD GUIDES <%= "(#{@neighborhood_links.count})" if @neighborhood_links.present? %></b></a>
