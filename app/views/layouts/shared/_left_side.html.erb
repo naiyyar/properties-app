@@ -28,6 +28,9 @@
         <li><a href="/about"><span class="navIcon icon-info"></span><span class="navLabel">About us</span></a></li>
         <li><a href="<%=new_contact_path%>"><span class="navIcon fa fa-comment"></span><span class="navLabel">Send feedback</span></a></li>
       <%end%>
+      <% if current_user.present? %>
+        <li><a href="<%=saved_buildings_user_path(current_user) %>"><span class="navIcon icon-heart"></span><span class="navLabel">Saved buildings</span></a></li>
+      <%end%>
     </ul>
     
   </nav>
