@@ -24,9 +24,11 @@
     -moz-appearance: none;
     -webkit-appearance: none;
 }
-.select-blue select{
-   border-color: #0073cc!important; 
+.select-blue select,{
+   border-color: #0073cc !important; 
+   color: #0073cc !important; 
 }
+
 .select {
     position: relative;
     display: block;
@@ -44,12 +46,12 @@
 
 .select i:before {
     top: 0;
-    border-bottom: 4px solid #404040;
+    border-bottom: 4px solid #0073cc;
 }
 
 .select i:after {
     bottom: 0;
-    border-top: 4px solid #404040;
+    border-top: 4px solid #0073cc;
 }
 
 i:after, .select i:before {

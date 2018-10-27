@@ -101,8 +101,13 @@ class HomeController < ApplicationController
         @lat = @boundary_coords.first.first[:lat]
         @lng = @boundary_coords.first.first[:lng]
       else
-        @lat = @searched_buildings.first.latitude
-        @lng = @searched_buildings.first.longitude
+        if @searched_buildings.present?
+          @lat = @searched_buildings.first.latitude
+          @lng = @searched_buildings.first.longitude
+        elsif building.present?
+          @lat = building.first.latitude
+          @lng = building.first.longitude
+        end
       end
     end
     @zoom = (@search_string == 'New York' ? 12 : 14)
