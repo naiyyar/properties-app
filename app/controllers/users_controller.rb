@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 		@buildings = Building.where(id: favorable_ids).paginate(:page => params[:page], :per_page => 20)
 		@hash = Building.buildings_json_hash(@buildings)
     @zoom = 12
+    @show_map_btn = true
 	end
 
 	def new
