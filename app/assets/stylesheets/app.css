@@ -6103,6 +6103,9 @@ select.custom-arrow {
     .resultsList {
         padding: 8px 0px 0 0px;
     }
+    .btn-o.btn-filter{
+        background-color: #fff !important;
+    }
     .form-container{
         padding: 10px;
         margin-left: 0px;
