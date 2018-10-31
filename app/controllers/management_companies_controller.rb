@@ -26,8 +26,8 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn = true
-    buildings = @management_company.buildings
-    @manage_buildings = buildings.paginate(:page => params[:page], :per_page => 20).reorder('neighborhood ASC, building_name ASC') if !params[:object_id].present?
+    buildings = @management_company.buildings.unscope(:order).order('neighborhood ASC, building_name ASC')
+    @manage_buildings = buildings.paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
     @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads).limit(10)
 
     if buildings.present?
@@ -39,13 +39,6 @@ class ManagementCompaniesController < ApplicationController
       @lng = buildings.first.longitude
       @zoom = 11
       @managed_buildings = buildings.includes(:uploads, :units, :building_average, :votes) unless buildings.kind_of? Array
-      # @hash = Gmaps4rails.build_markers(managed_buildings) do |building, marker|
-      #   marker.lat building.latitude
-      #   marker.lng building.longitude
-      #   marker.title "#{building.id}, #{building.building_name}, #{building.street_address}, #{building.zipcode}"
-        
-      #   marker.infowindow render_to_string(:partial => '/home/placeholder_infowindow')
-      # end
       @hash = @managed_buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
     end
   end

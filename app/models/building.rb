@@ -132,21 +132,6 @@ class Building < ActiveRecord::Base
      :search_query
     ]
   )
-  
-  # scope :sorted_by, -> (sort_option) {
-  #   return if sort_option.nil?
-  #   direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
-  #   case sort_option.to_s
-  #   when /^building_name_/
-  #     order("LOWER(buildings.building_name) #{ direction }")
-  #   when /^building_street_address_/
-  #     order("LOWER(buildings.building_street_address) #{ direction }")
-  #   when /^created_at_/
-  #     order("LOWER(buildings.created_at) #{ direction }")
-  #   else
-  #     raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
-  #   end
-  # }
 
   #amenities scopes
   scope :doorman, -> { where(doorman: true) }

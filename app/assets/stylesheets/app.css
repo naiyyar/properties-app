@@ -6101,7 +6101,14 @@ select.custom-arrow {
 
 @media screen and (max-width: 767px) {
     .resultsList {
-        padding: 8px 0px 0 0px;
+        padding: 10px 10px 0 10px;
+    }
+    .no-padding {
+        padding: 0 !important;
+    }
+    a.card, div.card {
+        margin-bottom: 10px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
     .btn-o.btn-filter{
         background-color: #fff !important;

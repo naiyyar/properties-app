@@ -55,25 +55,16 @@
 				</div>
       </div>
 
-      <div class="tab-pane fade  in active" id="building_managed">
-        <!-- <div class="singleTop" style="padding-bottom: 0px;"> -->
+      <div class="tab-pane fade  in active no-padding" id="building_managed">
+        <div class="resultsList">
           <div class="row" id="load-more-buildings">
             <%= render partial: 'home/search_results', locals: { buildings: @manage_buildings } %>
           </div>
+        </div>
 
-          <div class="pages-container">
-            <%= will_paginate @manage_buildings, renderer: BootstrapPagination::Rails %>
-          </div>
-        	<%# @manage_buildings.each do |building| %>
-        		<%# @building = building %>
-        		<!-- <div style="border-bottom: 6px solid #f3f3f3; padding: 6px 0px 0px;"> -->
-	        		<%#= render partial: 'buildings/building_images_slider' %>
-	        		<!-- <a href="<%#= building_path(building) %>"> -->
-		          	<%#= render partial: 'buildings/building_summary' %>
-		          <!-- </a> -->
-	          <!-- </div> -->
-	         <%#end%>
-        <!-- </div> -->
+        <div class="pages-container">
+          <%= will_paginate @manage_buildings, renderer: BootstrapPagination::Rails %>
+        </div>
       </div>
     </div>
   </div>

@@ -146,10 +146,14 @@ module BuildingsHelper
 
 	def check_availability_link building
 		if building.web_url.present? 
-      link_to 'Check Availability', building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' 
+      link_to check_vaibility, building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' 
     else
-      link_to 'Check Availability', '#', class: 'btn btn-block btn-primary invisible'
+      link_to check_vaibility, '#', class: 'btn btn-block btn-primary invisible'
     end
+	end
+
+	def check_vaibility
+		'<b>Check Availability</b>'.html_safe
 	end
 
 end
