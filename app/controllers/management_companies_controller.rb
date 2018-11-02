@@ -29,7 +29,8 @@ class ManagementCompaniesController < ApplicationController
     buildings = @management_company.buildings.unscope(:order).order('neighborhood ASC, building_name ASC')
     @manage_buildings = buildings.paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
     @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads).limit(10)
-
+    @building_photos = Upload.where(imageable_id: @manage_buildings.pluck(:id), imageable_type: 'Building')
+    
     if buildings.present?
       #finding average rating for all managed buildings 
       @stars = @management_company.get_average_stars

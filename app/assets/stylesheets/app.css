@@ -17,6 +17,10 @@ body{
     }
 }
 
+.contribute_guidelines_emojis img{
+    margin: 2px 4px;
+}
+
 .tr-auth-btn {
     padding-top: 8px;
     padding-bottom: 11px;
@@ -39,7 +43,7 @@ body{
     color: #b1b3b6;
 }
 .filled-heart .fa-heart, .unfilled-heart .fa-heart:hover{
-    color: #f16980 !important;
+    color: #EC555B !important;
 }
 
 .animated-background {
@@ -2321,7 +2325,7 @@ a.btn.dropdown-btn.btn-gray {
     font-size: 13px;
 }
 .resultsList {
-    padding: 11px 11px 0 11px;
+    padding: 15px 15px 0 15px;
 }
 a.color-default:hover{
     color: #1a0dab !important;
@@ -6100,14 +6104,14 @@ select.custom-arrow {
 }
 
 @media screen and (max-width: 767px) {
-    .resultsList {
+    /*.resultsList {
         padding: 10px 10px 0 10px;
-    }
+    }*/
     .no-padding {
         padding: 0 !important;
     }
     a.card, div.card {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
     .btn-o.btn-filter{

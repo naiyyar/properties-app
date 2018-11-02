@@ -96,6 +96,8 @@ class HomeController < ApplicationController
       @hash = Building.buildings_json_hash(@buildings)
       @lat = @hash[0]['latitude']
       @lng = @hash[0]['longitude']
+      @photos_count = Upload.where(imageable_id: @buildings.map(&:id), imageable_type: 'Building').count
+      @reviews_count = Review.where(reviewable_id: @buildings.map(&:id), reviewable_type: 'Building').count
     else
       if @boundary_coords.present? and @boundary_coords.first.length > 1
         @lat = @boundary_coords.first.first[:lat]
@@ -143,7 +145,11 @@ class HomeController < ApplicationController
     @borough_city = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
     @searched_neighborhoods = "#{@search_string}"
     @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
-    @tab_title_text = "#{@searched_neighborhoods} #{@borough_city}"
+    @tab_title_text = "#{@search_string} #{@borough_city}"
+   
+    # Management Company Pages
+    # {Management Company Name} manages {#} apartment rental buildings in NYC you can rent directly from and pay no broker fees. Click to view {#} photos and {#} reviews.
+
   end
 
 end
