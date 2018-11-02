@@ -28,7 +28,7 @@ class ManagementCompaniesController < ApplicationController
     @show_map_btn = true
     buildings = @management_company.buildings.reorder(neighborhood: :asc, building_name: :asc, building_street_address: :asc)
     @manage_buildings = buildings.paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
-    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads).limit(10)
+    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable).limit(10)
     @building_photos = Upload.where(imageable_id: @manage_buildings.pluck(:id), imageable_type: 'Building')
     
     if buildings.present?
@@ -39,7 +39,7 @@ class ManagementCompaniesController < ApplicationController
       @lat = buildings.first.latitude
       @lng = buildings.first.longitude
       @zoom = 11
-      @managed_buildings = buildings.includes(:uploads, :units, :building_average, :votes) unless buildings.kind_of? Array
+      @managed_buildings = buildings.includes(:uploads, :building_average, :votes) unless buildings.kind_of? Array
       @hash = @managed_buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
     end
   end

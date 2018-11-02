@@ -47,7 +47,7 @@ class ManagementCompany < ActiveRecord::Base
 
 	def recommended_percent
 		downcount = total_reviews = 0
-		self.buildings.each do |building|
+		self.buildings.includes(:reviews).each do |building|
 			if building.reviews.present?
 				downcount += building.downvotes_count
 				total_reviews += building.reviews.count
