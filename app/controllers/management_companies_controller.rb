@@ -26,7 +26,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn = true
-    buildings = @management_company.buildings.unscope(:order).order('neighborhood ASC, building_name ASC')
+    buildings = @management_company.buildings#.reorder(neighborhood: :asc, building_name: :asc)
     @manage_buildings = buildings.paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
     @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads).limit(10)
     @building_photos = Upload.where(imageable_id: @manage_buildings.pluck(:id), imageable_type: 'Building')

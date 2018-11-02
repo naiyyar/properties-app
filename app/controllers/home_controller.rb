@@ -146,10 +146,6 @@ class HomeController < ApplicationController
     @searched_neighborhoods = "#{@search_string}"
     @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
     @tab_title_text = "#{@search_string} #{@borough_city}"
-   
-    # Management Company Pages
-    # {Management Company Name} manages {#} apartment rental buildings in NYC you can rent directly from and pay no broker fees. Click to view {#} photos and {#} reviews.
-
   end
 
 end
