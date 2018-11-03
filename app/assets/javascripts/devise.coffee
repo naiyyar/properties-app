@@ -2,7 +2,6 @@
 #submitting sign in form
 
 $(document).bind 'ajax:success', "form#sign_in_user, form#sign_up_user", (e, data, status, xhr) ->
-	window.data = data
 	if(data.success)
 		$('#error_explanation b').html('')
 		$('#user_password').next().html('')
@@ -10,7 +9,7 @@ $(document).bind 'ajax:success', "form#sign_in_user, form#sign_up_user", (e, dat
 	else
 		$('#user_email_signup, #signup_user_password').next().html('')
 		password_field = $('#signup_user_password')
-		if(data.data.message.email)
+		if(data.data != undefined && data.data.message.email)
 			$('#user_email_signup').parent().addClass('has-error')
 			if(data.data.message.email[0] == 'is invalid')
 				$('#user_email_signup').next().append('Please enter a valid email address')
@@ -25,7 +24,7 @@ $(document).bind 'ajax:success', "form#sign_in_user, form#sign_up_user", (e, dat
 			$('#user_email_signup').parent().removeClass('has-error')
 			$('#user_email_signup').next().html('')
 		
-		if(data.data.message.password)
+		if(data.data != undefined && data.data.message.password)
 			$(password_field).parent().addClass('has-error')
 			$(password_field).next().append(data.data.message.password[0])
 		else

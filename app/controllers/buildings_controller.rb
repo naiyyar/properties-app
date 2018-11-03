@@ -3,13 +3,6 @@ class BuildingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search]
 
   def index
-    # @buildings = Building.order('created_at desc').includes(:building_average) #.paginate(:page => params[:page], :per_page => 20)
-    # respond_to do |format|
-    #   format.html
-    #   format.json { 
-    #     render json: Building.search(params[:term])
-    #   }
-    # end
     @filterrific = initialize_filterrific(
       Building,
       params[:filterrific],
@@ -28,17 +21,17 @@ class BuildingsController < ApplicationController
 
   def favorite
     @building = Building.find(params[:object_id])
-    @favourite = @building.favorite_by?(current_user)
-    @saved_as_favourite = true
-    if @favourite
-      current_user.unfavorite(@building)
-      @saved_as_favourite = false
-    else
-      current_user.favorite(@building)
-    end
+    current_user.favorite(@building)
     respond_to do |format|
       format.js
     end
+  end
+
+  def unfavorite
+    @building = Building.find(params[:object_id])
+    current_user.unfavorite(@building)
+    
+    render json: { message: 'Success' }
   end
 
   def units

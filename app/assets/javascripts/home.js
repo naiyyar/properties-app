@@ -385,13 +385,10 @@
     });
 
     function appendBuildingImages(building_id, elem, active_image_id){
-        console.log(building_id)
-        console.log(active_image_id)
         $.ajax({
             url: '/buildings/'+building_id+'/uploads',
             type: 'get',
             dataType: 'json',
-            //data: { upload: { sort: droppable_sort_id } },
             success: function(response){
                 console.log('success')
                 console.log(response)
@@ -410,16 +407,6 @@
         $('#signup').modal('hide');
         $('#signin').modal('show');
     });
-
-    //Hiding not building link element
-    // $('.contribute-wrapper').click(function(e) {
-    //     console.log(12)
-    //     hideAutoSearchList();
-    // });
-
-    // $('#search_term, #buildings-search-txt').blur(function(e){
-    //     hideAutoSearchList();
-    // })
 
     $(document).click(function(e){
         e.stopPropagation();

@@ -99,6 +99,7 @@ Rails.application.routes.draw do
   post '/load_infobox', to: 'home#load_infobox', as: 'load_infobox'
 
   get '/favorite' => 'buildings#favorite', as: :favorite
+  get '/unfavorite' => 'buildings#unfavorite', as: :unfavorite
   
   root "home#index"
   # The priority is based upon order of creation: first created -> highest priority.

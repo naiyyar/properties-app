@@ -133,7 +133,24 @@ module BuildingsHelper
 	end
 
 	def heart_link object
-		link_to heart_icon, favorite_path(object_id: object.id), remote: true, class: "favourite save_link_#{object.id} #{saved_color_class(object)}", title: heart_link_title(object), data: { objectid: object.id }
+		#To save as favourite sending js request
+		#to unsave as favourite sending json request
+		link_to heart_icon, saved_object_url(object), 
+												remote: remote(object), class: fav_classes(object), 
+												title: heart_link_title(object), 
+												data: { objectid: object.id }
+	end
+
+	def fav_classes object
+		"favourite save_link_#{object.id} #{saved_color_class(object)}"
+	end
+
+	def remote object
+		(object.favorite_by?(current_user) ? false : true )
+	end
+
+	def saved_object_url object
+		object.favorite_by?(current_user) ? 'javascript:;' : favorite_path(object_id: object.id)
 	end
 
 	def heart_link_title(object)
