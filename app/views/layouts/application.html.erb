@@ -13,13 +13,14 @@
       <% end %>
       <%#= content_for?(:title) ? yield(:title) : '' %>
     </title>
-    <meta name="description" content="Transparentcity provides insights into NYC buildings, apartments, neighborhoods, management companies and landlords with filtering tools, links to no broker fee buildings and ratings, reviews, recommendations, and photos from current and former residents. <%= yield :page_title %> <%=tab_title%>">
+    
+    <meta name="description" content="<%=@meta_desc%> <%= yield :page_title %> <%=tab_title%>">
 
     <meta property="og:url" content="https://www.transparentcity.co" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="No Fee Apartments NYC and Apartment Reviews NYC | Transparentcity" />
     <meta property="og:site_name" content="transparentcity.co" />
-    <meta property="og:description" content="Transparentcity provides insights into NYC buildings, apartments, neighborhoods, management companies and landlords with filtering tools, links to no broker fee buildings and ratings, reviews, recommendations, and photos from current and former residents. <%= yield :page_title %> <%=tab_title%>" />
+    <meta property="og:description" content="<%=@meta_desc%> <%= yield :page_title %> <%=tab_title%>" />
     <!-- <meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
 
     <%= stylesheet_link_tag 'application', media: 'all' %>

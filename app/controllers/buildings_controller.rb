@@ -105,32 +105,11 @@ class BuildingsController < ApplicationController
                   }
                 ]
 
-    # @hash = Building.where(id: params[:id]).select(:id, 
-    #                                                :building_name, 
-    #                                                :building_street_address, 
-    #                                                :latitude, :longitude, 
-    #                                                :zipcode, :city, :state).as_json
+    @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
+                  "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 
+                  "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.name if @building.management_company.present? }. "+ 
+                  "Click to view #{@buiding_uploads.count} photos and #{@building.reviews.count} reviews"
     
-    #google Map
-    # @hash = Gmaps4rails.build_markers(@building) do |building, marker|
-    #   marker.lat building.latitude
-    #   marker.lng building.longitude
-    #   building_link = view_context.link_to building.building_name, building_path(building)
-    #   marker.title building.building_name
-    #   marker.infowindow render_to_string(:partial => "/layouts/shared/marker_infowindow", 
-    #                                      :locals => { building_link: building_link, 
-    #                                                   building: building,
-    #                                                   image: Upload.marker_image(@building)
-    #                                                 }
-    #                                     )
-    
-    #   #To add own marker
-    #   marker.picture ({
-    #         "url" => ActionController::Base.helpers.asset_path("marker-blue.png"),
-    #         "width" => 50,
-    #         "height" => 50
-    #         })
-    # end
     flash[:notice] = "Files are uploaded successfully." if params[:from_uploaded].present?
   end
 

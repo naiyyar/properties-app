@@ -6,6 +6,9 @@ class HomeController < ApplicationController
 
   def index
     @home_view = true
+    @meta_desc = 'Transparentcity is the largest directory of links to no fee, '+
+                  'no broker apartment buildings and reviews in NYC. '+  
+                  'Rent from the source. Bypass middleman. Save money.'
   end
 
   def load_infobox
@@ -114,6 +117,9 @@ class HomeController < ApplicationController
     end
     @zoom = (@search_string == 'New York' ? 12 : 14)
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
+    @meta_desc = "#{@tab_title_text.titleize} has #{@buildings.count if @buildings.present?} "+ 
+                  "apartment rental buildings in NYC you can rent directly from and pay no broker fees. "+ 
+                  "Click to view #{@photos_count} photos and #{@reviews_count} reviews."
   end
 
   def tos
@@ -147,5 +153,4 @@ class HomeController < ApplicationController
     @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
     @tab_title_text = "#{@search_string} #{@borough_city}"
   end
-
 end

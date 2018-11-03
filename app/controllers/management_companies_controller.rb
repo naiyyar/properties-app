@@ -42,7 +42,11 @@ class ManagementCompaniesController < ApplicationController
       @managed_buildings = buildings.includes(:uploads, :building_average, :votes) unless buildings.kind_of? Array
       @hash = @managed_buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
     end
-  end
+
+    @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} "+ 
+                  "apartment rental buildings in NYC you can rent directly from and pay no broker fees. "+
+                  "Click to view #{@building_photos.count} photos and #{@management_company.aggregate_reviews} reviews."
+   end
 
   # GET /management_companies/new
   def new
