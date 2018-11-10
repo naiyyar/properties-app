@@ -13,25 +13,9 @@
 	    
 	    <div class="dropdown-menu dropdown-select dropdown-menu-right1" area-labelledby='lr2'>
 	    	<div class="row">
-	    		<% ['MANHATTAN', 'BROOKLYN','QUEENS'].each do |area| %>
-		    		<div class="col-xs-3 col-md-3 col-lg-3">
-		          <h2 class="osLight h-r"><%=area%></h2>
-		          <ul class="blog-r-nav text-left">
-		        		<% @pop_neighborhoods.where(boroughs: area).order(:name).each do |nb| %>
-		            	<li><%= search_by_neighborhood_link(nb, area) %></li>
-		            <%end%>
-		          </ul>
-		        </div>
-		      <%end%>
+	    		
+	    		<%= render partial: 'layouts/shared/neighborhoods_list' %>
 
-	         <div class="col-xs-3 col-md-3 col-lg-3">
-	          <h2 class="osLight h-r">BRONX (Coming Soon)</h2>
-	          <ul class="blog-r-nav text-left">
-	        		<% @manhattan_neighborhoods['BRONX'].sort.each do |nb| %>
-	            	<li><a href="#"><%= nb %></a></li>
-	            <%end%>
-	          </ul>
-	        </div><!-- end BRONX -->
 	    	</div>
 	    </div>
 	  </div>

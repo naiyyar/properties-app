@@ -1,0 +1,123 @@
+<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+  <ul class="neighborhoods-list">
+    <% area = 'MANHATTAN' %>
+    <b id="lower_manhattan">Lower Manhattan (<span></span>)</b>
+    <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('Battery Park City', area) %></li>
+    <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('East Village', area) %></li>
+    <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('Financial District', area) %></li>
+    <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('Lower East Side', area) %></li>
+    <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('SoHo', area) %></li>
+    <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('Tribeca', area) %></li>
+    <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('West Village', area) %>
+      <ul>
+        <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('Greenwich Village', area) %></li>
+      </ul>
+    </li>
+    
+    <b id="midtown">Midtown (<span></span>)</b>
+    <li data-parent="midtown"><%= search_by_neighborhood_link('Chelsea', area) %></li>
+    <li data-parent="midtown"><%= search_by_neighborhood_link('Gramercy Park', area) %></li>
+    <li data-parent="midtown"><%= search_by_neighborhood_link("Hell's Kitchen", area) %></li>
+  </ul>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+  <ul class="neighborhoods-list">
+    <li data-parent="midtown"><%= search_by_neighborhood_link('Kips Bay', area) %></li>
+    <li data-parent="midtown"><%= search_by_neighborhood_link('Midtown East', area) %> </a>
+      <ul>
+        <li data-parent="midtown"><%= search_by_neighborhood_link('Sutton Place', area) %></li>
+      </ul>
+    </li>
+    <li data-parent="midtown"><%= search_by_neighborhood_link('Murray Hill', area) %></li>
+    <li data-parent="midtown"><%= search_by_neighborhood_link('Roosevelt Island', area) %></li>
+    
+    <b id="uptown_manhattan">Uptown Manhattan (<span></span>)</b>
+    <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Morningside Heights', area) %></li>
+    <li data-parent="uptown_manhattan">
+      <%= search_by_neighborhood_link('Upper East Side', area) %></a>
+      <ul>
+        <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Carnegie Hill', area) %></li>
+        <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Lenox Hill', area) %></li>
+        <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Yorkville', area) %></li>
+      </ul>
+    </li>
+   
+    <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Upper West Side', area) %>
+      <ul>
+        <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Lincoln Square', area) %></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+  <ul class="neighborhoods-list">
+    <b id="upper_manhattan">Upper Manhattan (<span></span>)</b>
+    <li data-parent="upper_manhattan"><%= search_by_neighborhood_link('East Harlem', area) %></li>
+    <li data-parent="upper_manhattan"><%= search_by_neighborhood_link('Hudson Heights', area) %></li>
+    <li data-parent="upper_manhattan"><%= search_by_neighborhood_link('Washington Heights', area) %></li>
+    
+    <b id="brooklyn"><%= area = 'Brooklyn' %> (<span></span>)</b>
+    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Brooklyn Heights', area) %></li>
+    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Bushwick', area) %></li>
+    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Clinton Hill', area) %></li>
+    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Downtown Brooklyn', area) %></li>
+    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Dumbo', area) %></li>
+    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Fort Greene', area) %></li>
+    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Gravesend', area) %></li>
+    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Greenpoint', area) %></li>
+  </ul>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+  <ul class="neighborhoods-list">
+    <li data-parent="brooklyn"><a href="#">Sheepshead Bay</a></li>
+    <li data-parent="brooklyn"><a href="#">Williamsburg</a></li>
+    
+    <b id="queens"><%= area = 'Queens' %> (<span></span>)</b>
+    <li data-parent="queens"><%= search_by_neighborhood_link('Astoria', area) %></li>
+    <li data-parent="queens"><%= search_by_neighborhood_link('Corona', area) %></li>
+    <li data-parent="queens"><%= search_by_neighborhood_link('Flushing', area) %></li>
+    <li data-parent="queens"><%= search_by_neighborhood_link('Forest Hills', area) %></li>
+    <li data-parent="queens"><%= search_by_neighborhood_link('Kew Gardens', area) %></li>
+    <li data-parent="queens"><%= search_by_neighborhood_link('Long Island City', area) %></li>
+    <li data-parent="queens"><%= search_by_neighborhood_link('Rego Park', area) %></li>
+    
+    <b id="bronx"><%= area = 'Bronx' %> (Coming Soon)</b>
+    <li data-parent="bronx"><%= search_by_neighborhood_link('East Bronx', area) %></a></li>
+    <li data-parent="bronx"><%= search_by_neighborhood_link('University Heights', area) %></a></li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+  var borough_ids = ['uptown_manhattan', 'lower_manhattan','midtown','upper_manhattan','brooklyn','queens','bronx']
+  $.each(borough_ids, function(i,j){
+    var count = 0;
+    var items = $('.neighborhoods-list').find('li[data-parent="'+j+'"]');
+    $.each(items, function(i2, j2){
+      var building_count = parseInt($(j2).find('span').text());
+      if(!isNaN(building_count)){
+        count = count + building_count;
+      }
+    });
+    var elem = '';
+    if(j == 'uptown_manhattan'){
+      elem = $('#uptown_manhattan');
+    }else if(j == 'lower_manhattan'){
+      elem = $('#lower_manhattan');
+      console.log(count)
+    }else if(j == 'midtown'){
+      elem = $('#midtown');
+    }else if(j == 'upper_manhattan'){
+      elem = $('#upper_manhattan');
+    }else if(j == 'brooklyn'){
+      elem = $('#brooklyn');
+    }else if(j == 'queens'){
+      elem = $('#queens');
+    }else{
+      elem = $('#bronx');
+    }
+    elem.find('span').html(count);
+  })
+</script>

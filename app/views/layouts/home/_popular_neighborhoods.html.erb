@@ -1,24 +1,15 @@
 <div class="home-wrapper" style="padding: 20px 20px;">
   <% unless browser.device.mobile? %>
     <% if @home_view.present? %>
-      <div class="home-content neighborhood-container hidden-xs hidden-sm">
-        <h2 class="osLight1">Popular NYC Neighborhoods</h2>
+      <div class="home-content neighborhood-container">
+        <h2 class="osLight1">Popular NYC Neighborhoods To Rent</h2>
         <div class="row pb40">
-          <% ny_cities.each do |area| %>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-              <h3 class="align-left nh-area-name"><%= area %> <%='(Coming Soon)' if area == 'BRONX'%></h3>
-              <ul class="neighborhoods-list">
-                <% @pop_neighborhoods.where(boroughs: area).order(:name).each do |nb| %>
-                  <li><a href="<%=search_link(nb.name, area)%>"><%= nb.nb_name_with_counts %></a></li>
-                <%end%>
-              </ul>
-            </div>
-          <%end%>
+          <%= render partial: 'layouts/shared/neighborhoods_list' %>
         </div>
       </div>
     <%end%>
   <%else%>
-    <div class="home-content neighborhood-container visible-xs visible-sm">
+    <div class="home-content neighborhood-container hidden-xs hidden-sm">
       <h2 class="osLight1"><%='Popular NYC Neighborhoods' if params[:neighborhoods].blank?%><%='Neighborhoods' if params[:neighborhoods].present? %></h2>
       <div class="row pb40">
         <% ny_cities.each do |area| %>
@@ -28,9 +19,9 @@
               <div id="mddPanel<%=area%>" class="panel-collapse collapse in">
                 <div class="panel-body">
                   <ul class="neighborhoods-list list-inline">
-                    <% @pop_neighborhoods.where(boroughs: area).order(:name).each do |nb| %>
-                      <li><%= search_by_neighborhood_link(nb, area) %></li>
-                    <%end%>
+                    <%# @pop_neighborhoods.where(boroughs: area).order(:name).each do |nb| %>
+                      <li><%#= search_by_neighborhood_link(nb, area) %></li>
+                    <%#end%>
                   </ul>
                 </div>
               </div>
