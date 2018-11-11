@@ -1,5 +1,5 @@
 <div class="home-wrapper" style="padding: 20px 20px;">
-  <% unless browser.device.mobile? %>
+  <%# unless browser.device.mobile? %>
     <% if @home_view.present? %>
       <div class="home-content neighborhood-container">
         <h2 class="osLight1">Popular NYC Neighborhoods To Rent</h2>
@@ -8,8 +8,8 @@
         </div>
       </div>
     <%end%>
-  <%else%>
-    <div class="home-content neighborhood-container hidden-xs hidden-sm">
+  <%#else%>
+    <div class="home-content neighborhood-container hidden">
       <h2 class="osLight1"><%='Popular NYC Neighborhoods' if params[:neighborhoods].blank?%><%='Neighborhoods' if params[:neighborhoods].present? %></h2>
       <div class="row pb40">
         <% ny_cities.each do |area| %>
@@ -30,5 +30,5 @@
         <%end%>
       </div>
     </div>
-  <%end%>
+  <%#end%>
 </div>

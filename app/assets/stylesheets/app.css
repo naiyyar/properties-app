@@ -4917,8 +4917,8 @@ body.black {
 /* Homepage */
 
 #hero-container {
-    background-color: #000;
-    height: 550px;
+    background-color: #fff;
+    height: 521px;
     position: relative;
 }
 #hero-container-map {
@@ -5011,11 +5011,12 @@ body.black {
     padding-top: 40px;
 }
 .home-about-nyc-apt h2{
-    font-size: 15px;
+    font-size: 17px;
     padding: 0px 4px;
     line-height: 21px;
     margin-bottom: 1px;
     font-family: sans-serif;
+    margin-top: 12px;
 }
 .home-about-nyc-apt h1{
     font-size: 28px;
@@ -5044,14 +5045,14 @@ body.black {
     font-weight: bold;
 }
 .search-panel {
-    background-color: rgba(0, 0, 0, 0.60);
+    /*background-color: rgba(0, 0, 0, 0.60);*/
     position: absolute;
     /*left: 0;*/
     /*top: 170px;*/
     /*width: 100%;*/
-    color: #fff;
+    color: #333;
     padding: 16px 20px 24px 20px;
-    margin: 170px 311px 0px 311px;
+    margin: 110px 311px 0px 311px;
     /*position: relative;*/
 }
 .search-panel form {
@@ -6206,13 +6207,13 @@ select.custom-arrow {
         padding: 5px 9px 5px 0px;
     }
     #hero-container {
-        background-color: #000;
-        height: 550px;
+        background-color: #fff;
+        height: 450px;
         position: relative;
     }
     .search-panel {
         left: 0;
-        top: 100px;
+        top: 62px;
         width: 100%;
         padding: 16px 10px 13px 10px;
         margin: 0px;
@@ -6628,7 +6629,7 @@ select.custom-arrow {
         font-size: 11px;
     }
     #hero-container, #hero-container-map {
-        height: 425px;
+        height: 386px;
     }
     #home-map {
         height: 592px;
@@ -6680,7 +6681,7 @@ select.custom-arrow {
         text-align: left;
     }
     .search-panel .home-about-nyc-apt {
-        padding-bottom: 25px;
+        padding-bottom: 15px;
     }
     .home-search-form{
         width: 100%;
@@ -6912,8 +6913,8 @@ select.custom-arrow {
 
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {  
     #hero-container {
-        background-color: #000;
-        height: 550px;
+        background-color: #fff;
+        height: 521px;
         position: relative;
     }
     .search-panel {
@@ -7125,8 +7126,8 @@ select.custom-arrow {
 
 @media screen and (max-width: 1024px) and (min-width: 737px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
     #hero-container {
-        background-color: #000;
-        height: 550px;
+        background-color: #fff;
+        height: 521px;
         position: relative;
     }
     .search-panel {
