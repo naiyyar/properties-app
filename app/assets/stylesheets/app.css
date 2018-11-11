@@ -7130,12 +7130,12 @@ select.custom-arrow {
         position: relative;
     }
     .search-panel {
-        background-color: rgba(0, 0, 0, 0.60);
+        /*background-color: rgba(0, 0, 0, 0.60);*/
         position: absolute;
         left: 0;
         top: 170px;
         width: 100%;
-        color: #fff;
+        color: #333;
         padding: 16px 20px 20px 20px;
         margin: 0px;
     }
