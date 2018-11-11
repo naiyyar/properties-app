@@ -6693,13 +6693,13 @@ select.custom-arrow {
     .neighborhood-container .panel{
         margin-bottom: -1px;
     }
-    ul.neighborhoods-list li{
+    /*ul.neighborhoods-list li{
         border: 1px solid #ddd;
         margin: 4px 0px;
     }
     ul.neighborhoods-list li a{
         color: #333;
-    }
+    }*/
     .home-title {
         font-size: 26px;
         line-height: 30px;

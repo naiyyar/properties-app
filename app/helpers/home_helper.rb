@@ -12,6 +12,85 @@ module HomeHelper
 		['MANHATTAN', 'BROOKLYN','QUEENS','BRONX']
 	end
 
+	def lower_manhattan_sub_borough
+		[
+			'Battery Park City',
+			'East Village',
+			'Financial District',
+			'Lower East Side',
+			'SoHo',
+			'Tribeca',
+			'West Village',
+			'Greenwich Village'
+		]
+	end
+
+	def midtown_sub_borough
+		[
+			'Chelsea',
+			'Gramercy Park',
+			"Hell's Kitchen",
+			'Kips Bay',
+			'Midtown East',
+			'Sutton Place',
+			'Murray Hill',
+			'Roosevelt Island'
+		]
+	end
+
+	def upper_manhattan_sub_borough
+		[
+			'East Harlem',
+			'Hudson Heights',
+			'Washington Heights'
+		]
+	end
+
+	def brooklyn_sub_borough
+		[
+			'Brooklyn Heights',
+			'Bushwick',
+			'Clinton Hill',
+			'Downtown Brooklyn',
+			'Dumbo',
+			'Fort Greene',
+			'Gravesend',
+			'Greenpoint'
+		]
+	end
+
+	def uptown_sub_borough
+		[
+			'Morningside Heights',
+			'Upper East Side',
+			'Carnegie Hill',
+			'Lenox Hill',
+			'Yorkville',
+			'Upper West Side',
+			'Lincoln Square'
+		]
+	end
+
+	def queens_sub_borough
+		[
+			'Astoria',
+	    'Corona',
+	    'Flushing',
+	    'Forest Hills',
+	    'Kew Gardens',
+	    'Long Island City',
+	    'Rego Park'
+	  ]
+	end
+
+	def bronx_sub_borough
+		[
+			'East Bronx',
+			'University Heights'
+		]
+	end
+
+	#using for neighborhood guides
 	def manhattan_borough
 		[
 			'Harlem',

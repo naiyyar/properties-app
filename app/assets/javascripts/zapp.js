@@ -643,4 +643,44 @@
         $(this).select();
     });
 
+    $('.dropdown-toggle-neighborhoods').click(function(){
+        setParentBoroughCount();
+    });
+
+    //setting up parent neighbohoods count in pupolar nyc neighborhoods list
+
+    // var setParentBoroughCount = function(){
+    //     var borough_ids = ['uptown_manhattan', 'lower_manhattan','midtown','upper_manhattan','brooklyn','queens','bronx'];
+    //     $.each(borough_ids, function(i,j){
+    //         var count = 0;
+    //         var items = $('.neighborhoods-list').find('li[data-parent="'+j+'"]');
+    //         $.each(items, function(i2, j2){
+    //           var building_count = parseInt($(j2).find('span').text());
+    //           if(!isNaN(building_count)){
+    //             count = count + building_count;
+    //           }
+    //         });
+    //         var elem = '';
+
+    //         if(j == 'uptown_manhattan'){
+    //           elem = $('#uptown_manhattan');
+    //         }else if(j == 'lower_manhattan'){
+    //           elem = $('#lower_manhattan');
+    //         }else if(j == 'midtown'){
+    //           elem = $('#midtown');
+    //         }else if(j == 'upper_manhattan'){
+    //           elem = $('#upper_manhattan');
+    //         }else if(j == 'brooklyn'){
+    //           elem = $('#brooklyn');
+    //         }else if(j == 'queens'){
+    //           elem = $('#queens');
+    //         }else{
+    //           elem = $('#bronx');
+    //         }
+    //         elem.find('span').html(count);
+    //     })
+    // }
+
+    // setParentBoroughCount();
+
 })(jQuery);
