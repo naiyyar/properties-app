@@ -69,3 +69,22 @@
         top: 150px;
     }
 }
+
+@media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    #hero-container .cb-slideshow,
+    #hero-container .cb-slideshow:after { 
+        height: 430px;
+        top: 0px;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    #hero-container .cb-slideshow,
+    #hero-container .cb-slideshow:after { 
+        height: 571px;
+        top: -52px;
+    }
+    .search-panel{
+        margin: 110px 200px 0px 200px;
+    }
+}

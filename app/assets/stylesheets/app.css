@@ -6914,16 +6914,15 @@ select.custom-arrow {
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {  
     #hero-container {
         background-color: #fff;
-        height: 521px;
+        height: 436px;
         position: relative;
     }
     .search-panel {
-        background-color: rgba(0, 0, 0, 0.60);
+        /*background-color: rgba(0, 0, 0, 0.60);*/
         position: absolute;
         left: 0;
-        top: 170px;
+        top: 105px;
         width: 100%;
-        color: #fff;
         padding: 16px 20px 13px 20px;
         margin: 0px;
     }
