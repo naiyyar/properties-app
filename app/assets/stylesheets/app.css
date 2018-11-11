@@ -6109,6 +6109,12 @@ select.custom-arrow {
     /*.resultsList {
         padding: 10px 10px 0 10px;
     }*/
+    .home-nav ul.homeNavUl li a {
+        color: #fff;
+    }
+    .no-touch .home-nav ul.homeNavUl li a:hover {
+        color: #fff;
+    }
     .no-padding {
         padding: 0 !important;
     }
