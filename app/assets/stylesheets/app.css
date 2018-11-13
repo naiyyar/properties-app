@@ -6639,7 +6639,8 @@ select.custom-arrow {
         font-size: 11px;
     }
     #hero-container, #hero-container-map {
-        height: 386px;
+        height: 383px;
+        background-color: #dbe6f9;
     }
     #home-map {
         height: 592px;
@@ -6666,7 +6667,7 @@ select.custom-arrow {
 
     }
     #hero-container .home-header .home-logo{
-        margin-top: -17px;
+        margin-top: -12px;
     }
     #hero-container .home-header a.home-navHandler {
         margin-right: 25px;
@@ -6931,7 +6932,7 @@ select.custom-arrow {
         /*background-color: rgba(0, 0, 0, 0.60);*/
         position: absolute;
         left: 0;
-        top: 105px;
+        top: 68px;
         width: 100%;
         padding: 16px 20px 13px 20px;
         margin: 0px;
