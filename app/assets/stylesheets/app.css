@@ -4974,8 +4974,11 @@ body.black {
 }
 .home-nav ul.homeNavUl li {
     float: left;
-    margin-left: 20px;
+    margin-left: 11px;
     padding-top: 9px;
+}
+.home-nav ul.homeNavUl li a:hover{
+    border-bottom: 2px solid #333;
 }
 .home-nav ul.homeNavUl li:not(.no-hover-underline):hover {
     border-bottom: 1px solid #ffffff;
