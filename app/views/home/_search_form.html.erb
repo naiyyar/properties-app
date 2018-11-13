@@ -2,7 +2,7 @@
 	<% placeholder = 'Search by Neighborhood, ZipCode, Address, Building, Management company'%>
 	<% if params[:action] == 'index' and params[:controller] == 'home' %>
 		<div class="input-group">
-		  <%= text_field_tag 'search_term', searched_term, class: 'form-control', placeholder: placeholder, style: 'border: 0px solid #333;box-shadow: 0px 1px 4px rgba(0,0,0,0.6);'%>
+		  <%= text_field_tag 'search_term', searched_term, class: 'form-control', placeholder: placeholder, style: 'border: 0px solid #333; box-shadow: 0px 1px 4px rgba(0,0,0,0.6);-webkit-appearance: none;'%>
 		  <span class="input-group-btn"><a class="btn btn-blue" style="font-size: 15px;box-shadow: 0px 1px 4px rgba(0,0,0,0.6);"><span class="icon-magnifier"></span></a></span>
 		</div>
 	<%else%>
