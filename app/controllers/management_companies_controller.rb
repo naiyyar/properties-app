@@ -38,7 +38,7 @@ class ManagementCompaniesController < ApplicationController
       #For Gmap
       @lat = buildings.first.latitude
       @lng = buildings.first.longitude
-      @zoom = 11
+      @zoom = buildings.length > 50 ? 13 : 11
       @managed_buildings = buildings.includes(:uploads, :building_average, :votes) unless buildings.kind_of? Array
       @hash = @managed_buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
     end
