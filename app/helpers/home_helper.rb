@@ -17,11 +17,11 @@ module HomeHelper
 			'Battery Park City',
 			'East Village',
 			'Financial District',
+			'Greenwich Village',
+			'West Village',
 			'Lower East Side',
 			'SoHo',
-			'Tribeca',
-			'West Village',
-			'Greenwich Village'
+			'Tribeca'
 		]
 	end
 
@@ -217,6 +217,16 @@ module HomeHelper
     end
 	end
 
+	def parent_neighborhoods
+		[	
+			'Lower Manhattan',
+			'Midtown',
+			'Upper Manhattan',
+			'Queens',
+			'Bronx'
+		]
+	end
+
 	def search_by_neighborhood_link nb, area
 		#name = (nb.class == String ? nb : nb.name)
 		borough = Neighborhood.where(name: nb, boroughs: area.upcase)
@@ -225,8 +235,25 @@ module HomeHelper
 				#borough.first.nb_name_with_counts
 				"#{borough.first.name} (<span>#{borough.first.buildings_count}</span>)".html_safe
 			else
-				"#{nb} (0)"
+				"#{nb} (#{parent_neighborhoods_count(nb)})"
 			end
+		end
+	end
+
+	def parent_neighborhoods_count(nb)
+		case nb
+		when 'Lower Manhattan'
+			@lower_manhattan_count
+		when 'Midtown'
+			@midtown_count
+		when 'Upper Manhattan'
+			@upper_manhattan_count
+		when 'Queens'
+			@queens_count
+		when 'Brooklyn'
+			@brooklyn_count
+		else
+			@bronx_count
 		end
 	end
 

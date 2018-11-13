@@ -722,7 +722,7 @@ class Building < ActiveRecord::Base
 
   def update_neighborhood_counts
     popular_neighborhoods.each do |hood|
-      if hood.buildings_count > 0
+      if hood.buildings_count >= 0
         hood.buildings_count = Building.number_of_buildings(hood.name)
         hood.save
       end

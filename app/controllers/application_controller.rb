@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     @brooklyn_count = Neighborhood.where(name: view_context.brooklyn_sub_borough).sum(:buildings_count)
     @uptown_count = Neighborhood.where(name: view_context.uptown_sub_borough).sum(:buildings_count)
     @queens_count = Neighborhood.where(name: view_context.queens_sub_borough).sum(:buildings_count)
-    @bronx_count = 0
+    @bronx_count = Neighborhood.where(name: view_context.bronx_sub_borough).sum(:buildings_count)
   end
 
   def after_sign_up_path_for(resource)

@@ -505,4 +505,6 @@
 # 	building.save
 # end
 
+Neighborhood.create(name: 'East Bronx', boroughs: 'BRONX', buildings_count: 0)
+
 
