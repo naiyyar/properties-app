@@ -88,3 +88,24 @@
         margin: 68px 200px 0px 200px;
     }
 }
+
+@media screen and (min-width: 1025px) and (max-width: 1600px){
+    #hero-container {
+        height: 590px;
+        background-color: #dbe6f9;
+    }
+
+    #hero-container .cb-slideshow, #hero-container .cb-slideshow:after{
+        top: -20px;
+    }
+}
+
+@media screen and (min-width: 1601px) and (max-width: 1920px){
+    #hero-container {
+        height: 730px;
+        background-color: #dbe6f9;
+    }
+    #hero-container .cb-slideshow, #hero-container .cb-slideshow:after{
+        top: -50px;
+    }
+}

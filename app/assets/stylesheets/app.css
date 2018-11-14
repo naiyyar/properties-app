@@ -6040,6 +6040,48 @@ select.custom-arrow {
 }
 
 /* Media Queries */
+@media screen and (max-width: 480px) {
+    .aggregate-ratings ul{
+        width: 100%;
+    }
+    .agentAvatarImg {
+        width: 30%;
+    }
+    .home-title {
+        font-size: 22px;
+        line-height: 26px;
+    }
+    .featured.carousel .carousel-inner .item .carousel-caption .caption-title {
+        font-size: 22px;
+        line-height: 28px;
+    }
+    .home-subtitle {
+        font-size: 12px;
+    }
+    .featured.carousel .carousel-inner .item .carousel-caption .caption-subtitle {
+        font-size: 11px;
+    }
+    .tabsWidgetSearch .nav-tabs > li {
+        width: 100%;
+    }
+    .tabsWidgetSearch ul.propList li a .info {
+        max-width: 68%;
+    }
+    .btn-xs-block { width: 100%; display:block; }
+    .tabsWidget ul.propList li a .image {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .btn-hoods {
+        right: 0px;
+    }
+    .btn-hoods button {
+        padding: 10px 0px;
+    }
+}
 @media screen and (min-width: 481px) {
     /*contribute page next buttons*/
     .next_btn_container, .btn-block-container{
@@ -6047,36 +6089,6 @@ select.custom-arrow {
     }
 }
 
-@media screen and (max-width: 1199px) {
-    .home-wrapper {
-        width: 100%;
-        margin: 0;
-    }
-}
-@media screen and (min-width: 992px) and (max-width: 1199px){
-    .searchContainer {
-        position: relative;
-        width: 55% !important;
-    }
-    .search input {
-        width: 88% !important;
-    }
-    .clearSearchText {
-        right: 63px !important;
-        top: 13px !important;
-    }
-    .nav-justified > li {
-     width: 0% !important; 
-    }
-    .btn-filter .btn.sc-lg, .btn-sort .btn.sc-lg {
-        width: 10em;
-    }
-}
-@media screen and (min-width: 1024px){
-    #hero-container {
-        height: 630px;
-    }
-}
 @media screen and (max-width: 991px) {
     .agentAvatarImg {
         width: 20%;
@@ -6928,6 +6940,32 @@ select.custom-arrow {
 
 }
 
+@media screen and (max-width: 1199px) {
+    .home-wrapper {
+        width: 100%;
+        margin: 0;
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px){
+    .searchContainer {
+        position: relative;
+        width: 55% !important;
+    }
+    .search input {
+        width: 88% !important;
+    }
+    .clearSearchText {
+        right: 63px !important;
+        top: 13px !important;
+    }
+    .nav-justified > li {
+     width: 0% !important; 
+    }
+    .btn-filter .btn.sc-lg, .btn-sort .btn.sc-lg {
+        width: 10em;
+    }
+}
+
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {  
     #hero-container {
         background-color: #fff;
@@ -7216,49 +7254,6 @@ select.custom-arrow {
         max-width: 78%;
     }
             
-}
-
-@media screen and (max-width: 480px) {
-    .aggregate-ratings ul{
-        width: 100%;
-    }
-    .agentAvatarImg {
-        width: 30%;
-    }
-    .home-title {
-        font-size: 22px;
-        line-height: 26px;
-    }
-    .featured.carousel .carousel-inner .item .carousel-caption .caption-title {
-        font-size: 22px;
-        line-height: 28px;
-    }
-    .home-subtitle {
-        font-size: 12px;
-    }
-    .featured.carousel .carousel-inner .item .carousel-caption .caption-subtitle {
-        font-size: 11px;
-    }
-    .tabsWidgetSearch .nav-tabs > li {
-        width: 100%;
-    }
-    .tabsWidgetSearch ul.propList li a .info {
-        max-width: 68%;
-    }
-    .btn-xs-block { width: 100%; display:block; }
-    .tabsWidget ul.propList li a .image {
-        width: 80px;
-        height: 80px;
-    }
-}
-
-@media screen and (max-width: 320px){
-    .btn-hoods {
-        right: 0px;
-    }
-    .btn-hoods button {
-        padding: 10px 0px;
-    }
 }
 
 /*IE specific for header sign-in/signout button*/
