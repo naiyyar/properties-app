@@ -4942,7 +4942,7 @@ body.black {
     top: 0;
     left: 0;
     z-index: 1000;
-    background-color: #fff;
+    background-color: #f3f3f3;
     box-shadow: 0px 2px 3px rgba(0,0,0, 0.2)
 }
 .home-header.map {
@@ -4986,6 +4986,7 @@ body.black {
 
 .home-nav ul.homeNavUl li a {
     color: #333;
+    font-size: 15px;
 }
 .no-touch .home-nav ul.homeNavUl li a:hover {
     color: #333;
@@ -5056,7 +5057,7 @@ body.black {
     /*width: 100%;*/
     color: #333;
     padding: 16px 20px 24px 20px;
-    margin: 68px 311px 0px 311px;
+    margin: 170px 311px 0px 311px;
     /*position: relative;*/
 }
 .search-panel form {
@@ -6223,7 +6224,7 @@ select.custom-arrow {
     }
     .search-panel {
         left: 0;
-        top: 62px;
+        top: 90px;
         width: 100%;
         padding: 16px 10px 13px 10px;
         margin: 0px;

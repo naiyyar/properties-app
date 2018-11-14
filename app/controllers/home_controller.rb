@@ -58,6 +58,7 @@ class HomeController < ApplicationController
   def search
     search_term = params['search_term']
     if params[:searched_by] != 'address' and params[:searched_by] != 'management_company'
+      @zoom = (@search_string == 'New York' ? 12 : 14)
       unless @search_string == 'New York'
         @brooklyn_neighborhoods =  @search_string #used to add border boundaries of brooklyn and queens
         @neighborhood_coordinates = Gcoordinate.neighbohood_boundary_coordinates(@search_string)
@@ -73,7 +74,16 @@ class HomeController < ApplicationController
           if @search_string == 'Manhattan'
             @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}
           else
-            @buildings = Building.buildings_in_city(@search_string)
+            if @search_string == 'Queens'
+              boroughs = view_context.queens_sub_borough
+            elsif @search_string == 'Brooklyn'
+              boroughs = view_context.brooklyn_sub_borough
+            elsif @search_string == 'Bronx'
+              boroughs = view_context.bronx_sub_borough
+            end
+            @buildings = Building.where("city = ? OR neighborhood in (?)", @search_string, boroughs) 
+            #buildings_in_city(@search_string)
+            @zoom = 12
           end
         end
       else
@@ -115,7 +125,7 @@ class HomeController < ApplicationController
         end
       end
     end
-    @zoom = (@search_string == 'New York' ? 12 : 14)
+    
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
     @meta_desc = "#{@tab_title_text.titleize} has #{@buildings.count if @buildings.present?} "+ 
                   "apartment rental buildings in NYC you can rent directly from and pay no broker fees. "+ 
