@@ -5057,7 +5057,7 @@ body.black {
     /*width: 100%;*/
     color: #333;
     padding: 16px 20px 24px 20px;
-    margin: 170px 311px 0px 311px;
+    margin: 131px 311px 0px 311px;
     /*position: relative;*/
 }
 .search-panel form {
@@ -5068,7 +5068,7 @@ body.black {
     position: relative;
 }
 .search-panel .home-about-nyc-apt{
-    padding-bottom: 25px;
+    padding-bottom: 35px;
 }
 .home-search-form{
     width: 98%;
@@ -7187,7 +7187,7 @@ select.custom-arrow {
         /*background-color: rgba(0, 0, 0, 0.60);*/
         position: absolute;
         left: 0;
-        top: 170px;
+        top: 131px;
         width: 100%;
         color: #333;
         padding: 16px 20px 20px 20px;
