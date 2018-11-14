@@ -6072,6 +6072,11 @@ select.custom-arrow {
         width: 10em;
     }
 }
+@media screen and (min-width: 1024px){
+    #hero-container {
+        height: 630px;
+    }
+}
 @media screen and (max-width: 991px) {
     .agentAvatarImg {
         width: 20%;
