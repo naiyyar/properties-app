@@ -1,11 +1,12 @@
-<div class="home-wrapper" style="padding: 38px 20px 20px;">
-  <%# unless browser.device.mobile? %>
-  <%# if @home_view.present? %>
+<div class="home-wrapper" style="padding: 25px 20px 20px;">
+  <% unless browser.device.mobile? %>
+  	<%# if @home_view.present? %>
     <div class="home-content neighborhood-container">
       <h2 class="osLight1" style="font-weight: bolder;">Popular NYC Neighborhoods To Rent In</h2>
       <div class="row pb40">
         <%= render partial: 'layouts/shared/neighborhoods_list' %>
       </div>
     </div>
-  <%#end%>
+  <%else%>
+  <%end%>
 </div>

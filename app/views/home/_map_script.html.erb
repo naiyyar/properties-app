@@ -22,10 +22,10 @@
    
     function initialize(sidebar = true) {
       // Custom options for map
-      var show_controls = true;
+      // var show_controls = true;
       var zoom_ctrl = true;
-      if(width < 414){
-        show_controls = false;
+      if(width < 600){
+        // show_controls = false;
         zoom_ctrl = false;
       }
       
@@ -33,7 +33,7 @@
           zoomControl: zoom_ctrl,
           disableDoubleClickZoom: false,
           zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
-          mapTypeControl: show_controls,
+          mapTypeControl: false,
           mapTypeControlOptions: { 
                                     style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
                                     position: position

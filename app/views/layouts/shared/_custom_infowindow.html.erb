@@ -3,56 +3,58 @@
     <a class="closeInfo" id="closeBubble" style="color: #fff;"><span class="fa fa-times fa-2x"></span></a>
   </div> -->
   <% thumb_icon = "<span class='fa fa-thumbs-up recommended'></span>" %>
-  <div class="infoW-property-info" data-href="<%=building_path(building)%>">
-    <div class="propImg">
-      <%= image_tag image, alt: 'Image', style: 'width: 229px !important; height: 137px;' if image.present? %>
-    </div>
-    
-    <div class="paWrapper">
-      <div class="propTitle"><%= building.building_name_or_address %> </div>
-      <div class="propAddress"><%= building.street_address %> <%= building.zipcode %> </div>
-    </div>
-
-    <% if building_show  == 'false' %>
-      <div class="bd-types">
-        <%= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building } %>
+  <%= link_to building_path(building), style: 'color: #333;' do %> 
+    <div class="infoW-property-info" data-href="<%=building_path(building)%>">
+      <div class="propImg">
+        <%= image_tag image, alt: 'Image', style: 'width: 229px !important; height: 137px;' if image.present? %>
+      </div>
+      
+      <div class="paWrapper">
+        <div class="propTitle"><%= building.building_name_or_address %> </div>
+        <div class="propAddress"><%= building.street_address %> <%= building.zipcode %> </div>
       </div>
 
-      <div class="propRating">
-        <% if rating_cache.present? %>
-          <% cache_avg = rating_cache.first.avg %>
-          <% decimal_part = number_with_precision(cache_avg.round(2), precision: 2) %>
-          <% decimal_part = decimal_part.split('.')[1].to_f/100%>
-          <% unless cache_avg.nan? %>
-            <% cache_avg = cache_avg + 1 if decimal_part >= 0.76 %>
-            <% half = true %>
-            <% 1.upto(5) do |num| %>
-              <% if num <= cache_avg.to_i %>
-                  <span class="fa fa-star star"></span>
-              <%elsif decimal_part >= 0.30 and decimal_part <= 0.75 and half %>
-                  <span class="fa fa-star-half star"></span>
-                  <% half = false %>
-              <%else%>
-                  <span class="fa fa-star-o star" style="color: #ddd;"></span>
+      <% if building_show  == 'false' %>
+        <div class="bd-types">
+          <%= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building } %>
+        </div>
+
+        <div class="propRating">
+          <% if rating_cache.present? %>
+            <% cache_avg = rating_cache.first.avg %>
+            <% decimal_part = number_with_precision(cache_avg.round(2), precision: 2) %>
+            <% decimal_part = decimal_part.split('.')[1].to_f/100%>
+            <% unless cache_avg.nan? %>
+              <% cache_avg = cache_avg + 1 if decimal_part >= 0.76 %>
+              <% half = true %>
+              <% 1.upto(5) do |num| %>
+                <% if num <= cache_avg.to_i %>
+                    <span class="fa fa-star star"></span>
+                <%elsif decimal_part >= 0.30 and decimal_part <= 0.75 and half %>
+                    <span class="fa fa-star-half star"></span>
+                    <% half = false %>
+                <%else%>
+                    <span class="fa fa-star-o star" style="color: #ddd;"></span>
+                <%end%>
               <%end%>
             <%end%>
+          <%else%>
+            <% 1.upto(5) do |num| %>
+              <span class="fa fa-star-o star" style="color: #ddd;"></span>
+            <%end%>
           <%end%>
-        <%else%>
-          <% 1.upto(5) do |num| %>
-            <span class="fa fa-star-o star" style="color: #ddd;"></span>
-          <%end%>
-        <%end%>
-        <span> | <%= (recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe) %> </span>
-        <span><%= "| &nbsp; Reviews: #{building.reviews.count}".html_safe %></span>
-      </div>
+          <span> | <%= (recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe) %> </span>
+          <span><%= "| &nbsp; Reviews: #{building.reviews.count}".html_safe %></span>
+        </div>
 
-      <!-- <ul class="propFeat">
-        <li><%#= (recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe) %> </li>
-        <li><%#= "| &nbsp; Reviews: #{building.reviews.count}".html_safe %></li>
-      </ul> -->
-    <%end%>
-  </div>
-  
+        <!-- <ul class="propFeat">
+          <li><%#= (recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe) %> </li>
+          <li><%#= "| &nbsp; Reviews: #{building.reviews.count}".html_safe %></li>
+        </ul> -->
+      <%end%>
+    </div>
+  <%end%>
+
   <div class="clearfix"></div>
     
   <div class="infoButtons">

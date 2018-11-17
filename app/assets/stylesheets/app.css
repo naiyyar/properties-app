@@ -4918,7 +4918,7 @@ body.black {
 
 #hero-container {
     background-color: #fff;
-    height: 560px;
+    height: 520px;
     position: relative;
 }
 #hero-container-map {
@@ -5022,11 +5022,13 @@ body.black {
     margin-bottom: 1px;
     font-family: sans-serif;
     margin-top: 12px;
+    color: #000;
 }
 .home-about-nyc-apt h1{
     font-size: 28px;
     margin: 0px 0px;
     font-family: sans-serif;
+    color: #000;
 }
 .home-caption {
     position: absolute;
@@ -7180,7 +7182,7 @@ select.custom-arrow {
 @media screen and (max-width: 1024px) and (min-width: 737px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
     #hero-container {
         background-color: #fff;
-        height: 521px;
+        height: 500px;
         position: relative;
     }
     .search-panel {
