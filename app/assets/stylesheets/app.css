@@ -6326,6 +6326,7 @@ select.custom-arrow {
         height: 100%;
         overflow-y: scroll;
         overflow-x: hidden;
+        bottom: 0px;
     }
     .filterForm {
         padding: 6px 4px;
@@ -6339,7 +6340,7 @@ select.custom-arrow {
         font-size: 12px;
     }
     .filter-action{
-        margin-top: 20px;
+        padding: 20px;
     }
 
     .btn-filter, .btn-sort{
