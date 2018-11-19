@@ -6130,6 +6130,9 @@ select.custom-arrow {
     /*.resultsList {
         padding: 10px 10px 0 10px;
     }*/
+    .home-about-nyc-apt h1{
+        font-size: 22px;
+    }
     .home-nav ul.homeNavUl li a {
         color: #fff;
     }
