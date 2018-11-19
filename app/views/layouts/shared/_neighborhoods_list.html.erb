@@ -94,7 +94,7 @@
       <%end%>
     </div>
     <b id="bronx"><% area = 'Bronx' %> <%= link_to 'Bronx', '/city/bronx-ny'  %> (<%=@bronx_count%>)</b>
-    <div class="child-borough-container" style="border-bottom: 1px solid #ddd;">
+    <div class="child-borough-container" style="<%#= browser.device.mobile? ? 'border-bottom: 1px solid #ddd;' : '' %>">
       <li data-parent="bronx" class="parent"><%= search_by_neighborhood_link('East Bronx', area) %></a></li>
       <li data-parent="bronx" class="parent"><%= search_by_neighborhood_link('University Heights', area) %></a></li>
     </div>
