@@ -5172,7 +5172,7 @@ a.home-navHandler.active {
 }
 .no-touch a.home-navHandler:hover {
     text-decoration: none;
-    color: #fff;
+    /*color: #333;*/
 }
 .highlight {
     background-color: #0075c9;
