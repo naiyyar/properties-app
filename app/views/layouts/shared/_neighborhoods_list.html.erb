@@ -1,87 +1,102 @@
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <ul class="neighborhoods-list">
     <% area = 'MANHATTAN' %>
-    <b id="lower_manhattan">
-      <%= search_by_neighborhood_link('Lower Manhattan', area) %> </b>
-      <!-- (<span><%#=@lower_manhattan_count%></span>) -->
-    <% lower_manhattan_sub_borough.each do |borough| %>
-      <li data-parent="lower_manhattan"><%= search_by_neighborhood_link(borough, area) if borough != 'West Village'%>
-        <% if borough == 'Greenwich Village' %>
-          <ul>
-            <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('West Village', area) %></li>
-          </ul>
+    <b id="lower_manhattan"><%= search_by_neighborhood_link('Lower Manhattan', area) %> </b>
+    <div class="child-borough-container">
+      <% lower_manhattan_sub_borough.each do |borough| %>
+        <% if borough != 'West Village' %>
+          <li data-parent="lower_manhattan" class="parent">
+            <%= search_by_neighborhood_link(borough, area)%>
+            <% if borough == 'Greenwich Village' %>
+              <ul>
+                <li data-parent="lower_manhattan"><%= search_by_neighborhood_link('West Village', area) %></li>
+              </ul>
+            <%end%>
+          </li>
         <%end%>
-      </li>
-    <%end%>
+      <%end%>
+    </div>
     <b id="midtown"><%= search_by_neighborhood_link('Midtown', area) %></b>
-    <li data-parent="midtown"><%= search_by_neighborhood_link('Chelsea', area) %></li>
-    <li data-parent="midtown"><%= search_by_neighborhood_link('Gramercy Park', area) %></li>
-    <li data-parent="midtown"><%= search_by_neighborhood_link("Hell's Kitchen", area) %></li>
+    <div class="child-borough-container">
+      <li data-parent="midtown" class="parent"><%= search_by_neighborhood_link('Chelsea', area) %></li>
+      <li data-parent="midtown" class="parent"><%= search_by_neighborhood_link('Gramercy Park', area) %></li>
+      <li data-parent="midtown" class="parent"><%= search_by_neighborhood_link("Hell's Kitchen", area) %></li>
+    </div>
   </ul>
 </div>
 
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <ul class="neighborhoods-list">
-    <li data-parent="midtown"><%= search_by_neighborhood_link('Kips Bay', area) %></li>
-    <li data-parent="midtown"><%= search_by_neighborhood_link('Midtown East', area) %> </a>
-      <ul>
-        <li data-parent="midtown"><%= search_by_neighborhood_link('Sutton Place', area) %></li>
-      </ul>
-    </li>
-    <li data-parent="midtown"><%= search_by_neighborhood_link('Murray Hill', area) %></li>
-    <li data-parent="midtown"><%= search_by_neighborhood_link('Roosevelt Island', area) %></li>
-    
+    <div class="child-borough-container">
+      <li data-parent="midtown" class="parent"><%= search_by_neighborhood_link('Kips Bay', area) %></li>
+      <li data-parent="midtown" class="parent"><%= search_by_neighborhood_link('Midtown East', area) %> </a>
+        <ul>
+          <li data-parent="midtown"><%= search_by_neighborhood_link('Sutton Place', area) %></li>
+        </ul>
+      </li>
+      <li data-parent="midtown" class="parent"><%= search_by_neighborhood_link('Murray Hill', area) %></li>
+      <li data-parent="midtown" class="parent"><%= search_by_neighborhood_link('Roosevelt Island', area) %></li>
+    </div>
     <b id="uptown_manhattan">Uptown Manhattan (<span><%=@uptown_count%></span>)</b>
-    <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Morningside Heights', area) %></li>
-    <li data-parent="uptown_manhattan">
-      <%= search_by_neighborhood_link('Upper East Side', area) %></a>
-      <ul>
-        <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Carnegie Hill', area) %></li>
-        <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Lenox Hill', area) %></li>
-        <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Yorkville', area) %></li>
-      </ul>
-    </li>
-   
-    <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Upper West Side', area) %>
-      <ul>
-        <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Lincoln Square', area) %></li>
-      </ul>
-    </li>
+    <div class="child-borough-container">
+      <li data-parent="uptown_manhattan" class="parent"><%= search_by_neighborhood_link('Morningside Heights', area) %></li>
+      <li data-parent="uptown_manhattan" class="parent">
+        <%= search_by_neighborhood_link('Upper East Side', area) %></a>
+        <ul>
+          <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Carnegie Hill', area) %></li>
+          <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Lenox Hill', area) %></li>
+          <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Yorkville', area) %></li>
+        </ul>
+      </li>
+     
+      <li data-parent="uptown_manhattan" class="parent"><%= search_by_neighborhood_link('Upper West Side', area) %>
+        <ul>
+          <li data-parent="uptown_manhattan"><%= search_by_neighborhood_link('Lincoln Square', area) %></li>
+        </ul>
+      </li>
+    </div>
   </ul>
 </div>
 
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <ul class="neighborhoods-list">
     <b id="upper_manhattan"><%= search_by_neighborhood_link('Upper Manhattan', area) %></b>
-    <li data-parent="upper_manhattan"><%= search_by_neighborhood_link('East Harlem', area) %></li>
-    <li data-parent="upper_manhattan"><%= search_by_neighborhood_link('Harlem', area) %></li>
-    <li data-parent="upper_manhattan"><%= search_by_neighborhood_link('Hudson Heights', area) %></li>
-    <li data-parent="upper_manhattan"><%= search_by_neighborhood_link('Washington Heights', area) %></li>
-    
-    <b id="brooklyn"><% area = 'Brooklyn' %> <%= link_to 'Brooklyn', '/city/brooklyn-ny'  %> (<%=@brooklyn_count%>)</b>
-    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Brooklyn Heights', area) %></li>
-    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Bushwick', area) %></li>
-    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Clinton Hill', area) %></li>
-    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Downtown Brooklyn', area) %></li>
-    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Dumbo', area) %></li>
-    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Fort Greene', area) %></li>
-    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Gravesend', area) %></li>
-    <li data-parent="brooklyn"><%= search_by_neighborhood_link('Greenpoint', area) %></li>
+    <div class="child-borough-container">
+      <li data-parent="upper_manhattan" class="parent"><%= search_by_neighborhood_link('East Harlem', area) %></li>
+      <li data-parent="upper_manhattan" class="parent"><%= search_by_neighborhood_link('Harlem', area) %></li>
+      <li data-parent="upper_manhattan" class="parent"><%= search_by_neighborhood_link('Hudson Heights', area) %></li>
+      <li data-parent="upper_manhattan" class="parent"><%= search_by_neighborhood_link('Washington Heights', area) %></li>
+      
+      <b id="brooklyn"><% area = 'Brooklyn' %> <%= link_to 'Brooklyn', '/city/brooklyn-ny'  %> (<%=@brooklyn_count%>)</b>
+      <li data-parent="brooklyn" class="parent"><%= search_by_neighborhood_link('Brooklyn Heights', area) %></li>
+      <li data-parent="brooklyn" class="parent"><%= search_by_neighborhood_link('Bushwick', area) %></li>
+      <li data-parent="brooklyn" class="parent"><%= search_by_neighborhood_link('Clinton Hill', area) %></li>
+      <li data-parent="brooklyn" class="parent"><%= search_by_neighborhood_link('Downtown Brooklyn', area) %></li>
+      <li data-parent="brooklyn" class="parent"><%= search_by_neighborhood_link('Dumbo', area) %></li>
+      <li data-parent="brooklyn" class="parent"><%= search_by_neighborhood_link('Fort Greene', area) %></li>
+      <li data-parent="brooklyn" class="parent"><%= search_by_neighborhood_link('Gravesend', area) %></li>
+      <li data-parent="brooklyn" class="parent"><%= search_by_neighborhood_link('Greenpoint', area) %></li>
+    </div>
   </ul>
 </div>
 
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
   <ul class="neighborhoods-list">
-    <li data-parent="brooklyn"><a href="#">Sheepshead Bay</a></li>
-    <li data-parent="brooklyn"><a href="#">Williamsburg</a></li>
+    <div class="child-borough-container">
+      <li data-parent="brooklyn" class="parent"><a href="#">Sheepshead Bay</a></li>
+      <li data-parent="brooklyn" class="parent"><a href="#">Williamsburg</a></li>
+    </div>
     <% area = 'Queens' %>
     <b id="queens"><%= link_to 'Queens', '/city/queens-ny'  %> (<%=@queens_count%>)</b>
-    <% queens_sub_borough.each do |borough| %>
-      <li data-parent="queens"><%= search_by_neighborhood_link(borough, area) %></li>
-    <%end%>
-
+    <div class="child-borough-container">
+      <% queens_sub_borough.each do |borough| %>
+        <li data-parent="queens" class="parent"><%= search_by_neighborhood_link(borough, area) %></li>
+      <%end%>
+    </div>
     <b id="bronx"><% area = 'Bronx' %> <%= link_to 'Bronx', '/city/bronx-ny'  %> (<%=@bronx_count%>)</b>
-    <li data-parent="bronx"><%= search_by_neighborhood_link('East Bronx', area) %></a></li>
-    <li data-parent="bronx"><%= search_by_neighborhood_link('University Heights', area) %></a></li>
+    <div class="child-borough-container" style="border-bottom: 1px solid #ddd;">
+      <li data-parent="bronx" class="parent"><%= search_by_neighborhood_link('East Bronx', area) %></a></li>
+      <li data-parent="bronx" class="parent"><%= search_by_neighborhood_link('University Heights', area) %></a></li>
+    </div>
   </ul>
 </div>
