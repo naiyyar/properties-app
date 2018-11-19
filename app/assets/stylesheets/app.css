@@ -6735,13 +6735,21 @@ select.custom-arrow {
         font-size: 16px !important;
     }
     .neighborhoods-list li.parent {
-        border: 1px solid #ddd !important;
-        margin: 6px;
+        /*#box view*/
+        /*border: 1px solid #ddd !important;*/
+        /*margin: 6px;*/
+
+        /*#list view*/
+        border-bottom: 1px solid #ddd !important;
+        margin: 0px;
     }
     .neighborhoods-list div.child-borough-container {
         border-left: 1px solid #ddd;
         border-right: 1px solid #ddd;
-        padding: 1px;
+        /*#list view*/
+        padding: 0px;
+        /*#box view*/
+        /*padding: 1px;*/
     }
 
     ul.neighborhoods-list b{
