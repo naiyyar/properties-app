@@ -5090,6 +5090,7 @@ body.black {
     list-style: none;
     padding: 0px;
 }
+
 .neighborhoods-list li{
     padding: 4px 0px;
 }
@@ -6725,13 +6726,23 @@ select.custom-arrow {
     .neighborhood-container .panel{
         margin-bottom: -1px;
     }
-    /*ul.neighborhoods-list li{
-        border: 1px solid #ddd;
-        margin: 4px 0px;
+    .neighborhoods-list li {
+        padding: 4px 1px !important;
     }
-    ul.neighborhoods-list li a{
+    .neighborhoods-list li a {
+        font-size: 16px !important;
+    }
+    ul.neighborhoods-list b{
+        display: block;
+        text-align: center;
+        padding: 9px;
+        background: #fff;
+        border: 1px solid #ddd;
+    }
+    ul.neighborhoods-list b, ul.neighborhoods-list b a{
         color: #333;
-    }*/
+        font-size: 16px !important;
+    }
     .home-title {
         font-size: 26px;
         line-height: 30px;

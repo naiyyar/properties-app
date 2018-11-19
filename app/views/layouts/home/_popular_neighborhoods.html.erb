@@ -1,5 +1,5 @@
 <div class="home-wrapper" style="padding: 25px 20px 20px;">
-  <% unless browser.device.mobile? %>
+  <%# if browser.device.mobile? %>
   	<%# if @home_view.present? %>
     <div class="home-content neighborhood-container">
       <h2 class="osLight1" style="font-weight: bolder;">Popular NYC Neighborhoods To Rent In</h2>
@@ -7,6 +7,36 @@
         <%= render partial: 'layouts/shared/neighborhoods_list' %>
       </div>
     </div>
-  <%else%>
-  <%end%>
+  <%#else%>
+  	<div class="home-content neighborhood-container visible-xs visible-sm hidden">
+      <h2 class="osLight1"><%#='Popular NYC Neighborhoods To Rent In' if params[:neighborhoods].blank?%><%#='Neighborhoods' if params[:neighborhoods].present? %></h2>
+      <div class="row pb40">
+        <%# ny_cities.each do |area| %>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <div class="panel panel-default dd">
+              <a href="#mddPanel<%#=area%>" class="btn btn-o btn-primary btn-block btn-lg align-center btn-panel-collapsable" data-toggle="collapse"><%#=area%> <%#='(Coming Soon)' if area == 'BRONX'%><span class="fa fa-angle-down pull-right"></span></a>
+              <div id="mddPanel<%#=area%>" class="panel-collapse collapse in">
+                <div class="panel-body">
+                  <ul class="neighborhoods-list list-inline">
+                    <%# @pop_neighborhoods.where(boroughs: area).order(:name).each do |nb| %>
+                      <!-- <li><%#= search_by_neighborhood_link(nb, area) %></li> -->
+                    <%#end%>
+                    <%# lower_manhattan_sub_borough.each do |borough| %>
+								      <li><%#= search_by_neighborhood_link(borough, area) if borough != 'West Village'%>
+								        <%# if borough == 'Greenwich Village' %>
+								          <ul>
+								            <li data-parent="lower_manhattan"><%#= search_by_neighborhood_link('West Village', area) %></li>
+								          </ul>
+								        <%#end%>
+								      </li>
+								    <%#end%>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%#end%>
+      </div>
+    </div>
+  <%#end%>
 </div>
