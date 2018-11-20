@@ -62,14 +62,19 @@
 
     <div class="formField filter-action">
     	<div class="row">
-    		<div class="text-center">
-      		<%#= link_to 'Reset', search_path(search_term: params[:search_term], neighborhoods: params[:neighborhoods]), class: 'btn btn-default btn-xlg' %>
-          <%= link_to '<b>Cancel</b>'.html_safe,'javascript:;', class: 'closeFilter hidden-xs' %>
-          <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-xlg clearFilter' %>
-      		<a href="#" class="applyFilter btn btn-green btn-xlg">Apply</a>
-      	</div>
       	<%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden', name: nil %>
     	</div>
     </div>
   </form>
+
+  <div class="filter-action-btns" style="position: relative;">
+    <div class="text-center">
+      <div class="filter-action-btns2">
+        <%= link_to '<b>Cancel</b>'.html_safe,'javascript:;', class: 'closeFilter hidden-xs' %>
+        <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-xlg clearFilter' %>
+        <a href="#" class="applyFilter btn btn-green btn-xlg">Apply</a>
+      </div>
+    </div>
+  </div>
 </div>
+
