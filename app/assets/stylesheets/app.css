@@ -1130,7 +1130,14 @@ a.userHandler {
     background-color: transparent;
 }
 .neighborhoods-dropdown .dropdown-menu{
-    min-width: 610px;padding: 0px 6px;
+    min-width: 842px;
+    padding: 6px;
+    left: -112px;
+}
+.neighborhoods-dropdown .dropdown-menu .row .col-lg-3{
+    padding-right: 0px !important;
+    width: 22% !important;
+
 }
 .neighborhoods-dropdown .dropdown-menu h2{
     font-size: 13px;
@@ -5093,7 +5100,7 @@ body.black {
 
 .neighborhoods-list li{
     padding: 4px 0px;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .neighborhoods-list li a:hover{

@@ -9,7 +9,7 @@
     <%= hidden_field_tag :sort_by, params[:sort_by] || '4' %>
     
     <div class="row">
-      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 formItem">
+      <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 formItem">
         <div class="formField">
           <div class="volume">
             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 formItem">
+      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
         <div class="formField">
           <div class="volume">
             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -49,15 +49,7 @@
               <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Rental Building" <%= type_checked('Rental Building') %>><span class="fa fa-check"></span> Rental</label></div>
               <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Condo Building" <%= type_checked('Condo Building') %>><span class="fa fa-check"></span> Condo</label></div>
               <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Coop Building" <%= type_checked('Coop Building') %>><span class="fa fa-check"></span> Coop</label></div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 formItem">
-        <div class="formField">
-          <div class="volume">
-            <div class="col-sm-12 col-md-12 col-lg-12">
               <label><b>Rating</b></label>
               <% 1.upto(5) do |val| %>
                 <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_rating_filter single-check" name="filter[rating]" value="<%=val%>" <%= rating_checked(val) %> ><span class="fa fa-check"></span> <%=val%> Star</label></div>
