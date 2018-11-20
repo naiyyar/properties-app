@@ -6378,6 +6378,9 @@ select.custom-arrow {
     .filter-btn-container div{
         padding: 4px;
     }
+    .filter-action-btns2{
+        width: 100%;
+    }
     .center-xs{
         text-align: center;
     }
