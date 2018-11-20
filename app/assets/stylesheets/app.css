@@ -6187,7 +6187,7 @@ select.custom-arrow {
         padding: 0px 20px 1px;
     }
 
-    .row.pb40{
+    .row.pb40.scrollable{
         height: 650px;
         overflow-y: scroll;
     }
