@@ -4,8 +4,7 @@
     <span class="dropdown-label"><%#= params[:neighborhoods].present? ? params[:neighborhoods] : 'Neighborhoods'  %></span> &nbsp;<span class="caret"></span>
     </button>
   </div> -->
-  
-  <% if params[:searched_by] == 'neighborhoods' or params[:searched_by] == 'zipcode' %>
+  <% if show_filters? %>
 		<div class="btn-filter">
 	 		<button class="btn btn-o btn-primary btn-filter handleFilter">
 	      <span class="dropdown-label"><span class="fa fa-filter"></span> &nbsp;<%= 'Filter' %> <span class="filter-counts"></span> &nbsp; </span>

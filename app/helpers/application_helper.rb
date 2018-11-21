@@ -13,6 +13,12 @@ module ApplicationHelper
     @search_bar_hidden == status ? 'hidden' : ''
   end
 
+  def show_filters?
+    params[:searched_by] == 'neighborhoods' or 
+    params[:searched_by] == 'zipcode' or 
+    params[:searched_by] == 'city' 
+  end
+
 	def resource_name
     :user
   end

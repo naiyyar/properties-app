@@ -22,7 +22,7 @@
 	</div>
 
 
-	<% if params[:searched_by] == 'neighborhoods' or params[:searched_by] == 'zipcode' %>
+	<% if show_filters? %>
 		<div class="pull-right hidden-xs">
 			<div class="btn-filter">
 		 		<button data-toggle="dropdown" class="btn sc-lg btn-o btn-primary dropdown-toggle handleFilter <%=params[:filter].present? ? 'active' : ''%>">
