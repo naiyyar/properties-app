@@ -5,6 +5,7 @@
     var options = {
         zoom: 14,
         // disableDefaultUI: false,
+        mapTypeControl: false,
         zoomControlOptions: {
           position: google.maps.ControlPosition.RIGHT_CENTER
         },
