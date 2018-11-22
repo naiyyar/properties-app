@@ -1130,9 +1130,9 @@ a.userHandler {
     background-color: transparent;
 }
 .neighborhoods-dropdown .dropdown-menu{
-    min-width: 794px;
+    min-width: 840px;
     padding: 6px;
-    left: -67px;
+    left: -100px;
 }
 .neighborhoods-dropdown .dropdown-menu .row .col-lg-3{
     padding-right: 0px !important;
