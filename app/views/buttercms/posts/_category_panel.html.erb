@@ -34,7 +34,7 @@
             <div class="blog-tags">
                 <% if @tags.present? %>
                     <% @tags.each do |tag| %>
-                        <a href="<%=buttercms_tag_path(tag.slug)%>" title="<%=tag.name%>" class="label label-<%= params[:slug] == tag.slug ? 'success' : 'default' %>"><%=tag.name%></a>
+                        <a href="<%=buttercms_tag_path(tag.slug) if tag.slug.present?%>" title="<%=tag.name%>" class="label label-<%= params[:slug] == tag.slug ? 'success' : 'default' %>"><%=tag.name%></a>
                     <%end%>
                 <%end%>
             </div>
