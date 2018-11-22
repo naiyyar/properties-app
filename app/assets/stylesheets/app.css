@@ -6380,6 +6380,7 @@ select.custom-arrow {
     }
     .filter-action-btns2{
         width: 100%;
+        padding: 4px;
     }
     .center-xs{
         text-align: center;
