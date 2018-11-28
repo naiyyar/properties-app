@@ -252,7 +252,7 @@ module HomeHelper
 			@queens_count
 		when 'Brooklyn'
 			@brooklyn_count
-		else
+		when 'Bronx'
 			@bronx_count
 		end
 	end
