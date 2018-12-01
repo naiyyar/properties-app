@@ -4,6 +4,7 @@ if @search_by_mangement.present?
     json.id company.id
     json.search_term "#{company.name}" #if !arr.include? company.name
     json.management_company_name "#{company.name}"
+    json.category 'Management Company'
   end
 end
 
@@ -12,6 +13,7 @@ if @buildings_by_pneighborhood.present?
     json.id building.id
     json.search_term "#{building.neighborhoods_parent}, #{building.city}, #{building.state}"
     json.neighborhoods "#{building.formatted_neighborhood('parent')}"
+    json.category 'Neighborhood'
     arr << building.neighborhoods_parent
   end
 end
@@ -22,6 +24,7 @@ if @buildings_by_neighborhood.present?
     if building.neighborhood.present? and !arr.include? building.neighborhood
       json.search_term "#{building.neighborhood}, #{building.city}, #{building.state}"
       json.neighborhoods "#{building.formatted_neighborhood}"
+      json.category 'Neighborhood'
       arr << building.neighborhood
     end
   end
@@ -36,6 +39,7 @@ if @buildings_by_name.present? #and @buildings_by_address.blank? => Removed due 
       json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
     end
     json.term_address "#{building.building_street_address}"
+    json.category 'Building'
   end
 end
 
@@ -44,6 +48,7 @@ if @buildings_by_address.present?
     json.id building.id
     json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
     json.term_address "#{building.building_street_address}"
+    json.category 'Building'
   end
 end
 
@@ -53,10 +58,7 @@ if @buildings_by_zipcode.present?
     #if building.id == @buildings_by_zipcode.first.id
     json.search_term "#{building.zipcode} - #{building.city}, #{building.state}"
     json.term_zipcode "#{building.zipcode}-#{building.formatted_city}"
-    #else
-    #  json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
-    #  json.term "#{building.building_street_address}"
-    #end
+    json.category 'Zipcode'
   end
 end
 
@@ -67,6 +69,7 @@ if @buildings_by_city.present?
     if building.city.present? and !arr.include? building.city
       json.search_term "#{building.city}, #{building.state}"
       json.term_city "#{building.formatted_city}-#{building.state.downcase}"
+      json.category 'City'
     end 
   end
 end

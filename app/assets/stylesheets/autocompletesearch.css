@@ -114,11 +114,25 @@ ul.ui-autocomplete li.building_link_li a:hover, .no-match-link a:hover{
   left: 33px;
   top: 105px;
 }
-.ui-menu .ui-menu-item{
+.ui-menu .ui-menu-item:not(.ui-autocomplete-group){
   border-bottom: 1px solid #eee !important;
   padding: 12px 10px !important;
 }
 
 .ui-menu-item p{
   margin: 0px;
+}
+
+.ui-autocomplete-group{
+  border-bottom: 2px solid #939393 !important;
+  border-top: 2px solid #939393 !important;
+  padding: 4px 10px !important;
+}
+
+.ui-autocomplete-group b{
+  color: #0073cc;
+  font-size: 15px;
+}
+.ui-autocomplete-group:hover{
+  background-color: #fff !important;
 }

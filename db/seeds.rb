@@ -505,26 +505,26 @@
 # 	building.save
 # end
 
-manhattan_neighborhoods = [ 'Battery Park City', 'West Village', 'Sutton Place', 
-	'Roosevelt Island', 'Carnegie Hill', 'Lenox Hill', 'Yorkville', 'Lincoln Square', 'Hudson Heights', 'Morningside Heights']
+# manhattan_neighborhoods = [ 'Battery Park City', 'West Village', 'Sutton Place', 
+# 	'Roosevelt Island', 'Carnegie Hill', 'Lenox Hill', 'Yorkville', 'Lincoln Square', 'Hudson Heights', 'Morningside Heights']
 
-manhattan_neighborhoods.each do |hood|
-	obj = Neighborhood.where(name: hood)
-	unless obj.present?
-		count = Building.number_of_buildings(hood)
-		Neighborhood.create(name: hood, buildings_count: count, boroughs: 'MANHATTAN')
-	end
-end
+# manhattan_neighborhoods.each do |hood|
+# 	obj = Neighborhood.where(name: hood)
+# 	unless obj.present?
+# 		count = Building.number_of_buildings(hood)
+# 		Neighborhood.create(name: hood, buildings_count: count, boroughs: 'MANHATTAN')
+# 	end
+# end
 
-brroklyn_neighborhoods = ['Dumbo', 'Gravesend', 'Greenpoint', 'Sheepshead Bay']
+# brroklyn_neighborhoods = ['Dumbo', 'Gravesend', 'Greenpoint', 'Sheepshead Bay']
 
-brroklyn_neighborhoods.each do |hood|
-	obj = Neighborhood.where(name: hood)
-	unless obj.present?
-		count = Building.number_of_buildings(hood)
-		Neighborhood.create(name: hood, buildings_count: count, boroughs: 'BROOKLYN')
-	end
-end
+# brroklyn_neighborhoods.each do |hood|
+# 	obj = Neighborhood.where(name: hood)
+# 	unless obj.present?
+# 		count = Building.number_of_buildings(hood)
+# 		Neighborhood.create(name: hood, buildings_count: count, boroughs: 'BROOKLYN')
+# 	end
+# end
 
 
 
