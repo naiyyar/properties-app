@@ -126,7 +126,7 @@ ul.ui-autocomplete li.building_link_li a:hover, .no-match-link a:hover{
 .ui-autocomplete-group{
   /*border-bottom: 2px solid #939393 !important;*/
   /*border-top: 2px solid #939393 !important;*/
-  padding: 4px 10px !important;
+  padding: 6px 10px !important;
   background-color: #f8f8f8;
 }
 

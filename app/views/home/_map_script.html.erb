@@ -153,6 +153,9 @@
         // Setting up boundaries using kml file
         set_boundaries(map)
         addMarkers(props, map);
+
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
         
       }, 300);
       

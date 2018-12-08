@@ -106,6 +106,9 @@
 
             addMarkers(props, map);
 
+             var transitLayer = new google.maps.TransitLayer();
+            transitLayer.setMap(map);
+
             // panorama = map.getStreetView();
             // //panorama.setPosition({ lat: lat, lng: lng });
             // panorama.setPosition(marker.getPosition());
