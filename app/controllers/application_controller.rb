@@ -13,19 +13,15 @@ class ApplicationController < ActionController::Base
   end
 
   def popular_neighborhoods
-    #@manhattan_neighborhoods = view_context.manhattan_neighborhoods
-    #@pop_neighborhoods = Neighborhood.all
     @lower_manhattan_count = Neighborhood.where(name: view_context.lower_manhattan_sub_borough).sum(:buildings_count)
     @midtown_count = Neighborhood.where(name: view_context.midtown_sub_borough).sum(:buildings_count)
     @upper_manhattan_count = Neighborhood.where(name: view_context.upper_manhattan_sub_borough).sum(:buildings_count)
-    #@brooklyn_count = Neighborhood.where(name: view_context.brooklyn_sub_borough).sum(:buildings_count)
     @uptown_count = Neighborhood.where(name: view_context.uptown_sub_borough).sum(:buildings_count)
-    #@queens_count = Neighborhood.where(name: view_context.queens_sub_borough).sum(:buildings_count)
-    #@bronx_count = Neighborhood.where(name: view_context.bronx_sub_borough).sum(:buildings_count)
 
     @brooklyn_count = Building.where('city = ? OR neighborhood in (?)', 'Brooklyn', view_context.brooklyn_sub_borough).count
     @queens_count = Building.where('city = ? OR neighborhood in (?)', 'Queens', view_context.queens_sub_borough).count
-    @bronx_count = Building.where('city = ? OR neighborhood in (?)', 'Bronx', view_context.bronx_sub_borough).count
+    @bronx_count = Building.where('city = ?', 'Bronx').count
+    @east_bronx_count = Building.where('neighborhood = ?', 'East Bronx').count
   end
 
   def after_sign_up_path_for(resource)

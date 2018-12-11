@@ -42,7 +42,9 @@ module HomeHelper
 		[
 			'East Harlem',
 			'Hudson Heights',
-			'Washington Heights'
+			'Washington Heights',
+			'Harlem',
+			'Morningside Heights',
 		]
 	end
 
@@ -252,7 +254,9 @@ module HomeHelper
 			@queens_count
 		when 'Brooklyn'
 			@brooklyn_count
-		when 'Bronx'
+		when 'East Bronx'
+			@east_bronx_count
+		else
 			@bronx_count
 		end
 	end
