@@ -13,9 +13,9 @@ class ApplicationController < ActionController::Base
   end
 
   def popular_neighborhoods
-    @lower_manhattan_count = Neighborhood.where(name: view_context.lower_manhattan_sub_borough).sum(:buildings_count)
-    @midtown_count = Neighborhood.where(name: view_context.midtown_sub_borough).sum(:buildings_count)
-    @upper_manhattan_count = Neighborhood.where(name: view_context.upper_manhattan_sub_borough).sum(:buildings_count)
+    @lower_manhattan_count = Neighborhood.where(name: 'Lower Manhattan').first.buildings_count
+    @midtown_count = Neighborhood.where(name: 'Midtown').first.buildings_count
+    @upper_manhattan_count = Neighborhood.where(name: 'Upper Manhattan').first.buildings_count
     @uptown_count = Neighborhood.where(name: view_context.uptown_sub_borough).sum(:buildings_count)
 
     @brooklyn_count = Building.where('city = ? OR neighborhood in (?)', 'Brooklyn', view_context.brooklyn_sub_borough).count

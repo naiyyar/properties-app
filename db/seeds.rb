@@ -505,26 +505,16 @@
 # 	building.save
 # end
 
-# manhattan_neighborhoods = [ 'Battery Park City', 'West Village', 'Sutton Place', 
-# 	'Roosevelt Island', 'Carnegie Hill', 'Lenox Hill', 'Yorkville', 'Lincoln Square', 'Hudson Heights', 'Morningside Heights']
+manhattan_neighborhoods = ['Lower Manhattan', 'Upper Manhattan', 'Midtown']
 
-# manhattan_neighborhoods.each do |hood|
-# 	obj = Neighborhood.where(name: hood)
-# 	unless obj.present?
-# 		count = Building.number_of_buildings(hood)
-# 		Neighborhood.create(name: hood, buildings_count: count, boroughs: 'MANHATTAN')
-# 	end
-# end
-
-# brroklyn_neighborhoods = ['Dumbo', 'Gravesend', 'Greenpoint', 'Sheepshead Bay']
-
-# brroklyn_neighborhoods.each do |hood|
-# 	obj = Neighborhood.where(name: hood)
-# 	unless obj.present?
-# 		count = Building.number_of_buildings(hood)
-# 		Neighborhood.create(name: hood, buildings_count: count, boroughs: 'BROOKLYN')
-# 	end
-# end
-
+manhattan_neighborhoods.each do |hood|
+	obj = Neighborhood.where(name: hood)
+	count = Building.buildings_in_neighborhood(hood).count
+	unless obj.present?
+		Neighborhood.create(name: hood, buildings_count: count, boroughs: 'MANHATTAN')
+	else
+		obj.first.update(buildings_count: count) if obj.first.buildings_count.to_i != count.to_i
+	end
+end
 
 

@@ -724,7 +724,7 @@ class Building < ActiveRecord::Base
     #if popular_neighborhoods.pluck(:name).include?(self.neighborhood)
     popular_neighborhoods.each do |hood|
       if hood.buildings_count >= 0
-        hood.buildings_count = Building.number_of_buildings(hood.name)
+        hood.buildings_count = Building.buildings_in_neighborhood(hood.name)
         hood.save
       end
     end
