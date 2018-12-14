@@ -60,6 +60,7 @@ class Building < ActiveRecord::Base
   include Imageable
   acts_as_voteable
   resourcify
+  DIMENSIONS = ['cleanliness','noise','safe','health','responsiveness','management']
   ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
 
   validates :building_street_address, presence: true
@@ -227,6 +228,10 @@ class Building < ActiveRecord::Base
       buildings = buildings
     end
     buildings
+  end
+
+  def rating_cache?
+    RatingCache.where(cacheable_id: self.id, cacheable_type: 'Building', dimension: DIMENSIONS).present?
   end
 
   def self.sort_by_rating buildings, sort_index

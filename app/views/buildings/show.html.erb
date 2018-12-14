@@ -16,18 +16,20 @@
   <%= render partial: 'building_amenities' %>
 
   <div class="clearfix"></div>
-  <div class="aggregate-ratings">
-   <ul class="star-sm">
-      <li><h3 style="margin-top: 0px;margin-bottom: 0px;">Aggregate Ratings</h3></li>
+  <% if @building.rating_cache? %>
+    <div class="aggregate-ratings">
+     <ul class="star-sm">
+        <li><h3 style="margin-top: 0px;margin-bottom: 0px;">Aggregate Ratings</h3></li>
 
-      <li>Cleanliness - Pests/Smell/Trash <%= rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true %></li>
-      <li>Is it Noisy? <%= rating_for @building, 'noise', disable_after_rate: true, readonly: true %></li>
-      <li>Do you feel safe in your building? <%= rating_for @building, 'safe', disable_after_rate: true, readonly: true %></li>
-      <li>Utilities - AC/Electric/Heat/Water <%= rating_for @building, 'health', disable_after_rate: true, readonly: true %></li>
-      <li>Super Responsiveness <%= rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true %></li>
-      <li>Dealings with Management <%= rating_for @building, 'management', disable_after_rate: true, readonly: true %></li>
-    </ul>
-  </div>
+        <li>Cleanliness - Pests/Smell/Trash <%= rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true %></li>
+        <li>Is it Noisy? <%= rating_for @building, 'noise', disable_after_rate: true, readonly: true %></li>
+        <li>Do you feel safe in your building? <%= rating_for @building, 'safe', disable_after_rate: true, readonly: true %></li>
+        <li>Utilities - AC/Electric/Heat/Water <%= rating_for @building, 'health', disable_after_rate: true, readonly: true %></li>
+        <li>Super Responsiveness <%= rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true %></li>
+        <li>Dealings with Management <%= rating_for @building, 'management', disable_after_rate: true, readonly: true %></li>
+      </ul>
+    </div>
+  <%end%>
   <div class="clearfix"></div>
   <div class="tabsContainer" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
