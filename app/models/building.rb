@@ -721,18 +721,12 @@ class Building < ActiveRecord::Base
   end
 
   def update_neighborhood_counts
-    #if popular_neighborhoods.pluck(:name).include?(self.neighborhood)
     popular_neighborhoods.each do |hood|
-      if hood.buildings_count >= 0
-        hood.buildings_count = Building.buildings_in_neighborhood(hood.name)
+      if hood.buildings_count.to_i >= 0
+        hood.buildings_count = Building.buildings_in_neighborhood(hood.name).count
         hood.save
       end
     end
-    #else
-    #  borough = (self.city == 'New York' or self.city == "manhattan") ? 'MANHATTAN' : city
-    #  nb = Neighborhood.create(name: self.neighborhood, buildings_count: Building.number_of_buildings(self.neighborhood), boroughs: borough)
-    #end
-    
     #Rails.application.load_tasks
     #This first resets the task's already_invoked state, allowing the task to then be executed again, dependencies
     #Rake::Task['sitemap:generate'].reenable

@@ -63,13 +63,12 @@ module HomeHelper
 
 	def uptown_sub_borough
 		[
-			'Morningside Heights',
 			'Upper East Side',
-			'Carnegie Hill',
-			'Lenox Hill',
-			'Yorkville',
+			#'Carnegie Hill',
+			#'Lenox Hill',
+			#'Yorkville',
 			'Upper West Side',
-			'Lincoln Square'
+			#'Lincoln Square'
 		]
 	end
 
@@ -230,7 +229,6 @@ module HomeHelper
 	end
 
 	def search_by_neighborhood_link nb, area
-		#name = (nb.class == String ? nb : nb.name)
 		borough = Neighborhood.where(name: nb, boroughs: area.upcase)
 		link_to search_link(nb, area), data: { nbname: nb, st: searchable_text(nb, area) } do
 			if borough.present?
