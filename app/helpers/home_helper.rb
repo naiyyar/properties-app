@@ -320,4 +320,19 @@ module HomeHelper
 		[['Defaul sort',4],['Rating (high to low)',1],['Rating (low to high)',2],['Reviews (high to low)',3],['A - Z',4],['Z - A',5]]
 	end
 
+	def marker_color price
+		case price
+		when 1
+			'#fee5d9'
+		when 2
+			'#fcae91'
+		when 3
+			'#fb6a4a'
+		when 4
+			'#de2d26'
+		else
+			'#a50f15'
+		end
+	end
+
 end

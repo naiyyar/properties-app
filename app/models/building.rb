@@ -163,7 +163,14 @@ class Building < ActiveRecord::Base
 
   def self.buildings_json_hash(buildings)
     unless buildings.class == Array
-      buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
+      buildings.select(:id, 
+                        :building_name, 
+                        :building_street_address, 
+                        :latitude, 
+                        :longitude, 
+                        :zipcode, 
+                        :city, 
+                        :state, :price).as_json
     else
       buildings.as_json
     end
