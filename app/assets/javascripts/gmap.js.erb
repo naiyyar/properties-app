@@ -49,13 +49,12 @@ function createSidebarElem(json){
 };
 
 function bindElemToMarker(elem, marker, object){
-  var price = object.price
+  var price = (object.price == '' || object.price == null) ? 0 : object.price
   var card = elem.parent().parent().parent();
   card.on('mouseover', function(){
-    //marker.setIcon("<%#= asset_path 'green-dot.png' %>");
-    marker.setIcon(pinSymbol('#1fe83b'));
+    marker.setIcon(markerIcon(price, 'green'));
   }).on('mouseout', function(){
-    marker.setIcon(pinSymbol(setMcolor(price)));
+    marker.setIcon(markerIcon(price, 'red'));
   });
 };
 
@@ -65,41 +64,81 @@ function createSidebar(object, marker){
   bindElemToMarker(elem, marker, object);
 };
 
-function setMcolor(price){
-  if(price == 2){
-    return '#fcae91'
+function markerIcon(price, type='red'){
+  var path = '';
+  //console.log(price)
+  if(price == 0){
+    if(type == 'red'){
+      path = "<%=asset_path('markers/red_pin_p0.png')%>";
+    }else{
+      path = "<%=asset_path('markers/green_pin_p0.png')%>";
+    }
   }else if(price == 1){
-    return '#fee5d9'
+    if(type == 'red'){
+      path = "<%=asset_path('markers/red_pin_p1.png')%>";
+    }else{
+      path = "<%=asset_path('markers/green_pin_p1.png')%>";
+    }
+  }else if(price == 2){
+    if(type == 'red'){
+      path = "<%=asset_path('markers/red_pin_p2.png')%>";
+    }else{
+      path = "<%=asset_path('markers/green_pin_p2.png')%>";
+    }
   }else if(price == 3){
-    return '#fb6a4a'
+    if(type == 'red'){
+      path = "<%=asset_path('markers/red_pin_p3.png')%>";
+    }else{
+      path = "<%=asset_path('markers/green_pin_p3.png')%>";
+    }
   }else if(price == 4){
-    return '#de2d26'
+    if(type == 'red'){
+      path = "<%=asset_path('markers/red_pin_p4.png')%>";
+    }else{
+      path = "<%=asset_path('markers/green_pin_p4.png')%>";
+    }
   }else{
-    return '#a50f15'
+    path = "<%=asset_path('markers/red_pin_p0.png')%>";
   }
+
+  return path
 }
 
-function setPrice(price){
-  if(price == 2){
-    return '$$'
-  }else if(price == 1){
-    return '$'
-  }else if(price == 3){
-    return '$$$'
-  }else if(price == 4){
-    return '$$$$'
-  }else{
-    ''
-  }
-}
+// function setMcolor(price){
+//   if(price == 2){
+//     return '#fcae91'
+//   }else if(price == 1){
+//     return '#fee5d9'
+//   }else if(price == 3){
+//     return '#fb6a4a'
+//   }else if(price == 4){
+//     return '#de2d26'
+//   }else{
+//     return '#a50f15'
+//   }
+// }
 
-function pinSymbol(color) {
-  return {
-    path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
-    fillColor: color,
-    fillOpacity: 1,
-    strokeColor: '#000',
-    strokeWeight: 2,
-    scale: 1,
-  };
-}
+// function setPrice(price){
+//   if(price == 2){
+//     return '$$'
+//   }else if(price == 1){
+//     return '$'
+//   }else if(price == 3){
+//     return '$$$'
+//   }else if(price == 4){
+//     return '$$$$'
+//   }else{
+//     ''
+//   }
+// }
+
+// function pinSymbol(color) {
+//   return {
+//     path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+//     fillColor: color,
+//     fillOpacity: 1,
+//     strokeColor: '#000',
+//     strokeWeight: 2,
+//     scale: 1,
+//   };
+// }

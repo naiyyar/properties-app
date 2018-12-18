@@ -67,24 +67,33 @@
         var addMarkers = function(props, map) {
             $.each(props, function(i,prop) {
                 //console.log(prop.price)
-                //var default_icon = ''
-                // if(prop.price == '' || prop.price == null){
-                //   //default icon only when no price info available
-                //   // default_icon = new google.maps.MarkerImage( "<%#=asset_path('red-dot.png')%>",
-                //         // null,null,null,new google.maps.Size(36, 36))
-                //   default_icon = pinSymbol(setMcolor(prop.price))
-                // }
+                var default_icon = ''
+                var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
+                  //default icon only when no price info available
+                  default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),
+                        null,null,null, null)
+
+                  // var markerIcon = {
+                  //     url: 'http://image.flaticon.com/icons/svg/252/252025.svg',
+                  //     scaledSize: new google.maps.Size(80, 80),
+                  //     origin: new google.maps.Point(0, 0),
+                  //     anchor: new google.maps.Point(32,65),
+                  //     labelOrigin:  new google.maps.Point(40,33),
+                  //   };
+                
+                //var markerLabel = setPrice(prop.price);
                 
                 var latlng = new google.maps.LatLng(prop.latitude, prop.longitude);
                 var marker = new google.maps.Marker({
                     position: latlng,
                     map: map,
-                    icon: pinSymbol(setMcolor(prop.price)),
-                    label: {
-                            text: setPrice(prop.price),
-                            scaledSize: new google.maps.Size(32, 38),
-                            labelOrigin: new google.maps.Point(90, 90)
-                          }, //labels[labelIndex++ % labels.length],
+                    icon: default_icon, //pinSymbol(setMcolor(prop.price)),
+                    // label: {
+                    //         text: markerLabel,
+                    //         color: "#333",
+                    //         fontSize: "12px",
+                    //         fontWeight: "normal"
+                    //       }, //labels[labelIndex++ % labels.length],
                     draggable: false,
                     //animation: google.maps.Animation.DROP,
                 });
