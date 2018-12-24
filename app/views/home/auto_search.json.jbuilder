@@ -1,45 +1,42 @@
-# if @companies.present?
-#   json.companies do
-#     json.array!(@companies) do |company|
-#       json.name company.name
-#       json.url "/management_company/#{company.name}"
-#     end
-#   end
-# end
+if @companies.present?
+  json.companies do
+    json.array!(@companies) do |company|
+      json.name company.name
+      json.url "/management_company/#{company.name}"
+    end
+  end
+end
 
-#if @neighborhoods.present?
+if @neighborhoods.present?
   json.neighborhoods do
-    json.array!(@pneighborhoods) do |building|
-      json.name "#{building.neighborhoods_parent}, #{building.city}, #{building.state}"
-      json.url "/neighborhoods/#{building.formatted_neighborhood('parent')}"
+    json.array!(@neighborhoods) do |nb|
+      json.name "#{nb.name}, #{nb.formatted_city}, NY"
+      json.url "/neighborhoods/#{nb.formatted_name}"
     end
   end
+end
 
-  json.neighborhoodss do
-    json.array!(@neighborhoods) do |building|
-      json.name "#{building.neighborhoods_parent}, #{building.city}, #{building.state}"
-      json.url "/neighborhoods/#{building.formatted_neighborhood}"
+if @buildings.present?
+  json.buildings do
+    json.array!(@buildings) do |building|
+      if building.building_name.present?
+        json.name "#{building.building_name} - #{building.building_street_address}, #{building.city}, #{building.state}, #{building.zipcode}"
+      else
+        json.name "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
+      end
+      json.url building_path(building)
     end
   end
-#end
+end
 
-# json.buildings do
-#   json.array!(@buildings) do |building|
-#     if building.building_name.present?
-#       json.search_term "#{building.building_name} - #{building.building_street_address}, #{building.city}, #{building.state}, #{building.zipcode}"
-#     else
-#       json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
-#     end
-#     json.url building_path(building)
-#   end
-# end
-
-# json.zipcodes do
-#   json.array!(@zipcodes) do |building|
-#     json.name "#{building.zipcode} - #{building.city}, #{building.state}"
-#     json.url "/zipcode/#{building.zipcode}"
-#   end
-# end
+if @zipcodes.present?
+  json.zipcodes do
+    json.array!(@zipcodes) do |building|
+      json.name "#{building.zipcode} - #{building.city}, #{building.state}"
+      json.url "/zipcode/#{building.zipcode}"
+    end
+  end
+end
 
 # json.city do
 #   json.array!(@city) do |city|
@@ -62,7 +59,7 @@
 #   json.array! @buildings_by_pneighborhood do |building|
 #     json.id building.id
 #     json.search_term "#{building.neighborhoods_parent}, #{building.city}, #{building.state}"
-#     json.neighborhoods "#{building.formatted_neighborhood('parent')}"
+#     json.neighborhoods_parent "#{building.formatted_neighborhood('parent')}"
 #     json.category 'Neighborhood'
 #     arr << building.neighborhoods_parent
 #   end

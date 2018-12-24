@@ -12,6 +12,10 @@
 
 class Neighborhood < ActiveRecord::Base
 
+  include PgSearch
+  pg_search_scope :nb_search, against: [:name],
+     :using => { :tsearch => { prefix: true } }
+
 	def nb_name_with_counts
 		"#{name} (#{buildings_count})"
 	end
@@ -26,5 +30,15 @@ class Neighborhood < ActiveRecord::Base
       end
     end
 	end
+
+  def formatted_name
+    return "#{name.downcase.gsub(' ', '-')}-#{formatted_city}"
+  end
+
+  def formatted_city
+    city = boroughs.downcase
+    city = 'new york' if city == 'manhattan'
+    city.gsub(' ', '')
+  end
 
 end

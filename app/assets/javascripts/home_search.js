@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
   $input = $("[data-behavior='autocomplete']")
 
   var options = {
