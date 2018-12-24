@@ -40,6 +40,8 @@
 //= require gmap
 //= require blog
 //= require filterrific/filterrific-jquery
+//= require jquery.easy-autocomplete
 //= require load_more
+//= require home_search
 
 //= require_tree .

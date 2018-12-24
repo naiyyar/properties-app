@@ -26,27 +26,27 @@ class HomeController < ApplicationController
   end
 
   def auto_search
-    results = []
-    @buildings_by_pneighborhood = Building.search_by_pneighborhoods(params[:term])
-    results << @buildings_by_pneighborhood
-    @buildings_by_name = Building.search_by_building_name(params[:term])
-    results << @buildings_by_name
-    @buildings_by_neighborhood = Building.search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
-    results << @buildings_by_neighborhood
-    @buildings_by_address = Building.search_by_street_address(params[:term]).to_a.uniq(&:building_street_address)
-    results << @buildings_by_address
-    @buildings_by_zipcode = Building.search_by_zipcodes(params[:term])
-    results << @buildings_by_zipcode
-    @buildings_by_city = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
-    results << @buildings_by_city
-    @search_by_mangement = ManagementCompany.text_search_by_management_company(params[:term]).to_a.uniq(&:name)
-    results << @search_by_mangement
-    
-    if !results.flatten.present?
-      @result_type = 'no_match_found'
-    else
-      @result_type = 'match_found'
-    end
+    # results = []
+    @pneighborhoods = Building.search_by_pneighborhood(params[:term]).to_a.uniq(&:neighborhoods_parent) #All neighborhoods
+    # results << @buildings_by_pneighborhood
+    #@buildings = Building.search(params[:term]).limit(10)
+    # results << @buildings_by_name
+    neighborhoods = Building.search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
+    # results << @buildings_by_neighborhood
+    # @buildings_by_address = Building.search_by_street_address(params[:term]).to_a.uniq(&:building_street_address)
+    # results << @buildings_by_address
+    #@zipcodes = Building.search_by_zipcodes(params[:term]) #address and name
+    # results << @buildings_by_zipcode
+    #@city = Building.text_search_by_city(params[:term]) #.to_a.uniq(&:city)
+    # results << @buildings_by_city
+    #@companies = ManagementCompany.text_search_by_management_company(params[:term]) #.to_a.uniq(&:name)
+    # results << @search_by_mangement
+    #debugger
+    # if !results.flatten.present?
+    #   @result_type = 'no_match_found'
+    # else
+    #   @result_type = 'match_found'
+    # end
     
     respond_to do |format|
       #format.html: because if login from search split view after searching something session was saving auto_search path as looking for auto_search template

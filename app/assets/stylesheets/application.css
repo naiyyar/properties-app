@@ -24,4 +24,6 @@
  *= require slide-and-swipe-menu
  *= require bootstrap-datepicker3
  *= require social-share-button
+ *= require easy-autocomplete
+ *= require easy-autocomplete.themes
  */
