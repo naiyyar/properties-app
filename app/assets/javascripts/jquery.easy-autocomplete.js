@@ -1059,6 +1059,7 @@ var EasyAutocomplete = (function(scope) {
 
 								default:
 									$elements_container.find("ul").show();
+									$elements_container.find('.no-match-link').removeClass('hidden'); //to show no match link
 								break;
 							}
 
@@ -1086,6 +1087,7 @@ var EasyAutocomplete = (function(scope) {
 
 								default:
 									$elements_container.find("ul").hide();
+									$elements_container.find('.no-match-link').addClass('hidden'); //to hide no match link
 								break;
 							}
 

@@ -252,8 +252,8 @@
 }
 .easy-autocomplete-container ul {
   background: none repeat scroll 0 0 #ffffff;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  /*border-top: 1px solid #ccc;*/
+  /*border-bottom: 1px solid #ccc;*/
   display: none;
   margin-top: 0;
   padding-bottom: 0;
@@ -262,13 +262,15 @@
   top: -1px;
   max-height: 300px;
   overflow-y: scroll;
+  margin-bottom: -1px;
+  box-shadow: 0px 1px 4px rgba(0,0,0,0.6);
 }
 .easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
   background: inherit;
   border-color: #ccc;
   border-image: none;
-  border-style: solid;
-  border-width: 0 1px;
+  /*border-style: solid;*/
+  /*border-width: 0 1px;*/
   display: block;
   font-size: 14px;
   font-weight: normal;

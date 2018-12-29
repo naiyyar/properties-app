@@ -66,10 +66,10 @@
   z-index: 9999;
   background: #ccc;
   color: #333;
-  height: 3.5em;
+  /*height: 3.5em;*/
   line-height: 44px;
   position: absolute;
-  width: 86.5%;
+  width: 100%;
   text-align: center;
   left: 0px;
 }

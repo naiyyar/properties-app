@@ -25,17 +25,28 @@ window.addEventListener("load", function() {
       }
     ],
     list: {
-      maxNumberOfElements: 20,
+      maxNumberOfElements: 50,
       theme: "square",
       onChooseEvent: function() {
-        console.log($input)
+        //OUTPUIT getSelectedItemData(): {name: "Upper East Side, newyork, NY", url: "/neighborhoods/upper-east-side-newyork"}
         var url = $input.getSelectedItemData().url
-        $input.val("")
+        $input.val($input.getSelectedItemData().name)
         //Turbolinks.visit(url)
         window.location = url;
       },
+      onShowListEvent: function(){
+        console.log('onShowListEvent')
+        $('#eac-container-search_term').find('.no-match-link').remove();
+        var elemToAppend = '<div class="no-match-link" style="box-shadow: 0px 1px 4px rgba(0,0,0,0.6);">' +
+                           '<a href="/buildings/contribute?results=no-matches-found">'+
+                           '<b>No matches found - Add Your Building</b></a></div>';
+        $('#eac-container-search_term').append(elemToAppend)
+      },
+      onKeyEnterEvent: function(){
+        console.log('Mouse entered')
+      },
       onLoadEvent: function(){
-        //console.log(12)
+        //alert('onLoadEvent')
       }
     }
   }
