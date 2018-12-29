@@ -1085,7 +1085,7 @@ var EasyAutocomplete = (function(scope) {
 								break;
 
 								default:
-									//$elements_container.find("ul").hide();
+									$elements_container.find("ul").hide();
 								break;
 							}
 
