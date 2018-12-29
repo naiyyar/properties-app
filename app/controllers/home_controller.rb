@@ -37,9 +37,10 @@ class HomeController < ApplicationController
     # results << @buildings_by_address
     @zipcodes = Building.search_by_zipcodes(params[:term]) #address and name
     # results << @buildings_by_zipcode
-    #@city = Building.text_search_by_city(params[:term]) #.to_a.uniq(&:city)
     # results << @buildings_by_city
     @companies = ManagementCompany.text_search_by_management_company(params[:term])
+
+    @city = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
     # results << @search_by_mangement
     #debugger
     # if !results.flatten.present?

@@ -247,16 +247,21 @@
   position: absolute;
   width: 100%;
   z-index: 2;
+  top: 52px;
+  max-height: 300px;
 }
 .easy-autocomplete-container ul {
   background: none repeat scroll 0 0 #ffffff;
-  border-top: 1px dotted #ccc;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   display: none;
   margin-top: 0;
   padding-bottom: 0;
   padding-left: 0;
   position: relative;
   top: -1px;
+  max-height: 300px;
+  overflow-y: scroll;
 }
 .easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
   background: inherit;
@@ -269,9 +274,14 @@
   font-weight: normal;
   padding: 4px 12px;
 }
-.easy-autocomplete-container ul li:last-child {
+.easy-autocomplete-container ul .eac-category {background: #f8f8f8; color: #2b78e4; font-size: 15px;}
+/*.easy-autocomplete-container ul li:last-child {
   border-radius: 0 0 2px 2px;
   border-width: 0 1px 1px;
+}*/
+.easy-autocomplete-container ul li{
+  border-bottom: 1px solid #eee;
+  padding: 12px 10px
 }
 .easy-autocomplete-container ul li.selected {
   background: none repeat scroll 0 0 #ebebeb;
@@ -290,7 +300,7 @@
 }
 .easy-autocomplete-container ul .eac-category {
   font-color: #aaa;
-  font-style: italic;
+  /*  font-style: italic;*/
 }
 
 .eac-description .eac-item span {

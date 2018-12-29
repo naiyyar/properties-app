@@ -38,12 +38,14 @@ if @zipcodes.present?
   end
 end
 
-# json.city do
-#   json.array!(@city) do |city|
-#     json.name director.name
-#     json.url director_path(director)
-#   end
-# end
+if @city.present?
+  json.city do
+    json.array!(@city) do |building|
+      json.name "#{building.city}, #{building.state}"
+      json.url '#'
+    end
+  end
+end
 
 # arr = []
 # if @search_by_mangement.present?

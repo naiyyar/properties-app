@@ -1,4 +1,4 @@
-$(function(){
+window.addEventListener("load", function() {
   $input = $("[data-behavior='autocomplete']")
 
   var options = {
@@ -25,12 +25,17 @@ $(function(){
       }
     ],
     list: {
+      maxNumberOfElements: 20,
+      theme: "square",
       onChooseEvent: function() {
         console.log($input)
         var url = $input.getSelectedItemData().url
         $input.val("")
         //Turbolinks.visit(url)
         window.location = url;
+      },
+      onLoadEvent: function(){
+        //console.log(12)
       }
     }
   }

@@ -7,7 +7,7 @@
 		</div>
 	<%else%>
 		<div class="hidden-xs icon-search-shared"><span class="icon-magnifier"></span></div>
-		<%= text_field_tag 'search_term', searched_term, class: 'apt-search-text-shared', placeholder: placeholder %>
+		<%= text_field_tag 'search_term', searched_term, class: 'apt-search-text-shared', placeholder: placeholder, data: { behavior: "autocomplete" } %>
 	<%end%>
 
 	<%= render partial: 'layouts/shared/no_match' %>

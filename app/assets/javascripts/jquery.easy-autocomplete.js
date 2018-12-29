@@ -658,9 +658,12 @@ var EasyAutocomplete = (function(scope) {
 		}
 
 		function reduceElementsInList(list) {
-			if (listBuilder.maxNumberOfElements !== undefined && list.length > listBuilder.maxNumberOfElements) {
-				list = list.slice(0, listBuilder.maxNumberOfElements);
-			}
+			// console.log(list)
+			// if(list !== undefined){
+			// 	if (listBuilder.maxNumberOfElements !== undefined && list.length > listBuilder.maxNumberOfElements) {
+			// 		list = list.slice(0, listBuilder.maxNumberOfElements);
+			// 	}
+			// }
 
 			return list;
 		}
@@ -1082,7 +1085,7 @@ var EasyAutocomplete = (function(scope) {
 								break;
 
 								default:
-									$elements_container.find("ul").hide();
+									//$elements_container.find("ul").hide();
 								break;
 							}
 
@@ -1111,50 +1114,52 @@ var EasyAutocomplete = (function(scope) {
 
 								var listData = listBuilders[builderIndex].data;
 
-								if (listData.length === 0) {
+								if (listData !== undefined && listData.length === 0) {
 									continue;
 								}
-
-								if (listBuilders[builderIndex].header !== undefined && listBuilders[builderIndex].header.length > 0) {
+								//listData !== undefined To hide categories if no results found
+								if (listData !== undefined && listBuilders[builderIndex].header !== undefined && listBuilders[builderIndex].header.length > 0) {
 									$listContainer.append("<div class='eac-category' >" + listBuilders[builderIndex].header + "</div>");
 								}
 
-								for(var i = 0, listDataLength = listData.length; i < listDataLength && counter < listBuilders[builderIndex].maxListSize; i += 1) {
-									$item = $("<li><div class='eac-item'></div></li>");
-									
+								if(listData !== undefined ){
+									for(var i = 0, listDataLength = listData.length; i < listDataLength && counter < listBuilders[builderIndex].maxListSize; i += 1) {
+										$item = $("<li><div class='eac-item'></div></li>");
+										
 
-									(function() {
-										var j = i,
-											itemCounter = counter,
-											elementsValue = listBuilders[builderIndex].getValue(listData[j]);
+										(function() {
+											var j = i,
+												itemCounter = counter,
+												elementsValue = listBuilders[builderIndex].getValue(listData[j]);
 
-										$item.find(" > div")
-											.on("click", function() {
+											$item.find(" > div")
+												.on("click", function() {
 
-												$field.val(elementsValue).trigger("change");
+													$field.val(elementsValue).trigger("change");
 
-												selectedElement = itemCounter;
-												selectElement(itemCounter);
+													selectedElement = itemCounter;
+													selectElement(itemCounter);
 
-												config.get("list").onClickEvent();
-												config.get("list").onChooseEvent();
-											})
-											.mouseover(function() {
+													config.get("list").onClickEvent();
+													config.get("list").onChooseEvent();
+												})
+												.mouseover(function() {
 
-												selectedElement = itemCounter;
-												selectElement(itemCounter);	
+													selectedElement = itemCounter;
+													selectElement(itemCounter);	
 
-												config.get("list").onMouseOverEvent();
-											})
-											.mouseout(function() {
-												config.get("list").onMouseOutEvent();
-											})
-											.html(template.build(highlight(elementsValue, phrase), listData[j]));
-									})();
+													config.get("list").onMouseOverEvent();
+												})
+												.mouseout(function() {
+													config.get("list").onMouseOutEvent();
+												})
+												.html(template.build(highlight(elementsValue, phrase), listData[j]));
+										})();
 
-									$listContainer.append($item);
-									elementsList.push(listData[i]);
-									counter += 1;
+										$listContainer.append($item);
+										elementsList.push(listData[i]);
+										counter += 1;
+									}
 								}
 							}
 
