@@ -10,7 +10,7 @@
 .easy-autocomplete {
   position: relative;
 }
-.easy-autocomplete input {
+/*.easy-autocomplete input {
   border-color: #ccc;
   border-radius: 4px;
   border-style: solid;
@@ -29,7 +29,7 @@
 .easy-autocomplete.eac-blue-light input:hover, .easy-autocomplete.eac-blue-light input:focus {
   border-color: #66afe9;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
-}
+}*/
 .easy-autocomplete.eac-blue-light ul {
   border-color: #66afe9;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
@@ -327,6 +327,39 @@
   position: absolute;
   right: -4px;
   top: -8px;
+}
+
+@media screen and (max-width: 767px) {
+  .home-search-form .easy-autocomplete .easy-autocomplete-container {
+    left: 0px;
+    z-index: 2;
+    top: 52px;
+  }
+
+  .split-view-seach  .easy-autocomplete .easy-autocomplete-container {
+    left: -29px;
+    z-index: 2;
+    top: 38px;
+  }
+}
+
+/* Autocomplete search container full screen width  */
+@media screen and (max-width: 375px) {
+  .split-view-seach  .easy-autocomplete .easy-autocomplete-container {
+    width: 375px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .split-view-seach  .easy-autocomplete .easy-autocomplete-container {
+    width: 414px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .split-view-seach  .easy-autocomplete .easy-autocomplete-container {
+    width: 320px;
+  }
 }
 
 /*# sourceMappingURL=easy-autocomplete.css.map */

@@ -28,3 +28,19 @@
 		}
 	}
 }
+
+#apt-search-form{
+	span.input-magnifier{
+		position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 999;
+    a.btn{
+    	font-size: 15px;
+    	border-top-left-radius: 0px !important;
+    	border-bottom-left-radius: 0px !important;
+    	border-top-right-radius: 2px;
+    	border-bottom-right-radius: 2px;
+    }
+	}
+}

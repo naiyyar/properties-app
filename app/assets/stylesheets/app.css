@@ -1192,6 +1192,7 @@ a.userHandler {
     top: 16px;
     left: 8px;
     font-size: 18px;
+    z-index: 999;
 }
 .apt-search{
     position: relative;

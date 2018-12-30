@@ -1019,7 +1019,6 @@ var EasyAutocomplete = (function(scope) {
 
 			function adjustWrapperWidth() {
 				var fieldWidth = $field.outerWidth();
-
 				$field.parent().css("width", fieldWidth);				
 			}
 
@@ -1225,6 +1224,7 @@ var EasyAutocomplete = (function(scope) {
 				bindKeypress();
 				bindFocus();
 				bindBlur();
+				bindDocClick();
 			}
 
 			function bindFocusOut() {
@@ -1487,13 +1487,29 @@ var EasyAutocomplete = (function(scope) {
 			}
 
 			function bindBlur() {
-				$field.blur(function() {
-					setTimeout(function() { 
+				// $field.blur(function() {
+				// 	setTimeout(function() { 
 						
-						selectedElement = -1;
-						hideContainer();
-					}, 250);
-				});
+				// 		selectedElement = -1;
+				// 		hideContainer();
+				// 	}, 250);
+				// });
+			}
+
+			function bindDocClick(){
+				$(document).click(function(e){
+					e.stopPropagation();
+					var t_elem_id = e.target.getAttribute('id') //input field
+					var t_elem_class = e.target.getAttribute('class') //category elem class
+					//window.data = e.target
+					//Not hiding results container on input field click + container elements click
+					if( t_elem_id != 'search_term' && t_elem_class != 'eac-category' && t_elem_class != 'no-match-link'){
+						setTimeout(function() { 
+							selectedElement = -1;
+							hideContainer();
+						}, 250);
+					}
+				})
 			}
 
 			function removeAutocomplete() {

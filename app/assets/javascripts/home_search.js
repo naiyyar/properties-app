@@ -26,7 +26,6 @@ window.addEventListener("load", function() {
     ],
     list: {
       maxNumberOfElements: 50,
-      theme: "square",
       adjustWidth: false,
       onChooseEvent: function() {
         //OUTPUIT getSelectedItemData(): {name: "Upper East Side, newyork, NY", url: "/neighborhoods/upper-east-side-newyork"}
