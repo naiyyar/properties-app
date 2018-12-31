@@ -185,7 +185,7 @@ InfoBubble.prototype.BACKGROUND_COLOR_ = '#fff';
  * @private
  */
 //InfoBubble.prototype.CLOSE_SRC_ = 'https://maps.gstatic.com/intl/en_us/mapfiles/iw_close.gif';
-InfoBubble.prototype.CLOSE_SRC_ = "<%= asset_path('iw_close50.png') %>";
+InfoBubble.prototype.CLOSE_SRC_ = "<%= asset_path('iw_close50_pw.png') %>";
 
 /**
  * Extends a objects prototype by anothers.
@@ -218,15 +218,27 @@ InfoBubble.prototype.buildDom_ = function() {
   tabsContainer.style['position'] = 'relative';
 
   // Close button
-  var close = this.close_ = document.createElement('IMG');
+  close = this.close_ = document.createElement('DIV');
   close.style['position'] = 'absolute';
-  close.style['border'] = 0;
+  close.style['borderColor'] = '#ddd';
+  close.style['borderStyle'] = 'solid';
+  close.style['borderWidth'] = this.px(1);
+  close.style['borderRadius'] = this.px(2);
   close.style['zIndex'] = this.baseZIndex_ + 1;
   close.style['cursor'] = 'pointer';
-  close.style['width'] = '28px';
+  close.style['paddingTop'] = 0;
+  close.style['paddingRight'] = this.px(3);
+  close.style['paddingBottom'] = 0;
+  close.style['paddingLeft'] = this.px(3);
+  close.style['background'] = '#fff';
+  close.style['lineHeight'] = this.px(15);
   close.className = 'js-info-bubble-close';
-  close.src = this.get('closeSrc');
-
+  //close.src = this.get('closeSrc');
+  cross = document.createElement('span');
+  cross.className = 'fa fa-times fa-2x';
+  cross.style['color'] = '#333333';
+  close.appendChild(cross)
+  
   var that = this;
   google.maps.event.addDomListener(close, 'click', function() {
     that.close();
