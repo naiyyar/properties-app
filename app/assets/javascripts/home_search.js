@@ -31,6 +31,7 @@ window.addEventListener("load", function() {
         //OUTPUIT getSelectedItemData(): {name: "Upper East Side, newyork, NY", url: "/neighborhoods/upper-east-side-newyork"}
         var url = $input.getSelectedItemData().url
         $input.val($input.getSelectedItemData().name)
+        window.data = $input.getSelectedItemData()
         //Turbolinks.visit(url)
         window.location = url;
       },

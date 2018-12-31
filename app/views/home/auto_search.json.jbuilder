@@ -33,7 +33,7 @@ if @zipcodes.present?
   json.zipcodes do
     json.array!(@zipcodes) do |building|
       json.name "#{building.zipcode} - #{building.city}, #{building.state}"
-      json.url "/zipcode/#{building.zipcode}"
+      json.url "/zipcode/#{building.zipcode}-#{building.formatted_city}"
     end
   end
 end
@@ -42,7 +42,7 @@ if @city.present?
   json.city do
     json.array!(@city) do |building|
       json.name "#{building.city}, #{building.state}"
-      json.url '#'
+      json.url "/city/#{building.formatted_city}-#{building.state.downcase}"
     end
   end
 end
