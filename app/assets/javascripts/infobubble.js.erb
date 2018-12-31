@@ -184,7 +184,8 @@ InfoBubble.prototype.BACKGROUND_COLOR_ = '#fff';
  * @const
  * @private
  */
-InfoBubble.prototype.CLOSE_SRC_ = 'https://maps.gstatic.com/intl/en_us/mapfiles/iw_close.gif';
+//InfoBubble.prototype.CLOSE_SRC_ = 'https://maps.gstatic.com/intl/en_us/mapfiles/iw_close.gif';
+InfoBubble.prototype.CLOSE_SRC_ = "<%= asset_path('iw_close50.png') %>";
 
 /**
  * Extends a objects prototype by anothers.
@@ -222,6 +223,7 @@ InfoBubble.prototype.buildDom_ = function() {
   close.style['border'] = 0;
   close.style['zIndex'] = this.baseZIndex_ + 1;
   close.style['cursor'] = 'pointer';
+  close.style['width'] = '28px';
   close.className = 'js-info-bubble-close';
   close.src = this.get('closeSrc');
 
@@ -233,8 +235,8 @@ InfoBubble.prototype.buildDom_ = function() {
 
   // Content area
   var contentContainer = this.contentContainer_ = document.createElement('DIV');
-  contentContainer.style['overflowX'] = 'auto';
-  contentContainer.style['overflowY'] = 'auto';
+  contentContainer.style['overflowX'] = 'hidden';
+  contentContainer.style['overflowY'] = 'hidden';
   contentContainer.style['cursor'] = 'default';
   contentContainer.style['clear'] = 'both';
   contentContainer.style['position'] = 'relative';
@@ -1772,7 +1774,7 @@ InfoBubble.prototype.positionCloseButton_ = function() {
   if (c && c.clientHeight < c.scrollHeight) {
     // If there are scrollbars then move the cross in so it is not over
     // scrollbar
-    right += 15;
+    //right += 15;
   }
 
   this.close_.style['right'] = this.px(right);
