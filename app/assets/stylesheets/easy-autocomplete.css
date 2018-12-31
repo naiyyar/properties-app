@@ -348,11 +348,17 @@
   .split-view-seach  .easy-autocomplete .easy-autocomplete-container {
     width: 375px;
   }
+  .split-view-seach  .easy-autocomplete  .easy-autocomplete-container ul li {
+    padding: 12px 40px 12px 6px !important;
+  }
 }
 
 @media screen and (max-width: 414px) {
   .split-view-seach  .easy-autocomplete .easy-autocomplete-container {
     width: 414px;
+  }
+  .split-view-seach  .easy-autocomplete  .easy-autocomplete-container ul li {
+    padding: 12px 40px 12px 6px !important;
   }
 }
 

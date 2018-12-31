@@ -1155,7 +1155,7 @@ a.userHandler {
 }
 .searchContainer{
     position: relative;
-    width: 47%;
+    width: 50%;
 }
 .searchIcon {
     font-size: 1.8rem;
@@ -1178,7 +1178,7 @@ a.userHandler {
     border: 0 none;
     font-size: 13px;
     margin: 6px 0 0 5px;
-    /*width: 99%;*/
+    width: 88%;
     -webkit-appearance: none;
     padding: 11px 9px 11px 26px;
     border-bottom: 1px solid #ebebeb;
