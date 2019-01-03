@@ -459,11 +459,7 @@
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();
 
-    // window.addEventListener("orientationchange", function() {
-    //     console.log(window.orientation);
-
-    // }, false);
-
+    //To changes the size of search field on mobile device orientation changed
     window.addEventListener('resize', function() {
         var homeSearchContainer = $('.home-search-form  .easy-autocomplete');
         var splitSearchContainer = $('.split-view-seach  .easy-autocomplete');

@@ -331,7 +331,7 @@
   top: -8px;
 }
 
-@media screen and (min-width: 415px) and (max-width: 767px) and (orientation: portrait) {
+@media screen and (max-width: 767px) {
   .home-search-form .easy-autocomplete .easy-autocomplete-container {
     left: 0px;
     z-index: 2;
