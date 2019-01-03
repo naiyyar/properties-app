@@ -3,7 +3,7 @@
 	<% if params[:action] == 'index' and params[:controller] == 'home' %>
 		<!-- <div class="input-group"> -->
 		  <%= text_field_tag 'search_term', searched_term, class: 'form-control', placeholder: placeholder, style: 'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 15px rgba(0,0,0,0.6);', data: { behavior: "autocomplete" }%>
-		  <span class="input-magnifier"><a class="btn btn-blue"><span class="icon-magnifier"></span></a></span>
+		  <!-- <span class="input-magnifier"><a class="btn btn-blue"><span class="icon-magnifier"></span></a></span> -->
 		<!-- </div> -->
 	<%else%>
 		<div class="hidden-xs icon-search-shared"><span class="icon-magnifier"></span></div>

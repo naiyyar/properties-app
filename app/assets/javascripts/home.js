@@ -459,4 +459,30 @@
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();
 
+    // window.addEventListener("orientationchange", function() {
+    //     console.log(window.orientation);
+
+    // }, false);
+
+    window.addEventListener('resize', function() {
+        var homeSearchContainer = $('.home-search-form  .easy-autocomplete');
+        var splitSearchContainer = $('.split-view-seach  .easy-autocomplete');
+        if(window.innerWidth > 500 && window.innerWidth <= 667){
+            homeSearchContainer.css('width','649px');
+            splitSearchContainer.css('width','581px');
+        }
+        else if(window.innerWidth > 667 && window.innerWidth <= 736){
+            homeSearchContainer.css('width','715px');
+            splitSearchContainer.css('width','646px');
+        }
+        else if(window.innerWidth == 375){
+            homeSearchContainer.css('width','355px');
+            splitSearchContainer.css('width','289px');
+        }
+        else if(window.innerWidth == 414){
+            homeSearchContainer.css('width','394px');
+            splitSearchContainer.css('width','322px');
+        }
+    }, false);
+
 })(jQuery);

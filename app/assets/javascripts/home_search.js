@@ -47,4 +47,6 @@ window.addEventListener("load", function() {
   }
 
   $input.easyAutocomplete(options)
+  var magIcon = '<span class="input-magnifier"><a class="btn btn-blue"><span class="icon-magnifier"></span></a></span>'
+  $('.home-search-form .easy-autocomplete').append(magIcon);
 });
