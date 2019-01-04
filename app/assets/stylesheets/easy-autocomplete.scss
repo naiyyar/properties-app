@@ -249,7 +249,7 @@
   width: 100%;
   z-index: 2;
   top: 52px;
-  max-height: 300px;
+  max-height: 350px;
 }
 .easy-autocomplete-container ul {
   background: none repeat scroll 0 0 #ffffff;
@@ -346,6 +346,9 @@
 
   .easy-autocomplete-container ul li div {
     padding: 8px 10px;
+  }
+  .easy-autocomplete-container {
+    max-height: 400px;
   }
 }
 
