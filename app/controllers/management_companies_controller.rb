@@ -38,9 +38,11 @@ class ManagementCompaniesController < ApplicationController
       #For Gmap
       @lat = buildings.first.latitude
       @lng = buildings.first.longitude
-      @zoom = buildings.length > 50 ? 13 : 11
-      @managed_buildings = buildings.includes(:uploads, :building_average, :votes) unless buildings.kind_of? Array
-      @hash = @managed_buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
+      @zoom = buildings.length > 60 ? 13 : 11
+      @hash = Building.buildings_json_hash(buildings.includes(:uploads, :building_average, :votes))
+      #@managed_buildings = buildings.includes(:uploads, :building_average, :votes) unless buildings.kind_of? Array
+      
+      #@hash = @managed_buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
     end
 
     @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} "+ 

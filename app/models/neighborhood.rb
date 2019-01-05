@@ -36,9 +36,9 @@ class Neighborhood < ActiveRecord::Base
   end
 
   def formatted_city
-    city = boroughs.downcase
-    city = 'new york' if city == 'manhattan'
-    city.gsub(' ', '')
+    city = boroughs.capitalize
+    city = 'New York' if city == 'Manhattan'
+    city.gsub('', '')
   end
 
 end

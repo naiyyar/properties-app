@@ -505,16 +505,25 @@
 # 	building.save
 # end
 
-manhattan_neighborhoods = ['Lower Manhattan', 'Upper Manhattan', 'Midtown']
+# manhattan_neighborhoods = ['Lower Manhattan', 'Upper Manhattan', 'Midtown']
 
-manhattan_neighborhoods.each do |hood|
-	obj = Neighborhood.where(name: hood)
-	count = Building.buildings_in_neighborhood(hood).count
-	unless obj.present?
-		Neighborhood.create(name: hood, buildings_count: count, boroughs: 'MANHATTAN')
-	else
-		obj.first.update(buildings_count: count) if obj.first.buildings_count.to_i != count.to_i
-	end
+# manhattan_neighborhoods.each do |hood|
+# 	obj = Neighborhood.where(name: hood)
+# 	count = Building.buildings_in_neighborhood(hood).count
+# 	unless obj.present?
+# 		Neighborhood.create(name: hood, buildings_count: count, boroughs: 'MANHATTAN')
+# 	else
+# 		obj.first.update(buildings_count: count) if obj.first.buildings_count.to_i != count.to_i
+# 	end
+# end
+
+all_neighborhoods = Building.all.map(&:neighborhood).uniq
+pop_neighborhoods = Neighborhood.all.map(&:name).uniq
+new_hoods = all_neighborhoods - pop_neighborhoods
+
+new_hoods.each do |hood|
+	buildings = Building.where(neighborhood: hood)
+	Neighborhood.create(name: hood, buildings_count: buildings.count, boroughs: buildings.first.city) if buildings.present?
 end
 
 
