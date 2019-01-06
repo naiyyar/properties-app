@@ -517,13 +517,13 @@
 # 	end
 # end
 
-all_neighborhoods = Building.all.map(&:neighborhood).uniq
-pop_neighborhoods = Neighborhood.all.map(&:name).uniq
-new_hoods = all_neighborhoods - pop_neighborhoods
+# all_neighborhoods = Building.all.map(&:neighborhood).uniq
+# pop_neighborhoods = Neighborhood.all.map(&:name).uniq
+# new_hoods = all_neighborhoods - pop_neighborhoods
 
-new_hoods.each do |hood|
-	buildings = Building.where(neighborhood: hood)
-	Neighborhood.create(name: hood, buildings_count: buildings.count, boroughs: buildings.first.city) if buildings.present?
-end
+# new_hoods.each do |hood|
+# 	buildings = Building.where(neighborhood: hood)
+# 	Neighborhood.create(name: hood, buildings_count: buildings.count, boroughs: buildings.first.city) if buildings.present?
+# end
 
 

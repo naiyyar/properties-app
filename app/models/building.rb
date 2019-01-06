@@ -99,7 +99,7 @@ class Building < ActiveRecord::Base
   pg_search_scope :search_query, against: [:building_name, :building_street_address],
      :using => { :tsearch => { prefix: true } }
 
-  pg_search_scope :search_by_neighborhood, against: [:neighborhood, :neighborhoods_parent, :neighborhood3],
+  pg_search_scope :search_by_neighborhood, against: [:neighborhood, :neighborhood3],
      :using => {  :tsearch => { prefix: true }, 
                   :trigram=> { :threshold => 0.2 } 
                 }

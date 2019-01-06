@@ -42,6 +42,7 @@
 //= require filterrific/filterrific-jquery
 //= require load_more
 //= require home_search
+//= require progressive_render
 //= require jquery.easy-autocomplete
 
 //= require_tree .

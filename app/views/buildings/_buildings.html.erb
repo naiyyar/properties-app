@@ -17,7 +17,7 @@
               <th width='12%'>RATING</th>
               <th>Reviews</th>
               <th>Website</th>
-              <!-- <th>latlng</th> -->
+              <th>Docs</th>
               <th></th>
               <th></th>
             </tr>
@@ -39,7 +39,7 @@
                 </td>
                 <td><%= link_to "Reviews(#{building.reviews.count})", building_reviews_path(building_id: building.id) %></td>
                 <td><%= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present? %></td>
-                <!-- <td><%#= building.latitude %>, <%#= building.longitude %></td> -->
+                <td><%= building.uploads.where('document_file_name is not null').count %></td>
                 <% if current_user %>
                   <td><%= link_to "edit", edit_building_path(building) %></td>
                   <% if current_user.has_role?(:admin) %>

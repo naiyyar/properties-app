@@ -128,7 +128,7 @@ gem 'valid_url'
 
 gem 'buttercms-rails'
 
-#gem 'progressive_render'
+gem 'progressive_render'
 
 #gem 'actionpack-page_caching'
 #gem 'actionpack-action_caching'

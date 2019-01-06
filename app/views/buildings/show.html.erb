@@ -9,18 +9,52 @@
 <div id="content" class="mob-max">
   
   <div class="singleTop">
+    <%#= render partial: 'building_images_slider' %>
+    <div class="row sh-slider">
+      <div class="sh-slider-container">
+        <% unless browser.device.mobile? %>
+          <div class="col col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <%#= render partial: 'home/lightslider', locals: { building: @building } %>
+            <%= progressive_render placeholder: 'layouts/shared/loader' do %>
+              <div id="vertical-images-container">
+                <% @buiding_uploads.each do |upload| %>
+                  <div style="width: 150px;max-width: 150px;">
+                    <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox" title="<%=date_uploaded(upload)%>">
+                      <%= image_tag upload.uploaded_img_url, style: 'width: 100%;' %>
+                    </a> 
+                  </div>
+                <%end%>
+              </div>
+              <% sleep 2 %>
+            <%end%>
+          </div>
+        <%end%>
+        <div class="col col-lg-9 col-md-9 col-sm-12 col-xs-12">
+          <%= render partial: 'home/lightslider', locals: { building: @building } %>
+        </div>
+
+        <div class="clearfix"></div>
+        <%=render partial: 'uploads/add_photos', locals: { object: @building }%>
+      </div>
+    </div>
     <%= render partial: 'building_summary' %>
-    <%= render partial: 'building_images_slider' %>
   </div>
 
   <%= render partial: 'building_amenities' %>
 
   <div class="clearfix"></div>
+
+  <div id="building-documents" class='documents'>
+    <h3 style="margin-top: 0px;margin-bottom: 0px;">Documents (<%= @documents.count %>)</h3>
+    <%= render partial: 'uploads/documents' %>
+  </div>
+  
+  <div class="clearfix"></div>
+  
   <% if @building.rating_cache? %>
     <div class="aggregate-ratings">
      <ul class="star-sm">
         <li><h3 style="margin-top: 0px;margin-bottom: 0px;">Aggregate Ratings</h3></li>
-
         <li>Cleanliness - Pests/Smell/Trash <%= rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true %></li>
         <li>Is it Noisy? <%= rating_for @building, 'noise', disable_after_rate: true, readonly: true %></li>
         <li>Do you feel safe in your building? <%= rating_for @building, 'safe', disable_after_rate: true, readonly: true %></li>
@@ -30,14 +64,16 @@
       </ul>
     </div>
   <%end%>
+
   <div class="clearfix"></div>
+  
   <div class="tabsContainer" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
       <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "BUILDING REVIEWS (#{ @building.reviews.count })"%></a></li>
       <li><a href="#unit_reviews" role="tab" data-toggle="tab"><%= 'UNIT REVIEWS'%> (<%= @unit_review_count %>)</a></li>
       <li><a href="#rent_amount" role="tab" data-toggle="tab"><%= 'RENT INFORMATION'%> (<%= @unit_rent_summary_count %>)</a></li>
       <li><a href="#units" role="tab" data-toggle="tab"><%= 'UNITS'%> (<%= @building.units.count %>)</a></li>
-      <li><a href="#documents" role="tab" data-toggle="tab"><%= 'DOCUMENTS'%> (<%= @documents.count %>)</a></li>
+      <!-- <li><a href="#documents" role="tab" data-toggle="tab"><%#= 'DOCUMENTS'%> </a></li> -->
     </ul>
     
     <div class="tab-content">
@@ -73,9 +109,9 @@
         <%= render partial: 'units' %>
       </div>
 
-      <div class="tab-pane fade" id="documents">
-        <%= render partial: 'uploads/documents' %>
-      </div>
+      <!-- <div class="tab-pane fade" id="documents">
+        <%#= render partial: 'uploads/documents' %>
+      </div> -->
     </div>
   </div>
 </div>
