@@ -118,7 +118,7 @@ gem 'omniauth-facebook' #, '1.4.0'
 gem "omniauth-google-oauth2"
 
 #fancybox
-gem 'fancybox2-rails', '~> 0.2.8'
+#gem 'fancybox2-rails', '~> 0.2.8'
 
 # Error tracking
 gem 'rollbar'

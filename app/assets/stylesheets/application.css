@@ -14,8 +14,6 @@
  *= require_self
  *= require jquery-ui
  *= require font-awesome
- *= require fancybox
- *= require fancybox_overlay
  *= require fullscreen-slider
  *= require simple-line-icons
  *= require dropzone

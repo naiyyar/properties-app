@@ -24,7 +24,6 @@
 //= require underscore
 //= require app
 //= require dropzone_v5
-//= require fancybox
 //= require jquery.raty
 //= require ratyrate
 //= require bootstrap-datepicker
@@ -44,5 +43,6 @@
 //= require home_search
 //= require progressive_render
 //= require jquery.easy-autocomplete
+//= require jquery.fancybox
 
 //= require_tree .
