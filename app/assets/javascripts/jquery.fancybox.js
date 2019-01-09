@@ -2292,17 +2292,11 @@
       }
 
       self.revealContent(slide);
-      self.adjustCheckAvailaibilityLink(slide);
     },
 
     // Prevent caption overlap,
     // fix css inconsistency across browsers
     // =====================================
-
-    adjustCheckAvailaibilityLink: function(slide){
-      window.data = slide
-      //$('.fancybox-caption--separate').insertAfter('<div class="btn btn-primary btn-block">Check availablity</div>');
-    },
 
     adjustCaption: function(slide) {
       var self = this,
@@ -2333,6 +2327,17 @@
         }
 
         current.$slide.css("padding-bottom", captionH || "");
+      }
+
+      //appending CheckAvailability Link
+      var ch_avail_div = $('.fancybox-inner').find('.cvl-cont');
+      if(ch_avail_div.length == 0){
+        window.data = slide.opts
+        var check_vailability_link = slide.opts.chavailurl;
+        if(check_vailability_link != '' && check_vailability_link != undefined){
+          var cvl_container = '<div class="cvl-cont">'+check_vailability_link+'</div>'
+          $('.fancybox-inner').append(cvl_container)
+        }
       }
     },
 

@@ -68,8 +68,8 @@ class BuildingsController < ApplicationController
     @unit_rent_summary_count = @building.unit_rent_summary_count
     @unit_review_count = @building.unit_reviews_count
     @show_map_btn = true
-    @reviews = @building.reviews.includes(:user, :uploads).order(created_at: :desc)
-    @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id})
+    @reviews = @building.reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
+    @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id}).includes(:imageable)
 
     #calculating unit reviews count for a building
     @building_units = @building.units

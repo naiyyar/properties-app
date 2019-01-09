@@ -213,9 +213,7 @@ body{
 .pagination{
     box-shadow: none !important;
 }
-.aggregate-ratings{
-    background-color: #fff;
-}
+
 .aggregate-ratings ul{
     width: 70%;
     list-style: none;
