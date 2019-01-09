@@ -31,8 +31,18 @@ $(document).ready(function () {
 //     //prevEffect: 'fade'
 //   });
 
-	$('[data-fancybox="gallery"]').fancybox({
-		// Options will go here
-		loop: true
-	});
+	// $('[data-fancybox="gallery"]').fancybox({
+	// 	// Options will go here
+	// 	loop: true,
+	// 	closeExisting: true,
+	// 	buttons: [
+	//     "zoom",
+	//     //"share",
+	//     //"slideShow",
+	//     //"fullScreen",
+	//     //"download",
+	//     "thumbs",
+	//     "close"
+	//   ],
+	// });
 })

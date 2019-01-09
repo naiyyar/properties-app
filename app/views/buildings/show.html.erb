@@ -7,65 +7,26 @@
 <div id="pano"></div>
 
 <div id="content" class="mob-max">
+  <%= render 'buildings/show/top_summary_section' %>
   
-  <div class="singleTop">
-    <%#= render partial: 'building_images_slider' %>
-    <% if @buiding_uploads.present? %>
-      <div class="row sh-slider">
-        <div class="sh-slider-container">
-          <% unless browser.device.mobile? %>
-            <div class="col col-lg-3 col-md-3 hidden-sm hidden-xs">
-              <%#= render partial: 'home/lightslider', locals: { building: @building } %>
-              <%= progressive_render placeholder: 'layouts/shared/loader' do %>
-                <div id="vertical-images-container">
-                  <% @buiding_uploads.each do |upload| %>
-                    <div style="width: 150px;max-width: 150px;">
-                      <a rel='gallery' href="<%= upload.image.url %>" data-fancybox="gallery" data-caption="<%=date_uploaded(upload)%>">
-                        <%= image_tag upload.uploaded_img_url, style: 'width: 100%;' %>
-                      </a> 
-                    </div>
-                  <%end%>
-                </div>
-                <% sleep 2 %>
-              <%end%>
-            </div>
-          <%end%>
-        <div class="col col-lg-9 col-md-9 col-sm-12 col-xs-12">
-          <%= render partial: 'home/lightslider', locals: { building: @building } %>
-        </div>
-        <div class="clearfix"></div>
-        <%=render partial: 'uploads/add_photos', locals: { object: @building }%>
-      </div>
-    <%end%>
-    <%= render partial: 'building_summary' %>
-    
-    <% unless @buiding_uploads.present? %>
-      <div class="sliderLink">
-        <p class="text-danger">No photos are available.</p>
-        <% if user_signed_in? %>
-          <%= link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm' %>
-        <%else%>
-          <%= link_to 'Add Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm'  %>
-        <%end%>  
-      </div>
-    <%end%>
-  </div>
-
+  <div class="clearfix"></div>
+  
   <%= render partial: 'building_amenities' %>
 
-  <div class="clearfix"></div>
-
-  <div id="building-documents" class='documents'>
-    <h3 style="margin-top: 0px;margin-bottom: 0px;">Documents (<%= @documents.count %>)</h3>
-    <%= render partial: 'uploads/documents' %>
-  </div>
+  <!-- <div class="clearfix"></div> -->
+  <% if @documents.present? %>
+    <div id="building-documents" class='documents'>
+      <h3>Documents (<%= @documents.count %>)</h3>
+      <%= render partial: 'uploads/documents' %>
+    </div>
+  <%end%>
   
   <div class="clearfix"></div>
   
   <% if @building.rating_cache? %>
     <div class="aggregate-ratings">
      <ul class="star-sm">
-        <li><h3 style="margin-top: 0px;margin-bottom: 0px;">Aggregate Ratings</h3></li>
+        <li><h3>Aggregate Ratings</h3></li>
         <li>Cleanliness - Pests/Smell/Trash <%= rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true %></li>
         <li>Is it Noisy? <%= rating_for @building, 'noise', disable_after_rate: true, readonly: true %></li>
         <li>Do you feel safe in your building? <%= rating_for @building, 'safe', disable_after_rate: true, readonly: true %></li>
@@ -77,54 +38,69 @@
   <%end%>
 
   <div class="clearfix"></div>
-  
-  <div class="tabsContainer" id="reviewsContainer">
-    <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "BUILDING REVIEWS (#{ @building.reviews.count })"%></a></li>
-      <li><a href="#unit_reviews" role="tab" data-toggle="tab"><%= 'UNIT REVIEWS'%> (<%= @unit_review_count %>)</a></li>
-      <li><a href="#rent_amount" role="tab" data-toggle="tab"><%= 'RENT INFORMATION'%> (<%= @unit_rent_summary_count %>)</a></li>
-      <li><a href="#units" role="tab" data-toggle="tab"><%= 'UNITS'%> (<%= @building.units.count %>)</a></li>
-      <!-- <li><a href="#documents" role="tab" data-toggle="tab"><%#= 'DOCUMENTS'%> </a></li> -->
-    </ul>
-    
-    <div class="tab-content">
-      <div class="tab-pane fade in active" id="buildings">
-        <div class="comments">
-          <% if @reviews.present? %>
-            <div class="text-right" style="text-align: right;padding-bottom: 15px;">
-              <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
-            </div>
-            <%= render partial: @reviews %>
-          <%else%>
-            <p>There are no reviews for this building. Be the first to add your review for this building.</p>
-            <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
-          <%end%>
-        </div>
-      </div>
 
-      <div class="tab-pane fade" id="unit_reviews">
-        <div class="comments">
-          <% @building_units.each do |unit| %>
-            <h3 class="unit_name_header"><%= link_to unit.name, unit_path(unit), 'data-no-turbolink' => false %> (<span><%=unit.reviews.count%></span> Reviews)</h3>
-            <% @reviews = unit.reviews.includes(:user, :uploads) %>
-            <%= render partial: @reviews  %>
-          <% end %>
-        </div>
+  <div class="comments">
+    <h3><%= "Building Reviews (#{ @building.reviews.count })"%></h3>
+    <% if @reviews.present? %>
+      <div class="text-right" style="text-align: right;padding-bottom: 15px;">
+        <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
       </div>
-
-      <div class="tab-pane fade" id="rent_amount">
-        <%= render partial: 'rent_amount' %>
-      </div>
-
-      <div class="tab-pane fade" id="units">
-        <%= render partial: 'units' %>
-      </div>
-
-      <!-- <div class="tab-pane fade" id="documents">
-        <%#= render partial: 'uploads/documents' %>
-      </div> -->
-    </div>
+      <%= render partial: @reviews %>
+    <%else%>
+      <p>There are no reviews for this building. Be the first to add your review for this building.</p>
+      <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
+    <%end%>
   </div>
+  
+  <% if false %>
+    <div class="tabsContainer" id="reviewsContainer">
+      <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="active"><a href="#buildings" role="tab" data-toggle="tab"><%= "BUILDING REVIEWS (#{ @building.reviews.count })"%></a></li>
+        <li><a href="#unit_reviews" role="tab" data-toggle="tab"><%= 'UNIT REVIEWS'%> (<%= @unit_review_count %>)</a></li>
+        <li><a href="#rent_amount" role="tab" data-toggle="tab"><%= 'RENT INFORMATION'%> (<%= @unit_rent_summary_count %>)</a></li>
+        <li><a href="#units" role="tab" data-toggle="tab"><%= 'UNITS'%> (<%= @building.units.count %>)</a></li>
+        <!-- <li><a href="#documents" role="tab" data-toggle="tab"><%#= 'DOCUMENTS'%> </a></li> -->
+      </ul>
+      
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="buildings">
+          <div class="comments">
+            <% if @reviews.present? %>
+              <div class="text-right" style="text-align: right;padding-bottom: 15px;">
+                <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
+              </div>
+              <%= render partial: @reviews %>
+            <%else%>
+              <p>There are no reviews for this building. Be the first to add your review for this building.</p>
+              <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
+            <%end%>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="unit_reviews">
+          <div class="comments">
+            <% @building_units.each do |unit| %>
+              <h3 class="unit_name_header"><%= link_to unit.name, unit_path(unit), 'data-no-turbolink' => false %> (<span><%=unit.reviews.count%></span> Reviews)</h3>
+              <% @reviews = unit.reviews.includes(:user, :uploads) %>
+              <%= render partial: @reviews  %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="rent_amount">
+          <%= render partial: 'rent_amount' %>
+        </div>
+
+        <div class="tab-pane fade" id="units">
+          <%= render partial: 'units' %>
+        </div>
+
+        <!-- <div class="tab-pane fade" id="documents">
+          <%#= render partial: 'uploads/documents' %>
+        </div> -->
+      </div>
+    </div>
+  <%end%>
 </div>
 
 <div data-map="<%= @gmaphash.to_json %>" id="mapHash" data-lat="<%= @lat.to_json %>" data-lng="<%= @lng.to_json %>"></div>

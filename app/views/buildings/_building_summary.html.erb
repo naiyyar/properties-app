@@ -5,33 +5,12 @@
           <h1 class="pageTitle"><%= @building.building_name_or_address %> 
             <% if current_user and current_user.has_role?(:admin) %>
               <%= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right' %>
-              
               <%= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs', data: {confirm: 'Are you sure you want to discconect this building?'} if @manage_buildings.present? %>
             <%end%>
             <%= render partial: 'buildings/favourite', locals: { building: @building } %>
           </h1>
-          
           <%= render partial: 'property_info', locals: { object: @building } %>
-          
-          <%#= render partial: 'property_contribute_links', locals: { object: @building } %>
-          
-          <div class="clearfix"></div>
       </div>
     </div>
-    <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-xs hidden-sm hidden-md">
-      <div class="agentAvatar summaryItem">
-          <div class="clearfix"></div>
-          <%#= image_tag 'avatar-2.png', class: "avatar agentAvatarImg", alt: 'Avatar' %>
-          <div class="agentName">Jane Smith</div>
-          <a data-toggle="modal" href="#contactAgent" class="btn btn-lg btn-warning contactBtn">Contact Agent</a>
-          <%#= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_building_review_path(building_id: @building), class: "btn btn-o btn-yellow contactBtn", 'data-no-turbolink' => false %>
-          <%# if user_signed_in? %>
-            <%#= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, new_building_upload_path(building_id: @building), class: "btn btn-o btn-gray contactBtn", 'data-no-turbolink' => false  %>
-          <%#else%>
-            <%#= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '#signin', 'data-toggle' => 'modal', class: "btn btn-o btn-gray contactBtn hidden-xs", "data-no-turbolink" => false  %>
-            <%#= link_to '<span class="fa fa-camera"><span> Add photos'.html_safe, '#signin', class: 'btn btn-o btn-gray contactBtn', 'data-toggle' => 'modal'  %>
-          <%#end%>
-      </div>
-    </div> -->
   </div>
 </div>

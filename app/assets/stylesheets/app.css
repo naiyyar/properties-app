@@ -486,6 +486,10 @@ h3.unit_name_header{
     padding-left: 20px !important;
 }
 
+.padding-left-30{
+    padding-left: 30px !important;
+}
+
 .firstLetter{
     width: 40px;
     height: 40px;
@@ -2813,9 +2817,6 @@ h1.pageTitle {
     padding: 20px 20px 0 20px;
 }
 
-#building-documents{
-    border-top: 1px solid #e8e8e8;
-}
 #content h3 {
     font-size: 14px;
     line-height: 16px;

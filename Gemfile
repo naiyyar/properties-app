@@ -34,6 +34,8 @@ gem 'underscore-rails'
 
 gem 'geocoder'
 
+gem 'haml', git: 'https://github.com/haml/haml'
+
 #importing csv/excel
 gem 'roo'
 gem "iconv", "~> 1.0.3"
