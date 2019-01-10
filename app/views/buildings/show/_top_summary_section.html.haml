@@ -7,9 +7,8 @@
 						=progressive_render placeholder: 'layouts/shared/loader' do
 							#vertical-images-container
 								- @buiding_uploads.each do |upload|
-									%div.img-wrapper
-										%a{href: upload.image.url, data: { fancybox: 'gallery', caption: date_uploaded(upload), chAvailUrl: "#{check_availability_link(@building) if @building.web_url.present?}" }}
-											=image_tag upload.uploaded_img_url
+									%a{href: "#{upload.image.url}", data: { fancybox: "gallery", caption: "#{date_uploaded(upload)}" } }
+										.bg-size-cover.img-wrapper{ style: "background-image: url(#{upload.uploaded_img_url});" } }
 							- sleep 2
         
 				.col.col-lg-9.col-md-9.col-sm-12.col-xs-12
