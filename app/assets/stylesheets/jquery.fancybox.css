@@ -885,7 +885,7 @@ body.compensate-for-scrollbar {
 }
 
 /* Styling for Small-Screen Devices */
-@media all and (max-width: 576px) {
+@media all and (max-width: 736px) {
     .fancybox-thumbs {
         width: 110px;
     }
@@ -894,5 +894,13 @@ body.compensate-for-scrollbar {
     }
     .fancybox-thumbs__list a {
         max-width: calc(100% - 10px);
+    }
+
+    .fancybox-caption__body {
+        width: 100%;
+    }
+    .fancybox-inner .cvl-cont{
+        left: 2%;
+        width: 96%;
     }
 }

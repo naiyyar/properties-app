@@ -190,6 +190,7 @@
       '<div class="fancybox-navigation">{{arrows}}</div>' +
       '<div class="fancybox-stage"></div>' +
       '<div class="fancybox-caption"><div class="fancybox-caption__body"></div></div>' +
+      '<div class="cvl-cont"><a href="#" target="_blank" class="btn btn-primary btn-block"><b>Check Availability</b><a></div>' +
       "</div>" +
       "</div>",
 
@@ -606,6 +607,7 @@
 
       // Create markup from base template, it will be initially hidden to
       // avoid unnecessary work like painting while initializing is not complete
+      window.data = firstItemOpts
       $container = $(
         self.translate(
           self,
@@ -635,6 +637,9 @@
 
       // Build slides, load and reveal content
       self.jumpTo(self.currIndex);
+      
+      // Appending check available button
+      $('.cvl-cont a').attr('href', $('.stats1 a').attr('href'));
     },
 
     // Simple i18n support - replaces object keys found in template
@@ -2329,16 +2334,6 @@
         current.$slide.css("padding-bottom", captionH || "");
       }
 
-      //appending CheckAvailability Link
-      var ch_avail_div = $('.fancybox-inner').find('.cvl-cont');
-      if(ch_avail_div.length == 0){
-        window.data = slide.opts
-        var check_vailability_link = slide.opts.chavailurl;
-        if(check_vailability_link != '' && check_vailability_link != undefined){
-          var cvl_container = '<div class="cvl-cont">'+check_vailability_link+'</div>'
-          $('.fancybox-inner').append(cvl_container)
-        }
-      }
     },
 
     // Simple hack to fix inconsistency across browsers, described here (affects Edge, too):
