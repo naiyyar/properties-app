@@ -978,7 +978,7 @@
                     dataType: 'json',
                     success: function(response){
                     	var upload = response.uploads[response.uploads.length-1];
-                        var date_uploaded = upload.date_uploaded
+                        var date_uploaded = "Date uploaded: "+upload.date_uploaded;
                     	var left_item = '<a href="'+upload.image_url+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+upload.image_url+');"></div></a>';
                     	
                     	if(left_li.children().length == 0){
@@ -989,7 +989,8 @@
                       	$.each(slides, function(i, item){
                       		var list_index = $(item).data('listindex');
                       		if(parseInt(list_index) == i1 && $(item).children().length == 0){
-                      			var elem_div = '<a href="'+obj.image_url+'" data-fancybox="gallery" data-caption="'+obj.date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+obj.image_url+');"></div></a>';
+                                date_uploaded = "Date uploaded: "+upload.date_uploaded;
+                      			var elem_div = '<a href="'+obj.image_url+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+obj.image_url+');"></div></a>';
                       			$(item).append(elem_div);
                       		}
                       		

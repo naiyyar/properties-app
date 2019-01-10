@@ -467,7 +467,7 @@ body.compensate-for-scrollbar {
     rgba(0, 0, 0, .019) 88%,
     rgba(0, 0, 0, 0) 100%
     );*/
-    bottom: 0;
+    bottom: 20px;
     color: #eee;
     font-size: 14px;
     font-weight: 400;
@@ -479,6 +479,14 @@ body.compensate-for-scrollbar {
     right: 0;
     text-align: center;
     z-index: 99996;
+}
+
+.fancybox-inner .cvl-cont{
+    position: absolute;
+    bottom: 7px;
+    left: 34%;
+    width: 33%;
+    z-index: 99999;
 }
 
 @supports (padding: max(0px)) {
@@ -885,7 +893,7 @@ body.compensate-for-scrollbar {
 }
 
 /* Styling for Small-Screen Devices */
-@media all and (max-width: 736px) {
+@media all and (max-width: 767px) {
     .fancybox-thumbs {
         width: 110px;
     }
@@ -900,7 +908,7 @@ body.compensate-for-scrollbar {
         width: 100%;
     }
     .fancybox-inner .cvl-cont{
-        left: 2%;
-        width: 96%;
+        left: 2% !important;
+        width: 96% !important;
     }
 }
