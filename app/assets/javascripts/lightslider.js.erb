@@ -979,7 +979,9 @@
                     success: function(response){
                     	var upload = response.uploads[response.uploads.length-1];
                         var date_uploaded = "Date uploaded: "+upload.date_uploaded;
-                    	var left_item = '<a href="'+upload.image_url+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+upload.image_url+');"></div></a>';
+                        var orig_img = upload.orig_image_url;
+                        //var med_img = upload.med_image_url;
+                    	var left_item = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
                     	
                     	if(left_li.children().length == 0){
                     		left_li.append(left_item);
@@ -990,7 +992,9 @@
                       		var list_index = $(item).data('listindex');
                       		if(parseInt(list_index) == i1 && $(item).children().length == 0){
                                 date_uploaded = "Date uploaded: "+upload.date_uploaded;
-                      			var elem_div = '<a href="'+obj.image_url+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+obj.image_url+');"></div></a>';
+                                orig_img = obj.orig_image_url;
+                                //med_img = obj.med_image_url;
+                      			var elem_div = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
                       			$(item).append(elem_div);
                       		}
                       		

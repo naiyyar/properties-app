@@ -185,7 +185,7 @@ class UploadsController < ApplicationController
   def uploads_hash
     records = []
     @uploads.each do |upload|
-      records << { id: upload.id, image_url: upload.uploaded_img_url, date_uploaded: upload.created_at.strftime("%m/%d/%Y") }
+      records << { id: upload.id, orig_image_url: upload.image.url,  date_uploaded: upload.created_at.strftime("%m/%d/%Y") }
     end
     records
   end

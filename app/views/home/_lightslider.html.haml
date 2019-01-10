@@ -2,8 +2,8 @@
   .item
     .clearfix{ style: "width:100%;" }
       %h4.lightslider-slides-counts
-        %span.current 1 / 
-        %span.total=images_count = @uploads.count
+        %span.current 1
+        %span.total="/ #{images_count = @uploads.count}"
 
       %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 165px;", data: { buildingid: "#{building.id}" } }
         %li

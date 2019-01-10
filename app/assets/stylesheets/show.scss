@@ -3,8 +3,14 @@
 		max-height: 300px; 
 		overflow-y: scroll;
 		overflow-x: hidden;
-		img{
-			margin: 1px;
+		.img-wrapper{
+    	width: 150px;
+    	height: 125px;
+    	margin-bottom: 1px;
+		}
+		.img-wrapper img{
+			width: 100%;
+			height: 100%;
 		}
 	}
 

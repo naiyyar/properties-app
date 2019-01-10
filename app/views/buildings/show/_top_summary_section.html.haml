@@ -3,16 +3,16 @@
 		.row.sh-slider
 			.sh-slider-container
 				- unless browser.device.mobile?
-					.col-lg-3.col-md-3.hidden-sm.hidden-xs
+					.col.col-lg-3.col-md-3.hidden-sm.hidden-xs
 						=progressive_render placeholder: 'layouts/shared/loader' do
 							#vertical-images-container
 								- @buiding_uploads.each do |upload|
-									%div{style: "width: 150px;max-width: 150px;"}
+									%div.img-wrapper
 										%a{href: upload.image.url, data: { fancybox: 'gallery', caption: date_uploaded(upload), chAvailUrl: "#{check_availability_link(@building) if @building.web_url.present?}" }}
-											=image_tag upload.uploaded_img_url, style: 'width: 100%;'
+											=image_tag upload.uploaded_img_url
 							- sleep 2
         
-				.col-lg-9.col-md-9.col-sm-12.col-xs-12
+				.col.col-lg-9.col-md-9.col-sm-12.col-xs-12
 					=render 'home/lightslider', building: @building
 				.clearfix
 				=render 'uploads/add_photos', object: @building
