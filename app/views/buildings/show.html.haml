@@ -1,0 +1,58 @@
+- content_for :page_title do
+  = "#{@building.building_name}" if @building.building_name.present?
+  = "#{@building.building_street_address}"
+#street_view_btn.hidden-xs
+  %input#toggleStreetView.btn.btn-info{type: "button", value: "Street View"}
+#mapView.mob-min
+  .mapPlaceholder
+    %span.fa.fa-spin.fa-spinner Loading map...
+#pano
+#content.mob-max
+  = render 'buildings/show/top_summary_section'
+  .clearfix
+  = render 'building_amenities'
+  / <div class="clearfix"></div>
+  - if @documents.present?
+    #building-documents.documents
+      %h3
+        Documents (#{@documents.count})
+      = render 'uploads/documents'
+  .clearfix
+  - if @building.rating_cache?
+    .aggregate-ratings
+      %ul.star-sm
+        %li
+          %h3 Aggregate Ratings
+        %li
+          Cleanliness - Pests/Smell/Trash #{rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true}
+        %li
+          Is it Noisy? #{rating_for @building, 'noise', disable_after_rate: true, readonly: true}
+        %li
+          Do you feel safe in your building? #{rating_for @building, 'safe', disable_after_rate: true, readonly: true}
+        %li
+          Utilities - AC/Electric/Heat/Water #{rating_for @building, 'health', disable_after_rate: true, readonly: true}
+        %li
+          Super Responsiveness #{rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true}
+        %li
+          Dealings with Management #{rating_for @building, 'management', disable_after_rate: true, readonly: true}
+  .clearfix
+  .comments
+    %h3= "Building Reviews (#{ @building.reviews.count })"
+    - if @reviews.present?
+      .text-right{style: "text-align: right;padding-bottom: 15px;"}
+        = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow'
+      = render @reviews
+    - else
+      %p There are no reviews for this building. Be the first to add your review for this building.
+      = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow'
+  
+#mapHash{"data-lat" => "#{@lat.to_json}", "data-lng" => "#{@lng.to_json}", "data-map" => "#{@gmaphash.to_json}"}
+.addNewUnit
+  = render "new_unit_modal"
+- if session[:after_contribute].present? || params[:from_uploaded].present?
+  = render 'contribute_more_popup'
+  :javascript
+    $(document).ready(function(){
+      $("#contribute_more").modal('show');
+    })
+  - session[:after_contribute] = nil
