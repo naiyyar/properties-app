@@ -962,6 +962,8 @@
         //own implementation - Not with library
         $el.fetchAssets = function(){
       		var building_id = this.data('buildingid');
+            var view_type = this.data('viewType');
+            var path = this.data('path');
             var slides = $el.find('.lslide');
             var left_li = $el.find('.clone.left');
             var loader_img = "<%= image_path('ajax-loader.gif') %>";
@@ -980,8 +982,12 @@
                     	var upload = response.uploads[response.uploads.length-1];
                         var date_uploaded = "Date uploaded: "+upload.date_uploaded;
                         var orig_img = upload.orig_image_url;
-                        //var med_img = upload.med_image_url;
-                    	var left_item = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                        var left_item = '';
+                        if(view_type == 'split'){
+                    	    left_item = '<a href="'+path+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                        }else{
+                            left_item = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                        }
                     	
                     	if(left_li.children().length == 0){
                     		left_li.append(left_item);
@@ -993,9 +999,15 @@
                       		if(parseInt(list_index) == i1 && $(item).children().length == 0){
                                 date_uploaded = "Date uploaded: "+upload.date_uploaded;
                                 orig_img = obj.orig_image_url;
-                                //med_img = obj.med_image_url;
-                      			var elem_div = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
-                      			$(item).append(elem_div);
+                      			var elem_div = '';
+                      			
+                                if(view_type == 'split'){
+                                    elem_div = '<a href="'+path+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                                }else{
+                                    elem_div = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                                }
+
+                                $(item).append(elem_div);
                       		}
                       		
                       	});

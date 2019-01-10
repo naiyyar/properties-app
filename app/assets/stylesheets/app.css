@@ -6291,7 +6291,7 @@ select.custom-arrow {
         padding: 0px;
     }
     .comments h3{
-        padding: 20px;
+        padding: 20px !important;
     }
     textarea.form-control{
         height: 100px;

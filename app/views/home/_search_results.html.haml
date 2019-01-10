@@ -5,7 +5,7 @@
       /= link_to building_path(building) do
       .figure{style: "position: relative;"}
         / removing from management company show page because using building only to show marker on map
-        = render 'home/lightslider', building: building
+        = render 'home/lightslider', building: building, view_type: 'split'
       
       = link_to building_path(building) do
         .building-detail-card{id: "building_details#{building.id}"}
