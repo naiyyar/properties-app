@@ -6286,6 +6286,9 @@ select.custom-arrow {
     .comments{
         padding: 0px;
     }
+    .comments h3{
+        padding: 20px;
+    }
     textarea.form-control{
         height: 100px;
     }
