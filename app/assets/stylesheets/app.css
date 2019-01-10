@@ -17,6 +17,10 @@ body{
     }
 }
 
+.building-detail-card{
+    width: 93%;
+}
+
 .contribute_guidelines_emojis img{
     margin: 2px 4px;
 }
