@@ -8,6 +8,7 @@ jQuery ->
 			loop: true
 			thumbItem: 6
 			galleryMargin: 1
+			currentPagerPosition: 'left'
 			onBeforeSlide: (el) ->
 				show_count_elem = el.parent().parent().prev()
 				current_elem = show_count_elem.find('.current')
