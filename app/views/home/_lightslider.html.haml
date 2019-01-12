@@ -5,14 +5,10 @@
         %span.current 1
         %span.total="/ #{images_count = @uploads.count}"
 
-      %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: view_type, path:  building_path(building) } }
+      %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'split', path:  building_path(building) } }
         %li
-          - if view_type == 'split'
-            %a{ href: building_path(building), style: 'cursor: pointer;' }
-              .bg-size-cover{ style: "background-image: url(#{@uploads.first.uploaded_img_url});", data: { imageid: "#{@uploads.first.id}" } }
-          - else
-            %a{ href: "#{@uploads.first.image.url}", data: { fancybox: 'gallery', caption: "#{date_uploaded(@uploads.first)}" } }
-              .bg-size-cover{ style: "background-image: url(#{@uploads.first.uploaded_img_url});", data: { imageid: "#{@uploads.first.id}" } }
+          %a{ href: building_path(building), style: 'cursor: pointer;' }
+            .bg-size-cover{ style: "background-image: url(#{@uploads.first.uploaded_img_url});", data: { imageid: "#{@uploads.first.id}" } }
 
         - if images_count > 1
           - 1.upto(images_count-1) do |count|

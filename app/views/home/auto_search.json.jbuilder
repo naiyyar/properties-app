@@ -2,7 +2,7 @@ if @companies.present?
   json.companies do
     json.array!(@companies) do |company|
       json.name company.name
-      json.url "/management_company/#{company.name}"
+      json.url management_company_path(company)
     end
   end
 end

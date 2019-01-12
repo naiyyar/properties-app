@@ -1,0 +1,17 @@
+- if @uploads.present?
+  .item
+    .clearfix{ style: "width:100%;" }
+      %h4.lightslider-slides-counts
+        %span.current 1
+        %span.total="/ #{images_count = @uploads.count}"
+
+      %ul.gallery.list-unstyled{ id: 'imageGallery', style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'show', path:  building_path(building) } }
+        - @uploads.each do |upload|
+          %li{ title: date_uploaded(upload), data: { thumb: upload.uploaded_img_url, src: upload.image.url }}
+            %a{ href: "#{upload.image.url}" }
+              .bg-size-cover{ style: "background-image: url(#{upload.uploaded_img_url});", data: { imageid: "#{upload.id}" } }
+
+
+- else
+  .bg-size-cover{style: "background-image: url(#{image_url('no-photo.png') })"}
+                   

@@ -64,19 +64,21 @@ class BuildingsController < ApplicationController
 
   def show
     @building = Building.find(params[:id])
-    @buiding_uploads = @building.image_uploads.includes(:imageable)
-    @unit_rent_summary_count = @building.unit_rent_summary_count
-    @unit_review_count = @building.unit_reviews_count
+    #@buiding_uploads = @building.image_uploads.includes(:imageable)
+    #@unit_rent_summary_count = @building.unit_rent_summary_count
+    #@unit_review_count = @building.unit_reviews_count
     @show_map_btn = true
     @reviews = @building.reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
-    @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id}).includes(:imageable)
+    
+    #building + uinits images
+    @uploads = @building.image_uploads
 
     #calculating unit reviews count for a building
-    @building_units = @building.units
-    @unit_review_count = 0
-    @building_units.each do |unit|
-      @unit_review_count += unit.reviews.count
-    end
+    # @building_units = @building.units
+    # @unit_review_count = 0
+    # @building_units.each do |unit|
+    #   @unit_review_count += unit.reviews.count
+    # end
 
     @documents = @building.uploads.where('document_file_name is not null')
 
@@ -101,7 +103,7 @@ class BuildingsController < ApplicationController
     @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
                   "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 
                   "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.name if @building.management_company.present? }. "+ 
-                  "Click to view #{@buiding_uploads.count} photos and #{@building.reviews.count} reviews"
+                  "Click to view #{@uploads.count} photos and #{@building.reviews.count} reviews"
     
     flash[:notice] = "Files are uploaded successfully." if params[:from_uploaded].present?
   end

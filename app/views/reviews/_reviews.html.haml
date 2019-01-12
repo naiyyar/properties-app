@@ -1,8 +1,6 @@
-- reviewable = review.reviewable
-.comment.record{"data-id" => "#{review.id}", id: "comment#{review.id}"}
+.comment{id: "comment#{review.id}"}
   - if current_user and current_user.has_role?(:admin)
     = link_to '<span class="fa fa-times"></span>'.html_safe, review_path(review), method: :delete, remote: true, class: 'pull-right text-danger daleteReview', title: 'Delete'
-  
   .commentAvatar
     - unless review.anonymous
       - if review.user.avatar.present?
@@ -15,7 +13,6 @@
       = image_tag 'anonymous1.png', class: 'avatar'
     .commentArrow
       %span.fa.fa-caret-left
-  
   .commentContent
     .commentName
       - if @management_company.present?
@@ -25,7 +22,6 @@
           = reviewable.street_address
           , #{reviewable.zipcode}
       %p.review-header-item= review.anonymous ? 'Anonymous' : review.user_name.capitalize
-    
     .commentBody
       .commentTime{style: "float: none;"}
         %p.review-header-item
@@ -64,7 +60,6 @@
           %b Other comments:
           %span
             = simple_format(review.other_advice)
-      
       .commentActions{style: "padding: 0px 0px 8px;"}
         .show-review-images
           %h4
@@ -89,4 +84,4 @@
             = link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs', 'data-toggle' => 'modal'
       .clearfix
   .clearfix
-= render 'review_flags/form', review: review if current_user.present?
+= render partial: 'review_flags/form', locals: { review: review } if current_user.present?

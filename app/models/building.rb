@@ -202,7 +202,8 @@ class Building < ActiveRecord::Base
   end
 
   def image_uploads
-    self.uploads.where('image_file_name is not null')
+    #self.uploads.where('image_file_name is not null')
+    uploads.where.not(image_file_name: nil).where("imageable_id = ? or imageable_id in (?)", id, units.pluck(:id)).includes(:imageable)
   end
 
   def name

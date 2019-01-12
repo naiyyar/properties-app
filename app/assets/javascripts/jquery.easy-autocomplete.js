@@ -1292,6 +1292,11 @@ var EasyAutocomplete = (function(scope) {
 								$field.val(config.get("getValue")(elementsList[selectedElement]));
 
 								selectElement(selectedElement);
+								//TODO: Scroll ul on key down
+								// var sc_cont = $(".easy-autocomplete-container ul");
+								// var first_elem = $(".easy-autocomplete-container ul li:first");
+								// sc_cont.scrollTop(0);//set to top
+    						// sc_cont.scrollTop(first_elem.offset().top - sc_cont.height());
 								
 							}
 

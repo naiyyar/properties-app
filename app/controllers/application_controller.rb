@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :allow_iframe_requests
   after_action :store_location, unless: :skip_store_location
-  before_action :popular_neighborhoods
+  before_action :popular_neighborhoods, if: :html_request?
 
   def store_location
     # store last url as long as it isn't a /users path
@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
 	end
 
 	private
+
+  def html_request?
+    request.format.html?
+  end
 
   def save_review
     if session[:form_data].present?

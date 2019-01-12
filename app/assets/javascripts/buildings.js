@@ -129,7 +129,7 @@ app.buildings.prototype = {
     if($('#managed_building_id').length > 0){
       var item = '';
       //$('#managed_building_id').val(ui.item.id)
-      if(ui.item.building_name != ''){
+      if(ui.item.building_name != '' && ui.item.building_name != null){
         item = ui.item.building_name;
       }else{
         item = ui.item.building_street_address;

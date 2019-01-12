@@ -44,8 +44,8 @@
         = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow'
       = render @reviews
     - else
-      %p There are no reviews for this building. Be the first to add your review for this building.
-      = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow'
+      %p.no-review There are no reviews for this building. Be the first to add your review for this building.
+      = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow no-review'
   
 #mapHash{"data-lat" => "#{@lat.to_json}", "data-lng" => "#{@lng.to_json}", "data-map" => "#{@gmaphash.to_json}"}
 .addNewUnit

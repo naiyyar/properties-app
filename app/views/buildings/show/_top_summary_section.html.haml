@@ -1,18 +1,9 @@
 .singleTop
-	- if @buiding_uploads.present?
+	- if @uploads.present?
 		.row.sh-slider
 			.sh-slider-container
-				- unless browser.device.mobile?
-					.col.col-lg-3.col-md-3.hidden-sm.hidden-xs
-						=progressive_render placeholder: 'layouts/shared/loader' do
-							#vertical-images-container
-								- @buiding_uploads.each do |upload|
-									%a{href: "#{upload.image.url}", data: { fancybox: "gallery", caption: "#{date_uploaded(upload)}" } }
-										.bg-size-cover.img-wrapper{ style: "background-image: url(#{upload.uploaded_img_url});" } }
-							- sleep 2
-        
-				.col.col-lg-9.col-md-9.col-sm-12.col-xs-12
-					=render 'home/lightslider', building: @building, view_type: 'show'
+				.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
+					=render 'buildings/show/lightslider', building: @building
 				.clearfix
 				=render 'uploads/add_photos', object: @building
      
@@ -30,7 +21,7 @@
 					
 					= render 'property_info', object: @building 
     
-	- unless @buiding_uploads.present?
+	- unless @uploads.present?
 		.sliderLink
 			%p.text-danger No photos are available.
 			- if user_signed_in?

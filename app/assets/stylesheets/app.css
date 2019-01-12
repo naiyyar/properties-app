@@ -1547,7 +1547,7 @@ a.userHandler .counter {
     top: 59px;
     left: 0;
     width: 70px;
-    z-index: 10000;
+    z-index: 9991;
 }
 #leftSide.expanded {
     width: 200px;
@@ -6292,6 +6292,9 @@ select.custom-arrow {
     }
     .comments h3{
         padding: 20px !important;
+    }
+    .comments .no-review{
+        margin: 4px 20px;
     }
     textarea.form-control{
         height: 100px;

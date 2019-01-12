@@ -483,7 +483,7 @@ body.compensate-for-scrollbar {
 
 .fancybox-inner .cvl-cont{
     position: absolute;
-    bottom: 7px;
+    bottom: 17px;
     left: 34%;
     width: 33%;
     z-index: 99999;

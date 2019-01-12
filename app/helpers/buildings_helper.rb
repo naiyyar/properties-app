@@ -173,4 +173,10 @@ module BuildingsHelper
 		'<b>Check Availability</b>'.html_safe
 	end
 
+	def date_uploaded object
+		"<b>#{ associated_object(object.imageable) }</b>" +
+		"<p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>" +
+		"<p>" + check_availability_link(@building) + "</p>".html_safe if @building.present?
+	end
+
 end

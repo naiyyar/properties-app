@@ -1,7 +1,7 @@
-<% if @buiding_uploads.present? %>
-  <% if @buiding_uploads.count >= 3 %>
+<% if @uploads.present? %>
+  <% if @uploads.count >= 3 %>
     <div class="rotateslider-container hidden-xs hidden-sm hidden-md" id="slider">
-      <% @buiding_uploads.each do |upload| %>
+      <% @uploads.each do |upload| %>
         <div class="rotateslider-item">
           <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox" title="<%=date_uploaded(upload)%>">
             <%= image_tag upload.uploaded_img_url, size: '211x311' %>
@@ -12,8 +12,8 @@
       <span class="arrow left js-rotateslider-arrow" data-action="prev"><i class="fa fa-angle-left fa-3x"></i></span>
     </div>
   <%else%>
-    <% img_width = @buiding_uploads.count == 2 ? 48 : 98 %>
-    <% @buiding_uploads.each_with_index do |upload, index| %>
+    <% img_width = @uploads.count == 2 ? 48 : 98 %>
+    <% @uploads.each_with_index do |upload, index| %>
       <a href="<%=upload.image.url%>" title="<%=date_uploaded(upload)%>" class="fancybox" rel='gallery'>
         <div class="bg-size-cover" style='background-image: url("<%=upload.uploaded_img_url%>"); width: <%=img_width%>%; float: left; cursor: pointer; margin: 0px 0px 0px 6px;' ></div>
       </a>

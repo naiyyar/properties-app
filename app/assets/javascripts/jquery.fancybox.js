@@ -2961,7 +2961,8 @@
 
       // Recalculate content dimensions
       current.$slide.trigger("refresh");
-
+      //window.data = self;
+      console.log(index)
       // Set caption
       if (caption && caption.length) {
         self.$caption = $caption;
@@ -2979,7 +2980,10 @@
       }
 
       // Update info and navigation elements
-      $container.find("[data-fancybox-count]").html(self.group.length);
+      //self.group.length - 2 becasue two elements(left, right) are duplicates on lightslider
+      var items_length = self.group.length - 2;
+      $container.find("[data-fancybox-count]").html(items_length);
+      //index = (index == (items_length+1) ? 1 : index);
       $container.find("[data-fancybox-index]").html(index + 1);
 
       $container.find("[data-fancybox-prev]").prop("disabled", !current.opts.loop && index <= 0);
