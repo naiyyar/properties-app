@@ -474,7 +474,7 @@ body.compensate-for-scrollbar {
     left: 0;
     line-height: 1.5;
     /*padding: 75px 44px 25px 44px; Default*/
-    padding: 66px 42px 37px 9px;
+    padding: 66px 9px 37px 9px;
     pointer-events: none;
     right: 0;
     text-align: center;
@@ -503,7 +503,7 @@ body.compensate-for-scrollbar {
     max-height: 50vh;
     overflow: auto;
     pointer-events: all;
-    margin: 0 auto;
+    margin: 4px auto;
     width: 670px;
 }
 

@@ -162,11 +162,15 @@ module BuildingsHelper
 	end
 
 	def check_availability_link building
-		if building.web_url.present? 
-      link_to check_vaibility, building.web_url, target: '_blank' , class: 'btn btn-block btn-primary' 
+		if building.web_url.present?
+      link_to check_vaibility, building.web_url, target: '_blank' , class: "btn #{check_vaibility_btn_size} btn-primary"
     else
       link_to check_vaibility, '#', class: 'btn btn-block btn-primary invisible'
     end
+	end
+
+	def check_vaibility_btn_size
+		browser.device.mobile? ? 'btn-block' : 'btn-lg'
 	end
 
 	def check_vaibility

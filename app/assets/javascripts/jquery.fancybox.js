@@ -190,7 +190,6 @@
       '<div class="fancybox-navigation">{{arrows}}</div>' +
       '<div class="fancybox-stage"></div>' +
       '<div class="fancybox-caption"><div class="fancybox-caption__body"></div></div>' +
-      '<div class="cvl-cont"><a href="#" target="_blank" class="btn btn-primary btn-block"><b>Check Availability</b><a></div>' +
       "</div>" +
       "</div>",
 

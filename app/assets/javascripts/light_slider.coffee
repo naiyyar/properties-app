@@ -8,14 +8,15 @@ jQuery ->
 			loop: true
 			thumbItem: 6
 			galleryMargin: 1
-			currentPagerPosition: 'left'
 			onBeforeSlide: (el) ->
 				show_count_elem = el.parent().parent().prev()
 				current_elem = show_count_elem.find('.current')
 				current_elem.text(el.getCurrentSlideCount)
-			onSliderLoad: (el) ->
-				el.lightGallery
-					selector: '#imageGallery .lslide'
+
+		$().fancybox
+			selector: '.lightSlider .lslide a'
+			backFocus : false
+	
 	else
 		$('.gallery').lightSlider
 			item: 1

@@ -35,7 +35,6 @@
 //= require dataTables.bootstrap.min
 //= require jquery-fileupload/basic
 //= require lightslider
-//= require lightgallery
 //= require jquery.rotateSlider
 //= require gmap
 //= require blog

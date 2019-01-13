@@ -5,10 +5,10 @@
         %span.current 1
         %span.total="/ #{images_count = @uploads.count}"
 
-      %ul.gallery.list-unstyled{ id: 'imageGallery', style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'show', path:  building_path(building) } }
+      %ul.gallery.list-unstyled{style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'show', path:  building_path(building) } }
         - @uploads.each do |upload|
-          %li{ title: date_uploaded(upload), data: { thumb: upload.uploaded_img_url, src: upload.image.url }}
-            %a{ href: "#{upload.image.url}" }
+          %li{ data: { thumb: upload.uploaded_img_url } }
+            %a{ href: upload.image.url, data: { caption: date_uploaded(upload) } }
               .bg-size-cover{ style: "background-image: url(#{upload.uploaded_img_url});", data: { imageid: "#{upload.id}" } }
 
 
