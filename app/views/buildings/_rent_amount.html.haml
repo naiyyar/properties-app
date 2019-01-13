@@ -1,0 +1,27 @@
+- if @building.units.present?
+  .table-responsive.table-responsive-lg
+    %table.table.table-bordered.table-striped.price-history-table
+      %thead
+        %tr
+          %th Unit
+          %th{width: "12%"} Resident from
+          %th{width: "12%"} Resident to
+          %th Rent
+          %th Rent Up Front
+          %th Refundable deposits
+          %th Broker Fee
+          %th Non Refundable costs
+          %th Total Money upfront
+      %tbody
+        - @building.units.each do |unit|
+          - unit.rental_price_histories.order('created_at desc').each do |rental_price|
+            %tr
+              %td.text-center= link_to unit.name, unit_path(unit), class: 'link_underlined', 'data-no-turbolink' => false
+              %td= rental_price.res_start_year if rental_price.res_start_year.present?
+              %td= rental_price.res_end_year if rental_price.res_end_year.present?
+              %td.text-right= number_to_currency(rental_price.monthly_rent, precision: 0)
+              %td.text-right= number_to_currency(rental_price.rent_upfront, precision: 0)
+              %td.text-right= number_to_currency(rental_price.refundable_deposits, precision: 0)
+              %td.text-right= number_to_currency(rental_price.broker_fee, precision: 0)
+              %td.text-right= number_to_currency(rental_price.non_refundable_costs, precision: 0)
+              %td.text-right= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits, precision: 0)
