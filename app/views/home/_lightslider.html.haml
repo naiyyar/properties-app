@@ -14,5 +14,6 @@
           - 1.upto(images_count-1) do |count|
             %li{data: { listindex: "#{count}" } }
 - else
-  .bg-size-cover{style: "background-image: url(#{image_url('no-photo.png') })"}
+  %a{ href: building_path(building), style: 'cursor: pointer;' }
+    .bg-size-cover{style: "background-image: url(#{image_url('no-photo.png') })"}
                    
