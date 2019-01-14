@@ -161,17 +161,18 @@ module BuildingsHelper
 		(current_user.present? and object.favorite_by?(current_user)) ? 'filled-heart' : 'unfilled-heart'
 	end
 
-	def check_availability_link building
+	def check_availability_link building, sl_class=nil
 		if building.web_url.present?
-      link_to check_vaibility, building.web_url, target: '_blank' , class: "btn #{check_vaibility_btn_size} btn-primary"
+			bt_block_class = sl_class.present? ? sl_class : 'btn-block'
+      link_to check_vaibility, building.web_url, target: '_blank' , class: "btn #{bt_block_class} btn-primary txt-color-white"
     else
       link_to check_vaibility, '#', class: 'btn btn-block btn-primary invisible'
     end
 	end
 
-	def check_vaibility_btn_size
-		browser.device.mobile? ? 'btn-block' : 'btn-lg'
-	end
+	# def check_vaibility_btn_size
+	# 	browser.device.mobile? ? 'btn-block' : 'btn-lg'
+	# end
 
 	def check_vaibility
 		'<b>Check Availability</b>'.html_safe
@@ -180,7 +181,7 @@ module BuildingsHelper
 	def date_uploaded object
 		"<b>#{ associated_object(object.imageable) }</b>" +
 		"<p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>" +
-		"<p>" + check_availability_link(@building) + "</p>".html_safe if @building.present?
+		"<p>" + check_availability_link(@building, 'btn-slider') + "</p>".html_safe if @building.present?
 	end
 
 end

@@ -474,7 +474,7 @@ body.compensate-for-scrollbar {
     left: 0;
     line-height: 1.5;
     /*padding: 75px 44px 25px 44px; Default*/
-    padding: 66px 9px 37px 9px;
+    padding: 66px 9px 22px 9px;
     pointer-events: none;
     right: 0;
     text-align: center;
@@ -505,6 +505,11 @@ body.compensate-for-scrollbar {
     pointer-events: all;
     margin: 4px auto;
     width: 670px;
+}
+
+.fancybox-caption__body a.btn-slider{
+    margin: 0 auto;
+    width: 33%;
 }
 
 .fancybox-caption a,
@@ -904,9 +909,14 @@ body.compensate-for-scrollbar {
         max-width: calc(100% - 10px);
     }
 
-    .fancybox-caption__body {
+    .fancybox-caption{
+        padding: 66px 9px 0px 9px;
+    }
+
+    .fancybox-caption__body, .fancybox-caption__body a.btn-slider {
         width: 100%;
     }
+
     .fancybox-inner .cvl-cont{
         left: 2% !important;
         width: 96% !important;
