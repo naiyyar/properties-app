@@ -696,6 +696,7 @@
                     }
                     this.move($el, swipeVal);
                 }
+                $el.fetchAssets();
             },
 
             touchEnd: function (distance) {
@@ -754,10 +755,8 @@
                         $el.goToNextSlide();
                     }
                 }
-                $el.fetchAssets();
+                //$el.fetchAssets();
             },
-
-
 
             enableDrag: function () {
                 var $this = this;
@@ -819,9 +818,6 @@
                     });
                 }
             },
-
-
-
 
             enableTouch: function () {
                 var $this = this;
@@ -976,55 +972,53 @@
             var left_li = $el.find('.clone.left');
             var loader_img = "<%= image_path('ajax-loader.gif') %>";
             var loader = '<div class="slide-loader"><img src="'+loader_img+'" /></div>';
+        	
+            if(slides.find('a').length <= 1){
+                if(left_li.children().length == 0 && view_type != 'show'){
+                    $el.parent().append(loader);
+                    
+                    $.ajax({
+                        url: '/buildings/'+building_id+'/uploads',
+                        type: 'get',
+                        dataType: 'json',
+                        success: function(response){
+                        	var upload = response.uploads[response.uploads.length-1];
+                            var date_uploaded = "<p>Date uploaded: "+upload.date_uploaded+"</p>";
+                            var orig_img = upload.orig_image_url;
+                            var left_item = '';
+                            if(view_type == 'split'){
+                        	    left_item = '<a href="'+path+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                            }else{
+                                left_item = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                            }
+                        	
+                        	if(left_li.children().length == 0){
+                        		left_li.append(left_item);
+                        	}
 
-        	// if(left_li.children().length == 0){
-        		
-        	// }
-            
-            if(left_li.children().length == 0 && view_type != 'show'){
-                $el.parent().append(loader);
-                
-                $.ajax({
-                    url: '/buildings/'+building_id+'/uploads',
-                    type: 'get',
-                    dataType: 'json',
-                    success: function(response){
-                    	var upload = response.uploads[response.uploads.length-1];
-                        var date_uploaded = "<p>Date uploaded: "+upload.date_uploaded+"</p>";
-                        var orig_img = upload.orig_image_url;
-                        var left_item = '';
-                        if(view_type == 'split'){
-                    	    left_item = '<a href="'+path+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
-                        }else{
-                            left_item = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                          $.each(response.uploads, function(i1, obj){
+                          	$.each(slides, function(i, item){
+                          		var list_index = $(item).data('listindex');
+                          		if(parseInt(list_index) == i1 && $(item).children().length == 0){
+                                    date_uploaded = "<p>Date uploaded: "+obj.date_uploaded+"</p>";
+                                    orig_img = obj.orig_image_url;
+                          			var elem_div = '';
+                          			
+                                    if(view_type == 'split'){
+                                        elem_div = '<a href="'+path+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                                    }else{
+                                        elem_div = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
+                                    }
+
+                                    $(item).append(elem_div);
+                          		}
+                          		
+                          	});
+                          });
+                          $el.parent().children('.slide-loader').remove();
                         }
-                    	
-                    	if(left_li.children().length == 0){
-                    		left_li.append(left_item);
-                    	}
-
-                      $.each(response.uploads, function(i1, obj){
-                      	$.each(slides, function(i, item){
-                      		var list_index = $(item).data('listindex');
-                      		if(parseInt(list_index) == i1 && $(item).children().length == 0){
-                                date_uploaded = "<p>Date uploaded: "+obj.date_uploaded+"</p>";
-                                orig_img = obj.orig_image_url;
-                      			var elem_div = '';
-                      			
-                                if(view_type == 'split'){
-                                    elem_div = '<a href="'+path+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
-                                }else{
-                                    elem_div = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
-                                }
-
-                                $(item).append(elem_div);
-                      		}
-                      		
-                      	});
-                      });
-                      $el.parent().children('.slide-loader').remove();
-                    }
-              	});
+                  	});
+                }
             }
         };
 
