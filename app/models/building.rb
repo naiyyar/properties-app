@@ -82,10 +82,10 @@ class Building < ActiveRecord::Base
   after_validation :geocode
 
   #callbacks
-  #after_create :save_neighborhood, :update_neighborhood_counts
-  #after_update :update_neighborhood, :update_neighborhood_counts
+  after_create :save_neighborhood, :update_neighborhood_counts
+  after_update :update_neighborhood, :update_neighborhood_counts
 
-  #after_destroy :update_neighborhood_counts
+  after_destroy :update_neighborhood_counts
 
   #multisearchable
   # PgSearch.multisearch_options = {

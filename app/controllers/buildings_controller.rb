@@ -64,21 +64,11 @@ class BuildingsController < ApplicationController
 
   def show
     @building = Building.find(params[:id])
-    #@buiding_uploads = @building.image_uploads.includes(:imageable)
-    #@unit_rent_summary_count = @building.unit_rent_summary_count
-    #@unit_review_count = @building.unit_reviews_count
     @show_map_btn = true
     @reviews = @building.reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
     
     #building + uinits images
     @uploads = @building.image_uploads
-
-    #calculating unit reviews count for a building
-    # @building_units = @building.units
-    # @unit_review_count = 0
-    # @building_units.each do |unit|
-    #   @unit_review_count += unit.reviews.count
-    # end
 
     @documents = @building.uploads.where('document_file_name is not null')
 
@@ -190,7 +180,6 @@ class BuildingsController < ApplicationController
 
   def edit
     @building = Building.find(params[:id])
-    #@search_bar_hidden = :hidden
   end
 
   def update
@@ -219,12 +208,7 @@ class BuildingsController < ApplicationController
 
 
   def building_params
-    params.require(:building).permit! 
-                                      # (:neighborhood,:building_name,:user_id, :building_street_address, :photo, :latitude, :longitude,:city,:state,:phone, :zipcode, :address2,:weburl,
-                                      # :pets_allowed,:laundry_facility,:parking,:doorman,:elevator,:description,:floors,:built_in,:number_of_units,:web_url, :building_type,
-                                      # :management_company_run,:courtyard,:elevator,:garage,:gym,:live_in_super,:pets_allowed_cats,:pets_allowed_dogs,:roof_deck,:swimming_pool,:walk_up,
-                                      # uploads_attributes:[:id,:image,:imageable_id,:imageable_type], 
-                                      # units_attributes: [:id, :building_id, :name, :square_feet, :number_of_bedrooms, :number_of_bathrooms])
+    params.require(:building).permit!
   end
 
   def unit_params
@@ -233,17 +217,19 @@ class BuildingsController < ApplicationController
   end
 
   def add_or_update_prices
-    params[:price].each_pair do |key, value|
-      existing_prices = Price.where(priceable_id: @building.id, priceable_type: 'Building', bed_type: key)
-      if existing_prices.present?
-        obj = existing_prices.first
-        if value[:min_price].present?
-          if obj.min_price.to_i != value[:min_price].to_i or obj.max_price.to_i != value[:max_price].to_i
-            obj.update({ min_price: value[:min_price], max_price: value[:max_price] }) 
+    if params[:price].present?
+      params[:price].each_pair do |key, value|
+        existing_prices = Price.where(priceable_id: @building.id, priceable_type: 'Building', bed_type: key)
+        if existing_prices.present?
+          obj = existing_prices.first
+          if value[:min_price].present?
+            if obj.min_price.to_i != value[:min_price].to_i or obj.max_price.to_i != value[:max_price].to_i
+              obj.update({ min_price: value[:min_price], max_price: value[:max_price] }) 
+            end
           end
+        else
+          Price.create({priceable_id: @building.id, priceable_type: 'Building', min_price: value[:min_price], max_price: value[:max_price], bed_type: key}) if value[:min_price].present?
         end
-      else
-        Price.create({priceable_id: @building.id, priceable_type: 'Building', min_price: value[:min_price], max_price: value[:max_price], bed_type: key}) if value[:min_price].present?
       end
     end
   end
