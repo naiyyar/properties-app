@@ -71,8 +71,10 @@ class Building < ActiveRecord::Base
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :units,  :dependent => :destroy
   belongs_to :management_company
+  has_many :prices
   
   accepts_nested_attributes_for :units, :allow_destroy => true
+  accepts_nested_attributes_for :prices, :allow_destroy => true
 
   default_scope { order('building_name ASC, building_street_address ASC') }
 
@@ -80,10 +82,10 @@ class Building < ActiveRecord::Base
   after_validation :geocode
 
   #callbacks
-  after_create :save_neighborhood, :update_neighborhood_counts
-  after_update :update_neighborhood, :update_neighborhood_counts
+  #after_create :save_neighborhood, :update_neighborhood_counts
+  #after_update :update_neighborhood, :update_neighborhood_counts
 
-  after_destroy :update_neighborhood_counts
+  #after_destroy :update_neighborhood_counts
 
   #multisearchable
   # PgSearch.multisearch_options = {
@@ -602,6 +604,22 @@ class Building < ActiveRecord::Base
     else
       '$$$$'
     end
+  end
+
+  def min_price type_val
+    price_range_by_type(type_val).try(:min_price)
+  end
+
+  def max_price type_val
+    price_range_by_type(type_val).try(:max_price)
+  end
+
+  def price_range_by_type type_val
+    price_range.find_by(bed_type: type_val)
+  end
+
+  def price_range
+    Price.where(priceable_id: id, priceable_type: 'Building')
   end
 
   def bedroom_types?

@@ -1,0 +1,26 @@
+.clearfix
+  .price-ranges
+    %h3 Price
+    %table{style: 'width: 100%;'}
+      - if @building.price == 1
+        - @building.price_range.each do |pr|
+          %tr
+            %td{width: '40%'}=pr.bedroom_type
+            %td= "#{number_to_currency(pr.max_price, precision: 0)} <"
+      - elsif @building.price == 2 or @building.price == 3
+        - @building.price_range.each do |pr|
+          %tr
+            %td{width: '40%'}=pr.bedroom_type
+            %td
+              - if pr.max_price.present?
+                = number_to_currency(pr.min_price, precision: 0)
+                \-
+                = number_to_currency(pr.max_price, precision: 0)
+              - else
+                ="#{number_to_currency(pr.min_price, precision: 0)} +"
+      - else
+        - @building.price_range.each do |pr|
+          %tr
+            %td{width: '40%'}=pr.bedroom_type
+            %td
+              ="#{number_to_currency(pr.min_price, precision: 0)} +"

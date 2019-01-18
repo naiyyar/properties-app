@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Priceable:</strong>
+  <%= @price.priceable_id %>
+</p>
+
+<p>
+  <strong>Priceable type:</strong>
+  <%= @price.priceable_type %>
+</p>
+
+<p>
+  <strong>Min price:</strong>
+  <%= @price.min_price %>
+</p>
+
+<p>
+  <strong>Max price:</strong>
+  <%= @price.max_price %>
+</p>
+
+<p>
+  <strong>Bed type:</strong>
+  <%= @price.bed_type %>
+</p>
+
+<%= link_to 'Edit', edit_price_path(@price) %> |
+<%= link_to 'Back', prices_path %>

@@ -1,0 +1,44 @@
+.tables{style: "padding: 30px 20px;"}
+  .row
+    .col-lg-12
+      - if @building.present?
+        %h1.pageTitle= link_to @building.building_name_or_address, building_path(@building), 'data-no-turbolink' => false
+        .address.text-muted
+          = link_to building_path(@building), 'data-no-turbolink' => false do
+            / method on reviews helper
+            = building_street_address @building
+            %br/
+            = @building.neighborhood
+      - elsif @unit.present?
+        = link_to unit_path(@unit), class: 'text-col-black', 'data-no-turbolink' => false do
+          %h4= @unit.building.building_name
+          %p
+            %b
+              = @unit.building.building_street_address
+          %p
+            %b
+              = @unit.building.city
+              , #{@unit.building.state}, #{@unit.building.zipcode}
+          %p
+            %b= @unit.name
+  %hr/
+  %div{class: "row #{current_user && current_user.has_role?(:admin) ? 'photo-grid-container' : ''}"}
+    - @uploads.each_with_index do |upload, index|
+      - if current_user && current_user.has_role?(:admin)
+        .photo-grid-item.image-gallery{"data-object-id" => "#{upload.id}", "data-sort-id" => index}
+          %a.propWidget-1{caption: "#{date_uploaded(upload)}", "data-fancybox" => "gallery", href: "#{upload.image.url}"}
+            = image_tag upload.image.url, alt: 'Image', class: 'img-thumbnail'
+          = link_to '<span class="fa fa-trash" />'.html_safe, upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs pull-right1 delete_image'
+          = link_to '<span class="fa fa-repeat" />'.html_safe, rotate_upload_path(upload), class: 'btn btn-warning btn-xs rotate'
+      - else
+        .col-sm-3.image-gallery
+          %a.propWidget-1{"data-caption" => "#{date_uploaded(upload)}", "data-fancybox" => "gallery", "data-imageable" => "#{imageable(upload)}", href: "#{upload.image.url}"}
+            .image-rotator{style: "height: 236px;"}
+              = image_tag upload.image.url, alt: 'Image', class: 'img-thumbnail'
+/ jquery click function in zapp.js
+.loading.hidden Loading…
+:javascript
+  $('.photo-grid-container').sortablePhotos({
+    	selector: '> .photo-grid-item',
+    	sortable: true,
+  	});

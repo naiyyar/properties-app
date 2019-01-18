@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  priceable_id: 1
+  priceable_type: MyString
+  min_price: 
+  max_price: 9.99
+  bed_type: 1
+
+two:
+  priceable_id: 1
+  priceable_type: MyString
+  min_price: 
+  max_price: 9.99
+  bed_type: 1

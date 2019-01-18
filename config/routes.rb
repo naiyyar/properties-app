@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   
+  resources :prices
   scope :module => 'buttercms' do
     get '/categories/:slug' => 'categories#show', :as => :buttercms_category
     get '/tags/:slug' => 'tags#show', :as => :buttercms_tag

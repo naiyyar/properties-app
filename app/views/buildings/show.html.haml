@@ -10,9 +10,12 @@
 #pano
 #content.mob-max
   = render 'buildings/show/top_summary_section'
+  - if @building.price.present? or @building.bedroom_types?
+    = render 'buildings/show/price_ranges'
+  
   .clearfix
   = render 'building_amenities'
-  / <div class="clearfix"></div>
+  
   - if @documents.present?
     #building-documents.documents
       %h3
