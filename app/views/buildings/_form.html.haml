@@ -51,7 +51,7 @@
                     %label Building Type
                     = f.select :building_type, options_for_select(['Rental Building','Condo Building','Coop Building'], f.object.building_type), { prompt: 'Select type' }, { class: 'form-control custom-arrow' }
               .row
-                .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                .col-xs-12.col-sm-12.col-md-3.col-lg-6
                   .form-group
                     %label Bedroom Types
                     .checkbox.custom-checkbox.bedroom-types-checkbox
@@ -81,17 +81,6 @@
                         4+ Bedroom
                 
                 .col-xs-12.col-sm-12.col-md-3.col-lg-6
-                  .form-group.price-range
-                    %label Price Range
-                    - 0.upto(4) do |bt_range|
-                      .row
-                        .col-lg-4
-                          = text_field_tag "price[#{bt_range}][min_price]", @building.min_price(bt_range), class: 'form-control', placeholder: 'Min'
-                        .col-lg-1 -
-                        .col-lg-4
-                          = text_field_tag "price[#{bt_range}][max_price]", @building.max_price(bt_range), class: 'form-control', placeholder: 'Max'
-                
-                .col-xs-12.col-sm-12.col-md-3.col-lg-3
                   .form-group
                     %label Price
                     = f.select :price, options_for_select(prices_options, f.object.price), {include_blank: '-Select-' }, { class: 'form-control custom-arrow' }

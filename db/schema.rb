@@ -188,13 +188,12 @@ ActiveRecord::Schema.define(version: 20190118162753) do
   add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
 
   create_table "prices", force: :cascade do |t|
-    t.integer  "priceable_id"
-    t.string   "priceable_type"
     t.decimal  "min_price"
     t.decimal  "max_price"
     t.integer  "bed_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "range"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rates", force: :cascade do |t|

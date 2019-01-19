@@ -1,7 +1,6 @@
 class BuildingsController < ApplicationController 
   load_and_authorize_resource
   before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search]
-  after_action :add_or_update_prices, only: [:create, :update]
   def index
     @filterrific = initialize_filterrific(
       Building,
@@ -214,24 +213,6 @@ class BuildingsController < ApplicationController
   def unit_params
     params[:unit] = params[:building][:units_attributes]['0']
     params.require(:unit).permit(:name, :square_feet, :number_of_bathrooms, :number_of_bedrooms)
-  end
-
-  def add_or_update_prices
-    if params[:price].present?
-      params[:price].each_pair do |key, value|
-        existing_prices = Price.where(priceable_id: @building.id, priceable_type: 'Building', bed_type: key)
-        if existing_prices.present?
-          obj = existing_prices.first
-          if value[:min_price].present?
-            if obj.min_price.to_i != value[:min_price].to_i or obj.max_price.to_i != value[:max_price].to_i
-              obj.update({ min_price: value[:min_price], max_price: value[:max_price] }) 
-            end
-          end
-        else
-          Price.create({priceable_id: @building.id, priceable_type: 'Building', min_price: value[:min_price], max_price: value[:max_price], bed_type: key}) if value[:min_price].present?
-        end
-      end
-    end
   end
 
 end

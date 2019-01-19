@@ -1,0 +1,24 @@
+.tables
+  %table.table
+    %thead
+      %tr
+        %th Price range
+        %th Studio
+        %th 1 bed
+        %th 2 bed
+        %th 3 bed
+        %th 4+ bed
+		
+    %tbody
+      / prices_options: method on building helpers
+      - prices_options.map do |option|
+        - @range_prices = @prices.where(range: option[1])
+        %tr
+          %td
+            =link_to option[0], "#newPriceRange#{option[1]}", data: { toggle: 'modal' }
+            =render 'form', modal_id: "newPriceRange#{option[1]}", range: option[1]
+          - if @range_prices.present?
+            - @range_prices.each do |price|
+              %td="#{number_to_currency(price.min_price)} - #{number_to_currency(price.max_price)}"
+          -else
+            %td{colspan: "5"}

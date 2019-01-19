@@ -71,10 +71,8 @@ class Building < ActiveRecord::Base
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :units,  :dependent => :destroy
   belongs_to :management_company
-  has_many :prices
   
   accepts_nested_attributes_for :units, :allow_destroy => true
-  accepts_nested_attributes_for :prices, :allow_destroy => true
 
   default_scope { order('building_name ASC, building_street_address ASC') }
 
@@ -606,20 +604,8 @@ class Building < ActiveRecord::Base
     end
   end
 
-  def min_price type_val
-    price_range_by_type(type_val).try(:min_price)
-  end
-
-  def max_price type_val
-    price_range_by_type(type_val).try(:max_price)
-  end
-
-  def price_range_by_type type_val
-    price_range.find_by(bed_type: type_val)
-  end
-
-  def price_range
-    Price.where(priceable_id: id, priceable_type: 'Building')
+  def bedroom_ranges
+    Building.where(id: self.id).select(:studio, :one_bed, :two_bed, :three_bed, :four_plus_bed).to_a.first.attributes.values.compact
   end
 
   def bedroom_types?

@@ -1,0 +1,31 @@
+.modal.fade{id: modal_id, tabindex: "-1", role: "dialog"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: "button", class: "close", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}
+          &times;
+      
+      .modal-body.no-padding
+        = form_tag '/add_or_update_prices', class: 'form-horizontal' do
+          %fieldset
+            .row
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .form-group.price-range
+                  = hidden_field_tag :range, range
+                  - 0.upto(4) do |bt_range|
+                    .row
+                      .col-lg-3=bedroom_type(bt_range)
+                      .col-lg-4
+                        = text_field_tag "price[#{bt_range}][min_price]", @range_prices.present? ? Price.min_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Min'
+                      .col-lg-1 -
+                      .col-lg-4
+                        = text_field_tag "price[#{bt_range}][max_price]", @range_prices.present? ? Price.max_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Max'
+                
+          %footer
+            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
+            = submit_tag 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
+
+:css
+  .form-group.price-range input{
+    height: 24px;
+  }

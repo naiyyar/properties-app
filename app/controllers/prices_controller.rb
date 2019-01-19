@@ -4,7 +4,8 @@ class PricesController < ApplicationController
   # GET /prices
   # GET /prices.json
   def index
-    @prices = Price.all
+    @prices = Price.order(:bed_type)
+    @price = Price.new
   end
 
   # GET /prices/1
@@ -21,10 +22,30 @@ class PricesController < ApplicationController
   def edit
   end
 
+  def add_or_update_prices
+    if params[:price].present?
+      params[:price].each_pair do |key, value|
+        existing_prices = Price.where(bed_type: key, range: params[:range])
+        if existing_prices.present?
+          obj = existing_prices.first
+          if value[:min_price].present?
+            if obj.min_price.to_i != value[:min_price].to_i or obj.max_price.to_i != value[:max_price].to_i
+              obj.update({ min_price: value[:min_price], max_price: value[:max_price] }) 
+            end
+          end
+        else
+          Price.create({min_price: value[:min_price], max_price: value[:max_price], bed_type: key, range: params[:range]})
+        end
+      end
+    end
+
+    redirect_to :back
+  end
+
   # POST /prices
   # POST /prices.json
   def create
-    @price = Price.new(price_params)
+    # @price = Price.new(price_params)
 
     respond_to do |format|
       if @price.save
@@ -69,6 +90,6 @@ class PricesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def price_params
-      params.require(:price).permit(:priceable_id, :priceable_type, :min_price, :max_price, :bed_type)
+      params.require(:price).permit(:min_price, :max_price, :bed_type)
     end
 end

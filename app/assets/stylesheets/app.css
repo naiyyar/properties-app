@@ -21,6 +21,22 @@ body{
     width: 93%;
 }
 
+form footer{
+    display: block;
+    padding: 7px 14px 15px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    background: rgba(248,248,248,0.9);
+    text-align: right;
+}
+
+form fieldset{
+    padding: 20px 40px;
+}
+
+.modal-body.no-padding{
+    padding: 0px !important;
+}
+
 .contribute_guidelines_emojis img{
     margin: 2px 4px;
 }

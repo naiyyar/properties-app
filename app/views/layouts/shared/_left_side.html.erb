@@ -23,7 +23,7 @@
         <li><a href="/reviews"><span class="navIcon icon-star"></span><span class="navLabel">Reviews</span></a></li>
         <li><a href="/neighborhood_links"><span class="navIcon icon-link"></span><span class="navLabel">Neighborhood guides</span></a></li>
         <li><a href="<%=management_companies_path%>"><span class="navIcon fa fa-building"></span><span class="navLabel">Management companies</span></a></li>
-        <li><a href="<%#=building_price_ranges_path%>"><span class="navIcon fa fa-money"></span><span class="navLabel">Price Range</span></a></li>
+        <li><a href="/price_ranges"><span class="navIcon fa fa-money"></span><span class="navLabel">Price Range</span></a></li>
       <%elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank? %>
         <li><a href="/blog"><span class="navIcon fa fa-hashtag"></span><span class="navLabel">Blog</span></a></li>
         <li><a href="/about"><span class="navIcon icon-info"></span><span class="navLabel">About us</span></a></li>
