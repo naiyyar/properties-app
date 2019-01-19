@@ -28,11 +28,7 @@ class PricesController < ApplicationController
         existing_prices = Price.where(bed_type: key, range: params[:range])
         if existing_prices.present?
           obj = existing_prices.first
-          if value[:min_price].present?
-            if obj.min_price.to_i != value[:min_price].to_i or obj.max_price.to_i != value[:max_price].to_i
-              obj.update({ min_price: value[:min_price], max_price: value[:max_price] }) 
-            end
-          end
+          obj.update({ min_price: value[:min_price], max_price: value[:max_price] }) 
         else
           Price.create({min_price: value[:min_price], max_price: value[:max_price], bed_type: key, range: params[:range]})
         end
