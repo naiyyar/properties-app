@@ -197,7 +197,7 @@ class Building < ActiveRecord::Base
     latlng = "#{latitude}, #{longitude}"
     key = ENV['GEOCODER_API_KEY']
     #get nearby subway_station
-    radius = 1000 #in meter
+    radius = ENV['RADIUS'] #in meter
     nearby_subway_stations = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{latlng}&radius=#{radius}&type=subway_station&key=#{key}"
     response = HTTParty.get(nearby_subway_stations)
     nearby_subway_stations = response.parsed_response['results'].map{|r| r['name']}.uniq
