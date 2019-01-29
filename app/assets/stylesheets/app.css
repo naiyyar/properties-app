@@ -2831,7 +2831,7 @@ h1.pageTitle {
 .contactForm .cfItem:last-child {
     margin-bottom: 0;
 }
-.description, .amenities, .share, .similar, .documents, .price-ranges {
+.description, .amenities, .share, .similar, .documents, .price-ranges, .subways {
     padding: 20px 20px 0 20px;
 }
 

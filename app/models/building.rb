@@ -193,6 +193,26 @@ class Building < ActiveRecord::Base
     end
   end
 
+  def distance_results
+    latlng = "#{latitude}, #{longitude}"
+    key = ENV['GEOCODER_API_KEY']
+    #get nearby subway_station
+    radius = 1000 #in meter
+    nearby_subway_stations = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{latlng}&radius=#{radius}&type=subway_station&key=#{key}"
+    response = HTTParty.get(nearby_subway_stations)
+    nearby_subway_stations = response.parsed_response['results'].map{|r| r['name']}.uniq
+
+    #getting distance and subway line for each station from origin
+    distance_result = []
+    nearby_subway_stations.map do |dest_station|
+      dir_api_url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{building_street_address}&destination=#{dest_station}&mode=transit&transit_mode=subway&key=#{key}"
+      response = HTTParty.get(dir_api_url)
+      distance_result << response.parsed_response['routes'][0]['legs'] if response.parsed_response['routes'].length > 0
+    end
+
+    return distance_result.flatten
+  end
+
   def neighbohoods
     first_neighborhood.present? ? first_neighborhood : neighborhood3
   end

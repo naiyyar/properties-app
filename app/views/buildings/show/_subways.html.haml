@@ -1,0 +1,15 @@
+- @distance_results.flatten.each do |result|
+	.row
+		.col-lg-6
+			.pull-left
+				- result['steps'].map do |step|
+					- if step['travel_mode'] == 'TRANSIT'
+						- if step['transit_details']['line']['icon'].present?
+							=image_tag "http:#{step['transit_details']['line']['icon']}", size: '22x22'
+
+		.col-lg-6
+			.text-left
+				/ result['end_address'] => "Grand Central Terminal, 89 E 42nd St, New York, NY 10017, USA"
+				%b= result['end_address'].split(',')[0]
+				%p.font-sm.text-muted
+					= "#{result['duration']['text']} walk, #{result['distance']['text']} away"

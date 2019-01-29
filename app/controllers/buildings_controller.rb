@@ -1,6 +1,8 @@
 class BuildingsController < ApplicationController 
   load_and_authorize_resource
   before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search]
+  #after_action :set_distance_matrix, only: [:show]
+
   def index
     @filterrific = initialize_filterrific(
       Building,
@@ -65,7 +67,7 @@ class BuildingsController < ApplicationController
     @building = Building.find(params[:id])
     @show_map_btn = true
     @reviews = @building.reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
-    
+    @distance_results = @building.distance_results
     #building + uinits images
     @uploads = @building.image_uploads
 

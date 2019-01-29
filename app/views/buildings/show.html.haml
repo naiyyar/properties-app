@@ -21,6 +21,13 @@
       %h3
         Documents (#{@documents.count})
       = render 'uploads/documents'
+  
+  .clearfix
+    - if @distance_results.present?
+      .subways
+        %h3 Subway
+        = render 'buildings/show/subways'
+  
   .clearfix
   - if @building.rating_cache?
     .aggregate-ratings

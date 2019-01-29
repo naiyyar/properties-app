@@ -18,6 +18,8 @@ gem 'aws-sdk', '~> 2.3'
 
 gem 'puma'
 
+gem 'httparty'
+
 #
 gem 'activesupport-json_encoder'
 

@@ -15,7 +15,7 @@
         - @range_prices = @prices.where(range: option[1])
         %tr
           %td
-            =link_to option[0], "#newPriceRange#{option[1]}", data: { toggle: 'modal' }
+            =link_to option[0], "#newPriceRange#{option[1]}", data: { toggle: 'modal' }, class: 'hyper-link'
             =render 'form', modal_id: "newPriceRange#{option[1]}", range: option[1]
           - if @range_prices.present?
             - @range_prices.each do |price|
