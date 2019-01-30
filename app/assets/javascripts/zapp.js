@@ -125,57 +125,55 @@
             //   pitch: 0
             // }));
 
-            // request = { location: start, radius: 500, type: ['train_station','subway_station','transit_station'] }
+            // request = { location: new google.maps.LatLng(lat, lng), radius: 700, type: ['subway_station'] }
             // lservice = new google.maps.places.PlacesService(map);
             // lservice.nearbySearch(request, callback);
                     
-            // directionsService = new google.maps.DirectionsService;
-            // directionsDisplay = new google.maps.DirectionsRenderer;
-            
-            // vicinities = [];
+            // var directionsService = new google.maps.DirectionsService;
+            // var directionsDisplay = new google.maps.DirectionsRenderer;
+            // //directionsDisplay.setMap(map);
+            // station_names = [];
             // function callback(results, status) {
             //     if (status === google.maps.places.PlacesServiceStatus.OK) {
             //       for (var i = 0; i < results.length; i++) {
-            //         vicinities.push(results[i].vicinity)
+            //         station_names.push(results[i].name)
             //       }
             //     }
 
-            //     vicinities = jQuery.grep(vicinities, function(value) {
+            //     station_names = jQuery.grep(station_names, function(value) {
             //       return value != 'New York';
             //     });
             //     console.log(results[0])
             //     //console.log(results[1])
-            //     calculateAndDisplayRoute(vicinities);
+            //     calculateAndDisplayRoute(station_names);
             // }
 
-            // function calculateAndDisplayRoute(dests) {
-            //     var end = '42 Street - Grand Central, New York, NY'
-            //     //for(i = 0; i <= 4; i ++){
+            // function calculateAndDisplayRoute(dest_stations) {
+            //     //var end = '42 Street - Grand Central, New York, NY'
+            //     for(i = 0; i <= dest_stations.length; i++){
             //     //end = dests[i]
-            //     directionsService.route({
-            //       origin: new google.maps.LatLng(lat, lng),
-            //       destination: end,
-            //       travelMode: google.maps.TravelMode.TRANSIT,
-            //       transitOptions: {
-            //             modes: ['SUBWAY'],
-            //         }
-            //     }, function(response, status) {
-            //       if (status === 'OK') {
-            //         window.data = directionsDisplay
-            //         window.data2 = response
-            //         console.log(response)
-            //         //directionsDisplay.setDirections(response);
-            //       }else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-            //         //If too many request per second
-            //         wait = true;
-            //         setTimeout("wait = true", 2000);
-            //         //alert("OQL: " + status);
-            //       } 
-            //       else {
-            //         window.alert('Directions request failed due to ' + status);
-            //       }
-            //     });
-            //     //}
+            //         directionsService.route({
+            //           origin: new google.maps.LatLng(lat, lng),
+            //           destination: dest_stations[i],
+            //           travelMode: google.maps.TravelMode.TRANSIT,
+            //           transitOptions: {
+            //                 modes: ['SUBWAY'],
+            //             }
+            //         }, function(response, status) {
+            //           if (status === 'OK') {
+            //             console.log(response)
+            //             //directionsDisplay.setDirections(response);
+            //           }else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+            //             //If too many request per second
+            //             wait = true;
+            //             setTimeout("wait = true", 2000);
+            //             //alert("OQL: " + status);
+            //           } 
+            //           else {
+            //             window.alert('Directions request failed due to ' + status);
+            //           }
+            //         });
+            //     }
             // }
 
         }, 300);

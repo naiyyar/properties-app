@@ -201,15 +201,19 @@ class Building < ActiveRecord::Base
     nearby_subway_stations = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{latlng}&radius=#{radius}&type=subway_station&key=#{key}"
     response = HTTParty.get(nearby_subway_stations)
     nearby_subway_stations = response.parsed_response['results'].map{|r| r['name']}.uniq
-
+    
     #getting distance and subway line for each station from origin
     distance_result = []
     nearby_subway_stations.map do |dest_station|
-      dir_api_url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{building_street_address}&destination=#{dest_station}&mode=transit&transit_mode=subway&key=#{key}"
+      dir_api_url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{latlng}&destination=#{dest_station}&mode=transit&transit_mode=subway&key=#{key}"
       response = HTTParty.get(dir_api_url)
       distance_result << response.parsed_response['routes'][0]['legs'] if response.parsed_response['routes'].length > 0
     end
 
+    #get place detail
+    # detail_url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJlcBlyPxYwokRLJ9ONJ8qD3w&key=#{key}"
+    # pd_response = HTTParty.get(detail_url)
+    # debugger
     return distance_result.flatten
   end
 

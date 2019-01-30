@@ -2834,6 +2834,9 @@ h1.pageTitle {
 .description, .amenities, .share, .similar, .documents, .price-ranges, .subways {
     padding: 20px 20px 0 20px;
 }
+.price-ranges table td:first-child{
+    width: 33%;
+}
 
 #content h3 {
     font-size: 14px;
@@ -6196,6 +6199,9 @@ select.custom-arrow {
     .form-container{
         padding: 10px;
         margin-left: 0px;
+    }
+    .price-ranges table td:first-child{
+        width: 53%;
     }
     .searchContainer .apt-search .results .ui-autocomplete {
         min-width: 414px !important;
