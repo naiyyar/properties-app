@@ -2851,6 +2851,7 @@ h1.pageTitle {
 .amItem {
     font-size: 13px;
     margin-bottom: 10px;
+    white-space: nowrap;
 }
 .amItem span {
     color: #0eaaa6;
