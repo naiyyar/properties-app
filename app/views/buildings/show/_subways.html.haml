@@ -3,7 +3,7 @@
 	- result['steps'].map do |st|
 		- if st['travel_mode'] == 'TRANSIT' || st['travel_mode'] == 'WALKING' 
 			.row
-				- if st['transit_details'].present?
+				- if st['transit_details'].present? and st['distance']['text'].to_f <= 0.7
 					.col-lg-6
 						.pull-left
 							- if st['transit_details']['line']['icon'].present?
@@ -23,7 +23,7 @@
 	- result['steps'].map do |st|
 		- if st['travel_mode'] == 'TRANSIT' || st['travel_mode'] == 'WALKING' 
 			.row
-				- if !end_adress_arr.include?(result['end_address'].split(',')[0])
+				- if !end_adress_arr.include?(result['end_address'].split(',')[0]) and st['distance']['text'].to_f <= 0.7 
 					.col-lg-6
 						.pull-left
 
