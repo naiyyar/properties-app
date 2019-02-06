@@ -125,57 +125,6 @@
             //   pitch: 0
             // }));
 
-            // request = { location: new google.maps.LatLng(lat, lng), radius: 700, type: ['subway_station'] }
-            // lservice = new google.maps.places.PlacesService(map);
-            // lservice.nearbySearch(request, callback);
-                    
-            // var directionsService = new google.maps.DirectionsService;
-            // var directionsDisplay = new google.maps.DirectionsRenderer;
-            // //directionsDisplay.setMap(map);
-            // station_names = [];
-            // function callback(results, status) {
-            //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-            //       for (var i = 0; i < results.length; i++) {
-            //         station_names.push(results[i].name)
-            //       }
-            //     }
-
-            //     station_names = jQuery.grep(station_names, function(value) {
-            //       return value != 'New York';
-            //     });
-            //     console.log(results[0])
-            //     //console.log(results[1])
-            //     calculateAndDisplayRoute(station_names);
-            // }
-
-            // function calculateAndDisplayRoute(dest_stations) {
-            //     //var end = '42 Street - Grand Central, New York, NY'
-            //     for(i = 0; i <= dest_stations.length; i++){
-            //     //end = dests[i]
-            //         directionsService.route({
-            //           origin: new google.maps.LatLng(lat, lng),
-            //           destination: dest_stations[i],
-            //           travelMode: google.maps.TravelMode.TRANSIT,
-            //           transitOptions: {
-            //                 modes: ['SUBWAY'],
-            //             }
-            //         }, function(response, status) {
-            //           if (status === 'OK') {
-            //             console.log(response)
-            //             //directionsDisplay.setDirections(response);
-            //           }else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-            //             //If too many request per second
-            //             wait = true;
-            //             setTimeout("wait = true", 2000);
-            //             //alert("OQL: " + status);
-            //           } 
-            //           else {
-            //             window.alert('Directions request failed due to ' + status);
-            //           }
-            //         });
-            //     }
-            // }
-
         }, 300);
 
     }

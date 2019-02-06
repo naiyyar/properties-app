@@ -1,34 +1,17 @@
-- end_adress_arr = []
-- @distance_results.flatten.each do |result|
-	- result['steps'].map do |st|
-		- if st['travel_mode'] == 'TRANSIT' || st['travel_mode'] == 'WALKING' 
-			.row
-				- if st['transit_details'].present? and st['distance']['text'].to_f <= 0.7
-					.col-lg-6
-						.pull-left
-							- if st['transit_details']['line']['icon'].present?
-								=image_tag "http:#{st['transit_details']['line']['icon']}", size: '22x22'
-							- elsif st['transit_details']['line']['vehicle']['icon'].present?
-								=image_tag "http:#{st['transit_details']['line']['vehicle']['icon']}", size: '22x22'
+- @distance_results.values.map do |st|
+	.row
+		- distance = st[:dresults].present? ? st[:dresults]['distance']['text'] : nil
+		- if distance.present?
+			.col-lg-6
+				.pull-left
+					- if st[:lines].present?
+						- st[:lines].map do |line|
+							.st-line-num{style: "background-color: #{line['color']}"}=line['line']
 
-					.col-lg-6
-						.text-left
-							/ result['end_address'] => "Grand Central Terminal, 89 E 42nd St, New York, NY 10017, USA"
-							- end_adress_arr << result['end_address'].split(',')[0]
-							%b= result['end_address'].split(',')[0]
-							%p.font-sm.text-muted
-								= "#{st['duration']['text']} walk, #{st['distance']['text']} away"
-
-- @distance_results.flatten.each do |result|
-	- result['steps'].map do |st|
-		- if st['travel_mode'] == 'TRANSIT' || st['travel_mode'] == 'WALKING' 
-			.row
-				- if !end_adress_arr.include?(result['end_address'].split(',')[0]) and st['distance']['text'].to_f <= 0.7 
-					.col-lg-6
-						.pull-left
-
-					.col-lg-6
-						.text-left
-							%b= result['end_address'].split(',')[0]
-							%p.font-sm.text-muted
-								= "#{st['duration']['text']} walk, #{st['distance']['text']} away"
+			.col-lg-6
+				.text-left
+					/ result['end_address'] => "Grand Central Terminal, 89 E 42nd St, New York, NY 10017, USA"
+					%b= st[:dest_station]
+					%p.font-sm.text-muted
+						= "#{st[:dresults]['duration']['text']} walk," if st[:dresults].present?
+						= "#{distance} away"

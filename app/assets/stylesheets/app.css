@@ -21,6 +21,16 @@ body{
     width: 93%;
 }
 
+.st-line-num{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    line-height: 29px;
+    display: inline-block;
+}
+
 form footer{
     display: block;
     padding: 7px 14px 15px;

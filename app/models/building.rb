@@ -197,24 +197,34 @@ class Building < ActiveRecord::Base
     latlng = "#{latitude}, #{longitude}"
     key = ENV['GEOCODER_API_KEY']
     #get nearby subway_station
-    radius = ENV['RADIUS'] #in meter
-    nearby_subway_stations = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{latlng}&radius=#{radius}&type=subway_station&key=#{key}"
-    response = HTTParty.get(nearby_subway_stations)
-    nearby_subway_stations = response.parsed_response['results'].map{|r| r['name']}.uniq
+    #radius = ENV['RADIUS'] #in meter
+    distance = ENV['DISTANCE'] || 0.5
+    #nearby_subway_stations = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{latlng}&radius=#{radius}&type=subway_station&key=#{key}"
+    #response = HTTParty.get(nearby_subway_stations)
+    #nearby_subway_stations = response.parsed_response['results'].map{|r| r['name']}.uniq
     
+    nearby_stations = SubwayStation.near([latitude, longitude], distance)
     #getting distance and subway line for each station from origin
-    distance_result = []
-    nearby_subway_stations.map do |dest_station|
+    #distance_result_arr = []
+    distance_result = {}
+    st_names = []
+    #byebug
+    nearby_stations.each_with_index do |station, index|
+      dest_station = station.name
+      #if !st_names.include?(dest_station)
       dir_api_url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{latlng}&destination=#{dest_station}&mode=transit&transit_mode=subway&key=#{key}"
       response = HTTParty.get(dir_api_url)
-      distance_result << response.parsed_response['routes'][0]['legs'] if response.parsed_response['routes'].length > 0
+      #response.parsed_response['routes'][0]['legs'][0]['steps']
+      distance_result[index] = {}
+      distance_result[index][:dest_station] = station.name
+      distance_result[index][:dresults] = response.parsed_response['routes'][0]['legs'][0]['steps'][0] if response.parsed_response['routes'].length > 0
+      distance_result[index][:lines] = station.subway_station_lines.select(:line, :color).as_json
+      #distance_result_arr << distance_result
+      st_names << dest_station
+      #end
     end
-
-    #get place detail
-    # detail_url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJlcBlyPxYwokRLJ9ONJ8qD3w&key=#{key}"
-    # pd_response = HTTParty.get(detail_url)
-    # debugger
-    return distance_result.flatten
+    
+    return distance_result
   end
 
   def neighbohoods
