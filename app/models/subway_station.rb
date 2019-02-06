@@ -3,13 +3,13 @@ class SubwayStation < ActiveRecord::Base
 
 	#validates_uniqueness_of :name
 
-	# include PgSearch
- #  pg_search_scope :search, against: [:name],
- #     :using => { :tsearch => { prefix: true }, 
- #     						 :trigram=> { :threshold => 0.3 }  }
+	include PgSearch
+  pg_search_scope :search, against: [:name],
+     :using => { :tsearch => { prefix: true }, 
+     						 :trigram=> { :threshold => 0.3 }  }
 
-  # reverse_geocoded_by :latitude, :longitude
-  # after_validation :reverse_geocode
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
 
 	def line_color line
 		case line
