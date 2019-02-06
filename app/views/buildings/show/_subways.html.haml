@@ -6,7 +6,9 @@
 				.pull-left
 					- if st[:lines].present?
 						- st[:lines].map do |line|
-							.st-line-num{style: "background-color: #{line['color']}"}=line['line']
+							.st-transport-line.circled{style: "background-color: #{line['color']}"}=line['line']
+							- if [6,7].include?(line['line'].to_i)
+								=image_tag "st_exp_l#{line['line']}", size: '30x30'
 
 			.col-lg-6
 				.text-left

@@ -21,15 +21,21 @@ body{
     width: 93%;
 }
 
-.st-line-num{
+.st-transport-line{
     height: 30px;
     width: 30px;
-    border-radius: 50%;
     text-align: center;
     color: #fff;
     line-height: 29px;
     display: inline-block;
+    font-weight: bolder;
+    font-size: 17px;
 }
+
+.circled{
+    border-radius: 50%;
+}
+
 
 form footer{
     display: block;
