@@ -23,11 +23,22 @@
 	}
 
 	#subways{
+		.st-transport-line{
+	    height: 30px;
+	    width: 30px;
+	    text-align: center;
+	    color: #fff;
+	    line-height: 29px;
+	    display: inline-block;
+	    font-weight: bolder;
+	    font-size: 17px;
+		}
 		.row{
 			padding: 4px 0px;
 			display: flex;
 			align-items: center;
 		}
+
 		.distance-and-time{
 			text-align: left;
 			p{
@@ -72,6 +83,13 @@
 		}
 
 		#subways{
+			.st-transport-line{
+		    height: 22px;
+				width: 22px;
+				line-height: 21px;
+				font-size: 14px;
+				font-weight: 100;
+			}
 			.distance-and-time{
 				text-align: right;
 			}
