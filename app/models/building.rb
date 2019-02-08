@@ -193,10 +193,6 @@ class Building < ActiveRecord::Base
     end
   end
 
-  def distance_results
-    DistanceMatrix.get_data(self)
-  end
-
   def neighbohoods
     first_neighborhood.present? ? first_neighborhood : neighborhood3
   end

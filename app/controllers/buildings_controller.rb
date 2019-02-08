@@ -67,7 +67,7 @@ class BuildingsController < ApplicationController
     @building = Building.find(params[:id])
     @show_map_btn = true
     @reviews = @building.reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
-    @distance_results = @building.distance_results
+    @distance_results = DistanceMatrix.get_data(@building)
     #building + uinits images
     @uploads = @building.image_uploads
 
