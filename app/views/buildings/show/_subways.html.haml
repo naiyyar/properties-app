@@ -9,11 +9,10 @@
 						- st[:lines].map do |line|
 							.st-transport-line.circled{style: "background-color: #{line['color']}"}=line['line']
 							- if [6,7].include?(line['line'].to_i)
-								=image_tag "st_exp_l#{line['line']}", size: '30x30'
+								=image_tag "st_exp_line#{line['line']}", size: '30x30'
 
 			.col-lg-6
 				.distance-and-time
-					/ result['end_address'] => "Grand Central Terminal, 89 E 42nd St, New York, NY 10017, USA"
 					%b= st[:dest_station]
 					%p.text-muted
 						= "#{dt['duration']['text'].singularize} walk," if st[:results].present?
