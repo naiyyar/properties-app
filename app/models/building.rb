@@ -194,37 +194,7 @@ class Building < ActiveRecord::Base
   end
 
   def distance_results
-    latlng = "#{latitude}, #{longitude}"
-    key = ENV['GEOCODER_API_KEY']
-    #get nearby subway_station
-    #radius = ENV['RADIUS'] #in meter
-    distance = ENV['DISTANCE'] || 0.5
-    #nearby_subway_stations = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{latlng}&radius=#{radius}&type=subway_station&key=#{key}"
-    #response = HTTParty.get(nearby_subway_stations)
-    #nearby_subway_stations = response.parsed_response['results'].map{|r| r['name']}.uniq
-    
-    nearby_stations = SubwayStation.near([latitude, longitude], distance, :order => 'distance').limit(6) #.order('distance')
-    #getting distance and subway line for each station from origin
-    #distance_result_arr = []
-    distance_result = {}
-    st_names = []
-    
-    nearby_stations.each_with_index do |station, index|
-      #dest_station = station.name
-      st_dest = "#{station.latitude}, #{station.longitude}"
-      dis_matrix_api = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=#{self.street_address}&destinations=#{st_dest}&key=#{key}"
-      #debugger
-      #dir_api_url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{latlng}&destination=#{dest_station}&mode=transit&transit_mode=subway&key=#{key}"
-      response = HTTParty.get(dis_matrix_api)
-      distance_result[index] = {}
-      distance_result[index][:dest_station] = station.name
-      #distance_result[index][:dresults] = response.parsed_response['routes'][0]['legs'][0]['steps'][0] if response.parsed_response['routes'].length > 0
-      distance_result[index][:results] = response.parsed_response['rows'][0]['elements']
-      distance_result[index][:lines] = station.subway_station_lines.select(:line, :color).as_json
-      distance_result[index][:distance] = station.distance_to([latitude, longitude])
-    end
-    
-    return distance_result
+    DistanceMatrix.get_data(self)
   end
 
   def neighbohoods
