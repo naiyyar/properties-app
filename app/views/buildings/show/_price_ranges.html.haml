@@ -12,7 +12,7 @@
               -if @building.price == 1
                 ="#{number_to_currency(price.max_price, precision: 0)} <"
               -elsif @building.price == 2 or @building.price == 3
-                ="#{number_to_currency(price.min_price, precision: 0)} - #{number_to_currency(price.max_price)}"
+                ="#{number_to_currency(price.min_price, precision: 0)} - #{number_to_currency(price.max_price, precision: 0)}"
               -elsif @building.price == 4
                 ="#{number_to_currency(price.min_price, precision: 0)} +"
                 

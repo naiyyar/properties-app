@@ -203,25 +203,25 @@ class Building < ActiveRecord::Base
     #response = HTTParty.get(nearby_subway_stations)
     #nearby_subway_stations = response.parsed_response['results'].map{|r| r['name']}.uniq
     
-    nearby_stations = SubwayStation.near([latitude, longitude], distance)
+    nearby_stations = SubwayStation.near([latitude, longitude], distance, :order => 'distance').limit(6) #.order('distance')
     #getting distance and subway line for each station from origin
     #distance_result_arr = []
     distance_result = {}
     st_names = []
-    #byebug
+    
     nearby_stations.each_with_index do |station, index|
-      dest_station = station.name
-      #if !st_names.include?(dest_station)
-      dir_api_url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{latlng}&destination=#{dest_station}&mode=transit&transit_mode=subway&key=#{key}"
-      response = HTTParty.get(dir_api_url)
-      #response.parsed_response['routes'][0]['legs'][0]['steps']
+      #dest_station = station.name
+      st_dest = "#{station.latitude}, #{station.longitude}"
+      dis_matrix_api = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=#{self.street_address}&destinations=#{st_dest}&key=#{key}"
+      #debugger
+      #dir_api_url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{latlng}&destination=#{dest_station}&mode=transit&transit_mode=subway&key=#{key}"
+      response = HTTParty.get(dis_matrix_api)
       distance_result[index] = {}
       distance_result[index][:dest_station] = station.name
-      distance_result[index][:dresults] = response.parsed_response['routes'][0]['legs'][0]['steps'][0] if response.parsed_response['routes'].length > 0
+      #distance_result[index][:dresults] = response.parsed_response['routes'][0]['legs'][0]['steps'][0] if response.parsed_response['routes'].length > 0
+      distance_result[index][:results] = response.parsed_response['rows'][0]['elements']
       distance_result[index][:lines] = station.subway_station_lines.select(:line, :color).as_json
-      #distance_result_arr << distance_result
-      st_names << dest_station
-      #end
+      distance_result[index][:distance] = station.distance_to([latitude, longitude])
     end
     
     return distance_result

@@ -1,9 +1,10 @@
 - @distance_results.values.map do |st|
 	.row
-		- distance = st[:dresults].present? ? st[:dresults]['distance']['text'] : nil
+		- distance = st[:distance].to_f
+		- dt = st[:results][0]
 		- if distance.present?
 			.col-lg-6
-				.pull-left
+				.transport-lines.pull-left
 					- if st[:lines].present?
 						- st[:lines].map do |line|
 							.st-transport-line.circled{style: "background-color: #{line['color']}"}=line['line']
@@ -11,9 +12,9 @@
 								=image_tag "st_exp_l#{line['line']}", size: '30x30'
 
 			.col-lg-6
-				.text-left
+				.distance-and-time
 					/ result['end_address'] => "Grand Central Terminal, 89 E 42nd St, New York, NY 10017, USA"
 					%b= st[:dest_station]
 					%p.font-sm.text-muted
-						= "#{st[:dresults]['duration']['text']} walk," if st[:dresults].present?
-						= "#{distance} away"
+						= "#{dt['duration']['text'].singularize} walk," if st[:results].present?
+						= "#{distance.round(2)} miles"

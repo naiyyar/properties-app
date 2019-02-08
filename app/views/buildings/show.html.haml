@@ -9,7 +9,7 @@
     Loading map...
 #pano
 #content.mob-max
-  = render 'buildings/show/top_summary_section'
+  / = render 'buildings/show/top_summary_section'
   - if @building.price.present? or @building.bedroom_types?
     = render 'buildings/show/price_ranges'
   
@@ -24,7 +24,7 @@
   
   .clearfix
     - if @distance_results.present?
-      .subways
+      #subways
         %h3 Subway
         = render 'buildings/show/subways'
   
