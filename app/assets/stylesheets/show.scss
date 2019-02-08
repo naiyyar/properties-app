@@ -97,3 +97,19 @@
 	}
 	
 }
+
+@media screen and (max-width: 320px) {
+	#content{
+		#subways{
+			.distance-and-time{
+				b, p{
+					font-size: 11px;
+				}
+			}
+		}
+		.description, .amenities, .share, .similar, .documents, .price-ranges, #subways {
+		  padding: 18px 18px 0 18px;
+		}
+	}
+	
+}
