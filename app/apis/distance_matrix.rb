@@ -2,10 +2,6 @@ class DistanceMatrix
 	API_KEY = ENV['GEOCODER_API_KEY']
 	DISTANCE = 0.5
 	API_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&key=#{API_KEY}"
-	
-  def initialize
-		
-	end
 
 	def self.get_data building
 		latlng = [building.latitude, building.longitude]

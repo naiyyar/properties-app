@@ -98,12 +98,12 @@
 	
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
 	#content{
 		#subways{
 			.distance-and-time{
 				b, p{
-					font-size: 11px;
+					font-size: 1rem;
 				}
 			}
 		}
