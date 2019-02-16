@@ -25,41 +25,18 @@ class HomeController < ApplicationController
                   }
   end
 
-  def auto_search
-    # results = []
+  def auto_search    
     @search_phrase = params[:term]
     @neighborhoods = Neighborhood.nb_search(@search_phrase) #All neighborhoods
-    # results << @buildings_by_pneighborhood
     @buildings = Building.search(@search_phrase)
-    # results << @buildings_by_name
-    #neighborhoods = Building.search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
-    # results << @buildings_by_neighborhood
-    # @buildings_by_address = Building.search_by_street_address(params[:term]).to_a.uniq(&:building_street_address)
-    # results << @buildings_by_address
     @zipcodes = Building.search_by_zipcodes(@search_phrase) #address and name
-    # results << @buildings_by_zipcode
-    # results << @buildings_by_city
     @companies = ManagementCompany.text_search_by_management_company(@search_phrase)
-
     @city = Building.text_search_by_city(@search_phrase).to_a.uniq(&:city)
-    # results << @search_by_mangement
-    #debugger
-    # if !results.flatten.present?
-    #   @result_type = 'no_match_found'
-    # else
-    #   @result_type = 'match_found'
-    # end
     
     respond_to do |format|
       #format.html: because if login from search split view after searching something session was saving auto_search path as looking for auto_search template
       format.html { redirect_to root_url }
       format.json
-      # format.json{
-      #   @neighborhoods = @neighborhoods
-      #   @buildings = @buildings
-      #   @zipcodes = @zipcodes
-      #   @companies = @companies
-      # }
     end
   end
 

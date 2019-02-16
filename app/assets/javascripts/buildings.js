@@ -1,3 +1,4 @@
+var search_type = '';
 app.buildings = function() {
   this._input = $('#buildings-search-txt');
   source_url = $('#buildings-search-txt').data('src');
@@ -14,7 +15,7 @@ app.buildings.prototype = {
         source: source_url,
         prependTo: '#buildings-search-results',
         select: $.proxy(this._select, this),
-        response: $.proxy(this._response, this),
+        //response: $.proxy(this._response, this),
         open: $.proxy(this._open, this),
         search: $.proxy(this._search, this),
         close: $.proxy(this._close, this)
@@ -28,23 +29,37 @@ app.buildings.prototype = {
 
   _open: function(event, ui) {
     this._input.removeClass('loader');
-    var ul_height = 0;
-    $.each($('ul.ui-autocomplete'), function(){
-      var height = $(this).height();
-      if(height > 0){
-        ul_height = $(this).height();
-      }
-    })
-    
-    if($('#managed_building_id').length == 0){ // Not showing when creating new management company
+    var ul_height = $('ul.ui-autocomplete').outerHeight();
+    var search_input_width = this._input.outerWidth();
+    $('.ui-autocomplete').css('width', search_input_width+'px');
+    console.log(search_type)
+    if(search_type != 'companies'){
+      var elemToAppend = '<div class="no-match-link" style="top: 290px; width: 333px;">' +
+                            '<span class="address">' +
+                              '<b>Building Not Here?</b>' +
+                            '</span>' +
+                            '<a class="add_new_building" href="javascript:void(0);" id="add_new_building">' +
+                              '<b> Add Your Building</b>' +
+                            '</a>'
+                          '</div>';
+      
+      $('#buildings-search-results').html(elemToAppend);
       $('.no-match-link').css('top',ul_height+'px');
-      $('.no-match-link').removeClass('hidden');
-      $('.no-match-link').css('width', $('#buildings-search-txt').width()+30+'px');
+      $('.no-match-link').css('width', search_input_width+'px');
     }
-    // $('.ui-autocomplete').append('<li class="ui-menu-item building_link_li"><span class="address"><b>Building Not Here?</b></span> <a href="javascript:void(0)" id="add_new_building" class="add_new_building"> Add a building</a></li>');
+    
+    //setting container width
+       
+    // if($('#managed_building_id').length == 0){ // Not showing when creating new management company
+    //   $('.no-match-link').css('top',ul_height+'px');
+    //   $('.no-match-link').removeClass('hidden');
+    //   $('.no-match-link').css('width', $('#buildings-search-txt').width()+30+'px');
+    // }
+    
   },
 
   _render: function(ul, item) {
+    search_type = item.search_type
     $("#buildings-search-no-results").css('display','none');
     if($(".no-match-link").hasClass('hidden')){
       $(".no-match-link").removeClass('hidden');
@@ -70,6 +85,7 @@ app.buildings.prototype = {
     if(!$('.no-match-link').hasClass('hidden')){
       $('.no-match-link').addClass('hidden');
     }
+    
     $("#new_unit_building").addClass('hide');
     $("#search_item_form").find('#next_btn').removeClass('disabled')
     
@@ -146,13 +162,6 @@ app.buildings.prototype = {
     return false;
   },
 
-  // _close: function(){
-  //   //Hiding no match found - add new building link
-  //   if(!$('.no-match-link').hasClass('hidden')){
-  //     setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
-  //   }
-  // },
-
   _close: function(){
     //Hiding no match found - add new building link
      if(!$("ul.ui-autocomplete").is(":visible")) {
@@ -165,26 +174,26 @@ app.buildings.prototype = {
       }
   },
 
-  _response: function(event, ui){
+  // _response: function(event, ui){
          
-    if(ui.content.length === 0){
-      this._input.removeClass('loader');
-      var ul = $("#buildings-search-no-results");
-      // no_match_text = '<div class="no-match-link hidden">\
-      //                   <span class="address"><b>Building Not Here?</b></span>\ 
-      //                   <a href="javascript:void(0);" id="add_new_building" class="add_new_building"> Add Your Building</a>\
-      //                 </div>'
+  //   if(ui.content.length === 0){
+  //     this._input.removeClass('loader');
+  //     var ul = $("#buildings-search-no-results");
+  //     // no_match_text = '<div class="no-match-link hidden">\
+  //     //                   <span class="address"><b>Building Not Here?</b></span>\ 
+  //     //                   <a href="javascript:void(0);" id="add_new_building" class="add_new_building"> Add Your Building</a>\
+  //     //                 </div>'
       
-      var markup = [
-        '<span class="address"><b>Building Not Here?</b></span>',
-        '<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> <b>Add Your Building</b></a>'
-      ];
-      var search_field_width = $('#buildings-search-txt').width()+30;
-      ul_li = $('<li class="ui-menu-item no-result-li">').append(markup.join(''));
-      ul.html(ul_li);
-      ul.css({'display': 'block','width': search_field_width+'px','top': '36px','left': '15px','padding':'0px'});
+  //     var markup = [
+  //       '<span class="address"><b>Building Not Here?</b></span>',
+  //       '<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> <b>Add Your Building</b></a>'
+  //     ];
+  //     var search_field_width = $('#buildings-search-txt').width()+30;
+  //     ul_li = $('<li class="ui-menu-item no-result-li">').append(markup.join(''));
+  //     ul.html(ul_li);
+  //     ul.css({'display': 'block','width': search_field_width+'px','top': '36px','left': '15px','padding':'0px'});
       
-    }
-  }
+  //   }
+  // }
 
 };

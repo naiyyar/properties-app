@@ -1,4 +1,4 @@
-window.addEventListener("load", function() {
+//window.addEventListener("load", function() {
   // $input = $("[data-behavior='autocomplete']")
 
   // var options = {
@@ -49,4 +49,4 @@ window.addEventListener("load", function() {
   // $input.easyAutocomplete(options)
   //var magIcon = '<span class="input-magnifier"><a class="btn btn-blue"><span class="icon-magnifier"></span></a></span>'
   //$('.home-search-form .easy-autocomplete').append(magIcon);
-});
+//});

@@ -50,8 +50,10 @@ class BuildingsController < ApplicationController
     session[:form_data] = nil if session[:form_data].present?
     if params[:management].present?
       @buildings = Building.where('management_company_id is null')
+      @search_type = 'companies'
     else
       @buildings = Building.all
+      @search_type = 'building'
     end
     @buildings = @buildings.text_search(params[:term]).reorder('building_street_address ASC').limit(10).includes(:units)
     @building = Building.where(id: params[:building_id]).first if params[:building_id].present?
