@@ -27,20 +27,21 @@ class HomeController < ApplicationController
 
   def auto_search
     # results = []
-    @neighborhoods = Neighborhood.nb_search(params[:term]) #All neighborhoods
+    @search_phrase = params[:term]
+    @neighborhoods = Neighborhood.nb_search(@search_phrase) #All neighborhoods
     # results << @buildings_by_pneighborhood
-    @buildings = Building.search(params[:term])
+    @buildings = Building.search(@search_phrase)
     # results << @buildings_by_name
     #neighborhoods = Building.search_by_neighborhood(params[:term]).to_a.uniq(&:neighborhood)
     # results << @buildings_by_neighborhood
     # @buildings_by_address = Building.search_by_street_address(params[:term]).to_a.uniq(&:building_street_address)
     # results << @buildings_by_address
-    @zipcodes = Building.search_by_zipcodes(params[:term]) #address and name
+    @zipcodes = Building.search_by_zipcodes(@search_phrase) #address and name
     # results << @buildings_by_zipcode
     # results << @buildings_by_city
-    @companies = ManagementCompany.text_search_by_management_company(params[:term])
+    @companies = ManagementCompany.text_search_by_management_company(@search_phrase)
 
-    @city = Building.text_search_by_city(params[:term]).to_a.uniq(&:city)
+    @city = Building.text_search_by_city(@search_phrase).to_a.uniq(&:city)
     # results << @search_by_mangement
     #debugger
     # if !results.flatten.present?

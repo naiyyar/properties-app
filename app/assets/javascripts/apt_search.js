@@ -1,134 +1,128 @@
-// app.apartments = function() {
-//   this._input = $('#search_term');
-//   this._initAutocomplete();
-// };
+app.apartments = function() {
+  this._input = $('#search_term');
+  this._initAutocomplete();
+  var magIcon = '<span class="input-magnifier"><a class="btn btn-blue"><span class="icon-magnifier"></span></a></span>'
+	$('.home-search-form #apt-search-form').append(magIcon);
+};
 
-// app.apartments.prototype = {
-//   _initAutocomplete: function() {
-//     $.widget( "custom.catcomplete", $.ui.autocomplete, {
-//       _create: function() {
-//         this._super();
-//         this.widget().menu( "option", "items", "> :not(.ui-autocomplete-group)" );
-//       },
-//       _renderMenu: function( ul, items ) {
-//         var that = this,
-//           currentCategory = "";
-//         $.each( items, function( index, item ) {
-//           var li;
-//           if(item.category != undefined){
-//             if ( item.category != currentCategory ) {
-//               ul.append( "<li class='ui-autocomplete-group'><b>" + item.category + "</b></li>" );
-//               currentCategory = item.category;
-//             }
-//             li = that._renderItemData( ul, item );
-//             if ( item.category ) {
-//               li.attr("aria-label", item.category);
-//             }
-//           }
-//         });
-//       },
+app.apartments.prototype = {
+  _initAutocomplete: function() {
+    $.widget( "custom.catcomplete", $.ui.autocomplete, {
+      _create: function() {
+        this._super();
+        this.widget().menu( "option", "items", "> :not(.ui-autocomplete-group)" );
+      },
+      _renderMenu: function( ul, items ) {
+        var that = this,
+          currentCategory = "";
+        $.each( items, function( index, item ) {
+          var li;
+          if(item.category != undefined){
+            if ( item.category != currentCategory ) {
+              ul.append( "<li class='ui-autocomplete-group'><b>" + item.category + "</b></li>" );
+              currentCategory = item.category;
+            }
+            li = that._renderItemData( ul, item );
+            if ( item.category ) {
+              li.attr("aria-label", item.category);
+            }
+          }
+        });
+      },
 
-//       _renderItem: function(ul, item) {
-//         if(item.search_term == undefined){
-//           search_term = item.value
-//         }
-//         else{
-//           search_term = item.search_term
-//         }
-//         $('#search_term').removeClass('loader');
-//         var items = ''
-//         if(search_term != 'No matches found - Add Your Building'){
-//           if(search_term != undefined){
-//             items = '<p class="address"><b>' + search_term + '</b></p>';
-//           }
-//         }
+      _renderItem: function(ul, item) {
+        if(item.search_term == undefined){
+          search_term = item.value
+        }
+        else{
+          search_term = item.search_term
+        }
+        $('#search_term').removeClass('loader');
         
-//         var markup = [items];
-//         $('ul.ui-autocomplete').css('left','10');
-//         return $('<li>')
-//           .append(markup.join(''))
-//           .appendTo(ul);
-//       }
-//     });
+        //Hightliting searched phrase
+        search_phrase = item.search_phrase.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        var regexp = new RegExp('(' + search_phrase + ')', 'gi'),
+	        label = search_term.replace(regexp, '<b>$1</b>');
 
-//     this._input.catcomplete({
-//       source: '/auto_search.json',
-//       appendTo: '#apt-search-results',
-//       select: $.proxy(this._select, this),
-//       // select: function(event, ui){
-//       //   console.log(ui.item)
-//       // },
-//       open: $.proxy(this._open, this),
-//       search: $.proxy(this._search, this),
-//       close: $.proxy(this._close, this)
-//     });
-//   },
+        var items = ''
+        if(search_term != 'No matches found - Add Your Building'){
+          if(search_term != undefined){
+            items = '<p>'+ label + '</p>';
+          }
+        }
+        
+        var markup = [items];
+        $('ul.ui-autocomplete').css('left','10');
+        return $('<li>')
+          .append(markup.join(''))
+          .appendTo(ul);
+      }
+    });
 
-//   _search: function(e,ui){
-//     this._input.addClass('loader');
-//   },
+    this._input.catcomplete({
+      source: '/auto_search.json',
+      appendTo: '#apt-search-results',
+      select: $.proxy(this._select, this),
+      // select: function(event, ui){
+      //   console.log(ui.item)
+      // },
+      open: $.proxy(this._open, this),
+      search: $.proxy(this._search, this),
+      close: $.proxy(this._close, this)
+    });
+  },
 
-//   _open: function(event, ui) {
-//     this._input.removeClass('loader');
-//     var ul_height = 0;
-//     $.each($('ul.ui-autocomplete'), function(){
-//       var height = $(this).height();
-//       if(height > 0){
-//         ul_height = $(this).height();
-//       }
-//     });
-    
-//     if($('.apt-search-text-shared').length >= 1){
-//       $('ul.ui-autocomplete').css('width', $('.apt-search-text-shared').width()+20+'px');
-//       $('.no-match-link').addClass('no-match-position-left');
-//     }else{
-//       $('ul.ui-autocomplete').css('width', $('#search_term').width()+80+'px');
-//     }
-//     $('.no-match-link').css('top',ul_height+'px');
-//     $('.no-match-link').removeClass('hidden');
-//     $('.no-match-link').css('width',$('ul.ui-autocomplete').width()+2+'px');
-//   },
+  _search: function(e,ui){
+    this._input.addClass('loader');
+  },
 
-//   _select: function(e, ui) {
-//     console.log(ui)
-//     if(ui.item != undefined){
-//       search_term = ui.item.search_term;
-//       this._input.val(search_term);
-      
-//       url = '';
-//       if(ui.item.term_address != undefined){
-//         url = '/address/'+ui.item.term_address;
-//       }else if(ui.item.management_company_name != undefined){
-//         url = '/management_company/'+ui.item.management_company_name;
-//       }else if(ui.item.term_zipcode != undefined){
-//         url = '/zipcode/'+ui.item.term_zipcode;
-//       }else if(ui.item.neighborhoods != undefined){
-//         url = '/neighborhoods/'+ui.item.neighborhoods;
-//       }
-//       else{
-//         url = '/city/'+ui.item.term_city;
-//       }
-    
-//       $('.no-match-link').addClass('hidden');
-      
-//       //Submitting search form
-//       window.location = url;
-//     }
-//     //hiding autocomplete search results
-//     if($("ul.ui-autocomplete").is(":visible")) {
-//       $("ul.ui-autocomplete").hide();
-//     }
-//     return false;
-//   },
+  _open: function(event, ui) {
+    this._input.removeClass('loader');
+    var ul_height = $('ul.ui-autocomplete').outerHeight() + 44;
+
+    $('#apt-search-form').find('.no-match-link').remove();
+    var elemToAppend = '<div class="no-match-link" style="box-shadow: 0px 1px 4px rgba(0,0,0,0.6);">' +
+                       '<a href="/buildings/contribute?results=no-matches-found">'+
+                       '<b>No matches found - Add Your Building</b></a></div>';
+    $('#apt-search-form').append(elemToAppend);
+
+    if(window.innerWidth <= 414 && $('.split-view-seach').length > 0){
+    	//making full width when on mobile view
+    	$('.ui-autocomplete').css('width', '100%');
+    	$('.ui-autocomplete').css('left', '0px');
+    	$('.no-match-link').css('top',ul_height+'px');
+    }else{
+    	//setting container width
+	    var search_input_width = this._input.outerWidth();
+    	$('.ui-autocomplete').css('width', search_input_width+'px');
+	    $('.no-match-link').css('top',(ul_height+4)+'px');
+    }
+
+    $('.no-match-link').css('width', $('.ui-autocomplete').width()+'px');
+  },
+
+  _select: function(e, ui) {
+    if(ui.item != undefined){
+      this._input.val(search_term);
+      $('.no-match-link').addClass('hidden');
+      //Submitting search form
+      window.location = ui.item.url;
+    }
+    //hiding autocomplete search results
+    if($("ul.ui-autocomplete").is(":visible")) {
+      $("ul.ui-autocomplete").hide();
+    }
+    return false;
+  },
   
-//   _close: function(){
-//     //Hiding no match found - add new building link
-//     if(!$("ul.ui-autocomplete").is(":visible")) {
-//       $("ul.ui-autocomplete").show();
-//     }
-//     else{
-//       setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
-//     }    
-//   }
+  _close: function(){
+    //Hiding no match found - add new building link
+    if(!$("ul.ui-autocomplete").is(":visible")) {
+      $("ul.ui-autocomplete").show();
+    }
+    else{
+      setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
+    }    
+  }
 
-// };
+};

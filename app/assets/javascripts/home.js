@@ -425,12 +425,12 @@
 
     function hideAutoSearchList(){
         //#setInterval because no match link was not working: hiding too early
-        // setTimeout(function(){
-        //     if($("ul.ui-autocomplete").is(":visible")) {
-        //         $("ul.ui-autocomplete").hide();
-        //     }
-        //     $('.no-match-link').addClass('hidden');
-        // }, 200)
+        setTimeout(function(){
+            if($("ul.ui-autocomplete").is(":visible")) {
+                $("ul.ui-autocomplete").hide();
+            }
+            $('.no-match-link').addClass('hidden');
+        }, 200)
     }
      
 

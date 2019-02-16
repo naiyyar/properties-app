@@ -69,9 +69,9 @@
   /*height: 3.5em;*/
   line-height: 44px;
   position: absolute;
-  width: 100%;
+  /*width: 99.7%;*/
   text-align: center;
-  left: 0px;
+  left: 1px;
 }
 
 .ui-autocomplete{
@@ -136,4 +136,10 @@ ul.ui-autocomplete li.building_link_li a:hover, .no-match-link a:hover{
 }
 .ui-autocomplete-group:hover{
   background-color: #f8f8f8 !important;
+}
+
+@media screen and (max-width: 767px) {
+  .split-view-seach .no-match-link{
+    position: fixed;
+  }
 }

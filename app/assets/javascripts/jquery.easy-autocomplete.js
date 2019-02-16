@@ -1254,6 +1254,7 @@ var EasyAutocomplete = (function(scope) {
 			}
 
 			function bindKeyup() {
+				var c_e_offset = 0;
 				$field
 				.off("keyup")
 				.keyup(function(event) {
@@ -1278,6 +1279,19 @@ var EasyAutocomplete = (function(scope) {
 
 								selectElement(selectedElement);
 
+								//TODO: Scroll ul on key down => up arrow
+								// var sc_cont = $(".easy-autocomplete-container ul");
+								// var current_elem = $(".easy-autocomplete-container ul li.selected");
+								// sc_cont_height = sc_cont.height();
+
+								// var c_e_offset = current_elem[0].offsetTop;
+    				// 		console.log(c_e_offset + ':' + (sc_cont_height - 46));
+    				// 		if(current_elem && c_e_offset < sc_cont_height - 46){
+    				// 			sc_cont.animate({ scrollTop: c_e_offset - (sc_cont_height - 46) }, '100', 'swing', function(){
+    				// 				return false;
+    				// 			});
+    				// 		}
+
 							}						
 						break;
 
@@ -1297,6 +1311,21 @@ var EasyAutocomplete = (function(scope) {
 								// var first_elem = $(".easy-autocomplete-container ul li:first");
 								// sc_cont.scrollTop(0);//set to top
     						// sc_cont.scrollTop(first_elem.offset().top - sc_cont.height());
+
+    						/* my own implementation 
+								 *
+    						 */
+
+  						 	var sc_cont = $(".easy-autocomplete-container ul");
+								var current_elem = $(".easy-autocomplete-container ul li.selected");
+								sc_cont_height = sc_cont.height();
+
+								var c_e_offset = current_elem[0].offsetTop;
+    						if(current_elem && c_e_offset >= sc_cont_height - 46){
+    							sc_cont.animate({scrollTop: c_e_offset - (sc_cont_height - 46)}, '100', 'swing', function(){
+    								return false;
+    							});
+    						}
 								
 							}
 

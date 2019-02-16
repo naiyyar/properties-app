@@ -1199,16 +1199,19 @@ a.userHandler {
 .searchIcon.active {
     color: #3a3a3a;
 }
+#apt-search-form{
+    width: 93%;
+}
 .search input {
     background-color: #e8e8e8;
     color: #3a3a3a;
     border: 0 none;
     font-size: 13px;
-    margin: 6px 0 0 5px;
-    width: 88%;
+    margin: 6px 0 0 0px;
     -webkit-appearance: none;
     padding: 11px 9px 11px 26px;
     border-bottom: 1px solid #ebebeb;
+    width: 100%;
 }
 .search input:hover{
     /*background-color: #f5f8f9;*/
@@ -6279,10 +6282,10 @@ select.custom-arrow {
         font-size: 20px;
     }
 
-    .apt-search-shared .no-match-link{
+    /*.apt-search-shared .no-match-link{
         left: 20px !important;
         top: 105px;
-    }
+    }*/
 
     .expanded .leftNav ul li a {
         padding: 10px 10px;
@@ -6690,6 +6693,9 @@ select.custom-arrow {
     }
     .searchIcon.active {
         color: #333;
+    }
+    #apt-search-form{
+        width: 100%;
     }
     .search input {
         background-color: #fff;
