@@ -487,9 +487,9 @@ a.link_underlined:hover{
     cursor: pointer;
     z-index: 9999;
 }
-.clearSearchText:hover{
+/*.clearSearchText:hover{
     color: #a00;
-}
+}*/
 h3.unit_name_header{
     background-color: #eee;
     padding: 10px 4px !important;

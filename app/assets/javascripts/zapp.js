@@ -561,15 +561,15 @@
     $('#datepicker').datepicker();
 
     //clear text search
-    $('.clearSearchText').click(function(){
-        var $that = $(this);
-        $that.css('color','#a00');
-        $("#search_term").val('');
-        setTimeout(function(){
-            $that.css('color','#333');
-        },500);
+    // $('.clearSearchText').click(function(){
+    //     var $that = $(this);
+    //     $that.css('color','#a00');
+    //     $("#search_term").val('');
+    //     setTimeout(function(){
+    //         $that.css('color','#333');
+    //     },500);
         
-    })
+    // })
 
     //clearing out unit modal fields on building show page
     $("#new_unit_modal .close").click(function(){
