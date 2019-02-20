@@ -18,11 +18,13 @@ Rails.application.routes.draw do
     get '/blog/:slug' => 'posts#show', :as => :buttercms_post
   end
 
-  resources :management_companies do
+  resources :management_companies, except: [:show] do
     member do
       get :managed_buildings
     end
   end
+
+  get 'no-fee-management-companies-nyc/:id' => 'management_companies#show', as: :no_fee_company
 
   get 'load_more_reviews', to: 'management_companies#load_more_reviews', as: :load_more_reviews
   

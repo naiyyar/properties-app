@@ -6,9 +6,8 @@ class HomeController < ApplicationController
 
   def index
     @home_view = true
-    @meta_desc = 'Transparentcity is the largest directory of links to no fee, '+
-                  'no broker apartment buildings and reviews in NYC. '+  
-                  'Rent from the source. Bypass middleman. Save money.'
+    @meta_desc = "Search through #{Building.all.count} buildings of no fee apartments in NYC, no fee rentals in NYC, 
+                  for rent by owner in NYC and apartment reviews NYC. Rent direct and bypass brokers."
   end
 
   def load_infobox
@@ -43,7 +42,7 @@ class HomeController < ApplicationController
   def search
     search_term = params['search_term']
     if search_term != 'glyphicons-halflings-regular'
-      if params[:searched_by] != 'address' and params[:searched_by] != 'management_company'
+      if params[:searched_by] != 'address' and params[:searched_by] != 'no-fee-management-companies-nyc'
         @zoom = (@search_string == 'New York' ? 12 : 14)
         unless @search_string == 'New York'
           @brooklyn_neighborhoods =  @search_string #used to add border boundaries of brooklyn and queens
@@ -53,7 +52,7 @@ class HomeController < ApplicationController
           if params[:searched_by] == 'zipcode'
             @buildings = @searched_buildings = Building.where('zipcode = ?', @search_string)
             @boundary_coords << Gcoordinate.where(zipcode: @search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-          elsif params[:searched_by] == 'neighborhoods'
+          elsif params[:searched_by] == 'no-fee-apartments-nyc-neighborhoods'
             @buildings = @searched_buildings = Building.buildings_in_neighborhood(@search_string)
             @boundary_coords << @neighborhood_coordinates unless manhattan_kmls.include?(@search_string)
           else
@@ -80,7 +79,7 @@ class HomeController < ApplicationController
         #searching because some address has extra white space in last so can not match exactly with address search_term
         building = Building.where('building_street_address like ?', "%#{params[:search_term]}%") if building.blank?
         redirect_to building_path(building.first) if building.present?
-      elsif params[:searched_by] == 'management_company'
+      elsif params[:searched_by] == 'no-fee-management-companies-nyc'
         @company = ManagementCompany.where(name: params[:search_term])
         redirect_to management_company_path(@company.first) if @company.present?
       end
@@ -113,9 +112,10 @@ class HomeController < ApplicationController
       end
       
       @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
+
       @meta_desc = "#{@tab_title_text.titleize} has #{@buildings.count if @buildings.present?} "+ 
-                  "apartment rental buildings in NYC you can rent directly from and pay no broker fees. "+ 
-                  "Click to view #{@photos_count} photos and #{@reviews_count} reviews."
+                  "no fee apartment, no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. "+ 
+                  "View #{@photos_count} photos and #{@reviews_count} reviews."
     end
   end
 

@@ -51,7 +51,7 @@ if @companies.present?
   json.array! @companies do |company|
     json.id company.id
     json.search_term "#{company.name}"
-    json.url management_company_path(company)
+    json.url no_fee_company_path(id: company)
     json.category 'Management Company'
     json.search_phrase @search_phrase
   end
@@ -61,7 +61,7 @@ if @neighborhoods.present?
   json.array! @neighborhoods do |nb|
     json.id nb.id
     json.search_term "#{nb.name}, #{nb.formatted_city}, NY"
-    json.url "/neighborhoods/#{nb.formatted_name}"
+    json.url "/no-fee-apartments-nyc-neighborhoods/#{nb.formatted_name}"
     json.category 'Neighborhood'
     json.search_phrase @search_phrase
   end
@@ -82,7 +82,7 @@ end
 if @buildings.present? #and @buildings_by_address.blank? => Removed due to having building name in address
   json.array! @buildings do |building|
     json.id building.id
-    if building.building_name.present?
+    if building.building_name.present? and building.building_name != building.building_street_address
       json.search_term "#{building.building_name} - #{building.building_street_address}, #{building.city}, #{building.state}, #{building.zipcode}"
     else
       json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"

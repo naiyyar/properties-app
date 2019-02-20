@@ -40,14 +40,11 @@ class ManagementCompaniesController < ApplicationController
       @lng = buildings.first.longitude
       @zoom = buildings.length > 60 ? 13 : 11
       @hash = Building.buildings_json_hash(buildings.includes(:uploads, :building_average, :votes))
-      #@managed_buildings = buildings.includes(:uploads, :building_average, :votes) unless buildings.kind_of? Array
-      
-      #@hash = @managed_buildings.select(:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :city, :state).as_json
     end
 
-    @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} "+ 
-                  "apartment rental buildings in NYC you can rent directly from and pay no broker fees. "+
-                  "Click to view #{@building_photos.count} photos and #{@management_company.aggregate_reviews} reviews."
+    @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 
+                  for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
+                  Click to view #{@building_photos.count} photos and #{@management_company.aggregate_reviews} reviews."
    end
 
   # GET /management_companies/new

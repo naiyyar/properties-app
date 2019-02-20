@@ -182,16 +182,14 @@ module HomeHelper
 		unless borough == 'BRONX'
 			borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase.gsub(' ', '-'))
 			search_term = "#{neighborhood.downcase.gsub(' ', '-')}-#{borough}"
-			search_url = "/neighborhoods/#{search_term}"
+			search_url = "/no-fee-apartments-nyc-neighborhoods/#{search_term}"
 			if params[:sort_by].present? and params[:filter].present?
 				"#{search_url}?sort_by=#{params[:sort_by]}&#{filter_params}"
 			elsif params[:sort_by].present?
-				#request.fullpath
 				"#{search_url}?sort_by=#{params[:sort_by]}"
 			elsif params[:filter].present?
 				"#{search_url}"
 			else
-				#"/search?search_term=#{searchable_text(neighborhood, borough)}&neighborhoods=#{neighborhood}"
 				filter_params.present? ? "#{search_url}?#{filter_params}" : "#{search_url}"
 			end
 		else
@@ -232,7 +230,6 @@ module HomeHelper
 		borough = Neighborhood.where(name: nb, boroughs: area.upcase)
 		link_to search_link(nb, area), data: { nbname: nb, st: searchable_text(nb, area) } do
 			if borough.present?
-				#borough.first.nb_name_with_counts
 				"#{borough.first.name} (<span>#{borough.first.buildings_count}</span>)".html_safe
 			else
 				"#{nb} (#{parent_neighborhoods_count(nb)})"
