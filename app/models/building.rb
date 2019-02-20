@@ -685,7 +685,6 @@ class Building < ActiveRecord::Base
             neighborhood1 = neighborhood
           elsif predifined_neighborhoods.include? neighborhood
             neighborhood1 = neighborhood if neighborhood1.blank?
-            #neighborhood2 = neighborhood if neighborhood2.blank?
           elsif just_parent_neighborhoods.include? neighborhood
             neighborhood2 = neighborhood
           elsif parent_neighborhoods.include? neighborhood #checking parent of main neighborhood
@@ -693,17 +692,21 @@ class Building < ActiveRecord::Base
             neighborhood1 = neighborhood if neighborhood1.blank? and index >= 2
           elsif grandparent_neighborhoods.include? neighborhood #checking grandparent of main neighborhood
             neighborhood3 = neighborhood
-            #neighborhood1 = neighborhood if neighborhood1.blank?
             neighborhood2 = neighborhood if neighborhood2.blank? and neighborhood1.blank?
           else
             neighborhood1 = neighborhood if neighborhood1.blank?
+            parent_neighborhood = 'East Village' if 
             neighborhood2 = parent_neighborhood
           end
           #end if
         end
       end #end search loop
     else
-      neighborhood1 = self.neighborhood
+      if ['Alphabet City','Ukrainian Village'].include?(self.neighborhood)
+        neighborhood1 = 'East Village'
+      else
+        neighborhood1 = self.neighborhood
+      end
       neighborhood2 = parent_neighborhood
       neighborhood3 = self.neighborhood3
     end #end search if
@@ -731,9 +734,7 @@ class Building < ActiveRecord::Base
 
   def update_neighborhood
     if neighborhoods.present?
-      #if self.neighborhood != neighborhoods[0] or self.neighborhoods_parent != neighborhoods[1]
       self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1], neighborhood3: neighborhoods[2])
-      #end
     end
   end
 

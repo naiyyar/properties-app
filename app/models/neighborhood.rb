@@ -32,13 +32,13 @@ class Neighborhood < ActiveRecord::Base
 	end
 
   def formatted_name
-    return "#{name.downcase.gsub(' ', '-')}-#{formatted_city}"
+    return "#{name.downcase.gsub(' ', '-')}-#{formatted_city.downcase}"
   end
 
   def formatted_city
     city = boroughs.titleize
     city = 'New York' if city == 'Manhattan'
-    city.gsub('', '')
+    city.gsub(' ', '')
   end
 
 end
