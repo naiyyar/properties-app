@@ -11,9 +11,14 @@ class HomeController < ApplicationController
   end
 
   def load_infobox
-    @current_user = User.find(params[:current_user_id])
+    if params[:current_user_id].present?
+      @current_user = User.find(params[:current_user_id])
+      fav_color_class = building.favorite_by?(@current_user) ? 'filled-heart' : 'unfilled-heart'
+    else
+      fav_color_class = 'unfilled-heart'
+    end
     building = Building.find(params[:object_id])
-    fav_color_class = building.favorite_by?(@current_user) ? 'filled-heart' : 'unfilled-heart'
+    
     
     render json: { html: render_to_string(:partial => "/layouts/shared/custom_infowindow", 
                                           :locals => {  building: building,
