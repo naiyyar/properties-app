@@ -77,6 +77,9 @@ app.apartments.prototype = {
   },
 
   _open: function(event, ui) {
+    // Fix for double tap on ios devices
+    $('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
+    
     this._input.removeClass('loader');
     var ul_height = $('ul.ui-autocomplete').outerHeight() + 44;
 
