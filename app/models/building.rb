@@ -704,10 +704,14 @@ class Building < ActiveRecord::Base
     else
       if ['Alphabet City','Ukrainian Village'].include?(self.neighborhood)
         neighborhood1 = 'East Village'
+        neighborhood2 = 'Lower Manhattan'
+      elsif self.neighborhood == 'East Village'
+        neighborhood1 = self.neighborhood
+        neighborhood2 = 'Lower Manhattan'
       else
         neighborhood1 = self.neighborhood
+        neighborhood2 = parent_neighborhood
       end
-      neighborhood2 = parent_neighborhood
       neighborhood3 = self.neighborhood3
     end #end search if
 

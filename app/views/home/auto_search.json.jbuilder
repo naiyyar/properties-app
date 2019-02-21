@@ -60,7 +60,7 @@ end
 if @neighborhoods.present?
   json.array! @neighborhoods do |nb|
     json.id nb.id
-    json.search_term "#{nb.name}, #{nb.formatted_city}, NY"
+    json.search_term "#{nb.name}, #{nb.city_name}, NY"
     json.url "/no-fee-apartments-nyc-neighborhoods/#{nb.formatted_name}"
     json.category 'Neighborhood'
     json.search_phrase @search_phrase
@@ -117,7 +117,7 @@ if @city.present?
     json.id building.id
     #condition because if city name and neighborhood name is same then search will have duplicates items
     json.search_term "#{building.city}, #{building.state}"
-    json.url "/city/#{building.formatted_city}-#{building.state.downcase}"
+    json.url "/no-fee-apartments-nyc-city/#{building.formatted_city}-#{building.state.downcase.gsub(' ','')}"
     json.category 'City'
     json.search_phrase @search_phrase
   end

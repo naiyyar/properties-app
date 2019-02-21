@@ -41,4 +41,10 @@ class Neighborhood < ActiveRecord::Base
     city.gsub(' ', '')
   end
 
+  def city_name
+    city = boroughs.titleize
+    city = 'New York' if city == 'Manhattan'
+    city.gsub('', '')
+  end
+
 end
