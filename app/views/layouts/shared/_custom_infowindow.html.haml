@@ -44,7 +44,7 @@
         %a{"data-objectid" => "#{building.id}", href: 'javascript:;', title: 'Save', class: "favourite save_link_#{building.id} #{fav_color_class}", onclick: click_action}
           %span.fa.fa-heart
       
-      = link_to heart_icon, 'javascript:;', class: "save_link_#{building.id} modal-su favourite #{fav_color_class}" if !current_user.present?
+      = link_to heart_icon, 'javascript:;', class: "save_link_#{building.id} modal-su favourite #{fav_color_class}", onclick: 'openSuModal()' if !current_user.present?
   
   .clearfix
   .infoButtons
