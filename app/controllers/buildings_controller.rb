@@ -25,6 +25,7 @@ class BuildingsController < ApplicationController
     current_user.favorite(@building)
     respond_to do |format|
       format.js
+      format.json{ render json: { success: true } }
     end
   end
 

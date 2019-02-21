@@ -132,9 +132,10 @@ module BuildingsHelper
 		'<span class="fa fa-heart"></span>'.html_safe
 	end
 
-	def heart_link object
+	def heart_link object, user
 		#To save as favourite sending js request
 		#to unsave as favourite sending json request
+		@current_user = current_user.present? ? current_user : user
 		link_to heart_icon, saved_object_url(object), 
 												remote: remote(object), class: fav_classes(object), 
 												title: heart_link_title(object), 
@@ -146,19 +147,19 @@ module BuildingsHelper
 	end
 
 	def remote object
-		(object.favorite_by?(current_user) ? false : true )
+		(object.favorite_by?(@current_user) ? false : true )
 	end
 
 	def saved_object_url object
-		object.favorite_by?(current_user) ? 'javascript:;' : favorite_path(object_id: object.id)
+		object.favorite_by?(@current_user) ? 'javascript:;' : favorite_path(object_id: object.id)
 	end
 
 	def heart_link_title(object)
-		(current_user.present? and object.favorite_by?(current_user)) ? 'Unsave' : 'Save'
+		(@current_user.present? and object.favorite_by?(@current_user)) ? 'Unsave' : 'Save'
 	end
 
 	def saved_color_class(object)
-		(current_user.present? and object.favorite_by?(current_user)) ? 'filled-heart' : 'unfilled-heart'
+		(@current_user.present? and object.favorite_by?(@current_user)) ? 'filled-heart' : 'unfilled-heart'
 	end
 
 	def check_availability_link building, sl_class=nil

@@ -102,8 +102,8 @@ end
 #   end
 # end
 
-if @zipcode.present?
-  json.array! @zipcode do |building|
+if @zipcodes.present?
+  json.array! @zipcodes do |building|
     json.id building.id
     json.search_term "#{building.zipcode} - #{building.city}, #{building.state}"
     json.url "/zipcode/#{building.zipcode}-#{building.formatted_city}"
