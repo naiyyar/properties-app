@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   before_action :reset_session, only: [:index, :auto_search]
   before_action :get_neighborhoods, only: [:index]
   before_action :format_search_string, only: :search
+  before_action :save_as_favourite, only: [:search]
 
   def index
     @home_view = true
@@ -156,5 +157,13 @@ class HomeController < ApplicationController
     @searched_neighborhoods = "#{@search_string}"
     @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
     @tab_title_text = "#{@search_string} #{@borough_city}"
+  end
+
+  def save_as_favourite
+    if session[:favourite_object_id].present? and current_user.present?
+      building = Building.find(session[:favourite_object_id])
+      current_user.favorite(building)
+      session[:favourite_object_id] = nil
+    end
   end
 end

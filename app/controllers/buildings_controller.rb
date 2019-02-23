@@ -1,7 +1,7 @@
 class BuildingsController < ApplicationController 
-  load_and_authorize_resource
-  before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search]
-  #after_action :set_distance_matrix, only: [:show]
+  load_and_authorize_resource # except: :favorite
+  before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
+  before_action :save_as_favourite, only: [:show]
 
   def index
     @filterrific = initialize_filterrific(
@@ -21,8 +21,12 @@ class BuildingsController < ApplicationController
   end
 
   def favorite
-    @building = Building.find(params[:object_id])
-    current_user.favorite(@building)
+    if current_user.present?
+      @building = Building.find(params[:object_id])
+      current_user.favorite(@building)
+    else
+      session[:favourite_object_id] = params[:object_id]
+    end
     respond_to do |format|
       format.js
       format.json{ render json: { success: true } }
@@ -218,6 +222,14 @@ class BuildingsController < ApplicationController
   def unit_params
     params[:unit] = params[:building][:units_attributes]['0']
     params.require(:unit).permit(:name, :square_feet, :number_of_bathrooms, :number_of_bedrooms)
+  end
+
+  def save_as_favourite
+    if session[:favourite_object_id].present? and current_user.present?
+      building = Building.find(session[:favourite_object_id])
+      current_user.favorite(building)
+      session[:favourite_object_id] = nil
+    end
   end
 
 end

@@ -60,7 +60,6 @@ class ApplicationController < ActionController::Base
           @unit_object = @unit
           flash_message = 'Unit created successfully.'
         end
-        
         sign_in_redirect_path(@unit_object, flash_message)
       else
         reviewable = find_reviewable

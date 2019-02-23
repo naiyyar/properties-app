@@ -1,8 +1,8 @@
 class ManagementCompaniesController < ApplicationController
   load_and_authorize_resource
   before_action :set_management_company, only: [:show, :edit, :update, :destroy, :managed_buildings]
-
-  # GET /management_companies
+  before_action :save_as_favourite, only: [:show]
+  # GET /management_companies_url
   # GET /management_companies.json
   def index
     @management_companies = ManagementCompany.all
@@ -108,5 +108,13 @@ class ManagementCompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def management_company_params
       params.require(:management_company).permit(:name, :website)
+    end
+
+    def save_as_favourite
+      if session[:favourite_object_id].present? and current_user.present?
+        building = Building.find(session[:favourite_object_id])
+        current_user.favorite(building)
+        session[:favourite_object_id] = nil
+      end
     end
 end
