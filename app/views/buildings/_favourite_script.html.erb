@@ -1,0 +1,63 @@
+<script type="text/javascript">
+  
+  // favourite script for market infowindow
+    function saveToFavourite(object_id){
+      var save_link = $('.save_link_'+object_id);
+      var unfav_link = '<a class="favourite save_link_'+object_id+' filled-heart" title="Unsave" data-objectid="'+object_id+'"  href="javascript:;" onclick="removeFromFavourite('+object_id+')"><span class="fa fa-heart"></span></a>'
+
+      $.ajax({
+        url: '/favorite?object_id='+object_id,
+        type: 'get',
+        dataType: 'json',
+        success: function(response){
+          replace_link(save_link, unfav_link)
+        }
+      });
+    }
+
+    function removeFromFavourite(object_id){
+      var save_link = $('.save_link_'+object_id);
+      var fav_link = '<a class="favourite save_link_'+object_id+' unfilled-heart" title="Save" data-objectid="'+object_id+'"  href="javascript:;" onclick="saveToFavourite('+object_id+')"><span class="fa fa-heart"></span></a>';
+
+      $.ajax({
+        url: '/unfavorite.json',
+        type: 'get',
+        dataType: 'json',
+        data: { object_id: object_id },
+        success: function(response){
+          replace_link(save_link, fav_link);
+        }
+      });
+
+      //TODO FIX LATER: WHEN CLICKING ON CARD HEART SHWOING 2 CONFIRM BOX
+      // $.confirm({
+      //   title: 'Are you sure you want to remove this?',
+      //   content: '',
+      //   buttons: {
+      //     remove: {
+      //       btnClass: 'btn-success',
+      //       action: function(){
+              
+      //       }
+      //     },
+      //     cancel: function(){
+      //       console.log('Successfully canceled');
+      //     }
+      //   }
+      // });
+    }
+
+    function replace_link(to_replace, replace_with){
+      to_replace.replaceWith(function(){
+        return replace_with
+      });
+    }
+
+    function openSuModal(){
+      $('#signup').modal('show');
+    }
+
+
+    //END favorite script
+
+</script>

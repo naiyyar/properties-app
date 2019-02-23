@@ -1,25 +1,28 @@
 (function($) {
     "use strict";
 
-    // Custom options for map
-    var options = {
-        zoom: 14,
-        // disableDefaultUI: false,
-        mapTypeControl: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        zoomControlOptions: {
-          position: google.maps.ControlPosition.RIGHT_CENTER
-        },
-        gestureHandling: 'greedy',
-        // scaleControl: true,
-        streetViewControl: true,
-        streetViewControlOptions: {
-          position: google.maps.ControlPosition.RIGHT_CENTER
-        },
-    };
-    var map;
+    
+    var map, current_user_id;
 
     if($("#mapHash").length > 0){
+        current_user_id = $('#cu').val();
+        // Custom options for map
+        var options = {
+            zoom: 14,
+            // disableDefaultUI: false,
+            mapTypeControl: false,
+            //mapTypeId: google.maps.MapTypeId.ROADMAP,
+            zoomControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+            },
+            gestureHandling: 'greedy',
+            // scaleControl: true,
+            streetViewControl: true,
+            streetViewControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+            },
+        };
+
         var props = $("#mapHash").data('map');
         var lat = $("#mapHash").data('lat');
         var lng = $("#mapHash").data('lng');
@@ -73,7 +76,9 @@
                     });
                     return function() {
                       $.post('/load_infobox', {
-                        object_id: prop.id, building_show: true
+                        object_id: prop.id, 
+                        building_show: true,
+                        current_user_id: current_user_id,
                       }, function(data){
                         infobox.setContent(data.html);
                         infobox.open(map, marker);
@@ -128,7 +133,6 @@
         }, 300);
 
     }
-
 
     var windowHeight;
     var windowWidth;

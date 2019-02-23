@@ -58,8 +58,12 @@
       = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow no-review'
   
 #mapHash{"data-lat" => "#{@lat.to_json}", "data-lng" => "#{@lng.to_json}", "data-map" => "#{@gmaphash.to_json}"}
+= hidden_field_tag :cu, current_user.present? ? current_user.id : nil
 .addNewUnit
   = render "new_unit_modal"
+
+= render 'buildings/favourite_script'
+
 - if session[:after_contribute].present? || params[:from_uploaded].present?
   = render 'contribute_more_popup'
   :javascript

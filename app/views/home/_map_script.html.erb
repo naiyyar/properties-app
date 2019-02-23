@@ -3,6 +3,7 @@
   <input type="text" name="lng" class="hidden lng" value="<%#=@lng %>" />
   <input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13 %>" />
   <%= hidden_field_tag :cu, current_user.present? ? current_user.id : nil %>
+  
   <script type="text/javascript" charset="utf-8">
     json_array = <%= raw @hash.to_json %>;
     var position;
@@ -11,7 +12,7 @@
     <%else%>
       position = google.maps.ControlPosition.TOP_CENTER
     <%end%>
-    var map, current_user_id;
+    var map;
     var lat =  <%= raw @lat.to_json %>; 
     var lng= <%= raw @lng.to_json %>;
     var zoom = <%= @zoom || 13 %>;
@@ -21,10 +22,8 @@
    
     function initialize(sidebar = true) {
       // Custom options for map
-      // var show_controls = true;
       var zoom_ctrl = true;
       if(width < 600){
-        // show_controls = false;
         zoom_ctrl = false;
       }
       
@@ -199,62 +198,5 @@
         windowResizeHandler();
     });
 
-    //Using on marker infowindow
-    function saveToFavourite(object_id){
-      var save_link = $('.save_link_'+object_id);
-      var unfav_link = '<a class="favourite save_link_'+object_id+' filled-heart" title="Unsave" data-objectid="'+object_id+'"  href="javascript:;" onclick="removeFromFavourite('+object_id+')"><span class="fa fa-heart"></span></a>'
-
-      $.ajax({
-        url: '/favorite?object_id='+object_id,
-        type: 'get',
-        dataType: 'json',
-        success: function(response){
-          replace_link(save_link, unfav_link)
-        }
-      });
-    }
-
-    function removeFromFavourite(object_id){
-      var save_link = $('.save_link_'+object_id);
-      var fav_link = '<a class="favourite save_link_'+object_id+' unfilled-heart" title="Save" data-objectid="'+object_id+'"  href="javascript:;" onclick="saveToFavourite('+object_id+')"><span class="fa fa-heart"></span></a>';
-
-      $.ajax({
-        url: '/unfavorite.json',
-        type: 'get',
-        dataType: 'json',
-        data: { object_id: object_id },
-        success: function(response){
-          replace_link(save_link, fav_link);
-        }
-      });
-
-      //TODO FIX LATER: WHEN CLICKING ON CARD HEART SHWOING 2 CONFIRM BOX
-      // $.confirm({
-      //   title: 'Are you sure you want to remove this?',
-      //   content: '',
-      //   buttons: {
-      //     remove: {
-      //       btnClass: 'btn-success',
-      //       action: function(){
-              
-      //       }
-      //     },
-      //     cancel: function(){
-      //       console.log('Successfully canceled');
-      //     }
-      //   }
-      // });
-    }
-
-    function replace_link(to_replace, replace_with){
-      to_replace.replaceWith(function(){
-        return replace_with
-      });
-    }
-
-    function openSuModal(){
-      $('#signup').modal('show');
-    }
-
   </script>
-<%#end%>
+<%= render partial: 'buildings/favourite_script' %>
