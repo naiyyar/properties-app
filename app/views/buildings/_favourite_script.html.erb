@@ -53,11 +53,16 @@
       });
     }
 
-    function openSuModal(){
-      $('#signup').modal('show');
+    function openSuModal(object_id){
+      $.ajax({
+        url: '/favorite?object_id='+object_id,
+        type: 'get',
+        dataType: 'script',
+        success: function(response){
+          console.log('success')
+        }
+      });
     }
-
-
     //END favorite script
 
 </script>
