@@ -83,9 +83,9 @@ if @buildings.present? #and @buildings_by_address.blank? => Removed due to havin
   json.array! @buildings do |building|
     json.id building.id
     if building.building_name.present? and building.building_name != building.building_street_address
-      json.search_term "#{building.building_name} - #{building.building_street_address}, #{building.city}, #{building.state}, #{building.zipcode}"
+      json.search_term "#{building.building_name} - #{building.full_street_address}"
     else
-      json.search_term "#{building.building_street_address}, #{building.city}, #{building.state} #{building.zipcode}"
+      json.search_term "#{building.full_street_address}"
     end
     json.url building_path(building)
     json.category 'Building'

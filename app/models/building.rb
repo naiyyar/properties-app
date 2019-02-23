@@ -417,6 +417,10 @@ class Building < ActiveRecord::Base
     [building_street_address, city, state].compact.join(', ')
   end
 
+  def full_street_address
+    [building_street_address, city, state, zipcode].compact.join(', ')
+  end
+
   def coordinates
     [latitude, longitude].compact.join(', ')
   end
