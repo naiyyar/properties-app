@@ -106,7 +106,7 @@ app.apartments.prototype = {
 
   _select: function(e, ui) {
     if(ui.item != undefined){
-      this._input.val(search_term);
+      this._input.val(ui.item.search_term);
       $('.no-match-link').addClass('hidden');
       //Submitting search form
       window.location = ui.item.url;
