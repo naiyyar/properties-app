@@ -55,14 +55,15 @@ form fieldset{
     color: #535a60;
     text-align: center;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
 }
   .svg-icon {
     vertical-align: bottom;
 }
-.iconGoogle{
-    margin-left: 18px;
-    margin-right: 33px;
+.google-auth-icon{
+    position: absolute;
+    top: 10px;
+    left: 14px;
 }
 .fa-heart, .fa-heart:focus{
     color: #b1b3b6;
@@ -6190,9 +6191,7 @@ select.custom-arrow {
     /*.resultsList {
         padding: 10px 10px 0 10px;
     }*/
-    .iconGoogle{
-        margin-right: 51px;
-    }
+    
     .home-about-nyc-apt h1{
         font-size: 22px;
     }
