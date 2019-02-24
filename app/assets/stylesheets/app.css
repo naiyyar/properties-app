@@ -62,14 +62,18 @@ form fieldset{
 }
 .iconGoogle{
     margin-left: 18px;
-    margin-right: 29px;
+    margin-right: 33px;
 }
 .fa-heart, .fa-heart:focus{
     color: #b1b3b6;
 }
-.filled-heart .fa-heart, .unfilled-heart .fa-heart:hover{
+.filled-heart .fa-heart, .unfilled-heart .fa-heart.hover:hover{
     color: #EC555B !important;
 }
+
+/*.filled-heart .fa-heart, .unfilled-heart .fa-heart:hover{
+    color: #EC555B !important;
+}*/
 
 .animated-background {
     animation-duration: 1s;
@@ -6186,6 +6190,9 @@ select.custom-arrow {
     /*.resultsList {
         padding: 10px 10px 0 10px;
     }*/
+    .iconGoogle{
+        margin-right: 51px;
+    }
     .home-about-nyc-apt h1{
         font-size: 22px;
     }

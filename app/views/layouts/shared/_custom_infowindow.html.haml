@@ -41,7 +41,9 @@
     .pull-right{style: "padding-right: 8px;font-size: 22px;"}
       - if current_user.present?
         - click_action = fav_color_class == 'unfilled-heart' ? "saveToFavourite(#{building.id})" : "removeFromFavourite(#{building.id})"
-        %a{"data-objectid" => "#{building.id}", href: 'javascript:;', title: 'Save', class: "favourite save_link_#{building.id} #{fav_color_class}", onclick: click_action}
+        - hover_action = fav_color_class == 'unfilled-heart' ? "addHoverEffect(#{building.id})" : "removeHoverEffect(#{building.id})"
+        
+        %a{"data-objectid" => "#{building.id}", href: 'javascript:;', title: 'Save', class: "favourite save_link_#{building.id} #{fav_color_class}", onclick: click_action, onmouseover: hover_action}
           %span.fa.fa-heart
       
       = link_to heart_icon, 'javascript:;', class: "save_link_#{building.id} favourite #{fav_color_class}", onclick: "openSuModal(#{building.id})" if !current_user.present?
