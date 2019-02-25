@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
     if provider_image.present? 
       @avatar_url = provider_image
     elsif self.avatar.present?
-      @avatar_url = self.avatar
+      @avatar_url = self.avatar.url(:medium)
     else
       @avatar_url = 'missing.png'
     end

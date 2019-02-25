@@ -14,9 +14,7 @@ module ApplicationHelper
   end
 
   def show_filters?
-    params[:searched_by] == 'neighborhoods' or 
-    params[:searched_by] == 'zipcode' or 
-    params[:searched_by] == 'city' 
+    params[:searched_by].present?
   end
 
 	def resource_name
