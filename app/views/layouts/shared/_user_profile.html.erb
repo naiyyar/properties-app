@@ -2,10 +2,6 @@
   <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><%= image_tag current_user.profile_image(session[:provider]), alt: 'avatar', class: 'headerAvatar avatar', style: 'width:30px;height:30px;' %></a>
   <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">
       <%= image_tag current_user.profile_image(session[:provider]), class: "avatar headerAvatar pull-left", alt: 'Avatar'%>
-      <!-- <div class="userTop pull-left">
-          <span class="headerUserName"><%#= current_user.present? ? current_user.user_name.capitalize : '' %> </span> <span class="fa fa-angle-down"></span>
-      </div> -->
-      <!-- <div class="clearfix"></div> -->
   </a>
   <div class="dropdown-menu pull-right userMenu" role="menu">
     <div class="mobAvatar" style="display:block;">

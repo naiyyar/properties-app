@@ -1,0 +1,70 @@
+#leftSide{class: "#{contribute_left_side(params)}"}
+  %nav.leftNav.scrollable
+    .logo.search1.visible-xs
+      %a{href: "/"}= image_tag 'logo1.png', alt: 'logo'
+      .clearfix
+    %ul
+      %li.btn_contribute
+        %a{href: contribute_buildings_path}
+          %span.navIcon.icon-plus
+          %span.navLabel Write a review
+      - if current_user.blank?
+        %li
+          %a.left-side-zindex{"data-target" => "#signin", "data-toggle" => "modal", href: "#"}
+            %span.navIcon.fa.fa-sign-in
+            %span.navLabel Sign In
+        %li
+          %a.left-side-zindex{"data-target" => "#signup", "data-toggle" => "modal", href: "#"}
+            %span.navIcon.fa.fa-user
+            %span.navLabel Sign Up
+      - if current_user and current_user.has_role?(:admin)
+        %li
+          %a{href: "/buildings"}
+            %span.navIcon.fa.fa-building
+            %span.navLabel Buildings
+        %li
+          %a{href: "/units"}
+            %span.navIcon.icon-home
+            %span.navLabel Units
+        %li
+          %a{href: "/users"}
+            %span.navIcon.icon-user
+            %span.navLabel Users
+        %li
+          %a{href: "/documents"}
+            %span.navIcon.icon-docs
+            %span.navLabel Documents
+        %li
+          %a{href: "/reviews"}
+            %span.navIcon.icon-star
+            %span.navLabel Reviews
+        %li
+          %a{href: "/neighborhood_links"}
+            %span.navIcon.icon-link
+            %span.navLabel Neighborhood guides
+        %li
+          %a{href: management_companies_path}
+            %span.navIcon.fa.fa-building
+            %span.navLabel Management companies
+        %li
+          %a{href: "/price_ranges"}
+            %span.navIcon.fa.fa-money
+            %span.navLabel Price Range
+      - elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank?
+        %li
+          %a{href: "/blog"}
+            %span.navIcon.fa.fa-hashtag
+            %span.navLabel Blog
+        %li
+          %a{href: "/about"}
+            %span.navIcon.icon-info
+            %span.navLabel About us
+        %li
+          %a{href: new_contact_path}
+            %span.navIcon.fa.fa-comment
+            %span.navLabel Send feedback
+      - if current_user.present?
+        %li
+          %a{href: "#{saved_buildings_user_path(current_user)}"}
+            %span.navIcon.icon-heart
+            %span.navLabel Saved buildings

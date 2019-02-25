@@ -1,0 +1,35 @@
+#hero-container-blog{class: "hero-container-blog-#{params[:action]}"}
+  - if @post.present?
+    #carouselBlog.carousel.slide.featured{"data-ride" => "carousel"}
+      .carousel-inner
+        .item.active{style: "background-color: #f3f3f3;"}
+          .container
+            .carousel-caption
+              .carousel-title= @post_categories.first.try(:name)
+              .caption-title= @post.title if @post.title.present?
+              .p-n-articles.hidden
+                .p-article
+                  .pna-title Previous article
+                  %a{href: "#"} Why Green Architecture Is The Perfect Investment for Your Home
+                .n-article
+                  .pna-title Next article
+                  %a{href: "#"} Practical Lighting Size  Placement Guide for Every Corner of the House
+                .clearfix
+  / Header
+  .home-header
+    %a{href: "/blog"}
+      .home-logo.osLight{style: "color: #333;"}
+        %span.fa.fa-home
+        %strong.hidden-xs blog
+    .logo.osLight
+      %a{href: "/"}= image_tag 'logo2.png', alt: 'logo', width: '200'
+    .blog-nav.hidden
+      %ul
+        %li
+          %a{href: "index.html"} App Home
+        %li
+          %a{href: "blog.html"} Featured
+        %li
+          %a{href: "blog.html"} Latest
+        %li
+          %a{href: "blog-post.html"} Single Post
