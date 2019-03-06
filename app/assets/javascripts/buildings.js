@@ -1,4 +1,12 @@
 var search_type = '';
+var noMatchElemToAppend = '<div class="no-match-link" style="top: 0px; width: 333px;">' +
+                      '<span class="address">' +
+                        '<b>Building Not Here?</b>' +
+                      '</span>' +
+                      '<a class="add_new_building" href="javascript:void(0);" id="add_new_building">' +
+                        '<b> Add Your Building</b>' +
+                      '</a>'
+                    '</div>';
 app.buildings = function() {
   this._input = $('#buildings-search-txt');
   source_url = $('#buildings-search-txt').data('src');
@@ -25,41 +33,30 @@ app.buildings.prototype = {
 
   _search: function(e,ui){
     this._input.addClass('loader');
+    //console.log($('ul.ui-autocomplete'))
+    //console.log($('ul.ui-autocomplete').children().length)
+    // if($(".no-match-link").hasClass('hidden')){
+    //   $(".no-match-link").removeClass('hidden');
+    // }
   },
 
   _open: function(event, ui) {
     this._input.removeClass('loader');
+    console.log('open')
     var ul_height = $('ul.ui-autocomplete').outerHeight();
     var search_input_width = this._input.outerWidth();
     $('.ui-autocomplete').css('width', search_input_width+'px');
-    console.log(search_type)
     if(search_type != 'companies'){
-      var elemToAppend = '<div class="no-match-link" style="top: 290px; width: 333px;">' +
-                            '<span class="address">' +
-                              '<b>Building Not Here?</b>' +
-                            '</span>' +
-                            '<a class="add_new_building" href="javascript:void(0);" id="add_new_building">' +
-                              '<b> Add Your Building</b>' +
-                            '</a>'
-                          '</div>';
-      
-      $('#buildings-search-results').html(elemToAppend);
+      $('#buildings-search-results').html(noMatchElemToAppend);
       $('.no-match-link').css('top',ul_height+'px');
       $('.no-match-link').css('width', search_input_width+'px');
     }
-    
-    //setting container width
-       
-    // if($('#managed_building_id').length == 0){ // Not showing when creating new management company
-    //   $('.no-match-link').css('top',ul_height+'px');
-    //   $('.no-match-link').removeClass('hidden');
-    //   $('.no-match-link').css('width', $('#buildings-search-txt').width()+30+'px');
-    // }
     
   },
 
   _render: function(ul, item) {
     search_type = item.search_type
+    console.log('render')
     $("#buildings-search-no-results").css('display','none');
     if($(".no-match-link").hasClass('hidden')){
       $(".no-match-link").removeClass('hidden');
@@ -70,10 +67,13 @@ app.buildings.prototype = {
     }else{
       building_name = item.building_name;
     }
-    var markup = [
-      '<p class="address"><b>'+item.building_street_address+', '+item.city+', '+item.state+' '+item.zipcode+'</b></p>',
-      '<small class="building_name">'+building_name+'</small>'
-    ];
+    var markup = [];
+    if(item.value != 'No matches found'){
+      markup.push('<p class="address"><b>'+item.building_street_address+', '+item.city+', '+item.state+' '+item.zipcode+'</b></p>',
+        '<small class="building_name">'+building_name+'</small>');
+    }else{
+      //console.log('no-match-link')
+    }
     
     return $('<li>')
       .append(markup.join(''))
