@@ -1,59 +1,62 @@
-# Change this to your host. See the readme at https://github.com/lassebunk/dynamic_sitemaps
-# for examples of multiple hosts and folders.
+# Set the host name for URL creation
+#require 'aws-sdk'
+SitemapGenerator::Sitemap.default_host = "http://aptreviews.herokuapp.com"
+SitemapGenerator::Sitemap.create_index = true
+SitemapGenerator::Sitemap.compress = false
+SitemapGenerator::Sitemap.sitemaps_host = "https://s3-us-west-2.amazonaws.com/#{ENV['AWS_S3_BUCKET']}/"
+SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"
+#SitemapGenerator::Sitemap.public_path = 'public/sitemaps/'
 
-host "www.transparentcity.co"
+SitemapGenerator::Sitemap.create do
+  # Put links creation logic here.
+  add root_path
+  add buildings_path
 
-sitemap :site do
-  url root_url, last_mod: Time.now, change_freq: 'daily', priority: 1.0
-  url buildings_url, last_mod: Time.now, change_freq: 'weekly', priority: 1.0
-  Building.all.each do |building|
-    url building, last_mod: building.updated_at, priority: 1.0
-    if building.first_neighborhood.present?
-      url search_url(:searched_by => 'neighborhoods', search_term: "#{building.first_neighborhood.downcase.gsub(' ', '-')}")
-    end
-    url search_url(:searched_by => 'zipcode', search_term: building.zipcode), last_mod: Time.now
+  Neighborhood.find_each do |nb|
+    add search_path(:searched_by => 'no-fee-apartments-nyc-neighborhoods', search_term: nb.formatted_name), lastmod: nb.updated_at, changefreq: 'weekly', priority: 1.0
   end
   
-  url units_url, last_mod: Time.now, change_freq: 'weekly', priority: 1.0
-  Unit.all.each do |unit|
-    url unit, last_mod: unit.updated_at, priority: 1.0
+  Building.find_each do |building|
+    add building_path(building), lastmod: building.updated_at
+    add search_path(:searched_by => 'zipcode', search_term: building.zipcode), lastmod: Time.now, changefreq: 'weekly', priority: 1.0
   end
 
-  url "#{host}/buildings/contribute", last_mod: Time.now, change_freq: 'weekly', priority: 1.0
-  url "#{host}/contacts/new", last_mod: Time.now, change_freq: 'weekly', priority: 1.0
-  url "#{host}/about", last_mod: Time.now, change_freq: 'weekly', priority: 1.0
-  #url '/search', last_mod: Time.now, change_freq: "weekly", priority: 1.0
+  add management_companies_path
+
+  ManagementCompany.find_each do |company|
+    add no_fee_company_path(id: company), lastmod: company.updated_at
+  end
+  
+  add units_path
+  Unit.find_each do |unit|
+    add unit_path(unit), lastmod: unit.updated_at
+  end
+
+  add contribute_buildings_path
+  add new_contact_path
+  add about_path
+
+
+  #
+  # The root path '/' and sitemap index file are added automatically for you.
+  # Links are added to the Sitemap in the order they are specified.
+  #
+  # Usage: add(path, options={})
+  #        (default options are used if you don't specify)
+  #
+  # Defaults: :priority => 0.5, :changefreq => 'weekly',
+  #           :lastmod => Time.now, :host => default_host
+  #
+  # Examples:
+  #
+  # Add '/articles'
+  #
+  #   add articles_path, :priority => 0.7, :changefreq => 'daily'
+  #
+  # Add all articles:
+  #
+  #   Article.find_each do |article|
+  #     add article_path(article), :lastmod => article.updated_at
+  #   end
+  #SitemapGenerator::Sitemap.search_engines
 end
-
-# You can have multiple sitemaps like the above – just make sure their names are different.
-
-# Automatically link to all pages using the routes specified
-# using "resources :pages" in config/routes.rb. This will also
-# automatically set <lastmod> to the date and time in page.updated_at:
-#
-#   sitemap_for Page.scoped
-
-# For products with special sitemap name and priority, and link to comments:
-#
-#   sitemap_for Product.published, name: :published_products do |product|
-#     url product, last_mod: product.updated_at, priority: (product.featured? ? 1.0 : 0.7)
-#     url product_comments_url(product)
-#   end
-
-# If you want to generate multiple sitemaps in different folders (for example if you have
-# more than one domain, you can specify a folder before the sitemap definitions:
-# 
-#   Site.all.each do |site|
-#     folder "sitemaps/#{site.domain}"
-#     host site.domain
-#     
-#     sitemap :site do
-#       url root_url
-#     end
-# 
-#     sitemap_for site.products.scoped
-#   end
-
-# Ping search engines after sitemap generation:
-#
-  #ping_with "https://#{host}/sitemap.xml"

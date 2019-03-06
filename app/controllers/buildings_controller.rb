@@ -20,6 +20,10 @@ class BuildingsController < ApplicationController
     end
   end
 
+  def sitemap
+    redirect_to "https://s3-us-west-2.amazonaws.com/#{ENV['AWS_S3_BUCKET']}/sitemaps/sitemap1.xml"
+  end
+
   def favorite
     if current_user.present?
       @building = Building.find(params[:object_id])

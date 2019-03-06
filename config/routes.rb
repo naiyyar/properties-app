@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :prices
   get '/price_ranges' => 'prices#index'
   post '/add_or_update_prices' => 'prices#add_or_update_prices'
+
+  get "sitemap.xml" => "buildings#sitemap", format: :xml, as: :sitemap
   
   scope :module => 'buttercms' do
     get '/categories/:slug' => 'categories#show', :as => :buttercms_category
