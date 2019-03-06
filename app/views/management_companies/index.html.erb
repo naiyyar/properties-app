@@ -29,7 +29,7 @@
           <tbody class="table">
             <% @management_companies.each do |company| %>
               <tr>
-                <td><span class="propName"><b><%= link_to company.name, management_company_path(company) %> </td>
+                <td><span class="propName"><b><%= link_to company.name, no_fee_company_path(id: company) %> </td>
                 <td class="text-center"><%= link_to '<span class="fa fa-globe"></span>'.html_safe, company.website, target: '_blank' if company.website.present? %></td>
                 <td class="text-center"><%= link_to company.buildings.count, managed_buildings_management_company_path(company), class: 'hyper-link' if company.buildings.present? %></td>
                 <td class="star-sm">
