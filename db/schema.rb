@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190131173105) do
+ActiveRecord::Schema.define(version: 20190306174504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,29 @@ ActiveRecord::Schema.define(version: 20190131173105) do
 
   add_index "favorites", ["favorable_id", "favorable_type"], name: "index_favorites_on_favorable_id_and_favorable_type", using: :btree
   add_index "favorites", ["favoriter_id", "favoriter_type"], name: "index_favorites_on_favoriter_id_and_favoriter_type", using: :btree
+
+  create_table "featured_buildings", force: :cascade do |t|
+    t.integer  "building_id"
+    t.integer  "featured_comp_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "featured_buildings", ["building_id", "featured_comp_id"], name: "index_featured_buildings_on_building_id_and_featured_comp_id", using: :btree
+
+  create_table "featured_comps", force: :cascade do |t|
+    t.string   "comp_id",                     null: false
+    t.integer  "building_id",                 null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "active",      default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "featured_comps", ["comp_id", "building_id"], name: "index_featured_comps_on_comp_id_and_building_id", unique: true, using: :btree
+  add_index "featured_comps", ["end_date"], name: "index_featured_comps_on_end_date", using: :btree
+  add_index "featured_comps", ["start_date"], name: "index_featured_comps_on_start_date", using: :btree
 
   create_table "gcoordinates", force: :cascade do |t|
     t.float    "latitude"

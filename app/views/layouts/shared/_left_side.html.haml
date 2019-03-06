@@ -50,6 +50,11 @@
           %a{href: "/price_ranges"}
             %span.navIcon.fa.fa-money
             %span.navLabel Price Range
+        %li
+          %a{href: featured_comps_path}
+            %span.navIcon.fa.fa-money
+            %span.navLabel Featured Comps
+      
       - elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank?
         %li
           %a{href: "/blog"}

@@ -1,0 +1,81 @@
+input.apple-switch {
+  position: relative;
+  -webkit-appearance: none;
+  outline: none;
+  background-color: #fff;
+  border: 1px solid #D9DADC;
+  border-radius: 50px;
+  box-shadow: inset -20px 0 0 0 #fff;
+}
+
+input.apple-switch:after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.2);
+}
+
+input.apple-switch:checked {
+  border-color: #4ed164;
+}
+
+input.apple-switch:checked:after {
+  box-shadow: -2px 4px 3px rgba(0,0,0,0.05);
+}
+
+input.apple-switch.sb-sm{
+	width: 50px;
+  height: 20px;
+}
+
+input.apple-switch.sb-sm:after{
+	width: 17px;
+  height: 16px;
+}
+
+input.apple-switch.sb-sm:checked {
+  box-shadow: inset 28px 0 0 0 #4ed164;
+}
+
+input.apple-switch.sb-sm:checked:after {
+  left: 26px;
+}
+
+input.apple-switch.sb-md{
+	width: 50px;
+  height: 30px;
+}
+
+input.apple-switch.sb-md:after{
+	width: 26px;
+  height: 26px;
+}
+
+input.apple-switch.sb-md:checked {
+  box-shadow: inset 20px 0 0 0 #4ed164;
+}
+
+input.apple-switch.sb-md:checked:after {
+  left: 20px;
+}
+
+input.apple-switch.sb-lg{
+	width: 50px;
+  height: 30px;
+}
+
+input.apple-switch.sb-lg:after{
+	width: 26px;
+  height: 26px;
+}
+
+input.apple-switch.sb-lg:checked {
+  box-shadow: inset 20px 0 0 0 #4ed164;
+}
+
+input.apple-switch.sb-lg:checked:after {
+  left: 20px;
+}

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  
+  resources :featured_comps
   resources :prices
   get '/price_ranges' => 'prices#index'
   post '/add_or_update_prices' => 'prices#add_or_update_prices'

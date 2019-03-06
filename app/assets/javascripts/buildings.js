@@ -144,18 +144,20 @@ app.buildings.prototype = {
       $("ul.ui-autocomplete").hide();
     }
     
-    //when adding buildings to management company
+    //when adding buildings to management company or adding buikding as featured comp
+    var item = '';
+    //$('#managed_building_id').val(ui.item.id)
+    if(ui.item.building_name != '' && ui.item.building_name != null){
+      item = ui.item.building_name;
+    }else{
+      item = ui.item.building_street_address;
+    }
+    $('.buttonsWrapper').append('<a href="#" class="btn btn-success">'+item+'</a>');
     if($('#managed_building_id').length > 0){
-      var item = '';
-      //$('#managed_building_id').val(ui.item.id)
-      if(ui.item.building_name != '' && ui.item.building_name != null){
-        item = ui.item.building_name;
-      }else{
-        item = ui.item.building_street_address;
-      }
-
-      $('.buttonsWrapper').append('<a href="#" class="btn btn-success">'+item+'</a>');
       $('.management-company-form').append('<input type="hidden" name="managed_building_ids[]" id="managed_building_id" class="form-control" value="'+ui.item.id+'">');
+      this._input.val('');
+    }else if ($('#comparable_building_ids').length > 0){
+      $('.management-company-form').append('<input type="hidden" name="comparable_building_ids[]" id="comparable_building_ids" class="form-control" value="'+ui.item.id+'">');
       this._input.val('');
     }
 

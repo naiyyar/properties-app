@@ -1,0 +1,2 @@
+module FeaturedCompsHelper
+end

@@ -70,6 +70,8 @@ class Building < ActiveRecord::Base
   has_many :reviews, as: :reviewable
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :units,  :dependent => :destroy
+  has_one :featured_comp, :foreign_key => :building_id, :dependent => :destroy
+  has_many :featured_comps, through: :featured_buildings, :dependent => :destroy
   belongs_to :management_company
   
   accepts_nested_attributes_for :units, :allow_destroy => true

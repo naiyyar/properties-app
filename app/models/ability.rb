@@ -12,6 +12,7 @@ class Ability
       cannot :index, Contact
       cannot [:index, :new, :edit], ManagementCompany
       cannot [:index, :show, :saved_buildings], User
+      cannot [:index, :create, :update], FeaturedComp
     elsif user.has_role? :admin
       can :manage, :all
     else

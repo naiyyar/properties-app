@@ -1,0 +1,62 @@
+.form-container
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-6
+      .panel.panel-default
+        .panel-heading
+          %b= @featured_comp.new_record? ? 'New Featured Comp' : 'Edit Featured Comp'
+        .panel-body
+          = form_for @featured_comp, html: { class: 'management-company-form' } do |f|
+            .form-group
+              %label Feature This Building As Comp
+              / = f.select :building_id, options_for_select(Building.all.limit(20).map{|b| [b.building_name, b.id]}), { prompt: 'Please select'}, {class: 'form-control'}
+              = f.text_field :building_id, value: Building.first.id
+              = f.hidden_field :comp_id, value: '#1'
+            
+            .row
+              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                .form-group
+                  %label Start Date
+                  = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
+
+              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                .form-group
+                  %label End Date
+                  = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
+
+            .row
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .form-group
+                  %label Select Comparable Buildings to Feature On
+                  = hidden_field_tag 'comparable_building_ids', nil, class: 'form-control', name: 'comparable_building_ids[]'
+                  = text_field_tag 'buildings-search-txt',nil, class: 'form-control', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?featured=true' }, :autocomplete => :off
+                  #buildings-search-results.results{style: "position: relative;"}
+
+            .row
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .form-group
+                  %label Buildings Featured On
+                  .buttonsWrapper
+                    - if @featured_on_buildings.present?
+                      - @featured_on_buildings.each do |building|
+                        %a.btn.btn-default{href: "#{building_path(building)}"}= building.building_name_or_address
+            
+            .form-group
+              .col-sm-12
+                .pull-right
+                  = link_to 'Cancel', featured_comps_path, class: 'btn btn-default'
+                  = f.submit 'Save', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
+    
+
+:javascript
+  $(function() {
+    new app.buildings;
+  });
+
+  $(document).on('keyup', function(e){
+    if(e.keyCode == 40 || e.keyCode == 38){
+      if(!$("ul.ui-autocomplete").is(":visible")) {
+        //#ui-id-1: becasue there are two 1. global search 2. for buildings search
+        $("#ui-id-1").show();
+      }
+    }
+  })
