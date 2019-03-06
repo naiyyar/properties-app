@@ -55,6 +55,7 @@ if @companies.present?
     json.category 'Management Company'
     json.search_phrase @search_phrase
   end
+  @no_match_found = false
 end
 
 if @neighborhoods.present?
@@ -65,6 +66,7 @@ if @neighborhoods.present?
     json.category 'Neighborhood'
     json.search_phrase @search_phrase
   end
+  @no_match_found = false
 end
 
 # if @buildings_by_neighborhood.present?
@@ -91,6 +93,7 @@ if @buildings.present? #and @buildings_by_address.blank? => Removed due to havin
     json.category 'Building'
     json.search_phrase @search_phrase
   end
+  @no_match_found = false
 end
 
 # if @buildings_by_address.present?
@@ -110,6 +113,7 @@ if @zipcodes.present?
     json.category 'Zipcode'
     json.search_phrase @search_phrase
   end
+  @no_match_found = false
 end
 
 if @city.present?
@@ -121,7 +125,10 @@ if @city.present?
     json.category 'City'
     json.search_phrase @search_phrase
   end
+  @no_match_found = false
 end
+
+json.no_match_found 'No matches found' if @no_match_found
 
 # if @search_by_mangement.present?
 #   json.array! @search_by_mangement do |company|
