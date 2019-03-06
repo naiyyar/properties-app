@@ -1,0 +1,54 @@
+- content_for :page_title do
+  = "#{@management_company.name}" if @management_company.name.present?
+
+#mapViewSearch.mob-min
+  .mapPlaceholder
+    %span.fa.fa-spin.fa-spinner
+    Loading map...
+
+#pano
+
+#content.mob-max
+  .singleTop
+    .summary
+      .row
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+          .summaryItem{style: "margin-bottom: 0px;"}
+            %h1.pageTitle
+              = @management_company.name
+            .property_information{style: "padding: 0px 2px;"}
+              %div= link_to 'Website', @management_company.website, class: 'hyper-link', target: '_blank'
+              %div{style: "display: inline-block;"}
+                = render 'layouts/shared/custom_rating'
+                .favLink
+                  %span.icon-pipe
+                  = !@management_company.recommended_percent.present? or @management_company.recommended_percent.nan? ? "| <span class='fa fa-thumbs-up recommended'></span> --%".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@management_company.recommended_percent.to_i}%".html_safe
+            .clearfix
+  
+  #reviewsContainer.tabsContainer
+    %ul.nav.nav-tabs.nav-justified{role: "tablist"}
+      %li.active
+        %a{"data-toggle" => "tab", href: "#building_managed", role: "tab"}
+          = 'BUILDINGS MANAGED'
+          (#{@manage_buildings.count})
+      %li
+        %a{"data-toggle" => "tab", href: "#buildings_reviews_tab", role: "tab"}= "BUILDING REVIEWS (#{ @management_company.aggregate_reviews })"
+    
+    .tab-content
+      #buildings_reviews_tab.tab-pane.fade{style: "overflow-y: scroll;height: 500px;"}
+        .comments.objects-container{style: "padding: 0px 14px 34px 20px;"}
+          - if @reviews.present?
+            = render partial: @reviews
+        .load-more-container.text-center
+          / hide our loading gif image so that we show it when making ajax call via jquery
+          = image_tag 'loader.gif', style: 'display:none;', class: 'loading-gif'
+          = link_to 'Show More ...', load_more_reviews_path(id: @management_company.id), class: 'load-more', style: 'padding: 6px 27px;border: 1px solid #ddd;'
+      
+      #building_managed.tab-pane.fade.in.active.no-padding
+        .resultsList
+          #load-more-buildings.row
+            = render partial: 'home/search_results', locals: { buildings: @manage_buildings }
+        .pages-container
+          = will_paginate @manage_buildings, renderer: BootstrapPagination::Rails
+
+= render partial: 'home/map_script'
