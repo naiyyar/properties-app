@@ -753,9 +753,9 @@ class Building < ActiveRecord::Base
         hood.save
       end
     end
-    Rails.application.load_tasks
+    #Rails.application.load_tasks
     #Rake::Task['sitemap:refresh'].invoke
-    Rake::Task["sitemap:create_upload_and_ping"].invoke
+    #Rake::Task["sitemap:create_upload_and_ping"].invoke
   end
 
 end

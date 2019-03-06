@@ -24,7 +24,6 @@ class ManagementCompany < ActiveRecord::Base
   pg_search_scope :text_search_by_management_company, against: [:name],
      :using => { :tsearch => { prefix: true } }
 
-	after_save :update_sitemap
 	#methods
 
 	def to_param
@@ -68,21 +67,8 @@ class ManagementCompany < ActiveRecord::Base
     rateables = Rate.where(rateable_id: buildings.pluck(:id), rateable_type: 'Building', dimension: 'building')
     @total_rates = rateables.where('stars > ?', 0).sum(:stars)
 
-    # buildings.each do |building|
-    # 	#debugger
-    # 	star_count = Rate.where(rateable_id: building.id, rateable_type: 'Building', dimension: 'building').sum(:stars)
-    #   #rating_cache = building.rating_cache.where(dimension: 'building')
-    #   @total_rates += star_count.to_f #if star_count.present? and star_count
-    # end
-
     star_counts = (@total_rates.to_f/aggregate_reviews).round(2).to_s.split('.')
     return star_counts
-  end
-
-  private
-
-  def update_sitemap
-  	DynamicSitemaps.generate_sitemap
   end
 
 end
