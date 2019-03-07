@@ -24,12 +24,7 @@
                 %td=link_to comp.building.building_name_or_address, building_path(comp.building)
                 %td=link_to comp.building.management_company.try(:name), '#'
                 %td
-                %td
-                  - if comp.buildings.present?
-                    %ul.list-inline
-                      - comp.buildings.each_with_index do |building, index|
-                        %li{style: 'list-style: none;'}=link_to building.building_name_or_address, building_path(building)
-                        =',' if comp.buildings.count != (index+1)
+                %td= link_to comp.buildings.count,featured_comp_path(comp) , class: 'hyper-link'
                 %td= comp.start_date
                 %td= comp.end_date
                 %td= link_to 'edit', edit_featured_comp_path(comp)
