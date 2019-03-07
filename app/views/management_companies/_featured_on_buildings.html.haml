@@ -1,0 +1,20 @@
+.row
+  - @featured_on_buildings.each do |building|
+    #properties.col-xs-12.col-sm-12.col-md-6.col-lg-6
+      .card
+        = link_to building_path(building) do
+          .figure{style: "position: relative;"}
+            = image_tag single_image(building), alt: 'image'
+            .figCaption.fill-heart
+              %span.fa.fa-heart
+                = building.favorites.count
+          %h2= building.building_name_or_address
+          .cardAddress
+            %span.icon-pointer
+            = building.street_address
+            , #{building.zipcode}
+          = render partial: 'home/building_detail', locals: {building: building}
+        %div.text-center{style: "padding: 8px;"}
+          = link_to 'Disconnect', disconnect_building_featured_comp_path(id: @featured_comp.id, building_id: building.id), data: {confirm: "Are you sure you want to disconnect this building?"}, class: 'btn btn-danger btn-block'
+
+= will_paginate @featured_on_buildings, renderer: BootstrapPagination::Rails

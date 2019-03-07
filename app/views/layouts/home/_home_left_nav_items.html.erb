@@ -15,6 +15,7 @@
   <!-- <li><a href="/reviews"><span class="icon-star"></span> Reviews</a></li> -->
   <!-- <li><a href="/neighborhood_links"><span class="icon-link"></span> Neighborhood guides</a></li> -->
   <li><a href="<%=management_companies_path%>"><span class="fa fa-building"></span> Management companies</a></li>
+  <li><a href="<%=featured_comps_path%>"><span class="fa fa-money"></span> Featured comps</a></li>
 <%elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank? %>
   <li class="visible-xs"><a href="/blog"><span class="fa fa-hashtag"></span> Blog</a></li>
   <li class="visible-xs"><a href="/about"><span class="icon-info"></span> About us</a></li>
