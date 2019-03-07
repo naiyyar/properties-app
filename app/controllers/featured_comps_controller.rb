@@ -1,6 +1,6 @@
 class FeaturedCompsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_featured_comp, only: [:show, :edit, :update, :destroy]
+  before_action :set_featured_comp, only: [:show, :edit, :update, :destroy, :disconnect_building]
 
   # GET /featured_comps
   # GET /featured_comps.json
@@ -21,6 +21,13 @@ class FeaturedCompsController < ApplicationController
   # GET /featured_comps/1
   # GET /featured_comps/1.json
   def show
+  end
+
+  #disconnecting building from a management company
+  def disconnect_building
+    buildings = @featured_comp.featured_buildings.where(building_id: params[:building_id])
+    buildings.first.delete if buildings.present?
+    redirect_to :back, notice: 'Building disconnected'
   end
 
   # GET /featured_comps/new
