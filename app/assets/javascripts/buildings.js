@@ -158,6 +158,7 @@ app.buildings.prototype = {
       this._input.val('');
     }else if ($('#comparable_building_ids').length > 0){
       $('.management-company-form').append('<input type="hidden" name="comparable_building_ids[]" id="comparable_building_ids" class="form-control" value="'+ui.item.id+'">');
+      $('.seleted-count').text(parseInt($('.seleted-count').text()) + 1);
       this._input.val('');
     }
 
