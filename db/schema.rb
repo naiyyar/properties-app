@@ -138,18 +138,16 @@ ActiveRecord::Schema.define(version: 20190306174504) do
   add_index "featured_buildings", ["building_id", "featured_comp_id"], name: "index_featured_buildings_on_building_id_and_featured_comp_id", using: :btree
 
   create_table "featured_comps", force: :cascade do |t|
-    t.string   "comp_id",                     null: false
     t.integer  "building_id",                 null: false
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date     "start_date"
+    t.date     "end_date"
     t.boolean  "active",      default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
 
-  add_index "featured_comps", ["comp_id", "building_id"], name: "index_featured_comps_on_comp_id_and_building_id", unique: true, using: :btree
-  add_index "featured_comps", ["end_date"], name: "index_featured_comps_on_end_date", using: :btree
-  add_index "featured_comps", ["start_date"], name: "index_featured_comps_on_start_date", using: :btree
+  add_index "featured_comps", ["active"], name: "index_featured_comps_on_active", using: :btree
+  add_index "featured_comps", ["start_date", "end_date"], name: "index_featured_comps_on_start_date_and_end_date", using: :btree
 
   create_table "gcoordinates", force: :cascade do |t|
     t.float    "latitude"

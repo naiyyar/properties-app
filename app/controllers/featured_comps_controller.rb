@@ -10,7 +10,7 @@ class FeaturedCompsController < ApplicationController
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @featured_comps = @filterrific.find.paginate(:page => params[:page], :per_page => 100).reorder('created_at desc')
+    @featured_comps = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:building, :buildings).order('created_at desc')
 
     respond_to do |format|
       format.html
@@ -54,7 +54,6 @@ class FeaturedCompsController < ApplicationController
   # PATCH/PUT /featured_comps/1.json
   def update
     respond_to do |format|
-      debugger
       if @featured_comp.update(featured_comp_params)
         format.html { redirect_to featured_comps_path, notice: 'Featured comp was successfully updated.' }
         format.json { render :json => { success: true, data: @featured_comp } }
@@ -83,6 +82,6 @@ class FeaturedCompsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def featured_comp_params
-      params.require(:featured_comp).permit(:comp_id, :building_id, :start_date, :end_date, :active)
+      params.require(:featured_comp).permit(:building_id, :start_date, :end_date, :active)
     end
 end

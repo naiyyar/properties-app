@@ -1,13 +1,19 @@
 class FeaturedComp < ActiveRecord::Base
 	include PgSearch
-	validates_uniqueness_of :comp_id
 	belongs_to :building
-	#belongs_to :sender, :foreign_key => :sender_id, class_name: 'User'
 	has_many :featured_buildings
 	has_many :buildings, through: :featured_buildings, :dependent => :destroy
 
-	pg_search_scope :search_query, against: [:comp_id],
+	scope :active, -> { where(active: true) }
+	scope :inactive, -> { where(active: false) }
+
+	pg_search_scope :search_query, against: [:id, :start_date, :end_date],
     :using => { :tsearch => { prefix: true } }
+
+  pg_search_scope :search_query, associated_against: {
+    building: [:building_name, :building_street_address],
+    buildings: [:building_name, :building_street_address]
+  }
 
 	filterrific(
    default_filter_params: { },
