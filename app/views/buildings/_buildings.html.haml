@@ -1,0 +1,52 @@
+%h2
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    #filterrific_results{style: "margin-top: 10px;"}
+      .table-overflow
+        %table#sortable11.table
+          %thead
+            %tr
+              / <a class="filterrific_current_sort_column" data-remote="true" data-method="get" href="/buildings?filterrific%5Bsorted_by%5D=building_name_desc">PROPERTY</a>
+              / a class="filterrific_current_sort_column1" data-remote="true" data-method="get" href="/buildings?sorted_by=building_name_desc">
+              %th
+                PROPERTY(#{@buildings.count})
+              %th ADDRESS
+              %th{width: "8%"} Creation date
+              %th{width: "12%"} RATING
+              %th Reviews
+              %th Website
+              %th Docs
+              %th Featured by
+              %th
+              %th
+          %tbody.table
+            - buildings.each do |building|
+              %tr
+                %td
+                  %span.propName
+                    %b= link_to(building_name_or_address(building), building_path(building))
+                    \-
+                    = link_to "(#{building.units.count}) units", units_building_path(building)
+                    \-
+                    ="#{building.image_uploads.count} images"
+                  %br/
+                  %small
+                    = building.first_neighborhood
+                    = '-' if (building.parent_neighbors.present? and building.first_neighborhood.present? )
+                    = "#{building.parent_neighbors}"
+                %td
+                  = building.street_address
+                  = building.zipcode
+                %td= building.created_at.strftime("%Y-%m-%d")
+                %td.star-sm
+                  = rating_for building, "building", disabled_after_rate: true, readonly: true
+                %td= link_to "Reviews(#{building.reviews.count})", building_reviews_path(building_id: building.id)
+                %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
+                %td= building.uploads.where('document_file_name is not null').count
+                %td= link_to building.featured_comps.count, featured_by_building_path(building)
+                - if current_user
+                  %td= link_to "edit", edit_building_path(building)
+                  - if current_user.has_role?(:admin)
+                    %td
+                      = link_to "Delete", building_path(building), method: :delete, data: {confirm: "Are you sure you want to delete this building?"}, class: 'text-danger' if @management_company.blank?
+                      = link_to 'Disconnect', disconnect_building_building_path(building), class: 'text-danger', data: {confirm: 'Are you sure you want to discconect this building?'} if @management_company.present?

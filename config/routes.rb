@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     member do 
       get :units
       get '/disconnect_building', to: 'buildings#disconnect_building', as: 'disconnect_building'
+      get :featured_by
     end
 
     collection do

@@ -1,0 +1,25 @@
+.tables
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      #filterrific_results{style: "margin-top: 10px;"}
+        .table-overflow
+          %table.table.table-striped#sortable
+            %thead
+              %tr
+                %th{width: "8%"} Comp ID
+                %th Property
+                %th Address
+                %th Start Date
+                %th End Date
+                %th Active
+            
+            %tbody.table
+              - @featured_comps.each do |comp|
+                %tr
+                  %td= link_to comp.id, featured_comp_path(comp)
+                  %td= link_to comp.building.try(:building_name), building_path(comp.building)
+                  %td= link_to comp.building.building_name_or_address, building_path(comp.building)
+                  %td= comp.start_date
+                  %td= comp.end_date
+                  %td= comp.active ? 'Yes' : 'No'
+                  / %input.apple-switch.sb-sm{type: 'checkbox', checked: comp.active, style: 'margin: 0px;', data: { compid: comp.id } }

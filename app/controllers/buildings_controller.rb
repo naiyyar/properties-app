@@ -1,6 +1,7 @@
 class BuildingsController < ApplicationController 
   load_and_authorize_resource # except: :favorite
   before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
+  before_action :find_building, only: [:show, :edit, :update, :destroy, :featured_by, :units]
   before_action :save_as_favourite, only: [:show]
 
   def index
@@ -45,8 +46,11 @@ class BuildingsController < ApplicationController
   end
 
   def units
-    @building = Building.find(params[:id])
     @units = @building.units
+  end
+
+  def featured_by
+    @featured_comps = @building.featured_comps.order(created_at: :desc)
   end
 
   #disconnecting building from a management company
@@ -76,7 +80,6 @@ class BuildingsController < ApplicationController
   end
 
   def show
-    @building = Building.find(params[:id])
     @show_map_btn = true
     @reviews = @building.reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
     @distance_results = DistanceMatrix.get_data(@building)
@@ -192,11 +195,10 @@ class BuildingsController < ApplicationController
   end
 
   def edit
-    @building = Building.find(params[:id])
+    
   end
 
   def update
-    @building = Building.find(params[:id])
     if @building.update(building_params)
       session[:after_contribute] = 'amenities' if params[:contribution].present?
       if params[:subaction].blank?
@@ -211,7 +213,6 @@ class BuildingsController < ApplicationController
   end
 
   def destroy
-    @building = Building.find(params[:id])
     @building.destroy
 
     redirect_to buildings_path, notice: "Successfully Deleted"
@@ -219,6 +220,9 @@ class BuildingsController < ApplicationController
 
   private
 
+  def find_building
+    @building = Building.find(params[:id])
+  end
 
   def building_params
     params.require(:building).permit!
