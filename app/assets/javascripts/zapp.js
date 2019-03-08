@@ -2,7 +2,7 @@
     "use strict";
 
     
-    var map, current_user_id;
+    var map, current_user_id, current_building_id;
 
     if($("#mapHash").length > 0){
         current_user_id = $('#cu').val();
@@ -26,7 +26,8 @@
         var props = $("#mapHash").data('map');
         var lat = $("#mapHash").data('lat');
         var lng = $("#mapHash").data('lng');
-
+        current_building_id = $('#cu_building_id').val();
+        var bounds = new google.maps.LatLngBounds();
         var infobox = new InfoBubble({
           maxWidth: 230,
           position: new google.maps.LatLng(lng, lat),
@@ -49,20 +50,44 @@
         // function that adds the markers on map
         var addMarkers = function(props, map) {
             $.each(props, function(i,prop) {
-                var latlng = new google.maps.LatLng(prop.position.lat,prop.position.lng);
+                var latlng = new google.maps.LatLng(prop.latitude, prop.longitude);
+                var default_icon = ''
+                if(parseInt(prop.id) != parseInt(current_building_id)){
+                    var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
+                    //default icon only when no price info available
+                    default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),
+                                    null,null,null, null)
+                }else{
+                    default_icon = new google.maps.MarkerImage(markerIconBlue(),
+                                    null,null,null, null)
+                }
                 var marker = new google.maps.Marker({
                     position: latlng,
                     map: map,
-                    icon: new google.maps.MarkerImage( 
-                        prop.markerIcon,
-                        null,
-                        null,
-                        null,
-                        new google.maps.Size(36, 36)
-                    ),
+                    icon: default_icon, //pinSymbol(setMcolor(prop.price)),
+                    // label: {
+                    //         text: markerLabel,
+                    //         color: "#333",
+                    //         fontSize: "12px",
+                    //         fontWeight: "normal"
+                    //       }, //labels[labelIndex++ % labels.length],
                     draggable: false,
-                    animation: google.maps.Animation.DROP,
+                    //animation: google.maps.Animation.DROP,
                 });
+                //bounds.extend(marker.position);
+                // var marker = new google.maps.Marker({
+                //     position: latlng,
+                //     map: map,
+                //     icon: new google.maps.MarkerImage( 
+                //         default_icon,
+                //         null,
+                //         null,
+                //         null,
+                //         new google.maps.Size(36, 36)
+                //     ),
+                //     draggable: false,
+                //     animation: google.maps.Animation.DROP,
+                // });
 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     panorama = map.getStreetView();
@@ -101,6 +126,7 @@
                 });         
 
             });
+            //map.fitBounds(bounds);
         }
         
         setTimeout(function() {

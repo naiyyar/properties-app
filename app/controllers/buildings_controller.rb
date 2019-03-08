@@ -89,25 +89,29 @@ class BuildingsController < ApplicationController
 
     #Similiar buildings
     active_comps = @building.featured_comps.active
-    @similar_properties = Building.where(id: active_comps.pluck(:building_id))
+    @similar_properties = Building.where(id: active_comps.pluck(:building_id)) #.includes(:building_average, :imageable)
     
     @lat = @building.latitude
     @lng = @building.longitude
 
-    @gmaphash = [
-                  {
-                    id: @building.id,
-                    title: @building.building_name,
-                    image: Upload.marker_image(@building),
-                    address: @building.street_address,
-                    position: {
-                      lat: @building.latitude,
-                      lng: @building.longitude
-                    },
-                    markerIcon: ActionController::Base.helpers.asset_path("marker-blue.png")
+    buildings = @similar_properties.to_a + [@building]
 
-                  }
-                ]
+    @gmaphash = Building.buildings_json_hash(buildings)
+
+    # @gmaphash = [
+    #               {
+    #                 id: @building.id,
+    #                 title: @building.building_name,
+    #                 image: Upload.marker_image(@building),
+    #                 address: @building.street_address,
+    #                 position: {
+    #                   lat: @building.latitude,
+    #                   lng: @building.longitude
+    #                 },
+    #                 markerIcon: ActionController::Base.helpers.asset_path("marker-blue.png")
+
+    #               }
+    #             ]
 
     @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
                   "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 

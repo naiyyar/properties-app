@@ -64,6 +64,10 @@ function createSidebar(object, marker){
   bindElemToMarker(elem, marker, object);
 };
 
+function markerIconBlue(){
+  return "<%=asset_path('marker-blue.png')%>";
+}
+
 function markerIcon(price, type='red'){
   var path = '';
   //console.log(price)
