@@ -1,6 +1,8 @@
 - if @uploads.present?
   .item
     .clearfix{ style: "width:100%;" }
+      - if @similar_properties.present?
+        %h4.comp.featured Featured
       %h4.lightslider-slides-counts
         %span.current 1
         %span.total="/ #{images_count = @uploads.count}"

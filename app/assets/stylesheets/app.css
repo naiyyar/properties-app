@@ -270,6 +270,18 @@ form fieldset{
     height: 14px !important;
 }
 
+.comp.featured{
+    margin: 0 0 10px 0;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: #eab134;
+    z-index: 999;
+    color: #fff;
+    padding: .2em;
+    font-size: 14px;
+}
+
 .about_us{
     margin-left: 0px !important;
     background: transparent;

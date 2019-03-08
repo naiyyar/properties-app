@@ -3,7 +3,7 @@
     = render 'home/lightslider', building: building, view_type: 'split'
   
   = link_to building_path(building) do
-    - unless params[:action] == 'show'
+    - unless @similar_properties.present?
       .building-detail-card{id: "building_details#{building.id}"}
     - else
       #building_details88.building-detail-card
