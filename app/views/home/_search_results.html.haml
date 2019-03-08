@@ -1,17 +1,4 @@
 - buildings.each do |building|
   - @uploads = building.image_uploads
   .col-xs-12.col-sm-12.col-md-6.col-lg-6
-    .card.search-view-card
-      .figure{style: "position: relative;"}
-        = render 'home/lightslider', building: building, view_type: 'split'
-      
-      = link_to building_path(building) do
-        .building-detail-card{id: "building_details#{building.id}"}
-      
-      %div{style: "float: right;margin-top: -43px;"}
-        = render 'buildings/favourite', building: building
-      = link_to building_path(building) do
-        = render 'home/building_detail', building: building
-      %div{style: "padding: 8px;"}
-        = check_availability_link(building)
-    .clearfix
+    = render 'buildings/detail_card', building: building

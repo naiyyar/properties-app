@@ -1,0 +1,21 @@
+.card.search-view-card
+  .figure{style: "position: relative;"}
+    = render 'home/lightslider', building: building, view_type: 'split'
+  
+  = link_to building_path(building) do
+    - unless params[:action] == 'show'
+      .building-detail-card{id: "building_details#{building.id}"}
+    - else
+      #building_details88.building-detail-card
+        %h2=building.building_name_or_address
+        .cardAddress
+          %span.icon-location-pin
+          = building.full_street_address
+  
+  %div{style: "float: right;margin-top: -43px;"}
+    = render 'buildings/favourite', building: building
+  = link_to building_path(building) do
+    = render 'home/building_detail', building: building
+  %div{style: "padding: 8px;"}
+    = check_availability_link(building)
+.clearfix

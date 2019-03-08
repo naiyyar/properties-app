@@ -31,7 +31,7 @@
   .clearfix
     - if @similar_properties.present?
       #subways
-        %h3 Similar Buildings
+        %h3= "Similar Buildings (#{@similar_properties.count})"
         = render 'buildings/show/similar_properties'
   
   .clearfix

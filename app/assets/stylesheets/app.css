@@ -266,6 +266,10 @@ form fieldset{
     height: 18px !important;
 }
 
+.star-xs .star img{
+    height: 14px !important;
+}
+
 .about_us{
     margin-left: 0px !important;
     background: transparent;
