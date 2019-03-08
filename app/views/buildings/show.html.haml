@@ -27,6 +27,12 @@
       #subways
         %h3 Subway
         = render 'buildings/show/subways'
+
+  .clearfix
+    - if @similar_properties.present?
+      #subways
+        %h3 Similar Buildings
+        = render 'buildings/show/similar_properties'
   
   .clearfix
   - if @building.rating_cache?

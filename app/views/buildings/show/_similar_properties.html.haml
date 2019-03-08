@@ -1,0 +1,65 @@
+.similar
+  / carousel for medium & large devices
+  #carouselSimilar-1.carousel.slide.visible-lg.carousel-col
+    / %ol.carousel-indicators
+    /   %li.active{"data-slide-to" => "0", "data-target" => "#carouselSimilar-1"}
+    /   %li{"data-slide-to" => "1", "data-target" => "#carouselSimilar-1"}
+    .carousel-inner
+      .item.active
+        .row
+          - @similar_properties.each do |building|
+            .col-xs-4
+              = render 'building_card', building: building
+      .item
+        .row
+          .col-xs-4
+    - if @similar_properties.count > 3
+      %a.left.carousel-control{"data-slide" => "prev", href: "#carouselSimilar-1", role: "button"}
+        %span.fa.fa-chevron-left
+      %a.right.carousel-control{"data-slide" => "next", href: "#carouselSimilar-1", role: "button"}
+        %span.fa.fa-chevron-right
+  / carousel for small devices
+  - if browser.device.ipad?
+    #carouselSimilar-2.carousel.slide.visible-md.carousel-col
+      / %ol.carousel-indicators
+      /   %li.active{"data-slide-to" => "0", "data-target" => "#carouselSimilar-2"}
+      /   %li{"data-slide-to" => "1", "data-target" => "#carouselSimilar-2"}
+      /   %li{"data-slide-to" => "2", "data-target" => "#carouselSimilar-2"}
+      .carousel-inner
+        .item.active
+          .row
+            .col-xs-6
+              - @similar_properties.each do |building|
+                .col-xs-4
+                  = render 'building_card', building: building
+        .item
+          .row
+            .col-xs-6
+        .item
+          .row
+            .col-xs-6
+      / carousel-inner
+      %a.left.carousel-control{"data-slide" => "prev", href: "#carouselSimilar-2", role: "button"}
+        %span.fa.fa-chevron-left
+      %a.right.carousel-control{"data-slide" => "next", href: "#carouselSimilar-2", role: "button"}
+        %span.fa.fa-chevron-right
+  / carousel for extra-small devices
+  - if browser.device.mobile?
+    #carouselSimilar-4.carousel.slide.visible-xs.visible-sm.carousel-col
+      / %ol.carousel-indicators
+      /   %li.active{"data-slide-to" => "0", "data-target" => "#carouselSimilar-4"}
+      /   %li{"data-slide-to" => "1", "data-target" => "#carouselSimilar-4"}
+      /   %li{"data-slide-to" => "2", "data-target" => "#carouselSimilar-4"}
+      /   %li{"data-slide-to" => "3", "data-target" => "#carouselSimilar-4"}
+      /   %li{"data-slide-to" => "4", "data-target" => "#carouselSimilar-4"}
+      /   %li{"data-slide-to" => "5", "data-target" => "#carouselSimilar-4"}
+      .carousel-inner
+        - @similar_properties.each_with_index do |building, index|
+          %div{class: "item #{index == 0 ? 'active' : ''}"}
+            .row
+              .col-xs-12
+                = render 'building_card', building: building
+      %a.left.carousel-control{"data-slide" => "prev", href: "#carouselSimilar-4", role: "button"}
+        %span.fa.fa-chevron-left
+      %a.right.carousel-control{"data-slide" => "next", href: "#carouselSimilar-4", role: "button"}
+        %span.fa.fa-chevron-right

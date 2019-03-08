@@ -85,9 +85,12 @@ class BuildingsController < ApplicationController
     @distance_results = DistanceMatrix.get_data(@building)
     #building + uinits images
     @uploads = @building.image_uploads
-
     @documents = @building.uploads.where('document_file_name is not null')
 
+    #Similiar buildings
+    active_comps = @building.featured_comps.active
+    @similar_properties = Building.where(id: active_comps.pluck(:building_id))
+    
     @lat = @building.latitude
     @lng = @building.longitude
 
