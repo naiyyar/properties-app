@@ -7,13 +7,11 @@ class FeaturedComp < ActiveRecord::Base
 	scope :active, -> { where(active: true) }
 	scope :inactive, -> { where(active: false) }
 
-	pg_search_scope :search_query, against: [:id, :start_date, :end_date],
-    :using => { :tsearch => { prefix: true } }
-
-  pg_search_scope :search_query, associated_against: {
-    building: [:building_name, :building_street_address],
-    buildings: [:building_name, :building_street_address]
-  }
+  pg_search_scope :search_query, 
+  								against: [:id], 
+  								associated_against: {
+								    building: [:building_name, :building_street_address]
+								  }
 
 	filterrific(
    default_filter_params: { },

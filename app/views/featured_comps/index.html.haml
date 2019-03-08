@@ -13,3 +13,9 @@
   = render 'featured_comps/comps'
 .text-center
   = will_paginate @featured_comps, renderer: BootstrapPagination::Rails
+
+
+:css
+  #sortable_filter{
+    display: none;
+  }

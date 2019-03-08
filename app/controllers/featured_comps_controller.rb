@@ -62,7 +62,6 @@ class FeaturedCompsController < ApplicationController
   def update
     respond_to do |format|
       if @featured_comp.update(featured_comp_params)
-        debugger
         @featured_comp.add_featured_building(params[:comparable_building_ids]) if params[:comparable_building_ids].present?
         format.html { redirect_to featured_comps_path, notice: 'Featured comp was successfully updated.' }
         format.json { render :json => { success: true, data: @featured_comp } }
