@@ -95,11 +95,22 @@ class HomeController < ApplicationController
       
       @buildings = Building.filtered_buildings(@buildings, params[:filter]) if params[:filter].present?
       @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if (params[:sort_by].present? and @buildings.present?)
-    
+      
       #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
       if @buildings.present?
         @buildings = @buildings unless @buildings.kind_of? Array
-        @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
+        #getting all featured building for search term
+        featured_buildings = FeaturedBuilding.where(building_id: @buildings.pluck(:id))
+        featured_building_ids = featured_buildings.pluck(:building_id)
+        #Selecting 2 featured building to put on top
+        @top_two_featured_buildings = @buildings.where(id: featured_building_ids).shuffle[1..2]
+        @per_page_buildings = @buildings.where.not(id: featured_building_ids).paginate(:page => params[:page], :per_page => 20)
+        #putting featured building on top
+        if @top_two_featured_buildings.present?
+          @all_building = @top_two_featured_buildings + @per_page_buildings
+        else
+          @all_building = @per_page_buildings
+        end
         @hash = Building.buildings_json_hash(@buildings)
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']

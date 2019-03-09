@@ -21,7 +21,7 @@
         <%if @per_page_buildings.present? %>
           <div class="resultsList">
             <div class="row" id="load-more-buildings">
-              <%= render partial: 'search_results', locals: { buildings: @per_page_buildings } %>
+              <%= render partial: 'search_results', locals: { buildings: @all_building } %>
             </div>
           </div>
           

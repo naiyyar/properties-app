@@ -18,12 +18,12 @@
               .col-xs-6.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Start Date
-                  = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
+                  = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
 
               .col-xs-6.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label End Date
-                  = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
+                  = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
 
             
             .form-group
