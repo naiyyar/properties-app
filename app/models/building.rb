@@ -71,6 +71,7 @@ class Building < ActiveRecord::Base
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :units,  :dependent => :destroy
   has_one :featured_comp, :foreign_key => :building_id, :dependent => :destroy
+  has_many :featured_comp_buildings
   has_many :featured_comps, through: :featured_comp_buildings, :dependent => :destroy
   has_one :featured_building, :dependent => :destroy
   belongs_to :management_company

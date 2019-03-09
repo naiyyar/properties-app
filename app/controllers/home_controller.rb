@@ -103,7 +103,9 @@ class HomeController < ApplicationController
         featured_buildings = FeaturedBuilding.where(building_id: @buildings.pluck(:id))
         featured_building_ids = featured_buildings.pluck(:building_id)
         #Selecting 2 featured building to put on top
-        @top_two_featured_buildings = @buildings.where(id: featured_building_ids).shuffle[1..2]
+        @top_two_featured_buildings = @buildings.where(id: featured_building_ids)
+        @top_two_featured_buildings = @top_two_featured_buildings.shuffle[1..2] if @top_two_featured_buildings.count > 1
+        
         @per_page_buildings = @buildings.where.not(id: featured_building_ids).paginate(:page => params[:page], :per_page => 20)
         #putting featured building on top
         if @top_two_featured_buildings.present?
