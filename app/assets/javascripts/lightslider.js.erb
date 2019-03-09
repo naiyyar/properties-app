@@ -359,7 +359,9 @@
                         var thumb = $children.eq(i * settings.slideMove).attr('data-thumb');
                         if (settings.gallery === true) {
                             // pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><a href="#"><div class="img-wrapper"><img src="' + thumb + '" /></div></a></li>';
-                            pagers += '<li style="width:100%;' + gutter + ':' + settings.thumbMargin + 'px"><a href="#"><div class="img-wrapper"><img src="' + thumb + '" /></div></a></li>'; 
+                            if(thumb != undefined){
+                                pagers += '<li style="width:100%;' + gutter + ':' + settings.thumbMargin + 'px"><a href="#"><div class="img-wrapper"><img src="' + thumb + '" /></div></a></li>'; 
+                            }
                         } else {
                             pagers += '<li><a href="#">' + (i + 1) + '</a></li>';
                         }

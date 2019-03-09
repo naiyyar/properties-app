@@ -11,31 +11,30 @@
           = building.street_address
           = building.zipcode
 
-      - if building_show  == 'false'
-        .bd-types
-          = render partial: 'buildings/bedroom_types_and_prices', locals: { building: building }
-        .propRating
-          - if rating_cache.present?
-            - cache_avg = rating_cache.first.avg
-            - decimal_part = number_with_precision(cache_avg.round(2), precision: 2)
-            - decimal_part = decimal_part.split('.')[1].to_f/100
-            - unless cache_avg.nan?
-              - cache_avg = cache_avg + 1 if decimal_part >= 0.76
-              - half = true
-              - 1.upto(5) do |num|
-                - if num <= cache_avg.to_i
-                  %span.fa.fa-star.star
-                - elsif decimal_part >= 0.30 and decimal_part <= 0.75 and half
-                  %span.fa.fa-star-half.star
-                  - half = false
-                - else
-                  %span.fa.fa-star-o.star{style: "color: #ddd;"}
-          - else
+      .bd-types
+        = render partial: 'buildings/bedroom_types_and_prices', locals: { building: building }
+      .propRating
+        - if rating_cache.present?
+          - cache_avg = rating_cache.first.avg
+          - decimal_part = number_with_precision(cache_avg.round(2), precision: 2)
+          - decimal_part = decimal_part.split('.')[1].to_f/100
+          - unless cache_avg.nan?
+            - cache_avg = cache_avg + 1 if decimal_part >= 0.76
+            - half = true
             - 1.upto(5) do |num|
-              %span.fa.fa-star-o.star{style: "color: #ddd;"}
-          %span
-            | #{(recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe)}
-          %span= "| &nbsp; Reviews: #{building.reviews.count}".html_safe
+              - if num <= cache_avg.to_i
+                %span.fa.fa-star.star
+              - elsif decimal_part >= 0.30 and decimal_part <= 0.75 and half
+                %span.fa.fa-star-half.star
+                - half = false
+              - else
+                %span.fa.fa-star-o.star{style: "color: #ddd;"}
+        - else
+          - 1.upto(5) do |num|
+            %span.fa.fa-star-o.star{style: "color: #ddd;"}
+        %span
+          | #{(recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe)}
+        %span= "| &nbsp; Reviews: #{building.reviews.count}".html_safe
   
   %div{style: "position: absolute;right: -4px;top: 134px;"}
     .pull-right{style: "padding-right: 8px;font-size: 22px;"}

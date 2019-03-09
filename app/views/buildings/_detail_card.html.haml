@@ -1,6 +1,12 @@
-.card.search-view-card
-  .figure{style: "position: relative;"}
-    = render 'home/lightslider', building: building, view_type: 'split'
+.card.search-view-card 
+  - unless @similar_properties.present?
+    .figure{style: "position: relative;"}
+      = render 'home/lightslider', building: building, view_type: 'split'
+  - else
+    .figure{style: "position: relative;height: 165px;"}
+      - bg_img_url = ''
+      - bg_img_url = @last_uploads.present? ? @last_uploads.uploaded_img_url : image_url('no-photo.png')
+      .bg-size-cover{ style: "background-image: url(#{bg_img_url});" }
   
   = link_to building_path(building) do
     - unless @similar_properties.present?

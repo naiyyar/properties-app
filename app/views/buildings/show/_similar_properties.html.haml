@@ -5,15 +5,16 @@
     /   %li.active{"data-slide-to" => "0", "data-target" => "#carouselSimilar-1"}
     /   %li{"data-slide-to" => "1", "data-target" => "#carouselSimilar-1"}
     .carousel-inner
-      .item.active
-        .row
-          - @similar_properties.each do |building|
-            - @uploads = building.image_uploads
-            .col-xs-6.col-sm-4
-              = render 'buildings/detail_card', building: building
-      .item
-        .row
-          .col-xs-4
+      - item_ids = []
+      - (1..@similar_properties.count).step(2).each_with_index do |val, index|
+        %div{class: "item #{index == 0 ? 'active' : ''}"}
+          .row
+            - @similar_properties.where.not(id: item_ids).limit(2).each do |building|
+              - @last_uploads = building.image_uploads.last if building.image_uploads.present?
+              .col-xs-6.col-sm-4.col-xs-12
+                = render 'buildings/detail_card', building: building
+              - item_ids << building.id
+    
     - if @similar_properties.count > 2
       %a.left.carousel-control{"data-slide" => "prev", href: "#carouselSimilar-1", role: "button"}
         %span.fa.fa-chevron-left
@@ -23,20 +24,15 @@
   / carousel for extra-small devices
   - if browser.device.mobile?
     #carouselSimilar-4.carousel.slide.visible-xs.carousel-col
-      / %ol.carousel-indicators
-      /   %li.active{"data-slide-to" => "0", "data-target" => "#carouselSimilar-4"}
-      /   %li{"data-slide-to" => "1", "data-target" => "#carouselSimilar-4"}
-      /   %li{"data-slide-to" => "2", "data-target" => "#carouselSimilar-4"}
-      /   %li{"data-slide-to" => "3", "data-target" => "#carouselSimilar-4"}
-      /   %li{"data-slide-to" => "4", "data-target" => "#carouselSimilar-4"}
-      /   %li{"data-slide-to" => "5", "data-target" => "#carouselSimilar-4"}
       .carousel-inner
         - @similar_properties.each_with_index do |building, index|
-          - @uploads = building.image_uploads
+          - @last_uploads = building.image_uploads.last if building.image_uploads.present?
           %div{class: "item #{index == 0 ? 'active' : ''}"}
             .row
               .col-xs-12
                 = render 'buildings/detail_card', building: building
+      
+
       %a.left.carousel-control{"data-slide" => "prev", href: "#carouselSimilar-4", role: "button"}
         %span.fa.fa-chevron-left
       %a.right.carousel-control{"data-slide" => "next", href: "#carouselSimilar-4", role: "button"}

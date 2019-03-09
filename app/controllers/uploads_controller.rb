@@ -3,7 +3,7 @@ class UploadsController < ApplicationController
 	before_action :authenticate_user!, only: [:destroy]
 
 	def index
-    if params[:building_id]
+    if params[:building_id].present?
       @building = Building.find(params[:building_id])
       @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id}).order(:sort)
     elsif params[:unit_id]

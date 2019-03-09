@@ -683,4 +683,13 @@
         setParentBoroughCount();
     });
 
+    //Removing thumb slider from similar proprties gallery
+    setTimeout(function() {
+        $('#carouselSimilar-1').find('.lSPager.lSGallery').each(function(){
+            if($(this).children().length == 0){
+               $(this).remove(); 
+            }
+        })
+    }, 500);
+
 })(jQuery);
