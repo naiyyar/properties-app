@@ -128,14 +128,14 @@ ActiveRecord::Schema.define(version: 20190306174504) do
   add_index "favorites", ["favorable_id", "favorable_type"], name: "index_favorites_on_favorable_id_and_favorable_type", using: :btree
   add_index "favorites", ["favoriter_id", "favoriter_type"], name: "index_favorites_on_favoriter_id_and_favoriter_type", using: :btree
 
-  create_table "featured_buildings", force: :cascade do |t|
+  create_table "featured_comp_buildings", force: :cascade do |t|
     t.integer  "building_id"
     t.integer  "featured_comp_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
 
-  add_index "featured_buildings", ["building_id", "featured_comp_id"], name: "index_featured_buildings_on_building_id_and_featured_comp_id", using: :btree
+  add_index "featured_comp_buildings", ["building_id", "featured_comp_id"], name: "f_comp_buildings", using: :btree
 
   create_table "featured_comps", force: :cascade do |t|
     t.integer  "building_id",                 null: false
