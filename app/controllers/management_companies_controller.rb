@@ -27,7 +27,21 @@ class ManagementCompaniesController < ApplicationController
   def show
     @show_map_btn = true
     buildings = @management_company.buildings.reorder(neighborhood: :asc, building_name: :asc, building_street_address: :asc)
-    @manage_buildings = buildings.paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
+    
+    featured_buildings = FeaturedBuilding.where(building_id: buildings.pluck(:id))
+    featured_building_ids = featured_buildings.pluck(:building_id)
+    #Selecting 2 featured building to put on top
+    top_two_featured_buildings = buildings.where(id: featured_building_ids)
+    top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.count > 2
+    
+    @manage_buildings = buildings.where.not(id: featured_building_ids).paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
+    #putting featured building on top
+    if top_two_featured_buildings.present?
+      @all_building = top_two_featured_buildings + @manage_buildings
+    else
+      @all_building = @manage_buildings
+    end
+
     @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable).limit(10)
     @building_photos = Upload.where(imageable_id: @manage_buildings.pluck(:id), imageable_type: 'Building')
     
