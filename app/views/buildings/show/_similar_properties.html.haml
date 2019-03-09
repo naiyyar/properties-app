@@ -26,7 +26,7 @@
     #carouselSimilar-4.carousel.slide.visible-xs.carousel-col
       .carousel-inner
         - @similar_properties.each_with_index do |building, index|
-          - @last_uploads = building.image_uploads.last if building.image_uploads.present?
+          - @last_uploads = building.image_uploads.last
           %div{class: "item #{index == 0 ? 'active' : ''}"}
             .row
               .col-xs-12
