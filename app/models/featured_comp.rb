@@ -1,8 +1,8 @@
 class FeaturedComp < ActiveRecord::Base
 	include PgSearch
 	belongs_to :building
-	has_many :featured_buildings
-	has_many :buildings, through: :featured_buildings, :dependent => :destroy
+	has_many :featured_comp_buildings
+	has_many :buildings, through: :featured_comp_buildings, :dependent => :destroy
 
 	scope :active, -> { where(active: true) }
 	scope :inactive, -> { where(active: false) }

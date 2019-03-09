@@ -54,6 +54,11 @@
           %a{href: featured_comps_path}
             %span.navIcon.fa.fa-money
             %span.navLabel Featured Comps
+
+        %li
+          %a{href: featured_buildings_path}
+            %span.navIcon.fa.fa-money
+            %span.navLabel Featured buildings
       
       - elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank?
         %li

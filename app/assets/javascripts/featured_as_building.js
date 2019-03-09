@@ -1,6 +1,6 @@
 app.AsCompBuildings = function() {
-  this._input = $('#feature_building_as_comp');
-  source_url = $('#feature_building_as_comp').data('src');
+  this._input = $('#feature_building_as_comp, #featured_building_field');
+  source_url = this._input.data('src');
   this._initAutocomplete();
 };
 
@@ -49,8 +49,13 @@ app.AsCompBuildings.prototype = {
     var item = '';
     //featured_comp form top search field
     if(ui.item.featured_search_type === 'feature_comp_as'){
-      $('#feature_building_as_comp').val(ui.item.building_address)
-      $('#featured_comp_building_id').val(ui.item.id)
+      if($('#featured_building_building_id').length > 0){
+        $('#featured_building_building_id').val(ui.item.id)
+        $('#featured_building_field').val(ui.item.building_address)
+      }else{
+        $('#feature_building_as_comp').val(ui.item.building_address)
+        $('#featured_comp_building_id').val(ui.item.id)
+      }
     }
 
     return false;

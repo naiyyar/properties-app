@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190306174504) do
+ActiveRecord::Schema.define(version: 20190309153247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,15 @@ ActiveRecord::Schema.define(version: 20190306174504) do
 
   add_index "favorites", ["favorable_id", "favorable_type"], name: "index_favorites_on_favorable_id_and_favorable_type", using: :btree
   add_index "favorites", ["favoriter_id", "favoriter_type"], name: "index_favorites_on_favoriter_id_and_favoriter_type", using: :btree
+
+  create_table "featured_buildings", force: :cascade do |t|
+    t.integer  "building_id",                 null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "active",      default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "featured_comp_buildings", force: :cascade do |t|
     t.integer  "building_id"

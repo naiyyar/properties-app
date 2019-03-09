@@ -25,7 +25,7 @@ class FeaturedCompsController < ApplicationController
 
   #disconnecting building from a management company
   def disconnect_building
-    buildings = @featured_comp.featured_buildings.where(building_id: params[:building_id])
+    buildings = @featured_comp.featured_comp_buildings.where(building_id: params[:building_id])
     buildings.first.delete if buildings.present?
     redirect_to :back, notice: 'Building disconnected'
   end

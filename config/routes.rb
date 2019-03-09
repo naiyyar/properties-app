@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :featured_buildings
   resources :featured_comps do
     member do
       get :disconnect_building

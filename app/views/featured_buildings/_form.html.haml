@@ -1,0 +1,48 @@
+.form-container
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-6
+      .panel.panel-default
+        .panel-heading
+          %b= @featured_building.new_record? ? 'New Featured building' : 'Edit Featured building'
+        .panel-body
+          = form_for @featured_building do |f|
+            .row
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .form-group
+                  %label Feature This Building
+                  = text_field_tag 'featured_building_field', @featured_building.building.present? ? @featured_building.building.building_name_or_address : nil, class: 'form-control buildings-search-txt', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?featured_as=true' }, :autocomplete => :off
+                  #as-comp-buildings-search-results.results{style: "position: relative;"}
+                  
+              = f.hidden_field :building_id
+            .row
+              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                .form-group
+                  %label Start Date
+                  = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
+
+              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                .form-group
+                  %label End Date
+                  = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
+
+            
+            .form-group
+              .col-sm-12
+                .pull-right
+                  = link_to 'Cancel', featured_buildings_path, class: 'btn btn-default'
+                  = f.submit 'Save', class: 'btn btn-primary'
+    
+
+:javascript
+  $(function() {
+    new app.AsCompBuildings;
+  });
+
+  $(document).on('keyup', function(e){
+    if(e.keyCode == 40 || e.keyCode == 38){
+      if(!$("ul.ui-autocomplete").is(":visible")) {
+        //#ui-id-1: becasue there are two 1. global search 2. for buildings search
+        $("#ui-id-1").show();
+      }
+    }
+  })
