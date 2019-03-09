@@ -10,7 +10,7 @@
         %div{class: "item #{index == 0 ? 'active' : ''}"}
           .row
             - @similar_properties.where.not(id: item_ids).limit(2).each do |building|
-              - @last_uploads = building.image_uploads.last if building.image_uploads.present?
+              - @last_uploads = building.image_uploads.last
               .col-xs-6.col-sm-4.col-xs-12
                 = render 'buildings/detail_card', building: building
               - item_ids << building.id
