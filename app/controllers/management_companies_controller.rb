@@ -34,7 +34,7 @@ class ManagementCompaniesController < ApplicationController
     top_two_featured_buildings = buildings.where(id: featured_building_ids)
     top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.count > 2
     
-    @manage_buildings = buildings.where.not(id: featured_building_ids).paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
+    @manage_buildings = buildings.where.not(id: top_two_featured_buildings.map(:id)).paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
     #putting featured building on top
     if top_two_featured_buildings.present?
       @all_building = top_two_featured_buildings + @manage_buildings
