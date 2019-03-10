@@ -100,7 +100,7 @@ class HomeController < ApplicationController
       if @buildings.present?
         @buildings = @buildings unless @buildings.kind_of? Array
         #getting all featured building for search term
-        featured_buildings = FeaturedBuilding.where(building_id: @buildings.pluck(:id))
+        featured_buildings = FeaturedBuilding.where(building_id: @buildings.pluck(:id)).active
         featured_building_ids = featured_buildings.pluck(:building_id)
         #Selecting 2 featured building to put on top
         top_two_featured_buildings = @buildings.where(id: featured_building_ids)
