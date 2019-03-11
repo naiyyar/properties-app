@@ -165,7 +165,7 @@ module BuildingsHelper
 	def check_availability_link building, sl_class=nil
 		if building.web_url.present?
 			bt_block_class = sl_class.present? ? sl_class : 'btn-block'
-      link_to check_vaibility, building.web_url, target: '_blank' , class: "btn #{bt_block_class} btn-primary txt-color-white"
+      link_to check_vaibility, building.web_url, onclick: "window.open(this.href,'_blank');return false;", class: "btn #{bt_block_class} btn-primary txt-color-white"
     else
       link_to check_vaibility, '#', class: 'btn btn-block btn-primary invisible'
     end
