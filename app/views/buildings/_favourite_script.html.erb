@@ -60,7 +60,9 @@
       });
     }
 
-    function openSuModal(object_id){
+    function openSuModal(e,object_id){
+      e.preventDefault();
+      e.stopPropagation();
       $.ajax({
         url: '/favorite?object_id='+object_id,
         type: 'post',
@@ -77,7 +79,8 @@
 
     $("a.unfilled-heart").click(function (event) {
       event.preventDefault();
-      window.location = $(this).attr("href");
+      event.stopPropagation();
+      //window.location = $(this).attr("href");
     });
 
 </script>
