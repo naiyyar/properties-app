@@ -63,7 +63,10 @@
     function openSuModal(object_id){
       $.ajax({
         url: '/favorite?object_id='+object_id,
-        type: 'get',
+        type: 'post',
+        beforeSend: function(xhr){
+          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        },
         dataType: 'script',
         success: function(response){
           //console.log('success')
@@ -71,5 +74,10 @@
       });
     }
     //END favorite script
+
+    $("a.unfilled-heart").click(function (event) {
+      event.preventDefault();
+      window.location = $(this).attr("href");
+    });
 
 </script>
