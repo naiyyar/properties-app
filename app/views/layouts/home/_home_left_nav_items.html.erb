@@ -9,13 +9,6 @@
 
 <%if current_user and current_user.has_role?(:admin) %>
   <li><a href="/buildings"><span class="fa fa-building-o"></span> Admin</a></li>
-  <!-- <li><a href="/units"><span class="icon-home"></span> Units</a></li> -->
-  <!-- <li><a href="/users"><span class="icon-user"></span> Users</a></li> -->
-  <!-- <li><a href="/documents"><span class="icon-docs"></span> Documents</a></li> -->
-  <!-- <li><a href="/reviews"><span class="icon-star"></span> Reviews</a></li> -->
-  <!-- <li><a href="/neighborhood_links"><span class="icon-link"></span> Neighborhood guides</a></li> -->
-  <li><a href="<%=management_companies_path%>"><span class="fa fa-building"></span> Management companies</a></li>
-  <li><a href="<%=featured_comps_path%>"><span class="fa fa-money"></span> Featured comps</a></li>
 <%elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank? %>
   <li class="visible-xs"><a href="/blog"><span class="fa fa-hashtag"></span> Blog</a></li>
   <li class="visible-xs"><a href="/about"><span class="icon-info"></span> About us</a></li>
@@ -24,14 +17,3 @@
 <% if current_user.present? %>
   <li><a href="<%=saved_buildings_user_path(current_user) %>"><span class="icon-heart"></span>  Saved buildings</a></li>
 <%end%>
-
-<%# if user_signed_in? %>
-  <%# if current_user.has_role?(:admin) %>
-    <!-- <li>
-      <a href="<%#= buildings_path %>"><span class="fa fa-user-secret"></span> Admin</a></li>
-    </li> -->
-    <!-- <li>
-      <a href="<%= units_path %>"><span class="fa fa-building"></span> Units</a></li>
-    </li> -->
-  <%#end%>
-<%#end%>
