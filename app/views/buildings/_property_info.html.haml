@@ -27,7 +27,8 @@
       = "<span> Built in #{@building.built_in} </span>".html_safe if @building.built_in.present?
   - if @building.management_company.present? and @management_company.blank?
     .stats1.property_information
-      Managed By #{link_to @building.management_company.name, management_company_path(@building.management_company), class: 'hyper-link'}
+      Managed By 
+      =link_to @building.management_company.name, no_fee_company_path(id: @building.management_company), class: 'hyper-link'
   .clearfix
   .clearfix
   .stats1.property_information

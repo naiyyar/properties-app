@@ -22,5 +22,11 @@
   = link_to building_path(building) do
     = render 'home/building_detail', building: building
   %div{style: "padding: 8px;"}
-    = check_availability_link(building)
+    - unless @similar_properties.present? 
+      = check_availability_link(building)
+    - else
+      - if building.web_url.present?
+        =link_to check_availability, 'javascript:;', class: "btn btn-block btn-primary txt-color-white check_availability", data: { url: building.web_url }
+      - else
+        =link_to check_availability, 'javascript:;', class: "btn btn-block btn-primary invisible"
 .clearfix

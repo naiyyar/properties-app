@@ -692,4 +692,11 @@
         })
     }, 500);
 
+    // function openSitePage(e,url){
+    //     //window.open(this.href,'_blank');return false;
+    //     window.open(url,'_target');
+    //      e.preventDefault();
+    //     e.stopPropagation();
+    // }
+
 })(jQuery);
