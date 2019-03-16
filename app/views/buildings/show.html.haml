@@ -71,17 +71,6 @@
 
 = render 'buildings/favourite_script'
 
-:javascript
-    window.onload = function(){
-      $(document).on('click', '.check_availability', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        window.open($(this).data('url'), 'new')
-      })
-    }
-
-    
-
 - if session[:after_contribute].present? || params[:from_uploaded].present?
   = render 'contribute_more_popup'
   :javascript

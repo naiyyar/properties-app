@@ -490,20 +490,6 @@
     });
 
 
-    // //Enable swiping
-    // $(".carousel-inner").swipe( {
-    //     // swipeLeft:function(event, direction, distance, duration, fingerCount) {
-    //     //     $(this).parent().carousel('next'); 
-    //     // },
-    //     // swipeRight: function() {
-    //     //     $(this).parent().carousel('prev');
-    //     // }
-    // });
-
-    $(".carousel-inner .card").click(function() {
-        window.open($(this).attr('data-linkto'), '_self');
-    });
-
     $('#content').scroll(function() {
         if ($('.comments').length > 0) {
             var visible = $('.comments').visible(true);
