@@ -23,9 +23,6 @@
 //= require jquery.tagsinput.min
 //= require underscore
 //= require app
-//= require infobubble
-//= require home
-//= require zapp
 //= require dropzone_v5
 //= require jquery.raty
 //= require ratyrate
