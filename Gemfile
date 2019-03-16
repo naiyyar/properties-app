@@ -46,7 +46,8 @@ gem "iconv", "~> 1.0.3"
 gem 'email_verifier'
 
 #sitemap
-gem 'dynamic_sitemaps'
+#gem 'dynamic_sitemaps'
+gem 'sitemap_generator'
 
 #Error Messages, Form validations
 gem 'dynamic_form'
