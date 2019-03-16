@@ -55,9 +55,9 @@
       <%= yield %>
     <%end%>
     <%#= javascript_include_tag 'infobox' %>
-    <%= javascript_include_tag 'infobubble' %>
-    <%= javascript_include_tag 'home' %>
-    <%= javascript_include_tag 'zapp' %>
+    <%#= javascript_include_tag 'infobubble' %>
+    <%#= javascript_include_tag 'home' %>
+    <%#= javascript_include_tag 'zapp' %>
 
     <%= render 'layouts/shared/signin' if current_user.blank? %>
     <%= render 'layouts/shared/signup' if current_user.blank? %>

@@ -26,7 +26,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn = true
-    buildings = @management_company.buildings.reorder(neighborhood: :asc, building_name: :asc, building_street_address: :asc)
+    buildings = @management_company.buildings.reorder(neighborhood: :asc, building_name: :asc, building_street_address: :asc).includes(:featured_building)
     
     featured_buildings = FeaturedBuilding.where(building_id: buildings.pluck(:id)).active
     featured_building_ids = featured_buildings.pluck(:building_id)

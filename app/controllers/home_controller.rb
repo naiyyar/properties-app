@@ -98,7 +98,7 @@ class HomeController < ApplicationController
       
       #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
       if @buildings.present?
-        @buildings = @buildings.includes(:building_average) unless @buildings.kind_of? Array
+        @buildings = @buildings.includes(:building_average, :featured_building) unless @buildings.kind_of? Array
         #getting all featured building for search term
         featured_buildings = FeaturedBuilding.where(building_id: @buildings.pluck(:id)).active
         featured_building_ids = featured_buildings.pluck(:building_id)
