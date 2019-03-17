@@ -45,7 +45,7 @@
         %a{"data-objectid" => "#{building.id}", href: 'javascript:;', title: 'Save', class: "favourite save_link_#{building.id} #{fav_color_class}", onclick: click_action, onmouseover: hover_action}
           %span.fa.fa-heart
       
-      = link_to heart_icon, 'javascript:;', class: "save_link_#{building.id} favourite #{fav_color_class}", onclick: "openSuModal(#{building.id})" if !current_user.present?
+      = link_to heart_icon, 'javascript:;', class: "save_link_#{building.id} favourite #{fav_color_class}", onclick: "openSuModal(event, #{building.id})" if !current_user.present?
   
   .clearfix
   .infoButtons
