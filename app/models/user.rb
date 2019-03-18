@@ -145,7 +145,10 @@ class User < ActiveRecord::Base
       rating_cache.avg = rateables.sum(:stars)/rateables.count
       rating_cache.qty = rateables.count
       rating_cache.save
+      #updating avg in building table
+      rating_cache.update_building_avg if rating_cache.dimension == 'building'
     end
+
   end
 
   def marked_useful? review_id

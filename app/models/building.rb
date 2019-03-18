@@ -85,7 +85,7 @@ class Building < ActiveRecord::Base
 
   #callbacks
   after_create :save_neighborhood, :update_neighborhood_counts
-  after_update :update_neighborhood, :update_neighborhood_counts
+  after_update :update_neighborhood, :update_neighborhood_counts, :if => Proc.new{ |obj| obj.continue_call_back? }
 
   after_destroy :update_neighborhood_counts
 
@@ -251,20 +251,26 @@ class Building < ActiveRecord::Base
   end
 
   def self.sort_by_rating buildings, sort_index
+    rated_buildings = buildings.includes(:building_average, :featured_building).where.not(avg_rating: nil)
+    non_rated_buildings = buildings.includes(:building_average, :featured_building).where.not(id: rated_buildings.map(&:id))
     if sort_index == '1'
-      @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg DESC')
+      rated_buildings = rated_buildings.reorder(avg_rating: :desc, building_name: :asc, building_street_address: :asc)
+      buildings = rated_buildings + non_rated_buildings
+      #@ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg DESC')
     else
-      @ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg ASC')
+      rated_buildings = rated_buildings.reorder(avg_rating: :asc, building_name: :asc, building_street_address: :asc)
+      buildings = non_rated_buildings + rated_buildings
+      #@ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg ASC')
     end
     
-    building_ids = @ratings.map(&:cacheable_id)
-    rated_buildings = buildings.where(id: building_ids).sort_by{ |b| building_ids.index(b.id) if !b.id.nil? }
-    non_rated_buildings = buildings.where.not(id: rated_buildings.map(&:id))
-    if sort_index == '1'
-      buildings = rated_buildings + non_rated_buildings
-    else
-      buildings = non_rated_buildings + rated_buildings
-    end
+    #building_ids = @ratings.map(&:cacheable_id)
+    #rated_buildings = buildings.where(id: building_ids).sort_by{ |b| building_ids.index(b.id) if !b.id.nil? }
+    
+    # if sort_index == '1'
+    #   buildings = rated_buildings + non_rated_buildings
+    # else
+    #   buildings = non_rated_buildings + rated_buildings
+    # end
 
     buildings
   end
@@ -643,6 +649,10 @@ class Building < ActiveRecord::Base
   def favorite_by?(favoriter)
     favorites.find_by(favoriter_id: favoriter.id, favoriter_type: favoriter.class.base_class.name).present?
   end  
+
+  def continue_call_back?
+    !self.avg_rating_changed?
+  end
 
   private
 

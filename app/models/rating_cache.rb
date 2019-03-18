@@ -20,10 +20,14 @@ class RatingCache < ActiveRecord::Base
   													rateable_id: rating_cache.cacheable_id, 
   													rateable_type: rating_cache.cacheable_type)
   	
-  	#rating_cache = rating_cache.first
     rating_cache.avg = rateables.sum(:stars)/rateables.count
     rating_cache.qty = rateables.count
     rating_cache.save
+    rating_cache.update_building_avg if rating_cache.dimension == 'building'
+  end
+
+  def update_building_avg
+    Building.find(self.cacheable_id).update(avg_rating: self.avg)
   end
 
 end
