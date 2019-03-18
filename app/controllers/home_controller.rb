@@ -96,17 +96,27 @@ class HomeController < ApplicationController
       @buildings = Building.filtered_buildings(@buildings, params[:filter]) if params[:filter].present?
       @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if (params[:sort_by].present? and @buildings.present?)
       
-      #added unless @buildings.kind_of? Array => getting ratings sorting reasuls in array
+      #added unless @buildings.kind_of? Array => getting ratings sorting results in array
       if @buildings.present?
         @buildings = @buildings.includes(:building_average, :featured_building) unless @buildings.kind_of? Array
         #getting all featured building for search term
-        featured_buildings = FeaturedBuilding.where(building_id: @buildings.pluck(:id)).active
+        building_ids = @buildings.map(&:id)
+        featured_buildings = FeaturedBuilding.where(building_id: building_ids).active
         featured_building_ids = featured_buildings.pluck(:building_id)
-        #Selecting 2 featured building to put on top
-        top_two_featured_buildings = @buildings.where(id: featured_building_ids)
-        top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.count > 2
         
-        @per_page_buildings = @buildings.where.not(id: top_two_featured_buildings.map(&:id)).paginate(:page => params[:page], :per_page => 20)
+        #Selecting 2 featured building to put on top
+        if @buildings.kind_of?(Array)
+          #when sorting by rating, getting array of objects
+          top_two_featured_buildings = @buildings.select{|b| featured_building_ids.include?(b.id)}
+          top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.count > 2
+          @per_page_buildings = @buildings.select{|b| !top_two_featured_buildings.include?(b.id)}
+          #.where.not(id: top_two_featured_buildings.map(&:id))
+        else
+          top_two_featured_buildings = @buildings.where(id: featured_building_ids)
+          top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.count > 2
+          @per_page_buildings = @buildings.where.not(id: top_two_featured_buildings.map(&:id))
+        end
+        @per_page_buildings = @per_page_buildings.paginate(:page => params[:page], :per_page => 20)
         #putting featured building on top
         if top_two_featured_buildings.present?
           @all_building = top_two_featured_buildings + @per_page_buildings
@@ -116,8 +126,8 @@ class HomeController < ApplicationController
         @hash = Building.buildings_json_hash(@buildings)
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']
-        @photos_count = Upload.where(imageable_id: @buildings.map(&:id), imageable_type: 'Building').count
-        @reviews_count = Review.where(reviewable_id: @buildings.map(&:id), reviewable_type: 'Building').count
+        @photos_count = Upload.where(imageable_id: building_ids, imageable_type: 'Building').count
+        @reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
       else
         if @boundary_coords.present? and @boundary_coords.first.length > 1
           @lat = @boundary_coords.first.first[:lat]
