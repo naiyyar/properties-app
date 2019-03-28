@@ -18,8 +18,8 @@
     - else
       .row{style: 'padding-top: 6px;'}
         .col-xs-6
-          %label{style: 'margin-bottom: 1px;'}
-            =link_to "#{"(#{ @buildings.present? ? @buildings.count : 0 })"} Buildings", '#', style: 'margin: 15px;color: #428bca;'
+          %label{style: 'margin-bottom: 1px; padding: 2px 15px;'}
+            =link_to "#{"(#{ @buildings.present? ? @buildings.count : 0 })"} Buildings", '#', style: 'color: #428bca;'
         .col-xs-6
           / %label.hyper-link.font-bolder Sorted By:
           %label.select{style: 'margin-bottom: 1px;'}
