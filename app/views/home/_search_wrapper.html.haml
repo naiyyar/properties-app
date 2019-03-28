@@ -19,11 +19,11 @@
       .row{style: 'padding-top: 6px;'}
         .col-xs-6
           %label{style: 'margin-bottom: 1px;'}
-            =link_to "#{"(#{ @buildings.present? ? @buildings.count : 0 })"} Buildings", '#', class: ' font-bolder', style: 'margin: 15px;color: #428bca;'
+            =link_to "#{"(#{ @buildings.present? ? @buildings.count : 0 })"} Buildings", '#', style: 'margin: 15px;color: #428bca;'
         .col-xs-6
           / %label.hyper-link.font-bolder Sorted By:
-          %label{style: 'width: 55%;margin-bottom: 1px;'}
-            = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { prompt: 'Sorted By: Sort Type', data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, class: 'font-bolder', style: 'color: #428bca;' }
+          %label.select{style: 'margin-bottom: 1px;'}
+            = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { prompt: 'Sorted By: Sort Type', data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, style: 'color: #428bca;border-color: transparent;height: 25px; padding: 0px 10px;' }
     
     .tab-content.tab-scroll11{style: "background-color: #f3f3f3;"}
       - unless browser.device.mobile?
