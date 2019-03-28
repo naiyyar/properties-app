@@ -691,9 +691,10 @@ class Building < ActiveRecord::Base
     if search.present? and first_neighborhood.blank?
       neighborhood1 = neighborhood2 = neighborhood3 = ''
       #search for child neighborhoods
-      search[0..6].each_with_index do |geo_result, index|
+      search[0..7].each_with_index do |geo_result, index|
         #finding neighborhood
         neighborhood = geo_result.address_components_of_type(:neighborhood)
+        puts "gindex: #{index}"
         if neighborhood.present?
           neighborhood = neighborhood.first['long_name']
           sublocality = search[0].address_components_of_type(:sublocality)
@@ -720,21 +721,25 @@ class Building < ActiveRecord::Base
             parent_neighborhood = 'East Village' if 
             neighborhood2 = parent_neighborhood
           end
-          #end if
+          #discontinue once neighborhood is saved
+          break
         end
       end #end search loop
     else
+      neighborhood3 = self.neighborhood3
       if ['Alphabet City','Ukrainian Village'].include?(self.neighborhood)
         neighborhood1 = 'East Village'
         neighborhood2 = 'Lower Manhattan'
       elsif self.neighborhood == 'East Village'
         neighborhood1 = self.neighborhood
         neighborhood2 = 'Lower Manhattan'
+      elsif ['Rose Hill'].include?(self.neighborhood)
+        neighborhood1 = 'Kips Bay'
+        neighborhood3 = 'Midtown'
       else
         neighborhood1 = self.neighborhood
         neighborhood2 = parent_neighborhood
       end
-      neighborhood3 = self.neighborhood3
     end #end search if
 
     return neighborhood1, neighborhood2, neighborhood3
