@@ -453,9 +453,13 @@
     //     }
     // });
 
+    $('.closeGuides, .handleGuides').click(function(e) {
+        e.stopPropagation();
+        $('.modal-full').slideToggle(200);
+    });
+
     $('.handleFilter, .closeFilter').click(function(e) {
         e.stopPropagation();
-        //$('.filterForm').slideToggle(200);
         $('.filter').slideToggle(200);
     });
     

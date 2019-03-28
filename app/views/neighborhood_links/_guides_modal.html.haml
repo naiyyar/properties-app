@@ -1,0 +1,24 @@
+.modal-full{style: 'display: none; background: #fff;'}
+  .row{style: 'position: relative;'}
+    .col-lg-12
+      .text-center
+        %h3.text-center{style: 'margin-top: 10px; margin-bottom: 15px;'} Neighborhood Guides
+
+    %div.text-right.header.visible-xs{style: 'position: absolute; right: 10px; top: 5px;'}
+      = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeGuides'
+  
+  .nb-container
+    - if @neighborhood_links.present?
+      - @neighborhood_links.each do |neighborhood_link|
+        .row{style: 'border-bottom: 1px solid #999;'}
+          .col-xs-3
+            .pull-left
+              %div{style: 'padding: 4px'}
+                %a{href: "#{neighborhood_link.web_url}", target: "_blank"}
+                  .image{style: 'width: 80px;height:80px;'}
+                    = image_tag neighborhood_link.link_image, alt: 'Image', style: 'width: 85px;height: auto;border: 1px solid #999;border-radius: 8px;'
+          .col-xs-9
+            %div{style: 'padding: 4px 0px'}
+              %a{href: "#{neighborhood_link.web_url}", target: "_blank"}
+                .name{style: 'color: #2b2b2b;font-size: 16px;font-weight: 500;'}= neighborhood_link.title
+                .address.text-muted= neighborhood_link.source

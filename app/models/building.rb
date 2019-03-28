@@ -694,7 +694,6 @@ class Building < ActiveRecord::Base
       search[0..7].each_with_index do |geo_result, index|
         #finding neighborhood
         neighborhood = geo_result.address_components_of_type(:neighborhood)
-        puts "gindex: #{index}"
         if neighborhood.present?
           neighborhood = neighborhood.first['long_name']
           sublocality = search[0].address_components_of_type(:sublocality)
@@ -718,7 +717,7 @@ class Building < ActiveRecord::Base
             neighborhood2 = neighborhood if neighborhood2.blank? and neighborhood1.blank?
           else
             neighborhood1 = neighborhood if neighborhood1.blank?
-            parent_neighborhood = 'East Village' if 
+            parent_neighborhood = 'East Village'
             neighborhood2 = parent_neighborhood
           end
           #discontinue once neighborhood is saved

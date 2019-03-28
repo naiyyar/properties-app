@@ -25,6 +25,10 @@ body{
     border-radius: 50%;
 }
 
+.font-bolder, .font-bold{
+    font-weight: bolder;
+}
+
 
 form footer{
     display: block;
@@ -2230,7 +2234,7 @@ a.handleFilter, a.handleSort {
     padding: 20px;
     margin-left: 54px;
 }
-.filter {
+.filter, .modal-full {
     position: absolute;
     right: 3px;
     top: 113px;
@@ -6414,7 +6418,7 @@ select.custom-arrow {
         background-color: #fff;
         color: #333;
     }
-    .filter{
+    .filter, .modal-full{
         width: 100%;
         position: absolute;
         left: 0px;
