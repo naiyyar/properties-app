@@ -16,14 +16,14 @@
             %b
               NEIGHBORHOOD GUIDES #{"(#{@neighborhood_links.count})" if @neighborhood_links.present?}
     - else
-      .row{style: 'padding-top: 8px;'}
+      .row{style: 'padding-top: 6px;'}
         .col-xs-6
-          %label
-            =link_to "#{"(#{ @buildings.present? ? @buildings.count : 0 })"} Buildings", '#', class: 'hyper-link font-bolder', style: 'margin: 15px;'
+          %label{style: 'margin-bottom: 1px;'}
+            =link_to "#{"(#{ @buildings.present? ? @buildings.count : 0 })"} Buildings", '#', class: ' font-bolder', style: 'margin: 15px;color: #428bca;'
         .col-xs-6
           / %label.hyper-link.font-bolder Sorted By:
-          %label{style: 'width: 55%;'}
-            = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { prompt: 'Sorted By: Sort Type', data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, class: 'hyper-link font-bolder' }
+          %label{style: 'width: 55%;margin-bottom: 1px;'}
+            = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { prompt: 'Sorted By: Sort Type', data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, class: 'font-bolder', style: 'color: #428bca;' }
     
     .tab-content.tab-scroll11{style: "background-color: #f3f3f3;"}
       - unless browser.device.mobile?
