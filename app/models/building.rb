@@ -83,6 +83,9 @@ class Building < ActiveRecord::Base
   geocoded_by :street_address
   after_validation :geocode
 
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
+
   #callbacks
   after_create :save_neighborhood, :update_neighborhood_counts
   after_update :update_neighborhood, :update_neighborhood_counts, :if => Proc.new{ |obj| obj.continue_call_back? }

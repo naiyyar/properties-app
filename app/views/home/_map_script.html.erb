@@ -13,8 +13,16 @@
       position = google.maps.ControlPosition.TOP_CENTER
     <%end%>
     var map;
-    var lat =  <%= raw @lat.to_json %>; 
-    var lng= <%= raw @lng.to_json %>;
+    var currentLocation;
+    var props;
+    var bounds;
+    var infobox;
+    var newMarker;
+    var markers;
+    var options;
+    var dragged = false;
+    var lat = <%= raw @lat.to_json %>; 
+    var lng = <%= raw @lng.to_json %>;
     var zoom = <%= @zoom || 13 %>;
     var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
     current_user_id = $('#cu').val();
@@ -27,128 +35,128 @@
         zoom_ctrl = false;
       }
       
-        var options = {
-          zoomControl: zoom_ctrl,
-          disableDoubleClickZoom: false,
-          zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
-          mapTypeControl: false,
-          mapTypeControlOptions: { 
-                                    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                                    position: position
-                                  },
-          gestureHandling: 'greedy',
-        };
+      options = {
+        zoomControl: zoom_ctrl,
+        disableDoubleClickZoom: false,
+        zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+        mapTypeControl: false,
+        mapTypeControlOptions: { 
+                                  style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                                  position: position
+                                },
+        gestureHandling: 'greedy',
+      };
 
-        var newMarker = null;
-        var markers = [];
-        // json for properties markers on map
-        var props = json_array;
-        var bounds = new google.maps.LatLngBounds();
-        var infobox = new InfoBubble({
-          maxWidth: 229,
-          position: new google.maps.LatLng(lng, lat),
-          shadowStyle: 3,
-          padding: 0,
-          backgroundColor: 'rgb(255,255,255)',
-          borderRadius: 2,
-          arrowSize: 10,
-          borderWidth: 0,
-          borderColor: '#2c2c2c',
-          disableAutoPan: true,
-          hideCloseButton: false
-        });
+      newMarker = null;
+      markers = [];
+      // json for properties markers on map
+      props = json_array;
+      bounds = new google.maps.LatLngBounds();
+      infobox = new InfoBubble({
+        maxWidth: 229,
+        position: new google.maps.LatLng(lng, lat),
+        shadowStyle: 3,
+        padding: 0,
+        backgroundColor: 'rgb(255,255,255)',
+        borderRadius: 2,
+        arrowSize: 10,
+        borderWidth: 0,
+        borderColor: '#2c2c2c',
+        disableAutoPan: true,
+        hideCloseButton: false
+      });
 
-        // function that adds the markers on map
-        var addMarkers = function(props, map) {
-            $.each(props, function(i,prop) {
-                var default_icon = ''
-                var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
-                  //default icon only when no price info available
-                  default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),
-                        null,null,null, null)
+      // function that adds the markers on map
+      var addMarkers = function(props, map) {
+        $.each(props, function(i,prop) {
+            var default_icon = ''
+            var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
+              //default icon only when no price info available
+              default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),
+                    null,null,null, null)
 
-                var latlng = new google.maps.LatLng(prop.latitude, prop.longitude);
-                var marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map,
-                    icon: default_icon, //pinSymbol(setMcolor(prop.price)),
-                    // label: {
-                    //         text: markerLabel,
-                    //         color: "#333",
-                    //         fontSize: "12px",
-                    //         fontWeight: "normal"
-                    //       }, //labels[labelIndex++ % labels.length],
-                    draggable: false,
-                    //animation: google.maps.Animation.DROP,
-                });
-                bounds.extend(marker.position);
-                if(sidebar){
-                  createSidebar(prop, marker);
+            var latlng = new google.maps.LatLng(prop.latitude, prop.longitude);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                icon: default_icon, //pinSymbol(setMcolor(prop.price)),
+                // label: {
+                //         text: markerLabel,
+                //         color: "#333",
+                //         fontSize: "12px",
+                //         fontWeight: "normal"
+                //       }, //labels[labelIndex++ % labels.length],
+                draggable: false,
+                //animation: google.maps.Animation.DROP,
+            });
+            bounds.extend(marker.position);
+            if(sidebar){
+              createSidebar(prop, marker);
+            }
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                  var building_id = json_array[i].id
+                  //infobox.setContent(placeholder_content); //placeholder content
+                  $.post('/load_infobox', {
+                    object_id: building_id, 
+                    building_show: false,
+                    current_user_id: current_user_id,
+                  }, function(data){
+                    infobox.setContent(data.html);
+                    //infowindow.open(handler.getMap(), google.maps.markers[index]);
+                    //infobox.setPosition(latlng);
+                    //if (!infobox.isOpen()) {
+                      infobox.open(map, marker);
+                    //}
+                  });
+                  
+                  //infobox.setContent(infoboxContent);
+                  //infobox.open(map, marker);
                 }
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                      var building_id = json_array[i].id
-                      //infobox.setContent(placeholder_content); //placeholder content
-                      $.post('/load_infobox', {
-                        object_id: building_id, 
-                        building_show: false,
-                        current_user_id: current_user_id,
-                      }, function(data){
-                        infobox.setContent(data.html);
-                        //infowindow.open(handler.getMap(), google.maps.markers[index]);
-                        //infobox.setPosition(latlng);
-                        //if (!infobox.isOpen()) {
-                          infobox.open(map, marker);
-                        //}
-                      });
-                      
-                      //infobox.setContent(infoboxContent);
-                      //infobox.open(map, marker);
-                    }
-                    
-                })(marker, i));
+                
+            })(marker, i));
 
-                google.maps.event.addDomListener(document.getElementById('header'),
-                'click', function() {
-                  infobox.close();
-                });
-
-                google.maps.event.addDomListener(document.getElementById('content'),
-                'click', function() {
-                  infobox.close();
-                });
-
-                google.maps.event.addListener(map, 'click', function() {
-                  infobox.close();
-                });         
-
-                markers.push(marker);
+            google.maps.event.addDomListener(document.getElementById('header'),
+            'click', function() {
+              infobox.close();
             });
-            map.fitBounds(bounds);
-            var listener = google.maps.event.addListener(map, "idle", function () {
-                map.setZoom(zoom);
-                google.maps.event.removeListener(listener);
+
+            google.maps.event.addDomListener(document.getElementById('content'),
+            'click', function() {
+              infobox.close();
             });
-          }
+
+            google.maps.event.addListener(map, 'click', function() {
+              infobox.close();
+            });         
+
+            markers.push(marker);
+        });
+        map.fitBounds(bounds);
+        var listener = google.maps.event.addListener(map, "idle", function () {
+            map.setZoom(zoom);
+            google.maps.event.removeListener(listener);
+        });
+      }
         
-        var polylineoptons = {};
-        <% if @boundary_coords.present? %>
-          polylineoptons = { 
-            paths: <%= raw @boundary_coords.to_json %>, 
-            strokeColor: '#1664a4', 
-            strokeOpacity: 0.7, 
-            strokeWeight: 2.5, 
-            fillColor: '#0e5c9a', 
-            fillOpacity: 0.15, 
-            clickable:false 
-          }
-        <%end%>
-
-        var polylines = new google.maps.Polygon(polylineoptons);
-
-        var set_boundaries = function(map){
-          brooklyn_and_queens_neighborhoods(seach_term, map) //In search.js
+      var polylineoptons = {};
+      <% if @boundary_coords.present? %>
+        polylineoptons = { 
+          paths: <%= raw @boundary_coords.to_json %>, 
+          strokeColor: '#1664a4', 
+          strokeOpacity: 0.7, 
+          strokeWeight: 2.5, 
+          fillColor: '#0e5c9a', 
+          fillOpacity: 0.15, 
+          clickable:false 
         }
+      <%end%>
+
+      var polylines = new google.maps.Polygon(polylineoptons);
+
+      var set_boundaries = function(map){
+        brooklyn_and_queens_neighborhoods(seach_term, map) //In search.js
+      }
 
       setTimeout(function() {
         $('body').removeClass('notransition');
@@ -163,12 +171,71 @@
         var transitLayer = new google.maps.TransitLayer();
         transitLayer.setMap(map);
         
+        //Redo search only when dragging map
+        google.maps.event.addListener(map, 'dragend', function(){
+          dragged = true;
+        })
+        
+        var centerControlDiv = document.createElement('div');
+        var centerControl = new RedoButton(centerControlDiv, map);
+
+        centerControlDiv.index = 1;
+        if(width < 600){       
+          map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+        }else{
+          map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+        }
+
       }, 300);
       
     }
 
     // Initialize the map
     google.maps.event.addDomListener(window, 'load', initialize);
+
+    function getMoveData(){
+      if(dragged){
+        currentLocation = map.getCenter()
+        lat = currentLocation.lat()
+        lng = currentLocation.lng()
+        var orginal_url = window.location.href.split('?')[0];
+        location.href = orginal_url+'?latitude='+lat+'&longitude='+lng;
+      }
+    }
+
+    function RedoButton(controlDiv, map) {
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#428bc9';
+        // controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        if(width > 600){
+          controlUI.style.marginLeft = '71px';
+        }
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to recenter the map';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = '#fff';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = '<span class="fa fa-refresh"></span> Redo Search Here';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener('click', function() {
+          getMoveData();
+        });
+
+      }
 
     var windowHeight;
     var windowWidth;

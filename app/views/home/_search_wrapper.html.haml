@@ -10,7 +10,7 @@
         %li.active
           %a{"data-toggle" => "tab", href: "#buildings", role: "tab"}
             %b
-              BUILDINGS #{"(#{ @buildings.present? ? @buildings.count : 0 })"}
+              BUILDINGS #{"(#{ @buildings.present? ? @buildings.length : 0 })"}
         %li
           %a{"data-toggle" => "tab", href: "#resourceLinks", role: "tab"}
             %b
