@@ -196,10 +196,17 @@
     function getMoveData(){
       if(dragged){
         currentLocation = map.getCenter()
-        lat = currentLocation.lat()
-        lng = currentLocation.lng()
+        lat = currentLocation.lat();
+        lng = currentLocation.lng();
+        var query_strings = window.location.search;
         var orginal_url = window.location.href.split('?')[0];
-        location.href = orginal_url+'?latitude='+lat+'&longitude='+lng;
+        var  new_loc_url;
+        if(query_strings.includes('sort_by') || query_strings.includes('filter')){
+          new_loc_url = orginal_url+query_strings+'&latitude='+lat+'&longitude='+lng;
+        }else{
+          new_loc_url = orginal_url+'?latitude='+lat+'&longitude='+lng;
+        }
+        location.href = new_loc_url;
       }
     }
 
@@ -211,7 +218,7 @@
         controlUI.style.borderRadius = '3px';
         controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
         controlUI.style.cursor = 'pointer';
-        controlUI.style.marginBottom = '22px';
+        controlUI.style.marginTop = '8px';
         if(width > 600){
           controlUI.style.marginLeft = '71px';
         }
