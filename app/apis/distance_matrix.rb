@@ -12,6 +12,11 @@ class DistanceMatrix
     nearby_stations.each_with_index do |station, index|
       st_dest = "#{station.latitude}, #{station.longitude}"
       dis_matrix_api = "#{API_URL}&origins=#{address}&destinations=#{st_dest}"
+      begin
+        dis_matrix_api = URI.parse(dis_matrix_api)
+      rescue URI::InvalidURIError
+        dis_matrix_api = URI.parse(URI.escape(dis_matrix_api))
+      end
       response = HTTParty.get(dis_matrix_api)
       distance_result[index] = {}
       distance_result[index][:dest_station] = station.name
