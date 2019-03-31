@@ -26,11 +26,12 @@
       = link_to '<span class="fa fa-plus"></span>'.html_safe+' Write Review', contribute_buildings_path, class: 'btn btn-green hidden-xs'
     .pull-right.headerLinks.hidden
       = link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-green'
+  
   .visible-xs{style: "position: fixed; bottom: 10px;"}
     - if params[:action] == 'search' or @show_map_btn
-      %a.mapHandler.btn.btn-green{href: "javascript:void(0);"}
+      %a.mapHandler.btn.btn-green{href: "javascript:void(0);", style: custom_search? ? 'display: none;' : ''}
         %span.icon-map
         Map
-      %a.listHandler.btn.btn-green{href: "javascript:void(0);"}
+      %a.listHandler.btn.btn-green{href: "javascript:void(0);", style: custom_search? ? 'display: block;' : ''}
         %span.fa.fa-list
         List

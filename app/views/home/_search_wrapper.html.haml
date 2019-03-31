@@ -1,9 +1,9 @@
-#mapViewSearch
+#mapViewSearch{class: custom_search? ? 'max' : nil}
   .mapPlaceholder
     %span.fa.fa-spin.fa-spinner
     Loading map...
 
-#content.searched-properties
+#content.searched-properties{class: custom_search? ? 'min' : nil}
   .tabsWidget.tabsWidgetSearch
     - unless browser.device.mobile?
       %ul.nav.nav-tabs.nav-justified{role: "tablist"}
@@ -15,20 +15,6 @@
           %a{"data-toggle" => "tab", href: "#resourceLinks", role: "tab"}
             %b
               NEIGHBORHOOD GUIDES #{"(#{@neighborhood_links.count})" if @neighborhood_links.present?}
-    - else
-      - if false
-        .row{style: 'padding-top: 6px;'}
-          .col-xs-6
-            %label{style: 'margin-bottom: 1px; padding: 2px 15px;'}
-              =link_to "#{"(#{ @buildings.present? ? @buildings.length : 0 })"} Buildings", '#', style: 'color: #428bca;'
-          .col-xs-6
-            - if params[:sort_by].present?
-              .tbl-cell{style: 'width: 64px;'}
-                %span.hyper-link{style: 'margin-bottom: 1px;'} Sorted By:
-            
-            .tbl-cell
-              %label.select{style: 'margin-bottom: 1px;'}
-                = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { prompt: 'Sorted By: Sort Type', data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, style: 'color: #428bca;border-color: transparent;height: 25px; padding: 0px 0px;' }
       
     .tab-content.tab-scroll11{style: "background-color: #f3f3f3;"}
       - unless browser.device.mobile?
