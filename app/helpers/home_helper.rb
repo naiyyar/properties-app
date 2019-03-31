@@ -264,6 +264,8 @@ module HomeHelper
 				else
 					"#{@building.street_address}"
 				end
+			elsif params[:latitude].present? && params[:longitude].present?
+				'Custom'
 			else
 				@search_input_value
 			end
