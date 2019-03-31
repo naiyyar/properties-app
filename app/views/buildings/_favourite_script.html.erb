@@ -31,7 +31,10 @@
 
       $.ajax({
         url: '/favorite?object_id='+object_id,
-        type: 'get',
+        type: 'post',
+        beforeSend: function(xhr){
+          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        },
         dataType: 'json',
         success: function(response){
           replace_link(save_link, unfav_link)
@@ -78,8 +81,10 @@
     //END favorite script
 
     $("a.unfilled-heart").click(function (event) {
-      event.preventDefault();
-      event.stopPropagation();
+      if(this.dataset.remote != 'true'){
+        event.preventDefault();
+        event.stopPropagation();
+      }
     });
 
 </script>

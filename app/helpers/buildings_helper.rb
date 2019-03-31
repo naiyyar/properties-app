@@ -139,7 +139,8 @@ module BuildingsHelper
 		link_to heart_icon, saved_object_url(object), 
 												remote: remote(object), class: fav_classes(object), 
 												title: heart_link_title(object), 
-												data: { objectid: object.id }
+												data: { objectid: object.id }, 
+												method: :post
 	end
 
 	def fav_classes object
