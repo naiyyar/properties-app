@@ -17,6 +17,23 @@ body{
     }
 }
 
+.sorted-by{
+    color: #428bca;
+}
+
+/*.sort-select select:after{
+  content: "▼";
+  padding: 12px 8px;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+  width: 10%;
+  height: 100%;
+  pointer-events: none;
+}*/
+
 .building-detail-card{
     width: 93%;
 }

@@ -690,4 +690,9 @@
     //     e.stopPropagation();
     // }
 
+    $('.sorted-by').on('click', function(e){
+        e.preventDefault();
+        $('#sort').click();
+    })
+
 })(jQuery);

@@ -24,7 +24,7 @@
     -moz-appearance: none;
     -webkit-appearance: none;
 }
-.select-blue select,{
+.select-blue select{
    border-color: #0073cc !important; 
    color: #0073cc !important; 
 }
@@ -42,6 +42,16 @@
     height: 11px;
     background: #fff;
     box-shadow: 0 0 0 9px #fff;
+}
+
+.select i.sort {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 5px;
+    height: 11px;
+    background: #fff;
+    box-shadow: 0 0 0 7px #fff;
 }
 
 .select i:before {
