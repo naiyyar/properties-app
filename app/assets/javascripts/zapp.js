@@ -351,13 +351,14 @@
         $(this).hide();
         $('.mapHandler').show();
         listMapView();
+        $('.sorted_by_option').show()
     })
     
     $('.mapHandler').click(function() {
         $(this).hide();
         $('.listHandler').show();
         listMapView();
-
+        $('.sorted_by_option').hide()
     });
 
     // Expand left side sub navigation menus

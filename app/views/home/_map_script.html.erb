@@ -23,6 +23,7 @@
     var controlUI;
     var controlText;
     var dragged = false;
+    var draggedOnce = false;
     var lat = <%= raw @lat.to_json %>; 
     var lng = <%= raw @lng.to_json %>;
     var zoom = <%= @zoom || 13 %>;
@@ -174,23 +175,24 @@
         transitLayer.setMap(map);
         
         //Redo search only when dragging map
+        var centerControlDiv = document.createElement('div');
+        var centerControl = new RedoButton(centerControlDiv, map);
         google.maps.event.addListener(map, 'dragend', function(){
           dragged = true;
           controlUI.style.display = 'block';
           //To highlight redo search button on dragend
           //controlUI.style.backgroundColor = '#428bc9';
           //controlText.style.color = '#fff';
-        })
-        
-        var centerControlDiv = document.createElement('div');
-        var centerControl = new RedoButton(centerControlDiv, map);
-
-        centerControlDiv.index = 1;
-        if(width < 600){       
-          map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-        }else{
-          map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
-        }
+          if(!draggedOnce){
+            centerControlDiv.index = 1;
+            if(width < 600){       
+              map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+            }else{
+              map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+            }
+            draggedOnce = true;
+          }
+        });
 
       }, 300);
       
@@ -217,37 +219,36 @@
     }
 
     function RedoButton(controlDiv, map) {
-        // Set CSS for the control border.
-        controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#428bc9';
-        // controlUI.style.border = '2px solid #fff';
-        controlUI.style.borderRadius = '3px';
-        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI.style.cursor = 'pointer';
-        controlUI.style.marginTop = '8px';
-        controlUI.style.marginLeft = width > 600 ? '71px' : '';
-        controlUI.style.textAlign = 'center';
-        controlUI.title = 'Click to recenter the map';
-        controlUI.style.display = 'none';
-        controlDiv.appendChild(controlUI);
+      // Set CSS for the control border.
+      controlUI = document.createElement('div');
+      controlUI.style.backgroundColor = '#428bc9';
+      // controlUI.style.border = '2px solid #fff';
+      controlUI.style.borderRadius = '3px';
+      controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+      controlUI.style.cursor = 'pointer';
+      controlUI.style.marginTop = '8px';
+      controlUI.style.marginLeft = width > 600 ? '71px' : '';
+      controlUI.style.textAlign = 'center';
+      controlUI.title = 'Click to recenter the map';
+      controlUI.style.display = 'none';
+      controlDiv.appendChild(controlUI);
 
-        // Set CSS for the control interior.
-        controlText = document.createElement('div');
-        controlText.style.color = '#fff';
-        //controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText.style.fontSize = '16px';
-        controlText.style.lineHeight = '38px';
-        controlText.style.paddingLeft = '5px';
-        controlText.style.paddingRight = '5px';
-        controlText.innerHTML = '<span class="fa fa-refresh"></span> Redo Search Here';
-        controlUI.appendChild(controlText);
+      // Set CSS for the control interior.
+      controlText = document.createElement('div');
+      controlText.style.color = '#fff';
+      //controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+      controlText.style.fontSize = '14px';
+      controlText.style.lineHeight = '30px';
+      controlText.style.paddingLeft = '5px';
+      controlText.style.paddingRight = '5px';
+      controlText.innerHTML = '<span class="fa fa-refresh"></span> Redo Search Here';
+      controlUI.appendChild(controlText);
 
-        // Setup the click event listeners: simply set the map to Chicago.
-        controlUI.addEventListener('click', function() {
-          getMoveData();
-        });
-
-      }
+      // Setup the click event listeners: simply set the map to Chicago.
+      controlUI.addEventListener('click', function() {
+        getMoveData();
+      });
+    }
 
     var windowHeight;
     var windowWidth;

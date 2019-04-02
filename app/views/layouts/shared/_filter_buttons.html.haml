@@ -11,7 +11,7 @@
       .btn-filter
         = link_to "Guides (#{@neighborhood_links.present? ? @neighborhood_links.count : 0})", 'javascript:;', class: "btn btn-o btn-primary btn-filter handleGuides", style: 'width: 100%;'
 
-    %section.row{style: 'padding-top: 6px;display: inline-block;width: 100%;background: #fff;margin: 0px;'}
+    %section.sorted_by_option.row{style: "padding-top: 6px;display: inline-block;width: 100%;background: #fff;margin: 0px; display: #{custom_search? ? 'none' : 'block'}"}
       %section.col-xs-6
         %label{style: 'margin-bottom: 1px; padding: 2px;'}
           =link_to "#{"#{ @buildings.present? ? @buildings.length : 0 }"} Buildings", '#', style: 'color: #428bca;'
