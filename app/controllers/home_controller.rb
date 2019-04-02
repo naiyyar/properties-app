@@ -150,7 +150,7 @@ class HomeController < ApplicationController
       
       @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
 
-      @meta_desc = "#{@tab_title_text.titleize} has #{@buildings.length if @buildings.present?} "+ 
+      @meta_desc = "#{@tab_title_text.try(:titleize)} has #{@buildings.length if @buildings.present?} "+ 
                   "no fee apartment, no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. "+ 
                   "View #{@photos_count} photos and #{@reviews_count} reviews."
     end
@@ -174,18 +174,20 @@ class HomeController < ApplicationController
   end
 
   def format_search_string
-    terms_arr =  params['search_term'].split('-')
-    @borough_city = terms_arr.last
-    @search_string = terms_arr.pop #removing last elements-name of city
-    @search_string = terms_arr.join(' ').titleize #join neighborhoods
-    @search_string = @search_string.gsub('  ', ' -') if @search_string == 'Flatbush   Ditmas Park'
-    @search_string = @search_string.gsub(' ', '-') if @search_string == 'Bedford Stuyvesant'
-    @search_string = 'New York' if @search_string == 'Newyork'
-    
-    @borough_city = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
-    @searched_neighborhoods = "#{@search_string}"
-    @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
-    @tab_title_text = "#{@search_string} #{@borough_city}"
+    if params['search_term'].present?
+      terms_arr =  params['search_term'].split('-')
+      @borough_city = terms_arr.last
+      @search_string = terms_arr.pop #removing last elements-name of city
+      @search_string = terms_arr.join(' ').titleize #join neighborhoods
+      @search_string = @search_string.gsub('  ', ' -') if @search_string == 'Flatbush   Ditmas Park'
+      @search_string = @search_string.gsub(' ', '-') if @search_string == 'Bedford Stuyvesant'
+      @search_string = 'New York' if @search_string == 'Newyork'
+      
+      @borough_city = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
+      @searched_neighborhoods = "#{@search_string}"
+      @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
+      @tab_title_text = "#{@search_string} #{@borough_city}"
+    end
   end
 
   def save_as_favourite

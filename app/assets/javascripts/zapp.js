@@ -179,7 +179,6 @@
         $('#wrapper').height(contentHeight);
         $('#mapView').height(contentHeight);
         $('#content').height(contentHeight);
-
         if (map) {
             google.maps.event.trigger(map, 'resize');
         }
@@ -223,9 +222,9 @@
     }
 
     windowResizeHandler();
-    $(window).resize(function() {
-        windowResizeHandler();
-    });
+    // $(window).resize(function() {
+    //     windowResizeHandler();
+    // });
     
     $("#toggleStreetView").click(function(){
         var toggle = panorama.getVisible();
@@ -304,8 +303,8 @@
             $('#content').toggleClass('min');
             $('#mapView, #mapViewSearch').toggleClass('max');
         }
-        initialize(false)
-        resize_map();
+        //initialize(false)
+        //resize_map();
     }
 
     var listMapViewShow = function(){
@@ -320,18 +319,18 @@
             $('#mapView').toggleClass('min');
             $('#content').toggleClass('max');
         }
-        resize_map();
+        //resize_map();
     }
 
-    function resize_map(){
-        setTimeout(function() {
-            if (map) {
-                google.maps.event.trigger(map, 'resize');
-                map.setCenter(new google.maps.LatLng(lat, lng));
-            }
+    // function resize_map(){
+    //     setTimeout(function() {
+    //         if (map) {
+    //             google.maps.event.trigger(map, 'resize');
+    //             map.setCenter(new google.maps.LatLng(lat, lng));
+    //         }
 
-        }, 300);
-    }
+    //     }, 300);
+    // }
     
     /* for show page view */
     $('.listHandlerShow').click(function(){
@@ -351,7 +350,7 @@
         $(this).hide();
         $('.mapHandler').show();
         listMapView();
-        $('.sorted_by_option').show()
+        $('.sorted_by_option').show();
     })
     
     $('.mapHandler').click(function() {

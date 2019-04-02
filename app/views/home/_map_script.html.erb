@@ -22,6 +22,8 @@
     var options;
     var controlUI;
     var controlText;
+    var centerControlDiv;
+    var centerControl;
     var zoom = <%= @zoom || 13 %>;
     var zoomLevel = zoom;
     var dragged = false;
@@ -176,28 +178,17 @@
         transitLayer.setMap(map);
         
         //Redo search only when dragging map
-        var centerControlDiv = document.createElement('div');
-        var centerControl = new RedoButton(centerControlDiv, map);
+        createRedoButtonObject(map)
         google.maps.event.addListener(map, 'dragend', function(){
           dragged = true;
-          controlUI.style.display = 'block';
           //To highlight redo search button on dragend
           //controlUI.style.backgroundColor = '#428bc9';
           //controlText.style.color = '#fff';
-          if(!draggedOnce){
-            centerControlDiv.index = 1;
-            if(width < 600){       
-              map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-            }else{
-              map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
-            }
-            draggedOnce = true;
-          }
+          setRedoButtonPosition();
         });
 
         google.maps.event.addListener(map, 'zoom_changed', function() {
           zoomLevel = map.getZoom();
-          console.log(zoomLevel)  
         });
 
       }, 300);
@@ -207,21 +198,39 @@
     // Initialize the map
     google.maps.event.addDomListener(window, 'load', initialize);
 
+    function setRedoButtonPosition(){
+      controlUI.style.display = 'block';
+      if(!draggedOnce){
+        centerControlDiv.index = 1;
+        if(width < 600){       
+          map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+        }else{
+          map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+        }
+        draggedOnce = true;
+      }
+    }
+
     function getMoveData(){
       if(dragged){
         currentLocation = map.getCenter()
         lat = currentLocation.lat();
         lng = currentLocation.lng();
         var query_strings = window.location.search;
-        var orginal_url = window.location.href.split('?')[0];
-        var  new_loc_url;
+        var orginal_url = '/custom_search' //window.location.href.split('?')[0];
+        var new_loc_url;
         if(query_strings.includes('sort_by') || query_strings.includes('filter')){
           new_loc_url = orginal_url+query_strings+'&latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
         }else{
           new_loc_url = orginal_url+'?latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
         }
-        location.href = new_loc_url;
+        location.href = new_loc_url+'&searched_by=latlng&search_term=custom';
       }
+    }
+
+    function createRedoButtonObject(map){
+      centerControlDiv = document.createElement('div');
+      centerControl = new RedoButton(centerControlDiv, map);
     }
 
     function RedoButton(controlDiv, map) {
@@ -280,9 +289,6 @@
     }
 
     windowResizeHandler();
-    $(window).resize(function() {
-      windowResizeHandler();
-    });
 
   </script>
 <%= render partial: 'buildings/favourite_script' %>

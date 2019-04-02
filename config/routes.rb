@@ -102,6 +102,7 @@ Rails.application.routes.draw do
   end
   
   get '/:searched_by/:search_term', to: 'home#search', as: 'search' #must be after buildings resource
+  get '/custom_search', to: 'home#search' #must be after buildings resource
   get '/auto_search', to: 'home#auto_search', as: 'auto_search'
   get '/terms_of_service', to: 'home#tos', as: 'tos'
   post '/load_infobox', to: 'home#load_infobox', as: 'load_infobox'
