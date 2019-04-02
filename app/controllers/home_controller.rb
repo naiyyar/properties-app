@@ -95,7 +95,7 @@ class HomeController < ApplicationController
         end
       else
         @buildings = Building.near([params[:latitude].to_f, params[:longitude].to_f], 1.5, units: :km)
-        @zoom = 14
+        @zoom = params[:zoomlevel] || 14
       end
       
       @buildings = Building.filtered_buildings(@buildings, params[:filter]) if params[:filter].present?

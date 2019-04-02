@@ -690,9 +690,12 @@
     //     e.stopPropagation();
     // }
 
-    $('.sorted-by').on('click', function(e){
-        e.preventDefault();
-        $('#sort').click();
-    })
+    // $('span.sorted-by').on('click', function(e){
+    //     //e.preventDefault();
+    //     //$('#sort').click();
+    //     var mev = document.createEvent('MouseEvents');
+    //     mev.initMouseEvent('mousedown');
+    //     $('#sort')[0].dispatchEvent(mev);
+    // })
 
 })(jQuery);

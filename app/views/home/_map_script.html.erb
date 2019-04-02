@@ -22,11 +22,12 @@
     var options;
     var controlUI;
     var controlText;
+    var zoom = <%= @zoom || 13 %>;
+    var zoomLevel = zoom;
     var dragged = false;
     var draggedOnce = false;
     var lat = <%= raw @lat.to_json %>; 
     var lng = <%= raw @lng.to_json %>;
-    var zoom = <%= @zoom || 13 %>;
     var seach_term = <%= raw @brooklyn_neighborhoods.to_json %>;
     current_user_id = $('#cu').val();
     var width = window.innerWidth;
@@ -194,6 +195,11 @@
           }
         });
 
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+          zoomLevel = map.getZoom();
+          console.log(zoomLevel)  
+        });
+
       }, 300);
       
     }
@@ -210,9 +216,9 @@
         var orginal_url = window.location.href.split('?')[0];
         var  new_loc_url;
         if(query_strings.includes('sort_by') || query_strings.includes('filter')){
-          new_loc_url = orginal_url+query_strings+'&latitude='+lat+'&longitude='+lng;
+          new_loc_url = orginal_url+query_strings+'&latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
         }else{
-          new_loc_url = orginal_url+'?latitude='+lat+'&longitude='+lng;
+          new_loc_url = orginal_url+'?latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
         }
         location.href = new_loc_url;
       }
