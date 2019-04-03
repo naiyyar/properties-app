@@ -462,6 +462,11 @@
         e.stopPropagation();
         $('.filter').slideToggle(200);
     });
+
+    //Avoid dropdown menu close on click inside
+    $(document).on('click', '.neighborhoods-dropdown .dropdown-menu', function (e) {
+      e.stopPropagation();
+    });
     
     //Running this script only on desktop views
     //var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
@@ -479,6 +484,7 @@
          
     });
 
+    //For mobile dropdown panel
     $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
         $('.popular-neighborhoods').slideToggle(200);
     });
@@ -669,9 +675,9 @@
         $(this).select();
     });
 
-    $('.dropdown-toggle-neighborhoods').click(function(){
-        setParentBoroughCount();
-    });
+    // $('.dropdown-toggle-neighborhoods').click(function(){
+    //     setParentBoroughCount();
+    // });
 
     //Removing thumb slider from similar proprties gallery
     setTimeout(function() {

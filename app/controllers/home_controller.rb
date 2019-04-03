@@ -77,7 +77,7 @@ class HomeController < ApplicationController
                   boroughs = view_context.bronx_sub_borough
                 end
                 @buildings = Building.where("city = ? OR neighborhood in (?)", @search_string, boroughs) 
-                #buildings_in_city(@search_string)
+                building = @buildings #Only to show map when no match found after filter
                 @zoom = 12
               end
             end

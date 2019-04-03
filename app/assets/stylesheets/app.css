@@ -6527,6 +6527,7 @@ select.custom-arrow {
         height: 100%;
         overflow-y: scroll;
         overflow-x: hidden;
+        top: 0px;
     }
     .headerLinks {
         padding: 8px 3px 6px 4px;
