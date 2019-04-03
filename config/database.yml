@@ -18,7 +18,7 @@ development:
 
 production:
   <<: *default
-  database: dev_transparentcity10jul
+  database: transparentcity_dev26mar
   username: postgres
   password: postgres
 

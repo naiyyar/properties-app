@@ -2,6 +2,7 @@
   <input type="text" name="lat" class="hidden lat" value="<%#=@lat %>" />
   <input type="text" name="lng" class="hidden lng" value="<%#=@lng %>" />
   <input type="text" name="lng" class="hidden zoom" value="<%=@zoom || 13 %>" />
+  <input type="text" name="show_redo" class="hidden show_redo" value="0" />
   <%= hidden_field_tag :cu, current_user.present? ? current_user.id : nil %>
   
   <script type="text/javascript" charset="utf-8">
@@ -35,6 +36,11 @@
     var width = window.innerWidth;
    
     function initialize(sidebar = true) {
+      if(!sidebar){
+        //To fix redo button on mobile when switching between map and list view
+        dragged = true;
+        draggedOnce = false;
+      }
       // Custom options for map
       var zoom_ctrl = true;
       if(width < 600){
@@ -176,9 +182,9 @@
 
         var transitLayer = new google.maps.TransitLayer();
         transitLayer.setMap(map);
-        
         //Redo search only when dragging map
         createRedoButtonObject(map)
+        
         google.maps.event.addListener(map, 'dragend', function(){
           dragged = true;
           //To highlight redo search button on dragend
@@ -216,7 +222,7 @@
         lat = currentLocation.lat();
         lng = currentLocation.lng();
         var query_strings = window.location.search;
-        var orginal_url = '/custom_search' //window.location.href.split('?')[0];
+        var orginal_url = '/custom_search';
         var new_loc_url;
         if(query_strings.includes('sort_by') || query_strings.includes('filter')){
           new_loc_url = orginal_url+query_strings+'&latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
@@ -289,16 +295,15 @@
 
     windowResizeHandler();
 
-    function resize_map(){
-      setTimeout(function() {
-          if (map) {
-            google.maps.event.trigger(map, 'resize');
-            map.setCenter(new google.maps.LatLng(lat, lng));
-            map.setZoom(zoom);
-          }
-
-      }, 300);
-    }
+    // function resize_map(){
+    //   setTimeout(function(){
+    //     if (map) {
+    //       google.maps.event.trigger(map, 'resize');
+    //       map.setCenter(new google.maps.LatLng(lat, lng));
+    //       map.setZoom(zoom);
+    //     }
+    //   }, 300);
+    // }
 
   </script>
 <%= render partial: 'buildings/favourite_script' %>

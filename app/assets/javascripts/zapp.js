@@ -160,8 +160,6 @@
 
         function resize_map(){
             setTimeout(function() {
-                console.log(zoom)
-                console.log("map:"+ map)
                 if (map) {
                     console.log('resize')
                     google.maps.event.trigger(map, 'resize');
@@ -310,16 +308,16 @@
             $('#mapView, #mapViewSearch').hasClass('mob-max') || 
             $('#content').hasClass('mob-min') || 
             $('#content').hasClass('mob-max')) {
-                $('#mapView, #mapViewSearch').toggleClass('mob-max');
-                $('#content').toggleClass('mob-min');
+            $('#mapView, #mapViewSearch').toggleClass('mob-max');
+            $('#content').toggleClass('mob-min');
         } else {
             $('#content').toggleClass('min');
             $('#mapView, #mapViewSearch').toggleClass('max');
         }
-        //initialize(false)
-        if(!show_map){
-            resize_map();
-        }
+        initialize(false)
+        //if(!show_map){
+        //    resize_map();
+        //}
     }
 
     // var listMapViewShow = function(){
