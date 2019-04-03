@@ -9,9 +9,9 @@
     json_array = <%= raw @hash.to_json %>;
     var position;
     <% if browser.device.mobile? %>
-      position = google.maps.ControlPosition.TOP_LEFT
+      position = google.maps.ControlPosition.TOP_LEFT;
     <%else%>
-      position = google.maps.ControlPosition.TOP_CENTER
+      position = google.maps.ControlPosition.TOP_CENTER;
     <%end%>
     var map;
     var currentLocation;
@@ -169,10 +169,22 @@
       var set_boundaries = function(map){
         brooklyn_and_queens_neighborhoods(seach_term, map) //In search.js
       }
-
+      
       setTimeout(function() {
         $('body').removeClass('notransition');
         map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
+        //Redo search only when dragging map
+        createRedoButtonObject(map)
+        google.maps.event.addListener(map, 'dragend', function(){
+          dragged = true;
+          console.log('dragged')
+          setRedoButtonPosition();
+        });
+
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+          zoomLevel = map.getZoom();
+        });
+        
         map.setCenter(new google.maps.LatLng(lat,lng));
         map.setZoom(zoom);
         polylines.setMap(map);
@@ -182,20 +194,6 @@
 
         var transitLayer = new google.maps.TransitLayer();
         transitLayer.setMap(map);
-        //Redo search only when dragging map
-        createRedoButtonObject(map)
-        
-        google.maps.event.addListener(map, 'dragend', function(){
-          dragged = true;
-          //To highlight redo search button on dragend
-          //controlUI.style.backgroundColor = '#428bc9';
-          //controlText.style.color = '#fff';
-          setRedoButtonPosition();
-        });
-
-        google.maps.event.addListener(map, 'zoom_changed', function() {
-          zoomLevel = map.getZoom();
-        });
 
       }, 300);
     }
@@ -294,16 +292,6 @@
     }
 
     windowResizeHandler();
-
-    // function resize_map(){
-    //   setTimeout(function(){
-    //     if (map) {
-    //       google.maps.event.trigger(map, 'resize');
-    //       map.setCenter(new google.maps.LatLng(lat, lng));
-    //       map.setZoom(zoom);
-    //     }
-    //   }, 300);
-    // }
 
   </script>
 <%= render partial: 'buildings/favourite_script' %>
