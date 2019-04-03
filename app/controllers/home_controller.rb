@@ -94,7 +94,10 @@ class HomeController < ApplicationController
           redirect_to management_company_path(@company.first) if @company.present?
         end
       else
-        @buildings = Building.near([params[:latitude].to_f, params[:longitude].to_f], 1.5, units: :km)
+        custom_latng = [params[:latitude].to_f, params[:longitude].to_f]
+        @buildings = Building.near(custom_latng, 1.5, units: :km)
+        @buildings = Building.near(custom_latng, 2.0, units: :km) if @buildings.blank?
+        @buildings = Building.near(custom_latng, 4.5, units: :km) if @buildings.blank?
         building = @buildings
         @zoom = params[:zoomlevel] || 14
       end
