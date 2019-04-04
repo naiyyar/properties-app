@@ -354,6 +354,11 @@
         $('.mapHandler').show();
         listMapView();
         $('.sorted_by_option').show();
+        //Only when redo search
+        //images are not loading on hidden element
+        if($('.searched-properties').hasClass('invisible')){
+            $('.searched-properties').removeClass('invisible').removeClass('min');
+        }
     })
     
     $('.mapHandler').click(function() {
