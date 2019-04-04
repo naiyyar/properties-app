@@ -118,13 +118,14 @@ class HomeController < ApplicationController
           #when sorting by rating, getting array of objects
           top_two_featured_buildings = @buildings.select{|b| featured_building_ids.include?(b.id)}
           top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
-          @per_page_buildings = @buildings.select{|b| !top_two_featured_buildings.include?(b.id)}
+          @per_page_buildings = @buildings.select{|b| !top_two_featured_buildings.include?(b)}
           #.where.not(id: top_two_featured_buildings.map(&:id))
         else
           top_two_featured_buildings = @buildings.where(id: featured_building_ids)
           top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
           @per_page_buildings = @buildings.where.not(id: top_two_featured_buildings.map(&:id))
         end
+        
         @per_page_buildings = @per_page_buildings.paginate(:page => params[:page], :per_page => 20)
         #putting featured building on top
         if top_two_featured_buildings.present?

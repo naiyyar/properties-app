@@ -66,6 +66,10 @@ class Building < ActiveRecord::Base
   validates :building_street_address, presence: true
   validates_uniqueness_of :building_street_address, scope: [:zipcode]
 
+  #form some buildings when submitting reviews getting
+  #Error: undefined method `address=' for #<Building
+  attr_accessor :address 
+
   belongs_to :user
   has_many :reviews, as: :reviewable
   has_many :favorites, as: :favorable, dependent: :destroy

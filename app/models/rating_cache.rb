@@ -27,7 +27,9 @@ class RatingCache < ActiveRecord::Base
   end
 
   def update_building_avg
-    Building.find(self.cacheable_id).update(avg_rating: self.avg)
+    #Error: undefined method `address=' for #<Building
+    #Building.find(self.cacheable_id).update(avg_rating: self.avg) 
+    Building.where(id: self.cacheable_id).update_all(avg_rating: self.avg)
   end
 
 end
