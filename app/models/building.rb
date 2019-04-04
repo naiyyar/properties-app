@@ -68,7 +68,7 @@ class Building < ActiveRecord::Base
 
   #form some buildings when submitting reviews getting
   #Error: undefined method `address=' for #<Building
-  attr_accessor :address 
+  attr_accessor :address
 
   belongs_to :user
   has_many :reviews, as: :reviewable
@@ -240,7 +240,7 @@ class Building < ActiveRecord::Base
         buildings = sort_by_rating(buildings, '2')
       when '3'
         #buildings = buildings.reorder('reviews_count DESC')
-        buildings = where(id: buildings.pluck(:id)).reorder('reviews_count DESC')
+        buildings = where(id: buildings.map(&:id)).reorder('reviews_count DESC')
       when '4'
         buildings = buildings.reorder('building_name ASC, building_street_address ASC')
       when '5'

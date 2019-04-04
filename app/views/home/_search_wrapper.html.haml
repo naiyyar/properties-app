@@ -3,7 +3,7 @@
     %span.fa.fa-spin.fa-spinner
     Loading map...
 
-#content.searched-properties{class: custom_search? ? 'invisible' : nil}
+#content.searched-properties{class: (custom_search? and browser.device.mobile?) ? 'invisible' : nil}
   .tabsWidget.tabsWidgetSearch
     - unless browser.device.mobile?
       %ul.nav.nav-tabs.nav-justified{role: "tablist"}
