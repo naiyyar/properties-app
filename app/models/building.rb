@@ -239,7 +239,8 @@ class Building < ActiveRecord::Base
       when '2'
         buildings = sort_by_rating(buildings, '2')
       when '3'
-        buildings = buildings.reorder('reviews_count DESC')
+        #buildings = buildings.reorder('reviews_count DESC')
+        buildings = where(id: buildings.pluck(:id)).reorder('reviews_count DESC')
       when '4'
         buildings = buildings.reorder('building_name ASC, building_street_address ASC')
       when '5'

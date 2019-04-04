@@ -103,7 +103,6 @@ class HomeController < ApplicationController
       end
       
       @buildings = Building.filtered_buildings(@buildings, params[:filter]) if params[:filter].present?
-      @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if (params[:sort_by].present? and @buildings.present?)
       
       #added unless @buildings.kind_of? Array => getting ratings sorting results in array
       if @buildings.present?
@@ -125,6 +124,8 @@ class HomeController < ApplicationController
           top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
           @per_page_buildings = @buildings.where.not(id: top_two_featured_buildings.map(&:id))
         end
+
+        @per_page_buildings = Building.sort_buildings(@per_page_buildings, params[:sort_by]) if (params[:sort_by].present? and @buildings.present?)
         
         @per_page_buildings = @per_page_buildings.paginate(:page => params[:page], :per_page => 20)
         #putting featured building on top
