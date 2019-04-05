@@ -204,6 +204,38 @@ class Building < ActiveRecord::Base
     end
   end
 
+  def self.redo_search_buildings params
+    @zoom = params[:zoomlevel].to_i
+    custom_latng = [params[:latitude].to_f, params[:longitude].to_f]
+    distance = redo_search_distance(1.5)
+    buildings = Building.near(custom_latng, distance, units: :km)
+    distance = redo_search_distance(2.0)
+    buildings = Building.near(custom_latng, distance, units: :km) if buildings.blank?
+    distance = redo_search_distance(4.5)
+    buildings = Building.near(custom_latng, distance, units: :km) if buildings.blank?
+
+    buildings
+  end
+
+  def self.redo_search_distance distance
+    if @zoom > 14
+      distance = distance/(@zoom)
+      case @zoom
+      when 15
+        distance += 0.8
+      when 16
+        distance += 0.5
+      when 17
+        distance += 0.2
+      when 18
+        distance += 0.1
+      else
+        distance
+      end
+    end
+    distance
+  end
+
   def featured?
     self.featured_building.present? and featured_building.active
   end
