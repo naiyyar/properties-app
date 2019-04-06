@@ -81,10 +81,14 @@ form fieldset{
   .svg-icon {
     vertical-align: bottom;
 }
-.google-auth-icon{
+.google-auth-icon, .fb-auth-icon{
     position: absolute;
     top: 10px;
     left: 14px;
+}
+.fb-auth-button{
+    background-color: #4267b2;
+    color: #fff;
 }
 .fa-heart, .fa-heart:focus{
     color: #b1b3b6;

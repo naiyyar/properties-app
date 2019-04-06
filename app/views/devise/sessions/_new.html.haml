@@ -1,0 +1,30 @@
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: { :id => 'sign_in_user', format: :json, remote: true }) do |f|
+  #error_explanation.text-center
+    %b.text-red
+    %ul
+  .form-group
+    .btn-group-justified
+      = render partial: 'layouts/shared/social_auth_buttons', locals: {resource: resource, btn_title: 'Continue with Facebook', button_type: 'fb'}
+  .form-group
+    .btn-group-justified
+      = render partial: 'layouts/shared/social_auth_buttons', locals: {resource: resource, btn_title: 'Sign In with Google', button_type: 'google'}
+  .signOr OR
+  .form-group
+    = f.email_field :email, class: "form-control", placeholder: "Email", autocomplete: "off"
+    %p.help-block
+  .form-group
+    = f.password_field :password, autocomplete: "off", class: "form-control", placeholder: 'Password'
+    %p.help-block
+  .form-group
+    .row
+      .col-xs-6
+      .col-xs-6.align-right
+        %p.help-block
+          - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+            = link_to "Forgot password?", new_password_path(resource_name), class: 'text-blue'
+  .form-group
+    = f.submit "Sign In", class: "btn btn-block btn-blue login-btn-submit", data: { disable_with: "Signing in ..." }
+
+  %p.help-block
+    Not a transparentcity member?
+    %a.modal-suii.text-green{href: "/users/sign_up"} Sign Up
