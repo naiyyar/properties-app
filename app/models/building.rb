@@ -73,12 +73,13 @@ class Building < ActiveRecord::Base
   belongs_to :user
   has_many :reviews, as: :reviewable
   has_many :favorites, as: :favorable, dependent: :destroy
-  has_many :units,  :dependent => :destroy
+  has_many :units, :dependent => :destroy
   has_one :featured_comp, :foreign_key => :building_id, :dependent => :destroy
   has_many :featured_comp_buildings
   has_many :featured_comps, through: :featured_comp_buildings, :dependent => :destroy
   has_one :featured_building, :dependent => :destroy
   belongs_to :management_company
+  has_many :contacts, :dependent => :destroy
   
   accepts_nested_attributes_for :units, :allow_destroy => true
 

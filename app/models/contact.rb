@@ -11,4 +11,5 @@
 #
 
 class Contact < ActiveRecord::Base
+	belongs_to :building
 end

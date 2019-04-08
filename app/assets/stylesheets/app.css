@@ -21,19 +21,6 @@ body{
     color: #428bca;
 }
 
-/*.sort-select select:after{
-  content: "▼";
-  padding: 12px 8px;
-  position: absolute;
-  right: 10px;
-  top: 0;
-  z-index: 1;
-  text-align: center;
-  width: 10%;
-  height: 100%;
-  pointer-events: none;
-}*/
-
 .building-detail-card{
     width: 93%;
 }
@@ -46,8 +33,15 @@ body{
     font-weight: bolder;
 }
 
+.smart-form {
+    margin: 0;
+    outline: 0;
+    color: #666;
+    position: relative;
+}
 
-form footer{
+
+form footer, .smart-form footer{
     display: block;
     padding: 7px 14px 15px;
     border-top: 1px solid rgba(0,0,0,0.1);
@@ -55,8 +49,12 @@ form footer{
     text-align: right;
 }
 
-form fieldset{
-    padding: 20px 40px;
+form fieldset, .smart-form fieldset{
+    display: block;
+    padding: 25px 14px 5px;
+    border: none;
+    background: rgba(255,255,255,.9);
+    position: relative;
 }
 
 .modal-body.no-padding{

@@ -33,3 +33,16 @@
   .clearfix
   .stats1.property_information
     = check_availability_link(@building) if @building.web_url.present?
+  .stats1.property_information
+    = link_to 'Contact', '#newConactModal', class: 'btn btn-primary btn-o btn-block', data: {toggle: 'modal'} if @building.email.present?
+
+
+#newConactModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "NewUnitLabel", role: "dialog"}
+  .modal-dialog.modal-md
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Contact Form
+      .modal-body.no-padding
+        = render 'contacts/contact_building_form'

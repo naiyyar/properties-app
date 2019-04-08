@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   #load_and_authorize_resource
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
-
+  after_action :send_emails, only: :create
   # GET /contacts
   # GET /contacts.json
   def index
@@ -32,8 +32,8 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        UserMailer.send_feedback(@contact).deliver
-        format.html { redirect_to :back, notice: 'Feedback successfully sent.' }
+        notice = @contact.building_id.present? ? 'Email' : 'Feedback'
+        format.html { redirect_to :back, notice: "#{notice} successfully sent." }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
@@ -74,6 +74,14 @@ class ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:name, :email, :comment)
+      params.require(:contact).permit(:name, :email, :comment, :phone, :building_id, :user_id)
+    end
+
+    def send_emails
+      if @contact.building_id.present?
+        UserMailer.send_enquiry_to_building(@contact).deliver
+      else
+        UserMailer.send_feedback(@contact).deliver
+      end
     end
 end

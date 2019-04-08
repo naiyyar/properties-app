@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190318132739) do
+ActiveRecord::Schema.define(version: 20190408110543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20190318132739) do
     t.integer  "four_plus_bed"
     t.integer  "price"
     t.float    "avg_rating"
+    t.string   "email"
   end
 
   add_index "buildings", ["building_name"], name: "index_buildings_on_building_name", using: :btree
@@ -106,8 +107,11 @@ ActiveRecord::Schema.define(version: 20190318132739) do
     t.string   "name"
     t.string   "email"
     t.text     "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "building_id"
+    t.integer  "user_id"
+    t.string   "phone"
   end
 
   create_table "document_downloads", force: :cascade do |t|

@@ -29,4 +29,15 @@ class UserMailer < ApplicationMailer
 		)
 	end
 
+	def send_enquiry_to_building contact
+		@contact = contact
+		@building = contact.building
+		mail(
+			to: @building.email,
+			cc: 'transparentcityllc@gmail.com', 
+			from: contact.email,
+			subject: 'Interested in availabilities'
+		)
+	end
+
 end
