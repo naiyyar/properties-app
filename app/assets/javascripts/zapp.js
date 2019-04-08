@@ -700,20 +700,18 @@
             }
         })
     }, 500);
-
-    // function openSitePage(e,url){
-    //     //window.open(this.href,'_blank');return false;
-    //     window.open(url,'_target');
-    //      e.preventDefault();
-    //     e.stopPropagation();
-    // }
-
-    // $('span.sorted-by').on('click', function(e){
-    //     //e.preventDefault();
-    //     //$('#sort').click();
-    //     var mev = document.createEvent('MouseEvents');
-    //     mev.initMouseEvent('mousedown');
-    //     $('#sort')[0].dispatchEvent(mev);
+    
+    // var contact_comment_placeholder;
+    // $('#contact_comment').on('focus', function(){
+    //     contact_comment_placeholder = $(this).val();
+    //     $(this).val('').css('color', '#333');
+    //     $(this).unbind('focus')
+    // }).on('blur', function(){
+    //     if($(this).val() == ''){
+    //         $(this).val(contact_comment_placeholder);
+    //         $(this).css('color', '#777');
+    //         $(this).bind('focus')
+    //     }
     // })
 
 })(jQuery);

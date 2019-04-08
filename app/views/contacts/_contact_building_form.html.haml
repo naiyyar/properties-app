@@ -3,17 +3,16 @@
     .form-group
       = f.email_field :email, class: "form-control validate", placeholder: 'Email'
     .form-group
-      = f.number_field :phone, class: "form-control validate", placeholder: 'Phone'
+      = f.number_field :phone, class: 'form-control', placeholder: 'Phone'
       = f.hidden_field :building_id, value: @building.id if @building.present?
       = f.hidden_field :user_id, value: current_user.id if current_user.present?
     .form-group
-      = f.text_area :comment, value: "I'm interested in availabilities at #{@building.building_name_or_address}", class: "form-control validate", rows: 5
+      = f.text_area :comment, value: "I'm interested in availabilities at #{@building.building_name_or_address}.", class: "form-control validate", rows: 5, style: 'color: #777777;'
   
     = f.submit 'Send Message', class: 'btn btn-primary btn-block'
     
-    %p
-
-    %h3 Contact info
-    Phone: 
-    =link_to "#{@building.phone}", "tel: #{@building.phone}", class: 'hyper-link'
+    %div{style: 'margin: 10px 0px 18px 0px;'}
+      %h4{style: 'margin-top: 10px;margin-bottom: 6px;'} Contact info
+      Phone: 
+      =link_to "#{@building.phone}", "tel: #{@building.phone}", class: 'hyper-link'
       

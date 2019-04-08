@@ -34,7 +34,7 @@ class UserMailer < ApplicationMailer
 		@building = contact.building
 		mail(
 			to: @building.email,
-			cc: 'transparentcityllc@gmail.com', 
+			cc: 'hello@transparentcity.com', 
 			from: contact.email,
 			subject: 'Interested in availabilities'
 		)
