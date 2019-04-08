@@ -11,8 +11,8 @@
   
     = f.submit 'Send Message', class: 'btn btn-primary btn-block'
     
-    %div{style: 'margin: 10px 0px 18px 0px;'}
-      %h4{style: 'margin-top: 10px;margin-bottom: 6px;'} Contact info
-      Phone: 
-      =link_to "#{number_to_phone(@building.phone)}", "tel:#{@building.phone}", class: 'hyper-link'
+%div{style: 'margin: 10px 0px 18px 14px;'}
+  %h4{style: 'margin-top: 10px;margin-bottom: 6px;'} Contact info
+  Phone: 
+  =link_to "#{number_to_phone(@building.phone)}", "tel:#{@building.phone}", class: 'hyper-link'
       
