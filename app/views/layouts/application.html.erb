@@ -54,7 +54,8 @@
     <%else%>
       <%= yield %>
     <%end%>
-    <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? %>
+    <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? and params[:searched_by].present? %>
+    <%= render 'contacts/contact_building_modal' if @building.present? and @contact.present? %>
     <%#= javascript_include_tag 'infobox' %>
     <%= javascript_include_tag 'infobubble' %>
     <%= javascript_include_tag 'home' %>

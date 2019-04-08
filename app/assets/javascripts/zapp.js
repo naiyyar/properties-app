@@ -471,6 +471,11 @@
         $('.filter').slideToggle(200);
     });
 
+    $('.closeContact, .handleContact').click(function(e) {
+        e.stopPropagation();
+        $('.modal-full').slideToggle(200);
+    });
+
     //Avoid dropdown menu close on click inside
     $(document).on('click', '.neighborhoods-dropdown .dropdown-menu', function (e) {
       e.stopPropagation();
