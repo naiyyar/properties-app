@@ -1,6 +1,8 @@
-%p= simple_format(@contact.comment)
+%p 
+	You have a new inquiry for 
+	%a{href: "https://www.transparentcity.co/buildings/#{@building.slug}"}= @building_name
 
-%br
-%b Thanks
-%div= @contact.email
-%div= @contact.phone
+%p="From: #{@contact_email}"
+%p="Phone: #{@contact.phone}"
+
+%p= simple_format(@contact.comment)

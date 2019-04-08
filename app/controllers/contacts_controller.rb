@@ -80,6 +80,7 @@ class ContactsController < ApplicationController
     def send_emails
       if @contact.building_id.present?
         UserMailer.send_enquiry_to_building(@contact).deliver
+        UserMailer.enquiry_sent_mail_to_sender(@contact).deliver
       else
         UserMailer.send_feedback(@contact).deliver
       end

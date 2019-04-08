@@ -198,11 +198,12 @@ class Building < ActiveRecord::Base
   end
 
   def to_param
-    if building_name.present?
-      "#{id} #{building_name}".parameterize
-    else
-      "#{id} #{building_street_address}".parameterize
-    end
+    slug
+  end
+
+  def slug
+    slug = building_name.present? ? "#{id} #{building_name}" : "#{id} #{building_street_address}"
+    slug.parameterize
   end
 
   def self.redo_search_buildings params

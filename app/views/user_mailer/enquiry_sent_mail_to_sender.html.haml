@@ -1,0 +1,11 @@
+%p 
+	Nice job on trying to save a few thousand dollars in fees! Keep searching on
+	%a{href: 'https://www.transparentcity.co', target: '_blank'} transparentcity 
+	or 
+	%a{href: "https://www.transparentcity.co/buildings/#{@building.slug}", target: '_blank'} write a review of your building
+
+%p="From: #{@contact_email}"
+%p="To: #{@building.email}"
+%p='Phone: ###-###-####'
+
+%p= simple_format(@contact.comment)
