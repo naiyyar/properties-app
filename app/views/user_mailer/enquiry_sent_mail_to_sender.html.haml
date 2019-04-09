@@ -1,8 +1,9 @@
 %p 
 	Nice job on trying to save a few thousand dollars in fees! Keep searching on
-	%a{href: 'https://www.transparentcity.co', target: '_blank'} transparentcity 
+	%a{href: 'https://www.transparentcity.co?utm_source=email&utm_medium=sender', target: '_blank'} transparentcity 
 	or 
-	%a{href: "https://www.transparentcity.co/buildings/#{@building.slug}", target: '_blank'} write a review of your building
+	%a{href: 'https://www.transparentcity.co/buildings/contribute?utm_source=email&utm_medium=receiver', target: '_blank'} write a review 
+	of your building
 
 %p="From: #{@contact_email}"
 %p="To: #{@building.email}"
