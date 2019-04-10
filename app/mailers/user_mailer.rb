@@ -49,7 +49,7 @@ class UserMailer < ApplicationMailer
 		
 		mail(
 			to: @building.email,
-			cc: ['hello@transparentcity.com', 'naiyyarabbas512013@gmail.com'],
+			bcc: ['hello@transparentcity.co', 'naiyyarabbas512013@gmail.com'],
 			reply_to: @contact_email,
 			from: EMAIL_WITH_NAME,
 			subject: subject
@@ -70,11 +70,11 @@ class UserMailer < ApplicationMailer
 		@building = contact.building
 		@building_name = @building.building_name_or_address
 		subject = "Your message about #{@building_name} has been sent."
-		email_with_name = %(transparentcity <hello@transparentcity.com>)
+		email_with_name = %(transparentcity <hello@transparentcity.co>)
 		mail(
 			to: @contact_email,
 			reply_to: @contact_email,
-			cc: ['hello@transparentcity.com', 'naiyyarabbas512013@gmail.com'], 
+			bcc: ['hello@transparentcity.co', 'naiyyarabbas512013@gmail.com'], 
 			from: EMAIL_WITH_NAME,
 			subject: subject
 		)

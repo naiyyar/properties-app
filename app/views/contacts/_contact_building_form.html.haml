@@ -1,15 +1,15 @@
 = form_for @contact, html: { class: 'smart-form' } do |f|
   %fieldset
     .form-group
-      = f.email_field :email, class: "form-control validate", placeholder: 'Email'
+      = f.email_field :email, class: "form-control validate", placeholder: 'Email*'
     .form-group
-      = f.number_field :phone, class: 'form-control', placeholder: 'Phone'
+      = f.text_field :phone, class: 'form-control', placeholder: 'Phone', id: 'uintTextBox', maxlength: "10"
       = f.hidden_field :building_id, value: @building.id if @building.present?
       = f.hidden_field :user_id, value: current_user.id if current_user.present?
     .form-group
       = f.text_area :comment, value: "I'm interested in availabilities at #{@building.building_name_or_address}.", class: "form-control validate", rows: 5, style: 'color: #777777;'
   
-    = f.submit 'Send Message', class: 'btn btn-primary btn-block'
+    = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder'
     
 %div{style: 'margin: 10px 0px 18px 14px;'}
   %h4{style: 'margin-top: 10px;margin-bottom: 6px;'} Contact info

@@ -36,6 +36,6 @@
   .stats1.property_information
     - if @building.email.present?
       - if !browser.device.mobile?
-        = link_to 'Contact', '#newConactModal', class: 'btn btn-primary btn-o btn-block', data: {toggle: 'modal'} 
+        = link_to 'Contact', '#newConactModal', class: 'btn btn-primary btn-o btn-block font-bolder', data: {toggle: 'modal'} 
       - else
-        = link_to 'Contact', 'javascript:;', class: 'btn btn-primary btn-o btn-block handleContact'
+        = link_to 'Contact', 'javascript:;', class: 'btn btn-primary btn-o btn-block handleContact font-bolder'

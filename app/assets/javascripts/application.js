@@ -44,5 +44,6 @@
 //= require progressive_render
 //= require jquery.easy-autocomplete
 //= require jquery.fancybox
+//= require input_validations
 
 //= require_tree .

@@ -30,7 +30,7 @@ body{
 }
 
 .font-bolder, .font-bold{
-    font-weight: bolder;
+    font-weight: bolder !important;
 }
 
 .smart-form {
