@@ -35,6 +35,10 @@ $(document).ready(function () {
                 $('.loading-gif').hide();
                 // show our load more link
                 $('.load-more').show();
+                //hiding show more button when no review left to load
+                if(parseInt($('#total_reviews').val()) == $('.comment.record').length){
+                    $('a.load-more').hide();
+                }
             }
         });
 

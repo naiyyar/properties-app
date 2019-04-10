@@ -10,16 +10,17 @@ jQuery ->
     'contextmenu'
     'drop'
   ].forEach (event) ->
-    textbox.addEventListener event, ->
-      if inputFilter(this.value)
-        this.oldValue = this.value
-        this.oldSelectionStart = this.selectionStart
-        this.oldSelectionEnd = this.selectionEnd
-      else if this.hasOwnProperty('oldValue')
-        this.value = this.oldValue
-        this.setSelectionRange this.oldSelectionStart, this.oldSelectionEnd
+    if textbox != null
+      textbox.addEventListener event, ->
+        if inputFilter(this.value)
+          this.oldValue = this.value
+          this.oldSelectionStart = this.selectionStart
+          this.oldSelectionEnd = this.selectionEnd
+        else if this.hasOwnProperty('oldValue')
+          this.value = this.oldValue
+          this.setSelectionRange this.oldSelectionStart, this.oldSelectionEnd
+        return
       return
-    return
   return
 
   #-ve and +ve both

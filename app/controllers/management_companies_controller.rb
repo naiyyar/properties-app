@@ -14,7 +14,7 @@ class ManagementCompaniesController < ApplicationController
 
   def load_more_reviews
     buildings = @management_company.buildings
-    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads)
+    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
     @reviews = @reviews.where('id < ?', params[:object_id]).limit(10) if params[:object_id].present?
     
     respond_to do |format|

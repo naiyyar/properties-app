@@ -26,6 +26,7 @@
             .clearfix
   
   #reviewsContainer.tabsContainer
+    = hidden_field_tag :total_reviews, @management_company.aggregate_reviews
     %ul.nav.nav-tabs.nav-justified{role: "tablist"}
       %li.active
         %a{"data-toggle" => "tab", href: "#building_managed", role: "tab"}
