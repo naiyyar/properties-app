@@ -18,6 +18,7 @@ class ManagementCompaniesController < ApplicationController
     @reviews = @reviews.where('id < ?', params[:object_id]).limit(10) if params[:object_id].present?
     
     respond_to do |format|
+      format.html
       format.js
     end
   end

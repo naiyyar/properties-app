@@ -16,14 +16,14 @@
 			Congratulations! You've taken your first step into saving yourself literally thousands of dollars in broker fees! 
 		%p
 			Keep searching on
-			%a{href: 'https://www.transparentcity.co?utm_source=email&utm_medium=sender', target: '_blank'} transparentcity 
+			%a{href: 'https://www.transparentcity.co?utm_source=email&utm_medium=sender', target: '_blank'} transparentcity.co
 			or 
-			%a{href: 'https://www.transparentcity.co/buildings/contribute?utm_source=email&utm_medium=receiver', target: '_blank'} write a review 
+			%a{href: 'https://www.transparentcity.co/buildings/contribute?utm_source=email&utm_medium=sender', target: '_blank'} write a review 
 			of your building.
 		.contact-detail
 			%p="From: #{@contact_email}"
 			%p="To: #{@building.email}"
-			%p='Phone: ###-###-####'
+			%p="Phone: #{@building.try(:phone)}"
 		
 		.message
 			%p= simple_format(@contact.comment)

@@ -1,8 +1,8 @@
 class UserMailer < ApplicationMailer
-	EMAIL_WITH_NAME = %(transparentcity <hello@transparentcity.com>)
+	EMAIL_WITH_NAME = %(transparentcity <hello@transparentcity.co>)
 	
 	def password_reset_instructions
-		email = 'no-reply@transparentcity.com'
+		email = 'no-reply@transparentcity.co'
 		to = self.email
 		mail(
 			to: to, 
@@ -14,7 +14,7 @@ class UserMailer < ApplicationMailer
 	def send_feedback contact
 		@contact = contact
 		mail(
-			to: 'transparentcityllc@gmail.com', 
+			to: 'transparentcityllc@gmail.co', 
 			from: contact.email,
 			subject: 'Feedback'
 		)
@@ -24,7 +24,7 @@ class UserMailer < ApplicationMailer
 		@user = flag_review.user
 		@review = flag_review.review
 		mail(
-			to: 'transparentcityllc@gmail.com', 
+			to: 'transparentcityllc@gmail.co', 
 			from: @user.email,
 			subject: 'Review flagged as inappropriate'
 		)
@@ -49,7 +49,7 @@ class UserMailer < ApplicationMailer
 		
 		mail(
 			to: @building.email,
-			bcc: ['hello@transparentcity.co', 'naiyyarabbas512013@gmail.com'],
+			bcc: 'hello@transparentcity.co',
 			reply_to: @contact_email,
 			from: EMAIL_WITH_NAME,
 			subject: subject
@@ -74,7 +74,6 @@ class UserMailer < ApplicationMailer
 		mail(
 			to: @contact_email,
 			reply_to: @contact_email,
-			bcc: ['hello@transparentcity.co', 'naiyyarabbas512013@gmail.com'], 
 			from: EMAIL_WITH_NAME,
 			subject: subject
 		)
