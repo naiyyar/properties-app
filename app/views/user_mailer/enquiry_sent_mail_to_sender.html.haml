@@ -23,7 +23,7 @@
 		.contact-detail
 			%p="From: #{@contact_email}"
 			%p="To: #{@building.email}"
-			%p="Phone: #{@building.try(:phone)}"
+			%p="Phone: #{number_to_phone(@building.try(:phone), area_code: true)}"
 		
 		.message
 			%p= simple_format(@contact.comment)

@@ -45,5 +45,6 @@
 //= require jquery.easy-autocomplete
 //= require jquery.fancybox
 //= require input_validations
+//= require jquery.mask.min
 
 //= require_tree .

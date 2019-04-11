@@ -3,7 +3,7 @@
     .form-group
       = f.email_field :email, class: "form-control validate", placeholder: 'Email*'
     .form-group
-      = f.text_field :phone, class: 'form-control', placeholder: 'Phone', id: 'uintTextBox', maxlength: "10"
+      = f.text_field :phone, class: 'form-control phone_number', placeholder: 'Phone', id: 'uintTextBoxPhone', maxlength: "10"
       = f.hidden_field :building_id, value: @building.id if @building.present?
       = f.hidden_field :user_id, value: current_user.id if current_user.present?
     .form-group
@@ -14,5 +14,5 @@
 %div{style: 'margin: 10px 0px 18px 14px;'}
   %h4{style: 'margin-top: 10px;margin-bottom: 6px;'} Contact info
   Phone: 
-  =link_to "#{number_to_phone(@building.phone)}", "tel:#{@building.phone}", class: 'hyper-link'
+  =link_to "#{number_to_phone(@building.phone, area_code: true)}", "tel:#{@building.phone}", class: 'hyper-link'
       

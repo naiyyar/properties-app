@@ -19,7 +19,7 @@
 			%a{href: "https://www.transparentcity.co/buildings/#{@building.slug}?utm_source=email&utm_medium=receiver", target: '_blank'}= @building_name
 		.contact-detail
 			%p="From: #{@contact_email}"
-			%p="Phone: #{@contact.phone.present? ? @contact.phone : 'Not mentioned'}"
+			%p="Phone: #{@contact.phone.present? ? number_to_phone(@contact.phone, area_code: true) : 'Not mentioned'}"
 		
 		.message
 			%p= simple_format(@contact.comment)
