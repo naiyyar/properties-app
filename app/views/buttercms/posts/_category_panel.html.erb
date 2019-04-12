@@ -6,7 +6,7 @@
                 <ul class="blog-r-nav">
             		<% @categories.each do |category| %>
     				    <li>
-                            <%= link_to category.name, buttercms_category_path(category.slug), :title => category.name, style: "#{params[:slug] == category.slug ? 'font-weight:bolder;': ''}" %>
+                            <%= link_to category.name, buttercms_category_path(category.slug), :title => category.name, style: "#{params[:slug] == category.slug ? 'font-weight:bolder;': ''}" if category.slug.present? or category.name.present? %>
                             <%#= "(#{category.recent_posts.length})" if category.recent_posts.present? %>
                         </li>
                             

@@ -713,7 +713,12 @@
     //         $(this).bind('focus')
     //     }
     // })
-
-    $('.phone_number').mask("(999) 999-9999");
+    var options =  {
+                      onKeyPress: function(cep, e, field, options) {
+                        if(cep == '('){
+                            field.val('');
+                        }
+                    }};
+    $('.phone_number').mask("(000) 000-0000", options);
 
 })(jQuery);
