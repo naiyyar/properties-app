@@ -688,10 +688,6 @@
         $(this).select();
     });
 
-    // $('.dropdown-toggle-neighborhoods').click(function(){
-    //     setParentBoroughCount();
-    // });
-
     //Removing thumb slider from similar proprties gallery
     setTimeout(function() {
         $('#carouselSimilar-1').find('.lSPager.lSGallery').each(function(){
@@ -701,24 +697,13 @@
         })
     }, 500);
     
-    // var contact_comment_placeholder;
-    // $('#contact_comment').on('focus', function(){
-    //     contact_comment_placeholder = $(this).val();
-    //     $(this).val('').css('color', '#333');
-    //     $(this).unbind('focus')
-    // }).on('blur', function(){
-    //     if($(this).val() == ''){
-    //         $(this).val(contact_comment_placeholder);
-    //         $(this).css('color', '#777');
-    //         $(this).bind('focus')
-    //     }
-    // })
-    var mask_options =  {
-                      onKeyPress: function(cep, e, field, options) {
-                        if(cep == '('){
-                            field.val('');
+    var mask_options = {
+                        onKeyPress: function(cep, e, field, options) {
+                            if(cep == '('){
+                                field.val('');
+                            }
                         }
-                    }};
+                    };
     $('.phone_number').mask("(000) 000-0000", mask_options);
 
 })(jQuery);

@@ -95,10 +95,6 @@ form fieldset, .smart-form fieldset{
     color: #EC555B !important;
 }
 
-/*.filled-heart .fa-heart, .unfilled-heart .fa-heart:hover{
-    color: #EC555B !important;
-}*/
-
 .animated-background {
     animation-duration: 1s;
     animation-fill-mode: forwards;
@@ -312,7 +308,6 @@ form fieldset, .smart-form fieldset{
     height:300px;
     position: fixed;
     bottom: 0px;
-    /*background-image: */
     background-image: url('https://www.dropbox.com/s/plza9nkijo0666a/NY_bg.png?dl=1');
     /* Set a specified height, or the minimum height for the background image */
     /*min-height: 700px;*/
@@ -358,8 +353,7 @@ form fieldset, .smart-form fieldset{
     padding: 2px !important;
 }
 
-.loader{    
-    /*background-color: #ffffff;*/
+.loader{
     background-image: url("http://loadinggif.com/images/image-selection/3.gif") !important;
     background-size: 25px 25px;
     background-position:right center;
@@ -403,14 +397,6 @@ form fieldset, .smart-form fieldset{
     width: 16px;
     height: 16px;
 }
-/*.contribute_links{ old implementation
-    width: 100%;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
-    display: table;
-    padding-bottom: 8px;
-    margin-top: -1px;
-}*/
 
 .contribute_links{
     width: 100%;
@@ -421,11 +407,8 @@ form fieldset, .smart-form fieldset{
 #street_view_btn {
     position: absolute;
     top: 120px;
-    left: 41%;
+    left: 37%;
     z-index: 5;
-    /*background-color: #fff;*/
-    /*padding: 5px;*/
-    /*border: 1px solid #999;*/
     text-align: center;
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
@@ -433,12 +416,9 @@ form fieldset, .smart-form fieldset{
 }
 
 .property_information{
-    /*padding: 5px;*/
-    /*margin-bottom: 2px;*/
     padding: 2px 0px;
 }
 .property_information div, .property_information span {
-    /*padding-bottom: 3px;*/
     padding: 2px 0px;
 }
 
@@ -2979,8 +2959,6 @@ h1.pageTitle {
 
 .commentActions ul.tenant_info > li + li:after {
   /*font: normal normal normal 14px/1 FontAwesome;*/
-  /*padding: 0 10px;*/
-  /*color: #ccc;*/
   content: "|";
 }
 
@@ -3096,7 +3074,6 @@ h1.pageTitle {
 .propWidget-1 {
     display: block;
     background-color: #fff;
-    /*box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);*/
     margin-bottom: 20px;
     cursor: pointer;
     text-decoration: none;
