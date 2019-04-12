@@ -20,6 +20,10 @@ gem 'puma'
 
 gem 'httparty'
 
+#delayed Job
+gem 'delayed_job_active_record'
+#gem 'foreman'
+
 #
 gem 'activesupport-json_encoder'
 

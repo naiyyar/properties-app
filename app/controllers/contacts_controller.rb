@@ -79,10 +79,10 @@ class ContactsController < ApplicationController
 
     def send_emails
       if @contact.building_id.present?
-        UserMailer.send_enquiry_to_building(@contact).deliver
-        UserMailer.enquiry_sent_mail_to_sender(@contact).deliver
+        UserMailer.delay(priority: 0).send_enquiry_to_building(@contact)
+        UserMailer.delay(priority: 1).enquiry_sent_mail_to_sender(@contact)
       else
-        UserMailer.send_feedback(@contact).deliver
+        UserMailer.delay.send_feedback(@contact)
       end
     end
 end
