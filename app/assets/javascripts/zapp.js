@@ -713,12 +713,12 @@
     //         $(this).bind('focus')
     //     }
     // })
-    var options =  {
+    var mask_options =  {
                       onKeyPress: function(cep, e, field, options) {
                         if(cep == '('){
                             field.val('');
                         }
                     }};
-    $('.phone_number').mask("(000) 000-0000", options);
+    $('.phone_number').mask("(000) 000-0000", mask_options);
 
 })(jQuery);
