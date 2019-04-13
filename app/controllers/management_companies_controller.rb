@@ -18,7 +18,7 @@ class ManagementCompaniesController < ApplicationController
     @reviews = @reviews.where('id < ?', params[:object_id]).limit(10) if params[:object_id].present?
     
     respond_to do |format|
-      format.html
+      format.html{render nothing: true}
       format.js
     end
   end
@@ -43,7 +43,9 @@ class ManagementCompaniesController < ApplicationController
       @all_building = @manage_buildings
     end
 
-    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable).limit(10)
+    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
+    @total_reviews = @reviews.present? ? @reviews.count : 0
+    @reviews = @reviews.limit(10)
     @building_photos = Upload.where(imageable_id: @manage_buildings.pluck(:id), imageable_type: 'Building')
     
     if buildings.present?

@@ -1,7 +1,7 @@
 <div class="post-top">
     <div class="post-author">
         <!-- <img src="images/avatar-1.png" alt="avatar"> -->
-        <%= image_tag (@post.author.profile_image.present? ? @post.author.profile_image : 'user-missing2.png') %>
+        <%= image_tag (@post.author.profile_image.present? ? @post.author.profile_image : 'user-missing2.png') , class: 'author-img'%>
         <div class="pa-user">
             <div class="pa-name"><%="#{@post.author.first_name} #{@post.author.last_name}"%> on <%= Time.parse(@post.published).strftime('%B %d, %Y') %></div>
             <!-- <div class="pa-title">Senior Blog Editor</div> -->

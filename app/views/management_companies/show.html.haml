@@ -43,7 +43,7 @@
         .load-more-container.text-center
           / hide our loading gif image so that we show it when making ajax call via jquery
           = image_tag 'loader.gif', style: 'display:none;', class: 'loading-gif'
-          = link_to 'Show More ...', load_more_reviews_path(id: @management_company.id), class: 'load-more', style: 'padding: 6px 27px;border: 1px solid #ddd;'
+          = link_to 'Show More ...', load_more_reviews_path(id: @management_company.id), class: 'load-more', style: 'padding: 6px 27px;border: 1px solid #ddd;' if @total_reviews > 10
       
       #building_managed.tab-pane.fade.in.active.no-padding
         .resultsList
