@@ -11,6 +11,8 @@
     :css
       font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
 
-  %body{style: 'background-color: #ffffff !important;' }
+  %body{style: 'background-color: #ffffff !important;', class: 'no-hidden no-touch' }
     =render partial: 'layouts/shared/header'
     = yield
+    %br
+    = render 'layouts/home/footer'
