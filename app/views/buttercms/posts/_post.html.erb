@@ -10,7 +10,7 @@
         	<%end%>
         </div>
         
-        <h3 class="osLight"><%= link_to truncate(post.title, length: 60), buttercms_post_path(post.slug), :title => post.title %></h3>
+        <h3 class="osLight"><%= link_to truncate(post.title, length: 60), buttercms_post_path(post.slug), :title => post.title, target: 'new' %></h3>
         
         <p><%#= post.summary %></p>
         <div class="footer"><span class="text-muted"><%="#{post.author.first_name} #{post.author.last_name}, " if post.author.present? and post.author.first_name.present? %> <%= Time.parse(post.published).strftime('%B %d, %Y') %></span></div>
