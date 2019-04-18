@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'errors/not_found'
+
+  get 'errors/internal_server_error'
+
   resources :featured_buildings
   resources :featured_comps do
     member do
@@ -109,6 +113,12 @@ Rails.application.routes.draw do
 
   post '/favorite' => 'buildings#favorite', as: :favorite
   get '/unfavorite' => 'buildings#unfavorite', as: :unfavorite
+
+  # Dynamic error pages
+  get "/403", to: "errors#access_denied"
+  get "/404", to: "errors#not_found"
+  get "/422", to: "errors#unacceptable"
+  get "/500", to: "errors#internal_server_error"
   
   root "home#index"
   # The priority is based upon order of creation: first created -> highest priority.

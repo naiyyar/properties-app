@@ -26,6 +26,7 @@ module AptreviewApp
     config.active_record.raise_in_transactional_callbacks = true
     #config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
     config.autoload_paths += ['./app/apis']
+    config.exceptions_app = self.routes
     config.active_job.queue_adapter = :delayed_job
   end
 end

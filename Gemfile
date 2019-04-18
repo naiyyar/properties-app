@@ -20,6 +20,8 @@ gem 'puma'
 
 gem 'httparty'
 
+#gem 'exception_handler', '~> 0.8.0.0'
+
 #delayed Job
 gem 'delayed_job_active_record'
 #gem 'foreman'

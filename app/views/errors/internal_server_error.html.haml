@@ -1,0 +1,15 @@
+.row
+	.col-lg-6
+		= image_tag 'internal_server_error.png', style: 'width: 100%; height: auto;'
+	
+	.col-lg-6
+		.text-center{style: 'margin-top: 25vh;'}
+			.vh-center
+				%h1{style: 'font-size: 50px;'} Hmm.....
+
+				%h3 Looks Like Something Went Wrong
+
+				%p Don't Worry we're working on it!
+			%br
+			%a{href: root_path}
+				= image_tag 'logo2.png', style: 'width: 250px; height: auto;'
