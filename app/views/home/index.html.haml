@@ -1,0 +1,53 @@
+#hero-container
+  = render 'layouts/home/slider'
+  = render 'layouts/home/header'
+  .search-panel
+    .align-center.home-about-nyc-apt
+      %h1 No Fees. No Brokers. Just Rentals  Reviews.
+      %h2 transparentcity is the largest directory of links to no-fee, no-broker buildings in NYC.
+    .home-search-form
+      = render partial: 'home/search_form'
+
+= render 'layouts/home/popular_neighborhoods'
+
+.home-wrapper.pb20{style: 'padding: 20px 20px 20px;'}
+  .home-content.how-it-works
+    %h2{style: "font-weight: bolder;"} How transparentCity Works
+    .row
+      .col-lg-4.col-sm-12
+        .text-center
+          %h2.title Search
+          %p Find what you're interested in based on personal criteria on our exclusive to no broker fee buildings only platform.
+
+      .col-lg-4.col-sm-12
+        .text-center
+          %h2.title Check availability
+          %p Check available apartments on management company websites, all which have been vetted by transparentcity.
+
+      .col-lg-4.col-sm-12
+        .text-center
+          %h2.title Contact
+          %p Contact, schedule showing, visit, apply and rent directly from management company, bypassing brokers and all associated fees.
+
+.home-wrapper{style: 'padding: 20px 20px 20px;'}
+  .home-content.summary
+    %h2{style: "font-weight: bolder;"} Help A Fellow NYC Renter
+    .row
+      .col-lg-12.col-sm-12
+        .tp-summary
+          .text-center
+            %p We aim to include as many photos, reviews, and tidbits about amenities as we can from the community—because home means more than just walls and a roof.
+
+            = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-green btn-xlg btn-lg border-green', style: 'font-size: 15px;'
+
+
+.highlight.hidden
+  %h2{style: "font-weight: bolder;"} Help A Fellow NYC Renter
+  .h-text.osLight
+    / %p We include as many photos, reviews, and tidbits about amenities as we can&#x2014;because home means more than just walls and a roof.
+    / %p No guesswork, gimmicks, or middlemen. Find your next home without going broke, or write a review to help a fellow renter.
+    %p We aim to include as many photos, reviews, and tidbits about amenities as we can from the community—because home means more than just walls and a roof.
+    .buttonsWrapper
+      / <a href="/users/sign_up" class="btn btn-default btn-xlg btn-lg border-green">Sign up</a>
+      = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-green btn-xlg btn-lg border-green', style: 'font-size: 15px;'
+= render 'layouts/home/footer'

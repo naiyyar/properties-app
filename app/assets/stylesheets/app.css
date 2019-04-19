@@ -5,7 +5,8 @@
     border: 0;
 }
 body{
-    background-color: #f3f3f3 !important;
+    /*background-color: #f3f3f3 !important;*/
+    background-color: #fff !important;
 }
 
 @keyframes placeHolderShimmer{
@@ -15,6 +16,21 @@ body{
     100%{
         background-position: 468px 0
     }
+}
+
+.how-it-works p{
+    font-size: 16px;
+    padding: 0px 35px;
+    font-family: sans-serif;
+}
+
+.summary .tp-summary{
+    padding: 0px 20%;
+}
+
+.summary .tp-summary p{
+    font-family: sans-serif;
+    font-size: 20px;
 }
 
 .sorted-by{
@@ -6220,6 +6236,19 @@ select.custom-arrow {
     .no-padding {
         padding: 0 !important;
     }
+    
+    .summary .tp-summary {
+        padding: 0px 0%;
+    }
+
+    .how-it-works p {
+        padding: 0px 35px 30px;
+    }
+
+    .how-it-works h2.title{
+        padding: 0 0 15px 0;
+    }
+
     a.card, div.card {
         margin-bottom: 15px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
