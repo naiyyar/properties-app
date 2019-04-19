@@ -777,6 +777,8 @@ class Building < ActiveRecord::Base
       elsif ['Rose Hill'].include?(self.neighborhood)
         neighborhood1 = 'Kips Bay'
         neighborhood3 = 'Midtown'
+      elsif ['Bloomingdale'].include?(self.neighborhood)
+        neighborhood1 = 'Upper West Side'
       else
         neighborhood1 = self.neighborhood
         neighborhood2 = parent_neighborhood
