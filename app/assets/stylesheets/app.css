@@ -24,13 +24,17 @@ body{
     font-family: sans-serif;
 }
 
+.how-it-works h2.title{
+    color: #0033cc;
+}
+
 .summary .tp-summary{
     padding: 0px 20%;
 }
 
 .summary .tp-summary p{
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .sorted-by{
