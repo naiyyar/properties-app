@@ -13,6 +13,7 @@
     / See https://buttercms.com/docs/#cssstyling
     / <link rel="stylesheet" href="http://d2z2rr99bkshyr.cloudfront.net/buttercms-post-defaults.css">
     = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
     = favicon_link_tag 'favicon.png'
   %body.notransition.no-hidden
     = render 'layouts/buttercms/blog_header'
@@ -54,3 +55,6 @@
       .at-label{
           display: none !important;
       }
+
+    :javascript
+      $('.post-content p a').attr('target', '_blank')
