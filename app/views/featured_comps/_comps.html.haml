@@ -30,4 +30,4 @@
                 %td= link_to 'edit', edit_featured_comp_path(comp)
                 %td= link_to 'Delete', featured_comp_path(comp), method: :delete, data: {confirm: "Are you sure you want to delete this comp?"}, class: 'text-danger'
                 %td
-                  %input.apple-switch.sb-sm{type: 'checkbox', checked: comp.active, style: 'margin: 0px;', data: { compid: comp.id } }
+                  %input.apple-switch.sb-sm.featured_comps{type: 'checkbox', checked: comp.active, style: 'margin: 0px;', data: { compid: comp.id } }

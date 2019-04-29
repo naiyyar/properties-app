@@ -32,12 +32,16 @@
                 .col-xs-12.col-sm-12.col-md-12.col-lg-12
                   .form-group
                     %label Property Website
+                    .pull-right
+                      %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.active_web, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'web_url' } }
                     = f.text_field :web_url, class: 'form-control'
 
               .row
                 .col-xs-12.col-sm-12.col-md-6.col-lg-6
                   .form-group
                     %label Email
+                    .pull-right
+                      %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.active_email, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'email' } }
                     = f.email_field :email, class: 'form-control'
 
                 .col-xs-12.col-sm-12.col-md-6.col-lg-6

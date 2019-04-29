@@ -1,4 +1,4 @@
-$(document).on 'click', '.apple-switch', (e) ->
+$(document).on 'click', '.apple-switch.featured_comps', (e) ->
 	if(!$(this).is(':checked'))
 		changeFeaturedCompStatus(false, $(this))
 	else

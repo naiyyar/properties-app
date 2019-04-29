@@ -32,9 +32,9 @@
   .clearfix
   .clearfix
   .stats1.property_information
-    = check_availability_link(@building) if @building.web_url.present?
+    = check_availability_link(@building) if @building.web_url.present? and @building.active_web
   .stats1.property_information
-    - if @building.email.present?
+    - if @building.email.present? and @building.active_email
       - if !browser.device.mobile?
         = link_to 'Contact Leasing Team', '#newConactModal', class: 'btn btn-primary btn-o btn-block font-bolder', data: {toggle: 'modal'} 
       - else

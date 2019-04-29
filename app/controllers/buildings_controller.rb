@@ -208,10 +208,15 @@ class BuildingsController < ApplicationController
   def update
     if @building.update(building_params)
       session[:after_contribute] = 'amenities' if params[:contribution].present?
-      if params[:subaction].blank?
-        redirect_to building_path(@building), notice: "Successfully Updated"
-      else
-        redirect_to building_path(@building)
+      respond_to do |format|
+        format.html {
+          if params[:subaction].blank?
+            redirect_to building_path(@building), notice: "Successfully Updated"
+          else
+            redirect_to building_path(@building)
+          end
+        }
+        format.json {render json: @building}
       end
     else
       flash.now[:error] = "Error Updating"
