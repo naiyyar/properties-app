@@ -32,7 +32,7 @@
   .clearfix
   .clearfix
   .stats1.property_information
-    = check_availability_link(@building) if @building.web_url.present? and @building.active_web
+    = check_availability_link(@building) if @building.web_url.present?
   .stats1.property_information
     - if @building.email.present? and @building.active_email
       - if !browser.device.mobile?
