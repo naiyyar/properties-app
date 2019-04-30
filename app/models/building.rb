@@ -53,6 +53,8 @@
 #  three_bed               :integer
 #  four_plus_bed           :integer
 #  price                   :integer
+#  active_web              :boolean
+#  active_email            :boolean
 
 class Building < ActiveRecord::Base
 
@@ -92,9 +94,8 @@ class Building < ActiveRecord::Base
   after_validation :reverse_geocode
 
   #callbacks
-  after_create :save_neighborhood, :update_neighborhood_counts
+  after_create :save_neighborhood, :update_neighborhood_counts, :update_link_status
   after_update :update_neighborhood, :update_neighborhood_counts, :if => Proc.new{ |obj| obj.continue_call_back? }
-
   after_destroy :update_neighborhood_counts
 
   #multisearchable
@@ -251,7 +252,6 @@ class Building < ActiveRecord::Base
   end
 
   def image_uploads
-    #self.uploads.where('image_file_name is not null')
     uploads.where.not(image_file_name: nil).where("imageable_id = ? or imageable_id in (?)", id, units.pluck(:id)).includes(:imageable)
   end
 
@@ -298,22 +298,10 @@ class Building < ActiveRecord::Base
     if sort_index == '1'
       rated_buildings = rated_buildings.reorder(avg_rating: :desc, building_name: :asc, building_street_address: :asc)
       buildings = rated_buildings + non_rated_buildings
-      #@ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg DESC')
     else
       rated_buildings = rated_buildings.reorder(avg_rating: :asc, building_name: :asc, building_street_address: :asc)
       buildings = non_rated_buildings + rated_buildings
-      #@ratings = RatingCache.where(cacheable_id: buildings.map(&:id)).order('avg ASC')
     end
-    
-    #building_ids = @ratings.map(&:cacheable_id)
-    #rated_buildings = buildings.where(id: building_ids).sort_by{ |b| building_ids.index(b.id) if !b.id.nil? }
-    
-    # if sort_index == '1'
-    #   buildings = rated_buildings + non_rated_buildings
-    # else
-    #   buildings = non_rated_buildings + rated_buildings
-    # end
-
     buildings
   end
 
@@ -329,7 +317,6 @@ class Building < ActiveRecord::Base
         rates = rates.where('avg = ?', rating)
       else
         rates = rates.where('avg > ? AND avg <= ?', rating.to_i-1, rating)
-        #rates = rates.where('avg > ?', rating.to_i-1)
       end
       buildings.where('id in (?)', rates.map(&:cacheable_id))
     else
@@ -425,9 +412,7 @@ class Building < ActiveRecord::Base
   end
 
   def self.search_by_pneighborhoods(criteria)
-    #regexp = /#{criteria}/i; remove due to RegexpError: premature end of char-class: /river [a/i
     results = Building.search_by_pneighborhood(criteria).order(:neighborhoods_parent).to_a.uniq(&:neighborhoods_parent)
-    #results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
   def self.search_by_building_name(criteria)
@@ -435,7 +420,6 @@ class Building < ActiveRecord::Base
   end
 
   def self.buildings_in_neighborhood search_term
-    #where("neighborhood @@ :q OR neighborhoods_parent @@ :q OR neighborhood3 @@ :q", q: search_term)
     search_term = (search_term == 'Soho' ? 'SoHo' : search_term)
     where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
   end
@@ -617,7 +601,6 @@ class Building < ActiveRecord::Base
         end
       end
     end
-
   end
 
   def self.open_spreadsheet(file)
@@ -822,6 +805,17 @@ class Building < ActiveRecord::Base
     #Rails.application.load_tasks
     #Rake::Task['sitemap:refresh'].invoke
     #Rake::Task["sitemap:create_upload_and_ping"].invoke
+  end
+
+  #making check availability and contact buttons to active if field is not blank
+  def update_link_status
+    if web_url.present? and self.email.present?
+      self.update(active_web: true, active_email: true)
+    elsif web_url.present?
+      self.update(active_web: true)
+    elsif self.email.present?
+      self.update(active_email: true)
+    end
   end
 
 end
