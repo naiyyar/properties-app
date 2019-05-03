@@ -94,7 +94,7 @@ class Building < ActiveRecord::Base
   after_validation :reverse_geocode
 
   #callbacks
-  after_create :save_neighborhood, :update_neighborhood_counts, :update_link_status
+  after_create :save_neighborhood, :update_neighborhood_counts
   after_update :update_neighborhood, :update_neighborhood_counts, :if => Proc.new{ |obj| obj.continue_call_back? }
   after_destroy :update_neighborhood_counts
 
@@ -805,17 +805,6 @@ class Building < ActiveRecord::Base
     #Rails.application.load_tasks
     #Rake::Task['sitemap:refresh'].invoke
     #Rake::Task["sitemap:create_upload_and_ping"].invoke
-  end
-
-  #making check availability and contact buttons to active if field is not blank
-  def update_link_status
-    if web_url.present? and self.email.present?
-      self.update(active_web: true, active_email: true)
-    elsif web_url.present?
-      self.update(active_web: true)
-    elsif self.email.present?
-      self.update(active_email: true)
-    end
   end
 
 end

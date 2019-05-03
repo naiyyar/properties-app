@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 20190429091232) do
     t.integer  "price"
     t.float    "avg_rating"
     t.string   "email"
-    t.boolean  "active_email",            default: false
-    t.boolean  "active_web",              default: false
+    t.boolean  "active_email",            default: true
+    t.boolean  "active_web",              default: true
   end
 
   add_index "buildings", ["building_name"], name: "index_buildings_on_building_name", using: :btree
