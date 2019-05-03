@@ -54,7 +54,7 @@
           Dealings with Management #{rating_for @building, 'management', disable_after_rate: true, readonly: true}
   .clearfix
   .comments
-    %h3= "Building Reviews (#{ @building.reviews.count })"
+    %h3= "Building Reviews (#{ @building.cached_reviews_count })"
     - if @reviews.present?
       .text-right{style: "text-align: right;padding-bottom: 15px;"}
         = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow'

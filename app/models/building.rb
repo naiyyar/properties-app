@@ -207,6 +207,26 @@ class Building < ActiveRecord::Base
     slug.parameterize
   end
 
+  def cached_reviews
+    Rails.cache.fetch([self, 'reviews']) { reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc).to_a }
+  end
+
+  def cached_reviews_count
+    Rails.cache.fetch([self, 'reviews_count']) { reviews.size }
+  end
+
+  def image_uploads
+    uploads.where.not(image_file_name: nil).where("imageable_id = ? or imageable_id in (?)", id, units.pluck(:id)).includes(:imageable)
+  end
+
+  def chached_image_uploads
+    Rails.cache.fetch([self, 'image_uploads']) { image_uploads.to_a }
+  end
+
+  def chached_doc_uploads
+    Rails.cache.fetch([self, 'doc_uploads']) { uploads.where('document_file_name is not null').to_a }
+  end
+
   def self.redo_search_buildings params
     @zoom = params[:zoomlevel].to_i
     custom_latng = [params[:latitude].to_f, params[:longitude].to_f]
@@ -249,10 +269,6 @@ class Building < ActiveRecord::Base
 
   def neighborhood_name
     neighbohoods
-  end
-
-  def image_uploads
-    uploads.where.not(image_file_name: nil).where("imageable_id = ? or imageable_id in (?)", id, units.pluck(:id)).includes(:imageable)
   end
 
   def name

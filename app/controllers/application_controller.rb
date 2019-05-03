@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :allow_iframe_requests
   after_action :store_location, unless: :skip_store_location
-  before_action :popular_neighborhoods, if: :html_request?
+  before_action :show_nb_counts, :popular_neighborhoods, if: :html_request?
 
   def store_location
     # store last url as long as it isn't a /users path
@@ -15,15 +15,17 @@ class ApplicationController < ActionController::Base
   end
 
   def popular_neighborhoods
-    @lower_manhattan_count = Neighborhood.where(name: 'Lower Manhattan').first.buildings_count
-    @midtown_count = Neighborhood.where(name: 'Midtown').first.buildings_count
-    @upper_manhattan_count = Neighborhood.where(name: 'Upper Manhattan').first.buildings_count
-    @uptown_count = Neighborhood.where(name: view_context.uptown_sub_borough).sum(:buildings_count)
+    if @show_nb_counts
+      @lower_manhattan_count = Neighborhood.cached_nb_buildings_count('Lower Manhattan')
+      @midtown_count = Neighborhood.cached_nb_buildings_count('Midtown')
+      @upper_manhattan_count = Neighborhood.cached_nb_buildings_count('Upper Manhattan')
+      @uptown_count = Neighborhood.cached_nb_buildings_count(view_context.uptown_sub_borough)
 
-    @brooklyn_count = Building.where('city = ? OR neighborhood in (?)', 'Brooklyn', view_context.brooklyn_sub_borough).count
-    @queens_count = Building.where('city = ? OR neighborhood in (?)', 'Queens', view_context.queens_sub_borough).count
-    @bronx_count = Building.where('city = ?', 'Bronx').count
-    @east_bronx_count = Building.where('neighborhood = ?', 'East Bronx').count
+      @brooklyn_count = Building.where('city = ? OR neighborhood in (?)', 'Brooklyn', view_context.brooklyn_sub_borough).count
+      @queens_count = Building.where('city = ? OR neighborhood in (?)', 'Queens', view_context.queens_sub_borough).count
+      @bronx_count = Building.where('city = ?', 'Bronx').count
+      @east_bronx_count = Building.where('neighborhood = ?', 'East Bronx').count
+    end
   end
 
   def after_sign_up_path_for(resource)
@@ -38,6 +40,23 @@ class ApplicationController < ActionController::Base
 
   def html_request?
     request.format.html?
+  end
+
+  #showing neightborhoods count where ever necessary to reduce load time
+  def show_nb_counts
+    if controllers.include?(params[:controller]) and actions.include?(params[:action])
+      @show_nb_counts = false 
+    else
+      @show_nb_counts = true
+    end
+  end
+
+  def controllers
+    ['users/sessions','users/registrations','buildings', 'reviews']
+  end
+
+  def actions
+    ['new','contribute', 'index']
   end
 
   def save_review
@@ -96,18 +115,8 @@ class ApplicationController < ActionController::Base
         end
       end
     else
-      # if session[:contribution_for] == 'building_photos' && session[:search_term].present?
-      #   "/uploads/new?buildings-search-txt=#{session[:search_term]}&contribution=building_photos"
-      # elsif params[:contribution] == 'building_photos'
-      #   "/uploads/new?buildings-search-txt=#{params['buildings-search-txt']}&contribution=building_photos"
-      # elsif session[:building_id].present?
-      #   return "/uploads/new?building_id=#{session[:building_id]}"
-      # elsif session[:unit_id].present?
-      #   return "/uploads/new?unit_id=#{session[:unit_id]}"
-      # else
       flash[:notice] = 'Signed in successfully'
       session[:return_to] || root_path
-      #end
     end
   end
 
@@ -117,7 +126,6 @@ class ApplicationController < ActionController::Base
 
   def redirect_back_or_default(default)
     session[:return_to] || default
-    #session[:return_to] = nil
   end
 
   def sign_in_redirect_path object, flash_message
@@ -133,7 +141,6 @@ class ApplicationController < ActionController::Base
           if object.kind_of? Building 
             #Togoto Reviews path
             return user_steps_path(building_id: object.id, contribution_for: session[:form_data]['contribution'], contribution: session[:form_data]['contribution'])
-            #return building_path(object)
           else
             return unit_path(object)
           end

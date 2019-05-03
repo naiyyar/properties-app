@@ -24,7 +24,7 @@
 class Upload < ActiveRecord::Base
 	attr_accessor :rotation_degrees, :rotate
 	resourcify
-	belongs_to :imageable, polymorphic: true
+	belongs_to :imageable, polymorphic: true, touch: true
   has_many :document_downloads
   belongs_to :user
 	#before_create :set_defaults

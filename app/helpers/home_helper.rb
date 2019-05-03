@@ -227,12 +227,14 @@ module HomeHelper
 	end
 
 	def search_by_neighborhood_link nb, area
-		borough = Neighborhood.where(name: nb, boroughs: area.upcase)
-		link_to search_link(nb, area), data: { nbname: nb, st: searchable_text(nb, area) } do
-			if borough.present?
-				"#{borough.first.name} (<span>#{borough.first.buildings_count}</span>)".html_safe
-			else
-				"#{nb} (#{parent_neighborhoods_count(nb)})"
+		if @show_nb_counts
+			borough = Neighborhood.nb_borough(nb, area)
+			link_to search_link(nb, area), data: { nbname: nb, st: searchable_text(nb, area) } do
+				if borough.present?
+					"#{borough.first.name} (<span>#{borough.first.buildings_count}</span>)".html_safe
+				else
+					"#{nb} (#{parent_neighborhoods_count(nb)})"
+				end
 			end
 		end
 	end

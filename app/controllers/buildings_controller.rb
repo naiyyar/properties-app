@@ -81,11 +81,11 @@ class BuildingsController < ApplicationController
 
   def show
     @show_map_btn = true
-    @reviews = @building.reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
+    @reviews = @building.cached_reviews
     @distance_results = DistanceMatrix.get_data(@building)
-    #building + uinits images
-    @uploads = @building.image_uploads
-    @documents = @building.uploads.where('document_file_name is not null')
+    #building + units images
+    @uploads = @building.chached_image_uploads
+    @documents = @building.chached_doc_uploads
 
     #Similiar buildings
     active_comps = @building.featured_comps.active
@@ -97,21 +97,6 @@ class BuildingsController < ApplicationController
     buildings = @similar_properties.to_a + [@building]
     @contact = Contact.new
     @gmaphash = Building.buildings_json_hash(buildings)
-
-    # @gmaphash = [
-    #               {
-    #                 id: @building.id,
-    #                 title: @building.building_name,
-    #                 image: Upload.marker_image(@building),
-    #                 address: @building.street_address,
-    #                 position: {
-    #                   lat: @building.latitude,
-    #                   lng: @building.longitude
-    #                 },
-    #                 markerIcon: ActionController::Base.helpers.asset_path("marker-blue.png")
-
-    #               }
-    #             ]
 
     @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
                   "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 
