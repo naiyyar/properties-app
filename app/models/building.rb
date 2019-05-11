@@ -174,7 +174,11 @@ class Building < ActiveRecord::Base
 
   #Methods
 
-  def self.buildings_json_hash(buildings)
+  def self.buildings_json_hash(top_two_featured_buildings, buildings)
+    if top_two_featured_buildings.present?
+      buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
+      buildings = top_two_featured_buildings + buildings
+    end
     unless buildings.class == Array
       buildings.select(:id, 
                         :building_name, 
@@ -183,10 +187,15 @@ class Building < ActiveRecord::Base
                         :longitude, 
                         :zipcode, 
                         :city, 
-                        :state, :price).as_json
+                        :state, :price).as_json(:methods => [:featured])
     else
-      buildings.as_json
+      buildings.as_json(:methods => [:featured])
     end
+  end
+
+  def featured
+    feaured = FeaturedBuilding.where(building_id: self.id).active
+    feaured.present?
   end
 
   def self.options_for_sorted_by

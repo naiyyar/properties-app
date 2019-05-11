@@ -130,7 +130,7 @@ class HomeController < ApplicationController
         else
           @all_building = @per_page_buildings
         end
-        @hash = Building.buildings_json_hash(@buildings)
+        @hash = Building.buildings_json_hash(top_two_featured_buildings, @buildings)
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']
         @photos_count = Upload.where(imageable_id: building_ids, imageable_type: 'Building').count
