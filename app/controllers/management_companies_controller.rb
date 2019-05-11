@@ -56,7 +56,7 @@ class ManagementCompaniesController < ApplicationController
       @lat = buildings.first.latitude
       @lng = buildings.first.longitude
       @zoom = buildings.length > 60 ? 13 : 11
-      @hash = Building.buildings_json_hash(buildings.includes(:uploads, :building_average, :votes))
+      @hash = Building.buildings_json_hash(top_two_featured_buildings, buildings.includes(:uploads, :building_average, :votes))
     end
 
     @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 
