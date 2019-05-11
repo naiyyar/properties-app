@@ -174,7 +174,7 @@ class Building < ActiveRecord::Base
 
   #Methods
 
-  def self.buildings_json_hash(top_two_featured_buildings, buildings)
+  def self.buildings_json_hash(top_two_featured_buildings=nil, buildings)
     if top_two_featured_buildings.present?
       buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
       buildings = top_two_featured_buildings + buildings

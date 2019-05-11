@@ -89,6 +89,14 @@
                 //     animation: google.maps.Animation.DROP,
                 // });
 
+                // default opening first fetured building marker
+                google.maps.event.addListener(marker, 'load', (function(marker, i) {
+                    var object = prop
+                    if(object.featured){
+                      loadMarkerWindow(object.id, map, marker);
+                    }
+                })(marker, i));
+                
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     panorama = map.getStreetView();
                     panorama.setPosition(marker.getPosition());
@@ -100,14 +108,15 @@
                         });
                     });
                     return function() {
-                      $.post('/load_infobox', {
-                        object_id: prop.id, 
-                        building_show: true,
-                        current_user_id: current_user_id,
-                      }, function(data){
-                        infobox.setContent(data.html);
-                        infobox.open(map, marker);
-                      });
+                        loadMarkerWindow(prop.id, map, marker);
+                      // $.post('/load_infobox', {
+                      //   object_id: prop.id, 
+                      //   building_show: true,
+                      //   current_user_id: current_user_id,
+                      // }, function(data){
+                      //   infobox.setContent(data.html);
+                      //   infobox.open(map, marker);
+                      // });
                     }
                 })(marker, i));
 
@@ -168,6 +177,21 @@
                 }
 
             }, 300);
+        }
+
+        function loadMarkerWindow(building_id, map, marker){
+          $.post('/load_infobox', {
+            object_id: building_id, 
+            building_show: false,
+            current_user_id: current_user_id,
+          }, function(data){
+            infobox.setContent(data.html);
+            //infowindow.open(handler.getMap(), google.maps.markers[index]);
+            //infobox.setPosition(latlng);
+            //if (!infobox.isOpen()) {
+              infobox.open(map, marker);
+            //}
+          });
         }
 
     }
