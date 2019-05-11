@@ -1,5 +1,7 @@
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { :id => 'sign_up_user', format: :json, remote: true }) do |f|
   .form-group
+    %p.help-block.underline By continuing, you agree to our Terms of Service, Privacy Policy or Advertising Terms
+  .form-group
     .btn-group-justified
       / <a href="<haml_silent></haml_silent>" class="btn btn-lg btn-facebook"><span class="fa fa-facebook pull-left"></span>Sign Up with Facebook</a>
       = render partial: 'layouts/shared/social_auth_buttons', locals: {resource: resource, btn_title: 'Continue with Facebook', button_type: 'fb'}

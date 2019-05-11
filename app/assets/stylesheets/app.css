@@ -460,7 +460,7 @@ input[type=select] {
 .square_feet_help_block{
     visibility: hidden;
 }
-a.link_underlined:hover{
+a.link_underlined:hover, .underline{
     text-decoration: underline !important;
 }
 #reviewsContainer .tab-content, #buildingsContainer .tab-content{
