@@ -355,6 +355,16 @@ form fieldset, .smart-form fieldset{
 .tos_box{
     padding: 10px 20px;
     box-shadow: 0 1px 1px 1px rgba(127,127,127,0.3);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.tos_box p, .tos_box li {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.tos_box h1{
+    font-size: 30px;
+    line-height: 1.2em;
 }
 
 #tos:hover{
