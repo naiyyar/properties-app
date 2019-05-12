@@ -21,19 +21,6 @@
               %th Delete
           
           %tbody.table
-            - @management_companies.each do |company|
-              %tr
-                %td
-                  %span.propName
-                    %b= link_to company.name, no_fee_company_path(id: company)
-                %td.text-center= link_to '<span class="fa fa-globe"></span>'.html_safe, company.website, target: '_blank' if company.website.present?
-                %td.text-center= link_to company.buildings.count, managed_buildings_management_company_path(company), class: 'hyper-link' if company.buildings.present?
-                %td.star-sm
-                  - @stars = company.get_average_stars
-                  = render 'layouts/shared/custom_rating'
-                %td= company.aggregate_reviews
-                %td= company.created_at.strftime("%Y-%m-%d")
-                - if current_user && current_user.has_role?(:admin)
-                  %td= link_to "edit", edit_management_company_path(company)
-                  %td= link_to "Delete", management_company_path(company), method: :delete, data: {confirm: "Are you sure you want to delete this management?"}, class: 'text-danger'
+            =render partial: 'management_company', collection: @management_companies, as: :company
+              
 .text-center

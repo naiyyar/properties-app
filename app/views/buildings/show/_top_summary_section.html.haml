@@ -3,7 +3,8 @@
 		.row.sh-slider
 			.sh-slider-container
 				.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
-					=render 'buildings/show/lightslider', building: @building
+					- cache @building do
+						=render 'buildings/show/lightslider', building: @building
 				.clearfix
 				=render 'uploads/add_photos', object: @building
      

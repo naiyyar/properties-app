@@ -81,7 +81,7 @@ class BuildingsController < ApplicationController
 
   def show
     @show_map_btn = true
-    @reviews = @building.cached_reviews
+    @reviews = @building.building_reviews
     @distance_results = DistanceMatrix.get_data(@building)
     #building + units images
     @uploads = @building.chached_image_uploads

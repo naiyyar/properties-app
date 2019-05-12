@@ -145,7 +145,7 @@ gem 'progressive_render'
 #gem 'actionpack-action_caching'
 gem 'memcachier'
 gem 'dalli'
-#gem 'multi_fetch_fragments'
+gem 'multi_fetch_fragments'
 
 #filtering
 gem 'filterrific', '~> 4.0'

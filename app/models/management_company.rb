@@ -31,6 +31,18 @@ class ManagementCompany < ActiveRecord::Base
       "#{id} #{name}".parameterize
     end
   end
+
+  def company_buildings
+  	buildings.reorder(neighborhood: :asc, building_name: :asc, building_street_address: :asc).includes(:featured_building)
+  end
+
+  def cached_company_buildings_count
+  	company_buildings.count
+  end
+
+  def cached_buildings
+  	Rails.cache.fetch([self, 'company_buildings']) { company_buildings }
+  end
 	
 	def add_building building_ids
 		Building.where(id: building_ids).update_all(management_company_id: self.id)

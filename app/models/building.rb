@@ -80,7 +80,7 @@ class Building < ActiveRecord::Base
   has_many :featured_comp_buildings
   has_many :featured_comps, through: :featured_comp_buildings, :dependent => :destroy
   has_one :featured_building, :dependent => :destroy
-  belongs_to :management_company
+  belongs_to :management_company, touch: true
   has_many :contacts, :dependent => :destroy
   
   accepts_nested_attributes_for :units, :allow_destroy => true
@@ -216,8 +216,8 @@ class Building < ActiveRecord::Base
     slug.parameterize
   end
 
-  def cached_reviews
-    Rails.cache.fetch([self, 'reviews']) { reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc).to_a }
+  def building_reviews
+    reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
   end
 
   def cached_reviews_count

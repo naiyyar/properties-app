@@ -39,11 +39,11 @@ class NeighborhoodLink < ActiveRecord::Base
 
   def self.neighborhood_guide_links(search_string, queens_borough)
     if search_string.present? and search_string == 'New York'
-      @neighborhood_links = NeighborhoodLink.all
+      Rails.cache.fetch([self, 'neighborhood_links']) { NeighborhoodLink.all }
     elsif queens_borough.include?(search_string)
-      @neighborhood_links = NeighborhoodLink.where('neighborhood = ?', search_string)
+      Rails.cache.fetch([self, "neighborhood_links_#{search_string}"]) { NeighborhoodLink.where('neighborhood = ?', search_string) }
     else
-      @neighborhood_links = NeighborhoodLink.where('neighborhood @@ :q or parent_neighborhood @@ :q', q: search_string)
+      Rails.cache.fetch([self, "neighborhood_links_#{search_string}"]) { NeighborhoodLink.where('neighborhood @@ :q or parent_neighborhood @@ :q', q: search_string) }
     end
   end
 

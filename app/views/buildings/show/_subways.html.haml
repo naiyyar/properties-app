@@ -1,7 +1,6 @@
 - @distance_results.values.map do |st|
 	.row
 		- distance = st[:distance].to_f
-		- dt = st[:results][0]
 		- if distance.present?
 			.col-lg-6
 				.transport-lines.pull-left
@@ -13,5 +12,5 @@
 				.distance-and-time
 					%b= st[:dest_station]
 					%p.text-muted
-						= "#{dt['duration']['text'].singularize} walk," if st[:results].present?
+						= "#{st[:duration].singularize} walk," if st[:duration].present?
 						= "#{distance.round(2)} miles"
