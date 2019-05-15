@@ -293,30 +293,18 @@
         }
     });
 
-    // var cityOptions = {
-    //     types : [ '(cities)' ]
-    // };
-    // var city = document.getElementById('city');
-    // var cityAuto = new google.maps.places.Autocomplete(city, cityOptions);
-
     $('#advanced').click(function() {
         $('.adv').toggleClass('hidden-xs');
     });
 
-    $('.home-navHandler').click(function(e) {
-        //e.stopPropagation();
-        $('.home-nav').toggleClass('active');
-        $(this).toggleClass('active');
-        return false;
-    });
+    // $('.home-navHandler').click(function(e) {
+    //     //e.stopPropagation();
+    //     $('.home-nav').toggleClass('active');
+    //     $(this).toggleClass('active');
+    //     return false;
+    // });
 
-    $(document).click(function(){
-        if($('.home-nav').hasClass('active')){
-          $('.home-nav').removeClass('active');
-        }
-    })
-
-    // $(document).on('touchend', function(){
+    // $(document).click(function(){
     //     if($('.home-nav').hasClass('active')){
     //       $('.home-nav').removeClass('active');
     //     }

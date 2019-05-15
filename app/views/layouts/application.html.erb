@@ -34,9 +34,9 @@
   </head>
   <body class="notransition no-hidden" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
+    <%= render partial: 'layouts/shared/left_side' %>
     <% unless params[:controller] == 'home' and params[:action] == 'index'%>
       <%= render partial: 'layouts/shared/header' %>
-      <%= render partial: 'layouts/shared/left_side' %>
       <%= render partial: 'layouts/shared/filters' %>
       <div class="closeLeftSide"></div>
       <div id="wrapper" class="<%=contribute_wrapper(params)%>">

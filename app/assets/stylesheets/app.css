@@ -6592,6 +6592,10 @@ select.custom-arrow {
         -webkit-transition: all .2s ease-in-out;
         -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
+        min-height: 265px !important;
+    }
+    #leftSide.home{
+        top: 65px !important;
     }
     #leftSide.expanded {
         width: 53%;
@@ -6600,9 +6604,7 @@ select.custom-arrow {
         margin-left: 0;
         z-index: 9999;
     }
-    #leftSide{
-        min-height: 265px !important;
-    }
+    
     .contributeLeftSide {
         top: 49px !important;
     }

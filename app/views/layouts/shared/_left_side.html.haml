@@ -1,4 +1,4 @@
-#leftSide{class: "#{contribute_left_side(params)}"}
+#leftSide{class: "#{contribute_left_side(params)} #{params[:controller] == 'home' and params[:action] == 'index' ? 'home' : ''}"}
   %nav.leftNav.scrollable
     .logo.search1.visible-xs
       %a{href: "/"}= image_tag 'logo1.png', alt: 'logo'

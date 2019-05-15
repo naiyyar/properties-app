@@ -299,7 +299,7 @@
 
     // Exapnd left side navigation
     var navExpanded = false;
-    $('.navHandler, .closeLeftSide').click(function() {
+    $('.navHandler, .closeLeftSide, .home-navHandler').click(function() {
         if(!navExpanded) {
             $('.logo').addClass('expanded');
             $('#leftSide').addClass('expanded');
@@ -325,6 +325,14 @@
             navExpanded = false;
         }
     });
+
+    $(document).click(function(e){
+        var target_class = e.target.className;
+        if(target_class !== "fa fa-bars" && target_class != 'ssm-toggle-nav1'){
+            $('#leftSide').removeClass('expanded');
+            $('.logo').removeClass('expanded');
+        }
+    })
 
     // functionality for map manipulation icon on mobile devices
     var listMapView = function(){
