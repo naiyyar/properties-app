@@ -18,6 +18,10 @@ body{
     }
 }
 
+#leftSide.home{
+    display: none;
+}
+
 .how-it-works p{
     font-size: 16px;
     padding: 0px 35px;
@@ -6595,6 +6599,7 @@ select.custom-arrow {
         min-height: 265px !important;
     }
     #leftSide.home{
+        display: block;
         top: 65px !important;
     }
     #leftSide.expanded {
