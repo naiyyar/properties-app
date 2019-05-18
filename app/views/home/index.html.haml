@@ -3,7 +3,7 @@
   = render 'layouts/home/header'
   .search-panel
     .align-center.home-about-nyc-apt
-      %h1 No Fees. No Brokers. Just Rentals  Reviews.
+      %h1 No Fees. No Brokers. Just Rentals & Reviews.
       %h2 transparentcity is the largest directory of links to no-fee, no-broker buildings in NYC.
     .home-search-form
       = render partial: 'home/search_form'
@@ -42,3 +42,18 @@
 
 
 = render 'layouts/home/footer'
+
+:javascript
+  window.onload = function(){ getLocation();}
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  function showPosition(position) {
+    console.log("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
+  }
