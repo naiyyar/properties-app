@@ -18,6 +18,24 @@ body{
     }
 }
 
+.current-location{
+    background: #fff;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+}
+
+.current-location a{
+    font-size: 14px;
+}
+
+.current-location.loc-allowed{
+    background-color: #0075c9;
+}
+
+.current-location.loc-allowed a{
+    color: #fff;
+}
+
 #leftSide.home{
     display: none;
 }
@@ -6238,9 +6256,9 @@ select.custom-arrow {
 }
 
 @media screen and (max-width: 767px) {
-    /*.resultsList {
-        padding: 10px 10px 0 10px;
-    }*/
+    .current-location {
+        margin: 0px -70px 0px -30px;
+    }
     
     .home-about-nyc-apt h1{
         font-size: 22px;

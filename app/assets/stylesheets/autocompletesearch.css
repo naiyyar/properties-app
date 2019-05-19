@@ -92,6 +92,12 @@
   top: 96px !important;
 }*/
 #apt-search-results{position: relative;}
+/*.home.ui-autocomplete{
+  top: 333px !important;
+}
+.other.ui-autocomplete{
+  top: 138px !important;
+}*/
 
 ul.ui-autocomplete li.building_link_li{
   background-color: #eee;
@@ -142,4 +148,11 @@ ul.ui-autocomplete li.building_link_li a:hover, .no-match-link a:hover{
   .split-view-seach .no-match-link{
     position: fixed;
   }
+
+  /*.home.ui-autocomplete{
+    top: 311px !important;
+  }
+  .other.ui-autocomplete{
+    top: 74px !important;
+  }*/
 }

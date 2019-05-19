@@ -28,6 +28,8 @@ app.apartments.prototype = {
             }
           }
         });
+        var curr_loc_link = '<a class="hyper-link location" onclick="getLocation()" id="location-link" href=""><span class="fa fa-location-arrow"></span> Current location</a>';
+        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location' style='background: #fff;'>"+curr_loc_link+"</li>");
       },
 
       _renderItem: function(ul, item) {
@@ -98,9 +100,9 @@ app.apartments.prototype = {
     	//setting container width
 	    var search_input_width = this._input.outerWidth();
     	$('.ui-autocomplete').css('width', search_input_width+'px');
-	    $('.no-match-link').css('top',(ul_height+4)+'px');
+	    $('.no-match-link').css('top',(ul_height+3)+'px');
     }
-
+    //$('.ui-autocomplete').addClass($('#current_view').val());
     $('.no-match-link').css('width', $('.ui-autocomplete').width()+'px');
   },
 

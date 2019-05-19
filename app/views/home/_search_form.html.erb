@@ -9,6 +9,8 @@
 		<div class="hidden-xs icon-search-shared"><span class="icon-magnifier"></span></div>
 		<%= text_field_tag 'search_term', searched_term, class: 'apt-search-text-shared', placeholder: placeholder %>
 	<%end%>
-
+	<div class="current-location hidden">
+		<%= link_to "<span class='fa fa-location-arrow'></span> Current location".html_safe, 'javascript:;', class: 'hyper-link location', onclick: "getLocation()", id: 'location-link' %>
+	</div>
 	<%#= render partial: 'layouts/shared/no_match' %>
 </div>
