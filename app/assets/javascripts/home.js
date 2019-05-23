@@ -3,6 +3,7 @@
 
     $('#search_term').on('focus', function(){
         $('.current-location').removeClass('hidden');
+        $(this).removeClass('border-bottom-lr-radius');
     });
     
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
@@ -135,14 +136,15 @@
                 $("ul.ui-autocomplete").hide();
             }
             $('.no-match-link').addClass('hidden');
-        }, 200)
+        }, 200);
     }
 
     function hideCurrentLocationBar(){
         var curr_loc = $('.current-location');
         if(!curr_loc.hasClass('hidden')){
             curr_loc.addClass('hidden');    
-        }   
+        }
+        $('.home #search_term').addClass('border-bottom-lr-radius');   
     }
 
     //Searching building on neighborhood click

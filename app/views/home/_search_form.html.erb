@@ -1,16 +1,17 @@
-<div class="apt-search" id="apt-search-form">
+<div class="apt-search <%= @home_view ? 'home' : 'other' %>" id="apt-search-form">
 	<% placeholder = 'Neighborhood, ZipCode, Address, Building, Management Company'%>
 	<% if params[:action] == 'index' and params[:controller] == 'home' %>
-		<!-- <div class="input-group"> -->
-		<%= text_field_tag 'search_term', searched_term, class: 'form-control', placeholder: placeholder, style: 'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 15px rgba(0,0,0,0.6);' %>
-		  <!-- <span class="input-magnifier"><a class="btn btn-blue"><span class="icon-magnifier"></span></a></span> -->
-		<!-- </div> -->
+		<div class="icon-search-shared"><span class="icon-magnifier"></span></div>
+		<%= text_field_tag 'search_term', searched_term, class: 'form-control border-top-lr-radius border-bottom-lr-radius', placeholder: placeholder, style: 'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 15px rgba(0,0,0,0.6);' %>
 	<%else%>
 		<div class="hidden-xs icon-search-shared"><span class="icon-magnifier"></span></div>
 		<%= text_field_tag 'search_term', searched_term, class: 'apt-search-text-shared', placeholder: placeholder %>
 	<%end%>
-	<div class="current-location hidden">
-		<%= link_to "<span class='fa fa-location-arrow'></span> Current location".html_safe, 'javascript:;', class: 'hyper-link location', onclick: "getLocation()", id: 'location-link' %>
+	
+	<div class="current-location hyper-link hidden" onclick="getLocation()">
+		<span class='fa fa-location-arrow'></span>
+		Current location
 	</div>
+	
 	<%#= render partial: 'layouts/shared/no_match' %>
 </div>

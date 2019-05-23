@@ -1,8 +1,8 @@
 app.apartments = function() {
   this._input = $('#search_term');
   this._initAutocomplete();
-  var magIcon = '<span class="input-magnifier"><a class="btn btn-blue"><span class="icon-magnifier"></span></a></span>'
-	$('.home-search-form #apt-search-form').append(magIcon);
+  //var magIcon = '<span class="input-magnifier"><a class="btn btn-blue"><span class="icon-magnifier"></span></a></span>'
+	//$('.home-search-form #apt-search-form').append(magIcon);
 };
 
 app.apartments.prototype = {
@@ -28,8 +28,8 @@ app.apartments.prototype = {
             }
           }
         });
-        var curr_loc_link = '<a class="hyper-link location" onclick="getLocation()" id="location-link" href=""><span class="fa fa-location-arrow"></span> Current location</a>';
-        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location' style='background: #fff;'>"+curr_loc_link+"</li>");
+        var curr_loc = '<span class="fa fa-location-arrow"></span> Current location';
+        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location hyper-link' style='background: #fff;' onclick='getLocation()'>"+curr_loc+"</li>");
       },
 
       _renderItem: function(ul, item) {

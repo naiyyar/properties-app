@@ -34,21 +34,21 @@
               <% ['0','1','2','3','4'].map do |val| %>
                 <% if val == '0' %>
                   <div class="checkbox custom-checkbox"><label>
-                    <input type="checkbox" class="building_bed_filter single-check" name="filter[bedrooms][]" value="<%=val%>" id="studio" <%= bed_checked('0') %> ><span class="fa fa-check"></span> Studio</label></div>
+                    <input type="checkbox" class="building_bed_filter" name="filter[bedrooms][]" value="<%=val%>" id="studio" <%= bed_checked('0') %> ><span class="fa fa-check"></span> Studio</label></div>
                 <%else%>
-                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_bed_filter single-check" name="filter[bedrooms][]" value="<%=val%>" id="<%=val%>beds" <%= bed_checked(val) %> ><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Bed</label></div>
+                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_bed_filter" name="filter[bedrooms][]" value="<%=val%>" id="<%=val%>beds" <%= bed_checked(val) %> ><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Bed</label></div>
                 <%end%>
               <%end%>
               <!-- prices_options: in buildings_helper -->
               <label><b>Price</b></label>
               <% prices_options.map do |obj| %>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_price_filter single-check" name="filter[price][]" value="<%=obj[1]%>" id="<%=obj[1]%>prices" <%= price_checked(obj[1]) %> ><span class="fa fa-check"></span><%=obj[0]%></label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_price_filter" name="filter[price][]" value="<%=obj[1]%>" id="<%=obj[1]%>prices" <%= price_checked(obj[1]) %> ><span class="fa fa-check"></span><%=obj[0]%></label></div>
               <%end%>
               
-              <label><b>Building Type</b></label>
-              <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Rental Building" <%= type_checked('Rental Building') %>><span class="fa fa-check"></span> Rental</label></div>
-              <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Condo Building" <%= type_checked('Condo Building') %>><span class="fa fa-check"></span> Condo</label></div>
-              <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Coop Building" <%= type_checked('Coop Building') %>><span class="fa fa-check"></span> Coop</label></div>
+              <!-- <label><b>Building Type</b></label>
+              <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Rental Building" <%#= type_checked('Rental Building') %>><span class="fa fa-check"></span> Rental</label></div>
+              <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Condo Building" <%#= type_checked('Condo Building') %>><span class="fa fa-check"></span> Condo</label></div>
+              <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Coop Building" <%#= type_checked('Coop Building') %>><span class="fa fa-check"></span> Coop</label></div> -->
 
               <label><b>Rating</b></label>
               <% 1.upto(5) do |val| %>

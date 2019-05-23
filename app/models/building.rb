@@ -359,21 +359,34 @@ class Building < ActiveRecord::Base
   end
 
   def self.filter_by_beds buildings, beds
-    @beds = beds
+    #@beds = beds
     if buildings.present?
-      @buildings = buildings
-      @buildings = @buildings.studio if bed_type?('0')
-      @buildings = @buildings.one_bed if bed_type?('1')
-      @buildings = @buildings.two_bed if bed_type?('2')
-      @buildings = @buildings.three_bed if bed_type?('3')
-      @buildings = @buildings.four_bed if bed_type?('4')
+      @buildings = []
+      beds.map do |num|
+        if num == '0'
+          @buildings << buildings.studio
+        elsif num == '1'
+          @buildings << buildings.one_bed
+        elsif num == '2'
+          @buildings << buildings.two_bed
+        elsif num == '3'
+          @buildings << buildings.three_bed
+        else
+          @buildings << buildings.four_bed
+        end
+        # @buildings = @buildings.studio if bed_type?('0')
+        # @buildings = @buildings.one_bed if bed_type?('1')
+        # @buildings = @buildings.two_bed if bed_type?('2')
+        # @buildings = @buildings.three_bed if bed_type?('3')
+        # @buildings = @buildings.four_bed if bed_type?('4')
+      end
     end
-    @buildings
+    @buildings.flatten
   end
 
-  def self.bed_type? val
-    @beds.include?(val)
-  end
+  #def self.bed_type? val
+  #  @beds.include?(val)
+  #end
 
   def self.filter_by_types buildings, type
     if type.present?

@@ -5,7 +5,7 @@
   <!-- Should only be visible on home page when user is not logged in -->
   <% if params[:controller] == 'home' and params[:action] == 'index' %>
     <div class="pull-right btn-contribute btn-contribute-home <%= user_signed_in? ? 'hidden-xs hidden-sm' : '' %>">
-      <%=link_to '<span class="fa fa-plus"></span>'.html_safe+' Write Review', contribute_buildings_path, class: 'btn btn-green hidden-xs', style: 'font-size: 15px;' %>
+      <%#=link_to '<span class="fa fa-plus"></span>'.html_safe+' Write Review', contribute_buildings_path, class: 'btn btn-green hidden-xs', style: 'font-size: 15px;' %>
       <%=link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-green visible-xs' %>
     </div>
   <%end%>

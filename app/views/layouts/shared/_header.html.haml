@@ -11,21 +11,22 @@
         %span.dropdown-label= 'Hood'
          
         %span.caret
-    .pull-right.headerLinks.hidden-xs
+    .pull-right.headerLinks.hidden-xs{style: 'color: #ddd;'}
       - if !user_signed_in?
         - if params[:controller] == "users/sessions"
-          = link_to 'Sign Up', '/users/sign_up', class: 'btn btn-default'
+          = link_to 'Sign Up', '/users/sign_up'
         - elsif params[:controller] == "users/registrations"
-          = link_to 'Sign In', '/users/sign_in', class: 'btn btn-default'
+          = link_to 'Sign In', '/users/sign_in'
         - else
-          = link_to 'Sign Up', '/users/sign_up', class: 'btn btn-default'
-          = link_to 'Sign In', '/users/sign_in', class: 'btn btn-default'
+          = link_to 'Sign Up', '/users/sign_up'
+          |
+          = link_to 'Sign In', '/users/sign_in'
+          |
       - else
         .hidden-xs.hidden-sm{style: "display: inline-block;"}
           = render partial: 'layouts/shared/user_profile'
-      = link_to '<span class="fa fa-plus"></span>'.html_safe+' Write Review', contribute_buildings_path, class: 'btn btn-green hidden-xs'
-    .pull-right.headerLinks.hidden
-      = link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-green'
+      = link_to 'Write Review', contribute_buildings_path
+    
   
   .visible-xs{style: "position: fixed; bottom: 10px;"}
     - if params[:action] == 'search' or @show_map_btn

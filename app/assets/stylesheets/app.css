@@ -22,6 +22,7 @@ body{
     background: #fff;
     padding: 6px 10px;
     border: 1px solid #ddd;
+    cursor: pointer;
 }
 
 .current-location a{
@@ -535,14 +536,19 @@ a.link_underlined:hover, .underline{
     line-height: 27px !important;
 }
 .headerLinks{
-   padding: 8px 12px 9px 13px;
+   padding: 0px 68px 0px 0px;
    position: absolute;
    right: 0;
-   height: 55px;
+   /*height: 55px;*/
    display: inline-flex;
 }
 .headerLinks a{
-    margin:0px 10px;
+    margin: 0px 6px;
+    color: #fff;
+}
+.headerLinks a:hover{
+    color: #fff !important;
+    border-bottom: 1px solid #fff;
 }
 .contribute-fixed-btn{
     position: fixed;
@@ -1299,6 +1305,9 @@ a.userHandler {
     left: 8px;
     font-size: 18px;
     z-index: 999;
+}
+.home .icon-search-shared{
+    left: 12px !important;
 }
 .apt-search{
     position: relative;
@@ -5101,7 +5110,19 @@ body.black {
     float: left;
     margin-left: 11px;
     padding-top: 9px;
+    color: #777;
 }
+
+/*setting up search input field radius*/
+.border-top-lr-radius{
+    border-top-left-radius: 25px !important;
+    border-top-right-radius: 25px !important;
+}
+.border-bottom-lr-radius{
+    border-bottom-left-radius: 25px !important;
+    border-bottom-right-radius: 25px !important;
+}
+
 .home-nav ul.homeNavUl li a:hover{
     border-bottom: 2px solid #333;
 }
@@ -5111,7 +5132,7 @@ body.black {
 
 .home-nav ul.homeNavUl li a {
     color: #333;
-    font-size: 15px;
+    font-size: 14px;
 }
 .no-touch .home-nav ul.homeNavUl li a:hover {
     color: #333;
@@ -6255,8 +6276,14 @@ select.custom-arrow {
 
 }
 
+.home .icon-magnifier {
+    color: #7e7e7e;
+}
+
 @media screen and (max-width: 767px) {
-    .current-location {
+    
+
+    .other .current-location {
         margin: 0px -70px 0px -30px;
     }
     
@@ -6576,6 +6603,7 @@ select.custom-arrow {
     .headerLinks {
         padding: 8px 3px 6px 4px;
     }
+
     .logo a, .logo.expanded a {
         width: 70px;
         height: 50px;

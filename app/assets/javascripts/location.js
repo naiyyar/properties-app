@@ -16,16 +16,16 @@ function showPosition(position) {
 function showError(error) {
   switch(error.code) {
     case error.PERMISSION_DENIED:
-      alert("User denied the request for Geolocation.");
+      console.log("User denied the request for Geolocation.");
       break;
     case error.POSITION_UNAVAILABLE:
       alert("Location information is unavailable.");
       break;
     case error.TIMEOUT:
-      alert("The request to get user location timed out.");
+      console.log("The request to get user location timed out.");
       break;
     case error.UNKNOWN_ERROR:
-      alert("An unknown error occurred.");
+      console.log("An unknown error occurred.");
       break;
   }
 }
@@ -35,6 +35,7 @@ navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then
     //console.log('allowed')
     getLocation();
   }else{
-    console.log('denied')
+    //window.data = PermissionStatus
+    //PermissionStatus.state = 'prompt'
   }
 });
