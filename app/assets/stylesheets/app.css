@@ -536,7 +536,7 @@ a.link_underlined:hover, .underline{
     line-height: 27px !important;
 }
 .headerLinks{
-   padding: 0px 68px 0px 0px;
+   padding: 0px 142px 0px 0px;
    position: absolute;
    right: 0;
    /*height: 55px;*/
@@ -550,6 +550,13 @@ a.link_underlined:hover, .underline{
     color: #fff !important;
     border-bottom: 1px solid #fff;
 }
+.headerLinks.write-review{
+    padding: 0px 14px 0px 0px;
+}
+/*.headerLinks.write-review div{
+    border: 1px solid #fff;
+    padding: 6px 8px;
+}*/
 .contribute-fixed-btn{
     position: fixed;
     top: 50%;
@@ -689,6 +696,11 @@ h3.unit_name_header{
     background-color: #fff;
     color: #333;
 }
+.btn-white.btn-clear:hover, 
+.btn-white.btn-clear:focus, 
+.btn-white.btn-clear:active{
+    background-color: #016ebd !important;
+}
 .no-touch .btn-o.btn-white:hover,
 .btn-o.btn-white:focus,
 .btn-o.btn-white:active,
@@ -698,7 +710,7 @@ h3.unit_name_header{
     color: #333;
 }
 .btn-black {
-    background-color: #333;
+    /*background-color: #333;*/
     color: #fff;
 }
 .btn-o.btn-black {
@@ -711,7 +723,7 @@ h3.unit_name_header{
 .btn-black:active,
 .btn-black.active,
 .open > .dropdown-toggle.btn-black {
-    background-color: #000;
+    /*background-color: #000;*/
     color: #fff;
 }
 .no-touch .btn-o.btn-black:hover,
@@ -719,8 +731,8 @@ h3.unit_name_header{
 .btn-o.btn-black:active,
 .btn-o.btn-black.active,
 .open > .dropdown-toggle.btn-o.btn-black {
-    background-color: #000;
-    color: #fff;
+    background-color: #ddd;
+    color: #333;
 }
 .btn-green {
     background-color: #83c11f;

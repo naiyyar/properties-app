@@ -11,6 +11,7 @@
         %span.dropdown-label= 'Hood'
          
         %span.caret
+
     .pull-right.headerLinks.hidden-xs{style: 'color: #ddd;'}
       - if !user_signed_in?
         - if params[:controller] == "users/sessions"
@@ -21,11 +22,12 @@
           = link_to 'Sign Up', '/users/sign_up'
           |
           = link_to 'Sign In', '/users/sign_in'
-          |
       - else
         .hidden-xs.hidden-sm{style: "display: inline-block;"}
           = render partial: 'layouts/shared/user_profile'
-      = link_to 'Write Review', contribute_buildings_path
+
+    .pull-right.headerLinks.write-review.hidden-xs
+      = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-white btn-o btn-clear'
     
   
   .visible-xs{style: "position: fixed; bottom: 10px;"}

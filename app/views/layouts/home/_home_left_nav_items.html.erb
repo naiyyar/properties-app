@@ -2,7 +2,8 @@
   <a href="/buildings/contribute" class="visible-xs visible-sm"><span class="icon-plus"></span><span class="navLabel"> Write a review</span></a>
 </li>
 <% unless user_signed_in? %>
-  <li class="no-hover-underline"><a href="/blog">Blog</a> | <a href="/users/sign_in">Sign In</a> | <a href="/users/sign_up">Sign Up</a> | <%=link_to 'Write Review', contribute_buildings_path %></li>
+  <li class="no-hover-underline"><a href="/blog">Blog</a> | <a href="/users/sign_in">Sign In</a> | <a href="/users/sign_up">Sign Up</a> </li>
+  <!-- <li class="no-hover-underline"><%#=link_to 'Write Review', contribute_buildings_path, class: 'btn btn-blue btn-o' %></li> -->
 <%end%>
 
 <%if current_user and current_user.has_role?(:admin) %>
