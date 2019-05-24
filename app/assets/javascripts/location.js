@@ -16,7 +16,7 @@ function showPosition(position) {
 function showError(error) {
   switch(error.code) {
     case error.PERMISSION_DENIED:
-      console.log("User denied the request for Geolocation.");
+      alert("Transparentcity doesn't have permission to access your location. Please check your browser location settings.");
       break;
     case error.POSITION_UNAVAILABLE:
       alert("Location information is unavailable.");

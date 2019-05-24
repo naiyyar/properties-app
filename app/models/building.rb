@@ -364,15 +364,15 @@ class Building < ActiveRecord::Base
       @buildings = []
       beds.map do |num|
         if num == '0'
-          @buildings << buildings.studio
+          @buildings += buildings.studio
         elsif num == '1'
-          @buildings << buildings.one_bed
+          @buildings += buildings.one_bed
         elsif num == '2'
-          @buildings << buildings.two_bed
+          @buildings += buildings.two_bed
         elsif num == '3'
-          @buildings << buildings.three_bed
+          @buildings += buildings.three_bed
         else
-          @buildings << buildings.four_bed
+          @buildings += buildings.four_bed
         end
         # @buildings = @buildings.studio if bed_type?('0')
         # @buildings = @buildings.one_bed if bed_type?('1')
@@ -381,7 +381,7 @@ class Building < ActiveRecord::Base
         # @buildings = @buildings.four_bed if bed_type?('4')
       end
     end
-    @buildings.flatten
+    where(id: @buildings.map(&:id).uniq)
   end
 
   #def self.bed_type? val
@@ -430,11 +430,11 @@ class Building < ActiveRecord::Base
     beds = filter_params[:bedrooms]
     amenities = filter_params[:amenities]
   
-    buildings = Building.filter_by_amenities(buildings, amenities) if amenities.present?
-    buildings = Building.filter_by_rates(buildings, rating) if rating.present?
-    buildings = Building.filter_by_prices(buildings, price) if price.present?
-    buildings = Building.filter_by_beds(buildings, beds) if beds.present?
-    buildings = Building.filter_by_types(buildings, building_types)
+    buildings = filter_by_amenities(buildings, amenities) if amenities.present?
+    buildings = filter_by_rates(buildings, rating) if rating.present?
+    buildings = filter_by_prices(buildings, price) if price.present?
+    buildings = filter_by_beds(buildings, beds) if beds.present?
+    buildings = filter_by_types(buildings, building_types)
 
     return buildings
   end
