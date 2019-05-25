@@ -501,6 +501,7 @@
     $('.handleFilter, .closeFilter').click(function(e) {
         e.stopPropagation();
         $('.filter').slideToggle(200);
+        $('.btn-filter').toggleClass('open');
     });
 
     $('.closeContact, .handleContact').click(function(e) {
@@ -737,5 +738,33 @@
                         }
                     };
     $('.phone_number').mask("(000) 000-0000", mask_options);
+    
+    //removing neighborhoods dropdown toggle background when mouse leave
+    var once_leaved = false;
+    var primary_dropdown = $('.neighborhoods-dropdown .dropdown-toggle, .btn-sort .dropdown-toggle, .btn-filter .dropdown-toggle');
+    primary_dropdown.on('mouseleave', function(){
+        if(!$(this).parent().hasClass('open')){
+            removeDropdownToggleBg($(this))
+            once_leaved = true
+        }
+    })
+    primary_dropdown.on('mouseover', function(){
+        if(once_leaved){
+            $(this).css({'background-color':'#3071a9', 'color':'#fff', 'border-color':'#285e8e'});
+        }
+    });
+
+    function removeDropdownToggleBg(elem){
+        elem.css({'background-color':'transparent', 'color':'#0075c9', 'border-color':'#428bca'});
+    }
+
+    $(document).on('click', function(e){
+        e.stopPropagation();
+        var target = e.target;
+        var filter_length = $(target).parents().find('.filter').length;
+        if(filter_length <= 0 && target.className != 'dropdown-menu dropdown-select userMenu sc-lg'){
+            removeDropdownToggleBg(primary_dropdown)
+        }
+    });
 
 })(jQuery);

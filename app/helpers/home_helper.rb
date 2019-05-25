@@ -340,4 +340,11 @@ module HomeHelper
 		params[:latitude].present? && params[:longitude].present?
 	end
 
+	def no_search_result_text
+		txt = '<h3>No results matched your search.</h3>' +
+		"<p>Though we can't guarentee what you are looking for exists, we can however guarentee that if you do find an apartment through <a href='/'>transparentcity.co</a>, you will save thousands of dollars on broker fees!</p>" +
+		'<p>Please adjust your filter parameters.</p>'
+		txt.html_safe
+	end
+
 end

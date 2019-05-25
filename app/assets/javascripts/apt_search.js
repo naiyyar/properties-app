@@ -28,8 +28,8 @@ app.apartments.prototype = {
             }
           }
         });
-        var curr_loc = '<span class="fa fa-location-arrow"></span> Current location';
-        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location hyper-link' style='background: #fff;' onclick='getLocation()'>"+curr_loc+"</li>");
+        var curr_loc = '<span class="fa fa-location-arrow"></span> Current Location';
+        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location hyper-link' style='background: #fff; cursor: pointer;' onclick='getLocation()'>"+curr_loc+"</li>");
       },
 
       _renderItem: function(ul, item) {
@@ -104,6 +104,7 @@ app.apartments.prototype = {
     }
     //$('.ui-autocomplete').addClass($('#current_view').val());
     $('.no-match-link').css('width', $('.ui-autocomplete').width()+'px');
+    $('#search_term').removeClass('border-bottom-lr-radius');
   },
 
   _select: function(e, ui) {
@@ -127,7 +128,7 @@ app.apartments.prototype = {
     }
     else{
       setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
-    }    
+    }
   }
 
 };

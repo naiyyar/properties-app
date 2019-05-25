@@ -13,6 +13,8 @@
         %span.caret
 
     .pull-right.headerLinks.hidden-xs{style: 'color: #ddd;'}
+      = link_to 'Blog', '/blog'
+      |
       - if !user_signed_in?
         - if params[:controller] == "users/sessions"
           = link_to 'Sign Up', '/users/sign_up'

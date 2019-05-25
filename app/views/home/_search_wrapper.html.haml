@@ -27,16 +27,12 @@
             #load-more-buildings.row
               = render partial: 'search_results', locals: { buildings: @all_building }
           - if @buildings.blank? and @per_page_buildings.total_pages == @per_page_buildings.current_page
-            .text-center{style: "padding:4px;"}
-              %p No results matched your search.
-              %p Though we can't guarentee you will find what you are looking for, we can however guarentee that if you do find an apartment through transparentcity.co, you will save thousands of dollars on broker fees!
-              %p Please adjust your filter parameters.
+            .text-center{style: "padding: 12px 4px;"}
+              = no_search_result_text
           %br/
           .pages-container
             = will_paginate @per_page_buildings, renderer: BootstrapPagination::Rails
         - else
           .text-center{style: "padding: 12px 4px;"}
-            %h3 No results matched your search.
-            %p Though we can't guarentee you will find what you are looking for, we can however guarentee that if you do find an apartment through transparentcity.co, you will save thousands of dollars on broker fees!
-            %p Please adjust your filter parameters.
+            = no_search_result_text
 .clearfix

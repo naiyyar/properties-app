@@ -2,8 +2,8 @@
     "use strict";
 
     $('#search_term').on('focus', function(){
-        $('.current-location').removeClass('hidden');
-        $(this).removeClass('border-bottom-lr-radius');
+        //$('.current-location').removeClass('hidden');
+        //$(this).removeClass('border-bottom-lr-radius');
     });
     
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
@@ -109,14 +109,14 @@
         $('#signin').modal('show');
     });
 
-    $(document).click(function(e){
+    $(document).on('click', function(e){
         e.stopPropagation();
         if(e.target.id != 'search_term' && e.target.id != 'location-link'){
             hideAutoSearchList();
         }
-        if(e.target.id != 'search_term' && e.target.id != 'location-link'){
-            hideCurrentLocationBar();
-        }
+        // if(e.target.id != 'search_term' && e.target.id != 'location-link'){
+        //     hideCurrentLocationBar();
+        // }
     })
 
     $('#search_term').keyup(function(e){
@@ -136,16 +136,17 @@
                 $("ul.ui-autocomplete").hide();
             }
             $('.no-match-link').addClass('hidden');
+            //$('.home #search_term').addClass('border-bottom-lr-radius');
         }, 200);
     }
 
-    function hideCurrentLocationBar(){
-        var curr_loc = $('.current-location');
-        if(!curr_loc.hasClass('hidden')){
-            curr_loc.addClass('hidden');    
-        }
-        $('.home #search_term').addClass('border-bottom-lr-radius');   
-    }
+    // function hideCurrentLocationBar(){
+    //     var curr_loc = $('.current-location');
+    //     if(!curr_loc.hasClass('hidden')){
+    //         curr_loc.addClass('hidden');    
+    //     }
+    //     $('.home #search_term').addClass('border-bottom-lr-radius');   
+    // }
 
     //Searching building on neighborhood click
     $('.borough-neighborhood').click(function(e){
