@@ -37,6 +37,13 @@ body{
     color: #fff;
 }
 
+.icon-location{
+    position: absolute;
+    right: 17px;
+    top: 10px;
+    font-size: 2.2rem;
+}
+
 #leftSide.home{
     display: none;
 }

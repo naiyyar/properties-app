@@ -37,5 +37,8 @@ navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then
   }else{
     //window.data = PermissionStatus
     //PermissionStatus.state = 'prompt'
+    setTimeout(function(){
+      $('.icon-location').tooltip('show'); 
+    }, 2000);
   }
 });

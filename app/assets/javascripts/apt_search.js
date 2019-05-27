@@ -129,6 +129,7 @@ app.apartments.prototype = {
     else{
       setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
     }
+    $('#search_term').addClass('border-bottom-lr-radius');
   }
 
 };

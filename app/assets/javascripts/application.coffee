@@ -10,6 +10,7 @@
 
 jQuery ->
 	#$('[data-toggle="popover"]').popover({ trigger: "click" })
+	$('[data-toggle="tooltip"]').tooltip();
 
 	#removing hash after facebook login
 	if(window.location.hash && window.location.hash == '#_=_')
