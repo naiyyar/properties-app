@@ -28,8 +28,8 @@ app.apartments.prototype = {
             }
           }
         });
-        var curr_loc = '<span class="fa fa-location-arrow"></span> Current Location';
-        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location hyper-link' style='background: #fff; cursor: pointer;' onclick='getLocation()'>"+curr_loc+"</li>");
+        var curr_loc = '<a href="'+location_url+'" class="hyper-link location"><span class="fa fa-location-arrow"></span> Current Location</a>';
+        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location' style='background: #fff; cursor: pointer;' onclick='getLocation()'>"+curr_loc+"</li>");
       },
 
       _renderItem: function(ul, item) {

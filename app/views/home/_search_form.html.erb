@@ -3,12 +3,8 @@
 	<% if params[:action] == 'index' and params[:controller] == 'home' %>
 		<div class="icon-search-shared"><span class="icon-magnifier"></span></div>
 		<%= text_field_tag 'search_term', searched_term, class: 'form-control border-top-lr-radius border-bottom-lr-radius', placeholder: placeholder, style: 'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 15px rgba(0,0,0,0.6);' %>
-		<div class="icon-location" data-toggle="tooltip" data-placement="top" title="Current Location">
-			<a href="javascript:void(0);" class="hyper-link" onclick="getLocation()">
-				<span class='fa fa-location-arrow'></span>
-			</a>
-		</div>
 	<%else%>
+		<div class="hidden-xs icon-search-shared"><span class="icon-magnifier"></span></div>
 		<%= text_field_tag 'search_term', searched_term, class: 'apt-search-text-shared', placeholder: placeholder %>
 	<%end%>
 	
