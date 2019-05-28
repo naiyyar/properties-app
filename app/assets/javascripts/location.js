@@ -1,7 +1,9 @@
-var location_url = 'javascript:void(0);'
+var location_url = 'javascript:void(0);';
 function getLocation(){
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
+    var options = {enableHighAccuracy: true, timeout: 60000, maximumAge: 0};
+    navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+    //$('.location-loader').show();
   } else {
     alert("Geolocation is not supported by this browser.");
   }
@@ -9,14 +11,12 @@ function getLocation(){
 
 function showPosition(position) {
   var loc_link = $('.ui-autocomplete li.curr-location a');
-  location_url = '/location_search?latitude='+position.coords.latitude+'&longitude='+position.coords.longitude;
-  loc_link.attr('href', location_url);
+  render_url = '/location_search?latitude='+position.coords.latitude+'&longitude='+position.coords.longitude;
+  if(loc_link.attr('href') == 'javascript:void(0);'){
+    window.location.href = render_url;
+  }
+  loc_link.attr('href', render_url);
 }
-
-// $(document).on('li.curr-location', 'click', function(){
-//   alert(12)
-//   $("ul.ui-autocomplete").show();
-// });
 
 function showError(error) {
   switch(error.code) {
