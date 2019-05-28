@@ -117,6 +117,7 @@ app.apartments.prototype = {
     //hiding autocomplete search results
     if($("ul.ui-autocomplete").is(":visible")) {
       $("ul.ui-autocomplete").hide();
+      $('#search_term').addClass('border-bottom-lr-radius');
     }
     return false;
   },
@@ -129,7 +130,6 @@ app.apartments.prototype = {
     else{
       setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
     }
-    $('#search_term').addClass('border-bottom-lr-radius');
   }
 
 };
