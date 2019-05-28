@@ -1,6 +1,6 @@
 <div class="headerUserWraper">
-  <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><%= image_tag current_user.profile_image(session[:provider]), alt: 'avatar', class: 'headerAvatar avatar', style: 'width:30px;height:30px;' %></a>
-  <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">
+  <a href="#" class="no-hover-underline userHandler dropdown-toggle" data-toggle="dropdown"><%= image_tag current_user.profile_image(session[:provider]), alt: 'avatar', class: 'headerAvatar avatar', style: 'width:30px;height:30px;' %></a>
+  <a href="#" class="no-hover-underline headerUser dropdown-toggle" data-toggle="dropdown">
       <%= image_tag current_user.profile_image(session[:provider]), class: "avatar headerAvatar pull-left", alt: 'Avatar'%>
   </a>
   <div class="dropdown-menu pull-right userMenu" role="menu">

@@ -12,10 +12,10 @@
          
         %span.caret
 
-    .pull-right.headerLinks.hidden-xs{style: 'color: #ddd;'}
+    .pull-right.nav-items.headerLinks.hidden-xs{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
       = link_to 'Blog', '/blog'
-      |
       - if !user_signed_in?
+        |
         - if params[:controller] == "users/sessions"
           = link_to 'Sign Up', '/users/sign_up'
         - elsif params[:controller] == "users/registrations"
@@ -24,9 +24,10 @@
           = link_to 'Sign Up', '/users/sign_up'
           |
           = link_to 'Sign In', '/users/sign_in'
-      - else
-        .hidden-xs.hidden-sm{style: "display: inline-block;"}
-          = render partial: 'layouts/shared/user_profile'
+
+    - if user_signed_in?
+      .pull-right.user-profile.headerLinks.hidden-xs.hidden-sm{style: "display: inline-block;"}
+        = render partial: 'layouts/shared/user_profile'
 
     .pull-right.headerLinks.write-review.hidden-xs
       = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-white btn-o btn-clear'

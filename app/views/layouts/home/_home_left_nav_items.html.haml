@@ -1,0 +1,27 @@
+%li
+  %a.visible-xs.visible-sm{href: "/buildings/contribute"}
+    %span.icon-plus
+    %span.navLabel Write a review
+- unless user_signed_in?
+  %li.no-hover-underline
+    %a{href: "/blog"} Blog
+    |
+    %a{href: "/users/sign_in"} Sign In
+    |
+    %a{href: "/users/sign_up"} Sign Up
+  / <li class="no-hover-underline"><haml_silent></haml_silent></li>
+- if current_user and current_user.has_role?(:admin)
+  %li
+    %a{href: "/buildings"}
+      %span.fa.fa-building-o
+      Admin
+- elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank?
+  %li.visible-xs
+    %a{href: "/blog"} Blog
+  %li.visible-xs
+    %a{href: "/about"} About us
+  %li.visible-xs
+    %a{href: new_contact_path} Send feedback
+- if current_user.present?
+  %li
+    %a{href: "#{saved_buildings_user_path(current_user)}"} Saved buildings

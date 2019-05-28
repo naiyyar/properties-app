@@ -560,6 +560,10 @@ a.link_underlined:hover, .underline{
 .headerLinks.write-review{
     padding: 0px 14px 0px 0px;
 }
+
+.nav-items.headerLinks.signedin{
+    margin-right: 65px;
+}
 /*.headerLinks.write-review div{
     border: 1px solid #fff;
     padding: 6px 8px;
@@ -1574,10 +1578,12 @@ a.notifySettings {
     height: 60px;
 }
 a.headerUser {
-    display: block;
+    display: flex;
     height: 60px;
     text-align: center;
     padding: 0 8px;
+    justify-content: center;
+    align-items: center;
 }
 .home-header a.headerUser{
     color: #fff;
@@ -5148,6 +5154,10 @@ body.black {
 }
 .home-nav ul.homeNavUl li:not(.no-hover-underline):hover {
     border-bottom: 1px solid #ffffff;
+}
+
+.no-hover-underline:hover{
+    border-bottom: 1px solid transparent !important;
 }
 
 .home-nav ul.homeNavUl li a {
