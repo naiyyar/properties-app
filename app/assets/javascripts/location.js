@@ -11,7 +11,7 @@ function getLocation(){
 
 function showPosition(position) {
   var loc_link = $('.ui-autocomplete li.curr-location a');
-  render_url = '/location_search?latitude='+position.coords.latitude+'&longitude='+position.coords.longitude;
+  render_url = '/location_search?latitude='+position.coords.latitude+'&longitude='+position.coords.longitude+'&searched_by=current_location';
   if(loc_link.attr('href') == 'javascript:void(0);'){
     window.location.href = render_url;
   }
