@@ -80,7 +80,7 @@ class BuildingsController < ApplicationController
   end
 
   def show
-    @show_map_btn = true
+    @show_map_btn = @half_footer = true
     @reviews = @building.building_reviews
     @distance_results = DistanceMatrix.get_data(@building)
     #building + units images

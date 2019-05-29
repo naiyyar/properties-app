@@ -190,6 +190,7 @@ class HomeController < ApplicationController
       @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
       @tab_title_text = "#{@search_string} #{@borough_city}"
     end
+    @half_footer = true
   end
 
   def save_as_favourite

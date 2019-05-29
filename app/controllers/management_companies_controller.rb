@@ -26,7 +26,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1
   # GET /management_companies/1.json
   def show
-    @show_map_btn = true
+    @show_map_btn = @half_footer = true
     buildings = @management_company.cached_buildings
     
     featured_buildings = FeaturedBuilding.where(building_id: buildings.pluck(:id)).active

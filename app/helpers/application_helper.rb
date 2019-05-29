@@ -21,6 +21,14 @@ module ApplicationHelper
     :user
   end
 
+  def show_full_width_footer?
+    if @half_footer
+      false
+    else
+      true
+    end
+  end
+
   def resource
     @resource ||= User.new
   end
