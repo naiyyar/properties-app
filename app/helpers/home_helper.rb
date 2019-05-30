@@ -336,8 +336,12 @@ module HomeHelper
 		end
 	end
 
+	#redo search
 	def custom_search?
-		params[:latitude].present? && params[:longitude].present?
+		#params[:latitude].present? && params[:longitude].present?
+		#current location search also have lat and long
+		#searching on mobile redirecting to map view instad of list view
+		params[:searched_by] == 'latlng'
 	end
 
 	def no_search_result_text

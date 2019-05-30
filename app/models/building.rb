@@ -381,7 +381,7 @@ class Building < ActiveRecord::Base
         # @buildings = @buildings.four_bed if bed_type?('4')
       end
     end
-    buildings.where(id: @buildings.map(&:id).uniq)
+    buildings.where(id: @buildings.map(&:id).uniq) rescue nil
   end
 
   #def self.bed_type? val

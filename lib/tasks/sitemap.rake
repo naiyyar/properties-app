@@ -33,10 +33,10 @@ desc 'Upload the error messages files to S3'
 task upload_custom_error_message_files_to_s3: :environment do
   s3 = Aws::S3::Resource.new(region: 'us-west-2')
   bucket = ENV['AWS_S3_BUCKET']
-  Dir.entries(File.join(Rails.root, "public", "custom_errors")).each do |file_name|
+  Dir.entries(File.join(Rails.root, "public", "error_pages")).each do |file_name|
     next if ['.', '..'].include? file_name
-    path = "custom_errors/#{file_name}"
-    file = File.join(Rails.root, "public", "custom_errors", file_name)
+    path = "error_pages/#{file_name}"
+    file = File.join(Rails.root, "public", "error_pages", file_name)
 
     begin
       obj = s3.bucket(bucket).object(path)

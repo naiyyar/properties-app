@@ -1,13 +1,13 @@
-- cache("trans-home-#{Date.today}") do
-  #hero-container
-    = render 'layouts/home/slider'
-    = render 'layouts/home/header'
-    .search-panel
-      .align-center.home-about-nyc-apt
-        %h1 No Fees. No Brokers. Just Rentals & Reviews.
-        %h2 transparentcity is the largest directory of links to no-fee, no-broker buildings in NYC.
-      .home-search-form
-        = render partial: 'home/search_form'
+/ - cache("trans-home") do
+#hero-container
+  = render 'layouts/home/slider'
+  = render 'layouts/home/header'
+  .search-panel
+    .align-center.home-about-nyc-apt
+      %h1 No Fees. No Brokers. Just Rentals & Reviews.
+      %h2 transparentcity is the largest directory of links to no-fee, no-broker buildings in NYC.
+    .home-search-form
+      = render partial: 'home/search_form'
 
 = render 'layouts/home/popular_neighborhoods'
 
@@ -40,6 +40,3 @@
             %p{style: 'margin: 0 0 30px;'} We aim to include as many photos, reviews, and tidbits about amenities as we can from the community—because home means more than just walls and a roof.
 
             = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-green btn-xlg btn-lg border-green', style: 'font-size: 15px;'
-
-
-/ = render 'layouts/home/footer'
