@@ -65,6 +65,7 @@
         <%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden', name: nil %>
       </div>
     </div>
+    <%= hidden_field_tag :searched_by, params[:searched_by] if params[:searched_by].present? %>
   </form>
 
   <div class="filter-action-btns" style="position: relative;">

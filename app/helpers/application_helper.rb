@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def show_filters?
-    params[:searched_by].present? or params[:filter].present?
+    params[:searched_by].present? or params[:filter].present? or params[:sort_by].present?
   end
 
 	def resource_name
