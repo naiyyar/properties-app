@@ -56,7 +56,7 @@
     <%else%>
       <%= yield %>
     <%end%>
-    <%= render 'layouts/home/footer' if show_full_width_footer? %>
+    <%= render 'layouts/home/footer' if show_full_width_footer? and params[:action] != 'about' %>
     <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? and params[:searched_by].present? %>
     <%= render 'contacts/contact_building_modal' if @building.present? and @contact.present? %>
     <%#= javascript_include_tag 'infobox' %>
