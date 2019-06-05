@@ -2,6 +2,15 @@
 @import "bootstrap";
 @import "font-awesome";
 
+.searched-properties{
+  .tabsWidgetSearch{
+    .nav-tabs.nav-justified > li{
+      display: inline-block;
+      width: 49%;
+    }
+  }
+}
+
 #new_review{
   .media{
     margin-top: 15px;

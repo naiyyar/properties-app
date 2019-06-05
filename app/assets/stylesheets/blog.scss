@@ -1,0 +1,20 @@
+.blog-content {
+	.featured.carousel .carousel-inner .item .container{
+   	background-color: #fff !important;
+	}
+}
+.post-content{
+	img:not(.author-img){
+    width: 66% !important;
+    height: auto !important;
+	}
+}
+
+@media screen and (max-width: 676px){
+	.post-content{
+		img:not(.author-img){
+	    width: 100% !important;
+	    height: auto !important;
+		}
+	}
+}

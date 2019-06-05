@@ -136,9 +136,8 @@ class Building < ActiveRecord::Base
                 }}
 
   pg_search_scope :search_by_zipcode, against: [:zipcode],
-    :using => {:tsearch=> { prefix: true }, :trigram=> {
-                  :threshold => 0.5
-                }}
+    :using => {:tsearch=> { prefix: true } #, :trigram=> {:threshold => 0.2}
+              }
 
   filterrific(
    default_filter_params: { },
@@ -448,9 +447,9 @@ class Building < ActiveRecord::Base
   end
 
   def self.search_by_zipcodes(criteria)
-    #regexp = /#{criteria}/i;
+    # regexp = /#{criteria}/i;
     results = Building.search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
-    #results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
+    # results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
   def self.search_by_pneighborhoods(criteria)
