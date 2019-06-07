@@ -2,7 +2,7 @@
   %table.table
     %thead
       %tr
-        %th Price range
+        %th{width: '8%'} Price range
         %th Studio
         %th 1 bed
         %th 2 bed
@@ -10,7 +10,7 @@
         %th 4+ bed
 		
     %tbody
-      / prices_options: method on building helpers
+      / prices_options: $, $$, $$$, $$$$ method on building helpers
       - prices_options.map do |option|
         - @range_prices = @prices.where(range: option[1])
         %tr
@@ -22,3 +22,44 @@
               %td="#{number_to_currency(price.min_price)} - #{number_to_currency(price.max_price)}"
           -else
             %td{colspan: "5"}
+
+
+  / rent medians
+  %table.table
+    %thead
+      %tr
+        %th{width: '8%'} Rent Median
+        %th Studio
+        %th 1 bed
+        %th 2 bed
+        %th 3 bed
+        %th 4+ bed
+    
+    %tbody
+      / prices_options: $, $$, $$$, $$$$ method on building helpers
+      - prices_options.map do |option|
+        - @rent_medians = @medians.where(range: option[1])
+        %tr
+          %td
+            =link_to option[0], "#newRentMedian#{option[1]}", data: { toggle: 'modal' }, class: 'hyper-link'
+            =render 'rent_medians/form', modal_id: "newRentMedian#{option[1]}", range: option[1]
+          - if @rent_medians.present?
+            - @rent_medians.each do |med|
+              %td="#{number_to_currency(med.price)} - Save: #{((med.price*12)*@fee_percent.percent_amount/100)}"
+          -else
+            %td{colspan: "5"}
+
+  
+  
+  / Broker fee %
+  .col-lg-2.col-sm-12
+    %table.table
+      %thead
+        %tr
+          %th Broker fee %
+      
+      %tbody
+        %td
+          = link_to @fee_percent.present? ? @fee_percent.percent_amount : '0', '#editBrokerFeePercentModal', class: 'hyper-link', data: { toggle: 'modal' }
+          = render 'broker_fee_percents/form', modal_id: 'editBrokerFeePercentModal',  broker_fee_percent: @fee_percent
+

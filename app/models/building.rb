@@ -210,6 +210,22 @@ class Building < ActiveRecord::Base
     ]
   end
 
+  def saved_amount(broker_percent)
+    median_arr = []
+    bedroom_ranges.map do |bed_range|
+      prices = RentMedian.where(bed_type: bed_range, range: price)
+      if prices.present?
+        median = prices.first
+        median_arr << ((median.price * 12)*broker_percent)/100
+      end
+    end
+    median_arr
+  end
+
+  def min_save_amount broker_percent
+    saved_amount(broker_percent).min
+  end
+
   def to_param
     slug
   end

@@ -83,6 +83,7 @@ class BuildingsController < ApplicationController
     @show_map_btn = @half_footer = true
     @reviews = @building.building_reviews
     @distance_results = DistanceMatrix.get_data(@building)
+    @broker_percent = BrokerFeePercent.first.percent_amount
     #building + units images
     @uploads = @building.chached_image_uploads
     @documents = @building.chached_doc_uploads

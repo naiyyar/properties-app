@@ -539,10 +539,12 @@
 # 		SubwayStationLine.create(subway_station_id: station.id, line: line, color: station.line_color(line)) unless line.include?('Express')
 # 	end
 # end
-Building.all.each do |building|
-	rating_cache = RatingCache.where(cacheable_id: building.id, dimension: 'building')
-	building.update(avg_rating: rating_cache.first.avg) if rating_cache.present?
-end
+# Building.all.each do |building|
+# 	rating_cache = RatingCache.where(cacheable_id: building.id, dimension: 'building')
+# 	building.update(avg_rating: rating_cache.first.avg) if rating_cache.present?
+# end
+
+BrokerFeePercent.create(percent_amount: 10)
 
 
 

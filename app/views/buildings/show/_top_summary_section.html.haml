@@ -1,4 +1,4 @@
-.singleTop
+.singleTop{style: 'position: relative;'}
 	- if @uploads.present?
 		.row.sh-slider
 			.sh-slider-container
@@ -7,7 +7,12 @@
 						=render 'buildings/show/lightslider', building: @building
 				.clearfix
 				=render 'uploads/add_photos', object: @building
-     
+   		
+			- if @building.price.present? or @building.bedroom_types?
+				.saving-badge.show-view-badge
+					%p Save
+					%p= "#{number_to_currency(@building.min_save_amount(@broker_percent), precision: 0)}+"
+	
 	.summary
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12

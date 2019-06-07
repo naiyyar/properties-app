@@ -1,0 +1,2 @@
+module RentMediansHelper
+end

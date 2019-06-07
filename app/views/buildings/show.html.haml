@@ -13,6 +13,8 @@
   = render 'buildings/show/top_summary_section'
   - if @building.price.present? or @building.bedroom_types?
     = render 'buildings/show/price_ranges'
+
+    = render 'buildings/show/broker_fee_savings'
   
   .clearfix
   = render 'building_amenities'

@@ -4,26 +4,21 @@ class Ability
   def initialize(user)
     if user.nil?
       can :manage, :all
-      cannot :index, Building
-      cannot :index, Unit
-      cannot :index, Review
+      cannot :index, [Building, Unit, Review, NeighborhoodLink, Contact]
       cannot [:contribution, :index], User
-      cannot :index, NeighborhoodLink
-      cannot :index, Contact
       cannot [:index, :new, :edit], ManagementCompany
       cannot [:index, :show, :saved_buildings], User
-      cannot [:index, :create, :update], FeaturedComp
+      cannot [:index, :create, :update, :destroy], [BrokerFeePercent, RentMedian, FeaturedComp]
+      cannot [:index, :add_or_update_prices], Price
     elsif user.has_role? :admin
       can :manage, :all
     else
       can :manage, :all
-      cannot :index, Building
-      cannot :index, Unit
-      cannot :index, Review
+      cannot :index, [Building, Unit, Review, NeighborhoodLink, Contact]
       cannot [:contribution, :index], User
-      cannot :index, NeighborhoodLink
-      cannot :index, Contact
       cannot [:index, :new, :edit], ManagementCompany
+      cannot [:index, :create, :update, :destroy], [BrokerFeePercent, RentMedian, FeaturedComp]
+      cannot [:index, :add_or_update_prices], Price
     end
   end
   

@@ -6,7 +6,7 @@
           &times;
       
       .modal-body.no-padding
-        = form_tag '/add_or_update_prices' do
+        = form_tag '/add_or_update_rent_medians' do
           %fieldset
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -16,14 +16,11 @@
                     .row
                       .col-lg-3=bedroom_type(bt_range)
                       .col-lg-4
-                        = text_field_tag "price[#{bt_range}][min_price]", @range_prices.present? ? Price.min_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Min'
-                      .col-lg-1 -
-                      .col-lg-4
-                        = text_field_tag "price[#{bt_range}][max_price]", @range_prices.present? ? Price.max_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Max'
+                        = text_field_tag "price[#{bt_range}][rent_price]", @rent_medians.present? ? RentMedian.rent_price(bt_range, @rent_medians) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Price'
                 
           %footer
             = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
-            = submit_tag 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
+            = submit_tag 'Submit', class: 'btn btn-primary'
 
 :css
   .form-group.price-range input{
