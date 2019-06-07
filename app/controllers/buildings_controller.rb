@@ -84,6 +84,7 @@ class BuildingsController < ApplicationController
     @reviews = @building.building_reviews
     @distance_results = DistanceMatrix.get_data(@building)
     @broker_percent = BrokerFeePercent.first.percent_amount
+    @min_save_amount = @building.min_save_amount(@broker_percent)
     #building + units images
     @uploads = @building.chached_image_uploads
     @documents = @building.chached_doc_uploads

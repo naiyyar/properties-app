@@ -8,9 +8,11 @@
       .bg-size-cover{ style: "background-image: url(#{bg_img_url});" }
   
   - if building.price.present? or building.bedroom_types?
-    .saving-badge.split-view-badge
-      %p Save
-      %p= "#{number_to_currency(building.min_save_amount(@broker_percent), precision: 0)}+"
+    - min_save_amount = building.min_save_amount(@broker_percent)
+    - if min_save_amount.present?
+      .saving-badge.split-view-badge
+        %p Save
+        %p= "#{number_to_currency(building.min_save_amount(@broker_percent), precision: 0)}+"
   
   = link_to building_path(building) do
     - unless @similar_properties.present?
