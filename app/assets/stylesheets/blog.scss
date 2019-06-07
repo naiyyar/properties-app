@@ -1,7 +1,35 @@
 .blog-content {
+  a.text-color-blue{
+    color: #1a0dab;
+  }
+  .pn-icon {
+    position: absolute;
+    font-size: 36px;
+    line-height: 36px;
+    top: 50%;
+    margin-top: -18px;
+    color: #333 !important;
+  }
+  
+  .home-wrapper {
+    padding: 20px 20px;
+  }
+  .profiler-results{
+    display: none;
+  }
+  .at-label{
+    display: none !important;
+  }
+	
 	.featured.carousel .carousel-inner .item .container{
    	background-color: #fff !important;
 	}
+}
+
+#hero-container-blog{
+	.home-logo {
+    margin-top: 13px;
+  }
 }
 
 @media screen and (max-width: 676px){
