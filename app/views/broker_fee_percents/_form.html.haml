@@ -1,0 +1,20 @@
+.modal.fade{id: 'editBrokerFeePercentModal', tabindex: "-1", role: "dialog"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: "button", class: "close", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}
+          &times;
+      
+      .modal-body.no-padding
+        = form_for broker_fee_percent, html: { class: 'form-horizontal1' } do |f|
+          %fieldset
+            .row
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label Percent
+                  = f.number_field :percent_amount, class: 'form-control', min: 0
+                 
+                
+          %footer
+            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
+            = f.submit 'Submit', class: 'btn btn-primary'

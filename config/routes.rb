@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :broker_fee_percents, only: [:new, :create, :update, :edit]
+  
   get 'errors/not_found'
   get 'errors/internal_server_error'
 

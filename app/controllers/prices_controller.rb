@@ -6,6 +6,7 @@ class PricesController < ApplicationController
   def index
     @prices = Price.order(:bed_type)
     @price = Price.new
+    @fee_percent = BrokerFeePercent.first
   end
 
   # GET /prices/1
