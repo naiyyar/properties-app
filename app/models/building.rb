@@ -219,7 +219,11 @@ class Building < ActiveRecord::Base
         median_arr << ((median.price * 12)*broker_percent)/100
       end
     end
-    median_arr.min
+    median_arr
+  end
+
+  def min_save_amount broker_percent
+    saved_amount(broker_percent).min
   end
 
   def to_param
