@@ -149,7 +149,8 @@ class HomeController < ApplicationController
           end
         end
       end
-      
+      #to calculate save amount
+      @broker_percent = BrokerFeePercent.first.percent_amount
       @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
 
       @meta_desc = "#{@tab_title_text.try(:titleize)} has #{@buildings.length if @buildings.present?} "+ 

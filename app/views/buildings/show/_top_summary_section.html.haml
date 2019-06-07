@@ -7,10 +7,11 @@
 						=render 'buildings/show/lightslider', building: @building
 				.clearfix
 				=render 'uploads/add_photos', object: @building
-   
-			.saving-badge.show-view-badge
-				%p Save
-				%p= "#{number_to_currency(3500, precision: 0)}+"
+   		
+			- if @building.price.present? or @building.bedroom_types?
+				.saving-badge.show-view-badge
+					%p Save
+					%p= "#{number_to_currency(@building.saved_amount(@broker_percent), precision: 0)}+"
 	
 	.summary
 		.row

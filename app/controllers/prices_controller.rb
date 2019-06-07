@@ -7,6 +7,7 @@ class PricesController < ApplicationController
     @prices = Price.order(:bed_type)
     @price = Price.new
     @fee_percent = BrokerFeePercent.first
+    @medians = RentMedian.order(:bed_type)
   end
 
   # GET /prices/1
