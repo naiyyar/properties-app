@@ -28,7 +28,7 @@ class ManagementCompaniesController < ApplicationController
   def show
     @show_map_btn = @half_footer = true
     buildings = @management_company.cached_buildings
-    
+    @broker_percent = BrokerFeePercent.first.percent_amount
     featured_buildings = FeaturedBuilding.where(building_id: buildings.pluck(:id)).active
     featured_building_ids = featured_buildings.pluck(:building_id)
     #Selecting 2 featured building to put on top
