@@ -216,10 +216,10 @@ class Building < ActiveRecord::Base
       prices = RentMedian.where(bed_type: bed_range, range: price)
       if prices.present?
         median = prices.first
-        median_arr << ((median.price * 12)*broker_percent)/100
+        median_arr << (((median.price * 12)*broker_percent)/100).to_i
       end
     end
-    median_arr
+    median_arr.sort
   end
 
   def min_save_amount broker_percent

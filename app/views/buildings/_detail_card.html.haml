@@ -1,11 +1,12 @@
 .card.search-view-card 
-  - unless @similar_properties.present?
-    .figure{style: "position: relative;"}
-      = render 'home/lightslider', building: building, view_type: 'split'
-  - else
-    .figure{style: "position: relative;height: 165px;"}
-      - bg_img_url = @last_uploads.present? ? @last_uploads.uploaded_img_url : image_url('no-photo.png')
-      .bg-size-cover{ style: "background-image: url(#{bg_img_url});" }
+  - cache [building, params[:page], 'lightslider'] do
+    - unless @similar_properties.present?
+      .figure{style: "position: relative;"}
+        = render 'home/lightslider', building: building, view_type: 'split'
+    - else
+      .figure{style: "position: relative;height: 165px;"}
+        - bg_img_url = @last_uploads.present? ? @last_uploads.uploaded_img_url : image_url('no-photo.png')
+        .bg-size-cover{ style: "background-image: url(#{bg_img_url});" }
   
   - if building.price.present? or building.bedroom_types?
     - min_save_amount = building.min_save_amount(@broker_percent)
@@ -26,8 +27,9 @@
   
   %div{style: "float: right;margin-top: -43px;"}
     = render 'buildings/favourite', building: building
-    
-  = render 'home/building_detail', building: building
+  
+  - cache [building, params[:page], 'building_detail'] do
+    = render 'home/building_detail', building: building
   
   %div{style: "padding: 8px;"}
     = check_availability_link(building)
