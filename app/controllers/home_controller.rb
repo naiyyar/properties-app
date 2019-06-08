@@ -27,7 +27,8 @@ class HomeController < ApplicationController
                                                         recomended_per: Vote.recommended_percent(building),
                                                         building_show: params[:building_show],
                                                         current_user: @current_user,
-                                                        fav_color_class: fav_color_class
+                                                        fav_color_class: fav_color_class,
+                                                        broker_percent: BrokerFeePercent.first.percent_amount
                                                       })
                   }
   end
