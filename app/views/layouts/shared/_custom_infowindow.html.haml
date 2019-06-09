@@ -42,8 +42,8 @@
           | #{(recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe)}
         %span= "| &nbsp; Reviews: #{building.reviews.count}".html_safe
   
-  %div{style: "position: absolute;right: -4px;top: 134px;"}
-    .pull-right{style: "padding-right: 8px;font-size: 22px;"}
+  %div{style: "position: absolute;right: -4px;top: 136px;"}
+    .pull-right{style: "padding-right: 10px;font-size: 18px;"}
       - if current_user.present?
         - click_action = fav_color_class == 'unfilled-heart' ? "saveToFavourite(#{building.id})" : "removeFromFavourite(#{building.id})"
         - hover_action = fav_color_class == 'unfilled-heart' ? "addHoverEffect(#{building.id})" : "removeHoverEffect(#{building.id})"
