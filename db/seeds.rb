@@ -544,7 +544,7 @@
 # 	building.update(avg_rating: rating_cache.first.avg) if rating_cache.present?
 # end
 
-BrokerFeePercent.create(percent_amount: 10)
+#BrokerFeePercent.create(percent_amount: 10)
 
 
 

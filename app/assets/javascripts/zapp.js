@@ -195,7 +195,7 @@
         }
 
     }
-
+    var documentHeight, headerHeight;
     var windowHeight;
     var windowWidth;
     var contentHeight;
@@ -205,14 +205,16 @@
 
     // calculations for elements that changes size on window resize
     var windowResizeHandler = function() {
+        documentHeight = $(document).innerHeight();
         windowHeight = window.innerHeight;
         windowWidth = $(window).width();
-        contentHeight = windowHeight - $('#header').height();
+        headerHeight = $('#header').height()
+        contentHeight = windowHeight - headerHeight;
         contentWidth = $('#content').width();
 
         $('#leftSide').height(contentHeight);
         $('.closeLeftSide').height(contentHeight);
-        $('#wrapper').height(contentHeight);
+        $('#wrapper').height(documentHeight - headerHeight);
         $('#mapView').height(contentHeight);
         $('#content').height(contentHeight);
         if (map) {

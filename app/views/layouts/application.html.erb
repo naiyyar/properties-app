@@ -59,13 +59,13 @@
     <%= render 'layouts/home/footer' if show_full_width_footer? and params[:action] != 'about' %>
     <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? and params[:searched_by].present? %>
     <%= render 'contacts/contact_building_modal' if @building.present? and @contact.present? %>
-    <%#= javascript_include_tag 'infobox' %>
     <%= javascript_include_tag 'infobubble' %>
     <%= javascript_include_tag 'home' %>
     <%= javascript_include_tag 'zapp' %>
-
-    <%= render 'layouts/shared/signin' if current_user.blank? %>
-    <%= render 'layouts/shared/signup' if current_user.blank? %>
+    <%if current_user.blank? %>
+      <%= render 'layouts/shared/signin'%>
+      <%= render 'layouts/shared/signup'%>
+    <%end%>
     
     <script type="text/javascript">
       if($('#slider').length > 0){

@@ -12,9 +12,8 @@
         %span.fa.fa-instagram
     .copyright.padding-top-20
       transparentcity © #{Date.today.year <= 2018 ? 2018 : Date.today.year}
-    
-    %br
 
     - if request.url != 'https://transparentcity.co/'
+      %br
       .text-center
-        =image_tag 'buttercms_logo/butter-w.png', style: 'width: 150px;'
+        =image_tag 'buttercms_logo/butter-w.png', style: 'width: 150px;', alt: ''
