@@ -178,6 +178,7 @@ module HomeHelper
 	end
 	
 	#To retain filters when switching neighborhoods
+	#/no-fee-apartments-nyc-neighborhoods/lower-manhattan-newyork?sort_by=4&filter%5Bprice%5D%5B%5D=2&searched_by=no-fee-apartments-nyc-neighborhoods
 	def search_link neighborhood, borough
 		unless borough == 'BRONX'
 			borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase.gsub(' ', '-'))
@@ -198,9 +199,7 @@ module HomeHelper
 	end
 
 	def filter_params
-		if params[:filter].present?
-			params[:filter].to_query('filter')
-		end
+		params[:filter].present? ? params[:filter].to_query('filter') : nil
 	end
 
 	#on show page neighborhoods
