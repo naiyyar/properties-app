@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 	end
 
 	def saved_buildings
+		@broker_percent = BrokerFeePercent.first.percent_amount
 		favorable_ids = @user.favorites.pluck(:favorable_id)
 		@buildings = Building.where(id: favorable_ids).paginate(:page => params[:page], :per_page => 20)
 		@hash = Building.buildings_json_hash(@buildings)

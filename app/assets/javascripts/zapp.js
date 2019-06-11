@@ -208,7 +208,7 @@
         documentHeight = $(document).innerHeight();
         windowHeight = window.innerHeight;
         windowWidth = $(window).width();
-        headerHeight = $('#header').height()
+        headerHeight = $('#header').height();
         contentHeight = windowHeight - headerHeight;
         contentWidth = $('#content').width();
 
