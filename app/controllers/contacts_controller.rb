@@ -18,6 +18,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/new
   def new
+    @building = Building.find(params[:building_id])
     @contact = Contact.new
   end
 

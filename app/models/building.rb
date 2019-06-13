@@ -840,9 +840,10 @@ class Building < ActiveRecord::Base
         hood.save
       end
     end
-    #Rails.application.load_tasks
-    #Rake::Task['sitemap:refresh'].invoke
-    #Rake::Task["sitemap:create_upload_and_ping"].invoke
   end
+
+  # def env_is_prod?
+  #   Rails.env == 'production'
+  # end
 
 end

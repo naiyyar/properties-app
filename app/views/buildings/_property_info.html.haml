@@ -35,7 +35,4 @@
     = check_availability_link(@building) if @building.web_url.present?
   .stats1.property_information
     - if @building.email.present? and @building.active_email
-      - if !browser.device.mobile?
-        = link_to 'Contact Leasing Team', '#newConactModal', class: 'btn btn-primary btn-o btn-block font-bolder', data: {toggle: 'modal'} 
-      - else
-        = link_to 'Contact Leasing Team', 'javascript:;', class: 'btn btn-primary btn-o btn-block handleContact font-bolder'
+      = link_to 'Contact Leasing Team', new_contact_path(building_id: @building.id), class: 'btn btn-primary btn-o btn-block font-bolder', remote: true

@@ -97,7 +97,6 @@ class BuildingsController < ApplicationController
     @lng = @building.longitude
 
     buildings = @similar_properties.to_a + [@building]
-    @contact = Contact.new
     @gmaphash = Building.buildings_json_hash(buildings)
 
     @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 

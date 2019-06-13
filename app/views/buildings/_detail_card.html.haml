@@ -1,12 +1,12 @@
 .card.search-view-card 
-  - cache [building, params[:page], 'lightslider'] do
-    - unless @similar_properties.present?
-      .figure{style: "position: relative;"}
-        = render 'home/lightslider', building: building, view_type: 'split'
-    - else
-      .figure{style: "position: relative;height: 165px;"}
-        - bg_img_url = @last_uploads.present? ? @last_uploads.uploaded_img_url : image_url('no-photo.png')
-        .bg-size-cover{ style: "background-image: url(#{bg_img_url});" }
+  / - cache [building, params[:page], 'lightslider']
+  - unless @similar_properties.present?
+    .figure{style: "position: relative;"}
+      = render 'home/lightslider', building: building, view_type: 'split'
+  - else
+    .figure{style: "position: relative;height: 165px;"}
+      - bg_img_url = @last_uploads.present? ? @last_uploads.uploaded_img_url : image_url('no-photo.png')
+      .bg-size-cover{ style: "background-image: url(#{bg_img_url});" }
   
   - if building.price.present? or building.bedroom_types?
     - min_save_amount = building.min_save_amount(@broker_percent)
@@ -31,6 +31,12 @@
   - cache [building, params[:page], 'building_detail'] do
     = render 'home/building_detail', building: building
   
-  %div{style: "padding: 8px;"}
-    = check_availability_link(building)
+  .contact-links
+    %div{style: "padding: 8px;"}
+      = check_availability_link(building)
+
+    - if building.email.present? and building.active_email
+      %div{style: "padding: 0px 8px 0px 0px;"}
+        = link_to 'Contact Leasing', new_contact_path(building_id: building.id), class: "btn btn-primary btn-o font-bolder", style: 'padding: 10px 6px;', remote: true
+
 .clearfix
