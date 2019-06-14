@@ -55,5 +55,5 @@
   
   .clearfix
   .infoButtons.no-padding
-    = render 'contacts/buttons', building: building, size_class: 'btn-sm'
+    = render 'contacts/buttons', building: building, size_class: 'btn-sm btn-block'
     / = link_to check_availability, building.web_url, target: '_blank' , class: 'btn btn-block btn-sm btn-primary', style: 'padding: 4px 6px;' if building.web_url.present?
