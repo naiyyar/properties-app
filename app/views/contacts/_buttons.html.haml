@@ -1,0 +1,7 @@
+.contact-links
+  %div{style: "padding: #{size_class.present? ? '8px 3px;' : '8px'}"}
+    = check_availability_link(building, size_class)
+
+  - if building.email.present? and building.active_email
+    %div{style: "padding: 0px 8px 0px 0px;"}
+      = link_to 'Contact Leasing', 'javascript:;', class: "btn btn-primary btn-o font-bolder #{size_class}", style: "padding: #{size_class.present? ? '8px 4px;' : '10px 6px;'}", onclick: "showLeasingContactPopup(#{building.id})"

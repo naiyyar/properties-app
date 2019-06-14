@@ -54,5 +54,6 @@
       = link_to heart_icon, 'javascript:;', class: "save_link_#{building.id} favourite #{fav_color_class}", onclick: "openSuModal(event, #{building.id})" if !current_user.present?
   
   .clearfix
-  .infoButtons
-    = link_to check_availability, building.web_url, target: '_blank' , class: 'btn btn-block btn-sm btn-primary', style: 'padding: 4px 6px;' if building.web_url.present?
+  .infoButtons.no-padding
+    = render 'contacts/buttons', building: building, size_class: 'btn-sm'
+    / = link_to check_availability, building.web_url, target: '_blank' , class: 'btn btn-block btn-sm btn-primary', style: 'padding: 4px 6px;' if building.web_url.present?

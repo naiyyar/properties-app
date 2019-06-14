@@ -1,5 +1,4 @@
 .card.search-view-card 
-  / - cache [building, params[:page], 'lightslider']
   - unless @similar_properties.present?
     .figure{style: "position: relative;"}
       = render 'home/lightslider', building: building, view_type: 'split'
@@ -31,12 +30,6 @@
   - cache [building, params[:page], 'building_detail'] do
     = render 'home/building_detail', building: building
   
-  .contact-links
-    %div{style: "padding: 8px;"}
-      = check_availability_link(building)
-
-    - if building.email.present? and building.active_email
-      %div{style: "padding: 0px 8px 0px 0px;"}
-        = link_to 'Contact Leasing', new_contact_path(building_id: building.id), class: "btn btn-primary btn-o font-bolder", style: 'padding: 10px 6px;', remote: true
+  = render 'contacts/buttons', building: building, size_class: ''
 
 .clearfix
