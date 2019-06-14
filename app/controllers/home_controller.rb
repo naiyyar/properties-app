@@ -174,7 +174,10 @@ class HomeController < ApplicationController
       'Yorkville', 
       'Bowery', 
       'East Village', 
-      'Financial District'
+      'Financial District',
+      'Lower East Side',
+      'Greenwich Village',
+      'West Village'
     ]
   end
 
