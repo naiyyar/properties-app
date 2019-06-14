@@ -57,7 +57,7 @@ class HomeController < ApplicationController
         if params[:searched_by] != 'address' and params[:searched_by] != 'no-fee-management-companies-nyc'
           @zoom = (@search_string == 'New York' ? 12 : 14)
           unless @search_string == 'New York'
-            @brooklyn_neighborhoods =  @search_string #used to add border boundaries of brooklyn and queens
+            @brooklyn_neighborhoods = @search_string #used to add border boundaries of brooklyn and queens
             @neighborhood_coordinates = Gcoordinate.neighbohood_boundary_coordinates(@search_string)
 
             @boundary_coords = []
@@ -177,7 +177,11 @@ class HomeController < ApplicationController
       'Financial District',
       'Lower East Side',
       'Greenwich Village',
-      'West Village'
+      'West Village',
+      'Lower Manhattan',
+      'Soho',
+      'Tribeca',
+      'Battery Park City'
     ]
   end
 

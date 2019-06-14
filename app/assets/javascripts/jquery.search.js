@@ -165,6 +165,10 @@ var manhattan_neightborhoods_hash = [
 	{ key: 'Lower East Side', 	url: dropbox_url+'buf637uoqamd419/lower_east_side.kml?dl=1'},
 	{ key: 'Greenwich Village', url: dropbox_url+'yp9buxoexm9jp02/greenwich_village.kml?dl=1'},
 	{ key: 'West Village', 			url: dropbox_url+'laq652it6owd9x2/west_village.kml?dl=1'},
+	{ key: 'Lower Manhattan', 	url: dropbox_url+'jk9iami8vqw6pwn/lower_manhattan.kml?dl=1'},
+	{ key: 'Soho', 							url: dropbox_url+'y0kbzw1bq0e3gai/soho.kml?dl=1'},
+	{ key: 'Tribeca', 					url: dropbox_url+'1wjh4lgcxmrgpb6/tribeca.kml?dl=1'},
+	{ key: 'Battery Park City', url: dropbox_url+'5xiu0du241t8os3/battery_park_city.kml?dl=1'},
 ]
 
 function brooklyn_and_queens_neighborhoods(term, map){
