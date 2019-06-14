@@ -167,7 +167,15 @@ class HomeController < ApplicationController
   private
   
   def manhattan_kmls
-    ['Midtown', 'Sutton Place', 'Upper East Side', 'Yorkville', 'Bowery', 'East Village']
+    [
+      'Midtown', 
+      'Sutton Place', 
+      'Upper East Side', 
+      'Yorkville', 
+      'Bowery', 
+      'East Village', 
+      'Financial District'
+    ]
   end
 
   def reset_session

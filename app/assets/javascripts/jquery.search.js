@@ -160,7 +160,8 @@ var manhattan_neightborhoods_hash = [
 	{ key: 'Upper East Side', 	url: 'https://www.dropbox.com/s/y5lfm1mr9fixe2q/upper_east_side.kml?dl=1' },
 	{ key: 'Yorkville',         url: 'https://www.dropbox.com/s/1cvauvu3l4a4g4b/yorkville.kml?dl=1'},
 	{ key: 'Bowery',         		url: 'https://www.dropbox.com/s/3o342vhaop1s9cr/bowery.kml?dl=1'},
-	{ key: 'East Village',      url: 'https://www.dropbox.com/s/z8m4uiqpi06x96w/east_village.kml?dl=1'}
+	{ key: 'East Village',      url: 'https://www.dropbox.com/s/z8m4uiqpi06x96w/east_village.kml?dl=1'},
+	{ key: 'Financial District',      url: 'https://www.dropbox.com/s/z07nuvcxsefxhx5/financial_district.kml?dl=1'}
 ]
 
 
