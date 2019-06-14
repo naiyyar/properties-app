@@ -29,7 +29,7 @@
         current_building_id = $('#cu_building_id').val();
         var bounds = new google.maps.LatLngBounds();
         var infobox = new InfoBubble({
-          maxWidth: 230,
+          maxWidth: 236,
           position: new google.maps.LatLng(lng, lat),
           shadowStyle: 3,
           padding: 0,

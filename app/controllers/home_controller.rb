@@ -7,6 +7,7 @@ class HomeController < ApplicationController
 
   def index
     @home_view = true
+    @buildings_count = Building.all.count
     @meta_desc = "Search through #{Building.all.count} buildings of no fee apartments in NYC, no fee rentals in NYC, 
                   for rent by owner in NYC and apartment reviews NYC. Rent direct and bypass brokers."
   end
@@ -166,7 +167,7 @@ class HomeController < ApplicationController
   private
   
   def manhattan_kmls
-    ['Midtown', 'Sutton Place', 'Upper East Side', 'Yorkville', 'Bowery']
+    ['Midtown', 'Sutton Place', 'Upper East Side', 'Yorkville', 'Bowery', 'East Village']
   end
 
   def reset_session

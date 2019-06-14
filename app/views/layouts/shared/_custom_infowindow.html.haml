@@ -3,7 +3,7 @@
   = link_to building_path(building), style: 'color: #333;' do
     .infoW-property-info{"data-href" => "#{building_path(building)}"}
       .propImg
-        = image_tag image, alt: 'Image', style: 'width: 229px !important; height: 137px;' if image.present?
+        = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
       - if building.price.present? or building.bedroom_types?
         - min_save_amount = building.min_save_amount(broker_percent)
         - if min_save_amount.present?
