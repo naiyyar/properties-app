@@ -181,7 +181,14 @@ class HomeController < ApplicationController
       'Lower Manhattan',
       'Soho',
       'Tribeca',
-      'Battery Park City'
+      'Battery Park City',
+      'Chelsea',
+      'Gramercy Park',
+      'Kips Bay', 
+      "Hell's Kitchen",
+      'Midtown East',
+      'Murray Hill', 
+      'Roosevelt Island',
     ]
   end
 

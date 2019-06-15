@@ -169,6 +169,13 @@ var manhattan_neightborhoods_hash = [
 	{ key: 'Soho', 							url: dropbox_url+'y0kbzw1bq0e3gai/soho.kml?dl=1'},
 	{ key: 'Tribeca', 					url: dropbox_url+'1wjh4lgcxmrgpb6/tribeca.kml?dl=1'},
 	{ key: 'Battery Park City', url: dropbox_url+'5xiu0du241t8os3/battery_park_city.kml?dl=1'},
+	{ key: 'Chelsea',           url: dropbox_url+'qyzw0s3ydwnpvqo/chalsea.kml?dl=1'},
+	{ key: 'Gramercy Park',     url: dropbox_url+'cz4g4mizz7ctlhm/gramercy_park.kml?dl=1'},
+	{ key: 'Kips Bay',          url: dropbox_url+'flh5gqmbrzf3d5s/kips_bay.kml?dl=1'},
+	{ key: "Hell's Kitchen",    url: dropbox_url+'yej4ccqbwlz1j44/hells_kitchen.kml?dl=1'},
+	{ key: 'Midtown East',      url: dropbox_url+'38psy030o0zsa0v/midtown_east.kml?dl=1'},
+	{ key: 'Murray Hill',       url: dropbox_url+'95by3m7fq503bk1/murray_hill.kml?dl=1'},
+	{ key: 'Roosevelt Island',  url: dropbox_url+'hvus8q9wakqo16y/roosevelt_island.kml?dl=1'},
 ]
 
 function brooklyn_and_queens_neighborhoods(term, map){
