@@ -176,6 +176,16 @@ var manhattan_neightborhoods_hash = [
 	{ key: 'Midtown East',      url: dropbox_url+'38psy030o0zsa0v/midtown_east.kml?dl=1'},
 	{ key: 'Murray Hill',       url: dropbox_url+'95by3m7fq503bk1/murray_hill.kml?dl=1'},
 	{ key: 'Roosevelt Island',  url: dropbox_url+'hvus8q9wakqo16y/roosevelt_island.kml?dl=1'},
+	{ key: 'Carnegie Hill',  		url: dropbox_url+'fp1zq7476csz0c8/carnegie_hill.kml?dl=1'},
+	{ key: 'Lenox Hill',  			url: dropbox_url+'8h2v67d6ds2p588/lenox_hill.kml?dl=1'},
+	{ key: 'Upper West Side',   url: dropbox_url+'wzmhjlt289pbw5m/upper_west_side.kml?dl=1'},
+	{ key: 'Lincoln Square',  	url: dropbox_url+'4pf6coc8ho96tyq/lincoln_square.kml?dl=1'},
+	{ key: 'Upper Manhattan',		url: dropbox_url+'mgcwk6tdqke7ldy/upper_manhattan.kml?dl=1'},
+	{ key: 'East Harlem',				url: dropbox_url+'tdm96rjvgyxy2k6/east_harlem.kml?dl=1'},
+	{ key: 'Harlem',						url: dropbox_url+'pyepghx0d035af2/harlem.kml?dl=1'},
+	{ key: 'Hudson Heights',		url: dropbox_url+'6adnxbwvfawlt44/hudson_heights.kml?dl=1'},
+	{ key: 'Morningside Heights', url: dropbox_url+'fc3rw3dwj26aph9/morningside_heights.kml?dl=1'},
+	{ key: 'Washington Heights', 	url: dropbox_url+'mgcwk6tdqke7ldy/washington_heights.kml?dl=1'},
 ]
 
 function brooklyn_and_queens_neighborhoods(term, map){

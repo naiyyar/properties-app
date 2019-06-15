@@ -189,6 +189,16 @@ class HomeController < ApplicationController
       'Midtown East',
       'Murray Hill', 
       'Roosevelt Island',
+      'Carnegie Hill',
+      'Lenox Hill',
+      'Upper West Side',
+      'Lincoln Square',
+      'Upper Manhattan',
+      'East Harlem',
+      'Harlem',
+      'Hudson Heights',
+      'Morningside Heights',
+      'Washington Heights'
     ]
   end
 
