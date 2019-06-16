@@ -58,30 +58,23 @@ class HomeController < ApplicationController
           @zoom = (@search_string == 'New York' ? 12 : 14)
           unless @search_string == 'New York'
             @brooklyn_neighborhoods = @search_string #used to add border boundaries of brooklyn and queens
-            @neighborhood_coordinates = Gcoordinate.neighbohood_boundary_coordinates(@search_string)
-
             @boundary_coords = []
             if params[:searched_by] == 'zipcode'
               @buildings = @searched_buildings = Building.where('zipcode = ?', @search_string)
               @boundary_coords << Gcoordinate.where(zipcode: @search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
             elsif params[:searched_by] == 'no-fee-apartments-nyc-neighborhoods'
               @buildings = @searched_buildings = Building.buildings_in_neighborhood(@search_string)
-              @boundary_coords << @neighborhood_coordinates unless manhattan_kmls.include?(@search_string)
             else
-              if @search_string == 'Manhattan'
-                @boundary_coords << Gcoordinate.where(city: 'Manhattan').map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-              else
-                if @search_string == 'Queens'
-                  boroughs = view_context.queens_sub_borough
-                elsif @search_string == 'Brooklyn'
-                  boroughs = view_context.brooklyn_sub_borough
-                elsif @search_string == 'Bronx'
-                  boroughs = view_context.bronx_sub_borough
-                end
-                @buildings = Building.where("city = ? OR neighborhood in (?)", @search_string, boroughs) 
-                building = @buildings #Only to show map when no match found after filter
-                @zoom = 12
+              if @search_string == 'Queens'
+                boroughs = view_context.queens_sub_borough
+              elsif @search_string == 'Brooklyn'
+                boroughs = view_context.brooklyn_sub_borough
+              elsif @search_string == 'Bronx'
+                boroughs = view_context.bronx_sub_borough
               end
+              @buildings = Building.where("city = ? OR neighborhood in (?)", @search_string, boroughs) 
+              building = @buildings #Only to show map when no match found after filter
+              @zoom = 12
             end
           else
             @buildings = Building.buildings_in_city(@search_string)
@@ -168,6 +161,7 @@ class HomeController < ApplicationController
   
   def manhattan_kmls
     [
+      'New York',
       'Midtown', 
       'Sutton Place', 
       'Upper East Side', 
@@ -198,7 +192,15 @@ class HomeController < ApplicationController
       'Harlem',
       'Hudson Heights',
       'Morningside Heights',
-      'Washington Heights'
+      'Washington Heights',
+      'Little Italy',
+      'Chinatown',
+      'Inwood',
+      'Hamilton Heights',
+      'Civic Center',
+      'Stuyvesant Town',
+      'Nolita',
+      'Turtle Bay'
     ]
   end
 

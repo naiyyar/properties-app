@@ -155,6 +155,7 @@ var brooklyn_and_queens_zipcodes_hash = [
 ]
 
 var manhattan_neightborhoods_hash = [
+	//{key: 'New York', 					url: dropbox_url+'b8z3tmzzcf0uts6/new_york.kml?dl=1' },
 	{ key: 'Midtown', 					url: dropbox_url+'6dslyuv4hc4nz5k/midtown.kml?dl=1' },
 	{ key: 'Sutton Place', 			url: dropbox_url+'z67m9imvezwtx4k/sutton_place.kml?dl=1' },
 	{ key: 'Upper East Side', 	url: dropbox_url+'y5lfm1mr9fixe2q/upper_east_side.kml?dl=1' },
@@ -169,7 +170,7 @@ var manhattan_neightborhoods_hash = [
 	{ key: 'Soho', 							url: dropbox_url+'y0kbzw1bq0e3gai/soho.kml?dl=1'},
 	{ key: 'Tribeca', 					url: dropbox_url+'1wjh4lgcxmrgpb6/tribeca.kml?dl=1'},
 	{ key: 'Battery Park City', url: dropbox_url+'5xiu0du241t8os3/battery_park_city.kml?dl=1'},
-	{ key: 'Chelsea',           url: dropbox_url+'qyzw0s3ydwnpvqo/chalsea.kml?dl=1'},
+	{ key: 'Chelsea',           url: dropbox_url+'29sy17pc9vnncyt/chelsea.kml?dl=1'},
 	{ key: 'Gramercy Park',     url: dropbox_url+'cz4g4mizz7ctlhm/gramercy_park.kml?dl=1'},
 	{ key: 'Kips Bay',          url: dropbox_url+'flh5gqmbrzf3d5s/kips_bay.kml?dl=1'},
 	{ key: "Hell's Kitchen",    url: dropbox_url+'yej4ccqbwlz1j44/hells_kitchen.kml?dl=1'},
@@ -186,6 +187,15 @@ var manhattan_neightborhoods_hash = [
 	{ key: 'Hudson Heights',		url: dropbox_url+'6adnxbwvfawlt44/hudson_heights.kml?dl=1'},
 	{ key: 'Morningside Heights', url: dropbox_url+'fc3rw3dwj26aph9/morningside_heights.kml?dl=1'},
 	{ key: 'Washington Heights', 	url: dropbox_url+'mgcwk6tdqke7ldy/washington_heights.kml?dl=1'},
+	//
+	{ key: 'Little Italy', 				url: dropbox_url+'ze3f6zthqfb2607/little_italy.kml?dl=1'},
+	{ key: 'Chinatown', 					url: dropbox_url+'iev1l5fc6xf4vxr/chinatown.kml?dl=1'},
+	{ key: 'Inwood', 							url: dropbox_url+'tvsme37jtqjn011/inwood.kml?dl=1'},
+	{ key: 'Hamilton Heights', 		url: dropbox_url+'04xdfd3cqtkdpeq/hamilton_heights.kml?dl=1'},
+	{ key: 'Civic Center', 				url: dropbox_url+'iawxb4iwqda28xk/civic_center.kml?dl=1'},
+	{ key: 'Stuyvesant Town', 		url: dropbox_url+'uxassrc0v02o9yv/stuyvesant_town.kml?dl=1'},
+	{ key: 'Nolita', 							url: dropbox_url+'twujxttcgcwrhu9/nolita.kml?dl=1'},
+	{ key: 'Turtle Bay', 					url: dropbox_url+'lnfn29sl208bteq/turtle_bay.kml?dl=1'},
 ]
 
 function brooklyn_and_queens_neighborhoods(term, map){
