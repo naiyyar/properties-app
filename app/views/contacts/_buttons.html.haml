@@ -1,5 +1,5 @@
 .contact-links
-  %div{style: "padding: #{size_class.present? ? '8px 3px;' : '8px'}"}
+  %div{style: "padding: #{size_class.present? ? '2px 3px 2px 3px;' : '8px'}"}
     = check_availability_link(building, size_class)
 
   - if building.email.present? and building.active_email

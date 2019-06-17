@@ -13,7 +13,7 @@
         <%if @buildings.present? %>
           <div class="resultsList">
             <div class="row" id="load-more-buildings">
-              <%= render partial: 'home/search_results', locals: { buildings: @buildings } %>
+              <%= render partial: 'buildings/building', :collection => @buildings, :as => :building, cache: true %>
             </div>
           </div>
           
