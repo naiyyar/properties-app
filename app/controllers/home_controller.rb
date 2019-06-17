@@ -121,9 +121,9 @@ class HomeController < ApplicationController
         @per_page_buildings = @per_page_buildings.paginate(:page => params[:page], :per_page => 20)
         #putting featured building on top
         if top_two_featured_buildings.present?
-          @all_building = top_two_featured_buildings + @per_page_buildings
+          @all_buildings = top_two_featured_buildings + @per_page_buildings
         else
-          @all_building = @per_page_buildings
+          @all_buildings = @per_page_buildings
         end
         @hash = Building.buildings_json_hash(top_two_featured_buildings, @buildings)
         @lat = @hash[0]['latitude']

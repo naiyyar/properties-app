@@ -547,6 +547,7 @@
 #BrokerFeePercent.create(percent_amount: 10)
 
 neighs = [
+      'New York',
       'Midtown', 
       'Sutton Place', 
       'Upper East Side', 
@@ -568,16 +569,24 @@ neighs = [
       'Midtown East',
       'Murray Hill', 
       'Roosevelt Island',
-			'Carnegie Hill',
-			'Lenox Hill',
-			'Upper West Side',
-			'Lincoln Square',
-			'Upper Manhattan',
-			'East Harlem',
-			'Harlem',
-			'Hudson Heights',
-			'Morningside Heights',
-			'Washington Heights'
+      'Carnegie Hill',
+      'Lenox Hill',
+      'Upper West Side',
+      'Lincoln Square',
+      'Upper Manhattan',
+      'East Harlem',
+      'Harlem',
+      'Hudson Heights',
+      'Morningside Heights',
+      'Washington Heights',
+      'Little Italy',
+      'Chinatown',
+      'Inwood',
+      'Hamilton Heights',
+      'Civic Center',
+      'Stuyvesant Town',
+      'Nolita',
+      'Turtle Bay'
     ]
 
 Gcoordinate.where(neighborhood: neighs).delete_all

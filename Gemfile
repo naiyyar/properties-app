@@ -169,6 +169,7 @@ group :development do
   gem 'rack-mini-profiler', require: false
   gem 'bullet'
   gem 'annotate'
+  gem 'meta_request'
 end
 
 group :production do

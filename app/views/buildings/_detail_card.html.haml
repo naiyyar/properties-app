@@ -27,8 +27,7 @@
   %div{style: "float: right;margin-top: -43px;"}
     = render 'buildings/favourite', building: building
   
-  - cache [building, params[:page], 'building_detail'] do
-    = render 'home/building_detail', building: building
+  = render 'home/building_detail', building: building
   
   = render 'contacts/buttons', building: building, size_class: ''
 

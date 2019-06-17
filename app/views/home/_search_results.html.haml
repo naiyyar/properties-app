@@ -1,4 +1,6 @@
-- buildings.each do |building|
-	- @uploads = building.chached_image_uploads
-	.col-xs-12.col-sm-12.col-md-6.col-lg-6
-		= render 'buildings/detail_card', building: building
+/ - cache [buildings, params[:page]] do
+/ 	- buildings.each do |building|
+/ 		- cache [building, building.image_uploads.count, @broker_percent.to_s] do
+/ 			- @uploads = building.image_uploads
+/ 			.col-xs-12.col-sm-12.col-md-6.col-lg-6
+/ 				= render 'buildings/detail_card', building: building
