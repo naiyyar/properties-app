@@ -8,4 +8,9 @@ $('#remote-container').html("<%= j render 'contacts/contact_building_modal' %>")
     $('.lease-contact-modal').slideToggle(200);
   });
 <%end%>
+var lm_height = $(document).height();
+setTimeout(function(){
+	$('.lease-contact-modal').height(lm_height);	
+}, 1000);
+
 
