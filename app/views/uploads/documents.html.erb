@@ -18,7 +18,7 @@
             <% @documents.each do |document| %>
               <tr>
                 <td><%= link_to document.document_file_name, document.document.url, class: 'link_underlined', 'data-no-turbolink' => false, target: '_blank' %></td>
-                <td><%#= document.imageable.building_name %>
+                <td>
                   <%= link_to(building_name_or_address(document.imageable), building_path(document.imageable)) if document.imageable.present? %>
                 </td>
                 <td>

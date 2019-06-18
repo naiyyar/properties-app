@@ -11,6 +11,7 @@
 
 #content.mob-max
   = render 'buildings/show/top_summary_section'
+  
   - if @building.price.present? or @building.bedroom_types?
     = render 'buildings/show/price_ranges'
 
@@ -34,9 +35,10 @@
 
   .clearfix
     - if @similar_properties.present?
-      #subways
-        %h3= "Similar Buildings (#{@similar_properties.count})"
-        = render 'buildings/show/similar_properties'
+      - cache [@building, @similar_properties.count, 'similar_properties'] do
+        #subways
+          %h3= "Similar Buildings (#{@similar_properties.count})"
+          = render 'buildings/show/similar_properties'
   
   .clearfix
   - if @building.rating_cache?
