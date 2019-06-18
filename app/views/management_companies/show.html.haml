@@ -49,7 +49,6 @@
       #building_managed.tab-pane.fade.in.active.no-padding
         .resultsList
           #load-more-buildings.row
-            / = render partial: 'home/search_results', locals: { buildings: @all_building }
             = render partial: 'buildings/building', :collection => @all_building, :as => :building, cache: true 
         .pages-container
           = will_paginate @manage_buildings, renderer: BootstrapPagination::Rails

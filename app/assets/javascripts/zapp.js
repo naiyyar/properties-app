@@ -212,9 +212,13 @@
         contentHeight = windowHeight - headerHeight;
         contentWidth = $('#content').width();
 
+        // if(documentHeight >= windowHeight){
+        //     contentHeight = documentHeight
+        // }
+
         $('#leftSide').height(contentHeight);
         $('.closeLeftSide').height(contentHeight);
-        $('#wrapper').height(documentHeight - headerHeight);
+        $('#wrapper').height(contentHeight);
         $('#mapView').height(contentHeight);
         $('#content').height(contentHeight);
         if (map) {
