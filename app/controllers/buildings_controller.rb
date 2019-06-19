@@ -3,6 +3,7 @@ class BuildingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
   before_action :find_building, only: [:show, :edit, :update, :destroy, :featured_by, :units]
   before_action :save_as_favourite, only: [:show]
+  before_action :clear_cache, only: [:favorite, :unfavorite]
 
   def index
     @filterrific = initialize_filterrific(
@@ -237,6 +238,10 @@ class BuildingsController < ApplicationController
       current_user.favorite(building)
       session[:favourite_object_id] = nil
     end
+  end
+
+  def clear_cache
+    Rails.cache.clear()
   end
 
 end
