@@ -240,18 +240,10 @@ module HomeHelper
 
 	def parent_neighborhoods_count(nb)
 		case nb
-		when 'Lower Manhattan'
-			@lower_manhattan_count
-		when 'Midtown'
-			@midtown_count
-		when 'Upper Manhattan'
-			@upper_manhattan_count
 		when 'Queens'
 			@queens_count
 		when 'Brooklyn'
 			@brooklyn_count
-		when 'East Bronx'
-			@east_bronx_count
 		else
 			@bronx_count
 		end
