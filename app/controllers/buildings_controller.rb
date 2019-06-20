@@ -83,7 +83,7 @@ class BuildingsController < ApplicationController
   def show
     @show_map_btn = @half_footer = true
     @reviews = @building.building_reviews
-    @distance_results = DistanceMatrix.get_data(@building)
+    @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
     @broker_percent = BrokerFeePercent.first.percent_amount
     @min_save_amount = @building.min_save_amount(@broker_percent)
     #building + units images

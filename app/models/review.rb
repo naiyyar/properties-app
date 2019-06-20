@@ -35,6 +35,7 @@ class Review < ActiveRecord::Base
   validates :tos_agreement, :allow_nil => false, :acceptance => { :accept => true }, :on => :create #, message: 'Terms not accepted.'
   
   after_destroy :destroy_dependents
+  after_commit :clear_cache
 
   default_scope { order('created_at DESC') }
 
@@ -118,5 +119,9 @@ class Review < ActiveRecord::Base
     rating_caches.each do |rating_cache|
       RatingCache.update_rating_cache(rating_cache)
     end
+  end
+
+  def clear_cache
+    Rails.cache.clear
   end
 end
