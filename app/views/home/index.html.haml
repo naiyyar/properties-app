@@ -8,7 +8,7 @@
     .home-search-form
       = render partial: 'home/search_form'
 
-- cache(['home', 'pop_neighborhoods', "#{@buildings_count}"]) do
+- cache(['home', 'popular_neighborhoods', "#{@buildings_count}"]) do
   = render 'layouts/home/popular_neighborhoods'
 
 .home-wrapper.pb20{style: 'padding: 20px 20px 20px;'}

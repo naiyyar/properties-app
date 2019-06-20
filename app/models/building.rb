@@ -183,7 +183,7 @@ class Building < ActiveRecord::Base
 
   def self.city_count city, sub_boroughs = nil
     if sub_boroughs.present?
-      buildings = where(city: city, neighborhood: sub_boroughs)
+      buildings = where('city = ? OR neighborhood in (?)', city, sub_boroughs)
     else
       buildings = where(city: city)
     end
