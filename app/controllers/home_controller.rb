@@ -25,7 +25,7 @@ class HomeController < ApplicationController
                                           :locals => {  building: building,
                                                         image: Upload.marker_image(building),
                                                         rating_cache: building.rating_cache,
-                                                        recomended_per: Vote.recommended_percent(building),
+                                                        recomended_per: building.recommended_percent,
                                                         building_show: params[:building_show],
                                                         current_user: @current_user,
                                                         fav_color_class: fav_color_class,
@@ -128,8 +128,8 @@ class HomeController < ApplicationController
         @hash = Building.buildings_json_hash(top_two_featured_buildings, @buildings)
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']
-        @photos_count = Upload.where(imageable_id: building_ids, imageable_type: 'Building').count
-        @reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
+        #@photos_count = Upload.where(imageable_id: building_ids, imageable_type: 'Building').count
+        #@reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
       else
         if @boundary_coords.present? and @boundary_coords.first.length > 1
           @lat = @boundary_coords.first.first[:lat]

@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController 
   load_and_authorize_resource
   before_action :authenticate_user!, :except => [:new, :index, :create]
+  after_action :update_reviewable_info, only: :create
   
   #from production
   def index
@@ -58,26 +59,11 @@ class ReviewsController < ApplicationController
       @review = @reviewable.reviews.build(review_params)
       @review.user_id = current_user.id
       if @review.save
-        #@review.save_images(params[:review_attachments]) if params[:review_attachments].present?
-        @reviewable.update(reviews_count: @reviewable.reviews.count) if @reviewable.kind_of? Building
-        @review.set_imageable(params[:upload_uid])
         session[:after_contribute] = 'reviews' if params[:contribution].present?
-        if params[:score].present? 
-          params[:score].keys.each do |dimension|
-            # params[dimension] => score
-            current_user.create_rating(params[:score][dimension], @reviewable, @review.id, dimension) #if params[:score].present?
-          end
-        end
+        @review.set_imageable(params[:upload_uid])
+        @review.set_score(params[:score], @reviewable, current_user) if params[:score].present?
+        @review.set_votes(params[:vote], current_user, @reviewable) if params[:vote].present?
         
-        if params[:vote] == 'true'
-          vote = current_user.vote_for(@reviewable)
-        else
-          vote = current_user.vote_against(@reviewable)
-        end
-        if vote.present?
-          vote.review_id = @review.id
-          vote.save
-        end
         flash[:notice] = "Review Created Successfully."
         if @reviewable.kind_of? Unit
            redirect_to unit_path(@reviewable)
@@ -129,8 +115,15 @@ class ReviewsController < ApplicationController
   def find_reviewable
     params.each do |name, value|
       if name =~ /(.+)_id$/
-          return $1.classify.constantize.find(value)
+        return $1.classify.constantize.find(value)
       end
+    end
+  end
+
+  #updating recommended_percent and reviews_count
+  def update_reviewable_info
+    if @reviewable.kind_of? Building
+      @reviewable.update(recommended_percent: @reviewable.suggested_percent, reviews_count: @reviewable.reviews.count) if @reviewable.present?
     end
   end
 

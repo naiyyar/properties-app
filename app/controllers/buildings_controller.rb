@@ -103,7 +103,7 @@ class BuildingsController < ApplicationController
     @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
                   "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 
                   "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.name if @building.management_company.present? }. "+ 
-                  "Click to view #{@uploads.count} photos and #{@building.reviews.count} reviews"
+                  "Click to view #{@uploads.count} photos and #{@building.reviews_count} reviews"
     
     flash[:notice] = "Files are uploaded successfully." if params[:from_uploaded].present?
   end

@@ -18,7 +18,7 @@
                 %b= link_to(building_name_or_address(building), building_path(building))
             %td= link_to building.street_address, building_path(building)
             %td.star-sm= rating_for building, 'building', disabled_after_rate: true, readonly: true
-            %td= link_to "Reviews(#{building.reviews.count})", building_reviews_path(building_id: building.id)
+            %td= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id)
             %td= building.uploads.count if building.uploads.present?
             %td.text-center= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
             %td.text-center= link_to 'Disconnect', disconnect_building_building_path(building), class: 'text-danger', data: {confirm: 'Are you sure you want to discconect this building?'}

@@ -190,6 +190,10 @@ class Building < ActiveRecord::Base
     buildings.count
   end
 
+  def suggested_percent
+    Vote.recommended_percent(self)
+  end
+
   def self.options_for_sorted_by
     [
       ['Name (a-z)', 'building_name_asc'],
@@ -201,7 +205,7 @@ class Building < ActiveRecord::Base
 
   def saved_amount(broker_percent)
     median_arr = []
-    bedroom_ranges.map do |bed_range|
+    bedroom_ranges.each do |bed_range|
       prices = RentMedian.where(bed_type: bed_range, range: price)
       if prices.present?
         median = prices.first
@@ -212,7 +216,7 @@ class Building < ActiveRecord::Base
   end
 
   def min_save_amount broker_percent
-    saved_amount(broker_percent).min
+    saved_amount(broker_percent)[0]
   end
 
   def to_param
@@ -370,7 +374,7 @@ class Building < ActiveRecord::Base
     #@beds = beds
     if buildings.present?
       @buildings = []
-      beds.map do |num|
+      beds.each do |num|
         if num == '0'
           @buildings += buildings.studio
         elsif num == '1'
@@ -722,7 +726,7 @@ class Building < ActiveRecord::Base
   end  
 
   def continue_call_back?
-    !self.avg_rating_changed?
+    !self.avg_rating_changed? && !recommended_percent_changed?
   end
 
   private

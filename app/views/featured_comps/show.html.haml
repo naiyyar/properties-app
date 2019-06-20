@@ -27,7 +27,7 @@
                   %td=link_to building.building_street_address, building_path(building)
                   %td=link_to building.management_company.try(:name), '#'
                   %td.star-sm= rating_for building, 'building', disabled_after_rate: true, readonly: true 
-                  %td= link_to "Reviews(#{building.reviews.count})", building_reviews_path(building_id: building.id)
+                  %td= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id)
                   %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
                   %td= link_to 'Disconnect', disconnect_building_featured_comp_path(id: @featured_comp.id, building_id: building.id), data: {confirm: "Are you sure you want to disconnect this building?"}, class: 'text-danger'
                   

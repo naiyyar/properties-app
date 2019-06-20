@@ -546,50 +546,54 @@
 
 #BrokerFeePercent.create(percent_amount: 10)
 
-neighs = [
-      'New York',
-      'Midtown', 
-      'Sutton Place', 
-      'Upper East Side', 
-      'Yorkville', 
-      'Bowery', 
-      'East Village', 
-      'Financial District',
-      'Lower East Side',
-      'Greenwich Village',
-      'West Village',
-      'Lower Manhattan',
-      'Soho',
-      'Tribeca',
-      'Battery Park City',
-      'Chelsea',
-      'Gramercy Park',
-      'Kips Bay', 
-      "Hell's Kitchen",
-      'Midtown East',
-      'Murray Hill', 
-      'Roosevelt Island',
-      'Carnegie Hill',
-      'Lenox Hill',
-      'Upper West Side',
-      'Lincoln Square',
-      'Upper Manhattan',
-      'East Harlem',
-      'Harlem',
-      'Hudson Heights',
-      'Morningside Heights',
-      'Washington Heights',
-      'Little Italy',
-      'Chinatown',
-      'Inwood',
-      'Hamilton Heights',
-      'Civic Center',
-      'Stuyvesant Town',
-      'Nolita',
-      'Turtle Bay'
-    ]
+# neighs = [
+#       'New York',
+#       'Midtown', 
+#       'Sutton Place', 
+#       'Upper East Side', 
+#       'Yorkville', 
+#       'Bowery', 
+#       'East Village', 
+#       'Financial District',
+#       'Lower East Side',
+#       'Greenwich Village',
+#       'West Village',
+#       'Lower Manhattan',
+#       'Soho',
+#       'Tribeca',
+#       'Battery Park City',
+#       'Chelsea',
+#       'Gramercy Park',
+#       'Kips Bay', 
+#       "Hell's Kitchen",
+#       'Midtown East',
+#       'Murray Hill', 
+#       'Roosevelt Island',
+#       'Carnegie Hill',
+#       'Lenox Hill',
+#       'Upper West Side',
+#       'Lincoln Square',
+#       'Upper Manhattan',
+#       'East Harlem',
+#       'Harlem',
+#       'Hudson Heights',
+#       'Morningside Heights',
+#       'Washington Heights',
+#       'Little Italy',
+#       'Chinatown',
+#       'Inwood',
+#       'Hamilton Heights',
+#       'Civic Center',
+#       'Stuyvesant Town',
+#       'Nolita',
+#       'Turtle Bay'
+#     ]
 
-Gcoordinate.where(neighborhood: neighs).delete_all
+# Gcoordinate.where(neighborhood: neighs).delete_all
+
+Building.all.each do |b|
+	b.update(recommended_percent: b.suggested_percent)
+end
 
 
 

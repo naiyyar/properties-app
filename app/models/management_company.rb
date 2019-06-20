@@ -51,14 +51,14 @@ class ManagementCompany < ActiveRecord::Base
 	def aggregate_reviews
 		count = 0
 		self.buildings.each do |building|
-			count += building.reviews.count
+			count += building.reviews_count
 		end
 		count
 	end
 
 	def recommended_percent
 		downcount = total_reviews = 0
-		self.buildings.includes(:reviews).each do |building|
+		buildings.includes(:reviews).each do |building|
 			if building.reviews.present?
 				downcount += building.downvotes_count
 				total_reviews += building.reviews.count

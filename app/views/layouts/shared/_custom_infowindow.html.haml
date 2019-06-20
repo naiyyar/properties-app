@@ -40,7 +40,7 @@
             %span.fa.fa-star-o.star{style: "color: #ddd;"}
         %span
           | #{(recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe)}
-        %span= "| &nbsp; Reviews: #{building.reviews.count}".html_safe
+        %span= "| &nbsp; Reviews: #{building.reviews_count}".html_safe
   
   %div{style: "position: absolute;right: -4px;top: 136px;"}
     .pull-right{style: "padding-right: 10px;font-size: 18px;"}

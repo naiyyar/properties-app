@@ -73,6 +73,22 @@ class Review < ActiveRecord::Base
     end
   end
 
+  def set_votes vote, current_user, reviewable
+    if vote == 'true'
+      vote = current_user.vote_for(reviewable)
+    else
+      vote = current_user.vote_against(reviewable)
+    end
+    vote.update(review_id: id) if vote.present?
+  end
+
+  def set_score score_hash, reviewable, current_user
+    score_hash.keys.each do |dimension|
+      # params[dimension] => score
+      current_user.create_rating(score_hash[dimension], reviewable, id, dimension)
+    end
+  end
+
   # def save_images review_attachments
   #   review_attachments['image'].each do |img|
   #     self.uploads.create!(image: img)
@@ -85,7 +101,8 @@ class Review < ActiveRecord::Base
 
   private
   def update_building_reviews_count
-    self.reviewable.update(reviews_count: self.reviewable.reviews_count-1) if self.reviewable.reviews_count > 0
+    revieable = self.reviewable
+    revieable.update(reviews_count: revieable.reviews_count - 1) if revieable.reviews_count > 0
   end
   #To remove rating and votes
   def destroy_dependents
@@ -102,5 +119,4 @@ class Review < ActiveRecord::Base
       RatingCache.update_rating_cache(rating_cache)
     end
   end
-
 end
