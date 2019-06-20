@@ -16,15 +16,11 @@ class ApplicationController < ActionController::Base
 
   def popular_neighborhoods
     if @show_nb_counts
-      @lower_manhattan_count = Neighborhood.cached_nb_buildings_count('Lower Manhattan')
-      @midtown_count = Neighborhood.cached_nb_buildings_count('Midtown')
-      @upper_manhattan_count = Neighborhood.cached_nb_buildings_count('Upper Manhattan')
-      @uptown_count = Neighborhood.cached_nb_buildings_count(view_context.uptown_sub_borough)
-
-      @brooklyn_count = Building.where('city = ? OR neighborhood in (?)', 'Brooklyn', view_context.brooklyn_sub_borough).count
-      @queens_count = Building.where('city = ? OR neighborhood in (?)', 'Queens', view_context.queens_sub_borough).count
-      @bronx_count = Building.where('city = ?', 'Bronx').count
-      @east_bronx_count = Building.where('neighborhood = ?', 'East Bronx').count
+      neightborhoods = Neighborhood.all
+      @uptown_count = Neighborhood.cached_nb_buildings_count(neightborhoods, view_context.uptown_sub_borough)
+      @brooklyn_count = Building.city_count('Brooklyn', view_context.brooklyn_sub_borough)
+      @queens_count = Building.city_count('Queens', view_context.queens_sub_borough)
+      @queens_count = Building.city_count('Bronx')
     end
   end
 

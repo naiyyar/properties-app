@@ -47,12 +47,12 @@ class Neighborhood < ActiveRecord::Base
     city.gsub('', '')
   end
 
-  def self.nb_buildings_count name
-    Neighborhood.where(name: name).sum(:buildings_count)
+  def self.nb_buildings_count neightborhoods, name
+    neightborhoods.where(name: name).sum(:buildings_count)
   end
 
-  def self.cached_nb_buildings_count name
-    Rails.cache.fetch([self, 'nb_buildings_count']) { nb_buildings_count(name) }
+  def self.cached_nb_buildings_count neightborhoods, name
+    Rails.cache.fetch([self, 'cached_nb_buildings_count', name]) { nb_buildings_count(neightborhoods, name) }
   end
 
   def self.nb_borough(nb, area)

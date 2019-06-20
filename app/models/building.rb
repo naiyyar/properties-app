@@ -178,8 +178,16 @@ class Building < ActiveRecord::Base
   end
 
   def featured
-    feaured = FeaturedBuilding.where(building_id: self.id).active
-    feaured.present?
+    featured?
+  end
+
+  def self.city_count city, sub_boroughs = nil
+    if sub_boroughs.present?
+      buildings = where(city: city, neighborhood: sub_boroughs)
+    else
+      buildings = where(city: city)
+    end
+    buildings.count
   end
 
   def self.options_for_sorted_by
