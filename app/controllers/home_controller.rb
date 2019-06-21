@@ -83,9 +83,9 @@ class HomeController < ApplicationController
       if @buildings.present?
         building_ids = @buildings.pluck(:id)
         final_results = Building.with_featured_building(@buildings, building_ids, params[:page])
-        @per_page_buildings = final_results[:per_page_buildings]
-        @all_buildings = final_results[:all_buildings]
-        @hash = final_results[:map_hash]
+        @per_page_buildings = final_results[1]
+        @all_buildings = final_results[0][:all_buildings]
+        @hash = final_results[0][:map_hash]
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']
         #in meta_desc

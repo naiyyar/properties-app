@@ -30,9 +30,9 @@ class ManagementCompaniesController < ApplicationController
     buildings = @management_company.cached_buildings.includes(:uploads, :building_average)
     building_ids = buildings.pluck(:id)
     @broker_percent = BrokerFeePercent.first.percent_amount
-    final_results = Building.with_featured_building(buildings, building_ids)
-    @manage_buildings = final_results[:per_page_buildings].paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
-    @all_buildings = final_results[:all_buildings]
+    final_results = Building.with_featured_building(buildings, building_ids, params[:page])
+    @manage_buildings = final_results[1] if !params[:object_id].present?
+    @all_buildings = final_results[0][:all_buildings]
     
     #@aggregate_reviews = @management_company.aggregate_reviews(buildings)
     @recommended_percent = @management_company.recommended_percent(buildings)
@@ -43,7 +43,7 @@ class ManagementCompaniesController < ApplicationController
       #finding average rating for all managed buildings 
       @stars = @management_company.get_average_stars(buildings, @total_reviews)
       #For map
-      @hash = final_results[:map_hash]
+      @hash = final_results[0][:map_hash]
       if @hash.length > 0
         @lat = @hash.last['latitude']
         @lng = @hash.last['longitude']

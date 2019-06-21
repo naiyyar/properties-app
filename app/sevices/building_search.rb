@@ -53,11 +53,10 @@ module BuildingSearch
     distance
   end
 
-  def with_featured_building buildings, building_ids, page_params=1
+  def with_featured_building buildings, building_ids, page_num=1
   	final_results = {}
-  	final_results[:per_page_buildings] = nil
+  	#final_results[:per_page_buildings] = nil
   	final_results[:all_buildings] = nil
-  	buildings = buildings.includes(:building_average, :featured_building) unless buildings.kind_of? Array
     featured_building_ids = FeaturedBuilding.active_building_ids(building_ids)
     #Selecting 2 featured building to put on top
     if buildings.kind_of?(Array)
@@ -66,22 +65,23 @@ module BuildingSearch
       top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
       per_page_buildings = buildings.select{|b| !top_two_featured_buildings.include?(b)}
     else
+    	buildings = buildings.includes(:building_average, :featured_building) #unless buildings.kind_of? Array
       top_two_featured_buildings = buildings.where(id: featured_building_ids)
       top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
       per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
     end
-    final_results[:per_page_buildings] = per_page_buildings.paginate(:page => page_params, :per_page => 20)
+    #final_results[:per_page_buildings] = per_page_buildings
+    per_page_buildings = per_page_buildings.paginate(:page => page_num, :per_page => 20)
     #putting featured building on top
     if top_two_featured_buildings.present?
       all_buildings = top_two_featured_buildings + per_page_buildings
     else
       all_buildings = per_page_buildings
     end
-    
     final_results[:all_buildings] = all_buildings
     final_results[:map_hash] = buildings_json_hash(top_two_featured_buildings, buildings)
     
-    return final_results
+    return final_results, per_page_buildings
   end
 
 	def search_by_zipcodes(criteria)
