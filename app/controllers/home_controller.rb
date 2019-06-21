@@ -1,14 +1,14 @@
 require 'will_paginate/array'
 class HomeController < ApplicationController
   before_action :reset_session, only: [:index, :auto_search]
-  before_action :get_neighborhoods, only: [:index]
   before_action :format_search_string, only: :search
   before_action :save_as_favourite, only: [:search]
 
   def index
     @home_view = true
+    @neighborhoods = Neighborhood.all
     @buildings_count = Building.all.count
-    @meta_desc = "Search through #{Building.all.count} buildings of no fee apartments in NYC, no fee rentals in NYC, 
+    @meta_desc = "Search through #{@buildings_count} buildings of no fee apartments in NYC, no fee rentals in NYC, 
                   for rent by owner in NYC and apartment reviews NYC. Rent direct and bypass brokers."
   end
 
@@ -34,7 +34,7 @@ class HomeController < ApplicationController
                   }
   end
 
-  def auto_search    
+  def auto_search
     @search_phrase = params[:term]
     @no_match_found = true
     @neighborhoods = Neighborhood.nb_search(@search_phrase) #All neighborhoods
@@ -56,29 +56,11 @@ class HomeController < ApplicationController
       unless params[:latitude].present? and params[:longitude].present?
         if params[:searched_by] != 'address' and params[:searched_by] != 'no-fee-management-companies-nyc'
           @zoom = (@search_string == 'New York' ? 12 : 14)
-          unless @search_string == 'New York'
-            @brooklyn_neighborhoods = @search_string #used to add border boundaries of brooklyn and queens
-            @boundary_coords = []
-            if params[:searched_by] == 'zipcode'
-              @buildings = @searched_buildings = Building.where('zipcode = ?', @search_string)
-              @boundary_coords << Gcoordinate.where(zipcode: @search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-            elsif params[:searched_by] == 'no-fee-apartments-nyc-neighborhoods'
-              @buildings = @searched_buildings = Building.buildings_in_neighborhood(@search_string)
-            else
-              if @search_string == 'Queens'
-                boroughs = view_context.queens_sub_borough
-              elsif @search_string == 'Brooklyn'
-                boroughs = view_context.brooklyn_sub_borough
-              elsif @search_string == 'Bronx'
-                boroughs = view_context.bronx_sub_borough
-              end
-              @buildings = Building.where("city = ? OR neighborhood in (?)", @search_string, boroughs) 
-              building = @buildings #Only to show map when no match found after filter
-              @zoom = 12
-            end
-          else
-            @buildings = Building.buildings_in_city(@search_string)
-          end
+          #searched: Method in building search module
+          results = Building.searched(params[:searched_by], @search_string, @sub_borough)
+          building = @buildings = @searched_buildings = results['buildings']
+          @boundary_coords = results['boundary_coords'] if results['boundary_coords'].present?
+          @zoom = results['zoom'] if results['zoom'].present?
         elsif params[:searched_by] == 'address'
           building = Building.where(building_street_address: params[:search_term])
           #searching because some address has extra white space in last so can not match exactly with address search_term
@@ -99,37 +81,16 @@ class HomeController < ApplicationController
       
       #added unless @buildings.kind_of? Array => getting ratings sorting results in array
       if @buildings.present?
-        @buildings = @buildings.includes(:building_average, :featured_building) unless @buildings.kind_of? Array
-        #getting all featured building for search term
-        building_ids = @buildings.map(&:id)
-        featured_buildings = FeaturedBuilding.where(building_id: building_ids).active
-        featured_building_ids = featured_buildings.pluck(:building_id)
-        
-        #Selecting 2 featured building to put on top
-        if @buildings.kind_of?(Array)
-          #when sorting by rating, getting array of objects
-          top_two_featured_buildings = @buildings.select{|b| featured_building_ids.include?(b.id)}
-          top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
-          @per_page_buildings = @buildings.select{|b| !top_two_featured_buildings.include?(b)}
-          #.where.not(id: top_two_featured_buildings.map(&:id))
-        else
-          top_two_featured_buildings = @buildings.where(id: featured_building_ids)
-          top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
-          @per_page_buildings = @buildings.where.not(id: top_two_featured_buildings.map(&:id))
-        end
-        
-        @per_page_buildings = @per_page_buildings.paginate(:page => params[:page], :per_page => 20)
-        #putting featured building on top
-        if top_two_featured_buildings.present?
-          @all_buildings = top_two_featured_buildings + @per_page_buildings
-        else
-          @all_buildings = @per_page_buildings
-        end
-        @hash = Building.buildings_json_hash(top_two_featured_buildings, @buildings)
+        building_ids = @buildings.pluck(:id)
+        final_results = Building.building_with_featured(@buildings, building_ids)
+        @per_page_buildings = final_results['per_page_buildings'].paginate(:page => params[:page], :per_page => 20)
+        @all_buildings = final_results['all_buildings']
+        @hash = Building.buildings_json_hash(final_results['top_two_featured_buildings'], @buildings)
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']
-        #@photos_count = Upload.where(imageable_id: building_ids, imageable_type: 'Building').count
-        #@reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
+        #in meta_desc
+        @photos_count = Upload.where(imageable_id: building_ids, imageable_type: 'Building').count
+        @reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
       else
         if @boundary_coords.present? and @boundary_coords.first.length > 1
           @lat = @boundary_coords.first.first[:lat]
@@ -146,6 +107,7 @@ class HomeController < ApplicationController
       end
       #to calculate save amount
       @broker_percent = BrokerFeePercent.first.percent_amount
+      
       @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
 
       @meta_desc = "#{@tab_title_text.try(:titleize)} has #{@buildings.length if @buildings.present?} "+ 
@@ -158,58 +120,9 @@ class HomeController < ApplicationController
   end
 
   private
-  
-  def manhattan_kmls
-    [
-      'New York',
-      'Midtown', 
-      'Sutton Place', 
-      'Upper East Side', 
-      'Yorkville', 
-      'Bowery', 
-      'East Village', 
-      'Financial District',
-      'Lower East Side',
-      'Greenwich Village',
-      'West Village',
-      'Lower Manhattan',
-      'Soho',
-      'Tribeca',
-      'Battery Park City',
-      'Chelsea',
-      'Gramercy Park',
-      'Kips Bay', 
-      "Hell's Kitchen",
-      'Midtown East',
-      'Murray Hill', 
-      'Roosevelt Island',
-      'Carnegie Hill',
-      'Lenox Hill',
-      'Upper West Side',
-      'Lincoln Square',
-      'Upper Manhattan',
-      'East Harlem',
-      'Harlem',
-      'Hudson Heights',
-      'Morningside Heights',
-      'Washington Heights',
-      'Little Italy',
-      'Chinatown',
-      'Inwood',
-      'Hamilton Heights',
-      'Civic Center',
-      'Stuyvesant Town',
-      'Nolita',
-      'Turtle Bay'
-    ]
-  end
 
   def reset_session
     session[:return_to] = nil if session[:return_to].present?
-  end
-
-  def get_neighborhoods
-    @neighborhoods = Neighborhood.all
   end
 
   def format_search_string
@@ -226,8 +139,19 @@ class HomeController < ApplicationController
       @searched_neighborhoods = "#{@search_string}"
       @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
       @tab_title_text = "#{@search_string} #{@borough_city}"
+
+      if !searched_params.include?(params[:searched_by])
+        @sub_borough = {}
+        @sub_borough['Queens'] = view_context.queens_sub_borough
+        @sub_borough['Brooklyn'] = view_context.brooklyn_sub_borough
+        @sub_borough['Bronx'] = view_context.bronx_sub_borough
+      end
     end
     @half_footer = true
+  end
+
+  def searched_params
+    ['address', 'no-fee-management-companies-nyc', 'zipcodes']
   end
 
   def save_as_favourite
