@@ -16,7 +16,7 @@
       - if @building.votes.present?
         .favLink
           = recommended_percent(@building).html_safe
-      - if @building.reviews_count > 0 and @management_company.present?
+      - if @building.reviews_count.to_i > 0 and @management_company.present?
         .favLink
           %span.icon-pipe
           | Reviews: #{@building.reviews_count}

@@ -488,15 +488,15 @@ class Building < ActiveRecord::Base
   end
 
   def upvotes_count
-    self.votes.where(vote: true).count
+    votes.where(vote: true).count
   end
 
   def downvotes_count
-    self.votes.where(vote: false).count
+    votes.where(vote: false).count
   end
 
   def total_votes
-    self.votes.count
+    votes.count
   end
 
   def zipcode=(val)

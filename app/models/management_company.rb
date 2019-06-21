@@ -48,27 +48,23 @@ class ManagementCompany < ActiveRecord::Base
 		Building.where(id: building_ids).update_all(management_company_id: self.id)
 	end
 
-	def aggregate_reviews
-		count = 0
-		self.buildings.each do |building|
-			count += building.reviews_count
-		end
-		count
+	def aggregate_reviews managed_buildings
+		managed_buildings.sum(:reviews_count)
 	end
 
-	def recommended_percent
+	def recommended_percent managed_buildings
 		downcount = total_reviews = 0
-		buildings.includes(:reviews).each do |building|
-			if building.reviews.present?
+		managed_buildings.includes(:reviews).each do |building|
+			if building.reviews_count.to_i > 0
 				downcount += building.downvotes_count
-				total_reviews += building.reviews.count
+				total_reviews += building.reviews_count
 			end
 		end
 		upcount = total_reviews - downcount
 		return (upcount.to_f / total_reviews) * 100
 	end
 
-	def get_average_stars
+	def get_average_stars managed_buildings
   	@total_rates = 0
     star_counts = []
 
@@ -79,7 +75,7 @@ class ManagementCompany < ActiveRecord::Base
     rateables = Rate.where(rateable_id: buildings.pluck(:id), rateable_type: 'Building', dimension: 'building')
     @total_rates = rateables.where('stars > ?', 0).sum(:stars)
 
-    star_counts = (@total_rates.to_f/aggregate_reviews).round(2).to_s.split('.')
+    star_counts = (@total_rates.to_f/aggregate_reviews(managed_buildings)).round(2).to_s.split('.')
     return star_counts
   end
 

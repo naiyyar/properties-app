@@ -43,14 +43,14 @@ class ManagementCompaniesController < ApplicationController
       @all_building = @manage_buildings
     end
 
+    @aggregate_reviews = @management_company.aggregate_reviews(buildings)
+    @recommended_percent = @management_company.recommended_percent(buildings)
     @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
     @total_reviews = @reviews.present? ? @reviews.count : 0
     @reviews = @reviews.limit(10)
-    @building_photos = Upload.where(imageable_id: @manage_buildings.pluck(:id), imageable_type: 'Building')
-    
     if buildings.present?
       #finding average rating for all managed buildings 
-      @stars = @management_company.get_average_stars
+      @stars = @management_company.get_average_stars(@manage_buildings)
       
       #For Gmap
       @lat = buildings.first.latitude
@@ -58,11 +58,11 @@ class ManagementCompaniesController < ApplicationController
       @zoom = buildings.length > 60 ? 13 : 11
       @hash = Building.buildings_json_hash(top_two_featured_buildings, buildings.includes(:uploads, :building_average, :votes))
     end
-
+    @building_photos = Upload.where(imageable_id: @manage_buildings.pluck(:id), imageable_type: 'Building')
     @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 
                   for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
-                  Click to view #{@building_photos.count} photos and #{@management_company.aggregate_reviews} reviews."
-   end
+                  Click to view #{@building_photos.count} photos and #{@aggregate_reviews} reviews."
+  end
 
   # GET /management_companies/new
   def new

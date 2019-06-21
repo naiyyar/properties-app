@@ -16,12 +16,12 @@ class Neighborhood < ActiveRecord::Base
   pg_search_scope :nb_search, against: [:name],
      :using => { :tsearch => { prefix: true } }
 
-	def nb_name_with_counts
-		"#{name} (#{buildings_count})"
-	end
+  def nb_name_with_counts
+    "#{name} (#{buildings_count})"
+  end
 
-	def self.save_building_counts boroughs, borough_neighborhoods
-		boroughs.each do |borough|
+  def self.save_building_counts boroughs, borough_neighborhoods
+    boroughs.each do |borough|
       neighborhoods = Neighborhood.where(boroughs: borough)
       if neighborhoods.blank?
         borough_neighborhoods[borough].each do |hoods|
@@ -29,7 +29,7 @@ class Neighborhood < ActiveRecord::Base
         end
       end
     end
-	end
+  end
 
   def formatted_name
     return "#{name.downcase.gsub(' ', '-')}-#{formatted_city.downcase}"
@@ -47,12 +47,12 @@ class Neighborhood < ActiveRecord::Base
     city.gsub('', '')
   end
 
-  def self.nb_buildings_count neightborhoods, name
-    neightborhoods.where(name: name).sum(:buildings_count)
+  def self.nb_buildings_count name
+    where(name: name).sum(:buildings_count)
   end
 
-  def self.cached_nb_buildings_count neightborhoods, name
-    Rails.cache.fetch([self, 'cached_nb_buildings_count', name]) { nb_buildings_count(neightborhoods, name) }
+  def self.cached_nb_buildings_count name
+    Rails.cache.fetch([self, 'cached_nb_buildings_count', name]) { nb_buildings_count(name) }
   end
 
   def self.nb_borough(nb, area)

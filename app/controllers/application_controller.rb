@@ -16,8 +16,7 @@ class ApplicationController < ActionController::Base
 
   def popular_neighborhoods
     if @show_nb_counts
-      neightborhoods = Neighborhood.all
-      @uptown_count = Neighborhood.cached_nb_buildings_count(neightborhoods, view_context.uptown_sub_borough)
+      @uptown_count = Neighborhood.cached_nb_buildings_count(view_context.uptown_sub_borough)
       @brooklyn_count = Building.city_count('Brooklyn', view_context.brooklyn_sub_borough)
       @queens_count = Building.city_count('Queens', view_context.queens_sub_borough)
       @bronx_count = Building.city_count('Bronx')

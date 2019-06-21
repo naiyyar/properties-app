@@ -123,7 +123,7 @@ class ReviewsController < ApplicationController
   #updating recommended_percent and reviews_count
   def update_reviewable_info
     if @reviewable.kind_of? Building
-      @reviewable.update(recommended_percent: @reviewable.suggested_percent, reviews_count: @reviewable.reviews.count) if @reviewable.present?
+      @reviewable.update(recommended_percent: @reviewable.suggested_percent, reviews_count: @reviewable.reviews.count)
     end
   end
 
