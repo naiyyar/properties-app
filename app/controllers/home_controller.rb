@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     else
       fav_color_class = 'unfilled-heart'
     end
-    
+    min_save_amount = building.min_save_amount(BrokerFeePercent.first.percent_amount)
     render json: { html: render_to_string(:partial => "/layouts/shared/custom_infowindow", 
                                           :locals => {  building: building,
                                                         image: Upload.marker_image(building),
@@ -29,7 +29,7 @@ class HomeController < ApplicationController
                                                         building_show: params[:building_show],
                                                         current_user: @current_user,
                                                         fav_color_class: fav_color_class,
-                                                        broker_percent: BrokerFeePercent.first.percent_amount
+                                                        min_save_amount: min_save_amount
                                                       })
                   }
   end

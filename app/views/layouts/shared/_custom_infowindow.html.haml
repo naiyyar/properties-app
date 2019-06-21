@@ -5,7 +5,6 @@
       .propImg
         = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
       - if building.price.present? or building.bedroom_types?
-        - min_save_amount = building.min_save_amount(broker_percent)
         - if min_save_amount.present?
           .saving-badge.infowindow-view-badge
             %p Save

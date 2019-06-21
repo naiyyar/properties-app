@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!, :except => [:new, :index, :create]
   after_action :update_reviewable_info, only: :create
+  after_action :clear_cache, only: [:create, :destroy]
   
   #from production
   def index
@@ -125,6 +126,10 @@ class ReviewsController < ApplicationController
     if @reviewable.kind_of? Building
       @reviewable.update(recommended_percent: @reviewable.suggested_percent, reviews_count: @reviewable.reviews.count)
     end
+  end
+
+  def clear_cache
+    Rails.cache.clear()
   end
 
 end

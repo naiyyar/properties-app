@@ -1,7 +1,7 @@
 class BuildingsController < ApplicationController 
   load_and_authorize_resource # except: :favorite
   before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
-  before_action :find_building, only: [:show, :edit, :update, :destroy, :featured_by, :units]
+  before_action :find_building, only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite]
   before_action :save_as_favourite, only: [:show]
   before_action :clear_cache, only: [:favorite, :unfavorite]
 
@@ -28,7 +28,6 @@ class BuildingsController < ApplicationController
 
   def favorite
     if current_user.present?
-      @building = Building.find(params[:object_id])
       current_user.favorite(@building)
     else
       session[:favourite_object_id] = params[:object_id]
@@ -40,7 +39,6 @@ class BuildingsController < ApplicationController
   end
 
   def unfavorite
-    @building = Building.find(params[:object_id])
     current_user.unfavorite(@building)
     
     render json: { message: 'Success' }
@@ -83,7 +81,7 @@ class BuildingsController < ApplicationController
   def show
     @show_map_btn = @half_footer = true
     @reviews = @building.building_reviews
-    @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
+    @distance_results = DistanceMatrix.get_data(@building) #if Rails.env == 'production'
     @broker_percent = BrokerFeePercent.first.percent_amount
     @min_save_amount = @building.min_save_amount(@broker_percent)
     #building + units images
@@ -91,8 +89,7 @@ class BuildingsController < ApplicationController
     @documents = @building.chached_doc_uploads
 
     #Similiar buildings
-    active_comps = @building.featured_comps.active
-    @similar_properties = Building.where(id: active_comps.pluck(:building_id)).includes(:building_average)
+    @similar_properties = Building.where(id: @building.featured_comps.active.pluck(:building_id)).includes(:building_average)
     
     @lat = @building.latitude
     @lng = @building.longitude
@@ -220,7 +217,8 @@ class BuildingsController < ApplicationController
   private
 
   def find_building
-    @building = Building.find(params[:id])
+    id = params[:object_id] || params[:id]
+    @building = Building.find(id)
   end
 
   def building_params

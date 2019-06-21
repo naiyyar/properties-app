@@ -1,6 +1,7 @@
 class UploadsController < ApplicationController
   #load_and_authorize_resource
 	before_action :authenticate_user!, only: [:destroy]
+  after_action :clear_cache, only: [:create, :destroy]
 
 	def index
     if params[:building_id].present?
@@ -151,6 +152,7 @@ class UploadsController < ApplicationController
       respond_to do |format|  
         format.html{ redirect_to :back, notice: 'File deleted.' }
         format.json { render json: { message: "File deleted from server" } }
+        format.js
       end
     else
       render json: { message: @upload.errors.full_messages.join(',') }
@@ -188,6 +190,10 @@ class UploadsController < ApplicationController
       records << { id: upload.id, orig_image_url: upload.image.url,  date_uploaded: upload.created_at.strftime("%m/%d/%Y") }
     end
     records
+  end
+
+  def clear_cache
+    Rails.cache.clear()
   end
 
 end

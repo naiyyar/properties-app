@@ -590,9 +590,9 @@
 #     ]
 
 # Gcoordinate.where(neighborhood: neighs).delete_all
-
+# broker_percent = BrokerFeePercent.first.percent_amount
 # Building.all.each do |b|
-# 	b.update(recommended_percent: b.suggested_percent)
+# 	b.update(min_save_amount: b.min_save_amount1(broker_percent))
 # end
 
 

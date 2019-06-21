@@ -1,39 +1,38 @@
-- cache [@building, 'property_info'] do
-  .property_information
-    .address{style: "margin-left: -1px;"}
-      %span.icon-location-pin
-      = "#{@building.street_address}, #{@building.zipcode}"
-    - if @building.building_type.present? or @building.neighbohoods.present?
-      %div
-        = "#{@building.building_type} in" if @building.building_type.present?
-        = link_to @building.neighbohoods, borough_search_link(@building.neighbohoods), class: 'hyper-link' if @building.neighbohoods.present?
-    - if @building.price.present? or @building.bedroom_types?
-      %div
-        = render partial: 'buildings/bedroom_types_and_prices', locals: { building: @building }
-    %div{style: "margin-left: -3px;padding: 0px;"}
-      %ul.rating.star-sm
-        = rating_for @building, 'building', disable_after_rate: true, readonly: true
-      - if @building.votes.present?
-        .favLink
-          = recommended_percent(@building).html_safe
-      - if @building.reviews_count.to_i > 0 and @management_company.present?
-        .favLink
-          %span.icon-pipe
-          | Reviews: #{@building.reviews_count}
-    .clearfix
-    - if @building.unit_information?
-      %div
-        = "<span> #{@building.no_of_units} Units | </span>".html_safe if @building.no_of_units.present? and @building.no_of_units > 0
-        = "<span> #{@building.floors} Floors | </span>".html_safe if @building.floors.present?
-        = "<span> Built in #{@building.built_in} </span>".html_safe if @building.built_in.present?
-    - if @building.management_company.present? and @management_company.blank?
-      .stats1.property_information
-        Managed By 
-        =link_to @building.management_company.name, no_fee_company_path(id: @building.management_company), class: 'hyper-link'
-    .clearfix
-    .clearfix
+.property_information
+  .address{style: "margin-left: -1px;"}
+    %span.icon-location-pin
+    = "#{@building.street_address}, #{@building.zipcode}"
+  - if @building.building_type.present? or @building.neighbohoods.present?
+    %div
+      = "#{@building.building_type} in" if @building.building_type.present?
+      = link_to @building.neighbohoods, borough_search_link(@building.neighbohoods), class: 'hyper-link' if @building.neighbohoods.present?
+  - if @building.price.present? or @building.bedroom_types?
+    %div
+      = render partial: 'buildings/bedroom_types_and_prices', locals: { building: @building }
+  %div{style: "margin-left: -3px;padding: 0px;"}
+    %ul.rating.star-sm
+      = rating_for @building, 'building', disable_after_rate: true, readonly: true
+    - if @building.votes.present?
+      .favLink
+        = recommended_percent(@building).html_safe
+    - if @building.reviews_count.to_i > 0 and @management_company.present?
+      .favLink
+        %span.icon-pipe
+        | Reviews: #{@building.reviews_count}
+  .clearfix
+  - if @building.unit_information?
+    %div
+      = "<span> #{@building.no_of_units} Units | </span>".html_safe if @building.no_of_units.present? and @building.no_of_units > 0
+      = "<span> #{@building.floors} Floors | </span>".html_safe if @building.floors.present?
+      = "<span> Built in #{@building.built_in} </span>".html_safe if @building.built_in.present?
+  - if @building.management_company.present? and @management_company.blank?
     .stats1.property_information
-      = check_availability_link(@building) if @building.web_url.present?
-    .stats1.property_information
-      - if @building.email.present? and @building.active_email
-        = link_to 'Contact Leasing Team', new_contact_path(building_id: @building.id), class: 'btn btn-primary btn-o btn-block font-bolder', remote: true
+      Managed By 
+      =link_to @building.management_company.name, no_fee_company_path(id: @building.management_company), class: 'hyper-link'
+  .clearfix
+  .clearfix
+  .stats1.property_information
+    = check_availability_link(@building) if @building.web_url.present?
+  .stats1.property_information
+    - if @building.email.present? and @building.active_email
+      = link_to 'Contact Leasing Team', new_contact_path(building_id: @building.id), class: 'btn btn-primary btn-o btn-block font-bolder', remote: true

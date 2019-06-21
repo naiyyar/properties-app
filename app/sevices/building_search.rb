@@ -55,8 +55,6 @@ module BuildingSearch
 
   def with_featured_building buildings, building_ids, page_num=1
   	final_results = {}
-  	#final_results[:per_page_buildings] = nil
-  	final_results[:all_buildings] = nil
     featured_building_ids = FeaturedBuilding.active_building_ids(building_ids)
     #Selecting 2 featured building to put on top
     if buildings.kind_of?(Array)
@@ -70,7 +68,6 @@ module BuildingSearch
       top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
       per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
     end
-    #final_results[:per_page_buildings] = per_page_buildings
     per_page_buildings = per_page_buildings.paginate(:page => page_num, :per_page => 20)
     #putting featured building on top
     if top_two_featured_buildings.present?
@@ -78,6 +75,7 @@ module BuildingSearch
     else
       all_buildings = per_page_buildings
     end
+    all_buildings.map{|b| b.uploaded_images = b.image_uploads}
     final_results[:all_buildings] = all_buildings
     final_results[:map_hash] = buildings_json_hash(top_two_featured_buildings, buildings)
     
