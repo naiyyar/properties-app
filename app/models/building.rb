@@ -55,6 +55,7 @@
 #  price                   :integer
 #  active_web              :boolean
 #  active_email            :boolean
+#  recommended_percent     :float
 
 class Building < ActiveRecord::Base
   include PgSearch
@@ -152,7 +153,23 @@ class Building < ActiveRecord::Base
   scope :three_bed, -> { where(three_bed: 3) }
   scope :four_bed, -> { where(four_plus_bed: 4) }
 
+
+  #Service module
+  #Search and filtering methods
+  extend BuildingSearch
+
   #Methods
+
+  ### 
+  #Used in buildings controller index action filterrific
+  # def self.options_for_sorted_by
+  #   [
+  #     ['Name (a-z)', 'building_name_asc'],
+  #     ['Name (z-a)', 'building_name_desc'],
+  #     ['Creating date (newest first)', 'created_at_desc'],
+  #     ['Creating date (oldest first)', 'created_at_asc']
+  #   ]
+  # end
 
   def self.buildings_json_hash(top_two_featured_buildings=nil, buildings)
     if top_two_featured_buildings.present?
@@ -192,15 +209,6 @@ class Building < ActiveRecord::Base
 
   def suggested_percent
     Vote.recommended_percent(self)
-  end
-
-  def self.options_for_sorted_by
-    [
-      ['Name (a-z)', 'building_name_asc'],
-      ['Name (z-a)', 'building_name_desc'],
-      ['Creating date (newest first)', 'created_at_desc'],
-      ['Creating date (oldest first)', 'created_at_asc']
-    ]
   end
 
   def saved_amount(broker_percent)
@@ -248,38 +256,6 @@ class Building < ActiveRecord::Base
     Rails.cache.fetch([self, 'doc_uploads']) { uploads.where('document_file_name is not null').to_a }
   end
 
-  def self.redo_search_buildings params
-    @zoom = params[:zoomlevel].to_i
-    custom_latng = [params[:latitude].to_f, params[:longitude].to_f]
-    distance = redo_search_distance(1.5)
-    buildings = Building.near(custom_latng, distance, units: :km)
-    distance = redo_search_distance(2.0)
-    buildings = Building.near(custom_latng, distance, units: :km) if buildings.blank?
-    distance = redo_search_distance(4.5)
-    buildings = Building.near(custom_latng, distance, units: :km) if buildings.blank?
-
-    buildings
-  end
-
-  def self.redo_search_distance distance
-    if @zoom > 14
-      distance = distance/(@zoom)
-      case @zoom
-      when 15
-        distance += 0.8
-      when 16
-        distance += 0.5
-      when 17
-        distance += 0.2
-      when 18
-        distance += 0.1
-      else
-        distance
-      end
-    end
-    distance
-  end
-
   def featured?
     self.featured_building.present? and featured_building.active
   end
@@ -296,195 +272,12 @@ class Building < ActiveRecord::Base
     self.building_name
   end
 
-  def self.sort_buildings(buildings, sort_params)
-    # 0 => Default
-    # 1 => Rating (high to low)
-    # 2 => Rating (high to low)
-    # 3 => Reviews (high to low)
-    # 4 => A to Z
-    # 5 => Z to A
-    if buildings.present?
-      case sort_params
-      when '1'
-        buildings = sort_by_rating(buildings, '1')
-      when '2'
-        buildings = sort_by_rating(buildings, '2')
-      when '3'
-        #buildings = buildings.reorder('reviews_count DESC')
-        buildings = where(id: buildings.map(&:id)).reorder('reviews_count DESC')
-      when '4'
-        buildings = buildings.reorder('building_name ASC, building_street_address ASC')
-      when '5'
-        buildings = buildings.reorder('building_name DESC, building_street_address DESC')
-      else
-        buildings = buildings
-      end
-    else
-      buildings = buildings
-    end
-    buildings
-  end
-
   def rating_cache?
-    RatingCache.where(cacheable_id: self.id, cacheable_type: 'Building', dimension: DIMENSIONS).present?
+    rating_cache.where(dimension: DIMENSIONS).present?
   end
 
-  def self.sort_by_rating buildings, sort_index
-    rated_buildings = buildings.includes(:building_average, :featured_building).where.not(avg_rating: nil)
-    non_rated_buildings = buildings.includes(:building_average, :featured_building).where.not(id: rated_buildings.map(&:id))
-    if sort_index == '1'
-      rated_buildings = rated_buildings.reorder(avg_rating: :desc, building_name: :asc, building_street_address: :asc)
-      buildings = rated_buildings + non_rated_buildings
-    else
-      rated_buildings = rated_buildings.reorder(avg_rating: :asc, building_name: :asc, building_street_address: :asc)
-      buildings = non_rated_buildings + rated_buildings
-    end
-    buildings
-  end
-
-  def self.filter_by_rates buildings, rating
-    # 1 star - means  = 1
-    # 2 star - means  1 <= 2
-    # 3 star - means  2 <= 3
-    # 4 star - means  3 <= 4
-    # 5 star - means  4 <= 5 
-    if rating.present?
-      rates = RatingCache.where(cacheable_type: 'Building')
-      if rating == '1'
-        rates = rates.where('avg = ?', rating)
-      else
-        rates = rates.where('avg > ? AND avg <= ?', rating.to_i-1, rating)
-      end
-      buildings.where('id in (?)', rates.map(&:cacheable_id))
-    else
-      buildings
-    end
-  end
-
-  def self.filter_by_prices buildings, price
-    if price.present?
-      @buildings = buildings.where(price: price) if buildings.present?
-    else
-      @buildings = buildings
-    end
-    @buildings
-  end
-
-  def self.filter_by_beds buildings, beds
-    #@beds = beds
-    if buildings.present?
-      @buildings = []
-      beds.each do |num|
-        if num == '0'
-          @buildings += buildings.studio
-        elsif num == '1'
-          @buildings += buildings.one_bed
-        elsif num == '2'
-          @buildings += buildings.two_bed
-        elsif num == '3'
-          @buildings += buildings.three_bed
-        else
-          @buildings += buildings.four_bed
-        end
-        # @buildings = @buildings.studio if bed_type?('0')
-        # @buildings = @buildings.one_bed if bed_type?('1')
-        # @buildings = @buildings.two_bed if bed_type?('2')
-        # @buildings = @buildings.three_bed if bed_type?('3')
-        # @buildings = @buildings.four_bed if bed_type?('4')
-      end
-    end
-    buildings.where(id: @buildings.map(&:id).uniq) rescue nil
-  end
-
-  #def self.bed_type? val
-  #  @beds.include?(val)
-  #end
-
-  def self.filter_by_types buildings, type
-    if type.present?
-      @buildings = buildings.where(building_type: type)
-    else
-      @buildings = buildings
-    end
-    @buildings
-  end
-
-  def self.filter_by_amenities buildings, amenities
-    @amenities = amenities
-    if amenities.present?
-      @buildings = buildings
-      @buildings = @buildings.doorman if has_amenity?('doorman')
-      @buildings = @buildings.courtyard if has_amenity?('courtyard')
-      @buildings = @buildings.laundry_facility if has_amenity?('laundry_facility')
-      @buildings = @buildings.parking if has_amenity?('parking')
-      @buildings = @buildings.gym if has_amenity?('gym')
-      @buildings = @buildings.garage if has_amenity?('garage')
-      @buildings = @buildings.mgmt_company_run if has_amenity?('management_company_run')
-      @buildings = @buildings.live_in_super if has_amenity?('live_in_super')
-      @buildings = @buildings.roof_deck if has_amenity?('roof_deck')
-      @buildings = @buildings.pets_allowed_cats if has_amenity?('pets_allowed_cats')
-      @buildings = @buildings.pets_allowed_dogs if has_amenity?('pets_allowed_dogs')
-      @buildings = @buildings.elevator if has_amenity?('elevator')
-      @buildings = @buildings.swimming_pool if has_amenity?('swimming_pool')
-      @buildings = @buildings.childrens_playroom if has_amenity?('childrens_playroom')
-      @buildings = @buildings.walk_up if has_amenity?('walk_up')
-      @buildings = @buildings.no_fee if has_amenity?('no_fee')
-    else
-      @buildings = buildings
-    end
-    @buildings
-  end
-
-  def self.filtered_buildings buildings, filter_params
-    rating = filter_params[:rating]
-    building_types = filter_params[:type]
-    price = filter_params[:price]
-    beds = filter_params[:bedrooms]
-    amenities = filter_params[:amenities]
-  
-    buildings = filter_by_amenities(buildings, amenities) if amenities.present?
-    buildings = filter_by_rates(buildings, rating) if rating.present?
-    buildings = filter_by_prices(buildings, price) if price.present?
-    buildings = filter_by_beds(buildings, beds) if beds.present?
-    buildings = filter_by_types(buildings, building_types)
-
-    return buildings
-  end
-
-  def self.has_amenity?(name)
-    @amenities.include?(name)
-  end
-
-  def self.search_by_zipcodes(criteria)
-    # regexp = /#{criteria}/i;
-    results = Building.search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
-    # results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
-  end
-
-  def self.search_by_pneighborhoods(criteria)
-    results = Building.search_by_pneighborhood(criteria).order(:neighborhoods_parent).to_a.uniq(&:neighborhoods_parent)
-  end
-
-  def self.search_by_building_name(criteria)
-    results = Building.text_search_by_building_name(criteria).reorder('building_name ASC')
-  end
-
-  def self.buildings_in_neighborhood search_term
-    search_term = (search_term == 'Soho' ? 'SoHo' : search_term)
-    where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
-  end
-
-  def self.buildings_in_city city
-    where("city @@ :q" , q: city)
-  end
-
-  #Contribute search method
-  def self.text_search(term)
-    if term.present?
-      search(term)
-    else
-      self.all
-    end
+  def rating_cache
+    RatingCache.where(cacheable_id: self.id, cacheable_type: 'Building') 
   end
 
   def upvotes_count
@@ -533,10 +326,6 @@ class Building < ActiveRecord::Base
 
   def no_of_units
     self.number_of_units.present? ? self.number_of_units : self.units.count
-  end
-
-  def rating_cache
-    RatingCache.where(cacheable_id: self.id, cacheable_type: 'Building') 
   end
 
   def fetch_or_create_unit params
@@ -853,9 +642,5 @@ class Building < ActiveRecord::Base
       end
     end
   end
-
-  # def env_is_prod?
-  #   Rails.env == 'production'
-  # end
 
 end
