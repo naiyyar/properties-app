@@ -591,9 +591,9 @@
 
 # Gcoordinate.where(neighborhood: neighs).delete_all
 
-Building.all.each do |b|
-	b.update(recommended_percent: b.suggested_percent)
-end
+# Building.all.each do |b|
+# 	b.update(recommended_percent: b.suggested_percent)
+# end
 
 
 

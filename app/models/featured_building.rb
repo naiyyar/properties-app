@@ -17,4 +17,12 @@ class FeaturedBuilding < ActiveRecord::Base
      :search_query
     ]
   )
+
+  def self.active_building building_ids
+    where(building_id: building_ids).active
+  end
+
+  def self.active_building_ids building_ids
+    active_building(building_ids).pluck(:building_id)
+  end
 end

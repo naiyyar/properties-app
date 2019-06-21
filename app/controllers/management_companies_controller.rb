@@ -27,41 +27,36 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn = @half_footer = true
-    buildings = @management_company.cached_buildings
+    buildings = @management_company.cached_buildings.includes(:uploads, :building_average)
+    building_ids = buildings.pluck(:id)
     @broker_percent = BrokerFeePercent.first.percent_amount
-    featured_buildings = FeaturedBuilding.where(building_id: buildings.pluck(:id)).active
-    featured_building_ids = featured_buildings.pluck(:building_id)
-    #Selecting 2 featured building to put on top
-    top_two_featured_buildings = buildings.where(id: featured_building_ids)
-    top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.count > 2
+    final_results = Building.with_featured_building(buildings, building_ids)
+    @manage_buildings = final_results[:per_page_buildings].paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
+    @all_buildings = final_results[:all_buildings]
     
-    @manage_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id)).paginate(:page => params[:page], :per_page => 20) if !params[:object_id].present?
-    #putting featured building on top
-    if top_two_featured_buildings.present?
-      @all_building = top_two_featured_buildings + @manage_buildings
-    else
-      @all_building = @manage_buildings
-    end
-
-    @aggregate_reviews = @management_company.aggregate_reviews(buildings)
+    #@aggregate_reviews = @management_company.aggregate_reviews(buildings)
     @recommended_percent = @management_company.recommended_percent(buildings)
-    @reviews = Review.where(reviewable_id: buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
+    @reviews = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
     @total_reviews = @reviews.present? ? @reviews.count : 0
     @reviews = @reviews.limit(10)
     if buildings.present?
       #finding average rating for all managed buildings 
-      @stars = @management_company.get_average_stars(@manage_buildings)
-      
-      #For Gmap
-      @lat = buildings.first.latitude
-      @lng = buildings.first.longitude
+      @stars = @management_company.get_average_stars(buildings, @total_reviews)
+      #For map
+      @hash = final_results[:map_hash]
+      if @hash.length > 0
+        @lat = @hash.last['latitude']
+        @lng = @hash.last['longitude']
+      else
+        @lat = buildings.first.latitude
+        @lng = buildings.first.longitude
+      end
       @zoom = buildings.length > 60 ? 13 : 11
-      @hash = Building.buildings_json_hash(top_two_featured_buildings, buildings.includes(:uploads, :building_average, :votes))
     end
-    @building_photos = Upload.where(imageable_id: @manage_buildings.pluck(:id), imageable_type: 'Building')
+    @building_photos = Upload.where(imageable_id: building_ids, imageable_type: 'Building')
     @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 
                   for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
-                  Click to view #{@building_photos.count} photos and #{@aggregate_reviews} reviews."
+                  Click to view #{@building_photos.count} photos and #{@total_reviews} reviews."
   end
 
   # GET /management_companies/new

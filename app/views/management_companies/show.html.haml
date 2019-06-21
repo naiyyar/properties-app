@@ -26,14 +26,14 @@
             .clearfix
   
   #reviewsContainer.tabsContainer
-    = hidden_field_tag :total_reviews, @aggregate_reviews
+    = hidden_field_tag :total_reviews, @total_reviews
     %ul.nav.nav-tabs.nav-justified{role: "tablist"}
       %li.active
         %a{"data-toggle" => "tab", href: "#building_managed", role: "tab"}
           = 'BUILDINGS MANAGED'
-          (#{@manage_buildings.count})
+          (#{@all_buildings.count})
       %li
-        %a{"data-toggle" => "tab", href: "#buildings_reviews_tab", role: "tab"}= "BUILDING REVIEWS (#{ @aggregate_reviews })"
+        %a{"data-toggle" => "tab", href: "#buildings_reviews_tab", role: "tab"}= "BUILDING REVIEWS (#{ @total_reviews })"
     
     .tab-content.split-view
       #buildings_reviews_tab.tab-pane.fade{style: "overflow-y: scroll;height: 500px;"}
@@ -49,7 +49,7 @@
       #building_managed.tab-pane.fade.in.active.no-padding
         .resultsList
           #load-more-buildings.row
-            = render partial: 'buildings/building', :collection => @all_building, :as => :building, cache: true 
+            = render partial: 'buildings/building', :collection => @manage_buildings, :as => :building, cache: Proc.new{|item| [item, "management_show#{params[:page]}"]} 
         .pages-container
           = will_paginate @manage_buildings, renderer: BootstrapPagination::Rails
 

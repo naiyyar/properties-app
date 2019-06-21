@@ -64,7 +64,7 @@ class ManagementCompany < ActiveRecord::Base
 		return (upcount.to_f / total_reviews) * 100
 	end
 
-	def get_average_stars managed_buildings
+	def get_average_stars managed_buildings, review_count
   	@total_rates = 0
     star_counts = []
 
@@ -75,7 +75,7 @@ class ManagementCompany < ActiveRecord::Base
     rateables = Rate.where(rateable_id: buildings.pluck(:id), rateable_type: 'Building', dimension: 'building')
     @total_rates = rateables.where('stars > ?', 0).sum(:stars)
 
-    star_counts = (@total_rates.to_f/aggregate_reviews(managed_buildings)).round(2).to_s.split('.')
+    star_counts = (@total_rates.to_f/review_count).round(2).to_s.split('.')
     return star_counts
   end
 

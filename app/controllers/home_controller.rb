@@ -82,10 +82,10 @@ class HomeController < ApplicationController
       #added unless @buildings.kind_of? Array => getting ratings sorting results in array
       if @buildings.present?
         building_ids = @buildings.pluck(:id)
-        final_results = Building.building_with_featured(@buildings, building_ids)
-        @per_page_buildings = final_results['per_page_buildings'].paginate(:page => params[:page], :per_page => 20)
-        @all_buildings = final_results['all_buildings']
-        @hash = Building.buildings_json_hash(final_results['top_two_featured_buildings'], @buildings)
+        final_results = Building.with_featured_building(@buildings, building_ids, params[:page])
+        @per_page_buildings = final_results[:per_page_buildings]
+        @all_buildings = final_results[:all_buildings]
+        @hash = final_results[:map_hash]
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']
         #in meta_desc
