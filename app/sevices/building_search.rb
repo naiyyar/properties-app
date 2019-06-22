@@ -78,9 +78,8 @@ module BuildingSearch
 
   def with_featured_building buildings, page_num=1
   	final_results = {}
-    top_two_featured_buildings = []
     featured_buildings = Building.active_featured_buildings(buildings).includes(:building_average, :featured_building)
-    top_two_featured_buildings = featured_buildings.shuffle[1..2] if featured_buildings.length > 2
+    top_two_featured_buildings = featured_buildings.length > 2 ? featured_buildings.shuffle[1..2] : []
     #Selecting 2 featured building to put on top
     per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
                                         .paginate(:page => page_num, :per_page => 20)
@@ -124,7 +123,7 @@ module BuildingSearch
   end
 
   def cached_buildings_by_city_or_nb term, sub_borough
-    Rails.cache.fetch([self, term]) { where("city = ? OR neighborhood in (?)", term, sub_borough) }
+    Rails.cache.fetch([self, term, 'city']) { where("city = ? OR neighborhood in (?)", term, sub_borough) }
   end
 
   def search_by_pneighborhoods(criteria)
