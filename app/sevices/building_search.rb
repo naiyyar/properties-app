@@ -72,38 +72,42 @@ module BuildingSearch
     distance
   end
 
-  def with_featured_building buildings, building_ids, page_num=1
+  def broker_percent
+    BrokerFeePercent.first.percent_amount
+  end
+
+  def with_featured_building buildings, page_num=1
   	final_results = {}
-    featured_building_ids = FeaturedBuilding.active_building_ids(building_ids)
+    featured_buildings = Building.active_featured_buildings.includes(:building_average, :featured_building)
+    top_two_featured_buildings = featured_buildings.shuffle[1..2] if featured_buildings.length > 2
     #Selecting 2 featured building to put on top
-    if buildings.kind_of?(Array)
-      #when sorting by rating, getting array of objects
-      top_two_featured_buildings = buildings.select{|b| featured_building_ids.include?(b.id)}
-      top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
-      per_page_buildings = buildings.select{|b| !top_two_featured_buildings.include?(b)}
-    else
-    	buildings = buildings.includes(:building_average, :featured_building) #unless buildings.kind_of? Array
-      top_two_featured_buildings = buildings.where(id: featured_building_ids)
-      top_two_featured_buildings = top_two_featured_buildings.shuffle[1..2] if top_two_featured_buildings.length > 2
-      per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
-    end
-    per_page_buildings = per_page_buildings.paginate(:page => page_num, :per_page => 20)
+    per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
+                                        .paginate(:page => page_num, :per_page => 20)
     #putting featured building on top
     if top_two_featured_buildings.present?
       all_buildings = top_two_featured_buildings + per_page_buildings
     else
       all_buildings = per_page_buildings
     end
-    broker_percent = BrokerFeePercent.first.percent_amount
+
     all_buildings.each do |b| 
       images = b.chached_image_uploads
       b.first_image = images[0]
       b.uploaded_images_count = images.count
       b.min_saved_amount = b.min_save_amount(broker_percent)
     end
+
+    if top_two_featured_buildings.present?
+      if buildings.kind_of? Array
+        buildings = buildings - top_two_featured_buildings
+      else
+        buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
+      end
+      buildings = top_two_featured_buildings + buildings
+    end
     
     final_results[:all_buildings] = all_buildings
-    final_results[:map_hash] = buildings_json_hash(all_buildings)
+    final_results[:map_hash] = buildings_json_hash(buildings)
     
     return final_results, per_page_buildings
   end
@@ -280,15 +284,15 @@ module BuildingSearch
 
   def sort_by_rating buildings, sort_index
     rated_buildings = buildings.includes(:building_average, :featured_building).where.not(avg_rating: nil)
-    non_rated_buildings = buildings.includes(:building_average, :featured_building).where.not(id: rated_buildings.map(&:id))
+    non_rated_buildings = buildings.includes(:building_average, :featured_building).where.not(id: rated_buildings.pluck(:id))
     if sort_index == '1'
       rated_buildings = rated_buildings.reorder(avg_rating: :desc, building_name: :asc, building_street_address: :asc)
-      buildings = rated_buildings + non_rated_buildings
+      sort_buildings = rated_buildings + non_rated_buildings
     else
       rated_buildings = rated_buildings.reorder(avg_rating: :asc, building_name: :asc, building_street_address: :asc)
-      buildings = non_rated_buildings + rated_buildings
+      sort_buildings = non_rated_buildings + rated_buildings
     end
-    buildings
+    buildings.where(id: sort_buildings.map(&:id))
   end
 
 end

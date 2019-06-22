@@ -11,8 +11,10 @@ class UsersController < ApplicationController
 
 	def saved_buildings
 		broker_percent = BrokerFeePercent.first.percent_amount
-		favorable_ids = @user.favorites.pluck(:favorable_id)
-		@buildings = Building.where(id: favorable_ids).paginate(:page => params[:page], :per_page => 20)
+		@buildings = Building.saved_favourites(@user)
+												 .paginate(:page => params[:page], :per_page => 20)
+												 .includes(:featured_building)
+    
     @buildings.each do |b| 
       images = b.chached_image_uploads
       b.first_image = images[0]

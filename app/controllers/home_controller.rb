@@ -51,8 +51,7 @@ class HomeController < ApplicationController
   end
 
   def search
-    search_term = params['search_term']
-    if search_term != 'glyphicons-halflings-regular'
+    if params['search_term'] != 'glyphicons-halflings-regular'
       results = Building.apt_search(params, @search_string, @sub_borough)
       if results[:searched_by] == 'address'
         building = results[:building]
@@ -64,18 +63,17 @@ class HomeController < ApplicationController
         @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
         @zoom = results[:zoom] if results[:zoom].present?
       end
-          
+       @buildings = @buildings.includes(:building_average, :featured_building)   
       if @buildings.present?
-        building_ids = @buildings.pluck(:id)
-        final_results = Building.with_featured_building(@buildings, building_ids, params[:page])
+        final_results = Building.with_featured_building(@buildings, params[:page])
         @per_page_buildings = final_results[1]
         @all_buildings = final_results[0][:all_buildings]
         @hash = final_results[0][:map_hash]
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']
         #in meta_desc
-        @photos_count = Upload.where(imageable_id: building_ids, imageable_type: 'Building').count
-        @reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
+        @photos_count = Building.building_photos(@buildings).count
+        @reviews_count = Building.building_reviews(@buildings).count
       else
         if @boundary_coords.present? and @boundary_coords.first.length > 1
           @lat = @boundary_coords.first.first[:lat]

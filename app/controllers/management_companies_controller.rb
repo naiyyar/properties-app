@@ -27,15 +27,13 @@ class ManagementCompaniesController < ApplicationController
   def show
     @show_map_btn = @half_footer = true
     buildings = @management_company.cached_buildings.includes(:uploads, :building_average)
-    building_ids = buildings.pluck(:id)
-    @broker_percent = BrokerFeePercent.first.percent_amount
-    final_results = Building.with_featured_building(buildings, building_ids, params[:page])
+    #@broker_percent = BrokerFeePercent.first.percent_amount
+    final_results = Building.with_featured_building(buildings, params[:page])
     @manage_buildings = final_results[1] if !params[:object_id].present?
     @all_buildings = final_results[0][:all_buildings]
-    
-    #@aggregate_reviews = @management_company.aggregate_reviews(buildings)
     @recommended_percent = @management_company.recommended_percent(buildings)
-    @reviews = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
+    #@reviews = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
+    @reviews = Building.building_reviews(buildings)
     @total_reviews = @reviews.present? ? @reviews.count : 0
     @reviews = @reviews.limit(10)
     if buildings.present?
@@ -52,10 +50,10 @@ class ManagementCompaniesController < ApplicationController
       end
       @zoom = buildings.length > 60 ? 13 : 11
     end
-    @building_photos = Upload.where(imageable_id: building_ids, imageable_type: 'Building')
+    @building_photos_count = Building.building_photos(@all_buildings).count
     @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 
                   for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
-                  Click to view #{@building_photos.count} photos and #{@total_reviews} reviews."
+                  Click to view #{@building_photos_count} photos and #{@total_reviews} reviews."
   end
 
   # GET /management_companies/new

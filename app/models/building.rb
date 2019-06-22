@@ -128,6 +128,23 @@ class Building < ActiveRecord::Base
     ]
   )
 
+  #
+  scope :saved_favourites, -> (user) do
+    joins(:favorites).where('buildings.id = favorites.favorable_id AND favorites.favoriter_id = ?', user.id )
+  end
+
+  scope :active_featured_buildings, -> do
+    joins(:featured_building).where('buildings.id = featured_buildings.building_id AND active is true')
+  end
+
+  scope :building_photos, -> (buildings) do 
+    buildings.joins(:uploads).where('buildings.id = uploads.imageable_id AND imageable_type = ?', 'Building')
+  end
+
+  scope :building_reviews, -> (buildings) do 
+    buildings.joins(:reviews).where('buildings.id = reviews.reviewable_id AND reviewable_type = ?', 'Building')
+  end
+
   #amenities scopes
   scope :doorman, -> { where(doorman: true) }
   scope :courtyard, -> { where(courtyard: true) }
@@ -172,14 +189,6 @@ class Building < ActiveRecord::Base
   # end
 
   def self.buildings_json_hash(buildings)
-    # if top_two_featured_buildings.present?
-    #   if buildings.kind_of? Array
-    #     buildings = buildings - top_two_featured_buildings
-    #   else
-    #     buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
-    #   end
-    #   buildings = top_two_featured_buildings + buildings
-    # end
     unless buildings.class == Array
       buildings.select(:id, 
                         :building_name, 
