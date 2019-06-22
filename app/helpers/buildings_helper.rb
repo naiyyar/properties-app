@@ -106,7 +106,7 @@ module BuildingsHelper
 	def recommended_percent object
 		thumb_icon = "| <span class='fa fa-thumbs-up recommended'></span>"
 		recommended = ''
-		if object.present?
+		if object.present? and object.recommended_percent.present?
 			rec_percent = object.recommended_percent
 			if rec_percent.nan? 
 				recommended = "#{thumb_icon} --%"
