@@ -70,7 +70,7 @@ class Building < ActiveRecord::Base
 
   #form some buildings when submitting reviews getting
   #Error: undefined method `address=' for #<Building
-  attr_accessor :address, :uploaded_images
+  attr_accessor :address, :first_image, :min_saved_amount, :uploaded_images_count
 
   belongs_to :user
   has_many :reviews, as: :reviewable
@@ -200,15 +200,18 @@ class Building < ActiveRecord::Base
 
   def self.city_count city, sub_boroughs = nil
     if sub_boroughs.present?
-      buildings = where('city = ? OR neighborhood in (?)', city, sub_boroughs)
+      Rails.cache.fetch([self, city, 'sub_boroughs']) { where('city = ? OR neighborhood in (?)', city, sub_boroughs).count }
     else
-      buildings = where(city: city)
+      Rails.cache.fetch([self, city]) { where(city: city).count }
     end
-    buildings.count
   end
 
   def suggested_percent
     Vote.recommended_percent(self)
+  end
+
+  def bedroom_ranges
+    [studio, one_bed, two_bed, three_bed, four_plus_bed].compact
   end
 
   def saved_amount(broker_percent)
@@ -245,6 +248,7 @@ class Building < ActiveRecord::Base
   end
 
   def image_uploads
+    #including buildings + units images
     uploads.where.not(image_file_name: nil).where("imageable_id = ? or imageable_id in (?)", id, units.pluck(:id)).includes(:imageable)
   end
 
@@ -484,10 +488,6 @@ class Building < ActiveRecord::Base
     else
       '$$$$'
     end
-  end
-
-  def bedroom_ranges
-    Building.where(id: self.id).select(:studio, :one_bed, :two_bed, :three_bed, :four_plus_bed).to_a.first.attributes.values.compact
   end
 
   def bedroom_types?

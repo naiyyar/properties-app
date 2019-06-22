@@ -90,11 +90,9 @@ class HomeController < ApplicationController
           end
         end
       end
-      #to calculate save amount
-      @broker_percent = BrokerFeePercent.first.percent_amount
-      
-      @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
 
+      @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
+      @neighborhood_links_count = @neighborhood_links.count
       @meta_desc = "#{@tab_title_text.try(:titleize)} has #{@buildings.length if @buildings.present?} "+ 
                   "no fee apartment, no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. "+ 
                   "View #{@photos_count} photos and #{@reviews_count} reviews."

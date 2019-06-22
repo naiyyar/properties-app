@@ -10,12 +10,12 @@ module BuildingSearch
         results[:zoom] = (search_string == 'New York' ? 12 : 14)
         unless search_string == 'New York'
           if params[:searched_by] == 'zipcode'
-            results[:buildings] = where('zipcode = ?', search_string)
+            results[:buildings] = cached_buildings_by_zip('zipcode', search_string)
             results[:boundary_coords] << Gcoordinate.where(zipcode: search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
           elsif params[:searched_by] == 'no-fee-apartments-nyc-neighborhoods'
             results[:buildings] = buildings_in_neighborhood(search_string)
           else
-            results[:buildings] = where("city = ? OR neighborhood in (?)", search_string, sub_borough[search_string])
+            results[:buildings] = cached_buildings_by_city_or_nb(search_string, sub_borough[search_string])
             results[:zoom] = 12
           end
         else
@@ -94,7 +94,14 @@ module BuildingSearch
     else
       all_buildings = per_page_buildings
     end
-    all_buildings.map{|b| b.uploaded_images = b.image_uploads}
+    broker_percent = BrokerFeePercent.first.percent_amount
+    all_buildings.each do |b| 
+      images = b.chached_image_uploads
+      b.first_image = images[0]
+      b.uploaded_images_count = images.count
+      b.min_saved_amount = b.min_save_amount(broker_percent)
+    end
+    
     final_results[:all_buildings] = all_buildings
     final_results[:map_hash] = buildings_json_hash(top_two_featured_buildings, buildings)
     
@@ -103,31 +110,39 @@ module BuildingSearch
 
 	def search_by_zipcodes(criteria)
     # regexp = /#{criteria}/i;
-    Building.search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
+    search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
     # results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
+  def cached_buildings_by_zip searched_by, term
+    Rails.cache.fetch([self, searched_by, term]) { where('zipcode = ?', term) }
+  end
+
+  def cached_buildings_by_city_or_nb term, sub_borough
+    Rails.cache.fetch([self, term]) { where("city = ? OR neighborhood in (?)", term, sub_borough) }
+  end
+
   def search_by_pneighborhoods(criteria)
-    Building.search_by_pneighborhood(criteria).order(:neighborhoods_parent).to_a.uniq(&:neighborhoods_parent)
+    search_by_pneighborhood(criteria).order(:neighborhoods_parent).to_a.uniq(&:neighborhoods_parent)
   end
 
   def search_by_building_name(criteria)
-    Building.text_search_by_building_name(criteria).reorder('building_name ASC')
+    text_search_by_building_name(criteria).reorder('building_name ASC')
   end
 
   def buildings_in_neighborhood search_term
     search_term = (search_term == 'Soho' ? 'SoHo' : search_term)
-    Building.where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
+    Rails.cache.fetch([self, search_term, 'neighborhoods']) { where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term) }
   end
 
   def buildings_in_city city
-    Building.where("city @@ :q" , q: city)
+    Rails.cache.fetch([self, city, 'city']) { where("city @@ :q" , q: city) }
   end
 
   #Contribute search method
   def text_search(term)
     if term.present?
-      Building.search(term)
+      search(term)
     else
       self.all
     end

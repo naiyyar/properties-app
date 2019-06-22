@@ -56,7 +56,7 @@ class Neighborhood < ActiveRecord::Base
   end
 
   def self.nb_borough(nb, area)
-    where(name: nb, boroughs: area.upcase)
+    Rails.cache.fetch([self, nb]) { where(name: nb, boroughs: area.upcase) }
   end
 
 end

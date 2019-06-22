@@ -15,12 +15,12 @@
         %li
           %a{"data-toggle" => "tab", href: "#resourceLinks", role: "tab"}
             %b
-              NEIGHBORHOOD GUIDES #{"(#{@neighborhood_links.count})" if @neighborhood_links.present?}
+              NEIGHBORHOOD GUIDES #{"(#{@neighborhood_links_count})"}
       
     .tab-content.tab-scroll11{style: "background-color: #f3f3f3;"}
       - unless browser.device.mobile?
         #resourceLinks.tab-pane.fade
-          - if @neighborhood_links.present?
+          - if @neighborhood_links_count > 0
             %ul.propList
               = render :partial => 'neighborhood_links/neighborhood_link', :collection => @neighborhood_links, :as => :neighborhood_link, cache: true 
       
@@ -28,7 +28,7 @@
         - if @per_page_buildings.present?
           .resultsList
             #load-more-buildings.row
-              = render partial: 'buildings/building', :collection => @all_buildings, :as => :building, cache: false
+              = render partial: 'buildings/building', :collection => @all_buildings, :as => :building, cache: true
           
           - if @buildings.blank? and @per_page_buildings.total_pages == @per_page_buildings.current_page
             .text-center{style: "padding: 12px 4px;"}
