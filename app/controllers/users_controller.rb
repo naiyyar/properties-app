@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	before_filter :set_user, only: [:edit, :update, :show, :contribution, :saved_buildings]
 
 	def index
-		@users = User.order('created_at desc').includes(:buildings)
+		@users = User.order('created_at desc').includes(:buildings, :favorites)
 	end
 
 	def contribution
