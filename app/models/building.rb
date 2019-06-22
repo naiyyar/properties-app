@@ -133,8 +133,8 @@ class Building < ActiveRecord::Base
     joins(:favorites).where('buildings.id = favorites.favorable_id AND favorites.favoriter_id = ?', user.id )
   end
 
-  scope :active_featured_buildings, -> do
-    joins(:featured_building).where('buildings.id = featured_buildings.building_id AND active is true')
+  scope :active_featured_buildings, -> (buildings) do 
+    buildings.joins(:featured_building).where('buildings.id = featured_buildings.building_id AND active is true')
   end
 
   scope :building_photos, -> (buildings) do 
