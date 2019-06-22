@@ -53,33 +53,18 @@ class HomeController < ApplicationController
   def search
     search_term = params['search_term']
     if search_term != 'glyphicons-halflings-regular'
-      unless params[:latitude].present? and params[:longitude].present?
-        if params[:searched_by] != 'address' and params[:searched_by] != 'no-fee-management-companies-nyc'
-          @zoom = (@search_string == 'New York' ? 12 : 14)
-          #searched: Method in building search module
-          results = Building.searched(params[:searched_by], @search_string, @sub_borough)
-          building = @buildings = @searched_buildings = results['buildings']
-          @boundary_coords = results['boundary_coords'] if results['boundary_coords'].present?
-          @zoom = results['zoom'] if results['zoom'].present?
-        elsif params[:searched_by] == 'address'
-          building = Building.where(building_street_address: params[:search_term])
-          #searching because some address has extra white space in last so can not match exactly with address search_term
-          building = Building.where('building_street_address like ?', "%#{params[:search_term]}%") if building.blank?
-          redirect_to building_path(building.first) if building.present?
-        elsif params[:searched_by] == 'no-fee-management-companies-nyc'
-          @company = ManagementCompany.where(name: params[:search_term])
-          redirect_to management_company_path(@company.first) if @company.present?
-        end
+      results = Building.apt_search(params, @search_string, @sub_borough)
+      if results[:searched_by] == 'address'
+        building = results[:building]
+        redirect_to building_path(building.first) if building.present?
+      elsif results[:searched_by] == 'no-fee-management-companies-nyc'
+        redirect_to management_company_path(results[:company].first) if results[:company].present?
       else
-        @buildings = Building.redo_search_buildings(params)
-        building = @buildings
-        @zoom = params[:zoomlevel] || 14
+        @buildings = @searched_buildings = results[:buildings]
+        @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
+        @zoom = results[:zoom] if results[:zoom].present?
       end
-      
-      @buildings = Building.filtered_buildings(@buildings, params[:filter]) if params[:filter].present?
-      @buildings = Building.sort_buildings(@buildings, params[:sort_by]) if (params[:sort_by].present? and @buildings.present?)
-      
-      #added unless @buildings.kind_of? Array => getting ratings sorting results in array
+          
       if @buildings.present?
         building_ids = @buildings.pluck(:id)
         final_results = Building.with_featured_building(@buildings, building_ids, params[:page])

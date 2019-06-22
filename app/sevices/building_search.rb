@@ -1,35 +1,54 @@
 module BuildingSearch
 
-	def searched searched_by, search_string, sub_borough
-		results = {}
-		unless search_string == 'New York'
-      results['zoom'] = nil
-      results['boundary_coords'] = nil
-      @boundary_coords = []
-      if searched_by == 'zipcode'
-        results['buildings'] = Building.where('zipcode = ?', search_string)
-        results['boundary_coords'] << Gcoordinate.where(zipcode: search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
-      elsif searched_by == 'no-fee-apartments-nyc-neighborhoods'
-        results['buildings'] = Building.buildings_in_neighborhood(search_string)
-      else
-        results['buildings'] = Building.where("city = ? OR neighborhood in (?)", search_string, sub_borough[search_string])
-      	results['zoom'] = 12
+	def apt_search params, search_string, sub_borough
+    results = {}
+    results[:zoom] = nil
+    results[:boundary_coords] = []
+    results[:searched_by] = params[:searched_by]
+    unless params[:latitude].present? and params[:longitude].present?
+      if !['address', 'no-fee-management-companies-nyc'].include?(params[:searched_by])
+        results[:zoom] = (search_string == 'New York' ? 12 : 14)
+        unless search_string == 'New York'
+          if params[:searched_by] == 'zipcode'
+            results[:buildings] = where('zipcode = ?', search_string)
+            results[:boundary_coords] << Gcoordinate.where(zipcode: search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
+          elsif params[:searched_by] == 'no-fee-apartments-nyc-neighborhoods'
+            results[:buildings] = buildings_in_neighborhood(search_string)
+          else
+            results[:buildings] = where("city = ? OR neighborhood in (?)", search_string, sub_borough[search_string])
+            results[:zoom] = 12
+          end
+        else
+          results[:buildings] = buildings_in_city(search_string)
+        end
+      elsif params[:searched_by] == 'address'
+        building = where(building_street_address: params[:search_term])
+        #searching because some address has extra white space in last so can not match exactly with address search_term
+        building = where('building_street_address like ?', "%#{params[:search_term]}%") if building.blank?
+        results[:building] = building
+      elsif params[:searched_by] == 'no-fee-management-companies-nyc'
+        results[:company] = ManagementCompany.where(name: params[:search_term])
       end
     else
-      results['buildings'] = Building.buildings_in_city(search_string)
+      results[:buildings] = redo_search_buildings(params)
+      results[:zoom] = params[:zoomlevel] || 14
     end
+
+    results[:buildings] = filtered_buildings(results[:buildings], params[:filter]) if params[:filter].present?
+    results[:buildings] = sort_buildings(results[:buildings], params[:sort_by]) if (params[:sort_by].present? and results[:buildings].present?)
+
     return results
-	end
+  end
 
 	def redo_search_buildings params
     @zoom = params[:zoomlevel].to_i
     custom_latng = [params[:latitude].to_f, params[:longitude].to_f]
     distance = redo_search_distance(1.5)
-    buildings = Building.near(custom_latng, distance, units: :km)
+    buildings = near(custom_latng, distance, units: :km)
     distance = redo_search_distance(2.0)
-    buildings = Building.near(custom_latng, distance, units: :km) if buildings.blank?
+    buildings = near(custom_latng, distance, units: :km) if buildings.blank?
     distance = redo_search_distance(4.5)
-    buildings = Building.near(custom_latng, distance, units: :km) if buildings.blank?
+    buildings = near(custom_latng, distance, units: :km) if buildings.blank?
 
     buildings
   end
