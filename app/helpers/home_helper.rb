@@ -227,10 +227,9 @@ module HomeHelper
 
 	def search_by_neighborhood_link nb, area
 		if @show_nb_counts
-			borough = Neighborhood.nb_borough(nb, area)
 			link_to search_link(nb, area), data: { nbname: nb, st: searchable_text(nb, area) } do
-				if borough.present?
-					"#{borough.first.name} (<span>#{borough.first.buildings_count}</span>)".html_safe
+				if @pop_nb_hash[nb].present?
+					"#{nb} (<span>#{@pop_nb_hash[nb]}</span>)".html_safe
 				else
 					"#{nb} (#{parent_neighborhoods_count(nb)})"
 				end

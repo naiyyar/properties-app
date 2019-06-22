@@ -55,8 +55,8 @@ class Neighborhood < ActiveRecord::Base
     Rails.cache.fetch([self, 'cached_nb_buildings_count', name]) { nb_buildings_count(name) }
   end
 
-  def self.nb_borough(nb, area)
-    Rails.cache.fetch([self, nb]) { where(name: nb, boroughs: area.upcase) }
-  end
+  # def self.nb_borough(nb, area)
+  #   Rails.cache.fetch([self, nb]) { where(name: nb, boroughs: area.upcase) }
+  # end
 
 end

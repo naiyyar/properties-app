@@ -15,11 +15,15 @@ class ApplicationController < ActionController::Base
   end
 
   def popular_neighborhoods
+    @pop_nb_hash = {}
     if @show_nb_counts
       @uptown_count = Neighborhood.cached_nb_buildings_count(view_context.uptown_sub_borough)
       @brooklyn_count = Building.city_count('Brooklyn', view_context.brooklyn_sub_borough)
       @queens_count = Building.city_count('Queens', view_context.queens_sub_borough)
       @bronx_count = Building.city_count('Bronx')
+      Neighborhood.all.each do |nb|
+        @pop_nb_hash[nb.name] = nb.buildings_count
+      end
     end
   end
 

@@ -103,7 +103,7 @@ module BuildingSearch
     end
     
     final_results[:all_buildings] = all_buildings
-    final_results[:map_hash] = buildings_json_hash(top_two_featured_buildings, buildings)
+    final_results[:map_hash] = buildings_json_hash(all_buildings)
     
     return final_results, per_page_buildings
   end

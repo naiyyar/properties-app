@@ -129,7 +129,7 @@ class ReviewsController < ApplicationController
   end
 
   def clear_cache
-    Rails.cache.clear()
+    @reviewable.update(updated_at: Time.now) if @reviewable.present?
   end
 
 end

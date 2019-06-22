@@ -171,15 +171,15 @@ class Building < ActiveRecord::Base
   #   ]
   # end
 
-  def self.buildings_json_hash(top_two_featured_buildings=nil, buildings)
-    if top_two_featured_buildings.present?
-      if buildings.kind_of? Array
-        buildings = buildings - top_two_featured_buildings
-      else
-        buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
-      end
-      buildings = top_two_featured_buildings + buildings
-    end
+  def self.buildings_json_hash(buildings)
+    # if top_two_featured_buildings.present?
+    #   if buildings.kind_of? Array
+    #     buildings = buildings - top_two_featured_buildings
+    #   else
+    #     buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
+    #   end
+    #   buildings = top_two_featured_buildings + buildings
+    # end
     unless buildings.class == Array
       buildings.select(:id, 
                         :building_name, 

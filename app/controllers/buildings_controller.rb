@@ -239,7 +239,8 @@ class BuildingsController < ApplicationController
   end
 
   def clear_cache
-    Rails.cache.clear()
+    #Rails.cache.clear()
+    @building.update(updated_at: Time.now)
   end
 
 end
