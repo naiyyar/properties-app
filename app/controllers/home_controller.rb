@@ -72,8 +72,8 @@ class HomeController < ApplicationController
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']
         #in meta_desc
-        @photos_count = Building.building_photos(@buildings).count
-        @reviews_count = Building.building_reviews(@buildings).count
+        @photos_count = Building.building_photos(@buildings).length
+        @reviews_count = Building.building_reviews(@buildings).length
       else
         if @boundary_coords.present? and @boundary_coords.first.length > 1
           @lat = @boundary_coords.first.first[:lat]
