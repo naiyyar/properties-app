@@ -23,27 +23,27 @@
         $('#content').height(contentHeight);
 
         // Add custom scrollbar for left side navigation
-        // if(windowWidth > 767) {
-        //     $('.bigNav').slimScroll({
-        //         height : contentHeight - $('.leftUserWraper').height()
-        //     });
-        // } else {
-        //     $('.bigNav').slimScroll({
-        //         height : contentHeight
-        //     });
-        // }
-        // if($('.bigNav').parent('.slimScrollDiv').size() > 0) {
-        //     $('.bigNav').parent().replaceWith($('.bigNav'));
-        //     if(windowWidth > 767) {
-        //         $('.bigNav').slimScroll({
-        //             height : contentHeight - $('.leftUserWraper').height()
-        //         });
-        //     } else {
-        //         $('.bigNav').slimScroll({
-        //             height : contentHeight
-        //         });
-        //     }
-        // }
+        if(windowWidth > 767) {
+            $('.bigNav').slimScroll({
+                height : contentHeight - $('.leftUserWraper').height()
+            });
+        } else {
+            $('.bigNav').slimScroll({
+                height : contentHeight
+            });
+        }
+        if($('.bigNav').parent('.slimScrollDiv').size() > 0) {
+            $('.bigNav').parent().replaceWith($('.bigNav'));
+            if(windowWidth > 767) {
+                $('.bigNav').slimScroll({
+                    height : contentHeight - $('.leftUserWraper').height()
+                });
+            } else {
+                $('.bigNav').slimScroll({
+                    height : contentHeight
+                });
+            }
+        }
     }
 
     // var repositionTooltip = function( e, ui ){
