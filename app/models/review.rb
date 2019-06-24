@@ -48,6 +48,10 @@ class Review < ActiveRecord::Base
     ]
   )
 
+  scope :building_reviews, -> (buildings) do 
+    where('reviewable_type = ? AND reviewable_id in (?)', 'Building', buildings.pluck(:id))
+  end
+
   #reviewer
   def user_name
   	self.user.name ? self.user.name : self.user.email[/[^@]+/]

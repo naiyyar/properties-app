@@ -55,11 +55,16 @@
 #  price                   :integer
 #  active_web              :boolean
 #  active_email            :boolean
-#  recommended_percent     :float
 
 class Building < ActiveRecord::Base
   include PgSearch
   include Imageable
+  include SaveBuildingNeighborhood
+
+  #Search and filtering methods
+  extend BuildingSearch
+  extend ImportBuildingReviews
+
   acts_as_voteable
   resourcify
   DIMENSIONS = ['cleanliness','noise','safe','health','responsiveness','management']
@@ -92,11 +97,6 @@ class Building < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
-
-  #callbacks
-  after_create :save_neighborhood, :update_neighborhood_counts
-  after_update :update_neighborhood, :update_neighborhood_counts, :if => Proc.new{ |obj| obj.continue_call_back? }
-  after_destroy :update_neighborhood_counts
 
   #multisearchable
   # PgSearch.multisearch_options = {
@@ -141,10 +141,6 @@ class Building < ActiveRecord::Base
     buildings.joins(:uploads).where('buildings.id = uploads.imageable_id AND imageable_type = ?', 'Building')
   end
 
-  scope :building_reviews, -> (buildings) do 
-    buildings.joins(:reviews).where('buildings.id = reviews.reviewable_id AND reviewable_type = ?', 'Building')
-  end
-
   #amenities scopes
   scope :doorman, -> { where(doorman: true) }
   scope :courtyard, -> { where(courtyard: true) }
@@ -169,11 +165,6 @@ class Building < ActiveRecord::Base
   scope :two_bed, -> { where(two_bed: 2) }
   scope :three_bed, -> { where(three_bed: 3) }
   scope :four_bed, -> { where(four_plus_bed: 4) }
-
-
-  #Service module
-  #Search and filtering methods
-  extend BuildingSearch
 
   #Methods
 
@@ -404,66 +395,6 @@ class Building < ActiveRecord::Base
     buildings = Building.where('id <> ?', self.id)
   end
 
-  def self.import_reviews file
-    user = User.find_by_email('reviews@transparentcity.co')
-    spreadsheet = open_spreadsheet(file)
-    header = spreadsheet.row(1)
-    (2..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose ]
-      if row['building_address'].present?
-        @buildings = Building.where(building_street_address: row['building_address'], zipcode: row['zipcode'])
-        unless @buildings.present?
-          @building = Building.create({ building_street_address: row['building_address'], 
-                                      city: row['city'], 
-                                      state: 'NY', 
-                                      zipcode: row['zipcode']
-                                    })
-        else
-          @building = @buildings.first
-        end
-        
-        if @building.present? and @building.id.present?
-          rev = Review.new
-          rev.attributes = row.to_hash.slice(*row.to_hash.keys[5..8]) #excluding building specific attributes
-          
-          rev[:reviewable_id] = @building.id
-          rev[:reviewable_type] = 'Building'
-          rev[:anonymous] = true
-          rev[:created_at] = DateTime.parse(row['created_at'])
-          rev[:updated_at] = DateTime.parse(row['created_at'])
-          rev[:user_id] = user.id
-          rev[:tos_agreement] = true
-          rev[:scraped] = true
-          rev.save!
-
-          #row['rating'] => score
-          if rev.present? and rev.id.present?
-            user.create_rating(row['rating'], @building, rev.id, 'building')
-            if row['vote'].present? and row['vote'] == 'yes'.downcase
-              @vote = user.vote_for(@building)
-            else
-              @vote = user.vote_against(@building)
-            end
-            
-            if @vote.present?
-              @vote.review_id = rev.id
-              @vote.save
-            end
-          end
-        end
-      end
-    end
-  end
-
-  def self.open_spreadsheet(file)
-    case File.extname(file.original_filename)
-     when '.csv' then Roo::CSV.new(file.path)
-     when '.xls' then Roo::Excel.new(file.path)
-     when '.xlsx' then Roo::Excelx.new(file.path)
-     else raise "Unknown file type: #{file.original_filename}"
-    end
-  end
-
   def formatted_neighborhood type=''
     if type == 'parent'
       @neighborhood = self.neighborhoods_parent
@@ -522,134 +453,5 @@ class Building < ActiveRecord::Base
   def favorite_by?(favoriter)
     favorites.find_by(favoriter_id: favoriter.id, favoriter_type: favoriter.class.base_class.name).present?
   end  
-
-  def continue_call_back?
-    !self.avg_rating_changed? && !recommended_percent_changed?
-  end
-
-  private
-
-  #child neighbohoods
-  def predifined_neighborhoods
-    arr = []
-    File.open("#{Rails.root}/public/neighborhoods.txt", "r").each_line do |line|
-      arr << line.split(/\n/)
-    end
-    nyc_neighborhoods = arr.flatten.uniq
-    nyc_neighborhoods << ApplicationController.helpers.queens_borough
-    nyc_neighborhoods << ApplicationController.helpers.bronx_borough
-    return  nyc_neighborhoods.flatten.sort
-  end
-
-  def just_parent_neighborhoods
-    ['Harlem']
-  end
-
-  #Parent neighbohoods
-  def parent_neighborhoods
-    [ 'Midtown East','Midtown North',
-      'Midtown South','Midtown West','Upper West Side',
-      'Upper East Side','Lower East Side',
-      'Greenwich Village','Flatbush - Ditmas Park'
-    ]
-  end
-
-  def grandparent_neighborhoods
-    ['Lower Manhattan', 'Upper Manhattan', 'Midtown']
-  end
-
-  #saving neighbohoods
-  def neighborhoods
-    search = Geocoder.search([latitude, longitude])
-    if search.present? and first_neighborhood.blank?
-      neighborhood1 = neighborhood2 = neighborhood3 = ''
-      #search for child neighborhoods
-      search[0..7].each_with_index do |geo_result, index|
-        #finding neighborhood
-        neighborhood = geo_result.address_components_of_type(:neighborhood)
-        if neighborhood.present?
-          neighborhood = neighborhood.first['long_name']
-          sublocality = search[0].address_components_of_type(:sublocality)
-          if sublocality.present?
-            locality = sublocality.first['long_name']
-          else
-            locality = search[0].address_components_of_type(:locality).first['long_name']
-          end
-          #checking main neighborhood
-          if ['Queens','Brooklyn','Bronx'].include?(locality) and self.city == neighborhood
-            neighborhood1 = neighborhood
-          elsif predifined_neighborhoods.include? neighborhood
-            neighborhood1 = neighborhood if neighborhood1.blank?
-          elsif just_parent_neighborhoods.include? neighborhood
-            neighborhood2 = neighborhood
-          elsif parent_neighborhoods.include? neighborhood #checking parent of main neighborhood
-            neighborhood2 = neighborhood if neighborhood2.blank?
-            neighborhood1 = neighborhood if neighborhood1.blank? and index >= 2
-          elsif grandparent_neighborhoods.include? neighborhood #checking grandparent of main neighborhood
-            neighborhood3 = neighborhood
-            neighborhood2 = neighborhood if neighborhood2.blank? and neighborhood1.blank?
-          else
-            neighborhood1 = neighborhood if neighborhood1.blank?
-            parent_neighborhood = 'East Village'
-            neighborhood2 = parent_neighborhood
-          end
-          #discontinue once neighborhood is saved
-          break
-        end
-      end #end search loop
-    else
-      neighborhood3 = self.neighborhood3
-      if ['Alphabet City','Ukrainian Village'].include?(self.neighborhood)
-        neighborhood1 = 'East Village'
-        neighborhood2 = 'Lower Manhattan'
-      elsif self.neighborhood == 'East Village'
-        neighborhood1 = self.neighborhood
-        neighborhood2 = 'Lower Manhattan'
-      elsif ['Rose Hill'].include?(self.neighborhood)
-        neighborhood1 = 'Kips Bay'
-        neighborhood3 = 'Midtown'
-      elsif ['Bloomingdale'].include?(self.neighborhood)
-        neighborhood1 = 'Upper West Side'
-      else
-        neighborhood1 = self.neighborhood
-        neighborhood2 = parent_neighborhood
-      end
-    end #end search if
-
-    return neighborhood1, neighborhood2, neighborhood3
-  end
-
-  def parent_neighborhood
-    if self.neighborhoods_parent.present?
-      return self.neighborhoods_parent
-    else
-      buildings = Building.where('neighborhoods_parent is not null and neighborhood = ?', self.neighborhood)
-      return buildings.present? ? buildings.first.neighborhoods_parent : nil
-    end
-  end
-
-  def save_neighborhood
-    if neighborhoods.present?
-      self.neighborhood = neighborhoods[0]
-      self.neighborhoods_parent = neighborhoods[1]
-      self.neighborhood3 = neighborhoods[2]
-      self.save
-    end
-  end
-
-  def update_neighborhood
-    if neighborhoods.present?
-      self.update_columns(neighborhood: neighborhoods[0], neighborhoods_parent: neighborhoods[1], neighborhood3: neighborhoods[2])
-    end
-  end
-
-  def update_neighborhood_counts
-    popular_neighborhoods.each do |hood|
-      if hood.buildings_count.to_i >= 0
-        hood.buildings_count = Building.buildings_in_neighborhood(hood.name).count
-        hood.save
-      end
-    end
-  end
 
 end

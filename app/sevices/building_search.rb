@@ -90,12 +90,8 @@ module BuildingSearch
       all_buildings = per_page_buildings
     end
 
-    all_buildings.each do |b| 
-      images = b.chached_image_uploads
-      b.first_image = images[0]
-      b.uploaded_images_count = images.count
-      b.min_saved_amount = b.min_save_amount(broker_percent)
-    end
+    #setting up images, min_saved_amount attributes
+    set_virtul_attributes(all_buildings)
 
     if top_two_featured_buildings.present?
       if buildings.kind_of? Array
@@ -110,6 +106,15 @@ module BuildingSearch
     final_results[:map_hash] = buildings_json_hash(buildings)
     
     return final_results, per_page_buildings
+  end
+
+  def set_virtul_attributes building
+    building.each do |b| 
+      images = b.chached_image_uploads
+      b.first_image = images[0]
+      b.uploaded_images_count = images.count
+      b.min_saved_amount = b.min_save_amount(broker_percent)
+    end
   end
 
 	def search_by_zipcodes(criteria)
