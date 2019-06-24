@@ -93,7 +93,6 @@
         })
     }
 
-
     $(document).on('click', '.modal-su', function() {
         $('#signin').modal('hide');
         $('#signup').modal('show');
@@ -109,9 +108,6 @@
         if(e.target.id != 'search_term' && e.target.id != 'location-link'){
             hideAutoSearchList();
         }
-        // if(e.target.id != 'search_term' && e.target.id != 'location-link'){
-        //     hideCurrentLocationBar();
-        // }
     })
 
     $('#search_term').keyup(function(e){
@@ -134,14 +130,6 @@
             $('.home #search_term').addClass('border-bottom-lr-radius');
         }, 200);
     }
-
-    // function hideCurrentLocationBar(){
-    //     var curr_loc = $('.current-location');
-    //     if(!curr_loc.hasClass('hidden')){
-    //         curr_loc.addClass('hidden');    
-    //     }
-    //     $('.home #search_term').addClass('border-bottom-lr-radius');   
-    // }
 
     //Searching building on neighborhood click
     $('.borough-neighborhood').click(function(e){
