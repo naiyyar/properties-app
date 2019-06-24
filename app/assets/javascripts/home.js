@@ -1,11 +1,5 @@
 (function($) {
     "use strict";
-
-    //$('#search_term').on('focus', function(){
-        //$('.current-location').removeClass('hidden');
-        //$(this).removeClass('border-bottom-lr-radius');
-    //});
-
     
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
         $('body').addClass('no-touch');

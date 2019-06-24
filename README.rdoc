@@ -23,6 +23,9 @@ Things you may want to cover:
 
 * ...
 
+Theme URL
+http://mariusn.com/themes/reales/blog.html
+
 GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git push origin search-changes
 GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git push origin master
 heroku config:set GOOGLE_CLIENT_ID=joesmith

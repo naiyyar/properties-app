@@ -26,8 +26,9 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= favicon_link_tag 'favicon.png' %>
-    
-    <script src="//maps.google.com/maps/api/js?v=3.32&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
+    <% if @gmaphash.present? %>
+      <script src="//maps.google.com/maps/api/js?v=3.32&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
+    <%end%>
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 
     <%= csrf_meta_tags %>
@@ -62,6 +63,7 @@
     <%= javascript_include_tag 'infobubble' %>
     <%= javascript_include_tag 'home' %>
     <%= javascript_include_tag 'zapp' %>
+    
     <%if current_user.blank? %>
       <%= render 'layouts/shared/signin'%>
       <%= render 'layouts/shared/signup'%>
