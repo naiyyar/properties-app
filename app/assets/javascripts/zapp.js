@@ -17,18 +17,11 @@
         contentHeight = windowHeight - headerHeight;
         contentWidth = $('#content').width();
 
-        // if(documentHeight >= windowHeight){
-        //     contentHeight = documentHeight
-        // }
-
         $('#leftSide').height(contentHeight);
         $('.closeLeftSide').height(contentHeight);
         $('#wrapper').height(contentHeight);
         $('#mapView').height(contentHeight);
         $('#content').height(contentHeight);
-        if (map) {
-            google.maps.event.trigger(map, 'resize');
-        }
 
         // Add custom scrollbar for left side navigation
         if(windowWidth > 767) {

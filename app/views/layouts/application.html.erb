@@ -66,24 +66,27 @@
     <%end%>
     
     <script type="text/javascript">
-      if($('#slider').length > 0){
-        $('#slider').rotateSlider({});
-      }
-      
-      $(function() {
+      window.onload = function(){
+
+        if($('#slider').length > 0){
+          $('#slider').rotateSlider({});
+        }
+        
+        //$(function() {
         new app.apartments;
-      });
+        //});
 
-      //hiding autocomplete search results when no input given
-      if($('#buildings-search-txt').length > 0){
-        $(document).on('keyup', '#buildings-search-txt', function(e) {
-          q = $(this).val();
+        //hiding autocomplete search results when no input given
+        if($('#buildings-search-txt').length > 0){
+          $(document).on('keyup', '#buildings-search-txt', function(e) {
+            q = $(this).val();
 
-          if (q == '') {
-            $(".ui-autocomplete").hide();
-            $(".no-match-link").addClass('hidden');
-          }
-        })
+            if (q == '') {
+              $(".ui-autocomplete").hide();
+              $(".no-match-link").addClass('hidden');
+            }
+          })
+        }
       }
     </script>
 

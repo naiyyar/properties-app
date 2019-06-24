@@ -118,7 +118,6 @@
       function resize_map(){
         setTimeout(function() {
           if (map) {
-            console.log('resize')
             google.maps.event.trigger(map, 'resize');
             map.setCenter(new google.maps.LatLng(lat, lng));
             map.setZoom(zoom);
