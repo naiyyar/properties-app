@@ -52,6 +52,8 @@ class Unit < ActiveRecord::Base
 	has_many :rental_price_histories, dependent: :destroy
 	belongs_to :user
 
+  attr_accessor :recommended_percent, :reviews_count
+
 	include Imageable
 
 	default_scope { order('updated_at desc') }

@@ -24,7 +24,7 @@
     <!-- <meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
 
     <%= stylesheet_link_tag 'application', media: 'all', async: true %>
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'application', async: Rails.env.production? %>
     <%= favicon_link_tag 'favicon.png' %>
 
     <%= csrf_meta_tags %>
