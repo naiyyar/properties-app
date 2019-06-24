@@ -10,7 +10,7 @@
 
     // calculations for elements that changes size on window resize
     var windowResizeHandler = function() {
-        documentHeight = $(document).innerHeight();
+        //documentHeight = $(document).innerHeight();
         windowHeight = window.innerHeight;
         windowWidth = $(window).width();
         headerHeight = $('#header').height();
@@ -327,11 +327,6 @@
         }
         //}
          
-    });
-
-    //For mobile dropdown panel
-    $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
-        $('.popular-neighborhoods').slideToggle(200);
     });
 
      $('.handleSort').click(function(e) {

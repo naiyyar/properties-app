@@ -68,6 +68,11 @@
     <script type="text/javascript">
       window.onload = function(){
 
+        //For mobile dropdown panel
+        $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
+          $('.popular-neighborhoods').slideToggle(200);
+        });
+
         if($('#slider').length > 0){
           $('#slider').rotateSlider({});
         }
