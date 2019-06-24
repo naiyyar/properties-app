@@ -1,5 +1,5 @@
-var dropbox_url = 'https://www.dropbox.com/s/'
-var brooklyn_and_queens_neighborhoods_hash = [
+dropbox_url = 'https://www.dropbox.com/s/'
+brooklyn_and_queens_neighborhoods_hash = [
 	//{ key: 'Brooklyn', 						url: 'https://www.dropbox.com/s/p7bpftzv9e55i0o/brooklyn.kml?dl=1'},
 	{ key: 'Borough Park', 				url: dropbox_url+'iu4ih0c0xag21p3/borough_park.kml?dl=1' },
 	{ key: 'Canarsie', 						url: dropbox_url+'23ufopq3v4p1fie/canarsie.kml?dl=1' },
@@ -53,7 +53,7 @@ var brooklyn_and_queens_neighborhoods_hash = [
 	{ key: 'University Heights', 		url: dropbox_url+'18oak1cmrg36nuu/university_heights.kml?dl=1' }
 ]
 
-var brooklyn_and_queens_zipcodes_hash = [
+brooklyn_and_queens_zipcodes_hash = [
 	{ key: '11201', 				url: dropbox_url+'wjscg7dfog7aofw/11201.kml?dl=1' },
 	{ key: '11203', 				url: dropbox_url+'kqrmva4cwie82qd/11203.kml?dl=1' },
 	{ key: '11204', 				url: dropbox_url+'558eqzsg272ba1o/11204.kml?dl=1' },
@@ -154,7 +154,7 @@ var brooklyn_and_queens_zipcodes_hash = [
 	{ key: '11436', 				url: dropbox_url+'spst4jlynx0rxe0/11436.kml?dl=1' }
 ]
 
-var manhattan_neightborhoods_hash = [
+manhattan_neightborhoods_hash = [
 	//{key: 'New York', 					url: dropbox_url+'b8z3tmzzcf0uts6/new_york.kml?dl=1' },
 	{ key: 'Midtown', 					url: dropbox_url+'6dslyuv4hc4nz5k/midtown.kml?dl=1' },
 	{ key: 'Sutton Place', 			url: dropbox_url+'z67m9imvezwtx4k/sutton_place.kml?dl=1' },
