@@ -1,0 +1,143 @@
+<script type="text/javascript">
+	var map, current_user_id, current_building_id;
+  current_user_id = $('#cu').val();
+  if($("#mapHash").length > 0){
+    // Custom options for map
+    function initialize() {
+      var options = {
+        zoom: 14,
+        mapTypeControl: false,
+        zoomControlOptions: {
+          position: google.maps.ControlPosition.RIGHT_CENTER
+        },
+        gestureHandling: 'greedy',
+        streetViewControl: true,
+        streetViewControlOptions: {
+          position: google.maps.ControlPosition.RIGHT_CENTER
+        },
+      };
+
+      var props = $("#mapHash").data('map');
+      var lat = $("#mapHash").data('lat');
+      var lng = $("#mapHash").data('lng');
+      current_building_id = $('#cu_building_id').val();
+      var bounds = new google.maps.LatLngBounds();
+      var infobox = new InfoBubble({
+        maxWidth: 236,
+        position: new google.maps.LatLng(lng, lat),
+        shadowStyle: 3,
+        padding: 0,
+        backgroundColor: 'rgb(255,255,255)',
+        borderRadius: 2,
+        arrowSize: 10,
+        borderWidth: 0,
+        borderColor: '#2c2c2c',
+        disableAutoPan: true,
+        hideCloseButton: false,
+      });
+
+      //diabling right click on building edit form
+      // $(".edit_building").on("contextmenu",function(e){
+      //     return false;
+      // });
+
+      // function that adds the markers on map
+      var addMarkers = function(props, map) {
+        $.each(props, function(i,prop) {
+          var latlng = new google.maps.LatLng(prop.latitude, prop.longitude);
+          var default_icon = ''
+          if(parseInt(prop.id) != parseInt(current_building_id)){
+              var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
+              //default icon only when no price info available
+              default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),
+                              null,null,null, null)
+          }else{
+              default_icon = new google.maps.MarkerImage(markerIconBlue(),
+                              null,null,null, null)
+          }
+          var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            icon: default_icon,
+            draggable: false,
+          });
+
+          // default opening first fetured building marker
+          google.maps.event.addListener(marker, 'load', (function(marker, i) {
+            var object = prop
+            if(object.featured){
+              loadMarkerWindow(object.id, map, marker);
+            }
+          })(marker, i));
+          
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+              panorama = map.getStreetView();
+              panorama.setPosition(marker.getPosition());
+              google.maps.event.addListenerOnce(panorama, 'status_changed', function () {
+                panorama.setPov({
+                  heading: -265,
+                  zoom: 1,
+                  pitch: 0
+                });
+              });
+              return function() {
+                loadMarkerWindow(prop.id, map, marker);
+              }
+          })(marker, i));
+
+          google.maps.event.addDomListener(document.getElementById('header'),
+          'click', function() {
+            infobox.close();
+          });
+
+          google.maps.event.addDomListener(document.getElementById('content'),
+          'click', function() {
+            infobox.close();
+          });
+
+          google.maps.event.addListener(map, 'click', function() {
+            infobox.close();
+          });         
+        });
+      }
+      
+      setTimeout(function() {
+          $('body').removeClass('notransition');
+
+          map = new google.maps.Map(document.getElementById('mapView'), options);
+          map.setCenter(new google.maps.LatLng(lat, lng));
+          map.setZoom(14);
+
+          addMarkers(props, map);
+
+          var transitLayer = new google.maps.TransitLayer();
+          transitLayer.setMap(map);
+
+      }, 300);
+
+      function resize_map(){
+        setTimeout(function() {
+          if (map) {
+            console.log('resize')
+            google.maps.event.trigger(map, 'resize');
+            map.setCenter(new google.maps.LatLng(lat, lng));
+            map.setZoom(zoom);
+          }
+
+        }, 300);
+      }
+
+      function loadMarkerWindow(building_id, map, marker){
+        $.post('/load_infobox', {
+          object_id: building_id, 
+          building_show: false,
+          current_user_id: current_user_id,
+        }, function(data){
+          infobox.setContent(data.html);
+          infobox.open(map, marker);
+        });
+      }
+    }
+  }
+
+</script>
