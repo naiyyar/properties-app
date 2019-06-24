@@ -24,7 +24,7 @@
     <!-- <meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application', async: Rails.env.production?, defer: Rails.env.production? %>
+    <%= javascript_include_tag 'application' %>
     <%= favicon_link_tag 'favicon.png' %>
 
     <%= csrf_meta_tags %>
@@ -66,32 +66,24 @@
     <%#end%>
     
     <script type="text/javascript">
-      window.onload = function(){
-
-        //For mobile dropdown panel
-        $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
-          $('.popular-neighborhoods').slideToggle(200);
-        });
-
-        if($('#slider').length > 0){
-          $('#slider').rotateSlider({});
-        }
-        
-        //$(function() {
+      // if($('#slider').length > 0){
+      //   $('#slider').rotateSlider({});
+      // }
+      
+      $(function() {
         new app.apartments;
-        //});
+      });
 
-        //hiding autocomplete search results when no input given
-        if($('#buildings-search-txt').length > 0){
-          $(document).on('keyup', '#buildings-search-txt', function(e) {
-            q = $(this).val();
+      //hiding autocomplete search results when no input given
+      if($('#buildings-search-txt').length > 0){
+        $(document).on('keyup', '#buildings-search-txt', function(e) {
+          q = $(this).val();
 
-            if (q == '') {
-              $(".ui-autocomplete").hide();
-              $(".no-match-link").addClass('hidden');
-            }
-          })
-        }
+          if (q == '') {
+            $(".ui-autocomplete").hide();
+            $(".no-match-link").addClass('hidden');
+          }
+        })
       }
     </script>
 

@@ -61,6 +61,11 @@
     // }
 
     windowResizeHandler();
+
+    //For mobile dropdown panel
+    $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
+      $('.popular-neighborhoods').slideToggle(200);
+    });
     
     $("#toggleStreetView").click(function(){
         var toggle = panorama.getVisible();

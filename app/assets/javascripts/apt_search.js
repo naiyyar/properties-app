@@ -1,8 +1,6 @@
 app.apartments = function() {
   this._input = $('#search_term');
   this._initAutocomplete();
-  //var magIcon = '<span class="input-magnifier"><a class="btn btn-blue"><span class="icon-magnifier"></span></a></span>'
-	//$('.home-search-form #apt-search-form').append(magIcon);
 };
 
 app.apartments.prototype = {
@@ -65,9 +63,6 @@ app.apartments.prototype = {
       source: '/auto_search.json',
       appendTo: '#apt-search-results',
       select: $.proxy(this._select, this),
-      // select: function(event, ui){
-      //   console.log(ui.item)
-      // },
       open: $.proxy(this._open, this),
       search: $.proxy(this._search, this),
       close: $.proxy(this._close, this)

@@ -19,7 +19,6 @@
 //= require jquery-placeholder
 //= require bootstrap
 //= require jquery.touchSwipe.js
-//= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
 //= require underscore
 //= require app
@@ -35,7 +34,6 @@
 //= require dataTables.bootstrap.min
 //= require jquery-fileupload/basic
 //= require lightslider
-//= require jquery.rotateSlider
 //= require gmap
 //= require blog
 //= require filterrific/filterrific-jquery
