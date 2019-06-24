@@ -1,4 +1,4 @@
-(function($) {
+window.onload = function(){
     "use strict";
 
     setTimeout(function() {
@@ -14,7 +14,9 @@
         keyboard: false
     }).modal('show');
 
-})(jQuery);
+//})(jQuery);
+
+}
 
 $(document).on('click', '.favourite', function(){
     $('.modal-si0').prop('href','javascript:void(0);').addClass('modal-si')
