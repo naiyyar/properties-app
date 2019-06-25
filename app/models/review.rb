@@ -48,13 +48,27 @@ class Review < ActiveRecord::Base
     ]
   )
 
+  attr_accessor :up_votes, :useful_reviews_count, :photo_uploads
+
   scope :building_reviews, -> (buildings) do 
-    where('reviewable_type = ? AND reviewable_id in (?)', 'Building', buildings.pluck(:id))
+    where('reviewable_type = ? AND reviewable_id in (?) AND buildings.distance.*', 'Building', buildings.pluck(:id))
   end
 
   #reviewer
   def user_name
   	self.user.name ? self.user.name : self.user.email[/[^@]+/]
+  end
+
+  def user_votes?
+    user.votes.where(vote: true, review_id: id).present?
+  end
+
+  def marked_useful? user
+    useful_reviews.where(user_id: user.id).present?
+  end
+
+  def marked_flag? user
+    review_flags.where(user_id: user.id).present?
   end
 
   def property_name
@@ -114,9 +128,7 @@ class Review < ActiveRecord::Base
     Vote.where(review_id: self.id).destroy_all
     rate = Rate.where(review_id: self.id).destroy_all
     #update stars
-    #rateable_type = self.reviewable_type
     rating_caches = RatingCache.where(cacheable_id: self.reviewable_id, cacheable_type: self.reviewable_type)
-    #rateables = Rate.where(dimension: 'building', rateable_id: rateable_id, rateable_type: rateable_type)
     
     #updating avg ratign for all dimensions
     rating_caches.each do |rating_cache|

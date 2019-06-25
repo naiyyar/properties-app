@@ -151,16 +151,6 @@ class User < ActiveRecord::Base
 
   end
 
-  def marked_useful? review_id
-    useful_review = self.useful_reviews.where(review_id: review_id)
-    useful_review.present? ? true : false
-  end
-
-  def marked_flag? review_id
-    flags = self.review_flags.where(review_id: review_id)
-    flags.present? ? true : false
-  end
-
   def favorite?(favorable)
     favorites.find_by(favorable_id: favorable.id, favorable_type: favorable.class.base_class.name).present?
   end  

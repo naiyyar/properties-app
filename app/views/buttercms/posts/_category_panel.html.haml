@@ -1,0 +1,16 @@
+.col-xs-12.col-sm-12.col-md-3.col-lg-3
+  .row
+    .col-xs-12.col-sm-6.col-md-12.col-lg-12
+      - if @categories.present?
+        %h2.osLight.h-r Categories
+        %ul.blog-r-nav
+          - @categories.each do |category|
+            %li
+              = link_to category.name, buttercms_category_path(category.slug), :title => category.name, style: "#{params[:slug] == category.slug ? 'font-weight:bolder;color: #337ab7;': ''}" if category.slug.present? or category.name.present?
+    
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      %h2.osLight.h-r Popular Tags
+      .blog-tags
+        - if @tags.present?
+          - @tags.each do |tag|
+            %a{class: "label label-#{params[:slug] == tag.slug ? 'success' : 'default'}", href: "#{buttercms_tag_path(tag.slug) if tag.slug.present?}", title: "#{tag.name}"}= tag.name

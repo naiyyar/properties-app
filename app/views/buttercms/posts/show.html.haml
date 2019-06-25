@@ -1,0 +1,44 @@
+= content_for :html_title, @post.seo_title
+= content_for :meta_description, @post.meta_description
+.hidden-xs
+  = render partial: 'buttercms/authors/author'
+.post-content
+  .visible-xs
+    = render partial: 'buttercms/authors/author'
+  %p= simple_format(@post.body.html_safe)
+
+.f-pn-articles
+  - if @previous_post
+    %a.f-p-article{href: buttercms_post_path(@previous_post.slug), title: @previous_post.title}
+      .fpna-title Previous article
+      %span.fpna-header= truncate(@previous_post.title, length: 40)
+      %span.fa.fa-angle-left.pull-left.pn-icon
+  
+  - if @next_post
+    %a.f-p-article{href: buttercms_post_path(@next_post.slug), title: @next_post.title}
+      .fpna-title Next article
+      %span.fpna-header= truncate(@next_post.title, length: 40)
+      %span.fa.fa-angle-right.pull-right.pn-icon
+
+  .clearfix
+
+- if @has_related_posts
+  %h2.osLight.align-left Related Articles
+  .row.pb20
+    - @related_posts.each do |post|
+      - if post.slug != @post.slug and @post.categories.map(&:name) == post.categories.map(&:name)
+        .col-xs-12.col-sm-4.col-md-4.col-lg-4
+          .article.bg-w
+            %a.image{href: buttercms_post_path(post.slug)}= image_tag(post.featured_image) if post.featured_image
+          
+          .article-category
+            - post.categories.each do |category|
+              %a.text-green{href: "#"}= category.name if params[:slug] != category.slug
+          
+          %h3.osLight
+            %a{href: buttercms_post_path(post.slug)}= post.title
+          
+          .footer
+            %span.text-muted
+              = "#{post.author.first_name} #{post.author.last_name}, " if post.author.present? and post.author.first_name.present?
+              = Time.parse(post.published).strftime('%B %d, %Y')

@@ -5274,7 +5274,7 @@ a.home-navHandler.active {
 .featured.carousel .carousel-inner .item .container {
     width: 100%;
     height: 100%;
-    background-color: #f3f3f3; 
+    background-color: #fff; 
     /*rgba(0,0,0,0.25);*/
 }
 .featured.carousel .carousel-inner .item .carousel-caption .caption-title {
@@ -5363,7 +5363,7 @@ a.toggle-search:hover {
     -webkit-appearance: none;
 }
 .blog-content {
-    background-color: #f3f3f3;
+    background-color: #ffffff;
 }
 .blog-content h2 {
     margin: 0;

@@ -60,10 +60,10 @@
     <%= javascript_include_tag 'home', async: true, defer: true %>
     <%= javascript_include_tag 'zapp', async: true, defer: true %>
     
-    <%#if current_user.blank? %>
-      <%#= render 'layouts/shared/signin'%>
-      <%#= render 'layouts/shared/signup'%>
-    <%#end%>
+    <%if current_user.blank? %>
+      <%= render 'layouts/shared/signin'%>
+      <%= render 'layouts/shared/signup'%>
+    <%end%>
     
     <script type="text/javascript">
       // if($('#slider').length > 0){

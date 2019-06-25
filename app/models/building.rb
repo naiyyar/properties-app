@@ -240,7 +240,11 @@ class Building < ActiveRecord::Base
   end
 
   def building_reviews
-    reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
+    reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc).each do |r| 
+      r.up_votes = r.user_votes?
+      r.useful_reviews_count  = r.useful_reviews.count
+      r.photo_uploads = r.uploads
+    end
   end
 
   def cached_reviews_count
