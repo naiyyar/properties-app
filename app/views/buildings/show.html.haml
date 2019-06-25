@@ -10,7 +10,7 @@
 #pano
 
 #content.mob-max
-  - cache @building do
+  - cache [@building, '15'] do
     = render 'buildings/show/top_summary_section'
   
     - if @building.price.present? or @building.bedroom_types?
@@ -34,14 +34,13 @@
         = render 'buildings/show/subways'
 
     .clearfix
-      - if @similar_properties.present?
-        - cache ['similar_properties', @similar_properties.count] do
-          #subways
-            %h3= "Similar Buildings (#{@similar_properties.count})"
-            = render 'buildings/show/similar_properties'
+    - if @similar_properties.present?
+      #subways
+        %h3= "Similar Buildings (#{@similar_properties.count})"
+        = render 'buildings/show/similar_properties'
   
     .clearfix
-    - if @building.rating_cache?
+    - if @rating_cache
       .aggregate-ratings
         %ul.star-sm
           %li
@@ -60,8 +59,8 @@
             Dealings with Management #{rating_for @building, 'management', disable_after_rate: true, readonly: true}
   .clearfix
   .comments
-    %h3= "Building Reviews (#{ @building.cached_reviews_count })"
-    - if @reviews.present?
+    %h3= "Building Reviews (#{ review_count = @building.cached_reviews_count })"
+    - if review_count > 0
       .text-right{style: "text-align: right;padding-bottom: 15px;"}
         = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow'
       = render :partial => 'reviews/review', :collection => @reviews, :as => :review, cache: true

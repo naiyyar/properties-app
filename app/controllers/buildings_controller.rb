@@ -81,11 +81,25 @@ class BuildingsController < ApplicationController
   def show
     @show_map_btn = @half_footer = true
     @reviews = @building.building_reviews
-    @distance_results = DistanceMatrix.get_data(@building) #if Rails.env == 'production'
-    @broker_percent = BrokerFeePercent.first.percent_amount
-    @min_save_amount = @building.min_save_amount(@broker_percent)
+    @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
+    broker_percent = BrokerFeePercent.first.percent_amount
+
+    @broker_fee_savings = {}
+    @price_ranges = {}
+    saved_amounts = @building.saved_amount(broker_percent)
+    @building_price = @building.price
+    @building.bedroom_ranges.each_with_index do |bed_range, index|
+      @broker_fee_savings[bed_range] = saved_amounts[index]
+      price = Price.find_by(bed_type: bed_range, range: @building_price)
+      @price_ranges[bed_range] = price
+    end
+    @min_save_amount = @broker_fee_savings.values[0]
+    @rating_cache = @building.rating_cache?
     #building + units images
-    @uploads = @building.chached_image_uploads
+    uploads = @building.chached_image_uploads
+    @building.buildings_images = uploads
+    @building.uploaded_images_count = uploads.count
+    
     @documents = @building.chached_doc_uploads
 
     #Similiar buildings
@@ -100,7 +114,7 @@ class BuildingsController < ApplicationController
     @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
                   "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 
                   "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.name if @building.management_company.present? }. "+ 
-                  "Click to view #{@uploads.count} photos and #{@building.reviews_count} reviews"
+                  "Click to view #{@building.uploaded_images_count} photos and #{@building.reviews_count} reviews"
     
     flash[:notice] = "Files are uploaded successfully." if params[:from_uploaded].present?
   end

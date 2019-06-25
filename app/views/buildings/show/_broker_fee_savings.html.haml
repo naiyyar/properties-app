@@ -2,9 +2,9 @@
   .price-ranges
     %h3 Broker Fee Savings
     %table{style: 'width: 100%;'}
-      - @building.bedroom_ranges.each_with_index do |bed_range, index|
+      - @broker_fee_savings.each_pair do |bed_range, amount|
         %tr
           %td=bedroom_type(bed_range)
-          %td="#{number_to_currency(@building.saved_amount(@broker_percent)[index], precision: 0)}"
+          %td="#{number_to_currency(amount, precision: 0)}"
             
                 

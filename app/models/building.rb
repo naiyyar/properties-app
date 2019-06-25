@@ -75,7 +75,7 @@ class Building < ActiveRecord::Base
 
   #form some buildings when submitting reviews getting
   #Error: undefined method `address=' for #<Building
-  attr_accessor :address, :first_image, :min_saved_amount, :uploaded_images_count
+  attr_accessor :address, :first_image, :min_saved_amount, :uploaded_images_count, :buildings_images
 
   belongs_to :user
   has_many :reviews, as: :reviewable

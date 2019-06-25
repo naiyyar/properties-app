@@ -9,6 +9,10 @@ module ApplicationHelper
     end
   end
 
+  def current_user_profile_image
+    current_user.profile_image(session[:provider]) rescue nil
+  end
+
   def search_bar(status)
     @search_bar_hidden == status ? 'hidden' : ''
   end

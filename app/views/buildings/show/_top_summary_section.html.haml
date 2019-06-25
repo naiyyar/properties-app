@@ -1,5 +1,5 @@
 .singleTop{style: 'position: relative;'}
-	- if @uploads.present?
+	- if @building.uploaded_images_count > 0
 		.row.sh-slider
 			.sh-slider-container
 				.col.col-lg-12.col-md-12.col-sm-12.col-xs-12

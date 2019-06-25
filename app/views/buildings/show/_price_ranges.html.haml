@@ -2,17 +2,15 @@
   .price-ranges
     %h3 Price
     %table{style: 'width: 100%;'}
-      - @building.bedroom_ranges.map do |bed_range|
+      - @price_ranges.each_pair do |bed_range, price|
         %tr
           %td=bedroom_type(bed_range)
           %td
-            - prices = Price.where(bed_type: bed_range, range: @building.price)
-            -if prices.present?
-              - price = prices.first
-              -if @building.price == 1
+            -if price.present?
+              -if @building_price == 1
                 ="#{number_to_currency(price.max_price, precision: 0)} <"
-              -elsif @building.price == 2 or @building.price == 3
+              -elsif @building_price == 2 or @building_price == 3
                 ="#{number_to_currency(price.min_price, precision: 0)} - #{number_to_currency(price.max_price, precision: 0)}"
-              -elsif @building.price == 4
+              -elsif @building_price == 4
                 ="#{number_to_currency(price.min_price, precision: 0)} +"
                 

@@ -1,12 +1,12 @@
-- if @uploads.present?
+- if building.uploaded_images_count > 0
   .item
     .clearfix{ style: "width:100%;" }
       %h4.lightslider-slides-counts
         %span.current 1
-        %span.total="/ #{images_count = @uploads.count}"
+        %span.total="/ #{images_count = building.uploaded_images_count}"
 
       %ul.gallery.list-unstyled{style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'show', path:  building_path(building) } }
-        - @uploads.each do |upload|
+        - building.buildings_images.each do |upload|
           %li{ data: { thumb: upload.uploaded_img_url } }
             %a{ href: upload.image.url, data: { caption: date_uploaded(upload) } }
               .bg-size-cover{ style: "background-image: url(#{upload.uploaded_img_url});", data: { imageid: "#{upload.id}" } }
