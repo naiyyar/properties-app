@@ -31,7 +31,7 @@ module BuildingSearch
       end
     else
       results[:buildings] = redo_search_buildings(params)
-      results[:zoom] = params[:zoomlevel] || 13
+      results[:zoom] = params[:zoomlevel] || (results[:buildings].length > 90 ? 15 : 14)
     end
 
     results[:buildings] = filtered_buildings(results[:buildings], params[:filter]) if params[:filter].present?

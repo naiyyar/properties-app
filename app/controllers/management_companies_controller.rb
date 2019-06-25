@@ -33,7 +33,8 @@ class ManagementCompaniesController < ApplicationController
     @all_buildings = final_results[0][:all_buildings]
     @recommended_percent = @management_company.recommended_percent(buildings)
     #@reviews = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
-    @reviews = Review.building_reviews(buildings)
+    #@reviews = Review.building_reviews(buildings)
+    @reviews = Review.where(reviewable_id: buildings.map(&:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
     @total_reviews = @reviews.present? ? @reviews.count : 0
     @reviews = @reviews.limit(10)
     if buildings.present?
