@@ -2,6 +2,84 @@
 @import "bootstrap";
 @import "font-awesome";
 
+@font-face {
+    font-family: 'open_sansregular';
+    src: url(font-path('OpenSans-Regular-webfont.eot'));
+    src: url(font-path('OpenSans-Regular-webfont.eot?#iefix')) format('embedded-opentype'),
+         url(font-path('OpenSans-Regular-webfont.woff')) format('woff'),
+         url(font-path('OpenSans-Regular-webfont.ttf')) format('truetype'),
+         url(font-path('OpenSans-Regular-webfont.svg#open_sansregular')) format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'open_sanslight';
+    src: url(font-path('OpenSans-Light-webfont.eot'));
+    src: url(font-path('OpenSans-Light-webfont.eot?#iefix')) format('embedded-opentype'),
+         url(font-path('OpenSans-Light-webfont.woff')) format('woff'),
+         url(font-path('OpenSans-Light-webfont.ttf')) format('truetype'),
+         url(font-path('OpenSans-Light-webfont.svg#open_sanslight')) format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url(font-path('glyphicons-halflings-regular.eot'));
+    src: url(font-path('glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'),
+         url(font-path('glyphicons-halflings-regular.woff')) format('woff'),
+         url(font-path('glyphicons-halflings-regular.ttf')) format('truetype'),
+         url(font-path('glyphicons-halflings-regular.svg#glyphicons-halflingsregular')) format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.osLight {
+  font-family: 'open_sanslight';
+}
+
+a:hover, a:focus {
+  color: #23527c;
+  text-decoration: none;
+}
+
+a {
+  color: #999;
+  text-decoration: none;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+html{
+  -webkit-text-size-adjust: 100% !important;
+  -ms-text-size-adjust: 100% !important;
+  webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-size: 13px;
+  line-height: 1.42857143;
+  font-family: 'open_sansregular', sans-serif, Arial !important;
+  background-color: #fff !important;
+}
+
+.row {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  position: relative;
+  min-height: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .searched-properties{
   .tabsWidgetSearch{
     .nav-tabs.nav-justified > li{
@@ -22,8 +100,195 @@
   padding: 6px 0px;
 }
 
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  margin-bottom: 0;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 14px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
 .btn-default {
-	color: #333 !important;
+  color: #333 !important;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.btn-o.btn-primary {
+  color: #428bca;
+  background-color: transparent;
+  border-color: #428bca;
+}
+.no-touch .btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #3071a9;
+  border-color: #285e8e;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+
+.btn-icon.btn-sm {
+  width: 31px;
+}
+.btn-sm, .btn-group-sm>.btn {
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 13px;
+  border-radius: 3px;
+}
+.btn-o.btn-white {
+  background-color: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.btn-round {
+  border-radius: 50px !important;
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: normal;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 44px;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 16px;
+  color: #333;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  outline-style: none;
+  outline-width: 0;
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+input {
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  -webkit-appearance: textfield;
+  background-color: white;
+  -webkit-rtl-ordering: logical;
+  cursor: text;
+  margin: 0em;
+  font: 400 11px system-ui;
+  padding: 1px;
+  border-width: 2px;
+  border-style: inset;
+  border-color: initial;
+  border-image: initial;
+}
+
+.btn-group, .btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.btn-group>.btn, .btn-group-vertical>.btn {
+  position: relative;
+  float: left;
+}
+
+.btn-group>.btn:first-child {
+  margin-left: 0;
+}
+
+.btn-group>.btn, .btn-group-vertical>.btn {
+  position: relative;
+  float: left;
+}
+
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+[data-toggle="buttons"]>.btn>input[type="radio"], [data-toggle="buttons"]>.btn>input[type="checkbox"] {
+  position: absolute;
+  z-index: -1;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  margin: 4px 0 0;
+  margin-top: 1px \9;
+  line-height: normal;
+}
+
+.btn-group-justified {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  position: relative;
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: normal;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 2px;
 }
 
 #apt-search-form .form-control{
@@ -137,6 +402,7 @@
     z-index: 9999;
     text-align: center;
     margin-top: 60px;
+    text-shadow: none;
   }
 
 
@@ -156,4 +422,3 @@
     margin-top: 60px;
   }
 }
-

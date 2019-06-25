@@ -6,34 +6,22 @@
 </div>
 
 <div class="post-content">
-    <!-- <ul class="list-inline visible-xs"> -->
-        <%# @post_categories.each do |cat| %>
-            <!-- <li><a href='#' class="text-color-blue"><%#= cat.name %></a>&nbsp;</li> -->
-        <%#end%>
-    <!-- </ul> -->
-    <!-- <h2 class="osLight" style="padding: 0 0 10px 0;"><%#= @post.title %></h2> -->
 
     <div class="visible-xs">
         <%=render partial: 'buttercms/authors/author' %>
     </div>
-    <!-- <div class="image-block"> -->
-        <%#= image_tag(@post.featured_image) if @post.featured_image %>
-        <!-- <div class="ib-title"><span class="osLight">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit</span></div> -->
-    <!-- </div> -->
     
     <p><%= simple_format(@post.body.html_safe) %></p>
 </div>
 <div class="f-pn-articles">
     <% if @previous_post %>
       <a href="<%=buttercms_post_path(@previous_post.slug)%>" class="f-p-article", title="<%=@previous_post.title%>">
-          <!-- <div class="fpna-title">Older Articles</div> -->
           <span class="fpna-header"><%=truncate(@previous_post.title, length: 40)%></span>
           <span class="fa fa-angle-left pull-left pn-icon"></span>
       </a>
     <%end%>
     <% if @next_post %>
       <a href="<%=buttercms_post_path(@next_post.slug)%>" class="f-n-article", title="<%=@next_post.title%>">
-        <!-- <div class="fpna-title">Newer Articles</div> -->
         <span class="fpna-header"><%=truncate(@next_post.title, length: 40)%></span>
         <span class="fa fa-angle-right pull-right pn-icon"></span>
       </a>
@@ -48,7 +36,6 @@
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                     <div class="article bg-w">
                         <a href="<%=buttercms_post_path(post.slug)%>" class="image"><%= image_tag(post.featured_image) if post.featured_image %></a>
-                        <!-- <div class="article-category"><a href="#" class="text-green">Architecture</a></div> -->
                         <h3 class="osLight"><a href="<%=buttercms_post_path(post.slug)%>"><%= post.title %></a></h3>
                         <div class="footer"><span class="text-muted"><%="#{post.author.first_name} #{post.author.last_name}, " if post.author.present? and post.author.first_name.present? %> <%= Time.parse(post.published).strftime('%B %d, %Y') %></span></div>
                     </div>
