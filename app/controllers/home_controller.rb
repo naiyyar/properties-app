@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
   def index
     @home_view = true
-    @neighborhoods = Neighborhood.all
+    #@neighborhoods = Neighborhood.all
     @buildings_count = Building.all.count
     @meta_desc = "Search through #{@buildings_count} buildings of no fee apartments in NYC, no fee rentals in NYC, 
                   for rent by owner in NYC and apartment reviews NYC. Rent direct and bypass brokers."

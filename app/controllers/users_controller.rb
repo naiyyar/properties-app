@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     end
 		@hash = Building.buildings_json_hash(@buildings)
     @zoom = 12
-    @show_map_btn = true
+    @show_map_btn = @half_footer = true
 	end
 
 	def new

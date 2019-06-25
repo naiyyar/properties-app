@@ -142,22 +142,17 @@ class Building < ActiveRecord::Base
   end
 
   #amenities scopes
-  scope :doorman, -> { where(doorman: true) }
-  scope :courtyard, -> { where(courtyard: true) }
-  scope :laundry_facility, -> { where(laundry_facility: true) }
-  scope :parking, -> { where(parking: true) }
-  scope :elevator, -> { where.not(elevator: nil) }
-  scope :roof_deck, -> { where(roof_deck: true) }
-  scope :swimming_pool, -> { where(swimming_pool: true) }
-  scope :mgmt_company_run, -> { where(management_company_run: true) }
-  scope :garage, -> { where('garage is true') }
-  scope :gym, -> { where('gym is true') }
-  scope :live_in_super, -> { where('live_in_super is true') }
-  scope :pets_allowed_cats, -> { where('pets_allowed_cats is true') }
-  scope :pets_allowed_dogs, -> { where('pets_allowed_dogs is true') }
-  scope :walk_up, -> { where(walk_up: true) }
-  scope :childrens_playroom, -> { where(childrens_playroom: true) }
-  scope :no_fee, -> { where(no_fee: true) }
+  AMENITIES = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
+                :management_company_run, :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
+                :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee]
+  
+  AMENITIES.each do |item|
+    unless item == :elevator
+      scope item,  -> { where(item => true) }
+    else
+      scope item, -> { where.not(item => nil) }
+    end
+  end
 
   #bedrooms types
   scope :studio, -> { where(studio: 0) }
@@ -167,17 +162,6 @@ class Building < ActiveRecord::Base
   scope :four_bed, -> { where(four_plus_bed: 4) }
 
   #Methods
-
-  ### 
-  #Used in buildings controller index action filterrific
-  # def self.options_for_sorted_by
-  #   [
-  #     ['Name (a-z)', 'building_name_asc'],
-  #     ['Name (z-a)', 'building_name_desc'],
-  #     ['Creating date (newest first)', 'created_at_desc'],
-  #     ['Creating date (oldest first)', 'created_at_asc']
-  #   ]
-  # end
 
   def self.buildings_json_hash(buildings)
     unless buildings.class == Array

@@ -222,7 +222,7 @@ module BuildingSearch
       @buildings = @buildings.parking if has_amenity?('parking')
       @buildings = @buildings.gym if has_amenity?('gym')
       @buildings = @buildings.garage if has_amenity?('garage')
-      @buildings = @buildings.mgmt_company_run if has_amenity?('management_company_run')
+      @buildings = @buildings.management_company_run if has_amenity?('management_company_run')
       @buildings = @buildings.live_in_super if has_amenity?('live_in_super')
       @buildings = @buildings.roof_deck if has_amenity?('roof_deck')
       @buildings = @buildings.pets_allowed_cats if has_amenity?('pets_allowed_cats')

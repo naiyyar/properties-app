@@ -49,12 +49,13 @@
           <%end%>
           <%= yield %>
         </div>
+        <%= render 'layouts/home/footer' if show_full_width_footer? and params[:action] != 'about' and params[:action] != 'contribute' %>
       </div>
     <%else%>
       <%= yield %>
+      <%= render 'layouts/home/footer' if show_full_width_footer? and params[:action] != 'about' %>
     <%end%>
     <div id="remote-container"></div>
-    <%= render 'layouts/home/footer' if show_full_width_footer? and params[:action] != 'about' %>
     <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? and params[:searched_by].present? %>
     <%= javascript_include_tag 'infobubble', async: true, defer: true %>
     <%= javascript_include_tag 'home', async: true, defer: true %>
