@@ -5480,8 +5480,11 @@ blockquote {
     margin-bottom: 20px;
     border-radius: 3px;
     overflow: hidden;
-    height: 344px;
+    height: 422px;
     position: relative;
+}
+.hero-container-blog-index .article{
+    height: 344px !important;
 }
 .article .image {
     display: block;

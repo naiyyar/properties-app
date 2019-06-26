@@ -31,17 +31,17 @@
           .article.bg-w
             %a.image{href: buttercms_post_path(post.slug)}= image_tag(post.featured_image) if post.featured_image
           
-          .article-category
-            - post.categories.each do |category|
-              %a.text-green{href: "#"}= category.name if params[:slug] != category.slug
-          
-          %h3.osLight
-            %a{href: buttercms_post_path(post.slug)}= post.title
-          
-          .footer
-            %span.text-muted
-              = "#{post.author.first_name} #{post.author.last_name}, " if post.author.present? and post.author.first_name.present?
-              = Time.parse(post.published).strftime('%B %d, %Y')
+            .article-category
+              - post.categories.each do |category|
+                %a.text-green{href: "#"}= category.name if params[:slug] != category.slug
+            
+            %h3.osLight
+              %a{href: buttercms_post_path(post.slug)}= post.title
+            
+            .footer
+              %span.text-muted
+                = "#{post.author.first_name} #{post.author.last_name}, " if post.author.present? and post.author.first_name.present?
+                = Time.parse(post.published).strftime('%B %d, %Y')
 
 :css
   .blog-content {
