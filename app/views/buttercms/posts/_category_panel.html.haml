@@ -13,4 +13,4 @@
       .blog-tags
         - if @tags.present?
           - @tags.each do |tag|
-            %a{class: "label label-#{params[:slug] == tag.slug ? 'success' : 'default'}", href: "#{buttercms_tag_path(tag.slug) if tag.slug.present?}", title: "#{tag.name}"}= tag.name
+            %a{class: "label label-#{params[:slug] == tag.slug ? 'success' : 'grey'}", href: "#{buttercms_tag_path(tag.slug) if tag.slug.present?}", title: "#{tag.name}"}= tag.name

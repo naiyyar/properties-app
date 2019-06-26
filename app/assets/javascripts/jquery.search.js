@@ -180,6 +180,7 @@ manhattan_neightborhoods_hash = [
 	{ key: 'Carnegie Hill',  		url: dropbox_url+'fp1zq7476csz0c8/carnegie_hill.kml?dl=1'},
 	{ key: 'Lenox Hill',  			url: dropbox_url+'8h2v67d6ds2p588/lenox_hill.kml?dl=1'},
 	{ key: 'Upper West Side',   url: dropbox_url+'wzmhjlt289pbw5m/upper_west_side.kml?dl=1'},
+	{ key: 'Upper West Side', 	url: dropbox_url+'c1wucqcct2akk6j/upper_west_side1.kml?dl=1' },
 	{ key: 'Lincoln Square',  	url: dropbox_url+'4pf6coc8ho96tyq/lincoln_square.kml?dl=1'},
 	{ key: 'Upper Manhattan',		url: dropbox_url+'mgcwk6tdqke7ldy/upper_manhattan.kml?dl=1'},
 	{ key: 'East Harlem',				url: dropbox_url+'tdm96rjvgyxy2k6/east_harlem.kml?dl=1'},

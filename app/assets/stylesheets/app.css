@@ -4431,6 +4431,14 @@ h1.pageTitle {
     background-color: #7e115f;
 }
 
+.label-grey {
+    background-color: #ddd;
+}
+.label-grey[href]:hover,
+.label-grey[href]:focus {
+    background-color: #d0d0d0;
+}
+
 .alert {
     padding: 15px;
     /*margin-bottom: 0px;*/
@@ -5362,19 +5370,6 @@ a.toggle-search:hover {
     margin: 20px 0;
     -webkit-appearance: none;
 }
-.blog-content {
-    background-color: #ffffff;
-}
-.blog-content h2 {
-    margin: 0;
-    padding: 0px 0 20px 0;
-    font-size: 22px;
-    line-height: 22px;
-    text-align: left;
-}
-.blog-content h2.h-r {
-    text-align: right;
-}
 
 .blog-r-nav {
     margin: 0;
@@ -5630,7 +5625,7 @@ blockquote {
     font-size: 16px;
     line-height: 20px;
     display: block;
-    color: #333;
+    /*color: #333;*/
 }
 .no-touch .f-p-article:hover .fpna-header, .no-touch .f-n-article:hover .fpna-header {
     color: #0075c9;
