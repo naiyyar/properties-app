@@ -10,53 +10,52 @@
 #pano
 
 #content.mob-max
-  - cache @building do
-    = render 'buildings/show/top_summary_section'
-  
-    - if @building.price.present? or @building.bedroom_types?
-      = render 'buildings/show/price_ranges'
+  = render 'buildings/show/top_summary_section'
 
-      = render 'buildings/show/broker_fee_savings'
-  
-    .clearfix
-    = render 'building_amenities'
-  
-    - if @documents.present?
-      #building-documents.documents
-        %h3
-          Documents (#{@documents.count})
-        = render 'uploads/documents'
-  
-    .clearfix
-    - if @distance_results.present?
-      #subways
-        %h3 Subway
-        = render 'buildings/show/subways'
+  - if @building.price.present? or @building.bedroom_types?
+    = render 'buildings/show/price_ranges'
 
-    .clearfix
-    - if @similar_properties.present?
-      #subways
-        %h3= "Similar Buildings (#{@similar_properties.count})"
-        = render 'buildings/show/similar_properties'
-  
-    .clearfix
-    - if @rating_cache
-      .aggregate-ratings
-        %ul.star-sm
-          %li
-            %h3 Aggregate Ratings
-          %li
-            Cleanliness - Pests/Smell/Trash #{rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true}
-          %li
-            Is it Noisy? #{rating_for @building, 'noise', disable_after_rate: true, readonly: true}
-          %li
-            Do you feel safe in your building? #{rating_for @building, 'safe', disable_after_rate: true, readonly: true}
-          %li
-            Utilities - AC/Electric/Heat/Water #{rating_for @building, 'health', disable_after_rate: true, readonly: true}
-          %li
-            Super Responsiveness #{rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true}
-          %li
-            Dealings with Management #{rating_for @building, 'management', disable_after_rate: true, readonly: true}
+    = render 'buildings/show/broker_fee_savings'
+
+  .clearfix
+  = render 'building_amenities'
+
+  - if @documents.present?
+    #building-documents.documents
+      %h3
+        Documents (#{@documents.count})
+      = render 'uploads/documents'
+
+  .clearfix
+  - if @distance_results.present?
+    #subways
+      %h3 Subway
+      = render 'buildings/show/subways'
+
+  .clearfix
+  - if @similar_properties.present?
+    #subways
+      %h3= "Similar Buildings (#{@similar_properties.count})"
+      = render 'buildings/show/similar_properties'
+
+  .clearfix
+  - if @rating_cache
+    .aggregate-ratings
+      %ul.star-sm
+        %li
+          %h3 Aggregate Ratings
+        %li
+          Cleanliness - Pests/Smell/Trash #{rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true}
+        %li
+          Is it Noisy? #{rating_for @building, 'noise', disable_after_rate: true, readonly: true}
+        %li
+          Do you feel safe in your building? #{rating_for @building, 'safe', disable_after_rate: true, readonly: true}
+        %li
+          Utilities - AC/Electric/Heat/Water #{rating_for @building, 'health', disable_after_rate: true, readonly: true}
+        %li
+          Super Responsiveness #{rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true}
+        %li
+          Dealings with Management #{rating_for @building, 'management', disable_after_rate: true, readonly: true}
   .clearfix
   .comments
     %h3= "Building Reviews (#{ review_count = @building.cached_reviews_count })"

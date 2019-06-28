@@ -6,7 +6,7 @@
   %td.text-center= link_to '<span class="fa fa-globe"></span>'.html_safe, company.website, target: '_blank' if company.website.present?
   %td.text-center= link_to company.cached_company_buildings_count, managed_buildings_management_company_path(company), class: 'hyper-link' if buildings.present?
   %td.star-sm
-    - @stars = company.get_average_stars(buildings, Review.building_reviews(buildings).count)
+    - @stars = company.get_average_stars(buildings, Review.buildings_reviews(buildings).count)
     = render 'layouts/shared/custom_rating'
   %td= company.aggregate_reviews(buildings)
   %td= company.created_at.strftime("%Y-%m-%d")

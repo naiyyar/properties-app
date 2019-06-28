@@ -9,7 +9,7 @@ class ManagementCompaniesController < ApplicationController
   end
 
   def managed_buildings
-    @buildings = @management_company.buildings #.reorder('neighborhood ASC, building_name ASC')
+    @buildings = @management_company.buildings
   end
 
   def load_more_reviews
@@ -27,14 +27,11 @@ class ManagementCompaniesController < ApplicationController
   def show
     @show_map_btn = @half_footer = true
     buildings = @management_company.cached_buildings.includes(:uploads, :building_average)
-    #@broker_percent = BrokerFeePercent.first.percent_amount
     final_results = Building.with_featured_building(buildings, params[:page])
     @manage_buildings = final_results[1] if !params[:object_id].present?
     @all_buildings = final_results[0][:all_buildings]
     @recommended_percent = @management_company.recommended_percent(buildings)
-    #@reviews = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
-    #@reviews = Review.building_reviews(buildings)
-    @reviews = Review.where(reviewable_id: buildings.map(&:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
+    @reviews = Review.buildings_reviews(buildings)
     @total_reviews = @reviews.present? ? @reviews.count : 0
     @reviews = @reviews.limit(10)
     if buildings.present?
@@ -49,7 +46,7 @@ class ManagementCompaniesController < ApplicationController
         @lat = buildings.first.latitude
         @lng = buildings.first.longitude
       end
-      @zoom = buildings.length > 60 ? 13 : 11
+      @zoom = buildings.length > 70 ? 13 : 11
     end
     @building_photos_count = Building.building_photos(@all_buildings).count
     @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 
