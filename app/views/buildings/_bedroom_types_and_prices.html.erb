@@ -1,4 +1,4 @@
-<%= "<span> #{building.prices} | </span>".html_safe if @building_price.present? %>
+<%= "<span> #{building.prices} | </span>".html_safe if building.prices.present? %>
 <% if building.studio.present? %>
 	<%= "<span>Studio</span>".html_safe %><%= ',' if building.either_of_four? %>
 <%end%>
