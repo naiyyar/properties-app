@@ -71,6 +71,10 @@ class Upload < ActiveRecord::Base
   # #   end
   # end
 
+  def self.building_photos buildings
+    where(imageable_id: buildings.map(&:id), imageable_type: 'Building')
+  end
+
   def uploaded_img_url
     if self.image.exists?(:medium) #self.image.styles[:medium]
       self.image.url(:medium)

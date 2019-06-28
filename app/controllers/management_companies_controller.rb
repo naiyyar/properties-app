@@ -48,7 +48,7 @@ class ManagementCompaniesController < ApplicationController
       end
       @zoom = buildings.length > 70 ? 13 : 11
     end
-    @building_photos_count = Building.building_photos(@all_buildings).count
+    @building_photos_count = Upload.building_photos(@all_buildings).count
     @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 
                   for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
                   Click to view #{@building_photos_count} photos and #{@total_reviews} reviews."
