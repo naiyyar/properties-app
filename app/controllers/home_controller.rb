@@ -63,7 +63,7 @@ class HomeController < ApplicationController
         @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
         @zoom = results[:zoom] if results[:zoom].present?
       end
-       @buildings = @buildings.includes(:building_average, :featured_building)   
+      @buildings = @buildings.includes(:building_average, :featured_building) if @buildings.present?
       if @buildings.present?
         final_results = Building.with_featured_building(@buildings, params[:page])
         @per_page_buildings = final_results[1]
