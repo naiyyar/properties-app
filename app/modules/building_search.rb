@@ -1,6 +1,6 @@
 module BuildingSearch
 
-	def apt_search params, search_string, sub_borough
+  def apt_search params, search_string, sub_borough
     results = {}
     results[:zoom] = nil
     results[:boundary_coords] = []
@@ -40,7 +40,7 @@ module BuildingSearch
     return results
   end
 
-	def redo_search_buildings params
+  def redo_search_buildings params
     @zoom = params[:zoomlevel].to_i
     custom_latng = [params[:latitude].to_f, params[:longitude].to_f]
     distance = redo_search_distance(0.5)
@@ -77,14 +77,16 @@ module BuildingSearch
   end
 
   def with_featured_building buildings, page_num=1
-  	final_results = {}
-    featured_buildings = Building.active_featured_buildings(buildings).includes(:building_average, :featured_building)
-    top_two_featured_buildings = featured_buildings.length > 2 ? featured_buildings.shuffle[1..2] : []
+    final_results = {}
+    #buildings = buildings.includes(:building_average, :featured_building)
+    featured_buildings = FeaturedBuilding.active_featured_buildings(buildings)
+    top_two_featured_buildings = featured_buildings.length >= 2 ? featured_buildings.shuffle[1..2] : []
     #Selecting 2 featured building to put on top
     per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
                                         .paginate(:page => page_num, :per_page => 20)
     #putting featured building on top
     if top_two_featured_buildings.present?
+      top_two_featured_buildings = Building.where(id: top_two_featured_buildings.map(&:building_id))
       all_buildings = top_two_featured_buildings + per_page_buildings
     else
       all_buildings = per_page_buildings
@@ -108,16 +110,16 @@ module BuildingSearch
     return final_results, per_page_buildings
   end
 
-  def set_virtul_attributes building
-    building.each do |b| 
-      images = b.chached_image_uploads
+  def set_virtul_attributes buildings
+    buildings.each do |b| 
+      images = b.image_uploads
       b.first_image = images[0]
       b.uploaded_images_count = images.count
       b.min_saved_amount = b.min_save_amount(broker_percent)
     end
   end
 
-	def search_by_zipcodes(criteria)
+  def search_by_zipcodes(criteria)
     # regexp = /#{criteria}/i;
     search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
     # results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
@@ -157,7 +159,7 @@ module BuildingSearch
     end
   end
 
-	def filter_by_rates buildings, rating
+  def filter_by_rates buildings, rating
     # 1 star - means  = 1
     # 2 star - means  1 <= 2
     # 3 star - means  2 <= 3
