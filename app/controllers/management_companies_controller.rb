@@ -9,7 +9,7 @@ class ManagementCompaniesController < ApplicationController
   end
 
   def managed_buildings
-    @buildings = @management_company.buildings
+    @buildings = @management_company.company_buildings
   end
 
   def load_more_reviews
@@ -26,7 +26,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn = @half_footer = true
-    buildings = @management_company.cached_buildings.includes(:uploads, :building_average)
+    buildings = @management_company.company_buildings.includes(:uploads, :building_average)
     final_results = Building.with_featured_building(buildings, params[:page])
     @manage_buildings = final_results[1] if !params[:object_id].present?
     @all_buildings = final_results[0][:all_buildings]

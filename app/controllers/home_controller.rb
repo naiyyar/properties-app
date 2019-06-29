@@ -6,7 +6,6 @@ class HomeController < ApplicationController
 
   def index
     @home_view = true
-    #@neighborhoods = Neighborhood.all
     @buildings_count = Building.all.count
     @meta_desc = "Search through #{@buildings_count} buildings of no fee apartments in NYC, no fee rentals in NYC, 
                   for rent by owner in NYC and apartment reviews NYC. Rent direct and bypass brokers."
@@ -73,7 +72,6 @@ class HomeController < ApplicationController
         @lng = @hash[0]['longitude']
         #in meta_desc
         @photos_count = Building.building_photos(@buildings).length
-        #@reviews_count = Review.building_reviews(@buildings).length
         @reviews_count = Review.where(reviewable_id: @buildings.map(&:id), reviewable_type: 'Building').count
       else
         if @boundary_coords.present? and @boundary_coords.first.length > 1

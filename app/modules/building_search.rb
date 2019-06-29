@@ -78,15 +78,14 @@ module BuildingSearch
 
   def with_featured_building buildings, page_num=1
     final_results = {}
-    #buildings = buildings.includes(:building_average, :featured_building)
-    featured_buildings = FeaturedBuilding.active_featured_buildings(buildings)
-    top_two_featured_buildings = featured_buildings.length >= 2 ? featured_buildings.shuffle[1..2] : []
+    featured_buildings = FeaturedBuilding.active_featured_buildings(buildings.map(&:id))
+    featured_buildings = buildings.where(id: featured_buildings.map(&:building_id))
+    top_two_featured_buildings = featured_buildings.length >= 2 ? featured_buildings.shuffle[0..2] : featured_buildings
     #Selecting 2 featured building to put on top
     per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
                                         .paginate(:page => page_num, :per_page => 20)
     #putting featured building on top
     if top_two_featured_buildings.present?
-      top_two_featured_buildings = Building.where(id: top_two_featured_buildings.map(&:building_id))
       all_buildings = top_two_featured_buildings + per_page_buildings
     else
       all_buildings = per_page_buildings
@@ -126,11 +125,11 @@ module BuildingSearch
   end
 
   def cached_buildings_by_zip searched_by, term
-    Rails.cache.fetch([self, searched_by, term]) { where('zipcode = ?', term) }
+    where('zipcode = ?', term)
   end
 
   def cached_buildings_by_city_or_nb term, sub_borough
-    Rails.cache.fetch([self, term, 'city']) { where("city = ? OR neighborhood in (?)", term, sub_borough) }
+    where("city = ? OR neighborhood in (?)", term, sub_borough)
   end
 
   def search_by_pneighborhoods(criteria)
@@ -143,11 +142,11 @@ module BuildingSearch
 
   def buildings_in_neighborhood search_term
     search_term = (search_term == 'Soho' ? 'SoHo' : search_term)
-    Rails.cache.fetch([self, search_term, 'neighborhoods']) { where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term) }
+    where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
   end
 
   def buildings_in_city city
-    Rails.cache.fetch([self, city, 'city']) { where("city @@ :q" , q: city) }
+    where("city @@ :q" , q: city)
   end
 
   #Contribute search method

@@ -140,8 +140,8 @@ ul.ui-autocomplete li.building_link_li a:hover, .no-match-link a:hover{
   color: #2b78e4;
   font-size: 15px;
 }
-.ui-autocomplete-group:hover{
-  background-color: #f8f8f8 !important;
+.ui-autocomplete-group:hover, .ui-menu-item:hover, .ui-menu-item.ui-state-focus{
+  background-color: #ddd !important;
 }
 
 @media screen and (max-width: 767px) {
