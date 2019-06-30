@@ -70,8 +70,23 @@
 	}
 
   .blog-content {
+    h2.h-r {
+      text-align: left;
+    }
     .home-wrapper {
-      padding: 20px 40px;
+      padding: 20px 20px;
+      .article {
+        height: 440px;
+        h3 {
+          padding: 0 10px;
+        }
+        .footer{
+          padding: 7px 10px;
+        }
+        .article-category{
+          padding: 15px 10px 10px 10px;
+        }
+      }
     }
   }
 
