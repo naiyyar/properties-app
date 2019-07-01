@@ -74,8 +74,6 @@ module BuildingSearch
 
   def with_featured_building buildings, page_num=1
     final_results = {}
-    #featured_buildings = FeaturedBuilding.active_featured_buildings(buildings.map(&:id))
-    #featured_buildings = buildings.where(id: featured_buildings.map(&:building_id))
     featured_buildings = featured_buildings(buildings)
     top_two_featured_buildings = featured_buildings.length >= 2 ? featured_buildings.shuffle[0..2] : featured_buildings
     #Selecting 2 featured building to put on top
@@ -98,8 +96,10 @@ module BuildingSearch
   end
 
   def featured_buildings searched_buildings
-    searched_buildings.joins(:featured_building)
-                      .where('featured_buildings.active is true AND featured_buildings.end_date >= ?', Date.today)
+    featured_buildings = FeaturedBuilding.active_featured_buildings(searched_buildings.map(&:id))
+    searched_buildings.where(id: featured_buildings.map(&:building_id))
+    #Building.joins(:featured_building)
+    #.where('buildings.id = featured_buildings.building_id AND featured_buildings.active is true AND featured_buildings.end_date >= ? AND buildings.id in (?)', Date.today, searched_buildings.pluck(:id))
   end
 
   def search_by_zipcodes(criteria)
