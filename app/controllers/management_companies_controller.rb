@@ -35,6 +35,7 @@ class ManagementCompaniesController < ApplicationController
     @total_reviews = @reviews.present? ? @reviews.count : 0
     @reviews = @reviews.limit(10)
     if buildings.present?
+      @broker_percent = BrokerFeePercent.first.percent_amount
       #finding average rating for all managed buildings 
       @stars = @management_company.get_average_stars(buildings, @total_reviews)
       #For map

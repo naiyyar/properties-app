@@ -108,7 +108,6 @@
             
             if(i == 0 || i == '0'){
               // default opening first fetured building marker
-              window.data  = json_array[i];
               google.maps.event.addListener(marker, 'load', (function(marker, i) {
                 var object = json_array[i]
                 if(object.featured){
@@ -171,7 +170,6 @@
         createRedoButtonObject(map)
         google.maps.event.addListener(map, 'dragend', function(){
           dragged = true;
-          console.log('dragged')
           setRedoButtonPosition();
         });
 

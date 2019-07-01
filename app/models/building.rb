@@ -163,9 +163,9 @@ class Building < ActiveRecord::Base
 
   #Methods
 
-  def self.buildings_json_hash(buildings)
-    unless buildings.class == Array
-      buildings.select(:id, 
+  def self.buildings_json_hash(searched_buildings)
+    unless searched_buildings.class == Array
+      searched_buildings.select(:id, 
                         :building_name, 
                         :building_street_address, 
                         :latitude, 
@@ -174,7 +174,7 @@ class Building < ActiveRecord::Base
                         :city, 
                         :state, :price).as_json(:methods => [:featured])
     else
-      buildings.as_json(:methods => [:featured])
+      searched_buildings.as_json(:methods => [:featured])
     end
   end
 
@@ -200,8 +200,9 @@ class Building < ActiveRecord::Base
 
   def saved_amount(broker_percent)
     median_arr = []
+    prices = RentMedian.where(range: price)
     bedroom_ranges.each do |bed_range|
-      prices = RentMedian.where(bed_type: bed_range, range: price)
+      prices = prices.where(bed_type: bed_range)
       if prices.present?
         median = prices.first
         median_arr << (((median.price * 12)*broker_percent)/100).to_i

@@ -4,6 +4,7 @@ class FeaturedBuilding < ActiveRecord::Base
 
   scope :active, -> { where(active: true) }
   scope :inactive, -> { where(active: false) }
+  scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Date.today) }
 
   pg_search_scope :search_query, 
                   against: [:id], 
@@ -19,7 +20,7 @@ class FeaturedBuilding < ActiveRecord::Base
   )
 
   def self.active_featured_buildings building_ids
-    where(building_id: building_ids).active
+    where(building_id: building_ids).active.not_expired
   end
 
   def self.active_building_ids building_ids

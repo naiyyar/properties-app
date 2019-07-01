@@ -170,6 +170,7 @@ group :development do
   gem 'bullet'
   gem 'annotate'
   gem 'meta_request'
+  gem 'rails-footnotes', '~> 4.0'
 end
 
 group :production do

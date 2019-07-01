@@ -260,6 +260,8 @@ GEM
       activesupport (>= 4.2.0, < 5.0)
       nokogiri (~> 1.6)
       rails-deprecated_sanitizer (>= 1.0.1)
+    rails-footnotes (4.1.7)
+      rails (>= 3.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     rails_12factor (0.0.3)
@@ -399,6 +401,7 @@ DEPENDENCIES
   puma
   rack-mini-profiler
   rails (= 4.2.5.1)
+  rails-footnotes (~> 4.0)
   rails_12factor
   ratyrate!
   rolify

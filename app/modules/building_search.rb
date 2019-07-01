@@ -72,14 +72,11 @@ module BuildingSearch
     distance
   end
 
-  def broker_percent
-    BrokerFeePercent.first.percent_amount
-  end
-
   def with_featured_building buildings, page_num=1
     final_results = {}
-    featured_buildings = FeaturedBuilding.active_featured_buildings(buildings.map(&:id))
-    featured_buildings = buildings.where(id: featured_buildings.map(&:building_id))
+    #featured_buildings = FeaturedBuilding.active_featured_buildings(buildings.map(&:id))
+    #featured_buildings = buildings.where(id: featured_buildings.map(&:building_id))
+    featured_buildings = featured_buildings(buildings)
     top_two_featured_buildings = featured_buildings.length >= 2 ? featured_buildings.shuffle[0..2] : featured_buildings
     #Selecting 2 featured building to put on top
     per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
@@ -90,32 +87,19 @@ module BuildingSearch
     else
       all_buildings = per_page_buildings
     end
-
-    #setting up images, min_saved_amount attributes
-    set_virtul_attributes(all_buildings)
-
     if top_two_featured_buildings.present?
-      if buildings.kind_of? Array
-        buildings = buildings - top_two_featured_buildings
-      else
-        buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
-      end
+      buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
       buildings = top_two_featured_buildings + buildings
     end
-    
     final_results[:all_buildings] = all_buildings
     final_results[:map_hash] = buildings_json_hash(buildings)
     
     return final_results, per_page_buildings
   end
 
-  def set_virtul_attributes buildings
-    buildings.each do |b| 
-      images = b.image_uploads
-      b.first_image = images[0]
-      b.uploaded_images_count = images.count
-      b.min_saved_amount = b.min_save_amount(broker_percent)
-    end
+  def featured_buildings searched_buildings
+    searched_buildings.joins(:featured_building)
+                      .where('featured_buildings.active is true AND featured_buildings.end_date >= ?', Date.today)
   end
 
   def search_by_zipcodes(criteria)

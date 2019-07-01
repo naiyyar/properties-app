@@ -64,6 +64,7 @@ class HomeController < ApplicationController
       end
       @buildings = @buildings.includes(:building_average, :featured_building) if @buildings.present?
       if @buildings.present?
+        @broker_percent = BrokerFeePercent.first.percent_amount
         final_results = Building.with_featured_building(@buildings, params[:page])
         @per_page_buildings = final_results[1]
         @all_buildings = final_results[0][:all_buildings]
