@@ -12,7 +12,7 @@
 #  updated_at     :datetime
 #
 
-class RatingCache < ActiveRecord::Base
+class RatingCache < ApplicationRecord
   belongs_to :cacheable, :polymorphic => true
 
   def self.update_rating_cache rating_cache

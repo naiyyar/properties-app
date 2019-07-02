@@ -27,6 +27,20 @@
 
 //Binding markers
 
+// function saveBadge(price){
+//   return ('<div class="saving-badge split-view-badge">' +
+//         '<p>Save</p>' +
+//         '<p>$'+ price +'+</p>' +
+//         '</div>');
+// }
+
+// function imageSlider(image_url){
+//   return '<div class="saving-badge split-view-badge">' +
+//         '<p>Save</p>' +
+//         '<p>$'+ price +'+</p>' +
+//         '</div>';
+// }
+
 function createSidebarElem(json){
   var building_name = ''
   if(json.building_name == undefined || json.building_name == ''){
@@ -43,6 +57,7 @@ function createSidebarElem(json){
   if(building_name == ' '){
     building_name = address
   }
+  
   return ("<h2>" + building_name + "</h2>" +
             "<div class='cardAddress'><span class='icon-location-pin'></span>"+ address+','+' '+city+','+' '+state+' '+zipcode +"</div>"
           );

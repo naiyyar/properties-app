@@ -56,7 +56,7 @@
 #  active_web              :boolean
 #  active_email            :boolean
 
-class Building < ActiveRecord::Base
+class Building < ApplicationRecord
   include PgSearch
   include Imageable
   include SaveBuildingNeighborhood
@@ -75,7 +75,7 @@ class Building < ActiveRecord::Base
 
   #form some buildings when submitting reviews getting
   #Error: undefined method `address=' for #<Building
-  attr_accessor :address, :first_image, :min_saved_amount, :uploaded_images_count, :buildings_images
+  attr_accessor :address, :buildings_images, :uploaded_images_count
 
   belongs_to :user
   has_many :reviews, as: :reviewable
@@ -120,6 +120,10 @@ class Building < ActiveRecord::Base
 
   pg_search_scope :search_by_zipcode, against: [:zipcode],
     :using => { :tsearch=> { prefix: true } }
+
+  pg_search_scope :search_by_neighborhood, against: [:neighborhood, :neighborhoods_parent, :neighborhood3],
+    :using => [:tsearch, :trigram]
+  pg_search_scope :search_by_city, against: [:city]
 
   filterrific(
    default_filter_params: { },
@@ -198,21 +202,17 @@ class Building < ActiveRecord::Base
     [studio, one_bed, two_bed, three_bed, four_plus_bed].compact
   end
 
-  def saved_amount(broker_percent)
-    median_arr = []
-    prices = RentMedian.where(range: price)
-    bedroom_ranges.each do |bed_range|
-      prices = prices.where(bed_type: bed_range)
-      if prices.present?
-        median = prices.first
-        median_arr << (((median.price * 12)*broker_percent)/100).to_i
-      end
-    end
-    median_arr.sort
+  def rent_median_prices(rent_medians)
+    rent_medians.where(range: price, bed_type: bedroom_ranges).order(price: :asc)
   end
 
-  def min_save_amount broker_percent
-    saved_amount(broker_percent)[0]
+  def saved_amount(rent_medians, broker_percent)
+    median_prices = rent_median_prices(rent_medians).pluck(:price)
+    median_prices.map {|price| (((price*12)*broker_percent)/100).to_i}.sort
+  end
+
+  def min_save_amount rent_medians, broker_percent
+    saved_amount(rent_medians, broker_percent)[0]
   end
 
   def to_param

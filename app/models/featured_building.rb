@@ -1,4 +1,4 @@
-class FeaturedBuilding < ActiveRecord::Base
+class FeaturedBuilding < ApplicationRecord
   include PgSearch
   belongs_to :building
 

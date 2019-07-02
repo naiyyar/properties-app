@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class DocumentDownload < ActiveRecord::Base
+class DocumentDownload < ApplicationRecord
 	belongs_to :upload
 	belongs_to :user
 

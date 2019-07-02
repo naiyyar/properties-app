@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class UsefulReview < ActiveRecord::Base
+class UsefulReview < ApplicationRecord
 	belongs_to :review
 	belongs_to :user
 end

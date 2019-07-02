@@ -174,7 +174,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  before_filter :update_last_sign_in_at
+  before_action :update_last_sign_in_at
 
   protected
 

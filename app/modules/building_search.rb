@@ -109,7 +109,7 @@ module BuildingSearch
   end
 
   def cached_buildings_by_zip searched_by, term
-    where('zipcode = ?', term)
+    #where('zipcode = ?', term)
   end
 
   def cached_buildings_by_city_or_nb term, sub_borough
@@ -127,10 +127,12 @@ module BuildingSearch
   def buildings_in_neighborhood search_term
     search_term = (search_term == 'Soho' ? 'SoHo' : search_term)
     where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
+    #search_by_neighborhood(search_term)
   end
 
   def buildings_in_city city
-    where("city @@ :q" , q: city)
+    #where("city @@ :q" , q: city)
+    search_by_city(search_term)
   end
 
   #Contribute search method

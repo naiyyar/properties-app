@@ -41,7 +41,7 @@
 #  user_id                 :integer
 #
 
-class Unit < ActiveRecord::Base
+class Unit < ApplicationRecord
 	acts_as_voteable
 	ratyrate_rateable 'unit','cleanliness','noise','safe','health','responsiveness','management'
 	resourcify

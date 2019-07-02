@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   before_action :reset_session, only: [:index, :auto_search]
   before_action :format_search_string, only: :search
   before_action :save_as_favourite, only: [:search]
+  before_action :set_rent_medians, only: [:search, :load_infobox]
 
   def index
     @home_view = true
@@ -19,7 +20,7 @@ class HomeController < ApplicationController
     else
       fav_color_class = 'unfilled-heart'
     end
-    min_save_amount = building.min_save_amount(BrokerFeePercent.first.percent_amount)
+    min_save_amount = building.min_save_amount(@rent_medians, BrokerFeePercent.first.percent_amount)
     render json: { html: render_to_string(:partial => "/layouts/shared/custom_infowindow", 
                                           :locals => {  building: building,
                                                         image: Upload.marker_image(building),
@@ -72,8 +73,10 @@ class HomeController < ApplicationController
         @lat = @hash[0]['latitude']
         @lng = @hash[0]['longitude']
         #in meta_desc
-        @photos_count = Upload.building_photos(@buildings).length
-        @reviews_count = Review.where(reviewable_id: @buildings.map(&:id), reviewable_type: 'Building').count
+        building_ids = @buildings.pluck(:id)
+        @photos = Upload.building_photos(building_ids)
+        @photos_count = @photos.length
+        @reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
       else
         if @boundary_coords.present? and @boundary_coords.first.length > 1
           @lat = @boundary_coords.first.first[:lat]
@@ -141,5 +144,9 @@ class HomeController < ApplicationController
       current_user.favorite(building)
       session[:favourite_object_id] = nil
     end
+  end
+
+  def set_rent_medians
+    @rent_medians = RentMedian.all
   end
 end

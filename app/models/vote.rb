@@ -13,7 +13,7 @@
 #  review_id     :integer
 #
 
-class Vote < ActiveRecord::Base
+class Vote < ApplicationRecord
 
   scope :for_voter, lambda { |*args| where(["voter_id = ? AND voter_type = ?", args.first.id, args.first.class.base_class.name]) }
   scope :for_voteable, lambda { |*args| where(["voteable_id = ? AND voteable_type = ?", args.first.id, args.first.class.base_class.name]) }

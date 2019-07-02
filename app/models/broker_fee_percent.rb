@@ -1,4 +1,4 @@
-class BrokerFeePercent < ActiveRecord::Base
+class BrokerFeePercent < ApplicationRecord
 	validates :percent_amount, numericality: { greater_than: 0 }
 
 	after_update :clear_buildings_cache

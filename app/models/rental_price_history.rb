@@ -17,7 +17,7 @@
 #  end_year             :string
 #
 
-class RentalPriceHistory < ActiveRecord::Base
+class RentalPriceHistory < ApplicationRecord
 	belongs_to :unit
 
 	# validate :residence_end_date_after_residence_start_date?

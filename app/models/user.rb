@@ -28,7 +28,7 @@
 #  mobile                 :string
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include ActiveModel::Validations::HelperMethods
   rolify
   ratyrate_rater

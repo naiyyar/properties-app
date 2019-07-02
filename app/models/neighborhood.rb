@@ -10,7 +10,7 @@
 #  updated_at      :datetime         not null
 #
 
-class Neighborhood < ActiveRecord::Base
+class Neighborhood < ApplicationRecord
 
   include PgSearch
   pg_search_scope :nb_search, against: [:name],

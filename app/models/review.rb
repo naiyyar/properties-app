@@ -22,7 +22,7 @@
 #  scraped          :boolean          default(FALSE)
 #
 
-class Review < ActiveRecord::Base
+class Review < ApplicationRecord
 	resourcify
   belongs_to :reviewable, polymorphic: true
   belongs_to :user

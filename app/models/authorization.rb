@@ -14,6 +14,6 @@
 #  updated_at :datetime         not null
 #
 
-class Authorization < ActiveRecord::Base
+class Authorization < ApplicationRecord
 	belongs_to :user
 end

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -29,9 +28,8 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.string   "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_authorizations_on_user_id", using: :btree
   end
-
-  add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id", using: :btree
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -40,10 +38,9 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.float    "avg",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["rateable_id", "rateable_type"], name: "index_average_caches_on_rateable_id_and_rateable_type", using: :btree
+    t.index ["rater_id"], name: "index_average_caches_on_rater_id", using: :btree
   end
-
-  add_index "average_caches", ["rateable_id", "rateable_type"], name: "index_average_caches_on_rateable_id_and_rateable_type", using: :btree
-  add_index "average_caches", ["rater_id"], name: "index_average_caches_on_rater_id", using: :btree
 
   create_table "broker_fee_percents", force: :cascade do |t|
     t.integer  "percent_amount", default: 0
@@ -107,17 +104,16 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.boolean  "active_email",            default: true
     t.boolean  "active_web",              default: true
     t.float    "recommended_percent"
+    t.index ["building_name"], name: "index_buildings_on_building_name", using: :btree
+    t.index ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
+    t.index ["city"], name: "index_buildings_on_city", using: :btree
+    t.index ["management_company_id"], name: "index_buildings_on_management_company_id", using: :btree
+    t.index ["neighborhood"], name: "index_buildings_on_neighborhood", using: :btree
+    t.index ["neighborhood3"], name: "index_buildings_on_neighborhood3", using: :btree
+    t.index ["neighborhoods_parent"], name: "index_buildings_on_neighborhoods_parent", using: :btree
+    t.index ["user_id"], name: "index_buildings_on_user_id", using: :btree
+    t.index ["zipcode"], name: "index_buildings_on_zipcode", using: :btree
   end
-
-  add_index "buildings", ["building_name"], name: "index_buildings_on_building_name", using: :btree
-  add_index "buildings", ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
-  add_index "buildings", ["city"], name: "index_buildings_on_city", using: :btree
-  add_index "buildings", ["management_company_id"], name: "index_buildings_on_management_company_id", using: :btree
-  add_index "buildings", ["neighborhood"], name: "index_buildings_on_neighborhood", using: :btree
-  add_index "buildings", ["neighborhood3"], name: "index_buildings_on_neighborhood3", using: :btree
-  add_index "buildings", ["neighborhoods_parent"], name: "index_buildings_on_neighborhoods_parent", using: :btree
-  add_index "buildings", ["user_id"], name: "index_buildings_on_user_id", using: :btree
-  add_index "buildings", ["zipcode"], name: "index_buildings_on_zipcode", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -128,9 +124,8 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.integer  "building_id"
     t.integer  "user_id"
     t.string   "phone"
+    t.index ["building_id"], name: "index_contacts_on_building_id", using: :btree
   end
-
-  add_index "contacts", ["building_id"], name: "index_contacts_on_building_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -144,19 +139,17 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "document_downloads", force: :cascade do |t|
     t.integer  "upload_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["upload_id"], name: "index_document_downloads_on_upload_id", using: :btree
+    t.index ["user_id"], name: "index_document_downloads_on_user_id", using: :btree
   end
-
-  add_index "document_downloads", ["upload_id"], name: "index_document_downloads_on_upload_id", using: :btree
-  add_index "document_downloads", ["user_id"], name: "index_document_downloads_on_user_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "favorable_id"
@@ -165,12 +158,11 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.string   "favoriter_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["favorable_id", "favorable_type"], name: "index_favorites_on_favorable_id_and_favorable_type", using: :btree
+    t.index ["favorable_id"], name: "index_favorites_on_favorable_id", using: :btree
+    t.index ["favoriter_id", "favoriter_type"], name: "index_favorites_on_favoriter_id_and_favoriter_type", using: :btree
+    t.index ["favoriter_id"], name: "index_favorites_on_favoriter_id", using: :btree
   end
-
-  add_index "favorites", ["favorable_id", "favorable_type"], name: "index_favorites_on_favorable_id_and_favorable_type", using: :btree
-  add_index "favorites", ["favorable_id"], name: "index_favorites_on_favorable_id", using: :btree
-  add_index "favorites", ["favoriter_id", "favoriter_type"], name: "index_favorites_on_favoriter_id_and_favoriter_type", using: :btree
-  add_index "favorites", ["favoriter_id"], name: "index_favorites_on_favoriter_id", using: :btree
 
   create_table "featured_buildings", force: :cascade do |t|
     t.integer  "building_id",                 null: false
@@ -179,20 +171,18 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.boolean  "active",      default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.index ["building_id"], name: "index_featured_buildings_on_building_id", using: :btree
   end
-
-  add_index "featured_buildings", ["building_id"], name: "index_featured_buildings_on_building_id", using: :btree
 
   create_table "featured_comp_buildings", force: :cascade do |t|
     t.integer  "building_id"
     t.integer  "featured_comp_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["building_id", "featured_comp_id"], name: "f_comp_buildings", using: :btree
+    t.index ["building_id"], name: "index_featured_comp_buildings_on_building_id", using: :btree
+    t.index ["featured_comp_id"], name: "index_featured_comp_buildings_on_featured_comp_id", using: :btree
   end
-
-  add_index "featured_comp_buildings", ["building_id", "featured_comp_id"], name: "f_comp_buildings", using: :btree
-  add_index "featured_comp_buildings", ["building_id"], name: "index_featured_comp_buildings_on_building_id", using: :btree
-  add_index "featured_comp_buildings", ["featured_comp_id"], name: "index_featured_comp_buildings_on_featured_comp_id", using: :btree
 
   create_table "featured_comps", force: :cascade do |t|
     t.integer  "building_id",                 null: false
@@ -201,11 +191,10 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.boolean  "active",      default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.index ["active"], name: "index_featured_comps_on_active", using: :btree
+    t.index ["building_id"], name: "index_featured_comps_on_building_id", using: :btree
+    t.index ["start_date", "end_date"], name: "index_featured_comps_on_start_date_and_end_date", using: :btree
   end
-
-  add_index "featured_comps", ["active"], name: "index_featured_comps_on_active", using: :btree
-  add_index "featured_comps", ["building_id"], name: "index_featured_comps_on_building_id", using: :btree
-  add_index "featured_comps", ["start_date", "end_date"], name: "index_featured_comps_on_start_date_and_end_date", using: :btree
 
   create_table "gcoordinates", force: :cascade do |t|
     t.float    "latitude"
@@ -254,9 +243,8 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.float    "overall_avg",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["rateable_id", "rateable_type"], name: "index_overall_averages_on_rateable_id_and_rateable_type", using: :btree
   end
-
-  add_index "overall_averages", ["rateable_id", "rateable_type"], name: "index_overall_averages_on_rateable_id_and_rateable_type", using: :btree
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
@@ -264,10 +252,9 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.string   "searchable_type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["searchable_id", "searchable_type"], name: "index_pg_search_documents_on_searchable_id_and_searchable_type", using: :btree
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
   end
-
-  add_index "pg_search_documents", ["searchable_id", "searchable_type"], name: "index_pg_search_documents_on_searchable_id_and_searchable_type", using: :btree
-  add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
 
   create_table "prices", force: :cascade do |t|
     t.decimal  "min_price"
@@ -287,10 +274,9 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "review_id"
+    t.index ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
+    t.index ["rater_id"], name: "index_rates_on_rater_id", using: :btree
   end
-
-  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
-  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
 
   create_table "rating_caches", force: :cascade do |t|
     t.integer  "cacheable_id"
@@ -300,9 +286,8 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.string   "dimension"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
   end
-
-  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
   create_table "rent_medians", force: :cascade do |t|
     t.decimal  "price"
@@ -315,19 +300,18 @@ ActiveRecord::Schema.define(version: 20190620123933) do
   create_table "rental_price_histories", force: :cascade do |t|
     t.date     "residence_start_date"
     t.date     "residence_end_date"
-    t.decimal  "monthly_rent",         default: 0.0
-    t.decimal  "broker_fee",           default: 0.0
-    t.decimal  "non_refundable_costs", default: 0.0
-    t.decimal  "rent_upfront",         default: 0.0
-    t.decimal  "refundable_deposits",  default: 0.0
+    t.decimal  "monthly_rent",         default: "0.0"
+    t.decimal  "broker_fee",           default: "0.0"
+    t.decimal  "non_refundable_costs", default: "0.0"
+    t.decimal  "rent_upfront",         default: "0.0"
+    t.decimal  "refundable_deposits",  default: "0.0"
     t.integer  "unit_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "start_year"
     t.string   "end_year"
+    t.index ["unit_id"], name: "index_rental_price_histories_on_unit_id", using: :btree
   end
-
-  add_index "rental_price_histories", ["unit_id"], name: "index_rental_price_histories_on_unit_id", using: :btree
 
   create_table "review_flags", force: :cascade do |t|
     t.integer  "review_id"
@@ -335,10 +319,9 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.text     "flag_description"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["review_id"], name: "index_review_flags_on_review_id", using: :btree
+    t.index ["user_id"], name: "index_review_flags_on_user_id", using: :btree
   end
-
-  add_index "review_flags", ["review_id"], name: "index_review_flags_on_review_id", using: :btree
-  add_index "review_flags", ["user_id"], name: "index_review_flags_on_user_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.string   "review_title"
@@ -358,11 +341,10 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.boolean  "tos_agreement",    default: false
     t.string   "resident_from"
     t.boolean  "scraped",          default: false
+    t.index ["reviewable_id", "reviewable_type"], name: "index_reviews_on_reviewable_id_and_reviewable_type", using: :btree
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
+    t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
-
-  add_index "reviews", ["reviewable_id", "reviewable_type"], name: "index_reviews_on_reviewable_id_and_reviewable_type", using: :btree
-  add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
-  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -370,11 +352,10 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+    t.index ["name"], name: "index_roles_on_name", using: :btree
+    t.index ["resource_id", "resource_type"], name: "index_roles_on_resource_id_and_resource_type", using: :btree
   end
-
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
-  add_index "roles", ["resource_id", "resource_type"], name: "index_roles_on_resource_id_and_resource_type", using: :btree
 
   create_table "subway_station_lines", force: :cascade do |t|
     t.integer  "subway_station_id"
@@ -382,9 +363,8 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.string   "color"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["subway_station_id"], name: "index_subway_station_lines_on_subway_station_id", using: :btree
   end
-
-  add_index "subway_station_lines", ["subway_station_id"], name: "index_subway_station_lines_on_subway_station_id", using: :btree
 
   create_table "subway_stations", force: :cascade do |t|
     t.string   "name"
@@ -402,17 +382,17 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.text     "pros"
     t.text     "cons"
     t.integer  "number_of_bedrooms"
-    t.decimal  "number_of_bathrooms",     default: 0.0
-    t.decimal  "monthly_rent",            default: 0.0
-    t.decimal  "square_feet",             default: 0.0
-    t.decimal  "total_upfront_cost",      default: 0.0
+    t.decimal  "number_of_bathrooms",     default: "0.0"
+    t.decimal  "monthly_rent",            default: "0.0"
+    t.decimal  "square_feet",             default: "0.0"
+    t.decimal  "total_upfront_cost",      default: "0.0"
     t.date     "rent_start_date"
     t.date     "rent_end_date"
-    t.decimal  "security_deposit",        default: 0.0
-    t.decimal  "broker_fee",              default: 0.0
-    t.decimal  "move_in_fee",             default: 0.0
-    t.decimal  "rent_upfront_cost",       default: 0.0
-    t.decimal  "processing_fee",          default: 0.0
+    t.decimal  "security_deposit",        default: "0.0"
+    t.decimal  "broker_fee",              default: "0.0"
+    t.decimal  "move_in_fee",             default: "0.0"
+    t.decimal  "rent_upfront_cost",       default: "0.0"
+    t.decimal  "processing_fee",          default: "0.0"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.boolean  "balcony",                 default: false
@@ -433,10 +413,9 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.boolean  "can_be_converted",        default: false
     t.boolean  "dryer_in_unit",           default: false
     t.integer  "user_id"
+    t.index ["building_id"], name: "index_units_on_building_id", using: :btree
+    t.index ["user_id"], name: "index_units_on_user_id", using: :btree
   end
-
-  add_index "units", ["building_id"], name: "index_units_on_building_id", using: :btree
-  add_index "units", ["user_id"], name: "index_units_on_user_id", using: :btree
 
   create_table "uploads", force: :cascade do |t|
     t.string   "image_file_name"
@@ -455,20 +434,18 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
     t.string   "file_uid"
+    t.index ["imageable_id", "imageable_type"], name: "index_uploads_on_imageable_id_and_imageable_type", using: :btree
+    t.index ["user_id"], name: "index_uploads_on_user_id", using: :btree
   end
-
-  add_index "uploads", ["imageable_id", "imageable_type"], name: "index_uploads_on_imageable_id_and_imageable_type", using: :btree
-  add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
 
   create_table "useful_reviews", force: :cascade do |t|
     t.integer  "review_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_useful_reviews_on_review_id", using: :btree
+    t.index ["user_id"], name: "index_useful_reviews_on_user_id", using: :btree
   end
-
-  add_index "useful_reviews", ["review_id"], name: "index_useful_reviews_on_review_id", using: :btree
-  add_index "useful_reviews", ["user_id"], name: "index_useful_reviews_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -494,20 +471,18 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.string   "phone"
     t.text     "about_me"
     t.string   "mobile"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
+    t.index ["role_id", "user_id"], name: "index_users_roles_on_role_id_and_user_id", using: :btree
+    t.index ["role_id"], name: "index_users_roles_on_role_id", using: :btree
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+    t.index ["user_id"], name: "index_users_roles_on_user_id", using: :btree
   end
-
-  add_index "users_roles", ["role_id", "user_id"], name: "index_users_roles_on_role_id_and_user_id", using: :btree
-  add_index "users_roles", ["role_id"], name: "index_users_roles_on_role_id", using: :btree
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
-  add_index "users_roles", ["user_id"], name: "index_users_roles_on_user_id", using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.boolean  "vote",          default: false, null: false
@@ -518,9 +493,8 @@ ActiveRecord::Schema.define(version: 20190620123933) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "review_id"
+    t.index ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type", using: :btree
+    t.index ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type", using: :btree
   end
-
-  add_index "votes", ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type", using: :btree
-  add_index "votes", ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type", using: :btree
 
 end

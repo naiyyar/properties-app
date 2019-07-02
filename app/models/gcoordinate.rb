@@ -13,7 +13,7 @@
 #  neighborhood :string
 #
 
-class Gcoordinate < ActiveRecord::Base
+class Gcoordinate < ApplicationRecord
 
 	def self.neighbohood_boundary_coordinates neighborhoods
 		nb_coords = where("neighborhood = ?", neighborhoods)

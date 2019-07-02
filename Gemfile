@@ -1,120 +1,120 @@
 source 'https://rubygems.org'
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.1'
+#gem 'rails', '4.2.5.1'
+#gem 'rails', '>= 5.0.0.rc2', '< 5.1'
+gem 'rails', '~> 5.0.7'
 
-#
-gem 'browser'
-
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'bootstrap-datepicker-rails'
-gem 'will_paginate-bootstrap'
-#icons
-gem "font-awesome-rails"
-gem 'simple-line-icons-rails'
-
-gem "paperclip", "~> 5.0.0"
+#A
+#gem 'activesupport-json_encoder'
+gem 'american_date'
 gem 'aws-sdk', '~> 2.3'
 
-gem 'puma'
+#B
+gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'browser'
+gem 'buttercms-rails'
 
-gem 'httparty'
-
-#gem 'exception_handler', '~> 0.8.0.0'
-
-#delayed Job
-gem 'delayed_job_active_record'
-#gem 'foreman'
-
-#
-gem 'activesupport-json_encoder'
-
-#To make the :active_record_store functionality works
-#gem 'activerecord-session_store'
-
-gem 'jquery-fileupload-rails', github: 'Springest/jquery-fileupload-rails'
-#gem 'remotipart', '~> 1.2'
-
-#gem 'paperclip-av-transcoder' #for vidoes
-gem "figaro"
-#gem 'gmaps4rails'
-gem 'underscore-rails'
-
-gem 'geocoder'
-
-gem 'haml', git: 'https://github.com/haml/haml'
-
-#importing csv/excel
-gem 'roo'
-gem "iconv", "~> 1.0.3"
-
-#checking if given email address is real
-gem 'email_verifier'
-
-#sitemap
-#gem 'dynamic_sitemaps'
-gem 'sitemap_generator'
-
-#Error Messages, Form validations
-gem 'dynamic_form'
+#C
 gem 'client_side_validations'
-#gem 'validates_email_format_of'
-
-gem 'american_date'
-
-gem 'pg', '~> 0.21.0'
-
-#searching
-gem 'pg_search'
-
-#voting
-gem 'thumbs_up'
-
-#Multistep
-gem 'wicked'
-
-#
-#gem 'jquery-ui-rails'
-
-#Rest
-#gem 'rest-client'
-
-#Role management
-gem "rolify"
 gem 'cancancan'
-
-#
-gem 'social-share-button'
-
-#rating
-gem 'ratyrate', github: 'wazery/ratyrate'
-
-gem 'momentjs-rails'
-gem 'jquery-placeholder-rails'
-
-# good to sort a table
-#gem 'rails_sortable'
-
-# Use sqlite3 as the database for Active Record
-
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-gem 'devise'
+
+#D
+gem 'dalli'
+gem 'delayed_job_active_record'
+gem 'dynamic_form'
+gem 'devise', '4.4.3'
+
+#E
+gem 'email_verifier'
+
+#F
+gem "figaro"
+gem 'filterrific', '~> 5.0'
+gem "font-awesome-rails"
+#G
+gem 'geocoder'
+
+#H
+gem 'haml', git: 'https://github.com/haml/haml'
+gem 'httparty'
+
+#I
+gem "iconv", "~> 1.0.3"
+
+#J
+gem 'jbuilder', '~> 2.0'
+gem 'jquery-fileupload-rails', github: 'Springest/jquery-fileupload-rails'
+gem 'jquery-placeholder-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+#K
+
+#L
+
+#M
+gem 'memcachier'
+gem 'momentjs-rails'
+gem 'multi_fetch_fragments'
+
+#N
+
+#O
+gem 'oj', '~> 2.16.1'  #Oj for JSON serialization
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
+
+#P
+gem "paperclip", "~> 5.0.0"
+gem 'pg', '~> 0.21.0'
+gem 'pg_search'
+gem 'puma'
+
+#Q
+
+#R
+gem 'ratyrate', github: 'wazery/ratyrate'
+gem 'roo'
+gem "rolify"
+gem 'rollbar'
+
+#S
+gem 'sass-rails', '~> 5.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'simple-line-icons-rails'
+gem 'sitemap_generator'
+gem 'social-share-button'
+
+#T
+gem 'thumbs_up'
+
+#U
+gem 'underscore-rails'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
+#V
+gem 'valid_url'
+
+#W
+gem 'wicked'
+gem 'will_paginate-bootstrap'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
 #gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -124,31 +124,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'omniauth'
-gem 'omniauth-facebook' #, '1.4.0'
-gem "omniauth-google-oauth2"
-
-#fancybox
-#gem 'fancybox2-rails', '~> 0.2.8'
-
-# Error tracking
-gem 'rollbar'
-gem 'oj', '~> 2.16.1'  #Oj for JSON serialization
-
-gem 'valid_url'
-
-gem 'buttercms-rails'
-
-#gem 'progressive_render'
-
-#gem 'actionpack-page_caching'
-#gem 'actionpack-action_caching'
-gem 'memcachier'
-gem 'dalli'
-gem 'multi_fetch_fragments'
-
-#filtering
-gem 'filterrific', '~> 4.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -179,4 +154,4 @@ group :production do
 
 end
 
-ruby "2.2.2"
+ruby "2.4.0"

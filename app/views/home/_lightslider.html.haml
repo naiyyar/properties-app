@@ -1,4 +1,5 @@
-- if @image_uploads.length > 0
+- images_count = @image_uploads.length
+- if images_count > 0
   - first_image = @image_uploads[0]
   .item
     .clearfix{ style: "width:100%;" }
@@ -6,7 +7,7 @@
         %h4.comp.featured Featured
       %h4.lightslider-slides-counts
         %span.current 1
-        %span.total="/ #{images_count = @image_uploads.length}"
+        %span.total="/ #{images_count}"
 
       %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'split', path:  building_path(building) } }
         %li

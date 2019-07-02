@@ -13,6 +13,6 @@
 #  updated_at :datetime         not null
 #
 
-class Contact < ActiveRecord::Base
+class Contact < ApplicationRecord
 	belongs_to :building
 end
