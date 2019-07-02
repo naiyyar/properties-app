@@ -202,21 +202,17 @@ class Building < ApplicationRecord
     [studio, one_bed, two_bed, three_bed, four_plus_bed].compact
   end
 
-  def saved_amount(broker_percent)
-    median_arr = []
-    prices = RentMedian.rent_medians(price)
-    bedroom_ranges.each do |bed_range|
-      prices = prices.where(bed_type: bed_range)
-      if prices.present?
-        median = prices.first
-        median_arr << (((median.price * 12)*broker_percent)/100).to_i
-      end
-    end
-    median_arr.sort
+  def rent_median_prices(rent_medians)
+    rent_medians.where(range: price, bed_type: bedroom_ranges).order(price: :asc)
   end
 
-  def min_save_amount broker_percent
-    saved_amount(broker_percent)[0]
+  def saved_amount(rent_medians, broker_percent)
+    median_prices = rent_median_prices(rent_medians).pluck(:price)
+    median_prices.map {|price| (((price*12)*broker_percent)/100).to_i}.sort
+  end
+
+  def min_save_amount rent_medians, broker_percent
+    saved_amount(rent_medians, broker_percent)[0]
   end
 
   def to_param

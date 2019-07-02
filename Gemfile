@@ -79,7 +79,6 @@ gem "paperclip", "~> 5.0.0"
 gem 'pg', '~> 0.21.0'
 gem 'pg_search'
 gem 'puma'
-gem 'progressive_render'
 
 #Q
 
