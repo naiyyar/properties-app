@@ -1,19 +1,15 @@
 Rails.application.routes.draw do
-  
   post '/add_or_update_rent_medians' => 'rent_medians#add_or_update_rent_medians'
   
   resources :broker_fee_percents, only: [:new, :create, :update, :edit]
-  
-  get 'errors/not_found'
-  get 'errors/internal_server_error'
 
-  resources :featured_buildings
+  resources :featured_buildings, :prices
   resources :featured_comps do
     member do
       get :disconnect_building
     end
   end
-  resources :prices
+  
   get '/price_ranges' => 'prices#index'
   post '/add_or_update_prices' => 'prices#add_or_update_prices'
 
@@ -42,11 +38,9 @@ Rails.application.routes.draw do
 
   get 'load_more_reviews', to: 'management_companies#load_more_reviews', as: :load_more_reviews
   
-  resources :neighborhood_links
-  resources :review_flags
-  resources :contacts
+  resources :neighborhood_links, :review_flags, :contacts, :rental_price_histories
+  
   get '/about', to: 'contacts#about'
-  resources :rental_price_histories
   post '/rate' => 'rater#create', :as => 'rate'
   
   devise_for :users, controllers: { 
@@ -96,10 +90,8 @@ Rails.application.routes.draw do
   end
 
   #multisteps Forms
-  resources :user_steps
-  resources :building_steps
-  resources :unit_steps
-
+  resources :user_steps, :building_steps, :unit_steps
+  
   resources :units do
     resources :reviews
     resources :uploads
@@ -124,6 +116,8 @@ Rails.application.routes.draw do
   get "/404", to: "errors#not_found"
   get "/422", to: "errors#unacceptable"
   get "/500", to: "errors#internal_server_error"
+  get 'errors/not_found'
+  get 'errors/internal_server_error'
   
   root "home#index"
   # The priority is based upon order of creation: first created -> highest priority.

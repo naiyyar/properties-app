@@ -1,4 +1,4 @@
-class Price < ActiveRecord::Base
+class Price < ApplicationRecord
 
 	def self.min_price type_val, prices
     price_rec(type_val, prices).min_price

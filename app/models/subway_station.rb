@@ -1,4 +1,4 @@
-class SubwayStation < ActiveRecord::Base
+class SubwayStation < ApplicationRecord
 	has_many :subway_station_lines
 
 	#validates_uniqueness_of :name

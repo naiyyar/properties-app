@@ -44,5 +44,7 @@
 //= require jquery.fancybox
 //= require input_validations
 //= require jquery.mask.min
+//= require progressive_render
+
 
 //= require_tree .

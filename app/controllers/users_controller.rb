@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	load_and_authorize_resource
-	before_filter :set_user, only: [:edit, :update, :show, :contribution, :saved_buildings]
+	before_action :set_user, only: [:edit, :update, :show, :contribution, :saved_buildings]
 
 	def index
 		@users = User.order('created_at desc').includes(:buildings, :favorites)

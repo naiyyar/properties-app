@@ -21,7 +21,7 @@
 #  file_uid              :string
 #
 
-class Upload < ActiveRecord::Base
+class Upload < ApplicationRecord
 	attr_accessor :rotation_degrees, :rotate
 	resourcify
 	belongs_to :imageable, polymorphic: true, touch: true
@@ -71,8 +71,8 @@ class Upload < ActiveRecord::Base
   # #   end
   # end
 
-  def self.building_photos buildings
-    where(imageable_id: buildings.map(&:id), imageable_type: 'Building')
+  def self.building_photos building_ids
+    where(imageable_id: building_ids, imageable_type: 'Building')
   end
 
   def uploaded_img_url

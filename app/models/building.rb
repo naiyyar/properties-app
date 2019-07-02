@@ -56,7 +56,7 @@
 #  active_web              :boolean
 #  active_email            :boolean
 
-class Building < ActiveRecord::Base
+class Building < ApplicationRecord
   include PgSearch
   include Imageable
   include SaveBuildingNeighborhood
@@ -120,6 +120,10 @@ class Building < ActiveRecord::Base
 
   pg_search_scope :search_by_zipcode, against: [:zipcode],
     :using => { :tsearch=> { prefix: true } }
+
+  pg_search_scope :search_by_neighborhood, against: [:neighborhood, :neighborhoods_parent, :neighborhood3],
+    :using => [:tsearch, :trigram]
+  pg_search_scope :search_by_city, against: [:city]
 
   filterrific(
    default_filter_params: { },
@@ -200,7 +204,7 @@ class Building < ActiveRecord::Base
 
   def saved_amount(broker_percent)
     median_arr = []
-    prices = RentMedian.where(range: price)
+    prices = RentMedian.rent_medians(price)
     bedroom_ranges.each do |bed_range|
       prices = prices.where(bed_type: bed_range)
       if prices.present?

@@ -10,7 +10,7 @@
 #  updated_at       :datetime         not null
 #
 
-class ReviewFlag < ActiveRecord::Base
+class ReviewFlag < ApplicationRecord
 	belongs_to :review
 	belongs_to :user
 end

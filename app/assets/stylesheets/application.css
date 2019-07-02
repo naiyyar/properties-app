@@ -23,4 +23,6 @@
  *= require bootstrap-datepicker3
  *= require social-share-button
  *= require easy-autocomplete
+ *= require progressive_render
+
  */

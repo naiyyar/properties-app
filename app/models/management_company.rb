@@ -15,7 +15,7 @@
 	website 	string
 =end
 
-class ManagementCompany < ActiveRecord::Base
+class ManagementCompany < ApplicationRecord
 	has_many :buildings
 	validates :website, :url => true, allow_blank: true
 
