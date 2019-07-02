@@ -10,17 +10,13 @@ class UsersController < ApplicationController
 	end
 
 	def saved_buildings
-		broker_percent = BrokerFeePercent.first.percent_amount
+		@rent_medians = RentMedian.all
+		@broker_percent = BrokerFeePercent.first.percent_amount
 		@buildings = Building.saved_favourites(@user)
 												 .paginate(:page => params[:page], :per_page => 20)
 												 .includes(:featured_building)
     
-    @buildings.each do |b| 
-      images = b.chached_image_uploads
-      b.first_image = images[0]
-      b.uploaded_images_count = images.count
-      b.min_saved_amount = b.min_save_amount(broker_percent)
-    end
+    @photos = Upload.building_photos(@buildings.pluck(:id))
 		@hash = Building.buildings_json_hash(@buildings)
     @zoom = 12
     @show_map_btn = @half_footer = true

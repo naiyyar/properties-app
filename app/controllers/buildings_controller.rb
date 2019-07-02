@@ -29,8 +29,10 @@ class BuildingsController < ApplicationController
   def favorite
     if current_user.present?
       current_user.favorite(@building)
+      @saved_as_favourite = true
     else
       session[:favourite_object_id] = params[:object_id]
+      @saved_as_favourite = false
     end
     respond_to do |format|
       format.js
@@ -40,7 +42,6 @@ class BuildingsController < ApplicationController
 
   def unfavorite
     current_user.unfavorite(@building)
-    
     render json: { message: 'Success' }
   end
 
