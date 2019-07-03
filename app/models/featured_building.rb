@@ -20,7 +20,7 @@ class FeaturedBuilding < ApplicationRecord
   )
 
   def self.active_featured_buildings building_ids
-    where(building_id: building_ids).active.not_expired
+    where(building_id: building_ids).active
   end
 
   def self.active_building_ids building_ids
