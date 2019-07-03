@@ -87,6 +87,11 @@ class BuildingsController < ApplicationController
     @saved_amounts = @building.saved_amount(RentMedian.all, broker_percent)
     @building_price = @building.price
     @rating_cache = @building.rating_cache?
+    @price_ranges = {}
+    prices = Price.where(range: @building_price)
+    @building.bedroom_ranges.each do |bed_range|
+      @price_ranges[bed_range] = prices.find_by(bed_type: bed_range)
+    end
     #building + units images
     uploads = @building.chached_image_uploads
     @building.buildings_images = uploads
