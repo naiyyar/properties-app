@@ -36,6 +36,7 @@ class ManagementCompaniesController < ApplicationController
     @reviews = @reviews.limit(10)
     if buildings.present?
       @broker_percent = BrokerFeePercent.first.percent_amount
+      @rent_medians = RentMedian.all
       #finding average rating for all managed buildings 
       @stars = @management_company.get_average_stars(buildings, @total_reviews)
       #For map
@@ -49,7 +50,6 @@ class ManagementCompaniesController < ApplicationController
       end
       @zoom = buildings.length > 70 ? 13 : 11
     end
-    @rent_medians = RentMedian.all
     @photos = Upload.building_photos(@all_buildings.map(&:id))
     @building_photos_count = @photos.count
     @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 

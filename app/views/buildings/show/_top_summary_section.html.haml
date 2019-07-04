@@ -28,7 +28,7 @@
 					
 					= render 'property_info', object: @building 
     
-	- unless @uploads.present?
+	- unless @building.uploaded_images_count > 0
 		.sliderLink
 			%p.text-danger No photos are available.
 			- if user_signed_in?

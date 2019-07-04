@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     else
       fav_color_class = 'unfilled-heart'
     end
-    min_save_amount = building.min_save_amount(@rent_medians, BrokerFeePercent.first.percent_amount)
+    min_save_amount = building.min_save_amount(@rent_medians, @broker_percent)
     render json: { html: render_to_string(:partial => "/layouts/shared/custom_infowindow", 
                                           :locals => {  building: building,
                                                         image: Upload.marker_image(building),
@@ -65,7 +65,6 @@ class HomeController < ApplicationController
       end
       @buildings = @buildings.includes(:building_average, :featured_building) if @buildings.present?
       if @buildings.present?
-        @broker_percent = BrokerFeePercent.first.percent_amount
         final_results = Building.with_featured_building(@buildings, params[:page])
         @per_page_buildings = final_results[1]
         @all_buildings = final_results[0][:all_buildings]
@@ -147,6 +146,7 @@ class HomeController < ApplicationController
   end
 
   def set_rent_medians
+    @broker_percent = BrokerFeePercent.first.percent_amount
     @rent_medians = RentMedian.all
   end
 end

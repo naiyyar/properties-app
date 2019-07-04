@@ -1,4 +1,4 @@
-= form_for @contact, html: { class: 'smart-form' } do |f|
+= form_for @contact, html: { class: 'smart-form pm-contact-form' } do |f|
   %fieldset
     .form-group
       / = f.text_field :email, class: 'form-control validate', placeholder: 'Email*', pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$", title: 'Invalid email address'
@@ -10,10 +10,18 @@
     .form-group
       = f.text_area :comment, value: "I'm interested in availabilities at #{@building.building_name_or_address}.", class: "form-control validate", rows: 5, style: 'color: #777777;'
   
-    = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder'
+    = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder', style: 'font-size: 18px;'
     
-%div{style: 'margin: 10px 0px 18px 14px;'}
+%div.pm-contact-info{style: 'margin: 10px 0px 18px 14px;'}
   %h4{style: 'margin-top: 10px;margin-bottom: 6px;'} Contact info
+  - if @building.management_company.present?
+    %div=@building.management_company.name
+  
   Phone: 
   =link_to "#{number_to_phone(@building.phone, area_code: true)}", "tel:#{@building.phone}", class: 'hyper-link'
+
+  %div.margin-top-20
+    You can save 
+    %span{style: 'color: #03A63C'}= number_to_currency(@min_save_amount)
+    in broker fees by renting directly from this property manager. 
       
