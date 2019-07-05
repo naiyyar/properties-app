@@ -186,6 +186,10 @@ class Building < ApplicationRecord
     featured?
   end
 
+  def active_comps
+    featured_comps.active
+  end
+
   def self.city_count city, sub_boroughs = nil
     if sub_boroughs.present?
       Rails.cache.fetch([self, city, 'sub_boroughs']) { where('city = ? OR neighborhood in (?)', city, sub_boroughs).count }
@@ -245,8 +249,8 @@ class Building < ApplicationRecord
     Rails.cache.fetch([self, 'image_uploads']) { image_uploads.to_a }
   end
 
-  def chached_doc_uploads
-    Rails.cache.fetch([self, 'doc_uploads']) { uploads.where('document_file_name is not null').to_a }
+  def doc_uploads
+    uploads.where('document_file_name is not null').to_a
   end
 
   def featured?

@@ -13,7 +13,7 @@
     = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder', style: 'font-size: 18px;'
     
 %div.pm-contact-info{style: 'margin: 10px 0px 18px 14px;'}
-  %h4{style: 'margin-top: 10px;margin-bottom: 6px;'} Contact info
+  %h4{style: 'margin-top: 10px;margin-bottom: 6px;'} Contact Info
   - if @building.management_company.present?
     %div=@building.management_company.name
   
@@ -22,6 +22,6 @@
 
   %div.margin-top-20
     You can save 
-    %span{style: 'color: #03A63C'}= number_to_currency(@min_save_amount)
+    %span{style: 'color: #03A63C'}= number_to_currency(@min_save_amount, precision: 0)
     in broker fees by renting directly from this property manager. 
       

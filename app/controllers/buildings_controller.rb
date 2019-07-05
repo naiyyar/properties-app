@@ -93,13 +93,13 @@ class BuildingsController < ApplicationController
       @price_ranges[bed_range] = prices.find_by(bed_type: bed_range)
     end
     #building + units images
-    uploads = @building.chached_image_uploads
+    uploads = @building.image_uploads
     @building.buildings_images = uploads
     @building.uploaded_images_count = uploads.count
-    @documents = @building.chached_doc_uploads
+    @documents = @building.doc_uploads
 
     #Similiar buildings
-    @similar_properties = Building.where(id: @building.featured_comps.active.pluck(:building_id)).includes(:building_average)
+    @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average)
     
     @lat = @building.latitude
     @lng = @building.longitude
