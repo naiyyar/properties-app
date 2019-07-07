@@ -56,6 +56,7 @@ gem 'jquery-fileupload-rails', github: 'Springest/jquery-fileupload-rails'
 gem 'jquery-placeholder-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 
 #K
 gem 'kgio'
@@ -100,6 +101,7 @@ gem 'social-share-button'
 
 #T
 gem 'thumbs_up'
+gem 'turbolinks', '~> 5.2.0'
 
 #U
 gem 'underscore-rails'

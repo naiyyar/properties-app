@@ -132,7 +132,6 @@ Rails.application.configure do
     :entitystore  => client
   }
 
-  # config.static_cache_control = "public, max-age=2592000"
   config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=2592000' }
 
 end
