@@ -10,7 +10,7 @@
             </div>
           </div>
           <h2><%= building.building_name_or_address %></h2>
-          <div class="cardAddress"><span class="icon-pointer"></span> <%= building.street_address %>, <%= building.zipcode %></div>
+          <div class="cardAddress"><span class="fa fa-map-marker"></span> <%= building.street_address %>, <%= building.zipcode %></div>
           <%= render partial: 'home/building_detail', locals: {building: building} %>
         <%end%>
 

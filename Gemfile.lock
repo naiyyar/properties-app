@@ -316,8 +316,6 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    simple-line-icons-rails (0.1.5)
-      railties (>= 3.2, < 5.3)
     sitemap_generator (6.0.2)
       builder (~> 3.0)
     social-share-button (1.2.0)
@@ -429,7 +427,6 @@ DEPENDENCIES
   roo
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  simple-line-icons-rails
   sitemap_generator
   social-share-button
   spring

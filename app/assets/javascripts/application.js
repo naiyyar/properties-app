@@ -12,13 +12,13 @@
 //
 //= require jquery
 //= require jquery.turbolinks
-//= require turbolinks
 //= require rails.validations
 //= require jquery_ujs
 //= require jquery-2.1.1.min
 //= require jquery-ui.min
 //= require jquery-ui-touch-punch
 //= require jquery-placeholder
+//= require turbolinks
 //= require bootstrap
 //= require jquery.touchSwipe.js
 //= require jquery.slimscroll.min

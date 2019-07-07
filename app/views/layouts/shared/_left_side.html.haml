@@ -6,7 +6,7 @@
     %ul
       %li.btn_contribute
         %a{href: contribute_buildings_path}
-          %span.navIcon.icon-plus
+          %span.navIcon.fa.fa-plus-circle
           %span.navLabel Write a review
       - if current_user.blank?
         %li
@@ -24,23 +24,23 @@
             %span.navLabel Buildings
         %li
           %a{href: "/units"}
-            %span.navIcon.icon-home
+            %span.navIcon.fa.fa-home
             %span.navLabel Units
         %li
           %a{href: "/users"}
-            %span.navIcon.icon-user
+            %span.navIcon.fa.fa-user
             %span.navLabel Users
         %li
           %a{href: "/documents"}
-            %span.navIcon.icon-docs
+            %span.navIcon.fa.fa-file-o
             %span.navLabel Documents
         %li
           %a{href: "/reviews"}
-            %span.navIcon.icon-star
+            %span.navIcon.fa.fa-star
             %span.navLabel Reviews
         %li
           %a{href: "/neighborhood_links"}
-            %span.navIcon.icon-link
+            %span.navIcon.fa.fa-link
             %span.navLabel Neighborhood guides
         %li
           %a{href: management_companies_path}
@@ -67,7 +67,7 @@
             %span.navLabel Blog
         %li
           %a{href: "/about"}
-            %span.navIcon.icon-info
+            %span.navIcon.fa.fa-info-circle
             %span.navLabel About us
         %li
           %a{href: new_contact_path}
@@ -76,5 +76,5 @@
       - if current_user.present?
         %li
           %a{href: "#{saved_buildings_user_path(current_user)}"}
-            %span.navIcon.icon-heart
+            %span.navIcon.fa.fa-heart
             %span.navLabel Saved buildings

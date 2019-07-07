@@ -1,6 +1,6 @@
 .property_information
   .address{style: "margin-left: -1px;"}
-    %span.icon-location-pin
+    %span.fa.fa-map-marker
     = "#{@building.street_address}, #{@building.zipcode}"
   - if @building.building_type.present? or @building.neighbohoods.present?
     %div

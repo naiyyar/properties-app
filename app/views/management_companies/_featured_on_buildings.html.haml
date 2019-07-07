@@ -10,7 +10,7 @@
                 = building.favorites.count
           %h2= building.building_name_or_address
           .cardAddress
-            %span.icon-pointer
+            %span.fa.fa-map-marker
             = building.street_address
             , #{building.zipcode}
           = render partial: 'home/building_detail', locals: {building: building}
