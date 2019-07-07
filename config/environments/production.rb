@@ -16,7 +16,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = true #ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(:harmony => true) #:uglifier
@@ -110,13 +110,28 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
-  config.cache_store = :dalli_store,
-                    (ENV["MEMCACHIER_SERVERS"] || "").split(","),
-                    {:username => ENV["MEMCACHIER_USERNAME"],
-                     :password => ENV["MEMCACHIER_PASSWORD"],
-                     :failover => true,
-                     :socket_timeout => 1.5,
-                     :socket_failure_delay => 0.2,
-                     :down_retry_delay => 60
-                    }
+  client = Dalli::Client.new((ENV["MEMCACHIER_SERVERS"] || "").split(","),
+                           :username => ENV["MEMCACHIER_USERNAME"],
+                           :password => ENV["MEMCACHIER_PASSWORD"],
+                           :failover => true,
+                           :socket_timeout => 1.5,
+                           :socket_failure_delay => 0.2,
+                           :value_max_bytes => 10485760)
+
+  # config.cache_store = :dalli_store,
+  #                   (ENV["MEMCACHIER_SERVERS"] || "").split(","),
+  #                   {:username => ENV["MEMCACHIER_USERNAME"],
+  #                    :password => ENV["MEMCACHIER_PASSWORD"],
+  #                    :failover => true,
+  #                    :socket_timeout => 1.5,
+  #                    :socket_failure_delay => 0.2,
+  #                    :down_retry_delay => 60
+  #                   }
+  config.action_dispatch.rack_cache = {
+    :metastore    => client,
+    :entitystore  => client
+  }
+
+  config.static_cache_control = "public, max-age=2592000"
+
 end

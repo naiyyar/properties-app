@@ -58,6 +58,7 @@ gem 'jquery-placeholder-rails'
 gem 'jquery-rails'
 
 #K
+gem 'kgio'
 
 #L
 
@@ -87,6 +88,7 @@ gem 'ratyrate', github: 'wazery/ratyrate'
 gem 'roo'
 gem "rolify"
 gem 'rollbar'
+gem 'rack-cache'
 
 #S
 gem 'sass-rails', '~> 5.0'

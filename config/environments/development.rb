@@ -17,6 +17,7 @@ Rails.application.configure do
     config.action_controller.perform_caching = true
 
     config.cache_store = :dalli_store, nil, { :namespace => 'dev_apt_reviews', :expires_in => 1.day, :compress => true }
+
     config.public_file_server.headers = {
       'Cache-Control' => 'public, max-age=172800'
     }

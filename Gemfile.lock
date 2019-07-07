@@ -175,6 +175,7 @@ GEM
       regexp_property_values (~> 0.3)
     json (1.8.6)
     jwt (2.2.1)
+    kgio (2.11.2)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.7.0)
@@ -243,6 +244,8 @@ GEM
     puma (4.0.0)
       nio4r (~> 2.0)
     rack (2.0.7)
+    rack-cache (1.9.0)
+      rack (>= 0.4)
     rack-contrib (2.1.0)
       rack (~> 2.0)
     rack-mini-profiler (1.0.2)
@@ -393,6 +396,7 @@ DEPENDENCIES
   jquery-fileupload-rails!
   jquery-placeholder-rails
   jquery-rails
+  kgio
   letter_opener
   memcachier
   meta_request
@@ -407,6 +411,7 @@ DEPENDENCIES
   pg_search
   pry
   puma
+  rack-cache
   rack-mini-profiler
   rails (~> 5.0.7)
   rails-footnotes (~> 4.0)
