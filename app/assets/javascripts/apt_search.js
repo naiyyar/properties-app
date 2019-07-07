@@ -78,7 +78,7 @@ app.apartments.prototype = {
     $('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
     
     this._input.removeClass('loader');
-    var ul_height = $('ul.ui-autocomplete').outerHeight() + 44;
+    var ul_height = $('ul.ui-autocomplete').outerHeight() + 42;
 
     $('#apt-search-form').find('.no-match-link').remove();
     var elemToAppend = '<div class="no-match-link" style="box-shadow: 0px 1px 4px rgba(0,0,0,0.6);">' +

@@ -93,13 +93,12 @@ class BuildingsController < ApplicationController
       @price_ranges[bed_range] = prices.find_by(bed_type: bed_range)
     end
     #building + units images
-    uploads = @building.image_uploads
-    @building.buildings_images = uploads
-    @building.uploaded_images_count = uploads.count
+    @uploads = @building.image_uploads
+    @uploaded_images_count = @uploads.count
     @documents = @building.doc_uploads
 
     #Similiar buildings
-    @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average)
+    @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average) if @building.active_comps.present?
     
     @lat = @building.latitude
     @lng = @building.longitude
@@ -110,7 +109,7 @@ class BuildingsController < ApplicationController
     @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
                   "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 
                   "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.name if @building.management_company.present? }. "+ 
-                  "Click to view #{@building.uploaded_images_count} photos and #{@building.reviews_count} reviews"
+                  "Click to view #{@uploaded_images_count} photos and #{@building.reviews_count} reviews"
     
     flash[:notice] = "Files are uploaded successfully." if params[:from_uploaded].present?
   end
