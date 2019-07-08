@@ -40,7 +40,13 @@ module BuildingsHelper
 
 	def imageable upload
 		if upload.imageable.present?
-			upload.imageable_type == 'Building' ? upload.imageable.building_name : upload.imageable.name
+			if upload.imageable_type == 'Building'
+				upload.imageable.building_name
+			elsif upload.imageable_type == 'Unit'
+				upload.imageable.name
+			else
+				''
+			end
 		end
 	end
 

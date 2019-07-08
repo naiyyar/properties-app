@@ -21,7 +21,7 @@ class ContactsController < ApplicationController
     @building = Building.find_by(id: params[:building_id])
     broker_percent = BrokerFeePercent.first.percent_amount
     rent_medians = RentMedian.all
-    @min_save_amount = @building.min_save_amount(rent_medians, broker_percent)
+    @min_save_amount = @building.present? ? @building.min_save_amount(rent_medians, broker_percent) : 0
     @contact = Contact.new
   end
 
