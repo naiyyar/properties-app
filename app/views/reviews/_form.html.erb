@@ -164,11 +164,6 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 		  	<%= f.hidden_field :user_id, value: current_user.id %>
 		  <%end%>
 		  <br />
-		  <%# if params[:unit_id].present? %>
-		  	<%#= link_to 'Cancel', unit_path(@reviewable), class: "btn btn-default btn-xlg btn-xs-block margin-top-xs-10 hidden-xs" %>
-		  <%#else%>
-		  	<%#= link_to 'Cancel', building_path(@reviewable), class: "btn btn-default btn-xlg btn-xs-block margin-top-xs-10 hidden-xs" %>
-		  <%#end%>
 		   <%= f.submit 'Submit Review', class: "btn btn-primary btn-xlg btn-xs-block", id: 'submit_review' %>
 	  </div>
 	</div>

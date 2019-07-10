@@ -2,13 +2,12 @@
   = render 'layouts/home/slider'
   = render 'layouts/home/header'
   .search-panel
-    .align-center.home-about-nyc-apt
+    .text-center.home-about-nyc-apt
       %h1 Exclusively No Broker Fee Apartments In NYC.
       %h2 transparentcity is the largest directory of links to no-fee, no-broker buildings in NYC.
     .home-search-form
       = render partial: 'home/search_form'
 
-/ - cache(['home', 'popular_neighborhoods', "#{@buildings_count}"]) do
 = render 'layouts/home/popular_neighborhoods'
 
 .home-wrapper.pb20{style: 'padding: 20px 20px 20px;'}

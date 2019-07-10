@@ -23,7 +23,7 @@
   .clearfix
 
 - if @has_related_posts
-  %h2.osLight.align-left Related Articles
+  %h2.osLight.text-left Related Articles
   .row.pb20
     - @related_posts.each do |post|
       - if post.slug != @post.slug and @post.categories.map(&:name) == post.categories.map(&:name)

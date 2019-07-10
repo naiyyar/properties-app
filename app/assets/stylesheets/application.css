@@ -12,14 +12,13 @@
  *
  *= require_tree .
  *= require_self
- *= require jquery-ui
+ *= require jquery-ui.min
  *= require font-awesome
  *= require fullscreen-slider
- *= require dropzone
+ *= require dropzone.min
  *= require slider
- *= require swiper
+ *= require swiper.min
  *= require slide-and-swipe-menu
  *= require bootstrap-datepicker3
  *= require social-share-button
- *= require easy-autocomplete
  */
