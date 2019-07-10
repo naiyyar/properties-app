@@ -41,7 +41,7 @@ gem "figaro"
 gem 'filterrific', '~> 5.0'
 gem "font-awesome-rails"
 #G
-gem 'geocoder'
+gem 'geocoder', '1.4.5'
 
 #H
 gem 'haml', git: 'https://github.com/haml/haml'

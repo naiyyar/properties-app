@@ -187,8 +187,7 @@ manhattan_neightborhoods_hash = [
 	{ key: 'Harlem',						url: dropbox_url+'pyepghx0d035af2/harlem.kml?dl=1'},
 	{ key: 'Hudson Heights',		url: dropbox_url+'6adnxbwvfawlt44/hudson_heights.kml?dl=1'},
 	{ key: 'Morningside Heights', url: dropbox_url+'fc3rw3dwj26aph9/morningside_heights.kml?dl=1'},
-	{ key: 'Washington Heights', 	url: dropbox_url+'mgcwk6tdqke7ldy/washington_heights.kml?dl=1'},
-	//
+	{ key: 'Washington Heights', 	url: dropbox_url+'42m075q1ryus4dh/washington_heights.kml?dl=1'},
 	{ key: 'Little Italy', 				url: dropbox_url+'ze3f6zthqfb2607/little_italy.kml?dl=1'},
 	{ key: 'Chinatown', 					url: dropbox_url+'iev1l5fc6xf4vxr/chinatown.kml?dl=1'},
 	{ key: 'Inwood', 							url: dropbox_url+'tvsme37jtqjn011/inwood.kml?dl=1'},
