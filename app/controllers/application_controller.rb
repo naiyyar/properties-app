@@ -9,9 +9,7 @@ class ApplicationController < ActionController::Base
 
   def store_location
     # store last url as long as it isn't a /users path
-    if !request.fullpath.include?('glyphicons-halflings')
-      session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
-    end
+    session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
   end
 
   def popular_neighborhoods

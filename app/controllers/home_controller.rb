@@ -8,8 +8,10 @@ class HomeController < ApplicationController
   def index
     @home_view = true
     @buildings_count = Building.all.count
-    @meta_desc = "Search through #{@buildings_count} buildings of no fee apartments in NYC, no fee rentals in NYC, 
-                  for rent by owner in NYC and apartment reviews NYC. Rent direct and bypass brokers."
+    # @meta_desc = "Search through #{@buildings_count} buildings of no fee apartments in NYC, no fee rentals in NYC, 
+    #               for rent by owner in NYC and apartment reviews NYC. Rent direct and bypass brokers."
+    @meta_desc = "There are #{@buildings_count} buildings of no fee apartments NYC, no fee rentals NYC.  
+                  Save thousands on broker fees by renting directly from property managers and owners."
   end
 
   def load_infobox
@@ -51,52 +53,50 @@ class HomeController < ApplicationController
   end
 
   def search
-    if params['search_term'] != 'glyphicons-halflings-regular'
-      results = Building.apt_search(params, @search_string, @sub_borough)
-      if results[:searched_by] == 'address'
-        building = results[:building]
-        redirect_to building_path(building.first) if building.present?
-      elsif results[:searched_by] == 'no-fee-management-companies-nyc'
-        redirect_to management_company_path(results[:company].first) if results[:company].present?
+    results = Building.apt_search(params, @search_string, @sub_borough)
+    if results[:searched_by] == 'address'
+      building = results[:building]
+      redirect_to building_path(building.first) if building.present?
+    elsif results[:searched_by] == 'no-fee-management-companies-nyc'
+      redirect_to management_company_path(results[:company].first) if results[:company].present?
+    else
+      @buildings = @searched_buildings = results[:buildings]
+      @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
+      @zoom = results[:zoom] if results[:zoom].present?
+    end
+    @buildings = @buildings.includes(:building_average, :featured_building) if @buildings.present?
+    if @buildings.present?
+      final_results = Building.with_featured_building(@buildings, params[:page])
+      @per_page_buildings = final_results[1]
+      @all_buildings = final_results[0][:all_buildings]
+      @hash = final_results[0][:map_hash]
+      @lat = @hash[0]['latitude']
+      @lng = @hash[0]['longitude']
+      #in meta_desc
+      building_ids = @buildings.pluck(:id)
+      @photos = Upload.building_photos(building_ids)
+      @photos_count = @photos.length
+      @reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
+    else
+      if @boundary_coords.present? and @boundary_coords.first.length > 1
+        @lat = @boundary_coords.first.first[:lat]
+        @lng = @boundary_coords.first.first[:lng]
       else
-        @buildings = @searched_buildings = results[:buildings]
-        @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
-        @zoom = results[:zoom] if results[:zoom].present?
-      end
-      @buildings = @buildings.includes(:building_average, :featured_building) if @buildings.present?
-      if @buildings.present?
-        final_results = Building.with_featured_building(@buildings, params[:page])
-        @per_page_buildings = final_results[1]
-        @all_buildings = final_results[0][:all_buildings]
-        @hash = final_results[0][:map_hash]
-        @lat = @hash[0]['latitude']
-        @lng = @hash[0]['longitude']
-        #in meta_desc
-        building_ids = @buildings.pluck(:id)
-        @photos = Upload.building_photos(building_ids)
-        @photos_count = @photos.length
-        @reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
-      else
-        if @boundary_coords.present? and @boundary_coords.first.length > 1
-          @lat = @boundary_coords.first.first[:lat]
-          @lng = @boundary_coords.first.first[:lng]
-        else
-          if @searched_buildings.present?
-            @lat = @searched_buildings.first.latitude
-            @lng = @searched_buildings.first.longitude
-          elsif building.present?
-            @lat = building.first.latitude
-            @lng = building.first.longitude
-          end
+        if @searched_buildings.present?
+          @lat = @searched_buildings.first.latitude
+          @lng = @searched_buildings.first.longitude
+        elsif building.present?
+          @lat = building.first.latitude
+          @lng = building.first.longitude
         end
       end
+    end
 
-      @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
-      @neighborhood_links_count = @neighborhood_links.count
-      @meta_desc = "#{@tab_title_text.try(:titleize)} has #{@buildings.length if @buildings.present?} "+ 
+    @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
+    @neighborhood_links_count = @neighborhood_links.count
+    @meta_desc = "#{@tab_title_text.try(:titleize)} has #{@buildings.length if @buildings.present?} "+ 
                   "no fee apartment, no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. "+ 
                   "View #{@photos_count} photos and #{@reviews_count} reviews."
-    end
   end
 
   def tos

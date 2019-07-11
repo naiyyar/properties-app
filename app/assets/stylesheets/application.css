@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  *= require jquery-ui.min
- *= require font-awesome.min
+ *= require font-awesome
  *= require fullscreen-slider
  *= require dropzone.min
  *= require slider
