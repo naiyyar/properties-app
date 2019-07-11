@@ -84,10 +84,7 @@ class Upload < ApplicationRecord
   end
 
   def self.building_photos building_ids
-    select(:imageable_id, :imageable_type, :image_file_size, :image_file_name)
-      .where(imageable_id: building_ids, imageable_type: 'Building')
-      .unscoped
-      .order(:image_file_size => :asc)
+    where(imageable_id: building_ids, imageable_type: 'Building')
   end
 
   def uploaded_img_url

@@ -10,7 +10,7 @@ module BuildingSearch
         results[:zoom] = (search_string == 'New York' ? 12 : 14)
         unless search_string == 'New York'
           if params[:searched_by] == 'zipcode'
-            results[:buildings] = cached_buildings_by_zip('zipcode', search_string)
+            results[:buildings] = buildings_by_zip(search_string)
             results[:boundary_coords] << Gcoordinate.where(zipcode: search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
           elsif params[:searched_by] == 'no-fee-apartments-nyc-neighborhoods'
             results[:buildings] = buildings_in_neighborhood(search_string)
@@ -108,8 +108,8 @@ module BuildingSearch
     # results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
-  def cached_buildings_by_zip searched_by, term
-    #where('zipcode = ?', term)
+  def buildings_by_zip term
+    where('zipcode = ?', term)
   end
 
   def cached_buildings_by_city_or_nb term, sub_borough
