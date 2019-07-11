@@ -1,5 +1,5 @@
 class UploadsController < ApplicationController
-  load_and_authorize_resource only: :index
+  #load_and_authorize_resource only: :index
 	before_action :authenticate_user!, only: [:destroy]
   after_action :clear_cache, only: [:create, :destroy]
 
@@ -11,13 +11,13 @@ class UploadsController < ApplicationController
       @unit = Unit.find(params[:unit_id])
       @uploads = @unit.uploads.order('created_at desc')
     else
-      @uploads = Upload.order('created_at desc')
+      @uploads = Upload.order('created_at desc').limit(52)
     end
     @uploads = @uploads.where('image_file_name is not null')
 
     respond_to do |format|
       format.html
-      format.json { render json: { uploads: uploads_hash }, :status => 200 }
+      format.json { render json: { uploads: Upload.uploads_json_hash(@uploads) }, :status => 200 }
     end
 	end
 
@@ -180,16 +180,6 @@ class UploadsController < ApplicationController
         return $1.classify.constantize.find(value)
       end
     end
-  end
-
-  #[{id: 12, image_url: ''},{id: 123, image_url: ''},{id: 124, image_url: ''}]
-
-  def uploads_hash
-    records = []
-    @uploads.each do |upload|
-      records << { id: upload.id, orig_image_url: upload.image.url,  date_uploaded: upload.created_at.strftime("%m/%d/%Y") }
-    end
-    records
   end
 
   def clear_cache

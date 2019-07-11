@@ -130,7 +130,7 @@ module BuildingSearch
     #search_by_neighborhood(search_term)
   end
 
-  def buildings_in_city city
+  def buildings_in_city search_term
     #where("city @@ :q" , q: city)
     search_by_city(search_term)
   end

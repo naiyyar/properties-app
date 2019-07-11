@@ -12,9 +12,7 @@
         <%=tab_title%>
       <% end %>
     </title>
-    
     <meta name="description" content="<%=@meta_desc%>">
-
     <meta property="og:url" content="https://www.transparentcity.co" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="No Fee Apartments NYC and Apartment Reviews NYC | Transparentcity" />
@@ -96,7 +94,7 @@
 
       gtag('config', "<%=ENV['GOOGLE_TRACKING_ID']%>");
     </script>
-    <% if params[:action] == 'search' or @gmaphash.present? %>
+    <% if params[:action] == 'search' or @gmaphash.present? or @hash.present? %>
       <script async defer src="//maps.google.com/maps/api/js?v=3.32&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places&callback=initialize"></script>
       <script async defer src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
     <%end%>

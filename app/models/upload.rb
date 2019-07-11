@@ -71,6 +71,18 @@ class Upload < ApplicationRecord
   # #   end
   # end
 
+  def self.uploads_json_hash(uploads)
+    uploads.as_json(:methods => [:date_uploaded, :orig_image_url])
+  end
+
+  def date_uploaded
+    created_at.strftime("%m/%d/%Y")
+  end
+
+  def orig_image_url
+    image.url
+  end
+
   def self.building_photos building_ids
     select(:imageable_id, :imageable_type, :image_file_size, :image_file_name)
       .where(imageable_id: building_ids, imageable_type: 'Building')
