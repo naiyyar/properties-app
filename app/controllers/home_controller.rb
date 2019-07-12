@@ -88,6 +88,9 @@ class HomeController < ApplicationController
         elsif building.present?
           @lat = building.first.latitude
           @lng = building.first.longitude
+        else
+          @lat = params[:latitude]
+          @lng = params[:longitude]
         end
       end
     end
