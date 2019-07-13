@@ -1,4 +1,4 @@
-$(document).ready(function(){
+window.onload = function(){
     //"use strict";
     
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
@@ -180,4 +180,4 @@ $(document).ready(function(){
         }, 200);
     }, false);
 
-}) //(jQuery);
+}

@@ -11,19 +11,19 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require rails.validations
 //= require jquery_ujs
 //= require jquery-2.1.1.min
 //= require jquery-ui.min
 //= require jquery-ui-touch-punch
 //= require jquery-placeholder
-//= require turbolinks
 //= require bootstrap.min
 //= require jquery.touchSwipe.min.js
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
 //= require underscore
+//= require home
+//= require zapp
 //= require app
 //= require dropzone_v5
 //= require jquery.raty
@@ -45,7 +45,5 @@
 //= require jquery.fancybox
 //= require input_validations
 //= require jquery.mask.min
-//= require home
-//= require zapp
 
 //= require_tree .
