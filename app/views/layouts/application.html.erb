@@ -19,11 +19,6 @@
     <meta property="og:site_name" content="transparentcity.co" />
     <meta property="og:description" content="<%=@meta_desc%>" />
     <!-- <meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
-    <link async defer href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet">
-    <link async defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
-    <link async defer href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff" rel="stylesheet">
-    <link async defer href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2" rel="stylesheet">
-
     <%= stylesheet_link_tag 'application', media: 'all', "data-turbolinks-track" => 'reload', defer: true, async: true  %>
     <%= javascript_include_tag 'application', "data-turbolinks-track" => 'reload' %>
     <%= favicon_link_tag 'favicon.png' %>
@@ -102,5 +97,9 @@
       <script async defer src="//maps.google.com/maps/api/js?v=3.32&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places&callback=initialize"></script>
       <script async defer src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
     <%end%>
+     <link async defer href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet">
+      <link async defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+      <link async defer href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff" rel="stylesheet">
+      <link async defer href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2" rel="stylesheet">
   </body>
 </html>
