@@ -15,6 +15,13 @@ GIT
       tilt
 
 GIT
+  remote: https://github.com/romanbsd/heroku-deflater.git
+  revision: f4d5b4cc2440027fd8bd7b279768d0f6ff344fdb
+  specs:
+    heroku-deflater (0.6.3)
+      rack (>= 1.4.5)
+
+GIT
   remote: https://github.com/wazery/ratyrate.git
   revision: 718e4f9e340e2c7fbf76e190f3bb298ce291b711
   specs:
@@ -153,8 +160,6 @@ GEM
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (3.6.0)
-    heroku-deflater (0.6.3)
-      rack (>= 1.4.5)
     httparty (0.17.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -393,7 +398,7 @@ DEPENDENCIES
   font-awesome-rails
   geocoder (= 1.4.5)
   haml!
-  heroku-deflater
+  heroku-deflater!
   httparty
   iconv (~> 1.0.3)
   jbuilder (~> 2.0)
