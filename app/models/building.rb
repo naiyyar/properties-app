@@ -418,8 +418,10 @@ class Building < ApplicationRecord
       '$$'
     when 3
       '$$$'
-    else
+    when 4
       '$$$$'
+    else
+      ''
     end
   end
 
