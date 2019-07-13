@@ -19,8 +19,8 @@
 //= require jquery-ui-touch-punch
 //= require jquery-placeholder
 //= require turbolinks
-//= require bootstrap
-//= require jquery.touchSwipe.js
+//= require bootstrap.min
+//= require jquery.touchSwipe.min.js
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
 //= require underscore
@@ -45,5 +45,7 @@
 //= require jquery.fancybox
 //= require input_validations
 //= require jquery.mask.min
+//= require home
+//= require zapp
 
 //= require_tree .

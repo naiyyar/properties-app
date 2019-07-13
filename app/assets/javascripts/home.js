@@ -1,5 +1,5 @@
-(function($) {
-    "use strict";
+$(document).ready(function(){
+    //"use strict";
     
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
         $('body').addClass('no-touch');
@@ -180,4 +180,4 @@
         }, 200);
     }, false);
 
-})(jQuery);
+}) //(jQuery);

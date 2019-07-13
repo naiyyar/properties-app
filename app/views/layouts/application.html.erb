@@ -54,9 +54,6 @@
     <%end%>
     <div id="remote-container"></div>
     <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? and params[:searched_by].present? %>
-    <%= javascript_include_tag 'infobubble', async: true, defer: true %>
-    <%= javascript_include_tag 'home', async: true, defer: true %>
-    <%= javascript_include_tag 'zapp', async: true, defer: true %>
     
     <%if current_user.blank? %>
       <%= render 'layouts/shared/signin'%>

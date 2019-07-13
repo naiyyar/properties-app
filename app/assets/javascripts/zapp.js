@@ -1,5 +1,5 @@
-(function($) {
-    "use strict";
+$(document).ready(function(){
+    //"use strict";
     var documentHeight, headerHeight;
     var windowHeight;
     var windowWidth;
@@ -392,4 +392,5 @@
         }
     });
 
-})(jQuery);
+})
+//(jQuery);
