@@ -38,7 +38,7 @@
           - 1.upto(5) do |num|
             %span.fa.fa-star-o.star{style: "color: #ddd;"}
         %span
-          | #{(recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}".html_safe)}
+          ="| #{(recomended_per.present? && recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}")}".html_safe
         %span= "| &nbsp; Reviews: #{building.reviews_count}".html_safe
   
   %div{style: "position: absolute;right: -4px;top: 136px;"}
@@ -55,4 +55,3 @@
   .clearfix
   .infoButtons.no-padding
     = render 'contacts/buttons', building: building, size_class: 'btn-xs btn-block'
-    / = link_to check_availability, building.web_url, target: '_blank' , class: 'btn btn-block btn-sm btn-primary', style: 'padding: 4px 6px;' if building.web_url.present?
