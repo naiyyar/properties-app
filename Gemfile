@@ -56,7 +56,6 @@ gem 'jquery-fileupload-rails', github: 'Springest/jquery-fileupload-rails'
 gem 'jquery-placeholder-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-gem 'jquery-turbolinks'
 
 #K
 gem 'kgio'
@@ -101,7 +100,7 @@ gem 'social-share-button'
 
 #T
 gem 'thumbs_up'
-gem 'turbolinks', '~> 5.2.0'
+#gem 'turbolinks', '~> 5.2.0'
 
 #U
 gem 'underscore-rails'
@@ -115,9 +114,6 @@ gem 'valid_url'
 gem 'wicked'
 gem 'will_paginate-bootstrap'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-#gem 'turbolinks'
-#gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
 # Use ActiveModel has_secure_password
