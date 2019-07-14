@@ -148,7 +148,7 @@ class Building < ApplicationRecord
   #amenities scopes
   AMENITIES = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
                 :management_company_run, :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
-                :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee]
+                :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee, :garage]
   
   AMENITIES.each do |item|
     unless item == :elevator
