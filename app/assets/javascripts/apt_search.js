@@ -38,6 +38,9 @@ app.apartments.prototype = {
           search_term = item.search_term
         }
         $('#search_term').removeClass('loader');
+
+        window.data = item
+        console.log(item)
         
         //Hightliting searched phrase
         search_phrase = item.search_phrase.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
@@ -47,7 +50,7 @@ app.apartments.prototype = {
         var items = ''
         if(search_term != 'No matches found - Add Your Building'){
           if(search_term != undefined){
-            items = '<p>'+ label + '</p>';
+            items = '<a href='+item.url+'><p>'+ label + '</p></a>';
           }
         }
         
@@ -107,7 +110,7 @@ app.apartments.prototype = {
       this._input.val(ui.item.search_term);
       $('.no-match-link').addClass('hidden');
       //Submitting search form
-      window.location = ui.item.url;
+      //window.location = ui.item.url;
     }
     //hiding autocomplete search results
     if($("ul.ui-autocomplete").is(":visible")) {
