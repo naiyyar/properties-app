@@ -74,7 +74,7 @@ class HomeController < ApplicationController
       @lng = @hash[0]['longitude']
       #in meta_desc
       building_ids = @buildings.pluck(:id)
-      @photos = Upload.building_photos(building_ids)
+      @photos = Upload.cached_building_photos(building_ids)
       @photos_count = @photos.length
       @reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
     else

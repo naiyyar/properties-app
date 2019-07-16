@@ -87,6 +87,11 @@ class Upload < ApplicationRecord
     where(imageable_id: building_ids, imageable_type: 'Building')
   end
 
+  def self.cached_building_photos building_ids
+    key = building_ids.present? ? building_ids.join('_') : '1'
+    Rails.cache.fetch([self, 'building_photos', key]) { building_photos(building_ids) }
+  end
+
   def uploaded_img_url
     if self.image.exists?(:medium) #self.image.styles[:medium]
       self.image.url(:medium)

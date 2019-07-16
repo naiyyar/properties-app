@@ -151,7 +151,6 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'heroku-deflater', git: "https://github.com/romanbsd/heroku-deflater.git" #Enable gzip compression on heroku, but don't compress images.
-
 end
 
 ruby "2.4.0"

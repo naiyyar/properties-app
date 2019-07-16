@@ -38,9 +38,6 @@ app.apartments.prototype = {
           search_term = item.search_term
         }
         $('#search_term').removeClass('loader');
-
-        window.data = item
-        console.log(item)
         
         //Hightliting searched phrase
         search_phrase = item.search_phrase.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
@@ -110,7 +107,9 @@ app.apartments.prototype = {
       this._input.val(ui.item.search_term);
       $('.no-match-link').addClass('hidden');
       //Submitting search form
-      //window.location = ui.item.url;
+      if(e.keyCode == 13){
+        window.location = ui.item.url;
+      }
     }
     //hiding autocomplete search results
     if($("ul.ui-autocomplete").is(":visible")) {
