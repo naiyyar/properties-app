@@ -9,6 +9,10 @@
 #= require_tree .
 
 jQuery ->
+	#from uploads/index page
+	$(document).on 'click', '.delete_image',(e) ->
+		$(this).parent().hide(500);
+	
 	#$('[data-toggle="popover"]').popover({ trigger: "click" })
 	$('[data-toggle="tooltip"]').tooltip();
 

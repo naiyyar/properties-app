@@ -1,5 +1,5 @@
-$(document).ready(function(){
-    //"use strict";
+(function($) {
+    "use strict";
     var documentHeight, headerHeight;
     var windowHeight;
     var windowWidth;
@@ -391,6 +391,4 @@ $(document).ready(function(){
             removeDropdownToggleBg(primary_dropdown)
         }
     });
-
-})
-//(jQuery);
+})(jQuery);

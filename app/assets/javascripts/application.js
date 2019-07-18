@@ -22,8 +22,6 @@
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
 //= require underscore
-//= require home
-//= require zapp
 //= require app
 //= require dropzone_v5
 //= require jquery.raty
