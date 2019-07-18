@@ -17,7 +17,7 @@
 //= require jquery-ui.min
 //= require jquery-ui-touch-punch
 //= require jquery-placeholder
-//= require bootstrap.min
+//= require bootstrap-sprockets
 //= require jquery.touchSwipe.min.js
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
