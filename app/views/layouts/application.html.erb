@@ -59,11 +59,11 @@
       <%= render 'layouts/shared/signup'%>
     <%end%>
 
-    <%= javascript_include_tag 'home', async: true, defer: true %>
-    <%= javascript_include_tag 'zapp', async: true, defer: true %>
+    <%= javascript_include_tag 'home', async: true %>
+    <%= javascript_include_tag 'zapp', async: true %>
     
     <script type="text/javascript">
-      window.onload = function(){new app.apartments;}
+      $(function(){new app.apartments;})
 
       //hiding autocomplete search results when no input given
       if($('#buildings-search-txt').length > 0){
@@ -89,7 +89,7 @@
     </script>
     <% if params[:action] == 'search' or @gmaphash.present? or @hash.present? %>
       <script async defer src="//maps.google.com/maps/api/js?v=3.36&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places&callback=initialize"></script>
-      <script async defer src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+      <!-- <script async defer src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script> -->
     <%end%>
   </body>
 </html>
