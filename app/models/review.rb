@@ -48,8 +48,6 @@ class Review < ApplicationRecord
     ]
   )
 
-  attr_accessor :up_votes, :useful_reviews_count, :photo_uploads
-
   # scope :building_reviews, -> (buildings) do 
   #   where('reviewable_type = ? AND reviewable_id in (?) AND buildings.distance.*', 'Building', buildings.pluck(:id))
   # end

@@ -93,7 +93,7 @@ class BuildingsController < ApplicationController
       @price_ranges[bed_range] = prices.find_by(bed_type: bed_range)
     end
     #building + units images
-    @uploads = @building.image_uploads
+    @uploads = @building.chached_image_uploads
     @uploaded_images_count = @uploads.count
     @documents = @building.doc_uploads
 

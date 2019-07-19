@@ -229,11 +229,7 @@ class Building < ApplicationRecord
   end
 
   def building_reviews
-    reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc).each do |r| 
-      r.up_votes = r.user_votes?
-      r.useful_reviews_count  = r.useful_reviews.count
-      r.photo_uploads = r.uploads
-    end
+    reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
   end
 
   def cached_reviews_count
@@ -242,7 +238,8 @@ class Building < ApplicationRecord
 
   def image_uploads
     #including buildings + units images
-    uploads.where.not(image_file_name: nil).where("imageable_id = ? or imageable_id in (?)", id, units.pluck(:id)).includes(:imageable)
+    #uploads.where.not(image_file_name: nil).where("imageable_id = ? or imageable_id in (?)", id, ).includes(:imageable)
+    uploads.where.not(image_file_name: nil).includes(:imageable)
   end
 
   def chached_image_uploads

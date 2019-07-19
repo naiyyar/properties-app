@@ -46,7 +46,7 @@
           = rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id
         .favLink
           %span.icon-pipe |
-          - if review.up_votes
+          - if review.user_votes?
             %span.fa.fa-thumbs-up.recommended
           - else
             %span.fa.fa-thumbs-down
@@ -68,8 +68,8 @@
       .commentActions{style: "padding: 0px 0px 8px;"}
         .show-review-images
           %h4
-          - if review.photo_uploads.present?
-            - review.photo_uploads.each do |asset|
+          - if review.uploads.present?
+            - review.uploads.each do |asset|
               .pull-left
                 %a.fancybox{href: "#{asset.image.url}"}
                   = image_tag asset.image, alt: 'Image'
@@ -84,9 +84,9 @@
             = link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe,'#signin', 'data-toggle' => 'modal' , title: 'Flag as inappropriate'
         %li.helpful
           - if current_user.present?
-            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews_count}</span>)".html_safe,'javascript:;', class: "btn btn-o btn-blue btn-xs usefulButton #{review.marked_useful?(current_user) ? 'disabled' : ''}", 'data-reviewid' => "#{review.id}", 'data-userid' => current_user.id
+            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'javascript:;', class: "btn btn-o btn-blue btn-xs usefulButton #{review.marked_useful?(current_user) ? 'disabled' : ''}", 'data-reviewid' => "#{review.id}", 'data-userid' => current_user.id
           - else
-            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews_count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs', 'data-toggle' => 'modal'
+            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs', 'data-toggle' => 'modal'
       .clearfix
   .clearfix
 = render 'review_flags/form', review: review if current_user.present?
