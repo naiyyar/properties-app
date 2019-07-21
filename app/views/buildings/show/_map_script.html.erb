@@ -3,6 +3,7 @@
 <script type="text/javascript">
 	var map, current_user_id, current_building_id;
   current_user_id = $('#cu').val();
+  var infobox;
   if($("#mapHash").length > 0){
     // Custom options for map
     function initialize() {
@@ -24,7 +25,7 @@
       var lng = $("#mapHash").data('lng');
       current_building_id = $('#cu_building_id').val();
       var bounds = new google.maps.LatLngBounds();
-      var infobox = new InfoBubble({
+      infobox = new InfoBubble({
         maxWidth: 236,
         position: new google.maps.LatLng(lng, lat),
         shadowStyle: 3,
