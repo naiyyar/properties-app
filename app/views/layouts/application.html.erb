@@ -22,9 +22,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
     <%= stylesheet_link_tag 'application', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
     <%= javascript_include_tag 'application' %>
-    <%# if params[:action] == 'search' or @gmaphash.present? or @hash.present? %>
-      <script async src="//maps.google.com/maps/api/js?v=3.32&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places&callback=initialize"></script>
-    <%#end%>
+    <% if params[:action] == 'search' or @gmaphash.present? or @hash.present? %>
+      <script src="//maps.google.com/maps/api/js?v=3.32&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
+    <%end%>
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
   
