@@ -104,41 +104,38 @@
       }
       
       setTimeout(function() {
-          $('body').removeClass('notransition');
-
-          map = new google.maps.Map(document.getElementById('mapView'), options);
-          map.setCenter(new google.maps.LatLng(lat, lng));
-          map.setZoom(14);
-
-          addMarkers(props, map);
-
-          var transitLayer = new google.maps.TransitLayer();
-          transitLayer.setMap(map);
-
+        $('body').removeClass('notransition');
+        map = new google.maps.Map(document.getElementById('mapView'), options);
+        map.setCenter(new google.maps.LatLng(lat, lng));
+        map.setZoom(14);
+        addMarkers(props, map);
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+        resize_map(map, lat, lng)
       }, 300);
-
-      function resize_map(){
-        setTimeout(function() {
-          if (map) {
-            google.maps.event.trigger(map, 'resize');
-            map.setCenter(new google.maps.LatLng(lat, lng));
-            map.setZoom(zoom);
-          }
-
-        }, 300);
-      }
-
-      function loadMarkerWindow(building_id, map, marker){
-        $.post('/load_infobox', {
-          object_id: building_id, 
-          building_show: false,
-          current_user_id: current_user_id,
-        }, function(data){
-          infobox.setContent(data.html);
-          infobox.open(map, marker);
-        });
-      }
     }
+  }
+
+  function resize_map(map, lat, lng){
+    //setTimeout(function() {
+    if (map) {
+      google.maps.event.trigger(map, 'resize');
+      map.setCenter(new google.maps.LatLng(lat, lng));
+      map.setZoom(14);
+    }
+
+    //}, 300);
+  }
+
+  function loadMarkerWindow(building_id, map, marker){
+    $.post('/load_infobox', {
+      object_id: building_id, 
+      building_show: false,
+      current_user_id: current_user_id,
+    }, function(data){
+      infobox.setContent(data.html);
+      infobox.open(map, marker);
+    });
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
