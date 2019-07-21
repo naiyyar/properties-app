@@ -189,8 +189,12 @@
     }
 
     // Initialize the map
-    google.maps.event.addDomListener(window, 'load', initialize);
-    //$(document).ready(function() { initialize(); });
+    if(width < 700){
+      google.maps.event.addDomListener(window, 'load', initialize);
+    }else{
+      $(document).ready(function() { initialize(); });  
+    }
+    
 
     function loadMarkerWindow(building_id, map, marker){
       $.post('/load_infobox', {
