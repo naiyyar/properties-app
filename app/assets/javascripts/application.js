@@ -39,7 +39,6 @@
 //= require blog
 //= require filterrific/filterrific-jquery
 //= require load_more
-//= require home_search
 //= require jquery.fancybox
 //= require input_validations
 //= require jquery.mask.min

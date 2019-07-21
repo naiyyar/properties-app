@@ -40,7 +40,7 @@ class HomeController < ApplicationController
     @search_phrase = params[:term]
     @no_match_found = true
     @neighborhoods = Neighborhood.nb_search(@search_phrase) #All neighborhoods
-    @buildings = Building.search(@search_phrase)
+    @buildings = Building.search_by_building_name_or_address(@search_phrase)
     @zipcodes = Building.search_by_zipcodes(@search_phrase) #address and name
     @companies = ManagementCompany.text_search_by_management_company(@search_phrase)
     @city = Building.text_search_by_city(@search_phrase).to_a.uniq(&:city)

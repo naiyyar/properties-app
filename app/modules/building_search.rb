@@ -120,8 +120,8 @@ module BuildingSearch
     search_by_pneighborhood(criteria).order(:neighborhoods_parent).to_a.uniq(&:neighborhoods_parent)
   end
 
-  def search_by_building_name(criteria)
-    text_search_by_building_name(criteria).reorder('building_name ASC')
+  def search_by_building_name_or_address(criteria)
+    where("building_name @@ :q OR building_street_address @@ :q", q: criteria)
   end
 
   def buildings_in_neighborhood search_term
