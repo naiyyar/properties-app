@@ -89,8 +89,8 @@ class HomeController < ApplicationController
           @lat = building.first.latitude
           @lng = building.first.longitude
         else
-          @lat = params[:latitude]
-          @lng = params[:longitude]
+          @lat = params[:latitude].to_f
+          @lng = params[:longitude].to_f
         end
       end
     end

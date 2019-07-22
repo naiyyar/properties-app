@@ -47,8 +47,8 @@ module BuildingSearch
     buildings = near(custom_latng, distance, units: :km)
     distance = redo_search_distance(1.0)
     buildings = near(custom_latng, distance, units: :km) if buildings.blank?
-    distance = redo_search_distance(2.5)
-    buildings = near(custom_latng, distance, units: :km) if buildings.blank?
+    #distance = redo_search_distance(2.5)
+    #buildings = near(custom_latng, distance, units: :km) if buildings.blank?
 
     buildings
   end
@@ -121,7 +121,8 @@ module BuildingSearch
   end
 
   def search_by_building_name_or_address(criteria)
-    where("building_name @@ :q OR building_street_address @@ :q", q: criteria)
+    #where("building_name @@ :q OR building_street_address @@ :q", q: criteria)
+    where("building_name ILIKE ? OR building_street_address ILIKE ?", "%#{criteria}%", "%#{criteria}%")
   end
 
   def buildings_in_neighborhood search_term
