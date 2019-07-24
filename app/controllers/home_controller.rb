@@ -36,6 +36,18 @@ class HomeController < ApplicationController
                   }
   end
 
+  def get_images
+    building = Building.find(params[:building_id])
+    photos = Upload.cached_building_photos([params[:building_id]])
+    image_uploads = photos.present? ? photos.where(imageable_type: 'Building') : []
+    render json: { html: render_to_string(:partial => "/home/lightslider", 
+                                          :locals => {  building: building,
+                                                        images_count: image_uploads.length,
+                                                        first_image: image_uploads[0]
+                                                      })
+                  }
+  end
+
   def auto_search
     @search_phrase = params[:term]
     @no_match_found = true

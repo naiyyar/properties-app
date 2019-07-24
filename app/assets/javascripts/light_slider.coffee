@@ -1,5 +1,4 @@
 jQuery ->
-	
 	if($('.sh-slider-container').length > 0 )
 		$('.gallery').lightSlider
 			gallery: true

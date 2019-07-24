@@ -103,7 +103,10 @@
             bounds.extend(marker.position);
             
             //Adding building name and address on right buildings card
-            if(sidebar){ createSidebar(prop, marker); }
+            if(sidebar){ 
+              createSidebar(prop, marker); 
+              loadDisplayImage(prop.id)
+            }
             
             if(i == 0 || i == '0'){
               // default opening first fetured building marker
@@ -219,6 +222,32 @@
         infobox.open(map, marker);
       //}
     });
+  }
+
+  function loadDisplayImage(building_id){
+    var elem = $("#figure"+building_id)
+    $.ajax({
+      url: '/get_images',
+      dataType: 'json',
+      type: 'get',
+      data: { building_id: building_id },
+      success: function(response){
+        elem.html(response.html)
+      }
+    });
+  }
+  
+  window.onload = function(){
+    $('.gallery').lightSlider({
+       item: 1,
+       slideMargin: 0,
+       loop: true,
+       onBeforeSlide: function(el) {
+         show_count_elem = el.parent().parent().prev();
+         current_elem = show_count_elem.find('.current');
+         current_elem.text(el.getCurrentSlideCount);
+       }
+    })
   }
 
   function setRedoButtonPosition(){

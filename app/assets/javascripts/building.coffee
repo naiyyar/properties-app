@@ -5,7 +5,6 @@ $(document).on 'click', '.apple-switch.building', (e) ->
 	else
 		params = { active_email: status }
 	
-	console.log(params)
 	$.ajax
 		url: '/buildings/'+$(this).data('fbid')
 		dataType: 'json'

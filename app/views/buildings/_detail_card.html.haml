@@ -1,7 +1,7 @@
 .card.search-view-card 
   - unless @similar_properties.present?
-    .figure{style: "position: relative;"}
-      = render 'home/lightslider', building: building, view_type: 'split'
+    .figure{style: "position: relative;", id: "figure#{building.id}"}
+      = image_tag 'shimmer.gif', width: '100%'
   - else
     .figure{style: "position: relative;height: 165px;"}
       - bg_img_url = @last_uploads.present? ? @last_uploads.uploaded_img_url : image_url('no-photo.png')
@@ -31,3 +31,4 @@
   = render 'contacts/buttons', building: building, size_class: ''
 
 .clearfix
+  

@@ -107,6 +107,7 @@ Rails.application.routes.draw do
   get '/auto_search', to: 'home#auto_search', as: 'auto_search'
   get '/terms_of_service', to: 'home#tos', as: 'tos'
   post '/load_infobox', to: 'home#load_infobox', as: 'load_infobox'
+  get '/get_images', to: 'home#get_images'
 
   post '/favorite' => 'buildings#favorite', as: :favorite
   get '/unfavorite' => 'buildings#unfavorite', as: :unfavorite
