@@ -28,8 +28,7 @@
         - if @per_page_buildings.present?
           .resultsList
             #load-more-buildings.row
-              = render partial: 'buildings/building', :collection => @all_buildings, :as => :building
-              / , cache: Proc.new{|item| [item, "#{current_user.present? ? current_user.id : '2'}"]} 
+              = render partial: 'buildings/building', :collection => @all_buildings, :as => :building, cache: Proc.new{|item| [item, "#{current_user.present? ? current_user.id : Time.now.to_i}"]} 
           
           - if @all_buildings.blank? and @per_page_buildings.total_pages == @per_page_buildings.current_page
             .text-center{style: "padding: 12px 4px;"}

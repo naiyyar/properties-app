@@ -194,11 +194,11 @@
   }
 
   //Initialize the map
-  if(width < 767){
-    google.maps.event.addDomListener(window, 'load', initialize);
-  }else{
-    $(document).ready(function() { ;initialize(); });  
-  }
+  //if(width < 767){
+  //  google.maps.event.addDomListener(window, 'load', initialize);
+  //}else{
+  $(document).ready(function() { initialize(); });  
+  //}
   
   <% if params[:searched_by] == 'latlng' %>
     setTimeout(function() {
@@ -239,10 +239,14 @@
   
   window.onload = function(){
     $('.gallery').lightSlider({
-       item: 1,
-       slideMargin: 0,
-       loop: true,
-       onBeforeSlide: function(el) {
+      item: 1,
+      slideMargin: 0,
+      loop: true,
+      enableTouch: true,
+      enableDrag: true,
+      freeMove: true,
+      swipeThreshold: 40,
+      onBeforeSlide: function(el) {
          show_count_elem = el.parent().parent().prev();
          current_elem = show_count_elem.find('.current');
          current_elem.text(el.getCurrentSlideCount);
