@@ -7,6 +7,7 @@
   json_array = <%= raw @hash.to_json %>;
   var position;
   var map;
+  var redo_search = false;
   var currentLocation;
   var props;
   var bounds;
@@ -193,7 +194,6 @@
   if(width < 767){
     google.maps.event.addDomListener(window, 'load', initialize);
   }else{
-
     $(document).ready(function() { ;initialize(); });  
   }
   
@@ -201,6 +201,7 @@
     setTimeout(function() {
       if(map){
         map.setCenter(new google.maps.LatLng(lat,lng));
+        redo_search = true
       }
     }, 1000);
   <%end%>

@@ -142,6 +142,11 @@
             $('#mapView, #mapViewSearch').toggleClass('max');
         }
         initialize(false);
+        setTimeout(function() {
+            if(map && redo_search){
+                map.setCenter(new google.maps.LatLng(lat,lng));
+            }
+        }, 1000);
     }
 
     /* end show page */
