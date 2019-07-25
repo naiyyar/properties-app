@@ -8,8 +8,6 @@ class HomeController < ApplicationController
   def index
     @home_view = true
     @buildings_count = Building.all.count
-    # @meta_desc = "Search through #{@buildings_count} buildings of no fee apartments in NYC, no fee rentals in NYC, 
-    #               for rent by owner in NYC and apartment reviews NYC. Rent direct and bypass brokers."
     @meta_desc = "There are #{@buildings_count} buildings of no fee apartments NYC, no fee rentals NYC.  
                   Save thousands on broker fees by renting directly from property managers and owners."
   end
@@ -86,8 +84,7 @@ class HomeController < ApplicationController
       @lng = @hash[0]['longitude']
       #in meta_desc
       building_ids = @buildings.pluck(:id)
-      @photos = Upload.cached_building_photos(building_ids)
-      @photos_count = @photos.length
+      @photos_count = Upload.cached_building_photos(building_ids).length rescue 0
       @reviews_count = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
     else
       if @boundary_coords.present? and @boundary_coords.first.length > 1

@@ -173,7 +173,7 @@
       createRedoButtonObject(map)
       google.maps.event.addListener(map, 'dragend', function(){
         dragged = true;
-        setRedoButtonPosition();
+        setRedoButtonPosition(map);
       });
 
       google.maps.event.addListener(map, 'zoom_changed', function() {
@@ -194,11 +194,7 @@
   }
 
   //Initialize the map
-  //if(width < 767){
-  //  google.maps.event.addDomListener(window, 'load', initialize);
-  //}else{
-  $(document).ready(function() { initialize(); });  
-  //}
+  $(document).ready(function() { initialize(); });
   
   <% if params[:searched_by] == 'latlng' %>
     setTimeout(function() {
@@ -208,34 +204,6 @@
       }
     }, 1000);
   <%end%>
-  
-  function loadMarkerWindow(building_id, map, marker){
-    $.post('/load_infobox', {
-      object_id: building_id, 
-      building_show: false,
-      current_user_id: current_user_id,
-    }, function(data){
-      infobox.setContent(data.html);
-      //infowindow.open(handler.getMap(), google.maps.markers[index]);
-      //infobox.setPosition(latlng);
-      //if (!infobox.isOpen()) {
-        infobox.open(map, marker);
-      //}
-    });
-  }
-
-  function loadDisplayImage(building_id){
-    var elem = $("#figure"+building_id)
-    $.ajax({
-      url: '/get_images',
-      dataType: 'json',
-      type: 'get',
-      data: { building_id: building_id },
-      success: function(response){
-        elem.html(response.html)
-      }
-    });
-  }
   
   window.onload = function(){
     $('.gallery').lightSlider({
@@ -252,75 +220,7 @@
          current_elem.text(el.getCurrentSlideCount);
        }
     })
-  }
-
-  function setRedoButtonPosition(){
-    controlUI.style.display = 'block';
-    if(!draggedOnce){
-      centerControlDiv.index = 1;
-      if(width < 600){       
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-      }else{
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
-      }
-      draggedOnce = true;
-    }
-  }
-
-  function getMoveData(){
-    if(dragged){
-      currentLocation = map.getCenter()
-      lat = currentLocation.lat();
-      lng = currentLocation.lng();
-      var query_strings = window.location.search;
-      var orginal_url = '/custom_search';
-      var new_loc_url = '';
-      var q_params = '?latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
-      if(query_strings.includes('sort_by') || query_strings.includes('filter')){
-        new_loc_url = orginal_url+query_strings+q_params;
-      }else{
-        new_loc_url = orginal_url+q_params;
-      }
-      location.href = new_loc_url+'&searched_by=latlng&search_term=custom';
-    }
-  }
-
-  function createRedoButtonObject(map){
-    centerControlDiv = document.createElement('div');
-    centerControl = new RedoButton(centerControlDiv, map);
-  }
-
-  function RedoButton(controlDiv, map) {
-    // Set CSS for the control border.
-    controlUI = document.createElement('div');
-    controlUI.style.backgroundColor = '#428bc9';
-    // controlUI.style.border = '2px solid #fff';
-    controlUI.style.borderRadius = '3px';
-    controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-    controlUI.style.cursor = 'pointer';
-    controlUI.style.marginTop = '8px';
-    controlUI.style.marginLeft = width > 600 ? '71px' : '';
-    controlUI.style.textAlign = 'center';
-    controlUI.title = 'Click to recenter the map';
-    controlUI.style.display = 'none';
-    controlDiv.appendChild(controlUI);
-
-    // Set CSS for the control interior.
-    controlText = document.createElement('div');
-    controlText.style.color = '#fff';
-    //controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-    controlText.style.fontSize = '14px';
-    controlText.style.lineHeight = '30px';
-    controlText.style.paddingLeft = '5px';
-    controlText.style.paddingRight = '5px';
-    controlText.innerHTML = '<span class="fa fa-refresh"></span> Redo Search Here';
-    controlUI.appendChild(controlText);
-
-    // Setup the click event listeners: simply set the map to Chicago.
-    controlUI.addEventListener('click', function() {
-      getMoveData();
-    });
-  }
+  };
 
   var windowHeight;
   var windowWidth;
