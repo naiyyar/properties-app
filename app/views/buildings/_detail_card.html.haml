@@ -1,6 +1,6 @@
 .card.search-view-card 
   - unless @similar_properties.present?
-    .figure{style: "position: relative;height: 175px;", id: "figure#{building.id}"}
+    .figure{style: "position: relative;", id: "figure#{building.id}"}
       = image_tag 'shimmer.gif', width: '100%'
   - else
     .figure{style: "position: relative;height: 165px;"}
