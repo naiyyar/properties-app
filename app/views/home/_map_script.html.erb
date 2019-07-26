@@ -3,6 +3,7 @@
 <%= hidden_field_tag :cu, current_user.present? ? current_user.id : nil %>
 <script src="//maps.google.com/maps/api/js?v=3.36&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<%= javascript_include_tag 'lightslider' %>
 <script type="text/javascript" charset="utf-8">
   json_array = <%= raw @hash.to_json %>;
   var position;
@@ -228,29 +229,6 @@
       resizeElements();
       google.maps.event.trigger(map, 'resize');
     }
-  }
-
-  window.onload = function(){
-    setTimeout(function() {
-      loadLightSlider();
-    }, 1000);
-  }
-
-  function loadLightSlider(){
-    $('.gallery').lightSlider({
-      item: 1,
-      slideMargin: 0,
-      loop: true,
-      //enableTouch: true,
-      //enableDrag: true,
-      //freeMove: true,
-      swipeThreshold: 40,
-      onBeforeSlide: function(el) {
-         show_count_elem = el.parent().parent().prev();
-         current_elem = show_count_elem.find('.current');
-         current_elem.text(el.getCurrentSlideCount);
-       }
-    });
   }
 </script>
 <%= render partial: 'buildings/favourite_script' %>

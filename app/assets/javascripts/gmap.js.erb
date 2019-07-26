@@ -22,7 +22,21 @@ function loadDisplayImage(building_id){
     data: { building_id: building_id },
     success: function(response){
       elem.html(response.html);
+      initLightSlider(elem.find('.gallery'));
     }
+  });
+}
+
+function initLightSlider(elem){
+  elem.lightSlider({
+    item: 1,
+    slideMargin: 0,
+    loop: true,
+    onBeforeSlide: function(el) {
+       show_count_elem = el.parent().parent().prev();
+       current_elem = show_count_elem.find('.current');
+       current_elem.text(el.getCurrentSlideCount);
+     }
   });
 }
 
