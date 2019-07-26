@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
 
   def store_location
     # store last url as long as it isn't a /users path
-    session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
+    if request.format.html?
+      session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
+    end
   end
 
   def popular_neighborhoods

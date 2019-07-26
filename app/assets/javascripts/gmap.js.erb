@@ -21,7 +21,7 @@ function loadDisplayImage(building_id){
     type: 'get',
     data: { building_id: building_id },
     success: function(response){
-      elem.html(response.html)
+      elem.html(response.html);
     }
   });
 }
@@ -34,7 +34,7 @@ function createSidebarElem(json){
   }else{
     building_name = json.building_name
   }
-  
+
   var city = json.city;
   var state = json.state;
   var zipcode = json.zipcode;

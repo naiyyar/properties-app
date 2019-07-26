@@ -105,7 +105,7 @@
             //Adding building name and address on right buildings card
             if(sidebar){ 
               createSidebar(prop, marker); 
-              loadDisplayImage(prop.id)
+              loadDisplayImage(prop.id);
             }
             
             if(i == 0 || i == '0'){
@@ -205,23 +205,6 @@
     }, 1000);
   <%end%>
   
-  window.onload = function(){
-    $('.gallery').lightSlider({
-      item: 1,
-      slideMargin: 0,
-      loop: true,
-      enableTouch: true,
-      enableDrag: true,
-      freeMove: true,
-      swipeThreshold: 40,
-      onBeforeSlide: function(el) {
-         show_count_elem = el.parent().parent().prev();
-         current_elem = show_count_elem.find('.current');
-         current_elem.text(el.getCurrentSlideCount);
-       }
-    })
-  };
-
   var windowHeight;
   var windowWidth;
   var contentHeight;
@@ -239,11 +222,35 @@
     $('#mapViewSearch').height(contentHeight);
     $('#content').height(contentHeight);
   }
-  resizeElements();
+  
   var windowResizeHandler = function(map) {
     if(map){
+      resizeElements();
       google.maps.event.trigger(map, 'resize');
     }
+  }
+
+  window.onload = function(){
+    setTimeout(function() {
+      loadLightSlider();
+    }, 1000);
+  }
+
+  function loadLightSlider(){
+    $('.gallery').lightSlider({
+      item: 1,
+      slideMargin: 0,
+      loop: true,
+      //enableTouch: true,
+      //enableDrag: true,
+      //freeMove: true,
+      swipeThreshold: 40,
+      onBeforeSlide: function(el) {
+         show_count_elem = el.parent().parent().prev();
+         current_elem = show_count_elem.find('.current');
+         current_elem.text(el.getCurrentSlideCount);
+       }
+    });
   }
 </script>
 <%= render partial: 'buildings/favourite_script' %>
