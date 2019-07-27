@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :listings
   post '/add_or_update_rent_medians' => 'rent_medians#add_or_update_rent_medians'
   
   resources :broker_fee_percents, only: [:new, :create, :update, :edit]

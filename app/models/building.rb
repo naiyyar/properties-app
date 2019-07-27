@@ -87,6 +87,7 @@ class Building < ApplicationRecord
   has_one :featured_building, :dependent => :destroy
   belongs_to :management_company, touch: true
   has_many :contacts, :dependent => :destroy
+  has_many :listings, :foreign_key => :building_id, :dependent => :destroy
   
   accepts_nested_attributes_for :units, :allow_destroy => true
 

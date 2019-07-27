@@ -1,5 +1,5 @@
 app.AsCompBuildings = function() {
-  this._input = $('#feature_building_as_comp, #featured_building_field');
+  this._input = $('#feature_building_as_comp, #featured_building_field, #listing_building_field');
   source_url = this._input.data('src');
   this._initAutocomplete();
 };
@@ -47,17 +47,23 @@ app.AsCompBuildings.prototype = {
 
   _select: function(e, ui) {
     var item = '';
+    var full_address = ui.item.building_address;
     //featured_comp form top search field
     if(ui.item.featured_search_type === 'feature_comp_as'){
       if($('#featured_building_building_id').length > 0){
         $('#featured_building_building_id').val(ui.item.id)
-        $('#featured_building_field').val(ui.item.building_address)
-      }else{
-        $('#feature_building_as_comp').val(ui.item.building_address)
+        $('#featured_building_field').val(full_address)
+      }else if($('#feature_building_as_comp').length > 0){
+        $('#feature_building_as_comp').val(full_address)
         $('#featured_comp_building_id').val(ui.item.id)
+      }else if($('#listing_building_id').length > 0){
+        $('#listing_building_id').val(ui.item.id);
+        $('#listing_building_field').val(full_address); //full address
+        $('#listing_building_address').val(ui.item.address);
+        $('#listing_management_company').val(ui.item.management_company);
+        $('#new_listing input[type="submit"]').removeClass('disabled');
       }
     }
-
     return false;
   },
 

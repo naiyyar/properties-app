@@ -1,0 +1,50 @@
+%h2
+.row
+  
+
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    #filterrific_results{style: "margin-top: 10px;"}
+      .table-overflow
+        %table.table.table-striped#sortable
+          %thead
+            %tr
+              %th 
+              %th Date Active
+              %th Management
+              %th Building Address
+              %th{width: "5%"} Unit
+              %th Rent
+              %th{width: "5%"} Bed
+              %th{width: "5%"} Bath
+              %th.text-center{width: "5%"} Months Free
+              %th{width: "5%"} OP
+              %th{width: "5%"} RS
+              %th Date Available
+              %th 
+              %th 
+              %th Active
+          
+          %tbody.table
+            - @listings.each do |listing|
+              %tr
+                %td
+                  .checkbox.custom-checkbox
+                    %label
+                      =check_box_tag "listing_#{listing.id}", listing.id, nil, class: 'listing'
+                      %span.fa.fa-check
+                %td=listing.date_active
+                %td=link_to listing.management_company_name, '#'
+                %td=link_to listing.building.building_name_or_address, building_path(listing.building)
+                %td.text-center=listing.unit
+                %td.text-right=number_to_currency(listing.rent, precision: 0)
+                %td.text-center=listing.bed
+                %td.text-center=listing.bath
+                %td.text-center=listing.free_months
+                %td.text-center=listing.owner_paid
+                %td.text-center=listing.rent_stabilize ? 'Y' : 'N'
+                %td.text-center=listing.date_available
+                %td=link_to 'edit', edit_listing_path(listing)
+                %td=link_to 'Delete', listing_path(listing), method: :delete, data: {confirm: "Are you sure you want to delete this listing?"}, class: 'text-danger'
+                %td
+                  %input.apple-switch.sb-sm.listing{type: 'checkbox', checked: listing.active, style: 'margin: 0px;', data: { lid: listing.id } }
