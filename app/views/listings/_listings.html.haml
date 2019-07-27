@@ -1,6 +1,17 @@
 %h2
 .row
-  
+  .listing-actions{style: 'margin-left: 10px;'}
+    .col-lg-1
+      = form_tag '/listings/change_status', id: 'active_on_action_form', onsubmit: "return confirm('Do you really want to active all?');" do
+        =hidden_field_tag :active, true
+        =submit_tag 'Active On', class: 'btn btn-sm btn-green mb5 disabled'
+    .col-lg-1
+      = form_tag '/listings/change_status', id: 'active_off_action_form', onsubmit: "return confirm('Do you really want to submit the form?');" do
+        =hidden_field_tag :active, false
+        =submit_tag 'Active Off', class: 'btn btn-sm btn-gray mb5 disabled'
+    .col-lg-1
+      = form_tag '/listings/delete_all', id: 'delete_action_form', onsubmit: "return confirm('Do you really want to delete all?');" do
+        =submit_tag 'Delete', class: 'btn btn-sm btn-danger mb5 disabled'
 
 .row
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -27,7 +38,7 @@
           
           %tbody.table
             - @listings.each do |listing|
-              %tr
+              %tr{'data-id' => listing.id}
                 %td
                   .checkbox.custom-checkbox
                     %label

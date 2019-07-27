@@ -57,6 +57,7 @@ app.AsCompBuildings.prototype = {
         $('#feature_building_as_comp').val(full_address)
         $('#featured_comp_building_id').val(ui.item.id)
       }else if($('#listing_building_id').length > 0){
+        //For new/edit Listing form
         $('#listing_building_id').val(ui.item.id);
         $('#listing_building_field').val(full_address); //full address
         $('#listing_building_address').val(ui.item.address);

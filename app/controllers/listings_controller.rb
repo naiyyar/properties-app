@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
-
+  before_action :find_listings, only: [:change_status, :delete_all]
   # GET /listings
   # GET /listings.json
   def index
@@ -15,6 +15,16 @@ class ListingsController < ApplicationController
       format.html
       format.js
     end
+  end
+
+  def change_status
+    @listings.update_all(active: params[:active])
+    redirect_to :back
+  end
+  
+  def delete_all
+    @listings.destroy_all
+    redirect_to :back
   end
 
   # GET /listings/1
@@ -84,5 +94,9 @@ class ListingsController < ApplicationController
                                       :date_available,:rent_stabilize,:active,
                                       :building_address, :management_company,
                                       :date_active)
+    end
+
+    def find_listings
+      @listings = Listing.where(id: params[:selected_ids])
     end
 end

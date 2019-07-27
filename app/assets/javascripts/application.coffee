@@ -22,12 +22,6 @@ jQuery ->
 
 	$('input, textarea').placeholder()
 
-	$('#sortable').DataTable({
-		paging: false,
-		scrollY: 400,
-		"order": []
-	})
-
 	#using to open property show page on infowindow click
 	$(document).on 'click', '.infoW-property-info', (e) ->
 		url = $(this).data('href')

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :listings
+  post '/listings/change_status' => 'listings#change_status'
+  post '/listings/delete_all' => 'listings#delete_all'
   post '/add_or_update_rent_medians' => 'rent_medians#add_or_update_rent_medians'
   
   resources :broker_fee_percents, only: [:new, :create, :update, :edit]

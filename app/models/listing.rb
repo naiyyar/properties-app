@@ -17,7 +17,6 @@ class Listing < ApplicationRecord
 	filterrific(
    default_filter_params: { },
    available_filters: [
-   		:sorted_by,
      	:search_query
     ]
   )

@@ -320,7 +320,15 @@
             'review[tos_agreement]': 'Must be accepted.'
         }
     });
-    //})
+    
+    //Start Listing Datatable script
+    $('#sortable').DataTable({
+      paging: false,
+      scrollY: 400,
+      "order": []
+    });
+
+    //Listing DataTable script END
 
     //Removing rules when no pros check is checked
     $('#no_pros').change(function(){

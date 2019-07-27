@@ -32,7 +32,6 @@
 //= require jquery.validate
 //= require jquery-sortable-photos
 //= require jquery.dataTables.min
-//= require dataTables.bootstrap.min
 //= require jquery-fileupload/basic
 //= require lightslider
 //= require gmap
