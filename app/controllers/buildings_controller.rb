@@ -105,6 +105,10 @@ class BuildingsController < ApplicationController
 
     buildings = @similar_properties.to_a + [@building]
     @gmaphash = Building.buildings_json_hash(buildings)
+    @listings = @building.listings
+    @active_listings = @listings.active.reorder(rent: :asc)
+    @all_inactive_listings = @listings.inactive
+    @inactive_listings = @all_inactive_listings.reorder(created_at: :desc, rent: :asc).limit(10)
 
     @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
                   "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 

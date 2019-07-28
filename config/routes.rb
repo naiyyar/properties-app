@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :listings do
     collection do
       post :import
+      get :show_more
     end
   end
   post '/listings/change_status' => 'listings#change_status'

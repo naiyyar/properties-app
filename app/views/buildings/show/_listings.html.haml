@@ -1,0 +1,32 @@
+.row
+	.col-lg-12
+		%table.table
+			%thead
+				%tr
+					%th Date
+					%th Apt #
+					%th Rent
+					%th Beds
+					%th Baths
+					%th Months Free
+					%th.hidden-xs Date Available
+					%th.hidden-xs OP
+					%th.hidden-xs Rent Stabilize
+			%tbody.table.table-borders
+				- active_block = listings.first.active
+				- listings.each do |listing|
+					%tr
+						%td.text-center=listing.date_active
+						%td.text-center=listing.unit
+						%td.text-right=number_to_currency(listing.rent, precision: 0)
+						%td.text-center=listing.bed
+						%td.text-center=listing.bath
+						%td.text-center=listing.free_months
+						%td.hidden-xs=listing.date_available
+						%td.hidden-xs=listing.owner_paid
+						%td.text-center.hidden-xs=listing.rent_stabilize ? 'Y' : 'N'
+				
+				- if !active_block and @all_inactive_listings.present? and @all_inactive_listings.count > 10
+					%tr
+						- colspan = browser.device.mobile? ? '6' : '9'
+						%td.text-center{colspan: colspan}=link_to 'Show More...', show_more_listings_path(building_id: @building.id), remote: true

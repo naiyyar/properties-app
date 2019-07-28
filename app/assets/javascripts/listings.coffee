@@ -117,7 +117,7 @@ $(document).on 'submit', 'form#active_on_action_form, form#active_off_action_for
 	if form_id == 'active_on_action_form'
 		message = 'Are sure you want to make selected rows Active?'
 	else if form_id == 'active_off_action_form'
-		message = 'Are sure you want to make selected rows Non Active?'
+		message = 'Are sure you want to make selected rows Inactive?'
 	else 
 		message = 'Are sure you want to delete all selected rows?'
 	

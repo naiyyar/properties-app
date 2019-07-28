@@ -37,6 +37,11 @@ class ListingsController < ApplicationController
     redirect_to :back
   end
 
+  def show_more
+    @building = Building.find(params[:building_id])
+    @listings = @building.listings.reorder(created_at: :desc, rent: :asc)
+  end
+
   # GET /listings/1
   # GET /listings/1.json
   def show

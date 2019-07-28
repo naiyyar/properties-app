@@ -380,7 +380,6 @@ class Building < ApplicationRecord
     end
   end
 
-
   #finding similar properties may be on the basis amenities
   def similar_properties
     buildings = Building.where('id <> ?', self.id)
