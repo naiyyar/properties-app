@@ -4,6 +4,9 @@
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
         .pull-right
           = link_to 'Add New Listing', new_listing_path, class: 'btn btn-blue'
+          &nbsp;
+          = link_to 'Import excel', '#importReviews', class: 'btn btn-success pull-right', 'data-toggle' => 'modal'
+          = render 'reviews/import_reviews_form', import_path: import_listings_path
     %h2
   .row
     .listing-actions{style: 'margin-left: 10px;display:none'}

@@ -56,7 +56,6 @@ removeIdsContainerInputToForms=(id)->
 #==============================
 #Form submit confirm message
 #==============================
-
 $(document).on 'submit', 'form#active_on_action_form, form#active_off_action_form, form#delete_action_form', (e) ->
 	message = ''
 	form_id = $(this).attr('id')

@@ -27,6 +27,11 @@ class ListingsController < ApplicationController
     redirect_to :back
   end
 
+  def import
+    Listing.import_listings(params[:file])
+    redirect_to :back, notice: 'File imported.'
+  end
+
   # GET /listings/1
   # GET /listings/1.json
   def show
