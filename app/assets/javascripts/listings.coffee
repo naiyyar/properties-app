@@ -132,3 +132,9 @@ $(document).on 'submit', 'form#active_on_action_form, form#active_off_action_for
 removeDisbaleFromSubmitButton=(elem)->
 	elem.find("input[type='submit']").removeAttr('disabled')
 
+
+#Errors
+#
+$(document).on 'click', '.import-errors a.close',(e) ->
+	$(this).parent().remove();
+

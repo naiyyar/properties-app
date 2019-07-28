@@ -28,8 +28,13 @@ class ListingsController < ApplicationController
   end
 
   def import
-    Listing.import_listings(params[:file])
-    redirect_to :back, notice: 'File imported.'
+    @errors = Listing.import_listings(params[:file])
+    if @errors.present?
+      flash[:error] = @errors
+    else
+      flash[:notice] = 'File Succesfully Imported.'
+    end
+    redirect_to :back
   end
 
   # GET /listings/1
