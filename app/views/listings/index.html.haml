@@ -6,19 +6,19 @@
           = link_to 'Add New Listing', new_listing_path, class: 'btn btn-blue'
     %h2
   .row
-    .listing-actions{style: 'margin-left: 10px;'}
+    .listing-actions{style: 'margin-left: 10px;display:none'}
       .col-lg-1
-        = form_tag '/listings/change_status', id: 'active_on_action_form', onsubmit: "return confirm('Do you really want to active all?');" do
+        = form_tag '/listings/change_status', id: 'active_on_action_form' do
           =hidden_field_tag :active, true
-          =submit_tag 'Active On', class: 'btn btn-sm btn-green mb5 disabled'
+          =submit_tag 'Active On', class: 'btn btn-sm btn-green mb5'
       .col-lg-1
-        = form_tag '/listings/change_status', id: 'active_off_action_form', onsubmit: "return confirm('Do you really want to submit the form?');" do
+        = form_tag '/listings/change_status', id: 'active_off_action_form' do
           =hidden_field_tag :active, false
-          =submit_tag 'Active Off', class: 'btn btn-sm btn-gray mb5 disabled'
+          =submit_tag 'Active Off', class: 'btn btn-sm btn-gray mb5'
       .col-lg-1
-        = form_tag '/listings/delete_all', id: 'delete_action_form', onsubmit: "return confirm('Do you really want to delete all?');" do
-          =submit_tag 'Delete', class: 'btn btn-sm btn-danger mb5 disabled'
-        
+        = form_tag '/listings/delete_all', id: 'delete_action_form' do
+          =submit_tag 'Delete', class: 'btn btn-sm btn-danger mb5'
+
   .pull-right
     = form_for_filterrific @filterrific do |f|
       .form-field
