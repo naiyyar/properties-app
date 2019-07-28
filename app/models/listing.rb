@@ -8,10 +8,8 @@ class Listing < ApplicationRecord
 	scope :inactive, -> { where(active: false) }
 
   pg_search_scope :search_query, 
-  								against: [:id], 
-  								associated_against: {
-								    building: [:building_name, :building_street_address]
-								  }
+  								against: [:building_address, :management_company] 
+  								
   default_scope { order(date_active: :desc, management_company: :asc, building_address: :asc, unit: :asc)}
 	
 	filterrific(

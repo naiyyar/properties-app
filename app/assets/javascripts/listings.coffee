@@ -38,10 +38,11 @@ $(document).on 'click', '.listing', (e) ->
 	
 
 setListingActionButtonsStatus = (e) ->
+	actions = $('.listing-actions input[type="submit"]')
 	if $('.dataTable').find('tr.selected').length > 0
-		$('.listing-actions input[type="submit"]').removeClass('disabled')
+		actions.removeClass('disabled')
 	else
-		$('.listing-actions a').addClass('disabled')
+		actions.addClass('disabled')
 
 appendIdsContainerInputToForms=(id)->
 	inputToAppend = '<input type="hidden" name="selected_ids[]" id="selected_ids_on" class="selected_ids selected_ids_'+id+'" value="'+id+'">'
