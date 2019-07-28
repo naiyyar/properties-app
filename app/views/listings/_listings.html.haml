@@ -6,7 +6,7 @@
         %table.table.table-striped#sortable
           %thead
             %tr
-              %th 
+              %th.no-sort.text-center
                 .checkbox.custom-checkbox
                   %label
                     =check_box_tag "check_all_listing", nil, nil, class: 'check_all_listing'
@@ -19,17 +19,17 @@
               %th{width: "5%"} Bed
               %th{width: "5%"} Bath
               %th.text-center{width: "5%"} Months Free
-              %th{width: "5%"} OP
-              %th{width: "5%"} RS
+              %th.text-center{width: "5%"} OP
+              %th.text-center{width: "5%"} RS
               %th Date Available
-              %th 
-              %th 
-              %th Active
+              %th.no-sort 
+              %th.no-sort 
+              %th.no-sort Active
           
           %tbody.table
             - @listings.each do |listing|
               %tr{'data-id' => listing.id}
-                %td
+                %td.text-center
                   .checkbox.custom-checkbox
                     %label
                       =check_box_tag "listing_#{listing.id}", listing.id, nil, class: 'listing listing-box'

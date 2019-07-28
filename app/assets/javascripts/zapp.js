@@ -325,7 +325,10 @@
     $('#sortable').DataTable({
       paging: false,
       scrollY: 400,
-      "order": []
+      "order": [],
+      "columnDefs": [
+        { "orderable": false, "targets": 'no-sort' }
+      ]
     });
 
     //Listing DataTable script END
