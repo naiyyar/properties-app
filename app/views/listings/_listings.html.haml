@@ -7,10 +7,7 @@
           %thead
             %tr
               %th.no-sort.text-center
-                .checkbox.custom-checkbox
-                  %label
-                    =check_box_tag "check_all_listing", nil, nil, class: 'check_all_listing'
-                    %span.fa.fa-check
+                =check_box_tag "check_all_listing", nil, nil, class: 'check_all_listing'
               %th Date Active
               %th Management
               %th Building Address
@@ -30,10 +27,7 @@
             - @listings.each do |listing|
               %tr{'data-id' => listing.id}
                 %td.text-center
-                  .checkbox.custom-checkbox
-                    %label
-                      =check_box_tag "listing_#{listing.id}", listing.id, nil, class: 'listing listing-box'
-                      %span.fa.fa-check
+                  =check_box_tag "listing_#{listing.id}", listing.id, nil, class: 'listing listing-box'
                 %td=listing.date_active
                 %td=link_to listing.management_company_name, '#'
                 %td=link_to listing.building.building_name_or_address, building_path(listing.building)

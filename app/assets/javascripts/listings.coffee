@@ -21,20 +21,45 @@ changeListingStatus = (status, elem) ->
 #Listing data table tr selection script
 #============================================
 
-selectedRowIds = []
-$(document).on 'click', '.listing', (e) ->
-	selected_row = $(this).parent().parent().parent().parent();
+shiftHold = false
+lastChecked = null
+$(document).on 'click', '.listing-box', (e) ->
+	selected_row = $(this).parent().parent();
 	listing_id = $(selected_row).data('id')
 	if($(this).is(':checked'))
 		selected_row.addClass('selected')
-		selectedRowIds.push(listing_id)
 		appendIdsContainerInputToForms(listing_id)
+		setListingActionButtonsStatus(e)
+		if !lastChecked
+			lastChecked = this
+			return
+		
+		if e.shiftKey
+			from = $('.listing-box').index(this)
+			to = $('.listing-box').index(lastChecked)
+			start = Math.min(from, to)
+			end = Math.max(from, to) + 1
+			elems = $('.listing-box').slice(start, end).attr('checked', lastChecked.checked).trigger('change')
+			$.each elems, (i, j) ->
+				if !$(j).is(':checked')
+					$(j).prop('checked', true)
+				
+				p_tr = $(j).parent().parent()
+				if !p_tr.hasClass('selected')
+					p_tr.addClass('selected')
+					appendIdsContainerInputToForms(p_tr.data('id'))
+		lastChecked = this
 	else
-		selectedRowIds = selectedRowIds.filter((x) => x != listing_id)
 		selected_row.removeClass('selected')
 		removeIdsContainerInputToForms(listing_id)
-	#$('.selected_ids').val(selectedRowIds)
-	setListingActionButtonsStatus(e)
+		setListingActionButtonsStatus(e)
+
+#==============================
+#rows selection using shift key
+#==============================
+$(document).on 'keydown', (e) ->
+	if e.keyCode == 16
+		shiftHold = true
 
 #=============
 #Check All
@@ -69,7 +94,7 @@ setListingActionButtonsStatus = (e) ->
 #calling from inside setListingActionButtonsStatus method
 #=========================================================
 changeCheckAllBoxStatus= (status) ->
-	$('.check_all_listing').prop('checked', status)
+	$('#check_all_listing').prop('checked', status)
 
 #=================================================================
 #Appending selected row input field to set current row listing id
