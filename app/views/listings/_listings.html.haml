@@ -7,6 +7,10 @@
           %thead
             %tr
               %th 
+                .checkbox.custom-checkbox
+                  %label
+                    =check_box_tag "check_all_listing", nil, nil, class: 'check_all_listing'
+                    %span.fa.fa-check
               %th Date Active
               %th Management
               %th Building Address
@@ -28,7 +32,7 @@
                 %td
                   .checkbox.custom-checkbox
                     %label
-                      =check_box_tag "listing_#{listing.id}", listing.id, nil, class: 'listing'
+                      =check_box_tag "listing_#{listing.id}", listing.id, nil, class: 'listing listing-box'
                       %span.fa.fa-check
                 %td=listing.date_active
                 %td=link_to listing.management_company_name, '#'
