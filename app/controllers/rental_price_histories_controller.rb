@@ -4,13 +4,15 @@ class RentalPriceHistoriesController < ApplicationController
   # GET /rental_price_histories
   # GET /rental_price_histories.json
   def index
-    if params[:unit_id].present?
-      @unit = Unit.find(params[:unit_id])
-      @rental_price_histories = @unit.rental_price_histories.order('created_at desc')
-    else
-      @rental_price_histories = RentalPriceHistory.where('unit_id is not null').order('created_at desc')
-    end
-    
+    # if params[:unit_id].present?
+    #   @unit = Unit.find(params[:unit_id])
+    #   @rental_price_histories = @unit.rental_price_histories.order('created_at desc')
+    # else
+    #   @rental_price_histories = RentalPriceHistory.where('unit_id is not null').order('created_at desc')
+    # end
+    unit = Unit.find(params[:unit_id])
+    building = unit.building
+    @listings = building.listings.inactive.where(unit: unit.name)
   end
 
   # GET /rental_price_histories/1
