@@ -9,7 +9,7 @@ class ListingsController < ApplicationController
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:building, building: [:management_company]) #.order(date_active: :desc, :management_company, :building_address, :unit)
+    @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:building, building: [:management_company])
 
     respond_to do |format|
       format.html

@@ -3,25 +3,24 @@
     %span.fa.fa-map-marker
     = "#{@building.street_address}, #{@building.zipcode}"
   - if @building.building_type.present? or @building.neighbohoods.present?
-    %div
+    %div.pbt
       = "#{@building.building_type} in" if @building.building_type.present?
       = link_to @building.neighbohoods, borough_search_link(@building.neighbohoods), class: 'hyper-link' if @building.neighbohoods.present?
   - if @building_price.present? or @building.bedroom_types?
-    %div
+    %div.pbt
       = render partial: 'buildings/bedroom_types_and_prices', locals: { building: @building }
   %div{style: "margin-left: -3px;padding: 0px;"}
     %ul.rating.star-sm
       = rating_for @building, 'building', disable_after_rate: true, readonly: true
     - if @building.votes.present?
-      .favLink
-        = recommended_percent(@building).html_safe
+      .favLink= recommended_percent(@building).html_safe
     - if @building.reviews_count.to_i > 0 and @management_company.present?
       .favLink
         %span.icon-pipe
         | Reviews: #{@building.reviews_count}
   .clearfix
   - if @building.unit_information?
-    %div
+    %div.pbt
       = "<span> #{@building.no_of_units} Units | </span>".html_safe if @building.no_of_units.present? and @building.no_of_units > 0
       = "<span> #{@building.floors} Floors | </span>".html_safe if @building.floors.present?
       = "<span> Built in #{@building.built_in} </span>".html_safe if @building.built_in.present?

@@ -1,22 +1,33 @@
-<%= "<span> #{building.prices} | </span>".html_safe if building.prices.present? %>
-<% if building.studio.present? %>
-	<%= "<span>Studio</span>".html_safe %><%= ',' if building.either_of_four? %>
-<%end%>
+<div class="row">
+	<div class="col-lg-7">
+		<%= "<span> #{building.prices} | </span>".html_safe if building.prices.present? %>
+		<% if building.studio.present? %>
+			<%= "<span>Studio</span>".html_safe %><%= ',' if building.either_of_four? %>
+		<%end%>
 
-<% if building.one_bed.present? %>
-	<%= "<span>1</span>".html_safe %><%= ',' if building.either_of_three? %>
-<%end%>
+		<% if building.one_bed.present? %>
+			<%= "<span>1</span>".html_safe %><%= ',' if building.either_of_three? %>
+		<%end%>
 
-<% if building.two_bed.present? %>
-	<%= "<span>2</span>".html_safe %><%= ',' if building.either_of_two? %>
-<%end%>
+		<% if building.two_bed.present? %>
+			<%= "<span>2</span>".html_safe %><%= ',' if building.either_of_two? %>
+		<%end%>
 
-<% if building.three_bed.present? %>
-	<%= "<span>3</span>".html_safe %><%= ',' if building.four_plus_bed.present? %>
-<%end%>
+		<% if building.three_bed.present? %>
+			<%= "<span>3</span>".html_safe %><%= ',' if building.four_plus_bed.present? %>
+		<%end%>
 
-<% if building.four_plus_bed.present? %>
-	<%= "<span>4+</span>".html_safe %> 
-<%end%>
-
-<%= 'Bed' if building.bedroom_types? %>
+		<% if building.four_plus_bed.present? %>
+			<%= "<span>4+</span>".html_safe %> 
+		<%end%>
+		<%= 'Bed' if building.bedroom_types? %>
+	</div>
+	<% unless params[:action] == 'show' and params[:controller] == 'buildings' %>
+		<div class="col-lg-5" style="padding: 0px;">
+			<% active_listings = building.listings.active %>
+			<span class="font-xs">
+				<%= "#{active_listings.count} Active Listings" if active_listings.present? %>
+			</span>
+		</div>
+	<%end%>
+</div>
