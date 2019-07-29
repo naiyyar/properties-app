@@ -25,17 +25,21 @@
             </thead>
 
             <tbody>
-              <% @neighborhood_links.each do |neighborhood_link| %>
-                <tr>
-                  <td><%= neighborhood_link.neighborhood %></td>
-                  <td><%= neighborhood_link.date %></td>
-                  <td><%= link_to neighborhood_link.title, neighborhood_link.web_url, target: '_blank', class: 'link_underlined' %></td>
-                  <td><%= neighborhood_link.source %></td>
-                  <td><%= link_to 'Edit', "#editNeighnorhood#{neighborhood_link.id}" , 'data-toggle' => 'modal' %>
-                    <%= render partial: 'form', locals: { neighborhood_link: neighborhood_link, modal_id: "editNeighnorhood#{neighborhood_link.id}" } %>
-                  </td>
-                  <td><%= link_to 'Delete', neighborhood_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                </tr>
+              <% cache @neighborhood_links do %>
+                <% @neighborhood_links.each do |neighborhood_link| %>
+                  <% cache neighborhood_link do %>
+                    <tr>
+                      <td><%= neighborhood_link.neighborhood %></td>
+                      <td><%= neighborhood_link.date %></td>
+                      <td><%= link_to neighborhood_link.title, neighborhood_link.web_url, target: '_blank', class: 'link_underlined' %></td>
+                      <td><%= neighborhood_link.source %></td>
+                      <td><%= link_to 'Edit', "#editNeighnorhood#{neighborhood_link.id}" , 'data-toggle' => 'modal' %>
+                        <%= render partial: 'form', locals: { neighborhood_link: neighborhood_link, modal_id: "editNeighnorhood#{neighborhood_link.id}" } %>
+                      </td>
+                      <td><%= link_to 'Delete', neighborhood_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                  <%end%>
+                <% end %>
               <% end %>
             </tbody>
           </table>
