@@ -324,7 +324,7 @@
     //Start Listing Datatable script
     $('#sortable').DataTable({
       paging: false,
-      scrollY: 400,
+      scrollY: false,
       "order": [],
       "columnDefs": [
         { "orderable": false, "targets": 'no-sort' }

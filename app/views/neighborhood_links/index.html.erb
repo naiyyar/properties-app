@@ -49,5 +49,9 @@
   <%end%>
 </div>
 
+<div class="text-center">
+  <%= will_paginate @neighborhood_links, renderer: BootstrapPagination::Rails %>
+</div>
+
 
 <%= render partial: 'form', locals: { neighborhood_link: @neighborhood_link, modal_id: "newNeighnorhood" } %>

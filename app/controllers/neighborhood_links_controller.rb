@@ -2,7 +2,7 @@ class NeighborhoodLinksController < ApplicationController
   before_action :set_neighborhood_link, only: [:show, :edit, :update, :destroy]
 
   def index
-    @neighborhood_links = NeighborhoodLink.order({ date: :desc }, { title: :asc })
+    @neighborhood_links = NeighborhoodLink.order({ date: :desc }, { title: :asc }).paginate(:page => params[:page], :per_page => 100)
     @neighborhood_link = NeighborhoodLink.new
     @neighborhoods = Building.where('neighborhood is not null').map(&:neighborhood)
   end
