@@ -82,6 +82,8 @@ Rails.application.routes.draw do
     member do 
       get :rotate
     end
+
+    get :photos, on: :collection
   end
 
   resources :document_downloads do

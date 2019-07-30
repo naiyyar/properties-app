@@ -11,7 +11,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
               <div class="form-group">
                 <label>Neighborhood</label>
-                <%= f.select :neighborhood, options_for_select(@neighborhoods, f.object.neighborhood), { prompt: 'Please select a neighborhood' }, { class: "form-control" } %>
+                <%= f.select :neighborhood, options_for_select(@neighborhoods, f.object.neighborhood), { prompt: 'Please select a neighborhood' }, { class: "form-control validate" } %>
               </div>
             </div>
             
@@ -30,7 +30,7 @@
           
           <div class="form-group">
             <label>Website link</label>
-            <%= f.text_field :web_url, class: 'form-control' %>
+            <%= f.text_field :web_url, class: 'form-control validate' %>
           </div>
             
           <div class="form-group">

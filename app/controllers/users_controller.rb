@@ -3,7 +3,9 @@ class UsersController < ApplicationController
 	before_action :set_user, only: [:edit, :update, :show, :contribution, :saved_buildings]
 
 	def index
-		@users = User.order('created_at desc').includes(:buildings, :favorites)
+		@users = User.order('created_at desc')
+								 .includes(:buildings, :favorites)
+								 .paginate(:page => params[:page], :per_page => 100)
 	end
 
 	def contribution

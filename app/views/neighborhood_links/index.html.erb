@@ -15,12 +15,12 @@
           <table id="sortable" class="table table-bordered table-triped">
             <thead>
               <tr>
-                <th>Neighborhood</th>
+                <th width="15%">Neighborhood</th>
                 <th>Date</th>
-                <th>Title</th>
+                <th width="40%">Title</th>
                 <th>Source</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th width="6%">Edit</th>
+                <th width="6%">Delete</th>
               </tr>
             </thead>
 
@@ -36,7 +36,7 @@
                       <td><%= link_to 'Edit', "#editNeighnorhood#{neighborhood_link.id}" , 'data-toggle' => 'modal' %>
                         <%= render partial: 'form', locals: { neighborhood_link: neighborhood_link, modal_id: "editNeighnorhood#{neighborhood_link.id}" } %>
                       </td>
-                      <td><%= link_to 'Delete', neighborhood_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                      <td><%= link_to 'Delete', neighborhood_link, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' %></td>
                     </tr>
                   <%end%>
                 <% end %>

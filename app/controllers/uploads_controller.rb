@@ -1,5 +1,6 @@
 class UploadsController < ApplicationController
   #load_and_authorize_resource only: :index
+  before_action :find_upload, only: [:update, :edit, :destroy]
 	before_action :authenticate_user!, only: [:destroy]
   after_action :clear_cache, only: [:create, :destroy]
 
@@ -21,6 +22,10 @@ class UploadsController < ApplicationController
     end
 	end
 
+  def photos
+    @photos = Upload.where('image_file_name is not null').paginate(params[:page], per_page: 50)
+  end
+
   def documents
     @documents = Upload.where('document_file_name is not null').includes(:user, :imageable)
   end
@@ -33,6 +38,9 @@ class UploadsController < ApplicationController
     @image.rotate!(rotation)
 
     redirect_to :back, flash[:notice] => "The image has been rotated"
+  end
+
+  def edit
   end
 
 	def new
@@ -71,7 +79,6 @@ class UploadsController < ApplicationController
 	end
 
   def update
-    @upload = Upload.find(params[:id])
     # document = @upload.document
     # filename = URI.unescape(document.url).split('/').last #bucket file name[ex: 123.jpg]
     # renamefilename = upload_params[:document_file_name]
@@ -147,7 +154,6 @@ class UploadsController < ApplicationController
   end
 
 	def destroy
-    @upload = Upload.find(params[:id])
     if @upload.destroy
       respond_to do |format|  
         format.html{ redirect_to :back, notice: 'File deleted.' }
@@ -161,6 +167,10 @@ class UploadsController < ApplicationController
 
 
 	private
+
+  def find_upload
+    @upload = Upload.find(params[:id])
+  end
 
 	def upload_params
 		params.require(:upload).permit(:image, 
