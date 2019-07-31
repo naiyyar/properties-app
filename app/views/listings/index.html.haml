@@ -1,23 +1,23 @@
 .tables
-  - if !current_user.present?
-    .row
-      .col-lg-6.col-md-6
-        - if flash[:error]
-          .text-left
-            .error.import-errors.well
-              %a.close{'data-dismiss'=>"alert", 'aria-label'=>"close"}
-                &times;
-              - flash[:error].each do |err_message|
-                %p.text-danger= err_message
-      
-      .col-xs-12.col-sm-12.col-md-6.col-lg-6
-        .pull-right
-          = link_to 'Add New Listing', new_listing_path, class: 'btn btn-blue'
-          &nbsp;
-          = link_to 'Import excel', '#importReviews', class: 'btn btn-success pull-right', 'data-toggle' => 'modal'
-          = render 'reviews/import_reviews_form', import_path: import_listings_path
+  .row
+    .col-lg-6.col-md-6
+      - if flash[:error]
+        .text-left
+          .error.import-errors.well
+            %a.close{'data-dismiss'=>"alert", 'aria-label'=>"close"}
+              &times;
+            - flash[:error].each do |err_message|
+              %p.text-danger= err_message
+    
+    .col-xs-12.col-sm-12.col-md-6.col-lg-6
+      .pull-right
+        = link_to 'Add New Listing', new_listing_path, class: 'btn btn-blue'
+        &nbsp;
+        = link_to 'Import excel', '#importReviews', class: 'btn btn-success pull-right', 'data-toggle' => 'modal'
+        = render 'reviews/import_reviews_form', import_path: import_listings_path
         
-    %h2
+  %p
+  
   .row
     .listing-actions{style: 'margin-left: 10px;display:none'}
       .col-lg-1
