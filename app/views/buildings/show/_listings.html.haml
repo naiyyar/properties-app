@@ -18,7 +18,8 @@
 					%tr
 						%td.text-center=listing.date_active
 						%td.text-center=listing.unit
-						%td.text-right=number_to_currency(listing.rent, precision: 0)
+						%td.text-right
+							%b=number_to_currency(listing.rent, precision: 0)
 						%td.text-center=listing.bed
 						%td.text-center=listing.bath
 						%td.text-center=listing.free_months

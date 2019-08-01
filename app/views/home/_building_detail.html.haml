@@ -5,6 +5,7 @@
 
 = link_to building_path(building) do
 	%div.pb-info
+		/ prices and listing information
 		= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building }
 	%ul.cardRating
 		.pull-left{style: "margin-right: 10px;", class: @similar_properties.present? ? 'star-xs' : 'star-sm' }
