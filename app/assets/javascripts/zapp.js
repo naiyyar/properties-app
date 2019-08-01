@@ -322,7 +322,7 @@
     });
     
     //Start Listing Datatable script
-    $('#sortable').DataTable({
+    var data_sortable = $('#sortable').DataTable({
       paging: false,
       scrollY: false,
       "order": [],
@@ -331,7 +331,7 @@
       ]
     });
 
-    //Listing DataTable script END
+    //END Listing DataTable script 
 
     //Removing rules when no pros check is checked
     $('#no_pros').change(function(){
