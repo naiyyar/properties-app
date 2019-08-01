@@ -25,7 +25,6 @@
                 .filter(':not(.apple-switch)')
                 .prop('checked', true)
                 .trigger('change');
-                //this.setListingActionButtonsStatus()
                 this.selectRow(checkboxes)
         }
 
@@ -38,55 +37,40 @@
                 .filter(':not(.apple-switch)')
                 .prop('checked', false)
                 .trigger('change');
-                //this.setListingActionButtonsStatus()
-                console.log(this)
-                console.log('######')
-                this.deselectRow(checkboxes)
+                this.deselectRow(checkboxes);
         }
 
-        setListingActionButtonsStatus() {
-            let actions = $('.listing-actions');
-            if(this.$context.find('tr.selected').length > 0){
-                actions.show(300);
-            }else{
-                actions.hide(300);
-            }
+        showActionButtons() {
+            $('.listing-actions').show(300);
+            $('#check_all_listing').prop('checked', true);
+        }
+
+        hideActionButtons() {
+            $('.listing-actions').hide(300);
+            $('#check_all_listing').prop('checked', false);
         }
 
         selectRow(checkboxes){
-            let id;
-            let p_tr;
-            window.data = this
+            console.log(checkboxes)
             $.each(checkboxes, function(i, j){
-                p_tr = $(j).parent().parent();
+                let p_tr = $(j).parent().parent();
                 p_tr.addClass('selected');
-                id = p_tr.data('id');
+                let id = p_tr.data('id');
                 if(id != undefined){
-                    this.appendIdsContainerInputToForms(id);
+                    aptListing.appendIdsContainerInputToForms(id);
                 }
             });
-            this.setListingActionButtonsStatus();
+            console.log('select checkboxes')
+            this.showActionButtons();
         }
 
         deselectRow(checkboxes){
-            let p_tr;
             $.each(checkboxes, function(i, j){
-                p_tr = $(j).parent().parent();
+                let p_tr = $(j).parent().parent();
                 p_tr.removeClass('selected');
-                this.removeIdsContainerInputToForms(p_tr.data('id'));
+                aptListing.removeIdsContainerInputToForms(p_tr.data('id'));
             });
-            this.setListingActionButtonsStatus();
-        }
-
-        appendIdsContainerInputToForms(id) {
-            var inputToAppend = '<input type="hidden" name="selected_ids[]" id="selected_ids_on" class="selected_ids selected_ids_'+id+'" value="'+id+'">';
-            $('#active_on_action_form').append(inputToAppend);
-            $('#active_off_action_form').append(inputToAppend);
-            $('#delete_action_form').append(inputToAppend);
-        }
-
-        removeIdsContainerInputToForms(id){
-            $('.selected_ids_'+id).remove();
+            this.hideActionButtons();
         }
 
         /**
@@ -135,7 +119,8 @@
 
                 this.$context.on('click.checkboxes.range', ':checkbox', (event) => {
                     let $checkbox = $(event.target);
-                    $checkbox.parent().parent().toggleClass('selected');
+                    let shiftHold = false
+                    let selected_box_tr = $checkbox.parent().parent();
                     if (event.shiftKey && instance.$last) {
                         //let $checkboxes = instance.$context.find(':checkbox:visible');
                         let $checkboxes = instance.$context.find('.listing-box');
@@ -149,7 +134,17 @@
                             .prop('checked', $checkbox.prop('checked'))
                             .trigger('change');
                         //Highlighting seleted rows + appending/removing input to/from form
-                        $.each(elems, function(i, j) {
+                        let first_box = elems[0];
+                        let new_elems;
+                        //exclusing first checked checkbox selected without shift key
+                        if(first_box.checked){
+                            new_elems = jQuery.grep(elems, function(value) {
+                              return value.getAttribute('id') != first_box.getAttribute('id');
+                            });
+                        }else{
+                            new_elems = elems;
+                        }
+                        $.each(new_elems, function(i, j) {
                           let p_tr = $(j).parent().parent();
                           if (!p_tr.hasClass('selected')) {
                             p_tr.addClass('selected');
@@ -159,6 +154,19 @@
                             aptListing.removeIdsContainerInputToForms(p_tr.data('id'));
                           }
                         });
+                        shiftHold = true;
+                    }
+                    if(!shiftHold){
+                        let id = selected_box_tr.data('id');
+                        if($checkbox.is(':checked')){
+                            selected_box_tr.addClass('selected');
+                            this.showActionButtons();
+                            aptListing.appendIdsContainerInputToForms(id);
+                        }else{
+                            selected_box_tr.removeClass('selected');
+                            this.hideActionButtons();
+                            aptListing.removeIdsContainerInputToForms(id);
+                        }
                     }
                     instance.$last = $checkbox;
                 });
