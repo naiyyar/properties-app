@@ -4,8 +4,8 @@ class Listing < ApplicationRecord
 
 	delegate :management_company, to: :building
 
-	scope :active, -> { where(active: true) }
-	scope :inactive, -> { where(active: false) }
+	scope :active, -> { where(active: 'true') }
+	scope :inactive, -> { where(active: 'false') }
 
   pg_search_scope :search_query, 
   								against: [:building_address, :management_company],
@@ -34,6 +34,10 @@ class Listing < ApplicationRecord
 
   def unit_exist?
   	building.units.where(name: unit).present?
+  end
+
+  def rentstabilize
+    rent_stabilize.present? ? (rent_stabilize == 'true' ? 'Y' : 'N') : ''
   end
 
   def self.import_listings file

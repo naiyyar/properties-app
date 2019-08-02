@@ -60,11 +60,17 @@
             .row
               .col-xs-6.col-sm-6.col-md-6.col-lg-6
                 .form-group
-                  .checkbox.custom-checkbox
-                    %label
-                      =f.check_box :rent_stabilize
-                      %span.fa.fa-check
-                      Rent Stabilize
+                  %label Rent Stabilize
+                  %br
+                  %label
+                    .btn-group{'data-toggle'=>"buttons"}
+                      %label.btn.btn-default
+                        = f.radio_button :rent_stabilize, 'true'
+                        Yes
+
+                      %label.btn.btn-default
+                        = f.radio_button :rent_stabilize, 'false'
+                        No
 
             .form-group
               .col-sm-12
