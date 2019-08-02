@@ -14,10 +14,10 @@
       = rating_for @building, 'building', disable_after_rate: true, readonly: true
     - if @building.votes.present?
       .favLink= recommended_percent(@building).html_safe
-    - if @building.reviews_count.to_i > 0 and @management_company.present?
+    - if @reviews_count > 0 and @management_company.present?
       .favLink
         %span.icon-pipe
-        | Reviews: #{@building.reviews_count}
+        | Reviews: #{@reviews_count}
   .clearfix
   - if @building.unit_information?
     %div.pbt

@@ -71,7 +71,7 @@ class Listing < ApplicationRecord
             end
           end
         else
-          errors << 'Building Not present in database.'
+          errors << 'Building address does not exist in database.'
         end
       else
         missing_text = ''
