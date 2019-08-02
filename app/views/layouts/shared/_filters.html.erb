@@ -1,80 +1,82 @@
-<div class="filter" style="display: none;">
-  <div class="clearfix"></div>
-  <form action="/<%=params[:searched_by]%>/<%=params[:search_term]%>" class="filterForm">
-    <div class="text-right header visible-xs" style="padding: 4px; cursor: pointer;">
-      <%= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeFilter' %>
-    </div>
-    <%= hidden_field_tag :sort_by, params[:sort_by] || '4' %>
-    <%= hidden_field_tag :latitude, params[:latitude] if params[:latitude].present? %>
-    <%= hidden_field_tag :longitude, params[:longitude] if params[:longitude].present? %>
-    
-    <div class="row">
-      <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 formItem">
-        <div class="formField">
-          <div class="volume">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-              <label><b>Amenities</b></label>
-              <% building_amenities.each_pair do |k, v| %>
-                <div class="checkbox custom-checkbox">
-                  <label>
-                    <input type="checkbox" name="filter[amenities][]" value="<%=k.to_s%>" id="<%=k%>" <%= amen_checked(k.to_s) %>> <span class="fa fa-check"></span> <%= v == 'No Fee Building' ? '<b>No Fee Building</b>'.html_safe : v %>
-                  </label>
-                </div>
-              <%end%>                     
-            </div>
-          </div>
-        </div>
+<% if params[:searched_by].present? %>
+  <div class="filter" style="display: none;">
+    <div class="clearfix"></div>
+    <form action="/<%=params[:searched_by]%>/<%=params[:search_term]%>" class="filterForm">
+      <div class="text-right header visible-xs" style="padding: 4px; cursor: pointer;">
+        <%= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeFilter' %>
       </div>
-
-      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
-        <div class="formField">
-          <div class="volume">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-              <label><b>Bedrooms</b></label>
-              <% ['0','1','2','3','4'].map do |val| %>
-                <% if val == '0' %>
-                  <div class="checkbox custom-checkbox"><label>
-                    <input type="checkbox" class="building_bed_filter" name="filter[bedrooms][]" value="<%=val%>" id="studio" <%= bed_checked('0') %> ><span class="fa fa-check"></span> Studio</label></div>
-                <%else%>
-                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_bed_filter" name="filter[bedrooms][]" value="<%=val%>" id="<%=val%>beds" <%= bed_checked(val) %> ><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Bed</label></div>
-                <%end%>
-              <%end%>
-              <!-- prices_options: in buildings_helper -->
-              <label><b>Price</b></label>
-              <% prices_options.map do |obj| %>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_price_filter" name="filter[price][]" value="<%=obj[1]%>" id="<%=obj[1]%>prices" <%= price_checked(obj[1]) %> ><span class="fa fa-check"></span><%=obj[0]%></label></div>
-              <%end%>
-              
-              <!-- <label><b>Building Type</b></label>
-              <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Rental Building" <%#= type_checked('Rental Building') %>><span class="fa fa-check"></span> Rental</label></div>
-              <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Condo Building" <%#= type_checked('Condo Building') %>><span class="fa fa-check"></span> Condo</label></div>
-              <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Coop Building" <%#= type_checked('Coop Building') %>><span class="fa fa-check"></span> Coop</label></div> -->
-
-              <label><b>Rating</b></label>
-              <% 1.upto(5) do |val| %>
-                <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_rating_filter single-check" name="filter[rating]" value="<%=val%>" <%= rating_checked(val) %> ><span class="fa fa-check"></span> <%=val%> Star</label></div>
-              <%end%>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="formField filter-action">
+      <%= hidden_field_tag :sort_by, params[:sort_by] || '4' %>
+      <%= hidden_field_tag :latitude, params[:latitude] if params[:latitude].present? %>
+      <%= hidden_field_tag :longitude, params[:longitude] if params[:longitude].present? %>
+      
       <div class="row">
-        <%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden', name: nil %>
-      </div>
-    </div>
-    <%= hidden_field_tag :searched_by, params[:searched_by] if params[:searched_by].present? %>
-  </form>
+        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 formItem">
+          <div class="formField">
+            <div class="volume">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <label><b>Amenities</b></label>
+                <% building_amenities.each_pair do |k, v| %>
+                  <div class="checkbox custom-checkbox">
+                    <label>
+                      <input type="checkbox" name="filter[amenities][]" value="<%=k.to_s%>" id="<%=k%>" <%= amen_checked(k.to_s) %>> <span class="fa fa-check"></span> <%= v == 'No Fee Building' ? '<b>No Fee Building</b>'.html_safe : v %>
+                    </label>
+                  </div>
+                <%end%>                     
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="filter-action-btns" style="position: relative;">
-    <div class="text-center">
-      <div class="filter-action-btns2 filter-action">
-        <%= link_to '<b>Cancel</b>'.html_safe,'javascript:;', class: 'closeFilter hidden-xs' %>
-        <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-xlg clearFilter' %>
-        <a href="#" class="applyFilter btn btn-green btn-xlg">Apply</a>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
+          <div class="formField">
+            <div class="volume">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <label><b>Bedrooms</b></label>
+                <% ['0','1','2','3','4'].map do |val| %>
+                  <% if val == '0' %>
+                    <div class="checkbox custom-checkbox"><label>
+                      <input type="checkbox" class="building_bed_filter" name="filter[bedrooms][]" value="<%=val%>" id="studio" <%= bed_checked('0') %> ><span class="fa fa-check"></span> Studio</label></div>
+                  <%else%>
+                    <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_bed_filter" name="filter[bedrooms][]" value="<%=val%>" id="<%=val%>beds" <%= bed_checked(val) %> ><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Bed</label></div>
+                  <%end%>
+                <%end%>
+                <!-- prices_options: in buildings_helper -->
+                <label><b>Price</b></label>
+                <% prices_options.map do |obj| %>
+                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_price_filter" name="filter[price][]" value="<%=obj[1]%>" id="<%=obj[1]%>prices" <%= price_checked(obj[1]) %> ><span class="fa fa-check"></span><%=obj[0]%></label></div>
+                <%end%>
+                
+                <!-- <label><b>Building Type</b></label>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Rental Building" <%#= type_checked('Rental Building') %>><span class="fa fa-check"></span> Rental</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Condo Building" <%#= type_checked('Condo Building') %>><span class="fa fa-check"></span> Condo</label></div>
+                <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_type_filter single-check" name="filter[type]" value="Coop Building" <%#= type_checked('Coop Building') %>><span class="fa fa-check"></span> Coop</label></div> -->
+
+                <label><b>Rating</b></label>
+                <% 1.upto(5) do |val| %>
+                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_rating_filter single-check" name="filter[rating]" value="<%=val%>" <%= rating_checked(val) %> ><span class="fa fa-check"></span> <%=val%> Star</label></div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formField filter-action">
+        <div class="row">
+          <%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden', name: nil %>
+        </div>
+      </div>
+      <%= hidden_field_tag :searched_by, params[:searched_by] if params[:searched_by].present? %>
+    </form>
+
+    <div class="filter-action-btns" style="position: relative;">
+      <div class="text-center">
+        <div class="filter-action-btns2 filter-action">
+          <%= link_to '<b>Cancel</b>'.html_safe,'javascript:;', class: 'closeFilter hidden-xs' %>
+          <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-xlg clearFilter' %>
+          <a href="#" class="applyFilter btn btn-green btn-xlg">Apply</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<%end%>
