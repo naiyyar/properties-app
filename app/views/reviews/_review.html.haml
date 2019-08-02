@@ -75,7 +75,7 @@
                   = image_tag asset.image, alt: 'Image'
     .commentActions
       %ul.list-inline.ricons.pull-left
-        %li= social_share_button_tag(review.review_title, :url => "http://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}")
+        %li= social_share_button_tag(review.review_title, :url => "https://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}")
       %ul.list-inline.ricons.pull-right
         %li
           - if current_user.present?
