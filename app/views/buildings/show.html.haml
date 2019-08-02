@@ -72,7 +72,7 @@
     - if review_count > 0
       .text-right{style: "text-align: right;padding-bottom: 15px;"}
         = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow'
-      = render :partial => 'reviews/review', :collection => @reviews, :as => :review, cache: true
+      = render :partial => 'reviews/review', :collection => @reviews, :as => :review, cache: false
     - else
       %p.no-review There are no reviews for this building. Be the first to add your review for this building.
       = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow no-review'
