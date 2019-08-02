@@ -81,7 +81,6 @@ class BuildingsController < ApplicationController
 
   def show
     @show_map_btn = @half_footer = true
-    @reviews = @building.building_reviews
     @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
     broker_percent = BrokerFeePercent.first.percent_amount
     @saved_amounts = @building.saved_amount(RentMedian.all, broker_percent)
@@ -96,7 +95,7 @@ class BuildingsController < ApplicationController
     @uploads = @building.chached_image_uploads
     @uploaded_images_count = @uploads.count
     @documents = @building.doc_uploads
-    @reviews_count = @reviews.count
+    @reviews_count = @building.reviews_count
 
     #Similiar buildings
     @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average) if @building.active_comps.present?

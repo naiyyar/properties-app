@@ -24,8 +24,8 @@
 
 class Review < ApplicationRecord
 	resourcify
-  belongs_to :reviewable, polymorphic: true
-  belongs_to :user
+  belongs_to :reviewable, polymorphic: true, counter_cache: true
+  belongs_to :user, counter_cache: true
   has_many :useful_reviews
   has_many :review_flags
   
@@ -120,13 +120,8 @@ class Review < ApplicationRecord
   end
 
   private
-  def update_building_reviews_count
-    revieable = self.reviewable
-    revieable.update(reviews_count: revieable.reviews_count - 1) if revieable.reviews_count > 0
-  end
   #To remove rating and votes
   def destroy_dependents
-    update_building_reviews_count
     Vote.where(review_id: self.id).destroy_all
     rate = Rate.where(review_id: self.id).destroy_all
     #update stars

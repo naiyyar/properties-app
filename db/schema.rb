@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190802055534) do
+ActiveRecord::Schema.define(version: 20190802160802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(version: 20190802055534) do
     t.string   "building_type"
     t.boolean  "childrens_playroom",      default: false
     t.boolean  "no_fee",                  default: false
-    t.integer  "reviews_count"
     t.integer  "management_company_id"
     t.integer  "studio"
     t.integer  "one_bed"
@@ -104,6 +103,7 @@ ActiveRecord::Schema.define(version: 20190802055534) do
     t.boolean  "active_email",            default: true
     t.boolean  "active_web",              default: true
     t.float    "recommended_percent"
+    t.integer  "reviews_count",           default: 0,     null: false
     t.index ["building_name"], name: "index_buildings_on_building_name", using: :btree
     t.index ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
     t.index ["city"], name: "index_buildings_on_city", using: :btree
@@ -489,6 +489,7 @@ ActiveRecord::Schema.define(version: 20190802055534) do
     t.string   "phone"
     t.text     "about_me"
     t.string   "mobile"
+    t.integer  "reviews_count",          default: 0,  null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

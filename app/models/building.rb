@@ -233,10 +233,6 @@ class Building < ApplicationRecord
     reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
   end
 
-  def cached_reviews_count
-    Rails.cache.fetch([self, 'reviews_count']) { reviews.size }
-  end
-
   def image_uploads
     #including buildings + units images
     #uploads.where.not(image_file_name: nil).where("imageable_id = ? or imageable_id in (?)", id, ).includes(:imageable)
