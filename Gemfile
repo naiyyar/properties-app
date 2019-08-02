@@ -107,6 +107,7 @@ gem 'uglifier', '>= 1.3.0'
 
 #V
 gem 'valid_url'
+gem 'validates_timeliness', '~> 5.0.0.alpha3'
 
 #W
 gem 'wicked'

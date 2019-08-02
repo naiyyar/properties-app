@@ -17,6 +17,12 @@ class Listing < ApplicationRecord
   default_scope { order(date_active: :desc, management_company: :asc, building_address: :asc, unit: :asc)}
 
   validates_presence_of :building_address, :unit, :date_active
+  validates :rent,        :numericality => true, :allow_nil => true
+  validates :bed,         :numericality => true, :allow_nil => true
+  validates :bath,        :numericality => true, :allow_nil => true
+  validates :free_months, :numericality => true, :allow_nil => true
+  validates_date :date_active, :on => :create, :message => 'Formatting is off, must be yyyy/mm/dd'
+  validates_date :date_available, :on => :create, allow_nil: true, allow_blank: true, :message => 'Formatting is off, must be yyyy/mm/dd'
 	
 	filterrific(
    default_filter_params: { },
@@ -46,25 +52,28 @@ class Listing < ApplicationRecord
     errors = []
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose ]
+      #error << 'Issue line #{i}, col #{2}, Formatting of date active records is off' if !row['date_active'].kind_of?(Date)
+      #error << 'Issue line #{i}, col #{10}, Formatting of date available records is off' if row['date_available'].presen? and !row['date_available'].kind_of?(Date)
+      
       if row['building_address'].present? and row['unit'].present? and row['date_active'].present?
         @building = Building.where(building_street_address: row['building_address'])
         @building = Building.where('building_street_address @@ :q', q: row['building_address']) if @building.blank?
         if @building.present?
           listing = Listing.new
-          listing.attributes = row.to_hash #.slice(*row.to_hash.keys[5..8]) #excluding building specific attributes
+          listing.attributes = row.to_hash
           listing[:building_id] = @building.first.id
           listing[:building_address] = @building.first.building_street_address
           listing[:management_company] = @building.first.management_company.try(:name)
-          listing[:date_active] = !row['date_active'].kind_of?(Date) ? DateTime.parse(row['date_active']) : row['date_active']
+          listing[:date_active] = row['date_active'] #!row['date_active'].kind_of?(Date) ? DateTime.parse(row['date_active']) : row['date_active']
           listing[:unit] = row['unit']
           listing[:rent] = row['rent']
           listing[:bed]  = row['bed']
           listing[:bath] = row['bath']
           listing[:free_months] = row['free_months']
           listing[:owner_paid] = row['owner_paid']
-          listing[:rent_stabilize] = row['rent_stabilize'] || false
-          listing[:date_available] = !row['date_available'].kind_of?(Date) ? DateTime.parse(row['date_available']) :row['date_available']
-          if listing.save!
+          listing[:rent_stabilize] = row['rent_stabilize']
+          listing[:date_available] = row['date_available'] #!row['date_available'].kind_of?(Date) ? DateTime.parse(row['date_available']) : row['date_available']
+          if listing.save
           else
             listing.errors.full_messages.each do |message|
               errors << "Issue line #{i}, column #{message}."
