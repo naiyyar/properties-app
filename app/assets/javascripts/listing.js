@@ -1,10 +1,4 @@
 var ready = function () {
-	var lastChecked = null;
-	var dtr, listing_box;
-	//$(document).on('click', '.listing-box', function(e) {
-		//aptListing.selectRows(e, $(this));
-	//});
-
 	$('#sortable').checkboxes('range', true);
 
 	$(document).on('click', '.check_all_listing', function(e){
@@ -13,9 +7,6 @@ var ready = function () {
 		}else{
 			$('#sortable').checkboxes('uncheck');
 		}
-		//dtr = $('.dataTable > tbody tr');
-		//listing_box = dtr.find('.listing-box');
-		//aptListing.checkAll($(this), dtr, listing_box);
 	});
 
 
