@@ -23,7 +23,7 @@
 		<%= 'Bed' if building.bedroom_types? %>
 	</div>
 	<% unless params[:action] == 'show' and params[:controller] == 'buildings' %>
-		<div class="col-lg-5 col-sm-5 col-xs-5 text-right" style="padding: 0px 19px 0px 0px;">
+		<div class="col-lg-5 col-sm-5 col-xs-5 text-right">
 			<% active_listings = building.listings.active %>
 			<span class="font-xs">
 				<%= "#{active_listings.count} Active Listings" if active_listings.present? %>
