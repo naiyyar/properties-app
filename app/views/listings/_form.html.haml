@@ -48,29 +48,34 @@
                   %label Owner Paid
                   = f.text_field :owner_paid,  class: 'form-control'
             .row
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+              .col-xs-6.col-sm-6.col-md-6.col-lg-4
                 .form-group
                   %label Date Active*
                   = f.text_field :date_active, value: f.object.date_active.present? ? f.object.date_active.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker validate', :autocomplete => :off
 
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+              .col-xs-6.col-sm-6.col-md-6.col-lg-4
                 .form-group
                   %label Date Available
                   = f.text_field :date_available, value: f.object.date_available.present? ? f.object.date_available.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
-            .row
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+
+              .col-xs-6.col-sm-6.col-md-4.col-lg-4
                 .form-group
                   %label Rent Stabilize
-                  %br
-                  %label
-                    .btn-group{'data-toggle'=>"buttons"}
-                      %label.btn.btn-default
-                        = f.radio_button :rent_stabilize, 'true'
-                        Yes
+                  = f.select :rent_stabilize, options_for_select([['Please select', ''], ['Yes', 'true'], ['No', 'false']], f.object.rent_stabilize),{},{class: 'form-control'}
+            / .row
+            /   .col-xs-6.col-sm-6.col-md-6.col-lg-6
+            /     .form-group
+            /       %label Rent Stabilize
+            /       %br
+            /       %label
+            /         .btn-group{'data-toggle'=>"buttons"}
+            /           %label.btn.btn-default
+            /             = f.radio_button :rent_stabilize, 'true'
+            /             Yes
 
-                      %label.btn.btn-default
-                        = f.radio_button :rent_stabilize, 'false'
-                        No
+            /           %label.btn.btn-default
+            /             = f.radio_button :rent_stabilize, 'false'
+            /             No
 
             .form-group
               .col-sm-12
