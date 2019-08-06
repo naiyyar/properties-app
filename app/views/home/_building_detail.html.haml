@@ -4,14 +4,15 @@
 		= link_to building.neighborhood_name, borough_search_link(building.neighbohoods), class: 'hyper-link' if building.neighbohoods.present?
 
 = link_to building_path(building) do
-	%div.pb-info
-		/ prices and listing information
-		= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building }
 	%ul.cardRating
 		.pull-left{style: "margin-right: 10px;", class: @similar_properties.present? ? 'star-xs' : 'star-sm' }
 			= rating_for building, 'building', disable_after_rate: true,readonly: true, cancel: false
 		%div= recommended_percent(building).html_safe
-	
-	.clearfix
+
+		.clearfix
+
+	%div.pb-info
+		/ prices and listing information
+		= render partial: 'buildings/bedroom_types_and_prices', locals: { building: building }
 
 .clearfix
