@@ -266,6 +266,8 @@ module BuildingSearch
         buildings = buildings.reorder('building_name ASC, building_street_address ASC')
       when '5'
         buildings = buildings.reorder('building_name DESC, building_street_address DESC')
+      when '6'
+        buildings = sort_by_recently_updated(buildings, '6')
       else
         buildings = buildings
       end
@@ -273,6 +275,10 @@ module BuildingSearch
       buildings = buildings
     end
     buildings
+  end
+
+  def sort_by_recently_updated(buildings, sort_index)
+    buildings.joins(:listings).where('listings.active is true').group("buildings.id").reorder("count(listings.building_id) desc")
   end
 
   def sort_by_rating buildings, sort_index

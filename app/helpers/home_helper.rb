@@ -266,6 +266,17 @@ module HomeHelper
 		end
 	end
 
+	# def sort_options
+	# 	[	
+	# 		['Rating (high to low)',  '1'], 
+	# 		['Rating (low to high)',	'2'],
+	# 		['Reviews (high to low)',	'3'],
+	# 		['A - Z', '4'],
+	# 		['Z - A',	'5'],
+	# 		['Recently updated',	'6']
+	# 	]
+	# end
+
 	def sort_string
 		case params[:sort_by]
 		when '1'
@@ -278,6 +289,8 @@ module HomeHelper
       'A - Z'
     when '5'
       'Z - A'
+    when '6'
+      'Recently updated'
     else
       'Default sort'
     end
