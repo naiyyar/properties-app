@@ -278,7 +278,13 @@ module BuildingSearch
   end
 
   def sort_by_recently_updated(buildings, sort_index)
-    buildings.joins(:listings).where('listings.active is true').group("buildings.id").reorder("count(listings.building_id) desc")
+    buildings_with_active_listings = buildings.joins(:listings)
+                                               .where('listings.active is true')
+                                               .group("buildings.id")
+                                               .reorder("count(listings.building_id) desc")
+    buildings_without_active_listings = buildings.where.not(id: buildings_with_active_listings.pluck(:id))
+    sorted_buildins = (buildings_with_active_listings + buildings_without_active_listings)
+    buildings.where(id: sorted_buildins.map(&:id))
   end
 
   def sort_by_rating buildings, sort_index
