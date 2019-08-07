@@ -12,13 +12,22 @@
 #content.mob-max
   = render 'buildings/show/top_summary_section'
 
-  - if @building.price.present? or @building.bedroom_types?
-    = render 'buildings/show/price_ranges'
-
-    = render 'buildings/show/broker_fee_savings'
+  #listings
+    - if @active_listings.present?
+      %h3= "#{@active_listings.count} Active Rental Listings"
+      = render 'buildings/show/listings', listings: @active_listings
+    .clearfix
+    - if @inactive_listings.present?
+      %h3= "#{@all_inactive_listings.count} Past Rental Listings"
+      = render 'buildings/show/listings', listings: @inactive_listings
 
   .clearfix
   = render 'building_amenities'
+
+  .clearfix
+  - if @building.price.present? or @building.bedroom_types?
+    = render 'buildings/show/price_ranges'
+    = render 'buildings/show/broker_fee_savings'
 
   - if @documents.present?
     #building-documents.documents
@@ -37,16 +46,6 @@
     #subways
       %h3= "Similar Buildings (#{@similar_properties.count})"
       = render 'buildings/show/similar_properties'
-  
-  .clearfix
-  #listings
-    - if @active_listings.present?
-      %h3= "#{@active_listings.count} Active Rental Listings"
-      = render 'buildings/show/listings', listings: @active_listings
-    .clearfix
-    - if @inactive_listings.present?
-      %h3= "#{@all_inactive_listings.count} Past Rental Listings"
-      = render 'buildings/show/listings', listings: @inactive_listings
 
   .clearfix
   - if @rating_cache
