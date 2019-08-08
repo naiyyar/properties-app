@@ -52,9 +52,6 @@ class Listing < ApplicationRecord
     errors = []
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose ]
-      #error << 'Issue line #{i}, col #{2}, Formatting of date active records is off' if !row['date_active'].kind_of?(Date)
-      #error << 'Issue line #{i}, col #{10}, Formatting of date available records is off' if row['date_available'].presen? and !row['date_available'].kind_of?(Date)
-      
       if row['building_address'].present? and row['unit'].present? and row['date_active'].present?
         @building = Building.where(building_street_address: row['building_address'])
         @building = Building.where('building_street_address @@ :q', q: row['building_address']) if @building.blank?
@@ -64,15 +61,15 @@ class Listing < ApplicationRecord
           listing[:building_id] = @building.first.id
           listing[:building_address] = @building.first.building_street_address
           listing[:management_company] = @building.first.management_company.try(:name)
-          listing[:date_active] = row['date_active'] #!row['date_active'].kind_of?(Date) ? DateTime.parse(row['date_active']) : row['date_active']
+          listing[:date_active] = row['date_active']
           listing[:unit] = row['unit']
           listing[:rent] = row['rent']
           listing[:bed]  = row['bed']
           listing[:bath] = row['bath']
           listing[:free_months] = row['free_months']
           listing[:owner_paid] = row['owner_paid']
-          listing[:rent_stabilize] = row['rent_stabilize']
-          listing[:date_available] = row['date_available'] #!row['date_available'].kind_of?(Date) ? DateTime.parse(row['date_available']) : row['date_available']
+          listing[:rent_stabilize] = row['rent_stabilize'].to_s
+          listing[:date_available] = row['date_available']
           if listing.save
           else
             listing.errors.full_messages.each do |message|

@@ -289,10 +289,8 @@ module HomeHelper
       'A - Z'
     when '5'
       'Z - A'
-    when '6'
-      'Recently updated'
     else
-      'Default sort'
+      'Recently updated'
     end
 	end
 

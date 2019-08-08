@@ -266,8 +266,8 @@ module BuildingSearch
         buildings = buildings.reorder('building_name ASC, building_street_address ASC')
       when '5'
         buildings = buildings.reorder('building_name DESC, building_street_address DESC')
-      when '6'
-        buildings = sort_by_recently_updated(buildings, '6')
+      #when '6'
+      #  buildings = sort_by_recently_updated(buildings, '6')
       else
         buildings = buildings
       end
@@ -277,11 +277,10 @@ module BuildingSearch
     buildings
   end
 
-  def sort_by_recently_updated(buildings, sort_index)
-    buildings_with_active_listings = buildings.joins(:listings)
-                                               .where('listings.active is true')
-                                               .group("buildings.id")
-                                               .reorder("count(listings.building_id) desc")
+  def sort_by_recently_updated(buildings)
+    buildings_with_active_listings = buildings.joins(:listings).where('listings.active is true')
+                                               #.group("buildings.id")
+                                               #.reorder("buildings.building_name ASC, count(listings.building_id) DESC")
     buildings_without_active_listings = buildings.where.not(id: buildings_with_active_listings.pluck(:id))
     sorted_buildins = (buildings_with_active_listings + buildings_without_active_listings)
     buildings.where(id: sorted_buildins.map(&:id))
