@@ -35,7 +35,7 @@ module BuildingSearch
     end
 
     results[:buildings] = filtered_buildings(results[:buildings], params[:filter]) if params[:filter].present?
-    results[:buildings] = sort_buildings(results[:buildings], params[:sort_by]) if (params[:sort_by].present? and results[:buildings].present?)
+    results[:buildings] = sort_buildings(results[:buildings], params[:sort_by]) if results[:buildings].present?
 
     return results
   end
@@ -247,7 +247,7 @@ module BuildingSearch
   end
 
   def sort_buildings(buildings, sort_params)
-    # 0 => Default
+    # 0 => Default by active listings
     # 1 => Rating (high to low)
     # 2 => Rating (high to low)
     # 3 => Reviews (high to low)
@@ -260,16 +260,13 @@ module BuildingSearch
       when '2'
         buildings = sort_by_rating(buildings, '2')
       when '3'
-        #buildings = buildings.reorder('reviews_count DESC')
         buildings = where(id: buildings.map(&:id)).reorder('reviews_count DESC')
       when '4'
         buildings = buildings.reorder('building_name ASC, building_street_address ASC')
       when '5'
         buildings = buildings.reorder('building_name DESC, building_street_address DESC')
-      #when '6'
-      #  buildings = sort_by_recently_updated(buildings, '6')
       else
-        buildings = buildings
+        buildings = sort_by_recently_updated(buildings)
       end
     else
       buildings = buildings
@@ -278,11 +275,10 @@ module BuildingSearch
   end
 
   def sort_by_recently_updated(buildings)
-    buildings_with_active_listings = buildings.joins(:listings).where('listings.active is true')
-                                               #.group("buildings.id")
-                                               #.reorder("buildings.building_name ASC, count(listings.building_id) DESC")
+    buildings_with_active_listings = buildings.where('listings.active = ?', 'true')
+    #.group("buildings.id").unscoped.order("count(listings.building_id) DESC")
     buildings_without_active_listings = buildings.where.not(id: buildings_with_active_listings.pluck(:id))
-    sorted_buildins = (buildings_with_active_listings + buildings_without_active_listings)
+    sorted_buildins = buildings_with_active_listings + buildings_without_active_listings
     buildings.where(id: sorted_buildins.map(&:id))
   end
 
