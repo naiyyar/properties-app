@@ -126,6 +126,8 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
+    counter_cache_with_conditions (0.9.2)
+      activerecord (>= 3.2)
     crass (1.0.4)
     dalli (2.7.10)
     debug_inspector (0.0.3)
@@ -385,6 +387,7 @@ DEPENDENCIES
   cancancan
   client_side_validations
   coffee-rails (~> 4.1.0)
+  counter_cache_with_conditions
   dalli
   delayed_job_active_record
   devise (= 4.4.3)

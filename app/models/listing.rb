@@ -1,6 +1,8 @@
 class Listing < ApplicationRecord
 	include PgSearch
-	belongs_to :building, counter_cache: true
+	belongs_to :building
+
+  counter_cache_with_conditions :building, :listings_count, active: true
 
 	delegate :management_company, to: :building
 

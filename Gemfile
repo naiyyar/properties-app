@@ -24,6 +24,7 @@ gem 'client_side_validations'
 gem 'cancancan'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
+gem 'counter_cache_with_conditions'
 
 #D
 gem 'dalli'

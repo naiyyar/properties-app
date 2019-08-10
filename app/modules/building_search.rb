@@ -96,8 +96,6 @@ module BuildingSearch
   def featured_buildings searched_buildings
     featured_buildings = FeaturedBuilding.active_featured_buildings(searched_buildings.map(&:id))
     searched_buildings.where(id: featured_buildings.map(&:building_id))
-    #Building.joins(:featured_building)
-    #.where('buildings.id = featured_buildings.building_id AND featured_buildings.active is true AND featured_buildings.end_date >= ? AND buildings.id in (?)', Date.today, searched_buildings.pluck(:id))
   end
 
   def search_by_zipcodes(criteria)
