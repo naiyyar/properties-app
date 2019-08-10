@@ -44,11 +44,9 @@ module BuildingSearch
     @zoom = params[:zoomlevel].to_i
     custom_latng = [params[:latitude].to_f, params[:longitude].to_f]
     distance = redo_search_distance(0.5)
-    buildings = near(custom_latng, distance, units: :km)
+    buildings = near(custom_latng, distance, units: :km, order: "")
     distance = redo_search_distance(1.0)
-    buildings = near(custom_latng, distance, units: :km) if buildings.blank?
-    #distance = redo_search_distance(2.5)
-    #buildings = near(custom_latng, distance, units: :km) if buildings.blank?
+    buildings = near(custom_latng, distance, units: :km, order: "") if buildings.blank?
 
     buildings
   end

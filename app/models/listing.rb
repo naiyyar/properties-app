@@ -9,6 +9,7 @@ class Listing < ApplicationRecord
 
   pg_search_scope :search_query, 
   								against: [:building_address, :management_company],
+                  :using => {  :tsearch => { prefix: true }, :trigram=> { :threshold => 0.1 } },
                   associated_against: {
                     building: [:building_name]
                   }
@@ -77,7 +78,7 @@ class Listing < ApplicationRecord
             end
           end
         else
-          errors << 'Building address does not exist in database.'
+          errors << "Issue line #{i}, Building address does not exist in database."
         end
       else
         missing_text = ''
