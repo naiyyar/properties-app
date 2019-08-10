@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190802160802) do
+ActiveRecord::Schema.define(version: 20190810094602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20190802160802) do
     t.boolean  "active_web",              default: true
     t.float    "recommended_percent"
     t.integer  "reviews_count",           default: 0,     null: false
+    t.integer  "listings_count",          default: 0,     null: false
     t.index ["building_name"], name: "index_buildings_on_building_name", using: :btree
     t.index ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
     t.index ["city"], name: "index_buildings_on_city", using: :btree

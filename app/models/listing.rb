@@ -1,11 +1,11 @@
 class Listing < ApplicationRecord
 	include PgSearch
-	belongs_to :building
+	belongs_to :building, counter_cache: true
 
 	delegate :management_company, to: :building
 
-	scope :active, -> { where(active: 'true') }
-	scope :inactive, -> { where(active: 'false') }
+	scope :active, -> { where(active: true) }
+	scope :inactive, -> { where(active: false) }
 
   pg_search_scope :search_query, 
   								against: [:building_address, :management_company],

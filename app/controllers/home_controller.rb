@@ -78,7 +78,8 @@ class HomeController < ApplicationController
     if @buildings.present?
       final_results = Building.with_featured_building(@buildings, params[:page])
       @per_page_buildings = final_results[1]
-      @all_buildings = final_results[0][:all_buildings]
+      #@buildings_with_listings = @buildings.joins(:listings).reorder('listings.active DESC')
+      @all_buildings = final_results[0][:all_buildings] #with featured
       @hash = final_results[0][:map_hash]
       @lat = @hash[0]['latitude']
       @lng = @hash[0]['longitude']
