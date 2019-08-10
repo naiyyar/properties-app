@@ -24,30 +24,39 @@
     font-size: 14px !important;
 }
 
-.price-and-listings{
+/*.price-and-listings{
     width: 100%;
-}
-.price-and-listings .left-section, .price-and-listings .right-section{
+}*/
+/*.price-and-listings .left-section, .price-and-listings .right-section{
     display:inline-block;
 }
 .price-and-listings .left-section{
     width: 55.5%;
-}
+}*/
 
-.contact-links{
+.contact-links, .price-and-listings{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.contact-links div:first-child{
+.contact-links div:first-child, .price-and-listings .left-section{
     flex: 2 2;
     width: 55%;
+}
+
+.price-and-listings .left-section{
+    flex: 1.5 2;
 }
 
 .contact-links div:last-child{
     flex: 1 1;
     padding: 7px 12px;
+}
+
+.price-and-listings .right-section{
+    flex: 1.15 1;
+    padding: 7px 0px;
 }
 
 .search-view-card{
@@ -4739,6 +4748,9 @@ select.custom-arrow {
     .searchContainer{
         width: 93% !important;
     }
+    .price-and-listings .left-section {
+        flex: 1.5 2 !important;
+    }
 }
 @media screen and (min-width: 481px) {
     /*contribute page next buttons*/
@@ -4786,10 +4798,6 @@ select.custom-arrow {
 }
 
 @media screen and (max-width: 767px) {
-
-    .price-and-listings .left-section{
-        width: 62.5%;
-    }
     
     .location-loader .loader-container{
         margin-top: 10%;
@@ -5632,14 +5640,24 @@ select.custom-arrow {
         padding-right: 0px;
     }
 
+    .price-and-listings .left-section {
+        flex: 2.2 2;
+    }
+
 }
 
-@media screen and (max-width: 767px) and (orientation: landscape){
+@media screen and (max-width: 375px){
+    .price-and-listings .left-section {
+        flex: 2 2;
+    }
+}
+
+/*@media screen and (max-width: 767px) and (orientation: landscape){
 
     .price-and-listings .left-section{
         width: 65.5%;
     }
-}
+}*/
 
 @media screen and (max-width: 1199px) {
     .home-wrapper {
