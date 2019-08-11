@@ -20,6 +20,7 @@ class Ability
       cannot [:index, :new, :edit], ManagementCompany
       cannot [:index, :create, :update, :destroy], [BrokerFeePercent, RentMedian, FeaturedComp]
       cannot [:index, :add_or_update_prices], Price
+      cannot :manage, Listing
     end
   end
   
