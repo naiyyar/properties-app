@@ -38,6 +38,8 @@
 
 .price-and-listings .left-section{
     flex: 1.5 2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .contact-links div:last-child{
@@ -5643,19 +5645,13 @@ select.custom-arrow {
     }
 }
 
-/*@media screen and (max-width: 767px) and (orientation: landscape){
-
-    .price-and-listings .left-section{
-        width: 65.5%;
-    }
-}*/
-
 @media screen and (max-width: 1199px) {
     .home-wrapper {
         width: 100%;
         margin: 0;
     }
 }
+
 @media screen and (min-width: 992px) and (max-width: 1199px){
     .searchContainer {
         position: relative;
@@ -5952,6 +5948,25 @@ select.custom-arrow {
         max-width: 78%;
     }
             
+}
+/*1280, 1440 => 2.2 2*/
+/*1366 => 1.7 2*/
+@media screen and (min-width: 1400px) and (max-width: 1600){
+    .price-and-listings .left-section {
+        flex: 2.2 2 !important;
+    }
+}
+
+/*@media screen and (min-width: 1600px){
+    .price-and-listings .left-section {
+        flex: 2.2 2 !important;
+    }
+}*/
+
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+    .price-and-listings .left-section {
+        flex: 1.7 2 !important;
+    }
 }
 
 /*IE specific for header sign-in/signout button*/

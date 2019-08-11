@@ -10,6 +10,7 @@ class Ability
       cannot [:index, :show, :saved_buildings], User
       cannot [:index, :create, :update, :destroy], [BrokerFeePercent, RentMedian, FeaturedComp]
       cannot [:index, :add_or_update_prices], Price
+      cannot :manage, Listing
     elsif user.has_role? :admin
       can :manage, :all
     else

@@ -1,4 +1,5 @@
 class ListingsController < ApplicationController
+  load_and_authorize_resource only: :index
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :find_listings, only: [:change_status, :delete_all]
   # GET /listings

@@ -11,7 +11,7 @@ class Listing < ApplicationRecord
 
   pg_search_scope :search_query, 
   								against: [:building_address, :management_company],
-                  :using => {  :tsearch => { prefix: true }, :trigram=> { :threshold => 0.1 } },
+                  :using => {  :tsearch => { prefix: true }, :trigram=> { :threshold => 0.2 } },
                   associated_against: {
                     building: [:building_name]
                   }
