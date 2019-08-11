@@ -25,31 +25,20 @@
 }
 
 
-.contact-links, .price-and-listings{
+.contact-links{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.contact-links div:first-child, .price-and-listings .left-section{
+.contact-links div:first-child{
     flex: 2 2;
     width: 55%;
-}
-
-.price-and-listings .left-section{
-    flex: 1.5 2;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .contact-links div:last-child{
     flex: 1 1;
     padding: 7px 12px;
-}
-
-.price-and-listings .right-section{
-    flex: 1.15 1;
-    padding: 1px 0px;
 }
 
 .search-view-card{
@@ -1280,7 +1269,7 @@ a.userHandler {
 
 .search-view-card .pb-info .col-lg-5, 
 .search-view-card .pb-info .col-md-5{
-    padding: 0px 19px 0px 19px;
+    padding: 0px 19px 0px 3px;
 }
 
 .search-view-card .pb-info .col-lg-7,
@@ -4741,12 +4730,8 @@ select.custom-arrow {
     .searchContainer{
         width: 93% !important;
     }
-
-    .search-view-card .pb-info .col-lg-5, 
-    .search-view-card .pb-info .col-md-5{
-        padding: 0px 0px 0px 0px;
-    }
 }
+
 @media screen and (min-width: 481px) {
     /*contribute page next buttons*/
     .next_btn_container, .btn-block-container{
@@ -4793,10 +4778,6 @@ select.custom-arrow {
 }
 
 @media screen and (max-width: 767px) {
-    .search-view-card .pb-info .col-lg-5, 
-    .search-view-card .pb-info .col-md-5{
-        padding: 0px 19px 0px 23px;
-    }
     
     .location-loader .loader-container{
         margin-top: 10%;
@@ -5639,20 +5620,6 @@ select.custom-arrow {
         padding-right: 0px;
     }
 
-    .price-and-listings .left-section {
-        flex: 2.2 2;
-    }
-
-}
-
-@media screen and (max-width: 375px){
-    .price-and-listings .left-section {
-        flex: 2 2;
-    }
-    .search-view-card .pb-info .col-lg-5, 
-    .search-view-card .pb-info .col-md-5{
-        padding: 0px 19px 0px 14px;
-    }
 }
 
 @media screen and (max-width: 1199px) {
@@ -5959,25 +5926,17 @@ select.custom-arrow {
     }
             
 }
-/*1280, 1440 => 2.2 2*/
-/*1366 => 1.7 2*/
-/*@media screen and (min-width: 1400px) and (max-width: 1600){
-    .price-and-listings .left-section {
-        flex: 2.2 2 !important;
-    }
-}*/
 
-/*@media screen and (min-width: 1600px){
-    .price-and-listings .left-section {
-        flex: 2.2 2 !important;
-    }
-}*/
+p.pb-8{
+    height: 26px;
+    padding: 0px;
+    margin: 0px;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
-/*@media screen and (min-width: 1024px) and (max-width: 1366px){
-    .price-and-listings .left-section {
-        flex: 1.7 2 !important;
-    }
-}*/
 
 /*IE specific for header sign-in/signout button*/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {

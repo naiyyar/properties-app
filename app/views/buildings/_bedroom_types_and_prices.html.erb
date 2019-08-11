@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-lg-6 col-md-6 col-sm-7 col-xs-7">
+	<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
 		<%= "<span> #{building.prices} | </span>".html_safe if building.prices.present? %>
 		<% if building.studio.present? %>
 			<%= "<span>Studio</span>".html_safe %><%= ',' if building.either_of_four? %>
@@ -23,7 +23,7 @@
 		<%= 'Bed' if building.bedroom_types? %>
 	</div>
 	<% unless params[:action] == 'show' and params[:controller] == 'buildings' %>
-		<div class="col-lg-6 col-md-5 col-sm-5 col-xs-5 text-left">
+		<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-left">
 			<% active_listings = building.listings.active %>
 			<span class="font-xs">
 				<%= "#{active_listings.count} Active Listings" if active_listings.present? %>

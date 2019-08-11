@@ -1,7 +1,30 @@
 .contact-links
-  %div{style: "padding: #{size_class.present? ? '2px 3px 2px 3px;' : '8px'}"}
-    = check_availability_link(building, size_class)
+	%div{style: "padding: #{size_class.present? ? '2px 3px 2px 6px;' : '6px 8px 8px 11px;'}"}
+		%p.pb-8
+			= "<span> #{building.prices} | </span>".html_safe if building.prices.present?
+			- if building.studio.present?
+				= "<span>Studio</span>".html_safe
+				= ',' if building.either_of_four?
+			- if building.one_bed.present?
+				= "<span>1</span>".html_safe
+				= ',' if building.either_of_three?
+			- if building.two_bed.present?
+				= "<span>2</span>".html_safe
+				= ',' if building.either_of_two?
+			- if building.three_bed.present?
+				= "<span>3</span>".html_safe
+				= ',' if building.four_plus_bed.present?
+			- if building.four_plus_bed.present?
+				= "<span>4+</span>".html_safe
+			= 'Bed' if building.bedroom_types?
 
-  - if building.email.present? and building.active_email
-    %div{style: "padding: 0px 8px 0px 0px;"}
-      = link_to '<b>Contact Leasing</b>'.html_safe, 'javascript:;', class: "btn btn-primary btn-o #{size_class}", style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}", onclick: "showLeasingContactPopup(#{building.id})"
+		= check_availability_link(building, size_class)
+
+	%div{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}"}
+		- unless params[:action] == 'show' and params[:controller] == 'buildings'
+			- active_listings = building.listings.active
+			%p.font-xs.pb-8
+				= "#{active_listings.count} Active Listings" if active_listings.present?
+    
+		- if building.email.present? and building.active_email
+			= link_to '<b>Contact Leasing</b>'.html_safe, 'javascript:;', class: "btn btn-primary btn-o #{size_class}", style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}", onclick: "showLeasingContactPopup(#{building.id})"

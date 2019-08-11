@@ -39,8 +39,8 @@
           ="| #{(recomended_per.present? && recomended_per.nan? ? "--% #{thumb_icon}".html_safe :  "#{recomended_per.to_i}% #{thumb_icon}")}".html_safe
         %span= "| &nbsp; Reviews: #{building.reviews_count}".html_safe
 
-      .bd-types
-        = render partial: 'buildings/bedroom_types_and_prices', locals: { building: building }
+      / .bd-types
+      / = render partial: 'buildings/bedroom_types_and_prices', locals: { building: building }
   
   %div{style: "position: absolute;right: -4px;top: 136px;"}
     .pull-right{style: "padding-right: 10px;font-size: 18px;"}
