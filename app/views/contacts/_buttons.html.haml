@@ -20,9 +20,9 @@
 
 		= check_availability_link(building, size_class)
 
-	%div{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}"}
+	- active_listings = building.listings.active
+	%div{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}", class: "#{'hidden' unless building.email.present? and building.active_email}" }
 		- unless params[:action] == 'show' and params[:controller] == 'buildings'
-			- active_listings = building.listings.active
 			%p.font-xs.pb-8
 				= "#{active_listings.count} Active Listings" if active_listings.present?
     
