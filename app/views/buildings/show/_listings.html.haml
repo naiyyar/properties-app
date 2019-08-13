@@ -25,7 +25,7 @@
 						%td.text-center=listing.free_months
 						%td.hidden-xs=listing.date_available
 						%td.hidden-xs=listing.owner_paid
-						%td.text-center.hidden-xs=listing.rent_stabilize ? 'Y' : 'N'
+						%td.text-center.hidden-xs=listing.rentstabilize
 				
 				- if !active_block and @all_inactive_listings.present? and @all_inactive_listings.count > 10
 					%tr

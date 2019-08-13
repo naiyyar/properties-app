@@ -122,7 +122,7 @@ module BuildingsHelper
 				recommended = "#{thumb_icon} #{rec_percent.to_i}%"
 			end
 		end
-		"#{recommended} &nbsp; | Reviews: #{object.reviews_count}"
+		"#{recommended} &nbsp; | Reviews: #{object.reviews_count.to_i}"
 	end
 
 	def prices_options
