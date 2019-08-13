@@ -207,6 +207,18 @@ class Building < ApplicationRecord
     [studio, one_bed, two_bed, three_bed, four_plus_bed].compact
   end
 
+  def show_bed_ranges
+    beds = []
+    bedroom_ranges.map do |bed|
+      if bed == 0
+        beds << 'Studio'
+      else
+        beds << bed
+      end
+    end
+    beds
+  end
+
   def rent_median_prices(rent_medians)
     rent_medians.where(range: price, bed_type: bedroom_ranges).order(price: :asc)
   end

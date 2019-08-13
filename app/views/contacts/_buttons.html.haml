@@ -2,20 +2,7 @@
 	%div{style: "padding: #{size_class.present? ? '2px 3px 2px 6px;' : '6px 8px 8px 11px;'}"}
 		%p.pb-8
 			= "<span> #{building.prices} | </span>".html_safe if building.prices.present?
-			- if building.studio.present?
-				= "<span>Studio</span>".html_safe
-				= ',' if building.either_of_four?
-			- if building.one_bed.present?
-				= "<span>1</span>".html_safe
-				= ',' if building.either_of_three?
-			- if building.two_bed.present?
-				= "<span>2</span>".html_safe
-				= ',' if building.either_of_two?
-			- if building.three_bed.present?
-				= "<span>3</span>".html_safe
-				= ',' if building.four_plus_bed.present?
-			- if building.four_plus_bed.present?
-				= "<span>4+</span>".html_safe
+			%span=building.show_bed_ranges.join(', ') 
 			= 'Bed' if building.bedroom_types?
 
 		= check_availability_link(building, size_class)
