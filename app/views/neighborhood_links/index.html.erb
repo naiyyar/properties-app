@@ -33,9 +33,7 @@
                       <td><%= neighborhood_link.date %></td>
                       <td><%= link_to neighborhood_link.title, neighborhood_link.web_url, target: '_blank', class: 'link_underlined' %></td>
                       <td><%= neighborhood_link.source %></td>
-                      <td><%= link_to 'Edit', "#editNeighnorhood#{neighborhood_link.id}" , 'data-toggle' => 'modal' %>
-                        <%= render partial: 'form', locals: { neighborhood_link: neighborhood_link, modal_id: "editNeighnorhood#{neighborhood_link.id}" } %>
-                      </td>
+                      <td><%= link_to 'Edit', edit_neighborhood_link_path(neighborhood_link), remote: true %></td>
                       <td><%= link_to 'Delete', neighborhood_link, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' %></td>
                     </tr>
                   <%end%>

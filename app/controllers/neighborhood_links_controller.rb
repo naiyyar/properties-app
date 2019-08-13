@@ -1,10 +1,10 @@
 class NeighborhoodLinksController < ApplicationController
   before_action :set_neighborhood_link, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_neighborhoods, only: [:index, :edit]
+  
   def index
     @neighborhood_links = NeighborhoodLink.order({ date: :desc }, { title: :asc }).paginate(:page => params[:page], :per_page => 100)
     @neighborhood_link = NeighborhoodLink.new
-    @neighborhoods = Building.where('neighborhood is not null').map(&:neighborhood)
   end
 
   def show
@@ -60,5 +60,9 @@ class NeighborhoodLinksController < ApplicationController
 
     def neighborhood_link_params
       params.require(:neighborhood_link).permit(:neighborhood,:date,:title,:web_url,:source, :image, :parent_neighborhood)
+    end
+
+    def set_neighborhoods
+      @neighborhoods = Building.where('neighborhood is not null').map(&:neighborhood)
     end
 end
