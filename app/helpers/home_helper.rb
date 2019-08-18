@@ -341,4 +341,47 @@ module HomeHelper
 		txt.html_safe
 	end
 
+	def manhattan_searches
+		[ 'Manhattan Apartments For Rent', 'Cheap Apartments In NYC', 'Studio Apartments In NYC',
+			'Affordable Apartments For Rent In NYC', 'One Bedroom Apartments in NYC', 'Cheap Studio Apartments in NYC',
+			'Luxury Apartments in Manhattan', '2 Bedroom Apartments in NYC', '3 Bedroom Apartments For Rent in NYC',
+			'Manhattan Apartments For Rent Cheap', 'Affordable Luxury Apartments In NYC'
+		]
+	end
+
+	def amenities_searches
+		[
+			'Doorman Buildings In NYC', 'Pet Friendly Apartments In NYC', 'NYC Apartments With Pool', 
+			'Walk Up Apartments NYC', 'Affordable Doorman Buildings NYC', 'NYC Apartments With Gyms'
+		]
+	end
+
+	def neighborhoods_searches
+		[
+			'Studio Apartments in Brooklyn', 'Studios For Rent In Queens', '2 Bedroom Apartments in Brookly For Rent', 
+			'2 Bedroom Apartments in Queens For Rent', 'Upper East Side Apartments Luxury', 'Harlem Studio Apartments',
+			'Long Island City Studios', 'Upper East Side Studio Apartments', 'Upper West Side Studio Apartments',
+			"Hell's Kitchen Studios", 'West Village Studios', '2 Bedroom Apartments Upper East Side', "Hell's Kitchen Luxury Rentals",
+			'Midtown Studio Apartments NYC', 'Midtown East Luxury Rentals', 'Upper West Side Luxury Rental Buildings',
+			'Upper East Side Apartments For Rent With Doorman'
+		]
+	end
+
+	def col1_popular_searches
+		{
+			'Manhattan' => manhattan_searches,
+			'Amenities' => amenities_searches,
+		}
+	end
+
+	def col2_popular_searches
+		{
+			'Neighborhoods' => neighborhoods_searches,
+		}
+	end
+
+	def popular_search_link category, link_text
+		link_to link_text, "/nyc/#{link_text.downcase.split(' ').join('-')}", class: 'hyper-link'
+	end
+
 end

@@ -1,5 +1,5 @@
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
-  %ul.neighborhoods-list
+  %ul.pop-list
     - area = 'MANHATTAN'
     %b#lower_manhattan
       = search_by_neighborhood_link('Lower Manhattan', area)
@@ -18,7 +18,7 @@
       %li.parent{"data-parent" => "midtown"}= search_by_neighborhood_link("Hell's Kitchen", area)
       %li.parent{"data-parent" => "midtown"}= search_by_neighborhood_link('Kips Bay', area)
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
-  %ul.neighborhoods-list
+  %ul.pop-list
     .child-borough-container
       %li.parent{"data-parent" => "midtown"}
         = search_by_neighborhood_link('Midtown East', area)
@@ -46,7 +46,7 @@
       %li.parent{"data-parent" => "upper_manhattan"}= search_by_neighborhood_link('East Harlem', area)
       %li.parent{"data-parent" => "upper_manhattan"}= search_by_neighborhood_link('Harlem', area)
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
-  %ul.neighborhoods-list
+  %ul.pop-list
     .child-borough-container
       %li.parent{"data-parent" => "upper_manhattan"}= search_by_neighborhood_link('Hudson Heights', area)
       %li.parent{"data-parent" => "upper_manhattan"}= search_by_neighborhood_link('Morningside Heights', area)
@@ -65,7 +65,7 @@
       %li.parent{"data-parent" => "brooklyn"}= search_by_neighborhood_link('Sheepshead Bay', area)
       %li.parent{"data-parent" => "brooklyn"}= search_by_neighborhood_link('Williamsburg', area)
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
-  %ul.neighborhoods-list
+  %ul.pop-list
     - area = 'Queens'
     %b#queens= link_to "Queens (#{@queens_count})", '/no-fee-apartments-nyc-city/queens-ny'
     .child-borough-container

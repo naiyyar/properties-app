@@ -5,7 +5,7 @@
       <div class="text-right header visible-xs" style="padding: 4px; cursor: pointer;">
         <%= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeFilter' %>
       </div>
-      <%= hidden_field_tag :sort_by, params[:sort_by] || '4' %>
+      <%= hidden_field_tag :sort_by, params[:sort_by] || '0' %>
       <%= hidden_field_tag :latitude, params[:latitude] if params[:latitude].present? %>
       <%= hidden_field_tag :longitude, params[:longitude] if params[:longitude].present? %>
       

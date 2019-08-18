@@ -5,17 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>
-      <% tab_title = 'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC | Transparentcity' %>
       <% if content_for? :page_title %>
-        <%= yield :page_title %> <%=tab_title%>
+        <%= yield :page_title %>
       <% else %>
-        <%=tab_title%>
+        <%= @tab_title_text = 'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC | Transparentcity' %>
       <% end %>
     </title>
     <meta name="description" content="<%=@meta_desc%>">
     <meta property="og:url" content="https://www.transparentcity.co" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="<%=tab_title%>" />
+    <meta property="og:title" content="<%=@tab_title_text%>" />
     <meta property="og:site_name" content="transparentcity.co" />
     <meta property="og:description" content="<%=@meta_desc%>" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">

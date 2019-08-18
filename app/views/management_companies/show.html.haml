@@ -39,7 +39,7 @@
       #buildings_reviews_tab.tab-pane.fade{style: "overflow-y: scroll;height: 500px;"}
         .comments.objects-container{style: "padding: 15px 14px 0px 20px;"}
           - if @reviews.present?
-            = render :partial => 'reviews/review', :collection => @reviews, :as => :review, cache: true
+            = render :partial => 'reviews/review', :collection => @reviews, :as => :review
         .load-more-container.text-center{style: 'margin-bottom: 20px;'}
           / hide our loading gif image so that we show it when making ajax call via jquery
           = image_tag 'loader.gif', style: 'display:none;', class: 'loading-gif'

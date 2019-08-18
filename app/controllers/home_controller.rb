@@ -8,8 +8,10 @@ class HomeController < ApplicationController
   def index
     @home_view = true
     @buildings_count = Building.all.count
-    @meta_desc = "There are #{@buildings_count} buildings of no fee apartments NYC, no fee rentals NYC.  
-                  Save thousands on broker fees by renting directly from property managers and owners."
+    @meta_desc = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
+                  no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
+    
+    @tab_title_text = 'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC | Transparentcity'
   end
 
   def load_infobox
@@ -134,7 +136,7 @@ class HomeController < ApplicationController
       @borough_city = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
       @searched_neighborhoods = "#{@search_string}"
       @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
-      @tab_title_text = "#{@search_string} #{@borough_city}"
+      @tab_title_text = "#{@search_string} #{@borough_city} | Transparentcity"
 
       if !searched_params.include?(params[:searched_by])
         @sub_borough = {}

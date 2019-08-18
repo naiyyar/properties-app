@@ -1,3 +1,5 @@
+- content_for :page_title do
+  = @tab_title_text.titleize if @tab_title_text.present?
 #hero-container
   = render 'layouts/home/slider'
   = render 'layouts/home/header'
@@ -8,8 +10,10 @@
     .home-search-form
       = render partial: 'home/search_form'
 
-- cache(['popular_neighborhoods', @buildings_count]) do
+- cache(['apt_pop_neighborhoods', @buildings_count]) do
   = render 'layouts/home/popular_neighborhoods'
+
+= render 'layouts/home/popular_searches'
 
 .home-wrapper.pb20{style: 'padding: 20px 20px 20px;'}
   .home-content.how-it-works
