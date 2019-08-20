@@ -14,6 +14,10 @@ module BuildingSearch
             results[:boundary_coords] << Gcoordinate.where(zipcode: search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
           elsif params[:searched_by] == 'no-fee-apartments-nyc-neighborhoods'
             results[:buildings] = buildings_in_neighborhood(search_string)
+          elsif params[:searched_by] == 'nyc'
+            #popular no fee searches
+            results[:buildings] = buildings_by_popular_search(params)
+            results[:zoom] = 12
           else
             results[:buildings] = cached_buildings_by_city_or_nb(search_string, sub_borough[search_string])
             results[:zoom] = 12

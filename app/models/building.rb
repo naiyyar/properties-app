@@ -63,6 +63,7 @@ class Building < ApplicationRecord
 
   #Search and filtering methods
   extend BuildingSearch
+  extend PopularSearches
   extend ImportBuildingReviews
 
   acts_as_voteable
