@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     @meta_desc = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
                   no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
     
-    @tab_title_text = 'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC | Transparentcity'
+    @tab_title_text = 'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC'
   end
 
   def load_infobox
