@@ -51,6 +51,8 @@ class Upload < ApplicationRecord
   #before_update :rename_file
   #and (in my case, the paperclip attachement name is "file")
 
+  after_create :set_sort_index
+
   # def rename_file
   #   #debugger
   #   self.document = open(self.document.url)
@@ -138,6 +140,13 @@ class Upload < ApplicationRecord
   private
   def set_defaults
     self.rotation ||= 0
+  end
+
+  def set_sort_index
+    imageable = self.imageable
+    unit_ids = imageable.units.map(&:id)
+    uploads = Upload.where("imageable_id = ? or imageable_id in (?)", imageable.id, unit_ids).where.not(id: self.id)
+    self.update(sort: uploads.count + 1) if uploads.present?
   end
 
   # def is_video?
