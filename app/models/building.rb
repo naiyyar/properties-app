@@ -100,13 +100,6 @@ class Building < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
 
-  #multisearchable
-  # PgSearch.multisearch_options = {
-  #   :using => [:tsearch, :trigram, :dmetaphone],
-  #   :ignoring => :accents
-  # }
-  # multisearchable :against => [:neighborhood, :building_name]
-
   #pgsearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
      :using => { :tsearch => { prefix: true } }
@@ -247,8 +240,7 @@ class Building < ApplicationRecord
   end
 
   def image_uploads
-    #including buildings + units images
-    #uploads.where.not(image_file_name: nil).where("imageable_id = ? or imageable_id in (?)", id, ).includes(:imageable)
+    #including buildings
     uploads.where.not(image_file_name: nil).includes(:imageable)
   end
 
@@ -434,15 +426,15 @@ class Building < ApplicationRecord
   def bedroom_types?
     studio.present? || either_of_four?
   end
-
+  
   def either_of_two?
     three_bed.present? || four_plus_bed.present?
   end
-
+  
   def either_of_three?
     either_of_two? || two_bed.present?
   end
-
+  
   def either_of_four?
     either_of_three? || one_bed.present?
   end
