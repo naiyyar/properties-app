@@ -97,4 +97,16 @@
         }
       });
     }
+
+    function showActiveListingsPopup(building_id){
+      $.ajax({
+        url: '/listings/show_more',
+        type: 'get',
+        dataType: 'script',
+        data: { building_id: building_id, listing_type: 'active' },
+        success: function(response){
+          //console.log('showActiveListingsPopup')
+        }
+      });
+    }
 </script>
