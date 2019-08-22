@@ -75,6 +75,7 @@ class HomeController < ApplicationController
       @buildings = @searched_buildings = results[:buildings]
       @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
       @zoom = results[:zoom] if results[:zoom].present?
+      @filters = results[:filters]
     end
     @buildings = @buildings.includes(:building_average, :featured_building) if @buildings.present?
     if @buildings.present?

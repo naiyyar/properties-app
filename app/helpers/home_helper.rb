@@ -291,20 +291,32 @@ module HomeHelper
 		params[:filter][:rating].include?(val.to_s) ? 'checked' : '' if params[:filter].present? and params[:filter][:rating].present?
 	end
 
-	def type_checked val
-		params[:filter][:type].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:type].present?
-	end
+	# def type_checked val
+	# 	params[:filter][:type].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:type].present?
+	# end
 
 	def bed_checked val
-		params[:filter][:bedrooms].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:bedrooms].present?
+		if params[:filter].present? and params[:filter][:bedrooms].present?
+			params[:filter][:bedrooms].include?(val) ? 'checked' : ''
+		elsif @filters.present? and @filters[:beds].present?
+			@filters[:beds].include?(val) ? 'checked' : ''
+		end
 	end
 
 	def price_checked val
-		params[:filter][:price].include?(val.to_s) ? 'checked' : '' if params[:filter].present? and params[:filter][:price].present?
+		if params[:filter].present? and params[:filter][:price].present?
+			params[:filter][:price].include?(val.to_s) ? 'checked' : ''
+		elsif @filters.present? and @filters[:price].present?
+			@filters[:price].include?(val) ? 'checked' : ''
+		end
 	end
 
 	def amen_checked val
-		params[:filter][:amenities].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:amenities].present?
+		if params[:filter].present? and params[:filter][:amenities].present?
+			params[:filter][:amenities].include?(val) ? 'checked' : ''
+		elsif @filters.present? and @filters[:amenities].present?
+			@filters[:amenities].include?(val) ? 'checked' : ''
+		end
 	end
 
 	def sort_options

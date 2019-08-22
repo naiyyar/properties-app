@@ -2,6 +2,7 @@ module BuildingSearch
 
   def apt_search params, search_string, sub_borough
     results = {}
+    results[:filters] = nil
     results[:zoom] = nil
     results[:boundary_coords] = []
     results[:searched_by] = params[:searched_by]
@@ -16,7 +17,8 @@ module BuildingSearch
             results[:buildings] = buildings_in_neighborhood(search_string)
           elsif params[:searched_by] == 'nyc'
             #popular no fee searches
-            results[:buildings] = buildings_by_popular_search(params)
+            results[:buildings] = buildings_by_popular_search(params)[0]
+            results[:filters] = buildings_by_popular_search(params)[1]
             results[:zoom] = 12
           else
             results[:buildings] = cached_buildings_by_city_or_nb(search_string, sub_borough[search_string])
