@@ -371,7 +371,7 @@ module HomeHelper
 	def neighborhoods_searches
 		[
 			'Studio Apartments in Brooklyn', 'Studios For Rent In Queens', '2 Bedroom Apartments in Brookly For Rent', 
-			'2 Bedroom Apartments in Queens For Rent', 'Upper East Side Apartments Luxury', 'Harlem Studio Apartments',
+			'2 Bedroom Apartments in Queens For Rent', 'Luxury Apartments In Upper East Side', 'Harlem Studio Apartments',
 			'Long Island City Studios', 'Upper East Side Studio Apartments', 'Upper West Side Studio Apartments',
 			"Hell's Kitchen Studios", 'West Village Studios', '2 Bedroom Apartments Upper East Side', "Hell's Kitchen Luxury Rentals",
 			'Midtown Studio Apartments NYC', 'Midtown East Luxury Rentals', 'Upper West Side Luxury Rental Buildings',

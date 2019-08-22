@@ -23,8 +23,8 @@ module PopularSearches
 			buildings = nyc_buildings.one_bed
 			filters[:beds] = ['1']
 		when 'cheap-studio-apartments-in-nyc'
-			buildings = nyc_buildings.studio.where(price: AFFORDABLE_APTS_PRICES)
-			filters[:price] = AFFORDABLE_APTS_PRICES
+			buildings = nyc_buildings.studio.where(price: 1)
+			filters[:price] = [1]
 			filters[:beds] = STUDIOS
 		when 'luxury-apartments-in-manhattan'
 			buildings = manhattan_buildings.where(price: LUXURY_APTS_PRICES)
@@ -76,7 +76,7 @@ module PopularSearches
 		when '2-bedroom-apartments-in-queens-for-rent'
 			buildings = queens_buildings.two_bed
 			filters[:beds] = ['2']
-		when 'upper-east-side-apartments-luxury'
+		when 'luxury-apartments-in-upper-east-side'
 			buildings = buildings_in_neighborhood('Upper East Side')
 			filters[:amenities] = LUXURY_APTS_AMENITIES
 		when 'harlem-studio-apartments'
