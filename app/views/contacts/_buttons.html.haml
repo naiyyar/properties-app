@@ -11,7 +11,7 @@
 	%div{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}", class: "#{'hidden' unless building.email.present? and building.active_email}" }
 		- unless params[:action] == 'show' and params[:controller] == 'buildings'
 			%p.font-xs.pb-8
-				= "#{active_listings.count} Active Listings" if active_listings.present?
+				=link_to "#{active_listings.count} Active Listings", show_more_listings_path(building_id: building.id, listing_type: 'active'), remote: true, class: 'hyper-link' if active_listings.present?
     
 		- if building.email.present? and building.active_email
 			= link_to '<b>Contact Leasing</b>'.html_safe, 'javascript:;', class: "btn btn-primary btn-o #{size_class}", style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}", onclick: "showLeasingContactPopup(#{building.id})"

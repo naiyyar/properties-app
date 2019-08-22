@@ -40,7 +40,14 @@ class ListingsController < ApplicationController
 
   def show_more
     @building = Building.find(params[:building_id])
-    @listings = @building.listings.reorder(created_at: :desc, rent: :asc)
+    unless params[:listing_type].present?
+      @listings = @building.listings
+      @rentals = 'past'
+    else
+      @listings = @building.listings.active
+      @rentals = 'active'
+    end
+    @listings = @listings.reorder(created_at: :desc, rent: :asc)
   end
 
   # GET /listings/1
