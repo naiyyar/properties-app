@@ -354,18 +354,19 @@ module HomeHelper
 	end
 
 	def manhattan_searches
-		[ 'Manhattan Apartments For Rent', 'Cheap Apartments In NYC', 'Studio Apartments In NYC',
-			'Affordable Apartments For Rent In NYC', 'One Bedroom Apartments in NYC', 'Cheap Studio Apartments in NYC',
-			'Luxury Apartments in Manhattan', '2 Bedroom Apartments in NYC', '3 Bedroom Apartments For Rent in NYC',
-			'Manhattan Apartments For Rent Cheap', 'Affordable Luxury Apartments In NYC'
+		['Manhattan Apartments For Rent', 'Luxury Apartments in Manhattan', 'Manhattan Apartments For Rent Cheap']
+	end
+
+	def nyc_searches
+		[ 
+			'Cheap Apartments In NYC', 'Studio Apartments In NYC','Affordable Apartments For Rent In NYC', 'One Bedroom Apartments in NYC', 
+			'Cheap Studio Apartments in NYC','2 Bedroom Apartments in NYC', '3 Bedroom Apartments For Rent in NYC','Affordable Luxury Apartments In NYC'
 		]
 	end
 
 	def amenities_searches
-		[
-			'Doorman Buildings In NYC', 'Pet Friendly Apartments In NYC', 'NYC Apartments With Pool', 
-			'Walk Up Apartments NYC', 'Affordable Doorman Buildings NYC', 'NYC Apartments With Gyms'
-		]
+		['Doorman Buildings In NYC', 'Pet Friendly Apartments In NYC', 'NYC Apartments With Pool', 'Walk Up Apartments NYC', 
+			'Affordable Doorman Buildings NYC', 'NYC Apartments With Gyms']
 	end
 
 	def neighborhoods_searches
@@ -382,6 +383,7 @@ module HomeHelper
 	def col1_popular_searches
 		{
 			'Manhattan' => manhattan_searches,
+			'NYC' => nyc_searches,
 			'Amenities' => amenities_searches,
 		}
 	end
