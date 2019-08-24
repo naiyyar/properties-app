@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     @meta_desc = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
                   no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
     
-    @tab_title_text = 'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC'
+    @tab_title_text = tab_title_tag
   end
 
   def load_infobox
@@ -141,7 +141,7 @@ class HomeController < ApplicationController
       @borough_city = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
       @searched_neighborhoods = "#{@search_string}"
       @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
-      @tab_title_text = "#{@search_string} #{@borough_city}"
+      @tab_title_text = "#{@search_string} #{@borough_city} #{tab_title_tag}"
 
       if !searched_params.include?(params[:searched_by])
         @sub_borough = {}
@@ -168,5 +168,9 @@ class HomeController < ApplicationController
   def set_rent_medians
     @broker_percent = BrokerFeePercent.first.percent_amount
     @rent_medians = RentMedian.all
+  end
+
+  def tab_title_tag
+    'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC'
   end
 end
