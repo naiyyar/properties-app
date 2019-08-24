@@ -445,6 +445,14 @@ class Building < ApplicationRecord
 
   def favorite_by?(favoriter)
     favorites.find_by(favoriter_id: favoriter.id, favoriter_type: favoriter.class.base_class.name).present?
-  end  
+  end
+
+  def has_active_email?
+    email.present? and active_email
+  end
+
+  def active_web_url?
+    web_url.present? and active_web
+  end
 
 end

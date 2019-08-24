@@ -170,7 +170,7 @@ module BuildingsHelper
 	end
 
 	def check_availability_link building, sl_class=nil
-		if building.web_url.present? and building.active_web
+		if building.active_web_url?
 			bt_block_class = sl_class.present? ? sl_class : 'btn-block'
       link_to 'Check Availability', building.web_url, 
       														onclick: "window.open(this.href,'_blank');return false;", 
