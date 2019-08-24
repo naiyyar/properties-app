@@ -14,4 +14,5 @@
 				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'hyper-link', onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?
     
 		- if building.email.present? and building.active_email
-			= link_to '<b>Contact Leasing</b>'.html_safe, 'javascript:;', class: "btn btn-primary btn-o #{size_class}", style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}", onclick: "showLeasingContactPopup(#{building.id})"
+			.btn.btn-primary.btn-o{class: "#{size_class}", onclick: "showLeasingContactPopup(#{building.id})", style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}"}
+				%b Contact Leasing

@@ -194,7 +194,8 @@
   }
 
   //Initialize the map
-  $(document).ready(function() { initialize(); });
+  //$(document).ready(function() { initialize(); });
+  google.maps.event.addDomListener(window, 'load', initialize);
   
   <% if params[:searched_by] == 'latlng' %>
     setTimeout(function() {

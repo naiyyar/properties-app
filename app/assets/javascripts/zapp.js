@@ -127,7 +127,7 @@
             $('#leftSide').removeClass('expanded');
             $('.logo').removeClass('expanded');
         }
-    })
+    });
 
     // functionality for map manipulation icon on mobile devices
     var listMapView = function(){
