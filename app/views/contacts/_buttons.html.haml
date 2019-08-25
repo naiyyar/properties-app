@@ -1,15 +1,16 @@
 - active_listings = building.listings.active
 .contact-links
-	%div{style: "padding: #{size_class.present? ? '2px 3px 2px 6px;' : '6px 8px 8px 11px;'}"}
-		%p.pb-8
+	%div.left-section{style: "padding: #{size_class.present? ? '2px 3px 2px 6px;' : '6px 8px 8px 11px;'}"}
+		%div.pb-8
 			= "<span> #{building.prices} | </span>".html_safe if building.prices.present?
 			%span=building.show_bed_ranges.join(', ') 
 			= 'Bed' if building.bedroom_types?
-			- unless building.has_active_email?
-				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'hyper-link font-xs', onclick: "showActiveListingsPopup(#{building.id})", style: 'margin-left: 100px;' if active_listings.present?
+		- unless building.has_active_email?
+			%div.pb-8
+				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'hyper-link font-xs', onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?
 		= check_availability_link(building, size_class)
 
-	%div{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}", class: "#{'hidden' unless building.has_active_email?}" }
+	%div.right-section{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}", class: "#{'hidden' unless building.has_active_email?}" }
 		- unless params[:action] == 'show' and params[:controller] == 'buildings'
 			%p.font-xs.pb-8
 				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'hyper-link', onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?

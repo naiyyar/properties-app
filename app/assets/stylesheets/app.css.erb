@@ -35,14 +35,26 @@ a.dt-card-link{
     justify-content: space-between;
 }
 
-.contact-links div:first-child{
+.contact-links div.left-section{
     flex: 2 2;
     width: 55%;
 }
 
-.contact-links div:last-child{
+.contact-links div.right-section{
     flex: 1 1;
     padding: 7px 12px;
+}
+
+.contact-links .left-section .pb-8{
+    display: inline-block;
+}
+
+.contact-links .left-section .pb-8:first-child{
+    width: 165px;
+}
+
+.infoButtons .contact-links .left-section .pb-8:first-child{
+    width: 126px;
 }
 
 .search-view-card{
@@ -5941,7 +5953,7 @@ select.custom-arrow {
             
 }
 
-p.pb-8{
+.pb-8{
     height: 26px;
     padding: 0px;
     margin: 0px;
