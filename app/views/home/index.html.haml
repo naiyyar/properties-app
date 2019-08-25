@@ -10,7 +10,7 @@
     .home-search-form
       = render partial: 'home/search_form'
 
-- cache(['apt_pop_neighborhoods', @buildings_count]) do
+- cache(['apt_popular_neighborhoods', @buildings_count]) do
   = render 'layouts/home/popular_neighborhoods'
 
 = render 'layouts/home/popular_searches'

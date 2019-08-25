@@ -6,7 +6,7 @@
 			%span=building.show_bed_ranges.join(', ') 
 			= 'Bed' if building.bedroom_types?
 			- unless building.has_active_email?
-				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'hyper-link font-xs', onclick: "showActiveListingsPopup(#{building.id})", style: 'margin-left: 43px;' if active_listings.present?
+				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'hyper-link font-xs', onclick: "showActiveListingsPopup(#{building.id})", style: 'margin-left: 100px;' if active_listings.present?
 		= check_availability_link(building, size_class)
 
 	%div{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}", class: "#{'hidden' unless building.has_active_email?}" }

@@ -1,4 +1,4 @@
-<% content_for :page_title do%><%= @tab_title_text.titleize if @tab_title_text.present? %><%end %>
+<% content_for :page_title do%><%= @tab_title_text if @tab_title_text.present? %><%end %>
 
 <%= render partial: 'search_wrapper' %>
 
