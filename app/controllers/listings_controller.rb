@@ -47,7 +47,7 @@ class ListingsController < ApplicationController
       @listings = @building.listings.active
       @rentals = 'active'
     end
-    @listings = @listings.reorder(created_at: :desc, rent: :asc)
+    @listings = @listings.reorder(rent: :asc)
   end
 
   # GET /listings/1

@@ -76,12 +76,12 @@ class HomeController < ApplicationController
       @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
       @zoom = results[:zoom] if results[:zoom].present?
       @filters = results[:filters]
+      @tab_title_text = pop_search_tab_title if @filters.present?
     end
     @buildings = @buildings.includes(:building_average, :featured_building) if @buildings.present?
     if @buildings.present?
       final_results = Building.with_featured_building(@buildings, params[:page])
       @per_page_buildings = final_results[1]
-      #@buildings_with_listings = @buildings.joins(:listings).reorder('listings.active DESC')
       @all_buildings = final_results[0][:all_buildings] #with featured
       @hash = final_results[0][:map_hash]
       @lat = @hash[0]['latitude']
@@ -172,5 +172,11 @@ class HomeController < ApplicationController
 
   def tab_title_tag
     'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC'
+  end
+
+  def pop_search_tab_title
+    term = params[:search_term].split('-').join(' ').titleize
+    term.gsub!('Nyc', 'NYC')
+    "#{term} #{tab_title_tag}"
   end
 end
