@@ -319,6 +319,22 @@ module HomeHelper
 		end
 	end
 
+	def amen_locked? val
+		if @filters.present? and @filters[:amenities].present?
+			@filters[:amenities].include?(val) ? 'disabled' : ''
+		else
+			''
+		end
+	end
+
+	def bed_locked? val
+		(@filters.present? and @filters[:beds].present? and @filters[:beds].include?(val)) ? 'disabled' : ''
+	end
+
+	def price_locked? val
+		(@filters.present? and @filters[:price].present? and @filters[:price].include?(val)) ? 'disabled' : ''
+	end
+
 	def sort_options
 		[['Defaul sort',4],['Rating (high to low)',1],['Rating (low to high)',2],['Reviews (high to low)',3],['A - Z',4],['Z - A',5]]
 	end

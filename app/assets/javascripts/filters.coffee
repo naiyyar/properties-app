@@ -21,8 +21,8 @@ jQuery ->
 	#Clear filters
 	$(document).on 'click', '.clearFilter', (e) ->
 		e.preventDefault
-		$('.filterForm input[type=checkbox]').attr('checked', false)
-		$('.filterForm input[type=radio]').attr('checked', false)
+		$('.filterForm input[type=checkbox]').not(":disabled").attr('checked', false)
+		$('.filterForm input[type=radio]').not(":disabled").attr('checked', false)
 
 	#making type and rating checkboxed behave like radio button
 	$(document).on 'click', '.building_type_filter', (e) ->
