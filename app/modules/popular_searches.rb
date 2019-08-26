@@ -27,7 +27,7 @@ module PopularSearches
 			filters[:price] = [1]
 			filters[:beds] = STUDIOS
 		when 'luxury-apartments-in-manhattan'
-			buildings = manhattan_buildings.where(price: LUXURY_APTS_PRICES)
+			buildings = manhattan_buildings.where(price: LUXURY_APTS_PRICES).doorman.elevator
 			filters[:price] = LUXURY_APTS_PRICES
 			filters[:amenities] = LUXURY_APTS_AMENITIES
 		when '2-bedroom-apartments-in-nyc'
@@ -40,7 +40,7 @@ module PopularSearches
 			buildings = manhattan_buildings.where(price: AFFORDABLE_APTS_PRICES)
 			filters[:price] = AFFORDABLE_APTS_PRICES
 		when 'affordable-luxury-apartments-in-nyc'
-			buildings = nyc_buildings.where(price: [2])
+			buildings = nyc_buildings.where(price: [2]).doorman.elevator
 			filters[:price] = [2]
 			filters[:amenities] = LUXURY_APTS_AMENITIES
 		#amenities
@@ -77,7 +77,7 @@ module PopularSearches
 			buildings = queens_buildings.two_bed
 			filters[:beds] = ['2']
 		when 'luxury-apartments-in-upper-east-side'
-			buildings = buildings_in_neighborhood('Upper East Side')
+			buildings = buildings_in_neighborhood('Upper East Side').doorman.elevator
 			filters[:amenities] = LUXURY_APTS_AMENITIES
 		when 'harlem-studio-apartments'
 			buildings = buildings_in_neighborhood('Harlem').studio
@@ -101,18 +101,18 @@ module PopularSearches
 			buildings = buildings_in_neighborhood('Upper West Side').two_bed
 			filters[:beds] = ['2']
 		when "hell's-kitchen-luxury-rentals"
-			buildings = buildings_in_neighborhood("Hell's Kitchen").where(price: LUXURY_APTS_PRICES)
+			buildings = buildings_in_neighborhood("Hell's Kitchen").where(price: LUXURY_APTS_PRICES).doorman.elevator
 			filters[:price] = LUXURY_APTS_PRICES
 			filters[:amenities] = LUXURY_APTS_AMENITIES
 		when 'midtown-studio-apartments-nyc'
 			buildings = buildings_in_neighborhood('Midtown').studio
 			filters[:beds] = STUDIOS
 		when 'midtown-east-luxury-rentals'
-			buildings = buildings_in_neighborhood('Midtown East').where(price: LUXURY_APTS_PRICES)
+			buildings = buildings_in_neighborhood('Midtown East').where(price: LUXURY_APTS_PRICES).doorman.elevator
 			filters[:price] = LUXURY_APTS_PRICES
 			filters[:amenities] = LUXURY_APTS_AMENITIES
 		when 'upper-west-side-luxury-rental-buildings'
-			buildings = buildings_in_neighborhood('Upper West Side').where(price: LUXURY_APTS_PRICES)
+			buildings = buildings_in_neighborhood('Upper West Side').where(price: LUXURY_APTS_PRICES).doorman.elevator
 			filters[:price] = LUXURY_APTS_PRICES
 			filters[:amenities] = LUXURY_APTS_AMENITIES
 		when 'upper-east-side-apartments-for-rent-with-doorman'
