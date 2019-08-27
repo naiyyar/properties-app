@@ -100,7 +100,7 @@ module PopularSearches
 			buildings = buildings_in_neighborhood('West Village').studio
 			filters[:beds] = STUDIOS
 		when '2-bedroom-apartments-upper-east-side'
-			buildings = buildings_in_neighborhood('Upper West Side').two_bed
+			buildings = buildings_in_neighborhood('Upper East Side').two_bed
 			filters[:beds] = ['2']
 		when "hell's-kitchen-luxury-rentals"
 			buildings = buildings_in_neighborhood("Hell's Kitchen").where(price: LUXURY_APTS_PRICES).doorman.elevator
