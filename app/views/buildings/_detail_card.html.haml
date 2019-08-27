@@ -1,4 +1,4 @@
-.card.search-view-card 
+.card.search-view-card{'data-bid' => building.id}
   - unless @similar_properties.present?
     .figure{style: "position: relative;", id: "figure#{building.id}"}
       = image_tag 'shimmer.gif', width: '100%'

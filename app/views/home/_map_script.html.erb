@@ -28,7 +28,12 @@
   var seach_term = <%= raw @search_string.to_json %>;
   current_user_id = $('#cu').val();
   var width = window.innerWidth;
-
+  var per_page_buildings = [];
+  //getting all current page display building ids
+  $.each($('.card.search-view-card'), function(i, j){ 
+    per_page_buildings.push($(j).data('bid'));
+  });
+  
   // Custom options for map
   function initialize(sidebar = true) {
     <% if browser.device.mobile? %>
@@ -75,7 +80,7 @@
       disableAutoPan: true,
       hideCloseButton: false
     });
-
+    
     // function that adds the markers on map
     var addMarkers = function(props, map) {
       if(props != null){
@@ -104,8 +109,11 @@
             
             //Adding building name and address on right buildings card
             if(sidebar){ 
-              createSidebar(prop, marker); 
-              loadDisplayImage(prop.id);
+              createSidebar(prop, marker);
+          
+              if(per_page_buildings.includes(prop.id)) {
+                loadDisplayImage(prop.id);
+              }
             }
             
             if(i == 0 || i == '0'){
