@@ -10,6 +10,8 @@ module PopularSearches
 		case params[:search_term]
 		when 'manhattan-apartments-for-rent'
 			buildings = manhattan_buildings
+			#No use of filters hash here. It's only to fix the SEO tab title
+			filters[:amenities] = ['man'] 
 		when 'cheap-apartments-in-nyc'
 			buildings = nyc_buildings.where(price: 1)
 			filters[:price] = [1]
