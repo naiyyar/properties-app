@@ -115,7 +115,7 @@ class HomeController < ApplicationController
                    "no fee apartment, no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. "+ 
                    "View #{@photos_count} photos and #{@reviews_count} reviews."
     else
-      @meta_desc = "Browse #{@buildings.length if @buildings.present?} No Fee #{@tab_title_text.try(:titleize)}. Bypass the broker and save thousands in fees by renting directly from management companies."
+      @meta_desc = "Browse #{@buildings.length if @buildings.present?} No Fee #{pop_search_tab_title}. Bypass the broker and save thousands in fees by renting directly from management companies."
     end
   end
 
@@ -177,6 +177,6 @@ class HomeController < ApplicationController
   def pop_search_tab_title
     term = params[:search_term].split('-').join(' ').titleize
     term.gsub!('Nyc', 'NYC')
-    "#{term} #{tab_title_tag}"
+    "#{term}"
   end
 end
