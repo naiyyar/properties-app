@@ -1,23 +1,24 @@
 <script src="https://maps.google.com/maps/api/js?v=3.36&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
 <!-- <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script> -->
 <script type="text/javascript">
-	var map, current_user_id, current_building_id;
+  var map, current_user_id, current_building_id;
   current_user_id = $('#cu').val();
   var infobox;
+  var zoom = 16;
   if($("#mapHash").length > 0){
     // Custom options for map
     function initialize() {
       var options = {
-        zoom: 14,
+        zoom: zoom,
         mapTypeControl: false,
         zoomControlOptions: {
           position: google.maps.ControlPosition.RIGHT_CENTER
         },
         gestureHandling: 'greedy',
-        streetViewControl: true,
-        streetViewControlOptions: {
-          position: google.maps.ControlPosition.RIGHT_CENTER
-        },
+        //streetViewControl: false,
+        //streetViewControlOptions: {
+        //  position: google.maps.ControlPosition.RIGHT_CENTER
+        //},
       };
 
       var props = $("#mapHash").data('map');
@@ -74,15 +75,15 @@
           })(marker, i));
           
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
-              panorama = map.getStreetView();
-              panorama.setPosition(marker.getPosition());
-              google.maps.event.addListenerOnce(panorama, 'status_changed', function () {
-                panorama.setPov({
-                  heading: -265,
-                  zoom: 1,
-                  pitch: 0
-                });
-              });
+              // panorama = map.getStreetView();
+              // panorama.setPosition(marker.getPosition());
+              // google.maps.event.addListenerOnce(panorama, 'status_changed', function () {
+              //   panorama.setPov({
+              //     heading: -265,
+              //     zoom: 1,
+              //     pitch: 0
+              //   });
+              // });
               return function() {
                 loadMarkerWindow(prop.id, map, marker);
               }
@@ -108,7 +109,7 @@
         $('body').removeClass('notransition');
         map = new google.maps.Map(document.getElementById('mapView'), options);
         map.setCenter(new google.maps.LatLng(lat, lng));
-        map.setZoom(14);
+        map.setZoom(zoom);
         addMarkers(props, map);
         var transitLayer = new google.maps.TransitLayer();
         transitLayer.setMap(map);

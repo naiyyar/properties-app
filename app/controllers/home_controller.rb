@@ -111,7 +111,7 @@ class HomeController < ApplicationController
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
     @neighborhood_links_count = @neighborhood_links.count
     unless params[:searched_by] == 'nyc'
-      @meta_desc = "#{@tab_title_text.try(:titleize)} has #{@buildings.length if @buildings.present?} "+ 
+      @meta_desc = "#{@meta_desc_text} has #{@buildings.length if @buildings.present?} "+ 
                    "no fee apartment, no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. "+ 
                    "View #{@photos_count} photos and #{@reviews_count} reviews."
     else
@@ -141,7 +141,8 @@ class HomeController < ApplicationController
       @borough_city = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
       @searched_neighborhoods = "#{@search_string}"
       @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
-      @tab_title_text = "#{@search_string} #{@borough_city} #{tab_title_tag}"
+      @meta_desc_text = "#{@search_string} #{@borough_city}"
+      @tab_title_text = "#{@meta_desc_text} #{tab_title_tag}"
 
       if !searched_params.include?(params[:searched_by])
         @sub_borough = {}

@@ -1,7 +1,7 @@
 - if images_count > 0
   .item
     .clearfix{ style: "width:100%;" }
-      %a{ href: building_path(building), style: 'cursor: pointer;' }
+      %a{ href: 'javascript:;', style: 'cursor: pointer;' }
         - if @similar_properties.present? or building.featured?
           %h4.comp.featured Featured
         %h4.lightslider-slides-counts
@@ -10,7 +10,7 @@
 
       %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'split', path:  building_path(building) } }
         %li
-          %a{ href: building_path(building), style: 'cursor: pointer;' }
+          %a{ href: 'javascript:;', style: 'cursor: pointer;' }
             .bg-size-cover{ style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: "#{first_image.id}" } }
 
         - if images_count > 1

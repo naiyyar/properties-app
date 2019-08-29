@@ -67,16 +67,16 @@
       $('.popular-neighborhoods').slideToggle(200);
     });
     
-    $("#toggleStreetView").click(function(){
-        var toggle = panorama.getVisible();
-        if(toggle == false){
-          panorama.setVisible(true);
-          $(this).val('Map View');
-        } else {
-          panorama.setVisible(false);
-          $(this).val('Street View');
-        }
-    })
+    // $("#toggleStreetView").click(function(){
+    //     var toggle = panorama.getVisible();
+    //     if(toggle == false){
+    //       panorama.setVisible(true);
+    //       $(this).val('Map View');
+    //     } else {
+    //       panorama.setVisible(false);
+    //       $(this).val('Street View');
+    //     }
+    // })
     
 
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
@@ -169,6 +169,26 @@
         listMapView();
         $('.sorted_by_option').hide()
     });
+
+    $(document).on('click', '.card.search-view-card', function(e){
+        var target_elem = e.target;
+        window.data = target_elem;
+        var open_window = true;
+        if(target_elem.innerText == 'Contact Leasing' || target_elem.innerText == 'Check Availability'){
+            open_window = false;
+        }else if(target_elem.parentElement.classList[0] == 'favourite'){
+            open_window = false;
+        }
+
+        if(open_window){
+            if(target_elem.classList[1] == 'nb-link'){
+                return true;
+            }
+            else{
+                window.open($(this).data('url'), "_self");
+            }
+        }
+    })
 
     // Expand left side sub navigation menus
     $(document).on("click", '.hasSubActive', function() {

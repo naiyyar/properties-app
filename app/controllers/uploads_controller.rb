@@ -1,5 +1,5 @@
 class UploadsController < ApplicationController
-  #load_and_authorize_resource only: :index
+  load_and_authorize_resource only: [:documents]
   before_action :find_upload, only: [:update, :edit, :destroy]
 	before_action :authenticate_user!, only: [:destroy]
   after_action :clear_cache, only: [:create, :destroy]

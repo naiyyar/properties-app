@@ -19,12 +19,20 @@ class ListingsController < ApplicationController
   end
 
   def change_status
-    @listings.update_all(active: params[:active])
+    #Issue: Counter cache doesn't work with update_all
+    #@listings.update_all(active: params[:active])
+    @listings.each do |listing|
+      listing.update(active: params[:active])
+    end
     redirect_to :back
   end
   
   def delete_all
-    @listings.destroy_all
+    #Issue: Counter cache doesn't work with destroy_all
+    #@listings.destroy_all
+    @listings.each do |listing|
+      listing.destroy
+    end
     redirect_to :back
   end
 

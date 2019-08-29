@@ -48,7 +48,7 @@ class ManagementCompaniesController < ApplicationController
         @lat = buildings.first.latitude
         @lng = buildings.first.longitude
       end
-      @zoom = buildings.length > 70 ? 13 : 11
+      @zoom = 13 #buildings.length > 70 ? 13 : 11
     end
     @photos = Upload.building_photos(@all_buildings.map(&:id))
     @building_photos_count = @photos.count

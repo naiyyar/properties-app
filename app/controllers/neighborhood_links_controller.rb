@@ -1,4 +1,5 @@
 class NeighborhoodLinksController < ApplicationController
+  load_and_authorize_resource
   before_action :set_neighborhood_link, only: [:show, :edit, :update, :destroy]
   before_action :set_neighborhoods, only: [:index, :edit]
   
