@@ -170,13 +170,21 @@
         $('.sorted_by_option').hide()
     });
 
+    var card_opening_target = '_self'
+
+    $(document).on('keydown', function(e) {
+        if(e.metaKey && e.keyCode == 91){
+            card_opening_target = 'new'
+        }
+    });  
+
     $(document).on('click', '.card.search-view-card', function(e){
         var target_elem = e.target;
-        window.data = target_elem;
+        
         var open_window = true;
         if(target_elem.innerText == 'Contact Leasing' || target_elem.innerText == 'Check Availability'){
             open_window = false;
-        }else if(target_elem.parentElement.classList[0] == 'favourite'){
+        }else if(target_elem.parentElement.classList[0] == 'favourite' || target_elem.classList[0] == 'active-listing-link'){
             open_window = false;
         }
 
@@ -185,7 +193,7 @@
                 return true;
             }
             else{
-                window.open($(this).data('url'), "_self");
+                window.open($(this).data('url'), card_opening_target);
             }
         }
     })
