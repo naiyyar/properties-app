@@ -147,11 +147,11 @@ function getMoveData(map){
     var query_strings = window.location.search;
     var orginal_url = '/custom_search';
     var new_loc_url = '';
-    var q_params = '?latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
+    var q_params = 'latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
     if(query_strings.includes('sort_by') || query_strings.includes('filter')){
-      new_loc_url = orginal_url+query_strings+q_params;
+      new_loc_url = orginal_url+query_strings+'&'+q_params;
     }else{
-      new_loc_url = orginal_url+q_params;
+      new_loc_url = orginal_url+'?'+q_params;
     }
     location.href = new_loc_url+'&searched_by=latlng&search_term=custom';
   }
