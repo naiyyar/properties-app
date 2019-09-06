@@ -50,12 +50,14 @@ class ListingsController < ApplicationController
     @building = Building.find(params[:building_id])
     unless params[:listing_type].present?
       @listings = @building.listings
+      order = {date_active: :desc, rent: :asc}
       @rentals = 'past'
     else
       @listings = @building.listings.active
       @rentals = 'active'
+      order = {rent: :asc}
     end
-    @listings = @listings.reorder(rent: :asc)
+    @listings = @listings.reorder(order)
   end
 
   # GET /listings/1
