@@ -199,9 +199,9 @@ manhattan_neightborhoods_hash = [
 	{ key: 'Turtle Bay', 					url: dropbox_url+'lnfn29sl208bteq/turtle_bay.kml?dl=1'},
 ]
 
-function brooklyn_and_queens_neighborhoods(term, map){
+function brooklyn_and_queens_neighborhoods(term, city, map){
 	url = '';
-  if(term != null){
+  if(term != null && city != 'Bronx'){
 		$.each(manhattan_neightborhoods_hash, function(index, value ) {
 		  if(term == value.key){
 				url = value.url;

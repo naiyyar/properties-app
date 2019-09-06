@@ -3,6 +3,7 @@
 <%= hidden_field_tag :cu, current_user.present? ? current_user.id : nil %>
 <script src="//maps.google.com/maps/api/js?v=3.36&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
 <!-- <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script> -->
+
 <script type="text/javascript" charset="utf-8">
   json_array = <%= raw @hash.to_json %>;
   var position;
@@ -26,6 +27,10 @@
   var lat = <%= raw @lat.to_json %>; 
   var lng = <%= raw @lng.to_json %>;
   var seach_term = <%= raw @search_string.to_json %>;
+  var city = ''
+  if(seach_term == 'Little Italy'){
+    var city = <%= raw params[:search_term].include?('newyork') ? 'New York'.to_json : 'Bronx'.to_json %>;
+  }
   current_user_id = $('#cu').val();
   var width = window.innerWidth;
   var per_page_buildings = [];
@@ -171,7 +176,7 @@
     var polylines = new google.maps.Polygon(polylineoptons);
 
     var set_boundaries = function(map){
-      brooklyn_and_queens_neighborhoods(seach_term, map) //In search.js
+      brooklyn_and_queens_neighborhoods(seach_term, city, map) //In search.js
     }
     
     setTimeout(function() {
