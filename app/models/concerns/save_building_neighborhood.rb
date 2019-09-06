@@ -129,7 +129,7 @@ module SaveBuildingNeighborhood
   def update_neighborhood_counts
     popular_neighborhoods.each do |hood|
       if hood.buildings_count.to_i >= 0
-        hood.buildings_count = Building.buildings_in_neighborhood(hood.name).count
+        hood.buildings_count = Building.buildings_in_neighborhood(hood.name, hood.boroughs).count
         hood.save
       end
     end

@@ -14,7 +14,7 @@ module BuildingSearch
             results[:buildings] = buildings_by_zip(search_string)
             results[:boundary_coords] << Gcoordinate.where(zipcode: search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
           elsif params[:searched_by] == 'no-fee-apartments-nyc-neighborhoods'
-            results[:buildings] = buildings_in_neighborhood(search_string)
+            results[:buildings] = buildings_in_neighborhood(search_string, params[:search_term])
           elsif params[:searched_by] == 'nyc'
             #popular no fee searches
             results[:buildings] = buildings_by_popular_search(params)[0]
@@ -39,7 +39,7 @@ module BuildingSearch
       results[:buildings] = redo_search_buildings(params)
       results[:zoom] = params[:zoomlevel] || (results[:buildings].length > 90 ? 15 : 14)
     end
-    
+
     results[:buildings] = filtered_buildings(results[:buildings], params[:filter]) if params[:filter].present?
     results[:buildings] = sort_buildings(results[:buildings], params[:sort_by]) if results[:buildings].present?
 
@@ -123,18 +123,21 @@ module BuildingSearch
   end
 
   def search_by_building_name_or_address(criteria)
-    #where("building_name @@ :q OR building_street_address @@ :q", q: criteria)
     where("building_name ILIKE ? OR building_street_address ILIKE ?", "%#{criteria}%", "%#{criteria}%")
   end
 
-  def buildings_in_neighborhood search_term
+  def buildings_in_neighborhood search_term, term_with_city=nil
     search_term = (search_term == 'Soho' ? 'SoHo' : search_term)
-    where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
-    #search_by_neighborhood(search_term)
+    results = where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
+    if search_term == 'Little Italy'
+      #Because neighborhood Little italy exist in manhattan as well as Bronx
+      city = term_with_city.include?('newyork') ? 'New York' : 'Bronx'
+      results = results.where(city: city)
+    end
+    results
   end
 
   def buildings_in_city search_term
-    #where("city @@ :q" , q: city)
     search_by_city(search_term)
   end
 
