@@ -7,7 +7,8 @@ class UploadsController < ApplicationController
 	def index
     if params[:building_id].present?
       @building = Building.find(params[:building_id])
-      @uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id}) #.order(:sort)
+      #@uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id}) #.order(:sort)
+      @uploads = @building.uploads
     elsif params[:unit_id]
       @unit = Unit.find(params[:unit_id])
       @uploads = @unit.uploads.order('created_at desc')
