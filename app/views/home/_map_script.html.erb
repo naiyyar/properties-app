@@ -26,11 +26,14 @@
   var draggedOnce = false;
   var lat = <%= raw @lat.to_json %>; 
   var lng = <%= raw @lng.to_json %>;
-  var seach_term = <%= raw @search_string.to_json %>;
-  var city = ''
-  if(seach_term == 'Little Italy'){
-    var city = <%= raw params[:search_term].include?('newyork') ? 'New York'.to_json : 'Bronx'.to_json %>;
-  }
+  var searched_term;
+  var city = '';
+  <% if params[:search_term].present? %>
+    searched_term = <%= raw @search_string.to_json %>;
+    if(searched_term != null && searched_term == 'Little Italy'){
+      var city = <%= raw params[:search_term].include?('newyork') ? 'New York'.to_json : 'Bronx'.to_json %>
+    }
+  <%end%>
   current_user_id = $('#cu').val();
   var width = window.innerWidth;
   var per_page_buildings = [];
