@@ -62,8 +62,11 @@
             var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
             var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
             $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+            $('#min_price').val(ui.values[0])
+            $('#max_price').val(ui.values[1])
         }
     });
+    
     $('.priceSlider .sliderTooltip .stLabel').html(
         '$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
         ' <span class="fa fa-arrows-h"></span> ' +
