@@ -14,24 +14,33 @@
           <div class="formField">
             <div class="volume">
               <div class="col-sm-12 col-md-12 col-lg-12">
-                <label><b>Amenities</b></label>
+                <label><b>Building Amenities</b></label>
                 <% building_amenities.each_pair do |k, v| %>
                   <div class="checkbox custom-checkbox">
                     <label>
                       <input type="checkbox" name="filter[amenities][]" value="<%=k.to_s%>" id="<%=k%>" <%= amen_checked(k.to_s) %> <%=amen_locked?(k.to_s)%>> <span class="fa fa-check"></span> <%= v == 'No Fee Building' ? '<b>No Fee Building</b>'.html_safe : v %>
                     </label>
                   </div>
-                <%end%>                     
+                <%end%>
+
+                <label><b>Listing Amenities</b></label>
+                <% listing_amenities.each_pair do |k, v| %>
+                  <div class="checkbox custom-checkbox">
+                    <label>
+                      <input type="checkbox" name="filter[amenities][]" value="<%=k.to_s%>" id="<%=k%>" <%= amen_checked(k.to_s) %> <%=amen_locked?(k.to_s)%>> <span class="fa fa-check"></span> <%= v %>
+                    </label>
+                  </div>
+                <%end%>                         
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 formItem">
           <div class="formField">
             <div class="volume">
               <div class="col-sm-12 col-md-12 col-lg-12">
-                <label><b>Bedrooms</b></label>
+                <label><b>Building Bedrooms</b></label>
                 <% ['0','1','2','3','4'].map do |val| %>
                   <% if val == '0' %>
                     <div class="checkbox custom-checkbox"><label>
@@ -41,7 +50,7 @@
                   <%end%>
                 <%end%>
                 <!-- prices_options: in buildings_helper -->
-                <label><b>Price</b></label>
+                <label><b>Building Price</b></label>
                 <% prices_options.map do |obj| %>
                   <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_price_filter" name="filter[price][]" value="<%=obj[1]%>" id="<%=obj[1]%>prices" <%= price_checked(obj[1])%> <%=price_locked?(obj[1])%>><span class="fa fa-check"></span><%=obj[0]%></label></div>
                 <%end%>
@@ -56,6 +65,19 @@
                     <!-- <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_rating_filter single-check" name="filter[rating]" value="<%#=val%>" <%#= rating_checked(val) %> ><span class="fa fa-check"></span> <%#=val%> Star</label></div> -->
                   <%#end%>
                 <%end%>
+                <label><b>Listing Bedrooms</b></label>
+                <% (1..4).map do |val| %>
+                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_bed_filter" name="filter[listings][bedrooms][]" value="<%=val%>" id="<%=val%>beds" <%= bed_checked(val) %> <%=bed_locked?(val)%>><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Bed</label></div>
+                <%end%>
+
+                <label><b>Listing Price</b></label>
+                <!-- price slider -->
+                <div class="slider priceSlider">
+                  <div class="sliderTooltip">
+                    <div class="stArrow"></div>
+                    <div class="stLabel"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

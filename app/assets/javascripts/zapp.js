@@ -46,6 +46,34 @@
         }
     }
 
+    $('.priceSlider').slider({
+        range: true,
+        min: 0,
+        max: 15500,
+        values: [0, 2000],
+        step: 500,
+        slide: function(event, ui) {
+            $('.priceSlider .sliderTooltip .stLabel').html(
+                '$' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
+                ' <span class="fa fa-arrows-h"></span> ' +
+                '$' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+            );
+            var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
+            var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
+            var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+            $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+        }
+    });
+    $('.priceSlider .sliderTooltip .stLabel').html(
+        '$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
+        ' <span class="fa fa-arrows-h"></span> ' +
+        '$' + $('.priceSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+    );
+    var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
+    var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
+    var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+    $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+
     // var repositionTooltip = function( e, ui ){
     //     var div = $(ui.handle).data("bs.tooltip").$tip[0];
     //     var pos = $.extend({}, $(ui.handle).offset(), { 

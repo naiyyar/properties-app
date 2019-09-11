@@ -91,6 +91,7 @@ module BuildingsHelper
 	def building_amenities
 		{
 			no_fee: 'No Fee Building',
+			childrens_playroom: 'Childrens Playroom',
 			courtyard: 'Courtyard',
 			pets_allowed_cats: 'Cats Allowed',
 			pets_allowed_dogs: 'Dogs Allowed',
@@ -104,8 +105,15 @@ module BuildingsHelper
 			parking: 'Parking',
 			roof_deck: 'Roof Deck',
 			swimming_pool: 'Swimming Pool',
-			walk_up: 'Walk up',
-			childrens_playroom: 'Childrens Playroom',
+			walk_up: 'Walk up'
+		}
+	end
+
+	def listing_amenities
+		{
+			months_free_rent: 'Months Free Rent',
+			owner_paid: 'Owner Paid',
+			rent_stabilized: 'Rent Stabilized'
 		}
 	end
 
