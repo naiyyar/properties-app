@@ -120,7 +120,11 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to redirect_back_or_default(root_url), notice: exception.message
+    unless exception.message == 'You are not authorized to access this page.'
+      redirect_to redirect_back_or_default(root_url), notice: exception.message
+    else
+      redirect_to '/404' #page_not_found_path
+    end
   end
 
   def redirect_back_or_default(default)

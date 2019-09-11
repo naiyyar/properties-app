@@ -18,9 +18,9 @@
     <meta property="og:site_name" content="transparentcity.co" />
     <meta property="og:description" content="<%=@meta_desc%>" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
-    <%= stylesheet_link_tag 'application', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
+    <!-- preloading assets not working in firefox -->
+    <%= stylesheet_link_tag 'application', media: 'all'%>
     <%= javascript_include_tag 'application' %>
-    
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
   </head>
