@@ -174,7 +174,7 @@
 
     $(document).on('keydown', function(e) {
         if(e.metaKey && e.keyCode == 91){
-            card_opening_target = 'new'
+            card_opening_target = '_blank'
         }
     });  
 
@@ -187,7 +187,7 @@
         }else if(target_elem.parentElement.classList[0] == 'favourite' || target_elem.classList[0] == 'active-listing-link'){
             open_window = false;
         }
-
+        
         if(open_window){
             if(target_elem.classList[1] == 'nb-link'){
                 return true;
