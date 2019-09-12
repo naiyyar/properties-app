@@ -34,16 +34,23 @@ jQuery ->
 		resetListingBed()
 		resetListingPrice()
 		resetSlider()
+		removePriceInput()
 
 	#when building_price checkbox checked and then listing_price is selected then mark building_price to false
 	#
 	$(document).on 'click', '.building_price_filter', (e) ->
 		resetListingBed()
 		resetSlider()
+		removePriceInput()
 
 	$(document).on 'click', '#listings_price_box', (e) ->
-		resetBuildingBed();
-		resetBuildingPrice();
+		resetBuildingBed()
+		resetBuildingPrice()
+		if $(this).is(':checked')
+			appendPriceInput(0, 2000)
+		else
+			removePriceInput()
+			resetSlider()
 
 	#$(document).on 'click', '.building_bed_filter', (e) ->
 	#	checked = $(this).is(':checked')
@@ -92,5 +99,10 @@ jQuery ->
 		priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width()
 		priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
 		$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
-		$('#min_price').val(0);
-		$('#max_price').val(2000);
+		
+	appendPriceInput=(min, max)->
+		$('#priceFieldsContainer').html('<input type="hidden" name="min_price" id="min_price" value='+min+'>' +
+																		'<input type="hidden" name="max_price" id="max_price" value='+max+'>');
+
+	removePriceInput=->
+		$('#min_price, #max_price').remove();

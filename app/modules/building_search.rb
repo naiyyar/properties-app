@@ -225,6 +225,10 @@ module BuildingSearch
       @buildings = @buildings.childrens_playroom if has_amenity?('childrens_playroom')
       @buildings = @buildings.walk_up if has_amenity?('walk_up')
       @buildings = @buildings.no_fee if has_amenity?('no_fee')
+      #for listings
+      if @amenities.include?('months_free_rent') || @amenities.include?('owner_paid') || @amenities.include?('rent_stabilized')
+        @buildings = buildings_with_listing_amenities
+      end
     else
       @buildings = buildings
     end
@@ -235,18 +239,26 @@ module BuildingSearch
     @amenities.include?(name)
   end
 
+  def buildings_with_listing_amenities
+    @buildings = @buildings.joins(:listings)
+    @buildings = @buildings.where('listings.free_months > ?', 0) if has_amenity?('months_free_rent')
+    @buildings = @buildings.where('listings.owner_paid is not null') if has_amenity?('owner_paid')
+    @buildings = @buildings.where('listings.rent_stabilize = ?', 'true') if has_amenity?('rent_stabilized')
+    return @buildings
+  end
+
   def filtered_buildings buildings, filter_params
-    rating = filter_params[:rating]
+    #rating = filter_params[:rating]
     building_types = filter_params[:type]
     price = filter_params[:price]
     beds = filter_params[:bedrooms]
     amenities = filter_params[:amenities]
   
     buildings = filter_by_amenities(buildings, amenities) if amenities.present?
-    buildings = filter_by_rates(buildings, rating) if rating.present?
+    #buildings = filter_by_rates(buildings, rating) if rating.present?
     buildings = filter_by_prices(buildings, price) if price.present?
     buildings = filter_by_beds(buildings, beds) if beds.present?
-    buildings = filter_by_types(buildings, building_types)
+    buildings = filter_by_types(buildings, building_types) if building_types.present?
 
     return buildings
   end
