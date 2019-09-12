@@ -24,24 +24,26 @@ jQuery ->
 		$('.filterForm input[type=checkbox]').not(":disabled").attr('checked', false)
 		$('.filterForm input[type=radio]').not(":disabled").attr('checked', false)
 
-	#making type and rating checkboxed behave like radio button
-	$(document).on 'click', '.building_type_filter', (e) ->
-		checked = $(this).is(':checked')
-		$(".building_type_filter").prop('checked',false)
-		if checked
-			$(this).prop('checked',true)
+	#when building_bed checkbox checked and then listing_bed is selected then mark building_beds to false
+	$(document).on 'click', '.listing_bed_filter', (e) ->
+		resetBuildingBed()
+		resetBuildingPrice()
 
-	$(document).on 'click', '.building_rating_filter', (e) ->
-		checked = $(this).is(':checked')
-		$(".building_rating_filter").prop('checked',false)
-		if checked
-			$(this).prop('checked',true)
+	#when listing_bed checkbox checked and then building_bed is selected then mark listing_bed to false
+	$(document).on 'click', '.building_bed_filter', (e) ->
+		resetListingBed()
+		resetListingPrice()
+		resetSlider()
 
-	#$(document).on 'click', '.building_price_filter', (e) ->
-	#	checked = $(this).is(':checked')
-	#	$(".building_price_filter").prop('checked',false)
-	#	if checked
-	#		$(this).prop('checked',true)
+	#when building_price checkbox checked and then listing_price is selected then mark building_price to false
+	#
+	$(document).on 'click', '.building_price_filter', (e) ->
+		resetListingBed()
+		resetSlider()
+
+	$(document).on 'click', '#listings_price_box', (e) ->
+		resetBuildingBed();
+		resetBuildingPrice();
 
 	#$(document).on 'click', '.building_bed_filter', (e) ->
 	#	checked = $(this).is(':checked')
@@ -53,3 +55,42 @@ jQuery ->
 	checked_filter_count = $('.filterForm input[type=checkbox]:checked').length
 	if checked_filter_count > 0
 		$('.filter-counts').text('('+checked_filter_count+')')
+
+	
+	# ********* Methods ********
+	#
+	#
+
+	resetBuildingBed=->
+		if $('.building_bed_filter:checked').length > 0
+			$('.building_bed_filter').prop('checked', false)
+
+	resetBuildingPrice=->
+		if $('.building_price_filter:checked').length > 0
+			$('.building_price_filter').prop('checked', false)
+
+	resetListingPrice=->
+		if $('.listing_price_filter:checked').length > 0
+			$('.listing_price_filter').prop('checked', false)
+
+	resetListingBed=->
+		if $('.listing_bed_filter:checked').length > 0
+			$('.listing_bed_filter').prop('checked', false)
+	
+	resetSlider=->
+		$('.priceSlider').slider
+			range: true
+			min: 0
+			max: 15500
+			values: [0, 2000]
+			step: 500
+
+		$('#listings_price_box').prop('checked', false);
+		$('.priceSlider .sliderTooltip .stLabel').html('$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' <span class="fa fa-arrows-h"></span> ' + '$' + $('.priceSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+    
+		priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'))
+		priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width()
+		priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+		$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+		$('#min_price').val(0);
+		$('#max_price').val(2000);

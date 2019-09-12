@@ -53,6 +53,7 @@
         values: [0, 2000],
         step: 500,
         slide: function(event, ui) {
+            $('#listings_price_box').prop('checked', true);
             $('.priceSlider .sliderTooltip .stLabel').html(
                 '$' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
                 ' <span class="fa fa-arrows-h"></span> ' +
@@ -62,8 +63,16 @@
             var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
             var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
             $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
-            $('#min_price').val(ui.values[0])
-            $('#max_price').val(ui.values[1])
+            $('#min_price').val(ui.values[0]);
+            $('#max_price').val(ui.values[1]);
+
+            if($('.building_price_filter:checked').length > 0){
+                $('.building_price_filter').prop('checked', false);
+            }
+
+            if($('.building_bed_filter:checked').length > 0){
+                $('.building_bed_filter').prop('checked', false);
+            }
         }
     });
     

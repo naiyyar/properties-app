@@ -67,19 +67,22 @@
                 <%end%>
                 <label><b>Listing Bedrooms</b></label>
                 <% (1..4).map do |val| %>
-                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_bed_filter" name="filter[listings][bedrooms][]" value="<%=val%>" id="listings_<%=val%>beds" <%= bed_checked(val) %> <%=bed_locked?(val)%>><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Bed</label></div>
+                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_bed_filter" name="filter[bedrooms][]" value="<%=val%>" id="listings_<%=val%>beds" <%= bed_checked(val) %> <%=bed_locked?(val)%>><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Bed</label></div>
                 <%end%>
 
                 <label><b>Listing Price</b></label>
                 <!-- price slider -->
-                <div class="slider priceSlider">
-                  <div class="sliderTooltip">
-                    <div class="stArrow"></div>
-                    <div class="stLabel"></div>
+                <div class="slider-filter-container">
+                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_price_filter" name="filter[price][]" id="listings_price_box"><span class="fa fa-check"></span> </label></div>
+                  <div class="slider priceSlider">
+                    <div class="sliderTooltip">
+                      <div class="stArrow"></div>
+                      <div class="stLabel"></div>
+                    </div>
                   </div>
                 </div>
-                <%= hidden_field_tag :min_price %>
-                <%= hidden_field_tag :max_price %>
+                <%= hidden_field_tag :min_price, 0 %>
+                <%= hidden_field_tag :max_price, 2000 %>
               </div>
             </div>
           </div>
