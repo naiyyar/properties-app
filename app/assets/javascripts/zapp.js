@@ -46,11 +46,17 @@
         }
     }
 
+    var min_price = 0;
+    var max_price = 2000;
+    if($('#min_price').length > 0){
+        min_price = $('#min_price').val();
+        max_price = $('#max_price').val();
+    }
     $('.priceSlider').slider({
         range: true,
         min: 0,
         max: 15500,
-        values: [0, 2000],
+        values: [min_price, max_price],
         step: 500,
         slide: function(event, ui) {
             $('#listings_price_box').prop('checked', true);
@@ -77,9 +83,9 @@
     });
     
     $('.priceSlider .sliderTooltip .stLabel').html(
-        '$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
+        '$' + min_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
         ' <span class="fa fa-arrows-h"></span> ' +
-        '$' + $('.priceSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+        '$' + max_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
     );
     var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
     var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();

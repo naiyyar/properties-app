@@ -311,6 +311,18 @@ module HomeHelper
 		end
 	end
 
+	def listing_bed_checked val
+		if params[:filter].present? and params[:filter][:listing_bedrooms].present?
+			params[:filter][:listing_bedrooms].include?(val.to_s) ? 'checked' : ''
+		elsif @filters.present? and @filters[:listing_bedrooms].present?
+			@filters[:listing_bedrooms].include?(val) ? 'checked' : ''
+		end
+	end
+
+	def listing_price_box_checked
+		'checked' if params[:filter][:min_price].present?
+	end
+
 	def amen_checked val
 		if params[:filter].present? and params[:filter][:amenities].present?
 			params[:filter][:amenities].include?(val) ? 'checked' : ''

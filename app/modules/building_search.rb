@@ -222,8 +222,7 @@ module BuildingSearch
     buildings = buildings_with_listings(buildings)
     #buildings.where('listings.rent BETWEEN ? AND ?', min_price.to_i, max_price.to_i)
     #buildings.where("listings.rent BETWEEN #{min_price.to_i} AND #{max_price.to_i}")
-    #buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
-    buildings.where('listings.rent BETWEEN ? AND ?', min_price.to_i, max_price.to_i)
+    buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
   end
 
   # def filter_by_types buildings, type
