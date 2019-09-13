@@ -30,6 +30,9 @@
 
 class User < ApplicationRecord
   include ActiveModel::Validations::HelperMethods
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+  
   rolify
   ratyrate_rater
   acts_as_voter
@@ -63,6 +66,12 @@ class User < ApplicationRecord
   
 
   #methods
+  def slug_candidates
+    [
+      :name,
+      [:name, :email]
+    ]
+  end
 
   def saved_obejct? obejct
     true
@@ -165,5 +174,9 @@ class User < ApplicationRecord
     records = favorites.find_by(favorable_id: favorable.id, favorable_type: favorable.class.base_class.name)
     records.try(:destroy)
   end
+
+  # def should_generate_new_friendly_id?
+  #   name_changed?
+  # end
 
 end

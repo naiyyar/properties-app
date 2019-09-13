@@ -39,6 +39,7 @@ gem 'email_verifier'
 gem "figaro"
 gem 'filterrific', '~> 5.0'
 gem "font-awesome-rails"
+gem 'friendly_id', '~> 5.2.4'
 #G
 gem 'geocoder', '1.4.5'
 

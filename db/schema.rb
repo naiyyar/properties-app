@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190810094602) do
+ActiveRecord::Schema.define(version: 20190913174416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,6 +275,12 @@ ActiveRecord::Schema.define(version: 20190810094602) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
   end
 
+  create_table "popular_searches", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.string "category"
+  end
+
   create_table "prices", force: :cascade do |t|
     t.decimal  "min_price"
     t.decimal  "max_price"
@@ -491,8 +497,10 @@ ActiveRecord::Schema.define(version: 20190810094602) do
     t.text     "about_me"
     t.string   "mobile"
     t.integer  "reviews_count",          default: 0,  null: false
+    t.string   "slug"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

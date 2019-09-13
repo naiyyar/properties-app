@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-	load_and_authorize_resource
+	load_and_authorize_resource :find_by => :slug 
+	#before_action :authenticate_user!, only: [:show, :edit, :saved_buildings]
+	#before_action :only => [:show, :edit, :saved_buildings] do
+  #  redirect_to new_user_session_path unless current_user #&& current_user.admin
+  #end
 	before_action :set_user, only: [:edit, :update, :show, :contribution, :saved_buildings]
 
 	def index
@@ -55,7 +59,8 @@ class UsersController < ApplicationController
 		if current_user.present?
 			@user = current_user
 		else
-			@user = User.find(params[:id])
+			#@user = User.find(params[:id])
+			@user = User.friendly.find(params[:id])
 		end
 	end
 
