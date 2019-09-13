@@ -101,8 +101,8 @@ jQuery ->
 		$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
 		
 	appendPriceInput=(min, max)->
-		$('#priceFieldsContainer').html('<input type="hidden" name="min_price" id="min_price" value='+min+'>' +
-																		'<input type="hidden" name="max_price" id="max_price" value='+max+'>');
+		$('#priceFieldsContainer').html('<input type="hidden" name="filter[min_price]" id="min_price" value='+min+'>' +
+																		'<input type="hidden" name="filter[max_price]" id="max_price" value='+max+'>');
 
 	removePriceInput=->
 		$('#min_price, #max_price').remove();
