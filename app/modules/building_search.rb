@@ -220,7 +220,10 @@ module BuildingSearch
 
   def filter_by_listing_prices buildings, min_price, max_price
     buildings = buildings_with_listings(buildings)
-    buildings.where('listings.rent < ? AND listings.rent > ?', min_price, max_price)
+    #buildings.where('listings.rent BETWEEN ? AND ?', min_price.to_i, max_price.to_i)
+    #buildings.where("listings.rent BETWEEN #{min_price.to_i} AND #{max_price.to_i}")
+    #buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
+    buildings.where('listings.rent BETWEEN ? AND ?', min_price.to_i, max_price.to_i)
   end
 
   # def filter_by_types buildings, type
@@ -286,10 +289,10 @@ module BuildingSearch
     amenities = filter_params[:amenities]
     min_price = filter_params[:min_price]
     max_price = filter_params[:max_price]
-  
+
     buildings = filter_by_amenities(buildings, amenities) if amenities.present?
     #buildings = filter_by_rates(buildings, rating) if rating.present?
-    buildings = filter_by_prices(buildings, price) if price.present?
+    buildings = filter_by_prices(buildings, price) if price.present? and min_price.blank?
     buildings = filter_by_beds(buildings, beds) if beds.present?
     buildings = filter_by_listing_beds(buildings, listing_beds) if listing_beds.present?
     buildings = filter_by_listing_prices(buildings, min_price, max_price) if min_price.present? and max_price.present?
