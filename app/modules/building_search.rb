@@ -220,8 +220,6 @@ module BuildingSearch
 
   def filter_by_listing_prices buildings, min_price, max_price
     buildings = buildings_with_listings(buildings)
-    #buildings.where('listings.rent BETWEEN ? AND ?', min_price.to_i, max_price.to_i)
-    #buildings.where("listings.rent BETWEEN #{min_price.to_i} AND #{max_price.to_i}")
     buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
   end
 
@@ -301,23 +299,30 @@ module BuildingSearch
 
   def sort_buildings(buildings, sort_params)
     # 0 => Default by active listings
-    # 1 => Rating (high to low)
-    # 2 => Rating (high to low)
-    # 3 => Reviews (high to low)
-    # 4 => A to Z
-    # 5 => Z to A
+    #1.Least Expensive - Listing
+      #Sort by lowest listing price available at building with the building with the lowest price displayed at the top
+    #2.Most Expensive - Listing
+      #Sort by highest listing price available at building with the building with the highest price displayed at the top
+    #3.Least Expensive - Building
+      #1st sort by dollar sign at the building with the building with the lowest dollar sign displayed at the top
+      #2nd sort by Buildings with Active Listings
+      #3rd sort by alphabetical A-Z
+    #4.Most Expensive - Building
+      #1st sort by dollar sign at the building with the building with the highest dollar sign displayed at the top
+      #2nd sort by Buildings with Active Listings
+      #3rd sort by alphabetical A-Z
     if buildings.present?
       case sort_params
       when '1'
-        buildings = sort_by_rating(buildings, '1')
+        buildings = buildings_with_listings(buildings).reorder('listings.rent DESC')
       when '2'
-        buildings = sort_by_rating(buildings, '2')
+        buildings = buildings_with_listings(buildings).reorder('listings.rent ASC')
       when '3'
-        buildings = where(id: buildings.map(&:id)).reorder('reviews_count DESC')
+        buildings = buildings.reorder('price ASC, listings_count DESC, building_name ASC, building_street_address ASC')
       when '4'
-        buildings = buildings.reorder('building_name ASC, building_street_address ASC')
-      when '5'
-        buildings = buildings.reorder('building_name DESC, building_street_address DESC')
+        buildings = buildings.reorder('price DESC, listings_count DESC, building_name ASC, building_street_address ASC')
+      #when '5'
+      #  buildings = buildings.reorder('building_name DESC, building_street_address DESC')
       else
         buildings = buildings
       end
@@ -327,17 +332,46 @@ module BuildingSearch
     buildings
   end
 
-  def sort_by_rating buildings, sort_index
-    rated_buildings = buildings.includes(:building_average, :featured_building).where.not(avg_rating: nil)
-    non_rated_buildings = buildings.includes(:building_average, :featured_building).where.not(id: rated_buildings.pluck(:id))
-    if sort_index == '1'
-      rated_buildings = rated_buildings.reorder(avg_rating: :desc, building_name: :asc, building_street_address: :asc)
-      sort_buildings = rated_buildings + non_rated_buildings
-    else
-      rated_buildings = rated_buildings.reorder(avg_rating: :asc, building_name: :asc, building_street_address: :asc)
-      sort_buildings = non_rated_buildings + rated_buildings
-    end
-    buildings.where(id: sort_buildings.map(&:id))
-  end
+  ####### OLD SORTING LOGIC BEFORE 13 SEPT 2019
+  # def sort_buildings(buildings, sort_params)
+  #   # 0 => Default by active listings
+  #   # 1 => Rating (high to low)
+  #   # 2 => Rating (high to low)
+  #   # 3 => Reviews (high to low)
+  #   # 4 => A to Z
+  #   # 5 => Z to A
+  #   if buildings.present?
+  #     case sort_params
+  #     when '1'
+  #       buildings = sort_by_rating(buildings, '1')
+  #     when '2'
+  #       buildings = sort_by_rating(buildings, '2')
+  #     when '3'
+  #       buildings = where(id: buildings.map(&:id)).reorder('reviews_count DESC')
+  #     when '4'
+  #       buildings = buildings.reorder('building_name ASC, building_street_address ASC')
+  #     when '5'
+  #       buildings = buildings.reorder('building_name DESC, building_street_address DESC')
+  #     else
+  #       buildings = buildings
+  #     end
+  #   else
+  #     buildings = buildings
+  #   end
+  #   buildings
+  # end
+
+  # def sort_by_rating buildings, sort_index
+  #   rated_buildings = buildings.includes(:building_average, :featured_building).where.not(avg_rating: nil)
+  #   non_rated_buildings = buildings.includes(:building_average, :featured_building).where.not(id: rated_buildings.pluck(:id))
+  #   if sort_index == '1'
+  #     rated_buildings = rated_buildings.reorder(avg_rating: :desc, building_name: :asc, building_street_address: :asc)
+  #     sort_buildings = rated_buildings + non_rated_buildings
+  #   else
+  #     rated_buildings = rated_buildings.reorder(avg_rating: :asc, building_name: :asc, building_street_address: :asc)
+  #     sort_buildings = non_rated_buildings + rated_buildings
+  #   end
+  #   buildings.where(id: sort_buildings.map(&:id))
+  # end
 
 end

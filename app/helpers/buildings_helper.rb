@@ -200,4 +200,21 @@ module BuildingsHelper
 		"<p>" + check_availability_link(@building, 'btn-slider') + "</p>".html_safe if @building.present?
 	end
 
+	def sort_options
+		[
+			['Least Expensive - Listing', '1'],
+			['Most Expensive - Listing', '2'],
+			['Least Expensive - Building', '3'],
+			['Most Expensive - Building', '4']
+		]
+	end
+
+	def sort_string
+		if params[:sort_by] == '0'
+			'Recently updated'
+		else
+			sort_options[params[:sort_by].to_i-1][0]
+		end
+	end
+
 end

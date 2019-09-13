@@ -1,0 +1,9 @@
+.dropdown-menu.dropdown-select.userMenu.sc-lg{role: 'menu'}
+  %ul.sortMenu
+    - if params[:sort_by].present? and params[:sort_by] != '0'
+      %li{class: active('0')}
+        %a.sort-item{href: 'javascript:void(0);', rel: 'sort', 'data-sortIndex' => '0'} Recently updated
+
+    - sort_options.each do |sort_option|
+      %li{class: active(sort_option[1])}
+        %a.sort-item{href: 'javascript:void(0);', rel: 'sort', 'data-sortIndex' => sort_option[1]}=sort_option[0]

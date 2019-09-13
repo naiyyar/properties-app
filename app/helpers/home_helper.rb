@@ -266,23 +266,6 @@ module HomeHelper
 		end
 	end
 
-	def sort_string
-		case params[:sort_by]
-		when '1'
-      'Rating (high to low)'
-    when '2'
-      'Rating (low to high)'
-    when '3'
-      'Reviews (high to low)'
-    when '4'
-      'A - Z'
-    when '5'
-      'Z - A'
-    else
-      'Recently updated'
-    end
-	end
-
 	def active index
 		params[:sort_by] == index ? 'active' : ''
 	end
@@ -320,7 +303,7 @@ module HomeHelper
 	end
 
 	def listing_price_box_checked
-		'checked' if params[:filter][:min_price].present?
+		'checked' if params[:filter] && params[:filter][:min_price].present?
 	end
 
 	def amen_checked val
@@ -347,9 +330,14 @@ module HomeHelper
 		(@filters.present? and @filters[:price].present? and @filters[:price].include?(val)) ? 'disabled' : ''
 	end
 
-	def sort_options
-		[['Defaul sort',4],['Rating (high to low)',1],['Rating (low to high)',2],['Reviews (high to low)',3],['A - Z',4],['Z - A',5]]
-	end
+	# def sort_options
+	# 	[['Defaul sort',4],
+	# 		['Rating (high to low)',1],
+	# 		['Rating (low to high)',2],
+	# 		['Reviews (high to low)',3],
+	# 		['A - Z',4],
+	# 		['Z - A',5]]
+	# end
 
 	def marker_color price
 		case price
