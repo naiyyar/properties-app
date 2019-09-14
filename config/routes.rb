@@ -110,7 +110,7 @@ Rails.application.routes.draw do
     end
   end
   
-  get '/:searched_by/(:search_term)', to: 'home#search', as: 'search' #must be after buildings resource
+  get '/:searched_by/:search_term', to: 'home#search', as: 'search' #must be after buildings resource
   get '/custom_search', to: 'home#search' #must be after buildings resource
   get '/location_search', to: 'home#search'
   get '/current_location', to: 'home#search'
