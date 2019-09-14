@@ -69,8 +69,12 @@ class User < ApplicationRecord
   def slug_candidates
     [
       :name,
-      [:name, :email]
+      [:name, :user_email]
     ]
+  end
+
+  def user_email
+    email.split('@')[0]
   end
 
   def saved_obejct? obejct
