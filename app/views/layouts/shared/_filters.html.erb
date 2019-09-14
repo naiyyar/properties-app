@@ -66,8 +66,13 @@
                   <%#end%>
                 <%end%>
                 <label><b>Listing Bedrooms</b></label>
-                <% (1..4).map do |val| %>
-                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_bed_filter" name="filter[listing_bedrooms][]" value="<%=val%>" id="listings_<%=val%>beds" <%= listing_bed_checked(val) %>><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Bed</label></div>
+                <% ['0','1','2','3','4'].map do |val| %>
+                  <% if val == '0' %>
+                    <div class="checkbox custom-checkbox"><label>
+                      <input type="checkbox" class="listing_bed_filter" name="filter[listing_bedrooms][]" value="<%=val%>" id="listings_studio" <%= listing_bed_checked('0') %> ><span class="fa fa-check"></span> Studio</label></div>
+                  <%else%>
+                    <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_bed_filter" name="filter[listing_bedrooms][]" value="<%=val%>" id="listings_<%=val%>beds" <%= listing_bed_checked(val) %> ><span class="fa fa-check"></span> <%= val == '4' ? '4+' : val %> Bed</label></div>
+                  <%end%>
                 <%end%>
 
                 <label><b>Listing Price</b></label>

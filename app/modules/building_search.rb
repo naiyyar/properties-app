@@ -219,8 +219,10 @@ module BuildingSearch
   end
 
   def filter_by_listing_prices buildings, min_price, max_price
-    buildings = buildings_with_listings(buildings)
-    buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
+    if buildings.present?
+      buildings = buildings_with_listings(buildings)
+      buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
+    end
   end
 
   # def filter_by_types buildings, type
@@ -274,7 +276,7 @@ module BuildingSearch
   end
 
   def buildings_with_listings buildings
-    buildings.joins(:listings).where('listings.active is true')
+    buildings.joins(:listings).where('listings.active is true') rescue nil
   end
 
   def filtered_buildings buildings, filter_params
