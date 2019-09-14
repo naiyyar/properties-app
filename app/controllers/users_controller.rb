@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-	#load_and_authorize_resource :find_by => :slug 
+	load_and_authorize_resource :find_by => :slug 
 	before_action :authenticate_user!, only: [:show, :edit, :saved_buildings]
-	before_action :authenticate_user, :only => [:show, :edit, :saved_buildings]
 	before_action :set_user, only: [:edit, :update, :show, :contribution, :saved_buildings]
 
 	def index
