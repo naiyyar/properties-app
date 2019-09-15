@@ -50,7 +50,7 @@
                   <%end%>
                 <%end%>
                 <!-- prices_options: in buildings_helper -->
-                <label><b>Building Price</b></label>
+                <label><b>Building Price Range</b></label>
                 <% prices_options.map do |obj| %>
                   <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_price_filter" name="filter[price][]" value="<%=obj[1]%>" id="<%=obj[1]%>prices" <%= price_checked(obj[1])%> <%=price_locked?(obj[1])%>><span class="fa fa-check"></span><%=obj[0]%></label></div>
                 <%end%>
