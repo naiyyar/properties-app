@@ -23,6 +23,7 @@ jQuery ->
 		e.preventDefault
 		$('.filterForm input[type=checkbox]').not(":disabled").attr('checked', false)
 		$('.filterForm input[type=radio]').not(":disabled").attr('checked', false)
+		initSlider()
 
 	#when building_bed checkbox checked and then listing_bed is selected then mark building_beds to false
 	$(document).on 'click', '.listing_bed_filter', (e) ->
@@ -33,15 +34,13 @@ jQuery ->
 	$(document).on 'click', '.building_bed_filter', (e) ->
 		resetListingBed()
 		resetListingPrice()
-		resetSlider()
-		removePriceInput()
+		initSlider()
 
 	#when building_price checkbox checked and then listing_price is selected then mark building_price to false
 	#
 	$(document).on 'click', '.building_price_filter', (e) ->
 		resetListingBed()
-		resetSlider()
-		removePriceInput()
+		initSlider()
 
 	$(document).on 'click', '#listings_price_box', (e) ->
 		resetBuildingBed()
@@ -49,8 +48,7 @@ jQuery ->
 		if $(this).is(':checked')
 			appendPriceInput(0, 2000)
 		else
-			removePriceInput()
-			resetSlider()
+			initSlider()
 
 	#$(document).on 'click', '.building_bed_filter', (e) ->
 	#	checked = $(this).is(':checked')
@@ -84,13 +82,15 @@ jQuery ->
 		if $('.listing_bed_filter:checked').length > 0
 			$('.listing_bed_filter').prop('checked', false)
 	
-	resetSlider=->
+	initSlider=->
 		$('.priceSlider').slider
 			range: true
 			min: 0
 			max: 15500
 			values: [0, 2000]
 			step: 500
+
+		removePriceInput()
 
 		$('#listings_price_box').prop('checked', false);
 		$('.priceSlider .sliderTooltip .stLabel').html('$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' <span class="fa fa-arrows-h"></span> ' + '$' + $('.priceSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))

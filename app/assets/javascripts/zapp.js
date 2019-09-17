@@ -52,6 +52,7 @@
         min_price = $('#min_price').val();
         max_price = $('#max_price').val();
     }
+    
     $('.priceSlider').slider({
         range: true,
         min: 0,
@@ -81,16 +82,22 @@
             }
         }
     });
+
+    var initSlider = function(){
+        $('.priceSlider .sliderTooltip .stLabel').html(
+            '$' + min_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
+            ' <span class="fa fa-arrows-h"></span> ' +
+            '$' + max_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+        );
+        var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
+        var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
+        var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+        $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+    }
+
+    initSlider();
     
-    $('.priceSlider .sliderTooltip .stLabel').html(
-        '$' + min_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
-        ' <span class="fa fa-arrows-h"></span> ' +
-        '$' + max_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-    );
-    var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-    var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-    var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-    $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+    
 
     // var repositionTooltip = function( e, ui ){
     //     var div = $(ui.handle).data("bs.tooltip").$tip[0];
@@ -278,6 +285,7 @@
         e.stopPropagation();
         $('.filter').slideToggle(200);
         $('.btn-filter').toggleClass('open');
+        initSlider();
     });
 
     //Avoid dropdown menu close on click inside

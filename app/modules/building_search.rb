@@ -199,7 +199,7 @@ module BuildingSearch
 
   def filter_by_listing_beds buildings, beds
     if buildings.present?
-      buildings = buildings_with_listings(buildings)
+      buildings = buildings_with_active_listings(buildings)
       filtered_buildings = []
       beds.each do |num|
         if num == '0'
@@ -220,7 +220,7 @@ module BuildingSearch
 
   def filter_by_listing_prices buildings, min_price, max_price
     if buildings.present?
-      buildings = buildings_with_listings(buildings)
+      buildings = buildings_with_active_listings(buildings)
       buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
     end
   end
@@ -268,15 +268,19 @@ module BuildingSearch
   end
 
   def buildings_with_listing_amenities
-    @buildings = buildings_with_listings(@buildings)
+    @buildings = buildings_with_active_listings(@buildings)
     @buildings = @buildings.where('listings.free_months > ?', 0) if has_amenity?('months_free_rent')
     @buildings = @buildings.where('listings.owner_paid is not null') if has_amenity?('owner_paid')
     @buildings = @buildings.where('listings.rent_stabilize = ?', 'true') if has_amenity?('rent_stabilized')
     return @buildings
   end
 
-  def buildings_with_listings buildings
+  def buildings_with_active_listings buildings
     buildings.joins(:listings).where('listings.active is true') rescue nil
+  end
+
+  def buildings_with_all_listings buildings
+    buildings.left_outer_joins(:listings) rescue nil
   end
 
   def filtered_buildings buildings, filter_params
@@ -316,13 +320,13 @@ module BuildingSearch
     if buildings.present?
       case sort_params
       when '1'
-        buildings = buildings_with_listings(buildings).reorder('listings.rent DESC')
+        buildings = buildings_with_all_listings(buildings).reorder('listings.rent DESC')
       when '2'
-        buildings = buildings_with_listings(buildings).reorder('listings.rent ASC')
+        buildings = buildings_with_all_listings(buildings).reorder('listings.rent ASC')
       when '3'
-        buildings = buildings.reorder('price ASC, listings_count DESC, building_name ASC, building_street_address ASC')
+        buildings = buildings.where.not(price: nil).reorder('price ASC, listings_count DESC, building_name ASC, building_street_address ASC')
       when '4'
-        buildings = buildings.reorder('price DESC, listings_count DESC, building_name ASC, building_street_address ASC')
+        buildings = buildings.where.not(price: nil).reorder('price DESC, listings_count DESC, building_name ASC, building_street_address ASC')
       #when '5'
       #  buildings = buildings.reorder('building_name DESC, building_street_address DESC')
       else

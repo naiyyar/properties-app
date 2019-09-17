@@ -201,7 +201,7 @@ module BuildingsHelper
 	end
 
 	def sort_options
-		[
+		[	['Recently Updated', '0'],
 			['Least Expensive - Listing', '1'],
 			['Most Expensive - Listing', '2'],
 			['Least Expensive - Building', '3'],

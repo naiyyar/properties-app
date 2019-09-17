@@ -78,10 +78,12 @@ class HomeController < ApplicationController
       @filters = results[:filters]
       @tab_title_text = pop_search_tab_title if @filters.present?
     end
-    @buildings = @buildings.includes(:building_average, :featured_building) if @buildings.present?
+    
     if @buildings.present?
+      @buildings = @buildings.includes(:building_average, :featured_building) 
       page_num = params[:page].present? ? params[:page].to_i : 1
       final_results = Building.with_featured_building(@buildings, page_num)
+      #final_results = Building.sort_buildings(final_results[1], params[:sort_by]) if final_results[1].present? and params[:sort_by].present?
       @per_page_buildings = final_results[1]
       @all_buildings = final_results[0][:all_buildings] #with featured
       @hash = final_results[0][:map_hash]

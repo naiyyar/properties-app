@@ -25,6 +25,6 @@
         %button{class: "btn sc-lg btn-o btn-primary dropdown-toggle #{params[:sort_by].present? ? 'active' : ''}", "data-toggle" => "dropdown", style: 'padding: 10px 3px !important;'}
           %span.dropdown-label
             %span.fa.fa-sort
-             #{params[:sort_by].present? ? sort_string : 'Recently updated'}
+             #{params[:sort_by].present? ? sort_string : 'Recently Updated'}
            
         = render partial: 'layouts/shared/sort_list'
