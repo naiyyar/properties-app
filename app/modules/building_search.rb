@@ -11,21 +11,21 @@ module BuildingSearch
         results[:zoom] = (search_string == 'New York' ? 12 : 14)
         unless search_string == 'New York'
           if params[:searched_by] == 'zipcode'
-            results[:buildings] = buildings_by_zip(search_string)
+            results[:buildings] = buildings_by_zip(search_string).updated_recently
             results[:boundary_coords] << Gcoordinate.where(zipcode: search_string).map{|rec| { lat: rec.latitude, lng: rec.longitude}}
           elsif params[:searched_by] == 'no-fee-apartments-nyc-neighborhoods'
-            results[:buildings] = buildings_in_neighborhood(search_string, params[:search_term])
+            results[:buildings] = buildings_in_neighborhood(search_string, params[:search_term]).updated_recently
           elsif params[:searched_by] == 'nyc'
             #popular no fee searches
-            results[:buildings] = buildings_by_popular_search(params)[0]
+            results[:buildings] = buildings_by_popular_search(params)[0].updated_recently
             results[:filters] = buildings_by_popular_search(params)[1]
             results[:zoom] = 12
           else
-            results[:buildings] = cached_buildings_by_city_or_nb(search_string, sub_borough[search_string])
+            results[:buildings] = cached_buildings_by_city_or_nb(search_string, sub_borough[search_string]).updated_recently
             results[:zoom] = 12
           end
         else
-          results[:buildings] = buildings_in_city(search_string)
+          results[:buildings] = buildings_in_city(search_string).updated_recently
         end
       elsif params[:searched_by] == 'address'
         building = where(building_street_address: params[:search_term])
@@ -36,10 +36,10 @@ module BuildingSearch
         results[:company] = ManagementCompany.where(name: params[:search_term])
       end
     else
-      results[:buildings] = redo_search_buildings(params)
+      results[:buildings] = redo_search_buildings(params).updated_recently
       results[:zoom] = params[:zoomlevel] || (results[:buildings].length > 90 ? 15 : 14)
     end
-
+    
     results[:buildings] = filtered_buildings(results[:buildings], params[:filter]) if params[:filter].present?
     results[:buildings] = sort_buildings(results[:buildings], params[:sort_by]) if results[:buildings].present?
 

@@ -93,6 +93,7 @@ class Building < ApplicationRecord
   accepts_nested_attributes_for :units, :allow_destroy => true
 
   #default_scope { order('listings_count DESC, building_name ASC, building_street_address ASC') }
+  scope :updated_recently, -> { order('listings_count DESC, building_name ASC, building_street_address ASC') }
 
   geocoded_by :street_address
   after_validation :geocode
