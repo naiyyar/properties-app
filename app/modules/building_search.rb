@@ -316,11 +316,11 @@ module BuildingSearch
       when '2'
         buildings = buildings_with_all_listings(buildings).reorder('listings.rent ASC')
       when '3'
-        buildings = buildings.where.not(price: nil).reorder('price ASC, listings_count DESC, building_name ASC, building_street_address ASC')
+        sort_order = {price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}
+        buildings = buildings.where(id: sorting_buildings_ids(sort_order, buildings)).order(sort_order)
       when '4'
-        buildings = buildings.where.not(price: nil).reorder('price DESC, listings_count DESC, building_name ASC, building_street_address ASC')
-      #when '5'
-      #  buildings = buildings.reorder('building_name DESC, building_street_address DESC')
+        sort_order = {price: :desc, listings_count: :desc, building_name: :asc, building_street_address: :asc}
+        buildings = buildings.where(id: sorting_buildings_ids(sort_order, buildings))
       else
         buildings = buildings
       end
@@ -328,6 +328,18 @@ module BuildingSearch
       buildings = buildings
     end
     buildings
+  end
+
+  def sorting_buildings_ids sort_order, buildings
+    buildings_with_price_ids = buildings.where.not(price: nil)
+                                        .select(:id, :building_name, :building_street_address, :price, :listings_count)
+                                        .order(sort_order).pluck(:id)
+    
+    buildings_without_price_ids = buildings.where(price: nil)
+                                           .select(:id, :building_name, :building_street_address, :price, :listings_count)
+                                           .order({listings_count: :desc, building_name: :asc, building_street_address: :asc})
+                                           .pluck(:id)
+    return (buildings_with_price_ids + buildings_without_price_ids)
   end
 
   def buildings_with_active_listings buildings
