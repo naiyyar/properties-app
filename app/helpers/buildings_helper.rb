@@ -213,7 +213,7 @@ module BuildingsHelper
 		if params[:sort_by] == '0'
 			'Recently updated'
 		else
-			sort_options[params[:sort_by].to_i-1][0]
+			sort_options[params[:sort_by].to_i][0]
 		end
 	end
 
