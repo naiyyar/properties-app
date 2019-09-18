@@ -275,14 +275,6 @@ module BuildingSearch
     return @buildings
   end
 
-  def buildings_with_active_listings buildings
-    buildings.joins(:listings).where('listings.active is true') rescue nil
-  end
-
-  def buildings_with_all_listings buildings
-    buildings.left_outer_joins(:listings) rescue nil
-  end
-
   def filtered_buildings buildings, filter_params
     #rating = filter_params[:rating]
     #building_types = filter_params[:type]
@@ -336,6 +328,14 @@ module BuildingSearch
       buildings = buildings
     end
     buildings
+  end
+
+  def buildings_with_active_listings buildings
+    buildings.joins(:listings).where('listings.active is true') rescue nil
+  end
+
+  def buildings_with_all_listings buildings
+    buildings.left_outer_joins(:listings) rescue nil
   end
 
   ####### OLD SORTING LOGIC BEFORE 13 SEPT 2019

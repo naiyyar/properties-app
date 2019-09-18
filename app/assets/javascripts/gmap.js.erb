@@ -75,7 +75,8 @@ function bindElemToMarker(elem, marker, object){
 
 function createSidebar(object, marker){
   var elem = $( createSidebarElem(object) );
-  elem.appendTo('#building_details'+object.id);
+  $('#building_details'+object.id).html(elem)
+  //elem.appendTo('#building_details'+object.id);
   bindElemToMarker(elem, marker, object);
 };
 
