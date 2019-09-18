@@ -312,9 +312,9 @@ module BuildingSearch
     if buildings.present?
       case sort_params
       when '1'
-        buildings = buildings_with_all_listings(buildings).reorder('listings.rent DESC')
-      when '2'
         buildings = buildings_with_all_listings(buildings).reorder('listings.rent ASC')
+      when '2'
+        buildings = buildings_with_all_listings(buildings).reorder('listings.rent DESC')
       when '3'
         sort_order = {price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}
         buildings = buildings.where(id: sorting_buildings_ids(sort_order, buildings)).order(sort_order)
