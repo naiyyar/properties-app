@@ -221,6 +221,9 @@ module BuildingSearch
   def filter_by_listing_prices buildings, min_price, max_price
     if buildings.present?
       buildings = buildings_with_active_listings(buildings)
+      #when listing have price more than 15500
+      #assuming listing max price can be upto 30000
+      max_price = max_price.to_i == 15500 ? 30000 : max_price
       buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
     end
   end
@@ -314,7 +317,7 @@ module BuildingSearch
       when '1'
         buildings = buildings_with_all_listings(buildings).reorder('listings.rent ASC')
       when '2'
-        buildings = buildings_with_all_listings(buildings).reorder('listings.rent DESC')
+        buildings = buildings.left_outer_joins(:listings).reorder('listings.rent DESC')
       when '3'
         sort_order = {price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}
         buildings = buildings.where(id: sorting_buildings_ids(sort_order, buildings)).order(sort_order)
@@ -347,7 +350,12 @@ module BuildingSearch
   end
 
   def buildings_with_all_listings buildings
-    buildings.left_outer_joins(:listings) rescue nil
+    buildings = buildings.left_outer_joins(:listings)
+    buildings_with_listing_rent = buildings.where('listings.rent is not null')
+                                           .reorder('listings.rent ASC')
+    buildings_without_listing_rent = buildings.where('listings.rent is null')
+    buildings = buildings.where(id: (buildings_with_listing_rent+buildings_without_listing_rent).map(&:id))
+    return buildings
   end
 
   ####### OLD SORTING LOGIC BEFORE 13 SEPT 2019

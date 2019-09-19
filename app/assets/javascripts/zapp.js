@@ -50,7 +50,22 @@
     var max_price = 2000;
     if($('#min_price').length > 0){
         min_price = $('#min_price').val();
-        max_price = $('#max_price').val();
+        max_price = parseInt($('#max_price').val());
+    }
+
+    var setPrice = function(min, max, on_slide=false){
+        var maxValue = parseInt(max) > 15000 ? '15500+' : max;
+        $('.priceSlider .sliderTooltip .stLabel').html(
+            '$' + min.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
+            ' <span class="fa fa-arrows-h"></span> ' +
+            '$' + maxValue.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+        );
+        
+        if(on_slide){
+            $('#priceFieldsContainer').html('<input type="hidden" name="filter[min_price]" id="min_price" value='+min+'>' +
+                                            '<input type="hidden" name="filter[max_price]" id="max_price" value='+maxValue+'>');
+
+        }
     }
     
     $('.priceSlider').slider({
@@ -61,18 +76,14 @@
         step: 500,
         slide: function(event, ui) {
             $('#listings_price_box').prop('checked', true);
-            $('.priceSlider .sliderTooltip .stLabel').html(
-                '$' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
-                ' <span class="fa fa-arrows-h"></span> ' +
-                '$' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-            );
+            var sliding = true;
+            setPrice(ui.values[0], ui.values[1], sliding);
+            
             var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
             var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
             var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
             $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
-            $('#priceFieldsContainer').html('<input type="hidden" name="filter[min_price]" id="min_price" value='+ui.values[0]+'>' +
-                                            '<input type="hidden" name="filter[max_price]" id="max_price" value='+ui.values[1]+'>');
-
+            
             if($('.building_price_filter:checked').length > 0){
                 $('.building_price_filter').prop('checked', false);
             }
@@ -84,11 +95,7 @@
     });
 
     var initSlider = function(){
-        $('.priceSlider .sliderTooltip .stLabel').html(
-            '$' + min_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
-            ' <span class="fa fa-arrows-h"></span> ' +
-            '$' + max_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-        );
+        setPrice(min_price, max_price);
         var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
         var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
         var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
@@ -97,8 +104,6 @@
 
     initSlider();
     
-    
-
     // var repositionTooltip = function( e, ui ){
     //     var div = $(ui.handle).data("bs.tooltip").$tip[0];
     //     var pos = $.extend({}, $(ui.handle).offset(), { 

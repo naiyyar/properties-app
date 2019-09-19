@@ -16,8 +16,7 @@ class Listing < ApplicationRecord
                     building: [:building_name]
                   }
 
-  								
-  default_scope { order(date_active: :desc, management_company: :asc, building_address: :asc, unit: :asc)}
+  scope :default_listing_order, -> { order(date_active: :desc, management_company: :asc, building_address: :asc, unit: :asc) }
 
   validates_presence_of :building_address, :unit, :date_active
   validates :rent,        :numericality => true, :allow_nil => true
