@@ -101,6 +101,18 @@ class Listing < ApplicationRecord
      else raise "Unknown file type: #{file.original_filename}"
     end
   end
+
+  def update_rent
+    property = self.building
+    listings = Listing.where(building_id: property.id).active.order(rent: :asc)
+    if listings.present?
+      property.update(min_listing_price: listings.first.rent)
+      property.update(max_listing_price: listings.last.rent)
+    else
+      property.update(min_listing_price: nil)
+      property.update(max_listing_price: nil)
+    end
+  end
   
   private
   def create_unit

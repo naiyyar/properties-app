@@ -145,6 +145,8 @@ class Building < ApplicationRecord
     buildings.joins(:uploads).where('buildings.id = uploads.imageable_id AND imageable_type = ?', 'Building')
   end
 
+  scope :with_active_listing, -> {where('listings_count > ?', 0)}
+
   #amenities scopes
   AMENITIES = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
                 :management_company_run, :management_company_run, :gym, :live_in_super,:pets_allowed_cats,

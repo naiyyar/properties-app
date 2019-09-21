@@ -7,7 +7,7 @@ module SaveBuildingNeighborhood
 	end
 
 	def continue_call_back?
-    !self.avg_rating_changed? && !recommended_percent_changed?
+    !(avg_rating_changed? && recommended_percent_changed? && min_listing_price_changed? && max_listing_price_changed?)
   end
 
 	private

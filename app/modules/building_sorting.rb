@@ -36,12 +36,11 @@ module BuildingSorting
 
   def sorted_listed_building_ids buildings, sort_by
   	ids_arr = []
-  	buildings = buildings.where('listings_count > ?', 0)
   	if sort_by == '2'
-  		ids_arr << buildings.where.not(max_listing_price: nil).order(max_listing_price: :desc).pluck(:id)
+  		ids_arr << buildings.where.not(max_listing_price: nil).with_active_listing.order(max_listing_price: :desc).pluck(:id)
     	ids_arr << buildings.where(max_listing_price: nil).pluck(:id)
     else
-    	ids_arr << buildings.where.not(min_listing_price: nil).order(min_listing_price: :asc).pluck(:id)
+    	ids_arr << buildings.where.not(min_listing_price: nil).with_active_listing.order(min_listing_price: :asc).pluck(:id)
     	ids_arr << buildings.where(min_listing_price: nil).pluck(:id)
     end
     return ids_arr.flatten

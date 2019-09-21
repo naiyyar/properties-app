@@ -2,6 +2,7 @@ class ListingsController < ApplicationController
   load_and_authorize_resource only: :index
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :find_listings, only: [:change_status, :delete_all]
+  after_action :update_building_rent, only:[:create, :update, :destroy]
   # GET /listings
   # GET /listings.json
   def index
@@ -132,5 +133,9 @@ class ListingsController < ApplicationController
 
     def find_listings
       @listings = Listing.where(id: params[:selected_ids])
+    end
+
+    def update_building_rent
+      @listing.update_rent
     end
 end
