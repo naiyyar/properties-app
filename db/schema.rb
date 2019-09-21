@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190913174416) do
+ActiveRecord::Schema.define(version: 20190920162149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,8 @@ ActiveRecord::Schema.define(version: 20190913174416) do
     t.float    "recommended_percent"
     t.integer  "reviews_count",           default: 0,     null: false
     t.integer  "listings_count",          default: 0,     null: false
+    t.integer  "min_listing_price"
+    t.integer  "max_listing_price"
     t.index ["building_name"], name: "index_buildings_on_building_name", using: :btree
     t.index ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
     t.index ["city"], name: "index_buildings_on_city", using: :btree
@@ -224,6 +226,7 @@ ActiveRecord::Schema.define(version: 20190913174416) do
     t.boolean  "active",             default: true
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.index ["building_id", "building_address"], name: "index_listings_on_building_id_and_building_address", using: :btree
   end
 
   create_table "management_companies", force: :cascade do |t|

@@ -63,6 +63,8 @@ class Building < ApplicationRecord
 
   #Search and filtering methods
   extend BuildingSearch
+  extend BuildingFilters
+  extend BuildingSorting
   extend PopularSearches
   extend ImportBuildingReviews
 
@@ -94,6 +96,8 @@ class Building < ApplicationRecord
 
   #default_scope { order('listings_count DESC, building_name ASC, building_street_address ASC') }
   scope :updated_recently, -> { order('listings_count DESC, building_name ASC, building_street_address ASC') }
+  scope :order_by_min_rent, -> { reorder('min_listing_price ASC') }
+  scope :order_by_min_price, -> { reorder({price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}) }
 
   geocoded_by :street_address
   after_validation :geocode

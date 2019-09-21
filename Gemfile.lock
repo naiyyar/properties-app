@@ -189,6 +189,10 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.7.0)
       launchy (~> 2.2)
+    lol_dba (2.1.8)
+      actionpack (>= 3.0, < 6.0)
+      activerecord (>= 3.0, < 6.0)
+      railties (>= 3.0, < 6.0)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -410,6 +414,7 @@ DEPENDENCIES
   jquery-rails
   kgio
   letter_opener
+  lol_dba
   memcachier
   meta_request
   momentjs-rails

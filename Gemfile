@@ -147,6 +147,7 @@ group :development do
   gem 'annotate'
   gem 'meta_request'
   gem 'rails-footnotes', '~> 4.0'
+  gem 'lol_dba'
 end
 
 group :production do

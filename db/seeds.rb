@@ -12,5 +12,14 @@
 # 	end
 # end
 
+Building.all.each do |building|
+	listings = building.listings.order(rent: :asc)
+	if listings.present?
+		building.min_listing_price = listings.first.rent
+		building.max_listing_price = listings.last.rent
+		building.save
+	end
+end
+
 
 

@@ -98,7 +98,7 @@ class BuildingsController < ApplicationController
     @reviews_count = @building.reviews_count
 
     #Similiar buildings
-    @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average) if @building.active_comps.present?
+    @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average, :featured_building) if @building.active_comps.present?
     
     @lat = @building.latitude
     @lng = @building.longitude
