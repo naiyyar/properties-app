@@ -98,7 +98,7 @@ class Building < ApplicationRecord
   scope :updated_recently, -> { order('listings_count DESC, building_name ASC, building_street_address ASC') }
   scope :order_by_min_rent, -> { order('min_listing_price ASC') }
   scope :order_by_max_rent, -> { order('max_listing_price DESC') }
-  scope :order_by_min_price, -> { reorder({price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}) }
+  scope :order_by_min_price, -> { order({price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}) }
 
   geocoded_by :street_address
   after_validation :geocode

@@ -20,11 +20,9 @@ module BuildingSorting
       when '2'
         buildings = buildings.where(id: (sorted_listed_building_ids(buildings, sort_params))) #.reorder(max_listing_price: :desc)
       when '3'
-        sort_order = {price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}
-        buildings = buildings.where(id: sorting_buildings_ids(sort_order, buildings)).order_by_min_price
+        buildings = buildings.where(id: sorting_buildings_ids(buildings, sort_params)).order_by_min_price
       when '4'
-        sort_order = {price: :desc, listings_count: :desc, building_name: :asc, building_street_address: :asc}
-        buildings = buildings.where(id: sorting_buildings_ids(sort_order, buildings))
+        buildings = buildings.order('price DESC NULLS LAST, listings_count DESC, building_name ASC, building_street_address ASC')
       else
         buildings = buildings
       end
@@ -46,11 +44,12 @@ module BuildingSorting
     return ids_arr.flatten
   end
 
-  def sorting_buildings_ids sort_order, buildings
+  def sorting_buildings_ids buildings, sort_params
   	ids_arr = []
-    ids_arr << buildings.where.not(price: nil).order(sort_order).pluck(:id)
-    ids_arr << buildings.where(price: nil).pluck(:id)
-    return ids_arr.flatten
+  	buildings_with_prices = buildings.where.not(price: nil)
+    ids_arr += buildings_with_prices.order_by_min_price.pluck(:id)
+    ids_arr += buildings.where(price: nil).pluck(:id)
+    return ids_arr
   end
 
   ####### OLD SORTING LOGIC BEFORE 13 SEPT 2019
