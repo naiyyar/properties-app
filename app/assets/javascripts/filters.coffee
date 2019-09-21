@@ -88,7 +88,7 @@ jQuery ->
 			min: 0
 			max: 15500
 			values: [0, 2000]
-			step: 500
+			step: 250
 
 		removePriceInput()
 

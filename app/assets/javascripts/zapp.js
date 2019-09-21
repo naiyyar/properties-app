@@ -73,7 +73,7 @@
         min: 0,
         max: 15500,
         values: [min_price, max_price],
-        step: 100,
+        step: 250,
         slide: function(event, ui) {
             $('#listings_price_box').prop('checked', true);
             var sliding = true;
