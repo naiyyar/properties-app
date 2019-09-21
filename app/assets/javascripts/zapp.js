@@ -79,10 +79,10 @@
             var sliding = true;
             setPrice(ui.values[0], ui.values[1], sliding);
             
-            var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-            var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-            var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-            $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+            //var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
+            //var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
+            //var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+            //$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
             
             if($('.building_price_filter:checked').length > 0){
                 $('.building_price_filter').prop('checked', false);
@@ -96,10 +96,10 @@
 
     var initSlider = function(){
         setPrice(min_price, max_price);
-        var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-        var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-        var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-        $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+        //var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
+        //var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
+        //var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+        //$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
     }
 
     initSlider();
@@ -499,5 +499,9 @@
     $('.sorted-by').click(function(){
         //$('select#sort').show();
         console.log(12)
+    })
+
+    $(document).on('click', 'select#sort', function(){
+        //alert(12)
     })
 })(jQuery);
