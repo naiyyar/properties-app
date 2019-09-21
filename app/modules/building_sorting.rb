@@ -18,7 +18,7 @@ module BuildingSorting
       when '1'
         buildings = buildings.where(id: (sorted_listed_building_ids(buildings, sort_params))).order_by_min_rent
       when '2'
-        buildings = buildings.where(id: (sorted_listed_building_ids(buildings, sort_params))) #.reorder(max_listing_price: :desc)
+        buildings = buildings.order('max_listing_price DESC NULLS LAST')
       when '3'
         buildings = buildings.where(id: sorting_buildings_ids(buildings, sort_params)).order_by_min_price
       when '4'
