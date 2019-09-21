@@ -494,4 +494,10 @@
             removeDropdownToggleBg(primary_dropdown)
         }
     });
+
+    //Hiding mobile browser select box on soeted by text click
+    $('.sorted-by').click(function(){
+        //$('select#sort').show();
+        console.log(12)
+    })
 })(jQuery);
