@@ -47,7 +47,7 @@
     }
 
     var min_price = 0;
-    var max_price = 2000;
+    var max_price = 15500;
     if($('#min_price').length > 0){
         min_price = $('#min_price').val();
         max_price = parseInt($('#max_price').val());

@@ -46,7 +46,7 @@ jQuery ->
 		resetBuildingBed()
 		resetBuildingPrice()
 		if $(this).is(':checked')
-			appendPriceInput(0, 2000)
+			appendPriceInput(0, 15500)
 		else
 			initSlider()
 
@@ -87,13 +87,14 @@ jQuery ->
 			range: true
 			min: 0
 			max: 15500
-			values: [0, 2000]
+			values: [0, 15500]
 			step: 250
 
 		removePriceInput()
-
+		#max = $('.priceSlider').slider('values', 1)
+		maxValue = '15500+'
 		$('#listings_price_box').prop('checked', false);
-		$('.priceSlider .sliderTooltip .stLabel').html('$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' <span class="fa fa-arrows-h"></span> ' + '$' + $('.priceSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+		$('.priceSlider .sliderTooltip .stLabel').html('$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' <span class="fa fa-arrows-h"></span> ' + '$' + maxValue.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
     
 		#priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'))
 		#priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width()
