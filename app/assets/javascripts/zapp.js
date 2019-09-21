@@ -73,16 +73,16 @@
         min: 0,
         max: 15500,
         values: [min_price, max_price],
-        step: 500,
+        step: 100,
         slide: function(event, ui) {
             $('#listings_price_box').prop('checked', true);
             var sliding = true;
             setPrice(ui.values[0], ui.values[1], sliding);
             
-            //var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-            //var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-            //var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-            //$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+            // var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
+            // var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
+            // var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+            // $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
             
             if($('.building_price_filter:checked').length > 0){
                 $('.building_price_filter').prop('checked', false);
@@ -96,10 +96,10 @@
 
     var initSlider = function(){
         setPrice(min_price, max_price);
-        //var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-        //var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-        //var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-        //$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+        // var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
+        // var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
+        // var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+        // $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
     }
 
     initSlider();

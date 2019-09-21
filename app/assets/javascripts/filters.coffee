@@ -95,10 +95,10 @@ jQuery ->
 		$('#listings_price_box').prop('checked', false);
 		$('.priceSlider .sliderTooltip .stLabel').html('$' + $('.priceSlider').slider('values', 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' <span class="fa fa-arrows-h"></span> ' + '$' + $('.priceSlider').slider('values', 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
     
-		priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'))
-		priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width()
-		priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-		$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
+		#priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'))
+		#priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width()
+		#priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
+		#$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
 		
 	appendPriceInput=(min, max)->
 		$('#priceFieldsContainer').html('<input type="hidden" name="filter[min_price]" id="min_price" value='+min+'>' +
