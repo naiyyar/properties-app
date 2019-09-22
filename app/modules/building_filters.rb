@@ -69,11 +69,12 @@ module BuildingFilters
 
   def filter_by_listing_prices buildings, min_price, max_price
     if buildings.present?
-      buildings = buildings_with_active_listings(buildings)
+      buildings = buildings_with_active_listings(buildings).uniq
       #when listing have price more than 15500
       #assuming listing max price can be upto 30000
       max_price = max_price.to_i == 15500 ? 30000 : max_price
-      buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
+      #buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
+      buildings.where('buildings.min_listing_price >= ? AND buildings.max_listing_price <= ?', min_price.to_i, max_price.to_i)
     end
   end
 
