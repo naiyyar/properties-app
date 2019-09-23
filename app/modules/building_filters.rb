@@ -43,7 +43,7 @@ module BuildingFilters
         end
       end
     end
-    buildings.where(id: @buildings.map(&:id).uniq) rescue nil
+    buildings.where(id: @buildings.map(&:id).uniq).uniq rescue nil
   end
 
   def filter_by_listing_beds buildings, beds
@@ -64,7 +64,7 @@ module BuildingFilters
         end
       end
     end
-    buildings.where(id: filtered_buildings.map(&:id).uniq) rescue nil
+    buildings.where(id: filtered_buildings.map(&:id).uniq).uniq rescue nil
   end
 
   def filter_by_listing_prices buildings, min_price, max_price
@@ -74,7 +74,6 @@ module BuildingFilters
       #assuming listing max price can be upto 30000
       max_price = max_price.to_i == 15500 ? 30000 : max_price
       buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
-      #buildings.where('buildings.min_listing_price >= ? AND buildings.max_listing_price <= ?', min_price.to_i, max_price.to_i)
     end
   end
 
@@ -125,7 +124,7 @@ module BuildingFilters
     @buildings = @buildings.where('listings.free_months > ?', 0) if has_amenity?('months_free_rent')
     @buildings = @buildings.where('listings.owner_paid is not null') if has_amenity?('owner_paid')
     @buildings = @buildings.where('listings.rent_stabilize = ?', 'true') if has_amenity?('rent_stabilized')
-    return @buildings
+    return @buildings.uniq
   end
 
   def filtered_buildings buildings, filter_params
