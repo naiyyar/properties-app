@@ -87,6 +87,7 @@ module BuildingSearch
     #Selecting 2 featured building to put on top
     per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
                                         .paginate(:page => page_num, :per_page => 20)
+    
     #putting featured building on top
     if top_two_featured_buildings.present?
       all_buildings = top_two_featured_buildings + per_page_buildings
@@ -97,6 +98,9 @@ module BuildingSearch
       buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
       buildings = top_two_featured_buildings + buildings
     end
+    #when there are only top two featured buildings after filter
+    #then per_page_buildings will be blank due to fitering featured buildings
+    per_page_buildings = all_buildings.paginate(:page => page_num, :per_page => 20) if per_page_buildings.blank? and all_buildings.present?
     final_results[:all_buildings] = all_buildings
     final_results[:map_hash] = buildings_json_hash(buildings)
     
