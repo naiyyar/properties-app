@@ -144,9 +144,13 @@ class Upload < ApplicationRecord
 
   def set_sort_index
     imageable = self.imageable
-    unit_ids = imageable.units.map(&:id)
-    uploads = Upload.where("imageable_id = ? or imageable_id in (?)", imageable.id, unit_ids).where.not(id: self.id)
-    self.update(sort: uploads.count + 1) if uploads.present?
+    #unit_ids = imageable.units.map(&:id)
+    #uploads = Upload.where("imageable_id = ? or imageable_id in (?)", imageable.id, unit_ids).where.not(id: self.id)
+    uploads = Upload.where(imageable_id: imageable.id, imageable_type: 'Building') #.where.not(id: self.id)
+    uploads = uploads.order('sort ASC NULLS LAST, created_at ASC')
+    uploads.each_with_index do |upload, index|
+      upload.update(sort: index+1) 
+    end
   end
 
   # def is_video?
