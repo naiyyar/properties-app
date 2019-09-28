@@ -95,7 +95,7 @@ class BuildingsController < ApplicationController
     @uploads = @building.chached_image_uploads
     @uploaded_images_count = @uploads.count
     @documents = @building.doc_uploads
-    @reviews_count = @building.reviews_count
+    @reviews_count = @building.reviews_count.to_i
 
     #Similiar buildings
     @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average, :featured_building) if @building.active_comps.present?

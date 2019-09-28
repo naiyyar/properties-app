@@ -18,7 +18,7 @@ SitemapGenerator::Sitemap.create do
   
   Building.find_each do |building|
     add building_path(building), lastmod: building.updated_at
-    add search_path(:searched_by => 'zipcode', search_term: building.zipcode), lastmod: Time.now, changefreq: 'weekly', priority: 1.0
+    add search_path(:searched_by => 'zipcode', search_term: "#{building.zipcode}-#{building.formatted_city}"), lastmod: Time.now, changefreq: 'weekly', priority: 1.0
   end
 
   add management_companies_path

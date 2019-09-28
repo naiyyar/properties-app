@@ -38,7 +38,7 @@ module BuildingSearch
       results[:buildings] = redo_search_buildings(params)
       results[:zoom] = params[:zoomlevel] || (results[:buildings].length > 90 ? 15 : 14)
     end
-    results[:buildings] = results[:buildings].updated_recently unless params[:sort_by].present?
+    results[:buildings] = results[:buildings].updated_recently if(params[:sort_by].blank? or params[:sort_by] == '0')
     results[:buildings] = filtered_buildings(results[:buildings], params[:filter]) if params[:filter].present?
     results[:buildings] = sort_buildings(results[:buildings], params[:sort_by]) if results[:buildings].present?
 
