@@ -12,6 +12,13 @@ class HomeController < ApplicationController
                   no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
     
     @tab_title_text = tab_title_tag
+    
+  end
+
+  def set_split_view_type
+    #setting to know on split view in which view user is List view OR Map View
+    session[:view_type] = params[:view_type] if params[:view_type].present?
+    render json: { view: session[:view_type] }
   end
 
   def load_infobox

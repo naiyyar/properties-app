@@ -359,7 +359,8 @@ module HomeHelper
 		#params[:latitude].present? && params[:longitude].present?
 		#current location search also have lat and long
 		#searching on mobile redirecting to map view instad of list view
-		params[:searched_by] == 'latlng'
+		#returning to map view if user is searching or filtering from inside the map view
+		params[:searched_by] == 'latlng' or session[:view_type] == 'mapView'
 	end
 
 	def no_search_result_text

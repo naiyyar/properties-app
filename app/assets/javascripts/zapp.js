@@ -219,6 +219,7 @@
         if($('.searched-properties').hasClass('invisible')){
             $('.searched-properties').removeClass('invisible').removeClass('min');
         }
+        setSession('listView')
     })
     
     $('.mapHandler').click(function() {
@@ -226,7 +227,23 @@
         $('.listHandler').show();
         listMapView();
         $('.sorted_by_option').hide()
+        setSession('mapView')
     });
+
+    var setSession = function(view_type){
+        $.ajax({
+            url: '/set_split_view_type',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+            },
+            type: 'post',
+            dataType: 'json',
+            data: {view_type: view_type},
+            success: function(response){
+                //console.log(response)
+            }
+        })
+    }
 
     var card_opening_target = '_self'
 
