@@ -13,22 +13,19 @@ module BuildingSorting
       #1st sort by dollar sign at the building with the building with the highest dollar sign displayed at the top
       #2nd sort by Buildings with Active Listings
       #3rd sort by alphabetical A-Z
-    if buildings.present?
-      case sort_params
-      when '1'
-        buildings = buildings.where(id: (sorted_listed_building_ids(buildings, sort_params))).order_by_min_rent
-      when '2'
-        buildings = buildings.order('max_listing_price DESC NULLS LAST')
-      when '3'
-        buildings = buildings.where(id: sorting_buildings_ids(buildings, sort_params)).order_by_min_price
-      when '4'
-        buildings = buildings.order('price DESC NULLS LAST, listings_count DESC, building_name ASC, building_street_address ASC')
-      else
-        buildings = buildings
-      end
+    case sort_params
+    when '1'
+      buildings = buildings.where(id: (sorted_listed_building_ids(buildings, sort_params))).order_by_min_rent
+    when '2'
+      buildings = buildings.order('max_listing_price DESC NULLS LAST')
+    when '3'
+      buildings = buildings.where(id: sorting_buildings_ids(buildings, sort_params)).order_by_min_price
+    when '4'
+      buildings = buildings.order('price DESC NULLS LAST, listings_count DESC, building_name ASC, building_street_address ASC')
     else
       buildings = buildings
     end
+    
     buildings
   end
 

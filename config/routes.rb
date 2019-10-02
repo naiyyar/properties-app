@@ -94,7 +94,7 @@ Rails.application.routes.draw do
   
   resources :users do
     member do
-      get '/contribution', to: 'users#contribution', as: 'contribution'
+      get :contribution
       get :saved_buildings
     end
   end

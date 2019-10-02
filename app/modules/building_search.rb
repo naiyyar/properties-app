@@ -1,4 +1,5 @@
 module BuildingSearch
+  CITIES = ['New York', 'Brooklyn', 'Bronx', 'Queens']
   def apt_search params, search_string, sub_borough
     results = {}
     results[:filters] = nil
@@ -40,7 +41,7 @@ module BuildingSearch
     end
     results[:buildings] = results[:buildings].updated_recently if(params[:sort_by].blank? or params[:sort_by] == '0')
     results[:buildings] = filtered_buildings(results[:buildings], params[:filter]) if params[:filter].present?
-    results[:buildings] = sort_buildings(results[:buildings], params[:sort_by]) if results[:buildings].present?
+    results[:buildings] = sort_buildings(results[:buildings], params[:sort_by]) if(results[:buildings].present? and params[:sort_by] != '0')
 
     return results
   end
@@ -146,7 +147,13 @@ module BuildingSearch
   end
 
   def buildings_in_city search_term
-    search_by_city(search_term)
+    #search_by_city(search_term) => Getting PG::InvalidColumnReference: ERROR: for SELECT DISTINCT, ORDER BY expressions must appear in select list
+
+    if search_term == 'New York'
+      where(city: CITIES)
+    else
+      where(city: search_term)
+    end
   end
 
   #Contribute search method

@@ -20,14 +20,14 @@ module BuildingFilters
 
   def filter_by_prices buildings, price
     if price.present? and !price.include?('on')
-      buildings = buildings.where(price: price) if buildings.present?
+      buildings = buildings.where(price: price) if buildings.exists?
     else
       buildings = buildings
     end
   end
 
   def filter_by_beds buildings, beds
-    if buildings.present?
+    if buildings.exists?
       @buildings = []
       beds.each do |num|
         if num == '0'
@@ -47,7 +47,7 @@ module BuildingFilters
   end
 
   def filter_by_listing_beds buildings, beds
-    if buildings.present?
+    if buildings.exists?
       buildings = buildings_with_active_listings(buildings)
       filtered_buildings = []
       beds.each do |num|
@@ -68,7 +68,7 @@ module BuildingFilters
   end
 
   def filter_by_listing_prices buildings, min_price, max_price
-    if buildings.present?
+    if buildings.exists?
       buildings = buildings_with_active_listings(buildings).uniq
       #when listing have price more than 15500
       #assuming listing max price can be upto 30000
