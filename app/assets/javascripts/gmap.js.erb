@@ -63,21 +63,23 @@ function createSidebarElem(json){
           );
 };
 
-function bindElemToMarker(elem, marker, object){
+function bindElemToMarker(elem, marker, object, map){
   var price = (object.price == '' || object.price == null) ? 0 : object.price
   var card = elem.parent().parent().parent();
   card.on('mouseover', function(){
     marker.setIcon(markerIcon(price, 'green'));
+    console.log(object)
+    map.setCenter(new google.maps.LatLng(object.latitude,object.longitude));
   }).on('mouseout', function(){
     marker.setIcon(markerIcon(price, 'red'));
   });
 };
 
-function createSidebar(object, marker){
+function createSidebar(object, marker, map){
   var elem = $( createSidebarElem(object) );
   $('#building_details'+object.id).html(elem)
   //elem.appendTo('#building_details'+object.id);
-  bindElemToMarker(elem, marker, object);
+  bindElemToMarker(elem, marker, object, map);
 };
 
 function markerIconBlue(){

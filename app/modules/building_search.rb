@@ -80,7 +80,7 @@ module BuildingSearch
     final_results = {}
     featured_buildings = featured_buildings(buildings)
     #top_two_featured_buildings = featured_buildings
-    if featured_buildings.length > 2
+    if !featured_buildings.nil? and featured_buildings.length > 2
       top_two_featured_buildings = featured_buildings.shuffle[0..1]
     else
       top_two_featured_buildings = featured_buildings.shuffle[0..2]

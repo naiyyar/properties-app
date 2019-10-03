@@ -210,10 +210,10 @@ module BuildingsHelper
 	end
 
 	def sort_string
-		if params[:sort_by] == '0'
-			'Recently updated'
-		else
+		if ['1','2','3','4'].include?(params[:sort_by])
 			sort_options[params[:sort_by].to_i][0]
+		else
+			'Recently updated'
 		end
 	end
 

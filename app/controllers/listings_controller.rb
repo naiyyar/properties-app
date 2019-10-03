@@ -9,7 +9,7 @@ class ListingsController < ApplicationController
     @filterrific = initialize_filterrific(
       Listing,
       params[:filterrific],
-      available_filters: [:search_query]
+      available_filters: [:default_listing_order, :search_query]
     ) or return
     @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
                                  .includes(:building, building: [:management_company]).default_listing_order

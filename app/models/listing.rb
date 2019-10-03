@@ -27,9 +27,10 @@ class Listing < ApplicationRecord
   validates_date :date_available, :on => :create, allow_nil: true, allow_blank: true, :message => 'Formatting is off, must be yyyy/mm/dd'
 	
 	filterrific(
-   default_filter_params: { },
+   default_filter_params: {default_listing_order: :default_listing_order},
    available_filters: [
-     	:search_query
+      :default_listing_order,
+      :search_query
     ]
   )
 
