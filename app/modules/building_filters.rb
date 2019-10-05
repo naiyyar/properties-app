@@ -47,12 +47,12 @@ module BuildingFilters
   end
 
   def filter_by_listing_beds buildings, beds
-    buildings.with_listings_bed(beds) if buildings.exists?
+    buildings.with_listings_bed(beds) if buildings.present?
     #buildings.where(id: filtered_buildings.map(&:id).uniq).uniq rescue nil
   end
 
   def filter_by_listing_prices buildings, min_price, max_price
-    if buildings.any?
+    if buildings.present?
       #buildings = buildings_with_active_listings(buildings).uniq
       #when listing have price more than 15500
       #assuming listing max price can be upto 30000
