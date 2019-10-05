@@ -1,5 +1,5 @@
 module BuildingFilters
-	# def filter_by_rates buildings, rating
+  # def filter_by_rates buildings, rating
   #   # 1 star - means  = 1
   #   # 2 star - means  1 <= 2
   #   # 3 star - means  2 <= 3
@@ -47,33 +47,17 @@ module BuildingFilters
   end
 
   def filter_by_listing_beds buildings, beds
-    if buildings.exists?
-      buildings = buildings_with_active_listings(buildings)
-      filtered_buildings = []
-      beds.each do |num|
-        if num == '0'
-          filtered_buildings += buildings.l_studio
-        elsif num == '1'
-          filtered_buildings += buildings.l_one_bed
-        elsif num == '2'
-          filtered_buildings += buildings.l_two_bed
-        elsif num == '3'
-          filtered_buildings += buildings.l_three_bed
-        else
-          filtered_buildings += buildings.l_four_bed
-        end
-      end
-    end
-    buildings.where(id: filtered_buildings.map(&:id).uniq).uniq rescue nil
+    buildings.with_listings_bed(beds) if buildings.exists?
+    #buildings.where(id: filtered_buildings.map(&:id).uniq).uniq rescue nil
   end
 
   def filter_by_listing_prices buildings, min_price, max_price
-    if buildings.exists?
-      buildings = buildings_with_active_listings(buildings).uniq
+    if buildings.any?
+      #buildings = buildings_with_active_listings(buildings).uniq
       #when listing have price more than 15500
       #assuming listing max price can be upto 30000
       max_price = max_price.to_i == 15500 ? 30000 : max_price
-      buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i)
+      buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i).uniq
     end
   end
 
@@ -136,7 +120,7 @@ module BuildingFilters
     amenities = filter_params[:amenities]
     min_price = filter_params[:min_price]
     max_price = filter_params[:max_price]
-
+    buildings = buildings_with_active_listings(buildings)
     buildings = filter_by_amenities(buildings, amenities) if amenities.present?
     #buildings = filter_by_rates(buildings, rating) if rating.present?
     buildings = filter_by_prices(buildings, price) if price.present? and min_price.blank?

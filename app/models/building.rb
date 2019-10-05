@@ -169,11 +169,12 @@ class Building < ApplicationRecord
   scope :four_bed, -> { where(four_plus_bed: 4) }
 
   #Listings bedrooms types
-  scope :l_studio, -> { where('listings.bed = ?', 0) }
-  scope :l_one_bed, -> { where('listings.bed = ?', 1) }
-  scope :l_two_bed, -> { where('listings.bed = ?', 2) }
-  scope :l_three_bed, -> { where('listings.bed = ?', 3) }
-  scope :l_four_bed, -> { where('listings.bed = ?', 4) }
+  # scope :l_studio, -> { where('listings.bed = ?', 0) }
+  # scope :l_one_bed, -> { where('listings.bed = ?', 1) }
+  # scope :l_two_bed, -> { where('listings.bed = ?', 2) }
+  # scope :l_three_bed, -> { where('listings.bed = ?', 3) }
+  # scope :l_four_bed, -> { where('listings.bed = ?', 4) }
+  scope :with_listings_bed, -> (beds) { where('listings.bed in (?)', beds) }
 
   #Methods
 
