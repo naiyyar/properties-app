@@ -71,16 +71,16 @@ function bindElemToMarker(elem, marker, object, map){
     map.setZoom(16);
     map.panTo(new google.maps.LatLng(object.latitude,object.longitude));
   }).on('mouseout', function(){
-    map.setZoom(13);
+    map.setZoom(zoom);
     marker.setIcon(markerIcon(price, 'red'));
   });
 };
 
-function createSidebar(object, marker, map){
+function createSidebar(object, marker, map, zoom){
   var elem = $( createSidebarElem(object) );
   $('#building_details'+object.id).html(elem)
   //elem.appendTo('#building_details'+object.id);
-  bindElemToMarker(elem, marker, object, map);
+  bindElemToMarker(elem, marker, object, map, zoom);
 };
 
 function markerIconBlue(){
