@@ -47,7 +47,7 @@ module BuildingSearch
   end
 
   def redo_search_buildings params
-    @zoom = params[:zoomlevel].to_i
+    @zoom = params[:zoomlevel].present? ? params[:zoomlevel].to_i : 14
     custom_latng = [params[:latitude].to_f, params[:longitude].to_f]
     distance = redo_search_distance(0.5)
     buildings = near(custom_latng, distance, units: :km, order: "")

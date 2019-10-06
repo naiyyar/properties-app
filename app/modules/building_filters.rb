@@ -120,7 +120,7 @@ module BuildingFilters
     amenities = filter_params[:amenities]
     min_price = filter_params[:min_price]
     max_price = filter_params[:max_price]
-    buildings = buildings_with_active_listings(buildings)
+    buildings = buildings_with_active_listings(buildings) if filtered_by_listings?(filter_params)
     buildings = filter_by_amenities(buildings, amenities) if amenities.present?
     #buildings = filter_by_rates(buildings, rating) if rating.present?
     buildings = filter_by_prices(buildings, price) if price.present? and min_price.blank?
@@ -129,5 +129,9 @@ module BuildingFilters
     buildings = filter_by_listing_prices(buildings, min_price, max_price) if min_price.present? and max_price.present?
     #buildings = filter_by_types(buildings, building_types) if building_types.present?
     return buildings
+  end
+
+  def filtered_by_listings? filter
+    filter[:listing_bedrooms].present?
   end
 end
