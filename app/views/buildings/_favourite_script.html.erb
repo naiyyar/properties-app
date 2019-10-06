@@ -100,6 +100,7 @@
 
     $(document).on('click', '.active-listing-link', function(e){
       e.preventDefault();
+      $('#remote-container').html('');
       showActiveListingsPopup($(this).data('buildingid'));
       return false;
     });
