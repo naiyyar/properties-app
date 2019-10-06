@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :allow_iframe_requests
   after_action :store_location, unless: :skip_store_location
   before_action :show_nb_counts, :popular_neighborhoods, if: :html_request?
-
+  before_action :set_view_type
+  
   def store_location
     # store last url as long as it isn't a /users path
     if request.format.html?
@@ -191,6 +192,12 @@ class ApplicationController < ActionController::Base
 
   def skip_store_location
     request.format.json? || request.format.js?
+  end
+  
+  def set_view_type
+    unless params[:filter].present? or params[:searched_by].present?
+      session[:view_type] = nil
+    end
   end
 
 end

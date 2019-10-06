@@ -10,7 +10,6 @@ class HomeController < ApplicationController
     @buildings_count = Building.all.count
     @meta_desc = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
                   no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
-    
     @tab_title_text = tab_title_tag
     
   end
@@ -151,6 +150,7 @@ class HomeController < ApplicationController
       @borough_city = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
       @searched_neighborhoods = "#{@search_string}"
       @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
+      @search_input_value = 'Custom' if params[:searched_by] == 'latlng'
       @meta_desc_text = "#{@search_string} #{@borough_city}"
       @tab_title_text = "#{@meta_desc_text} #{tab_title_tag}"
 

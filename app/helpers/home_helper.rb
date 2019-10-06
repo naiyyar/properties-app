@@ -256,8 +256,8 @@ module HomeHelper
 				else
 					"#{@building.street_address}"
 				end
-			elsif custom_search?
-				'Custom'
+			#elsif custom_search?
+			#	'Custom'
 			else
 				@search_input_value
 			end
