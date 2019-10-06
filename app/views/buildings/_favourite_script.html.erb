@@ -98,6 +98,12 @@
       });
     }
 
+    $(document).on('click', '.active-listing-link', function(e){
+      e.preventDefault();
+      showActiveListingsPopup($(this).data('buildingid'));
+      return false;
+    });
+
     function showActiveListingsPopup(building_id){
       $.ajax({
         url: '/listings/show_more',
