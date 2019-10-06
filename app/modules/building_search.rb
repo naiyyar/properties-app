@@ -58,19 +58,30 @@ module BuildingSearch
   end
 
   def redo_search_distance distance
-    if @zoom > 14
+    if @zoom >= 14
       distance = distance/(@zoom)
       case @zoom
+      when 14
+        distance += 1.5
       when 15
         distance += 0.8
       when 16
         distance += 0.5
       when 17
         distance += 0.2
-      when 18
-        distance += 0.1
       else
-        distance
+        distance += 0.1
+      end
+    else
+      case @zoom
+      when 13 
+        distance += 3
+      when 12
+        distance += 4
+      when 11
+        distance += (@zoom * 2)
+      else
+        distance += (@zoom * 2.5)
       end
     end
     distance
