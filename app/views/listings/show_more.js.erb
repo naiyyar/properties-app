@@ -4,7 +4,7 @@ var opened = true;
 	$('#showPastListing').modal('show');
 <%else%>
 	if(opened){
-		$('.past-listing-modal').slideDown(200);
+		$('.past-listing-modal').show();
 		opened = false;
 	}
 	$('.closeContact').click(function(e) {
