@@ -1,12 +1,13 @@
-$('#remote-container').html("<%= j render 'listings/show_more' %>")
+$('#remote-container').html("<%= j render 'listings/show_more' %>");
 
 <% unless browser.device.mobile? %>
 	$('#showPastListing').modal('show');
 <%else%>
-	$('.past-listing-modal').slideToggle(200);
+	$('.past-listing-modal').slideDown(200);
 	$('.closeContact').click(function(e) {
     e.stopPropagation();
-    $('.past-listing-modal').slideToggle(200);
+    //$('.past-listing-modal').slideToggle(200);
+    $('.past-listing-modal').slideUp(200);
   });
 <%end%>
 var lm_height = $(document).height();
