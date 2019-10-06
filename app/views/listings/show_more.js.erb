@@ -1,9 +1,12 @@
 $('#remote-container').html("<%= j render 'listings/show_more' %>");
-
+var opened = true;
 <% unless browser.device.mobile? %>
 	$('#showPastListing').modal('show');
 <%else%>
-	$('.past-listing-modal').slideDown(200);
+	if(opened){
+		$('.past-listing-modal').slideDown(200);
+		opened = false;
+	}
 	$('.closeContact').click(function(e) {
     e.stopPropagation();
     //$('.past-listing-modal').slideToggle(200);
