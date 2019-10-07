@@ -98,14 +98,15 @@
       });
     }
 
-    $(document).on('click', '.active-listing-link', function(e){
-      e.preventDefault();
-      $('#remote-container').html('');
-      showActiveListingsPopup($(this).data('buildingid'));
-      return false;
-    });
+    // $(document).on('click', '.active-listing-link', function(e){
+    //   e.preventDefault();
+    //   $('#remote-container').html('');
+    //   showActiveListingsPopup($(this).data('buildingid'));
+    //   return false;
+    // });
 
     function showActiveListingsPopup(building_id){
+      $('#remote-container').html('');
       $.ajax({
         url: '/listings/show_more',
         type: 'get',

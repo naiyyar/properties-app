@@ -2,10 +2,10 @@ $('#remote-container').html("<%= j render 'contacts/contact_building_modal' %>")
 <% unless browser.device.mobile? %>
 	$('#newConactModal').modal('show');
 <%else%>
-	$('.lease-contact-modal').slideToggle(200);
+	$('.lease-contact-modal').show();
 	$('.closeContact').click(function(e) {
     e.stopPropagation();
-    $('.lease-contact-modal').slideToggle(200);
+    $('.lease-contact-modal').slideUp(200);
   });
 <%end%>
 var lm_height = $(document).height();

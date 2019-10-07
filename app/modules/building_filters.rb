@@ -47,7 +47,7 @@ module BuildingFilters
   end
 
   def filter_by_listing_beds buildings, beds
-    buildings.with_listings_bed(beds) if buildings.present?
+    buildings.with_listings_bed(beds).distinct if buildings.present?
     #buildings.where(id: filtered_buildings.map(&:id).uniq).uniq rescue nil
   end
 
@@ -57,7 +57,7 @@ module BuildingFilters
       #when listing have price more than 15500
       #assuming listing max price can be upto 30000
       max_price = max_price.to_i == 15500 ? 30000 : max_price
-      buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i).uniq
+      buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i).distinct
     end
   end
 
@@ -132,6 +132,6 @@ module BuildingFilters
   end
 
   def filtered_by_listings? filter
-    filter[:listing_bedrooms].present?
+    filter[:listing_bedrooms].present? || filter[:max_price].present?
   end
 end
