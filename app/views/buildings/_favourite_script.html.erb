@@ -98,23 +98,25 @@
       });
     }
 
-    // $(document).on('click', '.active-listing-link', function(e){
-    //   e.preventDefault();
-    //   $('#remote-container').html('');
-    //   showActiveListingsPopup($(this).data('buildingid'));
-    //   return false;
-    // });
-
     function showActiveListingsPopup(building_id){
       $('#remote-container').html('');
+      displayLoader();
       $.ajax({
         url: '/listings/show_more',
         type: 'get',
         dataType: 'script',
         data: { building_id: building_id, listing_type: 'active' },
         success: function(response){
-          //console.log('showActiveListingsPopup')
+          hideLoader();
         }
       });
+    }
+
+    function displayLoader(){
+      $('#apt-ajax-loader').show();
+    }
+
+    function hideLoader(){
+      $('#apt-ajax-loader').hide();
     }
 </script>

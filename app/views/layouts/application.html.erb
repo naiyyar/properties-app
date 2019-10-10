@@ -31,6 +31,7 @@
     <% unless params[:controller] == 'home' and params[:action] == 'index'%>
       <%= render partial: 'layouts/shared/header' %>
       <%= render partial: 'layouts/shared/filters' %>
+      <div id="apt-ajax-loader" style='display: none;'><span class="fa fa-spin fa-3x fa-spinner"></span></div>
       <div class="closeLeftSide"></div>
       <div id="wrapper" class="<%=contribute_wrapper(params)%>">
         <%= render partial: 'layouts/shared/filter_buttons' %>

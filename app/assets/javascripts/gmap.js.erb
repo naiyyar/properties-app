@@ -71,7 +71,7 @@ function bindElemToMarker(elem, marker, object, map){
     map.setZoom(16);
     map.panTo(new google.maps.LatLng(object.latitude,object.longitude));
   }).on('mouseout', function(){
-    map.setZoom(zoom);
+    //map.setZoom(zoom);
     marker.setIcon(markerIcon(price, 'red'));
   });
 };

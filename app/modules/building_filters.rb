@@ -20,14 +20,14 @@ module BuildingFilters
 
   def filter_by_prices buildings, price
     if price.present? and !price.include?('on')
-      buildings = buildings.where(price: price) if buildings.exists?
+      buildings = buildings.where(price: price) if buildings.present?
     else
       buildings = buildings
     end
   end
 
   def filter_by_beds buildings, beds
-    if buildings.exists?
+    if buildings.present?
       @buildings = []
       beds.each do |num|
         if num == '0'

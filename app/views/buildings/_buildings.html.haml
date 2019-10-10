@@ -12,7 +12,7 @@
                 PROPERTY(#{@buildings.count})
               %th ADDRESS
               %th{width: "8%"} Creation date
-              %th{width: "12%"} RATING
+              %th{width: "12%"} Management
               %th Reviews
               %th Website
               %th Docs
@@ -21,7 +21,7 @@
               %th
           %tbody.table
             - buildings.each do |building|
-              - cache building do
+              - cache(building) do
                 %tr
                   %td
                     %span.propName
@@ -40,7 +40,8 @@
                     = building.zipcode
                   %td= building.created_at.strftime("%Y-%m-%d")
                   %td.star-sm
-                    = rating_for building, "building", disabled_after_rate: true, readonly: true
+                    =link_to building.management_company.name, no_fee_company_path(id: building.management_company), class: 'hyper-link'
+                    / = rating_for building, "building", disabled_after_rate: true, readonly: true
                   %td= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id)
                   %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
                   %td= building.uploads.where('document_file_name is not null').count
