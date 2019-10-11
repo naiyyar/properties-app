@@ -1,20 +1,21 @@
-.card.search-view-card{'data-bid' => building.id, 'data-url' => building_path(building)}
-  - unless @similar_properties.present?
-    .figure{style: "position: relative;", id: "figure#{building.id}"}
-      = image_tag 'shimmer.gif', width: '100%'
-  - else
-    .figure{style: "position: relative;height: 165px;"}
-      - bg_img_url = @last_uploads.present? ? @last_uploads.uploaded_img_url : image_url('no-photo.png')
-      .bg-size-cover{ style: "background-image: url(#{bg_img_url});" }
-  
-  = link_to 'javascript:;' do
+.card.search-view-card{'data-bid' => building.id}
+  - @show_path = building_path(building)
+  = link_to @show_path do
+    - unless @similar_properties.present?
+      .figure{style: "position: relative;", id: "figure#{building.id}"}
+        = image_tag 'shimmer.gif', width: '100%'
+    - else
+      .figure{style: "position: relative;height: 165px;"}
+        - bg_img_url = @last_uploads.present? ? @last_uploads.uploaded_img_url : image_url('no-photo.png')
+        .bg-size-cover{ style: "background-image: url(#{bg_img_url});" }
+    
     - if building.price.present? or building.bedroom_types?
       - if @min_saved_amount.present?
         .saving-badge.split-view-badge
           %p Save
           %p= "#{number_to_currency(@min_saved_amount, precision: 0)}+"
-  
-  = link_to 'javascript:;', class: 'dt-card-link' do
+    
+    / = link_to 'javascript:;', class: 'dt-card-link' do
     - unless @similar_properties.present?
       .building-detail-card{id: "building_details#{building.id}"}
     - else
@@ -23,11 +24,12 @@
         .cardAddress
           %span.fa.fa-map-marker
           = building.full_street_address
+    
+    %div{style: "float: right;margin-top: -43px;"}
+      = render 'buildings/favourite', building: building
   
-  %div{style: "float: right;margin-top: -43px;"}
-    = render 'buildings/favourite', building: building
-  
-  = render 'home/building_detail', building: building
+  = link_to @show_path do
+    = render 'home/building_detail', building: building
   
   = render 'contacts/buttons', building: building, size_class: ''
 

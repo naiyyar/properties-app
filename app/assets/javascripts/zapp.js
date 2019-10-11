@@ -245,33 +245,33 @@
         })
     }
 
-    var card_opening_target = '_self'
+    // var card_opening_target = '_self'
 
-    $(document).on('keydown', function(e) {
-        if(e.metaKey && e.keyCode == 91){
-            card_opening_target = '_blank'
-        }
-    });  
+    // $(document).on('keydown', function(e) {
+    //     if(e.metaKey && e.keyCode == 91){
+    //         card_opening_target = '_blank'
+    //     }
+    // });  
 
-    $(document).on('click', '.card.search-view-card', function(e){
-        var target_elem = e.target;
+    // $(document).on('click', '.card.search-view-card', function(e){
+    //     var target_elem = e.target;
         
-        var open_window = true;
-        if(target_elem.innerText == 'Contact Leasing' || target_elem.innerText == 'Check Availability'){
-            open_window = false;
-        }else if(target_elem.parentElement.classList[0] == 'favourite' || target_elem.classList[0] == 'active-listing-link'){
-            open_window = false;
-        }
+    //     var open_window = true;
+    //     if(target_elem.innerText == 'Contact Leasing' || target_elem.innerText == 'Check Availability'){
+    //         open_window = false;
+    //     }else if(target_elem.parentElement.classList[0] == 'favourite' || target_elem.classList[0] == 'active-listing-link'){
+    //         open_window = false;
+    //     }
         
-        if(open_window){
-            if(target_elem.classList[1] == 'nb-link'){
-                return true;
-            }
-            else{
-                window.open($(this).data('url'), card_opening_target);
-            }
-        }
-    })
+    //     if(open_window){
+    //         if(target_elem.classList[1] == 'nb-link'){
+    //             return true;
+    //         }
+    //         else{
+    //             window.open($(this).data('url'), card_opening_target);
+    //         }
+    //     }
+    // })
 
     // Expand left side sub navigation menus
     $(document).on("click", '.hasSubActive', function() {

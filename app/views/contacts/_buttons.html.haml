@@ -1,19 +1,25 @@
 - active_listings = building.listings.active
 .contact-links
 	%div.left-section{style: "padding: #{size_class.present? ? '2px 3px 2px 6px;' : '6px 8px 8px 11px;'}"}
-		%div.pb-8
-			= "<span> #{building.prices} | </span>".html_safe if building.prices.present?
-			%span=building.show_bed_ranges.join(', ') 
-			= 'Bed' if building.bedroom_types?
+		= link_to @show_path, style: 'color: #333' do
+			%div.pb-8
+				= "<span> #{building.prices} | </span>".html_safe if building.prices.present?
+				%span=building.show_bed_ranges.join(', ') 
+				= 'Bed' if building.bedroom_types?
 		- unless building.has_active_email?
 			%div.pb-8
-				=link_to "#{active_listings.count} Active Listings", 'javascript:;', class: 'active-listing-link hyper-link font-xs', onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?
+				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'active-listing-link hyper-link font-xs', onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?
+		
 		= check_availability_link(building, size_class)
 
 	%div.right-section{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}", class: "#{'hidden' unless building.has_active_email?}" }
 		- unless params[:action] == 'show' and params[:controller] == 'buildings'
-			%p.font-xs.pb-8
-				=link_to "#{active_listings.count} Active Listings", 'javascript:;', class: 'active-listing-link hyper-link',onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?
+			- if active_listings.blank?
+				= link_to @show_path, style: 'color: #333' do
+					%p.font-xs.pb-8
+			- else
+				%p.font-xs.pb-8
+					=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'active-listing-link hyper-link', onclick: "showActiveListingsPopup(#{building.id})" 
     
 		- if building.has_active_email?
 			.btn.btn-primary.btn-o{class: "#{size_class}", onclick: "showLeasingContactPopup(#{building.id})", style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}"}

@@ -88,12 +88,13 @@
     });
 
     function showLeasingContactPopup(building_id){
+      displayLoader();
       $.ajax({
         url: '/contacts/new?building_id='+building_id,
         type: 'get',
         dataType: 'script',
         success: function(response){
-          //console.log('showLeasingContactPopup')
+          hideLoader();
         }
       });
     }
