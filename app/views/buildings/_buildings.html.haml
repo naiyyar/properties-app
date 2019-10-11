@@ -40,7 +40,7 @@
                     = building.zipcode
                   %td= building.created_at.strftime("%Y-%m-%d")
                   %td.star-sm
-                    =link_to building.management_company.name, no_fee_company_path(id: building.management_company), class: 'hyper-link'
+                    =link_to building.management_company.name, no_fee_company_path(id: building.management_company), class: 'hyper-link' if building.management_company.present?
                     / = rating_for building, "building", disabled_after_rate: true, readonly: true
                   %td= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id)
                   %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
