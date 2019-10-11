@@ -46,10 +46,12 @@ class HomeController < ApplicationController
     building = Building.find(params[:building_id])
     photos = Upload.cached_building_photos([params[:building_id]])
     image_uploads = photos.present? ? photos.where(imageable_type: 'Building') : []
-    render json: { html: render_to_string(:partial => "/home/lightslider", 
+    show_path = building_path(building)
+    render json: { html: render_to_string(:partial => '/home/lightslider', 
                                           :locals => {  building: building,
                                                         images_count: image_uploads.length,
-                                                        first_image: image_uploads[0]
+                                                        first_image: image_uploads[0],
+                                                        show_path: show_path
                                                       })
                   }
   end

@@ -1,23 +1,23 @@
 - if images_count > 0
   .item
     .clearfix{ style: "width:100%;" }
-      = link_to building_path(building), style: 'cursor: pointer;' do
+      = link_to show_path, style: 'cursor: pointer;' do
         - if @similar_properties.present? or building.featured?
           %h4.comp.featured Featured
         %h4.lightslider-slides-counts
           %span.current 1
           %span.total="/ #{images_count}"
 
-      %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'split', path:  building_path(building) } }
+      %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'split', path:  show_path } }
         %li
-          = link_to building_path(building), style: 'cursor: pointer;' do
+          = link_to show_path, style: 'cursor: pointer;' do
             .bg-size-cover{ style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: "#{first_image.id}" } }
 
         - if images_count > 1
           - 1.upto(images_count-1) do |count|
             %li{data: { listindex: "#{count}" } }
 - else
-  %a{ href: building_path(building), style: 'cursor: pointer;' }
+  %a{ href: show_path, style: 'cursor: pointer;' }
     - if @similar_properties.present? or building.featured?
       %h4.comp.featured Featured
     .bg-size-cover{style: "background-image: url(#{image_url('no-photo.png') })"}
