@@ -1,7 +1,9 @@
 - active_listings = building.listings.active
+- prices = false
 .contact-links
 	%div.left-section{style: "padding: #{size_class.present? ? '2px 3px 2px 6px;' : '6px 8px 8px 11px;'}"}
 		- if building.prices.present?
+			- prices = true
 			= link_to @show_path, style: 'color: #333' do
 				%div.pb-8
 					= "<span> #{building.prices} | </span>".html_safe
@@ -9,7 +11,7 @@
 					= 'Bed' if building.bedroom_types?
 		- unless building.has_active_email?
 			%div.pb-8
-				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'active-listing-link hyper-link font-xs', onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?
+				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: "active-listing-link hyper-link font-xs #{!prices ? 'ml' : ''}", onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?
 		
 		= check_availability_link(building, size_class)
 
