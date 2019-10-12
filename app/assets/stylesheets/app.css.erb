@@ -5381,6 +5381,10 @@ select.custom-arrow {
         -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
         height: 500px;
+        -webkit-overflow-scrolling: touch;
+        -webkit-transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000;
     }
     #mapView.min, #mapView.mob-min {
         width: 0%;
