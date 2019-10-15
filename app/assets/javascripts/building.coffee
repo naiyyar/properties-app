@@ -14,3 +14,9 @@ $(document).on 'click', '.apple-switch.building', (e) ->
 		data: { building: params }
 		success: (response) ->
 			console.log(response)
+
+$(document).on 'change', '.b-nb-dropdown', ->
+	if $(this).val() != ''
+		$('#selected_manually').val('manually')
+	else
+		$('#selected_manually').val('')

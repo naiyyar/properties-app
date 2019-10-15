@@ -27,7 +27,8 @@ class ManagementCompaniesController < ApplicationController
   def show
     @show_map_btn = @half_footer = true
     buildings = @management_company.company_buildings.includes(:uploads, :building_average)
-    final_results = Building.with_featured_building(buildings, params[:page])
+    page_num = params[:page].present? ? params[:page].to_i : 1
+    final_results = Building.with_featured_building(buildings, page_num)
     @manage_buildings = final_results[1] if !params[:object_id].present?
     @all_buildings = final_results[0][:all_buildings]
     @recommended_percent = @management_company.recommended_percent(buildings)

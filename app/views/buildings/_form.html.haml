@@ -27,6 +27,28 @@
                 .form-group
                   %label Zip*
                   = f.text_field :zipcode, class: 'form-control validate', readonly: disabled(current_user, f.object.zipcode)
+            
+            - if current_user and current_user.has_role?(:admin) and !@building.new_record?
+              .row
+                .col-xs-12.col-sm-12.col-md-4.col-lg-4
+                  .form-group
+                    %label Neighborhood1
+                    .pull-right
+                    = f.select :neighborhood, options_for_select(@neighborhood_options, f.object.neighborhood), { prompt: 'Select Neighborhood' }, { class: 'form-control custom-arrow b-nb-dropdown' }
+
+                .col-xs-12.col-sm-12.col-md-4.col-lg-4
+                  .form-group
+                    %label Neighborhood2
+                    .pull-right
+                    = f.select :neighborhoods_parent, options_for_select(@parent_neighborhood_options, f.object.neighborhoods_parent), { prompt: 'Select Neighborhood' }, { class: 'form-control custom-arrow b-nb-dropdown' }
+
+                .col-xs-12.col-sm-12.col-md-4.col-lg-4
+                  .form-group
+                    %label Neighborhood3
+                    .pull-right
+                    = f.select :neighborhood3, options_for_select(@grand_parent_neighborhood_options, f.object.neighborhood3), { prompt: 'Select Neighborhood' }, { class: 'form-control custom-arrow b-nb-dropdown' }
+                    = hidden_field_tag :selected_manually
+
             - if current_user and current_user.has_role? :admin
               .row
                 .col-xs-12.col-sm-12.col-md-12.col-lg-12

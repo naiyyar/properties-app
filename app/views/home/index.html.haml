@@ -1,7 +1,8 @@
 - content_for :page_title do
   = @tab_title_text if @tab_title_text.present?
 #hero-container
-  = render 'layouts/home/slider'
+  - cache('slider_home') do
+    = render 'layouts/home/slider'
   = render 'layouts/home/header'
   .search-panel
     .text-center.home-about-nyc-apt
@@ -10,8 +11,8 @@
     .home-search-form
       = render partial: 'home/search_form'
 
-/ - cache(['apt_popular_neighborhoods', @buildings_count]) do
-= render 'layouts/home/popular_neighborhoods'
+- cache(['apt_popular_neighborhoods', @buildings_count, Date.today]) do
+  = render 'layouts/home/popular_neighborhoods'
 
 = render 'layouts/home/popular_searches'
 
