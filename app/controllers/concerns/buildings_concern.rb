@@ -1,4 +1,4 @@
-module SaveBuildingNeighborhood
+module BuildingsConcern
   extend ActiveSupport::Concern
 
   def show
