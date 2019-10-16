@@ -74,6 +74,7 @@ class Listing < ApplicationRecord
           listing[:rent_stabilize] = row['rent_stabilize'].to_s
           listing[:date_available] = row['date_available']
           if listing.save
+            listing.update_rent
           else
             listing.errors.full_messages.each do |message|
               errors << "Issue line #{i}, column #{message}."
@@ -105,7 +106,7 @@ class Listing < ApplicationRecord
 
   def update_rent
     property = self.building
-    listings = Listing.where(building_id: property.id).active.order(rent: :asc)
+    listings = property.listings.active.order(rent: :asc)
     if listings.present?
       property.update(min_listing_price: listings.first.rent)
       property.update(max_listing_price: listings.last.rent)

@@ -34,6 +34,7 @@ class ListingsController < ApplicationController
     #@listings.destroy_all
     @listings.each do |listing|
       listing.destroy
+      listing.update_rent
     end
     redirect_to :back
   end
