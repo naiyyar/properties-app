@@ -5,7 +5,7 @@ class BuildingsController < ApplicationController
   before_action :save_as_favourite, only: [:show]
   before_action :clear_cache, only: [:favorite, :unfavorite]
   after_action :get_neighborhood, only: [:create, :update] #method in SaveBuildingNeighborhood
-  include BuildingsConcern #on create, update
+  include BuildingsConcern #create, update
 
   def index
     @filterrific = initialize_filterrific(
@@ -95,7 +95,9 @@ class BuildingsController < ApplicationController
   end
 
   def edit
-    
+    @neighborhood_options = Building.select('neighborhood').where.not(neighborhood: [nil, '']).order(neighborhood: :asc).distinct.pluck(:neighborhood)
+    @parent_neighborhood_options = Building.select('neighborhoods_parent').where.not(neighborhoods_parent: [nil, '']).order(neighborhoods_parent: :asc).distinct.pluck(:neighborhoods_parent)
+    @grand_parent_neighborhood_options = Building.select('neighborhood3').where.not(neighborhood3: [nil, '']).order(neighborhood3: :asc).distinct.pluck(:neighborhood3)
   end
 
   def update

@@ -105,14 +105,13 @@ class Listing < ApplicationRecord
   end
 
   def update_rent
-    property = self.building
-    listings = property.listings.active.order(rent: :asc)
+    listings = building.listings.active.order(rent: :asc)
     if listings.present?
-      property.update(min_listing_price: listings.first.rent)
-      property.update(max_listing_price: listings.last.rent)
+      building.update(min_listing_price: listings.first.rent)
+      building.update(max_listing_price: listings.last.rent)
     else
-      property.update(min_listing_price: nil)
-      property.update(max_listing_price: nil)
+      building.update(min_listing_price: nil)
+      building.update(max_listing_price: nil)
     end
   end
   
