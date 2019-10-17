@@ -35,6 +35,8 @@
                       = building.first_neighborhood
                       = '-' if (building.parent_neighbors.present? and building.first_neighborhood.present? )
                       = "#{building.parent_neighbors}"
+                      = '-' if (building.parent_neighbors.present? and building.neighborhood3.present? )
+                      = "#{building.neighborhood3}"
                   %td
                     = building.street_address
                     = building.zipcode

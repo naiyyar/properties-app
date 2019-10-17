@@ -162,9 +162,9 @@ module BuildingsConcern
     @building.neighborhood = hood if predifined_neighborhoods.include?(hood)
     building_with_nb3 = Building.select(:neighborhood, :neighborhoods_parent, :neighborhood3)
                                 .where(neighborhood: @building.neighborhood)
-                                .where.not(neighborhoods_parent: nil, neighborhood3: nil).first
+                                .where.not(neighborhoods_parent: [nil], neighborhood3: [nil]).first
     if building_with_nb3.present?
-      @building.update(neighborhoods_parent: building_with_nb3.first.neighborhoods_parent, neighborhood3: building_with_nb3.first.neighborhood3)
+      @building.update(neighborhoods_parent: building_with_nb3.neighborhoods_parent, neighborhood3: building_with_nb3.neighborhood3)
     else
       @building.neighborhoods_parent = hood if parent_neighborhoods.include?(hood)
       @building.neighborhood3 = hood if level3_neighborhoods.include?(hood)

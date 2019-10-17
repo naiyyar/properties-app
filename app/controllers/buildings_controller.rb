@@ -16,7 +16,7 @@ class BuildingsController < ApplicationController
       # },
       available_filters: [:search_query]
     ) or return
-    @buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:building_average).reorder('created_at desc') #.sorted_by(params[:sorted_by])
+    @buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:building_average, :management_company).reorder('created_at desc') #.sorted_by(params[:sorted_by])
 
     respond_to do |format|
       format.html
