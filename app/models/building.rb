@@ -74,7 +74,7 @@ class Building < ApplicationRecord
   ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
 
   validates :building_street_address, presence: true
-  validates_uniqueness_of :building_street_address, scope: [:zipcode]
+  validates_uniqueness_of :building_street_address, scope: [:zipcode], on: :create
 
   #From some buildings when submitting reviews getting
   #Error: undefined method `address=' for #<Building
