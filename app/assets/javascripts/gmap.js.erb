@@ -5,11 +5,7 @@ function loadMarkerWindow(building_id, map, marker){
     current_user_id: current_user_id,
   }, function(data){
     infobox.setContent(data.html);
-    //infowindow.open(handler.getMap(), google.maps.markers[index]);
-    //infobox.setPosition(latlng);
-    //if (!infobox.isOpen()) {
-      infobox.open(map, marker);
-    //}
+    infobox.open(map, marker);
   });
 }
 
@@ -71,7 +67,6 @@ function bindElemToMarker(elem, marker, object, map){
     map.setZoom(16);
     map.panTo(new google.maps.LatLng(object.latitude,object.longitude));
   }).on('mouseout', function(){
-    //map.setZoom(zoom);
     marker.setIcon(markerIcon(price, 'red'));
   });
 };
@@ -79,7 +74,6 @@ function bindElemToMarker(elem, marker, object, map){
 function createSidebar(object, marker, map, zoom){
   var elem = $( createSidebarElem(object) );
   $('#building_details'+object.id).html(elem)
-  //elem.appendTo('#building_details'+object.id);
   bindElemToMarker(elem, marker, object, map, zoom);
 };
 
@@ -89,7 +83,6 @@ function markerIconBlue(){
 
 function markerIcon(price, type='red'){
   var path = '';
-  //console.log(price)
   if(price == 0){
     if(type == 'red'){
       path = "<%=asset_path('markers/red_pin_p0.png')%>";

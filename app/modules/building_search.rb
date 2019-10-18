@@ -158,8 +158,6 @@ module BuildingSearch
   end
 
   def buildings_in_city search_term
-    #search_by_city(search_term) => Getting PG::InvalidColumnReference: ERROR: for SELECT DISTINCT, ORDER BY expressions must appear in select list
-
     if search_term == 'New York'
       where(city: CITIES)
     else

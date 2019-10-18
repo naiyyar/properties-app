@@ -20,3 +20,15 @@ $(document).on 'change', '.b-nb-dropdown', ->
 		$('#selected_manually').val('manually')
 	else
 		$('#selected_manually').val('')
+
+#
+
+$(document).on 'click', '.apple-switch.company', (e) ->
+	params = { active_web:  $(this).is(':checked') }
+	$.ajax
+		url: '/management_companies/'+$(this).data('companyid')+'/set_availability_link'
+		dataType: 'json'
+		type: 'get'
+		data: params
+		success: (response) ->
+			console.log(response)

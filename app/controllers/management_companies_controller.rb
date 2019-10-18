@@ -1,6 +1,6 @@
 class ManagementCompaniesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_management_company, only: [:show, :edit, :update, :destroy, :managed_buildings]
+  before_action :set_management_company, only: [:show, :edit, :update, :destroy, :managed_buildings, :set_availability_link]
   before_action :save_as_favourite, only: [:show]
   # GET /management_companies_url
   # GET /management_companies.json
@@ -10,6 +10,11 @@ class ManagementCompaniesController < ApplicationController
 
   def managed_buildings
     @buildings = @management_company.company_buildings
+  end
+
+  def set_availability_link
+    debugger
+    @management_company.company_buildings.update_all(active_web: params[:active_web])
   end
 
   def load_more_reviews

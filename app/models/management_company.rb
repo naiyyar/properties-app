@@ -40,6 +40,10 @@ class ManagementCompany < ApplicationRecord
   	company_buildings.count
   end
 
+  def active_email_buildings?
+  	company_buildings.where('active_web is true and web_url is not null').present?
+  end
+
   def cached_buildings
   	Rails.cache.fetch([self, 'company_buildings']) { company_buildings }
   end
@@ -67,11 +71,6 @@ class ManagementCompany < ApplicationRecord
 	def get_average_stars managed_buildings, review_count
   	@total_rates = 0
     star_counts = []
-
-    # @total_rates = RatingCache.where(cacheable_id: buildings.pluck(:id))
-    #                           .joins('LEFT JOIN buildings on rating_caches.cacheable_id = buildings.id')
-    #                           .where(dimension: 'building')
-    #                           .where.not(avg: [nil, 'NaN']).sum(:avg)
     rateables = Rate.where(rateable_id: buildings.pluck(:id), rateable_type: 'Building', dimension: 'building')
     @total_rates = rateables.where('stars > ?', 0).sum(:stars)
 

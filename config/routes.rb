@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   resources :management_companies, except: [:show] do
     member do
       get :managed_buildings
+      get :set_availability_link
     end
   end
 
