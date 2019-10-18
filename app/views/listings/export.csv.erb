@@ -1,0 +1,28 @@
+<%= CSV.generate({:force_quotes => true, :col_sep => ","}) do |csv|
+  
+ csv << ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free','Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood','Parent Neighborhood','Property Manager','Active','Amenity']
+
+  
+  csv << []
+
+  @listings.each do |listing|
+		building = listing.building
+    csv << [  listing.date_active,
+							listing.building_address,
+							listing.unit,
+							listing.rent,
+							listing.bed,
+							listing.bath,
+							listing.free_months,
+							listing.owner_paid,
+							listing.rent_stabilize,
+							building.zipcode,
+							building.range_price,
+							building.neighborhood,
+							building.neighborhoods_parent,
+							building.management_company&.name,
+							listing.active, 
+							building.amenities]
+  end
+  
+end .html_safe %>

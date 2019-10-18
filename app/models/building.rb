@@ -235,6 +235,27 @@ class Building < ApplicationRecord
     end
     beds
   end
+  
+  RANGE_PRICE = ['Studio', '$', '$$', '$$$', '$$$$']
+  def range_price
+    prices = []
+    bedroom_ranges.map{|range| prices << RANGE_PRICE[range.to_i]}
+    prices.join(',')
+  end
+
+  def amenities
+    amenities = []
+    ApplicationController.helpers.building_amenities.each_pair do |k, v|
+      if self[k].present?
+        if v == 'Elevator'
+         amenities << "#{v}(#{elevator})"
+        else
+          amenities << v
+        end
+      end
+    end
+    amenities.join(',')
+  end
 
   def rent_median_prices(rent_medians)
     rent_medians.where(range: price, bed_type: bedroom_ranges).order(price: :asc)

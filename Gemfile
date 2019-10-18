@@ -12,6 +12,7 @@ gem 'rails', '~> 5.0.7'
 #gem 'activesupport-json_encoder'
 gem 'american_date'
 gem 'aws-sdk', '~> 2.3'
+gem 'axlsx_rails'
 
 #B
 gem 'bootstrap-datepicker-rails'

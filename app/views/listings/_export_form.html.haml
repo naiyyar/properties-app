@@ -1,0 +1,35 @@
+#exportListings.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "contirbuteMoreLabel", role: "dialog"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          %span{"aria-hidden" => "true"} ×
+      
+      .modal-body.no-padding
+        = form_tag export_path, class: 'form-horizontal' do
+          %fieldset
+            .row
+              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                %label Date From
+                = text_field_tag :date_from, Date.today,  class: 'form-control datepicker validate', :autocomplete => :off
+
+              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                %label Date To
+                = text_field_tag :date_to, nil, class: 'form-control datepicker', :autocomplete => :off
+            %br
+            .row{style: "margin: 0px;"}
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                %label File Formats
+            
+              - ['xlsx', 'csv'].each do |file_format|
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  .radio.custom-radio
+                    %label
+                      = radio_button_tag :format, file_format, file_format == 'xlsx'
+                      %span.fa.fa-circle
+                      = ".#{file_format}"
+                
+          
+          %footer
+            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
+            = submit_tag 'Export', class: 'btn btn-blue', controller: 'listings', action: 'export'

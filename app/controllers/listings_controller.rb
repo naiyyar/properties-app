@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-  load_and_authorize_resource only: :index
+  load_and_authorize_resource only: [:index, :export]
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :find_listings, only: [:change_status, :delete_all]
   after_action :update_building_rent, only:[:create, :update, :destroy]
@@ -47,6 +47,25 @@ class ListingsController < ApplicationController
       flash[:notice] = 'File Succesfully Imported.'
     end
     redirect_to :back
+  end
+
+  def export
+    @from_date = Date.parse(params[:date_from])
+    @to_date = params[:date_to].present? ? Date.parse(params[:date_to]) : (@from_date + 1.month)
+    @lisitngs = Listing.includes(:building).where('date_active >= ? AND date_active <= ?', @from_date, @to_date)
+    
+    case params[:format]
+      when "xls" then render xls: 'export'
+      when "xlsx" then render xlsx: 'export'
+      when "csv" then render csv: 'export'
+      else render action: "index"
+    end
+    
+    # respond_to do |format|
+    #   format.xls
+    #   format.xlsx
+    #   format.csv
+    # end
   end
 
   def show_more

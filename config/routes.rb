@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :listings do
     collection do
       post :import
+      get :export
+      post :export
       get :show_more
     end
   end
