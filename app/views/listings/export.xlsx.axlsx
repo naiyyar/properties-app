@@ -16,12 +16,13 @@ wb.add_worksheet(name: "listings") do |sheet|
 										listing.bath,
 										listing.free_months,
 										listing.owner_paid,
-										listing.rent_stabilize,
+										listing.rentstabilize,
 										building.zipcode,
 										building.range_price,
 										building.neighborhood,
 										building.neighborhoods_parent,
 										building.management_company&.name,
-										listing.active ? 'Yes' : 'No']
+										listing.active ? 'Yes' : 'No',
+										building.amenities]
   end
 end

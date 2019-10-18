@@ -60,12 +60,6 @@ class ListingsController < ApplicationController
       when "csv" then render csv: 'export'
       else render action: "index"
     end
-    
-    # respond_to do |format|
-    #   format.xls
-    #   format.xlsx
-    #   format.csv
-    # end
   end
 
   def show_more

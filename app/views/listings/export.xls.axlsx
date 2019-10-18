@@ -22,6 +22,7 @@ wb.add_worksheet(name: "listings") do |sheet|
 										building.neighborhood,
 										building.neighborhoods_parent,
 										building.management_company&.name,
-										listing.active, building.amenities]
+										listing.active, 
+										building.amenities]
   end
 end
