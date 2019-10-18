@@ -59,7 +59,7 @@
 class Building < ApplicationRecord
   include PgSearch
   include Imageable
-  include SaveBuildingNeighborhood
+  include SaveNeighborhood
 
   #Search and filtering methods
   extend BuildingSearch
@@ -171,7 +171,16 @@ class Building < ApplicationRecord
   #Listings bedrooms types
   scope :with_listings_bed, -> (beds) { where('listings.bed in (?)', beds) }
 
+  #callbacks
+  after_create :update_neighborhood_counts
+  after_update :update_neighborhood_counts, :if => Proc.new{ |obj| obj.continue_call_back? }
+  after_destroy :update_neighborhood_counts
+
   #Methods
+
+  def continue_call_back?
+    !(avg_rating_changed? && recommended_percent_changed? && min_listing_price_changed? && max_listing_price_changed?)
+  end
 
   def self.buildings_json_hash(searched_buildings)
     unless searched_buildings.class == Array
@@ -467,6 +476,16 @@ class Building < ApplicationRecord
 
   def active_web_url?
     web_url.present? and active_web
+  end
+
+  private
+  def update_neighborhood_counts
+    popular_neighborhoods.each do |hood|
+      if hood.buildings_count.to_i >= 0
+        hood.buildings_count = Building.buildings_in_neighborhood(hood.name, hood.boroughs).count
+        hood.save
+      end
+    end
   end
 
 end

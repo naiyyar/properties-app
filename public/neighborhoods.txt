@@ -22,25 +22,32 @@ Financial District
 East Harlem
 Central Harlem
 South Harlem
+Hamilton Heights
 Inwood
 Tribeca
 Manhattanville
 Marble Hill
 Washington Heights
 Fort George
+Hudson Heights
 West Harlem
 Carnegie Hill
 Lenox Hill
-Yorkville
+Rose Hill
+Bowery
 Lincoln Square
 Manhattan Valley
-Morningside Heights
+Harlem
 Hamilton Heights
-Manhattanville
+Inwood
 Marble Hill
 Washington Heights
 Fort George
 Hudson Heights
+Carnegie Hill
+Lenox Hill
+Yorkville
+Morningside Heights
 Bedford-Stuyvesant
 Williamsburg
 Bushwick
