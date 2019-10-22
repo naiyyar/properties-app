@@ -1,10 +1,10 @@
 wb = xlsx_package.workbook
 
 wb.add_worksheet(name: "listings") do |sheet|
-	header = wb.styles.add_style({:alignment => {:horizontal => :center, :vertical => :center, :wrap_text => true}, :border => { :style => :thin, :color => "000000" }})
+	header = wb.styles.add_style({:bg_color => "dd", :sz => 12, :alignment => {:horizontal => :center, :vertical => :center, :wrap_text => true}, :border => { :style => :thin, :color => "000000" }})
 	date_format = wb.styles.add_style :format_code => 'YYYY-MM-DD'
   
-  sheet.add_row ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free','Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood','Parent Neighborhood', 'Neighborhood3', 'Property Manager','Active','Amenities']
+  sheet.add_row ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free','Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood','Parent Neighborhood', 'Neighborhood3', 'Property Manager','Active','Amenities'], :style => [header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header]
   
   sheet.add_row
 	
