@@ -149,6 +149,8 @@ group :development do
   gem 'meta_request'
   gem 'rails-footnotes', '~> 4.0'
   gem 'lol_dba'
+  gem 'rubocop', '~> 0.75.1', require: false
+  gem "rubycritic", require: false
 end
 
 group :production do

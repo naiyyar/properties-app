@@ -20,6 +20,7 @@ Battery Park City
 Flatiron District 
 Financial District
 East Harlem
+West Harlem
 Central Harlem
 South Harlem
 Hamilton Heights
@@ -30,14 +31,12 @@ Marble Hill
 Washington Heights
 Fort George
 Hudson Heights
-West Harlem
 Carnegie Hill
 Lenox Hill
 Rose Hill
 Bowery
 Lincoln Square
 Manhattan Valley
-Harlem
 Hamilton Heights
 Inwood
 Marble Hill

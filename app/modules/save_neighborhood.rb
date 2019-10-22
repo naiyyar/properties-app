@@ -3,7 +3,7 @@ module SaveNeighborhood
     [ 'Midtown East','Midtown North',
       'Midtown South','Midtown West','Upper West Side',
       'Upper East Side','Lower East Side',
-      'Greenwich Village','Flatbush - Ditmas Park'
+      'Greenwich Village','Flatbush - Ditmas Park', 'Harlem'
     ]
   end
 
