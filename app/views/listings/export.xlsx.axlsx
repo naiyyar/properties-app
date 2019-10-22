@@ -5,12 +5,14 @@ wb.add_worksheet(name: "listings") do |sheet|
 	date_format = wb.styles.add_style :format_code => 'YYYY-MM-DD'
   
   sheet.add_row ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free','Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood','Parent Neighborhood', 'Neighborhood3', 'Property Manager','Active','Amenities'], :style => [header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header]
-  
-  sheet.add_row
 	
 	@listings.includes(:building => [:management_company]).each do |listing|
 		building = listing.building
 		amenities = building.amenities.split(',')
+    ranges = []
+    building.price_ranges.each_pair do |bed_range, price|
+    	ranges << set_ranges(building.price, price)
+    end
     sheet.add_row [ listing.date_active,
 										listing.building_address,
 										listing.unit,
@@ -21,7 +23,7 @@ wb.add_worksheet(name: "listings") do |sheet|
 										listing.owner_paid,
 										listing.rentstabilize,
 										building.zipcode,
-										building.range_price,
+										ranges.join(', '),
 										building.neighborhood,
 										building.neighborhoods_parent,
 										building.neighborhood3,

@@ -217,4 +217,14 @@ module BuildingsHelper
 		end
 	end
 
+	def set_ranges building_price, price
+		if building_price == 1
+      "#{number_to_currency(price.max_price, precision: 0)} <"
+    elsif building_price == 2 or building_price == 3
+      "#{number_to_currency(price.min_price, precision: 0)} - #{number_to_currency(price.max_price, precision: 0)}"
+    elsif building_price == 4
+      "#{number_to_currency(price.min_price, precision: 0)} +"
+    end
+	end
+
 end

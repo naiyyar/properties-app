@@ -236,11 +236,20 @@ class Building < ApplicationRecord
     beds
   end
   
-  RANGE_PRICE = ['Studio', '$', '$$', '$$$', '$$$$']
-  def range_price
-    prices = []
-    bedroom_ranges.map{|range| prices << RANGE_PRICE[range.to_i]}
-    prices.join(',')
+  # RANGE_PRICE = ['Studio', '$', '$$', '$$$', '$$$$']
+  # def range_price
+  #   prices = []
+  #   bedroom_ranges.map{|range| prices << RANGE_PRICE[range.to_i]}
+  #   prices.join(',')
+  # end
+
+  def price_ranges
+    ranges = {}
+    prices = Price.where(range: price)
+    bedroom_ranges.each do |bed_range|
+      ranges[bed_range] = prices.find_by(bed_type: bed_range)
+    end
+    ranges
   end
 
   def amenities
