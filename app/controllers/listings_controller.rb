@@ -52,7 +52,7 @@ class ListingsController < ApplicationController
   def export
     @from_date = Date.parse(params[:date_from])
     @to_date = params[:date_to].present? ? Date.parse(params[:date_to]) : (@from_date + 1.month)
-    @lisitngs = Listing.includes(:building).where('date_active >= ? AND date_active <= ?', @from_date, @to_date)
+    @listings = Listing.where('date_active >= ? AND date_active <= ?', @from_date, @to_date)
     
     case params[:format]
       when "xls" then render xls: 'export'
