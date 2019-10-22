@@ -100,7 +100,7 @@ class Building < ApplicationRecord
   scope :order_by_max_rent, -> { order('max_listing_price DESC NULLS LAST, listings_count DESC') }
   scope :order_by_min_price, -> { order({price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}) }
 
-  geocoded_by :street_address
+  geocoded_by :full_street_address
   after_validation :geocode
 
   reverse_geocoded_by :latitude, :longitude
