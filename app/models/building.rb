@@ -57,6 +57,7 @@
 #  active_email            :boolean
 
 class Building < ApplicationRecord
+  RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
   include PgSearch
   include Imageable
   include SaveNeighborhood
@@ -235,13 +236,6 @@ class Building < ApplicationRecord
     end
     beds
   end
-  
-  # RANGE_PRICE = ['Studio', '$', '$$', '$$$', '$$$$']
-  # def range_price
-  #   prices = []
-  #   bedroom_ranges.map{|range| prices << RANGE_PRICE[range.to_i]}
-  #   prices.join(',')
-  # end
 
   def price_ranges
     ranges = {}
@@ -462,18 +456,7 @@ class Building < ApplicationRecord
   end
 
   def prices
-    case price
-    when 1
-      '$'
-    when 2
-      '$$'
-    when 3
-      '$$$'
-    when 4
-      '$$$$'
-    else
-      ''
-    end
+    !price.nil? ? RANGE_PRICE[price] : ''
   end
 
   def bedroom_types?

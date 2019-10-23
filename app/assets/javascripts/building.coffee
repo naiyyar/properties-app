@@ -16,10 +16,7 @@ $(document).on 'click', '.apple-switch.building', (e) ->
 			console.log(response)
 
 $(document).on 'change', '.b-nb-dropdown', ->
-	if $(this).val() != ''
-		$('#selected_manually').val('manually')
-	else
-		$('#selected_manually').val('')
+	$('#selected_manually').val('manually')
 
 #
 

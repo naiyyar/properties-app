@@ -5,11 +5,6 @@
   @listings.each do |listing|
 		building = listing.building
 		amenities = building.amenities.split(',')
-		ranges = []
-    building.price_ranges.each_pair do |bed_range, price|
-    	ranges << set_ranges(building.price, price)
-    end
-    
     csv << [  listing.date_active,
 							listing.building_address,
 							listing.unit,
@@ -20,7 +15,7 @@
 							listing.owner_paid,
 							listing.rentstabilize,
 							building.zipcode,
-							ranges.join(', '),
+							building.prices,
 							building.neighborhood,
 							building.neighborhoods_parent,
 							building.neighborhood3,
