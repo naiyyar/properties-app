@@ -2,7 +2,7 @@
   
  csv << ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free','Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood','Parent Neighborhood','Property Manager','Active','Amenities']
 
-  @listings.each do |listing|
+  @listings.includes(:building => [:management_company]).each do |listing|
 		building = listing.building
 		amenities = building.amenities.split(',')
     csv << [  listing.date_active,

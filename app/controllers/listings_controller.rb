@@ -53,10 +53,10 @@ class ListingsController < ApplicationController
     @from_date = Date.parse(params[:date_from])
     @to_date = params[:date_to].present? ? Date.parse(params[:date_to]) : (@from_date + 1.month)
     @listings = Listing.where('date_active >= ? AND date_active <= ?', @from_date, @to_date)
-    
+    file_name = "Listings_#{params[:date_from]}_to_#{params[:date_to]}.#{params[:format]}"
     case params[:format]
       when "xls" then render xls: 'export'
-      when "xlsx" then render xlsx: 'export'
+      when "xlsx" then render xlsx: 'export', filename: file_name
       when "csv" then render csv: 'export'
       else render action: "index"
     end
