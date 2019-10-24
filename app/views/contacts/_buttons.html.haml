@@ -10,7 +10,7 @@
 					%span=building.show_bed_ranges.join(', ') 
 					= 'Bed' if building.bedroom_types?
 		- unless building.has_active_email?
-			%div.pb-8
+			%div.pb-8{class: !prices ? 'ml' : ''}
 				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: "active-listing-link hyper-link font-xs #{!prices ? 'ml' : ''}", onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?
 		
 		= check_availability_link(building, size_class)
