@@ -18,13 +18,13 @@ class ApplicationController < ActionController::Base
   def popular_neighborhoods
     @pop_nb_hash = {}
     if @show_nb_counts
-      @uptown_count = Neighborhood.cached_nb_buildings_count(view_context.uptown_sub_borough)
-      @brooklyn_count = Building.city_count('Brooklyn', view_context.brooklyn_sub_borough)
-      @queens_count = Building.city_count('Queens', view_context.queens_sub_borough)
-      @bronx_count = Building.city_count('Bronx')
-      Neighborhood.all.each do |nb|
-        @pop_nb_hash[nb.name] = nb.buildings_count
-      end
+      buildings = Building.select(:city, :neighborhood)
+      nbs = Neighborhood.select(:name, :buildings_count)
+      @uptown_count = Neighborhood.nb_buildings_count(nbs, view_context.uptown_sub_borough)
+      @brooklyn_count = Building.city_count(buildings, 'Brooklyn', view_context.brooklyn_sub_borough)
+      @queens_count = Building.city_count(buildings, 'Queens', view_context.queens_sub_borough)
+      @bronx_count = Building.city_count(buildings, 'Bronx')
+      nbs.each{ |nb| @pop_nb_hash[nb.name] = nb.buildings_count }
     end
   end
 

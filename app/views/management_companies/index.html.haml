@@ -22,6 +22,7 @@
               %th Availability
           
           %tbody.table
-            =render partial: 'management_company', collection: @management_companies, as: :company
+            =render partial: 'management_company', collection: @management_companies, as: :company, cache: true
               
 .text-center
+  = will_paginate @management_companies, renderer: BootstrapPagination::Rails

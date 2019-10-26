@@ -5,7 +5,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies_url
   # GET /management_companies.json
   def index
-    @management_companies = ManagementCompany.all
+    @management_companies = ManagementCompany.paginate(:page => params[:page], :per_page => 100)
   end
 
   def managed_buildings
@@ -13,7 +13,6 @@ class ManagementCompaniesController < ApplicationController
   end
 
   def set_availability_link
-    debugger
     @management_company.company_buildings.update_all(active_web: params[:active_web])
   end
 
@@ -57,7 +56,7 @@ class ManagementCompaniesController < ApplicationController
       @zoom = 13 #buildings.length > 70 ? 13 : 11
     end
     @photos = Upload.building_photos(@all_buildings.map(&:id))
-    @building_photos_count = @photos.count
+    @building_photos_count = @photos.size
     @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 
                   for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
                   Click to view #{@building_photos_count} photos and #{@total_reviews} reviews."

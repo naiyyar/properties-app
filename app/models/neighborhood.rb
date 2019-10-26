@@ -47,16 +47,12 @@ class Neighborhood < ApplicationRecord
     city.gsub('', '')
   end
 
-  def self.nb_buildings_count name
-    where(name: name).sum(:buildings_count)
+  def self.nb_buildings_count hoods, name
+    Rails.cache.fetch([self, name, 'hoods_count']) { hoods.where(name: name).sum(:buildings_count) }
   end
 
   def self.cached_nb_buildings_count name
-    Rails.cache.fetch([self, 'cached_nb_buildings_count', name]) { nb_buildings_count(name) }
+    nb_buildings_count(name)
   end
-
-  # def self.nb_borough(nb, area)
-  #   Rails.cache.fetch([self, nb]) { where(name: nb, boroughs: area.upcase) }
-  # end
 
 end

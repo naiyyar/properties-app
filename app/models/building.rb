@@ -209,12 +209,8 @@ class Building < ApplicationRecord
     featured_comps.active
   end
 
-  def self.city_count city, sub_boroughs = nil
-    if sub_boroughs.present?
-      Rails.cache.fetch([self, city, 'sub_boroughs']) { where('city = ? OR neighborhood in (?)', city, sub_boroughs).count }
-    else
-      Rails.cache.fetch([self, city]) { where(city: city).count }
-    end
+  def self.city_count buildings, city, sub_boroughs = nil
+    Rails.cache.fetch([self, city, 'buildings_count']) { buildings.where('city = ? OR neighborhood in (?)', city, sub_boroughs).size }
   end
 
   def suggested_percent

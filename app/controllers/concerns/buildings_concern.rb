@@ -12,7 +12,7 @@ module BuildingsConcern
     
     #building + units images
     @uploads = @building.chached_image_uploads
-    @uploaded_images_count = @uploads.count
+    @uploaded_images_count = @uploads.size
     @documents = @building.doc_uploads
     @reviews_count = @building.reviews_count.to_i
 
@@ -106,7 +106,7 @@ module BuildingsConcern
 
   private
   def get_neighborhood
-  	@building.get_and_save_neighborhood(params[:selected_manually])
+    @building.get_and_save_neighborhood(params[:selected_manually])
   end
 
 end

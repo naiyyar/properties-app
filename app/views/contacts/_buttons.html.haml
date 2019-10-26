@@ -9,6 +9,9 @@
 					= "<span> #{building.prices} | </span>".html_safe
 					%span=building.show_bed_ranges.join(', ') 
 					= 'Bed' if building.bedroom_types?
+		- elsif active_listings.blank?
+			%div.pb-8{class: !building.has_active_email? ? 'wmd' : 'wxl'}
+		
 		- unless building.has_active_email?
 			%div.pb-8{class: !prices ? 'ml' : ''}
 				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: "active-listing-link hyper-link font-xs #{!prices ? 'ml' : ''}", onclick: "showActiveListingsPopup(#{building.id})" if active_listings.present?

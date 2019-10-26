@@ -10,8 +10,8 @@ class HomeController < ApplicationController
     @buildings_count = Building.all.count
     @meta_desc = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
                   no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
-    @tab_title_text = tab_title_tag
     
+    @tab_title_text = tab_title_tag
   end
 
   def set_split_view_type
@@ -120,7 +120,7 @@ class HomeController < ApplicationController
     end
 
     @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
-    @neighborhood_links_count = @neighborhood_links.count
+    @neighborhood_links_count = @neighborhood_links.size
     unless params[:searched_by] == 'nyc'
       @meta_desc = "#{@meta_desc_text} has #{@buildings.length if @buildings.present?} "+ 
                    "no fee apartment, no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. "+ 
