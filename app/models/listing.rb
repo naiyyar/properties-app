@@ -16,7 +16,7 @@ class Listing < ApplicationRecord
                     building: [:building_name]
                   }
 
-  scope :default_listing_order, -> { order(date_active: :desc, management_company: :asc, building_address: :asc, unit: :asc) }
+  scope :default_listing_order, -> { reorder(date_active: :desc, management_company: :asc, building_address: :asc, unit: :asc) }
 
   validates_presence_of :building_address, :unit, :date_active
   validates :rent,        :numericality => true, :allow_nil => true
@@ -27,11 +27,8 @@ class Listing < ApplicationRecord
   validates_date :date_available, :on => :create, allow_nil: true, allow_blank: true, :message => 'Formatting is off, must be yyyy/mm/dd'
 	
 	filterrific(
-   default_filter_params: {default_listing_order: :default_listing_order},
-   available_filters: [
-      :default_listing_order,
-      :search_query
-    ]
+    default_filter_params: {default_listing_order: :default_listing_order},
+    available_filters: [:default_listing_order, :search_query]
   )
 
   after_save :create_unit, unless: :unit_exist?
