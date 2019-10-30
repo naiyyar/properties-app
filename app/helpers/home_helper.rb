@@ -15,13 +15,15 @@ module HomeHelper
 	def lower_manhattan_sub_borough
 		[
 			'Battery Park City',
+			'Bowery',
 			'East Village',
 			'Financial District',
-			'Greenwich Village',
-			'West Village',
 			'Lower East Side',
+			'Nolita',
 			'SoHo',
-			'Tribeca'
+			'Tribeca',
+			'Greenwich Village',
+			'West Village'
 		]
 	end
 
