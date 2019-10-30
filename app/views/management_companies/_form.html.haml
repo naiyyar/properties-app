@@ -14,6 +14,18 @@
                 .form-group
                   %label Property Website
                   = f.text_field :website, class: 'form-control'
+            - unless @management_company.new_record?
+              .row
+                .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                  .form-group
+                    %label Connected Buildings Website
+                    %input.apple-switch.sb-sm.company{type: 'checkbox', checked: @management_company.active_website_buildings?, style: 'margin: 0px 7px -5px;', data: { companyid: @management_company.id, fieldtype: 'website' } }
+                
+                .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                  .form-group
+                    %label Connected Buildings Email
+                    %input.apple-switch.sb-sm.company{type: 'checkbox', checked: @management_company.active_email_buildings?, style: 'margin: 0px 7px -5px;', data: { companyid: @management_company.id, fieldtype: 'email' } }
+
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group

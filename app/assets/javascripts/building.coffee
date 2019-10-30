@@ -21,9 +21,16 @@ $(document).on 'change', '.b-nb-dropdown', ->
 #
 
 $(document).on 'click', '.apple-switch.company', (e) ->
-	params = { active_web:  $(this).is(':checked') }
+	el = $(this)
+	field = el.data('fieldtype')
+	id = el.data('companyid');
+	if field == 'website'
+		params = { active_web:  $(this).is(':checked') }
+	else
+		params = { active_email:  $(this).is(':checked') }
+	
 	$.ajax
-		url: '/management_companies/'+$(this).data('companyid')+'/set_availability_link'
+		url: '/management_companies/'+id+'/set_availability_link'
 		dataType: 'json'
 		type: 'get'
 		data: params

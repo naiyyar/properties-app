@@ -13,7 +13,12 @@ class ManagementCompaniesController < ApplicationController
   end
 
   def set_availability_link
-    @management_company.company_buildings.update_all(active_web: params[:active_web])
+    buildings = @management_company.company_buildings
+    if params[:active_web].present?
+      buildings.update_all(active_web: params[:active_web])
+    else
+      buildings.update_all(active_email: params[:active_email])
+    end
   end
 
   def load_more_reviews

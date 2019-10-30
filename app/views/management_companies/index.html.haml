@@ -19,10 +19,11 @@
               %th Creation Date
               %th Edit
               %th Delete
-              %th Availability
+              %th{width: "10%"} Building Email
+              %th{width: "10%"} Building Website
           
           %tbody.table
-            =render partial: 'management_company', collection: @management_companies, as: :company, cache: true
+            =render partial: 'management_company', collection: @management_companies, as: :company, cache: false
               
 .text-center
   = will_paginate @management_companies, renderer: BootstrapPagination::Rails
