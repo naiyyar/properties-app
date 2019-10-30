@@ -1,6 +1,6 @@
 <%= CSV.generate({:force_quotes => true, :col_sep => ","}) do |csv|
   
- csv << ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free','Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood','Parent Neighborhood','Property Manager','Active','Amenities']
+ csv << Listing::HEADER_ROW
 
   @listings.includes(:building => [:management_company]).each do |listing|
 		building = listing.building
@@ -20,6 +20,9 @@
 							building.neighborhoods_parent,
 							building.neighborhood3,
 							building.management_company&.name,
+							building.floors,
+							building.no_of_units,
+							building.built_in,
 							listing.active ? 'Yes' : 'No',
 							amenities[0], 
 							amenities[1], 

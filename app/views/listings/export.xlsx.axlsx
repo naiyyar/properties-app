@@ -4,7 +4,7 @@ wb.add_worksheet(name: "listings") do |sheet|
 	header = wb.styles.add_style({:bg_color => "dd", :sz => 12, :alignment => {:horizontal => :center, :vertical => :center, :wrap_text => true}, :border => { :style => :thin, :color => "000000" }})
 	date_format = wb.styles.add_style :format_code => 'YYYY-MM-DD'
   
-  sheet.add_row ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free','Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood','Parent Neighborhood', 'Neighborhood3', 'Property Manager','Active','Amenities'], :style => [header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header]
+  sheet.add_row Listing::HEADER_ROW, :style => [header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header, header]
 	
 	@listings.includes(:building => [:management_company]).each do |listing|
 		building = listing.building
@@ -24,6 +24,9 @@ wb.add_worksheet(name: "listings") do |sheet|
 										building.neighborhoods_parent,
 										building.neighborhood3,
 										building.management_company&.name,
+										building.floors,
+										building.no_of_units,
+										building.built_in,
 										listing.active ? 'Yes' : 'No',
 										amenities[0], 
 										amenities[1], 
