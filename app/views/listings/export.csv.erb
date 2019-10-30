@@ -1,6 +1,6 @@
 <%= CSV.generate({:force_quotes => true, :col_sep => ","}) do |csv|
   
- csv << Listing::HEADER_ROW
+ csv << Listing::EXPORT_SHEET_HEADER_ROW
 
   @listings.includes(:building => [:management_company]).each do |listing|
 		building = listing.building

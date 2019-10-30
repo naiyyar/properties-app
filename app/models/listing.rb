@@ -2,7 +2,7 @@ class Listing < ApplicationRecord
 	include PgSearch
 	belongs_to :building
 
-  HEADER_ROW = ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free','Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood','Parent Neighborhood', 'Neighborhood3', 'Property Manager','Number of Floors','Number of Units','Year Built','Active','Amenities']
+  EXPORT_SHEET_HEADER_ROW = ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free','Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood','Parent Neighborhood', 'Neighborhood3', 'Property Manager','Number of Floors','Number of Units','Year Built','Active','Amenities']
 
   counter_cache_with_conditions :building, :listings_count, active: true
 
@@ -35,6 +35,10 @@ class Listing < ApplicationRecord
 
   after_save :create_unit, unless: :unit_exist?
   after_update :create_unit, unless: :unit_exist?
+
+  def self.header_style style
+    Listing::EXPORT_SHEET_HEADER_ROW.map{|item| style}
+  end
 
   def management_company_name
     management_company.try(:name)
