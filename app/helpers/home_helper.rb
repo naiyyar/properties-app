@@ -1,17 +1,4 @@
 module HomeHelper
-	def manhattan_neighborhoods
-		{ 
-			'MANHATTAN' => manhattan_borough,
-			'BROOKLYN' => brookly_borough,
-			'QUEENS' => queens_borough,
-			'BRONX' => bronx_borough
-		}
-	end
-
-	def ny_cities
-		['MANHATTAN', 'BROOKLYN','QUEENS','BRONX']
-	end
-
 	def lower_manhattan_sub_borough
 		[
 			'Battery Park City',
@@ -27,51 +14,12 @@ module HomeHelper
 		]
 	end
 
-	def midtown_sub_borough
-		[
-			'Chelsea',
-			'Gramercy Park',
-			"Hell's Kitchen",
-			'Kips Bay',
-			'Midtown East',
-			'Sutton Place',
-			'Murray Hill',
-			'Roosevelt Island'
-		]
-	end
-
-	def upper_manhattan_sub_borough
-		[
-			'East Harlem',
-			'Hudson Heights',
-			'Washington Heights',
-			'Harlem',
-			'Morningside Heights',
-		]
-	end
-
 	def brooklyn_sub_borough
-		[
-			'Brooklyn Heights',
-			'Bushwick',
-			'Clinton Hill',
-			'Downtown Brooklyn',
-			'Dumbo',
-			'Fort Greene',
-			'Gravesend',
-			'Greenpoint'
-		]
+		['Brooklyn Heights','Bushwick','Clinton Hill','Downtown Brooklyn','Dumbo','Fort Greene','Gravesend','Greenpoint']
 	end
 
 	def uptown_sub_borough
-		[
-			'Upper East Side',
-			#'Carnegie Hill',
-			#'Lenox Hill',
-			#'Yorkville',
-			'Upper West Side',
-			#'Lincoln Square'
-		]
+		['Upper East Side','Upper West Side']
 	end
 
 	def queens_sub_borough
@@ -87,35 +35,7 @@ module HomeHelper
 	end
 
 	def bronx_sub_borough
-		[
-			'East Bronx',
-			'University Heights'
-		]
-	end
-
-	#using for neighborhood guides
-	def manhattan_borough
-		[
-			'Harlem',
-			'Chelsea',
-			'East Harlem',
-			'East Village',
-			'Financial District',
-			# 'Flatiron District',
-			'Gramercy Park',
-			'Greenwich Village',
-			'Hamilton Heights',
-			"Hell's Kitchen",
-			'Kips Bay',
-			'Lower East Side',
-			'Midtown East',
-			'Murray Hill',
-			'SoHo',
-			'Tribeca',
-			'Upper East Side',
-			'Upper West Side',
-			'Washington Heights'
-		]
+		['East Bronx','University Heights', 'Morris Heights', 'Riverdale']
 	end
 
 	def brookly_borough
@@ -159,14 +79,20 @@ module HomeHelper
 		 'Bronxdale',
 		 'Bronxwood',
 		 'Concourse',
+		 'East Bronx',
 		 'Fordham',
 		 'Kingsbridge',
 		 'Mott Haven',
+		 'Morris Heights',
 		 'Riverdale',
 		 'Spuyten Duyvil',
 		 'Tremont',
 		 'University Heights'
 		]
+	end
+
+	def parent_neighborhoods
+		['Lower Manhattan','Midtown','Upper Manhattan','Queens','Bronx']
 	end
 
 	def searchable_text neighborhood, borough
@@ -215,16 +141,6 @@ module HomeHelper
     else
       search_link(borough, 'MANHATTAN')
     end
-	end
-
-	def parent_neighborhoods
-		[	
-			'Lower Manhattan',
-			'Midtown',
-			'Upper Manhattan',
-			'Queens',
-			'Bronx'
-		]
 	end
 
 	def search_by_neighborhood_link nb, area
@@ -377,10 +293,8 @@ module HomeHelper
 	end
 
 	def nyc_searches
-		[ 
-			'Cheap Apartments In NYC', 'Studio Apartments In NYC','Affordable Apartments For Rent In NYC', 'One Bedroom Apartments in NYC', 
-			'Cheap Studio Apartments in NYC','2 Bedroom Apartments in NYC', '3 Bedroom Apartments For Rent in NYC','Affordable Luxury Apartments In NYC'
-		]
+		[ 'Cheap Apartments In NYC', 'Studio Apartments In NYC','Affordable Apartments For Rent In NYC', 'One Bedroom Apartments in NYC', 
+			'Cheap Studio Apartments in NYC','2 Bedroom Apartments in NYC', '3 Bedroom Apartments For Rent in NYC','Affordable Luxury Apartments In NYC']
 	end
 
 	def amenities_searches
@@ -395,22 +309,15 @@ module HomeHelper
 			'Long Island City Studios', 'Upper East Side Studio Apartments', 'Upper West Side Studio Apartments',
 			"Hell's Kitchen Studios", 'West Village Studios', '2 Bedroom Apartments Upper East Side', "Hell's Kitchen Luxury Rentals",
 			'Midtown Studio Apartments NYC', 'Midtown East Luxury Rentals', 'Upper West Side Luxury Rental Buildings',
-			'Upper East Side Apartments For Rent With Doorman'
-		]
+			'Upper East Side Apartments For Rent With Doorman']
 	end
 
 	def col1_popular_searches
-		{
-			'Manhattan' => manhattan_searches,
-			'NYC' => nyc_searches,
-			'Amenities' => amenities_searches,
-		}
+		{'Manhattan' => manhattan_searches,'NYC' => nyc_searches,'Amenities' => amenities_searches}
 	end
 
 	def col2_popular_searches
-		{
-			'Neighborhoods' => neighborhoods_searches,
-		}
+		{ 'Neighborhoods' => neighborhoods_searches }
 	end
 
 	def popular_search_link category, link_text
