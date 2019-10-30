@@ -8,6 +8,27 @@
     var isDevice = true;
     var panorama;
 
+    //for ios devices double tap
+    $('a').on('click touchend', function(e) {
+        var building_id = '';
+        var type = '';
+        var el = $(this);
+        var link = el.attr('href');
+        var target = el.attr('target');
+        building_id = el.data('bid');
+        type = el.data('type');
+        if(link.match(/https:/) != null){
+            target = target == undefined ? 'self' : target;
+            window.open(link, target);
+        }else if(building_id != ''){
+            if(type == 'listings'){
+                showActiveListingsPopup(building_id);    
+            }else if(type == 'contact'){
+                showLeasingContactPopup(building_id);
+            }
+        }
+    });
+
     // calculations for elements that changes size on window resize
     var windowResizeHandler = function() {
         windowHeight = window.innerHeight;
