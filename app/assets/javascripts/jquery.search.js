@@ -51,7 +51,8 @@ brooklyn_and_queens_neighborhoods_hash = [
 	{ key: 'Corona', 								url: dropbox_url+'9cfkvxlntllmm5q/corona.kml?dl=1' },
 	{ key: 'East Bronx', 						url: dropbox_url+'525tz12eqake8i8/east_bronx.kml?dl=1' },
 	{ key: 'University Heights', 		url: dropbox_url+'18oak1cmrg36nuu/university_heights.kml?dl=1' },
-	{ key: 'Gravesend', 						url: dropbox_url+'xq28iq63kiw5q7a/gravesend.kml?dl=1' }
+	{ key: 'Gravesend', 						url: dropbox_url+'xq28iq63kiw5q7a/gravesend.kml?dl=1' },
+	{ key: 'Morris Heights', 				url: dropbox_url+'dl8bzus2inry7l8/morris_heights.kml?dl=1' },
 ]
 
 brooklyn_and_queens_zipcodes_hash = [
@@ -197,6 +198,7 @@ manhattan_neightborhoods_hash = [
 	{ key: 'Stuyvesant Town', 		url: dropbox_url+'uxassrc0v02o9yv/stuyvesant_town.kml?dl=1'},
 	{ key: 'Nolita', 							url: dropbox_url+'twujxttcgcwrhu9/nolita.kml?dl=1'},
 	{ key: 'Turtle Bay', 					url: dropbox_url+'lnfn29sl208bteq/turtle_bay.kml?dl=1'},
+	{ key: 'Manhattan Valley', 		url: dropbox_url+'7hhqs4vu8gqelsa/manhattan_valley.kml?dl=1'}
 ]
 
 function brooklyn_and_queens_neighborhoods(term, city, map){
