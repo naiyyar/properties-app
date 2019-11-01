@@ -28,7 +28,7 @@
   <body class="notransition no-hidden" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
-    <% unless params[:controller] == 'home' and params[:action] == 'index'%>
+    <% unless controller_name == 'home' and action_name == 'index'%>
       <%= render partial: 'layouts/shared/header' %>
       <%= render partial: 'layouts/shared/filters' %>
       <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
@@ -46,11 +46,11 @@
           <%end%>
           <%= yield %>
         </div>
-        <%= render 'layouts/home/footer' if show_full_width_footer? and params[:action] != 'about' and params[:action] != 'contribute' %>
+        <%= render 'layouts/home/footer' if show_full_width_footer? and action_name != 'about' and action_name != 'contribute' %>
       </div>
     <%else%>
       <%= yield %>
-      <%= render 'layouts/home/footer' if show_full_width_footer? and params[:action] != 'about' %>
+      <%= render 'layouts/home/footer' if show_full_width_footer? and action_name != 'about' %>
     <%end%>
     <div id="remote-container"></div>
     <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? and params[:searched_by].present? %>

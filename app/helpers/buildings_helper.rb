@@ -67,7 +67,7 @@ module BuildingsHelper
 	end
 
 	def contribution? params
-		params[:action] == 'contribute' || params[:contribution].present?
+		action_name == 'contribute' || params[:contribution].present?
 	end
 
 	def disabled(current_user, val)

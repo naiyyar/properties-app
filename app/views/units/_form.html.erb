@@ -17,7 +17,7 @@
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                   <label>Building*</label>
-                  <% if params[:action] == 'new' %>
+                  <% if action_name == 'new' %>
                     <%= f.collection_select(:building_id, Building.where('building_name <> ?', ''), :id, :building_name, { :prompt => :true }, { class: "form-control validate" }) %>
                   <%else%>
                     <%= text_field_tag 'building_address',f.object.building.building_street_address, class: "form-control validate", readonly: true %>

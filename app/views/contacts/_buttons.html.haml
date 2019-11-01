@@ -19,7 +19,7 @@
 		= check_availability_link(building, size_class)
 
 	%div.right-section{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}", class: "#{'hidden' unless building.has_active_email?}" }
-		- unless params[:action] == 'show' and params[:controller] == 'buildings'
+		- unless action_name == 'show' and controller_name == 'buildings'
 			- if active_listings.blank?
 				= link_to @show_path, style: 'color: #333' do
 					%p.font-xs.pb-8

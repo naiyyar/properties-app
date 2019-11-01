@@ -34,7 +34,7 @@
     
   
   .visible-xs{style: "position: fixed; bottom: 10px;"}
-    - if params[:action] == 'search' or @show_map_btn
+    - if action_name == 'search' or @show_map_btn
       %a.mapHandler.btn.btn-green{href: "javascript:void(0);", style: custom_search? ? 'display: none;' : ''}
         %span.fa.fa-map-o
         Map

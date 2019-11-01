@@ -3,7 +3,7 @@
 .home-header
   .home-logo.osLight= image_tag 'logo2.png', alt: 'logo', width: '200'
   / Should only be visible on home page when user is not logged in
-  - if params[:controller] == 'home' and params[:action] == 'index'
+  - if controller_name == 'home' and action_name == 'index'
     %div{class: "pull-right btn-contribute btn-contribute-home #{user_signed_in? ? 'hidden-xs hidden-sm' : ''}"}
       = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-black btn-o hidden-xs', style: 'font-size: 14px;'
       = link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-black btn-o visible-xs'

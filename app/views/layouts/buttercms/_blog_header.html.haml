@@ -1,4 +1,4 @@
-#hero-container-blog{class: "hero-container-blog-#{params[:action]}"}
+#hero-container-blog{class: "hero-container-blog-#{action_name}"}
   - if @post.present?
     #carouselBlog.carousel.slide.featured{"data-ride" => "carousel"}
       .carousel-inner
