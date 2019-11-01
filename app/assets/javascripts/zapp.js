@@ -140,11 +140,6 @@
     // }
 
     windowResizeHandler();
-
-    //For mobile dropdown panel
-    $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
-      $('.popular-neighborhoods').slideToggle(200);
-    });
     
     // $("#toggleStreetView").click(function(){
     //     var toggle = panorama.getVisible();
@@ -156,8 +151,12 @@
     //       $(this).val('Street View');
     //     }
     // })
-    
 
+    //For mobile dropdown panel
+    $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
+      $('.popular-neighborhoods').slideToggle(200);
+    });
+    
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
         $('body').addClass('no-touch');
         isDevice = false;
