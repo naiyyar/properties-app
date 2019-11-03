@@ -5,11 +5,11 @@ module HomeHelper
 			'Bowery',
 			'East Village',
 			'Financial District',
+			'Greenwich Village',
 			'Lower East Side',
 			'Nolita',
 			'SoHo',
 			'Tribeca',
-			'Greenwich Village',
 			'West Village'
 		]
 	end
