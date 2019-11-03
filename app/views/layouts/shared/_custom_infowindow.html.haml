@@ -1,7 +1,8 @@
 .infoW
+  - @show_path = building_path(building)
   - thumb_icon = "<span class='fa fa-thumbs-up recommended'></span>"
-  = link_to building_path(building), style: 'color: #333;' do
-    .infoW-property-info{"data-href" => "#{building_path(building)}"}
+  = link_to @show_path, style: 'color: #333;' do
+    .infoW-property-info{"data-href" => "#{@show_path}"}
       .propImg
         = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
       - if building.price.present? or building.bedroom_types?
@@ -55,4 +56,4 @@
   
   .clearfix
   .infoButtons.no-padding
-    = render 'contacts/buttons', building: building, size_class: 'btn-xs btn-block'
+    = render 'contacts/buttons', building: building, size_class: 'btn-xs btn-block', on_click: true

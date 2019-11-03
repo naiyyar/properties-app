@@ -1,5 +1,4 @@
 <script src="https://maps.google.com/maps/api/js?v=3.36&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
-<!-- <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script> -->
 <script type="text/javascript">
   var map, current_user_id, current_building_id;
   current_user_id = $('#cu').val();
@@ -39,11 +38,6 @@
         disableAutoPan: true,
         hideCloseButton: false,
       });
-
-      //diabling right click on building edit form
-      // $(".edit_building").on("contextmenu",function(e){
-      //     return false;
-      // });
 
       // function that adds the markers on map
       var addMarkers = function(props, map) {
@@ -113,22 +107,10 @@
         addMarkers(props, map);
         var transitLayer = new google.maps.TransitLayer();
         transitLayer.setMap(map);
-        //resize_map(map, lat, lng)
         showWindowResizeHandler(map)
       }, 300);
     }
   }
-
-  // function resize_map(map, lat, lng){
-  //   //setTimeout(function() {
-  //   if (map) {
-  //     google.maps.event.trigger(map, 'resize');
-  //     map.setCenter(new google.maps.LatLng(lat, lng));
-  //     map.setZoom(14);
-  //   }
-
-  //   //}, 300);
-  // }
 
   function loadMarkerWindow(building_id, map, marker){
     $.post('/load_infobox', {

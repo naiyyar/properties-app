@@ -1,4 +1,4 @@
-- active_listings = building.listings.active
+- active_listings = building.listings.select(:id, :active).active
 - prices = false
 .contact-links
 	%div.left-section{style: "padding: #{size_class.present? ? '2px 3px 2px 6px;' : '6px 8px 8px 11px;'}"}
@@ -14,7 +14,11 @@
 		
 		- unless building.has_active_email?
 			%div.pb-8{class: !prices ? 'ml' : ''}
-				=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: "active-listing-link hyper-link font-xs #{!prices ? 'ml' : ''}", data: {bid: building.id, type: 'listings'} if active_listings.present?
+				- if active_listings.present?
+					- unless on_click
+						=link_to "#{active_listings.size} Active Listings", 'javascript:;',class: "active-listing-link hyper-link font-xs #{!prices ? 'ml' : ''}", data: {bid: building.id, type: 'listings'}
+					- else
+						=link_to "#{active_listings.size} Active Listings", 'javascript:;', class: "active-listing-link hyper-link font-xs #{!prices ? 'ml' : ''}", onclick: "showActiveListingsPopup(#{building.id})"
 		
 		= check_availability_link(building, size_class)
 
@@ -25,8 +29,16 @@
 					%p.font-xs.pb-8
 			- else
 				%p.font-xs.pb-8
-					=link_to "#{active_listings.count} Active Listings", 'javascript:;',class: 'active-listing-link hyper-link', data: {bid: building.id, type: 'listings'}
+					- unless on_click
+						=link_to "#{active_listings.size} Active Listings", 'javascript:;', class: 'active-listing-link hyper-link', data: {bid: building.id, type: 'listings'}
+					- else
+						=link_to "#{active_listings.size} Active Listings", 'javascript:;', class: 'active-listing-link hyper-link', onclick: "showActiveListingsPopup(#{building.id})"
+
     
 		- if building.has_active_email?
-			%a.btn.btn-primary.btn-o{href: 'javascript:;', class: "#{size_class}", data: {bid: building.id, type: 'contact'}, style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}"}
-				%b Contact Leasing
+			- unless on_click
+				%a.btn.btn-primary.btn-o{href: 'javascript:;', class: "#{size_class}", data: {bid: building.id, type: 'contact'}, style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}"}
+					%b Contact Leasing
+			- else
+				%a.btn.btn-primary.btn-o{href: 'javascript:;', class: "#{size_class}", style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}", onclick: "showLeasingContactPopup(#{building.id})"}
+					%b Contact Leasing

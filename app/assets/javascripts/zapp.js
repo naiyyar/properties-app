@@ -9,7 +9,7 @@
     var panorama;
 
     //for ios devices double tap
-    $('a').on('click touchend', function(e) {
+    $('body').on('click touchend','a', function(e) {
         var building_id = '';
         var type = '';
         var el = $(this);
