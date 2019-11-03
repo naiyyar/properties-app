@@ -53,6 +53,7 @@ brooklyn_and_queens_neighborhoods_hash = [
 	{ key: 'University Heights', 		url: dropbox_url+'18oak1cmrg36nuu/university_heights.kml?dl=1' },
 	{ key: 'Gravesend', 						url: dropbox_url+'xq28iq63kiw5q7a/gravesend.kml?dl=1' },
 	{ key: 'Morris Heights', 				url: dropbox_url+'dl8bzus2inry7l8/morris_heights.kml?dl=1' },
+	{	key: 'Riverdale',							url: dropbox_url+'vywjqp1jv9g5ydy/riverdale.kml?dl=1' }
 ]
 
 brooklyn_and_queens_zipcodes_hash = [
