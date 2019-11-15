@@ -3,7 +3,7 @@
   = link_to @show_path do
     - unless @similar_properties.present?
       .figure{style: "position: relative;", id: "figure#{building.id}"}
-        = image_tag 'shimmer.gif', width: '100%'
+        = image_tag 'shimmer.gif', style: 'width: 100%;height: 225px;' 
     - else
       .figure{style: "position: relative;height: 165px;"}
         - bg_img_url = @last_uploads.present? ? @last_uploads.uploaded_img_url : image_url('no-photo.png')

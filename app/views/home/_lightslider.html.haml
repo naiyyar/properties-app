@@ -8,10 +8,10 @@
           %span.current 1
           %span.total="/ #{images_count}"
 
-      %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'split', path:  show_path } }
+      %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 225px;", data: { buildingid: "#{building.id}", view_type: 'split', path:  show_path } }
         %li
           = link_to show_path, style: 'cursor: pointer;' do
-            .bg-size-cover{ style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: "#{first_image.id}" } }
+            .bg-size-cover.h-lg{ style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: "#{first_image.id}" } }
 
         - if images_count > 1
           - 1.upto(images_count-1) do |count|
