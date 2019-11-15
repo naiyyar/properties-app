@@ -100,12 +100,12 @@
     }
 }
 
-@media screen and (min-width: 1601px) and (max-width: 1920px){
+@media screen and (min-width: 1601px){
     #hero-container {
-        height: 730px;
+        height: 540px;
         background-color: #dbe6f9;
     }
     #hero-container .cb-slideshow, #hero-container .cb-slideshow:after{
-        top: -50px;
+        top: -10px;
     }
 }
