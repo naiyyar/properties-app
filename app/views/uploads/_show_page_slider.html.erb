@@ -3,7 +3,7 @@
     <div class="rotateslider-container hidden-xs hidden-sm hidden-md" id="slider">
       <% @uploads.each do |upload| %>
         <div class="rotateslider-item">
-          <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox" title="<%=date_uploaded(upload)%>">
+          <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox" title="<%=date_uploaded(upload)%>" data-role='slider'>
             <%= image_tag upload.uploaded_img_url, size: '211x311' %>
           </a> 
         </div>
@@ -14,45 +14,13 @@
   <%else%>
     <% img_width = @uploads.count == 2 ? 48 : 98 %>
     <% @uploads.each_with_index do |upload, index| %>
-      <a href="<%=upload.image.url%>" title="<%=date_uploaded(upload)%>" class="fancybox" rel='gallery'>
+      <a href="<%=upload.image.url%>" title="<%=date_uploaded(upload)%>" class="fancybox" rel='gallery' data-role='slider'>
         <div class="bg-size-cover" style='background-image: url("<%=upload.uploaded_img_url%>"); width: <%=img_width%>%; float: left; cursor: pointer; margin: 0px 0px 0px 6px;' ></div>
       </a>
     <%end%>
-
-    <%# object.image_uploads.each_with_index do |upload, index| %>
-     <!--  <a href="<%#=upload.image.url%>" title="<%#=date_uploaded(upload)%>" class="fancybox" rel='gallery'>
-        <div class="bg-size-cover" style='background-image: url("<%#=upload.image.url%>"); width: <%#=img_width%>%; float: left; cursor: pointer; margin: 0px 0px 0px 6px;' ></div>
-      </a> -->
-    <%#end%>
-
-    <!-- <div class="hidden" style="width: 100%; margin: 0 auto;">
-      <div id="propWidget-3" class="carousel slide propWidget-3" data-ride="carousel">
-        <div class="carousel-inner">
-          <%# object.image_uploads.each_with_index do |upload, index| %>
-            <div class="item <%#= index == 0 ? 'active' : ''%>">
-              <a rel='gallery' href="<%#= upload.image.url %>" class="fancybox" title="<%#=#date_uploaded(upload)%>">
-                <%#=# image_tag upload.image.url, alt: "" %>
-              </a>
-              <div class="container">
-                <div class="carousel-caption">
-                    
-                </div>
-              </div>
-            </div>
-          <%#end%>
-        </div>
-        <%# if object.image_uploads.count > 1 %>
-          <a class="left carousel-control" href="#propWidget-3" role="button" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
-          <a class="right carousel-control" href="#propWidget-3" role="button" data-slide="next"><span class="fa fa-chevron-right"></span></a>
-        <%#end%>
-      </div>
-    </div> -->
     <div class="clearfix"></div>
   <%end%>
   <% unless @management_company.present? %>
     <%=render partial: 'uploads/add_photos', locals: { object: object }%>
   <%end%>
-<%else%>
-  <%#= image_tag 'no-photo-available.jpg', size: '311x211', class: 'pull-left' %>
-  <!-- <div class="pull-right">No image Found! Please <%#= link_to 'Upload', path, "data-no-turbolink" => false %> images.</div> -->
 <%end%>

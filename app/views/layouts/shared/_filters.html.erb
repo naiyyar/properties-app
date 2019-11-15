@@ -15,7 +15,7 @@
             <div class="volume">
               <div class="col-sm-12 col-md-12 col-lg-12">
                 <label><b>Building Amenities</b></label>
-                <% building_amenities.each_pair do |k, v| %>
+                <% building_amenities.except(:childrens_playroom, :courtyard, :management_company_run).each_pair do |k, v| %>
                   <div class="checkbox custom-checkbox">
                     <label>
                       <input type="checkbox" name="filter[amenities][]" value="<%=k.to_s%>" id="<%=k%>" <%= amen_checked(k.to_s) %> <%=amen_locked?(k.to_s)%>> <span class="fa fa-check"></span> <%= v == 'No Fee Building' ? '<b>No Fee Building</b>'.html_safe : v %>

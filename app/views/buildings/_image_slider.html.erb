@@ -5,7 +5,7 @@
     <% if @uploads.present? %>
       <% @uploads.each do |upload| %>
         <div class="rotateslider-item">
-          <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox">
+          <a rel='gallery' href="<%= upload.image.url %>" data-imageable = "<%= imageable(upload) %>" class="fancybox" data-role='slider'>
             <%= image_tag upload.image.url, size: '211x311' %>
           </a> 
         </div>

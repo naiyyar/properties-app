@@ -1,16 +1,16 @@
 <div class="similar">
   <div class="swiper-container visible-xs visible-sm">
     <div class="swiper-wrapper">
-        <% uploads.each_with_index do |upload, index| %>
-            <div class="swiper-slide">
-                <a href="<%= upload.image.url %>" class="card fancybox" rel='gallery', title="<%=date_uploaded(upload)%>">
-                    <div class="figure">
-                        <%= image_tag upload.image, alt: 'Image' %>
-                    </div>
-                    <div class="clearfix"></div>
-                </a>
+      <% uploads.each_with_index do |upload, index| %>
+        <div class="swiper-slide">
+          <a href="<%= upload.image.url %>" class="card fancybox" rel='gallery', title="<%=date_uploaded(upload)%>" data-role='slider'>
+            <div class="figure">
+              <%= image_tag upload.image, alt: 'Image' %>
             </div>
-        <%end%>
+            <div class="clearfix"></div>
+          </a>
+        </div>
+      <%end%>
     </div>
     <div class="swiper-pagination"></div>
   </div>

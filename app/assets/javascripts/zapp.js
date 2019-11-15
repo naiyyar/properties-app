@@ -15,16 +15,19 @@
         var el = $(this);
         var link = el.attr('href');
         var target = el.attr('target');
+        var role = el.data('role');
         building_id = el.data('bid');
         type = el.data('type');
-        if(link.match(/https:/) != null){
-            target = target == undefined ? 'self' : target;
-            window.open(link, target);
-        }else if(building_id != ''){
-            if(type == 'listings'){
-                showActiveListingsPopup(building_id);    
-            }else if(type == 'contact'){
-                showLeasingContactPopup(building_id);
+        if(role != 'slider'){
+            if(link.match(/https:/) != null){
+                target = target == undefined ? 'self' : target;
+                window.open(link, target);
+            }else if(building_id != ''){
+                if(type == 'listings'){
+                    showActiveListingsPopup(building_id);    
+                }else if(type == 'contact'){
+                    showLeasingContactPopup(building_id);
+                }
             }
         }
     });
