@@ -5,7 +5,17 @@ class UnitsController < ApplicationController
   # GET /units
   # GET /units.json
   def index
-    @units = Unit.order('created_at desc').includes(:building)
+    @filterrific = initialize_filterrific(
+      Unit,
+      params[:filterrific],
+      available_filters: [:search_query]
+    ) or return
+    @units = @filterrific.find.reorder('created_at desc').includes(:building).paginate(:page => params[:page], :per_page => 100)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /units/1

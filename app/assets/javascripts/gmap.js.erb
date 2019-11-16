@@ -64,7 +64,7 @@ function bindElemToMarker(elem, marker, object, map){
   var card = elem.parent().parent().parent();
   card.on('mouseover', function(){
     marker.setIcon(markerIcon(price, 'green'));
-    //map.setZoom(16);
+    //map.setZoom(14);
     //map.panTo(new google.maps.LatLng(object.latitude,object.longitude));
   }).on('mouseout', function(){
     marker.setIcon(markerIcon(price, 'red'));

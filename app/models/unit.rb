@@ -42,6 +42,9 @@
 #
 
 class Unit < ApplicationRecord
+  include PgSearch
+  include Imageable
+  attr_accessor :recommended_percent, :reviews_count
 	acts_as_voteable
 	ratyrate_rateable 'unit','cleanliness','noise','safe','health','responsiveness','management'
 	resourcify
@@ -52,9 +55,19 @@ class Unit < ApplicationRecord
 	has_many :rental_price_histories, dependent: :destroy
 	belongs_to :user
 
-  attr_accessor :recommended_percent, :reviews_count
+  pg_search_scope :search_query, 
+                  against: [:name],
+                  :using => {  :tsearch => { prefix: true }, :trigram=> { :threshold => 0.2 } },
+                  associated_against: {
+                    building: [:building_street_address]
+                  }
 
-	include Imageable
+  filterrific(
+   default_filter_params: { },
+   available_filters: [
+     :search_query
+    ]
+  )
 
 	default_scope { order('updated_at desc') }
 
