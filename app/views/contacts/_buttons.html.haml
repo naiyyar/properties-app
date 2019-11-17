@@ -5,12 +5,13 @@
 			%section
 				=check_availability_button(building.web_url, 'btn-o')
 			%section
-				=active_listings_button(building, on_click, 'btn-o')
+				=active_listings_button(building, on_click, 'btn-o', active_listings)
 
 		.d-block
 			=contact_leasing_button(building, on_click, 'btn-block')
 
 	- elsif building.availability_and_contacts_cta? and active_listings.blank?
+		.d-block.h-42
 		.c-links
 			%section
 				= contact_leasing_button(building, on_click, 'btn-block')
@@ -18,33 +19,27 @@
 				=check_availability_button(building.web_url, 'btn-o')
 
 	- elsif building.active_web_url? and active_listings.present? and !building.has_active_email?
+		.d-block.h-42
 		.c-links
 			%section
 				=check_availability_button(building.web_url, 'btn-block')
 			%section
-				=active_listings_button(building, on_click, 'btn-o')
+				=active_listings_button(building, on_click, 'btn-o', active_listings)
 
 	- elsif !building.active_web_url? and active_listings.present? and building.has_active_email?
+		.d-block.h-42
 		.c-links
 			%section
 				= contact_leasing_button(building, on_click, 'btn-block')
 			%section
-				=active_listings_button(building, on_click, 'btn-o')
+				=active_listings_button(building, on_click, 'btn-o', active_listings)
 
 	- elsif building.active_web_url? and active_listings.blank? and !building.has_active_email?
-		.c-links.invisible
-			%section
-				= contact_leasing_button(building, on_click, 'btn-block')
-			%section
-				=active_listings_button(building, on_click, 'btn-o')
+		.c-links.h-42
 		.d-block
 			=check_availability_button(building.web_url, 'btn-block')
 
 	- elsif !building.active_web_url? and active_listings.blank? and building.has_active_email?
-		.c-links.invisible
-			%section
-				=check_availability_button(building.web_url, 'btn-block')
-			%section
-				=active_listings_button(building, on_click, 'btn-o')
+		.c-links.h-42
 		.d-block
 			= contact_leasing_button(building, on_click, 'btn-block')
