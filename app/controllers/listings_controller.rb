@@ -3,8 +3,7 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :find_listings, only: [:change_status, :delete_all]
   after_action :update_building_rent, only:[:create, :update, :destroy]
-  # GET /listings
-  # GET /listings.json
+  
   def index
     @filterrific = initialize_filterrific(
       Listing,
@@ -21,8 +20,6 @@ class ListingsController < ApplicationController
   end
 
   def change_status
-    #Issue: Counter cache doesn't work with update_all
-    #@listings.update_all(active: params[:active])
     @listings.each do |listing|
       listing.update(active: params[:active])
     end
@@ -30,8 +27,6 @@ class ListingsController < ApplicationController
   end
   
   def delete_all
-    #Issue: Counter cache doesn't work with destroy_all
-    #@listings.destroy_all
     @listings.each do |listing|
       listing.destroy
       listing.update_rent
@@ -76,22 +71,16 @@ class ListingsController < ApplicationController
     @listings = @listings.reorder(order)
   end
 
-  # GET /listings/1
-  # GET /listings/1.json
   def show
   end
 
-  # GET /listings/new
   def new
     @listing = Listing.new
   end
 
-  # GET /listings/1/edit
   def edit
   end
 
-  # POST /listings
-  # POST /listings.json
   def create
     @listing = Listing.new(listing_params)
 
@@ -106,8 +95,6 @@ class ListingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /listings/1
-  # PATCH/PUT /listings/1.json
   def update
     respond_to do |format|
       if @listing.update(listing_params)
@@ -120,8 +107,6 @@ class ListingsController < ApplicationController
     end
   end
 
-  # DELETE /listings/1
-  # DELETE /listings/1.json
   def destroy
     @listing.destroy
     respond_to do |format|
@@ -131,7 +116,6 @@ class ListingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_listing
       @listing = Listing.find(params[:id])
     end
