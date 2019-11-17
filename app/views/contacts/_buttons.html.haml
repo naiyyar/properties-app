@@ -43,3 +43,7 @@
 		.c-links.h-42
 		.d-block
 			= contact_leasing_button(building, on_click, 'btn-block')
+	- else
+		.d-block.h-42.invisible
+			=check_availability_button(building.web_url, 'btn-block')
+		.c-links
