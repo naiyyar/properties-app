@@ -30,6 +30,14 @@
   
   = link_to @show_path do
     = render 'home/building_detail', building: building
+
+
+  .pb-8{style: 'margin-left: 10px;'}
+    - if building.prices.present?
+      = link_to @show_path, style: 'color: #333;' do
+        = "<span> #{building.prices} | </span>".html_safe
+        %span=building.show_bed_ranges.join(', ') 
+        = 'Bed' if building.bedroom_types?
   
   = render 'contacts/buttons', building: building, size_class: '', on_click: false
 

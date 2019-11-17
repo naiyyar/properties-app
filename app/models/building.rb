@@ -209,6 +209,14 @@ class Building < ApplicationRecord
     featured_comps.active
   end
 
+  def all_three_cta? listings
+    active_web_url? and has_active_email? and listings.size > 0
+  end
+
+  def availability_and_contacts_cta?
+    active_web_url? and has_active_email?
+  end
+
   def self.city_count buildings, city, sub_boroughs = nil
     Rails.cache.fetch([self, city, 'buildings_count']) { buildings.where('city = ? OR neighborhood in (?)', city, sub_boroughs).size }
   end

@@ -181,13 +181,36 @@ module BuildingsHelper
 		if building.active_web_url?
 			bt_block_class = sl_class.present? ? sl_class : 'btn-block'
       link_to 'Check Availability', building.web_url, 
-      														onclick: "window.open(this.href,'_blank');return false;", 
-      														#target: '_blank',
+      														onclick: "window.open(this.href,'_blank');return false;",
       														class: "btn #{bt_block_class} btn-primary txt-color-white font-bolder",
       														style: "padding: #{bt_block_class.include?('btn-xs') ? '8px 0px' : ''}"
     else
       link_to check_availability, building_url(building), class: 'btn btn-block btn-primary invisible'
     end
+	end
+
+	def check_availability_button web_url, klass
+		link_to 'Check Availability', web_url, 
+																	onclick: "window.open(this.href,'_blank');return false;",
+																	class: "btn btn-primary #{klass}"
+	end
+
+	def contact_leasing_button building, event, klass
+		title, classes = 'Contact Leasing', "btn btn-primary #{klass}"
+		unless event
+			link_to title, 'javascript:;', data: { bid: building.id, type: 'contact' }, class: classes
+		else
+			link_to title, 'javascript:;', onclick: "showLeasingContactPopup(#{building.id})", class: classes
+		end
+	end
+
+	def active_listings_button building, event, klass
+		title, classes = 'Active Listings', "btn btn-primary active-listing-link #{klass}"
+		unless event
+			link_to title, 'javascript:;', data: { bid: building.id, type: 'listings' }, class: classes
+		else
+			link_to title, 'javascript:;', onclick: "showActiveListingsPopup(#{building.id})", class: classes
+		end
 	end
 
 	def check_availability

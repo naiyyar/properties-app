@@ -1,44 +1,50 @@
 - active_listings = building.listings.select(:id, :active).active
-- prices = false
 .contact-links
-	%div.left-section{style: "padding: #{size_class.present? ? '2px 3px 2px 6px;' : '6px 8px 8px 11px;'}"}
-		- if building.prices.present?
-			- prices = true
-			= link_to @show_path, style: 'color: #333' do
-				%div.pb-8{class: (!building.has_active_email? and active_listings.present?) ? 'wmd' : 'wxl'}
-					= "<span> #{building.prices} | </span>".html_safe
-					%span=building.show_bed_ranges.join(', ') 
-					= 'Bed' if building.bedroom_types?
-		- elsif active_listings.blank?
-			%div.pb-8{class: !building.has_active_email? ? 'wmd' : 'wxl'}
-		
-		- unless building.has_active_email?
-			%div.pb-8{class: !prices ? 'ml' : ''}
-				- if active_listings.present?
-					- unless on_click
-						=link_to "#{active_listings.size} Active Listings", 'javascript:;',class: "active-listing-link hyper-link font-xs #{!prices ? 'ml' : ''}", data: {bid: building.id, type: 'listings'}
-					- else
-						=link_to "#{active_listings.size} Active Listings", 'javascript:;', class: "active-listing-link hyper-link font-xs #{!prices ? 'ml' : ''}", onclick: "showActiveListingsPopup(#{building.id})"
-		
-		= check_availability_link(building, size_class)
+	- if building.all_three_cta?(active_listings)
+		.c-links
+			%section
+				=check_availability_button(building.web_url, 'btn-o')
+			%section
+				=active_listings_button(building, on_click, 'btn-o')
 
-	%div.right-section{style: "padding: #{size_class.present? ? '0px 6px 0px 0px;' : '0px 10px 0px 0px;'}", class: "#{'hidden' unless building.has_active_email?}" }
-		- unless action_name == 'show' and controller_name == 'buildings'
-			- if active_listings.blank?
-				= link_to @show_path, style: 'color: #333' do
-					%p.font-xs.pb-8
-			- else
-				%p.font-xs.pb-8
-					- unless on_click
-						=link_to "#{active_listings.size} Active Listings", 'javascript:;', class: 'active-listing-link hyper-link', data: {bid: building.id, type: 'listings'}
-					- else
-						=link_to "#{active_listings.size} Active Listings", 'javascript:;', class: 'active-listing-link hyper-link', onclick: "showActiveListingsPopup(#{building.id})"
+		.d-block
+			=contact_leasing_button(building, on_click, 'btn-block')
 
-    
-		- if building.has_active_email?
-			- unless on_click
-				%a.btn.btn-primary.btn-o{href: 'javascript:;', class: "#{size_class}", data: {bid: building.id, type: 'contact'}, style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}"}
-					%b Contact Leasing
-			- else
-				%a.btn.btn-primary.btn-o{href: 'javascript:;', class: "#{size_class}", style: "padding: #{size_class.present? ? '8px 2px;' : '10px 6px;'}", onclick: "showLeasingContactPopup(#{building.id})"}
-					%b Contact Leasing
+	- elsif building.availability_and_contacts_cta? and active_listings.blank?
+		.c-links
+			%section
+				= contact_leasing_button(building, on_click, 'btn-block')
+			%section
+				=check_availability_button(building.web_url, 'btn-o')
+
+	- elsif building.active_web_url? and active_listings.present? and !building.has_active_email?
+		.c-links
+			%section
+				=check_availability_button(building.web_url, 'btn-block')
+			%section
+				=active_listings_button(building, on_click, 'btn-o')
+
+	- elsif !building.active_web_url? and active_listings.present? and building.has_active_email?
+		.c-links
+			%section
+				= contact_leasing_button(building, on_click, 'btn-block')
+			%section
+				=active_listings_button(building, on_click, 'btn-o')
+
+	- elsif building.active_web_url? and active_listings.blank? and !building.has_active_email?
+		.c-links.invisible
+			%section
+				= contact_leasing_button(building, on_click, 'btn-block')
+			%section
+				=active_listings_button(building, on_click, 'btn-o')
+		.d-block
+			=check_availability_button(building.web_url, 'btn-block')
+
+	- elsif !building.active_web_url? and active_listings.blank? and building.has_active_email?
+		.c-links.invisible
+			%section
+				=check_availability_button(building.web_url, 'btn-block')
+			%section
+				=active_listings_button(building, on_click, 'btn-o')
+		.d-block
+			= contact_leasing_button(building, on_click, 'btn-block')

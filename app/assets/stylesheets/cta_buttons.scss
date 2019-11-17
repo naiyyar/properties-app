@@ -1,0 +1,37 @@
+.contact-links {
+	min-height: 88px;
+	padding: 0px 8px 8px;
+	.c-links {
+		-webkit-column-count: 2;
+	  -moz-column-count: 2;
+	  column-count: 2;
+	  height: 100%;
+	  -moz-column-fill: auto;
+	  column-fill: auto;
+	  section a{
+	  	width: 100%;
+	  }
+	}
+
+	a{ font-weight: bolder; }
+
+  .d-block{
+  	padding-top: 8px;
+  }
+}
+
+.infoW{
+	.infoButtons{
+		.contact-links {
+			padding: 8px 6px;
+			.c-links{
+				section:first-child{
+					width: 109%;
+				}
+				a{
+					font-size: 12px;
+				}
+			}
+		}
+	}
+}
