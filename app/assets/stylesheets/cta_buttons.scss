@@ -1,6 +1,5 @@
 .contact-links {
-	min-height: 88px;
-	padding: 0px 8px 8px;
+	padding: 0px 8px;
 	.c-links {
 		-webkit-column-count: 2;
 	  -moz-column-count: 2;
@@ -8,6 +7,7 @@
 	  height: 100%;
 	  -moz-column-fill: auto;
 	  column-fill: auto;
+	  padding-bottom: 8px;
 	  section a{
 	  	width: 100%;
 	  }
@@ -15,9 +15,6 @@
 
 	a{ font-weight: bolder; }
 
-  .d-block{
-  	padding-top: 8px;
-  }
   .h-42{
   	height: 42px;
   }
