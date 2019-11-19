@@ -25,6 +25,7 @@
 		.contact-links {
 			padding: 0px 6px;
 			.c-links{
+				padding-bottom: 6px;
 				section:first-child{
 					width: 108%;
 				}
@@ -33,5 +34,8 @@
 				}
 			}
 		}
+	}
+	.pb-8{
+		height: 22px;
 	}
 }

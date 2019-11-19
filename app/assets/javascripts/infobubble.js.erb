@@ -251,6 +251,8 @@ InfoBubble.prototype.buildDom_ = function() {
   contentContainer.style['cursor'] = 'default';
   contentContainer.style['clear'] = 'both';
   contentContainer.style['position'] = 'relative';
+  // this.contentContainer_.style['height'] overriding height in InfoBubble.prototype.figureOutSize_
+  contentContainer.style['height'] = this.px(282); 
 
   var content = this.content_ = document.createElement('DIV');
   contentContainer.appendChild(content);
@@ -1733,7 +1735,8 @@ InfoBubble.prototype.figureOutSize_ = function() {
   }
 
   this.contentContainer_.style['width'] = this.px(width);
-  this.contentContainer_.style['height'] = this.px(height);
+  // setting up fixed height 182 px in InfoBubble.prototype.buildDom_
+  //this.contentContainer_.style['height'] = this.px(height);
 };
 
 
