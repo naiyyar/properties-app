@@ -460,7 +460,7 @@ class Building < ApplicationRecord
   end
 
   def prices
-    !price.nil? ? RANGE_PRICE[price] : ''
+    !price.nil? ? RANGE_PRICE[price - 1] : ''
   end
 
   def bedroom_types?
