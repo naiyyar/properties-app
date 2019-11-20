@@ -251,13 +251,20 @@ module BuildingsHelper
 	end
 
 	def bed_ranges building
-		if building.prices.present?
+		if building.prices.present? or building.show_bed_ranges.present?
 			link_to @show_path, style: 'color: #333;' do
-	      "<span> #{building.prices} | </span>".html_safe +
-	      "<span> #{building.show_bed_ranges.join(', ')} </span>".html_safe +
-	      'Bed' if building.bedroom_types?
+	      (price_col(building) + types_col(building)).html_safe
 	    end
 	  end
+	end
+
+	def price_col building
+		building.prices.present? ? "<span> #{building.prices} | </span>" : ''
+	end
+
+	def types_col building
+		"<span> #{building.show_bed_ranges.join(', ')} </span>" +
+	  'Bed' if building.bedroom_types?
 	end
 
 end
