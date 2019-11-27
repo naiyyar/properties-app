@@ -81,11 +81,24 @@
 @media screen and (min-width: 992px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
     #hero-container .cb-slideshow,
     #hero-container .cb-slideshow:after { 
-        height: 571px;
-        top: -10px;
+        height: 55%;
+        top: 225px;
     }
     .search-panel{
-        margin: 0px 200px;
+        margin: 0px 160px;
+        padding: 131px 0px 0px 0px;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    #hero-container .cb-slideshow,
+    #hero-container .cb-slideshow:after { 
+        height: 55%;
+        top: 225px;
+    }
+    .search-panel{
+        margin: 0px 160px;
+        padding: 131px 0px 0px 0px;
     }
 }
 
@@ -106,6 +119,7 @@
         background-color: #dbe6f9;
     }
     #hero-container .cb-slideshow, #hero-container .cb-slideshow:after{
-        top: -10px;
+        top: 140px;
+        height: 74%;
     }
 }
