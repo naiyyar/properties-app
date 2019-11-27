@@ -9,7 +9,9 @@
       %h1 Exclusively No Broker Fee Apartments In NYC
       %h2 transparentcity is the largest directory of links to no-fee, no-broker buildings in NYC
     .home-search-form
-      = render partial: 'home/search_form'
+      = render 'home/search_form'
+    .home-quick-links
+      = render 'home/quick_links'
 
 / - cache(['apt_popular_neighborhoods', @buildings_count, Date.today]) do
 = render 'layouts/home/popular_neighborhoods'

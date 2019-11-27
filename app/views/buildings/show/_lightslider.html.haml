@@ -5,7 +5,7 @@
         %span.current 1
         %span.total="/ #{images_count = @uploaded_images_count}"
 
-      %ul.gallery.list-unstyled{style: "height: 165px;", data: { buildingid: "#{building.id}", view_type: 'show', path:  building_path(building) } }
+      %ul.gallery.list-unstyled{style: "height: 265px;", data: { buildingid: "#{building.id}", view_type: 'show', path:  building_path(building) } }
         - @uploads.each do |upload|
           %li{ data: { thumb: img_url = upload.uploaded_img_url } }
             %a{ href: img_url, 'data-role' => 'slider', 'data-caption' => date_uploaded(upload) }

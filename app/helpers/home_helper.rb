@@ -324,4 +324,19 @@ module HomeHelper
 		link_to link_text, "/nyc/#{link_text.downcase.split(' ').join('-')}", class: 'hyper-link'
 	end
 
+	def home_quick_links
+		[
+			{desk_name: 'Midtown Manhattan', 		mob_name: 'Midtown' , 	url: search_link('Midtown', 				'MANHATTAN')},
+			{desk_name: 'Downtown Manhattan',		mob_name: 'Downtown', 	url: search_link('Lower Manhattan', 'MANHATTAN')},
+			{desk_name: 'Upper Manhattan',			mob_name: 'Upper', 			url: search_link('Upper Manhattan', 'MANHATTAN')},
+			{desk_name: 'Upper East Side',			mob_name: 'UES', 				url: search_link('Upper East Side', 'MANHATTAN')},
+			{desk_name: 'Upper West Side',			mob_name: 'UWS', 				url: search_link('Upper West Side', 'MANHATTAN')},
+			{desk_name: 'Brooklyn',							mob_name: 'Brooklyn', 	url: search_link('Brooklyn', 				'Brooklyn')}
+		]
+	end
+
+	def quick_link_name nb
+		browser.device.mobile? ? nb[:mob_name] : nb[:desk_name]
+	end
+
 end

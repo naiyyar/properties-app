@@ -44,3 +44,19 @@
     }
 	}
 }
+
+.home-quick-links{
+	z-index: 999;
+	padding: 8px 0px;
+	ul{
+		margin: 0px;
+		padding: 8px;
+		li a{
+			color: #2b78e4;
+			font-size: 12px;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+	}
+}
