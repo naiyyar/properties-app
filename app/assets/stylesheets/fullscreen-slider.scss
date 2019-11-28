@@ -31,7 +31,7 @@
     color: transparent;
     background-size: cover;
     background-position: 50% 60%;
-    background-repeat: none;
+    background-repeat: no-repeat;
     opacity: 0;
     z-index: 0;
 	-webkit-backface-visibility: hidden;
@@ -85,7 +85,7 @@
         top: 225px;
     }
     .search-panel{
-        margin: 0px 160px;
+        margin: 0px 150px;
         padding: 110px 0px 0px 0px;
     }
 }
