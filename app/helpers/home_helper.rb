@@ -331,7 +331,7 @@ module HomeHelper
 			{desk_name: 'Upper Manhattan',			mob_name: 'Upper', 			url: search_link('Upper Manhattan', 'MANHATTAN')},
 			{desk_name: 'Upper East Side',			mob_name: 'UES', 				url: search_link('Upper East Side', 'MANHATTAN')},
 			{desk_name: 'Upper West Side',			mob_name: 'UWS', 				url: search_link('Upper West Side', 'MANHATTAN')},
-			{desk_name: 'Brooklyn',							mob_name: 'Brooklyn', 	url: search_link('Brooklyn', 				'Brooklyn')}
+			{desk_name: 'Brooklyn',							mob_name: 'Brooklyn', 	url: '/no-fee-apartments-nyc-city/brooklyn-ny'}
 		]
 	end
 
