@@ -1,8 +1,9 @@
 - content_for :page_title do
   = @tab_title_text if @tab_title_text.present?
 #hero-container
-  - cache('slider_home') do
-    = render 'layouts/home/slider'
+  / - cache('slider_home') do
+  / = render 'layouts/home/slider'
+  .bg_image_holder
   
   = render 'layouts/home/header'
   .search-panel
