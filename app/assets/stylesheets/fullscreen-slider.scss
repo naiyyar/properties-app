@@ -78,6 +78,12 @@
         height: 268px;
         top: 188px;
     }
+
+    #hero-container .bg_image_holder {
+        height: 49%;
+        width: 100%;
+        top: 75%;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
