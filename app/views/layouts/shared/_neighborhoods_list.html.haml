@@ -30,7 +30,7 @@
       %li.parent{"data-parent" => "midtown"}= search_by_neighborhood_link('Roosevelt Island', area)
     %b#uptown_manhattan
       Uptown Manhattan (
-      %span>= @uptown_count
+      %span>= uptown_count
       )
     .child-borough-container
       %li.parent{"data-parent" => "uptown_manhattan"}
@@ -66,7 +66,7 @@
       
       %b#brooklyn
         - area = 'Brooklyn'
-        = link_to "Brooklyn (#{@brooklyn_count})", '/no-fee-apartments-nyc-city/brooklyn-ny'
+        = link_to "Brooklyn (#{brooklyn_count})", '/no-fee-apartments-nyc-city/brooklyn-ny'
       %li.parent{"data-parent" => "brooklyn"}= search_by_neighborhood_link('Brooklyn Heights', area)
       %li.parent{"data-parent" => "brooklyn"}= search_by_neighborhood_link('Bushwick', area)
       %li.parent{"data-parent" => "brooklyn"}= search_by_neighborhood_link('Clinton Hill', area)
@@ -84,13 +84,13 @@
       %li.parent{"data-parent" => "brooklyn"}= search_by_neighborhood_link('Williamsburg', area)
     
     - area = 'Queens'
-    %b#queens= link_to "Queens (#{@queens_count})", '/no-fee-apartments-nyc-city/queens-ny'
+    %b#queens= link_to "Queens (#{queens_count})", '/no-fee-apartments-nyc-city/queens-ny'
     .child-borough-container
       - queens_sub_borough.each do |borough|
         %li.parent{"data-parent" => "queens"}= search_by_neighborhood_link(borough, area)
     %b#bronx
       - area = 'Bronx'
-      = link_to "Bronx (#{@bronx_count})", '/no-fee-apartments-nyc-city/bronx-ny'
+      = link_to "Bronx (#{bronx_count})", '/no-fee-apartments-nyc-city/bronx-ny'
     .child-borough-container{style: ""}
       %li.parent{"data-parent" => "bronx"}= search_by_neighborhood_link('East Bronx', area)
       %li.parent{"data-parent" => "bronx"}= search_by_neighborhood_link('Morris Heights', area)

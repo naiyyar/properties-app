@@ -4,9 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session, except: :load_infobox
 
   before_action :allow_iframe_requests
-  after_action :store_location, unless: :skip_store_location
-  before_action :show_nb_counts, :popular_neighborhoods, if: :html_request?
+  after_action  :store_location,              unless: :skip_store_location
+  before_action :popular_neighborhoods
   before_action :set_view_type
+
+  helper_method :uptown_count, :brooklyn_count, :queens_count, :bronx_count
   
   def store_location
     # store last url as long as it isn't a /users path
@@ -17,15 +19,23 @@ class ApplicationController < ActionController::Base
 
   def popular_neighborhoods
     @pop_nb_hash = {}
-    if @show_nb_counts
-      buildings = Building.select(:city, :neighborhood)
-      nbs = Neighborhood.select(:name, :buildings_count)
-      @uptown_count = Neighborhood.nb_buildings_count(nbs, view_context.uptown_sub_borough)
-      @brooklyn_count = Building.city_count(buildings, 'Brooklyn', view_context.brooklyn_sub_borough)
-      @queens_count = Building.city_count(buildings, 'Queens', view_context.queens_sub_borough)
-      @bronx_count = Building.city_count(buildings, 'Bronx')
-      nbs.each{ |nb| @pop_nb_hash[nb.name] = nb.buildings_count }
-    end
+    pop_neighborhoods.each{ |nb| @pop_nb_hash[nb.name] = nb.buildings_count }
+  end
+
+  def uptown_count
+    @uptown_count   ||= Neighborhood.nb_buildings_count(pop_neighborhoods, view_context.uptown_sub_borough)
+  end
+
+  def brooklyn_count
+    @brooklyn_count ||= Building.city_count(pop_nb_buildings, 'Brooklyn', view_context.brooklyn_sub_borough)
+  end
+
+  def queens_count
+    @queens_count   ||= Building.city_count(pop_nb_buildings, 'Queens', view_context.queens_sub_borough)
+  end
+
+  def bronx_count
+    @bronx_count    ||= Building.city_count(pop_nb_buildings, 'Bronx')
   end
 
   def after_sign_up_path_for(resource)
@@ -38,17 +48,12 @@ class ApplicationController < ActionController::Base
 
 	private
 
-  def html_request?
-    request.format.html?
+  def pop_nb_buildings
+    @pop_buildings ||= Building.select(:city, :neighborhood)
   end
 
-  #showing neightborhoods count where ever necessary to reduce load time
-  def show_nb_counts
-    if controllers.include?(params[:controller]) and actions.include?(params[:action])
-      @show_nb_counts = false 
-    else
-      @show_nb_counts = true
-    end
+  def pop_neighborhoods
+    @pop_neighborhoods ||= Neighborhood.select(:name, :buildings_count)
   end
 
   def controllers
