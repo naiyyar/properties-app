@@ -1,9 +1,9 @@
 #hero-container{
     .bg_image_holder{
       position: absolute;
-      height: 85%;
-      width: 87%;
-      top: 56%;
+      height: 80%;
+      width: 82%;
+      top: 58%;
       left: 50%;
       -webkit-background-size: cover !important;
       background-size: cover !important;
@@ -80,7 +80,7 @@
     }
 
     #hero-container .bg_image_holder {
-        height: 49%;
+        height: 50%;
         width: 100%;
         top: 75%;
     }
@@ -129,8 +129,7 @@
         width: 81%;
     }
     #hero-container .bg_image_holder{
-        width: 80%;
-        top: 55%;
+        width: 77%;
     }
 }
 
@@ -146,15 +145,14 @@
     }
 
     #hero-container .bg_image_holder{
-        width: 67%;
-        top: 56%;
+        width: 62%;
+        top: 60%;
     }
 }
 
 @media screen and (min-width: 1920px) and (max-width: 2200px){
     #hero-container .bg_image_holder{
         width: 58%;
-        top: 56%;
     }
 }
 
@@ -172,7 +170,7 @@
     }
 
     #hero-container .bg_image_holder{
-        width: 44%;
-        top: 57%;
+        width: 40%;
+        top: 60%;
     }
 }
