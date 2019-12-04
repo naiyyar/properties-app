@@ -86,6 +86,7 @@ gem 'puma'
 
 #R
 gem 'ratyrate', github: 'wazery/ratyrate'
+gem "recaptcha", require: "recaptcha/rails"
 gem 'roo'
 gem "rolify"
 gem 'rollbar'

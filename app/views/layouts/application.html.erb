@@ -36,14 +36,7 @@
       <div id="wrapper" class="<%=contribute_wrapper(params)%>">
         <%= render partial: 'layouts/shared/filter_buttons' %>
         <div class="content">
-          <% if @show_nb_counts %>
-            <div class="popular-neighborhoods" style="display: none;">
-              <div class="pull-right" style="padding: 4px; cursor: pointer;">
-                <%= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeHoods' %>
-              </div>
-              <%= render partial: 'layouts/home/popular_neighborhoods' %>
-            </div>
-          <%end%>
+          <%= yield :neighborhoods_modal if content_for? :neighborhoods_modal %>
           <%= yield %>
         </div>
         <%= render 'layouts/home/footer' if show_full_width_footer? and action_name != 'about' and action_name != 'contribute' %>
@@ -54,10 +47,9 @@
     <%end%>
     <div id="remote-container"></div>
     <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? and params[:searched_by].present? %>
-    
     <%if current_user.blank? %>
-      <%= render 'layouts/shared/signin'%>
-      <%= render 'layouts/shared/signup'%>
+      <%= render 'layouts/shared/signin' if controller_name != 'sessions' %>
+      <%= render 'layouts/shared/signup' if controller_name != 'registrations' %>
     <%end%>
 
     <%= javascript_include_tag 'home' %>

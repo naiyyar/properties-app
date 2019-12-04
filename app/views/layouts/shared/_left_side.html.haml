@@ -9,14 +9,17 @@
           %span.navIcon.fa.fa-plus-circle
           %span.navLabel Write a review
       - if current_user.blank?
-        %li
-          %a.left-side-zindex{"data-target" => "#signin", "data-toggle" => "modal", href: "#"}
-            %span.navIcon.fa.fa-sign-in
-            %span.navLabel Sign In
-        %li
-          %a.left-side-zindex{"data-target" => "#signup", "data-toggle" => "modal", href: "#"}
-            %span.navIcon.fa.fa-user
-            %span.navLabel Sign Up
+        - if controller_name != 'sessions'
+          %li
+            %a.left-side-zindex{"data-target" => "#signin", "data-toggle" => "modal", href: "#"}
+              %span.navIcon.fa.fa-sign-in
+              %span.navLabel Sign In
+        
+        - if controller_name != 'registrations'
+          %li
+            %a.left-side-zindex{"data-target" => "#signup", "data-toggle" => "modal", href: "#"}
+              %span.navIcon.fa.fa-user
+              %span.navLabel Sign Up
       - if current_user and current_user.has_role?(:admin)
         %li
           %a{href: "/buildings"}

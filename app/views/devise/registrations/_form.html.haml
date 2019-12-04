@@ -18,6 +18,11 @@
   .form-group
     = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password', id: 'signup_user_password'
     %p.help-block
+  
+  .form-group.apt-captcha
+    =recaptcha_tags
+    %p.help-block
+  
   .form-group
     = f.submit 'Sign Up', class: 'btn btn-block btn-blue', data: { disable_with: "Signing up ..." }
   %p.help-block
