@@ -64,20 +64,21 @@ class BuildingsController < ApplicationController
   def contribute
     session[:form_data] = nil if session[:form_data].present?
     if params[:management].present?
-      @buildings = Building.where('management_company_id is null')
-      @search_type = 'companies'
+      @buildings    = Building.where('management_company_id is null')
+      @search_type  = 'companies'
     else
-      @buildings = Building.all
-      @search_type = 'building'
+      @buildings    = Building.all
+      @search_type  = 'building'
     end
     @feature_comp_search_type = params[:featured_on].present? ? 'feature_comp_on' : 'feature_comp_as'
-    @buildings = @buildings.text_search(params[:term]).reorder('building_street_address ASC').limit(10).includes(:units)
-    @building = Building.where(id: params[:building_id]).first if params[:building_id].present?
-    @search_bar_hidden = :hidden
+    @buildings                = @buildings.text_search(params[:term]).reorder('building_street_address ASC').limit(10).includes(:units)
+    @building                 = Building.where(id: params[:building_id]).first  if params[:building_id].present?
+    @search_bar_hidden        = :hidden
   end
 
   def import
-    Building.import_reviews(params[:file])
+    #Building.import_reviews(params[:file])
+    ImportReviews.new(params[:file]).import_reviews
     redirect_to :back, notice: 'File imported.'
   end
 
@@ -95,9 +96,10 @@ class BuildingsController < ApplicationController
   end
 
   def edit
-    @neighborhood_options = Building.select('neighborhood').where.not(neighborhood: [nil, '']).order(neighborhood: :asc).distinct.pluck(:neighborhood)
-    @parent_neighborhood_options = Building.select('neighborhoods_parent').where.not(neighborhoods_parent: [nil, '']).order(neighborhoods_parent: :asc).distinct.pluck(:neighborhoods_parent)
-    @grand_parent_neighborhood_options = Building.select('neighborhood3').where.not(neighborhood3: [nil, '']).order(neighborhood3: :asc).distinct.pluck(:neighborhood3)
+    buildings = Building.all
+    @neighborhood_options              = buildings.select('neighborhood').where.not(neighborhood: [nil, '']).order(neighborhood: :asc).distinct.pluck(:neighborhood)
+    @parent_neighborhood_options       = buildings.select('neighborhoods_parent').where.not(neighborhoods_parent: [nil, '']).order(neighborhoods_parent: :asc).distinct.pluck(:neighborhoods_parent)
+    @grand_parent_neighborhood_options = buildings.select('neighborhood3').where.not(neighborhood3: [nil, '']).order(neighborhood3: :asc).distinct.pluck(:neighborhood3)
   end
 
   def update

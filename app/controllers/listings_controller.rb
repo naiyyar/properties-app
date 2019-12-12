@@ -35,7 +35,9 @@ class ListingsController < ApplicationController
   end
 
   def import
-    @errors = Listing.import_listings(params[:file])
+    #@errors = Listing.import_listings(params[:file])
+    import_listing = ImportListing.new(params[:file])
+    @errors = import_listing.import_listings
     if @errors.present?
       flash[:error] = @errors
     else
@@ -60,15 +62,16 @@ class ListingsController < ApplicationController
   def show_more
     @building = Building.find(params[:building_id])
     unless params[:listing_type].present?
-      @listings = @building.listings
-      order = {date_active: :desc, rent: :asc}
+      @listings = @building.listings.order_by_date_active_desc
       @rentals = 'past'
     else
-      @listings = @building.listings.active
+      @listings = @building.listings.active.order_by_rent_asc
       @rentals = 'active'
-      order = {rent: :asc}
     end
-    @listings = @listings.reorder(order)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show

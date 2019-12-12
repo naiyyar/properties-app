@@ -267,4 +267,8 @@ module BuildingsHelper
 	  'Bed' if building.bedroom_types?
 	end
 
+	def feature_comp_bg_img_url uploads
+		uploads.present? ? uploads.uploaded_img_url : image_url('no-photo.png')
+	end
+
 end

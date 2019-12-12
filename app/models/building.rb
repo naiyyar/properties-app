@@ -67,7 +67,6 @@ class Building < ApplicationRecord
   extend BuildingFilters
   extend BuildingSorting
   extend PopularSearches
-  extend ImportBuildingReviews
 
   acts_as_voteable
   resourcify
