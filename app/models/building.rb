@@ -179,7 +179,7 @@ class Building < ApplicationRecord
   #Methods
 
   def continue_call_back?
-    !(avg_rating_changed? && recommended_percent_changed? && min_listing_price_changed? && max_listing_price_changed?)
+    (avg_rating_changed? && recommended_percent_changed? && min_listing_price_changed? && max_listing_price_changed?)
   end
 
   def self.buildings_json_hash(searched_buildings)

@@ -14,23 +14,30 @@
                   #as-comp-buildings-search-results.results{style: "position: relative;"}
                   
               = f.hidden_field :building_id
-            .row
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                .form-group
-                  %label Start Date
-                  = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
+              = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin'
+              = f.hidden_field :user_id, value: current_user.id if current_user.present?
+            - unless params[:type].present?
+              .row
+                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                  .form-group
+                    %label Start Date
+                    = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
 
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                .form-group
-                  %label End Date
-                  = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
-
+                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                  .form-group
+                    %label End Date
+                    = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
+            -else
+              %p= "We will charge you #{number_to_currency(Billing::PRICE)} for four weeks."
+              %p 
+                We Do not offer refunds. Please review our full 
+                %a.hyper-link{href: '/terms_of_service'} Term of Use
             
             .form-group
               .col-sm-12
                 .pull-right
                   = link_to 'Cancel', featured_buildings_path, class: 'btn btn-default'
-                  = f.submit 'Save', class: 'btn btn-primary'
+                  = f.submit "#{params[:type].present? ? 'Next' : 'Save'}", class: 'btn btn-primary'
     
 
 :javascript

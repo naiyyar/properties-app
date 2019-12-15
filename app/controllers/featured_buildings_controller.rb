@@ -39,7 +39,7 @@ class FeaturedBuildingsController < ApplicationController
 
     respond_to do |format|
       if @featured_building.save
-        format.html { redirect_to featured_buildings_url, notice: 'Featured building was successfully created.' }
+        format.html { redirect_to redirect_path, notice: 'Featured building was successfully created.' }
         format.json { render :show, status: :created, location: @featured_building }
       else
         format.html { render :new }
@@ -80,6 +80,10 @@ class FeaturedBuildingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def featured_building_params
-      params.require(:featured_building).permit(:building_id, :start_date, :end_date, :active)
+      params.require(:featured_building).permit(:building_id, :start_date, :end_date, :active, :user_id, :featured_by)
+    end
+
+    def redirect_path
+      @featured_building.featured_by_manager? ? new_manager_featured_building_user_path(current_user, type: 'billing', fb_id: @featured_building.id) : featured_buildings_url
     end
 end

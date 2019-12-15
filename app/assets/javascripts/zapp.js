@@ -491,6 +491,8 @@
                         }
                     };
     $('.phone_number').mask("(000) 000-0000", mask_options);
+    $('#card-number').mask("0000 0000 0000 0000 000", mask_options);
+    $('#card-cvc').mask("0000", mask_options);
     
     //removing neighborhoods dropdown toggle background when mouse leave
     var once_leaved = false;

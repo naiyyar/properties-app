@@ -1,0 +1,24 @@
+%h2
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    .table-overflow
+      %table.table.table-striped#sortable
+        %thead
+          %tr
+            %th{width: "15%"} Date
+            %th{width: "15%"} Amount
+            %th Status
+            %th{width: "15%"} Actions
+        
+        %tbody.table
+          - @billings.each do |billing|
+            %tr
+              %td=billing.created_at.strftime('%d-%m-%Y')
+              %td.text-right=number_to_currency(billing.amount, precision: 2)
+              %td=billing.status
+              %td.text-center
+                =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, '#'
+                &nbsp;
+                =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, '#'
+                &nbsp;
+                =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, '#'

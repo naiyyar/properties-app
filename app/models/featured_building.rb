@@ -1,9 +1,13 @@
 class FeaturedBuilding < ApplicationRecord
   include PgSearch
   belongs_to :building
+  belongs_to :user
+  has_one :billing
 
-  scope :active, -> { where(active: true) }
-  scope :inactive, -> { where(active: false) }
+  enum status: [:draft, :live, :expired]
+
+  scope :active,      -> { where(active: true) }
+  scope :inactive,    -> { where(active: false) }
   scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Date.today) }
 
   pg_search_scope :search_query, 
@@ -18,6 +22,10 @@ class FeaturedBuilding < ApplicationRecord
      :search_query
     ]
   )
+
+  def featured_by_manager?
+    featured_by == 'manager'
+  end
 
   def self.active_featured_buildings building_ids
     where(building_id: building_ids).active

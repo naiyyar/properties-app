@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190920162149) do
+ActiveRecord::Schema.define(version: 20191215100540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 20190920162149) do
     t.datetime "updated_at"
     t.index ["rateable_id", "rateable_type"], name: "index_average_caches_on_rateable_id_and_rateable_type", using: :btree
     t.index ["rater_id"], name: "index_average_caches_on_rater_id", using: :btree
+  end
+
+  create_table "billings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "featured_building_id"
+    t.decimal  "amount",               default: "0.0"
+    t.string   "status"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "broker_fee_percents", force: :cascade do |t|
@@ -168,13 +177,17 @@ ActiveRecord::Schema.define(version: 20190920162149) do
   end
 
   create_table "featured_buildings", force: :cascade do |t|
-    t.integer  "building_id",                 null: false
+    t.integer  "building_id",                   null: false
     t.date     "start_date"
     t.date     "end_date"
     t.boolean  "active",      default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "user_id"
+    t.string   "featured_by", default: "admin"
+    t.integer  "status"
     t.index ["building_id"], name: "index_featured_buildings_on_building_id", using: :btree
+    t.index ["status"], name: "index_featured_buildings_on_status", using: :btree
   end
 
   create_table "featured_comp_buildings", force: :cascade do |t|
@@ -276,12 +289,6 @@ ActiveRecord::Schema.define(version: 20190920162149) do
     t.datetime "updated_at",      null: false
     t.index ["searchable_id", "searchable_type"], name: "index_pg_search_documents_on_searchable_id_and_searchable_type", using: :btree
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
-  end
-
-  create_table "popular_searches", force: :cascade do |t|
-    t.string "title"
-    t.string "slug"
-    t.string "category"
   end
 
   create_table "prices", force: :cascade do |t|

@@ -1,1 +1,5 @@
-<%= render 'form' %>
+<% if params[:type] == 'featured' %>
+	<%= render 'form' %>
+<%else%>
+	<%= render 'billings/form' %>
+<%end%>

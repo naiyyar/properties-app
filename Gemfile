@@ -99,6 +99,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #gem 'simple-line-icons-rails'
 gem 'sitemap_generator'
 gem 'social-share-button'
+gem 'stripe'
 
 #T
 gem 'thumbs_up'
