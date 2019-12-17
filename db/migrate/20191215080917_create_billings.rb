@@ -5,6 +5,7 @@ class CreateBillings < ActiveRecord::Migration[5.0]
     	t.integer :featured_building_id
     	t.decimal :amount, 							default: 0.0
     	t.string 	:status
+    	t.string :stripe_customer_id, 	unique: true
       t.timestamps
     end
   end

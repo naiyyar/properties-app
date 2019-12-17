@@ -1,46 +1,52 @@
 .form-container
   .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-6
-      .panel.panel-default
-        .panel-heading
-          %b New Billing
-        .panel-body
-          = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .payment-errors.text-danger
-            
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  / = text_field_tag :email, nil, class: 'form-control', :autocomplete => :off, data: { stripe: 'email' }, id: 'user-email', placeholder: 'Email'
-                  = hidden_field_tag 'billing[amount]', 49
-                  = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
-                  = hidden_field_tag 'billing[user_id]', current_user.id
+    - if @saved_cards.present?
+      .col-xs-12.col-sm-12.col-md-12.col-lg-6
+        - @saved_cards.each do |card|
+          %p="#{card[:brand]} ending in #{card[:last4]} expires #{card[:exp_month]}/#{card[:exp_year]}"
+    -else
+      .col-xs-12.col-sm-12.col-md-12.col-lg-6
+        .panel.panel-default
+          .panel-heading
+            %b New Billing
+          .panel-body
+            = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
+              .row
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  .payment-errors.text-danger
+              
+              .row
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  .form-group
+                    = text_field_tag :email, current_user.email, class: 'form-control', :autocomplete => :off, data: { stripe: 'email' }, id: 'user-email', placeholder: 'Email'
+                    = hidden_field_tag 'billing[amount]', 49
+                    = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
+                    = hidden_field_tag 'billing[user_id]', current_user.id
+                    / = hidden_field_tag :payment_token, nil, class: 'stripe-payment-token'
 
-                .row
-                  .col-lg-10
-                    .form-group
-                      = text_field_tag :card_number,nil, class: 'form-control', :autocomplete => :off, data: { stripe: 'number' }, id: 'card-number', placeholder: 'Card number'
-                  .col-lg-2
-                    .card-type.text-center
-                      %span.fa.fa-credit-card.fa-3x.text-muted
-                .row
-                  .col-lg-2
-                    .form-group
-                      = select_tag :exp_month, options_for_select('01'..'12'), prompt: 'MM', class: 'form-control', data: { stripe: 'exp-month' }, id: 'card-exp-month', placeholder: 'MM'
-                  .col-lg-3
-                    .form-group  
-                      = select_tag :exp_year, options_for_select(Date.today.year..(Date.today.year + 15)), prompt: 'YYYY', class: 'form-control', data: { stripe: 'exp-year' }, id: 'card-exp-year', placeholder: 'YYYY'
-                  .col-lg-4
-                    .form-group
-                      = text_field_tag :cvc, nil, class: 'form-control', :autocomplete => :off, data: { stripe: 'cvc' }, id: 'card-cvc', placeholder: 'CVC'
-            
-            
-            .form-group
-              %br
-              = submit_tag 'Pay $49.00', class: 'btn btn-primary btn-block font-bold btn_submit'
-    
+                  .row
+                    .col-lg-10
+                      .form-group
+                        = text_field_tag :card_number,nil, class: 'form-control', :autocomplete => :off, data: { stripe: 'number' }, id: 'card-number', placeholder: 'Card number'
+                    .col-lg-2
+                      .card-type.text-center
+                        %span.fa.fa-credit-card.fa-3x.text-muted
+                  .row
+                    .col-lg-2
+                      .form-group
+                        = select_tag :exp_month, options_for_select('01'..'12'), prompt: 'MM', class: 'form-control', data: { stripe: 'exp-month' }, id: 'card-exp-month', placeholder: 'MM'
+                    .col-lg-3
+                      .form-group  
+                        = select_tag :exp_year, options_for_select(Date.today.year..(Date.today.year + 15)), prompt: 'YYYY', class: 'form-control', data: { stripe: 'exp-year' }, id: 'card-exp-year', placeholder: 'YYYY'
+                    .col-lg-4
+                      .form-group
+                        = text_field_tag :cvc, nil, class: 'form-control', :autocomplete => :off, data: { stripe: 'cvc' }, id: 'card-cvc', placeholder: 'CVC'
+              
+              
+              .form-group
+                %br
+                = submit_tag 'Pay $49.00', class: 'btn btn-primary btn-block font-bold btn_submit btn_submit_stripe-form'
+      
 
 :javascript
   $(function() {

@@ -1,4 +1,14 @@
+- if @saved_cards.present?
+  .row
+    .col-xs-12.col-sm-12.col-md-6.col-lg-4
+      %table.table.table-striped
+        - @saved_cards.each do |card|
+          %tr
+            %td="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{card[:exp_month]}/#{card[:exp_year]}"
+      .pull-left
+        =link_to 'Add New Card', '#', class: 'btn btn-primary'
 %h2
+
 .row
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
     .table-overflow
@@ -8,6 +18,7 @@
             %th{width: "15%"} Date
             %th{width: "15%"} Amount
             %th Status
+            %th Cust_id
             %th{width: "15%"} Actions
         
         %tbody.table
@@ -16,6 +27,7 @@
               %td=billing.created_at.strftime('%d-%m-%Y')
               %td.text-right=number_to_currency(billing.amount, precision: 2)
               %td=billing.status
+              %td=billing.stripe_customer_id
               %td.text-center
                 =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, '#'
                 &nbsp;

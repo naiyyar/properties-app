@@ -38,7 +38,8 @@ class UsersController < ApplicationController
 	    																			 .includes(:building => [:management_company])
 	    																			 .order('created_at desc')
 	  else
-	  	@billings = @user.billings.order('created_at desc').paginate(:page => params[:page], :per_page => 100)
+	  	@saved_cards = Billing.get_saved_cards(current_user)
+	  	@billings 	 = @user.billings.order('created_at desc').paginate(:page => params[:page], :per_page => 100)
 	  end
 
     respond_to do |format|

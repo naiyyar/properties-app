@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20191215100540) do
     t.integer  "featured_building_id"
     t.decimal  "amount",               default: "0.0"
     t.string   "status"
+    t.string   "stripe_customer_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end

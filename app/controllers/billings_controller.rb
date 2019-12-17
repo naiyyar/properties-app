@@ -26,13 +26,17 @@ class BillingsController < ApplicationController
   # POST /billings.json
   def create
     @billing = Billing.new(billing_params)
-
+    @billing.customer_email = params[:email]
+    @billing.payment_token = params[:payment_token]
     respond_to do |format|
       if @billing.save_and_make_payment!
         format.html { redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Billing was successfully created.' }
         format.json { render :show, status: :created, location: @billing }
       else
-        format.html { render :new }
+        format.html { 
+          flash[:error] = @billing.errors.messages[:credit_card]
+          redirect_to :back 
+        }
         format.json { render json: @billing.errors, status: :unprocessable_entity }
       end
     end
