@@ -28,6 +28,7 @@ class BillingsController < ApplicationController
     @billing = Billing.new(billing_params)
     @billing.customer_email = params[:email]
     @billing.payment_token = params[:payment_token]
+    @billing.description = ''
     respond_to do |format|
       if @billing.save_and_make_payment!
         format.html { redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Billing was successfully created.' }

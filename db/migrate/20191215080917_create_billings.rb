@@ -6,6 +6,8 @@ class CreateBillings < ActiveRecord::Migration[5.0]
     	t.decimal :amount, 							default: 0.0
     	t.string 	:status
     	t.string :stripe_customer_id, 	unique: true
+      t.string :stripe_card_id,       unique: true
+      t.string :stripe_charge_id,     unique: true
       t.timestamps
     end
   end

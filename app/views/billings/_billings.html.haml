@@ -1,12 +1,15 @@
 - if @saved_cards.present?
+  %h2
   .row
     .col-xs-12.col-sm-12.col-md-6.col-lg-4
+      %p.bolder.font-md Credit cards
       %table.table.table-striped
         - @saved_cards.each do |card|
           %tr
             %td="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{card[:exp_month]}/#{card[:exp_year]}"
+            %td.text-center=link_to 'Delete', '#', class: 'btn btn-danger btn-sm'
       .pull-left
-        =link_to 'Add New Card', '#', class: 'btn btn-primary'
+        =link_to 'Add New Card', '#', class: 'btn btn-primary btn-sm'
 %h2
 
 .row
@@ -26,7 +29,9 @@
             %tr
               %td=billing.created_at.strftime('%d-%m-%Y')
               %td.text-right=number_to_currency(billing.amount, precision: 2)
-              %td=billing.status
+              %td
+                - if billing.stripe_customer_id.present?
+                  %b.text-success Success
               %td=billing.stripe_customer_id
               %td.text-center
                 =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, '#'

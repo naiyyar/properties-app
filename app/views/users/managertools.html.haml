@@ -11,7 +11,11 @@
 		.row
 			.col-lg-6
 				.pull-left
-					%h4="#{current_user.name}'s Featured Buildings"
+					%h4
+						-if params[:type] == 'featured'
+							="#{current_user.name}'s Featured Buildings"
+						-else
+							="#{current_user.name}'s Billing"
 			.col-lg-6
 				.pull-right
 					=link_to 'Add New Featured Buildings', new_manager_featured_building_user_path(current_user, type: 'featured'), class: 'btn btn-primary'

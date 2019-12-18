@@ -2,9 +2,9 @@ class FeaturedBuilding < ApplicationRecord
   include PgSearch
   belongs_to :building
   belongs_to :user
-  has_one :billing
+  has_one :billing, :dependent => :destroy
 
-  enum status: [:draft, :live, :expired]
+  #enum status: [:draft, :live, :expired]
 
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
@@ -33,5 +33,17 @@ class FeaturedBuilding < ApplicationRecord
 
   def self.active_building_ids building_ids
     active_featured_buildings(building_ids).pluck(:building_id)
+  end
+
+  def has_start_and_end_date?
+    start_date.present? and end_date.present?
+  end
+
+  def live?
+    start_date.present? and end_date.present? and end_date > Date.today
+  end
+
+  def expired?
+    !live?
   end
 end

@@ -1,0 +1,53 @@
+#main
+	.inner
+		%section
+			.logo=image_tag 'logo2.png', width: 200
+			%h2.company-name Transparentcity
+
+
+			#receipt-header
+				%h2 Receipt
+				%hr
+				.card
+
+	.payment-date=@billing.created_at.strftime('%d-%m-%Y')
+
+	.inner
+		%table
+			%tr
+				%th Description
+				%th Amount
+
+			%tr
+				%td Ad for 4 weeks
+				%td=number_to_currency(amount = @billing.amount)
+
+			%tfoot
+				%tr
+					%td 
+						%b Total
+					%td
+						%b=number_to_currency(amount)
+
+
+:css
+	#main{
+		width: 500px;
+	}
+	#main .inner{
+		padding: 10px 50px;
+		width: 500px;
+	}
+	#main .inner section{
+		margin: 0 auto;
+	}
+	.payment-date{
+		padding: 10px 0px;
+		width: 100%;
+		background: #ddd;
+		color: #333;
+	}
+	.inner table tr th, .inner table tr td{
+		padding: 8px 10px;
+		border: 1px solid #ddd;
+	}

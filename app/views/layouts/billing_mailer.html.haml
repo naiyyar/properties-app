@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name: "viewport"}/
+    %title Billing-Transparentcity
+    = stylesheet_link_tag 'application', media: 'all'
+    =csrf_meta_tags
+    :css
+      font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+
+  %body{style: 'background-color: #ffffff !important;' }
+    = yield
