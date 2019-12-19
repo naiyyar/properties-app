@@ -11,9 +11,6 @@ class BillingService
 		cards = []
 		current_user.billings.pluck(:stripe_customer_id).map do |cust_id|
 			#payment_methods = Stripe::PaymentMethod.list({customer: cust_id, type: 'card'})
-			#data = payment_methods.data[0]
-			#card = data['card']
-			#card = get_stripe_card(stripe_object_ids)
 			begin
 				card = fetch_card(cust_id)
 				cards << { 	id:         	card['id'],
@@ -24,31 +21,28 @@ class BillingService
 										last4: 				card['last4'] 
 									} if card.present?
 			rescue Timeout::Error
-				puts 'That took too long, exiting...'
+				puts 'Taking too long, exiting...'
 			end
 		end
 		return cards
 	end
 
 	def fetch_card cust_id
-		card = Stripe::Customer.list_sources(cust_id).data.first
+		Stripe::Customer.list_sources(cust_id).data.first
 	end
 
-	# def get_stripe_card stripe_object_ids
-	# 	customer_id, card_id = stripe_object_ids[0], stripe_object_ids[1]
-	# 	Stripe::Customer.retrieve_source(
-	# 	  customer_id,
-	# 	  card_id,
-	# 	)
-	# end
-
-	def create_stripe_customer
-		Stripe::Customer.create(email: @customer_email, card: @payment_token)
+	def find_or_create_stripe_customer options={}
+		billing 		 = options[:billing]
+		current_user = options[:current_user]
+		current_user = billing.user if billing.present?
+		unless current_user.customer_id.present?
+			customer = Stripe::Customer.create(email: @customer_email, card: @payment_token)
+			current_user.update(customer_id: customer.id)
+		else
+			customer = Stripe::Customer.retrieve(current_user.customer_id)
+		end
+		return customer
 	end
-
-	# def create_stripe_card customer_id
-	# 	Stripe::Customer.create_source(customer_id, { source: @payment_token })
-	# end
 
 	def create_stripe_charge customer_id
 		Stripe::Charge.create(

@@ -31,7 +31,6 @@
                   = hidden_field_tag 'billing[amount]', 49
                   = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
                   = hidden_field_tag 'billing[user_id]', current_user.id
-                  / = hidden_field_tag :payment_token, nil, class: 'stripe-payment-token'
 
                 = render 'billings/card_detail_fields'
             
@@ -39,18 +38,3 @@
             .form-group
               %br
               = submit_tag 'Pay $49.00', class: 'btn btn-primary btn-block font-bold btn_submit btn_submit_stripe-form'
-      
-
-:javascript
-  $(function() {
-    new app.AsCompBuildings;
-  });
-
-  $(document).on('keyup', function(e){
-    if(e.keyCode == 40 || e.keyCode == 38){
-      if(!$("ul.ui-autocomplete").is(":visible")) {
-        //#ui-id-1: becasue there are two 1. global search 2. for buildings search
-        $("#ui-id-1").show();
-      }
-    }
-  })

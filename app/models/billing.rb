@@ -12,7 +12,7 @@ class Billing < ApplicationRecord
 		if valid?
       begin
       	billing_service 				= BillingService.new(stripe_card_id, customer_email, description)
-      	customer 								= billing_service.create_stripe_customer
+      	customer 								= billing_service.find_or_create_stripe_customer(billing: self)
       	self.stripe_customer_id = customer.id
         charge 									= billing_service.create_stripe_charge(customer.id)
         self.stripe_charge_id 	= charge.id

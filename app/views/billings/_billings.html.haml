@@ -8,7 +8,7 @@
           %tr{id: card[:id].last(9)}
             %td="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{card[:exp_month]}/#{card[:exp_year]}"
             %td.text-center
-              =link_to 'Delete', delete_card_path(card_id: card[:id], customer_id: card[:customer_id]), class: 'btn btn-danger btn-sm', remote: true
+              =link_to 'Delete', delete_card_path(card_id: card[:id], customer_id: card[:customer_id]), class: 'btn btn-danger btn-sm', remote: true, data: { disable_with: 'Deleting...' }
     .pull-left
       =link_to 'Add New Card', new_manager_featured_building_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm disabled'
 %h2
