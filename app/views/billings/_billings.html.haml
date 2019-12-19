@@ -1,15 +1,16 @@
-- if @saved_cards.present?
-  %h2
-  .row
-    .col-xs-12.col-sm-12.col-md-6.col-lg-4
+%h2
+.row
+  .col-xs-12.col-sm-12.col-md-6.col-lg-4
+    - if @saved_cards.present?
       %p.bolder.font-md Credit cards
       %table.table.table-striped
         - @saved_cards.each do |card|
-          %tr
+          %tr{id: card[:id].last(9)}
             %td="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{card[:exp_month]}/#{card[:exp_year]}"
-            %td.text-center=link_to 'Delete', '#', class: 'btn btn-danger btn-sm'
-      .pull-left
-        =link_to 'Add New Card', '#', class: 'btn btn-primary btn-sm'
+            %td.text-center
+              =link_to 'Delete', delete_card_path(card_id: card[:id], customer_id: card[:customer_id]), class: 'btn btn-danger btn-sm', remote: true
+    .pull-left
+      =link_to 'Add New Card', new_manager_featured_building_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm disabled'
 %h2
 
 .row
@@ -21,18 +22,21 @@
             %th{width: "15%"} Date
             %th{width: "15%"} Amount
             %th Status
-            %th Cust_id
             %th{width: "15%"} Actions
         
         %tbody.table
           - @billings.each do |billing|
+            - card = BillingService.new.fetch_card(billing.stripe_customer_id)
             %tr
               %td=billing.created_at.strftime('%d-%m-%Y')
               %td.text-right=number_to_currency(billing.amount, precision: 2)
               %td
                 - if billing.stripe_customer_id.present?
+                  - if card.present?
+                    = image_tag "card_brands/#{card['brand'].downcase}.svg", height: 20
+                  - else
+                    = image_tag "card_brands/generic.svg", height: 20
                   %b.text-success Success
-              %td=billing.stripe_customer_id
               %td.text-center
                 =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, '#'
                 &nbsp;

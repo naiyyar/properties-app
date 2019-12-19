@@ -10,17 +10,28 @@ class BillingService
 	def get_saved_cards current_user
 		cards = []
 		current_user.billings.pluck(:stripe_customer_id).map do |cust_id|
-			payment_methods = Stripe::PaymentMethod.list({customer: cust_id, type: 'card'})
-			data = payment_methods.data[0]
-			card = data['card']
+			#payment_methods = Stripe::PaymentMethod.list({customer: cust_id, type: 'card'})
+			#data = payment_methods.data[0]
+			#card = data['card']
 			#card = get_stripe_card(stripe_object_ids)
-			cards << { 	brand: 			card['brand'], 
-									exp_month: 	card['exp_month'], 
-									exp_year: 	card['exp_year'], 
-									last4: 			card['last4'] 
-								}
+			begin
+				card = fetch_card(cust_id)
+				cards << { 	id:         	card['id'],
+										customer_id:	cust_id,
+										brand: 				card['brand'], 
+										exp_month: 		card['exp_month'], 
+										exp_year: 		card['exp_year'], 
+										last4: 				card['last4'] 
+									} if card.present?
+			rescue Timeout::Error
+				puts 'That took too long, exiting...'
+			end
 		end
 		return cards
+	end
+
+	def fetch_card cust_id
+		card = Stripe::Customer.list_sources(cust_id).data.first
 	end
 
 	# def get_stripe_card stripe_object_ids
@@ -32,7 +43,7 @@ class BillingService
 	# end
 
 	def create_stripe_customer
-		Stripe::Customer.create(email: @customer_email, source: @payment_token)
+		Stripe::Customer.create(email: @customer_email, card: @payment_token)
 	end
 
 	# def create_stripe_card customer_id

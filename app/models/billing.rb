@@ -3,7 +3,7 @@ class Billing < ApplicationRecord
 	belongs_to :user
 	belongs_to :featured_building
 
-	attr_accessor :payment_token, :customer_email, :description
+	attr_accessor :customer_email, :description
 
 	after_save :set_featured_building_end_date, on: :create
 	#after_destroy :remove_stripe_card
@@ -11,11 +11,9 @@ class Billing < ApplicationRecord
 	def save_and_make_payment!
 		if valid?
       begin
-      	billing_service 				= BillingService.new(payment_token, customer_email, description)
+      	billing_service 				= BillingService.new(stripe_card_id, customer_email, description)
       	customer 								= billing_service.create_stripe_customer
-      	#card 		 								= billing_service.create_stripe_card(customer.id)
       	self.stripe_customer_id = customer.id
-      	#self.stripe_card_id 		= card.id
         charge 									= billing_service.create_stripe_charge(customer.id)
         self.stripe_charge_id 	= charge.id
         save

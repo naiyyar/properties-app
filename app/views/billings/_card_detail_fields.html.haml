@@ -1,0 +1,17 @@
+.row
+  .col-lg-10
+    .form-group
+      = text_field_tag :card_number,nil, class: 'form-control', :autocomplete => :off, data: { stripe: 'number' }, id: 'card-number', placeholder: 'Card number'
+  .col-lg-2
+    .card-type.text-center
+      %span.fa.fa-credit-card.fa-3x.text-muted
+.row
+  .col-lg-2
+    .form-group
+      = select_tag :exp_month, options_for_select('01'..'12'), prompt: 'MM', class: 'form-control', data: { stripe: 'exp-month' }, id: 'card-exp-month', placeholder: 'MM'
+  .col-lg-3
+    .form-group  
+      = select_tag :exp_year, options_for_select(Date.today.year..(Date.today.year + 15)), prompt: 'YYYY', class: 'form-control', data: { stripe: 'exp-year' }, id: 'card-exp-year', placeholder: 'YYYY'
+  .col-lg-4
+    .form-group
+      = text_field_tag :cvc, nil, class: 'form-control', :autocomplete => :off, data: { stripe: 'cvc' }, id: 'card-cvc', placeholder: 'CVC'

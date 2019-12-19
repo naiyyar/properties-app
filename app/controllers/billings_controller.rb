@@ -18,8 +18,17 @@ class BillingsController < ApplicationController
     @billing = Billing.new
   end
 
-  # GET /billings/1/edit
-  def edit
+  def create_new_card
+    billing_service = BillingService.new(params[:billing][:stripe_card_id], params[:email])
+    customer        = billing_service.create_stripe_customer
+    
+    respond_to do |format|
+      format.html { redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Card successfully saved.' }
+    end
+  end
+
+  def delete_card
+    Stripe::Customer.delete_source(params[:customer_id], params[:card_id])
   end
 
   # POST /billings
@@ -27,7 +36,6 @@ class BillingsController < ApplicationController
   def create
     @billing = Billing.new(billing_params)
     @billing.customer_email = params[:email]
-    @billing.payment_token = params[:payment_token]
     @billing.description = ''
     respond_to do |format|
       if @billing.save_and_make_payment!
@@ -75,6 +83,6 @@ class BillingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def billing_params
-      params.require(:billing).permit(:user_id, :featured_building_id, :amount)
+      params.require(:billing).permit(:user_id, :featured_building_id, :amount, :stripe_card_id)
     end
 end

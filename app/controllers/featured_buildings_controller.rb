@@ -26,6 +26,7 @@ class FeaturedBuildingsController < ApplicationController
   # GET /featured_buildings/new
   def new
     @featured_building = FeaturedBuilding.new
+    @saved_cards = BillingService.new.get_saved_cards(current_user) rescue nil
   end
 
   # GET /featured_buildings/1/edit
