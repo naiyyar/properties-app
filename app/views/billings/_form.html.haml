@@ -1,17 +1,26 @@
 .form-container
-  .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-6
-      %table.table
-        - @saved_cards.each do |card|
-          - exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
-          %tr
-            %td="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
-            %td.text-center
-              =link_to 'Pay $49.00', '#', class: 'btn btn-primary btn-sm font-bold btn_submit'
   
-  .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-6
-      .text-center OR
+  - if @saved_cards.present?
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-6
+        %h3 Saved Cards
+        %table.table
+          - @saved_cards.each do |card|
+            - exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
+            %tr
+              %td.v-align-middle="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
+              %td.text-center
+                = form_tag pay_using_saved_card_path, method: :post do
+                  = hidden_field_tag 'billing[amount]', Billing::PRICE
+                  = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
+                  = hidden_field_tag 'billing[user_id]', current_user.id
+                  = hidden_field_tag :customer_id, card[:customer_id]
+
+                  = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary btn-sm font-bold', data: { disable_with: "Pay $#{Billing::PRICE}.00" }
+    
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-6
+        .text-center OR
   %br
   .row
     .col-xs-12.col-sm-12.col-md-12.col-lg-6
@@ -28,7 +37,7 @@
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group
                   = text_field_tag :email, current_user.email, class: 'form-control', :autocomplete => :off, data: { stripe: 'email' }, id: 'user-email', placeholder: 'Email'
-                  = hidden_field_tag 'billing[amount]', 49
+                  = hidden_field_tag 'billing[amount]', Billing::PRICE
                   = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
                   = hidden_field_tag 'billing[user_id]', current_user.id
 
@@ -37,4 +46,4 @@
             
             .form-group
               %br
-              = submit_tag 'Pay $49.00', class: 'btn btn-primary btn-block font-bold btn_submit btn_submit_stripe-form'
+              = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary btn-block font-bold btn_submit btn_submit_stripe-form'

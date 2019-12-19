@@ -5,8 +5,9 @@
       %p.bolder.font-md Credit cards
       %table.table.table-striped
         - @saved_cards.each do |card|
+          - exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
           %tr{id: card[:id].last(9)}
-            %td="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{card[:exp_month]}/#{card[:exp_year]}"
+            %td.v-align-middle="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
             %td.text-center
               =link_to 'Delete', delete_card_path(card_id: card[:id], customer_id: card[:customer_id]), class: 'btn btn-danger btn-sm', remote: true, data: { disable_with: 'Deleting...' }
     .pull-left
@@ -26,7 +27,7 @@
         
         %tbody.table
           - @billings.each do |billing|
-            - card = BillingService.new.fetch_card(billing.stripe_customer_id)
+            - card = BillingService.new.fetch_card(billing.stripe_customer_id) rescue nil
             %tr
               %td=billing.created_at.strftime('%d-%m-%Y')
               %td.text-right=number_to_currency(billing.amount, precision: 2)

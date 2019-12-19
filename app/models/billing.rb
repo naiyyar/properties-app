@@ -12,7 +12,7 @@ class Billing < ApplicationRecord
 		if valid?
       begin
       	billing_service 				= BillingService.new(stripe_card_id, customer_email, description)
-      	customer 								= billing_service.find_or_create_stripe_customer(billing: self)
+      	customer 								= billing_service.create_stripe_customer
       	self.stripe_customer_id = customer.id
         charge 									= billing_service.create_stripe_charge(customer.id)
         self.stripe_charge_id 	= charge.id
@@ -22,6 +22,19 @@ class Billing < ApplicationRecord
         false
       end
     end
+	end
+
+	def save_charge_existing_card! customer_id
+		if valid?
+			begin
+				BillingService.new.create_stripe_charge(customer_id)
+				self.stripe_customer_id = customer_id
+				save
+			rescue Stripe::CardError => e
+	      errors.add :credit_card, e.message
+	      false
+	    end
+	  end
 	end
 
 	private

@@ -9,8 +9,7 @@ class BillingService
 
 	def get_saved_cards current_user
 		cards = []
-		current_user.billings.pluck(:stripe_customer_id).map do |cust_id|
-			#payment_methods = Stripe::PaymentMethod.list({customer: cust_id, type: 'card'})
+		current_user.billings.where.not(stripe_customer_id: nil).pluck(:stripe_customer_id).uniq.map do |cust_id|
 			begin
 				card = fetch_card(cust_id)
 				cards << { 	id:         	card['id'],
@@ -31,17 +30,8 @@ class BillingService
 		Stripe::Customer.list_sources(cust_id).data.first
 	end
 
-	def find_or_create_stripe_customer options={}
-		billing 		 = options[:billing]
-		current_user = options[:current_user]
-		current_user = billing.user if billing.present?
-		unless current_user.customer_id.present?
-			customer = Stripe::Customer.create(email: @customer_email, card: @payment_token)
-			current_user.update(customer_id: customer.id)
-		else
-			customer = Stripe::Customer.retrieve(current_user.customer_id)
-		end
-		return customer
+	def create_stripe_customer
+		Stripe::Customer.create(email: @customer_email, card: @payment_token)
 	end
 
 	def create_stripe_charge customer_id

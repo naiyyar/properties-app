@@ -13,7 +13,6 @@ function stripeResponseHandler(status, response) {
     paymentForm.find('.btn_submit').prop('disabled', false);
   } else {
     var token = response.id;
-    console.log(token)
     paymentForm.append($('<input type="hidden" name="billing[stripe_card_id]" />').val(token));
     paymentForm[0].submit();
   }

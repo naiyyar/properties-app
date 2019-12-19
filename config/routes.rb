@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   resources :billings
-  post :create_charge,   to: 'billings#create',          as: :create_charge
-  get  :delete_card,     to: 'billings#delete_card',     as: :delete_card
-  post :create_new_card, to: 'billings#create_new_card', as: :create_new_card
+  post :create_charge,        to: 'billings#create',                as: :create_charge
+  get  :delete_card,          to: 'billings#delete_card',           as: :delete_card
+  post :create_new_card,      to: 'billings#create_new_card',       as: :create_new_card
+  post :pay_using_saved_card, to: 'billings#pay_using_saved_card',  as: :pay_using_saved_card
   
   resources :listings do
     collection do
