@@ -1,0 +1,16 @@
+#showInvoice.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "contirbuteMoreLabel", role: "dialog"}
+	.modal-dialog
+		.modal-content
+			.modal-header
+				%button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+					%span{"aria-hidden" => "true"} &times;
+      
+			.modal-body.no-padding
+				=render partial: 'billings/invoice'
+
+				%br
+				%br
+				%br
+				%br
+
+				= render 'layouts/shared/sig_footer'

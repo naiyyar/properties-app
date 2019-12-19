@@ -1,0 +1,54 @@
+.pdf-header {
+	width: 400px;
+	margin: 40px auto 50px auto;
+}
+
+.pdf-container{
+	width: 100%;
+}
+
+.divider{
+	border: 1px solid #333;
+}
+
+.text-muted{
+	color: #999 !important;
+}
+
+.text-center{
+	text-align: center !important;
+}
+.text-right{
+	text-align: right !important;
+}
+
+.font-md{
+	font-size: 15px !important;
+}
+
+#billing-invoice{
+	.receipt {
+		width: 150px;
+    margin: 0 auto;
+	}
+
+	.payment-date{
+		background: #f2f2f2 !important;
+		width: 100%;
+		padding: 8px 10px 8px 20px !important;
+		border-top: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+		font-size: 14px;
+	}
+
+	.billing-table, .payment-date{
+		margin-top: 40px;
+	}
+
+	.billing-table {
+		padding: 8px 20px;
+		.table tfoot tr, .table tfoot th{
+			background: #fff !important;
+		}
+	}
+}

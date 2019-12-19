@@ -6,7 +6,6 @@ class Billing < ApplicationRecord
 	attr_accessor :customer_email, :description
 
 	after_save :set_featured_building_end_date, on: :create
-	#after_destroy :remove_stripe_card
 
 	def save_and_make_payment!
 		if valid?
@@ -46,12 +45,5 @@ class Billing < ApplicationRecord
 		featured_building.update(start_date: start_date, end_date: end_date, active: true)
 		BillingMailer.send_payment_receipt(self, customer_email).deliver
 	end
-
-	# def remove_stripe_card
-	# 	Stripe::Customer.delete_source(
-	# 	  stripe_customer_id,
-	# 	  stripe_card_id,
-	# 	)
-	# end
 	
 end

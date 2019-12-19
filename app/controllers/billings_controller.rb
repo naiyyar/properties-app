@@ -11,6 +11,17 @@ class BillingsController < ApplicationController
   # GET /billings/1
   # GET /billings/1.json
   def show
+    if params[:type] == 'send'
+      BillingMailer.send_payment_receipt(@billing, @billing.email).deliver
+      flash[:notice] = 'Invoice successfully sent in mail.'
+    end
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+      format.pdf do
+        render wicked_pdf_options("invoice_#{@billing.created_at.strftime('%d-%m-%Y')}",'billings/show')
+      end
+    end
   end
 
   # GET /billings/new

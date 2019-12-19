@@ -40,9 +40,9 @@
                     = image_tag "card_brands/generic.svg", height: 20
                   %b.text-success Success
               %td.text-center
-                =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, '#'
+                =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf)
                 &nbsp;
-                =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, '#'
+                =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true
                 &nbsp;
-                =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, '#'
+                =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'send')
               %td.text-center

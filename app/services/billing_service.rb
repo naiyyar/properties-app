@@ -9,7 +9,7 @@ class BillingService
 
 	def get_saved_cards current_user
 		cards = []
-		current_user.billings.where.not(stripe_customer_id: nil).pluck(:stripe_customer_id).uniq.map do |cust_id|
+		current_user.billing_customer_ids.map do |cust_id|
 			begin
 				card = fetch_card(cust_id)
 				cards << { 	id:         	card['id'],

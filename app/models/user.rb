@@ -181,6 +181,10 @@ class User < ApplicationRecord
     records.try(:destroy)
   end
 
+  def billing_customer_ids
+    billings.where.not(stripe_customer_id: nil).pluck(:stripe_customer_id).uniq
+  end
+
   # def should_generate_new_friendly_id?
   #   name_changed?
   # end
