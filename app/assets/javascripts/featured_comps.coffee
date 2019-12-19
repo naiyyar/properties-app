@@ -21,10 +21,14 @@ changeFeaturedCompStatus = (status, elem) ->
 #Changing featured building status
 #
 $(document).on 'click', '.apple-switch.feature-building', (e) ->
-	if(!$(this).is(':checked'))
+	$this = $(this)
+	if(!$this.is(':checked'))
 		changeFeaturedBuildingStatus(false, $(this))
 	else
-		changeFeaturedBuildingStatus(true, $(this))
+		if $this.data('fbby') == 'manager' && $this.data('expired') == 'expired'
+			window.location.href = $this.data('billingurl')
+		else
+			changeFeaturedBuildingStatus(true, $(this))
 
 
 changeFeaturedBuildingStatus = (status, elem) ->
