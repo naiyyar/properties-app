@@ -33,10 +33,11 @@ class UsersController < ApplicationController
 	      available_filters: [:search_query]
 	    ) or return
 
-	    @featured_buildings = @filterrific.find.where(user_id: @user.id)
-	    																			 .paginate(:page => params[:page], :per_page => 100)
-	    																			 .includes(:building => [:management_company])
-	    																			 .order('created_at desc')
+	    @featured_buildings = @filterrific.find
+	    																	.where(user_id: @user.id).by_manager
+	    																	.paginate(:page => params[:page], :per_page => 100)
+	    																	.includes(:building => [:management_company])
+	    																	.order('created_at desc')
 	  else
 	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
 	  	@billings 	 = @user.billings.order('created_at desc').paginate(:page => params[:page], :per_page => 100)

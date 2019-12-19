@@ -13,6 +13,7 @@ class BillingService
 			begin
 				card = fetch_card(cust_id)
 				cards << { 	id:         	card['id'],
+										email: 				Stripe::Customer.retrieve(cust_id).email,
 										customer_id:	cust_id,
 										brand: 				card['brand'], 
 										exp_month: 		card['exp_month'], 

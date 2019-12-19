@@ -7,6 +7,8 @@ class FeaturedBuilding < ApplicationRecord
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
   scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Date.today) }
+  scope :expired,     -> { where('end_date is not null AND end_date < ?', Date.today) }
+  scope :by_manager,  -> { where(featured_by: 'manager') }
 
   pg_search_scope :search_query, 
                   against: [:id], 
