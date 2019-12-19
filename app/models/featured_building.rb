@@ -4,8 +4,6 @@ class FeaturedBuilding < ApplicationRecord
   belongs_to :user
   has_one :billing, :dependent => :destroy
 
-  #enum status: [:draft, :live, :expired]
-
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
   scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Date.today) }

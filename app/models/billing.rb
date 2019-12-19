@@ -14,6 +14,7 @@ class Billing < ApplicationRecord
       	billing_service 				= BillingService.new(stripe_card_id, customer_email, description)
       	customer 								= billing_service.create_stripe_customer
       	self.stripe_customer_id = customer.id
+      	self.email 							= customer_email
         charge 									= billing_service.create_stripe_charge(customer.id)
         self.stripe_charge_id 	= charge.id
         save

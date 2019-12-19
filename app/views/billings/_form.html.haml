@@ -11,6 +11,7 @@
               %td.v-align-middle="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
               %td.text-center
                 = form_tag pay_using_saved_card_path, method: :post do
+                  = hidden_field_tag 'billing[email]', card[:email]
                   = hidden_field_tag 'billing[amount]', Billing::PRICE
                   = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
                   = hidden_field_tag 'billing[user_id]', current_user.id
@@ -36,7 +37,7 @@
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group
-                  = text_field_tag :email, current_user.email, class: 'form-control', :autocomplete => :off, data: { stripe: 'email' }, id: 'user-email', placeholder: 'Email'
+                  = text_field_tag :email, current_user.email, class: 'form-control', :autocomplete => :off, data: { stripe: 'email' }, id: 'user-email', placeholder: 'Email', required: true
                   = hidden_field_tag 'billing[amount]', Billing::PRICE
                   = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
                   = hidden_field_tag 'billing[user_id]', current_user.id

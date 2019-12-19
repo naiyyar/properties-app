@@ -27,7 +27,7 @@ class BillingService
 	end
 
 	def fetch_card cust_id
-		Stripe::Customer.list_sources(cust_id).data.first
+		Stripe::Customer.list_sources(cust_id).data.first rescue nil
 	end
 
 	def create_stripe_customer

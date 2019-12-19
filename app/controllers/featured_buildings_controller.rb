@@ -68,7 +68,9 @@ class FeaturedBuildingsController < ApplicationController
   def destroy
     @featured_building.destroy
     respond_to do |format|
-      format.html { redirect_to featured_buildings_url, notice: 'Featured building was successfully destroyed.' }
+      format.html { 
+        redirect_to (@featured_building.featured_by_manager? ? :back : featured_buildings_url), notice: 'Featured building was successfully destroyed.' 
+      }
       format.json { head :no_content }
     end
   end

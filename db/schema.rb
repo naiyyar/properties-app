@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20191215100540) do
     t.string   "stripe_customer_id"
     t.string   "stripe_card_id"
     t.string   "stripe_charge_id"
+    t.string   "email"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end
