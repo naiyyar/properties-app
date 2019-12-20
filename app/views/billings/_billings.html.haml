@@ -12,7 +12,8 @@
               =link_to 'Delete', delete_card_path(card_id: card[:id], customer_id: card[:customer_id]), class: 'btn btn-danger btn-sm', remote: true, data: { disable_with: 'Deleting...' }
     .pull-left
       =link_to 'Add New Card', new_manager_featured_building_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm disabled'
-%h2
+
+%h2 Invoice History
 
 .row
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -40,7 +41,7 @@
                     = image_tag "card_brands/generic.svg", height: 20
                   %b.text-success Success
               %td.text-center
-                =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf)
+                =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), target: '_blank'
                 &nbsp;
                 =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true
                 &nbsp;

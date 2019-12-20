@@ -44,7 +44,10 @@
 
                 = render 'billings/card_detail_fields'
             
-            
+            %br
+            %br
             .form-group
-              %br
-              = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary btn-block font-bold btn_submit btn_submit_stripe-form'
+              .col-sm-12
+                .pull-right
+                  = link_to 'Cancel', managertools_user_path(current_user, type: 'billing'), class: 'btn btn-default font-bold'
+                  = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary font-bold btn_submit btn_submit_stripe-form'

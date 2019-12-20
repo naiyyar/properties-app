@@ -1,6 +1,7 @@
 .pdf-header {
 	width: 400px;
 	margin: 40px auto 50px auto;
+	text-align: center !important;
 }
 
 .pdf-container{
@@ -11,22 +12,26 @@
 	border: 1px solid #333;
 }
 
-.text-muted{
-	color: #999 !important;
-}
-
-.text-center{
-	text-align: center !important;
-}
-.text-right{
-	text-align: right !important;
-}
-
-.font-md{
-	font-size: 15px !important;
-}
-
 #billing-invoice{
+	.text-muted{
+		color: #999 !important;
+	}
+
+	.text-center{
+		text-align: center !important;
+	}
+	.text-right{
+		text-align: right !important;
+	}
+
+	.text-left{
+		text-align: left !important;
+	}
+
+	.font-md{
+		font-size: 15px !important;
+	}
+
 	.receipt {
 		width: 150px;
     margin: 0 auto;
@@ -39,6 +44,7 @@
 		border-top: 1px solid #ddd;
 		border-bottom: 1px solid #ddd;
 		font-size: 14px;
+		color: #4b4b4b;
 	}
 
 	.billing-table, .payment-date{
@@ -50,5 +56,18 @@
 		.table tfoot tr, .table tfoot th{
 			background: #fff !important;
 		}
+	}
+	table{
+		width: 100%;
+	}
+	table tr th, table tr td {
+    padding: 8px 10px;
+	}
+
+	.table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.428571429;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
 	}
 }

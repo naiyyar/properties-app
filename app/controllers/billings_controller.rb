@@ -1,7 +1,7 @@
 class BillingsController < ApplicationController
   load_and_authorize_resource
   before_action :set_billing, only: [:show, :edit, :update, :destroy]
-
+  before_action :get_card, only: [:show]
   # GET /billings
   # GET /billings.json
   def index
@@ -111,5 +111,11 @@ class BillingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def billing_params
       params.require(:billing).permit(:user_id, :featured_building_id, :amount, :stripe_card_id)
+    end
+
+    def get_card
+      if request.format.pdf? or params[:type] == 'view'
+        @card = BillingService.new.fetch_card(@billing.stripe_customer_id)
+      end
     end
 end

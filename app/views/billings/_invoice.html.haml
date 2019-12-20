@@ -1,10 +1,10 @@
-.pdf-header.text-center
+.pdf-header
 	= image_tag wicked_pdf_asset_base64('logo2.png'), width: '250'
 #billing-invoice
 	.receipt
 		%h1.text-center Receipt
 		.divider
-		%h3.text-muted.text-center="Visa 4242"
+		%h3.text-muted.text-center="#{@card['brand']} #{@card['last4']}"
 
 	.payment-date
 		%b=@billing.created_at.strftime("%b %-d, %Y")
@@ -12,11 +12,11 @@
 	.billing-table
 		%table.table
 			%tr
-				%th Description
+				%th.text-left Description
 				%th.text-right Amount
 
 			%tr
-				%td="Featured Building For Four Weeks Starting on #{@billing.featured_building.start_date.strftime('%a %-d, %Y')}"
+				%td.text-left="Featured Building For Four Weeks Starting on #{@billing.featured_building.start_date.strftime('%a %-d, %Y')}"
 				%td.text-right= number_to_currency(amount = @billing.amount, precision: 2)
 
 			%tfoot
