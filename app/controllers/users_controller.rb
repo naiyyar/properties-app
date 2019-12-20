@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 	    @featured_buildings = @filterrific.find
 	    																	.where(user_id: @user.id).by_manager
 	    																	.paginate(:page => params[:page], :per_page => 100)
-	    																	.includes(:building => [:management_company])
+	    																	.includes(:billing, :building => [:management_company])
 	    																	.order('created_at desc')
 	  else
 	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
