@@ -96,7 +96,7 @@ class BuildingsController < ApplicationController
   end
 
   def edit
-    buildings = Building.all
+    buildings                          = Building.all
     @neighborhood_options              = buildings.select('neighborhood').where.not(neighborhood: [nil, '']).order(neighborhood: :asc).distinct.pluck(:neighborhood)
     @parent_neighborhood_options       = buildings.select('neighborhoods_parent').where.not(neighborhoods_parent: [nil, '']).order(neighborhoods_parent: :asc).distinct.pluck(:neighborhoods_parent)
     @grand_parent_neighborhood_options = buildings.select('neighborhood3').where.not(neighborhood3: [nil, '']).order(neighborhood3: :asc).distinct.pluck(:neighborhood3)

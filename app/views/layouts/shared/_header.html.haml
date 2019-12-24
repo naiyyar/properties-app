@@ -14,6 +14,7 @@
 
     .pull-right.nav-items.headerLinks.hidden-xs{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
       = link_to 'Blog', '/blog'
+      %a{href: managertools_user_path(current_user, type: 'featured')} Manager tools
       - if !user_signed_in?
         |
         - if params[:controller] == "users/sessions"

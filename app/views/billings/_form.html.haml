@@ -49,5 +49,6 @@
             .form-group
               .col-sm-12
                 .pull-right
-                  = link_to 'Cancel', managertools_user_path(current_user, type: 'billing'), class: 'btn btn-default font-bold'
+                  = link_to 'Cancel', managertools_user_path(current_user, type: 'featured'), class: 'btn font-bold'
+                  = link_to 'Back', managertools_user_path(current_user, type: 'billing'), class: 'btn btn-default font-bold'
                   = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary font-bold btn_submit btn_submit_stripe-form'

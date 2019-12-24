@@ -16,7 +16,7 @@ class Ability
       can :manage, :all
     else
       can :manage, :all
-      cannot :index, [Building, Unit, Review, Contact, Upload]
+      cannot :index, [Building, Unit, Review, Contact, Upload, FeaturedBuilding]
       cannot :documents, Upload
       cannot [:contribution, :index], User
       cannot [:index, :new, :edit], ManagementCompany

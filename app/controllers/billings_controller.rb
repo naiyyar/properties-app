@@ -12,8 +12,8 @@ class BillingsController < ApplicationController
   # GET /billings/1.json
   def show
     if params[:type] == 'send'
-      BillingMailer.send_payment_receipt(@billing, @billing.email).deliver
-      flash[:notice] = 'Invoice successfully sent in mail.'
+      BillingMailer.send_payment_receipt(@billing, @card).deliver
+      flash[:notice] = 'Invoice successfully sent.'
     end
     respond_to do |format|
       format.html { redirect_to :back }
@@ -66,7 +66,7 @@ class BillingsController < ApplicationController
     @billing.description = ''
     respond_to do |format|
       if @billing.save_and_make_payment!
-        format.html { redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Billing was successfully created.' }
+        format.html { redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' }
         format.json { render :show, status: :created, location: @billing }
       else
         format.html { 

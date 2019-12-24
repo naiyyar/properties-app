@@ -22,16 +22,16 @@
         %thead
           %tr
             %th{width: "15%"} Date
-            %th{width: "15%"} Amount
+            %th.text-center{width: "10%"} Amount
             %th Status
-            %th.text-center{width: "15%"} Actions
+            %th.text-center{width: "20%"} Actions
             %th{width: "1%"}
         
         %tbody.table
           - @billings.each do |billing|
             - card = BillingService.new.fetch_card(billing.stripe_customer_id) rescue nil
             %tr
-              %td=billing.created_at.strftime('%d-%m-%Y')
+              %td=date_created = billing.created_at.strftime('%d-%m-%Y')
               %td.text-right=number_to_currency(billing.amount, precision: 2)
               %td
                 - if billing.stripe_customer_id.present?
@@ -39,11 +39,11 @@
                     = image_tag "card_brands/#{card['brand'].downcase}.svg", height: 20
                   - else
                     = image_tag "card_brands/generic.svg", height: 20
-                  %b.text-success Success
+                  %b.text-success Successful
               %td.text-center
-                =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), target: '_blank'
+                =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), download: "invoice_#{date_created}", title: 'Download inovoice in pdf'
                 &nbsp;
-                =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true
+                =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true, title: 'Preview in browser'
                 &nbsp;
-                =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'send')
+                =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'send'), title: 'Send in mail'
               %td.text-center

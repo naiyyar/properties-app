@@ -4,7 +4,11 @@
 	.receipt
 		%h1.text-center Receipt
 		.divider
-		%h3.text-muted.text-center="#{@card['brand']} #{@card['last4']}"
+		%h3.text-muted.text-center
+			- if card.present?
+				="#{card['brand']} #{card['last4']}"
+			- else
+				= 'Visa 4242'
 
 	.payment-date
 		%b=@billing.created_at.strftime("%b %-d, %Y")
@@ -16,7 +20,7 @@
 				%th.text-right Amount
 
 			%tr
-				%td.text-left="Featured Building For Four Weeks Starting on #{@billing.featured_building.start_date.strftime('%a %-d, %Y')}"
+				%td.text-left="Featured Building For Four Weeks Starting on #{@billing.featured_building.start_date.strftime('%b %-d, %Y')}"
 				%td.text-right= number_to_currency(amount = @billing.amount, precision: 2)
 
 			%tfoot

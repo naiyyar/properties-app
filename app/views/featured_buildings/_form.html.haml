@@ -28,15 +28,15 @@
                     %label End Date
                     = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
             -else
-              %p= "We will charge you #{number_to_currency(Billing::PRICE)} for four weeks."
+              %p= "We will charge you #{number_to_currency(Billing::PRICE)} for four weeks of featuring."
               %p 
-                We Do not offer refunds. Please review our full 
+                We do not offer refunds. Please review our full 
                 %a.hyper-link{href: '/terms_of_service', target: '_blank'} Term of Use
             
             .form-group
               .col-sm-12
                 .pull-right
-                  = link_to 'Cancel', featured_buildings_path, class: 'btn btn-default'
+                  = link_to 'Cancel', params[:type].blank? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
                   = f.submit "#{params[:type].present? ? 'Next' : 'Save'}", class: 'btn btn-primary'
     
 

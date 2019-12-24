@@ -1,11 +1,81 @@
 !!!
 %html
-  %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{charset: "utf-8"}/
-    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
-    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name: "viewport"}/
-    %title Billing-Transparentcity
+	%head
+		%meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+		%meta{charset: "utf-8"}/
+		%meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+		%meta{content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name: "viewport"}/
+		%title Billing-Transparentcity
 
-  %body{style: 'background-color: #ffffff !important;' }
-    = yield
+		:css
+			#receipt{
+				width: 470px;
+				text-align: center !important;
+				margin: 0 auto;
+				border: 1px solid #ddd;
+				min-height: 400px;
+			}
+			h1, h2, h3, h4{
+				padding: 0px;
+				margin: 5px;
+			}
+			.divider{
+				border: 1px solid #333;
+			}
+			.text-muted{
+				color: #999 !important;
+			}
+			.text-center{
+				text-align: center !important;
+			}
+			.text-right{
+				text-align: right !important;
+			}
+			.text-left{
+				text-align: left !important;
+			}
+			.font-md{
+				font-size: 15px !important;
+			}
+			.receipt {
+				width: 150px;
+				margin: 0 auto;
+			}
+			.payment-date{
+				background: #f2f2f2 !important;
+				padding: 8px 10px 8px 20px !important;
+				border-top: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				font-size: 14px;
+				color: #4b4b4b;
+				text-align: left !important;
+			}
+			.billing-table, .payment-date{
+				margin-top: 40px;
+			}
+			.billing-table {
+				padding: 8px 20px;
+			}
+			table{
+				width: 100%;
+			}				
+			.table tfoot tr, .table tfoot th{
+				background: #fff !important;
+			}
+			table tr th, table tr td {
+				padding: 8px 10px;
+			}
+			.table > thead > tr > th, .table > thead > tr > td, 
+			.table > tbody > tr > th, .table > tbody > tr > td, 
+			.table > tfoot > tr > th, .table > tfoot > tr > td {
+				padding: 8px;
+				line-height: 1.428571429;
+				vertical-align: middle;
+				border-top: 1px solid #ddd;
+			}
+			#signature{
+				margin-top: 50px;
+			}
+  
+	%body{style: 'background-color: #ffffff !important;' }
+		= yield

@@ -24,4 +24,6 @@
     %a{href: new_contact_path} Send feedback
 - if current_user.present?
   %li
-    %a{href: "#{saved_buildings_user_path(current_user)}"} Saved buildings
+    %a{href: saved_buildings_user_path(current_user)} Saved buildings
+  %li
+    %a{href: managertools_user_path(current_user, type: 'featured')} Manager tools

@@ -29,7 +29,7 @@ class HomeController < ApplicationController
       fav_color_class = 'unfilled-heart'
     end
     min_save_amount = building.min_save_amount(@rent_medians, @broker_percent)
-    render json: { html: render_to_string(:partial => "/layouts/shared/custom_infowindow", 
+    render json: { html: render_to_string(:partial => '/layouts/shared/custom_infowindow', 
                                           :locals => {  building: building,
                                                         image: Upload.marker_image(building),
                                                         rating_cache: building.rating_cache,
