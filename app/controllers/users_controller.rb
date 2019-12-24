@@ -26,6 +26,7 @@ class UsersController < ApplicationController
 	end
 
 	def managertools
+		@type = params[:type]
 		unless params[:type] == 'billing'
 			@filterrific = initialize_filterrific(
 	      FeaturedBuilding,

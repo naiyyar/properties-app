@@ -3,7 +3,7 @@
     .col-xs-12.col-sm-12.col-md-12.col-lg-6
       .panel.panel-default
         .panel-heading
-          %b= @featured_building.new_record? ? 'New Featured building' : 'Edit Featured building'
+          %b= @featured_building.new_record? ? 'New Featured Building' : 'Edit Featured Building'
         .panel-body
           = form_for @featured_building do |f|
             .row

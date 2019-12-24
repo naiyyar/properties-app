@@ -1,16 +1,16 @@
-.tables
-  - if current_user.present?
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-        .pull-right
-          = link_to "Add new building", new_building_path, class: 'btn btn-blue'
-    %h2
-  .pull-right
-    = form_for_filterrific @filterrific do |f|
-      .form-field
-        = f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
-      .form-field
-  - cache [@buildings, params[:page]] do
-    = render 'buildings/buildings', buildings: @buildings
+- if current_user.present?
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      .pull-right
+        = link_to "Add new building", new_building_path, class: 'btn btn-blue'
+  %h2
+.pull-right
+  = form_for_filterrific @filterrific do |f|
+    .form-field
+      = f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
+    .form-field
+- cache [@buildings, params[:page]] do
+  = render 'buildings/buildings', buildings: @buildings
+
 .text-center
   = will_paginate @buildings, renderer: BootstrapPagination::Rails

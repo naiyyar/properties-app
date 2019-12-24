@@ -1,34 +1,38 @@
 - if @user.present?
-	.tables
-		.row
-			.col-lg-12
-				.pull-left
-					.btn-group
-						=link_to 'Featured buildings', managertools_user_path(current_user, type: 'featured'), class: "btn #{params[:type] == 'featured' ? 'btn btn-primary' : 'btn-default'}"
-						=link_to 'Billing', 					 managertools_user_path(current_user, type: 'billing') , class: "btn #{params[:type] == 'billing' ? 'btn btn-primary' : 'btn-default'}"
-		%h2
+	.row
+		.col-lg-6
+			%h2
+			.pull-left
+				.tabsWidget
+					%ul.nav.nav-tabs.nav-justified{role: 'tablist'}
+						%li{class: @type == 'featured' ? 'active' : ''}
+							%a{href: managertools_user_path(current_user, type: 'featured')}
+								%b Featured buildings 
+						%li{class: @type == 'billing' ? 'active' : ''}
+							%a{href: managertools_user_path(current_user, type: 'billing')}
+								%b Billing
+      
+	.tab-content
+		- if @type == 'featured'
+			.tab-pane.fade.in.active
+				.row
+					.col-lg-6
+						.pull-left
+							%h4=@type == 'featured' ? "#{current_user.name}'s Featured Buildings" : "#{current_user.name}'s Billing"
+					.col-lg-6
+						.pull-right
+							=link_to 'Add New Featured Building', new_manager_featured_building_user_path(current_user, type: 'featured'), class: 'btn btn-primary'
+							
+							- if @filterrific.present?
+								%p
+								= form_for_filterrific @filterrific do |f|
+									.form-field
+										= f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
 
-		.row
-			.col-lg-6
-				.pull-left
-					%h4
-						-if params[:type] == 'featured'
-							="#{current_user.name}'s Featured Buildings"
-						-else
-							="#{current_user.name}'s Billing"
-			.col-lg-6
-				.pull-right
-					=link_to 'Add New Featured Building', new_manager_featured_building_user_path(current_user, type: 'featured'), class: 'btn btn-primary'
-					
-					- if @filterrific.present?
-						%p
-						= form_for_filterrific @filterrific do |f|
-							.form-field
-								= f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
-
-		- if params[:type] == 'featured'
-			=render 'featured_buildings/buildings'
-			.text-center
-				= will_paginate @featured_buildings, renderer: BootstrapPagination::Rails
+					=render 'featured_buildings/buildings'
+					.text-center
+						= will_paginate @featured_buildings, renderer: BootstrapPagination::Rails
+      
 		-else
-			=render 'billings/billings'
+			.tab-pane.fade.in.active
+				=render 'billings/billings'

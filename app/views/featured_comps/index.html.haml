@@ -1,4 +1,4 @@
-.tables
+- if current_user.has_role? :admin
   - if current_user.present?
     .row
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -11,8 +11,8 @@
         = f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
       .form-field
   = render 'featured_comps/comps'
-.text-center
-  = will_paginate @featured_comps, renderer: BootstrapPagination::Rails
+  .text-center
+    = will_paginate @featured_comps, renderer: BootstrapPagination::Rails
 
 
 :css
