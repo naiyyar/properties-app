@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191215100540) do
+ActiveRecord::Schema.define(version: 20191225100136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 20191215100540) do
     t.integer  "user_id"
     t.string   "featured_by", default: "admin"
     t.integer  "status"
+    t.boolean  "renew",       default: false
     t.index ["building_id"], name: "index_featured_buildings_on_building_id", using: :btree
     t.index ["status"], name: "index_featured_buildings_on_status", using: :btree
   end

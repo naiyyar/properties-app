@@ -10,7 +10,7 @@ class FeaturedBuildingsController < ApplicationController
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @featured_buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:building => [:management_company]).order('created_at desc')
+    @featured_buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:billing, :building => [:management_company]).order('created_at desc')
 
     respond_to do |format|
       format.html
@@ -54,7 +54,7 @@ class FeaturedBuildingsController < ApplicationController
   def update
     respond_to do |format|
       if @featured_building.update(featured_building_params)
-        format.html { redirect_to featured_buildings_url, notice: 'Featured building was successfully updated.' }
+        format.html { redirect_to redirect_path, notice: 'Featured building was successfully updated.' }
         format.json { render :json => { success: true, data: @featured_building } }
       else
         format.html { render :edit }
@@ -83,10 +83,16 @@ class FeaturedBuildingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def featured_building_params
-      params.require(:featured_building).permit(:building_id, :start_date, :end_date, :active, :user_id, :featured_by)
+      params.require(:featured_building).permit(:building_id, :start_date, :end_date, :active, :user_id, :featured_by, :renew)
     end
 
     def redirect_path
-      @featured_building.featured_by_manager? ? new_manager_featured_building_user_path(current_user, type: 'billing', fb_id: @featured_building.id) : featured_buildings_url
+      @featured_building.featured_by_manager? ? billing_or_featured_list_path : featured_buildings_url
+    end
+
+    def billing_or_featured_list_path
+      @featured_building.expired? ? 
+      new_manager_featured_building_user_path(current_user, type: 'billing', fb_id: @featured_building.id) :
+      managertools_user_path(current_user, type: 'featured')
     end
 end

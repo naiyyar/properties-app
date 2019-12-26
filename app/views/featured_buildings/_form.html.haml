@@ -14,21 +14,38 @@
                   #as-comp-buildings-search-results.results{style: "position: relative;"}
                   
               = f.hidden_field :building_id
-              = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin'
+              = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_building.new_record?
               = f.hidden_field :user_id, value: current_user.id if current_user.present?
             - unless params[:type].present?
               .row
                 .col-xs-6.col-sm-6.col-md-6.col-lg-6
                   .form-group
                     %label Start Date
-                    = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
+                    = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off, disabled: @featured_building.featured_by_manager?
 
                 .col-xs-6.col-sm-6.col-md-6.col-lg-6
                   .form-group
                     %label End Date
-                    = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
+                    = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off, disabled: @featured_building.featured_by_manager?
+              .row
+                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                  .form-group
+                    %label Featured Building Renewal
+                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                  .form-group
+                    .pull-right
+                      %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: @featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => @featured_building.id }
+              .row
+                .col-lg-12
+                  %label When active, the card on file wil be charged $49.00 two days before the end date for the next four week feature cycle.
+            
             -else
+              %p The building selected for featuring can be changed at any time while the featuring is still active. For example, if a selected featured building no longer has vacancies, you have the ability to choose a different building that has vacancies using the same feature entry.
+              %br
+              %p
+                %b Payment
               %p= "We will charge you #{number_to_currency(Billing::PRICE)} for four weeks of featuring."
+              %p Featuring will be renewed for the next four week cycle two days before the feature end date. The renewal setting can be adjusted at any time through our Manager Tools by editing the featured entry.
               %p 
                 We do not offer refunds. Please review our full 
                 %a.hyper-link{href: '/terms_of_service', target: '_blank'} Term of Use
@@ -36,7 +53,11 @@
             .form-group
               .col-sm-12
                 .pull-right
-                  = link_to 'Cancel', params[:type].blank? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
+                  -if @featured_building.new_record?
+                    = link_to 'Cancel', params[:type].blank? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
+                  -else
+                    = link_to 'Cancel', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
+
                   = f.submit "#{params[:type].present? ? 'Next' : 'Save'}", class: 'btn btn-primary'
     
 

@@ -22,13 +22,20 @@ changeFeaturedCompStatus = (status, elem) ->
 #
 $(document).on 'click', '.apple-switch.feature-building', (e) ->
 	$this = $(this)
+	field_type = $this.data('field')
 	if(!$this.is(':checked'))
-		changeFeaturedBuildingStatus(false, $(this))
+		if field_type != undefined && field_type == 'renew'
+			setPaymentRenewStatus(false, $this)
+		else
+			changeFeaturedBuildingStatus(false, $this)
 	else
 		if $this.data('fbby') == 'manager' && $this.data('expired') == 'expired'
 			window.location.href = $this.data('billingurl')
 		else
-			changeFeaturedBuildingStatus(true, $(this))
+			if field_type != undefined && field_type == 'renew'
+				setPaymentRenewStatus(true, $this)
+			else
+				changeFeaturedBuildingStatus(true, $this)
 
 
 changeFeaturedBuildingStatus = (status, elem) ->
@@ -40,5 +47,17 @@ changeFeaturedBuildingStatus = (status, elem) ->
 		beforeSend: (xhr) -> 
 			xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
 		data: { featured_building: { active: status } }
+		success: (response) ->
+			console.log(response)
+
+setPaymentRenewStatus = (status, elem) ->
+	fb_id = elem.data('fbid')
+	$.ajax
+		url: '/featured_buildings/'+fb_id
+		dataType: 'json'
+		type: 'put'
+		beforeSend: (xhr) -> 
+			xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+		data: { featured_building: { renew: status } }
 		success: (response) ->
 			console.log(response)

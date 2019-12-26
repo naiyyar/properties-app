@@ -6,16 +6,16 @@
         %table.table.table-striped#sortable
           %thead
             %tr
-              %th Feature ID(#{@featured_buildings.count})
+              %th{width: '10%'} Feature ID(#{@featured_buildings.count})
               %th Building
-              %th{width: "8%"} Management
-              %th{width: "12%"} Website
-              %th Start Date
-              %th End Date
+              %th{width: '10%'} Management
+              %th{width: '8%'} Website
+              %th{width: '8%'} Start Date
+              %th{width: '8%'} End Date
               %th Email
               %th
               %th
-              %th Active
+              %th{width: '6%'} Active
           
           %tbody.table
             - @featured_buildings.each do |featured_building|
@@ -42,8 +42,8 @@
                     %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: featured_building.active, style: 'margin: 0px;', data: { fbid: featured_building.id } }
                 -else
                   %td
-                    - if featured_building.has_start_and_end_date?
-                      = link_to 'edit', edit_featured_building_path(featured_building)
+                    / - if featured_building.has_start_and_end_date?
+                    = link_to 'edit', edit_featured_building_path(featured_building)
                   %td
                     - unless featured_building.has_start_and_end_date?
                       = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: "Are you sure you want to delete this featured building?"}, class: 'text-danger'

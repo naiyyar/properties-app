@@ -31,7 +31,7 @@
           - @billings.each do |billing|
             - card = BillingService.new.fetch_card(billing.stripe_customer_id) rescue nil
             %tr
-              %td=date_created = billing.created_at.strftime('%d-%m-%Y')
+              %td=date_created = billing.created_at.to_date
               %td.text-right=number_to_currency(billing.amount, precision: 2)
               %td
                 - if billing.stripe_customer_id.present?

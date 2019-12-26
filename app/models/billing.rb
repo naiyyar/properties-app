@@ -42,7 +42,7 @@ class Billing < ApplicationRecord
 		start_date = Date.today
 		featured_building = FeaturedBuilding.find(featured_building_id)
 		end_date = (start_date + 27.days) #for 4 weeks
-		featured_building.update(start_date: start_date, end_date: end_date, active: true)
+		featured_building.update(start_date: start_date, end_date: end_date, active: true, renew: true)
 		BillingMailer.send_payment_receipt(self, customer_email).deliver
 	end
 	

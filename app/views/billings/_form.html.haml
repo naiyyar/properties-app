@@ -11,10 +11,10 @@
               %td.v-align-middle="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
               %td.text-center
                 = form_tag pay_using_saved_card_path, method: :post do
-                  = hidden_field_tag 'billing[email]', card[:email]
-                  = hidden_field_tag 'billing[amount]', Billing::PRICE
-                  = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
-                  = hidden_field_tag 'billing[user_id]', current_user.id
+                  = hidden_field_tag 'billing[email]', card[:email], id: 'billing_email2'
+                  = hidden_field_tag 'billing[amount]', Billing::PRICE, id: 'billing_amount2'
+                  = hidden_field_tag 'billing[featured_building_id]', params[:fb_id], id: 'billing_featured_building_id2'
+                  = hidden_field_tag 'billing[user_id]', current_user.id, id: 'billing_user_id2'
                   = hidden_field_tag :customer_id, card[:customer_id]
 
                   = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary btn-sm font-bold', data: { disable_with: "Pay $#{Billing::PRICE}.00" }
@@ -29,26 +29,27 @@
         .panel-heading
           %b New Billing
         .panel-body
-          = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .payment-errors.text-danger
-            
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  = text_field_tag :email, current_user.email, class: 'form-control', :autocomplete => :off, data: { stripe: 'email' }, id: 'user-email', placeholder: 'Email', required: true
-                  = hidden_field_tag 'billing[amount]', Billing::PRICE
-                  = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
-                  = hidden_field_tag 'billing[user_id]', current_user.id
+          #example-2.cell.example.example2
+            = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
+              .row.error
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  .payment-errors.text-danger.message
+              
+              .row
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  .form-group
+                    = email_field_tag :email, current_user.email, class: 'form-control', :autocomplete => :off, data: { stripe: 'email' }, id: 'user-email', placeholder: 'Email', required: true
+                    = hidden_field_tag 'billing[amount]', Billing::PRICE
+                    = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
+                    = hidden_field_tag 'billing[user_id]', current_user.id
 
-                = render 'billings/card_detail_fields'
-            
-            %br
-            %br
-            .form-group
-              .col-sm-12
-                .pull-right
-                  = link_to 'Cancel', managertools_user_path(current_user, type: 'featured'), class: 'btn font-bold'
-                  = link_to 'Back', managertools_user_path(current_user, type: 'billing'), class: 'btn btn-default font-bold'
-                  = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary font-bold btn_submit btn_submit_stripe-form'
+                  = render 'billings/card_detail_fields'
+              
+              %br
+              %br
+              .form-group
+                .col-sm-12
+                  .pull-right
+                    = link_to 'Cancel', managertools_user_path(current_user, type: 'featured'), class: 'btn font-bold'
+                    = link_to 'Back', managertools_user_path(current_user, type: 'billing'), class: 'btn btn-default font-bold'
+                    = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary font-bold btn_submit btn_submit_stripe-form', 'data-tid' => "elements_examples.form.pay_button"
