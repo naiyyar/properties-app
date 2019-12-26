@@ -40,7 +40,7 @@
                   %td
                     - if billing.stripe_customer_id.present?
                       - if card.present?
-                        = image_tag "card_brands/#{billing.brand.downcase}.svg", height: 20
+                        = image_tag "card_brands/#{brand_name(billing.brand)}.svg", height: 20
                       - else
                         = image_tag "card_brands/generic.svg", height: 20
                       %b.text-success Successful
