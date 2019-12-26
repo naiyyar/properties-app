@@ -1,35 +1,49 @@
-.strp-form.strp-form2 {
+#stripe-billing-form input[type='email']{
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #cfd7df;
+  box-shadow: none;
+  width: 95%;
+  margin-left: 14px;
+  margin-bottom: 2px;
+  border-radius: 0px !important;
+}
+#stripe-billing-form #user-email:focus{
+
+}
+.example.example2 {
   background-color: #fff;
 }
 
-.strp-form.strp-form2 * {
+.example.example2 * {
   /*font-family: Source Code Pro, Consolas, Menlo, monospace;*/
   font-size: 14px;
   font-weight: 400;
 }
 
-.strp-form.strp-form2 .row {
+.example.example2 .row {
   display: -ms-flexbox;
   display: flex;
   margin: 0 5px 10px;
 }
 
-.strp-form.strp-form2 .field {
+.example.example2 .field {
   position: relative;
   width: 100%;
   height: 50px;
   margin: 0 10px;
 }
 
-.strp-form.strp-form2 .field.half-width {
+.example.example2 .field.half-width {
   width: 50%;
 }
 
-.strp-form.strp-form2 .field.quarter-width {
+.example.example2 .field.quarter-width {
   width: calc(25% - 10px);
 }
 
-.strp-form.strp-form2 .baseline {
+.example.example2 .baseline {
   position: absolute;
   width: 100%;
   height: 1px;
@@ -39,7 +53,7 @@
   transition: background-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.strp-form.strp-form2 label {
+.example.example2 label {
   position: absolute;
   width: 100%;
   left: 0;
@@ -56,7 +70,7 @@
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.strp-form.strp-form2 .input {
+.example.example2 .input {
   position: absolute;
   width: 100%;
   left: 0;
@@ -66,71 +80,73 @@
   background-color: transparent;
 }
 
-.strp-form.strp-form2 .input::-webkit-input-placeholder {
+.example.example2 .input::-webkit-input-placeholder {
   color: transparent;
   transition: color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.strp-form.strp-form2 .input::-moz-placeholder {
+.example.example2 .input::-moz-placeholder {
   color: transparent;
   transition: color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.strp-form.strp-form2 .input:-ms-input-placeholder {
+.example.example2 .input:-ms-input-placeholder {
   color: transparent;
   transition: color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.strp-form.strp-form2 .input.StripeElement {
+.example.example2 .input.StripeElement {
   opacity: 0;
   transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   will-change: opacity;
 }
 
-.strp-form.strp-form2 .input.focused,
-.strp-form.strp-form2 .input:not(.empty) {
+.example.example2 .input.focused,
+.example.example2 .input:not(.empty) {
   opacity: 1;
 }
 
-.strp-form.strp-form2 .input.focused::-webkit-input-placeholder,
-.strp-form.strp-form2 .input:not(.empty)::-webkit-input-placeholder {
+.example.example2 .input.focused::-webkit-input-placeholder,
+.example.example2 .input:not(.empty)::-webkit-input-placeholder {
   color: #cfd7df;
 }
 
-.strp-form.strp-form2 .input.focused::-moz-placeholder,
-.strp-form.strp-form2 .input:not(.empty)::-moz-placeholder {
+.example.example2 .input.focused::-moz-placeholder,
+.example.example2 .input:not(.empty)::-moz-placeholder {
   color: #cfd7df;
 }
 
-.strp-form.strp-form2 .input.focused:-ms-input-placeholder,
-.strp-form.strp-form2 .input:not(.empty):-ms-input-placeholder {
+.example.example2 .input.focused:-ms-input-placeholder,
+.example.example2 .input:not(.empty):-ms-input-placeholder {
   color: #cfd7df;
 }
 
-.strp-form.strp-form2 .input.focused + label,
-.strp-form.strp-form2 .input:not(.empty) + label {
+.example.example2 .input.focused + label,
+.example.example2 .input:not(.empty) + label {
   color: #aab7c4;
   transform: scale(0.85) translateY(-25px);
   cursor: default;
 }
 
-.strp-form.strp-form2 .input.focused + label {
-  color: #24b47e;
+.example.example2 .input.focused + label {
+  /*color: #24b47e;*/
+  color: #337ab7;
 }
 
-.strp-form.strp-form2 .input.invalid + label {
+.example.example2 .input.invalid + label {
   color: #ffa27b;
 }
 
-.strp-form.strp-form2 .input.focused + label + .baseline {
-  background-color: #24b47e;
+.example.example2 .input.focused + label + .baseline {
+  /*background-color: #24b47e;*/
+  background-color: #337ab7;
 }
 
-.strp-form.strp-form2 .input.focused.invalid + label + .baseline {
+.example.example2 .input.focused.invalid + label + .baseline {
   background-color: #e25950;
 }
 
-.strp-form.strp-form2 input, .strp-form.strp-form2 button {
+.example.example2 input, .example.example2 button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -138,21 +154,21 @@
   border-style: none;
 }
 
-.strp-form.strp-form2 input:-webkit-autofill {
+.example.example2 input:-webkit-autofill {
   -webkit-text-fill-color: #e39f48;
   transition: background-color 100000000s;
   -webkit-animation: 1ms void-animation-out;
 }
 
-.strp-form.strp-form2 .StripeElement--webkit-autofill {
+.example.example2 .StripeElement--webkit-autofill {
   background: transparent !important;
 }
 
-.strp-form.strp-form2 input, .strp-form.strp-form2 button {
+.example.example2 input, .example.example2 button {
   -webkit-animation: 1ms void-animation-out;
 }
 
-.strp-form.strp-form2 button {
+.example.example2 button {
   display: block;
   width: calc(100% - 30px);
   height: 40px;
@@ -165,40 +181,40 @@
   cursor: pointer;
 }
 
-.strp-form.strp-form2 .error svg {
+.example.example2 .error svg {
   margin-top: 0 !important;
 }
 
-.strp-form.strp-form2 .error svg .base {
+.example.example2 .error svg .base {
   fill: #e25950;
 }
 
-.strp-form.strp-form2 .error svg .glyph {
+.example.example2 .error svg .glyph {
   fill: #fff;
 }
 
-.strp-form.strp-form2 .error .message {
+.example.example2 .error .message {
   color: #e25950;
 }
 
-.strp-form.strp-form2 .success .icon .border {
+.example.example2 .success .icon .border {
   stroke: #abe9d2;
 }
 
-.strp-form.strp-form2 .success .icon .checkmark {
+.example.example2 .success .icon .checkmark {
   stroke: #24b47e;
 }
 
-.strp-form.strp-form2 .success .title {
+.example.example2 .success .title {
   color: #32325d;
   font-size: 16px !important;
 }
 
-.strp-form.strp-form2 .success .message {
+.example.example2 .success .message {
   color: #8898aa;
   font-size: 13px !important;
 }
 
-.strp-form.strp-form2 .success .reset path {
+.example.example2 .success .reset path {
   fill: #24b47e;
 }

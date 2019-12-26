@@ -29,7 +29,7 @@
         .panel-heading
           %b New Billing
         .panel-body
-          #example-2.cell.strp-form.strp-form2
+          #example-2.cell.example.example2
             = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
               .row.error
                 .col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -38,7 +38,7 @@
               .row
                 .col-xs-12.col-sm-12.col-md-12.col-lg-12
                   .form-group
-                    = email_field_tag :email, current_user.email, class: 'form-control', :autocomplete => :off, data: { stripe: 'email' }, id: 'user-email', placeholder: 'Email', required: true
+                    = email_field_tag 'billing[email]', current_user.email, class: 'form-control', :autocomplete => :off, id: 'user-email', placeholder: 'Email', required: true
                     = hidden_field_tag 'billing[amount]', Billing::PRICE
                     = hidden_field_tag 'billing[featured_building_id]', params[:fb_id]
                     = hidden_field_tag 'billing[user_id]', current_user.id
