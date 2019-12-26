@@ -4,6 +4,7 @@ class Billing < ApplicationRecord
 	belongs_to :featured_building
 	
 	attr_accessor :description
+	validates_presence_of :email
 
 	after_save :set_featured_building_end_date, :send_email
 
@@ -20,6 +21,8 @@ class Billing < ApplicationRecord
         errors.add :credit_card, e.message
         false
       end
+    else
+    	errors.add(:base, 'Email can not be blank.')  if email.blank?
     end
 	end
 
@@ -46,6 +49,7 @@ class Billing < ApplicationRecord
 
 	def send_email
 		card = BillingService.new.fetch_card(self.stripe_customer_id)
+		self.update_column(:brand, card['brand'])
 		BillingMailer.send_payment_receipt(self, card).deliver
 	end
 	

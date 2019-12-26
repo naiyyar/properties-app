@@ -1,2 +1,4 @@
-var row_id = '<%=params[:card_id].last(9)%>';
-$('.table-striped tr#'+row_id).remove();
+var c_id = '<%=params[:card_id].last(9)%>';
+//$('.table-striped tr#'+row_id).remove();
+$('#delete-stripe-card-'+c_id).parent().parent().remove();
+//window.location.reload()

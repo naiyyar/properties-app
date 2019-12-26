@@ -62,7 +62,6 @@ class BillingsController < ApplicationController
   # POST /billings.json
   def create
     @billing = Billing.new(billing_params)
-    @billing.description = 'Featured Building Payment.'
     respond_to do |format|
       if @billing.save_and_make_payment!
         format.html { redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' }
@@ -109,7 +108,7 @@ class BillingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def billing_params
-      params.require(:billing).permit(:user_id, :featured_building_id, :amount, :stripe_card_id, :email)
+      params.require(:billing).permit(:user_id, :featured_building_id, :amount, :stripe_card_id, :email, :description)
     end
 
     def get_card

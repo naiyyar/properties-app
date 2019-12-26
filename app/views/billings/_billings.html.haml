@@ -6,10 +6,10 @@
       %table.table.table-striped
         - @saved_cards.each do |card|
           - exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
-          %tr{id: card[:id].last(9)}
+          %tr
             %td.v-align-middle="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
             %td.text-center
-              =link_to 'Delete', delete_card_path(card_id: card[:id], customer_id: card[:customer_id]), class: 'btn btn-danger btn-sm', remote: true, data: { disable_with: 'Deleting...' }
+              =link_to 'Delete', delete_card_path(card_id: card[:id], customer_id: card[:customer_id]), class: 'btn btn-danger btn-sm', id: "delete-stripe-card-#{card[:id].last(9)}", remote: true, data: { disable_with: 'Deleting...' }
     .pull-left
       =link_to 'Add New Card', new_manager_featured_building_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm disabled'
 
@@ -23,27 +23,31 @@
           %tr
             %th{width: "15%"} Date
             %th.text-center{width: "10%"} Amount
+            %th Description
             %th Status
             %th.text-center{width: "20%"} Actions
             %th{width: "1%"}
         
         %tbody.table
-          - @billings.each do |billing|
-            - card = BillingService.new.fetch_card(billing.stripe_customer_id) rescue nil
-            %tr
-              %td=date_created = billing.created_at.to_date
-              %td.text-right=number_to_currency(billing.amount, precision: 2)
-              %td
-                - if billing.stripe_customer_id.present?
-                  - if card.present?
-                    = image_tag "card_brands/#{card['brand'].downcase}.svg", height: 20
-                  - else
-                    = image_tag "card_brands/generic.svg", height: 20
-                  %b.text-success Successful
-              %td.text-center
-                =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), download: "invoice_#{date_created}", title: 'Download inovoice in pdf'
-                &nbsp;
-                =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true, title: 'Preview in browser'
-                &nbsp;
-                =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'send'), title: 'Send in mail'
-              %td.text-center
+          - cache @billings do
+            - @billings.each do |billing|
+              - cache billing do
+                - card = BillingService.new.fetch_card(billing.stripe_customer_id) rescue nil
+                %tr
+                  %td=date_created = billing.created_at.to_date
+                  %td.text-right=number_to_currency(billing.amount, precision: 2)
+                  %td Featured Building Payment.
+                  %td
+                    - if billing.stripe_customer_id.present?
+                      - if card.present?
+                        = image_tag "card_brands/#{billing.brand.downcase}.svg", height: 20
+                      - else
+                        = image_tag "card_brands/generic.svg", height: 20
+                      %b.text-success Successful
+                  %td.text-center
+                    =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), download: "invoice_#{date_created}", title: 'Download inovoice in pdf'
+                    &nbsp;
+                    =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true, title: 'Preview in browser'
+                    &nbsp;
+                    =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'send'), title: 'Send in mail'
+                  %td.text-center

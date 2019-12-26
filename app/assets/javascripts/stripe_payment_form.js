@@ -1,5 +1,10 @@
 $(document).ready(function(){
   if($('#stripe-billing-form').length > 0){
+    $('#user-email').on('keyup', function(){
+      var text = $(this).val();
+      $('#billing_email').val(text);
+    })
+
     var stripe = Stripe($("meta[name='stripe-key']").attr('content'));
     function registerElements(elements, exampleName) {
       var formClass = '.' + exampleName;
