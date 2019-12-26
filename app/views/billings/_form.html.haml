@@ -11,11 +11,11 @@
               %td.v-align-middle="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
               %td.text-center
                 = form_tag pay_using_saved_card_path, method: :post do
-                  = hidden_field_tag 'billing[email]', card[:email], id: 'billing_email2'
-                  = hidden_field_tag 'billing[amount]', Billing::PRICE, id: 'billing_amount2'
-                  = hidden_field_tag 'billing[featured_building_id]', params[:fb_id], id: 'billing_featured_building_id2'
-                  = hidden_field_tag 'billing[user_id]', current_user.id, id: 'billing_user_id2'
-                  = hidden_field_tag :customer_id, card[:customer_id]
+                  = hidden_field_tag 'billing[email]', card[:email], id: "billing_email_#{card[:last4]}"
+                  = hidden_field_tag 'billing[amount]', Billing::PRICE, id: "billing_amount2_#{card[:last4]}"
+                  = hidden_field_tag 'billing[featured_building_id]', params[:fb_id], id: "billing_featured_building_id_#{card[:last4]}"
+                  = hidden_field_tag 'billing[user_id]', current_user.id, id: "billing_user_id_#{card[:last4]}"
+                  = hidden_field_tag :customer_id, card[:customer_id], id: "cust_id_#{card[:last4]}"
 
                   = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary btn-sm font-bold', data: { disable_with: "Pay $#{Billing::PRICE}.00" }
     
@@ -29,7 +29,7 @@
         .panel-heading
           %b New Billing
         .panel-body
-          #example-2.cell.example.example2
+          #example-2.cell.strp-form.strp-form2
             = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
               .row.error
                 .col-xs-12.col-sm-12.col-md-12.col-lg-12

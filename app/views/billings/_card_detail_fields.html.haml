@@ -1,33 +1,14 @@
-- if false
-  .row
-    .col-lg-10
-      .form-group
-        = text_field_tag :card_number,nil, class: 'form-control', :autocomplete => :off, data: { stripe: 'number' }, id: 'card-number', placeholder: 'Card number'
-    .col-lg-2
-      .card-type.text-center
-        %span.fa.fa-credit-card.fa-3x.text-muted
-  .row
-    .col-lg-2
-      .form-group
-        = select_tag :exp_month, options_for_select('01'..'12'), prompt: 'MM', class: 'form-control', data: { stripe: 'exp-month' }, id: 'card-exp-month', placeholder: 'MM'
-    .col-lg-3
-      .form-group  
-        = select_tag :exp_year, options_for_select(Date.today.year..(Date.today.year + 15)), prompt: 'YYYY', class: 'form-control', data: { stripe: 'exp-year' }, id: 'card-exp-year', placeholder: 'YYYY'
-    .col-lg-4
-      .form-group
-        = text_field_tag :cvc, nil, class: 'form-control', :autocomplete => :off, data: { stripe: 'cvc' }, id: 'card-cvc', placeholder: 'CVC'
-
 .row
   .field
     #example2-card-number.input.empty
-    %label{"data-tid" => "elements_examples.form.card_number_label", for: "example2-card-number"} Card number
+    %label{"data-tid" => "elements_examples.form.card_number_label", for: "strp-form2-card-number"} Card number
     .baseline
 .row
   .field.half-width
     #example2-card-expiry.input.empty
-    %label{"data-tid" => "elements_examples.form.card_expiry_label", for: "example2-card-expiry"} Expiration
+    %label{"data-tid" => "elements_examples.form.card_expiry_label", for: "strp-form2-card-expiry"} Expiration
     .baseline
   .field.half-width
     #example2-card-cvc.input.empty
-    %label{"data-tid" => "elements_examples.form.card_cvc_label", for: "example2-card-cvc"} CVC
+    %label{"data-tid" => "elements_examples.form.card_cvc_label", for: "strp-form2-card-cvc"} CVC
     .baseline

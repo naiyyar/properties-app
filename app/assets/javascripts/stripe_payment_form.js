@@ -1,12 +1,10 @@
 $(document).ready(function(){
- //'use strict';
   if($('#stripe-billing-form').length > 0){
     var stripe = Stripe($("meta[name='stripe-key']").attr('content'));
     function registerElements(elements, exampleName) {
       var formClass = '.' + exampleName;
-      var example = document.querySelector(formClass);
-      var form = example.querySelector('form');
-      //var resetButton = example.querySelector('a.reset');
+      var strp_form = document.querySelector(formClass);
+      var form = strp_form.querySelector('form');
       var error = form.querySelector('.error');
       var errorMessage = error.querySelector('.message');
 
@@ -93,38 +91,21 @@ $(document).ready(function(){
         }
 
         // Show a loading screen...
-        example.classList.add('submitting');
+        strp_form.classList.add('submitting');
 
         // Disable all inputs.
         disableInputs();
-
-        // Gather additional customer data we may have collected in our form.
-        // var name = form.querySelector('#' + exampleName + '-name');
-        // var address1 = form.querySelector('#' + exampleName + '-address');
-        // var city = form.querySelector('#' + exampleName + '-city');
-        // var state = form.querySelector('#' + exampleName + '-state');
-        // var zip = form.querySelector('#' + exampleName + '-zip');
-        // var additionalData = {
-        //   name: name ? name.value : undefined,
-        //   address_line1: address1 ? address1.value : undefined,
-        //   address_city: city ? city.value : undefined,
-        //   address_state: state ? state.value : undefined,
-        //   address_zip: zip ? zip.value : undefined,
-        // };
-
         // Use Stripe.js to create a token. We only need to pass in one Element
         // from the Element group in order to create a token. We can also pass
         // in the additional customer data we collected in our form.
         stripe.createToken(elements[0]).then(function(result) {
           // Stop loading!
-          //example.classList.remove('submitting');
+          //strp_form.classList.remove('submitting');
           if (result.token) {
-            // If we received a token, show the token ID.
             var token = result.token.id;
             var paymentForm = $('#stripe-billing-form');
             paymentForm.append($('<input type="hidden" name="billing[stripe_card_id]" />').val(token));
-            //example.querySelector('.token').innerText = result.token.id;
-            //example.classList.add('submitted');
+            //strp_form.classList.add('submitted');
             paymentForm[0].submit();
           } else {
             // Otherwise, un-disable inputs.
@@ -132,25 +113,6 @@ $(document).ready(function(){
           }
         });
       });
-
-      // resetButton.addEventListener('click', function(e) {
-      //   e.preventDefault();
-      //   // Resetting the form (instead of setting the value to `''` for each input)
-      //   // helps us clear webkit autofill styles.
-      //   form.reset();
-
-      //   // Clear each Element.
-      //   elements.forEach(function(element) {
-      //     element.clear();
-      //   });
-
-      //   // Reset error state as well.
-      //   error.classList.remove('visible');
-
-      //   // Resetting the form does not un-disable inputs, so we need to do it separately:
-      //   enableInputs();
-      //   example.classList.remove('submitted');
-      // });
     }
 
 
@@ -165,7 +127,7 @@ $(document).ready(function(){
     });
 
     // Floating labels
-    var inputs = document.querySelectorAll('.cell.example.example2 .input');
+    var inputs = document.querySelectorAll('.cell.strp-form.strp-form2 .input');
     Array.prototype.forEach.call(inputs, function(input) {
       input.addEventListener('focus', function() {
         input.classList.add('focused');
@@ -216,20 +178,20 @@ $(document).ready(function(){
       style: elementStyles,
       classes: elementClasses,
     });
-    cardNumber.mount('#example2-card-number');
+    cardNumber.mount('#strp-form2-card-number');
 
     var cardExpiry = elements.create('cardExpiry', {
       style: elementStyles,
       classes: elementClasses,
     });
-    cardExpiry.mount('#example2-card-expiry');
+    cardExpiry.mount('#strp-form2-card-expiry');
 
     var cardCvc = elements.create('cardCvc', {
       style: elementStyles,
       classes: elementClasses,
     });
-    cardCvc.mount('#example2-card-cvc');
+    cardCvc.mount('#strp-form2-card-cvc');
 
-    registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
+    registerElements([cardNumber, cardExpiry, cardCvc], 'strp-form2');
   }; //end if
 })//end doc ready
