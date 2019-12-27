@@ -8,7 +8,7 @@ class BillingService
 	end
 
 	def get_saved_cards current_user
-		cust_id = current_user.customer_id
+		cust_id = current_user.create_stripe_customer
 		cards = saved_cards(cust_id)
 		cards.map do |card|
 			begin
@@ -29,6 +29,10 @@ class BillingService
 
 	def saved_cards cust_id
 		Stripe::Customer.list_sources(cust_id).data rescue nil
+	end
+
+	def get_card customer_id, card_id
+		Stripe::Customer.retrieve_source(customer_id, card_id)
 	end
 
 	def create_stripe_customer

@@ -49,11 +49,11 @@ ActiveRecord::Schema.define(version: 20191227145214) do
     t.string   "status"
     t.string   "stripe_customer_id"
     t.string   "stripe_card_id"
+    t.string   "billing_card_id"
     t.string   "stripe_charge_id"
     t.string   "email"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.string   "brand"
   end
 
   create_table "broker_fee_percents", force: :cascade do |t|

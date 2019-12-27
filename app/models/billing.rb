@@ -19,7 +19,8 @@ class Billing < ApplicationRecord
       		customer_id 				= billing_service.create_stripe_customer.id
       		user.update_column(:stripe_customer_id, customer_id)
       	end
-      	billing_service.create_source(customer_id)
+      	card = billing_service.create_source(customer_id)
+      	self.billing_card_id 	= card.id
       	self.strp_customer_id = customer_id
         charge 								= billing_service.create_stripe_charge(customer_id)
         self.stripe_charge_id = charge.id
@@ -55,7 +56,7 @@ class Billing < ApplicationRecord
 	end
 
 	def send_email
-		card = BillingService.new.fetch_card(self.strp_customer_id)
+		card = BillingService.new.saved_cards(strp_customer_id, billing_card_id)
 		self.update_column(:brand, card['brand'])
 		BillingMailer.send_payment_receipt(self, card).deliver
 	end
