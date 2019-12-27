@@ -26,7 +26,8 @@ class UsersController < ApplicationController
 	end
 
 	def managertools
-		@type = params[:type]
+		@type 					  = params[:type]
+		session[:back_to] = request.fullpath
 		unless params[:type] == 'billing'
 			@filterrific = initialize_filterrific(
 	      FeaturedBuilding,
