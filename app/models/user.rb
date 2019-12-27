@@ -46,7 +46,6 @@ class User < ApplicationRecord
   has_many :billings, dependent: :destroy
   has_many :featured_buildings, dependent: :destroy
   has_many :favorites, as: :favoriter, dependent: :destroy
-  has_many :customers, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -180,10 +179,6 @@ class User < ApplicationRecord
   def unfavorite(favorable)
     records = favorites.find_by(favorable_id: favorable.id, favorable_type: favorable.class.base_class.name)
     records.try(:destroy)
-  end
-
-  def billing_customer_ids
-    customers.pluck(:stripe_customer_id).uniq
   end
 
   # def should_generate_new_friendly_id?

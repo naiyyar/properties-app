@@ -11,12 +11,18 @@ class Billing < ApplicationRecord
 	def save_and_make_payment!
 		if valid?
       begin
-      	billing_service 				= BillingService.new(stripe_card_id, email, description)
-      	customer 								= billing_service.create_stripe_customer
-      	Customer.create(stripe_customer_id: customer.id, user_id: user_id)
-      	self.strp_customer_id 	= customer.id
-        charge 									= billing_service.create_stripe_charge(customer.id)
-        self.stripe_charge_id 	= charge.id
+      	#stripe_card_id is same as payment_token
+      	billing_service 			= BillingService.new(stripe_card_id, email, description)
+      	if user.stripe_customer_id.present?
+      		customer_id 				= user.stripe_customer_id
+      	else
+      		customer_id 				= billing_service.create_stripe_customer.id
+      		user.update_column(:stripe_customer_id, customer_id)
+      	end
+      	billing_service.create_source(customer_id)
+      	self.strp_customer_id = customer_id
+        charge 								= billing_service.create_stripe_charge(customer_id)
+        self.stripe_charge_id = charge.id
         save
       rescue Stripe::CardError => e
         errors.add :credit_card, e.message

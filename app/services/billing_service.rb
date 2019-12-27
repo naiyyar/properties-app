@@ -8,12 +8,12 @@ class BillingService
 	end
 
 	def get_saved_cards current_user
-		cards = []
-		current_user.billing_customer_ids.map do |cust_id|
+		cust_id = current_user.customer_id
+		cards = saved_cards(cust_id)
+		cards.map do |card|
 			begin
-				card = fetch_card(cust_id)
 				cards << { 	id:         	card['id'],
-										email: 				Stripe::Customer.retrieve(cust_id).email,
+										email: 				current_user.email,
 										customer_id:	cust_id,
 										brand: 				card['brand'], 
 										exp_month: 		card['exp_month'], 
@@ -27,12 +27,16 @@ class BillingService
 		return cards
 	end
 
-	def fetch_card cust_id
-		Stripe::Customer.list_sources(cust_id).data.first rescue nil
+	def saved_cards cust_id
+		Stripe::Customer.list_sources(cust_id).data rescue nil
 	end
 
 	def create_stripe_customer
-		Stripe::Customer.create(email: @customer_email, card: @payment_token)
+		Stripe::Customer.create(email: @customer_email, description: "Customer for #{@customer_email}")
+	end
+
+	def create_source cust_id
+		Stripe::Customer.create_source(cust_id,{ source: @payment_token })
 	end
 
 	def create_stripe_charge customer_id
