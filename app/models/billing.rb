@@ -56,8 +56,11 @@ class Billing < ApplicationRecord
 	end
 
 	def send_email
-		card = BillingService.new.get_card(strp_customer_id, billing_card_id)
-		self.update_column(:brand, card['brand'])
+		customer_id = strp_customer_id || stripe_customer_id
+		if customer_id.present? and billing_card_id.present?
+			card = BillingService.new.get_card(strp_customer_id, billing_card_id)
+			self.update_column(:brand, card['brand'])
+		end
 		BillingMailer.send_payment_receipt(self, card).deliver
 	end
 	

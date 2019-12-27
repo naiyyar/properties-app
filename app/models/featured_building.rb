@@ -49,6 +49,14 @@ class FeaturedBuilding < ApplicationRecord
     !live?
   end
 
+  def renew_plan?
+    end_date.present? and Date.today == end_date - 2.days
+  end
+
+  def send_renew_reminder?
+    end_date.present? and Date.today == end_date - 4.days
+  end
+
   private
   def check_status
     errors.add :base, 'Cannot delete active featured buildings.'
