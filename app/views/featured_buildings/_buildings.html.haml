@@ -7,15 +7,15 @@
           %thead
             %tr
               %th{width: '10%'} Feature ID(#{@featured_buildings.count})
-              %th Building
-              %th{width: '10%'} Management
+              %th{width: '20%'} Building
+              %th{width: '20%'} Management
               %th{width: '8%'} Website
               %th{width: '8%'} Start Date
               %th{width: '8%'} End Date
               - unless params[:type] == 'featured'
                 %th='Email' 
-              %th
-              %th
+              %th{width: '6%'}
+              %th{width: '6%'}
               %th{width: '6%'} Renew
               %th{width: '6%'} Active
           
@@ -41,7 +41,7 @@
                     - unless featured_building.featured_by_manager?
                       = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: "Are you sure you want to delete this featured building?"}, class: 'text-danger' 
                   %td
-                    %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id }
+                    %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id, disabled: true }
                   %td
                     %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: featured_building.active, style: 'margin: 0px;', data: { fbid: featured_building.id } }
                 -else
@@ -50,6 +50,6 @@
                     - unless featured_building.has_start_and_end_date?
                       = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: "Are you sure you want to delete this featured building?"}, class: 'text-danger'
                   %td
-                    %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id }
+                    %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id, disabled: true }
                   %td
                     %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: featured_building.active, style: 'margin: 0px;', data: { fbid: featured_building.id, fbby: 'manager', expired: featured_building.expired? ? 'expired' : '', billingurl: featured_building.expired? ? new_manager_featured_building_user_path(current_user, type: 'billing', fb_id: featured_building.id) : '' } }

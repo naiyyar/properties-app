@@ -78,6 +78,10 @@ app.AsCompBuildings.prototype = {
     if(sbmt.length > 0){
       sbmt[0].disabled = false;  
     }
+
+    if($("ul.ui-autocomplete").is(":visible")) {
+      $("ul.ui-autocomplete").hide();
+    }
     
     return false;
   },

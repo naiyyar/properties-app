@@ -25,7 +25,6 @@ class FeaturedBuildingsController < ApplicationController
 
   # GET /featured_buildings/new
   def new
-    debugger
     session[:back_to]  = request.fullpath if params[:type] != 'billing'
     @featured_building = FeaturedBuilding.new
     @saved_cards       = BillingService.new.get_saved_cards(current_user) rescue nil

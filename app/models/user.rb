@@ -46,6 +46,7 @@ class User < ApplicationRecord
   has_many :billings, dependent: :destroy
   has_many :featured_buildings, dependent: :destroy
   has_many :favorites, as: :favoriter, dependent: :destroy
+  has_many :customers, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -182,7 +183,7 @@ class User < ApplicationRecord
   end
 
   def billing_customer_ids
-    billings.where.not(stripe_customer_id: nil).pluck(:stripe_customer_id).uniq
+    customers.pluck(:stripe_customer_id).uniq
   end
 
   # def should_generate_new_friendly_id?

@@ -2,7 +2,7 @@ class FeaturedBuilding < ApplicationRecord
   include PgSearch
   belongs_to :building
   belongs_to :user
-  has_one :billing, :dependent => :destroy
+  has_one :billing #, :dependent => :destroy
 
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
@@ -22,6 +22,8 @@ class FeaturedBuilding < ApplicationRecord
      :search_query
     ]
   )
+
+  #before_destroy :check_status, unless: Proc.new{ |obj| obj.expired? }
 
   def featured_by_manager?
     featured_by == 'manager'
@@ -45,5 +47,12 @@ class FeaturedBuilding < ApplicationRecord
 
   def expired?
     !live?
+  end
+
+  private
+  def check_status
+    errors.add :base, 'Cannot delete active featured buildings.'
+    false
+    throw(:abort)
   end
 end

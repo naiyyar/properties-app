@@ -30,8 +30,9 @@ class BillingsController < ApplicationController
   end
 
   def create_new_card
-    #billing_service = BillingService.new(params[:billing][:stripe_card_id], params[:email])
-    #customer        = billing_service.create_stripe_customer(current_user: current_user)
+    billing_service = BillingService.new(params[:billing][:stripe_card_id], params[:email])
+    customer        = billing_service.create_stripe_customer
+    Customer.create(stripe_customer_id: customer.id, user_id: current_user.id)
     
     respond_to do |format|
       format.html { redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Card successfully saved.' }
@@ -45,7 +46,7 @@ class BillingsController < ApplicationController
   def pay_using_saved_card
     @billing = Billing.new(billing_params)
     respond_to do |format|
-      if @billing.save_charge_existing_card!(params[:customer_id])
+      if @billing.create_charge_existing_card!(params[:customer_id])
         format.html { 
           redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' 
         }

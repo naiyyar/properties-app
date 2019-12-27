@@ -5,19 +5,22 @@
         .panel-heading
           %b New Card
         .panel-body
-          = form_tag create_new_card_path, method: :post, id: 'stripe-billing-form' do
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .payment-errors.text-danger
-            
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  = text_field_tag :email, current_user.email, class: 'form-control', :autocomplete => :off, data: { stripe: 'email' }, id: 'user-email', placeholder: 'Email'
-                
-                = render 'billings/card_detail_fields'
-            
-            
-            .form-group
-              %br
-              = submit_tag 'Save', class: 'btn btn-primary btn-block font-bold btn_submit btn_submit_stripe-form'
+          #example-2.cell.example.example2
+            = form_tag create_new_card_path, method: :post, id: 'stripe-billing-form' do
+              .row.error
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  .payment-errors.text-danger.message
+              
+              .row
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  .form-group
+                    = hidden_field_tag :email, current_user.email, class: 'form-control', id: 'user-email', placeholder: 'Email'
+                  
+                  = render 'billings/card_detail_fields'
+              
+              .form-group
+                .col-sm-12
+                  .pull-right
+                    = link_to 'Cancel', managertools_user_path(current_user, type: 'featured'), class: 'btn font-bold'
+                    = link_to 'Back', session[:back_to], class: 'btn btn-default font-bold'
+                    = submit_tag 'Save', class: 'btn btn-primary font-bold'

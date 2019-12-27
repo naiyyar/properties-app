@@ -3,7 +3,7 @@ class Billing < ApplicationRecord
 	belongs_to :user
 	belongs_to :featured_building
 	
-	attr_accessor :description
+	attr_accessor :description, :strp_customer_id
 	validates_presence_of :email
 
 	after_save :set_featured_building_end_date, :send_email
@@ -13,7 +13,8 @@ class Billing < ApplicationRecord
       begin
       	billing_service 				= BillingService.new(stripe_card_id, email, description)
       	customer 								= billing_service.create_stripe_customer
-      	self.stripe_customer_id = customer.id
+      	Customer.create(stripe_customer_id: customer.id, user_id: user_id)
+      	self.strp_customer_id 	= customer.id
         charge 									= billing_service.create_stripe_charge(customer.id)
         self.stripe_charge_id 	= charge.id
         save
@@ -26,11 +27,11 @@ class Billing < ApplicationRecord
     end
 	end
 
-	def save_charge_existing_card! customer_id
+	def create_charge_existing_card! customer_id
 		if valid?
 			begin
 				BillingService.new.create_stripe_charge(customer_id)
-				self.stripe_customer_id = customer_id
+				self.strp_customer_id = customer_id
 				save
 			rescue Stripe::CardError => e
 	      errors.add :credit_card, e.message
@@ -48,7 +49,7 @@ class Billing < ApplicationRecord
 	end
 
 	def send_email
-		card = BillingService.new.fetch_card(self.stripe_customer_id)
+		card = BillingService.new.fetch_card(self.strp_customer_id)
 		self.update_column(:brand, card['brand'])
 		BillingMailer.send_payment_receipt(self, card).deliver
 	end
