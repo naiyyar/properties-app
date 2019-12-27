@@ -3,11 +3,11 @@
   .col-xs-12.col-sm-12.col-md-6.col-lg-4
     - if @saved_cards.present?
       %p.bolder.font-md Credit cards
-      %table.table.table-striped
+      %table.table.table-striped.table-saved-cards
         - @saved_cards.each do |card|
           - exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
           %tr
-            %td.v-align-middle="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
+            %td.v-align-middle.card-detail="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
             %td.text-center
               =link_to 'Delete', delete_card_path(card_id: card[:id], customer_id: current_user&.stripe_customer_id), class: 'btn btn-danger btn-sm', id: "delete-stripe-card-#{card[:id].last(9)}", remote: true, data: { disable_with: 'Deleting...' }
     .pull-left

@@ -1,4 +1,9 @@
 var c_id = '<%=params[:card_id].last(9)%>';
 //$('.table-striped tr#'+row_id).remove();
 $('#delete-stripe-card-'+c_id).parent().parent().remove();
-//window.location.reload()
+var cards = $('.table-saved-cards td.card-detail');
+
+// TODO: TO SET customer_id to nil when all cards are removed
+if(cards.length <= 0){
+	<%= '@current_user.update(stripe_customer_id: nil)' %>
+}

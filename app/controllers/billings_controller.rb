@@ -40,6 +40,7 @@ class BillingsController < ApplicationController
   end
 
   def delete_card
+    @current_user = current_user
     Stripe::Customer.delete_source(params[:customer_id], params[:card_id])
   end
 
