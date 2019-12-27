@@ -8,9 +8,7 @@ class BillingService
 	end
 
 	def get_saved_cards current_user
-		cust_id = current_user&.stripe_customer_id
-		cards = saved_cards(cust_id) rescue [] if cust_id.present?
-		return cards
+		saved_cards(current_user&.stripe_customer_id)
 	end
 
 	def saved_cards cust_id

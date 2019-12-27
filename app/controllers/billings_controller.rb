@@ -32,7 +32,7 @@ class BillingsController < ApplicationController
   def create_new_card
     billing_service = BillingService.new(params[:billing][:stripe_card_id], params[:email])
     customer        = billing_service.create_stripe_customer
-    Customer.create(stripe_customer_id: customer.id, user_id: current_user.id)
+    billing_service.create_source(customer.id)
     
     respond_to do |format|
       format.html { redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Card successfully saved.' }
