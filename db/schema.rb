@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20191227145214) do
     t.string   "billing_card_id"
     t.string   "stripe_charge_id"
     t.string   "email"
+    t.string   "brand"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end

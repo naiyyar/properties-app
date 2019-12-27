@@ -8,22 +8,8 @@ class BillingService
 	end
 
 	def get_saved_cards current_user
-		cust_id = current_user.create_stripe_customer
-		cards = saved_cards(cust_id)
-		cards.map do |card|
-			begin
-				cards << { 	id:         	card['id'],
-										email: 				current_user.email,
-										customer_id:	cust_id,
-										brand: 				card['brand'], 
-										exp_month: 		card['exp_month'], 
-										exp_year: 		card['exp_year'], 
-										last4: 				card['last4'] 
-									} if card.present?
-			rescue Timeout::Error
-				puts 'Taking too long, exiting...'
-			end
-		end
+		cust_id = current_user&.stripe_customer_id
+		cards = saved_cards(cust_id) rescue [] if cust_id.present?
 		return cards
 	end
 

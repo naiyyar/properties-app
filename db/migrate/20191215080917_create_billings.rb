@@ -10,6 +10,7 @@ class CreateBillings < ActiveRecord::Migration[5.0]
       t.string :billing_card_id,      unique: true
       t.string :stripe_charge_id,     unique: true
       t.string :email
+      t.string :brand
       
       t.timestamps
     end

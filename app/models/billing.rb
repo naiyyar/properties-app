@@ -56,7 +56,7 @@ class Billing < ApplicationRecord
 	end
 
 	def send_email
-		card = BillingService.new.saved_cards(strp_customer_id, billing_card_id)
+		card = BillingService.new.get_card(strp_customer_id, billing_card_id)
 		self.update_column(:brand, card['brand'])
 		BillingMailer.send_payment_receipt(self, card).deliver
 	end
