@@ -1,3 +1,12 @@
+$(document).on('keyup', '#featured_building_field', function(){
+  if($(this).val() == ''){
+    var sbmt = $('#new_featured_building input[type="submit"]');
+    if(sbmt.length > 0){
+      sbmt[0].disabled = true;  
+    }
+  }
+});
+
 app.AsCompBuildings = function() {
   this._input = $('#feature_building_as_comp, #featured_building_field, #listing_building_field');
   source_url = this._input.data('src');
@@ -65,6 +74,11 @@ app.AsCompBuildings.prototype = {
         $('#new_listing input[type="submit"]').removeClass('disabled');
       }
     }
+    var sbmt = $('#new_featured_building input[type="submit"]');
+    if(sbmt.length > 0){
+      sbmt[0].disabled = false;  
+    }
+    
     return false;
   },
 

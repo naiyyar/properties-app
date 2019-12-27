@@ -31,13 +31,14 @@
         %tbody.table
           - cache @billings do
             - @billings.each do |billing|
-              - cache billing do
+              - cache [billing, 1] do
                 - card = BillingService.new.fetch_card(billing.stripe_customer_id) rescue nil
                 %tr
                   %td=date_created = billing.created_at.to_date
                   %td.text-right=number_to_currency(billing.amount, precision: 2)
                   %td Featured Building Payment.
                   %td
+                    -debugger
                     - if billing.stripe_customer_id.present?
                       - if card.present?
                         = image_tag "card_brands/#{brand_name(billing.brand)}.svg", height: 20

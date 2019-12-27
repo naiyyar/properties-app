@@ -1,6 +1,6 @@
 $(document).ready(function(){
   if($('#stripe-billing-form').length > 0){
-    $('#user-email').on('keyup', function(){
+    $('#example2-address').on('keyup', function(){
       var text = $(this).val();
       $('#billing_email').val(text);
     })

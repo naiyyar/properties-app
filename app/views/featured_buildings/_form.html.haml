@@ -48,7 +48,7 @@
               %p Featuring will be renewed for the next four week cycle two days before the feature end date. The renewal setting can be adjusted at any time through our Manager Tools by editing the featured entry.
               %p 
                 We do not offer refunds. Please review our full 
-                %a.hyper-link{href: '/terms_of_service', target: '_blank'} Term of Use
+                %a.hyper-link{href: '/terms_of_service', target: '_blank'} Terms of Service
             
             .form-group
               .col-sm-12
@@ -58,7 +58,7 @@
                   -else
                     = link_to 'Cancel', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
 
-                  = f.submit "#{params[:type].present? ? 'Next' : 'Save'}", class: 'btn btn-primary'
+                  = f.submit "#{params[:type].present? ? 'Next' : 'Save'}", class: 'btn btn-primary', disabled: true
     
 
 :javascript

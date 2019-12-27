@@ -47,7 +47,7 @@ class BillingsController < ApplicationController
     respond_to do |format|
       if @billing.save_charge_existing_card!(params[:customer_id])
         format.html { 
-          redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Billing was successfully created.' 
+          redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' 
         }
       else
         format.html { 

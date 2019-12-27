@@ -1,3 +1,9 @@
+- if false
+  .row.hidden
+    .field
+      %input#example2-address.input.empty.focused{type: 'email', placeholder: "abc@xyz.com", required: true, autocomplete: :off, 'data-tid' => "elements_examples.form.address_placeholder", value: current_user.email}
+      %label{"data-tid" => "elements_examples.form.address_label", for: "example2-address"} Email
+      .baseline
 .row
   .field
     #example2-card-number.input.empty
@@ -8,6 +14,7 @@
     #example2-card-expiry.input.empty
     %label{"data-tid" => "elements_examples.form.card_expiry_label", for: "example2-card-expiry"} Expiration
     .baseline
+  
   .field.half-width
     #example2-card-cvc.input.empty
     %label{"data-tid" => "elements_examples.form.card_cvc_label", for: "example2-card-cvc"} CVC
