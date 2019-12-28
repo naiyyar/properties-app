@@ -35,4 +35,19 @@
       
 		-else
 			.tab-pane.fade.in.active
+				%h2
+				.row
+					.col-xs-12.col-sm-12.col-md-6.col-lg-4
+						- if @saved_cards.present?
+							%p.bolder.font-md Credit cards
+							%table.table.table-striped.table-saved-cards
+								- @saved_cards.each do |card|
+									- exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
+									%tr
+										%td.v-align-middle.card-detail="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
+										%td.text-center
+											=link_to 'Delete', '#', class: 'btn btn-danger btn-sm delete-card', data: { disable_with: 'Deleting...', cid:  card[:id], customerid: current_user&.stripe_customer_id}
+						.pull-left
+							=link_to 'Add New Card', new_manager_featured_building_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm'
+
 				=render 'billings/billings'

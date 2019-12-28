@@ -5,7 +5,7 @@ class BillingsController < ApplicationController
   # GET /billings
   # GET /billings.json
   def index
-    @billings = Billing.all
+    @billings = current_user.billings
   end
 
   # GET /billings/1
@@ -31,8 +31,7 @@ class BillingsController < ApplicationController
 
   def create_new_card
     billing_service = BillingService.new(params[:billing][:stripe_card_id], params[:email])
-    customer        = billing_service.create_stripe_customer
-    billing_service.create_source(customer.id)
+    billing_service.create_source(billing_service.get_customer_id(current_user))
     
     respond_to do |format|
       format.html { redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Card successfully saved.' }
@@ -40,8 +39,9 @@ class BillingsController < ApplicationController
   end
 
   def delete_card
-    @current_user = current_user
     Stripe::Customer.delete_source(params[:customer_id], params[:card_id])
+    current_user.update(stripe_customer_id: nil) if params[:update_customer_id] == 'true'
+    render json: { status: :ok, success: true }
   end
 
   def pay_using_saved_card

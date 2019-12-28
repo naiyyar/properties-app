@@ -27,6 +27,16 @@ class BillingService
 		Stripe::Customer.create_source(cust_id,{ source: @payment_token })
 	end
 
+	def get_customer_id current_user
+		if current_user.stripe_customer_id.present?
+      customer_id   = current_user.stripe_customer_id
+    else
+      customer_id   = self.create_stripe_customer.id
+      current_user.update_column(:stripe_customer_id, customer_id)
+    end
+    return customer_id
+	end
+
 	def create_stripe_charge customer_id
 		Stripe::Charge.create(
     	customer:  		customer_id,
