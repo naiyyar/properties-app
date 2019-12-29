@@ -1,7 +1,6 @@
 class ContactsController < ApplicationController
   #load_and_authorize_resource
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
-  after_action :send_emails, only: :create
   # GET /contacts
   # GET /contacts.json
   def index
@@ -79,14 +78,5 @@ class ContactsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
       params.require(:contact).permit(:name, :email, :comment, :phone, :building_id, :user_id)
-    end
-
-    def send_emails
-      if @contact.building_id.present?
-        UserMailer.delay(priority: 0).send_enquiry_to_building(@contact)
-        UserMailer.delay(priority: 1).enquiry_sent_mail_to_sender(@contact)
-      else
-        UserMailer.delay.send_feedback(@contact)
-      end
     end
 end

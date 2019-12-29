@@ -47,7 +47,7 @@ class BillingsController < ApplicationController
   def pay_using_saved_card
     @billing = Billing.new(billing_params)
     respond_to do |format|
-      if @billing.create_charge_existing_card!(params[:customer_id])
+      if @billing.create_charge_existing_card!(current_user.stripe_customer_id, params[:card_id])
         format.html { 
           redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' 
         }
@@ -115,7 +115,7 @@ class BillingsController < ApplicationController
 
     def get_card
       if request.format.pdf? or params[:type] == 'view'
-        @card = BillingService.new.fetch_card(@billing.stripe_customer_id)
+        @card = BillingService.new.get_card(current_user.stripe_customer_id, @billing.stripe_card_id) rescue nil
       end
     end
 end

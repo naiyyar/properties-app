@@ -31,16 +31,18 @@ class Billing < ApplicationRecord
     end
 	end
 
-	def create_charge_existing_card! customer_id
+	def create_charge_existing_card! customer_id, card_id
 		if valid?
 			begin
-				BillingService.new.create_stripe_charge(customer_id)
+				BillingService.new.create_stripe_charge(customer_id, card_id)
 				self.strp_customer_id = customer_id
 				save
 			rescue Stripe::CardError => e
 	      errors.add :credit_card, e.message
 	      false
 	    end
+	  else
+	  	errors.add(:base, 'Email can not be blank.')  if email.blank?
 	  end
 	end
 
@@ -58,7 +60,7 @@ class Billing < ApplicationRecord
 			card = BillingService.new.get_card(strp_customer_id, billing_card_id)
 			self.update_column(:brand, card['brand'])
 		end
-		BillingMailer.send_payment_receipt(self, card).deliver
+		BillingMailer.delay.send_payment_receipt(self, card)
 	end
 	
 end
