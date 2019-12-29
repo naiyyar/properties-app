@@ -32,6 +32,7 @@ class FeaturedBuildingsController < ApplicationController
 
   # GET /featured_buildings/1/edit
   def edit
+    session[:back_to]  = request.fullpath if params[:type] != 'billing'
   end
 
   # POST /featured_buildings
@@ -70,7 +71,7 @@ class FeaturedBuildingsController < ApplicationController
     @featured_building.destroy
     respond_to do |format|
       format.html { 
-        redirect_to (@featured_building.featured_by_manager? ? :back : featured_buildings_url), notice: 'Featured building was successfully destroyed.' 
+        redirect_to (@featured_building.featured_by_manager? ? :back : featured_buildings_url), notice: 'Featured building was successfully deleted.' 
       }
       format.json { head :no_content }
     end
@@ -88,7 +89,9 @@ class FeaturedBuildingsController < ApplicationController
     end
 
     def redirect_path
-      @featured_building.featured_by_manager? ? billing_or_featured_list_path : featured_buildings_url
+      @featured_building.featured_by_manager? ? 
+      billing_or_featured_list_path : 
+      featured_buildings_url
     end
 
     def billing_or_featured_list_path

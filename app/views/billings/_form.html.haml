@@ -28,7 +28,7 @@
       .panel.panel-default
         .panel-heading
           %b New Billing
-        .panel-body
+        .panel-body{style: 'padding: 15px 15px 8px;'}
           #example-2.cell.example.example2
             = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
               .row.error
@@ -52,10 +52,19 @@
                     = link_to 'Cancel', managertools_user_path(current_user, type: 'featured'), class: 'btn font-bold'
                     = link_to 'Back', session[:back_to], class: 'btn btn-default font-bold'
                     = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary font-bold btn_submit btn_submit_stripe-form', 'data-tid' => "elements_examples.form.pay_button"
-              %br
-              %br
-              .row
-                .col-lg-4
-                  .text-left.text-muted Powered by Stripe
-                .col-lg-2=link_to 'Terms', 'https://stripe.com/checkout/legal', target: '_blank'
-                .col-lg-2=link_to 'Privacy', 'https://stripe.com/privacy', target: '_blank'
+              
+          %br
+          %br
+          .row.pw-footer
+            .col-lg-4{style: 'width: 27.33%'}
+              .text-left.text-muted
+                .Footer-PoweredBy 
+                  %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400
+                    Powered by
+                    =image_tag 'https://js.stripe.com/v3/fingerprinted/img/stripe-8ad2522ef8799d5985038700f8a07027.svg', class: 'Icon Footer-PoweredBy-Icon Icon--md'
+            .col-lg-1
+              %a{href: 'https://stripe.com/checkout/legal', target: '_blank'}
+                %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400 Terms
+            .col-lg-1
+              %a{href: 'https://stripe.com/privacy', target: '_blank'}
+                %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400 Privacy

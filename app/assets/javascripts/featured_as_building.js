@@ -1,11 +1,21 @@
 $(document).on('keyup', '#featured_building_field', function(){
   if($(this).val() == ''){
-    var sbmt = $('#new_featured_building input[type="submit"]');
-    if(sbmt.length > 0){
-      sbmt[0].disabled = true;  
-    }
+    setSubmitButtonStatus(true)
   }
 });
+
+$(window).load(function(){
+  if($('#featured_building_field').val() != ''){
+    setSubmitButtonStatus(false)
+  }
+});
+
+function setSubmitButtonStatus(status){
+  var sbmt = $('.featured_building_form input[type="submit"]');
+  if(sbmt.length > 0){
+    sbmt[0].disabled = status;  
+  }
+}
 
 app.AsCompBuildings = function() {
   this._input = $('#feature_building_as_comp, #featured_building_field, #listing_building_field');
@@ -74,7 +84,7 @@ app.AsCompBuildings.prototype = {
         $('#new_listing input[type="submit"]').removeClass('disabled');
       }
     }
-    var sbmt = $('#new_featured_building input[type="submit"]');
+    var sbmt = $('.featured_building_form input[type="submit"]');
     if(sbmt.length > 0){
       sbmt[0].disabled = false;  
     }

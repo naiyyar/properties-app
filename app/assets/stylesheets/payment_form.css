@@ -204,3 +204,30 @@
 .example.example2 .success .reset path {
   fill: #24b47e;
 }
+
+.ElementsApp, .ElementsApp .InputElement {
+  color: #333 !important;
+}
+.pw-footer .Footer-PoweredBy {
+  padding: 0 16px 0 0;
+  border-right: 1px solid #e7e7e7;
+}
+.pw-footer .Text-color--gray400 {
+  color: #909090;
+}
+.pw-footer .Text-fontWeight--400 {
+  font-weight: 400;
+}
+.pw-footer .Text-fontSize--12 {
+  font-size: 12px;
+}
+.pw-footer .Footer-PoweredBy-Icon {
+  vertical-align: text-bottom;
+  -webkit-transform: translateY(1.5px);
+  -ms-transform: translateY(1.5px);
+  transform: translateY(1.5px);
+  opacity: .7;
+}
+.pw-footer .Icon--md {
+  height: 16px;
+}

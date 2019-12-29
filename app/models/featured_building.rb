@@ -42,7 +42,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def live?
-    start_date.present? and end_date.present? and end_date > Date.today
+    start_date.present? and end_date.present? and end_date > Date.today and active
   end
 
   def expired?

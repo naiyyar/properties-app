@@ -16,7 +16,7 @@
       = link_to 'Blog', '/blog'
       - if user_signed_in?
         |
-        %a{href: managertools_user_path(current_user, type: 'featured')} Manager tools
+        %a{href: managertools_user_path(current_user, type: 'featured')} Manager Tools
       - if !user_signed_in?
         |
         - if params[:controller] == "users/sessions"

@@ -3,7 +3,7 @@ input.apple-switch {
   -webkit-appearance: none;
   outline: none;
   background-color: #fff;
-  border: 1px solid #D9DADC;
+  border: 1px solid #c4c4c4;
   border-radius: 50px;
   box-shadow: inset -20px 0 0 0 #fff;
 }
@@ -38,6 +38,15 @@ input.apple-switch.sb-sm:after{
 
 input.apple-switch.sb-sm:checked {
   box-shadow: inset 28px 0 0 0 #4ed164;
+}
+
+input.apple-switch.disabled:checked{
+  box-shadow: inset 28px 0 0 0 #b9ebb9 !important;
+  border-color: #b9ebb9 !important;
+}
+
+input.apple-switch.disabled{
+  border-color: #ddd;
 }
 
 input.apple-switch.sb-sm:checked:after {
