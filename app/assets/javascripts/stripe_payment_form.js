@@ -3,7 +3,7 @@ $(document).ready(function(){
     $('#example2-address').on('keyup', function(){
       var text = $(this).val();
       $('#billing_email').val(text);
-    })
+    });
 
     var stripe = Stripe($("meta[name='stripe-key']").attr('content'));
     function registerElements(elements, exampleName) {
@@ -196,5 +196,35 @@ $(document).ready(function(){
     cardCvc.mount('#example2-card-cvc');
 
     registerElements([cardNumber, cardExpiry, cardCvc], 'example2');
+
+    var cardBrandToPfClass = {
+      'visa': 'pf-visa',
+      'mastercard': 'pf-mastercard',
+      'amex': 'pf-american-express',
+      'discover': 'pf-discover',
+      'diners': 'pf-diners',
+      'jcb': 'pf-jcb',
+      'unknown': 'pf-credit-card',
+    }
+
+    function setBrandIcon(brand) {
+      var brandIconElement = document.getElementById('brand-icon');
+      var pfClass = 'pf-credit-card';
+      if (brand in cardBrandToPfClass) {
+        pfClass = cardBrandToPfClass[brand];
+      }
+      for (var i = brandIconElement.classList.length - 1; i >= 0; i--) {
+        brandIconElement.classList.remove(brandIconElement.classList[i]);
+      }
+      brandIconElement.classList.add('pf');
+      brandIconElement.classList.add(pfClass);
+    }
+
+    cardNumber.on('change', function(event) {
+      // Switch brand logo
+      if (event.brand) {
+        setBrandIcon(event.brand);
+      }
+    });
   }; //end if
 })//end doc ready

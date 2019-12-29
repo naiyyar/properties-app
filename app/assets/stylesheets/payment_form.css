@@ -21,6 +21,27 @@
   margin: 0 10px;
 }
 
+/*.h-36{
+  height: 36%;
+}
+
+.field .w-80{
+  width: 80%;
+  float: left;
+}
+.field .w-90{
+  width: 90%;
+  float: left;
+}
+.field .w-10{
+  width: 10%;
+  float: left;
+}
+.field .w-20{
+  width: 20%;
+  float: left;
+}*/
+
 .example.example2 .field.half-width {
   width: 50%;
 }
@@ -230,4 +251,21 @@
 }
 .pw-footer .Icon--md {
   height: 16px;
+}
+
+/*label > span {
+  width: 120px;
+  text-align: right;
+  margin-right: 30px;
+}*/
+
+.brand{
+  position: absolute;
+  right: 0px;
+  top: 19px;
+  width: 30px;
+}
+
+.brand .pf{
+  font-size: 16px !important;
 }

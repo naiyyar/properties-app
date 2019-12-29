@@ -5,7 +5,7 @@ class BillingsController < ApplicationController
   # GET /billings
   # GET /billings.json
   def index
-    @limit = 51
+    @limit       = 51
     @billings    = @current_user.billings.limit(@limit)
   end
 
