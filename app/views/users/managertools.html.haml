@@ -49,5 +49,7 @@
 											=link_to 'Delete', '#', class: 'btn btn-danger btn-sm delete-card', data: { disable_with: 'Deleting...', cid:  card[:id], customerid: current_user&.stripe_customer_id}
 						.pull-left
 							=link_to 'Add New Card', new_manager_featured_building_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm'
+				%h2 Invoice History
 
-				=render 'billings/billings'
+				=link_to 'View Your Receipts', billings_path, remote: true, class: 'btn btn-primary'
+				#billings-table

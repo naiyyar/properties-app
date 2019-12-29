@@ -41,9 +41,7 @@ class UsersController < ApplicationController
 	    																	.includes(:billing, :building => [:management_company])
 	    																	.order('created_at desc')
 	  else
-	  	@limit = 51
 	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
-	  	@billings 	 = @user.billings.limit(@limit)#.paginate(:page => params[:page], :per_page => 100)
 	  end
 
     respond_to do |format|
