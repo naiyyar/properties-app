@@ -1,6 +1,6 @@
 class BillingsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_billing, only: [:show, :edit, :update, :destroy]
+  before_action :set_billing, only: [:show, :edit, :update, :destroy, :email_receipt]
   before_action :get_card, only: [:show]
   # GET /billings
   # GET /billings.json
@@ -11,10 +11,6 @@ class BillingsController < ApplicationController
   # GET /billings/1
   # GET /billings/1.json
   def show
-    if params[:type] == 'send'
-      BillingMailer.send_payment_receipt(@billing, @card).deliver
-      flash[:notice] = 'Invoice successfully sent.'
-    end
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
@@ -22,6 +18,18 @@ class BillingsController < ApplicationController
         render wicked_pdf_options("invoice_#{@billing.created_at.strftime('%d-%m-%Y')}",'billings/show')
       end
     end
+  end
+
+  def email_receipt
+    if params[:email_to].present?
+      params[:email_to].split(',').each do |email|
+        BillingMailer.send_payment_receipt(@billing, @card, email.gsub(' ', '')).deliver
+      end
+      flash[:notice] = 'Invoice successfully sent.'
+    else
+      flash[:error] = 'No email specified.'
+    end
+    redirect_to :back
   end
 
   # GET /billings/new

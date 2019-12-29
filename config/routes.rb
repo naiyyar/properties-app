@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :billings
+  resources :billings do
+    member do
+      post :email_receipt
+    end
+  end
   post :create_charge,        to: 'billings#create',                as: :create_charge
   get  :delete_card,          to: 'billings#delete_card',           as: :delete_card
   post :create_new_card,      to: 'billings#create_new_card',       as: :create_new_card

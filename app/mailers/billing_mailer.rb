@@ -1,9 +1,9 @@
 class BillingMailer < ApplicationMailer
 	EMAIL_WITH_NAME = %(transparentcity <hello@transparentcity.co>)
 	
-	def send_payment_receipt billing, card=nil
+	def send_payment_receipt billing, card=nil, to_email=nil
 		@billing = billing
-		to_email = @billing.email
+		to_email = to_email.present? ? to_email : @billing&.email
 		@card 	 = card
 		mail(
 			to: to_email,
