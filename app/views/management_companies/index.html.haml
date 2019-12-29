@@ -1,29 +1,29 @@
-.tables
-  - if current_user.present?
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-        .pull-right
-          = link_to "Add New Management", new_management_company_path, class: 'btn btn-blue'
-    %h2
+- if current_user.present?
   .row
     .col-xs-12.col-sm-12.col-md-12.col-lg-12
-      .table-overflow
-        %table#sortable.table
-          %thead
-            %tr
-              %th Management Name (#{@management_companies.count})
-              %th Website
-              %th Buildings
-              %th{width: "12%"} Rating
-              %th Reviews
-              %th Creation Date
-              %th Edit
-              %th Delete
-              %th{width: "10%"} Building Website
-              %th{width: "10%"} Building Email
-          
-          %tbody.table
-            =render partial: 'management_company', collection: @management_companies, as: :company, cache: true
+      .pull-right= link_to "Add New Management", new_management_company_path, class: 'btn btn-blue'
+  
+  %h2
+
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    .table-overflow
+      %table#sortable.table
+        %thead
+          %tr
+            %th Management Name (#{@management_companies.count})
+            %th Website
+            %th Buildings
+            %th{width: "12%"} Rating
+            %th Reviews
+            %th Creation Date
+            %th Edit
+            %th Delete
+            %th{width: "10%"} Building Website
+            %th{width: "10%"} Building Email
+        
+        %tbody.table
+          =render partial: 'management_company', collection: @management_companies, as: :company, cache: true
               
 .text-center
   = will_paginate @management_companies, renderer: BootstrapPagination::Rails

@@ -1,51 +1,50 @@
-<div class="tables">
-  <%if current_user and current_user.has_role?(:admin) %>
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="pull-right">
-          <%= link_to "Add New Link", '#newNeighnorhood', class: 'btn btn-blue', 'data-toggle' => 'modal' %>
-        </div>
+<%if current_user and current_user.has_role?(:admin) %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="pull-right">
+        <%= link_to 'Add New Link', '#newNeighnorhood', class: 'btn btn-blue', 'data-toggle' => 'modal' %>
       </div>
     </div>
-    <h2></h2>
+  </div>
   
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="table-overflow">
-          <table id="sortable" class="table table-bordered table-triped">
-            <thead>
-              <tr>
-                <th width="15%">Neighborhood</th>
-                <th>Date</th>
-                <th width="40%">Title</th>
-                <th>Source</th>
-                <th width="6%">Edit</th>
-                <th width="6%">Delete</th>
-              </tr>
-            </thead>
+  <h2></h2>
+  
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="table-overflow">
+        <table id="sortable" class="table table-bordered table-triped">
+          <thead>
+            <tr>
+              <th width="15%">Neighborhood</th>
+              <th>Date</th>
+              <th width="40%">Title</th>
+              <th>Source</th>
+              <th width="6%">Edit</th>
+              <th width="6%">Delete</th>
+            </tr>
+          </thead>
 
-            <tbody>
-              <% cache @neighborhood_links do %>
-                <% @neighborhood_links.each do |neighborhood_link| %>
-                  <% cache neighborhood_link do %>
-                    <tr>
-                      <td><%= neighborhood_link.neighborhood %></td>
-                      <td><%= neighborhood_link.date %></td>
-                      <td><%= link_to neighborhood_link.title, neighborhood_link.web_url, target: '_blank', class: 'link_underlined' %></td>
-                      <td><%= neighborhood_link.source %></td>
-                      <td><%= link_to 'Edit', edit_neighborhood_link_path(neighborhood_link), remote: true %></td>
-                      <td><%= link_to 'Delete', neighborhood_link, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' %></td>
-                    </tr>
-                  <%end%>
-                <% end %>
+          <tbody>
+            <% cache @neighborhood_links do %>
+              <% @neighborhood_links.each do |neighborhood_link| %>
+                <% cache neighborhood_link do %>
+                  <tr>
+                    <td><%= neighborhood_link.neighborhood %></td>
+                    <td><%= neighborhood_link.date %></td>
+                    <td><%= link_to neighborhood_link.title, neighborhood_link.web_url, target: '_blank', class: 'link_underlined' %></td>
+                    <td><%= neighborhood_link.source %></td>
+                    <td><%= link_to 'Edit', edit_neighborhood_link_path(neighborhood_link), remote: true %></td>
+                    <td><%= link_to 'Delete', neighborhood_link, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' %></td>
+                  </tr>
+                <%end%>
               <% end %>
-            </tbody>
-          </table>
-        </div>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
-  <%end%>
-</div>
+  </div>
+<%end%>
 
 <div class="text-center">
   <%= will_paginate @neighborhood_links, renderer: BootstrapPagination::Rails %>
