@@ -52,7 +52,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def live?
-    !draft and end_date > Date.today
+    !draft? and end_date > Date.today
   end
 
   def expired?
