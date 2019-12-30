@@ -33,7 +33,7 @@ Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
 To restore pgdump downloaded from heroku
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -d transparentcity_dev2jul c7838df9-a94c-4480-a369-3ce8d4dd4a63
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d transparentcity_dev30dec 7a6dff78-dd4a-4f90-b9c4-1ed18390d0a4
 
 #memcached Cache
 Rails.cache.clear() – Flushing all the keys from memcached.

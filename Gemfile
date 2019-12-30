@@ -119,6 +119,7 @@ gem 'wicked'
 gem 'wicked_pdf'
 gem 'will_paginate-bootstrap'
 #gem 'wkhtmltopdf-binary' #, '0.12.4'
+gem "wkhtmltopdf-heroku"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
 # Use ActiveModel has_secure_password
