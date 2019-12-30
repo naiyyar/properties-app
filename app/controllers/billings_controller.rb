@@ -124,7 +124,7 @@ class BillingsController < ApplicationController
 
     def get_card
       if request.format.pdf? or params[:type] == 'view'
-        @card = BillingService.new.get_card(current_user.stripe_customer_id, @billing.stripe_card_id) rescue nil
+        @card = BillingService.new.get_card(current_user.stripe_customer_id, @billing.billing_card_id) rescue nil
       end
     end
 end

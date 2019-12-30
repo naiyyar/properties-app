@@ -36,6 +36,7 @@ class Billing < ApplicationRecord
 			begin
 				BillingService.new.create_stripe_charge(customer_id, card_id)
 				self.strp_customer_id = customer_id
+				self.billing_card_id	= card_id
 				save
 			rescue Stripe::CardError => e
 	      errors.add :credit_card, e.message
@@ -57,7 +58,7 @@ class Billing < ApplicationRecord
 	def send_email
 		customer_id = strp_customer_id || stripe_customer_id
 		if customer_id.present? and billing_card_id.present?
-			card = BillingService.new.get_card(strp_customer_id, billing_card_id)
+			card = BillingService.new.get_card(customer_id, billing_card_id)
 			self.update_column(:brand, card['brand'])
 		end
 		BillingMailer.delay.send_payment_receipt(self, card)
