@@ -156,10 +156,10 @@ $(document).ready(function(){
         fontSmoothing: 'antialiased',
 
         '::placeholder': {
-          color: '#CFD7DF',
+          color: '#A9A9A9',
         },
         ':-webkit-autofill': {
-          color: '#e39f48',
+          color: '#A9A9A9',
         },
       },
       invalid: {

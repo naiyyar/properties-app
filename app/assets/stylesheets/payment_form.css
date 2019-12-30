@@ -35,7 +35,7 @@
   height: 1px;
   left: 0;
   bottom: 0;
-  background-color: #bbb;
+  background-color: #707070;
   transition: background-color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -44,7 +44,7 @@
   width: 100%;
   left: 0;
   bottom: 8px;
-  color: #bbb;
+  color: #686868;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

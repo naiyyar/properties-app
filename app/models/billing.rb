@@ -31,7 +31,7 @@ class Billing < ApplicationRecord
     end
 	end
 
-	def create_charge_existing_card! customer_id, card_id
+	def create_charge_existing_card! customer_id, card_id=nil
 		if valid?
 			begin
 				BillingService.new.create_stripe_charge(customer_id, card_id)

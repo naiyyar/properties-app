@@ -12,7 +12,8 @@ namespace :feature_plan do
 																			user_id: 							user.id
 																		)
 					@billing.update_column(:stripe_customer_id, customer_id)
-					@billing.create_charge_existing_card!(customer_id)
+					card = BillingService.new.saved_cards(customer_id).last #cosidering last card default card
+					@billing.create_charge_existing_card!(customer_id, card.id)
 				end
 			elsif featured_building.send_renew_reminder?
 				##'Renew plan 2 days before the renew date.'
