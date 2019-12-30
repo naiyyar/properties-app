@@ -158,7 +158,7 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'heroku-deflater', git: "https://github.com/romanbsd/heroku-deflater.git" #Enable gzip compression on heroku, but don't compress images.
-  gem 'wkhtmltopdf-binary' #, '0.12.4'
+  gem 'wkhtmltopdf-binary' , '0.12.4'
   gem 'wkhtmltopdf-heroku'
 end
 

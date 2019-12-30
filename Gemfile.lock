@@ -452,6 +452,7 @@ GEM
     will_paginate (3.1.7)
     will_paginate-bootstrap (1.0.2)
       will_paginate (>= 3.0.3)
+    wkhtmltopdf-binary (0.12.4)
     wkhtmltopdf-heroku (2.12.5.0)
 
 PLATFORMS
@@ -536,6 +537,7 @@ DEPENDENCIES
   wicked
   wicked_pdf
   will_paginate-bootstrap
+  wkhtmltopdf-binary (= 0.12.4)
   wkhtmltopdf-heroku
 
 RUBY VERSION
