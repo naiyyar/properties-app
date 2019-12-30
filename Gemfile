@@ -116,7 +116,8 @@ gem 'validates_timeliness', '~> 5.0.0.alpha3'
 
 #W
 gem 'wicked'
-gem 'wicked_pdf'
+gem 'wicked_pdf', '1.1.0'
+gem 'wkhtmltopdf-binary' , '0.12.4'
 gem 'will_paginate-bootstrap'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
@@ -158,8 +159,7 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'heroku-deflater', git: "https://github.com/romanbsd/heroku-deflater.git" #Enable gzip compression on heroku, but don't compress images.
-  gem 'wkhtmltopdf-binary' , '0.12.4'
-  gem 'wkhtmltopdf-heroku'
+  gem 'wkhtmltopdf-heroku', '2.12.4.0'
 end
 
 ruby "2.4.0"
