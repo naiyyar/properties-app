@@ -32,7 +32,10 @@
                 - unless params[:type] == 'featured'
                   %td
                     - if featured_building.featured_by_manager?
-                      = featured_building&.billing&.email || featured_building.billing.user_email
+                      - if featured_building.draft?
+                        = featured_building&.user&.try(:email)
+                      - else 
+                        = featured_building&.billing&.user.try(:email)
 
                   %td
                     - unless featured_building.featured_by_manager?

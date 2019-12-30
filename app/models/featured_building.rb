@@ -23,13 +23,13 @@ class FeaturedBuilding < ApplicationRecord
     ]
   )
 
-  delegate :user, to: :billing
+  #delegate :user, to: :billing
 
   #before_destroy :check_status, unless: Proc.new{ |obj| obj.expired? }
 
-  def user_email
-    user&.email
-  end
+  # def user_email
+  #   user&.email
+  # end
 
   def featured_by_manager?
     featured_by == 'manager'
@@ -47,8 +47,12 @@ class FeaturedBuilding < ApplicationRecord
     start_date.present? and end_date.present?
   end
 
+  def draft?
+    start_date.blank? and end_date.blank? and !active
+  end
+
   def live?
-    start_date.present? and end_date.present? and end_date > Date.today and active
+    !draft and end_date > Date.today
   end
 
   def expired?

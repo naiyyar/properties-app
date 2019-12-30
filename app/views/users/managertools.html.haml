@@ -2,15 +2,14 @@
 	.row
 		.col-lg-6
 			%h2
-			.pull-left
-				.tabsWidget
-					%ul.nav.nav-tabs.nav-justified{role: 'tablist'}
-						%li{class: @type == 'featured' ? 'active' : ''}
-							%a{href: managertools_user_path(current_user, type: 'featured')}
-								%b Featured Buildings 
-						%li{class: @type == 'billing' ? 'active' : ''}
-							%a{href: managertools_user_path(current_user, type: 'billing')}
-								%b Billing
+			.tabsWidget
+				%ul.nav.nav-tabs.nav-justified{role: 'tablist'}
+					%li{class: @type == 'featured' ? 'active' : ''}
+						%a{href: managertools_user_path(current_user, type: 'featured')}
+							%b Featured Buildings 
+					%li{class: @type == 'billing' ? 'active' : ''}
+						%a{href: managertools_user_path(current_user, type: 'billing')}
+							%b Billing
       
 	.tab-content
 		- if @type == 'featured'
