@@ -23,13 +23,7 @@ class FeaturedBuilding < ApplicationRecord
     ]
   )
 
-  #delegate :user, to: :billing
-
-  #before_destroy :check_status, unless: Proc.new{ |obj| obj.expired? }
-
-  # def user_email
-  #   user&.email
-  # end
+  before_destroy :check_status, unless: Proc.new{ |obj| obj.expired? }
 
   def featured_by_manager?
     featured_by == 'manager'

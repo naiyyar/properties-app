@@ -303,7 +303,7 @@ class Building < ApplicationRecord
   end
 
   def featured?
-    self.featured_building.present? and featured_building.active
+    featured_building&.active
   end
 
   def neighbohoods
@@ -492,6 +492,14 @@ class Building < ApplicationRecord
 
   def active_web_url?
     web_url.present? and active_web
+  end
+
+  def fav_color_class user_id=nil
+    if user_id.present?
+      favorite_by?(User.find(user_id)) ? 'filled-heart' : 'unfilled-heart'
+    else
+      'unfilled-heart'
+    end 
   end
 
   private

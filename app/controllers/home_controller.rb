@@ -22,12 +22,7 @@ class HomeController < ApplicationController
 
   def load_infobox
     building = Building.find(params[:object_id])
-    if params[:current_user_id].present?
-      @current_user = User.find(params[:current_user_id])
-      fav_color_class = building.favorite_by?(@current_user) ? 'filled-heart' : 'unfilled-heart'
-    else
-      fav_color_class = 'unfilled-heart'
-    end
+    fav_color_class = building.fav_color_class(params[:current_user_id])
     min_save_amount = building.min_save_amount(@rent_medians, @broker_percent)
     render json: { html: render_to_string(:partial => '/layouts/shared/custom_infowindow', 
                                           :locals => {  building: building,
@@ -91,7 +86,6 @@ class HomeController < ApplicationController
       @buildings = @buildings.includes(:building_average, :featured_building)
       page_num = params[:page].present? ? params[:page].to_i : 1
       final_results = Building.with_featured_building(@buildings, page_num)
-      #final_results = Building.sort_buildings(final_results[1], params[:sort_by]) if final_results[1].present? and params[:sort_by].present?
       @per_page_buildings = final_results[1]
       @all_buildings = final_results[0][:all_buildings] #with featured
       @hash = final_results[0][:map_hash]
