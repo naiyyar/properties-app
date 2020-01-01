@@ -17,7 +17,7 @@ module BuildingsConcern
     @reviews_count = @building.reviews_count.to_i
 
     #Similiar buildings
-    @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average, :featured_building) if @building.active_comps.present?
+    @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average, :featured_buildings) if @building.active_comps.present?
     
     @lat = @building.latitude
     @lng = @building.longitude

@@ -83,7 +83,7 @@ class HomeController < ApplicationController
     end
     
     if @buildings.present?
-      @buildings = @buildings.includes(:building_average, :featured_building)
+      @buildings = @buildings.includes(:building_average, :featured_buildings)
       page_num = params[:page].present? ? params[:page].to_i : 1
       final_results = Building.with_featured_building(@buildings, page_num)
       @per_page_buildings = final_results[1]

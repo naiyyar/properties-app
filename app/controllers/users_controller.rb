@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 		@broker_percent = BrokerFeePercent.first.percent_amount
 		@buildings 			= Building.saved_favourites(@user)
 												 			.paginate(:page => params[:page], :per_page => 20)
-												 			.includes(:featured_building)
+												 			.includes(:featured_buildings)
     
     @photos 				= Upload.building_photos(@buildings.pluck(:id))
 		@hash 					= Building.buildings_json_hash(@buildings)

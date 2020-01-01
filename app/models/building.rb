@@ -84,20 +84,18 @@ class Building < ApplicationRecord
   has_many :reviews, as: :reviewable
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :units, :dependent => :destroy
+  accepts_nested_attributes_for :units, :allow_destroy => true
   has_one :featured_comp, :foreign_key => :building_id, :dependent => :destroy
   has_many :featured_comp_buildings
   has_many :featured_comps, through: :featured_comp_buildings, :dependent => :destroy
-  has_one :featured_building, :dependent => :destroy
+  has_many :featured_buildings, :dependent => :destroy
   belongs_to :management_company, touch: true
   has_many :contacts, :dependent => :destroy
   has_many :listings, :foreign_key => :building_id, :dependent => :destroy
-  
-  accepts_nested_attributes_for :units, :allow_destroy => true
 
-  #default_scope { order('listings_count DESC, building_name ASC, building_street_address ASC') }
-  scope :updated_recently, -> { order('listings_count DESC, building_name ASC, building_street_address ASC') }
-  scope :order_by_min_rent, -> { order('min_listing_price ASC, listings_count DESC') }
-  scope :order_by_max_rent, -> { order('max_listing_price DESC NULLS LAST, listings_count DESC') }
+  scope :updated_recently,   -> { order('listings_count DESC, building_name ASC, building_street_address ASC') }
+  scope :order_by_min_rent,  -> { order('min_listing_price ASC, listings_count DESC') }
+  scope :order_by_max_rent,  -> { order('max_listing_price DESC NULLS LAST, listings_count DESC') }
   scope :order_by_min_price, -> { order({price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}) }
 
   geocoded_by :full_street_address
@@ -138,9 +136,9 @@ class Building < ApplicationRecord
     joins(:favorites).where('buildings.id = favorites.favorable_id AND favorites.favoriter_id = ?', user.id )
   end
 
-  scope :active_featured_buildings, -> (buildings) do 
-    buildings.joins(:featured_building).where('buildings.id = featured_buildings.building_id AND active is true')
-  end
+  # scope :active_featured_buildings, -> (buildings) do 
+  #   buildings.joins(:featured_buildings).where('buildings.id = featured_buildings.building_id AND active is true')
+  # end
 
   scope :building_photos, -> (buildings) do 
     buildings.joins(:uploads).where('buildings.id = uploads.imageable_id AND imageable_type = ?', 'Building')
@@ -303,7 +301,7 @@ class Building < ApplicationRecord
   end
 
   def featured?
-    featured_building&.active
+    featured_buildings.active.present?
   end
 
   def neighbohoods
