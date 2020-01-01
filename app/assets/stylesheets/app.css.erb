@@ -4785,6 +4785,10 @@ select.custom-arrow {
     margin: 0 auto;
 }
 
+.searchContainer.mobile.split-view-seach{
+    margin-left: 30px;
+}
+
 /* Media Queries */
 @media screen and (max-width: 480px) {
     .aggregate-ratings ul{
@@ -4976,9 +4980,13 @@ select.custom-arrow {
         padding: 0px 20px 1px;
     }
 
-    .row.pb40.scrollable{
+    .row.pb40.scrollable.other{
         height: 480px;
         overflow-y: scroll;
+    }
+
+    .row.pb40.scrollable.neighborhoods{
+        min-height: 480px;
     }
 
     .spv-pop-search .row.pb40.scrollable{
@@ -5204,6 +5212,7 @@ select.custom-arrow {
         overflow-y: scroll;
         overflow-x: hidden;
         top: 0px;
+        left: 0;
     }
     .headerLinks {
         padding: 8px 3px 6px 4px;
@@ -5431,8 +5440,8 @@ select.custom-arrow {
         border-radius: 1.5em;
     }
     .clearSearchText {
-        right: 3px; 
-        top: 6px; 
+        right: 4px; 
+        top: 5px; 
     }
     .search input::-webkit-input-placeholder {
         color: #adc8c7;

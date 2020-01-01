@@ -1,4 +1,4 @@
-.searchContainer.pull-left.split-view-seach
+.searchContainer.pull-left.split-view-seach{class: browser.device.mobile? ? 'mobile': ''}
   %span.fa.fa-times-circle.fa-2x.clearSearchText.visible-xs.visible-sm
   = render partial: 'home/search_form'
 - unless @pop_neighborhoods.blank? and browser.device.mobile?

@@ -1,6 +1,9 @@
 - content_for :page_title do
   = "#{@management_company.name}" if @management_company.name.present?
 
+- content_for :neighborhoods_modal do
+  =render 'layouts/shared/pop_neighborhoods_list'
+
 #mapViewSearch.mob-min
   .mapPlaceholder
     %span.fa.fa-spin.fa-spinner
