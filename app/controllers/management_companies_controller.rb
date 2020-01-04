@@ -34,16 +34,16 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1
   # GET /management_companies/1.json
   def show
-    @show_map_btn = @half_footer = true
-    buildings = @management_company.company_buildings.includes(:uploads, :building_average)
-    page_num = params[:page].present? ? params[:page].to_i : 1
-    final_results = Building.with_featured_building(buildings, page_num)
-    @manage_buildings = final_results[1] if !params[:object_id].present?
-    @all_buildings = final_results[0][:all_buildings]
+    @show_map_btn        = @half_footer = true
+    buildings            = @management_company.company_buildings.includes(:uploads, :building_average)
+    page_num             = params[:page].present? ? params[:page].to_i : 1
+    final_results        = Building.with_featured_building(buildings, page_num)
+    @manage_buildings    = final_results[1] if !params[:object_id].present?
+    @all_buildings       = final_results[0][:all_buildings]
     @recommended_percent = @management_company.recommended_percent(buildings)
-    @reviews = Review.buildings_reviews(buildings)
-    @total_reviews = @reviews.present? ? @reviews.count : 0
-    @reviews = @reviews.limit(10)
+    @reviews             = Review.buildings_reviews(buildings)
+    @total_reviews       = @reviews.present? ? @reviews.count : 0
+    @reviews             = @reviews.limit(10)
     if buildings.present?
       @broker_percent = BrokerFeePercent.first.percent_amount
       @rent_medians = RentMedian.all

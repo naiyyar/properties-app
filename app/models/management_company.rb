@@ -33,7 +33,8 @@ class ManagementCompany < ApplicationRecord
   end
 
   def company_buildings
-  	buildings.reorder(neighborhood: :asc, building_name: :asc, building_street_address: :asc).includes(:featured_building)
+  	buildings.includes(:featured_buildings)
+  					 .reorder(neighborhood: :asc, building_name: :asc, building_street_address: :asc)
   end
 
   def cached_company_buildings_count

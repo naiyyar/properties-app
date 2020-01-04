@@ -17,7 +17,7 @@ namespace :feature_plan do
 				end
 			elsif featured_building.send_renew_reminder?
 				##'Renew plan 2 days before the renew date.'
-				#BillingMailer.send_renew_reminder(user.email, featured_building).deliver
+				BillingMailer.send_renew_reminder(user.email, featured_building).deliver
 			end
 		end
 	end
