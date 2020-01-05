@@ -234,9 +234,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_view_type
-    unless params[:filter].present? or params[:searched_by].present?
-      session[:view_type] = nil
-    end
+    session[:view_type] = nil if params[:searched_by].blank?
   end
 
 end

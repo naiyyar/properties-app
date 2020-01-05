@@ -185,7 +185,6 @@ function RedoButton(controlDiv, map) {
   controlText.innerHTML = '<span class="fa fa-refresh"></span> Redo Search Here';
   controlUI.appendChild(controlText);
 
-  // Setup the click event listeners: simply set the map to Chicago.
   controlUI.addEventListener('click', function() {
     getMoveData(map);
   });

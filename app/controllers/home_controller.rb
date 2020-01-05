@@ -15,7 +15,7 @@ class HomeController < ApplicationController
   end
 
   def set_split_view_type
-    #setting to know on split view in which view user is List view OR Map View
+    #setting to know on split view in which view user is on list view OR Map View
     session[:view_type] = params[:view_type] if params[:view_type].present?
     render json: { view: session[:view_type] }
   end
