@@ -2,9 +2,6 @@
   = "#{@building.building_name}" if @building.building_name.present?
   = "#{@building.building_street_address}"
 
-- content_for :neighborhoods_modal do
-  =render 'layouts/shared/pop_neighborhoods_list'
-
 #street_view_btn.hidden-xs
   / %input#toggleStreetView.btn.btn-info{type: "button", value: "Street View"}
 #mapView.mob-min

@@ -1,5 +1,5 @@
 (function($) {
-    "use strict";
+    //"use strict";
     var documentHeight, headerHeight;
     var windowHeight;
     var windowWidth;
@@ -7,6 +7,7 @@
     var contentWidth;
     var isDevice = true;
     var panorama;
+    var split_view_length = $('#mapViewSearch').length;
 
     // var dragging = false;
     // $("a").on("touchmove", function(){
@@ -15,7 +16,7 @@
 
     //for ios devices double tap
     $('body').on('click','a', function(e) {
-        e.preventDefault();
+        //e.preventDefault();
         //if(dragging){
         //    e.preventDefault();
         //}else{
@@ -82,6 +83,10 @@
                 });
             }
         }
+    }
+
+    if(split_view_length == 0){
+        windowResizeHandler();
     }
 
     var min_price = 0;
@@ -155,8 +160,6 @@
 
     //     $(div).find(".tooltip-inner").text( ui.value );
     // }
-
-    windowResizeHandler();
     
     // $("#toggleStreetView").click(function(){
     //     var toggle = panorama.getVisible();
