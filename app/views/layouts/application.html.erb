@@ -37,7 +37,7 @@
       <div class="closeLeftSide"></div>
       <div id="wrapper" class="<%=contribute_wrapper(params)%>">
         <%= render partial: 'layouts/shared/filter_buttons' %>
-        <div class="content">
+        <div class="content <%= controller_name + action_name %>">
           <%#= yield :neighborhoods_modal if content_for? :neighborhoods_modal %>
           <%= render 'layouts/shared/pop_neighborhoods_list' %>
           <%= yield %>

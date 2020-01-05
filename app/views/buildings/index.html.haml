@@ -1,9 +1,10 @@
 - if current_user.present?
   .row
     .col-xs-12.col-sm-12.col-md-12.col-lg-12
-      .pull-right
-        = link_to "Add new building", new_building_path, class: 'btn btn-blue'
+      .pull-right= link_to 'Add new building', new_building_path, class: 'btn btn-blue'
+  
   %h2
+
 .pull-right
   = form_for_filterrific @filterrific do |f|
     .form-field
