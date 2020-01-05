@@ -14,7 +14,7 @@
     });
 
     //for ios devices double tap
-    $('body').on('click touchend','a', function(e) {
+    $('body').on('click','a', function(e) {
         if(dragging){
             e.preventDefault();
         }else{
