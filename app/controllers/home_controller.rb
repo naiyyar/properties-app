@@ -52,13 +52,14 @@ class HomeController < ApplicationController
   end
 
   def auto_search
-    @search_phrase = params[:term]
+    @search_phrase  = params[:term]
     @no_match_found = true
-    @neighborhoods = Neighborhood.nb_search(@search_phrase) #All neighborhoods
-    @buildings = Building.search_by_building_name_or_address(@search_phrase)
-    @zipcodes = Building.search_by_zipcodes(@search_phrase) #address and name
-    @companies = ManagementCompany.text_search_by_management_company(@search_phrase)
-    @city = Building.text_search_by_city(@search_phrase).to_a.uniq(&:city)
+    buildings       = Building.all
+    @neighborhoods  = Neighborhood.nb_search(@search_phrase) #All neighborhoods
+    @buildings      = buildings.search_by_building_name_or_address(@search_phrase)
+    @zipcodes       = buildings.search_by_zipcodes(@search_phrase) #address and name
+    @companies      = ManagementCompany.text_search_by_management_company(@search_phrase)
+    @city           = buildings.text_search_by_city(@search_phrase).to_a.uniq(&:city)
     
     respond_to do |format|
       #format.html: because if login from search split view after searching something session was saving auto_search path as looking for auto_search template

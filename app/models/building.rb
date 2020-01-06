@@ -288,7 +288,6 @@ class Building < ApplicationRecord
   end
 
   def image_uploads
-    #including buildings
     uploads.where.not(image_file_name: nil).includes(:imageable)
   end
 
@@ -356,14 +355,6 @@ class Building < ApplicationRecord
     building_name.present? ? building_name : building_street_address
   end
 
-  def rent_information
-    info_count = 0
-    self.units.each do |unit|
-      info_count += unit.rental_price_histories.count
-    end
-    info_count
-  end
-
   def neighborhood_search_string
     "#{neighbohoods}, #{city}, NY"
   end
@@ -373,44 +364,11 @@ class Building < ApplicationRecord
   end
 
   def fetch_or_create_unit params
-    params = params[:units_attributes]
-    unit = Unit.new(params.values[0])
+    params           = params[:units_attributes]
+    unit             = Unit.new(params.values[0])
     unit.building_id = self.id
     unit.save
     return unit
-  end
-
-  def unit_reviews_count
-    count = 0
-    self.units.each do |unit|
-      count = count + unit.reviews.count
-    end
-    return count
-  end
-
-  def unit_rent_summary_count
-    unit_rent_summary_count = 0
-    self.units.each do |unit|
-      unit_rent_summary_count += unit.rental_price_histories.count
-    end
-    unit_rent_summary_count
-  end
-
-  def unit_reviews_count
-    unit_review_count = 0
-    self.units.each do |unit|
-      unit_review_count += unit.reviews.count
-    end
-    unit_review_count
-  end
-
-  def photos
-    building_counts = self.uploads.count
-    unit_counts = 0
-    self.units.each do |unit|
-      unit_counts += unit.uploads.count
-    end
-    return building_counts + unit_counts
   end
 
   def first_neighborhood
@@ -431,17 +389,12 @@ class Building < ApplicationRecord
 
   #finding similar properties may be on the basis amenities
   def similar_properties
-    buildings = Building.where('id <> ?', self.id)
+    Building.where('id <> ?', self.id)
   end
 
   def formatted_neighborhood type=''
-    if type == 'parent'
-      @neighborhood = self.neighborhoods_parent
-    else
-      @neighborhood = self.neighborhood
-    end
-
-    return "#{@neighborhood.downcase.gsub(' ', '-')}-#{formatted_city}"
+    neighborhood = (type == 'parent' ? neighborhoods_parent : neighborhood)
+    return "#{neighborhood.downcase.gsub(' ', '-')}-#{formatted_city}"
   end
 
   def formatted_city
@@ -453,7 +406,7 @@ class Building < ApplicationRecord
   end
 
   def popular_neighborhoods
-    Neighborhood.where('name = ? OR name = ? OR name = ?', self.neighborhood, self.neighborhoods_parent, self.neighborhood3)
+    Neighborhood.where('name = ? OR name = ? OR name = ?', neighborhood, neighborhoods_parent, neighborhood3)
   end
 
   def prices

@@ -1,5 +1,5 @@
 (function($) {
-    //"use strict";
+    "use strict";
     var documentHeight, headerHeight;
     var windowHeight;
     var windowWidth;
@@ -271,6 +271,7 @@
     });
 
     var setSession = function(view_type){
+        console.log(view_type)
         $.ajax({
             url: '/set_split_view_type',
             beforeSend: function(xhr){
@@ -280,7 +281,7 @@
             dataType: 'json',
             data: {view_type: view_type},
             success: function(response){
-                //console.log(response)
+                console.log(response)
             }
         })
     }

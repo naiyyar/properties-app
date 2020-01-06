@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :allow_iframe_requests
   after_action  :store_location,              unless: :skip_store_location
+  #after_action :set_view_type
   before_action :popular_neighborhoods
-  before_action :set_view_type
 
   helper_method :uptown_count, :brooklyn_count, :queens_count, :bronx_count
   
@@ -234,7 +234,12 @@ class ApplicationController < ActionController::Base
   end
   
   def set_view_type
-    session[:view_type] = nil if params[:searched_by].blank?
+    # session[:view_type] = session[:view_type]
+    # if params[:searched_by].present? and session[:view_type] == 'mapView'
+    #   session[:view_type] = 'mapView'
+    # else
+    #   session[:view_type] = nil
+    # end
   end
 
 end
