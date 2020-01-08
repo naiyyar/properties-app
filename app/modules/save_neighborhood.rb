@@ -48,18 +48,18 @@ module SaveNeighborhood
   end
 
   def save_neighborhood hood
-  	hood = 'Midtown' if hood == 'Midtown Manhattan'
-    self.neighborhood = hood if predifined_neighborhoods.include?(hood)
+  	hood              = 'Midtown' if hood == 'Midtown Manhattan'
+    neighborhood      = hood      if predifined_neighborhoods.include?(hood)
     building_with_nb3 = Building.select(:neighborhood, :neighborhoods_parent, :neighborhood3)
                                 .where(neighborhood: neighborhood)
                                 .where.not(neighborhoods_parent: [nil], neighborhood3: [nil]).first
     if building_with_nb3.present?
-      self.neighborhoods_parent = building_with_nb3.neighborhoods_parent 
-      self.neighborhood3 = building_with_nb3.neighborhood3
+      neighborhoods_parent = building_with_nb3.neighborhoods_parent
+      neighborhood3        = building_with_nb3.neighborhood3
     else
-      self.neighborhoods_parent = hood if parent_neighborhoods.include?(hood)
-      self.neighborhood3 = hood if level3_neighborhoods.include?(hood)
+      neighborhoods_parent = hood if parent_neighborhoods.include?(hood)
+      neighborhood3        = hood if level3_neighborhoods.include?(hood)
     end
-    self.save
+    save
   end
 end

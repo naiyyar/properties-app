@@ -136,26 +136,26 @@ class HomeController < ApplicationController
 
   def format_search_string
     if params['search_term'].present?
-      terms_arr =  params['search_term'].split('-')
-      @borough_city = terms_arr.last
+      terms_arr      =  params['search_term'].split('-')
+      @borough_city  = terms_arr.last
       @search_string = terms_arr.pop #removing last elements-name of city
       @search_string = terms_arr.join(' ').titleize #join neighborhoods
       @search_string = @search_string.gsub('  ', ' -') if @search_string == 'Flatbush   Ditmas Park'
-      @search_string = @search_string.gsub(' ', '-') if @search_string == 'Bedford Stuyvesant'
-      @search_string = 'New York' if @search_string == 'Newyork'
+      @search_string = @search_string.gsub(' ', '-')   if @search_string == 'Bedford Stuyvesant'
+      @search_string = 'New York'                      if @search_string == 'Newyork'
       
-      @borough_city = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
+      @borough_city           = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
       @searched_neighborhoods = "#{@search_string}"
-      @search_input_value = "#{@searched_neighborhoods} - #{@borough_city}, NY"
-      @search_input_value = 'Custom' if params[:searched_by] == 'latlng'
-      @meta_desc_text = "#{@search_string} #{@borough_city}"
-      @tab_title_text = "#{@meta_desc_text} #{tab_title_tag}"
+      @search_input_value     = "#{@searched_neighborhoods} - #{@borough_city}, NY"
+      @search_input_value     = 'Custom'               if params[:searched_by] == 'latlng'
+      @meta_desc_text         = "#{@search_string} #{@borough_city}"
+      @tab_title_text         = "#{@meta_desc_text} #{tab_title_tag}"
 
       if !searched_params.include?(params[:searched_by])
-        @sub_borough = {}
-        @sub_borough['Queens'] = view_context.queens_sub_borough
+        @sub_borough             = {}
+        @sub_borough['Queens']   = view_context.queens_sub_borough
         @sub_borough['Brooklyn'] = view_context.brooklyn_sub_borough
-        @sub_borough['Bronx'] = view_context.bronx_sub_borough
+        @sub_borough['Bronx']    = view_context.bronx_sub_borough
       end
     end
     @half_footer = true
@@ -175,7 +175,7 @@ class HomeController < ApplicationController
 
   def set_rent_medians
     @broker_percent = BrokerFeePercent.first.percent_amount
-    @rent_medians = RentMedian.all
+    @rent_medians   = RentMedian.all
   end
 
   def tab_title_tag
