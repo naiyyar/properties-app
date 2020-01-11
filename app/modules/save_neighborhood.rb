@@ -48,18 +48,23 @@ module SaveNeighborhood
   end
 
   def save_neighborhood hood
-  	hood              = 'Midtown' if hood == 'Midtown Manhattan'
-    neighborhood      = hood      if predifined_neighborhoods.include?(hood)
-    building_with_nb3 = Building.select(:neighborhood, :neighborhoods_parent, :neighborhood3)
-                                .where(neighborhood: neighborhood)
-                                .where.not(neighborhoods_parent: [nil], neighborhood3: [nil]).first
-    if building_with_nb3.present?
-      neighborhoods_parent = building_with_nb3.neighborhoods_parent
-      neighborhood3        = building_with_nb3.neighborhood3
+  	hood = 'Midtown' if hood == 'Midtown Manhattan'
+    self.update_column(:neighborhood, hood)      if predifined_neighborhoods.include?(hood)
+    building_with_neighborhood3      = building_with_nb3(neighborhood)
+    if building_with_neighborhood3.present?
+      nb_parent = building_with_neighborhood3.neighborhoods_parent
+      nb3       = building_with_neighborhood3.neighborhood3
     else
-      neighborhoods_parent = hood if parent_neighborhoods.include?(hood)
-      neighborhood3        = hood if level3_neighborhoods.include?(hood)
+      nb_parent = hood if parent_neighborhoods.include?(hood)
+      nb3       = hood if level3_neighborhoods.include?(hood)
     end
-    save
+    self.update_column(:neighborhoods_parent, nb_parent) if nb_parent.present?
+    self.update_column(:neighborhood3,        nb3      ) if nb3.present?
+  end
+
+  def building_with_nb3 neighborhood
+    Building.select(:id, :neighborhood, :neighborhoods_parent, :neighborhood3)
+            .where.not(neighborhood: nil, neighborhoods_parent: [nil], neighborhood3: [nil])
+            .where(neighborhood: neighborhood).first
   end
 end

@@ -9,10 +9,10 @@
     var panorama;
     var split_view_length = $('#mapViewSearch').length;
 
-    // var dragging = false;
-    // $("a").on("touchmove", function(){
-    //   dragging = true;
-    // });
+    var dragging = false;
+    $("a").on("touchmove", function(){
+      dragging = true;
+    });
 
     //for ios devices double tap
     $('body').on('click','a', function(e) {
@@ -43,9 +43,9 @@
         //}
     });
 
-    // $("a").on("touchstart", function(){
-    //     dragging = false;
-    // });
+    $("a").on("touchstart", function(){
+        dragging = false;
+    });
 
     // calculations for elements that changes size on window resize
     var windowResizeHandler = function() {

@@ -72,6 +72,10 @@
     opacity: 1;
 }
 
+#apt-search-form.other{
+    margin: 0 5px !important;
+}
+
 @media screen and (max-width: 767px) {
     #hero-container .cb-slideshow,
     #hero-container .cb-slideshow:after { 
@@ -162,7 +166,7 @@
     }
 }
 
-@media screen and (min-width: 2201px){
+@media screen and (min-width: 2201px) {
     #hero-container {
         height: 540px;
         background-color: #dbe6f9;
