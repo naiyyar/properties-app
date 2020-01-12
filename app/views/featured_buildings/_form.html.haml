@@ -54,13 +54,13 @@
                 %a.hyper-link{href: '/terms_of_service', target: '_blank'} Terms of Service
             
             .form-group
-              .col-sm-7
+              .col-md-7.col-sm-7.col-xs-7
                 .pull-right
                   -if @featured_building.new_record?
                     = link_to 'Cancel', params[:type].blank? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
                   -else
                     = link_to 'Cancel', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
-              .col-sm-5
+              .col-md-5.col-sm-5.col-xs-5
                 = f.submit submit_text, class: 'btn btn-primary btn-block', disabled: true
     
 
