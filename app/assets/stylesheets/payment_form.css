@@ -251,3 +251,10 @@
 .pw-footer .w-lg{
   width: 27.33%;
 }
+
+@media screen and (max-width: 767px){
+  .pw-footer .w-sm{
+    width: 50%;
+    float: left;
+  }
+}
