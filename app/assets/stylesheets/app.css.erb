@@ -1939,7 +1939,11 @@ a.userHandler .counter {
     left: 70px;
     top: 60px;
     margin: 53px 0 0 0px;
-    overflow-x: hidden;
+    /*overflow-x hidden : Getting grey/blank map issue on mobile devices ios13 when moving or zooming*/
+    /*overflow-x: hidden;*/
+}
+#wrapper.screen-lg{
+ overflow-x: hidden;   
 }
 #wrapper.full.m-full {
     margin-left: 200px;
