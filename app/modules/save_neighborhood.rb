@@ -33,14 +33,8 @@ module SaveNeighborhood
 	        #finding neighborhood
 	        neighborhood = geo_result.address_components_of_type(:neighborhood)
 	        if neighborhood.present?
-	          neighborhood = neighborhood.first['long_name']
-	          sublocality = search[0].address_components_of_type(:sublocality)
-	          if sublocality.present?
-	            locality = sublocality.first['long_name']
-	          else
-	            locality = search[0].address_components_of_type(:locality).first['long_name']
-	          end
-	          save_neighborhood(neighborhood) if neighborhood.present?
+	          nb_name = neighborhood.first['long_name']
+	          save_neighborhood(nb_name) if nb_name.present?
 	        end
 	      end
 	    end
@@ -48,23 +42,22 @@ module SaveNeighborhood
   end
 
   def save_neighborhood hood
-  	hood = 'Midtown' if hood == 'Midtown Manhattan'
-    self.update_column(:neighborhood, hood)      if predifined_neighborhoods.include?(hood)
-    building_with_neighborhood3      = building_with_nb3(neighborhood)
-    if building_with_neighborhood3.present?
-      nb_parent = building_with_neighborhood3.neighborhoods_parent
-      nb3       = building_with_neighborhood3.neighborhood3
-    else
-      nb_parent = hood if parent_neighborhoods.include?(hood)
-      nb3       = hood if level3_neighborhoods.include?(hood)
+  	hood      = 'Midtown' if hood == 'Midtown Manhattan'
+    nb        = hood      if predifined_neighborhoods.include?(hood)
+    nb_parent = hood      if parent_neighborhoods.include?(hood)
+    nb3       = hood      if level3_neighborhoods.include?(hood)
+    if hood == 'Ukrainian Village'
+      nb_parent = 'East Village'                      
+      nb3       = 'Lower Manhattan'
     end
-    self.update_column(:neighborhoods_parent, nb_parent) if nb_parent.present?
-    self.update_column(:neighborhood3,        nb3      ) if nb3.present?
+    update_column(:neighborhood, nb)                if nb.present? and neighborhood.blank?
+    update_column(:neighborhoods_parent, nb_parent) if nb_parent.present? and neighborhoods_parent.blank?
+    update_column(:neighborhood3,        nb3      ) if nb3.present? and neighborhood3.blank?
   end
 
-  def building_with_nb3 neighborhood
-    Building.select(:id, :neighborhood, :neighborhoods_parent, :neighborhood3)
-            .where.not(neighborhood: nil, neighborhoods_parent: [nil], neighborhood3: [nil])
-            .where(neighborhood: neighborhood).first
-  end
+  # def building_with_nb3 neighborhood
+  #   Building.select(:id, :neighborhood, :neighborhoods_parent, :neighborhood3)
+  #           .where.not(neighborhood: nil, neighborhoods_parent: [nil], neighborhood3: [nil])
+  #           .where(neighborhood: neighborhood).first
+  # end
 end
