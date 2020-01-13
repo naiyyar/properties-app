@@ -53,16 +53,16 @@ class FeaturedBuilding < ApplicationRecord
     !live?
   end
 
-  DEV_HOST = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
+  DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
 
   def renew_plan? host
-    if DEV_HOST.include?(host)
+    if DEV_HOSTS.include?(host)
       #end_date.present? and Date.today == end_date - 1.days
       #12 hrs before 
       #end_date.present? and ((end_date.to_time - Date.today.to_time) / 1.hour).to_i == 12
-      end_date.present? and Date.today == end_date - 1.days
+      end_date.present? and Time.now.to_s(:no_timezone) == end_date.to_s(:no_timezone) - 1.day
     else
-      end_date.present? and Date.today == end_date - 2.days
+      end_date.present? and Time.now.to_s(:no_timezone) == end_date.to_s(:no_timezone) - 2.days
     end
   end
 

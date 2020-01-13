@@ -49,8 +49,8 @@ class Billing < ApplicationRecord
 
 	private
 	def set_featured_building_end_date
-		start_date = Date.today
 		featured_building = FeaturedBuilding.find(featured_building_id)
+		start_date = featured_building.start_date.present? ? (featured_building.end_date  + 1.day) : Time.now
 		#end_date = (start_date + 27.days) #for 4 weeks on prodcution
 		end_date = (start_date + 2.day) #for 1 day on dev
 		featured_building.update(start_date: start_date, end_date: end_date, active: true, renew: true)
@@ -62,7 +62,7 @@ class Billing < ApplicationRecord
 			card = BillingService.new.get_card(customer_id, billing_card_id)
 			self.update_column(:brand, card['brand'])
 		end
-		BillingMailer.delay.send_payment_receipt(self, card)
+		BillingMailer.send_payment_receipt(self, card).deliver
 	end
 	
 end
