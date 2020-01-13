@@ -21,7 +21,7 @@
               %th
           %tbody.table
             - buildings.each do |building|
-              - cache(building) do
+              - cache(building, '10') do
                 %tr
                   %td
                     %span.propName

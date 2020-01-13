@@ -46,13 +46,13 @@ module SaveNeighborhood
     nb        = hood      if predifined_neighborhoods.include?(hood)
     nb_parent = hood      if parent_neighborhoods.include?(hood)
     nb3       = hood      if level3_neighborhoods.include?(hood)
-    if hood == 'Ukrainian Village'
-      nb_parent = 'East Village'                      
-      nb3       = 'Lower Manhattan'
+    if nb == 'Ukrainian Village'
+      nb  = 'East Village'
+      nb3 = nb_parent = 'Lower Manhattan'
     end
     update_column(:neighborhood, nb)                if nb.present? and neighborhood.blank?
     update_column(:neighborhoods_parent, nb_parent) if nb_parent.present? and neighborhoods_parent.blank?
-    update_column(:neighborhood3,        nb3      ) if nb3.present? and neighborhood3.blank?
+    update_column(:neighborhood3, nb3)              if nb3.present? and neighborhood3.blank?
   end
 
   # def building_with_nb3 neighborhood

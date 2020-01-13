@@ -51,7 +51,8 @@ class Billing < ApplicationRecord
 	def set_featured_building_end_date
 		start_date = Date.today
 		featured_building = FeaturedBuilding.find(featured_building_id)
-		end_date = (start_date + 27.days) #for 4 weeks
+		#end_date = (start_date + 27.days) #for 4 weeks on prodcution
+		end_date = (start_date + 1.day) #for 1 day on dev
 		featured_building.update(start_date: start_date, end_date: end_date, active: true, renew: true)
 	end
 

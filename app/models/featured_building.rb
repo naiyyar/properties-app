@@ -53,13 +53,23 @@ class FeaturedBuilding < ApplicationRecord
     !live?
   end
 
-  def renew_plan?
-    end_date.present? and Date.today == end_date - 2.days
+  DEV_HOST = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
+
+  def renew_plan? host
+    if DEV_HOST.include?(host)
+      #end_date.present? and Date.today == end_date - 1.days
+      #12 hrs before 
+      #end_date.present? and ((end_date.to_time - Date.today.to_time) / 1.hour).to_i == 12
+      end_date.present? and Date.today == end_date - 1.days
+    else
+      end_date.present? and Date.today == end_date - 2.days
+    end
   end
 
-  def send_renew_reminder?
-    end_date.present? and Date.today == end_date - 4.days
-  end
+  #Later
+  # def send_renew_reminder?
+  #   end_date.present? and Date.today == end_date - 4.days
+  # end
 
   private
   def check_status
