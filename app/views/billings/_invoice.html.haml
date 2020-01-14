@@ -11,7 +11,7 @@
 				= 'Visa 4242'
 
 	.payment-date
-		%b=@billing.created_at.strftime("%b %-d, %Y")
+		%b=@billing.created_at&.strftime("%b %-d, %Y")
 
 	.billing-table
 		%table.table
@@ -20,7 +20,11 @@
 				%th.text-right Amount
 
 			%tr
-				%td.text-left="Featured Building For Four Weeks Starting on #{@billing.featured_building.start_date.strftime('%b %-d, %Y')}"
+				%td.text-left
+					- unless @billing.renew_date
+						="Featured Building For Four Weeks Starting on #{@billing.featured_building.start_date&.strftime('%b %-d, %Y')}"
+					- else
+						="Renewed Featured Building For Four Weeks Starting on #{(@billing.renew_date + 2.day).strftime('%b %-d, %Y')}"
 				%td.text-right= number_to_currency(amount = @billing.amount, precision: 2)
 
 			%tfoot

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200113152713) do
+ActiveRecord::Schema.define(version: 20200114065739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20200113152713) do
     t.string   "brand"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+    t.datetime "renew_date"
   end
 
   create_table "broker_fee_percents", force: :cascade do |t|

@@ -1,6 +1,6 @@
 namespace :featured_buildings do
 	desc 'Making Expired featured buildings to inactive'
-	task make_expired_to_inactive: :environment do
+	task set_expired_to_inactive: :environment do
 		FeaturedBuilding.by_manager.expired.update_all(active: false, renew: false)
 	end
 end
@@ -14,12 +14,12 @@ namespace :featured_plan do
 			if featured_building.renew_plan?(ENV['SERVER_ROOT'])
 				customer_id = user.stripe_customer_id
 				if customer_id.present?
-					@billing 	  = Billing.create(email: 							  user.email,
+					@billing 	= Billing.create(	email: 								user.email,
 																			amount: 						  Billing::PRICE,
 																			featured_building_id: featured_building.id,
-																			user_id: 							user.id
+																			user_id: 							user.id,
+																			renew_date:           Time.now
 																		)
-					@billing.update_column(:stripe_customer_id, customer_id)
 					card = BillingService.new.saved_cards(customer_id).last #cosidering last card default card
 					@billing.create_charge_existing_card!(customer_id, card.id)
 				end

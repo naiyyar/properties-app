@@ -6,9 +6,13 @@ class Billing < ApplicationRecord
 	attr_accessor :description, :strp_customer_id
 	validates_presence_of :email
 
-	after_save :set_featured_building_end_date, :send_email
+	after_save :set_featured_building_end_date, :send_email #, :if => Proc.new{ |obj| obj.continue_call_back? }
 
 	default_scope {order(created_at: :desc)}
+
+	# def continue_call_back?
+	# 	!brand_changed?
+	# end
 
 	def save_and_make_payment!
 		if valid?
@@ -49,11 +53,8 @@ class Billing < ApplicationRecord
 
 	private
 	def set_featured_building_end_date
-		featured_building = FeaturedBuilding.find(featured_building_id)
-		start_date = featured_building.start_date.present? ? (featured_building.end_date  + 1.day) : Time.now
-		#end_date = (start_date + 27.days) #for 4 weeks on prodcution
-		end_date = (start_date + 2.day) #for 1 day on dev
-		featured_building.update(start_date: start_date, end_date: end_date, active: true, renew: true)
+		fb = FeaturedBuilding.find(featured_building_id)
+		fb.set_expiry_date(self.renew_date)
 	end
 
 	def send_email
