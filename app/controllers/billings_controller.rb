@@ -5,8 +5,8 @@ class BillingsController < ApplicationController
   # GET /billings
   # GET /billings.json
   def index
-    @limit       = 51
-    @billings    = @current_user.billings.limit(@limit)
+    @limit    = 51
+    @billings = @current_user.billings.limit(@limit)
   end
 
   # GET /billings/1
@@ -16,7 +16,7 @@ class BillingsController < ApplicationController
       format.html { redirect_to :back }
       format.js
       format.pdf do
-        render wicked_pdf_options("invoice_#{@billing.created_at.strftime('%d-%m-%Y')}",'billings/show')
+        render wicked_pdf_options("invoice_#{@billing.created_at.strftime('%d-%m-%Y')}", 'billings/show')
       end
     end
   end

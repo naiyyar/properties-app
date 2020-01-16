@@ -2,7 +2,7 @@ class FeaturedBuilding < ApplicationRecord
   include PgSearch
   belongs_to :building
   belongs_to :user
-  has_one :billing #, :dependent => :destroy
+  has_one    :billing #, :dependent => :destroy
 
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
@@ -23,7 +23,7 @@ class FeaturedBuilding < ApplicationRecord
     ]
   )
 
-  before_destroy :check_status, unless: Proc.new{ |obj| obj.expired? }
+  before_destroy :check_active_status, unless: Proc.new{ |obj| obj.expired? }
 
   def featured_by_manager?
     featured_by == 'manager'
@@ -61,9 +61,9 @@ class FeaturedBuilding < ApplicationRecord
       #12 hrs before 
       #end_date.present? and ((end_date.to_time - Date.today.to_time) / 1.hour).to_i == 12
       #end_date.present? and Time.now.to_date == end_date.to_date - 1.day
-      end_date.present? and Time.now.to_s(:no_timezone) == end_date.to_s(:no_timezone) - 1.day
+      end_date.present? and Time.now.to_s(:no_timezone) == (end_date - 1.day).to_s(:no_timezone)
     else
-      end_date.present? and Time.now.to_s(:no_timezone) == end_date.to_s(:no_timezone) - 2.days
+      end_date.present? and Time.now.to_s(:no_timezone) == (end_date - 2.day).to_s(:no_timezone)
     end
   end
 
@@ -85,7 +85,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   private
-  def check_status
+  def check_active_status
     errors.add :base, 'Cannot delete active featured buildings.'
     false
     throw(:abort)
