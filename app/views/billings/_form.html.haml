@@ -15,7 +15,9 @@
                   = hidden_field_tag 'billing[amount]', Billing::PRICE, id: "billing_amount2_#{card[:last4]}"
                   = hidden_field_tag 'billing[featured_building_id]', params[:fb_id], id: "billing_featured_building_id_#{card[:last4]}"
                   = hidden_field_tag 'billing[user_id]', current_user.id, id: "billing_user_id_#{card[:last4]}"
-                  = hidden_field_tag :card_id, card[:id], id: "card_id_#{card[:last4]}"
+                  = hidden_field_tag 'billing[billing_card_id]', card[:id], id: "billing_card_id_#{card[:last4]}"
+                  = hidden_field_tag 'billing[brand]', card[:brand], id: "billing_card_brand_#{card[:last4]}"
+                  / = hidden_field_tag :card_id, card[:id], id: "card_id_#{card[:last4]}"
 
                   = submit_tag "Pay $#{Billing::PRICE}.00", class: 'btn btn-primary btn-sm font-bold', data: { disable_with: "Pay $#{Billing::PRICE}.00" }
     

@@ -60,7 +60,8 @@ class FeaturedBuilding < ApplicationRecord
       #end_date.present? and Date.today == end_date - 1.days
       #12 hrs before 
       #end_date.present? and ((end_date.to_time - Date.today.to_time) / 1.hour).to_i == 12
-      end_date.present? and Time.now.to_date == end_date.to_date - 1.day
+      #end_date.present? and Time.now.to_date == end_date.to_date - 1.day
+      end_date.present? and Time.now.to_s(:no_timezone) == end_date.to_s(:no_timezone) - 1.day
     else
       end_date.present? and Time.now.to_s(:no_timezone) == end_date.to_s(:no_timezone) - 2.days
     end
