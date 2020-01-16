@@ -6,13 +6,9 @@ class Billing < ApplicationRecord
 	attr_accessor :description, :strp_customer_id
 	validates_presence_of :email
 
-	after_save :set_featured_building_end_date, :send_email #, :if => Proc.new{ |obj| obj.continue_call_back? }
+	after_save :set_featured_building_end_date, :send_email
 
 	default_scope {order(created_at: :desc)}
-
-	# def continue_call_back?
-	# 	!brand_changed?
-	# end
 
 	def save_and_make_payment!
 		if valid?
@@ -22,7 +18,7 @@ class Billing < ApplicationRecord
       	customer_id 					= billing_service.get_customer_id(user)
       	card 									= billing_service.create_source(customer_id)
       	self.billing_card_id 	= card.id
-      	self.strp_customer_id = customer_id
+      	self.brand						= card.brand
         charge 								= billing_service.create_stripe_charge(customer_id)
         self.stripe_charge_id = charge.id
         save
@@ -35,13 +31,10 @@ class Billing < ApplicationRecord
     end
 	end
 
-	def create_charge_existing_card! customer_id, card_id=nil
+	def create_charge_existing_card! customer_id
 		if valid?
 			begin
-				BillingService.new.create_stripe_charge(customer_id, card_id)
-				self.strp_customer_id = customer_id
-				self.billing_card_id	= card_id
-				save
+				BillingService.new.create_stripe_charge(customer_id, billing_card_id)
 			rescue Stripe::CardError => e
 	      errors.add :credit_card, e.message
 	      false
@@ -51,6 +44,15 @@ class Billing < ApplicationRecord
 	  end
 	end
 
+	def billing_description
+		fb = self.featured_building
+		unless renew_date
+			"Featured Building For Four Weeks Starting on #{fb.start_date&.strftime('%b %-d, %Y')}"
+		else
+			"ID #{fb.id} Renewed Featured Building For Four Weeks Starting on #{(renew_date + 2.day).strftime('%b %-d, %Y')}"
+		end
+	end
+
 	private
 	def set_featured_building_end_date
 		fb = FeaturedBuilding.find(featured_building_id)
@@ -58,12 +60,7 @@ class Billing < ApplicationRecord
 	end
 
 	def send_email
-		customer_id = strp_customer_id || stripe_customer_id
-		if customer_id.present? and billing_card_id.present?
-			card = BillingService.new.get_card(customer_id, billing_card_id)
-			self.update_column(:brand, card['brand'])
-		end
-		BillingMailer.send_payment_receipt(self, card).deliver if billing_card_id.blank?
+		BillingMailer.send_payment_receipt(self).deliver
 	end
 	
 end

@@ -79,7 +79,8 @@ class FeaturedBuilding < ApplicationRecord
   # end
 
   def self.set_expired_plans_to_inactive
-    by_manager.expired.update_all(active: false, renew: false) 
+    expired_plans = by_manager.expired
+    expired_plans.update_all(active: false, renew: false) if expired_plans.active.any?
   end
 
   private

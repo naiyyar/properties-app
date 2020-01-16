@@ -24,7 +24,7 @@ class BillingsController < ApplicationController
   def email_receipt
     if params[:email_to].present?
       params[:email_to].split(',').each do |email|
-        BillingMailer.send_payment_receipt(@billing, @card, email.gsub(' ', '')).deliver
+        BillingMailer.send_payment_receipt(@billing, email.gsub(' ', '')).deliver
       end
       flash[:notice] = 'Invoice successfully sent.'
     else

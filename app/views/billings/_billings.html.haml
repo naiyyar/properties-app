@@ -17,7 +17,7 @@
             %tr
               %td=date_created = billing.created_at.to_date
               %td.text-right=number_to_currency(billing.amount, precision: 2)
-              %td=billing_description(billing)
+              %td=billing.billing_description
               %td
                 = image_tag "card_brands/#{brand_name(billing.brand)}.svg", height: 20
                 %b.text-success Successful

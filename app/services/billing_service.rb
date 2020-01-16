@@ -40,7 +40,7 @@ class BillingService
 	def create_stripe_charge customer_id, card_id=nil
 		Stripe::Charge.create(
     	customer:  		customer_id,
-    	card: 			card_id,
+    	card: 				card_id,
       amount: 	 		Billing::PRICE * 100,
       currency:  		'usd',
       description: 	@description

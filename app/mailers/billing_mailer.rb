@@ -1,10 +1,11 @@
 class BillingMailer < ApplicationMailer
 	EMAIL_WITH_NAME = %(transparentcity <hello@transparentcity.co>)
 	
-	def send_payment_receipt billing, card=nil, to_email=nil
+	def send_payment_receipt billing, to_email=nil
 		@billing = billing
 		to_email = to_email.present? ? to_email : @billing&.email
-		@card 	 = card
+		user 		 = billing.user
+		@card 	 = BillingService.new.get_card(user.stripe_customer_id, billing.billing_card_id) rescue nil
 		mail(
 			to: to_email,
 			from: EMAIL_WITH_NAME,
