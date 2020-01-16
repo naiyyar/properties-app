@@ -8,18 +8,18 @@ class BillingMailer < ApplicationMailer
 		mail(
 			to: to_email,
 			from: EMAIL_WITH_NAME,
-			subject: 'Payment Receipt'
+			subject: "Payment Receipt (Invoice ##{billing.id})"
 		)
 	end
 
-	def send_renew_reminder to_email, featured_building
-		@renew_date = featured_building.end_date - 2.days
-		@user_name 	= featured_building.user.try(:name)
-		mail(
-			to: to_email,
-			from: EMAIL_WITH_NAME,
-			subject: 'Subscription Renewal Reminder'
-		)
-	end
+	# def send_renew_reminder to_email, featured_building
+	# 	@renew_date = featured_building.end_date - 2.days
+	# 	@user_name 	= featured_building.user.try(:name)
+	# 	mail(
+	# 		to: to_email,
+	# 		from: EMAIL_WITH_NAME,
+	# 		subject: 'Subscription Renewal Reminder'
+	# 	)
+	# end
 
 end

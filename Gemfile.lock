@@ -123,6 +123,7 @@ GEM
       nokogiri (~> 1.8, >= 1.8.2)
       rubyzip (~> 1.2, >= 1.2.1)
     character_set (1.4.0)
+    chronic (0.10.2)
     client_side_validations (15.0.0)
       jquery-rails (~> 4.3)
       js_regex (~> 3.1)
@@ -445,6 +446,8 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     wicked (1.3.3)
       railties (>= 3.0.7)
     wicked_pdf (1.1.0)
@@ -533,6 +536,7 @@ DEPENDENCIES
   valid_url
   validates_timeliness (~> 5.0.0.alpha3)
   web-console (~> 2.0)
+  whenever
   wicked
   wicked_pdf (= 1.1.0)
   will_paginate-bootstrap

@@ -63,7 +63,7 @@ class Billing < ApplicationRecord
 			card = BillingService.new.get_card(customer_id, billing_card_id)
 			self.update_column(:brand, card['brand'])
 		end
-		BillingMailer.send_payment_receipt(self, card).deliver
+		BillingMailer.send_payment_receipt(self, card).deliver if billing_card_id.blank?
 	end
 	
 end

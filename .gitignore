@@ -19,6 +19,7 @@
 # Ignore application configuration
 /config/application.yml
 /config/database.yml
+/config/schedule.rb
 
 #Ignore assets
 

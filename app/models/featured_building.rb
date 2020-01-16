@@ -78,6 +78,10 @@ class FeaturedBuilding < ApplicationRecord
   #   end_date.present? and Date.today == end_date - 4.days
   # end
 
+  def self.set_expired_plans_to_inactive
+    by_manager.expired.update_all(active: false, renew: false) 
+  end
+
   private
   def check_status
     errors.add :base, 'Cannot delete active featured buildings.'

@@ -154,6 +154,7 @@ group :development do
   gem 'lol_dba'
   gem 'rubocop', '~> 0.75.1', require: false
   gem "rubycritic", require: false
+  gem 'whenever'
 end
 
 group :production do
