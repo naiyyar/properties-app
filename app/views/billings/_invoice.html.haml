@@ -8,7 +8,7 @@
 
 	.payment-date
 		%b=@billing.created_at&.strftime("%b %-d, %Y")
-		.fl-right{style: 'float: right;'}="Invoice ##{@billing.id}"
+		.fl-right{style: 'float: right;margin-right: 15px;'}="Invoice: ##{@billing.id}"
 
 
 	.billing-table
