@@ -60,7 +60,7 @@ class Billing < ApplicationRecord
 	end
 
 	def send_email
-		BillingMailer.send_payment_receipt(self).deliver
+		BillingMailer.send_payment_receipt(billing: self).deliver
 	end
 	
 end

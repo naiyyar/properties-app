@@ -12,6 +12,7 @@ class BillingsController < ApplicationController
   # GET /billings/1
   # GET /billings/1.json
   def show
+    @view = 'pdf'
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
@@ -24,7 +25,9 @@ class BillingsController < ApplicationController
   def email_receipt
     if params[:email_to].present?
       params[:email_to].split(',').each do |email|
-        BillingMailer.send_payment_receipt(@billing, email.gsub(' ', '')).deliver
+        BillingMailer.send_payment_receipt(billing: @billing, 
+                                           to_email: email.gsub(' ', ''), 
+                                           view: params[:view]).deliver
       end
       flash[:notice] = 'Invoice successfully sent.'
     else

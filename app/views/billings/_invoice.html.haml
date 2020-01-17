@@ -1,8 +1,8 @@
 .pdf-header
-	- if params[:type] == 'view' or request.format.pdf?
+	- if @view != 'mail'
 		= image_tag wicked_pdf_asset_base64('logo2.png'), width: '250'
 	- else
-		= image_tag 'logo2.png', width: '250'
+		= image_tag 'https://www.dropbox.com/s/8q5a4uk24l7r5tc/logo2.png?dl=1', width: '250'
 #billing-invoice
 	.receipt
 		%h1.text-center Receipt

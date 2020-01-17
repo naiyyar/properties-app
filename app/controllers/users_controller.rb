@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 	    																	.order('created_at desc')
 	  else
 	  	@limit       = 51
-    	@billings    = @current_user.billings.limit(@limit)
+    	@billings    = @current_user.billings.includes(:featured_building).limit(@limit)
 	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
 	  end
 
