@@ -14,13 +14,12 @@ class Users::SessionsController < Devise::SessionsController
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
     sign_in(resource_name, resource)
     message = I18n.t 'devise.sessions.signed_in'
-
+    resource.set_timezone(params[:user][:time_zone]) if resource.time_zone.blank?
     yield resource if block_given?
 
     if request.xhr?
       return render :json => {:success => true, :login => true, :data =>  {:message => message}}
     else
-      resource.set_timezone(params[:user][:time_zone]) if resource.time_zone.blank?
       respond_with resource, location: after_sign_in_path_for(resource)
     end
   end
