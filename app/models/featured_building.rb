@@ -4,10 +4,12 @@ class FeaturedBuilding < ApplicationRecord
   belongs_to :user
   has_one    :billing #, :dependent => :destroy
 
+  LOCAL_TIME_WITHOUT_TIMEZONE = Time.now.localtime.to_s(:no_timezone)
+
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
-  scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Time.now.to_s(:no_timezone)) }
-  scope :expired,     -> { where('end_date is not null AND end_date < ?', Time.now.to_s(:no_timezone)) }
+  scope :not_expired, -> { where('end_date is not null AND end_date >= ?', LOCAL_TIME_WITHOUT_TIMEZONE) }
+  scope :expired,     -> { where('end_date is not null AND end_date < ?', LOCAL_TIME_WITHOUT_TIMEZONE) }
   scope :by_manager,  -> { where(featured_by: 'manager') }
 
   pg_search_scope :search_query, 
@@ -42,24 +44,28 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def draft?
-    start_date.blank? and end_date.blank? and !active
+    !has_start_and_end_date? and !active
   end
 
   def live?
-    !draft? and end_date.to_s(:no_timezone) > Time.now.to_s(:no_timezone)
+    !draft? and localtime_end_date.to_s(:no_timezone) > LOCAL_TIME_WITHOUT_TIMEZONE
   end
 
   def expired?
     !live?
   end
 
+  def localtime_end_date
+    end_date.localtime
+  end
+
   DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
 
   def renew_plan? host
     if DEV_HOSTS.include?(host)
-      end_date.present? and Time.now.to_s(:no_timezone) == (end_date - 1.day).to_s(:no_timezone)
+      end_date.present? and LOCAL_TIME_WITHOUT_TIMEZONE == (localtime_end_date - 1.day).to_s(:no_timezone)
     else
-      end_date.present? and Time.now.to_s(:no_timezone) == (end_date - 2.day).to_s(:no_timezone)
+      end_date.present? and LOCAL_TIME_WITHOUT_TIMEZONE == (localtime_end_date - 2.day).to_s(:no_timezone)
     end
   end
 
@@ -69,11 +75,6 @@ class FeaturedBuilding < ApplicationRecord
     en_date = renew_date.present? ? (renew_date + 2.days) : (std + 2.days) #for 1 day on dev
     update(start_date: std, end_date: en_date, active: true, renew: true)
   end
-
-  #Later
-  # def send_renew_reminder?
-  #   end_date.present? and Date.today == end_date - 4.days
-  # end
 
   def self.expired_featurings
     by_manager.expired
