@@ -1,5 +1,7 @@
 class Billing < ApplicationRecord
 	PRICE = 49
+	INV_DESCRIPTION = 'Featured Building For Four Weeks Starting on'
+	
 	belongs_to :user
 	belongs_to :featured_building
 	
@@ -43,13 +45,13 @@ class Billing < ApplicationRecord
 	  	errors.add(:base, 'Email can not be blank.')  if email.blank?
 	  end
 	end
-
+	
 	def billing_description
 		fb = self.featured_building
 		unless renew_date
-			"Featured Building For Four Weeks Starting on #{fb.start_date&.strftime('%b %-d, %Y')}"
+			"ID #{fb.id} #{INV_DESCRIPTION} #{fb.start_date&.strftime('%b %-d, %Y')}"
 		else
-			"ID #{fb.id} Renewed Featured Building For Four Weeks Starting on #{(renew_date + 2.day).strftime('%b %-d, %Y')}"
+			"ID #{fb.id} Renewed #{INV_DESCRIPTION} #{(renew_date + 2.day).strftime('%b %-d, %Y')}"
 		end
 	end
 

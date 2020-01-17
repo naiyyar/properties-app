@@ -40,7 +40,8 @@
 						- if @saved_cards.present?
 							%p.bolder.font-md Credit cards
 							%table.table.table-striped.table-saved-cards
-								- @saved_cards.each do |card|
+								/ - saved_cards_count = @saved_cards.length
+								- @saved_cards.each_with_index do |card, index|
 									- exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
 									%tr
 										%td.v-align-middle.card-detail="#{card[:brand].capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
@@ -50,6 +51,5 @@
 							=link_to 'Add New Card', new_manager_featured_building_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm'
 				%h2 Invoice History
 
-				/ =link_to 'View Your Receipts', billings_path, remote: true, class: 'btn btn-primary'
 				#billings-table
 					= render 'billings/billings'

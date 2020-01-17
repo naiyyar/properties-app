@@ -57,10 +57,6 @@ class FeaturedBuilding < ApplicationRecord
 
   def renew_plan? host
     if DEV_HOSTS.include?(host)
-      #end_date.present? and Date.today == end_date - 1.days
-      #12 hrs before 
-      #end_date.present? and ((end_date.to_time - Date.today.to_time) / 1.hour).to_i == 12
-      #end_date.present? and Time.now.to_date == end_date.to_date - 1.day
       end_date.present? and Time.now.to_s(:no_timezone) == (end_date - 1.day).to_s(:no_timezone)
     else
       end_date.present? and Time.now.to_s(:no_timezone) == (end_date - 2.day).to_s(:no_timezone)
@@ -79,9 +75,17 @@ class FeaturedBuilding < ApplicationRecord
   #   end_date.present? and Date.today == end_date - 4.days
   # end
 
+  def self.expired_featurings
+    by_manager.expired
+  end
+
   def self.set_expired_plans_to_inactive
-    expired_plans = by_manager.expired
-    expired_plans.update_all(active: false, renew: false) if expired_plans.active.any?
+    expired_featurings.update_all(active: false, renew: false) if expired_featurings.active.any?
+  end
+
+  def self.set_expired_plans_to_inactive_if_autorenew_id_off
+    autorenew_off_plans = expired_featurings.where(renew: false)
+    autorenew_off_plans.update_all(active: false) if autorenew_off_plans.present?
   end
 
   private
