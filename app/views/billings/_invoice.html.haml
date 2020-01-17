@@ -1,5 +1,8 @@
 .pdf-header
-	= image_tag wicked_pdf_asset_base64('logo2.png'), width: '250'
+	- if params[:type] == 'view' or request.format.pdf?
+		= image_tag wicked_pdf_asset_base64('logo2.png'), width: '250'
+	- else
+		= image_tag 'logo2.png', width: '250'
 #billing-invoice
 	.receipt
 		%h1.text-center Receipt

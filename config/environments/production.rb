@@ -97,6 +97,7 @@ Rails.application.configure do
   }
 
   config.action_mailer.default_url_options = { host: 'https://aptreviews-app.herokuapp.com/' }
+  config.action_controller.asset_host      = ENV['SERVER_ROOT']
   config.action_mailer.asset_host          = ENV['SERVER_ROOT']
   config.action_mailer.delivery_method     = :smtp
 
