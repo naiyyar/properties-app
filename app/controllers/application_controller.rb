@@ -9,13 +9,20 @@ class ApplicationController < ActionController::Base
   before_action :popular_neighborhoods
   before_action :set_timezone, if: :user_signed_in?
 
-  helper_method :uptown_count, :brooklyn_count, :queens_count, :bronx_count
+  helper_method :browser_time_zone, :uptown_count, :brooklyn_count, :queens_count, :bronx_count
 
 
 
   def set_timezone  
     Time.zone = current_user.time_zone 
   end  
+
+  def browser_time_zone
+    browser_tz = ActiveSupport::TimeZone.find_tzinfo(cookies[:timezone])
+    ActiveSupport::TimeZone.all.find{ |zone| zone.tzinfo == browser_tz } || Time.zone
+  rescue TZInfo::UnknownTimezone, TZInfo::InvalidTimezoneIdentifier
+    Time.zone
+  end
   
   def store_location
     # store last url as long as it isn't a /users path

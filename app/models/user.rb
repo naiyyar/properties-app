@@ -100,7 +100,7 @@ class User < ApplicationRecord
        #if auth.provider == "twitter" 
        #  user.save(:validate => false) 
        #else
-         user.save
+        user.save
        #end
       end
       authorization.name = auth.info.name

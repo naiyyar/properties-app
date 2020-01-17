@@ -4,6 +4,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def all
     user = User.from_omniauth(request.env['omniauth.auth'], current_user)
+    user.set_timezone(browser_time_zone.name) if user.time_zone.blank?
     if user.persisted?
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => User::SOCIALS[params[:action].to_sym]
       session[:provider] = User::SOCIALS[params[:action].to_sym]
