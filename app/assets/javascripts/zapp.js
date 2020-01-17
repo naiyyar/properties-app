@@ -536,4 +536,7 @@
     $(document).on('click', 'select#sort', function(){
         //alert(12)
     })
+
+    //setting timezone
+    $('#user_time_zone').set_timezone(); 
 })(jQuery);

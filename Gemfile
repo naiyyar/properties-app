@@ -30,8 +30,9 @@ gem 'counter_cache_with_conditions'
 #D
 gem 'dalli'
 gem 'delayed_job_active_record'
-gem 'dynamic_form'
 gem 'devise', '4.4.3'
+gem 'detect_timezone_rails'
+gem 'dynamic_form'
 
 #E
 gem 'email_verifier'

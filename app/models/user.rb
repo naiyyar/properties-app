@@ -83,6 +83,10 @@ class User < ApplicationRecord
     true
   end
 
+  def set_timezone zone
+    update_column(:time_zone, zone)
+  end
+
   def self.from_omniauth(auth, current_user)
     authorization = Authorization.where(:provider => auth.provider, 
                                         :uid => auth.uid).first_or_initialize

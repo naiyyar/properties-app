@@ -15,6 +15,7 @@
   .form-group
     = f.password_field :password, autocomplete: "off", class: "form-control", placeholder: 'Password'
     %p.help-block
+    =f.hidden_field :time_zone
   .form-group
     .row
       .col-xs-6

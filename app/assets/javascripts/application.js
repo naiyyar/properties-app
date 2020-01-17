@@ -41,5 +41,7 @@
 //= require jquery.fancybox
 //= require input_validations
 //= require jquery.mask.min
+//= require detect_timezone
+//= require jquery.detect_timezone
 
 //= require_tree .

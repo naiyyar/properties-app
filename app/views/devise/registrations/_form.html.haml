@@ -18,7 +18,7 @@
   .form-group
     = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password', id: 'signup_user_password'
     %p.help-block
-  
+    =f.hidden_field :time_zone
   .form-group.apt-captcha
     =recaptcha_tags
     %p.help-block

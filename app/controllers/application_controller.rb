@@ -7,8 +7,15 @@ class ApplicationController < ActionController::Base
   after_action  :store_location,              unless: :skip_store_location
   #after_action :set_view_type
   before_action :popular_neighborhoods
+  before_action :set_timezone, if: :user_signed_in?
 
   helper_method :uptown_count, :brooklyn_count, :queens_count, :bronx_count
+
+
+
+  def set_timezone  
+    Time.zone = current_user.time_zone 
+  end  
   
   def store_location
     # store last url as long as it isn't a /users path
