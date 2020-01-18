@@ -9,12 +9,12 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-
+    time_zone = params[:user][:time_zone]
     session['user_auth'] = params[:user]
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
     sign_in(resource_name, resource)
     message = I18n.t 'devise.sessions.signed_in'
-    resource.set_timezone(params[:user][:time_zone]) if resource.time_zone.blank?
+    resource.set_timezone(time_zone) if time_zone != resource.time_zone
     yield resource if block_given?
 
     if request.xhr?
