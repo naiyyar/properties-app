@@ -78,10 +78,9 @@ class FeaturedBuilding < ApplicationRecord
     renew_date.present? ? (renew_date + 2.days) : (_start_date + 2.days) #for 1 day on dev
   end
 
-  #Later
-  # def send_renew_reminder?
-  #   end_date.present? and Date.today == end_date - 4.days
-  # end
+  def draft_edit?
+    !new_record? and live?
+  end
 
   def self.expired_featurings
     by_manager.expired

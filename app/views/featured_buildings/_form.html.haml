@@ -17,7 +17,7 @@
               = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_building.new_record?
               = f.hidden_field :user_id, value: current_user.id if current_user.present?
             
-            - if !@featured_building.new_record? and (@featured_building.live? or @featured_building.has_start_and_end_date?)
+            - if @featured_building.draft_edit?
               - submit_text = 'Save'
               .row
                 .col-xs-6.col-sm-6.col-md-6.col-lg-6
