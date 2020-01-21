@@ -1,6 +1,7 @@
 class BillingsController < ApplicationController
   load_and_authorize_resource
   before_action :set_billing, only: [:show, :edit, :update, :destroy, :email_receipt]
+  before_action :set_customer_id, only: [:show, :pay_using_saved_card]
   before_action :get_card, only: [:show]
   # GET /billings
   # GET /billings.json
@@ -59,14 +60,13 @@ class BillingsController < ApplicationController
   def pay_using_saved_card
     @billing = Billing.new(billing_params)
     respond_to do |format|
-      if @billing.save
-        @billing.create_charge_existing_card!(current_user.stripe_customer_id)
+      if @billing.save_and_charge_existing_card!(customer_id: @customer_id, card_id: billing_params[:billing_card_id])
         format.html { 
           redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' 
         }
       else
         format.html { 
-          flash[:error] = @billing.errors.messages[:credit_card]
+          flash[:error] = @billing.errors.messages[:credit_card][0]
           redirect_to :back 
         }
       end
@@ -83,7 +83,7 @@ class BillingsController < ApplicationController
         format.json { render :show, status: :created, location: @billing }
       else
         format.html { 
-          flash[:error] = @billing.errors.messages[:credit_card]
+          flash[:error] = @billing.errors.messages[:credit_card][0]
           redirect_to :back 
         }
         format.json { render json: @billing.errors, status: :unprocessable_entity }
@@ -126,9 +126,13 @@ class BillingsController < ApplicationController
       params.require(:billing).permit(:user_id, :featured_building_id, :amount, :stripe_card_id, :email, :description, :billing_card_id, :brand)
     end
 
+    def set_customer_id
+      @customer_id = current_user.stripe_customer_id
+    end
+
     def get_card
       if request.format.pdf? or params[:type] == 'view'
-        @card = BillingService.new.get_card(current_user.stripe_customer_id, @billing.billing_card_id) rescue nil
+        @card = BillingService.new.get_card(@customer_id, @billing.billing_card_id) rescue nil
       end
     end
 end

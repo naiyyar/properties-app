@@ -14,6 +14,22 @@ class BillingMailer < ApplicationMailer
 		)
 	end
 
+	def no_card_payment_failed to_email
+		mail(
+			to: to_email,
+			from: DEFAULT_EMAIL_WITH_NAME,
+			subject: 'Your most recent invoice payment failed.'
+		)
+	end
+
+	def payment_failed to_email
+		mail(
+			to: to_email,
+			from: DEFAULT_EMAIL_WITH_NAME,
+			subject: 'Your most recent invoice payment failed.'
+		)
+	end
+
 	# def send_renew_reminder to_email, featured_building
 	# 	@renew_date = featured_building.end_date - 2.days
 	# 	@user_name 	= featured_building.user.try(:name)

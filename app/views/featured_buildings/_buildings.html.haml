@@ -38,20 +38,18 @@
                         = featured_building&.billing&.user.try(:email)
 
                   %td
-                    - unless featured_building.featured_by_manager?
-                      = link_to 'edit', edit_featured_building_path(featured_building) 
+                    = link_to 'edit', edit_featured_building_path(featured_building) unless featured_building.featured_by_manager?
                   %td
-                    - unless featured_building.featured_by_manager?
-                      = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: "Are you sure you want to delete this featured building?"}, class: 'text-danger' 
+                    = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: "Are you sure you want to delete this featured building?"}, class: 'text-danger' unless featured_building.featured_by_manager?
                   %td
                     %input.apple-switch.sb-sm.feature-building.renew.disabled{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id, disabled: true }
                   %td
                     %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: featured_building.active, style: 'margin: 0px;', data: { fbid: featured_building.id } }
                 -else
-                  %td= link_to 'edit', edit_featured_building_path(featured_building)
                   %td
-                    - unless featured_building.has_start_and_end_date?
-                      = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: "Are you sure you want to delete this featured building?"}, class: 'text-danger'
+                    = link_to 'edit', edit_featured_building_path(featured_building) unless featured_building.expired?
+                  %td
+                    = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: "Are you sure you want to delete this featured building?"}, class: 'text-danger' unless featured_building.has_start_and_end_date?
                   %td
                     %input.apple-switch.sb-sm.feature-building.renew.disabled{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id, disabled: true }
                   %td

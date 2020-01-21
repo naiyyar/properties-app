@@ -20,13 +20,17 @@
               %td=billing.billing_description
               %td
                 = image_tag "card_brands/#{brand_name(billing.brand)}.svg", height: 20
-                %b.text-success Successful
+                - if billing.payment_failed?
+                  %b.text-danger Failed
+                - else
+                  %b.text-success Successful
               %td.text-center
-                =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), download: "invoice_#{date_created}", title: 'Download inovoice in pdf'
-                &nbsp;
-                =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true, title: 'Preview in browser'
-                &nbsp;
-                =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'email'), title: 'Send in mail', remote: true
+                - unless billing.payment_failed?
+                  =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), download: "invoice_#{date_created}", title: 'Download inovoice in pdf'
+                  &nbsp;
+                  =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true, title: 'Preview in browser'
+                  &nbsp;
+                  =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'email'), title: 'Send in mail', remote: true
               %td.text-center
           
           - if (@billings.present? and @billings.count > @limit - 1) and request.format.html?

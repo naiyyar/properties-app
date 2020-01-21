@@ -63,6 +63,7 @@ class FeaturedBuilding < ApplicationRecord
     else
       end_date.present? and CURRENT_DT.to_s(:no_timezone) == (end_date - 2.day).to_s(:no_timezone)
     end
+    #end_date.present? and CURRENT_DT.to_date == (end_date - 1.day).to_date
   end
 
   def set_expiry_date renew_date
