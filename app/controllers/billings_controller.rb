@@ -56,7 +56,8 @@ class BillingsController < ApplicationController
   end
 
   def delete_card
-    Stripe::Customer.delete_source(params[:customer_id], params[:card_id])
+    customer_id = current_user&.stripe_customer_id
+    Stripe::Customer.delete_source(customer_id, params[:card_id]) if customer_id.present?
     #current_user.update(stripe_customer_id: nil) if params[:update_customer_id] == 'true'
     render json: { status: :ok, success: true }
   end
