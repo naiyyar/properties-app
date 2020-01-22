@@ -1,6 +1,7 @@
 #receipt
-	=render 'billings/invoice', card: @card
+	#invoice-container
+		=render 'billings/invoice', card: @card
 
 
-	#signature
-		= render 'layouts/shared/sig_footer'
+		#signature
+			= render 'layouts/shared/sig_footer'

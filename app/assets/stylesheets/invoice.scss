@@ -72,19 +72,30 @@
 
 	.billing-table {
 		padding: 8px 42px;
-		.billing-detail tr th{
-			color: #8898aa;
+		.billing-detail {
+			margin-bottom: 25px;
+			tr th{
+				color: #8898aa;
+			}
+			tr th, tr td{
+				padding: 1px 0px;
+			}
+			tr td{
+				font-size: 14px;
+			}
 		}
 		.table tfoot tr, .table tfoot th{
 			background: #fff !important;
 		}
 		.summary-section{
-			h4{
+			b{
 				color: #8898aa;
+				padding-bottom: 8px;
 			}
 			.inner{
 				background: #f6f9fc;
 				padding: 8px;
+				margin-top: 10px;
 			}
 		}
 	}
@@ -103,8 +114,12 @@
 	}
 
 	.help-block{
-		margin-top: 30px;
 		font-size: 15px;
 		font-style: inherit;
+	}
+
+	.spacer{
+		border-top: 1px solid #ddd;
+		margin: 35px 0px;
 	}
 }

@@ -10,36 +10,156 @@
 		%p.text-center.text-muted="Receipt ##{@billing.id}"
 
 	.billing-table
-		%table.table.billing-detail
+		%table.billing-detail
 			%tr
-				%th AMOUNT PAID
-				%th DATE PAID
-				%th PAYMENT METHOD
+				%th.text-left AMOUNT PAID
+				%th.text-left DATE PAID
+				%th.text-left PAYMENT METHOD
 
 			%tr
-				%td= number_to_currency(amount = @billing.amount, precision: 2)
-				%td=@billing.created_at&.strftime("%b %-d, %Y")
-				%td
+				%td.text-left= number_to_currency(amount = @billing.amount, precision: 2)
+				%td.text-left=@billing.created_at&.strftime("%b %-d, %Y")
+				%td.text-left
 					/ https://stripe-images.s3.amazonaws.com/emails/receipt_assets/card/visa-dark@2x.png
 					="#{@billing.brand} - #{card['last4']}" if card.present?
 
 		.summary-section
-			%h4 SUMMARY
+			%p.text-left SUMMARY
 			.inner
 				%table
 					%tr
-						%td{width: '70%'}=@billing.billing_description
-						%td.text-right= number_to_currency(amount = @billing.amount, precision: 2)
+						%td.text-left{width: '70%', style: 'border-bottom: 1px solid #ddd;'}=@billing.billing_description
+						%td.text-right{style: 'border-bottom: 1px solid #ddd;'}= number_to_currency(amount = @billing.amount, precision: 2)
 
 					%tfoot
 						%tr
-							%th.font-md Total Amount paid
+							%th.font-md.text-left Total Amount paid
 							%th.font-md.text-right= number_to_currency(amount, precision: 2)
 
-		.help-block
+		.spacer
+
+		.help-block.text-left
 			If you have any questions, contact us at 
 			%a{href: 'mailto: hello@transparentcity.co'} 
 				%span{style: "border: 0; margin: 0; padding: 0; color: #556cd6; text-decoration: none;", dir: "ltr"}hello@transparentcity.co
 			or call at 
 			%a{href: 'tel:+15165670265', style:"border: 0; margin: 0; padding: 0; color: #515f66; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif; text-decoration: none;", target: "_blank", rel: "noreferrer"}
 				%span{style: "border: 0; margin: 0; padding: 0; color: #556cd6; text-decoration: none;", dir: "ltr"}+1 516-567-0265
+
+
+:css
+	#invoice-container {
+		background-color: #fff;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu,sans-serif;
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		min-width: 100% !important;
+		width: 100% !important;
+	}
+	.pdf-header {
+		width: 400px;
+		margin: 30px auto 30px auto;
+		text-align: center !important;
+	}
+	.pdf-container {
+		width: 100%;
+	}
+	.divider {
+		border: 1px solid #333;
+	}
+	#billing-invoice .text-muted {
+		color: #999 !important;
+	}
+	#billing-invoice .text-center {
+		text-align: center !important;
+	}
+	#billing-invoice .text-right {
+		text-align: right !important;
+	}
+	#billing-invoice .text-left {
+		text-align: left !important;
+	}
+	#billing-invoice .font-md {
+		font-size: 15px !important;
+	}
+	#billing-invoice .receipt {
+		min-width: 150px;
+		margin: 0 auto;
+		max-width: 400px;
+	}
+	#billing-invoice .receipt p:first-child {
+		font-size: 22px;
+		margin: 0px;
+	}
+	#billing-invoice .receipt p:last-child {
+		font-size: 15px;
+		margin: 6px;
+	}
+	#billing-invoice .payment-date {
+		 background: #f2f2f2 !important;
+		 width: 100%;
+		 padding: 8px 10px 8px 20px !important;
+		 border-top: 1px solid #ddd;
+		 border-bottom: 1px solid #ddd;
+		 font-size: 14px;
+		 color: #4b4b4b;
+	}
+	#billing-invoice .billing-table, 
+	#billing-invoice .payment-date {
+		margin-top: 40px;
+	}
+	#billing-invoice .billing-table {
+		padding: 8px 20px;
+	}
+	#billing-invoice .billing-table .billing-detail {
+		margin-bottom: 25px;
+	}
+	#billing-invoice .billing-table .billing-detail tr th {
+		color: #8898aa;
+	}
+	#billing-invoice .billing-table .billing-detail tr th, #billing-invoice .billing-table .billing-detail tr td {
+		padding: 1px 0px;
+	}
+	#billing-invoice .billing-table .billing-detail tr td {
+		font-size: 14px;
+	}
+	#billing-invoice .billing-table .table tfoot tr, 
+	#billing-invoice .billing-table .table tfoot th {
+		background: #fff !important;
+	}
+	#billing-invoice .billing-table .summary-section p {
+		color: #8898aa;
+		margin: 0px;
+		padding: 0px;
+		font-weight: bolder;
+	}
+	#billing-invoice .billing-table .summary-section .inner {
+		background: #f6f9fc;
+		padding: 8px;
+		margin-top: 10px;
+	}
+	#billing-invoice table {
+		width: 100%;
+	}
+	#billing-invoice table tr th, #billing-invoice table tr td {
+		padding: 8px 10px;
+	}
+	#billing-invoice .table > thead > tr > th, 
+	#billing-invoice .table > thead > tr > td, 
+	#billing-invoice .table > tbody > tr > th, 
+	#billing-invoice .table > tbody > tr > td, 
+	#billing-invoice .table > tfoot > tr > th, 
+	#billing-invoice .table > tfoot > tr > td {
+		padding: 8px;
+		line-height: 1.428571429;
+		vertical-align: middle;
+		border-top: 1px solid #ddd;
+	}
+	#billing-invoice .help-block {
+		font-size: 15px;
+		font-style: inherit;
+	}
+	#billing-invoice .spacer {
+		border-top: 1px solid #ddd;
+		margin: 35px 0px;
+	}
