@@ -6,11 +6,12 @@
 					%span{"aria-hidden" => "true"} &times;
       
 			.modal-body.no-padding
-				=render 'billings/invoice', card: @card
+				#invoice-container
+					=render 'billings/invoice', card: @card
 
-				%br
-				%br
-				%br
-				%br
+					%br
+					%br
+					%br
+					%br
 
-				= render 'layouts/shared/sig_footer'
+					= render 'layouts/shared/sig_footer'

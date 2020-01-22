@@ -3,28 +3,43 @@
 		= image_tag wicked_pdf_asset_base64('logo2.png'), width: '250'
 	- else
 		= image_tag 'https://www.dropbox.com/s/8q5a4uk24l7r5tc/logo2.png?dl=1', width: '250'
+
 #billing-invoice
-	.receipt
-		%h1.text-center Receipt
-		.divider
-		%h3.text-muted.text-center="#{@billing.brand} #{card['last4']}" if card.present?
-
-	.payment-date
-		%b=@billing.created_at&.strftime("%b %-d, %Y")
-		.fl-right{style: 'float: right;margin-right: 15px;'}="Invoice: ##{@billing.id}"
-
+	.receipt.text-center
+		%p.text-center Receipt from transparentcity
+		%p.text-center.text-muted="Receipt ##{@billing.id}"
 
 	.billing-table
-		%table.table
+		%table.table.billing-detail
 			%tr
-				%th.text-left Description
-				%th.text-right{width: '22%'} Amount
+				%th AMOUNT PAID
+				%th DATE PAID
+				%th PAYMENT METHOD
 
 			%tr
-				%td.text-left=@billing.billing_description
-				%td.text-right= number_to_currency(amount = @billing.amount, precision: 2)
+				%td= number_to_currency(amount = @billing.amount, precision: 2)
+				%td=@billing.created_at&.strftime("%b %-d, %Y")
+				%td
+					/ https://stripe-images.s3.amazonaws.com/emails/receipt_assets/card/visa-dark@2x.png
+					="#{@billing.brand} - #{card['last4']}" if card.present?
 
-			%tfoot
-				%tr
-					%th.text-right.font-md Total
-					%th.text-right.font-md= number_to_currency(amount, precision: 2)
+		.summary-section
+			%h4 SUMMARY
+			.inner
+				%table
+					%tr
+						%td{width: '70%'}=@billing.billing_description
+						%td.text-right= number_to_currency(amount = @billing.amount, precision: 2)
+
+					%tfoot
+						%tr
+							%th.font-md Total Amount paid
+							%th.font-md.text-right= number_to_currency(amount, precision: 2)
+
+		.help-block
+			If you have any questions, contact us at 
+			%a{href: 'mailto: hello@transparentcity.co'} 
+				%span{style: "border: 0; margin: 0; padding: 0; color: #556cd6; text-decoration: none;", dir: "ltr"}hello@transparentcity.co
+			or call at 
+			%a{href: 'tel:+15165670265', style:"border: 0; margin: 0; padding: 0; color: #515f66; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif; text-decoration: none;", target: "_blank", rel: "noreferrer"}
+				%span{style: "border: 0; margin: 0; padding: 0; color: #556cd6; text-decoration: none;", dir: "ltr"}+1 516-567-0265

@@ -1,6 +1,15 @@
+#invoice-container{
+	background-color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  min-width: 100% !important;
+  width: 100% !important;
+}
+
 .pdf-header {
 	width: 400px;
-	margin: 40px auto 50px auto;
+	margin: 30px auto 30px auto;
 	text-align: center !important;
 }
 
@@ -35,7 +44,16 @@
 	.receipt {
 		min-width: 150px;
     margin: 0 auto;
-    max-width: 200px;
+    max-width: 400px;
+    p{
+	    &:first-child{
+	    	font-size: 22px;
+	    }
+	    &:last-child{
+	    	font-size: 15px;
+	    }
+	  }
+
 	}
 
 	.payment-date{
@@ -53,9 +71,21 @@
 	}
 
 	.billing-table {
-		padding: 8px 20px;
+		padding: 8px 42px;
+		.billing-detail tr th{
+			color: #8898aa;
+		}
 		.table tfoot tr, .table tfoot th{
 			background: #fff !important;
+		}
+		.summary-section{
+			h4{
+				color: #8898aa;
+			}
+			.inner{
+				background: #f6f9fc;
+				padding: 8px;
+			}
 		}
 	}
 	table{
@@ -70,5 +100,11 @@
     line-height: 1.428571429;
     vertical-align: middle;
     border-top: 1px solid #ddd;
+	}
+
+	.help-block{
+		margin-top: 30px;
+		font-size: 15px;
+		font-style: inherit;
 	}
 }
