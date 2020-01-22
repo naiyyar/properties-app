@@ -16,7 +16,7 @@ namespace :featured_plan do
 			if featured_building.renew_plan?(ENV['SERVER_ROOT'])
 				customer_id = user.stripe_customer_id
 				if customer_id.present?
-					card = BillingService.new.saved_cards(customer_id).last #cosidering last card default card
+					card = BillingService.new.saved_cards(customer_id).last rescue nil #cosidering last card default card
 					if card.present?
 						@billing 	= Billing.new({ email: 								user_email,
 																			amount: 						  Billing::PRICE,

@@ -44,7 +44,11 @@ class BillingsController < ApplicationController
 
   def create_new_card
     billing_service = BillingService.new(params[:billing][:stripe_card_id], params[:email])
-    billing_service.create_source(billing_service.get_customer_id(current_user))
+    begin
+      billing_service.create_source(billing_service.get_customer_id(current_user))
+    rescue Stripe::CardError => e
+      puts "ERROR: #{e.message}"
+    end
     
     respond_to do |format|
       format.html { redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Card successfully saved.' }
@@ -53,7 +57,7 @@ class BillingsController < ApplicationController
 
   def delete_card
     Stripe::Customer.delete_source(params[:customer_id], params[:card_id])
-    current_user.update(stripe_customer_id: nil) if params[:update_customer_id] == 'true'
+    #current_user.update(stripe_customer_id: nil) if params[:update_customer_id] == 'true'
     render json: { status: :ok, success: true }
   end
 
@@ -123,7 +127,7 @@ class BillingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def billing_params
-      params.require(:billing).permit(:user_id, :featured_building_id, :amount, :stripe_card_id, :email, :description, :billing_card_id, :brand)
+      params.require(:billing).permit(:user_id, :featured_building_id, :amount, :stripe_card_id, :email, :description, :billing_card_id, :brand, :last4)
     end
 
     def set_customer_id

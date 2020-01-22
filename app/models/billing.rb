@@ -25,6 +25,7 @@ class Billing < ApplicationRecord
       	card 									= billing_service.create_source(customer_id)
       	self.billing_card_id 	= card.id
       	self.brand						= card.brand
+      	self.last4            = card.last4
         charge 								= billing_service.create_stripe_charge(customer_id)
         self.stripe_charge_id = charge.id
         save
