@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  
+  mount StripeEvent::Engine, at: '/stripe-events'
+  
   resources :billings do
     member do
       post :email_receipt

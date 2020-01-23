@@ -101,6 +101,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sitemap_generator'
 gem 'social-share-button'
 gem 'stripe'
+gem 'stripe_event'
 
 #T
 gem 'thumbs_up'

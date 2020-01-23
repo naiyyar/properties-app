@@ -3,15 +3,12 @@ class BillingsController < ApplicationController
   before_action :set_billing, only: [:show, :edit, :update, :destroy, :email_receipt]
   before_action :set_customer_id, only: [:show, :pay_using_saved_card]
   before_action :get_card, only: [:show]
-  # GET /billings
-  # GET /billings.json
+  
   def index
     @limit    = 51
     @billings = @current_user.billings.limit(@limit)
   end
 
-  # GET /billings/1
-  # GET /billings/1.json
   def show
     @view = 'pdf'
     respond_to do |format|
@@ -37,7 +34,6 @@ class BillingsController < ApplicationController
     redirect_to :back
   end
 
-  # GET /billings/new
   def new
     @billing = Billing.new
   end
@@ -58,7 +54,6 @@ class BillingsController < ApplicationController
   def delete_card
     customer_id = current_user&.stripe_customer_id
     Stripe::Customer.delete_source(customer_id, params[:card_id]) if customer_id.present?
-    #current_user.update(stripe_customer_id: nil) if params[:update_customer_id] == 'true'
     render json: { status: :ok, success: true }
   end
 
@@ -78,8 +73,6 @@ class BillingsController < ApplicationController
     end
   end
 
-  # POST /billings
-  # POST /billings.json
   def create
     @billing = Billing.new(billing_params)
     respond_to do |format|
@@ -96,8 +89,6 @@ class BillingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /billings/1
-  # PATCH/PUT /billings/1.json
   def update
     respond_to do |format|
       if @billing.update(billing_params)
@@ -110,8 +101,6 @@ class BillingsController < ApplicationController
     end
   end
 
-  # DELETE /billings/1
-  # DELETE /billings/1.json
   def destroy
     @billing.destroy
     respond_to do |format|
@@ -121,12 +110,11 @@ class BillingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_billing
       @billing = Billing.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def billing_params
       params.require(:billing).permit(:user_id, :featured_building_id, :amount, :stripe_card_id, :email, :description, :billing_card_id, :brand, :last4)
     end
@@ -135,6 +123,7 @@ class BillingsController < ApplicationController
       @customer_id = current_user.stripe_customer_id
     end
 
+    # TODO: TO REMOVE WHEN MERGING WITH PRODUCTION
     def get_card
       if request.format.pdf? or params[:type] == 'view'
         @card = BillingService.new.get_card(@customer_id, @billing.billing_card_id) rescue nil
