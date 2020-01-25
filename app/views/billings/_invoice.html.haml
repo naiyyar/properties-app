@@ -36,15 +36,7 @@
 							%th.font-md.text-left Total Amount paid
 							%th.font-md.text-right= number_to_currency(amount, precision: 2)
 
-		.spacer
-
-		.help-block.text-left
-			If you have any questions, contact us at 
-			%a{href: 'mailto: hello@transparentcity.co'} 
-				%span{style: "border: 0; margin: 0; padding: 0; color: #556cd6; text-decoration: none;", dir: "ltr"}hello@transparentcity.co
-			or call at 
-			%a{href: 'tel:+15165670265', style:"border: 0; margin: 0; padding: 0; color: #515f66; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif; text-decoration: none;", target: "_blank", rel: "noreferrer"}
-				%span{style: "border: 0; margin: 0; padding: 0; color: #556cd6; text-decoration: none;", dir: "ltr"}+1 516-567-0265
+		=render 'billing_mailer/help_block'
 
 
 :css
@@ -81,19 +73,6 @@
 	}
 	#billing-invoice .font-md {
 		font-size: 15px !important;
-	}
-	#billing-invoice .receipt {
-		min-width: 150px;
-		margin: 0 auto;
-		max-width: 400px;
-	}
-	#billing-invoice .receipt p:first-child {
-		font-size: 22px;
-		margin: 0px;
-	}
-	#billing-invoice .receipt p:last-child {
-		font-size: 15px;
-		margin: 6px;
 	}
 	#billing-invoice .payment-date {
 		 background: #f2f2f2 !important;
@@ -154,12 +133,4 @@
 		line-height: 1.428571429;
 		vertical-align: middle;
 		border-top: 1px solid #ddd;
-	}
-	#billing-invoice .help-block {
-		font-size: 15px;
-		font-style: inherit;
-	}
-	#billing-invoice .spacer {
-		border-top: 1px solid #ddd;
-		margin: 35px 0px;
 	}

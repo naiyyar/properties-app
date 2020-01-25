@@ -22,7 +22,9 @@ class BillingMailer < ApplicationMailer
 		)
 	end
 
-	def payment_failed to_email
+	def payment_failed billing, to_email
+		@brand = billing.brand
+		@last4 = billing.last4
 		mail(
 			to: to_email,
 			from: DEFAULT_EMAIL_WITH_NAME,

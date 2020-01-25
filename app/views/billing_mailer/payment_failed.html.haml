@@ -1,6 +1,14 @@
 #receipt
-	#billing-invoice{style: 'height: 300px;'}
-		%p Unfortunately, your most recent invoice payment for $49.00 was declined. This could be due to a change in your card number, your card expiring, cancellation of your credit card, or the card issuer not recognizing the payment and therefore taking action to prevent it.
+	#invoice-container
+		#billing-invoice{style: 'height: 300px;'}
+			.receipt.text-center{style: 'max-width: 500px;'}
+				%p.text-center{style: 'color: #615c5c;padding: 20px 0px 0px;'} $49 payment to transparentcity was unsuccessful
+				%p.text-center.text-muted="#{@brand} - #{@last4}"
+			
+			%div{style: 'padding: 8px 20px;'}
+				%p{style: 'font-size: 16px;'}="We were unable to charge your #{@brand} ending in #{@last4} for your transparentcity subscription. Please update your billing information."
+			
+				=render 'billing_mailer/help_block'
 
-	#signature
-		= render 'layouts/shared/sig_footer'
+		#signature
+			= render 'layouts/shared/sig_footer'

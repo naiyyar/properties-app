@@ -12,12 +12,26 @@ module Stripe
       end
     end
 
+    def billing_user customer
+      User.find_by(stripe_customer_id: customer)
+    end
+
+    def billing charge
+      Billing.find_by(stripe_charge_id: charge)
+    end
+
     def handle_charge_failed(event)
-      puts 'handle_charge_failed'
+      user    = billing_user(event.data.object.customer)
+      billing = billing(event.data.object.id)
+      BillingMailer.payment_failed(billing, user.email).deliver
     end
 
     def handle_charge_succeeded(event)
-      puts 'handle_charge_succeeded'
+      billing = billing(event.data.object.id)
+      billing.update_status('Successful')
+      billing.set_featured_building_end_date
+      BillingMailer.send_payment_receipt(billing: billing).deliver
     end
+
   end
 end

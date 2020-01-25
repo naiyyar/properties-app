@@ -92,8 +92,10 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def self.set_expired_plans_to_inactive_if_autorenew_is_off
-    autorenew_off_plans = expired_featurings.where(renew: false)
-    autorenew_off_plans.update_all(active: false) if autorenew_off_plans.present?
+    if expired_featurings.any?
+      autorenew_off_plans = expired_featurings.where(renew: false)
+      autorenew_off_plans.update_all(active: false) if autorenew_off_plans.present?
+    end
   end
 
   private
