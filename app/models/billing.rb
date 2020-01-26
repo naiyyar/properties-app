@@ -8,7 +8,7 @@ class Billing < ApplicationRecord
 	attr_accessor :description, :strp_customer_id
 	validates_presence_of :email
 
-	#after_save :set_featured_building_end_date, :send_email, unless: :payment_failed?
+	after_save :set_featured_building_end_date, unless: :payment_failed?
 
 	default_scope {order(created_at: :desc)}
 
@@ -42,14 +42,13 @@ class Billing < ApplicationRecord
 		if valid?
 			begin
 				billing_service 			= BillingService.new
-				charge 								= billing_service.create_stripe_charge(options[:customer_id], options[:card_id])
+				@charge 							= billing_service.create_stripe_charge(options[:customer_id], options[:card_id])
+				self.stripe_charge_id = @charge.id
+				save
 			rescue Stripe::CardError => e
 	      errors.add :credit_card, e.message
 	      false
 	    end
-	    self.stripe_charge_id = charge.id if charge.present?
-	    self.status 					= 'Failed'  if charge.blank?
-			save
 	  else
 	  	errors.add(:base, 'Email can not be blank.')  if email.blank?
 	  end

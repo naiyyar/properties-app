@@ -29,7 +29,6 @@ namespace :featured_plan do
 						unless @billing.save_and_charge_existing_card!(customer_id: customer_id, card_id: card.id)
 							@billing.status = 'Failed'
 							@billing.save
-							BillingMailer.payment_failed(user_email).deliver
 						end
 					else
 						BillingMailer.no_card_payment_failed(user_email).deliver

@@ -22,11 +22,19 @@ class BillingMailer < ApplicationMailer
 		)
 	end
 
-	def payment_failed billing, to_email
-		@brand = billing.brand
-		@last4 = billing.last4
+	def payment_failed options={}
+		@brand = options[:brand]
+		@last4 = options[:last4]
 		mail(
-			to: to_email,
+			to: options[:to_email],
+			from: DEFAULT_EMAIL_WITH_NAME,
+			subject: 'Your most recent invoice payment failed.'
+		)
+	end
+
+	def charge_expired options={}
+		mail(
+			to: options[:to_email],
 			from: DEFAULT_EMAIL_WITH_NAME,
 			subject: 'Your most recent invoice payment failed.'
 		)

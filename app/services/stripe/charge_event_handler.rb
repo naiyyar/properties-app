@@ -20,16 +20,22 @@ module Stripe
       Billing.find_by(stripe_charge_id: charge)
     end
 
+    def handle_charge_expired(event)
+      object = event.data.object
+      user   = billing_user(object.customer)
+      BillingMailer.charge_expired(to_email: user.email).deliver
+    end
+
     def handle_charge_failed(event)
-      user    = billing_user(event.data.object.customer)
-      billing = billing(event.data.object.id)
-      BillingMailer.payment_failed(billing, user.email).deliver
+      object = event.data.object
+      user   = billing_user(object.customer)
+      card   = object.payment_method_details.card
+      BillingMailer.payment_failed(brand: card.brand, last4: card.last4, to_email: user.email).deliver
     end
 
     def handle_charge_succeeded(event)
       billing = billing(event.data.object.id)
       billing.update_status('Successful')
-      billing.set_featured_building_end_date
       BillingMailer.send_payment_receipt(billing: billing).deliver
     end
 

@@ -11,7 +11,10 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def mailer_actions
-  	['send_payment_receipt', 'no_card_payment_failed','payment_failed']
+  	[ 'send_payment_receipt', 
+      'no_card_payment_failed',
+      'payment_failed', 
+      'charge_expired']
   end
 
 end
