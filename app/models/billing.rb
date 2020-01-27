@@ -20,15 +20,15 @@ class Billing < ApplicationRecord
 		if valid?
       begin
       	#stripe_card_id is same as payment_token
-      	billing_service 			= BillingService.new(stripe_card_id, email, description)
-      	customer_id 					= billing_service.get_customer_id(user)
-      	card 									= billing_service.create_source(customer_id)
-      	self.billing_card_id 	= card.id
-      	self.brand						= card.brand
-      	self.last4            = card.last4
-        charge 								= billing_service.create_stripe_charge(customer_id)
-        self.stripe_charge_id = charge.id
-        save
+      	billing_service 	= BillingService.new(stripe_card_id, email)
+      	customer_id 			= billing_service.get_customer_id(user)
+      	card 							= billing_service.create_source(customer_id)
+      	billing_card_id 	= card.id
+      	brand							= card.brand
+      	last4            	= card.last4
+        if save
+        	billing_service.create_charge!(billing: self, customer_id: customer_id)
+        end
       rescue Stripe::CardError => e
         errors.add :credit_card, e.message
         false
@@ -41,10 +41,11 @@ class Billing < ApplicationRecord
 	def save_and_charge_existing_card! options={}
 		if valid?
 			begin
-				billing_service 			= BillingService.new
-				@charge 							= billing_service.create_stripe_charge(options[:customer_id], options[:card_id])
-				self.stripe_charge_id = @charge.id
-				save
+				billing_service = BillingService.new(nil, options[:email])
+				if save
+					options.merge!(billing: self)
+					billing_service.create_charge!(options)
+				end
 			rescue Stripe::CardError => e
 	      errors.add :credit_card, e.message
 	      false

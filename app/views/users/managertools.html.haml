@@ -49,7 +49,7 @@
 											=link_to 'Delete', 'javascript:;', class: 'btn btn-danger btn-sm delete-card', data: { disable_with: 'Deleting...', cid:  card[:id]}
 						.pull-left
 							=link_to 'Add New Card', new_manager_featured_building_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm'
-				%h2 Invoice History
+				%h2 Billing Transactions
 
 				#billings-table
 					= render 'billings/billings'

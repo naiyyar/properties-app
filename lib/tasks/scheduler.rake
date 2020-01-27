@@ -26,7 +26,7 @@ namespace :featured_plan do
 																			billing_card_id:      card.id,
 																			brand: 								card.brand
 																		})
-						unless @billing.save_and_charge_existing_card!(customer_id: customer_id, card_id: card.id)
+						unless @billing.save_and_charge_existing_card!(customer_id: customer_id, email: user_email, card_id: card.id)
 							@billing.status = 'Failed'
 							@billing.save
 						end

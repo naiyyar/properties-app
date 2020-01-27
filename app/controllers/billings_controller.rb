@@ -59,8 +59,9 @@ class BillingsController < ApplicationController
 
   def pay_using_saved_card
     @billing = Billing.new(billing_params)
+    email    = billing_params[:email]
     respond_to do |format|
-      if @billing.save_and_charge_existing_card!(customer_id: @customer_id, card_id: billing_params[:billing_card_id])
+      if @billing.save_and_charge_existing_card!(customer_id: @customer_id, email: email, card_id: billing_params[:billing_card_id])
         format.html {
           redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' 
         }

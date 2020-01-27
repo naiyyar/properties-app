@@ -1,10 +1,9 @@
 class BillingService
-	attr_accessor :payment_token, :customer_email, :description
+	attr_accessor :payment_token, :customer_email
 
-	def initialize payment_token=nil, customer_email=nil, description=nil
+	def initialize payment_token=nil, customer_email=nil
 		@payment_token 	= payment_token
 		@customer_email = customer_email
-		@description 		= description
 	end
 
 	def get_saved_cards current_user
@@ -37,13 +36,20 @@ class BillingService
     return customer_id
 	end
 
-	def create_stripe_charge customer_id, card_id=nil
+	def create_charge! options={}
+		billing = options[:billing]
+		charge  = create_stripe_charge(billing, options[:customer_id], options[:card_id])
+		billing.update_column(:stripe_charge_id, charge.id) if charge.present?
+	end
+
+	def create_stripe_charge billing, customer_id, card_id=nil
 		Stripe::Charge.create(
     	customer:  		customer_id,
     	card: 				card_id,
       amount: 	 		Billing::PRICE * 100,
       currency:  		'usd',
-      description: 	@description
+      description: 	billing.billing_description,
+      receipt_email: @customer_email
     )
 	end
 end
