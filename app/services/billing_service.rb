@@ -11,19 +11,19 @@ class BillingService
 	end
 
 	def saved_cards cust_id
-		Stripe::Customer.list_sources(cust_id).data rescue nil
+		customer.list_sources(cust_id).data rescue nil
 	end
 
 	def get_card customer_id, card_id
-		Stripe::Customer.retrieve_source(customer_id, card_id)
+		customer.retrieve_source(customer_id, card_id)
 	end
 
 	def create_stripe_customer
-		Stripe::Customer.create(email: @customer_email, description: "Customer for #{@customer_email}")
+		customer.create(email: @customer_email, description: "Customer for #{@customer_email}")
 	end
 
 	def create_source cust_id
-		Stripe::Customer.create_source(cust_id,{ source: @payment_token })
+		customer.create_source(cust_id,{ source: @payment_token })
 	end
 
 	def get_customer_id current_user
@@ -51,5 +51,10 @@ class BillingService
       description: 	billing.billing_description,
       receipt_email: @customer_email
     )
+	end
+
+	private
+	def customer
+		Stripe::Customer
 	end
 end
