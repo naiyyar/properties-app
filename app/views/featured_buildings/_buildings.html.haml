@@ -46,11 +46,10 @@
                   %td
                     %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: featured_building.active, style: 'margin: 0px;', data: { fbid: featured_building.id } }
                 -else
+                  %td 
+                    = link_to 'edit', edit_featured_building_path(featured_building) if featured_building.draft? or featured_building.live?
                   %td
-                    - if featured_building.draft? or featured_building.expired?
-                      = link_to 'edit', edit_featured_building_path(featured_building)
-                  %td
-                    = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: "Are you sure you want to delete this featured building?"}, class: 'text-danger' unless featured_building.has_start_and_end_date?
+                    = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: 'Are you sure you want to delete this featured building?'}, class: 'text-danger' if featured_building.draft?
                   %td
                     %input.apple-switch.sb-sm.feature-building.renew.disabled{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id, disabled: true }
                   %td
