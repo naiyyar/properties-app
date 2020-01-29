@@ -34,7 +34,7 @@ $(document).ready(function(){
       function disableInputs() {
         Array.prototype.forEach.call(
           form.querySelectorAll(
-            "input[type='text'], input[type='email'], input[type='submit']"
+            "input[type='text'], input[type='email']"
           ),
           function(input) {
             input.setAttribute('disabled', 'true');
@@ -88,7 +88,7 @@ $(document).ready(function(){
         // Trigger HTML5 validation UI on the form if any of the inputs fail
         // validation.
         enableSubmitButton();
-        
+
         var plainInputsValid = true;
         Array.prototype.forEach.call(form.querySelectorAll('input'), function(input) {
           if (input.checkValidity && !input.checkValidity()) {
@@ -105,7 +105,7 @@ $(document).ready(function(){
         // Show a loading screen...
         //example.classList.add('submitting');
         // Disable all inputs.
-        disableInputs();
+        //disableInputs();
         // Use Stripe.js to create a token. We only need to pass in one Element
         // from the Element group in order to create a token. We can also pass
         // in the additional customer data we collected in our form.

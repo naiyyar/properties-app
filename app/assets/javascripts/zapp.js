@@ -538,7 +538,7 @@
     })
 
     //setting timezone
-    $('#user_time_zone').set_timezone(); 
+    $('.user_time_zone').set_timezone(); 
     const timezone = $('#user_time_zone').val(); 
     //setting in cookies to access using helper method on application controller
     function setCookie(name, value) {

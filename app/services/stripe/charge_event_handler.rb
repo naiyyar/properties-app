@@ -33,10 +33,9 @@ module Stripe
     end
 
     def handle_charge_succeeded(event)
-      puts 'handle_charge_succeeded'
       billing = billing(event.data.object.id)
       billing.update_status('Successful') if billing.present?
-      #BillingMailer.send_payment_receipt(billing: billing).deliver
+      billing.update_column(:receipt_number, event.data.object.receipt_number)
     end
 
   end

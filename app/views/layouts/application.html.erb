@@ -58,10 +58,6 @@
     <%= javascript_include_tag 'home' %>
     <%= javascript_include_tag 'zapp' %>
 
-    <script type="text/javascript" src="https://js.stripe.com/v3/">
-      Stripe.setPublishableKey("<%= STRIPE_PUBLIC_KEY %>");
-    </script>
-
     <script type="text/javascript">
       $(function(){new app.apartments;})
       //hiding autocomplete search results when no input given

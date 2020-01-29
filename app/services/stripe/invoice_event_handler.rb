@@ -13,13 +13,10 @@ module Stripe
     end
 
     def handle_invoice_payment_failed(event)
-    	puts event
     	puts 'handle_invoice_payment_failed'
     end
 
     def handle_invoice_payment_succeeded(event)
-    	puts '##################'
-    	puts event
     	puts 'handle_invoice_payment_succeeded'
     end
   end
