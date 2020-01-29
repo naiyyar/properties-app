@@ -13,10 +13,17 @@ $(document).ready(function(){
       var error         = form.querySelector('.error');
       var errorMessage  = error.querySelector('.message');
 
+      function enableSubmitButton(){
+        var sbmt_input = $('.btn_submit.btn_submit_stripe-form')[0];
+        if(sbmt_input){
+          sbmt_input.disabled = false;
+        }
+      }
+
       function enableInputs() {
         Array.prototype.forEach.call(
           form.querySelectorAll(
-            "input[type='text'], input[type='email']"
+            "input[type='text'], input[type='email'], input[type='submit']"
           ),
           function(input) {
             input.removeAttribute('disabled');
@@ -27,7 +34,7 @@ $(document).ready(function(){
       function disableInputs() {
         Array.prototype.forEach.call(
           form.querySelectorAll(
-            "input[type='text'], input[type='email']"
+            "input[type='text'], input[type='email'], input[type='submit']"
           ),
           function(input) {
             input.setAttribute('disabled', 'true');
@@ -80,10 +87,10 @@ $(document).ready(function(){
         e.preventDefault();
         // Trigger HTML5 validation UI on the form if any of the inputs fail
         // validation.
+        enableSubmitButton();
+        
         var plainInputsValid = true;
-        var last_elem = '';
         Array.prototype.forEach.call(form.querySelectorAll('input'), function(input) {
-          last_elem = input
           if (input.checkValidity && !input.checkValidity()) {
             plainInputsValid = false;
             return;
@@ -98,9 +105,7 @@ $(document).ready(function(){
         // Show a loading screen...
         //example.classList.add('submitting');
         // Disable all inputs.
-        if(last_elem.type != 'submit'){
-          disableInputs();
-        }
+        disableInputs();
         // Use Stripe.js to create a token. We only need to pass in one Element
         // from the Element group in order to create a token. We can also pass
         // in the additional customer data we collected in our form.
