@@ -7,11 +7,11 @@ $(document).ready(function(){
 
     var stripe = Stripe($("meta[name='stripe-key']").attr('content'));
     function registerElements(elements, exampleName) {
-      var formClass = '.' + exampleName;
-      var example = document.querySelector(formClass);
-      var form = example.querySelector('form');
-      var error = form.querySelector('.error');
-      var errorMessage = error.querySelector('.message');
+      var formClass     = '.' + exampleName;
+      var example       = document.querySelector(formClass);
+      var form          = example.querySelector('form');
+      var error         = form.querySelector('.error');
+      var errorMessage  = error.querySelector('.message');
 
       function enableInputs() {
         Array.prototype.forEach.call(
@@ -38,8 +38,8 @@ $(document).ready(function(){
       function triggerBrowserValidation() {
         // The only way to trigger HTML5 form validation UI is to fake a user submit
         // event.
-        var submit = document.createElement('input');
-        submit.type = 'submit';
+        var submit           = document.createElement('input');
+        submit.type          = 'submit';
         submit.style.display = 'none';
         form.appendChild(submit);
         submit.click();
@@ -81,14 +81,15 @@ $(document).ready(function(){
         // Trigger HTML5 validation UI on the form if any of the inputs fail
         // validation.
         var plainInputsValid = true;
-        Array.prototype.forEach.call(form.querySelectorAll('input'), function(
-          input
-        ) {
+        var last_elem = '';
+        Array.prototype.forEach.call(form.querySelectorAll('input'), function(input) {
+          last_elem = input
           if (input.checkValidity && !input.checkValidity()) {
             plainInputsValid = false;
             return;
           }
         });
+        
         if (!plainInputsValid) {
           triggerBrowserValidation();
           return;
@@ -97,7 +98,9 @@ $(document).ready(function(){
         // Show a loading screen...
         //example.classList.add('submitting');
         // Disable all inputs.
-        disableInputs();
+        if(last_elem.type != 'submit'){
+          disableInputs();
+        }
         // Use Stripe.js to create a token. We only need to pass in one Element
         // from the Element group in order to create a token. We can also pass
         // in the additional customer data we collected in our form.
