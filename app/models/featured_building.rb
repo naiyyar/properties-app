@@ -24,7 +24,7 @@ class FeaturedBuilding < ApplicationRecord
      :search_query
     ]
   )
-
+  after_save :make_active, unless: :featured_by_manager?
   before_destroy :check_active_status, unless: Proc.new{ |obj| obj.expired? }
 
   def featured_by_manager?
@@ -99,8 +99,13 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   private
+
+  def make_active
+    update_column(:active, true)
+  end
+  
   def check_active_status
-    errors.add :base, 'Cannot delete active featured buildings.'
+    errors.add :base, 'Cannot delete unexpired featured buildings.'
     false
     throw(:abort)
   end

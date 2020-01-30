@@ -10,7 +10,7 @@ class FeaturedBuildingsController < ApplicationController
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @featured_buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:billing, :building => [:management_company]).order('created_at desc')
+    @featured_buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:user, :billing => [:user], :building => [:management_company]).order('created_at desc')
 
     respond_to do |format|
       format.html
@@ -26,6 +26,7 @@ class FeaturedBuildingsController < ApplicationController
   # GET /featured_buildings/new
   def new
     session[:back_to]  = request.fullpath if params[:type] != 'billing'
+    @featured_by       = params[:featured_by] 
     @featured_building = FeaturedBuilding.new
     @saved_cards       = BillingService.new.get_saved_cards(current_user) rescue nil
   end
@@ -68,16 +69,24 @@ class FeaturedBuildingsController < ApplicationController
   # DELETE /featured_buildings/1
   # DELETE /featured_buildings/1.json
   def destroy
-    @featured_building.destroy
     respond_to do |format|
-      format.html { 
-        redirect_to (@featured_building.featured_by_manager? ? :back : featured_buildings_url), notice: 'Featured building was successfully deleted.' 
-      }
-      format.json { head :no_content }
+      if @featured_building.destroy
+        format.html { 
+          redirect_to destroy_redirect_url, notice: 'Featured building was successfully deleted.' 
+        }
+        format.json { head :no_content }
+      else
+        flash[:error] = @featured_building.errors.messages[:base][0]
+        format.html { redirect_to destroy_redirect_url }
+      end
     end
   end
 
   private
+
+    def destroy_redirect_url
+      (@featured_building.featured_by_manager? ? :back : featured_buildings_url)
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_featured_building
       @featured_building = FeaturedBuilding.find(params[:id])

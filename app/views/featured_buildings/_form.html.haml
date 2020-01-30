@@ -17,7 +17,7 @@
               = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_building.new_record?
               = f.hidden_field :user_id, value: current_user.id if current_user.present?
             
-            - if @featured_building.draft_edit?
+            - if @featured_building.draft_edit? or @featured_by == 'admin'
               - submit_text = 'Save'
               .row
                 .col-xs-6.col-sm-6.col-md-6.col-lg-6
@@ -29,17 +29,19 @@
                   .form-group
                     %label End Date
                     = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off, disabled: @featured_building.featured_by_manager?
-              .row
-                .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                  .form-group
-                    %label Featured Building Renewal
-                .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                  .form-group
-                    .pull-right
-                      %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: @featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => @featured_building.id }
-              .row
-                .col-lg-12
-                  %label When active, the card on file wil be charged $49.00 two days before the end date for the next four week feature cycle.
+              
+              - if @featured_by != 'admin'
+                .row
+                  .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                    .form-group
+                      %label Featured Building Renewal
+                  .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                    .form-group
+                      .pull-right
+                        %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: @featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => @featured_building.id }
+                .row
+                  .col-lg-12
+                    %label When active, the card on file wil be charged $49.00 two days before the end date for the next four week feature cycle.
             
             -else
               - submit_text = 'Next'
