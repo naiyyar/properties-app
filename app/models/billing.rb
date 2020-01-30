@@ -1,5 +1,5 @@
 class Billing < ApplicationRecord
-	PRICE = 49
+	PRICE 					= 49
 	INV_DESCRIPTION = 'Featured Building For Four Weeks Starting on'
 	
 	belongs_to :user
