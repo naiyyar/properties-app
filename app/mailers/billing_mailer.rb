@@ -10,7 +10,7 @@ class BillingMailer < ApplicationMailer
 		mail(
 			to: to_email,
 			from: DEFAULT_EMAIL_WITH_NAME,
-			subject: "Payment Receipt (Invoice ##{@billing.id})"
+			subject: "Payment Receipt (##{@billing.receipt_number})"
 		)
 	end
 

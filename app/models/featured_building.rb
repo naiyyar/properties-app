@@ -25,7 +25,7 @@ class FeaturedBuilding < ApplicationRecord
     ]
   )
   after_save :make_active, unless: :featured_by_manager?
-  #before_destroy :check_active_status, unless: Proc.new{ |obj| obj.expired? }
+  before_destroy :check_active_status, unless: Proc.new{ |obj| obj.expired? }
 
   def featured_by_manager?
     featured_by == 'manager'
@@ -101,17 +101,21 @@ class FeaturedBuilding < ApplicationRecord
   private
 
   def start_dt
-    Time.zone.local(start_date.year, start_date.month, start_date.day, CURRENT_DT.hour, CURRENT_DT.min, CURRENT_DT.sec)
+    Time.zone.local(start_date.year, start_date.month, start_date.day, @hour, @min, @sec)
   end
 
   def end_dt
-    Time.zone.local(end_date.year, end_date.month, end_date.day, CURRENT_DT.hour, CURRENT_DT.min, CURRENT_DT.sec)
+    Time.zone.local(end_date.year, end_date.month, end_date.day, @hour, @min, @sec)
   end
 
   def make_active
-    update_column(:active,      true)
-    update_column(:start_date,  start_dt)
-    update_column(:end_date,    end_dt)
+    if start_date.present? and end_date.present?
+      @current_dt       = Time.now
+      @hour, @min, @sec = @current_dt.hour, @current_dt.min, @current_dt.sec
+      update_column(:active,      true)
+      update_column(:start_date,  start_dt)
+      update_column(:end_date,    end_dt)  
+    end
   end
   
   def check_active_status
