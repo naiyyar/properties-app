@@ -33,6 +33,7 @@ class FeaturedBuildingsController < ApplicationController
 
   # GET /featured_buildings/1/edit
   def edit
+    @featured_by       = params[:featured_by]
     session[:back_to]  = request.fullpath if params[:type] != 'billing'
   end
 

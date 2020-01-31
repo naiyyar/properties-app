@@ -3,7 +3,8 @@
     .row
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
         .pull-right
-          = link_to 'Add New Featured Building', new_featured_building_path(featured_by: 'admin'), class: 'btn btn-blue'
+          - @featured_by = 'admin'
+          = link_to 'Add New Featured Building', new_featured_building_path(featured_by: @featured_by), class: 'btn btn-blue'
     %h2
   .pull-right
     = form_for_filterrific @filterrific do |f|

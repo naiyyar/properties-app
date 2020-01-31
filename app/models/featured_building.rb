@@ -110,10 +110,7 @@ class FeaturedBuilding < ApplicationRecord
   # end
 
   def make_active
-    if start_date.present? and end_date.present?
-      #@hour, @min, @sec = created_at.hour, created_at.min, created_at.sec
-      update_columns(active: true)
-    end
+    update_columns(active: true) if has_start_and_end_date?
   end
   
   def check_active_status
