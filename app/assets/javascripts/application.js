@@ -43,5 +43,6 @@
 //= require jquery.mask.min
 //= require detect_timezone
 //= require jquery.detect_timezone
+//= require bootstrap-datetimepicker
 
 //= require_tree .

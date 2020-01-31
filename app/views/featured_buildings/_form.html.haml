@@ -21,14 +21,15 @@
               - submit_text = 'Save'
               .row
                 .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                  - picker_class = @featured_by == 'admin' ? 'datetimepicker1' : 'datepicker'
                   .form-group
                     %label Start Date
-                    = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off, disabled: @featured_building.featured_by_manager?
+                    = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: "form-control #{picker_class}", :autocomplete => :off, disabled: @featured_building.featured_by_manager?
 
                 .col-xs-6.col-sm-6.col-md-6.col-lg-6
                   .form-group
                     %label End Date
-                    = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off, disabled: @featured_building.featured_by_manager?
+                    = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: "form-control #{picker_class}", :autocomplete => :off, disabled: @featured_building.featured_by_manager?
               
               - if @featured_by != 'admin'
                 .row
@@ -70,7 +71,7 @@
   $(function() {
     new app.AsCompBuildings;
   });
-
+  var time_zone = "#{current_user.time_zone}";
   $(document).on('keyup', function(e){
     if(e.keyCode == 40 || e.keyCode == 38){
       if(!$("ul.ui-autocomplete").is(":visible")) {
@@ -79,3 +80,7 @@
       }
     }
   })
+
+  $('.datetimepicker1').datetimepicker({
+    format: 'YYYY-MM-DD HH:mm'
+  });

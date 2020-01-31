@@ -16,6 +16,7 @@ gem 'axlsx_rails'
 
 #B
 gem 'bootstrap-datepicker-rails'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'browser'
 gem 'buttercms-rails'

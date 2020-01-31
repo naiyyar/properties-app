@@ -100,18 +100,19 @@ class FeaturedBuilding < ApplicationRecord
 
   private
 
-  def start_dt
-    Time.zone.local(start_date.year, start_date.month, start_date.day, @hour, @min, @sec)
-  end
+  # def start_dt
+  #   Time.zone.parse("#{start_date.year}-#{start_date.month}-#{start_date.day} #{@hour}:#{@min}:#{@sec}")
+  # end
 
-  def end_dt
-    Time.zone.local(end_date.year, end_date.month, end_date.day, @hour, @min, @sec)
-  end
+  # def end_dt
+  #   Time.zone.parse("#{end_date.year}-#{end_date.month}-#{end_date.day} #{@hour}:#{@min}:#{@sec}")
+  #   #Time.zone.parse(end_date.year, end_date.month, end_date.day, @hour, @min, @sec)
+  # end
 
   def make_active
     if start_date.present? and end_date.present?
-      @hour, @min, @sec = created_at.hour, created_at.min, created_at.sec
-      update_columns(active: true, start_date: start_dt, end_date: end_dt)
+      #@hour, @min, @sec = created_at.hour, created_at.min, created_at.sec
+      update_columns(active: true)
     end
   end
   
