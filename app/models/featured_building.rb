@@ -48,7 +48,11 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def live?
-    !draft? and end_date.to_s(:no_timezone) > Time.now.to_s(:no_timezone)
+    if end_date.present?
+      !draft? and end_date.to_s(:no_timezone) > Time.now.to_s(:no_timezone)
+    else
+      false
+    end
   end
 
   def expired?
