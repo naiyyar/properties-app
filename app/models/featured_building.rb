@@ -4,12 +4,12 @@ class FeaturedBuilding < ApplicationRecord
   belongs_to :user
   has_one    :billing #, :dependent => :destroy
 
-  CURRENT_DT = Time.now
+  #CURRENT_DT = Time.now
 
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
-  scope :not_expired, -> { where('end_date is not null AND end_date >= ?', CURRENT_DT.to_s(:no_timezone)) }
-  scope :expired,     -> { where('end_date is not null AND end_date < ?',  CURRENT_DT.to_s(:no_timezone)) }
+  scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Time.now.to_s(:no_timezone)) }
+  scope :expired,     -> { where('end_date is not null AND end_date < ?',  Time.now.to_s(:no_timezone)) }
   scope :by_manager,  -> { where(featured_by: 'manager') }
 
   pg_search_scope :search_query, 
@@ -48,7 +48,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def live?
-    !draft? and end_date.to_s(:no_timezone) > CURRENT_DT.to_s(:no_timezone)
+    !draft? and end_date.to_s(:no_timezone) > Time.now.to_s(:no_timezone)
   end
 
   def expired?
@@ -60,7 +60,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def _start_date
-    (start_date.present? and end_date > CURRENT_DT) ? start_date : CURRENT_DT
+    (start_date.present? and end_date > Time.now) ? start_date : Time.now
   end
 
   def _end_date renew_date
@@ -91,10 +91,11 @@ class FeaturedBuilding < ApplicationRecord
 
   def renew_plan? host
     end_d = Time.zone.parse(end_date.to_s(:no_timezone))
+    cdt = Time.now
     if DEV_HOSTS.include?(host)
-      end_date.present? and CURRENT_DT.to_s(:no_timezone) == (end_d - 1.day).to_s(:no_timezone)
+      end_date.present? and cdt.to_s(:no_timezone) == (end_d - 1.day).to_s(:no_timezone)
     else
-      end_date.present? and CURRENT_DT.to_s(:no_timezone) == (end_d - 2.day).to_s(:no_timezone)
+      end_date.present? and cdt.to_s(:no_timezone) == (end_d - 2.day).to_s(:no_timezone)
     end
     #end_date.present? and CURRENT_DT.to_date == (end_date - 1.day).to_date
   end
