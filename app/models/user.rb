@@ -84,6 +84,7 @@ class User < ApplicationRecord
   end
 
   def set_timezone zone
+    zone = 'Eastern Time (US & Canada)' if zone == 'America/Havana'
     update_column(:time_zone, zone)
   end
 
