@@ -10,33 +10,6 @@ end
 namespace :featured_plan do
 	desc 'Renew plan 2 days before the end date.'
 	task renew: :environment do
-		FeaturedBuilding.where(renew: true).by_manager.not_expired.active.each do |featured_building|
-			user 			 = featured_building.user
-			user_email = user.email
-			if featured_building.renew_plan?(ENV['SERVER_ROOT'])
-				customer_id = user.stripe_customer_id
-				if customer_id.present?
-					card = BillingService.new.saved_cards(customer_id).last rescue nil #cosidering last card default card
-					if card.present?
-						@billing 	= Billing.new({ email: 								user_email,
-																			amount: 						  Billing::PRICE,
-																			featured_building_id: featured_building.id,
-																			user_id: 							user.id,
-																			renew_date:           Time.now,
-																			billing_card_id:      card.id,
-																			brand: 								card.brand
-																		})
-						unless @billing.save_and_charge_existing_card!(customer_id: customer_id, email: user_email, card_id: card.id)
-							@billing.status = 'Failed'
-							@billing.save
-						end
-					else
-						BillingMailer.no_card_payment_failed(user_email).deliver
-					end
-				else
-					BillingMailer.no_card_payment_failed(user_email).deliver
-				end
-			end
-		end
+		FeaturedBuilding.renew_plan
 	end
 end

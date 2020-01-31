@@ -45,6 +45,7 @@ class Billing < ApplicationRecord
 				if save
 					options.merge!(billing: self)
 					billing_service.create_charge!(options)
+					BillingMailer.send_payment_receipt(billing: self).deliver
 				end
 			rescue Stripe::CardError => e
 	      errors.add :credit_card, e.message
@@ -53,6 +54,24 @@ class Billing < ApplicationRecord
 	  else
 	  	errors.add(:base, 'Email can not be blank.')  if email.blank?
 	  end
+	end
+
+	def self.create_billing options={}
+		user 		 	 = options[:user]
+		card 		 	 = options[:card]
+		user_email = user.email
+    billing  	 = Billing.new({ 	email:                user_email,
+                              amount:               PRICE,
+                              featured_building_id: options[:featured_building_id],
+                              user_id:              user.id,
+                              renew_date:           Time.now,
+                              billing_card_id:      card.id,
+                              brand:                card.brand
+                            })
+    unless billing.save_and_charge_existing_card!(customer_id: options[:customer_id], email: user_email, card_id: card.id)
+      billing.status = 'Failed'
+      billing.save
+    end
 	end
 	
 	def billing_description
