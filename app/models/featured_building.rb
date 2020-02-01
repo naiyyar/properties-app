@@ -4,8 +4,6 @@ class FeaturedBuilding < ApplicationRecord
   belongs_to :user
   has_one    :billing #, :dependent => :destroy
 
-  #CURRENT_DT = Time.now
-
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
   scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Time.now.to_s(:no_timezone)) }
@@ -48,11 +46,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def live?
-    if end_date.present?
-      !draft? and end_date.to_s(:no_timezone) > Time.now.to_s(:no_timezone)
-    else
-      false
-    end
+    end_date.present? ? (!draft? and end_date.to_s(:no_timezone) > Time.now.to_s(:no_timezone)) : false
   end
 
   def expired?
