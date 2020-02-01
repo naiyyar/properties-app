@@ -89,7 +89,7 @@ class FeaturedBuilding < ApplicationRecord
 
   def renew_plan? host
     end_d = Time.zone.parse(end_date.to_s(:no_timezone))
-    cdt = Time.now
+    cdt = Time.zone.now
     if DEV_HOSTS.include?(host)
       end_date.present? and cdt.to_s(:no_timezone) == (end_d - 1.day).to_s(:no_timezone)
     else
@@ -99,7 +99,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def self.renew_plan
-    where(renew: true, id: 123).by_manager.not_expired.active.each do |featured_building|
+    where(renew: true).by_manager.not_expired.active.each do |featured_building|
       user       = featured_building.user
       Time.zone  = user.time_zone
       if featured_building.renew_plan?(ENV['SERVER_ROOT'])
