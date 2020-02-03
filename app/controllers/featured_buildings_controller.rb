@@ -10,7 +10,7 @@ class FeaturedBuildingsController < ApplicationController
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @featured_buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:user, :billing => [:user], :building => [:management_company]).order('created_at desc')
+    @featured_buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:user, :billings => [:user], :building => [:management_company]).order('created_at desc')
 
     respond_to do |format|
       format.html

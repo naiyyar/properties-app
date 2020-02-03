@@ -92,7 +92,7 @@ class User < ApplicationRecord
   end
 
   def timezone
-    time_zone || DEFAULT_TIMEZONE
+    time_zone.present? ? time_zone : DEFAULT_TIMEZONE
   end
 
   def self.from_omniauth(auth, current_user)

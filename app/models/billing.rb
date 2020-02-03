@@ -60,11 +60,11 @@ class Billing < ApplicationRecord
 		user 		 	 = options[:user]
 		card 		 	 = options[:card]
 		user_email = user.email
-    billing  	 = Billing.new({ 	email:                user_email,
+    billing  	 = Billing.new({email:              	user_email,
                               amount:               PRICE,
                               featured_building_id: options[:featured_building_id],
                               user_id:              user.id,
-                              renew_date:           Time.now,
+                              renew_date:           Time.zone.now,
                               billing_card_id:      card.id,
                               brand:                card.brand
                             })

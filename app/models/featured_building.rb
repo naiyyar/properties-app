@@ -2,12 +2,12 @@ class FeaturedBuilding < ApplicationRecord
   include PgSearch
   belongs_to :building
   belongs_to :user
-  has_one    :billing #, :dependent => :destroy
+  has_many   :billings #, :dependent => :destroy
 
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
-  scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Time.zone.now.to_s(:no_timezone)) }
-  scope :expired,     -> { where('end_date is not null AND end_date < ?',  Time.zone.now.to_s(:no_timezone)) }
+  #scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Time.zone.now.to_s(:no_timezone)) }
+  #scope :expired,     -> { where('end_date is not null AND end_date < ?',  Time.zone.now.to_s(:no_timezone)) }
   scope :by_manager,  -> { where(featured_by: 'manager') }
 
   pg_search_scope :search_query, 
@@ -46,7 +46,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def live?
-    end_date.present? ? (!draft? and end_date.to_s(:no_timezone) > Time.now.to_s(:no_timezone)) : false
+    end_date.present? ? (!draft? and end_date.to_s(:no_timezone) > Time.zone.now.to_s(:no_timezone)) : false
   end
 
   def expired?
@@ -58,7 +58,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def _start_date
-    (start_date.present? and end_date > Time.now) ? start_date : Time.now
+    (start_date.present? and end_date > Time.zone.now) ? start_date : Time.zone.now
   end
 
   def _end_date renew_date
@@ -70,32 +70,35 @@ class FeaturedBuilding < ApplicationRecord
     !new_record? and live?
   end
 
+  #DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
+
+  def renew_plan? host
+    end_d = Time.zone.parse(end_date.to_s(:no_timezone))
+    cdt   = Time.zone.now
+    #if DEV_HOSTS.include?(host)
+    end_date.present? and cdt.to_s(:no_timezone) == (end_d - 1.day).to_s(:no_timezone)
+    #else
+    #  end_date.present? and cdt.to_s(:no_timezone) == (end_d - 2.day).to_s(:no_timezone)
+    #end
+    #end_date.present? and CURRENT_DT.to_date == (end_date - 1.day).to_date
+  end
+
   #expired_featurings when renew is false and end_date is less than today's date then expire
-  def self.set_expired_plans_to_inactive_if_autorenew_is_off
-    where(renew: false).by_manager.active.each do |featured_building|
+  def self.set_expired_plans_to_inactive_if_autorenew_is_off buildings
+    buildings.where(renew: false).each do |featured_building|
       Time.zone = featured_building.user.timezone
       featured_building.update(active: false) if featured_building.expired?
     end
   end
 
-  DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
-
-  def renew_plan? host
-    end_d = Time.zone.parse(end_date.to_s(:no_timezone))
-    cdt = Time.zone.now
-    if DEV_HOSTS.include?(host)
-      end_date.present? and cdt.to_s(:no_timezone) == (end_d - 1.day).to_s(:no_timezone)
-    else
-      end_date.present? and cdt.to_s(:no_timezone) == (end_d - 2.day).to_s(:no_timezone)
-    end
-    #end_date.present? and CURRENT_DT.to_date == (end_date - 1.day).to_date
-  end
-
-  def self.renew_plan
-    where(renew: true).by_manager.active.each do |featured_building|
+  def self.renew_and_deactivate_featured_plan
+    buildings = by_manager.active
+    self.set_expired_plans_to_inactive_if_autorenew_is_off(buildings)
+    #renew
+    buildings.where(renew: true).each do |featured_building|
       user      = featured_building.user
-      Time.zone = user.time_zone
-      if featured_building.live? and featured_building.renew_plan?(ENV['SERVER_ROOT'])
+      Time.zone = user.timezone
+      if featured_building.live? and featured_building.not_already_renewed?
         if (customer_id = user.stripe_customer_id).present?
           card = BillingService.new.saved_cards(customer_id).last rescue nil
           if card.present?
@@ -109,6 +112,10 @@ class FeaturedBuilding < ApplicationRecord
         end
       end
     end
+  end
+
+  def not_already_renewed?
+    end_date.present? and (end_date - 1.day).to_s(:no_timezone) == Time.zone.now.to_s(:no_timezone)
   end
 
   private

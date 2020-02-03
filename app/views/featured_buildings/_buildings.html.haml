@@ -35,7 +35,7 @@
                       - if featured_building.draft?
                         = featured_building&.user&.try(:email)
                       - else 
-                        = featured_building&.billing&.user.try(:email)
+                        = featured_building&.billings&.first&.user.try(:email)
 
                   %td
                     = link_to 'edit', edit_featured_building_path(featured_building, featured_by: @featured_by) unless featured_building.featured_by_manager?
