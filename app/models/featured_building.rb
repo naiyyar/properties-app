@@ -74,12 +74,7 @@ class FeaturedBuilding < ApplicationRecord
   def self.set_expired_plans_to_inactive_if_autorenew_is_off
     where(renew: false).by_manager.active.each do |featured_building|
       Time.zone = featured_building.user.timezone
-      if featured_building.expired?
-        featured_building.update(active: false)
-        BillingMailer.no_card_payment_failed('anna@gmail.com').deliver
-      else
-        BillingMailer.no_card_payment_failed('not_expired@gmail.com').deliver
-      end
+      featured_building.update(active: false) if featured_building.expired?
     end
   end
 
