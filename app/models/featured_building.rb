@@ -6,8 +6,8 @@ class FeaturedBuilding < ApplicationRecord
 
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
-  scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Time.now.to_s(:no_timezone)) }
-  scope :expired,     -> { where('end_date is not null AND end_date < ?',  Time.now.to_s(:no_timezone)) }
+  scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Time.zone.now.to_s(:no_timezone)) }
+  scope :expired,     -> { where('end_date is not null AND end_date < ?',  Time.zone.now.to_s(:no_timezone)) }
   scope :by_manager,  -> { where(featured_by: 'manager') }
 
   pg_search_scope :search_query, 
@@ -70,18 +70,16 @@ class FeaturedBuilding < ApplicationRecord
     !new_record? and live?
   end
 
-  def self.expired_featurings
-    by_manager.expired
-  end
-
-  def self.set_expired_plans_to_inactive
-    expired_featurings.update_all(active: false, renew: false) if expired_featurings.active.any?
-  end
-
+  #expired_featurings when renew is false and end_date is less than today's date then expire
   def self.set_expired_plans_to_inactive_if_autorenew_is_off
-    if expired_featurings.any?
-      autorenew_off_plans = expired_featurings.where(renew: false)
-      autorenew_off_plans.update_all(active: false) if autorenew_off_plans.present?
+    where(renew: false).by_manager.active.each do |featured_building|
+      Time.zone = featured_building.user.timezone
+      if featured_building.expired?
+        featured_building.update(active: false)
+        BillingMailer.no_card_payment_failed('anna@gmail.com').deliver
+      else
+        BillingMailer.no_card_payment_failed('not_expired@gmail.com').deliver
+      end
     end
   end
 
@@ -99,10 +97,10 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def self.renew_plan
-    where(renew: true).by_manager.not_expired.active.each do |featured_building|
-      user       = featured_building.user
-      Time.zone  = user.time_zone
-      if featured_building.renew_plan?(ENV['SERVER_ROOT'])
+    where(renew: true).by_manager.active.each do |featured_building|
+      user      = featured_building.user
+      Time.zone = user.time_zone
+      if featured_building.live? and featured_building.renew_plan?(ENV['SERVER_ROOT'])
         if (customer_id = user.stripe_customer_id).present?
           card = BillingService.new.saved_cards(customer_id).last rescue nil
           if card.present?

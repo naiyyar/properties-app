@@ -56,6 +56,9 @@ class User < ApplicationRecord
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
   #validates_email_realness_of :email
   #validates_email_format_of :email, :message => 'is not looking good'
+
+  DEFAULT_TIMEZONE = 'Eastern Time (US & Canada)'
+  US_ZONES         = ['UTC', 'America/Havana']
   
   SOCIALS = {
     facebook: 'Facebook',
@@ -83,10 +86,13 @@ class User < ApplicationRecord
     true
   end
 
-  US_ZONES = ['UTC', 'America/Havana']
   def set_timezone zone
-    zone = 'Eastern Time (US & Canada)' if US_ZONES.include?(zone)
+    zone = DEFAULT_TIMEZONE if US_ZONES.include?(zone)
     update_column(:time_zone, zone)
+  end
+
+  def timezone
+    time_zone || DEFAULT_TIMEZONE
   end
 
   def self.from_omniauth(auth, current_user)
