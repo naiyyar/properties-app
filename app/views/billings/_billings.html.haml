@@ -5,12 +5,12 @@
       %table.table.table-striped#sortable
         %thead
           %tr
-            %th{width: "8%"} Date
-            %th.text-center{width: "6%"} Amount
+            %th{width: '8%'} Date
+            %th.text-center{width: '8%'} Amount
             %th Description
-            %th{width: "10%"} Status
-            %th.text-center{width: "20%"} Actions
-            %th{width: "1%"}
+            %th{width: '12%'} Status
+            %th.text-center{width: '20%'} Actions
+            %th{width: '1%'}
         
         %tbody.table
           - @billings.first(@limit - 1).each do |billing|
