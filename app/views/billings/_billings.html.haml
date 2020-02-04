@@ -23,7 +23,7 @@
                 - if billing.payment_failed?
                   %b.text-danger Failed
                 - else
-                  %b.text-success="#{billing.id} Successful"
+                  %b.text-success Successful
               %td.text-center
                 - unless billing.payment_failed?
                   =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), download: "invoice_#{date_created}", title: 'Download inovoice in pdf'
