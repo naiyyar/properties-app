@@ -92,13 +92,13 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def self.renew_and_deactivate_featured_plan
-    buildings = by_manager.active
-    self.set_expired_plans_to_inactive_if_autorenew_is_off(buildings)
+    buildings = self.by_manager
+    self.set_expired_plans_to_inactive_if_autorenew_is_off(buildings.active)
     #renew
     buildings.where(renew: true).each do |featured_building|
       user      = featured_building.user
       Time.zone = user.timezone
-      if featured_building.live? and featured_building.not_already_renewed?
+      if featured_building.not_already_renewed?
         if (customer_id = user.stripe_customer_id).present?
           card = BillingService.new.saved_cards(customer_id).last rescue nil
           if card.present?
