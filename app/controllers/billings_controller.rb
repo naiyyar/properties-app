@@ -1,8 +1,8 @@
 class BillingsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_billing, only: [:show, :edit, :update, :destroy, :email_receipt]
-  before_action :set_customer_id, only: [:show, :pay_using_saved_card]
-  before_action :get_card, only: [:show]
+  before_action :set_billing,     only: [:show, :edit, :update, :destroy, :email_receipt]
+  before_action :set_customer_id, only: [:show, :pay_using_saved_card, :email_receipt]
+  before_action :get_card,        only: [:show, :email_receipt]
   
   def index
     @limit    = 51
@@ -25,7 +25,8 @@ class BillingsController < ApplicationController
       params[:email_to].split(',').each do |email|
         BillingMailer.send_payment_receipt(billing: @billing, 
                                            to_email: email.gsub(' ', ''), 
-                                           view: params[:view]).deliver
+                                           view: params[:view],
+                                           card: @card).deliver
       end
       flash[:notice] = 'Invoice successfully sent.'
     else
@@ -126,8 +127,6 @@ class BillingsController < ApplicationController
 
     # TODO: TO REMOVE WHEN MERGING WITH PRODUCTION
     def get_card
-      if request.format.pdf? or params[:type] == 'view'
-        @card = BillingService.new.get_card(@customer_id, @billing.billing_card_id) rescue nil
-      end
+      @card = @billing.card(@customer_id)
     end
 end

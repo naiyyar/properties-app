@@ -6,7 +6,7 @@ class BillingMailer < ApplicationMailer
 		to_email = options[:to_email].present? ? options[:to_email] : @billing&.email
 		user 		 = @billing.user
 		@view		 = options[:view] || 'mail'
-		@card 	 = BillingService.new.get_card(user.stripe_customer_id, @billing.billing_card_id) rescue nil
+		@card 	 = options[:card]
 		mail(
 			to: to_email,
 			from: DEFAULT_EMAIL_WITH_NAME,
