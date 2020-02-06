@@ -83,6 +83,12 @@ class Billing < ApplicationRecord
 		end
 	end
 
+	def card stripe_customer_id
+		billing_service = BillingService.new
+		charge_obj 			= billing_service.get_charge(stripe_charge_id)
+		billing_service.get_card(stripe_customer_id, charge_obj.payment_method) if charge_obj.present?
+	end
+
 	def set_featured_building_end_date
 		fb = FeaturedBuilding.find(featured_building_id)
 		fb.set_expiry_date(self.renew_date)

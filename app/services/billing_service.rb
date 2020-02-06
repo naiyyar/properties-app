@@ -26,6 +26,10 @@ class BillingService
 		customer.create_source(cust_id,{ source: @payment_token })
 	end
 
+	def get_charge charge_id
+		stripe_charge.retrieve(charge_id)
+	end
+
 	def get_customer_id current_user
 		if current_user.stripe_customer_id.present?
       customer_id   = current_user.stripe_customer_id
@@ -43,7 +47,7 @@ class BillingService
 	end
 
 	def create_stripe_charge billing, customer_id, card_id=nil
-		Stripe::Charge.create(
+		stripe_charge.create(
     	customer:  		customer_id,
     	card: 				card_id,
       amount: 	 		Billing::PRICE * 100,
@@ -56,5 +60,9 @@ class BillingService
 	private
 	def customer
 		Stripe::Customer
+	end
+
+	def stripe_charge
+		Stripe::Charge
 	end
 end

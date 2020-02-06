@@ -19,11 +19,13 @@
               %td.text-right=number_to_currency(billing.amount, precision: 2)
               %td=billing.billing_description
               %td
-                = image_tag "card_brands/#{brand_name(billing.brand)}.svg", height: 20
-                - if billing.payment_failed?
-                  %b.text-danger Failed
+                - unless billing.billing_card_id.blank?
+                  =card_brand_image(billing.brand)
                 - else
-                  %b.text-success Successful
+                  - @card = billing.card(current_user&.stripe_customer_id)
+                  =card_brand_image(@card.brand)
+                =status_text(billing).html_safe
+
               %td.text-center
                 - unless billing.payment_failed?
                   =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), download: "invoice_#{date_created}", title: 'Download inovoice in pdf'
