@@ -21,7 +21,7 @@
 				%td.text-left=@billing.created_at&.strftime("%b %-d, %Y")
 				%td.text-left
 					/ https://stripe-images.s3.amazonaws.com/emails/receipt_assets/card/visa-dark@2x.png
-					- if @billing&.billing_card_id.present?
+					- if @billing.payment_detail?
 						="#{@billing.brand} - #{@billing.last4}"
 					- else
 						="#{@card.brand} - #{@card.last4}"

@@ -16,6 +16,10 @@ class Billing < ApplicationRecord
 		status == 'Failed'
 	end
 
+	def payment_detail?
+		billing_card_id && brand && last4
+	end
+
 	def save_and_make_payment!
 		if valid?
       begin
