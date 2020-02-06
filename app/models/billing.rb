@@ -23,10 +23,10 @@ class Billing < ApplicationRecord
       	billing_service 	= BillingService.new(stripe_card_id, email)
       	customer_id 			= billing_service.get_customer_id(user)
       	card 							= billing_service.create_source(customer_id)
-      	billing_card_id 	= card.id
-      	brand							= card.brand
-      	last4            	= card.last4
-        if save
+      	self.billing_card_id 	= card.id
+      	self.brand							= card.brand
+      	self.last4            	= card.last4
+        if self.save
         	billing_service.create_charge!(billing: self, customer_id: customer_id)
         end
       rescue Stripe::CardError => e
