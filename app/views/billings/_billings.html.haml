@@ -13,7 +13,7 @@
             %th{width: '1%'}
         
         %tbody.table
-          - @billings.first(@limit - 1).each do |billing|
+          - @billings.each do |billing|
             %tr
               %td=date_created = billing.created_at.to_date
               %td.text-right=number_to_currency(billing.amount, precision: 2)
@@ -34,7 +34,3 @@
                   &nbsp;
                   =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'email'), title: 'Send in mail', remote: true
               %td.text-center
-          
-          - if (@billings.present? and @billings.count > @limit - 1) and request.format.html?
-            %tr
-              %td.text-center{colspan: '6'}=link_to 'Show More...', billings_path, remote: true

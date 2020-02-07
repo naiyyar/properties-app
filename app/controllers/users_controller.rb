@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 	def managertools
 		@type 					  = params[:type]
 		session[:back_to] = request.fullpath
-		unless params[:type] == 'billing'
+		unless @type == 'billing'
 			@filterrific = initialize_filterrific(
 	      FeaturedBuilding,
 	      params[:filterrific],
@@ -41,8 +41,9 @@ class UsersController < ApplicationController
 	    																	.includes(:billings, :building => [:management_company])
 	    																	.order('created_at desc')
 	  else
-	  	@limit       = 51
-    	@billings    = @current_user.billings.includes(:featured_building).limit(@limit)
+	  	@billings = @current_user.billings
+    														.includes(:featured_building)
+    														.paginate(:page => params[:page], :per_page => 100)
 	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
 	  end
 
