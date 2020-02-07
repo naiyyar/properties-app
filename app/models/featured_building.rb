@@ -1,4 +1,5 @@
 class FeaturedBuilding < ApplicationRecord
+  DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
   include PgSearch
   belongs_to :building
   belongs_to :user
@@ -62,25 +63,15 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def _end_date renew_date
-    #en_date= (std + 27.days) #for 4 weeks on prodcution
-    renew_date.present? ? (renew_date + 2.days) : (_start_date + 2.days) #for 1 day on dev
+    DEV_HOSTS.include?(ENV['SERVER_ROOT']) ? set_end_date(renew_date, 2.days) : set_end_date(renew_date, 27.days)
+  end
+
+  def set_end_date renew_date, days
+    renew_date.present? ? (renew_date + days) : (_start_date + days)
   end
 
   def draft_edit?
     !new_record? and live?
-  end
-
-  #DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
-
-  def renew_plan? host
-    end_d = Time.zone.parse(end_date.to_s(:no_timezone))
-    cdt   = Time.zone.now
-    #if DEV_HOSTS.include?(host)
-    end_date.present? and cdt.to_s(:no_timezone) == (end_d - 1.day).to_s(:no_timezone)
-    #else
-    #  end_date.present? and cdt.to_s(:no_timezone) == (end_d - 2.day).to_s(:no_timezone)
-    #end
-    #end_date.present? and CURRENT_DT.to_date == (end_date - 1.day).to_date
   end
 
   #expired_featurings when renew is false and end_date is less than today's date then expire
@@ -98,7 +89,7 @@ class FeaturedBuilding < ApplicationRecord
     buildings.where(renew: true).each do |featured_building|
       user      = featured_building.user
       Time.zone = user.timezone
-      if featured_building.not_already_renewed?
+      if featured_building.not_already_renewed?(ENV['SERVER_ROOT'])
         if (customer_id = user.stripe_customer_id).present?
           card = BillingService.new.saved_cards(customer_id).last rescue nil
           if card.present?
@@ -114,8 +105,12 @@ class FeaturedBuilding < ApplicationRecord
     end
   end
 
-  def not_already_renewed?
-    end_date.present? and (end_date - 1.day).to_s(:no_timezone) == Time.zone.now.to_s(:no_timezone)
+  def renew_time day_before
+    end_date.present? and (end_date - day_before).to_s(:no_timezone) == Time.zone.now.to_s(:no_timezone)
+  end
+
+  def not_already_renewed? host=nil
+    DEV_HOSTS.include?(ENV['SERVER_ROOT']) ? renew_time(1.day) : renew_time(2.day)
   end
 
   private
