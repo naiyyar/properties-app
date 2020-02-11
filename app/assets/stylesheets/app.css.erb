@@ -14,6 +14,58 @@
     }
 }
 
+.divider{
+    width: 100%;
+    display: block;
+    background: #ddd;
+    height: 1px;
+}
+.filterForm .formItem{
+    padding-bottom: 8px;
+}
+
+.ck-button {
+    margin: 4px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #D0D0D0;
+    overflow: auto;
+    float: left;
+}
+
+.ck-button:hover {
+    background-color: #0075c9;
+    border: 1px solid #0075c9;
+}
+
+.ck-button:hover span{
+    color: #fff;
+}
+
+.ck-button label {
+    float: left;
+    width: 7.0em;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+.ck-button label span {
+    text-align: center;
+    padding: 3px 0px;
+    display: block;
+}
+
+.ck-button label input {
+    position: absolute;
+    top: -20px;
+    display: none;
+}
+
+.ck-button input:checked + span {
+    background-color: #0075c9;
+    color: #fff;
+}
+
 table tr td.v-align-middle, table tr th.v-align-middle{
     vertical-align: middle !important;
 }
@@ -2131,7 +2183,7 @@ a.handleFilter, a.handleSort {
     color: #333;
 }
 .filterForm {
-    padding: 6px 20px;
+    padding: 6px 20px 44px;
     margin-top: 1px; 
     border-top: 1px solid #ddd;
 }
@@ -4897,6 +4949,10 @@ select.custom-arrow {
 @media screen and (max-width: 767px) {
     #signup .modal-sm, #signin .modal-sm{
         width: auto;
+    }
+
+    .ck-button label{
+        width: 4.7em;
     }
 
     .g-recaptcha > div {

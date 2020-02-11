@@ -89,31 +89,48 @@ module BuildingsHelper
 	end
 
 	def building_amenities
-		{
-			no_fee: 'No Fee Building',
-			childrens_playroom: 'Childrens Playroom',
-			courtyard: 'Courtyard',
-			pets_allowed_cats: 'Cats Allowed',
-			pets_allowed_dogs: 'Dogs Allowed',
-			doorman: 'Doorman',
-			elevator: 'Elevator',
-			garage: 'Garage',
-			gym: 'Gym',
-			laundry_facility: 'Laundry in Building',
-			live_in_super: 'Live in super',
-			management_company_run: 'Management Company Run',
-			parking: 'Parking',
-			roof_deck: 'Roof Deck',
-			swimming_pool: 'Swimming Pool',
-			walk_up: 'Walk up'
+		amenities = {
+			childrens_playroom: 		'Childrens Playroom',
+			courtyard: 							'Courtyard',
+			garage: 								'Garage',
+			management_company_run: 'Management Company Run'
+		}
+		@building_amenities ||= col1_popular_building_amenities.merge(col2_popular_building_amenities.merge(amenities))
+	end
+
+	def col1_popular_building_amenities
+		@col1_popular_building_amenities ||= {
+			no_fee: 					 	'No Fee Building',
+			pets_allowed_cats: 	'Cats Allowed',
+			pets_allowed_dogs: 	'Dogs Allowed',
+			doorman: 						'Doorman',
+		}
+	end
+
+	def col2_popular_building_amenities
+		@col2_popular_building_amenities ||= {
+			elevator: 					'Elevator',
+			laundry_facility: 	'Laundry in Building',
+			walk_up: 						'Walk up',
+			courtyard: 					'Courtyard'
+		}
+	end
+
+	def other_building_amenities
+		@other_building_amenities ||= {
+			parking: 								'Parking/Garage',
+			gym: 										'Gym',
+			live_in_super: 					'Live in super',
+			roof_deck: 							'Roof Deck',
+			swimming_pool: 					'Swimming Pool'
 		}
 	end
 
 	def listing_amenities
-		{
+		@listing_amenities ||= {
 			months_free_rent: 'Months Free Rent',
-			owner_paid: 'Owner Paid',
-			rent_stabilized: 'Rent Stabilized'
+			owner_paid: 			'Owner Paid',
+			rent_stabilized: 	'Rent Stabilized'
 		}
 	end
 
@@ -134,12 +151,12 @@ module BuildingsHelper
 	end
 
 	def prices_options
-		[
-			['$', 1],
-			['$$', 2],
-			['$$$', 3],
-			['$$$$', 4]
-		]
+		@prices_options ||= [
+													['$', 1],
+													['$$', 2],
+													['$$$', 3],
+													['$$$$', 4]
+												]
 	end
 
 	def heart_icon
@@ -224,7 +241,7 @@ module BuildingsHelper
 	end
 
 	def sort_options
-		[	['Recently Updated', '0'],
+		@sort_options ||= [	['Recently Updated', '0'],
 			['Least Expensive - Listing', '1'],
 			['Most Expensive - Listing', '2'],
 			['Least Expensive - Building', '3'],
@@ -233,11 +250,7 @@ module BuildingsHelper
 	end
 
 	def sort_string
-		if ['1','2','3','4'].include?(params[:sort_by])
-			sort_options[params[:sort_by].to_i][0]
-		else
-			'Recently updated'
-		end
+		['1','2','3','4'].include?(params[:sort_by]) ? sort_options[params[:sort_by].to_i][0] : 'Recently updated'
 	end
 
 	def set_ranges building_price, price
