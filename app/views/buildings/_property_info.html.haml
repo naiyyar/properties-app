@@ -30,9 +30,4 @@
       =link_to @building.management_company.name, no_fee_company_path(id: @building.management_company), class: 'hyper-link'
   .clearfix
   .clearfix
-  .contact-buttons
-    .stats1.property_information
-      = check_availability_link(@building) if @building.web_url.present?
-    .stats1.property_information
-      - if @building.email.present? and @building.active_email
-        = link_to 'Contact Leasing Team', new_contact_path(building_id: @building.id), class: 'btn btn-primary btn-o btn-block font-bolder', remote: true
+  =render 'buildings/show/contact_buttons'

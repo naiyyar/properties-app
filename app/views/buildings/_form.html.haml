@@ -59,6 +59,14 @@
                     = f.text_field :web_url, class: 'form-control'
 
               .row
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  .form-group
+                    %label Online Application Website
+                    .pull-right
+                      %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.show_application_link, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'application_link' } }
+                    = f.text_field :online_application_link, class: 'form-control'
+
+              .row
                 .col-xs-12.col-sm-12.col-md-6.col-lg-6
                   .form-group
                     %label Email

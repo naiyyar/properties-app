@@ -230,6 +230,18 @@ module BuildingsHelper
 		end
 	end
 
+	def apply_online_link building
+		link_to 'Apply online', building.online_application_link, 
+														class: 'btn btn-primary btn-o btn-block font-bolder', 
+														target: '_blank'
+	end
+
+	def contact_leasing_link building, bg_col=''
+		link_to 'Contact Leasing Team', new_contact_path(building_id: building.id), 
+																		class: "btn btn-primary #{bg_col} btn-block font-bolder", 
+																		remote: true
+	end
+
 	def check_availability
 		'<b>Check Availability</b>'.html_safe
 	end

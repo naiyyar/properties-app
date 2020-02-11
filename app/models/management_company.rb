@@ -49,6 +49,10 @@ class ManagementCompany < ApplicationRecord
   	company_buildings.where('active_web is true and web_url is not null').present?
   end
 
+  def apply_link?
+    company_buildings.where('apply_link is true and online_application_link is not null').present?
+  end
+
   def cached_buildings
   	Rails.cache.fetch([self, 'company_buildings']) { company_buildings }
   end
