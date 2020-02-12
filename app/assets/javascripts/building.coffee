@@ -26,13 +26,13 @@ $(document).on 'click', '.apple-switch.company', (e) ->
 	el = $(this)
 	field = el.data('fieldtype')
 	id = el.data('companyid');
-	checkbox_status = $(this).is(':checked')
+	check_status = $(this).is(':checked')
 	if field == 'website'
-		params = { active_web: checkbox_status }
+		params = { active_web: check_status }
 	else if field == 'apply'
-		params = { apply_link: checkbox_status }
+		params = { apply_link: check_status }
 	else
-		params = { active_email: checkbox_status }
+		params = { active_email: check_status }
 	
 	$.ajax
 		url: '/management_companies/'+id+'/set_availability_link'
