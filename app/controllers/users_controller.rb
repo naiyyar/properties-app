@@ -57,10 +57,11 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@buildings = @user.buildings.includes(:uploads, :building_average, :units).paginate(:page => params[:page], :per_page => 20)
+		
 	end
 
 	def edit
+		@buildings = @user.buildings.includes(:uploads, :building_average, :units).paginate(:page => params[:page], :per_page => 20)
 	end
 
 	def create

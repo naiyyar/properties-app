@@ -1,3 +1,15 @@
-<div class="tables">
-	<%= render partial: 'form' %>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+		<%= render partial: 'form' %>
+	</div>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <% if @buildings.present? %>
+      <h3 style="margin-top: 0px;"><%= @manage_buildings.present? ? 'Connected' : 'Listed' %> Properties (<%= @buildings.count %>)</h3>
+		 <%= render partial: 'listed_properties' %>
+    <%else%>
+      <h3 style="margin-top: 0px;">Listed Properties(0)</h3>
+      <%= link_to 'Add a property', new_building_path, class: 'btn btn-blue' %>
+    <%end%>
+  </div>
 </div>
