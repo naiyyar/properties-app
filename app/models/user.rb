@@ -139,7 +139,11 @@ class User < ApplicationRecord
   end
 
   def user_name
-    self.name.present? ? self.name : self.email[/[^@]+/]
+    name.present? ? name : email[/[^@]+/]
+  end
+
+  def logged_in_user_name
+    name.present? ? name : authorizations&.first.name
   end
 
   def property_owner? object

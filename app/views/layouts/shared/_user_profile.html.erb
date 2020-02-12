@@ -10,9 +10,9 @@
     </div>
     <ul>
       <li><a href="<%= saved_buildings_user_path(current_user) %>"><span class="fa fa-heart"></span>Saved Buildings</a></li>
-      <li><a href="<%= managertools_user_path(current_user, type: 'featured') %>"><span class="fa fa-wrench"></span>Manager Tools</a></li>
+      <!-- <li><a href="<%#= managertools_user_path(current_user, type: 'featured') %>"><span class="fa fa-wrench"></span>Manager Tools</a></li> -->
       <li><a href="<%= edit_user_path(current_user) %>"><span class="fa fa-gear"></span>Settings</a></li>
-      <li><a href="<%= user_path(current_user) %>"><span class="fa fa-user"></span>Profile</a></li>
+      <!-- <li><a href="<%#= user_path(current_user) %>"><span class="fa fa-user"></span>Profile</a></li> -->
       <li class="divider"></li>
       <li><%= link_to '<span class="fa fa-power-off"></span>Logout'.html_safe, destroy_user_session_path, :method => :delete %> </li>
     </ul>
