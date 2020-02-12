@@ -42,15 +42,15 @@ class ManagementCompany < ApplicationRecord
   end
 
   def active_email_buildings?
-  	company_buildings.where('active_email is true and email is not null').present?
+  	company_buildings.with_active_email.present?
   end
 
   def active_website_buildings?
-  	company_buildings.where('active_web is true and web_url is not null').present?
+  	company_buildings.with_active_web.present?
   end
 
   def apply_link?
-    company_buildings.where('apply_link is true and online_application_link is not null').present?
+    company_buildings.with_application_link.present?
   end
 
   def cached_buildings

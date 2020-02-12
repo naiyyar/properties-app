@@ -55,6 +55,8 @@
 #  price                   :integer
 #  active_web              :boolean
 #  active_email            :boolean
+#  online_application_link :boolean
+#  show_application_link   :boolean
 
 class Building < ApplicationRecord
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
@@ -135,16 +137,13 @@ class Building < ApplicationRecord
   scope :saved_favourites, -> (user) do
     joins(:favorites).where('buildings.id = favorites.favorable_id AND favorites.favoriter_id = ?', user.id )
   end
-
-  # scope :active_featured_buildings, -> (buildings) do 
-  #   buildings.joins(:featured_buildings).where('buildings.id = featured_buildings.building_id AND active is true')
-  # end
-
   scope :building_photos, -> (buildings) do 
     buildings.joins(:uploads).where('buildings.id = uploads.imageable_id AND imageable_type = ?', 'Building')
   end
-
-  scope :with_active_listing, -> {where('listings_count > ?', 0)}
+  scope :with_active_listing,   -> {where('listings_count > ?', 0)}
+  scope :with_active_web,       -> {where('active_web is true and web_url is not null')}
+  scope :with_active_email,     -> {where('active_email is true and email is not null')}
+  scope :with_application_link, -> {where('show_application_link is true and online_application_link is not null')}
 
   #amenities scopes
   AMENITIES = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,

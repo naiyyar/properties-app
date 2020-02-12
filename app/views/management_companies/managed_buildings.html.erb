@@ -1,14 +1,12 @@
-<div class="tables">
-  <% if current_user.present? %>
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="pull-right">
-          <%= link_to 'Edit', edit_management_company_path(@management_company), class: 'btn btn-default' %>
-        </div>
+<% if current_user.present? %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="pull-right">
+        <%= link_to 'Edit', edit_management_company_path(@management_company), class: 'btn btn-default' %>
       </div>
     </div>
-    <h2></h2>
-  <%end%>
+  </div>
+  <h2></h2>
+<%end%>
   
-  <%= render partial: 'buildings/buildings', locals: { buildings: @buildings } %>
-</div>
+<%= render partial: 'buildings/buildings', locals: { buildings: @buildings } %>
