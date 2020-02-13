@@ -28,7 +28,7 @@
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="col-sm-6">
           <h3>Building Information</h3>
-          <% building_amenities.each do |key, value| %>
+          <% BuildingAmenities.all_amenities.each do |key, value| %>
             <% if value == 'Elevator' %>
               <div class="checkbox custom-checkbox"><label><%= check_box_tag :elevator,'yes', @building.elevator ? true : false %> <span class="fa fa-check"></span> Elevator</label></div>
               <div>

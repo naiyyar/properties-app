@@ -4,7 +4,7 @@
     <%= link_to 'Edit', "/building_steps/building_information?building_id=#{@building.id}", class: "btn btn-o btn-default btn-xs pull-right" if current_user.present? and current_user.has_role? :admin %>
   </h3>
   <div class="row">
-    <% building_amenities.each_pair do |k, v| %>
+    <% BuildingAmenities.all_amenities.each_pair do |k, v| %>
       <%if @building[k].present? %>
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem">
           <span><%= image_tag "amenities_icons/#{v}1.png" %></span>

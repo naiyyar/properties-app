@@ -60,6 +60,7 @@
 
 class Building < ApplicationRecord
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
+  BEDROOMS    = [['0', 'Studio'],['1','1 Bed'],['2', '2 Bed'],['3', '3 Bed'],['4', '4+ Bed']]
   include PgSearch
   include Imageable
   include SaveNeighborhood
@@ -256,7 +257,7 @@ class Building < ApplicationRecord
 
   def amenities
     amenities = []
-    ApplicationController.helpers.building_amenities.each_pair do |k, v|
+    BuildingAmenities.all_amenities.each_pair do |k, v|
       if self[k].present?
         if v == 'Elevator'
          amenities << "#{v}(#{elevator})"
