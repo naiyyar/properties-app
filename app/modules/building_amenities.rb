@@ -1,17 +1,33 @@
 module BuildingAmenities
 	class << self
-		def all_amenities
-			amenities = {
+		def building_edit_emenities
+			{
+				no_fee: 								'No Fee Building',
 				childrens_playroom: 		'Childrens Playroom',
-				courtyard: 							'Courtyard',
+				courtyard: 				 			'Courtyard',
+				pets_allowed_cats: 			'Cats Allowed',
+				pets_allowed_dogs: 			'Dogs Allowed',
+				doorman: 								'Doorman',
+				elevator: 							'Elevator',
 				garage: 								'Garage',
-				management_company_run: 'Management Company Run'
+				gym: 										'Gym',
+				laundry_facility: 			'Laundry in Building',
+				live_in_super: 					'Live in super',
+				management_company_run: 'Management Company Run',
+				parking: 								'Parking',
+				roof_deck: 							'Roof Deck',
+				swimming_pool: 					'Swimming Pool',
+				walk_up: 								'Walk up'
 			}
-			@building_amenities ||= col1_popular_building_amenities.merge(col2_popular_building_amenities.merge(other_building_amenities.merge(amenities)))
+		end
+		
+		def all_amenities
+			building_edit_emenities
 		end
 
+		# for filtering purpose
 		def col1_popular_building_amenities
-			@col1_popular_building_amenities ||= {
+			{
 				no_fee: 					 	'No Fee Building',
 				pets_allowed_cats: 	'Cats Allowed',
 				pets_allowed_dogs: 	'Dogs Allowed',
@@ -20,7 +36,7 @@ module BuildingAmenities
 		end
 
 		def col2_popular_building_amenities
-			@col2_popular_building_amenities ||= {
+			{
 				elevator: 					'Elevator',
 				laundry_facility: 	'Laundry in Building',
 				walk_up: 						'Walk up',
@@ -29,7 +45,7 @@ module BuildingAmenities
 		end
 
 		def other_building_amenities
-			@other_building_amenities ||= {
+			{
 				parking: 								'Parking/Garage',
 				gym: 										'Gym',
 				live_in_super: 					'Live in super',
