@@ -15,6 +15,10 @@ jQuery ->
 		$().fancybox
 			selector: '.lightSlider .lslide a'
 			backFocus : false
+			buttons : [
+	      'thumbs',
+	      'close'
+	    ]
 	
 	else
 		$('.gallery').lightSlider

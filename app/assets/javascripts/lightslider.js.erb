@@ -698,7 +698,9 @@
                     }
                     this.move($el, swipeVal);
                 }
-                $el.fetchAssets();
+                if(this.data('viewType') != 'show'){
+                    $el.fetchAssets();
+                }
             },
 
             touchEnd: function (distance) {
@@ -968,15 +970,15 @@
         //Custom
         $el.fetchAssets = function(){
       		var building_id = this.data('buildingid');
-            var view_type = this.data('viewType');
-            var path = this.data('path');
-            var slides = $el.find('.lslide');
-            var left_li = $el.find('.clone.left');
-            var loader_img = "<%= image_path('ajax-loader.gif') %>";
-            var loader = '<div class="slide-loader"><img src="'+loader_img+'" /></div>';
+            //var view_type   = this.data('viewType');
+            var path        = this.data('path');
+            var slides      = $el.find('.lslide');
+            var left_li     = $el.find('.clone.left');
+            var loader_img  = "<%= image_path('ajax-loader.gif') %>";
+            var loader      = '<div class="slide-loader"><img src="'+loader_img+'" /></div>';
         	
             if(slides.find('a').length <= 1){
-                if(left_li.children().length == 0 && view_type != 'show'){
+                if(left_li.children().length == 0){
                     $el.parent().append(loader);
                     
                     $.ajax({
@@ -1050,7 +1052,9 @@
                     }, 400);
                 }
             }
-            $el.fetchAssets();
+            if(this.data('viewType') != 'show'){
+                $el.fetchAssets();
+            }
         };
         $el.goToNextSlide = function () {
             var nextI = true;
@@ -1080,7 +1084,9 @@
                     }, 400);
                 }
             }
-            $el.fetchAssets();
+            if(this.data('viewType') != 'show'){
+                $el.fetchAssets();
+            }
         };
         $el.mode = function (_touch) {
             if (settings.adaptiveHeight === true && settings.vertical === false) {
