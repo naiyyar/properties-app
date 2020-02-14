@@ -3,7 +3,7 @@
   = render partial: 'home/search_form'
 - unless @pop_neighborhoods.blank? and browser.device.mobile?
   .pull-left.neighborhoods-dropdown.hidden-xs{style: "margin-top: 8px;"}
-    .btn-group
+    .btn-group.btn-dp-toggle
       %button#lr2.btn.btn-o.btn-primary.dropdown-toggle{"data-toggle" => "dropdown", style: "min-width: 121px;"}
         %span.dropdown-label= params[:searched_by] == 'neighborhoods' ? @searched_neighborhoods : 'Neighborhoods'
          
@@ -13,14 +13,14 @@
           = render partial: 'layouts/shared/neighborhoods_list'
   - if show_filters?
     .pull-right.hidden-xs
-      .btn-filter
+      .btn-filter.btn-dp-toggle
         %button{class: "btn sc-lg btn-o btn-primary dropdown-toggle handleFilter #{params[:filter].present? ? 'active' : ''}", "data-toggle" => "dropdown"}
           %span.dropdown-label
             %span.fa.fa-filter
              #{'Filter'}
             %span.filter-counts
            
-      .pull-right.btn-sort
+      .pull-right.btn-sort.btn-dp-toggle
         %button{class: "btn sc-lg btn-o btn-primary dropdown-toggle #{params[:sort_by].present? ? 'active' : ''}", "data-toggle" => "dropdown", style: 'padding: 10px 3px !important;'}
           %span.dropdown-label
             %span.fa.fa-sort

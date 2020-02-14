@@ -16,22 +16,13 @@
 
     //for ios devices double tap
     $('body').on('click','a', function(e) {
-        //e.preventDefault();
-        //if(dragging){
-        //    e.preventDefault();
-        //}else{
         var building_id = '';
         var type = '';
         var el = $(this);
-        //var link = el.attr('href');
-        //var target = el.attr('target');
         var role = el.data('role');
         building_id = el.data('bid');
         type = el.data('type');
         if(role != 'slider'){
-            //if(link.match(/https:/) != null){
-            //    target = target == undefined ? 'self' : target;
-            //    window.open(link, target);
             if(building_id != ''){
                 if(type == 'listings'){
                     showActiveListingsPopup(building_id);    
@@ -40,7 +31,6 @@
                 }
             }
         }
-        //}
     });
 
     $("a").on("touchstart", function(){
@@ -271,7 +261,6 @@
     });
 
     var setSession = function(view_type){
-        console.log(view_type)
         $.ajax({
             url: '/set_split_view_type',
             beforeSend: function(xhr){
@@ -302,11 +291,12 @@
 
     // functionality for custom dropdown select list
     $('.dropdown-select li a').click(function() {
-        if (!($(this).parent().hasClass('disabled'))) {
+        var dp_s = $(this).parent();
+        if (!(dp_s.hasClass('disabled'))) {
             $(this).prev().prop("checked", true);
-            $(this).parent().siblings().removeClass('active');
-            $(this).parent().addClass('active');
-            $(this).parent().parent().siblings('.dropdown-toggle').children('.dropdown-label').html($(this).text());
+            dp_s.siblings().removeClass('active');
+            dp_s.addClass('active');
+            dp_s.parent().siblings('.dropdown-toggle').children('.dropdown-label').html($(this).text());
         }
     });
 
@@ -318,34 +308,35 @@
 
     $('.handleFilter, .closeFilter').click(function(e) {
         e.stopPropagation();
-        $('.filter').slideToggle(200);
-        $('.btn-filter').toggleClass('open');
+        DPButtons.init();
+        DPButtons.handleFilter()
         initSlider();
+        DPButtons.closeDropdowns($(this), 'other');
     });
 
     //Avoid dropdown menu close on click inside
     $(document).on('click', '.neighborhoods-dropdown .dropdown-menu', function (e) {
-      e.stopPropagation();
+        e.stopPropagation();
+    });
+
+    $(document).on('click', '.dropdown-toggle', function(){
+        DPButtons.init();
+        DPButtons.closeDropdowns($(this), 'filter');
     });
     
     //Running this script only on desktop views
     //var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
 
     $(document).click(function(e) {
-        //if(!isMobile && window.innerWidth > 799){
         e.stopPropagation();
-        //$(e.target).closest('.filter').length skip hiding filter panel on this click
         if($(e.target).closest('.filter').length === 0){
             if($('.filter').is(':visible')){
                 $('.filter').slideUp(200);
             }
         }
-        //}
-         
     });
 
-     $('.handleSort').click(function(e) {
-        //e.preventDefault();
+    $('.handleSort').click(function(e) {
         $('.sortMenu').slideToggle(200);
     });
 
@@ -498,33 +489,25 @@
     $('.phone_number').mask("(000) 000-0000", mask_options);
     $('#card-number').mask("0000 0000 0000 0000 000", mask_options);
     $('#card-cvc').mask("0000", mask_options);
-    
-    //removing neighborhoods dropdown toggle background when mouse leave
-    var once_leaved = false;
-    var primary_dropdown = $('.neighborhoods-dropdown .dropdown-toggle, .btn-sort .dropdown-toggle, .btn-filter .dropdown-toggle');
-    primary_dropdown.on('mouseleave', function(){
-        if(!$(this).parent().hasClass('open')){
-            removeDropdownToggleBg($(this))
-            once_leaved = true
-        }
-    })
-    primary_dropdown.on('mouseover', function(){
-        if(once_leaved){
-            $(this).css({'background-color':'#3071a9', 'color':'#fff', 'border-color':'#285e8e'});
+
+    $(".btn-dp-toggle").on("hide.bs.dropdown", function(){
+        $(this).addClass('closed');
+    });
+
+    $(".btn-dp-toggle").on("show.bs.dropdown", function(){
+        if($(this).hasClass('closed')){
+            $(this).removeClass('closed');
         }
     });
 
-    function removeDropdownToggleBg(elem){
-        elem.css({'background-color':'transparent', 'color':'#0075c9', 'border-color':'#428bca'});
-    }
-
     $(document).on('click', function(e){
         e.stopPropagation();
-        var target = e.target;
-        var filter_length = $(target).parents().find('.filter').length;
-        if(filter_length <= 0 && target.className != 'dropdown-menu dropdown-select userMenu sc-lg'){
-            removeDropdownToggleBg(primary_dropdown)
-        }
+        // var target = e.target;
+        // var filter_length = $(target).parents().find('.filter').length;
+        // if(filter_length <= 0 && target.className != 'dropdown-menu dropdown-select userMenu sc-lg'){
+        //     DPButtons.init();
+        //     DPButtons.removeDropdownToggleBg(primary_dropdown)
+        // }
     });
 
     //Hiding mobile browser select box on soeted by text click
