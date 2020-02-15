@@ -112,7 +112,7 @@ class ApplicationController < ActionController::Base
   end
 
   def controllers
-    ['users/sessions', 'users/registrations', 'buildings', 'reviews')
+    ['users/sessions', 'users/registrations', 'buildings', 'reviews']
   end
 
   def actions
