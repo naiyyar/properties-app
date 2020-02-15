@@ -38,17 +38,17 @@ module BuildingAmenities
 		def col2_popular_building_amenities
 			{
 				elevator: 					'Elevator',
-				laundry_facility: 	'Laundry in Building',
-				walk_up: 						'Walk up',
+				laundry_facility: 	'Laundry In Building',
+				walk_up: 						'Walk Up',
 				courtyard: 					'Courtyard'
 			}
 		end
 
 		def other_building_amenities
 			{
-				parking: 								'Parking/Garage',
 				gym: 										'Gym',
-				live_in_super: 					'Live in super',
+				live_in_super: 					'Live In Super',
+				parking: 								'Parking/Garage',
 				roof_deck: 							'Roof Deck',
 				swimming_pool: 					'Swimming Pool'
 			}

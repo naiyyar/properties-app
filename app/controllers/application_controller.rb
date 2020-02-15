@@ -4,22 +4,23 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session, except: :load_infobox
 
   before_action :allow_iframe_requests
-  after_action  :store_location,              unless: :skip_store_location
-  #after_action :set_view_type
+  after_action  :store_location, unless: :skip_store_location
   before_action :popular_neighborhoods
   before_action :set_timezone, if: :user_signed_in?
 
-  helper_method :browser_time_zone, :uptown_count, :brooklyn_count, :queens_count, :bronx_count
+  helper_method :browser_time_zone,
+                :uptown_count,
+                :brooklyn_count,
+                :queens_count,
+                :bronx_count
 
-
-
-  def set_timezone  
-    Time.zone = current_user.time_zone 
-  end  
+  def set_timezone
+    Time.zone = current_user.time_zone
+  end
 
   def browser_time_zone
     browser_tz = ActiveSupport::TimeZone.find_tzinfo(cookies[:timezone])
-    #ActiveSupport::TimeZone.all.find{ |zone| zone.tzinfo == browser_tz } || Time.zone
+    # ActiveSupport::TimeZone.all.find{ |zone| zone.tzinfo == browser_tz } || Time.zone
     browser_tz || Time.zone
   rescue TZInfo::UnknownTimezone, TZInfo::InvalidTimezoneIdentifier
     Time.zone
@@ -27,9 +28,9 @@ class ApplicationController < ActionController::Base
   
   def store_location
     # store last url as long as it isn't a /users path
-    if request.format.html?
-      session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
-    end
+    return unless request.format.html?
+
+    session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
   end
 
   def popular_neighborhoods
@@ -38,26 +39,31 @@ class ApplicationController < ActionController::Base
   end
 
   def uptown_count
-    @uptown_count   ||= Neighborhood.nb_buildings_count(pop_neighborhoods, view_context.uptown_sub_borough)
+    @uptown_count ||= Neighborhood.nb_buildings_count(pop_neighborhoods,
+                                                      view_context.uptown_sub_borough)
   end
 
   def brooklyn_count
-    @brooklyn_count ||= Building.city_count(pop_nb_buildings, 'Brooklyn', view_context.brooklyn_sub_borough)
+    @brooklyn_count ||= Building.city_count(pop_nb_buildings,
+                                            'Brooklyn',
+                                            view_context.brooklyn_sub_borough)
   end
 
   def queens_count
-    @queens_count   ||= Building.city_count(pop_nb_buildings, 'Queens', view_context.queens_sub_borough)
+    @queens_count ||= Building.city_count(pop_nb_buildings,
+                                          'Queens',
+                                          view_context.queens_sub_borough)
   end
 
   def bronx_count
-    @bronx_count    ||= Building.city_count(pop_nb_buildings, 'Bronx')
+    @bronx_count ||= Building.city_count(pop_nb_buildings, 'Bronx')
   end
 
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(_resource)
     save_review
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     save_review
 	end
 
@@ -98,7 +104,7 @@ class ApplicationController < ActionController::Base
   end
 
   def pop_nb_buildings
-    @pop_buildings ||= Building.select(:city, :neighborhood)
+    @pop_nb_buildings ||= Building.select(:city, :neighborhood)
   end
 
   def pop_neighborhoods
@@ -106,48 +112,53 @@ class ApplicationController < ActionController::Base
   end
 
   def controllers
-    ['users/sessions','users/registrations','buildings', 'reviews']
+    ['users/sessions', 'users/registrations', 'buildings', 'reviews')
   end
 
   def actions
-    ['new','contribute', 'index']
+    %w(new contribute index)
   end
 
+  # OPTIMIZE ... Too many lines
   def save_review
+    # SaveReview.new(form_data: session[:form_data])
     if session[:form_data].present?
-      if session[:object_type].present? and session[:object_type] == 'building'
-        building = Building.create(session[:form_data]['building'])
-        building.update(user_id: current_user.id) if current_user.present?
+      building_data = session[:form_data]['building']
+      if session[:object_type].present? && session[:object_type] == 'building'
+        building = Building.create(building_data)
+        building.update(user_id: current_user.id) if current_user
         flash_message = 'Building created successfully.'
         sign_in_redirect_path(building, flash_message)
-      elsif session[:object_type].present? and session[:object_type] == 'unit' and session[:form_data]['building'].present?
-        building = Building.find_by_building_street_address(session[:form_data]['building']['building_street_address'])
-        session[:form_data]['building']['units_attributes']['0']['building_id'] = building.id if building.present?
-        unit = Unit.find(session[:form_data]['unit_id']) if session[:form_data]['unit_id'].present?
-        unit_params = session[:form_data]['building']['units_attributes']['0']
+      elsif session[:object_type].present? && session[:object_type] == 'unit' && building_data.present?
+        unit_attributes = building_data['units_attributes']['0']
+        unit_id         = session[:form_data]['unit_id']
+        building        = Building.find_by_building_street_address(building_data['building_street_address'])
+        unit_attributes['building_id'] = building.id if building.present?
+        unit            = Unit.find(unit_id) if unit_id.present?
+        unit_params     = unit_attributes
         if unit.present?
-          @unit = unit.update(unit_params)
-          @unit_object = unit
+          @unit         = unit.update(unit_params)
+          @unit_object  = unit
         else
-          @unit = Unit.create(unit_params)
-          @unit_object = @unit
+          @unit         = Unit.create(unit_params)
+          @unit_object  = @unit
           flash_message = 'Unit created successfully.'
         end
         sign_in_redirect_path(@unit_object, flash_message)
       else
-        reviewable = find_reviewable
-        review = reviewable.reviews.build(session[:form_data]['review'])
-        review.user_id = current_user.id
-        rating_score = session[:form_data]['score']
+        reviewable      = find_reviewable
+        review          = reviewable.reviews.build(session[:form_data]['review'])
+        review.user_id  = current_user.id
+        rating_score    = session[:form_data]['score']
         if session[:form_data]['vote'] == 'true'
           vote = current_user.vote_for(reviewable)
         else
           vote = current_user.vote_against(reviewable)
         end
         
-        udid = session[:form_data]['upload_uid']
-        session[:form_data] = nil
-        session[:after_contribute] = 'reviews'
+        udid                        = session[:form_data]['upload_uid']
+        session[:form_data]         = nil
+        session[:after_contribute]  = 'reviews'
         if review.save
           review.set_imageable(udid) if udid.present?
           if rating_score.present? 
@@ -228,7 +239,7 @@ class ApplicationController < ActionController::Base
 	def find_reviewable
     session[:form_data].each do |name, value|
       if name =~ /(.+)_id$/
-          return $1.classify.constantize.find(value)
+        return $1.classify.constantize.find(value)
       end
     end
   end
@@ -246,15 +257,6 @@ class ApplicationController < ActionController::Base
 
   def skip_store_location
     request.format.json? || request.format.js?
-  end
-  
-  def set_view_type
-    # session[:view_type] = session[:view_type]
-    # if params[:searched_by].present? and session[:view_type] == 'mapView'
-    #   session[:view_type] = 'mapView'
-    # else
-    #   session[:view_type] = nil
-    # end
   end
 
 end
