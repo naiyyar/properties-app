@@ -10,12 +10,13 @@ class BillingsController < ApplicationController
   end
 
   def show
-    @view = 'pdf'
+    @view     = 'pdf'
+    file_name = "invoice_#{@billing.created_at.strftime('%d-%m-%Y')}"
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
       format.pdf do
-        render wicked_pdf_options("invoice_#{@billing.created_at.strftime('%d-%m-%Y')}", 'billings/show')
+        render wicked_pdf_options(file_name, 'billings/show')
       end
     end
   end
@@ -23,8 +24,8 @@ class BillingsController < ApplicationController
   def email_receipt
     if params[:email_to].present?
       params[:email_to].split(',').each do |email|
-        BillingMailer.send_payment_receipt(billing: @billing, 
-                                           to_email: email.gsub(' ', ''), 
+        BillingMailer.send_payment_receipt(billing: @billing,
+                                           to_email: email.gsub(' ', ''),
                                            view: params[:view],
                                            card: @card).deliver
       end
@@ -40,15 +41,19 @@ class BillingsController < ApplicationController
   end
 
   def create_new_card
-    billing_service = BillingService.new(params[:billing][:stripe_card_id], params[:email])
+    card_id         = params[:billing][:stripe_card_id]
+    billing_service = BillingService.new(card_id, params[:email])
     begin
-      billing_service.create_source(billing_service.get_customer_id(current_user))
+      customer_id = billing_service.get_customer_id(current_user)
+      billing_service.create_source(customer_id)
     rescue Stripe::CardError => e
       puts "ERROR: #{e.message}"
     end
     
     respond_to do |format|
-      format.html { redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Card successfully saved.' }
+      format.html { 
+        redirect_to managertools_user_path(current_user, type: 'billing'), notice: 'Card successfully saved.'
+      }
     end
   end
 
@@ -62,14 +67,16 @@ class BillingsController < ApplicationController
     @billing = Billing.new(billing_params)
     email    = billing_params[:email]
     respond_to do |format|
-      if @billing.save_and_charge_existing_card!(customer_id: @customer_id, email: email, card_id: billing_params[:billing_card_id])
+      if @billing.save_and_charge_existing_card!( customer_id:  @customer_id,
+                                                  email:        email,
+                                                  card_id:      billing_params[:billing_card_id])
         format.html {
-          redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' 
+          redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.'
         }
       else
         format.html { 
           flash[:error] = @billing.errors.messages[:credit_card][0]
-          redirect_to :back 
+          redirect_to :back
         }
       end
     end

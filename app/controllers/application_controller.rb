@@ -121,7 +121,6 @@ class ApplicationController < ActionController::Base
 
   # OPTIMIZE ... Too many lines
   def save_review
-    # SaveReview.new(form_data: session[:form_data])
     if session[:form_data].present?
       building_data = session[:form_data]['building']
       if session[:object_type].present? && session[:object_type] == 'building'
