@@ -64,6 +64,7 @@ class Building < ApplicationRecord
   include PgSearch
   include Imageable
   include SaveNeighborhood
+  include BuildingReviews
 
   #Search and filtering methods
   extend BuildingSearch
@@ -198,6 +199,21 @@ class Building < ApplicationRecord
     end
   end
 
+  # creating unit from contribute
+  def created_unit session, building_data
+    unit_attributes = building_data['units_attributes']['0']
+    unit_id         = session[:form_data]['unit_id']
+    
+    unit_attributes['building_id'] = self.id
+    unit            = Unit.find(unit_id) rescue nil
+    unit_params     = unit_attributes
+    @unit  =  if unit.present?
+                unit.update(unit_params)
+              else
+                Unit.create(unit_params)
+              end
+  end
+
   def featured
     featured?
   end
@@ -289,10 +305,6 @@ class Building < ApplicationRecord
   def slug
     slug = building_name.present? ? "#{id} #{building_name}" : "#{id} #{building_street_address}"
     slug.parameterize
-  end
-
-  def building_reviews
-    reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
   end
 
   def image_uploads

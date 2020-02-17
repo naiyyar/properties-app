@@ -72,9 +72,8 @@ class BuildingsController < ApplicationController
       @buildings    = Building.all
       @search_type  = 'building'
     end
-    #@buildings                = @buildings.where.not(id: FeaturedBuilding.pluck(:building_id)) if params[:featured_as].present?
     @feature_comp_search_type = params[:featured_on].present? ? 'feature_comp_on' : 'feature_comp_as'
-    @buildings                = @buildings.text_search(params[:term]).reorder('building_street_address ASC').limit(10).includes(:units)
+    @buildings                = @buildings.text_search(params[:term]).reorder('building_street_address ASC').limit(10).includes(:units, :management_company)
     @building                 = @buildings.where(id: params[:building_id]).first  if params[:building_id].present?
     @search_bar_hidden        = :hidden
   end

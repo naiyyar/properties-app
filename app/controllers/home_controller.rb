@@ -1,13 +1,14 @@
 require 'will_paginate/array'
 class HomeController < ApplicationController
-  before_action :reset_session, only: [:index, :auto_search]
-  before_action :format_search_string, only: :search
-  before_action :save_as_favourite, only: [:search]
-  before_action :set_rent_medians, only: [:search, :load_infobox]
+  before_action :reset_session,         only: [:index, :auto_search]
+  before_action :find_building,         only: [:load_infobox, :get_images]
+  before_action :format_search_string,  only: :search
+  before_action :save_as_favourite,     only: [:search]
+  before_action :set_rent_medians,      only: [:search, :load_infobox]
 
   def index
     @home_view = true
-    @buildings_count = Building.all.count
+    @buildings_count = pop_nb_buildings&.size
     @meta_desc = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
                   no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
     
@@ -21,32 +22,30 @@ class HomeController < ApplicationController
   end
 
   def load_infobox
-    building = Building.find(params[:object_id])
-    fav_color_class = building.fav_color_class(params[:current_user_id])
-    min_save_amount = building.min_save_amount(@rent_medians, @broker_percent)
+    fav_color_class = @building.fav_color_class(params[:current_user_id])
+    min_save_amount = @building.min_save_amount(@rent_medians, @broker_percent)
     render json: { html: render_to_string(:partial => '/layouts/shared/custom_infowindow', 
-                                          :locals => {  building: building,
-                                                        image: Upload.marker_image(building),
-                                                        rating_cache: building.rating_cache,
-                                                        recomended_per: building.recommended_percent,
-                                                        building_show: params[:building_show],
-                                                        current_user: @current_user,
-                                                        fav_color_class: fav_color_class,
-                                                        min_save_amount: min_save_amount
+                                          :locals => {  building:         @building,
+                                                        image:            Upload.marker_image(@building),
+                                                        rating_cache:     @building.rating_cache,
+                                                        recomended_per:   @building.recommended_percent,
+                                                        building_show:    params[:building_show],
+                                                        current_user:     @current_user,
+                                                        fav_color_class:  fav_color_class,
+                                                        min_save_amount:  min_save_amount
                                                       })
                   }
   end
 
   def get_images
-    building = Building.find(params[:building_id])
-    photos = Upload.cached_building_photos([params[:building_id]])
+    photos        = Upload.cached_building_photos([params[:building_id]])
     image_uploads = photos.present? ? photos.where(imageable_type: 'Building') : []
-    show_path = building_path(building)
+    show_path     = building_path(@building)
     render json: { html: render_to_string(:partial => '/home/lightslider', 
-                                          :locals => {  building: building,
+                                          :locals => {  building:     @building,
                                                         images_count: image_uploads.length,
-                                                        first_image: image_uploads[0],
-                                                        show_path: show_path
+                                                        first_image:  image_uploads[0],
+                                                        show_path:    show_path
                                                       })
                   }
   end
@@ -131,15 +130,20 @@ class HomeController < ApplicationController
   private
 
   def reset_session
-    session[:return_to] = nil if session[:return_to].present?
+    session[:return_to] = nil
+  end
+
+  def find_building
+    building_id = params[:object_id] || params[:building_id]
+    @building   = Building.find(building_id)
   end
 
   def format_search_string
     if params['search_term'].present?
       terms_arr      =  params['search_term'].split('-')
       @borough_city  = terms_arr.last
-      @search_string = terms_arr.pop #removing last elements-name of city
-      @search_string = terms_arr.join(' ').titleize #join neighborhoods
+      @search_string = terms_arr.pop
+      @search_string = terms_arr.join(' ').titleize
       @search_string = @search_string.gsub('  ', ' -') if @search_string == 'Flatbush   Ditmas Park'
       @search_string = @search_string.gsub(' ', '-')   if @search_string == 'Bedford Stuyvesant'
       @search_string = 'New York'                      if @search_string == 'Newyork'
@@ -166,11 +170,10 @@ class HomeController < ApplicationController
   end
 
   def save_as_favourite
-    if session[:favourite_object_id].present? and current_user.present?
-      building = Building.find(session[:favourite_object_id])
-      current_user.favorite(building)
-      session[:favourite_object_id] = nil
-    end
+    return unless session[:favourite_object_id].present? and current_user.present?
+    building = Building.find(session[:favourite_object_id])
+    current_user.favorite(building)
+    session[:favourite_object_id] = nil
   end
 
   def set_rent_medians
@@ -184,7 +187,6 @@ class HomeController < ApplicationController
 
   def pop_search_tab_title
     term = params[:search_term].split('-').join(' ').titleize
-    term.gsub!('Nyc', 'NYC')
-    "#{term}"
+    "#{term.gsub!('Nyc', 'NYC')}"
   end
 end

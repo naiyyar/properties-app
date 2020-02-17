@@ -94,12 +94,12 @@ class Review < ApplicationRecord
   end
 
   def set_votes vote, current_user, reviewable
-    if vote == 'true'
-      vote = current_user.vote_for(reviewable)
-    else
-      vote = current_user.vote_against(reviewable)
-    end
-    vote.update(review_id: id) if vote.present?
+    @vote  = if vote == 'true'
+              current_user.vote_for(reviewable)
+            else
+              current_user.vote_against(reviewable)
+            end
+    @vote.update(review_id: id) if @vote.present?
   end
 
   def set_score score_hash, reviewable, current_user
@@ -108,12 +108,6 @@ class Review < ApplicationRecord
       current_user.create_rating(score_hash[dimension], reviewable, id, dimension)
     end
   end
-
-  # def save_images review_attachments
-  #   review_attachments['image'].each do |img|
-  #     self.uploads.create!(image: img)
-  #   end
-  # end
 
   def set_imageable uid
     Upload.where(file_uid: uid).update_all(imageable_id: self.id, imageable_type: 'Review')
