@@ -1,8 +1,8 @@
 class ManagementCompaniesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_management_company, only: [:show, :edit, :update, :destroy, :managed_buildings, :set_availability_link]
-  before_action :save_as_favourite, only: [:show]
-  before_action :set_company_buildings, only: [:managed_buildings, :set_availability_link]
+  before_action :set_management_company,  only: [:show, :edit, :update, :destroy, :managed_buildings, :set_availability_link]
+  before_action :save_as_favourite,       only: [:show]
+  before_action :set_company_buildings,   only: [:show, :edit, :managed_buildings, :set_availability_link, :load_more_reviews]
   # GET /management_companies_url
   # GET /management_companies.json
   def index
@@ -25,7 +25,8 @@ class ManagementCompaniesController < ApplicationController
   end
 
   def load_more_reviews
-    @reviews = Review.where(reviewable_id: @management_company.buildings.pluck(:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
+    @reviews = Review.where(reviewable_id:   @buildings.pluck(:id), 
+                            reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
     @reviews = @reviews.where('id < ?', params[:object_id]).limit(10) if params[:object_id].present?
     
     respond_to do |format|
@@ -38,28 +39,27 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn        = @half_footer = true
-    buildings            = @management_company.company_buildings.includes(:uploads, :building_average)
     page_num             = params[:page].present? ? params[:page].to_i : 1
-    final_results        = Building.with_featured_building(buildings, page_num)
+    final_results        = Building.with_featured_building(@buildings, page_num)
     @manage_buildings    = final_results[1] if !params[:object_id].present?
     @all_buildings       = final_results[0][:all_buildings]
-    @recommended_percent = @management_company.recommended_percent(buildings)
-    @reviews             = Review.buildings_reviews(buildings)
+    @recommended_percent = @management_company.recommended_percent(@buildings)
+    @reviews             = Review.buildings_reviews(@buildings)
     @total_reviews       = @reviews.present? ? @reviews.count : 0
     @reviews             = @reviews.limit(10)
-    if buildings.present?
+    if @buildings.present?
       @broker_percent = BrokerFeePercent.first.percent_amount
-      @rent_medians = RentMedian.all
+      @rent_medians   = RentMedian.all
       #finding average rating for all managed buildings 
-      @stars = @management_company.get_average_stars(buildings, @total_reviews)
+      @stars = @management_company.get_average_stars(@buildings, @total_reviews)
       #For map
       @hash = final_results[0][:map_hash]
       if @hash.length > 0
         @lat = @hash.last['latitude']
         @lng = @hash.last['longitude']
       else
-        @lat = buildings.first.latitude
-        @lng = buildings.first.longitude
+        @lat = @buildings.first.latitude
+        @lng = @buildings.first.longitude
       end
       @zoom = 13 #buildings.length > 70 ? 13 : 11
     end
@@ -77,7 +77,7 @@ class ManagementCompaniesController < ApplicationController
 
   # GET /management_companies/1/edit
   def edit
-    @buildings = @manage_buildings = @management_company.buildings.paginate(:page => params[:page], :per_page => 20)
+    @buildings = @manage_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
   end
 
   # POST /management_companies

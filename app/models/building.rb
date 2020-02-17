@@ -184,16 +184,16 @@ class Building < ApplicationRecord
   def self.buildings_json_hash(searched_buildings)
     unless searched_buildings.class == Array
       searched_buildings.select(:id, 
-                        :building_name, 
-                        :building_street_address, 
-                        :latitude, 
-                        :longitude, 
-                        :zipcode, 
-                        :city, 
-                        :min_listing_price,
-                        :max_listing_price,
-                        :listings_count,
-                        :state, :price).as_json(:methods => [:featured])
+                                :building_name, 
+                                :building_street_address, 
+                                :latitude, 
+                                :longitude, 
+                                :zipcode, 
+                                :city, 
+                                :min_listing_price,
+                                :max_listing_price,
+                                :listings_count,
+                                :state, :price).as_json(:methods => [:featured])
     else
       searched_buildings.as_json(:methods => [:featured])
     end

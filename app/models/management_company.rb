@@ -33,7 +33,7 @@ class ManagementCompany < ApplicationRecord
   end
 
   def company_buildings
-  	buildings.includes(:featured_buildings)
+  	buildings.includes(:featured_buildings, :uploads, :building_average)
   					 .reorder(neighborhood: :asc, building_name: :asc, building_street_address: :asc)
   end
 
@@ -80,7 +80,9 @@ class ManagementCompany < ApplicationRecord
 	def get_average_stars managed_buildings, review_count
   	@total_rates = 0
     star_counts = []
-    rateables = Rate.where(rateable_id: buildings.pluck(:id), rateable_type: 'Building', dimension: 'building')
+    rateables = Rate.where(rateable_id:   managed_buildings.pluck(:id), 
+                           rateable_type: 'Building', 
+                           dimension:     'building')
     @total_rates = rateables.where('stars > ?', 0).sum(:stars)
 
     star_counts = (@total_rates.to_f/review_count).round(2).to_s.split('.')
