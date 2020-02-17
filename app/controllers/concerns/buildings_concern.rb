@@ -18,7 +18,7 @@ module BuildingsConcern
     
     @lat                   = @building.latitude
     @lng                   = @building.longitude
-    active_comps           = @building.active_comps.pluck(:building_id)
+    active_comps           = @building.active_comps
     @similar_properties    = Building.where(id: active_comps.pluck(:building_id))
                                     .includes(:building_average, :featured_buildings) if active_comps.present?
     buildings              = @similar_properties.to_a + [@building]

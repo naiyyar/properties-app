@@ -1,13 +1,12 @@
 class UploadsController < ApplicationController
-  load_and_authorize_resource only: [:documents]
-  before_action :find_upload, only: [:update, :edit, :destroy]
-	before_action :authenticate_user!, only: [:destroy]
-  after_action :clear_cache, only: [:create, :destroy]
+  load_and_authorize_resource         only: [:documents]
+  before_action :find_upload,         only: [:update, :edit, :destroy]
+	before_action :authenticate_user!,  only: [:destroy]
+  after_action  :clear_cache,         only: [:create, :destroy]
 
 	def index
     if params[:building_id].present?
       @building = Building.find(params[:building_id])
-      #@uploads = Upload.where("imageable_id = ? or imageable_id in (?)", @building.id, @building.units.map{|u| u.id}) #.order(:sort)
       @uploads = @building.uploads
     elsif params[:unit_id]
       @unit = Unit.find(params[:unit_id])
@@ -32,13 +31,13 @@ class UploadsController < ApplicationController
   end
 
   def rotate
-    @image = Upload.find(params[:id])
+    @image   = Upload.find(params[:id])
     rotation = params[:deg].to_f
     rotation ||= 90 # Optional, otherwise, check for nil!
     
     @image.rotate!(rotation)
 
-    redirect_to :back, flash[:notice] => "The image has been rotated"
+    redirect_to :back, flash[:notice] => 'The image has been rotated'
   end
 
   def edit
@@ -60,8 +59,8 @@ class UploadsController < ApplicationController
 
 	def create
     unless upload_params[:file_uid].present?
-      @imageable = find_imageable
-      @upload = @imageable.uploads.build(upload_params)
+      @imageable      = find_imageable
+      @upload         = @imageable.uploads.build(upload_params)
       @upload.user_id = current_user.id if current_user.present?
     else
       @upload = Upload.new(upload_params)
@@ -80,70 +79,6 @@ class UploadsController < ApplicationController
 	end
 
   def update
-    # document = @upload.document
-    # filename = URI.unescape(document.url).split('/').last #bucket file name[ex: 123.jpg]
-    # renamefilename = upload_params[:document_file_name]
-    # document.styles.keys+[:original].each do |style|
-    #   old_path = document.path(style)
-    #   new_path = new_path.gsub!("documents/#{filename}", "documents/#{renamefilename}")
-    #   #rename_attachment(document, old_path, new_path)
-    #   old_path = document.s3_bucket.objects.first
-    #   document.s3_bucket.objects[old_path].move_to(new_path, acl: :public_read)
-    # end
-    # creds = Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
-    # aws_s3 = Aws::S3::Resource.new(credentials: creds, region: 'us-west-2')
-    # bucket = aws_s3.bucket(ENV['AWS_S3_BUCKET'])
-    #filename = URI.unescape(document.url).split('/').last
-    # s3 = Aws::S3::Client.new( region: 'us-west-2',
-    #                           credentials: creds)
-
-    # s3.copy_object(bucket: ENV['AWS_S3_BUCKET'],
-    #                copy_source: ENV['AWS_S3_BUCKET']+'/'+filename,
-    #                key: upload_params[:document_file_name])
-
-    # s3.delete_object(bucket: ENV['AWS_S3_BUCKET'],
-    #                  key: "#{filename}f")
-    
-    #(document.styles.keys+[:original]).each do |style|
-    #   debugger
-    # filename = URI.unescape(document.url).split('/').last #bucket file name[ex: 123.jpg]
-    # renamefilename = upload_params[:document_file_name]
-    # obj = bucket.object(filename) # create object of original file name
-    # # debugger
-    # puts obj.inspect
-    # obj.move_to("aptreviews-app/#{renamefilename}", acl: 'public-read')
-    # puts "OUTPUT: #{obj.inspect}"
-    # obj = bucket.object(renamefilename)
-
-    #   #old_path = document.path(style)
-    #   #new_path = old_path.gsub("#{@upload.document_file_name}", "#{upload_params[:document_file_name]}")
-
-    #   #document.s3_bucket.objects.first.move_to(new_path, acl: :public_read)
-    #   #extension = Paperclip::Interpolations.extension(@upload.document, style)
-    #   # old_path = @upload.document.url
-    #   # common_s3_path = @upload.document.url.split('original/')
-    #   # new_path = common_s3_path[0]+"original/#{upload_params[:document_file_name]}?#{Time.now.to_i}"
-    #   # aws_obj = @upload.document.s3_bucket.objects.first
-    #   #aws_obj.move_to new_path, acl: :public_read, @upload.document.bucket_name
-    # end
-    # #s3 = Aws::S3::Client.new( region: 'us-west-2')
-    #Aws::S3::Base.establish_connection!(:access_key_id =>ENV['AWS_ACCESS_KEY_ID'],:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'])
-    # TODO renaming files on AWS-S3
-    # if params[:renaming_file].present?
-    #   (@upload.document.styles.keys+[:original]).each do |style|
-    #       debugger
-    #       #path = @upload.document.url(style)
-    #       #debugger
-    #       #FileUtils.move(path, File.join(File.dirname(path), new_file_name))
-    #       AWS::S3::S3Object.move_to(path, upload_params[:document_file_name], @upload.document.bucket_name
-    #       #debugger
-    #   end
-    #   @upload.document_file_name = new_file_name
-    #end
-    #@upload.rename_file(params)
-    
-    ####***** RENAMING FILE CODE on AFTER UPDATE callback *****#####
-
     if @upload.update(upload_params)
       respond_to do |format|  
         format.html{ redirect_to :back, notice: 'File Updated.' }
@@ -158,7 +93,7 @@ class UploadsController < ApplicationController
     if @upload.destroy
       respond_to do |format|  
         format.html{ redirect_to :back, notice: 'File deleted.' }
-        format.json { render json: { message: "File deleted from server" } }
+        format.json { render json: { message: 'File deleted from server' } }
         format.js
       end
     else

@@ -172,8 +172,8 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 <%= form_for Upload.new, html: { :multipart => true } do |f| %>
 	<%= f.hidden_field :file_uid, value: @uid %>
 	<%= f.file_field :image, multiple: true, id: 'upload_images', class: 'hidden', name: 'upload[image]' %>
-	<%= f.hidden_field :imageable_type, value: nil %>
-	<%= f.hidden_field :imageable_id, value: nil %>
+	<%= f.hidden_field :imageable_type, value: @reviewable.class.name %>
+	<%= f.hidden_field :imageable_id, 	value: @reviewable.id %>
 	<%#= f.submit 'Submit', class: "btn btn-primary hidden", id: 'upload_review_images' %>
 <%end%>
 

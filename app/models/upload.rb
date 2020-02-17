@@ -27,8 +27,9 @@ class Upload < ApplicationRecord
 	belongs_to :imageable, polymorphic: true, touch: true
   has_many :document_downloads
   belongs_to :user
-	#before_create :set_defaults
   default_scope { order('sort asc') }
+
+  IMG_CONTENT_TYPES = ['image/jpeg', 'image/gif', 'image/png']
 
 	has_attached_file :image, 
                     :styles => { :original => '900x800', :medium => '650x550' },
@@ -37,41 +38,18 @@ class Upload < ApplicationRecord
 	
 	validates_attachment :image, 
                 				# :presence => true,
-                				:content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] }
+                				:content_type => { :content_type => IMG_CONTENT_TYPES }
   
   has_attached_file :document
   validates_attachment  :document, 
                         # :presence => true,
-                        :content_type => { :content_type => ["application/pdf","application/vnd.ms-excel",     
-                                           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                                           "application/msword", 
-                                           "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
-                                           "text/plain"] }
-  #after_update :rename_file
-  #before_update :rename_file
-  #and (in my case, the paperclip attachement name is "file")
-
+                        :content_type => { :content_type => ['application/pdf','application/vnd.ms-excel',     
+                                                             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                                             'application/msword', 
+                                                             'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+                                                             'text/plain'] 
+                                          }
   after_create :set_sort_index
-
-  # def rename_file
-  #   #debugger
-  #   self.document = open(self.document.url)
-  #   self.document.instance_write(:file_name, '1234')
-  #   self.save
-  # #   #self.document.instance_write(:file_name, params[:upload][:document_file_name])
-  # #   Upload.where(id: params[:id]).each do |m|
-  # #     [:original].each do |style|
-  # #       s3 = AWS::S3.new
-  # #       key = "uploads/#{m.id}/#{style}/#{m.document_file_name}"
-  # #       object = s3.buckets[:bucket_name].objects[key]
-  # #       next unless object.exists?
-  # #       hash = m.document.hash_key style
-  # #       copy_key = "m/#{m.id}/#{hash}/#{m.document_file_name}"
-  # #       puts "Copying to #{copy_key}"
-  # #       object.copy_to(copy_key, acl: :public_read)
-  # #     end
-  # #   end
-  # end
 
   def self.uploads_json_hash(uploads)
     uploads.as_json(:methods => [:date_uploaded, :orig_image_url])
@@ -95,7 +73,7 @@ class Upload < ApplicationRecord
   end
 
   def uploaded_img_url
-    if self.image.exists?(:medium) #self.image.styles[:medium]
+    if self.image.exists?(:medium) # self.image.styles[:medium]
       self.image.url(:medium)
     else
       self.image.url(:original)
@@ -144,10 +122,8 @@ class Upload < ApplicationRecord
 
   def set_sort_index
     imageable = self.imageable
-    #unit_ids = imageable.units.map(&:id)
-    #uploads = Upload.where("imageable_id = ? or imageable_id in (?)", imageable.id, unit_ids).where.not(id: self.id)
-    uploads = Upload.where(imageable_id: imageable.id, imageable_type: 'Building') #.where.not(id: self.id)
-    uploads = uploads.order('sort ASC NULLS LAST, created_at ASC')
+    uploads = Upload.where(imageable_id: imageable.id, imageable_type: 'Building')
+                    .includes(:imageable).order('sort ASC NULLS LAST, created_at ASC')
     uploads.each_with_index do |upload, index|
       upload.update(sort: index+1) 
     end
