@@ -4,13 +4,14 @@ module SignInRedirect
 		
 		def redirect_path options
 			session 			= options[:session]
+			form_data 		= session[:form_data]
 			object 				= options[:object]
-			if session[:form_data].present?
-	      contribution = session[:form_data]['contribution']
+			if form_data.present?
+				contribution  = form_data['contribution']
 	      if contribution.present?
 	        building_contribution_path(object, contribution)
 	      else
-	        unit_contribution_path(object, session[:form_data]['unit_contribution'])
+	        unit_contribution_path(object, form_data['unit_contribution'])
 	      end
 	    else
 	      session[:return_to] || root_path
@@ -24,15 +25,19 @@ module SignInRedirect
       when 'unit_photos'
       	new_unit_upload_path(object.id)
       else
-        if object.kind_of? Building 
-          #Togoto Reviews path
-          user_steps_path(	building_id: 			object.id, 
-          									contribution_for: contribution, 
-          									contribution: 		contribution)
-        else
-          unit_path(object)
-        end
+        next_step_path(object, contribution)
       end
+		end
+
+		def next_step_path object, contribution
+			if object.kind_of?(Building)
+	      #To go to Reviews path
+	      user_steps_path(building_id: 			object.id, 
+	      								contribution_for: contribution, 
+	      								contribution: 		contribution)
+	    else
+	      unit_path(object)
+	    end
 		end
 
 		def unit_contribution_path obj, contribution

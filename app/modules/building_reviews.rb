@@ -5,19 +5,15 @@ module BuildingReviews
     self.reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
   end
 
-	def create_review session, current_user
-		form_data 		 							= session[:form_data]
-		review 				 							= self.reviews.build(form_data['review'])
-    review.user_id 							= current_user.id
-    rating_score   							= form_data['score']
-    udid                        = form_data['upload_uid']
-    session[:form_data]     		= nil
-    session[:after_contribute]  = 'reviews'
-    
+	def create_review current_user, form_params, review_params
+		review 				 = self.reviews.build(review_params)
+    review.user_id = current_user.id
     if review.save
+      rating_score = form_params['score']
+      udid         = form_params['upload_uid']
       review.set_imageable(udid) if udid.present?
       review.set_score(rating_score, self, current_user)
-      review.set_votes(form_data['vote'], current_user, self)
+      review.set_votes(form_params['vote'], current_user, self)
     end
 	end
 

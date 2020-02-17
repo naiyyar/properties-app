@@ -118,8 +118,10 @@ class ApplicationController < ActionController::Base
         end
       else
         reviewable = find_reviewable
-        if reviewable.create_review(session, current_user)
+        form_data  = session[:form_data]
+        if reviewable.create_review(current_user, form_data, form_data['review'])
           flash[:notice] = 'Review Created Successfully.'
+          session[:form_data], session[:after_contribute] = nil, 'reviews'
           if reviewable.kind_of? Building 
             return building_path(reviewable)
           else
@@ -146,7 +148,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_in_redirect_path object, session
-    return SignInRedirect.redirect_path(session: session, object:  object)
+    return SignInRedirect.redirect_path(session: session, object: object)
   end
 
   def allow_iframe_requests

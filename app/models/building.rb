@@ -276,7 +276,7 @@ class Building < ApplicationRecord
     BuildingAmenities.all_amenities.each_pair do |k, v|
       if self[k].present?
         if v == 'Elevator'
-         amenities << "#{v}(#{elevator})"
+          amenities << "#{v}(#{elevator})"
         else
           amenities << v
         end

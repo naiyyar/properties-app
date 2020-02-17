@@ -1,24 +1,22 @@
 class BuildingsController < ApplicationController 
-  load_and_authorize_resource # except: :favorite
-  before_action :authenticate_user!, except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
-  before_action :find_building, only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite]
-  before_action :save_as_favourite, only: [:show]
-  before_action :clear_cache, only: [:favorite, :unfavorite]
-  after_action :get_neighborhood, only: [:create, :update] #method in SaveBuildingNeighborhood
-  include BuildingsConcern #create, update
+  load_and_authorize_resource
+  before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
+  before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite]
+  before_action :save_as_favourite,   only: [:show]
+  before_action :clear_cache,         only: [:favorite, :unfavorite]
+  after_action :get_neighborhood,     only: [:create, :update]
+
+  include BuildingsConcern # create, update
 
   def index
     @filterrific = initialize_filterrific(
       Building,
       params[:filterrific],
-      # select_options: {
-      #   sorted_by: Building.options_for_sorted_by,
-      # },
       available_filters: [:search_query]
     ) or return
     @buildings = @filterrific.find.paginate(page: params[:page], per_page: 100)
                                   .includes(:building_average, :management_company)
-                                  .reorder('created_at desc') #.sorted_by(params[:sorted_by])
+                                  .reorder('created_at desc')
 
     respond_to do |format|
       format.html
@@ -57,7 +55,7 @@ class BuildingsController < ApplicationController
     @featured_comps = @building.featured_comps.order(created_at: :desc)
   end
 
-  #disconnecting building from a management company
+  # disconnecting building from a management company
   def disconnect_building
     Building.where(id: params[:id]).update_all(management_company_id: nil)
     redirect_to :back, notice: 'Building disconnected'
@@ -79,7 +77,6 @@ class BuildingsController < ApplicationController
   end
 
   def import
-    #Building.import_reviews(params[:file])
     ImportReviews.new(params[:file]).import_reviews
     redirect_to :back, notice: 'File imported.'
   end
@@ -94,7 +91,6 @@ class BuildingsController < ApplicationController
     else
       @building = Building.new
     end
-    
   end
 
   def edit
@@ -110,7 +106,7 @@ class BuildingsController < ApplicationController
       respond_to do |format|
         format.html {
           if params[:subaction].blank?
-            redirect_to building_path(@building), notice: "Successfully Updated"
+            redirect_to building_path(@building), notice: 'Successfully Updated'
           else
             redirect_to building_path(@building)
           end
@@ -118,15 +114,14 @@ class BuildingsController < ApplicationController
         format.json {render json: @building}
       end
     else
-      flash.now[:error] = "Error Updating"
+      flash.now[:error] = 'Error Updating'
       render :edit
     end
   end
 
   def destroy
     @building.destroy
-
-    redirect_to buildings_path, notice: "Successfully Deleted"
+    redirect_to buildings_path, notice: 'Successfully Deleted'
   end
 
   private

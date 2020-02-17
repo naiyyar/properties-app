@@ -2,39 +2,38 @@ module BuildingsConcern
   extend ActiveSupport::Concern
 
   def show
-    @show_map_btn = @half_footer = true
+    @show_map_btn     = @half_footer = true
     @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
-    broker_percent = BrokerFeePercent.first.percent_amount
-    @saved_amounts = @building.saved_amount(RentMedian.all, broker_percent)
-    @building_price = @building.price
-    @rating_cache = @building.rating_cache?
-    @price_ranges = @building.price_ranges
+    broker_percent    = BrokerFeePercent.first.percent_amount
+    @saved_amounts    = @building.saved_amount(RentMedian.all, broker_percent)
+    @building_price   = @building.price
+    @rating_cache     = @building.rating_cache?
+    @price_ranges     = @building.price_ranges
     
     #building + units images
-    @uploads = @building.chached_image_uploads
+    @uploads               = @building.chached_image_uploads
     @uploaded_images_count = @uploads.size
-    @documents = @building.doc_uploads
-    @reviews_count = @building.reviews_count.to_i
-
-    #Similiar buildings
-    @similar_properties = Building.where(id: @building.active_comps.pluck(:building_id)).includes(:building_average, :featured_buildings) if @building.active_comps.present?
+    @documents             = @building.doc_uploads
+    @reviews_count         = @building.reviews_count.to_i
     
-    @lat = @building.latitude
-    @lng = @building.longitude
-
-    buildings = @similar_properties.to_a + [@building]
-    @gmaphash = Building.buildings_json_hash(buildings)
-    @listings = @building.listings
-    @active_listings = @listings.active.reorder(rent: :asc)
+    @lat                   = @building.latitude
+    @lng                   = @building.longitude
+    active_comps           = @building.active_comps.pluck(:building_id)
+    @similar_properties    = Building.where(id: active_comps.pluck(:building_id))
+                                    .includes(:building_average, :featured_buildings) if active_comps.present?
+    buildings              = @similar_properties.to_a + [@building]
+    @gmaphash              = Building.buildings_json_hash(buildings)
+    @listings              = @building.listings
+    @active_listings       = @listings.active.reorder(rent: :asc)
     @all_inactive_listings = @listings.inactive
-    @inactive_listings = @all_inactive_listings.reorder(date_active: :desc, rent: :asc).limit(5)
+    @inactive_listings     = @all_inactive_listings.reorder(date_active: :desc, rent: :asc).limit(5)
 
     @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
                   "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 
                   "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.name if @building.management_company.present? }. "+ 
                   "Click to view #{@uploaded_images_count} photos and #{@reviews_count} reviews"
     
-    flash[:notice] = "Files are uploaded successfully." if params[:from_uploaded].present?
+    flash[:notice] = 'Files are uploaded successfully.' if params[:from_uploaded].present?
   end
 
   def create
@@ -54,17 +53,14 @@ module BuildingsConcern
       end
       if @building.blank?
         @building = Building.create(building_params)
-
         if @building.save
-          
           if params[:unit_contribution]
             contribute = params[:unit_contribution]
             unit_id = @building.units.last.id
           else
             contribute = params[:contribution]
-            #building_id = @building.id
           end
-          flash[:notice] = "Building Created."
+          flash[:notice] = 'Building Created.'
           if contribute.present?
             if ['unit_review', 'unit_photos', 'unit_amenities', 'unit_price_history'].include? contribute
               redirect_to contribute_buildings_path(contribution_for: contribute, building_id: @building.id, contribution: contribute)  
@@ -76,7 +72,7 @@ module BuildingsConcern
           end
           
         else
-          flash.now[:error] = "Error Creating"
+          flash.now[:error] = 'Error Creating'
           render :new
         end
       else
