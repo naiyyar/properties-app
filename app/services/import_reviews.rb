@@ -7,7 +7,7 @@ class ImportReviews < ImportService
 
 	def create_review row
 		rev = Review.new
-    rev.attributes = row.to_hash.slice(*row.to_hash.keys[5..8]) #excluding building specific attributes
+    rev.attributes = row.to_hash.slice(*row.to_hash.keys[5..8]) # excluding building specific attributes
     
     rev[:reviewable_id] 	= @building.id
     rev[:reviewable_type] = 'Building'
@@ -18,17 +18,16 @@ class ImportReviews < ImportService
     rev[:tos_agreement] 	= true
     rev[:scraped] 				= true
     rev.save!
-    #row['rating'] => score
     save_votes(row) if rev.present? and rev.id.present?
 	end
 
 	def save_votes row
 		@user.create_rating(row['rating'], @building, rev.id, 'building')
-    if row['vote'].present? and row['vote'] == 'yes'
-      @vote = @user.vote_for(@building)
-    else
-      @vote = @user.vote_against(@building)
-    end
+    @vote = if (row['vote'].present? and row['vote'] == 'yes')
+              @user.vote_for(@building)
+            else
+              @user.vote_against(@building)
+            end
     
     if @vote.present?
       @vote.review_id = rev.id
@@ -37,7 +36,8 @@ class ImportReviews < ImportService
 	end
 
 	def get_buildings row
-		Building.where(building_street_address: row['building_address'], zipcode: row['zipcode'])
+		Building.where(building_street_address: row['building_address'], 
+                   zipcode:                 row['zipcode'])
 	end
 
 	def import_reviews
@@ -45,11 +45,11 @@ class ImportReviews < ImportService
       row = Hash[[@header, @spreadsheet.row(i)].transpose ]
       if row['building_address'].present?
         @buildings = get_buildings(row)
-        unless @buildings.present?
-          @building = create_building(row)
-        else
-          @building = @buildings.first
-        end
+        @building  = unless @buildings.present?
+                      create_building(row)
+                    else
+                      @buildings.first
+                    end
         create_review(row) if @building.present? and @building.id.present?
       end
     end

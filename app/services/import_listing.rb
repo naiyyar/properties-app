@@ -28,9 +28,11 @@ class ImportListing < ImportService
     end
 	end
 
-	def get_building address
-		Building.where(building_street_address: address)
-		Building.where('building_street_address @@ :q', q: address) if @building.blank?
+	def find_building address
+    buildings = Building.where.not(building_street_address: nil)
+		building = buildings.where(building_street_address: address)
+		building = buildings.where('building_street_address @@ :q', q: address) if building.blank?
+    return building
 	end
 
 	def import_listings
@@ -38,7 +40,7 @@ class ImportListing < ImportService
     (2..@spreadsheet.last_row).each do |i|
       row = Hash[[@header, @spreadsheet.row(i)].transpose ]
       if row['building_address'].present? and row['unit'].present? and row['date_active'].present?
-        @building = get_building(row['building_address'])
+        @building = find_building(row['building_address'])
         if @building.present?
           create_listing(row, i)
         else

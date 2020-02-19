@@ -69,10 +69,11 @@
         .show-review-images
           %h4
           - if review.uploads.present?
-            - review.uploads.each do |asset|
-              .pull-left
-                %a.fancybox{href: "#{asset.image.url}", 'data-role' => 'slider'}
-                  = image_tag asset.image, alt: 'Image'
+            %ul.gallery.list-unstyled{data: { buildingid: "#{reviewable.id}", view_type: 'show', path:  building_path(reviewable) } }
+              - review.uploads.each do |asset|
+                %li
+                  %a{href: asset.image.url, 'data-role' => 'slider', 'data-fancybox' => 'gallery'}
+                    = image_tag asset.image, alt: 'Image'
     .commentActions
       %ul.list-inline.ricons.pull-left
         %li= social_share_button_tag(review.review_title, :url => "https://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}")
