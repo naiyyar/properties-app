@@ -11,6 +11,7 @@
     %link{href: buttercms_blog_atom_path, rel: "alternate", title: "Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City - Atom", type: "application/atom+xml"}/
     %link{href: buttercms_blog_rss_path, rel: "alternate", title: "Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City - RSS", type: "application/rss+xml"}/
     / See https://buttercms.com/docs/#cssstyling
+    / <link rel="stylesheet" href="http://d2z2rr99bkshyr.cloudfront.net/buttercms-post-defaults.css">
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = favicon_link_tag 'favicon.png'
@@ -25,5 +26,13 @@
     = render 'layouts/home/footer'
     %script{src: "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bb8502a693bfcd8", type: "text/javascript"}
 
+    %script{async: "", src: "https://www.googletagmanager.com/gtag/js?id=#{ENV['GOOGLE_TRACKING_ID']}"}
+
     :javascript
       $('.post-content p a').attr('target', '_blank');
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', "#{ENV['GOOGLE_TRACKING_ID']}");

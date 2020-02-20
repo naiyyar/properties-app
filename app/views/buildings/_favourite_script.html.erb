@@ -1,3 +1,11 @@
+<% if params[:filter].present? %>
+  <%= hidden_field_tag :list_amenities,   params[:filter][:amenities] %>
+  <%= hidden_field_tag :list_bedrooms,    params[:filter][:listing_bedrooms] %>
+  <%= hidden_field_tag :list_min_price,   params[:filter][:min_price] %>
+  <%= hidden_field_tag :list_max_price,   params[:filter][:max_price] %>
+<%end%>
+
+
 <script type="text/javascript">
   // favourite script for market infowindow
     
@@ -101,12 +109,19 @@
 
     function showActiveListingsPopup(building_id){
       $('#remote-container').html('');
+      var filter_params = {
+        list_amenities: $('#list_amenities').val(),
+        list_bedrooms:  $('#list_bedrooms').val(),
+        list_min_price: $('#list_min_price').val(),
+        list_max_price: $('#list_max_price').val(),
+      };
+
       displayLoader();
       $.ajax({
         url: '/listings/show_more',
         type: 'get',
         dataType: 'script',
-        data: { building_id: building_id, listing_type: 'active' },
+        data: { building_id: building_id, listing_type: 'active', filter_params: filter_params },
         success: function(response){
           hideLoader();
         }

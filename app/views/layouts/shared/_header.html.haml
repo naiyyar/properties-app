@@ -6,11 +6,19 @@
       %a{href: "/"}= image_tag 'logo_white.png', alt: 'logo'
     #search-row{class: "search #{search_bar(:hidden)}"}
       = render partial: 'layouts/shared/search_form'
-    .pull-right.btn-hoods.visible-xs
-      %button{class: "btn btn-green dropdown-toggle-neighborhoods #{params[:neighborhoods].present? ? 'active' : ''}", "data-toggle" => "dropdown1"}
-        %span.dropdown-label= 'Hood'
-         
-        %span.caret
+    
+    .visible-xs.filter-btn-container
+      .btn-filter{style: 'width: 100%;'}
+        %button.btn.btn-o.btn-primary.btn-filter.handleFilter
+          %span.dropdown-label
+            %span.fa.fa-filter
+            Filter
+            %span.filter-counts
+      
+      .btn-hoods
+        %button.btn.btn-green.dropdown-toggle-neighborhoods{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
+          %span.dropdown-label Hood
+          %span.caret
 
     .pull-right.nav-items.headerLinks.hidden-xs{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
       = link_to 'Blog', '/blog'

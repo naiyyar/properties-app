@@ -1,5 +1,4 @@
 - active_listings = building.listings.select(:id, :active).active
-/ - debugger if building.id == 271
 .contact-links
 	- if building.all_three_cta?(active_listings)
 		.c-links

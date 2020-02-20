@@ -183,12 +183,16 @@ module BuildingsHelper
 		end
 	end
 
+	# filter%5Blisting_bedrooms%5D%5B%5D=1&searched_by=no-fee-apartments-nyc-neighborhoods
 	def active_listings_button building, event, klass, listings
 		title, classes = "#{listings.size} Active Listings", "btn btn-primary active-listing-link #{klass}"
 		unless event
-			link_to title, 'javascript:;', data: { bid: building.id, type: 'listings' }, class: classes
+			link_to title, 'javascript:;', data: { bid: building.id, 
+																							type: 'listings', 
+																						}, class: classes
 		else
-			link_to title, 'javascript:;', onclick: "showActiveListingsPopup(#{building.id})", class: classes
+			link_to title, 'javascript:;', 
+											onclick: "showActiveListingsPopup(#{building.id})", class: classes
 		end
 	end
 

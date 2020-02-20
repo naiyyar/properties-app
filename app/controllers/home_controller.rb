@@ -93,6 +93,7 @@ class HomeController < ApplicationController
       @lng                = @hash[0]['longitude']
       #in meta_desc
       building_ids        = @buildings.pluck(:id)
+      @listings_count     = Listing.where(building_id: building_ids).active.count
       @photos_count       = Upload.cached_building_photos(building_ids).length rescue 0
       @reviews_count      = Review.where(reviewable_id: building_ids, reviewable_type: 'Building').count
     else
@@ -113,8 +114,8 @@ class HomeController < ApplicationController
       end
     end
 
-    @neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
-    @neighborhood_links_count = @neighborhood_links.size
+    #@neighborhood_links = NeighborhoodLink.neighborhood_guide_links(@search_string, view_context.queens_borough)
+    #@neighborhood_links_count = @neighborhood_links.size
     unless params[:searched_by] == 'nyc'
       @meta_desc = "#{@meta_desc_text} has #{@buildings.length if @buildings.present?} "+ 
                    "no fee apartment, no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. "+ 

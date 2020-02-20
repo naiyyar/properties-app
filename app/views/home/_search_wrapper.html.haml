@@ -6,43 +6,25 @@
 #content.searched-properties{class: (custom_search? and browser.device.mobile?) ? 'invisible' : nil}
   .tabsWidget.tabsWidgetSearch{style: "#{@buildings.blank? ? 'height: 60vh' : ''}"}
     - unless browser.device.mobile?
-      %ul.nav.nav-tabs.nav-justified{role: "tablist"}
+      %ul.nav.nav-tabs1.nav-justified{role: 'tablist'}
         %li.active
-          %a{"data-toggle" => "tab", href: "#buildings", role: "tab"}
-            %b
-              BUILDINGS 
-              ="(#{ @buildings.present? ? @buildings.length : 0 })"
-        %li
-          %a{"data-toggle" => "tab", href: "#resourceLinks", role: "tab"}
-            %b
-              NEIGHBORHOOD GUIDES #{"(#{@neighborhood_links_count})"}
+          %a{'data-toggle' => 'tab', href: '#buildings', role: 'tab'}
+            %b{style: 'color: #0075c8;'}= "#{@listings_count} Rentals in #{@buildings&.size} Buildings"
       
-    .tab-content.tab-scroll11{style: "background-color: #f3f3f3;"}
-      - unless browser.device.mobile?
-        #resourceLinks.tab-pane.fade
-          - if @neighborhood_links_count.to_i > 0
-            %ul.propList
-              = render :partial => 'neighborhood_links/neighborhood_link', :collection => @neighborhood_links, :as => :neighborhood_link, cache: true 
-      
+    .tab-content.tab-scroll11{style: 'background-color: #f3f3f3;'}
       #buildings.tab-pane.fade.in.active
         - if @per_page_buildings.present?
           .resultsList
-            #load-more-buildings.row
-              = render partial: 'buildings/building', :collection => @all_buildings, :as => :building
-              / , cache: Proc.new{|item| [item, "#{current_user.present? ? current_user.id : '1'}"]} 
+            #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :building
           
           - if @all_buildings.blank? and @per_page_buildings.total_pages == @per_page_buildings.current_page
-            .text-center{style: "padding: 12px 4px;"}
-              = no_search_result_text
+            .text-center{style: 'padding: 12px 4px;'}= no_search_result_text
           %br/
-          .pages-container
-            = will_paginate @per_page_buildings, renderer: BootstrapPagination::Rails
+          .pages-container= will_paginate @per_page_buildings, renderer: BootstrapPagination::Rails
         - else
-          .text-center{style: "padding: 12px 4px;"}
-            = no_search_result_text
+          .text-center{style: 'padding: 12px 4px;'}= no_search_result_text
 
-    %section.spv-pop-search{style: 'margin-top: 25px'}
-      = render 'layouts/home/popular_searches'
+    %section.spv-pop-search{style: 'margin-top: 25px'}= render 'layouts/home/popular_searches'
   
     = render 'layouts/home/footer'
 .clearfix

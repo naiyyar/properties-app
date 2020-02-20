@@ -1,11 +1,11 @@
 module BuildingSearch
   CITIES = ['New York', 'Brooklyn', 'Bronx', 'Queens']
   def apt_search params, search_string, sub_borough
-    results = {}
-    results[:filters] = nil
-    results[:zoom] = nil
+    results                   = {}
+    results[:filters]         = nil
+    results[:zoom]            = nil
     results[:boundary_coords] = []
-    results[:searched_by] = params[:searched_by]
+    results[:searched_by]     = params[:searched_by]
     unless params[:latitude].present? and params[:longitude].present?
       if !['address', 'no-fee-management-companies-nyc'].include?(params[:searched_by])
         results[:zoom] = (search_string == 'New York' ? 12 : 14)
@@ -18,26 +18,26 @@ module BuildingSearch
           elsif params[:searched_by] == 'nyc'
             #popular no fee searches
             results[:buildings] = buildings_by_popular_search(params)[0]
-            results[:filters] = buildings_by_popular_search(params)[1]
-            results[:zoom] = 12
+            results[:filters]   = buildings_by_popular_search(params)[1]
+            results[:zoom]      = 12
           else
             results[:buildings] = cached_buildings_by_city_or_nb(search_string, sub_borough[search_string])
-            results[:zoom] = 12
+            results[:zoom]      = 12
           end
         else
           results[:buildings] = buildings_in_city(search_string)
         end
       elsif params[:searched_by] == 'address'
-        building = where(building_street_address: params[:search_term])
+        building           = where(building_street_address: params[:search_term])
         #searching because some address has extra white space in last so can not match exactly with address search_term
-        building = where('building_street_address like ?', "%#{params[:search_term]}%") if building.blank?
+        building           = where('building_street_address like ?', "%#{params[:search_term]}%") if building.blank?
         results[:building] = building
       elsif params[:searched_by] == 'no-fee-management-companies-nyc'
         results[:company] = ManagementCompany.where(name: params[:search_term])
       end
     else
       results[:buildings] = redo_search_buildings(params)
-      results[:zoom] = params[:zoomlevel] || (results[:buildings].length > 90 ? 15 : 14)
+      results[:zoom]      = params[:zoomlevel] || (results[:buildings].length > 90 ? 15 : 14)
     end
     results[:buildings] = results[:buildings].updated_recently if(params[:sort_by].blank? or params[:sort_by] == '0')
     results[:buildings] = filtered_buildings(results[:buildings], params[:filter]) if params[:filter].present?
@@ -47,12 +47,12 @@ module BuildingSearch
   end
 
   def redo_search_buildings params
-    @zoom = params[:zoomlevel].present? ? params[:zoomlevel].to_i : 14
-    custom_latng = [params[:latitude].to_f, params[:longitude].to_f]
-    distance = redo_search_distance(0.5)
-    buildings = near(custom_latng, distance, units: :km, order: "")
-    distance = redo_search_distance(1.0)
-    buildings = near(custom_latng, distance, units: :km, order: "") if buildings.blank?
+    @zoom         = params[:zoomlevel].present? ? params[:zoomlevel].to_i : 14
+    custom_latng  = [params[:latitude].to_f, params[:longitude].to_f]
+    distance      = redo_search_distance(0.5)
+    buildings     = near(custom_latng, distance, units: :km, order: '')
+    distance      = redo_search_distance(1.0)
+    buildings     = near(custom_latng, distance, units: :km, order: '') if buildings.blank?
 
     buildings
   end
@@ -61,25 +61,18 @@ module BuildingSearch
     if @zoom >= 14
       distance = distance/(@zoom)
       case @zoom
-      when 14
-        distance += 1.5
-      when 15
-        distance += 0.8
-      when 16
-        distance += 0.5
-      when 17
-        distance += 0.2
+      when 14 then distance += 1.5
+      when 15 then distance += 0.8
+      when 16 then distance += 0.5
+      when 17 then distance += 0.2
       else
         distance += 0.1
       end
     else
       case @zoom
-      when 13 
-        distance += 3
-      when 12
-        distance += 4
-      when 11
-        distance += (@zoom * 2)
+      when 13 then distance += 3
+      when 12 then distance += 4
+      when 11 then distance += (@zoom * 2)
       else
         distance += (@zoom * 2.5)
       end
@@ -125,9 +118,7 @@ module BuildingSearch
   end
 
   def search_by_zipcodes(criteria)
-    # regexp = /#{criteria}/i;
     search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
-    # results.sort{|x, y| (x =~ regexp) <=> (y =~ regexp) } 
   end
 
   def buildings_by_zip term
@@ -146,12 +137,16 @@ module BuildingSearch
     where("building_name ILIKE ? OR building_street_address ILIKE ?", "%#{criteria}%", "%#{criteria}%")
   end
 
+  #results = where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
   def buildings_in_neighborhood search_term, term_with_city=nil
     search_term = (search_term == 'Soho' ? 'SoHo' : search_term)
-    results = where("neighborhood = ? OR neighborhoods_parent = ? OR neighborhood3 = ?", search_term, search_term, search_term)
+    results = where(neighborhood: search_term)
+              .or(where(neighborhoods_parent: search_term))
+              .or(where(neighborhood3: search_term))
+    
     if search_term == 'Little Italy'
       #Because neighborhood Little italy exist in manhattan as well as Bronx
-      city = term_with_city.include?('newyork') ? 'New York' : 'Bronx'
+      city    = term_with_city.include?('newyork') ? 'New York' : 'Bronx'
       results = results.where(city: city)
     end
     results
@@ -167,11 +162,7 @@ module BuildingSearch
 
   #Contribute search method
   def text_search(term)
-    if term.present?
-      search(term)
-    else
-      self.all
-    end
+    term.present? ? search(term) : self.all
   end
 
   def buildings_with_active_listings buildings

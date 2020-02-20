@@ -35,7 +35,7 @@ module BuildingFilters
     if buildings.present?
       #when listing have price more than 15500
       #assuming listing max price can be upto 30000
-      max_price = max_price.to_i == 15500 ? 30000 : max_price
+      max_price = 30000 if max_price.to_i == 15500
       buildings.where('listings.rent >= ? AND listings.rent <= ?', min_price.to_i, max_price.to_i).distinct
     end
   end
