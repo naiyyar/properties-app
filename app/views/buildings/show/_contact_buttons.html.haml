@@ -1,16 +1,22 @@
 .contact-buttons
 	.row
-		- if @building.show_apply_link? and @building.web_url.present? and @building.show_contact_leasing?
+		- if @building.all_3_contact_link?
 			.col-lg-6.col-sm-6.col-xs-6{style: 'padding-right: 0px;'}= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
 			.col-lg-6.col-sm-6.col-xs-6= apply_online_link(@building)
 			.col-lg-12.col-sm-12.col-xs-12.margin-top-10= contact_leasing_link(@building)
-		- elsif @building.show_apply_link? and @building.web_url.present?
+		- elsif @building.apply_and_availability?
 			.col-lg-12.col-sm-12.col-xs-12= apply_online_link(@building)
 			.col-lg-12.col-sm-12.col-xs-12.margin-top-10= check_availability_link(@building)
-		- elsif @building.web_url.present? and @building.show_contact_leasing?
+		- elsif @building.leasing_and_availability?
 			.col-lg-12.col-sm-12.col-xs-12= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
 			.col-lg-12.col-sm-12.col-xs-12.margin-top-10= contact_leasing_link(@building)
-		- elsif @building.show_apply_link? and @building.show_contact_leasing?
+		- elsif @building.apply_and_leasing?
 			.col-lg-12.col-sm-12.col-xs-12= apply_online_link(@building)
 			.col-lg-12.col-sm-12.col-xs-12.margin-top-10= contact_leasing_link(@building)
+		- elsif @building.leasing?
+			.col-lg-12.col-sm-12.col-xs-12= contact_leasing_link(@building)
+		- elsif @building.availability?
+			.col-lg-12.col-sm-12.col-xs-12= check_availability_button(@building.web_url, 'font-bolder btn-block')
+		- elsif @building.apply?
+			.col-lg-12.col-sm-12.col-xs-12= apply_online_link(@building)
 			

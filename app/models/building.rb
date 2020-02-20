@@ -146,7 +146,16 @@ class Building < ApplicationRecord
   scope :with_active_web,       -> {where('active_web is true and web_url is not null')}
   scope :with_active_email,     -> {where('active_email is true and email is not null')}
   scope :with_application_link, -> {where('show_application_link is true and online_application_link is not null')}
+  #bedrooms types
+  scope :studio,    -> { where(studio: 0) }
+  scope :one_bed,   -> { where(one_bed: 1) }
+  scope :two_bed,   -> { where(two_bed: 2) }
+  scope :three_bed, -> { where(three_bed: 3) }
+  scope :four_bed,  -> { where(four_plus_bed: 4) }
 
+  #Listings bedrooms types
+  scope :with_listings_bed, -> (beds) { where('listings.bed in (?)', beds) }
+  
   #amenities scopes
   AMENITIES = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
                 :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
@@ -159,16 +168,6 @@ class Building < ApplicationRecord
       scope item, -> { where.not(item => nil) }
     end
   end
-
-  #bedrooms types
-  scope :studio, -> { where(studio: 0) }
-  scope :one_bed, -> { where(one_bed: 1) }
-  scope :two_bed, -> { where(two_bed: 2) }
-  scope :three_bed, -> { where(three_bed: 3) }
-  scope :four_bed, -> { where(four_plus_bed: 4) }
-
-  #Listings bedrooms types
-  scope :with_listings_bed, -> (beds) { where('listings.bed in (?)', beds) }
 
   #callbacks
   after_create :update_neighborhood_counts
@@ -231,11 +230,39 @@ class Building < ApplicationRecord
   end
 
   def show_apply_link?
-    online_application_link.present? and show_application_link 
+    online_application_link.present? && show_application_link 
   end
 
   def show_contact_leasing?
-    email.present? and active_email
+    email.present? && active_email
+  end
+
+  def all_3_contact_link?
+    show_apply_link? && show_contact_leasing? && active_web_url?
+  end
+
+  def apply_and_leasing?
+    show_apply_link? && show_contact_leasing?
+  end
+
+  def apply_and_availability?
+    show_apply_link? && active_web_url?
+  end
+
+  def leasing_and_availability?
+    show_contact_leasing? && active_web_url?
+  end
+
+  def leasing?
+    show_contact_leasing? && !(apply_and_availability?)
+  end
+
+  def availability?
+    active_web_url? && !(apply_and_leasing?)
+  end
+
+  def apply?
+    show_apply_link? && !(leasing_and_availability?)
   end
 
   def self.city_count buildings, city, sub_boroughs = nil
@@ -265,10 +292,8 @@ class Building < ApplicationRecord
   def price_ranges
     ranges = {}
     prices = Price.where(range: price)
-    bedroom_ranges.each do |bed_range|
-      ranges[bed_range] = prices.find_by(bed_type: bed_range)
-    end
-    ranges
+    bedroom_ranges.each{|bed_range| ranges[bed_range] = prices.find_by(bed_type: bed_range)}
+    return ranges
   end
 
   def amenities
