@@ -798,6 +798,11 @@ h3.unit_name_header{
     font-size: 25px;
 }
 
+.lg-action-buttons{
+    display: inline-flex;
+    float: right;
+}
+
 /* Buttons */
 .btn-filter .btn.sc-lg, .btn-sort .btn.sc-lg{
     width: 14em;
@@ -863,8 +868,8 @@ h3.unit_name_header{
     border-color: #fff;
 }
 .btn-o.btn-filter{
-    background-color: #fff;
-    color: #636363;
+    /*background-color: #fff;*/
+    color: #fff;
     border-color: #d3d3d3;
 }
 .no-touch .btn-white:hover,
@@ -1304,7 +1309,7 @@ a.userHandler {
 .search {
     /*float: left;*/
     position: absolute;
-    top: 60px;
+    top: 59px;
     width: 100%;
     height: 54px;
     /*background-color: #fff;*/
@@ -4822,7 +4827,7 @@ blockquote {
 .margin-top-20{
     margin-top: 20px !important;
 }
-.btn-filter, .btn-sort{
+.btn-sort, .lg-action-buttons > .btn-filter{
     margin-top: 8px;
     margin-right: 16px;
     float: right;
@@ -4862,9 +4867,9 @@ select.custom-arrow {
     margin: 0 auto;
 }
 
-.searchContainer.mobile.split-view-seach{
+/*.searchContainer.mobile.split-view-seach{
     margin-left: 30px;
-}
+}*/
 
 /* Media Queries */
 @media screen and (max-width: 480px) {
@@ -5033,8 +5038,8 @@ select.custom-arrow {
         margin-bottom: 15px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
-    .btn-o.btn-filter{
-        background-color: #fff !important;
+    .btn.btn-filter.handleFilter{
+        padding: 10px 4px;
     }
     .form-container{
         padding: 10px;
@@ -5046,10 +5051,7 @@ select.custom-arrow {
     .searchContainer .apt-search .results .ui-autocomplete {
         min-width: 414px !important;
     }
-    .btn-hoods{
-        position: absolute;
-        right: 3px;
-    }
+
     .btn-hoods button{
         padding: 10px 3px;
     }
@@ -5197,7 +5199,7 @@ select.custom-arrow {
         position: absolute;
         top: 7px;
         background: transparent;
-        width: 58.5%;
+        width: 61%;
         height: 35px;
         padding: 0px 20px 0px 1px;
         left: 28px;
@@ -5233,19 +5235,19 @@ select.custom-arrow {
     .filter-action{
         padding: 20px;
     }
-    .btn-filter, .btn-sort{
+    .btn-sort{
         margin-top: 0px;
         margin-right: 2.1em;
         width: 45%;
     }
     .btn-sort button{width: 100%;}
-    .btn-filter button{width: 52%;}
     .filter-btn-container{
         position: absolute;
-        right: 0px;
+        right: 3px;
     }
     .filter-btn-container div{
         padding: 2px;
+        float: left;
     }
     .filter-action-btns2{
         width: 100%;
