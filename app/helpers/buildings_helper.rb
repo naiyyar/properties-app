@@ -183,8 +183,8 @@ module BuildingsHelper
 		end
 	end
 
-	def active_listings_button building, event, klass, listings
-		title, classes = "#{listings.size} Active Listings", "btn btn-primary active-listing-link #{klass}"
+	def active_listings_button building, event, klass, listings_count
+		title, classes = "#{listings_count} Active Listings", "btn btn-primary active-listing-link #{klass}"
 		unless event
 			link_to title, 'javascript:;', data: { bid: building.id, 
 																							type: 'listings', 

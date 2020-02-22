@@ -1,16 +1,16 @@
-- active_listings = Filter::Listings.new(building, 'active', params[:filter]).show_more_listings
 .contact-links
-	- if building.all_three_cta?(active_listings)
+	- listings_count = building.active_listings_count
+	- if building.all_three_cta?(listings_count)
 		.c-links
 			%section
 				=check_availability_button(building.web_url, 'btn-o')
 			%section
-				=active_listings_button(building, on_click, 'btn-o', active_listings)
+				=active_listings_button(building, on_click, 'btn-o', listings_count)
 
 		.d-block
 			=contact_leasing_button(building, on_click, 'btn-block')
 
-	- elsif building.availability_and_contacts_cta? and active_listings.blank?
+	- elsif building.availability_and_contacts_cta? && listings_count <= 0
 		.d-block.h-42
 		.c-links
 			%section
@@ -18,28 +18,28 @@
 			%section
 				=check_availability_button(building.web_url, 'btn-o')
 
-	- elsif building.active_web_url? and active_listings.present? and !building.has_active_email?
+	- elsif building.active_web_url? && listings_count > 0 and !building.has_active_email?
 		.d-block.h-42
 		.c-links
 			%section
 				=check_availability_button(building.web_url, 'btn-block')
 			%section
-				=active_listings_button(building, on_click, 'btn-o', active_listings)
+				=active_listings_button(building, on_click, 'btn-o', listings_count)
 
-	- elsif !building.active_web_url? and active_listings.present? and building.has_active_email?
+	- elsif !building.active_web_url? && listings_count > 0 and building.has_active_email?
 		.d-block.h-42
 		.c-links
 			%section
 				= contact_leasing_button(building, on_click, 'btn-block')
 			%section
-				=active_listings_button(building, on_click, 'btn-o', active_listings)
+				=active_listings_button(building, on_click, 'btn-o', listings_count)
 
-	- elsif building.active_web_url? and active_listings.blank? and !building.has_active_email?
+	- elsif building.active_web_url? && listings_count <= 0 and !building.has_active_email?
 		.c-links.h-42
 		.d-block
 			=check_availability_button(building.web_url, 'btn-block')
 
-	- elsif !building.active_web_url? and active_listings.blank? and building.has_active_email?
+	- elsif !building.active_web_url? && listings_count <= 0 and building.has_active_email?
 		.c-links.h-42
 		.d-block
 			= contact_leasing_button(building, on_click, 'btn-block')
@@ -47,6 +47,6 @@
 		.d-block.h-42.invisible
 			=check_availability_button(building.web_url, 'btn-block')
 		.c-links
-	- elsif active_listings.present?
+	- elsif listings_count > 0
 		.c-links.h-42
-		.d-block=active_listings_button(building, on_click, 'btn-block', active_listings)
+		.d-block=active_listings_button(building, on_click, 'btn-block', listings_count)

@@ -12,7 +12,7 @@ module Filter
 		  end
 		end
 
-		def show_more_listings
+		def active_listings
 			unless @listing_type.present?
 	      filtered_listings.order_by_date_active_desc
 	    else

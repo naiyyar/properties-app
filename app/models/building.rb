@@ -82,7 +82,7 @@ class Building < ApplicationRecord
 
   #From some buildings when submitting reviews getting
   #Error: undefined method `address=' for #<Building
-  attr_accessor :address
+  attr_accessor :address, :active_listings_count
 
   belongs_to :user
   has_many :reviews, as: :reviewable
@@ -221,8 +221,12 @@ class Building < ApplicationRecord
     featured_comps.active
   end
 
-  def all_three_cta? listings
-    active_web_url? and has_active_email? and listings.size > 0
+  def active_listings filter_params, type='active'
+    Filter::Listings.new(self, type, filter_params).active_listings
+  end
+
+  def all_three_cta? listings_count
+    active_web_url? and has_active_email? and listings_count > 0
   end
 
   def availability_and_contacts_cta?

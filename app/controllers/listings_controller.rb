@@ -61,10 +61,9 @@ class ListingsController < ApplicationController
   end
 
   def show_more
-    @building         = Building.find(params[:building_id])
-    @rentals          = params[:listing_type].present? ? 'active' : 'past'
-    filtered_listings = Filter::Listings.new(@building, params[:listing_type], params[:filter_params])
-    @listings         = filtered_listings.show_more_listings
+    @building = Building.find(params[:building_id])
+    @rentals  = params[:listing_type].present? ? 'active' : 'past'
+    @listings = @building.active_listings(params[:filter_params], params[:listing_type])
     respond_to do |format|
       format.html
       format.js
