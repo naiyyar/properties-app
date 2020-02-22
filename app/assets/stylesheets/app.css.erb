@@ -5197,19 +5197,42 @@ select.custom-arrow {
     .search {
         display: block;
         position: absolute;
-        top: 7px;
+        top: 6px;
         background: transparent;
-        width: 61%;
+        width: 57%;
         height: 35px;
         padding: 0px 20px 0px 1px;
         left: 28px;
         border-bottom: 0px solid #96a9b8;
     }
-    .search > input[type=text] {
+    .search > input[type='text'] {
         margin-top: 2px;
         height: 45px;
         background-color: #fff;
         color: #333;
+    }
+    .search input {
+        background-color: #fff;
+        margin: 0px;
+        width: 100%;
+        padding: 9px;
+        border-radius: 1.5em;
+    }
+    .clearSearchText {
+        right: 4px; 
+        top: 5px; 
+    }
+    .search input::-webkit-input-placeholder {
+        color: #adc8c7;
+    }
+    .search input:-moz-placeholder { /* Firefox 18- */
+        color: #adc8c7;
+    }
+    .search input::-moz-placeholder {  /* Firefox 19+ */
+        color: #adc8c7;
+    }
+    .search input:-ms-input-placeholder {  
+        color: #adc8c7;
     }
     .filter, .modal-full{
         width: 100%;
@@ -5519,30 +5542,6 @@ select.custom-arrow {
     #apt-search-form{
         width: 100%;
     }
-    .search input {
-        background-color: #fff;
-        margin: 0px;
-        width: 100%;
-        padding: 9px;
-        border-radius: 1.5em;
-    }
-    .clearSearchText {
-        right: 4px; 
-        top: 5px; 
-    }
-    .search input::-webkit-input-placeholder {
-        color: #adc8c7;
-    }
-    .search input:-moz-placeholder { /* Firefox 18- */
-        color: #adc8c7;
-    }
-    .search input::-moz-placeholder {  /* Firefox 19+ */
-        color: #adc8c7;
-    }
-    .search input:-ms-input-placeholder {  
-        color: #adc8c7;
-    }
-   
     .table {
         margin-bottom: 0;
     }
