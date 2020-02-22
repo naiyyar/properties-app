@@ -110,10 +110,10 @@
     function showActiveListingsPopup(building_id){
       $('#remote-container').html('');
       var filter_params = {
-        list_amenities: $('#list_amenities').val(),
-        list_bedrooms:  $('#list_bedrooms').val(),
-        list_min_price: $('#list_min_price').val(),
-        list_max_price: $('#list_max_price').val(),
+        amenities:        $('#list_amenities').val(),
+        listing_bedrooms: $('#list_bedrooms').val(),
+        min_price:        $('#list_min_price').val(),
+        max_price:        $('#list_max_price').val(),
       };
 
       displayLoader();

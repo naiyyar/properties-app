@@ -70,14 +70,14 @@ class Listing < ApplicationRecord
     rent_stabilize.present? ? (rent_stabilize == 'true' ? 'Y' : 'N') : ''
   end
 
-  def update_rent
-    listings = building.listings.active.order(rent: :asc)
-    if listings.present?
-      building.update(min_listing_price: listings.first.rent)
-      building.update(max_listing_price: listings.last.rent)
+  def update_rent listings
+    property          = self.building
+    property_listings = listings.where(building_id: building_id).order(rent: :asc)
+    if property_listings.present?
+      property.update_columns(  min_listing_price: property_listings.first.rent, 
+                                max_listing_price: property_listings.last.rent )
     else
-      building.update(min_listing_price: nil)
-      building.update(max_listing_price: nil)
+      property.update_columns(min_listing_price: nil, max_listing_price: nil)
     end
   end
   

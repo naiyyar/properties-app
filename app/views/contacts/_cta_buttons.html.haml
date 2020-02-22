@@ -1,4 +1,4 @@
-- active_listings = building.listings.select(:id, :active).active
+- active_listings = Filter::Listings.new(building, 'active', params[:filter]).show_more_listings
 .contact-links
 	- if building.all_three_cta?(active_listings)
 		.c-links

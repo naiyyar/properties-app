@@ -29,15 +29,16 @@ class ListingsController < ApplicationController
   def delete_all
     @listings.each do |listing|
       listing.destroy
-      listing.update_rent
+      listing.update_rent(@listings.active)
     end
     redirect_to :back
   end
 
   def import
-    #@errors = Listing.import_listings(params[:file])
+    buildings      = Building.where.not(building_street_address: nil)
+    listings       = Listing.active     
     import_listing = ImportListing.new(params[:file])
-    @errors = import_listing.import_listings
+    @errors        = import_listing.import_listings(buildings, listings)
     if @errors.present?
       flash[:error] = @errors
     else
