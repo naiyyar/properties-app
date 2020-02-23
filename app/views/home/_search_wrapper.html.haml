@@ -8,8 +8,8 @@
     - unless browser.device.mobile?
       %ul.nav.nav-tabs1.nav-justified{role: 'tablist'}
         %li.active
-          %a{'data-toggle' => 'tab', href: '#buildings', role: 'tab'}
-            %b{style: 'color: #0075c8;'}= "#{@listings_count} Rentals in #{@buildings&.size} Buildings"
+          .text-center{style: 'padding: 8px 0px;'}
+            %b{style: 'color: #0075c8; font-size: 21px;'}= "#{@listings_count} Rentals | #{@buildings&.size} Buildings"
       
     .tab-content.tab-scroll11{style: 'background-color: #f3f3f3;'}
       #buildings.tab-pane.fade.in.active
