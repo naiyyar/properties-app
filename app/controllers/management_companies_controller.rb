@@ -50,9 +50,9 @@ class ManagementCompaniesController < ApplicationController
     if @buildings.present?
       @broker_percent = BrokerFeePercent.first.percent_amount
       @rent_medians   = RentMedian.all
-      #finding average rating for all managed buildings 
+      # finding average rating for all managed buildings 
       @stars = @management_company.get_average_stars(@buildings, @total_reviews)
-      #For map
+      # For map
       @hash = final_results[0][:map_hash]
       if @hash.length > 0
         @lat = @hash.last['latitude']
@@ -61,13 +61,14 @@ class ManagementCompaniesController < ApplicationController
         @lat = @buildings.first.latitude
         @lng = @buildings.first.longitude
       end
-      @zoom = 13 #buildings.length > 70 ? 13 : 11
+      @zoom = 13
     end
-    @photos = Upload.building_photos(@all_buildings.map(&:id))
+    @all_buildings.each{ |b| b.active_listings_count = b.active_listings(params[:filter]).size }
+    @photos                = Upload.building_photos(@all_buildings.map(&:id))
     @building_photos_count = @photos.size
-    @meta_desc = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, no fee rental, 
-                  for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
-                  Click to view #{@building_photos_count} photos and #{@total_reviews} reviews."
+    @meta_desc             = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, 
+                              no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
+                              Click to view #{@building_photos_count} photos and #{@total_reviews} reviews."
   end
 
   # GET /management_companies/new

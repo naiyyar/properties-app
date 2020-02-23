@@ -5,6 +5,8 @@ class HomeController < ApplicationController
   before_action :format_search_string,  only: :search
   before_action :save_as_favourite,     only: :search
   before_action :set_rent_medians,      only: [:search, :load_infobox]
+  before_action :set_fav_color_class,   only: :load_infobox
+  before_action :set_min_save_amount,   only: :load_infobox
 
   include HomeConcern #search
 
@@ -24,8 +26,6 @@ class HomeController < ApplicationController
   end
 
   def load_infobox
-    fav_color_class = @building.fav_color_class(params[:current_user_id])
-    min_save_amount = @building.min_save_amount(@rent_medians, @broker_percent)
     @building.active_listings_count = @building.active_listings(params[:filter_params]).size
     render json: { html: render_to_string(:partial => '/layouts/shared/custom_infowindow', 
                                           :locals => {  building:         @building,
@@ -34,8 +34,8 @@ class HomeController < ApplicationController
                                                         recomended_per:   @building.recommended_percent,
                                                         building_show:    params[:building_show],
                                                         current_user:     @current_user,
-                                                        fav_color_class:  fav_color_class,
-                                                        min_save_amount:  min_save_amount
+                                                        fav_color_class:  @fav_color_class,
+                                                        min_save_amount:  @min_save_amount
                                                       })
                   }
   end
@@ -43,12 +43,11 @@ class HomeController < ApplicationController
   def get_images
     photos        = Upload.cached_building_photos([params[:building_id]])
     image_uploads = photos.present? ? photos.where(imageable_type: 'Building') : []
-    show_path     = building_path(@building)
     render json: { html: render_to_string(:partial => '/home/lightslider', 
                                           :locals => {  building:     @building,
                                                         images_count: image_uploads.length,
                                                         first_image:  image_uploads[0],
-                                                        show_path:    show_path
+                                                        show_path:    building_path(@building)
                                                       })
                   }
   end
@@ -84,10 +83,6 @@ class HomeController < ApplicationController
     @building   = Building.find(building_id)
   end
 
-  def searched_params
-    ['address', 'no-fee-management-companies-nyc', 'zipcodes']
-  end
-
   def save_as_favourite
     return unless session[:favourite_object_id].present? && current_user.present?
     building = Building.find(session[:favourite_object_id])
@@ -100,12 +95,15 @@ class HomeController < ApplicationController
     @rent_medians   = RentMedian.all
   end
 
-  def tab_title_tag
-    'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC'
+  def set_fav_color_class
+    @fav_color_class = @building.fav_color_class(params[:current_user_id])
   end
 
-  def pop_search_tab_title
-    term = params[:search_term].split('-').join(' ').titleize
-    "#{term.gsub!('Nyc', 'NYC')}"
+  def set_min_save_amount
+    @min_save_amount = @building.min_save_amount(@rent_medians, @broker_percent)
+  end
+
+  def tab_title_tag
+    'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC'
   end
 end

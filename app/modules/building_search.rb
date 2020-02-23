@@ -28,10 +28,7 @@ module BuildingSearch
           results[:buildings] = buildings_in_city(search_string)
         end
       elsif params[:searched_by] == 'address'
-        building           = where(building_street_address: params[:search_term])
-        #searching because some address has extra white space in last so can not match exactly with address search_term
-        building           = where('building_street_address like ?', "%#{params[:search_term]}%") if building.blank?
-        results[:building] = building
+        results[:building] = get_building(params[:search_term])
       elsif params[:searched_by] == 'no-fee-management-companies-nyc'
         results[:company] = ManagementCompany.where(name: params[:search_term])
       end
@@ -44,6 +41,10 @@ module BuildingSearch
     results[:buildings] = sort_buildings(results[:buildings], params[:sort_by]) if(results[:buildings].present? and params[:sort_by] != '0')
 
     return results
+  end
+
+  def get_building address
+    where(building_street_address: address.strip)
   end
 
   def redo_search_buildings params

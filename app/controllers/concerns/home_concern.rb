@@ -90,4 +90,13 @@ module HomeConcern
     @half_footer = true
   end
 
+  def searched_params
+    ['address', 'no-fee-management-companies-nyc', 'zipcodes']
+  end
+
+  def pop_search_tab_title
+    term = params[:search_term].split('-').join(' ').titleize
+    "#{term.gsub!('Nyc', 'NYC')}"
+  end
+
 end
