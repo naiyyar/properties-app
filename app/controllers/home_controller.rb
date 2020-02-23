@@ -9,12 +9,12 @@ class HomeController < ApplicationController
   include HomeConcern #search
 
   def index
-    @home_view = true
-    @buildings_count = pop_nb_buildings&.size
-    @meta_desc = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
-                  no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
+    @home_view        = true
+    @buildings_count  = pop_nb_buildings&.size
+    @meta_desc        = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
+                         no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
     
-    @tab_title_text = tab_title_tag
+    @tab_title_text   = tab_title_tag
   end
 
   def set_split_view_type
@@ -26,6 +26,7 @@ class HomeController < ApplicationController
   def load_infobox
     fav_color_class = @building.fav_color_class(params[:current_user_id])
     min_save_amount = @building.min_save_amount(@rent_medians, @broker_percent)
+    @building.active_listings_count = @building.active_listings(params[:filter_params]).size
     render json: { html: render_to_string(:partial => '/layouts/shared/custom_infowindow', 
                                           :locals => {  building:         @building,
                                                         image:            Upload.marker_image(@building),

@@ -1,8 +1,16 @@
 function loadMarkerWindow(building_id, map, marker){
+  var filter_params = {
+    amenities:        $('#list_amenities').val(),
+    listing_bedrooms: $('#list_bedrooms').val(),
+    min_price:        $('#list_min_price').val(),
+    max_price:        $('#list_max_price').val(),
+  };
+  console.log(filter_params)
   $.post('/load_infobox', {
-    object_id: building_id, 
-    building_show: false,
-    current_user_id: current_user_id,
+    object_id:        building_id, 
+    building_show:    false,
+    current_user_id:  current_user_id,
+    filter_params:    filter_params
   }, function(data){
     infobox.setContent(data.html);
     infobox.open(map, marker);
