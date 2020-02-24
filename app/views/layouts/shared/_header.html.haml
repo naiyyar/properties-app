@@ -1,4 +1,4 @@
--if browser.device.mobile?
+.visible-xs
   #header-mob
     .row
       .col-xs-1
@@ -31,7 +31,7 @@
         %span.fa.fa-list
         List
 
-- else
+%div.hidden-xs
   %a.navHandler{href: "javascript:void(0)"}
     %span.fa.fa-bars
   #header
@@ -40,7 +40,7 @@
         %a{href: "/"}= image_tag 'logo_white.png', alt: 'logo'
       #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
 
-      .pull-right.nav-items.headerLinks{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
+      .pull-right.nav-items.headerLinks.visible-lg{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
         = link_to 'Blog', '/blog'
         - if user_signed_in?
           |
