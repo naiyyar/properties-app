@@ -5,24 +5,25 @@
         %a.navHandler{href: 'javascript:void(0)'}
           %span.fa.fa-bars
       .col-xs-7
-        .split-view-seach
+        .split-view-seach{class: "#{search_bar(:hidden)}"}
           %span.fa.fa-times-circle.fa-2x.clearSearchText
           = render partial: 'home/search_form'
       .col-xs-4
         .row
-          .col-xs-6.hood
+          .hood.col-xs-6{class: show_filters? ? '' : 'invisible'}
             .btn-hoods
               %button.btn.btn-primary.dropdown-toggle-neighborhoods{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
                 %span.dropdown-label Hood
                 %span.caret
 
-          .col-xs-6.h-filter
-            .btn-filter
-              %button.btn.btn-primary.btn-filter.handleFilter
-                %span.dropdown-label
-                  %span.fa.fa-filter
-                  Filter
-                  %span.filter-counts
+          - if show_filters?
+            .col-xs-6.h-filter
+              .btn-filter
+                %button.btn.btn-primary.btn-filter.handleFilter
+                  %span.dropdown-label
+                    %span.fa.fa-filter
+                    Filter
+                    %span.filter-counts
 
   .visible-xs{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;'}
     - if action_name == 'search' or @show_map_btn
