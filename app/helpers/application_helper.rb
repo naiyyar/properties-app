@@ -21,6 +21,18 @@ module ApplicationHelper
     params[:searched_by].present? || params[:filter].present? || params[:sort_by].present?
   end
 
+  def header_center_col
+    show_filters? ? '7' : '9'
+  end
+
+  def header_right_col
+    show_filters? ? '4' : '2'
+  end
+
+  def clear_link_from_right
+    show_filters? ? '6' : '13'
+  end
+
 	def resource_name
     :user
   end
