@@ -28,6 +28,7 @@
   var lng = <%= raw @lng.to_json %>;
   var searched_term;
   var city = '';
+  var header_id = $('#header').length > 0 ? 'header' : 'header-mob'
   <% if params[:search_term].present? %>
     searched_term = <%= raw @search_string.to_json %>;
     if(searched_term != null && searched_term == 'Little Italy'){
@@ -140,7 +141,7 @@
               }
             })(marker, i));
 
-            google.maps.event.addDomListener(document.getElementById('header'),
+            google.maps.event.addDomListener(document.getElementById(header_id),
             'click', function() {
               infobox.close();
             });

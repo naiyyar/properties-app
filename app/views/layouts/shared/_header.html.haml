@@ -1,50 +1,28 @@
-%a.navHandler{href: "javascript:void(0)"}
-  %span.fa.fa-bars
-#header
-  .logoContainer
-    .logo.hidden-xs
-      %a{href: "/"}= image_tag 'logo_white.png', alt: 'logo'
-    #search-row{class: "search #{search_bar(:hidden)}"}
-      = render partial: 'layouts/shared/search_form'
-    
-    .visible-xs.filter-btn-container
-      .btn-hoods
-        %button.btn.btn-primary.dropdown-toggle-neighborhoods{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
-          %span.dropdown-label Hood
-          %span.caret
+-if browser.device.mobile?
+  #header-mob
+    .row
+      .col-xs-1
+        %a.navHandler{href: 'javascript:void(0)'}
+          %span.fa.fa-bars
+      .col-xs-7
+        .split-view-seach= render partial: 'home/search_form'
+      .col-xs-4
+        .row
+          .col-xs-6.hood
+            .btn-hoods
+              %button.btn.btn-primary.dropdown-toggle-neighborhoods{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
+                %span.dropdown-label Hood
+                %span.caret
 
-      .btn-filter
-        %button.btn.btn-primary.btn-filter.handleFilter
-          %span.dropdown-label
-            %span.fa.fa-filter
-            Filter
-            %span.filter-counts
+          .col-xs-6.h-filter
+            .btn-filter
+              %button.btn.btn-primary.btn-filter.handleFilter
+                %span.dropdown-label
+                  %span.fa.fa-filter
+                  Filter
+                  %span.filter-counts
 
-    .pull-right.nav-items.headerLinks.hidden-xs{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
-      = link_to 'Blog', '/blog'
-      - if user_signed_in?
-        |
-        %a{href: managertools_user_path(current_user, type: 'featured')} Manager Tools
-      - if !user_signed_in?
-        |
-        - if params[:controller] == "users/sessions"
-          = link_to 'Sign Up', '/users/sign_up'
-        - elsif params[:controller] == "users/registrations"
-          = link_to 'Sign In', '/users/sign_in'
-        - else
-          = link_to 'Sign Up', '/users/sign_up'
-          |
-          = link_to 'Sign In', '/users/sign_in'
-
-    - if user_signed_in?
-      .pull-right.user-profile.headerLinks.hidden-xs.hidden-sm{style: "display: inline-block;"}
-        = render partial: 'layouts/shared/user_profile'
-
-    .pull-right.headerLinks.write-review.hidden-xs
-      = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-white btn-o btn-clear'
-    
-  
-  .visible-xs{style: "position: fixed; bottom: 10px;"}
+  .visible-xs{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;'}
     - if action_name == 'search' or @show_map_btn
       %a.mapHandler.btn.btn-green{href: "javascript:void(0);", style: custom_search? ? 'display: none;' : ''}
         %span.fa.fa-map-o
@@ -52,3 +30,35 @@
       %a.listHandler.btn.btn-green{href: "javascript:void(0);", style: custom_search? ? 'display: block;' : ''}
         %span.fa.fa-list
         List
+
+- else
+  %a.navHandler{href: "javascript:void(0)"}
+    %span.fa.fa-bars
+  #header
+    .logoContainer
+      .logo
+        %a{href: "/"}= image_tag 'logo_white.png', alt: 'logo'
+      #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
+
+      .pull-right.nav-items.headerLinks{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
+        = link_to 'Blog', '/blog'
+        - if user_signed_in?
+          |
+          %a{href: managertools_user_path(current_user, type: 'featured')} Manager Tools
+        - if !user_signed_in?
+          |
+          - if params[:controller] == "users/sessions"
+            = link_to 'Sign Up', '/users/sign_up'
+          - elsif params[:controller] == "users/registrations"
+            = link_to 'Sign In', '/users/sign_in'
+          - else
+            = link_to 'Sign Up', '/users/sign_up'
+            |
+            = link_to 'Sign In', '/users/sign_in'
+
+      - if user_signed_in?
+        .pull-right.user-profile.headerLinks{style: "display: inline-block;"}
+          = render partial: 'layouts/shared/user_profile'
+
+      .pull-right.headerLinks.write-review
+        = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-white btn-o btn-clear'

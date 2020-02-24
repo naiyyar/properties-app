@@ -4968,6 +4968,61 @@ select.custom-arrow {
 }
 
 @media screen and (max-width: 767px) {
+    #header-mob {
+        background-color: #0075c9;
+        /*position: fixed;*/
+        /*top: 0;*/
+        /*left: 0;*/
+        width: 100%;
+        padding: 8px 1px 8px 14px;
+        z-index: 1040;
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    #header-mob a.navHandler{
+        padding: 6px 0px 0px;
+        height: 0px;
+        width: 0px;
+    }
+
+    #header-mob .row .col-xs-4 {
+        padding-right: 1px;
+    }
+
+    #header-mob .col-xs-6.hood, 
+    #header-mob .col-xs-6.h-filter{
+        padding-right: 0px;
+        padding-left: 0px;
+        background: #0075c8;
+    }
+    #header-mob .col-xs-6.hood{
+        width: 41%;
+    }
+    #header-mob .col-xs-6.h-filter{
+        width: 45%;
+    }
+
+    #header-mob .row .col-xs-1{
+        padding-left: 0px;
+        width: 7.333333%;
+    }
+
+    #header-mob .row .col-xs-7{
+        padding-left: 0px;
+        padding-right: 4px;
+    }
+
+    #header-mob .apt-search input {
+        width: 100%;
+        border-radius: 1.5em;
+        padding: 11px;
+        margin: 0px;
+        background: #fff;
+        border: 0px solid #333; 
+        -webkit-appearance: none;
+        font-size: 13px;
+    }
+
     #signup .modal-sm, #signin .modal-sm{
         width: auto;
     }
@@ -5053,7 +5108,7 @@ select.custom-arrow {
     }
 
     .btn-hoods button{
-        padding: 10px 3px;
+        padding: 10px 6px;
     }
     #hero-container-blog .home-header .logo{
         width: 84%;

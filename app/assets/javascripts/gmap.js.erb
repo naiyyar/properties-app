@@ -5,7 +5,6 @@ function loadMarkerWindow(building_id, map, marker){
     min_price:        $('#list_min_price').val(),
     max_price:        $('#list_max_price').val(),
   };
-  console.log(filter_params)
   $.post('/load_infobox', {
     object_id:        building_id, 
     building_show:    false,
