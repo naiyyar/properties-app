@@ -1,6 +1,6 @@
 .visible-xs
   #header-mob
-    .row
+    .row{style: 'margin-right: 0px;'}
       .col-xs-1
         %a.navHandler{href: 'javascript:void(0)'}
           %span.fa.fa-bars
@@ -9,7 +9,7 @@
           %span.fa.fa-times-circle.fa-2x.clearSearchText{style: "right: #{clear_link_from_right}px;"}
           = render partial: 'home/search_form'
       %div{class: "col-xs-#{header_right_col}"}
-        .row
+        .row{style: 'margin-right: -1px;'}
           .hood.col-xs-6
             .btn-hoods
               %button.btn.btn-primary.dropdown-toggle-neighborhoods{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
