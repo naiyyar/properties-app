@@ -6,7 +6,7 @@
 #content.searched-properties{class: (custom_search? and browser.device.mobile?) ? 'invisible' : nil}
   .tabsWidget.tabsWidgetSearch{style: "#{@buildings.blank? ? 'height: 60vh' : ''}"}
     - unless browser.device.mobile?
-      %ul.nav.nav-tabs1.nav-justified{role: 'tablist'}
+      %ul.nav.nav-tabs1.nav-justified.hidden-xs{role: 'tablist'}
         %li.active
           .text-center{style: 'padding: 8px 0px;'}
             %b{style: 'color: #0075c8; font-size: 21px;'}= "#{@listings_count} Rentals | #{@buildings&.size} Buildings"

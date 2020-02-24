@@ -5,7 +5,9 @@
         %a.navHandler{href: 'javascript:void(0)'}
           %span.fa.fa-bars
       .col-xs-7
-        .split-view-seach= render partial: 'home/search_form'
+        .split-view-seach
+          %span.fa.fa-times-circle.fa-2x.clearSearchText
+          = render partial: 'home/search_form'
       .col-xs-4
         .row
           .col-xs-6.hood
