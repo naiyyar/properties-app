@@ -26,7 +26,7 @@ class HomeController < ApplicationController
   end
 
   def load_infobox
-    @building.active_listings_count = @building.active_listings(params[:filter_params]).size
+    active_listings_count = @building.active_listings(params[:filter_params]).size
     render json: { html: render_to_string(:partial => '/layouts/shared/custom_infowindow', 
                                           :locals => {  building:         @building,
                                                         image:            Upload.marker_image(@building),
@@ -35,7 +35,8 @@ class HomeController < ApplicationController
                                                         building_show:    params[:building_show],
                                                         current_user:     @current_user,
                                                         fav_color_class:  @fav_color_class,
-                                                        min_save_amount:  @min_save_amount
+                                                        min_save_amount:  @min_save_amount,
+                                                        listings_count:   active_listings_count
                                                       })
                   }
   end

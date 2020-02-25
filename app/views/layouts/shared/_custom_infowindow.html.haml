@@ -58,4 +58,6 @@
   
   .clearfix
   .infoButtons.no-padding
+    - @active_listings_count = {}
+    - @active_listings_count[building.id] = listings_count
     = render 'contacts/cta_buttons', building: building, size_class: 'btn-xs btn-block', on_click: true

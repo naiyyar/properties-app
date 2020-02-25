@@ -63,7 +63,8 @@ class ManagementCompaniesController < ApplicationController
       end
       @zoom = 13
     end
-    @all_buildings.each{ |b| b.active_listings_count = b.active_listings(params[:filter]).size }
+    @active_listings_count = {}
+    @buildings.each{|b| @active_listings_count[b.id] = b.active_listings(params[:filter]).size }
     @photos                = Upload.building_photos(@all_buildings.map(&:id))
     @building_photos_count = @photos.size
     @meta_desc             = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, 
