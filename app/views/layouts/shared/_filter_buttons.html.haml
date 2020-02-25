@@ -1,6 +1,6 @@
 .visible-xs
   - if show_filters?
-    %section.sorted_by_option.row{style: "padding: 8px 0px;display: inline-block;width: 100%;background: #fff;margin: 0px; display: #{custom_search? ? 'none' : 'block'}"}
+    %section.sorted_by_option.row{style: "padding: 2px 0px;display: inline-block;width: 100%;background: #fff;margin: 0px; display: #{custom_search? ? 'none' : 'block'}"}
       %section.col-xs-6{style: 'padding-left: 4px;'}
         %label{style: 'margin-bottom: 1px; padding: 2px;'}
           %div.counts=link_to "#{@listings_count} Rentals |", '#', style: 'color: #428bca;'
