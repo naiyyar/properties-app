@@ -9,7 +9,7 @@
       %ul.nav.nav-tabs1.nav-justified.hidden-xs{role: 'tablist'}
         %li.active
           .text-center{style: 'padding: 8px 0px;'}
-            %b{style: 'color: #0075c8; font-size: 21px;'}= "#{@listings_count} Rentals | #{@buildings&.size} Buildings"
+            %b{style: 'color: #0075c8; font-size: 21px;'}= "#{@listings_count.to_i} Rentals | #{@buildings&.size} Buildings"
       
     .tab-content.tab-scroll11{style: 'background-color: #f3f3f3;'}
       #buildings.tab-pane.fade.in.active

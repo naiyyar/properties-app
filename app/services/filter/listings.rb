@@ -28,7 +28,7 @@ module Filter
 	  def filtered_listings
 	    @listings = filter_by_listing_amenities	if @amenities.present?
 	    @listings = filter_by_beds 							if @bedrooms.present?
-	    @listings = @listings.with_prices(@min_price, @max_price) if @min_price.to_i > 0 || @max_price > 0
+	    @listings = @listings.with_prices(@min_price, @max_price) if @min_price.to_i > 0 || @max_price.to_i > 0
 	    return @listings
 	  end
 
