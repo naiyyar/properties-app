@@ -33,6 +33,10 @@ module ApplicationHelper
     show_filters? ? '6' : '13'
   end
 
+  def current_view
+    show_filters? ? 'split-view' : 'other-view'
+  end
+
 	def resource_name
     :user
   end

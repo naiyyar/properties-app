@@ -56,6 +56,7 @@ module BuildingFilters
       @buildings = @buildings.swimming_pool                 if has_amenity?('swimming_pool')
       @buildings = @buildings.walk_up                       if has_amenity?('walk_up')
       @buildings = @buildings.no_fee                        if has_amenity?('no_fee')
+      @buildings = @buildings.live_in_super                 if has_amenity?('live_in_super')
       #for listings
       if @amenities.include?('months_free_rent') || @amenities.include?('owner_paid') || @amenities.include?('rent_stabilized')
         @buildings = buildings_with_listing_amenities

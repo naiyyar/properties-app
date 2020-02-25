@@ -26,7 +26,7 @@ module Filter
 	    	@bedrooms = @bedrooms.split(' ') unless @bedrooms.kind_of?(Array)
 	    	@listings = @listings.with_beds(@bedrooms)
 	    end
-	    @listings = @listings.with_prices(@min_price, @max_price) if @min_price.to_i > 0
+	    @listings = @listings.with_prices(@min_price, @max_price) if @min_price.to_i > 0 || @max_price.present?
 	    return @listings
 	  end
 

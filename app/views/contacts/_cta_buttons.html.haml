@@ -1,5 +1,5 @@
 .contact-links
-	- listings_count = building.active_listings_count
+	- listings_count = building.active_listings_count.to_i
 	- if building.all_three_cta?(listings_count)
 		.c-links
 			%section

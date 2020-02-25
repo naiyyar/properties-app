@@ -4,14 +4,15 @@
       .col-xs-1
         %a.navHandler{href: 'javascript:void(0)'}
           %span.fa.fa-bars
-      %div{class: "col-xs-#{header_center_col}"}
+      %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
         .split-view-seach{class: "#{search_bar(:hidden)}"}
           %span.fa.fa-times-circle.fa-2x.clearSearchText{style: "right: #{clear_link_from_right}px;"}
           = render partial: 'home/search_form'
+     
       %div{class: "col-xs-#{header_right_col}"}
         .row{style: 'margin-right: -1px;'}
           .hood.col-xs-6
-            .btn-hoods
+            .btn-hoods{class: current_view}
               %button.btn.btn-primary.dropdown-toggle-neighborhoods{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
                 %span.dropdown-label Hood
                 %span.caret
@@ -41,7 +42,8 @@
     .logoContainer
       .logo
         %a{href: "/"}= image_tag 'logo_white.png', alt: 'logo'
-      #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
+      - if !browser.device.mobile?
+        #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
 
       .pull-right.nav-items.headerLinks.visible-lg{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
         = link_to 'Blog', '/blog'
