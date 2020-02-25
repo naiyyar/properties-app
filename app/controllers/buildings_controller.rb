@@ -2,8 +2,11 @@ class BuildingsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
   before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite]
-  before_action :save_as_favourite,   only: [:show]
+  before_action :save_as_favourite,   only: :show
+  before_action :set_distance_matrix, only: :show
+  before_action :broker_fee_percent,  only: :show
   before_action :clear_cache,         only: [:favorite, :unfavorite]
+  before_action :get_building,        only: :create
   after_action :get_neighborhood,     only: [:create, :update]
 
   include BuildingsConcern # create, update
@@ -17,7 +20,6 @@ class BuildingsController < ApplicationController
     @buildings = @filterrific.find.paginate(page: params[:page], per_page: 100)
                                   .includes(:building_average, :management_company)
                                   .reorder('created_at desc')
-
     respond_to do |format|
       format.html
       format.js
@@ -94,10 +96,16 @@ class BuildingsController < ApplicationController
   end
 
   def edit
-    buildings                          = Building.all
-    @neighborhood_options              = buildings.select('neighborhood').where.not(neighborhood: [nil, '']).order(neighborhood: :asc).distinct.pluck(:neighborhood)
-    @parent_neighborhood_options       = buildings.select('neighborhoods_parent').where.not(neighborhoods_parent: [nil, '']).order(neighborhoods_parent: :asc).distinct.pluck(:neighborhoods_parent)
-    @grand_parent_neighborhood_options = buildings.select('neighborhood3').where.not(neighborhood3: [nil, '']).order(neighborhood3: :asc).distinct.pluck(:neighborhood3)
+    buildings = Building.all
+    @neighborhood_options = buildings.select('neighborhood').distinct
+                                     .where.not(neighborhood: [nil, ''])
+                                     .order(neighborhood: :asc).pluck(:neighborhood)
+    @neighborhood2 = buildings.select('neighborhoods_parent').distinct
+                              .where.not(neighborhoods_parent: [nil, ''])
+                              .order(neighborhoods_parent: :asc).pluck(:neighborhoods_parent)
+    @neighborhood3 = buildings.select('neighborhood3').distinct
+                              .where.not(neighborhood3: [nil, ''])
+                              .order(neighborhood3: :asc).pluck(:neighborhood3)
   end
 
   def update
@@ -146,6 +154,28 @@ class BuildingsController < ApplicationController
       current_user.favorite(building)
       session[:favourite_object_id] = nil
     end
+  end
+
+  def set_distance_matrix
+    @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
+  end
+
+  def broker_fee_percent
+    broker_percent = BrokerFeePercent.first.percent_amount
+    @saved_amounts = @building.saved_amount(RentMedian.all, broker_percent)
+  end
+
+  def get_building
+    address     = params[:building][:building_street_address]
+    zipcode     = params[:building][:zipcode]
+    search_term = params['buildings-search-txt']
+    @building = if address.present? && zipcode.present?
+                  Building.where(building_street_address: address, zipcode: zipcode).first
+                elsif address.present?
+                  Building.find_by_building_street_address(address)
+                else
+                  Building.find_by_building_street_address(search_term)
+                end
   end
 
   def clear_cache

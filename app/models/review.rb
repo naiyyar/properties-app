@@ -48,12 +48,9 @@ class Review < ApplicationRecord
     ]
   )
 
-  # scope :building_reviews, -> (buildings) do 
-  #   where('reviewable_type = ? AND reviewable_id in (?) AND buildings.distance.*', 'Building', buildings.pluck(:id))
-  # end
-
   def self.buildings_reviews buildings
-    where(reviewable_id: buildings.map(&:id), reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
+    where(reviewable_id: buildings.map(&:id), 
+          reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
   end
 
   #reviewer
@@ -114,17 +111,15 @@ class Review < ApplicationRecord
   end
 
   private
-  #To remove rating and votes
+  # To remove rating and votes
   def destroy_dependents
     Vote.where(review_id: self.id).destroy_all
     rate = Rate.where(review_id: self.id).destroy_all
-    #update stars
+    # update stars
     rating_caches = RatingCache.where(cacheable_id: self.reviewable_id, cacheable_type: self.reviewable_type)
     
-    #updating avg ratign for all dimensions
-    rating_caches.each do |rating_cache|
-      RatingCache.update_rating_cache(rating_cache)
-    end
+    # updating avg ratign for all dimensions
+    rating_caches.map{ |rc| RatingCache.update_rating_cache(rc) }
   end
 
 end

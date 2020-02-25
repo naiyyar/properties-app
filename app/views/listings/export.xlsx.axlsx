@@ -7,7 +7,7 @@ wb.add_worksheet(name: "listings") do |sheet|
   sheet.add_row Listing::EXPORT_SHEET_HEADER_ROW, :style => Listing.header_style(header)
 	
 	@listings.includes(:building => [:management_company]).each do |listing|
-		building = listing.building
+		building  = listing.building
 		amenities = building.amenities.split(',')
     sheet.add_row [ listing.date_active,
 										listing.building_address,

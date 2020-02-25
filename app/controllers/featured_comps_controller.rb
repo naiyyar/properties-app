@@ -21,6 +21,7 @@ class FeaturedCompsController < ApplicationController
   # GET /featured_comps/1
   # GET /featured_comps/1.json
   def show
+    @buildings = @featured_comp.buildings.includes(:management_company)
   end
 
   #disconnecting building from a management company

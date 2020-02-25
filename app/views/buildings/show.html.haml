@@ -49,7 +49,7 @@
       = render 'buildings/show/similar_properties'
 
   .clearfix
-  - if @rating_cache
+  - if @building.rating_cache?
     .aggregate-ratings
       %ul.star-sm
         %li
@@ -79,11 +79,11 @@
       = link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow no-review'
   
   = render 'layouts/home/footer'
-#mapHash{"data-lat" => "#{@lat.to_json}", "data-lng" => "#{@lng.to_json}", "data-map" => "#{@gmaphash.to_json}"}
+#mapHash{"data-lat" => "#{@building.latitude.to_json}", "data-lng" => "#{@building.longitude.to_json}", 'data-map' => "#{@gmaphash.to_json}"}
 = hidden_field_tag :cu, current_user.present? ? current_user.id : nil
 = hidden_field_tag :cu_building_id, @building.id
 .addNewUnit
-  = render "new_unit_modal"
+  = render 'new_unit_modal'
 
 = render 'buildings/favourite_script'
 

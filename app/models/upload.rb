@@ -24,7 +24,7 @@
 class Upload < ApplicationRecord
 	attr_accessor :rotation_degrees, :rotate
 	resourcify
-	belongs_to :imageable, polymorphic: true, touch: true
+	belongs_to :imageable, polymorphic: true, counter_cache: true
   has_many :document_downloads
   belongs_to :user
   default_scope { order('sort asc') }
@@ -73,7 +73,7 @@ class Upload < ApplicationRecord
   end
 
   def uploaded_img_url
-    if self.image.exists?(:medium) # self.image.styles[:medium]
+    if self.image.exists?(:medium)
       self.image.url(:medium)
     else
       self.image.url(:original)

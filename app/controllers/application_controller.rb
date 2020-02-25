@@ -40,13 +40,13 @@ class ApplicationController < ActionController::Base
   end
 
   def brooklyn_count
-    @brooklyn_count ||= Building.city_count(pop_nb_buildings,
-                                            'Brooklyn',view_context.brooklyn_sub_borough)
+    @brooklyn_count ||= Building.city_count(pop_nb_buildings,'Brooklyn',
+                                            view_context.brooklyn_sub_borough)
   end
 
   def queens_count
-    @queens_count ||= Building.city_count(pop_nb_buildings,
-                                          'Queens',view_context.queens_sub_borough)
+    @queens_count ||= Building.city_count(pop_nb_buildings,'Queens',
+                                          view_context.queens_sub_borough)
   end
 
   def bronx_count
@@ -103,14 +103,15 @@ class ApplicationController < ActionController::Base
   def save_review
     if session[:form_data].present?
       building_data = session[:form_data]['building']
-      if session[:object_type].present? && session[:object_type] == 'building'
+      object_type   = session[:object_type]
+      if object_type.present? && object_type == 'building'
         user_id   = current_user&.id
         building  = Building.new(building_data.merge(user_id: user_id))
         if building.save
           flash[:notice] = 'Building created successfully.'
           sign_in_redirect_path(building, session)
         end
-      elsif session[:object_type].present? && session[:object_type] == 'unit' && building_data.present?
+      elsif object_type.present? && object_type == 'unit' && building_data.present?
         building = Building.find_by_building_street_address(building_data['building_street_address'])
         if (unit = building.created_unit(session, building_data))
           flash[:notice] = 'Unit created successfully.'

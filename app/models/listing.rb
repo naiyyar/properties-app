@@ -83,11 +83,11 @@ class Listing < ApplicationRecord
   
   private
   def create_unit
-  	Unit.create({ name: unit,
-  								building_id: building_id,
-  								number_of_bedrooms: bed,
-									number_of_bathrooms: bath,
-									monthly_rent: rent
+  	Unit.create({ name:                 unit,
+  								building_id:          building_id,
+  								number_of_bedrooms:   bed,
+									number_of_bathrooms:  bath,
+									monthly_rent:         rent
   							})
   end
 

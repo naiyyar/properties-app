@@ -7,8 +7,6 @@ class FeaturedBuilding < ApplicationRecord
 
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
-  #scope :not_expired, -> { where('end_date is not null AND end_date >= ?', Time.zone.now.to_s(:no_timezone)) }
-  #scope :expired,     -> { where('end_date is not null AND end_date < ?',  Time.zone.now.to_s(:no_timezone)) }
   scope :by_manager,  -> { where(featured_by: 'manager') }
 
   pg_search_scope :search_query, 
@@ -39,15 +37,15 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def has_start_and_end_date?
-    start_date.present? and end_date.present?
+    start_date.present? && end_date.present?
   end
 
   def draft?
-    start_date.blank? and end_date.blank? and !active
+    start_date.blank? && end_date.blank? && !active
   end
 
   def live?
-    end_date.present? ? (!draft? and end_date.to_s(:no_timezone) > Time.zone.now.to_s(:no_timezone)) : false
+    end_date.present? ? (!draft? && end_date.to_s(:no_timezone) > Time.zone.now.to_s(:no_timezone)) : false
   end
 
   def expired?
@@ -59,7 +57,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def _start_date
-    (start_date.present? and end_date > Time.zone.now) ? start_date : Time.zone.now
+    (start_date.present? && end_date > Time.zone.now) ? start_date : Time.zone.now
   end
 
   def _end_date renew_date
@@ -71,7 +69,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def draft_edit?
-    !new_record? and live?
+    !new_record? && live?
   end
 
   #expired_featurings when renew is false and end_date is less than today's date then expire
@@ -106,7 +104,7 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   def renew_time day_before
-    end_date.present? and (end_date - day_before).to_s(:no_timezone) == Time.zone.now.to_s(:no_timezone)
+    end_date.present? && (end_date - day_before).to_s(:no_timezone) == Time.zone.now.to_s(:no_timezone)
   end
 
   def not_already_renewed? host=nil

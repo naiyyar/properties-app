@@ -20,13 +20,15 @@ module Filter
 	    end
 	  end
 
+	  def filter_by_beds
+	    @bedrooms = @bedrooms.split(' ') unless @bedrooms.kind_of?(Array)
+	    @listings.with_beds(@bedrooms.flatten)
+	  end
+
 	  def filtered_listings
 	    @listings = filter_by_listing_amenities	if @amenities.present?
-	    if @bedrooms.present?
-	    	@bedrooms = @bedrooms.split(' ') unless @bedrooms.kind_of?(Array)
-	    	@listings = @listings.with_beds(@bedrooms)
-	    end
-	    @listings = @listings.with_prices(@min_price, @max_price) if @min_price.to_i > 0 || @max_price.present?
+	    @listings = filter_by_beds 							if @bedrooms.present?
+	    @listings = @listings.with_prices(@min_price, @max_price) if @min_price.to_i > 0 || @max_price > 0
 	    return @listings
 	  end
 

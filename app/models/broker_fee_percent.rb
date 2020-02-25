@@ -4,6 +4,7 @@ class BrokerFeePercent < ApplicationRecord
 	after_update :clear_buildings_cache
 
 	private
+	
 	def clear_buildings_cache
 		Rails.cache.clear()
 	end

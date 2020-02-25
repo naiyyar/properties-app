@@ -18,7 +18,6 @@ class Contact < ApplicationRecord
 	after_save :send_emails, on: :create
 
 	
-
 	private
 	def send_emails
     if self.building_id.present?

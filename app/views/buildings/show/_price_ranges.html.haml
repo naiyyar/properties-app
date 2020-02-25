@@ -6,6 +6,5 @@
         %tr
           %td=bedroom_type(bed_range)
           %td
-            -if price.present?
-              = set_ranges(@building_price, price)
+            = set_ranges(@building.price, price) if price.present?
                 

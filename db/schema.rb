@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200211161805) do
+ActiveRecord::Schema.define(version: 20200225150935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20200211161805) do
     t.integer  "max_listing_price"
     t.string   "online_application_link"
     t.boolean  "show_application_link",   default: true
+    t.integer  "uploads_count",           default: 0,     null: false
     t.index ["building_name"], name: "index_buildings_on_building_name", using: :btree
     t.index ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
     t.index ["city"], name: "index_buildings_on_city", using: :btree
@@ -460,6 +461,7 @@ ActiveRecord::Schema.define(version: 20200211161805) do
     t.boolean  "can_be_converted",        default: false
     t.boolean  "dryer_in_unit",           default: false
     t.integer  "user_id"
+    t.integer  "uploads_count",           default: 0,     null: false
     t.index ["building_id"], name: "index_units_on_building_id", using: :btree
     t.index ["user_id"], name: "index_units_on_user_id", using: :btree
   end

@@ -82,7 +82,7 @@ class Building < ApplicationRecord
 
   #From some buildings when submitting reviews getting
   #Error: undefined method `address=' for #<Building
-  attr_accessor :address, :active_listings_count
+  attr_accessor :address
 
   belongs_to :user
   has_many :reviews, as: :reviewable
@@ -177,21 +177,17 @@ class Building < ApplicationRecord
   #Methods
 
   def continue_call_back?
-    (avg_rating_changed? && recommended_percent_changed? && min_listing_price_changed? && max_listing_price_changed?)
+    ( avg_rating_changed?          && 
+      recommended_percent_changed? && 
+      min_listing_price_changed?   && 
+      max_listing_price_changed?)
   end
 
   def self.buildings_json_hash(searched_buildings)
     unless searched_buildings.class == Array
-      searched_buildings.select(:id, 
-                                :building_name, 
-                                :building_street_address, 
-                                :latitude, 
-                                :longitude, 
-                                :zipcode, 
-                                :city, 
-                                :min_listing_price,
-                                :max_listing_price,
-                                :listings_count,
+      searched_buildings.select(:id, :building_name, :building_street_address, 
+                                :latitude, :longitude, :zipcode, :city, 
+                                :min_listing_price,:max_listing_price, :listings_count,
                                 :state, :price).as_json(:methods => [:featured])
     else
       searched_buildings.as_json(:methods => [:featured])
@@ -226,11 +222,11 @@ class Building < ApplicationRecord
   end
 
   def all_three_cta? listings_count
-    active_web_url? and has_active_email? and listings_count > 0
+    active_web_url? && has_active_email? && listings_count > 0
   end
 
   def availability_and_contacts_cta?
-    active_web_url? and has_active_email?
+    active_web_url? && has_active_email?
   end
 
   def show_apply_link?
@@ -284,11 +280,7 @@ class Building < ApplicationRecord
   def show_bed_ranges
     beds = []
     bedroom_ranges.map do |bed|
-      if bed == 0
-        beds << 'Studio'
-      else
-        beds << bed
-      end
+      beds << (bed == 0 ? 'Studio' : bed)
     end
     beds
   end
@@ -304,11 +296,7 @@ class Building < ApplicationRecord
     amenities = []
     BuildingAmenities.all_amenities.each_pair do |k, v|
       if self[k].present?
-        if v == 'Elevator'
-          amenities << "#{v}(#{elevator})"
-        else
-          amenities << v
-        end
+        amenities << (v == 'Elevator' ? "#{v}(#{elevator})" : v)
       end
     end
     amenities.join(',')
@@ -320,7 +308,7 @@ class Building < ApplicationRecord
 
   def saved_amount(rent_medians, broker_percent)
     median_prices = rent_median_prices(rent_medians).pluck(:price)
-    median_prices.map {|price| (((price*12)*broker_percent)/100).to_i}.sort
+    median_prices.map{|price| (((price*12)*broker_percent)/100).to_i}.sort
   end
 
   def min_save_amount rent_medians, broker_percent
@@ -345,7 +333,7 @@ class Building < ApplicationRecord
   end
 
   def doc_uploads
-    uploads.where('document_file_name is not null').to_a
+    uploads.where.not(document_file_name: nil).to_a
   end
 
   def featured?
@@ -396,16 +384,8 @@ class Building < ApplicationRecord
     [building_street_address, city, state, zipcode].compact.join(', ')
   end
 
-  def coordinates
-    [latitude, longitude].compact.join(', ')
-  end
-
   def building_name_or_address
     building_name.present? ? building_name : building_street_address
-  end
-
-  def neighborhood_search_string
-    "#{neighbohoods}, #{city}, NY"
   end
 
   def no_of_units
@@ -424,26 +404,12 @@ class Building < ApplicationRecord
     neighborhood.present? ? neighborhood : neighborhoods_parent
   end
 
-  def property_neighborhods
-   "#{first_neighborhood} - #{parent_neighbors}"
-  end
-
   def parent_neighbors
-    if neighborhood.present? and neighborhoods_parent.present? and neighborhood3.present? 
+    if neighborhood.present? && neighborhoods_parent.present? && neighborhood3.present? 
       (neighborhoods_parent == neighborhood) ? neighborhood3 : neighborhoods_parent
     else
       neighborhood3.present? ? neighborhood3 : neighborhoods_parent
     end
-  end
-
-  #finding similar properties may be on the basis amenities
-  def similar_properties
-    Building.where('id <> ?', self.id)
-  end
-
-  def formatted_neighborhood type=''
-    neighborhood = (type == 'parent' ? neighborhoods_parent : neighborhood)
-    return "#{neighborhood.downcase.gsub(' ', '-')}-#{formatted_city}"
   end
 
   def formatted_city
@@ -451,11 +417,15 @@ class Building < ApplicationRecord
   end
 
   def self.number_of_buildings neighbohood
-    where("neighborhood @@ :q OR neighborhoods_parent @@ :q OR neighborhood3 @@ :q" , q: neighbohood).count
+    where("neighborhood @@ :q 
+           OR neighborhoods_parent @@ :q 
+           OR neighborhood3 @@ :q" , q: neighbohood).count
   end
 
   def popular_neighborhoods
-    Neighborhood.where('name = ? OR name = ? OR name = ?', neighborhood, neighborhoods_parent, neighborhood3)
+    Neighborhood.where('name = ? OR 
+                        name = ? OR 
+                        name = ?', neighborhood, neighborhoods_parent, neighborhood3)
   end
 
   def prices
@@ -479,19 +449,20 @@ class Building < ApplicationRecord
   end
 
   def unit_information?
-    (no_of_units.present? and self.no_of_units > 0) || floors.present? || built_in.present?
+    (no_of_units.present? && self.no_of_units > 0) || floors.present? || built_in.present?
   end
 
   def favorite_by?(favoriter)
-    favorites.find_by(favoriter_id: favoriter.id, favoriter_type: favoriter.class.base_class.name).present?
+    favorites.find_by(favoriter_id:   favoriter.id, 
+                      favoriter_type: favoriter.class.base_class.name).present?
   end
 
   def has_active_email?
-    email.present? and active_email
+    email.present? && active_email
   end
 
   def active_web_url?
-    web_url.present? and active_web
+    web_url.present? && active_web
   end
 
   def fav_color_class user_id=nil

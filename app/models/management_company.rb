@@ -22,7 +22,7 @@ class ManagementCompany < ApplicationRecord
 	#pgsearch
 	include PgSearch
   pg_search_scope :text_search_by_management_company, against: [:name],
-     :using => { :tsearch => { prefix: true } }
+                  :using => { :tsearch => { prefix: true } }
 
 	#methods
 
@@ -67,25 +67,19 @@ class ManagementCompany < ApplicationRecord
 
 	def recommended_percent managed_buildings
 		downcount = total_reviews = 0
-		managed_buildings.includes(:reviews).each do |building|
+		managed_buildings.includes(:votes).each do |building|
 			if building.reviews_count.to_i > 0
-				downcount += building.downvotes_count
+				downcount     += building.downvotes_count
 				total_reviews += building.reviews_count
 			end
 		end
-		upcount = total_reviews - downcount
-		return (upcount.to_f / total_reviews) * 100
+		return ((total_reviews - downcount).to_f / total_reviews) * 100
 	end
 
 	def get_average_stars managed_buildings, review_count
-  	@total_rates = 0
-    star_counts = []
-    rateables = Rate.where(rateable_id:   managed_buildings.pluck(:id), 
-                           rateable_type: 'Building', 
-                           dimension:     'building')
-    @total_rates = rateables.where('stars > ?', 0).sum(:stars)
-
-    star_counts = (@total_rates.to_f/review_count).round(2).to_s.split('.')
+    star_counts  = []
+    @total_rates = Rate.rateables(managed_buildings).where('stars > ?', 0).sum(:stars)
+    star_counts  = (@total_rates.to_f/review_count).round(2).to_s.split('.')
     return star_counts
   end
 

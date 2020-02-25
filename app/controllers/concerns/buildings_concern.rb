@@ -2,22 +2,12 @@ module BuildingsConcern
   extend ActiveSupport::Concern
 
   def show
-    @show_map_btn     = @half_footer = true
-    @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
-    broker_percent    = BrokerFeePercent.first.percent_amount
-    @saved_amounts    = @building.saved_amount(RentMedian.all, broker_percent)
-    @building_price   = @building.price
-    @rating_cache     = @building.rating_cache?
-    @price_ranges     = @building.price_ranges
-    
-    #building + units images
+    @show_map_btn          = @half_footer = true
+    @price_ranges          = @building.price_ranges
     @uploads               = @building.chached_image_uploads
-    @uploaded_images_count = @uploads.size
+    @uploaded_images_count = @building.uploads_count.to_i
     @documents             = @building.doc_uploads
     @reviews_count         = @building.reviews_count.to_i
-    
-    @lat                   = @building.latitude
-    @lng                   = @building.longitude
     active_comps           = @building.active_comps
     @similar_properties    = Building.where(id: active_comps.pluck(:building_id))
                                     .includes(:building_average, :featured_buildings) if active_comps.present?
@@ -28,9 +18,8 @@ module BuildingsConcern
     @all_inactive_listings = @listings.inactive
     @inactive_listings     = @all_inactive_listings.reorder(date_active: :desc, rent: :asc).limit(5)
 
-    @meta_desc = "#{@building.building_name if @building.building_name.present? } "+ 
-                  "#{@building.building_street_address} is a #{@building.building_type if @building.building_type.present?} "+ 
-                  "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.name if @building.management_company.present? }. "+ 
+    @meta_desc  = "#{@building.building_name_or_address} #{@building.building_street_address} is a #{@building.try(:building_type)} "+ 
+                  "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.try(:name) }. "+ 
                   "Click to view #{@uploaded_images_count} photos and #{@reviews_count} reviews"
     
     flash[:notice] = 'Files are uploaded successfully.' if params[:from_uploaded].present?
@@ -44,13 +33,7 @@ module BuildingsConcern
       # Redirect the user to register/login
       redirect_to new_user_registration_path
     else
-      if params[:building][:building_street_address].present? and params[:building][:zipcode].present?
-        @building = Building.find_by_building_street_address_and_zipcode(params[:building][:building_street_address], params[:building][:zipcode])
-      elsif params[:building][:building_street_address].present?
-        @building = Building.find_by_building_street_address(params[:building][:building_street_address])
-      else
-        @building = Building.find_by_building_street_address(params['buildings-search-txt'])
-      end
+      @building = Building.get_building(params[:building], params['buildings-search-txt'])
       if @building.blank?
         @building = Building.create(building_params)
         if @building.save

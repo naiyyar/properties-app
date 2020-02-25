@@ -16,9 +16,8 @@
 class Gcoordinate < ApplicationRecord
 
 	def self.neighbohood_boundary_coordinates neighborhoods
-		nb_coords = where("neighborhood = ?", neighborhoods)
+		nb_coords = where(neighborhood: neighborhoods)
 		nb_coords = where("neighborhood @@ :q", q: "%#{neighborhoods}") if nb_coords.blank?
-		
 		nb_coords.map{|rec| { lat: rec.latitude, lng: rec.longitude} }
 	end
 

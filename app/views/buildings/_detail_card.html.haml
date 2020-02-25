@@ -1,19 +1,18 @@
 .card.search-view-card{'data-bid' => building.id}
   - @show_path = building_path(building)
   = link_to @show_path do
-    .figure{style: "position: relative;", id: "figure#{building.id}"}
+    .figure{style: 'position: relative;', id: "figure#{building.id}"}
       - unless @similar_properties.present?
         = image_tag 'shimmer.gif', style: 'width: 100%;height: 225px;' 
       - else
         .bg-size-cover.h-lg{ style: "background-image: url(#{feature_comp_bg_img_url(@last_uploads)});" }
     
-    - if building.price.present? or building.bedroom_types?
+    - if building.price.present? || building.bedroom_types?
       - if @min_saved_amount.present?
         .saving-badge.split-view-badge
           %p Save
           %p= "#{number_to_currency(@min_saved_amount, precision: 0)}+"
     
-    / = link_to 'javascript:;', class: 'dt-card-link' do
     - unless @similar_properties.present?
       .building-detail-card{id: "building_details#{building.id}"}
     - else
@@ -23,15 +22,13 @@
           %span.fa.fa-map-marker
           = building.full_street_address
     
-    %div{style: "float: right;margin-top: -43px;"}
+    %div{style: 'float: right;margin-top: -43px;'}
       = render 'buildings/favourite', building: building
   
   = link_to @show_path do
     = render 'home/building_detail', building: building
 
-
-  .pb-8{style: 'margin-left: 10px;'}
-    =bed_ranges(building)
+  .pb-8{style: 'margin-left: 10px;'}=bed_ranges(building)
   
   = render 'contacts/cta_buttons', building: building, size_class: '', on_click: false
 

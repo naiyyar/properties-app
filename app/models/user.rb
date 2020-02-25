@@ -54,28 +54,22 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
-  #validates_email_realness_of :email
-  #validates_email_format_of :email, :message => 'is not looking good'
 
   DEFAULT_TIMEZONE = 'Eastern Time (US & Canada)'
   US_ZONES         = ['UTC', 'America/Havana']
   
   SOCIALS = {
-    facebook: 'Facebook',
-    google_oauth2: 'Google',
-    linkedin: 'Linkedin'
+    facebook:       'Facebook',
+    google_oauth2:  'Google',
+    linkedin:       'Linkedin'
   }
 
   has_attached_file :avatar, styles: { medium: '300x300>', thumb: '100x100>' }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   
-
   #methods
   def slug_candidates
-    [
-      :name,
-      [:name, :user_email]
-    ]
+    [ :name, [:name, :user_email] ]
   end
 
   def user_email
@@ -99,43 +93,35 @@ class User < ApplicationRecord
     authorization = Authorization.where(:provider => auth.provider, 
                                         :uid => auth.uid).first_or_initialize
     if authorization.user.blank?
-      user = current_user || User.where('email = ?', auth["info"]["email"]).first
-      if user.blank?
-        user = User.new
-        user.email = auth.info.email
-        user.password = Devise.friendly_token[0,20]
-        user.name = auth.info.name
-       #if auth.provider == "twitter" 
-       #  user.save(:validate => false) 
-       #else
-        user.save
-       #end
-      end
-      authorization.name = auth.info.name
-      authorization.user_id = user.id
+      user = current_user || User.where(email: auth['info']['email']).first
+      user = create_user(auth) if user.blank?
+      
+      authorization.name      = auth.info.name
+      authorization.user_id   = user.id
       authorization.image_url = auth.info.image
       authorization.save
     end
     authorization.user
   end
 
+  def create_user auth
+    User.create(email:    auth.info.email,
+                password: Devise.friendly_token[0,20],
+                name:     auth.info.name )
+  end
+
   def profile_image provider=nil
-    if provider == 'Google'
-      provider = 'google_oauth2'
-    else
-      provider = 'facebook'
-    end
-    authorizations = self.authorizations.where(provider: provider)
-    provider_image = authorizations.last.image_url if authorizations.present?
+    provider    = (provider == 'Google' ? 'google_oauth2' : 'facebook')
+    auths       = authorizations.where(provider: provider)
+    avatar_url  = if auths.present? 
+                    auths.last.image_url
+                  elsif avatar.present?
+                    avatar.url(:medium)
+                  else
+                    'user-missing.png'
+                  end
     
-    if provider_image.present? 
-      @avatar_url = provider_image
-    elsif self.avatar.present?
-      @avatar_url = self.avatar.url(:medium)
-    else
-      @avatar_url = 'user-missing.png'
-    end
-    @avatar_url
+    return avatar_url
   end
 
   def user_name
@@ -151,54 +137,38 @@ class User < ApplicationRecord
   end
 
   def create_rating score, rateable, review_id, dimension=nil
-    rate = Rate.new
-    rate.rater_id = self.id
-    rate.rateable_id = rateable.id
-    rate.rateable_type = rateable.class.name
-    rate.dimension = dimension #rateable.class.name.downcase
-    rate.stars = score
-    rate.review_id = review_id
-    rate.save
-
-    #populate rating cache table
-    rating_caches = RatingCache.where(cacheable_id: rateable.id, dimension: dimension)
-    rateables = Rate.where(rateable_id: rateable.id, rateable_type: rateable.class.name, dimension: dimension)
+    rateable_klass = rateable.class.name
+    rating_caches  = RatingCache.where(cacheable_id: rateable.id, dimension: dimension)
+    rateables      = Rate.where(rateable_id: rateable.id, rateable_type: rateable_klass, dimension: dimension)
+    # Creating user rating
+    Rate.create(rater_id:      self.id,        rateable_id: rateable.id,
+                rateable_type: rateable_klass, dimension:   dimension,
+                stars:         score,          review_id:   review_id )
+    
+    # Rating cache
     if rating_caches.present?
-      #updating if rateable is already present
-      rating_caches.each do |rating_cache|
-        RatingCache.update_rating_cache(rating_cache)
-      end
+      rating_caches.map{ |rc| RatingCache.update_rating_cache(rc) }
     else
-      rating_cache = RatingCache.new
-      rating_cache.cacheable_id = rateable.id
-      rating_cache.cacheable_type = rateable.class.name
-      rating_cache.dimension = dimension #rateable.class.name.downcase
-      rating_cache.avg = rateables.sum(:stars)/rateables.count
-      rating_cache.qty = rateables.count
-      rating_cache.save
-      #updating avg in building table
-      rating_cache.update_building_avg if rating_cache.dimension == 'building'
+      RatingCache.create_rating_cache(rateable, rateables)
     end
+  end
 
+  def user_favorite favorable
+    avorites.find_by(favorable_id:    favorable.id, 
+                      favorable_type: favorable.class.base_class.name)
   end
 
   def favorite?(favorable)
-    favorites.find_by(favorable_id: favorable.id, favorable_type: favorable.class.base_class.name).present?
+    user_favorite(favorable).present?
   end  
 
   def favorite(favorable)
-    unless favorite?(favorable)
-      favorites.create(favorable_id: favorable.id, favorable_type: favorable.class.base_class.name)
-    end
+    favorites.create(favorable_id:   favorable.id, 
+                     favorable_type: favorable.class.base_class.name) unless favorite?(favorable)
   end
 
   def unfavorite(favorable)
-    records = favorites.find_by(favorable_id: favorable.id, favorable_type: favorable.class.base_class.name)
-    records.try(:destroy)
+    user_favorite(favorable).try(:destroy)
   end
-
-  # def should_generate_new_friendly_id?
-  #   name_changed?
-  # end
 
 end

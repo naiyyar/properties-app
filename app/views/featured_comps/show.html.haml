@@ -1,33 +1,32 @@
-.tables
-  .row
-    .col-lg-12
-      .pull-left
-        %h3
-          = "Comp #{@featured_comp.id} - #{@featured_comp.building.building_name_or_address}"
-          %input.apple-switch.sb-sm{type: 'checkbox', checked: @featured_comp.active, style: 'margin: 0px;', data: { compid: @featured_comp.id } }
-  .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-12
-      #filterrific_results{style: "margin-top: 10px;"}
-        .table-overflow
-          %table.table.table-striped
-            %thead
+.row
+  .col-lg-12
+    .pull-left
+      %h3
+        = "Comp #{@featured_comp.id} - #{@featured_comp.building.building_name_or_address}"
+        %input.apple-switch.sb-sm{type: 'checkbox', checked: @featured_comp.active, style: 'margin: 0px;', data: { compid: @featured_comp.id } }
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    #filterrific_results{style: 'margin-top: 10px;'}
+      .table-overflow
+        %table.table.table-striped
+          %thead
+            %tr
+              %th{width: '20%'} Building
+              %th{width: '25%'} Address
+              %th{width: '20%'} Company
+              %th{width: '15%'} Rating
+              %th{width: '10%'} Reviews
+              %th{width: '8%'} Website
+              %th{width: '8%'} Disconnect
+          
+          %tbody.table
+            - @buildings.each do |building|
               %tr
-                %th{width: "20%"} Building
-                %th{width: "25%"} Address
-                %th{width: "20%"} Company
-                %th{width: "15%"} Rating
-                %th{width: "10%"} Reviews
-                %th{width: "8%"} Website
-                %th{width: "8%"} Disconnect
-            
-            %tbody.table
-              - @featured_comp.buildings.each do |building|
-                %tr
-                  %td=link_to building.building_name_or_address, building_path(building)
-                  %td=link_to building.building_street_address, building_path(building)
-                  %td=link_to building.management_company.try(:name), '#'
-                  %td.star-sm= rating_for building, 'building', disabled_after_rate: true, readonly: true 
-                  %td= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id)
-                  %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
-                  %td= link_to 'Disconnect', disconnect_building_featured_comp_path(id: @featured_comp.id, building_id: building.id), data: {confirm: "Are you sure you want to disconnect this building?"}, class: 'text-danger'
-                  
+                %td=link_to building.building_name_or_address, building_path(building)
+                %td=link_to building.building_street_address, building_path(building)
+                %td=link_to building.management_company.try(:name), '#'
+                %td.star-sm= rating_for building, 'building', disabled_after_rate: true, readonly: true 
+                %td= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id)
+                %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
+                %td= link_to 'Disconnect', disconnect_building_featured_comp_path(id: @featured_comp.id, building_id: building.id), data: {confirm: 'Are you sure you want to disconnect this building?'}, class: 'text-danger'
+                
