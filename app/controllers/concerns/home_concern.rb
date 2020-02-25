@@ -30,6 +30,7 @@ module HomeConcern
       	@active_listings_count[b.id] = b.active_listings(params[:filter]).size
       	@listings_count 			      += @active_listings_count[b.id]
       end
+      @buildings_count    = @buildings&.size
       @photos_count       = @buildings.sum(:uploads_count)
       @reviews_count      = @buildings.sum(:reviews_count)
     else
@@ -37,11 +38,11 @@ module HomeConcern
     end
 
     unless params[:searched_by] == 'nyc'
-      @meta_desc = "#{@meta_desc_text} has #{@buildings.size if @buildings.present?} "+ 
+      @meta_desc = "#{@meta_desc_text} has #{@buildings_count.to_i} "+ 
                    "no fee apartment, no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. "+ 
                    "View #{@photos_count} photos and #{@reviews_count} reviews."
     else
-      @meta_desc = "Browse #{@buildings.length if @buildings.present?} No Fee #{pop_search_tab_title}. Bypass the broker and save thousands in fees by renting directly from management companies."
+      @meta_desc = "Browse #{@buildings_count.to_i} No Fee #{pop_search_tab_title}. Bypass the broker and save thousands in fees by renting directly from management companies."
     end
   end
 
