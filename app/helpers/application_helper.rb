@@ -10,7 +10,9 @@ module ApplicationHelper
   end
 
   def current_user_profile_image
-    current_user.profile_image(session[:provider]) rescue nil
+    @current_user_profile_image ||= current_user.profile_image(session[:provider])
+  rescue
+    nil
   end
 
   def search_bar(status)
