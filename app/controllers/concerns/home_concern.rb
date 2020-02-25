@@ -26,7 +26,7 @@ module HomeConcern
       @lat, @lng          = @hash[0]['latitude'], @hash[0]['longitude']
       @listings_count     = 0
       @active_listings_count = {}
-      @all_buildings.each do |b|
+      @buildings.each do |b|
       	@active_listings_count[b.id] = b.active_listings(params[:filter]).size
       	@listings_count 			      += @active_listings_count[b.id]
       end
