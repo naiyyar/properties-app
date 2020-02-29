@@ -1,18 +1,11 @@
 <div class="headerUserWraper">
-  <a href="#" class="no-hover-underline userHandler dropdown-toggle" data-toggle="dropdown"><%= image_tag current_user_profile_image, alt: 'avatar', class: 'headerAvatar avatar', style: 'width:30px;height:30px;' %></a>
-  <a href="#" class="no-hover-underline headerUser dropdown-toggle" data-toggle="dropdown">
-      <%= image_tag current_user_profile_image, class: "avatar headerAvatar pull-left", alt: 'Avatar'%>
-  </a>
+  <a href="#" class="no-hover-underline userHandler dropdown-toggle" data-toggle="dropdown"> Account <span class='fa fa-chevron-down'></span></a>
+  <a href="#" class="no-hover-underline headerUser1 dropdown-toggle no-hover-underline" data-toggle="dropdown">Account <span class='fa fa-chevron-down'></span></a>
+  
   <div class="dropdown-menu pull-right userMenu" role="menu">
-    <!-- <div class="mobAvatar" style="display:block;">
-        <%#= image_tag current_user_profile_image, alt: 'avatar', class: 'avatar mobAvatarImg' %>
-        <div class="mobAvatarName"><%#= current_user.present? ? current_user.user_name.capitalize : '' %></div>
-    </div> -->
     <ul>
       <li><a href="<%= saved_buildings_user_path(current_user) %>"><span class="fa fa-heart"></span>Saved Buildings</a></li>
-      <li><a href="<%= managertools_user_path(current_user, type: 'featured') %>"><span class="fa fa-wrench"></span>Manager Tools</a></li>
       <li><a href="<%= edit_user_path(current_user) %>"><span class="fa fa-gear"></span>Settings</a></li>
-      <!-- <li><a href="<%#= user_path(current_user) %>"><span class="fa fa-user"></span>Profile</a></li> -->
       <li class="divider"></li>
       <li><%= link_to '<span class="fa fa-power-off"></span>Logout'.html_safe, destroy_user_session_path, :method => :delete %> </li>
     </ul>

@@ -1,6 +1,6 @@
 class Listing < ApplicationRecord
-	include PgSearch
-	
+  include PgSearch
+  
   # associations
   belongs_to :building
   counter_cache_with_conditions :building, :listings_count, active: true
@@ -23,8 +23,8 @@ class Listing < ApplicationRecord
   
 
   # scopes
-	scope :active,          -> { where(active: true) }
-	scope :inactive,        -> { where(active: false) }
+  scope :active,          -> { where(active: true) }
+  scope :inactive,        -> { where(active: false) }
   scope :months_free,     -> { where('free_months > ?', 0) }
   scope :owner_paid,      -> { where('owner_paid is not null') }
   scope :rent_stabilize,  -> { where('rent_stabilize = ?', 'true') }
@@ -32,7 +32,7 @@ class Listing < ApplicationRecord
   scope :with_beds,       -> (beds) { where('bed in (?)', beds) }
 
   pg_search_scope :search_query, 
-  								against: [:building_address, :management_company],
+                  against: [:building_address, :management_company],
                   :using => {  :tsearch => { prefix: true }, 
                                :trigram=> { :threshold => 0.2 } 
                             },
@@ -42,7 +42,7 @@ class Listing < ApplicationRecord
   scope :order_by_date_active_desc, -> { reorder(date_active: :desc, rent: :asc) }
   scope :order_by_rent_asc,         -> { reorder(rent: :asc) }
 
-	filterrific(
+  filterrific(
     default_filter_params: { default_listing_order: :default_listing_order },
     available_filters: [:default_listing_order, :search_query]
   )
@@ -62,8 +62,18 @@ class Listing < ApplicationRecord
     management_company.try(:name)
   end
 
+  def self.listings_count buildings, filter_params={}
+    listings_count = 0
+    if filter_params.present?
+      buildings.each{|b| listings_count += b.active_listings(filter_params).size }
+    else
+      listings_count = buildings.pluck(:listings_count).reduce(:+)
+    end
+    return listings_count
+  end
+
   def unit_exist?
-  	building.units.where(name: unit).present?
+    building.units.where(name: unit).present?
   end
 
   def rentstabilize
@@ -83,12 +93,12 @@ class Listing < ApplicationRecord
   
   private
   def create_unit
-  	Unit.create({ name:                 unit,
-  								building_id:          building_id,
-  								number_of_bedrooms:   bed,
-									number_of_bathrooms:  bath,
-									monthly_rent:         rent
-  							})
+    Unit.create({ name:                 unit,
+                  building_id:          building_id,
+                  number_of_bedrooms:   bed,
+                  number_of_bathrooms:  bath,
+                  monthly_rent:         rent
+                })
   end
 
 end

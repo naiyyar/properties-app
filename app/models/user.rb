@@ -72,6 +72,10 @@ class User < ApplicationRecord
     [ :name, [:name, :user_email] ]
   end
 
+  def admin?
+    has_role? :admin
+  end
+
   def user_email
     email.split('@')[0]
   end

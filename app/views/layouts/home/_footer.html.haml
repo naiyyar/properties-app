@@ -1,19 +1,42 @@
 .home-footer
   .home-wrapper
-    .contactUs
-      = link_to 'About us', '/about'
-      | #{link_to 'Terms of Service', tos_path, target: '_blank'} | #{link_to 'Send feedback', new_contact_path, class: 'btn1 btn-info1'} | #{link_to 'Blog', '/blog', class: 'btn1 btn-info1'}
-    .social-links.text-center.padding-top-20
-      %a.btn.btn-sm.btn-icon.btn-round.btn-o.btn-white{href: "https://www.facebook.com/transparentcityllc", target: "new"}
-        %span.fa.fa-facebook
-      %a.btn.btn-sm.btn-icon.btn-round.btn-o.btn-white{href: "https://twitter.com/transprentcity", target: "new"}
-        %span.fa.fa-twitter
-      %a.btn.btn-sm.btn-icon.btn-round.btn-o.btn-white{href: "https://www.instagram.com/transprentcity", target: "new"}
-        %span.fa.fa-instagram
-    .copyright.padding-top-20
-      transparentcity © #{Date.today.year <= 2018 ? 2018 : Date.today.year}
+    .row
+      .col-xs-6.col-sm-6.col-md-3.col-lg-3.hidden-xs.hidden-sm
 
+      .col-xs-6.col-sm-6.col-md-3.col-lg-3
+        .osLight.footer-header Company
+        %ul.footer-nav.pb20
+          %li
+            %a{href: '/about'} About Us
+          %li
+            %a{href: '#'} Advertise With Us
+          %li
+            %a{href: '/blog'} Blog
+          %li
+            %a{href: tos_path, target: '_blank'} Terms Of Services
+
+      .col-xs-6.col-sm-6.col-md-3.col-lg-3
+        .osLight.footer-header Get In Touch
+        %ul.footer-nav.pb20
+          %li
+            %a{href: new_contact_path} Email Us
+          %li.invisible
+            %a{href: '#'} xxxxx
+          %li
+            %a.btn.btn-sm.btn-icon.font-md{href: 'https://www.facebook.com/transparentcityllc', target: 'new'}
+              %span.fa.fa-facebook
+            %a.btn.btn-sm.btn-icon.font-md{href: 'https://twitter.com/transprentcity', target: 'new'}
+              %span.fa.fa-twitter
+            %a.btn.btn-sm.btn-icon.font-md{href: 'https://www.instagram.com/transprentcity', target: 'new'}
+              %span.fa.fa-instagram
+            %a.btn.btn-sm.btn-icon.font-md{href: 'https://www.linked-in.com/transprentcity', target: 'new'}
+              %span.fa.fa-linkedin
+    
+    .copyright.padding-top-20
+      transparentcity © #{Date.today.year}
+  
     - unless request.url.include?('www.transparentcity.co')
       %br
       .text-center
         =image_tag 'buttercms_logo/butter-w.png', style: 'width: 150px;', alt: ''
+

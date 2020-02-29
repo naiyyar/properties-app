@@ -161,7 +161,7 @@ module BuildingsHelper
 			bt_block_class = sl_class.present? ? sl_class : 'btn-block'
       link_to 'Check Availability', building.web_url, 
       														onclick: "window.open(this.href,'_blank');return false;",
-      														class: "btn #{bt_block_class} btn-primary txt-color-white font-bolder",
+      														class: "btn #{bt_block_class} btn-primary txt-color-white font-bolder btn-round",
       														style: "padding: #{bt_block_class.include?('btn-xs') ? '8px 0px' : ''}"
     else
       link_to check_availability, building_url(building), class: 'btn btn-block btn-primary invisible'
@@ -171,11 +171,11 @@ module BuildingsHelper
 	def check_availability_button web_url, klass
 		link_to 'Check Availability', web_url, 
 																	onclick: "window.open(this.href,'_blank');return false;",
-																	class: "btn btn-primary #{klass}"
+																	class: "btn btn-primary #{klass} btn-round"
 	end
 
 	def contact_leasing_button building, event, klass
-		title, classes = 'Contact Leasing', "btn btn-primary #{klass}"
+		title, classes = 'Contact Leasing', "btn btn-primary #{klass} btn-round"
 		unless event
 			link_to title, 'javascript:;', data: { bid: building.id, type: 'contact' }, class: classes
 		else
@@ -184,7 +184,8 @@ module BuildingsHelper
 	end
 
 	def active_listings_button building, event, klass, listings_count
-		title, classes = "#{listings_count} Active Listings", "btn btn-primary active-listing-link #{klass}"
+		title 	= "#{listings_count} Active Listings" 
+		classes = "btn btn-primary active-listing-link #{klass} btn-round"
 		unless event
 			link_to title, 'javascript:;', data: { bid: building.id, 
 																							type: 'listings', 
@@ -197,13 +198,13 @@ module BuildingsHelper
 
 	def apply_online_link building
 		link_to 'Apply Online', building.online_application_link, 
-														class: 'btn btn-primary btn-o btn-block font-bolder', 
+														class: 'btn btn-primary btn-o btn-block font-bolder btn-round', 
 														target: '_blank'
 	end
 
 	def contact_leasing_link building, bg_col=''
 		link_to 'Contact Leasing Team', new_contact_path(building_id: building.id), 
-																		class: "btn btn-primary #{bg_col} btn-block font-bolder", 
+																		class: "btn btn-primary #{bg_col} btn-block font-bolder btn-round", 
 																		remote: true
 	end
 

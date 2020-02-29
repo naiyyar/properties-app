@@ -1,19 +1,40 @@
-%a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: "javascript:void(0)"}
+%a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
   %span.fa.fa-bars
 .home-header
   .home-logo.osLight= image_tag 'logo2.png', alt: 'logo', width: '200'
   / Should only be visible on home page when user is not logged in
-  - if controller_name == 'home' and action_name == 'index'
+  .home-nav.pull-left
+    %ul.homeNavUl
+      %li.no-hover-underline.parent
+        %a{href: '/about'} About
+      %li.no-hover-underline.parent
+        %a{href: '#'} Advertise
+      %li.no-hover-underline.parent
+        %a{href: '/blog'} Blog
+      %li.no-hover-underline.parent
+        %a{href:'/buildings/contribut'} Write Review
+
+  - if false && controller_name == 'home' and action_name == 'index'
     %div{class: "pull-right btn-contribute btn-contribute-home #{user_signed_in? ? 'hidden-xs hidden-sm' : ''}"}
-      = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-black btn-o hidden-xs', style: 'font-size: 14px;'
-      = link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-black btn-o visible-xs'
+      / = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-black btn-o hidden-xs btn-round', style: 'font-size: 14px;'
+      / = link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-black btn-o visible-xs btn-round'
   / for large devices
   .home-nav
-    - if user_signed_in?
-      .pull-right.home-header-userProfile.hidden-xs.hidden-sm
-        = render partial: 'layouts/shared/user_profile'
-    %ul.homeNavUl
-      = render partial: 'layouts/home/home_left_nav_items'
+    %ul.homeNavUl{style: 'position: relative;'}
+      / = render partial: 'layouts/home/home_left_nav_items'
+      - unless user_signed_in?
+        %li.no-hover-underline.parent
+          %a{href: '/users/sign_in'} Sign In
+          |
+          %a{href: '/users/sign_up'} Sign Up
+      - else
+        %li.no-hover-underline.parent
+          = render 'layouts/shared/admin_nav_items'
+        %li.no-hover-underline.parent
+          %a{href: managertools_user_path(current_user, type: 'featured')} Manager Tools
+        %li.no-hover-underline.parent
+          = render 'layouts/shared/user_profile'
+
 - if user_signed_in?
   .mobView.visible-xs.visible-sm
     = render partial: 'layouts/shared/user_profile'

@@ -24,8 +24,7 @@ module HomeConcern
       @all_buildings      = final_results[0][:all_buildings] #with featured
       @hash               = final_results[0][:map_hash]
       @lat, @lng          = @hash[0]['latitude'], @hash[0]['longitude']
-      @listings_count     = 0
-      @buildings.each{|b| @listings_count += b.active_listings(params[:filter]).size }
+      @listings_count     = Listing.listings_count(@buildings, params[:filter])
       @buildings_count    = @buildings&.size
       @photos_count       = @buildings.sum(:uploads_count)
       @reviews_count      = @buildings.sum(:reviews_count)

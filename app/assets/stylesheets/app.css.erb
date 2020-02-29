@@ -5,6 +5,14 @@
     border: 0;
 }
 
+.btn.btn-primary, 
+.btn.btn-blue, 
+.btn.btn-success, 
+.btn.btn-default, 
+.btn.btn-danger{
+    border-radius: 50px !important;
+}
+
 @keyframes placeHolderShimmer{
     0%{
         background-position: -468px 0
@@ -1488,10 +1496,10 @@ a.userHandler {
     -webkit-animation: pulsate 0.5s ease-out;
     animation: pulsate 0.5s ease-out;
 }
-.headerUserWraper {
+/*.headerUserWraper {
     float: right;
     height: 60px;
-}
+}*/
 a.headerUser {
     display: flex;
     height: 60px;
@@ -4058,15 +4066,15 @@ body.black {
     height: 600px;
 }
 .home-header {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    padding: 0px 69px 1px;
-    color: #fff;
+    padding: 0px 69px 0px;
+    color: #000;
     top: 0;
     left: 0;
     z-index: 1000;
-    background-color: #f3f3f3;
-    box-shadow: 0px 2px 3px rgba(0,0,0, 0.2)
+    background-color: #fff;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
 }
 .home-header.map {
     background: rgba(0, 0, 0, 0.50);
@@ -4080,27 +4088,6 @@ body.black {
 .home-logo span {
     font-size: 34px;
 }
-.home-nav {
-    float: right;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
-.home-nav ul.homeNavUl {
-    margin: 0;
-    padding: 10px 0px;
-    list-style-type: none;
-    float: right;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
-.home-nav ul.homeNavUl li {
-    float: left;
-    margin-left: 11px;
-    padding-top: 9px;
-    color: #777;
-}
 
 /*setting up search input field radius*/
 .border-top-lr-radius{
@@ -4112,24 +4099,10 @@ body.black {
     border-bottom-right-radius: 25px !important;
 }
 
-.home-nav ul.homeNavUl li a:hover{
-    border-bottom: 2px solid #333;
-}
-.home-nav ul.homeNavUl li:not(.no-hover-underline):hover {
-    border-bottom: 1px solid #ffffff;
-}
-
 .no-hover-underline:hover{
     border-bottom: 1px solid transparent !important;
 }
 
-.home-nav ul.homeNavUl li a {
-    color: #333;
-    font-size: 14px;
-}
-.no-touch .home-nav ul.homeNavUl li a:hover {
-    color: #333;
-}
 .padding-bottom-10{
     padding-bottom: 10px;
 }
@@ -4768,7 +4741,7 @@ blockquote {
     font-size: 16px;
     line-height: 16px;
     padding-bottom: 20px;
-    color: #c6e4e3;
+    color: #fff;
 }
 .footer-nav {
     margin: 0;
@@ -4812,9 +4785,9 @@ blockquote {
     font-style: italic;
 }
 
-.mobView .headerUserWraper{
+/*.mobView .headerUserWraper{
     height: 55px;
-}
+}*/
 
 .margin-top-10{
     margin-top: 10px !important;

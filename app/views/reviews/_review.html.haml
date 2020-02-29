@@ -1,5 +1,5 @@
 - reviewable = review.reviewable
-.comment.record{"data-id" => "#{review.id}", id: "comment#{review.id}"}
+.comment.record{'data-id' => "#{review.id}", id: "comment#{review.id}"}
   - if current_user and current_user.has_role?(:admin)
     = link_to '<span class="fa fa-times"></span>'.html_safe, review_path(review), method: :delete, remote: true, class: 'pull-right text-danger daleteReview', title: 'Delete'
   
@@ -27,10 +27,10 @@
       %p.review-header-item= review.anonymous ? 'Anonymous' : review.user_name.capitalize
     
     .commentBody
-      .commentTime{style: "float: none;"}
+      .commentTime{style: 'float: none;'}
         %p.review-header-item
           %span.fa.fa-clock-o
-          = review.created_at.strftime("%b %d, %Y")
+          = review.created_at.strftime('%b %d, %Y')
       .tenantStatus{style: "float: none;"}
         %p.review-header-item
           - if review.tenant_status != 'visitor'
@@ -40,9 +40,9 @@
             = review.resident_to.to_i == Date.today.year ? 'Present' : review.resident_to if review.resident_to.present?
           - else
             = 'Visitor'
-      %div{style: "display: inline-block;"}
+      %div{style: 'display: inline-block;'}
         %p.review-header-item
-        %ul.rating.pull-left.star-sm{style: "margin: 0px;padding: 0px;"}
+        %ul.rating.pull-left.star-sm{style: 'margin: 0px;padding: 0px;'}
           = rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id
         .favLink
           %span.icon-pipe |
@@ -65,7 +65,7 @@
           %span
             = simple_format(review.other_advice)
       
-      .commentActions{style: "padding: 0px 0px 8px;"}
+      .commentActions{style: 'padding: 0px 0px 8px;'}
         .show-review-images
           %h4
           - if review.uploads.present?
@@ -85,9 +85,9 @@
             = link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe,'#signin', 'data-toggle' => 'modal' , title: 'Flag as inappropriate'
         %li.helpful
           - if current_user.present?
-            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'javascript:;', class: "btn btn-o btn-blue btn-xs usefulButton #{review.marked_useful?(current_user) ? 'disabled' : ''}", 'data-reviewid' => "#{review.id}", 'data-userid' => current_user.id
+            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'javascript:;', class: "btn btn-o btn-blue btn-xs btn-round usefulButton #{review.marked_useful?(current_user) ? 'disabled' : ''}", 'data-reviewid' => "#{review.id}", 'data-userid' => current_user.id
           - else
-            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs', 'data-toggle' => 'modal'
+            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs btn-round', 'data-toggle' => 'modal'
       .clearfix
   .clearfix
 = render 'review_flags/form', review: review if current_user.present?

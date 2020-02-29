@@ -1,0 +1,30 @@
+- if current_user&.admin?
+	%a{href: '#', class: 'no-hover-underline dropdown-toggle', 'data-toggle' => 'dropdown'} 
+		Admin
+		%span.fa.fa-chevron-down
+
+	.dropdown-menu.userMenu.admin{role: 'menu'}
+		%ul
+			%li
+				%a{href: buildings_path} Buildings
+			%li
+				%a{href: units_path} Units
+			%li
+				%a{href: listings_path} Listings
+			%li
+				%a{href: users_path} Users
+			%li
+				%a{href: '/documents'} Documents
+			%li
+				%a{href: reviews_path} Reviews
+			%li
+				%a{href: neighborhood_links_path} Guides
+			%li
+				%a{href: management_companies_path} Management companies
+			%li
+				%a{href: '/price_ranges'} Price Range
+			%li
+				%a{href: featured_comps_path} Featured Comps
+			%li
+				%a{href: featured_buildings_path} Featured buildings
+				

@@ -1,5 +1,5 @@
 .property_information
-  .address{style: "margin-left: -1px;"}
+  .address{style: 'margin-left: -1px;'}
     %span.fa.fa-map-marker
     = "#{@building.street_address}, #{@building.zipcode}"
   - if @building.building_type.present? || @building.neighbohoods.present?
@@ -9,7 +9,7 @@
   - if @building.price.present? || @building.bedroom_types?
     %div.pbt
       = render partial: 'buildings/bedroom_types_and_prices', locals: { building: @building }
-  %div{style: "margin-left: -3px;padding: 0px;"}
+  %div{style: 'margin-left: -3px;padding: 0px;'}
     %ul.rating.star-sm
       = rating_for @building, 'building', disable_after_rate: true, readonly: true
     - if @building.votes.present?

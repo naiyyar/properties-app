@@ -21,8 +21,8 @@
 					%h1.pageTitle
 						=@building.building_name_or_address
 						- if current_user and current_user.has_role?(:admin)
-							= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right'
-							= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs', data: {confirm: 'Are you sure you want to discconect this building?'} if @manage_buildings.present?
+							= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right btn-round'
+							= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs btn-round', data: {confirm: 'Are you sure you want to discconect this building?'} if @manage_buildings.present?
 
 						= render 'buildings/favourite', building: @building
 					
@@ -32,6 +32,6 @@
 		.sliderLink
 			%p.text-danger No photos are available.
 			- if user_signed_in?
-				=link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm'
+				=link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm btn-round'
 			-else
-				=link_to 'Add Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm'
+				=link_to 'Add Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm btn-round'

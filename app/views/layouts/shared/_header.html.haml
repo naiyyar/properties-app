@@ -13,30 +13,30 @@
         .row{style: 'margin-right: -1px;'}
           .hood.col-xs-6
             .btn-hoods{class: current_view}
-              %button.btn.btn-primary.dropdown-toggle-neighborhoods{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
+              %button.btn.btn-primary.dropdown-toggle-neighborhoods.btn-round{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
                 %span.dropdown-label Hood
                 %span.caret
 
           - if show_filters?
             .col-xs-6.h-filter
               .btn-filter{style: 'margin-left: 3px;'}
-                %button.btn.btn-primary.btn-filter.handleFilter
+                %button.btn.btn-primary.btn-filter.handleFilter.btn-round
                   %span.dropdown-label
                     %span.fa.fa-filter
                     Filter
                     %span.filter-counts
 
   .visible-xs{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;'}
-    - if action_name == 'search' or @show_map_btn
-      %a.mapHandler.btn.btn-green{href: "javascript:void(0);", style: custom_search? ? 'display: none;' : ''}
+    - if action_name == 'search' || @show_map_btn
+      %a.mapHandler.btn.btn-green.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: none;' : ''}
         %span.fa.fa-map-o
         Map
-      %a.listHandler.btn.btn-green{href: "javascript:void(0);", style: custom_search? ? 'display: block;' : ''}
+      %a.listHandler.btn.btn-green.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: block;' : ''}
         %span.fa.fa-list
         List
 
 %div.hidden-xs
-  %a.navHandler{href: 'javascript:void(0)'}
+  %a.navHandler{href: 'javascript:void(0);'}
     %span.fa.fa-bars
   #header
     .logoContainer
@@ -52,9 +52,9 @@
           %a{href: managertools_user_path(current_user, type: 'featured')} Manager Tools
         - if !user_signed_in?
           |
-          - if params[:controller] == "users/sessions"
+          - if controller_name == 'users/sessions'
             = link_to 'Sign Up', '/users/sign_up'
-          - elsif params[:controller] == "users/registrations"
+          - elsif controller_name == 'users/registrations'
             = link_to 'Sign In', '/users/sign_in'
           - else
             = link_to 'Sign Up', '/users/sign_up'
@@ -62,8 +62,8 @@
             = link_to 'Sign In', '/users/sign_in'
 
       - if user_signed_in?
-        .pull-right.user-profile.headerLinks{style: "display: inline-block;"}
+        .pull-right.user-profile.headerLinks{style: 'display: inline-block;'}
           = render partial: 'layouts/shared/user_profile'
 
       .pull-right.headerLinks.write-review
-        = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-white btn-o btn-clear'
+        = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-white btn-o btn-clear btn-round'
