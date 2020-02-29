@@ -12,20 +12,18 @@
       %li.no-hover-underline.parent
         %a{href: '/blog'} Blog
       %li.no-hover-underline.parent
-        %a{href:'/buildings/contribut'} Write Review
+        %a{href:'/buildings/contribute'} Write Review
 
-  - if false && controller_name == 'home' and action_name == 'index'
-    %div{class: "pull-right btn-contribute btn-contribute-home #{user_signed_in? ? 'hidden-xs hidden-sm' : ''}"}
-      / = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-black btn-o hidden-xs btn-round', style: 'font-size: 14px;'
-      / = link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-black btn-o visible-xs btn-round'
+  - if controller_name == 'home' and action_name == 'index'
+    %div{class: "pull-right btn-contribute btn-contribute-home #{user_signed_in? ? 'hidden-xs hidden-sm' : ''}"}= link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-black btn-o visible-xs btn-round'
+  
   / for large devices
   .home-nav
     %ul.homeNavUl{style: 'position: relative;'}
-      / = render partial: 'layouts/home/home_left_nav_items'
       - unless user_signed_in?
         %li.no-hover-underline.parent
           %a{href: '/users/sign_in'} Sign In
-          |
+          &nbsp;
           %a{href: '/users/sign_up'} Sign Up
       - else
         %li.no-hover-underline.parent

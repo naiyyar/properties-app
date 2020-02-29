@@ -38,32 +38,27 @@
 %div.hidden-xs
   %a.navHandler{href: 'javascript:void(0);'}
     %span.fa.fa-bars
+  
   #header
     .logoContainer
       .logo
-        %a{href: "/"}= image_tag 'logo_white.png', alt: 'logo'
+        %a{href: '/'}= image_tag 'logo_white.png', alt: 'logo'
       - if !browser.device.mobile?
         #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
 
       .pull-right.nav-items.headerLinks.visible-lg{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
-        = link_to 'Blog', '/blog'
-        - if user_signed_in?
-          |
-          %a{href: managertools_user_path(current_user, type: 'featured')} Manager Tools
-        - if !user_signed_in?
-          |
-          - if controller_name == 'users/sessions'
-            = link_to 'Sign Up', '/users/sign_up'
-          - elsif controller_name == 'users/registrations'
-            = link_to 'Sign In', '/users/sign_in'
+        %ul.list-inline.shared-header{style: 'margin-bottom: 0px;'}
+          - if user_signed_in?
+            %li= link_to 'Blog', '/blog'
+            %li= link_to 'Manager Tools', managertools_user_path(current_user, type: 'featured')
+            %li= render partial: 'layouts/shared/user_profile'
           - else
-            = link_to 'Sign Up', '/users/sign_up'
-            |
-            = link_to 'Sign In', '/users/sign_in'
+            - if controller_name == 'sessions'
+              %li= link_to 'Sign Up', '/users/sign_up'
+            - elsif controller_name == 'registrations'
+              %li= link_to 'Sign In', '/users/sign_in'
+            - else
+              %li= link_to 'Sign In', '/users/sign_in'
+              %li= link_to 'Sign Up', '/users/sign_up'
 
-      - if user_signed_in?
-        .pull-right.user-profile.headerLinks{style: 'display: inline-block;'}
-          = render partial: 'layouts/shared/user_profile'
-
-      .pull-right.headerLinks.write-review
-        = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-white btn-o btn-clear btn-round'
+      .pull-right.headerLinks.write-review= link_to 'Write Review', contribute_buildings_path, class: 'btn btn-white btn-o btn-clear btn-round'
