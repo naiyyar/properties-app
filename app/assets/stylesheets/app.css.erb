@@ -1133,43 +1133,18 @@ h3.unit_name_header{
 /* Header */
 #header {
     background-color: #0075c9;
-    /*position: fixed;*/
     top: 0;
     left: 0;
     width: 100%;
     height: 60px;
     z-index: 1040;
-    /*border-bottom: 1px solid #eee;*/
     z-index: 1000;
-    /*background: rgba(25, 25, 25, 0.86);*/
     position: relative;
-    display: -ms-inline-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+    padding: 0px 69px 0px;
 }
 .logoContainer{
     width: 100%;
-    display: flex;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
 }
 
 .logo {
@@ -1343,7 +1318,7 @@ a.userHandler {
     color: #3a3a3a;
 }
 #apt-search-form{
-    width: 93%;
+    width: 100%;
 }
 .search input {
     background-color: #e8e8e8;
@@ -4042,50 +4017,6 @@ body.black {
     margin-bottom: 20px;
 }
 
-/* Homepage */
-
-#hero-container {
-    background-color: #dae5f9;
-    height: 565px;
-    position: relative;
-}
-#hero-container-map {
-    background-color: #fff;
-    height: 600px;
-    position: relative;
-}
-#hero-container-blog {
-    /*height: 300px;*/
-    position: relative;
-}
-#home-map {
-    width: 100%;
-    height: 600px;
-}
-.home-header {
-    position: fixed;
-    width: 100%;
-    padding: 0px 69px 0px;
-    color: #000;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    background-color: #fff;
-    box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
-}
-.home-header.map {
-    background: rgba(0, 0, 0, 0.50);
-}
-.home-logo {
-    color: #fff;
-    font-size: 20px;
-    float: left;
-    margin-top: 0px;
-}
-.home-logo span {
-    font-size: 34px;
-}
-
 /*setting up search input field radius*/
 .border-top-lr-radius{
     border-top-left-radius: 25px !important;
@@ -4125,19 +4056,19 @@ body.black {
     padding-top: 40px;
 }
 .home-about-nyc-apt h2{
-    font-size: 17px;
+    font-size: 21px;
     padding: 0px 4px;
     line-height: 20px;
     margin-bottom: 1px;
     font-family: sans-serif;
     margin-top: 12px;
-    color: #484a59;
+    color: #000;
 }
 .home-about-nyc-apt h1{
-    font-size: 28px;
+    font-size: 40px;
     margin: 0px 0px;
     font-family: sans-serif;
-    color: #000c50;
+    color: #2b78e4;
 }
 .home-caption {
     position: absolute;
@@ -4168,10 +4099,10 @@ body.black {
     /*width: 100%;*/
     color: #333;
     padding: 90px 0px;
-    margin: 0px 270px;
+    margin: 0px 11em;
     /*position: relative;*/
     display: flex;
-    align-items: center;
+    align-items: left;
     flex-flow: column wrap;
 }
 .search-panel form {
@@ -4182,7 +4113,7 @@ body.black {
     position: relative;
 }
 .search-panel .home-about-nyc-apt{
-    padding-bottom: 20px;
+    padding-bottom: 16px;
     z-index: 999;
 }
 .home-search-form{
@@ -4229,7 +4160,8 @@ body.black {
 }
 
 body.no-hidden {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 a.home-navHandler {
     display: block;
@@ -4269,28 +4201,12 @@ a.home-navHandler.active {
     padding: 0 18%;
 }
 .h-text p{
-    /*font-family: 'Source Sans Pro', sans-serif;*/
     font-family: sans-serif;
     font-size: 20px;
 }
 .h-text a{
     font-style: normal;
     font-family: sans-serif;
-}
-.home-wrapper {
-    /*width: 1140px;*/
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-.home-content h2 {
-    margin: 0;
-    padding: 0 0 30px 0;
-    font-size: 22px;
-    line-height: 22px;
-    text-align: center;
-}
-.home-content h2.h-r {
-    text-align: right;
 }
 
 .pb40 {
@@ -4733,6 +4649,7 @@ blockquote {
 .home-footer {
     background-color: #333;
     color: #fff;
+    padding: 20px;
 }
 .footer-header {
     font-size: 16px;

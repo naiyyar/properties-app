@@ -30,6 +30,7 @@
   <body class="notransition no-hidden" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
+    <%#= render partial: 'layouts/home/header' %>
     <% unless controller_name == 'home' and action_name == 'index'%>
       <%= render partial: 'layouts/shared/header' %>
       <%= render partial: 'layouts/shared/filters' %>

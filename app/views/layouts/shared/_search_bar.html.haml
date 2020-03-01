@@ -1,0 +1,3 @@
+- if !browser.device.mobile?
+	#search-row{class: "search #{search_bar(:hidden)}"}
+		= render partial: 'layouts/shared/search_form'

@@ -1,9 +1,9 @@
 #hero-container{
     .bg_image_holder{
       position: absolute;
-      height: 80%;
-      width: 80%;
-      top: 60%;
+      height: 63%;
+      width: 85%;
+      top: 68%;
       left: 50%;
       -webkit-background-size: cover !important;
       background-size: cover !important;
@@ -73,7 +73,7 @@
 }
 
 #apt-search-form.other{
-    margin: 0 5px !important;
+    margin: 1 5px !important;
 }
 
 @media screen and (max-width: 767px) {
@@ -136,7 +136,7 @@
         width: 81%;
     }
     #hero-container .bg_image_holder{
-        width: 77%;
+        width: 92%;
     }
 }
 
@@ -152,8 +152,11 @@
     }
 
     #hero-container .bg_image_holder{
-        width: 62%;
+        width: 82%;
         top: 60%;
+    }
+    .search-panel{
+        margin: 0px 0px 0px 282px;
     }
     #apt-search-form{
         width: 65%;
@@ -162,10 +165,13 @@
 
 @media screen and (min-width: 1920px) and (max-width: 2200px){
     #hero-container .bg_image_holder{
-        width: 58%;
+        width: 70%;
+    }
+    .search-panel{
+        margin: 0px 0px 0px 402px;
     }
     #apt-search-form{
-        width: 55%;
+        width: 65%;
     }
 }
 
@@ -183,10 +189,27 @@
     }
 
     #hero-container .bg_image_holder{
-        width: 40%;
+        width: 52%;
         top: 60%;
+    }
+    .search-panel{
+        margin: 0px 0px 0px 50em;
     }
     #apt-search-form{
         width: 55%;
+    }
+}
+
+@media screen and (min-width: 2561px) {
+    .search-panel{
+        margin: 0px 0px 0px 77em;
+    }
+    #apt-search-form{
+        width: 55%;
+    }
+
+    #hero-container .bg_image_holder{
+        width: 52%;
+        top: 60%;
     }
 }

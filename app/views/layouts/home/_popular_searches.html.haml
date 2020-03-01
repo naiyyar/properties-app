@@ -1,6 +1,6 @@
-.home-wrapper{style: "padding: 10px 20px 0px;"}
+.home-wrapper{style: 'padding: 10px 20px 0px;'}
 	.home-content.popular-searches-container
-		%h2.osLight1{style: "font-weight: bolder;"} Popular No Fee Searches
+		%h2.osLight1{style: 'font-weight: bolder; color: #333'} Popular No Fee Searches
 		.row.pb40{class: "#{!@home_view ? 'scrollable' : '' }"}
 			.col-xs-12.col-sm-6.col-md-6.col-lg-6
 				%ul.pop-list
@@ -8,7 +8,7 @@
 						%b{id: key}=key
 						.child-borough-container
 							- values.map do |val|
-								%li.parent{"data-parent" => key}= popular_search_link(key, val)
+								%li.parent{'data-parent' => key}= popular_search_link(key, val)
 
 			.col-xs-12.col-sm-6.col-md-6.col-lg-6
 				%ul.pop-list
@@ -16,6 +16,6 @@
 						%b{id: key}=key
 						.child-borough-container
 							- values.map do |val|
-								%li.parent{"data-parent" => key}= popular_search_link(key, val)
+								%li.parent{'data-parent' => key}= popular_search_link(key, val)
 
 			  

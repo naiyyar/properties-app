@@ -1,0 +1,210 @@
+/* ============== HOME HEADER NAV STYLING ============= */
+
+	.no-touch {
+		.home-nav ul.homeNavUl li a:hover {
+	    color: #000;
+	  }
+	}
+
+	.home-nav{
+		float: right;
+	  -webkit-transition: all .2s ease-in-out;
+	  -o-transition: all .2s ease-in-out;
+	  transition: all .2s ease-in-out;
+		
+		ul.homeNavUl{
+			margin: 0px 0px 0px 19px;
+	    padding: 19px 0px;
+	    list-style-type: none;
+	    float: right;
+	    -webkit-transition: all .2s ease-in-out;
+	    -o-transition: all .2s ease-in-out;
+	    transition: all .2s ease-in-out;
+
+			li.parent{
+				float: left;
+		    margin-left: 20px;
+		    padding-top: 0px;
+		    color: #777;
+				&:not(.no-hover-underline):hover{
+					border-bottom: 1px solid #ffffff;
+				}
+				a{
+					color: #000;
+	    		font-size: 15px;
+					&:hover{
+						border-bottom: 2px solid #333;
+					}
+				}
+			}
+		}
+
+		ul.homeNavUl.shared{
+			li a{
+				color: #fff;
+				&:hover{
+					color: #fff;
+					border-bottom: 2px solid #fff;
+				}
+			}
+		}
+	}
+
+/* ========== END HOME HEADER NAV STYLING =========*/
+
+/* ========== START POPULAR NEIGHBORHOODS =========*/
+
+.pop-list{
+	b{
+		font-size: 18px !important;
+		color: #2b78e4;
+		text-decoration: underline;
+		a{
+			color: #2b78e4;
+			text-decoration: underline;
+			font-size: 16px;
+		}
+		a:hover{
+			text-decoration: underline;
+		}
+	}
+	li{
+		list-style: none;
+		padding: 1px 0px;
+		a{
+			color: #2b78e4;
+			font-size: 16px;
+		}
+		ul{
+			padding: 0px 0px 0px 22px;
+			li{
+				list-style: none;
+				padding: 2px 0px !important;
+				a{
+					color: #2b78e4;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+}
+
+#apt-search-form{
+	span.input-magnifier{
+		position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 999;
+    a.btn{
+    	font-size: 15px;
+    	border-top-left-radius: 0px !important;
+    	border-bottom-left-radius: 0px !important;
+    	border-top-right-radius: 2px;
+    	border-bottom-right-radius: 2px;
+    }
+	}
+}
+
+#home-content-wrapper{
+	font-family: sans-serif;
+	
+	#hero-container {
+	  background-color: #dae5f9;
+	  height: 524px;
+	  position: relative;
+	}
+	#hero-container-map {
+	  background-color: #fff;
+	  height: 600px;
+	  position: relative;
+	}
+	#hero-container-blog {
+	  position: relative;
+	}
+	#home-map {
+	  width: 100%;
+	  height: 600px;
+	}
+	.home-wrapper {
+	  margin: 0 auto;
+	  padding: 40px 20px;
+	  .home-content{
+	  	p{
+	  		font-size: 21px;
+	  		color: #000;
+	  	}
+	  }
+	}
+	.home-content h2 {
+	  margin: 0;
+	  padding: 0 0 30px 0;
+	  font-size: 30px;
+	  line-height: 22px;
+	  text-align: center;
+	  color: #000;
+	}
+	.home-content h2.h-r {
+	  text-align: right;
+	}
+
+	.home-header {
+	  position: fixed;
+	  width: 100%;
+	  padding: 0px 69px 0px;
+	  color: #000;
+	  top: 0;
+	  left: 0;
+	  z-index: 1000;
+	  background-color: #fff;
+	  box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
+	}
+	.home-header.map {
+	  background: rgba(0, 0, 0, 0.50);
+	}
+	.home-logo {
+	    color: #fff;
+	    font-size: 20px;
+	    float: left;
+	    margin-top: 0px;
+	    span {
+	    	font-size: 34px;
+		}
+	}
+
+	#quick-links{
+		margin-top: 60px;
+		padding: 0px;
+		a{
+			color: #333;
+			.item{
+				list-style: none;
+		    background: #265757;
+		    padding: 1.7em 8px;
+		    margin-bottom: -1px;
+		    border: 1px solid #ddd;
+		    text-align: center;
+		    font-size: 16px;
+		    text-shadow: 1px 1px 1px;
+		    color: #fff;
+		    background-image: url(asset-path('about_us_bg.png'));
+		    background-repeat: no-repeat;
+		    background-position: center;
+		    background-size: cover;
+			}
+		}
+	}
+
+	.home-quick-links{
+		z-index: 999;
+		padding: 5px 0px;
+		ul{
+			margin: 0px;
+			padding: 8px;
+			li a{
+				color: #2b78e4;
+				font-size: 13px;
+				text-decoration: underline;
+			}
+		}
+	}
+}

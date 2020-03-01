@@ -1,7 +1,7 @@
 #leftSide{class: "#{contribute_left_side(params)} #{controller_name == 'home' and action_name == 'index' ? 'home' : ''}"}
   %nav.leftNav.scrollable
     .logo.search1.visible-xs
-      %a{href: "/"}= image_tag 'logo1.png', alt: 'logo'
+      %a{href: '/'}= image_tag 'logo1.png', alt: 'logo'
       .clearfix
     %ul
       %li.btn_contribute
@@ -11,42 +11,42 @@
       - if current_user.blank?
         - if controller_name != 'sessions'
           %li
-            %a.left-side-zindex{"data-target" => "#signin", "data-toggle" => "modal", href: "#"}
+            %a.left-side-zindex{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
               %span.navIcon.fa.fa-sign-in
               %span.navLabel Sign In
         
         - if controller_name != 'registrations'
           %li
-            %a.left-side-zindex{"data-target" => "#signup", "data-toggle" => "modal", href: "#"}
+            %a.left-side-zindex{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
               %span.navIcon.fa.fa-user
               %span.navLabel Sign Up
       - if current_user&.admin?
         %li
-          %a{href: "/buildings"}
+          %a{href: '/buildings'}
             %span.navIcon.fa.fa-building
             %span.navLabel Buildings
         %li
-          %a{href: "/units"}
+          %a{href: '/units'}
             %span.navIcon.fa.fa-home
             %span.navLabel Units
         %li
-          %a{href: "/listings"}
+          %a{href: '/listings'}
             %span.navIcon.fa.fa-list
             %span.navLabel Listings
         %li
-          %a{href: "/users"}
+          %a{href: '/users'}
             %span.navIcon.fa.fa-user
             %span.navLabel Users
         %li
-          %a{href: "/documents"}
+          %a{href: '/documents'}
             %span.navIcon.fa.fa-file-o
             %span.navLabel Documents
         %li
-          %a{href: "/reviews"}
+          %a{href: '/reviews'}
             %span.navIcon.fa.fa-star
             %span.navLabel Reviews
         %li
-          %a{href: "/neighborhood_links"}
+          %a{href: '/neighborhood_links'}
             %span.navIcon.fa.fa-link
             %span.navLabel Neighborhood guides
         %li
@@ -54,7 +54,7 @@
             %span.navIcon.fa.fa-building
             %span.navLabel Management companies
         %li
-          %a{href: "/price_ranges"}
+          %a{href: '/price_ranges'}
             %span.navIcon.fa.fa-money
             %span.navLabel Price Range
         %li
@@ -69,11 +69,11 @@
       
       - elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank?
         %li
-          %a{href: "/blog"}
+          %a{href: '/blog'}
             %span.navIcon.fa.fa-hashtag
             %span.navLabel Blog
         %li
-          %a{href: "/about"}
+          %a{href: '/about'}
             %span.navIcon.fa.fa-info-circle
             %span.navLabel About us
         %li

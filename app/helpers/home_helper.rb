@@ -15,11 +15,15 @@ module HomeHelper
 	end
 
 	def brooklyn_sub_borough
-		@brooklyn_sub_borough ||= ['Brooklyn Heights','Bushwick','Clinton Hill','Downtown Brooklyn','Dumbo','Fort Greene','Gravesend','Greenpoint']
+		@brooklyn_sub_borough ||= ['Brooklyn Heights',
+															 'Bushwick','Clinton Hill',
+															 'Downtown Brooklyn','Dumbo','Fort Greene',
+															 'Gravesend','Greenpoint'
+															]
 	end
 
 	def uptown_sub_borough
-		@uptown_sub_borough ||= ['Upper East Side','Upper West Side']
+		@uptown_sub_borough ||= ['Upper East Side', 'Upper West Side']
 	end
 
 	def queens_sub_borough
@@ -35,7 +39,11 @@ module HomeHelper
 	end
 
 	def bronx_sub_borough
-		@bronx_sub_borough ||= ['East Bronx','University Heights', 'Morris Heights', 'Riverdale']
+		@bronx_sub_borough ||= ['East Bronx',
+														'University Heights', 
+														'Morris Heights', 
+														'Riverdale'
+													]
 	end
 
 	def brookly_borough
@@ -59,18 +67,18 @@ module HomeHelper
 
 	def queens_borough
 		@queens_borough ||= [	'Astoria',
-				'Corona',
-				'Elmhurst',
-				'Flushing',
-				'Forest Hills',
-				'Jackson Heights',
-				'Jamaica',
-				'Kew Gardens',
-				'Long Island City',
-				'Rego Park',
-				'Sunnyside',
-				'Woodside'
-			]
+													'Corona',
+													'Elmhurst',
+													'Flushing',
+													'Forest Hills',
+													'Jackson Heights',
+													'Jamaica',
+													'Kew Gardens',
+													'Long Island City',
+													'Rego Park',
+													'Sunnyside',
+													'Woodside'
+												]
 	end
 
 	def bronx_borough
@@ -92,7 +100,11 @@ module HomeHelper
 	end
 
 	def parent_neighborhoods
-		['Lower Manhattan','Midtown','Upper Manhattan','Queens','Bronx']
+		@parent_neighborhoods ||= [ 'Lower Manhattan',
+																'Midtown', 
+																'Upper Manhattan',
+																'Queens','Bronx'
+															]
 	end
 
 	def searchable_text neighborhood, borough
@@ -155,10 +167,8 @@ module HomeHelper
 
 	def parent_neighborhoods_count(nb)
 		case nb
-		when 'Queens'
-			@queens_count
-		when 'Brooklyn'
-			@brooklyn_count
+		when 'Queens' 	then @queens_count
+		when 'Brooklyn' then @brooklyn_count
 		else
 			@bronx_count
 		end
@@ -167,13 +177,11 @@ module HomeHelper
 	def searched_term
 		if @management_company.blank?
 			if @building.present?
-				if @building.building_name.present? and @building.building_name != @building.building_street_address
+				if @building.building_name.present? && @building.building_name != @building.building_street_address
 					"#{@building.building_name} - #{@building.street_address}"
 				else
 					"#{@building.street_address}"
 				end
-			#elsif custom_search?
-			#	'Custom'
 			else
 				@search_input_value
 			end
@@ -187,33 +195,31 @@ module HomeHelper
 	end
 
 	def rating_checked val
-		params[:filter][:rating].include?(val.to_s) ? 'checked' : '' if params[:filter].present? and params[:filter][:rating].present?
+		if params[:filter].present? && params[:filter][:rating].present?
+			params[:filter][:rating].include?(val.to_s) ? 'checked' : ''
+		end
 	end
 
-	# def type_checked val
-	# 	params[:filter][:type].include?(val) ? 'checked' : '' if params[:filter].present? and params[:filter][:type].present?
-	# end
-
 	def bed_checked val
-		if params[:filter].present? and params[:filter][:bedrooms].present?
+		if params[:filter].present? && params[:filter][:bedrooms].present?
 			params[:filter][:bedrooms].include?(val) ? 'checked' : ''
-		elsif @filters.present? and @filters[:beds].present?
+		elsif @filters.present? && @filters[:beds].present?
 			@filters[:beds].include?(val) ? 'checked' : ''
 		end
 	end
 
 	def price_checked val
-		if params[:filter].present? and params[:filter][:price].present?
+		if params[:filter].present? && params[:filter][:price].present?
 			params[:filter][:price].include?(val.to_s) ? 'checked' : ''
-		elsif @filters.present? and @filters[:price].present?
+		elsif @filters.present? && @filters[:price].present?
 			@filters[:price].include?(val) ? 'checked' : ''
 		end
 	end
 
 	def listing_bed_checked val
-		if params[:filter].present? and params[:filter][:listing_bedrooms].present?
+		if params[:filter].present? &&  params[:filter][:listing_bedrooms].present?
 			params[:filter][:listing_bedrooms].include?(val.to_s) ? 'checked' : ''
-		elsif @filters.present? and @filters[:listing_bedrooms].present?
+		elsif @filters.present? &&  @filters[:listing_bedrooms].present?
 			@filters[:listing_bedrooms].include?(val) ? 'checked' : ''
 		end
 	end
@@ -223,15 +229,15 @@ module HomeHelper
 	end
 
 	def amen_checked val
-		if params[:filter].present? and params[:filter][:amenities].present?
+		if params[:filter].present? &&  params[:filter][:amenities].present?
 			params[:filter][:amenities].include?(val) ? 'checked' : ''
-		elsif @filters.present? and @filters[:amenities].present?
+		elsif @filters.present? &&  @filters[:amenities].present?
 			@filters[:amenities].include?(val) ? 'checked' : ''
 		end
 	end
 
 	def amen_locked? val
-		if @filters.present? and @filters[:amenities].present?
+		if @filters.present? &&  @filters[:amenities].present?
 			@filters[:amenities].include?(val) ? 'disabled' : ''
 		else
 			''
@@ -239,32 +245,19 @@ module HomeHelper
 	end
 
 	def bed_locked? val
-		(@filters.present? and @filters[:beds].present? and @filters[:beds].include?(val)) ? 'disabled' : ''
+		(@filters.present? && @filters[:beds].present? && @filters[:beds].include?(val)) ? 'disabled' : ''
 	end
 
 	def price_locked? val
-		(@filters.present? and @filters[:price].present? and @filters[:price].include?(val)) ? 'disabled' : ''
+		(@filters.present? && @filters[:price].present? && @filters[:price].include?(val)) ? 'disabled' : ''
 	end
-
-	# def sort_options
-	# 	[['Defaul sort',4],
-	# 		['Rating (high to low)',1],
-	# 		['Rating (low to high)',2],
-	# 		['Reviews (high to low)',3],
-	# 		['A - Z',4],
-	# 		['Z - A',5]]
-	# end
 
 	def marker_color price
 		case price
-		when 1
-			'#fee5d9'
-		when 2
-			'#fcae91'
-		when 3
-			'#fb6a4a'
-		when 4
-			'#de2d26'
+		when 1 then '#fee5d9'
+		when 2 then '#fcae91'
+		when 3 then '#fb6a4a'
+		when 4 then '#de2d26'
 		else
 			'#a50f15'
 		end
@@ -276,42 +269,72 @@ module HomeHelper
 		#current location search also have lat and long
 		#searching on mobile redirecting to map view instad of list view
 		#returning to map view if user is searching or filtering from inside the map view
-		params[:searched_by] == 'latlng' or session[:view_type] == 'mapView'
+		params[:searched_by] == 'latlng' || session[:view_type] == 'mapView'
 	end
 
 	def no_search_result_text
-		txt = '<h3>No results matched your search.</h3>' +
-		"<p>Though we can't guarentee what you are looking for exists, we can however guarentee that if you do find an apartment through <a href='/'>transparentcity.co</a>, you will save thousands of dollars on broker fees!</p>" +
-		'<p>Please adjust your filter parameters.</p>'
-		txt.html_safe
+		@no_search_result_text ||= '<h3>No results matched your search.</h3>' +
+															 "<p>Though we can't guarentee what you are looking for exists, 
+															 we can however guarentee that if you do find an apartment through 
+															 	<a href='/'>transparentcity.co</a>, you will save thousands of dollars on broker fees!</p>" +
+															 '<p>Please adjust your filter parameters.</p>'.html_safe
 	end
 
 	def manhattan_searches
-		['Manhattan Apartments For Rent', 'Luxury Apartments in Manhattan', 'Manhattan Apartments For Rent Cheap']
+		@manhattan_searches ||= [ 
+			'Manhattan Apartments For Rent', 
+			'Luxury Apartments in Manhattan', 
+			'Manhattan Apartments For Rent Cheap'
+		]
 	end
 
 	def nyc_searches
-		[ 'Cheap Apartments In NYC', 'Studio Apartments In NYC','Affordable Apartments For Rent In NYC', 'One Bedroom Apartments in NYC', 
-			'Cheap Studio Apartments in NYC','2 Bedroom Apartments in NYC', '3 Bedroom Apartments For Rent in NYC','Affordable Luxury Apartments In NYC']
+		@nyc_searches ||= [ 
+			'Cheap Apartments In NYC', 'Studio Apartments In NYC',
+			'Affordable Apartments For Rent In NYC', 
+			'One Bedroom Apartments in NYC', 
+			'Cheap Studio Apartments in NYC','2 Bedroom Apartments in NYC', 
+			'3 Bedroom Apartments For Rent in NYC',
+			'Affordable Luxury Apartments In NYC'
+		]
 	end
 
 	def amenities_searches
-		['Doorman Buildings In NYC', 'Pet Friendly Apartments In NYC', 'NYC Apartments With Pool', 'Walk Up Apartments NYC', 
-			'Affordable Doorman Buildings NYC', 'NYC Apartments With Gyms']
+		@amenities_searches ||= [
+			'Doorman Buildings In NYC', 
+			'Pet Friendly Apartments In NYC', 
+			'NYC Apartments With Pool', 
+			'Walk Up Apartments NYC', 
+			'Affordable Doorman Buildings NYC', 
+			'NYC Apartments With Gyms'
+		]
 	end
 
 	def neighborhoods_searches
-		[
-			'Studio Apartments in Brooklyn', 'Studios For Rent In Queens', '2 Bedroom Apartments in Brookly For Rent', 
-			'2 Bedroom Apartments in Queens For Rent', 'Luxury Apartments In Upper East Side', 'Harlem Studio Apartments',
-			'Long Island City Studios', 'Upper East Side Studio Apartments', 'Upper West Side Studio Apartments',
-			"Hell's Kitchen Studios", 'West Village Studios', '2 Bedroom Apartments Upper East Side', "Hell's Kitchen Luxury Rentals",
-			'Midtown Studio Apartments NYC', 'Midtown East Luxury Rentals', 'Upper West Side Luxury Rental Buildings',
-			'Upper East Side Apartments For Rent With Doorman']
+		@neighborhoods_searches ||= [
+			'Studio Apartments in Brooklyn', 
+			'Studios For Rent In Queens', 
+			'2 Bedroom Apartments in Brookly For Rent', 
+			'2 Bedroom Apartments in Queens For Rent', 
+			'Luxury Apartments In Upper East Side', 
+			'Harlem Studio Apartments',
+			'Long Island City Studios', 
+			'Upper East Side Studio Apartments', 
+			'Upper West Side Studio Apartments',
+			"Hell's Kitchen Studios", 'West Village Studios', 
+			'2 Bedroom Apartments Upper East Side', 
+			"Hell's Kitchen Luxury Rentals",'Midtown Studio Apartments NYC', 
+			'Midtown East Luxury Rentals', 'Upper West Side Luxury Rental Buildings',
+			'Upper East Side Apartments For Rent With Doorman'
+		]
 	end
 
 	def col1_popular_searches
-		{'Manhattan' => manhattan_searches,'NYC' => nyc_searches,'Amenities' => amenities_searches}
+		{ 
+			'Manhattan' => manhattan_searches, 
+			'NYC' 			=> nyc_searches, 
+			'Amenities' => amenities_searches 
+		}
 	end
 
 	def col2_popular_searches
@@ -324,12 +347,12 @@ module HomeHelper
 
 	def home_quick_links
 		[
-			{desk_name: 'Midtown Manhattan', 		mob_name: 'Midtown' , 	url: search_link('Midtown', 				'MANHATTAN')},
-			{desk_name: 'Downtown Manhattan',		mob_name: 'Downtown', 	url: search_link('Lower Manhattan', 'MANHATTAN')},
-			{desk_name: 'Upper Manhattan',			mob_name: 'Upper', 			url: search_link('Upper Manhattan', 'MANHATTAN')},
-			{desk_name: 'Upper East Side',			mob_name: 'UES', 				url: search_link('Upper East Side', 'MANHATTAN')},
-			{desk_name: 'Upper West Side',			mob_name: 'UWS', 				url: search_link('Upper West Side', 'MANHATTAN')},
-			{desk_name: 'Brooklyn',							mob_name: 'Brooklyn', 	url: '/no-fee-apartments-nyc-city/brooklyn-ny'}
+			{desk_name: 'Midtown Manhattan', 	mob_name: 'Midtown' , url: search_link('Midtown', 				'MANHATTAN')},
+			{desk_name: 'Downtown Manhattan',	mob_name: 'Downtown', url: search_link('Lower Manhattan', 'MANHATTAN')},
+			{desk_name: 'Upper Manhattan',		mob_name: 'Upper', 		url: search_link('Upper Manhattan', 'MANHATTAN')},
+			{desk_name: 'Upper East Side',		mob_name: 'UES', 			url: search_link('Upper East Side', 'MANHATTAN')},
+			{desk_name: 'Upper West Side',		mob_name: 'UWS', 			url: search_link('Upper West Side', 'MANHATTAN')},
+			{desk_name: 'Brooklyn',						mob_name: 'Brooklyn', url: '/no-fee-apartments-nyc-city/brooklyn-ny'}
 		]
 	end
 

@@ -1,7 +1,8 @@
 %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
   %span.fa.fa-bars
 .home-header
-  .home-logo.osLight= image_tag 'logo2.png', alt: 'logo', width: '200'
+  .home-logo.osLight
+    %a{href: '/'}= image_tag 'logo2.png', alt: 'logo', width: '200'
   / Should only be visible on home page when user is not logged in
   .home-nav.pull-left
     %ul.homeNavUl
@@ -12,7 +13,7 @@
       %li.no-hover-underline.parent
         %a{href: '/blog'} Blog
       %li.no-hover-underline.parent
-        %a{href:'/buildings/contribute'} Write Review
+        %a{href: contribute_buildings_path} Write Review
 
   - if controller_name == 'home' and action_name == 'index'
     %div{class: "pull-right btn-contribute btn-contribute-home #{user_signed_in? ? 'hidden-xs hidden-sm' : ''}"}= link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-black btn-o visible-xs btn-round'

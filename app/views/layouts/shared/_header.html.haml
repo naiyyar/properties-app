@@ -46,19 +46,28 @@
       - if !browser.device.mobile?
         #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
 
-      .pull-right.nav-items.headerLinks.visible-lg{style: 'color: #ddd;', class: !user_signed_in? ? 'no-signedin' : 'signedin'}
-        %ul.list-inline.shared-header{style: 'margin-bottom: 0px;'}
-          - if user_signed_in?
-            %li= link_to 'Blog', '/blog'
-            %li= link_to 'Manager Tools', managertools_user_path(current_user, type: 'featured')
-            %li= render partial: 'layouts/shared/user_profile'
-          - else
-            - if controller_name == 'sessions'
-              %li= link_to 'Sign Up', '/users/sign_up'
-            - elsif controller_name == 'registrations'
-              %li= link_to 'Sign In', '/users/sign_in'
-            - else
-              %li= link_to 'Sign In', '/users/sign_in'
-              %li= link_to 'Sign Up', '/users/sign_up'
+      .home-nav.pull-left
+        %ul.homeNavUl.shared
+          %li.no-hover-underline.parent
+            %a{href: '/about'} About
+          %li.no-hover-underline.parent
+            %a{href: '#'} Advertise
+          %li.no-hover-underline.parent
+            %a{href: '/blog'} Blog
+          %li.no-hover-underline.parent
+            %a{href: contribute_buildings_path} Write Review
 
-      .pull-right.headerLinks.write-review= link_to 'Write Review', contribute_buildings_path, class: 'btn btn-white btn-o btn-clear btn-round'
+      .home-nav
+        %ul.homeNavUl.shared{style: 'position: relative;'}
+          - unless user_signed_in?
+            %li.no-hover-underline.parent
+              %a{href: '/users/sign_in'} Sign In
+              &nbsp;
+              %a{href: '/users/sign_up'} Sign Up
+          - else
+            %li.no-hover-underline.parent
+              = render 'layouts/shared/admin_nav_items'
+            %li.no-hover-underline.parent
+              %a{href: managertools_user_path(current_user, type: 'featured')} Manager Tools
+            %li.no-hover-underline.parent
+              = render 'layouts/shared/user_profile'
