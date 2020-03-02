@@ -43,7 +43,7 @@
           <%= render 'layouts/shared/pop_neighborhoods_list' %>
           <%= yield %>
         </div>
-        <%= render 'layouts/home/footer' if show_full_width_footer? and action_name != 'about' and action_name != 'contribute' %>
+        <%= render 'layouts/home/footer' if show_full_width_footer? and action_name != 'contribute' %>
       </div>
     <%else%>
       <%= yield %>

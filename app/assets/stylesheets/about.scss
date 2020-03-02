@@ -1,0 +1,32 @@
+#about{
+	color: #000;
+	margin-bottom: 30px;
+	.about-content{
+		padding: 0px 60px;
+		span{
+			font-size: 30px;
+		}
+		.header{
+			font-size: 21px;
+			color: #2b78e4;
+		}
+		section{
+			font-size: 16px;
+		}
+	}
+
+	.location-and-press{
+		padding: 0px 60px;
+		h2{
+			margin-top: 0px;
+		}
+		p{
+			padding: 0px;
+			margin: 0px;
+			font-size: 16px;
+		}
+		a:hover{
+			text-decoration: underline;
+		}
+	}
+}
