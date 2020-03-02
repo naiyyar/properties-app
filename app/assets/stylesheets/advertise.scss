@@ -36,3 +36,32 @@
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
 }
+
+@media screen and (max-width: 767px) {
+	.advertise-with-us {
+		padding: 0px 10px 40px 10px !important;
+		.top-section {
+			h2 {
+				font-size: 30px;
+			}
+			p {
+				font-size: 21px;
+			}
+		}
+		
+		.mid-section {
+			h3 {
+				font-size: 30px;
+				font-weight: bold;
+			}
+			h4 {
+				font-size: 21px;
+				font-weight: bold;
+				color: #2b78e4;
+			}
+			p, a {
+				font-size: 16px;
+			}
+		}	
+	}
+}
