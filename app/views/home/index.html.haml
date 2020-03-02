@@ -4,13 +4,13 @@
   = render 'layouts/home/header'
 
   .row{style: 'margin-right: 0px;'}
-    .col-lg-3.col-md-3{style: 'padding-right: 0px;'}
+    .col-lg-3.col-md-3.hidden-xs{style: 'padding-right: 0px;'}
       #quick-links
         - home_quick_links.each do |nb|
           %a{href: nb[:url]}
             %div.item=quick_link_name(nb)
 
-    .col-lg-9.col-md-9{style: 'padding-left: 0px;padding-right: 0px;'}
+    .col-lg-9.col-md-9.col-xs-12{style: 'padding-left: 0px;padding-right: 0px;'}
       #hero-container
         .bg_image_holder
     
@@ -21,8 +21,8 @@
             %h2 transparentcity connects renters directly to NYC landlords and property managers
           .home-search-form
           = render 'home/search_form'
-      / .home-quick-links
-      / = render 'home/quick_links'
+          .home-quick-links.visible-xs
+            = render 'home/quick_links'
 
   = render 'layouts/home/popular_neighborhoods'
 
