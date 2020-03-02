@@ -1,6 +1,8 @@
-%a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
-  %span.fa.fa-bars
 .home-header
+  .pull-left
+    %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
+      %span.fa.fa-bars
+
   .home-logo.osLight
     %a{href: '/'}= image_tag 'logo2.png', alt: 'logo', width: '200'
   / Should only be visible on home page when user is not logged in
@@ -9,7 +11,7 @@
       %li.no-hover-underline.parent
         %a{href: '/about'} About
       %li.no-hover-underline.parent
-        %a{href: '#'} Advertise
+        %a{href: '/advertise_with_us'} Advertise
       %li.no-hover-underline.parent
         %a{href: '/blog'} Blog
       %li.no-hover-underline.parent

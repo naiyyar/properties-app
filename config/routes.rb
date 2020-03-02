@@ -33,16 +33,16 @@ Rails.application.routes.draw do
   
   get '/price_ranges'                => 'prices#index'
   post '/add_or_update_prices'       => 'prices#add_or_update_prices'
-  get "sitemap.xml"                  => "buildings#sitemap", format: :xml,             as: :sitemap
+  get 'sitemap.xml'                  => 'buildings#sitemap', format: :xml,             as: :sitemap
   
   scope :module => 'buttercms' do
     get '/categories/:slug'          => 'categories#show',                             :as => :buttercms_category
     get '/tags/:slug'                => 'tags#show',                                   :as => :buttercms_tag
     get '/author/:slug'              => 'authors#show',                                :as => :buttercms_author
 
-    get '/blog/rss'                  => 'feeds#rss',        :format => 'rss',          :as => :buttercms_blog_rss
-    get '/blog/atom'                 => 'feeds#atom',       :format => 'atom',         :as => :buttercms_blog_atom
-    get '/blog/sitemap.xml'          => 'feeds#sitemap',    :format => 'xml',          :as => :buttercms_blog_sitemap
+    get '/blog/rss'                  => 'feeds#rss',        :format => :rss,          :as => :buttercms_blog_rss
+    get '/blog/atom'                 => 'feeds#atom',       :format => :atom,         :as => :buttercms_blog_atom
+    get '/blog/sitemap.xml'          => 'feeds#sitemap',    :format => :xml,          :as => :buttercms_blog_sitemap
 
     get '/blog(/page/:page)'         => 'posts#index',      :defaults => {:page => 1}, :as => :buttercms_blog
     get '/blog/:slug'                => 'posts#show',                                  :as => :buttercms_post
@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   resources :neighborhood_links, :review_flags, :contacts, :rental_price_histories
   
   get '/about', to: 'contacts#about'
-  post '/rate' => 'rater#create', :as => 'rate'
+  post '/rate' => 'rater#create', :as => :rate
   
   devise_for :users, controllers: { 
     omniauth_callbacks: 'users/omniauth_callbacks',
@@ -75,7 +75,7 @@ Rails.application.routes.draw do
 
     member do 
       get :units
-      get '/disconnect_building', to: 'buildings#disconnect_building', as: 'disconnect_building'
+      get '/disconnect_building', to: 'buildings#disconnect_building', as: :disconnect_building
       get :featured_by
     end
 
@@ -102,7 +102,7 @@ Rails.application.routes.draw do
     get :downloaders, on: :collection
   end
 
-  get '/documents', to: 'uploads#documents', as: 'documents'
+  get '/documents', to: 'uploads#documents', as: :documents
   
   resources :users do
     member do
@@ -110,7 +110,6 @@ Rails.application.routes.draw do
       get :saved_buildings
       get '/managertools/:type',        to: 'users#managertools',     as: :managertools
       get '/managertools/:type/new',    to: 'featured_buildings#new', as: :new_manager_featured_building
-      # get '/managertools/billing/new',  to: 'billings#new',           as: :new_builling
     end
   end
 
@@ -125,13 +124,14 @@ Rails.application.routes.draw do
     end
   end
   
-  get '/:searched_by/:search_term', to: 'home#search',              as: 'search' #must be after buildings resource
+  get '/:searched_by/:search_term', to: 'home#search',              as: :search #must be after buildings resource
   get '/custom_search',             to: 'home#search' #must be after buildings resource
   get '/location_search',           to: 'home#search'
   get '/current_location',          to: 'home#search'
-  get '/auto_search',               to: 'home#auto_search',         as: 'auto_search'
-  get '/terms_of_service',          to: 'home#tos',                 as: 'tos'
-  post '/load_infobox',             to: 'home#load_infobox',        as: 'load_infobox'
+  get '/auto_search',               to: 'home#auto_search',         as: :auto_search
+  get '/terms_of_service',          to: 'home#tos',                 as: :tos
+  get '/advertise_with_us',         to: 'home#advertise_with_us',   as: :advertise_with_us
+  post '/load_infobox',             to: 'home#load_infobox',        as: :load_infobox
   post '/set_split_view_type',      to: 'home#set_split_view_type'
   get '/get_images',                to: 'home#get_images'
 

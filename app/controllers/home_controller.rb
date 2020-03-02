@@ -72,6 +72,9 @@ class HomeController < ApplicationController
   def tos
   end
 
+  def advertise_with_us
+  end
+
   private
 
   def reset_session
