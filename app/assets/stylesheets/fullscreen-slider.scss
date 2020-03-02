@@ -1,9 +1,9 @@
 #hero-container{
     .bg_image_holder{
       position: absolute;
-      height: 63%;
-      width: 85%;
-      top: 68%;
+      height: 40%;
+      width: 77%;
+      top: 79%;
       left: 50%;
       -webkit-background-size: cover !important;
       background-size: cover !important;
@@ -14,7 +14,7 @@
       transition: opacity .3s linear;
       -webkit-transition: opacity .3s linear;
       opacity: 1;
-      background-image: asset-data-url('home_slider_img.jpg');
+      background-image: asset-data-url('home_img.jpg');
       transform: translate(-50%, -50%)
     }
     .cb-slideshow,
@@ -84,13 +84,13 @@
     }
 
     #home-content-wrapper #hero-container{
-        height: 446px !important;
+        height: 428px !important;
     }
 
     #hero-container .bg_image_holder {
-        height: 41%;
+        height: 25%;
         width: 100%;
-        top: 72%;
+        top: 76%;
     }
     #apt-search-form.other{
         margin: 0 0px !important;

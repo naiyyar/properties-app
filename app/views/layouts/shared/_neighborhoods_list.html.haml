@@ -29,9 +29,10 @@
       %li.parent{"data-parent" => "midtown"}= search_by_neighborhood_link('Murray Hill', area)
       %li.parent{"data-parent" => "midtown"}= search_by_neighborhood_link('Roosevelt Island', area)
     %b#uptown_manhattan
-      Uptown Manhattan (
-      %span>= uptown_count
-      )
+      %a{href: '#'}
+        Uptown Manhattan (
+        %span>= uptown_count
+        )
     .child-borough-container
       %li.parent{"data-parent" => "uptown_manhattan"}
         = search_by_neighborhood_link('Upper East Side', area)

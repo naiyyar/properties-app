@@ -1977,13 +1977,15 @@ a.userHandler .counter {
     position: relative;
     width: auto;
 }
-.no-touch .leftUserWraper ul li a:hover span.badge, .no-touch .leftUserWraper ul li a:focus span.badge {
+.no-touch .leftUserWraper ul li a:hover span.badge, 
+.no-touch .leftUserWraper ul li a:focus span.badge {
     color: #fff;
 }
 #wrapper {
     left: 70px;
     top: 60px;
     margin: 53px 0 0 0px;
+    overflow-y: scroll;
     /*overflow-x hidden : Getting grey/blank map issue on mobile devices ios13 when moving or zooming*/
     /*overflow-x: hidden;*/
 }
@@ -4109,44 +4111,6 @@ body.black {
     margin: 0 auto;
 }
 
-.neighborhood-container{
-    padding: 0px 150px 0px 150px;
-}
-
-.popular-searches-container{
-    /*padding: 0px 200px 0px 200px;*/
-    margin: 0 auto;
-    width: 700px;
-}
-
-.tabsWidgetSearch .popular-searches-container{
-    width: 640px;
-}
-
-.neighborhood-container .panel a > span.fa{
-    margin-top: -6px;
-    font-size: 2em;
-}
-
-.neighborhood-container .nh-area-name{
-    padding: 0 0 15px 0;
-}
-
-.pop-list{
-    list-style: none;
-    padding: 0px;
-}
-
-.pop-list li{
-    padding: 4px 0px;
-    font-size: 14px;
-}
-
-.pop-list li a:hover{
-    text-decoration: underline;
-    color: #0075c9;
-}
-
 body.no-hidden {
     overflow-x: hidden;
     overflow-y: auto;
@@ -4934,17 +4898,12 @@ select.custom-arrow {
     .other .current-location {
         margin: 0px -70px 0px -30px;
     }
-
-    .neighborhood-container{
-        padding: 0px;
-    }
-    .popular-searches-container, .tabsWidgetSearch .popular-searches-container{
-        padding: 0px;
-        width: 100%;
-    }
     
     .home-about-nyc-apt h1{
-        font-size: 22px;
+        font-size: 26px;
+    }
+    .home-about-nyc-apt h2{
+        font-size: 17px;
     }
     .home-nav ul.homeNavUl li a {
         color: #fff;
@@ -5239,16 +5198,7 @@ select.custom-arrow {
     .btn_contribute{
         z-index: 333;
     }
-    .popular-neighborhoods{
-        position: absolute;
-        z-index: 9999;
-        background: #fff;
-        height: 100%;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        top: 0px;
-        left: 0;
-    }
+    
     .headerLinks {
         padding: 8px 3px 6px 4px;
     }
@@ -5383,7 +5333,7 @@ select.custom-arrow {
         margin: 0px 0 0 0;
     }
     .contribute-wrapper{
-        margin: 31px 0 0 0 !important;
+        margin: 0px !important;
     }
     #mapView, #mapViewSearch {
         width: 0%;
@@ -5542,44 +5492,10 @@ select.custom-arrow {
     }
     .search-panel .home-about-nyc-apt {
         padding-bottom: 15px;
+        text-align: center;
     }
     .search-panel .form-group {
         margin: 0 5px 0px 5px;
-    }
-    .neighborhood-container .panel{
-        margin-bottom: -1px;
-    }
-    .pop-list{
-        background-color: #fff;
-        margin-bottom: 0px;
-    }
-    .pop-list li a{
-        font-size: 18px !important;
-    }
-    .pop-list li {
-        padding: 6px !important;
-        font-size: 16px !important;
-    }
-    .pop-list li.parent {
-        border-bottom: 1px solid #ddd !important;
-        margin: 0px;
-    }
-    .pop-list div.child-borough-container {
-        border-left: 1px solid #ddd;
-        border-right: 1px solid #ddd;
-        padding: 0px;
-    }
-
-    ul.pop-list b{
-        display: block;
-        text-align: center;
-        padding: 9px;
-        background: #dbe6f9;
-        border: 1px solid #ddd;
-    }
-    ul.pop-list b, ul.pop-list b a{
-        color: #333;
-        font-size: 16px !important;
     }
     .home-title {
         font-size: 26px;

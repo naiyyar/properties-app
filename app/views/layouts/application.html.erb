@@ -31,8 +31,10 @@
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
     <%#= render partial: 'layouts/home/header' %>
-    <% unless controller_name == 'home' and action_name == 'index'%>
+    <% unless controller_name == 'home' && action_name == 'index'%>
+      <!-- <div id="header-shared"> -->
       <%= render partial: 'layouts/shared/header' %>
+      <!-- </div> -->
       <%= render partial: 'layouts/shared/filters' %>
       <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
       <div class="closeLeftSide"></div>
@@ -43,14 +45,14 @@
           <%= render 'layouts/shared/pop_neighborhoods_list' %>
           <%= yield %>
         </div>
-        <%= render 'layouts/home/footer' if show_full_width_footer? and action_name != 'contribute' %>
+        <%= render 'layouts/home/footer' if show_full_width_footer? && action_name != 'contribute' %>
       </div>
     <%else%>
       <%= yield %>
-      <%= render 'layouts/home/footer' if show_full_width_footer? and action_name != 'about' %>
+      <%= render 'layouts/home/footer' if show_full_width_footer? && action_name != 'about' %>
     <%end%>
     <div id="remote-container"></div>
-    <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? and params[:searched_by].present? %>
+    <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? && params[:searched_by].present? %>
     <%if current_user.blank? %>
       <%= render 'layouts/shared/signin' if controller_name != 'sessions' %>
       <%= render 'layouts/shared/signup' if controller_name != 'registrations' %>
