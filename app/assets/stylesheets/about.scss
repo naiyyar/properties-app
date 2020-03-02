@@ -30,3 +30,11 @@
 		}
 	}
 }
+
+@media screen and (max-width: 767px) {
+	#about{
+		.about-content, .location-and-press{
+			padding: 0px 6px;
+		}
+	}
+}

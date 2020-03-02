@@ -158,7 +158,7 @@ class User < ApplicationRecord
   end
 
   def user_favorite favorable
-    avorites.find_by(favorable_id:    favorable.id, 
+    favorites.find_by(favorable_id:    favorable.id, 
                       favorable_type: favorable.class.base_class.name)
   end
 
