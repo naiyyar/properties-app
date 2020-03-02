@@ -33,7 +33,6 @@ module BuildingsConcern
       # Redirect the user to register/login
       redirect_to new_user_registration_path
     else
-      @building = Building.get_building(params[:building], params['buildings-search-txt'])
       if @building.blank?
         @building = Building.create(building_params)
         if @building.save
