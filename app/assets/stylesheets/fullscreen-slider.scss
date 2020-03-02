@@ -110,16 +110,16 @@
     }
 
     #hero-container .bg_image_holder{
-        height: 70%;
-        top: 62%;
+        height: 52%;
+        top: 74%;
     }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1024px) {
 
     #hero-container .bg_image_holder{
-        height: 70%;
-        top: 62%;
+        height: 52%;
+        top: 74%;
     }
 }
 
@@ -152,8 +152,9 @@
     }
 
     #hero-container .bg_image_holder{
-        width: 82%;
-        top: 60%;
+        width: 76%;
+        top: 64%;
+        height: 71%;
     }
     .search-panel{
         margin: 0px 0px 0px 282px;
@@ -189,8 +190,9 @@
     }
 
     #hero-container .bg_image_holder{
-        width: 52%;
-        top: 60%;
+        width: 50%;
+        top: 65%;
+        height: 69%;
     }
     .search-panel{
         margin: 0px 0px 0px 50em;
@@ -209,7 +211,8 @@
     }
 
     #hero-container .bg_image_holder{
-        width: 52%;
-        top: 60%;
+        width: 32%;
+        top: 64%;
+        height: 72%;
     }
 }
