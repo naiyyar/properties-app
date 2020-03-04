@@ -751,7 +751,7 @@ a.link_underlined:hover, .underline{
     z-index: 9999;
 }
 .logo a > img, .logo.expanded a > img{
-    width: 200px;
+    width: 146px;
 }
 .mobile-search{
     display: none;
@@ -1988,6 +1988,10 @@ a.userHandler .counter {
     overflow-y: scroll;
     /*overflow-x hidden : Getting grey/blank map issue on mobile devices ios13 when moving or zooming*/
     /*overflow-x: hidden;*/
+}
+
+#wrapper.mt0{
+    margin: 8px 0px 0px;
 }
 #wrapper.screen-lg{
  overflow-x: hidden;   
@@ -4045,21 +4049,7 @@ body.black {
 .padding-top-40{
     padding-top: 40px;
 }
-.home-about-nyc-apt h2{
-    font-size: 21px;
-    padding: 0px 4px;
-    line-height: 24px;
-    margin-bottom: 1px;
-    font-family: sans-serif;
-    margin-top: 12px;
-    color: #000;
-}
-.home-about-nyc-apt h1{
-    font-size: 40px;
-    margin: 0px 0px;
-    font-family: sans-serif;
-    color: #2b78e4;
-}
+
 .home-caption {
     position: absolute;
     width: 100%;
@@ -4083,17 +4073,21 @@ body.black {
 }
 .search-panel {
     /*background-color: rgba(0, 0, 0, 0.60);*/
-    /*position: absolute;*/
+    position: absolute;
     /*left: 0;*/
     /*top: 170px;*/
     /*width: 100%;*/
-    color: #333;
+    /*color: #333;
     padding: 90px 0px;
-    margin: 0px 11em;
-    /*position: relative;*/
+    margin: 0px 20em;
+    position: relative;
     display: flex;
-    align-items: left;
-    flex-flow: column wrap;
+    align-items: center;
+    flex-flow: column wrap;*/
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 59%;
 }
 .search-panel form {
     text-align: center;
@@ -5280,9 +5274,10 @@ select.custom-arrow {
     .headerUserWraper {
         position: absolute;
         float: right;
-        top: 10px;
-        right: 0px;
+        top: 20px;
+        right: 10px;
         z-index: 9999;
+        font-size: 15px;
     }
     a.headerUser {
         display: none;
@@ -5722,7 +5717,7 @@ select.custom-arrow {
         position: relative;
     }
     .search-panel {
-        padding: 47px 20px 13px 20px;
+        padding: 83px 20px 13px 20px;
         margin: 0px;
     }
     .headerLinks {

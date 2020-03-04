@@ -17,7 +17,9 @@
     <meta property="og:title" content="<%=@tab_title_text%>" />
     <meta property="og:site_name" content="transparentcity.co" />
     <meta property="og:description" content="<%=@meta_desc%>" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.1.2/css/paymentfont.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
+    <% if action_name == 'managertools' %>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.1.2/css/paymentfont.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
+    <%end%>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
     <!-- preloading assets not working in firefox -->
     <%= stylesheet_link_tag 'application', media: 'all'%>
@@ -38,7 +40,7 @@
       <%= render partial: 'layouts/shared/filters' %>
       <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
       <div class="closeLeftSide"></div>
-      <div id="wrapper" class="<%=contribute_wrapper(params)%> <%=browser.device.mobile? ? 'screen-sm' : 'screen-lg'%>">
+      <div id="wrapper" class="<%=contribute_wrapper(params)%> <%=browser.device.mobile? ? 'screen-sm' : 'screen-lg'%> <%= @search_bar_hidden == :hidden ? 'mt0' : ''%>">
         <%= render partial: 'layouts/shared/filter_buttons' %>
         <div class="content <%= controller_name + action_name %>">
           <%#= yield :neighborhoods_modal if content_for? :neighborhoods_modal %>

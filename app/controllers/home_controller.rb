@@ -73,6 +73,7 @@ class HomeController < ApplicationController
   end
 
   def advertise_with_us
+    @search_bar_hidden = :hidden
   end
 
   private

@@ -80,8 +80,9 @@ class Listing < ApplicationRecord
     rent_stabilize.present? ? (rent_stabilize == 'true' ? 'Y' : 'N') : ''
   end
 
-  def update_rent listings
+  def update_rent listings = nil
     property          = self.building
+    listings          = Listing.active if listings.blank?
     property_listings = listings.where(building_id: building_id).order(rent: :asc)
     if property_listings.present?
       property.update_columns(  min_listing_price: property_listings.first.rent, 

@@ -3,85 +3,105 @@
     .logo.search1.visible-xs
       %a{href: '/'}= image_tag 'logo1.png', alt: 'logo'
       .clearfix
-    %ul
-      %li.btn_contribute
-        %a{href: contribute_buildings_path}
-          %span.navIcon.fa.fa-plus-circle
-          %span.navLabel Write a review
-      - if current_user.blank?
-        - if controller_name != 'sessions'
-          %li
-            %a.left-side-zindex{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
-              %span.navIcon.fa.fa-sign-in
-              %span.navLabel Sign In
-        
-        - if controller_name != 'registrations'
-          %li
-            %a.left-side-zindex{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
-              %span.navIcon.fa.fa-user
-              %span.navLabel Sign Up
-      - if current_user&.admin?
-        %li
-          %a{href: '/buildings'}
-            %span.navIcon.fa.fa-building
-            %span.navLabel Buildings
-        %li
-          %a{href: '/units'}
-            %span.navIcon.fa.fa-home
-            %span.navLabel Units
-        %li
-          %a{href: '/listings'}
-            %span.navIcon.fa.fa-list
-            %span.navLabel Listings
-        %li
-          %a{href: '/users'}
-            %span.navIcon.fa.fa-user
-            %span.navLabel Users
-        %li
-          %a{href: '/documents'}
-            %span.navIcon.fa.fa-file-o
-            %span.navLabel Documents
-        %li
-          %a{href: '/reviews'}
-            %span.navIcon.fa.fa-star
-            %span.navLabel Reviews
-        %li
-          %a{href: '/neighborhood_links'}
-            %span.navIcon.fa.fa-link
-            %span.navLabel Neighborhood guides
-        %li
-          %a{href: management_companies_path}
-            %span.navIcon.fa.fa-building
-            %span.navLabel Management companies
-        %li
-          %a{href: '/price_ranges'}
-            %span.navIcon.fa.fa-money
-            %span.navLabel Price Range
-        %li
-          %a{href: featured_comps_path}
-            %span.navIcon.fa.fa-money
-            %span.navLabel Featured Comps
 
-        %li
-          %a{href: featured_buildings_path}
-            %span.navIcon.fa.fa-money
-            %span.navLabel Featured buildings
-      
-      - elsif (current_user and !current_user.has_role?(:admin)) or current_user.blank?
-        %li
-          %a{href: '/blog'}
-            %span.navIcon.fa.fa-hashtag
-            %span.navLabel Blog
+    %ul
+      - if current_user.blank?
         %li
           %a{href: '/about'}
             %span.navIcon.fa.fa-info-circle
             %span.navLabel About us
         %li
-          %a{href: new_contact_path}
-            %span.navIcon.fa.fa-comment
-            %span.navLabel Send feedback
-      - if current_user.present?
+          %a{href: advertise_with_us_path}
+            %span.navIcon.fa.fa-info-circle
+            %span.navLabel Advertise
         %li
-          %a{href: "#{saved_buildings_user_path(current_user)}"}
-            %span.navIcon.fa.fa-heart
-            %span.navLabel Saved buildings
+          %a{href: '/blog'}
+            %span.navIcon.fa.fa-hashtag
+            %span.navLabel Blog
+        %li.btn_contribute
+          %a{href: contribute_buildings_path}
+            %span.navIcon.fa.fa-plus-circle
+            %span.navLabel Write a review
+
+        - if controller_name == 'registrations'
+          %li
+            %a.left-side-zindex{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
+              %span.navIcon.fa.fa-sign-in
+              %span.navLabel Sign In
+        
+        - elsif controller_name == 'sessions'
+          %li
+            %a.left-side-zindex{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
+              %span.navIcon.fa.fa-user
+              %span.navLabel Sign Up
+        - else
+          %li
+            %a.left-side-zindex{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
+              %span.navIcon.fa.fa-sign-in
+              %span.navLabel Sign In
+          %li
+            %a.left-side-zindex{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
+              %span.navIcon.fa.fa-user
+              %span.navLabel Sign Up
+      
+      - elsif current_user.present?
+        %li.btn_contribute
+          %a{href: saved_buildings_user_path(current_user)}
+            %span.navLabel Saved
+
+        %li.btn_contribute
+          %a{href: contribute_buildings_path}
+            %span.navLabel Write a review
+
+        %li.btn_contribute
+          %a{href: managertools_user_path(current_user, type: 'featured')}
+            %span.navLabel Manager Tools
+
+        %li.btn_contribute
+          %a{href: edit_user_path(current_user)}
+            %span.navLabel Settings
+
+        %li.btn_contribute
+          %a{href: destroy_user_session_path, method: :delete}
+            %span.navLabel Sign Out
+
+        - if current_user.admin?
+          %li.hasSub
+            %a{href: 'javascript:;'}
+              %span.navLabel Admin
+              %span.fa.fa-angle-left.arrowRight
+            
+            %ul
+              %li
+                %a{href: buildings_path}
+                  %span.navLabel Buildings
+              %li
+                %a{href: units_path}
+                  %span.navLabel Units
+              %li
+                %a{href: listings_path}
+                  %span.navLabel Listings
+              %li
+                %a{href: users_path}
+                  %span.navLabel Users
+              %li
+                %a{href: '/documents'}
+                  %span.navLabel Documents
+              %li
+                %a{href: reviews_path}
+                  %span.navLabel Reviews
+              %li
+                %a{href: neighborhood_links_path}
+                  %span.navLabel Guides
+              %li
+                %a{href: management_companies_path}
+                  %span.navLabel Management companies
+              %li
+                %a{href: '/price_ranges'}
+                  %span.navLabel Price Range
+              %li
+                %a{href: featured_comps_path}
+                  %span.navLabel Featured Comps
+              %li
+                %a{href: featured_buildings_path}
+                  %span.navLabel Featured buildings

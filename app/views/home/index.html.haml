@@ -4,75 +4,40 @@
   = render 'layouts/home/header'
 
   .row{style: 'margin-right: 0px;'}
-    .col-lg-3.col-md-3.hidden-xs{style: 'padding-right: 0px;'}
-      #quick-links
-        - home_quick_links.each do |nb|
-          %a{href: nb[:url]}
-            %div.item=quick_link_name(nb)
-
-    .col-lg-9.col-md-9.col-xs-12{style: 'padding-left: 0px;padding-right: 0px;'}
+    .col-lg-12.col-md-12.col-xs-12{style: 'padding-left: 0px;padding-right: 0px;'}
       #hero-container
-        .bg_image_holder
-    
+        / .bg_image_holder
+        = image_tag 'bg_img1.jpg', style: 'width: 100%;height: 100%;'
         .search-panel
-          .text-left.home-about-nyc-apt
-            %h1 Exclusively Broker Free 
-            %h1 Apartments For Rent In NYC
-            %h2 transparentcity connects renters directly to NYC landlords and property managers
+          .text-center.home-about-nyc-apt
+            %h1 Exclusively Broker Free Apartments
+            %h1 For Rent In NYC
+            %h2 Transparentcity connects renters directly to NYC landlords and property managers
           .home-search-form
           = render 'home/search_form'
-          .home-quick-links.visible-xs
+          .home-quick-links
             = render 'home/quick_links'
 
   = render 'layouts/home/popular_neighborhoods'
 
   = render 'layouts/home/popular_searches'
 
-  .home-wrapper.pb20{style: 'padding: 20px 20px 20px;'}
+  .home-wrapper.pb20{style: 'padding: 20px 20px 20px;background: #FBFBFF;'}
     .home-content
-      %h2{style: 'font-weight: bolder;'} What We Do
       .row
-        .col-lg-2.col-sm-12
-        .col-lg-8.col-sm-12
+        .col-lg-1.col-sm-12
+        .col-lg-10.col-sm-12
+          %h2{style: 'font-weight: bolder;text-align: left;'} What We Do
           %p Transparentcity is a site that standardizes and aggregates information from websites of NYC landlords and property management companies, all of whom apartments can be rented directly from without working through a broker.
-        .col-lg-2.col-sm-12
+          = link_to 'Learn More <span class="fa fa-arrow-right"></span>'.html_safe, '/about', style: 'font-size: 21px;font-weight: bolder;'
+        .col-lg-1.col-sm-12
 
-  .home-wrapper.pb20{style: 'padding: 20px 20px 20px;'}
+  .home-wrapper.pb20{style: 'padding: 20px 20px 20px;background: #FBFBFF;'}
     .home-content
-      %h2{style: 'font-weight: bolder;'} Help Your Fellow NYC Renters
       .row
-        .col-lg-2.col-sm-12
-        .col-lg-8.col-sm-12
+        .col-lg-1.col-sm-12
+        .col-lg-10.col-sm-12
+          %h2{style: 'font-weight: bolder;text-align: left;'} Help Your Fellow NYC Renters
           %p We aim to include as many photos, reviews, and tidbits about the NYC rental experience as we can from the community—because home means more than just walls and a roof.
           = link_to 'Write Review <span class="fa fa-arrow-right"></span>'.html_safe, contribute_buildings_path, style: 'font-size: 21px;font-weight: bolder;'
-        .col-lg-2.col-sm-12
-
-  .home-wrapper.pb20.hidden{style: 'padding: 20px 20px 20px;'}
-    .home-content.how-it-works
-      %h2{style: 'font-weight: bolder;'} How Transparentcity Works
-      .row
-        .col-lg-4.col-sm-12
-          .text-center
-            %h2.title Search
-            %p Find what you're interested in based on personal criteria on our exclusive to no broker fee buildings only platform.
-
-        .col-lg-4.col-sm-12
-          .text-center
-            %h2.title Check Availability
-            %p Check available apartments on management company websites, all which have been vetted by transparentcity.
-
-        .col-lg-4.col-sm-12
-          .text-center
-            %h2.title Contact
-            %p Contact, schedule showing, visit, apply and rent directly from management company, bypassing brokers and all associated fees.
-
-  .home-wrapper.hidden{style: 'padding: 20px 20px 20px;'}
-    .home-content.summary
-      %h2{style: 'font-weight: bolder;'} Help A Fellow NYC Renter
-      .row
-        .col-lg-12.col-sm-12
-          .tp-summary
-            .text-center
-              %p{style: 'margin: 0 0 30px;'} We aim to include as many photos, reviews, and tidbits about amenities as we can from the community—because home means more than just walls and a roof.
-
-              = link_to 'Write Review', contribute_buildings_path, class: 'btn btn-green btn-xlg btn-lg border-green btn-round', style: 'font-size: 15px;'
+        .col-lg-1.col-sm-12

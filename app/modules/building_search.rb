@@ -91,6 +91,7 @@ module BuildingSearch
       top_two_featured_buildings = featured_buildings.shuffle[0..2]
     end
     #Selecting 2 featured building to put on top
+    page_num = 1 if page_num == 0
     per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
                                         .paginate(:page => page_num, :per_page => 20)
     

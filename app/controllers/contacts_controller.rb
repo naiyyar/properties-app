@@ -13,6 +13,7 @@ class ContactsController < ApplicationController
   end
 
   def about
+    @search_bar_hidden = :hidden
   end
 
   # GET /contacts/new

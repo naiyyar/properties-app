@@ -3,15 +3,15 @@
     %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
       %span.fa.fa-bars
 
-  .home-logo.osLight
-    %a{href: '/'}= image_tag 'logo2.png', alt: 'logo', width: '200'
+  .home-logo.osLight{style: 'width: 146px;'}
+    %a{href: '/'}= image_tag 'logo2.png', alt: 'logo', width: '100%'
   
   .home-nav.pull-left
     %ul.homeNavUl
       %li.no-hover-underline.parent
         %a{href: '/about'} About
       %li.no-hover-underline.parent
-        %a{href: '/advertise_with_us'} Advertise
+        %a{href: advertise_with_us_path } Advertise
       %li.no-hover-underline.parent
         %a{href: '/blog'} Blog
       %li.no-hover-underline.parent

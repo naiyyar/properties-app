@@ -130,7 +130,7 @@ Rails.application.routes.draw do
   get '/current_location',          to: 'home#search'
   get '/auto_search',               to: 'home#auto_search',         as: :auto_search
   get '/terms_of_service',          to: 'home#tos',                 as: :tos
-  get '/advertise_with_us',         to: 'home#advertise_with_us',   as: :advertise_with_us
+  get '/advertise-with-us',         to: 'home#advertise_with_us',   as: :advertise_with_us
   post '/load_infobox',             to: 'home#load_infobox',        as: :load_infobox
   post '/set_split_view_type',      to: 'home#set_split_view_type'
   get '/get_images',                to: 'home#get_images'

@@ -166,11 +166,6 @@
     $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
       $('.popular-neighborhoods').slideToggle(200);
     });
-    
-    if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
-        $('body').addClass('no-touch');
-        isDevice = false;
-    }
 
     // Header search icon transition
     $('.search input').focus(function() {
@@ -178,43 +173,6 @@
     });
     $('.search input').blur(function() {
         $('.searchIcon').removeClass('active');
-    });
-
-    // Exapnd left side navigation
-    var navExpanded = false;
-    $('.navHandler, .closeLeftSide, .home-navHandler').click(function() {
-        if(!navExpanded) {
-            $('.logo').addClass('expanded');
-            $('#leftSide').addClass('expanded');
-            if(windowWidth < 768) {
-                $('.closeLeftSide').show();
-            }
-            $('.hasSub').addClass('hasSubActive');
-            $('.leftNav').addClass('bigNav');
-            if(windowWidth > 767) {
-                $('.full').addClass('m-full');
-            }
-            windowResizeHandler();
-            navExpanded = true;
-        } else {
-            $('.logo').removeClass('expanded');
-            $('#leftSide').removeClass('expanded');
-            $('.closeLeftSide').hide();
-            $('.hasSub').removeClass('hasSubActive');
-            //$('.bigNav').slimScroll({ destroy: true });
-            $('.leftNav').removeClass('bigNav');
-            $('.leftNav').css('overflow', 'visible');
-            $('.full').removeClass('m-full');
-            navExpanded = false;
-        }
-    });
-
-    $(document).click(function(e){
-        var target_class = e.target.className;
-        if(target_class !== "fa fa-bars" && target_class != 'ssm-toggle-nav1'){
-            $('#leftSide').removeClass('expanded');
-            $('.logo').removeClass('expanded');
-        }
     });
 
     // functionality for map manipulation icon on mobile devices
@@ -273,20 +231,6 @@
                 console.log(response)
             }
         })
-    }
-
-    // Expand left side sub navigation menus
-    $(document).on("click", '.hasSubActive', function() {
-        $(this).toggleClass('active');
-        $(this).children('ul').toggleClass('bigList');
-        $(this).children('a').children('.arrowRight').toggleClass('fa-angle-down');
-    });
-
-    if(isDevice) {
-        $('.hasSub').click(function() {
-            $('.leftNav ul li').not(this).removeClass('onTap');
-            $(this).toggleClass('onTap');
-        });
     }
 
     // functionality for custom dropdown select list
@@ -502,18 +446,11 @@
 
     $(document).on('click', function(e){
         e.stopPropagation();
-        // var target = e.target;
-        // var filter_length = $(target).parents().find('.filter').length;
-        // if(filter_length <= 0 && target.className != 'dropdown-menu dropdown-select userMenu sc-lg'){
-        //     DPButtons.init();
-        //     DPButtons.removeDropdownToggleBg(primary_dropdown)
-        // }
     });
 
     //Hiding mobile browser select box on soeted by text click
     $('.sorted-by').click(function(){
-        //$('select#sort').show();
-        console.log(12)
+        //console.log(12)
     })
 
     $(document).on('click', 'select#sort', function(){
