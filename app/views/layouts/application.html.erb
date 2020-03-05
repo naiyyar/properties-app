@@ -20,7 +20,7 @@
     <% if action_name == 'managertools' %>
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.1.2/css/paymentfont.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
     <%end%>
-    <!-- <link href="https://fonts.googleapis.com/css?family=Serif:400,600&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'"> -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="preload" as="style" onload="this.rel='stylesheet'">
     <!-- preloading assets not working in firefox -->
     <%= stylesheet_link_tag 'application', media: 'all'%>
     <%= tag :meta, name: 'stripe-key', content: STRIPE_PUBLIC_KEY %>
