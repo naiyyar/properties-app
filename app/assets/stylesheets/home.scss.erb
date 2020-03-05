@@ -1,56 +1,83 @@
 /* ============== HOME HEADER NAV STYLING ============= */
 
-	.no-touch {
-		.home-nav ul.homeNavUl li a:hover {
-	    color: #000;
-	  }
-	}
+.no-touch {
+	.home-nav ul.homeNavUl li a:hover {
+    color: #000;
+  }
+}
 
-	.home-nav{
-		float: right;
-	  -webkit-transition: all .2s ease-in-out;
-	  -o-transition: all .2s ease-in-out;
-	  transition: all .2s ease-in-out;
-		
-		ul.homeNavUl{
-			margin: 0px 0px 0px 19px;
-	    padding: 20px 0px;
-	    list-style-type: none;
-	    float: right;
-	    -webkit-transition: all .2s ease-in-out;
-	    -o-transition: all .2s ease-in-out;
-	    transition: all .2s ease-in-out;
+.home-nav{
+	float: right;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+	
+	ul.homeNavUl{
+		margin: 0px 0px 0px 19px;
+    padding: 20px 0px;
+    list-style-type: none;
+    float: right;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 
-			li.parent{
-				float: left;
-		    margin-left: 20px;
-		    padding-top: 0px;
-		    color: #777;
-				&:not(.no-hover-underline):hover{
-					border-bottom: 1px solid #ffffff;
-				}
-				a{
-					color: #000;
-	    		font-size: 15px;
-					&:hover{
-						border-bottom: 2px solid #333;
-					}
-				}
+		li.parent{
+			float: left;
+	    margin-left: 20px;
+	    padding-top: 0px;
+	    color: #777;
+			&:not(.no-hover-underline):hover{
+				border-bottom: 1px solid #ffffff;
 			}
-		}
-
-		ul.homeNavUl.shared{
-			li a{
-				color: #fff;
+			a{
+				color: #000;
+    		font-size: 15px;
 				&:hover{
-					color: #fff;
-					border-bottom: 2px solid #fff;
+					border-bottom: 2px solid #333;
 				}
 			}
 		}
 	}
+
+	ul.homeNavUl.shared{
+		li a{
+			color: #fff;
+			&:hover{
+				color: #fff;
+				border-bottom: 2px solid #fff;
+			}
+		}
+	}
+}
+
+.home-header {
+  position: fixed;
+  width: 100%;
+  padding: 0px 69px 0px;
+  color: #000;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #fff;
+  box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
+  height: 59px;
+  .home-logo {
+	    color: #fff;
+	    font-size: 20px;
+	    float: left;
+	    margin-top: 0px;
+	    width: 146px;
+	    span {
+	    	font-size: 34px;
+		}
+	}
+}
+.home-header.map {
+  background: rgba(0, 0, 0, 0.50);
+}
 
 /* ========== END HOME HEADER NAV STYLING =========*/
+
 
 /* ========== START POPULAR NEIGHBORHOODS =========*/
 
@@ -105,13 +132,36 @@
 	}
 }
 
-/* #background-color-#dae5f9 */
+#apt-search-form.other{
+  margin: 1 5px !important;
+}
 
 #home-content-wrapper{
 	#hero-container {
 	  background-color: #fff;
 	  height: 524px;
 	  position: relative;
+	  .search-panel {
+	    background-color: rgba(24, 49, 69, 0.7);
+	    position: absolute;
+	    left: 50%;
+	    top: 50%;
+	    transform: translate(-50%, -50%);
+	    width: 60%;
+	    padding: 8px;
+	    
+	    form {
+	    	text-align: center;
+			}
+			.form-group {
+			  margin: 0 5px 20px 5px;
+			  position: relative;
+			}
+			.home-about-nyc-apt {
+		    padding-bottom: 16px;
+		    z-index: 999;
+			}
+		}
 	}
 	#hero-container-map {
 	  background-color: #fff;
@@ -131,10 +181,10 @@
     color: #fff;
 	}
 	.home-about-nyc-apt h1{
-	    font-size: 40px;
-	    margin: 0px 0px;
-	    font-family: open-sans;
-	    color: #fff;
+	  font-size: 40px;
+	  margin: 0px 0px;
+	  font-family: open-sans;
+	  color: #fff;
 	}
 	#home-map {
 	  width: 100%;
@@ -162,55 +212,6 @@
 	  text-align: right;
 	}
 
-	.home-header {
-	  position: fixed;
-	  width: 100%;
-	  padding: 0px 69px 0px;
-	  color: #000;
-	  top: 0;
-	  left: 0;
-	  z-index: 1000;
-	  background-color: #fff;
-	  box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
-	  height: 59px;
-	  .home-logo {
-		    color: #fff;
-		    font-size: 20px;
-		    float: left;
-		    margin-top: 0px;
-		    width: 146px;
-		    span {
-		    	font-size: 34px;
-			}
-		}
-	}
-	.home-header.map {
-	  background: rgba(0, 0, 0, 0.50);
-	}
-
-	#quick-links{
-		margin-top: 60px;
-		padding: 0px;
-		a{
-			color: #333;
-			.item{
-				list-style: none;
-		    background: #3f5b84;
-		    padding: 1.7em 8px;
-		    margin-bottom: -1px;
-		    border: 1px solid #ddd;
-		    text-align: center;
-		    font-size: 16px;
-		    text-shadow: 1px 1px 1px;
-		    color: #fff;
-		    background-image: url(asset-path('about_us_bg.png'));
-		    background-repeat: no-repeat;
-		    background-position: center;
-		    background-size: cover;
-			}
-		}
-	}
-
 	.home-quick-links{
 		z-index: 999;
 		padding: 5px 0px;
@@ -225,3 +226,106 @@
 		}
 	}
 }
+
+
+/* ========= MEDIA QUERY============ */
+
+@media screen and (max-width: 767px) {
+  #apt-search-form.other {
+    margin: 0 0px !important;
+  }
+  #home-content-wrapper {
+		#hero-container {
+			.search-panel {
+	      width: 97%;
+	      padding: 0px 0px 0px 9px;
+	    }
+		}
+    .home-about-nyc-apt {
+      h1 {
+        font-size: 35px;
+      }
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .home-header {
+    padding: 0px 88px 0px !important;
+    .home-logo {
+      width: 200px !important;
+    }
+  }
+
+  .expended {
+    .leftNav {
+      ul {
+        li.logo a > img {
+          width: 180px !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+		#home-content-wrapper {
+  		#hero-container{
+  			.search-panel {
+      		width: 95%;
+  			}
+  		}
+  	}
+}
+
+@media screen and (min-width: 992px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    .search-panel {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1024px) {
+   .search-panel {
+        width: 72%;
+    }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 737px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    
+    #leftSide.home {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1367px) and (max-width: 1600px) {
+    .search-panel {
+        width: 54%;
+    }
+}
+
+
+@media screen and (min-width: 1601px) and (max-width: 1900px){
+    .search-panel {
+        width: 47%;
+    }
+}
+
+@media screen and (min-width: 1920px) and (max-width: 2200px){
+   .search-panel {
+        width: 41%;
+    }
+}
+
+@media screen and (min-width: 2201px) {
+   .search-panel {
+        width: 31%;
+    }
+}
+
+@media screen and (min-width: 2561px) {
+   .search-panel {
+        width: 22%;
+    }
+}
+

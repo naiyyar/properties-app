@@ -19,17 +19,16 @@ class ImportListing < ImportService
   end
 
   def find_building buildings, address
-    buildings  = buildings.where(building_street_address: address.strip)
-    buildings  = buildings.where('building_street_address @@ :q', q: address) if buildings.blank?
-    return buildings
+    buildings.where('LOWER(building_street_address) = ?', address.downcase.strip)
   end
 
   def import_listings buildings, listings
     @errors = []
     (2..@spreadsheet.last_row).each do |i|
       row = Hash[[@header, @spreadsheet.row(i)].transpose ]
-      if row['building_address'].present? and row['unit'].present? and row['date_active'].present?
-        building = find_building(buildings, row['building_address'])
+      address = row['building_address']
+      if address.present? && row['unit'].present? && row['date_active'].present?
+        building = find_building(buildings, address)
         if building.present?
           create_listing(building.first, listings, row, i)
         else

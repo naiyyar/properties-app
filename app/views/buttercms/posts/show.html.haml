@@ -1,7 +1,9 @@
 = content_for :html_title, @post.seo_title
 = content_for :meta_description, @post.meta_description
+
 .hidden-xs
   = render partial: 'buttercms/authors/author'
+
 .post-content
   .visible-xs
     = render partial: 'buttercms/authors/author'

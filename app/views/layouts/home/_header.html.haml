@@ -1,7 +1,13 @@
 .home-header
   .pull-left
-    %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
-      %span.fa.fa-bars
+    - unless params[:controller].include?('buttercms')
+      %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
+        %span.fa.fa-bars
+    - else
+      %a.home-navHandler{href: '/blog'}
+        %span.fa.fa-home
+        %strong.hidden-xs blog
+
 
   .home-logo.osLight
     %a{href: '/'}= image_tag 'logo2.png', alt: 'logo', width: '100%'

@@ -15,9 +15,12 @@
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = favicon_link_tag 'favicon.png'
-  %body.notransition.no-hidden
-    = render 'layouts/buttercms/blog_header'
-    .blog-content
+  %body.notransition.no-hidden#trans-blog
+    = render 'layouts/home/header'
+    - if @post.present?
+      #title-header
+        = render 'layouts/buttercms/blog_header'
+    .blog-content{class: action_name}
       .home-wrapper
         .row
           .col-xs-12.col-sm-12.col-md-9.col-lg-9
