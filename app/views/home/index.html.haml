@@ -15,7 +15,7 @@
             %h2 Transparentcity connects renters directly to NYC landlords and property managers
           .home-search-form
           = render 'home/search_form'
-          .home-quick-links
+          .home-quick-links.text-center
             = render 'home/quick_links'
 
   = render 'layouts/home/popular_neighborhoods'
@@ -29,7 +29,7 @@
         .col-lg-10.col-sm-12
           %h2{style: 'font-weight: bolder;text-align: left;'} What We Do
           %p Transparentcity is a site that standardizes and aggregates information from websites of NYC landlords and property management companies, all of whom apartments can be rented directly from without working through a broker.
-          = link_to 'Learn More <span class="fa fa-arrow-right"></span>'.html_safe, '/about', style: 'font-size: 21px;font-weight: bolder;'
+          = link_to 'Learn More <span class="fa fa-arrow-right"></span>'.html_safe, '/about', style: 'font-size: 18px;font-weight: bolder;'
         .col-lg-1.col-sm-12
 
   .home-wrapper.pb20{style: 'padding: 20px 20px 20px;background: #FBFBFF;'}
@@ -39,5 +39,5 @@
         .col-lg-10.col-sm-12
           %h2{style: 'font-weight: bolder;text-align: left;'} Help Your Fellow NYC Renters
           %p We aim to include as many photos, reviews, and tidbits about the NYC rental experience as we can from the community—because home means more than just walls and a roof.
-          = link_to 'Write Review <span class="fa fa-arrow-right"></span>'.html_safe, contribute_buildings_path, style: 'font-size: 21px;font-weight: bolder;'
+          = link_to 'Write Review <span class="fa fa-arrow-right"></span>'.html_safe, contribute_buildings_path, style: 'font-size: 18px;font-weight: bolder;'
         .col-lg-1.col-sm-12

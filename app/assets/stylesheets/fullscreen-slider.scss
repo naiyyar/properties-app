@@ -79,151 +79,93 @@
 /* MEDIA QUERY */
 
 @media screen and (max-width: 767px) {
-    #hero-container .cb-slideshow,
-    #hero-container .cb-slideshow:after { 
-        height: 268px;
-        top: 188px;
-    }
-
-    #home-content-wrapper #hero-container{
-        height: 428px !important;
-    }
-
-    #hero-container .bg_image_holder {
-        height: 25%;
-        width: 100%;
-        top: 76%;
-    }
-    #apt-search-form.other{
+    #apt-search-form.other {
         margin: 0 0px !important;
+    }
+    .search-panel {
+        width: 97%;
+        padding: 0px 0px 0px 9px;
+    }
+    #home-content-wrapper {
+        .home-about-nyc-apt {
+            h1 {
+                font-size: 35px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+        }
+        .home-header {
+            padding: 0px 88px 0px !important;
+            .home-logo {
+                width: 200px !important;
+            }
+        }
+    }
+
+    .expended {
+        .leftNav {
+            ul {
+                li.logo a > img {
+                    width: 180px !important;
+                }
+            }
+        }
     }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-    #hero-container .cb-slideshow,
-    #hero-container .cb-slideshow:after { 
-        height: 436px;
+    .search-panel{
+        width: 95%;
     }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-    #hero-container .cb-slideshow,
-    #hero-container .cb-slideshow:after { 
-        height: 571px;
-    }
     .search-panel {
-        margin: 0px 200px;
-    }
-
-    #hero-container .bg_image_holder {
-        height: 33%;
-        width: 83%;
-        top: 80%;
+        width: 70%;
     }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1024px) {
-    #hero-container .bg_image_holder {
-        height: 33%;
-        width: 83%;
-        top: 80%;
+   .search-panel {
+        width: 72%;
     }
 }
 
 @media screen and (max-width: 1024px) and (min-width: 737px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-    #hero-container .bg_image_holder {
-        height: 33%;
-        top: 80%;
-    }
+    
     #leftSide.home {
         display: block;
     }
 }
 
 @media screen and (min-width: 1367px) and (max-width: 1600px) {
-    #hero-container .cb-slideshow,
-    #hero-container .cb-slideshow:after { 
-        width: 81%;
-    }
-    #hero-container .bg_image_holder {
-        width: 72%;
+    .search-panel {
+        width: 54%;
     }
 }
 
 
 @media screen and (min-width: 1601px) and (max-width: 1900px){
-    #hero-container {
-        height: 540px;
-        background-color: #dbe6f9;
-    }
-    #hero-container .cb-slideshow,
-    #hero-container .cb-slideshow:after { 
-        width: 67%;
-    }
-
-    #hero-container .bg_image_holder {
-        width: 67%;
-        top: 78%;
-        height: 44%;
-    }
     .search-panel {
-        margin: 0px 0px 0px 282px;
-    }
-    #apt-search-form {
-        width: 65%;
+        width: 47%;
     }
 }
 
 @media screen and (min-width: 1920px) and (max-width: 2200px){
-    #hero-container .bg_image_holder {
-        width: 54%;
-    }
-    .search-panel {
-        margin: 0px 0px 0px 402px;
-    }
-    #apt-search-form {
-        width: 65%;
+   .search-panel {
+        width: 41%;
     }
 }
 
 @media screen and (min-width: 2201px) {
-    #hero-container {
-        height: 540px;
-        background-color: #dbe6f9;
-    }
-    #hero-container .cb-slideshow,
-    #hero-container .cb-slideshow:after { 
-        width: 45%;
-    }
-    .search-panel {
-        margin: 0px 577px;
-    }
-
-    #hero-container .bg_image_holder{
-        width: 44%;
-        top: 77%;
-        height: 42%;
-        left: 52%;
-    }
-    .search-panel {
-        margin: 0px 0px 0px 50em;
-    }
-    #apt-search-form {
-        width: 55%;
+   .search-panel {
+        width: 31%;
     }
 }
 
 @media screen and (min-width: 2561px) {
-    .search-panel {
-        margin: 0px 0px 0px 77em;
-    }
-    #apt-search-form {
-        width: 55%;
-    }
-
-    #hero-container .bg_image_holder {
-        width: 29%;
-        top: 77%;
-        height: 42%;
+   .search-panel {
+        width: 22%;
     }
 }

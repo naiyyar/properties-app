@@ -1,10 +1,13 @@
 #leftSide{class: "#{contribute_left_side(params)} #{controller_name == 'home' and action_name == 'index' ? 'home' : ''}"}
   %nav.leftNav.scrollable
-    .logo.search1.visible-xs
-      %a{href: '/'}= image_tag 'logo1.png', alt: 'logo'
+    .logo.search1.hidden
+      / %a{href: '/'}= image_tag 'logo1.png', alt: 'logo'
       .clearfix
 
     %ul
+      %li.logo.visible-xs
+        %a{href: '/'}= image_tag 'logo1.png', alt: 'logo'
+      
       - if current_user.blank?
         %li
           %a{href: '/about'}
