@@ -2,18 +2,34 @@
 	color: #000;
 	margin-bottom: 30px;
 	.about-content{
-		padding: 0px 60px;
+		.row.pb, .header-row{
+			padding: 15px 60px;
+		}
+
+		.row.pb:nth-child(even){
+			background: #fff;
+		}
+		.row.pb:nth-child(odd){
+			background: #fbfbff;
+		}
+
 		span{
-			font-size: 30px;
+			margin-top: 8px;
 		}
 		.header{
 			font-size: 21px;
 			color: #2b78e4;
 			font-weight: bolder;
+			padding-bottom: 8px;
 		}
 		section{
 			font-size: 16px;
 		}
+	}
+
+	#location-and-press{
+		border-top: 1px solid #eeeeee;
+    padding: 30px 0px;
 	}
 
 	.location-and-press{

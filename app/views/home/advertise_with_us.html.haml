@@ -4,11 +4,10 @@
 			.col-lg-12.col-md-12.col-xs-12
 				%h2 Promote Your Apartments 
 				%h2 More Effectively With Transparentcity
+				%br
 				%p Transparentcity advertises exclusively for NYC area landlords and property managers. We provide a supplemental, yet zero maintenance solution to advertise your vacant apartments without disrupting your current leasing and marketing efforts, leading to increased effectiveness of overall marketing dollars
-
-	.row
-		.col-lg-12.col-md-12.col-xs-12
-			%hr
+	
+	%hr
 	
 	.mid-section
 		.row
@@ -20,19 +19,21 @@
 				%h4 Self Service Featuring
 				%p Simply create a user account and go into the manager tool.  Select the building you want to Feature, pay online through our Stripe integration and you are done in minutes.
 				%p Featured Buildings are interchangeable and can be adjusted throughout the featured time period.
-				%br
-				%a.btn.btn-blue.btn-round{href: '/users/sign_up'}='$49 / Building / 4 Weeks'
+				%a.btn.btn-blue.btn-round.font-bold{href: @self_service_btn_link}='$49 / Building / 4 Weeks'
 
 			.col-lg-6.col-md-6.col-xs-12
 				%h4 Managed Service Featuring
 				%p Maintenance free for you where we continually monitor and update the portfolio of buildings to Feature based on vacancies or desired brand exposure for your portfolio.
 				%p Month to month payments. No contracts or long term commitments. Cancel and resubscribe anytime.
-				%br
-				%a.btn.btn-blue.btn-round{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
-		
+				%a.btn.btn-blue.btn-round.font-bold{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
+
+		%hr
+
 		.row
 			.col-lg-12.col-md-12.col-xs-12
 				%h3 Our Product Platform
+		
+		%h2
 
 		.row
 			.col-lg-6.col-md-6.col-xs-12
@@ -54,62 +55,56 @@
 					Use the dashboard to advertise and manage your 
 					%b Featured 
 					portfolio
-
-		.row
-			.col-lg-12.col-md-12.col-xs-12
-				%hr
+		
+		%hr
 
 		.row
 			.col-lg-12.col-md-12.col-xs-12
 				%h3 Who We Work With
 				%p Any Property Managers with in house leasing teams and websites that showcase availability so our renters know they can rent directly.
 				%p Are you a:
-				%p='- General Property Manager'
-				%p='- Co Living Manager'
-				%p='- Furnished Apartment Manager'
-				%p='- Short Term Manager'
-				%p='- Individual Owner/Landlord of Building (contact us for details on validating)'
-				%p='- Ad Agency representing above types of Property Managers'
+				%ul.who-www
+					%li='- General Property Manager'
+					%li='- Co Living Manager'
+					%li='- Furnished Apartment Manager'
+					%li='- Short Term Manager'
+					%li='- Individual Owner/Landlord of Building (contact us for details on validating)'
+					%li='- Ad Agency representing above types of Property Managers'
 
-		.row
-			.col-lg-12.col-md-12.col-xs-12
-				%hr
+		%hr
 
-		.row
-			.col-lg-12.col-md-12.col-xs-12
-				%h3 Why Work With Transparentcity?
+		#why-wwt
+			.row
+				.col-lg-12.col-md-12.col-xs-12
+					%h3 Why Work With Transparentcity?
+			
+			.row
+				.col-lg-6.col-md-6.col-xs-12
+					%div
+						%span.fa.fa-exchange.fa-3x.fa-rotate-90
+					%h4 Increase Leads | Decrease Vacancies
+					%p Connect with active NYC renters who explicitly want to bypass fees and are looking to deal directly. Drive vacancies and rent concessions down while driving the rent roll and NOI up.
 
-		.row
-			.col-lg-6.col-md-6.col-xs-12
-				%div
-					%span.fa.fa-exchange.fa-3x.fa-rotate-90
-				%h4 Increase Leads | Decrease Vacancies
-				%p Connect with active NYC renters who explicitly want to bypass fees and are looking to deal directly. Drive vacancies and rent concessions down while driving the rent roll and NOI up.
+				.col-lg-6.col-md-6.col-xs-12
+					%div
+						%span.fa.fa-line-chart.fa-3x
+					%h4 Boost Your Buildings Exposure
+					%p Increase the amount of website clicks, email leads and online applications an apartment receives.
 
-			.col-lg-6.col-md-6.col-xs-12
-				%div
-					%span.fa.fa-line-chart.fa-3x
-				%h4 Boost Your Buildings Exposure
-				%p Increase the amount of website clicks, email leads and online applications an apartment receives.
+			.row
+				.col-lg-6.col-md-6.col-xs-12
+					%div
+						%span.fa.fa-magic.fa-3x
+					%h4 Further Your Brand Awareness
+					%p 
+						Increase utilization of your most powerful yet most underutilized asset: 
+						%b Your Own Website.
 
-		.row
-			.col-lg-6.col-md-6.col-xs-12
-				%div
-					%span.fa.fa-magic.fa-3x
-				%h4 Further Your Brand Awareness
-				%p 
-					Increase utilization of your most powerful yet most underutilized asset: 
-					%b Your Own Website.
-
-			.col-lg-6.col-md-6.col-xs-12
-				%div
-					%span.fa.fa-clock-o.fa-3x
-				%h4 Zero Maintenance
-				%p 
-					No manual postings. No listings fatigue. No duplicate information. Simply choose a building to 
-					%b Feature 
-					or let us do it for you.
-
-
-
-
+				.col-lg-6.col-md-6.col-xs-12
+					%div
+						%span.fa.fa-clock-o.fa-3x
+					%h4 Zero Maintenance
+					%p 
+						No manual postings. No listings fatigue. No duplicate information. Simply choose a building to 
+						%b Feature 
+						or let us do it for you.

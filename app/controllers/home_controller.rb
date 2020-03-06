@@ -73,6 +73,11 @@ class HomeController < ApplicationController
   end
 
   def advertise_with_us
+    @self_service_btn_link =  unless current_user
+                                '/users/sign_up'
+                              else
+                                managertools_user_path(current_user, type: 'featured')
+                              end
     @search_bar_hidden = :hidden
   end
 
