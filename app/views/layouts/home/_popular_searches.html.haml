@@ -5,7 +5,7 @@
 			.col-xs-12.col-sm-6.col-md-6.col-lg-6
 				%ul.pop-list
 					- col1_popular_searches.each_pair do |key, values|
-						%b{style: 'color: #000;text-decoration: none;', id: key}=key
+						%b{style: 'text-decoration: none;', id: key}=key
 						.child-borough-container
 							- values.map do |val|
 								%li.parent{'data-parent' => key}= popular_search_link(key, val)
@@ -13,7 +13,7 @@
 			.col-xs-12.col-sm-6.col-md-6.col-lg-6
 				%ul.pop-list
 					- col2_popular_searches.each_pair do |key, values|
-						%b{style: 'color: #000;text-decoration: none;', id: key}=key
+						%b{style: 'text-decoration: none;', id: key}=key
 						.child-borough-container
 							- values.map do |val|
 								%li.parent{'data-parent' => key}= popular_search_link(key, val)
