@@ -7,11 +7,12 @@
       - else
         .bg-size-cover.h-lg{ style: "background-image: url(#{feature_comp_bg_img_url(@last_uploads)});" }
     
-    - if building.price.present? || building.bedroom_types?
-      - if @min_saved_amount.present?
-        .saving-badge.split-view-badge
-          %p Save
-          %p= "#{number_to_currency(@min_saved_amount, precision: 0)}+"
+    - if false
+      - if building.price.present? || building.bedroom_types?
+        - if @min_saved_amount.present?
+          .saving-badge.split-view-badge
+            %p Save
+            %p= "#{number_to_currency(@min_saved_amount, precision: 0)}+"
     
     - unless @similar_properties.present?
       .building-detail-card{id: "building_details#{building.id}"}

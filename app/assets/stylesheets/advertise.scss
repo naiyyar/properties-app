@@ -81,13 +81,13 @@
 
 @media screen and (max-width: 767px) {
 	.advertise-with-us {
-		padding: 0px 10px 40px 10px !important;
+		padding: 0px 6px 30px !important;
 		.top-section {
 			h2 {
-				font-size: 30px;
+				font-size: 27px;
 			}
 			p {
-				font-size: 21px;
+				font-size: 16px;
 			}
 		}
 		
@@ -96,14 +96,32 @@
 				font-size: 30px;
 				font-weight: bold;
 			}
+			
+			#why-wwt{
+				p{
+					margin-bottom: 20px;
+				}
+				.row{
+					margin-bottom: 0px;
+					.icon{
+						padding-top: 12px;
+					}
+					h4{
+						padding: 0px 0px;
+					}
+				}
+			}
+
 			h4 {
 				font-size: 21px;
 				font-weight: bold;
 				color: #2b78e4;
+				margin-top: 40px;
 			}
 			p, a {
 				font-size: 16px;
 			}
 		}	
 	}
+
 }

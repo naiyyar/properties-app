@@ -39,7 +39,7 @@
     padding: 30px 0px;
 	}
 
-	.location-and-press{
+	.location-and-press {
 		padding: 0px 60px;
 		h2{
 			margin-top: 0px;
@@ -57,8 +57,25 @@
 
 @media screen and (max-width: 767px) {
 	#about{
+		.about-content{
+			.row.pb {
+				padding: 30px 6px;
+				.header{
+					padding-top: 20px;
+				}
+			}
+
+			.header-row{
+				padding: 0px 6px 10px;
+			}
+		}
 		.about-content, .location-and-press{
 			padding: 0px 6px;
+		}
+		.location-and-press{
+			div:first-child{
+				padding-bottom: 40px;
+			}
 		}
 	}
 }
