@@ -23,14 +23,14 @@
 }
 #search-row .btn-dp-toggle button, #search-row .btn-dp-toggle.closed button{
     background-color: transparent;
-    color: #0075c9; 
-    border-color: #428bca;
+    color: #2b78e4; 
+    border-color: #2b78e4;
 }
 
 #search-row .btn-dp-toggle.open button, #search-row .btn-dp-toggle:hover button{
-    background-color: #3071a9;
+    background-color: #2b78e4;
     color: #fff; 
-    border-color: #285e8e;
+    border-color: #2b78e4;
 }
 
 .divider{
@@ -130,6 +130,7 @@ a.dt-card-link{
     padding: 0px 2px;
     z-index: 99;
     box-shadow: 1px 1px 15px rgba(0,0,0,0.4);
+    border-radius: 10px;
 }
 
 .saving-badge.show-view-badge{
@@ -490,33 +491,17 @@ form fieldset, .smart-form fieldset{
 }
 
 .comp.featured{
-    margin: 0 0 10px 0;
+    margin: 2px 0px 2px 2px;
     position: absolute;
     left: 0px;
     top: 0px;
-    background: #eab134;
+    background: #000;
     z-index: 999;
     color: #fff;
-    padding: .2em;
+    padding: .4em;
     font-size: 14px;
     -webkit-transform: translate3d(0, 0, 0);
 }
-/*.about_us{
-    margin-left: 0px !important;
-    background: transparent;
-    width:100%;
-    height:300px;
-    position: fixed;
-    bottom: 0px;
-    background-image: url('https://www.dropbox.com/s/plza9nkijo0666a/NY_bg.png?dl=1');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.about_us p{
-    font-size: 14px;
-    color: #333;
-} */
 
 /* custom */
 .no-pointer{
@@ -937,24 +922,24 @@ h3.unit_name_header{
 .btn-o.btn-green:active,
 .btn-o.btn-green.active,
 .open > .dropdown-toggle.btn-o.btn-green {
-    background-color: #0075c9;
+    background-color: #2b78e4;
     color: #fff;
 }
 .btn-blue {
-    background-color: #0075c9;
+    background-color: #2b78e4;
     color: #fff;
 }
 .btn-o.btn-blue {
     background-color: transparent;
-    color: #0075c9;
-    border-color: #0075c9;
+    color: #2b78e4;
+    border-color: #2b78e4;
 }
 .no-touch .btn-blue:hover,
 .btn-blue:focus,
 .btn-blue:active,
 .btn-blue.active,
 .open > .dropdown-toggle.btn-blue {
-    background-color: #005999;
+    background-color: #2b78e4;
     color: #fff !important;
 }
 .no-touch .btn-o.btn-blue:hover,
@@ -962,7 +947,7 @@ h3.unit_name_header{
 .btn-o.btn-blue:active,
 .btn-o.btn-blue.active,
 .open > .dropdown-toggle.btn-o.btn-blue {
-    background-color: #005999;
+    background-color: #2b78e4;
     color: #fff!important;
 }
 .btn-magenta {
@@ -1132,7 +1117,8 @@ h3.unit_name_header{
     z-index: 1040;
     z-index: 1000;
     position: relative;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+    /*box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);*/
+    border-bottom: 1px solid #ddd;
     padding: 0px 69px 0px;
 }
 .logoContainer{
@@ -1259,18 +1245,14 @@ a.userHandler {
     background-color: transparent;
 }
 .neighborhoods-dropdown .dropdown-menu{
-    min-width: 840px;
+    min-width: 74em;
     padding: 6px;
-    left: -100px;
+    left: -220px;
 }
 .neighborhoods-dropdown .dropdown-menu .row .col-lg-3{
     padding-right: 0px !important;
     width: 22% !important;
 
-}
-.neighborhoods-dropdown .dropdown-menu h2{
-    font-size: 13px;
-    font-weight: bold;
 }
 #wrapper .content.homesearch, 
 #wrapper .content.buildingsshow, 
@@ -1285,10 +1267,11 @@ a.userHandler {
     position: absolute;
     top: 59px;
     width: 100%;
-    height: 54px;
+    height: 52px;
     /*background-color: #fff;*/
     left: 0px;
     border-bottom: 1px solid #ddd;
+    padding: 0px 4px;
 }
 .searchContainer{
     position: relative;
@@ -1598,7 +1581,7 @@ a.userHandler .counter {
 .leftNav ul li a {
     display: block;
     font-size: 16px;
-    color: #adc8c7;
+    color: #fff;
     width: 0px;
     height: 60px;
     overflow: hidden;
@@ -1984,7 +1967,7 @@ a.userHandler .counter {
 #wrapper {
     left: 70px;
     top: 60px;
-    margin: 53px 0 0 0px;
+    margin: 51px 0 0 0px;
     overflow-y: scroll;
     /*overflow-x hidden : Getting grey/blank map issue on mobile devices ios13 when moving or zooming*/
     /*overflow-x: hidden;*/
@@ -2015,6 +1998,9 @@ a.userHandler .counter {
 }
 #mapView.min .mapPlaceholder, #mapViewSearch.min .mapPlaceholder  {
     display: none;
+}
+.searched-properties#content{
+    border-top: 0px solid #e8e8e8;
 }
 .mapPlaceholder span {
     font-size: 16px;

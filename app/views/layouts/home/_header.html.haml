@@ -22,9 +22,6 @@
         %a{href: '/blog'} Blog
       %li.no-hover-underline.parent
         %a{href: contribute_buildings_path} Write Review
-
-  - if controller_name == 'home' and action_name == 'index'
-    %div{class: "pull-right btn-contribute btn-contribute-home #{user_signed_in? ? 'hidden-xs hidden-sm' : ''}"}= link_to '<span class="fa fa-plus"></span>'.html_safe, contribute_buildings_path, class: 'btn btn-black btn-o visible-xs btn-round'
   
   / for large devices
   .home-nav
