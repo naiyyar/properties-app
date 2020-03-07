@@ -372,22 +372,36 @@ input[type="radio"], input[type="checkbox"] {
 .img-thumbnail { padding: 1px; height: 100%; width: 100%;}
 
 .carousel-caption {
-    position: relative;
-    right: 0%;
-    left: 0%;
-    margin-right: 20%;
-    margin-left: 20%;
-    z-index: 9999;
-    text-align: center;
-    margin-top: 60px;
-    text-shadow: none;
-  }
+  position: relative;
+  right: 0%;
+  left: 0%;
+  margin-right: 20%;
+  margin-left: 20%;
+  z-index: 9999;
+  text-align: center;
+  margin-top: 60px;
+  text-shadow: none;
+}
 
+.pagination > .active > a, 
+.pagination > .active > a:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span, 
+.pagination > .active > span:hover, 
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  background-color: #2c78e4;
+  border-color: #2c78e4;
+  cursor: default;
+}
+
+/* Media Query */
 
 @media screen and (max-width: 767px) {
-    textarea.form-control{
-        height: 100px;
-    }
+  textarea.form-control{
+    height: 100px;
+  }
 
   .carousel-caption {
     position: relative;

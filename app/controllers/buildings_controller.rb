@@ -1,5 +1,6 @@
 class BuildingsController < ApplicationController 
   load_and_authorize_resource
+  AWS_S3_URL = 'https://s3-us-west-2.amazonaws.com'
   before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
   before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite]
   before_action :save_as_favourite,   only: :show
@@ -7,6 +8,7 @@ class BuildingsController < ApplicationController
   before_action :broker_fee_percent,  only: :show
   before_action :clear_cache,         only: [:favorite, :unfavorite]
   before_action :get_building,        only: :create
+  before_action :find_buildings,      only: [:contribute, :edit]
   after_action :get_neighborhood,     only: [:create, :update]
 
   include BuildingsConcern # create, update
@@ -25,9 +27,9 @@ class BuildingsController < ApplicationController
       format.js
     end
   end
-
+  
   def sitemap
-    redirect_to "https://s3-us-west-2.amazonaws.com/#{ENV['AWS_S3_BUCKET']}/sitemaps/sitemap1.xml"
+    redirect_to "#{AWS_S3_URL}/#{ENV['AWS_S3_BUCKET']}/sitemaps/sitemap1.xml"
   end
 
   def favorite
@@ -65,15 +67,15 @@ class BuildingsController < ApplicationController
 
   def contribute
     session[:form_data] = nil if session[:form_data].present?
+    @search_type        = 'building'
     if params[:management].present?
-      @buildings    = Building.where('management_company_id is null')
+      @buildings    = @buildings.where('management_company_id is null')
       @search_type  = 'companies'
-    else
-      @buildings    = Building.all
-      @search_type  = 'building'
     end
     @feature_comp_search_type = params[:featured_on].present? ? 'feature_comp_on' : 'feature_comp_as'
-    @buildings                = @buildings.text_search(params[:term]).reorder('building_street_address ASC').limit(10).includes(:units, :management_company)
+    @buildings                = @buildings.text_search(params[:term])
+                                          .reorder('building_street_address ASC')
+                                          .limit(10).includes(:units, :management_company)
     @building                 = @buildings.where(id: params[:building_id]).first  if params[:building_id].present?
     @search_bar_hidden        = :hidden
   end
@@ -96,16 +98,15 @@ class BuildingsController < ApplicationController
   end
 
   def edit
-    buildings = Building.all
-    @neighborhood_options = buildings.select('neighborhood').distinct
-                                     .where.not(neighborhood: [nil, ''])
-                                     .order(neighborhood: :asc).pluck(:neighborhood)
-    @neighborhood2 = buildings.select('neighborhoods_parent').distinct
-                              .where.not(neighborhoods_parent: [nil, ''])
-                              .order(neighborhoods_parent: :asc).pluck(:neighborhoods_parent)
-    @neighborhood3 = buildings.select('neighborhood3').distinct
-                              .where.not(neighborhood3: [nil, ''])
-                              .order(neighborhood3: :asc).pluck(:neighborhood3)
+    @neighborhood_options = @buildings.select('neighborhood').distinct
+                                      .where.not(neighborhood: [nil, ''])
+                                      .order(neighborhood: :asc).pluck(:neighborhood)
+    @neighborhood2        = @buildings.select('neighborhoods_parent').distinct
+                                      .where.not(neighborhoods_parent: [nil, ''])
+                                      .order(neighborhoods_parent: :asc).pluck(:neighborhoods_parent)
+    @neighborhood3        = @buildings.select('neighborhood3').distinct
+                                      .where.not(neighborhood3: [nil, ''])
+                                      .order(neighborhood3: :asc).pluck(:neighborhood3)
   end
 
   def update
@@ -163,6 +164,10 @@ class BuildingsController < ApplicationController
   def broker_fee_percent
     broker_percent = BrokerFeePercent.first.percent_amount
     @saved_amounts = @building.saved_amount(RentMedian.all, broker_percent)
+  end
+
+  def find_buildings
+    @buildings = Building.all
   end
 
   def get_building

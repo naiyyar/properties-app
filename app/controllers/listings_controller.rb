@@ -53,17 +53,17 @@ class ListingsController < ApplicationController
     @listings = Listing.where('date_active >= ? AND date_active <= ?', @from_date, @to_date)
     file_name = "Listings_#{params[:date_from]}_to_#{params[:date_to]}.#{params[:format]}"
     case params[:format]
-      when "xls" then render xls: 'export'
-      when "xlsx" then render xlsx: 'export', filename: file_name
-      when "csv" then render csv: 'export'
-      else render action: "index"
+      when 'xls'  then render xls:  'export'
+      when 'xlsx' then render xlsx: 'export', filename: file_name
+      when 'csv'  then render csv:  'export'
+      else render action: 'index'
     end
   end
 
   def show_more
     @building = Building.find(params[:building_id])
     @rentals  = params[:listing_type].present? ? 'active' : 'past'
-    @listings = @building.active_listings(params[:filter_params], params[:listing_type])
+    @listings = @building.active_listings(params[:filter_params], @rentals)
     respond_to do |format|
       format.html
       format.js
