@@ -130,7 +130,7 @@ a.dt-card-link{
     padding: 0px 2px;
     z-index: 99;
     box-shadow: 1px 1px 15px rgba(0,0,0,0.4);
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .saving-badge.show-view-badge{
@@ -1622,7 +1622,7 @@ a.userHandler .counter {
     color: #adc8c7;
 }
 .expanded .leftNav > ul > li.active > a {
-    background-color: #067670;
+    background-color: #000;
     color: #fff;
 }
 .leftNav ul li a span.navIcon {
@@ -1633,7 +1633,7 @@ a.userHandler .counter {
     margin-right: 10px;
 }
 .leftNav ul li a span.navLabel {
-    font-size: 12px;
+    font-size: 16px;
     bottom: 0px;
     left: -81px;
 }
@@ -1788,15 +1788,15 @@ a.userHandler .counter {
     margin-top: 4px;
 }
 .no-touch .leftNav ul li:hover ul li a, .leftNav ul li.onTap ul li a {
-    color: #96adac;
-    background-color: #132120;
+    color: #fff;
+    background-color: #2a2a2a;
     width: 100%;
     font-size: 12px;
     height: auto;
 }
 .no-touch .leftNav ul li ul li a:hover {
     color: #fff;
-    background-color: #05635e;
+    background-color: #2a2a2a;
     padding-left: 30px;
     text-decoration: none;
 }
@@ -2265,7 +2265,7 @@ a.btn.dropdown-btn.btn-gray {
     margin: 0 auto;
 }
 .stLabel {
-    background-color: #0075c9;
+    background-color: #2b78e4;
     font-size: 16px;
     line-height: 12px;
     color: #fff;
@@ -2284,11 +2284,11 @@ a.btn.dropdown-btn.btn-gray {
     position: absolute;
     width: 0;
     height: 0;
-    border-top-color: #0075c9;
+    border-top-color: #2b78e4;
 }
 
 .ui-slider .ui-slider-range {
-    background-color: #0075c9 !important;
+    background-color: #2b78e4 !important;
 }
 
 .ui-slider-horizontal .ui-slider-handle{
@@ -4734,17 +4734,19 @@ select.custom-arrow {
 
 @media screen and (max-width: 767px) {
     #header-mob {
-        background-color: #0075c9;
+        background-color: #2b78e4;
         width: 100%;
         padding: 7px 1px 7px 14px;
         z-index: 1040;
-        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+        /*box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);*/
+        border-bottom: 1px solid #ddd;
     }
 
     #header-mob a.navHandler{
         padding: 6px 0px 0px;
         height: 0px;
         width: 0px;
+        color: #fff;
     }
 
     #header-mob .row .col-xs-4 {
@@ -4754,7 +4756,7 @@ select.custom-arrow {
     #header-mob .col-xs-6.h-filter{
         padding-right: 0px;
         padding-left: 0px;
-        background: #0075c8;
+        background: #2b78e4;
     }
     #header-mob .col-xs-6.hood{
         width: 46%;
@@ -4762,6 +4764,11 @@ select.custom-arrow {
     #header-mob .col-xs-6.h-filter{
         width: 45%;
     }
+
+    #header-mob .col-xs-6.hood button, #header-mob .col-xs-6.h-filter button{
+        border: 1px solid #fff;
+    }
+    
     #header-mob .row .col-xs-1{
         padding-left: 0px;
         width: 6.333333%;

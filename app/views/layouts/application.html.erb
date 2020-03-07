@@ -69,7 +69,6 @@
       if($('#buildings-search-txt').length > 0){
         $(document).on('keyup', '#buildings-search-txt', function(e) {
           q = $(this).val();
-
           if (q == '') {
             $(".ui-autocomplete").hide();
             $(".no-match-link").addClass('hidden');

@@ -1,5 +1,6 @@
 $(document).ready(function(){
     // Exapnd left side navigation
+    var windowWidth = $(window).width();
     var isDevice = true;
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
         $('body').addClass('no-touch');
@@ -7,7 +8,8 @@ $(document).ready(function(){
     }
 
     var navExpanded = false;
-    $('.navHandler, .closeLeftSide, .home-navHandler').click(function() {
+    $('.navHandler, .closeLeftSide, .home-navHandler').click(function(e) {
+        e.preventDefault()
         if(!navExpanded) {
             $('.logo').addClass('expanded');
             $('#leftSide').addClass('expanded');
@@ -19,7 +21,6 @@ $(document).ready(function(){
             if(windowWidth > 767) {
                 $('.full').addClass('m-full');
             }
-            windowResizeHandler();
             navExpanded = true;
         } else {
             $('.logo').removeClass('expanded');
@@ -56,10 +57,12 @@ $(document).ready(function(){
         if(target_class !== "fa fa-bars" && target_class != 'ssm-toggle-nav1' && target_class != 'navLabel') {
             console.log(2)
             if(!container.is(e.target) && container.has(e.target).length === 0) {
-                console.log(3)
                 $('#leftSide').removeClass('expanded');
                 $('.logo').removeClass('expanded');
             }
         }
     });
+    $('.auth').on('click', function(){
+        $('#leftSide').removeClass('expanded');
+    })
 });

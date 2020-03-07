@@ -1,9 +1,5 @@
 #leftSide{class: "#{contribute_left_side(params)} #{controller_name == 'home' and action_name == 'index' ? 'home' : ''}"}
   %nav.leftNav.scrollable
-    .logo.search1.hidden
-      / %a{href: '/'}= image_tag 'logo1.png', alt: 'logo'
-      .clearfix
-
     %ul
       %li.logo.visible-xs
         %a{href: '/'}= image_tag 'logo1.png', alt: 'logo'
@@ -11,40 +7,32 @@
       - if current_user.blank?
         %li
           %a{href: '/about'}
-            %span.navIcon.fa.fa-info-circle
             %span.navLabel About us
         %li
           %a{href: advertise_with_us_path}
-            %span.navIcon.fa.fa-info-circle
             %span.navLabel Advertise
         %li
           %a{href: '/blog'}
-            %span.navIcon.fa.fa-hashtag
             %span.navLabel Blog
         %li.btn_contribute
           %a{href: contribute_buildings_path}
-            %span.navIcon.fa.fa-plus-circle
             %span.navLabel Write a review
 
         - if controller_name == 'registrations'
           %li
-            %a.left-side-zindex{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
-              %span.navIcon.fa.fa-sign-in
+            %a.left-side-zindex.auth{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
               %span.navLabel Sign In
         
         - elsif controller_name == 'sessions'
           %li
-            %a.left-side-zindex{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
-              %span.navIcon.fa.fa-user
+            %a.left-side-zindex.auth{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
               %span.navLabel Sign Up
         - else
           %li
-            %a.left-side-zindex{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
-              %span.navIcon.fa.fa-sign-in
+            %a.left-side-zindex.auth{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
               %span.navLabel Sign In
           %li
-            %a.left-side-zindex{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
-              %span.navIcon.fa.fa-user
+            %a.left-side-zindex.auth{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
               %span.navLabel Sign Up
       
       - elsif current_user.present?
@@ -65,7 +53,7 @@
             %span.navLabel Settings
 
         %li.btn_contribute
-          %a{href: destroy_user_session_path, method: :delete}
+          %a{href: destroy_user_session_path, 'data-method' => 'delete' }
             %span.navLabel Sign Out
 
         - if current_user.admin?
