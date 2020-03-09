@@ -9,6 +9,10 @@ module ApplicationHelper
     end
   end
 
+  def home_page?
+    controller_name == 'home' && action_name == 'index'
+  end
+
   def current_user_profile_image
     @current_user_profile_image ||= current_user.profile_image(session[:provider])
   rescue

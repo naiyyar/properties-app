@@ -1,8 +1,8 @@
-#leftSide{class: "#{contribute_left_side(params)} #{controller_name == 'home' and action_name == 'index' ? 'home' : ''}"}
+#leftSide{class: "#{contribute_left_side(params)} #{home_page? ? 'home' : ''}"}
   %nav.leftNav.scrollable
     %ul
-      %li.logo.visible-xs
-        %a{href: '/'}= image_tag 'logo1.png', alt: 'logo'
+      %li.logo.visible-xs.text-center
+        %a{href: '/'}= image_tag 'logo_white.png', alt: 'logo'
       
       - if current_user.blank?
         %li

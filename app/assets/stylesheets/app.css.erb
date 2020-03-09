@@ -490,7 +490,7 @@ form fieldset, .smart-form fieldset{
     z-index: 999;
     color: #fff;
     padding: .4em;
-    font-size: 14px;
+    font-size: 13px;
     -webkit-transform: translate3d(0, 0, 0);
 }
 
@@ -1206,10 +1206,11 @@ a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     text-align: center;
     font-size: 16px;
     height: auto;
-    color: #fff;
+    color: #000;
     display: none;
     text-decoration: none;
     font-weight: bold;
+    background: #fff;
 }
 
 a.userHandler {
@@ -1278,14 +1279,13 @@ a.userHandler {
     width: 100%;
 }
 .search input {
-    background-color: #e8e8e8;
+    background-color: #fff;
     color: #3a3a3a;
-    border: 0 none;
     font-size: 13px;
     margin: 6px 0 0 0px;
     -webkit-appearance: none;
     padding: 11px 9px 11px 26px;
-    border-bottom: 1px solid #ebebeb;
+    border: 1px solid #ddd;
     width: 100%;
 }
 
@@ -1327,6 +1327,7 @@ a.userHandler {
     left: 8px;
     font-size: 18px;
     z-index: 999;
+    color: #5b78e4;
 }
 .home .icon-search-shared{
     left: 12px !important;
@@ -1527,7 +1528,7 @@ a.userHandler .counter {
     left: 12px;
 }
 #leftSide {
-    background-color: rgba(33, 33, 33, 0.95);
+    background-color: rgb(44, 120, 228);
     position: absolute;
     top: 59px;
     left: -50px;
@@ -4865,7 +4866,7 @@ select.custom-arrow {
     }
 
     .expanded .leftNav ul li a {
-        padding: 10px 10px;
+        padding: 10px 0px 10px 10px;
     }
     
     .h-text {
@@ -5049,7 +5050,7 @@ select.custom-arrow {
         cursor: pointer !important;
     }
     .logo a > img, .logo.expanded a > img{
-        width: 100%;
+        width: 51%;
     }
     li.logo{
         z-index: 999;
@@ -5094,7 +5095,7 @@ select.custom-arrow {
         display: block;
     }
     #leftSide {
-        top: 49px;
+        top: 53px;
         visibility: hidden;
         opacity: 0;
         margin-left: -87%;
@@ -5108,7 +5109,7 @@ select.custom-arrow {
         top: 60px !important;
     }
     #leftSide.expanded {
-        width: 53%;
+        width: 87%;
         opacity: 1;
         visibility: visible;
         margin-left: 0;
@@ -5126,7 +5127,7 @@ select.custom-arrow {
         z-index: 100;
     }
     .expanded .leftNav ul li {
-        width: 200px;
+        width: 100%;
     }
     .expanded .leftNav ul li a {
         width: 100%;
@@ -5335,9 +5336,14 @@ select.custom-arrow {
     }
     a.home-navHandler{
         position: absolute;
-        z-index: 10000;
-        top: 10px;
+        z-index: 100000;
+        top: 11px;
         left: 0;
+        bottom: 0px
+    }
+
+    a.home-navHadler span{
+        transform: translate(4%, 22%);
     }
     .btn-contribute-home{
         position: absolute;
@@ -5664,7 +5670,7 @@ select.custom-arrow {
     a.home-navHandler{
         position: absolute;
         z-index: 9999;
-        top: 10px;
+        top: 6px;
         left: 0;
     }
     .btn-contribute-home{

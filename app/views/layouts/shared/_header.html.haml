@@ -5,7 +5,7 @@
         %span.fa.fa-bars
     %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
       .split-view-seach{class: "#{search_bar(:hidden)}"}
-        %span.fa.fa-times-circle.fa-2x.clearSearchText{style: "right: #{clear_link_from_right}px;"}
+        %span.fa.fa-times.fa-2x.clearSearchText{style: "right: #{clear_link_from_right}px;"}
         = render partial: 'home/search_form' if browser.device.mobile?
    
     %div{class: "col-xs-#{header_right_col}"}
@@ -27,10 +27,10 @@
 
   .visible-xs{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;'}
     - if action_name == 'search' || @show_map_btn
-      %a.mapHandler.btn.btn-green.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: none;' : ''}
+      %a.mapHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: none;' : ''}
         %span.fa.fa-map-o
         Map
-      %a.listHandler.btn.btn-green.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: block;' : ''}
+      %a.listHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: block;' : ''}
         %span.fa.fa-list
         List
 
@@ -38,7 +38,8 @@
   #header
     .logoContainer
       .logo
-        %a{href: '/'}= image_tag 'logo2.png', alt: 'logo'
+        %a{href: '/'}= image_tag 'logo4.png', alt: 'logo'
+      
       - if !browser.device.mobile?
         #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
 
