@@ -1,4 +1,13 @@
 module HomeHelper
+
+	def spv_count_header_style
+		if browser.device.mobile? 
+			'color: #0075c8; font-size: 21px;'
+		else
+			'color: #000; font-size: 21px;'
+		end
+	end
+	
 	def lower_manhattan_sub_borough
 		@lower_manhattan_sub_borough ||= [
 			'Battery Park City',

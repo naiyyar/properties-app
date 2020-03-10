@@ -62,26 +62,12 @@
                 .form-group
                   %label Rent Stabilize
                   = f.select :rent_stabilize, options_for_select([['Please select', ''], ['Yes', 'true'], ['No', 'false']], f.object.rent_stabilize),{},{class: 'form-control'}
-            / .row
-            /   .col-xs-6.col-sm-6.col-md-6.col-lg-6
-            /     .form-group
-            /       %label Rent Stabilize
-            /       %br
-            /       %label
-            /         .btn-group{'data-toggle'=>"buttons"}
-            /           %label.btn.btn-default
-            /             = f.radio_button :rent_stabilize, 'true'
-            /             Yes
-
-            /           %label.btn.btn-default
-            /             = f.radio_button :rent_stabilize, 'false'
-            /             No
 
             .form-group
               .col-sm-12
                 .pull-right
-                  = link_to 'Cancel', listings_path, class: 'btn btn-default'
-                  -if @listing.new_record?
+                  = link_to 'Cancel', 'javascript:;', class: 'btn btn-default cancel-form'
+                  - if @listing.new_record?
                     = f.submit 'Save', class: 'btn btn-primary disabled'
                   - else
                     = f.submit 'Update', class: 'btn btn-primary'
@@ -96,4 +82,9 @@
     if($(this).val() == ''){
       $('#new_listing input[type="submit"]').addClass('disabled');
     }
+  });
+
+  $('.cancel-form').on('click', function(e){
+    e.preventDefault();
+    window.location.href = '/listings';
   })

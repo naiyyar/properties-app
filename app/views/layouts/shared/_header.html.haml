@@ -5,7 +5,7 @@
         %span.fa.fa-bars
     %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
       .split-view-seach{class: "#{search_bar(:hidden)}"}
-        %span.fa.fa-times.fa-2x.clearSearchText{style: "right: #{clear_link_from_right}px;"}
+        %span.fa.fa-times.clearSearchText{style: "right: #{clear_link_from_right}px;"}
         = render partial: 'home/search_form' if browser.device.mobile?
    
     %div{class: "col-xs-#{header_right_col}"}

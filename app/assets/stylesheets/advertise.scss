@@ -48,12 +48,13 @@
 		}
 
 		.who-www{
-			list-style: none;
 			margin: 0px;
     	padding: 0px;
-			li{
-				font-size: 16px;
+			section {
 				padding: 4px;
+				b{
+					font-size: 16px;
+				}
 			}
 		}
 
