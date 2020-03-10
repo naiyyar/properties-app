@@ -39,7 +39,7 @@ app.apartments.prototype = {
         }
         $('#search_term').removeClass('loader');
         
-        //Hightliting searched phrase
+        // Hightliting searched phrase
         search_phrase = item.search_phrase.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
         var regexp = new RegExp('(' + search_phrase + ')', 'gi'),
 	        label = search_term.replace(regexp, '<b>$1</b>');
@@ -87,17 +87,16 @@ app.apartments.prototype = {
     $('#apt-search-form').append(elemToAppend);
 
     if(window.innerWidth <= 414 && $('.split-view-seach').length > 0){
-    	//making full width when on mobile view
+    	// making full width when on mobile view
     	$('.ui-autocomplete').css('width', '100%');
     	$('.ui-autocomplete').css('left', '0px');
     	$('.no-match-link').css('top',ul_height+'px');
     }else{
-    	//setting container width
+    	// setting container width
 	    var search_input_width = this._input.outerWidth();
     	$('.ui-autocomplete').css('width', search_input_width+'px');
 	    $('.no-match-link').css('top',(ul_height+3)+'px');
     }
-    //$('.ui-autocomplete').addClass($('#current_view').val());
     $('.no-match-link').css('width', $('.ui-autocomplete').width()+'px');
     $('#search_term').removeClass('border-bottom-lr-radius');
   },
@@ -106,21 +105,21 @@ app.apartments.prototype = {
     if(ui.item != undefined){
       this._input.val(ui.item.search_term);
       $('.no-match-link').addClass('hidden');
-      //Submitting search form
+      // Submitting search form
       if(e.keyCode == 13){
         window.location = ui.item.url;
       }
     }
-    //hiding autocomplete search results
+    // hiding autocomplete search results
     if($("ul.ui-autocomplete").is(":visible")) {
       $("ul.ui-autocomplete").hide();
-      $('.home #search_term').addClass('border-bottom-lr-radius');
+      $('#search_term').addClass('border-bottom-lr-radius');
     }
     return false;
   },
   
   _close: function(){
-    //Hiding no match found - add new building link
+    // Hiding no match found - add new building link
     if(!$("ul.ui-autocomplete").is(":visible")) {
       $("ul.ui-autocomplete").show();
     }

@@ -105,8 +105,8 @@
     })
 
     $(document).on('keyup', '#search_term', function(e){
-        //e.keyCode != 40 || e.keyCode != 38 for key up / down
-        //home page search
+        // e.keyCode != 40 || e.keyCode != 38 for key up / down
+        // home page search
         if((e.keyCode != 40 && e.keyCode != 38)){
             if($('#search_term').val() == ''){
                 hideAutoSearchList();
@@ -115,25 +115,26 @@
     });
 
     function hideAutoSearchList(){
-        //#setInterval because no match link was not working: hiding too early
+        // setInterval because no match link was not working: hiding too early
         setTimeout(function(){
             if($("ul.ui-autocomplete").is(":visible")) {
                 $("ul.ui-autocomplete").hide();
             }
             $('.no-match-link').addClass('hidden');
-            $('.home #search_term').addClass('border-bottom-lr-radius');
+            $('#search_term').addClass('border-bottom-lr-radius');
         }, 200);
     }
 
-    //Searching building on neighborhood click
+    // Searching building on neighborhood click
     $('.borough-neighborhood').click(function(e){
         e.preventDefault();
         $('#neighborhoods').val($(this).text());
         var nbh = $(this).data('nhname');
+        var search_btn = $('.search-btn-submit');
         $('#apt-search-txt').val(nbh);
-        $('.search-btn-submit').click();
-        if($('.search-btn-submit').length > 0){
-            $('.search-btn-submit').click();
+        search_btn.click();
+        if(search_btn.length > 0) {
+            search_btn.click();
         }
     })
 
@@ -151,7 +152,7 @@
 
     //To changes the size of search field on mobile device orientation changed
     window.addEventListener('resize', function() {
-        var homeSearchContainer = $('.home-search-form  .easy-autocomplete');
+        var homeSearchContainer  = $('.home-search-form  .easy-autocomplete');
         var splitSearchContainer = $('.split-view-seach  .easy-autocomplete');
         setTimeout(function(){
             if(window.innerWidth > 500 && window.innerWidth <= 667){
