@@ -27,7 +27,7 @@ class BillingService
 	end
 
 	def get_charge charge_id
-		stripe_charge.retrieve(charge_id)
+		stripe_charge.retrieve(charge_id) rescue nil
 	end
 
 	def get_customer_id current_user
