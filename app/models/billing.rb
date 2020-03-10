@@ -49,7 +49,6 @@ class Billing < ApplicationRecord
 				if save
 					options.merge!(billing: self)
 					billing_service.create_charge!(options)
-					BillingMailer.send_payment_receipt(billing: self).deliver
 				end
 			rescue Stripe::CardError => e
 	      errors.add :credit_card, e.message
