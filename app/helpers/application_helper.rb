@@ -71,7 +71,7 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-   def show_full_width_footer?
+  def show_full_width_footer?
     @half_footer ? false : true
   end
 

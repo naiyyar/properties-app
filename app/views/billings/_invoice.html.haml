@@ -1,6 +1,6 @@
 .pdf-header
 	- if @view != 'mail'
-		= image_tag wicked_pdf_asset_base64('logo2.png'), width: '250'
+		= image_tag wicked_pdf_asset_base64('logo4.png'), width: '200'
 	- else
 		= image_tag 'https://www.dropbox.com/s/8q5a4uk24l7r5tc/logo2.png?dl=1', width: '250'
 
@@ -20,12 +20,10 @@
 				%td.text-left= number_to_currency(amount = @billing.amount, precision: 2)
 				%td.text-left=@billing.created_at&.strftime("%b %-d, %Y")
 				%td.text-left
-					/ https://stripe-images.s3.amazonaws.com/emails/receipt_assets/card/visa-dark@2x.png
 					- if @billing.payment_detail?
 						="#{@billing.brand} - #{@billing.last4}"
 					- else
 						="#{@card.brand} - #{@card.last4}" if @card.present?
-
 
 		.summary-section
 			%p.text-left SUMMARY

@@ -47,8 +47,10 @@
       </div>
     <%else%>
       <%= render partial: 'layouts/home/header' if hide_search_bar? %>
-      <%= yield %>
-      <%= render 'layouts/home/footer' if show_full_width_footer? && about_page? %>
+      <div class="content-wrapper <%= controller_name + action_name %>">
+        <%= yield %>
+      </div>
+      <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
     <%end%>
     <div id="remote-container"></div>
     <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? && params[:searched_by].present? %>
