@@ -13,6 +13,22 @@ module ApplicationHelper
     controller_name == 'home' && action_name == 'index'
   end
 
+  def about_page?
+    action_name == 'about'
+  end
+  
+  def addvertise_page?
+    action_name == 'advertise_with_us'
+  end
+  
+  def contribute_page?
+    action_name == 'contribute'
+  end
+
+  def hide_search_bar?
+    home_page? || about_page? || addvertise_page? || contribute_page?
+  end
+
   def current_user_profile_image
     @current_user_profile_image ||= current_user.profile_image(session[:provider])
   rescue

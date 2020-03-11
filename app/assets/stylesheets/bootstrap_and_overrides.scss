@@ -383,19 +383,6 @@ input[type="radio"], input[type="checkbox"] {
   text-shadow: none;
 }
 
-.pagination > .active > a, 
-.pagination > .active > a:hover, 
-.pagination > .active > a:focus, 
-.pagination > .active > span, 
-.pagination > .active > span:hover, 
-.pagination > .active > span:focus {
-  z-index: 3;
-  color: #fff;
-  background-color: #2c78e4;
-  border-color: #2c78e4;
-  cursor: default;
-}
-
 /* Media Query */
 
 @media screen and (max-width: 767px) {

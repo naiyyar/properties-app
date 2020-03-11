@@ -11,11 +11,11 @@
         <%= @tab_title_text = 'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC | Transparentcity' %>
       <% end %>
     </title>
-    <meta name="description" content="<%=@meta_desc%>">
-    <meta property="og:url" content="https://www.transparentcity.co" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="<%=@tab_title_text%>" />
-    <meta property="og:site_name" content="transparentcity.co" />
+    <meta name="description"        content="<%=@meta_desc%>">
+    <meta property="og:url"         content="https://www.transparentcity.co" />
+    <meta property="og:type"        content="article" />
+    <meta property="og:title"       content="<%=@tab_title_text%>" />
+    <meta property="og:site_name"   content="transparentcity.co" />
     <meta property="og:description" content="<%=@meta_desc%>" />
     <% if action_name == 'managertools' %>
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.1.2/css/paymentfont.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
@@ -32,26 +32,23 @@
   <body class="notransition no-hidden" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
-    <%#= render partial: 'layouts/home/header' %>
-    <% unless controller_name == 'home' && action_name == 'index'%>
-      <!-- <div id="header-shared"> -->
+    <% unless hide_search_bar? %>
       <%= render partial: 'layouts/shared/header' %>
-      <!-- </div> -->
       <%= render partial: 'layouts/shared/filters' %>
       <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
       <div class="closeLeftSide"></div>
       <div id="wrapper" class="<%=contribute_wrapper(params)%> <%=browser.device.mobile? ? 'screen-sm' : 'screen-lg'%> <%= @search_bar_hidden == :hidden ? 'mt0' : ''%>">
         <%= render partial: 'layouts/shared/filter_buttons' %>
         <div class="content <%= controller_name + action_name %>">
-          <%#= yield :neighborhoods_modal if content_for? :neighborhoods_modal %>
           <%= render 'layouts/shared/pop_neighborhoods_list' %>
           <%= yield %>
         </div>
-        <%= render 'layouts/home/footer' if show_full_width_footer? && action_name != 'contribute' %>
+        <%= render 'layouts/home/footer' if show_full_width_footer? && contribute_page? %>
       </div>
     <%else%>
+      <%= render partial: 'layouts/home/header' if hide_search_bar? %>
       <%= yield %>
-      <%= render 'layouts/home/footer' if show_full_width_footer? && action_name != 'about' %>
+      <%= render 'layouts/home/footer' if show_full_width_footer? && about_page? %>
     <%end%>
     <div id="remote-container"></div>
     <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? && params[:searched_by].present? %>
@@ -64,8 +61,8 @@
     <%= javascript_include_tag 'zapp' %>
 
     <script type="text/javascript">
-      $(function(){new app.apartments;})
-      //hiding autocomplete search results when no input given
+      $(function(){ new app.apartments; })
+      // hiding autocomplete search results when no input given
       if($('#buildings-search-txt').length > 0){
         $(document).on('keyup', '#buildings-search-txt', function(e) {
           q = $(this).val();

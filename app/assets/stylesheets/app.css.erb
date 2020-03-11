@@ -3526,14 +3526,15 @@ h1.pageTitle {
     background-color: #fff;
     border: 1px solid #fff;
     margin-left: 0;
+    font-size: 13px !important;
 }
 .no-touch .pagination > li > a:hover,
 .no-touch .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-    color: #333;
-    background-color: #e8e8e8;
-    border-color: #e8e8e8;
+    color: #fff;
+    background-color: #2c78e4;
+    border-color: #2c78e4;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -3544,8 +3545,8 @@ h1.pageTitle {
     z-index: 2;
     color: #fff;
     cursor: default;
-    background-color: #0eaaa6;
-    border-color: #0eaaa6;
+    background-color: #2c78e4 !important;
+    border-color: #2c78e4 !important;
 }
 .labelsContainer {
     margin-bottom: 20px;
@@ -4582,6 +4583,10 @@ select.custom-arrow {
     margin: 0 auto;
 }
 
+.contribute {
+    padding: 0px 20px;
+}
+
 /* Media Queries */
 @media screen and (max-width: 480px) {
     .aggregate-ratings ul{
@@ -4687,7 +4692,7 @@ select.custom-arrow {
     #header-mob {
         background-color: #2b78e4;
         width: 100%;
-        padding: 7px 1px 7px 14px;
+        padding: 10px 1px 10px 14px;
         z-index: 1040;
         border-bottom: 1px solid #ddd;
     }
@@ -5125,7 +5130,7 @@ select.custom-arrow {
         display: block;
     }
     #leftSide {
-        top: 53px;
+        top: 59px;
         visibility: hidden;
         opacity: 0;
         margin-left: -87%;
@@ -5145,10 +5150,10 @@ select.custom-arrow {
         margin-left: 0;
         z-index: 9999;
     }
-    
-    .contributeLeftSide {
-        top: 49px !important;
+    .contribute{
+        padding: 70px 20px;
     }
+    
     .closeLeftSide {
         width: 13%;
         position: absolute;
