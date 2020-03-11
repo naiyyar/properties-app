@@ -23,7 +23,7 @@
                   =card_brand_image(billing.brand)
                 - else
                   - @card = billing.card(current_user&.stripe_customer_id)
-                  =card_brand_image(@card.brand)
+                  =card_brand_image(@card.brand) if @card.present?
                 =status_text(billing).html_safe
 
               %td.text-center
