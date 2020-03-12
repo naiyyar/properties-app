@@ -5,11 +5,6 @@
     .infoW-property-info{"data-href" => "#{@show_path}"}
       .propImg
         = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
-      - if building.price.present? or building.bedroom_types?
-        - if min_save_amount.present?
-          .saving-badge.infowindow-view-badge
-            %p Save
-            %p= "#{number_to_currency(min_save_amount, precision: 0)}+"
       .paWrapper
         .propTitle
           = building.building_name_or_address
