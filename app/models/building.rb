@@ -66,22 +66,24 @@ class Building < ApplicationRecord
   include SaveNeighborhood
   include BuildingReviews
 
-  #Search and filtering methods
-  extend BuildingSearch
-  extend BuildingFilters
-  extend BuildingSorting
-  extend PopularSearches
+  # Search and filtering methods
+  extend Search::BuildingSearch
+  extend Search::BuildingFilters
+  extend Search::BuildingSorting
+  extend Search::PopularSearches
+  extend Search::RedoSearch
 
   acts_as_voteable
   resourcify
+ 
   DIMENSIONS = ['cleanliness','noise','safe','health','responsiveness','management']
   ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
 
   validates :building_street_address, presence: true
   validates_uniqueness_of :building_street_address, scope: [:zipcode], on: :create
 
-  #From some buildings when submitting reviews getting
-  #Error: undefined method `address=' for #<Building
+  # From some buildings when submitting reviews getting
+  # Error: undefined method `address=' for #<Building
   attr_accessor :address
 
   belongs_to :user
@@ -97,18 +99,45 @@ class Building < ApplicationRecord
   has_many :contacts, :dependent => :destroy
   has_many :listings, :foreign_key => :building_id, :dependent => :destroy
 
+  # Scopes
   scope :updated_recently,   -> { order('listings_count DESC, building_name ASC, building_street_address ASC') }
   scope :order_by_min_rent,  -> { order('min_listing_price ASC, listings_count DESC') }
   scope :order_by_max_rent,  -> { order('max_listing_price DESC NULLS LAST, listings_count DESC') }
   scope :order_by_min_price, -> { order({price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}) }
 
-  geocoded_by :full_street_address
-  after_validation :geocode
+  scope :saved_favourites, -> (user) do
+    joins(:favorites).where('buildings.id = favorites.favorable_id AND favorites.favoriter_id = ?', user.id )
+  end
+  scope :building_photos, -> (buildings) do 
+    buildings.joins(:uploads).where('buildings.id = uploads.imageable_id AND imageable_type = ?', 'Building')
+  end
 
-  reverse_geocoded_by :latitude, :longitude
-  after_validation :reverse_geocode
+  scope :with_active_listing,   -> { where('listings_count > ?', 0) }
+  scope :with_listings_bed, -> (beds) { where('listings.bed in (?)', beds) }
+  scope :with_active_web,       -> { where('active_web is true and web_url is not null') }
+  scope :with_active_email,     -> { where('active_email is true and email is not null') }
+  scope :with_application_link, -> { where('show_application_link is true and online_application_link is not null') }
+  scope :with_pets,             -> { where('pets_allowed_cats is true OR pets_allowed_dogs is true') }
+  
+  scope :studio,    -> { where(studio: 0) }
+  scope :one_bed,   -> { where(one_bed: 1) }
+  scope :two_bed,   -> { where(two_bed: 2) }
+  scope :three_bed, -> { where(three_bed: 3) }
+  scope :four_bed,  -> { where(four_plus_bed: 4) }
+  # amenities scopes
+  AMENITIES = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
+                :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
+                :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee, :garage]
+  
+  AMENITIES.each do |item|
+    unless item == :elevator
+      scope item,  -> { where(item => true) }
+    else
+      scope item, -> { where.not(item => nil) }
+    end
+  end
 
-  #pgsearch
+  # pgsearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
      :using => { :tsearch => { prefix: true } }
 
@@ -135,63 +164,25 @@ class Building < ApplicationRecord
     ]
   )
 
-  #
-  scope :saved_favourites, -> (user) do
-    joins(:favorites).where('buildings.id = favorites.favorable_id AND favorites.favoriter_id = ?', user.id )
-  end
-  scope :building_photos, -> (buildings) do 
-    buildings.joins(:uploads).where('buildings.id = uploads.imageable_id AND imageable_type = ?', 'Building')
-  end
-  scope :with_active_listing,   -> {where('listings_count > ?', 0)}
-  scope :with_active_web,       -> {where('active_web is true and web_url is not null')}
-  scope :with_active_email,     -> {where('active_email is true and email is not null')}
-  scope :with_application_link, -> {where('show_application_link is true and online_application_link is not null')}
-  #bedrooms types
-  scope :studio,    -> { where(studio: 0) }
-  scope :one_bed,   -> { where(one_bed: 1) }
-  scope :two_bed,   -> { where(two_bed: 2) }
-  scope :three_bed, -> { where(three_bed: 3) }
-  scope :four_bed,  -> { where(four_plus_bed: 4) }
-
-  #Listings bedrooms types
-  scope :with_listings_bed, -> (beds) { where('listings.bed in (?)', beds) }
-  
-  #amenities scopes
-  AMENITIES = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
-                :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
-                :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee, :garage]
-  
-  AMENITIES.each do |item|
-    unless item == :elevator
-      scope item,  -> { where(item => true) }
-    else
-      scope item, -> { where.not(item => nil) }
-    end
-  end
-
-  #callbacks
+  # callbacks
   after_create :update_neighborhood_counts
   after_update :update_neighborhood_counts, :if => Proc.new{ |obj| obj.continue_call_back? }
   after_destroy :update_neighborhood_counts
 
-  #Methods
+  #
+  geocoded_by :full_street_address
+  after_validation :geocode
+
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
+  
+  # Methods
 
   def continue_call_back?
     ( avg_rating_changed?          && 
       recommended_percent_changed? && 
       min_listing_price_changed?   && 
       max_listing_price_changed?)
-  end
-
-  def self.buildings_json_hash(searched_buildings)
-    unless searched_buildings.class == Array
-      searched_buildings.select(:id, :building_name, :building_street_address, 
-                                :latitude, :longitude, :zipcode, :city, 
-                                :min_listing_price,:max_listing_price, :listings_count,
-                                :state, :price).as_json(:methods => [:featured])
-    else
-      searched_buildings.as_json(:methods => [:featured])
-    end
   end
 
   # creating unit from contribute
@@ -263,10 +254,6 @@ class Building < ApplicationRecord
 
   def apply?
     show_apply_link? && !(leasing_and_availability?)
-  end
-
-  def self.city_count buildings, city, sub_boroughs = nil
-    Rails.cache.fetch([self, city, 'buildings_count']) { buildings.where('city = ? OR neighborhood in (?)', city, sub_boroughs).size }
   end
 
   def suggested_percent
@@ -465,7 +452,7 @@ class Building < ApplicationRecord
     web_url.present? && active_web
   end
 
-  def fav_color_class user_id=nil
+  def fav_color_class user_id = nil
     if user_id.present?
       favorite_by?(User.find(user_id)) ? 'filled-heart' : 'unfilled-heart'
     else

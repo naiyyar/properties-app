@@ -9,111 +9,39 @@ module HomeHelper
 	end
 	
 	def lower_manhattan_sub_borough
-		@lower_manhattan_sub_borough ||= [
-			'Battery Park City',
-			'Bowery',
-			'East Village',
-			'Financial District',
-			'Greenwich Village',
-			'Lower East Side',
-			'Nolita',
-			'SoHo',
-			'Tribeca',
-			'West Village'
-		]
+		NYCBorough.lower_manhattan_sub_borough
 	end
 
 	def brooklyn_sub_borough
-		@brooklyn_sub_borough ||= ['Brooklyn Heights',
-															 'Bushwick','Clinton Hill',
-															 'Downtown Brooklyn','Dumbo','Fort Greene',
-															 'Gravesend','Greenpoint'
-															]
+		NYCBorough.brooklyn_sub_borough
 	end
 
 	def uptown_sub_borough
-		@uptown_sub_borough ||= ['Upper East Side', 'Upper West Side']
+		NYCBorough.uptown_sub_borough
 	end
 
 	def queens_sub_borough
-		@queens_sub_borough ||= [
-			'Astoria',
-	    'Corona',
-	    'Flushing',
-	    'Forest Hills',
-	    'Kew Gardens',
-	    'Long Island City',
-	    'Rego Park'
-	  ]
+		NYCBorough.queens_sub_borough
 	end
 
 	def bronx_sub_borough
-		@bronx_sub_borough ||= ['East Bronx',
-														'University Heights', 
-														'Morris Heights', 
-														'Riverdale'
-													]
+		NYCBorough.bronx_sub_borough
 	end
 
 	def brookly_borough
-		@brookly_borough ||= [ 
-			'Bedford-Stuyvesant',
-			'Brooklyn Heights',
-			'Bushwick',
-			'Carroll Gardens',
-			'Clinton Hill',
-			'Crown Heights',
-			'Downtown Brooklyn',
-			'Flatbush - Ditmas Park',
-			'Fort Greene',
-			'Greenpoint',
-			'Park Slope',
-			'Prospect Heights',
-			'Prospect Lefferts Gardens',
-			'Williamsburg'
-		]
+		NYCBorough.brookly_borough
 	end
 
 	def queens_borough
-		@queens_borough ||= [	'Astoria',
-													'Corona',
-													'Elmhurst',
-													'Flushing',
-													'Forest Hills',
-													'Jackson Heights',
-													'Jamaica',
-													'Kew Gardens',
-													'Long Island City',
-													'Rego Park',
-													'Sunnyside',
-													'Woodside'
-												]
+		NYCBorough.queens_borough
 	end
 
 	def bronx_borough
-		@bronx_borough ||= [
-												 'Belmont',
-												 'Bronxdale',
-												 'Bronxwood',
-												 'Concourse',
-												 'East Bronx',
-												 'Fordham',
-												 'Kingsbridge',
-												 'Mott Haven',
-												 'Morris Heights',
-												 'Riverdale',
-												 'Spuyten Duyvil',
-												 'Tremont',
-												 'University Heights'
-												]
+		NYCBorough.bronx_borough
 	end
 
 	def parent_neighborhoods
-		@parent_neighborhoods ||= [ 'Lower Manhattan',
-																'Midtown', 
-																'Upper Manhattan',
-																'Queens','Bronx'
-															]
+		NYCBorough.parent_neighborhoods
 	end
 
 	def searchable_text neighborhood, borough
@@ -226,7 +154,7 @@ module HomeHelper
 	end
 
 	def listing_bed_checked val
-		if params[:filter].present? &&  params[:filter][:listing_bedrooms].present?
+		if params[:filter].present? && params[:filter][:listing_bedrooms].present?
 			params[:filter][:listing_bedrooms].include?(val.to_s) ? 'checked' : ''
 		elsif @filters.present? &&  @filters[:listing_bedrooms].present?
 			@filters[:listing_bedrooms].include?(val) ? 'checked' : ''
@@ -238,7 +166,7 @@ module HomeHelper
 	end
 
 	def amen_checked val
-		if params[:filter].present? &&  params[:filter][:amenities].present?
+		if params[:filter].present? && params[:filter][:amenities].present?
 			params[:filter][:amenities].include?(val) ? 'checked' : ''
 		elsif @filters.present? &&  @filters[:amenities].present?
 			@filters[:amenities].include?(val) ? 'checked' : ''
@@ -246,7 +174,7 @@ module HomeHelper
 	end
 
 	def amen_locked? val
-		if @filters.present? &&  @filters[:amenities].present?
+		if @filters.present? && @filters[:amenities].present?
 			@filters[:amenities].include?(val) ? 'disabled' : ''
 		else
 			''
@@ -282,11 +210,11 @@ module HomeHelper
 	end
 
 	def no_search_result_text
-		@no_search_result_text ||= '<h3>No results matched your search.</h3>' +
-															 "<p>Though we can't guarentee what you are looking for exists, 
-															 we can however guarentee that if you do find an apartment through 
-															 	<a href='/'>transparentcity.co</a>, you will save thousands of dollars on broker fees!</p>" +
-															 '<p>Please adjust your filter parameters.</p>'.html_safe
+		'<h3>No results matched your search.</h3>'.html_safe +
+		 "<p>Though we can't guarentee what you are looking for exists, 
+		 we can however guarentee that if you do find an apartment through 
+		 	<a href='/'>transparentcity.co</a>, you will save thousands of dollars on broker fees!</p>".html_safe +
+		 '<p>Please adjust your filter parameters.</p>'.html_safe
 	end
 
 	def manhattan_searches

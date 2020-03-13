@@ -16,9 +16,20 @@
 class Gcoordinate < ApplicationRecord
 
 	def self.neighbohood_boundary_coordinates neighborhoods
-		nb_coords = where(neighborhood: neighborhoods)
-		nb_coords = where("neighborhood @@ :q", q: "%#{neighborhoods}") if nb_coords.blank?
-		nb_coords.map{|rec| { lat: rec.latitude, lng: rec.longitude} }
+		coords = where(neighborhood: neighborhoods)
+		coords = where("neighborhood @@ :q", q: "%#{neighborhoods}") if coords.blank?
+		coords.as_json(only: [:latitude, :longitude])
 	end
+
+	def self.zip_boundary_coordinates zipcode
+		where(zipcode: zipcode).as_json(only: [:latitude, :longitude])
+	end
+
+	def as_json(options = {})
+    h = super(options)
+    h[:lat] = latitude
+    h[:lng] = longitude
+    h
+  end
 
 end
