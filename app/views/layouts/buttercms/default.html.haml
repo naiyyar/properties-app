@@ -18,8 +18,7 @@
   %body.notransition.no-hidden#trans-blog
     = render 'layouts/home/header'
     - if @post.present?
-      #title-header
-        = render 'layouts/buttercms/blog_header'
+      #title-header= render 'layouts/buttercms/blog_header'
     .blog-content{class: action_name}
       .home-wrapper
         .row
