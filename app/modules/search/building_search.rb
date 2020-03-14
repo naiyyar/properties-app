@@ -1,7 +1,5 @@
 module Search
   module BuildingSearch
-    CITIES = ['New York', 'Brooklyn', 'Bronx', 'Queens']
-
     def buildings_json_hash(searched_buildings)
       unless searched_buildings.class == Array
         searched_buildings.select(:id, :building_name, :building_street_address, 

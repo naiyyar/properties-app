@@ -61,6 +61,8 @@
 class Building < ApplicationRecord
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
   BEDROOMS    = [['0', 'Studio'],['1','1 Bed'],['2', '2 Bed'],['3', '3 Bed'],['4', '4+ Bed']]
+  CITIES      = ['New York', 'Brooklyn', 'Bronx', 'Queens']
+  
   include PgSearch
   include Imageable
   include SaveNeighborhood

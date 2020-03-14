@@ -33,6 +33,11 @@
     :javascript
       $('.post-content p a').attr('target', '_blank');
 
+      $('#trans-blog a.home-navHandler').on('click', function(e){
+        e.preventDefault();
+        window.location.href = '/blog';
+      })
+
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
