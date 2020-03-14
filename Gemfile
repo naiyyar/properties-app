@@ -11,7 +11,7 @@ gem 'rails', '~> 5.0.7'
 #A
 # gem 'activesupport-json_encoder'
 gem 'american_date'
-gem 'aws-sdk', '~> 2.3'
+gem 'aws-sdk', '~> 3'
 gem 'axlsx_rails'
 
 #B
