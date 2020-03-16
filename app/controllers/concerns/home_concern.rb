@@ -10,7 +10,7 @@ module HomeConcern
       company = ManagementCompany.find_by(name: @search_term.strip)
       redirect_to management_company_path(company) if company.present?
     else
-      results          = Buildings::Search.new(params, @search_string).call
+      results          = Buildings::Search.new(params, @search_string).fetch
       @buildings       = @searched_buildings = results[:buildings]
       @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
       @zoom            = results[:zoom]            if results[:zoom].present?
@@ -28,34 +28,12 @@ module HomeConcern
       @lat, @lng          = @hash[0]['latitude'], @hash[0]['longitude']
       @listings_count     = Listing.listings_count(@buildings, params[:filter])
       @buildings_count    = @buildings&.size
-    else
-      @lat, @lng = latlng
     end
-
     @meta_desc = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
                                                              count: @buildings_count, 
                                                              term:  @search_term)
 
     @half_footer = true
-  end
-
-  def latlng
-    if @boundary_coords.present? && @boundary_coords.first.length > 1
-      @lat = @boundary_coords.first.first[:lat]
-      @lng = @boundary_coords.first.first[:lng]
-    else
-      if @searched_buildings.present?
-        @lat = @searched_buildings.first.latitude
-        @lng = @searched_buildings.first.longitude
-      elsif @building.present?
-        @lat = @building.first.latitude
-        @lng = @building.first.longitude
-      else
-        @lat = params[:latitude].to_f
-        @lng = params[:longitude].to_f
-      end
-    end
-    return @lat, @lng
   end
 
   def format_search_string

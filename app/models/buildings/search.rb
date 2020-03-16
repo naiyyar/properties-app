@@ -29,7 +29,7 @@ module Buildings
       end
 		end
 
-		def call
+		def fetch
 			@results[:zoom]      = set_zoom
 			@results[:buildings] = unless @lat.present? && @lng.present?
 																unless @search_string == 'New York'

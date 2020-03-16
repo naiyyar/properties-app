@@ -463,6 +463,7 @@ class Building < ApplicationRecord
   end
 
   private
+  
   def update_neighborhood_counts
     popular_neighborhoods.each do |hood|
       if hood.buildings_count.to_i >= 0
