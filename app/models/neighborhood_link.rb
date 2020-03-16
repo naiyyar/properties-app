@@ -20,10 +20,10 @@
 class NeighborhoodLink < ApplicationRecord
 
 	has_attached_file :image, 
-                    :styles => { :medium => "300x300>", :thumb => "100x100>", :original => '' }
+                    :styles => { :medium => '300x300>', :thumb => '100x100>', :original => '' }
 	
 	validates_attachment :image,
-                			:content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] }
+                			:content_type => { :content_type => ['image/jpeg', 'image/gif', 'image/png'] }
 
 
   default_scope { order('date desc, title ASC') }

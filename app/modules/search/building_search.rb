@@ -7,14 +7,14 @@ module Search
                                   :min_listing_price,:max_listing_price, :listings_count,
                                   :state, :price).as_json(:methods => [:featured])
       else
-        searched_buildings.as_json(:methods => [:featured])
+        searched_buildings.as_json(:methods => [:featured?])
       end
     end
 
     def with_featured_building buildings, page_num = 1
       final_results = {}
       featured_buildings = featured_buildings(buildings)
-      top_two_featured_buildings = if !featured_buildings.nil? && featured_buildings.length > 2
+      top_two_featured_buildings = if featured_buildings.present? && featured_buildings.length > 2
                                       featured_buildings.shuffle[0..1]
                                     else
                                       featured_buildings.shuffle[0..2]
@@ -44,9 +44,8 @@ module Search
     end
 
     def featured_buildings searched_buildings
-      ids = searched_buildings.map(&:id)
-      fbs = FeaturedBuilding.active_featured_buildings(ids)
-      fbs.where(id: fbs.map(&:building_id))
+      fbs = FeaturedBuilding.active_featured_buildings(searched_buildings.pluck(:id))
+      searched_buildings.where(id: fbs.pluck(:building_id))
     end
 
     def search_by_zipcodes(criteria)
@@ -78,7 +77,7 @@ module Search
       
       if search_term == 'Little Italy'
         # Because neighborhood Little italy exist in manhattan as well as Bronx
-        city    = term_with_city.include?('newyork') ? 'New York' : 'Bronx'
+        city    = (!term_with_city.nil? && term_with_city.include?('newyork')) ? 'New York' : 'Bronx'
         results = results.where(city: city)
       end
       results

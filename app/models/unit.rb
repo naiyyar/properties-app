@@ -79,7 +79,7 @@ class Unit < ApplicationRecord
 
 	def self.search(term)
     if term
-      self.where("name ILIKE ?", "%#{term}%")
+      self.where('name ILIKE ?', "%#{term}%")
     else
       self.all
     end

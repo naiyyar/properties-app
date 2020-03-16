@@ -1,16 +1,18 @@
 class FeaturedCompsController < ApplicationController
   load_and_authorize_resource
   before_action :set_featured_comp, only: [:show, :edit, :update, :destroy, :disconnect_building]
-
-  # GET /featured_comps
-  # GET /featured_comps.json
+  before_action :set_comp_buildings, only: [:show, :edit]
+  
   def index
     @filterrific = initialize_filterrific(
       FeaturedComp,
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @featured_comps = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:buildings, :building => [:management_company]).order('created_at desc')
+    @featured_comps = @filterrific.find
+                                  .paginate(:page => params[:page], :per_page => 100)
+                                  .includes(:buildings, :building => [:management_company])
+                                  .order('created_at desc')
 
     respond_to do |format|
       format.html
@@ -18,31 +20,25 @@ class FeaturedCompsController < ApplicationController
     end
   end
 
-  # GET /featured_comps/1
-  # GET /featured_comps/1.json
   def show
-    @buildings = @featured_comp.buildings.includes(:management_company)
+    @buildings = @comp_buildings.includes(:management_company, :building_average)
   end
 
-  #disconnecting building from a management company
+  # disconnecting building from a management company
   def disconnect_building
     buildings = @featured_comp.featured_comp_buildings.where(building_id: params[:building_id])
     buildings.first.delete if buildings.present?
     redirect_to :back, notice: 'Building disconnected'
   end
 
-  # GET /featured_comps/new
   def new
     @featured_comp = FeaturedComp.new
   end
 
-  # GET /featured_comps/1/edit
   def edit
-    @featured_on_buildings = @featured_comp.buildings.paginate(:page => params[:page], :per_page => 20)
+    @featured_on_buildings = @comp_buildings.paginate(:page => params[:page], :per_page => 20)
   end
 
-  # POST /featured_comps
-  # POST /featured_comps.json
   def create
     @featured_comp = FeaturedComp.new(featured_comp_params)
 
@@ -58,8 +54,6 @@ class FeaturedCompsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /featured_comps/1
-  # PATCH/PUT /featured_comps/1.json
   def update
     respond_to do |format|
       if @featured_comp.update(featured_comp_params)
@@ -73,8 +67,6 @@ class FeaturedCompsController < ApplicationController
     end
   end
 
-  # DELETE /featured_comps/1
-  # DELETE /featured_comps/1.json
   def destroy
     @featured_comp.destroy
     respond_to do |format|
@@ -87,6 +79,10 @@ class FeaturedCompsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_featured_comp
       @featured_comp = FeaturedComp.find(params[:id])
+    end
+
+    def set_comp_buildings
+      @comp_buildings = @featured_comp.buildings
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

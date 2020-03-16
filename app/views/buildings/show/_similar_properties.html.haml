@@ -11,14 +11,13 @@
           .row
             - @similar_properties.where.not(id: item_ids).limit(2).each do |building|
               - @last_uploads = building.image_uploads.first
-              .col-xs-6.col-sm-4.col-xs-12
-                = render 'buildings/detail_card', building: building
+              .col-xs-6.col-sm-4.col-xs-12= render 'buildings/detail_card', building: building
               - item_ids << building.id
     
     - if @similar_properties.count > 2
-      %a.left.carousel-control{"data-slide" => "prev", href: "#carouselSimilar-1", role: "button"}
+      %a.left.carousel-control{'data-slide' => 'prev', href: '#carouselSimilar-1', role: 'button'}
         %span.fa.fa-chevron-left
-      %a.right.carousel-control{"data-slide" => "next", href: "#carouselSimilar-1", role: "button"}
+      %a.right.carousel-control{'data-slide' => 'next', href: '#carouselSimilar-1', role: 'button'}
         %span.fa.fa-chevron-right
   
   / carousel for extra-small devices
@@ -29,11 +28,10 @@
           - @last_uploads = building.image_uploads.first
           %div{class: "item #{index == 0 ? 'active' : ''}"}
             .row
-              .col-xs-12
-                = render 'buildings/detail_card', building: building
+              .col-xs-12= render 'buildings/detail_card', building: building
       
 
-      %a.left.carousel-control{"data-slide" => "prev", href: "#carouselSimilar-4", role: "button"}
+      %a.left.carousel-control{'data-slide' => 'prev', href: '#carouselSimilar-4', role: 'button'}
         %span.fa.fa-chevron-left
-      %a.right.carousel-control{"data-slide" => "next", href: "#carouselSimilar-4", role: "button"}
+      %a.right.carousel-control{'data-slide' => 'next', href: '#carouselSimilar-4', role: 'button'}
         %span.fa.fa-chevron-right

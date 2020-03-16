@@ -1,4 +1,4 @@
-# == Schema Information
+ # == Schema Information
 #
 # Table name: management_companies
 #
@@ -19,12 +19,12 @@ class ManagementCompany < ApplicationRecord
 	has_many :buildings
 	validates :website, :url => true, allow_blank: true
 
-	#pgsearch
+	# pgsearch
 	include PgSearch
   pg_search_scope :text_search_by_management_company, against: [:name],
                   :using => { :tsearch => { prefix: true } }
 
-	#methods
+	# methods
 
 	def to_param
     if name.present?

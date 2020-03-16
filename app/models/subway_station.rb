@@ -1,7 +1,6 @@
 class SubwayStation < ApplicationRecord
 	has_many :subway_station_lines
 
-	#validates_uniqueness_of :name
 	attr_accessor :address
 	include PgSearch
   pg_search_scope :search, against: [:name],

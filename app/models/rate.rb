@@ -17,10 +17,10 @@ class Rate < ApplicationRecord
   belongs_to :rater, 		:class_name => 'User'
   belongs_to :rateable, :polymorphic => true
 
-  #attr_accessible :rate, :dimension
-
   def self.rateables managed_buildings
-    where(rateable_id: managed_buildings.pluck(:id), rateable_type: 'Building', dimension: 'building')
+    where(rateable_id: 		managed_buildings.pluck(:id), 
+    			rateable_type: 	'Building', 
+    			dimension: 			'building')
   end
 
 end
