@@ -27,7 +27,7 @@ $(document).ready(function(){
             $('#leftSide').removeClass('expanded');
             $('.closeLeftSide').hide();
             $('.hasSub').removeClass('hasSubActive');
-            //$('.bigNav').slimScroll({ destroy: true });
+            // $('.bigNav').slimScroll({ destroy: true });
             $('.leftNav').removeClass('bigNav');
             $('.leftNav').css('overflow', 'visible');
             $('.full').removeClass('m-full');
@@ -49,20 +49,24 @@ $(document).ready(function(){
         });
     }
 
-    // #leftSide
+    // leftSide
     $(document).click(function(e){
         var target_class = e.target.className;
         var container = $('.leftNav');
-        console.log(1)
-        if(target_class !== "fa fa-bars" && target_class != 'ssm-toggle-nav1' && target_class != 'navLabel') {
-            console.log(2)
+        if( target_class !== "fa fa-bars" && 
+            target_class != 'ssm-toggle-nav1' && 
+            target_class != 'navLabel' &&
+            target_class != 'fa fa-chevron-right' && 
+            target_class != 'fa fa-chevron-left') {
             if(!container.is(e.target) && container.has(e.target).length === 0) {
                 $('#leftSide').removeClass('expanded');
                 $('.logo').removeClass('expanded');
             }
         }
     });
+    
     $('.auth').on('click', function(){
         $('#leftSide').removeClass('expanded');
-    })
+    });
+    
 });

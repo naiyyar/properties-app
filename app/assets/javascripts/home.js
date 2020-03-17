@@ -17,75 +17,83 @@
     $('#advanced').click(function() { $('.adv').toggleClass('hidden-xs'); });
 
     //Enable swiping
-    var elem;
-    var visted_count;
-    var total_count ;
-    $(".carousel-inner").swipe( {
-        swipeLeft:function(event, direction, distance, duration, fingerCount) {
-            $(this).parent().carousel('next');
-            var carousel = $(this).parent(); 
-            increaseSliderImageNumCount(carousel);
-            var building_id = $(this).data('buildingid');
-            appendBuildingImages(building_id, carousel)
+    //var elem;
+    //var visted_count;
+    //var total_count ;
+    $(".carousel").swipe({
+        swipe: function(event, direction, distance, duration, fingerCount) {
+            if(direction == "left") { $(this).carousel("next"); }
+            if(direction == "right") { $(this).carousel("prev"); }
         },
-        swipeRight: function() {
-            $(this).parent().carousel('prev');
-            var carousel = $(this).parent();
-            decreaseSliderImageNumCount(carousel);
-            var building_id = $(this).data('buildingid');
-            appendBuildingImages(building_id, carousel)
-        }
+        // swipeLeft:function(event, direction, distance, duration, fingerCount) {
+        //     $(this).parent().carousel('prev');
+        //     console.log('left')
+        //     console.log(direction)
+        //     //var carousel = $(this).parent(); 
+        //     //increaseSliderImageNumCount(carousel);
+        //     //var building_id = $(this).data('buildingid');
+        //     //appendBuildingImages(building_id, carousel)
+        // },
+        // swipeRight: function() {
+        //     $(this).parent().carousel('next');
+        //     $(this).parent().carousel('right');
+        //     //var carousel = $(this).parent();
+        //     //decreaseSliderImageNumCount(carousel);
+        //     //var building_id = $(this).data('buildingid');
+        //     //appendBuildingImages(building_id, carousel)
+        // },
+        //threshold: 0
     });
 
-    function decreaseSliderImageNumCount(inner_carousal){
-        elem = inner_carousal.parent().find('.img-num');
-        visted_count = parseInt($(elem).text());
-        total_count = inner_carousal.find('div.item').length;
+    // function decreaseSliderImageNumCount(inner_carousal){
+    //     elem = inner_carousal.parent().find('.img-num');
+    //     visted_count = parseInt($(elem).text());
+    //     total_count = inner_carousal.find('div.item').length;
 
-        if(visted_count == 1){
-            $(elem).text(total_count);
-        }else{
-            $(elem).text(visted_count-1);
-        }
-    }
+    //     if(visted_count == 1){
+    //         $(elem).text(total_count);
+    //     }else{
+    //         $(elem).text(visted_count-1);
+    //     }
+    // }
 
-    function increaseSliderImageNumCount(inner_carousal){
-        elem = inner_carousal.parent().find('.img-num');
-        visted_count = parseInt($(elem).text());
-        total_count = inner_carousal.find('.item').length;
+    // function increaseSliderImageNumCount(inner_carousal){
+    //     elem = inner_carousal.parent().find('.img-num');
+    //     visted_count = parseInt($(elem).text());
+    //     total_count = inner_carousal.find('.item').length;
         
-        if(visted_count == total_count){
-            $(elem).text('1');
-        }else{
-            $(elem).text(visted_count+1);
-        }
-    }
+    //     if(visted_count == total_count){
+    //         $(elem).text('1');
+    //     }else{
+    //         $(elem).text(visted_count+1);
+    //     }
+    // }
 
-    $('.carousel .left').click(function(){
-        var carousel_inner = $(this).parent().find('.carousel-inner')
-        decreaseSliderImageNumCount(carousel_inner);
-        var building_id = $(this).data('buildingid');
-        appendBuildingImages(building_id, carousel_inner);
-    });
+    // $('.carousel .left').click(function(){
+    //     var carousel_inner = $(this).parent().find('.carousel-inner')
+    //     decreaseSliderImageNumCount(carousel_inner);
+    //     var building_id = $(this).data('buildingid');
+    //     appendBuildingImages(building_id, carousel_inner);
+    // });
 
-    $('.carousel .right').click(function(){
-        var carousel_inner = $(this).parent().find('.carousel-inner');
-        increaseSliderImageNumCount(carousel_inner);
-        var building_id = $(this).data('buildingid');
-        appendBuildingImages(building_id, carousel_inner);
-    });
+    // $('.carousel .right').click(function(){
+    //     var carousel_inner = $(this).parent().find('.carousel-inner');
+    //     increaseSliderImageNumCount(carousel_inner);
+    //     var building_id = $(this).data('buildingid');
+    //     appendBuildingImages(building_id, carousel_inner);
+    // });
 
-    function appendBuildingImages(building_id, elem, active_image_id){
-        $.ajax({
-            url: '/buildings/'+building_id+'/uploads',
-            type: 'get',
-            dataType: 'json',
-            success: function(response){
+    // function appendBuildingImages(building_id, elem, active_image_id){
+    //     $.ajax({
+    //         url: '/buildings/'+building_id+'/uploads',
+    //         type: 'get',
+    //         dataType: 'json',
+    //         success: function(response){
                 
-            }
+    //         }
 
-        })
-    }
+    //     })
+    // }
 
     $(document).on('click', '.modal-su', function() {
         $('#signin').modal('hide');
