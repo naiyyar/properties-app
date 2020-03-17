@@ -13,10 +13,10 @@ brooklyn_and_queens_neighborhoods_hash = [
 	{ key: 'Jamaica', 						url: dropbox_url+'9sp6snzk64lhxpn/jamica.kml?dl=1'},
 	{ key: 'Rockaways', 					url: dropbox_url+'sgiyzb9s6t4j4hq/rockaways.kml?dl=1'},
 	{ key: 'Bedford-Stuyvesant', 	url: dropbox_url+'s56id8b39yr5wer/bedford.kml?dl=1'},
-	{ key: 'Crown Heights', 			url: dropbox_url+'irgob4ie8dqecfh/crown_heights.kml?dl=1'},
+	{ key: 'Crown Heights', 			url: dropbox_url+'sjwhq2yererth3t/crown_heights.kml?dl=1'},
 	{ key: 'Park Slope', 					url: dropbox_url+'xx23k5f37tsaevq/slop_park.kml?dl=1'},
 	{ key: 'Clinton Hill', 				url: dropbox_url+'leaq54qo7dnfd6d/clinton_hill.kml?dl=1'},
-	{ key: 'Downtown Brooklyn', 	url: dropbox_url+'4poh1z6gdxdv0vi/downtown_brooklyn.kml?dl=1'},
+	{ key: 'Downtown Brooklyn', 	url: dropbox_url+'fo6o87um9k97p7j/downtown_brooklyn.kml?dl=1'},
 	{ key: 'Prospect Lefferts Gardens', url: dropbox_url+'l4i37qkeoiu4y3b/plg.kml?dl=1'},
 	{ key: 'Brooklyn Heights', 			url: dropbox_url+'c1hr7mhyouztvm2/brooklyn_heights.kml?dl=1'},
 	{ key: 'Fort Greene', 					url: dropbox_url+'civeisfgflbya3d/fort_greene.kml?dl=1'},
@@ -228,14 +228,10 @@ function brooklyn_and_queens_neighborhoods(term, city, map){
 			});
 		}
 	}	
-	add_kml(url, map)
-
+	add_kml(url, map);
 }
 
 function add_kml(url, map){
-	// var kmls = handler.addKml(
-	// 		{ url: url }
-	// 	);
 	var kml_layer = new google.maps.KmlLayer(url,{suppressInfoWindows: false, map: map}); 
 	kml_layer.setMap(map);
 }

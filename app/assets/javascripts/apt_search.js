@@ -75,10 +75,11 @@ app.apartments.prototype = {
 
   _open: function(event, ui) {
     // Fix for double tap on ios devices
-    $('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
+    var ui_autcomplete = $('.ui-autocomplete')
+    ui_autcomplete.off('menufocus hover mouseover mouseenter');
     
     this._input.removeClass('loader');
-    var ul_height = $('ul.ui-autocomplete').outerHeight() + 42;
+    var ul_height = ui_autcomplete.outerHeight() + 42;
 
     $('#apt-search-form').find('.no-match-link').remove();
     var elemToAppend = '<div class="no-match-link" style="box-shadow: 0px 1px 4px rgba(0,0,0,0.6);">' +
@@ -88,16 +89,16 @@ app.apartments.prototype = {
 
     if(window.innerWidth <= 414 && $('.split-view-seach').length > 0){
     	// making full width when on mobile view
-    	$('.ui-autocomplete').css('width', '100%');
-    	$('.ui-autocomplete').css('left', '0px');
+    	ui_autcomplete.css('width', '100%');
+    	ui_autcomplete.css('left', '0px');
     	$('.no-match-link').css('top',ul_height+'px');
     }else{
     	// setting container width
 	    var search_input_width = this._input.outerWidth();
-    	$('.ui-autocomplete').css('width', search_input_width+'px');
-	    $('.no-match-link').css('top',(ul_height+3)+'px');
+    	ui_autcomplete.css('width', (search_input_width)+'px');
+	    $('.no-match-link').css('top',(ul_height + 5)+'px');
     }
-    $('.no-match-link').css('width', $('.ui-autocomplete').width()+'px');
+    $('.no-match-link').css('width', (ui_autcomplete.width()+2)+'px');
     $('#search_term').removeClass('border-bottom-lr-radius');
   },
 
