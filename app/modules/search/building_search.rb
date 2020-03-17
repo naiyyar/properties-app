@@ -44,8 +44,8 @@ module Search
     end
 
     def featured_buildings searched_buildings
-      fbs = FeaturedBuilding.active_featured_buildings(searched_buildings.pluck(:id))
-      searched_buildings.where(id: fbs.pluck(:building_id))
+      fbs = FeaturedBuilding.active_featured_buildings(searched_buildings.map(&:id))
+      searched_buildings.where(id: fbs.map(&:building_id))
     end
 
     def search_by_zipcodes(criteria)
