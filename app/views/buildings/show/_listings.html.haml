@@ -33,4 +33,4 @@
 						- if !active_block and @all_inactive_listings.present? and @all_inactive_listings.count > 5
 							%tr
 								- colspan = browser.device.mobile? ? '6' : '9'
-								%td.text-center{colspan: colspan}=link_to 'Show More...', show_more_listings_path(building_id: @building.id), remote: true
+								%td.text-center{colspan: colspan}=link_to 'Show More...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true

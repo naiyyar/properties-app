@@ -5,11 +5,8 @@
   
   %h2
 
-.pull-right
-  = form_for_filterrific @filterrific do |f|
-    .form-field
-      = f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
-    .form-field
+.pull-right= render 'layouts/shared/filterrific_form'
+
 - cache [@buildings, params[:page]] do
   = render 'buildings/buildings', buildings: @buildings
 

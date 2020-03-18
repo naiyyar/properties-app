@@ -3,17 +3,12 @@ class ListingsController < ApplicationController
   before_action :set_listing,   only: [:show, :edit, :update, :destroy]
   before_action :find_listings, only: [:change_status, :delete_all]
   before_action :format_date,   only: [:transfer, :export]
-  before_action :filter_listings, only: [:index, :past_listings]
+  before_action :filter_listings, only: :index
   after_action :update_building_rent, only:[:create, :update, :destroy]
   
   def index
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
-  def past_listings
+    @export_listings_path = export_listings_path
+    @type = 'current'
     respond_to do |format|
       format.html
       format.js
@@ -21,16 +16,18 @@ class ListingsController < ApplicationController
   end
 
   def change_status
-    @listings.each do |listing|
-      listing.update(active: params[:active])
-    end
+    @listings.each { |list| list.update(active: params[:active]) }
     redirect_to :back
   end
   
   def delete_all
-    @listings.each do |listing|
-      listing.destroy
-      listing.update_rent(@listings.active)
+    unless params[:type] == 'past'
+      @listings.each do |listing|
+        listing.destroy
+        listing.update_rent(@listings.active)
+      end
+    else
+      @listings.delete_all
     end
     redirect_to :back
   end
@@ -68,7 +65,7 @@ class ListingsController < ApplicationController
 
   def show_more
     @building = Building.find(params[:building_id])
-    @rentals  = params[:listing_type].present? ? 'active' : 'past'
+    @rentals  = params[:listing_type] || 'active'
     @listings = @building.active_listings(params[:filter_params], @rentals)
     respond_to do |format|
       format.html
@@ -135,7 +132,11 @@ class ListingsController < ApplicationController
     end
 
     def find_listings
-      @listings = Listing.where(id: params[:selected_ids])
+      @listings = if params[:type] == 'past'
+                    PastListing.where(id: params[:selected_ids])
+                  else
+                    Listing.where(id: params[:selected_ids])
+                  end
     end
 
     def update_building_rent
@@ -143,9 +144,8 @@ class ListingsController < ApplicationController
     end
 
     def filter_listings
-      klass = params[:modal] || listing_klass
       @filterrific = initialize_filterrific(
-        klass.constantize,
+        Listing,
         params[:filterrific],
         available_filters: [:default_listing_order, :search_query]
       ) or return
@@ -157,9 +157,5 @@ class ListingsController < ApplicationController
     def format_date
       @from_date = Date.parse(params[:date_from])
       @to_date   = params[:date_to].present? ? Date.parse(params[:date_to]) : (@from_date + 1.month)
-    end
-
-    def listing_klass
-      action_name == 'past_listings' ? 'PastListing' : 'Listing'
     end
 end

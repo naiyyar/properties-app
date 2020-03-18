@@ -8,6 +8,7 @@ class PastListing < ApplicationRecord
 
   # scopes
   scope :inactive,        -> { where(active: false) }
+  scope :between,         -> (from, to) { where('date_active >= ? AND date_active <= ?', from, to) }
   scope :months_free,     -> { where('free_months > ?', 0) }
   scope :owner_paid,      -> { where('owner_paid is not null') }
   scope :rent_stabilize,  -> { where('rent_stabilize = ?', 'true') }

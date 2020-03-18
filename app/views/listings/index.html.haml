@@ -2,12 +2,7 @@
   = render 'listings/partials/listings_header'
 
   %div{style: 'padding: 0px 8px;'}
-    .pull-right
-      = form_for_filterrific @filterrific do |f|
-        .form-field
-          = f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
-          = f.hidden_field :modal, value: 'Listing'
-        .form-field
+    .pull-right= render 'layouts/shared/filterrific_form'
   
     .row
       .col-xs-12.col-sm-12.col-md-12.col-lg-12

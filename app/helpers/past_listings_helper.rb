@@ -1,0 +1,2 @@
+module PastListingsHelper
+end

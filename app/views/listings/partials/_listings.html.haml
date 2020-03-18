@@ -13,7 +13,12 @@
     %td.text-center=listing.owner_paid
     %td.text-center=listing.rentstabilize
     %td.text-center=listing.date_available
-    %td=link_to 'edit', edit_listing_path(listing)
-    %td=link_to 'Delete', listing_path(listing), method: :delete, data: {confirm: "Are you sure you want to delete this listing?"}, class: 'text-danger'
+    - confirm_message = 'Are you sure you want to delete this listing?'
+    - unless action_name == 'past_listings'
+      %td=link_to 'edit', edit_listing_path(listing)
+      %td=link_to 'Delete', listing_path(listing), method: :delete, data: {confirm: confirm_message }, class: 'text-danger'
+    - else
+      %td=link_to 'edit', edit_past_listing_path(listing)
+      %td=link_to 'Delete', past_listing_path(listing), method: :delete, data: {confirm: confirm_message }, class: 'text-danger'
     %td
       %input.apple-switch.sb-sm.listing{type: 'checkbox', checked: listing.active, style: 'margin: 0px;', data: { lid: listing.id } }

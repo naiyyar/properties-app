@@ -116,7 +116,7 @@ class Building < ApplicationRecord
   end
 
   scope :with_active_listing,   -> { where('listings_count > ?', 0) }
-  scope :with_listings_bed, -> (beds) { where('listings.bed in (?)', beds) }
+  scope :with_listings_bed,     -> (beds) { where('listings.bed in (?)', beds) }
   scope :with_active_web,       -> { where('active_web is true and web_url is not null') }
   scope :with_active_email,     -> { where('active_email is true and email is not null') }
   scope :with_application_link, -> { where('show_application_link is true and online_application_link is not null') }
@@ -211,8 +211,8 @@ class Building < ApplicationRecord
     featured_comps.active
   end
 
-  def active_listings filter_params, type='active'
-    Filter::Listings.new(self, type, filter_params).active_listings
+  def active_listings filter_params, type = 'active'
+    Filter::Listings.new(self, type, filter_params).fetch_listings
   end
 
   def all_three_cta? listings_count

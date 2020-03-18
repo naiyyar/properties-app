@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   mount StripeEvent::Engine, at: '/stripe-events'
   
   resources :billings do
@@ -13,12 +13,18 @@ Rails.application.routes.draw do
   post :create_new_card,      to: 'billings#create_new_card',       as: :create_new_card
   post :pay_using_saved_card, to: 'billings#pay_using_saved_card',  as: :pay_using_saved_card
   
+  resources :past_listings do
+    collection do
+      post :export
+      get :show_more
+    end
+  end
+
   resources :listings do
     collection do
       post :import
       post :export
       post :transfer
-      get :past_listings
       get :show_more
     end
   end
