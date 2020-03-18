@@ -1,16 +1,12 @@
 class Listing < ApplicationRecord
   include PgSearch
-  
+  include Listable
   # associations
   belongs_to :building
   counter_cache_with_conditions :building, :listings_count, active: true
   
   # constants
   BEDROOMS                = [['0', 'Studio'],['1','1 Bed'],['2', '2 Bed'],['3', '3 Bed'],['4', '4+ Bed']]
-  EXPORT_SHEET_HEADER_ROW = ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free',
-                             'Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood',
-                             'Parent Neighborhood', 'Neighborhood3', 'Property Manager','Number of Floors',
-                             'Number of Units','Year Built','Active','Amenities']
 
   # validations
   validates_presence_of :building_address, :unit, :date_active
@@ -25,6 +21,7 @@ class Listing < ApplicationRecord
   # scopes
   scope :active,          -> { where(active: true) }
   scope :inactive,        -> { where(active: false) }
+  scope :between,         -> (from, to) { where('date_active >= ? AND date_active <= ?', from, to) }
   scope :months_free,     -> { where('free_months > ?', 0) }
   scope :owner_paid,      -> { where('owner_paid is not null') }
   scope :rent_stabilize,  -> { where('rent_stabilize = ?', 'true') }
@@ -55,11 +52,7 @@ class Listing < ApplicationRecord
   delegate :management_company, to: :building
 
   def self.header_style style
-    Listing::EXPORT_SHEET_HEADER_ROW.map{|item| style}
-  end
-
-  def management_company_name
-    management_company.try(:name)
+    EXPORT_SHEET_HEADER_ROW.map{|item| style}
   end
 
   def self.listings_count buildings, filter_params={}
@@ -72,14 +65,6 @@ class Listing < ApplicationRecord
     return listings_count
   end
 
-  def unit_exist?
-    building.units.where(name: unit).present?
-  end
-
-  def rentstabilize
-    rent_stabilize.present? ? (rent_stabilize == 'true' ? 'Y' : 'N') : ''
-  end
-
   def update_rent listings = nil
     property          = self.building
     listings          = Listing.active if listings.blank?
@@ -90,6 +75,13 @@ class Listing < ApplicationRecord
     else
       property.update_columns(min_listing_price: nil, max_listing_price: nil)
     end
+  end
+
+  def self.transfer_to_past_listings_table listings
+    listings.each do |listing|
+      PastListing.create(listing.attributes.except('id'))
+    end
+    listings.delete_all
   end
   
   private

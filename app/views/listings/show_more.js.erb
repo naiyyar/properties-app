@@ -1,4 +1,4 @@
-$('#remote-container').html("<%= j render 'listings/show_more' %>");
+$('#remote-container').html("<%= j render 'listings/partials/show_more' %>");
 var opened = true;
 <% unless browser.device.mobile? %>
 	$('#showPastListing').modal('show');

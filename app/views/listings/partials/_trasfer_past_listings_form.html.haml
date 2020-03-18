@@ -1,0 +1,22 @@
+#transferPastListings.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "contirbuteMoreLabel", role: "dialog"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          %span{"aria-hidden" => "true"} &times;
+      
+      .modal-body.no-padding
+        = form_tag transfer_listings_path, class: 'form-horizontal' do
+          %fieldset
+            .row
+              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                %label Date From
+                = text_field_tag :date_from, Date.today,  class: 'form-control datepicker validate', :autocomplete => :off
+
+              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                %label Date To
+                = text_field_tag :date_to, nil, class: 'form-control datepicker', :autocomplete => :off
+          
+          %footer
+            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
+            = button_tag 'Transfer', class: 'btn btn-blue', controller: 'listings', action: 'export'

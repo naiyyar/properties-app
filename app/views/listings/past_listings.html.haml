@@ -6,7 +6,7 @@
       = form_for_filterrific @filterrific do |f|
         .form-field
           = f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
-          = f.hidden_field :modal, value: 'Listing'
+          = f.hidden_field :modal, value: 'PastListing'
         .form-field
   
     .row
@@ -17,17 +17,17 @@
               %thead
                 %tr
                   %th.no-sort.text-center
-                    =check_box_tag "check_all_listing", nil, nil, class: 'check_all_listing'
+                    =check_box_tag 'check_all_listing', nil, nil, class: 'check_all_listing'
                   %th Date Active
                   %th Management
                   %th Building Address
-                  %th{width: "5%"} Unit
+                  %th{width: '5%'} Unit
                   %th Rent
-                  %th{width: "5%"} Bed
-                  %th{width: "5%"} Bath
-                  %th.text-center{width: "5%"} Months Free
-                  %th.text-center{width: "5%"} OP
-                  %th.text-center{width: "5%"} RS
+                  %th{width: '5%'} Bed
+                  %th{width: '5%'} Bath
+                  %th.text-center{width: '5%'} Months Free
+                  %th.text-center{width: '5%'} OP
+                  %th.text-center{width: '5%'} RS
                   %th Date Available
                   %th.no-sort 
                   %th.no-sort 

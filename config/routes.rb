@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post :email_receipt
     end
   end
+  
   post :create_charge,        to: 'billings#create',                as: :create_charge
   get  :delete_card,          to: 'billings#delete_card',           as: :delete_card
   post :create_new_card,      to: 'billings#create_new_card',       as: :create_new_card
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
     collection do
       post :import
       post :export
+      post :transfer
+      get :past_listings
       get :show_more
     end
   end

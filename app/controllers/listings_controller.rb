@@ -1,12 +1,21 @@
 class ListingsController < ApplicationController
-  load_and_authorize_resource only: [:index, :export]
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource   only: [:index, :export]
+  before_action :set_listing,   only: [:show, :edit, :update, :destroy]
   before_action :find_listings, only: [:change_status, :delete_all]
+  before_action :format_date,   only: [:transfer, :export]
+  before_action :filter_listings, only: [:index, :past_listings]
   after_action :update_building_rent, only:[:create, :update, :destroy]
   
   def index
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def past_listings
     @filterrific = initialize_filterrific(
-      Listing,
+      PastListing,
       params[:filterrific],
       available_filters: [:default_listing_order, :search_query]
     ) or return
@@ -47,10 +56,15 @@ class ListingsController < ApplicationController
     redirect_to :back
   end
 
+  def transfer
+    listings = Listing.between(@from_date, @to_date).inactive
+    Listing.transfer_to_past_listings_table(listings)
+    flash[:notice] = 'Listing Succesfully Transfered.'
+    redirect_to :back
+  end
+
   def export
-    @from_date = Date.parse(params[:date_from])
-    @to_date = params[:date_to].present? ? Date.parse(params[:date_to]) : (@from_date + 1.month)
-    @listings = Listing.where('date_active >= ? AND date_active <= ?', @from_date, @to_date)
+    @listings = Listing.between(@from_date, @to_date)
     file_name = "Listings_#{params[:date_from]}_to_#{params[:date_to]}.#{params[:format]}"
     case params[:format]
       when 'xls'  then render xls:  'export'
@@ -134,5 +148,27 @@ class ListingsController < ApplicationController
 
     def update_building_rent
       @listing.update_rent
+    end
+
+    def listing_klass
+      action_name == 'past_listings' ? 'PastListing' : 'Listing'
+    end
+
+    def filter_listings
+      klass = params[:modal] || listing_klass
+      @filterrific = initialize_filterrific(
+        klass.constantize,
+        params[:filterrific],
+        available_filters: [:default_listing_order, :search_query]
+      ) or return
+      @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
+                                   .includes(:building, building: [:management_company]).default_listing_order
+
+ 
+    end
+
+    def format_date
+      @from_date = Date.parse(params[:date_from])
+      @to_date   = params[:date_to].present? ? Date.parse(params[:date_to]) : (@from_date + 1.month)
     end
 end

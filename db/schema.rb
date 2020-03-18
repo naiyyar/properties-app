@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200225150935) do
+ActiveRecord::Schema.define(version: 20200318060018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -292,6 +292,27 @@ ActiveRecord::Schema.define(version: 20200225150935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["rateable_id", "rateable_type"], name: "index_overall_averages_on_rateable_id_and_rateable_type", using: :btree
+  end
+
+  create_table "past_listings", force: :cascade do |t|
+    t.integer  "building_id"
+    t.string   "building_address"
+    t.string   "management_company"
+    t.string   "unit"
+    t.integer  "rent"
+    t.integer  "bed"
+    t.decimal  "bath"
+    t.decimal  "free_months"
+    t.decimal  "owner_paid"
+    t.date     "date_active"
+    t.date     "date_available"
+    t.boolean  "rent_stabilize",     default: false
+    t.boolean  "active",             default: true
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.index ["building_address"], name: "index_past_listings_on_building_address", using: :btree
+    t.index ["building_id"], name: "index_past_listings_on_building_id", using: :btree
+    t.index ["date_active"], name: "index_past_listings_on_date_active", using: :btree
   end
 
   create_table "pg_search_documents", force: :cascade do |t|

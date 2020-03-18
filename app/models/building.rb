@@ -89,17 +89,18 @@ class Building < ApplicationRecord
   attr_accessor :address
 
   belongs_to :user
-  has_many :reviews, as: :reviewable
-  has_many :favorites, as: :favorable, dependent: :destroy
-  has_many :units, :dependent => :destroy
-  accepts_nested_attributes_for :units, :allow_destroy => true
-  has_one :featured_comp, :foreign_key => :building_id, :dependent => :destroy
-  has_many :featured_comp_buildings
-  has_many :featured_comps, through: :featured_comp_buildings, :dependent => :destroy
-  has_many :featured_buildings, :dependent => :destroy
   belongs_to :management_company, touch: true
-  has_many :contacts, :dependent => :destroy
-  has_many :listings, :foreign_key => :building_id, :dependent => :destroy
+  has_many :reviews,                as:         :reviewable
+  has_many :favorites,              as:         :favorable,     dependent: :destroy
+  has_one  :featured_comp,          foreign_key: :building_id,  dependent: :destroy
+  has_many :featured_comps,         through: :featured_comp_buildings, dependent: :destroy
+  has_many :featured_buildings,     dependent: :destroy
+  has_many :contacts,               dependent: :destroy
+  has_many :listings,               foreign_key: :building_id, dependent: :destroy
+  has_many :past_listings,          foreign_key: :building_id, dependent: :destroy
+  has_many :featured_comp_buildings
+  has_many :units,                  dependent: :destroy
+  accepts_nested_attributes_for :units, :allow_destroy => true
 
   # Scopes
   scope :updated_recently,   -> { order('listings_count DESC, building_name ASC, building_street_address ASC') }

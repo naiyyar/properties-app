@@ -15,7 +15,7 @@ module BuildingsConcern
     @gmaphash              = Building.buildings_json_hash(buildings)
     @listings              = @building.listings
     @active_listings       = @listings.active.reorder(rent: :asc)
-    @all_inactive_listings = @listings.inactive
+    @all_inactive_listings = @building.past_listings.inactive
     @inactive_listings     = @all_inactive_listings.reorder(date_active: :desc, rent: :asc).limit(5)
 
     @meta_desc  = "#{@building.building_name_or_address} #{@building.building_street_address} is a #{@building.try(:building_type)} "+ 
