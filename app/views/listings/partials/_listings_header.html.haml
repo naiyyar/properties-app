@@ -23,6 +23,19 @@
 %p
 
 .row
+  .col-lg-6.col-xs-12
+    %h2
+    .tabsWidget
+      %ul.nav.nav-tabs.nav-justified{role: 'tablist'}
+        %li{class: action_name == 'index' ? 'active' : ''}
+          %a{href: listings_path}
+            %b Current Listings
+        %li{class: action_name == 'past_listings' ? 'active' : ''}
+          %a{href: past_listings_listings_path}
+            %b Past Listings
+%br
+
+.row
   .listing-actions{style: 'margin-left: 10px; display: none'}
     .col-lg-1
       = form_tag '/listings/change_status', id: 'active_on_action_form' do

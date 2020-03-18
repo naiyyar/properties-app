@@ -14,14 +14,6 @@ class ListingsController < ApplicationController
   end
 
   def past_listings
-    @filterrific = initialize_filterrific(
-      PastListing,
-      params[:filterrific],
-      available_filters: [:default_listing_order, :search_query]
-    ) or return
-    @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
-                                 .includes(:building, building: [:management_company]).default_listing_order
-
     respond_to do |format|
       format.html
       format.js
@@ -150,10 +142,6 @@ class ListingsController < ApplicationController
       @listing.update_rent
     end
 
-    def listing_klass
-      action_name == 'past_listings' ? 'PastListing' : 'Listing'
-    end
-
     def filter_listings
       klass = params[:modal] || listing_klass
       @filterrific = initialize_filterrific(
@@ -162,13 +150,16 @@ class ListingsController < ApplicationController
         available_filters: [:default_listing_order, :search_query]
       ) or return
       @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
-                                   .includes(:building, building: [:management_company]).default_listing_order
-
- 
+                                   .includes(:building, building: [:management_company])
+                                   .default_listing_order
     end
 
     def format_date
       @from_date = Date.parse(params[:date_from])
       @to_date   = params[:date_to].present? ? Date.parse(params[:date_to]) : (@from_date + 1.month)
+    end
+
+    def listing_klass
+      action_name == 'past_listings' ? 'PastListing' : 'Listing'
     end
 end
