@@ -5,15 +5,12 @@
         .pull-right
           = link_to 'Add New Featured Comp', new_featured_comp_path, class: 'btn btn-blue'
     %h2
-  .pull-right
-    = form_for_filterrific @filterrific do |f|
-      .form-field
-        = f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
-      .form-field
+  
+  .pull-right= render 'layouts/shared/filterrific_form'
+  
   = render 'featured_comps/comps'
   .text-center
     = will_paginate @featured_comps, renderer: BootstrapPagination::Rails
-
 
 :css
   #sortable_filter{

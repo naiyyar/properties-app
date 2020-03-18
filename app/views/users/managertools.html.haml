@@ -24,9 +24,7 @@
 							
 							- if @filterrific.present?
 								%p
-								= form_for_filterrific @filterrific do |f|
-									.form-field
-										= f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
+								= render 'layouts/shared/filterrific_form'
 
 					=render 'featured_buildings/buildings'
 					.text-center
