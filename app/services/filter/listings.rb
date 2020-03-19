@@ -17,10 +17,12 @@ module Filter
 		end
 
 		def fetch_listings
-			unless @listing_type == 'active'
-	      filtered_listings.order_by_date_active_desc
-	    else
+			if @listing_type == 'active'
 	      filtered_listings.active.order_by_rent_asc
+	    elsif @listing_type == 'past'
+	    	filtered_listings.inactive.order_by_date_active_desc
+	    else
+	      filtered_listings.order_by_rent_asc
 	    end
 	  end
 
