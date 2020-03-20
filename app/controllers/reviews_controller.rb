@@ -4,24 +4,27 @@ class ReviewsController < ApplicationController
   after_action :update_reviewable_info, only: :create
   after_action :clear_cache,            only: [:create, :destroy]
   
-  #from production
+  # from production
   def index
     @filterrific = initialize_filterrific(
       Review,
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @reviews = @filterrific.find.paginate(:page => params[:page], :per_page => 100).order('created_at desc').includes(:reviewable, :user)
+    @reviews = @filterrific.find
+                           .paginate(:page => params[:page], :per_page => 100)
+                           .order('created_at desc').includes(:reviewable, :user)
 
-    @reviews = if params[:building_id].present?
-                @reviews.where(reviewable_id: params[:building_id])
-              elsif params[:unit_id].present?
-                @reviews.where(reviewable_id: params[:unit_id])
-              end
+    if params[:building_id].present?
+      @reviews =  @reviews.where(reviewable_id: params[:building_id])
+    elsif params[:unit_id].present?
+      @reviews =  @reviews.where(reviewable_id: params[:unit_id])
+    end
   end
 
   def destroy_scraped_reviews
     Review.where(scraped: true).destroy_all
+
     redirect_to :back, notice: 'Destroyed successfully'
   end
 
