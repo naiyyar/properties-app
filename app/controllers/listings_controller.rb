@@ -3,6 +3,7 @@ class ListingsController < ApplicationController
   before_action :set_listing,   only: [:show, :edit, :update, :destroy]
   before_action :find_listings, only: [:change_status, :delete_all]
   before_action :format_date,   only: [:transfer, :export]
+  before_action :find_listings_between_dates, only: [:transfer, :export]
   before_action :filter_listings, only: :index
   after_action :update_building_rent, only:[:create, :update, :destroy]
   
@@ -46,13 +47,12 @@ class ListingsController < ApplicationController
   end
 
   def transfer
-    listings = Listing.between(@from_date, @to_date).inactive
-    if listings&.count > 1500
+    if @listings&.count > 1500
       TransferListingsJob.perform_later(params[:date_from], params[:date_to])
       flash[:notice] = 'Transfering Listings To Past Listings Table started.'
     else
-      if listings.present?
-        Listing.transfer_to_past_listings_table(listings)
+      if @listings.present?
+        Listing.transfer_to_past_listings_table(@listings)
         flash[:notice] = 'Transfering listings completed.'
       else
         flash[:error] = ["No Listings found between #{params[:date_from]} and #{params[:date_to]}."]
@@ -62,7 +62,6 @@ class ListingsController < ApplicationController
   end
 
   def export
-    @listings = Listing.between(@from_date, @to_date)
     file_name = "Listings_#{params[:date_from]}_to_#{params[:date_to]}.#{params[:format]}"
     case params[:format]
       when 'xls'  then render xls:  'export'
@@ -166,5 +165,9 @@ class ListingsController < ApplicationController
     def format_date
       @from_date = Date.parse(params[:date_from])
       @to_date   = params[:date_to].present? ? Date.parse(params[:date_to]) : (@from_date + 1.month)
+    end
+
+    def find_listings_between_dates
+      @listings = Listing.between(@from_date, @to_date)
     end
 end
