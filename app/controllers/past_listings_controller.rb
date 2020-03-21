@@ -29,7 +29,7 @@ class PastListingsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @listing.update(listing_params)
+      if @listing.update(past_listing_params)
         format.html { redirect_to past_listings_url, notice: 'Listing was successfully updated.' }
         format.json { render :json => { success: true, data: @listing } }
       else
@@ -52,6 +52,14 @@ class PastListingsController < ApplicationController
   def set_listing
     @listing = PastListing.find(params[:id])
   end
+
+  def past_listing_params
+      params.require(:past_listing).permit( :building_id,:unit,:building_id,
+                                            :rent,:bed,:bath,:free_months,:owner_paid,
+                                            :date_available,:rent_stabilize,:active,
+                                            :building_address, :management_company,
+                                            :date_active)
+    end
 
   def filter_listings
       @filterrific = initialize_filterrific(
