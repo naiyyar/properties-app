@@ -66,7 +66,7 @@
             .form-group
               .col-sm-12
                 .pull-right
-                  = link_to 'Cancel', 'javascript:;', class: 'btn btn-default cancel-form'
+                  = link_to 'Cancel', 'javascript:;', class: 'btn btn-default cancel-form', 'data-model' => @listing.class.name
                   - if @listing.new_record?
                     = f.submit 'Save', class: 'btn btn-primary disabled'
                   - else
@@ -86,5 +86,10 @@
 
   $('.cancel-form').on('click', function(e){
     e.preventDefault();
-    window.location.href = '/listings';
+    if($(this).data('model') == 'Listing'){
+      url = '/listings';
+    }else{
+      url = '/past_listings';
+    }
+    window.location.href = url;
   })
