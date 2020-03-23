@@ -211,7 +211,7 @@ class Building < ApplicationRecord
     featured_comps.active
   end
 
-  def active_listings filter_params, type = 'active'
+  def get_listings filter_params, type = 'active'
     Filter::Listings.new(self, type, filter_params).fetch_listings
   end
 

@@ -1,9 +1,9 @@
 module Filter
 	class Listings
-		def initialize building, listing_type='active', filter_params={}
+		def initialize building, listing_type = 'active', filter_params={}
 			@listing_type = listing_type
 			@listings 		= unless listing_type == 'past'
-												building.listings
+												building.listings.active
 											else
 												building.past_listings
 											end
@@ -18,9 +18,9 @@ module Filter
 
 		def fetch_listings
 			if @listing_type == 'active'
-	      filtered_listings.active.order_by_rent_asc
+	      filtered_listings.order_by_rent_asc
 	    elsif @listing_type == 'past'
-	    	filtered_listings.inactive.order_by_date_active_desc
+	    	filtered_listings.order_by_date_active_desc
 	    else
 	      filtered_listings.order_by_rent_asc
 	    end

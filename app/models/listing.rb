@@ -58,7 +58,7 @@ class Listing < ApplicationRecord
   def self.listings_count buildings, filter_params={}
     listings_count = 0
     if filter_params.present?
-      buildings.each{|b| listings_count += b.active_listings(filter_params).size }
+      buildings.each{|b| listings_count += b.get_listings(filter_params).size }
     else
       listings_count = buildings.pluck(:listings_count).reduce(:+)
     end
@@ -80,8 +80,8 @@ class Listing < ApplicationRecord
   def self.transfer_to_past_listings_table listings
     listings.each do |listing|
       PastListing.create(listing.attributes.except('id'))
+      listing.destroy
     end
-    listings.delete_all
   end
   
   private

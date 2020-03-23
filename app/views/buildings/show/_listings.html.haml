@@ -16,21 +16,19 @@
 				- if listings.present?
 					- colspan 		 = browser.device.mobile? ? '6' : '9'
 					- active_block = listings.first.active
-					- cache listings do
-						- listings.each do |listing|
-							- cache listing do
-								%tr
-									%td.text-center=listing.date_active
-									%td.text-center=listing.unit
-									%td.text-right
-										%b=number_to_currency(listing.rent, precision: 0)
-									%td.text-center=listing.bed
-									%td.text-center=listing.bath
-									%td.text-center=listing.free_months
-									%td.hidden-xs=listing.date_available
-									%td.hidden-xs=listing.owner_paid
-									%td.text-center.hidden-xs=listing.rentstabilize
-							
-						- if !active_block and @all_inactive_listings.present? and @all_inactive_listings.count > 5
-							%tr
-								%td.text-center{colspan: colspan}=link_to 'Show More...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true
+					- listings.each do |listing|
+						%tr
+							%td.text-center=listing.date_active
+							%td.text-center=listing.unit
+							%td.text-right
+								%b=number_to_currency(listing.rent, precision: 0)
+							%td.text-center=listing.bed
+							%td.text-center=listing.bath
+							%td.text-center=listing.free_months
+							%td.hidden-xs=listing.date_available
+							%td.hidden-xs=listing.owner_paid
+							%td.text-center.hidden-xs=listing.rentstabilize
+						
+					- if !active_block and @all_inactive_listings.present? and @all_inactive_listings.count > 5
+						%tr
+							%td.text-center{colspan: colspan}=link_to 'Show More...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true
