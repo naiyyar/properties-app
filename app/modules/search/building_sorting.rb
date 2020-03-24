@@ -22,7 +22,10 @@ module Search
       when '3'
         buildings = buildings.where(id: sorting_buildings_ids(buildings)).order_by_min_price
       when '4'
-        buildings = buildings.order('price DESC NULLS LAST, listings_count DESC, building_name ASC, building_street_address ASC')
+        buildings = buildings.order('price DESC NULLS LAST, 
+                                     listings_count DESC, 
+                                     building_name ASC, 
+                                     building_street_address ASC')
       else
         buildings = buildings
       end
@@ -30,26 +33,37 @@ module Search
       buildings
     end
 
+    # 1.Least Expensive - Listing
     def sorted_building_ids_by_min_price buildings
       ids_arr = []
       filtered_buildings = where(id: buildings.pluck(:id))
-      ids_arr += filtered_buildings.where.not(min_listing_price: nil).with_active_listing.order_by_min_rent.pluck(:id)
+      ids_arr += filtered_buildings.where.not(min_listing_price: nil)
+                                   .with_active_listing
+                                   .order_by_min_rent
+                                   .pluck(:id)
       ids_arr += buildings.where(min_listing_price: nil).pluck(:id)
       return ids_arr
     end
 
+    # 2.Most Expensive - Listing
     def sorted_building_ids_by_max_price buildings
       ids_arr = []
       filtered_buildings = where(id: buildings.pluck(:id))
-      ids_arr += filtered_buildings.where.not(max_listing_price: nil).with_active_listing.order_by_max_rent.pluck(:id)
+      ids_arr += filtered_buildings.where.not(max_listing_price: nil)
+                                   .with_active_listing
+                                   .order_by_max_rent
+                                   .pluck(:id)
       ids_arr += buildings.where(max_listing_price: nil).pluck(:id)
       return ids_arr
     end
 
+    # 3.Least Expensive - Building
     def sorting_buildings_ids buildings
       ids_arr = []
       filtered_buildings = where(id: buildings.pluck(:id))
-      ids_arr += filtered_buildings.where.not(price: nil).order_by_min_price.pluck(:id)
+      ids_arr += filtered_buildings.where.not(price: nil)
+                                   .order_by_min_price
+                                   .pluck(:id)
       ids_arr += buildings.where(price: nil).pluck(:id)
       return ids_arr
     end

@@ -65,6 +65,10 @@ class Listing < ApplicationRecord
     return listings_count
   end
 
+  def self.active_listings
+    self.active
+  end
+
   def update_rent listings = nil
     property          = self.building
     listings          = Listing.active if listings.blank?
@@ -78,9 +82,11 @@ class Listing < ApplicationRecord
   end
 
   def self.transfer_to_past_listings_table listings
+    active_listings = Listing.active_listings
     listings.each do |listing|
       PastListing.create(listing.attributes.except('id'))
       listing.destroy
+      listing.update_rent(active_listings)
     end
   end
   
