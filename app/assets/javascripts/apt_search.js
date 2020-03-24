@@ -42,7 +42,7 @@ app.apartments.prototype = {
         // Hightliting searched phrase
         search_phrase = item.search_phrase.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
         var regexp = new RegExp('(' + search_phrase + ')', 'gi'),
-	        label = search_term.replace(regexp, '<b>$1</b>');
+          label = search_term.replace(regexp, '<b>$1</b>');
 
         var items = ''
         if(search_term != 'No matches found - Add Your Building'){
@@ -70,7 +70,7 @@ app.apartments.prototype = {
   },
 
   _search: function(e,ui){
-    this._input.addClass('loader');
+    $('.search-loader').show();
   },
 
   _open: function(event, ui) {
@@ -78,7 +78,7 @@ app.apartments.prototype = {
     var ui_autcomplete = $('.ui-autocomplete')
     ui_autcomplete.off('menufocus hover mouseover mouseenter');
     
-    this._input.removeClass('loader');
+    $('.search-loader').hide();
     var ul_height = ui_autcomplete.outerHeight() + 42;
 
     $('#apt-search-form').find('.no-match-link').remove();
@@ -88,15 +88,15 @@ app.apartments.prototype = {
     $('#apt-search-form').append(elemToAppend);
 
     if(window.innerWidth <= 414 && $('.split-view-seach').length > 0){
-    	// making full width when on mobile view
-    	ui_autcomplete.css('width', '100%');
-    	ui_autcomplete.css('left', '0px');
-    	$('.no-match-link').css('top',ul_height+'px');
+      // making full width when on mobile view
+      ui_autcomplete.css('width', '100%');
+      ui_autcomplete.css('left', '0px');
+      $('.no-match-link').css('top',ul_height+'px');
     }else{
-    	// setting container width
-	    var search_input_width = this._input.outerWidth();
-    	ui_autcomplete.css('width', (search_input_width)+'px');
-	    $('.no-match-link').css('top',(ul_height + 5)+'px');
+      // setting container width
+      var search_input_width = this._input.outerWidth();
+      ui_autcomplete.css('width', (search_input_width)+'px');
+      $('.no-match-link').css('top',(ul_height + 5)+'px');
     }
     $('.no-match-link').css('width', (ui_autcomplete.width()+2)+'px');
     $('#search_term').removeClass('border-bottom-lr-radius');
