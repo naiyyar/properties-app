@@ -83,8 +83,8 @@
 #mapHash{'data-lat' => "#{@building.latitude.to_json}", 'data-lng' => "#{@building.longitude.to_json}", 'data-map' => "#{@gmaphash.to_json}"}
 = hidden_field_tag :cu, current_user.present? ? current_user.id : nil
 = hidden_field_tag :cu_building_id, @building.id
-.addNewUnit
-  = render 'new_unit_modal'
+
+.addNewUnit= render 'new_unit_modal'
 
 = render 'buildings/favourite_script'
 

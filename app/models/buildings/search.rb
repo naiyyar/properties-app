@@ -77,7 +77,7 @@ module Buildings
 
 		def set_zoom
 			if @lat.present? && @lng.present?
-				@zoomlevel || (@results[:buildings].length > 90 ? 15 : 14)
+				@zoomlevel || (@results[:buildings]&.length.to_i > 90 ? 15 : 14)
 			else
 				@search_string == 'New York' ? 12 : 14
 			end
