@@ -1,30 +1,22 @@
+- @show_path = building_path(building)
+
 .card.search-view-card{'data-bid' => building.id}
-  - @show_path = building_path(building)
-  = link_to @show_path do
-    .figure{style: 'position: relative;', id: "figure#{building.id}"}
-      - unless @similar_properties.present?
-        = image_tag 'shimmer.gif', style: 'width: 100%;height: 225px;' 
-      - else
-        .bg-size-cover.h-lg{ style: "background-image: url(#{feature_comp_bg_img_url(@last_uploads)});" }
-    
-    - if false
-      - if building.price.present? || building.bedroom_types?
-        - if @min_saved_amount.present?
-          .saving-badge.split-view-badge
-            %p Save
-            %p= "#{number_to_currency(@min_saved_amount, precision: 0)}+"
-    
-    - unless @similar_properties.present?
+  - unless @similar_properties.present?
+    = link_to @show_path do
+      .figure{style: 'position: relative;', id: "figure#{building.id}"}= image_tag 'shimmer.gif', style: 'width: 100%;height: 225px;' 
+      
       .building-detail-card{id: "building_details#{building.id}"}
-    - else
-      #building_details88.building-detail-card
-        %h2=building.building_name_or_address
-        .cardAddress
-          %span.fa.fa-map-marker
-          = building.full_street_address
+  - else
+    .figure.featured-comps{style: 'position: relative;', id: "figure#{building.id}", data: { show_url: @show_path }}
+      .bg-size-cover.h-lg{ style: "background-image: url(#{feature_comp_bg_img_url(@last_uploads)});" }
     
-    %div{style: 'float: right;margin-top: -43px;'}
-      = render 'buildings/favourite', building: building
+    #building_details88.building-detail-card.featured-comps{data: { show_url: @show_path }}
+      %h2=building.building_name_or_address
+      .cardAddress
+        %span.fa.fa-map-marker
+        = building.full_street_address
+
+  %div{style: 'float: right; margin-top: -43px;'}= render 'buildings/favourite', building: building
   
   = link_to @show_path do
     = render 'home/building_detail', building: building

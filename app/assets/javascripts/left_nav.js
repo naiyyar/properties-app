@@ -68,5 +68,9 @@ $(document).ready(function(){
     $('.auth').on('click', function(){
         $('#leftSide').removeClass('expanded');
     });
+
+    $('.card.search-view-card .featured-comps').on('click', function(){
+        window.location.href = $(this).data('showUrl');
+    })
     
 });

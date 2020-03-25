@@ -20,7 +20,7 @@
             if(direction == "left") { $(this).carousel("next"); }
             if(direction == "right") { $(this).carousel("prev"); }
         },
-        threshold: 0
+        // threshold: 0
     });
 
     $(document).on('click', '.modal-su', function() {
