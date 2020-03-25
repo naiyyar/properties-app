@@ -25,7 +25,6 @@ class Vote < ApplicationRecord
 
   attr_accessible :vote, :voter, :voteable if ActiveRecord::VERSION::MAJOR < 4
 
-
   def self.recommended_percent object
     (object.upvotes_count / object.total_votes.to_f) * 100
   end

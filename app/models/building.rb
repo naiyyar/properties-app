@@ -59,14 +59,24 @@
 #  show_application_link   :boolean
 
 class Building < ApplicationRecord
+  acts_as_voteable
+  resourcify
+
+  # constants
+  DIMENSIONS  = ['cleanliness','noise','safe','health','responsiveness','management']
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
   BEDROOMS    = [['0', 'Studio'],['1','1 Bed'],['2', '2 Bed'],['3', '3 Bed'],['4', '4+ Bed']]
   CITIES      = ['New York', 'Brooklyn', 'Bronx', 'Queens']
+  AMENITIES   = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
+                :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
+                :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee, :garage]
   
+  # Modules
   include PgSearch
   include Imageable
   include SaveNeighborhood
   include BuildingReviews
+  include Voteable
 
   # Search and filtering methods
   extend Search::BuildingSearch
@@ -74,11 +84,8 @@ class Building < ApplicationRecord
   extend Search::BuildingSorting
   extend Search::PopularSearches
   extend Search::RedoSearch
-
-  acts_as_voteable
-  resourcify
  
-  DIMENSIONS = ['cleanliness','noise','safe','health','responsiveness','management']
+  
   ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
 
   validates :building_street_address, presence: true
@@ -127,11 +134,8 @@ class Building < ApplicationRecord
   scope :two_bed,   -> { where(two_bed: 2) }
   scope :three_bed, -> { where(three_bed: 3) }
   scope :four_bed,  -> { where(four_plus_bed: 4) }
-  # amenities scopes
-  AMENITIES = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
-                :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
-                :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee, :garage]
   
+  # amenities scopes
   AMENITIES.each do |item|
     unless item == :elevator
       scope item,  -> { where(item => true) }
@@ -180,6 +184,15 @@ class Building < ApplicationRecord
   after_validation :reverse_geocode
   
   # Methods
+
+  def to_param
+    slug
+  end
+
+  def slug
+    slug = building_name.present? ? "#{id} #{building_name}" : "#{id} #{building_street_address}"
+    slug.parameterize
+  end
 
   def continue_call_back?
     ( avg_rating_changed?          && 
@@ -305,27 +318,6 @@ class Building < ApplicationRecord
     saved_amount(rent_medians, broker_percent)[0]
   end
 
-  def to_param
-    slug
-  end
-
-  def slug
-    slug = building_name.present? ? "#{id} #{building_name}" : "#{id} #{building_street_address}"
-    slug.parameterize
-  end
-
-  def image_uploads
-    uploads.where.not(image_file_name: nil).includes(:imageable)
-  end
-
-  def chached_image_uploads
-    Rails.cache.fetch([self, 'image_uploads']) { image_uploads.to_a }
-  end
-
-  def doc_uploads
-    uploads.where.not(document_file_name: nil).to_a
-  end
-
   def featured?
     featured_buildings.active.present?
   end
@@ -348,18 +340,6 @@ class Building < ApplicationRecord
 
   def rating_cache
     RatingCache.where(cacheable_id: self.id, cacheable_type: 'Building') 
-  end
-
-  def upvotes_count
-    votes.where(vote: true).count
-  end
-
-  def downvotes_count
-    votes.where(vote: false).count
-  end
-
-  def total_votes
-    votes.count
   end
 
   def zipcode=(val)

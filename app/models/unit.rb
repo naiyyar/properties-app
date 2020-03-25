@@ -42,10 +42,14 @@
 #
 
 class Unit < ApplicationRecord
+  acts_as_voteable
+
   include PgSearch
   include Imageable
+  include Voteable
+  
   attr_accessor :recommended_percent, :reviews_count
-	acts_as_voteable
+	
 	ratyrate_rateable 'unit','cleanliness','noise','safe','health','responsiveness','management'
 	resourcify
 	validates_uniqueness_of :name, scope: [:id, :building_id], presence: true
@@ -84,22 +88,6 @@ class Unit < ApplicationRecord
       self.all
     end
 	end
-
-	def upvotes_count
-    self.votes.where(vote: true).count
-  end
-
-  def downvotes_count
-    self.votes.where(vote: false).count
-  end
-
-  def total_votes
-    self.votes.count
-  end
-
-	def image_uploads
-    self.uploads.where('image_file_name is not null')
-  end
 
   def bedrooms
   	if number_of_bedrooms == 0
