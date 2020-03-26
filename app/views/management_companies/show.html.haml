@@ -16,31 +16,32 @@
     .summary
       .row
         .col-xs-12.col-sm-12.col-md-12.col-lg-12
-          .summaryItem{style: "margin-bottom: 0px;"}
+          .summaryItem{style: 'margin-bottom: 0px;'}
             %h1.pageTitle
               = @management_company.name
-            .property_information{style: "padding: 0px 2px;"}
+            .property_information{style: 'padding: 0px 2px;'}
+              %p
               %div= link_to 'Website', @management_company.website, class: 'hyper-link', target: '_blank'
-              %div{style: "display: inline-block;"}
-                = render 'layouts/shared/custom_rating'
-                .favLink
-                  %span.icon-pipe
-                  = !@recommended_percent.present? or @recommended_percent.nan? ? "| <span class='fa fa-thumbs-up recommended'></span> --%".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@recommended_percent.to_i}%".html_safe
+              %div{style: 'display: inline-block;'}
+              / = render 'layouts/shared/custom_rating'
+              / .favLink
+              / %span.icon-pipe
+              / = !@recommended_percent.present? or @recommended_percent.nan? ? "| <span class='fa fa-thumbs-up recommended'></span> --%".html_safe :  "| <span class='fa fa-thumbs-up recommended'></span> #{@recommended_percent.to_i}%".html_safe
             .clearfix
   
   #reviewsContainer.tabsContainer
     = hidden_field_tag :total_reviews, @total_reviews
-    %ul.nav.nav-tabs.nav-justified{role: "tablist"}
+    %ul.nav.nav-tabs.nav-justified{role: 'tablist'}
       %li.active
-        %a{"data-toggle" => "tab", href: "#building_managed", role: "tab"}
+        %a{'data-toggle' => 'tab', href: '#building_managed', role: 'tab'}
           = 'BUILDINGS MANAGED'
           (#{@all_buildings.count})
       %li
-        %a{"data-toggle" => "tab", href: "#buildings_reviews_tab", role: "tab"}= "BUILDING REVIEWS (#{ @total_reviews })"
+        %a{'data-toggle' => 'tab', href: '#buildings_reviews_tab', role: 'tab'}= "BUILDING REVIEWS (#{ @total_reviews })"
     
     .tab-content.split-view
-      #buildings_reviews_tab.tab-pane.fade{style: "overflow-y: scroll;height: 500px;"}
-        .comments.objects-container{style: "padding: 15px 14px 0px 20px;"}
+      #buildings_reviews_tab.tab-pane.fade{style: 'overflow-y: scroll; height: 500px;'}
+        .comments.objects-container{style: 'padding: 15px 14px 0px 20px;'}
           - if @reviews.present?
             = render :partial => 'reviews/review', :collection => @reviews, :as => :review
         .load-more-container.text-center{style: 'margin-bottom: 20px;'}

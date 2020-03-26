@@ -43,7 +43,7 @@ class ManagementCompaniesController < ApplicationController
     final_results        = Building.with_featured_building(@buildings, page_num)
     @manage_buildings    = final_results[1] if !params[:object_id].present?
     @all_buildings       = final_results[0][:all_buildings]
-    @recommended_percent = @management_company.recommended_percent(@buildings)
+    # @recommended_percent = @management_company.recommended_percent(@buildings)
     @reviews             = Review.buildings_reviews(@buildings)
     @total_reviews       = @reviews.present? ? @reviews.count : 0
     @reviews             = @reviews.limit(10)
@@ -51,7 +51,7 @@ class ManagementCompaniesController < ApplicationController
       @broker_percent = BrokerFeePercent.first.percent_amount
       @rent_medians   = RentMedian.all
       # finding average rating for all managed buildings 
-      @stars = @management_company.get_average_stars(@buildings, @total_reviews)
+      # @stars = @management_company.get_average_stars(@buildings, @total_reviews)
       # For map
       @hash = final_results[0][:map_hash]
       if @hash.length > 0
