@@ -47,7 +47,7 @@
   - if @similar_properties.present?
     #subways
       %h3= "Similar Buildings (#{@similar_properties.count})"
-      = render 'buildings/show/similar_properties'
+      = render 'buildings/show/similar_properties', step: 2, col: 6
 
   .clearfix
   - if @building.rating_cache?
