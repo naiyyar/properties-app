@@ -4,7 +4,7 @@
     %table{style: 'width: 100%;'}
       - @price_ranges.each_pair do |bed_range, price|
         %tr
-          %td=bedroom_type(bed_range)
-          %td
+          %td.font-14=bedroom_type(bed_range)
+          %td.font-14
             = set_ranges(@building.price, price) if price.present?
                 

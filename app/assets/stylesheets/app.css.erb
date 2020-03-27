@@ -481,6 +481,7 @@ form fieldset, .smart-form fieldset{
 }
 .aggregate-ratings ul li{
     padding: 4px 0px;
+    font-size: 14px;
 }
 .aggregate-ratings ul li .star{
     display: inline-flex;
@@ -656,13 +657,18 @@ form fieldset, .smart-form fieldset{
 
 .property_information{
     padding: 2px 0px;
+    font-size: 14px;
 }
-.property_information div.pbt, .property_information span {
+.property_information div.pbt, 
+.property_information span {
     padding: 2px 0px;
 }
 
 .property_information .contact-buttons{
     margin-top: 8px;
+}
+.property_information .contact-buttons a{
+    font-size: 14px;
 }
 
 #properties .figure{
@@ -679,10 +685,9 @@ input[type=select] {
    -moz-appearance:    menulist;
    appearance:         menulist;
 }
-.sliderLink{text-align: center; padding: 8px;}
-.square_feet_help_block{
-    visibility: hidden;
-}
+.sliderLink{ text-align: center; padding: 8px; font-size: 14px; }
+.square_feet_help_block{ visibility: hidden; }
+
 a.link_underlined:hover, .underline{
     text-decoration: underline !important;
 }
@@ -2109,10 +2114,10 @@ a.btn.viewInfo {
 #content {
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: #f3f3f3;
+    background-color: #fff;
     width: 50%;
     height: 100px;
-    border-top: 1px solid #e8e8e8;
+    /*border-top: 1px solid #e8e8e8;*/
     float: right;
     -webkit-overflow-scrolling: touch;
 }
@@ -2463,7 +2468,7 @@ a.card, div.card {
 }
 a.card h2, div.card h2 {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 16px;
     margin: 0 10px 0 0;
     padding: 10px 0 3px 10px;
@@ -2483,7 +2488,7 @@ a.card h2, div.card h2 {
     text-decoration: none;
 }
 a.card .cardAddress, div.card .cardAddress {
-    font-size: 11px;
+    font-size: 12px;
     line-height: 13px;
     color: #999;
     padding: 0 0 5px 10px;
@@ -2769,8 +2774,16 @@ h1.pageTitle {
     width: 33%;
 }
 
+.font-14{
+    font-size: 14px !important;
+}
+
+.font-16{
+    font-size: 16px !important;
+}
+
 #content h3 {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 16px;
     margin: 0;
     padding: 0 0 10px 0;
@@ -5268,7 +5281,7 @@ select.custom-arrow {
     #content {
         overflow-x: hidden;
         overflow-y: scroll;
-        background-color: #f3f3f3;
+        background-color: #fff;
         width: 100%;
         border-top: 1px solid #e8e8e8;
         float: right;

@@ -21,7 +21,7 @@
   = link_to @show_path do
     = render 'home/building_detail', building: building
 
-  .pb-8{style: 'margin-left: 10px;'}=bed_ranges(building)
+  .pb-8.font-14{style: 'margin-left: 10px;'}=bed_ranges(building)
   
   = render 'contacts/cta_buttons', building: building, size_class: '', on_click: false, filter_params: params[:filter]
 

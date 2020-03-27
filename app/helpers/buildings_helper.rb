@@ -171,7 +171,7 @@ module BuildingsHelper
 	def check_availability_button web_url, klass
 		link_to 'Check Availability', web_url, 
 																	onclick: "window.open(this.href,'_blank');return false;",
-																	class: "btn btn-primary #{klass} btn-round"
+																	class: "btn btn-primary #{klass} btn-round ca"
 	end
 
 	def contact_leasing_button building, event, klass

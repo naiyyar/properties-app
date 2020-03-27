@@ -11,9 +11,12 @@
 	  section a{
 	  	width: 100%;
 	  }
+	  section a.ca{
+	  	padding: 10px 8px;
+	  }
 	}
 
-	a{ font-weight: bolder; }
+	a{ font-weight: bolder; font-size: 14px; }
 
   .h-42{
   	height: 44px;

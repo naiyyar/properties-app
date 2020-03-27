@@ -6,7 +6,7 @@
   <div class="row">
     <% BuildingAmenities.all_amenities.each_pair do |k, v| %>
       <%if @building[k].present? %>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem">
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem font-14">
           <span><%= image_tag "amenities_icons/#{v}1.png" %></span>
           <% if v == 'Elevator' %>
             <%= "#{v}(#{@building.elevator})" %>

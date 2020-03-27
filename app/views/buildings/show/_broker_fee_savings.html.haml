@@ -4,7 +4,7 @@
     %table{style: 'width: 100%;'}
       - @building.bedroom_ranges.each_with_index do |bed_range, index|
         %tr
-          %td=bedroom_type(bed_range)
-          %td="#{number_to_currency(@saved_amounts[index], precision: 0)}"
+          %td.font-14=bedroom_type(bed_range)
+          %td.font-14="#{number_to_currency(@saved_amounts[index], precision: 0)}"
             
                 
