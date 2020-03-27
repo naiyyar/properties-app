@@ -71,7 +71,6 @@ function bindElemToMarker(elem, marker, object, map){
   var card = elem.parent().parent().parent();
   card.on('mouseover', function(){
     marker.setIcon(markerIcon(price, 'green'));
-    //map.setZoom(14);
     //map.panTo(new google.maps.LatLng(object.latitude,object.longitude));
   }).on('mouseout', function(){
     marker.setIcon(markerIcon(price, 'red'));
@@ -80,7 +79,7 @@ function bindElemToMarker(elem, marker, object, map){
 
 function createSidebar(object, marker, map, zoom){
   var elem = $( createSidebarElem(object) );
-  $('#building_details'+object.id).html(elem)
+  $('#building_details'+object.id).html(elem);
   bindElemToMarker(elem, marker, object, map, zoom);
 };
 

@@ -58,7 +58,7 @@
       <%= render 'layouts/shared/signin' if controller_name != 'sessions' %>
       <%= render 'layouts/shared/signup' if controller_name != 'registrations' %>
     <%end%>
-
+    <%= render 'buildings/favourite_script' %>
     <%= javascript_include_tag 'home' %>
     <%= javascript_include_tag 'zapp' %>
 

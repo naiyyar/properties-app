@@ -24,16 +24,32 @@ class FeaturedBuilding < ApplicationRecord
   after_save :make_active, unless: :featured_by_manager?
   before_destroy :check_active_status, unless: Proc.new{ |obj| obj.expired? }
 
-  def featured_by_manager?
-    featured_by == 'manager'
-  end
-
   def self.active_featured_buildings building_ids
     where(building_id: building_ids).active
   end
 
   def self.active_building_ids building_ids
     active_featured_buildings(building_ids).pluck(:building_id)
+  end
+
+  def self.get_random_buildings
+    results            = []
+    featured_buildings = self.active.includes(:building)
+    total_to_show      = 4
+    fbs_count          = featured_buildings.count
+    results << featured_buildings.shuffle[0..fbs_count]
+    results << buildings_with_active_listing.first(total_to_show - fbs_count) if fbs_count < 4
+    
+    return results.flatten.first(4)
+  end
+
+  def self.buildings_with_active_listing
+    @buildings ||= Building.with_active_listing
+    return @buildings.shuffle[0..@buildings.count]
+  end
+
+  def featured_by_manager?
+    featured_by == 'manager'
   end
 
   def has_start_and_end_date?
@@ -114,7 +130,7 @@ class FeaturedBuilding < ApplicationRecord
   private
 
   def make_active
-    update_columns(active: true) if has_start_and_end_date?
+    update_columns(active: true) if has_start_and_end_date? && end_date >= Time.zone.now
   end
   
   def check_active_status
