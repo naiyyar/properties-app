@@ -83,6 +83,16 @@
         $(this).prev().find('span').removeClass('fa-angle-up').addClass('fa-angle-down');
     });
 
+    // home page featured slider
+    $(".center").slick({
+      dots: false,
+      infinite: true,
+      centerMode: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false
+    });
+
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();
 
