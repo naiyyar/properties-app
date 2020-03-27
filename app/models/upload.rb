@@ -73,11 +73,12 @@ class Upload < ApplicationRecord
   end
 
   def uploaded_img_url
-    if self.image.exists?(:medium)
-      self.image.url(:medium)
-    else
-      self.image.url(:original)
-    end
+    self.image.url(:medium)
+    # if self.image.exists?(:medium)
+    #   self.image.url(:medium)
+    # else
+    #   self.image.url(:original)
+    # end
   end
 
   def self.image_uploads_count object

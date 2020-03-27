@@ -6,6 +6,7 @@
       .figure{style: 'position: relative;', id: "figure#{building.id}"}= image_tag 'shimmer.gif', style: 'width: 100%;height: 225px;'
       .building-detail-card{id: "building_details#{building.id}"}
   - else
+    / - cache [building, 'featured', Date.today] do
     .figure.featured-comps{style: 'position: relative;', id: "figure#{building.id}", data: { show_url: @show_path }}
       - if building.featured?
         %h4.comp.featured.round Featured

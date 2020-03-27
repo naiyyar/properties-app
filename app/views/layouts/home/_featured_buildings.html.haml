@@ -4,12 +4,5 @@
 		.row.pb40
 			- @similar_properties = @featured_buildings
 			= render 'buildings/show/similar_properties', step: 4, col: 3
-			
-			- if false
-				- @featured_buildings.each do |fb|
-					.col-xs-12.col-sm-6.col-md-3.col-lg-3
-						- building 			= fb.kind_of?(FeaturedBuilding) ? fb.building : fb
-						- @last_uploads = building.image_uploads.first
-						= render 'buildings/detail_card', building: building
 
 			  
