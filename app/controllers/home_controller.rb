@@ -12,7 +12,7 @@ class HomeController < ApplicationController
 
   def index
     @home_view        = true
-    @featured_buildings = FeaturedBuilding.get_random_buildings
+    @featured_buildings ||= FeaturedBuilding.get_random_buildings(pop_nb_buildings)
     @buildings_count  = pop_nb_buildings&.size
     @meta_desc        = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
                          no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."

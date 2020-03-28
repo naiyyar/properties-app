@@ -17,14 +17,15 @@
             %ul.list-inline
               - home_quick_links.each do |nb|
                 %li=link_to quick_link_name(nb), nb[:url]
-
-  = render 'layouts/home/featured_buildings'
+  
+  .home-wrapper{style: 'padding: 20px 20px 0px;background: #FBFBFF;'}
+    = render 'layouts/home/featured_buildings'
 
   = render 'layouts/home/popular_neighborhoods'
 
   = render 'layouts/home/popular_searches'
 
-  .home-wrapper{style: 'background: #FBFBFF;'}
+  .home-wrapper{style: 'background: #fff;'}
     .home-content
       .row
         .col-lg-1.col-sm-12
@@ -34,7 +35,7 @@
           = link_to 'Learn More <span class="fa fa-arrow-right"></span>'.html_safe, '/about', style: 'font-size: 18px;font-weight: bolder;color: #2b78e4;'
         .col-lg-1.col-sm-12
   
-  .home-wrapper{style: 'background: #fff;'}
+  .home-wrapper{style: 'background: #FBFBFF;'}
     .home-content
       .row
         .col-lg-1.col-sm-12

@@ -1,8 +1,12 @@
 .listings.table{
 	thead, tbody, tfoot{
 		tr{
+			th{
+				text-align: center;
+			}
 			td, th{
 				padding: 5px;
+				font-size: 14px;
 			}
 		}
 	}

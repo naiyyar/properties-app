@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def pop_nb_buildings
-    @pop_nb_buildings ||= Building.select(:city, :neighborhood)
+    @pop_nb_buildings ||= Building.all #select(:city, :neighborhood)
   end
 
   def pop_neighborhoods

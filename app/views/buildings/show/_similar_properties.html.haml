@@ -4,6 +4,7 @@
     #carouselSimilar-1.carousel.slide.carousel-col
       .carousel-inner
         - item_ids = []
+        - @border_class = 'bordered'
         - (1..@similar_properties.count).step(step).each_with_index do |val, index|
           %div{class: "item #{index == 0 ? 'active' : ''}"}
             .row
