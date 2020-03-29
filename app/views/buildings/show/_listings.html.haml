@@ -3,15 +3,15 @@
 		%table.table.listings
 			%thead
 				%tr
-					%th{width: '15%'} Date
+					%th{width: '16%'} Date
 					%th Apt#
 					%th Rent
 					%th Beds
 					%th Baths
-					%th Months Free
-					%th.hidden-xs Date Available
+					%th{width: '5%'} Months Free
+					%th.hidden-xs{width: '16%'} Date Available
 					%th.hidden-xs OP
-					%th.hidden-xs Rent Stabilize
+					%th.hidden-xs{width: '5%'} Rent Stabilize
 			%tbody.table.table-borders
 				- if listings.present?
 					- colspan 		 = browser.device.mobile? ? '6' : '9'

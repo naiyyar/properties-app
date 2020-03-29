@@ -10,7 +10,7 @@
             .row
               - @similar_properties.where.not(id: item_ids).limit(step).each do |building|
                 - @last_uploads = building.image_uploads.first
-                %div{class: "col-lg-#{col}"}= render 'buildings/detail_card', building: building
+                %div{class: "col-lg-#{col} col-md-4"}= render 'buildings/detail_card', building: building
                 - item_ids << building.id
       
       - if @similar_properties.count > step
