@@ -3,10 +3,40 @@
 		tr{
 			th{
 				text-align: center;
+				&:first-child{
+					width: 16%;
+				}
 			}
 			td, th{
 				padding: 5px;
 				font-size: 14px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.listings.table {
+		thead, tbody, tfoot {
+			tr {
+				th:first-child{
+					width: 25%;
+				}
+				td, th {
+					padding: 8px 0px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 992px) and (max-width: 1024px) {
+ .listings.table{
+		thead, tbody, tfoot{
+			tr{
+				td, th{
+					padding: 8px 0px;
+				}
 			}
 		}
 	}
