@@ -6,13 +6,12 @@
   
     .row
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-        #filterrific_results{style: "margin-top: 10px;"}
+        #filterrific_results{style: 'margin-top: 10px;'}
           .table-overflow
             %table.table.table-striped#sortable
               %thead
                 %tr
-                  %th.no-sort.text-center
-                    =check_box_tag 'check_all_listing', nil, nil, class: 'check_all_listing'
+                  %th.no-sort.text-center=check_box_tag 'check_all_listing', nil, nil, class: 'check_all_listing'
                   %th Date Active
                   %th Management
                   %th Building Address
@@ -31,8 +30,7 @@
               %tbody.table#listings-body
                 = render 'listings/partials/listings'
 
-  .text-center
-    = will_paginate @listings, renderer: BootstrapPagination::Rails
+  .text-center= will_paginate @listings, renderer: BootstrapPagination::Rails
 
 :css
   #sortable_filter{

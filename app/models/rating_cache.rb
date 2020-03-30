@@ -33,8 +33,7 @@ class RatingCache < ApplicationRecord
   end
 
   def self.create_rating_cache rateable, rateables
-    rating_cache = RatingCache.create(  cacheable_id:   rateable.id, 
-                                        cacheable_id:   rateable.id,
+    rating_cache = RatingCache.create(  cacheable_id:   rateable.id,
                                         cacheable_type: rateable.class.name,
                                         dimension:      dimension,
                                         avg:            rateables.sum(:stars) / rateables.count,
