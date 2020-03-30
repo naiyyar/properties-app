@@ -8,25 +8,25 @@
 					%th Rent
 					%th Beds
 					%th Baths
-					%th.text-center{width: '5%'} Months Free
-					%th.hidden-xs.text-center{width: '16%'} Date Available
+					%th Months Free
+					%th.hidden-xs{width: '16%'} Date Available
 					%th.hidden-xs OP
-					%th.hidden-xs.text-center{width: '5%'} Rent Stabilize
+					%th.hidden-xs{width: '5%'} Rent Stabilize
 			%tbody.table.table-borders
 				- if listings.present?
 					- colspan = browser.device.mobile? ? '6' : '9'
 					- listings.each do |listing|
 						%tr
-							%td.text-center=listing.date_active
-							%td.text-center=listing.unit
-							%td.text-right
+							%td=listing.date_active
+							%td=listing.unit
+							%td
 								%b=number_to_currency(listing.rent, precision: 0)
-							%td.text-center=listing.bed
-							%td.text-center=listing.bath
-							%td.text-center=listing.free_months
+							%td=listing.bed
+							%td=listing.bath
+							%td=listing.free_months
 							%td.hidden-xs=listing.date_available
 							%td.hidden-xs=listing.owner_paid
-							%td.text-center.hidden-xs=listing.rentstabilize
+							%td.hidden-xs=listing.rentstabilize
 						
 					- if type == 'past' && @all_inactive_listings.present? && @all_inactive_listings.count > 5
 						%tr

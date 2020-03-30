@@ -401,3 +401,9 @@ input[type="radio"], input[type="checkbox"] {
     margin-top: 60px;
   }
 }
+
+@media screen and (min-width: 992px){
+  .modal-md {
+    width: 700px;
+  }
+}

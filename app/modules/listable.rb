@@ -13,6 +13,6 @@ module Listable
   end
 
   def rentstabilize
-    rent_stabilize.present? ? (rent_stabilize == 'true' ? 'Y' : 'N') : ''
+    rent_stabilize.present? ? (['t', 'true'].include?(rent_stabilize) ? 'Y' : 'N') : ''
   end
 end

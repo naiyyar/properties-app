@@ -38,7 +38,7 @@ class NeighborhoodLink < ApplicationRecord
   end
 
   def self.neighborhood_guide_links(search_string, queens_borough)
-    if search_string.present? and search_string == 'New York'
+    if search_string.present? && search_string == 'New York'
       self.all
     elsif queens_borough.include?(search_string)
       where('neighborhood = ?', search_string)
