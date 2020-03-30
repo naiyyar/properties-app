@@ -8,7 +8,7 @@
           %div.modal-title
             = listing_header_title(@rentals).html_safe
         .modal-body.no-padding
-          = render 'buildings/show/listings', listings: @listings
+          = render 'buildings/show/listings', listings: @listings, type: 'past'
 - else
   .modal-full.past-listing-modal{style: 'display: none; background: #fff;'}
     .row{style: 'position: relative;'}
@@ -20,7 +20,7 @@
       %div.text-right.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
         = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeContact'
     
-    = render 'buildings/show/listings', listings: @listings
+    = render 'buildings/show/listings', listings: @listings, type: 'past'
 
     :css
       .past-listing-modal .title-header{

@@ -17,11 +17,11 @@
   #listings
     - if @active_listings.present?
       %h3= "#{@active_listings.count} Active Rental Listings"
-      = render 'buildings/show/listings', listings: @active_listings
+      = render 'buildings/show/listings', listings: @active_listings, type: 'current'
     .clearfix
     - if @inactive_listings.present?
       %h3= "#{@all_inactive_listings.count} Past Rental Listings"
-      = render 'buildings/show/listings', listings: @inactive_listings
+      = render 'buildings/show/listings', listings: @inactive_listings, type: 'past'
 
   .clearfix
   = render 'building_amenities'

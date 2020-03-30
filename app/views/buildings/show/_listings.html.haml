@@ -14,8 +14,7 @@
 					%th.hidden-xs.text-center{width: '5%'} Rent Stabilize
 			%tbody.table.table-borders
 				- if listings.present?
-					- colspan 		 = browser.device.mobile? ? '6' : '9'
-					- active_block = listings.first.active
+					- colspan = browser.device.mobile? ? '6' : '9'
 					- listings.each do |listing|
 						%tr
 							%td.text-center=listing.date_active
@@ -29,6 +28,6 @@
 							%td.hidden-xs=listing.owner_paid
 							%td.text-center.hidden-xs=listing.rentstabilize
 						
-					- if !active_block && @all_inactive_listings&.count > 5
+					- if type == 'past' && @all_inactive_listings.present? && @all_inactive_listings.count > 5
 						%tr
 							%td.text-center{colspan: colspan}=link_to 'Show More...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true
