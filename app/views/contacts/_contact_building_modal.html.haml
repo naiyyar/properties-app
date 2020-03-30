@@ -1,10 +1,10 @@
 - if !browser.device.mobile?
-  #newConactModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "NewUnitLabel", role: "dialog"}
+  #newConactModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
     .modal-dialog.modal-md
       .modal-content
         .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
-            %span{"aria-hidden" => "true"} ×
+          %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+            %span{'aria-hidden' => 'true'} ×
           %h4.modal-title Contact Property Manager
         .modal-body.no-padding
           = render 'contacts/contact_building_form'
@@ -16,6 +16,6 @@
           %h4.text-center{style: 'margin-top: 10px; margin-bottom: 10px;'} Contact Property Manager
 
       %div.text-right.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
-        = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeContact'
+        = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, 'javascript:;', class: 'closeContact'
     
     = render 'contacts/contact_building_form'
