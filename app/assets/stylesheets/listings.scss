@@ -2,7 +2,6 @@
 	thead, tbody, tfoot{
 		tr{
 			th{
-				text-align: center;
 				&:first-child{
 					width: 16%;
 				}
@@ -14,6 +13,8 @@
 		}
 	}
 }
+
+/* ========= MEDIA QUERY============ */
 
 @media screen and (max-width: 767px) {
 	.listings.table {

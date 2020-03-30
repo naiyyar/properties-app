@@ -8,10 +8,10 @@
 					%th Rent
 					%th Beds
 					%th Baths
-					%th{width: '5%'} Months Free
-					%th.hidden-xs{width: '16%'} Date Available
+					%th.text-center{width: '5%'} Months Free
+					%th.hidden-xs.text-center{width: '16%'} Date Available
 					%th.hidden-xs OP
-					%th.hidden-xs{width: '5%'} Rent Stabilize
+					%th.hidden-xs.text-center{width: '5%'} Rent Stabilize
 			%tbody.table.table-borders
 				- if listings.present?
 					- colspan 		 = browser.device.mobile? ? '6' : '9'
@@ -29,6 +29,6 @@
 							%td.hidden-xs=listing.owner_paid
 							%td.text-center.hidden-xs=listing.rentstabilize
 						
-					- if !active_block and @all_inactive_listings.present? and @all_inactive_listings.count > 5
+					- if !active_block && @all_inactive_listings&.count > 5
 						%tr
 							%td.text-center{colspan: colspan}=link_to 'Show More...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true
