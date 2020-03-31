@@ -5,6 +5,9 @@
 				&:first-child{
 					width: 16%;
 				}
+				&:nth-child(6){
+					width: 10%;
+				}
 			}
 			td, th{
 				padding: 5px;

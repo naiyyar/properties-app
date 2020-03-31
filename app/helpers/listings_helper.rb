@@ -5,19 +5,15 @@ module ListingsHelper
 		else
 			"<h4 #{name_styles}> #{@building.building_name_or_address} </h2>" +
 			"<p class='cardAddress text-muted address_font'>#{@building.street_address} #{@building.zipcode}</p>" +
-			"<b style='font-size: 13px;'>#{@listings.size} Active Rental Listings</b>"
+			"<p style='font-size: 14px;font-weight: bolder;margin-bottom: 6px;'>#{@listings.size} Active Rental Listings</p>"
 		end
 	end
 
 	def name_styles
-		"style='margin: 2px 0px; font-size: #{name_text_font};font-weight: #{address_text_weight}'"
-	end
-
-	def address_text_weight
-		browser.device.mobile? ? 'bolder;' : ''
+		"style='margin: 2px 0px; font-size: #{name_text_font};font-weight: bolder;'"
 	end
 
 	def name_text_font
-		browser.device.mobile? ? '14px;' : '18px;'
+		browser.device.mobile? ? '14px;' : '16px;'
 	end
 end
