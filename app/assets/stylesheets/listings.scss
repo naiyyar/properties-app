@@ -20,8 +20,25 @@
 	.listings.table {
 		thead, tbody, tfoot {
 			tr {
-				th:first-child{
-					width: 25%;
+					th {
+					&:first-child{
+						width: 23%;
+					}
+					&:nth-child(2){
+						width: 14%;
+					}
+					&:nth-child(3){
+						width: 16.5%;
+					}
+					&:nth-child(4){
+						width: 10%;
+					}
+					&:nth-child(5){
+						width: 8%;
+					}
+					&:nth-child(6){
+						width: 10%;
+					}
 				}
 				td, th {
 					padding: 8px 2px;
@@ -36,7 +53,7 @@
 		thead, tbody, tfoot{
 			tr{
 				td, th{
-					padding: 8px 0px;
+					padding: 8px 2px;
 				}
 			}
 		}
