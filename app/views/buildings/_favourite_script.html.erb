@@ -121,7 +121,11 @@
       url: '/listings/show_more',
       type: 'get',
       dataType: 'script',
-      data: { building_id: building_id, listing_type: 'active', filter_params: filter_params },
+      data: { 
+              building_id: building_id, 
+              listing_type: 'active', 
+              filter_params: filter_params 
+            },
       success: function(response){
         hideLoader();
       }

@@ -1,12 +1,12 @@
 module ListingsHelper
 	def listing_header_title rentals
-		if rentals == 'past'
-			'<h4>Past Rental Listings</h4>'
-		else
-			"<h4 #{name_styles}> #{@building.building_name_or_address} </h2>" +
-			"<p class='cardAddress text-muted address_font'>#{@building.street_address} #{@building.zipcode}</p>" +
-			"<p style='font-size: 14px;font-weight: bolder;margin-bottom: 6px;'>#{@listings.size} Active Rental Listings</p>"
-		end
+		"<h4 #{name_styles}> #{@building.building_name_or_address} </h2>" +
+		"<p class='cardAddress text-muted address_font'>#{@building.street_address} #{@building.zipcode}</p>" +
+		"<p style='font-size: 14px;margin-bottom: 6px;'>#{@listings.size} #{type_text(rentals)}</p>"
+	end
+
+	def type_text type
+		type == 'past' ? 'Past Rental Listings' : 'Active Rental Listings'
 	end
 
 	def name_styles
