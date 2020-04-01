@@ -24,7 +24,8 @@
         - else
           .text-center{style: 'padding: 12px 4px;'}= no_search_result_text
 
-    %section.spv-pop-search{style: 'margin-top: 25px; background: #fff;'}= render 'layouts/home/popular_searches'
+    %section.spv-pop-search{style: 'padding: 0px 16px;'}
+      = render 'layouts/home/popular_searches', bg_col: '#fff'
   
     = render 'layouts/home/footer'
 .clearfix

@@ -10,10 +10,7 @@ module ListingsHelper
 	end
 
 	def name_styles
-		"style='margin: 2px 0px; font-size: #{name_text_font};font-weight: bolder;'"
+		"style='margin: 2px 0px; font-size: 16px;font-weight: bolder;'"
 	end
-
-	def name_text_font
-		browser.device.mobile? ? '14px;' : '16px;'
-	end
+	
 end

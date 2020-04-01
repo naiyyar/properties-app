@@ -2117,7 +2117,6 @@ a.btn.viewInfo {
     background-color: #fff;
     width: 50%;
     height: 100px;
-    /*border-top: 1px solid #e8e8e8;*/
     float: right;
     -webkit-overflow-scrolling: touch;
 }
@@ -2135,7 +2134,7 @@ a.btn.viewInfo {
 .filter {
     background-color: #fff;
     float: right;
-    width: 49.2%;
+    width: 50%;
 }
 .filter h1 {
     margin-top: 0;
@@ -2170,7 +2169,7 @@ a.handleFilter, a.handleSort {
 .filter, .modal-full {
     position: absolute;
     right: 0px;
-    top: 113px;
+    top: 110px;
     bottom: 0px;
     z-index: 2147483638;
     height: 100%
@@ -4726,10 +4725,11 @@ select.custom-arrow {
     width: 335px;
 }
 
+#filter-container {
+    width: 96%;
+}
+
 @media screen and (max-width: 767px) {
-    .address_font{
-        font-size: 13px;
-    }
     #wrapper .content{
         padding: 10px;
     }
@@ -5081,6 +5081,9 @@ select.custom-arrow {
     }
     .filterForm label {
         font-size: 12px;
+    }
+    #filter-container {
+        width: 92%;
     }
     .filter-action{
         padding: 20px;
