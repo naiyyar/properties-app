@@ -7,7 +7,7 @@ module Search
                                   :min_listing_price,:max_listing_price, :listings_count,
                                   :state, :price).as_json(:methods => [:featured])
       else
-        searched_buildings.as_json(:methods => [:featured?])
+        searched_buildings.as_json(:methods => [:featured?, :featured])
       end
     end
 
@@ -85,7 +85,7 @@ module Search
 
     def buildings_in_city search_term
       if search_term == 'New York'
-        where(city: CITIES)
+        where(city: Building::CITIES)
       else
         where(city: search_term)
       end

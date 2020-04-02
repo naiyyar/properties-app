@@ -1,6 +1,6 @@
 <div class="row">
-	<% @buildings.each do |building| %>
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="properties">
+  <% @buildings.each do |building| %>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="properties">
       <div class="card">
         <%= link_to building_path(building) do %>
           <div class="figure" style="position: relative;">
@@ -11,7 +11,10 @@
           </div>
           <h2><%= building.building_name_or_address %></h2>
           <div class="cardAddress"><span class="fa fa-map-marker"></span> <%= building.street_address %>, <%= building.zipcode %></div>
-          <%= render partial: 'home/building_detail', locals: {building: building} %>
+          
+          <div class="font-14" style='padding: 0px 0px 0px 11px; height: 22px;'>
+            <%= render partial: 'home/building_detail', locals: {building: building} %>
+          </div>
         <%end%>
 
         <div style="padding: 8px;">
@@ -19,8 +22,8 @@
         </div>
       </div>
     </div>
-	<%end%>
+  <%end%>
 </div>
 
 <%= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
-	    
+      
