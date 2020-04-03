@@ -35,7 +35,7 @@ class FeaturedBuilding < ApplicationRecord
   def self.get_random_buildings buildings
     results            = []
     featured_buildings = self.active
-    fbs_count          = featured_buildings.count
+    fbs_count          = featured_buildings&.size
     building_ids       = featured_buildings.pluck(:building_id)
     fb_buildings       = buildings.where(id: building_ids)
     results << fb_buildings.shuffle[0..fbs_count]
@@ -48,7 +48,7 @@ class FeaturedBuilding < ApplicationRecord
   def self.shuffle_buildings_with_active_listing buildings, building_ids
     buildings.where.not(id: building_ids)
              .with_active_listing
-             .shuffle[0..buildings.count]
+             .shuffle[0..buildings.size]
   end
 
   def featured_by_manager?

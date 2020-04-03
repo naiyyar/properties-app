@@ -1,7 +1,3 @@
 .home-content
 	%h2.osLight1.text-center{style: 'font-weight: bolder; color: #000;'} No Fee Apartments That May Interest You
-	.row.pb20
-		- @similar_properties = @featured_buildings
-		= render 'buildings/show/similar_properties', step: 4, col: 3
-
-			  
+	.row.pb20= render 'buildings/show/similar_properties', step: 4, col: 3

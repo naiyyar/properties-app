@@ -1,21 +1,21 @@
 - @show_path = building_path(building)
 .card.search-view-card{class: "#{@border_class} #{home_page? ? 'home' : ''}", 'data-bid' => building.id}
-  - unless @similar_properties.present? || @featured_buildings.present?
+  - unless @similar_properties.present?
     = link_to @show_path do
-      .figure{style: 'position: relative;', id: "figure#{building.id}"}= image_tag 'shimmer.gif', style: 'width: 100%;height: 225px;'
-      .building-detail-card{id: "building_details#{building.id}"}
+      .figure{style: 'position: relative;', id: "figure#{building.id}"}
+        = image_tag 'shimmer.gif', style: 'width: 100%;height: 225px;'
+      - if home_page?
+        =render 'home/partials/building_header', building: building
+      - else
+        .building-detail-card{id: "building_details#{building.id}"}
+        
   - else
-    / - cache [building, 'featured', Date.today] do
     .figure.featured-comps{style: 'position: relative;', id: "figure#{building.id}", data: { show_url: @show_path }}
       - if building.featured?
         %h4.comp.featured.round Featured
       .bg-size-cover.h-lg{ style: "background-image: url(#{feature_comp_bg_img_url(@last_uploads)});" }
     
-    #building_details88.building-detail-card.featured-comps{data: { show_url: @show_path }}
-      %h2.name-or-add=building.building_name_or_address
-      .cardAddress
-        %span.fa.fa-map-marker
-        = building.full_street_address
+    =render 'home/partials/building_header', building: building
 
   %div{style: 'float: right; margin-top: -43px;'}= render 'buildings/favourite', building: building
   

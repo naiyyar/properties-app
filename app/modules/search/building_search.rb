@@ -5,42 +5,51 @@ module Search
         searched_buildings.select(:id, :building_name, :building_street_address, 
                                   :latitude, :longitude, :zipcode, :city, 
                                   :min_listing_price,:max_listing_price, :listings_count,
-                                  :state, :price).as_json(:methods => [:featured])
+                                  :state, :price).as_json(:methods => [:featured?, :featured])
       else
         searched_buildings.as_json(:methods => [:featured?, :featured])
       end
     end
 
     def with_featured_building buildings, page_num = 1
-      final_results = {}
-      featured_buildings = featured_buildings(buildings)
-      top_two_featured_buildings = if featured_buildings.present? && featured_buildings.length > 2
-                                      featured_buildings.shuffle[0..1]
-                                    else
-                                      featured_buildings.shuffle[0..2]
-                                    end
-      #Selecting 2 featured building to put on top
-      page_num = 1 if page_num == 0
-      per_page_buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
-                                          .paginate(:page => page_num, :per_page => 20)
+      page_num                     = 1 if page_num == 0
+      final_results                = {}
       
-      #putting featured building on top
-      all_buildings = if top_two_featured_buildings.present?
-                        top_two_featured_buildings + per_page_buildings
-                      else
-                        per_page_buildings
-                      end
-      if top_two_featured_buildings.present?
-        buildings = buildings.where.not(id: top_two_featured_buildings.map(&:id))
-        buildings = top_two_featured_buildings + buildings
+      featured_buildings           = featured_buildings(buildings)
+      top2_featured_buildings     = seleted_featured_buildings(featured_buildings)
+      buildings_other_than_top_two = non_featured_buildings(buildings, top2_featured_buildings)
+      per_page_buildings           = buildings_other_than_top_two.paginate(:page => page_num, :per_page => 20)
+      all_buildings                = buildings_with_featured_on_top(top2_featured_buildings, per_page_buildings)
+      
+      if top2_featured_buildings.present?
+        buildings = top2_featured_buildings + buildings_other_than_top_two
       end
-      #when there are only top two featured buildings after filter
-      #then per_page_buildings will be blank due to fitering featured buildings
-      per_page_buildings = all_buildings.paginate(:page => page_num, :per_page => 20) if per_page_buildings.blank? && all_buildings.present?
+      # when there are only top two featured buildings after filter
+      # then per_page_buildings will be blank due to fitering featured buildings
+      if per_page_buildings.blank? && all_buildings.present?
+        per_page_buildings = all_buildings.paginate(:page => page_num, :per_page => 20)
+      end
       final_results[:all_buildings] = all_buildings
-      final_results[:map_hash] = buildings_json_hash(buildings)
+      final_results[:map_hash]      = buildings_json_hash(buildings)
       
       return final_results, per_page_buildings
+    end
+
+    # putting featured building on top
+    def buildings_with_featured_on_top top_2, per_page
+      top_2.present? ? (top_2 + per_page) : per_page
+    end
+
+    def non_featured_buildings buildings, top_2
+      buildings.where.not(id: top_2.map(&:id))
+    end
+
+    def seleted_featured_buildings featured_buildings
+      if featured_buildings.present? && featured_buildings.length > 2
+        featured_buildings.shuffle[0..1]
+      else
+        featured_buildings.shuffle[0..2]
+      end
     end
 
     def featured_buildings searched_buildings
