@@ -17,7 +17,8 @@ function loadMarkerWindow(building_id, map, marker){
 }
 
 function loadDisplayImage(building_id){
-  var elem = $("#figure"+building_id)
+  var elem = $("#figure"+building_id);
+  var enable_touch = !($('#featured-buildings-section').length > 0);
   $.ajax({
     url: '/get_images',
     dataType: 'json',
@@ -25,16 +26,18 @@ function loadDisplayImage(building_id){
     data: { building_id: building_id },
     success: function(response){
       elem.html(response.html);
-      initLightSlider(elem.find('.gallery'));
+      initLightSlider(elem.find('.gallery'), enable_touch);
     }
   });
 }
 
-function initLightSlider(elem){
+function initLightSlider(elem, enable_touch){
   elem.lightSlider({
     item: 1,
     slideMargin: 0,
     loop: true,
+    enableDrag: enable_touch,
+    enableTouch: enable_touch,
     onBeforeSlide: function(el) {
        show_count_elem = el.parent().parent().prev();
        current_elem = show_count_elem.find('.current');
