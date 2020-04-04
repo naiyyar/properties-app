@@ -6,7 +6,7 @@ class Listing < ApplicationRecord
   counter_cache_with_conditions :building, :listings_count, active: true
   
   # constants
-  BEDROOMS                = [['0', 'Studio'],['1','1 Bed'],['2', '2 Bed'],['3', '3 Bed'],['4', '4+ Bed']]
+  BEDROOMS = [['0', 'Studio'],['1','1 Bed'],['2', '2 Bed'],['3', '3 Bed'],['4', '4+ Bed']]
 
   # validations
   validates_presence_of :building_address, :unit, :date_active

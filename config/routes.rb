@@ -122,7 +122,7 @@ Rails.application.routes.draw do
     end
   end
 
-  #multisteps Forms
+  # multisteps Forms
   resources :user_steps, :building_steps, :unit_steps
   
   resources :units do
@@ -133,8 +133,8 @@ Rails.application.routes.draw do
     end
   end
   
-  get '/:searched_by/:search_term', to: 'home#search',              as: :search #must be after buildings resource
-  get '/custom_search',             to: 'home#search' #must be after buildings resource
+  get '/:searched_by/:search_term', to: 'home#search',              as: :search # must be after buildings resource
+  get '/custom_search',             to: 'home#search' # must be after buildings resource
   get '/location_search',           to: 'home#search'
   get '/current_location',          to: 'home#search'
   get '/auto_search',               to: 'home#auto_search',         as: :auto_search
@@ -143,7 +143,8 @@ Rails.application.routes.draw do
   post '/load_infobox',             to: 'home#load_infobox',        as: :load_infobox
   post '/set_split_view_type',      to: 'home#set_split_view_type'
   get '/get_images',                to: 'home#get_images'
-
+  get '/load_featured_buildings',   to: 'home#load_featured_buildings'
+  
   post '/favorite',                 to: 'buildings#favorite',       as: :favorite
   get '/unfavorite',                to: 'buildings#unfavorite',     as: :unfavorite
 

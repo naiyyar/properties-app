@@ -84,14 +84,14 @@
     });
 
     // home page featured slider
-    $(".center").slick({
-      dots: false,
-      infinite: true,
-      centerMode: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false
-    });
+    // $(".center").slick({
+    //   dots: false,
+    //   infinite: true,
+    //   centerMode: true,
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1,
+    //   arrows: false
+    // });
 
     //Home menu swipe and slide
     //$('.swipe-nav').slideAndSwipe();

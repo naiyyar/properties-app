@@ -173,7 +173,7 @@
     var polylines = new google.maps.Polygon(polylineoptons);
 
     var set_boundaries = function(map){
-      brooklyn_and_queens_neighborhoods(searched_term, city, map) // In search.js
+      brooklyn_and_queens_neighborhoods(searched_term, city, map) //In search.js
     }
     
     setTimeout(function() {
@@ -218,7 +218,6 @@
   var contentHeight;
   var contentWidth;
   var isDevice = true;
-  
   // calculations for elements that changes size on window resize
   var resizeElements = function() {
     windowHeight = window.innerHeight;
@@ -244,6 +243,9 @@
     loadDisplayImage($(j).data('bid'));
   });
   
+
   //Initialize the map
+  //$(document).ready(function() { initialize(); });
   google.maps.event.addDomListener(window, 'load', initialize);
+
 </script>

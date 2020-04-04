@@ -32,23 +32,21 @@ class FeaturedBuilding < ApplicationRecord
     active_featured_buildings(building_ids).pluck(:building_id)
   end
 
+  FBS_COUNT = 4
   def self.get_random_buildings buildings
-    results            = []
-    featured_buildings = self.active
-    fbs_count          = featured_buildings&.size
+    featured_buildings = self.active.limit(FBS_COUNT).order('RANDOM()')
     building_ids       = featured_buildings.pluck(:building_id)
-    fb_buildings       = buildings.where(id: building_ids)
-    results << fb_buildings.shuffle[0..fbs_count]
-    if fbs_count < 4
-      results << shuffle_buildings_with_active_listing(buildings, building_ids).first(4 - fbs_count)
+    if building_ids.length < FBS_COUNT
+      building_ids += active_buildings_ids_without_featured(buildings, building_ids)
     end
-    return buildings.where(id: results.flatten.first(4).map(&:id))
+    return buildings.where(id: building_ids)
   end
 
-  def self.shuffle_buildings_with_active_listing buildings, building_ids
+  def self.active_buildings_ids_without_featured buildings, building_ids
     buildings.where.not(id: building_ids)
              .with_active_listing
-             .shuffle[0..buildings.size]
+             .limit(FBS_COUNT - building_ids.length)
+             .order('RANDOM()').pluck(:id)
   end
 
   def featured_by_manager?

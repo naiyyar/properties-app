@@ -1,0 +1,32 @@
+- @border_class = 'bordered'
+.similar{style: "#{@featured_buildings.present? ? 'padding: 0px;' : ''}"}
+	.center.slider
+		- properties = @similar_properties || @featured_buildings
+		- properties.each do |building|
+			%div= render 'buildings/detail_card', building: building
+
+:css
+	.slick-slide img {
+		width: 100%;
+	}
+
+	.slick-prev:before,
+	.slick-next:before {
+		color: black;
+	}
+
+	.slick-slide {
+		transition: all ease-in-out .3s;
+		opacity: .6;
+	}
+  
+	.slick-active {
+		opacity: .5;
+	}
+
+	.slick-current {
+		opacity: 1;
+	}
+	.modal-full.past-listing-modal{
+		padding-bottom: 10px;
+	}

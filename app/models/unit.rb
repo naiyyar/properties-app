@@ -49,15 +49,15 @@ class Unit < ApplicationRecord
   include Voteable
   
   attr_accessor :recommended_percent, :reviews_count
-	
-	ratyrate_rateable 'unit','cleanliness','noise','safe','health','responsiveness','management'
-	resourcify
-	validates_uniqueness_of :name, scope: [:id, :building_id], presence: true
   
-	belongs_to :building
-	has_many :reviews, as: :reviewable
-	has_many :rental_price_histories, dependent: :destroy
-	belongs_to :user
+  ratyrate_rateable 'unit','cleanliness','noise','safe','health','responsiveness','management'
+  resourcify
+  validates_uniqueness_of :name, scope: [:id, :building_id], presence: true
+  
+  belongs_to :building
+  has_many :reviews, as: :reviewable
+  has_many :rental_price_histories, dependent: :destroy
+  belongs_to :user
 
   pg_search_scope :search_query, 
                   against: [:name],
@@ -73,30 +73,30 @@ class Unit < ApplicationRecord
     ]
   )
 
-	default_scope { order('updated_at desc') }
+  default_scope { order('updated_at desc') }
 
-	def to_param
+  def to_param
     if name.present?
       "#{id} #{name}".parameterize.upcase
     end
   end 
 
-	def self.search(term)
+  def self.search(term)
     if term
       self.where('name ILIKE ?', "%#{term}%")
     else
       self.all
     end
-	end
+  end
 
   def bedrooms
-  	if number_of_bedrooms == 0
-  		'Studio'
-  	elsif number_of_bedrooms == 4
-  		'4+ Bedrooms'
-  	else
-  		"#{number_of_bedrooms} Bedrooms"
-  	end
+    if number_of_bedrooms == 0
+      'Studio'
+    elsif number_of_bedrooms == 4
+      '4+ Bedrooms'
+    else
+      "#{number_of_bedrooms} Bedrooms"
+    end
   end
 
 end
