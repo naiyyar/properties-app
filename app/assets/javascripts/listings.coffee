@@ -20,6 +20,7 @@ changeListingStatus = (status, elem) ->
 #==============================
 #Form submit confirm message
 #==============================
+
 $(document).on 'submit', 'form#active_on_action_form, form#active_off_action_form, form#delete_action_form', (e) ->
 	message = ''
 	form_id = $(this).attr('id')
@@ -38,9 +39,9 @@ $(document).on 'submit', 'form#active_on_action_form, form#active_off_action_for
 #==============================
 #on confirm box cancel click it's adding disabled atrribute to submit form button
 #==============================
+
 removeDisbaleFromSubmitButton=(elem)->
 	elem.find("input[type='submit']").removeAttr('disabled')
-
 
 #Errors
 #

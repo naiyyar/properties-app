@@ -14,7 +14,7 @@
       dragging = true;
     });
 
-    //for ios devices double tap
+    // for ios devices double tap
     $('body').on('click','a', function(e) {
         var building_id = '';
         var type = '';
@@ -112,11 +112,6 @@
             var sliding = true;
             setPrice(ui.values[0], ui.values[1], sliding);
             
-            // var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-            // var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-            // var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-            // $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
-            
             if($('.building_price_filter:checked').length > 0){
                 $('.building_price_filter').prop('checked', false);
             }
@@ -129,40 +124,11 @@
 
     var initSlider = function(){
         setPrice(min_price, max_price);
-        // var priceSliderRangeLeft = parseInt($('.priceSlider .ui-slider-range').css('left'));
-        // var priceSliderRangeWidth = $('.priceSlider .ui-slider-range').width();
-        // var priceSliderLeft = priceSliderRangeLeft + ( priceSliderRangeWidth / 2 ) - ( $('.priceSlider .sliderTooltip').width() / 2 );
-        // $('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
     }
 
     initSlider();
-    
-    // var repositionTooltip = function( e, ui ){
-    //     var div = $(ui.handle).data("bs.tooltip").$tip[0];
-    //     var pos = $.extend({}, $(ui.handle).offset(), { 
-    //                     width: $(ui.handle).get(0).offsetWidth,
-    //                     height: $(ui.handle).get(0).offsetHeight
-    //                 });
-    //     var actualWidth = div.offsetWidth;
 
-    //     var tp = {left: pos.left + pos.width / 2 - actualWidth / 2}
-    //     $(div).offset(tp);
-
-    //     $(div).find(".tooltip-inner").text( ui.value );
-    // }
-    
-    // $("#toggleStreetView").click(function(){
-    //     var toggle = panorama.getVisible();
-    //     if(toggle == false){
-    //       panorama.setVisible(true);
-    //       $(this).val('Map View');
-    //     } else {
-    //       panorama.setVisible(false);
-    //       $(this).val('Street View');
-    //     }
-    // })
-
-    //For mobile dropdown panel
+    // For mobile dropdown panel
     $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
       $('.popular-neighborhoods').slideToggle(200);
     });
@@ -202,8 +168,8 @@
         $('.mapHandler').show();
         listMapView();
         $('.sorted_by_option').show();
-        //Only when redo search
-        //images are not loading on hidden element
+        // Only when redo search
+        // images are not loading on hidden element
         if($('.searched-properties').hasClass('invisible')){
             $('.searched-properties').removeClass('invisible').removeClass('min');
         }
@@ -258,7 +224,7 @@
         DPButtons.closeDropdowns($(this), 'other');
     });
 
-    //Avoid dropdown menu close on click inside
+    // Avoid dropdown menu close on click inside
     $(document).on('click', '.neighborhoods-dropdown .dropdown-menu', function (e) {
         e.stopPropagation();
     });
@@ -268,8 +234,8 @@
         DPButtons.closeDropdowns($(this), 'filter');
     });
     
-    //Running this script only on desktop views
-    //var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+    // Running this script only on desktop views
+    // var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
 
     $(document).click(function(e) {
         e.stopPropagation();
@@ -295,31 +261,16 @@
         }
     });
 
-    // $('.tabsWidget .tab-scroll').slimScroll({
-    //     height: '235px',
-    //     size: '5px',
-    //     position: 'right',
-    //     color: '#939393',
-    //     alwaysVisible: false,
-    //     distance: '5px',
-    //     railVisible: false,
-    //     railColor: '#222',
-    //     railOpacity: 0.3,
-    //     wheelStep: 10,
-    //     allowPageScroll: true,
-    //     disableFadeOut: false
-    // });
-
     $('.progress-bar[data-toggle="tooltip"]').tooltip();
     $('.tooltipsContainer .btn').tooltip();
     $('#datepicker').datepicker();
 
-    //clear text search
+    // clear text search
     $('.clearSearchText').click(function(){
         $("#search_term").val('');
     })
 
-    //clearing out unit modal fields on building show page
+    // clearing out unit modal fields on building show page
     $("#new_unit_modal .close").click(function(){
         var search_field = $("#new_unit_modal #units-search-txt");
         if(search_field.val() != ''){
@@ -340,8 +291,8 @@
         }
     })
 
-    //New review form validations only
-    //$().ready(function(){
+    // New review form validations only
+    // $().ready(function(){
     $("#new_review").validate({
         rules: {
             'score[building]': 'required',
@@ -373,7 +324,7 @@
         }
     });
     
-    //Start Listing Datatable script
+    // Start Listing Datatable script
     var data_sortable = $('#sortable').DataTable({
       paging: false,
       scrollY: false,
@@ -383,9 +334,9 @@
       ]
     });
 
-    //END Listing DataTable script 
+    // END Listing DataTable script 
 
-    //Removing rules when no pros check is checked
+    // Removing rules when no pros check is checked
     $('#no_pros').change(function(){
         if($(this).is(':checked')){
             $('#review_pros').rules('remove', 'invalid min required');
@@ -395,7 +346,7 @@
         }
     })
 
-    //Removing rules when no cons check is checked and vice versa
+    // Removing rules when no cons check is checked and vice versa
     $('#no_cons').change(function(){
         if($(this).is(':checked')){
             $('#review_cons').rules('remove', 'invalid min required');
@@ -405,7 +356,7 @@
         }
     });
 
-    //Rotating image overlay...
+    // Rotating image overlay...
     $('.rotate').click(function(){
       $('.loading').removeClass('hidden');
     });
@@ -414,7 +365,7 @@
         $(this).select();
     });
 
-    //Removing thumb slider from similar proprties gallery
+    // Removing thumb slider from similar proprties gallery
     setTimeout(function() {
         $('#carouselSimilar-1').find('.lSPager.lSGallery').each(function(){
             if($(this).children().length == 0){
@@ -448,19 +399,19 @@
         e.stopPropagation();
     });
 
-    //Hiding mobile browser select box on soeted by text click
+    // Hiding mobile browser select box on soeted by text click
     $('.sorted-by').click(function(){
-        //console.log(12)
+        // console.log(12)
     })
 
     $(document).on('click', 'select#sort', function(){
-        //alert(12)
+        // alert(12)
     })
 
-    //setting timezone
+    // setting timezone
     $('.user_time_zone').set_timezone(); 
     const timezone = $('.user_time_zone').val(); 
-    //setting in cookies to access using helper method on application controller
+    // setting in cookies to access using helper method on application controller
     function setCookie(name, value) {
       var expires = new Date()
       expires.setTime(expires.getTime() + (24 * 60 * 60 * 1000))
