@@ -40,7 +40,6 @@
     // calculations for elements that changes size on window resize
     var windowResizeHandler = function() {
         windowHeight = window.innerHeight;
-        windowWidth = $(window).width();
         headerHeight = $('#header').height();
         contentHeight = windowHeight - headerHeight;
         contentWidth = $('#content').width();
@@ -50,29 +49,6 @@
         $('#wrapper').height(contentHeight);
         $('#mapView').height(contentHeight);
         $('#content').height(contentHeight);
-
-        // Add custom scrollbar for left side navigation
-        if(windowWidth > 767) {
-            $('.bigNav').slimScroll({
-                height : contentHeight - $('.leftUserWraper').height()
-            });
-        } else {
-            $('.bigNav').slimScroll({
-                height : contentHeight
-            });
-        }
-        if($('.bigNav').parent('.slimScrollDiv').size() > 0) {
-            $('.bigNav').parent().replaceWith($('.bigNav'));
-            if(windowWidth > 767) {
-                $('.bigNav').slimScroll({
-                    height : contentHeight - $('.leftUserWraper').height()
-                });
-            } else {
-                $('.bigNav').slimScroll({
-                    height : contentHeight
-                });
-            }
-        }
     }
 
     if(split_view_length == 0){
