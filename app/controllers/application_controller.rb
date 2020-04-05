@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   helper_method :browser_time_zone, :uptown_count,
                 :brooklyn_count, :queens_count, :bronx_count
 
+  layout :set_layout
+
   def set_timezone
     Time.zone = current_user.time_zone
   end
@@ -83,6 +85,11 @@ class ApplicationController < ActionController::Base
   end
 
 	private
+
+  def set_layout
+    return 'home' if action_name == 'index' && controller_name == 'home'
+    'application'
+  end
 
   def footer_html
     ERB.new(pdf_template).result(binding)

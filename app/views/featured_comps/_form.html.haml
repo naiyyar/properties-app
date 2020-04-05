@@ -55,12 +55,14 @@
     - if @featured_on_buildings.present?
       #content.mob-max.user_property_listing
         = render 'management_companies/featured_on_buildings'
-    
+
+=javascript_include_tag 'buildings'
+=javascript_include_tag 'featured_as_building'
 
 :javascript
   $(function() {
-    new app.buildings;
-    new app.AsCompBuildings;
+    new bapp.buildings;
+    new capp.asCompBuildings;
   });
 
   $(document).on('keyup', function(e){

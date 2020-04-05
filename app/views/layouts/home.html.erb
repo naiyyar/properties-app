@@ -17,51 +17,37 @@
     <meta property="og:title"       content="<%=@tab_title_text%>" />
     <meta property="og:site_name"   content="transparentcity.co" />
     <meta property="og:description" content="<%=@meta_desc%>" />
-    <% if action_name == 'managertools' %>
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.1.2/css/paymentfont.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
-    <%end%>
     
     <%= stylesheet_link_tag 'application', media: 'all'%>
-    <%= tag :meta, name: 'stripe-key', content: STRIPE_PUBLIC_KEY %>
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'home/init' %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
   </head>
   
-  <body class="notransition no-hidden" >
+  <body class="notransition no-hidden home index" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
     <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
-    <% unless hide_search_bar? %>
-      <%= render partial: 'layouts/shared/header' %>
-      <%= render partial: 'layouts/shared/filters' %>
-      <div class="closeLeftSide"></div>
-      <div id="wrapper" class="<%=contribute_wrapper(params)%> <%=browser.device.mobile? ? 'screen-sm' : 'screen-lg'%> <%= @search_bar_hidden == :hidden ? 'mt0' : ''%>">
-        <%= render partial: 'layouts/shared/filter_buttons' %>
-        <div class="content <%= controller_name + action_name %>">
-          <%= render 'layouts/shared/pop_neighborhoods_list' %>
-          <%= yield %>
-        </div>
-        <%= render 'layouts/home/footer' if show_full_width_footer? && contribute_page? %>
-      </div>
-    <%else%>
-      <%= render partial: 'layouts/home/header' if hide_search_bar? %>
-      <div class="content-wrapper <%= controller_name + action_name %>">
-        <%= yield %>
-      </div>
-      <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
-    <%end%>
-    <div id="remote-container"></div>
-    <%= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? && params[:searched_by].present? %>
+    <%= render partial: 'layouts/home/header' if hide_search_bar? %>
+    <div class="content-wrapper <%= controller_name + action_name %>">
+      <%= yield %>
+    </div>
+    
+    <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
+
     <%if current_user.blank? %>
       <%= render 'layouts/shared/signin' if controller_name != 'sessions' %>
       <%= render 'layouts/shared/signup' if controller_name != 'registrations' %>
     <%end%>
+    
     <%= render 'buildings/favourite_script' %>
-    <%= javascript_include_tag 'zapp' %>
+    
+    <%= javascript_include_tag 'home' %>
 
     <script type="text/javascript">
-      $(function(){ new app.apartments; })
+      $(function(){ 
+        new app.apartments; 
+      })
       // hiding autocomplete search results when no input given
       if($('#buildings-search-txt').length > 0){
         $(document).on('keyup', '#buildings-search-txt', function(e) {

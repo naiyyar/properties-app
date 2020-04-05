@@ -1,4 +1,5 @@
 var search_type = '';
+var bapp = window.bapp = {};
 var noMatchElemToAppend = '<div class="no-match-link" style="top: 0px; width: 333px;">' +
                       '<span class="address">' +
                         '<b>Building Not Here?</b>' +
@@ -7,7 +8,7 @@ var noMatchElemToAppend = '<div class="no-match-link" style="top: 0px; width: 33
                         '<b> Add Your Building</b>' +
                       '</a>'
                     '</div>';
-app.buildings = function() {
+bapp.buildings = function() {
   this._input = $('#buildings-search-txt');
   source_url = $('#buildings-search-txt').data('src');
   if(source_url == undefined){
@@ -16,14 +17,13 @@ app.buildings = function() {
   this._initAutocomplete();
 };
 
-app.buildings.prototype = {
+bapp.buildings.prototype = {
   _initAutocomplete: function() {
     this._input
       .autocomplete({
         source: source_url,
         prependTo: '#buildings-search-results',
         select: $.proxy(this._select, this),
-        //response: $.proxy(this._response, this),
         open: $.proxy(this._open, this),
         search: $.proxy(this._search, this),
         close: $.proxy(this._close, this)
@@ -33,11 +33,6 @@ app.buildings.prototype = {
 
   _search: function(e,ui){
     this._input.addClass('loader');
-    //console.log($('ul.ui-autocomplete'))
-    //console.log($('ul.ui-autocomplete').children().length)
-    // if($(".no-match-link").hasClass('hidden')){
-    //   $(".no-match-link").removeClass('hidden');
-    // }
   },
 
   _open: function(event, ui) {
@@ -51,12 +46,10 @@ app.buildings.prototype = {
       $('.no-match-link').css('top',ul_height+'px');
       $('.no-match-link').css('width', search_input_width+'px');
     }
-    
   },
 
   _render: function(ul, item) {
     search_type = item.search_type
-    console.log('render')
     $("#buildings-search-no-results").css('display','none');
     if($(".no-match-link").hasClass('hidden')){
       $(".no-match-link").removeClass('hidden');
@@ -72,7 +65,7 @@ app.buildings.prototype = {
       markup.push('<p class="address"><b>'+item.building_street_address+', '+item.city+', '+item.state+' '+item.zipcode+'</b></p>',
         '<small class="building_name">'+building_name+'</small>');
     }else{
-      //console.log('no-match-link')
+      
     }
     
     return $('<li>')
@@ -93,8 +86,6 @@ app.buildings.prototype = {
       $('.no-result-li').remove();
     }
     $('#next_to_review_btn').remove();
-
-    //new app.units(ui.item.id);
     
     this._input.val(ui.item.building_street_address + ', ' + ui.item.city + ', ' + ui.item.state + ' ' + ui.item.zipcode);
     
@@ -109,7 +100,7 @@ app.buildings.prototype = {
       $('#search_item_form').attr('action', href);
     }
 
-    //Adding and removing next btn with next page link
+    // Adding and removing next btn with next page link
     if(contribution_for == 'unit_review' 
       || contribution_for == 'unit_photos' 
       || contribution_for == 'unit_amenities' 
@@ -144,9 +135,8 @@ app.buildings.prototype = {
       $("ul.ui-autocomplete").hide();
     }
     
-    //when adding buildings to management company or adding buikding as featured comp
+    // when adding buildings to management company or adding buikding as featured comp
     var item = '';
-    //$('#managed_building_id').val(ui.item.id)
     if(ui.item.building_name != '' && ui.item.building_name != null){
       item = ui.item.building_name;
     }else{
@@ -166,7 +156,7 @@ app.buildings.prototype = {
   },
 
   _close: function(){
-    //Hiding no match found - add new building link
+    // Hiding no match found - add new building link
      if(!$("ul.ui-autocomplete").is(":visible")) {
         $("ul.ui-autocomplete").show();
       }
@@ -176,27 +166,5 @@ app.buildings.prototype = {
         }
       }
   },
-
-  // _response: function(event, ui){
-         
-  //   if(ui.content.length === 0){
-  //     this._input.removeClass('loader');
-  //     var ul = $("#buildings-search-no-results");
-  //     // no_match_text = '<div class="no-match-link hidden">\
-  //     //                   <span class="address"><b>Building Not Here?</b></span>\ 
-  //     //                   <a href="javascript:void(0);" id="add_new_building" class="add_new_building"> Add Your Building</a>\
-  //     //                 </div>'
-      
-  //     var markup = [
-  //       '<span class="address"><b>Building Not Here?</b></span>',
-  //       '<a href="javascript:void(0)" id="add_new_building" class="add_new_building"> <b>Add Your Building</b></a>'
-  //     ];
-  //     var search_field_width = $('#buildings-search-txt').width()+30;
-  //     ul_li = $('<li class="ui-menu-item no-result-li">').append(markup.join(''));
-  //     ul.html(ul_li);
-  //     ul.css({'display': 'block','width': search_field_width+'px','top': '36px','left': '15px','padding':'0px'});
-      
-  //   }
-  // }
 
 };

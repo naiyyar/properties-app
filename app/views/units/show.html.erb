@@ -31,14 +31,13 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade active in" id="ur">
-          <%#= link_to "<i class='fa fa-star'></i> Write a review".html_safe, new_unit_review_path(unit_id: @unit), class: "btn btn-o btn-yellow contactBtn reviewBtnMobile pull-right", "data-no-turbolink" => false %>
           <div class="comments">
             <% if @unit.reviews.present? %>
               <%@reviews = @unit.reviews %>
               <%= render partial: @reviews %>
             <%else%>
               <p>There are no reviews for this property. Be the first to add a review on this property.</p>
-              <%= link_to 'Write a Review', new_unit_review_path(unit_id: @unit, contribution: 'unit_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
+              <%= link_to 'Write a Review', new_unit_review_path(unit_id: @unit, contribution: 'unit_review'), "data-no-turbolink" => false, class: 'btn btn-warning' %>
             <%end%>
           </div>
         </div>
@@ -49,7 +48,7 @@
               <%= render partial: @reviews %>
             <%else%>
               <p>There are no reviews for this property. Be the first to add a review on this property.</p>
-              <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-yellow' %>
+              <%= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), "data-no-turbolink" => false, class: 'btn btn-warning' %>
             <%end%>
           </div>
         </div>

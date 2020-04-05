@@ -1,0 +1,14 @@
+//= require jquery
+//= require jquery_ujs
+//= require jquery-2.1.1.min
+//= require jquery-ui.min
+//= require jquery-ui-touch-punch
+//= require bootstrap-sprockets
+//= require jquery.touchSwipe.min
+//= require gmap
+//= require lightslider
+//= require jquery.fancybox
+//= require slick.min
+//= require location
+//= require left_nav
+//= require ./search

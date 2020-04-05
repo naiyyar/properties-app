@@ -1,3 +1,5 @@
+var app = window.app = {};
+
 app.apartments = function() {
   this._input = $('#search_term');
   this._initAutocomplete();

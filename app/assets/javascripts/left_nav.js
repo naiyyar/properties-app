@@ -27,7 +27,6 @@ $(document).ready(function(){
             $('#leftSide').removeClass('expanded');
             $('.closeLeftSide').hide();
             $('.hasSub').removeClass('hasSubActive');
-            // $('.bigNav').slimScroll({ destroy: true });
             $('.leftNav').removeClass('bigNav');
             $('.leftNav').css('overflow', 'visible');
             $('.full').removeClass('m-full');

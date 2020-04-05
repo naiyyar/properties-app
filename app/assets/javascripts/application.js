@@ -10,39 +10,25 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require ./home/init
 //= require rails.validations
-//= require jquery_ujs
-//= require jquery-2.1.1.min
-//= require jquery-ui.min
-//= require jquery-ui-touch-punch
 //= require jquery-placeholder
-//= require bootstrap-sprockets
-//= require jquery.touchSwipe.min.js
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
 //= require underscore
-//= require app
 //= require dropzone_v5
 //= require jquery.raty
 //= require ratyrate
 //= require bootstrap-datepicker
-//= require moment
 //= require jquery.validate
 //= require jquery-sortable-photos
 //= require jquery.dataTables.min
 //= require jquery-fileupload/basic
-//= require lightslider
-//= require gmap
 //= require blog
+//= require moment
 //= require filterrific/filterrific-jquery
 //= require load_more
-//= require jquery.fancybox
 //= require input_validations
 //= require jquery.mask.min
 //= require detect_timezone
 //= require jquery.detect_timezone
-//= require bootstrap-datetimepicker
-//= require slick.min
-
-//= require_tree .
