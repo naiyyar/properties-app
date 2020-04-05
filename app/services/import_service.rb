@@ -2,17 +2,19 @@ class ImportService
 	attr_accessor :file, :spreadsheet, :header
 	
 	def initialize file
-		@file 			 	= file
-		@spreadsheet 	= open_spreadsheet(@file)
-		@header 			= @spreadsheet.row(1)
+		@file 			 			 = file
+		@original_filename = @file.original_filename rescue nil
+		@file_path 				 = @file.path rescue nil
+		@spreadsheet 			 = open_spreadsheet
+		@header 					 = @spreadsheet.row(1)
 	end
 
-	def open_spreadsheet(file)
-    case File.extname(file.original_filename)
-     when '.csv' then Roo::CSV.new(file.path)
-     when '.xls' then Roo::Excel.new(file.path)
-     when '.xlsx' then Roo::Excelx.new(file.path)
-     else raise "Unknown file type: #{file.original_filename}"
+	def open_spreadsheet
+    case File.extname(@original_filename)
+     when '.csv' then Roo::CSV.new(@file_path)
+     when '.xls' then Roo::Excel.new(@file_path)
+     when '.xlsx' then Roo::Excelx.new(@file_path)
+     else raise "Unknown file type: #{@original_filename}"
     end
   end
 end

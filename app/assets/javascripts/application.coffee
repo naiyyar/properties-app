@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require contribute
 #= require form_validations
 #= require devise
 #= require social-share-button
@@ -13,7 +12,6 @@ jQuery ->
 	$(document).on 'click', '.delete_image',(e) ->
 		$(this).parent().hide(500);
 	
-	#$('[data-toggle="popover"]').popover({ trigger: "click" })
 	$('[data-toggle="tooltip"]').tooltip();
 
 	#removing hash after facebook login
@@ -25,7 +23,6 @@ jQuery ->
 	#using to open property show page on infowindow click
 	$(document).on 'click', '.infoW-property-info', (e) ->
 		url = $(this).data('href')
-		#window.open(url)
 		window.location.href = url
 	
 	$(document).on 'click', '.left-side-zindex', (e) ->

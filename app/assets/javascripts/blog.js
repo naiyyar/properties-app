@@ -29,6 +29,4 @@
         $(this).toggleClass('active');
     });
 
-    $('input, textarea').placeholder();
-
 })(jQuery);

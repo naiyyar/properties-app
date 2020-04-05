@@ -62,17 +62,19 @@
     }
 
     // Searching building on neighborhood click
-    $('.borough-neighborhood').click(function(e){
-        e.preventDefault();
-        $('#neighborhoods').val($(this).text());
-        var nbh = $(this).data('nhname');
-        var search_btn = $('.search-btn-submit');
-        $('#apt-search-txt').val(nbh);
-        search_btn.click();
-        if(search_btn.length > 0) {
+    if($('.borough-neighborhood').length > 0){
+        $('.borough-neighborhood').click(function(e){
+            e.preventDefault();
+            $('#neighborhoods').val($(this).text());
+            var nbh = $(this).data('nhname');
+            var search_btn = $('.search-btn-submit');
+            $('#apt-search-txt').val(nbh);
             search_btn.click();
-        }
-    })
+            if(search_btn.length > 0) {
+                search_btn.click();
+            }
+        })
+    }
 
 
     $('.panel-collapse').on('show.bs.collapse', function () {
@@ -82,19 +84,6 @@
     $('.panel-collapse').on('hide.bs.collapse', function () {
         $(this).prev().find('span').removeClass('fa-angle-up').addClass('fa-angle-down');
     });
-
-    // home page featured slider
-    // $(".center").slick({
-    //   dots: false,
-    //   infinite: true,
-    //   centerMode: true,
-    //   slidesToShow: 1,
-    //   slidesToScroll: 1,
-    //   arrows: false
-    // });
-
-    //Home menu swipe and slide
-    //$('.swipe-nav').slideAndSwipe();
 
     //To changes the size of search field on mobile device orientation changed
     window.addEventListener('resize', function() {
