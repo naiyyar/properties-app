@@ -290,7 +290,7 @@ class Building < ApplicationRecord
   def show_bed_ranges
     beds = []
     bedroom_ranges.map do |bed|
-      beds << (bed == 0 ? 'Studio' : bed)
+      beds << (bed == 0 ? 'Studio' : bed) unless bed == 5
     end
     beds
   end
@@ -313,16 +313,20 @@ class Building < ApplicationRecord
   end
 
   def rent_median_prices(rent_medians)
-    rent_medians.where(range: price, bed_type: bedroom_ranges).order(price: :asc)
+    rent_medians.where(range: price, bed_type: bedroom_ranges)
   end
 
   def saved_amount(rent_medians, broker_percent)
-    median_prices = rent_median_prices(rent_medians).pluck(:price)
-    median_prices.map{|price| (((price*12)*broker_percent)/100).to_i}.sort
+    saved_amounts = {}
+    rent_median_prices(rent_medians).as_json.each do |mp| 
+      saved_amounts[mp['bed_type']] = (((mp['price']*12)*broker_percent)/100).to_i
+    end
+
+    return saved_amounts
   end
 
   def min_save_amount rent_medians, broker_percent
-    saved_amount(rent_medians, broker_percent)[0]
+    saved_amount(rent_medians, broker_percent).values.min
   end
 
   def featured?

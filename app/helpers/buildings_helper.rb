@@ -234,7 +234,7 @@ module BuildingsHelper
 	end
 
 	def bed_ranges building
-		if building.prices.present? or building.show_bed_ranges.present?
+		if building.prices.present? || building.show_bed_ranges.present?
 			link_to @show_path, style: 'color: #333;' do
 	      (price_col(building).to_s + types_col(building).to_s).html_safe
 	    end
@@ -247,7 +247,7 @@ module BuildingsHelper
 
 	def types_col building
 		"<span> #{building.show_bed_ranges.join(', ')} </span>" +
-	  'Bed' if building.bedroom_types?
+		"#{'Bed' if building.bedroom_types?}#{', CoLiving' if building.co_living == 5  }"
 	end
 
 	def feature_comp_bg_img_url uploads
