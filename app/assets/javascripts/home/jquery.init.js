@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-2.1.1.min
 //= require jquery-ui.min
 //= require jquery-ui-touch-punch
 //= require bootstrap-sprockets
@@ -9,5 +8,4 @@
 //= require slick.min
 //= require location
 //= require left_nav
-//= require jquery-confirm.min
 //= require ./search
