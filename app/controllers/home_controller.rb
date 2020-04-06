@@ -13,8 +13,9 @@ class HomeController < ApplicationController
   def index
     @home_view        = true
     @buildings_count  = pop_nb_buildings&.size
-    @meta_desc        = "Rent in any of these #{@buildings_count} no fee apartments NYC, 
-                         no fee rentals NYC buildings to bypass the broker fee 100% of the time and save thousands."
+    @meta_desc        = "Rent directly from management companies or landlords in any of these 
+                         #{@buildings_count} no fee apartment rental buildings in NYC and 
+                         save on broker fees."
     
     @tab_title_text   = tab_title_tag
   end

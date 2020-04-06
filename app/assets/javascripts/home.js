@@ -14,15 +14,6 @@
         }
     });
 
-    // Enable swiping
-    $(".carousel").swipe({
-        swipe: function(event, direction, distance, duration, fingerCount) {
-            if(direction == "left") { $(this).carousel("next"); }
-            if(direction == "right") { $(this).carousel("prev"); }
-        },
-        // threshold: 0
-    });
-
     $(document).on('click', '.modal-su', function() {
         $('#signin').modal('hide');
         $('#signup').modal('show');
@@ -75,7 +66,6 @@
             }
         })
     }
-
 
     $('.panel-collapse').on('show.bs.collapse', function () {
         $(this).prev().find('span').removeClass('fa-angle-down').addClass('fa-angle-up');

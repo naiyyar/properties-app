@@ -10,21 +10,20 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require ./home/init
+//= require ./home/jquery.init
 //= require rails.validations
 //= require jquery-placeholder
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
 //= require underscore
-//= require dropzone_v5
 //= require jquery.raty
 //= require ratyrate
 //= require bootstrap-datepicker
 //= require jquery.validate
+//= require jquery.touchSwipe.min
 //= require jquery-sortable-photos
 //= require jquery.dataTables.min
 //= require jquery-fileupload/basic
-//= require blog
 //= require moment
 //= require filterrific/filterrific-jquery
 //= require load_more
@@ -32,3 +31,4 @@
 //= require jquery.mask.min
 //= require detect_timezone
 //= require jquery.detect_timezone
+//= require jquery.fancybox

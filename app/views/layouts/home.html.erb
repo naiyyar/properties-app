@@ -8,7 +8,7 @@
       <% if content_for? :page_title %>
         <%= yield :page_title %> | Transparentcity
       <% else %>
-        <%= @tab_title_text = 'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC | Transparentcity' %>
+        <%= @tab_title_text = 'No Fee Apartments For Rent in NYC By Owner Landlord' %>
       <% end %>
     </title>
     <meta name="description"        content="<%=@meta_desc%>">
@@ -19,7 +19,7 @@
     <meta property="og:description" content="<%=@meta_desc%>" />
     
     <%= stylesheet_link_tag 'application', media: 'all'%>
-    <%= javascript_include_tag 'home/init' %>
+    <%= javascript_include_tag 'home/jquery.init' %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
   </head>
@@ -32,7 +32,7 @@
     <div class="content-wrapper <%= controller_name + action_name %>">
       <%= yield %>
     </div>
-    
+    <div id="remote-container"></div>
     <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
 
     <%if current_user.blank? %>

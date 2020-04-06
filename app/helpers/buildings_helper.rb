@@ -176,24 +176,23 @@ module BuildingsHelper
 
 	def contact_leasing_button building, event, klass
 		title, classes = 'Contact Leasing', "btn btn-primary #{klass} btn-round"
-		unless event
-			link_to title, 'javascript:;', data: { bid: building.id, type: 'contact' }, class: classes
-		else
-			link_to title, 'javascript:;', onclick: "showLeasingContactPopup(#{building.id})", class: classes
-		end
+		# unless event
+		# 	link_to title, 'javascript:;', data: { bid: building.id, type: 'contact' }, class: classes
+		# else
+		link_to title, 'javascript:;', onclick: "showLeasingContactPopup(#{building.id})", class: classes
+		#end
 	end
 
 	def active_listings_button building, event, klass, listings_count
 		title 	= "#{listings_count} Active Listings" 
 		classes = "btn btn-primary active-listing-link #{klass} btn-round"
-		unless event
-			link_to title, 'javascript:;', data: { bid: building.id, 
-																							type: 'listings', 
-																						}, class: classes
-		else
-			link_to title, 'javascript:;', 
-											onclick: "showActiveListingsPopup(#{building.id})", class: classes
-		end
+		#unless event
+		#	link_to title, 'javascript:;', data: { bid: building.id, 
+		#																					type: 'listings', 
+		#																				}, class: classes
+		#else
+		link_to title, 'javascript:;', onclick: "showActiveListingsPopup(#{building.id})", class: classes
+		#end
 	end
 
 	def apply_online_link building

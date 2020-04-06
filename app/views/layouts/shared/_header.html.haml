@@ -39,7 +39,7 @@
   #header
     .logoContainer
       .logo
-        %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: 'transparentcity-logo'
+        %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text
       
       - if !browser.device.mobile?
         #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'

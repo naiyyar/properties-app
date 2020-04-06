@@ -9,6 +9,10 @@ module ApplicationHelper
     end
   end
 
+  def alt_text
+    'No Fee Apartments For Rent In NYC | Transparentcity.co'
+  end
+
   def home_page?
     controller_name == 'home' && action_name == 'index'
   end

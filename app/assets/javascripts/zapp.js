@@ -76,33 +76,43 @@
 
         }
     }
-    
-    $('.priceSlider').slider({
-        range: true,
-        min: 0,
-        max: 15500,
-        values: [min_price, max_price],
-        step: 250,
-        slide: function(event, ui) {
-            $('#listings_price_box').prop('checked', true);
-            var sliding = true;
-            setPrice(ui.values[0], ui.values[1], sliding);
-            
-            if($('.building_price_filter:checked').length > 0){
-                $('.building_price_filter').prop('checked', false);
-            }
+    if($('.priceSlider').length > 0){
+        $('.priceSlider').slider({
+            range: true,
+            min: 0,
+            max: 15500,
+            values: [min_price, max_price],
+            step: 250,
+            slide: function(event, ui) {
+                $('#listings_price_box').prop('checked', true);
+                var sliding = true;
+                setPrice(ui.values[0], ui.values[1], sliding);
+                
+                if($('.building_price_filter:checked').length > 0){
+                    $('.building_price_filter').prop('checked', false);
+                }
 
-            if($('.building_bed_filter:checked').length > 0){
-                $('.building_bed_filter').prop('checked', false);
+                if($('.building_bed_filter:checked').length > 0){
+                    $('.building_bed_filter').prop('checked', false);
+                }
             }
-        }
-    });
+        });
+    };
 
     var initSlider = function(){
         setPrice(min_price, max_price);
     }
 
     initSlider();
+
+    // Enable swiping
+    $(".carousel").swipe({
+        swipe: function(event, direction, distance, duration, fingerCount) {
+            if(direction == "left") { $(this).carousel("next"); }
+            if(direction == "right") { $(this).carousel("prev"); }
+        },
+        // threshold: 0
+    });
 
     // For mobile dropdown panel
     $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
