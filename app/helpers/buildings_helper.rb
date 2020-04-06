@@ -112,15 +112,6 @@ module BuildingsHelper
 		"#{recommended} &nbsp;"
 	end
 
-	def prices_options
-		@prices_options ||= [
-													['$', 1],
-													['$$', 2],
-													['$$$', 3],
-													['$$$$', 4]
-												]
-	end
-
 	def heart_icon
 		'<span class="fa fa-heart"></span>'.html_safe
 	end
@@ -237,6 +228,8 @@ module BuildingsHelper
       "#{number_to_currency(price.min_price, precision: 0)} - #{number_to_currency(price.max_price, precision: 0)}"
     elsif building_price == 4
       "#{number_to_currency(price.min_price, precision: 0)} +"
+    else
+    	"#{number_to_currency(0, precision: 0)} - #{number_to_currency(0, precision: 0)}"
     end
 	end
 

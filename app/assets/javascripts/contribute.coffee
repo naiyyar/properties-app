@@ -17,13 +17,19 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 	if($('#buildings-search-txt').parent().hasClass('has-error'))
 		$('#buildings-search-txt').parent().removeClass('has-error')
 
+$(document).on 'click', '#deposit_free',(e) ->
+	showHideAmenitiesInfoField($('#building_deposit_free'))
+
 $(document).on 'click', '#elevator',(e) ->
-	$('#building_elevator').toggleClass('hide')
-	if($('#building_elevator').hasClass('hide'))
-		$('#building_elevator').val('')
-		$('#building_elevator').removeAttr('required')
+	showHideAmenitiesInfoField($('#building_elevator'))
+
+@showHideAmenitiesInfoField = (elem) ->
+	elem.toggleClass('hide')
+	if(elem.hasClass('hide'))
+		elem.val('')
+		elem.removeAttr('required')
 	else
-		$('#building_elevator').attr('required', 'required')
+		elem.attr('required', 'required')
 
 $(document).on 'click', '.reviewer_type',(e) ->
 	id = $(this).children().attr('id')

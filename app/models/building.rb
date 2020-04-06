@@ -65,7 +65,14 @@ class Building < ApplicationRecord
   # constants
   DIMENSIONS  = ['cleanliness','noise','safe','health','responsiveness','management']
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
-  BEDROOMS    = [['0', 'Studio'],['1','1 Bed'],['2', '2 Bed'],['3', '3 Bed'],['4', '4+ Bed']]
+  BEDROOMS    = [
+                 ['0',  'Studio'  ],
+                 ['1',  '1 Bed'   ],
+                 ['2',  '2 Bed'   ],
+                 ['3',  '3 Bed'   ],
+                 ['4',  '4+ Bed'  ],
+                 # ['5',  'CoLiving']
+                ]
   CITIES      = ['New York', 'Brooklyn', 'Bronx', 'Queens']
   AMENITIES   = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
                 :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
@@ -277,7 +284,7 @@ class Building < ApplicationRecord
   end
 
   def bedroom_ranges
-    [studio, one_bed, two_bed, three_bed, four_plus_bed].compact
+    [studio, one_bed, two_bed, three_bed, four_plus_bed, co_living].compact
   end
 
   def show_bed_ranges

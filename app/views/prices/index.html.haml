@@ -8,9 +8,10 @@
         %th 2 bed
         %th 3 bed
         %th 4+ bed
+        %th CoLiving
 		
     %tbody
-      / prices_options: $, $$, $$$, $$$$ method on building helpers
+      / prices_options: $, $$, $$$, $$$$ method on prices helpers
       - prices_options.map do |option|
         - @range_prices = @prices.where(range: option[1])
         %tr
@@ -21,7 +22,7 @@
             - @range_prices.each do |price|
               %td="#{number_to_currency(price.min_price)} - #{number_to_currency(price.max_price)}"
           -else
-            %td{colspan: "5"}
+            %td{colspan: '5'}
 
 
   / rent medians
@@ -34,6 +35,7 @@
         %th 2 bed
         %th 3 bed
         %th 4+ bed
+        %th CoLiving
     
     %tbody
       / prices_options: $, $$, $$$, $$$$ method on building helpers
@@ -47,7 +49,7 @@
             - @rent_medians.each do |med|
               %td="#{number_to_currency(med.price)} - Save: #{((med.price*12)*@fee_percent.percent_amount/100)}"
           -else
-            %td{colspan: "5"}
+            %td{colspan: '5'}
 
   
   

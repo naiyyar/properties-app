@@ -30,12 +30,21 @@
           <h3>Building Information</h3>
           <% BuildingAmenities.building_edit_emenities.each do |key, value| %>
             <% if value == 'Elevator' %>
-              <div class="checkbox custom-checkbox"><label><%= check_box_tag :elevator,'yes', @building.elevator ? true : false %> <span class="fa fa-check"></span> Elevator</label></div>
+              <div class="checkbox custom-checkbox"><label><%= check_box_tag :elevator,'yes', @building.elevator ? true : false %> <span class="fa fa-check"></span> <%= value %></label></div>
               <div>
                 <% if @building.elevator %>
                   <%= f.number_field :elevator, class: 'form-control' %>
                 <%else%>
                   <%= f.number_field :elevator, class: 'form-control hide', placeholder: '#Elevators' %>
+                <%end%>
+              </div>
+            <%elsif value == 'Deposit Free'%>
+               <div class="checkbox custom-checkbox"><label><%= check_box_tag :deposit_free %> <span class="fa fa-check"></span> <%= value %></label></div>
+              <div>
+                <% if @building.deposit_free %>
+                  <%= f.text_field :deposit_free, class: 'form-control' %>
+                <%else%>
+                  <%= f.text_field :deposit_free, class: 'form-control hide', placeholder: 'Company name that offers service' %>
                 <%end%>
               </div>
             <%else%>

@@ -7,6 +7,7 @@ module BuildingAmenities
 				courtyard: 				 			'Courtyard',
 				pets_allowed_cats: 			'Cats Allowed',
 				pets_allowed_dogs: 			'Dogs Allowed',
+				deposit_free: 					'Deposit Free',
 				doorman: 								'Doorman',
 				elevator: 							'Elevator',
 				# garage: 								'Garage',

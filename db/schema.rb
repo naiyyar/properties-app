@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200318060018) do
+ActiveRecord::Schema.define(version: 20200406054132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,9 @@ ActiveRecord::Schema.define(version: 20200318060018) do
     t.string   "online_application_link"
     t.boolean  "show_application_link",   default: true
     t.integer  "uploads_count",           default: 0,     null: false
+    t.integer  "co_living"
+    t.boolean  "deposit_free"
+    t.string   "deposit_free_company"
     t.index ["building_name"], name: "index_buildings_on_building_name", using: :btree
     t.index ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
     t.index ["city"], name: "index_buildings_on_city", using: :btree
