@@ -33,6 +33,7 @@ module ApplicationHelper
     controller_name == 'sessions' || controller_name == 'registrations'
   end
 
+  # showing white header with logo
   def hide_search_bar?
     home_page?       || 
     about_page?      || 

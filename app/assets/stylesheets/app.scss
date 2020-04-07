@@ -2509,41 +2509,6 @@ select.custom-arrow{
         overflow-x: hidden;
         bottom: 0px;
     }
-    .filterForm {
-        padding: 6px 4px;
-        margin-top: 0px;
-    }
-    .filterForm .header{
-        border-bottom: 1px solid #ddd;
-        margin-bottom: 6px;
-    }
-    .filterForm label {
-        font-size: 12px;
-    }
-    #filter-container {
-        width: 92%;
-    }
-    .filter-action{
-        padding: 20px;
-    }
-    .btn-sort{
-        margin-top: 0px;
-        margin-right: 2.1em;
-        width: 45%;
-    }
-    .btn-sort button{width: 100%;}
-    .filter-btn-container{
-        position: absolute;
-        right: 1px;
-    }
-    .filter-btn-container div{
-        padding: 1px;
-        float: left;
-    }
-    .filter-action-btns2{
-        width: 100%;
-        padding: 4px;
-    }
     .center-xs{
         text-align: center;
     }
@@ -2670,16 +2635,6 @@ select.custom-arrow{
         width: 30px;
         color: #fff;
     }
-    a.mapHandler, a.mapHandlerShow {
-        display: block;
-    }
-    a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow {
-        box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 4px 8px 0 rgba(0,0,0,0.20);
-    }
-    .no-touch a.mapHandler:hover {
-        color: #c6e4e3;
-        text-decoration: none;
-    }
     a.userHandler {
         display: block;
         padding-top: 8px;
@@ -2702,12 +2657,7 @@ select.custom-arrow{
     .contribute-wrapper{
         margin: 0px !important;
     }
-    #mapView, #mapViewSearch {
-        width: 0%;
-        -webkit-transition: all .2s ease-in-out;
-        -o-transition: all .2s ease-in-out;
-        transition: all .2s ease-in-out;
-    }
+    
     #content {
         overflow-x: hidden;
         overflow-y: scroll;
@@ -2725,24 +2675,7 @@ select.custom-arrow{
         -webkit-backface-visibility: hidden;
         -webkit-perspective: 1000;
     }
-    #mapView.min, #mapView.mob-min {
-        width: 0%;
-    }
-    #content.min, #mapViewSearch.mob-min {
-        width: 0%;
-    }
-    #mapViewSearch.max, #content.mob-max {
-        width: 100%;
-    }
-    #mapView.mob-max, #mapViewSearch.mob-max {
-        width: 100%;
-    }
-    #content.mob-min {
-        width: 0%;
-    }
-    #mapView.mob-min .mapPlaceholder, #mapViewSearch.mob-min .mapPlaceholder {
-        display: none;
-    }
+    
     .carousel-control .glyphicon-chevron-left,
     .carousel-control .glyphicon-chevron-right {
         width: 30px;

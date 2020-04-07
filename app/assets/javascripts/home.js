@@ -14,16 +14,6 @@
         }
     });
 
-    $(document).on('click', '.modal-su', function() {
-        $('#signin').modal('hide');
-        $('#signup').modal('show');
-    });
-
-    $(document).on('click', '.modal-si', function() {
-        $('#signup').modal('hide');
-        $('#signin').modal('show');
-    });
-
     $(document).on('click', function(e){
         e.stopPropagation();
         if(e.target.id != 'search_term' && e.target.id != 'location-link'){

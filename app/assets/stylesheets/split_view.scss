@@ -137,3 +137,36 @@ a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     width: 22% !important;
 
 }
+
+@media screen and (max-width: 767px) {
+  #mapView, #mapViewSearch {
+    width: 0%;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  #mapView.min, #mapView.mob-min {
+      width: 0%;
+  }
+  #content.min, #mapViewSearch.mob-min {
+      width: 0%;
+  }
+  #mapViewSearch.max, #content.mob-max {
+      width: 100%;
+  }
+  #mapView.mob-max, #mapViewSearch.mob-max {
+      width: 100%;
+  }
+  #content.mob-min {
+      width: 0%;
+  }
+  #mapView.mob-min .mapPlaceholder, #mapViewSearch.mob-min .mapPlaceholder {
+      display: none;
+  }
+  a.mapHandler, a.mapHandlerShow {
+    display: block;
+  }
+  a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow {
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 4px 8px 0 rgba(0,0,0,0.20);
+  }
+}

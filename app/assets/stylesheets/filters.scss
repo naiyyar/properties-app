@@ -89,3 +89,44 @@ a.handleFilter, a.handleSort {
   background-color: #0075c9;
   color: #fff;
 }
+
+@media screen and (max-width: 767px) {
+  .filter, .modal-full{
+    width: 100%;
+  }
+  .filterForm {
+    padding: 6px 4px;
+    margin-top: 0px;
+  }
+  .filterForm .header{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 6px;
+  }
+  .filterForm label {
+    font-size: 12px;
+  }
+  #filter-container {
+    width: 92%;
+  }
+  .filter-action{
+    padding: 20px;
+  }
+  .btn-sort{
+    margin-top: 0px;
+    margin-right: 2.1em;
+    width: 45%;
+  }
+  .btn-sort button{width: 100%;}
+  .filter-btn-container{
+    position: absolute;
+    right: 1px;
+  }
+  .filter-btn-container div{
+    padding: 1px;
+    float: left;
+  }
+  .filter-action-btns2{
+    width: 100%;
+    padding: 4px;
+  }
+}
