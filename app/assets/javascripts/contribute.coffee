@@ -17,7 +17,7 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 	if($('#buildings-search-txt').parent().hasClass('has-error'))
 		$('#buildings-search-txt').parent().removeClass('has-error')
 
-$(document).on 'click', '#deposit_free',(e) ->
+$(document).on 'click', '#building_deposit_free',(e) ->
 	showHideAmenitiesInfoField($('#building_deposit_free_company'))
 
 $(document).on 'click', '#elevator',(e) ->

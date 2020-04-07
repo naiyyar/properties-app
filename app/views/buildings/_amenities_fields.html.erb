@@ -39,7 +39,7 @@
                 <%end%>
               </div>
             <%elsif value == 'Deposit Free'%>
-               <div class="checkbox custom-checkbox"><label><%= check_box_tag :deposit_free, '', @building.deposit_free %> <span class="fa fa-check"></span> <%= value %></label></div>
+               <div class="checkbox custom-checkbox"><label><%= f.check_box :deposit_free%> <span class="fa fa-check"></span> <%= value %></label></div>
               <div>
                 <% if @building.deposit_free %>
                   <%= f.text_field :deposit_free_company, class: 'form-control' %>

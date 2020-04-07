@@ -9,3 +9,7 @@
 //= require location
 //= require left_nav
 //= require ./search
+
+setTimeout(function(){ 
+	$('.alert').slideUp(300)
+}, 3000);

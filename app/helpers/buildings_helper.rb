@@ -247,7 +247,7 @@ module BuildingsHelper
 
 	def types_col building
 		"<span> #{building.show_bed_ranges.join(', ')} </span>" +
-		"#{'Bed' if building.bedroom_types?}#{', CoLiving' if building.co_living == 5  }"
+		"#{'Bed' if building.bedroom_types?}#{',' if building.bedroom_types? && building.co_living == 5} #{'CoLiving' if building.co_living == 5  }"
 	end
 
 	def feature_comp_bg_img_url uploads

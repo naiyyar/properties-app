@@ -37,13 +37,8 @@ function showError(error) {
 
 navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
   if(PermissionStatus.state == 'granted'){
-    //console.log('allowed')
     getLocation();
   }else{
-    //window.data = PermissionStatus
-    //PermissionStatus.state = 'prompt'
-    // setTimeout(function(){
-    //   $('.icon-location').tooltip('show'); 
-    // }, 2000);
+    
   }
 });

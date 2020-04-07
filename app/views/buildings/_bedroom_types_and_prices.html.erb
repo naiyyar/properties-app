@@ -1,10 +1,9 @@
 <div class="row">
 	<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-		<%= "<span> #{building.prices} | </span>".html_safe if building.prices.present? %>
-		<span><%= building.show_bed_ranges.join(', ') %></span>
-		<%= 'Bed' if building.bedroom_types? %><%= ', CoLiving' if  building.co_living == 5 %>
+		<%= bed_ranges(@building) %>
 	</div>
-	<% unless action_name == 'show' and controller_name == 'buildings' %>
+	
+	<% unless action_name == 'show' && controller_name == 'buildings' %>
 		<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-left">
 			<% active_listings = building.listings.active %>
 			<span class="font-xs">

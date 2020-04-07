@@ -15,7 +15,6 @@ function setupSrollHistory() {
 };
 
 function resetScrollPos(){
-  //console.log('reset')
   setTimeout(function(){
     localStorage.setItem('scroll_pos', 0);
   }, 3000);

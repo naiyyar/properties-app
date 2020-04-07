@@ -25,7 +25,7 @@ jQuery ->
 		else
 			$('.start_validation_error_message').addClass('hidden');
 
-	#dismiss datepicker on mobile touch
+	# dismiss datepicker on mobile touch
 	$("form#new_rental_price_history").on 'touchstart', (e) ->
 		$('.dropdown-menu').css('display', 'none')
 
@@ -33,7 +33,7 @@ jQuery ->
 		e.preventDefault()
 		$('.dropdown-menu').css('display', 'none')
 
-	#for mobile touch
+	# for mobile touch
 	$('.hide-datepicker').on 'touchstart', (e) ->
 		e.preventDefault()
 		$('.dropdown-menu').css('display', 'none')
