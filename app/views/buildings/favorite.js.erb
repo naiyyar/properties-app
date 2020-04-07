@@ -2,8 +2,21 @@ var object_id = "<%= @building.id %>";
 var save_link = $('.save_link_'+object_id);
 <% unless @saved_as_favourite %>
 	save_link.removeClass('filled-heart');
+	$('#auth-form').html("<%= j render partial: 'layouts/shared/signup' %>");
 <%else%>
 	save_link.addClass('filled-heart');
 <%end%>
 
 $('#signup').modal('show');
+
+// setting timezone
+$('.user_time_zone').set_timezone(); 
+const timezone = $('.user_time_zone').val(); 
+// setting in cookies to access using helper method on application controller
+function setCookie(name, value) {
+  var expires = new Date()
+  expires.setTime(expires.getTime() + (24 * 60 * 60 * 1000))
+  document.cookie = name + '=' + value + ';expires=' + expires.toUTCString()
+}
+
+setCookie("timezone", timezone)

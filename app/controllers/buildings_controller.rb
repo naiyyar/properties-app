@@ -150,11 +150,9 @@ class BuildingsController < ApplicationController
   end
 
   def save_as_favourite
-    if session[:favourite_object_id].present? and current_user.present?
-      building = Building.find(session[:favourite_object_id])
-      current_user.favorite(building)
-      session[:favourite_object_id] = nil
-    end
+    return unless session[:favourite_object_id].present? && current_user.present?
+    current_user.add_to_fav(session[:favourite_object_id])
+    session[:favourite_object_id] = nil
   end
 
   def set_distance_matrix

@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require ./home/jquery.init
 //= require rails.validations
 //= require jquery-placeholder
 //= require jquery.slimscroll.min
@@ -29,6 +28,10 @@
 //= require load_more
 //= require input_validations
 //= require jquery.mask.min
-//= require detect_timezone
-//= require jquery.detect_timezone
 //= require jquery.fancybox
+//= require form_validations
+//= require devise
+//= require social-share-button
+//= require filters
+//= require light_slider
+//= require_tree .

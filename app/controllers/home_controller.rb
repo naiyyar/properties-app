@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   before_action :reset_session,         only: [:index, :auto_search]
   before_action :find_building,         only: [:load_infobox, :get_images]
   before_action :format_search_string,  only: :search
-  before_action :save_as_favourite,     only: :search
+  before_action :save_as_favourite,     only: [:index, :search]
   #before_action :set_rent_medians,      only: [:search, :load_infobox]
   before_action :set_fav_color_class,   only: :load_infobox
   #before_action :set_min_save_amount,   only: :load_infobox
@@ -99,8 +99,7 @@ class HomeController < ApplicationController
 
   def save_as_favourite
     return unless session[:favourite_object_id].present? && current_user.present?
-    building = Building.find(session[:favourite_object_id])
-    current_user.favorite(building)
+    current_user.add_to_fav(session[:favourite_object_id])
     session[:favourite_object_id] = nil
   end
 

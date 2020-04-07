@@ -1,4 +1,4 @@
-//= require jquery
+//= require jquery2
 //= require jquery_ujs
 //= require jquery-ui.min
 //= require jquery-ui-touch-punch
@@ -8,6 +8,11 @@
 //= require slick.min
 //= require location
 //= require left_nav
+//= require devise
+//= require detect_timezone
+//= require jquery.detect_timezone
+//= require jquery-confirm.min
+//= require saved_buildings
 //= require ./search
 
 setTimeout(function(){ 

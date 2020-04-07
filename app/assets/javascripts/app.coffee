@@ -1,12 +1,3 @@
-#= require jquery
-#= require jquery_ujs
-#= require form_validations
-#= require devise
-#= require social-share-button
-#= require filters
-#= require light_slider
-#= require_tree .
-
 jQuery ->
 	#from uploads/index page
 	$(document).on 'click', '.delete_image',(e) ->

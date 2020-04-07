@@ -175,4 +175,8 @@ class User < ApplicationRecord
     user_favorite(favorable).try(:destroy)
   end
 
+  def add_to_fav favorable_id
+    favorite(Building.find(favorable_id))
+  end
+
 end

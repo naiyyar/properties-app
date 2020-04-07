@@ -405,4 +405,5 @@
     }
 
     setCookie("timezone", timezone)
+
 })(jQuery);

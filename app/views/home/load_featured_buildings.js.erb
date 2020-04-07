@@ -13,5 +13,9 @@ var section = $('#featured-buildings-section');
   });
 <%end%>
 
+$(document).on('click', '.favourite', function(){
+    removeFavorite($(this));
+})
+
 $('#home-popular_neighborhoods').html("<%= j render partial: 'layouts/home/popular_neighborhoods' %>");
 $('#home-popular_searches').html("<%= j render partial: 'layouts/home/popular_searches', locals: { bg_col: '#FBFBFF' } %>");
