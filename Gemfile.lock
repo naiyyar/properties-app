@@ -1214,9 +1214,6 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_critical_css_server (0.1.5)
-      httparty (~> 0.13.3)
-      rails (>= 3.0)
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (5.0.7.2)
@@ -1385,6 +1382,7 @@ DEPENDENCIES
   geocoder (= 1.4.5)
   haml!
   heroku-deflater!
+  httparty
   iconv (~> 1.0.3)
   jbuilder (~> 2.0)
   jquery-fileupload-rails!
@@ -1411,7 +1409,6 @@ DEPENDENCIES
   rails (~> 5.0.7)
   rails-footnotes (~> 4.0)
   rails_12factor
-  rails_critical_css_server
   ratyrate!
   recaptcha
   rolify

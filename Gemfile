@@ -48,7 +48,7 @@ gem 'geocoder', '1.4.5'
 
 #H
 gem 'haml', git: 'https://github.com/haml/haml'
-#gem 'httparty'
+gem 'httparty'
 
 #I
 gem 'iconv', '~> 1.0.3'
@@ -89,7 +89,6 @@ gem 'puma'
 #R
 gem 'ratyrate', github: 'wazery/ratyrate'
 gem 'rack-cache'
-gem 'rails_critical_css_server'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'roo'
 gem 'rolify'

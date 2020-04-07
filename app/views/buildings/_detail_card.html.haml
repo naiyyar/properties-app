@@ -3,7 +3,7 @@
   - unless @similar_properties.present?
     = link_to @show_path do
       .figure{style: 'position: relative;', id: "figure#{building.id}"}
-        = image_tag 'shimmer.gif', style: 'width: 100%;height: 225px;'
+        .shimmer
       - if action_name == 'load_featured_buildings'
         =render 'home/partials/building_header', building: building
       - else
