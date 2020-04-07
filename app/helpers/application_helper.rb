@@ -29,8 +29,16 @@ module ApplicationHelper
     action_name == 'contribute'
   end
 
+  def authentication_page?
+    controller_name == 'sessions' || controller_name == 'registrations'
+  end
+
   def hide_search_bar?
-    home_page? || about_page? || addvertise_page? || contribute_page?
+    home_page?       || 
+    about_page?      || 
+    addvertise_page? || 
+    contribute_page? || 
+    authentication_page?
   end
 
   def current_user_profile_image

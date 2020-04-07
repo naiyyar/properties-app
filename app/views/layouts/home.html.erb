@@ -33,11 +33,6 @@
     </div>
     <div id="remote-container"></div>
     <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
-
-    <%if current_user.blank? %>
-      <%= render 'layouts/shared/signin' if controller_name != 'sessions' %>
-      <%= render 'layouts/shared/signup' if controller_name != 'registrations' %>
-    <%end%>
     
     <%= render 'buildings/favourite_script' %>
     

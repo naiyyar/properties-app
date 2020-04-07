@@ -51,12 +51,9 @@
       </div>
       <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
     <%end%>
+    
     <div id="remote-container"></div>
-    <%#= render partial: 'neighborhood_links/guides_modal' if browser.device.mobile? && params[:searched_by].present? %>
-    <%if current_user.blank? %>
-      <%= render 'layouts/shared/signin' if controller_name != 'sessions' %>
-      <%= render 'layouts/shared/signup' if controller_name != 'registrations' %>
-    <%end%>
+
     <%= render 'buildings/favourite_script' %>
     <%= javascript_include_tag 'zapp' %>
 

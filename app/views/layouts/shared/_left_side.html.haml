@@ -20,19 +20,19 @@
 
         - if controller_name == 'registrations'
           %li
-            %a.left-side-zindex.auth{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
+            %a.left-side-zindex.auth{href: '/users/sign_in'}
               %span.navLabel Sign In
         
         - elsif controller_name == 'sessions'
           %li
-            %a.left-side-zindex.auth{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
+            %a.left-side-zindex.auth{href: '/users/sign_up'}
               %span.navLabel Sign Up
         - else
           %li
-            %a.left-side-zindex.auth{'data-target' => '#signin', 'data-toggle' => 'modal', href: '#'}
+            %a.left-side-zindex.auth{href: '/users/sign_in'}
               %span.navLabel Sign In
           %li
-            %a.left-side-zindex.auth{'data-target' => '#signup', 'data-toggle' => 'modal', href: '#'}
+            %a.left-side-zindex.auth{href: '/users/sign_up'}
               %span.navLabel Sign Up
       
       - elsif current_user.present?
