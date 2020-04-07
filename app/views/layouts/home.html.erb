@@ -17,8 +17,11 @@
     <meta property="og:title"       content="<%=@tab_title_text%>" />
     <meta property="og:site_name"   content="transparentcity.co" />
     <meta property="og:description" content="<%=@meta_desc%>" />
+
+    <%= RailsCriticalCssServer::Rewrite.call self do %>
+      <%= stylesheet_link_tag 'application', media: 'all'%>
+    <% end %>
     
-    <%= stylesheet_link_tag 'application', media: 'all'%>
     <%= javascript_include_tag 'home/jquery.init' %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
