@@ -101,13 +101,7 @@
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                icon: default_icon, //pinSymbol(setMcolor(prop.price)),
-                // label: {
-                //         text: markerLabel,
-                //         color: "#333",
-                //         fontSize: "12px",
-                //         fontWeight: "normal"
-                //       }, //labels[labelIndex++ % labels.length],
+                icon: default_icon,
                 draggable: false,
                 //animation: google.maps.Animation.DROP,
             });
@@ -240,12 +234,11 @@
 
   // getting all current page display building ids and loading the first image
   $.each($('.card.search-view-card'), function(i, j){ 
-    loadDisplayImage($(j).data('bid'));
+    Photo.loadDisplayImage($(j).data('bid'));
   });
   
 
   //Initialize the map
-  //$(document).ready(function() { initialize(); });
   google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>

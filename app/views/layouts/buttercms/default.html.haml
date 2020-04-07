@@ -1,19 +1,17 @@
 !!!
 %html
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{charset: "utf-8"}/
-    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
-    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", name: "viewport"}/
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
+    %meta{charset: 'utf-8'}/
+    %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}/
+    %meta{content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name: 'viewport'}/
     %title
-      = content_for?(:html_title) ? "#{content_for(:html_title)} Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City" : "Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City"
-    %meta{content: "#{content_for?(:meta_description) ? content_for(:meta_description) : "Transparentcity Blog is the place to find the latest rental housing research, market data, news, and stories on renting and living in New York City."}", name: "description"}/
-    %link{href: buttercms_blog_atom_path, rel: "alternate", title: "Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City - Atom", type: "application/atom+xml"}/
-    %link{href: buttercms_blog_rss_path, rel: "alternate", title: "Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City - RSS", type: "application/rss+xml"}/
-    / See https://buttercms.com/docs/#cssstyling
-    / <link rel="stylesheet" href="http://d2z2rr99bkshyr.cloudfront.net/buttercms-post-defaults.css">
+      = content_for?(:html_title) ? "#{content_for(:html_title)} Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City" : 'Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City'
+    %meta{content: "#{content_for?(:meta_description) ? content_for(:meta_description) : 'Transparentcity Blog is the place to find the latest rental housing research, market data, news, and stories on renting and living in New York City.'}", name: 'description'}/
+    %link{href: buttercms_blog_atom_path, rel: 'alternate', title: 'Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City - Atom', type: 'application/atom+xml'}/
+    %link{href: buttercms_blog_rss_path, rel: 'alternate', title: 'Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City - RSS', type: 'application/rss+xml'}/
     = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'application'
+    = javascript_include_tag 'blog'
     = favicon_link_tag 'favicon.png'
   %body.notransition.no-hidden#trans-blog
     = render 'layouts/home/header'
@@ -26,9 +24,9 @@
             = yield
           = render partial: 'buttercms/posts/category_panel'
     = render 'layouts/home/footer'
-    %script{src: "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bb8502a693bfcd8", type: "text/javascript"}
+    %script{src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bb8502a693bfcd8', type: 'text/javascript'}
 
-    %script{async: "", src: "https://www.googletagmanager.com/gtag/js?id=#{ENV['GOOGLE_TRACKING_ID']}"}
+    %script{async: '', src: "https://www.googletagmanager.com/gtag/js?id=#{ENV['GOOGLE_TRACKING_ID']}"}
 
     :javascript
       $('.post-content p a').attr('target', '_blank');
