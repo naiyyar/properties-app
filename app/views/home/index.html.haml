@@ -22,17 +22,15 @@
                 %li=link_to quick_link_name(nb), nb[:url]
   
   .home-wrapper{style: 'background: #FBFBFF;'}
-    .home-content
+    .home-content{style: 'padding: 0px 16px;'}
       %h2.osLight1.text-center{style: 'font-weight: bolder; color: #000;'} No Fee Apartments That May Interest You
-      .row.pb20
-        .col-lg-12
-          .row
-            #featured-buildings-section
-              - unless browser.device.mobile?
-                - 1.upto(4) do
-                  .col-lg-3= render 'home/partials/placeholder_cards'
-              - else
-                .col-sm-12.col-xs-12= render 'home/partials/placeholder_cards'
+      .row
+        #featured-buildings-section
+          - unless browser.device.mobile?
+            - 1.upto(4) do
+              .col-lg-3= render 'home/partials/placeholder_cards'
+          - else
+            .col-sm-12.col-xs-12= render 'home/partials/placeholder_cards'
 
   #home-popular_neighborhoods
 

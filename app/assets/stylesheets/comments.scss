@@ -1,0 +1,77 @@
+.comments {
+  padding: 30px 14px 83px 20px;
+}
+.comment {
+  padding-bottom: 20px;
+}
+.comment.reply {
+  padding-left: 54px;
+}
+.commentAvatar {
+  position: relative;
+  float: left;
+}
+.commentArrow {
+  position: absolute;
+  top: 5px;
+  left: 45px;
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  font-size: 30px;
+  line-height: 30px;
+  text-shadow: -1px 1px 2px rgba(0, 0, 0, 0.13);
+}
+.commentContent {
+  background-color: #fff;
+  margin-left: 54px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
+  border-radius: 2px;
+}
+.commentName {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 12px;
+  padding: 10px 10px 5px 10px;
+}
+.commentBody {
+  font-size: 13px;
+  color: #333;
+  line-height: 16px;
+  padding: 0 10px 10px 10px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.commentActions {
+  padding: 14px 4px 8px;
+}
+.commentTime {
+  float: left;
+  font-size: 11px;
+  color: #999;
+  float: left;
+}
+.commentActions ul {
+  list-style-type: none;
+  float: right;
+  padding: 0px 0px;
+}
+
+.commentActions ul.tenant_info > li + li:after {
+  /*font: normal normal normal 14px/1 FontAwesome;*/
+  content: "|";
+}
+
+.commentActions ul.ricons li a > i {
+  font-size: 16px;
+}
+
+.commentActions ul.ricons li a i:hover, .flagged{
+  color: rgb(204, 39, 39);
+}
+
+.commentActions ul li {
+  float: right;
+  margin-left: 10px;
+  font-size: 11px;
+  color: #999;
+}

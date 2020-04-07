@@ -88,3 +88,55 @@ input.apple-switch.sb-lg:checked {
 input.apple-switch.sb-lg:checked:after {
   left: 20px;
 }
+
+.checkbox.switch  {
+    padding-top: 4px;
+}
+.checkbox.custom-checkbox input[type="checkbox"],
+.radio.custom-radio input[type="radio"],
+.checkbox.switch input[type="checkbox"] {
+    position: absolute;
+    left: -9999em;
+}
+.checkbox.custom-checkbox label,
+.radio.custom-radio label,
+.checkbox.switch label {
+    padding-left: 0;
+}
+.checkbox.custom-checkbox span,
+.radio.custom-radio span {
+  background-color: #fff;
+  border: 1px solid #999;
+  font-size: 10px;
+  line-height: 10px;
+  padding: 3px;
+  border-radius: 2px;
+  float: left;
+  margin-right: 5px;
+  color: #fff;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+.radio.custom-radio span {
+  border-radius: 50%;
+  line-height: 9px;
+}
+.checkbox.custom-checkbox input:checked+span,
+.radio.custom-radio input:checked+span {
+  background-color: #0075c9;
+  border-color: #0075c9;
+}
+.checkbox.custom-checkbox input[disabled]+span,
+fieldset[disabled] .checkbox.custom-checkbox input+span,
+.radio.custom-radio input[disabled]+span,
+fieldset[disabled] .radio.custom-radio input+span {
+  border-color: #e8e8e8;
+}
+.checkbox.custom-checkbox input[disabled]:checked+span,
+fieldset[disabled] .checkbox.custom-checkbox input:checked+span,
+.radio.custom-radio input[disabled]:checked+span,
+fieldset[disabled] .radio.custom-radio input:checked+span {
+  border-color: #66a5d3;
+  background-color: #66a5d3;
+}
