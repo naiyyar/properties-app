@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require ./home/jquery.init
 //= require rails.validations
 //= require jquery-placeholder
 //= require jquery.slimscroll.min

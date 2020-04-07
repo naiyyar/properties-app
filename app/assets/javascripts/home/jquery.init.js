@@ -11,8 +11,8 @@
 //= require devise
 //= require detect_timezone
 //= require jquery.detect_timezone
-//= require jquery-confirm.min
 //= require saved_buildings
+//= require bootbox.min
 //= require ./search
 
 setTimeout(function(){ 
