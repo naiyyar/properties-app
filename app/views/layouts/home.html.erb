@@ -27,13 +27,13 @@
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
     <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
-    <%= render partial: 'layouts/home/header' if hide_search_bar? %>
+    <%= render partial: 'layouts/home/header' %>
     <div class="content-wrapper <%= controller_name + action_name %>">
       <%= yield %>
     </div>
     <div id="remote-container"></div>
     <div id="auth-form"></div>
-    <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
+    <%= render 'layouts/home/footer' %>
     
     <%= render 'buildings/favourite_script' %>
     <%= javascript_include_tag 'home' %>

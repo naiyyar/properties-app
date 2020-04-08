@@ -5,8 +5,6 @@ $(document).on 'click', '.favourite', () ->
 @removeFavorite =(elem)->
 	object_id = elem.data('objectid')
 	save_link = $('.save_link_'+object_id);
-	console.log(save_link)
-	console.log(elem)
 	if elem.hasClass('unfilled-heart')
 		save_link.removeClass('unfilled-heart').addClass('filled-heart')
 		save_link.css('color','#f16980')
