@@ -117,6 +117,6 @@ class HomeController < ApplicationController
   # end
 
   def tab_title_tag
-    'No Fee Apartments NYC, No Fee Rentals NYC, No Broker Fee Apartments For Rent In NYC'
+    'No Fee Apartments For Rent in NYC By Owner Landlord'
   end
 end
