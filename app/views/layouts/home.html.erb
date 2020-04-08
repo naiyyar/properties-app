@@ -23,7 +23,7 @@
     <%= csrf_meta_tags %>
   </head>
   
-  <body class="notransition no-hidden home index" >
+  <body class="notransition no-hidden" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
     <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
@@ -36,7 +36,6 @@
     <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
     
     <%= render 'buildings/favourite_script' %>
-    
     <%= javascript_include_tag 'home' %>
 
     <script type="text/javascript">

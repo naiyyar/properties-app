@@ -15,7 +15,7 @@
 //= require ./search
 
 setTimeout(function(){ 
-	$('.alert').slideUp(300)
+	$('.alert').slideUp(300);
 }, 3000);
 
 Photo = {

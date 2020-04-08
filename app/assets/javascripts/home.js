@@ -5,7 +5,11 @@
         $('body').addClass('no-touch');
     }
 
-     $('.dropdown-select li a').click(function() {
+    setTimeout(function() {
+        $('body').removeClass('notransition');
+    }, 300);
+
+    $('.dropdown-select li a').click(function() {
         if (!($(this).parent().hasClass('disabled'))) {
             $(this).prev().prop("checked", true);
             $(this).parent().siblings().removeClass('active');
