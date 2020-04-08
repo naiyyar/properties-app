@@ -19,12 +19,12 @@
 
   %div{style: 'float: right; margin-top: -43px;'}= render 'buildings/favourite', building: building
   
-  = link_to @show_path do
-    %div.font-14{style: 'padding: 0px 0px 0px 11px; height: 22px;'}= render 'home/building_detail', building: building
-
-  .pb-8.font-14{style: 'margin-left: 10px;'}=bed_ranges(building)
+  %div.font-14{style: 'padding: 0px 0px 0px 11px; height: 22px;'}= render 'home/building_detail', building: building
   
-  = render 'contacts/cta_buttons', building: building, size_class: '', on_click: false, filter_params: params[:filter]
+  = link_to @show_path, style: 'color: #000' do
+    .pb-8.font-14{style: 'margin-left: 10px;'}=bed_ranges(building)
+  
+    = render 'contacts/cta_buttons', building: building, size_class: '', on_click: false, filter_params: params[:filter]
 
 .clearfix
   
