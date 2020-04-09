@@ -11,12 +11,12 @@ module Search
       end
     end
 
-    def with_featured_building buildings, page_num = 1
+   def with_featured_building buildings, page_num = 1
       page_num                     = 1 if page_num == 0
       final_results                = {}
       
       featured_buildings           = featured_buildings(buildings)
-      top2_featured_buildings      = featured_buildings.limit(2)
+      top2_featured_buildings      = seleted_featured_buildings(featured_buildings)
       buildings_other_than_top_two = non_featured_buildings(buildings, top2_featured_buildings)
       per_page_buildings           = buildings_other_than_top_two.paginate(:page => page_num, :per_page => 20)
       all_buildings                = buildings_with_featured_on_top(top2_featured_buildings, per_page_buildings)
@@ -44,10 +44,23 @@ module Search
       buildings.where.not(id: top_2.map(&:id))
     end
 
+    def seleted_featured_buildings featured_buildings
+      if featured_buildings.present? && featured_buildings.length > 2
+        featured_buildings.shuffle[0..1]
+      else
+        featured_buildings.shuffle[0..2]
+      end
+    end
+
     def featured_buildings searched_buildings
       fbs = FeaturedBuilding.active_featured_buildings(searched_buildings.map(&:id))
-      searched_buildings.where(id: fbs.map(&:building_id)).reorder('RANDOM()')
+      searched_buildings.where(id: fbs.map(&:building_id))
     end
+
+    # def featured_buildings searched_buildings
+    #   fbs = FeaturedBuilding.active_featured_buildings(searched_buildings.map(&:id))
+    #   searched_buildings.where(id: fbs.map(&:building_id)).reorder('RANDOM()')
+    # end
 
     def search_by_zipcodes(criteria)
       search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)

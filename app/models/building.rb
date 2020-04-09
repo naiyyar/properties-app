@@ -131,6 +131,7 @@ class Building < ApplicationRecord
 
   scope :with_active_listing,   -> { where('listings_count > ?', 0) }
   scope :with_listings_bed,     -> (beds) { where('listings.bed in (?)', beds) }
+  scope :between_prices,        -> (min, max) { where('listings.rent >= ? AND listings.rent <= ?', min, max) }
   scope :with_active_web,       -> { where('active_web is true and web_url is not null') }
   scope :with_active_email,     -> { where('active_email is true and email is not null') }
   scope :with_application_link, -> { where('show_application_link is true and online_application_link is not null') }
