@@ -7,12 +7,13 @@ module Buildings
 		include NYCBorough
 		
 		# Methods
-		def initialize params, formatted_search_string
+		def initialize params, search_string, buildings
 			@sort_by 									 = params[:sort_by]
 			@filters 									 = params[:filter]
-			@search_string 						 = formatted_search_string
+			@search_string 						 = search_string
 			@searched_by               = params[:searched_by]
 	    @search_term               = params[:search_term]
+	    @buildings 								 = buildings
 	    @results                   = {}
 	    @results[:filters]         = nil
 	    @results[:zoom]            = 14
@@ -35,17 +36,17 @@ module Buildings
 																unless @search_string == 'New York'
 																	self.searched_buildings
 																else
-																	Building.buildings_in_city(@search_string)
+																	@buildings.buildings_in_city(@search_string)
 																end
 															else
-																Building.redo_search_buildings(@lat, @lng, @zoomlevel)
+																@buildings.redo_search_buildings(@lat, @lng, @zoomlevel)
 															end
 			@results[:buildings] = @results[:buildings].updated_recently if no_sorting?
 			if @filters.present?
-				@results[:buildings] = Building.filtered_buildings(@results[:buildings], @filters)
+				@results[:buildings] = @buildings.filtered_buildings(@results[:buildings], @filters)
 			end
 			if @results[:buildings].present? && @sort_by != '0'
-				@results[:buildings] = Building.sort_buildings(@results[:buildings], @sort_by)
+				@results[:buildings] = @buildings.sort_buildings(@results[:buildings], @sort_by)
 			end
 			return @results
 		end
@@ -54,13 +55,13 @@ module Buildings
 		def searched_buildings
 			case @searched_by
 			when 'zipcode'
-				buildings = Building.buildings_by_zip(@search_string)
+				buildings = @buildings.buildings_by_zip(@search_string)
 				@results[:boundary_coords] << Gcoordinate.zip_boundary_coordinates(@search_string)
 			when 'no-fee-apartments-nyc-neighborhoods'
-				buildings = Building.buildings_in_neighborhood(@search_string)
+				buildings = @buildings.buildings_in_neighborhood(@search_string)
 			when 'nyc'
-				buildings 					= Building.buildings_by_popular_search(@search_term)[0]
-				@results[:filters]  = Building.buildings_by_popular_search(@search_term)[1]
+				buildings 					= @buildings.buildings_by_popular_search(@search_term)[0]
+				@results[:filters]  = @buildings.buildings_by_popular_search(@search_term)[1]
 				@results[:zoom] 		= 12
 			else
 				buildings = self.search_by_city_or_nb
@@ -70,7 +71,7 @@ module Buildings
 		end
 
 		def search_by_city_or_nb
-			Building.cached_buildings_by_city_or_nb(@search_string, @sub_borough[@search_string])
+			@buildings.cached_buildings_by_city_or_nb(@search_string, @sub_borough[@search_string])
 		end
 
 		private

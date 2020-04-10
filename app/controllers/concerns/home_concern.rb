@@ -10,7 +10,7 @@ module HomeConcern
       company = ManagementCompany.find_by(name: @search_term.strip)
       redirect_to management_company_path(company) if company.present?
     else
-      results          = Buildings::Search.new(params, @search_string).fetch
+      results          = Buildings::Search.new(params, @search_string, pop_nb_buildings).fetch
       @buildings       = @searched_buildings = results[:buildings]
       @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
       @zoom            = results[:zoom]            if results[:zoom].present?

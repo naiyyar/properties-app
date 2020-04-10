@@ -1,5 +1,11 @@
 module HomeHelper
 
+	def hero_image
+		if home_page?
+    	@hero_image ||= (@mobile_view ? asset_path('hero-mobile.jpg') : asset_path('hero.jpg'))
+	  end
+  end
+
 	def spv_count_header_style
 		if browser.device.mobile? 
 			'color: #0075c8; font-size: 21px;'

@@ -5,14 +5,15 @@ class HomeController < ApplicationController
   before_action :format_search_string,  only: :search
   before_action :save_as_favourite,     only: [:index, :search]
   #before_action :set_rent_medians,      only: [:search, :load_infobox]
+  before_action :set_device_view,       only: :load_featured_buildings
   before_action :set_fav_color_class,   only: :load_infobox
   #before_action :set_min_save_amount,   only: :load_infobox
-
+  
   include HomeConcern #search
 
   def index
     @home_view        = true
-    @buildings_count  = pop_nb_buildings&.size
+    @buildings_count  ||= pop_nb_buildings&.size
     @meta_desc        = "Rent directly from management companies or landlords in any of these 
                          #{@buildings_count} no fee apartment rental buildings in NYC and 
                          save on broker fees."
@@ -21,7 +22,6 @@ class HomeController < ApplicationController
   end
 
   def load_featured_buildings
-    @mobile_view = browser.device.mobile?
     @featured_buildings ||= FeaturedBuilding.get_random_buildings(pop_nb_buildings)
   end
 
@@ -101,6 +101,10 @@ class HomeController < ApplicationController
     return unless session[:favourite_object_id].present? && current_user.present?
     current_user.add_to_fav(session[:favourite_object_id])
     session[:favourite_object_id] = nil
+  end
+
+  def set_device_view
+    @mobile_view = browser.device.mobile?
   end
 
   # def set_rent_medians

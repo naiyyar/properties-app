@@ -5,6 +5,7 @@
   .row{style: 'margin-right: 0px;'}
     .col-lg-12.col-md-12.col-xs-12{style: 'padding-left: 0px;padding-right: 0px;'}
       #hero-container
+        = image_tag hero_image, style: 'width: 100%; height: 100%;'
         
         .search-panel
           .home-about-nyc-apt
@@ -58,9 +59,7 @@
 =javascript_include_tag 'home/sections'
 
 :javascript
-  image = "#{browser.device.mobile? ? asset_path('hero-mobile.jpg') : asset_path('hero.jpg')}"
   window.onload = function() {
-    apt_home.loadHeroImage(image);
     apt_home.loadFeaturedBuildings();
   }
   
