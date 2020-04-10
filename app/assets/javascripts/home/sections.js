@@ -11,6 +11,11 @@ if($('.home-wrapper').length > 0){
       }
     },
 
+    loadHeroImage: function(url){
+      img_tag = '<img src='+url+' style="width: 100%; height: 100%;" />'
+      $('#hero-container').prepend(img_tag);
+    },
+
     loadFeaturedBuildings: function() {
       $.ajax({
         url: '/load_featured_buildings',
