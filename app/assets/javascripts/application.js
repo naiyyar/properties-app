@@ -12,6 +12,9 @@
 //
 //= require ./home/jquery.init
 //= require rails.validations
+//= require bootstrap/tooltip
+//= require bootstrap/carousel
+//= require bootstrap/button
 //= require jquery-placeholder
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min

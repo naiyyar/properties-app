@@ -2,7 +2,8 @@
 //= require jquery_ujs
 //= require jquery-ui.min
 //= require jquery-ui-touch-punch
-//= require bootstrap-sprockets
+//= require bootstrap/modal
+//= require bootstrap/dropdown
 //= require lightslider
 //= require slick.min
 //= require location
