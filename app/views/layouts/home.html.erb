@@ -37,6 +37,8 @@
     <%= render 'buildings/favourite_script' %>
     <%= javascript_include_tag 'home' %>
 
+    <%= stylesheet_link_tag 'home/main', media: 'all'%>
+
     <script type="text/javascript">
       $(function(){ 
         new app.apartments; 
@@ -62,6 +64,5 @@
 
       gtag('config', "<%=ENV['GOOGLE_TRACKING_ID']%>");
     </script>
-    <%= stylesheet_link_tag 'home/main', media: 'all', async: true, defer: true%>
   </body>
 </html>
