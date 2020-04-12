@@ -1,3 +1,4 @@
+//= require jquery-ui.min
 //= require jquery-ui-touch-punch
 //= require bootstrap/modal
 //= require bootstrap/dropdown
