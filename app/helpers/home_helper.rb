@@ -2,7 +2,7 @@ module HomeHelper
 
 	def hero_image
 		if home_page?
-    	@hero_image ||= (@mobile_view ? asset_path('hero-mobile.jpg') : asset_path('hero.jpg'))
+    	@mobile_view ? asset_path('hero-mobile.jpg') : asset_path('hero.jpg')
 	  end
   end
 
