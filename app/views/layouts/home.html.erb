@@ -17,7 +17,6 @@
     <meta property="og:title"       content="<%=@tab_title_text%>" />
     <meta property="og:site_name"   content="transparentcity.co" />
     <meta property="og:description" content="<%=@meta_desc%>" />
-    <%= stylesheet_link_tag 'home/main', media: 'all'%>
     <%= javascript_include_tag 'home/jquery.init' %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
@@ -63,5 +62,6 @@
 
       gtag('config', "<%=ENV['GOOGLE_TRACKING_ID']%>");
     </script>
+    <%= stylesheet_link_tag 'home/main', media: 'all', async: true, defer: true%>
   </body>
 </html>
