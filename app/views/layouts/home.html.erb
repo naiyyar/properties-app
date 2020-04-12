@@ -38,7 +38,7 @@
     <%= render 'buildings/favourite_script' %>
     <%= javascript_include_tag 'home' %>
 
-    <%= stylesheet_link_tag 'home/main', media: 'all'%>
+    <%= stylesheet_link_tag 'home/main',  media: 'all', rel: 'preload', as: "style", onload: "this.rel='stylesheet'"%>
 
     <script type="text/javascript">
       $(function(){ 
