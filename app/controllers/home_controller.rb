@@ -121,6 +121,6 @@ class HomeController < ApplicationController
   # end
 
   def tab_title_tag
-    @tab_title_tag ||= 'No Fee Apartments For Rent in NYC By Owner Landlord'
+    @tab_title_tag ||= 'Apartments For Rent in NYC'
   end
 end

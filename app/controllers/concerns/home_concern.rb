@@ -51,7 +51,7 @@ module HomeConcern
       @searched_neighborhoods = "#{@search_string}"
       @search_input_value     = "#{@searched_neighborhoods} - #{@borough_city}, NY"
       @search_input_value     = 'Custom'               if params[:searched_by] == 'latlng'
-      @desc_text              = "#{@search_string} #{@borough_city}"
+      @desc_text              = "#{@search_string}"
       @tab_title_text         = "#{@desc_text} #{tab_title_tag}"
     end
   end
