@@ -1,0 +1,13 @@
+//= require jquery-ui-touch-punch
+//= require bootstrap/modal
+//= require bootstrap/dropdown
+//= require lightslider
+//= require slick.min
+//= require location
+//= require left_nav
+//= require devise
+//= require detect_timezone
+//= require jquery.detect_timezone
+//= require saved_buildings
+//= require bootbox.min
+//= require ./search
