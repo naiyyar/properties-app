@@ -87,8 +87,13 @@ class ApplicationController < ActionController::Base
 	private
 
   def set_layout
-    return 'home' if action_name == 'index' && controller_name == 'home'
-    'application'
+    if action_name == 'index' && controller_name == 'home'
+      'home'
+    elsif action_name == 'search' && controller_name == 'home'
+      'search'
+    else
+      'application'
+    end
   end
 
   def footer_html

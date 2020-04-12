@@ -28,6 +28,18 @@ jQuery ->
 
 ready = ->
 	$('[data-toggle="tooltip"]').tooltip({ trigger: 'click' })
+	#
+	$('#wrapper').removeAttr('style');
+
+	#
+	data_sortable = $('#sortable').DataTable({
+	  paging: false,
+	  scrollY: false,
+	  "order": [],
+	  "columnDefs": [
+	    { "orderable": false, "targets": 'no-sort' }
+	  ]
+	});
 
 	$('.datepicker').datepicker
 		format: 'yyyy-mm-dd'

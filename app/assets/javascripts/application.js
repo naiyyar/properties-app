@@ -36,5 +36,5 @@
 //= require jquery.fancybox
 //= require form_validations
 //= require social-share-button
-//= require filters
+//= require review_form
 //= require_tree .

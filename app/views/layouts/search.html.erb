@@ -17,6 +17,7 @@
     <meta property="og:title"       content="<%=@tab_title_text%>" />
     <meta property="og:site_name"   content="transparentcity.co" />
     <meta property="og:description" content="<%=@meta_desc%>" />
+    <%= tag :meta, name: 'stripe-key', content: STRIPE_PUBLIC_KEY %>
     <%= javascript_include_tag 'home/jquery.init' %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
@@ -25,42 +26,32 @@
   <body class="notransition no-hidden" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
+    <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
     
-    <div id="apt-ajax-loader" style='display: none;'>
-      <div><span class="fa fa-spin fa-4x fa-spinner"></span></div>
+    <%= render partial: 'layouts/shared/header' %>
+    <%= render partial: 'layouts/shared/filters' %>
+    <div class="closeLeftSide"></div>
+    <div id="wrapper" class="<%=contribute_wrapper(params)%> <%=browser.device.mobile? ? 'screen-sm' : 'screen-lg'%> <%= @search_bar_hidden == :hidden ? 'mt0' : ''%>">
+      <%= render partial: 'layouts/shared/filter_buttons' %>
+      <div class="content <%= controller_name + action_name %>">
+        <%= render 'layouts/shared/pop_neighborhoods_list' %>
+        <%= yield %>
+      </div>
+      <%= render 'layouts/home/footer' if show_full_width_footer? && contribute_page? %>
     </div>
-    
-    <%= render partial: 'layouts/home/header' %>
-    
-    <div class="content-wrapper <%= controller_name + action_name %>">
-      <%= yield %>
-    </div>
-    
+
     <div id="remote-container"></div>
     <div id="auth-form"></div>
     
-    <%= render 'layouts/home/footer' %>
-    
-    <%= javascript_include_tag 'home/main', defer: true %>
+    <%= javascript_include_tag 'home/main'%>
+    <%= javascript_include_tag 'search/main'%>
     <%= render 'buildings/favourite_script' %>
-    <%= javascript_include_tag 'home' %>
+    <%= render 'home/map_script' %>
 
-    <%= stylesheet_link_tag 'home/main',  media: 'all', rel: 'preload', as: "style", onload: "this.rel='stylesheet'"%>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
 
     <script type="text/javascript">
-      $(function(){ 
-        new app.apartments; 
-      })
-      // hiding autocomplete search results when no input given
-      if($('#buildings-search-txt').length > 0){
-        $(document).on('keyup', '#buildings-search-txt', function(e) {
-          q = $(this).val();
-          if (q == '') {
-            $(".ui-autocomplete").hide();
-            $(".no-match-link").addClass('hidden');
-          }
-        })
-      }
+      $(function(){ new app.apartments; })
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
