@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   before_action :format_search_string,  only: :search
   before_action :save_as_favourite,     only: [:index, :search]
   #before_action :set_rent_medians,      only: [:search, :load_infobox]
-  before_action :set_device_view,       only: :load_featured_buildings
+  before_action :set_device_view,       only: [:index, :load_featured_buildings]
   before_action :set_fav_color_class,   only: :load_infobox
   #before_action :set_min_save_amount,   only: :load_infobox
   
