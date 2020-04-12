@@ -133,6 +133,7 @@ module Search
     def pop_search_tab_title search_term
       term = search_term.split('-').join(' ').titleize
       "#{term.gsub!('Nyc', 'NYC')}"
+      return term
     end
   end
 end
