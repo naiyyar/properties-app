@@ -21,7 +21,7 @@
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.1.2/css/paymentfont.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
     <%end%>
     
-    <%= stylesheet_link_tag 'application', media: 'all'%>
+    <%#= stylesheet_link_tag 'application', media: 'all'%>
     <%= tag :meta, name: 'stripe-key', content: STRIPE_PUBLIC_KEY %>
     <%= javascript_include_tag 'application' %>
     <%= favicon_link_tag 'favicon.png' %>
@@ -57,6 +57,8 @@
 
     <%= render 'buildings/favourite_script' %>
     <%= javascript_include_tag 'zapp' %>
+
+    <%= stylesheet_link_tag 'application',  media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'"%>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })

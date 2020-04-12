@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require ./home/jquery.init
+//= require ./home/main
 //= require rails.validations
 //= require bootstrap/tooltip
 //= require bootstrap/carousel
