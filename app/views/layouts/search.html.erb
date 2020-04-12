@@ -42,13 +42,13 @@
 
     <div id="remote-container"></div>
     <div id="auth-form"></div>
-    
+
     <%= javascript_include_tag 'home/main'%>
     <%= javascript_include_tag 'search/main'%>
     <%= render 'buildings/favourite_script' %>
     <%= render 'home/map_script' %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'application', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })

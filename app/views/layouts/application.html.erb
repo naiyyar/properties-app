@@ -23,7 +23,7 @@
     
     <%= tag :meta, name: 'stripe-key', content: STRIPE_PUBLIC_KEY %>
     <%= javascript_include_tag 'application' %>
-    <%= stylesheet_link_tag 'application',  media: 'all', rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
+    <%= stylesheet_link_tag 'application', media: 'all', rel: "preload", as: "style", onload: "this.rel='stylesheet'" %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
   </head>
