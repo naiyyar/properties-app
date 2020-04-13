@@ -27,22 +27,10 @@
     <%= render 'buildings/favourite_script' %>
     <%= javascript_include_tag 'home' %>
 
-    <%= stylesheet_link_tag 'home/main',  media: 'all', rel: 'preload', as: "style", onload: "this.rel='stylesheet'"%>
+    <%= stylesheet_link_tag 'home/main',  media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
 
     <script type="text/javascript">
-      $(function(){ 
-        new app.apartments; 
-      })
-      // hiding autocomplete search results when no input given
-      if($('#buildings-search-txt').length > 0){
-        $(document).on('keyup', '#buildings-search-txt', function(e) {
-          q = $(this).val();
-          if (q == '') {
-            $(".ui-autocomplete").hide();
-            $(".no-match-link").addClass('hidden');
-          }
-        })
-      }
+      $(function(){ new app.apartments; });
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->

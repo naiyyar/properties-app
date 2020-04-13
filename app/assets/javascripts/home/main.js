@@ -11,6 +11,8 @@
 //= require jquery.detect_timezone
 //= require saved_buildings
 //= require bootbox.min
+//= require jquery.mask.min
+//= require mask
 //= require ./search
 
 setTimeout(function(){ 

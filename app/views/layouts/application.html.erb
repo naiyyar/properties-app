@@ -7,7 +7,7 @@
     <%end%>
     
     <%= tag :meta, name: 'stripe-key', content: STRIPE_PUBLIC_KEY %>
-    <%= stylesheet_link_tag 'application', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
   
   <body class="notransition no-hidden" >
@@ -15,17 +15,7 @@
     <%= render partial: 'layouts/shared/left_side' %>
     <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
     <% unless hide_search_bar? %>
-      <%= render partial: 'layouts/shared/header' %>
-      <%= render partial: 'layouts/shared/filters' %>
-      <div class="closeLeftSide"></div>
-      <div id="wrapper" class="<%=contribute_wrapper(params)%> <%=browser.device.mobile? ? 'screen-sm' : 'screen-lg'%> <%= @search_bar_hidden == :hidden ? 'mt0' : ''%>">
-        <%= render partial: 'layouts/shared/filter_buttons' %>
-        <div class="content <%= controller_name + action_name %>">
-          <%= render 'layouts/shared/pop_neighborhoods_list' %>
-          <%= yield %>
-        </div>
-        <%= render 'layouts/home/footer' if show_full_width_footer? && contribute_page? %>
-      </div>
+      <%= render 'layouts/shared/wrapper' %>
     <%else%>
       <%= render partial: 'layouts/home/header' if hide_search_bar? %>
       <div class="content-wrapper <%= controller_name + action_name %>">

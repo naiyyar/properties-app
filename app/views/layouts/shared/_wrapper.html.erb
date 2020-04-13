@@ -1,0 +1,11 @@
+<%= render partial: 'layouts/shared/header' %>
+<%= render partial: 'layouts/shared/filters' %>
+<div class="closeLeftSide"></div>
+<div id="wrapper" class="<%=contribute_wrapper(params)%> <%=browser.device.mobile? ? 'screen-sm' : 'screen-lg'%> <%= @search_bar_hidden == :hidden ? 'mt0' : ''%>">
+  <%= render partial: 'layouts/shared/filter_buttons' %>
+  <div class="content <%= controller_name + action_name %>">
+    <%= render 'layouts/shared/pop_neighborhoods_list' %>
+    <%= yield %>
+  </div>
+  <%= render 'layouts/home/footer' if show_full_width_footer? && contribute_page? %>
+</div>
