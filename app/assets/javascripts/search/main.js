@@ -9,6 +9,5 @@
 //= require back_to_scroll_position
 //= require infobubble
 //= require swiper.jquery
-//= require zapp
 //= require filters
 //= require dropdown_buttons

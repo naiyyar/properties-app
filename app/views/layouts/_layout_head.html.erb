@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>
+  <% if content_for? :page_title %>
+    <%= yield :page_title %> | All No Fee Apartments
+  <% else %>
+    <%= @tab_title_text = 'Apartments For Rent in NYC | All No Fee Apartments' %>
+  <% end %>
+</title>
+<meta name="description"        content="<%=@meta_desc%>">
+<meta property="og:url"         content="https://www.transparentcity.co" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="<%=@tab_title_text%>" />
+<meta property="og:site_name"   content="transparentcity.co" />
+<meta property="og:description" content="<%=@meta_desc%>" />
+<%= javascript_include_tag js_path %>
+<%= favicon_link_tag 'favicon.png' %>
+<%= csrf_meta_tags %>

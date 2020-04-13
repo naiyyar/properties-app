@@ -38,3 +38,27 @@
 //= require social-share-button
 //= require review_form
 //= require_tree .
+
+
+(function($) {
+	
+	// Enable swiping
+  $(".carousel").swipe({
+    swipe: function(event, direction, distance, duration, fingerCount) {
+      if(direction == "left") { $(this).carousel("next"); }
+      if(direction == "right") { $(this).carousel("prev"); }
+    },
+    // threshold: 0
+  });
+
+	var mask_options = {
+                      onKeyPress: function(cep, e, field, options) {
+                        if(cep == '(') {
+                          field.val('');
+                        }
+                      }
+                    };
+    $('.phone_number').mask("(000) 000-0000", mask_options);
+    $('#card-number').mask("0000 0000 0000 0000 000", mask_options);
+    $('#card-cvc').mask("0000", mask_options);
+})(jQuery);

@@ -1,24 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>
-      <% if content_for? :page_title %>
-        <%= yield :page_title %> | All No Fee
-      <% else %>
-        <%= @tab_title_text = 'Apartments For Rent in NYC | All No Fee' %>
-      <% end %>
-    </title>
-    <meta name="description"        content="<%=@meta_desc%>">
-    <meta property="og:url"         content="https://www.transparentcity.co" />
-    <meta property="og:type"        content="article" />
-    <meta property="og:title"       content="<%=@tab_title_text%>" />
-    <meta property="og:site_name"   content="transparentcity.co" />
-    <meta property="og:description" content="<%=@meta_desc%>" />
-    <%= tag :meta, name: 'stripe-key', content: STRIPE_PUBLIC_KEY %>
-    <%= javascript_include_tag 'home/jquery.init' %>
+    <%= render partial: 'layouts/layout_head', locals: {js_path: 'home/jquery.init'} %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
   </head>
@@ -47,8 +31,7 @@
     <%= javascript_include_tag 'search/main'%>
     <%= render 'buildings/favourite_script' %>
     <%= render 'home/map_script' %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
+    <%= javascript_include_tag 'zapp'%>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })
