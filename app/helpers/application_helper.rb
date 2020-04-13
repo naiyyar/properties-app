@@ -33,6 +33,10 @@ module ApplicationHelper
     controller_name == 'sessions' || controller_name == 'registrations'
   end
 
+  def seo_title_after_pipe
+    action_name == 'show' ? 'Transparentcity' : 'All No Fee Apartments'
+  end
+
   # showing white header with logo
   def hide_search_bar?
     home_page?       || 
