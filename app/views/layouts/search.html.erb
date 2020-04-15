@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render partial: 'layouts/layout_head', locals: {js_path: 'home/jquery.init'} %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= render partial: 'layouts/layout_head', locals: { js_path: 'home/jquery.init' } %>
+    <%= stylesheet_link_tag 'split_view/main', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= csrf_meta_tags %>
   </head>
