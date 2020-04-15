@@ -9,6 +9,7 @@ module ApplicationHelper
     end
   end
 
+  # logo image
   def alt_text
     'No Fee Apartments For Rent In NYC | Transparentcity.co'
   end
