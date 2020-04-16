@@ -320,7 +320,7 @@ class Building < ApplicationRecord
   def saved_amount(rent_medians, broker_percent)
     saved_amounts = {}
     rent_median_prices(rent_medians).as_json.each do |mp| 
-      saved_amounts[mp['bed_type']] = (((mp['price']*12)*broker_percent)/100).to_i
+      saved_amounts[mp['bed_type']] = (((mp['price'].to_i * 12) * broker_percent)/100).to_i
     end
 
     return saved_amounts

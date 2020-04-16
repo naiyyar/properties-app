@@ -72,10 +72,11 @@
                   - else
                     = f.submit 'Update', class: 'btn btn-primary'
     
+=javascript_include_tag 'featured_as_building'
 
 :javascript
   $(function() {
-    new app.AsCompBuildings;
+    new capp.asCompBuildings;
   });
 
   $('#listing_building_field').on('keyup', function(){
