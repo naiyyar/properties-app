@@ -76,7 +76,7 @@ class Building < ApplicationRecord
   CITIES      = ['New York', 'Brooklyn', 'Bronx', 'Queens']
   AMENITIES   = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
                 :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
-                :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee, :garage]
+                :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee]
   
   # Modules
   include PgSearch

@@ -49,7 +49,7 @@ module Search
         @buildings = @buildings.courtyard                     if has_amenity?('courtyard')
         @buildings = @buildings.laundry_facility              if has_amenity?('laundry_facility')
         @buildings = @buildings.gym                           if has_amenity?('gym')
-        @buildings = @buildings.garage.or(@buildings.parking) if has_amenity?('garage') || has_amenity?('parking')
+        @buildings = @buildings.parking                       if has_amenity?('parking')
         @buildings = @buildings.roof_deck                     if has_amenity?('roof_deck')
         @buildings = @buildings.pets_allowed_cats             if has_amenity?('pets_allowed_cats')
         @buildings = @buildings.pets_allowed_dogs             if has_amenity?('pets_allowed_dogs')
@@ -60,13 +60,17 @@ module Search
         @buildings = @buildings.live_in_super                 if has_amenity?('live_in_super')
         
         # for listings
-        if @amenities.include?('months_free_rent') || @amenities.include?('owner_paid') || @amenities.include?('rent_stabilized')
+        if listing_amenity?
           @buildings = buildings_with_listing_amenities
         end
       else
         @buildings = buildings
       end
       @buildings
+    end
+
+    def listing_amenity?
+      @amenities.include?('months_free_rent') || @amenities.include?('owner_paid') || @amenities.include?('rent_stabilized')
     end
 
     def has_amenity?(name)
