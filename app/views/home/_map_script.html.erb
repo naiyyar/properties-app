@@ -103,13 +103,14 @@
                 map: map,
                 icon: default_icon,
                 draggable: false,
-                //animation: google.maps.Animation.DROP,
+                // animation: google.maps.Animation.DROP,
             });
             bounds.extend(marker.position);
             
-            //Adding building name and address on right buildings card
+            // Adding building name and address on right buildings card
             if(sidebar){ 
               createSidebar(prop, marker, map, zoom);
+              Card.loadDisplayImage(prop.id);
             }
             
             if(i == 0 || i == '0'){
@@ -231,14 +232,8 @@
       google.maps.event.trigger(map, 'resize');
     }
   }
-
-  // getting all current page display building ids and loading the first image
-  $.each($('.card.search-view-card'), function(i, j){ 
-    Photo.loadDisplayImage($(j).data('bid'));
-  });
   
-
-  //Initialize the map
+  // Initialize the map
   google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>

@@ -10,25 +10,27 @@ module Search
         searched_buildings.as_json(:methods => [:featured?, :featured])
       end
     end
-
-   def with_featured_building buildings, page_num = 1
-      page_num                     = 1 if page_num == 0
-      final_results                = {}
+    
+    def no_sorting? sort_by
+      sort_by.blank? || sort_by == '0'
+    end
+    
+    def with_featured_building buildings, sort_by, page_num = 1 
+      page_num           = 1 if page_num == 0
+      final_results      = {}
       
-      featured_buildings           = featured_buildings(buildings)
-      top2_featured_buildings      = seleted_featured_buildings(featured_buildings)
-      buildings_other_than_top_two = non_featured_buildings(buildings, top2_featured_buildings)
-      per_page_buildings           = buildings_other_than_top_two.paginate(:page => page_num, :per_page => 20)
-      all_buildings                = buildings_with_featured_on_top(top2_featured_buildings, per_page_buildings)
+      top2_featured      = featured_buildings(buildings)
+      non_featured       = non_featured_buildings(buildings, top2_featured, sort_by)
+      per_page_buildings = non_featured.paginate(:page => page_num, :per_page => 20)
+      all_buildings      = buildings_with_featured_on_top(top2_featured, per_page_buildings)
       
-      if top2_featured_buildings.present?
-        buildings = top2_featured_buildings + buildings_other_than_top_two
-      end
+      buildings = top2_featured + non_featured if top2_featured.present?
       # when there are only top two featured buildings after filter
       # then per_page_buildings will be blank due to fitering featured buildings
       if per_page_buildings.blank? && all_buildings.present?
         per_page_buildings = all_buildings.paginate(:page => page_num, :per_page => 20)
       end
+      
       final_results[:all_buildings] = all_buildings
       final_results[:map_hash]      = buildings_json_hash(buildings)
       
@@ -40,27 +42,22 @@ module Search
       top_2.present? ? (top_2 + per_page) : per_page
     end
 
-    def non_featured_buildings buildings, top_2
-      buildings.where.not(id: top_2.map(&:id))
-    end
+    def non_featured_buildings buildings, top_2, sort_by
+      buildings = buildings.where.not(id: top_2.map(&:id))
+      sorted_buildings =  if no_sorting?(sort_by)
+                            buildings.updated_recently
+                          else
+                            buildings.sort_buildings(buildings, sort_by)
+                          end
 
-    def seleted_featured_buildings featured_buildings
-      if featured_buildings.present? && featured_buildings.length > 2
-        featured_buildings.shuffle[0..1]
-      else
-        featured_buildings.shuffle[0..2]
-      end
+      return sorted_buildings
     end
 
     def featured_buildings searched_buildings
-      fbs = FeaturedBuilding.active_featured_buildings(searched_buildings.map(&:id))
-      searched_buildings.where(id: fbs.map(&:building_id))
+      fbs = searched_buildings.where('featured_buildings_count > ?', 0)
+      return searched_buildings if fbs.blank?
+      searched_buildings.where(id: fbs.pluck(:id).shuffle[0..1])
     end
-
-    # def featured_buildings searched_buildings
-    #   fbs = FeaturedBuilding.active_featured_buildings(searched_buildings.map(&:id))
-    #   searched_buildings.where(id: fbs.map(&:building_id)).reorder('RANDOM()')
-    # end
 
     def search_by_zipcodes(criteria)
       search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
@@ -71,7 +68,7 @@ module Search
     end
 
     def cached_buildings_by_city_or_nb term, sub_borough
-      where("city = ? OR neighborhood in (?)", term, sub_borough)
+      where('city = ? OR neighborhood in (?)', term, sub_borough)
     end
 
     def search_by_pneighborhoods(criteria)
@@ -79,22 +76,22 @@ module Search
     end
 
     def search_by_building_name_or_address(criteria)
-      where("building_name ILIKE ? OR 
-             building_street_address ILIKE ?", "%#{criteria}%", "%#{criteria}%")
+      where('building_name ILIKE ? OR 
+             building_street_address ILIKE ?', "%#{criteria}%", "%#{criteria}%")
     end
 
     def buildings_in_neighborhood search_term, term_with_city=nil
-      search_term = (search_term == 'Soho' ? 'SoHo' : search_term)
+      search_term = 'SoHo' if search_term == 'Soho'
       results = where(neighborhood: search_term)
                 .or(where(neighborhoods_parent: search_term))
                 .or(where(neighborhood3: search_term))
-      
-      if search_term == 'Little Italy'
-        # Because neighborhood Little italy exist in manhattan as well as Bronx
-        city    = (!term_with_city.nil? && term_with_city.include?('newyork')) ? 'New York' : 'Bronx'
-        results = results.where(city: city)
-      end
+      # Because neighborhood Little italy exist in manhattan as well as Bronx
+      results = results.where(city: nb_city(term_with_city)) if search_term == 'Little Italy'
       results
+    end
+
+    def nb_city term_with_city
+      (!term_with_city.nil? && term_with_city.include?('newyork')) ? 'New York' : 'Bronx'
     end
 
     def buildings_in_city search_term

@@ -29,6 +29,7 @@
 //= require jquery.dataTables.min
 //= require jquery-fileupload/basic
 //= require moment
+//= require bootstrap-datetimepicker
 //= require filterrific/filterrific-jquery
 //= require load_more
 //= require input_validations
@@ -41,7 +42,6 @@
 
 
 (function($) {
-	
 	// Enable swiping
   $(".carousel").swipe({
     swipe: function(event, direction, distance, duration, fingerCount) {

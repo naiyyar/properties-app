@@ -24,6 +24,9 @@
         - else
           .text-center{style: 'padding: 12px 4px;'}= no_search_result_text
 
+    / .hidden.filter-params{data: { filterParams: params[:filter].to_json }}
+    =content_tag 'div', '', id: 'filter-params', data: { filterParams: @filter_params.as_json }
+
     %section.spv-pop-search{style: 'padding: 0px 16px;'}
       = render 'layouts/home/popular_searches', bg_col: '#fff'
   

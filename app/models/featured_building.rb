@@ -2,6 +2,8 @@ class FeaturedBuilding < ApplicationRecord
   DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
   include PgSearch
   belongs_to :building
+  #counter_cache_with_conditions :building, :featured_buildings_count, active: true
+  
   belongs_to :user
   has_many   :billings #, :dependent => :destroy
 
@@ -35,7 +37,7 @@ class FeaturedBuilding < ApplicationRecord
   FBS_COUNT = 4
   def self.get_random_buildings buildings
     featured_buildings = self.active.limit(FBS_COUNT).order('RANDOM()')
-    building_ids       = featured_buildings.pluck(:building_id)
+    building_ids       = featured_buildings.pluck(:building_id).uniq
     if building_ids.length < FBS_COUNT
       building_ids += active_buildings_ids_without_featured(buildings, building_ids)
     end

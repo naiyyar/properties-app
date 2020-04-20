@@ -13,26 +13,6 @@ module HomeHelper
 			'color: #000; font-size: 21px;'
 		end
 	end
-	
-	def lower_manhattan_sub_borough
-		NYCBorough.lower_manhattan_sub_borough
-	end
-
-	def brooklyn_sub_borough
-		NYCBorough.brooklyn_sub_borough
-	end
-
-	def uptown_sub_borough
-		NYCBorough.uptown_sub_borough
-	end
-
-	def queens_sub_borough
-		NYCBorough.queens_sub_borough
-	end
-
-	def bronx_sub_borough
-		NYCBorough.bronx_sub_borough
-	end
 
 	def brookly_borough
 		NYCBorough.brookly_borough
@@ -60,8 +40,8 @@ module HomeHelper
 		end
 	end
 	
-	#To retain filters when switching neighborhoods
-	#/no-fee-apartments-nyc-neighborhoods/lower-manhattan-newyork?sort_by=4&filter%5Bprice%5D%5B%5D=2&searched_by=no-fee-apartments-nyc-neighborhoods
+	# To retain filters when switching neighborhoods
+	# /no-fee-apartments-nyc-neighborhoods/lower-manhattan-newyork?sort_by=4&filter%5Bprice%5D%5B%5D=2&searched_by=no-fee-apartments-nyc-neighborhoods
 	def search_link neighborhood, borough
 		unless borough == 'BRONX'
 			borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase.gsub(' ', '-'))
@@ -85,7 +65,7 @@ module HomeHelper
 		params[:filter].present? ? params[:filter].to_query('filter') : nil
 	end
 
-	#on show page neighborhoods
+	# on show page neighborhoods
 	def borough_search_link borough
 		if queens_borough.include?(borough)
       search_link(borough, 'QUEENS')
@@ -206,12 +186,12 @@ module HomeHelper
 		end
 	end
 
-	#redo search
+	# redo search
 	def custom_search?
-		#params[:latitude].present? && params[:longitude].present?
-		#current location search also have lat and long
-		#searching on mobile redirecting to map view instad of list view
-		#returning to map view if user is searching or filtering from inside the map view
+		# params[:latitude].present? && params[:longitude].present?
+		# current location search also have lat and long
+		# searching on mobile redirecting to map view instad of list view
+		# returning to map view if user is searching or filtering from inside the map view
 		params[:searched_by] == 'latlng' || session[:view_type] == 'mapView'
 	end
 

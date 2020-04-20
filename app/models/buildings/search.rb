@@ -41,13 +41,8 @@ module Buildings
 															else
 																@buildings.redo_search_buildings(@lat, @lng, @zoomlevel)
 															end
-			@results[:buildings] = @results[:buildings].updated_recently if no_sorting?
-			if @filters.present?
-				@results[:buildings] = @buildings.filtered_buildings(@results[:buildings], @filters)
-			end
-			if @results[:buildings].present? && @sort_by != '0'
-				@results[:buildings] = @buildings.sort_buildings(@results[:buildings], @sort_by)
-			end
+															
+			@results[:buildings] = @buildings.filtered_buildings(@results[:buildings], @filters) if @filters.present?
 			return @results
 		end
 
@@ -83,10 +78,5 @@ module Buildings
 				@search_string == 'New York' ? 12 : 14
 			end
 		end
-
-		def no_sorting?
-			@sort_by.blank? || @sort_by == '0'
-		end
-
 	end
 end

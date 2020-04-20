@@ -19,8 +19,9 @@ setTimeout(function(){
 	$('.alert').slideUp(300);
 }, 3000);
 
-Photo = {
+Card = {
 	loadDisplayImage: function(building_id){
+		Card.appendCTALinks(building_id);
 	  var elem = $("#figure"+building_id);
 	  var enable_touch = !($('#featured-buildings-section').length > 0);
 	  $.ajax({
@@ -30,7 +31,21 @@ Photo = {
 	    data: { building_id: building_id },
 	    success: function(response){
 	      elem.html(response.html);
-	      Photo.initLightSlider(elem.find('.gallery'), enable_touch);
+	      Card.initLightSlider(elem.find('.gallery'), enable_touch);
+	    }
+	  });
+	},
+
+	appendCTALinks: function(building_id){
+		var elem 					= $("#cta-links"+building_id);
+	  var filter_params = $('#filter-params').data('filterparams');
+	  $.ajax({
+	    url: '/set_cta_links', // action in home controller
+	    dataType: 'json',
+	    type: 'get',
+	    data: { building_id: building_id, filter: filter_params },
+	    success: function(response){
+	      elem.html(response.html);
 	    }
 	  });
 	},

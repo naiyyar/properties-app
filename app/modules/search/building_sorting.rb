@@ -40,7 +40,7 @@ module Search
       ids_arr += filtered_buildings.where.not(min_listing_price: nil)
                                    .with_active_listing
                                    .order_by_min_rent
-                                   .pluck(:id)
+                                   .map(&:id)
       ids_arr += buildings.where(min_listing_price: nil).pluck(:id)
       return ids_arr
     end
@@ -52,7 +52,7 @@ module Search
       ids_arr += filtered_buildings.where.not(max_listing_price: nil)
                                    .with_active_listing
                                    .order_by_max_rent
-                                   .pluck(:id)
+                                   .map(&:id)
       ids_arr += buildings.where(max_listing_price: nil).pluck(:id)
       return ids_arr
     end
@@ -63,7 +63,7 @@ module Search
       filtered_buildings = where(id: buildings.pluck(:id))
       ids_arr += filtered_buildings.where.not(price: nil)
                                    .order_by_min_price
-                                   .pluck(:id)
+                                   .map(&:id)
       ids_arr += buildings.where(price: nil).pluck(:id)
       return ids_arr
     end

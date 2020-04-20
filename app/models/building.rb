@@ -78,6 +78,11 @@ class Building < ApplicationRecord
                 :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
                 :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee]
   
+  ATTRS       = [:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :reviews_count, :web_url, 
+                 :email, :active_email, :active_web,:min_listing_price, :max_listing_price, :uploads_count, :price,
+                 :featured_buildings_count, :city, :state, :building_type, :neighborhood, :neighborhoods_parent, 
+                 :neighborhood3, :studio, :one_bed, :two_bed, :three_bed, :four_plus_bed, :co_living, :listings_count]
+  
   # Modules
   include PgSearch
   include Imageable
@@ -331,7 +336,7 @@ class Building < ApplicationRecord
   end
 
   def featured?
-    featured_buildings.active.present?
+    featured_buildings_count.to_i > 0
   end
 
   def neighbohoods
@@ -404,12 +409,6 @@ class Building < ApplicationRecord
            OR neighborhood3 @@ :q" , q: neighbohood).count
   end
 
-  def popular_neighborhoods
-    Neighborhood.where('name = ? OR 
-                        name = ? OR 
-                        name = ?', neighborhood, neighborhoods_parent, neighborhood3)
-  end
-
   def prices
     !price.nil? ? RANGE_PRICE[price - 1] : ''
   end
@@ -455,12 +454,19 @@ class Building < ApplicationRecord
     end 
   end
 
+  def popular_neighborhoods
+    Neighborhood.where('name = ? OR 
+                        name = ? OR 
+                        name = ?', neighborhood, neighborhoods_parent, neighborhood3)
+  end
+
   private
   
   def update_neighborhood_counts
     popular_neighborhoods.each do |hood|
       if hood.buildings_count.to_i >= 0
-        hood.buildings_count = Building.buildings_in_neighborhood(hood.name, hood.boroughs).count
+        city = (hood.boroughs == 'MANHATTAN' ? 'New York' : hood.boroughs.capitalize)
+        hood.buildings_count = Building.buildings_in_neighborhood(hood.name, city).count
         hood.save
       end
     end

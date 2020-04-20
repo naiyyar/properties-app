@@ -23,8 +23,7 @@
   
   = link_to @show_path, style: 'color: #000' do
     .pb-8.font-14{style: 'margin-left: 10px;'}=bed_ranges(building)
-  
-    = render 'contacts/cta_buttons', building: building, size_class: '', on_click: false, filter_params: params[:filter]
-
+    
+    .cta_buttons{id: "cta-links#{building.id}"}
+      / = render 'contacts/cta_buttons', building: building, size_class: '', on_click: false, filter_params: params[:filter]
 .clearfix
-  

@@ -10,7 +10,7 @@ module SaveNeighborhood
   def level3_neighborhoods
     ['Lower Manhattan', 'Upper Manhattan', 'Midtown']
   end
-  #child neighbohoods
+  # child neighbohoods
   def predifined_neighborhoods
     arr = []
     File.open("#{Rails.root}/public/neighborhoods.txt", "r").each_line do |line|
@@ -22,15 +22,15 @@ module SaveNeighborhood
     return  nyc_neighborhoods.flatten.sort
   end
   
-  #saving neighbohoods
+  # saving neighbohoods
   def get_and_save_neighborhood mode=''
   	if mode != 'manually'
 	    search = Geocoder.search([latitude, longitude])
 	    if search.present?
 	      neighborhood1 = neighborhood2 = neighborhood3 = ''
-	      #search for child neighborhoods
+	      # search for child neighborhoods
 	      search[0..7].each_with_index do |geo_result, index|
-	        #finding neighborhood
+	        # finding neighborhood
 	        neighborhood = geo_result.address_components_of_type(:neighborhood)
 	        if neighborhood.present?
 	          nb_name = neighborhood.first['long_name']

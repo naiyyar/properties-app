@@ -1,11 +1,8 @@
 module Search
   module BuildingFilters
     def filter_by_prices buildings, price
-      if price.present? && !price.include?('on') && buildings.present?
-        buildings.where(price: price)
-      else
-        buildings
-      end
+      return buildings unless price.present? && !price.include?('on') && buildings.present?
+      buildings.where(price: price)
     end
 
     def filter_by_beds buildings, beds

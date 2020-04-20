@@ -15,24 +15,24 @@ module HomeConcern
       @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
       @zoom            = results[:zoom]            if results[:zoom].present?
       @filters         = results[:filters]
-      @tab_title_text  = Building.pop_search_tab_title(@search_term)     if @filters.present?
+      @tab_title_text  = Building.pop_search_tab_title(@search_term) if @filters.present?
     end
     
     if @buildings.present?
-      @buildings          = @buildings.includes(:building_average, :featured_buildings)
+      # @buildings          = @buildings.includes(:listings)
       page_num            = params[:page].present? ? params[:page].to_i : 1
-      final_results       = Building.with_featured_building(@buildings, page_num)
+      final_results       = Building.with_featured_building(@buildings, params[:sort_by], page_num)
       @per_page_buildings = final_results[1]
-      @all_buildings      = final_results[0][:all_buildings] #with featured
+      @all_buildings      = final_results[0][:all_buildings] # with featured
       @hash               = final_results[0][:map_hash]
       @lat, @lng          = @hash[0]['latitude'], @hash[0]['longitude']
+      @filter_params      = params[:filter]
       @listings_count     = Listing.listings_count(@buildings, params[:filter])
       @buildings_count    = @buildings&.size
     end
     @meta_desc = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
                                                              count: @buildings_count, 
                                                              term:  @search_term)
-
     @half_footer = true
   end
 

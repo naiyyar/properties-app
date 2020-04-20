@@ -7,7 +7,7 @@ if($('.home-wrapper').length > 0){
       
       for(var i = 0; i < figures.length; i++) {
         figure = figures[i];
-        Photo.loadDisplayImage(figure.parentNode.parentNode.dataset.bid);
+        Card.loadDisplayImage(figure.parentNode.parentNode.dataset.bid);
       }
     },
 

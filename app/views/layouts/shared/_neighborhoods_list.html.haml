@@ -4,7 +4,7 @@
     %b#lower_manhattan
       = search_by_neighborhood_link('Lower Manhattan', area)
     .child-borough-container
-      - lower_manhattan_sub_borough.each do |borough|
+      - NYCBorough.lower_manhattan_sub_borough.each do |borough|
         - if borough != 'West Village'
           %li.parent{'data-parent' => 'lower_manhattan'}
             = search_by_neighborhood_link(borough, area)
@@ -87,7 +87,7 @@
     - area = 'Queens'
     %b#queens= link_to "Queens (#{queens_count})", '/no-fee-apartments-nyc-city/queens-ny'
     .child-borough-container
-      - queens_sub_borough.each do |borough|
+      - NYCBorough.queens_sub_borough.each do |borough|
         %li.parent{'data-parent' => 'queens'}= search_by_neighborhood_link(borough, area)
     %b#bronx
       - area = 'Bronx'

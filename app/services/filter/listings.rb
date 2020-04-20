@@ -8,11 +8,11 @@ module Filter
 												building.past_listings
 											end
 			if filter_params.present?
-				@amenities 				 = filter_params[:amenities]
-		    @bedrooms 				 = filter_params[:listing_bedrooms]
-		    @min_price 				 = filter_params[:min_price].to_i
-		    @max_price 				 = filter_params[:max_price].to_i
-		    @max_price 				 = 30000 if @max_price == 15500
+				@amenities  = filter_params[:amenities]
+		    @bedrooms  	= filter_params[:listing_bedrooms]
+		    @min_price  = filter_params[:min_price].to_i
+		    @max_price  = filter_params[:max_price].to_i
+		    @max_price  = 30000 if @max_price == 15500
 		  end
 		end
 

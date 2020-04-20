@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200406054132) do
+ActiveRecord::Schema.define(version: 20200420063836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20200406054132) do
   create_table "buildings", force: :cascade do |t|
     t.string   "building_name"
     t.string   "building_street_address"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -88,27 +88,27 @@ ActiveRecord::Schema.define(version: 20200406054132) do
     t.boolean  "doorman"
     t.text     "description"
     t.integer  "elevator"
-    t.boolean  "garage",                  default: false
-    t.boolean  "gym",                     default: false
-    t.boolean  "live_in_super",           default: false
-    t.boolean  "pets_allowed_cats",       default: false
-    t.boolean  "pets_allowed_dogs",       default: false
-    t.boolean  "roof_deck",               default: false
-    t.boolean  "swimming_pool",           default: false
-    t.boolean  "walk_up",                 default: false
+    t.boolean  "garage",                   default: false
+    t.boolean  "gym",                      default: false
+    t.boolean  "live_in_super",            default: false
+    t.boolean  "pets_allowed_cats",        default: false
+    t.boolean  "pets_allowed_dogs",        default: false
+    t.boolean  "roof_deck",                default: false
+    t.boolean  "swimming_pool",            default: false
+    t.boolean  "walk_up",                  default: false
     t.string   "neighborhood"
     t.string   "neighborhoods_parent"
     t.integer  "user_id"
     t.integer  "floors"
     t.integer  "built_in"
     t.integer  "number_of_units"
-    t.boolean  "courtyard",               default: false
-    t.boolean  "management_company_run",  default: false
+    t.boolean  "courtyard",                default: false
+    t.boolean  "management_company_run",   default: false
     t.string   "neighborhood3"
     t.string   "web_url"
     t.string   "building_type"
-    t.boolean  "childrens_playroom",      default: false
-    t.boolean  "no_fee",                  default: false
+    t.boolean  "childrens_playroom",       default: false
+    t.boolean  "no_fee",                   default: false
     t.integer  "management_company_id"
     t.integer  "studio"
     t.integer  "one_bed"
@@ -118,19 +118,20 @@ ActiveRecord::Schema.define(version: 20200406054132) do
     t.integer  "price"
     t.float    "avg_rating"
     t.string   "email"
-    t.boolean  "active_email",            default: true
-    t.boolean  "active_web",              default: true
+    t.boolean  "active_email",             default: true
+    t.boolean  "active_web",               default: true
     t.float    "recommended_percent"
-    t.integer  "reviews_count",           default: 0,     null: false
-    t.integer  "listings_count",          default: 0,     null: false
+    t.integer  "reviews_count",            default: 0,     null: false
+    t.integer  "listings_count",           default: 0,     null: false
     t.integer  "min_listing_price"
     t.integer  "max_listing_price"
     t.string   "online_application_link"
-    t.boolean  "show_application_link",   default: true
-    t.integer  "uploads_count",           default: 0,     null: false
+    t.boolean  "show_application_link",    default: true
+    t.integer  "uploads_count",            default: 0,     null: false
     t.integer  "co_living"
     t.boolean  "deposit_free"
     t.string   "deposit_free_company"
+    t.integer  "featured_buildings_count"
     t.index ["building_name"], name: "index_buildings_on_building_name", using: :btree
     t.index ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
     t.index ["city"], name: "index_buildings_on_city", using: :btree

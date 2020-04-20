@@ -12,14 +12,12 @@
 # 	end
 # end
 
-# Building.all.each do |building|
-# 	listings = building.listings.order(rent: :asc)
-# 	if listings.present?
-# 		building.min_listing_price = listings.first.rent
-# 		building.max_listing_price = listings.last.rent
-# 		building.save
-# 	end
-# end
+Neighborhood.all.each do |nb|
+	city = nb.boroughs == 'MANHATTAN' ? 'New York' : nb.boroughs.capitalize
+	counts = Building.buildings_in_neighborhood(nb.name, city).count
+	puts "#{nb.name}: #{counts}"
+	nb.update(buildings_count: counts)
+end
 
 
 

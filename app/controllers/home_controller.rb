@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class HomeController < ApplicationController
   before_action :reset_session,         only: [:index, :auto_search]
-  before_action :find_building,         only: [:load_infobox, :get_images]
+  before_action :find_building,         only: [:load_infobox, :get_images, :set_cta_links]
   before_action :format_search_string,  only: :search
   before_action :save_as_favourite,     only: [:index, :search]
   #before_action :set_rent_medians,      only: [:search, :load_infobox]
@@ -53,6 +53,16 @@ class HomeController < ApplicationController
                                                         images_count: image_uploads.length,
                                                         first_image:  image_uploads[0],
                                                         show_path:    building_path(@building)
+                                                      })
+                  }
+  end
+
+  def set_cta_links
+    render json: { html: render_to_string(:partial => '/contacts/cta_buttons', 
+                                          :locals => {  building:   @building,
+                                                        size_class: '',
+                                                        on_click:    false,
+                                                        filter_params: params[:filter]
                                                       })
                   }
   end

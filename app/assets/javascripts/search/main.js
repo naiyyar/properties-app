@@ -1,4 +1,5 @@
 //= require bootstrap/button
+//= require bootstrap/tab
 //= require underscore
 //= require jquery.touchSwipe.min
 //= require jquery.slimscroll.min
