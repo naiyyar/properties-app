@@ -2,7 +2,7 @@ class FeaturedBuilding < ApplicationRecord
   DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
   include PgSearch
   belongs_to :building
-  #counter_cache_with_conditions :building, :featured_buildings_count, active: true
+  counter_cache_with_conditions :building, :featured_buildings_count, active: true
   
   belongs_to :user
   has_many   :billings #, :dependent => :destroy
