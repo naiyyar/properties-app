@@ -47,24 +47,8 @@ class HomeController < ApplicationController
 
   def get_images
     photos        = Upload.cached_building_photos([params[:building_id]])
-    image_uploads = photos.present? ? photos.where(imageable_type: 'Building') : []
-    render json: { html: render_to_string(:partial => '/home/lightslider', 
-                                          :locals => {  building:     @building,
-                                                        images_count: image_uploads.length,
-                                                        first_image:  image_uploads[0],
-                                                        show_path:    building_path(@building)
-                                                      })
-                  }
-  end
-
-  def set_cta_links
-    render json: { html: render_to_string(:partial => '/contacts/cta_buttons', 
-                                          :locals => {  building:   @building,
-                                                        size_class: '',
-                                                        on_click:    false,
-                                                        filter_params: params[:filter]
-                                                      })
-                  }
+    @image_uploads = photos.present? ? photos.where(imageable_type: 'Building') : []
+    render json: {  html:render_slider_partial, cta_html: render_cta_partial }
   end
 
   def auto_search
@@ -132,5 +116,25 @@ class HomeController < ApplicationController
 
   def tab_title_tag
     @tab_title_tag ||= 'Apartments For Rent in NYC'
+  end
+
+  def render_slider_partial
+    render_to_string(:partial => '/home/lightslider', 
+                     :locals => { building:     @building,
+                                  images_count: @image_uploads.length,
+                                  first_image:  @image_uploads[0],
+                                  show_path:    building_path(@building)
+                                }
+                    )
+  end
+
+  def render_cta_partial
+    render_to_string(:partial => '/contacts/cta_buttons', 
+                     :locals => {  building:       @building,
+                                   size_class:     '',
+                                   on_click:       false,
+                                   filter_params:  params[:filter]
+                                }
+                  )
   end
 end

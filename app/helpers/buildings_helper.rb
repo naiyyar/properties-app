@@ -235,18 +235,25 @@ module BuildingsHelper
 
 	def bed_ranges building
 		if building.prices.present? || building.show_bed_ranges.present?
-			#link_to @show_path, style: 'color: #333;' do
 	    (price_col(building).to_s + types_col(building).to_s).html_safe
-	    #end
 	  end
 	end
 
 	def price_col building
-		"<span> #{building.prices} | </span>"
+		unless building.listings.active.present?
+			"<span> #{building.prices} </span>"
+		else
+			"<b> #{min_and_max_prices(building)} </b>"
+		end
 	end
 
+	def min_and_max_prices building
+    return number_to_currency(building.min_listing_price, precision: 0) if building.min_listing_price == building.max_listing_price
+    "#{number_to_currency(building.min_listing_price, precision: 0)} - #{number_to_currency(building.max_listing_price, precision: 0)}"
+  end
+
 	def types_col building
-		"<span> #{building.show_bed_ranges.join(', ')} </span>" +
+		"<span> #{'|' if building.show_bed_ranges.present?} #{building.show_bed_ranges.join(', ')} </span>" +
 		"#{'Bed' if building.bedroom_types?}#{',' if building.bedroom_types? && building.co_living == 5} #{'CoLiving' if building.co_living == 5  }"
 	end
 

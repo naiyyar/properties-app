@@ -20,32 +20,20 @@ setTimeout(function(){
 }, 3000);
 
 Card = {
-	loadDisplayImage: function(building_id){
-		Card.appendCTALinks(building_id);
-	  var elem = $("#figure"+building_id);
-	  var enable_touch = !($('#featured-buildings-section').length > 0);
+	loadDisplayImageAndCTALinks: function(building_id){
+	  var fig_elem 			= $("#figure"+building_id);
+	  var cta_elem 			= $("#cta-links"+building_id);
+	  var filter_params = $('#filter-params').data('filterparams');
+	  var enable_touch 	= !($('#featured-buildings-section').length > 0);
 	  $.ajax({
 	    url: '/get_images',
 	    dataType: 'json',
 	    type: 'get',
 	    data: { building_id: building_id },
 	    success: function(response){
-	      elem.html(response.html);
-	      Card.initLightSlider(elem.find('.gallery'), enable_touch);
-	    }
-	  });
-	},
-
-	appendCTALinks: function(building_id){
-		var elem 					= $("#cta-links"+building_id);
-	  var filter_params = $('#filter-params').data('filterparams');
-	  $.ajax({
-	    url: '/set_cta_links', // action in home controller
-	    dataType: 'json',
-	    type: 'get',
-	    data: { building_id: building_id, filter: filter_params },
-	    success: function(response){
-	      elem.html(response.html);
+	      fig_elem.html(response.html);
+	      Card.initLightSlider(fig_elem.find('.gallery'), enable_touch);
+	      cta_elem.html(response.cta_html);
 	    }
 	  });
 	},

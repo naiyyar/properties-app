@@ -143,7 +143,6 @@ Rails.application.routes.draw do
   post '/load_infobox',             to: 'home#load_infobox',        as: :load_infobox
   post '/set_split_view_type',      to: 'home#set_split_view_type'
   get '/get_images',                to: 'home#get_images'
-  get '/set_cta_links',             to: 'home#set_cta_links'
   get '/load_featured_buildings',   to: 'home#load_featured_buildings'
   
   post '/favorite',                 to: 'buildings#favorite',       as: :favorite
