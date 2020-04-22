@@ -123,7 +123,7 @@ class Building < ApplicationRecord
   accepts_nested_attributes_for :units, :allow_destroy => true
 
   # Scopes
-  scope :updated_recently,   -> { order('listings_count DESC, building_name ASC, building_street_address ASC') }
+  scope :updated_recently,   -> { order({listings_count: :desc, building_name: :asc, building_street_address: :asc}) }
   scope :order_by_min_rent,  -> { order('min_listing_price ASC, listings_count DESC') }
   scope :order_by_max_rent,  -> { order('max_listing_price DESC NULLS LAST, listings_count DESC') }
   scope :order_by_min_price, -> { order({price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}) }

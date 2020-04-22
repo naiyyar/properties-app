@@ -18,7 +18,6 @@ module Search
     def with_featured_building buildings, sort_by, page_num = 1 
       page_num           = 1 if page_num == 0
       final_results      = {}
-      
       top2_featured      = featured_buildings(buildings)
       non_featured       = non_featured_buildings(buildings, top2_featured, sort_by)
       per_page_buildings = non_featured.paginate(:page => page_num, :per_page => 20)
@@ -44,18 +43,14 @@ module Search
 
     def non_featured_buildings buildings, top_2, sort_by
       buildings = buildings.where.not(id: top_2.map(&:id))
-      sorted_buildings =  if no_sorting?(sort_by)
-                            buildings.updated_recently
-                          else
-                            buildings.sort_buildings(buildings, sort_by)
-                          end
-
-      return sorted_buildings
+      return buildings.updated_recently if no_sorting?(sort_by)
+      buildings.sort_buildings(buildings, sort_by)
     end
 
     def featured_buildings searched_buildings
-      fbs = searched_buildings.where('featured_buildings_count > ?', 0)
-      return searched_buildings if fbs.blank?
+      fbs = searched_buildings.where('featured_buildings_count is not null AND 
+                                      featured_buildings_count > ?', 0)
+      #return searched_buildings if fbs.blank?
       searched_buildings.where(id: fbs.pluck(:id).shuffle[0..1])
     end
 
