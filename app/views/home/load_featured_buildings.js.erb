@@ -3,14 +3,6 @@ var section = $('#featured-buildings-section');
     section.html("<%= j render partial: 'layouts/home/featured_buildings' %>");
 <%else%>
     section.html("<%= j render partial: 'layouts/shared/slick_slider' %>");
-    $(".center").slick({
-        dots: false,
-        infinite: true,
-        centerMode: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false
-    });
 <%end%>
 
 $('#home-popular_neighborhoods').html("<%= j render partial: 'layouts/home/popular_neighborhoods' %>");

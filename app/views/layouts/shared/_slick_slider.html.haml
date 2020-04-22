@@ -5,6 +5,16 @@
 		- properties.each do |building|
 			%div= render 'buildings/detail_card', building: building
 
+:javascript
+	$(".center").slick({
+		dots: false,
+		infinite: true,
+		centerMode: true,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		arrows: false
+	});
+
 :css
 	.slick-slide img {
 		width: 100%;

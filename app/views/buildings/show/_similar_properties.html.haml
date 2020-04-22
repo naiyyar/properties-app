@@ -1,6 +1,6 @@
-.similar{style: "#{@featured_buildings.present? ? 'padding: 0px;' : ''}"}
-  / carousel for medium & large devices
-  - unless browser.device.mobile?
+- if !browser.device.mobile?
+  .similar{style: "#{@featured_buildings.present? ? 'padding: 0px;' : ''}"}
+    / carousel for medium & large devices
     - unless action_name == 'load_featured_buildings'
       #carouselSimilar-1.carousel.slide.carousel-col
         .carousel-inner
@@ -25,3 +25,5 @@
             - @border_class = 'bordered'
             - @featured_buildings.each do |building|
               .col-lg-3.col-md-4= render 'buildings/detail_card', building: building
+- elsif action_name == 'show'
+  =render 'layouts/shared/slick_slider'
