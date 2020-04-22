@@ -41,6 +41,7 @@ class HomeController < ApplicationController
                                                         building_show:    params[:building_show],
                                                         current_user:     @current_user,
                                                         fav_color_class:  @fav_color_class,
+                                                        filters:          params[:filter_params],
                                                         :@listings =>     listings
                                                       })
                   }

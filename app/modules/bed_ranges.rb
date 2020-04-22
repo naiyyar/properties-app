@@ -1,9 +1,13 @@
 module BedRanges
 	def bedroom_ranges
-    active_listings = listings.active
     building_beds = [studio, one_bed, two_bed, three_bed, four_plus_bed, co_living].compact
-    return building_beds unless active_listings.present?
-    active_listings.pluck(:bed).uniq.sort
+    return building_beds unless min_and_max_price?
+    get_listings_beds
+  end
+
+  def get_listings_beds
+    listings = act_listings.present? ? act_listings : self.listings.active
+    return listings&.pluck(:bed).uniq.sort
   end
 
   def show_bed_ranges
@@ -30,7 +34,7 @@ module BedRanges
 	end
 
   def listings_beds?
-    listings.active.present?
+    min_and_max_price?
   end
 
   def bedroom_types?

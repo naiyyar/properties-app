@@ -106,7 +106,7 @@ class Building < ApplicationRecord
 
   # From some buildings when submitting reviews getting
   # Error: undefined method `address=' for #<Building
-  attr_accessor :address, :min_price, :max_price
+  attr_accessor :address, :min_price, :max_price, :act_listings
 
   belongs_to :user
   belongs_to :management_company, touch: true
@@ -311,6 +311,10 @@ class Building < ApplicationRecord
     end
 
     return saved_amounts
+  end
+
+  def min_and_max_price?
+    min_listing_price.present? && max_listing_price.present?
   end
 
   def min_save_amount rent_medians, broker_percent

@@ -222,22 +222,22 @@ module BuildingsHelper
     end
 	end
 
-	def set_bed_ranges building
+	def set_bed_ranges building, filters = nil
 		if building.prices.present? || building.show_bed_ranges.present?
-	    (price_col(building).to_s + types_col(building).to_s).html_safe
+	    (price_col(building, filters).to_s + types_col(building).to_s).html_safe
 	  end
 	end
 
-	def price_col b
-		unless b.listings.active.present?
+	def price_col b, filters
+		unless b.min_and_max_price?
 			"<span> #{b.prices} </span>"
 		else
-			"<b> #{min_and_max_prices(b)} </b>"
+			"<b> #{min_and_max_prices(b, filters)} </b>"
 		end
 	end
 
-	def min_and_max_prices prop
-    if prop.min_price.blank? && prop.max_price.blank?
+	def min_and_max_prices prop, filters
+    if prop.min_and_max_price? && filters.blank?
   		return number_to_currency(prop.min_listing_price, precision: 0) if prop.min_listing_price == prop.max_listing_price
   		"#{number_to_currency(prop.min_listing_price, precision: 0)} - #{number_to_currency(prop.max_listing_price, precision: 0)}"
   	else
