@@ -61,8 +61,8 @@ class Listing < ApplicationRecord
       buildings.each do |b|
         act_listings    = b.get_listings(filter_params)
         b.act_listings  = act_listings
-        b.min_price     = act_listings.first.rent
-        b.max_price     = act_listings.last.rent
+        b.min_price     = act_listings.first.rent rescue nil
+        b.max_price     = act_listings.last.rent rescue nil
         listings_count += act_listings.size
       end
     else
