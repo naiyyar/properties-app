@@ -89,6 +89,7 @@ class Building < ApplicationRecord
   include SaveNeighborhood
   include BuildingReviews
   include Voteable
+  include BedRanges
 
   # Search and filtering methods
   extend Search::BuildingSearch
@@ -105,7 +106,7 @@ class Building < ApplicationRecord
 
   # From some buildings when submitting reviews getting
   # Error: undefined method `address=' for #<Building
-  attr_accessor :address
+  attr_accessor :address, :min_price, :max_price
 
   belongs_to :user
   belongs_to :management_company, touch: true
@@ -289,25 +290,6 @@ class Building < ApplicationRecord
     Vote.recommended_percent(self)
   end
 
-  def bedroom_ranges
-    [studio, one_bed, two_bed, three_bed, four_plus_bed, co_living].compact
-  end
-
-  def show_bed_ranges
-    beds = []
-    bedroom_ranges.map do |bed|
-      beds << (bed == 0 ? 'Studio' : bed) unless bed == 5
-    end
-    beds
-  end
-
-  def price_ranges
-    ranges = {}
-    prices = Price.where(range: price)
-    bedroom_ranges.each{|bed_range| ranges[bed_range] = prices.find_by(bed_type: bed_range)}
-    return ranges
-  end
-
   def amenities
     amenities = []
     BuildingAmenities.all_amenities.each_pair do |k, v|
@@ -411,22 +393,6 @@ class Building < ApplicationRecord
 
   def prices
     !price.nil? ? RANGE_PRICE[price - 1] : ''
-  end
-
-  def bedroom_types?
-    studio.present? || either_of_four?
-  end
-  
-  def either_of_two?
-    three_bed.present? || four_plus_bed.present?
-  end
-  
-  def either_of_three?
-    either_of_two? || two_bed.present?
-  end
-  
-  def either_of_four?
-    either_of_three? || one_bed.present?
   end
 
   def unit_information?

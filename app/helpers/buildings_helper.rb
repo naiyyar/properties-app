@@ -51,7 +51,7 @@ module BuildingsHelper
 	end
 
 	def reviewable_path review
-		 if review.reviewable_object.kind_of? Building
+		if review.reviewable_object.kind_of? Building
       building_path(review.reviewable_object)
     elsif review.reviewable_object.kind_of? Unit
       unit_path(review.reviewable_object)
@@ -71,21 +71,15 @@ module BuildingsHelper
 	end
 
 	def disabled(current_user, val)
-		if val.present? && current_user && !current_user.has_role?(:admin)
-			true
-		end
+		val.present? && current_user && !current_user.has_role?(:admin)
 	end
 
 	def contribute_left_side params
-		if contribution?(params)
-			'contributeLeftSide'
-		end
+		'contributeLeftSide' if contribution?(params)
 	end
 
 	def contribute_wrapper params
-		if contribution?(params)
-			'contribute-wrapper'
-		end
+		'contribute-wrapper' if contribution?(params)
 	end
 
 	def listing_amenities
@@ -99,7 +93,7 @@ module BuildingsHelper
 	def recommended_percent object
 		thumb_icon = "| <span class='fa fa-thumbs-up recommended'></span>"
 		recommended = ''
-		if object.present? and object.recommended_percent.present?
+		if object.present? && object.recommended_percent.present?
 			rec_percent = object.recommended_percent
 			if rec_percent.nan? 
 				recommended = "#{thumb_icon} --%"
@@ -117,8 +111,8 @@ module BuildingsHelper
 	end
 
 	def heart_link object, user
-		#To save as favourite sending js request
-		#to unsave as favourite sending json request
+		# To save as favourite sending js request
+		# to unsave as favourite sending json request
 		@current_user = current_user.present? ? current_user : user
 		link_to heart_icon, saved_object_url(object), 
 												remote: remote(object), class: fav_classes(object), 
@@ -132,7 +126,7 @@ module BuildingsHelper
 	end
 
 	def remote object
-		(object.favorite_by?(@current_user) ? false : true )
+		(object.favorite_by?(@current_user) ? false : true)
 	end
 
 	def saved_object_url object
@@ -140,11 +134,11 @@ module BuildingsHelper
 	end
 
 	def heart_link_title(object)
-		(@current_user.present? and object.favorite_by?(@current_user)) ? 'Unsave' : 'Save'
+		(@current_user.present? && object.favorite_by?(@current_user)) ? 'Unsave' : 'Save'
 	end
 
 	def saved_color_class(object)
-		(@current_user.present? and object.favorite_by?(@current_user)) ? 'filled-heart' : 'unfilled-heart'
+		(@current_user.present? && object.favorite_by?(@current_user)) ? 'filled-heart' : 'unfilled-heart'
 	end
 
 	def check_availability_link building, sl_class=nil
@@ -166,24 +160,15 @@ module BuildingsHelper
 	end
 
 	def contact_leasing_button building, event, klass
-		title, classes = 'Contact Leasing', "btn btn-primary #{klass} btn-round"
-		# unless event
-		# 	link_to title, 'javascript:;', data: { bid: building.id, type: 'contact' }, class: classes
-		# else
-		link_to title, 'javascript:;', onclick: "showLeasingContactPopup(#{building.id})", class: classes
-		#end
+		link_to 'Contact Leasing', 'javascript:;', 
+																onclick: "showLeasingContactPopup(#{building.id})", 
+																 class: "btn btn-primary #{klass} btn-round"
 	end
 
 	def active_listings_button building, event, klass, listings_count
-		title 	= "#{listings_count} Active Listings" 
-		classes = "btn btn-primary active-listing-link #{klass} btn-round"
-		#unless event
-		#	link_to title, 'javascript:;', data: { bid: building.id, 
-		#																					type: 'listings', 
-		#																				}, class: classes
-		#else
-		link_to title, 'javascript:;', onclick: "showActiveListingsPopup(#{building.id})", class: classes
-		#end
+		link_to "#{listings_count} Active Listings" , 'javascript:;', 
+																									onclick: "showActiveListingsPopup(#{building.id})", 
+																									class: "btn btn-primary active-listing-link #{klass} btn-round"
 	end
 
 	def apply_online_link building
@@ -221,6 +206,10 @@ module BuildingsHelper
 		['1','2','3','4'].include?(params[:sort_by]) ? sort_options[params[:sort_by].to_i][0] : 'Recently updated'
 	end
 
+	def feature_comp_bg_img_url uploads
+		uploads.present? ? uploads.uploaded_img_url : image_url('no-photo.png')
+	end
+
 	def set_ranges building_price, price
 		if building_price == 1
       "#{number_to_currency(price.max_price, precision: 0)} <"
@@ -233,32 +222,36 @@ module BuildingsHelper
     end
 	end
 
-	def bed_ranges building
+	def set_bed_ranges building
 		if building.prices.present? || building.show_bed_ranges.present?
 	    (price_col(building).to_s + types_col(building).to_s).html_safe
 	  end
 	end
 
-	def price_col building
-		unless building.listings.active.present?
-			"<span> #{building.prices} </span>"
+	def price_col b
+		unless b.listings.active.present?
+			"<span> #{b.prices} </span>"
 		else
-			"<b> #{min_and_max_prices(building)} </b>"
+			"<b> #{min_and_max_prices(b)} </b>"
 		end
 	end
 
-	def min_and_max_prices building
-    return number_to_currency(building.min_listing_price, precision: 0) if building.min_listing_price == building.max_listing_price
-    "#{number_to_currency(building.min_listing_price, precision: 0)} - #{number_to_currency(building.max_listing_price, precision: 0)}"
+	def min_and_max_prices prop
+    if prop.min_price.blank? && prop.max_price.blank?
+  		return number_to_currency(prop.min_listing_price, precision: 0) if prop.min_listing_price == prop.max_listing_price
+  		"#{number_to_currency(prop.min_listing_price, precision: 0)} - #{number_to_currency(prop.max_listing_price, precision: 0)}"
+  	else
+  		return number_to_currency(prop.min_price, precision: 0) if prop.min_price == prop.max_price
+  		"#{number_to_currency(prop.min_price, precision: 0)} - #{number_to_currency(prop.max_price, precision: 0)}"
+  	end
   end
 
-	def types_col building
-		"<span> #{'|' if building.show_bed_ranges.present?} #{building.show_bed_ranges.join(', ')} </span>" +
-		"#{'Bed' if building.bedroom_types?}#{',' if building.bedroom_types? && building.co_living == 5} #{'CoLiving' if building.co_living == 5  }"
+	def types_col b
+		"<span> #{'|' if b.show_bed_ranges.present?} #{b.show_bed_ranges.join(', ')} </span>" +
+		"#{with_bed_text(b)}"
 	end
 
-	def feature_comp_bg_img_url uploads
-		uploads.present? ? uploads.uploaded_img_url : image_url('no-photo.png')
+	def with_bed_text b
+		"#{'Bed' if b.bedroom_types? && !b.has_only_studio?}#{',' if b.bedroom_types? && b.coliving_with_building_beds?} #{'CoLiving' if b.coliving_with_building_beds? }"
 	end
-
 end

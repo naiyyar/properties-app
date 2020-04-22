@@ -1,5 +1,5 @@
 .contact-links
-	- listings_count = building.get_listings(filter_params).size
+	- listings_count = @listings.blank? ? building.get_listings(filter_params).size : @listings.size
 	- if building.all_three_cta?(listings_count)
 		.c-links
 			%section=check_availability_button(building.web_url, 'btn-o')

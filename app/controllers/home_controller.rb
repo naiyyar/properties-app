@@ -32,6 +32,7 @@ class HomeController < ApplicationController
   end
 
   def load_infobox
+    listings = @building.get_listings(params[:filter_params])
     render json: { html: render_to_string(:partial => '/layouts/shared/custom_infowindow', 
                                           :locals => {  building:         @building,
                                                         image:            Upload.marker_image(@building),
@@ -40,15 +41,15 @@ class HomeController < ApplicationController
                                                         building_show:    params[:building_show],
                                                         current_user:     @current_user,
                                                         fav_color_class:  @fav_color_class,
-                                                        filter_params:    params[:filter_params]
+                                                        :@listings =>     listings
                                                       })
                   }
   end
 
   def get_images
     photos        = Upload.cached_building_photos([params[:building_id]])
-    @image_uploads = photos.present? ? photos.where(imageable_type: 'Building') : []
-    render json: {  html:render_slider_partial, cta_html: render_cta_partial }
+    @image_uploads = photos.where(imageable_type: 'Building') rescue []
+    render json: { html: render_slider_partial, cta_html: render_cta_partial }
   end
 
   def auto_search
@@ -133,7 +134,7 @@ class HomeController < ApplicationController
                      :locals => {  building:       @building,
                                    size_class:     '',
                                    on_click:       false,
-                                   filter_params:  params[:filter]
+                                   filter_params:  params[:filter_params]
                                 }
                   )
   end

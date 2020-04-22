@@ -58,7 +58,12 @@ class Listing < ApplicationRecord
   def self.listings_count buildings, filter_params={}
     listings_count = 0
     if filter_params.present?
-      buildings.each{|b| listings_count += b.get_listings(filter_params).size }
+      buildings.each do |b|
+        listings        = b.get_listings(filter_params)
+        b.min_price     = listings.first.rent
+        b.max_price     = listings.last.rent
+        listings_count += listings.size
+      end
     else
       listings_count = buildings.pluck(:listings_count).reduce(:+)
     end

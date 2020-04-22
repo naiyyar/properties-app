@@ -29,7 +29,7 @@ Card = {
 	    url: '/get_images',
 	    dataType: 'json',
 	    type: 'get',
-	    data: { building_id: building_id },
+	    data: { building_id: building_id, filter_params: filter_params },
 	    success: function(response){
 	      fig_elem.html(response.html);
 	      Card.initLightSlider(fig_elem.find('.gallery'), enable_touch);
