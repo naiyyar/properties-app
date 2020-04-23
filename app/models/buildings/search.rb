@@ -53,7 +53,7 @@ module Buildings
 				buildings = @buildings.buildings_by_zip(@search_string)
 				@results[:boundary_coords] << Gcoordinate.zip_boundary_coordinates(@search_string)
 			when 'no-fee-apartments-nyc-neighborhoods'
-				buildings = @buildings.buildings_in_neighborhood(@search_string)
+				buildings = @buildings.buildings_in_neighborhood(@search_string.downcase)
 			when 'nyc'
 				buildings 					= @buildings.buildings_by_popular_search(@search_term)[0]
 				@results[:filters]  = @buildings.buildings_by_popular_search(@search_term)[1]

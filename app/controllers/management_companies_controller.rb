@@ -45,7 +45,7 @@ class ManagementCompaniesController < ApplicationController
     @all_buildings       = final_results[0][:all_buildings]
     # @recommended_percent = @management_company.recommended_percent(@buildings)
     @reviews             = Review.buildings_reviews(@buildings)
-    @total_reviews       = @reviews.present? ? @reviews.count : 0
+    @total_reviews       = @reviews.size rescue 0
     @reviews             = @reviews.limit(10)
     if @buildings.present?
       @broker_percent = BrokerFeePercent.first.percent_amount

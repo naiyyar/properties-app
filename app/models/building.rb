@@ -142,6 +142,9 @@ class Building < ApplicationRecord
   scope :with_active_email,     -> { where('active_email is true and email is not null') }
   scope :with_application_link, -> { where('show_application_link is true and online_application_link is not null') }
   scope :with_pets,             -> { where('pets_allowed_cats is true OR pets_allowed_dogs is true') }
+
+  # popular searches
+  scope :luxury_rentals, -> (prices) { where(price: prices).doorman.elevator }
   
   scope :studio,    -> { where(studio: 0) }
   scope :one_bed,   -> { where(one_bed: 1) }
@@ -436,7 +439,7 @@ class Building < ApplicationRecord
     popular_neighborhoods.each do |hood|
       if hood.buildings_count.to_i >= 0
         city = (hood.boroughs == 'MANHATTAN' ? 'New York' : hood.boroughs.capitalize)
-        hood.buildings_count = Building.buildings_in_neighborhood(hood.name, city).count
+        hood.buildings_count = Building.buildings_in_neighborhood(hood.name.downcase, city).count
         hood.save
       end
     end

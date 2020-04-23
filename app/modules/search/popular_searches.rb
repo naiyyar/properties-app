@@ -31,7 +31,7 @@ module Search
 				filters[:price] = [1]
 				filters[:beds] 	= STUDIOS
 			when 'luxury-apartments-in-manhattan'
-				buildings 					= manhattan_buildings.where(price: LUXURY_APTS_PRICES).doorman.elevator
+				buildings 					= manhattan_buildings.luxury_rentals(LUXURY_APTS_PRICES)
 				filters[:price] 		= LUXURY_APTS_PRICES
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when '2-bedroom-apartments-in-nyc'
@@ -44,7 +44,7 @@ module Search
 				buildings 			= manhattan_buildings.where(price: AFFORDABLE_APTS_PRICES)
 				filters[:price] = AFFORDABLE_APTS_PRICES
 			when 'affordable-luxury-apartments-in-nyc'
-				buildings 					= nyc_buildings.where(price: [2]).doorman.elevator
+				buildings 					= nyc_buildings.luxury_rentals([2])
 				filters[:price] 		= [2]
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			# amenities
@@ -81,46 +81,46 @@ module Search
 				buildings 			= queens_buildings.two_bed
 				filters[:beds] 	= ['2']
 			when 'luxury-apartments-in-upper-east-side'
-				buildings 					= buildings_in_neighborhood('Upper East Side').doorman.elevator
+				buildings 					= buildings_in_neighborhood('upper east side').doorman.elevator
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'harlem-studio-apartments'
-				buildings 		 = buildings_in_neighborhood('Harlem').studio
+				buildings 		 = buildings_in_neighborhood('harlem').studio
 				filters[:beds] = STUDIOS
 			when 'long-island-city-studios'
-				buildings 		 = buildings_in_neighborhood('Long Island City').studio
+				buildings 		 = buildings_in_neighborhood('long island city').studio
 				filters[:beds] = STUDIOS
 			when 'upper-east-side-studio-apartments'
-				buildings 		 = buildings_in_neighborhood('Upper East Side').studio
+				buildings 		 = buildings_in_neighborhood('upper east side').studio
 				filters[:beds] = STUDIOS
 			when 'upper-west-side-studio-apartments'
-				buildings 		 = buildings_in_neighborhood('Upper West Side').studio
+				buildings 		 = buildings_in_neighborhood('upper west side').studio
 				filters[:beds] = STUDIOS
 			when "hell's-kitchen-studios"
-				buildings 		 = buildings_in_neighborhood("Hell's Kitchen").studio
+				buildings 		 = buildings_in_neighborhood("hell's kitchen").studio
 				filters[:beds] = STUDIOS
 			when 'west-village-studios'
-				buildings 		 = buildings_in_neighborhood('West Village').studio
+				buildings 		 = buildings_in_neighborhood('west village').studio
 				filters[:beds] = STUDIOS
 			when '2-bedroom-apartments-upper-east-side'
-				buildings 		 = buildings_in_neighborhood('Upper East Side').two_bed
+				buildings 		 = buildings_in_neighborhood('upper east side').two_bed
 				filters[:beds] = ['2']
 			when "hell's-kitchen-luxury-rentals"
-				buildings 					= buildings_in_neighborhood("Hell's Kitchen").where(price: LUXURY_APTS_PRICES).doorman.elevator
+				buildings 					= buildings_in_neighborhood("hell's kitchen").luxury_rentals(LUXURY_APTS_PRICES)
 				filters[:price] 		= LUXURY_APTS_PRICES
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'midtown-studio-apartments-nyc'
-				buildings 		 = buildings_in_neighborhood('Midtown').studio
+				buildings 		 = buildings_in_neighborhood('midtown').studio
 				filters[:beds] = STUDIOS
 			when 'midtown-east-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('Midtown East').where(price: LUXURY_APTS_PRICES).doorman.elevator
+				buildings 					= buildings_in_neighborhood('midtown east').luxury_rentals(LUXURY_APTS_PRICES)
 				filters[:price] 		= LUXURY_APTS_PRICES
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'upper-west-side-luxury-rental-buildings'
-				buildings 					= buildings_in_neighborhood('Upper West Side').where(price: LUXURY_APTS_PRICES).doorman.elevator
+				buildings 					= buildings_in_neighborhood('upper west side').luxury_rentals(LUXURY_APTS_PRICES)
 				filters[:price] 		= LUXURY_APTS_PRICES
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'upper-east-side-apartments-for-rent-with-doorman'
-				buildings 					= buildings_in_neighborhood('Upper East Side').doorman
+				buildings 					= buildings_in_neighborhood('upper east side').doorman
 				filters[:amenities] = ['doorman']
 			else
 				buildings = nyc_buildings

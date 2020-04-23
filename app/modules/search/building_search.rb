@@ -5,7 +5,7 @@ module Search
         searched_buildings.select(:id, :building_name, :building_street_address, 
                                   :latitude, :longitude, :zipcode, :city, 
                                   :min_listing_price,:max_listing_price, :listings_count,
-                                  :state, :price).as_json(:methods => [:featured?, :featured])
+                                  :state, :price, :featured_buildings_count).as_json(:methods => [:featured?, :featured])
       else
         searched_buildings.as_json(:methods => [:featured?, :featured])
       end
@@ -75,14 +75,13 @@ module Search
              building_street_address ILIKE ?', "%#{criteria}%", "%#{criteria}%")
     end
 
-    def buildings_in_neighborhood search_term, term_with_city=nil
-      search_term = 'SoHo' if search_term == 'Soho'
-      results = where(neighborhood: search_term)
-                .or(where(neighborhoods_parent: search_term))
-                .or(where(neighborhood3: search_term))
-      # Because neighborhood Little italy exist in manhattan as well as Bronx
-      results = results.where(city: nb_city(term_with_city)) if search_term == 'Little Italy'
-      results
+    def buildings_in_neighborhood search_term, term_with_city = nil
+      results = where('LOWER(neighborhood) = ?', search_term)
+                .or(where('LOWER(neighborhoods_parent) = ?', search_term))
+                .or(where('LOWER(neighborhood3) = ?', search_term))
+      # Neighborhood Little italy exist in manhattan as well as Bronx
+      return results unless search_term == 'Little Italy'
+      results.where(city: nb_city(term_with_city))
     end
 
     def nb_city term_with_city
@@ -102,9 +101,11 @@ module Search
       term.present? ? search(term) : self.all
     end
 
-    def buildings_with_active_listings buildings
-      buildings.joins(:listings).where('listings.active is true') rescue nil
-    end
+    # def buildings_with_active_listings buildings
+    #   # buildings.joins(:listings).where('listings.active is true') rescue nil
+    #   buildings.with_active_listing rescue nil
+    #   # buildings.where.not(min_listing_price: nil, max_listing_price: nil)
+    # end
 
     def city_count buildings, city, sub_boroughs = nil
       buildings.where('city = ? OR neighborhood in (?)', city, sub_boroughs).size
