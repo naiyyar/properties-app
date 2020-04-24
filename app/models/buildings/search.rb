@@ -55,13 +55,14 @@ module Buildings
 			when 'no-fee-apartments-nyc-neighborhoods'
 				buildings = @buildings.buildings_in_neighborhood(@search_string.downcase)
 			when 'nyc'
-				buildings 					= @buildings.buildings_by_popular_search(@search_term)[0]
-				@results[:filters]  = @buildings.buildings_by_popular_search(@search_term)[1]
-				@results[:zoom] 		= 12
+				buildings 				 = @buildings.buildings_by_popular_search(@search_term)[0]
+				@results[:filters] = @buildings.buildings_by_popular_search(@search_term)[1]
+				@results[:zoom] 	 = 12
 			else
-				buildings = self.search_by_city_or_nb
-				@results[:zoom] 		= 12
+				buildings 			= self.search_by_city_or_nb
+				@results[:zoom] = 12
 			end
+			
 			return buildings
 		end
 

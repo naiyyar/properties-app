@@ -1,17 +1,17 @@
 module Search
 	module PopularSearches
-		QUEENS_CITIES = [ 'Queens','Astoria','Corona','Flushing','Forest Hills',
-											'Kew Gardens','Long Island City','Rego Park']
-		LUXURY_APTS_AMENITIES = %w(doorman elevator)
-		LUXURY_APTS_PRICES = [3,4]
-		AFFORDABLE_APTS_PRICES = [1,2]
-		STUDIOS = ['0']
+		QUEENS_CITIES 				  = [ 'Queens','Astoria','Corona','Flushing','Forest Hills',
+															  'Kew Gardens','Long Island City','Rego Park']
+		LUXURY_APTS_AMENITIES   = %w(doorman elevator)
+		LUXURY_APTS_PRICES 			= [3,4]
+		AFFORDABLE_APTS_PRICES  = [1,2]
+		STUDIOS 								= ['0']
 		
 		def buildings_by_popular_search search_term
 			filters = {}
 			case search_term
 			when 'manhattan-apartments-for-rent'
-				buildings 					= manhattan_buildings
+				buildings = manhattan_buildings
 				# No use of filters hash here. It's only to fix the SEO tab title
 				filters[:amenities] = ['man'] 
 			when 'cheap-apartments-in-nyc'
