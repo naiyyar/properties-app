@@ -95,6 +95,7 @@ module Search
     end
 
     def listing_amenity? amenities
+      return false if amenities.blank?
       amenities.include?('months_free_rent') || amenities.include?('owner_paid') || amenities.include?('rent_stabilized')
     end
 
