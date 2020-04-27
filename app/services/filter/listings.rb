@@ -12,7 +12,7 @@ module Filter
 		    @bedrooms  	= filter_params[:listing_bedrooms]
 		    @min_price  = filter_params[:min_price].to_i
 		    @max_price  = filter_params[:max_price].to_i
-		    @max_price  = 30000 if @max_price == 15500
+		    @max_price  = Listing.max_rent if @max_price == 15500
 		  end
 		end
 

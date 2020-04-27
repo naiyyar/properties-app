@@ -71,6 +71,10 @@ class Listing < ApplicationRecord
     return listings_count
   end
 
+  def self.max_rent
+    @max_rent ||= self.maximum('rent')
+  end
+
   def update_rent listings = nil
     property          = self.building
     listings          = Listing.active if listings.blank?
