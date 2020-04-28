@@ -23,10 +23,10 @@ class Listing < ApplicationRecord
   scope :inactive,        -> { where(active: false) }
   scope :between,         -> (from, to) { where('date_active >= ? AND date_active <= ?', from, to) }
   scope :months_free,     -> { where('free_months > ?', 0) }
-  scope :owner_paid,      -> { where('owner_paid is not null') }
-  scope :rent_stabilize,  -> { where('rent_stabilize = ?', 'true') }
+  scope :owner_paid,      -> { where.not(owner_paid: nil) }
+  scope :rent_stabilize,  -> { where(rent_stabilize: ['true', 't']) }
   scope :with_prices,     -> (min, max) { where('rent >= ? AND rent <= ?', min.to_i, max.to_i) }
-  scope :with_beds,       -> (beds) { where('bed in (?)', beds) }
+  scope :with_beds,       -> (beds) { where(bed: beds) }
 
   pg_search_scope :search_query, 
                   against: [:building_address, :management_company],
