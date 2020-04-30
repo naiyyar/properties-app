@@ -18,7 +18,7 @@ module Search
     def with_featured_building buildings, sort_by, page_num = 1 
       page_num           = 1 if page_num == 0
       final_results      = {}
-      top2_featured      = featured_buildings(buildings)
+      top2_featured      = top2_featured_buildings
       non_featured       = non_featured_buildings(buildings, top2_featured, sort_by)
       per_page_buildings = non_featured.paginate(:page => page_num, :per_page => 20)
       all_buildings      = buildings_with_featured_on_top(top2_featured, per_page_buildings)
@@ -47,12 +47,16 @@ module Search
       buildings.sort_buildings(buildings, sort_by)
     end
 
-    def featured_buildings searched_buildings
-      fbs = searched_buildings.where('featured_buildings_count is not null AND 
-                                      featured_buildings_count > ?', 0)
-      #return searched_buildings if fbs.blank?
-      searched_buildings.where(id: fbs.pluck(:id).shuffle[0..1])
+    def top2_featured_buildings
+      Building.where(id: FeaturedBuilding.active.pluck(:building_id).shuffle[0..1])
     end
+
+    # def featured_buildings searched_buildings
+    #   fbs = searched_buildings.where('featured_buildings_count is not null AND 
+    #                                   featured_buildings_count > ?', 0)
+    #   #return searched_buildings if fbs.blank?
+    #   searched_buildings.where(id: fbs.pluck(:id).shuffle[0..1])
+    # end
 
     def search_by_zipcodes(criteria)
       search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)

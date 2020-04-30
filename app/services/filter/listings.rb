@@ -2,10 +2,11 @@ module Filter
 	class Listings
 		def initialize building, listing_type = 'active', filter_params={}
 			@listing_type = listing_type
+			@building 		= building
 			@listings 		= unless listing_type == 'past'
-												building.listings.active
+												@building.listings.active
 											else
-												building.past_listings
+												@building.past_listings
 											end
 			if filter_params.present?
 				@amenities  = filter_params[:amenities]
@@ -17,6 +18,9 @@ module Filter
 		end
 
 		def fetch_listings
+			# Not appying filter on featured building listings
+			return @listings if @building.featured?
+			
 			if @listing_type == 'active'
 	      filtered_listings.order_by_rent_asc
 	    elsif @listing_type == 'past'
