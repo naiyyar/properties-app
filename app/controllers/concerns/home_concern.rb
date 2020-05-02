@@ -19,13 +19,13 @@ module HomeConcern
     end
     
     if @buildings.present?
+      @filter_params      = params[:filter]
       page_num            = params[:page].present? ? params[:page].to_i : 1
       final_results       = Building.with_featured_building(@buildings, params[:sort_by], page_num)
       @per_page_buildings = final_results[1]
       @all_buildings      = final_results[0][:all_buildings] # with featured
       @hash               = final_results[0][:map_hash]
       @lat, @lng          = @hash[0]['latitude'], @hash[0]['longitude']
-      @filter_params      = params[:filter]
       @listings_count     = Listing.listings_count(@buildings, @all_buildings, @filter_params)
       @buildings_count    = @buildings&.size
     end

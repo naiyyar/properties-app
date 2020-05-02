@@ -15,8 +15,9 @@ module Search
       sort_by.blank? || sort_by == '0'
     end
     
-    def with_featured_building buildings, sort_by, page_num = 1 
+    def with_featured_building buildings, sort_by, page_num = 1, filters
       page_num           = 1 if page_num == 0
+      @filters           = filters
       final_results      = {}
       top2_featured      = top2_featured_buildings
       non_featured       = non_featured_buildings(buildings, top2_featured, sort_by)
@@ -50,13 +51,6 @@ module Search
     def top2_featured_buildings
       Building.where(id: FeaturedBuilding.active.pluck(:building_id).shuffle[0..1])
     end
-
-    # def featured_buildings searched_buildings
-    #   fbs = searched_buildings.where('featured_buildings_count is not null AND 
-    #                                   featured_buildings_count > ?', 0)
-    #   #return searched_buildings if fbs.blank?
-    #   searched_buildings.where(id: fbs.pluck(:id).shuffle[0..1])
-    # end
 
     def search_by_zipcodes(criteria)
       search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)
@@ -104,12 +98,6 @@ module Search
     def text_search(term)
       term.present? ? search(term) : self.all
     end
-
-    # def buildings_with_active_listings buildings
-    #   # buildings.joins(:listings).where('listings.active is true') rescue nil
-    #   buildings.with_active_listing rescue nil
-    #   # buildings.where.not(min_listing_price: nil, max_listing_price: nil)
-    # end
 
     def city_count buildings, city, sub_boroughs = nil
       buildings.where('city = ? OR neighborhood in (?)', city, sub_boroughs).size
