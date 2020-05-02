@@ -24,7 +24,7 @@ Card = {
 	  var fig_elem 			= $("#figure"+building_id);
 	  var cta_elem 			= $("#cta-links"+building_id);
 	  var filter_params = $('#filter-params').data('filterparams');
-	  var enable_touch 	= !($('#featured-buildings-section').length > 0);
+	  
 	  $.ajax({
 	    url: '/get_images',
 	    dataType: 'json',
@@ -32,10 +32,18 @@ Card = {
 	    data: { building_id: building_id, filter_params: filter_params },
 	    success: function(response){
 	      fig_elem.html(response.html);
-	      Card.initLightSlider(fig_elem.find('.gallery'), enable_touch);
+	      Card.initLightSlider(fig_elem.find('.gallery'), Card.enableTouch());
 	      cta_elem.html(response.cta_html);
 	    }
 	  });
+	},
+
+	enableTouch: function(){
+		var enable_touch = true;
+		if($('#featured-buildings-section').length > 0 || $('.building-detail-card.featured-comps').length > 0){
+			enable_touch = false;
+		}
+		return enable_touch;
 	},
 
 	initLightSlider: function(elem, enable_touch){

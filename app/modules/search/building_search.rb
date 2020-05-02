@@ -15,7 +15,7 @@ module Search
       sort_by.blank? || sort_by == '0'
     end
     
-    def with_featured_building buildings, sort_by, page_num = 1, filters
+    def with_featured_building buildings, sort_by, page_num = 1
       page_num           = 1 if page_num == 0
       @filters           = filters
       final_results      = {}
