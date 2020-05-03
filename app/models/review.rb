@@ -49,7 +49,7 @@ class Review < ApplicationRecord
   )
 
   def self.buildings_reviews buildings
-    where(reviewable_id: buildings.map(&:id), 
+    where(reviewable_id: buildings.pluck(:id), 
           reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
   end
 

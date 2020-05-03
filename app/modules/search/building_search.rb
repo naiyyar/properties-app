@@ -17,7 +17,6 @@ module Search
     
     def with_featured_building buildings, sort_by, page_num = 1
       page_num           = 1 if page_num == 0
-      @filters           = filters
       final_results      = {}
       top2_featured      = top2_featured_buildings
       non_featured       = non_featured_buildings(buildings, top2_featured, sort_by)
