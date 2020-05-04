@@ -234,6 +234,10 @@ class Building < ApplicationRecord
               end
   end
 
+  def self.transparentcity_buildings
+    @transparentcity_buildings ||= where.not(building_street_address: nil)
+  end
+
   def featured
     featured?
   end

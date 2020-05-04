@@ -14,10 +14,6 @@ module Search
     def no_sorting? sort_by
       sort_by.blank? || sort_by == '0'
     end
-
-    def transparentcity_buildings
-      @transparentcity_buildings ||= Building.where.not(building_street_address: nil)
-    end
     
     def with_featured_building buildings, search_string, sort_by, filters, page_num = 1
       page_num           = 1 if page_num == 0

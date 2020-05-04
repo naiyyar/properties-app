@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def pop_nb_buildings
-    @pop_nb_buildings ||= Building.select(*Building::ATTRS)
+    @pop_nb_buildings ||= Building.transparentcity_buildings.select(*Building::ATTRS)
   end
 
   def pop_neighborhoods

@@ -51,10 +51,6 @@ module Search
       sorted_buildings_by(sorted_building_ids_by_rent(buildings, 'DESC'))
     end
 
-    def sorted_buildings_by ids
-      transparentcity_buildings.order_by_id_pos(ids)
-    end
-
     def sorted_building_ids_by_rent buildings, sort_type
       buildings.joins(:listings)
                .select('listings.rent')
