@@ -326,6 +326,7 @@ class Building < ApplicationRecord
 
   def featured?
     featured_buildings_count.to_i > 0
+    # featured_buildings.active.first.present?
   end
 
   def neighbohoods
