@@ -28,7 +28,7 @@ module Search
     end
 
     def filter_by_listing_beds buildings, beds
-      buildings.with_listings_bed(beds).distinct if buildings.present?
+      buildings.with_listings_bed(beds) if buildings.present?
     end
 
     def filter_by_listing_prices buildings, min_price, max_price
@@ -36,7 +36,8 @@ module Search
         # when listing have price more than 15500
         # assuming listing max price can be upto whatever maximum rent listing table has
         max_price = Listing.max_rent if max_price.to_i == 15500
-        buildings.between_prices(min_price.to_i, max_price.to_i).distinct
+        ids = buildings.between_prices(min_price.to_i, max_price.to_i).map(&:id).uniq
+        transparentcity_buildings.order_by_id_pos(ids)
       end
     end
 
@@ -81,10 +82,11 @@ module Search
       amenities            = filter_params[:amenities]
       min_price, max_price = filter_params[:min_price], filter_params[:max_price]
       #
-      buildings = buildings.with_active_listing.joins(:listings)            if filtered_by_listings?(filter_params)
+      buildings = buildings.with_active_listing
       buildings = filter_by_amenities(buildings, amenities)                 if amenities.present?
       buildings = filter_by_prices(buildings, price)                        if price.present? && min_price.blank?
       buildings = filter_by_beds(buildings, beds)                           if beds.present?
+      buildings = buildings.joins(:listings)                                if filtered_by_listings?(filter_params)
       buildings = filter_by_listing_beds(buildings, listing_beds)           if listing_beds.present?
       buildings = filter_by_listing_prices(buildings, min_price, max_price) if min_price.present? && max_price.present?
       return buildings

@@ -14,9 +14,14 @@ module Search
     def no_sorting? sort_by
       sort_by.blank? || sort_by == '0'
     end
+
+    def transparentcity_buildings
+      @transparentcity_buildings ||= Building.where.not(building_street_address: nil)
+    end
     
-    def with_featured_building buildings, search_string, sort_by, page_num = 1
+    def with_featured_building buildings, search_string, sort_by, filters, page_num = 1
       page_num           = 1 if page_num == 0
+      @filters           = filters
       final_results      = {}
       top2_featured      = top2_featured_buildings(search_string.downcase)
       non_featured       = non_featured_buildings(buildings, top2_featured, sort_by)
@@ -44,7 +49,7 @@ module Search
     def non_featured_buildings buildings, top_2, sort_by
       buildings = buildings.where.not(id: top_2.map(&:id))
       return buildings.updated_recently if no_sorting?(sort_by)
-      buildings.sort_buildings(buildings, sort_by)
+      buildings.sort_buildings(buildings, sort_by, @filters)
     end
 
     def top2_featured_buildings search_string

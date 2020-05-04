@@ -1,6 +1,6 @@
 module Search
   module BuildingSorting
-    def sort_buildings(buildings, sort_params)
+    def sort_buildings(buildings, sort_params, filters = {})
       # 0 => Default by active listings
       #1.Least Expensive - Listing
         #Sort by lowest listing price available at building with the building with the lowest price displayed at the top
@@ -19,9 +19,13 @@ module Search
       
       buildings = case sort_params
                   when '1'
-                    buildings.where(id: (sorted_building_ids_by_min_price(buildings))).order_by_min_rent
+                    buildinds = buildings.where(id: (sorted_building_ids_by_min_price(buildings)))
+                    return least_exp_sorted_buildings(buildinds) if filters.present? && has_listing_filters?(filters.keys)
+                    buildinds.order_by_min_rent
                   when '2'
-                    buildings.where(id: (sorted_building_ids_by_max_price(buildings))).order_by_max_rent
+                    buildinds = buildings.where(id: (sorted_building_ids_by_max_price(buildings)))
+                    return most_exp_sorted_buildings(buildinds) if filters.present? && has_listing_filters?(filters.keys)
+                    buildinds.order_by_max_rent
                   when '3'
                     buildings.where(id: sorting_buildings_ids(buildings)).order_by_min_price
                   when '4'
@@ -32,6 +36,34 @@ module Search
                   end
       
       buildings
+    end
+
+    def least_exp_sorted_buildings buildings
+      sorted_buildings_by(sorted_building_ids_by_rent(buildings, 'ASC'))
+    end
+
+    def sorted_buildings_by ids
+      # Building.where(id: ids.uniq) #.sort_by{|p| ids.index(p.id)}.uniq{|b| b.id }
+      transparentcity_buildings.order_by_id_pos(ids)
+    end
+
+    def most_exp_sorted_buildings buildings
+      sorted_buildings_by(sorted_building_ids_by_rent(buildings, 'DESC'))
+    end
+
+    def sorted_buildings_by ids
+      transparentcity_buildings.order_by_id_pos(ids)
+    end
+
+    def sorted_building_ids_by_rent buildings, sort_type
+      buildings.joins(:listings)
+               .select('listings.rent')
+               .reorder("listings.rent #{sort_type}")
+               .map(&:id).uniq
+    end
+
+    def has_listing_filters? keys
+      keys.include?('listing_bedrooms') || keys.include?('min_price')
     end
 
     # 1.Least Expensive - Listing
