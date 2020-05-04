@@ -27,7 +27,7 @@ module HomeConcern
       @hash               = final_results[0][:map_hash]
       @lat, @lng          = @hash[0]['latitude'], @hash[0]['longitude']
       @listings_count     = Listing.listings_count(@buildings, @all_buildings, @filter_params)
-      @buildings_count    = @buildings&.size
+      @buildings_count    = @all_buildings.pluck(:id).uniq.length
     end
     @meta_desc = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
                                                              count: @buildings_count, 
