@@ -13,8 +13,8 @@ class UsersController < ApplicationController
 	end
 
 	def saved_buildings
-		@rent_medians 	= RentMedian.all
-		@broker_percent = BrokerFeePercent.first.percent_amount
+		# @rent_medians 	= RentMedian.all
+		# @broker_percent = BrokerFeePercent.first.percent_amount
 		@buildings 			= Building.saved_favourites(@user)
 												 			.paginate(:page => params[:page], :per_page => 20)
 												 			.includes(:featured_buildings)

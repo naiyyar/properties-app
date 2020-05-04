@@ -41,7 +41,7 @@ class ManagementCompaniesController < ApplicationController
   def show
     @show_map_btn        = @half_footer = true
     page_num             = params[:page].present? ? params[:page].to_i : 1
-    final_results        = Building.with_featured_building(@buildings, nil, page_num)
+    final_results        = Building.with_featured_building(@buildings, nil, nil, nil, page_num)
     @manage_buildings    = final_results[1] if !params[:object_id].present?
     @all_buildings       = final_results[0][:all_buildings]
     # @recommended_percent = @management_company.recommended_percent(@buildings)
