@@ -9,8 +9,7 @@
       = link_to @building.neighbohoods, borough_search_link(@building.neighbohoods), class: 'hyper-link' if @building.neighbohoods.present?
   
   - if @building.price.present? || @building.bedroom_types?
-    %div.pbt
-      = render partial: 'buildings/bedroom_types_and_prices', locals: { building: @building }
+    %div.pbt= render 'buildings/bedroom_types_and_prices', building: @building
   
   / %div.hidden{style: 'margin-left: -3px; padding: 0px;'}
   /   %ul.rating.star-sm

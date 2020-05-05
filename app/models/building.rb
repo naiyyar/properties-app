@@ -147,10 +147,10 @@ class Building < ApplicationRecord
   # popular searches
   scope :luxury_rentals, -> (prices) { where(price: prices).doorman.elevator }
   
-  scope :studio,    -> { where(studio: 0) }
-  scope :one_bed,   -> { where(one_bed: 1) }
-  scope :two_bed,   -> { where(two_bed: 2) }
-  scope :three_bed, -> { where(three_bed: 3) }
+  scope :studio,    -> { where(studio: 0)        }
+  scope :one_bed,   -> { where(one_bed: 1)       }
+  scope :two_bed,   -> { where(two_bed: 2)       }
+  scope :three_bed, -> { where(three_bed: 3)     }
   scope :four_bed,  -> { where(four_plus_bed: 4) }
   
   # amenities scopes

@@ -28,7 +28,10 @@ module Search
     end
 
     def filter_by_listing_beds buildings, beds
-      buildings.with_listings_bed(beds) if buildings.present?
+      if buildings.present?
+        ids = buildings.with_listings_bed(beds).pluck(:id).uniq
+        transparentcity_buildings.order_by_id_pos(ids)
+      end
     end
 
     def filter_by_listing_prices buildings, min_price, max_price
@@ -87,7 +90,10 @@ module Search
       buildings = filter_by_prices(buildings, price)                        if price.present? && min_price.blank?
       buildings = filter_by_beds(buildings, beds)                           if beds.present?
       buildings = buildings.joins(:listings)                                if filtered_by_listings?(filter_params)
-      buildings = filter_by_listing_beds(buildings, listing_beds)           if listing_beds.present?
+      if listing_beds.present?
+        buildings = filter_by_listing_beds(buildings, listing_beds)           
+        buildings = buildings.joins(:listings) 
+      end
       buildings = filter_by_listing_prices(buildings, min_price, max_price) if min_price.present? && max_price.present?
       return buildings
     end

@@ -19,13 +19,13 @@ module Search
       
       buildings = case sort_params
                   when '1'
-                    buildinds = buildings.where(id: (sorted_building_ids_by_min_price(buildings)))
-                    return least_exp_sorted_buildings(buildinds) if filters.present? && has_listing_filters?(filters.keys)
-                    buildinds.order_by_min_rent
+                    buildings = buildings.where(id: (sorted_building_ids_by_min_price(buildings)))
+                    return least_exp_sorted_buildings(buildings) if filters.present? && has_listing_filters?(filters.keys)
+                    buildings.order_by_min_rent
                   when '2'
-                    buildinds = buildings.where(id: (sorted_building_ids_by_max_price(buildings)))
-                    return most_exp_sorted_buildings(buildinds) if filters.present? && has_listing_filters?(filters.keys)
-                    buildinds.order_by_max_rent
+                    buildings = buildings.where(id: (sorted_building_ids_by_max_price(buildings)))
+                    return most_exp_sorted_buildings(buildings) if filters.present? && has_listing_filters?(filters.keys)
+                    buildings.order_by_max_rent
                   when '3'
                     buildings.where(id: sorting_buildings_ids(buildings)).order_by_min_price
                   when '4'
@@ -53,9 +53,9 @@ module Search
 
     def sorted_building_ids_by_rent buildings, sort_type
       buildings.joins(:listings)
-               .select('listings.rent')
-               .reorder("listings.rent #{sort_type}")
-               .map(&:id).uniq
+              .select('listings.rent, buildings.*')
+              .reorder("listings.rent #{sort_type}")
+              .map(&:id).uniq
     end
 
     def has_listing_filters? keys
