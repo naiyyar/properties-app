@@ -45,8 +45,7 @@ module Search
 
     def non_featured_buildings buildings, top_2, sort_by
       buildings = buildings.where.not(id: top_2.map(&:id))
-      return buildings.updated_recently if no_sorting?(sort_by)
-      buildings.sort_buildings(buildings, sort_by, @filters)
+      return buildings.sort_buildings(buildings, sort_by, @filters)
     end
 
     def top2_featured_buildings_for_management buildings

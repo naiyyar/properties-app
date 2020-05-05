@@ -33,9 +33,16 @@ module Search
                                      listings_count DESC, 
                                      building_name ASC, 
                                      building_street_address ASC')
+                  else
+                    return sorted_by_recently_updated(buildings) if filters.present? && has_listing_filters?(filters.keys)
+                    buildings.updated_recently
                   end
       
       buildings
+    end
+
+    def sorted_by_recently_updated buildings
+      sorted_buildings_by(buildings.pluck(:id).uniq)
     end
 
     def least_exp_sorted_buildings buildings
