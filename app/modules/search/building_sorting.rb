@@ -42,6 +42,8 @@ module Search
     end
 
     def sorted_by_recently_updated buildings
+      ids = buildings.pluck(:id)
+      return buildings.updated_recently if ids.empty?
       sorted_buildings_by(buildings.pluck(:id).uniq)
     end
 

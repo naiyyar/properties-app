@@ -29,7 +29,9 @@ module Search
 
     def filter_by_listing_beds buildings, beds
       if buildings.present?
-        ids = buildings.with_listings_bed(beds).pluck(:id).uniq
+        buildings_with_beds = buildings.with_listings_bed(beds)
+        ids = buildings_with_beds.pluck(:id).uniq
+        return buildings_with_beds.distinct if ids.empty?
         transparentcity_buildings.order_by_id_pos(ids)
       end
     end
@@ -39,7 +41,9 @@ module Search
         # when listing have price more than 15500
         # assuming listing max price can be upto whatever maximum rent listing table has
         max_price = Listing.max_rent if max_price.to_i == 15500
-        ids = buildings.between_prices(min_price.to_i, max_price.to_i).map(&:id).uniq
+        buildings_with_prices = buildings.between_prices(min_price.to_i, max_price.to_i)
+        ids = buildings_with_prices.map(&:id).uniq
+        return buildings_with_prices.distinct if ids.empty?
         transparentcity_buildings.order_by_id_pos(ids)
       end
     end

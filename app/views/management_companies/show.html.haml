@@ -30,7 +30,7 @@
       %li.active
         %a{'data-toggle' => 'tab', href: '#building_managed', role: 'tab'}
           = 'BUILDINGS MANAGED'
-          (#{@all_buildings.count})
+          (#{@buildings_count})
       %li
         %a{'data-toggle' => 'tab', href: '#buildings_reviews_tab', role: 'tab'}= "BUILDING REVIEWS (#{ @total_reviews })"
     

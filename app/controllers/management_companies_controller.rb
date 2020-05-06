@@ -44,18 +44,13 @@ class ManagementCompaniesController < ApplicationController
     final_results        = Building.with_featured_building(@buildings, nil, nil, nil, page_num)
     @manage_buildings    = final_results[1] if !params[:object_id].present?
     @all_buildings       = final_results[0][:all_buildings]
-    # @recommended_percent = @management_company.recommended_percent(@buildings)
     @reviews             = Review.buildings_reviews(@buildings)
     @total_reviews       = @reviews.size rescue 0
     @reviews             = @reviews.limit(10)
     if @buildings.present?
-      # @broker_percent = BrokerFeePercent.first.percent_amount
-      # @rent_medians   = RentMedian.all
-      # finding average rating for all managed buildings 
-      # @stars = @management_company.get_average_stars(@buildings, @total_reviews)
-      # For map
-      @hash = final_results[0][:map_hash]
-      if @hash.length > 0
+      @hash            = final_results[0][:map_hash]
+      @buildings_count = @hash.length
+      if @buildings_count > 0
         @lat = @hash.last['latitude']
         @lng = @hash.last['longitude']
       else
@@ -65,7 +60,7 @@ class ManagementCompaniesController < ApplicationController
       @zoom = 13
     end
     @building_photos_count = @buildings.sum(:uploads_count)
-    @meta_desc             = "#{@management_company.name} manages #{@manage_buildings.count} no fee apartment, 
+    @meta_desc             = "#{@management_company.name} manages #{@buildings_count} no fee apartment, 
                               no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
                               Click to view #{@building_photos_count} photos and #{@total_reviews} reviews."
   end
