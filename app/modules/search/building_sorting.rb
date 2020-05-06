@@ -20,25 +20,28 @@ module Search
       buildings = case sort_params
                   when '1'
                     buildings = buildings.where(id: (sorted_building_ids_by_min_price(buildings)))
-                    return least_exp_sorted_buildings(buildings) if filters.present? && has_listing_filters?(filters.keys)
+                    return least_exp_sorted_listings(buildings) if has_listing_type_filters?
                     buildings.order_by_min_rent
                   when '2'
                     buildings = buildings.where(id: (sorted_building_ids_by_max_price(buildings)))
-                    return most_exp_sorted_buildings(buildings) if filters.present? && has_listing_filters?(filters.keys)
+                    return most_exp_sorted_listings(buildings) if has_listing_type_filters?
                     buildings.order_by_max_rent
                   when '3'
-                    buildings.where(id: sorting_buildings_ids(buildings)).order_by_min_price
+                    return least_exp_sorted_buildings(buildings) if has_listing_type_filters?
+                    buildings.order_by_min_price
                   when '4'
-                    buildings.order('price DESC NULLS LAST, 
-                                     listings_count DESC, 
-                                     building_name ASC, 
-                                     building_street_address ASC')
+                    return most_exp_sorted_buildings(buildings) if has_listing_type_filters?
+                    buildings.order_by_max_price
                   else
-                    return sorted_by_recently_updated(buildings) if filters.present? && has_listing_filters?(filters.keys)
+                    return sorted_by_recently_updated(buildings) if has_listing_type_filters?
                     buildings.updated_recently
                   end
       
       buildings
+    end
+
+    def has_listing_type_filters?
+      @filters.present? && has_listing_filters?(@filters.keys)
     end
 
     def sorted_by_recently_updated buildings
@@ -47,12 +50,20 @@ module Search
       sorted_buildings_by(buildings.pluck(:id).uniq)
     end
 
-    def least_exp_sorted_buildings buildings
+    def least_exp_sorted_listings buildings
       sorted_buildings_by(sorted_building_ids_by_rent(buildings, 'ASC'))
     end
 
-    def most_exp_sorted_buildings buildings
+    def most_exp_sorted_listings buildings
       sorted_buildings_by(sorted_building_ids_by_rent(buildings, 'DESC'))
+    end
+
+    def least_exp_sorted_buildings buildings
+      sorted_buildings_by(sorted_buildings_ids_by_price(buildings, 'ASC'))
+    end
+
+    def most_exp_sorted_buildings buildings
+      sorted_buildings_by(sorted_buildings_ids_by_price(buildings, 'DESC'))
     end
 
     def sorted_buildings_by ids
@@ -65,6 +76,12 @@ module Search
       buildings = buildings.select('listings.rent, buildings.*')
                            .reorder("listings.rent #{sort_type}")
 
+      buildings.map(&:id).uniq
+    end
+
+    def sorted_buildings_ids_by_price buildings, sort_type
+      buildings = buildings.order_by_min_price if sort_type == 'ASC'
+      buildings = buildings.order_by_max_price if sort_type == 'DESC'
       buildings.map(&:id).uniq
     end
 

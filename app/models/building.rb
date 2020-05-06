@@ -128,6 +128,7 @@ class Building < ApplicationRecord
   scope :order_by_min_rent,  -> { order('min_listing_price ASC, listings_count DESC') }
   scope :order_by_max_rent,  -> { order('max_listing_price DESC NULLS LAST, listings_count DESC') }
   scope :order_by_min_price, -> { order({price: :asc, listings_count: :desc, building_name: :asc, building_street_address: :asc}) }
+  scope :order_by_max_price, -> { order('price DESC NULLS LAST, listings_count DESC, building_name ASC, building_street_address ASC') }
 
   scope :saved_favourites, -> (user) do
     joins(:favorites).where('buildings.id = favorites.favorable_id AND favorites.favoriter_id = ?', user.id )
