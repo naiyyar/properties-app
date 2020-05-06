@@ -14,7 +14,7 @@ module Search
         #1st sort by dollar sign at the building with the building with the highest dollar sign displayed at the top
         #2nd sort by Buildings with Active Listings
         #3rd sort by alphabetical A-Z
-
+      @filters = filters
       return buildings unless sort_params.present?
       
       buildings = case sort_params
@@ -51,20 +51,21 @@ module Search
       sorted_buildings_by(sorted_building_ids_by_rent(buildings, 'ASC'))
     end
 
-    def sorted_buildings_by ids
-      # Building.where(id: ids.uniq) #.sort_by{|p| ids.index(p.id)}.uniq{|b| b.id }
-      transparentcity_buildings.order_by_id_pos(ids)
-    end
-
     def most_exp_sorted_buildings buildings
       sorted_buildings_by(sorted_building_ids_by_rent(buildings, 'DESC'))
     end
 
+    def sorted_buildings_by ids
+      transparentcity_buildings.order_by_id_pos(ids)
+    end
+
     def sorted_building_ids_by_rent buildings, sort_type
-      buildings.joins(:listings)
-              .select('listings.rent, buildings.*')
-              .reorder("listings.rent #{sort_type}")
-              .map(&:id).uniq
+      buildings = buildings.joins(:listings).where('listings.active is true')
+      buildings = buildings.where('listings.bed in (?)', @filters[:listing_bedrooms]) if @filters[:listing_bedrooms].present?
+      buildings = buildings.select('listings.rent, buildings.*')
+                           .reorder("listings.rent #{sort_type}")
+
+      buildings.map(&:id).uniq
     end
 
     def has_listing_filters? keys
