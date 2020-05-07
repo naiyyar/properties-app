@@ -44,7 +44,7 @@ module Search
     end
 
     def non_featured_buildings buildings, top_2, sort_by
-      buildings = buildings.where.not(id: top_2.map(&:id))
+      buildings = buildings.where.not(id: top_2.map(&:id)) if top_2.present?
       return buildings.sort_buildings(buildings, sort_by, @filters)
     end
 

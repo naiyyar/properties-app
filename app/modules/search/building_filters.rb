@@ -89,15 +89,13 @@ module Search
       amenities            = filter_params[:amenities]
       min_price, max_price = filter_params[:min_price], filter_params[:max_price]
       #
-      # buildings = buildings.with_active_listing
       buildings = filter_by_amenities(buildings, amenities)                 if amenities.present?
       buildings = filter_by_prices(buildings, price)                        if price.present? && min_price.blank?
       buildings = filter_by_beds(buildings, beds)                           if beds.present?
       buildings = buildings.with_active_listing.joins(:listings)            if filtered_by_listings?(filter_params)
-      if listing_beds.present?
-        buildings = filter_by_listing_beds(buildings, listing_beds)           
-        buildings = buildings.joins(:listings) 
-      end
+      #
+      buildings = filter_by_listing_beds(buildings, listing_beds)           if listing_beds.present?
+      buildings = buildings.joins(:listings)  if listing_beds.present? && min_price.present? && max_price.present?
       buildings = filter_by_listing_prices(buildings, min_price, max_price) if min_price.present? && max_price.present?
       return buildings
     end
