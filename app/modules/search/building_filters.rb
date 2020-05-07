@@ -43,7 +43,7 @@ module Search
         max_price = Listing.max_rent if max_price.to_i == 15500
         buildings_with_prices = buildings.between_prices(min_price.to_i, max_price.to_i)
         ids = buildings_with_prices.map(&:id).uniq
-        return buildings_with_prices.distinct if ids.empty?
+        return buildings_with_prices if ids.empty?
         transparentcity_buildings.order_by_id_pos(ids)
       end
     end
@@ -77,7 +77,7 @@ module Search
     def buildings_with_listing_amenities buildings
       buildings = buildings.where('listings.free_months > ?', 0)         if has_amenity?('months_free_rent')
       buildings = buildings.where('listings.owner_paid is not null')     if has_amenity?('owner_paid')
-      buildings = buildings.where('listings.rent_stabilize = ?', 'true') if has_amenity?('rent_stabilized')
+      buildings = buildings.where('listings.rent_stabilize in (?)', ['t','true']) if has_amenity?('rent_stabilized')
       
       return buildings.uniq
     end
