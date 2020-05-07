@@ -122,7 +122,7 @@ module Search
       unless searched_by == 'nyc'
         "#{options[:desc]} has #{options[:count].to_i} no fee apartment, no fee rental, 
         for rent by owner buildings in NYC you can rent directly from and pay no broker fees.
-        View #{buildings&.sum(:uploads_count).to_i} photos and #{buildings&.sum(:reviews_count).to_i} reviews."
+        View #{buildings&.sum(:uploads_count)} photos and #{buildings&.sum(:reviews_count)} reviews."
       else
         "Browse #{options[:count].to_i} No Fee #{pop_search_tab_title(options[:term])}. 
          Bypass the broker and save thousands in fees by renting directly from management companies."

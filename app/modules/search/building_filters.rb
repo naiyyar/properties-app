@@ -1,6 +1,53 @@
 module Search
   module BuildingFilters
-    LISTING_AMENITIES = %w(months_free_rent owner_paid rent_stabilized)
+    def filtered_buildings buildings, filter_params
+      price     = filter_params[:price]
+      beds      = filter_params[:bedrooms]
+      min_price = filter_params[:min_price] 
+      amenities = filter_params[:amenities]
+      
+      # building level filters
+      buildings = filter_by_amenities(buildings, amenities)                 if amenities.present?
+      buildings = filter_by_prices(buildings, price)                        if price.present? && min_price.blank?
+      buildings = filter_by_beds(buildings, beds)                           if beds.present?
+      
+      # listings level filters
+      if filtered_by_listings?(filter_params)
+        listing_beds = filter_params[:listing_bedrooms]
+        max_price    = filter_params[:max_price]
+
+        buildings    = buildings.with_active_listing.join_with_listings
+        buildings    = filter_by_listing_beds(buildings, listing_beds)           if listing_beds.present?
+        buildings    = filter_by_listing_prices(buildings, min_price, max_price) if min_price.present? && max_price.present?
+      end
+      return buildings
+    end
+
+    def filter_by_amenities buildings, amenities
+      @amenities = amenities
+      if amenities.present?
+        @buildings = buildings
+        @buildings = @buildings.doorman           if has_amenity?('doorman')
+        @buildings = @buildings.courtyard         if has_amenity?('courtyard')
+        @buildings = @buildings.laundry_facility  if has_amenity?('laundry_facility')
+        @buildings = @buildings.gym               if has_amenity?('gym')
+        @buildings = @buildings.parking           if has_amenity?('parking')
+        @buildings = @buildings.roof_deck         if has_amenity?('roof_deck')
+        @buildings = @buildings.pets_allowed_cats if has_amenity?('pets_allowed_cats')
+        @buildings = @buildings.pets_allowed_dogs if has_amenity?('pets_allowed_dogs')
+        @buildings = @buildings.elevator          if has_amenity?('elevator')
+        @buildings = @buildings.swimming_pool     if has_amenity?('swimming_pool')
+        @buildings = @buildings.walk_up           if has_amenity?('walk_up')
+        @buildings = @buildings.no_fee            if has_amenity?('no_fee')
+        @buildings = @buildings.live_in_super     if has_amenity?('live_in_super')
+        
+        # for listings
+        @buildings = buildings_with_listing_amenities(@buildings) if listing_amenity?(@amenities)
+      else
+        @buildings = buildings
+      end
+      @buildings
+    end
     
     def filter_by_prices buildings, price
       return buildings unless price.present? && !price.include?('on') && buildings.present?
@@ -29,10 +76,11 @@ module Search
 
     def filter_by_listing_beds buildings, beds
       if buildings.present?
-        buildings_with_beds = buildings.with_listings_bed(beds)
-        ids = buildings_with_beds.pluck(:id).uniq
-        return buildings_with_beds.distinct if ids.empty?
-        transparentcity_buildings.order_by_id_pos(ids)
+        # buildings_with_beds = buildings.with_listings_bed(beds)
+        #ids = buildings_with_beds.pluck(:id).uniq
+        #return buildings_with_beds if ids.empty?
+        #buildings.order_by_id_pos(ids)
+        buildings.with_listings_bed(beds)
       end
     end
 
@@ -41,37 +89,12 @@ module Search
         # when listing have price more than 15500
         # assuming listing max price can be upto whatever maximum rent listing table has
         max_price = Listing.max_rent if max_price.to_i == 15500
-        buildings_with_prices = buildings.between_prices(min_price.to_i, max_price.to_i)
-        ids = buildings_with_prices.map(&:id).uniq
-        return buildings_with_prices if ids.empty?
-        transparentcity_buildings.order_by_id_pos(ids)
+        #buildings_with_prices = buildings.between_prices(min_price.to_i, max_price.to_i)
+        #ids = buildings_with_prices.map(&:id).uniq
+        #return buildings_with_prices if ids.empty?
+        #buildings.order_by_id_pos(ids)
+        buildings.between_prices(min_price.to_i, max_price.to_i)
       end
-    end
-
-    def filter_by_amenities buildings, amenities
-      @amenities = amenities
-      if amenities.present?
-        @buildings = buildings
-        @buildings = @buildings.doorman           if has_amenity?('doorman')
-        @buildings = @buildings.courtyard         if has_amenity?('courtyard')
-        @buildings = @buildings.laundry_facility  if has_amenity?('laundry_facility')
-        @buildings = @buildings.gym               if has_amenity?('gym')
-        @buildings = @buildings.parking           if has_amenity?('parking')
-        @buildings = @buildings.roof_deck         if has_amenity?('roof_deck')
-        @buildings = @buildings.pets_allowed_cats if has_amenity?('pets_allowed_cats')
-        @buildings = @buildings.pets_allowed_dogs if has_amenity?('pets_allowed_dogs')
-        @buildings = @buildings.elevator          if has_amenity?('elevator')
-        @buildings = @buildings.swimming_pool     if has_amenity?('swimming_pool')
-        @buildings = @buildings.walk_up           if has_amenity?('walk_up')
-        @buildings = @buildings.no_fee            if has_amenity?('no_fee')
-        @buildings = @buildings.live_in_super     if has_amenity?('live_in_super')
-        
-        # for listings
-        @buildings = buildings_with_listing_amenities(@buildings) if listing_amenity?(@amenities)
-      else
-        @buildings = buildings
-      end
-      @buildings
     end
 
     def buildings_with_listing_amenities buildings
@@ -80,24 +103,6 @@ module Search
       buildings = buildings.where('listings.rent_stabilize in (?)', ['t','true']) if has_amenity?('rent_stabilized')
       
       return buildings.uniq
-    end
-
-    def filtered_buildings buildings, filter_params
-      price                = filter_params[:price]
-      beds                 = filter_params[:bedrooms]
-      listing_beds         = filter_params[:listing_bedrooms]
-      amenities            = filter_params[:amenities]
-      min_price, max_price = filter_params[:min_price], filter_params[:max_price]
-      #
-      buildings = filter_by_amenities(buildings, amenities)                 if amenities.present?
-      buildings = filter_by_prices(buildings, price)                        if price.present? && min_price.blank?
-      buildings = filter_by_beds(buildings, beds)                           if beds.present?
-      buildings = buildings.with_active_listing.joins(:listings)            if filtered_by_listings?(filter_params)
-      #
-      buildings = filter_by_listing_beds(buildings, listing_beds)           if listing_beds.present?
-      buildings = buildings.joins(:listings)  if listing_beds.present? && min_price.present? && max_price.present?
-      buildings = filter_by_listing_prices(buildings, min_price, max_price) if min_price.present? && max_price.present?
-      return buildings
     end
 
     def filtered_by_listings? filter

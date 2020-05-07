@@ -15,7 +15,7 @@ module Search
         #2nd sort by Buildings with Active Listings
         #3rd sort by alphabetical A-Z
       @filters = filters
-      return buildings unless sort_params.present?
+      return buildings.updated_recently unless sort_params.present?
       
       buildings = case sort_params
                   when '1'
@@ -71,12 +71,12 @@ module Search
     end
 
     def sorted_building_ids_by_rent buildings, sort_type
-      buildings = buildings.joins(:listings).where('listings.active is true')
-      buildings = buildings.where('listings.bed in (?)', @filters[:listing_bedrooms]) if @filters[:listing_bedrooms].present?
-      buildings = buildings.select('listings.rent, buildings.*')
-                           .reorder("listings.rent #{sort_type}")
-
-      buildings.map(&:id).uniq
+      # buildings = buildings.where('listings.active is true')
+      # buildings = buildings.where('listings.bed in (?)', @filters[:listing_bedrooms]) if @filters[:listing_bedrooms].present?
+      buildings.select('listings.rent, buildings.*')
+               .reorder("listings.rent #{sort_type}")
+               .map(&:id)
+               .uniq
     end
 
     def sorted_buildings_ids_by_price buildings, sort_type
