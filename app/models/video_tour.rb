@@ -12,6 +12,7 @@
 
 class VideoTour < ApplicationRecord
 	belongs_to :building
+	
 	CATEGORIES = [['Amenities', 	'amenities'], 
 								['Studio', 			'studio'], 
 								['1 Bedroom', 	'1-bedroom'],
@@ -21,7 +22,6 @@ class VideoTour < ApplicationRecord
 	
 	validates_presence_of   :url, message: 'Url can not be blank.'
 	validates_uniqueness_of :url, scope: :building_id, message: 'Url has already been taken.'
-
 
 	default_scope { order('sort asc') }
 end

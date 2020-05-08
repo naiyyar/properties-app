@@ -8,21 +8,17 @@
         = @building.neighborhood
     
 %hr/
-%div{class: "row #{current_user && current_user.has_role?(:admin) ? 'photo-grid-container' : ''}"}
-  - VideoTour::CATEGORIES.each do |category|
-    - @video_tours.where(category: category).each_with_index do |tour, index|
-      - url = tour.url
-      .photo-grid-item.image-gallery{'data-object-id' => "#{tour.id}", 'data-sort-id' => index}
-        %a.propWidget-1{caption: "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-role' => 'slider', href: "#{url}"}
-          = image_tag url, alt: 'Image', class: 'img-thumbnail'
-        / = link_to '<span class="fa fa-trash" />'.html_safe, upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs pull-right1 delete_image'
-        / = link_to '<span class="fa fa-edit" />'.html_safe, edit_upload_path(upload, upload_type: 'image'), remote: true, class: 'btn btn-primary btn-xs pull-right1 edit_image'
-        / = link_to '<span class="fa fa-repeat" />'.html_safe, rotate_upload_path(upload), class: 'btn btn-warning btn-xs rotate'
-/ jquery click function in zapp.js
-.loading.hidden Loading…
 
-:javascript
-  $('.photo-grid-container').sortablePhotos({
-      selector: '> .photo-grid-item',
-      sortable: true,
-    });
+%div{style: 'padding: 10px;'}
+  - VideoTour::CATEGORIES.each do |category|
+    .row{class: "#{current_user && current_user.admin? ? 'photo-grid-container' : ''}"}
+      %h4=category[0]
+      - @video_tours.where(category: category[1]).each_with_index do |tour, index|
+        - url = tour.url
+        .col-lg-3
+          %a.propWidget-1{caption: tour.description, 'data-fancybox' => 'gallery', href: "#{url}", 'data-type' => 'iframe', 'data-role' => 'slider'}
+            %div{style: 'position:absolute;z-index:500;height:200px;width:100%;'}
+            %iframe{src: url, style: 'width: 100%;height: 200px;border:none;'}
+            
+          = link_to '<span class="fa fa-trash" />'.html_safe, tour, method: :delete, class: 'btn btn-danger btn-xs delete_image', data: { confirm: 'Are you sure?' }, remote: true
+          = link_to '<span class="fa fa-edit" />'.html_safe, edit_video_tour_path(tour), remote: true, class: 'btn btn-primary btn-xs edit_image'

@@ -2,13 +2,16 @@
   .row
     - if current_user && current_user.admin?
       - last_col = 6
+      - has_tour = false
       - if @building.video_tours.present?
+        - has_tour = true
         .col-lg-2.col-sm-3.col-xs-3
           = link_to '<span class="fa fa-cube"></span> 3D Tour'.html_safe, show_tour_path(building_id: @building.id), remote: true, class: 'btn btn-o btn-info btn-sm btn-round' 
       - else
         - last_col = 8
+      
       .col-lg-2.col-sm-3.col-xs-3
-        = link_to 'Add Tour', new_video_tour_path(building_id: @building.id), class: 'btn btn-o btn-primary btn-sm'
+        = link_to 'Add Tour', add_tour_path(@building.id, has_tour), class: 'btn btn-o btn-primary btn-sm'
       .col-lg-2.col-sm-3.col-xs-3
         = link_to 'Add Photo', new_building_upload_path(building_id: object.id, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm'
     

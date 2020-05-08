@@ -1,27 +1,38 @@
 - cat = "#{@building.id}-#{category[1]}_#{index}"
 %div{id: "tour-form-container-#{cat}"}
-  = form_for @video_tour, html: { class: 'form-horizontal', id: "new_tour_#{cat}", style: 'margin: 8px 0px;', remote: true } do |f|
+  = form_for video_tour, html: { class: 'form-horizontal', id: "tour_#{cat}", style: 'margin: 8px 0px;', remote: true } do |f|
     = f.hidden_field :building_id, value: @building.id, id: "video_tour_building_id_#{cat}"
-    = f.hidden_field :sort,        value: index,        id: "video_tour_sort_#{cat}", class: 'video_tour_sort'
+    = f.hidden_field :sort,        value: index,        id: "video_tour_sort_#{cat}", class: 'video_tour_sort' if video_tour.new_record?
     = f.hidden_field :category,    value: category[1],  id: "video_tour_category_#{cat}"
     .row
+      - if !video_tour.new_record?
+        .col-lg-1
+          %label Sort
+          = f.text_field :sort, id: "video_tour_sort_#{cat}", class: 'form-control video_tour_sort'
+      
       .col-lg-3
         %label Description
         = f.text_field :description, class: 'form-control', id: "video_tour_description_#{cat}"
-      .col-lg-1
+      
+      %div{style: 'width: 20px;'}
 
-      .col-lg-4
+      .col-lg-3
         %label Url*
         = f.text_field :url, class: 'form-control validate', id: "video_tour_url_#{cat}", required: true
       
-      .col-lg-1
-        %label.invisible Url*
+      %div{style: 'width: 20px;'}
+      
+      %div.visible-xs
+        %br
+      
+      .col-lg-1.col-xs-4
+        %label.invisible.hidden-xs AddAdd*
         = f.submit 'Add', class: 'btn btn-success btn-sm'
       
-      .col-lg-2
+      .col-lg-2.col-xs-4
         .video-preview
-          %iframe{src: '', style: 'height: 100%;width: 100%;border: none;', id: "video-preview-#{cat}"}
+          %iframe{src: video_tour.new_record? ? '' : video_tour.url, style: 'height: 100%;width: 100%;border: none;', id: "video-preview-#{cat}"}
 
-      .col-lg-1{style: 'height: 80px;'}
+      .col-lg-1.col-xs-4{style: 'height: 80px;'}
         .text-center.vertically-middle{id: "remove-fields-#{cat}"}
-          =render 'delete_link', video_tour: @video_tour
+          =render 'delete_link', video_tour: video_tour

@@ -1,10 +1,11 @@
 class VideoToursController < ApplicationController
   before_action :set_video_tour, only: [:show, :edit, :update, :destroy]
   before_action :find_builidng, only: [:index, :new, :show_tour]
+  before_action :find_tours, only: [:index, :show_tour, :new]
   # GET /video_tours
   # GET /video_tours.json
   def index
-    @video_tours = @building.video_tours
+    
   end
 
   # GET /video_tours/1
@@ -13,7 +14,7 @@ class VideoToursController < ApplicationController
   end
 
   def show_tour
-    @video_tours = @building.video_tours.group_by{|v| v.category}
+    @video_tours = @video_tours.group_by{|v| v.category}
   end
 
   # GET /video_tours/new
@@ -49,8 +50,7 @@ class VideoToursController < ApplicationController
   def update
     respond_to do |format|
       if @video_tour.update(video_tour_params)
-        format.html { redirect_to @video_tour, notice: 'Video tour was successfully updated.' }
-        format.json { render :show, status: :ok, location: @video_tour }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @video_tour.errors, status: :unprocessable_entity }
@@ -75,6 +75,10 @@ class VideoToursController < ApplicationController
 
     def find_builidng
       @building = Building.find(params[:building_id])
+    end
+    
+    def find_tours
+      @video_tours = @building.video_tours rescue nil
     end
 
     def video_tour_params
