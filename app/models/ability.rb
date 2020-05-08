@@ -9,7 +9,7 @@ class Ability
       cannot [:contribution, :index, :managertools], User
       cannot [:index, :new, :edit], ManagementCompany
       cannot [:index, :show, :saved_buildings], User
-      cannot [:index, :create, :update, :destroy, :new], [BrokerFeePercent, RentMedian, FeaturedComp, NeighborhoodLink, FeaturedBuilding]
+      cannot [:index, :create, :update, :destroy, :new], [BrokerFeePercent, RentMedian, FeaturedComp, NeighborhoodLink, FeaturedBuilding, VideoTour]
       cannot [:index, :add_or_update_prices], Price
       cannot :manage, [Listing, Price, ]
     elsif user.has_role? :admin
@@ -20,7 +20,7 @@ class Ability
       cannot :documents, Upload
       cannot [:contribution, :index], User
       cannot [:index, :new, :edit], ManagementCompany
-      cannot [:index, :create, :update, :destroy], [BrokerFeePercent, RentMedian, FeaturedComp, NeighborhoodLink]
+      cannot [:index, :create, :update, :destroy], [BrokerFeePercent, RentMedian, FeaturedComp, NeighborhoodLink, VideoTour]
       cannot [:index, :add_or_update_prices], Price
       cannot :manage, [Listing, Price]
     end
