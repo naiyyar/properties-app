@@ -254,8 +254,4 @@ module BuildingsHelper
 	def with_bed_text b
 		"#{'Bed' if b.bedroom_types? && !b.has_only_studio?}#{',' if b.bedroom_types? && b.coliving_with_building_beds?} #{'CoLiving' if b.coliving_with_building_beds? }"
 	end
-
-	def add_tour_path building_id, has_tour
-		has_tour ? new_video_tour_path(building_id: building_id) : edit_video_tour_path(building_id: building_id)
-	end
 end
