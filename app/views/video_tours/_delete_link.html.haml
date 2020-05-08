@@ -1,0 +1,4 @@
+- if @video_tour.new_record?
+	=link_to '<span class="fa fa-trash fa-2x"></span>'.html_safe, 'javascript:;', class: 'btn btn-danger btn-sm remove-fields'
+- else
+	=link_to '<span class="fa fa-trash fa-2x"></span>'.html_safe, @video_tour, method: :delete, class: 'btn btn-danger btn-sm remove-fields', data: { confirm: 'Are you sure?' }, remote: true

@@ -1,0 +1,16 @@
+%div.add--assets
+  .row
+    - if current_user && current_user.admin?
+      .col-lg-2.col-sm-3.col-xs-3
+        = link_to '<span class="fa fa-cube"></span> 3D Tour'.html_safe, show_tour_path(building_id: @building.id), remote: true, class: 'btn btn-o btn-info btn-sm btn-round' if @building.video_tours.present?
+      .col-lg-2.col-sm-3.col-xs-3
+        = link_to 'Add Tour', new_video_tour_path(building_id: @building.id), class: 'btn btn-o btn-primary btn-sm'
+      .col-lg-2.col-sm-3.col-xs-3
+        = link_to 'Add Photo', new_building_upload_path(building_id: object.id, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm'
+    
+    .col-lg-6.col-sm-3.col-xs-3
+      .text-right
+        - if object.kind_of?(Building)
+          = link_to "<span class='fa fa-th-large'></span> See all(#{@uploaded_images_count})".html_safe, building_uploads_path(building_id: object.id), class: 'btn btn-o btn-sm'
+        - else
+          = link_to 'See all(0)', unit_uploads_path(unit_id: object.id)

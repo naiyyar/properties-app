@@ -1,7 +1,6 @@
 $(document).on 'click', '.apple-switch.building', (e) ->
 	status = $(this).is(':checked')
 	ftype  = $(this).data('ftype')
-	console.log(ftype)
 	if(ftype == 'web_url')
 		params = { active_web:  status }
 	else if(ftype == 'application_link')

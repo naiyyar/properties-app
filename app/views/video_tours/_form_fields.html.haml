@@ -1,0 +1,27 @@
+- cat = "#{@building.id}-#{category[1]}_#{index}"
+%div{id: "tour-form-container-#{cat}"}
+  = form_for @video_tour, html: { class: 'form-horizontal', id: "new_tour_#{cat}", style: 'margin: 8px 0px;', remote: true } do |f|
+    = f.hidden_field :building_id, value: @building.id, id: "video_tour_building_id_#{cat}"
+    = f.hidden_field :sort,        value: index,        id: "video_tour_sort_#{cat}", class: 'video_tour_sort'
+    = f.hidden_field :category,    value: category[1],  id: "video_tour_category_#{cat}"
+    .row
+      .col-lg-3
+        %label Description
+        = f.text_field :description, class: 'form-control', id: "video_tour_description_#{cat}"
+      .col-lg-1
+
+      .col-lg-4
+        %label Url*
+        = f.text_field :url, class: 'form-control validate', id: "video_tour_url_#{cat}", required: true
+      
+      .col-lg-1
+        %label.invisible Url*
+        = f.submit 'Add', class: 'btn btn-success btn-sm'
+      
+      .col-lg-2
+        .video-preview
+          %iframe{src: '', style: 'height: 100%;width: 100%;border: none;', id: "video-preview-#{cat}"}
+
+      .col-lg-1{style: 'height: 80px;'}
+        .text-center.vertically-middle{id: "remove-fields-#{cat}"}
+          =render 'delete_link', video_tour: @video_tour

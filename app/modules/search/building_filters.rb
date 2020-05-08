@@ -75,26 +75,26 @@ module Search
     end
 
     def filter_by_listing_beds buildings, beds
-      if buildings.present?
+      # if buildings.present?
         # buildings_with_beds = buildings.with_listings_bed(beds)
-        #ids = buildings_with_beds.pluck(:id).uniq
-        #return buildings_with_beds if ids.empty?
-        #buildings.order_by_id_pos(ids)
+        # ids = buildings_with_beds.pluck(:id).uniq
+        # return buildings_with_beds if ids.empty?
+        # buildings.order_by_id_pos(ids)
         buildings.with_listings_bed(beds)
-      end
+      # end
     end
 
     def filter_by_listing_prices buildings, min_price, max_price
-      if buildings.present?
+      # if buildings.present?
         # when listing have price more than 15500
         # assuming listing max price can be upto whatever maximum rent listing table has
         max_price = Listing.max_rent if max_price.to_i == 15500
-        #buildings_with_prices = buildings.between_prices(min_price.to_i, max_price.to_i)
-        #ids = buildings_with_prices.map(&:id).uniq
-        #return buildings_with_prices if ids.empty?
-        #buildings.order_by_id_pos(ids)
+        # buildings_with_prices = buildings.between_prices(min_price.to_i, max_price.to_i)
+        # ids = buildings_with_prices.map(&:id).uniq
+        # return buildings_with_prices if ids.empty?
+        # buildings.order_by_id_pos(ids)
         buildings.between_prices(min_price.to_i, max_price.to_i)
-      end
+      # end
     end
 
     def buildings_with_listing_amenities buildings

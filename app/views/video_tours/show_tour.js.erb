@@ -1,0 +1,27 @@
+$("#remote-container").html('<%= j render partial: "show_tour_modal" %>');
+
+<% unless browser.device.mobile? %>
+	$('#showTourModal').modal('show');
+<%else%>
+	$('.show-tour-modal').slideDown(200);
+	$('.closeContact').click(function(e) {
+    e.stopPropagation();
+    $('.show-tour-modal').slideUp(200);
+  });
+<%end%>
+var lm_height = 736;
+setTimeout(function(){
+	$('.show-tour-modal').height(lm_height);	
+}, 1000);
+
+// $().fancybox({
+// 	selector: '.lightSlider .lslide a',
+// 	backFocus : false,
+// 	buttons : ['thumbs','close']
+// })
+
+$('[data-fancybox="gallery"]').fancybox({
+	// Options will go here
+});
+
+

@@ -1,0 +1,2 @@
+module VideoToursHelper
+end

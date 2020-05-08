@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   mount StripeEvent::Engine, at: '/stripe-events'
+
+  resources :video_tours
+  get '/show_tour/:building_id', to: 'video_tours#show_tour', as: :show_tour
   
   resources :billings do
     member do

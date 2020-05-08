@@ -119,6 +119,7 @@ class Building < ApplicationRecord
   has_many :listings,               foreign_key: :building_id, dependent: :destroy
   has_many :past_listings,          foreign_key: :building_id, dependent: :destroy
   has_many :featured_comp_buildings
+  has_many :video_tours,            dependent: :destroy
   has_many :units,                  dependent: :destroy
   accepts_nested_attributes_for :units, :allow_destroy => true
 

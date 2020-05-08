@@ -1,0 +1,7 @@
+var elem = $("#<%=@category[1]%>-form");
+elem.append('<%= j render partial: "form_fields", locals: { category: @category, index: @sort_index } %>');
+
+//Delete
+$('.remove-fields').on('click', function(){
+  $(this).parent().parent().parent().parent().remove();
+});
