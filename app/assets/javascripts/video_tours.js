@@ -18,5 +18,14 @@ $(function(){
 	$('.remove-fields').on('click', function(){
 	  $(this).parent().parent().parent().parent().parent().remove();
 	});
+
+	$('#showTour').on('click', function(){
+		$('.show-tour-modal').slideDown(200);
+	});
+
+	$('.closeTour').click(function(e) {
+    e.stopPropagation();
+    $('.show-tour-modal').slideUp(200);
+  });
 	
 });
