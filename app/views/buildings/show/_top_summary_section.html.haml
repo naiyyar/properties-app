@@ -5,14 +5,15 @@
 				.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
 					- cache [@building, 'showPLSlider'] do
 						= render 'buildings/show/lightslider', building: @building
-				.clearfix
-				=render 'uploads/add_photos', object: @building
    		
 			- if @building.price.present? or @building.bedroom_types?
 				- if @min_save_amount.present?
 					.saving-badge.show-view-badge
 						%p Save
 						%p= "#{number_to_currency(@min_save_amount, precision: 0)}+"
+	
+	.clearfix
+	%div.add--assets=render 'uploads/add_photos', object: @building
 	
 	.summary
 		.row

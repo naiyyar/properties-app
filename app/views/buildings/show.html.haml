@@ -98,3 +98,18 @@
   - session[:after_contribute] = nil
 
 =render 'buildings/show/map_script'
+
+=render 'video_tours/show_tour_modal'
+
+:javascript
+  var building_id = "#{@building.id}";
+  window.onload = function(){
+    //$.ajax({
+    //  url: '/show_tour/'+building_id,
+    //  type: 'get',
+    //  dataType: 'script',
+    //  success: function(){
+    //    console.log(111)
+    //  }
+    //})
+  }

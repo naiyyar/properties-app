@@ -4,9 +4,14 @@
       = link_to show_path, style: 'cursor: pointer;' do
         - if @similar_properties.present? or building.featured?
           %h4.comp.featured.round Featured
+        
         %h4.lightslider-slides-counts.round
           %span.current 1
           %span.total="/ #{images_count}"
+
+        - if building.video_tours.any?
+          .video-tour-icon
+            %span.fa.fa-video-camera
 
       %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 225px;", data: { buildingid: "#{building.id}", view_type: 'split', path:  show_path } }
         %li

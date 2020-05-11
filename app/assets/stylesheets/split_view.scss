@@ -114,6 +114,18 @@
     top: 10px;
     opacity: 0.0;
 }
+.search-view-card {
+  .video-tour-icon {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    z-index: 999;
+    color: #ddd;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+}
 
 a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     float: right;

@@ -1,10 +1,13 @@
 $("#remote-container").html('<%= j render partial: "show_tour_modal" %>');
 
 <% unless browser.device.mobile? %>
-	$('#showTourModal').modal('show');
+	//$('#showTourModal').modal('show');
 <%else%>
-	$('.show-tour-modal').slideDown(200);
-	$('.closeContact').click(function(e) {
+	$('#showTour').on('click', function(){
+		$('.show-tour-modal').slideDown(200);
+	});
+
+	$('.closeTour').click(function(e) {
     e.stopPropagation();
     $('.show-tour-modal').slideUp(200);
   });
