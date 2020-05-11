@@ -1,21 +1,26 @@
 - if !browser.device.mobile?
   #showTourModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
     .modal-dialog.modal-md
-      .modal-content
+      .modal-content{style: 'background-color: #333;'}
         .modal-header
           %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
-            %span{'aria-hidden' => 'true'} ×
-          %h4.modal-title Video Tours
+            %span{'aria-hidden' => 'true', style: 'color: #fff;'} ×
+          %h4.modal-title{style: 'color: #fff;'}
+            .pageTitle.font-bold{style: 'font-size: 16px;'}=@building.building_name_or_address
+            .address{style: 'font-size: 14px;'}=building_street_address(@building)
         .modal-body.no-padding
+          - @vd_height = '120'
           = render 'show'
 - else
-  .modal-full.show-tour-modal{style: 'display: none; background: #fff;'}
+  .modal-full.show-tour-modal{style: 'display: none; background: #333;color: #fff;'}
     .row{style: 'position: relative;'}
       .col-lg-12
         .text-center{style: 'border-bottom: 1px solid #ddd;'}
-          %h4.text-center{style: 'margin-top: 10px; margin-bottom: 10px;'} Video Tours
+          %h4.text-center{style: 'margin-top: 10px; margin-bottom: 10px;'}
+            .pageTitle.font-bold{style: 'font-size: 16px;'}=@building.building_name_or_address
+            .address{style: 'font-size: 14px;'}=building_street_address(@building)
 
       %div.text-right.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
-        = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, 'javascript:;', class: 'closeContact'
-    
+        = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, 'javascript:;', class: 'closeContact', style: 'color: #fff;'
+    - @vd_height = '200'
     = render 'show'

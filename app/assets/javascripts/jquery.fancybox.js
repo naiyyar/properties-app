@@ -3008,8 +3008,9 @@
     // ========================
 
     hideControls: function(andCaption) {
+      // toolbar1 : To always show controls
       var self = this,
-        arr = ["infobar", "toolbar", "nav"];
+        arr = ["infobar", "toolbar1", "nav"];
 
       if (andCaption || !self.current.opts.preventCaptionOverlap) {
         arr.push("caption");
