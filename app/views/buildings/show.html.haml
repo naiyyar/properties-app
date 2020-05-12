@@ -102,14 +102,10 @@
 =render 'video_tours/show_tour_modal'
 
 :javascript
-  var building_id = "#{@building.id}";
-  window.onload = function(){
-    //$.ajax({
-    //  url: '/show_tour/'+building_id,
-    //  type: 'get',
-    //  dataType: 'script',
-    //  success: function(){
-    //    console.log(111)
-    //  }
-    //})
-  }
+  $(document).on('keydown', function(e){
+    keycode = e.keyCode || e.which;
+    console.log(keycode)
+    if (keycode === 8 || keycode === 27) {
+      $('.fancybox-button--close').click();
+    }
+  });
