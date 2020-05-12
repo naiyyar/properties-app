@@ -9,7 +9,7 @@
             .pageTitle.font-bold{style: 'font-size: 16px;'}=@building.building_name_or_address
             .address{style: 'font-size: 14px;'}=building_street_address(@building)
         .modal-body.no-padding
-          - @vd_height = '120'
+          - @vd_height = '190'
           = render 'video_tours/show'
 - else
   .modal-full.show-tour-modal{style: 'display: none; background: #333;color: #fff;'}

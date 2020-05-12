@@ -3,7 +3,6 @@
   = "#{@building.building_street_address}"
 
 #street_view_btn.hidden-xs
-  / %input#toggleStreetView.btn.btn-info{type: "button", value: "Street View"}
 
 #mapView.mob-min
   .mapPlaceholder
@@ -86,8 +85,6 @@
 
 .addNewUnit= render 'new_unit_modal'
 
-/ = render 'buildings/favourite_script'
-
 - if session[:after_contribute].present? || params[:from_uploaded].present?
   = render 'contribute_more_popup'
   :javascript
@@ -98,14 +95,4 @@
   - session[:after_contribute] = nil
 
 =render 'buildings/show/map_script'
-
 =render 'video_tours/show_tour_modal'
-
-:javascript
-  $(document).on('keydown', function(e){
-    keycode = e.keyCode || e.which;
-    console.log(keycode)
-    if (keycode === 8 || keycode === 27) {
-      $('.fancybox-button--close').click();
-    }
-  });
