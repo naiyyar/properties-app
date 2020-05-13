@@ -13,7 +13,9 @@
 						%p= "#{number_to_currency(@min_save_amount, precision: 0)}+"
 	
 	.clearfix
-	%div.add--assets=render 'uploads/add_photos', object: @building
+	
+	%div.add--assets{class: current_user && current_user.admin? ? 'admin' : ''}
+		=render 'uploads/add_photos', object: @building
 	
 	.summary
 		.row
@@ -21,7 +23,7 @@
 				.summaryItem
 					%h1.pageTitle
 						=@building.building_name_or_address
-						- if current_user and current_user.admin?
+						- if current_user && current_user.admin?
 							= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right btn-round'
 							= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs btn-round', data: {confirm: 'Are you sure you want to discconect this building?'} if @manage_buildings.present?
 
@@ -37,6 +39,6 @@
 					%span.fa.fa-cube
 					3D/Video Tour
 				
-			- if current_user and current_user.admin?
+			- if current_user && current_user.admin?
 				= link_to 'Add Tour', new_video_tour_path(building_id: @building.id), class: 'btn btn-o btn-primary btn-sm'
 				=link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm btn-round'
