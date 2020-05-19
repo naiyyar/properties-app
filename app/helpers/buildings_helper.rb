@@ -223,8 +223,8 @@ module BuildingsHelper
 	end
 
 	def set_bed_ranges building, filters = nil
-		if building.prices.present? || building.show_bed_ranges.present?
-	    (price_col(building, filters).to_s + types_col(building).to_s).html_safe
+		if building.prices.present? || building.show_bed_ranges(filters).present?
+	    (price_col(building, filters).to_s + types_col(building, filters).to_s).html_safe
 	  end
 	end
 
@@ -246,12 +246,12 @@ module BuildingsHelper
   	end
   end
 
-	def types_col b
-		"<span> #{'|' if b.show_bed_ranges.present?} #{b.show_bed_ranges.join(', ')} </span>" +
-		"#{with_bed_text(b)}"
+	def types_col b, filters
+		"<span> #{'|' if b.show_bed_ranges(filters).present?} #{b.show_bed_ranges(filters).join(', ')} </span>" +
+		"#{with_bed_text(b, filters)}"
 	end
 
-	def with_bed_text b
-		"#{'Bed' if b.bedroom_types? && !b.has_only_studio?}#{',' if b.bedroom_types? && b.coliving_with_building_beds?} #{'CoLiving' if b.coliving_with_building_beds? }"
+	def with_bed_text b, filters
+		"#{'Bed' if b.bedroom_types? && !b.has_only_studio?(filters)}#{',' if b.bedroom_types? && b.coliving_with_building_beds?} #{'CoLiving' if b.coliving_with_building_beds? }"
 	end
 end

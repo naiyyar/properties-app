@@ -32,7 +32,8 @@ class HomeController < ApplicationController
   end
 
   def load_infobox
-    listings = @building.get_listings(params[:filter_params])
+    filters  = params[:filter_params]
+    listings = @building.get_listings(filters)
     render json: { html: render_to_string(:partial => '/layouts/shared/custom_infowindow', 
                                           :locals => {  building:         @building,
                                                         image:            Upload.marker_image(@building),
@@ -41,7 +42,7 @@ class HomeController < ApplicationController
                                                         building_show:    params[:building_show],
                                                         current_user:     @current_user,
                                                         fav_color_class:  @fav_color_class,
-                                                        filters:          params[:filter_params],
+                                                        filters:          filters,
                                                         :@listings =>     listings
                                                       })
                   }

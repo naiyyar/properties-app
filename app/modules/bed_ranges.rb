@@ -1,32 +1,33 @@
 module BedRanges
-	def bedroom_ranges
+	def bedroom_ranges(filter_params=nil)
     building_beds = [studio, one_bed, two_bed, three_bed, four_plus_bed, co_living].compact
     return building_beds unless min_and_max_price?
-    get_listings_beds
+    get_listings_beds(filter_params)
   end
 
-  def get_listings_beds
-    listings = act_listings.present? ? act_listings : self.listings.active
+  def get_listings_beds filter_params
+    listings = act_listings.present? ? act_listings : self.get_listings(filter_params)
     return listings&.pluck(:bed).uniq.sort
   end
 
-  def show_bed_ranges
+  def show_bed_ranges(filter_params)
     beds = []
-    bedroom_ranges.map do |bed|
+    bedroom_ranges(filter_params).map do |bed|
       beds << (bed == 0 ? 'Studio' : bed) unless bed == 5
     end
     beds
   end
 
-  def price_ranges
+  def price_ranges filters=nil
     ranges = {}
     prices = Price.where(range: price)
-    bedroom_ranges.each{|bed_range| ranges[bed_range] = prices.find_by(bed_type: bed_range)}
+    bedroom_ranges(filters).each{|bed_range| ranges[bed_range] = prices.find_by(bed_type: bed_range)}
     return ranges
   end
 
-  def has_only_studio?
-		show_bed_ranges.length == 1 && show_bed_ranges[0] == 'Studio'
+  def has_only_studio? filters
+    show_bed_range = show_bed_ranges(filters)
+		return show_bed_range.length == 1 && show_bed_range[0] == 'Studio'
 	end
 
   def coliving_with_building_beds?
