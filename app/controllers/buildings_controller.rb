@@ -101,9 +101,7 @@ class BuildingsController < ApplicationController
     @neighborhood_options = @buildings.select('neighborhood').distinct
                                       .where.not(neighborhood: [nil, ''])
                                       .order(neighborhood: :asc).pluck(:neighborhood)
-    @neighborhood2        = @buildings.select('neighborhoods_parent').distinct
-                                      .where.not(neighborhoods_parent: [nil, ''])
-                                      .order(neighborhoods_parent: :asc).pluck(:neighborhoods_parent)
+    @neighborhood2        = neighborhoods2
     @neighborhood3        = @buildings.select('neighborhood3').distinct
                                       .where.not(neighborhood3: [nil, ''])
                                       .order(neighborhood3: :asc).pluck(:neighborhood3)
@@ -179,6 +177,24 @@ class BuildingsController < ApplicationController
                 else
                   Building.find_by_building_street_address(search_term)
                 end
+  end
+
+  def neighborhoods2
+    [ 
+      'East Village', 
+      'Flatbush - Ditmas Park', 
+      'Greenwich Village', 
+      'Harlem', 
+      'Lower East Side', 
+      'Lower Manhattan', 
+      'Midtown', 
+      'Midtown South', 
+      'Midtown West',
+      'SoHo',
+      'Upper East Side', 
+      'Upper Manhattan', 
+      'Upper West Side'
+    ]
   end
 
   def clear_cache
