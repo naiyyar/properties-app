@@ -124,7 +124,7 @@ class Building < ApplicationRecord
   accepts_nested_attributes_for :units, :allow_destroy => true
 
   # Scopes
-  scope :order_by_id_pos,    -> (ids) { where(id: ids).order("array_position(ARRAY[#{ids.join(',')}], buildings.id)") }
+  scope :order_by_id_pos,    -> (ids) { where(id: ids.uniq).order("array_position(ARRAY[#{ids.join(',')}], buildings.id)") }
   scope :updated_recently,   -> { order({listings_count: :desc, building_name: :asc, building_street_address: :asc}) }
   scope :order_by_min_rent,  -> { order('min_listing_price ASC, listings_count DESC') }
   scope :order_by_max_rent,  -> { order('max_listing_price DESC NULLS LAST, listings_count DESC') }
@@ -141,10 +141,14 @@ class Building < ApplicationRecord
   scope :with_active_listing,   -> { where('listings_count > ?', 0) }
   scope :with_listings_bed,     -> (beds) { where('listings.bed in (?) AND listings.active is true', beds) }
   scope :between_prices,        -> (min, max) { where('listings.rent >= ? AND listings.rent <= ?', min, max) }
-  scope :join_with_listings,    -> { left_outer_joins(:listings).uniq
+  scope :join_with_listings,    -> { left_outer_joins(:listings).distinct
                                                                 .select('buildings.*, COUNT(listings.*) as lists_count')
-                                                                .group('buildings.id, listings.rent')
+                                                                .group('buildings.id, listings.id')
                                     }
+  scope :months_free,           -> { where('listings.free_months > ?', 0)}
+  scope :owner_paid,            -> { where('listings.owner_paid is not null')}
+  scope :rent_stabilize,        -> { where('listings.rent_stabilize in (?)', ['t', 'true'])}
+  
   scope :with_active_web,       -> { where('active_web is true and web_url is not null') }
   scope :with_active_email,     -> { where('active_email is true and email is not null') }
   scope :with_application_link, -> { where('show_application_link is true and online_application_link is not null') }
