@@ -21,7 +21,7 @@ var fields = $('#feature_building_as_comp, #featured_building_field, #listing_bu
 
 if($(fields).length > 0) {
   capp.asCompBuildings = function() {
-    this._input = $('#feature_building_as_comp, #featured_building_field, #listing_building_field');
+    this._input = fields;
     source_url = this._input.data('src');
     this._initAutocomplete();
   };
