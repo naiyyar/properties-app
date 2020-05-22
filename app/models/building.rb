@@ -145,9 +145,9 @@ class Building < ApplicationRecord
                                                                 .select('buildings.*, COUNT(listings.*) as lists_count')
                                                                 .group('buildings.id, listings.id')
                                     }
-  scope :months_free,           -> { where('listings.free_months > ?', 0)}
-  scope :owner_paid,            -> { where('listings.owner_paid is not null')}
-  scope :rent_stabilize,        -> { where('listings.rent_stabilize in (?)', ['t', 'true'])}
+  scope :months_free,           -> { where('listings.active is true AND listings.free_months > ?', 0)}
+  scope :owner_paid,            -> { where('listings.active is true AND listings.owner_paid is not null')}
+  scope :rent_stabilize,        -> { where('listings.active is true AND listings.rent_stabilize in (?)', ['t', 'true'])}
   
   scope :with_active_web,       -> { where('active_web is true and web_url is not null') }
   scope :with_active_email,     -> { where('active_email is true and email is not null') }

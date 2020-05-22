@@ -70,8 +70,6 @@ module Search
     end
 
     def filter_by_listing_prices buildings, min_price, max_price
-      # when listing have price more than 15500
-      # assuming listing max price can be upto whatever maximum rent listing table has
       max_price = Listing.max_rent if max_price.to_i == 15500
       buildings.between_prices(min_price.to_i, max_price.to_i)
     end
