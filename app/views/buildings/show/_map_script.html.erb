@@ -141,5 +141,9 @@
     }
   }
 
+  $('.search-view-card').each(function(i, j){
+    Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+  });
+
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
