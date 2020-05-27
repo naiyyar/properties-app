@@ -106,17 +106,18 @@ a.dt-card-link {
   a ul.cardRating {
     margin-bottom: 4px;
   }
-  .video-tour-icon {
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-    z-index: 999;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 4px 12px;
-    border-radius: 20px;
-    -webkit-transform: translate3d(0, 0, 0);
-  }
+}
+
+.video-tour-icon {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  z-index: 999;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 12px;
+  border-radius: 20px;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 /* location related */

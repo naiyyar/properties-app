@@ -2,12 +2,14 @@
   - @show_path = building_path(building)
   - thumb_icon = "<span class='fa fa-thumbs-up recommended'></span>"
   = link_to @show_path, style: 'color: #333;' do
-    .infoW-property-info{"data-href" => "#{@show_path}"}
+    .infoW-property-info{'data-href' => "#{@show_path}"}
       .propImg
         = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
+        - if building.video_tours.any?
+          .video-tour-icon
+            %span.fa.fa-video-camera
       .paWrapper
-        .propTitle
-          = building.building_name_or_address
+        .propTitle= building.building_name_or_address
         .propAddress
           = building.street_address
           = building.zipcode
@@ -18,7 +20,7 @@
         - click_action = fav_color_class == 'unfilled-heart' ? "saveToFavourite(#{building.id})" : "removeFromFavourite(#{building.id})"
         - hover_action = fav_color_class == 'unfilled-heart' ? "addHoverEffect(#{building.id})" : "removeHoverEffect(#{building.id})"
         
-        %a{"data-objectid" => "#{building.id}", href: 'javascript:;', title: 'Save', class: "favourite save_link_#{building.id} #{fav_color_class}", onclick: click_action, onmouseover: hover_action}
+        %a{'data-objectid' => "#{building.id}", href: 'javascript:;', title: 'Save', class: "favourite save_link_#{building.id} #{fav_color_class}", onclick: click_action, onmouseover: hover_action}
           %span.fa.fa-heart
       
       = link_to heart_icon, 'javascript:;', class: "save_link_#{building.id} favourite #{fav_color_class}", onclick: "openSuModal(event, #{building.id})" if !current_user.present?
