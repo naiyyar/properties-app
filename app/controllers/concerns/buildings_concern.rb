@@ -7,6 +7,7 @@ module BuildingsConcern
     @uploads               = @building.chached_image_uploads
     @uploaded_images_count = @building.uploads_count.to_i
     @documents             = @building.doc_uploads
+    @reviews               = @building.building_reviews.includes(:uploads)
     @reviews_count         = @building.reviews_count.to_i
     active_comps           = @building.active_comps
     @similar_properties    = Building.where(id: active_comps.pluck(:building_id))

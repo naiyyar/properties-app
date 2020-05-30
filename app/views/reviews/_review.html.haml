@@ -66,14 +66,14 @@
             = simple_format(review.other_advice)
       
       .commentActions{style: 'padding: 0px 0px 8px;'}
-        .show-review-images
-          %h4
-          - if review.uploads.present?
-            %ul.gallery.list-unstyled{data: { buildingid: "#{reviewable.id}", view_type: 'show', path:  building_path(reviewable) } }
-              - review.uploads.each do |asset|
-                %li
-                  %a{href: asset.image.url, 'data-role' => 'slider', 'data-fancybox' => 'gallery'}
-                    = image_tag asset.image, alt: 'Image'
+        %h4
+        .row
+          - review.uploads.each do |asset|
+            - img_url = asset.image.url
+            .col-lg-3.image-gallery
+              %a.propWidget-1{'data-fancybox' => 'gallery', href: 'javascript:;', 'data-src' => img_url }
+                = image_tag img_url, alt: 'Image', style: 'height: 100%;width: 100%;'
+
     .commentActions
       %ul.list-inline.ricons.pull-left
         %li= social_share_button_tag(review.review_title, :url => "https://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}")
