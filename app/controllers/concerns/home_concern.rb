@@ -21,7 +21,8 @@ module HomeConcern
     if @buildings.present?
       @filter_params      = params[:filter]
       page_num            = params[:page].present? ? params[:page].to_i : 1
-      final_results       = Building.with_featured_building(@buildings, @search_string, params[:sort_by], @filter_params, page_num)
+      search_terms        = [@search_string, searched_by]
+      final_results       = Building.with_featured_building(@buildings, search_terms, params[:sort_by], @filter_params, page_num)
       @per_page_buildings = final_results[1]
       @all_buildings      = final_results[0][:all_buildings] # with featured
       @hash               = final_results[0][:map_hash]
