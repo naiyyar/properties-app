@@ -32,7 +32,7 @@ class RatingCache < ApplicationRecord
     Building.where(id: cacheable_id).update_all(avg_rating: self.avg)
   end
 
-  def self.create_rating_cache rateable, rateables
+  def self.create_rating_cache rateable, rateables, dimension
     rating_cache = RatingCache.create(  cacheable_id:   rateable.id,
                                         cacheable_type: rateable.class.name,
                                         dimension:      dimension,

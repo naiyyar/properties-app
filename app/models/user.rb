@@ -153,7 +153,7 @@ class User < ApplicationRecord
     if rating_caches.present?
       rating_caches.map{ |rc| RatingCache.update_rating_cache(rc) }
     else
-      RatingCache.create_rating_cache(rateable, rateables)
+      RatingCache.create_rating_cache(rateable, rateables, dimension)
     end
   end
 

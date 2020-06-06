@@ -7,7 +7,7 @@ module BedRanges
 
   def get_listings_beds filter_params
     listings = act_listings.present? ? act_listings : self.get_listings(filter_params)
-    return listings&.pluck(:bed).uniq.sort
+    return listings&.pluck(:bed).uniq.compact.sort
   end
 
   def show_bed_ranges(filter_params)
