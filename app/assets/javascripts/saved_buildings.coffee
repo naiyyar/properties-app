@@ -12,14 +12,14 @@ $(document).on 'click', '.favourite', () ->
 		save_link.removeAttr('data-remote')
 	else
 		bootbox.confirm
-			message: 'Are you sure, you want to remove this post?'
+			message: 'Are you sure, you want to remove this?'
 			size: 'small'
 			buttons:
 				'cancel':
-					label: 'No'
+					label: 'Cancel'
 					className: 'btn-default btn-sm'
 				'confirm':
-					label: 'Remove'
+					label: 'Yes'
 					className: 'btn-success btn-sm'
 			callback: (result) ->
 				if result
@@ -36,6 +36,3 @@ unfavorite = (object_id, save_link) ->
 			save_link.css('color','#b1b3b6')
 			save_link.prop('href', '/favorite?object_id='+object_id)
 			save_link.attr('data-remote', 'true')
-
-
-
