@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	load_and_authorize_resource :find_by => :slug 
 	before_action :authenticate_user!, only: [:show, :edit, :saved_buildings]
-	before_action :set_user, only: [:edit, :update, :show, :contribution, :saved_buildings, :managertools]
+	before_action :set_user, except: [:index, :create]
 
 	def index
 		@users = User.order('created_at desc')
@@ -47,6 +47,33 @@ class UsersController < ApplicationController
 	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
 	  end
 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+	end
+
+	def agenttools
+		# @type 					  = params[:type]
+		# session[:back_to] = request.fullpath
+		# unless @type == 'billing'
+		# 	@filterrific = initialize_filterrific(
+	 #      FeaturedAgent,
+	 #      params[:filterrific],
+	 #      available_filters: [:search_query]
+	 #    ) or return
+
+	 #    @featured_buildings = @filterrific.find
+	 #    																	.where(user_id: @user.id).by_manager
+	 #    																	.paginate(:page => params[:page], :per_page => 100)
+	 #    																	.includes(:billings, :building => [:management_company])
+	 #    																	.order('created_at desc')
+	 #  else
+	 #  	@billings = @current_user.billings
+  #   														.includes(:featured_agent)
+  #   														.paginate(:page => params[:page], :per_page => 100)
+	 #  	@saved_cards = BillingService.new.get_saved_cards(current_user)
+	 #  end
     respond_to do |format|
       format.html
       format.js

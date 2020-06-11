@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200508064617) do
+ActiveRecord::Schema.define(version: 20200611094711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,19 @@ ActiveRecord::Schema.define(version: 20200508064617) do
     t.index ["favorable_id"], name: "index_favorites_on_favorable_id", using: :btree
     t.index ["favoriter_id", "favoriter_type"], name: "index_favorites_on_favoriter_id_and_favoriter_type", using: :btree
     t.index ["favoriter_id"], name: "index_favorites_on_favoriter_id", using: :btree
+  end
+
+  create_table "featured_agents", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "license_number"
+    t.string   "broker_firm"
+    t.string   "phone"
+    t.string   "webiste"
+    t.string   "neighborhood"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "featured_buildings", force: :cascade do |t|

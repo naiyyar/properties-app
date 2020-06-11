@@ -1,0 +1,53 @@
+- if @user.present?
+	.row
+		.col-lg-6.col-xs-12
+			%h2
+			.tabsWidget
+				%ul.nav.nav-tabs.nav-justified{role: 'tablist'}
+					%li{class: @type == 'featured' ? 'active' : ''}
+						%a{href: managertools_user_path(current_user, type: 'featured')}
+							%b Featured Buildings 
+					%li{class: @type == 'billing' ? 'active' : ''}
+						%a{href: managertools_user_path(current_user, type: 'billing')}
+							%b Billing
+      
+	.tab-content
+		- if @type == 'featured'
+			.tab-pane.fade.in.active
+				.row
+					.col-lg-6
+						.pull-left
+							%h4=@type == 'featured' ? "#{current_user.name}'s Featured Buildings" : "#{current_user.name}'s Billing"
+					.col-lg-6
+						.pull-right
+							=link_to 'Add New Featured Building', new_manager_featured_building_user_path(current_user, type: 'featured'), class: 'btn btn-primary'
+							
+							- if @filterrific.present?
+								%p
+								= render 'layouts/shared/filterrific_form'
+
+					=render 'featured_agents/agents'
+					.text-center
+						= will_paginate @featured_buildings, renderer: BootstrapPagination::Rails
+      
+		-else
+			.tab-pane.fade.in.active
+				%h2
+				.row
+					.col-xs-12.col-sm-12.col-md-6.col-lg-4
+						- if @saved_cards.present?
+							%p.bolder.font-md Credit cards
+							%table.table.table-striped.table-saved-cards
+								- @saved_cards.each_with_index do |card, index|
+									- exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
+									%tr
+										%td.v-align-middle.card-detail="#{card[:brand]&.capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
+										%td.text-center
+											=link_to 'Delete', 'javascript:;', class: 'btn btn-danger btn-sm delete-card', data: { disable_with: 'Deleting...', cid:  card[:id]}
+						.pull-left
+							=link_to 'Add New Card', new_manager_featured_building_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm'
+				%h2 Billing Transactions
+
+				= render 'billings/billings'
+				.text-center
+					= will_paginate @billings, renderer: BootstrapPagination::Rails

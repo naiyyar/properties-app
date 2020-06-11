@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :featured_agents
   mount StripeEvent::Engine, at: '/stripe-events'
 
   resources :video_tours
@@ -120,8 +121,10 @@ Rails.application.routes.draw do
     member do
       get :contribution
       get :saved_buildings
-      get '/managertools/:type',        to: 'users#managertools',     as: :managertools
-      get '/managertools/:type/new',    to: 'featured_buildings#new', as: :new_manager_featured_building
+      get '/managertools/:type',     to: 'users#managertools',     as: :managertools
+      get '/managertools/:type/new', to: 'featured_buildings#new', as: :new_manager_featured_building
+      get '/agenttools/:type',       to: 'users#agenttools',       as: :agenttools
+      get '/agenttools/:type/new',   to: 'featured_agents#new',    as: :new_agent_featured_building
     end
   end
 
