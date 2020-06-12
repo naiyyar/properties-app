@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200611094711) do
+ActiveRecord::Schema.define(version: 20200612080041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20200611094711) do
     t.datetime "renew_date"
     t.string   "last4"
     t.string   "receipt_number"
+    t.string   "billable_type"
+    t.integer  "billable_id"
   end
 
   create_table "broker_fee_percents", force: :cascade do |t|
@@ -201,8 +203,13 @@ ActiveRecord::Schema.define(version: 20200611094711) do
     t.string   "phone"
     t.string   "webiste"
     t.string   "neighborhood"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "user_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string   "featured_by"
+    t.boolean  "active",         default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "featured_buildings", force: :cascade do |t|

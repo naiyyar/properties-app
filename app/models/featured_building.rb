@@ -1,11 +1,13 @@
 class FeaturedBuilding < ApplicationRecord
   DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
   include PgSearch
+  include Billable
+  
   belongs_to :building
   counter_cache_with_conditions :building, :featured_buildings_count, active: true
   
   belongs_to :user
-  has_many   :billings #, :dependent => :destroy
+  # has_many   :billings #, :dependent => :destroy
 
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }

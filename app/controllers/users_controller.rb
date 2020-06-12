@@ -42,8 +42,9 @@ class UsersController < ApplicationController
 	    																	.order('created_at desc')
 	  else
 	  	@billings = @current_user.billings
-    														.includes(:featured_building)
-    														.paginate(:page => params[:page], :per_page => 100)
+	  													 .for_type('FeaturedBuilding')
+    													 .includes(:featured_building)
+    													 .paginate(:page => params[:page], :per_page => 100)
 	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
 	  end
 
@@ -54,26 +55,27 @@ class UsersController < ApplicationController
 	end
 
 	def agenttools
-		# @type 					  = params[:type]
-		# session[:back_to] = request.fullpath
-		# unless @type == 'billing'
-		# 	@filterrific = initialize_filterrific(
-	 #      FeaturedAgent,
-	 #      params[:filterrific],
-	 #      available_filters: [:search_query]
-	 #    ) or return
+		@type 					  = params[:type]
+		session[:back_to] = request.fullpath
+		unless @type == 'billing'
+			@filterrific = initialize_filterrific(
+	      FeaturedAgent,
+	      params[:filterrific],
+	      available_filters: [:search_query]
+	    ) or return
 
-	 #    @featured_buildings = @filterrific.find
-	 #    																	.where(user_id: @user.id).by_manager
-	 #    																	.paginate(:page => params[:page], :per_page => 100)
-	 #    																	.includes(:billings, :building => [:management_company])
-	 #    																	.order('created_at desc')
-	 #  else
-	 #  	@billings = @current_user.billings
-  #   														.includes(:featured_agent)
-  #   														.paginate(:page => params[:page], :per_page => 100)
-	 #  	@saved_cards = BillingService.new.get_saved_cards(current_user)
-	 #  end
+	    @featured_agents = @filterrific.find
+	    															 .where(user_id: @user.id).by_manager
+	    															 .paginate(:page => params[:page], :per_page => 100)
+	    															 .order('created_at desc')
+	  else
+	  	@billings = @current_user.billings
+	  														.for_type('FeaturedAgent')
+    														.includes(:featured_agent)
+    														.paginate(:page => params[:page], :per_page => 100)
+	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
+	  end
+	  @photos_count = 0
     respond_to do |format|
       format.html
       format.js

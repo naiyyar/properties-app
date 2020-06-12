@@ -9,6 +9,11 @@ class CreateFeaturedAgents < ActiveRecord::Migration[5.0]
     	t.string :phone
     	t.string :webiste
     	t.string :neighborhood
+      t.integer :user_id
+      t.datetime :start_date
+      t.datetime :end_date
+      t.string :featured_by
+      t.boolean :active, default: false
       t.timestamps
     end
   end

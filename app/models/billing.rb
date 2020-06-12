@@ -2,15 +2,17 @@ class Billing < ApplicationRecord
 	PRICE 					= 49
 	INV_DESCRIPTION = 'Featured Building For Four Weeks Starting on'
 	
+	belongs_to :billable, polymorphic: true
 	belongs_to :user
-	belongs_to :featured_building
-	
+
 	attr_accessor :description, :strp_customer_id
 	validates_presence_of :email
 
 	after_save :set_featured_building_end_date, unless: :payment_failed?
 
 	default_scope {order(created_at: :desc)}
+
+	scope :for_type, -> (type) { where(billable_type: type )}
 
 	def payment_failed?
 		status == 'Failed'

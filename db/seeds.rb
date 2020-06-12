@@ -12,12 +12,9 @@
 # 	end
 # end
 
-# Neighborhood.all.each do |nb|
-# 	city = nb.boroughs == 'MANHATTAN' ? 'New York' : nb.boroughs.capitalize
-# 	counts = Building.buildings_in_neighborhood(nb.name, city).count
-# 	puts "#{nb.name}: #{counts}"
-# 	nb.update(buildings_count: counts)
-# end
+Billing.all.each do |billing|
+	billing.update(billable_type: 'FeaturedBuilding', billable_id: billing.featured_building_id)
+end
 
 
 
