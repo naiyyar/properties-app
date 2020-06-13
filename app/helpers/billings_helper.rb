@@ -16,4 +16,11 @@ module BillingsHelper
 		'<b class="text-danger"> Failed</b>' :
 		'<b class="text-success"> Successful</b>'
 	end
+
+	def cancel_form_link type
+		url = (type == 'FeaturedBuilding' ? 
+					managertools_user_path(current_user, type: 'featured') : 
+					agenttools_user_path(current_user, type: 'featured'))
+		link_to 'Cancel', url, class: 'btn font-bold'
+	end
 end

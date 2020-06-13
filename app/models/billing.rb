@@ -1,6 +1,6 @@
 class Billing < ApplicationRecord
-	PRICE 					= 49
-	INV_DESCRIPTION = 'Featured Building For Four Weeks Starting on'
+	FEATURED_BUILDING_PRICE = 49
+	FEATURED_AGENT_PRICE = 9
 	
 	belongs_to :billable, polymorphic: true
 	belongs_to :user
@@ -8,7 +8,7 @@ class Billing < ApplicationRecord
 	attr_accessor :description, :strp_customer_id
 	validates_presence_of :email
 
-	after_save :set_featured_building_end_date, unless: :payment_failed?
+	after_save :set_end_date, unless: :payment_failed?
 
 	default_scope {order(created_at: :desc)}
 
@@ -65,26 +65,35 @@ class Billing < ApplicationRecord
 		user 		 	 = options[:user]
 		card 		 	 = options[:card]
 		user_email = user.email
-    billing  	 = Billing.new({email:              	user_email,
-                              amount:               PRICE,
-                              featured_building_id: options[:featured_building_id],
-                              user_id:              user.id,
-                              renew_date:           Time.zone.now,
-                              billing_card_id:      card.id,
-                              brand:                card.brand
+    billing  	 = Billing.new({email:           user_email,
+                              amount:          PRICE,
+                              billable_id: 		 options[:id],
+                              billable_type:   options[:type],
+                              user_id:         user.id,
+                              renew_date:      Time.zone.now,
+                              billing_card_id: card.id,
+                              brand:           card.brand
                             })
     unless billing.save_and_charge_existing_card!(customer_id: options[:customer_id], email: user_email, card_id: card.id)
       billing.status = 'Failed'
       billing.save
     end
 	end
+
+	def inv_description
+		"Featured #{billable_type == 'FeaturedAgent' ? 'Agent' : 'Building'} For Four Weeks Starting on"
+	end
+
+	def price
+		billable_type == 'FeaturedAgent' ? FEATURED_AGENT_PRICE : FEATURED_BUILDING_PRICE
+	end
 	
 	def billing_description
-		fb = self.featured_building
+		billable = self.billable
 		unless renew_date
-			"ID #{fb.id} #{INV_DESCRIPTION} #{fb.start_date&.strftime('%b %-d, %Y')}"
+			"ID #{billable.id} #{inv_description} #{billable.start_date&.strftime('%b %-d, %Y')}"
 		else
-			"ID #{fb.id} Renewed #{INV_DESCRIPTION} #{(renew_date + 2.day).strftime('%b %-d, %Y')}"
+			"ID #{billable.id} Renewed #{inv_description} #{(renew_date + 2.day).strftime('%b %-d, %Y')}"
 		end
 	end
 
@@ -94,9 +103,9 @@ class Billing < ApplicationRecord
 		billing_service.get_card(stripe_customer_id, charge_obj.payment_method) if charge_obj.present?
 	end
 
-	def set_featured_building_end_date
-		fb = FeaturedBuilding.find(featured_building_id)
-		fb.set_expiry_date(self.renew_date)
+	def set_end_date
+		klass = self.billable_type.constantize
+		klass.find(billable_id).set_expiry_date(self.renew_date)
 	end
 
 	def update_status status

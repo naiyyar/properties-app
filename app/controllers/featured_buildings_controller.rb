@@ -28,6 +28,9 @@ class FeaturedBuildingsController < ApplicationController
     session[:back_to]  = request.fullpath if params[:type] != 'billing'
     @featured_by       = params[:featured_by] 
     @featured_building = FeaturedBuilding.new
+    @price             = Billing::FEATURED_BUILDING_PRICE
+    @object_id         = params[:object_id]
+    @object_type       = 'FeaturedBuilding'
     @saved_cards       = BillingService.new.get_saved_cards(current_user) rescue nil
   end
 

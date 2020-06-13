@@ -53,53 +53,6 @@ class FeaturedBuilding < ApplicationRecord
              .order('RANDOM()').pluck(:id)
   end
 
-  def _end_date renew_date
-    DEV_HOSTS.include?(ENV['SERVER_ROOT']) ? set_end_date(renew_date, 2.days) : set_end_date(renew_date, 27.days)
-  end
-
-  def set_end_date renew_date, days
-    renew_date.present? ? (renew_date + days) : (_start_date + days)
-  end
-
-  #expired_featurings when renew is false and end_date is less than today's date then expire
-  def self.set_expired_plans_to_inactive_if_autorenew_is_off buildings
-    buildings.where(renew: false).each do |featured_building|
-      Time.zone = featured_building.user.timezone
-      featured_building.update(active: false) if featured_building.expired?
-    end
-  end
-
-  def self.renew_and_deactivate_featured_plan
-    buildings = self.by_manager
-    self.set_expired_plans_to_inactive_if_autorenew_is_off(buildings.active)
-    #renew
-    buildings.where(renew: true).each do |featured_building|
-      user      = featured_building.user
-      Time.zone = user.timezone
-      if featured_building.not_already_renewed?(ENV['SERVER_ROOT'])
-        if (customer_id = user.stripe_customer_id).present?
-          card = BillingService.new.saved_cards(customer_id).last rescue nil
-          if card.present?
-            @billing = Billing.create_billing(user:                 user, 
-                                              card:                 card, 
-                                              customer_id:          customer_id, 
-                                              featured_building_id: featured_building.id)
-          else
-            BillingMailer.no_card_payment_failed(user.email).deliver
-          end
-        end
-      end
-    end
-  end
-
-  def renew_time day_before
-    end_date.present? && (end_date - day_before).to_s(:no_timezone) == Time.zone.now.to_s(:no_timezone)
-  end
-
-  def not_already_renewed? host=nil
-    DEV_HOSTS.include?(ENV['SERVER_ROOT']) ? renew_time(1.day) : renew_time(2.day)
-  end
-
   private
 
   def make_active

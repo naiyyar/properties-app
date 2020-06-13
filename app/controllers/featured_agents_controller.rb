@@ -21,7 +21,10 @@ class FeaturedAgentsController < ApplicationController
   def new
     session[:back_to]  = request.fullpath if params[:type] != 'billing'
     @featured_by       = params[:featured_by] 
-    @featured_building = FeaturedAgent.new
+    @featured_agent    = FeaturedAgent.new
+    @price             = Billing::FEATURED_AGENT_PRICE
+    @object_id         = params[:object_id]
+    @object_type       = 'FeaturedAgent'
     @saved_cards       = BillingService.new.get_saved_cards(current_user) rescue nil
   end
 

@@ -86,7 +86,9 @@ class BillingsController < ApplicationController
     @billing = Billing.new(billing_params)
     respond_to do |format|
       if @billing.save_and_make_payment!
-        format.html { redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' }
+        format.html { 
+          redirect_to redirect_path, notice: 'Billing was successfully created.' 
+        }
         format.json { render :show, status: :created, location: @billing }
       else
         format.html { 
@@ -130,6 +132,14 @@ class BillingsController < ApplicationController
 
     def set_customer_id
       @customer_id = current_user.stripe_customer_id
+    end
+
+    def redirect_path
+      if @billing.billable_type == 'FeaturedBuilding'
+        managertools_user_path(current_user, type: 'featured')
+      else
+        agenttools_user_path(current_user, type: 'featured')
+      end
     end
 
     # TODO: TO REMOVE WHEN MERGING WITH PRODUCTION
