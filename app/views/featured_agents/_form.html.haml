@@ -1,0 +1,60 @@
+.form-container
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-6
+      .panel.panel-default
+        .panel-heading
+          %b= @featured_agent.new_record? ? 'New Featured Agent' : 'Edit Featured Agent'
+        .panel-body
+          = form_for @featured_agent, html: {class: 'featured_agent_form'} do |f|
+            .row
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label First Name*
+                  =f.text_field :first_name, class: 'form-control validate', required: true
+
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label Last Name*
+                  =f.text_field :last_name, class: 'form-control validate', required: true
+            .row
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label Email*
+                  =f.text_field :email, class: 'form-control validate', required: true
+
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label License Number*
+                  =f.text_field :license_number, class: 'form-control validate', required: true
+
+            .row
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label Broker Firm Name*
+                  =f.text_field :broker_firm, class: 'form-control validate', required: true
+
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label Phone Number
+                  =f.text_field :phone, class: 'form-control'
+
+            .row
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .form-group
+                  %label Profile Website
+                  =f.text_field :website, class: 'form-control'
+
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .form-group
+                  %label Neighborhood To Be Featured In*
+                  = f.select :neighborhood, options_for_select(@neighborhoods, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
+                  
+              = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_agent.new_record?
+              = f.hidden_field :user_id, value: current_user.id if current_user.present?
+            
+            .form-group
+              .col-md-7.col-sm-7.col-xs-7
+                .pull-right
+                  = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
+              .col-md-5.col-sm-5.col-xs-5
+                = f.submit 'Next', class: 'btn btn-primary btn-block'

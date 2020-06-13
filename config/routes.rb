@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :featured_agents
   mount StripeEvent::Engine, at: '/stripe-events'
 
   resources :video_tours
@@ -129,8 +128,11 @@ Rails.application.routes.draw do
   end
 
   # multisteps Forms
-  resources :user_steps, :building_steps, :unit_steps
-  
+  resources :user_steps, :building_steps, :unit_steps, :featured_agent_steps
+  resources :featured_agents do
+    resources :uploads
+  end
+
   resources :units do
     resources :reviews
     resources :uploads

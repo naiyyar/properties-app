@@ -1,6 +1,6 @@
 class FeaturedAgentsController < ApplicationController
   before_action :set_featured_agent, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_neighborhoods, only: [:new, :edit]
   # GET /featured_agents
   # GET /featured_agents.json
   def index
@@ -28,7 +28,10 @@ class FeaturedAgentsController < ApplicationController
 
     respond_to do |format|
       if @featured_agent.save
-        format.html { redirect_to @featured_agent, notice: 'Featured agent was successfully created.' }
+        format.html { 
+          redirect_to featured_agent_steps_path(agent_id: @featured_agent.id), 
+                      notice: 'Featured agent was successfully created.' 
+        }
         format.json { render :show, status: :created, location: @featured_agent }
       else
         format.html { render :new }
@@ -69,6 +72,19 @@ class FeaturedAgentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def featured_agent_params
-      params.fetch(:featured_agent, {})
+      params.require(:featured_agent).permit!
+    end
+
+    def set_neighborhoods
+      @neighborhoods = [
+        'Lower Manhattan',
+        'Midtown Manhattan',
+        'Upper East Side',
+        'Upper West Side',
+        'Upper Manhattan',
+        'Brooklyn',
+        'Queens',
+        'Bronx'
+      ]
     end
 end

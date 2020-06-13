@@ -1,0 +1,11 @@
+<% if params[:type] == 'billing' %>
+	<%= render 'billings/form' %>
+<%elsif params[:type] == 'add_new_card' %>
+	<%= render 'billings/add_card_form' %>
+<%else%>
+	<%= render 'form' %>
+<%end%>
+
+<script type="text/javascript" src="https://js.stripe.com/v3/">
+  Stripe.setPublishableKey("<%= STRIPE_PUBLIC_KEY %>");
+</script>

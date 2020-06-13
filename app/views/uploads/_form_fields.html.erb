@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-lg-12">
+		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: 'dropzone form-horizontal', id: "new_upload_#{params[:upload_type]}" }) do |f|  %>
+		  <div class="fallback">
+		  	<% unless params[:upload_type] == 'documents' %>
+		    	<%= f.file_field :image %>
+		    <%else%>
+		    	<%= f.file_field :document %>
+		    <%end%><br />
+		    
+		    <%= f.hidden_field :user_id, value: current_user.id if current_user.present?%> <br />
+		    
+		    <%= f.submit 'Upload' %>
+		  </div>
+		<% end %>
+		
+		<br />
+		<%if @imageable.kind_of? FeaturedAgent %>
+			<p> Upload a profile image of yourself here. You can edit images on the next step</p>
+		<%end%>
+		<div class="from-group">
+			<div class="pull-right">
+				<% if @imageable.kind_of? Unit %>
+					<%= link_to 'Done', unit_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done' %>
+				<%elsif @imageable.kind_of? FeaturedAgent %>
+					<%= link_to 'Next', wizard_path(:edit_photos, agent_id: @imageable.id), class: 'btn btn-primary btn-done' %>
+				<%else%>
+					<%= link_to 'Done', building_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done disabled' %>
+				<%end%>
+			</div>
+		</div>
+	</div>
+</div>
