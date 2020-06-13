@@ -1,10 +1,15 @@
 class FeaturedAgentsController < ApplicationController
-  before_action :set_featured_agent, only: [:show, :edit, :update, :destroy]
+  before_action :set_featured_agent, only: [:show, :edit, :update, :destroy, :preview]
   before_action :set_neighborhoods, only: [:new, :edit]
   # GET /featured_agents
   # GET /featured_agents.json
   def index
     @featured_agents = FeaturedAgent.all
+  end
+
+  def preview
+    @uploads      = @featured_agent.uploads
+    @images_count = @uploads.count
   end
 
   # GET /featured_agents/1

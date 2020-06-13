@@ -30,4 +30,8 @@ class FeaturedAgent < ApplicationRecord
   def featured_by_manager?
     featured_by == 'manager'
   end
+
+  def featured?
+    false
+  end
 end

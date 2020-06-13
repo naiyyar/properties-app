@@ -35,16 +35,7 @@
         %li.no-hover-underline.parent
           = render 'layouts/shared/admin_nav_items'
         %li.no-hover-underline.parent
-          %a.dropdown-toggle.no-hover-underline{href: '#', 'data-toggle' => 'dropdown'} 
-            Tools
-            %span.fa.fa-chevron-down
-
-          .dropdown-menu.userMenu.admin{role: 'menu'}
-            %ul
-              %li
-                %a{href: agenttools_user_path(current_user, type: 'featured')} Agent Tools
-              %li
-                %a{href: managertools_user_path(current_user, type: 'featured')} Manager Tools
+          = render 'layouts/shared/tools_nav'
         
         %li.no-hover-underline.parent
           = render 'layouts/shared/user_profile'

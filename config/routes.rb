@@ -131,6 +131,7 @@ Rails.application.routes.draw do
   resources :user_steps, :building_steps, :unit_steps, :featured_agent_steps
   resources :featured_agents do
     resources :uploads
+    get :preview, on: :member
   end
 
   resources :units do

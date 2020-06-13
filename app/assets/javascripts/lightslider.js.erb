@@ -969,7 +969,8 @@
         
         //Custom
         $el.fetchAssets = function(){
-      		var building_id = this.data('buildingid');
+      		var object_id   = this.data('objectid');
+            var resource    = this.data('resource');
             var view_type   = this.data('viewType');
             var path        = this.data('path');
             var slides      = $el.find('.lslide');
@@ -982,7 +983,7 @@
                     $el.parent().append(loader);
                     
                     $.ajax({
-                        url: '/buildings/'+building_id+'/uploads',
+                        url: '/'+resource+'/'+object_id+'/uploads',
                         type: 'get',
                         dataType: 'json',
                         success: function(response){

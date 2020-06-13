@@ -1,0 +1,6 @@
+$('.figure').html("<%= j render partial: 'home/lightslider', \
+																locals: { images_count: @images_count, \
+																				  object: @featured_agent, \
+																				  first_image: @uploads.first, \
+																				  show_path: featured_agent_path(@featured_agent) } %>");
+$('#thumbnailPreview').modal('show');

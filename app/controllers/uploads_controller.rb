@@ -7,14 +7,17 @@ class UploadsController < ApplicationController
 	def index
     if params[:building_id].present?
       @building = Building.find(params[:building_id])
-      @uploads = @building.uploads
+      @uploads  = @building.uploads
     elsif params[:unit_id]
-      @unit = Unit.find(params[:unit_id])
-      @uploads = @unit.uploads.order('created_at desc')
+      @unit     = Unit.find(params[:unit_id])
+      @uploads  = @unit.uploads.order('created_at desc')
+    elsif params[:unit_id]
+      @featured_agent = FeaturedAgent.find(params[:featured_agent_id])
+      @uploads        = @featured_agent.uploads
     else
       @uploads = Upload.order('created_at desc').limit(52)
     end
-    @uploads = @uploads.where('image_file_name is not null').includes(:imageable)
+    @uploads = @uploads.where('image_file_name is not null')
 
     respond_to do |format|
       format.html
