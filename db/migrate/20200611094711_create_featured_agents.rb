@@ -15,6 +15,7 @@ class CreateFeaturedAgents < ActiveRecord::Migration[5.0]
       t.string :featured_by
       t.integer :uploads_count
       t.boolean :active, default: false
+      t.boolean :renew,  default: false
       t.timestamps
     end
   end

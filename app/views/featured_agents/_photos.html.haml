@@ -17,7 +17,7 @@
     .pull-right
       = link_to 'Cancel', '#'
       = link_to 'Back', wizard_path(:add_photos, agent_id: @featured_agent.id), class: 'btn btn-default'
-      = link_to 'Next', '#', class: 'btn btn-primary'
+      = link_to 'Next', agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-primary'
 
 
 :javascript

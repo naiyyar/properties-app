@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     														.paginate(:page => params[:page], :per_page => 100)
 	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
 	  end
-	  @photos_count = 0
+	  @photos_count = @featured_agents.sum(:uploads_count)
     respond_to do |format|
       format.html
       format.js

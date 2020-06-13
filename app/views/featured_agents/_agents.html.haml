@@ -23,32 +23,16 @@
               %tr
                 %td=link_to agent.id, edit_featured_agent_path(agent, featured_by: @featured_by)
                 %td=link_to agent.full_name
-                %td=link_to agent.building.try(:email), '#'
-                %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
+                %td=link_to agent.try(:email), '#'
+                %td= link_to '<span class="fa fa-globe"></span>'.html_safe, agent.website, target: '_blank' if agent.website.present?
+                %td= agent.uploads_count
                 %td= start_date(agent)
                 %td= end_date(agent)
-                - unless params[:type] == 'featured'
-                  %td
-                    - if featured_building.featured_by_manager?
-                      - if featured_building.draft?
-                        = featured_building&.user&.try(:email)
-                      - else 
-                        = featured_building&.billings&.first&.user.try(:email)
-
-                  %td
-                    = link_to 'edit', edit_featured_building_path(featured_building, featured_by: @featured_by) unless featured_building.featured_by_manager?
-                  %td
-                    = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: 'Are you sure you want to delete this featured building?'}, class: 'text-danger' unless featured_building.featured_by_manager?
-                  %td
-                    %input.apple-switch.sb-sm.feature-building.renew.disabled{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id, disabled: true }
-                  %td
-                    %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: featured_building.active, style: 'margin: 0px;', data: { fbid: featured_building.id } }
-                -else
-                  %td 
-                    = link_to 'edit', edit_featured_building_path(featured_building) if featured_building.draft? or featured_building.live?
-                  %td
-                    = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: 'Are you sure you want to delete this featured building?'}, class: 'text-danger' if featured_building.draft?
-                  %td
-                    %input.apple-switch.sb-sm.feature-building.renew.disabled{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id, disabled: true }
-                  %td
-                    %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: featured_building.active, style: 'margin: 0px;', data: { fbid: featured_building.id, fbby: 'manager', expired: featured_building.expired? ? 'expired' : '', billingurl: featured_building.expired? ? new_manager_featured_building_user_path(current_user, type: 'billing', fb_id: featured_building.id) : '' } }
+                %td
+                  = link_to 'edit', edit_featured_agent_path(agent) if agent.draft? or agent.live?
+                %td
+                  = link_to 'Delete', featured_agent_path(agent), method: :delete, data: {confirm: 'Are you sure you want to delete this featured building?'}, class: 'text-danger' if agent.draft?
+                %td
+                  %input.apple-switch.sb-sm.feature-building.renew.disabled{type: 'checkbox', checked: agent.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-agentid' => agent.id, disabled: true }
+                %td
+                  %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: agent.active, style: 'margin: 0px;', data: { agentid: agent.id, fbby: 'manager', expired: agent.expired? ? 'expired' : '', billingurl: agent.expired? ? new_manager_featured_agent_user_path(current_user, type: 'billing', agent_id: agent.id) : '' } }

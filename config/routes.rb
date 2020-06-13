@@ -123,7 +123,7 @@ Rails.application.routes.draw do
       get '/managertools/:type',     to: 'users#managertools',     as: :managertools
       get '/managertools/:type/new', to: 'featured_buildings#new', as: :new_manager_featured_building
       get '/agenttools/:type',       to: 'users#agenttools',       as: :agenttools
-      get '/agenttools/:type/new',   to: 'featured_agents#new',    as: :new_featured_agent
+      get '/agenttools/:type/new',   to: 'featured_agents#new',    as: :new_manager_featured_agent
     end
   end
 

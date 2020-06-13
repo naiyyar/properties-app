@@ -19,7 +19,10 @@ class FeaturedAgentsController < ApplicationController
 
   # GET /featured_agents/new
   def new
-    @featured_agent = FeaturedAgent.new
+    session[:back_to]  = request.fullpath if params[:type] != 'billing'
+    @featured_by       = params[:featured_by] 
+    @featured_building = FeaturedAgent.new
+    @saved_cards       = BillingService.new.get_saved_cards(current_user) rescue nil
   end
 
   # GET /featured_agents/1/edit

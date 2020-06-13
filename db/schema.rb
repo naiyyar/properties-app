@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 20200612080041) do
     t.string   "featured_by"
     t.integer  "uploads_count"
     t.boolean  "active",         default: false
+    t.boolean  "renew",          default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end

@@ -20,7 +20,7 @@
 							%h4= @type == 'featured' ? "#{current_user.name}'s Featured Agents" : "#{current_user.name}'s Billing"
 					.col-lg-6
 						.pull-right
-							=link_to 'Add New Featured Agent', new_featured_agent_user_path(current_user, type: 'featured'), class: 'btn btn-primary'
+							=link_to 'Add New Featured Agent', new_manager_featured_agent_user_path(current_user, type: 'featured'), class: 'btn btn-primary'
 							
 							- if @filterrific.present?
 								%p
