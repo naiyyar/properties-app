@@ -6,7 +6,7 @@ class Ability
       can :manage, :all
       cannot :index, [Building, Unit, Review, Contact, Upload]
       cannot :documents, Upload
-      cannot [:contribution, :index, :managertools], User
+      cannot [:contribution, :index, :managertools, :agenttools], User
       cannot [:index, :new, :edit], ManagementCompany
       cannot [:index, :show, :saved_buildings], User
       cannot [:index, :create, :update, :destroy, :new], [BrokerFeePercent, RentMedian, FeaturedComp, NeighborhoodLink, FeaturedBuilding, VideoTour]
