@@ -6,13 +6,16 @@
         %table.table.table-striped#sortable
           %thead
             %tr
-              %th{width: '10%'} Feature ID(#{@featured_agents.count})
-              %th{width: '12%'} Agent Name
-              %th{width: '20%'} Email
+              %th{width: '5%'} ID(#{@featured_agents.count})
+              %th{width: '10%'} Agent Name
+              %th{width: '16%'} Email
               %th{width: '10%'} Neighborhood
-              %th{width: '8%'} (#{@photos_count}) Photos
-              %th{width: '15%'} Start Date
-              %th{width: '15%'} End Date
+              %th{width: '10%'} Firm
+              %th{width: '10%'} Phone
+              %th{width: '6%'} Website
+              %th{width: '6%'} (#{@photos_count}) Photos
+              %th{width: '12%'} Start Date
+              %th{width: '12%'} End Date
               %th{width: '6%'} Edit
               %th{width: '6%'} Delete
               %th{width: '6%'} Renew
@@ -24,6 +27,9 @@
                 %td=link_to agent.id, edit_featured_agent_path(agent, featured_by: @featured_by)
                 %td=link_to agent.full_name
                 %td=link_to agent.try(:email), '#'
+                %td=link_to agent.try(:neighborhood)
+                %td=link_to agent.try(:broker_firm)
+                %td=link_to number_to_phone(agent.try(:phone), area_code: true)
                 %td= link_to '<span class="fa fa-globe"></span>'.html_safe, agent.website, target: '_blank' if agent.website.present?
                 %td= agent.uploads_count
                 %td= start_date(agent)
@@ -36,3 +42,8 @@
                   %input.apple-switch.sb-sm.feature-agent.renew.disabled{type: 'checkbox', checked: agent.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-agentid' => agent.id, disabled: true }
                 %td
                   %input.apple-switch.sb-sm.feature-agent{type: 'checkbox', checked: agent.active, style: 'margin: 0px;', data: { agentid: agent.id, fbby: 'manager', expired: agent.expired? ? 'expired' : '', billingurl: agent.expired? ? new_manager_featured_agent_user_path(current_user, type: 'billing', agent_id: agent.id) : '' } }
+
+:css
+  table.dataTable tr th, table.dataTable tr td{
+    padding: 8px 4px;
+  }
