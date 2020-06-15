@@ -43,18 +43,32 @@
                 .form-group
                   %label Profile Website
                   =f.text_field :website, class: 'form-control'
-
+            .row
+            - if @featured_agent.draft_edit? || @featured_by == 'admin'
+              = render 'featured_buildings/admin_form_fields', f: f, object: f.object
+            - else
+              - @submit_text = 'Next'
+            .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group
                   %label Neighborhood To Be Featured In*
                   = f.select :neighborhood, options_for_select(@neighborhoods, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
-                  
+              
               = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_agent.new_record?
               = f.hidden_field :user_id, value: current_user.id if current_user.present?
             
             .form-group
               .col-md-7.col-sm-7.col-xs-7
                 .pull-right
-                  = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
+                  - if @featured_agent.new_record?
+                    = link_to 'Cancel', params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default cancel'
+                  - else
+                    = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default cancel'
               .col-md-5.col-sm-5.col-xs-5
-                = f.submit 'Next', class: 'btn btn-primary btn-block'
+                = f.submit @submit_text, class: 'btn btn-primary btn-block'
+
+:javascript
+  $('.cancel').on('click', function(e){
+    e.preventDefault();
+    window.location.href = $(this).attr('href')
+  })

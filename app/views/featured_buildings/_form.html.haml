@@ -17,35 +17,10 @@
               = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_building.new_record?
               = f.hidden_field :user_id, value: current_user.id if current_user.present?
             
-            - if @featured_building.draft_edit? or @featured_by == 'admin'
-              - submit_text = 'Save'
-              .row
-                .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                  - picker_class = @featured_by == 'admin' ? 'datetimepicker1' : 'datepicker'
-                  .form-group
-                    %label Start Date
-                    = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date&.to_s(:no_timezone) : nil,  class: "form-control #{picker_class}", :autocomplete => :off, disabled: @featured_building.featured_by_manager?
-
-                .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                  .form-group
-                    %label End Date
-                    = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.to_s(:no_timezone) : nil,  class: "form-control #{picker_class}", :autocomplete => :off, disabled: @featured_building.featured_by_manager?
-              
-              - if @featured_by != 'admin'
-                .row
-                  .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                    .form-group
-                      %label Featured Building Renewal
-                  .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                    .form-group
-                      .pull-right
-                        %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: @featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => @featured_building.id }
-                .row
-                  .col-lg-12
-                    %label When active, the card on file wil be charged $49.00 two days before the end date for the next four week feature cycle.
-            
+            - if @featured_building.draft_edit? || @featured_by == 'admin'
+              =render 'featured_buildings/admin_form_fields', f: f, object: f.object
             -else
-              - submit_text = 'Next'
+              - @submit_text = 'Next'
               %p The building selected for featuring can be changed at any time while the featuring is still active. For example, if a selected featured building no longer has vacancies, you have the ability to choose a different building that has vacancies using the same feature entry.
               %br
               %p
@@ -64,7 +39,7 @@
                   -else
                     = link_to 'Cancel', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
               .col-md-5.col-sm-5.col-xs-5
-                = f.submit submit_text, class: 'btn btn-primary btn-block', disabled: true
+                = f.submit @submit_text, class: 'btn btn-primary btn-block', disabled: true
     
 =javascript_include_tag 'featured_as_building'
 
@@ -81,7 +56,3 @@
       }
     }
   })
-
-  $('.datetimepicker1').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm'
-  });

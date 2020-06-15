@@ -53,4 +53,4 @@
                   %td
                     %input.apple-switch.sb-sm.feature-building.renew.disabled{type: 'checkbox', checked: featured_building.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => featured_building.id, disabled: true }
                   %td
-                    %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: featured_building.active, style: 'margin: 0px;', data: { fbid: featured_building.id, fbby: 'manager', expired: featured_building.expired? ? 'expired' : '', billingurl: featured_building.expired? ? new_manager_featured_building_user_path(current_user, type: 'billing', fb_id: featured_building.id) : '' } }
+                    %input.apple-switch.sb-sm.feature-building{type: 'checkbox', checked: featured_building.active, style: 'margin: 0px;', data: { fbid: featured_building.id, fbby: 'manager', expired: featured_building.expired? ? 'expired' : '', billingurl: featured_building.expired? ? new_manager_featured_building_user_path(current_user, type: 'billing', object_id: featured_building.id) : '' } }
