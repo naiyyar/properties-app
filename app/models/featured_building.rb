@@ -1,14 +1,12 @@
 class FeaturedBuilding < ApplicationRecord
-  DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
   include PgSearch
   include Billable
   
+  belongs_to :user
   belongs_to :building
   counter_cache_with_conditions :building, :featured_buildings_count, active: true
-  
-  belongs_to :user
-  # has_many   :billings #, :dependent => :destroy
 
+  # scopes
   scope :active,      -> { where(active: true) }
   scope :inactive,    -> { where(active: false) }
   scope :by_manager,  -> { where(featured_by: 'manager') }
@@ -25,6 +23,8 @@ class FeaturedBuilding < ApplicationRecord
      :search_query
     ]
   )
+  
+  # callbacks
   after_save :make_active, unless: :featured_by_manager?
   before_destroy :check_active_status, unless: Proc.new{ |obj| obj.expired? }
 
@@ -54,10 +54,6 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   private
-
-  def make_active
-    update_columns(active: true) if has_start_and_end_date? && end_date >= Time.zone.now
-  end
   
   def check_active_status
     errors.add :base, 'Cannot delete unexpired featured buildings.'

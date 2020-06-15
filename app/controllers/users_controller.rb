@@ -43,9 +43,8 @@ class UsersController < ApplicationController
 	  else
 	  	@billings = @current_user.billings
 	  													 .for_type('FeaturedBuilding')
-    													 .includes(:featured_building)
     													 .paginate(:page => params[:page], :per_page => 100)
-	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
+	  	@saved_cards = BillingService.new(current_user).get_saved_cards
 	  end
 
     respond_to do |format|
@@ -68,14 +67,14 @@ class UsersController < ApplicationController
 	    															 .where(user_id: @user.id).by_manager
 	    															 .paginate(:page => params[:page], :per_page => 100)
 	    															 .order('created_at desc')
+	  	@photos_count = @featured_agents.sum(:uploads_count)
 	  else
 	  	@billings = @current_user.billings
-	  														.for_type('FeaturedAgent')
-    														.includes(:featured_agent)
-    														.paginate(:page => params[:page], :per_page => 100)
-	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
+	  													 .for_type('FeaturedAgent')
+    													 .paginate(:page => params[:page], :per_page => 100)
+	  	@saved_cards = BillingService.new(current_user).get_saved_cards
 	  end
-	  @photos_count = @featured_agents.sum(:uploads_count)
+    
     respond_to do |format|
       format.html
       format.js

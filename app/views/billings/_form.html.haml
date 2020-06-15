@@ -15,7 +15,8 @@
                 = form_tag pay_using_saved_card_path, method: :post, id: "card_form_#{last4}" do
                   = hidden_field_tag 'billing[email]', current_user.email, id: "billing_email_#{last4}"
                   = hidden_field_tag 'billing[amount]', @price, id: "billing_amount2_#{last4}"
-                  = hidden_field_tag 'billing[featured_building_id]', params[:fb_id], id: "billing_featured_building_id_#{last4}"
+                  = hidden_field_tag 'billing[billable_id]', @object_id, id: "billable_id_#{last4}"
+                  = hidden_field_tag 'billing[billable_type]', @object_type, id: "billable_type_#{last4}"
                   = hidden_field_tag 'billing[user_id]', current_user.id, id: "billing_user_id_#{last4}"
                   = hidden_field_tag 'billing[billing_card_id]', card[:id], id: "billing_card_id_#{last4}"
                   = hidden_field_tag 'billing[brand]', brand, id: "billing_card_brand_#{last4}"

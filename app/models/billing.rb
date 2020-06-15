@@ -26,12 +26,12 @@ class Billing < ApplicationRecord
 		if valid?
       begin
       	#stripe_card_id is same as payment_token
-      	billing_service 	= BillingService.new(stripe_card_id, email)
-      	customer_id 			= billing_service.get_customer_id(user)
-      	card 							= billing_service.create_source(customer_id)
+      	billing_service 			= BillingService.new(user, stripe_card_id)
+      	customer_id 					= billing_service.get_customer_id
+      	card 									= billing_service.create_source(customer_id)
       	self.billing_card_id 	= card.id
-      	self.brand							= card.brand
-      	self.last4            	= card.last4
+      	self.brand						= card.brand
+      	self.last4            = card.last4
         if self.save
         	billing_service.create_charge!(billing: self, customer_id: customer_id)
         end
@@ -47,7 +47,7 @@ class Billing < ApplicationRecord
 	def save_and_charge_existing_card! options={}
 		if valid?
 			begin
-				billing_service = BillingService.new(nil, options[:email])
+				billing_service = BillingService.new(options[:user], nil)
 				if save
 					options.merge!(billing: self)
 					billing_service.create_charge!(options)
@@ -74,7 +74,7 @@ class Billing < ApplicationRecord
                               billing_card_id: card.id,
                               brand:           card.brand
                             })
-    unless billing.save_and_charge_existing_card!(customer_id: options[:customer_id], email: user_email, card_id: card.id)
+    unless billing.save_and_charge_existing_card!(user: user, customer_id: options[:customer_id], card_id: card.id)
       billing.status = 'Failed'
       billing.save
     end
@@ -97,8 +97,8 @@ class Billing < ApplicationRecord
 		end
 	end
 
-	def card stripe_customer_id
-		billing_service = BillingService.new
+	def card current_user, stripe_customer_id
+		billing_service = BillingService.new(current_user)
 		charge_obj 			= billing_service.get_charge(stripe_charge_id)
 		billing_service.get_card(stripe_customer_id, charge_obj.payment_method) if charge_obj.present?
 	end

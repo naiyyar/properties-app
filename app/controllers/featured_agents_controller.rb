@@ -23,9 +23,9 @@ class FeaturedAgentsController < ApplicationController
     @featured_by       = params[:featured_by] 
     @featured_agent    = FeaturedAgent.new
     @price             = Billing::FEATURED_AGENT_PRICE
-    @object_id         = params[:object_id]
+    @object_id         = params[:object_id] || params[:agent_id]
     @object_type       = 'FeaturedAgent'
-    @saved_cards       = BillingService.new.get_saved_cards(current_user) rescue nil
+    @saved_cards       = BillingService.new(current_user).get_saved_cards rescue nil
   end
 
   # GET /featured_agents/1/edit

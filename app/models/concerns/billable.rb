@@ -4,6 +4,8 @@ module Billable
 		has_many :billings, as: :billable
 	end
 
+  DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
+
 	def featured_by_manager?
     featured_by == 'manager'
   end
@@ -61,13 +63,13 @@ module Billable
       Time.zone = user.timezone
       if billable.not_already_renewed?(ENV['SERVER_ROOT'])
         if (customer_id = user.stripe_customer_id).present?
-          card = BillingService.new.saved_cards(customer_id).last rescue nil
+          card = BillingService.new(user).saved_cards(customer_id).last rescue nil
           if card.present?
             @billing = Billing.create_billing(user:         user, 
                                               card:         card, 
                                               customer_id:  customer_id, 
                                               id:           billable.id,
-                                              type:         billable.class.name,)
+                                              type:         billable.class.name)
           else
             BillingMailer.no_card_payment_failed(user.email).deliver
           end
@@ -82,5 +84,11 @@ module Billable
 
   def not_already_renewed? host=nil
     DEV_HOSTS.include?(ENV['SERVER_ROOT']) ? renew_time(1.day) : renew_time(2.day)
+  end
+
+  private
+
+  def make_active
+    update_columns(active: true) if has_start_and_end_date? && end_date >= Time.zone.now
   end
 end

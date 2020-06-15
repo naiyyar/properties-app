@@ -11,10 +11,7 @@ class FeaturedAgent < ApplicationRecord
 	scope :by_manager,  -> { where(featured_by: 'manager') }
 
 	pg_search_scope :search_query, 
-                  against: [:id], 
-                  associated_against: {
-                    building: [:first_name, :neighborhood]
-                  }
+                  against: [:first_name, :last_name, :neighborhood]
 
   filterrific(
    default_filter_params: { },
@@ -23,15 +20,22 @@ class FeaturedAgent < ApplicationRecord
     ]
   )
 
+  # callbacks
+  after_save :make_active, unless: :featured_by_manager?
+  before_destroy :check_active_status, unless: Proc.new{ |obj| obj.expired? }
+
   def full_name
   	"#{first_name} #{last_name}"
   end
 
-  def featured_by_manager?
-    featured_by == 'manager'
-  end
-
   def featured?
     false
+  end
+
+  private
+  def check_active_status
+    errors.add :base, 'Cannot delete unexpired featured Agent.'
+    false
+    throw(:abort)
   end
 end

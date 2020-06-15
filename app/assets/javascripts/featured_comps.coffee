@@ -4,7 +4,6 @@ $(document).on 'click', '.apple-switch.featured_comps', (e) ->
 	else
 		changeFeaturedCompStatus(true, $(this))
 
-
 changeFeaturedCompStatus = (status, elem) ->
 	comp_id = elem.data('compid')
 	$.ajax
@@ -16,7 +15,6 @@ changeFeaturedCompStatus = (status, elem) ->
 		data: {featured_comp: { active: status } }
 		success: (response) ->
 			console.log(response)
-
 
 #Changing featured building status
 #
