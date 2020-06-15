@@ -1,6 +1,7 @@
 class FeaturedAgentsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_featured_agent, only: [:show, :edit, :update, :destroy, :preview]
+  before_action :set_featured_agent, only: [:show, :edit, :update, :destroy, :preview, :get_images]
+  before_action :set_uploads, only: [:preview, :get_images]
   before_action :set_neighborhoods, only: [:new, :edit]
   
   # GET /featured_agents
@@ -22,8 +23,11 @@ class FeaturedAgentsController < ApplicationController
   end
 
   def preview
-    @uploads      = @featured_agent.uploads
-    @images_count = @uploads.count
+    
+  end
+
+  def get_images
+    render json: { html: render_slider_partial }
   end
 
   # GET /featured_agents/1
@@ -99,6 +103,11 @@ class FeaturedAgentsController < ApplicationController
     params.require(:featured_agent).permit!
   end
 
+  def set_uploads
+    @uploads      = @featured_agent.uploads
+    @images_count = @uploads.count
+  end
+
   def set_neighborhoods
     @neighborhoods = [
       'Lower Manhattan',
@@ -122,5 +131,15 @@ class FeaturedAgentsController < ApplicationController
     @featured_agent.expired? ? 
     new_manager_featured_agent_user_path(current_user, type: 'billing', object_id: @featured_agent.id) :
     agenttools_user_path(current_user, type: 'featured')
+  end
+
+  def render_slider_partial
+    render_to_string(:partial => '/home/lightslider', 
+                     :locals => { object:       @featured_agent,
+                                  images_count: @images_count,
+                                  first_image:  @uploads[0],
+                                  show_path:    featured_agent_path(@featured_agent)
+                                }
+                    )
   end
 end

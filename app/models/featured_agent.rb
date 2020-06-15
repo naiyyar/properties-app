@@ -32,6 +32,10 @@ class FeaturedAgent < ApplicationRecord
     false
   end
 
+  def self.get_random_agent nb
+    where(neighborhood: nb).active.order('RANDOM()').limit(1)
+  end
+
   private
   def check_active_status
     errors.add :base, 'Cannot delete unexpired featured Agent.'

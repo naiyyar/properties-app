@@ -4,7 +4,7 @@
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
         .pull-right
           - @featured_by = 'admin'
-          = link_to 'Add New Featured Building', new_featured_agent_path(featured_by: @featured_by), class: 'btn btn-blue'
+          = link_to 'Add New Featured Agent', new_featured_agent_path(featured_by: @featured_by), class: 'btn btn-blue'
     %h2
   
   .pull-right= render 'layouts/shared/filterrific_form'

@@ -30,6 +30,8 @@ module HomeConcern
       @listings_count     = Listing.listings_count(@buildings, @all_buildings, @filter_params)
       @buildings_count    = @hash.length rescue 0
     end
+    
+    @agents    = FeaturedAgent.get_random_agent(@search_string)
     @meta_desc = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
                                                              count: @buildings_count, 
                                                              term:  @search_term)

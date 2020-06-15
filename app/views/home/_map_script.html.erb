@@ -233,7 +233,12 @@
   }
 
   $('.search-view-card').each(function(i, j){
-    Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+    var agentid = $(j).data('agentid');
+    if(agentid != undefined){
+      Card.loadFeaturedAgentImages(agentid);
+    }else{
+      Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+    }
   });
   
   // Initialize the map

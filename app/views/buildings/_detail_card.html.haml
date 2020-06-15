@@ -1,5 +1,5 @@
 - @show_path = building_path(building)
-.card.search-view-card{class: "#{@border_class} #{home_page? ? 'home' : ''}", 'data-bid' => building.id}
+.card.search-view-card{class: "#{@border_class} #{home_page? ? 'home' : ''}", 'data-bid' => building.id, id: "card-#{building.id}"}
   - unless @similar_properties.present?
     = link_to @show_path do
       .figure{style: 'position: relative;', id: "figure#{building.id}"}

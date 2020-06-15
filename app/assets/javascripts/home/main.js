@@ -59,5 +59,19 @@ Card = {
 	       current_elem.text(el.getCurrentSlideCount);
 	     }
 	  });
+	},
+
+	loadFeaturedAgentImages: function(agent_id){
+		var fig_elem 			= $("#figure"+agent_id);
+	  $.ajax({
+	    url: '/featured_agents/get_images',
+	    dataType: 'json',
+	    type: 'get',
+	    data: { id: agent_id },
+	    success: function(response){
+	      fig_elem.html(response.html);
+	      Card.initLightSlider(fig_elem.find('.gallery'), Card.enableTouch());
+	    }
+	  });
 	}
 }

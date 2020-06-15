@@ -15,7 +15,12 @@
       #buildings.tab-pane.fade.in.active
         - if @per_page_buildings.present?
           .resultsList
-            #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :building
+            - first_4    = @all_buildings.first(4)
+            - remainings = @all_buildings - first_4
+            #load-more-buildings.row
+              = render partial: 'buildings/building',    :collection => first_4,    :as => :building
+              = render partial: 'featured_agents/agent', :collection => @agents,    :as => :agent
+              = render partial: 'buildings/building',    :collection => remainings, :as => :building
           
           - if @all_buildings.blank? && @per_page_buildings.total_pages == @per_page_buildings.current_page
             .text-center{style: 'padding: 12px 4px;'}= no_search_result_text

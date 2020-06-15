@@ -44,6 +44,9 @@
                   %input.apple-switch.sb-sm.feature-agent{type: 'checkbox', checked: agent.active, style: 'margin: 0px;', data: { agentid: agent.id, fbby: 'manager', expired: agent.expired? ? 'expired' : '', billingurl: agent.expired? ? new_manager_featured_agent_user_path(current_user, type: 'billing', object_id: agent.id) : '' } }
 
 :css
-  table.dataTable tr th, table.dataTable tr td{
+  table.dataTable tr th, 
+  table.dataTable tr td,
+  table.table tr th,
+  table.table tr td{
     padding: 8px 4px;
   }

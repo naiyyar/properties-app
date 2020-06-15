@@ -129,9 +129,11 @@ Rails.application.routes.draw do
 
   # multisteps Forms
   resources :user_steps, :building_steps, :unit_steps, :featured_agent_steps
+  
   resources :featured_agents do
     resources :uploads
-    get :preview, on: :member
+    get :preview,    on: :member
+    get :get_images, on: :collection
   end
 
   resources :units do
