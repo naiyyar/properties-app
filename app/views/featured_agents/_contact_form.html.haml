@@ -19,7 +19,7 @@
 
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
-				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control multiselect', prompt: 'Neighborhood Interested In*', multiple: true
+				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control', multiple: true
 
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
@@ -39,6 +39,16 @@
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%div= submit_tag 'Send Message', class: "btn btn-blue btn-block font-bold"
 
+%script{src: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js'}
+%link{rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css'}
+
+:javascript
+	$('#contact_neighborhoods').multiselect({
+		nonSelectedText: 'Neighborhood Interested In*',
+		buttonWidth: '100%',
+		buttonClass: 'btn-custom-multiselect'
+	});
+
 :css
 	#agent-info{
 		padding: 20px;
@@ -51,4 +61,26 @@
 	#agent-info	p{
 		padding: 0px;
 		margin: 2px 0px;
+	}
+
+	.btn-custom-multiselect{
+		height: 44px;
+		padding: 10px 14px;
+		text-align: left;
+		background: #fff;
+		border: 1px solid #dfdfdf;
+		-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	}
+
+	.btn-custom-multiselect .caret{
+		position: absolute;
+		right: 4px;
+		top: 21px;
+	}
+
+	.multiselect-container.dropdown-menu{
+		width: 100%;
 	}

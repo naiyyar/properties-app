@@ -30,7 +30,6 @@
 //= require jquery-fileupload/basic
 //= require moment
 //= require bootstrap-datetimepicker
-//= require bootstrap-multiselect
 //= require filterrific/filterrific-jquery
 //= require load_more
 //= require input_validations
