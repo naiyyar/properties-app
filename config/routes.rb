@@ -132,7 +132,11 @@ Rails.application.routes.draw do
   
   resources :featured_agents do
     resources :uploads
-    get :preview,    on: :member
+    member do
+      get :preview
+      get :contact
+      post :contact_agent
+    end
     get :get_images, on: :collection
   end
 

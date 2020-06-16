@@ -1,8 +1,8 @@
 class FeaturedAgentsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_featured_agent, only: [:show, :edit, :update, :destroy, :preview, :get_images]
+  before_action :set_featured_agent, except: [:index, :create, :new]
   before_action :set_uploads, only: [:preview, :get_images]
-  before_action :set_neighborhoods, only: [:new, :edit]
+  before_action :set_neighborhoods, only: [:new, :edit, :contact]
   
   # GET /featured_agents
   # GET /featured_agents.json
@@ -24,6 +24,15 @@ class FeaturedAgentsController < ApplicationController
 
   def preview
     
+  end
+
+  def contact
+
+  end
+
+  def contact_agent
+    UserMailer.contact_agent(@featured_agent.email, params[:contact]).deliver
+    redirect_to :back, notice: 'Messsage successfully sent.'
   end
 
   def get_images
@@ -73,7 +82,7 @@ class FeaturedAgentsController < ApplicationController
   def update
     respond_to do |format|
       if @featured_agent.update(featured_agent_params)
-        format.html { redirect_to @featured_agent, notice: 'Featured agent was successfully updated.' }
+        format.html { redirect_to redirect_path, notice: 'Featured agent was successfully updated.' }
         format.json { render :show, status: :ok, location: @featured_agent }
       else
         format.html { render :edit }
@@ -124,13 +133,13 @@ class FeaturedAgentsController < ApplicationController
   def redirect_path
     @featured_agent.featured_by_manager? ? 
     billing_or_featured_list_path : 
-    featured_agents_url
+    featured_agent_steps_path(agent_id: @featured_agent.id)
   end
   #featured_agent_steps_path(agent_id: @featured_agent.id)
   def billing_or_featured_list_path
     @featured_agent.expired? ? 
     new_manager_featured_agent_user_path(current_user, type: 'billing', object_id: @featured_agent.id) :
-    agenttools_user_path(current_user, type: 'featured')
+    featured_agent_steps_path(agent_id: @featured_agent.id)
   end
 
   def render_slider_partial

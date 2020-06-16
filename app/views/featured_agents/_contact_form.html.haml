@@ -1,0 +1,55 @@
+#agent-info
+	.row
+		.col-lg-2.col-xs-4
+			=image_tag agent_image(@featured_agent.uploads.first), style: 'width: 100%;height: 100%;'
+		.col-lg-10.col-xs-8
+			%p.font-bold.font-14=@featured_agent.full_name
+			%p.font-14=@featured_agent.broker_firm
+			%p.font-14=number_to_phone(@featured_agent.phone, area_code: true)
+
+	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'form-horizontal' do
+		.row
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				%label
+				= text_field_tag 'contact[email]', nil,  class: 'form-control', placeholder: 'Email*', required: true
+
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				%label
+				= text_field_tag 'contact[phone]', nil, class: 'form-control', placeholder: 'Phone'
+
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				%label
+				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control multiselect', prompt: 'Neighborhood Interested In*', multiple: true
+
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				%label
+				= select_tag 'contact[bedrooms]', options_for_select(bedrooms_options), class: 'form-control', prompt: 'Bedrooms*'
+
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				%label
+				= select_tag 'contact[budget]', options_for_select(budgets_options), class: 'form-control', prompt: 'Budget*'
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				%label
+				= text_area_tag 'contact[message]', message, class: 'form-control', rows: 4
+		.row
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				%p.font-bold.font-14{style: 'padding: 18px 0px;'} Agents typically charge a commission rate equal to 1 months rent or more for their services.
+
+		.form-group
+			.pull-right
+				= link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal' unless block_class.present?
+				= submit_tag 'Send Message', class: "btn btn-blue #{block_class}"
+
+:css
+	#agent-info{
+		padding: 20px;
+	}
+
+	#agent-info img{
+		border: 1px solid #ddd;
+	}
+	
+	#agent-info	p{
+		padding: 0px;
+		margin: 2px 0px;
+	}

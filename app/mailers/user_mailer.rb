@@ -30,6 +30,22 @@ class UserMailer < ApplicationMailer
 		)
 	end
 
+	def contact_agent to_email, params
+		@to_email      = to_email
+		@from_email    = params[:email]
+		@phone         = params[:phone]
+		@neighborhoods = params[:neighborhoods]
+		@bedrooms			 = params[:bedrooms]
+		@budget        = params[:budget]
+		@message			 = params[:message]
+		subject = "[Inquiry From Transparentcity User] regarding assistance on rental apartment search from #{@from_email}"
+		mail(
+			to: @to_email,
+			from: @from_email,
+			subject: subject
+		)
+	end
+
 
 	######## EMAIL Structure ########
 	# from:		transparentcity <hello@transparentcity.co>

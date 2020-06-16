@@ -15,9 +15,9 @@
 .row
   .col-lg-12
     .pull-right
-      = link_to 'Cancel', agenttools_user_path(current_user, type: 'featured')
+      = link_to 'Cancel', @featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path
       = link_to 'Back', wizard_path(:add_photos, agent_id: @featured_agent.id), class: 'btn btn-default'
-      = link_to 'Next', billing_or_agent_list_path, class: 'btn btn-primary'
+      = link_to 'Next', @featured_agent.featured_by_manager? ? billing_or_agent_list_path : featured_agents_path, class: 'btn btn-primary'
 
 
 :javascript

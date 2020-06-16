@@ -46,8 +46,8 @@
             .row
             - if @featured_agent.draft_edit? || @featured_by == 'admin'
               = render 'featured_buildings/admin_form_fields', f: f, object: f.object
-            - else
-              - @submit_text = 'Next'
+              
+            - @submit_text = 'Next'
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group

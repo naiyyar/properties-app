@@ -12,5 +12,5 @@
       %br
       .contact-links
         .c-links
-          %section=link_to "Work With #{agent.first_name}", '#', class: 'btn btn-primary'
+          %section=link_to "Work With #{agent.first_name}", contact_featured_agent_path(agent), class: 'btn btn-primary', remote: true
           %section=link_to "#{agent.first_name}'s Profile", agent.website, class: 'btn btn-default', target: '_blank'
