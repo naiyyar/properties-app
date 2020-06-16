@@ -40,9 +40,20 @@ class UserMailer < ApplicationMailer
 		@message			 = params[:message]
 		subject = "[Inquiry From Transparentcity User] regarding assistance on rental apartment search from #{@from_email}"
 		mail(
+			from: EMAIL_WITH_NAME,
+			reply_to: @from_email,
 			to: @to_email,
-			from: @from_email,
+			# cc: "#{@from_email}, hello@transparentcity.co",  
 			subject: subject
+		)
+	end
+
+	def contact_agent_sender_copy agent, sender_email
+		mail(
+			from: EMAIL_WITH_NAME,
+			reply_to: sender_email,
+			to: sender_email,
+			subject: "Your message to #{agent.full_name} has been sent."
 		)
 	end
 
@@ -81,11 +92,11 @@ class UserMailer < ApplicationMailer
 	# mailed-by:	hello.transparentcity.co
 	# signed-by:	transparentcity.co
 	def enquiry_sent_mail_to_sender contact
-		@contact = contact
-		@contact_email = @contact.email
-		@building = contact.building
-		@building_name = @building.building_name_or_address
-		subject = "Your message about #{@building_name} has been sent."
+		@contact 				= contact
+		@contact_email 	= @contact.email
+		@building 			= contact.building
+		@building_name 	= @building.building_name_or_address
+		subject 				= "Your message about #{@building_name} has been sent."
 		email_with_name = %(transparentcity <hello@transparentcity.co>)
 		mail(
 			to: @contact_email,
