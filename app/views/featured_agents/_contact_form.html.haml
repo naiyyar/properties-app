@@ -34,11 +34,10 @@
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%p.font-bold.font-14{style: 'padding: 18px 0px;'} Agents typically charge a commission rate equal to 1 months rent or more for their services.
-
-		.form-group
-			.pull-right
-				= link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal' unless block_class.present?
-				= submit_tag 'Send Message', class: "btn btn-blue #{block_class}"
+		
+		.row
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				%div= submit_tag 'Send Message', class: "btn btn-blue btn-block font-bold"
 
 :css
 	#agent-info{
