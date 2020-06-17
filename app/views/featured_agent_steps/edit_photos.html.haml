@@ -5,8 +5,10 @@
 		.pull-right
 			=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success', remote: true
 %h2
+
 %p.font-bold.font-16 Edit Photos
-= render partial: 'featured_agents/photos'
+%div{style: 'padding: 10px;'}
+	= render partial: 'featured_agents/photos'
 
 - if !browser.device.mobile?
 	#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}

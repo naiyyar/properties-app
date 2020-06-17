@@ -7,7 +7,7 @@ class Ability
       cannot :index, [Building, Unit, Review, Contact, Upload]
       cannot :documents, Upload
       cannot [:contribution, :index, :managertools, :agenttools], User
-      cannot [:index, :new, :edit], ManagementCompany
+      cannot [:index, :new, :edit], [ManagementCompany, FeaturedAgent, FeaturedBuilding]
       cannot [:index, :show, :saved_buildings], User
       cannot [:index, :create, :update, :destroy, :new], [BrokerFeePercent, RentMedian, FeaturedComp, NeighborhoodLink, FeaturedBuilding, VideoTour]
       cannot [:index, :add_or_update_prices], Price

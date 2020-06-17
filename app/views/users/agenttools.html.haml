@@ -45,7 +45,7 @@
 										%td.text-center
 											=link_to 'Delete', 'javascript:;', class: 'btn btn-danger btn-sm delete-card', data: { disable_with: 'Deleting...', cid:  card[:id]}
 						.pull-left
-							=link_to 'Add New Card', new_featured_agent_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm'
+							=link_to 'Add New Card', new_manager_featured_agent_user_path(current_user, type: 'add_new_card'), class: 'btn btn-primary btn-sm'
 				%h2 Billing Transactions
 
 				= render 'billings/billings'

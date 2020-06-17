@@ -68,7 +68,7 @@ class FeaturedAgentsController < ApplicationController
     respond_to do |format|
       if @featured_agent.save
         format.html { 
-          redirect_to redirect_path, notice: 'Featured agent was successfully created.' 
+          redirect_to featured_agent_steps_path(agent_id: @featured_agent.id), notice: 'Featured agent was successfully created.' 
         }
         format.json { render :show, status: :created, location: @featured_agent }
       else
@@ -83,7 +83,7 @@ class FeaturedAgentsController < ApplicationController
   def update
     respond_to do |format|
       if @featured_agent.update(featured_agent_params)
-        format.html { redirect_to redirect_path, notice: 'Featured agent was successfully updated.' }
+        format.html { redirect_to featured_agent_steps_path(agent_id: @featured_agent.id), notice: 'Featured agent was successfully updated.' }
         format.json { render :show, status: :ok, location: @featured_agent }
       else
         format.html { render :edit }

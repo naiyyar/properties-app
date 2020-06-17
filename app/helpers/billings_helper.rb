@@ -4,7 +4,11 @@ module BillingsHelper
 	end
 
 	def previous_page_path
-		params[:fb_id].present? ? edit_featured_building_path(params[:fb_id]) : session[:back_to]
+		unless @object_type == 'FeaturedAgent'
+			params[:object_id].present? ? edit_featured_building_path(params[:object_id]) : session[:back_to]
+		else
+			wizard_path(:edit_photos, agent_id: @featured_agent.id)
+		end
 	end
 
 	def card_brand_image brand

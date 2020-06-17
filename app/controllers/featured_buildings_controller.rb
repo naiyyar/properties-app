@@ -32,7 +32,7 @@ class FeaturedBuildingsController < ApplicationController
     @featured_by       = params[:featured_by] 
     @featured_building = FeaturedBuilding.new
     @price             = Billing::FEATURED_BUILDING_PRICE
-    @object_id         = params[:object_id]
+    @object_id         = params[:object_id] || params[:fb_id]
     @object_type       = 'FeaturedBuilding'
     @saved_cards       = BillingService.new(current_user).get_saved_cards rescue nil
   end
