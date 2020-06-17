@@ -7,7 +7,7 @@ module BillingsHelper
 		unless @object_type == 'FeaturedAgent'
 			params[:object_id].present? ? edit_featured_building_path(params[:object_id]) : session[:back_to]
 		else
-			wizard_path(:edit_photos, agent_id: @featured_agent.id)
+			params[:object_id].present? ? edit_featured_agent_path(params[:object_id]) : session[:back_to]
 		end
 	end
 
