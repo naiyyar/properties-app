@@ -3,6 +3,8 @@ class FeaturedAgent < ApplicationRecord
 	include Imageable
 	include Billable
 
+  extend SplitViewAgentDisplay
+
 	belongs_to :user
 	has_many   :billings
 
@@ -30,10 +32,6 @@ class FeaturedAgent < ApplicationRecord
 
   def featured?
     false
-  end
-
-  def self.get_random_agent nb
-    where(neighborhood: nb).active.order('RANDOM()').limit(1)
   end
 
   private

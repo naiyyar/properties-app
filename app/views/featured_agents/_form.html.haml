@@ -55,7 +55,7 @@
                   = f.select :neighborhood, options_for_select(@neighborhoods, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
               
               = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_agent.new_record?
-              = f.hidden_field :user_id, value: current_user.id if current_user.present?
+              = f.hidden_field :user_id, value: current_user&.id
             
             .form-group
               .col-md-7.col-sm-7.col-xs-7
