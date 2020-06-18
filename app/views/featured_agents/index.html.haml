@@ -1,0 +1,21 @@
+- if current_user.has_role? :admin
+  - if current_user.present?
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+        .pull-right
+          - @featured_by = 'admin'
+          = link_to 'Add New Featured Agent', new_featured_agent_path(featured_by: @featured_by), class: 'btn btn-blue'
+    %h2
+  
+  .pull-right= render 'layouts/shared/filterrific_form'
+  
+  = render 'featured_agents/agents'
+  
+  .text-center
+    = will_paginate @featured_agents, renderer: BootstrapPagination::Rails
+
+
+:css
+  #sortable_filter{
+    display: none;
+  }

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	load_and_authorize_resource :find_by => :slug 
 	before_action :authenticate_user!, only: [:show, :edit, :saved_buildings]
-	before_action :set_user, only: [:edit, :update, :show, :contribution, :saved_buildings, :managertools]
+	before_action :set_user, except: [:index, :create]
 
 	def index
 		@users = User.order('created_at desc')
@@ -42,11 +42,39 @@ class UsersController < ApplicationController
 	    																	.order('created_at desc')
 	  else
 	  	@billings = @current_user.billings
-    														.includes(:featured_building)
-    														.paginate(:page => params[:page], :per_page => 100)
-	  	@saved_cards = BillingService.new.get_saved_cards(current_user)
+	  													 .for_type('FeaturedBuilding')
+    													 .paginate(:page => params[:page], :per_page => 100)
+	  	@saved_cards = BillingService.new(current_user).get_saved_cards
 	  end
 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+	end
+
+	def agenttools
+		@type 					  = params[:type]
+		session[:back_to] = request.fullpath
+		unless @type == 'billing'
+			@filterrific = initialize_filterrific(
+	      FeaturedAgent,
+	      params[:filterrific],
+	      available_filters: [:search_query]
+	    ) or return
+
+	    @featured_agents = @filterrific.find
+	    															 .where(user_id: @user.id).by_manager
+	    															 .paginate(:page => params[:page], :per_page => 100)
+	    															 .order('created_at desc')
+	  	@photos_count = @featured_agents.sum(:uploads_count)
+	  else
+	  	@billings = @current_user.billings
+	  													 .for_type('FeaturedAgent')
+    													 .paginate(:page => params[:page], :per_page => 100)
+	  	@saved_cards = BillingService.new(current_user).get_saved_cards
+	  end
+    
     respond_to do |format|
       format.html
       format.js

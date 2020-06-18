@@ -1,0 +1,16 @@
+.col-xs-12.col-sm-12.col-md-6.col-lg-6
+  .card.search-view-card.bordered{'data-agentid' => agent.id}
+    .figure{style: 'position: relative;', id: "figure#{agent.id}"}
+      .shimmer
+          
+    .building-detail-card
+      %h2.name-or-add=agent.full_name
+      .cardAddress= agent.neighborhood
+      .cardAddress= agent.broker_firm
+      .cardAddress=link_to "#{number_to_phone(phone = agent.try(:phone), area_code: true)}", "tel:#{phone}", class: 'hyper-link'
+      %br
+      %br
+      .contact-links
+        .c-links
+          %section=link_to "Work With #{agent.first_name}", contact_featured_agent_path(agent), class: 'btn btn-primary', remote: true
+          %section=link_to "#{agent.first_name}'s Profile", agent.website, class: 'btn btn-default', target: '_blank'

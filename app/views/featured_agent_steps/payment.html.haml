@@ -1,0 +1,6 @@
+= render 'billings/form'
+
+%script{type: 'text/javascript', src: 'https://js.stripe.com/v3/'}
+
+:javascript
+	Stripe.setPublishableKey(#{STRIPE_PUBLIC_KEY});

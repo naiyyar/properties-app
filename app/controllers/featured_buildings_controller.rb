@@ -10,7 +10,10 @@ class FeaturedBuildingsController < ApplicationController
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @featured_buildings = @filterrific.find.paginate(:page => params[:page], :per_page => 100).includes(:user, :billings => [:user], :building => [:management_company]).order('created_at desc')
+    @featured_buildings = @filterrific.find
+                                      .paginate(:page => params[:page], :per_page => 100)
+                                      .includes(:user, :building => [:management_company])
+                                      .order('created_at desc')
 
     respond_to do |format|
       format.html
@@ -28,7 +31,10 @@ class FeaturedBuildingsController < ApplicationController
     session[:back_to]  = request.fullpath if params[:type] != 'billing'
     @featured_by       = params[:featured_by] 
     @featured_building = FeaturedBuilding.new
-    @saved_cards       = BillingService.new.get_saved_cards(current_user) rescue nil
+    @price             = Billing::FEATURED_BUILDING_PRICE
+    @object_id         = params[:object_id] || params[:fb_id]
+    @object_type       = 'FeaturedBuilding'
+    @saved_cards       = BillingService.new(current_user).get_saved_cards rescue nil
   end
 
   # GET /featured_buildings/1/edit

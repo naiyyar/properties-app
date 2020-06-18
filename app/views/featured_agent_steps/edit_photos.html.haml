@@ -1,0 +1,35 @@
+.row
+	.col-lg-10.col-sm-10.col-xs-10
+		=render 'agent_info'
+	.col-lg-2.col-sm-2.col-xs-2
+		.pull-right
+			=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success', remote: true
+%h2
+
+%p.font-bold.font-16 Edit Photos
+%div{style: 'padding: 10px;'}
+	= render partial: 'featured_agents/photos'
+
+- if !browser.device.mobile?
+	#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					%button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+						%span{'aria-hidden' => 'true'} ×
+					%h4.modal-title
+				.modal-body.no-padding
+					= render 'featured_agents/thumbnail_preview'
+- else
+	.modal-full.lease-contact-modal{style: 'display: none; background: #fff;'}
+		.row{style: 'position: relative;'}
+			.col-lg-12
+				.text-center{style: 'border-bottom: 1px solid #ddd;'}
+					%h4.text-center{style: 'margin-top: 10px; margin-bottom: 10px;'}
+
+			%div.text-right.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
+				= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, 'javascript:;', class: 'closeContact'
+    
+		= render 'featured_agents/thumbnail_preview'
+				
+

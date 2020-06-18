@@ -120,14 +120,26 @@ Rails.application.routes.draw do
     member do
       get :contribution
       get :saved_buildings
-      get '/managertools/:type',        to: 'users#managertools',     as: :managertools
-      get '/managertools/:type/new',    to: 'featured_buildings#new', as: :new_manager_featured_building
+      get '/managertools/:type',     to: 'users#managertools',     as: :managertools
+      get '/managertools/:type/new', to: 'featured_buildings#new', as: :new_manager_featured_building
+      get '/agenttools/:type',       to: 'users#agenttools',       as: :agenttools
+      get '/agenttools/:type/new',   to: 'featured_agents#new',    as: :new_manager_featured_agent
     end
   end
 
   # multisteps Forms
-  resources :user_steps, :building_steps, :unit_steps
+  resources :user_steps, :building_steps, :unit_steps, :featured_agent_steps
   
+  resources :featured_agents do
+    resources :uploads
+    member do
+      get :preview
+      get :contact
+      post :contact_agent
+    end
+    get :get_images, on: :collection
+  end
+
   resources :units do
     resources :reviews
     resources :uploads

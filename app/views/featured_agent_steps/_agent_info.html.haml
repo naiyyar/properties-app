@@ -1,0 +1,15 @@
+.row
+	.col-lg-12
+		.media
+			.media-left
+				.media-body
+					%h1.pageTitle=@featured_agent.full_name
+					%div=@featured_agent.email
+					%div="License Number: #{@featured_agent.license_number}"
+					%div="Broker Firm Name: #{@featured_agent.broker_firm}"
+					%div=link_to "#{number_to_phone(phone = @featured_agent.try(:phone), area_code: true)}", "tel:#{phone}", class: 'hyper-link'
+					%div=link_to 'Profile Website', @featured_agent.website, target: '_blank' if @featured_agent.website.present?
+					- nb = @featured_agent.neighborhood
+					%div
+						Featured In:
+						=link_to "#{nb}", '#'

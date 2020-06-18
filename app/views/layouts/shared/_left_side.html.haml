@@ -51,9 +51,18 @@
           %a{href: advertise_with_us_path}
             %span.navLabel Advertise
 
-        %li.btn_contribute
-          %a{href: managertools_user_path(current_user, type: 'featured')}
-            %span.navLabel Manager Tools
+        %li.hasSub
+          %a{href: 'javascript:;'}
+            %span.navLabel Tools
+            %span.fa.fa-angle-left.arrowRight
+          
+          %ul
+            %li
+              %a{href: agenttools_user_path(current_user, type: 'featured')}
+                %span.navLabel Agent Tools
+            %li
+              %a{href: managertools_user_path(current_user, type: 'featured')}
+                %span.navLabel  Manager Tools
 
         %li.btn_contribute
           %a{href: edit_user_path(current_user)}

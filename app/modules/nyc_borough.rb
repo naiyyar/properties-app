@@ -16,6 +16,34 @@ module NYCBorough
 		]
 	end
 
+	def midtown_manhattan_sub_borough
+		[
+			'Chelsea',
+			'Flatiron Distric',
+			'Gramercy Park',
+			"Hell's Kitchen",
+			'Kips Bay',
+			'Midtown East',
+			'Sutton Place',
+			'Midtown West ',
+			'Murray Hill',
+			'Roosevelt Island'
+		]
+	end
+
+	def upper_manhattan_sub_borough
+		@upper_manhattan_sub_borough ||= [
+			'East Harlem',
+			'Harlem ',
+			'South Harlem',
+			'Central Harlem',
+			'Hamilton Heights',
+			'Morningside Heights',
+			'Washington Heights',
+			'Hudson Heights'
+		]
+	end
+
 	def brooklyn_sub_borough
 		@brooklyn_sub_borough ||= ['Brooklyn Heights',
 															 'Bushwick','Clinton Hill',

@@ -1,13 +1,14 @@
 class BillingService
 	attr_accessor :payment_token, :customer_email
 
-	def initialize payment_token=nil, customer_email=nil
+	def initialize user, payment_token=nil
+		@current_user   = user
 		@payment_token 	= payment_token
-		@customer_email = customer_email
+		@customer_email = @current_user.email
 	end
 
-	def get_saved_cards current_user
-		saved_cards(current_user&.stripe_customer_id)
+	def get_saved_cards
+		saved_cards(@current_user&.stripe_customer_id)
 	end
 
 	def saved_cards cust_id
@@ -23,21 +24,31 @@ class BillingService
 	end
 
 	def create_source cust_id
-		customer.create_source(cust_id,{ source: @payment_token })
+		begin
+			customer.create_source(cust_id, { source: @payment_token })
+		rescue StandardError, AnotherError => e
+			# when No such customer
+			set_customer_id
+		end
 	end
 
 	def get_charge charge_id
 		stripe_charge.retrieve(charge_id) rescue nil
 	end
 
-	def get_customer_id current_user
-		if current_user.stripe_customer_id.present?
-      customer_id   = current_user.stripe_customer_id
-    else
-      customer_id   = self.create_stripe_customer.id
-      current_user.update_column(:stripe_customer_id, customer_id)
-    end
+	def get_customer_id
+		customer_id = if @current_user.stripe_customer_id.present?
+							      @current_user.stripe_customer_id
+							    else
+							      set_customer_id
+							    end
     return customer_id
+	end
+
+	def set_customer_id
+		customer_id = self.create_stripe_customer.id
+		@current_user.update_column(:stripe_customer_id, customer_id)
+		return customer_id
 	end
 
 	def create_charge! options={}
@@ -50,7 +61,7 @@ class BillingService
 		stripe_charge.create(
     	customer:  		customer_id,
     	card: 				card_id,
-      amount: 	 		Billing::PRICE * 100,
+      amount: 	 		billing.price * 100,
       currency:  		'usd',
       description: 	billing.billing_description,
       receipt_email: @customer_email

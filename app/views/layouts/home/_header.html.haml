@@ -35,7 +35,8 @@
         %li.no-hover-underline.parent
           = render 'layouts/shared/admin_nav_items'
         %li.no-hover-underline.parent
-          %a{href: managertools_user_path(current_user, type: 'featured')} Manager Tools
+          = render 'layouts/shared/tools_nav'
+        
         %li.no-hover-underline.parent
           = render 'layouts/shared/user_profile'
 

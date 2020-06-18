@@ -2,18 +2,18 @@
   .item
     .clearfix{ style: 'width:100%;' }
       = link_to show_path, style: 'cursor: pointer;' do
-        - if @similar_properties.present? or building.featured?
+        - if @similar_properties.present? or object.featured?
           %h4.comp.featured.round Featured
         
         %h4.lightslider-slides-counts.round
           %span.current 1
           %span.total="/ #{images_count}"
 
-        - if building.video_tours.any?
+        - if object.kind_of?(Building) && object.video_tours.any?
           .video-tour-icon
             %span.fa.fa-video-camera
 
-      %ul.gallery.list-unstyled{ id: "image-gallery#{building.id}", style: "height: 225px;", data: { buildingid: "#{building.id}", view_type: 'split', path:  show_path } }
+      %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 225px;', data: { objectid: "#{object.id}", view_type: 'split', path: show_path, resource: object.class.to_s.tableize } }
         %li
           = link_to show_path, style: 'cursor: pointer;' do
             .bg-size-cover.h-lg{ style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: "#{first_image.id}" } }
@@ -23,6 +23,6 @@
             %li{data: { listindex: "#{count}" } }
 - else
   %a{ href: show_path, style: 'cursor: pointer;' }
-    - if @similar_properties.present? or building.featured?
+    - if @similar_properties.present? or object.featured?
       %h4.comp.featured.round Featured
     .bg-size-cover.h-lg{style: "background-image: url(#{image_url('no-photo.png') })"}

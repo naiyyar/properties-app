@@ -1,7 +1,7 @@
 module Imageable
 	extend ActiveSupport::Concern
 	included do
-		has_many :uploads, as: :imageable
+		has_many :uploads, as: :imageable, dependent: :destroy
 		accepts_nested_attributes_for :uploads, :allow_destroy => true
 	end
 

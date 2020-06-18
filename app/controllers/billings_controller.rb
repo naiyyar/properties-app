@@ -42,9 +42,9 @@ class BillingsController < ApplicationController
 
   def create_new_card
     card_id         = params[:billing][:stripe_card_id]
-    billing_service = BillingService.new(card_id, params[:email])
+    billing_service = BillingService.new(current_user, card_id)
     begin
-      customer_id = billing_service.get_customer_id(current_user)
+      customer_id = billing_service.get_customer_id
       billing_service.create_source(customer_id)
     rescue Stripe::CardError => e
       puts "ERROR: #{e.message}"
@@ -65,13 +65,13 @@ class BillingsController < ApplicationController
 
   def pay_using_saved_card
     @billing = Billing.new(billing_params)
-    email    = billing_params[:email]
     respond_to do |format|
-      if @billing.save_and_charge_existing_card!( customer_id:  @customer_id,
-                                                  email:        email,
-                                                  card_id:      billing_params[:billing_card_id])
+      if @billing.save_and_charge_existing_card!( user:         current_user,
+                                                  customer_id:  @customer_id,
+                                                  card_id:      billing_params[:billing_card_id]
+                                                )
         format.html {
-          redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.'
+          redirect_to redirect_path, notice: 'Billing was successfully created.'
         }
       else
         format.html { 
@@ -86,7 +86,9 @@ class BillingsController < ApplicationController
     @billing = Billing.new(billing_params)
     respond_to do |format|
       if @billing.save_and_make_payment!
-        format.html { redirect_to managertools_user_path(current_user, type: 'featured'), notice: 'Billing was successfully created.' }
+        format.html { 
+          redirect_to redirect_path, notice: 'Billing was successfully created.' 
+        }
         format.json { render :show, status: :created, location: @billing }
       else
         format.html { 
@@ -125,15 +127,32 @@ class BillingsController < ApplicationController
     end
 
     def billing_params
-      params.require(:billing).permit(:user_id, :featured_building_id, :amount, :stripe_card_id, :email, :description, :billing_card_id, :brand, :last4)
+      params.require(:billing).permit(:user_id,
+                                      :billable_id, 
+                                      :billable_type,
+                                      :amount, 
+                                      :stripe_card_id, 
+                                      :email, 
+                                      :description, 
+                                      :billing_card_id, 
+                                      :brand, 
+                                      :last4)
     end
 
     def set_customer_id
       @customer_id = current_user.stripe_customer_id
     end
 
+    def redirect_path
+      if @billing.billable_type == 'FeaturedBuilding'
+        managertools_user_path(current_user, type: 'featured')
+      else
+        agenttools_user_path(current_user, type: 'featured')
+      end
+    end
+
     # TODO: TO REMOVE WHEN MERGING WITH PRODUCTION
     def get_card
-      @card = @billing.card(@customer_id)
+      @card = @billing.card(current_user, @customer_id)
     end
 end
