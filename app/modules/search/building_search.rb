@@ -94,9 +94,13 @@ module Search
     end
 
     def buildings_in_neighborhood search_term, term_with_city = nil
-      results = where('LOWER(neighborhood) = ?', search_term)
-                .or(where('LOWER(neighborhoods_parent) = ?', search_term))
-                .or(where('LOWER(neighborhood3) = ?', search_term))
+      results = where('LOWER(neighborhood) = ? 
+                      OR LOWER(neighborhoods_parent) = ? 
+                      OR LOWER(neighborhood3) = ? 
+                      OR LOWER(city) = ?', search_term, 
+                                           search_term, 
+                                           search_term, 
+                                           search_term )
       # Neighborhood Little italy exist in manhattan as well as Bronx
       return results unless search_term == 'Little Italy'
       results.where(city: nb_city(term_with_city))
