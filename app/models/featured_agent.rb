@@ -4,6 +4,7 @@ class FeaturedAgent < ApplicationRecord
 	include Billable
 
   extend SplitViewAgentDisplay
+  extend RenewPlan
 
 	belongs_to :user
 	has_many   :billings

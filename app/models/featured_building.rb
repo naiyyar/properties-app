@@ -1,6 +1,8 @@
 class FeaturedBuilding < ApplicationRecord
   include PgSearch
   include Billable
+
+  extend RenewPlan
   
   belongs_to :user
   belongs_to :building
