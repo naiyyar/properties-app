@@ -61,11 +61,11 @@
               .col-md-7.col-sm-7.col-xs-7
                 .pull-right
                   - if @featured_agent.new_record?
-                    = link_to 'Cancel', params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default cancel'
+                    = link_to 'Cancel', params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default cancel font-18'
                   - else
-                    = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default cancel'
+                    = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default cancel font-18'
               .col-md-5.col-sm-5.col-xs-5
-                = f.submit @submit_text, class: 'btn btn-primary btn-block'
+                = f.submit @submit_text, class: 'btn btn-primary btn-block font-18'
 
 :javascript
   $('.cancel').on('click', function(e){
