@@ -3,7 +3,8 @@
 namespace :featured_plan do
 	desc 'Renew plan 2 days before the end date, Making Expired featured buildings to inactive'
 	task renew_and_deactivate_featured_plan: :environment do
-		FeaturedBuilding.renew_and_deactivate_featured_plan
-		FeaturedAgent.renew_and_deactivate_featured_plan
+		['FeaturedBuilding', 'FeaturedAgent'].each do |klass|
+			klass.constantize.renew_and_deactivate_featured_plan
+		end
 	end
 end

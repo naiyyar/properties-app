@@ -13,7 +13,7 @@
               %th{width: '10%'} Firm
               %th{width: '10%'} Phone
               %th{width: '6%'} Website
-              %th{width: '6%'} (#{@photos_count}) Photos
+              %th{width: '10%'} (#{@photos_count}) Photos
               %th{width: '12%'} Start Date
               %th{width: '12%'} End Date
               %th{width: '6%'} Edit
@@ -24,12 +24,12 @@
           %tbody.table
             - @featured_agents.each do |agent|
               %tr
-                %td=link_to agent.id, edit_featured_agent_path(agent, featured_by: @featured_by)
-                %td=link_to agent.full_name
-                %td=link_to agent.try(:email), '#'
-                %td=link_to agent.try(:neighborhood)
-                %td=link_to agent.try(:broker_firm)
-                %td=link_to number_to_phone(agent.try(:phone), area_code: true)
+                %td=agent.id
+                %td=agent.full_name
+                %td=agent.try(:email)
+                %td=search_by_neighborhood_link(agent.try(:neighborhood), 'MANHATTAN', false)
+                %td=agent.try(:broker_firm)
+                %td=number_to_phone(agent.try(:phone), area_code: true)
                 %td=link_to '<span class="fa fa-globe"></span>'.html_safe, agent.website, target: '_blank' if agent.website.present?
                 %td=agent.uploads_count.to_i
                 %td=start_date(agent)

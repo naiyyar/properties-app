@@ -20,7 +20,7 @@
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
                   %label Email*
-                  =f.text_field :email, class: 'form-control validate', required: true
+                  =f.email_field :email, class: 'form-control validate', required: true
 
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
@@ -36,7 +36,7 @@
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
                   %label Phone Number
-                  =f.text_field :phone, class: 'form-control'
+                  =f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
 
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12

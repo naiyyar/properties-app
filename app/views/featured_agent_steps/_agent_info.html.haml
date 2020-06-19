@@ -4,12 +4,40 @@
 			.media-left
 				.media-body
 					%h1.pageTitle=@featured_agent.full_name
-					%div=@featured_agent.email
-					%div="License Number: #{@featured_agent.license_number}"
-					%div="Broker Firm Name: #{@featured_agent.broker_firm}"
-					%div=link_to "#{number_to_phone(phone = @featured_agent.try(:phone), area_code: true)}", "tel:#{phone}", class: 'hyper-link'
-					%div=link_to 'Profile Website', @featured_agent.website, target: '_blank' if @featured_agent.website.present?
-					- nb = @featured_agent.neighborhood
-					%div
-						Featured In:
-						=link_to "#{nb}", '#'
+		
+		%table.table.table-bordered-none{class: browser.device.mobile? ? 'small-sreen' : 'large-sreen'}
+			%tr
+				%td Email:
+				%td=@featured_agent.email
+			%tr
+				%td License Number:
+				%td=@featured_agent.license_number
+			%tr
+				%td Broker Firm Name:
+				%td=@featured_agent.broker_firm
+			%tr
+				%td Phone:
+				%td=link_to "#{number_to_phone(phone = @featured_agent.try(:phone), area_code: true)}", "tel:#{phone}", class: 'hyper-link'
+			
+			- if @featured_agent.website.present?
+				%tr
+					%td Profile Website:
+					%td=link_to 'Profile Website', @featured_agent.website, target: '_blank'
+			%tr
+				%td Featured In:
+				%td=@featured_agent.try(:neighborhood)
+
+:css
+	.table.large-sreen{
+		width: 34%;
+	}
+	.table.small-sreen{
+		width: 100%;
+	}
+	.table tr td{
+		font-size: 14px;
+		width: 10%;
+	}
+	.table-bordered-none tr td {
+		padding: 2px 0px 2px 0px !important;
+	}
