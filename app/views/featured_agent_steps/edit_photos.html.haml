@@ -1,14 +1,24 @@
 .row
-	.col-lg-10.col-sm-10.col-xs-10
-		= render 'agent_info'
+	.col-lg-4.col-sm-10.col-xs-10.col-lg-offset-3= render 'agent_info'
 	.col-lg-2.col-sm-2.col-xs-2
-		.pull-right
-			=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success', remote: true
-%h2
+		.text-left=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success', remote: true
+.row
+	.col-lg-12.col-xs-12.col-lg-offset-3
+		%p.font-bold.font-16 Edit Photos
 
-%p.font-bold.font-16 Edit Photos
-%div{style: 'padding: 10px;'}
-	= render partial: 'featured_agents/photos'
+.row
+	.col-lg-12.col-xs-12.col-lg-offset-3= render partial: 'featured_agents/photos'
+
+.row{style: 'display: contents;'}
+	.col-lg-12{style: 'height: 100px;'}
+
+.row
+	.col-lg-6.col-lg-offset-2
+		.form-group
+			.text-right
+				= link_to 'Cancel', @featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path, class: 'font-18'
+				= link_to 'Back', wizard_path(:add_photos, agent_id: @featured_agent.id), class: 'btn btn-default font-18'
+				= link_to 'Next', @featured_agent.featured_by_manager? ? wizard_path(:payment, agent_id: @featured_agent.id) : featured_agents_path, class: 'btn btn-primary font-18'
 
 - if !browser.device.mobile?
 	#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}

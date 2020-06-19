@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-lg-6">
 		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: 'dropzone form-horizontal', id: "new_upload_#{params[:upload_type]}" }) do |f|  %>
 		  <div class="fallback">
 		  	<% unless params[:upload_type] == 'documents' %>
@@ -17,7 +17,7 @@
 		<%if @imageable.kind_of? FeaturedAgent %>
 			<p class="font-14"> Upload a profile image of yourself here. You can edit images on the next step.</p>
 		<%end%>
-		<div class="from-group">
+		<div class="form-group">
 			<div class="pull-right">
 				<% if @imageable.kind_of? Unit %>
 					<%= link_to 'Done', unit_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done' %>

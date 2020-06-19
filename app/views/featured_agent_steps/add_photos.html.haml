@@ -1,5 +1,18 @@
-=render 'agent_info'
-%p.font-bold.font-16 Add Photos
-= render partial: 'uploads/form_fields'
+.row
+	.col-lg-4.col-sm-10.col-xs-10.col-lg-offset-3
+		= render 'agent_info'
+.row
+	.col-lg-12.col-lg-offset-3
+		%p.font-bold.font-16 Add Photos
+.row
+	.col-lg-12.col-xs-12.col-lg-offset-3
+		= render partial: 'uploads/form_fields'
 
 %br
+
+:css
+	.dropbox-container{
+		width: 100%;
+		text-align: center;
+		margin: 0 auto;
+	}

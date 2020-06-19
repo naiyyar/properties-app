@@ -24,7 +24,7 @@ body {
   height: 100%;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.42857143;
   font-family: 'Open Sans', sans-serif !important;
   background-color: #fff !important;
@@ -49,6 +49,12 @@ body {
       width: 49%;
     }
   }
+}
+
+.panel-default > .panel-heading {
+  color: #fff;
+  background-color: #2b78e4;
+  border-color: #ddd;
 }
 
 #new_review{
