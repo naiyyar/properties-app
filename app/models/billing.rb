@@ -66,7 +66,7 @@ class Billing < ApplicationRecord
 		card 		 	 = options[:card]
 		user_email = user.email
     billing  	 = Billing.new({email:           user_email,
-                              amount:          PRICE,
+                              amount:          prices(options[:type]),
                               billable_id: 		 options[:id],
                               billable_type:   options[:type],
                               user_id:         user.id,
@@ -86,6 +86,10 @@ class Billing < ApplicationRecord
 
 	def price
 		billable_type == 'FeaturedAgent' ? FEATURED_AGENT_PRICE : FEATURED_BUILDING_PRICE
+	end
+
+	def self.prices(type)
+		type == 'FeaturedAgent' ? FEATURED_AGENT_PRICE : FEATURED_BUILDING_PRICE
 	end
 	
 	def billing_description
