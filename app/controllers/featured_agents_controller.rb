@@ -97,7 +97,7 @@ class FeaturedAgentsController < ApplicationController
   def destroy
     @featured_agent.destroy
     respond_to do |format|
-      format.html { redirect_to featured_agents_url, notice: 'Featured agent was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Featured agent was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

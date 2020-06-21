@@ -5,7 +5,7 @@
           
     .building-detail-card
       %h2.name-or-add=agent.full_name
-      .cardAddress= agent.neighborhood
+      .cardAddress="#{agent.neighborhood} Expert"
       .cardAddress.font-14{style: 'color: #000;'}= agent.broker_firm
       .cardAddress.font-14=link_to "#{number_to_phone(phone = agent.try(:phone), area_code: true)}", "tel:#{phone}", class: 'hyper-link'
       %br
