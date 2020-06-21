@@ -388,6 +388,10 @@ input[type="radio"], input[type="checkbox"] {
   text-shadow: none;
 }
 
+.form-group label{
+  font-weight: bolder;
+}
+
 /* Media Query */
 
 @media screen and (max-width: 767px) {

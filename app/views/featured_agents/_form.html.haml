@@ -24,8 +24,8 @@
 
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
-                  %label License Number*
-                  =f.text_field :license_number, class: 'form-control validate', required: true
+                  %label Phone Number
+                  =f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
 
             .row
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
@@ -35,8 +35,8 @@
 
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
-                  %label Phone Number
-                  =f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
+                  %label License Number*
+                  =f.text_field :license_number, class: 'form-control validate', required: true
 
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
