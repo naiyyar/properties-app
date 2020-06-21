@@ -31,7 +31,7 @@ module HomeConcern
       @buildings_count    = @hash.length rescue 0
     end
     
-    @agents    = FeaturedAgent.get_random_agent(@search_string)
+    @agents    = FeaturedAgent.get_random_agent(@search_string, searched_by)
     @meta_desc = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
                                                              count: @buildings_count, 
                                                              term:  @search_term)

@@ -1,6 +1,8 @@
 module SplitViewAgentDisplay
-  def get_random_agent nb
-    where(neighborhood: neighborhood(nb)).active.order('RANDOM()').limit(1)
+  def get_random_agent nb, searched_by
+    agents = self.active.order('RANDOM()')
+    agents = agents.where(neighborhood: neighborhood(nb)) unless searched_by == 'nyc'
+    return agents.limit(1)
   end
 
   def neighborhood nb
