@@ -43,9 +43,6 @@
                 .form-group
                   %label Profile Website
                   =f.text_field :website, class: 'form-control'
-            .row
-            - if @featured_agent.draft_edit? || @featured_by == 'admin'
-              = render 'featured_buildings/admin_form_fields', f: f, object: f.object
               
             - @submit_text = 'Next'
             .row
@@ -53,6 +50,11 @@
                 .form-group
                   %label Neighborhood To Be Featured In*
                   = f.select :neighborhood, options_for_select(@neighborhoods, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
+              
+            .row
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                - if @featured_agent.draft_edit? || @featured_by == 'admin'
+                  = render 'featured_buildings/admin_form_fields', f: f, object: f.object
               
               = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_agent.new_record?
               = f.hidden_field :user_id, value: current_user&.id
