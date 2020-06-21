@@ -248,7 +248,8 @@
         }
 
         // Apply placement.
-        var elem = this.items[i].element
+        var elem = this.items[i].element;
+        window.data = this.items[i]
         elem.attr('data-row-id', this.rowId);
         elem.css('position', 'absolute');
         elem.css('top', top + 'px');
@@ -326,9 +327,12 @@
         img.css('height', '');
         img.css('width', '');
         img.css('max-width', 'none');
-
-        //row.createItem(itemElement, img.width(), img.height()); // with lib
-        row.createItem(itemElement, 250, 175); // our customization
+        var img_size = img.data('size');
+        if(img_size)
+          row.createItem(itemElement, img.width(), img.height()); // with lib
+        else{
+          row.createItem(itemElement, 250, 175); // our customization
+        }
 
         // Check if adding this item has used up all the space.
         if (row.isFull()) {

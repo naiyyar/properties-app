@@ -56,16 +56,17 @@
               
               = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_agent.new_record?
               = f.hidden_field :user_id, value: current_user&.id
-            
+            %br
+            %br
             .form-group
-              .col-md-7.col-sm-7.col-xs-7
-                .pull-right
+              .col-md-12.col-sm-12.col-xs-12
+                .text-right
                   - if @featured_agent.new_record?
-                    = link_to 'Cancel', params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default cancel font-18'
+                    = link_to 'Cancel', params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
                   - else
-                    = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default cancel font-18'
-              .col-md-5.col-sm-5.col-xs-5
-                = f.submit @submit_text, class: 'btn btn-primary btn-block font-18'
+                    = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
+                  = link_to 'Back', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18'
+                  = f.submit @submit_text, class: 'btn btn-primary font-18'
 
 :javascript
   $('.cancel').on('click', function(e){

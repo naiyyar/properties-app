@@ -4,7 +4,7 @@
       - url = upload.image.url
       .photo-grid-item.image-gallery{'data-object-id' => "#{upload.id}", 'data-sort-id' => index}
         %a.propWidget-1{caption: "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-role' => 'slider', href: "#{url}"}
-          = image_tag url, alt: 'Image', class: 'img-thumbnail'
+          = image_tag url, alt: 'Image', class: 'img-thumbnail', data: {size: '250'}, width: '250', height: '250'
         = link_to '<span class="fa fa-trash" />'.html_safe, upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs pull-right1 delete_image'
         = link_to '<span class="fa fa-edit" />'.html_safe, edit_upload_path(upload, upload_type: 'image'), remote: true, class: 'btn btn-primary btn-xs pull-right1 edit_image'
 
@@ -21,8 +21,3 @@
       selector: '> .photo-grid-item',
       sortable: true,
     });
-
-:css
-  img.img-thumbnail{
-    height: 250px !important;
-  }

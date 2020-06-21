@@ -1,25 +1,25 @@
 .row
   .col-lg-12
-    - if @building.present?
-      %h1.pageTitle= link_to @building.building_name_or_address, building_path(@building), 'data-no-turbolink' => false
+    - if @imageable.present?
+      %h1.pageTitle= link_to @imageable.building_name_or_address, building_path(@imageable), 'data-no-turbolink' => false
       .address.text-muted
-        = link_to building_path(@building), 'data-no-turbolink' => false do
+        = link_to building_path(@imageable), 'data-no-turbolink' => false do
           / method on reviews helper
-          = building_street_address @building
+          = building_street_address @imageable
           %br/
-          = @building.neighborhood
-    - elsif @unit.present?
-      = link_to unit_path(@unit), class: 'text-col-black', 'data-no-turbolink' => false do
-        %h4= @unit.building.building_name
+          = @imageable.neighborhood
+    - elsif imageable.kind_of?(Unit)
+      = link_to unit_path(@imageable), class: 'text-col-black', 'data-no-turbolink' => false do
+        %h4= @imageable.building.building_name
         %p
           %b
-            = @unit.building.building_street_address
+            = @imageable.building.building_street_address
         %p
           %b
-            = @unit.building.city
-            , #{@unit.building.state}, #{@unit.building.zipcode}
+            = @imageable.building.city
+            , #{@imageable.building.state}, #{@imageable.building.zipcode}
         %p
-          %b= @unit.name
+          %b= @imageable.name
 %hr/
 %div{class: "row #{current_user && current_user.has_role?(:admin) ? 'photo-grid-container' : ''}"}
   - @uploads.each_with_index do |upload, index|
