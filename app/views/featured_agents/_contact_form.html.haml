@@ -3,9 +3,9 @@
 		.col-lg-2.col-xs-4
 			=image_tag agent_image(@featured_agent.uploads.first), style: 'width: 100%;height: 100%;'
 		.col-lg-10.col-xs-8
-			%p.font-bold.font-14=@featured_agent.full_name
+			%p.font-bold.font-18=@featured_agent.full_name
 			%p.font-14=@featured_agent.broker_firm
-			%p.font-14=number_to_phone(@featured_agent.phone, area_code: true)
+			%p.font-14=link_to number_to_phone(@featured_agent.phone, area_code: true), "tel:#{@featured_agent.phone}", class: 'hyper-link'
 
 	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'form-horizontal agent-contact-form' do
 		.row
@@ -15,7 +15,7 @@
 
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= text_field_tag 'contact[phone]', nil, class: 'form-control', placeholder: 'Phone'
+				= text_field_tag 'contact[phone]', nil, class: 'form-control phone_number', placeholder: 'Phone'
 
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
