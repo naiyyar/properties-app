@@ -35,7 +35,9 @@ module FeaturedAgentsHelper
 
 	def message
 		'Hi,
+
 I am looking for an agent to help me with my rental apartment search.
+
 Thank you!'
 	end
 end
