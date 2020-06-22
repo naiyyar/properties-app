@@ -7,37 +7,41 @@
 			%p.font-14=@featured_agent.broker_firm
 			%p.font-14=number_to_phone(@featured_agent.phone, area_code: true)
 
-	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'form-horizontal' do
+	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'form-horizontal agent-contact-form' do
 		.row
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
 				= text_field_tag 'contact[email]', nil,  class: 'form-control', placeholder: 'Email*', required: true
 
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
 				= text_field_tag 'contact[phone]', nil, class: 'form-control', placeholder: 'Phone'
 
+		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
 				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control', multiple: true
+		.row
+			.col-xs-12.col-sm-12.col-md-12.col-lg-6
+				%label
+				= select_tag 'contact[bedrooms]', options_for_select(bedrooms_options), class: 'form-control col-grey cst', prompt: 'Bedrooms*'
 
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= select_tag 'contact[bedrooms]', options_for_select(bedrooms_options), class: 'form-control', prompt: 'Bedrooms*'
-
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
-				%label
-				= select_tag 'contact[budget]', options_for_select(budgets_options), class: 'form-control', prompt: 'Budget*'
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
-				%label
-				= text_area_tag 'contact[message]', message, class: 'form-control', rows: 4
+				= select_tag 'contact[budget]', options_for_select(budgets_options), class: 'form-control col-grey cst', prompt: 'Budget*'
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
-				%p.font-bold.font-14{style: 'padding: 18px 0px;'} Agents typically charge a commission rate equal to 1 months rent or more for their services.
-		
+				%label
+				= text_area_tag 'contact[message]', message, class: 'form-control', rows: 4, style: 'color: #9d9d9d;'
+		%br
+
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
-				%div= submit_tag 'Send Message', class: "btn btn-blue btn-block font-bold"
+				%div= submit_tag 'Send Message', class: 'btn btn-blue btn-block font-bold'
+
+		.row
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				%p.font-14{style: 'padding: 18px 0px;'} Agents typically charge a commission rate equal to 1 months rent or more for their services.
 
 %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js'}
 %link{rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css'}
@@ -46,8 +50,28 @@
 	$('#contact_neighborhoods').multiselect({
 		nonSelectedText: 'Neighborhood Interested In*',
 		buttonWidth: '100%',
-		buttonClass: 'btn-custom-multiselect'
+		buttonClass: 'btn-custom-multiselect',
+		onChange: function(options, checked){
+			var checked_boxes = $('.multiselect-container').find('input[type=checkbox]:checked');
+			var elem = $('span.multiselect-selected-text');
+			if(checked_boxes.length >= 1){
+				elem.addClass('selected');
+			}else{
+				elem.removeClass('selected');
+			}
+		}
 	});
+
+	$('.agent-contact-form').find('select.cst').on('change', function(){
+		//this.className=this.options[this.selectedIndex].className
+		var val = $(this).val();
+		if(val == ''){
+
+			$(this).addClass('col-grey');
+		}else{
+			$(this).removeClass('col-grey');
+		}
+	})
 
 :css
 	#agent-info{
@@ -73,6 +97,21 @@
 		-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	}
+
+	span.multiselect-selected-text{
+		color: #9d9d9d;
+	}
+	span.multiselect-selected-text.selected{
+		color: #000;
+	}
+
+	select.col-grey {
+		color: #9d9d9d !important;
+	}
+	
+	option:not(:first-of-type) {
+		color: #000 !important;
 	}
 
 	.btn-custom-multiselect .caret{
