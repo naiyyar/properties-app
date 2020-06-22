@@ -43,8 +43,6 @@
                 .form-group
                   %label Profile Website
                   =f.text_field :website, class: 'form-control'
-              
-            - @submit_text = 'Next'
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group
@@ -68,7 +66,7 @@
                   - else
                     = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
                   = link_to 'Back', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18'
-                  = f.submit @submit_text, class: 'btn btn-primary font-18'
+                  = f.submit 'Next', class: 'btn btn-primary font-18'
 
 :javascript
   $('.cancel').on('click', function(e){
