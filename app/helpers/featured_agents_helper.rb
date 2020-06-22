@@ -5,6 +5,18 @@ module FeaturedAgentsHelper
     managertools_user_path(current_user, type: 'featured')
   end
 
+  def done_or_next_path
+  	if !@featured_agent.active && @featured_agent.featured_by_manager?
+  		wizard_path(:payment, agent_id: @featured_agent.id) 
+  	else
+  		agenttools_dashboard_path(@featured_agent)
+  	end
+  end
+
+  def agenttools_dashboard_path fa
+  	fa.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured')  : featured_agents_path
+  end
+
   def agent_image upload
   	upload.present? ? upload.image.url : 'user-missing2.png'
   end

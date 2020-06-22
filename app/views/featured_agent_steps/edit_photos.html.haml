@@ -23,10 +23,10 @@
 	.col-lg-7.col-lg-offset-2
 		.form-group
 			.text-right
-				= link_to 'Cancel', @featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path, class: 'font-18'
+				= link_to 'Cancel', agenttools_dashboard_path(@featured_agent), class: 'font-18'
 				= link_to 'Back', wizard_path(:add_photos, agent_id: @featured_agent.id), class: 'btn btn-default font-18'
 				- next_btn_text = @featured_agent.active? ? 'Done' : 'Next'
-				= link_to next_btn_text, @featured_agent.featured_by_manager? ? wizard_path(:payment, agent_id: @featured_agent.id) : featured_agents_path, class: 'btn btn-primary font-18'
+				= link_to next_btn_text, done_or_next_path, class: 'btn btn-primary font-18'
 
 - if !browser.device.mobile?
 	#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
