@@ -8,7 +8,8 @@ class FeaturedAgentStepsController < ApplicationController
 		when :add_photos
 			@imageable = @featured_agent
 		when :edit_photos
-			@uploads = @featured_agent.uploads
+			@uploads 			= @featured_agent.uploads
+			@photos_count = @uploads.count.to_i
 		when :payment
 			@featured_by       = 'manager'
 			@price             = Billing::FEATURED_AGENT_PRICE

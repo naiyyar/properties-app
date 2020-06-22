@@ -1,4 +1,4 @@
-- if @featured_agent.uploads_count.to_i > 0
+- if photo_counts > 0
   .row.photo-grid-container
     - @uploads.each_with_index do |upload, index|
       - url = upload.image.url
@@ -10,7 +10,7 @@
 
     / jquery click function in zapp.js
     .loading.hidden Loading…
-  - if @featured_agent.uploads_count.to_i > 1
+  - if photo_counts > 1
     %h4 Drag images to reorder.
 - else
   %b.text-danger No Photos are available. Click on back button to add photos.

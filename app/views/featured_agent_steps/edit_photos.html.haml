@@ -7,10 +7,17 @@
 		%p.font-bold.font-16 Edit Photos
 
 .row
-	.col-lg-6.col-xs-12.col-lg-offset-3= render partial: 'featured_agents/photos'
+	.col-lg-6.col-xs-12.col-lg-offset-3= render 'featured_agents/photos', photo_counts: @photos_count
 
 .row{style: 'display: contents;'}
 	.col-lg-12{style: 'height: 100px;'}
+- if @photos_count <= 0
+	%br
+	%br
+	%br
+	%br
+	%br
+	%br
 
 .row
 	.col-lg-7.col-lg-offset-2
