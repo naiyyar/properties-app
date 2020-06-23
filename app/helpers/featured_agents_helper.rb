@@ -15,7 +15,7 @@ module FeaturedAgentsHelper
 
   def work_with_button agent, klass=''
   	link_to "Work With #{agent.first_name}", 'javascript:;', 
-																							onclick: "agentContactForm(#{agent.id})", 
+																							onclick: "agentContactForm(#{agent.id})",
 																 							class: "btn btn-primary #{klass} btn-round"
   end
 

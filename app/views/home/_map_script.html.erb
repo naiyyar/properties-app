@@ -235,7 +235,7 @@
   $('.search-view-card').each(function(i, j){
     var agentid = $(j).data('agentid');
     if(agentid != undefined){
-      Card.loadFeaturedAgentImages(agentid);
+      Card.loadFeaturedAgentImagesAndCTALinks(agentid);
     }else{
       Card.loadDisplayImageAndCTALinks($(j).data('bid'));
     }

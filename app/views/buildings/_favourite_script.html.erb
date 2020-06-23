@@ -5,7 +5,6 @@
   <%= hidden_field_tag :list_max_price,   params[:filter][:max_price] %>
 <%end%>
 
-
 <script type="text/javascript">
   // favourite script for market infowindow
     
@@ -97,17 +96,25 @@
 
   function agentContactForm(agent_id){
     displayLoader();
-    var url = '/featured_agents/'+agent_id+'/contact';
     $.ajax({
-      url: url,
+      url: '/featured_agents/'+agent_id+'/contact',
       type: 'get',
-      dataType: 'script',
+      dataType: 'json',
       success: function(response){
-        console.log('success')
+        $('#remote-container').html(response.contact_form_html);
         hideLoader();
+        if($('.contact-agent-modal').length > 0){
+          $('.contact-agent-modal').slideDown(200);
+          $('.closeContact').click(function(e) {
+            e.stopPropagation();
+            $('.contact-agent-modal').slideUp(200);
+          });
+        }else{
+          $('#contactAgentModal').modal('show');
+        }
       },
       error: function(res){
-        console.log('error')
+        console.log(res);
         hideLoader();
       }
     });
@@ -158,3 +165,7 @@
     $('#apt-ajax-loader').hide();
   }
 </script>
+
+<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js'>
+</script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">

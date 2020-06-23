@@ -27,10 +27,7 @@ class FeaturedAgentsController < ApplicationController
   end
 
   def contact
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    render json: { contact_form_html: render_contact_form_partial }
   end
 
   def contact_agent
@@ -40,7 +37,7 @@ class FeaturedAgentsController < ApplicationController
   end
 
   def get_images
-    render json: { html: render_slider_partial }
+    render json: { html: render_slider_partial, cta_html: render_cta_partial}
   end
 
   # GET /featured_agents/1
@@ -108,7 +105,7 @@ class FeaturedAgentsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_featured_agent
-    @featured_agent = FeaturedAgent.find(params[:id])
+    @featured_agent = FeaturedAgent.find(params[:id]) rescue nil
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -153,6 +150,24 @@ class FeaturedAgentsController < ApplicationController
                                   first_image:  @uploads[0],
                                   show_path:    featured_agent_path(@featured_agent)
                                 }
+                    )
+  end
+
+  def render_cta_partial
+    render_to_string(:partial => '/featured_agents/cta_links', 
+                     :locals => { agent: @featured_agent }
+                    )
+  end
+
+  def render_contact_form_partial
+    render_to_string(:partial => '/featured_agents/contact_agent_modal', 
+                     :locals => { 
+                        mobile: browser.device.mobile?,
+                        :@featured_agent => @featured_agent,
+                        :@neighborhoods => @neighborhoods,
+                        :bedrooms_options => view_context.bedrooms_options,
+                        :budgets_options => view_context.budgets_options
+                      }
                     )
   end
 end
