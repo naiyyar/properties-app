@@ -30,30 +30,39 @@ class UserMailer < ApplicationMailer
 		)
 	end
 
-	def contact_agent to_email, params
-		@to_email      = to_email
+	def contact_agent agent, params
+		@to_email      = agent.email
 		@from_email    = params[:email]
 		@phone         = params[:phone]
 		@neighborhoods = params[:neighborhoods]
 		@bedrooms			 = params[:bedrooms]
 		@budget        = params[:budget]
 		@message			 = params[:message]
+		@agent_name    = agent.full_name
 		subject = "[Inquiry From Transparentcity User] regarding assistance on rental apartment search from #{@from_email}"
 		mail(
 			from: EMAIL_WITH_NAME,
 			reply_to: @from_email,
 			to: @to_email,
-			# cc: "#{@from_email}, hello@transparentcity.co",  
+			cc: 'hello@transparentcity.co',  
 			subject: subject
 		)
 	end
 
-	def contact_agent_sender_copy agent, sender_email
+	def contact_agent_sender_copy agent, params
+		@to_email 	 = agent.email
+		sender_email = params[:email]
+		@phone         = params[:phone]
+		@neighborhoods = params[:neighborhoods]
+		@bedrooms			 = params[:bedrooms]
+		@budget        = params[:budget]
+		@message			 = params[:message]
+		@agent_name    = agent.full_name
 		mail(
 			from: EMAIL_WITH_NAME,
 			reply_to: sender_email,
 			to: sender_email,
-			subject: "Your message to #{agent.full_name} has been sent."
+			subject: "Your message to #{@agent_name} has been sent."
 		)
 	end
 
