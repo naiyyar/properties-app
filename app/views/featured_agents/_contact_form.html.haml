@@ -20,19 +20,19 @@
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
-				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control', multiple: true
+				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control', multiple: true, required: true
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= select_tag 'contact[bedrooms]', options_for_select(bedrooms_options), class: 'form-control col-grey cst', prompt: 'Bedrooms*'
+				= select_tag 'contact[bedrooms]', options_for_select(bedrooms_options), class: 'form-control col-grey cst', prompt: 'Bedrooms*', required: true
 
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= select_tag 'contact[budget]', options_for_select(budgets_options), class: 'form-control col-grey cst', prompt: 'Budget*'
+				= select_tag 'contact[budget]', options_for_select(budgets_options), class: 'form-control col-grey cst', prompt: 'Budget*', required: true
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
-				= text_area_tag 'contact[message]', message, class: 'form-control', rows: 7, style: 'color: #9d9d9d;'
+				= text_area_tag 'contact[message]', message, class: 'form-control', rows: 7, style: 'color: #777777;'
 		%br
 
 		.row
@@ -63,10 +63,8 @@
 	});
 
 	$('.agent-contact-form').find('select.cst').on('change', function(){
-		//this.className=this.options[this.selectedIndex].className
 		var val = $(this).val();
 		if(val == ''){
-
 			$(this).addClass('col-grey');
 		}else{
 			$(this).removeClass('col-grey');
@@ -100,14 +98,14 @@
 	}
 
 	span.multiselect-selected-text{
-		color: #9d9d9d;
+		color: #777777;
 	}
 	span.multiselect-selected-text.selected{
 		color: #000;
 	}
 
 	select.col-grey {
-		color: #9d9d9d !important;
+		color: #777777 !important;
 	}
 	
 	option:not(:first-of-type) {
@@ -122,4 +120,20 @@
 
 	.multiselect-container.dropdown-menu{
 		width: 100%;
+	}
+	.form-control{
+		font-size: 14px;
+	}
+
+	input::-webkit-input-placeholder {
+		color: #777777 !important;
+	}
+	input:-moz-placeholder { /* Firefox 18- */
+		color: #777777 !important;
+	}
+	input::-moz-placeholder {  /* Firefox 19+ */
+		color: #777777 !important;
+	}
+	input:-ms-input-placeholder {  
+		color: #777777 !important;
 	}

@@ -64,9 +64,9 @@
                   - if @featured_agent.new_record?
                     = link_to 'Cancel', params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
                   - else
-                    = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
-                  = link_to 'Back', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18'
-                  = f.submit 'Next', class: 'btn btn-primary font-18'
+                    = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'cancel font-18 pl-28 pr-28'
+                  = link_to 'Back', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18 pl-28 pr-28'
+                  = f.submit 'Next', class: 'btn btn-primary font-18 pl-28 pr-28'
 
 :javascript
   $('.cancel').on('click', function(e){

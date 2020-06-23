@@ -11,7 +11,7 @@
 		%td=@phone
 	%tr
 		%td Interested In:
-		%td=@neighborhoods.join(', ')
+		%td=@neighborhoods.present? ? @neighborhoods.join(', ') : ''
 	%tr
 		%td Bedrooms
 		%td=@bedrooms

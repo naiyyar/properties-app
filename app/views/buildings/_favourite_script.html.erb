@@ -95,6 +95,24 @@
     }
   });
 
+  function agentContactForm(agent_id){
+    displayLoader();
+    var url = '/featured_agents/'+agent_id+'/contact';
+    $.ajax({
+      url: url,
+      type: 'get',
+      dataType: 'script',
+      success: function(response){
+        console.log('success')
+        hideLoader();
+      },
+      error: function(res){
+        console.log('error')
+        hideLoader();
+      }
+    });
+  } 
+
   function showLeasingContactPopup(building_id){
     displayLoader();
     $.ajax({

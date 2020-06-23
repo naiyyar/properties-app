@@ -27,7 +27,10 @@ class FeaturedAgentsController < ApplicationController
   end
 
   def contact
-
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def contact_agent

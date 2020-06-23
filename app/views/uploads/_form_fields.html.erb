@@ -24,9 +24,9 @@
 				<%elsif @imageable.kind_of? FeaturedAgent %>
 					<br/>
 					<br/>
-					<%= link_to 'Cancel', @featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path, class: 'font-18' %>
-					<%= link_to 'Back', edit_featured_agent_path(@imageable), class: 'btn btn-default font-18' %>
-					<%= link_to 'Next', wizard_path(:edit_photos, agent_id: @imageable.id), class: 'btn btn-primary btn-done font-18' %>
+					<%= link_to 'Cancel', @featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path, class: 'font-18 pl-28 pr-28' %>
+					<%= link_to 'Back', edit_featured_agent_path(@imageable), class: 'btn btn-default font-18 pl-28 pr-28' %>
+					<%= link_to 'Next', wizard_path(:edit_photos, agent_id: @imageable.id), class: 'btn btn-primary btn-done font-18 pl-28 pr-28' %>
 				<%else%>
 					<%= link_to 'Done', building_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done disabled' %>
 				<%end%>

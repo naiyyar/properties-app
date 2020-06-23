@@ -14,8 +14,8 @@
         - unless agent.website.blank?
           .c-links{style: 'height: 19px;'}
           .c-links
-            %section=link_to "Work With #{agent.first_name}", contact_featured_agent_path(agent), class: "btn btn-primary #{'btn-block' if agent.website.blank?}", remote: true
+            %section=work_with_button(agent)
             %section=link_to "#{agent.first_name}'s Profile", agent.website, class: 'btn btn-primary btn-o', target: '_blank'
         - else
           .c-links{style: 'height: 19px;'}
-          %section.d-block=link_to "Work With #{agent.first_name}", contact_featured_agent_path(agent), class: 'btn btn-primary btn-block', remote: true
+          %section.d-block=work_with_button(agent, 'btn-block')

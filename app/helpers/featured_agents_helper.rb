@@ -13,6 +13,12 @@ module FeaturedAgentsHelper
   	end
   end
 
+  def work_with_button agent, klass=''
+  	link_to "Work With #{agent.first_name}", 'javascript:;', 
+																							onclick: "agentContactForm(#{agent.id})", 
+																 							class: "btn btn-primary #{klass} btn-round"
+  end
+
   def agenttools_dashboard_path fa
   	fa.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured')  : featured_agents_path
   end

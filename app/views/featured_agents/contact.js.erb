@@ -1,5 +1,4 @@
-$('#remote-container').html('<%= j render partial: "featured_agents/contact_agent_modal" %>');
-
+$('#remote-container').html('<%= j render "featured_agents/contact_agent_modal" %>');
 <% unless browser.device.mobile? %>
 	$('#contactAgentModal').modal('show');
 <%else%>

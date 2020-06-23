@@ -1,7 +1,7 @@
 .row
 	.col-lg-4.col-sm-10.col-xs-10.col-lg-offset-3= render 'agent_info'
 	.col-lg-2.col-sm-2.col-xs-2
-		.text-left=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success', remote: true
+		.text-right=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success', remote: true
 .row
 	.col-lg-12.col-xs-12.col-lg-offset-3
 		%p.font-bold.font-16 Edit Photos
@@ -23,10 +23,10 @@
 	.col-lg-7.col-lg-offset-2
 		.form-group
 			.text-right
-				= link_to 'Cancel', agenttools_dashboard_path(@featured_agent), class: 'font-18'
-				= link_to 'Back', wizard_path(:add_photos, agent_id: @featured_agent.id), class: 'btn btn-default font-18'
+				= link_to 'Cancel', agenttools_dashboard_path(@featured_agent), class: 'font-18 pl-28 pr-28'
+				= link_to 'Back', wizard_path(:add_photos, agent_id: @featured_agent.id), class: 'btn btn-default font-18 pl-28 pr-28'
 				- next_btn_text = @featured_agent.active? ? 'Done' : 'Next'
-				= link_to next_btn_text, done_or_next_path, class: 'btn btn-primary font-18'
+				= link_to next_btn_text, done_or_next_path, class: 'btn btn-primary font-18 pl-28 pr-28'
 
 - if !browser.device.mobile?
 	#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
