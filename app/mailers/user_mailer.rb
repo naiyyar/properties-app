@@ -44,7 +44,7 @@ class UserMailer < ApplicationMailer
 			from: EMAIL_WITH_NAME,
 			reply_to: @from_email,
 			to: @to_email,
-			cc: 'hello@transparentcity.co',  
+			bcc: 'hello@transparentcity.co',  
 			subject: subject
 		)
 	end

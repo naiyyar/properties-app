@@ -256,8 +256,15 @@ form fieldset, .smart-form fieldset{
     position: relative;
     height: 200px;
     background-size: cover;
-    background-position: center center;
     background-repeat: no-repeat;
+}
+
+.bg-pos-center{
+  background-position: center center;
+}
+
+.bg-pos-0{
+  background-position: 50% 0%;
 }
 
 .bg-size-cover.h-lg{
@@ -1980,6 +1987,12 @@ ol {
 }
 .round {
   border-radius: 100px;
+}
+
+.has-error button {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
 /* Sign In | Sign Up */

@@ -1,4 +1,5 @@
 - if images_count > 0
+  - resource = object.class.to_s.tableize
   .item
     .clearfix{ style: 'width:100%;' }
       = link_to show_path, style: 'cursor: pointer;' do
@@ -13,16 +14,16 @@
           .video-tour-icon
             %span.fa.fa-video-camera
 
-      %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 225px;', data: { objectid: "#{object.id}", view_type: 'split', path: show_path, resource: object.class.to_s.tableize } }
+      %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 225px;', data: { objectid: "#{object.id}", view_type: 'split', path: show_path, resource: resource } }
         %li
           = link_to show_path, style: 'cursor: pointer;' do
-            .bg-size-cover.h-lg{ style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: "#{first_image.id}" } }
+            .h-lg.bg-size-cover{ class: (resource == 'featured_agents' ? 'bg-pos-0' : 'bg-pos-center'), style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: "#{first_image.id}" } }
 
         - if images_count > 1
           - 1.upto(images_count-1) do |count|
             %li{data: { listindex: "#{count}" } }
 - else
   %a{ href: show_path, style: 'cursor: pointer;' }
-    - if @similar_properties.present? or object.featured?
+    - if @similar_properties.present? || object.featured?
       %h4.comp.featured.round Featured
-    .bg-size-cover.h-lg{style: "background-image: url(#{image_url('no-photo.png') })"}
+    .bg-size-cover.h-lg.bg-pos-center{style: "background-image: url(#{image_url('no-photo.png') })"}

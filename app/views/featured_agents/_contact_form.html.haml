@@ -11,7 +11,7 @@
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= text_field_tag 'contact[email]', nil,  class: 'form-control', placeholder: 'Email*', required: true
+				= text_field_tag 'contact[email]', nil,  class: 'validate form-control', placeholder: 'Email*', required: true
 
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
@@ -20,15 +20,15 @@
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
-				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control', multiple: true, required: true
+				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control', multiple: true
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= select_tag 'contact[bedrooms]', options_for_select(bedrooms_options), class: 'form-control col-grey cst', prompt: 'Bedrooms*', required: true
+				= select_tag 'contact[bedrooms]', options_for_select(bedrooms_options), class: 'validate form-control col-grey cst', prompt: 'Bedrooms*', required: true
 
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= select_tag 'contact[budget]', options_for_select(budgets_options), class: 'form-control col-grey cst', prompt: 'Budget*', required: true
+				= select_tag 'contact[budget]', options_for_select(budgets_options), class: 'validate form-control col-grey cst', prompt: 'Budget*', required: true
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
@@ -37,7 +37,7 @@
 
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
-				%div= submit_tag 'Send Message', class: 'btn btn-blue btn-block font-bold'
+				%div= submit_tag 'Send Message', class: 'btn btn-blue btn-block font-bold font-14'
 
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -47,7 +47,7 @@
 	$('#contact_neighborhoods').multiselect({
 		nonSelectedText: 'Neighborhood Interested In*',
 		buttonWidth: '100%',
-		buttonClass: 'btn-custom-multiselect',
+		buttonClass: 'btn-custom-multiselect validate',
 		onChange: function(options, checked){
 			var checked_boxes = $('.multiselect-container').find('input[type=checkbox]:checked');
 			var elem = $('span.multiselect-selected-text');
@@ -66,6 +66,24 @@
 		}else{
 			$(this).removeClass('col-grey');
 		}
+	});
+
+	$(document).on('click', 'form', function(e){
+		var submit;
+		var select_btn = $('.btn-custom-multiselect');
+		elems = $(this).find('.validate');
+		len = elems.length - 1
+		for(var i = 0; i <= len; i++){
+			if($(elems[i]).val() == '' || select_btn.text() == 'Neighborhood Interested In* '){
+				$(elems[i]).parent().addClass('has-error');
+				submit = false
+			}else{
+				$(elems[i]).parent().removeClass('has-error');
+				select_btn.parent().removeClass('has-error');
+				submit = true;
+			}
+		}
+		return submit;
 	})
 
 :css
@@ -133,4 +151,8 @@
 	}
 	input:-ms-input-placeholder {  
 		color: #777777 !important;
+	}
+
+	.has-error .checkbox{
+		color: #000;
 	}

@@ -12,7 +12,7 @@ class Billing < ApplicationRecord
 
 	default_scope {order(created_at: :desc)}
 
-	scope :for_type, -> (type) { where(billable_type: type )}
+	scope :for_type, -> (type) { where(billable_type: type ).includes(:billable)}
 
 	def payment_failed?
 		status == 'Failed'

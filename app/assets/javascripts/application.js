@@ -38,6 +38,7 @@
 //= require form_validations
 //= require social-share-button
 //= require review_form
+//= require billings
 //= require_tree .
 
 
