@@ -20,7 +20,7 @@
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
-				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control', multiple: true
+				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: "form-control #{mobile ? 'validate' : 'multiselect' }", multiple: true, required: mobile
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
@@ -44,7 +44,7 @@
 				%p.font-14{style: 'padding: 18px 0px;'} Agents typically charge a commission rate equal to 1 months rent or more for their services.
 
 :javascript
-	$('#contact_neighborhoods').multiselect({
+	$('#contact_neighborhoods.multiselect').multiselect({
 		nonSelectedText: 'Neighborhood Interested In*',
 		buttonWidth: '100%',
 		buttonClass: 'btn-custom-multiselect validate',
@@ -71,10 +71,10 @@
 	$(document).on('click', 'form', function(e){
 		var submit;
 		var select_btn = $('.btn-custom-multiselect');
-		elems = $(this).find('.validate');
-		len = elems.length - 1
+		var elems = $(this).find('.validate');
+		var len = elems.length - 1
 		for(var i = 0; i <= len; i++){
-			if($(elems[i]).val() == '' || select_btn.text() == 'Neighborhood Interested In* '){
+			if($(elems[i]).val() == '' || $(elems[i]).val() == null || select_btn.text() == 'Neighborhood Interested In* '){
 				$(elems[i]).parent().addClass('has-error');
 				submit = false
 			}else{
@@ -90,16 +90,13 @@
 	#agent-info{
 		padding: 20px;
 	}
-
 	#agent-info img{
 		border: 1px solid #ddd;
 	}
-	
 	#agent-info	p{
 		padding: 0px;
 		margin: 2px 0px;
 	}
-
 	.btn-custom-multiselect{
 		height: 44px;
 		padding: 10px 14px;
@@ -111,35 +108,29 @@
 		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 	}
-
 	span.multiselect-selected-text{
 		color: #777777;
 	}
 	span.multiselect-selected-text.selected{
 		color: #000;
 	}
-
 	select.col-grey {
 		color: #777777 !important;
 	}
-	
 	option:not(:first-of-type) {
 		color: #000 !important;
 	}
-
 	.btn-custom-multiselect .caret{
 		position: absolute;
 		right: 4px;
 		top: 21px;
 	}
-
 	.multiselect-container.dropdown-menu{
 		width: 100%;
 	}
 	.form-control{
 		font-size: 14px;
 	}
-
 	input::-webkit-input-placeholder {
 		color: #777777 !important;
 	}
@@ -152,7 +143,6 @@
 	input:-ms-input-placeholder {  
 		color: #777777 !important;
 	}
-
 	.has-error .checkbox{
 		color: #000;
 	}

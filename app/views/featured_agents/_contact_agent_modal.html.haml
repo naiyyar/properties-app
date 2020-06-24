@@ -7,7 +7,7 @@
 						%span{'aria-hidden' => 'true'} ×
 					%h4.modal-title Contact Agent
 				.modal-body.no-padding
-					= render 'featured_agents/contact_form', block_class: ''
+					= render 'featured_agents/contact_form', block_class: '', mobile: mobile
 - else
 	.modal-full.contact-agent-modal{style: 'display: none; background: #fff;'}
 		.row{style: 'position: relative;'}
@@ -17,5 +17,5 @@
 
 			%div.text-right.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
 				= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, 'javascript:;', class: 'closeContact'
-		= render 'featured_agents/contact_form', block_class: 'btn-block'
+		= render 'featured_agents/contact_form', block_class: 'btn-block', mobile: mobile
 				
