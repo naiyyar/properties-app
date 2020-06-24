@@ -3,17 +3,16 @@
     .carousel-inner
       .row
         .col-lg-12.col-md-12
-          .card.search-view-card.bordered
+          .card.search-view-card.bordered{style: 'height: 412px;'}
             .figure{style: 'position: relative;', id: "figure#{@featured_agent.id}"}
               .shimmer
                   
             .building-detail-card
               %h2.name-or-add=@featured_agent.full_name
               .cardAddress="#{@featured_agent.neighborhood} Expert"
-              .cardAddress.font-14= @featured_agent.broker_firm
+              .cardAddress.font-14{style: 'color: #000;'}= @featured_agent.broker_firm
               .cardAddress.font-14=link_to "#{number_to_phone(phone = @featured_agent.try(:phone), area_code: true)}", "tel:#{phone}", class: 'hyper-link'
               %br
               %br
               =render 'featured_agents/cta_links', agent: @featured_agent
-                
-          .clearfix
+              %br

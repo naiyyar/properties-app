@@ -37,7 +37,7 @@ class FeaturedAgent < ApplicationRecord
 
   private
   def check_active_status
-    errors.add :base, 'Cannot delete unexpired featured Agent.'
+    errors.add :base, 'Cannot delete active featured Agent.'
     false
     throw(:abort)
   end

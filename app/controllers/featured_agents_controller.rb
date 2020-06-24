@@ -96,10 +96,13 @@ class FeaturedAgentsController < ApplicationController
   # DELETE /featured_agents/1.json
   def destroy
     @featured_agent.destroy
-    respond_to do |format|
-      format.html { redirect_to :back, notice: 'Featured agent was successfully destroyed.' }
-      format.json { head :no_content }
+    error_messages = @featured_agent.errors.messages
+    if error_messages.present? && error_messages[:base].present?
+      flash[:error] = @featured_agent.errors.messages[:base][0]
+    else
+      flash[:notice] = 'Featured agent was successfully deleted.'
     end
+    redirect_to :back
   end
 
   private

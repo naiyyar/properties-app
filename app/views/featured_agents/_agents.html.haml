@@ -34,14 +34,24 @@
                 %td=agent.uploads_count.to_i
                 %td=start_date(agent)
                 %td=end_date(agent)
-                %td
-                  = link_to 'edit', edit_featured_agent_path(agent) if agent.draft? or agent.live?
-                %td
-                  = link_to 'Delete', featured_agent_path(agent), method: :delete, data: {confirm: 'Are you sure you want to delete this featured Agent?'}, class: 'text-danger' if agent.draft?
-                %td
-                  %input.apple-switch.sb-sm.feature-agent.renew.disabled{type: 'checkbox', checked: agent.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-agentid' => agent.id, disabled: true }
-                %td
-                  %input.apple-switch.sb-sm.feature-agent{type: 'checkbox', checked: agent.active, style: 'margin: 0px;', data: { agentid: agent.id, fbby: 'manager', expired: agent.expired? ? 'expired' : '', billingurl: agent.expired? ? new_manager_featured_agent_user_path(current_user, type: 'billing', object_id: agent.id) : '' } }
+                - unless params[:type] == 'featured'
+                  %td
+                    = link_to 'edit', edit_featured_agent_path(agent, featured_by: @featured_by) unless agent.featured_by_manager?
+                  %td
+                    = link_to 'Delete', featured_agent_path(agent), method: :delete, data: {confirm: 'Are you sure you want to delete this featured agent?'}, class: 'text-danger' unless agent.featured_by_manager?
+                  %td
+                    %input.apple-switch.sb-sm.feature-agent.renew.disabled{type: 'checkbox', checked: agent.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-agentid' => agent.id, disabled: true }
+                  %td
+                    %input.apple-switch.sb-sm.feature-agent{type: 'checkbox', checked: agent.active, style: 'margin: 0px;', data: { agentid: agent.id } }
+                - else
+                  %td
+                    = link_to 'edit', edit_featured_agent_path(agent) if agent.draft? or agent.live?
+                  %td
+                    = link_to 'Delete', featured_agent_path(agent), method: :delete, data: {confirm: 'Are you sure you want to delete this featured Agent?'}, class: 'text-danger' if agent.draft?
+                  %td
+                    %input.apple-switch.sb-sm.feature-agent.renew.disabled{type: 'checkbox', checked: agent.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-agentid' => agent.id, disabled: true }
+                  %td
+                    %input.apple-switch.sb-sm.feature-agent{type: 'checkbox', checked: agent.active, style: 'margin: 0px;', data: { agentid: agent.id, fbby: 'manager', expired: agent.expired? ? 'expired' : '', billingurl: agent.expired? ? new_manager_featured_agent_user_path(current_user, type: 'billing', object_id: agent.id) : '' } }
 
 :css
   table.dataTable tr th, 
