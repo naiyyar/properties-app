@@ -4,8 +4,8 @@
       .panel.panel-default
         .panel-heading
           %b= @featured_agent.new_record? ? 'New Featured Agent' : 'Edit Featured Agent'
-        .panel-body
-          = form_for @featured_agent, html: {class: 'featured_agent_form'} do |f|
+        .panel-body{style: browser.device.mobile? ? 'padding: 8px;' : '' }
+          = form_for @featured_agent, html: { class: 'featured_agent_form' } do |f|
             .row
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
