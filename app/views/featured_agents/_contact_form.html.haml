@@ -7,7 +7,7 @@
 			%p.font-14=@featured_agent.broker_firm
 			%p.font-14=link_to number_to_phone(@featured_agent.phone, area_code: true), "tel:#{@featured_agent.phone}", class: 'hyper-link'
 
-	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'form-horizontal agent-contact-form' do
+	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'form-horizontal1 agent-contact-form' do
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
@@ -20,7 +20,7 @@
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
-				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: "form-control #{mobile ? 'validate' : 'multiselect' }", multiple: true, required: mobile
+				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: "form-control #{!mobile ? 'validate' : 'multiselect' }", multiple: true, required: mobile
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
@@ -44,10 +44,14 @@
 				%p.font-14{style: 'padding: 18px 0px;'} Agents typically charge a commission rate equal to 1 months rent or more for their services.
 
 :javascript
+	var non_selected_text = 'Neighborhood Interested In*';
 	$('#contact_neighborhoods.multiselect').multiselect({
-		nonSelectedText: 'Neighborhood Interested In*',
+		nonSelectedText: non_selected_text,
 		buttonWidth: '100%',
 		buttonClass: 'btn-custom-multiselect validate',
+		templates: {
+			li: '<li><div class="checkbox"><label></label></div></li>'
+		},
 		onChange: function(options, checked){
 			var checked_boxes = $('.multiselect-container').find('input[type=checkbox]:checked');
 			var elem = $('span.multiselect-selected-text');
@@ -57,6 +61,27 @@
 				elem.removeClass('selected');
 			}
 		}
+	});
+
+	$('.multiselect-container div.checkbox').each(function (index) {
+		var id = 'multiselect-' + index,
+				$input = $(this).find('input');
+
+		// Associate the label and the input
+		$(this).find('label').attr('for', id);  
+		$input.attr('id', id);
+
+		// Remove the input from the label wrapper
+		$input.detach();
+
+		// Place the input back in before the label
+		$input.prependTo($(this));
+
+		$(this).click(function (e) {
+			// Prevents the click from bubbling up and hiding the dropdown
+			e.stopPropagation();
+		});
+
 	});
 
 	$('.agent-contact-form').find('select.cst').on('change', function(){
@@ -84,7 +109,7 @@
 			}
 		}
 		return submit;
-	})
+	});
 
 :css
 	#agent-info{
@@ -145,4 +170,19 @@
 	}
 	.has-error .checkbox{
 		color: #000;
+	}
+	.multiselect-container div.checkbox {
+		margin: 0;
+	}
+	.multiselect-container label {
+		margin: 0;
+		white-space: nowrap;
+	}
+	.multiselect-container div.checkbox {
+		padding: 5px 15px 5px 35px;
+	}
+	.form-horizontal .checkbox-inline {
+	  margin-top: 0;
+	  margin-bottom: 0;
+	  padding-top: 0px !important;
 	}
