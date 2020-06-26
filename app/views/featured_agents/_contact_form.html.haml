@@ -20,7 +20,7 @@
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
-				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: "form-control #{!mobile ? 'validate' : 'multiselect' }", multiple: true, required: mobile
+				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control multiselect validate', multiple: true, required: mobile
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
