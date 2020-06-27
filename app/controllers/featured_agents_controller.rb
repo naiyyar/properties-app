@@ -151,7 +151,7 @@ class FeaturedAgentsController < ApplicationController
                      :locals => { object:       @featured_agent,
                                   images_count: @images_count,
                                   first_image:  @uploads[0],
-                                  show_path:    '#' #featured_agent_path(@featured_agent)
+                                  show_path:    '#'
                                 }
                     )
   end

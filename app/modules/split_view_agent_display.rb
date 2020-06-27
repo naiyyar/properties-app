@@ -22,11 +22,11 @@ module SplitViewAgentDisplay
       'Midtown Manhattan'
     elsif nb == 'Sutton Place'
       'Midtown East'
-    elsif brooklyn_children.include?(nb)
+    elsif brooklyn_children.include?(nb)  || nb == 'Brooklyn'
       'Brooklyn'
-    elsif queens_children.include?(nb)
+    elsif queens_children.include?(nb) || nb == 'Queens'
       'Queens'
-    elsif  bronx_children.include?(nb)
+    elsif bronx_children.include?(nb) || nb == 'Bronx'
       'Bronx'
     else
       nb
