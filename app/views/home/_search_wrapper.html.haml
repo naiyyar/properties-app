@@ -1,11 +1,12 @@
-#mapViewSearch{style: 'width: 45%;', class: custom_search? ? 'max' : nil}
+- mobile = browser.device.mobile?
+#mapViewSearch{style: "#{'width: 45%;' unless mobile}", class: custom_search? ? 'max' : nil}
   .mapPlaceholder
     %span.fa.fa-spin.fa-spinner
     Loading map...
 
-#content.searched-properties{style: 'width: 55%;', class: (custom_search? && browser.device.mobile?) ? 'invisible' : nil}
+#content.searched-properties{style: "#{'width: 55%;' unless mobile}", class: (custom_search? && mobile) ? 'invisible' : nil}
   .tabsWidget.tabsWidgetSearch{style: "#{@buildings.blank? ? 'height: 60vh' : ''}"}
-    - unless browser.device.mobile?
+    - unless mobile
       %ul.nav.nav-tabs1.nav-justified.hidden-xs{role: 'tablist'}
         %li.active
           .text-center{style: 'padding: 8px 0px;'}
