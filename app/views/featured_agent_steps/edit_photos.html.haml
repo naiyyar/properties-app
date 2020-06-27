@@ -1,5 +1,5 @@
 .row
-	.col-lg-4.col-sm-10.col-xs-10.col-lg-offset-3= render 'agent_info'
+	.col-lg-4.col-sm-10.col-xs-8.col-lg-offset-3= render 'agent_info'
 	.col-lg-2.col-sm-2.col-xs-2
 		.text-right=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success', remote: true
 .row
@@ -28,17 +28,18 @@
 				- next_btn_text = @featured_agent.active? ? 'Done' : 'Next'
 				= link_to next_btn_text, done_or_next_path, class: 'btn btn-primary font-18 pl-28 pr-28'
 
-- if !browser.device.mobile?
-	#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
-		.modal-dialog.modal-md
-			.modal-content{style: 'background-color: #f3f3f3;'}
-				.modal-header
-					%button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
-						%span{'aria-hidden' => 'true'} ×
-					%h4.modal-title.font-18 Preview Agent
-				.modal-body.no-padding
-					= render 'featured_agents/thumbnail_preview'
-- else
+
+#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
+	.modal-dialog.modal-md
+		.modal-content{style: 'background-color: #f3f3f3;'}
+			.modal-header
+				%button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+					%span{'aria-hidden' => 'true'} ×
+				%h4.modal-title.font-18 Preview Agent
+			.modal-body.no-padding
+				= render 'featured_agents/thumbnail_preview'
+
+- if false
 	.modal-full.lease-contact-modal{style: 'display: none; background: #f3f3f3;'}
 		.row{style: 'position: relative;'}
 			.col-lg-12
