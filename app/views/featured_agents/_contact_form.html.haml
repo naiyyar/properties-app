@@ -7,11 +7,11 @@
 			%p.font-14=@featured_agent.broker_firm
 			%p.font-14=link_to number_to_phone(@featured_agent.phone, area_code: true), "tel:#{@featured_agent.phone}", class: 'hyper-link'
 
-	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'form-horizontal1 agent-contact-form' do
+	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'agent-contact-form' do
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= email_field_tag 'contact[email]', nil,  class: 'validate form-control', placeholder: 'Email*', required: true
+				= email_field_tag 'contact[email]', nil,  class: 'validate form-control', placeholder: 'Email*', autocomplete: 'off', required: true
 
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
