@@ -12,3 +12,4 @@
 //= require swiper.jquery
 //= require filters
 //= require dropdown_buttons
+//= require home

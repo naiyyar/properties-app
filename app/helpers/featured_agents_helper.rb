@@ -21,6 +21,8 @@ module FeaturedAgentsHelper
 
   def agenttools_dashboard_path fa
   	fa.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured')  : featured_agents_path
+  rescue
+  	featured_agents_path
   end
 
   def agent_image upload
