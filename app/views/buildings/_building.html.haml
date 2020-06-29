@@ -1,2 +1,5 @@
 / - @min_saved_amount = building.min_save_amount(@rent_medians, @broker_percent)
-.col-xs-12.col-sm-12.col-md-6.col-lg-6= render 'buildings/detail_card', building: building
+- if building_counter == 4 && @agent.present?
+	= render 'featured_agents/agent', agent: @agent
+- else
+	.col-xs-12.col-sm-12.col-md-6.col-lg-6= render 'buildings/detail_card', building: building
