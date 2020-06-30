@@ -327,8 +327,7 @@ class Building < ApplicationRecord
     rent_median_prices(rent_medians).as_json.each do |mp| 
       saved_amounts[mp['bed_type']] = (((mp['price'].to_i * 12) * broker_percent)/100).to_i
     end
-
-    return saved_amounts
+    saved_amounts
   end
 
   def min_and_max_price?
