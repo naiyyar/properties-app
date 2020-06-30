@@ -7,11 +7,11 @@
 			%p.font-14=@featured_agent.broker_firm
 			%p.font-14=link_to number_to_phone(@featured_agent.phone, area_code: true), "tel:#{@featured_agent.phone}", class: 'hyper-link'
 
-	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'agent-contact-form' do
+	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'agent-contact-form', id: 'contact-agent-form' do
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= email_field_tag 'contact[email]', nil,  class: 'validate form-control', placeholder: 'Email*', autocomplete: 'off', required: true
+				= text_field_tag 'contact[email]', nil,  class: 'form-control', placeholder: 'Email*', autocomplete: 'off', role: 'email'
 
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
@@ -37,7 +37,7 @@
 
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
-				%div= submit_tag 'Send Message', class: 'btn btn-blue btn-block font-bold font-14'
+				%div= submit_tag 'Send Message', class: 'btn btn-blue btn-block font-bold font-14 submit'
 
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -84,32 +84,48 @@
 
 	});
 
-	$('.agent-contact-form').find('select.cst').on('change', function(){
-		var val = $(this).val();
-		if(val == ''){
-			$(this).addClass('col-grey');
-		}else{
-			$(this).removeClass('col-grey');
+	$("#contact-agent-form").validate({
+		rules: {
+			'contact[email]': {
+				required: true,
+				email: true
+			},
+			'contact[bedrooms]': 'required',
+			'contact[budget]': 'required',
+			'contact[neighborhoods][]': 'required'
+		},
+		messages: {
+			'contact[bedrooms]': '',
+			'contact[budget]': '',
+			'contact[neighborhoods][]': ''
 		}
 	});
 
-	$(document).on('click', 'form', function(e){
-		var submit;
-		var select_btn = $('.btn-custom-multiselect');
+	// If trying to submit form when nothing is entered.
+	//
+	$('input[type=submit]').on('click', function(){
+		var nb = $('#contact_neighborhoods').val();
 		var elems = $(this).find('.validate');
-		var len = elems.length - 1
+		var elem;
+		var submit;
+		if(nb == '' || nb == null){
+			$('.btn-custom-multiselect').addClass('error');
+			submit = false;
+		}else{
+			$('.btn-custom-multiselect').removeClass('error');
+			submit = true;
+		}
+		
 		for(var i = 0; i <= len; i++){
-			if($(elems[i]).val() == '' || $(elems[i]).val() == null || select_btn.text() == 'Neighborhood Interested In* '){
-				$(elems[i]).parent().addClass('has-error');
-				submit = false
-			}else{
-				$(elems[i]).parent().removeClass('has-error');
-				select_btn.parent().removeClass('has-error');
-				submit = true;
+			elem = $(elems[i]);
+			if(elem.val() == '' || elem.val() == null){
+				elem.addClass('error');
+				submit = false;
 			}
 		}
 		return submit;
 	});
+
 
 :css
 	#agent-info{
@@ -183,4 +199,10 @@
 	}
 	.checkbox label {
 		width: 100%;
+	}
+	.error{
+		color: #a94442;
+	}
+	select.error, input.error, .btn-custom-multiselect.error{
+		border-color: #a94442;
 	}
