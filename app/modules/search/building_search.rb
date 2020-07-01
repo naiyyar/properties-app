@@ -20,7 +20,7 @@ module Search
       page_num           = 1 if page_num == 0
       @filters           = filters
       final_results      = {}
-      top2_featured      = top2_featured_buildings(buildings) #if search_string.present?
+      top2_featured      = top2_featured_buildings(buildings, searched_by) #if search_string.present?
       #top2_featured      = top2_featured_buildings_for_management(buildings)   if search_string.blank?
       non_featured       = non_featured_buildings(buildings, top2_featured, sort_by)
       per_page_buildings = non_featured.paginate(:page => page_num, :per_page => 20)
@@ -49,10 +49,17 @@ module Search
       return buildings.sort_buildings(buildings, sort_by, @filters)
     end
 
-    def top2_featured_buildings buildings
-      fb_ids = featured_building_ids(buildings.pluck(:id))
+    def top2_featured_buildings buildings, searched_by
+      fb_ids = featured_building_ids(buildings.pluck(:id), searched_by)
       return [] if fb_ids.blank?
-      buildings.where(id: fb_ids.shuffle[0..1]) if fb_ids.length > 0
+      shuffled_ids = fb_ids.shuffle[0..1]
+      if fb_ids.length > 0
+        unless searched_by == 'nyc'
+          buildings.where(id: shuffled_ids) 
+        else
+          Building.where(id: shuffled_ids)
+        end
+      end
     end
 
     # def top2_featured_buildings buildings, search_string, searched_by
@@ -68,10 +75,10 @@ module Search
     #   # end
     # end
 
-    def featured_building_ids ids
-      FeaturedBuilding.active
-                      .where(building_id: ids)
-                      .pluck(:building_id)
+    def featured_building_ids ids, searched_by
+      fbs = FeaturedBuilding.active
+      fbs = fbs.where(building_id: ids) unless searched_by == 'nyc'
+      fbs.pluck(:building_id)
     end
 
     def search_by_zipcodes(criteria)

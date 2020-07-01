@@ -1,3 +1,5 @@
+//= require ./home/jquery.init
+
 (function($) {
   "use strict";
 
