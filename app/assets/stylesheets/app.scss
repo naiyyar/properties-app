@@ -1324,7 +1324,7 @@ a.userHandler .counter {
     transition: all .2s ease-in-out;
 }
 .no-touch .leftNav ul li ul {
-    background-color: #132120;
+    background-color: #2a2a2a;
     position: absolute;
     display: block;
     top: 0;
@@ -1363,7 +1363,7 @@ a.userHandler .counter {
     transition: all .4s ease-in-out;
 }
 .expanded .leftNav ul li ul.bigList {
-    max-height: 600px;
+    min-height: 600px;
 }
 .no-touch .leftNav ul li:hover ul {
     left: 100%;
