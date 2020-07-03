@@ -1,12 +1,12 @@
 .visible-xs
   - if show_filters?
     %section.sorted_by_option.row{style: "padding: 1px 0px;display: inline-block;width: 100%;background: #fff;margin: 0px; display: #{custom_search? ? 'none' : 'block'}"}
-      %section.col-xs-6{style: 'padding-left: 0px;padding-right: 1px;'}
+      %section.col-xs-6{style: 'padding-left: 0px;padding-right: 1px;width: 53%;'}
         %label{style: 'margin-bottom: 1px; padding: 2px 0px;'}
           %div.counts=link_to "#{@listings_count.to_i} Rentals |", '#', style: 'color: #428bca;'
           %div.counts=link_to "#{@buildings_count.to_i} Buildings", '#', style: 'color: #428bca;'
       
-      %section.col-xs-6{style: 'padding-left: 0px;padding-right: 0px;'}
+      %section.col-xs-6{style: 'padding-left: 0px;padding-right: 0px;width: 47%;'}
         %section.tbl-cell.pull-left{style: 'width: 67px;padding: 3px 0px;'}
           %span.sorted-by{style: 'margin-bottom: 1px;'} Sorted By:
         %section.tbl-cell{style: 'display: table-cell;'}
