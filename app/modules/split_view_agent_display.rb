@@ -18,15 +18,15 @@ module SplitViewAgentDisplay
       'Harlem'
     elsif nb == 'Hudson Heights'
       'Washington Heights'
-    elsif NYCBorough.midtown_manhattan_sub_borough.include?(nb)
+    elsif NYCBorough.midtown_manhattan_sub_borough.include?(nb) || nb == 'Midtown'
       'Midtown Manhattan'
     elsif nb == 'Sutton Place'
       'Midtown East'
-    elsif brooklyn_children.include?(nb)  || nb == 'Brooklyn'
+    elsif brooklyn_children.include?(nb)
       'Brooklyn'
-    elsif queens_children.include?(nb) || nb == 'Queens'
+    elsif queens_children.include?(nb)
       'Queens'
-    elsif bronx_children.include?(nb) || nb == 'Bronx'
+    elsif bronx_children.include?(nb)
       'Bronx'
     else
       nb

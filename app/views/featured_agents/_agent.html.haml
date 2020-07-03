@@ -7,7 +7,12 @@
       %h2.name-or-add=agent.full_name
       .cardAddress="#{agent.neighborhood} Expert"
       .cardAddress.font-14{style: 'color: #000;'}= agent.broker_firm
-      .cardAddress.font-14=link_to "#{number_to_phone(phone = agent.try(:phone), area_code: true)}", "tel:#{phone}", class: 'hyper-link'
+      .cardAddress.font-14
+        - phone = agent.try(:phone)
+        - if phone.present?
+          =link_to "#{number_to_phone(phone, area_code: true)}", "tel:#{phone}", class: 'hyper-link'
+        - else
+          %span.invisible 9899123456
       %br
       %br
       
