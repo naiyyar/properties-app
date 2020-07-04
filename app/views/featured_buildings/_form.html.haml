@@ -25,14 +25,15 @@
               %br
             
             .form-group
-              .col-md-7.col-sm-7.col-xs-7
-                .pull-right
+              .col-md-12.col-sm-12.col-xs-12
+                .text-right
                   -if @featured_building.new_record?
-                    = link_to 'Cancel', params[:type].blank? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
+                    = link_to 'Cancel', params[:type].blank? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
                   -else
-                    = link_to 'Cancel', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
-              .col-md-5.col-sm-5.col-xs-5
-                = f.submit @submit_text, class: 'btn btn-primary btn-block', disabled: true
+                    = link_to 'Cancel', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
+                  
+                  = link_to 'Back', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18 pl-28 pr-28'
+                  = f.submit @submit_text, class: 'btn btn-primary font-18 pl-28 pr-28', disabled: true
     
 =javascript_include_tag 'featured_as_building'
 
