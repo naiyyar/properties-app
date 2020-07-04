@@ -8,7 +8,7 @@
           = building_street_address @imageable
           %br/
           = @imageable.neighborhood
-    - elsif imageable.kind_of?(Unit)
+    - elsif @imageable.kind_of?(Unit)
       = link_to unit_path(@imageable), class: 'text-col-black', 'data-no-turbolink' => false do
         %h4= @imageable.building.building_name
         %p

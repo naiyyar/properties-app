@@ -1,5 +1,9 @@
 <% if params[:type] == 'billing' %>
-	<%= render 'billings/form' %>
+	<div class='row'>
+		<div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-3'>
+			<%= render 'billings/form' %>
+		</div>
+	</div>
 <%elsif params[:type] == 'add_new_card' %>
 	<%= render 'billings/add_card_form' %>
 <%else%>

@@ -27,7 +27,10 @@
                 %td=agent.id
                 %td=agent.full_name
                 %td=agent.try(:email)
-                %td=search_by_neighborhood_link(agent.try(:neighborhood), 'MANHATTAN', false)
+                %td
+                  - nb = agent.try(:neighborhood)
+                  - nb = 'Midtown' if nb == 'Midtown Manhattan'
+                  =search_by_neighborhood_link(nb, 'MANHATTAN', false)
                 %td=agent.try(:broker_firm)
                 %td=number_to_phone(agent.try(:phone), area_code: true)
                 %td=link_to '<span class="fa fa-globe"></span>'.html_safe, agent.website, target: '_blank' if agent.website.present?
