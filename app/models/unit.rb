@@ -44,7 +44,7 @@
 class Unit < ApplicationRecord
   acts_as_voteable
 
-  include PgSearch
+  include PgSearch::Model
   include Imageable
   include Voteable
   

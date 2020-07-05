@@ -17,7 +17,12 @@
       %li.no-hover-underline.parent
         %a{href: '/about'} About
       %li.no-hover-underline.parent
-        %a{href: advertise_with_us_path } Advertise
+        %a.dropdown-toggle.no-hover-underline{href: '#', 'data-toggle' => 'dropdown'} 
+          Advertise
+          %span.fa.fa-chevron-down
+
+        .dropdown-menu.userMenu.admin{role: 'menu'}
+          = render 'layouts/shared/advertise_items'
       %li.no-hover-underline.parent
         %a{href: '/blog'} Blog
       %li.no-hover-underline.parent

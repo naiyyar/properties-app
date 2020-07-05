@@ -1,5 +1,17 @@
 module HomeHelper
 
+	def self_service_btn_link type
+		unless current_user
+      '/users/sign_up'
+    else
+      unless type == 'agents'
+        managertools_user_path(current_user, type: 'featured')
+      else
+        agenttools_user_path(current_user, type: 'featured')
+      end
+    end
+	end
+
 	def hero_image
 		if home_page?
     	@mobile_view ? asset_path('hero-mobile.jpg') : asset_path('hero.jpg')

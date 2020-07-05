@@ -1,5 +1,5 @@
 class Listing < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
   include Listable
   # associations
   belongs_to :building

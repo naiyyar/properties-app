@@ -9,7 +9,10 @@
           %li
             %a{href: '/about'} About Us
           %li
-            %a{href: '/advertise-with-us'} Advertise With Us
+            %a{href: 'javascript:;'} Advertise With Us
+            %ul.list-unstyled{style: 'padding: 8px 16px 0px;'}
+              %li=link_to 'Agents', advertise_with_us_path(type: 'agents')
+              %li{style: 'padding-bottom: 0px;'}=link_to 'Property Managers', advertise_with_us_path(type: 'property-managers')
           %li
             %a{href: '/blog'} Blog
           %li

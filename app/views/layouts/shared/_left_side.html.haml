@@ -8,9 +8,11 @@
         %li
           %a{href: '/about'}
             %span.navLabel About us
-        %li
-          %a{href: advertise_with_us_path}
+        %li.hasSub
+          %a{href: 'javascript:;'}
             %span.navLabel Advertise
+            %span.fa.fa-angle-left.arrowRight
+          = render 'layouts/shared/advertise_items'
         %li
           %a{href: '/blog'}
             %span.navLabel Blog
@@ -47,10 +49,12 @@
         %li
           %a{href: '/about'}
             %span.navLabel About us
-        %li
-          %a{href: advertise_with_us_path}
+        %li.hasSub
+          %a{href: 'javascript:;'}
             %span.navLabel Advertise
-
+            %span.fa.fa-angle-left.arrowRight
+          = render 'layouts/shared/advertise_items'
+          
         %li.hasSub
           %a{href: 'javascript:;'}
             %span.navLabel Tools

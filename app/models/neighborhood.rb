@@ -12,7 +12,7 @@
 
 class Neighborhood < ApplicationRecord
 
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :nb_search, against: [:name],
      :using => { :tsearch => { prefix: true } }
 

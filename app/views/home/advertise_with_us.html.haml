@@ -1,127 +1,130 @@
-.advertise-with-us
-	.top-section
-		.row
-			.col-lg-12.col-md-12.col-xs-12
-				%h2 Promote Your Apartments 
-				%h2 More Effectively With Transparentcity
-				%br
-				%p Transparentcity advertises exclusively for NYC area landlords and property managers. We provide a supplemental, yet zero maintenance solution to advertise your vacant apartments without disrupting your current leasing and marketing efforts.
-	
-	%hr
-	
-	.mid-section
-		.row
-			.col-lg-12.col-md-12.col-xs-12
-				%h3 Our Offerings
-
-		.row
-			.col-lg-6.col-md-6.col-xs-12
-				%h4 Self Service Featuring
-				%p 
-					Simply create a user account and go into the manager tool. Select the building you want to 
-					%b Feature, 
-					pay online through our Stripe integration and you are done in minutes.
-				%p 
-					%b Featured Buildings 
-					are interchangeable and can be adjusted throughout the featured time period.
-				%a.btn.btn-primary.btn-round.font-bold.visible-xs{href: @self_service_btn_link}='$49 / Building / 4 Weeks'
-
-			.col-lg-6.col-md-6.col-xs-12
-				%h4 Managed Service Featuring
-				%p 
-					Maintenance free for you where we continually monitor and update the portfolio of buildings to 
-					%b Feature 
-					based on vacancies or desired brand exposure for your portfolio.
-				%p Month to month payments. No contracts or long term commitments. Cancel and resubscribe anytime.
-				%a.btn.btn-primary.btn-round.font-bold.visible-xs{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
-		
-		.row.hidden-xs
-			.col-lg-6.col-md-6
-				%a.btn.btn-primary.btn-round.font-bold{href: @self_service_btn_link}='$49 / Building / 4 Weeks'
-			.col-lg-6.col-md-6
-				%a.btn.btn-primary.btn-round.font-bold{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
-
-		%hr
-
-		.row
-			.col-lg-12.col-md-12.col-xs-12
-				%h3 Our Product Platform
-
-		.row
-			.col-lg-6.col-md-6.col-xs-12
-				=image_tag 'Advertise-With-Us.jpg', style: 'width: 100%;margin-top: 14px;'
-
-			.col-lg-6.col-md-6.col-xs-12
-				%h4 We Manage Data. You Manage Leads.
-				%p We use the listings, photos and contact emails that are on your website and upload them to Transparentcity so you don't have to.
-				%p Leads are sent directly to your email inbox or via website referral traffic. Your website analytics will show that Transparentcity is already a top source of referral traffic.  
-
-				%h4 Featuring Capabilities
-				%p 
-					Boost exposure with 
-					%b Featured 
-					Buildings, Comps and Map Ads for priority and more frequent placement
-
-				%h4 Manager Tools
-				%p 
-					Use the dashboard to advertise and manage your 
-					%b Featured 
-					portfolio
-		
-		%hr
-
-		.row
-			.col-lg-12.col-md-12.col-xs-12
-				%h3 Who We Work With
-				%p Property Managers with inhouse leasing teams and a website(s) that showcase availability so renters know they can rent directly.
-				.who-www
-					%section 
-						%b Multifamily Rental Properties
-					%section 
-						%b Co Living
-					%section 
-						%b Furnished/Short Term Apartments
-					%section 
-						%b Individual Owner/Landlord of Building 
-						(contact us for details on validating)
-					%section 
-						%b Ad Agency 
-						representing the above
-
-		%hr
-
-		#why-wwt
+- if params[:type] == 'agents'
+	= render 'home/partials/agent_advertising'
+- else
+	.advertise-with-us
+		.top-section
 			.row
 				.col-lg-12.col-md-12.col-xs-12
-					%h3 Why Work With Transparentcity?
-			
+					%h2 Promote Your Apartments 
+					%h2 More Effectively With Transparentcity
+					%br
+					%p Transparentcity advertises exclusively for NYC area landlords and property managers. We provide a supplemental, yet zero maintenance solution to advertise your vacant apartments without disrupting your current leasing and marketing efforts.
+		
+		%hr
+		
+		.mid-section
 			.row
-				.col-lg-6.col-md-6.col-xs-12
-					%div.icon
-						%span.fa.fa-exchange.fa-3x.fa-rotate-90
-					%h4 Increase Leads | Decrease Vacancies
-					%p Connect with active NYC renters who explicitly want to bypass fees and are looking to deal directly. Drive vacancies and rent concessions down while driving the rent roll and NOI up.
-
-				.col-lg-6.col-md-6.col-xs-12
-					%div.icon
-						%span.fa.fa-line-chart.fa-3x
-					%h4 Boost Your Buildings Exposure
-					%p Increase the amount of website clicks, email leads and online applications an apartment receives.
+				.col-lg-12.col-md-12.col-xs-12
+					%h3 Our Offerings
 
 			.row
 				.col-lg-6.col-md-6.col-xs-12
-					%div.icon
-						%span.fa.fa-magic.fa-3x
-					%h4 Further Your Brand Awareness
+					%h4 Self Service Featuring
 					%p 
-						Increase utilization of your most powerful yet most underutilized asset: 
-						%b Your Own Website.
+						Simply create a user account and go into the Manager Tool.  Select the building you want to
+						%b Feature, 
+						and your Building Ad is up and running in a couple of clicks.
+					%p 
+						%b Featured Buildings 
+						are interchangeable and can be adjusted throughout the featured time period.
+					%a.btn.btn-primary.btn-round.font-bold.visible-xs{href: @self_service_btn_link}='$49 / Building / 4 Weeks'
 
 				.col-lg-6.col-md-6.col-xs-12
-					%div.icon
-						%span.fa.fa-clock-o.fa-3x
-					%h4 Zero Maintenance
+					%h4 Managed Service Featuring
 					%p 
-						No manual postings. No listings fatigue. No duplicate information. Simply choose a building to 
+						Maintenance free for you where we continually monitor and update the portfolio of buildings to 
 						%b Feature 
-						or let us do it for you.
+						based on vacancies or desired brand exposure for your portfolio.
+					%p Month to month payments. No contracts or long term commitments. Cancel and resubscribe anytime.
+					%a.btn.btn-primary.btn-round.font-bold.visible-xs{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
+			
+			.row.hidden-xs
+				.col-lg-6.col-md-6
+					%a.btn.btn-primary.btn-round.font-bold{href: @self_service_btn_link}='$49 / Building / 4 Weeks'
+				.col-lg-6.col-md-6
+					%a.btn.btn-primary.btn-round.font-bold{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
+
+			%hr
+
+			.row
+				.col-lg-12.col-md-12.col-xs-12
+					%h3 Our Product Platform For Property Managers
+
+			.row
+				.col-lg-6.col-md-6.col-xs-12
+					=image_tag 'Advertise-With-Us.jpg', style: 'width: 100%;margin-top: 14px;'
+
+				.col-lg-6.col-md-6.col-xs-12
+					%h4 We Manage Data. You Manage Leads.
+					%p We use the listings, photos and contact emails that are on your website and upload them to Transparentcity so you don't have to.
+					%p Leads are sent directly to your email inbox or via website referral traffic. Your website analytics will show that Transparentcity is already a top source of referral traffic.  
+
+					%h4 Featuring Capabilities
+					%p 
+						Boost exposure with 
+						%b Featured 
+						Buildings, Comps and Map Ads for priority and more frequent placement
+
+					%h4 Manager Tools
+					%p 
+						Use the dashboard to advertise and manage your 
+						%b Featured 
+						portfolio
+			
+			%hr
+
+			.row
+				.col-lg-12.col-md-12.col-xs-12
+					%h3 Who We Work With
+					%p Property Managers with inhouse leasing teams and a website(s) that showcase availability so renters know they can rent directly.
+					.who-www
+						%section 
+							%b Multifamily Rental Properties
+						%section 
+							%b Co Living
+						%section 
+							%b Furnished/Short Term Apartments
+						%section 
+							%b Individual Owner/Landlord of Building 
+							(contact us for details on validating)
+						%section 
+							%b Ad Agency 
+							representing the above
+
+			%hr
+
+			#why-wwt
+				.row
+					.col-lg-12.col-md-12.col-xs-12
+						%h3 Why Work With Transparentcity?
+				
+				.row
+					.col-lg-6.col-md-6.col-xs-12
+						%div.icon
+							%span.fa.fa-exchange.fa-3x.fa-rotate-90
+						%h4 Increase Leads | Decrease Vacancies
+						%p Connect with active NYC renters who explicitly want to bypass fees and are looking to deal directly. Drive vacancies and rent concessions down while driving the rent roll and NOI up.
+
+					.col-lg-6.col-md-6.col-xs-12
+						%div.icon
+							%span.fa.fa-line-chart.fa-3x
+						%h4 Boost Your Buildings Exposure
+						%p Increase the amount of website clicks, email leads and online applications an apartment receives.
+
+				.row
+					.col-lg-6.col-md-6.col-xs-12
+						%div.icon
+							%span.fa.fa-magic.fa-3x
+						%h4 Further Your Brand Awareness
+						%p 
+							Increase utilization of your most powerful yet most underutilized asset: 
+							%b Your Own Website.
+
+					.col-lg-6.col-md-6.col-xs-12
+						%div.icon
+							%span.fa.fa-clock-o.fa-3x
+						%h4 Zero Maintenance
+						%p 
+							No manual postings. No listings fatigue. No duplicate information. Simply choose a building to 
+							%b Feature 
+							or let us do it for you.

@@ -20,7 +20,7 @@ class ManagementCompany < ApplicationRecord
 	validates :website, :url => true, allow_blank: true
 
 	# pgsearch
-	include PgSearch
+	include PgSearch::Model
   pg_search_scope :text_search_by_management_company, against: [:name],
                   :using => { :tsearch => { prefix: true } }
 
