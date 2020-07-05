@@ -1,5 +1,5 @@
 class FeaturedAgent < ApplicationRecord
-	include PgSearch
+	include PgSearch::Model
 	include Imageable
 	include Billable
 

@@ -1,5 +1,5 @@
 class FeaturedBuilding < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
   include Billable
 
   extend RenewPlan

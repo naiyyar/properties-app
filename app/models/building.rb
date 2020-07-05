@@ -84,7 +84,7 @@ class Building < ApplicationRecord
                  :neighborhood3, :studio, :one_bed, :two_bed, :three_bed, :four_plus_bed, :co_living, :listings_count]
   
   # Modules
-  include PgSearch
+  include PgSearch::Model
   include Imageable
   include SaveNeighborhood
   include BuildingReviews

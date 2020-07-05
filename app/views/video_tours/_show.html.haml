@@ -9,6 +9,6 @@
 					- url = video.url
 					.col-lg-6.image-gallery
 						%p.font-14=video.try(:description)
-						%a.propWidget-1{'data-caption' => video.try(:description), 'data-fancybox' => 'gallery', href: 'javascript:;', 'data-type' => 'iframe', 'data-src' => "#{url}?#{auto_play(url)}"}
+						%a.propWidget-1.tour-fbox{'data-caption' => video.try(:description), 'data-fancybox' => 'gallery', href: 'javascript:;', 'data-type' => 'iframe', 'data-src' => "#{url}?#{auto_play(url)}"}
 							%div{style: "position:absolute;z-index:500;height:#{@vd_height}px;width:100%;"}
 							%iframe{src: url, style: "width: 100%;height: #{@vd_height}px;border:none;", frameborder: '0', allowfullscreen: true}
