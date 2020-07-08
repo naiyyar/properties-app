@@ -74,7 +74,7 @@ class ListingsController < ApplicationController
   def show_more
     @building = Building.find(params[:building_id])
     @rentals  = params[:listing_type] || 'active'
-    @listings = @building.get_listings(params[:filter_params], @rentals).order_by_rent_asc
+    @listings = @building.get_listings(params[:filter_params], @rentals)
     respond_to do |format|
       format.html
       format.js
