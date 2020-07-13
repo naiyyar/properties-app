@@ -193,7 +193,8 @@ class BuildingsController < ApplicationController
       'SoHo',
       'Upper East Side', 
       'Upper Manhattan', 
-      'Upper West Side'
+      'Upper West Side',
+      'Washington Heights'
     ]
   end
 
