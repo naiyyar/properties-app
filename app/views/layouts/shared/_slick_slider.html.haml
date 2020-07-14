@@ -1,18 +1,21 @@
 - @border_class = 'bordered'
 .similar{style: "#{@featured_buildings.present? ? 'padding: 0px;' : ''}"}
-	.center.slider
+	.center.slider{class: "slides-#{slides_to_show}"}
 		- properties = @similar_properties || @featured_buildings
 		- properties.each do |building|
 			%div= render 'buildings/detail_card', building: building
 
 :javascript
+	var slides_to_show = #{slides_to_show};
+	var show_arrows = (slides_to_show == 2 ? true : false);
+	var centered 		= !show_arrows;
 	$(".center").slick({
 		dots: false,
 		infinite: true,
-		centerMode: true,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		arrows: false
+		centerMode: centered,
+		slidesToShow: slides_to_show,
+		slidesToScroll: slides_to_show,
+		arrows: show_arrows
 	});
 
 :css
@@ -27,14 +30,19 @@
 
 	.slick-slide {
 		transition: all ease-in-out .3s;
+	}
+
+	.slides-1 .slick-slide {
 		opacity: .6;
 	}
   
-	.slick-active {
+	.slides-1 .slick-track .slick-active {
 		opacity: .5;
 	}
-
-	.slick-current {
+	.slides-2 .slick-track .slick-active {
+		opacity: 1;
+	}
+	.slides-1 .slick-track .slick-current {
 		opacity: 1;
 	}
 	.modal-full.past-listing-modal{

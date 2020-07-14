@@ -2,22 +2,24 @@
   .similar{style: "#{@featured_buildings.present? ? 'padding: 0px;' : ''}"}
     / carousel for medium & large devices
     - unless action_name == 'load_featured_buildings'
-      #carouselSimilar-1.carousel.slide.carousel-col
-        .carousel-inner
-          - item_ids = []
-          - (1..@similar_properties.count).step(step).each_with_index do |val, index|
-            %div{class: "item #{index == 0 ? 'active' : ''}"}
-              .row
-                - @similar_properties.where.not(id: item_ids).limit(step).each do |building|
-                  - @last_uploads = building.image_uploads.first
-                  %div{class: "col-lg-#{col} col-md-4"}= render 'buildings/detail_card', building: building
-                  - item_ids << building.id
-        
-        - if @similar_properties.count > step
-          %a.left.carousel-control{'data-slide' => 'prev', href: '#carouselSimilar-1', role: 'button'}
-            %span.fa.fa-chevron-left
-          %a.right.carousel-control{'data-slide' => 'next', href: '#carouselSimilar-1', role: 'button'}
-            %span.fa.fa-chevron-right
+      =render 'layouts/shared/slick_slider', slides_to_show: 2
+      -if false
+        #carouselSimilar-1.carousel.slide.carousel-col
+          .carousel-inner
+            - item_ids = []
+            - (1..@similar_properties.count).step(step).each_with_index do |val, index|
+              %div{class: "item #{index == 0 ? 'active' : ''}"}
+                .row
+                  - @similar_properties.where.not(id: item_ids).limit(step).each do |building|
+                    - @last_uploads = building.image_uploads.first
+                    %div{class: "col-lg-#{col} col-md-4"}= render 'buildings/detail_card', building: building
+                    - item_ids << building.id
+          
+          - if @similar_properties.count > step
+            %a.left.carousel-control{'data-slide' => 'prev', href: '#carouselSimilar-1', role: 'button'}
+              %span.fa.fa-chevron-left
+            %a.right.carousel-control{'data-slide' => 'next', href: '#carouselSimilar-1', role: 'button'}
+              %span.fa.fa-chevron-right
     - else
       #carouselSimilar-1.carousel.slide.carousel-col
         .carousel-inner
@@ -26,4 +28,4 @@
             - @featured_buildings.each do |building|
               .col-lg-3.col-md-4= render 'buildings/detail_card', building: building
 - elsif action_name == 'show'
-  =render 'layouts/shared/slick_slider'
+  =render 'layouts/shared/slick_slider', slides_to_show: 1
