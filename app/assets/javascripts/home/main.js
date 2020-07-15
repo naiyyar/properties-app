@@ -64,7 +64,6 @@ Card = {
 	loadFeaturedAgentImagesAndCTALinks: function(agent_id){
 		var fig_elem = $("#figure"+agent_id);
 		var cta_elem = $("#agent-cta-links"+agent_id);
-		console.log(cta_elem)
 	  $.ajax({
 	    url: '/featured_agents/get_images',
 	    dataType: 'json',

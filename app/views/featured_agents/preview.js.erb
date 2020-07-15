@@ -1,6 +1,9 @@
-$('.figure').html("<%= j render partial: 'home/lightslider', \
+var fig_elem  = $('.figure');
+fig_elem.html("<%= j render partial: 'home/lightslider', \
 																locals: { images_count: @images_count, \
 																				  object: @featured_agent, \
 																				  first_image: @uploads.first, \
 																				  show_path: '#' } %>");
 $('#thumbnailPreview').modal('show');
+
+Card.initLightSlider(fig_elem.find('.gallery'), true);
