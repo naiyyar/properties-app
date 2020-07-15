@@ -156,6 +156,7 @@ class Building < ApplicationRecord
 
   # popular searches
   scope :luxury_rentals, -> (prices) { where(price: prices).doorman.elevator }
+  scope :penthouses_luxury_rentals, -> (ids) { where(id: ids) }
   
   scope :studio,    -> { where(studio: 0)        }
   scope :one_bed,   -> { where(one_bed: 1)       }

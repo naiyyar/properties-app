@@ -221,28 +221,26 @@ module HomeHelper
 
 	def manhattan_searches
 		@manhattan_searches ||= [ 
-			'Manhattan Apartments For Rent', 
-			'Luxury Apartments in Manhattan', 
+			'Manhattan Apartments For Rent',
 			'Manhattan Apartments For Rent Cheap'
 		]
 	end
 
 	def nyc_searches
 		@nyc_searches ||= [ 
-			'Cheap Apartments In NYC', 'Studio Apartments In NYC',
-			'Affordable Apartments For Rent In NYC', 
-			'One Bedroom Apartments in NYC', 
-			'Cheap Studio Apartments in NYC','2 Bedroom Apartments in NYC', 
+			'Studio Apartments In NYC For Rent',
+			'Affordable Apartments For Rent In NYC',
+			'Cheap Apartments In NYC For Rent',
+			'2 Bedroom Apartments in NYC', 
 			'3 Bedroom Apartments For Rent in NYC',
-			'Affordable Luxury Apartments In NYC'
+			'One Bedroom Apartments in NYC For Rent', 
+			'Cheap Studio Apartments in NYC For Rent',
 		]
 	end
 
 	def amenities_searches
 		@amenities_searches ||= [
-			'Doorman Buildings In NYC', 
 			'Pet Friendly Apartments In NYC', 
-			'NYC Apartments With Pool', 
 			'Walk Up Apartments NYC', 
 			'Affordable Doorman Buildings NYC', 
 			'NYC Apartments With Gyms'
@@ -251,37 +249,69 @@ module HomeHelper
 
 	def neighborhoods_searches
 		@neighborhoods_searches ||= [
-			'Studio Apartments in Brooklyn', 
+			'Studio Apartments in Brooklyn For Rent', 
 			'Studios For Rent In Queens', 
 			'2 Bedroom Apartments in Brookly For Rent', 
 			'2 Bedroom Apartments in Queens For Rent', 
-			'Luxury Apartments In Upper East Side', 
-			'Harlem Studio Apartments',
-			'Long Island City Studios', 
+			'Harlem Studio Apartments','Long Island City Studios', 
 			'Upper East Side Studio Apartments', 
 			'Upper West Side Studio Apartments',
 			"Hell's Kitchen Studios", 'West Village Studios', 
-			'2 Bedroom Apartments Upper East Side', 
-			"Hell's Kitchen Luxury Rentals",'Midtown Studio Apartments NYC', 
-			'Midtown East Luxury Rentals', 'Upper West Side Luxury Rental Buildings',
-			'Upper East Side Apartments For Rent With Doorman'
+			'2 Bedroom Apartments Upper East Side',
+		]
+	end
+
+	def luxury_searches
+		@luxury_searches ||= [
+			'Penthouses For Rent In NYC',
+			'Luxury Apartments For Rent In NYC',
+			'Affordable Luxury Apartments In NYC',
+			'Brooklyn Luxury Rentals',
+			'Luxury Apartments in Manhattan For Rent'
+		]
+	end
+
+	def luxury_neighborhoods
+		@luxury_neighborhoods ||= [
+			'Battery Park City Luxury Rentals','Chelsea Luxury Rentals',
+			'Downtown Brooklyn Luxury Rentals','East Harlem Luxury Rentals',
+			'East Village Luxury Rentals','Financial District Luxury Rentals',
+			'Gramercy Luxury Rentals','Harlem Luxury Rentals',
+			"Hell's Kitchen Luxury Rentals",'Kips Bay Luxury Rentals',
+			'Long Island City Luxury Rentals','Midtown East Luxury Rentals',
+			'Midtown West Luxury Rentals','Murray Hill Luxury Rentals',
+			'Roosevelt Island Luxury Rentals','Tribeca Luxury Rentals',
+			'Upper East Side Luxury Rentals','Upper West Side Luxury Rentals',
+			'West Village Luxury Rentals','Williamsburg Luxury Rentals'
 		]
 	end
 
 	def col1_popular_searches
 		{ 
-			'Manhattan' => manhattan_searches, 
-			'NYC' 			=> nyc_searches, 
-			'Amenities' => amenities_searches 
+			'Manhattan' 		=> manhattan_searches, 
+			'NYC' 					=> nyc_searches, 
+			'Amenities' 		=> amenities_searches,
+			'Neighborhoods' => neighborhoods_searches
 		}
 	end
 
 	def col2_popular_searches
-		{ 'Neighborhoods' => neighborhoods_searches }
+		{ 
+			'Luxury' 							 => luxury_searches,
+		 	'Luxury Neighborhoods' => luxury_neighborhoods
+		}
+	end
+
+	def popular_search_url link_text
+		search_string = link_text.downcase.split(' ').join('-')
+		url = "/nyc/#{search_string}"
+		return url unless search_string == 'penthouses-for-rent-in-nyc'
+		
+		"#{url}?sort_by=0&filter%5Bprice%5D%5B%5D=on&searched_by=nyc&filter%5Bmin_price%5D=8100&filter%5Bmax_price%5D=15500%2B"
 	end
 
 	def popular_search_link category, link_text
-		link_to link_text, "/nyc/#{link_text.downcase.split(' ').join('-')}", class: 'hyper-link'
+		link_to link_text, popular_search_url(link_text), class: 'hyper-link'
 	end
 
 	def home_quick_links
