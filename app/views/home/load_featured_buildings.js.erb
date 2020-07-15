@@ -2,7 +2,7 @@ var section = $('#featured-buildings-section');
 <% unless @mobile_view %>
     section.html("<%= j render partial: 'layouts/home/featured_buildings' %>");
 <%else%>
-    section.html("<%= j render partial: 'layouts/shared/slick_slider' %>");
+    section.html("<%= j render partial: 'layouts/shared/slick_slider', locals: { slides_to_show: 1 } %>");
 <%end%>
 
 $('#home-popular_neighborhoods').html("<%= j render partial: 'layouts/home/popular_neighborhoods' %>");
