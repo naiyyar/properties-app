@@ -6,6 +6,7 @@ module Search
 		LUXURY_APTS_PRICES 			= [3,4]
 		AFFORDABLE_APTS_PRICES  = [1,2]
 		STUDIOS 								= ['0']
+		PENTHOUSES_MIN_PRICE 	  = 8000
 		
 		def buildings_by_popular_search search_term
 			filters = {}
@@ -63,7 +64,7 @@ module Search
 			when 'studios-for-rent-in-queens'
 				buildings 			= queens_buildings.studio
 				filters[:beds] 	= STUDIOS
-			when '2-bedroom-apartments-in-brookly-for-rent'
+			when '2-bedroom-apartments-in-brooklyn-for-rent'
 				buildings 			= brooklyn_buildings.two_bed
 				filters[:beds] 	= ['2']
 			when '2-bedroom-apartments-in-queens-for-rent'
@@ -92,106 +93,83 @@ module Search
 				filters[:beds] = ['2']
 			#Luxury
 			when 'penthouses-for-rent-in-nyc'
-				# Listing Price > $8,000
-				building_ids 				     = Listing.where('rent > ?', 8000).pluck(:building_id)
+				# Listing Price >= $8,000
+				building_ids 				     = Listing.where('rent > ?', PENTHOUSES_MIN_PRICE).pluck(:building_id)
 				buildings 					     = nyc_buildings.penthouses_luxury_rentals(building_ids)
-				filters[:list_min_price] = [8100]
+				filters[:list_min_price] = [PENTHOUSES_MIN_PRICE]
 			when 'luxury-apartments-for-rent-in-nyc'
-				buildings 					= nyc_buildings.luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= nyc_buildings.luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'affordable-luxury-apartments-in-nyc'
-				buildings 					= nyc_buildings.luxury_rentals([2])
+				buildings 					= nyc_buildings.where(price: [2]).luxury_rentals
 				filters[:price] 		= [2]
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'brooklyn-luxury-rentals'
-				buildings 					= brooklyn_buildings.luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= brooklyn_buildings.luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'luxury-apartments-in-manhattan-for-rent'
-				buildings 					= manhattan_buildings.luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= manhattan_buildings.luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			#Luxury Neighborhoods
 			when 'battery-park-city-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('battery park city').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('battery park city').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'chelsea-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('chelsea').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('chelsea').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'downtown-brooklyn-Luxury-rentals'
-				buildings 					= buildings_in_neighborhood('downtown brooklyn').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('downtown brooklyn').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'east-harlem-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('east harlem').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('east harlem').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'east-village-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('east village').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('east village').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'financial-district-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('financial district').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('financial district').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'gramercy-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('gramercy park').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('gramercy park').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'harlem-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('harlem').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('harlem').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when "hell's-kitchen-luxury-rentals"
-				buildings 					= buildings_in_neighborhood("hell's kitchen").luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood("hell's kitchen").luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'kips-bay-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('kips bay').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('kips bay').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'long-island-city-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('long island city').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('long island city').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'midtown-east-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('midtown east').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('midtown east').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'midtown-west-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('midtown west').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('midtown west').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'murray-hill-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('murray hill').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('murray hill').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'roosevelt-island-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('roosevelt island').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('roosevelt island').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'tribeca-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('tribeca').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('tribeca').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'upper-east-side-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('upper east side').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('upper east side').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'upper-west-side-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('upper west side').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('upper west side').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'west-village-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('west village').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('west village').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'williamsburg-luxury-rentals'
-				buildings 					= buildings_in_neighborhood('williamsburg').luxury_rentals(LUXURY_APTS_PRICES)
-				filters[:price] 		= LUXURY_APTS_PRICES
+				buildings 					= buildings_in_neighborhood('williamsburg').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			else
 				buildings = nyc_buildings

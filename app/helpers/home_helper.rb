@@ -251,7 +251,7 @@ module HomeHelper
 		@neighborhoods_searches ||= [
 			'Studio Apartments in Brooklyn For Rent', 
 			'Studios For Rent In Queens', 
-			'2 Bedroom Apartments in Brookly For Rent', 
+			'2 Bedroom Apartments in Brooklyn For Rent', 
 			'2 Bedroom Apartments in Queens For Rent', 
 			'Harlem Studio Apartments','Long Island City Studios', 
 			'Upper East Side Studio Apartments', 
@@ -307,7 +307,7 @@ module HomeHelper
 		url = "/nyc/#{search_string}"
 		return url unless search_string == 'penthouses-for-rent-in-nyc'
 		
-		"#{url}?sort_by=0&filter%5Bprice%5D%5B%5D=on&searched_by=nyc&filter%5Bmin_price%5D=8100&filter%5Bmax_price%5D=15500%2B"
+		"#{url}?sort_by=0&filter%5Bprice%5D%5B%5D=on&searched_by=nyc&filter%5Bmin_price%5D=#{Search::PopularSearches::PENTHOUSES_MIN_PRICE}&filter%5Bmax_price%5D=15500%2B"
 	end
 
 	def popular_search_link category, link_text
