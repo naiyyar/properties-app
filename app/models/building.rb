@@ -155,7 +155,7 @@ class Building < ApplicationRecord
   scope :with_pets,             -> { where('pets_allowed_cats is true OR pets_allowed_dogs is true') }
 
   # popular searches
-  scope :luxury_rentals, -> { where.not(price: nil).doorman.elevator }
+  scope :luxury_rentals, -> { where.not(building_street_address: nil).doorman.elevator }
   scope :penthouses_luxury_rentals, -> (ids) { where(id: ids) }
   
   scope :studio,    -> { where(studio: 0)        }
