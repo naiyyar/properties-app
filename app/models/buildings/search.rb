@@ -1,7 +1,7 @@
 module Buildings
 	class Search
 		# constants
-		CITY_SEARCH_STRINGS = ['address', 'no-fee-management-companies-nyc', 'zipcodes']
+		CITY_SEARCH_STRINGS = %w(address no-fee-management-companies-nyc zipcodes)
 
 		# modules
 		include NYCBorough

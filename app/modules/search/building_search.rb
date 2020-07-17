@@ -62,19 +62,6 @@ module Search
       end
     end
 
-    # def top2_featured_buildings buildings, search_string, searched_by
-    #   # if featured_building_ids.length > 0
-    #   #   buildings = unless searched_by == 'nyc'
-    #   #                 buildings_in_neighborhood(search_string.downcase)
-    #   #               else
-    #   #                 buildings_in_city('New York')
-    #   #               end
-    #   #   return buildings.where(id: featured_building_ids.shuffle[0..1])
-    #   # else
-    #   #   []
-    #   # end
-    # end
-
     def featured_building_ids ids, searched_by
       fbs = FeaturedBuilding.active
       fbs = fbs.where(building_id: ids) unless searched_by == 'nyc'

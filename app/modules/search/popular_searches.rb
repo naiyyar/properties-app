@@ -117,7 +117,7 @@ module Search
 			when 'chelsea-luxury-rentals'
 				buildings 					= buildings_in_neighborhood('chelsea').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
-			when 'downtown-brooklyn-Luxury-rentals'
+			when 'downtown-brooklyn-luxury-rentals'
 				buildings 					= buildings_in_neighborhood('downtown brooklyn').luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'east-harlem-luxury-rentals'
