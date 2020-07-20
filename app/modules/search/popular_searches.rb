@@ -187,7 +187,7 @@ module Search
 		end
 
 		def brooklyn_buildings
-			where(city: 'Brooklyn')
+			where(city: ['Brooklyn', 'Downtown Brooklyn'])
 		end
 
 		def queens_buildings
