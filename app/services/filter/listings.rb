@@ -19,7 +19,7 @@ module Filter
 
 		def fetch_listings
 			# Not appying filter on featured building listings
-			return @listings if @building.featured?
+			return @listings if @building.featured? && @listing_type != 'past'
 			
 			if @listing_type == 'active'
 	      filtered_listings.order_by_rent_asc

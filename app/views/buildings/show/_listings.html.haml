@@ -30,4 +30,4 @@
 						
 					- if type == 'past' && @all_inactive_listings.present? && @all_inactive_listings.count > 5
 						%tr
-							%td.text-center{colspan: colspan}=link_to 'Show More...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true
+							%td.text-center{colspan: colspan}=link_to 'Show More Past Listings...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true

@@ -80,10 +80,6 @@ class User < ApplicationRecord
     email.split('@')[0]
   end
 
-  def saved_obejct? obejct
-    true
-  end
-
   def set_timezone zone
     zone = DEFAULT_TIMEZONE if US_ZONES.include?(zone)
     update_column(:time_zone, zone)
@@ -133,7 +129,7 @@ class User < ApplicationRecord
   end
 
   def logged_in_user_name
-    name.present? ? name : authorizations&.first.name
+    name.present? ? name : authorizations&.first&.name
   end
 
   def property_owner? object

@@ -9,6 +9,7 @@ brooklyn_and_queens_neighborhoods_hash = [
 	{ key: 'Greenpoint', 					url: dropbox_url+'ayj6os0lrrq8bbv/greenpoint.kml?dl=1' },
 	{ key: 'Sunset Park', 				url: dropbox_url+'t0yjbnvqqkbcswd/sunset_park.kml?dl=1' },
 	{ key: 'Bushwick', 						url: dropbox_url+'nfl2c4boxadlwh0/bushwick.kml?dl=1' },
+	{ key: 'East Williamsburg',   url: dropbox_url+'1bw12dq6n8fio1t/east_williamsburg.kml?dl=1'},
 	{ key: 'Williamsburg', 				url: dropbox_url+'iji8ng3hjsxzram/williamsburg.kml?dl=1' },
 	{ key: 'Jamaica', 						url: dropbox_url+'9sp6snzk64lhxpn/jamica.kml?dl=1'},
 	{ key: 'Rockaways', 					url: dropbox_url+'sgiyzb9s6t4j4hq/rockaways.kml?dl=1'},

@@ -13,24 +13,25 @@
             %th{width: '1%'}
         
         %tbody.table
-          - @billings.each do |billing|
-            %tr
-              %td=date_created = billing.created_at.to_date
-              %td.text-right=number_to_currency(billing.amount, precision: 2)
-              %td=billing.billing_description
-              %td
-                - unless billing.billing_card_id.blank?
-                  =card_brand_image(billing.brand)
-                - else
-                  - @card = billing.card(current_user&.stripe_customer_id)
-                  =card_brand_image(@card.brand) if @card.present?
-                =status_text(billing).html_safe
+          - if @billings.present?
+            - @billings.each do |billing|
+              %tr
+                %td=date_created = billing.created_at.to_date
+                %td.text-right=number_to_currency(billing.amount, precision: 2)
+                %td=billing.billing_description
+                %td
+                  - unless billing.billing_card_id.blank?
+                    =card_brand_image(billing.brand)
+                  - else
+                    - @card = billing.card(current_user&.stripe_customer_id)
+                    =card_brand_image(@card.brand) if @card.present?
+                  =status_text(billing).html_safe
 
-              %td.text-center
-                - unless billing.payment_failed?
-                  =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), download: "invoice_#{date_created}", title: 'Download inovoice in pdf'
-                  &nbsp;
-                  =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true, title: 'Preview in browser'
-                  &nbsp;
-                  =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'email'), title: 'Send in mail', remote: true
-              %td.text-center
+                %td.text-center
+                  - unless billing.payment_failed?
+                    =link_to '<span class="fa fa-file-pdf-o fa-2x"></span>'.html_safe, billing_path(billing, format: :pdf), download: "invoice_#{date_created}", title: 'Download inovoice in pdf'
+                    &nbsp;
+                    =link_to '<span class="fa fa-eye fa-2x"></span>'.html_safe, billing_path(billing, type: 'view'), remote: true, title: 'Preview in browser'
+                    &nbsp;
+                    =link_to '<span class="fa fa-envelope fa-2x"></span>'.html_safe, billing_path(billing, type: 'email'), title: 'Send in mail', remote: true
+                %td.text-center

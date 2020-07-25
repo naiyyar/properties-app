@@ -35,7 +35,7 @@
 		.sliderLink
 			%p.text-danger No photos are available.
 			- if @video_tours.present?
-				%a.btn.btn-o.btn-info.btn-sm.btn-round{href: show_tour_path(building_id: @building.id), 'data-remote' => true}
+				%a.btn.btn-o.btn-info.btn-sm.btn-round{href: '#video-tours'}
 					%span.fa.fa-cube
 					3D/Video Tour
 				

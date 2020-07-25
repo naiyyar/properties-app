@@ -16,14 +16,7 @@ class VideoToursController < ApplicationController
 
   def show_tour
     @loaded_category = params[:loaded_category]
-    categories       = @video_tours.pluck(:category)
-    @category        = categories.include?('amenities') ? 'amenities' : categories.uniq.sort.first
-    @video_tours     =  unless @loaded_category.present?
-                          @video_tours.where(category: @category)
-                        else
-                          @video_tours.where.not(category: @loaded_category)
-                        end
-    @video_tours     = @video_tours.group_by{|v| v.category}
+    @video_tours, @category = VideoTour.videos_by_categories(@video_tours, @loaded_category)
   end
 
   # GET /video_tours/new

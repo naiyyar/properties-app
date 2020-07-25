@@ -24,7 +24,12 @@
 
   .clearfix
   = render 'building_amenities'
-
+  
+  .clearfix
+  .amenities#video-tours
+    %h3 3D / Video Tour
+    = render 'video_tours/show'
+  
   .clearfix
   - if @building.price.present? or @building.bedroom_types?
     = render 'buildings/show/price_ranges'
@@ -97,11 +102,11 @@
 =render 'buildings/show/map_script'
 
 :javascript
-  var building_id = "#{@building.id}";
-  window.onload = function(){
-    $.ajax({
-      url: '/show_tour/'+building_id,
-      type: 'get',
-      dataType: 'script'
-    })
-  }
+  //var building_id = "#{@building.id}";
+  //window.onload = function(){
+  //  $.ajax({
+  //    url: '/show_tour/'+building_id,
+  //    type: 'get',
+  //    dataType: 'script'
+  //  })
+  //}

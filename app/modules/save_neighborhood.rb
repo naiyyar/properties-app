@@ -55,9 +55,4 @@ module SaveNeighborhood
     update_column(:neighborhood3, nb3)              if nb3.present? and neighborhood3.blank?
   end
 
-  # def building_with_nb3 neighborhood
-  #   Building.select(:id, :neighborhood, :neighborhoods_parent, :neighborhood3)
-  #           .where.not(neighborhood: nil, neighborhoods_parent: [nil], neighborhood3: [nil])
-  #           .where(neighborhood: neighborhood).first
-  # end
 end

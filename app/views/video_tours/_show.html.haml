@@ -1,4 +1,4 @@
-%div{style: 'padding: 10px; color: #fff;'}
+%div{style: 'padding: 10px; color: #333;'}
 	- VideoTour::CATEGORIES.each_with_index do |category, index|
 		- video_tours = @video_tours[category[1]] rescue nil
 		- if video_tours.present?
@@ -12,3 +12,7 @@
 						%a.propWidget-1.tour-fbox{'data-caption' => video.try(:description), 'data-fancybox' => 'gallery', href: 'javascript:;', 'data-type' => 'iframe', 'data-src' => "#{url}?#{auto_play(url)}"}
 							%div{style: "position:absolute;z-index:500;height:#{@vd_height}px;width:100%;"}
 							%iframe{src: url, style: "width: 100%;height: #{@vd_height}px;border:none;", frameborder: '0', allowfullscreen: true}
+
+- if @building_tours.present? && @building_tours.length >= 3
+	.row
+		.text-center= link_to 'Show More Videos...', show_tour_path(building_id: @building.id, loaded_category: @category), remote: true
