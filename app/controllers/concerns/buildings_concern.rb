@@ -19,7 +19,7 @@ module BuildingsConcern
     @all_inactive_listings = @building.past_listings
     @inactive_listings     = @all_inactive_listings.order_by_date_active_desc.limit(5)
     @building_tours        = @building.video_tours
-    @video_tours, @category = VideoTour.videos_by_categories(@building_tours)
+    @video_tours, @category = VideoTour.videos_by_categories(@building_tours, limit: 2)
 
     @meta_desc  = "#{@building.building_name_or_address} #{@building.building_street_address} is a #{@building.try(:building_type)} "+ 
                   "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.try(:name) }. "+ 

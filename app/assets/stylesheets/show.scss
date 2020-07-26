@@ -15,7 +15,7 @@ $content-view-width: (100%-$map-view-width);
 	  height: 100px;
 	  float: left;
 	  -webkit-overflow-scrolling: touch;
-	  .amenities, .similar, .documents, .price-ranges, #subways, #listings{
+	  .amenities, .similar, .documents, .price-ranges, #subways, #listings, .singleTop .summary{
 		  padding: 20px 200px 0 200px;
 		}
 	}
@@ -104,7 +104,6 @@ $content-view-width: (100%-$map-view-width);
 		}
 
 		.summary {
-		  padding: 20px 200px 0 200px;
 		  .summaryItem {
     		margin-bottom: 20px;
 			}
@@ -194,6 +193,19 @@ $content-view-width: (100%-$map-view-width);
 }
 
 @media screen and (max-width: 767px) {
+	.buildingsshow{
+		#mapView{
+			width: $map-view-width;
+	    float: right;
+		}
+
+		#content {
+		  .amenities, .similar, .documents, .price-ranges, #subways, #listings, .singleTop .summary{
+			  padding: 20px 20px 0 20px;
+			}
+		}
+	}
+
 	#content{
 		.singleTop{
 			.sh-slider-container{

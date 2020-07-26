@@ -15,8 +15,8 @@ class VideoToursController < ApplicationController
   end
 
   def show_tour
-    @loaded_category = params[:loaded_category]
-    @video_tours, @category = VideoTour.videos_by_categories(@video_tours, @loaded_category)
+    # @loaded_category = params[:loaded_category]
+    @video_tours, @category = VideoTour.videos_by_categories(@video_tours)
   end
 
   # GET /video_tours/new

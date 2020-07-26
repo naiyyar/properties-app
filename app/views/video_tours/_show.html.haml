@@ -1,4 +1,4 @@
-%div{style: 'padding: 10px; color: #333;'}
+%div{style: "padding: 10px; color: ##{cat_color};"}
 	- VideoTour::CATEGORIES.each_with_index do |category, index|
 		- video_tours = @video_tours[category[1]] rescue nil
 		- if video_tours.present?
@@ -15,4 +15,7 @@
 
 - if @building_tours.present? && @building_tours.length >= 3
 	.row
-		.text-center= link_to 'Show More Videos...', show_tour_path(building_id: @building.id, loaded_category: @category), remote: true
+		.col-lg-12
+			%table.table
+				%tr
+					%td.text-center= link_to 'Show More Videos...', show_tour_path(building_id: @building.id), remote: true

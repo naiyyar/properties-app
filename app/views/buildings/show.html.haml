@@ -28,7 +28,9 @@
   .clearfix
   .amenities#video-tours
     %h3 3D / Video Tour
-    = render 'video_tours/show'
+    - @vd_height = '190'
+    - cache [@building_tours.length, '3DTour'] do
+      = render 'video_tours/show', cat_color: '333'
   
   .clearfix
   - if @building.price.present? or @building.bedroom_types?
@@ -102,6 +104,7 @@
 =render 'buildings/show/map_script'
 
 :javascript
+  // $('.tour-fbox').fancybox({});
   //var building_id = "#{@building.id}";
   //window.onload = function(){
   //  $.ajax({

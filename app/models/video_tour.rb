@@ -25,13 +25,13 @@ class VideoTour < ApplicationRecord
 
 	default_scope { order('sort asc') }
 
-	def self.videos_by_categories videos, loaded_category=nil
+	def self.videos_by_categories videos, options={}
 		categories  = videos.pluck(:category)
 		category    = categories.include?('amenities') ? 'amenities' : categories.uniq.sort.first
-		video_tours = unless loaded_category.present?
-                    videos.where(category: category)
+		video_tours = if options.present? && options[:limit] == 2
+                    videos.where(category: category).limit(options[:limit])
                   else
-                    videos.where.not(category: loaded_category)
+                    videos.where.not(category: nil)
                   end
     video_tours = video_tours.group_by{|v| v.category}
     return video_tours, category
