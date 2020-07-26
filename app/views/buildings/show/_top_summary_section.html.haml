@@ -3,8 +3,8 @@
 		.row.sh-slider
 			.sh-slider-container
 				.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
-					- cache [@building, 'showPLSlider'] do
-						= render 'buildings/show/lightslider', building: @building
+					/ - cache [@building, 'showPLSlider1'] do
+					= render 'buildings/show/lightslider', building: @building
    		
 			- if @building.price.present? or @building.bedroom_types?
 				- if @min_save_amount.present?

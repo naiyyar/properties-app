@@ -1,4 +1,8 @@
-$("#remote-container").html('<%= j render partial: "show_tour_modal" %>');
+var container = $("#remote-container");
+if(container.children().length == 0){
+	container.html('<%= j render partial: "show_tour_modal" %>');
+}
+
 <% unless browser.device.mobile? %>
 	$('#showTourModal').modal('show');
 <%else%>

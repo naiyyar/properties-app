@@ -177,9 +177,10 @@ module BuildingsHelper
 														target: '_blank'
 	end
 
-	def contact_leasing_link building, bg_col=''
+	def contact_leasing_link building, bg_col='', sl_class=''
+		bt_block_class = sl_class.present? ? sl_class : 'btn-block'
 		link_to 'Contact Leasing Team', new_contact_path(building_id: building.id), 
-																		class: "btn btn-primary #{bg_col} btn-block font-bolder btn-round", 
+																		class: "btn btn-primary #{bg_col} #{bt_block_class} txt-color-white font-bolder btn-round sh-contact-leasing", 
 																		remote: true
 	end
 
@@ -190,7 +191,11 @@ module BuildingsHelper
 	def date_uploaded object
 		"<b>#{ associated_object(object.imageable) }</b>" +
 		"<p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>" +
-		"<p>" + check_availability_link(@building, 'btn-slider') + "</p>".html_safe if @building.present?
+		"<p>" + fancybox_cta_buttons + "</p>".html_safe if @building.present?
+	end
+
+	def fancybox_cta_buttons
+		@building.leasing? ? contact_leasing_link(@building, '', 'btn-slider') : check_availability_link(@building, 'btn-slider')
 	end
 
 	def sort_options
