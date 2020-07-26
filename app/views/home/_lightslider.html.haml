@@ -4,7 +4,8 @@
     .clearfix{ style: 'width:100%;' }
       = link_to show_path, style: 'cursor: pointer;' do
         - if @similar_properties.present? or object.featured?
-          %h4.comp.featured.round Featured
+          %h4.comp.featured.round
+            %span.icon-badge.font-14
         
         %h4.lightslider-slides-counts.round
           %span.current 1
@@ -25,5 +26,6 @@
 - else
   %a{ href: show_path, style: 'cursor: pointer;' }
     - if @similar_properties.present? || object.featured?
-      %h4.comp.featured.round Featured
+      %h4.comp.featured.round
+        %span.icon-badge.font-14
     .bg-size-cover.h-lg.bg-pos-center{style: "background-image: url(#{image_url('no-photo.png') })"}
