@@ -1,5 +1,5 @@
 <% @building ||= building %>
-<div class="amenities">
+<div class="amenities show-section">
   <h3>Building Amenities
     <%= link_to 'Edit', "/building_steps/building_information?building_id=#{@building.id}", class: "btn btn-o btn-default btn-xs pull-right" if current_user.present? and current_user.has_role? :admin %>
   </h3>

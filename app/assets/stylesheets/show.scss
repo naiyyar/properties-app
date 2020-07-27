@@ -15,8 +15,11 @@ $content-view-width: (100%-$map-view-width);
 	  height: 100px;
 	  float: left;
 	  -webkit-overflow-scrolling: touch;
-	  .amenities, .similar, .documents, .price-ranges, #subways, #listings, .singleTop .summary{
+	  .show-section, .singleTop .summary{
 		  padding: 20px 200px 0 200px;
+		}
+		.aggregate-ratings.show-section ul{
+			padding: 10px 20px 10px 0px;
 		}
 	}
 }
@@ -200,7 +203,7 @@ $content-view-width: (100%-$map-view-width);
 		}
 
 		#content {
-		  .amenities, .similar, .documents, .price-ranges, #subways, #listings, .singleTop .summary{
+		  .show-section, .singleTop .summary{
 			  padding: 20px 20px 0 20px;
 			}
 		}
