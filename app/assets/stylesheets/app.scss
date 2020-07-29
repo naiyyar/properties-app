@@ -1694,7 +1694,7 @@ h1.pageTitle {
 .contactForm .cfItem:last-child {
   margin-bottom: 0;
 }
-.description, .amenities, .share, .similar, .documents, .price-ranges, #subways, #listings{
+.description, .amenities, .share, .documents, .price-ranges, #subways, #listings{
   padding: 20px 20px 0 20px;
 }
 .price-ranges table td:first-child{
@@ -2710,18 +2710,17 @@ select.custom-arrow{
         margin: 0px !important;
     }
     
-    #content {
+    #content, #show-content {
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: hidden;
         background-color: #fff;
         width: 100%;
-        border-top: 1px solid #e8e8e8;
         float: right;
         -webkit-overflow-scrolling: touch;
         -webkit-transition: all .2s ease-in-out;
         -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
-        height: 500px;
+        height: 100%;
         -webkit-overflow-scrolling: touch;
         -webkit-transform: translate3d(0, 0, 0);
         -webkit-backface-visibility: hidden;

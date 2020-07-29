@@ -9,6 +9,10 @@ module ApplicationHelper
     end
   end
 
+  def screen_class
+    browser.device.mobile? ? 'screen-sm' : 'screen-lg'
+  end
+
   # logo image
   def alt_text
     'No Fee Apartments For Rent In NYC | Transparentcity.co'

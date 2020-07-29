@@ -1,0 +1,100 @@
+.singleTop{style: 'position: relative;'}
+	.summary
+		.row
+			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+				.summaryItem
+					%h1.pageTitle
+						=@building.building_name_or_address
+						- if current_user && current_user.admin?
+							= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right btn-round'
+							= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs btn-round', data: {confirm: 'Are you sure you want to discconect this building?'} if @manage_buildings.present?
+
+						= render 'buildings/favourite', building: @building
+					
+					= render 'property_info', object: @building 
+    
+	- unless @uploaded_images_count > 0
+		.sliderLink
+			%p.text-danger No photos are available.
+			- if @video_tours.present?
+				%a.btn.btn-o.btn-info.btn-sm.btn-round{href: '#video-tours'}
+					%span.fa.fa-cube
+					3D/Video Tour
+				
+			- if current_user && current_user.admin?
+				= link_to 'Add Tour', new_video_tour_path(building_id: @building.id), class: 'btn btn-o btn-primary btn-sm'
+				=link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm btn-round'
+
+#listings.show-section
+	- if @active_listings.present?
+		%h3= "#{@active_listings.count} Active Rental Listings"
+		= render 'buildings/show/listings', listings: @active_listings, type: 'current'
+	.clearfix
+	- if @inactive_listings.present?
+		%h3= "#{@all_inactive_listings.count} Past Rental Listings"
+		= render 'buildings/show/listings', listings: @inactive_listings, type: 'past'
+
+.clearfix
+= render 'building_amenities'
+
+.clearfix
+- if @building_tours.present?
+	.amenities.show-section#video-tours
+		%h3 3D / Video Tour
+		- @vd_height = '190'
+		- cache [@building_tours.length, '3DTour'] do
+			= render 'video_tours/show', cat_color: '333'
+
+.clearfix
+- if @building.price.present? or @building.bedroom_types?
+	= render 'buildings/show/price_ranges'
+	= render 'buildings/show/broker_fee_savings'
+
+- if @documents.present?
+	#building-documents.documents.show-section
+		%h3
+			Documents (#{@documents.count})
+		= render 'uploads/documents'
+
+.clearfix
+- if @distance_results.present?
+	#subways.show-section
+		%h3 Subway
+		= render 'buildings/show/subways'
+
+.clearfix
+- if @similar_properties.present?
+	#similiar-buildings.show-section
+		%h3= "Similar Buildings (#{@similar_properties.count})"
+		= render 'buildings/show/similar_properties', step: 2, col: 6
+
+.clearfix
+- if @building.rating_cache?
+	.aggregate-ratings.show-section
+		%h3 Aggregate Ratings
+		%ul.star-sm
+			%li.hidden
+				%h3
+			%li
+				Cleanliness - Pests/Smell/Trash #{rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true}
+			%li
+				Is it Noisy? #{rating_for @building, 'noise', disable_after_rate: true, readonly: true}
+			%li
+				Do you feel safe in your building? #{rating_for @building, 'safe', disable_after_rate: true, readonly: true}
+			%li
+				Utilities - AC/Electric/Heat/Water #{rating_for @building, 'health', disable_after_rate: true, readonly: true}
+			%li
+				Super Responsiveness #{rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true}
+			%li
+				Dealings with Management #{rating_for @building, 'management', disable_after_rate: true, readonly: true}
+.clearfix
+.comments.font-14.show-section
+	%h3= "Building Reviews (#{ @reviews_count })"
+	- if @reviews_count > 0
+		.text-right{style: 'text-align: right; padding-bottom: 15px;'}
+			= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning btn-round'
+    
+		= render :partial => 'reviews/review', :collection => @reviews, :as => :review
+	- else
+		%p.no-review.font-14 There are no reviews for this building. Be the first to add your review for this building.
+		= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning no-review btn-round'
