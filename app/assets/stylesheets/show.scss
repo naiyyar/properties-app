@@ -220,34 +220,35 @@ $content-view-width: (100%-$map-view-width);
 			}
 		}
 	}
+	.buildingsshow {
+		#content{
+			overflow-y: scroll;
+			.singleTop{
+				.sh-slider-container{
+					padding: 0px 9px !important;
+				}
+				.add--assets.admin{
+					padding: 10px 15px 0px 4px;
+				}
+				.add--assets{
+					padding: 10px 15px 0px 20px;
+				}
+			}
 
-	#content{
-		.singleTop{
-			.sh-slider-container{
-				padding: 0px 9px !important;
-			}
-			.add--assets.admin{
-				padding: 10px 15px 0px 4px;
-			}
-			.add--assets{
-				padding: 10px 15px 0px 20px;
-			}
-		}
-
-		#subways{
-			.st-transport-line{
-		    height: 22px;
-				width: 22px;
-				line-height: 21px;
-				font-size: 14px;
-				font-weight: 100;
-			}
-			.distance-and-time{
-				text-align: right;
+			#subways{
+				.st-transport-line{
+			    height: 22px;
+					width: 22px;
+					line-height: 21px;
+					font-size: 14px;
+					font-weight: 100;
+				}
+				.distance-and-time{
+					text-align: right;
+				}
 			}
 		}
 	}
-	
 }
 
 @media screen and (max-width: 414px) {
