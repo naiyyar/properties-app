@@ -4,7 +4,7 @@ module Filter
 			@listing_type = listing_type
 			@building 		= building
 			@listings 		= unless listing_type == 'past'
-												@building.listings.active
+												@building.listings.active.order_by_rent_asc
 											else
 												@building.past_listings
 											end
@@ -21,9 +21,7 @@ module Filter
 			# Not appying filter on featured building listings
 			return @listings if @building.featured? && @listing_type != 'past'
 			
-			if @listing_type == 'active'
-	      filtered_listings.order_by_rent_asc
-	    elsif @listing_type == 'past'
+	    if @listing_type == 'past'
 	    	filtered_listings.order_by_date_active_desc
 	    else
 	      filtered_listings.order_by_rent_asc
