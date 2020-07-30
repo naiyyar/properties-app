@@ -1,0 +1,25 @@
+.summary
+	.row
+		.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.summaryItem
+				%h1.pageTitle
+					= @building.building_name_or_address
+					- if current_user && current_user.admin?
+						= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right btn-round'
+						= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs btn-round', data: {confirm: 'Are you sure you want to discconect this building?'} if @manage_buildings.present?
+
+					= render 'buildings/favourite', building: @building
+				
+				= render 'property_info', object: @building 
+  
+- unless @uploaded_images_count > 0
+	.sliderLink
+		%p.text-danger No photos are available.
+		- if @video_tours.present?
+			%a.btn.btn-o.btn-info.btn-sm.btn-round{href: '#video-tours'}
+				%span.fa.fa-cube
+				3D/Video Tour
+			
+		- if current_user && current_user.admin?
+			= link_to 'Add Tour', new_video_tour_path(building_id: @building.id), class: 'btn btn-o btn-primary btn-sm'
+			=link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm btn-round'

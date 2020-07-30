@@ -7,9 +7,9 @@
 - if screen_class == 'screen-lg'
 	.row
 		.col-lg-9{style: 'padding-right: 1px;'}
-			#content{class: screen_class}= render 'buildings/show/top_summary_section'
+			#content{class: screen_class}= render 'buildings/show/top_summary_section', show_summary: false
 			.clearfix
-			#show-content= render 'buildings/show/content'
+			#show-content= render 'buildings/show/content', show_summary: true
 		.col-lg-3{style: 'padding-left: 0px;'}
 			#mapView{class: screen_class}
 				.mapPlaceholder
@@ -23,8 +23,8 @@
 	#pano
 
 	#content.mob-max
-		= render 'buildings/show/top_summary_section'
-		= render 'buildings/show/content'
+		= render 'buildings/show/top_summary_section', show_summary: true
+		= render 'buildings/show/content', show_summary: false
 
 %br
 .clearfix

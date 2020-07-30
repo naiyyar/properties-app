@@ -25,6 +25,11 @@ $content-view-width: (100%-$map-view-width);
 	  -webkit-overflow-scrolling: touch;
 	}
 
+	.show-section h3 {
+		font-size: 24px;
+		font-weight: bolder;
+	}
+
 	#show-content{
 		.singleTop{
 			# border-bottom: 1px solid #e8e8e8;
