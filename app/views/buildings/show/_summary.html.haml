@@ -16,14 +16,14 @@
 				
 				= render 'property_info', object: @building 
   
-- unless @uploaded_images_count > 0
-	.sliderLink
-		%p.text-danger No photos are available.
-		- if @video_tours.present?
-			%a.btn.btn-o.btn-info.btn-sm.btn-round{href: '#video-tours'}
-				%span.fa.fa-cube
-				3D/Video Tour
-			
-		- if current_user && current_user.admin?
-			= link_to 'Add Tour', new_video_tour_path(building_id: @building.id), class: 'btn btn-o btn-primary btn-sm'
-			=link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm btn-round'
+	- unless @uploaded_images_count > 0
+		.sliderLink
+			%p.text-danger No photos are available.
+			- if @video_tours.present?
+				%a.btn.btn-o.btn-info.btn-sm.btn-round{href: '#video-tours'}
+					%span.fa.fa-cube
+					3D/Video Tour
+				
+			- if current_user && current_user.admin?
+				= link_to 'Add Tour', new_video_tour_path(building_id: @building.id), class: 'btn btn-o btn-primary btn-sm'
+				=link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm btn-round'
