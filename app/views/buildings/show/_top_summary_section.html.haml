@@ -3,8 +3,8 @@
 		.row.sh-slider
 			.sh-slider-container
 				.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
-					/ - cache [@building, 'showPLSlider1'] do
-					= render 'buildings/show/lightslider', building: @building
+					- cache [@building, 'showPLSlider1'] do
+						= render 'buildings/show/lightslider', building: @building
    		
 			- if @building.price.present? or @building.bedroom_types?
 				- if @min_save_amount.present?
@@ -13,7 +13,5 @@
 						%p= "#{number_to_currency(@min_save_amount, precision: 0)}+"
 	
 	.clearfix
-	
-	%div.add--assets{class: current_user && current_user.admin? ? 'admin' : ''}=render 'uploads/add_photos', object: @building
 
 	= render 'buildings/show/summary' if show_summary

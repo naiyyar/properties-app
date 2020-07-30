@@ -1,5 +1,9 @@
 .summary
 	.row
+		.col-lg-12
+			.add--assets{class: current_user && current_user.admin? ? 'admin' : ''}=render 'uploads/add_photos', object: @building
+	%h2
+	.row
 		.col-xs-12.col-sm-12.col-md-12.col-lg-12
 			.summaryItem
 				%h1.pageTitle

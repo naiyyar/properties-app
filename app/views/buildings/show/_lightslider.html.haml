@@ -11,8 +11,6 @@
             %a{ href: img_url, 'data-role' => 'slider', 'data-caption' => date_uploaded(upload), 'data-fancybox' => 'gallery' }
               .bg-size-cover.bg-pos-center{ style: "background-image: url(#{img_url});", data: { imageid: "#{upload.id}" } }
               = image_tag img_url, alt: 'Image', class: 'img-thumbnail hidden'
-
-
 - else
   .bg-size-cover{style: "background-image: url(#{image_url('no-photo.png') })"}
                    
