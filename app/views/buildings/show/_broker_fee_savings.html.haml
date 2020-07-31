@@ -1,10 +1,11 @@
 .clearfix
 	.price-ranges.show-section
 		%h3 Broker Fee Savings
-		%table{style: 'width: 100%;'}
-			- @building.bedroom_ranges.each_with_index do |bed_range, index|
-				%tr
-					%td.font-14=bedroom_type(bed_range)
-					%td.font-14="#{number_to_currency(@saved_amounts[bed_range], precision: 0)}"
+		- @building.bedroom_ranges.each_with_index do |bed_range, index|
+			.row
+				.col-lg-6.col-xs-6.col-md-6
+					.font-14=bedroom_type(bed_range)
+				.col-lg-6.col-xs-6.col-md-6
+					.font-14="#{number_to_currency(@saved_amounts[bed_range], precision: 0)}"
             
                 
