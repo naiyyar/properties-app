@@ -6,7 +6,6 @@ $content-view-width: (100%-$map-view-width);
 		width: 100%;
     float: right;
 	}
-
 	#mapView.screen-lg{
 		height: 460px !important;
 	}
@@ -36,7 +35,7 @@ $content-view-width: (100%-$map-view-width);
 			padding-bottom: 20px;
 		}
 		.show-section, .singleTop .summary{
-		  padding: 20px 0px 0 288px;
+		  padding: 20px 0px 0 174px;
 		}
 		.aggregate-ratings.show-section ul{
 			padding: 10px 20px 10px 0px;
@@ -273,4 +272,44 @@ $content-view-width: (100%-$map-view-width);
 		}
 	}
 	
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1600px){
+	.buildingsshow {
+		#show-content {
+			.show-section, .singleTop .summary {
+				  padding: 20px 0px 0 186px;
+				}
+		}
+	}
+}
+
+@media screen and (min-width: 1601px) and (max-width: 1680px){
+	.buildingsshow {
+		#show-content {
+			.show-section, .singleTop .summary {
+				  padding: 20px 0px 0 214px;
+				}
+		}
+	}
+}
+
+@media screen and (min-width: 1920px) and (max-width: 2500px){
+	.buildingsshow {
+		#show-content {
+			.show-section, .singleTop .summary {
+				  padding: 20px 0px 0 247px;
+				}
+		}
+	}
+}
+
+@media screen and (min-width: 2560px){
+	.buildingsshow {
+		#show-content {
+			.show-section, .singleTop .summary {
+				  padding: 20px 0px 0 326px;
+				}
+		}
+	}
 }
