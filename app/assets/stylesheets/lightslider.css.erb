@@ -30,12 +30,10 @@
 }
 .sh-slider-container .lSSlideWrapper{
     width: 100%;
+    max-width: 100%;
     overflow: hidden;
     position: relative;
     float: right;
-}
-.sh-slider-container .no-thumb .lSSlideWrapper{
-    width: 83%;
 }
 .lSSlideWrapper > .lightSlider:after {
     clear: both;
@@ -140,7 +138,7 @@
     user-select: none;
     float: left;
     width: 148px !important;
-    height: 459px;
+    height: 419px;
     overflow-y: scroll;
 }
 .lSSlideOuter .lSPager.lSGallery li {
@@ -153,11 +151,11 @@
 }
 .lSSlideOuter .lSPager.lSGallery .img-wrapper {
     width: 150px;
-    height: 150px;
+    height: 125px;
     margin-bottom: 1px;
 }
 .buildingsshow .lSSlideOuter .lSPager.lSGallery {
-    width: 16.66% !important;
+    width: 30% !important;
 }
 .buildingsshow .lSSlideOuter .lSPager.lSGallery .img-wrapper{
     width: 100%;
@@ -165,7 +163,7 @@
 .lSSlideOuter .lSPager.lSGallery .img-wrapper img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 .lSSlideOuter .lSPager.lSGallery:before, .lSSlideOuter .lSPager.lSGallery:after {
@@ -477,13 +475,6 @@
     display: inline-block;
 }
 
-@media screen and (max-width: 767px) {
-    .sh-slider-container .no-thumb .lSSlideWrapper{
-        width: 100%;
-        /*float: none;*/
-    }
-}
-
 @media screen and (max-width: 1024px) {
     .lSAction{
         display: none !important;
@@ -491,36 +482,36 @@
     .lSSlideOuter .lSPager.lSGallery{
         display: none;
     }
-    /*.sh-slider-container .lSSlideWrapper{
+    .sh-slider-container .lSSlideWrapper{
         max-width: 100%;
         float: none;
-    }*/
+    }
 }
 @media screen and (min-width: 1366px) and (max-width: 1400px){
-    /*.sh-slider-container .lSSlideWrapper{
+    .sh-slider-container .lSSlideWrapper{
         max-width: 78%;
-    }*/
+    }
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1600px){
-    /*.sh-slider-container .lSSlideWrapper{
+    .sh-slider-container .lSSlideWrapper{
         max-width: 79.2%;
-    }*/
+    }
 }
 @media screen and (min-width: 1680px) and (max-width: 1900px){
-    /*.sh-slider-container .lSSlideWrapper{
+    .sh-slider-container .lSSlideWrapper{
         max-width: 82%;
-    }*/
+    }
 }
 
 @media screen and (min-width: 1920px) and (max-width: 2500px){
-    /*.sh-slider-container .lSSlideWrapper{
+    .sh-slider-container .lSSlideWrapper{
         max-width: 84.3%;
-    }*/
+    }
 }
 
 @media screen and (min-width: 2560px){
-    /*.sh-slider-container .lSSlideWrapper{
+    .sh-slider-container .lSSlideWrapper{
         max-width: 88%;
-    }*/
+    }
 }

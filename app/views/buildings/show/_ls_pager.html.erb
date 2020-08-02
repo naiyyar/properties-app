@@ -1,0 +1,53 @@
+<ul class="lSPager lSGallery" style="margin-top: 1px; transition-duration: 400ms; transform: translate3d(0px, 0px, 0px);">
+	<% @uploads.each do |upload| %>
+		<li class="">
+			<a href="#" class="thumb">
+				<div class="img-wrapper">
+					<%= image_tag upload.image.url %>
+				</div>
+			</a>
+		</li>
+	<%end%>
+</ul>
+
+<style type="text/css">
+	#thumb-pager .col-lg-5{
+		width: 33% !important;
+		padding-left: 5px;
+    padding-right: 0px;
+	}
+	.sh-slider-container .col-lg-7{
+		width: 66.95% !important;
+		padding-left: 2px;
+    padding-right: 0px;
+	}
+	#thumb-pager .lSPager{
+		list-style: none;
+		margin: 0;
+    padding: 0;
+    width: 100% !important;
+	}
+	#thumb-pager .lSPager li{
+		float: left;
+		padding: 0;
+		margin: 0px 2px 2px 0 !important;
+		list-style: none;
+		width: 150px !important;
+    height: 125px !important;
+	}
+
+	#thumb-pager .lSPager li a img{
+		width: 150px !important;
+    height: 125px !important;
+	}
+
+	#thumb-pager .lSPager li a {
+		padding: 0px;
+		display: block;
+	}
+
+	#thumb-pager .lSPager img {
+		border: none;
+		display: block;
+	}
+</style>

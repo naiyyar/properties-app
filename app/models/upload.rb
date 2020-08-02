@@ -32,7 +32,7 @@ class Upload < ApplicationRecord
   IMG_CONTENT_TYPES = ['image/jpeg', 'image/gif', 'image/png']
 
 	has_attached_file :image, 
-                    :styles => { :original => '900x800', :medium => '650x550' },
+                    :styles => { :thumb => '100x100', :original => '900x800', :medium => '650x550' },
                     #:convert_options => {:medium => '-quality 80 -strip' },
                     processors: [:rotator]
 	

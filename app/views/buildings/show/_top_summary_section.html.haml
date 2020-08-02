@@ -2,8 +2,10 @@
 	.row.sh-slider
 		.sh-slider-container
 			.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
-				/ - cache [@building, "showPLSlider#{@uploaded_images_count}"] do
-				= render 'buildings/show/lightslider', building: @building
+				- unless browser.device.mobile?
+					#thumb-pager
+						.col-lg-5= render 'buildings/show/ls_pager'
+				.col-lg-7.col-xs-12= render 'buildings/show/lightslider', building: @building
  		
 		- if @building.price.present? or @building.bedroom_types?
 			- if @min_save_amount.present?

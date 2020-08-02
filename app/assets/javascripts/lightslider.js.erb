@@ -383,7 +383,8 @@
                             }
                         }
                     }
-                    var $cSouter = $slide.parent();
+                    // var $cSouter = $slide.parent() // Original
+                    var $cSouter = $slide.parent().parent().parent().parent().prev(); //Custom
                     $cSouter.find('.lSPager').html(pagers); 
                     if (settings.gallery === true) {
                         if (settings.vertical === true) {
@@ -401,6 +402,9 @@
                         $cSouter.find('.lSPager').css(property, pagerWidth + 'px');
                     }
                     var $pager = $cSouter.find('.lSPager').find('li');
+                    
+                    $slide.parent().find('.lSPager').remove();
+
                     $pager.first().addClass('active');
                     $pager.on('click', function () {
                         if (settings.loop === true && settings.mode === 'slide') {
