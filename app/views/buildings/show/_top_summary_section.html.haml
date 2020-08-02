@@ -5,7 +5,8 @@
 				- unless browser.device.mobile?
 					#thumb-pager
 						.col-lg-5= render 'buildings/show/ls_pager'
-				.col-lg-7.col-xs-12= render 'buildings/show/lightslider', building: @building
+				%div{ class: "#{'col-lg-7' unless browser.device.mobile?}" }
+					= render 'buildings/show/lightslider', building: @building
  		
 		- if @building.price.present? or @building.bedroom_types?
 			- if @min_save_amount.present?
