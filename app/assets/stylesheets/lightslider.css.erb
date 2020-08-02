@@ -487,31 +487,87 @@
         float: none;
     }
 }
+
+/*custom LSpager CSS*/
+
+#thumb-pager .col-lg-5{
+    width: 31.9% !important;
+    padding-left: 2px;
+    padding-right: 0px;
+}
+.sh-slider-container .col-lg-7{
+    width: 67.95% !important;
+    padding-left: 2px;
+    padding-right: 0px;
+}
+#thumb-pager .lSPager{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100% !important;
+    height: 460px;
+    overflow-y: scroll;
+}
+#thumb-pager .lSPager li{
+    float: left;
+    padding: 0;
+    margin: 0px 2px 2px 0 !important;
+    list-style: none;
+    opacity: 0.75;
+}
+
+#thumb-pager .lSPager li.active, #thumb-pager .lSPager li:hover{
+    opacity: 1;
+}
+
+#thumb-pager .lSPager li, #thumb-pager .lSPager li a img{
+    width: 150px !important;
+    height: 125px !important;
+}
+
+#thumb-pager .lSPager li a {
+    padding: 0px;
+    display: block;
+}
+
+#thumb-pager .lSPager img {
+    border: none;
+    display: block;
+}
+
+/*end custom LSpager css*/
+
+
 @media screen and (min-width: 1366px) and (max-width: 1400px){
-    .sh-slider-container .lSSlideWrapper{
-        max-width: 78%;
+     #thumb-pager .lSPager li, #thumb-pager .lSPager li a img{
+        width: 160px !important;
+        height: 133px !important;
     }
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1600px){
-    .sh-slider-container .lSSlideWrapper{
-        max-width: 79.2%;
+    #thumb-pager .lSPager li, #thumb-pager .lSPager li a img{
+        width: 169px !important;
+        height: 139px !important;
     }
 }
 @media screen and (min-width: 1680px) and (max-width: 1900px){
-    .sh-slider-container .lSSlideWrapper{
-        max-width: 82%;
+     #thumb-pager .lSPager li, #thumb-pager .lSPager li a img{
+        width: 198px !important;
+        height: 159px !important;
     }
 }
 
 @media screen and (min-width: 1920px) and (max-width: 2500px){
-    .sh-slider-container .lSSlideWrapper{
-        max-width: 84.3%;
+    #thumb-pager .lSPager li, #thumb-pager .lSPager li a img{
+        width: 225px !important;
+        height: 186px !important;
     }
 }
 
 @media screen and (min-width: 2560px){
-    .sh-slider-container .lSSlideWrapper{
-        max-width: 88%;
+    #thumb-pager .lSPager li, #thumb-pager .lSPager li a img{
+        width: 250px !important;
+        height: 200px !important;
     }
 }

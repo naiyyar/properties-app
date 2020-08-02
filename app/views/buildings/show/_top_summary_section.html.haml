@@ -4,8 +4,11 @@
 			.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
 				- unless browser.device.mobile?
 					#thumb-pager
-						.col-lg-5= render 'buildings/show/ls_pager'
+						.col-lg-5
+							/ - cache [@building, 'showPLSliderThumbSlide1'] do
+							= render 'buildings/show/ls_pager'
 				%div{ class: "#{'col-lg-7' unless browser.device.mobile?}" }
+					/ - cache [@building, 'showPLSliderMainSlide'] do
 					= render 'buildings/show/lightslider', building: @building
  		
 		- if @building.price.present? or @building.bedroom_types?

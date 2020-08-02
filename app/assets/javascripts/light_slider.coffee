@@ -13,7 +13,6 @@ jQuery ->
 			addClass: add_class
 			onBeforeSlide: (el, scene) ->
 				parent_elem 		= el.parent().parent()
-				# ls_pager 				= parent_elem.parent().parent().parent().parent().find('.lSPager')
 				show_count_elem = parent_elem.prev()
 				current_elem    = show_count_elem.find('.current')
 				current_elem.text(el.getCurrentSlideCount)
