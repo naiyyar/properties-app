@@ -6,11 +6,13 @@
         %span.total="/ #{images_count = @uploaded_images_count}"
 
       %ul.gallery.list-unstyled{style: 'height: 265px;', data: { buildingid: "#{building.id}", view_type: 'show', path:  building_path(building) } }
+        - thumb_hidden_class = @building.present? ? '' : 'hidden'
         - @uploads.each do |upload|
           %li{ data: { thumb: img_url = upload.image.url(:original) } }
-            %a{ href: img_url, 'data-role' => 'slider', 'data-caption' => date_uploaded(upload), 'data-fancybox' => 'gallery' }
-              / .bg-size-cover.bg-pos-center{ style: "background-image: url(#{img_url});", data: { imageid: "#{upload.id}" } }
-              = image_tag img_url, alt: 'Image', class: 'img-thumbnail hidden1'
+            %a{ href: img_url, 'data-role' => 'slider', 'data-caption' => date_uploaded(upload), 'data-fancybox' => 'gallery' } 
+              - if @building.blank?
+                .bg-size-cover.bg-pos-center{ style: "background-image: url(#{img_url});", data: { imageid: "#{upload.id}" } }
+              = image_tag img_url, alt: 'Image', class: "img-thumbnail #{thumb_hidden_class}" 
 - else
   .item
     .clearfix{ style: 'width:100%;' }
