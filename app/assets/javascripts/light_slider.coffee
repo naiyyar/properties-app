@@ -11,9 +11,11 @@ jQuery ->
 			thumbItem: 6
 			galleryMargin: 1
 			addClass: add_class
-			onBeforeSlide: (el) ->
-				show_count_elem = el.parent().parent().prev()
-				current_elem = show_count_elem.find('.current')
+			onBeforeSlide: (el, scene) ->
+				parent_elem 		= el.parent().parent()
+				# ls_pager 				= parent_elem.parent().parent().parent().parent().find('.lSPager')
+				show_count_elem = parent_elem.prev()
+				current_elem    = show_count_elem.find('.current')
 				current_elem.text(el.getCurrentSlideCount)
 
 		$().fancybox

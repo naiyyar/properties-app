@@ -567,7 +567,8 @@
                         }, settings.speed, settings.easing);
                     }
                 }
-                var $thumb = $slide.parent().find('.lSPager').find('li');
+                // var $thumb = $slide.parent().find('.lSPager').find('li'); // default
+                var $thumb = $slide.parent().parent().parent().parent().prev().find('.lSPager').find('li'); //custom
                 this.active($thumb, true);
             },
             fade: function () {
