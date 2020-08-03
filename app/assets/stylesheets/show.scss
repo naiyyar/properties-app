@@ -1,6 +1,3 @@
-$map-view-width: 25%;
-$content-view-width: (100%-$map-view-width);
-
 .buildingsshow{
 	#mapView{
 		width: 100%;
@@ -212,7 +209,6 @@ $content-view-width: (100%-$map-view-width);
 @media screen and (max-width: 767px) {
 	.buildingsshow{
 		#mapView{
-			width: $map-view-width;
 	    float: right;
 		}
 
@@ -268,46 +264,5 @@ $content-view-width: (100%-$map-view-width);
 		.similar {
 			padding: 14px 8px 0 8px;
 		}
-	}
-	
-}
-
-@media screen and (min-width: 1440px) and (max-width: 1600px){
-	.buildingsshow {
-		#show-content {
-			.show-section, .singleTop .summary {
-				  
-				}
-		}
-	}
-}
-
-@media screen and (min-width: 1601px) and (max-width: 1680px){
-	.buildingsshow {
-		#show-content {
-			.show-section, .singleTop .summary {
-				  
-				}
-		}
-	}
-}
-
-@media screen and (min-width: 1920px) and (max-width: 2500px){
-	.buildingsshow {
-		#show-content {
-			.show-section, .singleTop .summary {
-				  
-				}
-		}
-	}
-}
-
-@media screen and (min-width: 2560px){
-	.buildingsshow {
-		#show-content {
-			.show-section, .singleTop .summary {
-				  
-				}
-		}
-	}
+	}	
 }
