@@ -393,6 +393,26 @@ input[type="radio"], input[type="checkbox"] {
   font-weight: bolder;
 }
 
+.btn:active, .btn.active {
+  outline: 0;
+  background-image: none;
+  /* -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); */
+  /* box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); */
+}
+
+.lg-action-buttons{
+  .btn-sort, .btn-filter{
+    .btn:active, .btn.active {
+      outline: 0;
+      background-image: none;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+
+
 /* Media Query */
 
 @media screen and (max-width: 767px) {
