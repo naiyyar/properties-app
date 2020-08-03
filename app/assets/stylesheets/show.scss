@@ -31,11 +31,10 @@ $content-view-width: (100%-$map-view-width);
 
 	#show-content{
 		.singleTop{
-			# border-bottom: 1px solid #e8e8e8;
 			padding-bottom: 20px;
 		}
 		.show-section, .singleTop .summary{
-		  padding: 20px 0px 0 304px;
+		  padding: 20px 0px 0px;
 		}
 		.aggregate-ratings.show-section ul{
 			padding: 10px 20px 10px 0px;

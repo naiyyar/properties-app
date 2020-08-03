@@ -9,7 +9,11 @@
 		.col-lg-9{style: 'padding-right: 1px;'}
 			#content{class: screen_class}= render 'buildings/show/top_summary_section', show_summary: false
 			.clearfix
-			#show-content= render 'buildings/show/content', show_summary: true
+			#show-content
+				#thumb-pager
+					.col-lg-5
+				.col-lg-8{style: 'width: 68%;'}
+					= render 'buildings/show/content', show_summary: true
 		.col-lg-3{style: 'padding-left: 0px;'}
 			#mapView{class: screen_class}
 				.mapPlaceholder
