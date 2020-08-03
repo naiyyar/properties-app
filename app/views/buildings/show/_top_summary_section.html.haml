@@ -5,11 +5,11 @@
 				- unless browser.device.mobile?
 					#thumb-pager
 						.col-lg-5
-							/ - cache [@building, 'showPLSliderThumbSlide1'] do
-							= render 'buildings/show/ls_pager'
+							- cache [@building, 'showPLSliderThumbSlide'] do
+								= render 'buildings/show/ls_pager'
 				%div{ class: "#{'col-lg-7' unless browser.device.mobile?}" }
-					/ - cache [@building, 'showPLSliderMainSlide'] do
-					= render 'buildings/show/lightslider', building: @building
+					- cache [@building, 'showPLSliderMainSlide'] do
+						= render 'buildings/show/lightslider', building: @building
  		
 		- if @building.price.present? or @building.bedroom_types?
 			- if @min_save_amount.present?
