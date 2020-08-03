@@ -234,7 +234,10 @@ $content-view-width: (100%-$map-view-width);
 					padding: 10px 15px 0px 4px;
 				}
 				.add--assets{
-					padding: 10px 15px 0px 0px;
+					padding: 0px;
+					.text-right a.see-all{
+						padding: 8px 0px;
+					}
 				}
 			}
 
