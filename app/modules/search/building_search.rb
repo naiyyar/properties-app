@@ -5,9 +5,9 @@ module Search
         searched_buildings.select(:id, :building_name, :building_street_address, 
                                   :latitude, :longitude, :zipcode, :city, 
                                   :min_listing_price,:max_listing_price, :listings_count,
-                                  :state, :price, :featured_buildings_count).as_json(:methods => [:featured?, :featured])
+                                  :state, :price, :featured_buildings_count).as_json(:methods => [:featured?, :featured, :featured_comp])
       else
-        searched_buildings.as_json(:methods => [:featured?, :featured])
+        searched_buildings.as_json(:methods => [:featured?, :featured, :featured_comp])
       end
     end
     

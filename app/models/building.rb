@@ -253,9 +253,21 @@ class Building < ApplicationRecord
     featured?
   end
 
+  def featured?
+    featured_buildings_count.to_i > 0
+    # featured_buildings.active.first.present?
+  end
+
   def active_comps
     featured_comps.active
   end
+
+  # to auto open show page map marker
+  def featured_comp?
+    active_comps.present?
+  end
+
+  alias_method :featured_comp, :featured_comp?
 
   def get_listings filter_params, type = 'active'
     Filter::Listings.new(self, type, filter_params).fetch_listings
@@ -337,11 +349,6 @@ class Building < ApplicationRecord
 
   def min_save_amount rent_medians, broker_percent
     saved_amount(rent_medians, broker_percent).values.min
-  end
-
-  def featured?
-    featured_buildings_count.to_i > 0
-    # featured_buildings.active.first.present?
   end
 
   def neighbohoods

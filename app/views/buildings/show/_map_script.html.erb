@@ -61,11 +61,10 @@
             draggable: false,
           });
 
-          // default opening first fetured building marker
+          // default opening first fetured comp building marker
           google.maps.event.addListener(marker, 'load', (function(marker, i) {
-            var object = prop
-            if(object.featured){
-              loadMarkerWindow(object.id, map, marker);
+            if(prop.featured_comp){
+              loadMarkerWindow(prop.id, map, marker);
             }
           })(marker, i));
           
