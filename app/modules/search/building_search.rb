@@ -5,10 +5,15 @@ module Search
         searched_buildings.select(:id, :building_name, :building_street_address, 
                                   :latitude, :longitude, :zipcode, :city, 
                                   :min_listing_price,:max_listing_price, :listings_count,
-                                  :state, :price, :featured_buildings_count).as_json(:methods => [:featured?, :featured, :featured_comp])
+                                  :state, :price, :featured_buildings_count)
+                                  .as_json(:methods => json_hash_methods)
       else
-        searched_buildings.as_json(:methods => [:featured?, :featured, :featured_comp])
+        searched_buildings.as_json(:methods => json_hash_methods)
       end
+    end
+
+    def json_hash_methods
+      [:featured?, :featured, :featured_comp_building_id]
     end
     
     def no_sorting? sort_by
@@ -20,8 +25,7 @@ module Search
       page_num           = 1 if page_num == 0
       @filters           = filters
       final_results      = {}
-      top2_featured      = top2_featured_buildings(buildings, searched_by) #if search_string.present?
-      #top2_featured      = top2_featured_buildings_for_management(buildings)   if search_string.blank?
+      top2_featured      = top2_featured_buildings(buildings, searched_by)
       non_featured       = non_featured_buildings(buildings, top2_featured, sort_by)
       per_page_buildings = non_featured.paginate(:page => page_num, :per_page => 20)
       all_buildings      = buildings_with_featured_on_top(top2_featured, per_page_buildings)

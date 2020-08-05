@@ -4,6 +4,7 @@
   current_user_id = $('#cu').val();
   var infobox;
   var zoom = 16;
+  var featured_comp_building_id = "<%=@similar_properties.first.id rescue nil%>";
   if($("#mapHash").length > 0){
     // Custom options for map
     function initialize() {
@@ -20,40 +21,41 @@
         //},
       };
 
-      var props = $("#mapHash").data('map');
-      var lat = $("#mapHash").data('lat');
-      var lng = $("#mapHash").data('lng');
-      current_building_id = parseInt($('#cu_building_id').val())
-      var bounds = new google.maps.LatLngBounds();
-      infobox = new InfoBubble({
-        minWidth: 236,
-        maxWidth: 250,
-        position: new google.maps.LatLng(lng, lat),
-        shadowStyle: 3,
-        padding: 0,
-        backgroundColor: 'rgb(255,255,255)',
-        borderRadius: 2,
-        arrowSize: 10,
-        borderWidth: 0,
-        borderColor: '#2c2c2c',
-        disableAutoPan: true,
-        hideCloseButton: false,
-      });
+      var props           = $("#mapHash").data('map');
+      var lat             = $("#mapHash").data('lat');
+      var lng             = $("#mapHash").data('lng');
+      current_building_id = parseInt($('#cu_building_id').val());
+      var bounds          = new google.maps.LatLngBounds();
+      infobox             = new InfoBubble({
+                                    minWidth: 236,
+                                    maxWidth: 250,
+                                    position: new google.maps.LatLng(lng, lat),
+                                    shadowStyle: 3,
+                                    padding: 0,
+                                    backgroundColor: 'rgb(255,255,255)',
+                                    borderRadius: 2,
+                                    arrowSize: 10,
+                                    borderWidth: 0,
+                                    borderColor: '#2c2c2c',
+                                    disableAutoPan: true,
+                                    hideCloseButton: false,
+                                });
 
       // function that adds the markers on map
       var addMarkers = function(props, map) {
         $.each(props, function(i,prop) {
-          var latlng = new google.maps.LatLng(prop.latitude, prop.longitude);
-          var default_icon = ''
-          prop_id = prop.id
-          if(parseInt(prop_id) != current_building_id){
+          var prop_id      = parseInt(prop.id);
+          var default_icon = '';
+          var latlng       = new google.maps.LatLng(prop.latitude, prop.longitude);
+          
+          if(prop_id != current_building_id){
               var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
-              //default icon only when no price info available
+              // default icon only when no price info available
               default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),
-                              null,null,null, null)
+                              null,null,null, null);
           }else{
               default_icon = new google.maps.MarkerImage(markerIconBlue(),
-                              null,null,null, null)
+                              null,null,null, null);
           }
           var marker = new google.maps.Marker({
             position: latlng,
@@ -64,7 +66,7 @@
 
           // default opening first fetured comp building marker
           google.maps.event.addListener(marker, 'load', (function(marker, i) {
-            if(prop.featured_comp && parseInt(prop_id) != current_building_id){
+            if(prop_id == parseInt(featured_comp_building_id)){
               loadMarkerWindow(prop_id, map, marker);
             }
           })(marker, i));

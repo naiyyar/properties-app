@@ -262,12 +262,9 @@ class Building < ApplicationRecord
     featured_comps.active
   end
 
-  # to auto open show page map marker
-  def featured_comp?
-    active_comps.present?
+  def featured_comp_building_id
+    active_comps&.first&.building_id
   end
-
-  alias_method :featured_comp, :featured_comp?
 
   def get_listings filter_params, type = 'active'
     Filter::Listings.new(self, type, filter_params).fetch_listings
