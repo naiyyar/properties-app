@@ -9,6 +9,7 @@ class Buttercms::PostsController < Buttercms::BaseController
 
   def show
     @post            = ButterCMS::Post.find(params[:slug])
+    # @embed_body_code = ActiveSupport::SafeBuffer.new(%Q{#{@post.body}})
     @categories      = ButterCMS::Category.all
     @post_categories = @post.categories
     @related_posts   = ButterCMS::Post.all
