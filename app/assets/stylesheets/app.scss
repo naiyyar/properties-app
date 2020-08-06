@@ -2038,6 +2038,17 @@ ol {
   border-bottom: 1px solid transparent !important;
 }
 
+.homeNavUl{
+  .advertise-menu{
+    li:hover{
+      background: #f3f3f3;
+      a:hover{
+        border-bottom: 0px solid transparent !important;
+      }
+    }
+  }
+}
+
 .padding-bottom-10{
   padding-bottom: 10px;
 }

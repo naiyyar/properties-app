@@ -1,4 +1,5 @@
 //= require ./home/jquery.init
+//= require bootstrap/dropdown
 
 (function($) {
   "use strict";
