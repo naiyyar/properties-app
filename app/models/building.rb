@@ -71,7 +71,7 @@ class Building < ApplicationRecord
                  ['2',  '2 Bed'   ],
                  ['3',  '3 Bed'   ],
                  ['4',  '4+ Bed'  ],
-                 # ['5',  'CoLiving']
+                 ['5',  'CoLiving']
                 ]
   CITIES      = ['New York', 'Brooklyn', 'Bronx', 'Queens']
   AMENITIES   = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
@@ -163,6 +163,7 @@ class Building < ApplicationRecord
   scope :two_bed,   -> { where(two_bed: 2)       }
   scope :three_bed, -> { where(three_bed: 3)     }
   scope :four_bed,  -> { where(four_plus_bed: 4) }
+  scope :co_living,  ->{ where(co_living: 5) }
   
   # amenities scopes
   AMENITIES.each do |item|

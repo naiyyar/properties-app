@@ -18,6 +18,9 @@ module Search
 			when 'manhattan-apartments-for-rent-cheap'
 				buildings 			= manhattan_buildings.where(price: AFFORDABLE_APTS_PRICES)
 				filters[:price] = AFFORDABLE_APTS_PRICES
+			when 'coliving-spaces-in-nyc-for-rent'
+				buildings 			= nyc_buildings.co_living
+				filters[:beds] 	= ['5']
 			when 'studio-apartments-in-nyc-for-rent'
 				buildings 			= nyc_buildings.studio
 				filters[:beds] 	= STUDIOS

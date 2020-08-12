@@ -16,12 +16,13 @@
 				- if listings.present?
 					- colspan = browser.device.mobile? ? '6' : '9'
 					- listings.each do |listing|
+						- bed = listing.bed
 						%tr
 							%td=listing.date_active
 							%td=listing.unit
 							%td
 								%b=number_to_currency(listing.rent, precision: 0)
-							%td=listing.bed
+							%td=(bed == -1 ? 'R' : bed)
 							%td=listing.bath
 							%td=listing.free_months
 							%td.hidden-xs=listing.date_available

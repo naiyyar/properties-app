@@ -1,8 +1,11 @@
 module BedRanges
 	def bedroom_ranges(filter_params=nil)
-    building_beds = [studio, one_bed, two_bed, three_bed, four_plus_bed, co_living].compact
     return building_beds unless min_and_max_price?
     get_listings_beds(filter_params)
+  end
+
+  def building_beds
+    [studio, one_bed, two_bed, three_bed, four_plus_bed].compact
   end
 
   def get_listings_beds filter_params
@@ -13,9 +16,21 @@ module BedRanges
   def show_bed_ranges(filter_params)
     beds = []
     bedroom_ranges(filter_params).map do |bed|
-      beds << (bed == 0 ? 'Studio' : bed) unless bed == 5
+      beds << set_bed_type(bed)
+      # beds << (bed == 0 ? 'Studio' : bed) unless bed == 5
     end
     beds
+  end
+
+  def set_bed_type bed
+    case bed
+    when -1
+      'Room'
+    when 0
+      'Studio'
+    else
+      bed
+    end
   end
 
   def price_ranges filters=nil

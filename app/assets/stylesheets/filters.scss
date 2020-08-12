@@ -67,7 +67,7 @@ a.handleFilter, a.handleSort {
   border: 1px solid #D0D0D0;
   overflow: auto;
   float: left;
-  width: 18.5%;
+  width: 14.5%;
 }
 .ck-button label {
   float: left;
@@ -106,7 +106,7 @@ a.handleFilter, a.handleSort {
     font-size: 12px;
   }
   #filter-container {
-    width: 92%;
+    width: 100%;
   }
   .filter-action{
     padding: 20px;
@@ -125,13 +125,19 @@ a.handleFilter, a.handleSort {
     padding: 1px;
     float: left;
   }
+  .slider-filter-container{
+    .slider {
+      width: 90%;
+    }
+  }
   .filter-action-btns2{
     width: 100%;
     padding: 4px;
   }
 
   .ck-button{
-    width: 17.5%;
+    width: 14%;
+    padding: 0px 2px;
   }
 
   .form-container{

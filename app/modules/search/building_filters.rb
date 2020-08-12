@@ -15,7 +15,6 @@ module Search
       if filtered_by_listings?(filter_params)
         listing_beds = filter_params[:listing_bedrooms]
         max_price    = filter_params[:max_price]
-
         buildings    = buildings.with_active_listing.join_with_listings
         buildings    = buildings.with_listings_bed(listing_beds)                 if listing_beds.present?
         buildings    = filter_by_listing_prices(buildings, min_price, max_price) if min_price.present? && max_price.present?
@@ -61,6 +60,8 @@ module Search
             @buildings += buildings.two_bed
           elsif num == '3'
             @buildings += buildings.three_bed
+          elsif num == '5'
+            @buildings += buildings.co_living
           else
             @buildings += buildings.four_bed
           end

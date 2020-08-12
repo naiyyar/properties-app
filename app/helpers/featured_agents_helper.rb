@@ -30,7 +30,7 @@ module FeaturedAgentsHelper
   end
 
   def bedrooms_options
-  	['Studio','1 Bedroom','2 Bedroom','3 Bedroom','4+ Bedroom']
+  	['Room', 'Studio','1 Bedroom','2 Bedroom','3 Bedroom','4+ Bedroom']
   end
 
 	def budgets_options

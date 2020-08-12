@@ -228,6 +228,7 @@ module HomeHelper
 
 	def nyc_searches
 		@nyc_searches ||= [ 
+			'CoLiving Spaces In NYC For Rent',
 			'Studio Apartments In NYC For Rent',
 			'Affordable Apartments For Rent In NYC',
 			'Cheap Apartments In NYC For Rent',
