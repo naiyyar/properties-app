@@ -21,8 +21,8 @@
 	.amenities.show-section#video-tours
 		%h3 3D / Video Tour
 		- @vd_height = '190'
-		- cache [@building, @building_tours.length, '3DVTours'] do
-			= render 'video_tours/show', cat_color: '333'
+		/ - cache [@building, @building_tours.length, '3DVTours'] do
+		= render 'video_tours/show', cat_color: '333'
 
 .clearfix
 - if @building.price.present? or @building.bedroom_types?
