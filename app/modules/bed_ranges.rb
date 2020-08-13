@@ -1,11 +1,12 @@
 module BedRanges
+  #debugger if b.id == 521
 	def bedroom_ranges(filter_params=nil)
     return building_beds unless min_and_max_price?
     get_listings_beds(filter_params)
   end
 
   def building_beds
-    [studio, one_bed, two_bed, three_bed, four_plus_bed].compact
+    [co_living, studio, one_bed, two_bed, three_bed, four_plus_bed].compact
   end
 
   def get_listings_beds filter_params
@@ -28,6 +29,8 @@ module BedRanges
       'Room'
     when 0
       'Studio'
+    when 5
+      'CoLiving'
     else
       bed
     end
@@ -44,6 +47,11 @@ module BedRanges
     show_bed_range = show_bed_ranges(filters)
 		return show_bed_range.length == 1 && show_bed_range[0] == 'Studio'
 	end
+
+  def has_only_room? filters
+    show_bed_range = show_bed_ranges(filters)
+    return show_bed_range.length == 1 && show_bed_range[0] == 'Room'
+  end
 
   def coliving_with_building_beds?
 		!listings_beds? && co_living == 5

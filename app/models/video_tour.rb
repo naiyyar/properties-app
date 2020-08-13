@@ -55,5 +55,6 @@ class VideoTour < ApplicationRecord
 	    return tour_videos if tour_videos.length >= 2
 	    videos.where(category: [first_category(videos), second_category(videos)]).limit(2)
 		end
-	end
+	end #class methods
+
 end

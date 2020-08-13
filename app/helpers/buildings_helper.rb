@@ -218,7 +218,7 @@ module BuildingsHelper
 	def set_ranges building_price, price
 		if building_price == 1
       "#{number_to_currency(price.max_price, precision: 0)} <"
-    elsif building_price == 2 or building_price == 3
+    elsif building_price == 2 || building_price == 3
       "#{number_to_currency(price.min_price, precision: 0)} - #{number_to_currency(price.max_price, precision: 0)}"
     elsif building_price == 4
       "#{number_to_currency(price.min_price, precision: 0)} +"
@@ -257,6 +257,6 @@ module BuildingsHelper
 	end
 
 	def with_bed_text b, filters
-		"#{'Bed' if b.bedroom_types? && !b.has_only_studio?(filters)}#{',' if b.bedroom_types? && b.coliving_with_building_beds?} #{'CoLiving' if b.coliving_with_building_beds? }"
+		"#{'Bed' if b.bedroom_types? && (!b.has_only_studio?(filters) && !b.has_only_room?(filters))}" # #{',' if b.bedroom_types? && b.coliving_with_building_beds?}" # #{'CoLiving' if b.coliving_with_building_beds? }
 	end
 end
