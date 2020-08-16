@@ -27,7 +27,7 @@ class VideoTour < ApplicationRecord
 
 	class << self
 		def categories videos
-			@categories ||= videos.pluck(:category).uniq.sort
+			videos.pluck(:category).uniq.sort
 		end
 
 		def first_category videos

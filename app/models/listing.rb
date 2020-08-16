@@ -88,8 +88,8 @@ class Listing < ApplicationRecord
   end
 
   def update_rent listings = nil
-    property          = self.building
-    listings          = Listing.active if listings.blank?
+    property        = self.building
+    listings        = Listing.active if listings.blank?
     active_listings = property_listings(listings)
     if active_listings.present?
       property.update_columns(  min_listing_price: active_listings.first.rent, 
