@@ -8,14 +8,16 @@
             %tr
               %th{width: '5%'} ID(#{@featured_agents.count})
               %th{width: '10%'} Agent Name
-              %th{width: '16%'} Email
+              %th{width: '14%'} Account Email
+              %th{width: '14%'} Featured Agent Email
               %th{width: '10%'} Neighborhood
               %th{width: '10%'} Firm
+              %th{width: '10%'} License
               %th{width: '10%'} Phone
               %th{width: '6%'} Website
               %th{width: '10%'} (#{@photos_count}) Photos
-              %th{width: '12%'} Start Date
-              %th{width: '12%'} End Date
+              %th{width: '16%'} Start Date
+              %th{width: '16%'} End Date
               %th{width: '6%'} Edit
               %th{width: '6%'} Delete
               %th{width: '6%'} Renew
@@ -26,12 +28,14 @@
               %tr
                 %td=agent.id
                 %td=agent.full_name
+                %td=agent.user.try(:email)
                 %td=agent.try(:email)
                 %td
                   - nb = agent.try(:neighborhood)
                   - nb = 'Midtown' if nb == 'Midtown Manhattan'
                   =search_by_neighborhood_link(nb, 'MANHATTAN', false)
                 %td=agent.try(:broker_firm)
+                %td=agent.try(:license_number)
                 %td=number_to_phone(agent.try(:phone), area_code: true)
                 %td=link_to '<span class="fa fa-globe"></span>'.html_safe, agent.website, target: '_blank' if agent.website.present?
                 %td=agent.uploads_count.to_i

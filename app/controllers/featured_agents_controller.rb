@@ -14,7 +14,7 @@ class FeaturedAgentsController < ApplicationController
     ) or return
     @featured_agents = @filterrific.find
                                    .paginate(:page => params[:page], :per_page => 100)
-                                   .order('created_at desc')
+                                   .includes(:user).order('created_at desc')
     @photos_count = @featured_agents.sum(:uploads_count)
     respond_to do |format|
       format.html
