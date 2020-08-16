@@ -1,8 +1,10 @@
 module BedRanges
-  #debugger if b.id == 521
-	def bedroom_ranges(filter_params=nil)
-    return building_beds unless min_and_max_price?
-    get_listings_beds(filter_params)
+  def bedroom_ranges(filter_params=nil)
+    unless min_and_max_price?
+      return building_beds, 'building'
+    else
+      return get_listings_beds(filter_params), 'listing'
+    end
   end
 
   def building_beds
@@ -16,20 +18,20 @@ module BedRanges
 
   def show_bed_ranges(filter_params)
     beds = []
-    bedroom_ranges(filter_params).map do |bed|
-      beds << set_bed_type(bed)
+    bed_ranges, modal_type = bedroom_ranges(filter_params)
+    bed_ranges.map do |bed|
+      beds << set_bed_type(bed, modal_type)
       # beds << (bed == 0 ? 'Studio' : bed) unless bed == 5
     end
     beds
   end
 
-  def set_bed_type bed
-    case bed
-    when -1
+  def set_bed_type bed, modal_type
+    if bed == -1
       'Room'
-    when 0
+    elsif bed == 0
       'Studio'
-    when 5
+    elsif bed == 5 && modal_type == 'building'
       'CoLiving'
     else
       bed
@@ -37,16 +39,17 @@ module BedRanges
   end
 
   def price_ranges filters=nil
-    ranges = {}
-    prices = Price.where(range: price)
-    bedroom_ranges(filters).each{|bed_range| ranges[bed_range] = prices.find_by(bed_type: bed_range)}
+    ranges     = {}
+    prices     = Price.where(range: price)
+    bed_ranges = bedroom_ranges(filters)[0]
+    bed_ranges.each{|bed_range| ranges[bed_range] = prices.find_by(bed_type: bed_range)}
     return ranges
   end
 
   def has_only_studio? filters
     show_bed_range = show_bed_ranges(filters)
-		return show_bed_range.length == 1 && show_bed_range[0] == 'Studio'
-	end
+    return show_bed_range.length == 1 && show_bed_range[0] == 'Studio'
+  end
 
   def has_only_room? filters
     show_bed_range = show_bed_ranges(filters)
@@ -54,8 +57,8 @@ module BedRanges
   end
 
   def coliving_with_building_beds?
-		!listings_beds? && co_living == 5
-	end
+    !listings_beds? && co_living == 5
+  end
 
   def listings_beds?
     min_and_max_price?

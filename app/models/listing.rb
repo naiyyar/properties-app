@@ -2,7 +2,7 @@ class Listing < ApplicationRecord
   include PgSearch::Model
   include Listable
   # associations
-  belongs_to :building
+  belongs_to :building, touch: true
   counter_cache_with_conditions :building, :listings_count, active: true
   
   # constants

@@ -81,7 +81,7 @@ class Building < ApplicationRecord
   ATTRS       = [:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :reviews_count, :web_url, 
                  :email, :active_email, :active_web,:min_listing_price, :max_listing_price, :uploads_count, :price,
                  :featured_buildings_count, :city, :state, :building_type, :neighborhood, :neighborhoods_parent, 
-                 :neighborhood3, :studio, :one_bed, :two_bed, :three_bed, :four_plus_bed, :co_living, :listings_count]
+                 :neighborhood3, :studio, :one_bed, :two_bed, :three_bed, :four_plus_bed, :co_living, :listings_count, :updated_at]
   
   # Modules
   include PgSearch::Model
@@ -330,7 +330,7 @@ class Building < ApplicationRecord
   end
 
   def rent_median_prices(rent_medians)
-    rent_medians.where(range: price, bed_type: bedroom_ranges)
+    rent_medians.where(range: price, bed_type: bedroom_ranges[0])
   end
 
   def saved_amount(rent_medians, broker_percent)

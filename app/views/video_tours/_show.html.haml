@@ -1,9 +1,8 @@
 %div{style: "padding: 10px; color: ##{cat_color};"}
-	- VideoTour::CATEGORIES.each_with_index do |category, index|
-		- video_tours = @video_tours[category[1]] rescue nil
+	- VideoTour::CATEGORIES.each do |category|
+		- video_tours = @video_tours[category[1]]
 		- if video_tours.present?
-			%p.font-16.font-bold
-				=category[0]
+			%p.font-16.font-bold=category[0]
 			.row
 				- video_tours.each do |video|
 					- url = video.url

@@ -5,7 +5,7 @@ class FeaturedBuilding < ApplicationRecord
   extend RenewPlan
   
   belongs_to :user
-  belongs_to :building
+  belongs_to :building, touch: true
   counter_cache_with_conditions :building, :featured_buildings_count, active: true
 
   # scopes
