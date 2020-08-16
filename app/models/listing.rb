@@ -90,13 +90,17 @@ class Listing < ApplicationRecord
   def update_rent listings = nil
     property          = self.building
     listings          = Listing.active if listings.blank?
-    property_listings = listings.where(building_id: building_id).order(rent: :asc)
-    if property_listings.present?
-      property.update_columns(  min_listing_price: property_listings.first.rent, 
-                                max_listing_price: property_listings.last.rent )
+    active_listings = property_listings(listings)
+    if active_listings.present?
+      property.update_columns(  min_listing_price: active_listings.first.rent, 
+                                max_listing_price: active_listings.last.rent )
     else
       property.update_columns(min_listing_price: nil, max_listing_price: nil)
     end
+  end
+
+  def property_listings listings
+    listings.where('building_id = ? AND rent is not null', building_id).order(rent: :asc)
   end
 
   def self.transfer_to_past_listings_table listings
