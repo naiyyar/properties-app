@@ -3,7 +3,7 @@
     %td.text-center=check_box_tag "listing_#{listing.id}", listing.id, nil, class: 'listing listing-box'
     %td=listing.date_active
     %td=link_to listing.management_company_name, '#'
-    %td=link_to listing.building.building_name_or_address, building_path(listing.building)
+    %td=link_to listing.building.building_street_address, building_path(listing.building)
     %td.text-center=listing.unit
     %td.text-right=number_to_currency(listing.rent, precision: 0)
     %td.text-center=listing.bed
