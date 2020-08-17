@@ -13,6 +13,16 @@ class PastListingsController < ApplicationController
     end
   end
 
+  def load_more
+    @building        = Building.find(params[:building_id])
+    load_more_params = { date_active: params[:date_active], loaded_ids: params[:loaded_ids]}
+    @past_listings   = @building.get_listings(nil, 'past', load_more_params)
+    respond_to do |format|
+      format.html{ render nothing: true }
+      format.js
+    end
+  end
+
   def edit
   end
 

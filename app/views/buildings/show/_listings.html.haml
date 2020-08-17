@@ -15,25 +15,14 @@
 			%tbody.table.table-borders
 				- if listings.present?
 					- colspan = browser.device.mobile? ? '6' : '9'
-					- listings.each do |listing|
-						- bed = listing.bed
-						%tr
-							%td=listing.date_active
-							%td=listing.unit
-							%td
-								%b=number_to_currency(listing.rent, precision: 0)
-							%td=(bed == -1 ? 'R' : bed)
-							%td=listing.bath
-							%td=listing.free_months
-							%td.hidden-xs
-								- d_av = listing.date_available
-								- unless type == 'past'
-									=d_av || 'Now'
-								- else
-									=d_av
-							%td.hidden-xs=listing.owner_paid
-							%td.hidden-xs=listing.rentstabilize
-						
+					= render 'listings/partials/listing_rows', listings: listings, type: type
+					
 					- if type == 'past' && @all_inactive_listings.present? && @all_inactive_listings.count > 5
 						%tr
 							%td.text-center{colspan: colspan}=link_to 'Show More Past Listings...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true
+
+- if type == 'past' && @building.past_listings.count > 10 && request.format.js?
+	.row
+		.col-lg-12
+			.text-center=link_to 'Show more...', load_more_past_listings_path(building_id: @building.id), class: 'load-more font-14 past-listings'
+	%br

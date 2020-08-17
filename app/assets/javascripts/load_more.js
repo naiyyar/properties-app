@@ -2,7 +2,9 @@
 $(document).ready(function () {
     // when the load more link is clicked
     $('a.load-more').click(function (e) {
-
+        var last_date_active = null;
+        var last_id          = null;
+        var loaded_ids       = [];
         // prevent the default click action
         e.preventDefault();
 
@@ -12,9 +14,16 @@ $(document).ready(function () {
         // show loading gif
         $('.loading-gif').show();
 
-        // get the last id and save it in a variable 'last-id'
-        var last_id = $('.record').last().attr('data-id');
-
+        // get the last id and save it in a variable 'last_id'
+        if($(this).hasClass('past-listings')){
+            last_date_active = $('.listings-record').last().attr('data-date-active');
+            $('#past-listings .listings-record').each(function(i, j){
+                loaded_ids.push(parseInt($(j).attr('data-id')));
+            });
+        }else{
+            last_id = $('.record').last().attr('data-id');
+        }
+        
         // make an ajax call passing along our last user id
         $.ajax({
 
@@ -24,7 +33,9 @@ $(document).ready(function () {
             url: $(this).attr('href'),
             // send the last id to our rails app
             data: {
-                object_id: last_id
+                object_id:   last_id,
+                date_active: last_date_active,
+                loaded_ids:  loaded_ids
             },
             // the response will be a script
             dataType: "script",

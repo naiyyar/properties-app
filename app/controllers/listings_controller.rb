@@ -1,11 +1,12 @@
 class ListingsController < ApplicationController
-  load_and_authorize_resource   only: [:index, :export]
-  before_action :set_listing,   only: [:show, :edit, :update, :destroy]
-  before_action :find_listings, only: [:change_status, :delete_all]
-  before_action :format_date,   only: [:transfer, :export]
+  load_and_authorize_resource                 only: [:index, :export]
+  before_action :set_listing,                 only: [:show, :edit, :update, :destroy]
+  before_action :find_listings,               only: [:change_status, :delete_all]
+  before_action :format_date,                 only: [:transfer, :export]
   before_action :find_listings_between_dates, only: [:transfer, :export]
-  before_action :filter_listings, only: :index
-  after_action :update_building_rent, only:[:create, :update, :destroy]
+  before_action :filter_listings,             only: :index
+  before_action :set_building,                only: :show_more
+  after_action :update_building_rent,         only:[:create, :update, :destroy]
   
   def index
     @export_listings_path = export_listings_path
@@ -72,7 +73,6 @@ class ListingsController < ApplicationController
   end
 
   def show_more
-    @building = Building.find(params[:building_id])
     @rentals  = params[:listing_type] || 'active'
     @listings = @building.get_listings(params[:filter_params], @rentals)
     respond_to do |format|
@@ -149,6 +149,10 @@ class ListingsController < ApplicationController
 
     def update_building_rent
       @listing.update_rent
+    end
+
+    def set_building
+      @building = Building.find(params[:building_id])
     end
 
     def filter_listings

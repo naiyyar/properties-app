@@ -267,8 +267,8 @@ class Building < ApplicationRecord
     active_comps&.first&.building_id
   end
 
-  def get_listings filter_params, type = 'active'
-    Filter::Listings.new(self, type, filter_params).fetch_listings
+  def get_listings filter_params, type='active', load_more_params={}
+    Filter::Listings.new(self, load_more_params, type, filter_params).fetch_listings
   end
 
   def all_three_cta? listings_count
