@@ -2,7 +2,7 @@ module ListingsHelper
 	def listing_header_title rentals
 		"<h4 #{name_styles}> #{@building.building_name_or_address} </h2>" +
 		"<p class='cardAddress text-muted address_font'>#{@building.street_address} #{@building.zipcode}</p>" +
-		"<p style='font-size: 14px;margin-bottom: 6px;'>#{@listings.size} #{type_text(rentals)}</p>"
+		"<p style='font-size: 14px;margin-bottom: 6px;'>#{@past_listings_count} #{type_text(rentals)}</p>"
 	end
 
 	def type_text type

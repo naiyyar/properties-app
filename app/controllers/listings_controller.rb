@@ -73,8 +73,9 @@ class ListingsController < ApplicationController
   end
 
   def show_more
-    @rentals  = params[:listing_type] || 'active'
-    @listings = @building.get_listings(params[:filter_params], @rentals)
+    @rentals             = params[:listing_type] || 'active'
+    @listings            = @building.get_listings(params[:filter_params], @rentals)
+    @past_listings_count = @building.past_listings.count if @rentals == 'past'
     respond_to do |format|
       format.html
       format.js
