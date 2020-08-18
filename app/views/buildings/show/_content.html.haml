@@ -11,6 +11,7 @@
 	.clearfix
 	- if @inactive_listings.present?
 		%h3= "#{@all_inactive_listings.count} Past Rental Listings"
+		= hidden_field_tag 'past_listings_count', @all_inactive_listings.count
 		= render 'buildings/show/listings', listings: @inactive_listings, type: 'past'
 
 .clearfix

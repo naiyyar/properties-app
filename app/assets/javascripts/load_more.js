@@ -5,6 +5,9 @@ $(document).ready(function () {
         var last_date_active = null;
         var last_id          = null;
         var loaded_ids       = [];
+        var past_listings_count    = $('#past_listings_count').val();
+        var total_reviews          = $('#total_reviews').val();
+        var loaded_listings_count;
         // prevent the default click action
         e.preventDefault();
 
@@ -46,8 +49,9 @@ $(document).ready(function () {
                 $('.loading-gif').hide();
                 // show our load more link
                 $('.load-more').show();
+                loaded_listings_count  = $('#past-listings .listings-record').length;
                 //hiding show more button when no review left to load
-                if(parseInt($('#total_reviews').val()) == $('.comment.record').length){
+                if(total_reviews == $('.comment.record').length || loaded_listings_count == past_listings_count){
                     $('a.load-more').hide();
                 }
             }
