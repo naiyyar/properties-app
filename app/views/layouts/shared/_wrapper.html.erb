@@ -7,5 +7,5 @@
     <%= render 'layouts/shared/pop_neighborhoods_list' %>
     <%= yield %>
   </div>
-  <%= render 'layouts/home/footer' if show_full_width_footer? && contribute_page? %>
+  <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
 </div>

@@ -46,7 +46,7 @@
                       - @featured_on_buildings.each do |building|
                         %a.btn.btn-default{href: "#{building_path(building)}"}= building.building_name_or_address
             
-            .form-group
+            .form-group.footer
               .col-sm-12
                 .pull-right
                   = link_to 'Cancel', featured_comps_path, class: 'btn btn-default'

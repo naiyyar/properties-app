@@ -157,15 +157,16 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 	    <!-- <span class='message hide tos-not-accepted text-red'>Must be accepted.</span> -->
 		</div>
 	</div>
-
-  <div class="col-sm-12">
-  	<div class="btn-block-container">
-		  <% if current_user %>
-		  	<%= f.hidden_field :user_id, value: current_user.id %>
-		  <%end%>
-		  <br />
-		   <%= f.submit 'Submit Review', class: "btn btn-primary btn-xlg btn-xs-block", id: 'submit_review' %>
-	  </div>
+	<div class="footer">
+	  <div class="col-sm-12">
+	  	<div class="btn-block-container">
+			  <% if current_user %>
+			  	<%= f.hidden_field :user_id, value: current_user.id %>
+			  <%end%>
+			  <br />
+			   <%= f.submit 'Submit Review', class: "btn btn-primary btn-xlg btn-xs-block", id: 'submit_review' %>
+		  </div>
+		</div>
 	</div>
 <% end %>
 
