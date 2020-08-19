@@ -11,7 +11,7 @@
 #
 
 class VideoTour < ApplicationRecord
-	belongs_to :building
+	belongs_to :building, touch: true
 	
 	CATEGORIES = [['Amenities', 	'amenities'], 
 								['Studio', 			'studio'], 

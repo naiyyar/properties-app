@@ -22,7 +22,7 @@
 	.amenities.show-section#video-tours
 		%h3="3D / Video Tour (#{tours_count = @building_tours.length})"
 		- @vd_height = '190'
-		- cache [@building, tours_count, '3DVTours'] do
+		- cache [@building, tours_count, '3DVideoTour'] do
 			= render 'video_tours/show', cat_color: '333'
 
 .clearfix
