@@ -13,6 +13,7 @@
 class VideoTour < ApplicationRecord
 	belongs_to :building, touch: true
 	
+	# SORTED_CATEGORIES = ['amenities', 'studio', '1-bedroom', '2-bedroom', '3-bedroom', '4-bedroom']
 	CATEGORIES = [['Amenities', 	'amenities'], 
 								['Studio', 			'studio'], 
 								['1 Bedroom', 	'1-bedroom'],
@@ -27,7 +28,7 @@ class VideoTour < ApplicationRecord
 
 	class << self
 		def categories videos
-			videos.pluck(:category).uniq.sort
+			videos.pluck(:category).uniq #.sort
 		end
 
 		def first_category videos
@@ -53,6 +54,7 @@ class VideoTour < ApplicationRecord
 		def first_2_videos videos
 			tour_videos = videos.where(category: first_category(videos)).limit(2)
 	    return tour_videos if tour_videos.length >= 2
+	    debugger
 	    videos.where(category: [first_category(videos), second_category(videos)]).limit(2)
 		end
 	end #class methods
