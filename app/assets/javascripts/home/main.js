@@ -76,4 +76,18 @@ Card = {
 	    }
 	  });
 	}
-}
+};
+
+//
+//**** Fancybox **** //
+//
+Transparentcity = {
+	initFancybox: function(selector){
+		$().fancybox({
+			selector: selector,
+			backFocus: false,
+			buttons: ['thumbs', 'close']
+		});
+	}
+};
+

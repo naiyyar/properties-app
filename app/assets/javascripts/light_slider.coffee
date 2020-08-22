@@ -17,19 +17,10 @@ jQuery ->
 				current_elem    = show_count_elem.find('.current')
 				current_elem.text(el.getCurrentSlideCount)
 
-		$().fancybox
-			selector: '.lightSlider .lslide a'
-			backFocus : false
-			buttons : [
-	      'thumbs',
-	      'close'
-	    ]
-
-	  # Changing slider image width when no thumb images available
-	  #thumb_images_length = $('.lSPager.lSGallery').children().length
-	  #if(thumb_images_length <= 0)
-	  #	slider = $('.sh-slider-container .lSSlideWrapper')
-	  #	slider.css({'max-width': '100% !important', 'float': 'left !important;'})
+		#
+		##initializing fancybox for show page light slider images
+		#
+		Transparentcity.initFancybox('.sh-slider-container .lightSlider .lslide a')
 	
 	else
 		$('.gallery').lightSlider

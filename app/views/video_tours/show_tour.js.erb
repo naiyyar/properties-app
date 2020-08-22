@@ -1,4 +1,5 @@
 var container = $("#remote-container");
+var delay = 200;
 if(container.children().length == 0){
 	container.html('<%= j render partial: "show_tour_modal" %>');
 }
@@ -6,23 +7,11 @@ if(container.children().length == 0){
 <% unless browser.device.mobile? %>
 	$('#showTourModal').modal('show');
 <%else%>
-	//$('#showTour').on('click', function(){
-	$('.show-tour-modal').slideDown(200);
-	//});
-
+	$('.show-tour-modal').slideDown(delay);
 	$('.closeTour').click(function(e) {
     e.stopPropagation();
-    $('.show-tour-modal').slideUp(200);
+    $('.show-tour-modal').slideUp(delay);
   });
 <%end%>
 
-$('.tour-fbox').fancybox({});
-
-// var building_id = '<%= @building.id %>';
-// $('#showTourModal').on('shown.bs.modal', function(){
-//   $.ajax({
-//     url: '/video_tours/show_tour/'+building_id,
-//     type: 'get',
-//     dataType: 'script'
-//   });
-// });
+Transparentcity.initFancybox('#showTourModal .tour-fbox');
