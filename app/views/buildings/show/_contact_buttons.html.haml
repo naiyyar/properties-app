@@ -13,7 +13,7 @@
 		- elsif @building.apply_and_leasing?
 			.col-lg-12.col-sm-12.col-xs-12= apply_online_link(@building)
 			.col-lg-12.col-sm-12.col-xs-12.margin-top-10= contact_leasing_link(@building)
-		- elsif @building.leasing?
+		- elsif @building.show_contact_leasing?
 			.col-lg-12.col-sm-12.col-xs-12= contact_leasing_link(@building)
 		- elsif @building.availability?
 			.col-lg-12.col-sm-12.col-xs-12= check_availability_button(@building.web_url, 'font-bolder btn-block')

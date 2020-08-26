@@ -5,10 +5,10 @@ class PricesController < ApplicationController
   # GET /prices
   # GET /prices.json
   def index
-    @prices = Price.order(:bed_type)
-    @price = Price.new
+    @prices      = Price.order(:bed_type)
+    @price       = Price.new
     @fee_percent = BrokerFeePercent.first
-    @medians = RentMedian.order(:bed_type)
+    @medians     = RentMedian.order(:bed_type)
     @half_footer = true
   end
 
@@ -34,7 +34,11 @@ class PricesController < ApplicationController
           obj = existing_prices.first
           obj.update({ min_price: value[:min_price], max_price: value[:max_price] }) 
         else
-          Price.create({min_price: value[:min_price], max_price: value[:max_price], bed_type: key, range: params[:range]})
+          Price.create({min_price:  value[:min_price], 
+                        max_price:  value[:max_price], 
+                        bed_type:   key, 
+                        range:      params[:range]
+                      })
         end
       end
     end

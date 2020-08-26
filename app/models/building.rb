@@ -271,6 +271,7 @@ class Building < ApplicationRecord
     Filter::Listings.new(self, load_more_params, type, filter_params).fetch_listings
   end
 
+  # CTA
   def all_three_cta? listings_count
     active_web_url? && has_active_email? && listings_count > 0
   end
@@ -303,10 +304,6 @@ class Building < ApplicationRecord
     show_contact_leasing? && active_web_url?
   end
 
-  def leasing?
-    show_contact_leasing? && !(apply_and_availability?)
-  end
-
   def availability?
     active_web_url? && !(apply_and_leasing?)
   end
@@ -314,7 +311,8 @@ class Building < ApplicationRecord
   def apply?
     show_apply_link? && !(leasing_and_availability?)
   end
-
+  #end CTA
+  
   def suggested_percent
     Vote.recommended_percent(self)
   end
@@ -330,10 +328,14 @@ class Building < ApplicationRecord
   end
 
   def rent_median_prices(rent_medians)
-    rent_medians.where(range: price, bed_type: bedroom_ranges[0])
+    range = bedroom_ranges[0]
+    if range.include?(-1)
+      range = range.map{|x| x == -1 ? 5 : x }
+    end
+    return rent_medians.where(range: price, bed_type: range)
   end
 
-  def saved_amount(rent_medians, broker_percent)
+  def broker_fee_savings(rent_medians, broker_percent)
     saved_amounts = {}
     rent_median_prices(rent_medians).as_json.each do |mp| 
       saved_amounts[mp['bed_type']] = (((mp['price'].to_i * 12) * broker_percent)/100).to_i
@@ -346,7 +348,7 @@ class Building < ApplicationRecord
   end
 
   def min_save_amount rent_medians, broker_percent
-    saved_amount(rent_medians, broker_percent).values.min
+    broker_fee_savings(rent_medians, broker_percent).values.min
   end
 
   def neighbohoods

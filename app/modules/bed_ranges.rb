@@ -39,10 +39,14 @@ module BedRanges
   end
 
   def price_ranges filters=nil
-    ranges     = {}
-    prices     = Price.where(range: price)
-    bed_ranges = bedroom_ranges(filters)[0]
-    bed_ranges.each{|bed_range| ranges[bed_range] = prices.find_by(bed_type: bed_range)}
+    ranges                 = {}
+    prices                 = Price.where(range: price)
+    bed_ranges, modal_type = bedroom_ranges(filters)
+    bed_ranges.each do |bed_range|
+      bdr               = bed_range
+      bdr               = 5 if bed_range == -1 && modal_type == 'listing'
+      ranges[bed_range] = prices.find_by(bed_type: bdr)
+    end
     return ranges
   end
 

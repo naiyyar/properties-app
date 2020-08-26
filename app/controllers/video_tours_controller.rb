@@ -1,12 +1,13 @@
 class VideoToursController < ApplicationController
-  load_and_authorize_resource
-  before_action :set_video_tour, only: [:show, :edit, :update, :destroy]
-  before_action :find_builidng, only: [:index, :new, :show_tour]
-  before_action :find_tours, only: [:index, :show_tour, :new]
+  load_and_authorize_resource except: :index
+  before_action :set_video_tour,  only: [:show, :edit, :update, :destroy]
+  before_action :find_builidng,   only: [:new, :show_tour]
+  before_action :find_tours,      only: [:show_tour, :new]
   # GET /video_tours
   # GET /video_tours.json
   def index
-    
+    @category    = params[:category]
+    @video_tours = VideoTour.where(id: params[:ids])
   end
 
   # GET /video_tours/1
@@ -15,7 +16,6 @@ class VideoToursController < ApplicationController
   end
 
   def show_tour
-    # @loaded_category = params[:loaded_category]
     @video_tours, @category = VideoTour.videos_by_categories(@video_tours)
   end
 

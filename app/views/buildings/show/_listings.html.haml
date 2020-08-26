@@ -21,7 +21,7 @@
 						%tr
 							%td.text-center{colspan: colspan}=link_to 'Show More Past Listings...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true
 
-- if type == 'past' && @building.past_listings.count > 10 && request.format.js?
+- if type == 'past' && @building.past_listings.count > PastListing::LIMIT && request.format.js?
 	.row
 		.col-lg-12
 			.text-center

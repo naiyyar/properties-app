@@ -1,11 +1,12 @@
 module Filter
 	class Listings
 		def initialize building, load_more_params, listing_type = 'active', filter_params={}
-			@listing_type = listing_type
-			@date_active  = load_more_params[:date_active]
-			@loaded_ids   = load_more_params[:loaded_ids]
-			@building 		= building
-			@listings 		= unless listing_type == 'past'
+			@listing_type  = listing_type
+			@date_active   = load_more_params[:date_active]
+			@loaded_ids    = load_more_params[:loaded_ids]
+			@building 		 = building
+			@past_listings = @building.past_listings.order_by_date_active_desc
+			@listings 		 = unless listing_type == 'past'
 												@building.listings.active.order_by_rent_asc
 											else
 												past_listings
@@ -20,8 +21,8 @@ module Filter
 		end
 
 		def past_listings
-			return @building.past_listings.where('date_active >= ? AND id not in(?)', @date_active, @loaded_ids) if @date_active.present?
-			@building.past_listings
+			return @past_listings.where('date_active <= ? AND id not in(?)', @date_active, @loaded_ids) if @date_active.present?
+			@past_listings
 		end
 
 		def fetch_listings
@@ -29,7 +30,7 @@ module Filter
 			return @listings if @building.featured? && @listing_type != 'past'
 			
 	    if @listing_type == 'past'
-	    	filtered_listings.order_by_date_active_desc.limit(100)
+	    	@listings.order_by_date_active_desc.limit(PastListing::LIMIT)
 	    else
 	      filtered_listings.order_by_rent_asc
 	    end

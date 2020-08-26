@@ -159,7 +159,7 @@ class BuildingsController < ApplicationController
 
   def broker_fee_percent
     broker_percent = BrokerFeePercent.first.percent_amount
-    @saved_amounts = @building.saved_amount(RentMedian.all, broker_percent)
+    @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
   end
 
   def find_buildings

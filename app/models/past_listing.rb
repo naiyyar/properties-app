@@ -5,6 +5,7 @@ class PastListing < ApplicationRecord
   belongs_to :building
   
   # constants
+  LIMIT = 500
 
   # scopes
   scope :inactive,        -> { where(active: false) }

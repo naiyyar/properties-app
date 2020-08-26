@@ -78,9 +78,6 @@ Card = {
 	}
 };
 
-//
-//**** Fancybox **** //
-//
 Transparentcity = {
 	initFancybox: function(selector){
 		$().fancybox({
@@ -88,6 +85,21 @@ Transparentcity = {
 			backFocus: false,
 			buttons: ['thumbs', 'close']
 		});
+	},
+	loadTourVideos: function(elem, ids){
+		var $this  = elem;
+		var cat 	 = $this.dataset.category;
+		var loader = $('.loader-'+cat);
+		loader.show();
+		$.ajax({
+			url: '/video_tours',
+			dataType: 'script',
+			type: 'get',
+			data: { ids: ids, category: cat },
+			success: function(){
+				loader.hide();
+			}
+		})
 	}
 };
 

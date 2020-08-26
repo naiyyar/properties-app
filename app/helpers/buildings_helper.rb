@@ -195,7 +195,7 @@ module BuildingsHelper
 	end
 
 	def fancybox_cta_buttons
-		@building.leasing? ? contact_leasing_link(@building, '', 'btn-slider') : check_availability_link(@building, 'btn-slider')
+		@building.show_contact_leasing? ? contact_leasing_link(@building, '', 'btn-slider') : check_availability_link(@building, 'btn-slider')
 	end
 
 	def sort_options
