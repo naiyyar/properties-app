@@ -11,13 +11,15 @@ module PricesHelper
 			'3 Bed'
 		when 5
 			'CoLiving'
-		else
+		when 4
 			'4+ Bed'
+		when -1
+			'Room'
 		end
 	end
 
 	def prices_options
-		@prices_options ||= [
+		[
 			['$', 1],
 			['$$', 2],
 			['$$$', 3],
