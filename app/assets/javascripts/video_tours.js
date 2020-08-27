@@ -3,7 +3,8 @@ $(function(){
 	  e.preventDefault();
 	  var building_id = $(this).data('bid')
 	  var category 		= $(this).data('category');
-	  var sort_index 	= parseInt($('#'+category[1]+'-form').find('form').find('.video_tour_sort').val()) + 1;
+	  var last_form   = $('#'+category[1]+'-form').find('form').last();
+	  var sort_index 	= parseInt(last_form.find('.video_tour_sort').val()) + 1;
 	  $.ajax({
 	    url: '/video_tours/new',
 	    type: 'get',

@@ -8,12 +8,15 @@
 #  description       		 :string
 #  category      				 :string
 #  sort          				 :integer
+#  image_file_name       :string
+#  image_content_type    :string
+#  image_file_size       :integer
+#  image_updated_at      :datetime
 #
 
 class VideoTour < ApplicationRecord
 	belongs_to :building, touch: true
 	
-	# SORTED_CATEGORIES = ['amenities', 'studio', '1-bedroom', '2-bedroom', '3-bedroom', '4-bedroom']
 	CATEGORIES = [['Amenities', 	'amenities'], 
 								['Studio', 			'studio'], 
 								['1 Bedroom', 	'1-bedroom'],
@@ -22,7 +25,11 @@ class VideoTour < ApplicationRecord
 								['4+ Bedroom', 	'4-bedroom']]
 	
 	validates_presence_of   :url, message: 'Url can not be blank.'
-	validates_uniqueness_of :url, scope: :building_id, message: 'Url has already been taken.'
+	validates_uniqueness_of :url, scope: :building_id, message: 'Url has already been taken.', on: :create
+
+
+	has_attached_file :image
+	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
 	default_scope { order('sort asc') }
 

@@ -1,6 +1,6 @@
 - cat = "#{@building.id}-#{category[1]}_#{index}"
 %div{id: "tour-form-container-#{cat}"}
-  = form_for video_tour, html: { class: 'form-horizontal', id: "tour_#{cat}", style: 'margin: 8px 0px;', remote: true } do |f|
+  = form_for video_tour, html: { class: 'form-horizontal', id: "tour_#{cat}", style: 'margin: 8px 0px;', multipart: true }, remote: true, authenticity_token: true do |f|
     = f.hidden_field :building_id, value: @building.id, id: "video_tour_building_id_#{cat}"
     = f.hidden_field :sort,        value: index,        id: "video_tour_sort_#{cat}", class: 'video_tour_sort' if video_tour.new_record?
     = f.hidden_field :category,    value: category[1],  id: "video_tour_category_#{cat}"
@@ -10,7 +10,7 @@
           %label Sort
           = f.text_field :sort, id: "video_tour_sort_#{cat}", class: 'form-control video_tour_sort'
       
-      .col-lg-3
+      .col-lg-2
         %label Description
         = f.text_field :description, class: 'form-control', id: "video_tour_description_#{cat}"
       
@@ -21,7 +21,13 @@
         = f.text_field :url, class: 'form-control validate', id: "video_tour_url_#{cat}", required: true
       
       %div{style: 'width: 20px;'}
+
+      .col-lg-2
+        %label Placeholder Image
+        = f.file_field :image, class: 'form-control', id: "video_tour_image_#{cat}"
       
+      %div{style: 'width: 20px;'}
+
       %div.visible-xs
         %br
       
@@ -31,7 +37,10 @@
       
       .col-lg-2.col-xs-4
         .video-preview
-          %iframe{src: video_tour.new_record? ? '' : video_tour.url, style: 'height: 100%;width: 100%;border: none;', id: "video-preview-#{cat}"}
+          - unless video_tour.image.present?
+            %iframe{src: video_tour.new_record? ? '' : video_tour.url, style: 'height: 100%;width: 100%;border: none;', id: "video-preview-#{cat}"}
+          - else
+            =image_tag video_tour.image.url, style: 'height: 100%;width: 100%;border: none;'
 
       .col-lg-1.col-xs-4{style: 'height: 80px;'}
         .text-center.vertically-middle{id: "remove-fields-#{cat}"}

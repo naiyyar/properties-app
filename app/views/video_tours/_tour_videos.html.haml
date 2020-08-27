@@ -1,7 +1,10 @@
 - video_tours.each do |video|
-	- url = video.url
+	- url = "#{video.url}?#{auto_play(video.url)}"
 	.col-lg-6.image-gallery
 		%p.font-14=video.try(:description)
-		%a.propWidget-1.tour-fbox{'data-caption' => video.try(:description), href: 'javascript:;', 'data-type' => 'iframe', 'data-src' => "#{url}?#{auto_play(url)}"}
-			%div{style: "position:absolute;z-index:500;height:#{@vd_height}px;width:100%;"}
-			%iframe{src: url, style: "width: 100%;height: #{@vd_height}px;border:none;", frameborder: '0', allowfullscreen: true}
+		%a.propWidget-1.tour-fbox{'data-caption' => video.try(:description), href: 'javascript:;', 'data-type' => 'iframe', 'data-src' => url}
+			- unless video.image.present?
+				%div{style: "position:absolute;z-index:500;height:#{@vd_height}px;width:100%;"}
+				%iframe{src: url, style: "width: 100%;height: #{@vd_height}px;border:none;", frameborder: '0', allowfullscreen: true}
+			- else
+				=image_tag video.image.url, style: "width: 100%;height: #{@vd_height}px;border:none;"

@@ -9,7 +9,11 @@ module VideoToursHelper
 	end
 
 	def auto_play url
-		matterport_url?(url) ? 'play=1' : 'rel=0&modestbranding=1&autohide=1&mute=1&showinfo=0&controls=1&autoplay=1'
+		if matterport_url?(url)
+			'play=0'
+		else
+			'rel=0&modestbranding=1&autohide=1&mute=1&showinfo=0&controls=1&autoplay=1'
+		end
 	end
 
 	def youtube_url? url

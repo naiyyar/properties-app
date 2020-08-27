@@ -38,10 +38,11 @@ class VideoToursController < ApplicationController
     respond_to do |format|
       if @video_tour.save
         @category = @video_tour.category
-        format.html
+        format.html { redirect_to :back }
         format.js
       else
         @errors = @video_tour.errors
+        flash[:error] = @errors.messages
         format.js
       end
     end
@@ -52,6 +53,7 @@ class VideoToursController < ApplicationController
   def update
     respond_to do |format|
       if @video_tour.update(video_tour_params)
+        format.html { redirect_to :back }
         format.js
       else
         format.html { render :edit }
@@ -84,6 +86,6 @@ class VideoToursController < ApplicationController
     end
 
     def video_tour_params
-      params.require(:video_tour).permit(:building_id, :sort, :description, :category, :url)
+      params.require(:video_tour).permit(:building_id, :sort, :description, :category, :url, :image)
     end
 end
