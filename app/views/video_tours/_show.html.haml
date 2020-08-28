@@ -1,38 +1,9 @@
-- if request.format.js?
-	.panel-group#accordion
-		- count = 0
-		- VideoTour::CATEGORIES.each do |category|
-			- video_tours = @video_tours[category[1]]
-			- if video_tours.present?
-				- if count == 0
-					.panel.panel-default.dd.vdt
-						%a.font-16.font-bold{href: "#ddPanel-#{category[1]}", class: 'btn-o btn-default btn-block btn-lg text-left', 'data-toggle' => 'collapse', 'data-parent' => "#accordion", 'data-category' => category[1], onclick: "Transparentcity.loadTourVideos(this, #{video_tours.pluck(:id)})"}
-							=category[0]
-							%span.fa.fa-angle-down.pull-right
-						.panel-collapse.collapse.in{ id: "ddPanel-#{category[1]}", }
-							.panel-body
-								.row.tour-videos{id: "tour-videos-#{category[1]}"}
-									= render 'video_tours/tour_videos', video_tours: video_tours
-								%div{class: "loader-#{category[1]}", style: 'display:none;'}=image_tag 'ajax-loader.gif'
-				- else
-					.panel.panel-default.dd.vdt
-						%a.font-16.font-bold{href: "#ddPanel-#{category[1]}", class: 'btn-o btn-default btn-block btn-lg text-left', 'data-toggle' => 'collapse', 'data-parent' => "#accordion", 'data-category' => category[1], onclick: "Transparentcity.loadTourVideos(this, #{video_tours.pluck(:id)})"}
-							=category[0]
-							%span.fa.fa-angle-down.pull-right
-						.panel-collapse.collapse{id: "ddPanel-#{category[1]}", }
-							.panel-body
-								.row.tour-videos{id: "tour-videos-#{category[1]}"}
-								%div{class: "loader-#{category[1]}", style: 'display:none;'}=image_tag 'ajax-loader.gif'
-								
-				- count += 1
-
-- else
-	%div{style: "padding: 10px; color: ##{cat_color};"}
-		- VideoTour::CATEGORIES.each do |category|
-			- video_tours = @video_tours[category[1]]
-			- if video_tours.present?
-				%p.font-16.font-bold=category[0]
-				.row= render 'video_tours/tour_videos', video_tours: video_tours
+%div{style: "padding: 10px; color: ##{cat_color};"}
+	- VideoTour::CATEGORIES.each do |category|
+		- video_tours = @video_tours[category[1]]
+		- if video_tours.present?
+			%p.font-16.font-bold=category[0]
+			.row= render 'video_tours/tour_videos', video_tours: video_tours
 					
 
 - if @building_tours.present? && @building_tours.length >= 3
