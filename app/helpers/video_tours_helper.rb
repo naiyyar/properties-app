@@ -8,11 +8,26 @@ module VideoToursHelper
 						class: 'btn btn-o btn-primary btn-sm btn-round font-bold', id: 'showTour'
 	end
 
+	def formated_url url
+		uri 			= URI.parse(url)
+		query_str = uri.query
+		new_url 	= if query_str.present?
+									uri.to_s.gsub(query_str, new_query_string(query_str, url))
+								else
+									"#{url}?#{auto_play(url)}"
+								end
+		return new_url
+	end
+
+	def new_query_string str, url
+		"#{str}&#{auto_play(url)}"
+	end
+
 	def auto_play url
 		if matterport_url?(url)
 			'play=0'
 		else
-			'rel=0&modestbranding=1&autohide=1&mute=1&showinfo=0&controls=1&autoplay=1'
+			'rel=0&modestbranding=1&autohide=1&mute=1&showinfo=0&controls=1&autoplay=0'
 		end
 	end
 

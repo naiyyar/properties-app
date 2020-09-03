@@ -2061,8 +2061,9 @@
       } else {
         self.afterLoad(slide);
       }
-
-      $iframe.attr("src", slide.src);
+      var slideSrc      = slide.src;
+      var auto_play_src = slideSrc.replace('play=0', 'play=1');
+      $iframe.attr("src", auto_play_src);
 
       // Remove iframe if closing or changing gallery item
       $slide.one("onReset", function() {

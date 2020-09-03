@@ -1,5 +1,5 @@
 - video_tours.each do |video|
-	- url = "#{video.url}?#{auto_play(video.url)}"
+	- url = formated_url(video.url)
 	.col-lg-6.image-gallery
 		%p.font-14=video.try(:description)
 		%a.propWidget-1.tour-fbox{'data-caption' => video.try(:description), href: 'javascript:;', 'data-type' => 'iframe', 'data-src' => url}

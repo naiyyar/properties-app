@@ -13,5 +13,5 @@ if(container.children().first().attr('id') != 'showTourModal'){
     $('.show-tour-modal').slideUp(delay);
   });
 <%end%>
-
-Transparentcity.initFancybox('#showTourModal .tour-fbox, .show-tour-modal .tour-fbox');
+var elems_classes = '#showTourModal .tour-fbox, .show-tour-modal .tour-fbox';
+Transparentcity.initFancybox(elems_classes);
