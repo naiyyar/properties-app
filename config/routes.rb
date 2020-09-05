@@ -29,7 +29,7 @@ Rails.application.routes.draw do
       post :import
       post :export
       post :transfer
-      get :show_more
+      get :show_more, xhr: true
     end
   end
   
