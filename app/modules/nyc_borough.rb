@@ -3,22 +3,26 @@ module NYCBorough
 
 	def nearby_neighborhoods nb
 		if nb == 'Lower Manhattan' || lower_manhattan_sub_borough.include?(nb)
-			{'MANHATTAN' => lower_manhattan_sub_borough }
+			sub_neighborhood_hash('Lower Manhattan', lower_manhattan_sub_borough, 'MANHATTAN')
 		elsif nb == 'Midtown' || midtown_manhattan_sub_borough.include?(nb)
-			{'MANHATTAN' => midtown_manhattan_sub_borough }
+			sub_neighborhood_hash('Midtown', midtown_manhattan_sub_borough, 'MANHATTAN')
 		elsif nb == 'Upper East Side' || upper_east_side_borough.include?(nb)
-			{'MANHATTAN' => upper_east_side_borough }
+			sub_neighborhood_hash('Upper East Side', upper_east_side_borough, 'MANHATTAN')
 		elsif nb == 'Upper West Side' || upper_west_side_borough.include?(nb)
-			{'MANHATTAN' => upper_west_side_borough }
+			sub_neighborhood_hash('Upper West Side', upper_west_side_borough, 'MANHATTAN')
 		elsif nb == 'Upper Manhattan' || upper_manhattan_sub_borough.include?(nb)
-			{'MANHATTAN' => upper_manhattan_sub_borough }
+			sub_neighborhood_hash('Upper Manhattan', upper_manhattan_sub_borough, 'MANHATTAN')
 		elsif nb == 'Brooklyn' 	|| brooklyn_sub_borough.include?(nb)
-			{'Brooklyn' => brooklyn_sub_borough }
+			sub_neighborhood_hash('Brooklyn', brooklyn_sub_borough, 'Brooklyn')
 		elsif nb == 'Queens' || queens_sub_borough.include?(nb)
-			{'Queens' => queens_sub_borough }
+			sub_neighborhood_hash('Queens', queens_sub_borough, 'Queens')
 		elsif nb == 'Bronx' || bronx_sub_borough.include?(nb)		 
-			{'Bronx' => bronx_sub_borough }
+			sub_neighborhood_hash('Bronx', bronx_sub_borough, 'Bronx')
 		end
+	end
+
+	def sub_neighborhood_hash parent_neighborhood, hoods, area
+		{ parent_neighborhood => { hoods: hoods, area: area } }
 	end
 	
 	def lower_manhattan_sub_borough

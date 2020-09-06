@@ -82,9 +82,17 @@
 .clearfix
 - if @nearby_nbs.present?
 	.show-section
-		%h3="Nearby #{@neighbohood}"
+		%h3= "Nearby #{@neighbohood}"
 		%ul.pop-list
-			- @nearby_nbs.each_pair do |area, sub_neighbohoods|
-				- (sub_neighbohoods - [@neighbohood]).each do |neighbohood|
+			- @nearby_nbs.each_pair do |key, nb_hash|
+				- sub_neighbohoods = nb_hash[:hoods]
+				- area 						 = nb_hash[:area]
+				%li
+					- if ['Queens','Bronx','Brooklyn'].include?(key)
+						=link_to "#{area} Apartments For Rent", "/no-fee-apartments-nyc-city/#{key.downcase}-ny", class: 'hyper-link'
+					- else
+						=link_to "#{key} Apartments For Rent", search_link(key, area), class: 'hyper-link'
+				
+				- (sub_neighbohoods).each do |neighbohood|
 					%li=link_to "#{neighbohood} Apartments For Rent", search_link(neighbohood, area), class: 'hyper-link'
 	
