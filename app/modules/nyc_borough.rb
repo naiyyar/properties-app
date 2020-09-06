@@ -1,5 +1,25 @@
 module NYCBorough
 	extend self
+
+	def nearby_neighborhoods nb
+		if nb == 'Lower Manhattan' || lower_manhattan_sub_borough.include?(nb)
+			{'MANHATTAN' => lower_manhattan_sub_borough }
+		elsif nb == 'Midtown' || midtown_manhattan_sub_borough.include?(nb)
+			{'MANHATTAN' => midtown_manhattan_sub_borough }
+		elsif nb == 'Upper East Side' || upper_east_side_borough.include?(nb)
+			{'MANHATTAN' => upper_east_side_borough }
+		elsif nb == 'Upper West Side' || upper_west_side_borough.include?(nb)
+			{'MANHATTAN' => upper_west_side_borough }
+		elsif nb == 'Upper Manhattan' || upper_manhattan_sub_borough.include?(nb)
+			{'MANHATTAN' => upper_manhattan_sub_borough }
+		elsif nb == 'Brooklyn' 	|| brooklyn_sub_borough.include?(nb)
+			{'Brooklyn' => brooklyn_sub_borough }
+		elsif nb == 'Queens' || queens_sub_borough.include?(nb)
+			{'Queens' => queens_sub_borough }
+		elsif nb == 'Bronx' || bronx_sub_borough.include?(nb)		 
+			{'Bronx' => bronx_sub_borough }
+		end
+	end
 	
 	def lower_manhattan_sub_borough
 		@lower_manhattan_sub_borough ||= [
@@ -45,15 +65,31 @@ module NYCBorough
 	end
 
 	def brooklyn_sub_borough
-		@brooklyn_sub_borough ||= ['Brooklyn Heights',
-															 'Bushwick','Clinton Hill',
-															 'Downtown Brooklyn','Dumbo','Fort Greene',
-															 'Gravesend','Greenpoint'
+		@brooklyn_sub_borough ||= [
+															  'Brooklyn Heights',
+													      'Bushwick',
+													      'Clinton Hill',
+													      'Crown Heights',
+													      'Downtown Brooklyn',
+													      'Dumbo',
+													      'Fort Greene',
+													      'Greenpoint',
+													      'Park Slope',
+													      'Sheepshead Bay',
+													      'Williamsburg'
 															]
 	end
 
 	def uptown_sub_borough
 		@uptown_sub_borough ||= ['Upper East Side', 'Upper West Side']
+	end
+
+	def upper_east_side_borough
+		[ 'Carnegie Hill','Lenox Hill', 'Yorkville']
+	end
+
+	def upper_west_side_borough
+		[ 'Lincoln Square', 'Manhattan Valley']
 	end
 
 	def queens_sub_borough

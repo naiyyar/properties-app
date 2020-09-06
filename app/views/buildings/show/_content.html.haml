@@ -78,3 +78,13 @@
 	- else
 		%p.no-review.font-14 There are no reviews for this building. Be the first to add your review for this building.
 		= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning no-review btn-round'
+
+.clearfix
+- if @nearby_nbs.present?
+	.show-section
+		%h3="Nearby #{@neighbohood}"
+		%ul.pop-list
+			- @nearby_nbs.each_pair do |area, sub_neighbohoods|
+				- (sub_neighbohoods - [@neighbohood]).each do |neighbohood|
+					%li=link_to "#{neighbohood} Apartments For Rent", search_link(neighbohood, area), class: 'hyper-link'
+	
