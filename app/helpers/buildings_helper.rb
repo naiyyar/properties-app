@@ -259,4 +259,21 @@ module BuildingsHelper
 	def with_bed_text b, filters
 		"#{'Bed' if b.bedroom_types? && (!b.has_only_studio?(filters) && !b.has_only_room?(filters))}" # #{',' if b.bedroom_types? && b.coliving_with_building_beds?}" # #{'CoLiving' if b.coliving_with_building_beds? }
 	end
+
+	def nearby_link_text nb
+		case nb
+		when 'Midtown'
+			"Midtown NYC #{apt_rent_text}"
+		when 'Corona'
+			"Corona NY #{apt_rent_text}"
+		when 'Flatiron Distric'
+			"Flatiron #{apt_rent_text}"
+		else
+			"#{nb} #{apt_rent_text}"
+		end
+	end
+
+	def apt_rent_text
+		'Apartments For Rent'
+	end
 end

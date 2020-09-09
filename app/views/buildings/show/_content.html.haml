@@ -89,10 +89,10 @@
 				- area 						 = nb_hash[:area]
 				%li
 					- if ['Queens','Bronx','Brooklyn'].include?(key)
-						=link_to "#{area} Apartments For Rent", "/no-fee-apartments-nyc-city/#{key.downcase}-ny", class: 'hyper-link'
+						=link_to nearby_link_text(area), "/no-fee-apartments-nyc-city/#{key.downcase}-ny", class: 'hyper-link'
 					- else
-						=link_to "#{key} Apartments For Rent", search_link(key, area), class: 'hyper-link'
+						=link_to nearby_link_text(key), search_link(key, area), class: 'hyper-link'
 				
 				- (sub_neighbohoods).each do |neighbohood|
-					%li=link_to "#{neighbohood} Apartments For Rent", search_link(neighbohood, area), class: 'hyper-link'
+					%li=link_to nearby_link_text(neighbohood), search_link(neighbohood, area), class: 'hyper-link'
 	

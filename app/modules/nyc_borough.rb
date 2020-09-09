@@ -12,12 +12,12 @@ module NYCBorough
 			sub_neighborhood_hash('Upper West Side', upper_west_side_borough, 'MANHATTAN')
 		elsif nb == 'Upper Manhattan' || upper_manhattan_sub_borough.include?(nb)
 			sub_neighborhood_hash('Upper Manhattan', upper_manhattan_sub_borough, 'MANHATTAN')
-		elsif nb == 'Brooklyn' 	|| brooklyn_sub_borough.include?(nb)
-			sub_neighborhood_hash('Brooklyn', brooklyn_sub_borough, 'Brooklyn')
-		elsif nb == 'Queens' || queens_sub_borough.include?(nb)
-			sub_neighborhood_hash('Queens', queens_sub_borough, 'Queens')
-		elsif nb == 'Bronx' || bronx_sub_borough.include?(nb)		 
-			sub_neighborhood_hash('Bronx', bronx_sub_borough, 'Bronx')
+		elsif nb == 'Brooklyn' 	|| brookly_borough.include?(nb)
+			sub_neighborhood_hash('Brooklyn', brookly_borough, 'Brooklyn')
+		elsif nb == 'Queens' || queens_borough.include?(nb)
+			sub_neighborhood_hash('Queens', queens_borough, 'Queens')
+		elsif nb == 'Bronx' || bronx_borough.include?(nb)		 
+			sub_neighborhood_hash('Bronx', bronx_borough, 'Bronx')
 		end
 	end
 
@@ -48,6 +48,7 @@ module NYCBorough
 			"Hell's Kitchen",
 			'Kips Bay',
 			'Midtown East',
+			'Midtown South',
 			'Sutton Place',
 			'Midtown West ',
 			'Murray Hill',
