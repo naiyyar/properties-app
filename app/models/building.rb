@@ -351,6 +351,22 @@ class Building < ApplicationRecord
     broker_fee_savings(rent_medians, broker_percent).values.min
   end
 
+  def nearby_neighborhood
+    neighborhood3 || neighborhoods_parent || neighborhood
+  end
+
+  def first_neighborhood
+    neighborhood.present? ? neighborhood : neighborhoods_parent
+  end
+
+  def parent_neighbors
+    if neighborhood.present? && neighborhoods_parent.present? && neighborhood3.present? 
+      (neighborhoods_parent == neighborhood) ? neighborhood3 : neighborhoods_parent
+    else
+      neighborhood3.present? ? neighborhood3 : neighborhoods_parent
+    end
+  end
+
   def neighbohoods
     first_neighborhood.present? ? first_neighborhood : neighborhood3
   end
@@ -397,18 +413,6 @@ class Building < ApplicationRecord
     unit.building_id = self.id
     unit.save
     return unit
-  end
-
-  def first_neighborhood
-    neighborhood.present? ? neighborhood : neighborhoods_parent
-  end
-
-  def parent_neighbors
-    if neighborhood.present? && neighborhoods_parent.present? && neighborhood3.present? 
-      (neighborhoods_parent == neighborhood) ? neighborhood3 : neighborhoods_parent
-    else
-      neighborhood3.present? ? neighborhood3 : neighborhoods_parent
-    end
   end
 
   def formatted_city
