@@ -66,8 +66,7 @@ module NYCBorough
 			'Hamilton Heights',
 			'Morningside Heights',
 			'Washington Heights',
-			'Hudson Heights',
-			# 'Inwood'
+			'Hudson Heights'
 		]
 	end
 

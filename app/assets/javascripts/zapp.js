@@ -48,7 +48,7 @@
         $('.closeLeftSide').height(contentHeight);
         $('#wrapper').height(contentHeight);
         $('#mapView').height(contentHeight);
-        $('#content').height(contentHeight);
+        // $('#content').height(contentHeight);
     }
 
     if(split_view_length == 0){

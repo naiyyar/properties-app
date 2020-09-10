@@ -352,7 +352,8 @@ class Building < ApplicationRecord
   end
 
   def nearby_neighborhood
-    neighborhood3 || neighborhoods_parent || neighborhood
+    return neighborhood3 if neighborhood3.present?
+    neighborhoods_parent.present? ? neighborhoods_parent : neighborhood
   end
 
   def first_neighborhood
