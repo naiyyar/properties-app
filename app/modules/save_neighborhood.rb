@@ -50,9 +50,9 @@ module SaveNeighborhood
       nb  = 'East Village'
       nb3 = nb_parent = 'Lower Manhattan'
     end
-    update_column(:neighborhood, nb)                if nb.present? and neighborhood.blank?
-    update_column(:neighborhoods_parent, nb_parent) if nb_parent.present? and neighborhoods_parent.blank?
-    update_column(:neighborhood3, nb3)              if nb3.present? and neighborhood3.blank?
+    update_column(:neighborhood, nb)                if nb.present? && neighborhood.blank?
+    update_column(:neighborhoods_parent, nb_parent) if nb_parent.present? && neighborhoods_parent.blank?
+    update_column(:neighborhood3, nb3)              if nb3.present? && neighborhood3.blank?
   end
 
 end
