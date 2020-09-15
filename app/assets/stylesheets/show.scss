@@ -220,7 +220,7 @@
 	}
 	.buildingsshow {
 		#content{
-			overflow-y: auto;
+			overflow-y: scroll;
 			-webkit-overflow-scrolling: touch;
 			.singleTop{
 				.sh-slider-container{
