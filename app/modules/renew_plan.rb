@@ -45,7 +45,7 @@ module RenewPlan
             set_time_zone(user) 
             if billable.expired? && billable.active
               update_status(billable)
-              BillingMailer.no_card_payment_failed(user.email).deliver
+              # BillingMailer.no_card_payment_failed(user.email).deliver
             end
           end
         end

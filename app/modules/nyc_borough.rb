@@ -60,7 +60,7 @@ module NYCBorough
 	def upper_manhattan_sub_borough
 		@upper_manhattan_sub_borough ||= [
 			'East Harlem',
-			'Harlem ',
+			'Harlem',
 			'South Harlem',
 			'Central Harlem',
 			'Hamilton Heights',
@@ -128,6 +128,7 @@ module NYCBorough
 			'Crown Heights',
 			'Downtown Brooklyn',
 			'Flatbush - Ditmas Park',
+			'Flatbush',
 			'Fort Greene',
 			'Greenpoint',
 			'Park Slope',
@@ -167,7 +168,8 @@ module NYCBorough
 												 'Riverdale',
 												 'Spuyten Duyvil',
 												 'Tremont',
-												 'University Heights'
+												 'University Heights',
+												 'Fordham Manor'
 												]
 	end
 
