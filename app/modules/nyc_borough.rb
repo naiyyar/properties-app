@@ -127,7 +127,6 @@ module NYCBorough
 			'Clinton Hill',
 			'Crown Heights',
 			'Downtown Brooklyn',
-			'Flatbush - Ditmas Park',
 			'Flatbush',
 			'Fort Greene',
 			'Greenpoint',
