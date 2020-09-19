@@ -100,6 +100,18 @@ Transparentcity = {
 				loader.hide();
 			}
 		})
-	}
+	},
+	showHideCTALinks: function(elem){
+		var $this  		 = elem;
+		var scroll_top = $this.scrollTop;
+		var cta_div 	 = $('.cta-buttons.show-mob');
+		console.log(scroll_top)
+		if(scroll_top >= 685 ){
+			cta_div.show();
+		}else{
+			cta_div.hide();
+		}
+	},
+
 };
 
