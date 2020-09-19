@@ -20,8 +20,8 @@
 					%span.fa.fa-spin.fa-spinner 
 					Loading map...
 - else
-	%button.listHandler.closeMap{'aria-label' => 'Close', type: 'button'}
-		%span{'aria-hidden' => 'true'} &times;
+	%a.listHandler.closeMap{href: 'javascript:;'}
+		%span.fa.fa-times.fa-3x
 	
 	#mapView.mob-min{class: screen_class}
 		.mapPlaceholder
