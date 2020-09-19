@@ -22,8 +22,16 @@
 	.amenities.show-section#video-tours
 		%h3="3D / Video Tour (#{tours_count = @building_tours.length})"
 		- @vd_height = '190'
-		/ - cache [@building, tours_count, '3DVideoTours'] do
-		= render 'video_tours/show', cat_color: '333'
+		- cache [@building, tours_count, '3DVideoTours'] do
+			= render 'video_tours/show', cat_color: '333'
+
+- unless screen_class == 'screen-lg'
+	.clearfix
+	.show-section.show-map-handler{style: 'height: 200px; width: 100%;'}
+		#mob-map{style: 'height: 100%; width: 100%;'}
+			.mapPlaceholder
+				%span.fa.fa-spin.fa-spinner 
+				Loading map...
 
 .clearfix
 - if @building.price.present? || @building.bedroom_types?

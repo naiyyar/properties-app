@@ -1,13 +1,15 @@
 <script src="https://maps.google.com/maps/api/js?v=3.36&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
 <script type="text/javascript">
-  var map, current_user_id, current_building_id;
+  var map, map2, current_user_id, current_building_id, mob_map;
   current_user_id = $('#cu').val();
   var infobox;
   var zoom = 16;
   var featured_comp_building_id = "<%=@similar_properties.first.id rescue nil%>";
+  
   if($("#mapHash").length > 0){
     // Custom options for map
     function initialize() {
+      mob_map = $('#mob-map');
       var options = {
         zoom: zoom,
         mapTypeControl: false,
@@ -20,6 +22,15 @@
         //  position: google.maps.ControlPosition.RIGHT_CENTER
         //},
       };
+
+      var static_options = {
+        zoom: zoom,
+        mapTypeControl: false,
+        zoomControl: false,
+        gestureHandling: 'none',
+        disableDoubleClickZoom: true,
+        fullscreenControl: false
+      }
 
       var props           = $("#mapHash").data('map');
       var lat             = $("#mapHash").data('lat');
@@ -72,15 +83,6 @@
           })(marker, i));
           
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
-              // panorama = map.getStreetView();
-              // panorama.setPosition(marker.getPosition());
-              // google.maps.event.addListenerOnce(panorama, 'status_changed', function () {
-              //   panorama.setPov({
-              //     heading: -265,
-              //     zoom: 1,
-              //     pitch: 0
-              //   });
-              // });
               return function() {
                 loadMarkerWindow(prop.id, map, marker);
               }
@@ -101,18 +103,34 @@
           });         
         });
       }
+
+      var setShowMap = function(new_map){
+        new_map.setCenter(new google.maps.LatLng(lat, lng));
+        new_map.setZoom(zoom);
+        addMarkers(props, new_map);
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(new_map);
+        showWindowResizeHandler(new_map);
+      }
       
       setTimeout(function() {
         $('body').removeClass('notransition');
         map = new google.maps.Map(document.getElementById('mapView'), options);
-        map.setCenter(new google.maps.LatLng(lat, lng));
-        map.setZoom(zoom);
-        addMarkers(props, map);
-        var transitLayer = new google.maps.TransitLayer();
-        transitLayer.setMap(map);
-        showWindowResizeHandler(map)
+        setShowMap(map)
+        if(mob_map.length == 1){
+          map2 = new google.maps.Map(document.getElementById('mob-map'), static_options);
+          setShowMap(map2)
+        }
+        // map.setCenter(new google.maps.LatLng(lat, lng));
+        // map.setZoom(zoom);
+        // addMarkers(props, map);
+        // var transitLayer = new google.maps.TransitLayer();
+        // transitLayer.setMap(map);
+        // showWindowResizeHandler(map);
       }, 300);
     }
+
+
   }
 
   function loadMarkerWindow(building_id, map, marker){
