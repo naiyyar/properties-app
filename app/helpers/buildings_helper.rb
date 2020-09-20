@@ -234,7 +234,7 @@ module BuildingsHelper
 	end
 
 	def price_col b, filters
-		if b.min_and_max_price? && b.act_listings.sum(:rent) > 0
+		if b.min_and_max_price? && b.act_listings.present? && b.act_listings.sum(:rent) > 0
 			"<b> #{min_and_max_prices(b, filters)} </b>"
 		else
 			"<span> #{b.prices} </span>"

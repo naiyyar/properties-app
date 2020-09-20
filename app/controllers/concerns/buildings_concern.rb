@@ -16,6 +16,7 @@ module BuildingsConcern
     @gmaphash              = Building.buildings_json_hash(buildings)
     @listings              = @building.listings
     @active_listings       = @listings.active.order_by_rent_asc
+    @building.act_listings = @active_listings
     @all_inactive_listings = @building.past_listings
     @inactive_listings     = @all_inactive_listings.order_by_date_active_desc.limit(5)
     @building_tours        = @building.video_tours
