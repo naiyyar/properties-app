@@ -234,11 +234,17 @@ module BuildingsHelper
 	end
 
 	def price_col b, filters
-		if b.min_and_max_price? && b.act_listings.present? && b.act_listings.sum(:rent) > 0
+		if b.min_and_max_price? && show_price_range_with_filters?(b, filters)
+			"<b> #{min_and_max_prices(b, filters)} </b>"
+		elsif b.min_and_max_price?
 			"<b> #{min_and_max_prices(b, filters)} </b>"
 		else
 			"<span> #{b.prices} </span>"
 		end
+	end
+
+	def show_price_range_with_filters?(b, filters)
+		filters.present? && b.act_listings.present? && b.act_listings.sum(:rent) > 0
 	end
 
 	def min_and_max_prices prop, filters

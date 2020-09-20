@@ -2,16 +2,20 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session, except: :load_infobox
-
+  # Filters
   before_action :allow_iframe_requests
   after_action  :store_location, unless: :skip_store_location
-  before_action :popular_neighborhoods
   before_action :set_timezone, if: :user_signed_in?
-
-  helper_method :browser_time_zone, :uptown_count,
-                :brooklyn_count, :queens_count, :bronx_count
-
+  
+  # layouts
   layout :set_layout
+  
+  # helpers
+  helper_method :browser_time_zone
+  
+  # modules
+  include BuildingsCountConcern
+  include CreateReviewConcern
 
   def set_timezone
     Time.zone = current_user.time_zone
@@ -30,43 +34,6 @@ class ApplicationController < ActionController::Base
 
     session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
   end
-
-  def popular_neighborhoods
-    @pop_nb_hash = {}
-    pop_neighborhoods.each{ |nb| @pop_nb_hash[nb.name] = nb.buildings_count }
-  end
-
-  def uptown_count
-    @uptown_count ||= Neighborhood.nb_buildings_count(pop_neighborhoods, NYCBorough.uptown_sub_borough)
-  end
-
-  def brooklyn_count
-    @brooklyn_count ||= Building.city_count(pop_nb_buildings,'Brooklyn', NYCBorough.brooklyn_sub_borough)
-  end
-
-  def queens_count
-    @queens_count ||= Building.city_count(pop_nb_buildings,'Queens', NYCBorough.queens_sub_borough)
-  end
-
-  def bronx_count
-    @bronx_count ||= Building.city_count(pop_nb_buildings, 'Bronx', NYCBorough.bronx_sub_borough)
-  end
-
-  def pop_nb_buildings
-    @pop_nb_buildings ||= Building.transparentcity_buildings.select(*Building::ATTRS)
-  end
-
-  def pop_neighborhoods
-    @pop_neighborhoods ||= Neighborhood.select(:name, :buildings_count)
-  end
-
-  def after_sign_up_path_for(_resource)
-    save_review
-  end
-
-  def after_sign_in_path_for(_resource)
-    save_review
-	end
 
   def wicked_pdf_options(file_name, template)
     { 
@@ -109,42 +76,6 @@ class ApplicationController < ActionController::Base
     %w(new contribute index)
   end
 
-  def save_review
-    if session[:form_data].present?
-      building_data = session[:form_data]['building']
-      object_type   = session[:object_type]
-      if object_type.present? && object_type == 'building'
-        user_id   = current_user&.id
-        building  = Building.new(building_data.merge(user_id: user_id))
-        if building.save
-          flash[:notice] = 'Building created successfully.'
-          sign_in_redirect_path(building, session)
-        end
-      elsif object_type.present? && object_type == 'unit' && building_data.present?
-        building = Building.find_by_building_street_address(building_data['building_street_address'])
-        if (unit = building.created_unit(session, building_data))
-          flash[:notice] = 'Unit created successfully.'
-          sign_in_redirect_path(unit, session)
-        end
-      else
-        reviewable = find_reviewable
-        form_data  = session[:form_data]
-        if reviewable.create_review(current_user, form_data, form_data['review'])
-          flash[:notice] = 'Review Created Successfully.'
-          session[:form_data], session[:after_contribute] = nil, 'reviews'
-          if reviewable.kind_of? Building 
-            return building_path(reviewable)
-          else
-            return unit_path(reviewable)
-          end
-        end
-      end
-    else
-      flash[:notice] = 'Signed in successfully'
-      session[:return_to] || root_path
-    end
-  end
-
   rescue_from CanCan::AccessDenied do |exception|
     unless exception.message == 'You are not authorized to access this page.'
       redirect_to redirect_back_or_default(root_url), notice: exception.message
@@ -157,20 +88,8 @@ class ApplicationController < ActionController::Base
     session[:return_to] || default
   end
 
-  def sign_in_redirect_path object, session
-    return SignInRedirect.redirect_path(session: session, object: object)
-  end
-
   def allow_iframe_requests
     response.headers.delete('X-Frame-Options')
-  end
-	
-	def find_reviewable
-    session[:form_data].each do |name, value|
-      if name =~ /(.+)_id$/
-        return $1.classify.constantize.find(value)
-      end
-    end
   end
 
   before_action :update_last_sign_in_at
