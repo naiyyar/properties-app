@@ -28,9 +28,9 @@
   
   = link_to @show_path do
     %div{style: 'margin-left: 6px;'}= render 'home/building_detail', building: building
-  
-  - building.min_price = @listings&.first&.rent
-  - building.max_price = @listings&.last&.rent
+  - building.act_listings = @listings
+  - building.min_price    = @listings&.first&.rent
+  - building.max_price    = @listings.with_rent&.last&.rent
   .pb-8{style: 'margin-left: 6px;'}= set_bed_ranges(building, filters)
   
   .clearfix
