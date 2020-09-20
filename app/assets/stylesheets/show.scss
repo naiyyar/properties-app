@@ -1,3 +1,8 @@
+.touch-scroll {
+	#wrapper.screen-sm {
+		-webkit-overflow-scrolling: touch !important;
+	}
+}
 .buildingsshow{
 	#mapView{
 		width: 100%;
@@ -18,7 +23,6 @@
 	  width: 100%;
 	  height: 100%;
 	  float: left;
-	  -webkit-overflow-scrolling: touch;
 	}
 
 	.show-section h3 {

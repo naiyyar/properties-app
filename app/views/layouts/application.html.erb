@@ -10,7 +10,7 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
   
-  <body class="notransition no-hidden" >
+  <body class="notransition no-hidden <%= 'touch-scroll' if @show_map_btn %>" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
     <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
