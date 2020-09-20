@@ -130,7 +130,7 @@
             $('#content').toggleClass('min');
             $('#mapView, #mapViewSearch').toggleClass('max');
         }
-        initialize(false);
+        initialize();
         setTimeout(function() {
             if(map && redo_search){
                 map.setCenter(new google.maps.LatLng(lat,lng));
@@ -153,8 +153,10 @@
         setSession('listView')
     })
     
-    $('.mapHandler').click(function() {
-        $(this).hide();
+    $('.mapHandler, .show-map-handler').click(function() {
+        if(!$(this).hasClass('show-map-handler')){
+            $(this).hide();
+        }
         $('.listHandler').show();
         listMapView();
         $('.sorted_by_option').hide()

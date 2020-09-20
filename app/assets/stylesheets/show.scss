@@ -212,6 +212,16 @@
 	    float: right;
 		}
 
+		.listHandler.closeMap {
+			position: absolute;
+			top: 60px;
+			right: 20px;
+			z-index: 99;
+			display: none;
+			background: transparent;
+			box-shadow: none;
+		}
+
 		#content, #show-content {
 		  .show-section, .singleTop .summary{
 			  padding: 6px 20px 0 20px;

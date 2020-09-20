@@ -27,7 +27,7 @@
                   %span.filter-counts
 
   .visible-xs{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;'}
-    - if action_name == 'search' || @show_map_btn
+    - if action_name == 'search'
       %a.mapHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: none;' : ''}
         %span.fa.fa-map-o
         Map

@@ -15,11 +15,14 @@
 				.col-lg-8{style: 'width: 68%;'}
 					= render 'buildings/show/content', show_summary: true
 		.col-lg-3{style: 'padding-left: 0px;'}
-			#mapView{class: screen_class}
+			#mapView.apt-map{class: screen_class}
 				.mapPlaceholder
 					%span.fa.fa-spin.fa-spinner 
 					Loading map...
 - else
+	%a.listHandler.closeMap{href: 'javascript:;'}
+		%span.fa.fa-times.fa-3x
+	
 	#mapView.mob-min{class: screen_class}
 		.mapPlaceholder
 			%span.fa.fa-spin.fa-spinner 
@@ -29,6 +32,10 @@
 	#content.mob-max
 		= render 'buildings/show/top_summary_section', show_summary: true
 		= render 'buildings/show/content', show_summary: false
+
+
+.visible-xs
+	.cta-buttons.show-mob{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;display: none;'}= fancybox_cta_buttons
 
 %br
 .clearfix
