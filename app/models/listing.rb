@@ -65,11 +65,12 @@ class Listing < ApplicationRecord
     listings_count = 0
     if filter_params.present?
       per_page_buildings.each do |b|
-        act_listings    = b.get_listings(filter_params)
-        b.act_listings  = act_listings
-        b.min_price     = act_listings.first.rent rescue nil
-        b.max_price     = act_listings.last.rent  rescue nil
-        listings_count += act_listings.size
+        act_listings       = b.get_listings(filter_params)
+        listings_with_rent = act_listings.with_rent
+        b.act_listings     = act_listings
+        b.min_price        = listings_with_rent.first.rent rescue nil
+        b.max_price        = listings_with_rent.last.rent  rescue nil
+        listings_count    += act_listings.size
       end
 
       buildings.where.not(id: per_page_buildings.pluck(:id)).each do |b|
