@@ -1,16 +1,18 @@
 - if show_summary
 	.singleTop{ style: 'position: relative;' }
 		= render 'buildings/show/summary'
+
 .section-container
-	#listings.show-section
-		- if @active_listings.present?
-			%h3= "#{@active_listings.count} Active Rental Listings"
-			= render 'buildings/show/listings', listings: @active_listings, type: 'current'
-		.clearfix
-		- if @inactive_listings.present?
-			%h3= "#{@all_inactive_listings.count} Past Rental Listings"
-			= hidden_field_tag 'past_listings_count', @all_inactive_listings.count
-			= render 'buildings/show/listings', listings: @inactive_listings, type: 'past'
+	- if @active_listings.present? || @inactive_listings.present?
+		#listings.show-section
+			- if @active_listings.present?
+				%h3= "#{@active_listings.count} Active Rental Listings"
+				= render 'buildings/show/listings', listings: @active_listings, type: 'current'
+			.clearfix
+			- if @inactive_listings.present?
+				%h3= "#{@all_inactive_listings.count} Past Rental Listings"
+				= hidden_field_tag 'past_listings_count', @all_inactive_listings.count
+				= render 'buildings/show/listings', listings: @inactive_listings, type: 'past'
 
 	.clearfix
 	= render 'building_amenities'
