@@ -5,28 +5,14 @@ class ApplicationController < ActionController::Base
   # Filters
   before_action :allow_iframe_requests
   after_action  :store_location, unless: :skip_store_location
-  before_action :set_timezone, if: :user_signed_in?
   
   # layouts
   layout :set_layout
   
-  # helpers
-  helper_method :browser_time_zone
-  
   # modules
   include BuildingsCountConcern
   include CreateReviewConcern
-
-  def set_timezone
-    Time.zone = current_user.time_zone
-  end
-
-  def browser_time_zone
-    browser_tz = ActiveSupport::TimeZone.find_tzinfo(cookies[:timezone])
-    browser_tz || Time.zone
-  rescue TZInfo::UnknownTimezone, TZInfo::InvalidTimezoneIdentifier
-    Time.zone
-  end
+  include SetTimezoneConcern
   
   def store_location
     # store last url as long as it isn't a /users path

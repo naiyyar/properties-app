@@ -25,17 +25,18 @@
 	  float: left;
 	}
 
-	.show-section h3 {
-		font-size: 24px;
-		font-weight: bolder;
+	.show-section {
+		border-top: 1px solid #ddd;
+		padding: 10px 0px 20px 0px;
+		h3 {
+			font-size: 24px;
+			font-weight: bolder;
+		}
 	}
 
 	#show-content{
 		.singleTop{
 			padding-bottom: 20px;
-		}
-		.show-section, .singleTop .summary{
-		  padding: 8px 0px 0px;
 		}
 		.aggregate-ratings.show-section ul{
 			padding: 10px 20px 10px 0px;
@@ -225,12 +226,6 @@
 			background: transparent;
 			box-shadow: none;
 		}
-
-		#content, #show-content {
-		  .show-section, .singleTop .summary{
-			  padding: 6px 20px 0 20px;
-			}
-		}
 	}
 	.buildingsshow {
 		#content{
@@ -250,7 +245,9 @@
 					}
 				}
 			}
-
+			.section-container, .singleTop .summary{
+				padding: 10px 20px 20px;
+			}
 			h3{
 				font-size: 18px;
 			}

@@ -1,106 +1,105 @@
 - if show_summary
 	.singleTop{ style: 'position: relative;' }
 		= render 'buildings/show/summary'
+.section-container
+	#listings.show-section
+		- if @active_listings.present?
+			%h3= "#{@active_listings.count} Active Rental Listings"
+			= render 'buildings/show/listings', listings: @active_listings, type: 'current'
+		.clearfix
+		- if @inactive_listings.present?
+			%h3= "#{@all_inactive_listings.count} Past Rental Listings"
+			= hidden_field_tag 'past_listings_count', @all_inactive_listings.count
+			= render 'buildings/show/listings', listings: @inactive_listings, type: 'past'
 
-#listings.show-section
-	%div.divider
-	%br
-	- if @active_listings.present?
-		%h3= "#{@active_listings.count} Active Rental Listings"
-		= render 'buildings/show/listings', listings: @active_listings, type: 'current'
 	.clearfix
-	- if @inactive_listings.present?
-		%h3= "#{@all_inactive_listings.count} Past Rental Listings"
-		= hidden_field_tag 'past_listings_count', @all_inactive_listings.count
-		= render 'buildings/show/listings', listings: @inactive_listings, type: 'past'
+	= render 'building_amenities'
 
-.clearfix
-= render 'building_amenities'
-
-.clearfix
-- if @building_tours.present?
-	.amenities.show-section#video-tours
-		%h3="3D / Video Tour (#{tours_count = @building_tours.length})"
-		- @vd_height = '190'
-		- cache [@building, tours_count, '3DVideoTours'] do
-			= render 'video_tours/show', cat_color: '333'
-
-- unless screen_class == 'screen-lg'
 	.clearfix
-	.show-section.show-map-handler{style: 'height: 200px; width: 100%;'}
-		#mob-map{style: 'height: 100%; width: 100%;'}
-			.mapPlaceholder
-				%span.fa.fa-spin.fa-spinner 
-				Loading map...
+	- if @building_tours.present?
+		.amenities.show-section#video-tours
+			%h3="3D / Video Tour (#{tours_count = @building_tours.length})"
+			- @vd_height = '190'
+			- cache [@building, tours_count, '3DVideoTours'] do
+				= render 'video_tours/show', cat_color: '333'
 
-.clearfix
-- if @building.price.present? || @building.bedroom_types?
-	= render 'buildings/show/price_ranges'
-	= render 'buildings/show/broker_fee_savings'
+	- unless screen_class == 'screen-lg'
+		.show-section.show-map-handler{style: 'height: 200px; width: 100%;'}
+			%br
+			#mob-map{style: 'height: 100%; width: 100%;'}
+				.mapPlaceholder
+					%span.fa.fa-spin.fa-spinner 
+					Loading map...
 
-- if @documents.present?
-	#building-documents.documents.show-section
-		%h3
-			Documents (#{@documents.count})
-		= render 'uploads/documents'
+	.clearfix
+	- if @building.price.present? || @building.bedroom_types?
+		%br
+		= render 'buildings/show/price_ranges'
+		= render 'buildings/show/broker_fee_savings'
 
-.clearfix
-- if @distance_results.present?
-	#subways.show-section
-		%h3 Subway
-		= render 'buildings/show/subways'
+	- if @documents.present?
+		#building-documents.documents.show-section
+			%h3
+				Documents (#{@documents.count})
+			= render 'uploads/documents'
 
-.clearfix
-- if @similar_properties.present?
-	#similiar-buildings.show-section
-		%h3= "Similar Buildings (#{@similar_properties.count})"
-		= render 'buildings/show/similar_properties', step: 2, col: 6
+	.clearfix
+	- if @distance_results.present?
+		#subways.show-section
+			%h3 Subway
+			= render 'buildings/show/subways'
 
-.clearfix
-- if @building.rating_cache?
-	.aggregate-ratings.show-section
-		%h3 Aggregate Ratings
-		%ul.star-sm
-			%li.hidden
-				%h3
-			%li
-				Cleanliness - Pests/Smell/Trash #{rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true}
-			%li
-				Is it Noisy? #{rating_for @building, 'noise', disable_after_rate: true, readonly: true}
-			%li
-				Do you feel safe in your building? #{rating_for @building, 'safe', disable_after_rate: true, readonly: true}
-			%li
-				Utilities - AC/Electric/Heat/Water #{rating_for @building, 'health', disable_after_rate: true, readonly: true}
-			%li
-				Super Responsiveness #{rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true}
-			%li
-				Dealings with Management #{rating_for @building, 'management', disable_after_rate: true, readonly: true}
-.clearfix
-.comments.font-14.show-section
-	%h3= "Building Reviews (#{ @reviews_count })"
-	- if @reviews_count > 0
-		.text-right{style: 'text-align: right; padding-bottom: 15px;'}
-			= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning btn-round'
-    
-		= render :partial => 'reviews/review', :collection => @reviews, :as => :review
-	- else
-		%p.no-review.font-14 There are no reviews for this building. Be the first to add your review for this building.
-		= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning no-review btn-round'
+	.clearfix
+	- if @similar_properties.present?
+		#similiar-buildings.show-section
+			%h3= "Similar Buildings (#{@similar_properties.count})"
+			= render 'buildings/show/similar_properties', step: 2, col: 6
 
-.clearfix
-- if @nearby_nbs.present?
-	.show-section{style: 'margin-bottom: 30px;'}
-		%h3= "Nearby #{@neighbohood}"
-		%ul.pop-list
-			- @nearby_nbs.each_pair do |key, nb_hash|
-				- sub_neighbohoods = nb_hash[:hoods]
-				- area 						 = nb_hash[:area]
+	.clearfix
+	- if @building.rating_cache?
+		.aggregate-ratings.show-section
+			%h3 Aggregate Ratings
+			%ul.star-sm
+				%li.hidden
+					%h3
 				%li
-					- if ['Queens','Bronx','Brooklyn'].include?(key)
-						=link_to nearby_link_text(area), "/no-fee-apartments-nyc-city/#{key.downcase}-ny", class: 'hyper-link'
-					- else
-						=link_to nearby_link_text(key), search_link(key, area), class: 'hyper-link'
-				
-				- (sub_neighbohoods).each do |neighbohood|
-					%li=link_to nearby_link_text(neighbohood), search_link(neighbohood, area), class: 'hyper-link'
+					Cleanliness - Pests/Smell/Trash #{rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true}
+				%li
+					Is it Noisy? #{rating_for @building, 'noise', disable_after_rate: true, readonly: true}
+				%li
+					Do you feel safe in your building? #{rating_for @building, 'safe', disable_after_rate: true, readonly: true}
+				%li
+					Utilities - AC/Electric/Heat/Water #{rating_for @building, 'health', disable_after_rate: true, readonly: true}
+				%li
+					Super Responsiveness #{rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true}
+				%li
+					Dealings with Management #{rating_for @building, 'management', disable_after_rate: true, readonly: true}
+	.clearfix
+	.comments.font-14.show-section
+		%h3= "Building Reviews (#{ @reviews_count })"
+		- if @reviews_count > 0
+			.text-right{style: 'text-align: right; padding-bottom: 15px;'}
+				= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning btn-round'
+	    
+			= render :partial => 'reviews/review', :collection => @reviews, :as => :review
+		- else
+			%p.no-review.font-14 There are no reviews for this building. Be the first to add your review for this building.
+			= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning no-review btn-round'
+
+	.clearfix
+	- if @nearby_nbs.present?
+		.show-section{style: 'margin-bottom: 30px;'}
+			%h3= "Nearby #{@neighbohood}"
+			%ul.pop-list
+				- @nearby_nbs.each_pair do |key, nb_hash|
+					- sub_neighbohoods = nb_hash[:hoods]
+					- area 						 = nb_hash[:area]
+					%li
+						- if ['Queens','Bronx','Brooklyn'].include?(key)
+							=link_to nearby_link_text(area), "/no-fee-apartments-nyc-city/#{key.downcase}-ny", class: 'hyper-link'
+						- else
+							=link_to nearby_link_text(key), search_link(key, area), class: 'hyper-link'
+					
+					- (sub_neighbohoods).each do |neighbohood|
+						%li=link_to nearby_link_text(neighbohood), search_link(neighbohood, area), class: 'hyper-link'
 	
