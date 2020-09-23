@@ -107,7 +107,11 @@
 
     // For mobile dropdown panel
     $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
-      $('.popular-neighborhoods').slideToggle(200);
+      $('.popular-neighborhoods').slideToggle(200, 'linear', function(){
+        var elem             = $('#wrapper.screen-sm');
+        var toggleable_class = 'no-touch-scroll'
+        $(this).is(':hidden') ? elem.removeClass(toggleable_class) : elem.addClass(toggleable_class);
+      });
     });
 
     // Header search icon transition

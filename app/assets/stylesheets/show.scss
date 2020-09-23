@@ -2,6 +2,9 @@
 	#wrapper.screen-sm {
 		-webkit-overflow-scrolling: touch !important;
 	}
+	#wrapper.screen-sm.no-touch-scroll {
+		-webkit-overflow-scrolling: auto !important;
+	}
 }
 .buildingsshow{
 	#mapView{
