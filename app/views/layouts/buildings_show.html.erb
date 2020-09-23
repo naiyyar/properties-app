@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render partial: 'layouts/layout_head', locals: { js_path: 'application' } %>
-    <% if action_name == 'managertools' %>
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.1.2/css/paymentfont.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
-    <%end%>
-    
-    <%= tag :meta, name: 'stripe-key', content: STRIPE_PUBLIC_KEY %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= render partial: 'layouts/layout_head', locals: { js_path: 'home/jquery.init' } %>
+    <%= stylesheet_link_tag 'building/main', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
   </head>
   
-  <body class="notransition no-hidden" >
+  <body class="notransition no-hidden touch-scroll" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
     <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
@@ -25,10 +20,14 @@
     <%end%>
     
     <div id="remote-container"></div>
-    <div id="auth-form"></div>
 
+    <%= javascript_include_tag 'home/main'%>
+    <%= javascript_include_tag 'building/main'%>
     <%= render 'buildings/favourite_script' %>
-    <%= javascript_include_tag 'zapp' %>
+    <%= render 'buildings/show/map_script' %>
+    <%= javascript_include_tag 'zapp'%>
+    <%= javascript_include_tag 'home'%>
+
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })
