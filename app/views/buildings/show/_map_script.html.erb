@@ -5,6 +5,7 @@
   var zoom = 16;
   var featured_comp_building_id = "<%=@similar_properties.first.id rescue nil%>";
   var fullscreen_ctrl = true;
+  var redo_search = false;
   if($("#mapHash").length > 0){
     // Custom options for map
     function initialize() {
