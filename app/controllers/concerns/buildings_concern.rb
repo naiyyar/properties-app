@@ -15,7 +15,7 @@ module BuildingsConcern
     @documents             = @building.doc_uploads
     @reviews_count         = @building.reviews_count.to_i
     @similar_properties    = @building.comps
-    @similar_properties_count = @similar_properties.count
+    @similar_properties_count = @similar_properties.length
     @gmaphash              = Building.buildings_json_hash(@similar_properties.to_a + [@building])
     @listings              = @building.listings
     @active_listings       = @listings.active.order_by_rent_asc

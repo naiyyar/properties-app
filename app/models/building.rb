@@ -268,8 +268,8 @@ class Building < ApplicationRecord
   end
 
   def comps
-    Building.where(id: active_comp_building_ids)
-            .includes(:featured_comps, :uploads) if active_comp_building_ids.length > 0
+    return [] if active_comp_building_ids.length == 0
+    Building.where(id: active_comp_building_ids).includes(:featured_comps, :uploads)
   end
 
   def featured_comp_building_id
