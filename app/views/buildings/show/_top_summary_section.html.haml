@@ -1,15 +1,9 @@
 .singleTop{style: 'position: relative;'}
-	.row.sh-slider
-		.sh-slider-container
-			.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
-				- unless browser.device.mobile?
-					#thumb-pager
-						.col-lg-5
-							- cache [@building, 'showPLSliderThumbSlide'] do
-								= render 'buildings/show/ls_pager'
-				%div{ class: "#{'col-lg-7' unless browser.device.mobile?}" }
-					- cache [@building, 'showPLSliderMainSlide'] do
-						= render 'buildings/show/lightslider', building: @building
+	.row.sh-slider#sh-slider
+		%div{style: 'height: 460px;text-align: center;line-height: 460px;'}
+			- if browser.device.mobile?
+				%span.fa.fa-spin.fa-circle-o-notch.fa-2x.fa-fw
+			/ = render 'buildings/show/light_slider', building: @building
  		
 		- if @building.price.present? or @building.bedroom_types?
 			- if @min_save_amount.present?

@@ -126,6 +126,9 @@
           setShowMap(map2);
         }
       }, 300);
+
+      Transparentcity.lazyLoadThumbImages("<%=@building.id%>");
+      Transparentcity.initFancybox('#video-tours .tour-fbox');
     }
 
 
@@ -164,7 +167,5 @@
   });
 
   google.maps.event.addDomListener(window, 'load', initialize);
-
-  Transparentcity.initFancybox('#video-tours .tour-fbox');
 
 </script>

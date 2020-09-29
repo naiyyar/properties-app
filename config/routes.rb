@@ -90,6 +90,7 @@ Rails.application.routes.draw do
       get :units
       get '/disconnect_building', to: 'buildings#disconnect_building', as: :disconnect_building
       get :featured_by
+      get :load_thumb_images
     end
 
     collection do

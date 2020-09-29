@@ -1,5 +1,5 @@
 jQuery ->
-	if($('.sh-slider-container').length > 0 )
+	if(false && $('.sh-slider-container').length > 0 )
 		thumb_images_length = $('.lSPager.lSGallery').children().length
 		add_class 					= if thumb_images_length == 0 then 'no-thumb' else 'with-thumb'
 		

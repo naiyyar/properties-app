@@ -1,18 +1,19 @@
-- listings.each do |listing|
-	- bed = listing.bed
-	%tr.listings-record{'data-id' => listing.id, 'data-date-active' => listing.date_active }
-		%td=listing.date_active
-		%td=listing.unit
-		%td
-			%b=number_to_currency(listing.rent, precision: 0)
-		%td=(bed == -1 ? 'R' : bed)
-		%td=listing.bath
-		%td=listing.free_months
-		%td.hidden-xs
-			- d_av = listing.date_available
-			- unless type == 'past'
-				=d_av || 'Now'
-			- else
-				=d_av
-		%td.hidden-xs=listing.owner_paid
-		%td.hidden-xs=listing.rentstabilize
+- cache listing
+	- listings.each do |listing|
+		- bed = listing.bed
+		%tr.listings-record{'data-id' => listing.id, 'data-date-active' => listing.date_active }
+			%td=listing.date_active
+			%td=listing.unit
+			%td
+				%b=number_to_currency(listing.rent, precision: 0)
+			%td=(bed == -1 ? 'R' : bed)
+			%td=listing.bath
+			%td=listing.free_months
+			%td.hidden-xs
+				- d_av = listing.date_available
+				- unless type == 'past'
+					=d_av || 'Now'
+				- else
+					=d_av
+			%td.hidden-xs=listing.owner_paid
+			%td.hidden-xs=listing.rentstabilize

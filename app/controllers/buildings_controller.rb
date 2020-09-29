@@ -1,17 +1,13 @@
 class BuildingsController < ApplicationController 
   load_and_authorize_resource
   AWS_S3_URL = 'https://s3-us-west-2.amazonaws.com'
-  before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
-  before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite]
-  before_action :save_as_favourite,   only: :show
-  before_action :set_distance_matrix, only: :show
-  before_action :broker_fee_percent,  only: :show
+  before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite, :load_thumb_images]
+  before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite, :load_thumb_images]
   before_action :clear_cache,         only: [:favorite, :unfavorite]
-  before_action :get_building,        only: :create
   before_action :find_buildings,      only: [:contribute, :edit]
   after_action :get_neighborhood,     only: [:create, :update]
 
-  include BuildingsConcern # create, update
+  include BuildingsConcern # create, show
 
   def index
     @filterrific = initialize_filterrific(
@@ -24,6 +20,14 @@ class BuildingsController < ApplicationController
                                   .reorder('created_at desc')
     respond_to do |format|
       format.html
+      format.js
+    end
+  end
+
+  def load_thumb_images
+    @uploads               = @building.chached_image_uploads
+    @uploaded_images_count = @building.uploads_count.to_i
+    respond_to do |format|
       format.js
     end
   end
@@ -147,36 +151,8 @@ class BuildingsController < ApplicationController
     params.require(:unit).permit(:name, :square_feet, :number_of_bathrooms, :number_of_bedrooms)
   end
 
-  def save_as_favourite
-    return unless session[:favourite_object_id].present? && current_user.present?
-    current_user.add_to_fav(session[:favourite_object_id])
-    session[:favourite_object_id] = nil
-  end
-
-  def set_distance_matrix
-    @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
-  end
-
-  def broker_fee_percent
-    broker_percent = BrokerFeePercent.first.percent_amount
-    @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
-  end
-
   def find_buildings
     @buildings = Building.all
-  end
-
-  def get_building
-    address     = params[:building][:building_street_address]
-    zipcode     = params[:building][:zipcode]
-    search_term = params['buildings-search-txt']
-    @building = if address.present? && zipcode.present?
-                  Building.where(building_street_address: address, zipcode: zipcode).first
-                elsif address.present?
-                  Building.find_by_building_street_address(address)
-                else
-                  Building.find_by_building_street_address(search_term)
-                end
   end
 
   def neighborhoods2

@@ -199,23 +199,25 @@
         $('.modal-full').slideToggle(200);
     });
 
-    $('.handleFilter, .closeFilter').click(function(e) {
-        e.stopPropagation();
-        DPButtons.init();
-        DPButtons.handleFilter()
-        initSlider();
-        DPButtons.closeDropdowns($(this), 'other');
-    });
-
     // Avoid dropdown menu close on click inside
     $(document).on('click', '.neighborhoods-dropdown .dropdown-menu', function (e) {
         e.stopPropagation();
     });
 
-    $(document).on('click', '.dropdown-toggle', function(){
-        DPButtons.init();
-        DPButtons.closeDropdowns($(this), 'filter');
-    });
+    if($('.handleFilter').length > 0){
+        $('.handleFilter, .closeFilter').click(function(e) {
+            e.stopPropagation();
+            DPButtons.init();
+            DPButtons.handleFilter()
+            initSlider();
+            DPButtons.closeDropdowns($(this), 'other');
+        });
+
+        $(document).on('click', '.dropdown-toggle', function(){
+            DPButtons.init();
+            DPButtons.closeDropdowns($(this), 'filter');
+        });
+    }
     
     // Running this script only on desktop views
     // var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;

@@ -1,10 +1,17 @@
 module BuildingsConcern
   extend ActiveSupport::Concern
 
+  included do
+    before_action :save_as_favourite,   only: :show
+    before_action :set_distance_matrix, only: :show
+    before_action :broker_fee_percent,  only: :show
+    before_action :get_building,        only: :create
+  end
+
   def show
     @show_map_btn          = @half_footer = true
     @price_ranges          = @building.price_ranges
-    @uploads               = @building.chached_image_uploads
+    #@uploads               = @building.chached_image_uploads
     @uploaded_images_count = @building.uploads_count.to_i
     @documents             = @building.doc_uploads
     @reviews               = @building.building_reviews.includes(:uploads)
@@ -90,6 +97,33 @@ module BuildingsConcern
   private
   def get_neighborhood
     @building.get_and_save_neighborhood(params[:selected_manually])
+  end
+
+  def save_as_favourite
+    return unless session[:favourite_object_id].present? && current_user.present?
+    current_user.add_to_fav(session[:favourite_object_id])
+    session[:favourite_object_id] = nil
+  end
+
+  def set_distance_matrix
+    @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
+  end
+
+  def broker_fee_percent
+    broker_percent = BrokerFeePercent.first.percent_amount
+    @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
+  end
+def get_building
+    address     = params[:building][:building_street_address]
+    zipcode     = params[:building][:zipcode]
+    search_term = params['buildings-search-txt']
+    @building = if address.present? && zipcode.present?
+                  Building.where(building_street_address: address, zipcode: zipcode).first
+                elsif address.present?
+                  Building.find_by_building_street_address(address)
+                else
+                  Building.find_by_building_street_address(search_term)
+                end
   end
 
 end

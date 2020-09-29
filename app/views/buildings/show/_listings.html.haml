@@ -15,7 +15,8 @@
 			%tbody.table.table-borders
 				- if listings.present?
 					- colspan = browser.device.mobile? ? '6' : '9'
-					= render 'listings/partials/listing_rows', listings: listings, type: type
+					- cache listings do
+						= render 'listings/partials/listing_rows', listings: listings, type: type
 					
 					- if type == 'past' && @all_inactive_listings.present? && @all_inactive_listings.count > 5
 						%tr

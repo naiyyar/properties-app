@@ -32,7 +32,7 @@ Card = {
 	    data: { building_id: building_id, filter_params: filter_params },
 	    success: function(response){
 	      fig_elem.html(response.html);
-	      Card.initLightSlider(fig_elem.find('.gallery'), Card.enableTouch());
+	      Card.initLightSlider(fig_elem.find('.gallery'), Card.enableTouch(), 1);
 	      cta_elem.html(response.cta_html);
 	    }
 	  });
@@ -46,9 +46,9 @@ Card = {
 		return enable_touch;
 	},
 
-	initLightSlider: function(elem, enable_touch){
+	initLightSlider: function(elem, enable_touch, items){
 	  elem.lightSlider({
-	    item: 1,
+	    item: items,
 	    slideMargin: 0,
 	    loop: true,
 	    enableDrag: enable_touch,
@@ -111,6 +111,17 @@ Transparentcity = {
 			cta_div.hide();
 		}
 	},
+
+	lazyLoadThumbImages: function(id){
+		$.ajax({
+			url: '/buildings/'+id+'/load_thumb_images',
+			dataType: 'script',
+			type: 'get',
+			success: function(){
+				//console.log('thumb images loaded')
+			}
+		})
+	}
 
 };
 
