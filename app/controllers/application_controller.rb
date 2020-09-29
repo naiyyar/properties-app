@@ -29,6 +29,8 @@ class ApplicationController < ActionController::Base
       'home'
     elsif action_name == 'search' && controller_name == 'home'
       'search'
+    elsif action_name == 'show' && controller_name == 'buildings'
+      'buildings_show'
     else
       'application'
     end

@@ -2,7 +2,11 @@
 <html>
   <head>
     <%= render partial: 'layouts/layout_head', locals: { js_path: 'home/jquery.init' } %>
-    <%= stylesheet_link_tag 'split_view/main', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
+    <%if browser.chrome?%>
+      <%= stylesheet_link_tag 'split_view/main', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
+    <%else%>
+      <%= stylesheet_link_tag 'split_view/main', media: 'all' %>
+    <%end%>
   </head>
   
   <body class="notransition no-hidden" >

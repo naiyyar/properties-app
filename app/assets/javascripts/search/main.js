@@ -10,7 +10,6 @@
 //= require back_to_scroll_position
 //= require infobubble
 //= require swiper.jquery
-//= require filters
 //= require dropdown_buttons
 //= require jquery.validate
 //= require home
