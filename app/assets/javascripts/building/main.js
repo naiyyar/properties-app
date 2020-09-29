@@ -1,13 +1,9 @@
+//= require ../home/main
 //= require bootstrap/button
-//= require bootstrap/tab
 //= require underscore
 //= require jquery.touchSwipe.min
-//= require jquery.slimscroll.min
-//= require jquery.search
 //= require jquery.fancybox
 //= require gmap
 //= require infobubble
-//= require swiper.jquery
-//= require dropdown_buttons
-//= require jquery.validate
 //= require home
+//= require light_slider

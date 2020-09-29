@@ -2,12 +2,12 @@
 <html>
   <head>
     <%= render partial: 'layouts/layout_head', locals: { js_path: 'home/jquery.init' } %>
-    <%if browser.chrome?%>
+    <%if browser.chrome? %>
       <%= stylesheet_link_tag 'building/main', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
     <%else%>
       <%= stylesheet_link_tag 'building/main', media: 'all' %>
     <%end%>
-    
+    <%= javascript_include_tag 'building/main'%>
   </head>
   
   <body class="notransition no-hidden touch-scroll" >
@@ -25,9 +25,8 @@
     <%end%>
     
     <div id="remote-container"></div>
-
-    <%= javascript_include_tag 'home/main'%>
-    <%= javascript_include_tag 'building/main'%>
+    <div id="auth-form"></div>
+    
     <%= render 'buildings/favourite_script' %>
     <%= render 'buildings/show/map_script' %>
     <%= javascript_include_tag 'zapp'%>
