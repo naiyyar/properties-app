@@ -3,9 +3,9 @@
   var map, map2, current_building_id, mob_map, infobox;
   var current_user_id = $('#cu').val();
   var zoom = 16;
-  var featured_comp_building_id = "<%=@similar_properties.first.id rescue nil%>";
+  var featured_comp_building_id = "<%=@similar_properties.first.id rescue nil %>";
   var fullscreen_ctrl = true;
-  var redo_search = false;
+  var redo_search     = false;
   if($("#mapHash").length > 0){
     // Custom options for map
     function initialize() {
@@ -131,8 +131,7 @@
       Transparentcity.initFancybox('#video-tours .tour-fbox');
     }
 
-
-  }
+  } /*end initialize */
 
   function loadMarkerWindow(building_id, map, marker){
     $.post('/load_infobox', {
