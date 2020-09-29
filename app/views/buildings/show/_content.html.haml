@@ -3,16 +3,16 @@
 		= render 'buildings/show/summary'
 
 .section-container
-	- if @active_listings.present? || @inactive_listings.present?
+	- if @active_listings_count > 0 || @past_listings_count > 0
 		#listings.show-section
-			- if @active_listings.present?
-				%h3= "#{@active_listings.count} Active Rental Listings"
+			- if @active_listings_count > 0
+				%h3= "#{@active_listings_count} Active Rental Listings"
 				= render 'buildings/show/listings', listings: @active_listings, type: 'current'
 			.clearfix
-			- if @inactive_listings.present?
-				%h3= "#{@all_inactive_listings.count} Past Rental Listings"
-				= hidden_field_tag 'past_listings_count', @all_inactive_listings.count
-				= render 'buildings/show/listings', listings: @inactive_listings, type: 'past'
+			- if @past_listings_count > 0
+				%h3= "#{@past_listings_count} Past Rental Listings"
+				= hidden_field_tag 'past_listings_count', @past_listings_count
+				= render 'buildings/show/listings', listings: @last5_past_listings, type: 'past'
 
 	.clearfix
 	= render 'building_amenities'
@@ -53,38 +53,26 @@
 			= render 'buildings/show/subways'
 
 	.clearfix
-	- if @similar_properties.present?
+	- if @similar_properties_count > 0
 		#similiar-buildings.show-section
-			%h3= "Similar Buildings (#{@similar_properties.count})"
+			%h3= "Similar Buildings (#{@similar_properties_count})"
 			= render 'buildings/show/similar_properties', step: 2, col: 6
 
 	.clearfix
 	- if @building.rating_cache?
 		.aggregate-ratings.show-section
 			%h3 Aggregate Ratings
-			%ul.star-sm
-				%li.hidden
-					%h3
-				%li
-					Cleanliness - Pests/Smell/Trash #{rating_for @building, 'cleanliness', disable_after_rate: true, readonly: true}
-				%li
-					Is it Noisy? #{rating_for @building, 'noise', disable_after_rate: true, readonly: true}
-				%li
-					Do you feel safe in your building? #{rating_for @building, 'safe', disable_after_rate: true, readonly: true}
-				%li
-					Utilities - AC/Electric/Heat/Water #{rating_for @building, 'health', disable_after_rate: true, readonly: true}
-				%li
-					Super Responsiveness #{rating_for @building, 'responsiveness', disable_after_rate: true, readonly: true}
-				%li
-					Dealings with Management #{rating_for @building, 'management', disable_after_rate: true, readonly: true}
+			%ul.star-sm#ratings
+				/ lazy loading
+				
 	.clearfix
 	.comments.font-14.show-section
 		%h3= "Building Reviews (#{ @reviews_count })"
 		- if @reviews_count > 0
 			.text-right{style: 'text-align: right; padding-bottom: 15px;'}
 				= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning btn-round'
-	    
-			= render :partial => 'reviews/review', :collection => @reviews, :as => :review
+			#building-reviews
+				/ lazy loading
 		- else
 			%p.no-review.font-14 There are no reviews for this building. Be the first to add your review for this building.
 			= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning no-review btn-round'

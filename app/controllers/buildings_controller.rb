@@ -1,8 +1,8 @@
 class BuildingsController < ApplicationController 
   load_and_authorize_resource
   AWS_S3_URL = 'https://s3-us-west-2.amazonaws.com'
-  before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite, :load_thumb_images]
-  before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite, :load_thumb_images]
+  before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite, :lazy_load_content]
+  before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite, :lazy_load_content]
   before_action :clear_cache,         only: [:favorite, :unfavorite]
   before_action :find_buildings,      only: [:contribute, :edit]
   after_action :get_neighborhood,     only: [:create, :update]
@@ -24,9 +24,14 @@ class BuildingsController < ApplicationController
     end
   end
 
-  def load_thumb_images
+  #1. Loading show page content after page load
+  # 1.1 Light slider images
+  # 1.2 reviews section
+  # 1.3 ratings
+  def lazy_load_content
     @uploads               = @building.chached_image_uploads
     @uploaded_images_count = @building.uploads_count.to_i
+    @reviews               = @building.building_reviews
     respond_to do |format|
       format.js
     end

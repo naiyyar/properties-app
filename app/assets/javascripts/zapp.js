@@ -245,10 +245,15 @@
             $(this).toggleClass('active ' + $(this).attr('data-toggle-class'));
         }
     });
-
-    $('.progress-bar[data-toggle="tooltip"]').tooltip();
-    $('.tooltipsContainer .btn').tooltip();
-    $('#datepicker').datepicker();
+    if($('.progress-bar[data-toggle="tooltip"]').length > 0){
+        $('.progress-bar[data-toggle="tooltip"]').tooltip();
+    }
+    if($('.tooltipsContainer .btn').length > 0){
+        $('.tooltipsContainer .btn').tooltip();
+    }
+    if($('#datepicker').length > 0){
+        $('#datepicker').datepicker();
+    }
 
     // clear text search
     $('.clearSearchText').click(function(){

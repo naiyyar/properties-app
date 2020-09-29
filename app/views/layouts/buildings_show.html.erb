@@ -7,7 +7,7 @@
     <%else%>
       <%= stylesheet_link_tag 'building/main', media: 'all' %>
     <%end%>
-    <%= javascript_include_tag 'building/main'%>
+    <%= javascript_include_tag 'building/main' %>
   </head>
   
   <body class="notransition no-hidden touch-scroll" >
@@ -23,6 +23,8 @@
       </div>
       <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
     <%end%>
+
+    <%= render 'layouts/shared/signin' %>
     
     <div id="remote-container"></div>
     <div id="auth-form"></div>

@@ -263,6 +263,15 @@ class Building < ApplicationRecord
     featured_comps.active
   end
 
+  def active_comp_building_ids
+    active_comps.pluck(:building_id) rescue []
+  end
+
+  def comps
+    Building.where(id: active_comp_building_ids)
+            .includes(:featured_comps, :uploads) if active_comp_building_ids.length > 0
+  end
+
   def featured_comp_building_id
     active_comps&.first&.building_id
   end

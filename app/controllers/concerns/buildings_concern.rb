@@ -11,21 +11,19 @@ module BuildingsConcern
   def show
     @show_map_btn          = @half_footer = true
     @price_ranges          = @building.price_ranges
-    #@uploads               = @building.chached_image_uploads
     @uploaded_images_count = @building.uploads_count.to_i
     @documents             = @building.doc_uploads
-    @reviews               = @building.building_reviews.includes(:uploads)
     @reviews_count         = @building.reviews_count.to_i
-    active_comps           = @building.active_comps
-    @similar_properties    = Building.where(id: active_comps.pluck(:building_id))
-                                    .includes(:featured_comps, :uploads) if active_comps.present?
-    buildings              = @similar_properties.to_a + [@building]
-    @gmaphash              = Building.buildings_json_hash(buildings)
+    @similar_properties    = @building.comps
+    @similar_properties_count = @similar_properties.count
+    @gmaphash              = Building.buildings_json_hash(@similar_properties.to_a + [@building])
     @listings              = @building.listings
     @active_listings       = @listings.active.order_by_rent_asc
     @building.act_listings = @active_listings
-    @all_inactive_listings = @building.past_listings
-    @inactive_listings     = @all_inactive_listings.order_by_date_active_desc.limit(5)
+    @past_listings         = @building.past_listings
+    @last5_past_listings   = @past_listings.order_by_date_active_desc.limit(5)
+    @active_listings_count = @active_listings.count
+    @past_listings_count   = @past_listings.count
     @building_tours        = @building.video_tours
     @video_tours, @category = VideoTour.videos_by_categories(@building_tours, limit: 2)
     @neighbohood            = @building.neighbohoods

@@ -112,9 +112,9 @@ Transparentcity = {
 		}
 	},
 
-	lazyLoadThumbImages: function(id){
+	lazyLoadShowPageContent: function(id){
 		$.ajax({
-			url: '/buildings/'+id+'/load_thumb_images',
+			url: '/buildings/'+id+'/lazy_load_content',
 			dataType: 'script',
 			type: 'get',
 			success: function(){
