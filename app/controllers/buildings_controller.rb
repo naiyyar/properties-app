@@ -29,8 +29,8 @@ class BuildingsController < ApplicationController
   # 1.2 reviews section
   # 1.3 ratings
   def lazy_load_content
-    @uploads               = @building.chached_image_uploads
-    @uploaded_images_count = @building.uploads_count.to_i
+    #@uploads               = @building.chached_image_uploads
+    #@uploaded_images_count = @building.uploads_count.to_i
     @reviews               = @building.building_reviews
     respond_to do |format|
       format.js
