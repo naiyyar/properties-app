@@ -22,16 +22,12 @@
     <div id="auth-form"></div>
     
     <%= render 'layouts/home/footer' %>
+
+    <%= layout_stylesheet_link 'home/main' %>
     
     <%= javascript_include_tag 'home/main', defer: true %>
     <%= render 'buildings/favourite_script' %>
     <%= javascript_include_tag 'home' %>
-
-    <%if browser.chrome?%>
-      <%= stylesheet_link_tag 'home/main', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
-    <%else%>
-      <%= stylesheet_link_tag 'home/main', media: 'all' %>
-    <%end%>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; });

@@ -2,12 +2,7 @@
 <html>
   <head>
     <%= render partial: 'layouts/layout_head', locals: { js_path: 'home/jquery.init' } %>
-    <%if browser.chrome? %>
-      <%= stylesheet_link_tag 'building/main', media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'" %>
-    <%else%>
-      <%= stylesheet_link_tag 'building/main', media: 'all' %>
-    <%end%>
-    <%= javascript_include_tag 'building/main' %>
+    <%= javascript_include_tag 'building/main', async: true %>
   </head>
   
   <body class="notransition no-hidden touch-scroll" >
@@ -29,11 +24,13 @@
     <div id="remote-container"></div>
     <div id="auth-form"></div>
     
+    <%= javascript_include_tag 'home/main', defer: true %>
     <%= render 'buildings/favourite_script' %>
     <%= render 'buildings/show/map_script' %>
     <%= javascript_include_tag 'zapp'%>
     <%= javascript_include_tag 'home'%>
 
+    <%= layout_stylesheet_link 'building/main' %>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })
@@ -47,6 +44,11 @@
           }
         })
       }
+      var slides_to_show = 1;
+      if(!Device.type.mobile){
+        slides_to_show = 2;
+      }
+      Card.initSlick(slides_to_show)
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->

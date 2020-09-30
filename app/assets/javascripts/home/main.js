@@ -19,6 +19,12 @@ setTimeout(function(){
 	$('.alert').slideUp(300);
 }, 3000);
 
+//finding device type
+var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+const Device = {
+	type: { mobile: mobile}
+};
+
 Card = {
 	loadDisplayImageAndCTALinks: function(building_id){
 	  var fig_elem 			= $("#figure"+building_id);
@@ -61,6 +67,20 @@ Card = {
 	  });
 	},
 
+	initSlick: function(slides_to_show){
+		var show_arrows = (slides_to_show == 2 ? true : false);
+		var centered 		= !show_arrows;
+		console.log('sl3')
+		$(".center").slick({
+			dots: false,
+			infinite: true,
+			centerMode: centered,
+			slidesToShow: slides_to_show,
+			slidesToScroll: slides_to_show,
+			arrows: show_arrows
+		});
+	},
+
 	loadFeaturedAgentImagesAndCTALinks: function(agent_id){
 		var fig_elem = $("#figure"+agent_id);
 		var cta_elem = $("#agent-cta-links"+agent_id);
@@ -86,6 +106,7 @@ Transparentcity = {
 			buttons: ['thumbs', 'close']
 		});
 	},
+
 	loadTourVideos: function(elem, ids){
 		var $this  = elem;
 		var cat 	 = $this.dataset.category;

@@ -1,4 +1,3 @@
-//= require ../home/main
 //= require bootstrap/button
 //= require underscore
 //= require jquery.touchSwipe.min

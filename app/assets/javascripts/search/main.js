@@ -3,7 +3,7 @@
 //= require underscore
 //= require jquery.touchSwipe.min
 //= require jquery.slimscroll.min
-//= require jquery.search
+//= require jquery.add_kml
 //= require jquery.fancybox
 //= require filters
 //= require gmap

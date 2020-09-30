@@ -5,19 +5,6 @@
 		- properties.each do |building|
 			%div= render 'buildings/detail_card', building: building
 
-:javascript
-	var slides_to_show = #{slides_to_show};
-	var show_arrows = (slides_to_show == 2 ? true : false);
-	var centered 		= !show_arrows;
-	$(".center").slick({
-		dots: false,
-		infinite: true,
-		centerMode: centered,
-		slidesToShow: slides_to_show,
-		slidesToScroll: slides_to_show,
-		arrows: show_arrows
-	});
-
 :css
 	.slick-slide img {
 		width: 100%;
