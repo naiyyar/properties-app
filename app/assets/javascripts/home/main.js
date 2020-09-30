@@ -70,7 +70,6 @@ Card = {
 	initSlick: function(slides_to_show){
 		var show_arrows = (slides_to_show == 2 ? true : false);
 		var centered 		= !show_arrows;
-		console.log('sl3')
 		$(".center").slick({
 			dots: false,
 			infinite: true,

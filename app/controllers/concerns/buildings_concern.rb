@@ -11,6 +11,7 @@ module BuildingsConcern
   def show
     @show_map_btn          = @half_footer = true
     @price_ranges          = @building.price_ranges
+    @uploads               = @building.chached_image_uploads
     @uploaded_images_count = @building.uploads_count.to_i
     @documents             = @building.doc_uploads
     @reviews_count         = @building.reviews_count.to_i

@@ -1,5 +1,6 @@
-$('#sh-slider').html("<%= j render partial: 'buildings/show/light_slider', locals: { building: @building } %>");
-
+if(false){
+	$('#sh-slider').html("<%= j render partial: 'buildings/show/light_slider', locals: { building: @building } %>");
+}
 var thumb_images_length = $('.lSPager.lSGallery').children().length
 var add_class 					= thumb_images_length == 0 ? 'no-thumb' : 'with-thumb'
 
