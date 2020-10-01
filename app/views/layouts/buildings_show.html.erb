@@ -3,7 +3,6 @@
   <head>
     <%= render partial: 'layouts/layout_head', locals: { js_path: 'home/jquery.init' } %>
     <%= javascript_include_tag 'building/main', async: true, defer: true %>
-    <%= javascript_include_tag 'zapp', async: true, defer: true%>
     <%= javascript_include_tag 'home', async: true, defer: true%>
     <%= layout_stylesheet_link 'building/main' %>
   </head>
@@ -30,6 +29,7 @@
     <%= javascript_include_tag 'home/main'%>
     <%= render 'buildings/favourite_script' %>
     <%= render 'buildings/show/map_script' %>
+    <%= javascript_include_tag 'zapp'%>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })
