@@ -62,8 +62,7 @@
 	- if @building.rating_cache?
 		.aggregate-ratings.show-section
 			%h3 Aggregate Ratings
-			%ul.star-sm#ratings
-				/ lazy loading
+			%ul.star-sm=render 'buildings/show/rating_list'
 				
 	.clearfix
 	.comments.font-14.show-section

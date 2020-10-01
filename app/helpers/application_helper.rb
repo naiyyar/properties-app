@@ -105,8 +105,4 @@ module ApplicationHelper
     end
   end
 
-  def web_fonts font_path
-    layout_stylesheet_link(font_path)
-  end
-
 end
