@@ -25,13 +25,10 @@ class BuildingsController < ApplicationController
   end
 
   #1. Loading show page content after page load
-  # 1.1 Light slider images
-  # 1.2 reviews section
-  # 1.3 ratings
+  # 1.1 reviews section
+  # 1.2 ratings
   def lazy_load_content
-    #@uploads               = @building.chached_image_uploads
-    #@uploaded_images_count = @building.uploads_count.to_i
-    @reviews               = @building.building_reviews
+    @reviews = @building.building_reviews
     respond_to do |format|
       format.js
     end

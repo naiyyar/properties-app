@@ -1,9 +1,5 @@
 .singleTop{style: 'position: relative;'}
-	.row.sh-slider#sh-slider1
-		- if false
-			%div{style: 'height: 460px;text-align: center;line-height: 460px;'}
-				- if browser.device.mobile?
-					%span.fa.fa-spin.fa-circle-o-notch.fa-2x.fa-fw{style: 'color: #ddd;'}
+	.row.sh-slider
 		= render 'buildings/show/light_slider', building: @building
  		
 		- if @building.price.present? or @building.bedroom_types?
