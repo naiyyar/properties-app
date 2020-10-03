@@ -75,6 +75,26 @@
     padding: 0px !important;
 }
 
+.sortMenu .active, .sortMenu .active a:hover{
+    background: #0075c9 !important;
+}
+.sortMenu .active a, .sortMenu .active a:hover{
+    color: #fff;
+}
+
+.btn-filter .btn.sc-lg, .btn-sort .btn.sc-lg{
+    width: 14em;
+}
+
+.btn-filter .btn .dropdown-label, .btn-sort .btn .dropdown-label{ float: none; }
+
+.btn-sort .btn{ padding: 10px 30px !important; }
+
+.btn-sort .dropdown-menu.sc-lg{
+    right: 206px;
+    top: 51px;
+}
+
 @keyframes pulsate {
     0% {
         transform: scale(1.0, 1.0);

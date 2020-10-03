@@ -1,0 +1,63 @@
+.form-group {
+    margin-bottom: 6px;
+}
+label.error{
+	color: #ea3d36;
+}
+.images-container {
+    div.attachment-icon{
+        padding: 0px 20px;
+        background: #f3f3f3;
+        border: 1px solid #ddd;
+        margin-top: 4px;
+        height: 70px;
+        line-height: 67px;
+        text-align: center;
+        img{
+            width: 45px;
+            vertical-align: middle;
+        }
+    }
+
+    .image-preview{
+        margin-right: 4px;
+        margin-top: 4px;
+        width: 82px;
+        height: 70px;
+        border: 1px solid #ddd;
+        position: relative;
+        img{
+            width: 80px;
+            height: 70px;
+            object-fit: contain;
+            overflow: hidden;
+        }
+        
+        .progress-loader{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            right: 0px;
+            background-color: rgba(255, 255, 255, 0.9);
+            bottom: 0px;
+            text-align: center;
+            line-height: 70px;
+            img{
+                width: 20px !important;
+                height: 20px !important;
+            }
+        }
+    }
+}
+
+#tos:hover{
+    color: #ddd;
+    text-decoration: underline;
+}
+.tos-agreement{
+    background-color: #f2f2f2;
+    padding: 10px 10px 0px;
+}
+.tos-link, .tos-link:visited, .tos-link:hover{
+    color: #0075c9 !important;
+}

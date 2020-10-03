@@ -6,6 +6,34 @@
   }
 }
 
+.figure .shimmer{
+  width: 100%;
+  height: 215px;
+}
+
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
+  }
+}
+.animated-background, .shimmer {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: linear-gradient(to right, #f7f7f7 8%, #f2f2f2 18%, #f7f7f7 33%);
+  background-size: 800px 104px;
+  position: relative;
+}
+
+.content-wrapper.homeindex{
+  margin-top: 58px;
+}
+
 .home-nav{
 	float: right;
   -webkit-transition: all .2s ease-in-out;
@@ -300,6 +328,48 @@
     }
   }
 
+  .home-nav {
+        position: absolute;
+        width: 45%;
+        right: 0%;
+        overflow-y: scroll;
+        overflow-x:hidden;
+        z-index: 1100;
+        min-height: 150px;
+        float: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .home-header .home-nav{
+        left: 0;
+        top: 64px;
+    }
+    #header .home-nav{
+        top: 143px;
+    }
+    .home-nav ul.homeNavUl {
+        position: relative;
+        top: 0;
+        left: -121%;
+        float: left;
+        padding: 0px;
+        z-index: 1100;
+    }
+    .home-nav.active {
+        background-color: rgba(25, 25, 25, 0.90);
+    }
+    .home-nav.active ul {
+        left: 0;
+        width: 100%;
+    }
+    .home-nav.active ul li {
+        float: none;
+        margin-left: 0px;
+        padding: 12px;
+    }
+    .home-nav.active ul li:hover{
+        background-color: rgba(0, 0, 0, 0.57)
+    }
+
   .expended {
     .leftNav {
       ul {
@@ -323,6 +393,46 @@
   			padding: 0px 20px;
   		}
   	}
+
+  	.home-nav {
+        position: absolute;
+        width: 25%;
+        right: 0%;
+        overflow-y: scroll;
+        overflow-x:hidden;
+        z-index: 1100;
+        min-height: 85px;
+        float: none;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .home-header .home-nav{
+        left: 0;
+        top: 64px;
+    }
+   
+    .home-nav ul.homeNavUl {
+        position: relative;
+        top: 0;
+        left: -121%;
+        float: left;
+        padding: 0px;
+        z-index: 1100;
+    }
+    .home-nav.active {
+        background-color: rgba(0, 0, 0, 0.50);
+    }
+    .home-nav.active ul {
+        left: 0;
+        width: 100%;
+    }
+    .home-nav.active ul li {
+        float: none;
+        margin-left: 0px;
+        padding: 12px;
+    }
+    .home-nav.active ul li:hover{
+        background-color: rgba(0, 0, 0, 0.57)
+    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
@@ -333,6 +443,13 @@
   .home-wrapper {
 		padding: 0px 20px;
 	}
+}
+
+@media screen and (max-width: 1199px) {
+    .home-wrapper {
+        width: 100%;
+        margin: 0;
+    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1024px) {
