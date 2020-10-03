@@ -8,7 +8,8 @@
       %ul.gallery.list-unstyled{style: 'height: 265px;', data: { buildingid: "#{building.id}", view_type: 'show', path:  building_path(building) } }
         - thumb_hidden_class = @building.present? ? '' : 'hidden'
         - @uploads.each do |upload|
-          %li{ data: { thumb: img_url = upload.image.url(:original) } }
+          - img_url = upload.image.url(:original)
+          %li{ data: { thumb: upload.slider_thumb_image } }
             %a{ href: img_url, 'data-role' => 'slider', 'data-caption' => date_uploaded(upload) } 
               - if @building.blank?
                 .bg-size-cover.bg-pos-center{ style: "background-image: url(#{img_url});", data: { imageid: "#{upload.id}" } }

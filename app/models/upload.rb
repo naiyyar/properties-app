@@ -81,6 +81,11 @@ class Upload < ApplicationRecord
     # end
   end
 
+  def slider_thumb_image
+    return uploaded_img_url if image.styles.keys.include?(:medium)
+    image.url(:original)
+  end
+
   def self.image_uploads_count object
     object.uploads.where('image_file_name is not null').count
   end

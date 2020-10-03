@@ -1,11 +1,5 @@
 <ul class="lSPager lSGallery" style="margin-top: 1px; transition-duration: 400ms; transform: translate3d(0px, 0px, 0px);">
-	<% @uploads.each do |upload| %>
-		<li class="">
-			<a href="#" class="thumb">
-				<div class="img-wrapper">
-					<%= image_tag upload.image.url %>
-				</div>
-			</a>
-		</li>
+	<% 1.upto(@uploaded_images_count).each do |_| %>
+		<li> <a href="#" class="thumb"> <div class="img-wrapper"></div> </a> </li>
 	<%end%>
 </ul>
