@@ -105,7 +105,7 @@ module BuildingsConcern
   end
 
   def set_distance_matrix
-    @distance_results = DistanceMatrix.get_data(@building) if Rails.env == 'production'
+    @distance_results = DistanceMatrix.new(@building).get_data # if Rails.env == 'production'
   end
 
   def broker_fee_percent
