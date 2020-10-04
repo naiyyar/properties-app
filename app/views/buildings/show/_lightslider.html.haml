@@ -9,7 +9,7 @@
         - thumb_hidden_class = @building.present? ? '' : 'hidden'
         - @uploads.each do |upload|
           - img_url = upload.image.url(:original)
-          %li{ data: { thumb: upload.slider_thumb_image } }
+          %li{ data: { thumb: upload.slider_thumb_image(:medium) } }
             %a{ href: img_url, 'data-role' => 'slider', 'data-caption' => date_uploaded(upload) } 
               - if @building.blank?
                 .bg-size-cover.bg-pos-center{ style: "background-image: url(#{img_url});", data: { imageid: "#{upload.id}" } }

@@ -32,7 +32,7 @@ class Upload < ApplicationRecord
   IMG_CONTENT_TYPES = ['image/jpeg', 'image/gif', 'image/png']
 
 	has_attached_file :image, 
-                    :styles => { :thumb => '100x100', :original => '900x800', :medium => '650x550' },
+                    :styles => { :small => '200x200', :original => '900x800', :medium => '550x450' },
                     #:convert_options => {:medium => '-quality 80 -strip' },
                     processors: [:rotator]
 	
@@ -72,8 +72,13 @@ class Upload < ApplicationRecord
     Rails.cache.fetch([self, 'building_photos', key]) { building_photos(building_ids) }
   end
 
-  def uploaded_img_url
-    self.image.url(:medium)
+  def small_img
+    image.url(:small)
+  end
+
+  def uploaded_img_url style = :medium
+    image.url(style)
+    #!Warning: Exists checking taking too much time
     # if self.image.exists?(:medium)
     #   self.image.url(:medium)
     # else
@@ -81,9 +86,8 @@ class Upload < ApplicationRecord
     # end
   end
 
-  def slider_thumb_image
-    return uploaded_img_url if image.styles.keys.include?(:medium)
-    image.url(:original)
+  def slider_thumb_image style = :medium
+    uploaded_img_url(style)
   end
 
   def self.image_uploads_count object
