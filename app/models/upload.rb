@@ -22,14 +22,17 @@
 #
 
 class Upload < ApplicationRecord
+  IMG_CONTENT_TYPES = ['image/jpeg', 'image/gif', 'image/png']
 	attr_accessor :rotation_degrees, :rotate
 	resourcify
 	belongs_to :imageable, polymorphic: true, counter_cache: true
   has_many :document_downloads
   belongs_to :user
+  
   default_scope { order('sort asc') }
 
-  IMG_CONTENT_TYPES = ['image/jpeg', 'image/gif', 'image/png']
+  scope :with_image, -> { where.not(image_file_name: nil).includes(:imageable) }
+  scope :with_doc,   -> { where.not(document_file_name: nil) }
 
 	has_attached_file :image, 
                     :styles => { :small => '200x200', :original => '900x800', :medium => '550x450' },

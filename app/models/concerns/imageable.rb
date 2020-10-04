@@ -5,15 +5,23 @@ module Imageable
 		accepts_nested_attributes_for :uploads, :allow_destroy => true
 	end
 
-	def image_uploads
-    uploads.where.not(image_file_name: nil).includes(:imageable)
+  def get_uploads
+    uploads_hash = Hash.new
+    assets       = self.uploads.all
+    uploads_hash.merge!({ image_uploads: chached_image_uploads(assets), 
+                         doc_uploads:   doc_uploads(assets) })
   end
 
-  def chached_image_uploads
-    Rails.cache.fetch([self, 'image_uploads']) { image_uploads.to_a }
+	def image_uploads assets = nil
+    return uploads.with_image unless assets.present?
+    assets.with_image
   end
 
-  def doc_uploads
-    uploads.where.not(document_file_name: nil).to_a
+  def chached_image_uploads assets
+    Rails.cache.fetch([self, 'image_uploads']) { image_uploads(assets).to_a }
+  end
+
+  def doc_uploads assets
+    assets.with_doc.to_a
   end
 end

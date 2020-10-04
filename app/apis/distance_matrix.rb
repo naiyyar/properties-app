@@ -6,7 +6,9 @@ class DistanceMatrix
   def initialize building
     @latlng          = [building.latitude, building.longitude]
     @address         = building.street_address
-    @nearby_stations = SubwayStation.near(@latlng, DISTANCE, :order => 'distance').limit(6)
+    @nearby_stations = SubwayStation.includes(:subway_station_lines)
+                                    .near(@latlng, DISTANCE, :order => 'distance')
+                                    .limit(6)
     @distance_result = {}
   end
 	
@@ -20,7 +22,6 @@ class DistanceMatrix
         station.update(st_distance: station.distance_to(@latlng), 
                        st_duration: @distance_result[index][:results][0]['duration']['text'])
       end
-      
       @distance_result[index][:dest_station] = station.name
       @distance_result[index][:lines]        = station.subway_station_lines.select(:line, :color).as_json
       @distance_result[index][:distance]     = station.st_distance

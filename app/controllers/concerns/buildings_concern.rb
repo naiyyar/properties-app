@@ -5,30 +5,36 @@ module BuildingsConcern
     before_action :save_as_favourite,   only: :show
     before_action :set_distance_matrix, only: :show
     before_action :broker_fee_percent,  only: :show
+    before_action :get_uploads,         only: :show
     before_action :get_building,        only: :create
   end
 
   def show
     @show_map_btn          = @half_footer = true
     @price_ranges          = @building.price_ranges
-    @uploads               = @building.chached_image_uploads
-    @uploaded_images_count = @building.uploads_count.to_i
-    @documents             = @building.doc_uploads
+    #
     @reviews_count         = @building.reviews_count.to_i
+    # comps
     @similar_properties    = @building.comps
     @similar_properties_count = @similar_properties.length
+    # 
     @gmaphash              = Building.buildings_json_hash(@similar_properties.to_a + [@building])
+    # Current listings
     @listings              = @building.listings
     @active_listings       = @listings.active.order_by_rent_asc
     @building.act_listings = @active_listings
+    @active_listings_count = @active_listings.count
+    # Past listings
     @past_listings         = @building.past_listings
     @last5_past_listings   = @past_listings.order_by_date_active_desc.limit(5)
-    @active_listings_count = @active_listings.count
     @past_listings_count   = @past_listings.count
+    # Tour
     @building_tours        = @building.video_tours
     @video_tours, @category = VideoTour.videos_by_categories(@building_tours, limit: 2)
+    
     @neighbohood            = @building.neighbohoods
     @nearby_nbs             = NYCBorough.nearby_neighborhoods(@building.nearby_neighborhood)
+    
     @meta_desc  = "#{@building.building_name_or_address} #{@building.building_street_address} is a #{@building.try(:building_type)} "+ 
                   "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.try(:name) }. "+ 
                   "View #{@uploaded_images_count} photos, #{@active_listings_count} active listings, #{@past_listings_count} past listings."
@@ -112,7 +118,15 @@ module BuildingsConcern
     broker_percent = BrokerFeePercent.first.percent_amount
     @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
   end
-def get_building
+
+  def get_uploads
+    # Uploaded assets
+    assets                 = @building.get_uploads
+    @uploads, @documents   = assets[:image_uploads], assets[:doc_uploads]
+    @uploaded_images_count = @building.uploads_count.to_i
+  end
+  
+  def get_building
     address     = params[:building][:building_street_address]
     zipcode     = params[:building][:zipcode]
     search_term = params['buildings-search-txt']
