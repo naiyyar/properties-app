@@ -35,43 +35,44 @@
         %span.fa.fa-list
         List
 
-%div.hidden-xs
-  #header
-    .logoContainer
-      .logo
-        %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40'
-      
-      - if !browser.device.mobile?
-        #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
+- if screen_class == 'screen-lg'
+  %div.hidden-xs
+    #header
+      .logoContainer
+        .logo
+          %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40'
+        
+        - if !browser.device.mobile?
+          #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
 
-      .home-nav.pull-left
-        %ul.homeNavUl.shared
-          %li.no-hover-underline.parent
-            %a{href: '/about'} About
-          %li.no-hover-underline.parent
-            %a.dropdown-toggle.no-hover-underline{href: '#', 'data-toggle' => 'dropdown'} 
-              Advertise
-              %span.fa.fa-chevron-down
+        .home-nav.pull-left
+          %ul.homeNavUl.shared
+            %li.no-hover-underline.parent
+              %a{href: '/about'} About
+            %li.no-hover-underline.parent
+              %a.dropdown-toggle.no-hover-underline{href: '#', 'data-toggle' => 'dropdown'} 
+                Advertise
+                %span.fa.fa-chevron-down
 
-            .dropdown-menu.userMenu.admin.advertise-menu{role: 'menu'}
-              = render 'layouts/shared/advertise_items'
+              .dropdown-menu.userMenu.admin.advertise-menu{role: 'menu'}
+                = render 'layouts/shared/advertise_items'
 
-          %li.no-hover-underline.parent
-            %a{href: '/blog'} Blog
-          %li.no-hover-underline.parent
-            %a{href: contribute_buildings_path} Write Review
+            %li.no-hover-underline.parent
+              %a{href: '/blog'} Blog
+            %li.no-hover-underline.parent
+              %a{href: contribute_buildings_path} Write Review
 
-      .home-nav
-        %ul.homeNavUl.shared{style: 'position: relative;'}
-          - unless user_signed_in?
-            %li.no-hover-underline.parent
-              %a{href: '/users/sign_in'} Sign In
-              &nbsp;
-              %a{href: '/users/sign_up'} Sign Up
-          - else
-            %li.no-hover-underline.parent
-              = render 'layouts/shared/admin_nav_items'
-            %li.no-hover-underline.parent
-              = render 'layouts/shared/tools_nav'
-            %li.no-hover-underline.parent
-              = render 'layouts/shared/user_profile'
+        .home-nav
+          %ul.homeNavUl.shared{style: 'position: relative;'}
+            - unless user_signed_in?
+              %li.no-hover-underline.parent
+                %a{href: '/users/sign_in'} Sign In
+                &nbsp;
+                %a{href: '/users/sign_up'} Sign Up
+            - else
+              %li.no-hover-underline.parent
+                = render 'layouts/shared/admin_nav_items'
+              %li.no-hover-underline.parent
+                = render 'layouts/shared/tools_nav'
+              %li.no-hover-underline.parent
+                = render 'layouts/shared/user_profile'
