@@ -1,14 +1,13 @@
 module Search
   module BuildingSearch
-    def buildings_json_hash(searched_buildings)
-      unless searched_buildings.class == Array
-        searched_buildings.select(:id, :building_name, :building_street_address, 
-                                  :latitude, :longitude, :zipcode, :city, 
-                                  :min_listing_price,:max_listing_price, :listings_count,
-                                  :state, :price, :featured_buildings_count)
-                                  .as_json(:methods => json_hash_methods)
+    def buildings_json_hash(buildings)
+      unless buildings.class == Array
+        buildings.select(:id, :building_name, :building_street_address, 
+                         :latitude, :longitude, :zipcode, :city, 
+                         :min_listing_price,:max_listing_price, :listings_count,
+                         :state, :price, :featured_buildings_count).as_json(:methods => json_hash_methods)
       else
-        searched_buildings.as_json(:methods => json_hash_methods)
+        buildings.as_json(:methods => json_hash_methods)
       end
     end
 
