@@ -154,6 +154,8 @@ class Building < ApplicationRecord
   scope :with_application_link, -> { where('show_application_link is true and online_application_link is not null') }
   scope :with_pets,             -> { where('pets_allowed_cats is true OR pets_allowed_dogs is true') }
 
+  scope :random,                -> (ids) { where(id: ids) }
+  
   # popular searches
   scope :luxury_rentals, -> { where.not(building_street_address: nil).doorman.elevator }
   scope :penthouses_luxury_rentals, -> (ids) { where(id: ids) }

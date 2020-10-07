@@ -55,10 +55,6 @@ function createSidebar(object, marker, map, zoom){
   bindElemToMarker(elem, marker, object, map, zoom);
 };
 
-function markerIconBlue(){
-  return "<%=asset_path('marker-blue.png')%>";
-}
-
 function markerIcon(price, type='red'){
   var path = '';
   if(price == 0){

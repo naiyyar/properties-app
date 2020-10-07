@@ -57,11 +57,8 @@ module Search
       return [] if fb_ids.blank?
       shuffled_ids = fb_ids.shuffle[0..1]
       if fb_ids.length > 0
-        unless searched_by == 'nyc'
-          buildings.where(id: shuffled_ids) 
-        else
-          Building.where(id: shuffled_ids)
-        end
+        return buildings.random(shuffled_ids) unless searched_by == 'nyc'
+        Building.random(shuffled_ids)
       end
     end
 
