@@ -13,7 +13,7 @@
             %a{ href: img_url, 'data-role' => 'slider', 'data-caption' => date_uploaded(upload) } 
               - if @building.blank?
                 .bg-size-cover.bg-pos-center{ style: "background-image: url(#{img_url});", data: { imageid: "#{upload.id}" } }
-              = image_tag img_url, alt: 'Image', class: "img-thumbnail #{thumb_hidden_class}", width: '750', height: '460'
+              = image_tag img_url, alt: 'Image', class: "img-thumbnail #{thumb_hidden_class}", width: '750', height: '460', loading: 'lazy'
 - else
   .item
     .clearfix{ style: 'width:100%;' }

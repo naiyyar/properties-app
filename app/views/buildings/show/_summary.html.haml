@@ -8,7 +8,7 @@
 			.summaryItem
 				%h1.pageTitle
 					= @building.building_name_or_address
-					- if current_user && current_user.admin?
+					- if current_user&.admin?
 						= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right btn-round'
 						= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs btn-round', data: {confirm: 'Are you sure you want to discconect this building?'} if @manage_buildings.present?
 
