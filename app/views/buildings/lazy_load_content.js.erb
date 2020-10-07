@@ -1,28 +1,44 @@
-/*
-if(false) {
-	//$('#sh-slider').html("<%#= j render partial: 'buildings/show/light_slider', locals: { building: @building } %>");
+$('#sh-slider').html("<%= j render partial: 'buildings/show/light_slider', locals: { building: @building } %>");
 
-	var thumb_images_length = $('.lSPager.lSGallery').children().length
-	var add_class 					= thumb_images_length == 0 ? 'no-thumb' : 'with-thumb'
+var thumb_images_length = $('.lSPager.lSGallery').children().length
+var add_class 					= thumb_images_length == 0 ? 'no-thumb' : 'with-thumb'
 
-	$('.gallery').lightSlider({
-		gallery: true,
-		item: 1,
-		slideMargin: 0,
-		loop: true,
-		thumbItem: 6,
-		galleryMargin: 1,
-		addClass: add_class,
-		onBeforeSlide: function(el, scene){
-			parent_elem 		= el.parent().parent()
-			show_count_elem = parent_elem.prev()
-			current_elem    = show_count_elem.find('.current')
-			current_elem.text(el.getCurrentSlideCount)
-		}
-	});
+$('.gallery').lightSlider({
+	gallery: true,
+	item: 1,
+	slideMargin: 0,
+	loop: true,
+	thumbItem: 6,
+	galleryMargin: 1,
+	addClass: add_class,
+	onBeforeSlide: function(el, scene){
+		parent_elem 		= el.parent().parent()
+		show_count_elem = parent_elem.prev()
+		current_elem    = show_count_elem.find('.current')
+		current_elem.text(el.getCurrentSlideCount)
+	}
+});
 
-	Transparentcity.initFancybox('.sh-slider-container .lightSlider .lslide a');
-}*/
+Transparentcity.initFancybox('.sh-slider-container .lightSlider .lslide a');
+
+//rice_ranges_and_broker_fee_savings
+<% if @building.price.present? %>
+	$('#price_ranges').html("<%= j render partial: 'buildings/show/price_ranges' %>");
+<%end%>
+
+<% if @building.bedroom_types? %>
+	$('#broker_fee_savings').html("<%= j render partial: 'buildings/show/broker_fee_savings' %>");
+<%end%>
+
+//documents
+<% if @documents.present? %>
+	$('#building-documents').html("<%= j render partial: 'uploads/documents' %>");
+<%end%>
+
+//#subways
+<% if @distance_results.present? %>
+	$('#subways').html("<%= j render partial: 'buildings/show/subways' %>");
+<%end%>
 
 //Ratings
 $('#ratings').html("<%= j render partial: 'buildings/show/rating_list' %>");

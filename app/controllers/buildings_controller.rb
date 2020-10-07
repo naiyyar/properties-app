@@ -5,6 +5,9 @@ class BuildingsController < ApplicationController
   before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite, :lazy_load_content]
   before_action :clear_cache,         only: [:favorite, :unfavorite]
   before_action :find_buildings,      only: [:contribute, :edit]
+  before_action :set_distance_matrix, only: :lazy_load_content
+  before_action :get_uploads,         only: :lazy_load_content
+  before_action :set_image_counts,    only: [:show, :lazy_load_content]
   after_action :get_neighborhood,     only: [:create, :update]
 
   include BuildingsConcern # create, show
@@ -28,7 +31,11 @@ class BuildingsController < ApplicationController
   # 1.1 reviews section
   # 1.2 ratings
   def lazy_load_content
-    @reviews = @building.building_reviews
+    @reviews       = @building.building_reviews
+    @price_ranges  = @building.price_ranges
+    broker_percent = BrokerFeePercent.first.percent_amount
+    @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
+    
     respond_to do |format|
       format.js
     end
@@ -178,6 +185,20 @@ class BuildingsController < ApplicationController
 
   def clear_cache
     @building.update(updated_at: Time.now)
+  end
+
+  def set_distance_matrix
+    @distance_results = DistanceMatrix.new(@building).get_data # if Rails.env == 'production'
+  end
+
+  def get_uploads
+    # Uploaded assets
+    assets                 = @building.get_uploads
+    @uploads, @documents   = assets[:image_uploads], assets[:doc_uploads]
+  end
+
+  def set_image_counts
+    @uploaded_images_count = @building.uploads_count.to_i
   end
 
 end

@@ -3,15 +3,11 @@ module BuildingsConcern
 
   included do
     before_action :save_as_favourite,   only: :show
-    before_action :set_distance_matrix, only: :show
-    before_action :broker_fee_percent,  only: :show
-    before_action :get_uploads,         only: :show
     before_action :get_building,        only: :create
   end
 
   def show
     @show_map_btn          = @half_footer = true
-    @price_ranges          = @building.price_ranges
     # reviews
     @reviews_count         = @building.reviews_count.to_i
     # comps
@@ -108,22 +104,6 @@ module BuildingsConcern
     return unless session[:favourite_object_id].present? && current_user.present?
     current_user.add_to_fav(session[:favourite_object_id])
     session[:favourite_object_id] = nil
-  end
-
-  def set_distance_matrix
-    @distance_results = DistanceMatrix.new(@building).get_data # if Rails.env == 'production'
-  end
-
-  def broker_fee_percent
-    broker_percent = BrokerFeePercent.first.percent_amount
-    @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
-  end
-
-  def get_uploads
-    # Uploaded assets
-    assets                 = @building.get_uploads
-    @uploads, @documents   = assets[:image_uploads], assets[:doc_uploads]
-    @uploaded_images_count = @building.uploads_count.to_i
   end
   
   def get_building

@@ -35,22 +35,18 @@
 		%br
 		
 	.clearfix
-	- if @building.price.present? || @building.bedroom_types?
 		%br
-		= render 'buildings/show/price_ranges'
-		= render 'buildings/show/broker_fee_savings'
+		#price_ranges
+			/ lazy load
+		#broker_fee_savings
+			/ lazy load
 
-	- if @documents.present?
-		#building-documents.documents.show-section
-			%h3
-				Documents (#{@documents.count})
-			= render 'uploads/documents'
+	#building-documents
+		/ lazy load
 
 	.clearfix
-	- if @distance_results.present?
-		#subways.show-section
-			%h3 Subway
-			= render 'buildings/show/subways'
+	
+	#subways.show-section
 
 	.clearfix
 	- if @similar_properties_count > 0
