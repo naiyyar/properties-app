@@ -14,7 +14,6 @@ module BuildingsConcern
     @price_ranges          = @building.price_ranges
     # reviews
     @reviews_count         = @building.reviews_count.to_i
-    @reviews               = @building.building_reviews
     # comps
     @similar_properties       = @building.comps
     @similar_properties_count = @similar_properties.length
