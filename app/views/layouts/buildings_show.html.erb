@@ -29,7 +29,7 @@
     <%= javascript_include_tag 'home/main'%>
     <%= render 'buildings/favourite_script' %>
     <%= render 'buildings/show/map_script' %>
-    <%= javascript_include_tag 'zapp'%>
+    <%= javascript_include_tag 'zapp', async: true, defer: true %>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })
