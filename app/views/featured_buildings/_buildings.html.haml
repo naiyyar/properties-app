@@ -7,8 +7,10 @@
           %thead
             %tr
               %th{width: '10%'} Feature ID(#{@featured_buildings.count})
-              %th{width: '20%'} Building
-              %th{width: '20%'} Management
+              %th{width: '16%'} Building
+              %th{width: '18%'} Management
+              %th{width: '12%'} Neighborhood1
+              %th{width: '12%'} Neighborhood3
               %th{width: '8%'} Website
               %th{width: '15%'} Start Date
               %th{width: '15%'} End Date
@@ -25,7 +27,10 @@
               %tr
                 %td=link_to featured_building.id, edit_featured_building_path(featured_building, featured_by: @featured_by)
                 %td=link_to building.building_name_or_address, building_path(building)
-                %td=link_to featured_building.building.management_company.try(:name), '#'
+                %td=link_to building.management_company.try(:name), '#'
+                %td=link_to building.try(:neighborhood), '#'
+                %td=link_to building.try(:neighborhood3), '#'
+                
                 %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
                 %td= start_date(featured_building)
                 %td= end_date(featured_building)
