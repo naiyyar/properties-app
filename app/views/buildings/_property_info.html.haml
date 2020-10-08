@@ -10,12 +10,6 @@
   
   - if @building.price.present? || @building.bedroom_types?
     %div.pbt= render 'buildings/bedroom_types_and_prices', building: @building
-  
-  / %div.hidden{style: 'margin-left: -3px; padding: 0px;'}
-  /   %ul.rating.star-sm
-  /     / = rating_for @building, 'building', disable_after_rate: true, readonly: true
-  /   .favLink
-  /     / = recommended_percent(@building).html_safe if @building.votes.present?
 
   .clearfix
   

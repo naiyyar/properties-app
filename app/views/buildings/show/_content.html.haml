@@ -20,10 +20,10 @@
 	.clearfix
 	- if @building_tours.present?
 		.amenities.show-section#video-tours
-			%h3="3D / Video Tour (#{tours_count = @building_tours.length})"
-			- @vd_height = '190'
-			- cache [@building, tours_count, '3DVideoTour'] do
-				= render 'video_tours/show', cat_color: '333'
+			%h3="3D / Video Tour (#{@building_tours.length})"
+			%a.btn.btn-o.btn-primary.btn-sm.btn-round.font-bold.btn-block.font-14{ href: show_tour_path(building_id: @building.id), 'data-remote' => true }
+				%span.fa.fa-play
+				Launch 3D / Video Tours
 
 	- unless screen_class == 'screen-lg'
 		.show-section.show-map-handler{style: 'height: 200px; width: 100%;'}

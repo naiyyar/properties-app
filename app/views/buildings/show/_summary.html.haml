@@ -1,7 +1,7 @@
 .summary
 	.row
 		.col-lg-12
-			.add--assets{class: current_user && current_user.admin? ? 'admin' : ''}=render 'uploads/add_photos', object: @building
+			.add--assets{class: current_user&.admin? ? 'admin' : ''}=render 'uploads/add_photos', object: @building
 	%h2
 	.row
 		.col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -19,11 +19,11 @@
 	- unless @uploaded_images_count > 0
 		.sliderLink
 			%p.text-danger No photos are available.
-			- if @video_tours.present?
+			- if false && @video_tours.present?
 				%a.btn.btn-o.btn-info.btn-sm.btn-round{href: '#video-tours'}
 					%span.fa.fa-cube
 					3D/Video Tour
 				
-			- if current_user && current_user.admin?
+			- if current_user&.admin?
 				= link_to 'Add Tour', new_video_tour_path(building_id: @building.id), class: 'btn btn-o btn-primary btn-sm'
 				=link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm btn-round'
