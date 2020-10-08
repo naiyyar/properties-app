@@ -1,14 +1,9 @@
-.singleTop{style: 'position: relative;'}
+.singleTop{style: 'position: relative;height: 460px'}
 	.row.sh-slider
 		#sh-slider{style: 'height: 460px;background: #ececec;'}
-			/ = render 'buildings/show/light_slider', building: @building
  		
 		- if @building.price.present? || @building.bedroom_types?
 			- if @min_save_amount.present?
 				.saving-badge.show-view-badge
 					%p Save
 					%p= "#{number_to_currency(@min_save_amount, precision: 0)}+"
-	
-	.clearfix
-
-	= render 'buildings/show/summary' if show_summary

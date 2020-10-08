@@ -1,14 +1,14 @@
-- if show_summary
-	.singleTop{ style: 'position: relative;' }
-		= render 'buildings/show/summary'
-
 .section-container
+	- if show_summary
+		%div{ style: 'position: relative;margin-bottom: 20px;' }= render 'buildings/show/summary'
+	
 	- if @active_listings_count > 0 || @past_listings_count > 0
-		#listings.show-section
+		#listings.show-section{style: 'min-height: 200px;'}
 			- if @active_listings_count > 0
 				%h3= "#{@active_listings_count} Active Rental Listings"
 				= render 'buildings/show/listings', listings: @active_listings, type: 'current'
 			.clearfix
+			
 			- if @past_listings_count > 0
 				%h3= "#{@past_listings_count} Past Rental Listings"
 				= hidden_field_tag 'past_listings_count', @past_listings_count
