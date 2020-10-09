@@ -3,7 +3,7 @@
 		%div{ style: 'position: relative;margin-bottom: 20px;' }= render 'buildings/show/summary'
 	
 	- if @active_listings_count > 0 || @past_listings_count > 0
-		#listings.show-section{style: 'min-height: 200px;'}
+		#listings.show-section
 			- if @active_listings_count > 0
 				%h3= "#{@active_listings_count} Active Rental Listings"
 				= render 'buildings/show/listings', listings: @active_listings, type: 'current'
@@ -26,13 +26,12 @@
 				Launch 3D / Video Tours
 
 	- unless screen_class == 'screen-lg'
-		.show-section.show-map-handler{style: 'height: 200px; width: 100%;'}
+		.show-section.show-map-handler{style: 'height: 200px; width: 100%; margin-bottom: 20px;margin-top: 20px;'}
 			%br
 			#mob-map{style: 'height: 100%; width: 100%;'}
 				.mapPlaceholder
 					%span.fa.fa-spin.fa-spinner 
 					Loading map...
-		%br
 		
 	.clearfix
 		%br

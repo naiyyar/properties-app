@@ -4,10 +4,10 @@
 			.add--assets{class: current_user&.admin? ? 'admin' : ''}=render 'uploads/add_photos', object: @building
 	
 	.row
-		.col-xs-9.col-sm-8.col-md-8.col-lg-8
+		.col-xs-10.col-sm-8.col-md-8.col-lg-8
 			%h1.pageTitle{style: 'height: 28px;width: 100%;'}= @building.building_name_or_address
 		
-		.col-xs-3.col-sm-4.col-md-4.col-lg-4
+		.col-xs-2.col-sm-4.col-md-4.col-lg-4
 			- if current_user&.admin?
 				= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs pull-right btn-round'
 				= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'pull-right btn btn-danger btn-o btn-xs btn-round', data: {confirm: 'Are you sure you want to discconect this building?'} if @manage_buildings.present?
