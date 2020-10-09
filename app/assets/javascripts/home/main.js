@@ -145,3 +145,53 @@ Transparentcity = {
 
 };
 
+//
+
+$('.btn').click(function() {
+  if ($(this).is('[data-toggle-class]')) {
+    $(this).toggleClass('active ' + $(this).attr('data-toggle-class'));
+  }
+});
+if($('.progress-bar[data-toggle="tooltip"]').length > 0){
+    $('.progress-bar[data-toggle="tooltip"]').tooltip();
+}
+if($('.tooltipsContainer .btn').length > 0){
+    $('.tooltipsContainer .btn').tooltip();
+}
+if($('#datepicker').length > 0){
+    $('#datepicker').datepicker();
+}
+
+// clear text search
+$('.clearSearchText').click(function(){
+    $("#search_term").val('');
+});
+
+// search box text seletion on click
+$("#apt-search-txt-searchpage, #search_term").click(function () {
+  $(this).select();
+});
+
+//
+// For mobile neighborhoods dropdown toggle
+$('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
+  $('.popular-neighborhoods').slideToggle(200, 'linear', function(){
+    var elem             = $('#wrapper.screen-sm');
+    var toggleable_class = 'no-touch-scroll'
+    $(this).is(':hidden') ? elem.removeClass(toggleable_class) : elem.addClass(toggleable_class);
+  });
+});
+
+
+// setting timezone
+$('.user_time_zone').set_timezone(); 
+const timezone = $('.user_time_zone').val(); 
+// setting in cookies to access using helper method on application controller
+function setCookie(name, value) {
+  var expires = new Date()
+  expires.setTime(expires.getTime() + (24 * 60 * 60 * 1000))
+  document.cookie = name + '=' + value + ';expires=' + expires.toUTCString()
+}
+
+setCookie("timezone", timezone)
+

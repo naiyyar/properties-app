@@ -54,66 +54,6 @@
     if(split_view_length == 0){
         windowResizeHandler();
     }
-
-    var min_price = 0;
-    var max_price = 15500;
-    if($('#min_price').length > 0){
-        min_price = $('#min_price').val();
-        max_price = parseInt($('#max_price').val());
-    }
-
-    var setPrice = function(min, max, on_slide=false){
-        var maxValue = parseInt(max) > 15000 ? '15500+' : max;
-        $('.priceSlider .sliderTooltip .stLabel').html(
-            '$' + min.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + 
-            ' <span class="fa fa-arrows-h"></span> ' +
-            '$' + maxValue.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-        );
-        
-        if(on_slide){
-            $('#priceFieldsContainer').html('<input type="hidden" name="filter[min_price]" id="min_price" value='+min+'>' +
-                                            '<input type="hidden" name="filter[max_price]" id="max_price" value='+maxValue+'>');
-
-        }
-    }
-    if($('.priceSlider').length > 0){
-        $('.priceSlider').slider({
-            range: true,
-            min: 0,
-            max: 15500,
-            values: [min_price, max_price],
-            step: 250,
-            slide: function(event, ui) {
-                $('#listings_price_box').prop('checked', true);
-                var sliding = true;
-                setPrice(ui.values[0], ui.values[1], sliding);
-                
-                if($('.building_price_filter:checked').length > 0){
-                    $('.building_price_filter').prop('checked', false);
-                }
-
-                if($('.building_bed_filter:checked').length > 0){
-                    $('.building_bed_filter').prop('checked', false);
-                }
-            }
-        });
-    };
-
-    var initSlider = function(){
-        setPrice(min_price, max_price);
-    }
-
-    initSlider();
-
-    // For mobile dropdown panel
-    $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
-      $('.popular-neighborhoods').slideToggle(200, 'linear', function(){
-        var elem             = $('#wrapper.screen-sm');
-        var toggleable_class = 'no-touch-scroll'
-        $(this).is(':hidden') ? elem.removeClass(toggleable_class) : elem.addClass(toggleable_class);
-      });
-    });
-
     // Header search icon transition
     $('.search input').focus(function() {
         $('.searchIcon').addClass('active');
@@ -124,15 +64,15 @@
 
     // functionality for map manipulation icon on mobile devices
     var listMapView = function(){
-        if ($('#mapView, #mapViewSearch').hasClass('mob-min') || 
-            $('#mapView, #mapViewSearch').hasClass('mob-max') || 
+        if ($('#mapViewSearch').hasClass('mob-min') || 
+            $('#mapViewSearch').hasClass('mob-max') || 
             $('#content').hasClass('mob-min') || 
             $('#content').hasClass('mob-max')) {
-            $('#mapView, #mapViewSearch').toggleClass('mob-max');
+            $('#mapViewSearch').toggleClass('mob-max');
             $('#content').toggleClass('mob-min');
         } else {
             $('#content').toggleClass('min');
-            $('#mapView, #mapViewSearch').toggleClass('max');
+            $('#mapViewSearch').toggleClass('max');
         }
         initialize();
         setTimeout(function() {
@@ -157,7 +97,7 @@
         setSession('listView')
     })
     
-    $('.mapHandler, .show-map-handler').click(function() {
+    $('.mapHandler').click(function() {
         if(!$(this).hasClass('show-map-handler')){
             $(this).hide();
         }
@@ -194,100 +134,14 @@
     });
 
     
-    $('.closeGuides, .handleGuides').click(function(e) {
-        e.stopPropagation();
-        $('.modal-full').slideToggle(200);
-    });
-
-    // Avoid dropdown menu close on click inside
-    $(document).on('click', '.neighborhoods-dropdown .dropdown-menu', function (e) {
-        e.stopPropagation();
-    });
-
-    if($('.handleFilter').length > 0){
-        $('.handleFilter, .closeFilter').click(function(e) {
-            e.stopPropagation();
-            DPButtons.init();
-            DPButtons.handleFilter()
-            initSlider();
-            DPButtons.closeDropdowns($(this), 'other');
-        });
-
-        $(document).on('click', '.dropdown-toggle', function(){
-            DPButtons.init();
-            DPButtons.closeDropdowns($(this), 'filter');
-        });
-    }
-    
-    // Running this script only on desktop views
-    // var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
-
-    $(document).click(function(e) {
-        e.stopPropagation();
-        if($(e.target).closest('.filter').length === 0){
-            if($('.filter').is(':visible')){
-                $('.filter').slideUp(200);
-            }
-        }
-    });
-
-    $('.handleSort').click(function(e) {
-        $('.sortMenu').slideToggle(200);
-    });
-
     $('.applyFilter').click(function(e) {
         e.preventDefault();
         $('.btn-submit-filter-form').click();
     });
 
-    $('.btn').click(function() {
-        if ($(this).is('[data-toggle-class]')) {
-            $(this).toggleClass('active ' + $(this).attr('data-toggle-class'));
-        }
-    });
-    if($('.progress-bar[data-toggle="tooltip"]').length > 0){
-        $('.progress-bar[data-toggle="tooltip"]').tooltip();
-    }
-    if($('.tooltipsContainer .btn').length > 0){
-        $('.tooltipsContainer .btn').tooltip();
-    }
-    if($('#datepicker').length > 0){
-        $('#datepicker').datepicker();
-    }
-
-    // clear text search
-    $('.clearSearchText').click(function(){
-        $("#search_term").val('');
-    })
-
-    // clearing out unit modal fields on building show page
-    $("#new_unit_modal .close").click(function(){
-        var search_field = $("#new_unit_modal #units-search-txt");
-        if(search_field.val() != ''){
-          search_field.val('');
-        }
-        if(!$('#new_unit_building').hasClass('hide')){
-          $('#new_unit_building').addClass('hide');
-        }
-        if($(".no-result-li").length > 0){
-          $(".no-result-li").remove();
-        }
-    })
-
-    $('.add_unit').click(function(){
-        if($("#units-search-txt").hasClass('hide') && $(".unit-search").hasClass('hide')){
-          $("#units-search-txt").removeClass('hide');
-          $(".unit-search").removeClass('hide');
-        }
-    });
-
     // Rotating image overlay...
     $('.rotate').click(function(){
       $('.loading').removeClass('hidden');
-    });
-
-    $("#apt-search-txt-searchpage, #search_term").click(function () {
-        $(this).select();
     });
 
     // Removing thumb slider from similar proprties gallery
@@ -315,24 +169,8 @@
     });
 
     // Hiding mobile browser select box on soeted by text click
-    $('.sorted-by').click(function(){
-        // console.log(12)
-    })
+    $('.sorted-by').click(function(){})
 
-    $(document).on('click', 'select#sort', function(){
-        // alert(12)
-    });
-
-    // setting timezone
-    $('.user_time_zone').set_timezone(); 
-    const timezone = $('.user_time_zone').val(); 
-    // setting in cookies to access using helper method on application controller
-    function setCookie(name, value) {
-      var expires = new Date()
-      expires.setTime(expires.getTime() + (24 * 60 * 60 * 1000))
-      document.cookie = name + '=' + value + ';expires=' + expires.toUTCString()
-    }
-
-    setCookie("timezone", timezone)
+    $(document).on('click', 'select#sort', function(){});
 
 })(jQuery);

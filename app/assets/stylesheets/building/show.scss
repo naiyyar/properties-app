@@ -19,6 +19,10 @@
 		height: 460px !important;
 	}
 
+	.add--assets{
+		padding: 10px 10px 0px 20px;
+	}
+
 	#content {
 	  overflow-x: hidden;
 	  overflow-y: hidden;
@@ -122,10 +126,6 @@
 			}
 		}
 
-		.add--assets{
-			padding: 10px 10px 0px 20px;
-		}
-
 		.address {
 		  font-size: 13px;
 		  line-height: 14px;
@@ -226,6 +226,18 @@
 			box-shadow: none;
 		}
 	}
+
+	.add--assets.admin{
+		padding: 10px 0px 20px 0px;
+	}
+
+	.add--assets{
+		padding: 0px;
+		.text-right a.see-all{
+			padding: 8px 0px;
+		}
+	}
+	
 	.buildingsshow {
 		#content{
 			overflow-y: scroll;
@@ -234,21 +246,13 @@
 				.sh-slider-container{
 					padding: 0px 9px !important;
 				}
-				.add--assets.admin{
-					padding: 10px 15px 0px 4px;
-				}
-				.add--assets{
-					padding: 0px;
-					.text-right a.see-all{
-						padding: 8px 0px;
-					}
-				}
 			}
 			.section-container, .singleTop .summary{
 				padding: 10px 20px 20px;
 			}
 			h3{
 				font-size: 18px;
+				margin-bottom: 20px;
 			}
 
 			#subways{
