@@ -19,6 +19,7 @@
     .clearfix{ style: 'width:100%;' }
       %ul.gallery.list-unstyled{style: 'height: 265px;', data: { buildingid: "#{building.id}", view_type: 'show', path:  building_path(building) } }
         %li
-          %a{ href: image_url('no-photo.png'), 'data-role' => 'slider', 'data-caption' => '', 'data-fancybox' => 'gallery' }
-            .bg-size-cover.bg-pos-center{style: "background-image: url(#{image_url('no-photo.png') })"}
+          - img_url = image_url('no-photo.jpg')
+          %a{ href: img_url, 'data-fancybox' => 'gallery' }
+            .bg-size-cover.bg-pos-center{style: "background-image: url(#{img_url})"}
                    
