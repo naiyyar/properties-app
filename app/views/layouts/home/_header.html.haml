@@ -14,19 +14,15 @@
   
   .home-nav.pull-left
     %ul.homeNavUl
-      %li.no-hover-underline.parent
-        %a{href: '/about'} About
+      %li.no-hover-underline.parent=link_to 'About', '/about'
       %li.no-hover-underline.parent
         %a.dropdown-toggle.no-hover-underline{href: '#', 'data-toggle' => 'dropdown'} 
           Advertise
           %span.fa.fa-chevron-down
 
-        .dropdown-menu.userMenu.admin.advertise-menu{role: 'menu'}
-          = render 'layouts/shared/advertise_items'
-      %li.no-hover-underline.parent
-        %a{href: '/blog'} Blog
-      %li.no-hover-underline.parent
-        %a{href: contribute_buildings_path} Write Review
+        .dropdown-menu.userMenu.admin.advertise-menu{role: 'menu'}= render 'layouts/shared/advertise_items'
+      %li.no-hover-underline.parent=link_to 'Blog', '/blog'
+      %li.no-hover-underline.parent=link_to 'Write Review', contribute_buildings_path
   
   / for large devices
   .home-nav
@@ -37,14 +33,9 @@
           &nbsp;
           %a{href: '/users/sign_up'} Sign Up
       - else
-        %li.no-hover-underline.parent
-          = render 'layouts/shared/admin_nav_items'
-        %li.no-hover-underline.parent
-          = render 'layouts/shared/tools_nav'
-        
-        %li.no-hover-underline.parent
-          = render 'layouts/shared/user_profile'
+        %li.no-hover-underline.parent= render 'layouts/shared/admin_nav_items'
+        %li.no-hover-underline.parent= render 'layouts/shared/tools_nav'
+        %li.no-hover-underline.parent= render 'layouts/shared/user_profile'
 
 - if user_signed_in?
-  .mobView.visible-xs.visible-sm
-    = render partial: 'layouts/shared/user_profile'
+  .mobView.visible-xs.visible-sm= render partial: 'layouts/shared/user_profile'

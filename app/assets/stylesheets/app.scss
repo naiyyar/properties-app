@@ -505,9 +505,6 @@ a.link_underlined:hover, .underline{
     right:10px;
     z-index: 9999;
 }
-/*.logo a > img, .logo.expanded a > img{
-    width: 146px;
-}*/
 .mobile-search{
     display: none;
 }
@@ -2113,6 +2110,10 @@ select.custom-arrow{
     #header-mob .col-xs-6.h-filter{
         width: 45%;
     }
+    h1.pageTitle{
+      font-size: 23px;
+      white-space: nowrap;
+    }
 
     #header-mob .col-xs-6.hood button, #header-mob .col-xs-6.h-filter button{
         border: 1px solid #fff;
@@ -2394,9 +2395,10 @@ select.custom-arrow{
     .logo a, .logo.expanded a{
         cursor: pointer !important;
     }
+    /*
     .logo a > img, .logo.expanded a > img{
         width: 51%;
-    }
+    }*/
     li.logo{
         z-index: 999;
     }

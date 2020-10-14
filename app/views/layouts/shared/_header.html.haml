@@ -1,78 +1,68 @@
-#header-mob.visible-xs{class: "sm-#{action_name}"}
-  .row{style: 'margin-right: 0px;'}
-    .col-xs-1
-      %a.navHandler{href: 'javascript:void(0)'}
-        %span.fa.fa-bars
-    
-    %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
-      .split-view-seach{class: "#{search_bar(:hidden)}"}
-        %span.fa.fa-times.clearSearchText{style: "right: #{clear_link_from_right}px;"}
-        = render partial: 'home/search_form' if browser.device.mobile?
-   
-    %div{class: "col-xs-#{header_right_col}"}
-      .row{style: 'margin-right: -1px;'}
-        .hood.col-xs-6
-          .btn-hoods{class: current_view}
-            %button.btn.btn-primary.dropdown-toggle-neighborhoods.btn-round{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
-              %span.dropdown-label Hood
-              %span.caret
+- unless screen_class == 'screen-lg'
+  #header-mob{class: "sm-#{action_name}"}
+    .row{style: 'margin-right: 0px;'}
+      .col-xs-1
+        %a.navHandler{href: 'javascript:void(0)'}
+          %span.fa.fa-bars
+      
+      %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
+        .split-view-seach{class: "#{search_bar(:hidden)}"}
+          %span.fa.fa-times.clearSearchText{style: "right: #{clear_link_from_right}px;"}
+          = render partial: 'home/search_form'
+     
+      %div{class: "col-xs-#{header_right_col}"}
+        .row{style: 'margin-right: -1px;'}
+          .hood.col-xs-6
+            .btn-hoods{class: current_view}
+              %button.btn.btn-primary.dropdown-toggle-neighborhoods.btn-round{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
+                %span.dropdown-label Hood
+                %span.caret
 
-        - if show_filters?
-          .col-xs-6.h-filter
-            .btn-filter{style: 'margin-left: 3px;'}
-              %button.btn.btn-primary.btn-filter.handleFilter.btn-round
-                %span.dropdown-label
-                  %span.fa.fa-filter
-                  Filter
-                  %span.filter-counts
+          - if show_filters?
+            .col-xs-6.h-filter
+              .btn-filter{style: 'margin-left: 3px;'}
+                %button.btn.btn-primary.btn-filter.handleFilter.btn-round
+                  %span.dropdown-label
+                    %span.fa.fa-filter
+                    Filter
+                    %span.filter-counts
 
-  .visible-xs{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;'}
-    - if action_name == 'search'
-      %a.mapHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: none;' : ''}
-        %span.fa.fa-map-o
-        Map
-      %a.listHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: block;' : ''}
-        %span.fa.fa-list
-        List
+    %div{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;'}
+      - if action_name == 'search'
+        %a.mapHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: none;' : ''}
+          %span.fa.fa-map-o
+          Map
+        %a.listHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: block;' : ''}
+          %span.fa.fa-list
+          List
 
-- if screen_class == 'screen-lg'
-  %div.hidden-xs
-    #header
-      .logoContainer
-        .logo
-          %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40'
-        
-        - if !browser.device.mobile?
-          #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
+- else
+  #header
+    .logoContainer
+      .logo
+        %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40'
+      #search-row{class: "search #{search_bar(:hidden)}"}= render partial: 'layouts/shared/search_form'
 
-        .home-nav.pull-left
-          %ul.homeNavUl.shared
+      .home-nav.pull-left
+        %ul.homeNavUl.shared
+          %li.no-hover-underline.parent=link_to 'About', '/about'
+          %li.no-hover-underline.parent
+            %a.dropdown-toggle.no-hover-underline{href: '#', 'data-toggle' => 'dropdown'} 
+              Advertise
+              %span.fa.fa-chevron-down
+            .dropdown-menu.userMenu.admin.advertise-menu{role: 'menu'}= render 'layouts/shared/advertise_items'
+
+          %li.no-hover-underline.parent=link_to 'blog', '/Blog'
+          %li.no-hover-underline.parent=link_to 'Write Review', contribute_buildings_path
+
+      .home-nav
+        %ul.homeNavUl.shared{style: 'position: relative;'}
+          - unless user_signed_in?
             %li.no-hover-underline.parent
-              %a{href: '/about'} About
-            %li.no-hover-underline.parent
-              %a.dropdown-toggle.no-hover-underline{href: '#', 'data-toggle' => 'dropdown'} 
-                Advertise
-                %span.fa.fa-chevron-down
-
-              .dropdown-menu.userMenu.admin.advertise-menu{role: 'menu'}
-                = render 'layouts/shared/advertise_items'
-
-            %li.no-hover-underline.parent
-              %a{href: '/blog'} Blog
-            %li.no-hover-underline.parent
-              %a{href: contribute_buildings_path} Write Review
-
-        .home-nav
-          %ul.homeNavUl.shared{style: 'position: relative;'}
-            - unless user_signed_in?
-              %li.no-hover-underline.parent
-                %a{href: '/users/sign_in'} Sign In
-                &nbsp;
-                %a{href: '/users/sign_up'} Sign Up
-            - else
-              %li.no-hover-underline.parent
-                = render 'layouts/shared/admin_nav_items'
-              %li.no-hover-underline.parent
-                = render 'layouts/shared/tools_nav'
-              %li.no-hover-underline.parent
-                = render 'layouts/shared/user_profile'
+              %a{href: '/users/sign_in'} Sign In
+              &nbsp;
+              %a{href: '/users/sign_up'} Sign Up
+          - else
+            %li.no-hover-underline.parent= render 'layouts/shared/admin_nav_items'
+            %li.no-hover-underline.parent= render 'layouts/shared/tools_nav'
+            %li.no-hover-underline.parent= render 'layouts/shared/user_profile'

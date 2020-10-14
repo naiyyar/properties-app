@@ -90,7 +90,7 @@ Card = {
 	    data: { id: agent_id },
 	    success: function(response){
 	      fig_elem.html(response.html);
-	      Card.initLightSlider(fig_elem.find('.gallery'), Card.enableTouch());
+	      Card.initLightSlider(fig_elem.find('.gallery'), Card.enableTouch(), 1);
 	      cta_elem.html(response.cta_html);
 	    }
 	  });
