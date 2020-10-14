@@ -183,7 +183,6 @@
       google.maps.event.addListener(map, 'zoom_changed', function() {
         zoomLevel = map.getZoom();
       });
-      console.log(map)
       map.setCenter(new google.maps.LatLng(lat, lng));
       map.setZoom(zoom);
       polylines.setMap(map);
