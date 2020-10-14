@@ -1,3 +1,4 @@
+/*
 window.onload = function(){
 	if($('.sh-slider-container').length > 0 ){
 		// var thumb_images_length = $('.lSPager.lSGallery').children().length
@@ -19,9 +20,9 @@ window.onload = function(){
 		// 	}
 		// });
 
-		// /*
+		//
 		// initializing fancybox for show page light slider images
-		// */
+		//
 		// Transparentcity.initFancybox('.sh-slider-container .lightSlider .lslide a');
 	
 	}else{
@@ -36,7 +37,7 @@ window.onload = function(){
 			}
 		});
 	}
-	//#when slider is not loading on tab active so NEED TO RESIZE
-	//#$('[href="#building_managed"]').on 'shown.bs.tab', ->
-	//#	$('.gallery').resize()
-}
+	when slider is not loading on tab active so NEED TO RESIZE
+	$('[href="#building_managed"]').on 'shown.bs.tab', ->
+		$('.gallery').resize()
+} */
