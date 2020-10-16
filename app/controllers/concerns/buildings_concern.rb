@@ -7,14 +7,14 @@ module BuildingsConcern
   end
 
   def show
-    @show_map_btn          = @half_footer = true
+    @half_footer = true
     # reviews
-    @reviews_count         = @building.reviews_count.to_i
+    @reviews_count = @building.reviews_count.to_i
     # comps
     @similar_properties       = @building.comps
     @similar_properties_count = @similar_properties.length
     # 
-    @gmaphash              = Building.buildings_json_hash(@similar_properties.to_a + [@building])
+    @gmaphash = Building.buildings_json_hash(@similar_properties.to_a + [@building])
     # Current listings
     @listings              = @building.listings
     @active_listings       = @listings.active.order_by_rent_asc
