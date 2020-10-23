@@ -38,7 +38,7 @@ nbs 			= Neighborhood.where(boroughs: 'QUEENS')
 buildings = Building.all
 queens_nb.each do |nb|
 	hood 		= nbs.where(name: nb.downcase)
-	count 	= buildings.buildings_in_neighborhood(nb).count
+	count 	= buildings.buildings_in_neighborhood(nb.downcase).count
 	puts "#{nb} buildings count: #{count}"
 	if hood.blank?
 		Neighborhood.create({ name: 					nb, 
