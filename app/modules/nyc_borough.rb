@@ -27,7 +27,7 @@ module NYCBorough
 	end
 	
 	def lower_manhattan_sub_borough
-		@lower_manhattan_sub_borough ||= [
+		[
 			'Battery Park City',
 			'Bowery',
 			'East Village',
@@ -58,7 +58,7 @@ module NYCBorough
 	end
 
 	def upper_manhattan_sub_borough
-		@upper_manhattan_sub_borough ||= [
+		[
 			'East Harlem',
 			'Harlem',
 			'South Harlem',
@@ -71,19 +71,19 @@ module NYCBorough
 	end
 
 	def brooklyn_sub_borough
-		@brooklyn_sub_borough ||= [
-															  'Brooklyn Heights',
-													      'Bushwick',
-													      'Clinton Hill',
-													      'Crown Heights',
-													      'Downtown Brooklyn',
-													      'Dumbo',
-													      'Fort Greene',
-													      'Greenpoint',
-													      'Park Slope',
-													      'Sheepshead Bay',
-													      'Williamsburg'
-															]
+		[
+		  'Brooklyn Heights',
+      'Bushwick',
+      'Clinton Hill',
+      'Crown Heights',
+      'Downtown Brooklyn',
+      'Dumbo',
+      'Fort Greene',
+      'Greenpoint',
+      'Park Slope',
+      'Sheepshead Bay',
+      'Williamsburg'
+		]
 	end
 
 	def uptown_sub_borough
@@ -99,27 +99,29 @@ module NYCBorough
 	end
 
 	def queens_sub_borough
-		@queens_sub_borough ||= [
+		[
 			'Astoria',
 	    'Corona',
 	    'Flushing',
 	    'Forest Hills',
 	    'Kew Gardens',
 	    'Long Island City',
-	    'Rego Park'
+	    'Rego Park',
+	    'Ridgewood'
 	  ]
 	end
 
 	def bronx_sub_borough
-		@bronx_sub_borough ||= ['East Bronx',
-														'University Heights', 
-														'Morris Heights', 
-														'Riverdale'
-													]
+		[
+			'East Bronx',
+			'University Heights', 
+			'Morris Heights', 
+			'Riverdale'
+		]
 	end
 
 	def brookly_borough
-		@brookly_borough ||= [ 
+		[ 
 			'Bedford-Stuyvesant',
 			'Brooklyn Heights',
 			'Bushwick',
@@ -138,38 +140,46 @@ module NYCBorough
 	end
 
 	def queens_borough
-		@queens_borough ||= [	'Astoria',
-													'Corona',
-													'Elmhurst',
-													'Flushing',
-													'Forest Hills',
-													'Jackson Heights',
-													'Jamaica',
-													'Kew Gardens',
-													'Long Island City',
-													'Rego Park',
-													'Sunnyside',
-													'Woodside'
-												]
+		[	'Astoria',
+			'Arverne',
+			'Auburndale',
+			'Bayside',
+			'Briarwood',
+			'Corona',
+			'Elmhurst',
+			'Far Rockaway',
+			'Flushing',
+			'Forest Hills',
+			'Jackson Heights',
+			'Jamaica',
+			'Kew Gardens',
+			'Long Island City',
+			'Queens Village',
+			'Rego Park',
+			'Ridgewood',
+			'Richmond Hill',
+			'Sunnyside',
+			'Woodside'
+		]
 	end
 
 	def bronx_borough
-		@bronx_borough ||= [
-												 'Belmont',
-												 'Bronxdale',
-												 'Bronxwood',
-												 'Concourse',
-												 'East Bronx',
-												 'Fordham',
-												 'Kingsbridge',
-												 'Mott Haven',
-												 'Morris Heights',
-												 'Riverdale',
-												 'Spuyten Duyvil',
-												 'Tremont',
-												 'University Heights',
-												 'Fordham Manor'
-												]
+		[
+		 'Belmont',
+		 'Bronxdale',
+		 'Bronxwood',
+		 'Concourse',
+		 'East Bronx',
+		 'Fordham',
+		 'Kingsbridge',
+		 'Mott Haven',
+		 'Morris Heights',
+		 'Riverdale',
+		 'Spuyten Duyvil',
+		 'Tremont',
+		 'University Heights',
+		 'Fordham Manor'
+		]
 	end
 
 	def parent_neighborhoods

@@ -24,7 +24,7 @@ module Buildings
 
 	    @sub_borough             	 = {}
 	    unless CITY_SEARCH_STRINGS.include?(@searched_by)
-        @sub_borough['Queens']   = queens_sub_borough
+        @sub_borough['Queens']   = queens_borough
         @sub_borough['Brooklyn'] = brooklyn_sub_borough
         @sub_borough['Bronx']    = bronx_sub_borough
       end

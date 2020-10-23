@@ -20,7 +20,7 @@ module BuildingsCountConcern
   end
 
   def queens_count
-    @queens_count ||= Building.city_count(pop_nb_buildings,'Queens', NYCBorough.queens_sub_borough)
+    @queens_count ||= Building.city_count(pop_nb_buildings,'Queens', NYCBorough.queens_borough)
   end
 
   def bronx_count
