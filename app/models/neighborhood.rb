@@ -11,8 +11,11 @@
 #
 
 class Neighborhood < ApplicationRecord
-
   include PgSearch::Model
+
+  validates :name, presence: true
+  validates_uniqueness_of :name, scope: [:boroughs], on: :create, message: 'Duplicate name.'
+  
   pg_search_scope :nb_search, against: [:name],
      :using => { :tsearch => { prefix: true } }
 

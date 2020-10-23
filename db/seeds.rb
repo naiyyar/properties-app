@@ -21,7 +21,7 @@ queens_nb = [	'Astoria',
 							'Elmhurst',
 							'Far Rockaway',
 							'Flushing',
-							'Forest Hills',
+							'Forest Hill',
 							'Jackson Heights',
 							'Jamaica',
 							'Kew Gardens',
@@ -37,17 +37,15 @@ queens_nb = [	'Astoria',
 nbs 			= Neighborhood.where(boroughs: 'QUEENS')
 buildings = Building.all
 queens_nb.each do |nb|
-	hood 		= nbs.where(name: nb.downcase)
+	hood 		= nbs.where(name: nb)
 	count 	= buildings.buildings_in_neighborhood(nb.downcase).count
-	puts "#{nb} buildings count: #{count}"
 	if hood.blank?
-		Neighborhood.create({ name: 					nb, 
+		Neighborhood.create!({ name: 					nb, 
 												boroughs: 			'QUEENS', 
 												buildings_count: count})
 	else
 		nb.update(buildings_count: count)
 	end
 end
-
 
 
