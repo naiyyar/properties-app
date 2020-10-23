@@ -227,19 +227,19 @@
 			background: transparent;
 			box-shadow: none;
 		}
-	}
 
-	.add--assets.admin{
-		padding: 10px 0px 20px 0px;
-	}
+		.add--assets.admin{
+			padding: 0px 0px 20px 0px;
+		}
 
-	.add--assets{
-		padding: 0px;
-		.text-right a.see-all{
-			padding: 8px 0px;
+		.add--assets{
+			padding: 0px;
+			.text-right a.see-all{
+				padding: 6px 0px;
+			}
 		}
 	}
-	
+
 	.buildingsshow {
 		#content{
 			overflow-y: scroll;
@@ -250,7 +250,7 @@
 				}
 			}
 			.section-container, .singleTop .summary{
-				padding: 10px 16px 20px;
+				padding: 0px 16px 20px;
 			}
 			h3{
 				font-size: 18px;
