@@ -31,7 +31,9 @@ module HomeConcern
       @buildings_count    = @hash.length rescue 0
     end
 
-    @agent = FeaturedAgent.get_random_agent(@search_string, searched_by).first
+    @lat, @lng = params[:latitude], params[:longitude] if params[:search_term] == 'custom'
+
+    @agent      = FeaturedAgent.get_random_agent(@search_string, searched_by).first
     @meta_desc  = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
                                                              count: @buildings_count, 
                                                              term:  @search_term)
