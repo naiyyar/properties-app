@@ -12,8 +12,41 @@
 # 	end
 # end
 
-Billing.all.each do |billing|
-	billing.update(billable_type: 'FeaturedBuilding', billable_id: billing.featured_building_id)
+queens_nb = [	'Astoria',
+							'Arverne',
+							'Auburndale',
+							'Bayside',
+							'Briarwood',
+							'Corona',
+							'Elmhurst',
+							'Far Rockaway',
+							'Flushing',
+							'Forest Hills',
+							'Jackson Heights',
+							'Jamaica',
+							'Kew Gardens',
+							'Long Island City',
+							'Queens Village',
+							'Rego Park',
+							'Ridgewood',
+							'Richmond Hill',
+							'Sunnyside',
+							'Woodside'
+						]
+
+nbs 			= Neighborhood.where(boroughs: 'QUEENS')
+buildings = Building.all
+queens_nb.each do |nb|
+	hood 		= nbs.where(name: nb.downcase)
+	count 	= buildings.buildings_in_neighborhood(nb).count
+	puts "#{nb} buildings count: #{count}"
+	if hood.blank?
+		Neighborhood.create({ name: 					nb, 
+												boroughs: 			'QUEENS', 
+												buildings_count: count})
+	else
+		nb.update(buildings_count: count)
+	end
 end
 
 
