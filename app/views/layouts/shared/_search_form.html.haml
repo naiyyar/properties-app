@@ -2,7 +2,7 @@
   %span.fa.fa-times-circle.fa-2x.clearSearchText.visible-xs.visible-sm
   = render partial: 'home/search_form'
 - unless @pop_neighborhoods.blank? && browser.device.mobile?
-  .pull-left.neighborhoods-dropdown.hidden-xs{style: 'margin-top: 8px;margin-left: 8px;'}
+  .pull-left.neighborhoods-dropdown.hidden-xs{style: 'margin-top: 3px;margin-left: 8px;'}
     .btn-group.btn-dp-toggle
       %button#lr2.btn.btn-o.btn-primary.dropdown-toggle.btn-round{'data-toggle' => 'dropdown', style: 'min-width: 121px;'}
         %span.dropdown-label= params[:searched_by] == 'neighborhoods' ? @searched_neighborhoods : 'Neighborhoods'

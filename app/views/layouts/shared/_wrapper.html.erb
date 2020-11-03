@@ -1,8 +1,15 @@
-<%= render partial: 'layouts/shared/header' %>
-<%= render partial: 'layouts/shared/filters' %>
+<%= render partial: 'layouts/home/header' %>
+<% unless home_page? %>
+	<% unless screen_class == 'screen-sm' %>
+  	<div id="search-row" class="search <%=search_bar(:hidden) %>" style="margin-top: 60px;">
+  		<%= render partial: 'layouts/shared/search_form' %>
+  	</div>
+  <%end%>
+<%end%>
+<%= render partial: 'layouts/shared/filters' if action_name == 'search'%>
 <div class="closeLeftSide"></div>
-<div id="wrapper" class="<%=contribute_wrapper(params)%> <%=browser.device.mobile? ? 'screen-sm' : 'screen-lg'%> <%= @search_bar_hidden == :hidden ? 'mt0' : ''%>" onscroll="Transparentcity.showHideCTALinks(this)">
-  <%= render partial: 'layouts/shared/filter_buttons' %>
+<div id="wrapper" class="<%=contribute_wrapper(params)%> <%=screen_class%> <%= @search_bar_hidden == :hidden ? 'mt0' : ''%>" onscroll="Transparentcity.showHideCTALinks(this)">
+  <%= render partial: 'layouts/shared/filter_buttons' if action_name == 'search' && screen_class != 'screen-lg' %>
   <div class="content <%= controller_name + action_name %>">
     <%= render 'layouts/shared/pop_neighborhoods_list' %>
     <%= yield %>

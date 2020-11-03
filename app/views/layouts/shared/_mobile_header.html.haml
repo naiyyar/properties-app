@@ -1,0 +1,36 @@
+#header-mob{class: "sm-#{action_name}"}
+  .row{style: 'margin-right: 0px;'}
+    .col-xs-1
+      %a.navHandler{href: 'javascript:void(0)'}
+        %span.fa.fa-bars
+    
+    %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
+      .split-view-seach{class: "#{search_bar(:hidden)}"}
+        %span.fa.fa-times.clearSearchText{style: "right: #{clear_link_from_right}px;"}
+        = render partial: 'home/search_form'
+   
+    %div{class: "col-xs-#{header_right_col}"}
+      .row{style: 'margin-right: -1px;'}
+        .hood.col-xs-6
+          .btn-hoods{class: current_view}
+            %button.btn.btn-primary.dropdown-toggle-neighborhoods.btn-round{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
+              %span.dropdown-label Hood
+              %span.caret
+
+        - if show_filters?
+          .col-xs-6.h-filter
+            .btn-filter{style: 'margin-left: 3px;'}
+              %button.btn.btn-primary.btn-filter.handleFilter.btn-round
+                %span.dropdown-label
+                  %span.fa.fa-filter
+                  Filter
+                  %span.filter-counts
+
+  %div{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;'}
+    - if action_name == 'search' || @show_map_btn
+      %a.mapHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: none;' : ''}
+        %span.fa.fa-map-o
+        Map
+      %a.listHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: block;' : ''}
+        %span.fa.fa-list
+        List

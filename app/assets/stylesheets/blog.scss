@@ -519,6 +519,12 @@ blockquote {
     }
   }
 
+  .hero-container-blog-show, 
+  .hero-container-blog-show .featured.carousel {
+    min-height: 148px !important;
+    max-height: 230px !important;
+  }
+
   article {min-height: 320px;}
   .blog-nav {
       top: 0px;
@@ -543,25 +549,25 @@ blockquote {
       margin-right: 0;
   }
   .blog-nav ul li {
-      padding: 10px 20px;
-      float: none;
-      text-align: right;
-      font-size: 20px;
+    padding: 10px 20px;
+    float: none;
+    text-align: right;
+    font-size: 20px;
   }
   .blog-nav ul li span.fa-home{
-      font-size: 35px
+    font-size: 35px
   }
   .p-n-articles a {
-      font-size: 14px;
+    font-size: 14px;
   }
   .pna-title {
-      font-size: 9px;
-      line-height: 9px;
-      letter-spacing: 1px;
+    font-size: 9px;
+    line-height: 9px;
+    letter-spacing: 1px;
   }
   .post-author {
-      float: none;
-      margin-bottom: 20px;
+    float: none;
+    margin-bottom: 20px;
   }
   .post-share {
       float: none;
@@ -588,5 +594,21 @@ blockquote {
   .fpna-header {
       font-size: 14px;
       line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .blog-content h2.h-r {
+    text-align: left;
+  }
+  .blog-r-nav {
+    text-align: left;
+  }
+  .blog-tags .label {
+    margin-left: 0;
+    margin-right: 5px;
+  }
+  .blog-tags {
+    text-align: left;
   }
 }

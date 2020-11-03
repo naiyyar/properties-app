@@ -707,8 +707,7 @@ a.link_underlined:hover, .underline{
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px;
-    z-index: 1040;
+    height: 59px;
     z-index: 1000;
     position: relative;
     border-bottom: 1px solid #ddd;
@@ -811,17 +810,11 @@ a.navHandler {
 #wrapper .content.management_companiesshow{
     padding: 0px 0px;
 }
-#wrapper .content{
-    padding: 8px;
-}
 .search {
-    position: absolute;
-    top: 59px;
     width: 100%;
-    height: 52px;
-    left: 0px;
+    padding: 6px 4px;
+    height: 56px;
     border-bottom: 1px solid #ddd;
-    padding: 0px 4px;
 }
 .searchContainer{
     position: relative;
@@ -849,7 +842,7 @@ a.navHandler {
     background-color: #fff;
     color: #000;
     font-size: 13px;
-    margin: 6px 0 0 0px;
+    margin: 0px;
     -webkit-appearance: none;
     padding: 11px 9px 11px 26px;
     border: 1px solid #ddd;
@@ -882,7 +875,7 @@ a.navHandler {
 
 .icon-search-shared{
     position: absolute;
-    top: 14px;
+    top: 8px;
     left: 8px;
     font-size: 18px;
     z-index: 999;
@@ -1254,7 +1247,7 @@ a.userHandler .counter {
 #wrapper {
     left: 70px;
     top: 60px;
-    margin: 51px 0 0 0px;
+    margin: 0px;
     overflow-y: scroll;
     /*overflow-x hidden : Getting grey/blank map issue on mobile devices ios13 when moving or zooming*/
 }
@@ -1521,12 +1514,6 @@ h1.pageTitle {
     font-size: 20px;
     color: #ea3d36;
 }
-.contactForm .cfItem {
-    margin-bottom: 10px;
-}
-.contactForm .cfItem:last-child {
-  margin-bottom: 0;
-}
 .price-ranges table td:first-child{
   width: 33%;
 }
@@ -1556,20 +1543,12 @@ h1.pageTitle {
 .amItem {
     font-size: 13px;
     margin-bottom: 10px;
-    white-space: nowrap;
 }
-.amItem span {
-    color: #0eaaa6;
-}
-.amItem.inactive, .amItem.inactive span {
-    color: #b4b4b4;
-}
+
 .amItem span {
     width: 20px;
     text-align: center;
-}
-.shareItem {
-  margin-bottom: 10px;
+    color: #0eaaa6;
 }
 
 .buttonsWrapper > .btn, .buttonsWrapper > .btn-group, .buttonsWrapper > .btn-group-vertical {
@@ -2048,20 +2027,6 @@ select.custom-arrow{
         font-size: 34px;
         line-height: 40px;
     }
-    .blog-content h2.h-r, .home-content h2.h-r {
-        text-align: left;
-    }
-    .blog-r-nav {
-        text-align: left;
-    }
-    .blog-tags .label {
-        margin-left: 0;
-        margin-right: 5px;
-    }
-    .blog-tags {
-        text-align: left;
-    }
-
 }
 
 .home .icon-magnifier {
@@ -2112,7 +2077,6 @@ select.custom-arrow{
     }
     h1.pageTitle{
       font-size: 23px;
-      white-space: nowrap;
     }
 
     #header-mob .col-xs-6.hood button, #header-mob .col-xs-6.h-filter button{
@@ -2212,12 +2176,6 @@ select.custom-arrow{
     .home-about-nyc-apt h2{
         font-size: 17px;
     }
-    .home-nav ul.homeNavUl li a {
-        color: #fff;
-    }
-    .no-touch .home-nav ul.homeNavUl li a:hover {
-        color: #fff;
-    }
     
     a.card, div.card {
         margin-bottom: 15px;
@@ -2248,11 +2206,6 @@ select.custom-arrow{
         top: 0px;
         padding-top: 20px;
     }
-    .hero-container-blog-show, .hero-container-blog-show .featured.carousel {
-        min-height: 148px !important;
-        max-height: 230px !important;
-    }
-    
     textarea.form-control{
         height: 176px !important;;
     }
@@ -2395,10 +2348,7 @@ select.custom-arrow{
     .logo a, .logo.expanded a{
         cursor: pointer !important;
     }
-    /*
-    .logo a > img, .logo.expanded a > img{
-        width: 51%;
-    }*/
+    
     li.logo{
         z-index: 999;
     }
@@ -2415,10 +2365,6 @@ select.custom-arrow{
         width: 70px;
         height: 50px;
         width: 100%;
-    }
-    .blog-view .logo a{
-        margin: 0 auto;
-        width: 50% !important;
     }
     .logo a span.marker, .logo.expanded a span.marker {
         left: 0;

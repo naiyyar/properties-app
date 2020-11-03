@@ -8,12 +8,13 @@
   <body class="notransition no-hidden" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' %>
-    <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
     
     <%= render 'layouts/shared/wrapper' %>
 
     <div id="remote-container"></div>
     <div id="auth-form"></div>
+
+    <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
 
     <%= javascript_include_tag 'home/main'%>
     <%= javascript_include_tag 'search/main'%>

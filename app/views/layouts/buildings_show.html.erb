@@ -7,24 +7,18 @@
     <%= layout_stylesheet_link 'building/main' %>
   </head>
   
-  <body class="no-hidden touch-scroll" >
+  <body class="notransition no-hidden touch-scroll" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' unless screen_class == 'screen-lg' %>
-    <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
-    <% unless hide_search_bar? %>
-      <%= render 'layouts/shared/wrapper' %>
-    <%else%>
-      <%= render partial: 'layouts/home/header' if hide_search_bar? %>
-      <div class="content-wrapper <%= controller_name + action_name %>">
-        <%= yield %>
-      </div>
-      <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
-    <%end%>
+    
+    <%= render 'layouts/shared/wrapper' %>
 
     <%= render 'layouts/shared/signin' %>
     
     <div id="remote-container"></div>
     <div id="auth-form"></div>
+
+    <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
 
     <%= javascript_include_tag 'home/main'%>
     <%= render 'buildings/favourite_script' %>

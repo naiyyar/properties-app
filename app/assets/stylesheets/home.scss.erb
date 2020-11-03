@@ -1,11 +1,3 @@
-/* ============== HOME HEADER NAV STYLING ============= */
-
-.no-touch {
-	.home-nav ul.homeNavUl li a:hover {
-    color: #000;
-  }
-}
-
 .figure .shimmer{
   width: 100%;
   height: 215px;
@@ -34,25 +26,18 @@
   margin-top: 58px;
 }
 
+/* HOME HEADER NAV */
+
 .home-nav{
 	float: right;
-  -webkit-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
-	
 	ul.homeNavUl{
 		position: relative;
-		margin: 0px 0px 0px 19px;
+		margin: 0px 0px;
     padding: 20px 0px;
     list-style-type: none;
-    float: right;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-
 		li.parent{
 			float: left;
-	    margin-left: 20px;
+	    margin: 0px 10px;
 	    padding-top: 0px;
 	    color: #777;
 			&:not(.no-hover-underline):hover{
@@ -79,6 +64,15 @@
 	}
 }
 
+.home-header.home-page{
+	box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
+}
+
+.home-header.other-page {
+	box-shadow: none;
+	border-bottom: 1px solid #ddd;
+}
+
 .home-header {
   position: fixed;
   width: 100%;
@@ -88,25 +82,31 @@
   left: 0;
   z-index: 1000;
   background-color: #fff;
-  box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
   height: 59px;
   .home-logo {
-	    float: left;
-	    margin-top: 2px;
-	    width: 146px;
-	    span {
-	    	font-size: 34px;
-		}
+	   float: left;
+	   margin-top: 0px;
+	   width: 146px;
+	   height: 100%;
+	   margin-right: 30px;
 	}
 }
+
 .home-header.map {
   background: rgba(0, 0, 0, 0.50);
 }
 
-/* ========== END HOME HEADER NAV STYLING =========*/
+.no-touch {
+	.home-nav ul.homeNavUl li a:hover {
+    color: #000;
+  }
+}
 
-
-/* ========== START POPULAR NEIGHBORHOODS =========*/
+/* 
+==========
+========== POPULAR NEIGHBORHOODS =========
+==========
+*/
 
 .pop-list{
 	b{
@@ -160,7 +160,7 @@
 }
 
 #apt-search-form.other{
-  margin: 1 5px !important;
+  margin: 1px 5px !important;
 }
 
 #home-content-wrapper{

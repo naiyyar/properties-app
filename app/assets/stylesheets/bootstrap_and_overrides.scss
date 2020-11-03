@@ -9,9 +9,6 @@ a {
   color: #428aca;
   text-decoration: none;
   outline: 0 !important;
-  -webkit-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
 }
 
 html{
@@ -21,7 +18,7 @@ html{
 }
 
 body {
-  margin: 0;
+  margin: 0px !important;
   height: 100%;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
