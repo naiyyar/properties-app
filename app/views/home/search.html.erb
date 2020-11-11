@@ -4,4 +4,16 @@
   <%= render partial: 'layouts/shared/pop_neighborhoods_list' %>
 <%end%>
 
+<input type="text" name="zoom" class="hidden zoom" value="<%=@zoom || 13 %>" />
+<input type="text" name="show_redo" class="hidden show_redo" value="0" />
+<%= content_tag 'div', '', id: 'json-hash', data: { buildingshash: @hash.to_json }%>
+<%= content_tag 'div', '', id: 'lat', data: { lat: @lat.to_json }%>
+<%= content_tag 'div', '', id: 'lng', data: { lng: @lng.to_json }%>
+<%= content_tag 'div', '', id: 'boundary_coords', data: { coords: @boundary_coords.to_json }%>
+
+<%= hidden_field_tag :searched_by, params[:searched_by] %>
+<%= hidden_field_tag :search_term, params[:search_term] %>
+<%= hidden_field_tag :search_string, @search_string %>
+<%= hidden_field_tag :cu, current_user&.id %>
+
 <%= render partial: 'search_wrapper' %>

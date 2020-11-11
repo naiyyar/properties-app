@@ -48,3 +48,13 @@ $(document).click(function(e) {
 $('.handleSort').click(function(e) {
     $('.sortMenu').slideToggle(200);
 });
+
+// setting up building and agent image on search view card
+$('.search-view-card').each(function(i, j){
+    var agentid = $(j).data('agentid');
+    if(agentid != undefined){
+      Card.loadFeaturedAgentImagesAndCTALinks(agentid);
+    }else{
+      Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+    }
+});

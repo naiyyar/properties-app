@@ -1,7 +1,7 @@
 - if screen_class == 'screen-sm' && !home_page?
   = render 'layouts/shared/mobile_header'
 - else
-  .home-header{class: home_page? ? 'home-page' : 'other-page'}
+  .home-header#app-header{class: home_page? ? 'home-page' : 'other-page'}
     .pull-left
       - unless params[:controller].include?('buttercms')
         %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
