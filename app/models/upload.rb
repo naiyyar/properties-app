@@ -25,7 +25,8 @@ class Upload < ApplicationRecord
   IMG_CONTENT_TYPES = ['image/jpeg', 'image/gif', 'image/png']
 	attr_accessor :rotation_degrees, :rotate
 	resourcify
-	belongs_to :imageable, polymorphic: true, counter_cache: true
+	belongs_to :imageable, polymorphic: true #, counter_cache: :has_image?
+  # counter_cache_with_conditions :building, :buildings_count, [:image_file_name], lambda{|image_file_name| image_file_name != nil }
   has_many :document_downloads
   belongs_to :user
   
@@ -53,6 +54,8 @@ class Upload < ApplicationRecord
                                                              'text/plain'] 
                                           }
   after_create :set_sort_index
+  after_save :update_counter_cache
+  after_destroy :update_counter_cache
 
   def self.uploads_json_hash(uploads)
     uploads.as_json(:methods => [:date_uploaded, :orig_image_url])
@@ -128,6 +131,10 @@ class Upload < ApplicationRecord
     !self.rotation.nil? and self.rotate
   end
 
+  def has_image?
+    self.image_file_name != nil
+  end
+
   private
   def set_defaults
     self.rotation ||= 0
@@ -139,6 +146,21 @@ class Upload < ApplicationRecord
                     .includes(:imageable).order('sort ASC NULLS LAST, created_at ASC')
     uploads.each_with_index do |upload, index|
       upload.update(sort: index+1) 
+    end
+  end
+
+  def update_counter_cache
+    begin
+      uploads = Upload.where('image_file_name is not null AND 
+                              imageable_id = ? AND 
+                              imageable_type = ?', imageable.id, imageable.class.name)
+      self.imageable.uploads_count = uploads.count
+      self.imageable.save
+    rescue Exception => e
+      puts "SQL error in #{ __method__ }"
+      ActiveRecord::Base.connection.execute 'ROLLBACK'
+
+      raise e
     end
   end
 

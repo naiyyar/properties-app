@@ -9,6 +9,8 @@
 //= require devise
 //= require detect_timezone
 //= require jquery.detect_timezone
+//= require set_timezone
+//= require upload
 //= require saved_buildings
 //= require bootbox.min
 //= require jquery.mask.min

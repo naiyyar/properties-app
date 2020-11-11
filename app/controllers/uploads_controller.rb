@@ -44,6 +44,7 @@ class UploadsController < ApplicationController
   end
 
 	def new
+    @upload_type = params[:upload_type]
     if params['buildings-search-txt'].present?
       address = params['buildings-search-txt'].split(',')[0]
       zipcode = params[:zip].present? ? params[:zip] : params['buildings-search-txt'].split('NY ').last 
@@ -109,15 +110,7 @@ class UploadsController < ApplicationController
   end
 
 	def upload_params
-		params.require(:upload).permit(:image, 
-                                    :imageable_id, 
-                                    :imageable_type, 
-                                    :user_id, 
-                                    :sort, 
-                                    :rotation, 
-                                    :document, 
-                                    :document_file_name, 
-                                    :file_uid)
+		params.require(:upload).permit!
 	end
 
 	def find_imageable
