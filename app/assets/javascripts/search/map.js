@@ -11,7 +11,7 @@ var ready = function(){
   var controlText;
   var centerControlDiv;
   var centerControl;
-  var json_array    = $('#json-hash').data('buildingshash')
+  var json_array    = $('#json-hash').data('buildingshash');
   var zoom          = parseInt($('.zoom').val());
   var zoomLevel     = zoom;
   var redo_search   = false;
@@ -28,26 +28,26 @@ var ready = function(){
   var per_page_buildings  = [];
   var boundary_coords = $('#boundary_coords').data('coords');
 
-  infobox = new InfoBubble({
-    minWidth: 236,
-    maxWidth: 250,
-    position: new google.maps.LatLng(lng, lat),
-    shadowStyle: 3,
-    padding: 0,
-    backgroundColor: 'rgb(255,255,255)',
-    borderRadius: 2,
-    arrowSize: 10,
-    borderWidth: 0,
-    borderColor: '#2c2c2c',
-    disableAutoPan: true,
-    hideCloseButton: false
-  });
-
-  if(searched_term != undefined || searched_term != null){
+  if(searched_term){
     searched_term = search_string;
     if(searched_term != null && searched_term == 'Little Italy'){
       var city = searched_term.includes('newyork') ? 'New York' : 'Bronx'
     }
+
+    infobox = new InfoBubble({
+      minWidth: 236,
+      maxWidth: 250,
+      position: new google.maps.LatLng(lng, lat),
+      shadowStyle: 3,
+      padding: 0,
+      backgroundColor: 'rgb(255,255,255)',
+      borderRadius: 2,
+      arrowSize: 10,
+      borderWidth: 0,
+      borderColor: '#2c2c2c',
+      disableAutoPan: true,
+      hideCloseButton: false
+    });
   }
 
   // Custom options for map
@@ -226,7 +226,9 @@ var ready = function(){
     }
   }
   //google.maps.event.addDomListener(window, 'load', initialize);
-  initialize();
+  if(searched_term){
+    initialize();
+  }
 }
 
 $(document).ready(ready)
