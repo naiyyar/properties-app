@@ -12,7 +12,7 @@
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group.price-range
                   = hidden_field_tag :range, range
-                  - 0.upto(5) do |bt_range|
+                  - 0.upto(4) do |bt_range|
                     .row
                       .col-lg-3=bedroom_type(bt_range)
                       .col-lg-4
@@ -20,6 +20,15 @@
                       .col-lg-1 -
                       .col-lg-4
                         = text_field_tag "price[#{bt_range}][max_price]", @range_prices.present? ? Price.max_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Max'
+                  / for coliving bed type 9
+                  - bt_range = Building::COLIVING_NUM
+                  .row
+                    .col-lg-3=bedroom_type(bt_range)
+                    .col-lg-4
+                      = text_field_tag "price[#{bt_range}][min_price]", @range_prices.present? ? Price.min_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Min'
+                    .col-lg-1 -
+                    .col-lg-4
+                      = text_field_tag "price[#{bt_range}][max_price]", @range_prices.present? ? Price.max_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Max'
                 
           %footer
             = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'

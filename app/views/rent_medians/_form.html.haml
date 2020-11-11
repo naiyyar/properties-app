@@ -12,11 +12,17 @@
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group.price-range
                   = hidden_field_tag :range, range
-                  - 0.upto(5) do |bt_range|
+                  - 0.upto(4) do |bt_range|
                     .row
                       .col-lg-3=bedroom_type(bt_range)
                       .col-lg-4
                         = text_field_tag "price[#{bt_range}][rent_price]", @rent_medians.present? ? RentMedian.rent_price(bt_range, @rent_medians) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Price'
+
+                  - bt_range = Building::COLIVING_NUM
+                  .row
+                    .col-lg-3=bedroom_type(bt_range)
+                    .col-lg-4
+                      = text_field_tag "price[#{bt_range}][rent_price]", @rent_medians.present? ? RentMedian.rent_price(bt_range, @rent_medians) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Price'
                 
           %footer
             = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'

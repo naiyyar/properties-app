@@ -24,16 +24,9 @@ $(document).ready(function(){
 		//when the remove button is clicked
 		removedfile: function(file){
 			// grap the id of the uploaded file we set earlier
-			var id = $(file.previewTemplate).find('.dz-remove').attr('id'); 
-			$(file.previewTemplate).find('.dz-remove').parent().remove();
 			// make a DELETE ajax request to delete the file
-			$.ajax({
-				type: 'DELETE',
-				url: '/uploads/' + id,
-				success: function(data){
-					console.log(data.message);
-				}
-			});
+			removedfile(file)
+			delete_upload(file)
 		}
 	});	
 
@@ -57,18 +50,26 @@ $(document).ready(function(){
 		//when the remove button is clicked
 		removedfile: function(file){
 			// grap the id of the uploaded file we set earlier
-			var id = $(file.previewTemplate).find('.dz-remove').attr('id'); 
-			$(file.previewTemplate).find('.dz-remove').parent().remove();
+			removedfile(file)
 			// make a DELETE ajax request to delete the file
-			$.ajax({
-				type: 'DELETE',
-				url: '/uploads/' + id,
-				success: function(data){
-					// console.log(data.message);
-				}
-			});
+			delete_upload(file)
 		}
 	});
+
+	function removedfile(file){
+		$(file.previewTemplate).find('.dz-remove').parent().remove();
+	}
+
+	function delete_upload(file){
+		var id = $(file.previewTemplate).find('.dz-remove').attr('id'); 
+		$.ajax({
+			type: 'DELETE',
+			url: '/uploads/' + id,
+			success: function(data){
+				// console.log(data.message);
+			}
+		});
+	}
 
 	//Saving document downloads counts
 	$('.document-name').click(function(){

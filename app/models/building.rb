@@ -65,13 +65,14 @@ class Building < ApplicationRecord
   # constants
   DIMENSIONS  = ['cleanliness','noise','safe','health','responsiveness','management']
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
+  COLIVING_NUM = 9
   BEDROOMS    = [
                  ['0',  'Studio'  ],
                  ['1',  '1 Bed'   ],
                  ['2',  '2 Bed'   ],
                  ['3',  '3 Bed'   ],
                  ['4',  '4+ Bed'  ],
-                 ['5',  'CoLiving']
+                 ['9',  'CoLiving']
                 ]
   CITIES      = ['New York', 'Brooklyn', 'Bronx', 'Queens']
   AMENITIES   = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
@@ -165,7 +166,7 @@ class Building < ApplicationRecord
   scope :two_bed,   -> { where(two_bed: 2)       }
   scope :three_bed, -> { where(three_bed: 3)     }
   scope :four_bed,  -> { where(four_plus_bed: 4) }
-  scope :co_living,  ->{ where(co_living: 5) }
+  scope :co_living,  ->{ where(co_living: Building::COLIVING_NUM) }
   
   # amenities scopes
   AMENITIES.each do |item|
@@ -336,30 +337,6 @@ class Building < ApplicationRecord
       end
     end
     amenities.join(',')
-  end
-
-  def rent_median_prices(rent_medians)
-    range = bedroom_ranges[0]
-    if range.include?(-1)
-      range = range.map{|x| x == -1 ? 5 : x }
-    end
-    return rent_medians.where(range: price, bed_type: range)
-  end
-
-  def broker_fee_savings(rent_medians, broker_percent)
-    saved_amounts = {}
-    rent_median_prices(rent_medians).as_json.each do |mp| 
-      saved_amounts[mp['bed_type']] = (((mp['price'].to_i * 12) * broker_percent)/100).to_i
-    end
-    saved_amounts
-  end
-
-  def min_and_max_price?
-    min_listing_price.present? && max_listing_price.present?
-  end
-
-  def min_save_amount rent_medians, broker_percent
-    broker_fee_savings(rent_medians, broker_percent).values.min
   end
 
   def nearby_neighborhood

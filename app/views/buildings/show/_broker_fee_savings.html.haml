@@ -1,12 +1,13 @@
 .clearfix
 	.price-ranges.show-section
 		%h3 Broker Fee Savings
-		- @building.bedroom_ranges[0].each_with_index do |bed_range, index|
+		- ranges = @building.bedroom_ranges[0].reject{|r| r > 4 && r != Building::COLIVING_NUM}
+		- ranges.each_with_index do |bed_range, index|
 			.row
 				.col-lg-6.col-xs-6.col-md-6
 					.font-14=bedroom_type(bed_range)
 				.col-lg-6.col-xs-6.col-md-6
-					- bed_range = 5 if bed_range == -1
+					- bed_range = Building::COLIVING_NUM if bed_range < 0
 					.font-14="#{number_to_currency(@saved_amounts[bed_range], precision: 0)}"
             
                 

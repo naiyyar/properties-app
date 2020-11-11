@@ -31,7 +31,7 @@ module BedRanges
       'Room'
     elsif bed == 0
       'Studio'
-    elsif bed == 5 && modal_type == 'building'
+    elsif bed == Building::COLIVING_NUM && modal_type == 'building'
       'CoLiving'
     else
       bed
@@ -44,10 +44,34 @@ module BedRanges
     bed_ranges, modal_type = bedroom_ranges(filters)
     bed_ranges.each do |bed_range|
       bdr               = bed_range
-      bdr               = 5 if bed_range == -1 && modal_type == 'listing'
+      bdr               = Building::COLIVING_NUM if bed_range == -1 && modal_type == 'listing'
       ranges[bed_range] = prices.find_by(bed_type: bdr)
     end
     return ranges
+  end
+
+  def rent_median_prices(rent_medians)
+    range = bedroom_ranges[0]
+    if range.include?(-1)
+      range = range.map{|x| x == -1 ? Building::COLIVING_NUM : x }
+    end
+    return rent_medians.where(range: price, bed_type: range)
+  end
+
+  def broker_fee_savings(rent_medians, broker_percent)
+    saved_amounts = {}
+    rent_median_prices(rent_medians).as_json.each do |mp| 
+      saved_amounts[mp['bed_type']] = (((mp['price'].to_i * 12) * broker_percent)/100).to_i
+    end
+    saved_amounts
+  end
+
+  def min_and_max_price?
+    min_listing_price.present? && max_listing_price.present?
+  end
+
+  def min_save_amount rent_medians, broker_percent
+    broker_fee_savings(rent_medians, broker_percent).values.min
   end
 
   def has_only_studio? filters
@@ -61,7 +85,7 @@ module BedRanges
   end
 
   def coliving_with_building_beds?
-    !listings_beds? && co_living == 5
+    !listings_beds? && co_living == Building::COLIVING_NUM
   end
 
   def listings_beds?

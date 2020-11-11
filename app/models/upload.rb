@@ -25,8 +25,7 @@ class Upload < ApplicationRecord
   IMG_CONTENT_TYPES = ['image/jpeg', 'image/gif', 'image/png']
 	attr_accessor :rotation_degrees, :rotate
 	resourcify
-	belongs_to :imageable, polymorphic: true #, counter_cache: :has_image?
-  # counter_cache_with_conditions :building, :buildings_count, [:image_file_name], lambda{|image_file_name| image_file_name != nil }
+	belongs_to :imageable, polymorphic: true
   has_many :document_downloads
   belongs_to :user
   

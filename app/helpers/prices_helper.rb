@@ -1,19 +1,14 @@
 module PricesHelper
 	def bedroom_type bed_type
-		case bed_type
-		when 0
+		if bed_type == 0
 			'Studio'
-		when 1
-			'1 Bed'
-		when 2
-			'2 Bed'
-		when 3
-			'3 Bed'
-		when 5
-			'CoLiving'
-		when 4
+		elsif bed_type == 1 || bed_type == 2 || bed_type == 3
+			"#{bed_type} Bed"
+		elsif bed_type >= 4 && bed_type != Building::COLIVING_NUM
 			'4+ Bed'
-		when -1
+		elsif bed_type == Building::COLIVING_NUM
+			'CoLiving'
+		elsif bed_type < 0
 			'Room'
 		end
 	end
