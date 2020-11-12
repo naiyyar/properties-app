@@ -881,7 +881,8 @@ a.navHandler {
     z-index: 999;
     color: #5b78e4;
 }
-.home .icon-search-shared{
+.home .icon-search-shared {
+    top: 13px;
     left: 12px !important;
     color: #7e7e7e;
 }
@@ -1250,6 +1251,10 @@ a.userHandler .counter {
     margin: 0px;
     overflow-y: scroll;
     /*overflow-x hidden : Getting grey/blank map issue on mobile devices ios13 when moving or zooming*/
+}
+
+#wrapper.screen-lg{
+  margin: 10px 0px;
 }
 
 #wrapper.mt0{

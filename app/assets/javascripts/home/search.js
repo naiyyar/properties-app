@@ -77,40 +77,46 @@ app.apartments.prototype = {
 
   _open: function(event, ui) {
     // Fix for double tap on ios devices
-    var ui_autcomplete = $('.ui-autocomplete')
-    ui_autcomplete.off('menufocus hover mouseover mouseenter');
+    var ui_autcomplete  = $('.ui-autocomplete');
+    var no_match_link;
+    var ul_height       = ui_autcomplete.outerHeight() + 42;
+    var elemToAppend    = '';
+    var item            = ui.item;
     
+    ui_autcomplete.off('menufocus hover mouseover mouseenter');
     $('.search-loader').hide();
-    var ul_height = ui_autcomplete.outerHeight() + 42;
-
     $('#apt-search-form').find('.no-match-link').remove();
-    var elemToAppend = '<div class="no-match-link" style="box-shadow: 0px 1px 4px rgba(0,0,0,0.6);">' +
-                       '<a href="/buildings/contribute?results=no-matches-found">'+
-                       '<b>No matches found - Add Your Building</b></a></div>';
+    
+    elemToAppend =  '<div class="no-match-link" style="box-shadow: 0px 1px 4px rgba(0,0,0,0.6);">' +
+                    '<a href="/buildings/contribute?results=no-matches-found">'+
+                    '<b>No matches found - Add Your Building</b></a></div>';
     $('#apt-search-form').append(elemToAppend);
-
-    if(window.innerWidth <= 414 && $('.split-view-seach').length > 0){
+    no_match_link = $('.no-match-link');
+    if(window.innerWidth <= 414 && $('.split-view-search').length > 0){
       // making full width when on mobile view
       ui_autcomplete.css('width', '100%');
       ui_autcomplete.css('left', '0px');
-      $('.no-match-link').css('top',ul_height+'px');
+      no_match_link.css('top', ul_height+'px');
     }else{
       // setting container width
       var search_input_width = this._input.outerWidth();
       ui_autcomplete.css('width', (search_input_width)+'px');
-      $('.no-match-link').css('top',(ul_height + 5)+'px');
+      no_match_link.css('top',(ul_height - 3)+'px');
+      if($('.home .no-match-link').length > 0){
+        no_match_link.css('top',(ul_height + 5)+'px');
+      }
     }
     $('.no-match-link').css('width', (ui_autcomplete.width()+2)+'px');
     $('#search_term').removeClass('border-bottom-lr-radius');
   },
 
   _select: function(e, ui) {
-    if(ui.item != undefined){
-      this._input.val(ui.item.search_term);
+    if(item != undefined){
+      this._input.val(item.search_term);
       $('.no-match-link').addClass('hidden');
       // Submitting search form
       if(e.keyCode == 13){
-        window.location = ui.item.url;
+        window.location = item.url;
       }
     }
     // hiding autocomplete search results
