@@ -1,9 +1,14 @@
-var fig_elem  = $('.figure');
+var fa_id = "<%=@featured_agent.id%>";
+var fig_elem  = $('#figure'+fa_id);
+console.log(fig_elem)
+$('#thumbnailPreview').modal('show');
+
 fig_elem.html("<%= j render partial: 'home/lightslider', \
 																locals: { images_count: @images_count, \
 																				  object: @featured_agent, \
 																				  first_image: @uploads.first, \
 																				  show_path: '#' } %>");
-$('#thumbnailPreview').modal('show');
 
-Card.initLightSlider(fig_elem.find('.gallery'), true);
+setTimeout(function(){
+	Card.initLightSlider(fig_elem.find('.gallery'), true, 1);	
+}, 300)

@@ -5,7 +5,8 @@ $(document).ready(function(){
 	// grap our upload form by its id
 	// #new_upload_photos = from +upload button 
 	// new_upload_ = from contribute page
-	var dz_elem = $('#new_upload_photos');
+	// id new_upload_ used for featured agent form
+	var dz_elem = $('#new_upload_photos, #new_upload_');
 	var param_name = "upload[image]";
 	if($('#new_upload_documents').length > 0){
 		dz_elem = $('#new_upload_documents');
