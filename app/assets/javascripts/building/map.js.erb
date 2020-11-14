@@ -1,0 +1,150 @@
+var map, map2;
+var featured_comp_building_id = parseInt($('#similar_property_id').val());
+var current_building_id       = parseInt($('#cu_building_id').val());
+current_user_id         = $('#cu').val();
+var zoom                = 16;
+var fullscreen_ctrl     = true;
+var redo_search         = false;
+var props               = $("#mapHash").data('map');
+var lat                 = $("#mapHash").data('lat');
+var lng                 = $("#mapHash").data('lng');
+var mob_map             = $('#mob-map');
+var desktop_map         = $('#mapView');
+var header_elem         = document.getElementById('header');
+
+MapObject = {
+  
+  initialize: function(){
+    if(mobile){
+      fullscreen_ctrl = false;
+    }
+    var options = {
+      zoom: zoom,
+      mapTypeControl: false,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.RIGHT_CENTER
+      },
+      gestureHandling: 'greedy',
+      fullscreenControl: fullscreen_ctrl
+    };
+
+    var static_options = {
+      zoom: zoom,
+      mapTypeControl: false,
+      zoomControl: false,
+      gestureHandling: 'none',
+      disableDoubleClickZoom: true,
+      fullscreenControl: false
+    }
+
+    infobox = new InfoBubble({
+        minWidth: 236,
+        maxWidth: 250,
+        position: new google.maps.LatLng(lng, lat),
+        shadowStyle: 3,
+        padding: 0,
+        backgroundColor: 'rgb(255,255,255)',
+        borderRadius: 2,
+        arrowSize: 10,
+        borderWidth: 0,
+        borderColor: '#2c2c2c',
+        disableAutoPan: true,
+        hideCloseButton: false,
+    });
+
+    var bounds = new google.maps.LatLngBounds();
+
+    var markerIconBlue = function(){
+      return "<%=asset_path('marker-blue.png')%>";
+    }
+    // function that adds the markers on map
+    var addMarkers = function(props, map) {
+      $.each(props, function(i,prop) {
+        var prop_id      = parseInt(prop.id);
+        var default_icon = '';
+        var latlng       = new google.maps.LatLng(prop.latitude, prop.longitude);
+        
+        if(prop_id != current_building_id){
+            var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
+            // default icon only when no price info available
+            default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),
+                            null,null,null, null);
+        }else{
+            default_icon = new google.maps.MarkerImage(markerIconBlue(),
+                            null,null,null, null);
+        }
+        var marker = new google.maps.Marker({
+          position: latlng,
+          map: map,
+          icon: default_icon,
+          draggable: false,
+        });
+
+        // default opening first fetured comp building marker
+        google.maps.event.addListener(marker, 'load', (function(marker, i) {
+          if(prop_id == parseInt(featured_comp_building_id)){
+            loadMarkerWindow(prop_id, map, marker);
+          }
+        })(marker, i));
+        
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              loadMarkerWindow(prop.id, map, marker);
+            }
+        })(marker, i));
+        
+        if(header_elem){
+          google.maps.event.addDomListener(header_elem,
+          'click', function() {
+            infobox.close();
+          });
+        }
+
+        google.maps.event.addDomListener(document.getElementById('content'),
+        'click', function() {
+          infobox.close();
+        });
+
+        if(map){
+          google.maps.event.addListener(map, 'click', function() {
+            infobox.close();
+          });         
+        }
+      });
+    };
+
+    var setShowMap = function(new_map){
+      new_map.setCenter(new google.maps.LatLng(lat, lng));
+      new_map.setZoom(zoom);
+      addMarkers(props, new_map);
+      var transitLayer = new google.maps.TransitLayer();
+      transitLayer.setMap(new_map);
+      showWindowResizeHandler(new_map);
+    }
+    
+    setTimeout(function() {
+      $('body').removeClass('notransition');
+      if(desktop_map.length == 1){
+        map = new google.maps.Map(document.getElementById('mapView'), options);
+        if(map){
+          setShowMap(map);
+        }
+      }
+      if(mob_map.length == 1){
+        map2 = new google.maps.Map(document.getElementById('mob-map'), static_options);
+        if(map2){
+          setShowMap(map2);
+        }
+      }
+    }, 300);
+  }
+}
+
+var ready = function(){
+  if($("#mapHash").length > 0){
+    MapObject.initialize();
+  }
+}
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

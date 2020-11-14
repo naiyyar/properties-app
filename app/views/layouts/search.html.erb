@@ -21,8 +21,8 @@
     <%= render 'buildings/favourite_script' %>
     <%#= render 'home/map_script' %>
     <%= javascript_include_tag 'zapp'%>
-
-    <script defer src="//maps.google.com/maps/api/js?v=3.42&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
+    
+    <script defer src='<%=gmap_url_helper%>'></script>
 
     <%= javascript_include_tag 'search/map', defer: true %>
 

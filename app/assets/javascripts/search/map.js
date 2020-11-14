@@ -1,6 +1,5 @@
 var ready = function(){
   var position;
-  var map;
   var currentLocation;
   var props;
   var bounds;
@@ -14,7 +13,7 @@ var ready = function(){
   var json_array    = $('#json-hash').data('buildingshash');
   var zoom          = parseInt($('.zoom').val());
   var zoomLevel     = zoom;
-  var redo_search   = false;
+  redo_search       = false;
   var dragged       = false;
   var draggedOnce   = false;
   var lat           = $('#lat').data('lat');
@@ -51,8 +50,8 @@ var ready = function(){
   }
 
   // Custom options for map
-  function initialize(sidebar = true) {
-    var position  = google.maps.ControlPosition.TOP_CENTER;
+  window.initialize = function(sidebar = true) {
+    position  = google.maps.ControlPosition.TOP_CENTER;
     var zoom_ctrl = true;
     if(mobile){
       position  = google.maps.ControlPosition.TOP_LEFT;

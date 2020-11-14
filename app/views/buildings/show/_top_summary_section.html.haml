@@ -1,6 +1,7 @@
 .singleTop{style: 'position: relative;height: 460px'}
 	.row.sh-slider
 		#sh-slider{style: 'height: 460px;background: #ececec;'}
+			=render 'buildings/show/light_slider', building: @building
  		
 		- if @building.price.present? || @building.bedroom_types?
 			- if @min_save_amount.present?

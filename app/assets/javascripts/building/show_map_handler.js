@@ -10,7 +10,7 @@ var listMapView = function(){
       $('#content').toggleClass('min');
       $('#mapView').toggleClass('max');
   }
-  initialize();
+  MapObject.initialize();
 }
 
 $('.listHandler').click(function(){

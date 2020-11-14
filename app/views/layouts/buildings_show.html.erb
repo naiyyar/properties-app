@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render partial: 'layouts/layout_head', locals: { js_path: 'home/jquery.init' } %>
-    <%= javascript_include_tag 'building/main', async: true, defer: true %>
-    <%= javascript_include_tag 'home', async: true, defer: true%>
     <%= layout_stylesheet_link 'building/main' %>
+    <%= render partial: 'layouts/layout_head', locals: { js_path: 'home/jquery.init' } %>
+    <%= javascript_include_tag 'building/main', defer: true %>
+    <%= javascript_include_tag 'home', defer: true%>
+    <%= javascript_include_tag 'home/main' %>
   </head>
   
-  <body class="notransition no-hidden touch-scroll" >
+  <body class="notransition no-hidden touch-scroll">
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' unless screen_class == 'screen-lg' %>
     
@@ -20,9 +21,12 @@
 
     <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
 
-    <%= javascript_include_tag 'home/main'%>
     <%= render 'buildings/favourite_script' %>
-    <%= render 'buildings/show/map_script' %>
+    <%#= render 'buildings/show/map_script' %>
+
+    <script defer src='<%=gmap_url_helper%>'></script>
+    <%= javascript_include_tag 'infobubble',   defer: true %>
+    <%= javascript_include_tag 'building/map', defer: true %>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })

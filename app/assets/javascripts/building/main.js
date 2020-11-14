@@ -1,6 +1,7 @@
 //= require bootstrap/button
 //= require underscore
 //= require jquery.fancybox
+//= require lightslider
 //= require gmap
 //= require ./show_map_handler
 
@@ -23,3 +24,41 @@ $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
     $(this).is(':hidden') ? elem.removeClass(toggleable_class) : elem.addClass(toggleable_class);
   });
 });
+
+// lightSlider
+var sl_container = $('.sh-slider-container');
+if(sl_container.length > 0) {
+  var thumb_images_length = $('.lSPager.lSGallery').children().length;
+  var add_class           = thumb_images_length == 0 ? 'no-thumb' : 'with-thumb';
+  var show_gallery        = sl_container.find('.gallery');
+  if(show_gallery){
+	  show_gallery.lightSlider({
+	    gallery: true,
+	    item: 1,
+	    slideMargin: 0,
+	    loop: true,
+	    thumbItem: 6,
+	    galleryMargin: 1,
+	    addClass: add_class,
+	    onBeforeSlide: function(el, scene){
+	      parent_elem     = el.parent().parent();
+	      show_count_elem = parent_elem.prev();
+	      current_elem    = show_count_elem.find('.current');
+	      current_elem.text(el.getCurrentSlideCount);
+	    }
+	  });
+    var elem = $('.sh-slider-container .lightSlider .lslide a');
+    if(elem && elem.length > 0){
+  	 Transparentcity.initFancybox('.sh-slider-container .lightSlider .lslide a');
+    }
+  	$('#sh-slider').css('background', '#fff');
+  }
+}
+
+// For featured Comps buildings
+//
+if($('.search-view-card').length > 0){
+  $('.search-view-card').each(function(i, j){
+    Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+  });
+}

@@ -1,13 +1,13 @@
 <%= javascript_include_tag 'infobubble'%>
+<% if false %>
 <script type="text/javascript" async defer>
   var map, map2, current_building_id, mob_map, infobox, desktop_map, header_elem, lat, lng;
   var current_user_id = $('#cu').val();
   var zoom = 16;
-  var featured_comp_building_id = "<%=@similar_properties.first.id rescue nil %>";
+  var featured_comp_building_id = $('#similar_property_id').val();
   var fullscreen_ctrl = true;
   var redo_search     = false;
   if($("#mapHash").length > 0){
-    // Custom options for map
     function initialize() {
       mob_map = $('#mob-map');
       desktop_map = $('#mapView');
@@ -142,15 +142,42 @@
 
   } /*end initialize */
 
-  $('.search-view-card').each(function(i, j){
-    Card.loadDisplayImageAndCTALinks($(j).data('bid'));
-  });
+  // if($('.search-view-card').length > 0){
+  //   $('.search-view-card').each(function(i, j){
+  //     Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+  //   });
+  // }
 
-  Transparentcity.lazyLoadShowPageContent("<%=@building.id%>");
+  // function markerIconBlue(){
+  //   return "<%#=asset_path('marker-blue.png')%>";
+  // }
 
-  function markerIconBlue(){
-    return "<%=asset_path('marker-blue.png')%>";
-  }
+  // var sl_container = $('.sh-slider-container');
+  // if(sl_container.length > 0) {
+  //   var thumb_images_length = $('.lSPager.lSGallery').children().length;
+  //   var add_class           = thumb_images_length == 0 ? 'no-thumb' : 'with-thumb';
+  //   var show_gallery        = sl_container.find('.gallery');
+
+  //   show_gallery.lightSlider({
+  //     gallery: true,
+  //     item: 1,
+  //     slideMargin: 0,
+  //     loop: true,
+  //     thumbItem: 6,
+  //     galleryMargin: 1,
+  //     addClass: add_class,
+  //     onBeforeSlide: function(el, scene){
+  //       parent_elem     = el.parent().parent();
+  //       show_count_elem = parent_elem.prev();
+  //       current_elem    = show_count_elem.find('.current');
+  //       current_elem.text(el.getCurrentSlideCount);
+  //     }
+  //   });
+
+  //   //Transparentcity.initFancybox('.sh-slider-container .lightSlider .lslide a');
+
+  //   $('#sh-slider').css('background', '#fff');
+  //}
 </script>
 
 <script async defer src="https://maps.google.com/maps/api/js?v=3.36&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places&callback=initialize"></script>

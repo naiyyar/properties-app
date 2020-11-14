@@ -1,6 +1,6 @@
 <div class="apt-search <%= @home_view ? 'home' : 'other' %>" id="apt-search-form">
 	<% placeholder = 'Neighborhood, ZipCode, Address, Building, Management Company'%>
-	<% if action_name == 'index' and controller_name == 'home' %>
+	<% if action_name == 'index' && controller_name == 'home' %>
 		<div class="icon-search-shared"><span class="fa fa-search"></span></div>
 		<%= text_field_tag 'search_term', searched_term, class: 'form-control border-top-lr-radius border-bottom-lr-radius', placeholder: placeholder, style: 'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 5px rgba(0,0,0,0.6);' %>
 	<%else%>

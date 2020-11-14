@@ -2,8 +2,9 @@ module BuildingsConcern
   extend ActiveSupport::Concern
 
   included do
-    before_action :save_as_favourite,   only: :show
-    before_action :get_building,        only: :create
+    before_action :save_as_favourite,              only: :show
+    before_action :get_building,                   only: :create
+    before_action :get_uploads, :set_image_counts, only: :show
   end
 
   def show
@@ -30,6 +31,12 @@ module BuildingsConcern
     
     @neighbohood            = @building.neighbohoods
     @nearby_nbs             = NYCBorough.nearby_neighborhoods(@building.nearby_neighborhood)
+
+    @reviews       = @building.building_reviews
+    @price_ranges  = @building.price_ranges
+    broker_percent = BrokerFeePercent.first.percent_amount
+    @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
+    @distance_results = DistanceMatrix.new(@building).get_data
     
     @meta_desc  = "#{@building.building_name_or_address} #{@building.building_street_address} is a #{@building.try(:building_type)} "+ 
                   "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.try(:name) }. "+ 
@@ -117,6 +124,15 @@ module BuildingsConcern
                 else
                   Building.find_by_building_street_address(search_term)
                 end
+  end
+
+  def get_uploads
+    assets                 = @building.get_uploads
+    @uploads, @documents   = assets[:image_uploads], assets[:doc_uploads]
+  end
+
+  def set_image_counts
+    @uploaded_images_count = @building.uploads_count.to_i
   end
 
 end

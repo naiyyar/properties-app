@@ -81,8 +81,7 @@ app.apartments.prototype = {
     var no_match_link;
     var ul_height       = ui_autcomplete.outerHeight() + 42;
     var elemToAppend    = '';
-    var item            = ui.item;
-    
+
     ui_autcomplete.off('menufocus hover mouseover mouseenter');
     $('.search-loader').hide();
     $('#apt-search-form').find('.no-match-link').remove();
@@ -92,7 +91,8 @@ app.apartments.prototype = {
                     '<b>No matches found - Add Your Building</b></a></div>';
     $('#apt-search-form').append(elemToAppend);
     no_match_link = $('.no-match-link');
-    if(window.innerWidth <= 414 && $('.split-view-search').length > 0){
+    //if(mobile && $('.split-view-search').length > 0){
+    if(mobile){
       // making full width when on mobile view
       ui_autcomplete.css('width', '100%');
       ui_autcomplete.css('left', '0px');
@@ -111,6 +111,7 @@ app.apartments.prototype = {
   },
 
   _select: function(e, ui) {
+    var item = ui.item;
     if(item != undefined){
       this._input.val(item.search_term);
       $('.no-match-link').addClass('hidden');

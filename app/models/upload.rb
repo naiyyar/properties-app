@@ -100,14 +100,12 @@ class Upload < ApplicationRecord
   end
 
 	def self.marker_image object
-    no_image = 'no-photo.png'
-    if object.uploads.present?
-      if object.image_uploads.present?
-        image_obj = object.image_uploads.first
-        image_obj.image_file_name.present? ? image_obj.uploaded_img_url : no_image if image_obj.present?
-      end
-    else
-      no_image
+    no_image = 'no-photo.jpg'
+    uploads  = object.image_uploads
+    return no_image if uploads.blank?
+    image_obj = uploads.first
+    if image_obj.present?
+      image_obj.image_file_name.present? ? image_obj.uploaded_img_url : no_image
     end
 	end
 

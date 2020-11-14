@@ -36,16 +36,17 @@
 	.clearfix
 		%br
 		#price_ranges
-			/ lazy load
+			= render 'buildings/show/price_ranges' 
 		#broker_fee_savings
-			/ lazy load
+			= render 'buildings/show/broker_fee_savings'
 
 	#building-documents
-		/ lazy load
+		= render 'uploads/documents'
 
 	.clearfix
 	
 	#subways.show-section
+		=render 'buildings/show/subways'
 
 	.clearfix
 	- if @similar_properties_count > 0
@@ -58,7 +59,7 @@
 		.aggregate-ratings.show-section
 			%h3 Aggregate Ratings
 			%ul.star-sm#ratings
-				/ lazy loading
+				= render 'buildings/show/rating_list'
 				
 	.clearfix
 	.comments.font-14.show-section
@@ -67,7 +68,7 @@
 			.text-right{style: 'text-align: right; padding-bottom: 15px;'}
 				= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning btn-round'
 			#building-reviews
-				/ lazy loading
+				= render partial: 'reviews/review', :collection => @reviews, :as => :review
 		- else
 			%p.no-review.font-14 There are no reviews for this building. Be the first to add your review for this building.
 			= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning no-review btn-round'

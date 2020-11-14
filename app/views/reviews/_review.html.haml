@@ -6,13 +6,13 @@
   .commentAvatar
     - unless review.anonymous
       - if review.user.avatar.present?
-        = image_tag review.user.avatar, class: 'avatar'
+        = image_tag review.user.avatar, class: 'avatar', width: '40', height: '40'
       - elsif review.user.image_url.present?
-        = image_tag review.user.image_url, class: 'avatar'
+        = image_tag review.user.image_url, class: 'avatar', width: '40', height: '40'
       - else
         .firstLetter= review.user.user_name.split('')[0].capitalize
     - else
-      = image_tag 'anonymous1.png', class: 'avatar'
+      = image_tag 'anonymous1.png', class: 'avatar', width: '40', height: '40'
     .commentArrow
       %span.fa.fa-caret-left
   
