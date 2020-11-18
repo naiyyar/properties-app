@@ -7,8 +7,8 @@
 <input type="text" name="zoom" class="hidden zoom" value="<%=@zoom || 13 %>" />
 <input type="text" name="show_redo" class="hidden show_redo" value="0" />
 <%= content_tag 'div', '', id: 'json-hash', data: { buildingshash: @hash.to_json }%>
-<%= content_tag 'div', '', id: 'lat', data: { lat: @lat.to_json }%>
-<%= content_tag 'div', '', id: 'lng', data: { lng: @lng.to_json }%>
+<%= content_tag 'div', '', id: 'lat', data: { lat: @lat }%>
+<%= content_tag 'div', '', id: 'lng', data: { lng: @lng }%>
 <%= content_tag 'div', '', id: 'boundary_coords', data: { coords: @boundary_coords.to_json }%>
 
 <%= hidden_field_tag :searched_by, params[:searched_by] %>

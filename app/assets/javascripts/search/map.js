@@ -12,10 +12,6 @@ var ready = function(){
   var centerControl;
   var json_array    = $('#json-hash').data('buildingshash');
   var zoom          = parseInt($('.zoom').val());
-  var zoomLevel     = zoom;
-  redo_search       = false;
-  var dragged       = false;
-  var draggedOnce   = false;
   var lat           = $('#lat').data('lat');
   var lng           = $('#lng').data('lng');
   var serched_by    = $('#searched_by').val();
@@ -23,13 +19,18 @@ var ready = function(){
   var search_string = $('#search_string').val();
   var city          = '';
   var header_id     = $('#app-header').length > 0 ? 'app-header' : 'header-mob';
-  current_user_id   = $('#cu').val();
   var per_page_buildings  = [];
   var boundary_coords = $('#boundary_coords').data('coords');
 
-  if(searched_term){
+  current_user_id   = $('#cu').val();
+  redo_search       = false;
+  dragged           = false;
+  draggedOnce       = false;
+  zoomLevel         = zoom;
+
+  if(searched_term && search_string){
     searched_term = search_string;
-    if(searched_term != null && searched_term == 'Little Italy'){
+    if(searched_term && searched_term == 'Little Italy'){
       var city = searched_term.includes('newyork') ? 'New York' : 'Bronx'
     }
 
@@ -228,6 +229,8 @@ var ready = function(){
   if(searched_term){
     initialize();
   }
+
+
 }
 
 $(document).ready(ready)

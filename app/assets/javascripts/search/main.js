@@ -14,6 +14,7 @@
 //= require jquery.validate
 //= require price_slider
 //= require home
+//= require ./redo_button
 
 
 // Avoid dropdown menu close on click inside
