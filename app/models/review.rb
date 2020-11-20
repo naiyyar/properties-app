@@ -24,7 +24,7 @@
 
 class Review < ApplicationRecord
 	resourcify
-  belongs_to :reviewable, polymorphic: true, counter_cache: true
+  belongs_to :reviewable, polymorphic: true, counter_cache: true, :touch => true
   belongs_to :user, counter_cache: true
   has_many :useful_reviews
   has_many :review_flags

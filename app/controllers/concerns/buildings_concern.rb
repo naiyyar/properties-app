@@ -32,6 +32,7 @@ module BuildingsConcern
     @nearby_nbs             = NYCBorough.nearby_neighborhoods(@building.nearby_neighborhood)
 
     @reviews       = @building.building_reviews
+    @reviews       = @reviews.includes(:reviewable) if @review.present?
     @price_ranges  = @building.price_ranges
     broker_percent = BrokerFeePercent.first.percent_amount
     @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
