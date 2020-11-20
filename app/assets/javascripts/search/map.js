@@ -33,21 +33,6 @@ var ready = function(){
     if(searched_term && searched_term == 'Little Italy'){
       var city = searched_term.includes('newyork') ? 'New York' : 'Bronx'
     }
-
-    infobox = new InfoBubble({
-      minWidth: 236,
-      maxWidth: 250,
-      position: new google.maps.LatLng(lng, lat),
-      shadowStyle: 3,
-      padding: 0,
-      backgroundColor: 'rgb(255,255,255)',
-      borderRadius: 2,
-      arrowSize: 10,
-      borderWidth: 0,
-      borderColor: '#2c2c2c',
-      disableAutoPan: true,
-      hideCloseButton: false
-    });
   }
 
   // Custom options for map
@@ -63,6 +48,21 @@ var ready = function(){
       dragged     = true;
       draggedOnce = false;
     }
+
+    infobox = new InfoBubble({
+      minWidth: 236,
+      maxWidth: 250,
+      position: new google.maps.LatLng(lng, lat),
+      shadowStyle: 3,
+      padding: 0,
+      backgroundColor: 'rgb(255,255,255)',
+      borderRadius: 2,
+      arrowSize: 10,
+      borderWidth: 0,
+      borderColor: '#2c2c2c',
+      disableAutoPan: true,
+      hideCloseButton: false
+    });
     
     var options = {
                     zoomControl: zoom_ctrl,
