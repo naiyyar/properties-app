@@ -27,13 +27,11 @@ $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
 
 $(document).ready(function(){
   var building_id = $('#cu_building_id').val();
-  console.log(building_id)
   $.ajax({
     url: '/buildings/'+building_id+'/lazy_load_content',
     dataType: 'script',
     type: 'get',
     success: function(){
-      //alert('success');
     }
   })
 })
