@@ -25,16 +25,17 @@ $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
   });
 });
 
-$(document).ready(function(){
-  var building_id = $('#cu_building_id').val();
-  $.ajax({
-    url: '/buildings/'+building_id+'/lazy_load_content',
-    dataType: 'script',
-    type: 'get',
-    success: function(){
-    }
-  })
-})
+$(document).ready(function() {
+  if($('#sh-slider').length > 0) {
+    var building_id = $('#cu_building_id').val();
+    $.ajax({
+      url: '/buildings/'+building_id+'/lazy_load_content',
+      dataType: 'script',
+      type: 'get',
+      success: function(){}
+    });
+  }
+});
 
 // lightSlider
 // var sl_container = $('.sh-slider-container');

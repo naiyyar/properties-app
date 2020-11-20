@@ -29,6 +29,10 @@
 
     <%= render 'buildings/favourite_script' %>
     <%= javascript_include_tag 'zapp' %>
+    
+    <%if @lat.present? && @lng.present? %>
+      <script defer src='<%=gmap_url_helper%>'></script>
+    <%end%>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })

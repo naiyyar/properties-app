@@ -1,0 +1,15 @@
+= hidden_field_tag :zoom, @zoom || 13, class: 'zoom'
+= hidden_field_tag :show_redo, 0, class: 'show_redo'
+= content_tag 'div', '', id: 'json-hash', data: { buildingshash: @hash.to_json }
+= content_tag 'div', '', id: 'lat', data: { lat: @lat }
+= content_tag 'div', '', id: 'lng', data: { lng: @lng }
+= content_tag 'div', '', id: 'boundary_coords', data: { coords: @boundary_coords.to_json }
+
+= hidden_field_tag :searched_by, params[:searched_by]
+= hidden_field_tag :search_term, params[:search_term]
+= hidden_field_tag :search_string, @search_string
+= hidden_field_tag :cu, current_user&.id
+
+-0.upto(4) do |num|
+  = content_tag 'div', '', id: "red-marker-asset-#{num}", data: { path: asset_path("markers/red_pin_p#{num}.png") }
+  = content_tag 'div', '', id: "green-marker-asset-#{num}", data: { path: asset_path("markers/green_pin_p#{num}.png") }

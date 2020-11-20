@@ -160,7 +160,6 @@ var ready = function(){
     }
 
     var polylines = new google.maps.Polygon(polylineoptons);
-
     var set_boundaries = function(map){
       brooklyn_and_queens_neighborhoods(searched_term, city, map) //In search.js
     }
@@ -230,6 +229,18 @@ var ready = function(){
     initialize();
   }
 
+  // setting up building and agent image on search view card
+var cards = $('.search-view-card');
+if(cards.length > 0){
+  cards.each(function(i, j){
+      var agentid = $(j).data('agentid');
+      if(agentid){
+        Card.loadFeaturedAgentImagesAndCTALinks(agentid);
+      }else{
+        Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+      }
+  });
+}
 
 }
 

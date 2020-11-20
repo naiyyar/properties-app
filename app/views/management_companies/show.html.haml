@@ -2,7 +2,9 @@
   = "#{@management_company.name}" if @management_company.name.present?
 
 - content_for :neighborhoods_modal do
-  =render 'layouts/shared/pop_neighborhoods_list'
+  = render 'layouts/shared/pop_neighborhoods_list'
+
+= render 'buildings/partials/map_data_field'
 
 #mapViewSearch.mob-min
   .mapPlaceholder
@@ -38,7 +40,7 @@
       #buildings_reviews_tab.tab-pane.fade{style: 'overflow-y: scroll; height: 500px;'}
         .comments.objects-container{style: 'padding: 15px 14px 0px 20px;'}
           - if @reviews.present?
-            = render :partial => 'reviews/review', :collection => @reviews, :as => :review
+            = render :partial => 'reviews/review', :collection => @reviews, :as => :review, cache: true
         .load-more-container.text-center{style: 'margin-bottom: 20px;'}
           / hide our loading gif image so that we show it when making ajax call via jquery
           = image_tag 'loader.gif', style: 'display:none;', class: 'loading-gif'
@@ -52,5 +54,3 @@
         .pages-container= will_paginate @manage_buildings, renderer: BootstrapPagination::Rails
 
         = render 'layouts/home/footer'
-
-= render partial: 'home/map_script'

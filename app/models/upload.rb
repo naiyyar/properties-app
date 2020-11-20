@@ -36,6 +36,7 @@ class Upload < ApplicationRecord
 
 	has_attached_file :image, 
                     :styles => { :small => '200x200', :original => '900x800', :medium => '550x450' },
+                    :default_url => "/images/:style/missing.png",
                     #:convert_options => {:medium => '-quality 80 -strip' },
                     processors: [:rotator]
 	
