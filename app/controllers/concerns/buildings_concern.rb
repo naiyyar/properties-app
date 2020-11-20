@@ -2,9 +2,8 @@ module BuildingsConcern
   extend ActiveSupport::Concern
 
   included do
-    before_action :save_as_favourite,              only: :show
-    before_action :get_building,                   only: :create
-    before_action :get_uploads, :set_image_counts, only: :show
+    before_action :save_as_favourite, only: :show
+    before_action :get_building,      only: :create
   end
 
   def show
@@ -124,15 +123,6 @@ module BuildingsConcern
                 else
                   Building.find_by_building_street_address(search_term)
                 end
-  end
-
-  def get_uploads
-    assets                 = @building.get_uploads
-    @uploads, @documents   = assets[:image_uploads], assets[:doc_uploads]
-  end
-
-  def set_image_counts
-    @uploaded_images_count = @building.uploads_count.to_i
   end
 
 end
