@@ -189,4 +189,25 @@ module NYCBorough
 																'Queens','Bronx'
 															]
 	end
+
+	# using on buildings form in neighborhood2 select field
+	def nyc_parent_neighborhoods
+    [ 
+      'East Village', 
+      'Flatbush - Ditmas Park', 
+      'Greenwich Village', 
+      'Harlem', 
+      'Lower East Side', 
+      'Lower Manhattan', 
+      'Midtown', 
+      'Midtown South', 
+      'Midtown West',
+      'Midtown East',
+      'SoHo',
+      'Upper East Side', 
+      'Upper Manhattan', 
+      'Upper West Side',
+      'Washington Heights'
+    ]
+  end
 end

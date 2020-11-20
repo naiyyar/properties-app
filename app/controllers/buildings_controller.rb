@@ -24,16 +24,12 @@ class BuildingsController < ApplicationController
     end
   end
 
-  #1. Loading show page content after page load
-  # 1.1 reviews section
-  # 1.2 ratings
-  # 1.3 images
+  ## FOR LATER USE
   def lazy_load_content
     #@reviews       = @building.building_reviews
     #@price_ranges  = @building.price_ranges
     #broker_percent = BrokerFeePercent.first.percent_amount
     #@saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
-    
     respond_to do |format|
       format.js
     end
@@ -112,7 +108,7 @@ class BuildingsController < ApplicationController
     @neighborhood_options = @buildings.select('neighborhood').distinct
                                       .where.not(neighborhood: [nil, ''])
                                       .order(neighborhood: :asc).pluck(:neighborhood)
-    @neighborhood2        = neighborhoods2
+    @neighborhood2        = NYCBorough.nyc_parent_neighborhoods
     @neighborhood3        = @buildings.select('neighborhood3').distinct
                                       .where.not(neighborhood3: [nil, ''])
                                       .order(neighborhood3: :asc).pluck(:neighborhood3)
@@ -145,8 +141,7 @@ class BuildingsController < ApplicationController
   private
 
   def find_building
-    id = params[:object_id] || params[:id]
-    @building = Building.find(id)
+    @building = Building.find(params[:object_id] || params[:id])
   end
 
   def building_params
@@ -160,25 +155,6 @@ class BuildingsController < ApplicationController
 
   def find_buildings
     @buildings = Building.all
-  end
-
-  def neighborhoods2
-    [ 
-      'East Village', 
-      'Flatbush - Ditmas Park', 
-      'Greenwich Village', 
-      'Harlem', 
-      'Lower East Side', 
-      'Lower Manhattan', 
-      'Midtown', 
-      'Midtown South', 
-      'Midtown West',
-      'SoHo',
-      'Upper East Side', 
-      'Upper Manhattan', 
-      'Upper West Side',
-      'Washington Heights'
-    ]
   end
 
   def clear_cache
