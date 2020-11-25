@@ -1,14 +1,15 @@
 module BuildingsCountConcern
-	extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
-	included do
-		before_action :popular_neighborhoods
-		helper_method :uptown_count, :brooklyn_count, :queens_count, :bronx_count
-	end
+  included do
+    before_action :popular_neighborhoods
+    helper_method :uptown_count, :brooklyn_count, :queens_count, :bronx_count
+  end
 
-	def popular_neighborhoods
-    @pop_nb_hash = {}
-    pop_neighborhoods.each{ |nb| @pop_nb_hash[nb.name] = nb.buildings_count }
+  def popular_neighborhoods
+    #@pop_nb_hash = {}
+    #pop_neighborhoods.each{ |nb| @pop_nb_hash[nb.name] = nb.buildings_count }
+    @pop_nb_hash ||= pop_neighborhoods.group_by(&:name)
   end
 
   def uptown_count
@@ -32,6 +33,6 @@ module BuildingsCountConcern
   end
 
   def pop_neighborhoods
-    @pop_neighborhoods ||= Neighborhood.select(:name, :buildings_count)
+    @pop_neighborhoods ||= Neighborhood.pop_neighborhoods
   end
 end

@@ -40,11 +40,17 @@ class Neighborhood < ApplicationRecord
   end
 
   def self.nb_buildings_count hoods, name
-    Rails.cache.fetch([self, name, 'hoods_count']) { hoods.where(name: name).sum(:buildings_count) }
+    Rails.cache.fetch([self, name, 'hoods_count']) {
+      hoods.where(name: name).sum(:buildings_count) 
+    }
   end
 
   def self.cached_nb_buildings_count name
     nb_buildings_count(name)
+  end
+
+  def self.pop_neighborhoods
+    self.select(:id, :name, :buildings_count)
   end
 
 end

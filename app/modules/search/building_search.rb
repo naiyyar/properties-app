@@ -1,18 +1,24 @@
 module Search
   module BuildingSearch
-    def buildings_json_hash(buildings)
+    def buildings_json_hash(buildings, featured_comp_building_id = nil)
       unless buildings.class == Array
-        buildings.select(:id, :building_name, :building_street_address, 
-                         :latitude, :longitude, :zipcode, :city, 
-                         :min_listing_price,:max_listing_price, :listings_count,
-                         :state, :price, :featured_buildings_count).as_json(:methods => json_hash_methods)
+        buildings.select(*attrs_to_select)
+                 .as_json(:methods => json_hash_methods(featured_comp_building_id))
       else
-        buildings.as_json(:methods => json_hash_methods)
+        buildings.as_json(:methods => json_hash_methods(featured_comp_building_id))
       end
     end
 
-    def json_hash_methods
+    def json_hash_methods featured_comp_building_id
+      return [:featured?, :featured] if featured_comp_building_id.blank?
       [:featured?, :featured, :featured_comp_building_id]
+    end
+
+    def attrs_to_select
+      [ :id, :building_name, :building_street_address, 
+        :latitude, :longitude, :zipcode, :city, 
+        :min_listing_price,:max_listing_price, :listings_count,
+        :state, :price, :featured_buildings_count]
     end
     
     def no_sorting? sort_by
@@ -120,7 +126,9 @@ module Search
     end
 
     def city_count buildings, city, sub_boroughs = nil
-      buildings.where('city = ? OR neighborhood in (?)', city, sub_boroughs).size
+      Rails.cache.fetch([self, city, 'city_count']) {
+        buildings.where('city = ? OR neighborhood in (?)', city, sub_boroughs).size
+      }
     end
 
     # split view

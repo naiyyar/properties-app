@@ -111,8 +111,8 @@ class Building < ApplicationRecord
 
   belongs_to :user
   belongs_to :management_company, touch: true
-  has_many :reviews,                as:         :reviewable
-  has_many :favorites,              as:         :favorable,     dependent: :destroy
+  has_many :reviews,                as: :reviewable
+  has_many :favorites,              as: :favorable, dependent: :destroy
   has_one  :featured_comp,          foreign_key: :building_id,  dependent: :destroy
   has_many :featured_comps,         through: :featured_comp_buildings, dependent: :destroy
   has_many :featured_buildings,     dependent: :destroy
@@ -250,7 +250,9 @@ class Building < ApplicationRecord
   end
 
   def self.transparentcity_buildings
-    @transparentcity_buildings ||= where.not(building_street_address: nil)
+    Rails.cache.fetch([self, 'transparentcity_buildings']) { 
+      where.not(building_street_address: nil)
+    }
   end
 
   def featured
