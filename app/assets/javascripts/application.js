@@ -41,6 +41,7 @@
 //= require social-share-button
 //= require review_form
 //= require billings
+//= require video_tours
 //= require_tree .
 
 
