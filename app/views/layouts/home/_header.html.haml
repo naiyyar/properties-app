@@ -1,9 +1,9 @@
-- if screen_class == 'screen-sm' && !home_page?
+- if screen_class == 'screen-sm' && !home_page? && !blog_view?
   = render 'layouts/shared/mobile_header'
 - else
   .home-header#app-header{class: home_page? ? 'home-page' : 'other-page'}
     .pull-left
-      - unless params[:controller].include?('buttercms')
+      - unless blog_view?
         %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
           %span.fa.fa-bars
       - else
@@ -13,7 +13,7 @@
 
 
     .home-logo.osLight
-      %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '100%'
+      %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40'
     
     .home-nav.pull-left
       %ul.homeNavUl
@@ -28,7 +28,7 @@
         %li.no-hover-underline.parent=link_to 'Write Review', contribute_buildings_path
     
     / for large devices
-    .home-nav
+    .home-nav.pull-right
       %ul.homeNavUl{style: 'position: relative;'}
         - unless user_signed_in?
           %li.no-hover-underline.parent
@@ -40,5 +40,5 @@
           %li.no-hover-underline.parent= render 'layouts/shared/tools_nav'
           %li.no-hover-underline.parent= render 'layouts/shared/user_profile'
 
-  - if user_signed_in?
+  - if user_signed_in? && browser.device.mobile?
     .mobView.visible-xs.visible-sm= render partial: 'layouts/shared/user_profile'

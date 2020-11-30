@@ -2,21 +2,18 @@
   = @tab_title_text
 
 #home-content-wrapper
-  .row{style: 'margin-right: 0px;'}
-    .col-lg-12.col-md-12.col-xs-12{style: 'padding-left: 0px;padding-right: 0px;'}
-      #hero-container
-        = image_tag hero_image, width: '100%', height: '100%'
-        
-        .search-panel
-          .home-about-nyc-apt
-            %h1 No Fee Apartments For Rent In NYC
-            %h2 Helping You Find Your NYC Home
-          .home-search-form
-          = render 'home/search_form'
-          .home-quick-links
-            %ul.list-inline
-              - home_quick_links.each do |nb|
-                %li=link_to quick_link_name(nb), nb[:url]
+  #hero-container
+    = image_tag hero_image, width: '100%', height: '100%'
+    .search-panel
+      .home-about-nyc-apt
+        %h1 No Fee Apartments For Rent In NYC
+        %h2 Helping You Find Your NYC Home
+      .home-search-form
+      = render 'home/search_form'
+      .home-quick-links
+        %ul.list-inline
+          - home_quick_links.each do |nb|
+            %li=link_to quick_link_name(nb), nb[:url]
   
   .home-wrapper{style: 'background: #FBFBFF;'}
     .home-content.featured-section
@@ -32,8 +29,11 @@
                 .col-sm-12.col-xs-12= render 'home/partials/placeholder_cards'
 
   #home-popular_neighborhoods
+    / = render 'layouts/home/popular_neighborhoods'
 
   #home-popular_searches
+    - cache 'popular_searches' do
+      = render 'layouts/home/popular_searches', bg_col: '#FBFBFF'
 
   .home-wrapper{style: 'background: #fff;'}
     .home-content
@@ -57,9 +57,4 @@
       %br
 
 =javascript_include_tag 'home/sections'
-
-:javascript
-  window.onload = function() {
-    apt_home.loadFeaturedBuildings();
-  }
   

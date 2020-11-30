@@ -23,3 +23,7 @@ if($('.home-wrapper').length > 0){
     }
   }
 }
+
+window.onload = function() {
+  apt_home.loadFeaturedBuildings();
+}

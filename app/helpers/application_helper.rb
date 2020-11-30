@@ -65,6 +65,18 @@ module ApplicationHelper
     params[:searched_by].present? || params[:filter].present? || params[:sort_by].present?
   end
 
+  def search_page? 
+    show_filters?
+  end
+
+  def blog_view?
+    params[:controller].include?('buttercms')
+  end
+
+  def building_show_page?
+    action_name == 'show' && controller_name == 'buildings'
+  end
+
   def header_center_col
     show_filters? ? '7' : '9'
   end
