@@ -19,6 +19,7 @@
     <%else%>
       <%= render partial: 'layouts/home/header' if hide_search_bar? %>
       <div class="content-wrapper <%= controller_name + action_name %>">
+        <%= render 'layouts/shared/pop_neighborhoods_list' %>
         <%= yield %>
       </div>
       <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
