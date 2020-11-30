@@ -117,8 +117,4 @@ module ApplicationHelper
     end
   end
 
-  def gmap_url_helper
-    "https://maps.google.com/maps/api/js?v=3.42&key=#{ENV['GEOCODER_API_KEY']}&libraries=places"
-  end
-
 end

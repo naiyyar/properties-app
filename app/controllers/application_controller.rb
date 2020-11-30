@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   
   # layouts
   layout :set_layout
+
+  #helpers
+  helper_method :gmap_url_helper
   
   # modules
   include BuildingsCountConcern
@@ -22,7 +25,7 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
   end
 
-	private
+  private
 
   def set_layout
     if action_name == 'index' && controller_name == 'home'
@@ -61,6 +64,10 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :update_last_sign_in_at
+
+  def gmap_url_helper
+    @gmap_url_helper ||= "https://maps.google.com/maps/api/js?v=3.42&key=#{ENV['GEOCODER_API_KEY']}&libraries=places"
+  end
 
   protected
 

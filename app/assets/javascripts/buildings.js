@@ -37,7 +37,6 @@ bapp.buildings.prototype = {
 
   _open: function(event, ui) {
     this._input.removeClass('loader');
-    console.log('open')
     var ul_height = $('ul.ui-autocomplete').outerHeight();
     var search_input_width = this._input.outerWidth();
     $('.ui-autocomplete').css('width', search_input_width+'px');
