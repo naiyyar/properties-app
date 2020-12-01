@@ -42,13 +42,18 @@ module ApplicationHelper
     action_name == 'show' ? 'Transparentcity' : 'All No Fee Apartments'
   end
 
+  def saved_buildings_page?
+    action_name == 'saved_buildings'
+  end
+
   # showing white header with logo
   def hide_search_bar?
     home_page?       || 
     about_page?      || 
     addvertise_page? || 
     contribute_page? || 
-    authentication_page?
+    authentication_page? ||
+    saved_buildings_page?
   end
 
   def hide_hood_dropdown?
