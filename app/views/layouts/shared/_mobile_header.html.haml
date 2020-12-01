@@ -15,8 +15,8 @@
    
     %div{class: "col-xs-#{header_right_col}"}
       .row{style: 'margin-right: -1px;'}
-        .hood.col-xs-6
-          - unless hide_hood_dropdown?
+        - unless hide_hood_dropdown?
+          .hood.col-xs-6
             .btn-hoods{class: current_view}
               %button.btn.btn-primary.dropdown-toggle-neighborhoods.btn-round{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
                 %span.dropdown-label Hood
