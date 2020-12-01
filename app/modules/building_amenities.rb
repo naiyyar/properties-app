@@ -14,7 +14,7 @@ module BuildingAmenities
 				gym: 										'Gym',
 				laundry_facility: 			'Laundry in Building',
 				live_in_super: 					'Live in super',
-				management_company_run: 'Management Company Run',
+				management_company_run: 'Management Company',
 				parking: 								'Parking / Garage',
 				roof_deck: 							'Roof Deck',
 				swimming_pool: 					'Swimming Pool',

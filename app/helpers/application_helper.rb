@@ -51,6 +51,10 @@ module ApplicationHelper
     authentication_page?
   end
 
+  def hide_hood_dropdown?
+    hide_search_bar?
+  end
+
   def current_user_profile_image
     @current_user_profile_image ||= current_user.profile_image(session[:provider])
   rescue

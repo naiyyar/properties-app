@@ -91,8 +91,8 @@ app.apartments.prototype = {
                     '<b>No matches found - Add Your Building</b></a></div>';
     $('#apt-search-form').append(elemToAppend);
     no_match_link = $('.no-match-link');
-    //if(mobile && $('.split-view-search').length > 0){
-    if(mobile){
+    console.log('mobile: '+mobile)
+    if(mobile && $('.search-view-card').length > 0){
       // making full width when on mobile view
       ui_autcomplete.css('width', '100%');
       ui_autcomplete.css('left', '0px');
