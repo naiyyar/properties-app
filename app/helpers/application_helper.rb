@@ -81,6 +81,10 @@ module ApplicationHelper
     action_name == 'show' && controller_name == 'buildings'
   end
 
+  def management_show_page?
+    action_name == 'show' && controller_name == 'management_companies'
+  end
+
   def header_center_col
     show_filters? ? '7' : '9'
   end

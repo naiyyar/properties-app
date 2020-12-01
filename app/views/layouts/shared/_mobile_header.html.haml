@@ -1,11 +1,11 @@
-#header-mob{class: "sm-#{action_name}"}
+#header-mob{class: "sm-#{action_name} sm-#{action_name}_#{controller_name}"}
   .row{style: 'margin-right: 0px;'}
     .col-xs-1
       %a.navHandler{href: 'javascript:void(0)'}
         %span.fa.fa-bars
     
     %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
-      - if search_page? || building_show_page?
+      - if search_page? || building_show_page? || management_show_page?
         .split-view-seach{class: "#{search_bar(:hidden)}"}
           %span.fa.fa-times.clearSearchText{style: "right: #{clear_link_from_right}px;"}
           = render partial: 'home/search_form'
