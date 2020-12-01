@@ -46,18 +46,21 @@ module ApplicationHelper
     action_name == 'saved_buildings'
   end
 
+  def mob_header_bg_color_class_helper
+    if search_page? || building_show_page? || management_show_page?
+      'bg-blue'
+    else
+      'bg-white'
+    end
+  end
+
   # showing white header with logo
   def hide_search_bar?
-    home_page?       || 
-    about_page?      || 
-    addvertise_page? || 
-    contribute_page? || 
-    authentication_page? ||
-    saved_buildings_page?
+    hide_hood_dropdown?
   end
 
   def hide_hood_dropdown?
-    hide_search_bar?
+    !(search_page? || building_show_page? || management_show_page?)
   end
 
   def current_user_profile_image

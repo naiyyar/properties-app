@@ -2105,22 +2105,12 @@ select.custom-arrow{
         font-size: 13px;
     }
 
-    #header-mob.sm-about, 
-    #header-mob.sm-advertise_with_us,
-    #header-mob.sm-contribute, 
-    #header-mob.sm-new_sessions, 
-    #header-mob.sm-new_registrations,
-    #header-mob.sm-saved_buildings{
-        background-color: #fff;
+    #header-mob.bg-white{
+      background-color: #fff;
     }
 
-    #header-mob.sm-about a.navHandler,
-    #header-mob.sm-advertise_with_us a.navHandler,
-    #header-mob.sm-contribute a.navHandler,
-    #header-mob.sm-new_sessions a.navHandler,
-    #header-mob.sm-new_registrations a.navHandler,
-    #header-mob.sm-saved_buildings a.navHandler{
-        color: #000;
+    #header-mob.bg-white a.navHandler{
+      color: #000;
     }
 
     #header-mob.sm-about .col-xs-6.hood,
