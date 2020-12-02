@@ -30,13 +30,17 @@ class ApplicationController < ActionController::Base
   def set_layout
     if action_name == 'index' && controller_name == 'home'
       'home'
-    elsif action_name == 'search' && controller_name == 'home'
+    elsif search_layout?
       'search'
     elsif action_name == 'show' && controller_name == 'buildings'
       'buildings_show'
     else
       'application'
     end
+  end
+
+  def search_layout?
+    (action_name == 'search' && controller_name == 'home') || action_name == 'saved_buildings'
   end
 
   def controllers

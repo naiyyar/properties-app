@@ -48,16 +48,16 @@ class ListingsController < ApplicationController
   end
 
   def transfer
-    if @listings&.count > 1500
+    if @listings.present?
       TransferListingsJob.perform_later(params[:date_from], params[:date_to])
       flash[:notice] = 'Transfering Listings To Past Listings Table started.'
     else
-      if @listings.present?
-        Listing.transfer_to_past_listings_table(@listings)
-        flash[:notice] = 'Transfering listings completed.'
-      else
-        flash[:error] = ["No Listings found between #{params[:date_from]} and #{params[:date_to]}."]
-      end
+      #if @listings.present?
+      #  Listing.transfer_to_past_listings_table(@listings)
+      #  flash[:notice] = 'Transfering listings completed.'
+      #else
+      flash[:error] = ["No Listings found between #{params[:date_from]} and #{params[:date_to]}."]
+      #end
     end
     redirect_to :back
   end

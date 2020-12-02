@@ -225,7 +225,7 @@ var ready = function(){
     }
   }
   //google.maps.event.addDomListener(window, 'load', initialize);
-  if(searched_term && $('#mapViewSearch').length > 0){
+  if($('#mapViewSearch').length > 0){
     initialize();
   }
 
