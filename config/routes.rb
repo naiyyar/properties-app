@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     collection do
       post :export
       get :show_more
-      get :load_more
+      post :load_more
     end
   end
 

@@ -2,12 +2,20 @@
 $(document).ready(function () {
     // when the load more link is clicked
     $('a.load-more').click(function (e) {
+        e.preventDefault()
         var last_date_active = null;
         var last_id          = null;
         var loaded_ids       = [];
         var past_listings_count    = $('#past_listings_count').val();
         var total_reviews          = $('#total_reviews').val();
         var loaded_listings_count;
+        var req_type  = $(this).data('type') || 'GET'
+        var url;
+        if(req_type == 'post' || req_type == 'POST'){
+            url = $(this).data('url');
+        }else{
+            url = $(this).attr('href');
+        }
         // prevent the default click action
         e.preventDefault();
 
@@ -29,11 +37,10 @@ $(document).ready(function () {
         
         // make an ajax call passing along our last user id
         $.ajax({
-
             // make a get request to the server
-            type: "GET",
+            type: req_type,
             // get the url from the href attribute of our link
-            url: $(this).attr('href'),
+            url: url,
             // send the last id to our rails app
             data: {
                 object_id:   last_id,

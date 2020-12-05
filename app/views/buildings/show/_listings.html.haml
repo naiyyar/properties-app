@@ -26,6 +26,6 @@
 	.row
 		.col-lg-12
 			.text-center
-				=link_to 'Show more...', load_more_past_listings_path(building_id: @building.id), class: 'load-more font-14 past-listings'
+				=link_to 'Show more...', 'javascript:;', class: 'load-more font-14 past-listings', data: {type: 'POST', url: load_more_past_listings_path(building_id: @building.id)}, method: :post
 				= image_tag 'loader.gif', style: 'display:none;', class: 'loading-gif'
 	%br

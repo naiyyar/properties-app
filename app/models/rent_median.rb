@@ -1,7 +1,7 @@
 class RentMedian < ApplicationRecord
 
 	def self.rent_price type_val, prices
-    price_rec(type_val, prices).price
+    price_rec(type_val, prices)&.price
   end
 
   def self.price_rec type_val, prices
