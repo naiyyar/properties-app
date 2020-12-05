@@ -24,7 +24,7 @@
 }
 
 .content-wrapper {
-  margin: 20px 8px;
+  margin-top: 80px;
 }
 
 #search-row .btn-dp-toggle button, 
@@ -2048,6 +2048,14 @@ select.custom-arrow{
     #wrapper .content{
         padding: 10px;
     }
+    .content-wrapper {
+      margin: 20px 8px;
+    }
+
+    .content-wrapper.homeindex {
+      margin: 20px 0px;
+    }
+    
     #header-mob {
         background-color: #2b78e4;
         width: 100%;
