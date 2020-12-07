@@ -23,8 +23,11 @@ class PastListing < ApplicationRecord
                             },
                   associated_against: { building: [:building_name] }
 
-  scope :default_listing_order,     -> { reorder(date_active: :desc, management_company: :asc, building_address: :asc, unit: :asc) }
-  scope :order_by_date_active_desc, -> { reorder(date_active: :desc, rent: :asc) }
+  scope :default_listing_order,     -> { reorder(date_active: :desc, 
+                                                 management_company: :asc, 
+                                                 building_address: :asc, 
+                                                 unit: :asc) }
+  scope :order_by_date_active_desc, -> { reorder(date_active: :desc, rent: :asc, unit: :asc) }
   scope :order_by_rent_asc,         -> { reorder(rent: :asc) }
 
   filterrific(
