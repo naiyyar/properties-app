@@ -1,8 +1,8 @@
 class BillingsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_billing,     only: [:show, :edit, :update, :destroy, :email_receipt]
-  before_action :set_customer_id, only: [:show, :pay_using_saved_card, :email_receipt]
-  before_action :get_card,        only: [:show, :email_receipt]
+  before_action :set_billing,     only: [:show, :edit, :update, :destroy]
+  before_action :set_customer_id, only: [:show, :pay_using_saved_card]
+  before_action :get_card,        only: :show
   
   def index
     @limit    = 51
@@ -24,10 +24,10 @@ class BillingsController < ApplicationController
   def email_receipt
     if params[:email_to].present?
       params[:email_to].split(',').each do |email|
-        BillingMailer.send_payment_receipt(billing: @billing,
-                                           to_email: email.gsub(' ', ''),
-                                           view: params[:view],
-                                           card: @card).deliver
+        Billings::SendPaymentReceiptJob.perform_later( params[:id],
+                                                       current_user.id,
+                                                       email.gsub(' ', ''), 
+                                                       params[:view])
       end
       flash[:notice] = 'Invoice successfully sent.'
     else

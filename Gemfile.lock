@@ -1092,6 +1092,7 @@ GEM
       sexp_processor (~> 4.8)
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
+    foreman (0.87.2)
     friendly_id (5.2.5)
       activerecord (>= 4.0.0)
     geocoder (1.4.5)
@@ -1398,6 +1399,7 @@ DEPENDENCIES
   figaro
   filterrific (~> 5.0)
   font-awesome-rails
+  foreman
   friendly_id (~> 5.2.4)
   geocoder (= 1.4.5)
   haml!

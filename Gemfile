@@ -144,6 +144,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'letter_opener'
+  gem 'foreman'
   gem 'lol_dba'
   gem 'meta_request'
   gem 'pry'

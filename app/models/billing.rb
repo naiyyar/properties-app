@@ -10,7 +10,7 @@ class Billing < ApplicationRecord
 
 	after_save :set_end_date, unless: :payment_failed?
 
-	default_scope {order(created_at: :desc)}
+	default_scope { order(created_at: :desc) }
 
 	scope :for_type, -> (type) { where(billable_type: type ).includes(:billable)}
 
@@ -115,5 +115,12 @@ class Billing < ApplicationRecord
 	def update_status status
     update_column(:status, status)
   end
+
+  def send_receipt_in_email email, view_param, card
+		BillingMailer.send_payment_receipt(billing: 	self,
+                                       to_email: 	email,
+                                       view: 			view_param,
+                                       card: 			card).deliver
+	end
 	
 end
