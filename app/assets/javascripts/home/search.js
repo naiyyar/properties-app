@@ -84,12 +84,17 @@ app.apartments.prototype = {
 
     ui_autcomplete.off('menufocus hover mouseover mouseenter');
     $('.search-loader').hide();
-    $('#apt-search-form').find('.no-match-link').remove();
+    $('#apt-search-form, #search-modal').find('.no-match-link').remove();
     
     elemToAppend =  '<div class="no-match-link" style="box-shadow: 0px 1px 4px rgba(0,0,0,0.6);">' +
                     '<a href="/buildings/contribute?results=no-matches-found">'+
                     '<b>No matches found - Add Your Building</b></a></div>';
-    $('#apt-search-form').append(elemToAppend);
+    if(mobile){
+      $('#search-modal').append(elemToAppend);
+    }
+    else{
+      $('#apt-search-form').append(elemToAppend);
+    }
     no_match_link = $('.no-match-link');
     if(mobile && $('.split-view-seach').length > 0){
       // making full width when on mobile view
@@ -98,15 +103,29 @@ app.apartments.prototype = {
       no_match_link.css('top', ul_height+'px');
     }else{
       // setting container width
-      var search_input_width = this._input.outerWidth();
-      ui_autcomplete.css('width', (search_input_width)+'px');
-      no_match_link.css('top',(ul_height - 3)+'px');
-      if($('.home .no-match-link').length > 0){
-        no_match_link.css('top',(ul_height + 5)+'px');
+      if(mobile){
+        ui_autcomplete.css('width', '100%');
+        ui_autcomplete.css('left', '0px');
+        if($('#search-modal .no-match-link').length > 0){
+          no_match_link.css('top',(ul_height + 20)+'px');
+        }
+      }else{
+        var search_input_width = this._input.outerWidth();
+        ui_autcomplete.css('width', (search_input_width)+'px');
+        no_match_link.css('top',(ul_height - 3)+'px');
+        if($('.home .no-match-link').length > 0){
+          no_match_link.css('top',(ul_height + 5)+'px');
+        }
       }
     }
-    $('.no-match-link').css('width', (ui_autcomplete.width()+2)+'px');
-    $('#search_term').removeClass('border-bottom-lr-radius');
+    if(mobile){
+      $('.no-match-link').css('width', '100%');
+    }
+    else{
+      $('.no-match-link').css('width', (ui_autcomplete.width()+2)+'px');
+      $('#search_term').removeClass('border-bottom-lr-radius');
+    }
+    
   },
 
   _select: function(e, ui) {

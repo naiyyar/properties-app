@@ -26,4 +26,12 @@ window.onload = function() {
   if($('.home-wrapper').length > 0){
     apt_home.loadFeaturedBuildings();
   }
+
+  $('#search-input-placeholder').on('click', function(){
+    $('#search-modal').show();
+  });
+
+  $('.fa-arrow-left').on('click', function(){
+    $('#search-modal').hide();
+  })
 }
