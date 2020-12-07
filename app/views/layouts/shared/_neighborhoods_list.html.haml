@@ -68,6 +68,7 @@
       %b#brooklyn
         - area = 'Brooklyn'
         = link_to "Brooklyn (#{brooklyn_count})", '/no-fee-apartments-nyc-city/brooklyn-ny'
+      %li.parent{'data-parent' => 'Brooklyn'}= search_by_neighborhood_link('Bedford-Stuyvesant', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Brooklyn Heights', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Bushwick', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Clinton Hill', area)
@@ -75,11 +76,11 @@
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Downtown Brooklyn', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Dumbo', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Fort Greene', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Greenpoint', area)
       
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
   %ul.pop-list
     .child-borough-container
+      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Greenpoint', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Park Slope', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Sheepshead Bay', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Williamsburg', area)
