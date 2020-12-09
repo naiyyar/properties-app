@@ -95,14 +95,12 @@
   });
 
   function agentContactForm(agent_id){
-    displayLoader();
     $.ajax({
       url: '/featured_agents/'+agent_id+'/contact',
       type: 'get',
       dataType: 'json',
       success: function(response){
         $('#remote-container').html(response.contact_form_html);
-        hideLoader();
         if($('.contact-agent-modal').length > 0){
           $('.contact-agent-modal').slideDown(200);
           $('.closeContact').click(function(e) {
@@ -114,21 +112,17 @@
         }
       },
       error: function(res){
-        console.log(res);
-        hideLoader();
+        //console.log(res);
       }
     });
   } 
 
   function showLeasingContactPopup(building_id){
-    displayLoader();
     $.ajax({
       url: '/contacts/new?building_id='+building_id,
       type: 'get',
       dataType: 'script',
-      success: function(response){
-        hideLoader();
-      }
+      success: function(response){}
     });
   }
 
@@ -141,7 +135,6 @@
       max_price:        $('#list_max_price').val(),
     };
 
-    displayLoader();
     $.ajax({
       url: '/listings/show_more',
       type: 'get',
@@ -151,9 +144,7 @@
               listing_type: 'active', 
               filter_params: filter_params 
             },
-      success: function(response){
-        hideLoader();
-      }
+      success: function(response){}
     });
   }
 </script>

@@ -2053,19 +2053,13 @@ select.custom-arrow{
 
 @media screen and (max-width: 767px) {
     #wrapper .content{
-        padding: 10px;
-    }
-    .content-wrapper {
-      margin: 20px 8px;
-    }
-
-    .content-wrapper.homeindex {
-      margin: 20px 0px;
+      padding: 10px;
     }
 
     #search-modal {
       background: #fff;
       height: 100%;
+      overflow: hidden;
       .header {
         height: 71px;
         width: 100%;

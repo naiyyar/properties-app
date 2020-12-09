@@ -1,6 +1,7 @@
 var ready = function(){
 	$('#search-input-placeholder').on('click', function(){
     $('#search-modal').css('z-index', '99999').show();
+    $('#search_term').focus();
 	});
 
 	$('.fa-arrow-left').on('click', function(){

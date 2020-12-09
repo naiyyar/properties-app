@@ -5,13 +5,13 @@
     <%= layout_stylesheet_link 'home/main' %>
   </head>
   
-  <body class="notransition no-hidden" style="margin: 0px; padding: 0px;">
+  <body class="notransition no-hidden home" style="margin: 0px; padding: 0px;">
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' if browser.device.mobile? %>
     
-    <div id="apt-ajax-loader" style='display: none;'>
+    <!-- <div id="apt-ajax-loader" style='display: none;'>
       <div><span class="fa fa-spin fa-4x fa-spinner"></span></div>
-    </div>
+    </div> -->
     
     <%= render partial: 'layouts/home/header' %>
     
@@ -19,12 +19,13 @@
     
     <div class="content-wrapper <%= controller_name + action_name %>">
       <%= yield %>
+      <%= render 'layouts/home/footer' if browser.device.mobile? %>
     </div>
+
+    <%= render 'layouts/home/footer' unless browser.device.mobile? %>
     
     <div id="remote-container"></div>
     <div id="auth-form"></div>
-    
-    <%= render 'layouts/home/footer' %>
     
     <%= javascript_include_tag 'home/main', defer: true %>
     <%= render 'buildings/favourite_script' %>
