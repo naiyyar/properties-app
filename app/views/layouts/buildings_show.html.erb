@@ -11,7 +11,7 @@
   <body class="notransition no-hidden touch-scroll">
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' unless screen_class == 'screen-lg' %>
-    
+    <%= render partial: 'layouts/shared/search_modal' %>
     <%= render 'layouts/shared/wrapper' %>
 
     <%= render 'layouts/shared/signin' %>
@@ -22,7 +22,6 @@
     <div id="apt-ajax-loader" style='display: none;'><div><span class="fa fa-spin fa-4x fa-spinner"></span></div></div>
 
     <%= render 'buildings/favourite_script' %>
-    <%#= render 'buildings/show/map_script' %>
 
     <script defer src='<%=gmap_url_helper%>'></script>
     <%= javascript_include_tag 'infobubble',   defer: true %>

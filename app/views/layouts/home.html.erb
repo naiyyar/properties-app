@@ -15,23 +15,7 @@
     
     <%= render partial: 'layouts/home/header' %>
     
-    <% if browser.device.mobile? %>
-      <div id="search-modal" class="modal-full" style='display: none;'>
-        <div class='header'>
-          <div class="row">
-            <div class="col-xs-1">
-              <span class="fa fa-arrow-left fa-2x"></span>
-            </div>
-            <div class="col-xs-11">
-              <%= render 'home/search_form' %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <style type="text/css">
-        .ui-autocomplete{ z-index: 10000; max-height: 450px !important;}
-      </style>
-    <%end%>
+    <%= render partial: 'layouts/shared/search_modal' %>
     
     <div class="content-wrapper <%= controller_name + action_name %>">
       <%= yield %>

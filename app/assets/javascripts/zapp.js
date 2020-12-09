@@ -173,16 +173,6 @@
 
     $(document).on('click', 'select#sort', function(){});
 
-    // clear text search
-    $('.clearSearchText').click(function(){
-        $("#search_term").val('');
-    });
-
-    // search box text seletion on click
-    $("#apt-search-txt-searchpage, #search_term").click(function () {
-      $(this).select();
-    });
-
     //
     // For mobile neighborhoods dropdown toggle
     $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {

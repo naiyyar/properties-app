@@ -1,0 +1,17 @@
+<% if browser.device.mobile? %>
+  <div id="search-modal" class="modal-full" style='display: none;'>
+    <div class='header'>
+      <div class="row">
+        <div class="col-xs-1">
+          <span class="fa fa-arrow-left fa-2x"></span>
+        </div>
+        <div class="col-xs-11">
+          <%= render 'home/search_form' %>
+        </div>
+      </div>
+    </div>
+    <style type="text/css">
+      .ui-autocomplete{ z-index: 100000; max-height: 450px !important;}
+    </style>
+  </div>
+<%end%>

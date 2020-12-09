@@ -14,6 +14,7 @@
 //= require jquery.validate
 //= require price_slider
 //= require home
+//= require search_modal
 //= require ./redo_button
 
 

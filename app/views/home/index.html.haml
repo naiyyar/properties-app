@@ -15,7 +15,7 @@
         .apt-search.home#apt-search-form
           .icon-search-shared
             %span.fa.fa-search
-          = text_field_tag 'search-input-placeholder', searched_term, class: 'form-control border-top-lr-radius border-bottom-lr-radius', placeholder: search_input_placeholders, style: 'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 5px rgba(0,0,0,0.6);'
+          = search_placeholder_input_helper
 
       .home-quick-links
         %ul.list-inline

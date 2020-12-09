@@ -18,6 +18,14 @@ module ApplicationHelper
     'No Fee Apartments For Rent In NYC | Transparentcity.co'
   end
 
+  def search_placeholder_input_helper
+    text_field_tag 'search-input-placeholder', 
+                    searched_term, 
+                    class: "border-top-lr-radius border-bottom-lr-radius #{search_placeholder_input_form_ctrl_class}", 
+                    placeholder: search_input_placeholders, 
+                    style: search_placeholder_input_styles
+  end
+
   def home_page?
     controller_name == 'home' && action_name == 'index'
   end
@@ -131,6 +139,16 @@ module ApplicationHelper
     else
       stylesheet_link_tag sheet_path, media: 'all'
     end
+  end
+
+  private
+  def search_placeholder_input_styles
+    return '' if screen_class == 'screen-sm' 
+    'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 5px rgba(0,0,0,0.6);'
+  end
+
+  def search_placeholder_input_form_ctrl_class
+    home_page? ? 'form-control' : ''
   end
 
 end

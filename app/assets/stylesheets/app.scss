@@ -2055,6 +2055,45 @@ select.custom-arrow{
     .content-wrapper.homeindex {
       margin: 20px 0px;
     }
+
+    #search-modal {
+      background: #fff;
+      height: 100%;
+      .header {
+        height: 71px;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 8px 0;
+        span.fa-arrow-left{
+          color: #2b78e4;
+          margin-top: 10px;
+        }
+      }
+
+      .apt-search.other #search_term {
+        height: 51px !important;
+        padding: 10px 14px 10px 30px !important;
+        border: 0px solid #333;
+        -webkit-appearance: none;
+        box-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+        width: 100%;
+      }
+
+      .apt-search.other #search-input-placeholder {
+        width: 100%;
+      }
+    }
+
+    #apt-search-form {
+      .form-control {
+        height: 51px !important;
+        padding: 10px 14px 10px 30px !important;
+      }
+      .icon-search-shared{
+        top: 13px;
+        color: #7e7e7e;
+      }
+    }
     
     #header-mob {
         background-color: #2b78e4;

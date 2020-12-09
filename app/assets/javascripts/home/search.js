@@ -100,7 +100,7 @@ app.apartments.prototype = {
       // making full width when on mobile view
       ui_autcomplete.css('width', '100%');
       ui_autcomplete.css('left', '0px');
-      no_match_link.css('top', ul_height+'px');
+      no_match_link.css('top', (ul_height + 20)+'px');
     }else{
       // setting container width
       if(mobile){

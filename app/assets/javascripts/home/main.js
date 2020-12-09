@@ -14,6 +14,7 @@
 //= require bootbox.min
 //= require jquery.mask.min
 //= require mask
+//= require search_modal
 //= require ./search
 
 setTimeout(function(){ 
@@ -145,8 +146,6 @@ Transparentcity = {
 	}
 
 };
-
-//
 
 $('.btn').click(function() {
   if ($(this).is('[data-toggle-class]')) {
