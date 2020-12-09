@@ -1989,6 +1989,13 @@ select.custom-arrow{
   padding: 0px 20px;
 }
 
+#apt-search-form {
+  .form-control {
+    height: 51px !important;
+    padding: 10px 14px 10px 30px !important;
+  }
+}
+
 /* Media Queries */
 @media screen and (max-width: 480px) {
     .aggregate-ratings ul{
