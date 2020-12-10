@@ -542,8 +542,6 @@
 }
 
 #thumb-pager .lSPager li a img{
-    /*width: 150px;*/
-    /*height: 125px;*/
     max-width: 100%;
     max-height: 100%;
     display: block;
@@ -566,6 +564,13 @@
     .lSSlideWrapper .lSSlide li a .img-thumbnail {
         width: 100%;
         object-fit: cover;
+    }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1024px){
+     #thumb-pager .lSPager li, #thumb-pager .lSPager li a img{
+        width: 118px !important;
+        height: 90px !important;
     }
 }
 
