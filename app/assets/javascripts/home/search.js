@@ -100,14 +100,14 @@ app.apartments.prototype = {
       // making full width when on mobile view
       ui_autcomplete.css('width', '100%');
       ui_autcomplete.css('left', '0px');
-      no_match_link.css('top', (ul_height + 20)+'px');
+      no_match_link.css('top', (ul_height + 30)+'px');
     }else{
       // setting container width
       if(mobile){
         ui_autcomplete.css('width', '100%');
         ui_autcomplete.css('left', '0px');
         if($('#search-modal .no-match-link').length > 0){
-          no_match_link.css('top',(ul_height + 20)+'px');
+          no_match_link.css('top',(ul_height + 30)+'px');
         }
       }else{
         var search_input_width = this._input.outerWidth();

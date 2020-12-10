@@ -6,21 +6,7 @@
 //= require search_modal
 //= require ./show_map_handler
 
-// clear text search
-$('.clearSearchText').click(function(){
-    $("#search_term").val('');
-});
 
-$('#search_term.screen-sm').on('focus', function(){
-  $("#search_term").val('');
-});
-
-// search box text seletion on click
-$("#apt-search-txt-searchpage, #search_term").click(function () {
-  $(this).select();
-});
-
-//
 // For mobile neighborhoods dropdown toggle
 $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
   $('.popular-neighborhoods').slideToggle(200, 'linear', function(){
