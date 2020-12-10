@@ -195,3 +195,11 @@ a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     }
   }
 }
+@media screen and (min-width: 992px) and (max-width: 1199px){
+  .btn-filter .btn.sc-lg, .btn-sort .btn.sc-lg{
+    width: 12em;
+  }
+  .btn-sort, .lg-action-buttons > .btn-filter {
+    margin-top: 3px;
+  }
+}

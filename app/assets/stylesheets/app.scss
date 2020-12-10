@@ -1253,8 +1253,9 @@ a.userHandler .counter {
     /*overflow-x hidden : Getting grey/blank map issue on mobile devices ios13 when moving or zooming*/
 }
 
-#wrapper.screen-lg{
+#wrapper.screen-lg {
   margin: 10px 0px;
+  width: 100%;
 }
 
 #wrapper.mt0{
@@ -2635,7 +2636,7 @@ select.custom-arrow{
 @media screen and (min-width: 992px) and (max-width: 1199px){
     .searchContainer {
         position: relative;
-        width: 52% !important;
+        width: 50% !important;
     }
     .search input {
         width: 88% !important;
@@ -2646,9 +2647,6 @@ select.custom-arrow{
     }
     .tabsWidgetSearch .popular-searches-container {
         width: 540px;
-    }
-    .btn-filter .btn.sc-lg, .btn-sort .btn.sc-lg {
-        width: 10em;
     }
 }
 
@@ -2782,7 +2780,7 @@ select.custom-arrow{
         top: 12px;
     }
     .search{
-        width: 92.5%;
+        width: 100%;
     }
     .search input{
         width: 100%;
@@ -2791,12 +2789,12 @@ select.custom-arrow{
         position: relative;
         width: 55%;
     }
-    .search .neighborhoods-dropdown{
+    .search .neighborhoods-dropdown {
         margin-left: 8px;
     }
-    .search .neighborhoods-dropdown .dropdown-menu{
-        right: -91px;
-        left: auto;
+    .search .neighborhoods-dropdown .dropdown-menu {
+      right: auto;
+      left: -350px;
     }
     .searchIcon{
         margin-left: 10px;
