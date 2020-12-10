@@ -6,6 +6,7 @@ var ready = function(){
 
 	$('#search-input-placeholder').on('click', function(){
     search_modal.css('z-index', '99999').show();
+    search_box[0].focus();
     clearSearchField();
 	});
 
