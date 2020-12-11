@@ -1,6 +1,6 @@
 var location_url = 'javascript:void(0);';
 function getLocation(){
-  document.getElementById('search_term').value = 'Current Location'
+  document.getElementById('search_term').value = 'Current Location';
   navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
     if(PermissionStatus.state == 'granted'){
       if (navigator.geolocation) {
@@ -18,7 +18,6 @@ function getLocation(){
 
 function showPosition(position) {
   var loc_link = $('.ui-autocomplete li.curr-location a');
-  console.log('xx'+loc_link.attr('href'))
   if(loc_link.attr('href') == 'javascript:void(0);'){
     window.location.href = render_url(position);
   }

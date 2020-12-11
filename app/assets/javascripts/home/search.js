@@ -28,17 +28,13 @@ app.apartments.prototype = {
             }
           }
         });
-        var curr_loc = '<a href="'+location_url+'" class="hyper-link location"><span class="fa fa-location-arrow"></span> Current Location</a>';
-        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location' style='background: #fff; cursor: pointer;' onclick='getLocation()'>"+curr_loc+"</li>");
+        var curr_loc = '<a href="'+location_url+'" class="hyper-link location" style="display: block;" onclick="getLocation()"><span class="fa fa-location-arrow"></span> Current Location</a>';
+        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location' style='background: #fff; cursor: pointer;'>"+curr_loc+"</li>");
       },
 
       _renderItem: function(ul, item) {
-        if(item.search_term == undefined){
-          search_term = item.value
-        }
-        else{
-          search_term = item.search_term
-        }
+        search_term = (item.search_term == undefined ? item.value : item.search_term)
+        
         $('#search_term').removeClass('loader');
         
         // Hightliting searched phrase
