@@ -24,7 +24,8 @@ module ApplicationHelper
                     class: "border-top-lr-radius border-bottom-lr-radius #{search_placeholder_input_form_ctrl_class}", 
                     placeholder: search_input_placeholders, 
                     style: search_placeholder_input_styles, 
-                    readonly: true
+                    readonly: true,
+                    onclick: 'SearchModal.showSearchModal()'
   end
 
   def home_page?

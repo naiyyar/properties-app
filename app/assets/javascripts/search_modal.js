@@ -1,53 +1,57 @@
 var ready = function(){
-	if(mobile){
+	if(Device.type.mobile){
 		var search_box 		= $('#search_term');
 		var search_modal 	= $('#search-modal');
 		var search_form 	= $('#apt-search-form');
 		var clear_icon 		= $('#clear-icon');
 
-		$('#search-input-placeholder').on('click touchstart', function(){
-	    search_modal.css('z-index', '99999').show();
-	    search_box[0].focus();
-	    clearSearchField();
-		});
+		SearchModal = {
+			showSearchModal: function (){
+				search_modal.css('z-index', '99999').show();
+		    setTimeout(function(){
+		    	search_box[0].focus();
+		    }, 200);
+		    this.clearSearchField();
+			},
+
+			clearSearchField: function(){
+				$(search_box).val('');
+				var self = this;
+				setTimeout(function(){
+					self.hideClearIcon();
+				}, 200)
+			},
+
+			showClearIcon: function(){
+				if(clear_icon.is(':hidden')){
+					clear_icon.show();
+				}
+			},
+
+			hideClearIcon: function(){
+				if(!clear_icon.is(':hidden')){
+					clear_icon.hide();
+				}
+			}
+		};
 
 		$('.fa-arrow-left').on('click', function(){
-			hideClearIcon();
+			SearchModal.hideClearIcon();
 		  search_modal.hide();
 		});
 
 		search_box.on('keyup', function(){
 			if($(this).val() != ''){			
-				showClearIcon();
+				SearchModal.showClearIcon();
 			}else{
-				hideClearIcon();
+				SearchModal.hideClearIcon();
 			}
 		});
 		
 		clear_icon.on('click', function(){
-			clearSearchField();
+			SearchModal.clearSearchField();
 		});
-
-		function clearSearchField(){
-			$(search_box).val('');
-			setTimeout(function(){
-				hideClearIcon();
-			}, 400)
-		}
-
-		function showClearIcon(){
-			if(clear_icon.is(':hidden')){
-				clear_icon.show();
-			}
-		}
-
-		function hideClearIcon(){
-			if(!clear_icon.is(':hidden')){
-				clear_icon.hide();
-			}
-		}
 	}
-
 } // close ready
 
 $(document).ready(ready)
