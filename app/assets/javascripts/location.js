@@ -1,19 +1,20 @@
 var location_url = 'javascript:void(0);';
 function getLocation(){
   document.getElementById('search_term').value = 'Current Location';
-  //navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
-    //if(PermissionStatus.state == 'granted'){
-      if (navigator.geolocation) {
-        var options = {enableHighAccuracy: true, timeout: 60000, maximumAge: 0};
-        navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-      } else {
-        alert("Geolocation is not supported by this browser.");
-      }
-    //}
-    //else{
-    //  alert("Permission not granted. state_type:"+PermissionStatus.state);
-    //}
-  //});
+  // PermissionStatus is not working in ios mobiles devices. Returing undefined PermissionStatus.state
+  // navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
+  // if(PermissionStatus.state == 'granted'){
+  if (navigator.geolocation) {
+    var options = {enableHighAccuracy: true, timeout: 60000, maximumAge: 0};
+    navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
+  // }
+  // else{
+  //   alert("Permission not granted. state_type:"+PermissionStatus.state);
+  // }
+  // });
 }
 
 function showPosition(position) {

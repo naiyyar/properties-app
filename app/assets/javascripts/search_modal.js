@@ -5,7 +5,7 @@ var ready = function(){
 		var search_form 	= $('#apt-search-form');
 		var clear_icon 		= $('#clear-icon');
 
-		$('#search-input-placeholder').on('click', function(){
+		$('#search-input-placeholder').on('click touchstart', function(){
 	    search_modal.css('z-index', '99999').show();
 	    search_box[0].focus();
 	    clearSearchField();
