@@ -508,11 +508,6 @@ a.link_underlined:hover, .underline{
 .mobile-search{
     display: none;
 }
-.clearSearchText{
-    position: absolute;
-    cursor: pointer;
-    z-index: 999;
-}
 
 .btn-contribute{
     padding: 12px 0px 0px 16px;
@@ -2362,10 +2357,6 @@ select.custom-arrow{
         padding: 9px;
         border-radius: 1.5em;
     }
-    .clearSearchText {
-        top: 9px; 
-        font-size: 1.5em !important;
-    }
     .search input::-webkit-input-placeholder {
         color: #adc8c7;
     }
@@ -2645,10 +2636,6 @@ select.custom-arrow{
     .search input {
         width: 88% !important;
     }
-    .clearSearchText {
-        right: 63px !important;
-        top: 13px !important;
-    }
     .tabsWidgetSearch .popular-searches-container {
         width: 540px;
     }
@@ -2674,10 +2661,6 @@ select.custom-arrow{
     }
     .nav-justified > li a {
         font-size: 11px;
-    }
-    .clearSearchText{
-        right: 21px;
-        top: 12px;
     }
     .search{
         width: 100%;
@@ -2754,9 +2737,6 @@ select.custom-arrow{
             
 }
 @media screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
-    .clearSearchText{
-        top: 6px;
-    }
     .search{
         width: 100%;
     }
@@ -2778,10 +2758,6 @@ select.custom-arrow{
     }
     #street_view_btn {
         left: 39%;
-    }
-    .clearSearchText{
-        right: 3px;
-        top: 12px;
     }
     .search{
         width: 100%;
