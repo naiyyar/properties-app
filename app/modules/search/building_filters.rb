@@ -24,22 +24,11 @@ module Search
     end
 
     def filter_by_amenities buildings, amenities
-      @amenities = amenities
-      return buildings unless @amenities.present?
+      return buildings unless amenities.present?
       @buildings = buildings
-      @buildings = @buildings.doorman           if has_amenity?('doorman')
-      @buildings = @buildings.courtyard         if has_amenity?('courtyard')
-      @buildings = @buildings.laundry_facility  if has_amenity?('laundry_facility')
-      @buildings = @buildings.gym               if has_amenity?('gym')
-      @buildings = @buildings.parking           if has_amenity?('parking')
-      @buildings = @buildings.roof_deck         if has_amenity?('roof_deck')
-      @buildings = @buildings.pets_allowed_cats if has_amenity?('pets_allowed_cats')
-      @buildings = @buildings.pets_allowed_dogs if has_amenity?('pets_allowed_dogs')
-      @buildings = @buildings.elevator          if has_amenity?('elevator')
-      @buildings = @buildings.swimming_pool     if has_amenity?('swimming_pool')
-      @buildings = @buildings.walk_up           if has_amenity?('walk_up')
-      @buildings = @buildings.no_fee            if has_amenity?('no_fee')
-      @buildings = @buildings.live_in_super     if has_amenity?('live_in_super')
+      amenities.each(&:to_sym).each do |amenity|
+        @buildings = @buildings.where(amenity => true)
+      end
       @buildings
     end
     

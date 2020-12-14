@@ -44,7 +44,7 @@ module NYCBorough
 	def midtown_manhattan_sub_borough
 		[
 			'Chelsea',
-			'Flatiron Distric',
+			'Flatiron District',
 			'Gramercy Park',
 			"Hell's Kitchen",
 			'Kips Bay',

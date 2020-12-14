@@ -7,8 +7,6 @@ module BuildingsCountConcern
   end
 
   def popular_neighborhoods
-    #@pop_nb_hash = {}
-    #pop_neighborhoods.each{ |nb| @pop_nb_hash[nb.name] = nb.buildings_count }
     @pop_nb_hash ||= pop_neighborhoods.group_by(&:name)
   end
 
@@ -34,5 +32,10 @@ module BuildingsCountConcern
 
   def pop_neighborhoods
     @pop_neighborhoods ||= Neighborhood.pop_neighborhoods
+  end
+
+  protected
+  def show_neighborhoods?
+    home_page? || show_filters? || search_page? || building_show_page? || management_show_page?
   end
 end

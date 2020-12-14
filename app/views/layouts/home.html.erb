@@ -13,11 +13,10 @@
       <div><span class="fa fa-spin fa-4x fa-spinner"></span></div>
     </div> -->
     
-    <%= render partial: 'layouts/home/header' %>
-    
     <%= render partial: 'layouts/shared/search_modal' %>
     
     <div class="content-wrapper <%= controller_name + action_name %>">
+      <%= render partial: 'layouts/home/header' %>
       <%= yield %>
       <%= render 'layouts/home/footer' if browser.device.mobile? %>
     </div>

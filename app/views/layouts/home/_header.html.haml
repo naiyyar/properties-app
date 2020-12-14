@@ -4,8 +4,9 @@
   .home-header#app-header{class: home_page? ? 'home-page' : 'other-page'}
     .pull-left
       - unless blog_view?
-        %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
-          %span.fa.fa-bars
+        - if browser.device.mobile?
+          %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
+            %span.fa.fa-bars
       - else
         %a.home-navHandler{href: '/blog'}
           %span.fa.fa-home

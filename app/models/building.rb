@@ -113,13 +113,13 @@ class Building < ApplicationRecord
   belongs_to :management_company, touch: true
   has_many :reviews,                as: :reviewable
   has_many :favorites,              as: :favorable, dependent: :destroy
-  has_one  :featured_comp,          foreign_key: :building_id,  dependent: :destroy
+  # has_one  :featured_comp,          foreign_key: :building_id,  dependent: :destroy
+  has_many :featured_comp_buildings
   has_many :featured_comps,         through: :featured_comp_buildings, dependent: :destroy
   has_many :featured_buildings,     dependent: :destroy
   has_many :contacts,               dependent: :destroy
   has_many :listings,               foreign_key: :building_id, dependent: :destroy
   has_many :past_listings,          foreign_key: :building_id, dependent: :destroy
-  has_many :featured_comp_buildings
   has_many :video_tours,            dependent: :destroy
   has_many :units,                  dependent: :destroy
   accepts_nested_attributes_for :units, :allow_destroy => true
@@ -215,6 +215,10 @@ class Building < ApplicationRecord
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
+
+  # delegates
+  delegate :name, to: :management_company, prefix: true
+
   
   # Methods
 

@@ -18,8 +18,9 @@ class BuildingsController < ApplicationController
       available_filters: [:search_query]
     ) or return
     @buildings = @filterrific.find.paginate(page: params[:page], per_page: 100)
-                                  .includes(:building_average, :management_company)
-                                  .reorder('created_at desc')
+                                  .includes(:management_company, :uploads)
+                                  .reorder(created_at: :desc)
+    @buildings_count = @buildings.count
     respond_to do |format|
       format.html
       format.js
