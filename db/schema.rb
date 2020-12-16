@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200827033453) do
+ActiveRecord::Schema.define(version: 20201216035250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -436,6 +436,7 @@ ActiveRecord::Schema.define(version: 20200827033453) do
     t.boolean  "tos_agreement",    default: false
     t.string   "resident_from"
     t.boolean  "scraped",          default: false
+    t.integer  "uploads_count",    default: 0,     null: false
     t.index ["reviewable_id", "reviewable_type"], name: "index_reviews_on_reviewable_id_and_reviewable_type", using: :btree
     t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
