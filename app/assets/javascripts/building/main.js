@@ -30,8 +30,14 @@ $(document).ready(function() {
 
 // For featured Comps buildings
 //
-if($('.search-view-card').length > 0){
-  $('.search-view-card').each(function(i, j){
+var svc = $('.search-view-card');
+if(svc.length > 0){
+  svc.each(function(i, j){
     Card.loadDisplayImageAndCTALinks($(j).data('bid'));
   });
+}
+
+var sp = $('#search-input-placeholder')
+if(sp.val() != ''){
+  sp.val('');
 }

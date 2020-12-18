@@ -1,15 +1,15 @@
 module Search
   module BuildingFilters
     def filtered_buildings buildings, filter_params
-      price     = filter_params[:price]
-      beds      = filter_params[:bedrooms]
-      min_price = filter_params[:min_price] 
-      amenities = filter_params[:amenities]
+      price      = filter_params[:price]
+      beds       = filter_params[:bedrooms]
+      min_price  = filter_params[:min_price] 
+      @amenities = filter_params[:amenities]
       
       # building level filters
-      buildings = filter_by_amenities(buildings, amenities) if amenities.present?
-      buildings = filter_by_prices(buildings, price)        if price.present? && min_price.blank?
-      buildings = filter_by_beds(buildings, beds)           if beds.present?
+      buildings = filter_by_amenities(buildings)     if @amenities.present? && has_building_amenities?
+      buildings = filter_by_prices(buildings, price) if price.present? && min_price.blank?
+      buildings = filter_by_beds(buildings, beds)    if beds.present?
       
       # listings level filters
       if filtered_by_listings?(filter_params)
@@ -18,19 +18,43 @@ module Search
         buildings    = buildings.with_active_listing.join_with_listings
         buildings    = buildings.with_listings_bed(listing_beds)                 if listing_beds.present?
         buildings    = filter_by_listing_prices(buildings, min_price, max_price) if min_price.present? && max_price.present?
-        buildings    = buildings_with_listing_amenities(buildings)               if listing_amenity?(amenities)
+        buildings    = buildings_with_listing_amenities(buildings)               if listing_amenity?
       end
       return buildings
     end
 
-    def filter_by_amenities buildings, amenities
-      return buildings unless amenities.present?
+    def has_building_amenities?
+      (Building::AMENITIES & @amenities.map(&:to_sym)).present?
+    end
+
+    def filter_by_amenities buildings
+      return buildings unless @amenities.present?
       @buildings = buildings
-      amenities.each(&:to_sym).each do |amenity|
-        @buildings = @buildings.where(amenity => true)
-      end
+      @buildings = @buildings.doorman           if has_amenity?('doorman')
+      @buildings = @buildings.courtyard         if has_amenity?('courtyard')
+      @buildings = @buildings.laundry_facility  if has_amenity?('laundry_facility')
+      @buildings = @buildings.gym               if has_amenity?('gym')
+      @buildings = @buildings.parking           if has_amenity?('parking')
+      @buildings = @buildings.roof_deck         if has_amenity?('roof_deck')
+      @buildings = @buildings.pets_allowed_cats if has_amenity?('pets_allowed_cats')
+      @buildings = @buildings.pets_allowed_dogs if has_amenity?('pets_allowed_dogs')
+      @buildings = @buildings.elevator          if has_amenity?('elevator')
+      @buildings = @buildings.swimming_pool     if has_amenity?('swimming_pool')
+      @buildings = @buildings.walk_up           if has_amenity?('walk_up')
+      @buildings = @buildings.no_fee            if has_amenity?('no_fee')
+      @buildings = @buildings.live_in_super     if has_amenity?('live_in_super')
+
       @buildings
     end
+
+    # def filter_by_amenities buildings, amenities
+    #   return buildings unless amenities.present?
+    #   @buildings = buildings
+    #   amenities.each(&:to_sym).each do |amenity|
+    #     @buildings = @buildings.where(amenity => true)
+    #   end
+    #   @buildings
+    # end
     
     def filter_by_prices buildings, price
       return buildings unless price.present? && !price.include?('on') && buildings.present?
@@ -76,7 +100,8 @@ module Search
       filter[:listing_bedrooms].present? || filter[:max_price].present? || listing_amenity?(filter[:amenities])
     end
 
-    def listing_amenity? amenities
+    def listing_amenity? amenities = nil
+      amenities = @amenities || amenities
       return false if amenities.blank?
       amenities.include?('months_free_rent') || amenities.include?('owner_paid') || amenities.include?('rent_stabilized')
     end
