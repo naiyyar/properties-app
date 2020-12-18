@@ -35,7 +35,7 @@ app.apartments.prototype = {
       _renderItem: function(ul, item) {
         search_term = (item.search_term == undefined ? item.value : item.search_term)
         
-        $('#search_term').removeClass('loader');
+        //$('#search_term').removeClass('loader');
         
         // Hightliting searched phrase
         search_phrase = item.search_phrase.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
@@ -68,7 +68,7 @@ app.apartments.prototype = {
   },
 
   _search: function(e,ui){
-    $('.search-loader').show();
+    // $('.search-loader').show();
   },
 
   _open: function(event, ui) {
@@ -79,7 +79,7 @@ app.apartments.prototype = {
     var elemToAppend    = '';
 
     ui_autcomplete.off('menufocus hover mouseover mouseenter');
-    $('.search-loader').hide();
+    //$('.search-loader').hide();
     $('#apt-search-form, #search-modal').find('.no-match-link').remove();
     
     elemToAppend =  '<div class="no-match-link" style="box-shadow: 0px 1px 4px rgba(0,0,0,0.6);">' +
@@ -128,6 +128,7 @@ app.apartments.prototype = {
     var item = ui.item;
     if(item != undefined){
       this._input.val(item.search_term);
+      $('#search-input-placeholder').val(item.search_term);
       $('.no-match-link').addClass('hidden');
       // Submitting search form
       if(e.keyCode == 13){
@@ -139,6 +140,7 @@ app.apartments.prototype = {
       $("ul.ui-autocomplete").hide();
       $('#search_term').addClass('border-bottom-lr-radius');
     }
+    $('#search-modal').hide();
     return false;
   },
   

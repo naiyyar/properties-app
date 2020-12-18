@@ -52,7 +52,8 @@ var ready = function(){
 			SearchModal.clearSearchField();
 		});
 	}
+
 } // close ready
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).ready(ready);
+$(document).on('page:load', ready);
