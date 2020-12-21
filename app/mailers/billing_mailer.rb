@@ -2,6 +2,7 @@ class BillingMailer < ApplicationMailer
 	DEFAULT_EMAIL_WITH_NAME = %(transparentcity <hello@transparentcity.co>)
 	
 	def send_payment_receipt options={}
+		debugger1
 		@billing = options[:billing]
 		to_email = options[:to_email].present? ? options[:to_email] : @billing&.email
 		user 		 = @billing.user

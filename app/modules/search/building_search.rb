@@ -24,55 +24,6 @@ module Search
     def no_sorting? sort_by
       sort_by.blank? || sort_by == '0'
     end
-    
-    def with_featured_building buildings, search_terms, sort_by, filters, page_num = 1
-      search_string, searched_by = search_terms
-      page_num           = 1 if page_num == 0
-      @filters           = filters
-      final_results      = {}
-      top2_featured      = top2_featured_buildings(buildings, searched_by)
-      non_featured       = non_featured_buildings(buildings, top2_featured, sort_by)
-      per_page_buildings = non_featured.paginate(:page => page_num, :per_page => 20)
-      all_buildings      = buildings_with_featured_on_top(top2_featured, per_page_buildings)
-      
-      buildings = top2_featured + non_featured if top2_featured.present?
-      # when there are only top two featured buildings after filter
-      # then per_page_buildings will be blank due to fitering featured buildings
-      if per_page_buildings.blank? && all_buildings.present?
-        per_page_buildings = all_buildings.paginate(:page => page_num, :per_page => 20)
-      end
-      
-      final_results[:all_buildings] = all_buildings
-      final_results[:map_hash]      = buildings_json_hash(buildings)
-      
-      return final_results, per_page_buildings
-    end
-
-    # putting featured building on top
-    def buildings_with_featured_on_top top_2, per_page
-      top_2.present? ? (top_2 + per_page) : per_page
-    end
-
-    def non_featured_buildings buildings, top_2, sort_by
-      buildings = buildings.where.not(id: top_2.map(&:id)) if top_2.present?
-      return buildings.sort_buildings(buildings, sort_by, @filters)
-    end
-
-    def top2_featured_buildings buildings, searched_by
-      fb_ids = featured_building_ids(buildings.pluck(:id), searched_by)
-      return [] if fb_ids.blank?
-      shuffled_ids = fb_ids.shuffle[0..1]
-      if fb_ids.length > 0
-        return buildings.random(shuffled_ids) unless searched_by == 'nyc'
-        Building.random(shuffled_ids)
-      end
-    end
-
-    def featured_building_ids ids, searched_by
-      fbs = FeaturedBuilding.active
-      fbs = fbs.where(building_id: ids) unless searched_by == 'nyc'
-      fbs.pluck(:building_id)
-    end
 
     def search_by_zipcodes(criteria)
       search_by_zipcode(criteria).order(:zipcode).to_a.uniq(&:zipcode)

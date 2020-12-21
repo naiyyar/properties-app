@@ -10,7 +10,8 @@ module HomeConcern
       company = ManagementCompany.find_by(name: @search_term.strip)
       redirect_to management_company_path(company) if company.present?
     else
-      results          = Buildings::Search.new(params, @search_string, pop_nb_buildings).fetch
+      search_buildings = Buildings::Search.new(params, @search_string, pop_nb_buildings)
+      results          = search_buildings.fetch
       @buildings       = @searched_buildings = results[:buildings]
       @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
       @zoom            = results[:zoom]            if results[:zoom].present?
@@ -19,24 +20,20 @@ module HomeConcern
     end
     
     if @buildings.present?
-      @filter_params      = params[:filter]
-      page_num            = params[:page].present? ? params[:page].to_i : 1
-      search_terms        = [@search_string, searched_by]
-      final_results       = Building.with_featured_building(@buildings, search_terms, params[:sort_by], @filter_params, page_num)
-      @per_page_buildings = final_results[1]
-      @all_buildings      = final_results[0][:all_buildings] # with featured
-      @hash               = final_results[0][:map_hash]
-      @lat, @lng          = @hash[0]['latitude'], @hash[0]['longitude']
-      @listings_count     = Listing.listings_count(@buildings, @all_buildings, @filter_params)
-      @buildings_count    = @hash.length rescue 0
+      @filter_params   = params[:filter]
+      final_results    = search_buildings.with_featured_buildings(@buildings)
+      @all_buildings, @hash, @per_page_buildings = final_results
+      @lat, @lng       = @hash[0]['latitude'], @hash[0]['longitude']
+      @listings_count  = Listing.listings_count(@buildings, @all_buildings, @filter_params)
+      @buildings_count = @hash.length rescue 0
     end
 
     @lat, @lng = params[:latitude], params[:longitude] if params[:search_term] == 'custom'
 
     @agent      = FeaturedAgent.get_random_agent(@search_string, searched_by).first
     @meta_desc  = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
-                                                             count: @buildings_count, 
-                                                             term:  @search_term)
+                                                              count: @buildings_count, 
+                                                              term:  @search_term)
     @half_footer = true
   end
 

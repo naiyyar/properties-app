@@ -6,6 +6,9 @@ class Building < ApplicationRecord
   DIMENSIONS  = ['cleanliness','noise','safe','health','responsiveness','management']
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
   COLIVING_NUM = 9
+  
+  PENTHOUSES_MIN_PRICE = 8000
+  
   BEDROOMS    = [
                  ['0',  'Studio'  ],
                  ['1',  '1 Bed'   ],
@@ -107,6 +110,7 @@ class Building < ApplicationRecord
   scope :three_bed, -> { where(three_bed: 3)     }
   scope :four_bed,  -> { where(four_plus_bed: 4) }
   scope :co_living,  ->{ where(co_living: Building::COLIVING_NUM) }
+  scope :penthouse, -> { where('max_listing_price >= ?', PENTHOUSES_MIN_PRICE) }
   
   # amenities scopes
   AMENITIES.each do |item|

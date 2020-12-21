@@ -5,9 +5,11 @@ module Buildings
 
 		# modules
 		include NYCBorough
+		include Buildings::FeaturedBuildings
 		
 		# Methods
 		def initialize params, search_string, buildings
+			@page 										 = params[:page]
 			@sort_by 									 = params[:sort_by]
 			@filters 									 = params[:filter]
 			@search_string 						 = search_string
@@ -21,13 +23,6 @@ module Buildings
 	    @lat 											 = params[:latitude]
 	    @lng 											 = params[:longitude]
 	    @zoomlevel 								 = params[:zoomlevel]
-
-	    @sub_borough             	 = {}
-	    unless CITY_SEARCH_STRINGS.include?(@searched_by)
-        @sub_borough['Queens']   = queens_borough
-        @sub_borough['Brooklyn'] = brooklyn_sub_borough
-        @sub_borough['Bronx']    = bronx_sub_borough
-      end
 		end
 
 		def fetch
@@ -55,7 +50,7 @@ module Buildings
 			when 'no-fee-apartments-nyc-neighborhoods'
 				buildings = @buildings.buildings_in_neighborhood(@search_string.downcase)
 			when 'nyc'
-				buildings, @results[:filters] = @buildings.buildings_by_popular_search(@search_term)
+				buildings, @results[:filters] = Building.buildings_by_popular_search(@search_term, @buildings)
 				@results[:zoom] = 12
 			else
 				buildings 			= self.search_by_city_or_nb
@@ -66,10 +61,23 @@ module Buildings
 		end
 
 		def search_by_city_or_nb
-			@buildings.cached_buildings_by_city_or_nb(@search_string, @sub_borough[@search_string])
+			@buildings.cached_buildings_by_city_or_nb(@search_string, sub_borough)
 		end
 
 		private
+
+		def sub_borough
+			unless CITY_SEARCH_STRINGS.include?(@searched_by)
+				@sub_borough = {
+					'Queens' 		=> queens_borough,
+					'Brooklyn' 	=> brooklyn_sub_borough,
+					'Bronx' 		=> bronx_sub_borough
+				}
+       	return @sub_borough[@search_string]
+      else
+      	nil
+      end
+		end
 
 		def set_zoom
 			if @lat.present? && @lng.present?
@@ -77,6 +85,10 @@ module Buildings
 			else
 				@search_string == 'New York' ? 12 : 14
 			end
+		end
+
+	  def page_num
+			@page.present? ? @page.to_i : 1
 		end
 	end
 end

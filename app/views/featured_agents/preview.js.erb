@@ -6,7 +6,7 @@ $('#thumbnailPreview').modal('show');
 fig_elem.html("<%= j render partial: 'home/lightslider', \
 																locals: { images_count: @images_count, \
 																				  object: @featured_agent, \
-																				  first_image: @uploads.first, \
+																				  first_image: @first_image, \
 																				  show_path: '#' } %>");
 
 setTimeout(function(){

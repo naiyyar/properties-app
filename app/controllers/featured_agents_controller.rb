@@ -117,8 +117,8 @@ class FeaturedAgentsController < ApplicationController
   end
 
   def set_uploads
-    @uploads      = @featured_agent.uploads
-    @images_count = @uploads.count
+    @first_image  = @featured_agent.uploads.first rescue nil
+    @images_count = @featured_agent.uploads_count
   end
 
   def set_neighborhoods
@@ -150,7 +150,7 @@ class FeaturedAgentsController < ApplicationController
     render_to_string(:partial => '/home/lightslider', 
                      :locals => { object:       @featured_agent,
                                   images_count: @images_count,
-                                  first_image:  @uploads[0],
+                                  first_image:  @first_image,
                                   show_path:    '#'
                                 }
                     )
