@@ -24,10 +24,7 @@ class ListingsController < ApplicationController
   
   def delete_all
     unless params[:type] == 'past'
-      @listings.each do |listing|
-        listing.destroy
-        listing.update_rent(@listings.active)
-      end
+      Listing.delete_current_listings(@listings)
     else
       @listings.delete_all
     end
@@ -35,10 +32,9 @@ class ListingsController < ApplicationController
   end
 
   def import
-    buildings      = Building.where.not(building_street_address: nil)
-    listings       = Listing.active     
+    buildings      = Building.where.not(building_street_address: nil).includes(:listings)
     import_listing = ImportListing.new(params[:file])
-    @errors        = import_listing.import_listings(buildings, listings)
+    @errors        = import_listing.import_listings(buildings)
     if @errors.present?
       flash[:error] = @errors
     else
@@ -153,7 +149,8 @@ class ListingsController < ApplicationController
     end
 
     def update_building_rent
-      @listing.update_rent
+      building = @listing.building
+      building.update_rent(building.listings.active)
     end
 
     def set_building

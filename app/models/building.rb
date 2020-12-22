@@ -357,12 +357,6 @@ class Building < ApplicationRecord
     self.city.downcase.gsub(' ', '')
   end
 
-  def self.number_of_buildings neighbohood
-    where("neighborhood @@ :q 
-           OR neighborhoods_parent @@ :q 
-           OR neighborhood3 @@ :q" , q: neighbohood).count
-  end
-
   def prices
     !price.nil? ? RANGE_PRICE[price - 1] : ''
   end
@@ -398,7 +392,22 @@ class Building < ApplicationRecord
                         name = ?', neighborhood, neighborhoods_parent, neighborhood3)
   end
 
+  def update_rent active_listings = nil
+    if active_listings.present?
+      active_listings = active_listings.with_rent.order(rent: :asc)
+      min_price = active_listings.first.rent rescue nil
+      max_price = active_listings.last.rent  rescue nil
+    else
+      min_price, max_price = nil, nil
+    end
+    update_listings_price(min_price, max_price)
+  end
+
   private
+
+  def update_listings_price min_price, max_price
+    update_columns(min_listing_price: min_price, max_listing_price: max_price)
+  end
   
   def update_neighborhood_counts
     popular_neighborhoods.each do |hood|

@@ -94,28 +94,17 @@ class Listing < ApplicationRecord
     @max_rent ||= self.maximum('rent')
   end
 
-  def update_rent listings = nil
-    property        = self.building
-    listings        = Listing.active if listings.blank?
-    active_listings = property_listings(listings)
-    if active_listings.present?
-      property.update_columns(  min_listing_price: active_listings.first.rent, 
-                                max_listing_price: active_listings.last.rent )
-    else
-      property.update_columns(min_listing_price: nil, max_listing_price: nil)
-    end
-  end
-
-  def property_listings listings
-    listings.where('building_id = ? AND rent is not null', building_id).order(rent: :asc)
-  end
-
   def self.transfer_to_past_listings_table listings
-    active_listings = Listing.active
-    listings.each do |listing|
-      PastListing.create(listing.attributes.except('id'))
+    self.delete_current_listings(listings, 'transfer')
+  end
+
+  def self.delete_current_listings listings, type = 'delete'
+    active_listings = Listing.active.where.not(id: listings.pluck(:id))
+    listings.includes(:building).each do |listing|
+      building = listing.building
+      PastListing.create(listing.attributes.except('id')) if type == 'transfer'
       listing.destroy
-      listing.update_rent(active_listings)
+      building.update_rent(active_listings.where(building_id: building.id))
     end
   end
   

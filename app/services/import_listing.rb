@@ -4,13 +4,13 @@ class ImportListing < ImportService
     super
   end
   
-  def create_listing building, listings, row, line_num
+  def create_listing building, row, line_num
     listing = Listing.new
     listing.attributes            = row.to_hash
     listing[:building_id]         = building.id
-    listing[:management_company]  = building.management_company.try(:name)
+    listing[:management_company]  = building.management_company_name
     if listing.save
-      listing.update_rent(listings)
+      building.update_rent(building.listings)
     else
       listing.errors.full_messages.each do |message|
         @errors << "Issue line #{line_num}, column #{message}."
@@ -22,7 +22,7 @@ class ImportListing < ImportService
     buildings.where('LOWER(building_street_address) = ?', address.downcase.strip)
   end
 
-  def import_listings buildings, listings
+  def import_listings buildings
     @errors = []
     (2..@spreadsheet.last_row).each do |i|
       row = Hash[[@header, @spreadsheet.row(i)].transpose ]
@@ -30,7 +30,7 @@ class ImportListing < ImportService
       if address.present? && row['unit'].present? && row['date_active'].present?
         building = find_building(buildings, address)
         if building.present?
-          create_listing(building.first, listings, row, i)
+          create_listing(building.first, row, i)
         else
           @errors << "Issue line #{i}, Building address does not exist in database."
         end
