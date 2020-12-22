@@ -8,7 +8,7 @@ module Buildings
 		include Buildings::FeaturedBuildings
 		
 		# Methods
-		def initialize params, buildings=nil, search_string=''
+		def initialize params, buildings, search_string=''
 			@page 										 = params[:page]
 			@sort_by 									 = params[:sort_by]
 			@filters 									 = params[:filter]

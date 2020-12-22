@@ -264,7 +264,7 @@ module BuildingsHelper
 	end
 
 	def with_bed_text b, filters
-		"#{'Bed' if b.bedroom_types? && (!b.has_only_studio?(filters) && !b.has_only_room?(filters))}" # #{',' if b.bedroom_types? && b.coliving_with_building_beds?}" # #{'CoLiving' if b.coliving_with_building_beds? }
+		"#{'Bed' if b.bedroom_types? && (!b.has_only_studio?(filters) && !b.has_only_room?(filters) && !b.coliving)}" # #{',' if b.bedroom_types? && b.coliving_with_building_beds?}" # #{'CoLiving' if b.coliving_with_building_beds? }
 	end
 
 	def nearby_link_text nb

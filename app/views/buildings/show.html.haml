@@ -45,7 +45,6 @@
 = hidden_field_tag :cu, current_user.present? ? current_user.id : nil
 = hidden_field_tag :cu_building_id, @building.id
 = hidden_field_tag :similar_property_id, @similar_properties&.first&.id
-= hidden_field_tag :searched_term, searched_term
 
 .addNewUnit= render 'new_unit_modal'
 

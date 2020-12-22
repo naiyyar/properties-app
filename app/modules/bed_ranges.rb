@@ -85,7 +85,7 @@ module BedRanges
   end
 
   def coliving_with_building_beds?
-    !listings_beds? && co_living == Building::COLIVING_NUM
+    !listings_beds? && coliving
   end
 
   def listings_beds?
@@ -93,7 +93,7 @@ module BedRanges
   end
 
   def bedroom_types?
-    studio.present? || either_of_four? || listings_beds?
+    studio.present? || either_of_four? || listings_beds? || coliving
   end
   
   def either_of_two?
@@ -106,5 +106,9 @@ module BedRanges
   
   def either_of_four?
     either_of_three? || one_bed.present?
+  end
+
+  def coliving
+    co_living == Building::COLIVING_NUM
   end
 end
