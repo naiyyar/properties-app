@@ -18,7 +18,11 @@ class ListingsController < ApplicationController
   end
 
   def change_status
-    @listings.each { |list| list.update(active: params[:active]) }
+    @listings.includes(:building).each do |list|
+      building = list.building
+      list.update_column('active', params[:active])
+      building.update_rent(building.listings.active)
+    end
     redirect_to :back
   end
   
