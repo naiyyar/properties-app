@@ -1,8 +1,7 @@
 module Search
 	module RedoSearch
-		def redo_search_buildings lat, lng, zoom = nil
+		def redo_search_buildings custom_latng, zoom = nil
 	    zoom         = zoom.present? ? zoom.to_i : 14
-	    custom_latng = [lat.to_f, lng.to_f]
 	    distance     = redo_search_distance(0.5, zoom)
 	    buildings    = near(custom_latng, distance, units: :km, order: '')
 	    distance     = redo_search_distance(1.0, zoom)

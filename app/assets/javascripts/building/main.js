@@ -36,8 +36,3 @@ if(svc.length > 0){
     Card.loadDisplayImageAndCTALinks($(j).data('bid'));
   });
 }
-
-var sp = $('#search-input-placeholder')
-if(sp.val() != ''){
-  sp.val('');
-}

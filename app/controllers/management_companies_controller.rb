@@ -11,7 +11,6 @@ class ManagementCompaniesController < ApplicationController
   end
 
   def managed_buildings
-    
   end
 
   def set_availability_link
@@ -40,15 +39,19 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn        = @half_footer = true
-    page_num             = params[:page].present? ? params[:page].to_i : 1
-    final_results        = Building.with_featured_building(@buildings, nil, nil, nil, page_num)
-    @manage_buildings    = final_results[1] if !params[:object_id].present?
-    @all_buildings       = final_results[0][:all_buildings]
+    search_buildings     = Buildings::Search.new(params)
+    final_results        = search_buildings.with_featured_buildings(@buildings)
+    @manage_buildings    = final_results[2] if !params[:object_id].present?
+    @all_buildings       = final_results[0]
+    
+    # Reviews
     @reviews             = Review.buildings_reviews(@buildings)
     @total_reviews       = @reviews.size rescue 0
     @reviews             = @reviews.limit(10)
+
+    # json hash for rendering map
     if @buildings.present?
-      @hash            = final_results[0][:map_hash]
+      @hash            = final_results[1]
       @buildings_count = @hash.length
       if @buildings_count > 0
         @lat = @hash.last['latitude']

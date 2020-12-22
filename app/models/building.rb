@@ -41,7 +41,6 @@ class Building < ApplicationRecord
   extend Search::BuildingSorting
   extend Search::PopularSearches
   extend Search::RedoSearch
- 
   
   ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
 

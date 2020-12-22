@@ -49,7 +49,7 @@
         = render 'layouts/home/footer'
       #building_managed.tab-pane.fade.in.active.no-padding
         .resultsList{class: controller_name}
-          #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :building, cache: false 
+          #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :building
         
         .pages-container= will_paginate @manage_buildings, renderer: BootstrapPagination::Rails
 

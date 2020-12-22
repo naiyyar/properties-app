@@ -5,9 +5,8 @@ module Filter
 			@date_active   = load_more_params[:date_active]
 			@loaded_ids    = load_more_params[:loaded_ids]
 			@building 		 = building
-			@past_listings = @building.past_listings.order_by_date_active_desc
 			@listings 		 = unless listing_type == 'past'
-												@building.listings.active.order_by_rent_asc
+												active_listings
 											else
 												past_listings
 											end
@@ -21,19 +20,20 @@ module Filter
 		end
 
 		def past_listings
+			@past_listings = @building.past_listings.order_by_date_active_desc
 			return @past_listings.where('date_active <= ? AND id not in(?)', @date_active, @loaded_ids) if @date_active.present?
 			@past_listings
 		end
 
+		def active_listings
+			@building.listings.active.order_by_rent_asc
+		end
+
 		def fetch_listings
 			# Not appying filter on featured building listings
-			return @listings if @building.featured? && @listing_type != 'past'
-			
-	    if @listing_type == 'past'
-	    	@listings.order_by_date_active_desc.limit(PastListing::LIMIT)
-	    else
-	      filtered_listings.order_by_rent_asc
-	    end
+			return @listings 													 if @building.featured? && @listing_type != 'past'
+			return filtered_listings.order_by_rent_asc if @listing_type != 'past'
+	    return @listings.order_by_date_active_desc.limit(PastListing::LIMIT)
 	  end
 
 	  def filter_by_beds

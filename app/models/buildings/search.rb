@@ -8,7 +8,7 @@ module Buildings
 		include Buildings::FeaturedBuildings
 		
 		# Methods
-		def initialize params, search_string, buildings
+		def initialize params, buildings=nil, search_string=''
 			@page 										 = params[:page]
 			@sort_by 									 = params[:sort_by]
 			@filters 									 = params[:filter]
@@ -34,7 +34,7 @@ module Buildings
 																	@buildings.buildings_in_city(@search_string)
 																end
 															else
-																@buildings.redo_search_buildings(@lat, @lng, @zoomlevel)
+																@buildings.redo_search_buildings([@lat.to_f, @lng.to_f], @zoomlevel)
 															end
 															
 			@results[:buildings] = @buildings.filtered_buildings(@results[:buildings], @filters) if @filters.present?
