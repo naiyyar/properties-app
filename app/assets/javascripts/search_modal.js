@@ -19,7 +19,7 @@ var ready = function(){
 				var self = this;
 				setTimeout(function(){
 					self.hideClearIcon();
-				}, 200)
+				}, 200);
 			},
 
 			showClearIcon: function(){

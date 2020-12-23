@@ -1,12 +1,57 @@
 var app = window.app = {};
 
 app.apartments = function() {
-  this._input = $('#search_term');
-  this._initAutocomplete();
+  $that = this
+  $that._input = $('#search_term');
+  let items = [];
+  let prev_searches = JSON.parse(localStorage.getItem('prevSearches'));
+  if(prev_searches) {
+    for(i = 0; i < prev_searches.length; i++){
+      item = prev_searches[i];
+      items.push({ label: item.search_term, desc: item.url });
+    }
+  }
+  if($that._input.length > 0){
+    $that._initAutocomplete(items);
+    $that._initCatAutocomplete();
+  }
 };
 
 app.apartments.prototype = {
-  _initAutocomplete: function() {
+  // Autocompalte to show search history results
+  _initAutocomplete: function(items){
+    $that._input.autocomplete({
+      source: items,
+      minLength: 0,
+      select: function( e, ui ) {
+        var item = ui.item;
+        $( "#search_term, #search-input-placeholder" ).val( item.label );
+        if(item != undefined){
+          if(e.keyCode == 13){ window.location = item.desc; }
+        }
+        return false;
+      }
+    }).click(function() {
+        $that._input.val('');
+        $(this).autocomplete("search");
+        var historyUi = $('#ui-id-1');
+        if(!mobile){
+          $that._input.removeClass('border-bottom-lr-radius');
+        }else{
+          historyUi.css({'width':'100%', 'left':'0px'});
+        }
+        historyUi.append($that._prepend_location_link('ui-menu-item'));
+        if(historyUi.is(':hidden')){
+          historyUi.show();
+        }
+    }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+         return $( "<li>" )
+         .append( "<span class='fa fa-history' style='color: #777;'></span> <a href="+item.desc+">" + item.label + "</a>" )
+         .appendTo( ul );
+      }; 
+  },
+  // CatAutocompalte to show app search results
+  _initCatAutocomplete: function() {
     $.widget( "custom.catcomplete", $.ui.autocomplete, {
       _create: function() {
         this._super();
@@ -28,15 +73,11 @@ app.apartments.prototype = {
             }
           }
         });
-        var curr_loc = '<a href="'+location_url+'" class="hyper-link location" style="display: block;" onclick="getLocation()"><span class="fa fa-location-arrow"></span> Current Location</a>';
-        $('.ui-autocomplete').prepend("<li class='ui-autocomplete-group curr-location' style='background: #fff; cursor: pointer;'>"+curr_loc+"</li>");
+        $that._prepend_location_link('ui-autocomplete-group');
       },
 
       _renderItem: function(ul, item) {
         search_term = (item.search_term == undefined ? item.value : item.search_term)
-        
-        //$('#search_term').removeClass('loader');
-        
         // Hightliting searched phrase
         search_phrase = item.search_phrase.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
         var regexp = new RegExp('(' + search_phrase + ')', 'gi'),
@@ -57,7 +98,7 @@ app.apartments.prototype = {
       }
     });
 
-    this._input.catcomplete({
+    $that._input.catcomplete({
       source: '/auto_search.json',
       appendTo: '#apt-search-results',
       select: $.proxy(this._select, this),
@@ -67,21 +108,31 @@ app.apartments.prototype = {
     });
   },
 
-  _search: function(e,ui){
-    // $('.search-loader').show();
+  _prepend_location_link: function(_class){
+    var curr_loc = '<a href="'+location_url+'" \
+                       class="hyper-link location" \
+                       style="display: block;" \
+                       onclick="getLocation()"> \
+                         <span class="fa fa-location-arrow"></span> Current Location</a>';
+    
+    $('.ui-autocomplete').prepend("<li class='"+_class+" curr-location' \
+                                       style='background: #fff; cursor: pointer;'>"+curr_loc+"</li>");
   },
+
+  _search: function(e, ui){ },
 
   _open: function(event, ui) {
     // Fix for double tap on ios devices
-    var ui_autcomplete  = $('.ui-autocomplete');
+    console.log(111)
+    var history_ui = $('#ui-id-1');
+    if(history_ui.is(':visible')){ history_ui.hide(); }
+    
+    var ui_autcomplete  = $('#ui-id-2');
     var no_match_link;
     var ul_height       = ui_autcomplete.outerHeight() + 42;
     var elemToAppend    = '';
-
     ui_autcomplete.off('menufocus hover mouseover mouseenter');
-    //$('.search-loader').hide();
     $('#apt-search-form, #search-modal').find('.no-match-link').remove();
-    
     elemToAppend =  '<div class="no-match-link" style="box-shadow: 0px 1px 4px rgba(0,0,0,0.6);">' +
                     '<a href="/buildings/contribute?results=no-matches-found">'+
                     '<b>No matches found - Add Your Building</b></a></div>';
@@ -106,7 +157,7 @@ app.apartments.prototype = {
           no_match_link.css('top',(ul_height + 30)+'px');
         }
       }else{
-        var search_input_width = this._input.outerWidth();
+        var search_input_width = $that._input.outerWidth();
         ui_autcomplete.css('width', (search_input_width)+'px');
         no_match_link.css('top',(ul_height - 3)+'px');
         if($('.home .no-match-link').length > 0){
@@ -119,15 +170,15 @@ app.apartments.prototype = {
     }
     else{
       $('.no-match-link').css('width', (ui_autcomplete.width()+2)+'px');
-      $('#search_term').removeClass('border-bottom-lr-radius');
+      $that._input.removeClass('border-bottom-lr-radius');
     }
-    
+    return false;
   },
 
   _select: function(e, ui) {
     var item = ui.item;
     if(item != undefined){
-      this._input.val(item.search_term);
+      $that._input.val(item.search_term);
       $('#search-input-placeholder').val(item.search_term);
       $('.no-match-link').addClass('hidden');
       // Submitting search form
@@ -141,6 +192,7 @@ app.apartments.prototype = {
       $('#search_term').addClass('border-bottom-lr-radius');
     }
     $('#search-modal').hide();
+    this._save_search(ui.item);
     return false;
   },
   
@@ -152,6 +204,20 @@ app.apartments.prototype = {
     else{
       setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
     }
-  }
+  },
 
+  _save_search: function(item){
+    let search_arr = new Array;
+    let prev_searches = JSON.parse(localStorage.getItem('prevSearches'))
+    search_arr.push(item);
+    if(prev_searches) {
+      for(i = 0; i <= prev_searches.length; i++){
+        let prev_item = prev_searches[i];
+        if(prev_item && item.id != prev_item.id){
+          search_arr.push(prev_searches[i]);
+        }
+      }
+    }
+    localStorage.setItem('prevSearches', JSON.stringify(search_arr));
+  }
 };
