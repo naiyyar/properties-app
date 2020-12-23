@@ -129,7 +129,7 @@ class HomeController < ApplicationController
   def render_slider_partial
     render_to_string(:partial => '/home/lightslider', 
                      :locals => { object:       @building,
-                                  images_count: @image_uploads.length,
+                                  images_count: @image_uploads.size,
                                   first_image:  @image_uploads[0],
                                   show_path:    building_path(@building)
                                 }

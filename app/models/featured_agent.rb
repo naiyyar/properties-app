@@ -1,6 +1,6 @@
 class FeaturedAgent < ApplicationRecord
 	include PgSearch::Model
-	include Imageable
+	include ImageableConcern
 	include Billable
 
   extend SplitViewAgentDisplay

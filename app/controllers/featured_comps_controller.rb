@@ -11,7 +11,7 @@ class FeaturedCompsController < ApplicationController
     ) or return
     @featured_comps = @filterrific.find
                                   .paginate(:page => params[:page], :per_page => 100)
-                                  .includes(:buildings, :building => [:management_company])
+                                  .includes(:building => [:management_company])
                                   .order('created_at desc')
 
     respond_to do |format|

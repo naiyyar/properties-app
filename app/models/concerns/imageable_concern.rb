@@ -1,4 +1,4 @@
-module Imageable
+module ImageableConcern
 	extend ActiveSupport::Concern
 	included do
 		has_many :uploads, as: :imageable, dependent: :destroy

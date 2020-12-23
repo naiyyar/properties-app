@@ -45,7 +45,7 @@ class Unit < ApplicationRecord
   acts_as_voteable
 
   include PgSearch::Model
-  include Imageable
+  include ImageableConcern
   include Voteable
   
   attr_accessor :recommended_percent, :reviews_count

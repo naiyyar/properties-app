@@ -11,8 +11,11 @@ module BuildingsConcern
     # reviews
     @reviews_count = @building.reviews_count.to_i
     # comps
-    @similar_properties       = @building.comps
-    @similar_properties_count = @similar_properties.length
+    @similar_properties_count = 0
+    if @building.active_comps.size > 0
+      @similar_properties = Building.buildings_with_active_comps(@building.id)
+      @similar_properties_count = @similar_properties.size
+    end
     # 
     @gmaphash = Building.buildings_json_hash((@similar_properties.to_a + [@building]), 'featured_comps')
     # Current listings
@@ -26,6 +29,7 @@ module BuildingsConcern
     @past_listings_count   = @past_listings.count
     # Tour
     @building_tours        = @building.video_tours
+    @building_tours_count  = @building_tours.size
     @video_tours, @category = VideoTour.videos_by_categories(@building_tours, limit: 2)
     
     @neighbohood            = @building.neighbohoods
@@ -37,9 +41,10 @@ module BuildingsConcern
     broker_percent = BrokerFeePercent.first.percent_amount
     @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
     @distance_results = DistanceMatrix.new(@building).get_data
+    @b_management_company = @building.management_company
     
     @meta_desc  = "#{@building.building_name_or_address} #{@building.building_street_address} is a #{@building.try(:building_type)} "+ 
-                  "in #{@building.neighbohoods} #{@building.city} and is managed by #{@building.management_company.try(:name) }. "+ 
+                  "in #{@building.neighbohoods} #{@building.city} and is managed by #{@b_management_company.try(:name) }. "+ 
                   "View #{@uploaded_images_count} photos, #{@active_listings_count} active listings, #{@past_listings_count} past listings."
     
     flash[:notice] = 'Files are uploaded successfully.' if params[:from_uploaded].present?

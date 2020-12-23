@@ -1,5 +1,6 @@
 class FeaturedComp < ApplicationRecord
 	include PgSearch::Model
+  belongs_to :building
 	has_many :featured_comp_buildings
 	has_many :buildings, through: :featured_comp_buildings, :dependent => :destroy
 

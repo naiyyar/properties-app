@@ -109,7 +109,7 @@ module BuildingsHelper
 	def heart_link object, user
 		# To save as favourite sending js request
 		# to unsave as favourite sending json request
-		@current_user = current_user.present? ? current_user : user
+		@current_user = current_user || user
 		link_to heart_icon, saved_object_url(object), 
 												remote: remote(object), class: fav_classes(object), 
 												title: heart_link_title(object), 

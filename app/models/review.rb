@@ -29,7 +29,7 @@ class Review < ApplicationRecord
   has_many :useful_reviews
   has_many :review_flags
   
-  include Imageable
+  include ImageableConcern
   include PgSearch::Model
   
   validates :tos_agreement, :allow_nil => false, :acceptance => { :accept => true }, :on => :create #, message: 'Terms not accepted.'

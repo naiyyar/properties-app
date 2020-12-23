@@ -10,4 +10,8 @@ module Voteable
   def total_votes
     votes.count
   end
+
+  def suggested_percent
+    Vote.recommended_percent(self)
+  end
 end

@@ -3,7 +3,6 @@ class Building < ApplicationRecord
   resourcify
 
   # constants
-  DIMENSIONS  = ['cleanliness','noise','safe','health','responsiveness','management']
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
   COLIVING_NUM = 9
   
@@ -28,12 +27,15 @@ class Building < ApplicationRecord
                  :neighborhood3, :studio, :one_bed, :two_bed, :three_bed, :four_plus_bed, :co_living, :listings_count, :updated_at]
   
   # Modules
+  include ImageableConcern
+  include FavoritableConcern
+  include RateableConcern
   include PgSearch::Model
-  include Imageable
   include SaveNeighborhood
   include BuildingReviews
   include Voteable
   include BedRanges
+  include CTALinks
 
   # Search and filtering methods
   extend Search::BuildingSearch
@@ -54,7 +56,6 @@ class Building < ApplicationRecord
   belongs_to :user
   belongs_to :management_company, touch: true
   has_many :reviews,                as: :reviewable
-  has_many :favorites,              as: :favorable, dependent: :destroy
   # has_one  :featured_comp,          foreign_key: :building_id,  dependent: :destroy
   has_many :featured_comp_buildings
   has_many :featured_comps,         through: :featured_comp_buildings, dependent: :destroy
@@ -79,6 +80,10 @@ class Building < ApplicationRecord
   end
   scope :building_photos, -> (buildings) do 
     buildings.joins(:uploads).where('buildings.id = uploads.imageable_id AND imageable_type = ?', 'Building')
+  end
+
+  scope :buildings_with_active_comps, -> (building_id) do
+    joins(:featured_comps).where('featured_comps.building_id = ? AND featured_comps.active is true', building_id)
   end
 
   scope :with_active_listing,   -> { where('listings_count > ?', 0) }
@@ -181,21 +186,6 @@ class Building < ApplicationRecord
       max_listing_price_changed?)
   end
 
-  # creating unit from contribute
-  def created_unit session, building_data
-    unit_attributes = building_data['units_attributes']['0']
-    unit_id         = session[:form_data]['unit_id']
-    
-    unit_attributes['building_id'] = self.id
-    unit            = Unit.find(unit_id) rescue nil
-    unit_params     = unit_attributes
-    @unit  =  if unit.present?
-                unit.update(unit_params)
-              else
-                Unit.create(unit_params)
-              end
-  end
-
   def self.transparentcity_buildings
     Rails.cache.fetch([self, 'transparentcity_buildings']) { 
       where.not(building_street_address: nil)
@@ -208,74 +198,21 @@ class Building < ApplicationRecord
 
   def featured?
     featured_buildings_count.to_i > 0
-    # featured_buildings.active.first.present?
   end
 
   def active_comps
-    featured_comps.active
-  end
-
-  def active_comp_building_ids
-    active_comps.pluck(:building_id) rescue []
-  end
-
-  def comps
-    return [] if active_comp_building_ids.length == 0
-    Building.where(id: active_comp_building_ids).includes(:featured_comps, :uploads)
+    @active_comps ||= featured_comps.active
   end
 
   def featured_comp_building_id
-    active_comps&.first&.building_id
+    self.id
   end
 
   def get_listings filter_params, type='active', load_more_params={}
-    Filter::Listings.new(self, load_more_params, type, filter_params).fetch_listings
-  end
-
-  # CTA
-  def all_three_cta? listings_count
-    active_web_url? && has_active_email? && listings_count > 0
-  end
-
-  def availability_and_contacts_cta?
-    active_web_url? && has_active_email?
-  end
-
-  def show_apply_link?
-    online_application_link.present? && show_application_link 
-  end
-
-  def show_contact_leasing?
-    email.present? && active_email
-  end
-
-  def all_3_contact_link?
-    show_apply_link? && show_contact_leasing? && active_web_url?
-  end
-
-  def apply_and_leasing?
-    show_apply_link? && show_contact_leasing?
-  end
-
-  def apply_and_availability?
-    show_apply_link? && active_web_url?
-  end
-
-  def leasing_and_availability?
-    show_contact_leasing? && active_web_url?
-  end
-
-  def availability?
-    active_web_url? && !(apply_and_leasing?)
-  end
-
-  def apply?
-    show_apply_link? && !(leasing_and_availability?)
-  end
-  #end CTA
-  
-  def suggested_percent
-    Vote.recommended_percent(self)
+    Filter::Listings.new(self, 
+                         load_more_params, 
+                         type, 
+                         filter_params).fetch_listings
   end
 
   def amenities
@@ -317,40 +254,20 @@ class Building < ApplicationRecord
     self.building_name
   end
 
-  def rating_cache?
-    rating_cache.where(dimension: DIMENSIONS).present?
-  end
-
-  def rating_cache
-    RatingCache.where(cacheable_id: self.id, cacheable_type: 'Building') 
-  end
-
   def zipcode=(val)
     write_attribute(:zipcode, val.to_s.gsub(/\s+/,'')) if val.present?
   end
 
   def street_address
-    [building_street_address, city, state].compact.join(', ')
+    address.compact.join(', ')
   end
 
   def full_street_address
-    [building_street_address, city, state, zipcode].compact.join(', ')
+    (address << zipcode).compact.join(', ')
   end
 
   def building_name_or_address
     building_name.present? ? building_name : building_street_address
-  end
-
-  def no_of_units
-    self.number_of_units.present? ? self.number_of_units : self.units.count
-  end
-
-  def fetch_or_create_unit params
-    params           = params[:units_attributes]
-    unit             = Unit.new(params.values[0])
-    unit.building_id = self.id
-    unit.save
-    return unit
   end
 
   def formatted_city
@@ -361,36 +278,39 @@ class Building < ApplicationRecord
     !price.nil? ? RANGE_PRICE[price - 1] : ''
   end
 
+  def no_of_units
+    self.number_of_units.present? ? self.number_of_units : self.units.count
+  end
+
+  #### UNITS
+  # creating unit from contribute
+  def created_unit session, building_data
+    unit_attributes = building_data['units_attributes']['0']
+    unit_id         = session[:form_data]['unit_id']
+    
+    unit_attributes['building_id'] = self.id
+    unit        = Unit.find(unit_id) rescue nil
+    unit_params = unit_attributes
+    @unit  =  if unit.present?
+                unit.update(unit_params)
+              else
+                Unit.create(unit_params)
+              end
+  end
+
+  def fetch_or_create_unit params
+    params           = params[:units_attributes]
+    unit             = Unit.new(params.values[0])
+    unit.building_id = self.id
+    unit.save
+    return unit
+  end
+
   def unit_information?
     (no_of_units.present? && self.no_of_units > 0) || floors.present? || built_in.present?
   end
 
-  def favorite_by?(favoriter)
-    favorites.find_by(favoriter_id:   favoriter.id, 
-                      favoriter_type: favoriter.class.base_class.name).present?
-  end
-
-  def has_active_email?
-    email.present? && active_email
-  end
-
-  def active_web_url?
-    web_url.present? && active_web
-  end
-
-  def fav_color_class user_id = nil
-    if user_id.present?
-      favorite_by?(User.find(user_id)) ? 'filled-heart' : 'unfilled-heart'
-    else
-      'unfilled-heart'
-    end 
-  end
-
-  def popular_neighborhoods
-    Neighborhood.where('name = ? OR 
-                        name = ? OR 
-                        name = ?', neighborhood, neighborhoods_parent, neighborhood3)
-  end
+  #### END UNITS
 
   def update_rent active_listings = nil
     if active_listings.present?
@@ -408,15 +328,24 @@ class Building < ApplicationRecord
   def update_listings_price min_price, max_price
     update_columns(min_listing_price: min_price, max_listing_price: max_price)
   end
+
+  def popular_neighborhoods
+    Neighborhood.where('name = ? OR 
+                        name = ? OR 
+                        name = ?', neighborhood, neighborhoods_parent, neighborhood3)
+  end
   
   def update_neighborhood_counts
     popular_neighborhoods.each do |hood|
       if hood.buildings_count.to_i >= 0
-        city = (hood.boroughs == 'MANHATTAN' ? 'New York' : hood.boroughs.capitalize)
-        hood.buildings_count = Building.buildings_in_neighborhood(hood.name.downcase, city).count
+        hood.buildings_count = Building.buildings_in_neighborhood(hood.name.downcase, hood.city).count
         hood.save
       end
     end
+  end
+
+  def address
+    [building_street_address, city, state]
   end
 
 end

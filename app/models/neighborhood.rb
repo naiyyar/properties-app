@@ -27,15 +27,7 @@ class Neighborhood < ApplicationRecord
     return "#{name.downcase.gsub(' ', '-')}-#{formatted_city.downcase}"
   end
 
-  def formatted_city
-    city = boroughs.titleize
-    city = 'New York' if city == 'Manhattan'
-    city.gsub(' ', '')
-  end
-
   def city_name
-    city = boroughs.titleize
-    city = 'New York' if city == 'Manhattan'
     city.gsub('', '')
   end
 
@@ -51,6 +43,18 @@ class Neighborhood < ApplicationRecord
 
   def self.pop_neighborhoods
     self.select(:id, :name, :buildings_count)
+  end
+
+  def city
+    self.boroughs.upcase == 'MANHATTAN' ? 'New York' : self.boroughs.capitalize
+  end
+
+  private
+
+  def formatted_city
+    # city = boroughs.titleize
+    # city = 'New York' if city == 'Manhattan'
+    city.gsub(' ', '')
   end
 
 end

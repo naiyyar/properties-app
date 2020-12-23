@@ -13,7 +13,7 @@
 					%th.hidden-xs OP
 					%th.hidden-xs{width: '5%'} Rent Stabilize
 			%tbody.table.table-borders
-				- if listings.present?
+				- if listings.size > 0
 					- colspan = browser.device.mobile? ? '6' : '9'
 					- cache listings do
 						= render 'listings/partials/listing_rows', listings: listings, type: type

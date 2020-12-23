@@ -18,9 +18,9 @@
 	= render 'building_amenities'
 
 	.clearfix
-	- if @building_tours.present?
+	- if @building_tours_count > 0
 		.amenities.show-section#video-tours
-			%h3="3D / Video Tour (#{@building_tours.length})"
+			%h3="3D / Video Tour (#{@building_tours_count})"
 			%a.btn.btn-o.btn-primary.btn-sm.btn-round.font-bold.btn-block.font-14{ href: show_tour_path(building_id: @building.id), 'data-remote' => true }
 				%span.fa.fa-play
 				Launch 3D / Video Tours

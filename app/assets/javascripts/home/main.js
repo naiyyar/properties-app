@@ -161,4 +161,3 @@ if($('.tooltipsContainer .btn').length > 0){
 if($('#datepicker').length > 0){
     $('#datepicker').datepicker();
 }
-

@@ -6,15 +6,18 @@ class DistanceMatrix
   def initialize building
     @latlng          = [building.latitude, building.longitude]
     @address         = building.street_address
-    @nearby_stations = SubwayStation.includes(:subway_station_lines)
-                                    .near(@latlng, DISTANCE, :order => 'distance')
-                                    .limit(6)
     @distance_result = {}
+  end
+
+  def nearby_stations
+    SubwayStation.includes(:subway_station_lines)
+                  .near(@latlng, DISTANCE, :order => 'distance')
+                  .limit(6)
   end
 	
   def get_data
-    @nearby_stations.each_with_index do |station, index|
-      st_dest                = "#{station.latitude}, #{station.longitude}"
+    nearby_stations.each_with_index do |station, index|
+      st_dest = "#{station.latitude}, #{station.longitude}"
       @distance_result[index] = {}
       if station.st_duration.blank?
         response = HTTParty.get(parsed_api_url(st_dest))
