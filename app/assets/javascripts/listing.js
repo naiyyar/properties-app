@@ -9,12 +9,24 @@ var ready = function () {
 		}
 	});
 
+	var elms_ids = [
+							'#active_on_action_form', 
+							'#active_off_action_form', 
+							'#delete_action_form',
+							'#transfer_all_action_form'
+							]
+
 	aptListing = {
 		appendIdsContainerInputToForms: function(listing_id){
-			var inputToAppend = '<input type="hidden" name="selected_ids[]" id="selected_ids_on" class="selected_ids selected_ids_'+listing_id+'" value="'+listing_id+'">';
-			$('#active_on_action_form').append(inputToAppend);
-			$('#active_off_action_form').append(inputToAppend);
-			$('#delete_action_form').append(inputToAppend);
+			var inputToAppend = '<input type="hidden"' +
+																	'name="selected_ids[]"' +
+																	'id="selected_ids_on_'+listing_id+'"' +
+																	'class="selected_ids selected_ids_'+listing_id+'"' +
+																	'value="'+listing_id+'">';
+			
+			for(i = 0; i < elms_ids.length; i++){
+				$(elms_ids[i]).append(inputToAppend);
+			}
 		},
 
 		removeIdsContainerInputToForms: function(listing_id){

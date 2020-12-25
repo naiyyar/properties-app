@@ -99,12 +99,18 @@ class Listing < ApplicationRecord
   end
 
   def self.delete_current_listings listings, type = 'delete'
-    active_listings = Listing.active.where.not(id: listings.pluck(:id))
-    listings.includes(:building).each do |listing|
-      building = listing.building
-      PastListing.create(listing.attributes.except('id')) if type == 'transfer'
-      listing.destroy
-      building.update_rent(active_listings.where(building_id: building.id))
+    begin
+      active_listings = Listing.active.where.not(id: listings.pluck(:id))
+      listings.includes(:building).each do |listing|
+        building = listing.building
+        PastListing.create(listing.attributes.except('id')) if type == 'transfer'
+        listing.destroy
+        building.update_rent(active_listings.where(building_id: building.id))
+      end
+    rescue Exception => e
+      puts '======================'
+      puts e.message
+      puts '======================'
     end
   end
   

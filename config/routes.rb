@@ -29,6 +29,9 @@ Rails.application.routes.draw do
       post :import
       post :export
       post :transfer
+      post :change_status
+      post :delete_all
+      post :transfer_all
       get :show_more, xhr: true
     end
   end
@@ -40,8 +43,6 @@ Rails.application.routes.draw do
     get :disconnect_building, on: :member
   end
 
-  post '/listings/change_status'     => 'listings#change_status'
-  post '/listings/delete_all'        => 'listings#delete_all'
   post '/add_or_update_rent_medians' => 'rent_medians#add_or_update_rent_medians'
   
   get '/price_ranges'                => 'prices#index'

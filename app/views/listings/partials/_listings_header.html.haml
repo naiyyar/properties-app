@@ -38,16 +38,10 @@
 .row
   .listing-actions{style: 'margin-left: 10px; display: none'}
     .col-lg-1
-      = form_tag '/listings/change_status', id: 'active_on_action_form' do
-        =hidden_field_tag :active, true
-        =hidden_field_tag :type, @type
-        =submit_tag 'Active On', class: 'btn btn-sm btn-green mb5'
+      = render 'listings/partials/action_form', url: change_status_listings_path, form_id: 'active_on_action_form', submit_text: 'Active On', submit_btn_color: 'btn-green'
     .col-lg-1
-      = form_tag '/listings/change_status', id: 'active_off_action_form' do
-        =hidden_field_tag :active, false
-        =hidden_field_tag :type, @type
-        =submit_tag 'Active Off', class: 'btn btn-sm btn-gray mb5'
+      = render 'listings/partials/action_form', url: change_status_listings_path, form_id: 'active_off_action_form', submit_text: 'Active Off', submit_btn_color: 'btn-gray'
     .col-lg-1
-      = form_tag '/listings/delete_all', id: 'delete_action_form' do
-        =hidden_field_tag :type, @type
-        =submit_tag 'Delete', class: 'btn btn-sm btn-danger mb5'
+      = render 'listings/partials/action_form', url: delete_all_listings_path, form_id: 'delete_action_form', submit_text: 'Delete', submit_btn_color: 'btn-danger'
+    .col-lg-1
+      = render 'listings/partials/action_form', url: transfer_all_listings_path, form_id: 'transfer_all_action_form', submit_text: 'Transfer', submit_btn_color: 'btn-info'

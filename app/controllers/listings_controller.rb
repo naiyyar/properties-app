@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
   load_and_authorize_resource                 only: [:index, :export]
   before_action :set_listing,                 only: [:show, :edit, :update, :destroy]
-  before_action :find_listings,               only: [:change_status, :delete_all]
+  before_action :find_listings,               only: [:change_status, :delete_all, :transfer_all]
   before_action :format_date,                 only: [:transfer, :export]
   before_action :find_listings_between_dates, only: [:transfer, :export]
   before_action :filter_listings,             only: :index
@@ -31,6 +31,15 @@ class ListingsController < ApplicationController
       Listing.delete_current_listings(@listings)
     else
       @listings.delete_all
+    end
+    redirect_to :back
+  end
+
+  def transfer_all
+    if @listings.present?
+      Listing.transfer_to_past_listings_table(@listings)
+    else
+      flash[:error] = 'Please select the listings to transfer.'
     end
     redirect_to :back
   end

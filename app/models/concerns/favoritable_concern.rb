@@ -9,15 +9,12 @@ module FavoritableConcern
   end
 
   def user_favorites favoriter
-    favorites.where(favoriter_id:   @favoriter.id, 
-                    favoriter_type: @favoriter.class.base_class.name)
+    favorites.where(favoriter_id:   favoriter.id, 
+                    favoriter_type: favoriter.class.base_class.name)
   end
 
   def fav_color_class user_id = nil
-    if user_id.present?
-      favorite_by?(User.find(user_id)) ? 'filled-heart' : 'unfilled-heart'
-    else
-      'unfilled-heart'
-    end 
+    return 'unfilled-heart' if user_id.blank?
+    favorite_by?(User.find(user_id)) ? 'filled-heart' : 'unfilled-heart'
   end
 end
