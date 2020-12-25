@@ -50,7 +50,9 @@ app.apartments.prototype = {
         $that._input.val('');
         $(this).autocomplete("search");
         var historyUi = $('#ui-id-1');
-        $that._input.removeClass('border-bottom-lr-radius');
+        if(prev_search_items.length > 0){
+          $that._input.removeClass('border-bottom-lr-radius');
+        }
         $('#ui-id-1').prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
         if(historyUi.is(':hidden')){
           historyUi.show();
