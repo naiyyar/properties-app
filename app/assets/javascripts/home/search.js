@@ -1,18 +1,33 @@
 var app = window.app = {};
+LOC_LINK = {
+  locationLinkLi: function(_class){
+    var curr_loc = '<a href="'+location_url+'" \
+                       class="hyper-link location" \
+                       style="display: block;" \
+                       onclick="getLocation()"> \
+                         <span class="fa fa-location-arrow"></span> Current Location</a>';
+    var li = "<li class='"+_class+" curr-location' \
+                  style='background: #fff; cursor: pointer; padding: 6px 10px !important;border-bottom: 1px solid #eee;'>"+curr_loc+"</li>";
 
+    return li;
+  }
+}
+
+prev_search_items = [];
 app.apartments = function() {
   $that = this
   $that._input = $('#search_term');
-  let items = [];
   let prev_searches = JSON.parse(localStorage.getItem('prevSearches'));
   if(prev_searches) {
     for(i = 0; i < prev_searches.length; i++){
       item = prev_searches[i];
-      items.push({ label: item.search_term, desc: item.url });
+      prev_search_items.push({ label: item.search_term, desc: item.url });
     }
   }
   if($that._input.length > 0){
-    $that._initAutocomplete(items);
+    if(!mobile) {
+      $that._initAutocomplete(prev_search_items);
+    }
     $that._initCatAutocomplete();
   }
 };
@@ -35,12 +50,8 @@ app.apartments.prototype = {
         $that._input.val('');
         $(this).autocomplete("search");
         var historyUi = $('#ui-id-1');
-        if(!mobile){
-          $that._input.removeClass('border-bottom-lr-radius');
-        }else{
-          historyUi.css({'width':'100%', 'left':'0px'});
-        }
-        historyUi.append($that._prepend_location_link('ui-menu-item'));
+        $that._input.removeClass('border-bottom-lr-radius');
+        $('#ui-id-1').prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
         if(historyUi.is(':hidden')){
           historyUi.show();
         }
@@ -59,7 +70,8 @@ app.apartments.prototype = {
       },
       _renderMenu: function( ul, items ) {
         var that = this,
-          currentCategory = "";
+          currentCategory = "",
+          ui_elem = ';'
         $.each( items, function( index, item ) {
           var li;
           if(item.category != undefined){
@@ -73,7 +85,12 @@ app.apartments.prototype = {
             }
           }
         });
-        $that._prepend_location_link('ui-autocomplete-group');
+        if(mobile){
+          ui_elem = $('#ui-id-1');
+        }else{
+          ui_elem = $('#ui-id-2');
+        }
+        ui_elem.prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
       },
 
       _renderItem: function(ul, item) {
@@ -108,26 +125,12 @@ app.apartments.prototype = {
     });
   },
 
-  _prepend_location_link: function(_class){
-    var curr_loc = '<a href="'+location_url+'" \
-                       class="hyper-link location" \
-                       style="display: block;" \
-                       onclick="getLocation()"> \
-                         <span class="fa fa-location-arrow"></span> Current Location</a>';
-    
-    $('.ui-autocomplete').prepend("<li class='"+_class+" curr-location' \
-                                       style='background: #fff; cursor: pointer;'>"+curr_loc+"</li>");
-  },
-
   _search: function(e, ui){ },
 
   _open: function(event, ui) {
     // Fix for double tap on ios devices
-    console.log(111)
-    var history_ui = $('#ui-id-1');
-    if(history_ui.is(':visible')){ history_ui.hide(); }
-    
-    var ui_autcomplete  = $('#ui-id-2');
+    var history_ui      = $('#ui-id-1');
+    var ui_autcomplete  = mobile ? $('#ui-id-1') : $('#ui-id-2')
     var no_match_link;
     var ul_height       = ui_autcomplete.outerHeight() + 42;
     var elemToAppend    = '';
@@ -138,9 +141,11 @@ app.apartments.prototype = {
                     '<b>No matches found - Add Your Building</b></a></div>';
     if(mobile){
       $('#search-modal').append(elemToAppend);
+      history_ul.hide();
     }
     else{
       $('#apt-search-form').append(elemToAppend);
+      //if(history_ui.is(':visible')){ history_ui.hide(); }
     }
     no_match_link = $('.no-match-link');
     if(mobile && $('.split-view-seach').length > 0){

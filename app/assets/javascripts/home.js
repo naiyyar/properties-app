@@ -10,11 +10,13 @@
     }, 300);
 
     $('.dropdown-select li a').click(function() {
-        if (!($(this).parent().hasClass('disabled'))) {
-            $(this).prev().prop("checked", true);
-            $(this).parent().siblings().removeClass('active');
-            $(this).parent().addClass('active');
-            $(this).parent().parent().siblings('.dropdown-toggle').children('.dropdown-label').html($(this).text());
+        var $self = $(this);
+        if (!($self.parent().hasClass('disabled'))) {
+            $self.prev().prop("checked", true);
+            var parent = $self.parent();
+            parent.siblings().removeClass('active');
+            parent.addClass('active');
+            parent.parent().siblings('.dropdown-toggle').children('.dropdown-label').html($self.text());
         }
     });
 
@@ -22,33 +24,41 @@
         e.stopPropagation();
         if(e.target.id != 'search_term' && e.target.id != 'location-link'){
             hideAutoSearchList();
+            $('#search_term').addClass('border-bottom-lr-radius');
         }
     })
 
     $(document).on('keyup', '#search_term', function(e){
         // e.keyCode != 40 || e.keyCode != 38 for key up / down
         // home page search
+        var search_term = $('#search_term');
         if((e.keyCode != 40 && e.keyCode != 38)){
-            if($('#search_term').val() == ''){
+            if(search_term.val() == ''){
                 hideAutoSearchList();
+                // $('#ui-id-1').show();
             }
         }
     });
 
     function hideAutoSearchList(){
         // setInterval because no match link was not working: hiding too early
+        var ui_complete = mobile ? $('#ui-id-1') : $('#ui-id-2');
         setTimeout(function(){
-            if($("ul.ui-autocomplete").is(":visible")) {
-                $("ul.ui-autocomplete").hide();
-            }
+            if(ui_complete.is(":visible")) { ui_complete.hide(); }
             $('.no-match-link').addClass('hidden');
-            $('#search_term').addClass('border-bottom-lr-radius');
+            if(!mobile){
+                $('#ui-id-1').prepend(LOC_LINK.locationLinkLi('ui-menu-item'));
+            }
+            if(typeof(history_ul) != 'undefined' && history_ul.is(':hidden')){
+                history_ul.show();   
+            }
         }, 200);
     }
 
     // Searching building on neighborhood click
-    if($('.borough-neighborhood').length > 0){
-        $('.borough-neighborhood').click(function(e){
+    var bn = $('.borough-neighborhood')
+    if(bn.length > 0){
+        bn.click(function(e){
             e.preventDefault();
             $('#neighborhoods').val($(this).text());
             var nbh = $(this).data('nhname');
@@ -61,11 +71,12 @@
         })
     }
 
-    $('.panel-collapse').on('show.bs.collapse', function () {
+    var panel_collapse = $('.panel-collapse');
+    panel_collapse.on('show.bs.collapse', function () {
         $(this).prev().find('span').removeClass('fa-angle-down').addClass('fa-angle-up');
     });
 
-    $('.panel-collapse').on('hide.bs.collapse', function () {
+    panel_collapse.on('hide.bs.collapse', function () {
         $(this).prev().find('span').removeClass('fa-angle-up').addClass('fa-angle-down');
     });
 
