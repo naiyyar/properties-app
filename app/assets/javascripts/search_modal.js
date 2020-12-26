@@ -32,18 +32,11 @@ var ready = function(){
 
 			appendSearchHistoryItems: function() {
 				var li_item, item;
-				// li_item = '<li class="ui-menu-item curr-location" style="background: #fff; cursor: pointer;"> \
-    //     						<a href="javascript:void(0);" class="hyper-link location" style="display: block;" onclick="getLocation()"> \
-    //       						<span class="fa fa-location-arrow"></span> Current Location</a> \
-    //   						</li>';
 				li_item = LOC_LINK.locationLinkLi('ui-menu-item');
 				history_ul.append(li_item)
 				for(i = 0; i < prev_search_items.length; i++) {
 					item    = prev_search_items[i];
-					li_item = '<li class="ui-menu-item" id="ui-id-'+(i+20)+'" tabindex="-1"> \
-											<span class="fa fa-history" style="color: #777;"></span> \
-											<a href="'+item.desc+'">'+item.label+'</a> \
-										</li>';
+					li_item = '<li class="ui-menu-item" id="ui-id-'+(i+20)+'" tabindex="-1">'+AutocompleteLI.itemToRender(item)+'</li>';
 					history_ul.append(li_item);
 				}
 			},

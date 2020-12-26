@@ -13,6 +13,13 @@ LOC_LINK = {
   }
 }
 
+AutocompleteLI = {
+  itemToRender: function(item){
+    return "<a style='display: block;' href="+item.desc+">" +
+            "<span class='fa fa-history' style='margin-right: 10px; color: #777;'></span>" + item.label + "</a>";
+  }
+}
+
 prev_search_items = [];
 app.apartments = function() {
   $that = this
@@ -53,14 +60,13 @@ app.apartments.prototype = {
         if(prev_search_items.length > 0){
           $that._input.removeClass('border-bottom-lr-radius');
         }
-        $('#ui-id-1').prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
+        historyUi.prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
         if(historyUi.is(':hidden')){
           historyUi.show();
         }
     }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-         var new_item = "<a style='display: block;' href="+item.desc+"><span class='fa fa-history' style='margin-right: 10px; color: #777;'></span>" + item.label + "</a>"
          return $( "<li>" )
-         .append(new_item)
+         .append(AutocompleteLI.itemToRender(item))
          .appendTo( ul );
       }; 
   },
