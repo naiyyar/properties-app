@@ -58,8 +58,9 @@ app.apartments.prototype = {
           historyUi.show();
         }
     }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+         var new_item = "<a style='display: block;' href="+item.desc+"><span class='fa fa-history' style='margin-right: 10px; color: #777;'></span>" + item.label + "</a>"
          return $( "<li>" )
-         .append( "<span class='fa fa-history' style='color: #777;'></span> <a href="+item.desc+">" + item.label + "</a>" )
+         .append(new_item)
          .appendTo( ul );
       }; 
   },
