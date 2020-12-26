@@ -8,7 +8,7 @@ class ImportListing < ImportService
     listing = Listing.new
     listing.attributes            = row.to_hash
     listing[:building_id]         = building.id
-    listing[:management_company]  = building.management_company_name
+    listing[:management_company]  = building.management_company_name if building.management_company.present?
     if listing.save
       building.update_rent(building.listings)
     else
