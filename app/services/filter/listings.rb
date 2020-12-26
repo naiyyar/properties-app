@@ -5,11 +5,7 @@ module Filter
 			@date_active   = load_more_params[:date_active]
 			@loaded_ids    = load_more_params[:loaded_ids]
 			@building 		 = building
-			@listings 		 = unless listing_type == 'past'
-												active_listings
-											else
-												past_listings
-											end
+			@listings 		 = listing_type == 'past' ? past_listings : active_listings
 			if filter_params.present?
 				@amenities  = filter_params[:amenities]
 		    @bedrooms  	= filter_params[:listing_bedrooms]
@@ -20,9 +16,8 @@ module Filter
 		end
 
 		def past_listings
-			@past_listings = @building.past_listings.order_by_date_active_desc
 			return @past_listings.where('date_active <= ? AND id not in(?)', @date_active, @loaded_ids) if @date_active.present?
-			@past_listings
+			@building.past_listings
 		end
 
 		def active_listings
