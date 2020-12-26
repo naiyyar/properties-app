@@ -9,12 +9,12 @@ var ready = function () {
 		}
 	});
 
-	var elms_ids = [
-							'#active_on_action_form', 
-							'#active_off_action_form', 
-							'#delete_action_form',
-							'#transfer_all_action_form'
-							]
+	listing_action_form_ids = [
+								'#active_on_action_form', 
+								'#active_off_action_form', 
+								'#delete_action_form',
+								'#transfer_all_action_form'
+			]
 
 	aptListing = {
 		appendIdsContainerInputToForms: function(listing_id){
@@ -24,8 +24,8 @@ var ready = function () {
 																	'class="selected_ids selected_ids_'+listing_id+'"' +
 																	'value="'+listing_id+'">';
 			
-			for(i = 0; i < elms_ids.length; i++){
-				$(elms_ids[i]).append(inputToAppend);
+			for(i = 0; i < listing_action_form_ids.length; i++){
+				$(listing_action_form_ids[i]).append(inputToAppend);
 			}
 		},
 

@@ -21,13 +21,16 @@ changeListingStatus = (status, elem) ->
 #Form submit confirm message
 #==============================
 
-$(document).on 'submit', 'form#active_on_action_form, form#active_off_action_form, form#delete_action_form', (e) ->
+
+$(document).on 'submit', '#active_on_action_form, #active_off_action_form, #delete_action_form, #transfer_all_action_form', (e) ->
 	message = ''
 	form_id = $(this).attr('id')
 	if form_id == 'active_on_action_form'
 		message = 'Are sure you want to make selected rows Active?'
 	else if form_id == 'active_off_action_form'
 		message = 'Are sure you want to make selected rows Inactive?'
+	else if form_id == 'transfer_all_action_form'
+		message = 'Are sure you want to transfer selected rows to past listings?'
 	else 
 		message = 'Are sure you want to delete all selected rows?'
 	
