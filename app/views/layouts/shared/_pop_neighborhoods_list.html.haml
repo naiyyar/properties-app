@@ -1,4 +1,5 @@
-.popular-neighborhoods{style: 'display: none'}
-  .pull-right{style: "padding: 4px; cursor: pointer;"}
-    = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeHoods'
-  = render 'layouts/home/popular_neighborhoods', :@modal_type => 'neighborhoods'
+- if @pop_nb_hash
+	.popular-neighborhoods{style: 'display: none'}
+		.pull-right{style: "padding: 4px; cursor: pointer;"}
+			= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeHoods'
+		= render 'layouts/home/popular_neighborhoods', :@modal_type => 'neighborhoods'

@@ -4,9 +4,10 @@ module Search
 	    zoom         = zoom.present? ? zoom.to_i : 14
 	    distance     = redo_search_distance(0.5, zoom)
 	    buildings    = near(custom_latng, distance, units: :km, order: '')
-	    distance     = redo_search_distance(1.0, zoom)
-	    buildings    = near(custom_latng, distance, units: :km, order: '') if buildings.blank?
-
+	    if buildings.blank?
+	    	distance     = redo_search_distance(1.0, zoom)
+	    	buildings    = near(custom_latng, distance, units: :km, order: '')
+	    end
 	    buildings
 	  end
 

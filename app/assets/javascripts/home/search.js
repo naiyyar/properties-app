@@ -54,18 +54,18 @@ app.apartments.prototype = {
         return false;
       }
     }).click(function() {
-      if(prev_search_items.length > 0){
-        var historyUi = $('#ui-id-1');
-        $that._input.val('');
-        $(this).autocomplete("search");
-        $that._input.removeClass('border-bottom-lr-radius');
-        if(historyUi.find('.curr-lication').length == 0){
-          historyUi.prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
+        if(prev_search_items.length > 0){
+          var historyUi = $('#ui-id-1');
+          $that._input.val('');
+          $(this).autocomplete("search");
+          $that._input.removeClass('border-bottom-lr-radius');
+          if(historyUi.find('.curr-lication').length == 0){
+            historyUi.prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
+          }
+          if(historyUi.is(':hidden')){
+            historyUi.show();
+          }
         }
-        if(historyUi.is(':hidden')){
-          historyUi.show();
-        }
-      }
     }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
          return $( "<li>" )
          .append(AutocompleteLI.itemToRender(item))
@@ -139,7 +139,6 @@ app.apartments.prototype = {
   _search: function(e, ui){ },
 
   _open: function(event, ui) {
-    // Fix for double tap on ios devices
     var history_ui      = $('#ui-id-1');
     var ui_autcomplete  = mobile ? $('#ui-id-1') : $('#ui-id-2')
     var no_match_link;
@@ -156,7 +155,6 @@ app.apartments.prototype = {
     }
     else{
       $('#apt-search-form').append(elemToAppend);
-      //if(history_ui.is(':visible')){ history_ui.hide(); }
     }
     no_match_link = $('.no-match-link');
     if(mobile && $('.split-view-seach').length > 0){

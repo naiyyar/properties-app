@@ -2,7 +2,7 @@ module BuildingsCountConcern
   extend ActiveSupport::Concern
 
   included do
-    before_action :popular_neighborhoods
+    before_action :popular_neighborhoods, if: :show_neighborhoods?
     helper_method :uptown_count, :brooklyn_count, :queens_count, :bronx_count
   end
 
@@ -36,6 +36,11 @@ module BuildingsCountConcern
 
   protected
   def show_neighborhoods?
-    home_page? || show_filters? || search_page? || building_show_page? || management_show_page?
+    view_context.show_filters? || 
+    view_context.search_page? || 
+    view_context.building_show_page? || 
+    view_context.management_show_page? ||
+    action_name == 'load_featured_buildings' || 
+    action_name == 'saved_buildings'
   end
 end
