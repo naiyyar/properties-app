@@ -3,24 +3,6 @@ class ImportListing < ImportService
   def initialize file
     super
   end
-  
-  def create_listing building, row, line_num
-    listing = Listing.new
-    listing.attributes            = row.to_hash
-    listing[:building_id]         = building.id
-    listing[:management_company]  = building.management_company_name if building.management_company.present?
-    if listing.save
-      building.update_rent(building.listings)
-    else
-      listing.errors.full_messages.each do |message|
-        @errors << "Issue line #{line_num}, column #{message}."
-      end
-    end
-  end
-
-  def find_building buildings, address
-    buildings.where('LOWER(building_street_address) = ?', address.downcase.strip)
-  end
 
   def import_listings buildings
     @errors = []
@@ -39,6 +21,27 @@ class ImportListing < ImportService
       end
     end
     @errors
+  end
+
+
+  private
+
+  def create_listing building, row, line_num
+    listing = Listing.new
+    listing.attributes            = row.to_hash
+    listing[:building_id]         = building.id
+    listing[:management_company]  = building.management_company_name if building.management_company.present?
+    if listing.save
+      building.update_rent(building.listings)
+    else
+      listing.errors.full_messages.each do |message|
+        @errors << "Issue line #{line_num}, column #{message}."
+      end
+    end
+  end
+
+  def find_building buildings, address
+    buildings.where('LOWER(building_street_address) = ?', address.downcase.strip)
   end
 
   def missing_text_error_messages row

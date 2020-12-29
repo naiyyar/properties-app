@@ -54,16 +54,18 @@ app.apartments.prototype = {
         return false;
       }
     }).click(function() {
+      if(prev_search_items.length > 0){
+        var historyUi = $('#ui-id-1');
         $that._input.val('');
         $(this).autocomplete("search");
-        var historyUi = $('#ui-id-1');
-        if(prev_search_items.length > 0){
-          $that._input.removeClass('border-bottom-lr-radius');
+        $that._input.removeClass('border-bottom-lr-radius');
+        if(historyUi.find('.curr-lication').length == 0){
+          historyUi.prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
         }
-        historyUi.prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
         if(historyUi.is(':hidden')){
           historyUi.show();
         }
+      }
     }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
          return $( "<li>" )
          .append(AutocompleteLI.itemToRender(item))
