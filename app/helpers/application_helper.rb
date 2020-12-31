@@ -2,10 +2,10 @@ module ApplicationHelper
 	
 	def flash_class(flash_type)
     case flash_type.to_sym
-      when :notice  then 'alert alert-success'
-      when :info    then 'alert alert-info'
-      when :error   then 'alert alert-danger'
-      when :warning then 'alert alert-warning'
+      when :notice  then 'alert-success'
+      when :info    then 'alert-info'
+      when :error   then 'alert-danger'
+      when :warning then 'alert-warning'
     end
   end
 

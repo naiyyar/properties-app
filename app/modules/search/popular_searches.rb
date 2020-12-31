@@ -5,6 +5,7 @@ module Search
 		LUXURY_APTS_AMENITIES   = %w(doorman elevator)
 		LUXURY_APTS_PRICES 			= [3,4]
 		AFFORDABLE_APTS_PRICES  = [1,2]
+		AFFORDABLE_LUXURY_APTS_PRICES  = [2]
 		STUDIOS 								= ['0']
 		
 		def buildings_by_popular_search search_term, buildings
@@ -105,8 +106,8 @@ module Search
 				buildings 					= @buildings.luxury_rentals
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'affordable-luxury-apartments-in-nyc'
-				buildings 					= @buildings.where(price: [2]).luxury_rentals
-				filters[:price] 		= [2]
+				buildings 					= @buildings.where(price: AFFORDABLE_LUXURY_APTS_PRICES).luxury_rentals
+				filters[:price] 		= AFFORDABLE_LUXURY_APTS_PRICES
 				filters[:amenities] = LUXURY_APTS_AMENITIES
 			when 'brooklyn-luxury-rentals'
 				buildings 					= brooklyn_buildings.luxury_rentals

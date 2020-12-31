@@ -4,8 +4,8 @@ module Buildings
 
 		def with_featured_buildings buildings
 	    final_results      = {}
-	    top2_featured      = top2_featured_buildings(buildings, @searched_by)
-	    non_featured       = non_featured_buildings(buildings, top2_featured, @sort_by)
+	    top2_featured      = top2_featured_buildings(buildings)
+	    non_featured       = non_featured_buildings(buildings, top2_featured)
 	    per_page_buildings = non_featured.paginate(:page => page_num, :per_page => PER_PAGE)
 	    all_buildings      = buildings_with_featured_on_top(top2_featured, per_page_buildings)
 	    
@@ -27,24 +27,21 @@ module Buildings
 	    top_2.present? ? (top_2 + per_page) : per_page
 	  end
 
-	  def non_featured_buildings buildings, top_2, sort_by
+	  def non_featured_buildings buildings, top_2
 	    buildings = buildings.where.not(id: top_2.map(&:id)) if top_2.present?
-	    return buildings.sort_buildings(buildings, sort_by, @filters)
+	    return buildings.sort_buildings(buildings, @sort_by, @filters)
 	  end
 
-	  def top2_featured_buildings buildings, searched_by
-	    fb_ids = featured_building_ids(buildings.pluck(:id), searched_by)
+	  def top2_featured_buildings buildings
+	    fb_ids = featured_building_ids(buildings.pluck(:id))
 	    return [] if fb_ids.blank?
 	    shuffled_ids = fb_ids.shuffle[0..1]
-	    if fb_ids.length > 0
-	      return buildings.random(shuffled_ids) unless searched_by == 'nyc'
-	      Building.random(shuffled_ids)
-	    end
+	    buildings.random(shuffled_ids)
 	  end
 
-	  def featured_building_ids ids, searched_by
+	  def featured_building_ids ids
 	    fbs = FeaturedBuilding.active
-	    fbs = fbs.where(building_id: ids) unless searched_by == 'nyc'
+	    fbs = fbs.where(building_id: ids) unless @searched_by == 'nyc'
 	    fbs.pluck(:building_id)
 	  end
   end

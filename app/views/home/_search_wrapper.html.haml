@@ -25,7 +25,7 @@
           
           .pages-container{style: 'padding: 15px'}
             - if mobile
-              = will_paginate @per_page_buildings, renderer: BootstrapPagination::Rails, previous_label: '← Prev', inner_window: 0, outer_window: 0
+              = will_paginate @per_page_buildings, renderer: BootstrapPagination::Rails, previous_label: '← Prev', inner_window: 0, outer_window: 0, :page_links => false
             - else
               = will_paginate @per_page_buildings, renderer: BootstrapPagination::Rails, previous_label: '← Prev'
         - else
