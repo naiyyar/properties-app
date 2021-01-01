@@ -35,14 +35,13 @@ module Buildings
 	  def top2_featured_buildings buildings
 	    fb_ids = featured_building_ids(buildings.pluck(:id))
 	    return [] if fb_ids.blank?
-	    shuffled_ids = fb_ids.shuffle[0..1]
-	    buildings.random(shuffled_ids)
+	    buildings.random(fb_ids.shuffle[0..1])
 	  end
 
 	  def featured_building_ids ids
-	    fbs = FeaturedBuilding.active
-	    fbs = fbs.where(building_id: ids) unless @searched_by == 'nyc'
-	    fbs.pluck(:building_id)
+	    FeaturedBuilding.active
+	    								.where(building_id: ids)
+	    								.pluck(:building_id)
 	  end
   end
 end
