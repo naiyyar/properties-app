@@ -4,7 +4,7 @@ console.log(fig_elem)
 $('#thumbnailPreview').modal('show');
 
 fig_elem.html("<%= j render partial: 'home/lightslider', \
-																locals: { images_count: @images_count, \
+																locals: { images_count: @images_count.to_i, \
 																				  object: @featured_agent, \
 																				  first_image: @first_image, \
 																				  show_path: '#' } %>");

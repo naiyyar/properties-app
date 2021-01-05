@@ -3,7 +3,7 @@ class Building < ApplicationRecord
   resourcify
 
   # constants
-  RANGE_PRICE = ['$', '$$', '$$$', '$$$$']
+  RANGE_PRICE = ['$', '$$', '$$$', '$$$$'].freeze
   COLIVING_NUM = 9
   
   PENTHOUSES_MIN_PRICE = 8000
@@ -15,7 +15,7 @@ class Building < ApplicationRecord
                  ['3',  '3 Bed'   ],
                  ['4',  '4+ Bed'  ],
                  ['9',  'CoLiving']
-                ]
+                ].freeze
   CITIES      = ['New York', 'Brooklyn', 'Bronx', 'Queens']
   AMENITIES   = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
                 :management_company_run, :gym, :live_in_super,:pets_allowed_cats,

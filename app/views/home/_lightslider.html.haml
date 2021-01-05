@@ -3,7 +3,7 @@
   .item
     .clearfix{ style: 'width:100%;' }
       = link_to show_path, style: 'cursor: pointer;' do
-        - if @similar_properties.present? or object.featured?
+        - if @similar_properties.present? || object.featured?
           %h4.comp.featured.round
             %span.icon-badge.font-14
         

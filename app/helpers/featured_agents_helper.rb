@@ -29,30 +29,6 @@ module FeaturedAgentsHelper
   	upload.present? ? upload.image.url : 'user-missing2.png'
   end
 
-  def bedrooms_options
-  	['Room', 'Studio', '1 Bedroom', '2 Bedroom', '3 Bedroom', '4+ Bedroom']
-  end
-
-	def budgets_options
-		[	
-			'$1,750',
-			'$2,000',
-			'$2,500',
-			'$3,000',
-			'$3,500',
-			'$4,000',
-			'$4,500',
-			'$5,000',
-			'$6,000',
-			'$7,000',
-			'$8,000',
-			'$9,000',
-			'$10,000',
-			'$12,500',
-			'$15,000'
-			]
-	end
-
 	def message
 		'Hi,
 

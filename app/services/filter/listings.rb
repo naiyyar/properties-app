@@ -40,7 +40,7 @@ module Filter
 	    @listings = filter_by_listing_amenities	if @amenities.present?
 	    @listings = filter_by_beds 							if @bedrooms.present?
 	    @listings = @listings.with_prices(@min_price, @max_price) if @min_price.to_i > 0 || @max_price.to_i > 0
-	    return @listings
+	    @listings
 	  end
 
 	  def filter_by_listing_amenities
@@ -48,7 +48,7 @@ module Filter
 	    @listings  = @listings.months_free    if @amenities.include?('months_free_rent')
 	    @listings  = @listings.owner_paid     if @amenities.include?('owner_paid')
 	    @listings  = @listings.rent_stabilize if @amenities.include?('rent_stabilized')
-	    return @listings
+	    @listings
 	  end
 	end
 end

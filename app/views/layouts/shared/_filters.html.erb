@@ -18,7 +18,7 @@
                   <label><b>Listing Price</b></label>
                   <!-- price slider -->
                   <div class="slider-filter-container">
-                    <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_price_filter" name="filter[price][]" id="listings_price_box" <%= listing_price_box_checked %>><span class="fa fa-check"></span> </label></div>
+                    <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_price_filter" name="filter[listings][price][]" id="listings_price_box" <%= listing_price_box_checked %>><span class="fa fa-check"></span> </label></div>
                     <div class="slider priceSlider">
                       <div class="sliderTooltip">
                         <div class="stArrow"></div>
@@ -44,7 +44,7 @@
                     <% val, text  = beds[0], beds[1] %>
                     <div class="ck-button">
                       <label>
-                        <input type="checkbox" class="listing_bed_filter" name="filter[listing_bedrooms][]" value="<%=val%>" id="listings_<%=val%>beds" <%= listing_bed_checked(val) %> > <span><%=text%></span>
+                        <input type="checkbox" class="listing_bed_filter" name="filter[listings][listing_bedrooms][]" value="<%=val%>" id="listings_<%=val%>beds" <%= listing_bed_checked(val) %> > <span><%=text%></span>
                       </label>
                     </div>
                   <%end%>
@@ -115,7 +115,7 @@
                   <% listing_amenities.each_pair do |k, v| %>
                     <div class="checkbox custom-checkbox">
                       <label>
-                        <input type="checkbox" name="filter[amenities][]" value="<%=k.to_s%>" id="<%=k%>" <%= amen_checked(k.to_s) %> <%=amen_locked?(k.to_s)%>> <span class="fa fa-check"></span> <%= v %>
+                        <input type="checkbox" name="filter[listings][amenities][]" value="<%=k.to_s%>" id="<%=k%>" <%= listings_amen_checked(k.to_s) %> <%=amen_locked?(k.to_s)%>> <span class="fa fa-check"></span> <%= v %>
                       </label>
                     </div>
                   <%end%>                         

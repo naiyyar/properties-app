@@ -2,7 +2,6 @@ class FeaturedAgentsController < ApplicationController
   load_and_authorize_resource
   before_action :set_featured_agent, except: [:index, :create, :new]
   before_action :set_uploads, only: [:preview, :get_images]
-  before_action :set_neighborhoods, only: [:new, :edit, :contact]
   
   # GET /featured_agents
   # GET /featured_agents.json
@@ -121,24 +120,12 @@ class FeaturedAgentsController < ApplicationController
     @images_count = @featured_agent.uploads_count
   end
 
-  def set_neighborhoods
-    @neighborhoods = [
-      'Lower Manhattan',
-      'Midtown Manhattan',
-      'Upper East Side',
-      'Upper West Side',
-      'Upper Manhattan',
-      'Brooklyn',
-      'Queens',
-      'Bronx'
-    ]
-  end
-
   def redirect_path
     @featured_agent.featured_by_manager? ? 
     billing_or_featured_list_path : 
     featured_agent_steps_path(agent_id: @featured_agent.id)
   end
+  
   #featured_agent_steps_path(agent_id: @featured_agent.id)
   def billing_or_featured_list_path
     @featured_agent.expired? ? 
@@ -167,9 +154,7 @@ class FeaturedAgentsController < ApplicationController
                      :locals => { 
                         mobile: browser.device.mobile?,
                         :@featured_agent => @featured_agent,
-                        :@neighborhoods => @neighborhoods,
-                        :bedrooms_options => view_context.bedrooms_options,
-                        :budgets_options => view_context.budgets_options
+                        :@neighborhoods => @neighborhoods
                       }
                     )
   end

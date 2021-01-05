@@ -22,7 +22,7 @@ class VideoTour < ApplicationRecord
 								['1 Bedroom', 	'1-bedroom'],
 								['2 Bedroom', 	'2-bedroom'], 
 								['3 Bedroom', 	'3-bedroom'], 
-								['4+ Bedroom', 	'4-bedroom']]
+								['4+ Bedroom', 	'4-bedroom']].freeze
 	
 	validates_presence_of   :url, message: 'Url can not be blank.'
 	validates_uniqueness_of :url, scope: :building_id, message: 'Url has already been taken.', on: :create

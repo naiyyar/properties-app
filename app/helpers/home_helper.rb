@@ -55,31 +55,6 @@ module HomeHelper
 			"#{neighborhood}, #{borough.capitalize}, NY"
 		end
 	end
-	
-	# To retain filters when switching neighborhoods
-	# /no-fee-apartments-nyc-neighborhoods/lower-manhattan-newyork?sort_by=4&filter%5Bprice%5D%5B%5D=2&searched_by=no-fee-apartments-nyc-neighborhoods
-	def search_link neighborhood, borough
-		unless borough == 'BRONX'
-			borough = (borough == 'MANHATTAN' ? 'newyork' : borough.downcase.gsub(' ', '-'))
-			search_term = "#{neighborhood.downcase.gsub(' ', '-')}-#{borough}"
-			search_url = "/no-fee-apartments-nyc-neighborhoods/#{search_term}"
-			if params[:sort_by].present? and params[:filter].present?
-				"#{search_url}?sort_by=#{params[:sort_by]}&#{filter_params}"
-			elsif params[:sort_by].present?
-				"#{search_url}?sort_by=#{params[:sort_by]}"
-			elsif params[:filter].present?
-				"#{search_url}"
-			else
-				filter_params.present? ? "#{search_url}?#{filter_params}" : "#{search_url}"
-			end
-		else
-			'javascript:void(0)'
-		end
-	end
-
-	def filter_params
-		params[:filter].present? ? params[:filter].to_query('filter') : nil
-	end
 
 	# on show page neighborhoods
 	def borough_search_link borough
@@ -138,64 +113,6 @@ module HomeHelper
 		params[:sort_by] == index ? 'active' : ''
 	end
 
-	def rating_checked val
-		if params[:filter].present? && params[:filter][:rating].present?
-			params[:filter][:rating].include?(val.to_s) ? 'checked' : ''
-		end
-	end
-
-	def bed_checked val
-		if params[:filter].present? && params[:filter][:bedrooms].present?
-			params[:filter][:bedrooms].include?(val) ? 'checked' : ''
-		elsif @filters.present? && @filters[:beds].present?
-			@filters[:beds].include?(val) ? 'checked' : ''
-		end
-	end
-
-	def price_checked val
-		if params[:filter].present? && params[:filter][:price].present?
-			params[:filter][:price].include?(val.to_s) ? 'checked' : ''
-		elsif @filters.present? && @filters[:price].present?
-			@filters[:price].include?(val) ? 'checked' : ''
-		end
-	end
-
-	def listing_bed_checked val
-		if params[:filter].present? && params[:filter][:listing_bedrooms].present?
-			params[:filter][:listing_bedrooms].include?(val.to_s) ? 'checked' : ''
-		elsif @filters.present? &&  @filters[:listing_bedrooms].present?
-			@filters[:listing_bedrooms].include?(val) ? 'checked' : ''
-		end
-	end
-
-	def listing_price_box_checked
-		'checked' if params[:filter] && params[:filter][:min_price].present?
-	end
-
-	def amen_checked val
-		if params[:filter].present? && params[:filter][:amenities].present?
-			params[:filter][:amenities].include?(val) ? 'checked' : ''
-		elsif @filters.present? &&  @filters[:amenities].present?
-			@filters[:amenities].include?(val) ? 'checked' : ''
-		end
-	end
-
-	def amen_locked? val
-		if @filters.present? && @filters[:amenities].present?
-			@filters[:amenities].include?(val) ? 'disabled' : ''
-		else
-			''
-		end
-	end
-
-	def bed_locked? val
-		(@filters.present? && @filters[:beds].present? && @filters[:beds].include?(val)) ? 'disabled' : ''
-	end
-
-	def price_locked? val
-		(@filters.present? && @filters[:price].present? && @filters[:price].include?(val)) ? 'disabled' : ''
-	end
-
 	def marker_color price
 		case price
 		when 1 then '#fee5d9'
@@ -208,11 +125,11 @@ module HomeHelper
 	end
 
 	# redo search
+	# params[:latitude].present? && params[:longitude].present?
+	# current location search also have lat and long
+	# searching on mobile redirecting to map view instad of list view
+	# returning to map view if user is searching or filtering from inside the map view
 	def custom_search?
-		# params[:latitude].present? && params[:longitude].present?
-		# current location search also have lat and long
-		# searching on mobile redirecting to map view instad of list view
-		# returning to map view if user is searching or filtering from inside the map view
 		params[:searched_by] == 'latlng' || session[:view_type] == 'mapView'
 	end
 

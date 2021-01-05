@@ -20,15 +20,15 @@
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
-				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control multiselect validate', multiple: true, required: mobile
+				= select_tag 'contact[neighborhoods]', options_for_select(FeaturedAgent::FEATURED_IN_NEIGHBORHOODS), class: 'form-control multiselect validate', multiple: true, required: mobile
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= select_tag 'contact[bedrooms]', options_for_select(bedrooms_options), class: 'validate form-control col-grey cst', prompt: 'Bedrooms*', required: true
+				= select_tag 'contact[bedrooms]', options_for_select(FeaturedAgent::BEDROOMS), class: 'validate form-control col-grey cst', prompt: 'Bedrooms*', required: true
 
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
-				= select_tag 'contact[budget]', options_for_select(budgets_options), class: 'validate form-control col-grey cst', prompt: 'Budget*', required: true
+				= select_tag 'contact[budget]', options_for_select(FeaturedAgent::BUDGET), class: 'validate form-control col-grey cst', prompt: 'Budget*', required: true
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-12
 				%label
