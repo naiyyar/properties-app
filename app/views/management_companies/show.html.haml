@@ -51,6 +51,6 @@
         .resultsList{class: controller_name}
           #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :building
         
-        .pages-container= will_paginate @manage_buildings, renderer: BootstrapPagination::Rails
+        .pages-container= render 'layouts/shared/add_pagination', objects: @manage_buildings
 
         = render 'layouts/home/footer'
