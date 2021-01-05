@@ -8,6 +8,12 @@ $(document).on 'click', '.add_new_building',(e) ->
 		$("#new_building").removeClass('hide')
 		$('#building_building_street_address').val(search_value)
 
+$(document).on 'click', '#add_new_building.no-match', (e) ->
+	e.preventDefault
+	ui_auto_complete = $("ul.ui-autocomplete")
+	if(ui_auto_complete.is(':visible'))
+		ui_auto_complete.hide()
+
 $(document).on 'click', "input[name='contribute_to']",(e) ->
 	# hiding Building Not Here? li
 	if($(".search-no-result li").length != 0)

@@ -4,7 +4,7 @@ var noMatchElemToAppend = '<div class="no-match-link" style="top: 0px; width: 33
                       '<span class="address">' +
                         '<b>Building Not Here?</b>' +
                       '</span>' +
-                      '<a class="add_new_building" href="javascript:void(0);" id="add_new_building">' +
+                      '<a class="add_new_building no-match" href="javascript:void(0);" id="add_new_building">' +
                         '<b> Add Your Building</b>' +
                       '</a>'
                     '</div>';
