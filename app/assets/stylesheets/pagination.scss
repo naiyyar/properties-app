@@ -30,3 +30,13 @@
     background-color: #2c78e4 !important;
     border-color: #2c78e4 !important;
 }
+
+@media screen and (max-width: 767px) {
+    .screen-sm {
+        .pagination > li > a, 
+        .pagination > li > span {
+            font-size: 20px !important;
+            padding: 16px 50px;
+        }
+    }
+}
