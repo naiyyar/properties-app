@@ -38,8 +38,7 @@ module BuildingsConcern
     @reviews       = @building.building_reviews
     @reviews       = @reviews.includes(:reviewable) if @review.present?
     @price_ranges  = @building.price_ranges
-    broker_percent = BrokerFeePercent.first.percent_amount
-    @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
+    @saved_amounts = @building.broker_fee_savings
     @distance_results = DistanceMatrix.new(@building).get_data
     @b_management_company = @building.management_company
     
@@ -129,6 +128,11 @@ module BuildingsConcern
                 else
                   Building.find_by_building_street_address(search_term)
                 end
+  end
+
+  def resource_not_found
+    flash[:error] = 'Record Not found.'
+    redirect_to root_path
   end
 
 end

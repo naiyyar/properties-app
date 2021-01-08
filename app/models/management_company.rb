@@ -62,7 +62,7 @@ class ManagementCompany < ApplicationRecord
 
 	def recommended_percent managed_buildings
 		downcount = total_reviews = 0
-		managed_buildings.includes(:votes).each do |building|
+		managed_buildings.each do |building|
 			if building.reviews_count.to_i > 0
 				downcount     += building.downvotes_count
 				total_reviews += building.reviews_count

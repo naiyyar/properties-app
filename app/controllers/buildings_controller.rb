@@ -34,8 +34,6 @@ class BuildingsController < ApplicationController
   def lazy_load_content
     # @reviews       = @building.building_reviews
     # @price_ranges  = @building.price_ranges
-    # broker_percent = BrokerFeePercent.first.percent_amount
-    # @saved_amounts = @building.broker_fee_savings(RentMedian.all, broker_percent)
     respond_to do |format|
       format.js
     end

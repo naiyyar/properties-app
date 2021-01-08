@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_filter :configure_sign_up_params, only: [:create]
-  #prepend_before_action :check_captcha, only: [:create], :if => Proc.new { |c| c.request.format != 'application/json' }
+  # prepend_before_action :check_captcha, only: [:create], :if => Proc.new { |c| c.request.format != 'application/json' }
   respond_to :json
   # GET /resource/sign_up
   
@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  #POST /resource
+  # POST /resource
   def create
     if check_captcha
       build_resource(sign_up_params)

@@ -17,6 +17,8 @@ class ApplicationController < ActionController::Base
   include CreateReviewConcern
   include SetTimezoneConcern
   include WickedPdfConcern
+
+  rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
   
   def store_location
     # store last url as long as it isn't a /users path
@@ -84,6 +86,9 @@ class ApplicationController < ActionController::Base
 
   def skip_store_location
     request.format.json? || request.format.js?
+  end
+
+  def resource_not_found
   end
 
 end

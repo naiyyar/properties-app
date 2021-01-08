@@ -50,7 +50,7 @@ module BedRanges
     return ranges
   end
 
-  def rent_median_prices(rent_medians)
+  def rent_median_prices
     range = bedroom_ranges[0]
     if range.include?(-1)
       range = range.map{|x| x == -1 ? Building::COLIVING_NUM : x }
@@ -58,20 +58,28 @@ module BedRanges
     return rent_medians.where(range: price, bed_type: range)
   end
 
-  def broker_fee_savings(rent_medians, broker_percent)
+  def broker_fee_savings
     saved_amounts = {}
-    rent_median_prices(rent_medians).as_json.each do |mp| 
+    rent_median_prices.as_json.each do |mp| 
       saved_amounts[mp['bed_type']] = (((mp['price'].to_i * 12) * broker_percent)/100).to_i
     end
     saved_amounts
+  end
+
+  def broker_percent
+    BrokerFeePercent.first.percent_amount
+  end
+
+  def rent_medians
+    @rent_medians ||= RentMedian.all
   end
 
   def min_and_max_price?
     min_listing_price.present? && max_listing_price.present?
   end
 
-  def min_save_amount rent_medians, broker_percent
-    broker_fee_savings(rent_medians, broker_percent).values.min
+  def min_save_amount
+    broker_fee_savings.values.min
   end
 
   def has_only_studio? filters

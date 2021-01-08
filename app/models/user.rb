@@ -90,27 +90,6 @@ class User < ApplicationRecord
     time_zone.present? ? time_zone : DEFAULT_TIMEZONE
   end
 
-  def self.from_omniauth(auth, current_user)
-    authorization = Authorization.where(:provider => auth.provider, 
-                                        :uid      => auth.uid).first_or_initialize
-    if authorization.user.blank?
-      user = current_user || User.where(email: auth['info']['email']).first
-      user = create_user(auth) if user.blank?
-      
-      authorization.name      = auth.info.name
-      authorization.user_id   = user.id
-      authorization.image_url = auth.info.image
-      authorization.save
-    end
-    authorization.user
-  end
-
-  def self.create_user auth
-    User.create(email:    auth.info.email,
-                password: Devise.friendly_token[0,20],
-                name:     auth.info.name )
-  end
-
   def profile_image provider=nil
     provider    = (provider == 'Google' ? 'google_oauth2' : 'facebook')
     auths       = authorizations.where(provider: provider)

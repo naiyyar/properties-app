@@ -25,16 +25,13 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def failure
-    user = User.where(email: session['user_auth'][:email]).first rescue nil
+    user = User.find_by(email: session['user_auth'][:email])
     message = I18n.t 'devise.failure.invalid', authentication_keys: 'email'
 
     respond_to do |format|
       format.json {
         render :json => { :success => false, :errors => ["Login failed."] }
       }
-      # format.html {
-      #   redirect_to '/users/sign_in'
-      # }
     end
   end
 
