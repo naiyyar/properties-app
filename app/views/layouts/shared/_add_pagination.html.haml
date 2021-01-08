@@ -1,4 +1,4 @@
 - if browser.device.mobile?
-  = will_paginate objects, renderer: BootstrapPagination::Rails, previous_label: '← Prev', inner_window: 0, outer_window: 0, :page_links => false
+  = will_paginate objects, renderer: BootstrapPagination::Rails, previous_label: '← Prev', inner_window: 0, outer_window: 0, :page_links => false, class: "pagination #{last_page_class(objects)} #{first_page_class(objects)}"
 - else
   = will_paginate objects, renderer: BootstrapPagination::Rails, previous_label: '← Prev'
