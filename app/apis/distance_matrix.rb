@@ -1,3 +1,4 @@
+# To find nearby station and their distance & duration from the building
 class DistanceMatrix
 	API_KEY  = ENV['GEOCODER_API_KEY']
 	DISTANCE = 0.5
@@ -9,19 +10,12 @@ class DistanceMatrix
     @distance_result = {}
   end
 
-  def nearby_stations
-    SubwayStation.includes(:subway_station_lines)
-                  .near(@latlng, DISTANCE, :order => 'distance')
-                  .limit(6)
-  end
-	
   def get_data
     nearby_stations.each_with_index do |station, index|
       st_dest = "#{station.latitude}, #{station.longitude}"
       @distance_result[index] = {}
       if station.st_duration.blank?
-        response = HTTParty.get(parsed_api_url(st_dest))
-        @distance_result[index][:results] = response.parsed_response['rows'][0]['elements']
+        @distance_result[index][:results] = parsed_response(st_dest)
         station.update(st_distance: station.distance_to(@latlng), 
                        st_duration: @distance_result[index][:results][0]['duration']['text'])
       end
@@ -33,6 +27,21 @@ class DistanceMatrix
     
     return @distance_result
 	end
+
+  private 
+  def nearby_stations
+    SubwayStation.includes(:subway_station_lines)
+                  .near(@latlng, DISTANCE, :order => 'distance')
+                  .limit(6)
+  end
+
+  def parsed_response st_dest
+    http_response(st_dest).parsed_response['rows'][0]['elements']
+  end
+
+  def http_response st_dest
+    HTTParty.get(parsed_api_url(st_dest))
+  end
 
   def parsed_api_url destination_station
     dis_matrix_api = "#{API_URL}&origins=#{@address}&destinations=#{destination_station}"

@@ -51,6 +51,9 @@
         .resultsList{class: controller_name}
           #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :building
         
-        .pages-container= render 'layouts/shared/add_pagination', objects: @manage_buildings
+        .pages-container{style: 'padding: 15px'}= render 'layouts/shared/add_pagination', objects: @manage_buildings
 
         = render 'layouts/home/footer'
+
+:javascript
+  $(function(){ new app.apartments; })

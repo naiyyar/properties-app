@@ -23,31 +23,43 @@
     $(document).on('click', function(e){
         e.stopPropagation();
         if(e.target.id != 'search_term' && e.target.id != 'location-link'){
-            hideAutoSearchList();
-            $('#search_term').addClass('border-bottom-lr-radius');
+            hideAutoSearchList('.ui-autocomplete');
+            addSearchInputBorderClass()
         }
-    })
+    });
 
-    $(document).on('keyup', '#search_term', function(e){
+    $(document).on('keyup', '#search_term, #featured_building_field, #feature_building_as_comp', function(e){
         // e.keyCode != 40 || e.keyCode != 38 for key up / down
         // home page search
-        var search_term = $('#search_term');
+        var search_term = $('#search_term, #featured_building_field, #feature_building_as_comp');
         if((e.keyCode != 40 && e.keyCode != 38)){
             if(search_term.val() == ''){
-                hideAutoSearchList();
-                // $('#ui-id-1').show();
+                hideAutoSearchList('.ui-autocomplete');
+                addSearchInputBorderClass()
             }
         }
     });
 
-    function hideAutoSearchList(){
+    function addSearchInputBorderClass(){
+        var input = $('#search_term');
+        if(input.length > 0){
+            input.addClass('border-bottom-lr-radius');
+        }
+    }
+
+    function hideAutoSearchList(klass){
         // setInterval because no match link was not working: hiding too early
-        var ui_complete = mobile ? $('#ui-id-1') : $('#ui-id-2');
+        // var ui_complete = mobile ? $('#ui-id-1') : $('#ui-id-2');
+        var elem = $(klass);
         setTimeout(function(){
-            if(ui_complete.is(":visible")) { ui_complete.hide(); }
+            if(elem.is(":visible")) { elem.hide(); }
             $('.no-match-link').addClass('hidden');
             if(!mobile){
-                $('#ui-id-1').prepend(LOC_LINK.locationLinkLi('ui-menu-item'));
+                var ui = $('#ui-id-1');
+                var loc_link = ui.find('.location');
+                if(loc_link.length == 0){
+                    ui.prepend(LOC_LINK.locationLinkLi('ui-menu-item'));
+                }
             }
             if(typeof(history_ul) != 'undefined' && history_ul.is(':hidden')){
                 history_ul.show();   

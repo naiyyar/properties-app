@@ -33,11 +33,17 @@
 
 @media screen and (max-width: 767px) {
   .screen-sm {
+    .pages-container{
+      padding: 15px 15px 60px !important;
+    }
     .pagination {
       width: 100%;
+      li{
+        display: inline-block;
+      }
       li > a, li > span {
         font-size: 18px !important;
-        padding: 16px 50px;
+        padding: 16px 53px;
       }
       .prev.disabled, .next.disabled {
         display: none;
@@ -46,9 +52,14 @@
         color: #fff;
         background-color: #2b78e4;
       }
+      li.prev > a {
+        color: #333;
+      }
     }
 
+    .pagination.first-page li,
     .pagination.first-page li > a, 
+    .pagination.last-page li,
     .pagination.last-page li > a {
       width: 100%;
     }
