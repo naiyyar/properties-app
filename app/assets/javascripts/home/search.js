@@ -17,6 +17,21 @@ AutocompleteLI = {
   itemToRender: function(item){
     return "<a style='display: block;' href="+item.desc+">" +
             "<span class='fa fa-history' style='margin-right: 10px; color: #777;'></span>" + item.label + "</a>";
+  },
+
+  _save_search: function(item){
+    let search_arr = new Array;
+    let prev_searches = JSON.parse(localStorage.getItem('prevSearches'))
+    search_arr.push(item);
+    if(prev_searches) {
+      for(i = 0; i <= prev_searches.length; i++){
+        let prev_item = prev_searches[i];
+        if(prev_item && item.id != prev_item.id){
+          search_arr.push(prev_searches[i]);
+        }
+      }
+    }
+    localStorage.setItem('prevSearches', JSON.stringify(search_arr));
   }
 }
 
@@ -28,7 +43,13 @@ app.apartments = function() {
   if(prev_searches) {
     for(i = 0; i < prev_searches.length; i++){
       item = prev_searches[i];
-      prev_search_items.push({ label: item.search_term, desc: item.url });
+      prev_search_items.push({ id: item.id, 
+                               search_term: item.search_term, 
+                               url: item.url,
+                               category: item.category,
+                               label: item.search_term, 
+                               desc: item.url 
+                             });
     }
   }
   if($that._input.length > 0){
@@ -51,6 +72,8 @@ app.apartments.prototype = {
         if(item != undefined){
           if(e.keyCode == 13){ window.location = item.desc; }
         }
+        // Most recent search at the top even if searching using history link
+        AutocompleteLI._save_search(ui.item);
         return false;
       }
     }).click(function() {
@@ -106,7 +129,7 @@ app.apartments.prototype = {
 
       _renderItem: function(ul, item) {
         search_term = (item.search_term == undefined ? item.value : item.search_term)
-        // Hightliting searched phrase
+        // Highliting searched phrase
         search_phrase = item.search_phrase.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
         var regexp = new RegExp('(' + search_phrase + ')', 'gi'),
           label = search_term.replace(regexp, '<b>$1</b>');
@@ -206,7 +229,7 @@ app.apartments.prototype = {
       $('#search_term').addClass('border-bottom-lr-radius');
     }
     $('#search-modal').hide();
-    this._save_search(ui.item);
+    AutocompleteLI._save_search(ui.item);
     return false;
   },
   
@@ -218,20 +241,5 @@ app.apartments.prototype = {
     else{
       setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
     }
-  },
-
-  _save_search: function(item){
-    let search_arr = new Array;
-    let prev_searches = JSON.parse(localStorage.getItem('prevSearches'))
-    search_arr.push(item);
-    if(prev_searches) {
-      for(i = 0; i <= prev_searches.length; i++){
-        let prev_item = prev_searches[i];
-        if(prev_item && item.id != prev_item.id){
-          search_arr.push(prev_searches[i]);
-        }
-      }
-    }
-    localStorage.setItem('prevSearches', JSON.stringify(search_arr));
   }
 };
