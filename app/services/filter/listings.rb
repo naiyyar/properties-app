@@ -16,8 +16,9 @@ module Filter
 		end
 
 		def past_listings
-			return @past_listings.where('date_active <= ? AND id not in(?)', @date_active, @loaded_ids) if @date_active.present?
-			@building.past_listings
+			past_listings = @building.past_listings
+			return past_listings unless @date_active.present?
+			past_listings.where('date_active <= ? AND id not in(?)', @date_active, @loaded_ids)
 		end
 
 		def active_listings
