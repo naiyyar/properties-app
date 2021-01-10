@@ -14,9 +14,21 @@ LOC_LINK = {
 }
 
 AutocompleteLI = {
-  itemToRender: function(item){
-    return "<a style='display: block;' href="+item.desc+">" +
+  itemToRender: function(item, history_class=''){
+    return "<a class="+history_class+" "+
+               "onclick='AutocompleteLI.reorderHistory(this)'" +
+               "data-id="+item.id+" "+
+               "data-category="+item.category+" "+
+               "data-url="+item.url+" "+
+               "data-search_term="+item.search_term+" "+
+               "style='display: block;' href="+item.desc+">" +
             "<span class='fa fa-history' style='margin-right: 10px; color: #777;'></span>" + item.label + "</a>";
+  },
+
+  reorderHistory: function(elem){
+    var item = JSON.parse(JSON.stringify(elem.dataset));
+    item.search_term = elem.text
+    this._save_search(item);
   },
 
   _save_search: function(item){

@@ -36,7 +36,7 @@ var ready = function(){
 				history_ul.append(li_item)
 				for(i = 0; i < prev_search_items.length; i++) {
 					item    = prev_search_items[i];
-					li_item = '<li class="ui-menu-item" id="ui-id-'+(i+20)+'" tabindex="-1">'+AutocompleteLI.itemToRender(item)+'</li>';
+					li_item = '<li class="ui-menu-item" id="ui-id-'+(i+20)+'" tabindex="-1">'+AutocompleteLI.itemToRender(item, 'history-item')+'</li>';
 					history_ul.append(li_item);
 				}
 			},
