@@ -26,6 +26,10 @@ module HomeConcern
       @lat, @lng       = @hash[0]['latitude'], @hash[0]['longitude']
       @listings_count  = Listing.listings_count(@buildings, @all_buildings, @filter_params)
       @buildings_count = @hash.length rescue 0
+    else
+      building = Building.buildings_in_neighborhood(@search_string.downcase).first
+      @lat = building.latitude
+      @lng = building.longitude
     end
 
     @lat, @lng = params[:latitude], params[:longitude] if params[:search_term] == 'custom'

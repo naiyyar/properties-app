@@ -163,6 +163,8 @@ var ready = function(){
     var set_boundaries = function(map){
       brooklyn_and_queens_neighborhoods(searched_term, city, map) //In search.js
     }
+    console.log(lat)
+    console.log(lng)
     
     setTimeout(function() {
       $('body').removeClass('notransition');
@@ -177,7 +179,7 @@ var ready = function(){
       google.maps.event.addListener(map, 'zoom_changed', function() {
         zoomLevel = map.getZoom();
       });
-      map.setCenter(new google.maps.LatLng(lat, lng));
+      
       map.setZoom(zoom);
       polylines.setMap(map);
       // Setting up boundaries using kml file
@@ -190,14 +192,25 @@ var ready = function(){
       if(map && serched_by == 'latlng'){
         setCustomSearchCenter(map);
       }
+      //setMapCenter(map);
     }, 300);
   }
 
+  setTimeout(function() {
+    setMapCenter(map);
+  }, 400);
+
   function setCustomSearchCenter(map){
     setTimeout(function() {
-      map.setCenter(new google.maps.LatLng(lat,lng));
+      setMapCenter(map)
       redo_search = true;
     }, 500);
+  }
+
+  function setMapCenter(map){
+    if(map){
+      map.setCenter(new google.maps.LatLng(lat,lng));
+    }
   }
 
   var windowHeight;
