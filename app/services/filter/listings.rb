@@ -6,13 +6,28 @@ module Filter
 			@loaded_ids    = load_more_params[:loaded_ids]
 			@building 		 = building
 			@listings 		 = listing_type == 'past' ? past_listings : active_listings
+
 			if filter_params.present?
-				@amenities  = filter_params[:amenities]
+				@amenities  = listing_amenities(filter_params)
 		    @bedrooms  	= filter_params[:listing_bedrooms]
 		    @min_price  = filter_params[:min_price].to_i
 		    @max_price  = filter_params[:max_price].to_i
 		    @max_price  = Listing.max_rent if @max_price == 15500
 		  end
+		end
+
+		def fetch_listings
+			# Not appying filter on featured building listings
+			return @listings 													 if @building.featured? && @listing_type != 'past'
+			return filtered_listings.order_by_rent_asc if @listing_type != 'past'
+	    return @listings.order_by_date_active_desc.limit(PastListing::LIMIT)
+	  end
+
+	  private
+
+	  def listing_amenities filter_params
+			return filter_params[:listings][:amenities] if filter_params[:listings].present?
+			filter_params[:amenities]
 		end
 
 		def past_listings
@@ -24,13 +39,6 @@ module Filter
 		def active_listings
 			@building.listings.active.order_by_rent_asc
 		end
-
-		def fetch_listings
-			# Not appying filter on featured building listings
-			return @listings 													 if @building.featured? && @listing_type != 'past'
-			return filtered_listings.order_by_rent_asc if @listing_type != 'past'
-	    return @listings.order_by_date_active_desc.limit(PastListing::LIMIT)
-	  end
 
 	  def filter_by_beds
 	    @bedrooms = @bedrooms.split(' ') unless @bedrooms.kind_of?(Array)

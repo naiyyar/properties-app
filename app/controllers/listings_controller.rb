@@ -87,7 +87,7 @@ class ListingsController < ApplicationController
     @listings_count = if @rentals == 'past' 
                         @building.past_listings.count
                       else
-                        @building.listings.count
+                        @listings.size
                       end
     respond_to do |format|
       format.html

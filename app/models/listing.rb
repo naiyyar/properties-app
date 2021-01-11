@@ -75,24 +75,6 @@ class Listing < ApplicationRecord
     end
   end
 
-  def self.filtered_listings_count buildings, per_page_buildings, filter_params
-    listings_count = 0
-    per_page_buildings.each do |b|
-      act_listings       = b.get_listings(filter_params)
-      listings_with_rent = act_listings.with_rent
-      b.act_listings     = act_listings
-      b.min_price        = listings_with_rent.first.rent rescue nil
-      b.max_price        = listings_with_rent.last.rent  rescue nil
-      listings_count    += act_listings.size
-    end
-
-    buildings.where.not(id: per_page_buildings.pluck(:id)).each do |b|
-      act_listings    = b.get_listings(filter_params)
-      listings_count += act_listings.size
-    end
-    listings_count
-  end
-
   def self.max_rent
     @max_rent ||= self.maximum('rent')
   end
@@ -119,6 +101,24 @@ class Listing < ApplicationRecord
                   number_of_bathrooms:  bath,
                   monthly_rent:         rent
                 })
+  end
+
+  def self.filtered_listings_count buildings, per_page_buildings, filter_params
+    listings_count = 0
+    per_page_buildings.each do |b|
+      act_listings       = b.get_listings(filter_params)
+      listings_with_rent = act_listings.with_rent
+      b.act_listings     = act_listings
+      b.min_price        = listings_with_rent.first.rent rescue nil
+      b.max_price        = listings_with_rent.last.rent  rescue nil
+      listings_count    += act_listings.size
+    end
+
+    buildings.where.not(id: per_page_buildings.pluck(:id)).each do |b|
+      act_listings    = b.get_listings(filter_params)
+      listings_count += act_listings.size
+    end
+    listings_count
   end
 
 end
