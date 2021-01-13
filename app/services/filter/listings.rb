@@ -6,10 +6,10 @@ module Filter
 			@loaded_ids    = load_more_params[:loaded_ids]
 			@building 		 = building
 			@listings 		 = listing_type == 'past' ? past_listings : active_listings
-
-			if filter_params.present?
-				@amenities  = listing_amenities(filter_params)
-		    @bedrooms  	= filter_params[:listing_bedrooms]
+			@filter_params = filter_params
+			if @filter_params.present?
+				@amenities  = listing_amenities
+		    @bedrooms  	= listing_beds
 		    @min_price  = filter_params[:min_price].to_i
 		    @max_price  = filter_params[:max_price].to_i
 		    @max_price  = Listing.max_rent if @max_price == 15500
@@ -25,9 +25,14 @@ module Filter
 
 	  private
 
-	  def listing_amenities filter_params
-			return filter_params[:listings][:amenities] if filter_params[:listings].present?
-			filter_params[:amenities]
+	  def listing_amenities
+			return @filter_params[:amenities] unless @filter_params[:listings].present?
+			@filter_params[:listings][:amenities]
+	  end
+
+	  def listing_beds
+	  	return @filter_params[:listing_bedrooms] unless @filter_params[:listings].present?
+			@filter_params[:listings][:listing_bedrooms]
 		end
 
 		def past_listings
