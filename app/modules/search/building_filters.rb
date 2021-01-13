@@ -15,6 +15,7 @@ module Search
       listings_filters = filter_params[:listings]
       if listings_filters.present?
         listing_beds = listings_filters[:listing_bedrooms]
+        @amenities   = listings_filters[:amenities]
         @max_price   = listings_filters[:max_price]
         @buildings   = @buildings.with_active_listing.join_with_listings
         @buildings   = @buildings.with_listings_bed(listing_beds) if listing_beds.present?

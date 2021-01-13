@@ -1,4 +1,4 @@
-dropbox_url = 'https://www.dropbox.com/s/'
+const dropbox_url = 'https://www.dropbox.com/s/';
 brooklyn_and_queens_neighborhoods_hash = [
 	//{ key: 'Brooklyn', 						url: 'https://www.dropbox.com/s/p7bpftzv9e55i0o/brooklyn.kml?dl=1'},
 	{ key: 'Borough Park', 				url: dropbox_url+'iu4ih0c0xag21p3/borough_park.kml?dl=1' },
@@ -190,8 +190,6 @@ manhattan_neightborhoods_hash = [
 	{ key: 'Upper Manhattan',		url: dropbox_url+'mgcwk6tdqke7ldy/upper_manhattan.kml?dl=1'},
 	{ key: 'East Harlem',				url: dropbox_url+'p3bsinhs266wsi7/east_harlem.kml?dl=1'},
 	{ key: 'Harlem',						url: dropbox_url+'pyepghx0d035af2/harlem.kml?dl=1'},
-	{ key: 'South Harlem',			url: dropbox_url+'pyepghx0d035af2/harlem.kml?dl=1'},
-	{ key: 'Central Harlem',		url: dropbox_url+'pyepghx0d035af2/harlem.kml?dl=1'},
 	{ key: 'Hudson Heights',		url: dropbox_url+'f9zvtc444vmvkno/hudson_heights.kml?dl=1'},
 	{ key: 'Morningside Heights', url: dropbox_url+'fc3rw3dwj26aph9/morningside_heights.kml?dl=1'},
 	{ key: 'Washington Heights', 	url: dropbox_url+'42m075q1ryus4dh/washington_heights.kml?dl=1'},
