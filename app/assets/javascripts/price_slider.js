@@ -14,8 +14,8 @@ var setPrice = function(min, max, on_slide=false){
     );
     
     if(on_slide){
-        $('#priceFieldsContainer').html('<input type="hidden" name="filter[min_price]" id="min_price" value='+min+'>' +
-                                        '<input type="hidden" name="filter[max_price]" id="max_price" value='+maxValue+'>');
+        $('#priceFieldsContainer').html('<input type="hidden" name="filter[listings][min_price]" id="min_price" value='+min+'>' +
+                                        '<input type="hidden" name="filter[listings][max_price]" id="max_price" value='+maxValue+'>');
 
     }
 }

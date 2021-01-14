@@ -1,7 +1,9 @@
 <% filter_params = params[:filter] %>
 <% if filter_params.present? %>
-  <%= hidden_field_tag :list_amenities, filter_params[:listings][:amenities] %>
-  <%= hidden_field_tag :list_bedrooms,  filter_params[:listings][:listing_bedrooms] %>
+  <% if filter_params[:listings].present? %>
+    <%= hidden_field_tag :list_amenities, filter_params[:listings][:amenities] %>
+    <%= hidden_field_tag :list_bedrooms,  filter_params[:listings][:listing_bedrooms] %>
+  <%end%>
   <%= hidden_field_tag :list_min_price, filter_params[:min_price] %>
   <%= hidden_field_tag :list_max_price, filter_params[:max_price] %>
 <%end%>

@@ -18,7 +18,7 @@ changeListingStatus = (status, elem) ->
 			console.log(response)
 
 #==============================
-#Form submit confirm message
+# Form submit confirm message
 #==============================
 
 
