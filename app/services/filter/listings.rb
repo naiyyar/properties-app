@@ -7,11 +7,11 @@ module Filter
 			@building 		 = building
 			@listings 		 = listing_type == 'past' ? past_listings : active_listings
 			@filter_params = filter_params
+			
 			if @filter_params.present?
 				@amenities  = listing_amenities
 		    @bedrooms  	= listing_beds
-		    @min_price  = filter_params[:min_price].to_i
-		    @max_price  = filter_params[:max_price].to_i
+		    @min_price, @max_price = min_max_prices
 		    @max_price  = Listing.max_rent if @max_price == 15500
 		  end
 		end
@@ -25,14 +25,23 @@ module Filter
 
 	  private
 
+	  def listings_params
+	  	@listings_params ||= @filter_params[:listings]
+	  end
+
+	  def min_max_prices
+	  	return @filter_params[:min_price], @filter_params[:max_price] unless listings_params.present?
+	  	[listings_params[:min_price], listings_params[:max_price]]
+	  end
+
 	  def listing_amenities
-			return @filter_params[:amenities] unless @filter_params[:listings].present?
-			@filter_params[:listings][:amenities]
+			return @filter_params[:amenities] unless listings_params.present?
+			listings_params[:amenities]
 	  end
 
 	  def listing_beds
-	  	return @filter_params[:listing_bedrooms] unless @filter_params[:listings].present?
-			@filter_params[:listings][:listing_bedrooms]
+	  	return @filter_params[:listing_bedrooms] unless listings_params.present?
+			listings_params[:listing_bedrooms]
 		end
 
 		def past_listings
@@ -53,7 +62,7 @@ module Filter
 	  def filtered_listings
 	    @listings = filter_by_listing_amenities	if @amenities.present?
 	    @listings = filter_by_beds 							if @bedrooms.present?
-	    @listings = @listings.with_prices(@min_price, @max_price) if @min_price.to_i > 0 || @max_price.to_i > 0
+	    @listings = @listings.between_prices(@min_price, @max_price) if @min_price.to_i > 0 || @max_price.to_i > 0
 	    @listings
 	  end
 

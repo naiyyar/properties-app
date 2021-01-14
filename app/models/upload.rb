@@ -2,8 +2,8 @@ class Upload < ApplicationRecord
   resourcify
   
   IMG_CONTENT_TYPES = ['image/jpeg', 'image/gif', 'image/png']
-	attr_accessor :rotation_degrees, :rotate
-	
+  attr_accessor :rotation_degrees, :rotate
+  
   # associations
   belongs_to :imageable, polymorphic: true
   has_many :document_downloads
@@ -35,7 +35,7 @@ class Upload < ApplicationRecord
 
   # callbacks
   after_create :set_sort_index
-  after_save :update_counter_cache
+  after_save :update_counter_cache, :if => Proc.new{ |obj| obj.image_file_name.present? }
   after_destroy :update_counter_cache
 
   # Methods
@@ -109,7 +109,7 @@ class Upload < ApplicationRecord
     object.uploads.where('image_file_name is not null').count
   end
 
-	def self.marker_image object
+  def self.marker_image object
     no_image = 'no-photo.jpg'
     uploads  = object.image_uploads
     return no_image if uploads.blank?
@@ -117,7 +117,7 @@ class Upload < ApplicationRecord
     if image_obj.present?
       image_obj.image_file_name.present? ? image_obj.uploaded_img_url : no_image
     end
-	end
+  end
 
   private
   

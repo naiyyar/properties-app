@@ -16,7 +16,9 @@ module Search
       if listings_filters.present?
         listing_beds = listings_filters[:listing_bedrooms]
         @amenities   = listings_filters[:amenities]
-        @max_price   = listings_filters[:max_price]
+        @max_price   = listings_filters[:max_price].to_i
+        @max_price   = Listing.max_rent if @max_price == 15500
+        @min_price   = listings_filters[:min_price]
         @buildings   = @buildings.with_active_listing.join_with_listings
         @buildings   = @buildings.with_listings_bed(listing_beds) if listing_beds.present?
         @buildings   = filter_by_listing_prices                   if @min_price.present? && @max_price.present?
@@ -84,7 +86,6 @@ module Search
     end
 
     def filter_by_listing_prices
-      @max_price = Listing.max_rent if @max_price.to_i == 15500
       @buildings.between_prices(@min_price.to_i, @max_price.to_i)
     end
 

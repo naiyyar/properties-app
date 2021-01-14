@@ -1,16 +1,14 @@
-<% filter_params = params[:filter] %>
-<% if filter_params.present? %>
-  <% if filter_params[:listings].present? %>
-    <%= hidden_field_tag :list_amenities, filter_params[:listings][:amenities] %>
-    <%= hidden_field_tag :list_bedrooms,  filter_params[:listings][:listing_bedrooms] %>
+<% if listings_filters.present? %>
+  <%= hidden_field_tag :list_amenities, listings_filters[:amenities] %>
+  <%= hidden_field_tag :list_bedrooms,  listings_filters[:listing_bedrooms] %>
+  <% if listings_filters[:min_price].present? %>
+    <%= hidden_field_tag :list_min_price, listings_filters[:min_price] %>
+    <%= hidden_field_tag :list_max_price, listings_filters[:max_price] %>
   <%end%>
-  <%= hidden_field_tag :list_min_price, filter_params[:min_price] %>
-  <%= hidden_field_tag :list_max_price, filter_params[:max_price] %>
 <%end%>
 
 <script type="text/javascript">
   // favourite script for market infowindow
-    
   $('.unfilled-heart').mouseover(function(){
     var notFav = $('.unfilled-heart').find('span');
     if(!notFav.hasClass('hover')){

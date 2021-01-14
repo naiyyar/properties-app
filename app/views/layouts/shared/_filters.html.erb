@@ -18,7 +18,7 @@
                   <label><b>Listing Price</b></label>
                   <!-- price slider -->
                   <div class="slider-filter-container">
-                    <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_price_filter" name="filter[listings][price][]" id="listings_price_box" <%= listing_price_box_checked %>><span class="fa fa-check"></span> </label></div>
+                    <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_price_filter" name="filter[listings][price][]" id="listings_price_box" <%= listing_price_box_checked %> ><span class="fa fa-check"></span> </label></div>
                     <div class="slider priceSlider">
                       <div class="sliderTooltip">
                         <div class="stArrow"></div>
@@ -165,9 +165,9 @@
         </div>
         <%= hidden_field_tag :searched_by, params[:searched_by] if params[:searched_by].present? %>
         <div id="priceFieldsContainer">
-          <% if params[:filter] && params[:filter][:min_price].present? %>
-            <%= hidden_field_tag :min_price, params[:filter][:min_price], name: 'filter[min_price]' %>
-            <%= hidden_field_tag :max_price, params[:filter][:max_price], name: 'filter[max_price]' %>
+          <% if listings_filters && listings_filters[:min_price].present? %>
+            <%= hidden_field_tag :min_price, listings_filters[:min_price], name: 'filter[listings][min_price]' %>
+            <%= hidden_field_tag :max_price, listings_filters[:max_price], name: 'filter[listings][max_price]' %>
           <%end%>
         </div>
       </div>
