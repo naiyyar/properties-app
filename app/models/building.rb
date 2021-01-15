@@ -2,6 +2,24 @@ class Building < ApplicationRecord
   acts_as_voteable
   resourcify
 
+  # Modules
+  include ImageableConcern
+  include FavoritableConcern
+  include RateableConcern
+  include PgSearch::Model
+  include SaveNeighborhood
+  include BuildingReviews
+  include Voteable
+  include BedRanges
+  include CTALinks
+
+  # Search and filtering methods
+  extend Search::BuildingSearch
+  extend Search::BuildingFilters
+  extend Search::BuildingSorting
+  extend Search::PopularSearches
+  extend Search::RedoSearch
+
   # constants
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$'].freeze
   COLIVING_NUM = 9
@@ -26,23 +44,7 @@ class Building < ApplicationRecord
                  :featured_buildings_count, :city, :state, :building_type, :neighborhood, :neighborhoods_parent, 
                  :neighborhood3, :studio, :one_bed, :two_bed, :three_bed, :four_plus_bed, :co_living, :listings_count, :updated_at]
   
-  # Modules
-  include ImageableConcern
-  include FavoritableConcern
-  include RateableConcern
-  include PgSearch::Model
-  include SaveNeighborhood
-  include BuildingReviews
-  include Voteable
-  include BedRanges
-  include CTALinks
-
-  # Search and filtering methods
-  extend Search::BuildingSearch
-  extend Search::BuildingFilters
-  extend Search::BuildingSorting
-  extend Search::PopularSearches
-  extend Search::RedoSearch
+  
   
   ratyrate_rateable 'building','cleanliness','noise','safe','health','responsiveness','management'
 
@@ -186,12 +188,6 @@ class Building < ApplicationRecord
       max_listing_price_changed?)
   end
 
-  def self.transparentcity_buildings
-    Rails.cache.fetch([self, 'transparentcity_buildings']) { 
-      where.not(building_street_address: nil)
-    }
-  end
-
   def featured
     featured?
   end
@@ -321,6 +317,12 @@ class Building < ApplicationRecord
       min_price, max_price = nil, nil
     end
     update_listings_price(min_price, max_price)
+  end
+
+  def self.transparentcity_buildings
+    Rails.cache.fetch([self, 'transparentcity_buildings']) { 
+      where.not(building_street_address: nil)
+    }
   end
 
   private

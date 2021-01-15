@@ -27,12 +27,15 @@ module Search
       @buildings
     end
 
+    private
+    
     def has_building_amenities?
       (Building::AMENITIES & @amenities.map(&:to_sym)).present?
     end
 
     def filter_by_amenities
       return @buildings unless @amenities.present?
+
       @buildings = @buildings.doorman           if has_amenity?('doorman')
       @buildings = @buildings.courtyard         if has_amenity?('courtyard')
       @buildings = @buildings.laundry_facility  if has_amenity?('laundry_facility')
@@ -59,30 +62,32 @@ module Search
     # end
     
     def filter_by_prices
-      return @buildings unless @price.present? && !@price.include?('on') && @buildings.present?
+      return @buildings unless price_filter?
       @buildings.where(price: @price)
+    end
+
+    def price_filter?
+      @price.present? && !@price.include?('on') && @buildings.present?
     end
 
     def filter_by_beds
       if @buildings.present?
         buildings = []
-        @beds.each do |num|
-          if num == '0'
-            buildings += @buildings.studio
-          elsif num == '1'
-            buildings += @buildings.one_bed
-          elsif num == '2'
-            buildings += @buildings.two_bed
-          elsif num == '3'
-            buildings += @buildings.three_bed
-          elsif num == '5'
-            buildings += @buildings.co_living
-          else
-            buildings += @buildings.four_bed
-          end
-        end
+        @beds.each{|bed_num | buildings += buildings_by_beds(bed_num) }
       end
       @buildings.where(id: buildings.map(&:id).uniq).uniq rescue nil
+    end
+
+    def buildings_by_beds bed_num
+      case bed_num
+      when '0' then @buildings.studio
+      when '1' then @buildings.one_bed
+      when '2' then @buildings.two_bed
+      when '3' then @buildings.three_bed
+      when '5' then @buildings.co_living
+      else
+        @buildings.four_bed
+      end
     end
 
     def filter_by_listing_prices

@@ -1,6 +1,7 @@
 class Listing < ApplicationRecord
   include PgSearch::Model
   include Listable
+  
   # associations
   belongs_to :building, touch: true
   counter_cache_with_conditions :building, :listings_count, active: true
@@ -71,7 +72,7 @@ class Listing < ApplicationRecord
     if listing_or_building_filter?(filter_params)
       filtered_listings_count(buildings, per_page_buildings, filter_params)
     else
-      buildings.pluck(:listings_count).reduce(:+)
+      buildings.sum(:listings_count)
     end
   end
 

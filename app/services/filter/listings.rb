@@ -18,9 +18,9 @@ module Filter
 
 		def fetch_listings
 			# Not appying filter on featured building listings
-			return @listings 													 if @building.featured? && @listing_type != 'past'
+			return @listings if @building.featured? && @listing_type != 'past'
 			return filtered_listings.order_by_rent_asc if @listing_type != 'past'
-	    return @listings.order_by_date_active_desc.limit(PastListing::LIMIT)
+	    @listings.order_by_date_active_desc.limit(PastListing::LIMIT)
 	  end
 
 	  private
@@ -54,15 +54,10 @@ module Filter
 			@building.listings.active.order_by_rent_asc
 		end
 
-	  def filter_by_beds
-	    @bedrooms = @bedrooms.split(' ') unless @bedrooms.kind_of?(Array)
-	    @listings.with_beds(@bedrooms.flatten)
-	  end
-
 	  def filtered_listings
 	    @listings = filter_by_listing_amenities	if @amenities.present?
-	    @listings = filter_by_beds 							if @bedrooms.present?
-	    @listings = @listings.between_prices(@min_price, @max_price) if @min_price.to_i > 0 || @max_price.to_i > 0
+	    @listings = filter_by_beds if @bedrooms.present?
+	    @listings = between_prices if @min_price.to_i > 0 || @max_price.to_i > 0
 	    @listings
 	  end
 
@@ -72,6 +67,15 @@ module Filter
 	    @listings  = @listings.owner_paid     if @amenities.include?('owner_paid')
 	    @listings  = @listings.rent_stabilize if @amenities.include?('rent_stabilized')
 	    @listings
+	  end
+
+	  def filter_by_beds
+	    @bedrooms = @bedrooms.split(' ') unless @bedrooms.kind_of?(Array)
+	    @listings.with_beds(@bedrooms.flatten)
+	  end
+
+	  def between_prices
+	  	@listings.between_prices(@min_price, @max_price)
 	  end
 	end
 end
