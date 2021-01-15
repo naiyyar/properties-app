@@ -68,7 +68,7 @@ class Listing < ApplicationRecord
   end
 
   def self.listings_count buildings, per_page_buildings, filter_params={}
-    if filter_params.present? && filter_params[:listings].present?
+    if listing_or_building_filter?(filter_params)
       filtered_listings_count(buildings, per_page_buildings, filter_params)
     else
       buildings.pluck(:listings_count).reduce(:+)
@@ -94,6 +94,11 @@ class Listing < ApplicationRecord
   end
   
   private
+
+  def self.listing_or_building_filter? filter_params
+    filter_params.present? || (filter_params.present? && filter_params[:listings].present?)
+  end
+  
   def create_unit
     Unit.create({ name:                 unit,
                   building_id:          building_id,
