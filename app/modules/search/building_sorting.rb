@@ -1,126 +1,126 @@
 module Search
   module BuildingSorting
+    SORT_BY_ASC = 'ASC'
+    SORT_BY_DESC = 'DESC'
+    
     def sort_buildings(buildings, sort_params, filters = {})
-      # 0 => Default by active listings
-      #1.Least Expensive - Listing
-        #Sort by lowest listing price available at building with the building with the lowest price displayed at the top
-      #2.Most Expensive - Listing
-        #Sort by highest listing price available at building with the building with the highest price displayed at the top
-      #3.Least Expensive - Building
-        #1st sort by dollar sign at the building with the building with the lowest dollar sign displayed at the top
-        #2nd sort by Buildings with Active Listings
-        #3rd sort by alphabetical A-Z
-      #4.Most Expensive - Building
-        #1st sort by dollar sign at the building with the building with the highest dollar sign displayed at the top
-        #2nd sort by Buildings with Active Listings
-        #3rd sort by alphabetical A-Z
-      @filters = filters
-      return buildings.updated_recently unless sort_params.present?
+      @filters     = filters[:listings]
+      @filter_keys = @filters.keys
+      @buildings   = buildings
+      @sort_params = sort_params
       
-      buildings = case sort_params
-                  when '1'
-                    buildings = buildings.where(id: (sorted_building_ids_by_min_price(buildings)))
-                    return least_exp_sorted_listings(buildings) if has_listing_type_filters?
-                    buildings.order_by_min_rent
-                  when '2'
-                    buildings = buildings.where(id: (sorted_building_ids_by_max_price(buildings)))
-                    return most_exp_sorted_listings(buildings) if has_listing_type_filters?
-                    buildings.order_by_max_rent
-                  when '3'
-                    return least_exp_sorted_buildings(buildings) if has_listing_type_filters?
-                    buildings.order_by_min_price
-                  when '4'
-                    return most_exp_sorted_buildings(buildings) if has_listing_type_filters?
-                    buildings.order_by_max_price
-                  else
-                    return sorted_by_recently_updated(buildings) if has_listing_type_filters?
-                    buildings.updated_recently
-                  end
-      
-      buildings
+      return @buildings.updated_recently unless sort_params.present?
+      sorted_building_by_sort_num
+    end
+
+    private
+
+    def sorted_building_by_sort_num
+      buildings = 
+        case @sort_params
+        when '1'
+          @buildings = @buildings.where(id: sorted_building_ids_by_min_price)
+          return least_exp_sorted_listings if has_listing_type_filters?
+          @buildings.order_by_min_rent
+        when '2'
+          @buildings = @buildings.where(id: sorted_building_ids_by_max_price)
+          return most_exp_sorted_listings if has_listing_type_filters?
+          @buildings.order_by_max_rent
+        when '3'
+          return least_exp_sorted_buildings if has_listing_type_filters?
+          @buildings.order_by_min_price
+        when '4'
+          return most_exp_sorted_buildings if has_listing_type_filters?
+          @buildings.order_by_max_price
+        else
+          return sorted_by_recently_updated if has_listing_type_filters?
+          @buildings.updated_recently
+        end
+      return buildings
     end
 
     def has_listing_type_filters?
-      @filters.present? && has_listing_filters?(@filters.keys)
+      @filters.present? && has_listing_filters?
     end
 
-    def sorted_by_recently_updated buildings
-      ids = buildings.pluck(:id)
-      return buildings.updated_recently if ids.empty?
-      sorted_buildings_by(buildings.pluck(:id).uniq)
+    def has_listing_filters?
+      @filter_keys.include?('listing_bedrooms') || @filter_keys.include?('min_price')
     end
 
-    def least_exp_sorted_listings buildings
-      sorted_buildings_by(sorted_building_ids_by_rent(buildings, 'ASC'))
+    def least_exp_sorted_listings
+      sorted_buildings_by(sorted_building_ids_by_rent(SORT_BY_ASC))
     end
 
     # sort by most expensive listings
-    def most_exp_sorted_listings buildings
-      sorted_buildings_by(sorted_building_ids_by_rent(buildings, 'DESC'))
+    def most_exp_sorted_listings
+      sorted_buildings_by(sorted_building_ids_by_rent(SORT_BY_DESC))
     end
 
-    def least_exp_sorted_buildings buildings
-      sorted_buildings_by(sorted_buildings_ids_by_price(buildings, 'ASC'))
+    def least_exp_sorted_buildings
+      sorted_buildings_by(sorted_buildings_ids_by_price(SORT_BY_ASC))
     end
 
-    def most_exp_sorted_buildings buildings
-      sorted_buildings_by(sorted_buildings_ids_by_price(buildings, 'DESC'))
+    def most_exp_sorted_buildings
+      sorted_buildings_by(sorted_buildings_ids_by_price(SORT_BY_DESC))
     end
 
     def sorted_buildings_by ids
       transparentcity_buildings.order_by_id_pos(ids)
     end
 
-    def sorted_building_ids_by_rent buildings, sort_type
-      buildings.select('listings.rent, buildings.*')
-               .reorder("listings.rent #{sort_type} NULLS LAST")
+    def sorted_building_ids_by_rent sort_order
+      @buildings.select('listings.rent, buildings.*')
+               .reorder("listings.rent #{sort_order} NULLS LAST")
                .map(&:id)
                .uniq
     end
 
-    def sorted_buildings_ids_by_price buildings, sort_type
-      buildings = buildings.order_by_min_price if sort_type == 'ASC'
-      buildings = buildings.order_by_max_price if sort_type == 'DESC'
-      buildings.map(&:id).uniq
-    end
-
-    def has_listing_filters? keys
-      keys.include?('listing_bedrooms') || keys.include?('min_price')
+    def sorted_buildings_ids_by_price sort_order
+      buildings = @buildings.order_by_min_price if sort_order == 'ASC'
+      buildings = @buildings.order_by_max_price if sort_order == 'DESC'
+      buildings.ids.uniq
     end
 
     # 1.Least Expensive - Listing
-    def sorted_building_ids_by_min_price buildings
+    def sorted_building_ids_by_min_price
       ids_arr = []
-      filtered_buildings = where(id: buildings.ids)
-      ids_arr += filtered_buildings.where.not(min_listing_price: nil)
+      ids_arr += filtered_properties.where.not(min_listing_price: nil)
                                    .with_active_listing
                                    .order_by_min_rent
                                    .map(&:id)
-      ids_arr += buildings.where(min_listing_price: nil).ids
+      ids_arr += @buildings.where(min_listing_price: nil).ids
       return ids_arr
     end
 
     # 2.Most Expensive - Listing
-    def sorted_building_ids_by_max_price buildings
+    def sorted_building_ids_by_max_price
       ids_arr = []
-      filtered_buildings = where(id: buildings.ids)
-      ids_arr += filtered_buildings.where.not(max_listing_price: nil)
+      ids_arr += filtered_properties.where.not(max_listing_price: nil)
                                    .with_active_listing
                                    .order_by_max_rent
                                    .map(&:id)
-      ids_arr += buildings.where(max_listing_price: nil).ids
+      ids_arr += @buildings.where(max_listing_price: nil).ids
       return ids_arr
     end
 
     # 3.Least Expensive - Building
-    def sorting_buildings_ids buildings
+    def sorting_buildings_ids
       ids_arr = []
-      filtered_buildings = where(id: buildings.ids)
-      ids_arr += filtered_buildings.where.not(price: nil)
+      ids_arr += filtered_properties.where.not(price: nil)
                                    .order_by_min_price
                                    .map(&:id)
-      ids_arr += buildings.where(price: nil).ids
+      ids_arr += @buildings.where(price: nil).ids
       return ids_arr
+    end
+
+    def filtered_properties
+      @filtered_properties ||= where(id: @buildings.ids)
+    end
+
+    def sorted_by_recently_updated
+      ids = @buildings.pluck(:id)
+      return @buildings.updated_recently if ids.empty?
+      sorted_buildings_by(@buildings.pluck(:id).uniq)
     end
   end
 end

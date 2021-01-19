@@ -57,7 +57,7 @@ class HomeController < ApplicationController
   def auto_search
     @search_phrase  = params[:term]
     @no_match_found = true
-    buildings       = Building.all
+    buildings       = pop_nb_buildings # Building.all
     @neighborhoods  = Neighborhood.nb_search(@search_phrase)
     @buildings      = buildings.search_by_building_name_or_address(@search_phrase)
     @zipcodes       = buildings.search_by_zipcodes(@search_phrase)

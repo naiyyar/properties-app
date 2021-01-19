@@ -1,12 +1,14 @@
 module HomeConcern
   extend ActiveSupport::Concern
+  DEFAULT_LAT = 40.7812
+  DEFAULT_LNG = -73.9665
 
   def search
     searched_by = params[:searched_by]
     if searched_by == 'address'
       @building = Building.find_by(building_street_address: @search_term.strip)
       redirect_to building_path(@building) if @building.present?
-    elsif searched_by == 'no-fee-management-companies-nyc'
+    elsif searched_by == 'no-fee-management-companies-nyc' || searched_by == 'management_companies'
       company = ManagementCompany.find_by(name: @search_term.strip)
       redirect_to management_company_path(company) if company.present?
     else
@@ -28,8 +30,7 @@ module HomeConcern
       @buildings_count = @hash.length rescue 0
     else
       building = Building.buildings_in_neighborhood(@search_string.downcase).first
-      @lat = building.latitude
-      @lng = building.longitude
+      @lat, @lng = building_latlng(building)
     end
 
     @lat, @lng = params[:latitude], params[:longitude] if params[:search_term] == 'custom'
@@ -39,6 +40,13 @@ module HomeConcern
                                                               count: @buildings_count, 
                                                               term:  @search_term)
     @half_footer = true
+  end
+
+  private
+  
+  def building_latlng building
+    return DEFAULT_LAT, DEFAULT_LNG unless building.present?
+    return building.try(:latitude), building.try(:longitude)
   end
 
   def format_search_string
