@@ -78,7 +78,7 @@ module Search
     def sorted_buildings_ids_by_price sort_order
       buildings = @buildings.order_by_min_price if sort_order == 'ASC'
       buildings = @buildings.order_by_max_price if sort_order == 'DESC'
-      buildings.ids.uniq
+      buildings.map(&:id).uniq
     end
 
     # 1.Least Expensive - Listing
