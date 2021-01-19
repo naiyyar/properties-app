@@ -1,5 +1,0 @@
-<% if user_signed_in? %>
-  <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, object_upload_path(object),class: 'btn btn-o btn-gray contactBtn hidden-lg', 'data-no-turbolink' => false  %>
-<%else%>
-  <%= link_to '<span class="fa fa-camera"><span> Upload photos'.html_safe, '#signin', class: 'btn btn-o btn-gray contactBtn hidden-lg', 'data-toggle' => 'modal'  %>
-<%end%>

@@ -4,8 +4,10 @@ module Search
     SORT_BY_DESC = 'DESC'
     
     def sort_buildings(buildings, sort_params, filters = {})
-      @filters     = filters[:listings]
-      @filter_keys = @filters.keys
+      if filters.present?
+        @filters     = filters[:listings]
+        @filter_keys = @filters.keys
+      end
       @buildings   = buildings
       @sort_params = sort_params
       
