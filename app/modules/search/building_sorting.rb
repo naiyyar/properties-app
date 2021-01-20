@@ -6,7 +6,7 @@ module Search
     def sort_buildings(buildings, sort_params, filters = {})
       if filters.present?
         @filters     = filters[:listings]
-        @filter_keys = @filters.keys
+        @filter_keys = @filters&.keys
       end
       @buildings   = buildings
       @sort_params = sort_params
