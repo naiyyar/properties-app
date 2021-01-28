@@ -91,8 +91,9 @@
         $('.sorted_by_option').show();
         // Only when redo search
         // images are not loading on hidden element
-        if($('.searched-properties').hasClass('invisible')){
-            $('.searched-properties').removeClass('invisible').removeClass('min');
+        var props = $('.searched-properties');
+        if(props.hasClass('invisible')){
+            props.removeClass('invisible').removeClass('min');
         }
         setSession('listView')
     })
@@ -102,6 +103,7 @@
             $(this).hide();
         }
         $('.listHandler').show();
+        draggedOnce = false;
         listMapView();
         $('.sorted_by_option').hide()
         setSession('mapView')

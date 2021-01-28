@@ -44,7 +44,7 @@ var ready = function(){
       zoom_ctrl = false;
     }
     if(!sidebar){
-      // To fix redo button on mobile when switching between map and list view
+      // TODO: Fix redo button on mobile when switching between map and list view
       dragged     = true;
       draggedOnce = false;
     }
@@ -163,8 +163,6 @@ var ready = function(){
     var set_boundaries = function(map){
       brooklyn_and_queens_neighborhoods(searched_term, city, map) //In search.js
     }
-    console.log(lat)
-    console.log(lng)
     
     setTimeout(function() {
       $('body').removeClass('notransition');
@@ -197,7 +195,9 @@ var ready = function(){
   }
 
   setTimeout(function() {
-    setMapCenter(map);
+    if(map){
+      setMapCenter(map);
+    }
   }, 400);
 
   function setCustomSearchCenter(map){
