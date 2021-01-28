@@ -3,6 +3,10 @@ module HomeConcern
   DEFAULT_LAT = 40.7812
   DEFAULT_LNG = -73.9665
 
+  included do
+    before_action :format_search_string,  only: :search
+  end
+
   def search
     searched_by = params[:searched_by]
     if searched_by == 'address'
@@ -23,8 +27,7 @@ module HomeConcern
     
     if @buildings.present?
       @filter_params   = params[:filter]
-      final_results    = search_buildings.with_featured_buildings(@buildings)
-      @all_buildings, @hash, @per_page_buildings = final_results
+      @all_buildings, @hash, @per_page_buildings = search_buildings.with_featured_buildings(@buildings)
       @lat, @lng       = @hash[0]['latitude'], @hash[0]['longitude']
       @listings_count  = Listing.listings_count(@buildings, @all_buildings, @filter_params)
       @buildings_count = @hash.length rescue 0

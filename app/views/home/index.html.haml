@@ -38,9 +38,7 @@
   #home-popular_neighborhoods
     / = render 'layouts/home/popular_neighborhoods'
 
-  #home-popular_searches
-    - cache 'popular_searches' do
-      = render 'layouts/home/popular_searches', bg_col: '#FBFBFF'
+  #home-popular_searches= render 'layouts/home/popular_searches', bg_col: '#FBFBFF'
 
   .home-wrapper{style: 'background: #fff;'}
     .home-content

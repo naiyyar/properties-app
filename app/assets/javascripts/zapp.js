@@ -87,6 +87,7 @@
     $('.listHandler').click(function(){
         $(this).hide();
         $('.mapHandler').show();
+        draggedOnce = false;
         listMapView();
         $('.sorted_by_option').show();
         // Only when redo search
@@ -103,7 +104,6 @@
             $(this).hide();
         }
         $('.listHandler').show();
-        draggedOnce = false;
         listMapView();
         $('.sorted_by_option').hide()
         setSession('mapView')

@@ -12,7 +12,7 @@ module Filter
 				@amenities  = listing_amenities
 		    @bedrooms  	= listing_beds
 		    @min_price, @max_price = min_max_prices
-		    @max_price  = Listing.max_rent if @max_price == 15500
+		    @max_price  = Listing.max_rent if @max_price.to_i == 15500
 		  end
 		end
 
@@ -30,7 +30,7 @@ module Filter
 	  end
 
 	  def min_max_prices
-	  	return @filter_params[:min_price], @filter_params[:max_price] unless listings_params.present?
+	  	return @filter_params[:min_price].to_i, @filter_params[:max_price].to_i unless listings_params.present?
 	  	[listings_params[:min_price], listings_params[:max_price]]
 	  end
 

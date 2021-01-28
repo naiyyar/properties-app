@@ -229,8 +229,7 @@ module HomeHelper
 		search_string = link_text.downcase.split(' ').join('-')
 		url = "/nyc/#{search_string}"
 		return url unless search_string == 'penthouses-for-rent-in-nyc'
-		
-		"#{url}?sort_by=0&filter%5Bprice%5D%5B%5D=on&searched_by=nyc&filter%5Bmin_price%5D=#{Building::PENTHOUSES_MIN_PRICE}&filter%5Bmax_price%5D=15500%2B"
+		"#{url}?sort_by=0&filter%5Blistings%5D%5Bprice%5D%5B%5D=on&searched_by=nyc&filter%5Blistings%5D%5Bmin_price%5D=#{Building::PENTHOUSES_MIN_PRICE}&filter%5Blistings%5D%5Bmax_price%5D=15500%2B"
 	end
 
 	def popular_search_link category, link_text
