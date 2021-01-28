@@ -67,6 +67,7 @@ module Search
     end
 
     def sorted_buildings_by ids
+      return transparentcity_buildings if ids.empty?
       transparentcity_buildings.order_by_id_pos(ids)
     end
 
@@ -78,9 +79,12 @@ module Search
     end
 
     def sorted_buildings_ids_by_price sort_order
-      buildings = @buildings.order_by_min_price if sort_order == 'ASC'
-      buildings = @buildings.order_by_max_price if sort_order == 'DESC'
-      buildings.map(&:id).uniq
+      buildings = if sort_order == 'ASC'
+                    @buildings.order_by_min_price
+                  elsif sort_order == 'DESC'
+                    @buildings.order_by_max_price
+                  end
+      return buildings.map(&:id).uniq
     end
 
     # 1.Least Expensive - Listing
