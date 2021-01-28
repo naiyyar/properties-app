@@ -120,7 +120,7 @@ module Search
     end
 
     def filtered_properties
-      @filtered_properties ||= where(id: @buildings.ids)
+      where(id: @buildings.ids)
     end
 
     def sorted_by_recently_updated
