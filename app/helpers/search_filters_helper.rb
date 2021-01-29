@@ -30,7 +30,7 @@ module SearchFiltersHelper
 	end
 
 	def sort_by
-		sort_by ||= params[:sort_by]
+		params[:sort_by]
 	end
 
 	def filter_params
@@ -39,7 +39,7 @@ module SearchFiltersHelper
 
 	def listings_filters
 		return {} if params[:filter].blank?
-		@listings_filters ||= params[:filter][:listings]
+		params[:filter][:listings]
 	end
 
 	def bed_checked val

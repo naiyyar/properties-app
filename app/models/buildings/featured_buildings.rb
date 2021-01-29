@@ -22,6 +22,8 @@ module Buildings
 	    return final_results[:all_buildings], final_results[:map_hash], per_page_buildings
 	  end
 
+	  private
+	  
 	  # putting featured building on top
 	  def buildings_with_featured_on_top top_2, per_page
 	    top_2.present? ? (top_2 + per_page) : per_page
@@ -29,7 +31,7 @@ module Buildings
 
 	  def non_featured_buildings buildings, top_2
 	    buildings = buildings.where.not(id: top_2.map(&:id)) if top_2.present?
-	    return buildings.sort_buildings(buildings, @sort_by, @filters)
+	    return Building.sort_buildings(buildings, @sort_by, @filters_params)
 	  end
 
 	  def top2_featured_buildings buildings

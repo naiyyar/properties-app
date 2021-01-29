@@ -4,10 +4,8 @@ module Search
     SORT_BY_DESC = 'DESC'
     
     def sort_buildings(buildings, sort_params, filters = {})
-      if filters.present?
-        @filters     = filters[:listings]
-        @filter_keys = @filters&.keys
-      end
+      @listing_filters = filters.present? ? filters[:listings] : nil
+      @filter_keys = @listing_filters&.keys
       @buildings   = buildings
       @sort_params = sort_params
       
@@ -42,7 +40,7 @@ module Search
     end
 
     def has_listing_type_filters?
-      @filters.present? && has_listing_filters?
+      @listing_filters.present? && has_listing_filters?
     end
 
     def has_listing_filters?
@@ -50,12 +48,12 @@ module Search
     end
 
     def least_exp_sorted_listings
-      sorted_buildings_by(sorted_building_ids_by_rent(SORT_BY_ASC))
+      sorted_buildings_by(sorted_building_ids_by_listing_rent(SORT_BY_ASC))
     end
 
     # sort by most expensive listings
     def most_exp_sorted_listings
-      sorted_buildings_by(sorted_building_ids_by_rent(SORT_BY_DESC))
+      sorted_buildings_by(sorted_building_ids_by_listing_rent(SORT_BY_DESC))
     end
 
     def least_exp_sorted_buildings
@@ -71,11 +69,12 @@ module Search
       transparentcity_buildings.order_by_id_pos(ids)
     end
 
-    def sorted_building_ids_by_rent sort_order
+    def sorted_building_ids_by_listing_rent sort_order
       @buildings.select('listings.rent, buildings.*')
                .reorder("listings.rent #{sort_order} NULLS LAST")
                .map(&:id)
                .uniq
+      # @buildings.reorder("listings.rent #{sort_order} NULLS LAST").pluck(:id).uniq
     end
 
     def sorted_buildings_ids_by_price sort_order

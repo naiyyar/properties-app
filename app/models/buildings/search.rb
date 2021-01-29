@@ -11,7 +11,7 @@ module Buildings
 		def initialize params, buildings=nil, search_string=''
 			@page 										 = params[:page]
 			@sort_by 									 = params[:sort_by]
-			@filters 									 = params[:filter]
+			@filters_params 					 = params[:filter]
 			@search_string 						 = search_string
 			@searched_by               = params[:searched_by]
 	    @search_term               = params[:search_term]
@@ -37,7 +37,7 @@ module Buildings
 																@buildings.redo_search_buildings([@lat.to_f, @lng.to_f], @zoomlevel)
 															end
 															
-			@results[:buildings] = @buildings.filtered_buildings(@results[:buildings], @filters) if @filters.present?
+			@results[:buildings] = @buildings.filtered_buildings(@results[:buildings], @filters_params) if @filters_params.present?
 			return @results
 		end
 

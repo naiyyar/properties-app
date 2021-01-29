@@ -50,12 +50,6 @@ jQuery ->
 		else
 			initSlider()
 
-	#$(document).on 'click', '.building_bed_filter', (e) ->
-	#	checked = $(this).is(':checked')
-	#	$(".building_bed_filter").prop('checked',false)
-	#	if checked
-	#		$(this).prop('checked',true)
-
 	#appending checked filter count to filter button
 	checked_filter_count = $('.filterForm input[type=checkbox]:checked').length
 	if checked_filter_count > 0
@@ -102,8 +96,8 @@ jQuery ->
 		#$('.priceSlider .sliderTooltip').css('left', priceSliderLeft);
 		
 	appendPriceInput=(min, max)->
-		$('#priceFieldsContainer').html('<input type="hidden" name="filter[min_price]" id="min_price" value='+min+'>' +
-																		'<input type="hidden" name="filter[max_price]" id="max_price" value='+max+'>');
+		$('#priceFieldsContainer').html('<input type="hidden" name="filter[listings][min_price]" id="min_price" value='+min+'>' +
+																		'<input type="hidden" name="filter[listings][max_price]" id="max_price" value='+max+'>');
 
 	removePriceInput=->
 		$('#min_price, #max_price').remove();

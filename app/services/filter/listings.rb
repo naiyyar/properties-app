@@ -26,7 +26,7 @@ module Filter
 	  private
 
 	  def listings_params
-	  	@listings_params ||= @filter_params[:listings]
+	  	@filter_params[:listings]
 	  end
 
 	  def min_max_prices
