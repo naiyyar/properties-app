@@ -20,7 +20,7 @@ module BuildingsConcern
     @gmaphash = Building.buildings_json_hash((@similar_properties.to_a + [@building]), 'featured_comps')
     # Current listings
     @listings              = @building.listings
-    @active_listings       = @listings.active.order_by_rent_asc
+    @active_listings       = @listings.order_by_rent_asc
     @building.act_listings = @active_listings
     @active_listings_count = @active_listings.count
     # Past listings

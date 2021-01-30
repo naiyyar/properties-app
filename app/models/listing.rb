@@ -15,6 +15,12 @@ class Listing < ApplicationRecord
               ['4', '4+ Bed']
             ]
 
+  AMENITIES = {
+    months_free:     'Months Free Rent',
+    owner_paid:      'Owner Paid',
+    rent_stabilized: 'Rent Stabilized'
+  }.freeze
+
   # validations
   validates_presence_of :building_address, :unit, :date_active
   validates :rent,        :numericality => true, :allow_nil => true

@@ -1,14 +1,22 @@
 class ListingsController < ApplicationController
   load_and_authorize_resource                 only: [:index, :export]
+  
   before_action :set_listing,                 only: [:show, :edit, :update, :destroy]
   before_action :find_listings,               only: [:change_status, :delete_all, :transfer_all]
   before_action :format_date,                 only: [:transfer, :export]
   before_action :find_listings_between_dates, only: [:transfer, :export]
-  before_action :filter_listings,             only: :index
   before_action :set_building,                only: :show_more
   after_action :update_building_rent,         only:[:create, :update, :destroy]
   
   def index
+    @filterrific = initialize_filterrific(
+        Listing,
+        params[:filterrific],
+        available_filters: [:default_listing_order, :search_query]
+      ) or return
+      @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
+                                   .includes(building: [:management_company])
+                                   .default_listing_order
     @export_listings_path = export_listings_path
     @type = 'current'
     respond_to do |format|
@@ -21,7 +29,7 @@ class ListingsController < ApplicationController
     @listings.includes(:building).each do |list|
       building = list.building
       list.update_column('active', params[:active])
-      building.update_rent(building.listings.active)
+      building.update_rent(building.listings)
     end
     redirect_to :back
   end
@@ -163,22 +171,11 @@ class ListingsController < ApplicationController
 
     def update_building_rent
       building = @listing.building
-      building.update_rent(building.listings.active)
+      building.update_rent(building.listings)
     end
 
     def set_building
       @building = Building.find(params[:building_id])
-    end
-
-    def filter_listings
-      @filterrific = initialize_filterrific(
-        Listing,
-        params[:filterrific],
-        available_filters: [:default_listing_order, :search_query]
-      ) or return
-      @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
-                                   .includes(building: [:management_company])
-                                   .default_listing_order
     end
 
     def format_date

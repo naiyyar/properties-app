@@ -35,31 +35,11 @@ module Search
 
     def filter_by_amenities
       return @buildings unless @amenities.present?
-
-      @buildings = @buildings.doorman           if has_amenity?('doorman')
-      @buildings = @buildings.courtyard         if has_amenity?('courtyard')
-      @buildings = @buildings.laundry_facility  if has_amenity?('laundry_facility')
-      @buildings = @buildings.gym               if has_amenity?('gym')
-      @buildings = @buildings.parking           if has_amenity?('parking')
-      @buildings = @buildings.roof_deck         if has_amenity?('roof_deck')
-      @buildings = @buildings.pets_allowed_cats if has_amenity?('pets_allowed_cats')
-      @buildings = @buildings.pets_allowed_dogs if has_amenity?('pets_allowed_dogs')
-      @buildings = @buildings.elevator          if has_amenity?('elevator')
-      @buildings = @buildings.swimming_pool     if has_amenity?('swimming_pool')
-      @buildings = @buildings.walk_up           if has_amenity?('walk_up')
-      @buildings = @buildings.no_fee            if has_amenity?('no_fee')
-      @buildings = @buildings.live_in_super     if has_amenity?('live_in_super')
+      @amenities.each do |amenity| 
+        @buildings = @buildings.send("#{amenity}")
+      end
       @buildings
     end
-
-    # def filter_by_amenities buildings, amenities
-    #   return buildings unless amenities.present?
-    #   @buildings = buildings
-    #   amenities.each(&:to_sym).each do |amenity|
-    #     @buildings = @buildings.where(amenity => true)
-    #   end
-    #   @buildings
-    # end
     
     def filter_by_prices
       return @buildings unless price_filter?
@@ -95,7 +75,7 @@ module Search
     end
 
     def buildings_with_listing_amenities
-      @buildings = @buildings.months_free    if has_amenity?('months_free_rent')
+      @buildings = @buildings.months_free    if has_amenity?('months_free')
       @buildings = @buildings.owner_paid     if has_amenity?('owner_paid')
       @buildings = @buildings.rent_stabilize if has_amenity?('rent_stabilized')
       @buildings
@@ -104,7 +84,7 @@ module Search
     def listing_amenity? amenities = nil
       amenities = @amenities || amenities
       return false if amenities.blank?
-      amenities.include?('months_free_rent') || amenities.include?('owner_paid') || amenities.include?('rent_stabilized')
+      amenities.include?('months_free') || amenities.include?('owner_paid') || amenities.include?('rent_stabilized')
     end
 
     def has_amenity?(name)

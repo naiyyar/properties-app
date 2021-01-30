@@ -9,8 +9,8 @@ module Filter
 			@filter_params = filter_params
 			
 			if @filter_params.present?
-				@amenities  = listing_amenities
-		    @bedrooms  	= listing_beds
+				@bedrooms = bedroom_filters
+				@amenities = amenities_filters
 		    @min_price, @max_price = min_max_prices
 		    @max_price  = Listing.max_rent if @max_price.to_i == 15500
 		  end
@@ -25,8 +25,18 @@ module Filter
 
 	  private
 
+	  def bedroom_filters
+	  	return listing_beds if listing_beds.kind_of?(Array)
+		  listing_beds.split(' ') unless listing_beds.blank?
+	  end
+
+	  def amenities_filters
+	  	return listing_amenities if listing_amenities.kind_of?(Array)
+			listing_amenities.split(' ') unless listing_amenities.blank?
+	  end
+
 	  def listings_params
-	  	@filter_params[:listings]
+	  	@listings_params ||= @filter_params[:listings]
 	  end
 
 	  def min_max_prices
@@ -51,7 +61,7 @@ module Filter
 		end
 
 		def active_listings
-			@building.listings.active.order_by_rent_asc
+			@building.listings.order_by_rent_asc
 		end
 
 	  def filtered_listings
@@ -62,15 +72,15 @@ module Filter
 	  end
 
 	  def filter_by_listing_amenities
-	    @amenities = @amenities.split(' ')    unless @amenities.kind_of?(Array)
-	    @listings  = @listings.months_free    if @amenities.include?('months_free_rent')
-	    @listings  = @listings.owner_paid     if @amenities.include?('owner_paid')
-	    @listings  = @listings.rent_stabilize if @amenities.include?('rent_stabilized')
-	    @listings
+	  	return @listings unless listing_amenities?
+	    @amenities.map{ |amenity| @listings.send("#{amenity}") }[0]
+	  end
+
+	  def listing_amenities?
+	  	(@amenities & Listing::AMENITIES.keys.map(&:to_s)).present?
 	  end
 
 	  def filter_by_beds
-	    @bedrooms = @bedrooms.split(' ') unless @bedrooms.kind_of?(Array)
 	    @listings.with_beds(@bedrooms.flatten)
 	  end
 

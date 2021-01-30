@@ -112,7 +112,7 @@
               <div class="volume">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                   <label><b>Listing Amenities</b></label>
-                  <% listing_amenities.each_pair do |k, v| %>
+                  <% Listing::AMENITIES.each_pair do |k, v| %>
                     <div class="checkbox custom-checkbox">
                       <label>
                         <input type="checkbox" name="filter[listings][amenities][]" value="<%=k.to_s%>" id="<%=k%>" <%= listings_amen_checked(k.to_s) %> <%=amen_locked?(k.to_s)%>> <span class="fa fa-check"></span> <%= v %>

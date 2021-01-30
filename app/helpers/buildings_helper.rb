@@ -78,14 +78,6 @@ module BuildingsHelper
 		'contribute-wrapper' if contribution?(params)
 	end
 
-	def listing_amenities
-		@listing_amenities ||= {
-			months_free_rent: 'Months Free Rent',
-			owner_paid: 			'Owner Paid',
-			rent_stabilized: 	'Rent Stabilized'
-		}
-	end
-
 	def recommended_percent object
 		thumb_icon = "| <span class='fa fa-thumbs-up recommended'></span>"
 		recommended = ''

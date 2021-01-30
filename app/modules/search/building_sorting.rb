@@ -9,7 +9,7 @@ module Search
       @buildings   = buildings
       @sort_params = sort_params
       
-      return @buildings.updated_recently unless sort_params.present?
+      return @buildings.updated_recently unless @sort_params.present?
       sorted_building_by_sort_num
     end
 
