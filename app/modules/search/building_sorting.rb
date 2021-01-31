@@ -74,7 +74,6 @@ module Search
                .reorder("listings.rent #{sort_order} NULLS LAST")
                .map(&:id)
                .uniq
-      # @buildings.reorder("listings.rent #{sort_order} NULLS LAST").pluck(:id).uniq
     end
 
     def sorted_buildings_ids_by_price sort_order
