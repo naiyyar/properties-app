@@ -83,13 +83,13 @@ MapObject = {
         // default opening first fetured comp building marker
         google.maps.event.addListener(marker, 'load', (function(marker, i) {
           if(prop_id == parseInt(featured_comp_building_id)){
-            loadMarkerWindow(prop_id, map, marker);
+            loadShowMarkerWindow(prop_id, map, marker);
           }
         })(marker, i));
         
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-              loadMarkerWindow(prop.id, map, marker);
+              loadShowMarkerWindow(prop.id, map, marker);
             }
         })(marker, i));
         

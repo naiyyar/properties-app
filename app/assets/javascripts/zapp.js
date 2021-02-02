@@ -74,7 +74,17 @@
             $('#content').toggleClass('min');
             $('#mapViewSearch').toggleClass('max');
         }
-        initialize();
+        
+        if(map_init_count == 1){
+            initialize();
+        }else if(map){
+            if(featured_building_id){
+                loadMarkerWindow(featured_building_id, map, featured_marker);
+            }
+            map.setCenter(new google.maps.LatLng(lat,lng));
+            map.setZoom(zoom);
+        }
+        
         setTimeout(function() {
             if(map && redo_search){
                 map.setCenter(new google.maps.LatLng(lat,lng));
@@ -96,7 +106,7 @@
         if(props.hasClass('invisible')){
             props.removeClass('invisible').removeClass('min');
         }
-        setSession('listView')
+        setSerchViewTypeSession('listView');
     })
     
     $('.mapHandler').click(function() {
@@ -106,10 +116,10 @@
         $('.listHandler').show();
         listMapView();
         $('.sorted_by_option').hide()
-        setSession('mapView')
+        setSerchViewTypeSession('mapView');
     });
 
-    var setSession = function(view_type){
+    var setSerchViewTypeSession = function(view_type){
         $.ajax({
             url: '/set_split_view_type',
             beforeSend: function(xhr){

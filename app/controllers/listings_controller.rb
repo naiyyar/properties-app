@@ -29,8 +29,7 @@ class ListingsController < ApplicationController
     @listings.includes(:building).each do |list|
       building = list.building
       list.update(active: params[:active])
-      lists = building.listings.active
-      building.update_rent(lists)
+      building.update_rent(building.listings.active)
     end
     redirect_to :back
   end

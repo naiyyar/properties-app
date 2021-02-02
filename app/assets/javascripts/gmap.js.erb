@@ -11,9 +11,14 @@ function loadMarkerWindow(building_id, map, marker){
     current_user_id:  current_user_id,
     filter_params:    filter_params
   }, function(data){
-    infobox.setContent(data.html);
-    infobox.open(map, marker);
+    infobox_data_html = data.html
+    infobox.setContent(infobox_data_html);
+    openInfoBox(map, marker);
   });
+}
+
+function openInfoBox(map, marker){
+  infobox.open(map, marker);
 }
 
 function createSidebarElem(json){

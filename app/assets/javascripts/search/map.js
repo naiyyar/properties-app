@@ -11,9 +11,9 @@ var ready = function(){
   var centerControlDiv;
   var centerControl;
   var json_array    = $('#json-hash').data('buildingshash');
-  var zoom          = parseInt($('.zoom').val());
-  var lat           = $('#lat').data('lat');
-  var lng           = $('#lng').data('lng');
+  zoom = parseInt($('.zoom').val());
+  lat = $('#lat').data('lat');
+  lng = $('#lng').data('lng');
   var serched_by    = $('#searched_by').val();
   var searched_term = $('#search_term').val();
   var search_string = $('#search_string').val();
@@ -27,7 +27,11 @@ var ready = function(){
   dragged           = false;
   draggedOnce       = false;
   zoomLevel         = zoom;
-
+  map_init_count    = 0;
+  featured_building_id = null;
+  featured_marker = null;
+  infobox_data_html = null;
+  
   if(searched_term && search_string){
     searched_term = search_string;
     if(searched_term && searched_term == 'Little Italy'){
@@ -38,6 +42,7 @@ var ready = function(){
   // Custom options for map
   window.initialize = function(sidebar = true) {
     position  = google.maps.ControlPosition.TOP_CENTER;
+    map_init_count = map_init_count + 1;
     var zoom_ctrl = true;
     if(mobile){
       position  = google.maps.ControlPosition.TOP_LEFT;
@@ -110,9 +115,17 @@ var ready = function(){
             if(i == 0 || i == '0'){
               // default opening first fetured building marker
               google.maps.event.addListener(marker, 'load', (function(marker, i) {
-                var object = json_array[i]
+                var object = json_array[i];
                 if(object.featured){
-                  loadMarkerWindow(object.id, map, marker);
+                  featured_building_id = object.id
+                  featured_marker = marker;
+                  if(infobox_data_html){
+                    infobox.setContent(infobox_data_html);
+                    openInfoBox(map, featured_marker);
+                  }
+                  else{
+                    loadMarkerWindow(object.id, map, marker);
+                  }
                 }
               })(marker, i));
             }
