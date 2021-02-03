@@ -81,6 +81,7 @@
             if(featured_building_id){
                 loadMarkerWindow(featured_building_id, map, featured_marker);
             }
+            createRedoButtonObject(map);
             map.setCenter(new google.maps.LatLng(lat,lng));
             map.setZoom(zoom);
         }
@@ -98,6 +99,7 @@
         $(this).hide();
         $('.mapHandler').show();
         draggedOnce = false;
+        redoControlUI.remove();
         listMapView();
         $('.sorted_by_option').show();
         // Only when redo search
@@ -129,7 +131,7 @@
             dataType: 'json',
             data: {view_type: view_type},
             success: function(response){
-                console.log(response)
+                // console.log(response)
             }
         })
     }

@@ -1,10 +1,13 @@
 //
 //**** REDO BUTTON SCRIPTS   ****
 //
+redoControlUI = '';
+
 function setRedoButtonPosition(map){
-  controlUI.style.display = 'block';
+  redoControlUI.style.display = 'block';
   if(!draggedOnce){
     centerControlDiv.index = 1;
+    console.log('setRedoButtonPosition')
     if(mobile){       
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
     }else{
@@ -16,7 +19,7 @@ function setRedoButtonPosition(map){
 
 function getMoveData(map){
   if(dragged){
-    currentLocation = map.getCenter()
+    currentLocation = map.getCenter();
     lat = currentLocation.lat();
     lng = currentLocation.lng();
     var query_strings = window.location.search;
@@ -39,16 +42,16 @@ function createRedoButtonObject(map){
 
 function RedoButton(controlDiv, map) {
   // Set CSS for the control border.
-  controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#2b78e4';
-  controlUI.style.borderRadius    = '90px';
-  controlUI.style.boxShadow       = '0 2px 6px rgba(0,0,0,.3)';
-  controlUI.style.cursor          = 'pointer';
-  controlUI.style.marginTop       = '8px';
-  controlUI.style.marginLeft      = mobile ? '8px' : '';
-  controlUI.style.textAlign       = 'center';
-  controlUI.style.display         = 'none';
-  controlDiv.appendChild(controlUI);
+  redoControlUI = document.createElement('div');
+  redoControlUI.style.backgroundColor = '#2b78e4';
+  redoControlUI.style.borderRadius    = '90px';
+  redoControlUI.style.boxShadow       = '0 2px 6px rgba(0,0,0,.3)';
+  redoControlUI.style.cursor          = 'pointer';
+  redoControlUI.style.marginTop       = '8px';
+  redoControlUI.style.marginLeft      = mobile ? '8px' : '';
+  redoControlUI.style.textAlign       = 'center';
+  redoControlUI.style.display         = 'none';
+  controlDiv.appendChild(redoControlUI);
 
   // Set CSS for the control interior.
   controlText = document.createElement('div');
@@ -59,9 +62,9 @@ function RedoButton(controlDiv, map) {
   controlText.style.paddingLeft   = '8px';
   controlText.style.paddingRight  = '8px';
   controlText.innerHTML = '<span class="fa fa-refresh"></span> Redo Search Here';
-  controlUI.appendChild(controlText);
+  redoControlUI.appendChild(controlText);
 
-  controlUI.addEventListener('click', function() {
+  redoControlUI.addEventListener('click', function() {
     getMoveData(map);
   });
 }

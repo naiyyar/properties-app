@@ -6,7 +6,6 @@ var ready = function(){
   var newMarker;
   var markers;
   var options;
-  var controlUI;
   var controlText;
   var centerControlDiv;
   var centerControl;
@@ -180,7 +179,6 @@ var ready = function(){
     setTimeout(function() {
       $('body').removeClass('notransition');
       map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
-      //Redo search only when dragging map
       createRedoButtonObject(map)
       google.maps.event.addListener(map, 'dragend', function(){
         dragged = true;
@@ -256,17 +254,17 @@ var ready = function(){
   }
 
   // setting up building and agent image on search view card
-var cards = $('.search-view-card');
-if(cards.length > 0){
-  cards.each(function(i, j){
-      var agentid = $(j).data('agentid');
-      if(agentid){
-        Card.loadFeaturedAgentImagesAndCTALinks(agentid);
-      }else{
-        Card.loadDisplayImageAndCTALinks($(j).data('bid'));
-      }
-  });
-}
+  var cards = $('.search-view-card');
+  if(cards.length > 0){
+    cards.each(function(i, j){
+        var agentid = $(j).data('agentid');
+        if(agentid){
+          Card.loadFeaturedAgentImagesAndCTALinks(agentid);
+        }else{
+          Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+        }
+    });
+  }
 
 }
 
