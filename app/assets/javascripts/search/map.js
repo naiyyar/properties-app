@@ -116,13 +116,7 @@ var ready = function(){
                 if(object.featured){
                   featured_building_id = object.id
                   featured_marker = marker;
-                  if(infobox_data_html){
-                    infobox.setContent(infobox_data_html);
-                    openInfoBox(map, featured_marker);
-                  }
-                  else{
-                    loadMarkerWindow(object.id, map, marker);
-                  }
+                  loadMarkerWindow(featured_building_id, map, featured_marker);
                 }
               })(marker, i));
             }

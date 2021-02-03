@@ -63,7 +63,7 @@
     });
 
     // functionality for map manipulation icon on mobile devices
-    var listMapView = function(){
+    var listMapView = function(target_class_list){
         if ($('#mapViewSearch').hasClass('mob-min') || 
             $('#mapViewSearch').hasClass('mob-max') || 
             $('#content').hasClass('mob-min') || 
@@ -78,12 +78,14 @@
         if(map_init_count == 1){
             initialize();
         }else if(map){
-            if(!infobox_opened && featured_building_id){
-                loadMarkerWindow(featured_building_id, map, featured_marker);
+            if(target_class_list.includes('mapHandler')){
+                if(!infobox_opened && featured_building_id){
+                    loadMarkerWindow(featured_building_id, map, featured_marker);
+                }
+                createRedoButtonObject(map);
+                map.setCenter(new google.maps.LatLng(lat,lng));
+                map.setZoom(zoom);
             }
-            createRedoButtonObject(map);
-            map.setCenter(new google.maps.LatLng(lat,lng));
-            map.setZoom(zoom);
         }
         
         setTimeout(function() {
@@ -95,12 +97,12 @@
 
     /* end show page */
     
-    $('.listHandler').click(function(){
+    $('.listHandler').click(function(e){
         $(this).hide();
         $('.mapHandler').show();
         draggedOnce = false;
         redoControlUI.remove();
-        listMapView();
+        listMapView([...e.currentTarget.classList]);
         $('.sorted_by_option').show();
         // Only when redo search
         // images are not loading on hidden element
@@ -111,12 +113,12 @@
         setSerchViewTypeSession('listView');
     })
     
-    $('.mapHandler').click(function() {
+    $('.mapHandler').click(function(e) {
         if(!$(this).hasClass('show-map-handler')){
             $(this).hide();
         }
         $('.listHandler').show();
-        listMapView();
+        listMapView([...e.currentTarget.classList]);
         $('.sorted_by_option').hide()
         setSerchViewTypeSession('mapView');
     });

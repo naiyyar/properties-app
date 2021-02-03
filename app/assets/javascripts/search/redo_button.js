@@ -10,7 +10,6 @@ function setRedoButtonPosition(map){
   redoControlUI.style.display = 'block';
   if(!draggedOnce){
     centerControlDiv.index = 1;
-    console.log('setRedoButtonPosition')
     if(mobile){       
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
     }else{
