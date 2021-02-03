@@ -27,6 +27,12 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.fullpath unless request.fullpath =~ /\/users/
   end
 
+  def model_class
+    @model_class ||= params[:controller].singularize.camelize.constantize
+  end
+
+  helper_method :model_class
+
   private
 
   def set_layout

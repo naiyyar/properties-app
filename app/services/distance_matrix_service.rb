@@ -1,5 +1,5 @@
 # To find nearby station and their distance & duration from the building
-class DistanceMatrix
+class DistanceMatrixService
 	API_KEY  = ENV['GEOCODER_API_KEY']
 	DISTANCE = 0.5
 	API_URL  = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&key=#{API_KEY}"

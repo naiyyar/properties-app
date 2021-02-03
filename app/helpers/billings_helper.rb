@@ -3,12 +3,30 @@ module BillingsHelper
 		brand.present? ? brand.downcase.split(' ').join('_') : 'generic'
 	end
 
-	def previous_page_path
-		unless @object_type == 'FeaturedAgent'
-			params[:object_id].present? ? edit_featured_building_path(params[:object_id]) : session[:back_to]
+	def tool_type object_type
+		case object_type
+		when 'FeaturedAgent' then 'Agent'
+		when 'FeaturedBuilding' then 'Manager'
+		when 'FeaturedListing' then 'FRBOS'
 		else
-			params[:object_id].present? ? edit_featured_agent_path(params[:object_id]) : session[:back_to]
+			''
 		end
+	end
+
+	def previous_page_path object_type
+		return session[:back_to] if payment_object_id.present?
+		
+		if object_type == 'FeaturedAgent'
+			edit_featured_agent_path(payment_object_id)
+		elsif object_type == 'FeaturedBuilding'
+			edit_featured_building_path(payment_object_id)
+		elsif object_type == 'FeaturedListing'
+			edit_featured_listing_path(payment_object_id)
+		end
+	end
+
+	def payment_object_id
+		@payment_object_id ||= params[:object_id]
 	end
 
 	def card_brand_image brand
@@ -22,9 +40,17 @@ module BillingsHelper
 	end
 
 	def cancel_form_link type
-		url = (type == 'FeaturedBuilding' ? 
-					managertools_user_path(current_user, type: 'featured') : 
-					agenttools_user_path(current_user, type: 'featured'))
-		link_to 'Cancel', url, class: 'btn font-bold'
+		link_to 'Cancel', cancel_redirect_url(type), class: 'btn font-bold'
+	end
+
+	def cancel_redirect_url type
+		case type
+		when 'FeaturedBuilding'
+			managertools_user_path(current_user, type: 'featured')
+		when 'FeaturedAgent'
+			agenttools_user_path(current_user, type: 'featured')
+		when 'FeaturedListing'
+			frbotools_user_path(current_user, type: 'featured')
+		end
 	end
 end

@@ -1,0 +1,40 @@
+.row
+	.col-lg-12.col-xs-12.col-lg-offset-3
+		.form-container
+		  .row
+		    .col-xs-12.col-sm-12.col-md-12.col-lg-6
+		      .panel.panel-default
+		        .panel-heading
+		          %b= 'Featured Listing'
+		        .panel-body
+		          = form_for @featured_listing, class: 'form-horizontal' do |f|
+		            .row
+		              .col-xs-6.col-sm-6.col-md-8.col-lg-8
+		                %b.font-14.hyper-link Amenities
+		            %br
+		            
+		            .row
+		              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+		                .checkbox.custom-checkbox
+		                  %label
+		                    = check_box_tag :no_fee,'', checked: true, name: 'amenities[no_fee]'
+		                    %span.fa.fa-check
+		                    No Fee
+
+		                - BuildingAmenities.listing_emenities.each do |key, value|
+		                  .checkbox.custom-checkbox
+		                    %label
+		                      = check_box_tag key, name: "amenities[#{key}]"
+		                      %span.fa.fa-check
+		                      = value
+		                  
+		                = f.submit 'Next ->', class: 'btn btn-primary'
+
+		            .form-group
+		              .col-sm-12
+		                .pull-left
+		                  = link_to 'Cancel', cancel_redirect_url('FeaturedListing'), class: 'btn btn-default'
+		                
+		                .pull-right
+		                  = link_to '<- Back', edit_manager_featured_listing_user_path(current_user, type: 'featured'), class: 'btn btn-primary'
+		                  = f.submit 'Next ->', class: 'btn btn-primary'

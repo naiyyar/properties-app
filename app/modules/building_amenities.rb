@@ -1,16 +1,12 @@
 module BuildingAmenities
 	class << self
-		def building_edit_emenities
+		def common
 			{
-				no_fee: 								'No Fee Building',
 				childrens_playroom: 		'Childrens Playroom',
-				courtyard: 				 			'Courtyard',
 				pets_allowed_cats: 			'Cats Allowed',
 				pets_allowed_dogs: 			'Dogs Allowed',
-				deposit_free: 					'Deposit Free',
 				doorman: 								'Doorman',
 				elevator: 							'Elevator',
-				# garage: 								'Garage',
 				gym: 										'Gym',
 				laundry_facility: 			'Laundry in Building',
 				live_in_super: 					'Live in super',
@@ -22,8 +18,24 @@ module BuildingAmenities
 			}
 		end
 		
+		def building_edit_emenities
+			common.merge!({
+				courtyard: 				 			'Courtyard',
+				deposit_free: 					'Deposit Free',
+			}).sort_by{|_k, value| value}.to_h
+		end
+		
 		def all_amenities
 			building_edit_emenities
+		end
+
+		def listing_amenties
+			common.merge!({
+											balcony: 'Balcony',
+											dishwasher: 'Dishwasher',
+											furnished: 'Furnished',
+											laundary_in_unit: 'Laundry In Unit',
+										}).sort_by{|_k, value| value}.to_h
 		end
 
 		# for filtering purpose

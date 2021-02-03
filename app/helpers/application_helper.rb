@@ -9,6 +9,14 @@ module ApplicationHelper
     end
   end
 
+  def tool_nav_helper
+    @tool_nav ||= [
+      { title: 'Agent Tools',   url: agenttools_user_path(current_user,   type: 'featured') },
+      { title: 'FRBO Tools',    url: frbotools_user_path(current_user,    type: 'featured') },
+      { title: 'Manager Tools', url: managertools_user_path(current_user, type: 'featured') }
+    ]
+  end
+
   # adding last page custom class to pagination ul
   def last_page_class collection
     collection.total_pages == collection.current_page ? 'last-page' : ''
