@@ -2,6 +2,9 @@
 //**** REDO BUTTON SCRIPTS   ****
 //
 redoControlUI = '';
+var controlText;
+var centerControlDiv;
+var centerControl;
 
 function setRedoButtonPosition(map){
   redoControlUI.style.display = 'block';

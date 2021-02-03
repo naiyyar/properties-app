@@ -6,10 +6,7 @@ var ready = function(){
   var newMarker;
   var markers;
   var options;
-  var controlText;
-  var centerControlDiv;
-  var centerControl;
-  var json_array    = $('#json-hash').data('buildingshash');
+  var json_array = $('#json-hash').data('buildingshash');
   zoom = parseInt($('.zoom').val());
   lat = $('#lat').data('lat');
   lng = $('#lng').data('lng');
@@ -48,7 +45,6 @@ var ready = function(){
       zoom_ctrl = false;
     }
     if(!sidebar){
-      // TODO: Fix redo button on mobile when switching between map and list view
       dragged     = true;
       draggedOnce = false;
     }
