@@ -27,6 +27,8 @@ var ready = function(){
   featured_building_id = null;
   featured_marker = null;
   infobox_data_html = null;
+  infobox_opened = true;
+
   
   if(searched_term && search_string){
     searched_term = search_string;

@@ -78,7 +78,7 @@
         if(map_init_count == 1){
             initialize();
         }else if(map){
-            if(featured_building_id){
+            if(!infobox_opened && featured_building_id){
                 loadMarkerWindow(featured_building_id, map, featured_marker);
             }
             createRedoButtonObject(map);

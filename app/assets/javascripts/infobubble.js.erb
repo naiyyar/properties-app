@@ -242,6 +242,7 @@ InfoBubble.prototype.buildDom_ = function() {
   google.maps.event.addDomListener(close, 'click', function() {
     that.close();
     google.maps.event.trigger(that, 'closeclick');
+    infobox_opened = false;
   });
 
   // Content area
