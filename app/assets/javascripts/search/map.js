@@ -17,6 +17,7 @@ var ready = function(){
   var header_id     = $('#app-header').length > 0 ? 'app-header' : 'header-mob';
   var per_page_buildings  = [];
   var boundary_coords = $('#boundary_coords').data('coords');
+  var polylines;
 
   current_user_id   = $('#cu').val();
   redo_search       = false;
@@ -27,7 +28,8 @@ var ready = function(){
   featured_building_id = null;
   featured_marker = null;
   infobox_data_html = null;
-  infobox_opened = true;
+  infobox_opened = false;
+  map = null;
 
   
   if(searched_term && search_string){
@@ -40,7 +42,7 @@ var ready = function(){
   // Custom options for map
   window.initialize = function(sidebar = true) {
     position  = google.maps.ControlPosition.TOP_CENTER;
-    map_init_count = map_init_count + 1;
+    // map_init_count = map_init_count + 1;
     var zoom_ctrl = true;
     if(mobile){
       position  = google.maps.ControlPosition.TOP_LEFT;
@@ -116,7 +118,9 @@ var ready = function(){
                 if(object.featured){
                   featured_building_id = object.id
                   featured_marker = marker;
-                  loadMarkerWindow(featured_building_id, map, featured_marker);
+                  if(!mobile){
+                    loadMarkerWindow(featured_building_id, map, featured_marker);
+                  }
                 }
               })(marker, i));
             }
@@ -163,14 +167,16 @@ var ready = function(){
       }
     }
 
-    var polylines = new google.maps.Polygon(polylineoptons);
+    polylines = new google.maps.Polygon(polylineoptons);
     var set_boundaries = function(map){
       brooklyn_and_queens_neighborhoods(searched_term, city, map) //In search.js
     }
     
     setTimeout(function() {
       $('body').removeClass('notransition');
-      map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
+      if(!map){
+        map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
+      }
       createRedoButtonObject(map)
       google.maps.event.addListener(map, 'dragend', function(){
         dragged = true;
@@ -182,11 +188,12 @@ var ready = function(){
       });
       
       map.setZoom(zoom);
-      polylines.setMap(map);
+      if(polylines){
+        polylines.setMap(map);
+      }
       // Setting up boundaries using kml file
       set_boundaries(map)
       addMarkers(props, map);
-
       var transitLayer = new google.maps.TransitLayer();
       transitLayer.setMap(map);
       windowResizeHandler(map);

@@ -75,18 +75,28 @@
             $('#mapViewSearch').toggleClass('max');
         }
         
-        if(map_init_count == 1){
-            initialize();
-        }else if(map){
+        //if(map_init_count == 1){
             if(target_class_list.includes('mapHandler')){
-                if(!infobox_opened && featured_building_id){
+                initialize();
+                if(map && featured_building_id){
                     loadMarkerWindow(featured_building_id, map, featured_marker);
+                    infobox_opened = true
                 }
-                createRedoButtonObject(map);
-                map.setCenter(new google.maps.LatLng(lat,lng));
-                map.setZoom(zoom);
+            }else{
+                if(infobox_opened){
+                    infobox.close();
+                }
             }
-        }
+        // }else if(map){
+        //     if(target_class_list.includes('mapHandler')){
+        //         if(!infobox_opened && featured_building_id){
+        //             loadMarkerWindow(featured_building_id, map, featured_marker);
+        //         }
+        //         createRedoButtonObject(map);
+        //         map.setCenter(new google.maps.LatLng(lat,lng));
+        //         map.setZoom(zoom);
+        //     }
+        // }
         
         setTimeout(function() {
             if(map && redo_search){
