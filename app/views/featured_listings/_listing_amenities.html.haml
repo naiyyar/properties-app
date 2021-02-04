@@ -1,0 +1,40 @@
+.row
+	.col-lg-12.col-xs-12.col-lg-offset-3
+		.form-container
+			.row
+				.col-xs-12.col-sm-12.col-md-12.col-lg-6
+					.panel.panel-default
+						.panel-heading
+							%b= 'Featured Listing'
+						.panel-body
+							= form_for @featured_listing, class: 'form-horizontal' do |f|
+								.row
+									.col-xs-6.col-sm-6.col-md-8.col-lg-8
+										%b.font-14.hyper-link Amenities
+								%br
+		            
+								.row
+									.col-xs-12.col-sm-12.col-md-6.col-lg-6
+										.checkbox.custom-checkbox
+											%label
+												= check_box_tag 'featured_listing[amenities][no_fee]', 'No Fee', checked: true
+												%span.fa.fa-check
+												No Fee
+
+										- BuildingAmenities.listing_amenities.each do |key, value|
+											.checkbox.custom-checkbox
+												%label
+													- saved_value = @listing_amenities[key.to_s]
+													= check_box_tag "featured_listing[amenities][#{key}]", value, saved_value.present?
+													%span.fa.fa-check
+													= value
+		                  
+										= hidden_field_tag :next_step, :add_photos
+								%br
+								.form-group
+									.col-sm-12
+										.pull-left
+											= link_to 'Cancel', cancel_redirect_url('FeaturedListing'), class: 'btn btn-default'
+										.pull-right
+											= link_to '<- Back', next_prev_step_url(@featured_listing, step: 'create'), class: 'btn btn-primary'
+											= f.submit 'Next ->', class: 'btn btn-primary'

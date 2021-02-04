@@ -117,7 +117,7 @@
                 .form-group
                   %label Description
                   = f.text_area :description, class: 'form-control', rows: 10
-
+                  = hidden_field_tag :next_step, :add_amenities
             .form-group
               .col-sm-12
                 .pull-right

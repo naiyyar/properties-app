@@ -20,16 +20,32 @@ class FeaturedListingsController < ApplicationController
   end
 
   def edit
-    # @featured_listing = FeaturedListing.find(session[:rental_listing_id])
+    @featured_listing = FeaturedListing.find_by(id: params[:object_id])
+    @step = params[:step].to_sym
+    case @step
+    when :add_amenities
+      @listing_amenities = @featured_listing.amenities
+    when :add_photos
+      @imageable = @featured_listing
+    when :edit_photos
+      @uploads      = @featured_listing.uploads
+      @photos_count = @featured_listing.uploads_count
+    when :payment
+      @featured_by       = 'manager'
+      @price             = Billing::FEATURED_LISTING_PRICE
+      @object_id         = @featured_listing.id
+      @object_type       = 'FeaturedListing'
+      @saved_cards       = BillingService.new(current_user).get_saved_cards rescue nil
+    end
   end
 
   def create
-    @featured_listing = FeaturedListing.new(rental_listing_params)
+    @featured_listing = FeaturedListing.new(featured_listing_params)
 
     respond_to do |format|
       if @featured_listing.save
         # session[:rental_listing_id] = @featured_listing.id
-        format.html { redirect_to featured_listing_steps_path(featured_listing_id: @featured_agent.id) }
+        format.html { redirect_to next_step_url(:create) }
       else
         format.html { 
           flash[:error] = @featured_listing.errors.full_messages
@@ -43,7 +59,7 @@ class FeaturedListingsController < ApplicationController
     respond_to do |format|
       if @featured_listing.update(featured_listing_params)
         # session[:rental_listing_id] = @featured_listing.id
-        format.html { redirect_to featured_listing_steps_path(featured_listing_id: @featured_agent.id) }
+        format.html { redirect_to next_step_url(params[:next_step]) }
       else
         format.html { 
           flash[:error] = @featured_listing.errors.full_messages
@@ -70,5 +86,9 @@ class FeaturedListingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def featured_listing_params
       params.require(:featured_listing).permit!
+    end
+
+    def next_step_url step
+      view_context.next_prev_step_url(@featured_listing, step: step)
     end
 end

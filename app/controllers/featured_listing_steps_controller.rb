@@ -1,10 +1,12 @@
 class FeaturedListingStepsController < ApplicationController
 	include Wicked::Wizard
-	steps :add_amenities, :add_photos, :edit_photos, :payment
+	steps :create, :add_amenities, :add_photos, :edit_photos, :payment
 
 	def show
 		@featured_listing = FeaturedListing.find_by(id: params[:featured_listing_id])
 		case step
+		when :create
+
 		when :add_amenitites
 
 		when :add_photos

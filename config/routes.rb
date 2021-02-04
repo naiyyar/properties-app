@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :featured_listings
+  resources :featured_listings do
+    resources :uploads
+  end
 
   mount StripeEvent::Engine, at: '/stripe-events'
 
@@ -126,8 +128,9 @@ Rails.application.routes.draw do
       get :contribution
       get :saved_buildings
       get '/frbotools/:type',        to: 'users#frbotools',        as: :frbotools
-      get '/frbotools/:type/new',    to: 'featured_listings#new',  as: :new_manager_featured_listing
-      get '/frbotools/:type/create', to: 'featured_listings#edit', as: :edit_manager_featured_listing
+      # get '/frbotools/:type/:step', to: 'featured_listing_steps#show', as: :featured_listing_create_step
+      # get '/frbotools/:type/new',  to: 'featured_listings#new',  as: :new_manager_featured_listing
+      get '/frbotools/:type/:step',  to: 'featured_listings#edit', as: :edit_manager_featured_listing
       get '/managertools/:type',     to: 'users#managertools',     as: :managertools
       get '/managertools/:type/new', to: 'featured_buildings#new', as: :new_manager_featured_building
       get '/agenttools/:type',       to: 'users#agenttools',       as: :agenttools
@@ -136,7 +139,10 @@ Rails.application.routes.draw do
   end
 
   # multisteps Forms
-  resources :user_steps, :building_steps, :unit_steps, :featured_agent_steps
+  resources :user_steps, 
+            :building_steps, 
+            :unit_steps, 
+            :featured_agent_steps
   
   resources :featured_agents do
     resources :uploads

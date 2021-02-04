@@ -29,7 +29,7 @@ module BuildingAmenities
 			building_edit_emenities
 		end
 
-		def listing_amenties
+		def listing_amenities
 			common.merge!({
 											balcony: 'Balcony',
 											dishwasher: 'Dishwasher',

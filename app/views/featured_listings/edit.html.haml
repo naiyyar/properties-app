@@ -1,0 +1,13 @@
+- if @step == :create
+	= render 'featured_listings/form', featured_listing: @featured_listing
+- elsif @step == :add_amenities
+	= render 'featured_listings/listing_amenities', featured_listing: @featured_listing
+- elsif @step == :add_photos
+	.row
+		.col-lg-12.col-lg-offset-3
+			%p.font-bold.font-16 Add Photos
+	.row
+		- @imageable = @featured_listing
+		.col-lg-12.col-xs-12.col-lg-offset-3= render partial: 'uploads/form_fields'
+- else
+	= render 'featured_listings/payment'

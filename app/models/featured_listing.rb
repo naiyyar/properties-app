@@ -1,6 +1,7 @@
 class FeaturedListing < ApplicationRecord
 	include PgSearch::Model
   include Billable
+  include ImageableConcern
 
   extend RenewPlan
   
@@ -50,7 +51,7 @@ class FeaturedListing < ApplicationRecord
   FIELDS_TO_VALIDATES = [ :first_name,
 													:last_name,
 													:email,
-													:neighbrhood,
+													:neighborhood,
 													:address,
 													:city,
 													:zipcode,
@@ -58,7 +59,7 @@ class FeaturedListing < ApplicationRecord
 													:bath
 												]
   FIELDS_TO_VALIDATES.each do |field|
-  	validates field, presence: true
+  	validates field, presence: true, on: :update
   end
 
   validates :apartment_type, 

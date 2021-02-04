@@ -15,7 +15,7 @@
 #
 
 class VideoTour < ApplicationRecord
-	belongs_to :building, touch: true
+	belongs_to :tourable, polymorphic: true, touch: true
 	
 	CATEGORIES = [['Amenities', 	'amenities'], 
 								['Studio', 			'studio'], 
