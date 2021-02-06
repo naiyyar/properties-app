@@ -81,11 +81,7 @@
                 loadMarkerWindow(featured_building_id, map, featured_marker);
                 infobox_opened = true
             }
-            var saved_zoom = parseInt(localStorage.mapZoom);
-            if(saved_zoom > defaultZoomLevel){
-                defaultZoomLevel = saved_zoom;
-            }
-            map.setZoom(parseInt(defaultZoomLevel));
+            map.setZoom(parseInt(localStorage.mapZoom));
             map.setCenter(new google.maps.LatLng(lat,lng));
             
         }else{

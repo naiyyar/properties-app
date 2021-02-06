@@ -1,5 +1,4 @@
 var ready = function(){
-  localStorage.setItem('mapZoom', '');
   var position;
   var currentLocation;
   var props;
@@ -9,6 +8,7 @@ var ready = function(){
   var options;
   var json_array = $('#json-hash').data('buildingshash');
   zoom = parseInt($('.zoom').val());
+  localStorage.setItem('mapZoom', zoom);
   lat = $('#lat').data('lat');
   lng = $('#lng').data('lng');
   var serched_by    = $('#searched_by').val();
@@ -200,7 +200,11 @@ var ready = function(){
         setCustomSearchCenter(map);
       }
       google.maps.event.addListener(map, 'zoom_changed', function() {
-        localStorage.mapZoom = map.getZoom();
+        var zoom_val = parseInt(map.getZoom());
+        if( zoom_val < zoom) {
+          zoom_val = zoom
+        }
+        localStorage.mapZoom = zoom_val
       });
 
       map.setZoom(zoom);
