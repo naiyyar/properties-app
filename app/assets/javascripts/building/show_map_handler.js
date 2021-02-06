@@ -1,5 +1,5 @@
 // functionality for map manipulation icon on mobile devices
-var listMapView = function(){
+var showListMapView = function(){
   if ($('#mapView').hasClass('mob-min') || 
       $('#mapView').hasClass('mob-max') || 
       $('#content').hasClass('mob-min') || 
@@ -16,7 +16,7 @@ var listMapView = function(){
 $('.listHandler').click(function(){
   $(this).hide();
   $('.mapHandler').show();
-  listMapView();
+  showListMapView();
 })
 
 $('.show-map-handler').click(function() {
@@ -24,7 +24,7 @@ $('.show-map-handler').click(function() {
     $(this).hide();
   }
   $('.listHandler').show();
-  listMapView();
+  showListMapView();
 });
 
 // calculations for elements that changes size on window resize

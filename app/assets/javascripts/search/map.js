@@ -1,4 +1,5 @@
 var ready = function(){
+  localStorage.setItem('mapZoom', '');
   var position;
   var currentLocation;
   var props;
@@ -15,22 +16,20 @@ var ready = function(){
   var search_string = $('#search_string').val();
   var city          = '';
   var header_id     = $('#app-header').length > 0 ? 'app-header' : 'header-mob';
-  var per_page_buildings  = [];
   var boundary_coords = $('#boundary_coords').data('coords');
   var polylines;
-
+  var transitLayer;
+  map_init_count = 0;
   current_user_id   = $('#cu').val();
   redo_search       = false;
   dragged           = false;
   draggedOnce       = false;
-  zoomLevel         = zoom;
-  map_init_count    = 0;
+  defaultZoomLevel  = zoom;
   featured_building_id = null;
   featured_marker = null;
   infobox_data_html = null;
   infobox_opened = false;
   map = null;
-
   
   if(searched_term && search_string){
     searched_term = search_string;
@@ -41,12 +40,12 @@ var ready = function(){
 
   // Custom options for map
   window.initialize = function(sidebar = true) {
-    position  = google.maps.ControlPosition.TOP_CENTER;
-    // map_init_count = map_init_count + 1;
     var zoom_ctrl = true;
     if(mobile){
       position  = google.maps.ControlPosition.TOP_LEFT;
       zoom_ctrl = false;
+    }else{
+      position  = google.maps.ControlPosition.TOP_CENTER;
     }
     if(!sidebar){
       dragged     = true;
@@ -71,7 +70,9 @@ var ready = function(){
     var options = {
                     zoomControl: zoom_ctrl,
                     disableDoubleClickZoom: false,
-                    zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+                    zoomControlOptions: { 
+                      position: google.maps.ControlPosition.RIGHT_CENTER 
+                    },
                     mapTypeControl: false,
                     mapTypeControlOptions: { 
                                               style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -85,14 +86,15 @@ var ready = function(){
     // json for properties markers on map
     var props = json_array;
     var bounds = new google.maps.LatLngBounds();
-    
+    var markers_added = false;
     // function that adds the markers on map
     var addMarkers = function(props, map) {
       if(props != null){
+        markers_added = true;
         $.each(props, function(i,prop) {
             var default_icon = ''
             var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
-              //default icon only when no price info available
+              // default icon only when no price info available
               default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),
                     null,null,null, null)
 
@@ -101,14 +103,13 @@ var ready = function(){
                 position: latlng,
                 map: map,
                 icon: default_icon,
-                draggable: false,
-                // animation: google.maps.Animation.DROP,
+                draggable: false
             });
             bounds.extend(marker.position);
             
             // Adding building name and address on right buildings card
             if(sidebar){ 
-              createSidebar(prop, marker, map, zoom);
+              createSidebar(prop, marker, map);
             }
             
             if(i == 0 || i == '0'){
@@ -118,9 +119,7 @@ var ready = function(){
                 if(object.featured){
                   featured_building_id = object.id
                   featured_marker = marker;
-                  if(!mobile){
-                    loadMarkerWindow(featured_building_id, map, featured_marker);
-                  }
+                  loadMarkerWindow(featured_building_id, map, featured_marker);
                 }
               })(marker, i));
             }
@@ -148,10 +147,10 @@ var ready = function(){
         });
       }
       map.fitBounds(bounds);
-      var listener = google.maps.event.addListener(map, "idle", function () {
-          map.setZoom(zoom);
-          google.maps.event.removeListener(listener);
-      });
+      // var listener = google.maps.event.addListener(map, "idle", function () {
+      //     map.setZoom(zoomLevel);
+      //     google.maps.event.removeListener(listener);
+      // });
     }
       
     var polylineoptons = {};
@@ -169,38 +168,43 @@ var ready = function(){
 
     polylines = new google.maps.Polygon(polylineoptons);
     var set_boundaries = function(map){
-      brooklyn_and_queens_neighborhoods(searched_term, city, map) //In search.js
+      brooklyn_and_queens_neighborhoods(searched_term, city, map)
     }
-    
+  
     setTimeout(function() {
       $('body').removeClass('notransition');
       if(!map){
         map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
       }
-      createRedoButtonObject(map)
+    
+      createRedoButtonObject(map);
       google.maps.event.addListener(map, 'dragend', function(){
         dragged = true;
         setRedoButtonPosition(map);
       });
 
-      google.maps.event.addListener(map, 'zoom_changed', function() {
-        zoomLevel = map.getZoom();
-      });
-      
-      map.setZoom(zoom);
       if(polylines){
         polylines.setMap(map);
       }
       // Setting up boundaries using kml file
-      set_boundaries(map)
-      addMarkers(props, map);
-      var transitLayer = new google.maps.TransitLayer();
+      set_boundaries(map);
+      if(!markers_added){
+        addMarkers(props, map);
+      }
+      if(!transitLayer){
+        transitLayer = new google.maps.TransitLayer();
+      }
       transitLayer.setMap(map);
       windowResizeHandler(map);
       if(map && serched_by == 'latlng'){
         setCustomSearchCenter(map);
       }
-      //setMapCenter(map);
+      google.maps.event.addListener(map, 'zoom_changed', function() {
+        localStorage.mapZoom = map.getZoom();
+      });
+
+      map.setZoom(zoom);
+      
     }, 300);
   }
 
@@ -212,7 +216,7 @@ var ready = function(){
 
   function setCustomSearchCenter(map){
     setTimeout(function() {
-      setMapCenter(map)
+      setMapCenter(map);
       redo_search = true;
     }, 500);
   }

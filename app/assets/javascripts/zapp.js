@@ -75,28 +75,24 @@
             $('#mapViewSearch').toggleClass('max');
         }
         
-        //if(map_init_count == 1){
-            if(target_class_list.includes('mapHandler')){
-                initialize();
-                if(map && featured_building_id){
-                    loadMarkerWindow(featured_building_id, map, featured_marker);
-                    infobox_opened = true
-                }
-            }else{
-                if(infobox_opened){
-                    infobox.close();
-                }
+        if(target_class_list.includes('mapHandler')){
+            //initialize(); Error: Not retaining prev zoom value
+            if(map && featured_building_id){
+                loadMarkerWindow(featured_building_id, map, featured_marker);
+                infobox_opened = true
             }
-        // }else if(map){
-        //     if(target_class_list.includes('mapHandler')){
-        //         if(!infobox_opened && featured_building_id){
-        //             loadMarkerWindow(featured_building_id, map, featured_marker);
-        //         }
-        //         createRedoButtonObject(map);
-        //         map.setCenter(new google.maps.LatLng(lat,lng));
-        //         map.setZoom(zoom);
-        //     }
-        // }
+            var saved_zoom = parseInt(localStorage.mapZoom);
+            if(saved_zoom > defaultZoomLevel){
+                defaultZoomLevel = saved_zoom;
+            }
+            map.setZoom(parseInt(defaultZoomLevel));
+            map.setCenter(new google.maps.LatLng(lat,lng));
+            
+        }else{
+            if(infobox_opened){
+                infobox.close();
+            }
+        }
         
         setTimeout(function() {
             if(map && redo_search){

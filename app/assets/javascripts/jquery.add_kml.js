@@ -234,6 +234,10 @@ function brooklyn_and_queens_neighborhoods(term, city, map){
 }
 
 function add_kml(url, map){
-	var kml_layer = new google.maps.KmlLayer(url,{suppressInfoWindows: false, map: map}); 
+	var kml_options = { 
+											suppressInfoWindows: false, 
+											preserveViewport: Device.type.mobile
+										}
+	var kml_layer = new google.maps.KmlLayer(url, kml_options); 
 	kml_layer.setMap(map);
 }

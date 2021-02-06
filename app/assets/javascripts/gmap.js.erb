@@ -53,10 +53,10 @@ function bindElemToMarker(elem, marker, object, map){
   });
 };
 
-function createSidebar(object, marker, map, zoom){
+function createSidebar(object, marker, map){
   var elem = $( createSidebarElem(object) );
   $('#building_details'+object.id).html(elem);
-  bindElemToMarker(elem, marker, object, map, zoom);
+  bindElemToMarker(elem, marker, object, map);
 };
 
 function markerIcon(price, type='red'){
