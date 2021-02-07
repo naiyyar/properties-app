@@ -76,13 +76,14 @@
         }
         
         if(target_class_list.includes('mapHandler')){
-            //initialize(); Error: Not retaining prev zoom value
+            //initialize(); TOFIX: Not retaining prev zoom value
             if(map && featured_building_id){
                 loadMarkerWindow(featured_building_id, map, featured_marker);
                 infobox_opened = true
             }
             map.setZoom(parseInt(localStorage.mapZoom));
-            map.setCenter(new google.maps.LatLng(lat,lng));
+            var center = map.getCenter()
+            map.setCenter(new google.maps.LatLng(center.lat(), center.lng()));
             
         }else{
             if(infobox_opened){
