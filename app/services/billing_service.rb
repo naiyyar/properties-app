@@ -61,7 +61,7 @@ class BillingService
 		stripe_charge.create(
     	customer:  		customer_id,
     	card: 				card_id,
-      amount: 	 		billing.price * 100,
+      amount: 	 		billing.amount.to_i * 100,
       currency:  		'usd',
       description: 	billing.billing_description,
       receipt_email: @customer_email

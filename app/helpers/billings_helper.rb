@@ -30,10 +30,10 @@ module BillingsHelper
 	end
 
 	def cancel_form_link type
-		link_to 'Cancel', cancel_redirect_url(type), class: 'btn font-bold'
+		link_to 'Cancel', redirect_url(type), class: 'btn font-bold'
 	end
 
-	def cancel_redirect_url type
+	def redirect_url type
 		case type
 		when 'FeaturedBuilding'
 			managertools_user_path(current_user, type: 'featured')

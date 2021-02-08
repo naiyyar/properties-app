@@ -138,7 +138,7 @@ class Billing < ApplicationRecord
 	end
 
 	def billing_amount type
-		FEATURED_PRICES[type].to_f
+		FEATURED_PRICES[type]
 	end
 
 	def inv_description

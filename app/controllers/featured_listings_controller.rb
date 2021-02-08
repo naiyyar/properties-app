@@ -16,7 +16,13 @@ class FeaturedListingsController < ApplicationController
   end
 
   def new
+    session[:back_to] = request.fullpath if params[:type] != 'billing'
+    @featured_by    = params[:featured_by] 
     @featured_listing = FeaturedListing.new
+    @object_id      = params[:object_id]
+    @object_type    = 'FeaturedListing'
+    @price          = Billing::FEATURED_PRICE[@object_type]
+    @saved_cards    = BillingService.new(current_user).get_saved_cards rescue nil
   end
 
   def edit
