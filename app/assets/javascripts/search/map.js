@@ -24,7 +24,7 @@ var ready = function(){
   redo_search       = false;
   dragged           = false;
   draggedOnce       = false;
-  defaultZoomLevel  = zoom;
+  zoomLevel         = zoom;
   featured_building_id = null;
   featured_marker = null;
   infobox_data_html = null;
@@ -148,7 +148,6 @@ var ready = function(){
       }
       map.fitBounds(bounds);
       // var listener = google.maps.event.addListener(map, "idle", function () {
-      //     map.setZoom(zoomLevel);
       //     google.maps.event.removeListener(listener);
       // });
     }
@@ -201,13 +200,14 @@ var ready = function(){
       }
       google.maps.event.addListener(map, 'zoom_changed', function() {
         var zoom_val = parseInt(map.getZoom());
+        zoomLevel = zoom_val;
         if( zoom_val < zoom) {
           zoom_val = zoom
         }
-        localStorage.mapZoom = zoom_val
+        localStorage.mapZoom = zoom_val;
       });
 
-      map.setZoom(zoom);
+      map.setZoom(zoomLevel);
       
     }, 300);
   }
