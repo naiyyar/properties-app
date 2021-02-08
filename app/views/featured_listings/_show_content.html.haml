@@ -1,0 +1,74 @@
+.section-container
+	- if show_summary
+		%div{ style: 'position: relative;margin-bottom: 20px;' }
+			.summary
+				.row
+					.col-xs-11.col-sm-8.col-md-8.col-lg-9
+						%p.pageTitle.font-bold.font-16{style: 'width: 100%; margin: 0px;'}
+							= number_to_currency(@featured_listing.rent, precision: 0)
+					.col-xs-1.col-sm-4.col-md-4.col-lg-3
+						/ = render 'buildings/favourite', building: @featured_listing
+				
+				.row
+					.col-xs-12.col-sm-12.col-md-12.col-lg-12
+						.property_information
+							.address{style: 'margin-left: -1px;'}= listing_address(@featured_listing)
+						  
+							- if @featured_listing.apartment_type.present? || @neighborhood.present?
+								%div.pbt
+									= "#{@featured_listing.apartment_type} in" if @featured_listing.apartment_type.present?
+									= link_to @neighborhood, borough_search_link(@neighborhood), class: 'hyper-link' if @neighborhood.present?
+
+							- if @featured_listing.date_available.present?
+								%div.pbt= "Available #{date_available(@featured_listing)}"
+
+							%div.pbt= "For Rent By #{@featured_listing.first_name} #{@featured_listing.last_name.first}."
+
+							.clearfix
+							.clearfix
+						
+						%br
+
+						= link_to 'Contact Owner', contact_owner_featured_listing_path(@featured_listing), class: 'btn btn-primary btn-block', remote: true
+			  
+				- unless @uploaded_images_count > 0
+					.sliderLink
+						%p.text-danger No photos are available.
+
+	.clearfix
+	- if @building_tours_count > 0
+		.amenities.show-section#video-tours
+			%h3="3D / Video Tour (#{@building_tours_count})"
+			%a.btn.btn-o.btn-primary.btn-sm.btn-round.font-bold.btn-block.font-14{ href: featured_listing_video_tours_path(@featured_listing), 'data-remote' => true }
+				%span.fa.fa-play
+				Launch 3D / Video Tours
+
+	.clearfix
+	%h3 Description
+	%p= simple_format(@featured_listing.description)
+	
+	.clearfix
+	%h3 Amenities
+	.row
+		- @featured_listing.amenities.each_pair do |key, value|
+			.col-xs-6.col-sm-6.col-md-4.col-lg-4.amItem.font-14
+				%span
+					= image_tag "amenities_icons/#{key}.png", width: '16', height: '16', alt: value
+				= value
+	
+	- unless screen_class == 'screen-lg'
+		.show-section.show-map-handler{style: 'height: 200px; width: 100%; margin-bottom: 20px;margin-top: 20px;'}
+			%br
+			#mob-map{style: 'height: 100%; width: 100%;'}
+				.mapPlaceholder
+					%span.fa.fa-spin.fa-spinner 
+					Loading map...
+		
+
+	.clearfix
+	
+	#subways.show-section=render 'buildings/show/subways'
+
+	.clearfix
+	= render 'layouts/shared/nearby_neighborhoods', nearby_nbs: @nearby_nbs
+	

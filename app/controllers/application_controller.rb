@@ -40,11 +40,17 @@ class ApplicationController < ActionController::Base
       'home'
     elsif search_layout?
       'search'
-    elsif action_name == 'show' && controller_name == 'buildings'
+    elsif show_layout?
       'buildings_show'
     else
       'application'
     end
+  end
+  
+  CONTROLLER_NAMES = %w(buildings featured_listings)
+  
+  def show_layout?
+    action_name == 'show' && CONTROLLER_NAMES.include?(controller_name)
   end
 
   def search_layout?

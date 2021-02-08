@@ -117,6 +117,10 @@ module ApplicationHelper
     action_name == 'show' && controller_name == 'buildings'
   end
 
+  def featured_listing_show_page?
+    action_name == 'show' && controller_name == 'featured_listings'
+  end
+
   def management_show_page?
     action_name == 'show' && controller_name == 'management_companies'
   end

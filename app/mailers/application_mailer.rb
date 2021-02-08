@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
+  DEFAULT_EMAIL = %(transparentcity <hello@transparentcity.co>)
+  
   layout :select_layout
 
   private

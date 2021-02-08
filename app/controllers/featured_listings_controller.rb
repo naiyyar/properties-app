@@ -1,5 +1,6 @@
 class FeaturedListingsController < ApplicationController
-	before_action :set_featured_listing, only: [:show, :update, :destroy]
+	load_and_authorize_resource except: :show
+  before_action :set_featured_listing, only: [:show, :update, :destroy, :contact_owner]
   
   include Searchable
   
@@ -12,7 +13,24 @@ class FeaturedListingsController < ApplicationController
     end
   end
 
+  def contact_owner
+    respond_to do |format|
+      format.html { 
+        UserMailer.contact_frbo(@featured_listing, params[:contact_owner]).deliver
+        redirect_to :back, notice: '' 
+      }
+      format.js
+    end
+  end
+
   def show
+    @half_footer = true
+    @featured_listing_tours = @featured_listing.video_tours
+    @building_tours_count = @featured_listing.size
+    @neighborhood = @featured_listing.neighborhood
+    @nearby_nbs = NYCBorough.nearby_neighborhoods(@neighborhood)
+    @uploaded_images_count = @featured_listing.uploads_count
+    @distance_results = DistanceMatrixService.new(@featured_listing).get_data
   end
 
   def new

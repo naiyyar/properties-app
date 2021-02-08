@@ -1,6 +1,4 @@
 class UserMailer < ApplicationMailer
-	EMAIL_WITH_NAME = %(transparentcity <hello@transparentcity.co>)
-	
 	def password_reset_instructions
 		email = 'no-reply@transparentcity.co'
 		to = self.email
@@ -41,7 +39,7 @@ class UserMailer < ApplicationMailer
 		@agent_name    = agent.full_name
 		subject = "[Inquiry From Transparentcity User] regarding assistance on rental apartment search from #{@from_email}"
 		mail(
-			from: EMAIL_WITH_NAME,
+			from: DEFAULT_EMAIL,
 			reply_to: @from_email,
 			to: @to_email,
 			bcc: 'hello@transparentcity.co',  
@@ -50,8 +48,8 @@ class UserMailer < ApplicationMailer
 	end
 
 	def contact_agent_sender_copy agent, params
-		@to_email 	 = agent.email
-		sender_email = params[:email]
+		@to_email 	   = agent.email
+		sender_email   = params[:email]
 		@phone         = params[:phone]
 		@neighborhoods = params[:neighborhoods]
 		@bedrooms			 = params[:bedrooms]
@@ -59,10 +57,29 @@ class UserMailer < ApplicationMailer
 		@message			 = params[:message]
 		@agent_name    = agent.full_name
 		mail(
-			from: EMAIL_WITH_NAME,
+			from: DEFAULT_EMAIL,
 			reply_to: sender_email,
 			to: sender_email,
 			subject: "Your message to #{@agent_name} has been sent."
+		)
+	end
+
+	def contact_frbo listing, params
+		@to_email 	   = listing.email
+		sender_email   = params[:email]
+		@phone         = params[:phone]
+		@neighborhoods = params[:neighborhoods]
+		@bedrooms			 = params[:bedrooms]
+		@budget        = params[:budget]
+		@message			 = params[:message]
+		@owner_name    = listing.owner_full_name
+		subject = "[Inquiry From Transparentcity User] regarding assistance on rental apartment search from #{@from_email}"
+
+		mail(
+			from: DEFAULT_EMAIL,
+			reply_to: sender_email,
+			to: @to_email,
+			subject: subject
 		)
 	end
 
@@ -87,7 +104,7 @@ class UserMailer < ApplicationMailer
 			to: @building.email,
 			bcc: 'hello@transparentcity.co',
 			reply_to: @contact_email,
-			from: EMAIL_WITH_NAME,
+			from: DEFAULT_EMAIL,
 			subject: subject
 		)
 	end
@@ -106,11 +123,10 @@ class UserMailer < ApplicationMailer
 		@building 			= contact.building
 		@building_name 	= @building.building_name_or_address
 		subject 				= "Your message about #{@building_name} has been sent."
-		email_with_name = %(transparentcity <hello@transparentcity.co>)
 		mail(
 			to: @contact_email,
 			reply_to: @contact_email,
-			from: EMAIL_WITH_NAME,
+			from: DEFAULT_EMAIL,
 			subject: subject
 		)
 	end

@@ -49,7 +49,7 @@
               .col-xs-6.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Address*
-                  = f.text_field :address, class: 'form-control validate'
+                  = f.text_field :address, class: 'form-control validate', autocomplete: 'off'
 
               .col-xs-6.col-sm-6.col-md-6.col-lg-6
                 .form-group
@@ -111,7 +111,7 @@
               .col-xs-6.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Date Available
-                  = f.text_field :date_available, value: f.object.date_available.present? ? f.object.date_available.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
+                  = f.text_field :date_available, value: date_available(f.object),  class: 'form-control datepicker', :autocomplete => :off
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group

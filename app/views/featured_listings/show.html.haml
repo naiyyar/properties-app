@@ -1,0 +1,38 @@
+#street_view_btn.hidden-xs
+
+- if screen_class == 'screen-lg'
+	.row
+		.col-lg-9.col-md-9{style: 'padding-right: 1px;'}
+			#content
+			.clearfix
+			#show-content
+				#thumb-pager
+					.col-lg-5.col-md-5
+				.col-lg-8.col-md-8{style: 'width: 68%;'}
+					= render 'show_content', show_summary: true
+		
+		.col-lg-3.col-md-3{style: 'padding-left: 0px;'}
+			#mapView.apt-map{class: screen_class}
+				.mapPlaceholder
+					%span.fa.fa-spin.fa-spinner 
+					Loading map...
+- else
+	%a.listHandler.closeMap{href: 'javascript:;'}
+		%span.fa.fa-times.fa-3x
+	
+	#mapView.mob-min{class: screen_class}
+		.mapPlaceholder
+			%span.fa.fa-spin.fa-spinner 
+			Loading map...
+	#pano
+
+	#content.mob-max= render 'show_content', show_summary: true
+
+%br
+.clearfix
+= render 'layouts/home/footer'
+
+#mapHash{'data-lat' => "#{@featured_listing.latitude.to_json}", 'data-lng' => "#{@featured_listing.longitude.to_json}", 'data-map' => "#{@gmaphash.to_json}"}
+= hidden_field_tag :cu, current_user.present? ? current_user.id : nil
+/ = hidden_field_tag :cu_building_id, @featured_listing.id
+/  = hidden_field_tag :similar_property_id, @similar_properties&.first&.id

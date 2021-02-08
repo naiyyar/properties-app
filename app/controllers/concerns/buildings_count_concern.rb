@@ -35,10 +35,12 @@ module BuildingsCountConcern
   end
 
   protected
+  
   def show_neighborhoods?
     view_context.show_filters? || 
     view_context.search_page? || 
-    view_context.building_show_page? || 
+    view_context.building_show_page? ||
+    view_context.featured_listing_show_page? || 
     view_context.management_show_page? ||
     action_name == 'load_featured_buildings' || 
     action_name == 'saved_buildings'

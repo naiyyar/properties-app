@@ -2,10 +2,44 @@ class FeaturedListing < ApplicationRecord
 	include PgSearch::Model
   include Billable
   include ImageableConcern
+  include Tourable
 
   extend RenewPlan
 
+  # constant
   FEATURING_WEEKS = 'two'
+
+  FEATURED_IN_NEIGHBORHOODS = [
+    'Lower Manhattan',
+    'Midtown Manhattan',
+    'Upper East Side',
+    'Upper West Side',
+    'Upper Manhattan',
+    'Brooklyn',
+    'Queens',
+    'Bronx'
+  ].freeze
+  
+  APARTMENT_TYPE = [
+    'Co-op',
+    'Condo',
+    'Condop',
+    'Townhouse/House',
+    'Rental Building',
+    'Other'
+  ].freeze
+
+  # validations
+  FIELDS_TO_VALIDATES = [ :first_name,
+                          :last_name,
+                          :email,
+                          :neighborhood,
+                          :address,
+                          :city,
+                          :zipcode,
+                          :bed,
+                          :bath
+                        ]
   
   belongs_to :user
 
@@ -26,40 +60,7 @@ class FeaturedListing < ApplicationRecord
      :search_query
     ]
   )
-
-  # constant
   
-  FEATURED_IN_NEIGHBORHOODS = [
-		'Lower Manhattan',
-		'Midtown Manhattan',
-		'Upper East Side',
-		'Upper West Side',
-		'Upper Manhattan',
-		'Brooklyn',
-		'Queens',
-		'Bronx'
-	].freeze
-  
-  APARTMENT_TYPE = [
-  	'Co-op',
-		'Condo',
-		'Condop',
-		'Townhouse/House',
-		'Rental Building',
-		'Other'
-  ].freeze
-
-  # validations
-  FIELDS_TO_VALIDATES = [ :first_name,
-													:last_name,
-													:email,
-													:neighborhood,
-													:address,
-													:city,
-													:zipcode,
-													:bed,
-													:bath
-												]
   FIELDS_TO_VALIDATES.each do |field|
   	validates field, presence: true, on: :update
   end
@@ -71,13 +72,27 @@ class FeaturedListing < ApplicationRecord
             presence: true, 
             numericality: { greater_than_or_equal_to: 0 }, on: :update
   
+  #
+  geocoded_by :full_address
+  after_validation :geocode
+
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
+
   # delegates
-  
   delegate :email, to: :user, prefix: true
 
   # methods
   
   def full_address
   	[address, city, state, zipcode].join(', ')
+  end
+
+  def street_address
+    address
+  end
+
+  def owner_full_name
+    "#{first_name} #{last_name}"
   end
 end

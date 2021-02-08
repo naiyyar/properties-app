@@ -34,7 +34,7 @@
 								.form-group
 									.col-sm-12
 										.pull-left
-											= link_to 'Cancel', cancel_redirect_url('FeaturedListing'), class: 'btn btn-default'
+											= cancel_form_link('FeaturedListing')
 										.pull-right
 											= link_to '<- Back', next_prev_step_url(@featured_listing, step: 'create'), class: 'btn btn-primary'
 											= f.submit 'Next ->', class: 'btn btn-primary'

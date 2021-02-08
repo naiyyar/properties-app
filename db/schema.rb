@@ -277,6 +277,8 @@ ActiveRecord::Schema.define(version: 20210204113318) do
     t.integer  "uploads_count",  default: 0,                    null: false
     t.boolean  "active",         default: false
     t.boolean  "renew",          default: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.json     "amenities",      default: {"no_fee"=>"No Fee"}, null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false

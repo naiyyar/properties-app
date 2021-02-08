@@ -30,7 +30,7 @@ module BillingsHelper
 	end
 
 	def cancel_form_link type
-		link_to 'Cancel', redirect_url(type), class: 'btn font-bold'
+		link_to 'Cancel', redirect_url(type), class: 'btn btn-default font-bold'
 	end
 
 	def redirect_url type

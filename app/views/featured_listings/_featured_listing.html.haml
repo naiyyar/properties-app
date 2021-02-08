@@ -24,7 +24,7 @@
             - @featured_listings.each do |listing|
               %tr
                 %td=link_to listing.id, edit_featured_listing_path(listing, featured_by: @featured_by)
-                %td=link_to listing.full_address, '#'
+                %td=link_to listing.full_address, show_featured_listing_path(id: listing.id, address: url_address(listing))
                 %td=link_to listing.unit, '#'
                 %td=link_to listing.try(:neighborhood), '#'
                 %td=link_to listing.uploads_count, '#'
