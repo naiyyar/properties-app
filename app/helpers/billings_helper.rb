@@ -3,17 +3,7 @@ module BillingsHelper
 		brand.present? ? brand.downcase.split(' ').join('_') : 'generic'
 	end
 
-	def tool_type object_type
-		case object_type
-		when 'FeaturedAgent' then 'Agent'
-		when 'FeaturedBuilding' then 'Manager'
-		when 'FeaturedListing' then 'FRBOS'
-		else
-			''
-		end
-	end
-
-	def previous_page_path object_type
+	def previous_page_path object, object_type
 		return session[:back_to] if payment_object_id.present?
 		
 		if object_type == 'FeaturedAgent'
@@ -21,7 +11,7 @@ module BillingsHelper
 		elsif object_type == 'FeaturedBuilding'
 			edit_featured_building_path(payment_object_id)
 		elsif object_type == 'FeaturedListing'
-			edit_featured_listing_path(payment_object_id)
+			next_prev_step_url(object, step: 'add_photos')
 		end
 	end
 

@@ -46,13 +46,13 @@ class FeaturedAgentsController < ApplicationController
 
   # GET /featured_agents/new
   def new
-    session[:back_to]  = request.fullpath if params[:type] != 'billing'
-    @featured_by       = params[:featured_by] 
-    @featured_agent    = FeaturedAgent.new
-    @price             = Billing::FEATURED_AGENT_PRICE
-    @object_id         = params[:object_id]
-    @object_type       = 'FeaturedAgent'
-    @saved_cards       = BillingService.new(current_user).get_saved_cards rescue nil
+    session[:back_to] = request.fullpath if params[:type] != 'billing'
+    @featured_by    = params[:featured_by] 
+    @featured_agent = FeaturedAgent.new
+    @object_id      = params[:object_id]
+    @object_type    = 'FeaturedAgent'
+    @price          = Billing::FEATURED_PRICE[@object_type]
+    @saved_cards    = BillingService.new(current_user).get_saved_cards rescue nil
   end
 
   # GET /featured_agents/1/edit

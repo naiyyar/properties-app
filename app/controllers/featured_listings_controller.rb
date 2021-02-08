@@ -27,15 +27,17 @@ class FeaturedListingsController < ApplicationController
       @listing_amenities = @featured_listing.amenities
     when :add_photos
       @imageable = @featured_listing
+      session[:back_to] = request.fullpath
     when :edit_photos
       @uploads      = @featured_listing.uploads
       @photos_count = @featured_listing.uploads_count
     when :payment
-      @featured_by       = 'manager'
-      @price             = Billing::FEATURED_LISTING_PRICE
-      @object_id         = @featured_listing.id
-      @object_type       = 'FeaturedListing'
-      @saved_cards       = BillingService.new(current_user).get_saved_cards rescue nil
+      @object      = @featured_listing
+      @featured_by = 'manager'
+      @object_id   = @featured_listing.id
+      @object_type = 'FeaturedListing'
+      @price       = Billing::FEATURED_PRICES[@object_type]
+      @saved_cards = BillingService.new(current_user).get_saved_cards rescue nil
     end
   end
 

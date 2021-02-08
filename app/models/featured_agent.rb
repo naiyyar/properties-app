@@ -6,6 +6,8 @@ class FeaturedAgent < ApplicationRecord
   extend SplitViewAgentDisplay
   extend RenewPlan
 
+  FEATURING_WEEKS = 'four'
+
   BEDROOMS = ['Room', 'Studio', '1 Bedroom',  '2 Bedroom',  '3 Bedroom', '4+ Bedroom'].freeze
 
   BUDGET = [

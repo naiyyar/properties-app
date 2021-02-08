@@ -2,6 +2,18 @@ class Billing < ApplicationRecord
 	FEATURED_BUILDING_PRICE = 49
 	FEATURED_AGENT_PRICE = 9
 	FEATURED_LISTING_PRICE = 14
+
+	FEATURED_PRICES = {
+		'FeaturedAgent' => 9,
+		'FeaturedBuilding' => 49,
+		'FeaturedListing' => 14
+	}
+
+	TYPE_TOOLS = {
+		'FeaturedAgent' => 'Agent',
+		'FeaturedBuilding' => 'Manager',
+		'FeaturedListing' => 'FRBOS'
+	}.freeze
 	
 	belongs_to :billable, polymorphic: true
 	belongs_to :user
@@ -126,11 +138,7 @@ class Billing < ApplicationRecord
 	end
 
 	def billing_amount type
-		case billable_type
-		when 'FeaturedAgent' then FEATURED_AGENT_PRICE 
-		when 'FeaturedBuilding' then FEATURED_BUILDING_PRICE
-		when 'FeaturedListing' then FEATURED_LISTING_PRICE
-		end
+		FEATURED_PRICES[type].to_f
 	end
 
 	def inv_description

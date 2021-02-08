@@ -20,4 +20,12 @@ module UploadsHelper
 		end
 	end
 
+	def edit_upload_link upload
+		link_to '<span class="fa fa-trash" />'.html_safe, upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs delete_image'
+	end
+
+	def delete_upload_link upload
+		link_to '<span class="fa fa-edit" />'.html_safe, edit_upload_path(upload, upload_type: 'image'), remote: true, class: 'btn btn-primary btn-xs edit_image'
+	end
+
 end

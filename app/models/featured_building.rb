@@ -3,6 +3,8 @@ class FeaturedBuilding < ApplicationRecord
   include Billable
 
   extend RenewPlan
+
+  FEATURING_WEEKS = 'four'
   
   belongs_to :user
   belongs_to :building, touch: true

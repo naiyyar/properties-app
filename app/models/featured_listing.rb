@@ -4,6 +4,8 @@ class FeaturedListing < ApplicationRecord
   include ImageableConcern
 
   extend RenewPlan
+
+  FEATURING_WEEKS = 'two'
   
   belongs_to :user
 

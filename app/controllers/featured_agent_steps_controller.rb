@@ -11,11 +11,12 @@ class FeaturedAgentStepsController < ApplicationController
 			@uploads 			= @featured_agent.uploads
 			@photos_count = @uploads.count.to_i
 		when :payment
-			@featured_by       = 'manager'
-			@price             = Billing::FEATURED_AGENT_PRICE
-			@object_id         = @featured_agent.id
-			@object_type       = 'FeaturedAgent'
-			@saved_cards       = BillingService.new(current_user).get_saved_cards rescue nil
+			@object 		 = @featured_agent
+			@featured_by = 'manager'
+			@object_id   = @featured_agent.id
+			@object_type = 'FeaturedAgent'
+			@price       = Billing::FEATURED_PRICE[@object_type]
+			@saved_cards = BillingService.new(current_user).get_saved_cards rescue nil
 		end
 		
 		render_wizard
