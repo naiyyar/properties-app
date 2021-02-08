@@ -1,8 +1,4 @@
 class Billing < ApplicationRecord
-	FEATURED_BUILDING_PRICE = 49
-	FEATURED_AGENT_PRICE = 9
-	FEATURED_LISTING_PRICE = 14
-
 	FEATURED_PRICES = {
 		'FeaturedAgent' => 9,
 		'FeaturedBuilding' => 49,
@@ -146,7 +142,7 @@ class Billing < ApplicationRecord
 	end
 
 	def tool_type
-		billable_type&.split(/(?=[A-Z])/) # camelcase split
+		billable_type&.split(/(?=[A-Z])/)[1] # camelcase split
 	end
 
 	def billing_start_date date

@@ -17,15 +17,15 @@
             - @billings.each do |billing|
               %tr
                 %td=date_created = billing.created_at.to_date
-                %td.text-right=number_to_currency(billing.amount, precision: 2)
-                %td=billing.billing_description
+                %td.text-right= number_to_currency(billing.amount, precision: 2)
+                %td= billing.billing_description
                 %td
                   - unless billing.billing_card_id.blank?
-                    =card_brand_image(billing.brand)
+                    = card_brand_image(billing.brand)
                   - else
                     - @card = billing.card(current_user&.stripe_customer_id)
-                    =card_brand_image(@card.brand) if @card.present?
-                  =status_text(billing).html_safe
+                    = card_brand_image(@card.brand) if @card.present?
+                  = status_text(billing).html_safe
 
                 %td.text-center
                   - unless billing.payment_failed?
