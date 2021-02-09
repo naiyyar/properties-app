@@ -4,7 +4,7 @@
 			.summary
 				.row
 					.col-xs-11.col-sm-8.col-md-8.col-lg-9
-						%p.pageTitle.font-bold.font-16{style: 'width: 100%; margin: 0px;'}
+						%p.pageTitle.font-bold.font-16{style: 'width: 100%; margin: 10px 0px 0px;'}
 							= number_to_currency(@featured_listing.rent, precision: 0)
 					.col-xs-1.col-sm-4.col-md-4.col-lg-3
 						/ = render 'buildings/favourite', building: @featured_listing
@@ -36,25 +36,27 @@
 						%p.text-danger No photos are available.
 
 	.clearfix
-	- if @building_tours_count > 0
+	- if @video_tours_count > 0
 		.amenities.show-section#video-tours
-			%h3="3D / Video Tour (#{@building_tours_count})"
+			%h3="3D / Video Tour (#{@video_tours_count})"
 			%a.btn.btn-o.btn-primary.btn-sm.btn-round.font-bold.btn-block.font-14{ href: featured_listing_video_tours_path(@featured_listing), 'data-remote' => true }
 				%span.fa.fa-play
 				Launch 3D / Video Tours
 
 	.clearfix
-	%h3 Description
-	%p= simple_format(@featured_listing.description)
+	.show-section
+		%h3 Description
+		%p= simple_format(@featured_listing.description)
 	
 	.clearfix
-	%h3 Amenities
-	.row
-		- @featured_listing.amenities.each_pair do |key, value|
-			.col-xs-6.col-sm-6.col-md-4.col-lg-4.amItem.font-14
-				%span
-					= image_tag "amenities_icons/#{key}.png", width: '16', height: '16', alt: value
-				= value
+	.show-section
+		%h3 Amenities
+		.row
+			- @featured_listing.amenities.each_pair do |key, value|
+				.col-xs-6.col-sm-6.col-md-4.col-lg-4.amItem.font-14
+					%span
+						= image_tag "amenities_icons/#{key}.png", width: '16', height: '16', alt: value
+					= value
 	
 	- unless screen_class == 'screen-lg'
 		.show-section.show-map-handler{style: 'height: 200px; width: 100%; margin-bottom: 20px;margin-top: 20px;'}

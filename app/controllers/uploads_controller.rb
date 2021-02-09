@@ -26,8 +26,20 @@ class UploadsController < ApplicationController
     @photos = Upload.where('image_file_name is not null').paginate(params[:page], per_page: 50)
   end
 
+  def lazy_load_images
+    object_klass = params[:object_type].constantize
+    @object = object_klass.find(params[:object_id])
+    assets = @object.get_uploads
+    @uploads, @documents = assets[:image_uploads], assets[:doc_uploads]
+    @uploaded_images_count = @object.uploads_count.to_i
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def documents
-    @documents = Upload.where('document_file_name is not null').includes(:user, :imageable)
+    @documents = Upload.with_doc
   end
 
   def rotate

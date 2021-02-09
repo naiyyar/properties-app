@@ -1,5 +1,6 @@
 class FeaturedListingsController < ApplicationController
-	load_and_authorize_resource except: :show
+	load_and_authorize_resource
+  before_action :authenticate_user!,  except: :show
   before_action :set_featured_listing, only: [:show, :update, :destroy, :contact_owner]
   
   include Searchable
@@ -26,11 +27,12 @@ class FeaturedListingsController < ApplicationController
   def show
     @half_footer = true
     @featured_listing_tours = @featured_listing.video_tours
-    @building_tours_count = @featured_listing.size
+    @video_tours_count = @featured_listing_tours.size
     @neighborhood = @featured_listing.neighborhood
     @nearby_nbs = NYCBorough.nearby_neighborhoods(@neighborhood)
     @uploaded_images_count = @featured_listing.uploads_count
     @distance_results = DistanceMatrixService.new(@featured_listing).get_data
+    @gmaphash = [@featured_listing.as_json] # for map
   end
 
   def new

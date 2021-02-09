@@ -18,11 +18,13 @@ $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
 
 $(document).ready(function() {
   if($('#sh-slider').length > 0) {
-    var building_id = $('#cu_building_id').val();
+    var object_id = $('#cu_object_id').val();
+    var type = $('#cu_object_type').val();
     $.ajax({
-      url: '/buildings/'+building_id+'/lazy_load_content',
+      url: '/uploads/'+object_id+'/lazy_load_images',
       dataType: 'script',
       type: 'get',
+      data: { object_type: type },
       success: function(){}
     });
   }

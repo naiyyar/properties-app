@@ -43,9 +43,9 @@ var showWindowResizeHandler = function(map) {
 }
 
 //
-function loadShowMarkerWindow(building_id, map, marker){
+function loadShowMarkerWindow(prop_id, map, marker){
   $.post('/load_infobox', {
-    object_id: building_id, 
+    object_id: prop_id, 
     building_show: false,
     current_user_id: current_user_id,
   }, function(data){

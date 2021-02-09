@@ -114,21 +114,22 @@ Rails.application.routes.draw do
   resources :reviews do 
     get :destroy_scraped_reviews, on: :collection
   end
-  
-  resources :useful_reviews
-  resources :uploads do
-    member do 
-      get :rotate
-    end
-
-    get :photos, on: :collection
-  end
 
   resources :document_downloads do
     get :downloaders, on: :collection
   end
+  
+  resources :useful_reviews
+
+  resources :uploads do
+    member do 
+      get :rotate
+    end
+    get :photos, on: :collection
+  end
 
   get '/documents', to: 'uploads#documents', as: :documents
+  get '/uploads/:object_id/lazy_load_images', to: 'uploads#lazy_load_images'
   
   resources :users do
     member do

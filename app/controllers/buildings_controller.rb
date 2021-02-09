@@ -1,12 +1,11 @@
 class BuildingsController < ApplicationController 
   load_and_authorize_resource
   AWS_S3_URL = 'https://s3-us-west-2.amazonaws.com'
-  before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite, :lazy_load_content]
-  before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite, :lazy_load_content]
+  before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
+  before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite]
   before_action :clear_cache,         only: [:favorite, :unfavorite]
   before_action :find_buildings,      only: [:contribute, :edit]
-  before_action :set_image_counts,    only: [ :lazy_load_content, :show ]
-  before_action :get_uploads,         only: [ :lazy_load_content ]
+  before_action :set_image_counts,    only: :show
   after_action :get_neighborhood,     only: [:create, :update]
 
   include BuildingsConcern # create, show
@@ -23,18 +22,6 @@ class BuildingsController < ApplicationController
     @buildings_count = @buildings.count
     respond_to do |format|
       format.html
-      format.js
-    end
-  end
-
-  #1. Loading show page content after page load
-  # 1.1 reviews section
-  # 1.2 ratings
-  # 1.3 images
-  def lazy_load_content
-    # @reviews       = @building.building_reviews
-    # @price_ranges  = @building.price_ranges
-    respond_to do |format|
       format.js
     end
   end
@@ -159,11 +146,6 @@ class BuildingsController < ApplicationController
 
   def find_buildings
     @buildings = Building.all
-  end
-
-  def get_uploads
-    assets                 = @building.get_uploads
-    @uploads, @documents   = assets[:image_uploads], assets[:doc_uploads]
   end
 
   def set_image_counts

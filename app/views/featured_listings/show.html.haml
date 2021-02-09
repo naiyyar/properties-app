@@ -3,7 +3,10 @@
 - if screen_class == 'screen-lg'
 	.row
 		.col-lg-9.col-md-9{style: 'padding-right: 1px;'}
-			#content
+			#content.screen-lg
+				.singleTop{style: 'position: relative;height: 460px'}
+					.row.sh-slider
+						#sh-slider{style: 'height: 460px;background: #ececec;'}
 			.clearfix
 			#show-content
 				#thumb-pager
@@ -34,5 +37,5 @@
 
 #mapHash{'data-lat' => "#{@featured_listing.latitude.to_json}", 'data-lng' => "#{@featured_listing.longitude.to_json}", 'data-map' => "#{@gmaphash.to_json}"}
 = hidden_field_tag :cu, current_user.present? ? current_user.id : nil
-/ = hidden_field_tag :cu_building_id, @featured_listing.id
-/  = hidden_field_tag :similar_property_id, @similar_properties&.first&.id
+= hidden_field_tag :cu_object_id, @featured_listing.id
+= hidden_field_tag :cu_object_type, 'FeaturedListing'

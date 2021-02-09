@@ -28,4 +28,12 @@ module UploadsHelper
 		link_to '<span class="fa fa-edit" />'.html_safe, edit_upload_path(upload, upload_type: 'image'), remote: true, class: 'btn btn-primary btn-xs edit_image'
 	end
 
+	def slider_data_attribute object
+		{ objectid: "#{object.id}", view_type: 'show', path: object_show_path(object) }
+	end
+
+	def object_show_path object
+		object.kind_of?(Building) ? building_path(object) : featured_listing_path(object)
+	end
+
 end
