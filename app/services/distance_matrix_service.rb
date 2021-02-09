@@ -4,9 +4,9 @@ class DistanceMatrixService
 	DISTANCE = 0.5
 	API_URL  = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&key=#{API_KEY}"
   
-  def initialize building
-    @latlng          = [building.latitude, building.longitude]
-    @address         = building.street_address
+  def initialize property
+    @latlng          = [property.latitude, property.longitude]
+    @address         = property.street_address
     @distance_result = {}
   end
 

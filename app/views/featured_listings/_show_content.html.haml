@@ -19,10 +19,9 @@
 									= "#{@featured_listing.apartment_type} in" if @featured_listing.apartment_type.present?
 									= link_to @neighborhood, borough_search_link(@neighborhood), class: 'hyper-link' if @neighborhood.present?
 
-							- if @featured_listing.date_available.present?
-								%div.pbt= "Available #{date_available(@featured_listing)}"
+							%div.pbt= "Available #{date_available(@featured_listing)}"
 
-							%div.pbt= "For Rent By #{@featured_listing.first_name} #{@featured_listing.last_name.first}."
+							%div.pbt= "For Rent By #{@featured_listing.name_with_last_initial}."
 
 							.clearfix
 							.clearfix

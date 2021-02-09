@@ -43,7 +43,7 @@
               .col-xs-6.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Neighborhood To Be Featured In*
-                  = f.select :neighborhood, options_for_select(FeaturedListing::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
+                  = f.select :neighborhood, options_for_select(StaticData::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
 
             .row
               .col-xs-6.col-sm-6.col-md-6.col-lg-6

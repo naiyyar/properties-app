@@ -9,7 +9,7 @@ module FeaturedListingsHelper
 	end
 
 	def date_available object
-		object.date_available.present? ? object.date_available.strftime("%Y-%m-%d") : nil
+		object.date_available.present? ? object.date_available.strftime("%Y-%m-%d") : 'Now'
 	end
 
 	def next_prev_step_url object, step:

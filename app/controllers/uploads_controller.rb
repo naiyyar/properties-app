@@ -28,10 +28,10 @@ class UploadsController < ApplicationController
 
   def lazy_load_images
     object_klass = params[:object_type].constantize
-    @object = object_klass.find(params[:object_id])
-    assets = @object.get_uploads
+    @property = object_klass.find(params[:object_id])
+    assets = @property.get_uploads
     @uploads, @documents = assets[:image_uploads], assets[:doc_uploads]
-    @uploaded_images_count = @object.uploads_count.to_i
+    @uploaded_images_count = @property.uploads_count.to_i
     
     respond_to do |format|
       format.js

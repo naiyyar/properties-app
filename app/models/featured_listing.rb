@@ -8,17 +8,6 @@ class FeaturedListing < ApplicationRecord
 
   # constant
   FEATURING_WEEKS = 'two'
-
-  FEATURED_IN_NEIGHBORHOODS = [
-    'Lower Manhattan',
-    'Midtown Manhattan',
-    'Upper East Side',
-    'Upper West Side',
-    'Upper Manhattan',
-    'Brooklyn',
-    'Queens',
-    'Bronx'
-  ].freeze
   
   APARTMENT_TYPE = [
     'Co-op',
@@ -94,5 +83,9 @@ class FeaturedListing < ApplicationRecord
 
   def owner_full_name
     "#{first_name} #{last_name}"
+  end
+
+  def name_with_last_initial
+    "#{first_name} #{last_name.first}"
   end
 end

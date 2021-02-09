@@ -1,5 +1,5 @@
 var sh_slider = $('#sh-slider');
-sh_slider.html("<%= j render partial: 'uploads/light_slider', locals: { object: @object } %>");
+sh_slider.html("<%= j render partial: 'uploads/light_slider', locals: { property: @property } %>");
 
 var sl_container = $('.sh-slider-container');
 if(sl_container.length > 0){

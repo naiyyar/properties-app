@@ -1,6 +1,6 @@
 class FeaturedListingsController < ApplicationController
-	load_and_authorize_resource
-  before_action :authenticate_user!,  except: :show
+	# load_and_authorize_resource
+  before_action :authenticate_user!, except: :show
   before_action :set_featured_listing, only: [:show, :update, :destroy, :contact_owner]
   
   include Searchable
@@ -46,8 +46,10 @@ class FeaturedListingsController < ApplicationController
   end
 
   def edit
-    @featured_listing = FeaturedListing.find_by(id: params[:object_id])
-    @step = params[:step].to_sym
+    @featured_listing = FeaturedListing.find(params[:object_id])
+    @partial_to_render = params[:step]
+    @step = @partial_to_render.to_sym
+    @partial_to_render = 'form' if @step == :create
     case @step
     when :add_amenities
       @listing_amenities = @featured_listing.amenities
@@ -72,8 +74,9 @@ class FeaturedListingsController < ApplicationController
 
     respond_to do |format|
       if @featured_listing.save
-        # session[:rental_listing_id] = @featured_listing.id
-        format.html { redirect_to next_step_url(:create) }
+        format.html { 
+          redirect_to next_step_url(:create) 
+        }
       else
         format.html { 
           flash[:error] = @featured_listing.errors.full_messages

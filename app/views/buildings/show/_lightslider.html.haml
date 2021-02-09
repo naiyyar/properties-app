@@ -1,4 +1,3 @@
-- building = object
 - if @uploaded_images_count > 0
   .item
     .clearfix{ style: 'width:100%;' }
@@ -6,8 +5,8 @@
         %span.current 1
         %span.total="/ #{images_count = @uploaded_images_count}"
 
-      %ul.gallery.list-unstyled{style: 'height: 265px;', data: slider_data_attribute(object) }
-        - thumb_hidden_class = @object.present? ? '' : 'hidden'
+      %ul.gallery.list-unstyled{style: 'height: 265px;', data: slider_data_attribute(property) }
+        - thumb_hidden_class = @property.present? ? '' : 'hidden'
         - @uploads.each do |upload|
           - img_url = upload.image.url(:original)
           %li{ data: { thumb: upload.slider_thumb_image(:medium) } }
@@ -16,7 +15,7 @@
 - else
   .item
     .clearfix{ style: 'width:100%;' }
-      %ul.gallery.list-unstyled{style: 'height: 265px;', data: slider_data_attribute(object) }
+      %ul.gallery.list-unstyled{style: 'height: 265px;', data: slider_data_attribute(property) }
         %li
           - img_url = image_url('no-photo.jpg')
           %a{ href: img_url, 'data-fancybox' => 'gallery' }
