@@ -24,6 +24,8 @@ module HomeConcern
       @filters         = results[:filters]
       @tab_title_text  = Building.pop_search_tab_title(@search_term) if @filters.present?
     end
+
+    @featured_listings = FeaturedListing.get_random_objects(@search_string, searched_by, limit: 2)
     
     if @buildings.present?
       @filter_params   = params[:filter]
@@ -35,10 +37,13 @@ module HomeConcern
       building = Building.buildings_in_neighborhood(@search_string.downcase).first
       @lat, @lng = building_latlng(building)
     end
-
+    
+    # @hash = (@hash + FeaturedListing.as_json_hash(@featured_listings)) if @featured_listings.present?
+    
     @lat, @lng = params[:latitude], params[:longitude] if params[:search_term] == 'custom'
 
-    @agent      = FeaturedAgent.get_random_agent(@search_string, searched_by).first
+    @agent = FeaturedAgent.get_random_objects(@search_string, searched_by, limit: 1).first
+    
     @meta_desc  = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
                                                               count: @buildings_count, 
                                                               term:  @search_term)

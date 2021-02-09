@@ -196,6 +196,10 @@ class Building < ApplicationRecord
     featured_buildings_count.to_i > 0
   end
 
+  def property_type
+    self.class.name
+  end
+
   def active_comps
     @active_comps ||= featured_comps.active
   end

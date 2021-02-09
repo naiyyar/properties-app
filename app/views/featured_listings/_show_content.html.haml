@@ -5,7 +5,7 @@
 				.row
 					.col-xs-11.col-sm-8.col-md-8.col-lg-9
 						%p.pageTitle.font-bold.font-16{style: 'width: 100%; margin: 10px 0px 0px;'}
-							= number_to_currency(@featured_listing.rent, precision: 0)
+							= rent_with_currency(@featured_listing)
 					.col-xs-1.col-sm-4.col-md-4.col-lg-3
 						/ = render 'buildings/favourite', building: @featured_listing
 				
@@ -14,21 +14,11 @@
 						.property_information
 							.address{style: 'margin-left: -1px;'}= listing_address(@featured_listing)
 						  
-							- if @featured_listing.apartment_type.present? || @neighborhood.present?
-								%div.pbt
-									= "#{@featured_listing.apartment_type} in" if @featured_listing.apartment_type.present?
-									= link_to @neighborhood, borough_search_link(@neighborhood), class: 'hyper-link' if @neighborhood.present?
-
-							%div.pbt= "Available #{date_available(@featured_listing)}"
-
-							%div.pbt= "For Rent By #{@featured_listing.name_with_last_initial}."
-
-							.clearfix
-							.clearfix
+							= render 'featured_listings/property_detail', featured_listing: @featured_listing
 						
 						%br
 
-						= link_to 'Contact Owner', contact_owner_featured_listing_path(@featured_listing), class: 'btn btn-primary btn-block', remote: true
+						= featured_listing_contact_owner_button(@featured_listing, size_class: 'btn-block')
 			  
 				- unless @uploaded_images_count > 0
 					.sliderLink

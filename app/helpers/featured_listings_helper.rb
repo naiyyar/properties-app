@@ -1,5 +1,9 @@
 module FeaturedListingsHelper
 
+	def rent_with_currency object
+		number_to_currency(object.rent, precision: 0)
+	end
+
 	def listing_address object
 		"#{object.address} Unit #{object.unit}, #{object.city}, NY, #{object.zipcode}"
 	end
@@ -19,4 +23,13 @@ module FeaturedListingsHelper
                                             type: 'featured'
                                             )
 	end
+
+	def featured_listing_contact_owner_button object, size_class:
+		link_to 'Contact Owner', 
+						'javascript:;',
+						onclick: "FEATURED_LISTING.showContactOwnerFormModal(#{object.id})", 
+						class: "btn btn-primary #{size_class}", 
+						remote: true
+	end
+
 end

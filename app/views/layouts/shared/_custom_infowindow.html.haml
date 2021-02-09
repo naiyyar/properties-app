@@ -1,38 +1,58 @@
 .infoW
-  - @show_path = building_path(building)
+  - @show_path = object_show_path(property)
   - thumb_icon = "<span class='fa fa-thumbs-up recommended'></span>"
-  = link_to @show_path, style: 'color: #333;' do
-    .infoW-property-info{'data-href' => "#{@show_path}"}
-      .propImg
-        = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
-        - if building.video_tours.any?
-          .video-tour-icon
-            %span.fa.fa-video-camera
-      .paWrapper
-        .propTitle= building.building_name_or_address
-        .propAddress
-          = building.street_address
-          = building.zipcode
-  
-  %div{style: 'position: absolute; right: -4px; top: 136px;'}
-    .pull-right{style: 'padding-right: 10px; font-size: 18px;'}
-      - if current_user.present?
-        - click_action = fav_color_class == 'unfilled-heart' ? "saveToFavourite(#{building.id})" : "removeFromFavourite(#{building.id})"
-        - hover_action = fav_color_class == 'unfilled-heart' ? "addHoverEffect(#{building.id})" : "removeHoverEffect(#{building.id})"
+  - if property_type == 'Building'
+    = link_to @show_path, style: 'color: #333;' do
+      .infoW-property-info{'data-href' => "#{@show_path}"}
+        .propImg
+          = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
+          - if property.video_tours.any?
+            .video-tour-icon
+              %span.fa.fa-video-camera
+        .paWrapper
+          .propTitle= property.building_name_or_address
+          .propAddress
+            = property.street_address
+            = property.zipcode
+    
+    %div{style: 'position: absolute; right: -4px; top: 136px;'}
+      .pull-right{style: 'padding-right: 10px; font-size: 18px;'}
+        - if current_user.present?
+          - click_action = fav_color_class == 'unfilled-heart' ? "saveToFavourite(#{property.id})" : "removeFromFavourite(#{property.id})"
+          - hover_action = fav_color_class == 'unfilled-heart' ? "addHoverEffect(#{property.id})" : "removeHoverEffect(#{property.id})"
+          
+          %a{'data-objectid' => "#{property.id}", href: 'javascript:;', title: 'Save', class: "favourite save_link_#{property.id} #{fav_color_class}", onclick: click_action, onmouseover: hover_action}
+            %span.fa.fa-heart
         
-        %a{'data-objectid' => "#{building.id}", href: 'javascript:;', title: 'Save', class: "favourite save_link_#{building.id} #{fav_color_class}", onclick: click_action, onmouseover: hover_action}
-          %span.fa.fa-heart
-      
-      = link_to heart_icon, 'javascript:;', class: "save_link_#{building.id} favourite #{fav_color_class}", onclick: "openSuModal(event, #{building.id})" if !current_user.present?
+        = link_to heart_icon, 'javascript:;', class: "save_link_#{property.id} favourite #{fav_color_class}", onclick: "openSuModal(event, #{property.id})" if !current_user.present?
+
+
+    = link_to @show_path do
+      %div{style: 'margin-left: 6px;'}= render 'home/building_detail', building: property
+    - property.act_listings = @listings
+    - property.min_price    = @listings&.first&.rent
+    - property.max_price    = @listings.with_rent&.last&.rent
+    .pb-8{style: 'margin-left: 6px;'}= set_bed_ranges(property, filters)
+
+    .clearfix
+    .infoButtons.no-padding= render 'contacts/cta_buttons', building: property, size_class: 'btn-xs btn-block', on_click: true
   
-  
-  = link_to @show_path do
-    %div{style: 'margin-left: 6px;'}= render 'home/building_detail', building: building
-  - building.act_listings = @listings
-  - building.min_price    = @listings&.first&.rent
-  - building.max_price    = @listings.with_rent&.last&.rent
-  .pb-8{style: 'margin-left: 6px;'}= set_bed_ranges(building, filters)
-  
-  .clearfix
-  .infoButtons.no-padding
-    = render 'contacts/cta_buttons', building: building, size_class: 'btn-xs btn-block', on_click: true
+  - else
+    = link_to @show_path, style: 'color: #333;' do
+      .infoW-property-info{'data-href' => "#{@show_path}"}
+        .propImg
+          = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
+          - if property.video_tours.any?
+            .video-tour-icon
+              %span.fa.fa-video-camera
+        .paWrapper
+          .propTitle= rent_with_currency(property)
+          .propAddress= listing_address(property)
+        %div{style: 'margin-left: 6px;'}
+          = render 'featured_listings/property_detail', featured_listing: property
+
+    .clearfix
+    %br
+    %br
+    %br
+    .infoButtons.no-padding= featured_listing_contact_owner_button(property, size_class: 'btn-xs btn-block')

@@ -5,6 +5,7 @@ class FeaturedListing < ApplicationRecord
   include Tourable
 
   extend RenewPlan
+  extend SplitViewDisplayCard
 
   # constant
   FEATURING_WEEKS = 'two'
@@ -88,4 +89,46 @@ class FeaturedListing < ApplicationRecord
   def name_with_last_initial
     "#{first_name} #{last_name.first}"
   end
+
+  def property_type
+    self.class.name
+  end
+
+  def featured?
+    self.active && !expired?
+  end
+
+  def featured
+    featured?
+  end
+
+  def price
+    @price ||= self.rent
+  end
+
+  def self.as_json_hash(listings)
+    listings.select(*attrs_to_select).as_json(:methods => json_hash_methods)
+  end
+
+  def self.json_hash_methods
+    [:featured?, :featured, :property_type, :price, :full_address]
+  end
+
+  def self.attrs_to_select
+    [
+       :id, 
+       :rent, 
+       :address, 
+       :latitude, 
+       :longitude, 
+       :zipcode, 
+       :city, 
+       :state, 
+       :apartment_type,
+       :active,
+       :end_date,
+       :start_date
+    ]
+  end
+
 end

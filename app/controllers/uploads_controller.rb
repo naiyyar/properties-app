@@ -8,13 +8,15 @@ class UploadsController < ApplicationController
     if params[:building_id].present?
       @imageable = Building.find(params[:building_id])
     elsif params[:unit_id]
-      @imageable     = Unit.find(params[:unit_id])
+      @imageable = Unit.find(params[:unit_id])
     elsif params[:featured_agent_id]
       @imageable = FeaturedAgent.find(params[:featured_agent_id])
+    elsif params[:featured_listing_id]
+      @imageable = FeaturedListing.find(params[:featured_listing_id])
     else
       @uploads = Upload.order('created_at desc').limit(52)
     end
-    @uploads = @imageable.uploads.where('image_file_name is not null') if @imageable.present?
+    @uploads = @imageable.uploads.with_image if @imageable.present?
 
     respond_to do |format|
       format.html

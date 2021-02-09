@@ -1,4 +1,4 @@
-function loadMarkerWindow(building_id, map, marker){
+function loadMarkerWindow(building_id, map, marker, current_object_type){
   var filter_params = {
     amenities:        $('#list_amenities').val(),
     listing_bedrooms: $('#list_bedrooms').val(),
@@ -6,10 +6,11 @@ function loadMarkerWindow(building_id, map, marker){
     max_price:        $('#list_max_price').val(),
   };
   $.post('/load_infobox', {
-    object_id:        building_id, 
-    building_show:    false,
-    current_user_id:  current_user_id,
-    filter_params:    filter_params
+    object_id:       building_id, 
+    building_show:   false,
+    current_user_id: current_user_id,
+    filter_params:   filter_params,
+    property_type:   current_object_type
   }, function(data){
     infobox_data_html = data.html
     infobox.setContent(infobox_data_html);
@@ -21,7 +22,30 @@ function openInfoBox(map, marker){
   infobox.open(map, marker);
 }
 
-function createSidebarElem(json){
+function bindElemToMarker(elem, marker, object, map){
+  var price = (object.price == '' || object.price == null) ? 0 : object.price
+  var card = elem.parent().parent().parent();
+  card.on('mouseover', function(){
+    marker.setIcon(markerIcon(price, 'green'));
+  }).on('mouseout', function(){
+    marker.setIcon(markerIcon(price, 'red'));
+  });
+};
+
+function createSidebar(object, marker, map, zoom){
+  var elem;
+  elem = $( createSidebarElemForBuilding(object) );
+  // if(object.property_type == 'Building'){
+  //   elem = $( createSidebarElemForBuilding(object) );
+  // }else{
+  //   elem = $( createSidebarElemForFeaturedListing(object) );
+  // } 
+  
+  $('#building_details'+object.id).html(elem);
+  bindElemToMarker(elem, marker, object, map, zoom);
+};
+
+function createSidebarElemForBuilding(json){
   var building_name = ''
   var address = json.building_street_address;
   if(json.building_name == undefined || json.building_name == ''){
@@ -39,26 +63,17 @@ function createSidebarElem(json){
     building_name = address
   }
   
-  return ("<h2>" + building_name + "</h2>" +
-            "<div class='cardAddress'><span class='fa fa-map-marker'></span> "+full_address+"</div>"
-          );
+  return header_elem(building_name, full_address)
 };
 
-function bindElemToMarker(elem, marker, object, map){
-  var price = (object.price == '' || object.price == null) ? 0 : object.price
-  var card = elem.parent().parent().parent();
-  card.on('mouseover', function(){
-    marker.setIcon(markerIcon(price, 'green'));
-  }).on('mouseout', function(){
-    marker.setIcon(markerIcon(price, 'red'));
-  });
-};
+function createSidebarElemForFeaturedListing(object){
+  return header_elem(object.rent, object.full_address)
+}
 
-function createSidebar(object, marker, map, zoom){
-  var elem = $( createSidebarElem(object) );
-  $('#building_details'+object.id).html(elem);
-  bindElemToMarker(elem, marker, object, map, zoom);
-};
+function header_elem(title, subtitle){
+  ("<h2>" + title + "</h2>" +
+  "<div class='cardAddress'><span class='fa fa-map-marker'></span> "+subtitle+"</div>" );
+}
 
 function markerIcon(price, type='red'){
   var path = $('#red-marker-asset-'+0);

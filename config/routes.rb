@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :featured_listings, except: [:show] do
-    resources :uploads, only: [:new, :create]
+    resources :uploads, only: [:new, :create, :index]
     resources :video_tours, only: :index
     member do
       get :contact_owner
@@ -152,7 +152,7 @@ Rails.application.routes.draw do
             :featured_agent_steps
   
   resources :featured_agents do
-    resources :uploads, only: [:new, :create]
+    resources :uploads, only: [:new, :create, :index]
     member do
       get :preview
       get :contact

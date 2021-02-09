@@ -119,14 +119,14 @@ var ready = function(){
                     openInfoBox(map, featured_marker);
                   }
                   else{
-                    loadMarkerWindow(object.id, map, marker);
+                    loadMarkerWindow(object.id, map, marker, prop.property_type);
                   }
                 }
               })(marker, i));
             }
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
               return function() {
-                loadMarkerWindow(json_array[i].id, map, marker);
+                loadMarkerWindow(json_array[i].id, map, marker, prop.property_type);
               }
             })(marker, i));
 
@@ -257,7 +257,7 @@ var ready = function(){
         if(agentid){
           Card.loadFeaturedAgentImagesAndCTALinks(agentid);
         }else{
-          Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+          Card.loadDisplayImageAndCTALinks($(j));
         }
     });
   }

@@ -17,7 +17,7 @@ module Buildings
 	    end
 	    
 	    final_results[:all_buildings] = all_buildings
-	    final_results[:map_hash]      = Building.buildings_json_hash(buildings)
+	    final_results[:map_hash] = Building.buildings_json_hash(buildings)
 	    
 	    return final_results[:all_buildings], final_results[:map_hash], per_page_buildings
 	  end

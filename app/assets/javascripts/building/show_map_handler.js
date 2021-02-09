@@ -48,6 +48,7 @@ function loadShowMarkerWindow(prop_id, map, marker){
     object_id: prop_id, 
     building_show: false,
     current_user_id: current_user_id,
+    property_type: current_object_type
   }, function(data){
     infobox.setContent(data.html);
     infobox.open(map, marker);

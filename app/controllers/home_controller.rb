@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class HomeController < ApplicationController
   before_action :reset_session,         only: [:index, :auto_search]
-  before_action :find_building,         only: [:load_infobox, :get_images, :set_cta_links]
+  before_action :find_property,         only: [:load_infobox, :get_images, :set_cta_links]
   before_action :save_as_favourite,     only: [:index, :search]
   #before_action :set_rent_medians,      only: [:search, :load_infobox]
   before_action :set_device_view,       only: [:index, :load_featured_buildings]
@@ -31,26 +31,33 @@ class HomeController < ApplicationController
   end
 
   def load_infobox
-    filters  = params[:filter_params]
-    listings = @building.get_listings(filters)
+    building_type_locals = {}
+    if @property_type == 'Building'
+      filters  = params[:filter_params]
+      listings = @property.get_listings(filters)
+      building_type_locals = {
+        recomended_per: @property.recommended_percent,
+        rating_cache:   @property.rating_cache,
+        filters:  filters,
+        :@listings => listings,
+        fav_color_class:  @fav_color_class
+      }
+    end
     render json: { html: render_to_string(:partial => '/layouts/shared/custom_infowindow', 
-                                          :locals => {  building:         @building,
-                                                        image:            Upload.marker_image(@building),
-                                                        rating_cache:     @building.rating_cache,
-                                                        recomended_per:   @building.recommended_percent,
-                                                        building_show:    params[:building_show],
-                                                        current_user:     @current_user,
-                                                        fav_color_class:  @fav_color_class,
-                                                        filters:          filters,
-                                                        :@listings =>     listings
-                                                      })
-                  }
+                                          :locals => {  property:      @property,
+                                                        image:         Upload.marker_image(@property),
+                                                        building_show: params[:building_show],
+                                                        current_user:  @current_user,
+                                                        property_type: @property_type,
+                                                      }.merge(building_type_locals))
+                }
   end
 
   def get_images
-    photos        = Upload.cached_building_photos([params[:building_id]])
-    @image_uploads = photos.where(imageable_type: 'Building') rescue []
-    render json: { html: render_slider_partial, cta_html: render_cta_partial }
+    @image_uploads = @property.uploads.with_image rescue []
+    
+    render json: { html: render_slider_partial, 
+                   cta_html: render_cta_partial }
   end
 
   def auto_search
@@ -93,9 +100,10 @@ class HomeController < ApplicationController
     session[:return_to] = nil
   end
 
-  def find_building
-    building_id = params[:object_id] || params[:building_id]
-    @building   = Building.find(building_id)
+  def find_property
+    property_id = params[:object_id] || params[:building_id]
+    @property_type = params[:property_type] || 'Building'
+    @property = @property_type.constantize.find(property_id)
   end
 
   def save_as_favourite
@@ -114,7 +122,9 @@ class HomeController < ApplicationController
   # end
 
   def set_fav_color_class
-    @fav_color_class = @building.fav_color_class(params[:current_user_id])
+    if @property_type == 'Building'
+      @fav_color_class = @property.fav_color_class(params[:current_user_id])
+    end
   end
 
   # def set_min_save_amount
@@ -127,17 +137,17 @@ class HomeController < ApplicationController
 
   def render_slider_partial
     render_to_string(:partial => '/home/lightslider', 
-                     :locals => { object:       @building,
+                     :locals => { object:       @property,
                                   images_count: @image_uploads.size,
                                   first_image:  @image_uploads[0],
-                                  show_path:    building_path(@building)
+                                  show_path:    view_context.object_show_path(@property)
                                 }
                     )
   end
 
   def render_cta_partial
     render_to_string(:partial => '/contacts/cta_buttons', 
-                     :locals => {  building:       @building,
+                     :locals => {  property:       @property,
                                    size_class:     '',
                                    on_click:       false,
                                    filter_params:  params[:filter_params]

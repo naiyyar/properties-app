@@ -7,4 +7,10 @@
 	.col-xs-12.col-sm-12.col-md-6.col-lg-6= render 'buildings/detail_card', building: building
 	= render 'featured_agents/agent', agent: @agent
 - else
-	.col-xs-12.col-sm-12.col-md-6.col-lg-6= render 'buildings/detail_card', building: building
+	.col-xs-12.col-sm-12.col-md-6.col-lg-6
+		- if !building.featured? && @featured_listings.present? && @taken_featured_listings_count < @featured_listings.length
+			- @featured_listings.each do |featured_listing|
+				= render 'featured_listings/detail_card', featured_listing: featured_listing
+				- @taken_featured_listings_count += 1
+		- else
+			= render 'buildings/detail_card', building: building

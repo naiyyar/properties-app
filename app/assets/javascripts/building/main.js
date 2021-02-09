@@ -4,6 +4,7 @@
 //= require lightslider
 //= require gmap
 //= require search_modal
+//= require featured_listings
 //= require ./show_map_handler
 
 
@@ -35,6 +36,6 @@ $(document).ready(function() {
 var svc = $('.search-view-card');
 if(svc.length > 0){
   svc.each(function(i, j){
-    Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+    Card.loadDisplayImageAndCTALinks($(j));
   });
 }

@@ -15,6 +15,7 @@
 //= require price_slider
 //= require home
 //= require search_modal
+//= require featured_listings
 //= require ./redo_button
 
 

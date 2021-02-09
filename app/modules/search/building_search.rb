@@ -10,8 +10,8 @@ module Search
     end
 
     def json_hash_methods featured_comp_building_id
-      return [:featured?, :featured] if featured_comp_building_id.blank?
-      [:featured?, :featured, :featured_comp_building_id]
+      return [:featured?, :featured, :property_type] if featured_comp_building_id.blank?
+      [:featured?, :featured, :featured_comp_building_id, :property_type]
     end
 
     def attrs_to_select
