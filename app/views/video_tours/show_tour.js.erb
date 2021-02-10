@@ -1,7 +1,7 @@
 var container = $("#remote-container");
 var delay = 200;
 if(container.children().first().attr('id') != 'showTourModal'){
-	container.html('<%= j render partial: "show_tour_modal" %>');
+	container.html('<%= j render partial: "show_tour_modal", locals: {tourable_type: @tourable_type} %>');
 }
 
 <% unless browser.device.mobile? %>

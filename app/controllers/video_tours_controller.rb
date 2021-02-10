@@ -18,7 +18,13 @@ class VideoToursController < ApplicationController
   end
 
   def show_tour
+    @tourable_type = params[:tourable_type]    
     @video_tours, @category = VideoTour.videos_by_categories(@video_tours)
+    @categories = if @tourable_type == 'Building' 
+                    VideoTour::CATEGORIES 
+                  else 
+                    [['Featured Listing', 'featured_listing']]
+                  end
   end
 
   # GET /video_tours/new

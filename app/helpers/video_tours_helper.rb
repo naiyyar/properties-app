@@ -1,12 +1,11 @@
 module VideoToursHelper
-	# def tour_link title = '3D / Video Tour'
-	# 	#link_to "<span class='fa fa-play'></span> #{title}".html_safe, '#showTourModal', 
-	# 	#				'data-toggle' => 'modal', 
-	# 	#				class: 'btn btn-o btn-primary btn-sm btn-round font-bold',
-	# 	#				id: 'showTour'
-	# 	link_to "<span class='fa fa-play'></span> #{title}".html_safe, '#video-tours', 
-	# 					class: 'btn btn-o btn-primary btn-sm btn-round font-bold', id: 'showTour'
-	# end
+	
+	def launch_tour_link tourable
+		link_to '<span class="fa fa-play"></span> Launch 3D / Video Tours'.html_safe, 
+						show_tour_path(tourable_id: tourable.id, tourable_type: tourable.class.name),
+						class: 'btn btn-o btn-primary btn-sm btn-round font-bold btn-block font-14', 
+						remote: true
+	end
 
 	def show_tour_icon? object
 		['Building', 'FeaturedListing'].include?(object.class.name)

@@ -21,9 +21,7 @@
 	- if @building_tours_count > 0
 		.amenities.show-section#video-tours
 			%h3="3D / Video Tour (#{@building_tours_count})"
-			%a.btn.btn-o.btn-primary.btn-sm.btn-round.font-bold.btn-block.font-14{ href: show_tour_path(object_id: @building.id), 'data-remote' => true }
-				%span.fa.fa-play
-				Launch 3D / Video Tours
+			= launch_tour_link(@building)
 
 	- unless screen_class == 'screen-lg'
 		.show-section.show-map-handler{style: 'height: 200px; width: 100%; margin-bottom: 20px;margin-top: 20px;'}

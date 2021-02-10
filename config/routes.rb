@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :featured_listings, except: [:show] do
     resources :uploads, only: [:new, :create, :index]
-    resources :video_tours, only: :index
+    # resources :video_tours, only: :index
     member do
       get :contact_owner
       post :contact_owner
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   mount StripeEvent::Engine, at: '/stripe-events'
 
   resources :video_tours
-  get '/video_tours/show_tour/:building_id', to: 'video_tours#show_tour', as: :show_tour
+  get '/video_tours/show_tour/:tourable_id', to: 'video_tours#show_tour', as: :show_tour
   
   resources :billings do
     member do

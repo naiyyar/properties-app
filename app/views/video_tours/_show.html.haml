@@ -1,14 +1,7 @@
 %div{style: "padding: 10px; color: ##{cat_color};"}
-	- VideoTour::CATEGORIES.each do |category|
+	- @categories.each do |category|
 		- video_tours = @video_tours[category[1]]
 		- if video_tours.present?
-			%p.font-16.font-bold=category[0]
+			%p.font-16.font-bold
+				= category[0] if tourable_type == 'Building'
 			.row= render 'video_tours/tour_videos', video_tours: video_tours
-					
-
-- if false && @building_tours.length >= 3
-	.row
-		.col-lg-12
-			%table.table
-				%tr
-					%td.text-center= link_to 'Show More Videos...', show_tour_path(building_id: @building.id), remote: true, class: 'font-14 font-bold'

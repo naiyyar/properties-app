@@ -13,36 +13,28 @@
 					.col-xs-11.col-sm-8.col-md-8.col-lg-9
 						%p.pageTitle.font-bold.font-16{style: 'width: 100%; margin: 10px 0px 0px;'}
 							= rent_with_currency(@featured_listing)
+					
 					.col-xs-1.col-sm-4.col-md-4.col-lg-3
-						/ = render 'buildings/favourite', building: @featured_listing
 				
 				.row
 					.col-xs-12.col-sm-12.col-md-12.col-lg-12
 						.property_information
 							.address{style: 'margin-left: -1px;'}= listing_address(@featured_listing)
-						  
 							= render 'featured_listings/property_detail', featured_listing: @featured_listing
-						
 						%br
-
 						= featured_listing_contact_owner_button(@featured_listing, size_class: 'btn-block')
-			  
-				- unless @uploaded_images_count > 0
-					.sliderLink
-						%p.text-danger No photos are available.
 
 	.clearfix
 	- if @video_tours_count > 0
 		.amenities.show-section#video-tours
 			%h3="3D / Video Tour (#{@video_tours_count})"
-			%a.btn.btn-o.btn-primary.btn-sm.btn-round.font-bold.btn-block.font-14{ href: featured_listing_video_tours_path(@featured_listing), 'data-remote' => true }
-				%span.fa.fa-play
-				Launch 3D / Video Tours
+			= launch_tour_link(@featured_listing)
 
 	.clearfix
-	.show-section
-		%h3 Description
-		%p= simple_format(@featured_listing.description)
+	- if @featured_listing.description.present?
+		.show-section
+			%h3 Description
+			%p= simple_format(@featured_listing.description)
 	
 	.clearfix
 	.show-section
@@ -50,8 +42,7 @@
 		.row
 			- @featured_listing.amenities.each_pair do |key, value|
 				.col-xs-6.col-sm-6.col-md-4.col-lg-4.amItem.font-14
-					%span
-						= image_tag "amenities_icons/#{key}.png", width: '16', height: '16', alt: value
+					%span= image_tag "amenities_icons/#{key}.png", width: '16', height: '16', alt: value
 					= value
 	
 	- unless screen_class == 'screen-lg'
