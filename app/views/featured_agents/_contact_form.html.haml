@@ -5,7 +5,7 @@
 		.col-lg-10.col-xs-8
 			%p.font-bold.font-18=@featured_agent.full_name
 			%p.font-14=@featured_agent.broker_firm
-			%p.font-14=link_to number_to_phone(@featured_agent.phone, area_code: true), "tel:#{@featured_agent.phone}", class: 'hyper-link'
+			%p.font-14= phone_with_area_code_link(@featured_agent)
 
 	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'agent-contact-form', id: 'contact-agent-form' do
 		.row

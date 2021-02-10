@@ -1,11 +1,21 @@
 = form_tag contact_owner_featured_listing_path(@featured_listing), class: 'smart-form pm-contact-form' do |f|
-  %fieldset
-    .form-group
-      = text_field_tag :email, nil, class: 'form-control validate', placeholder: 'Email*', pattern: "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}", required: true, title: 'Email Format should be xyz@abc.com', name: 'contact_owner[email]'
-    .form-group
-      = text_field_tag :phone, nil, class: 'form-control phone_number', placeholder: 'Phone', id: 'uintTextBoxPhone', maxlength: '10', name: 'contact_owner[phone]'
-      = hidden_field_tag :user_id, current_user.try(:id)
-    .form-group
-      = text_area_tag :message, "I'm interested in availabilities at #{@featured_listing.full_address}.", class: "form-control validate", rows: 5, style: 'color: #777777;', name: 'contact_owner[message]'
+	%fieldset
+		.form-group
+			= text_field_tag :email, nil, class: 'form-control validate', placeholder: 'Email*', pattern: "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}", required: true, title: 'Email Format should be xyz@abc.com', name: 'contact_owner[email]'
+		.form-group
+			= text_field_tag :phone, nil, class: 'form-control phone_number', placeholder: 'Phone', id: 'uintTextBoxPhone', maxlength: '10', name: 'contact_owner[phone]'
+			= hidden_field_tag :user_id, current_user.try(:id)
+		.form-group
+			= text_area_tag :message, "I'm interested in availabilities at #{@featured_listing.full_address}.", class: "form-control validate", rows: 5, style: 'color: #777777;', name: 'contact_owner[message]'
   
-    = submit_tag 'Send Message', class: 'btn btn-primary btn-block font-bolder', style: 'font-size: 18px;'
+		= submit_tag 'Send Message', class: 'btn btn-primary btn-block font-bolder', style: 'font-size: 18px;'
+	
+	%fieldset
+		%p.font-16.font-bold Contact Info
+		%div.font-14= @featured_listing.name_with_last_initial
+		%div.font-14
+			Phone Number:
+			= phone_with_area_code_link(@featured_listing)
+
+%br
+%br
