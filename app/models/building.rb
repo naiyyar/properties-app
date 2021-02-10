@@ -270,6 +270,8 @@ class Building < ApplicationRecord
     building_name.present? ? building_name : building_street_address
   end
 
+  alias_method :property_name_or_address, :building_name_or_address
+
   def formatted_city
     self.city.downcase.gsub(' ', '')
   end

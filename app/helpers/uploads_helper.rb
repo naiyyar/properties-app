@@ -1,9 +1,17 @@
 module UploadsHelper
 
-	def seel_all_link building_id, images_count, see_all_class=nil
-		link_to "<span style='color: #333;' class='fa fa-th-large'></span> See all(#{images_count})".html_safe, 
-						building_uploads_path(building_id: building_id), 
+	def seel_all_link object, images_count, see_all_class=nil
+		link_to see_all_link_title(images_count), 
+						see_all_url(object), 
 						class: "btn btn-o btn-sm #{see_all_class}"
+	end
+
+	def see_all_link_title images_count
+		"<span style='color: #333;' class='fa fa-th-large'></span> See all(#{images_count})".html_safe
+	end
+
+	def see_all_url object
+		"/#{object.class.table_name}/#{object.id}/uploads"
 	end
 
 	def object_upload_path object
@@ -36,6 +44,10 @@ module UploadsHelper
 		object.kind_of?(Building) ? 
 		building_path(object) : 
 		show_featured_listing_path(id: object.id, address: url_address(object))
+	end
+
+	def type_featured_listing? object
+		object.imageable_type == 'FeaturedListing'
 	end
 
 end

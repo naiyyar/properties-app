@@ -2,11 +2,11 @@
   .col-lg-12
     - if @imageable.present?
       %div{ style: 'padding: 8px;'}
-        %h1.pageTitle{style: 'font-size: 30px;'}= link_to @imageable.building_name_or_address, building_path(@imageable), 'data-no-turbolink' => false
+        %h1.pageTitle{style: 'font-size: 30px;'}
+          = link_to @imageable.property_name_or_address, object_show_path(@imageable), 'data-no-turbolink' => false
         .address.text-muted
-          = link_to building_path(@imageable), 'data-no-turbolink' => false do
-            / method on reviews helper
-            = building_street_address @imageable
+          = link_to object_show_path(@imageable), 'data-no-turbolink' => false do
+            =  @imageable.full_street_address
             %br/
             = @imageable.neighborhood
 %hr/

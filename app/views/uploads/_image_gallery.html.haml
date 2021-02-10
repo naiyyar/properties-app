@@ -10,11 +10,11 @@
 			%div{style: 'position: absolute; right: 5px; bottom: 25px;'}
 				= link_to number_to_human_size(upload.image_file_size), 'javascript:;', class: 'btn btn-default btn-xs'
 	- else
-		.image-gallery{class: "#{upload.imageable_type == 'FeaturedListing' ? 'photo-grid-item' : 'col-sm-3'}"}
+		.image-gallery{class: "#{current_user && type_featured_listing?(upload) ? 'photo-grid-item' : 'col-sm-3'}"}
 			%a.propWidget-1{'data-caption' => "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-imageable' => "#{imageable(upload)}", href: "#{url}", 'data-role' => 'slider'}
 				.image-rotator{style: 'height: 236px;'}= image_tag url, alt: 'Image', class: 'img-thumbnail'
 
-			- if upload.imageable_type == 'FeaturedListing'
+			- if current_user && type_featured_listing?(upload)
 				.actions-links
 					= delete_upload_link(upload)
 					= edit_upload_link(upload)

@@ -72,9 +72,13 @@ class FeaturedListing < ApplicationRecord
   	[address, city, state, zipcode].join(', ')
   end
 
+  alias_method :full_street_address, :full_address
+
   def street_address
     address
   end
+
+  alias_method :property_name_or_address, :street_address
 
   def owner_full_name
     "#{first_name} #{last_name}"

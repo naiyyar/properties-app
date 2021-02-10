@@ -2,15 +2,15 @@
   .row
     .col-lg-3.col-xs-5.col-md-5
     .col-sm-3.col-lg-9.col-xs-7.col-md-7
-      .text-right=seel_all_link(@building.id, @uploaded_images_count, 'see-all')
+      .text-right=seel_all_link(@building, @uploaded_images_count, 'see-all')
 - else
   .row
     - if current_user.admin?
       .col-lg-3.col-md-3.col-xs-4= link_to 'Add Tour', new_video_tour_path(building_id: @building.id), class: 'btn btn-o btn-primary btn-sm btn-block'
       .col-lg-3.col-md-3.col-xs-4= link_to 'Add Photo', new_building_upload_path(building_id: object.id, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm btn-block'
       .col-lg-6.col-md-6.col-xs-4
-        .text-right=seel_all_link(@building.id, @uploaded_images_count)
+        .text-right=seel_all_link(@building, @uploaded_images_count)
     - else
       .col-lg-3.col-xs-5.col-md-5
       .col-sm-3.col-lg-9.col-xs-7.col-md-7
-        .text-right=seel_all_link(@building.id, @uploaded_images_count, 'see-all')
+        .text-right=seel_all_link(@building, @uploaded_images_count, 'see-all')

@@ -3,6 +3,13 @@
 		%div{ style: 'position: relative;margin-bottom: 20px;' }
 			.summary
 				.row
+					.col-lg-12.col-md-12
+						.add--assets{class: current_user&.admin? ? 'admin' : ''}
+							.row
+								.col-lg-3.col-xs-5.col-md-5
+								.col-sm-3.col-lg-9.col-xs-7.col-md-7
+									.text-right=seel_all_link(@featured_listing, @uploaded_images_count, 'see-all')
+				.row
 					.col-xs-11.col-sm-8.col-md-8.col-lg-9
 						%p.pageTitle.font-bold.font-16{style: 'width: 100%; margin: 10px 0px 0px;'}
 							= rent_with_currency(@featured_listing)
