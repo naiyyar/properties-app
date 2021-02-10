@@ -63,17 +63,18 @@ function createSidebarElemForBuilding(json){
     building_name = address
   }
   
-  return header_elem(building_name, full_address)
+  return ("<h2>" + building_name + "</h2>" +
+  "<div class='cardAddress'><span class='fa fa-map-marker'></span> "+full_address+"</div>" );
 };
 
-function createSidebarElemForFeaturedListing(object){
-  return header_elem(object.rent, object.full_address)
-}
+// function createSidebarElemForFeaturedListing(object){
+//   return header_elem(object.rent, object.full_address)
+// }
 
-function header_elem(title, subtitle){
-  ("<h2>" + title + "</h2>" +
-  "<div class='cardAddress'><span class='fa fa-map-marker'></span> "+subtitle+"</div>" );
-}
+// function header_elem(title, subtitle){
+//   ("<h2>" + title + "</h2>" +
+//   "<div class='cardAddress'><span class='fa fa-map-marker'></span> "+subtitle+"</div>" );
+// }
 
 function markerIcon(price, type='red'){
   var path = $('#red-marker-asset-'+0);

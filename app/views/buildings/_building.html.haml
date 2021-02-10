@@ -12,5 +12,6 @@
 			- @featured_listings.each do |featured_listing|
 				= render 'featured_listings/detail_card', featured_listing: featured_listing
 				- @taken_featured_listings_count += 1
+			/ = render 'buildings/detail_card', building: building
 		- else
 			= render 'buildings/detail_card', building: building
