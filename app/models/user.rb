@@ -45,6 +45,7 @@ class User < ApplicationRecord
   has_many :review_flags
   has_many :billings, dependent: :destroy
   has_many :featured_buildings, dependent: :destroy
+  has_many :featured_listings, dependent: :destroy
   has_many :favorites, as: :favoriter, dependent: :destroy
 
   # Include default devise modules. Others available are:

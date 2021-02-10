@@ -111,7 +111,7 @@
               .col-xs-6.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Date Available
-                  = f.text_field :date_available, value: date_available(f.object),  class: 'form-control datepicker', :autocomplete => :off
+                  = f.text_field :date_available,  class: 'form-control datepicker', :autocomplete => :off
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group
@@ -121,5 +121,5 @@
             .form-group
               .col-sm-12
                 .pull-right
-                  = link_to 'Cancel', frbotools_user_path(current_user, type: 'featured'), class: 'btn btn-default'
+                  = link_to 'Cancel', frbotools_user_path(current_user, type: 'featured'), class: 'cancel btn btn-default'
                   = f.submit 'Next ->', class: 'btn btn-primary'

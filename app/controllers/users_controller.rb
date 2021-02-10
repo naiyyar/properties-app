@@ -81,6 +81,7 @@ class UsersController < ApplicationController
   	@type 					  = params[:type]
 		session[:back_to] = request.fullpath
 		unless @type == 'billing'
+			current_user.featured_listings.where(address: nil, neighborhood: nil).delete_all
 			@filterrific = initialize_filterrific(
 	      FeaturedListing,
 	      params[:filterrific],

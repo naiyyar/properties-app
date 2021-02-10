@@ -39,10 +39,7 @@ class FeaturedListing < ApplicationRecord
   scope :by_manager,  -> { where(featured_by: 'manager') }
 
   pg_search_scope :search_query, 
-                  against: [:id], 
-                  associated_against: {
-                    building: [:building_name, :building_street_address]
-                  }
+                  against: [:first_name, :neighborhood, :address]
 
   filterrific(
    default_filter_params: { },
@@ -63,11 +60,11 @@ class FeaturedListing < ApplicationRecord
             numericality: { greater_than_or_equal_to: 0 }, on: :update
   
   #
-  geocoded_by :full_address
-  after_validation :geocode
+  geocoded_by :full_address, on: :update
+  after_validation :geocode, on: :update
 
-  reverse_geocoded_by :latitude, :longitude
-  after_validation :reverse_geocode
+  reverse_geocoded_by :latitude, :longitude, on: :update
+  after_validation :reverse_geocode, on: :update
 
   # delegates
   delegate :email, to: :user, prefix: true

@@ -21,6 +21,10 @@ jQuery ->
 		if(parentElem.hasClass('expanded'))
 			parentElem.css('z-index', 999)
 
+	$(document).on 'click', '.cancel', (e) ->
+		e.preventDefault
+		window.location.href = $(this).attr('href')
+
 	window.setTimeout (->
    	$('.alert').slideUp 300, ->
      	$(this).remove()

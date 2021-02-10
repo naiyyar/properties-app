@@ -7,7 +7,6 @@ class FeaturedListingsController < ApplicationController
   
   def index
   	@featured_listings = filterrific_search_results
-
   	respond_to do |format|
       format.html
       format.js
