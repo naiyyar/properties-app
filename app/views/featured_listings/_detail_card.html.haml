@@ -21,9 +21,9 @@
       / %div.pbt= "For Rent By #{featured_listing.name_with_last_initial}."
 
   .clearfix
-  
-  %br
-  
-  .cta_buttons{id: "cta-links#{featured_listing.id}"}
+  = link_to @show_path, style: 'color: #000' do
+    %br
+    %p
+    .cta_buttons{id: "cta-links#{featured_listing.id}"}
       
 .clearfix

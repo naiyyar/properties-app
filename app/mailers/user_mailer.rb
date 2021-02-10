@@ -65,21 +65,18 @@ class UserMailer < ApplicationMailer
 	end
 
 	def contact_frbo listing, params
-		@to_email 	   = listing.email
-		sender_email   = params[:email]
-		@phone         = params[:phone]
-		@neighborhoods = params[:neighborhoods]
-		@bedrooms			 = params[:bedrooms]
-		@budget        = params[:budget]
-		@message			 = params[:message]
-		@owner_name    = listing.owner_full_name
-		subject = "[Inquiry From Transparentcity User] regarding assistance on rental apartment search from #{@from_email}"
-
+		@listing = listing
+		@to_email = listing.email
+		@from_email = params[:email]
+		@phone = params[:phone]
+		@message = params[:message]
+		@owner_name  = listing.owner_full_name
+		@address_with_unit = @listing.address_with_unit
 		mail(
 			from: DEFAULT_EMAIL,
-			reply_to: sender_email,
+			reply_to: @from_email,
 			to: @to_email,
-			subject: subject
+			subject: frbo_subject
 		)
 	end
 
@@ -129,6 +126,12 @@ class UserMailer < ApplicationMailer
 			from: DEFAULT_EMAIL,
 			subject: subject
 		)
+	end
+
+	private
+	
+	def frbo_subject
+		"[Inquiry From Transparentcity User] Availability At #{@address_with_unit} from #{@from_email}"
 	end
 
 end

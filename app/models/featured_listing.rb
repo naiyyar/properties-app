@@ -84,6 +84,14 @@ class FeaturedListing < ApplicationRecord
 
   alias_method :property_name_or_address, :street_address
 
+  def address_with_unit
+    "#{address} #{unit}"
+  end
+
+  def full_address_with_unit
+    "#{full_address} #{unit}"
+  end
+
   def owner_full_name
     "#{first_name} #{last_name}"
   end

@@ -1,6 +1,7 @@
 %p 
 	You have a new inquiry through
-	%a{href: "https://www.transparentcity.co/?utm_source=email&utm_medium=receiver&utm_campaign=#{@owner_name}", target: '_blank'} Transparentcity.
+	%a{href: "https://www.transparentcity.co/?utm_source=email&utm_medium=receiver&utm_campaign=#{@owner_name}", target: '_blank'} Transparentcity
+	for #{@address_with_unit}.
 
 %table
 	%tr
@@ -9,12 +10,6 @@
 	%tr
 		%td Phone #:
 		%td=@phone
-	%tr
-		%td Interested In:
-		%td=@neighborhoods.present? ? @neighborhoods.join(', ') : ''
-	%tr
-		%td Bedrooms
-		%td=@bedrooms
 
 %p=simple_format(@message)
 

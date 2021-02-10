@@ -6,7 +6,7 @@
 			= text_field_tag :phone, nil, class: 'form-control phone_number', placeholder: 'Phone', id: 'uintTextBoxPhone', maxlength: '10', name: 'contact_owner[phone]'
 			= hidden_field_tag :user_id, current_user.try(:id)
 		.form-group
-			= text_area_tag :message, "I'm interested in availabilities at #{@featured_listing.full_address}.", class: "form-control validate", rows: 5, style: 'color: #777777;', name: 'contact_owner[message]'
+			= text_area_tag :message, "I'm interested in availabilities at #{@featured_listing.full_address} #{@featured_listing.unit}.", class: "form-control validate", rows: 5, style: 'color: #777777;', name: 'contact_owner[message]'
   
 		= submit_tag 'Send Message', class: 'btn btn-primary btn-block font-bolder', style: 'font-size: 18px;'
 	
