@@ -2,7 +2,7 @@ module Billable
 	extend ActiveSupport::Concern
 	
   included do
-		has_many :billings, as: :billable
+		has_many :billings, as: :billable, dependent: :destroy
 	end
 
   DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)

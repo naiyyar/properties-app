@@ -102,9 +102,9 @@ class Billing < ApplicationRecord
 	def billing_description
 		billable = self.billable
 		unless renew_date
-			"ID #{billable.id} #{inv_description} #{billing_start_date(billable.start_date)}"
+			"ID #{billable_id} #{inv_description} #{billing_start_date(billable&.start_date)}"
 		else
-			"ID #{billable.id} Renewed #{inv_description} #{billing_start_date(renew_date + 2.day)}"
+			"ID #{billable_id} Renewed #{inv_description} #{billing_start_date(renew_date + 2.day)}"
 		end
 	end
 

@@ -5,10 +5,8 @@
 		.col-lg-6.col-xs-6
 			%b Featured Listing
 		.col-lg-2.col-xs-2.text-center
-			%a{href: '#', style: 'color: #000;'}
-				%span.fa.fa-refresh.fa-2x
 		.col-lg-4.col-xs-4
-			= link_to 'Preview', '#preview', class: 'btn btn-success btn-block'
+			= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-success btn-block', target: 'blank'
 
 .row
 	.col-lg-12.col-lg-offset-3
@@ -25,7 +23,8 @@
 				= render 'uploads/image_gallery', uploads: @imageable.uploads
 
 / video tours
-
+%br
+%br
 - tour_category = 'featured_listing'
 .row
 	.col-lg-6.col-xs-12.col-lg-offset-3
@@ -51,3 +50,12 @@
 				= link_to 'Next ->', next_prev_step_url(@imageable, step: 'payment'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
 
 %br
+
+:css
+	.dropzone {
+		min-height: 120px;
+		height: 120px;
+		border: 1px solid rgba(0, 0, 0, 0.3);
+		background: #fff;
+		padding: 20px 20px;
+	}
