@@ -31,6 +31,20 @@ class StaticData
     '$15,000'
   ].freeze
 
-  # methods
+  ADMIN_NAV_MENU = [
+    { title: 'Buildings',            url: '/buildings'},
+    { title: 'Units',                url: '/units'},
+    { title: 'Listings',             url: '/listings'},
+    { title: 'Users',                url: '/users'},
+    { title: 'Documents',            url: '/documents'},
+    { title: 'Reviews',              url: '/reviews'},
+    { title: 'Guides',               url: '/buildings'},
+    { title: 'Management companies', url: '/management_companies'},
+    { title: 'Price Range',          url: '/price_ranges'},
+    { title: 'Featured Comps',       url: '/featured_comps'},
+    { title: 'Featured buildings',   url: '/featured_buildings'},
+    { title: 'Featured agents',      url: '/featured_agents'},
+    { title: 'Featured Listings',    url: '/featured_listings'}
+  ]
 
 end

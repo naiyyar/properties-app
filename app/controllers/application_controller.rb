@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def model_class
-    @model_class ||= params[:controller].singularize.camelize.constantize
+    @model_class ||= controller_name.singularize.camelize.constantize
   end
 
   helper_method :model_class

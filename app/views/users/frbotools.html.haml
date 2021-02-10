@@ -29,7 +29,7 @@
 								%p
 								= render 'layouts/shared/filterrific_form'
 
-					= render 'featured_listings/featured_listing'
+					= render 'featured_listings/featured_listing', featured_listings: @featured_listings
 					.text-center= will_paginate @featured_listings, renderer: BootstrapPagination::Rails
       
 		-else

@@ -1,0 +1,20 @@
+- if current_user.has_role? :admin
+  - if current_user.present?
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+        .pull-right
+          - @featured_by = 'admin'
+          = link_to 'Add New Featured Listing', '#', class: 'btn btn-blue'
+    %h2
+  
+  .pull-right= render 'layouts/shared/filterrific_form'
+  
+  = render 'featured_listings/featured_listing', featured_listings: @featured_listings
+  
+  .text-center= will_paginate @featured_listings, renderer: BootstrapPagination::Rails
+
+
+  :css
+    #sortable_filter{
+      display: none;
+    }

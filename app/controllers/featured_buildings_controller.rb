@@ -2,19 +2,12 @@ class FeaturedBuildingsController < ApplicationController
   load_and_authorize_resource
   before_action :set_featured_building, only: [:show, :edit, :update, :destroy]
 
-  # GET /featured_buildings
-  # GET /featured_buildings.json
-  def index
-    @filterrific = initialize_filterrific(
-      FeaturedBuilding,
-      params[:filterrific],
-      available_filters: [:search_query]
-    ) or return
-    @featured_buildings = @filterrific.find
-                                      .paginate(:page => params[:page], :per_page => 100)
-                                      .includes(:user, :building => [:management_company])
-                                      .order('created_at desc')
+  include Searchable
 
+  def index
+    @featured_buildings = filterrific_search_results.includes(:user, 
+                                                              :building => [:management_company]
+                                                              )
     respond_to do |format|
       format.html
       format.js

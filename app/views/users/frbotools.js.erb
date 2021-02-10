@@ -1,1 +1,2 @@
-$("#filterrific_results").html('<%= j render partial: "featured_listings/featured_listing" %>');
+$("#filterrific_results").html('<%= j render partial: "featured_listings/featured_listing", \
+																			locals: { featured_listings: @featured_listings} %>');

@@ -9,17 +9,12 @@ class BuildingsController < ApplicationController
   after_action :get_neighborhood,     only: [:create, :update]
 
   include BuildingsConcern # create, show
+  include Searchable
 
   def index
-    @filterrific = initialize_filterrific(
-      Building,
-      params[:filterrific],
-      available_filters: [:search_query]
-    ) or return
-    @buildings = @filterrific.find.paginate(page: params[:page], per_page: 100)
-                                  .includes(:management_company, :uploads)
-                                  .reorder(created_at: :desc)
+    @buildings = filterrific_search_results.includes(:management_company, :uploads)
     @buildings_count = @buildings.count
+    
     respond_to do |format|
       format.html
       format.js

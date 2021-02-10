@@ -75,42 +75,10 @@
               %span.fa.fa-angle-left.arrowRight
             
             %ul
-              %li
-                %a{href: buildings_path}
-                  %span.navLabel Buildings
-              %li
-                %a{href: units_path}
-                  %span.navLabel Units
-              %li
-                %a{href: listings_path}
-                  %span.navLabel Listings
-              %li
-                %a{href: users_path}
-                  %span.navLabel Users
-              %li
-                %a{href: '/documents'}
-                  %span.navLabel Documents
-              %li
-                %a{href: reviews_path}
-                  %span.navLabel Reviews
-              %li
-                %a{href: neighborhood_links_path}
-                  %span.navLabel Guides
-              %li
-                %a{href: management_companies_path}
-                  %span.navLabel Management companies
-              %li
-                %a{href: '/price_ranges'}
-                  %span.navLabel Price Range
-              %li
-                %a{href: featured_comps_path}
-                  %span.navLabel Featured Comps
-              %li
-                %a{href: featured_buildings_path}
-                  %span.navLabel Featured buildings
-              %li
-                %a{href: featured_agents_path}
-                  %span.navLabel Featured agents
+              - StaticData::ADMIN_NAV_MENU.each do |nav|
+                %li
+                  %a{href: nav[:url]}
+                    %span.navLabel= nav[:title]
 
         %li.btn_contribute
           %a{href: destroy_user_session_path, 'data-method' => 'delete' }

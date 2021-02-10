@@ -3,17 +3,10 @@ class FeaturedAgentsController < ApplicationController
   before_action :set_featured_agent, except: [:index, :create, :new]
   before_action :set_uploads, only: [:preview, :get_images]
   
-  # GET /featured_agents
-  # GET /featured_agents.json
+  include Searchable
+
   def index
-    @filterrific = initialize_filterrific(
-      FeaturedAgent,
-      params[:filterrific],
-      available_filters: [:search_query]
-    ) or return
-    @featured_agents = @filterrific.find
-                                   .paginate(:page => params[:page], :per_page => 100)
-                                   .includes(:user).order('created_at desc')
+    @featured_agents = filterrific_search_results.includes(:user)
     @photos_count = @featured_agents.sum(:uploads_count)
     respond_to do |format|
       format.html

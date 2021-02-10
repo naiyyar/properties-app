@@ -6,22 +6,20 @@
         %table.table.table-striped#sortable
           %thead
             %tr
-              %th{width: '10%'} Feature ID(#{@featured_listings.count})
+              %th{width: '10%'} Feature ID(#{featured_listings.count})
               %th{width: '16%'} Address
               %th{width: '18%'} Unit
               %th{width: '12%'} Neighborhood
-              %th{width: '12%'} #{@featured_listings.sum(:uploads_count)} Photos
+              %th{width: '12%'} #{featured_listings.sum(:uploads_count)} Photos
               %th{width: '15%'} Start Date
               %th{width: '15%'} End Date
-              - unless params[:type] == 'featured'
-                %th='Email' 
               %th{width: '6%'} Edit
               %th{width: '6%'} Delete
               %th{width: '6%'} Renew
               %th{width: '6%'} Active
           
           %tbody.table
-            - @featured_listings.each do |listing|
+            - featured_listings.each do |listing|
               %tr
                 %td=link_to listing.id, edit_featured_listing_path(listing, featured_by: @featured_by)
                 %td=link_to listing.full_address, object_show_path(listing)
@@ -31,7 +29,6 @@
                 %td= start_date(listing)
                 %td= end_date(listing)
                 - unless params[:type] == 'featured'
-                  %td= show_biller_email(listings)
                   %td
                     = link_to 'edit', edit_featured_listing_path(listing, featured_by: @featured_by) unless listing.featured_by_manager?
                   %td

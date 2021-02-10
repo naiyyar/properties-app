@@ -3,16 +3,10 @@ class FeaturedCompsController < ApplicationController
   before_action :set_featured_comp, only: [:show, :edit, :update, :destroy, :disconnect_building]
   before_action :set_comp_buildings, only: [:show, :edit]
   
+  include Searchable
+
   def index
-    @filterrific = initialize_filterrific(
-      FeaturedComp,
-      params[:filterrific],
-      available_filters: [:search_query]
-    ) or return
-    @featured_comps = @filterrific.find
-                                  .paginate(:page => params[:page], :per_page => 100)
-                                  .includes(:building => [:management_company])
-                                  .order('created_at desc')
+    @featured_comps = filterrific_search_results.includes(:building => [:management_company])
 
     respond_to do |format|
       format.html
