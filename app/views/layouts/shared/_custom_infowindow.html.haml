@@ -35,7 +35,7 @@
     .pb-8{style: 'margin-left: 6px;'}= set_bed_ranges(property, filters)
 
     .clearfix
-    .infoButtons.no-padding= render 'contacts/cta_buttons', building: property, size_class: 'btn-xs btn-block', on_click: true
+    .infoButtons.no-padding= render 'contacts/cta_buttons', property: property, size_class: 'btn-xs btn-block', on_click: true
   
   - else
     = link_to @show_path, style: 'color: #333;' do
