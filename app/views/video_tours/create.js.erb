@@ -1,10 +1,9 @@
-var cat = "<%=@video_tour.building_id%>-<%=@category%>_<%=@video_tour.sort%>";
-var iframe_elem = $('#video-preview-'+cat);
-iframe_elem.attr('src', '<%=@video_tour.url%>');
-
-$('#remove-fields-'+cat).html("<%= j render partial: 'delete_link', locals: {video_tour: @video_tour }%>");
-
-<%if @errors.present? %>
+<% unless @errors.present? %>
+	var cat = "<%=@video_tour.tourable_id%>-<%=@category%>_<%=@video_tour.sort%>";
+	var iframe_elem = $('#video-preview-'+cat);
+	iframe_elem.attr('src', '<%=@video_tour.url%>');
+	$('#remove-fields-'+cat).html("<%= j render partial: 'video_tours/delete_link', locals: {video_tour: @video_tour }%>");
+<%else%>
 	error_message = "<%=@errors.messages[:url][0]%>"
 	bootbox.alert('<b>'+error_message+'</b>');
 <%end%>

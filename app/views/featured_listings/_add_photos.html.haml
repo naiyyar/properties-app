@@ -1,7 +1,7 @@
 - @imageable = featured_listing
 
 .row
-	%div{style: 'margin: 8px;'}
+	.col-lg-6.col-xs-12.col-lg-offset-3
 		.col-lg-6.col-xs-6
 			%b Featured Listing
 		.col-lg-2.col-xs-2.text-center
@@ -27,18 +27,19 @@
 / video tours
 
 - tour_category = 'featured_listing'
+.row
+	.col-lg-6.col-xs-12.col-lg-offset-3
+		%h4.font-bold= link_to 'Add Video <span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: tour_category, bid: @imageable.id, type: 'FeaturedListing' }
+		
+		.category-forms-container{id: "#{tour_category}-form"}
+			- if @video_tours.present?
+				- @video_tours.each do |tour|
+					= render 'featured_listings/add_tour_form', video_tour: tour, category: tour_category, index: tour.sort, object: @imageable
+			- else
+				= render 'featured_listings/add_tour_form', video_tour: @new_video_tour, category: tour_category, index: 0, object: @imageable
 
-%div.row{style: 'margin: 8px;'}
-	%h4.font-bold
-		= link_to 'Add Video <span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: tour_category, bid: @imageable.id, type: 'FeaturedListing' }
-	
-	.category-forms-container{id: "#{tour_category}-form"}
-		- if @video_tours.present?
-			- @video_tours.each do |tour|
-				= render 'featured_listings/add_tour_form', video_tour: tour, category: tour_category, index: tour.sort, object: @imageable
-		- else
-			= render 'featured_listings/add_tour_form', video_tour: @new_video_tour, category: tour_category, index: 0, object: @imageable
-
+%br
+%br
 %br
 
 .row
