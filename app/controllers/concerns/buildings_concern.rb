@@ -42,9 +42,7 @@ module BuildingsConcern
     @distance_results = DistanceMatrixService.new(@building).get_data
     @b_management_company = @building.management_company
     
-    @meta_desc  = "#{@building.building_name_or_address} #{@building.building_street_address} is a #{@building.try(:building_type)} "+ 
-                  "in #{@building.neighbohoods} #{@building.city} and is managed by #{@b_management_company.try(:name) }. "+ 
-                  "View #{@uploaded_images_count} photos, #{@active_listings_count} active listings, #{@past_listings_count} past listings."
+    @meta_desc = meta_description
     
     flash[:notice] = 'Files are uploaded successfully.' if params[:from_uploaded].present?
   end
@@ -133,6 +131,13 @@ module BuildingsConcern
   def resource_not_found
     flash[:error] = 'Record Not found.'
     redirect_to root_path
+  end
+
+  def meta_description
+    "#{@building.building_name_or_address} #{@building.building_street_address} is a #{@building.try(:building_type)} "+ 
+    "in #{@building.neighbohoods} #{@building.city} and is managed by #{@b_management_company.try(:name) }. "+ 
+    "View #{@uploaded_images_count} photos, #{@active_listings_count} active listings, #{@past_listings_count} past listings."
+    
   end
 
 end

@@ -31,7 +31,12 @@
 			Loading map...
 	#pano
 
-	#content.mob-max= render 'show_content', show_summary: true
+	#content.mob-max
+		.singleTop{style: 'position: relative;height: 460px'}
+			.row.sh-slider
+				#sh-slider{style: 'height: 460px;background: #ececec;'}
+ 		
+		= render 'show_content', show_summary: true
 
 %br
 .clearfix

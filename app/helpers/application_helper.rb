@@ -79,11 +79,7 @@ module ApplicationHelper
   end
 
   def mob_header_bg_color_class_helper
-    if search_page? || building_show_page? || management_show_page?
-      'bg-blue'
-    else
-      'bg-white'
-    end
+    show_and_search_page_header? ? 'bg-blue' : 'bg-white'
   end
 
   # showing white header with logo
@@ -92,7 +88,14 @@ module ApplicationHelper
   end
 
   def hide_hood_dropdown?
-    !(search_page? || building_show_page? || management_show_page?)
+    !show_and_search_page_header?
+  end
+
+  def show_and_search_page_header?
+    search_page? || 
+    building_show_page? || 
+    management_show_page? || 
+    featured_listing_show_page?
   end
 
   def current_user_profile_image
@@ -103,10 +106,6 @@ module ApplicationHelper
 
   def search_bar(status)
     @search_bar_hidden == status ? 'hidden' : ''
-  end
-
-  def show_filters?
-    params[:searched_by].present? || params[:filter].present? || params[:sort_by].present?
   end
 
   def search_page? 
@@ -143,6 +142,12 @@ module ApplicationHelper
 
   def current_view
     show_filters? ? 'split-view' : 'other-view'
+  end
+
+  def show_filters?
+    params[:searched_by].present? || 
+    params[:filter].present? || 
+    params[:sort_by].present?
   end
 
 	def resource_name

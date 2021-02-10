@@ -5,7 +5,7 @@
         %span.fa.fa-bars
     
     %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
-      - if search_page? || building_show_page? || management_show_page?
+      - if show_and_search_page_header?
         .split-view-seach{class: "#{search_bar(:hidden)}"}
           - unless browser.device.mobile?
             = render partial: 'home/search_form'
