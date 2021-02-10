@@ -7,16 +7,18 @@
     .building-detail-card{id: "building_details#{featured_listing.id}"}
         
     #building_details88.building-detail-card.featured-comps{ data: { show_url: @show_path } }
-      %h2.name-or-add= rent_with_currency(featured_listing)
+      %h2.name-or-add= "#{featured_listing.address} #{featured_listing.unit}"
+      / = rent_with_currency(featured_listing)
       .cardAddress
         %span.fa.fa-map-marker
-        = featured_listing.full_address
+        = featured_listing.city_state_zip
   
   = link_to @show_path, style: 'color: #000' do
     %div.font-14{style: 'padding: 0px 0px 0px 11px; height: 22px; white-space: nowrap;'}
-      %div.pbt= "#{featured_listing.apartment_type}" if featured_listing.apartment_type.present?
-      %div.pbt= "Available #{date_available(featured_listing)}"
-      %div.pbt= "For Rent By #{featured_listing.name_with_last_initial}."
+      %div.pbt= "#{featured_listing.apartment_type} in #{featured_listing.neighborhood}" if featured_listing.apartment_type.present?
+      %div.pbt= "#{rent_with_currency(featured_listing)} | #{featured_listing.bed} Bed #{featured_listing.bath} Bath"
+      / %div.pbt= "Available #{date_available(featured_listing)}"
+      / %div.pbt= "For Rent By #{featured_listing.name_with_last_initial}."
 
   .clearfix
   
