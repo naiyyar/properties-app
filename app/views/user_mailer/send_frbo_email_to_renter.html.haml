@@ -1,0 +1,35 @@
+%p Searching for an apartment in NYC is painful.  We hope the owner provides you with a positive experience. 
+
+%p If you do not hear back, follow up by sending another email to the address located in the body of this email in the 'To:' field.  We also recommend calling the Owner directly, an underutilized but effective method.
+
+%p 
+	In the meantime, feel free to continue browsing 
+	%a{href: 'https://www.transparentcity.co', target: '_blank'} Transparentcity.  
+	Best of luck on your hunt!
+
+%table
+	%tr
+		%td From:
+		%td=@from_email
+	%tr
+		%td To:
+		%td=@to_email
+	%tr
+		%td Phone #:
+		%td=@phone
+
+%p=simple_format(@message)
+
+
+:css
+	*{
+		font-family: 'Open Sans', sans-serif !important;
+	}
+
+	table tr td, p, a{
+		font-size: 14px;
+	}
+
+	table tr td{
+		border: none;
+	}

@@ -80,6 +80,21 @@ class UserMailer < ApplicationMailer
 		)
 	end
 
+	def send_frbo_email_to_renter listing, params
+		@listing = listing
+		@to_email = listing.email
+		@from_email = params[:email]
+		@phone = params[:phone]
+		@message = params[:message]
+		@address_with_unit = @listing.address_with_unit
+		mail(
+			from: DEFAULT_EMAIL,
+			reply_to: @from_email,
+			to: @from_email,
+			subject: "Your Inquiry Regarding #{@address_with_unit} Has Been Sent"
+		)
+	end
+
 
 	######## EMAIL Structure ########
 	# from:		transparentcity <hello@transparentcity.co>

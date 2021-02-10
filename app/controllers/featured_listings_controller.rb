@@ -17,6 +17,7 @@ class FeaturedListingsController < ApplicationController
     respond_to do |format|
       format.html { 
         UserMailer.contact_frbo(@featured_listing, params[:contact_owner]).deliver
+        UserMailer.send_frbo_email_to_renter(@featured_listing, params[:contact_owner]).deliver
         redirect_to :back, notice: '' 
       }
       format.js

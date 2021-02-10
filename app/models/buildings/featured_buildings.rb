@@ -29,6 +29,7 @@ module Buildings
 
 	  def buildings_with_featured_listings buildings, featured_listings, top2_featured_count = 0
 	  	if featured_listings.present?
+	  		buildings = buildings.to_a
 	  		featured_listings.each_with_index{|fl, index| buildings.insert(top2_featured_count + index, fl)}
 	  	end
 	  	return buildings
