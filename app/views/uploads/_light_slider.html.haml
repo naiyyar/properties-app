@@ -1,0 +1,7 @@
+.sh-slider-container
+	.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
+		- unless browser.device.mobile?
+			#thumb-pager
+				.col-lg-5.col-md-5= render 'buildings/show/ls_pager'
+		%div{ class: "#{'col-lg-7 col-md-7' unless browser.device.mobile?}" }
+			= render 'buildings/show/lightslider', property: property

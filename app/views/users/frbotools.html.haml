@@ -1,0 +1,44 @@
+- if @user.present?
+	.row
+		.col-lg-6.col-xs-12
+			%h2
+			.tabsWidget
+				%ul.nav.nav-tabs.nav-justified{role: 'tablist'}
+					%li{class: @type == 'featured' ? 'active' : ''}
+						%a{href: frbotools_user_path(current_user, type: 'featured')}
+							%b Featured Listings 
+					%li{class: @type == 'billing' ? 'active' : ''}
+						%a{href: frbotools_user_path(current_user, type: 'billing')}
+							%b Billing
+      
+	.tab-content
+		- if @type == 'featured'
+			.tab-pane.fade.in.active
+				.row
+					.col-lg-6
+						.pull-left
+							%h4= @type == 'featured' ? "#{current_user.name}'s Featured Listings" : "#{current_user.name}'s Billing"
+					.col-lg-6
+						.pull-right
+							= form_for FeaturedListing.new do |f|
+								= f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin'
+								= f.hidden_field :user_id, value: @user.id
+								= f.submit 'Add New Featured Listing', class: 'btn btn-primary'
+							
+							- if @filterrific.present?
+								%p
+								= render 'layouts/shared/filterrific_form'
+
+					= render 'featured_listings/featured_listing'
+					.text-center= will_paginate @featured_listings, renderer: BootstrapPagination::Rails
+      
+		-else
+			.tab-pane.fade.in.active
+				%h2
+				= render 'billings/saved_cards', add_new_card_url: new_manager_featured_listing_user_path(current_user, type: 'add_new_card')
+				
+				%h2 Billing Transactions
+
+				= render 'billings/billings'
+				
+				.text-center= will_paginate @billings, renderer: BootstrapPagination::Rails

@@ -1,15 +1,4 @@
 apt_home = {
-  loadImages: function() {
-    var figure;
-    var id;
-    var figures = $('.figure');
-    
-    for(var i = 0; i < figures.length; i++) {
-      figure = figures[i];
-      Card.loadDisplayImageAndCTALinks(figure.parentNode.parentNode.dataset.bid);
-    }
-  },
-
   loadFeaturedBuildings: function() {
     $.ajax({
       url: '/load_featured_buildings',
@@ -19,6 +8,16 @@ apt_home = {
         apt_home.loadImages();
       }
     });
+  },
+
+  loadImages: function() {
+    var figure;
+    var figures = $('.figure');
+    
+    for(var i = 0; i < figures.length; i++) {
+      figure = figures[i];
+      Card.loadDisplayImageAndCTALinks($(figure.parentNode.parentNode));
+    }
   }
 }
 

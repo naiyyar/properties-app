@@ -6,7 +6,7 @@
 		-webkit-overflow-scrolling: auto !important;
 	}
 }
-.buildingsshow{
+.buildingsshow, .featured_listingsshow{
 	#mapView{
 		width: 100%;
     float: right;
@@ -219,7 +219,7 @@
 }
 
 @media screen and (max-width: 767px) {
-	.buildingsshow{
+	.buildingsshow, .featured_listingsshow{
 		#mapView{
 	    float: right;
 		}
@@ -246,7 +246,7 @@
 		}
 	}
 
-	.buildingsshow {
+	.buildingsshow, .featured_listingsshow {
 		#content{
 			overflow-y: scroll;
 			-webkit-overflow-scrolling: touch;

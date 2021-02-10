@@ -92,13 +92,13 @@ class Upload < ApplicationRecord
   # class Methods
   ##################################
 
-  def self.building_photos building_ids
-    where(imageable_id: building_ids, imageable_type: 'Building')
+  def self.building_photos property_ids, type
+    where(imageable_id: property_ids, imageable_type: type)
   end
 
-  def self.cached_building_photos building_ids
-    key = building_ids.present? ? building_ids.join('_') : '1'
-    Rails.cache.fetch([self, 'building_photos', key]) { building_photos(building_ids) }
+  def self.cached_property_photos property_ids, type
+    key = property_ids.present? ? property_ids.join('_') : '1'
+    Rails.cache.fetch([self, "#{type}_photos", key]) { building_photos(property_ids, type) }
   end
 
   def self.uploads_json_hash(uploads)

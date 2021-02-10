@@ -61,12 +61,8 @@
             %span.fa.fa-angle-left.arrowRight
           
           %ul
-            %li
-              %a{href: agenttools_user_path(current_user, type: 'featured')}
-                %span.navLabel Agent Tools
-            %li
-              %a{href: managertools_user_path(current_user, type: 'featured')}
-                %span.navLabel  Manager Tools
+            - tool_nav_helper.each do |item|
+              %li=link_to item[:title], item[:url]
 
         %li.btn_contribute
           %a{href: edit_user_path(current_user)}

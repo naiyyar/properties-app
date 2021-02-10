@@ -8,6 +8,10 @@ module VideoToursHelper
 	# 					class: 'btn btn-o btn-primary btn-sm btn-round font-bold', id: 'showTour'
 	# end
 
+	def show_tour_icon? object
+		['Building', 'FeaturedListing'].include?(object.class.name)
+	end
+
 	def formated_url url
 		encoded_url = URI.encode(url)
 		uri 				= URI.parse(encoded_url)

@@ -14,9 +14,10 @@
 		  </div>
 		<% end %>
 		
-		<%if @imageable.kind_of? FeaturedAgent %>
-			<p class="font-14"> Upload a profile image of yourself here. You can edit images on the next step.</p>
+		<%if @imageable.kind_of?(FeaturedAgent)%>
+			<p class="font-14" style='margin: 0px 8px;'> Upload a profile image of yourself here. You can edit images on the next step.</p>
 		<%end%>
+
 		<div class="form-group">
 			<div class="pull-right" style="padding: 8px 0px;">
 				<% if @imageable.kind_of? Unit %>
@@ -28,7 +29,7 @@
 					<%= link_to 'Back', edit_featured_agent_path(@imageable), class: 'btn btn-default font-18 pl-28 pr-28' %>
 					<%= link_to 'Next', wizard_path(:edit_photos, agent_id: @imageable.id), class: 'btn btn-primary btn-done font-18 pl-28 pr-28' %>
 				<%else%>
-					<%= link_to 'Done', building_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done disabled' %>
+					<%= link_to 'Done', building_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done disabled' if show_done %>
 				<%end%>
 			</div>
 		</div>

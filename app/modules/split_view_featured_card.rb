@@ -1,8 +1,8 @@
-module SplitViewAgentDisplay
-  def get_random_agent nb, searched_by
-    agents = self.active.order('RANDOM()')
-    agents = agents.where(neighborhood: neighborhood(nb)) unless searched_by == 'nyc'
-    return agents.limit(1)
+module SplitViewFeaturedCard
+  def get_random_objects nb, searched_by, limit: 1
+    records = self.active.reorder('RANDOM()')
+    records = records.where(neighborhood: neighborhood(nb)) unless searched_by == 'nyc'
+    return records.limit(limit)
   end
 
   def neighborhood nb

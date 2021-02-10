@@ -1,0 +1,33 @@
+%p 
+	You have a new inquiry through
+	%a{href: "https://www.transparentcity.co/?utm_source=email&utm_medium=receiver&utm_campaign=#{@owner_name}", target: '_blank'} Transparentcity.
+
+%table
+	%tr
+		%td From:
+		%td=@from_email
+	%tr
+		%td Phone #:
+		%td=@phone
+	%tr
+		%td Interested In:
+		%td=@neighborhoods.present? ? @neighborhoods.join(', ') : ''
+	%tr
+		%td Bedrooms
+		%td=@bedrooms
+
+%p=simple_format(@message)
+
+
+:css
+	*{
+		font-family: 'Open Sans', sans-serif !important;
+	}
+
+	table tr td, p, a{
+		font-size: 14px;
+	}
+
+	table tr td{
+		border: none;
+	}

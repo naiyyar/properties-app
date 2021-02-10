@@ -1,16 +1,17 @@
 var map, map2;
 var featured_comp_building_id = parseInt($('#similar_property_id').val());
-var current_building_id       = parseInt($('#cu_building_id').val());
-current_user_id         = $('#cu').val();
-var zoom                = 16;
-var fullscreen_ctrl     = true;
-var redo_search         = false;
-var props               = $("#mapHash").data('map');
-var lat                 = $("#mapHash").data('lat');
-var lng                 = $("#mapHash").data('lng');
-var mob_map             = $('#mob-map');
-var desktop_map         = $('#mapView');
-var header_elem         = document.getElementById('header');
+var current_object_id = parseInt($('#cu_object_id').val());
+current_object_type = $('#cu_object_type').val();
+current_user_id     = $('#cu').val();
+var zoom            = 16;
+var fullscreen_ctrl = true;
+var redo_search     = false;
+var props           = $("#mapHash").data('map');
+var lat             = $("#mapHash").data('lat');
+var lng             = $("#mapHash").data('lng');
+var mob_map         = $('#mob-map');
+var desktop_map     = $('#mapView');
+var header_elem     = document.getElementById('header');
 
 MapObject = {
   
@@ -64,7 +65,7 @@ MapObject = {
         var default_icon = '';
         var latlng       = new google.maps.LatLng(prop.latitude, prop.longitude);
         
-        if(prop_id != current_building_id){
+        if(prop_id != current_object_id){
             var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
             // default icon only when no price info available
             default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),

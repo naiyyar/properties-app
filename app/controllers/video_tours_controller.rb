@@ -3,15 +3,17 @@ class VideoToursController < ApplicationController
   before_action :set_video_tour,  only: [:show, :edit, :update, :destroy]
   before_action :find_builidng,   only: [:new, :show_tour]
   before_action :find_tours,      only: [:show_tour, :new]
-  # GET /video_tours
-  # GET /video_tours.json
+  
   def index
-    @category    = params[:category]
-    @video_tours = VideoTour.where(id: params[:ids])
+    if params[:featured_listing_id].present?
+      @featured_listing = FeaturedListing.find(params[:featured_listing_id])
+      @video_tours = @featured_listing.video_tours
+    else
+      @category    = params[:category]
+      @video_tours = VideoTour.where(id: params[:ids])
+    end
   end
 
-  # GET /video_tours/1
-  # GET /video_tours/1.json
   def show
   end
 
@@ -86,6 +88,6 @@ class VideoToursController < ApplicationController
     end
 
     def video_tour_params
-      params.require(:video_tour).permit(:building_id, :sort, :description, :category, :url, :image)
+      params.require(:video_tour).permit(:tourable_type, :tourable_id, :sort, :description, :category, :url, :image)
     end
 end

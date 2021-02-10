@@ -3,39 +3,10 @@ class FeaturedAgent < ApplicationRecord
 	include ImageableConcern
 	include Billable
 
-  extend SplitViewAgentDisplay
+  extend SplitViewFeaturedCard
   extend RenewPlan
 
-  BEDROOMS = ['Room', 'Studio', '1 Bedroom',  '2 Bedroom',  '3 Bedroom', '4+ Bedroom'].freeze
-
-  BUDGET = [
-    '$1,750',
-    '$2,000',
-    '$2,500',
-    '$3,000',
-    '$3,500',
-    '$4,000',
-    '$4,500',
-    '$5,000',
-    '$6,000',
-    '$7,000',
-    '$8,000',
-    '$9,000',
-    '$10,000',
-    '$12,500',
-    '$15,000'
-  ].freeze
-
-  FEATURED_IN_NEIGHBORHOODS = [
-    'Lower Manhattan',
-    'Midtown Manhattan',
-    'Upper East Side',
-    'Upper West Side',
-    'Upper Manhattan',
-    'Brooklyn',
-    'Queens',
-    'Bronx'
-  ].freeze
+  FEATURING_WEEKS = 'four'
 
 	belongs_to :user
 	has_many   :billings

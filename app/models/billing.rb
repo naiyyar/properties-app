@@ -1,6 +1,15 @@
 class Billing < ApplicationRecord
-	FEATURED_BUILDING_PRICE = 49
-	FEATURED_AGENT_PRICE = 9
+	FEATURED_PRICES = {
+		'FeaturedAgent' => 9,
+		'FeaturedBuilding' => 49,
+		'FeaturedListing' => 14
+	}
+
+	TYPE_TOOLS = {
+		'FeaturedAgent' => 'Agent',
+		'FeaturedBuilding' => 'Manager',
+		'FeaturedListing' => 'FRBOS'
+	}.freeze
 	
 	belongs_to :billable, polymorphic: true
 	belongs_to :user
@@ -80,24 +89,22 @@ class Billing < ApplicationRecord
     end
 	end
 
-	def inv_description
-		"Featured #{billable_type == 'FeaturedAgent' ? 'Agent' : 'Building'} For Four Weeks Starting on"
-	end
+	def 
 
 	def price
-		billable_type == 'FeaturedAgent' ? FEATURED_AGENT_PRICE : FEATURED_BUILDING_PRICE
+		billing_amount(billable_type)
 	end
 
 	def self.prices(type)
-		type == 'FeaturedAgent' ? FEATURED_AGENT_PRICE : FEATURED_BUILDING_PRICE
+		billing_amount(type)
 	end
 	
 	def billing_description
 		billable = self.billable
 		unless renew_date
-			"ID #{billable.id} #{inv_description} #{billable.start_date&.strftime('%b %-d, %Y')}"
+			"ID #{billable.id} #{inv_description} #{billing_start_date(billable.start_date)}"
 		else
-			"ID #{billable.id} Renewed #{inv_description} #{(renew_date + 2.day).strftime('%b %-d, %Y')}"
+			"ID #{billable.id} Renewed #{inv_description} #{billing_start_date(renew_date + 2.day)}"
 		end
 	end
 
@@ -105,11 +112,6 @@ class Billing < ApplicationRecord
 		billing_service = BillingService.new(current_user)
 		charge_obj 			= billing_service.get_charge(stripe_charge_id)
 		billing_service.get_card(stripe_customer_id, charge_obj.payment_method) if charge_obj.present?
-	end
-
-	def set_end_date
-		klass = self.billable_type.constantize
-		klass.find(billable_id).set_expiry_date(self.renew_date)
 	end
 
 	def update_status status
@@ -121,6 +123,30 @@ class Billing < ApplicationRecord
                                        to_email: 	email,
                                        view: 			view_param,
                                        card: 			card).deliver
+	end
+
+	
+	private
+	
+	def set_end_date
+		klass = self.billable_type.constantize
+		klass.find(billable_id).set_expiry_date(self.renew_date)
+	end
+
+	def billing_amount type
+		FEATURED_PRICES[type]
+	end
+
+	def inv_description
+		"Featured #{tool_type} For Four Weeks Starting on"
+	end
+
+	def tool_type
+		billable_type&.split(/(?=[A-Z])/)[1] # camelcase split
+	end
+
+	def billing_start_date date
+		date&.strftime('%b %-d, %Y')
 	end
 	
 end

@@ -47,7 +47,7 @@
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group
                   %label Neighborhood To Be Featured In*
-                  = f.select :neighborhood, options_for_select(FeaturedAgent::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
+                  = f.select :neighborhood, options_for_select(StaticData::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
               
             .row
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -67,9 +67,3 @@
                     = link_to 'Cancel', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'cancel font-18 pl-28 pr-28'
                   = link_to 'Back', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18 pl-28 pr-28'
                   = f.submit 'Next', class: 'btn btn-primary font-18 pl-28 pr-28'
-
-:javascript
-  $('.cancel').on('click', function(e){
-    e.preventDefault();
-    window.location.href = $(this).attr('href')
-  })

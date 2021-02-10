@@ -1,0 +1,13 @@
+.row
+	.col-xs-12.col-sm-12.col-md-6.col-lg-4
+		- if @saved_cards.present?
+			%p.bolder.font-md Credit cards
+			%table.table.table-striped.table-saved-cards
+				- @saved_cards.each_with_index do |card, index|
+					- exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
+					%tr
+						%td.v-align-middle.card-detail="#{card[:brand]&.capitalize} ending in #{card[:last4]} expires #{exp_month}/#{card[:exp_year]}"
+						%td.text-center
+							=link_to 'Delete', 'javascript:;', class: 'btn btn-danger btn-sm delete-card', data: { disable_with: 'Deleting...', cid:  card[:id]}
+		
+		.pull-left=link_to 'Add New Card', add_new_card_url, class: 'btn btn-primary btn-sm'

@@ -12,6 +12,7 @@ class Building < ApplicationRecord
   include Voteable
   include BedRanges
   include CTALinks
+  include Tourable
 
   # Search and filtering methods
   extend Search::BuildingSearch
@@ -65,7 +66,6 @@ class Building < ApplicationRecord
   has_many :contacts, dependent: :destroy
   has_many :listings, -> {where('listings.active' => true)}, foreign_key: :building_id, dependent: :destroy
   has_many :past_listings, foreign_key: :building_id, dependent: :destroy
-  has_many :video_tours, dependent: :destroy
   has_many :units, dependent: :destroy
   accepts_nested_attributes_for :units, :allow_destroy => true
 
@@ -194,6 +194,10 @@ class Building < ApplicationRecord
 
   def featured?
     featured_buildings_count.to_i > 0
+  end
+
+  def property_type
+    self.class.name
   end
 
   def active_comps

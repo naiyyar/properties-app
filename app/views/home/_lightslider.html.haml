@@ -11,7 +11,7 @@
           %span.current 1
           %span.total="/ #{images_count}"
 
-        - if object.kind_of?(Building) && object.video_tours.any?
+        - if show_tour_icon?(object) && object.video_tours.any?
           .video-tour-icon
             %span.fa.fa-video-camera
 

@@ -27,30 +27,3 @@ if(sl_container.length > 0){
 
 	sh_slider.css('background', '#fff');
 }
-
-<% if false %>
-	// price_ranges_and_broker_fee_savings
-	<% if @building&.price.present? %>
-		$('#price_ranges').html("<%= j render partial: 'buildings/show/price_ranges' %>");
-	<%end%>
-
-	<% if @building.bedroom_types? %>
-		$('#broker_fee_savings').html("<%= j render partial: 'buildings/show/broker_fee_savings' %>");
-	<%end%>
-
-	// documents
-	<% if @documents.present? %>
-		$('#building-documents').html("<%= j render partial: 'uploads/documents' %>");
-	<%end%>
-
-	// subways
-	<% if @distance_results.present? %>
-		$('#subways').html("<%= j render partial: 'buildings/show/subways' %>");
-	<%end%>
-
-	// Ratings
-	$('#ratings').html("<%= j render partial: 'buildings/show/rating_list' %>");
-
-	// Loading Building Reviews
-	$('#building-reviews').html("<%= j render partial: 'reviews/review', :collection => @reviews, :as => :review %>");
-<%end%>

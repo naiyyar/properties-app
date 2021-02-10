@@ -2,8 +2,8 @@ module Buildings
 	module FeaturedBuildings
 		PER_PAGE = 20
 
-		def with_featured_buildings buildings
-	    final_results      = {}
+		def with_featured_buildings buildings, featured_listings=nil
+	    final_results      = {all_buildings: nil, map_hash: nil}
 	    top2_featured      = top2_featured_buildings(buildings)
 	    non_featured       = non_featured_buildings(buildings, top2_featured)
 	    per_page_buildings = non_featured.paginate(:page => page_num, :per_page => PER_PAGE)
@@ -16,13 +16,23 @@ module Buildings
 	      per_page_buildings = all_buildings.paginate(:page => page_num, :per_page => PER_PAGE)
 	    end
 	    
-	    final_results[:all_buildings] = all_buildings
-	    final_results[:map_hash]      = Building.buildings_json_hash(buildings)
+	    
+	    final_results.merge!({
+	    	all_buildings: buildings_with_featured_listings(all_buildings, featured_listings, top2_featured.length),
+	    	map_hash: Building.buildings_json_hash(buildings)
+	    })
 	    
 	    return final_results[:all_buildings], final_results[:map_hash], per_page_buildings
 	  end
 
 	  private
+
+	  def buildings_with_featured_listings buildings, featured_listings, top2_featured_count = 0
+	  	if featured_listings.present?
+	  		featured_listings.each_with_index{|fl, index| buildings.insert(top2_featured_count + index, fl)}
+	  	end
+	  	return buildings
+	  end
 	  
 	  # putting featured building on top
 	  def buildings_with_featured_on_top top_2, per_page

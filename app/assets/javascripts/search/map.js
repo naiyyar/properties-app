@@ -119,13 +119,19 @@ var ready = function(){
                 if(object.featured){
                   featured_building_id = object.id
                   featured_marker = marker;
-                  loadMarkerWindow(featured_building_id, map, featured_marker);
+                  if(infobox_data_html){
+                    infobox.setContent(infobox_data_html);
+                    openInfoBox(map, featured_marker);
+                  }
+                  else{
+                    loadMarkerWindow(object.id, map, marker, prop.property_type);
+                  }
                 }
               })(marker, i));
             }
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
               return function() {
-                loadMarkerWindow(json_array[i].id, map, marker);
+                loadMarkerWindow(json_array[i].id, map, marker, prop.property_type);
               }
             })(marker, i));
 
@@ -268,7 +274,7 @@ var ready = function(){
         if(agentid){
           Card.loadFeaturedAgentImagesAndCTALinks(agentid);
         }else{
-          Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+          Card.loadDisplayImageAndCTALinks($(j));
         }
     });
   }

@@ -53,8 +53,8 @@
               %br
               
               %p.font-bold Payment
-              %p= "We will charge you #{number_to_currency(@price)} for four weeks of featuring."
-              %p="Featuring will be renewed for the next four week cycle two days before the feature end date. The renewal setting can be adjusted at any time through our #{@object_type == 'FeaturedAgent' ? 'Agent' : 'Manager'} Tools by editing the featured entry."
+              %p= "We will charge you #{number_to_currency(@price)} for #{@object_type.constantize::FEATURING_WEEKS} weeks of featuring."
+              %p="Featuring will be renewed for the next four week cycle two days before the feature end date. The renewal setting can be adjusted at any time through our #{Billing::TYPE_TOOLS[@object_type]} Tools by editing the featured entry."
               %p 
                 We do not offer refunds. Please review our full 
                 %a.hyper-link{href: '/terms_of_service', target: '_blank'} Terms of Service
@@ -65,7 +65,7 @@
                 .col-sm-12
                   .pull-right
                     = cancel_form_link(@object_type)
-                    = link_to 'Back', previous_page_path, class: 'btn btn-default font-bold'
+                    = link_to 'Back', previous_page_path(@object, @object_type), class: 'btn btn-default font-bold'
                     = submit_tag "Pay $#{@price}.00", class: 'btn btn-primary font-bold btn_submit btn_submit_stripe-form', 'data-tid' => "elements_examples.form.pay_button"
               
           %br

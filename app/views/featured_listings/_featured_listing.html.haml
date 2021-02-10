@@ -1,0 +1,51 @@
+%h2
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    #filterrific_results{style: 'margin-top: 10px;'}
+      .table-overflow
+        %table.table.table-striped#sortable
+          %thead
+            %tr
+              %th{width: '10%'} Feature ID(#{@featured_listings.count})
+              %th{width: '16%'} Address
+              %th{width: '18%'} Unit
+              %th{width: '12%'} Neighborhood
+              %th{width: '12%'} #{@featured_listings.sum(:uploads_count)} Photos
+              %th{width: '15%'} Start Date
+              %th{width: '15%'} End Date
+              - unless params[:type] == 'featured'
+                %th='Email' 
+              %th{width: '6%'} Edit
+              %th{width: '6%'} Delete
+              %th{width: '6%'} Renew
+              %th{width: '6%'} Active
+          
+          %tbody.table
+            - @featured_listings.each do |listing|
+              %tr
+                %td=link_to listing.id, edit_featured_listing_path(listing, featured_by: @featured_by)
+                %td=link_to listing.full_address, object_show_path(listing)
+                %td=link_to listing.unit, '#'
+                %td=link_to listing.try(:neighborhood), '#'
+                %td=link_to listing.uploads_count, '#'
+                %td= start_date(listing)
+                %td= end_date(listing)
+                - unless params[:type] == 'featured'
+                  %td= show_biller_email(listings)
+                  %td
+                    = link_to 'edit', edit_featured_listing_path(listing, featured_by: @featured_by) unless listing.featured_by_manager?
+                  %td
+                    = link_to 'Delete', featured_listing_path(listing), method: :delete, data: { confirm: 'Are you sure you want to delete this featured listing?' }, class: 'text-danger' unless listing.featured_by_manager?
+                  %td
+                    %input.apple-switch.sb-sm.featured-listing.renew.disabled{type: 'checkbox', checked: listing.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => listing.id, disabled: true }
+                  %td
+                    %input.apple-switch.sb-sm.featured-listing{type: 'checkbox', checked: listing.active, style: 'margin: 0px;', data: { fbid: listing.id } }
+                - else
+                  %td 
+                    = link_to 'Edit', next_prev_step_url(listing, step: 'create') if listing.draft? or listing.live?
+                  %td
+                    = link_to 'Delete', featured_listing_path(listing), method: :delete, data: {confirm: 'Are you sure you want to delete this featured listing?'}, class: 'text-danger' if listing.draft?
+                  %td
+                    %input.apple-switch.sb-sm.featured-listing.renew.disabled{type: 'checkbox', checked: listing.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => listing.id, disabled: true }
+                  %td
+                    %input.apple-switch.sb-sm.featured-listing{type: 'checkbox', checked: listing.active, style: 'margin: 0px;', data: { fbid: listing.id, fbby: 'manager', expired: listing.expired? ? 'expired' : '', billingurl: listing.expired? ? next_prev_step_url(listing, step: 'payment') : '' } }

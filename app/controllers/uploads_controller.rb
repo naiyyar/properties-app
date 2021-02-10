@@ -8,13 +8,15 @@ class UploadsController < ApplicationController
     if params[:building_id].present?
       @imageable = Building.find(params[:building_id])
     elsif params[:unit_id]
-      @imageable     = Unit.find(params[:unit_id])
+      @imageable = Unit.find(params[:unit_id])
     elsif params[:featured_agent_id]
       @imageable = FeaturedAgent.find(params[:featured_agent_id])
+    elsif params[:featured_listing_id]
+      @imageable = FeaturedListing.find(params[:featured_listing_id])
     else
       @uploads = Upload.order('created_at desc').limit(52)
     end
-    @uploads = @imageable.uploads.where('image_file_name is not null') if @imageable.present?
+    @uploads = @imageable.uploads.with_image if @imageable.present?
 
     respond_to do |format|
       format.html
@@ -26,8 +28,20 @@ class UploadsController < ApplicationController
     @photos = Upload.where('image_file_name is not null').paginate(params[:page], per_page: 50)
   end
 
+  def lazy_load_images
+    object_klass = params[:object_type].constantize
+    @property = object_klass.find(params[:object_id])
+    assets = @property.get_uploads
+    @uploads, @documents = assets[:image_uploads], assets[:doc_uploads]
+    @uploaded_images_count = @property.uploads_count.to_i
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def documents
-    @documents = Upload.where('document_file_name is not null').includes(:user, :imageable)
+    @documents = Upload.with_doc
   end
 
   def rotate

@@ -12,10 +12,12 @@
 #  image_content_type    :string
 #  image_file_size       :integer
 #  image_updated_at      :datetime
+#  tourable_id      		 :integer
+#  tourable_type      	 :string
 #
 
 class VideoTour < ApplicationRecord
-	belongs_to :building, touch: true
+	belongs_to :tourable, polymorphic: true, touch: true
 	
 	CATEGORIES = [['Amenities', 	'amenities'], 
 								['Studio', 			'studio'], 

@@ -15,6 +15,7 @@
 //= require jquery.mask.min
 //= require mask
 //= require search_modal
+//= require featured_listings
 //= require ./search
 
 setTimeout(function(){ 
@@ -28,16 +29,18 @@ const Device = {
 };
 
 Card = {
-	loadDisplayImageAndCTALinks: function(building_id){
-	  var fig_elem 			= $("#figure"+building_id);
-	  var cta_elem 			= $("#cta-links"+building_id);
+	loadDisplayImageAndCTALinks: function(elem, type){
+		var prop_id = elem.data('bid')
+    var type = elem.data('proptype')
+	  var fig_elem 			= $("#figure"+prop_id);
+	  var cta_elem 			= $("#cta-links"+prop_id);
 	  var filter_params = $('#filter-params').data('filterparams');
-	  
+	  var property_type = type || 'Building'
 	  $.ajax({
 	    url: '/get_images',
 	    dataType: 'json',
 	    type: 'get',
-	    data: { building_id: building_id, filter_params: filter_params },
+	    data: { object_id: prop_id, filter_params: filter_params, property_type: type },
 	    success: function(response){
 	      fig_elem.html(response.html);
 	      Card.initLightSlider(fig_elem.find('.gallery'), Card.enableTouch(), 1);

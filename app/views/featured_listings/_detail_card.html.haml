@@ -1,0 +1,27 @@
+- @show_path = object_show_path(featured_listing)
+.card.search-view-card{class: "#{@border_class} #{home_page? ? 'home' : ''}", 'data-bid' => featured_listing.id, id: "card-#{featured_listing.id}", 'data-proptype' => featured_listing.class.name}
+  = link_to @show_path do
+    .figure{style: 'position: relative;', id: "figure#{featured_listing.id}"}
+      .shimmer
+    
+    .building-detail-card{id: "building_details#{featured_listing.id}"}
+        
+    #building_details88.building-detail-card.featured-comps{ data: { show_url: @show_path } }
+      %h2.name-or-add= rent_with_currency(featured_listing)
+      .cardAddress
+        %span.fa.fa-map-marker
+        = featured_listing.full_address
+  
+  = link_to @show_path, style: 'color: #000' do
+    %div.font-14{style: 'padding: 0px 0px 0px 11px; height: 22px; white-space: nowrap;'}
+      %div.pbt= "#{featured_listing.apartment_type}" if featured_listing.apartment_type.present?
+      %div.pbt= "Available #{date_available(featured_listing)}"
+      %div.pbt= "For Rent By #{featured_listing.name_with_last_initial}."
+
+  .clearfix
+  
+  %br
+  
+  .cta_buttons{id: "cta-links#{featured_listing.id}"}
+      
+.clearfix

@@ -28,7 +28,7 @@ class BillingService
 			customer.create_source(cust_id, { source: @payment_token })
 		rescue StandardError, AnotherError => e
 			# when No such customer
-			set_customer_id
+			Struct.new(id: set_customer_id)
 		end
 	end
 
@@ -61,7 +61,7 @@ class BillingService
 		stripe_charge.create(
     	customer:  		customer_id,
     	card: 				card_id,
-      amount: 	 		billing.price * 100,
+      amount: 	 		billing.amount.to_i * 100,
       currency:  		'usd',
       description: 	billing.billing_description,
       receipt_email: @customer_email

@@ -28,6 +28,8 @@
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="col-sm-6">
           <h3>Building Information</h3>
+          <br />
+          <div class="checkbox custom-checkbox"><label><%= f.check_box :no_fee %> <span class="fa fa-check"></span> <%= 'No Fee Building' %></label></div>
           <% BuildingAmenities.building_edit_emenities.each do |key, value| %>
             <% if value == 'Elevator' %>
               <div class="checkbox custom-checkbox"><label><%= check_box_tag :elevator,'yes', @building.elevator ? true : false %> <span class="fa fa-check"></span> <%= value %></label></div>

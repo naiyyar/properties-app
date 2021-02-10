@@ -39,7 +39,7 @@ module BuildingsConcern
     @reviews       = @reviews.includes(:reviewable) if @review.present?
     @price_ranges  = @building.price_ranges
     @saved_amounts = @building.broker_fee_savings
-    @distance_results = DistanceMatrix.new(@building).get_data
+    @distance_results = DistanceMatrixService.new(@building).get_data
     @b_management_company = @building.management_company
     
     @meta_desc  = "#{@building.building_name_or_address} #{@building.building_street_address} is a #{@building.try(:building_type)} "+ 

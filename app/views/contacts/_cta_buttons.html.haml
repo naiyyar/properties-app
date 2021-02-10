@@ -1,40 +1,45 @@
 .contact-links
-	- listings_count = @listings.blank? ? building.get_listings(filter_params).size : @listings.size
-	- if building.all_three_cta?(listings_count)
-		.c-links
-			%section=check_availability_button(building.web_url, 'btn-o')
-			%section=active_listings_button(building, on_click, 'btn-o', listings_count)
-
-		.d-block=contact_leasing_button(building, on_click, 'btn-block')
-
-	- elsif building.availability_and_contacts_cta? && listings_count <= 0
-		.d-block.h-42
-		.c-links
-			%section= contact_leasing_button(building, on_click, 'btn-block')
-			%section=check_availability_button(building.web_url, 'btn-o')
-
-	- elsif building.active_web_url? && listings_count > 0 and !building.has_active_email?
-		.d-block.h-42
-		.c-links
-			%section=check_availability_button(building.web_url, 'btn-block')
-			%section=active_listings_button(building, on_click, 'btn-o', listings_count)
-
-	- elsif !building.active_web_url? && listings_count > 0 and building.has_active_email?
-		.d-block.h-42
-		.c-links
-			%section= contact_leasing_button(building, on_click, 'btn-block')
-			%section=active_listings_button(building, on_click, 'btn-o', listings_count)
-
-	- elsif building.active_web_url? && listings_count <= 0 and !building.has_active_email?
+	- if property.kind_of?(FeaturedListing)
 		.c-links.h-42
-		.d-block=check_availability_button(building.web_url, 'btn-block')
+		.d-block=featured_listing_contact_owner_button(property, size_class: 'btn-block')
+	
+	- else
+		- listings_count = @listings.blank? ? property.get_listings(filter_params).size : @listings.size
+		- if property.all_three_cta?(listings_count)
+			.c-links
+				%section=check_availability_button(property.web_url, 'btn-o')
+				%section=active_listings_button(property, on_click, 'btn-o', listings_count)
 
-	- elsif !building.active_web_url? && listings_count <= 0 and building.has_active_email?
-		.c-links.h-42
-		.d-block= contact_leasing_button(building, on_click, 'btn-block')
-	- elsif building.active_web_url?
-		.d-block.h-42.invisible=check_availability_button(building.web_url, 'btn-block')
-		.c-links
-	- elsif listings_count > 0
-		.c-links.h-42
-		.d-block=active_listings_button(building, on_click, 'btn-block', listings_count)
+			.d-block=contact_leasing_button(property, on_click, 'btn-block')
+
+		- elsif property.availability_and_contacts_cta? && listings_count <= 0
+			.d-block.h-42
+			.c-links
+				%section= contact_leasing_button(property, on_click, 'btn-block')
+				%section=check_availability_button(property.web_url, 'btn-o')
+
+		- elsif property.active_web_url? && listings_count > 0 and !property.has_active_email?
+			.d-block.h-42
+			.c-links
+				%section=check_availability_button(property.web_url, 'btn-block')
+				%section=active_listings_button(property, on_click, 'btn-o', listings_count)
+
+		- elsif !property.active_web_url? && listings_count > 0 and property.has_active_email?
+			.d-block.h-42
+			.c-links
+				%section= contact_leasing_button(property, on_click, 'btn-block')
+				%section=active_listings_button(property, on_click, 'btn-o', listings_count)
+
+		- elsif property.active_web_url? && listings_count <= 0 and !property.has_active_email?
+			.c-links.h-42
+			.d-block=check_availability_button(property.web_url, 'btn-block')
+
+		- elsif !property.active_web_url? && listings_count <= 0 and property.has_active_email?
+			.c-links.h-42
+			.d-block= contact_leasing_button(property, on_click, 'btn-block')
+		- elsif property.active_web_url?
+			.d-block.h-42.invisible=check_availability_button(property.web_url, 'btn-block')
+			.c-links
+		- elsif listings_count > 0
+			.c-links.h-42
+			.d-block=active_listings_button(property, on_click, 'btn-block', listings_count)

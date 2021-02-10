@@ -1,0 +1,36 @@
+- uploads.each_with_index do |upload, index|
+	- url = upload.image.url
+	- if current_user&.has_role?(:admin)
+		.photo-grid-item.image-gallery{'data-object-id' => "#{upload.id}", 'data-sort-id' => index}
+			%a.propWidget-1{caption: "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-role' => 'slider', href: "#{url}"}
+				= image_tag url, alt: 'Image', class: 'img-thumbnail'
+			= delete_upload_link(upload)
+			= edit_upload_link(upload)
+			= link_to '<span class="fa fa-repeat" />'.html_safe, rotate_upload_path(upload), class: 'btn btn-warning btn-xs rotate'
+			%div{style: 'position: absolute; right: 5px; bottom: 25px;'}
+				= link_to number_to_human_size(upload.image_file_size), 'javascript:;', class: 'btn btn-default btn-xs'
+	- else
+		.image-gallery{class: "#{upload.imageable_type == 'FeaturedListing' ? 'photo-grid-item' : 'col-sm-3'}"}
+			%a.propWidget-1{'data-caption' => "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-imageable' => "#{imageable(upload)}", href: "#{url}", 'data-role' => 'slider'}
+				.image-rotator{style: 'height: 236px;'}= image_tag url, alt: 'Image', class: 'img-thumbnail'
+
+			- if upload.imageable_type == 'FeaturedListing'
+				.actions-links
+					= delete_upload_link(upload)
+					= edit_upload_link(upload)
+
+
+/ jquery click function in zapp.js
+.loading.hidden Loading…
+:javascript
+	$('.photo-grid-container').sortablePhotos({
+		selector: '> .photo-grid-item',
+		sortable: true,
+	});
+
+:css
+	.actions-links{
+		position: absolute;
+		top: 3px;
+		right: 3px;
+	}

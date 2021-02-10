@@ -1,5 +1,4 @@
 class BillingMailer < ApplicationMailer
-	DEFAULT_EMAIL_WITH_NAME = %(transparentcity <hello@transparentcity.co>)
 	
 	def send_payment_receipt options={}
 		@billing = options[:billing]
@@ -9,7 +8,7 @@ class BillingMailer < ApplicationMailer
 		@card 	 = options[:card]
 		mail(
 			to: to_email,
-			from: DEFAULT_EMAIL_WITH_NAME,
+			from: DEFAULT_EMAIL,
 			subject: "Payment Receipt (##{@billing.receipt_number})"
 		)
 	end
@@ -17,7 +16,7 @@ class BillingMailer < ApplicationMailer
 	def no_card_payment_failed to_email
 		mail(
 			to: to_email,
-			from: DEFAULT_EMAIL_WITH_NAME,
+			from: DEFAULT_EMAIL,
 			subject: 'Your most recent invoice payment failed.'
 		)
 	end
@@ -27,7 +26,7 @@ class BillingMailer < ApplicationMailer
 		@last4 = options[:last4]
 		mail(
 			to: options[:to_email],
-			from: DEFAULT_EMAIL_WITH_NAME,
+			from: DEFAULT_EMAIL,
 			subject: 'Your most recent invoice payment failed.'
 		)
 	end
@@ -35,7 +34,7 @@ class BillingMailer < ApplicationMailer
 	def charge_expired options={}
 		mail(
 			to: options[:to_email],
-			from: DEFAULT_EMAIL_WITH_NAME,
+			from: DEFAULT_EMAIL,
 			subject: 'Your most recent invoice payment failed.'
 		)
 	end

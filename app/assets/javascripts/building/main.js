@@ -4,6 +4,7 @@
 //= require lightslider
 //= require gmap
 //= require search_modal
+//= require featured_listings
 //= require ./show_map_handler
 
 
@@ -18,11 +19,13 @@ $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
 
 $(document).ready(function() {
   if($('#sh-slider').length > 0) {
-    var building_id = $('#cu_building_id').val();
+    var object_id = $('#cu_object_id').val();
+    var type = $('#cu_object_type').val();
     $.ajax({
-      url: '/buildings/'+building_id+'/lazy_load_content',
+      url: '/uploads/'+object_id+'/lazy_load_images',
       dataType: 'script',
       type: 'get',
+      data: { object_type: type },
       success: function(){}
     });
   }
@@ -33,6 +36,6 @@ $(document).ready(function() {
 var svc = $('.search-view-card');
 if(svc.length > 0){
   svc.each(function(i, j){
-    Card.loadDisplayImageAndCTALinks($(j).data('bid'));
+    Card.loadDisplayImageAndCTALinks($(j));
   });
 }

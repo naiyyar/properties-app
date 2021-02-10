@@ -144,11 +144,7 @@ class BillingsController < ApplicationController
     end
 
     def redirect_path
-      if @billing.billable_type == 'FeaturedBuilding'
-        managertools_user_path(current_user, type: 'featured')
-      else
-        agenttools_user_path(current_user, type: 'featured')
-      end
+      view_context.redirect_url(@billing.billable_type)
     end
 
     # TODO: TO REMOVE WHEN MERGING WITH PRODUCTION
