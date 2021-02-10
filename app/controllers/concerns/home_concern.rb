@@ -29,7 +29,7 @@ module HomeConcern
     
     if @buildings.present?
       @filter_params   = params[:filter]
-      @all_buildings, @hash, @per_page_buildings = search_buildings.with_featured_buildings(@buildings)
+      @all_buildings, @hash, @per_page_buildings = search_buildings.with_featured_buildings(@buildings, @featured_listings)
       @lat, @lng       = @hash[0]['latitude'], @hash[0]['longitude']
       @listings_count  = Listing.listings_count(@buildings, @all_buildings, @filter_params)
       @buildings_count = @hash.length rescue 0

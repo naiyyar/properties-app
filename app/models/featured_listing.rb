@@ -5,7 +5,7 @@ class FeaturedListing < ApplicationRecord
   include Tourable
 
   extend RenewPlan
-  extend SplitViewDisplayCard
+  extend SplitViewFeaturedCard
 
   # constant
   FEATURING_WEEKS = 'two'

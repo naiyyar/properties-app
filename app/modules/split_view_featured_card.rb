@@ -1,6 +1,6 @@
-module SplitViewDisplayCard
+module SplitViewFeaturedCard
   def get_random_objects nb, searched_by, limit: 1
-    records = self.active.order('RANDOM()')
+    records = self.active.reorder('RANDOM()')
     records = records.where(neighborhood: neighborhood(nb)) unless searched_by == 'nyc'
     return records.limit(limit)
   end

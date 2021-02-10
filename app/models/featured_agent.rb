@@ -3,7 +3,7 @@ class FeaturedAgent < ApplicationRecord
 	include ImageableConcern
 	include Billable
 
-  extend SplitViewDisplayCard
+  extend SplitViewFeaturedCard
   extend RenewPlan
 
   FEATURING_WEEKS = 'four'
