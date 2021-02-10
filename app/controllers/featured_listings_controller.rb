@@ -89,9 +89,8 @@ class FeaturedListingsController < ApplicationController
   def update
     respond_to do |format|
       if @featured_listing.update(featured_listing_params)
-        # session[:rental_listing_id] = @featured_listing.id
         format.html { redirect_to next_step_url(params[:next_step]) }
-        format.json { render :show, status: :ok, location: @featured_listing }
+        format.json { render json: @featured_listing }
       else
         format.html { 
           flash[:error] = @featured_listing.errors.full_messages

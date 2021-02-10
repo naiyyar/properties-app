@@ -1,6 +1,7 @@
 module Billable
 	extend ActiveSupport::Concern
-	included do
+	
+  included do
 		has_many :billings, as: :billable
 	end
 
