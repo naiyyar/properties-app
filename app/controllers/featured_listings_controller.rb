@@ -33,6 +33,7 @@ class FeaturedListingsController < ApplicationController
     @uploaded_images_count = @featured_listing.uploads_count
     @distance_results = DistanceMatrixService.new(@featured_listing).get_data
     @gmaphash = [@featured_listing.as_json] # for map
+    @meta_desc = meta_description
   end
 
   def new
@@ -121,5 +122,13 @@ class FeaturedListingsController < ApplicationController
 
     def next_step_url step
       view_context.next_prev_step_url(@featured_listing, step: step)
+    end
+
+    # [Address] [Unit Number] is a [#] Bed [#] Bath apartment for rent in a  [Apartment Type] 
+    # in [Neighborhood] for $[Monthly Rent] and is managed by [First Name] [Last Initial].
+    def meta_description
+      "#{@featured_listing.address_with_unit} is a #{@featured_listing.bed} Bed" +
+      " #{@featured_listing.bath} Bath apartment for rent in a #{@featured_listing.apartment_type} in" +
+      " #{@neighborhood} for $#{@featured_listing.rent} and is managed by #{@featured_listing.name_with_last_initial}."
     end
 end

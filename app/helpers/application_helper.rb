@@ -67,7 +67,11 @@ module ApplicationHelper
   end
 
   def seo_title_after_pipe
-    action_name == 'show' ? 'Transparentcity' : 'All No Fee Apartments'
+    if featured_listing_show_page?
+      'Apartment For Rent In NYC'
+    else
+      action_name == 'show' ? 'Transparentcity' : 'All No Fee Apartments'
+    end
   end
 
   def saved_buildings_page?
