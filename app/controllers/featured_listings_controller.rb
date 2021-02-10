@@ -6,7 +6,7 @@ class FeaturedListingsController < ApplicationController
   include Searchable
   
   def index
-  	@featured_listings = filterrific_search_results
+  	@featured_listings = filterrific_search_results.includes([:user])
   	respond_to do |format|
       format.html
       format.js
@@ -56,6 +56,8 @@ class FeaturedListingsController < ApplicationController
       @listing_amenities = @featured_listing.amenities
     when :add_photos
       @imageable = @featured_listing
+      @new_video_tour = VideoTour.new
+      @video_tours = @imageable.video_tours.where(category: 'featured_listing')
       session[:back_to] = request.fullpath
     when :edit_photos
       @uploads      = @featured_listing.uploads

@@ -39,6 +39,7 @@ ready = ->
 	data_sortable = $('#sortable').DataTable({
 	  paging: false,
 	  scrollY: false,
+	  scrollX: true,
 	  "order": [],
 	  "columnDefs": [
 	    { "orderable": false, "targets": 'no-sort' }

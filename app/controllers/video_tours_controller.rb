@@ -1,7 +1,7 @@
 class VideoToursController < ApplicationController
   load_and_authorize_resource except: :index
   before_action :set_video_tour,  only: [:show, :edit, :update, :destroy]
-  before_action :find_builidng,   only: [:new, :show_tour]
+  before_action :find_tourable,   only: [:new, :show_tour]
   before_action :find_tours,      only: [:show_tour, :new]
   
   def index
@@ -79,12 +79,12 @@ class VideoToursController < ApplicationController
       @video_tour = VideoTour.find(params[:id])
     end
 
-    def find_builidng
-      @building = Building.find(params[:building_id])
+    def find_tourable
+      @tourable = params[:tourable_type].constantize.find(params[:tourable_id])
     end
     
     def find_tours
-      @video_tours = @building.video_tours rescue nil
+      @video_tours = @tourable.video_tours rescue nil
     end
 
     def video_tour_params

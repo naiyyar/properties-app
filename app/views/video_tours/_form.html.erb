@@ -22,7 +22,7 @@
     <% VideoTour::CATEGORIES.each do |category| %>
       <% index = 0 %>
       <% video_tours = @video_tours.where(category: category[1]) %>
-      <h4 class="font-bold"><%= category[0] %> <%=link_to '<span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: category, bid: @building.id } %></h4>
+      <h4 class="font-bold"><%= category[0] %> <%=link_to '<span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: category[1], bid: @building.id, type: 'Building' } %></h4>
       <div id="<%=category[1]%>-form" class="category-forms-container">
         <% if video_tours.present? %>
           <% video_tours.each do |tour| %>

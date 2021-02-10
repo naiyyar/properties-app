@@ -7,7 +7,7 @@
         .panel-body
           = form_for featured_listing, class: 'form-horizontal' do |f|
             .row
-              .col-xs-6.col-sm-6.col-md-8.col-lg-8
+              .col-xs-12.col-sm-6.col-md-8.col-lg-8
                 %b.font-14.hyper-link Listing contact information
             %br
             
@@ -35,39 +35,39 @@
             %br
             %br
             .row
-              .col-xs-6.col-sm-6.col-md-8.col-lg-8
+              .col-xs-12.col-sm-6.col-md-8.col-lg-8
                 %b.font-14.hyper-link Listing location
             %br
 
             .row
-              .col-xs-6.col-sm-6.col-md-3.col-lg-6
+              .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Neighborhood To Be Featured In*
                   = f.select :neighborhood, options_for_select(StaticData::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
 
             .row
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+              .col-xs-12.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Address*
                   = f.text_field :address, class: 'form-control validate', autocomplete: 'off'
 
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+              .col-xs-12.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Unit Number*
                   = f.text_field :unit, class: 'form-control validate'
 
             .row
-              .col-xs-6.col-sm-6.col-md-3.col-lg-5
+              .col-xs-8.col-sm-6.col-md-3.col-lg-5
                 .form-group
                   %label City*
                   = f.text_field :city, class: 'form-control validate'
 
-              .col-xs-6.col-sm-6.col-md-3.col-lg-2
+              .col-xs-4.col-sm-6.col-md-3.col-lg-2
                 .form-group
                   %label State*
                   = f.text_field :state, class: 'form-control', disabled: true
 
-              .col-xs-6.col-sm-6.col-md-3.col-lg-5
+              .col-xs-12.col-sm-6.col-md-3.col-lg-5
                 .form-group
                   %label Zip Code*
                   = f.text_field :zipcode, class: 'form-control validate'
@@ -75,40 +75,40 @@
             %br
             %br
             .row
-              .col-xs-6.col-sm-6.col-md-8.col-lg-8
+              .col-xs-12.col-sm-6.col-md-8.col-lg-8
                 %b.font-14.hyper-link Listing Information
             %br
 
             .row
-              .col-xs-6.col-sm-6.col-md-3.col-lg-6
+              .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Monthly Rent $*
                   = f.number_field :rent,  class: 'form-control'
 
             .row
-              .col-xs-6.col-sm-6.col-md-3.col-lg-6
+              .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Number of bedrooms*
                   = f.number_field :bed,  class: 'form-control'
 
-              .col-xs-6.col-sm-6.col-md-3.col-lg-6
+              .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Number of bathrooms*
                   = f.number_field :bath,  class: 'form-control'
 
             .row
-              .col-xs-6.col-sm-6.col-md-3.col-lg-6
+              .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Size In Square Feet
                   = f.number_field :size,  class: 'form-control'
 
-              .col-xs-6.col-sm-6.col-md-3.col-lg-6
+              .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Apartment Type
                   = f.select :apartment_type, options_for_select(FeaturedListing::APARTMENT_TYPE, f.object.apartment_type), { prompt: 'Select Apartment Type'}, { class: 'form-control validate', required: true }
             
             .row
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+              .col-xs-12.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Date Available
                   = f.text_field :date_available,  class: 'form-control datepicker', :autocomplete => :off
@@ -120,6 +120,5 @@
                   = hidden_field_tag :next_step, :add_amenities
             .form-group
               .col-sm-12
-                .pull-right
-                  = link_to 'Cancel', frbotools_user_path(current_user, type: 'featured'), class: 'cancel btn btn-default'
-                  = f.submit 'Next ->', class: 'btn btn-primary'
+                .pull-left= cancel_form_link('FeaturedListing')
+                .pull-right= f.submit 'Next ->', class: 'btn btn-primary'

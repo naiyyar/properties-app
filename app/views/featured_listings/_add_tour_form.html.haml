@@ -1,0 +1,34 @@
+- cat = "#{object.id}-#{category}_#{index}"
+%div{id: "tour-form-container-#{cat}"}
+  = form_for video_tour, remote: true, html: { class: 'form-horizontal', id: "tour_#{cat}", style: 'margin: 8px 0px;', multipart: true }, authenticity_token: true do |f|
+    = f.hidden_field :tourable_id, value: object.id, id: "video_tour_object_id_#{cat}"
+    = f.hidden_field :tourable_type, value: object.class.name, id: "video_tour_object_type_#{cat}"
+    = f.hidden_field :sort, value: index, id: "video_tour_sort_#{cat}", class: 'video_tour_sort' if video_tour.new_record?
+    = f.hidden_field :category, value: category,  id: "video_tour_category_#{cat}"
+    .row
+      - if !video_tour.new_record?
+        .col-lg-1
+          %label Sort
+          = f.text_field :sort, id: "video_tour_sort_#{cat}", class: 'form-control video_tour_sort'
+
+      .col-lg-3.col-xs-6
+        %label Url*
+        = f.text_field :url, class: 'form-control validate', id: "video_tour_url_#{cat}", required: true
+
+      %div.visible-xs
+        %br
+      
+      .col-lg-1.col-xs-2
+        %label.invisible.hidden-xs AddAdd*
+        = f.submit 'Add', class: 'btn btn-success btn-sm', style: "#{browser.device.mobile? ? 'margin-top: 11px;' : ''}"
+      
+      .col-lg-2.col-xs-3{style: "height: 80px;"}
+        .video-preview
+          - unless video_tour.image.present?
+            %iframe{src: video_tour.new_record? ? '' : video_tour.url, style: 'height: 100%;width: 100%;border: none;', id: "video-preview-#{cat}"}
+          - else
+            =image_tag video_tour.image.url, style: 'height: 100%;width: 100%;border: none;'
+
+      .col-lg-1.col-xs-1{style: 'height: 80px;'}
+        .text-center.vertically-middle{id: "remove-fields-#{cat}", style: "#{browser.device.mobile? ? 'margin-top: 11px;' : ''}"}
+          =render 'video_tours/delete_link', video_tour: video_tour

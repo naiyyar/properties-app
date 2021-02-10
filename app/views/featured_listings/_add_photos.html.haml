@@ -1,4 +1,15 @@
 - @imageable = featured_listing
+
+.row
+	%div{style: 'margin: 8px;'}
+		.col-lg-6.col-xs-6
+			%b Featured Listing
+		.col-lg-2.col-xs-2.text-center
+			%a{href: '#', style: 'color: #000;'}
+				%span.fa.fa-refresh.fa-2x
+		.col-lg-4.col-xs-4
+			= link_to 'Preview', '#preview', class: 'btn btn-success btn-block'
+
 .row
 	.col-lg-12.col-lg-offset-3
 		%p.font-bold.font-16{style: 'margin: 8px;'} Add Photos
@@ -13,15 +24,29 @@
 			.row.photo-grid-container#featured-listing-image
 				= render 'uploads/image_gallery', uploads: @imageable.uploads
 
+/ video tours
+
+- tour_category = 'featured_listing'
+
+%div.row{style: 'margin: 8px;'}
+	%h4.font-bold
+		= link_to 'Add Video <span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: tour_category, bid: @imageable.id, type: 'FeaturedListing' }
+	
+	.category-forms-container{id: "#{tour_category}-form"}
+		- if @video_tours.present?
+			- @video_tours.each do |tour|
+				= render 'featured_listings/add_tour_form', video_tour: tour, category: tour_category, index: tour.sort, object: @imageable
+		- else
+			= render 'featured_listings/add_tour_form', video_tour: @new_video_tour, category: tour_category, index: 0, object: @imageable
+
 %br
 
 .row
 	.col-lg-6.col-lg-offset-3
-		.pull-left
-			= link_to 'Cancel', @imageable.featured_by_manager? ? frbotools_user_path(current_user, type: 'featured') : featured_listings_path, class: 'font-18 pl-28 pr-28'
-		
-		.pull-right
-			= link_to '<- Back', next_prev_step_url(@imageable, step: 'add_amenities'), class: 'btn btn-default font-18 pl-28 pr-28'
-			= link_to 'Next ->', next_prev_step_url(@imageable, step: 'payment'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
+		%div{style: 'margin: 8px;'}
+			.pull-left= cancel_form_link('FeaturedListing')
+			.pull-right
+				= link_to '<- Back', next_prev_step_url(@imageable, step: 'add_amenities'), class: 'btn btn-primary font-18 pl-28 pr-28'
+				= link_to 'Next ->', next_prev_step_url(@imageable, step: 'payment'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
 
 %br
