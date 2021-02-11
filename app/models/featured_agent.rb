@@ -7,9 +7,22 @@ class FeaturedAgent < ApplicationRecord
   extend RenewPlan
 
   FEATURING_WEEKS = 'four'
+  # validations
+  FIELDS_TO_VALIDATES = [ :first_name,
+                          :last_name,
+                          :email,
+                          :broker_firm,
+                          :license_number,
+                          :neighborhood
+                        ]
 
 	belongs_to :user
 	has_many   :billings
+
+  # validations
+  FIELDS_TO_VALIDATES.each do |field|
+    validates field, presence: true
+  end
 
 	scope :active,      -> { where(active: true) }
 	scope :inactive,    -> { where(active: false) }

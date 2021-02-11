@@ -18,11 +18,11 @@ $(document).ready(function(){
 		// changed the passed param to one accepted by
 		// our rails app
 		paramName: param_name,
-		headers: {
-			"Accept": "application/javascript",
-      "Cache-Control": "no-cache",
-      "X-Requested-With": "XMLHttpRequest"
-		},
+		// headers: {
+		// 	"Accept": "application/javascript",
+  //     "Cache-Control": "no-cache",
+  //     "X-Requested-With": "XMLHttpRequest"
+		// },
 		// show remove links on each image upload
 		addRemoveLinks: true,
 		dictDefaultMessage: "<b>Add images </b> <br/> Drop Your Images Or Click To Browse",

@@ -5,7 +5,7 @@ class Ability
     if user.nil?
       can :manage, :all
       cannot :index, [Building, Unit, Review, Contact, Upload]
-      cannot :documents, Upload
+      cannot [:delete, :create, :documents], Upload
       cannot [:contribution, :index, :managertools, :agenttools, :frbotools], User
       cannot [:index, :new, :edit], [ManagementCompany, FeaturedAgent, FeaturedBuilding, FeaturedListing]
       cannot [:index, :show, :saved_buildings], User

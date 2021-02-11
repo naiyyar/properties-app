@@ -140,7 +140,7 @@ Rails.application.routes.draw do
       get :saved_buildings
       get '/frbotools/:type',        to: 'users#frbotools',        as: :frbotools
       get '/frbotools/:type/new',    to: 'featured_listings#new',  as: :new_manager_featured_listing
-      get '/frbotools/:type/:step',  to: 'featured_listings#edit', as: :edit_manager_featured_listing
+      get '/frbotools/:type/:step',  to: 'users#featured_listings_steps', as: :edit_manager_featured_listing
       get '/managertools/:type',     to: 'users#managertools',     as: :managertools
       get '/managertools/:type/new', to: 'featured_buildings#new', as: :new_manager_featured_building
       get '/agenttools/:type',       to: 'users#agenttools',       as: :agenttools

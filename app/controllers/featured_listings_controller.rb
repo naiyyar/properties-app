@@ -1,5 +1,5 @@
 class FeaturedListingsController < ApplicationController
-	# load_and_authorize_resource
+	load_and_authorize_resource
   before_action :authenticate_user!, except: [:show, :contact_owner]
   before_action :set_featured_listing, only: [:show, :update, :destroy, :contact_owner]
   
@@ -42,35 +42,12 @@ class FeaturedListingsController < ApplicationController
     @featured_listing = FeaturedListing.new
     @object_id      = params[:object_id]
     @object_type    = 'FeaturedListing'
-    @price          = Billing::FEATURED_PRICE[@object_type]
+    @price          = Billing::FEATURED_PRICES[@object_type]
     @saved_cards    = BillingService.new(current_user).get_saved_cards rescue nil
   end
 
   def edit
-    @featured_listing = FeaturedListing.find(params[:object_id])
-    @partial_to_render = params[:step]
-    @step = @partial_to_render.to_sym
-    @partial_to_render = 'form' if @step == :create
-    case @step
-    when :add_amenities
-      @listing_amenities = @featured_listing.amenities
-    when :add_photos
-      @imageable = @featured_listing
-      @new_video_tour = VideoTour.new
-      @video_tours = @imageable.video_tours.where(category: 'featured_listing')
-      @photos = @imageable.uploads.with_image
-      session[:back_to] = request.fullpath
-    # when :edit_photos
-    #   @uploads      = @featured_listing.uploads
-    #   @photos_count = @featured_listing.uploads_count
-    when :payment
-      @object      = @featured_listing
-      @featured_by = 'manager'
-      @object_id   = @featured_listing.id
-      @object_type = 'FeaturedListing'
-      @price       = Billing::FEATURED_PRICES[@object_type]
-      @saved_cards = BillingService.new(current_user).get_saved_cards rescue nil
-    end
+    
   end
 
   def create

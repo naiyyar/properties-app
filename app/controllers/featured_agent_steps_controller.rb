@@ -15,7 +15,7 @@ class FeaturedAgentStepsController < ApplicationController
 			@featured_by = 'manager'
 			@object_id   = @featured_agent.id
 			@object_type = 'FeaturedAgent'
-			@price       = Billing::FEATURED_PRICE[@object_type]
+			@price       = Billing::FEATURED_PRICES[@object_type]
 			@saved_cards = BillingService.new(current_user).get_saved_cards rescue nil
 		end
 		

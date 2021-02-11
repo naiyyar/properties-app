@@ -7,9 +7,9 @@ module BillingsHelper
 		return session[:back_to] if payment_object_id.present?
 		
 		if object_type == 'FeaturedAgent'
-			edit_featured_agent_path(payment_object_id)
+			wizard_path(:edit_photos, agent_id: object.id)
 		elsif object_type == 'FeaturedBuilding'
-			edit_featured_building_path(payment_object_id)
+			!object.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured')
 		elsif object_type == 'FeaturedListing'
 			next_prev_step_url(object, step: 'add_photos')
 		end

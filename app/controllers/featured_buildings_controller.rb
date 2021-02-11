@@ -21,13 +21,17 @@ class FeaturedBuildingsController < ApplicationController
 
   # GET /featured_buildings/new
   def new
-    session[:back_to]  = request.fullpath if params[:type] != 'billing'
-    @featured_by       = params[:featured_by] 
-    @featured_building = FeaturedBuilding.new
-    @price             = Billing::FEATURED_BUILDING_PRICE
-    @object_id         = params[:object_id] || params[:fb_id]
-    @object_type       = 'FeaturedBuilding'
-    @saved_cards       = BillingService.new(current_user).get_saved_cards rescue nil
+    session[:back_to] = request.fullpath if params[:type] != 'billing'
+    @object_id        = params[:object_id] || params[:fb_id]
+    unless @object_id
+      @featured_building = FeaturedBuilding.new
+    else
+      @featured_by = params[:featured_by] 
+      @object_type = 'FeaturedBuilding'
+      @object      = FeaturedBuilding.find(@object_id)
+      @price       = Billing::FEATURED_PRICES[@object_type]
+      @saved_cards = BillingService.new(current_user).get_saved_cards rescue nil
+    end
   end
 
   # GET /featured_buildings/1/edit

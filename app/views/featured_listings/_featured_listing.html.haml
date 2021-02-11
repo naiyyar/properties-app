@@ -21,7 +21,7 @@
           %tbody.table
             - featured_listings.each do |listing|
               %tr
-                %td=link_to listing.id, edit_featured_listing_path(listing, featured_by: @featured_by)
+                %td=listing.id
                 %td=link_to listing.full_address, object_show_path(listing)
                 %td=link_to listing.unit, '#'
                 %td=link_to listing.try(:neighborhood), '#'

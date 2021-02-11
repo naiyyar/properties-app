@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	load_and_authorize_resource :find_by => :slug 
 	
-	before_action :authenticate_user!, only: [:show, :edit, :saved_buildings]
+	before_action :authenticate_user!, only: [:show, :edit, :saved_buildings, :featured_listings_steps]
 	before_action :set_user, 					 except: [:index, :create]
 	before_action :get_saved_cards, :set_type_and_back_to_url, only: [:managertools, :agenttools, :frbotools]
 
@@ -13,6 +13,34 @@ class UsersController < ApplicationController
 
 	def contribution
 	end
+
+	def featured_listings_steps
+    @featured_listing = FeaturedListing.find(params[:object_id])
+    if current_user == @featured_listing.user
+      @partial_to_render = params[:step]
+      @step = @partial_to_render.to_sym
+      @partial_to_render = 'form' if @step == :create
+      case @step
+      when :add_amenities
+        @listing_amenities = @featured_listing.amenities
+      when :add_photos
+        @imageable = @featured_listing
+        @new_video_tour = VideoTour.new
+        @video_tours = @imageable.video_tours.where(category: 'featured_listing')
+        @photos = @imageable.uploads.with_image
+        session[:back_to] = request.fullpath
+      when :payment
+        @object      = @featured_listing
+        @featured_by = 'manager'
+        @object_id   = @featured_listing.id
+        @object_type = 'FeaturedListing'
+        @price       = Billing::FEATURED_PRICES[@object_type]
+        @saved_cards = BillingService.new(current_user).get_saved_cards rescue nil
+      end
+    else
+    	redirect_to '/403' # access denied
+    end
+  end
 
 	def saved_buildings
 		# @rent_medians 	= RentMedian.all

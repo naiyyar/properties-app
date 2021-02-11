@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   include SetTimezoneConcern
   include WickedPdfConcern
 
-  rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
+  # rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
   
   def store_location
     # store last url as long as it isn't a /users path

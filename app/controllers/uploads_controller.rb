@@ -1,7 +1,7 @@
 class UploadsController < ApplicationController
-  load_and_authorize_resource         only: [:documents]
-  before_action :find_upload,         only: [:update, :edit, :destroy]
-	before_action :authenticate_user!,  only: [:destroy]
+  load_and_authorize_resource        only: [:documents, :destroy]
+  before_action :find_upload,        only: [:update, :edit, :destroy]
+	before_action :authenticate_user!, only: [:destroy]
 
 	def index
     if params[:building_id].present?
@@ -92,7 +92,7 @@ class UploadsController < ApplicationController
       respond_to do |format|
         format.html
         format.js
-        # format.json { render json: { message: 'success', fileID: @upload.id }, :status => 200 }
+        format.json { render json: { message: 'success', fileID: @upload.id }, :status => 200 }
       end
     else
       #  you need to send an error header, otherwise Dropzone

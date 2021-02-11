@@ -2,6 +2,10 @@ class ErrorsController < ApplicationController
   before_action :hide_search_bar
   
   def access_denied
+    respond_to do |format|
+      format.html { render status: 404 }
+      format.json { render json: { error: 'Access Denied.' }, status: 404 }
+    end
   end
 
   def not_found
