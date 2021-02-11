@@ -14,12 +14,18 @@ $(document).ready(function(){
 	}
 	dz_elem.dropzone({
 		// restrict image size to a maximum 1MB
-		//maxFilesize: 1,
+		maxFilesize: 1,
 		// changed the passed param to one accepted by
 		// our rails app
 		paramName: param_name,
+		headers: {
+			"Accept": "application/javascript",
+      "Cache-Control": "no-cache",
+      "X-Requested-With": "XMLHttpRequest"
+		},
 		// show remove links on each image upload
 		addRemoveLinks: true,
+		dictDefaultMessage: "<b>Add images </b> <br/> Drop Your Images Or Click To Browse",
 		// if the upload was successful
 		success: function(file, response){
 			// find the remove button link of the uploaded file and give it an id

@@ -28,11 +28,11 @@ module UploadsHelper
 		end
 	end
 
-	def edit_upload_link upload
+	def delete_upload_link upload
 		link_to '<span class="fa fa-trash" />'.html_safe, upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs delete_image'
 	end
 
-	def delete_upload_link upload
+	def edit_upload_link upload
 		link_to '<span class="fa fa-edit" />'.html_safe, edit_upload_path(upload, upload_type: 'image'), remote: true, class: 'btn btn-primary btn-xs edit_image'
 	end
 
@@ -48,6 +48,14 @@ module UploadsHelper
 
 	def type_featured_listing? object
 		object.imageable_type == 'FeaturedListing'
+	end
+
+	def draggable_class upload
+		current_user && type_featured_listing?(upload) ? 'photo-grid-item' : 'col-sm-3'
+	end
+
+	def featurable_class sort, featured_image: false
+		featured_image && sort.to_i == 0 ? 'fl-featured-image' : ''
 	end
 
 end

@@ -34,7 +34,7 @@ class Upload < ApplicationRecord
   scope :with_doc,   -> { where.not(document_file_name: nil) }
 
   # callbacks
-  after_create :set_sort_index
+  # after_create :set_sort_index
   after_save :update_counter_cache, :if => Proc.new{ |obj| obj.image_file_name.present? }
   after_destroy :update_counter_cache
 
@@ -119,18 +119,14 @@ class Upload < ApplicationRecord
     end
   end
 
+  def self.update_sort_value imageable_id, sort_index
+    find(imageable_id).update_column('sort', sort_index)
+  end
+
   private
   
   def set_defaults
     self.rotation ||= 0
-  end
-
-  def set_sort_index
-    uploads = Upload.where(imageable_id: self.imageable.id, imageable_type: 'Building')
-                    .includes(:imageable).order('sort ASC NULLS LAST, created_at ASC')
-    uploads.each_with_index do |upload, index|
-      upload.update_column('sort', index+1) 
-    end
   end
 
   def update_counter_cache

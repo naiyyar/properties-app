@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-6">
-		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: 'dropzone form-horizontal', id: "new_upload_#{params[:upload_type]}", style: "margin: 10px;" }) do |f|  %>
+		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: 'dropzone form-horizontal', id: "new_upload_#{params[:upload_type]}", style: 'margin: 10px 0px;' }) do |f|  %>
 		  <div class="fallback">
 		  	<% unless params[:upload_type] == 'documents' %>
 		    	<%= f.file_field :image %>
@@ -9,6 +9,8 @@
 		    <%end%><br />
 		    
 		    <%= f.hidden_field :user_id, value: current_user.id if current_user.present?%> <br />
+
+		    <div class="dz-message" data-dz-message><span>Your Custom Message</span></div>
 		    
 		    <%= f.submit 'Upload' %>
 		  </div>

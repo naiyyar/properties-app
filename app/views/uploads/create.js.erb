@@ -1,4 +1,1 @@
-<%# if @upload.imageable_type == 'FeaturedListing' %>
-	<%# uploads = Upload.where(imageable_type: 'FeaturedListing', imageable_id:  @upload.imageable_id) %>
-	//$('#featured-listing-image').html("<%#= render 'uploads/image_gallery', uploads: uploads%>")
-<%#end%>
+$('.photo-grid-container').html("<%= j render partial: 'uploads/image_gallery', locals: {uploads: @uploads, featured_image: true }%>");

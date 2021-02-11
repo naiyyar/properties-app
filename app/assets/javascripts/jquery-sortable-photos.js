@@ -296,7 +296,6 @@
      *  Arranges the grid.
      */
     arrange: function () {
-      console.log('arrange')
       this._trigger('beforeArrange', null, this.element);
 
       // Container is the object on which the widget is initialized.
@@ -389,11 +388,10 @@
       // and rearrange the items.
       // Need to use .detach() to keep the event listeners added
       // by jQuery UI.
-      window.data1 = $(ui.draggable)
+      // window.data1 = $(ui.draggable)
 
       var droppable_id = droppable.dataset.objectId
       var droppable_sort_id = droppable.dataset.sortId
-
       var draggable_id = $(ui.draggable).data('objectId')
       var draggable_sort_id = $(ui.draggable).data('sortId')
 
@@ -406,29 +404,27 @@
       
       //setting droppable sort value
       if(droppable_id != '' && draggable_sort_id != ''){
+        var items = $('.jq-sortable-photos-item');
+        upload_params = {
+          droppable_id: droppable_id,
+          droppable_sort_id: droppable_sort_id,
+          draggable_id: draggable_id,
+          draggable_sort_id: draggable_sort_id
+        }
         $.ajax({
-          url: '/uploads/'+droppable_id,
-          type: 'PUT',
+          url: '/uploads/set_sort_order',
+          type: 'GET',
           dataType: 'json',
-          data: { upload: { sort: draggable_sort_id } },
+          data: upload_params,
           success: function(response){
-            console.log('success')
-            //console.log(response)
-          }
-
-        })
-      }
-
-      if(draggable_id != '' && droppable_sort_id != ''){
-      //setting draggable sort value
-        $.ajax({
-          url: '/uploads/'+draggable_id,
-          type: 'PUT',
-          dataType: 'json',
-          data: { upload: { sort: droppable_sort_id } },
-          success: function(response){
-            console.log('success')
-            //console.log(response)
+            $('.fl-featured-badge').html('');
+            $('.featured-gallery').removeClass('fl-featured-image')
+            items.each(function(i, j){
+              if(j.dataset.gridItemId == '0-0'){
+                $(j).addClass('fl-featured-image')
+                $(j).find('.fl-featured-badge').html('<h4 class="comp featured round"> <span class="icon-badge font-14"></span></h4>');
+              }
+            });
           }
 
         })

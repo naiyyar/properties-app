@@ -1,0 +1,13 @@
+.image-gallery{class: "#{draggable_class(upload)} #{featurable_class(upload.sort, featured_image: featured_image)} #{ 'featured-gallery' if featured_image}", 'data-object-id' => "#{upload.id}", 'data-sort-id' => index }
+	%a.propWidget-1{'data-caption' => "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-imageable' => "#{imageable(upload)}", href: "#{url}", 'data-role' => 'slider'}
+		= image_tag url, alt: 'Image', class: 'img-thumbnail'
+
+	- if current_user && type_featured_listing?(upload)
+		.pull-left.fl-featured-badge
+			- if featured_image && upload.sort.to_i == 0
+				%h4.comp.featured.round
+					%span.icon-badge.font-14
+		
+		.actions-links
+			= delete_upload_link(upload)
+			= edit_upload_link(upload)

@@ -11,4 +11,4 @@
             = @imageable.neighborhood
 %hr/
 %div{class: "row #{current_user && current_user.has_role?(:admin) ? 'photo-grid-container' : ''}"}
-  = render 'uploads/image_gallery', uploads: @uploads
+  = render 'uploads/image_gallery', uploads: @uploads, featured_image: false

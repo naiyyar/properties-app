@@ -1,26 +1,27 @@
 - @imageable = featured_listing
-
 .row
 	.col-lg-6.col-xs-12.col-lg-offset-3
 		.col-lg-6.col-xs-6
-			%b Featured Listing
+			%b.font-16 Featured Listing
 		.col-lg-2.col-xs-2.text-center
 		.col-lg-4.col-xs-4
 			= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-success btn-block', target: 'blank'
+%br
 
 .row
 	.col-lg-12.col-lg-offset-3
-		%p.font-bold.font-16{style: 'margin: 8px;'} Add Photos
+		.col-lg-12.col-xs-12
+			%p.font-bold.font-16 Add Photos
 .row
 	.col-lg-12.col-xs-12.col-lg-offset-3
-		%p{style: 'margin: 0px 8px;'} First image will be Featured
-		= render 'uploads/form_fields', show_done: false
+		.col-lg-12.col-xs-12
+			%p{style: 'margin: 0px 0px;'} First image will be Featured
+			= render 'uploads/form_fields', show_done: false
 
-- if @imageable.uploads_count > 0
-	.row
-		.col-lg-6.col-xs-12.col-lg-offset-3
-			.row.photo-grid-container#featured-listing-image
-				= render 'uploads/image_gallery', uploads: @imageable.uploads
+.row
+	.col-lg-6.col-xs-12.col-lg-offset-3
+		.row.photo-grid-container#featured-listing-image
+			= render 'uploads/image_gallery', uploads: @photos, featured_image: true if @imageable.uploads_count > 0
 
 / video tours
 %br
@@ -50,12 +51,3 @@
 				= link_to 'Next ->', next_prev_step_url(@imageable, step: 'payment'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
 
 %br
-
-:css
-	.dropzone {
-		min-height: 120px;
-		height: 120px;
-		border: 1px solid rgba(0, 0, 0, 0.3);
-		background: #fff;
-		padding: 20px 20px;
-	}

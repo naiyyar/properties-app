@@ -125,7 +125,10 @@ Rails.application.routes.draw do
     member do 
       get :rotate
     end
-    get :photos, on: :collection
+    collection do
+      get :photos
+      get :set_sort_order
+    end
   end
 
   get '/documents', to: 'uploads#documents', as: :documents

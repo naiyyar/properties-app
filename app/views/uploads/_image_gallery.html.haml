@@ -1,6 +1,6 @@
 - uploads.each_with_index do |upload, index|
 	- url = upload.image.url
-	- if current_user&.has_role?(:admin)
+	- if !current_user&.has_role?(:admin)
 		.photo-grid-item.image-gallery{'data-object-id' => "#{upload.id}", 'data-sort-id' => index}
 			%a.propWidget-1{caption: "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-role' => 'slider', href: "#{url}"}
 				= image_tag url, alt: 'Image', class: 'img-thumbnail'
@@ -10,14 +10,7 @@
 			%div{style: 'position: absolute; right: 5px; bottom: 25px;'}
 				= link_to number_to_human_size(upload.image_file_size), 'javascript:;', class: 'btn btn-default btn-xs'
 	- else
-		.image-gallery{class: "#{current_user && type_featured_listing?(upload) ? 'photo-grid-item' : 'col-sm-3'}"}
-			%a.propWidget-1{'data-caption' => "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-imageable' => "#{imageable(upload)}", href: "#{url}", 'data-role' => 'slider'}
-				.image-rotator{style: 'height: 236px;'}= image_tag url, alt: 'Image', class: 'img-thumbnail'
-
-			- if current_user && type_featured_listing?(upload)
-				.actions-links
-					= delete_upload_link(upload)
-					= edit_upload_link(upload)
+		= render 'uploads/gallery', featured_image: featured_image, upload: upload, url: url, index: index
 
 
 / jquery click function in zapp.js
@@ -33,4 +26,7 @@
 		position: absolute;
 		top: 3px;
 		right: 3px;
+	}
+	.fl-featured-image img.img-thumbnail{
+		border: 1px solid #2b78e4;
 	}

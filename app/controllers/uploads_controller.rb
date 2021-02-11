@@ -2,7 +2,6 @@ class UploadsController < ApplicationController
   load_and_authorize_resource         only: [:documents]
   before_action :find_upload,         only: [:update, :edit, :destroy]
 	before_action :authenticate_user!,  only: [:destroy]
-  after_action  :clear_cache,         only: [:create, :destroy]
 
 	def index
     if params[:building_id].present?
@@ -23,6 +22,14 @@ class UploadsController < ApplicationController
       format.json { render json: { uploads: Upload.uploads_json_hash(@uploads) }, :status => 200 }
     end
 	end
+
+  # On drag and drop
+  def set_sort_order
+    Upload.update_sort_value(params[:droppable_id], params[:draggable_sort_id])
+    Upload.update_sort_value(params[:draggable_id], params[:droppable_sort_id])
+
+    render json: { message: 'success' }, :status => 200
+  end
 
   def photos
     @photos = Upload.where('image_file_name is not null').paginate(params[:page], per_page: 50)
@@ -81,10 +88,11 @@ class UploadsController < ApplicationController
       @upload = Upload.new(upload_params)
     end
     if @upload.save
+      set_sort_index
       respond_to do |format|
-        # send success header
+        format.html
         format.js
-        format.json { render json: { message: 'success', fileID: @upload.id }, :status => 200 }
+        # format.json { render json: { message: 'success', fileID: @upload.id }, :status => 200 }
       end
     else
       #  you need to send an error header, otherwise Dropzone
@@ -97,6 +105,7 @@ class UploadsController < ApplicationController
     if @upload.update(upload_params)
       respond_to do |format|  
         format.html{ redirect_to :back, notice: 'File Updated.' }
+        format.js
         format.json { render json: { message: 'success' }, :status => 200 }
       end
     else
@@ -135,8 +144,13 @@ class UploadsController < ApplicationController
     end
   end
 
-  def clear_cache
-    Rails.cache.clear()
+  def set_sort_index
+   # @imageable = FeaturedBuilding.find(params[:featured_listing_id])
+    @uploads = Upload.where(imageable_id: @upload.imageable.id, imageable_type: @upload.imageable.class.name)
+                     .with_image
+                     .reorder('sort ASC NULLS LAST, created_at ASC')
+    
+    @uploads.where(id: @upload.id, sort: nil).first.update_column('sort', @uploads.count - 1)
   end
 
 end

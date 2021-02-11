@@ -58,10 +58,11 @@ class FeaturedListingsController < ApplicationController
       @imageable = @featured_listing
       @new_video_tour = VideoTour.new
       @video_tours = @imageable.video_tours.where(category: 'featured_listing')
+      @photos = @imageable.uploads.with_image
       session[:back_to] = request.fullpath
-    when :edit_photos
-      @uploads      = @featured_listing.uploads
-      @photos_count = @featured_listing.uploads_count
+    # when :edit_photos
+    #   @uploads      = @featured_listing.uploads
+    #   @photos_count = @featured_listing.uploads_count
     when :payment
       @object      = @featured_listing
       @featured_by = 'manager'
