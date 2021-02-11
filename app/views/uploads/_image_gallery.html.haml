@@ -1,14 +1,16 @@
 - uploads.each_with_index do |upload, index|
 	- url = upload.image.url
-	- if !current_user&.has_role?(:admin)
+	- if current_user&.has_role?(:admin)
 		.photo-grid-item.image-gallery{'data-object-id' => "#{upload.id}", 'data-sort-id' => index}
 			%a.propWidget-1{caption: "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-role' => 'slider', href: "#{url}"}
 				= image_tag url, alt: 'Image', class: 'img-thumbnail'
-			= delete_upload_link(upload)
-			= edit_upload_link(upload)
-			= link_to '<span class="fa fa-repeat" />'.html_safe, rotate_upload_path(upload), class: 'btn btn-warning btn-xs rotate'
-			%div{style: 'position: absolute; right: 5px; bottom: 25px;'}
-				= link_to number_to_human_size(upload.image_file_size), 'javascript:;', class: 'btn btn-default btn-xs'
+			
+			- unless featured_image
+				= delete_upload_link(upload)
+				= edit_upload_link(upload)
+				= link_to '<span class="fa fa-repeat" />'.html_safe, rotate_upload_path(upload), class: 'btn btn-warning btn-xs rotate'
+				%div{style: 'position: absolute; right: 5px; bottom: 25px;'}
+					= link_to number_to_human_size(upload.image_file_size), 'javascript:;', class: 'btn btn-default btn-xs'
 	- else
 		= render 'uploads/gallery', featured_image: featured_image, upload: upload, url: url, index: index
 
