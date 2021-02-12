@@ -11,7 +11,7 @@
           %h2= building.building_name_or_address
           
           .cardAddress
-            %span.fa.fa-map-marker
+            = map_marker_icon_helper
             = building.street_address
             , #{building.zipcode}
           

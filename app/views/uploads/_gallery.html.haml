@@ -4,10 +4,7 @@
 
 	- if current_user && type_featured_listing?(upload)
 		.pull-left.fl-featured-badge
-			- if featured_image && upload.sort.to_i == 0
-				%h4.comp.featured.round
-					%span.icon-badge.font-14
-		
+			= featured_badge_helper if featured_image && upload.sort.to_i == 0
 		.actions-links
 			= delete_upload_link(upload)
 			= edit_upload_link(upload)

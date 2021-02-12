@@ -30,7 +30,8 @@
 		  			<%end%>
 		  		<%end%>
 		  		<% if building.votes.present? %>
-		  			<li style="font-size: 11px;"><span class="icon-pipe"></span>
+		  			<li style="font-size: 11px;">
+		  				<%= icon_pipe_helper %>
 	        	<%#= recomended_per.nan? ? '| --% Recommended' :  "| #{recomended_per.to_i}% Recommended" %>
 	        		<%= recommended_percent(building).html_safe %> 
 	        	</li>
@@ -43,7 +44,7 @@
 	  			<li><%= image_tag 'star-off.png' %></li>
 	  		<%end%>
 	  		<li style="font-size: 11px;">
-	  			<span class="icon-pipe"></span>
+	  			<%= icon_pipe_helper %>
         	<%= recomended_per.nan? ? '| --% Recommended' :  "| #{recomended_per.to_i}% Recommended" %>
         </li>
 	  	</ul>

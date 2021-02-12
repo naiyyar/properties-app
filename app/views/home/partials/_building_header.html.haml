@@ -1,5 +1,5 @@
 #building_details88.building-detail-card.featured-comps{data: { show_url: @show_path }}
   %h2.name-or-add=building.building_name_or_address
   .cardAddress
-    %span.fa.fa-map-marker
+    = map_marker_icon_helper
     = building.full_street_address

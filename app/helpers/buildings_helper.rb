@@ -79,23 +79,18 @@ module BuildingsHelper
 	end
 
 	def recommended_percent object
-		thumb_icon = "| <span class='fa fa-thumbs-up recommended'></span>"
 		recommended = ''
-		if object.present? && object.recommended_percent.present?
+		if object&.recommended_percent.present?
 			rec_percent = object.recommended_percent
-			if rec_percent.nan? 
-				recommended = "#{thumb_icon} --%"
-			elsif rec_percent == 0
-				recommended = "#{thumb_icon} 0%"
-			else
-				recommended = "#{thumb_icon} #{rec_percent.to_i}%"
-			end
+			recommended = if rec_percent.nan? 
+											"#{thumbs_up_icon_helper} --%"
+										elsif rec_percent == 0
+											"#{thumbs_up_icon_helper} 0%"
+										else
+											"#{thumbs_up_icon_helper} #{rec_percent.to_i}%"
+										end
 		end
 		"#{recommended} &nbsp;"
-	end
-
-	def heart_icon
-		'<span class="fa fa-heart"></span>'.html_safe
 	end
 
 	def heart_link object, user

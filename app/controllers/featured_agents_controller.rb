@@ -2,6 +2,7 @@ class FeaturedAgentsController < ApplicationController
   load_and_authorize_resource
   before_action :set_featured_agent, except: [:index, :create, :new]
   before_action :set_uploads, only: [:preview, :get_images]
+  before_action :set_neighborhoods, only: [:new, :contact]
   
   include Searchable
 
@@ -150,5 +151,9 @@ class FeaturedAgentsController < ApplicationController
                         :@neighborhoods => @neighborhoods
                       }
                     )
+  end
+
+  def set_neighborhoods
+    @neighborhoods = StaticData::FEATURED_IN_NEIGHBORHOODS
   end
 end

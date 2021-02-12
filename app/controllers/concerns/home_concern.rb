@@ -26,23 +26,28 @@ module HomeConcern
     end
 
     @featured_listings = FeaturedListing.get_random_objects(@search_string, searched_by, limit: 2)
+    @agent = FeaturedAgent.get_random_objects(@search_string, searched_by, limit: 1).first
     
     if @buildings.present?
       @filter_params   = params[:filter]
-      @all_buildings, @hash, @per_page_buildings = search_buildings.with_featured_buildings(@buildings, @featured_listings)
+      @all_buildings, @hash, @per_page_buildings = search_buildings.with_featured_buildings(@buildings, @featured_listings, @agent)
       @lat, @lng       = @hash[0]['latitude'], @hash[0]['longitude']
       @listings_count  = Listing.listings_count(@buildings, @all_buildings, @filter_params)
       @buildings_count = @hash.length rescue 0
     else
-      building = Building.buildings_in_neighborhood(@search_string.downcase).first
+      featured_buildings = FeaturedBuilding.active_in_neighborhood(@search_string)
+      buildings = pop_nb_buildings.where(id: featured_buildings.pluck(:building_id))
+      @hash = Building.buildings_json_hash(buildings)
+      @all_buildings = buildings.to_a + @featured_listings.to_a + [@agent].compact
+      building = if buildings.present?
+                  buildings.first
+                else
+                  Building.buildings_in_neighborhood(@search_string.downcase).first
+                end
       @lat, @lng = building_latlng(building)
     end
     
-    # @hash = (@hash + FeaturedListing.as_json_hash(@featured_listings)) if @featured_listings.present?
-    
     @lat, @lng = params[:latitude], params[:longitude] if params[:search_term] == 'custom'
-
-    @agent = FeaturedAgent.get_random_objects(@search_string, searched_by, limit: 1).first
     
     @meta_desc  = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
                                                               count: @buildings_count, 

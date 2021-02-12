@@ -11,8 +11,7 @@
             = render partial: 'home/search_form'
           - else
             .apt-search.other#apt-search-form
-              .icon-search-shared.hidden-xs
-                %span.fa.fa-search
+              = icon_search_helper(other_class: 'hidden-xs')
               = search_placeholder_input_helper
       - else
         .home-logo.osLight{style: 'text-align: center;margin-top: -10px;'}

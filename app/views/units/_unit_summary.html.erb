@@ -9,7 +9,7 @@
             <%end%>
           </h1>
           <div class="property_information">
-            <div class="address"><span class="fa fa-map-marker"></span> 
+            <div class="address"><%=map_marker_icon_helper%></span> 
               <%= link_to building_path(@unit.building), 'data-no-turbolink' => false do %>  
                 <%= @unit.building.street_address %>, <%= @unit.building.zipcode %> <br />  
               <%end%>

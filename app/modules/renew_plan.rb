@@ -67,7 +67,7 @@ module RenewPlan
   end
 
   def update_status billable
-    billable.update(active: false, renew: false)
+    billable.update_columns(active: false, renew: false)
   end
 
   def set_time_zone user

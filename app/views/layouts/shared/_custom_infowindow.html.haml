@@ -6,9 +6,7 @@
       .infoW-property-info{'data-href' => "#{@show_path}"}
         .propImg
           = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
-          - if property.video_tours.any?
-            .video-tour-icon
-              %span.fa.fa-video-camera
+          = tour_icon_helper if property.video_tours.any?
         .paWrapper
           .propTitle= property.building_name_or_address
           .propAddress
@@ -42,9 +40,7 @@
       .infoW-property-info{'data-href' => "#{@show_path}"}
         .propImg
           = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
-          - if property.video_tours.any?
-            .video-tour-icon
-              %span.fa.fa-video-camera
+          = tour_icon_helper if property.video_tours.any?
         .paWrapper
           .propTitle= rent_with_currency(property)
           .propAddress= listing_address(property)

@@ -3,17 +3,13 @@
   .item
     .clearfix{ style: 'width:100%;' }
       = link_to show_path, style: 'cursor: pointer;' do
-        - if @similar_properties.present? || object.featured?
-          %h4.comp.featured.round
-            %span.icon-badge.font-14
+        = featured_badge_helper if @similar_properties.present? || object.featured?
         
         %h4.lightslider-slides-counts.round
           %span.current 1
           %span.total="/ #{images_count}"
 
-        - if show_tour_icon?(object) && object.video_tours.any?
-          .video-tour-icon
-            %span.fa.fa-video-camera
+        = tour_icon_helper if show_tour_icon?(object) && object.video_tours.any?
 
       %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 270px;', data: { objectid: "#{object.id}", view_type: 'split', path: show_path, resource: resource } }
         %li
@@ -25,7 +21,5 @@
             %li{data: { listindex: "#{count}" } }
 - else
   %a{ href: show_path, style: 'cursor: pointer;' }
-    - if @similar_properties.present? || object.featured?
-      %h4.comp.featured.round
-        %span.icon-badge.font-14
+    = featured_badge_helper if @similar_properties.present? || object.featured?
     .bg-size-cover.h-lg.bg-pos-center{style: "background-image: url(#{image_url('no-photo.jpg') })"}

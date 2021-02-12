@@ -47,4 +47,6 @@ class StaticData
     { title: 'Featured Listings',    url: '/featured_listings'}
   ]
 
+  FeaturedObjects = ['FeaturedBuilding', 'FeaturedAgent', 'FeaturedListing']
+
 end

@@ -13,8 +13,7 @@
         = render 'home/search_form'
       - else
         .apt-search.home#apt-search-form
-          .icon-search-shared
-            %span.fa.fa-search
+          = icon_search_helper
           = search_placeholder_input_helper
 
       .home-quick-links

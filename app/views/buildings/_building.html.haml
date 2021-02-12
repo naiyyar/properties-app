@@ -1,14 +1,10 @@
 / - @min_saved_amount = building.min_save_amount(@rent_medians, @broker_percent)
-- if (property_counter == 4 && @agent.present?)
-	- @taken_agent = true
-	= render 'featured_agents/agent', agent: @agent
-	.col-xs-12.col-sm-12.col-md-6.col-lg-6= render 'buildings/detail_card', building: property
-- elsif !@taken_agent && @agent.present? && @buildings_count.to_i <= (property_counter + 1)
-	.col-xs-12.col-sm-12.col-md-6.col-lg-6= render 'buildings/detail_card', building: property
-	= render 'featured_agents/agent', agent: @agent
-- else
-	.col-xs-12.col-sm-12.col-md-6.col-lg-6
-		- if property.kind_of?(FeaturedListing)
-			= render 'featured_listings/detail_card', featured_listing: property
-		- else
-			= render 'buildings/detail_card', building: property
+- if object.present?
+	- if object.kind_of?(FeaturedListing)
+		.col-xs-12.col-sm-12.col-md-6.col-lg-6
+			= render 'featured_listings/detail_card', featured_listing: object
+	- elsif object.kind_of?(FeaturedAgent)
+		= render 'featured_agents/agent', agent: object
+	- else
+		.col-xs-12.col-sm-12.col-md-6.col-lg-6
+			= render 'buildings/detail_card', building: object

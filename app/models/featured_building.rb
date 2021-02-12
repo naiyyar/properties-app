@@ -57,6 +57,16 @@ class FeaturedBuilding < ApplicationRecord
              .order('RANDOM()').pluck(:id)
   end
 
+  # Using when no buildings found after appling filters
+  def self.active_in_neighborhood search_query
+    self.active
+        .joins(:building)
+        .where('buildings.neighborhood @@ :q OR 
+                buildings.neighborhoods_parent @@ :q OR
+                buildings.neighborhood3 @@ :q', q: search_query)
+        .order('RANDOM()').limit(2)
+  end
+
   private
   
   def check_active_status
