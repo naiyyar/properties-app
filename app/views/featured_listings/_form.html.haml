@@ -1,6 +1,6 @@
 .form-container
   .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-6
+    .col-xs-12.col-sm-12.col-md-12.col-lg-7.col-lg-offset-2
       .panel.panel-default
         .panel-heading
           %b= 'Featured Listing'
@@ -8,7 +8,7 @@
           = form_for featured_listing, class: 'form-horizontal' do |f|
             .row
               .col-xs-12.col-sm-6.col-md-8.col-lg-8
-                %b.font-14.hyper-link Listing contact information
+                %b.font-16.hyper-link Listing Contact
             %br
             
             .row
@@ -36,7 +36,7 @@
             %br
             .row
               .col-xs-12.col-sm-6.col-md-8.col-lg-8
-                %b.font-14.hyper-link Listing location
+                %b.font-16.hyper-link Listing Location
             %br
 
             .row
@@ -76,7 +76,7 @@
             %br
             .row
               .col-xs-12.col-sm-6.col-md-8.col-lg-8
-                %b.font-14.hyper-link Listing Information
+                %b.font-16.hyper-link Listing Information
             %br
 
             .row
@@ -88,12 +88,12 @@
             .row
               .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
-                  %label Number of bedrooms*
+                  %label Number of Bedrooms*
                   = f.number_field :bed,  class: 'form-control'
 
               .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
-                  %label Number of bathrooms*
+                  %label Number of Bathrooms*
                   = f.number_field :bath,  class: 'form-control'
 
             .row

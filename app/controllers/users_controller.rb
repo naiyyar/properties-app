@@ -86,7 +86,6 @@ class UsersController < ApplicationController
 
 	def frbotools
 		unless @type == 'billing'
-			current_user.featured_listings.where(address: nil, neighborhood: nil).delete_all
 			@featured_listings = filterific_results(FeaturedListing)
 	  	@photos_count = @featured_listings.sum(:uploads_count)
 	  else
