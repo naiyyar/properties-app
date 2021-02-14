@@ -331,6 +331,12 @@ class Building < ApplicationRecord
     }
   end
 
+  def self.neighborhood1
+    self.select('neighborhood')
+        .distinct.where.not(neighborhood: [nil, ''])
+        .order(neighborhood: :asc).pluck(:neighborhood) 
+  end
+
   private
 
   def update_listings_price min_price, max_price

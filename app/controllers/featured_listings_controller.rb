@@ -97,7 +97,34 @@ class FeaturedListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def featured_listing_params
-      params.require(:featured_listing).permit!
+      params.require(:featured_listing).permit(:first_name, 
+                                               :last_name, 
+                                               :email, 
+                                               :phone, 
+                                               :neighborhood, 
+                                               :address, 
+                                               :unit, 
+                                               :city, 
+                                               :state, 
+                                               :zipcode, 
+                                               :rent, 
+                                               :bed, 
+                                               :bath, 
+                                               :size, 
+                                               :apartment_type, 
+                                               :date_available, 
+                                               :description, 
+                                               :user_id, 
+                                               :start_date, 
+                                               :end_date, 
+                                               :featured_by, 
+                                               :uploads_count, 
+                                               :active, 
+                                               :renew, 
+                                               :latitude, 
+                                               :longitude, 
+                                               :amenities, 
+                                               :neighborhood1)
     end
 
     def next_step_url step

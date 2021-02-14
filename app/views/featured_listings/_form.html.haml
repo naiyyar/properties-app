@@ -71,6 +71,12 @@
                 .form-group
                   %label Zip Code*
                   = f.text_field :zipcode, class: 'form-control validate'
+            .row
+              .col-xs-12.col-sm-6.col-md-3.col-lg-6
+                .form-group
+                  %label Neighborhood*
+                  = f.select :neighborhood1, options_for_select(Building.neighborhood1, f.object.neighborhood1), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
+
 
             %br
             %br

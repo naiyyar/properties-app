@@ -91,9 +91,7 @@ class BuildingsController < ApplicationController
   end
 
   def edit
-    @neighborhood_options = @buildings.select('neighborhood').distinct
-                                      .where.not(neighborhood: [nil, ''])
-                                      .order(neighborhood: :asc).pluck(:neighborhood)
+    @neighborhood_options = Building.neighborhood1
     @neighborhood2        = NYCBorough.nyc_parent_neighborhoods
     @neighborhood3        = @buildings.select('neighborhood3').distinct
                                       .where.not(neighborhood3: [nil, ''])

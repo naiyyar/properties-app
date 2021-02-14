@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210204113318) do
+ActiveRecord::Schema.define(version: 20210214112334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,6 +282,7 @@ ActiveRecord::Schema.define(version: 20210204113318) do
     t.json     "amenities",      default: {"no_fee"=>"No Fee"}, null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
+    t.string   "neighborhood1"
     t.index ["address"], name: "index_featured_listings_on_address", using: :btree
     t.index ["first_name"], name: "index_featured_listings_on_first_name", using: :btree
     t.index ["last_name"], name: "index_featured_listings_on_last_name", using: :btree
