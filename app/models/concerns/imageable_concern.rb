@@ -19,7 +19,7 @@ module ImageableConcern
   end
 
   def cached_image_uploads assets
-    Rails.cache.fetch([self, 'imageUploads']) { image_uploads(assets).to_a }
+    Rails.cache.fetch([self, 'imageUploads',]) { image_uploads(assets).to_a }
   end
 
   def doc_uploads assets

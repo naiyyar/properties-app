@@ -1,7 +1,11 @@
 jQuery ->
 	#from uploads/index page
 	$(document).on 'click', '.delete_image',(e) ->
-		$(this).parent().hide(500);
+		parent = $(this).parent();
+		if parent.hasClass('actions-links')
+			$(this).parent().parent().hide(500);
+		else
+			$(this).parent().hide(500);
 	
 	$('[data-toggle="tooltip"]').tooltip();
 

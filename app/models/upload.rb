@@ -5,7 +5,7 @@ class Upload < ApplicationRecord
   attr_accessor :rotation_degrees, :rotate
   
   # associations
-  belongs_to :imageable, polymorphic: true
+  belongs_to :imageable, polymorphic: true, touch: true
   has_many :document_downloads
   belongs_to :user
 
@@ -34,7 +34,6 @@ class Upload < ApplicationRecord
   scope :with_doc,   -> { where.not(document_file_name: nil) }
 
   # callbacks
-  # after_create :set_sort_index
   after_save :update_counter_cache, :if => Proc.new{ |obj| obj.image_file_name.present? }
   after_destroy :update_counter_cache
 
@@ -120,7 +119,7 @@ class Upload < ApplicationRecord
   end
 
   def self.update_sort_value imageable_id, sort_index
-    find(imageable_id).update_column('sort', sort_index)
+    find(imageable_id).update(sort: sort_index)
   end
 
   private

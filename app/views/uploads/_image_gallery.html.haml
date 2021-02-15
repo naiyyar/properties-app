@@ -1,6 +1,6 @@
 - uploads.each_with_index do |upload, index|
 	- url = upload.image.url
-	- if current_user&.has_role?(:admin)
+	- if !current_user&.has_role?(:admin)
 		.photo-grid-item.image-gallery{'data-object-id' => "#{upload.id}", 'data-sort-id' => index}
 			%a.propWidget-1{caption: "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-role' => 'slider', href: "#{url}"}
 				= image_tag url, alt: 'Image', class: 'img-thumbnail'

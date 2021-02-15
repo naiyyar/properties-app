@@ -12,7 +12,7 @@
   
   = link_to @show_path, style: 'color: #000' do
     %div.font-14{style: 'padding: 0px 0px 0px 11px; height: 22px; white-space: nowrap;'}
-      %div.pbt= "#{featured_listing.apartment_type} in #{featured_listing.neighborhood}" if featured_listing.apartment_type.present?
+      %div.pbt= "#{featured_listing.apartment_type} in #{featured_listing.neighborhood1}" if featured_listing.apartment_type.present?
       %div.pbt= "#{rent_with_currency(featured_listing)} | #{featured_listing.bed} Bed #{featured_listing.bath} Bath"
 
   .clearfix

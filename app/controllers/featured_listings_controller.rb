@@ -28,7 +28,7 @@ class FeaturedListingsController < ApplicationController
     @half_footer = true
     @featured_listing_tours = @featured_listing.video_tours
     @video_tours_count = @featured_listing_tours.size
-    @neighborhood = @featured_listing.neighborhood
+    @neighborhood = @featured_listing.neighborhood1
     @nearby_nbs = NYCBorough.nearby_neighborhoods(@neighborhood)
     @uploaded_images_count = @featured_listing.uploads_count
     @distance_results = DistanceMatrixService.new(@featured_listing).get_data
