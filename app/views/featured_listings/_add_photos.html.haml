@@ -1,88 +1,57 @@
 - @imageable = featured_listing
-.row
-	.col-lg-12.col-xs-12.col-lg-offset-3
-		.row
-			.col-lg-3.col-xs-12
-				%b.font-16 Featured Listing
-			.col-lg-3.col-xs-4
-				= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-success btn-block', target: 'blank'
-		%br
+#property-photos
+	.row
+		.col-lg-12.col-xs-12.col-lg-offset-3
+			.row
+				.col-lg-3.col-xs-8
+					%b.font-16 Featured Listing
+				.col-lg-3.col-xs-4
+					= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-success btn-block', target: 'blank'
+			%br
 
-		.row
-			.col-lg-12
-				%p.font-bold.font-16 Add Photos
-		
-		.row
-			.col-lg-12.col-xs-12
-				%p{style: 'margin: 0px 0px;'} First image will be Featured
-				= render 'uploads/form_fields', show_done: false
+			.row
+				.col-lg-12
+					%p.font-bold.font-16 Add Photos
+			
+			.row
+				.col-lg-12.col-xs-12
+					%p{style: 'margin: 0px 0px;'} First image will be Featured
+					= render 'uploads/form_fields', show_done: false
 
-		.row
-			.col-lg-6.col-xs-12
-				%ul#gallery.list-inline{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing'}
-					- @photos.each do |upload|
-						= render 'uploads/gallery', upload: upload, featured_image: true 
-
-		- if false
 			.row
 				.col-lg-6.col-xs-12
-					.row.photo-grid-container#featured-listing-image
-						= render 'uploads/image_gallery', uploads: @photos, featured_image: true if @imageable.uploads_count > 0
+					%ul#gallery.list-inline{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing'}
+						- @photos.each do |upload|
+							= render 'uploads/gallery', upload: upload, featured_image: true 
 
-		/ video tours
-		%br
-		%br
-		- tour_category = 'featured_listing'
-		.row
-			.col-lg-6.col-xs-12
-				%h4.font-bold= link_to 'Add Video <span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: tour_category, bid: @imageable.id, type: 'FeaturedListing' }
-				
-				.category-forms-container{id: "#{tour_category}-form"}
-					- if @video_tours.present?
-						- @video_tours.each do |tour|
-							= render 'featured_listings/add_tour_form', video_tour: tour, category: tour_category, index: tour.sort, object: @imageable
-					- else
-						= render 'featured_listings/add_tour_form', video_tour: @new_video_tour, category: tour_category, index: 0, object: @imageable
-
-		%br
-		%br
-		%br
-
-		.row
-			.col-lg-6
-				%div{style: 'margin: 8px;'}
-					.pull-left= cancel_form_link('FeaturedListing')
-					.pull-right
-						= link_to '<- Back', next_prev_step_url(@imageable, step: 'add_amenities'), class: 'btn btn-primary font-18 pl-28 pr-28'
-						- unless @imageable.live?
-							= link_to 'Next ->', next_prev_step_url(@imageable, step: 'payment'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
+			/ video tours
+			%br
+			%br
+			- tour_category = 'featured_listing'
+			.row
+				.col-lg-6.col-xs-12
+					%h4.font-bold= link_to 'Add Video <span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: tour_category, bid: @imageable.id, type: 'FeaturedListing' }
+					
+					.category-forms-container{id: "#{tour_category}-form"}
+						- if @video_tours.present?
+							- @video_tours.each do |tour|
+								= render 'featured_listings/add_tour_form', video_tour: tour, category: tour_category, index: tour.sort, object: @imageable
 						- else
-							= link_to 'Done', frbotools_user_path(current_user, type: 'featured'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
+							= render 'featured_listings/add_tour_form', video_tour: @new_video_tour, category: tour_category, index: 0, object: @imageable
 
-		%br
+			%br
+			%br
+			%br
 
-:css
-	.ui-state-default {
-		margin: 3px 0px !important; 
-		padding-left: 1px !important; 
-		padding-right: 1px !important;
-		position: relative;
-	}
-	.ui-state-default img{
-		height: 150px;
-		width: 206px;
-		border: 1px solid #ddd;
-	}
+			.row
+				.col-lg-6
+					%div{style: 'margin: 8px;'}
+						.pull-left= cancel_form_link('FeaturedListing')
+						.pull-right
+							= link_to '<- Back', next_prev_step_url(@imageable, step: 'add_amenities'), class: 'btn btn-primary font-18 pl-28 pr-28'
+							- unless @imageable.live?
+								= link_to 'Next ->', next_prev_step_url(@imageable, step: 'payment'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
+							- else
+								= link_to 'Done', frbotools_user_path(current_user, type: 'featured'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
 
-	.ui-state-default.fl-featured-image img{
-		border: 1px solid #2b78e4;
-	}
-
-	.actions-links{
-		position: absolute;
-		top: 3px;
-		right: 3px;
-	}
-	.highlight, .gray-background {
-		background-color: #ddd;
-	}
+			%br

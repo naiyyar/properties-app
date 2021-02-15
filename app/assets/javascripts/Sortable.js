@@ -2218,6 +2218,7 @@
       }
 
       this._nulling();
+      this._saveSortOrder();
     },
     _nulling: function _nulling() {
       pluginEvent('nulling', this);
@@ -2269,7 +2270,6 @@
         case 'drop':
         case 'dragend':
           this._onDrop(evt);
-          this._saveSortOrder();
           break;
 
         case 'dragenter':

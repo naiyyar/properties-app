@@ -1,0 +1,44 @@
+#gallery {
+	.ui-state-default {
+		margin: 3px 0px !important; 
+		padding-left: 1px !important; 
+		padding-right: 1px !important;
+		position: relative;
+		
+		img{
+			height: 150px;
+			width: 206px;
+			border: 1px solid #ddd;
+		}
+	}
+
+	.ui-state-default.fl-featured-image img{
+		border: 1px solid #2b78e4;
+	}
+
+	.actions-links{
+		position: absolute;
+		top: 3px;
+		right: 3px;
+	}
+	
+	.gray-background {
+		background-color: #ddd;
+	}
+}
+
+@media screen and (max-width: 767px) { 
+	#property-photos{
+		margin: 0px 4px;
+	}
+	#gallery {
+		.ui-state-default {
+			height: 250px;
+			width: 100%;
+			img {
+				height: 100%;
+				width: 100%;
+			}
+		}
+	}
+}
