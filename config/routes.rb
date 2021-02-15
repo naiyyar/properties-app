@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+shuffle_gallery.js.erbRails.application.routes.draw do
 
   resources :featured_listings, except: [:show] do
     resources :uploads, only: [:new, :create, :index]
@@ -128,7 +128,6 @@ Rails.application.routes.draw do
     collection do
       get :photos
       get :set_sort_order
-      get :shuffle_gallery
     end
   end
 
