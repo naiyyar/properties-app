@@ -3,9 +3,9 @@ jQuery ->
 	$(document).on 'click', '.delete_image',(e) ->
 		parent = $(this).parent();
 		if parent.hasClass('actions-links')
-			$(this).parent().parent().hide(500);
+			$(this).parent().parent().remove();
 		else
-			$(this).parent().hide(500);
+			$(this).parent().remove();
 	
 	$('[data-toggle="tooltip"]').tooltip();
 

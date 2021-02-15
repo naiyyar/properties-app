@@ -323,9 +323,9 @@
         var img = itemElement.find('img');
 
         // Remove css so that the actual size can be determined.
-        img.css('height', '');
-        img.css('width', '');
-        img.css('max-width', 'none');
+        //img.css('height', '');
+        //img.css('width', '');
+        //img.css('max-width', '250');
         var img_size = img.data('size');
         if(img_size)
           row.createItem(itemElement, img.width(), img.height()); // with lib

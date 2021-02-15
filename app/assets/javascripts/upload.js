@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	// disable auto discover
 	Dropzone.autoDiscover = false;
-
+	var uploaded_ids = [];
 	// grap our upload form by its id
 	// #new_upload_photos = from +upload button 
 	// new_upload_ = from contribute page
@@ -18,11 +18,6 @@ $(document).ready(function(){
 		// changed the passed param to one accepted by
 		// our rails app
 		paramName: param_name,
-		// headers: {
-		// 	"Accept": "application/javascript",
-  //     "Cache-Control": "no-cache",
-  //     "X-Requested-With": "XMLHttpRequest"
-		// },
 		// show remove links on each image upload
 		addRemoveLinks: true,
 		dictDefaultMessage: "<b>Add images </b> <br/> Drop Your Images Or Click To Browse",
@@ -33,6 +28,11 @@ $(document).ready(function(){
 			$(file.previewTemplate).find('.dz-remove').attr('id', response.fileID);
 			// add the dz-success class (the green tick sign)
 			$(file.previewElement).addClass("dz-success");
+
+			if(!uploaded_ids.includes(response.fileID)){
+				appendToGallery(response);
+				removedfile(file);
+			}
 		},
 		//when the remove button is clicked
 		removedfile: function(file){
@@ -56,6 +56,26 @@ $(document).ready(function(){
 				// console.log(data.message);
 			}
 		});
+	}
+
+	function appendToGallery(response){
+		var image_url = response.image_url;
+		var upload_id = response.fileID;
+		var sort_index = $('.featured-gallery').length + 1;
+		uploaded_ids.push(upload_id) // ISSUE TO FIX: file is uploaded once but sending two success call for a file.
+		var featured_icon_class = sort_index == 0 ? 'fl-featured-image' : ''
+		var html =  '<li class="featured-gallery ui-state-default '+featured_icon_class+'" data-id="'+upload_id+'" data-index="'+sort_index+'"style="">' +
+									'<a data-caption="" data-fancybox="gallery" data-imageable="" data-role="slider" href="'+image_url+'">' +
+										'<img src="'+image_url+'" alt="image">' +
+									'</a>' +
+									'<div class="pull-left fl-featured-badge"></div>'+
+									'<div class="actions-links">' +
+									'<a class="btn btn-primary btn-xs edit_image" data-remote="true" href="/uploads/'+upload_id+'/edit?upload_type=image"><span class="fa fa-edit"></span></a>' +
+									'<a class="btn btn-danger btn-xs delete_image" data-remote="true" rel="nofollow" data-method="delete" href="/uploads/'+upload_id+'"><span class="fa fa-trash"></span></a>' +
+									'</div>' +
+								'</li>'
+		
+		$('ul#gallery').append(html);
 	}
 
 	//Saving document downloads counts

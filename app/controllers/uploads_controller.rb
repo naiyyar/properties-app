@@ -25,9 +25,12 @@ class UploadsController < ApplicationController
 
   # On drag and drop
   def set_sort_order
-    Upload.update_sort_value(params[:droppable_id], params[:draggable_sort_id])
-    Upload.update_sort_value(params[:draggable_id], params[:droppable_sort_id])
-
+    object = params[:imageable_type].constantize.find(params[:imageable_id])
+    uploads = object.uploads
+    params[:order].each_pair do |key, value|
+      uploads.find(value[:id]).update_columns(sort: key, updated_at: Time.now)
+    end
+    Rails.cache.clear();
     render json: { message: 'success' }, :status => 200
   end
 
@@ -88,11 +91,16 @@ class UploadsController < ApplicationController
       @upload = Upload.new(upload_params)
     end
     if @upload.save
-      set_sort_index
       respond_to do |format|
         format.html
-        format.js
-        format.json { render json: { message: 'success', fileID: @upload.id }, :status => 200 }
+        format.json { 
+          render json: { 
+            message: 'success', 
+            fileID: @upload.id,
+            image_url: @upload.image.url
+          }, 
+          :status => 200 
+        }
       end
     else
       #  you need to send an error header, otherwise Dropzone
@@ -142,15 +150,6 @@ class UploadsController < ApplicationController
         return $1.classify.constantize.find(value)
       end
     end
-  end
-
-  def set_sort_index
-   # @imageable = FeaturedBuilding.find(params[:featured_listing_id])
-    @uploads = Upload.where(imageable_id: @upload.imageable.id, imageable_type: @upload.imageable.class.name)
-                     .with_image
-                     .reorder('sort ASC NULLS LAST, created_at ASC')
-    
-    @uploads.where(id: @upload.id, sort: nil).first.update_column('sort', @uploads.count - 1)
   end
 
 end

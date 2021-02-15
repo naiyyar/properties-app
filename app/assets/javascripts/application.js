@@ -28,6 +28,8 @@
 //= require jquery.validate
 //= require jquery.touchSwipe.min
 //= require jquery-sortable-photos
+//= require Sortable
+//= require jquery-sortable
 //= require jquery.dataTables.min
 //= require jquery-fileupload/basic
 //= require moment

@@ -34,6 +34,7 @@ class Upload < ApplicationRecord
   scope :with_doc,   -> { where.not(document_file_name: nil) }
 
   # callbacks
+  before_save :set_sort_index
   after_save :update_counter_cache, :if => Proc.new{ |obj| obj.image_file_name.present? }
   after_destroy :update_counter_cache
 
@@ -118,10 +119,6 @@ class Upload < ApplicationRecord
     end
   end
 
-  def self.update_sort_value imageable_id, sort_index
-    find(imageable_id).update(sort: sort_index)
-  end
-
   private
   
   def set_defaults
@@ -143,6 +140,10 @@ class Upload < ApplicationRecord
     Upload.where('image_file_name is not null AND 
                   imageable_id = ? AND 
                   imageable_type = ?', imageable.id, imageable.class.name).size
+  end
+
+  def set_sort_index
+    self.sort = self.imageable.uploads_count
   end
 
   # def is_video?

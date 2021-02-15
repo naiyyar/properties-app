@@ -1,0 +1,9 @@
+$('#featured-listing-image').html('')
+$('.photo-grid-container').append("<%= j render 'uploads/image_gallery', uploads: @uploads, featured_image: true %>")
+
+// setTimeout(function(){
+// 	$('.photo-grid-container').sortablePhotos({
+// 		selector: '> .photo-grid-item',
+// 		sortable: true,
+// 	});
+// }, 1000)
