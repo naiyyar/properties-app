@@ -1,4 +1,4 @@
-shuffle_gallery.js.erbRails.application.routes.draw do
+Rails.application.routes.draw do
 
   resources :featured_listings, except: [:show] do
     resources :uploads, only: [:new, :create, :index]
