@@ -37,6 +37,18 @@ module IconsHelper
 		thumb_icon_helper('fa-thumbs-down')
 	end
 
+	def trash_icon_helper
+		span_tag(klasses: 'fa fa-trash')
+	end
+
+	def edit_icon_helper
+		span_tag(klasses: 'fa fa-edit')
+	end
+
+	def repeat_icon_helper
+		span_tag(klasses: 'fa fa-repeat')
+	end
+
 	private
 	
 	def thumb_icon_helper klass

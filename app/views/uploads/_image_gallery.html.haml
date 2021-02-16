@@ -1,5 +1,9 @@
 - uploads.each_with_index do |upload, index|
 	- url = upload.image.url
+	= render 'uploads/gallery', featured_image: featured_image, upload: upload, url: url, index: index
+
+- if false
+	/ TO REMOVE
 	- if current_user&.has_role?(:admin)
 		.photo-grid-item.image-gallery{'data-object-id' => "#{upload.id}", 'data-sort-id' => index}
 			%a.propWidget-1{caption: "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-role' => 'slider', href: "#{url}"}
@@ -8,19 +12,9 @@
 			- unless featured_image
 				= delete_upload_link(upload)
 				= edit_upload_link(upload)
-				= link_to '<span class="fa fa-repeat" />'.html_safe, rotate_upload_path(upload), class: 'btn btn-warning btn-xs rotate'
+				= rotate_image_link(upload)
 				%div{style: 'position: absolute; right: 5px; bottom: 25px;'}
 					= link_to number_to_human_size(upload.image_file_size), 'javascript:;', class: 'btn btn-default btn-xs'
-		
-		/ jquery click function in zapp.js
-		.loading.hidden Loading…
-		:javascript
-			$('.photo-grid-container').sortablePhotos({
-				selector: '> .photo-grid-item',
-				sortable: true,
-			});
-	- else
-		= render 'uploads/gallery', featured_image: featured_image, upload: upload, url: url, index: index
 
 :css
 	.actions-links{

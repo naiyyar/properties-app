@@ -1,6 +1,6 @@
 class VideoToursController < ApplicationController
   load_and_authorize_resource except: :index
-  before_action :set_video_tour,  only: [:show, :edit, :update, :destroy]
+  before_action :set_video_tour,  only: [:edit, :update, :destroy]
   before_action :find_tourable,   only: [:new, :show_tour]
   before_action :find_tours,      only: [:show_tour, :new]
   
@@ -12,9 +12,6 @@ class VideoToursController < ApplicationController
       @category    = params[:category]
       @video_tours = VideoTour.where(id: params[:ids])
     end
-  end
-
-  def show
   end
 
   def show_tour

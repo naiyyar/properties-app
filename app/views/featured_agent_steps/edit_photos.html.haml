@@ -1,54 +1,40 @@
 .row
-	.col-lg-4.col-sm-10.col-xs-8.col-lg-offset-3= render 'agent_info'
-	.col-lg-2.col-sm-2.col-xs-2
-		.text-right=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success', remote: true
-.row
 	.col-lg-12.col-xs-12.col-lg-offset-3
-		%p.font-bold.font-16 Edit Photos
+		.row
+			.col-lg-4.col-sm-10.col-xs-8= render 'agent_info'
+			.col-lg-2.col-sm-2.col-xs-2
+				.text-right=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success font-16 font-bold', remote: true
+		.row
+			.col-lg-12.col-xs-12
+				%p.font-bold.font-16 Edit Photos
 
-.row
-	.col-lg-6.col-xs-12.col-lg-offset-3= render 'featured_agents/photos', photo_counts: @photos_count
+		.row
+			.col-lg-6.col-xs-12
+				%ul#gallery.list-inline{'data-imageable-id' => @featured_agent.id, 'data-imageable-type' => @featured_agent.class.name}
+					- @uploads.each do |upload|
+						= render 'uploads/gallery', upload: upload, featured_image: false 
+		%br
+		%br
 
-.row{style: 'display: contents;'}
-	.col-lg-12{style: 'height: 100px;'}
-- if @photos_count <= 0
-	%br
-	%br
-	%br
-	%br
-	%br
-	%br
+		.row
+			.col-lg-6.col-xs-12
+				.text-right
+					= link_to 'Cancel', agenttools_dashboard_path(@featured_agent), class: 'font-18 pl-28 pr-28'
+					= link_to '<- Previous', wizard_path(:add_photos, agent_id: @featured_agent.id), class: 'btn btn-primary btn-o font-18 pl-28 pr-28'
+					- next_btn_text = @featured_agent.active? ? 'Done' : 'Next ->'
+					= link_to next_btn_text, done_or_next_path, class: 'btn btn-primary font-18 pl-28 pr-28'
 
-.row
-	.col-lg-7.col-lg-offset-2
-		.form-group
-			.text-right
-				= link_to 'Cancel', agenttools_dashboard_path(@featured_agent), class: 'font-18 pl-28 pr-28'
-				= link_to 'Back', wizard_path(:add_photos, agent_id: @featured_agent.id), class: 'btn btn-default font-18 pl-28 pr-28'
-				- next_btn_text = @featured_agent.active? ? 'Done' : 'Next'
-				= link_to next_btn_text, done_or_next_path, class: 'btn btn-primary font-18 pl-28 pr-28'
+		%br
+		%br
 
-
-#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
-	.modal-dialog.modal-md
-		.modal-content{style: 'background-color: #f3f3f3;'}
-			.modal-header
-				%button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
-					%span{'aria-hidden' => 'true'} ×
-				%h4.modal-title.font-18 Preview Agent
-			.modal-body.no-padding
-				= render 'featured_agents/thumbnail_preview'
-
-- if false
-	.modal-full.lease-contact-modal{style: 'display: none; background: #f3f3f3;'}
-		.row{style: 'position: relative;'}
-			.col-lg-12
-				.text-center{style: 'border-bottom: 1px solid #ddd;'}
-					%h4.text-center.font-18{style: 'margin-top: 10px; margin-bottom: 10px;'} Preview Agent
-
-			%div.text-right.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
-				= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, 'javascript:;', class: 'closeContact'
-    
-		= render 'featured_agents/thumbnail_preview'
+		#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
+			.modal-dialog.modal-md
+				.modal-content{style: 'background-color: #f3f3f3;'}
+					.modal-header
+						%button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+							%span{'aria-hidden' => 'true'} ×
+						%h4.modal-title.font-18 Preview Agent
+					.modal-body.no-padding
+						= render 'featured_agents/thumbnail_preview'
 				
 

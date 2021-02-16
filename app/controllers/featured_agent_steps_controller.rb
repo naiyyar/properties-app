@@ -7,6 +7,7 @@ class FeaturedAgentStepsController < ApplicationController
 		case step
 		when :add_photos
 			@imageable = @featured_agent
+			@uploads 	 = @featured_agent.uploads
 		when :edit_photos
 			@uploads 			= @featured_agent.uploads
 			@photos_count = @uploads.count.to_i

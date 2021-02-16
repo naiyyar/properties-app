@@ -16,7 +16,7 @@
 			.row
 				.col-lg-12.col-xs-12
 					%p{style: 'margin: 0px 0px;'} First image will be Featured
-					= render 'uploads/form_fields', show_done: false
+					.dz-short= render 'uploads/form_fields', show_done: false
 
 			.row
 				.col-lg-6.col-xs-12
@@ -54,7 +54,3 @@
 								= link_to 'Done', frbotools_user_path(current_user, type: 'featured'), class: 'btn btn-primary btn-done font-16 pl-28 pr-28'
 
 			%br
-:css
-	.dropzone {
-		min-height: 125px;
-	}

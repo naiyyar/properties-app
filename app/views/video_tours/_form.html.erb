@@ -1,38 +1,40 @@
-<div class="row">
-  <div class="col-lg-12">
-    <div class="media">
-      <div class="media-left">
-        <div class="media-body">
-          <h1 class="pageTitle"><%= link_to @building.building_name_or_address, building_path(@building) %></h1> 
-          <div class="address text-muted">
-            <%= link_to building_path(@building) do %>
-              <%= building_street_address @building %> <br />
-              <%= @building.neighborhood %>
-            <%end%> 
+<div style='margin: 8px;'>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="media">
+        <div class="media-left">
+          <div class="media-body">
+            <h1 class="pageTitle"><%= link_to @tourable.building_name_or_address, object_show_path(@tourable) %></h1> 
+            <div class="address text-muted">
+              <%= link_to object_show_path(@tourable) do %>
+                <%= building_street_address @tourable %> <br />
+                <%= @tourable.neighborhood %>
+              <%end%> 
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>  
-</div>
+    </div>  
+  </div>
 
-<h2></h2>
-<div class="row">
-  <div class="col-lg-12">
-    <% VideoTour::CATEGORIES.each do |category| %>
-      <% index = 0 %>
-      <% video_tours = @video_tours.where(category: category[1]) %>
-      <h4 class="font-bold"><%= category[0] %> <%=link_to '<span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: category[1], bid: @building.id, type: 'Building' } %></h4>
-      <div id="<%=category[1]%>-form" class="category-forms-container">
-        <% if video_tours.present? %>
-          <% video_tours.each do |tour| %>
-            <%= render partial: 'form_fields', locals: { video_tour: tour, category: category, index: tour.sort } %>
+  <h2></h2>
+  <div class="row">
+    <div class="col-lg-12">
+      <% VideoTour::CATEGORIES.each do |category| %>
+        <% index = 0 %>
+        <% video_tours = @video_tours.where(category: category[1]) %>
+        <h4 class="font-bold"><%= category[0] %> <%=link_to '<span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: category[1], bid: @tourable.id, type: 'Building' } %></h4>
+        <div id="<%=category[1]%>-form" class="category-forms-container">
+          <% if video_tours.present? %>
+            <% video_tours.each do |tour| %>
+              <%= render partial: 'form_fields', locals: { tourable: @tourable, video_tour: tour, category: category, index: tour.sort } %>
+            <%end%>
+          <%else%>
+            <%= render partial: 'form_fields', locals: { tourable: @tourable, video_tour: @video_tour, category: category, index: index } %>
           <%end%>
-        <%else%>
-          <%= render partial: 'form_fields', locals: { video_tour: @video_tour, category: category, index: index } %>
-        <%end%>
-      </div>
-    <%end%>
+        </div>
+      <%end%>
+    </div>
   </div>
 </div>
 

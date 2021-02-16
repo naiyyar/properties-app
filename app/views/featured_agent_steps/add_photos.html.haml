@@ -1,24 +1,54 @@
 .row
-	.col-lg-4.col-sm-10.col-xs-10.col-lg-offset-3
-		= render 'agent_info'
-.row
-	.col-lg-12.col-lg-offset-3
-		%p.font-bold.font-16 Add Photos
-.row
 	.col-lg-12.col-xs-12.col-lg-offset-3
-		= render partial: 'uploads/form_fields', show_done: true
+		.row
+			.col-lg-4.col-sm-10.col-xs-10= render 'agent_info'
+
+			.col-lg-2.col-sm-2.col-xs-2
+				.text-right=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success font-16 font-bold', remote: true
+		
+		.row
+			.col-lg-12
+				%p.font-bold.font-16 Add Photos
+		
+		.row
+			.col-lg-12.col-xs-12
+				.dz-short= render 'uploads/form_fields', show_done: false
+
+		.row
+			.col-lg-6.col-xs-12
+				%ul#gallery.list-inline{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
+					- @uploads.each do |upload|
+						= render 'uploads/gallery', upload: upload, featured_image: false 
+
+		%br
+		%br
+		%br
+
+		.row
+			.col-lg-6
+				.form-actions{style: 'margin: 8px;'}
+					.text-right
+						= link_to 'Cancel', @featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path, class: 'font-18 pl-28 pr-28'
+						= link_to '<- Previous',  edit_featured_agent_path(@imageable), class: 'btn btn-primary font-16 btn-o pl-28 pr-28'
+						- unless @imageable.live?
+							= link_to 'Next ->', wizard_path(:edit_photos, agent_id: @imageable.id), class: 'btn btn-primary btn-done font-16 pl-28 pr-28'
+						- else
+							= link_to 'Done', frbotools_user_path(current_user, type: 'featured'), class: 'btn btn-primary btn-done font-16 pl-28 pr-28'
 
 %br
 
-:css
-	.dropbox-container{
-		width: 100%;
-		text-align: center;
-		margin: 0 auto;
-	}
+#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
+	.modal-dialog.modal-md
+		.modal-content{style: 'background-color: #f3f3f3;'}
+			.modal-header
+				%button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+					%span{'aria-hidden' => 'true'} ×
+				%h4.modal-title.font-18 Preview Agent
+			.modal-body.no-padding
+				= render 'featured_agents/thumbnail_preview'
 
 - unless browser.device.mobile?
 	:css
 		.dropzone .dz-message{
-			margin-top: -120.5px;
+			margin-top: -50.5px;
 		}

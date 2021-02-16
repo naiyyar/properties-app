@@ -97,7 +97,8 @@ class UploadsController < ApplicationController
           render json: { 
             message: 'success', 
             fileID: @upload.id,
-            image_url: @upload.image.url
+            image_url: @upload.image.url,
+            type: @upload.imageable_type
           }, 
           :status => 200 
         }

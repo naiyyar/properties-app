@@ -1,10 +1,11 @@
-- cat = "#{@building.id}-#{category[1]}_#{index}"
+- cat = "#{tourable.id}-#{category[1]}_#{index}"
 %div{id: "tour-form-container-#{cat}"}
   = form_for video_tour, remote: true, html: { class: 'form-horizontal', id: "tour_#{cat}", style: 'margin: 8px 0px;', multipart: true }, authenticity_token: true do |f|
-    = f.hidden_field :tourable_id, value: @building.id, id: "video_tour_building_id_#{cat}"
-    = f.hidden_field :tourable_type, value: 'Building', id: "video_tour_building_type_#{cat}"
-    = f.hidden_field :sort,        value: index,        id: "video_tour_sort_#{cat}", class: 'video_tour_sort' if video_tour.new_record?
-    = f.hidden_field :category,    value: category[1],  id: "video_tour_category_#{cat}"
+    = f.hidden_field :tourable_id, value: tourable.id, id: "video_tour_building_id_#{cat}"
+    = f.hidden_field :tourable_type, value: tourable.class.name, id: "video_tour_building_type_#{cat}"
+    = f.hidden_field :sort, value: index, id: "video_tour_sort_#{cat}", class: 'video_tour_sort' if video_tour.new_record?
+    = f.hidden_field :category, value: category[1],  id: "video_tour_category_#{cat}"
+    
     .row
       - if !video_tour.new_record?
         .col-lg-1

@@ -1,5 +1,17 @@
 module UploadsHelper
 
+	def user_can_take_action? object
+		current_user.admin? || photo_owner?(object)
+	end
+
+	def photo_owner? object
+		object.user == current_user
+	end
+
+	def user_can_drag?
+		current_user && current_user.admin?
+	end
+
 	def seel_all_link object, images_count, see_all_class=nil
 		link_to see_all_link_title(images_count), 
 						see_all_url(object), 
@@ -29,11 +41,15 @@ module UploadsHelper
 	end
 
 	def delete_upload_link upload
-		link_to '<span class="fa fa-trash" />'.html_safe, upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs delete_image'
+		link_to trash_icon_helper, upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs delete_image'
 	end
 
 	def edit_upload_link upload
-		link_to '<span class="fa fa-edit" />'.html_safe, edit_upload_path(upload, upload_type: 'image'), remote: true, class: 'btn btn-primary btn-xs edit_image'
+		link_to edit_icon_helper, edit_upload_path(upload, upload_type: 'image'), remote: true, class: 'btn btn-primary btn-xs edit_image'
+	end
+
+	def rotate_image_link upload
+		link_to repeat_icon_helper, rotate_upload_path(upload), class: 'btn btn-warning btn-xs rotate'
 	end
 
 	def slider_data_attribute object
@@ -50,12 +66,20 @@ module UploadsHelper
 		object.imageable_type == 'FeaturedListing'
 	end
 
-	def draggable_class upload
-		current_user && type_featured_listing?(upload) ? 'photo-grid-item' : 'col-sm-3'
-	end
-
 	def featurable_class sort, featured_image: false
 		featured_image && sort.to_i == 0 ? 'fl-featured-image' : ''
+	end
+
+	def add_tour_link tourable, klass: ''
+		link_to 'Add Tour', 
+						new_video_tour_path(tourable_id: tourable.id, tourable_type: tourable.class.name), 
+						class: "btn btn-o btn-primary btn-sm #{klass}"
+	end
+
+	def add_photos_link imageable, klass:
+		link_to 'Add Photo', 
+						new_building_upload_path(building_id: imageable.id, upload_type: 'photos'), 
+						class: "btn btn-o btn-primary btn-sm btn-round #{klass}" 
 	end
 
 end

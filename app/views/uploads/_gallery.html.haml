@@ -1,23 +1,13 @@
-- unless featured_image
-	.image-gallery.jq-sortable-photos-item{class: "#{draggable_class(upload)} #{featurable_class(upload.sort, featured_image: featured_image)} #{ 'featured-gallery' if featured_image}", 'data-object-id' => "#{upload.id}", 'data-sort-id' => index, 'data-grid-item-id'=>"0-#{index}", 'data-row-id' => "#{row_id}" }
-		
-		%a.propWidget-1{'data-caption' => "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-imageable' => "#{imageable(upload)}", href: "#{url}", 'data-role' => 'slider'}
-			= image_tag url, alt: 'Image', class: 'img-thumbnail', style: 'max-width: none !important; width: 216px !important; height: 151px !important;'
-
-		- if current_user && type_featured_listing?(upload)
-			.pull-left.fl-featured-badge
-				= featured_badge_helper if featured_image && upload.sort.to_i == 0
-			.actions-links
-				= delete_upload_link(upload)
-				= edit_upload_link(upload)
-- else
-	%li.ui-state-default.featured-gallery{class: featurable_class(upload.sort, featured_image: true), 'data-index' => upload.sort, 'data-id' => upload.id}
-		%a{'data-caption' => "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-imageable' => "#{imageable(upload)}", href: "#{upload.image.url}", 'data-role' => 'slider'}
-			= image_tag upload.image.url
-		
-		- if current_user && type_featured_listing?(upload)
+%li.ui-state-default.featured-gallery{class: featurable_class(upload.sort, featured_image: true), 'data-index' => upload.sort, 'data-id' => upload.id}
+	%a{'data-caption' => "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-imageable' => "#{imageable(upload)}", href: "#{upload.image.url}", 'data-role' => 'slider'}
+		= image_tag upload.image.url
+	
+	- if current_user
+		- if type_featured_listing?(upload)
 			.pull-left.fl-featured-badge
 				= featured_badge_helper if upload.sort.to_i == 0
+		
+		- if user_can_take_action?(upload)
 			.actions-links
 				= edit_upload_link(upload)
 				= delete_upload_link(upload)

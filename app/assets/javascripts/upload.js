@@ -29,13 +29,15 @@ $(document).ready(function(){
 			// add the dz-success class (the green tick sign)
 			$(file.previewElement).addClass("dz-success");
 
-			if(!uploaded_ids.includes(response.fileID)) {
+			if(!uploaded_ids.includes(response.fileID) && response.type != 'Building') {
 				appendToGallery(response);
 				removedfile(file);
 			}
 			
-			if($('dz-image-preview').length == 0){
+			if($('.dz-image-preview').length == 0){
 				$('.dz-message').show();
+			}else{
+				$('.dz-message').hide();
 			}
 		},
 		//when the remove button is clicked
@@ -70,7 +72,7 @@ $(document).ready(function(){
 		var featured_icon_class='';
 		var badge_icon='';
 		
-		if(sort_index == 0) {
+		if(sort_index == 0 && response.type == 'FeaturedListing') {
 			featured_icon_class = 'fl-featured-image';
 			badge_icon = '<h4 class="comp featured round"><span class="icon-badge font-14"></span></h4>';
 		}

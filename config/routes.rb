@@ -13,7 +13,8 @@ Rails.application.routes.draw do
 
   mount StripeEvent::Engine, at: '/stripe-events'
 
-  resources :video_tours
+  resources :video_tours, except: [:show, :new]
+  get '/video_tours/new/:tourable_type/:tourable_id', to: 'video_tours#new', as: :new_video_tour
   get '/video_tours/show_tour/:tourable_id', to: 'video_tours#show_tour', as: :show_tour
   
   resources :billings do
