@@ -19,7 +19,6 @@
 				%ul#gallery.list-inline{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
 					- @uploads.each do |upload|
 						= render 'uploads/gallery', upload: upload, featured_image: false 
-
 		%br
 		%br
 		%br
@@ -27,13 +26,14 @@
 		.row
 			.col-lg-6
 				.form-actions{style: 'margin: 8px;'}
-					.text-right
-						= link_to 'Cancel', @featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path, class: 'font-18 pl-28 pr-28'
-						= link_to '<- Previous',  edit_featured_agent_path(@imageable), class: 'btn btn-primary font-16 btn-o pl-28 pr-28'
+					.pull-left
+						= cancel_link(@featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path)
+					.pull-right
+						= previous_link(edit_featured_agent_path(@imageable))
 						- unless @imageable.live?
-							= link_to 'Next ->', wizard_path(:edit_photos, agent_id: @imageable.id), class: 'btn btn-primary btn-done font-16 pl-28 pr-28'
+							= next_link(wizard_path(:payment, agent_id: @imageable.id))
 						- else
-							= link_to 'Done', frbotools_user_path(current_user, type: 'featured'), class: 'btn btn-primary btn-done font-16 pl-28 pr-28'
+							= done_link(frbotools_user_path(current_user, type: 'featured'))
 
 %br
 

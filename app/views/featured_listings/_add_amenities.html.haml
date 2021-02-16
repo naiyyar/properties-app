@@ -32,9 +32,9 @@
 
 					.row
 						.col-sm-12.col-lg-12
-							.text-center.form-actions
-								= link_to '<- Previous', next_prev_step_url(@featured_listing, step: 'create'), class: 'btn btn-primary btn-o font-16 pl-28 pr-28'
-								= f.submit 'Next ->', class: 'btn btn-primary font-16 pl-28 pr-28'
+							.text-right.form-actions
+								= previous_link(next_prev_step_url(@featured_listing, step: 'create'))
+								= f.submit next_text, class: 'btn btn-primary font-16 pl-28 pr-28'
 
 					%br
 					%br

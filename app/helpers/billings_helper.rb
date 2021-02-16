@@ -7,7 +7,7 @@ module BillingsHelper
 		return session[:back_to] if payment_object_id.present?
 		
 		if object_type == 'FeaturedAgent'
-			wizard_path(:edit_photos, agent_id: object.id)
+			wizard_path(:add_photos, agent_id: object.id)
 		elsif object_type == 'FeaturedBuilding'
 			!object.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured')
 		elsif object_type == 'FeaturedListing'
@@ -30,7 +30,8 @@ module BillingsHelper
 	end
 
 	def cancel_form_link type
-		link_to 'Cancel', redirect_url(type), class: 'cancel btn btn-default font-bold'
+		cancel_link(redirect_url(type))
+		# link_to 'Cancel', redirect_url(type), class: 'cancel btn btn-default font-bold'
 	end
 
 	def redirect_url type

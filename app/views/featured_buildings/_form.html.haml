@@ -20,20 +20,21 @@
             - if @featured_building.draft_edit? || @featured_by == 'admin'
               =render 'featured_buildings/admin_form_fields', f: f, object: f.object
             -else
-              - @submit_text = 'Next'
+              - @submit_text = next_text
               %p The building selected for Featuring can be changed at any time while the Featuring is still active. For example, if a selected Featured building no longer has vacancies, you have the ability to choose a different building that has vacancies using the same Feature entry.
               %br
             
             .form-group.footer
               .col-md-12.col-sm-12.col-xs-12
-                .text-right
-                  -if @featured_building.new_record?
-                    = link_to 'Cancel', params[:type].blank? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
-                  -else
-                    = link_to 'Cancel', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
+                .pull-left
+                  - if @featured_building.new_record?
+                    = cancel_link(params[:type].blank? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'))
+                  - else
+                    = cancel_link(!@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'))
                   
-                  = link_to 'Back', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18 pl-28 pr-28'
-                  = f.submit @submit_text, class: 'btn btn-primary font-18 pl-28 pr-28', disabled: true
+                .pull-right
+                  / = link_to 'Back', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18 pl-28 pr-28'
+                  = f.submit @submit_text, class: 'btn btn-primary font-16 pl-28 pr-28', disabled: true
     
 =javascript_include_tag 'featured_as_building'
 
