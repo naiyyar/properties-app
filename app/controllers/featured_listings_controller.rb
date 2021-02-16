@@ -97,6 +97,7 @@ class FeaturedListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def featured_listing_params
+      amenitites_keys = params[:featured_listing].try(:fetch, :amenities,{}).keys
       params.require(:featured_listing).permit(:first_name, 
                                                :last_name, 
                                                :email, 
@@ -123,8 +124,8 @@ class FeaturedListingsController < ApplicationController
                                                :renew, 
                                                :latitude, 
                                                :longitude, 
-                                               :amenities, 
-                                               :neighborhood1)
+                                               :neighborhood1,
+                                               :amenities => amenitites_keys)
     end
 
     def next_step_url step
