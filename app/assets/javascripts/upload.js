@@ -61,17 +61,24 @@ $(document).ready(function(){
 	function appendToGallery(response){
 		var image_url = response.image_url;
 		var upload_id = response.fileID;
-		var sort_index = $('.featured-gallery').length + 1;
+		var sort_index = $('.featured-gallery').length;
 		uploaded_ids.push(upload_id) // ISSUE TO FIX: file is uploaded once but sending two success call for a file.
-		var featured_icon_class = sort_index == 0 ? 'fl-featured-image' : ''
-		var html =  '<li class="featured-gallery ui-state-default '+featured_icon_class+'" data-id="'+upload_id+'" data-index="'+sort_index+'"style="">' +
+		var featured_icon_class='';
+		var badge_icon='';
+		
+		if(sort_index == 0) {
+			featured_icon_class = 'fl-featured-image';
+			badge_icon = '<h4 class="comp featured round"><span class="icon-badge font-14"></span></h4>';
+		}
+		
+		var html =  '<li class="featured-gallery ui-state-default '+featured_icon_class+'" data-id="'+upload_id+'" data-index="'+sort_index+'">' +
 									'<a data-caption="" data-fancybox="gallery" data-imageable="" data-role="slider" href="'+image_url+'">' +
 										'<img src="'+image_url+'" alt="image">' +
 									'</a>' +
-									'<div class="pull-left fl-featured-badge"></div>'+
+									'<div class="pull-left fl-featured-badge">'+badge_icon+'</div>' +
 									'<div class="actions-links">' +
-									'<a class="btn btn-primary btn-xs edit_image" data-remote="true" href="/uploads/'+upload_id+'/edit?upload_type=image"><span class="fa fa-edit"></span></a>' +
-									'<a class="btn btn-danger btn-xs delete_image" data-remote="true" rel="nofollow" data-method="delete" href="/uploads/'+upload_id+'"><span class="fa fa-trash"></span></a>' +
+										'<a class="btn btn-primary btn-xs edit_image" data-remote="true" href="/uploads/'+upload_id+'/edit?upload_type=image"><span class="fa fa-edit"></span></a>' +
+										'<a class="btn btn-danger btn-xs delete_image" data-remote="true" rel="nofollow" data-method="delete" href="/uploads/'+upload_id+'"><span class="fa fa-trash"></span></a>' +
 									'</div>' +
 								'</li>'
 		
