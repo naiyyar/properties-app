@@ -61,7 +61,7 @@ class FeaturedListingsController < ApplicationController
       else
         format.html { 
           flash[:error] = @featured_listing.errors.full_messages
-          redirect_to :back 
+          redirect_to :back
         }
       end
     end

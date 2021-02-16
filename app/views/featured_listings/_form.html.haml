@@ -92,18 +92,18 @@
             .col-xs-12.col-sm-6.col-md-3.col-lg-6
               .form-group
                 %label Monthly Rent $*
-                = f.number_field :rent,  class: 'form-control'
+                = f.number_field :rent,  class: 'form-control validate'
 
           .row
             .col-xs-12.col-sm-6.col-md-3.col-lg-6
               .form-group
                 %label Number of Bedrooms*
-                = f.number_field :bed,  class: 'form-control'
+                = f.number_field :bed,  class: 'form-control validate'
 
             .col-xs-12.col-sm-6.col-md-3.col-lg-6
               .form-group
                 %label Number of Bathrooms*
-                = f.number_field :bath,  class: 'form-control'
+                = f.number_field :bath,  class: 'form-control validate'
 
           .row
             .col-xs-12.col-sm-6.col-md-3.col-lg-6
@@ -113,7 +113,7 @@
 
             .col-xs-12.col-sm-6.col-md-3.col-lg-6
               .form-group
-                %label Apartment Type
+                %label Apartment Type*
                 = f.select :apartment_type, options_for_select(FeaturedListing::APARTMENT_TYPE, f.object.apartment_type), { prompt: 'Select Apartment Type'}, { class: 'form-control validate', required: true }
           
           .row
