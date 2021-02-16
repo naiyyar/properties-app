@@ -19,10 +19,10 @@
       .row
         .col-xs-12.col-sm-12.col-md-12.col-lg-12
           .summaryItem{style: 'margin-bottom: 0px;'}
-            %h1.pageTitle= @management_company.name
+            %h1.pageTitle.fon-16= @management_company.try(:name)
             .property_information{style: 'padding: 0px 2px;'}
               %p
-              %div= link_to 'Website', @management_company.website, class: 'hyper-link', target: '_blank'
+              %div= link_to 'Website', @management_company.try(:website), class: 'hyper-link', target: '_blank'
               %div{style: 'display: inline-block;'}
             .clearfix
   
@@ -49,7 +49,7 @@
         = render 'layouts/home/footer'
       #building_managed.tab-pane.fade.in.active.no-padding
         .resultsList{class: controller_name}
-          #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :building
+          #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :object
         
         .pages-container{style: 'padding: 15px'}= render 'layouts/shared/add_pagination', objects: @manage_buildings
 

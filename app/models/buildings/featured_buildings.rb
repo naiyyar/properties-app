@@ -18,7 +18,7 @@ module Buildings
 	    end
 	    featured_buildings_count 				 = top2_featured.length
 	    with_featured_listings 					 = buildings_with_featured_listings(all_buildings, featured_listings, featured_buildings_count)
-	    with_featured_listings_and_agent = buildings_with_featured_agent(with_featured_listings, agent, featured_buildings_count, featured_listings.size)
+	    with_featured_listings_and_agent = buildings_with_featured_agent(with_featured_listings, agent, featured_buildings_count, featured_listings&.size)
 	    
 	    final_results.merge!({
 	    	all_buildings: with_featured_listings_and_agent,
