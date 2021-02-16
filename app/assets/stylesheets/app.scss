@@ -247,6 +247,10 @@ form fieldset, .smart-form fieldset{
     color: #428bca !important;
 }
 
+.font-blue{
+    color: #2C79E4 !important;
+}
+
 .commentBody .show-review-images{
     display: inline-block; 
     width: 90%;
@@ -1529,12 +1533,20 @@ h1.pageTitle {
   font-size: 18px !important;
 }
 
+.font-21{
+  font-size: 21px !important;
+}
+
 .pl-28{
   padding-left: 28px !important;
 }
 
 .pr-28{
   padding-right: 28px !important;
+}
+
+.form-actions a{
+  margin: 0px 10px;
 }
 
 .description p {

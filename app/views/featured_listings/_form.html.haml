@@ -1,130 +1,138 @@
-.form-container
-  .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-7.col-lg-offset-2
-      .panel.panel-default
-        .panel-heading
-          %b= 'Featured Listing'
-        .panel-body
-          = form_for featured_listing, class: 'form-horizontal' do |f|
-            .row
-              .col-xs-12.col-sm-6.col-md-8.col-lg-8
-                %b.font-16.hyper-link Listing Contact
-            %br
-            
-            .row
-              .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                .form-group
-                  %label First Name*
-                  = f.text_field :first_name, class: 'form-control validate'
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-8.col-lg-offset-3
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-9
+        %p.font-21 Featured Listing
+    
+    %br
+    
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-9
+        = form_for featured_listing, class: 'form-horizontal' do |f|
+          .row
+            .col-xs-12.col-sm-6.col-md-8.col-lg-8
+              %b.font-16.hyper-link Listing Contact
+          %br
+          
+          .row
+            .col-xs-12.col-sm-12.col-md-6.col-lg-6
+              .form-group
+                %label First Name*
+                = f.text_field :first_name, class: 'form-control validate'
 
-              .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                .form-group
-                  %label Last Name*
-                  = f.text_field :last_name, class: 'form-control validate'
+            .col-xs-12.col-sm-12.col-md-6.col-lg-6
+              .form-group
+                %label Last Name*
+                = f.text_field :last_name, class: 'form-control validate'
 
-            .row
-              .col-xs-12.col-sm-6.col-md-6.col-lg-6
-                .form-group
-                  %label Email*
-                  = f.text_field :email, class: 'form-control validate'
+          .row
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6
+              .form-group
+                %label Email*
+                = f.text_field :email, class: 'form-control validate'
 
-              .col-xs-12.col-sm-6.col-md-6.col-lg-6
-                .form-group
-                  %label Phone Number
-                  =f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
-            %br
-            %br
-            .row
-              .col-xs-12.col-sm-6.col-md-8.col-lg-8
-                %b.font-16.hyper-link Listing Location
-            %br
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6
+              .form-group
+                %label Phone Number
+                =f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
+          %br
+          %br
+          .row
+            .col-xs-12.col-sm-6.col-md-8.col-lg-8
+              %b.font-16.hyper-link Listing Location
+          %br
 
-            .row
-              .col-xs-12.col-sm-6.col-md-3.col-lg-6
-                .form-group
-                  %label Neighborhood To Be Featured In*
-                  = f.select :neighborhood, options_for_select(StaticData::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
+          .row
+            .col-xs-12.col-sm-6.col-md-3.col-lg-6
+              .form-group
+                %label Neighborhood To Be Featured In*
+                = f.select :neighborhood, options_for_select(StaticData::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
 
-            .row
-              .col-xs-12.col-sm-6.col-md-6.col-lg-6
-                .form-group
-                  %label Address*
-                  = f.text_field :address, class: 'form-control validate', autocomplete: 'off'
+          .row
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6
+              .form-group
+                %label Address*
+                = f.text_field :address, class: 'form-control validate', autocomplete: 'off'
 
-              .col-xs-12.col-sm-6.col-md-6.col-lg-6
-                .form-group
-                  %label Unit Number*
-                  = f.text_field :unit, class: 'form-control validate'
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6
+              .form-group
+                %label Unit Number*
+                = f.text_field :unit, class: 'form-control validate'
 
-            .row
-              .col-xs-8.col-sm-6.col-md-3.col-lg-5
-                .form-group
-                  %label City*
-                  = f.text_field :city, class: 'form-control validate'
+          .row
+            .col-xs-8.col-sm-6.col-md-3.col-lg-5
+              .form-group
+                %label City*
+                = f.text_field :city, class: 'form-control validate'
 
-              .col-xs-4.col-sm-6.col-md-3.col-lg-2
-                .form-group
-                  %label State*
-                  = f.text_field :state, class: 'form-control', disabled: true
+            .col-xs-4.col-sm-6.col-md-3.col-lg-2
+              .form-group
+                %label State*
+                = f.text_field :state, class: 'form-control', disabled: true
 
-              .col-xs-12.col-sm-6.col-md-3.col-lg-5
-                .form-group
-                  %label Zip Code*
-                  = f.text_field :zipcode, class: 'form-control validate'
-            .row
-              .col-xs-12.col-sm-6.col-md-3.col-lg-6
-                .form-group
-                  %label Neighborhood*
-                  = f.select :neighborhood1, options_for_select(Building.neighborhood1, f.object.neighborhood1), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
+            .col-xs-12.col-sm-6.col-md-3.col-lg-5
+              .form-group
+                %label Zip Code*
+                = f.text_field :zipcode, class: 'form-control validate'
+          .row
+            .col-xs-12.col-sm-6.col-md-3.col-lg-6
+              .form-group
+                %label Neighborhood*
+                = f.select :neighborhood1, options_for_select(Building.neighborhood1, f.object.neighborhood1), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
 
 
-            %br
-            %br
-            .row
-              .col-xs-12.col-sm-6.col-md-8.col-lg-8
-                %b.font-16.hyper-link Listing Information
-            %br
+          %br
+          %br
+          .row
+            .col-xs-12.col-sm-6.col-md-8.col-lg-8
+              %b.font-16.hyper-link Listing Information
+          %br
 
-            .row
-              .col-xs-12.col-sm-6.col-md-3.col-lg-6
-                .form-group
-                  %label Monthly Rent $*
-                  = f.number_field :rent,  class: 'form-control'
+          .row
+            .col-xs-12.col-sm-6.col-md-3.col-lg-6
+              .form-group
+                %label Monthly Rent $*
+                = f.number_field :rent,  class: 'form-control'
 
-            .row
-              .col-xs-12.col-sm-6.col-md-3.col-lg-6
-                .form-group
-                  %label Number of Bedrooms*
-                  = f.number_field :bed,  class: 'form-control'
+          .row
+            .col-xs-12.col-sm-6.col-md-3.col-lg-6
+              .form-group
+                %label Number of Bedrooms*
+                = f.number_field :bed,  class: 'form-control'
 
-              .col-xs-12.col-sm-6.col-md-3.col-lg-6
-                .form-group
-                  %label Number of Bathrooms*
-                  = f.number_field :bath,  class: 'form-control'
+            .col-xs-12.col-sm-6.col-md-3.col-lg-6
+              .form-group
+                %label Number of Bathrooms*
+                = f.number_field :bath,  class: 'form-control'
 
-            .row
-              .col-xs-12.col-sm-6.col-md-3.col-lg-6
-                .form-group
-                  %label Size In Square Feet
-                  = f.number_field :size,  class: 'form-control'
+          .row
+            .col-xs-12.col-sm-6.col-md-3.col-lg-6
+              .form-group
+                %label Size In Square Feet
+                = f.number_field :size,  class: 'form-control'
 
-              .col-xs-12.col-sm-6.col-md-3.col-lg-6
-                .form-group
-                  %label Apartment Type
-                  = f.select :apartment_type, options_for_select(FeaturedListing::APARTMENT_TYPE, f.object.apartment_type), { prompt: 'Select Apartment Type'}, { class: 'form-control validate', required: true }
-            
-            .row
-              .col-xs-12.col-sm-6.col-md-6.col-lg-6
-                .form-group
-                  %label Date Available
-                  = f.text_field :date_available,  class: 'form-control datepicker', :autocomplete => :off
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  %label Description
-                  = f.text_area :description, class: 'form-control', rows: 10
-                  = hidden_field_tag :next_step, :add_amenities
-            .form-group
-              .col-sm-12
-                .pull-left= cancel_form_link('FeaturedListing')
-                .pull-right= f.submit 'Next ->', class: 'btn btn-primary'
+            .col-xs-12.col-sm-6.col-md-3.col-lg-6
+              .form-group
+                %label Apartment Type
+                = f.select :apartment_type, options_for_select(FeaturedListing::APARTMENT_TYPE, f.object.apartment_type), { prompt: 'Select Apartment Type'}, { class: 'form-control validate', required: true }
+          
+          .row
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6
+              .form-group
+                %label Date Available
+                = f.text_field :date_available,  class: 'form-control datepicker', :autocomplete => :off
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              .form-group
+                %label Description
+                = f.text_area :description, class: 'form-control', rows: 10
+                = hidden_field_tag :next_step, :add_amenities
+          
+          .row
+            .col-sm-12
+              .pull-left
+                / = cancel_form_link('FeaturedListing')
+              .pull-right= f.submit 'Next ->', class: 'btn btn-primary font-16'
+          
+          %br
+          %br

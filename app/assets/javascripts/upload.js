@@ -20,7 +20,7 @@ $(document).ready(function(){
 		paramName: param_name,
 		// show remove links on each image upload
 		addRemoveLinks: true,
-		dictDefaultMessage: "<b>Add images </b> <br/> Drop Your Images Or Click To Browse",
+		dictDefaultMessage: "<b>Add Images </b> <br/> Drop Your Images Or Click To Browse",
 		// if the upload was successful
 		success: function(file, response){
 			// find the remove button link of the uploaded file and give it an id
@@ -29,9 +29,13 @@ $(document).ready(function(){
 			// add the dz-success class (the green tick sign)
 			$(file.previewElement).addClass("dz-success");
 
-			if(!uploaded_ids.includes(response.fileID)){
+			if(!uploaded_ids.includes(response.fileID)) {
 				appendToGallery(response);
 				removedfile(file);
+			}
+			
+			if($('dz-image-preview').length == 0){
+				$('.dz-message').show();
 			}
 		},
 		//when the remove button is clicked

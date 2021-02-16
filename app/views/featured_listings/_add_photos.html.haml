@@ -3,15 +3,15 @@
 	.row
 		.col-lg-12.col-xs-12.col-lg-offset-3
 			.row
-				.col-lg-3.col-xs-8
-					%b.font-16 Featured Listing
-				.col-lg-3.col-xs-4
-					= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-success btn-block', target: 'blank'
+				.col-lg-4.col-xs-8
+					%p.font-21 Featured Listing
+				.col-lg-2.col-xs-4
+					= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-success btn-block font-16 font-bold', target: 'blank'
 			%br
 
 			.row
 				.col-lg-12
-					%p.font-bold.font-16 Add Photos
+					%p.font-bold.font-16.font-blue Add Photos
 			
 			.row
 				.col-lg-12.col-xs-12
@@ -45,13 +45,16 @@
 
 			.row
 				.col-lg-6
-					%div{style: 'margin: 8px;'}
-						.pull-left= cancel_form_link('FeaturedListing')
-						.pull-right
-							= link_to '<- Back', next_prev_step_url(@imageable, step: 'add_amenities'), class: 'btn btn-primary font-18 pl-28 pr-28'
+					.form-actions{style: 'margin: 8px;'}
+						.text-center
+							= link_to '<- Previous', next_prev_step_url(@imageable, step: 'add_amenities'), class: 'btn btn-primary font-16 btn-o pl-28 pr-28'
 							- unless @imageable.live?
-								= link_to 'Next ->', next_prev_step_url(@imageable, step: 'payment'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
+								= link_to 'Next ->', next_prev_step_url(@imageable, step: 'payment'), class: 'btn btn-primary btn-done font-16 pl-28 pr-28'
 							- else
-								= link_to 'Done', frbotools_user_path(current_user, type: 'featured'), class: 'btn btn-primary btn-done font-18 pl-28 pr-28'
+								= link_to 'Done', frbotools_user_path(current_user, type: 'featured'), class: 'btn btn-primary btn-done font-16 pl-28 pr-28'
 
 			%br
+:css
+	.dropzone {
+		min-height: 125px;
+	}
