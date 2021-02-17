@@ -30,10 +30,7 @@
                 %td=agent.full_name
                 %td=agent.user.try(:email)
                 %td=agent.try(:email)
-                %td
-                  - nb = agent.try(:neighborhood)
-                  - nb = 'Midtown' if nb == 'Midtown Manhattan'
-                  =search_by_neighborhood_link(nb, 'MANHATTAN', false)
+                %td=neighborhood_link(agent.try(:neighborhood))
                 %td=agent.try(:broker_firm)
                 %td=agent.try(:license_number)
                 %td=number_to_phone(agent.try(:phone), area_code: true)

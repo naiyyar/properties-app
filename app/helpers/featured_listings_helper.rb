@@ -5,7 +5,7 @@ module FeaturedListingsHelper
 	end
 
 	def listing_address object
-		"#{object.address} Unit #{object.unit}, #{object.city}, NY, #{object.zipcode}"
+		"#{object.address} #{object.unit}, #{object.city}, NY, #{object.zipcode}"
 	end
 
 	def url_address listing
@@ -28,7 +28,7 @@ module FeaturedListingsHelper
 		link_to 'Contact Owner', 
 						'javascript:;',
 						onclick: "FEATURED_LISTING.showContactOwnerFormModal(#{object.id})", 
-						class: "btn btn-primary #{size_class}", 
+						class: "btn btn-primary #{size_class} font-14 font-bold", 
 						remote: true
 	end
 

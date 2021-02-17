@@ -21,11 +21,13 @@
           %tbody.table
             - featured_listings.each do |listing|
               %tr
-                %td=listing.id
-                %td=link_to listing.full_address, object_show_path(listing)
-                %td=link_to listing.unit, '#'
-                %td=link_to listing.try(:neighborhood), '#'
-                %td=link_to listing.uploads_count, '#'
+                %td= listing.id
+                %td
+                  - if listing.address.present?
+                    =link_to listing.full_address, object_show_path(listing)
+                %td= listing.unit
+                %td= neighborhood_link(listing.try(:neighborhood))
+                %td= listing.uploads_count
                 %td= start_date(listing)
                 %td= end_date(listing)
                 - unless params[:type] == 'featured'

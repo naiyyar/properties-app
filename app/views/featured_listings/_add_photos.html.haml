@@ -30,7 +30,8 @@
 			- tour_category = 'featured_listing'
 			.row
 				.col-lg-6.col-xs-12
-					%h4.font-bold= link_to 'Add Video <span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: tour_category, bid: @imageable.id, type: 'FeaturedListing' }
+					%h4.font-bold.font-16
+						= link_to 'Add Video <span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: tour_category, bid: @imageable.id, type: 'FeaturedListing' }
 					
 					.category-forms-container{id: "#{tour_category}-form"}
 						- if @video_tours.present?

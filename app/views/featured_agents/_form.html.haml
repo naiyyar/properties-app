@@ -74,7 +74,7 @@
               .pull-right
                 / = previous_link(!@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'))
                 / = link_to 'Back', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18 pl-28 pr-28'
-                = f.submit next_text, class: 'btn btn-primary font-16 pl-28 pr-28'
+                = f.submit next_text, class: 'btn btn-primary font-16 pl-28 pr-28 font-bold', style: next_prev_link_style_h
 
           %br
           %br
