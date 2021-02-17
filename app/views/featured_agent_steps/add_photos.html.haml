@@ -13,7 +13,8 @@
 		.row
 			.col-lg-12.col-xs-12
 				.dz-short= render 'uploads/form_fields', show_done: false
-
+				%p.font-14{style: 'margin: 4px 0px;'} Upload a profile image of yourself here. You can edit images on the next step.
+		%br
 		.row
 			.col-lg-6.col-xs-12
 				%ul#gallery.list-inline{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
@@ -46,9 +47,3 @@
 				%h4.modal-title.font-18 Preview Agent
 			.modal-body.no-padding
 				= render 'featured_agents/thumbnail_preview'
-
-- unless browser.device.mobile?
-	:css
-		.dropzone .dz-message{
-			margin-top: -50.5px;
-		}

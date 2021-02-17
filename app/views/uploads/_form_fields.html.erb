@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-6">
-		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: 'dropzone form-horizontal', id: "new_upload_#{params[:upload_type]}", style: 'margin: 10px 0px;' }) do |f|  %>
+		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: 'dropzone form-horizontal', id: "new_upload_#{params[:upload_type]}", style: 'margin: 0px;' }) do |f|  %>
 		  <div class="fallback">
 		  	<% unless params[:upload_type] == 'documents' %>
 		    	<%= f.file_field :image %>
@@ -16,20 +16,27 @@
 		  </div>
 		<% end %>
 		
-		<%if @imageable.kind_of?(FeaturedAgent)%>
-			<p class="font-14" style='margin: 0px 8px;'> Upload a profile image of yourself here. You can edit images on the next step.</p>
-		<%end%>
-
-		<div class="form-group">
-			<div class="pull-right" style="padding: 8px 0px;">
-				<% if @imageable.kind_of? Unit %>
-					<%= link_to 'Done', unit_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done' %>
-				<%else%>
-					<%= link_to 'Done', building_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done disabled' if show_done %>
-				<%end%>
+		<% if show_done %>
+			<div class="form-group">
+				<div class="pull-right" style="padding: 8px 0px;">
+					<% if @imageable.kind_of? Unit %>
+						<%= link_to 'Done', unit_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done' %>
+					<%else%>
+						<%= link_to 'Done', building_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done disabled' %>
+					<%end%>
+				</div>
 			</div>
-		</div>
+		<%end%>
 	</div>
 </div>
 
 <%= javascript_include_tag 'upload' %>
+
+<% unless browser.device.mobile? %>
+	<style type="text/css">
+		.dropzone .dz-message {
+			margin-top: -20.5px;
+			height: 75px;
+		}
+	</style>
+<%end%>
