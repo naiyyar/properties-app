@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-6">
-		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: 'dropzone form-horizontal', id: "new_upload_#{params[:upload_type]}", style: 'margin: 0px;' }) do |f|  %>
+		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: "dropzone form-horizontal #{@imageable.class.name}", id: "new_upload_#{params[:upload_type]}", style: 'margin: 0px;' }) do |f|  %>
 		  <div class="fallback">
 		  	<% unless params[:upload_type] == 'documents' %>
 		    	<%= f.file_field :image %>
@@ -35,8 +35,13 @@
 <% unless browser.device.mobile? %>
 	<style type="text/css">
 		.dropzone .dz-message {
-			margin-top: -20.5px;
 			height: 75px;
+			margin-top: -20.5px;
 		}
+
+		.dropzone.Building .dz-message {
+			margin-top: -49.5px;
+		}
+
 	</style>
 <%end%>
