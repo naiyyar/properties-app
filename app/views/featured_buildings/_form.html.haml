@@ -34,7 +34,7 @@
                   
                 .pull-right
                   / = link_to 'Back', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18 pl-28 pr-28'
-                  = f.submit @submit_text, class: 'btn btn-primary font-16 pl-28 pr-28 font-bold', disabled: true, style: next_prev_link_style_h
+                  = submit_link(f, title: @submit_text, disabled: true)
     
 =javascript_include_tag 'featured_as_building'
 

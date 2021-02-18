@@ -1,32 +1,32 @@
-.row
-	.col-lg-12.col-xs-12.col-lg-offset-3
-		.row
-			.col-lg-4.col-sm-10.col-xs-10= render 'agent_info'
+#property-photos
+	.row
+		.col-lg-12.col-xs-12.col-lg-offset-3
+			.row
+				.col-lg-4.col-sm-10.col-xs-8= render 'agent_info'
 
-			.col-lg-2.col-sm-2.col-xs-2
-				.text-right=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success font-16 font-bold', remote: true
-		
-		.row
-			.col-lg-12
-				%p.font-bold.font-16 Add Photos
-		
-		.row
-			.col-lg-12.col-xs-12
-				.dz-short= render 'uploads/form_fields', show_done: false
-				%p.font-14{style: 'margin: 4px 0px;'} Upload a profile image of yourself here. You can edit images on the next step.
-		%br
-		.row
-			.col-lg-6.col-xs-12
-				%ul#gallery.list-inline{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
-					- @uploads.each do |upload|
-						= render 'uploads/gallery', upload: upload, featured_image: false 
-		%br
-		%br
-		%br
+				.col-lg-2.col-sm-2.col-xs-2
+					.text-right=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success font-16 font-bold', remote: true
+			
+			.row
+				.col-lg-12
+					%p.font-bold.font-16 Add Photos
+			
+			.row
+				.col-lg-12.col-xs-12
+					.dz-short= render 'uploads/form_fields', show_done: false
+					%p.font-14{style: 'margin: 4px 0px;'} Upload a profile image of yourself here. You can edit images on the next step.
+			%br
+			.row
+				.col-lg-6.col-xs-9
+					%ul#gallery.list-inline{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
+						- @uploads.each do |upload|
+							= render 'uploads/gallery', upload: upload, featured_image: false 
+			%br
+			%br
+			%br
 
-		.row
-			.col-lg-6
-				.form-actions{style: 'margin: 8px;'}
+			.row
+				.col-lg-6.col-xs-12
 					.pull-left
 						= cancel_link(@featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path)
 					.pull-right
@@ -36,14 +36,14 @@
 						- else
 							= done_link(frbotools_user_path(current_user, type: 'featured'))
 
-%br
+	%br
 
-#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
-	.modal-dialog.modal-md
-		.modal-content{style: 'background-color: #f3f3f3;'}
-			.modal-header
-				%button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
-					%span{'aria-hidden' => 'true'} ×
-				%h4.modal-title.font-18 Preview Agent
-			.modal-body.no-padding
-				= render 'featured_agents/thumbnail_preview'
+	#thumbnailPreview.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
+		.modal-dialog.modal-md
+			.modal-content{style: 'background-color: #f3f3f3;'}
+				.modal-header
+					%button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+						%span{'aria-hidden' => 'true'} ×
+					%h4.modal-title.font-18 Preview Agent
+				.modal-body.no-padding
+					= render 'featured_agents/thumbnail_preview'

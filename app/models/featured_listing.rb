@@ -97,7 +97,7 @@ class FeaturedListing < ApplicationRecord
   end
 
   def name_with_last_initial
-    "#{first_name} #{last_name.first}"
+    "#{first_name} #{last_name.first}."
   end
 
   def property_type

@@ -25,10 +25,6 @@
 									= f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin'
 									= f.hidden_field :user_id, value: @user.id
 									= f.submit 'Add New Featured Listing', class: 'btn btn-primary'
-								
-								- if @filterrific.present?
-									%p
-									= render 'layouts/shared/filterrific_form'
 				- else
 					.row
 						.col-xs-12
@@ -44,13 +40,11 @@
 									= f.submit 'Add New Featured Listing', class: 'btn btn-primary'
 						
 						.col-xs-6
-							= render 'layouts/shared/filterrific_form' if @filterrific.present?
-
 
 				= render 'featured_listings/featured_listing', featured_listings: @featured_listings
 				.text-center= will_paginate @featured_listings, renderer: BootstrapPagination::Rails
       
-		-else
+		- else
 			.tab-pane.fade.in.active
 				%h2
 				= render 'billings/saved_cards', add_new_card_url: new_manager_featured_listing_user_path(current_user, type: 'add_new_card')

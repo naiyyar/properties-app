@@ -174,11 +174,19 @@ module BuildingsHelper
 	def date_uploaded object
 		"<b>#{ associated_object(object.imageable) }</b>" +
 		"<p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>" +
-		"<p>" + fancybox_cta_buttons + "</p>".html_safe if @building.present?
+		"<p>" + fancybox_cta_buttons(object) + "</p>".html_safe # if @building.present?
 	end
 
-	def fancybox_cta_buttons
-		@building.show_contact_leasing? ? contact_leasing_link(@building, '', 'btn-slider') : check_availability_link(@building, 'btn-slider')
+	def fancybox_cta_buttons object
+		if object.imageable_type == 'FeaturedListing'
+			featured_listing_contact_owner_button(object.imageable, size_class: 'txt-color-white btn-slider')
+		else
+			if @building
+				@building.show_contact_leasing? ? contact_leasing_link(@building, '', 'btn-slider') : check_availability_link(@building, 'btn-slider')
+			else
+				''
+			end
+		end
 	end
 
 	def sort_options

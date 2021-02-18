@@ -19,7 +19,7 @@
 					.dz-short= render 'uploads/form_fields', show_done: false
 			%br
 			.row
-				.col-lg-6.col-xs-12
+				.col-lg-6.col-xs-9
 					%ul#gallery.list-inline{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing'}
 						- @photos.each do |upload|
 							= render 'uploads/gallery', upload: upload, featured_image: true 
@@ -45,13 +45,12 @@
 			%br
 
 			.row
-				.col-lg-6
-					.form-actions{style: 'margin: 8px;'}
-						.text-right
-							= previous_link(next_prev_step_url(@imageable, step: 'add_amenities'))
-							- unless @imageable.live?
-								= next_link(next_prev_step_url(@imageable, step: 'payment'))
-							- else
-								= done_link(frbotools_user_path(current_user, type: 'featured'))
+				.col-lg-6.col-xs-12
+					%div{class: action_links_alignment_class}
+						= previous_link(next_prev_step_url(@imageable, step: 'add_amenities'))
+						- unless @imageable.live?
+							= next_link(next_prev_step_url(@imageable, step: 'payment'))
+						- else
+							= done_link(frbotools_user_path(current_user, type: 'featured'))
 
 			%br

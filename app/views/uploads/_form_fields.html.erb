@@ -32,16 +32,7 @@
 
 <%= javascript_include_tag 'upload' %>
 
-<% unless browser.device.mobile? %>
-	<style type="text/css">
-		.dropzone .dz-message {
-			height: 75px;
-			margin-top: -20.5px;
-		}
-
-		.dropzone.Building .dz-message {
-			margin-top: -49.5px;
-		}
-
-	</style>
-<%end%>
+<style type="text/css">
+	.dropzone .dz-message { height: 75px; margin-top: -20.5px; }
+	.dropzone.Building .dz-message { margin-top: -49.5px; }
+</style>

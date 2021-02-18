@@ -1,40 +1,41 @@
-.row
-	.col-lg-12.col-xs-12.col-lg-offset-4
-		.row
-			.col-xs-12.col-sm-12.col-md-12.col-lg-4
-				%p.font-21 Featured Listing
-		.row
-			.col-xs-6.col-sm-6.col-md-8.col-lg-4
-				%b.font-16.font-blue Amenities
-		
-		.row
-			.col-xs-12.col-sm-12.col-md-12.col-lg-4
-				= form_for @featured_listing, class: 'form-horizontal' do |f|
-					.row
-						.col-xs-12.col-sm-12.col-md-6.col-lg-6
-							.checkbox.custom-checkbox
-								%label
-									= check_box_tag 'featured_listing[amenities][no_fee]', 'No Fee', checked: true
-									%span.fa.fa-check
-									No Fee
-
-							- BuildingAmenities.listing_amenities.each do |key, value|
+%div{style: 'padding: 8px 10px;'}
+	.row
+		.col-lg-12.col-xs-12.col-lg-offset-4
+			.row
+				.col-xs-12.col-sm-12.col-md-12.col-lg-4
+					%p.font-21 Featured Listing
+			.row
+				.col-xs-6.col-sm-6.col-md-8.col-lg-4
+					%b.font-16.font-blue Amenities
+			
+			.row
+				.col-xs-12.col-sm-12.col-md-12.col-lg-4
+					= form_for @featured_listing, class: 'form-horizontal' do |f|
+						.row
+							.col-xs-12.col-sm-12.col-md-6.col-lg-6
 								.checkbox.custom-checkbox
 									%label
-										- saved_value = @listing_amenities[key.to_s]
-										= check_box_tag "featured_listing[amenities][#{key}]", value, saved_value.present?
+										= check_box_tag 'featured_listing[amenities][no_fee]', 'No Fee', checked: true
 										%span.fa.fa-check
-										= value
-		            
-							= hidden_field_tag :next_step, :add_photos
-					%br
-					%br
+										No Fee
 
-					.row
-						.col-sm-12.col-lg-12
-							.text-right.form-actions
-								= previous_link(next_prev_step_url(@featured_listing, step: 'create'))
-								= f.submit next_text, class: 'btn btn-primary font-16 pl-28 pr-28 font-bold', style: next_prev_link_style_h
+								- BuildingAmenities.listing_amenities.each do |key, value|
+									.checkbox.custom-checkbox
+										%label
+											- saved_value = @listing_amenities[key.to_s]
+											= check_box_tag "featured_listing[amenities][#{key}]", value, saved_value.present?
+											%span.fa.fa-check
+											= value
+			            
+								= hidden_field_tag :next_step, :add_photos
+						%br
+						%br
 
-					%br
-					%br
+						.row
+							.col-sm-12.col-lg-12
+								%div{class: action_links_alignment_class}
+									= previous_link(next_prev_step_url(@featured_listing, step: 'create'))
+									= submit_link(f, title: next_text)
+
+						%br
+						%br

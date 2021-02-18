@@ -1,80 +1,77 @@
-.row
-  .col-xs-12.col-sm-12.col-md-12.col-lg-8.col-lg-offset-3
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-9
-        %p.font-21= @featured_agent.new_record? ? 'New Featured Agent' : 'Edit Featured Agent'
+%div{style: 'padding: 8px 14px;'}
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-8.col-lg-offset-3
+      .row
+        .col-xs-12.col-sm-12.col-md-12.col-lg-9
+          %p.font-21= @featured_agent.new_record? ? 'New Featured Agent' : 'Edit Featured Agent'
+        
+      %br
       
-    %br
-    
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-9
-        = form_for @featured_agent, html: { class: 'featured_agent_form' } do |f|
-          .row
-            .col-xs-12.col-sm-12.col-md-6.col-lg-6
-              .form-group
-                %label First Name*
-                =f.text_field :first_name, class: 'form-control validate', required: true
+      .row
+        .col-xs-12.col-sm-12.col-md-12.col-lg-9
+          = form_for @featured_agent, html: { class: 'featured_agent_form' } do |f|
+            .row
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label First Name*
+                  =f.text_field :first_name, class: 'form-control validate', required: true
 
-            .col-xs-12.col-sm-12.col-md-6.col-lg-6
-              .form-group
-                %label Last Name*
-                =f.text_field :last_name, class: 'form-control validate', required: true
-          .row
-            .col-xs-12.col-sm-12.col-md-6.col-lg-6
-              .form-group
-                %label Email*
-                =f.email_field :email, class: 'form-control validate', required: true
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label Last Name*
+                  =f.text_field :last_name, class: 'form-control validate', required: true
+            .row
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label Email*
+                  =f.email_field :email, class: 'form-control validate', required: true
 
-            .col-xs-12.col-sm-12.col-md-6.col-lg-6
-              .form-group
-                %label Phone Number
-                =f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label Phone Number
+                  =f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
 
-          .row
-            .col-xs-12.col-sm-12.col-md-6.col-lg-6
-              .form-group
-                %label Broker Firm Name*
-                =f.text_field :broker_firm, class: 'form-control validate', required: true
+            .row
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label Broker Firm Name*
+                  =f.text_field :broker_firm, class: 'form-control validate', required: true
 
-            .col-xs-12.col-sm-12.col-md-6.col-lg-6
-              .form-group
-                %label License Number*
-                =f.text_field :license_number, class: 'form-control validate', required: true
+              .col-xs-12.col-sm-12.col-md-6.col-lg-6
+                .form-group
+                  %label License Number*
+                  =f.text_field :license_number, class: 'form-control validate', required: true
 
-          .row
-            .col-xs-12.col-sm-12.col-md-12.col-lg-12
-              .form-group
-                %label Profile Website
-                =f.text_field :website, class: 'form-control'
-          .row
-            .col-xs-12.col-sm-12.col-md-12.col-lg-12
-              .form-group
-                %label Neighborhood To Be Featured In*
-                = f.select :neighborhood, options_for_select(StaticData::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
+            .row
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .form-group
+                  %label Profile Website
+                  =f.text_field :website, class: 'form-control'
+            .row
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .form-group
+                  %label Neighborhood To Be Featured In*
+                  = f.select :neighborhood, options_for_select(StaticData::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
+              
+            .row
+              .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                - if @featured_agent.draft_edit? || @featured_by == 'admin'
+                  = render 'featured_buildings/admin_form_fields', f: f, object: f.object
+              
+              = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_agent.new_record?
+              = f.hidden_field :user_id, value: current_user&.id
             
-          .row
-            .col-xs-12.col-sm-12.col-md-12.col-lg-12
-              - if @featured_agent.draft_edit? || @featured_by == 'admin'
-                = render 'featured_buildings/admin_form_fields', f: f, object: f.object
-            
-            = f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin' if @featured_agent.new_record?
-            = f.hidden_field :user_id, value: current_user&.id
-          
-          %br
+            %br
 
-          .row
-            .col-md-12.col-sm-12.col-xs-12
-              .pull-left
-                - if @featured_agent.new_record?
-                  = cancel_link(params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'))
-                  / = link_to 'Cancel', params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'cancel font-18'
-                - else
-                  = cancel_link(!@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'))
-                  / = link_to 'Cancel', , class: 'cancel font-18 pl-28 pr-28'
-              .pull-right
-                / = previous_link(!@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'))
-                / = link_to 'Back', !@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18 pl-28 pr-28'
-                = f.submit next_text, class: 'btn btn-primary font-16 pl-28 pr-28 font-bold', style: next_prev_link_style_h
+            .row
+              .col-md-12.col-sm-12.col-xs-12
+                .pull-left
+                  - if @featured_agent.new_record?
+                    = cancel_link(params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'))
+                  - else
+                    = cancel_link(!@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'))
+                .pull-right
+                  = submit_link(f, title: next_text)
 
-          %br
-          %br
+            %br
+            %br
