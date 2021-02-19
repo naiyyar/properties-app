@@ -178,11 +178,12 @@ module BuildingsHelper
 	end
 
 	def fancybox_cta_buttons object
+		imageable = object.imageable
 		if object.imageable_type == 'FeaturedListing'
-			featured_listing_contact_owner_button(object.imageable, size_class: 'txt-color-white btn-slider')
+			featured_listing_contact_owner_button(imageable, size_class: 'txt-color-white btn-slider')
 		else
-			if @building
-				@building.show_contact_leasing? ? contact_leasing_link(@building, '', 'btn-slider') : check_availability_link(@building, 'btn-slider')
+			if imageable
+				imageable.show_contact_leasing? ? contact_leasing_link(imageable, '', 'btn-slider') : check_availability_link(imageable, 'btn-slider')
 			else
 				''
 			end

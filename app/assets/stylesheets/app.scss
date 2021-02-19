@@ -2647,6 +2647,14 @@ select.custom-arrow{
     .tabsWidget .nav-tabs > li {
         width: 100%;
     }
+
+    .tabsWidget .nav-tabs.list-inline > li {
+        width: 50%;
+    }
+    .nav-justified.list-inline > li, 
+    .nav-tabs.nav-justified.list-inline > li {
+      float: left;
+    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px){

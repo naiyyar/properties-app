@@ -6,13 +6,13 @@
 					%p.font-21 Featured Listing
 			.row
 				.col-xs-6.col-sm-6.col-md-8.col-lg-4
-					%b.font-16.font-blue Amenities
+					%p.font-16.font-blue Amenities
 			
 			.row
 				.col-xs-12.col-sm-12.col-md-12.col-lg-4
 					= form_for @featured_listing, class: 'form-horizontal' do |f|
 						.row
-							.col-xs-12.col-sm-12.col-md-6.col-lg-6
+							.col-lg-6.col-xs-9.col-sm-12.col-md-6
 								.checkbox.custom-checkbox
 									%label
 										= check_box_tag 'featured_listing[amenities][no_fee]', 'No Fee', checked: true
@@ -28,7 +28,6 @@
 											= value
 			            
 								= hidden_field_tag :next_step, :add_photos
-						%br
 						%br
 
 						.row

@@ -1,88 +1,86 @@
-.form-container
-  - if @saved_cards.present?
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-6
-        %h3 Saved Cards
-        %table.table
-          - @saved_cards.each do |card|
-            - exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
-            - last4     = card[:last4]
-            - brand     = card[:brand]
-            %tr
-              %td.v-align-middle="#{brand&.capitalize} ending in #{last4} expires #{exp_month}/#{card[:exp_year]}"
-              %td.text-right
-                = form_tag pay_using_saved_card_path, method: :post, id: "card_form_#{last4}" do
-                  = hidden_field_tag 'billing[email]', current_user.email, id: "billing_email_#{last4}"
-                  = hidden_field_tag 'billing[amount]', @price, id: "billing_amount2_#{last4}"
-                  = hidden_field_tag 'billing[billable_id]', @object_id, id: "billable_id_#{last4}"
-                  = hidden_field_tag 'billing[billable_type]', @object_type, id: "billable_type_#{last4}"
-                  = hidden_field_tag 'billing[user_id]', current_user.id, id: "billing_user_id_#{last4}"
-                  = hidden_field_tag 'billing[billing_card_id]', card[:id], id: "billing_card_id_#{last4}"
-                  = hidden_field_tag 'billing[brand]', brand, id: "billing_card_brand_#{last4}"
-                  = hidden_field_tag 'billing[last4]', last4, id: "billing_card_last4_#{last4}"
-
-                  = submit_tag "Pay $#{@price}.00", class: 'btn btn-primary btn-sm font-bold', data: { disable_with: "Pay $#{@price}.00" }
-    
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-6
-        .text-center OR
-  %br
+%div{style: 'padding: 8px 14px;'}
   .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-6
-      .panel.panel-default
-        .panel-heading
-          %b New Billing
-        .panel-body{style: 'padding: 15px 15px 8px;'}
-          #example-2.cell.example.example2
-            = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
-              .row.error
-                .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                  .payment-errors.text-danger.message
-              
-              .row
-                .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                  = hidden_field_tag 'billing[email]', current_user.email
-                  = hidden_field_tag 'billing[amount]', @price
-                  = hidden_field_tag 'billing[billable_id]', @object_id
-                  = hidden_field_tag 'billing[billable_type]', @object_type
-                  = hidden_field_tag 'billing[user_id]', current_user.id
+    .col-xs-12.col-sm-12.col-md-12.col-lg-10.col-lg-offset-3
+      - if @saved_cards.present?
+        .row
+          .col-xs-12.col-sm-12.col-md-12.col-lg-6
+            %p.font-bold.font-14 Saved Cards
+            %table.table
+              - @saved_cards.each do |card|
+                - exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
+                - last4     = card[:last4]
+                - brand     = card[:brand]
+                %tr
+                  %td.v-align-middle="#{brand&.capitalize} ending in #{last4} expires #{exp_month}/#{card[:exp_year]}"
+                  %td.text-right
+                    = form_tag pay_using_saved_card_path, method: :post, id: "card_form_#{last4}" do
+                      = hidden_field_tag 'billing[email]', current_user.email, id: "billing_email_#{last4}"
+                      = hidden_field_tag 'billing[amount]', @price, id: "billing_amount2_#{last4}"
+                      = hidden_field_tag 'billing[billable_id]', @object_id, id: "billable_id_#{last4}"
+                      = hidden_field_tag 'billing[billable_type]', @object_type, id: "billable_type_#{last4}"
+                      = hidden_field_tag 'billing[user_id]', current_user.id, id: "billing_user_id_#{last4}"
+                      = hidden_field_tag 'billing[billing_card_id]', card[:id], id: "billing_card_id_#{last4}"
+                      = hidden_field_tag 'billing[brand]', brand, id: "billing_card_brand_#{last4}"
+                      = hidden_field_tag 'billing[last4]', last4, id: "billing_card_last4_#{last4}"
 
-                  = render 'billings/card_detail_fields'
-              
-              %br
-              %br
-              
-              %p.font-bold Payment
-              %p= "We will charge you #{number_to_currency(@price)} for #{weeks = @object_type.constantize::FEATURING_WEEKS} weeks of featuring."
-              %p="Featuring will be renewed for the next #{weeks} weeks cycle two days before the feature end date. The renewal setting can be adjusted at any time through our #{Billing::TYPE_TOOLS[@object_type]} Tools by editing the featured entry."
-              %p 
-                We do not offer refunds. Please review our full 
-                %a.hyper-link{href: '/terms_of_service', target: '_blank'} Terms of Service
-              
-              %br
-              %br
-              .form-group
-                .col-sm-12
-                  .pull-left
-                    = cancel_form_link(@object_type)
+                      = submit_tag "Pay $#{@price}.00", class: 'btn btn-primary btn-sm font-bold', data: { disable_with: "Pay $#{@price}.00" }
+        
+        .row
+          .col-xs-12.col-sm-12.col-md-12.col-lg-6
+            .text-center OR
+      %br
+      .row
+        .col-xs-12.col-sm-12.col-md-12.col-lg-6
+          .panel.panel-default
+            .panel-heading
+              %b Payment
+            .panel-body{style: 'padding: 15px 15px 8px;'}
+              #example-2.cell.example.example2
+                = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
+                  .row.error
+                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                      .payment-errors.text-danger.message
                   
-                  .pull-right
-                    = previous_link(previous_page_path(@object, @object_type))
-                    / = link_to 'Back', previous_page_path(@object, @object_type), class: 'btn btn-default font-bold'
-                    = submit_tag "Pay $#{@price}.00", class: 'btn btn-primary font-bold btn_submit btn_submit_stripe-form', 'data-tid' => "elements_examples.form.pay_button", style: action_link_styles
-              
-          %br
-          %br
-          .row.pw-footer
-            .col-lg-4.w-lg.w-sm
-              .text-left.text-muted
-                .Footer-PoweredBy 
-                  %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400
-                    Powered by
-                    =image_tag 'https://js.stripe.com/v3/fingerprinted/img/stripe-8ad2522ef8799d5985038700f8a07027.svg', class: 'Icon Footer-PoweredBy-Icon Icon--md'
-            .col-lg-1.col-xs-2
-              %a{href: 'https://stripe.com/checkout/legal', target: '_blank'}
-                %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400 Terms
-            .col-lg-1
-              %a{href: 'https://stripe.com/privacy', target: '_blank'}
-                %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400 Privacy
+                  .row
+                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                      = hidden_field_tag 'billing[email]', current_user.email
+                      = hidden_field_tag 'billing[amount]', @price
+                      = hidden_field_tag 'billing[billable_id]', @object_id
+                      = hidden_field_tag 'billing[billable_type]', @object_type
+                      = hidden_field_tag 'billing[user_id]', current_user.id
+
+                      = render 'billings/card_detail_fields'
+                  
+                  %br
+                  %br
+                  
+                  %p= "We will charge #{number_to_currency(@price)} for #{weeks = @object_type.constantize::FEATURING_WEEKS} weeks of featuring."
+                  %p="Featuring will be renewed for the next #{weeks} weeks cycle two days before the feature end date. The renewal setting can be adjusted at any time through our #{Billing::TYPE_TOOLS[@object_type]} Tools by editing the featured entry."
+                  %p 
+                    We do not offer refunds. Please review our full 
+                    %a.hyper-link{href: '/terms_of_service', target: '_blank'} Terms of Service
+                  
+                  %br
+                  %br
+                  .form-group
+                    .col-sm-12
+                      %div{class: action_links_alignment_class}
+                        = previous_link(previous_page_path(@object, @object_type))
+                        / = link_to 'Back', previous_page_path(@object, @object_type), class: 'btn btn-default font-bold'
+                        = submit_tag "Pay $#{@price}.00", class: 'btn btn-primary font-bold font-16 btn_submit btn_submit_stripe-form', 'data-tid' => "elements_examples.form.pay_button", style: action_link_styles
+                  
+              %br
+              %br
+              .row.pw-footer
+                .col-lg-4.w-lg.w-sm
+                  .text-left.text-muted
+                    .Footer-PoweredBy 
+                      %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400
+                        Powered by
+                        =image_tag 'https://js.stripe.com/v3/fingerprinted/img/stripe-8ad2522ef8799d5985038700f8a07027.svg', class: 'Icon Footer-PoweredBy-Icon Icon--md'
+                .col-lg-1.col-xs-2
+                  %a{href: 'https://stripe.com/checkout/legal', target: '_blank'}
+                    %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400 Terms
+                .col-lg-1
+                  %a{href: 'https://stripe.com/privacy', target: '_blank'}
+                    %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400 Privacy

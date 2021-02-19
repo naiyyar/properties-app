@@ -61,7 +61,7 @@
                   = f.text_field :unit, class: 'form-control validate'
 
             .row
-              .col-xs-8.col-sm-6.col-md-3.col-lg-5
+              .col-xs-8.col-sm-6.col-md-3.col-lg-4
                 .form-group
                   %label City*
                   = f.text_field :city, class: 'form-control validate'
@@ -71,7 +71,7 @@
                   %label State*
                   = f.text_field :state, class: 'form-control', disabled: true
 
-              .col-xs-12.col-sm-6.col-md-3.col-lg-5
+              .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Zip Code*
                   = f.text_field :zipcode, class: 'form-control validate'
@@ -128,10 +128,12 @@
                   %label Description
                   = f.text_area :description, class: 'form-control', rows: 10
                   = hidden_field_tag :next_step, :add_amenities
-            
+            %br
+            %br
+
             .row
               .col-sm-12
-                .pull-right= submit_link(f, title: next_text)
+                %div{class: action_links_alignment_class}= submit_link(f, title: next_text)
             
             %br
             %br

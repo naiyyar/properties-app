@@ -3,14 +3,14 @@
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
     #filterrific_results{style: 'margin-top: 10px;'}
       .table-overflow
-        %table.table.table-striped#sortable
+        %table.table.table-striped#sortable1
           %thead
             %tr
               %th{width: '10%'} Feature ID(#{featured_listings.count})
               %th{width: '16%'} Address
               %th{width: '18%'} Unit
               %th{width: '12%'} Neighborhood
-              %th{width: '12%'} #{featured_listings.sum(:uploads_count)} Photos
+              %th{width: '12%'} Photos
               %th{width: '15%'} Start Date
               %th{width: '15%'} End Date
               %th{width: '6%'} Edit

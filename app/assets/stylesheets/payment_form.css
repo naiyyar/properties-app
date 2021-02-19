@@ -11,7 +11,7 @@
 .example.example2 .row {
   display: -ms-flexbox;
   display: flex;
-  margin: 0 5px 10px;
+  /*margin: 0 5px 0px;*/
 }
 
 .example.example2 .field {
