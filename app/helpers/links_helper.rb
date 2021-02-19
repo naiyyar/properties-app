@@ -2,21 +2,21 @@ module LinksHelper
 	def previous_link url
 		site_link_h(text: '← Previous', 
 								url: url, 
-								klasses: "#{btn_primary_h} btn-o font-bold", 
+								klasses: "#{action_btn_classes} btn-o font-bold", 
 								style: action_link_styles)
 	end
 
 	def next_link url
 		site_link_h(text: next_text, 
 								url: url, 
-								klasses: "#{btn_primary_h} font-bold", 
+								klasses: "#{action_btn_classes} font-bold", 
 								style: action_link_styles)
 	end
 
 	def done_link url
 		site_link_h(text: 'Done', 
 							  url: url, 
-							  klasses: "#{btn_primary_h} btn-done font-bold",
+							  klasses: "#{action_btn_classes} btn-done font-bold",
 							  style: action_link_styles)
 	end
 
@@ -53,7 +53,7 @@ module LinksHelper
 		link_to text, url, class: klasses, style: style
 	end
 
-	def btn_primary_h
+	def action_btn_classes
 		"btn btn-primary #{font_size16_h} pl-28 pr-28"
 	end
 
