@@ -4,16 +4,17 @@
 			.row
 				.col-xs-12.col-sm-12.col-md-12.col-lg-4
 					%p.font-21 Featured Listing
+			%br
 			.row
 				.col-xs-6.col-sm-6.col-md-8.col-lg-4
-					%p.font-16.font-blue Amenities
-			
+					%b.font-16.hyper-link Amenities
+			%br
 			.row
 				.col-xs-12.col-sm-12.col-md-12.col-lg-4
 					= form_for @featured_listing do |f|
 						.row
 							.col-lg-6.col-xs-12.col-sm-12.col-md-6
-								.checkbox.custom-checkbox
+								.checkbox.custom-checkbox{style: 'margin-top: 0px;'}
 									%label
 										= check_box_tag 'featured_listing[amenities][no_fee]', 'No Fee', checked: true
 										%span.fa.fa-check
