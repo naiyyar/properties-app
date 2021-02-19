@@ -17,6 +17,10 @@ module ApplicationHelper
     ]
   end
 
+  def tbl_cell_width lg_width, sm_width=''
+    browser.device.mobile? ? (sm_width.present? ? sm_width : lg_width) : lg_width
+  end
+
   # adding last page custom class to pagination ul
   def last_page_class collection
     collection.total_pages == collection.current_page ? 'last-page' : ''

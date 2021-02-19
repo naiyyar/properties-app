@@ -3,20 +3,20 @@
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
     #filterrific_results{style: 'margin-top: 10px;'}
       .table-overflow
-        %table.table.table-striped#sortable1
+        %table.table.table-striped#sortable1{style: browser.device.mobile? ? 'width: 80em; max-width: 100%;' : ''}
           %thead
             %tr
-              %th{width: '10%'} Feature ID(#{featured_listings.count})
-              %th{width: '16%'} Address
-              %th{width: '18%'} Unit
-              %th{width: '12%'} Neighborhood
-              %th{width: '12%'} Photos
-              %th{width: '15%'} Start Date
-              %th{width: '15%'} End Date
-              %th{width: '6%'} Edit
-              %th{width: '6%'} Delete
-              %th{width: '6%'} Renew
-              %th{width: '6%'} Active
+              %th{width: tbl_cell_width('10%', '8%')} Feature ID(#{featured_listings.count})
+              %th{width: tbl_cell_width('16%', '16%')} Address
+              %th{width: tbl_cell_width('18%', '8%')} Unit
+              %th{width: tbl_cell_width('12%')} Neighborhood
+              %th{width: tbl_cell_width('12%')} Photos
+              %th{width: tbl_cell_width('15%')} Start Date
+              %th{width: tbl_cell_width('15%')} End Date
+              %th{width: tbl_cell_width('6%')} Edit
+              %th{width: tbl_cell_width('6%')} Delete
+              %th{width: tbl_cell_width('6%')} Renew
+              %th{width: tbl_cell_width('6%')} Active
           
           %tbody.table
             - featured_listings.each do |listing|
