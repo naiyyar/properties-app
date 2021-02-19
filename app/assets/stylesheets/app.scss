@@ -2648,11 +2648,13 @@ select.custom-arrow{
         width: 100%;
     }
 
-    .tabsWidget .nav-tabs.list-inline > li {
+    .tabsWidget .nav-tabs.tab-inline > li {
         width: 50%;
+        padding-left: 0px;
+        padding-right: 0px;
     }
-    .nav-justified.list-inline > li, 
-    .nav-tabs.nav-justified.list-inline > li {
+    .nav-justified.tab-inline > li, 
+    .nav-tabs.nav-justified.tab-inline > li {
       float: left;
     }
 }

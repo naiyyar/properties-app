@@ -51,13 +51,12 @@ class FeaturedListingsController < ApplicationController
   end
 
   def create
-    @featured_listing = FeaturedListing.new(featured_listing_params)
-
+    @featured_listing = FeaturedListing.new
+    @featured_listing.user = current_user
+    
     respond_to do |format|
       if @featured_listing.save
-        format.html { 
-          redirect_to next_step_url(:create) 
-        }
+        format.html { redirect_to next_step_url(:create) }
       else
         format.html { 
           flash[:error] = @featured_listing.errors.full_messages
@@ -97,7 +96,7 @@ class FeaturedListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def featured_listing_params
-      amenitites_keys = params[:featured_listing].try(:fetch, :amenities,{}).keys
+      amenitites_keys = params[:featured_listing].try(:fetch, :amenities, {}).keys rescue []
       params.require(:featured_listing).permit(:first_name, 
                                                :last_name, 
                                                :email, 
