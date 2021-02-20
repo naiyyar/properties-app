@@ -51,9 +51,8 @@ class FeaturedListingsController < ApplicationController
   end
 
   def create
-    @featured_listing = FeaturedListing.new
+    @featured_listing = FeaturedListing.new(featured_listing_params)
     @featured_listing.user = current_user
-    
     respond_to do |format|
       if @featured_listing.save
         format.html { redirect_to next_step_url(:create) }
