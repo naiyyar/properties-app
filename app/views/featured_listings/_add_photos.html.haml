@@ -31,7 +31,7 @@
 			.row
 				.col-lg-6.col-xs-12
 					%h4.font-bold.font-16
-						= link_to 'Add Video <span class="fa fa-plus"></span>'.html_safe, new_video_tour_path(category: tour_category, tourable_id: @imageable.id, tourable_type: 'FeaturedListing', sort_index: @video_tours&.last.sort + 1), class: 'add-tour-form', remote: true
+						= append_tour_link(@imageable, tour_category, last_tour: video_tours.last)
 					
 					.category-forms-container{id: "#{tour_category}-form"}
 						- if @video_tours.present?

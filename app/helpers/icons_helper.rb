@@ -11,6 +11,10 @@ module IconsHelper
 	  end
 	end
 
+	def plus_icon
+		span_tag(klasses: 'fa fa-plus')
+	end
+
 	def icon_search_helper other_class: ''
 		content_tag 'div', '', class: "icon-search-shared #{other_class}" do
 			span_tag(klasses: 'fa fa-search')
