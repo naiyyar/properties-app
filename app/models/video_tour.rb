@@ -27,7 +27,7 @@ class VideoTour < ApplicationRecord
 								['4+ Bedroom', 	'4-bedroom']].freeze
 	
 	validates_presence_of   :url, message: 'Url can not be blank.'
-	validates_uniqueness_of :url, scope: :building_id, message: 'Url has already been taken.', on: :create
+	validates_uniqueness_of :url, scope: [:tourable_id, :tourable_type], message: 'Url has already been taken.', on: :create
 
 
 	has_attached_file :image

@@ -1,8 +1,8 @@
-$(function(){
+$(document).ready(function(){
 	$('.add-tour-form').on('click', function(e){
 	  e.preventDefault();
-	  var object_id   = $(this).data('bid')
-	  var object_type = $(this).data('type')
+	  var object_id   = $(this).data('bid');
+	  var object_type = $(this).data('type');
 	  var category 		= $(this).data('category');
 	  var last_form   = $('#'+category+'-form').find('form').last();
 	  var sort_index 	= parseInt(last_form.find('.video_tour_sort').val()) + 1;
