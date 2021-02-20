@@ -22,7 +22,7 @@ apt_home = {
 }
 
 window.onload = function() {
-  if($('.home-wrapper').length > 0){
+  if($('.home-wrapper > .featured-section').length > 0){
     apt_home.loadFeaturedBuildings();
   }
 }

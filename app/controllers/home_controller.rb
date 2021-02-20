@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class HomeController < ApplicationController
   before_action :reset_session,         only: [:index, :auto_search]
-  before_action :find_property,         only: [:load_infobox, :get_images, :set_cta_links]
+  before_action :find_property,         only: [:load_infobox, :get_images]
   before_action :save_as_favourite,     only: [:index, :search]
   #before_action :set_rent_medians,      only: [:search, :load_infobox]
   before_action :set_device_view,       only: [:index, :load_featured_buildings]

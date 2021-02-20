@@ -182,12 +182,12 @@ module BuildingsHelper
 		if object.imageable_type == 'FeaturedListing'
 			featured_listing_contact_owner_button(imageable, size_class: 'txt-color-white btn-slider')
 		else
-			if imageable
-				imageable.show_contact_leasing? ? contact_leasing_link(imageable, '', 'btn-slider') : check_availability_link(imageable, 'btn-slider')
-			else
-				''
-			end
+			imageable && object.imageable_type == 'Building' ? show_slider_cta_links(imageable) : ''
 		end
+	end
+
+	def show_slider_cta_links imageable
+		imageable.show_contact_leasing? ? contact_leasing_link(imageable, '', 'btn-slider') : check_availability_link(imageable, 'btn-slider')
 	end
 
 	def sort_options

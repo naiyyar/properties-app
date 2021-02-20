@@ -267,7 +267,7 @@ var ready = function(){
   }
 
   // setting up building and agent image on search view card
-  var cards = $('.search-view-card');
+  var cards = $('.searched-properties .search-view-card');
   if(cards.length > 0){
     cards.each(function(i, j){
         var agentid = $(j).data('agentid');
