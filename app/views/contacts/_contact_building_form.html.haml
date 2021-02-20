@@ -12,17 +12,18 @@
   
     = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder', style: 'font-size: 18px;'
     
-%div.pm-contact-info{style: 'margin: 10px 0px 18px 14px;'}
-  %h4{style: 'margin-top: 10px;margin-bottom: 6px;'} Contact Info
-  - if @building.management_company.present?
-    %div=@building.management_company.name
+  %fieldset{style: 'color: #333;'}
+    %p.font-18 Contact Info
+    - if @building.management_company.present?
+      %div=@building.management_company.name
   
-  Phone: 
-  =link_to "#{number_to_phone(@building.phone, area_code: true)}", "tel:#{@building.phone}", class: 'hyper-link'
+    Phone: 
+    =link_to "#{number_to_phone(@building.phone, area_code: true)}", "tel:#{@building.phone}", class: 'hyper-link'
 
-  - if @min_save_amount.to_f > 0
-    %div.margin-top-20
-      You can save 
-      %span{style: 'color: #03A63C'}= number_to_currency(@min_save_amount, precision: 0)
-      in broker fees by renting directly from this property manager. 
-      
+    - if @min_save_amount.to_f > 0
+      %div.margin-top-20
+        You can save 
+        %span{style: 'color: #03A63C'}= number_to_currency(@min_save_amount, precision: 0)
+        in broker fees by renting directly from this property manager. 
+  %br
+  %br
