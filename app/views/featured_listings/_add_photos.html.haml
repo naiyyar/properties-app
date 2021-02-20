@@ -31,7 +31,7 @@
 			.row
 				.col-lg-6.col-xs-12
 					%h4.font-bold.font-16
-						= append_tour_link(@imageable, tour_category, last_tour: video_tours.last)
+						= append_tour_link(@imageable, tour_category, last_tour: @video_tours.last)
 					
 					.category-forms-container{id: "#{tour_category}-form"}
 						- if @video_tours.present?

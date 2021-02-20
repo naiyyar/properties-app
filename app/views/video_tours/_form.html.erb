@@ -26,7 +26,7 @@
         <h4 class="font-bold">
           <%= category[0] %> 
           <%= append_tour_link(@tourable, category[0], last_tour: video_tours.last )%>
-          <%#=link_to '<span class="fa fa-plus"></span>'.html_safe, '#', class: 'add-tour-form', data: { category: category[1], bid: @tourable.id, type: 'Building' } %></h4>
+        </h4>
         <div id="<%=category[1]%>-form" class="category-forms-container">
           <% if video_tours.present? %>
             <% video_tours.each do |tour| %>
