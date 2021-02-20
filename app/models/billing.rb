@@ -8,7 +8,7 @@ class Billing < ApplicationRecord
 	TYPE_TOOLS = {
 		'FeaturedAgent' => 'Agent',
 		'FeaturedBuilding' => 'Manager',
-		'FeaturedListing' => 'FRBOS'
+		'FeaturedListing' => 'FRBO'
 	}.freeze
 	
 	belongs_to :billable, polymorphic: true
