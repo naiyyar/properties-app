@@ -174,15 +174,14 @@ module BuildingsHelper
 	def date_uploaded object
 		"<b>#{ associated_object(object.imageable) }</b>" +
 		"<p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>" +
-		"<p>" + fancybox_cta_buttons(object) + "</p>".html_safe # if @building.present?
+		"<p>" + fancybox_cta_buttons(object.imageable) + "</p>".html_safe # if @building.present?
 	end
 
-	def fancybox_cta_buttons object
-		imageable = object.imageable
-		if object.imageable_type == 'FeaturedListing'
+	def fancybox_cta_buttons imageable
+		if imageable.class.name == 'FeaturedListing'
 			featured_listing_contact_owner_button(imageable, size_class: 'txt-color-white btn-slider')
 		else
-			imageable && object.imageable_type == 'Building' ? show_slider_cta_links(imageable) : ''
+			imageable && imageable.class.name == 'Building' ? show_slider_cta_links(imageable) : ''
 		end
 	end
 
