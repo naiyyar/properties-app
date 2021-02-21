@@ -1,21 +1,3 @@
-# == Schema Information
-#
-# Table name: uploads
-#
-#  id                    :integer          not null, primary key
-#  building_id       		 :integer
-#  url    							 :string
-#  description       		 :string
-#  category      				 :string
-#  sort          				 :integer
-#  image_file_name       :string
-#  image_content_type    :string
-#  image_file_size       :integer
-#  image_updated_at      :datetime
-#  tourable_id      		 :integer
-#  tourable_type      	 :string
-#
-
 class VideoTour < ApplicationRecord
 	belongs_to :tourable, polymorphic: true, touch: true
 	
@@ -37,7 +19,7 @@ class VideoTour < ApplicationRecord
 
 	class << self
 		def categories videos
-			videos.pluck(:category).uniq #.sort
+			videos.pluck(:category).uniq
 		end
 
 		def first_category videos

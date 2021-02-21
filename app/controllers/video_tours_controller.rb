@@ -1,5 +1,5 @@
 class VideoToursController < ApplicationController
-  load_and_authorize_resource except: :index
+  load_and_authorize_resource except: [:index, :create]
   before_action :set_video_tour,  only: [:edit, :update, :destroy]
   before_action :find_tourable,   only: [:new, :show_tour]
   before_action :find_tours,      only: [:show_tour, :new]
@@ -77,7 +77,7 @@ class VideoToursController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_video_tour
       @video_tour = VideoTour.find(params[:id])
     end
