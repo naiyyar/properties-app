@@ -12,7 +12,7 @@
           %p.font-bold.font-14 Featured Listing Renewal
 
         .col-xs-3.col-lg-3
-          .text-right=renew_witch_button(featured_listing)
+          .text-right=renew_witch_button(featured_listing, disabled: !featured_listing.active)
       
       .row
         .col-xs-12.col-lg-9
