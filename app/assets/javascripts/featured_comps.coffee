@@ -18,7 +18,7 @@ changeFeaturedCompStatus = (status, elem) ->
 
 #Changing featured building status
 #
-$(document).on 'click', '.apple-switch.feature-building', (e) ->
+$(document).on 'click', '.apple-switch.featured-building', (e) ->
 	$this = $(this)
 	field_type = $this.data('field')
 	if(!$this.is(':checked'))

@@ -21,36 +21,48 @@ module LinksHelper
 		last_tour.present? ? last_tour.sort + 1 : 0
 	end
 
-	def renew_witch_button object, disabled: false
+	def renew_switch_button object, disabled: false
 		disabled_class = disabled ? 'disabled' : ''
 		checked = object.renew ? 'checked' : ''
 		return "<input type='checkbox' 
-						class='#{sitch_button_classes} renew #{disabled_class}' 
+						class='#{switch_button_classes} renew #{disabled_class} #{object_class(object)}' 
 						style='margin: 0px;' 
 						data-field='renew'
 						data-fbid=#{object.id} 
 						#{checked} #{disabled_class} />".html_safe
 	end
 
-	def active_witch_button object, fbby: '', showbillingurl: false
+	def active_switch_button object, fbby: '', showbillingurl: false
 		checked = object.active ? 'checked' : ''
 		return "<input type='checkbox' 
-						class='#{sitch_button_classes}' 
+						class='#{switch_button_classes} #{object_class(object)}' 
 						style='margin: 0px;' 
 						data-fbid=#{object.id} 
-						data-fbby=#{fbby}
+						data-fbby='#{fbby}'
 						data-expired=#{object.expired? ? 'expired' : ''}
 						data-billingurl=#{billing_url(object) if showbillingurl }
 						#{checked} />".html_safe
 	end
 
-	def sitch_button_classes
-		'apple-switch sb-sm featured-listing'
+	def switch_button_classes
+		'apple-switch sb-sm'
 	end
 
+	def object_class object
+		object.class.name.split(/(?=[A-Z])/).join('-').downcase rescue ''
+	end
 
 	def billing_url object
-		object.expired? ? next_prev_step_url(object, step: 'payment') : ''
+		return '' unless object.expired?
+ 		
+ 		case object.class.name
+		when 'FeaturedListing'
+			next_prev_step_url(object, step: 'payment')
+		when 'FeaturedAgent'
+			new_manager_featured_agent_user_path(current_user, type: 'billing', object_id: object.id)
+		when 'FeaturedBuilding'
+			new_manager_featured_building_user_path(current_user, type: 'billing', object_id: object.id)
+		end
 	end
 
 	def previous_link url

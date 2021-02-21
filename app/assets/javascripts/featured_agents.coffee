@@ -1,6 +1,6 @@
 #Changing featured agent status
 #
-$(document).on 'click', '.apple-switch.feature-agent', (e) ->
+$(document).on 'click', '.apple-switch.featured-agent', (e) ->
 	$this = $(this)
 	field_type = $this.data('field')
 	if(!$this.is(':checked'))

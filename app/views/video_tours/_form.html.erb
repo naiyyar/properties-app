@@ -24,8 +24,8 @@
         <% index = 0 %>
         <% video_tours = @video_tours.where(category: category[1]) %>
         <h4 class="font-bold">
-          <%= category[0] %> 
-          <%= append_tour_link(@tourable, category[0], last_tour: video_tours.last )%>
+          <%= cat = category[0] %> 
+          <%= append_tour_link(@tourable, cat, last_tour: video_tours.last )%>
         </h4>
         <div id="<%=category[1]%>-form" class="category-forms-container">
           <% if video_tours.present? %>
