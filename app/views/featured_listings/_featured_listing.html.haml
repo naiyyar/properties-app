@@ -38,9 +38,9 @@
                   %td=renew_switch_button(listing, disabled: true)
                   %td=active_switch_button(listing)
                 - else
-                  %td 
-                    = link_to 'Edit', next_prev_step_url(listing, step: 'create') if listing.draft? or listing.live?
-                  %td
-                    = link_to 'Delete', featured_listing_path(listing), method: :delete, data: {confirm: 'Are you sure you want to delete this featured listing?'}, class: 'text-danger' if listing.draft?
-                  %td=renew_switch_button(listing, disabled: true)
-                  %td=active_switch_button(listing, fbby: 'manager', showbillingurl: true)
+                  - if current_user == listing.user
+                    %td= link_to 'Edit', next_prev_step_url(listing, step: 'create')
+                    %td
+                      = link_to 'Delete', featured_listing_path(listing), method: :delete, data: {confirm: 'Are you sure you want to delete this featured listing?'}, class: 'text-danger' if listing.draft?
+                    %td=renew_switch_button(listing, disabled: true)
+                    %td=active_switch_button(listing, fbby: 'manager', showbillingurl: true)

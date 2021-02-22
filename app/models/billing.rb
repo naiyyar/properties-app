@@ -138,7 +138,7 @@ class Billing < ApplicationRecord
 	end
 
 	def inv_description
-		"Featured #{tool_type} For Four Weeks Starting on"
+		"Featured #{tool_type} For #{billable_type.constantize::FEATURING_WEEKS} Weeks Starting on"
 	end
 
 	def tool_type

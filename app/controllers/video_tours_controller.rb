@@ -1,5 +1,5 @@
 class VideoToursController < ApplicationController
-  load_and_authorize_resource except: [:index, :create]
+  load_and_authorize_resource except: [:index, :create, :new]
   before_action :set_video_tour,  only: [:edit, :update, :destroy]
   before_action :find_tourable,   only: [:new, :show_tour]
   before_action :find_tours,      only: [:show_tour, :new]
