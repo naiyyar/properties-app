@@ -29,20 +29,4 @@ Building.find_each do |building|
   amenities << 'deposit_free'					 if building.deposit_free
   #
   building.update_columns(amenities: amenities, bedroom_types: bedroom_types)
-end      
-
-
- # amenities.merge!(:parking => 'Parking / Garage') 									if building.parking
- #  amenities.merge!(:pets_allowed_cats => 'Cats Allowed')  					if building.pets_allowed_cats
- #  amenities.merge!(:pets_allowed_dogs => 'Dogs Allowed')  					if building.pets_allowed_dogs
- #  amenities.merge!(:doorman => 'Doorman')          									if building.doorman
- #  amenities.merge!(:elevator => 'Elevator')         								if building.elevator
- #  amenities.merge!(:gym => 'gym')              											if building.gym
- #  amenities.merge!(:laundry_facility => 'Laundry in Building') 			if building.laundry_facility
- #  amenities.merge!(:live_in_super => 'Live in super')              	if building.live_in_super
- #  amenities.merge!(:management_company_run => 'Management Company') if building.management_company_run
- #  amenities.merge!(:roof_deck => 'Roof Deck') 											if building.roof_deck
- #  amenities.merge!(:swimming_pool => 'Swimming Pool') 							if building.swimming_pool
- #  amenities.merge!(:walk_up => 'Walk up') 													if building.walk_up
- #  amenities.merge!(:courtyard => 'Courtyard') 											if building.courtyard
- #  amenities.merge!(:deposit_free => 'Deposit Free') 								if building.deposit_free           
+end

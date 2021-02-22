@@ -38,8 +38,8 @@ module BedRanges
   end
 
   def price_ranges filters=nil
-    ranges                 = {}
-    prices                 = Price.where(range: price)
+    ranges = {}
+    prices = Price.where(range: price)
     bed_ranges, modal_type = bedroom_ranges(filters)
     bed_ranges.each do |bed_range|
       bdr = bed_range
@@ -66,7 +66,7 @@ module BedRanges
   end
 
   def broker_percent
-    BrokerFeePercent.first.percent_amount
+    @broker_percent ||= BrokerFeePercent.first.percent_amount
   end
 
   def rent_medians
