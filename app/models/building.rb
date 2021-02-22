@@ -353,12 +353,6 @@ class Building < ApplicationRecord
   def update_listings_price min_price, max_price
     update_columns(min_listing_price: min_price, max_listing_price: max_price)
   end
-
-  def popular_neighborhoods
-    Neighborhood.where('name = ? OR 
-                        name = ? OR 
-                        name = ?', neighborhood, neighborhoods_parent, neighborhood3)
-  end
   
   def update_neighborhood_counts
     popular_neighborhoods.each do |hood|
@@ -367,6 +361,10 @@ class Building < ApplicationRecord
         hood.save
       end
     end
+  end
+
+  def popular_neighborhoods
+    Neighborhood.where(name: [neighborhood, neighborhoods_parent, neighborhood3])
   end
 
   def address
