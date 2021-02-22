@@ -219,14 +219,17 @@ class Building < ApplicationRecord
                          filter_params).fetch_listings
   end
 
-  def _amenities
+  def export_amenities
     amenities = []
-    BuildingAmenities.all_amenities.each_pair do |k, v|
-      if self[k].present?
-        amenities << (v == 'Elevator' ? "#{v}(#{elevator})" : v)
-      end
+    self.sorted_amenities.each do |amenity|
+      value = Building.building_amenities[amenity.to_sym]
+      amenities << (value == 'Elevator' ? "#{value}(#{elevator})" : value)
     end
     amenities.join(',')
+  end
+
+  def self.building_amenities 
+    @building_amenities ||= BuildingAmenities.building_edit_amenities
   end
 
   def sorted_amenities

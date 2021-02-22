@@ -4,10 +4,8 @@
     <%= link_to 'Edit', "/building_steps/building_information?building_id=#{@building.id}", class: 'btn btn-o btn-default btn-xs pull-right' if current_user&.has_role? :admin %>
   </h3>
   <div class="row">
-    <% building_amenities = BuildingAmenities.building_edit_amenities %>
-    
     <% @building.sorted_amenities.each do |amenity| %>
-      <% value = building_amenities[amenity.to_sym] %>
+      <% value = Building.building_amenities[amenity.to_sym] %>
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem font-14">
         <span><%= image_tag "amenities_icons/#{amenity}.png", width: '16', height: '16', alt: value %></span>
         <% if value == 'Elevator' %>

@@ -4,7 +4,7 @@
 
   @listings.includes(:building => [:management_company]).each do |listing|
 		building = listing.building
-		amenities = building.amenities.split(',')
+		amenities = building.export_amenities.split(',')
     csv << [  listing.date_active,
 							listing.building_address,
 							listing.unit,

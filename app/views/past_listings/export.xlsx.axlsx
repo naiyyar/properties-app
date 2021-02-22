@@ -8,7 +8,7 @@ wb.add_worksheet(name: "listings") do |sheet|
 	
 	@listings.includes(:building => [:management_company]).each do |listing|
 		building  = listing.building
-		amenities = building.amenities.split(',')
+		amenities = building.export_amenities.split(',')
     sheet.add_row [ listing.date_active,
 										listing.building_address,
 										listing.unit,
