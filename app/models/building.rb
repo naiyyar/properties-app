@@ -47,7 +47,7 @@ class Building < ApplicationRecord
   ATTRS       = [:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :reviews_count, :web_url, 
                  :email, :active_email, :active_web,:min_listing_price, :max_listing_price, :uploads_count, :price,
                  :featured_buildings_count, :city, :state, :building_type, :neighborhood, :neighborhoods_parent, 
-                 :neighborhood3, :studio, :one_bed, :two_bed, :three_bed, :four_plus_bed, :co_living, :listings_count, :updated_at, :bedroom_types]
+                 :neighborhood3, :listings_count, :updated_at, :bedroom_types]
   
   
   
@@ -227,6 +227,10 @@ class Building < ApplicationRecord
       end
     end
     amenities.join(',')
+  end
+
+  def sorted_amenities
+    self.amenities.keep_if{|val| !val.empty?}.sort
   end
 
   def nearby_neighborhood

@@ -29,10 +29,24 @@
         <div class="col-sm-6">
           <h3>Building Information</h3>
           <br />
-          <div class="checkbox custom-checkbox"><label><%= f.check_box :no_fee %> <span class="fa fa-check"></span> <%= 'No Fee Building' %></label></div>
+          <div class="checkbox custom-checkbox">
+            <label>
+              <%= f.check_box :amenities, { name: 'building[amenities][]'}, 'no_fee', '' %>
+              <span class="fa fa-check"></span> 
+              No Fee Building
+            </label>
+          </div>
+          
           <% BuildingAmenities.building_edit_amenities.each do |key, value| %>
+            <div class="checkbox custom-checkbox">
+              <label>
+                <%= f.check_box :amenities, { name: 'building[amenities][]', id: "building_amenities_#{key}"}, key.to_s, '' %>
+                <span class="fa fa-check"></span> 
+                <%= value %>
+              </label>
+            </div>
+            
             <% if value == 'Elevator' %>
-              <div class="checkbox custom-checkbox"><label><%= check_box_tag :elevator,'yes', @building.elevator ? true : false %> <span class="fa fa-check"></span> <%= value %></label></div>
               <div>
                 <% if @building.elevator %>
                   <%= f.number_field :elevator, class: 'form-control' %>
@@ -40,8 +54,9 @@
                   <%= f.number_field :elevator, class: 'form-control hide', placeholder: '#Elevators' %>
                 <%end%>
               </div>
-            <%elsif value == 'Deposit Free'%>
-               <div class="checkbox custom-checkbox"><label><%= f.check_box :deposit_free%> <span class="fa fa-check"></span> <%= value %></label></div>
+            <%end%>
+
+            <%if value == 'Deposit Free'%>
               <div>
                 <% if @building.deposit_free %>
                   <%= f.text_field :deposit_free_company, class: 'form-control' %>
@@ -49,17 +64,17 @@
                   <%= f.text_field :deposit_free_company, class: 'form-control hide', placeholder: 'Company name that offers service' %>
                 <%end%>
               </div>
-            <%else%>
-              <div class="checkbox custom-checkbox"><label><%= f.check_box key %> <span class="fa fa-check"></span> <%= value %></label></div>
             <%end%>
           <%end%>
         </div>
+      
       <br />
+
       <div class="form-group">
         <div class="col-sm-12">
           <div class="pull-right">
             <%= link_to 'Cancel', building_path(@building), class: 'btn btn-default'%>
-            <%= f.submit 'Submit', class: "btn btn-primary" %>
+            <%= f.submit 'Submit', class: 'btn btn-primary' %>
           </div>
         </div>
       </div>  

@@ -2,11 +2,12 @@ class BuildingsController < ApplicationController
   load_and_authorize_resource
   AWS_S3_URL = 'https://s3-us-west-2.amazonaws.com'
   before_action :authenticate_user!,  except: [:index, :show, :contribute, :create, :autocomplete, :apt_search, :favorite]
-  before_action :find_building,       only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite]
-  before_action :clear_cache,         only: [:favorite, :unfavorite]
-  before_action :find_buildings,      only: [:contribute, :edit]
-  before_action :set_image_counts,    only: :show
-  after_action :get_neighborhood,     only: [:create, :update]
+  
+  before_action :find_building,    only: [:show, :edit, :update, :destroy, :featured_by, :units, :favorite, :unfavorite]
+  before_action :clear_cache,      only: [:favorite, :unfavorite]
+  before_action :find_buildings,   only: [:contribute, :edit]
+  before_action :set_image_counts, only: :show
+  after_action :get_neighborhood,  only: [:create, :update]
 
   include BuildingsConcern # create, show
   include Searchable

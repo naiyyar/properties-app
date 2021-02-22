@@ -23,10 +23,10 @@ $(document).on 'click', "input[name='contribute_to']",(e) ->
 	if($('#buildings-search-txt').parent().hasClass('has-error'))
 		$('#buildings-search-txt').parent().removeClass('has-error')
 
-$(document).on 'click', '#building_deposit_free',(e) ->
+$(document).on 'click', '#building_amenities_deposit_free',(e) ->
 	showHideAmenitiesInfoField($('#building_deposit_free_company'))
 
-$(document).on 'click', '#elevator',(e) ->
+$(document).on 'click', '#building_amenities_elevator',(e) ->
 	showHideAmenitiesInfoField($('#building_elevator'))
 
 @showHideAmenitiesInfoField = (elem) ->

@@ -35,10 +35,7 @@ module Search
 
     def filter_by_amenities
       return @buildings unless @amenities.present?
-      @amenities.each do |amenity| 
-        @buildings = @buildings.send("#{amenity}")
-      end
-      @buildings
+      @buildings.where("amenities @> ARRAY[?]::varchar[]", @amenities)
     end
     
     def filter_by_prices

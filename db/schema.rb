@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20210221172950) do
     t.boolean  "deposit_free"
     t.string   "deposit_free_company"
     t.integer  "featured_buildings_count"
-    t.jsonb    "amenities",                default: {}
+    t.string   "amenities",                default: [],                 array: true
     t.string   "bedroom_types",            default: [],                 array: true
     t.index ["amenities"], name: "index_buildings_on_amenities", using: :gin
     t.index ["bedroom_types"], name: "index_buildings_on_bedroom_types", using: :gin
