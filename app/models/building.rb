@@ -2,6 +2,8 @@ class Building < ApplicationRecord
   acts_as_voteable
   resourcify
 
+  # serialize :bedroom_types
+
   # Modules
   include ImageableConcern
   include FavoritableConcern
@@ -20,6 +22,8 @@ class Building < ApplicationRecord
   extend Search::BuildingSorting
   extend Search::PopularSearches
   extend Search::RedoSearch
+
+  # store_accessor(:amenities)
 
   # constants
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$'].freeze
@@ -43,7 +47,7 @@ class Building < ApplicationRecord
   ATTRS       = [:id, :building_name, :building_street_address, :latitude, :longitude, :zipcode, :reviews_count, :web_url, 
                  :email, :active_email, :active_web,:min_listing_price, :max_listing_price, :uploads_count, :price,
                  :featured_buildings_count, :city, :state, :building_type, :neighborhood, :neighborhoods_parent, 
-                 :neighborhood3, :studio, :one_bed, :two_bed, :three_bed, :four_plus_bed, :co_living, :listings_count, :updated_at]
+                 :neighborhood3, :studio, :one_bed, :two_bed, :three_bed, :four_plus_bed, :co_living, :listings_count, :updated_at, :bedroom_types]
   
   
   
@@ -215,7 +219,7 @@ class Building < ApplicationRecord
                          filter_params).fetch_listings
   end
 
-  def amenities
+  def _amenities
     amenities = []
     BuildingAmenities.all_amenities.each_pair do |k, v|
       if self[k].present?

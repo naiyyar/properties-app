@@ -18,15 +18,15 @@ module BuildingAmenities
 			}
 		end
 		
-		def building_edit_emenities
+		def building_edit_amenities
 			common.merge!({
-				courtyard: 				 			'Courtyard',
-				deposit_free: 					'Deposit Free',
+				courtyard: 'Courtyard',
+				deposit_free: 'Deposit Free'
 			}).sort_by{|_k, value| value}.to_h
 		end
 		
 		def all_amenities
-			building_edit_emenities
+			building_edit_amenities
 		end
 
 		def listing_amenities

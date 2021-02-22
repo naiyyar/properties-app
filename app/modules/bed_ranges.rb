@@ -8,7 +8,7 @@ module BedRanges
   end
 
   def building_beds
-    [co_living, studio, one_bed, two_bed, three_bed, four_plus_bed].compact
+    bedroom_types.keep_if{|val| !val.empty?}.map(&:to_i) rescue []
   end
 
   def get_listings_beds filter_params
@@ -19,9 +19,8 @@ module BedRanges
   def show_bed_ranges(filter_params)
     beds = []
     bed_ranges, modal_type = bedroom_ranges(filter_params)
-    bed_ranges.map do |bed|
+    bed_ranges.each do |bed|
       beds << set_bed_type(bed, modal_type)
-      # beds << (bed == 0 ? 'Studio' : bed) unless bed == 5
     end
     beds
   end
@@ -43,8 +42,8 @@ module BedRanges
     prices                 = Price.where(range: price)
     bed_ranges, modal_type = bedroom_ranges(filters)
     bed_ranges.each do |bed_range|
-      bdr               = bed_range
-      bdr               = Building::COLIVING_NUM if bed_range == -1 && modal_type == 'listing'
+      bdr = bed_range
+      bdr = Building::COLIVING_NUM if bed_range == -1 && modal_type == 'listing'
       ranges[bed_range] = prices.find_by(bed_type: bdr)
     end
     return ranges
@@ -101,22 +100,10 @@ module BedRanges
   end
 
   def bedroom_types?
-    studio.present? || either_of_four? || listings_beds? || coliving
-  end
-  
-  def either_of_two?
-    three_bed.present? || four_plus_bed.present?
-  end
-  
-  def either_of_three?
-    either_of_two? || two_bed.present?
-  end
-  
-  def either_of_four?
-    either_of_three? || one_bed.present?
+    building_beds.present?
   end
 
   def coliving
-    co_living == Building::COLIVING_NUM
+    building_beds.include?(Building::COLIVING_NUM)
   end
 end

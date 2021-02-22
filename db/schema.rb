@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210214112334) do
+ActiveRecord::Schema.define(version: 20210221172950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,7 +134,10 @@ ActiveRecord::Schema.define(version: 20210214112334) do
     t.boolean  "deposit_free"
     t.string   "deposit_free_company"
     t.integer  "featured_buildings_count"
-    t.integer  "video_tours_count",        default: 0,     null: false
+    t.jsonb    "amenities",                default: {}
+    t.string   "bedroom_types",            default: [],                 array: true
+    t.index ["amenities"], name: "index_buildings_on_amenities", using: :gin
+    t.index ["bedroom_types"], name: "index_buildings_on_bedroom_types", using: :gin
     t.index ["building_name"], name: "index_buildings_on_building_name", using: :btree
     t.index ["building_street_address"], name: "index_buildings_on_building_street_address", using: :btree
     t.index ["city"], name: "index_buildings_on_city", using: :btree
@@ -429,37 +432,6 @@ ActiveRecord::Schema.define(version: 20210214112334) do
     t.integer  "range"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "rental_listings", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "neighborhood"
-    t.string   "address"
-    t.string   "unit"
-    t.string   "city"
-    t.string   "state",          default: "NY"
-    t.string   "zipcode"
-    t.integer  "rent"
-    t.integer  "bed"
-    t.decimal  "bath"
-    t.integer  "size"
-    t.string   "apartment_type"
-    t.date     "date_available"
-    t.text     "description"
-    t.integer  "user_id",                                       null: false
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.string   "featured_by"
-    t.integer  "uploads_count",  default: 0,                    null: false
-    t.boolean  "active",         default: false
-    t.boolean  "renew",          default: false
-    t.json     "amenities",      default: {"no_fee"=>"No Fee"}, null: false
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.index ["user_id"], name: "index_rental_listings_on_user_id", using: :btree
   end
 
   create_table "rental_price_histories", force: :cascade do |t|

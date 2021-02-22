@@ -121,10 +121,8 @@ module BuildingsConcern
     search_term = params['buildings-search-txt']
     @building = if address.present? && zipcode.present?
                   Building.where(building_street_address: address, zipcode: zipcode).first
-                elsif address.present?
-                  Building.find_by_building_street_address(address)
                 else
-                  Building.find_by_building_street_address(search_term)
+                  Building.find_by_building_street_address(address || search_term)
                 end
   end
 

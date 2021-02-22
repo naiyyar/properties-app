@@ -30,7 +30,7 @@
           <h3>Building Information</h3>
           <br />
           <div class="checkbox custom-checkbox"><label><%= f.check_box :no_fee %> <span class="fa fa-check"></span> <%= 'No Fee Building' %></label></div>
-          <% BuildingAmenities.building_edit_emenities.each do |key, value| %>
+          <% BuildingAmenities.building_edit_amenities.each do |key, value| %>
             <% if value == 'Elevator' %>
               <div class="checkbox custom-checkbox"><label><%= check_box_tag :elevator,'yes', @building.elevator ? true : false %> <span class="fa fa-check"></span> <%= value %></label></div>
               <div>

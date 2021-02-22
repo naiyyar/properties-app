@@ -51,23 +51,7 @@ module Search
     end
 
     def filter_by_beds
-      if @buildings.present?
-        buildings = []
-        @beds.each{|bed_num | buildings += buildings_by_beds(bed_num) }
-      end
-      @buildings.where(id: buildings.map(&:id).uniq).uniq rescue nil
-    end
-
-    def buildings_by_beds bed_num
-      case bed_num
-      when '0' then @buildings.studio
-      when '1' then @buildings.one_bed
-      when '2' then @buildings.two_bed
-      when '3' then @buildings.three_bed
-      when '5' then @buildings.co_living
-      else
-        @buildings.four_bed
-      end
+      @buildings.where("bedroom_types @> ARRAY[?]::varchar[]", @beds) rescue nil
     end
 
     def filter_by_listing_prices

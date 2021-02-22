@@ -100,36 +100,12 @@
                 .col-xs-12.col-sm-12.col-md-3.col-lg-6
                   .form-group
                     %label Bedroom Types
-                    .checkbox.custom-checkbox.bedroom-types-checkbox
-                      %label
-                        = f.check_box :studio, {}, 0, ''
-                        %span.fa.fa-check
-                        Studio
-                    .checkbox.custom-checkbox.bedroom-types-checkbox
-                      %label
-                        = f.check_box :one_bed, {}, 1, ''
-                        %span.fa.fa-check
-                        1 Bedroom
-                    .checkbox.custom-checkbox.bedroom-types-checkbox
-                      %label
-                        = f.check_box :two_bed, {}, 2, ''
-                        %span.fa.fa-check
-                        2 Bedroom
-                    .checkbox.custom-checkbox.bedroom-types-checkbox
-                      %label
-                        = f.check_box :three_bed, {}, 3, ''
-                        %span.fa.fa-check
-                        3 Bedroom
-                    .checkbox.custom-checkbox.bedroom-types-checkbox
-                      %label
-                        = f.check_box :four_plus_bed, {}, 4, ''
-                        %span.fa.fa-check
-                        4+ Bedroom
-                    .checkbox.custom-checkbox.bedroom-types-checkbox
-                      %label
-                        = f.check_box :co_living, {}, Building::COLIVING_NUM, ''
-                        %span.fa.fa-check
-                        CoLiving
+                    - Building::BEDROOMS.each do |bd_type|
+                      .checkbox.custom-checkbox.bedroom-types-checkbox
+                        %label
+                          = f.check_box :bedroom_types, {name: 'building[bedroom_types][]'}, bd_type[0], ''
+                          %span.fa.fa-check
+                          = bd_type[1]
                 
                 .col-xs-12.col-sm-12.col-md-3.col-lg-6
                   .form-group

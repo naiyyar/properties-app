@@ -238,11 +238,6 @@ module BuildingsHelper
 		filters.present? && b.min_listing_price > 0
 	end
 
-	# def active_listings_with_rent? b
-	# 	return b.act_listings.sum(:rent) > 0 if b.act_listings.present?
-	# 	b.listings.active.with_rent.sum(:rent) > 0
-	# end
-
 	def min_and_max_prices prop, filters
     if prop.min_and_max_price? && filters.blank?
   		return number_to_currency(prop.min_listing_price, precision: 0) if prop.min_listing_price == prop.max_listing_price
@@ -259,7 +254,7 @@ module BuildingsHelper
 	end
 
 	def with_bed_text b, filters
-		"#{'Bed' if b.bedroom_types? && (!b.has_only_studio?(filters) && !b.has_only_room?(filters) && !b.coliving)}" # #{',' if b.bedroom_types? && b.coliving_with_building_beds?}" # #{'CoLiving' if b.coliving_with_building_beds? }
+		"#{'Bed' if b.bedroom_types? && (!b.has_only_studio?(filters) && !b.has_only_room?(filters) && !b.coliving)}"
 	end
 
 	def nearby_link_text nb
