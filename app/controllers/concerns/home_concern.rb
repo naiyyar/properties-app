@@ -22,7 +22,7 @@ module HomeConcern
       @boundary_coords = results[:boundary_coords] if results[:boundary_coords].present?
       @zoom            = results[:zoom]            if results[:zoom].present?
       @filters         = results[:filters]
-      @tab_title_text  = Building.pop_search_tab_title(@search_term) if @filters.present?
+      @tab_title_text  = pop_search_tab_title if @filters.present?
     end
 
     @featured_listings = FeaturedListing.get_random_objects(@search_string, searched_by, limit: 2)
@@ -49,13 +49,28 @@ module HomeConcern
     
     @lat, @lng = params[:latitude], params[:longitude] if params[:search_term] == 'custom'
     
-    @meta_desc  = Building.meta_desc(@buildings, searched_by, desc:  @desc_text, 
-                                                              count: @buildings_count, 
-                                                              term:  @search_term)
+    @meta_desc = meta_desc(searched_by)
     @half_footer = true
   end
 
   private
+
+  def meta_desc searched_by
+    unless searched_by == 'nyc'
+      "#{@desc_text} has #{@buildings_count.to_i} no fee apartment, no fee rental, 
+      for rent by owner buildings in NYC you can rent directly from and pay no broker fees.
+      View #{@buildings&.sum(:uploads_count)} photos and #{@buildings&.sum(:reviews_count)} reviews."
+    else
+      "Browse #{@buildings_count.to_i} No Fee #{pop_search_tab_title}. 
+       Bypass the broker and save thousands in fees by renting directly from management companies."
+    end
+  end
+
+  def pop_search_tab_title
+    term = @search_term.split('-').join(' ').titleize
+    "#{term.gsub!('Nyc', 'NYC')}"
+    return term
+  end
   
   def building_latlng building
     return DEFAULT_LAT, DEFAULT_LNG unless building.present?

@@ -1,17 +1,8 @@
 class AddAmenitiesToBuildings < ActiveRecord::Migration
-  def self.up
-  	add_column :buildings,  :pets_allowed, :boolean
-    add_column :buildings,  :laundry_facility, :boolean
-    add_column :buildings,  :parking, :boolean
-    add_column :buildings,  :doorman, :boolean
-    add_column :buildings,  :elevator, :boolean
+  def change
+    add_column :buildings,  :laundry_facility, :boolean, default: false
+    add_column :buildings,  :parking, :boolean, default: false
+    add_column :buildings,  :doorman, :boolean, default: false
     add_column :buildings,  :description, :text
-  end
-  def self.down
-  	remove_column :buildings,  :pets_allowed, :boolean
-    remove_column :buildings,  :laundry_facility, :boolean
-    remove_column :buildings,  :parking, :boolean
-    remove_column :buildings,  :doorman, :boolean
-    remove_column :buildings,  :elevator, :boolean
   end
 end

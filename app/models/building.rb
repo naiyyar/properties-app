@@ -2,8 +2,6 @@ class Building < ApplicationRecord
   acts_as_voteable
   resourcify
 
-  # serialize :bedroom_types
-
   # Modules
   include ImageableConcern
   include FavoritableConcern
@@ -16,14 +14,12 @@ class Building < ApplicationRecord
   include CTALinks
   include Tourable
 
-  # Search and filtering methods
+  # Search and filtering
   extend Search::BuildingSearch
   extend Search::BuildingFilters
   extend Search::BuildingSorting
   extend Search::PopularSearches
   extend Search::RedoSearch
-
-  # store_accessor(:amenities)
 
   # constants
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$'].freeze
@@ -233,7 +229,7 @@ class Building < ApplicationRecord
   end
 
   def sorted_amenities
-    self.amenities.keep_if{|val| !val.empty?}.sort
+    @sorted_amenities ||= self.amenities.keep_if{|val| !val.empty?}.sort
   end
 
   def nearby_neighborhood

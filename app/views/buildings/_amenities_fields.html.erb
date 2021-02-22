@@ -37,7 +37,7 @@
             </label>
           </div>
           
-          <% BuildingAmenities.building_edit_amenities.each do |key, value| %>
+          <% Building.building_amenities.each do |key, value| %>
             <div class="checkbox custom-checkbox">
               <label>
                 <%= f.check_box :amenities, { name: 'building[amenities][]', id: "building_amenities_#{key}"}, key.to_s, '' %>
@@ -48,7 +48,7 @@
             
             <% if value == 'Elevator' %>
               <div>
-                <% if @building.elevator %>
+                <% if @building.sorted_amenities.include?('elevator') %>
                   <%= f.number_field :elevator, class: 'form-control' %>
                 <%else%>
                   <%= f.number_field :elevator, class: 'form-control hide', placeholder: '#Elevators' %>
@@ -58,7 +58,7 @@
 
             <%if value == 'Deposit Free'%>
               <div>
-                <% if @building.deposit_free %>
+                <% if @building.sorted_amenities.include?('deposit_free') %>
                   <%= f.text_field :deposit_free_company, class: 'form-control' %>
                 <%else%>
                   <%= f.text_field :deposit_free_company, class: 'form-control hide', placeholder: 'Company name that offers service' %>

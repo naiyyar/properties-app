@@ -81,23 +81,5 @@ module Search
         buildings.where('city = ? OR neighborhood in (?)', city, sub_boroughs).size
       }
     end
-
-    # split view
-    def meta_desc buildings, searched_by, options={}
-      unless searched_by == 'nyc'
-        "#{options[:desc]} has #{options[:count].to_i} no fee apartment, no fee rental, 
-        for rent by owner buildings in NYC you can rent directly from and pay no broker fees.
-        View #{buildings&.sum(:uploads_count)} photos and #{buildings&.sum(:reviews_count)} reviews."
-      else
-        "Browse #{options[:count].to_i} No Fee #{pop_search_tab_title(options[:term])}. 
-         Bypass the broker and save thousands in fees by renting directly from management companies."
-      end
-    end
-
-    def pop_search_tab_title search_term
-      term = search_term.split('-').join(' ').titleize
-      "#{term.gsub!('Nyc', 'NYC')}"
-      return term
-    end
   end
 end
