@@ -65,7 +65,7 @@ module Search
     def listing_amenity? amenities = nil
       amenities = @amenities || amenities
       return false if amenities.blank?
-      amenities.include?('months_free') || amenities.include?('owner_paid') || amenities.include?('rent_stabilized')
+      (Listing::AMENITIES.keys.map(&:to_s) & amenities).present?
     end
 
     def has_amenity?(name)
