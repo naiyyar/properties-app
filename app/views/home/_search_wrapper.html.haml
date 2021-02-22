@@ -14,7 +14,6 @@
       
     .tab-content.tab-scroll11{style: 'background-color: #f3f3f3;'}
       #buildings.tab-pane.fade.in.active
-        / - if @per_page_buildings.present?
         .resultsList
           #load-more-buildings.row
             = render partial: 'buildings/building', :collection => @all_buildings, :as => :object

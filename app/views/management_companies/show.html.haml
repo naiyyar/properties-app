@@ -48,7 +48,7 @@
         
         = render 'layouts/home/footer'
       #building_managed.tab-pane.fade.in.active.no-padding
-        .resultsList{class: controller_name}
+        .resultsList.searched-properties{class: controller_name}
           #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :object
         
         .pages-container{style: 'padding: 15px'}= render 'layouts/shared/add_pagination', objects: @manage_buildings
