@@ -1,5 +1,5 @@
 class FeaturedAgentsController < ApplicationController
-  load_and_authorize_resource except: :contact_agent
+  load_and_authorize_resource
   before_action :set_featured_agent, except: [:index, :create, :new]
   before_action :set_uploads, only: [:preview, :get_images]
   before_action :set_neighborhoods, only: [:new, :contact]

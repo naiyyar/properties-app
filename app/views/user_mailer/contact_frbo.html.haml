@@ -1,17 +1,18 @@
 %p 
 	You have a new inquiry through
-	%a{href: "https://www.transparentcity.co/?utm_source=email&utm_medium=receiver&utm_campaign=#{@owner_name}", target: '_blank'} Transparentcity
-	for #{@address_with_unit}.
+	%a{href: 'https://www.transparentcity.co/?utm_source=email&utm_medium=receiver', target: '_blank'} Transparentcity
+	for 
+	%a{href: "https://www.transparentcity.co/rent/#{@listing.id}/#{"#{@listing.address}-#{@listing.unit}-#{@listing.city}".parameterize}?utm_source=email&utm_medium=receiver",  target: '_blank'}= "#{@address_with_unit}."
 
 %table
 	%tr
 		%td From:
-		%td=@from_email
+		%td= @from_email
 	%tr
 		%td Phone #:
-		%td=@phone
+		%td= @phone
 
-%p=simple_format(@message)
+%p= simple_format(@message)
 
 
 :css
