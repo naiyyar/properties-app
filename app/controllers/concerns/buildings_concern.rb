@@ -32,14 +32,14 @@ module BuildingsConcern
     @building_tours_count  = @building_tours.size
     @video_tours, @category = VideoTour.videos_by_categories(@building_tours, limit: 2)
     
-    @neighbohood            = @building.neighbohoods
-    @nearby_nbs             = NYCBorough.nearby_neighborhoods(@building.nearby_neighborhood)
+    @neighbohood = @building.neighbohoods
+    @nearby_nbs  = NYCBorough.nearby_neighborhoods(@building.nearby_neighborhood)
 
-    @reviews       = @building.building_reviews
-    @reviews       = @reviews.includes(:reviewable) if @review.present?
-    @price_ranges  = @building.price_ranges
+    @reviews = @building.building_reviews
+    @reviews = @reviews.includes(:reviewable) if @review.present?
+    @price_ranges = @building.price_ranges
     @saved_amounts = @building.broker_fee_savings
-    @distance_results = DistanceMatrixService.new(@building).get_data
+    @distance_results = @building.get_subway_lines
     @b_management_company = @building.management_company
     
     @meta_desc = meta_description

@@ -44,7 +44,7 @@
 	.clearfix
 	
 	#subways.show-section
-		=render 'buildings/show/subways'
+		= render 'buildings/show/subways'
 
 	.clearfix
 	- if @similar_properties_count > 0
@@ -72,5 +72,6 @@
 			= link_to 'Write a Review', new_building_review_path(building_id: @building, contribution: 'building_review'), 'data-no-turbolink' => false, class: 'btn btn-warning no-review btn-round'
 
 	.clearfix
-	= render 'layouts/shared/nearby_neighborhoods', nearby_nbs: @nearby_nbs
+	- cache [@building, "nearby_neighborhoods_#{@nearby_nbs.values[0][:hoods].length}"] do
+		= render 'layouts/shared/nearby_neighborhoods', nearby_nbs: @nearby_nbs
 	

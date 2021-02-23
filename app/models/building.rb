@@ -194,6 +194,12 @@ class Building < ApplicationRecord
     self.id
   end
 
+  def get_subway_lines
+    Rails.cache.fetch([self, 'subway_lines']) { 
+      DistanceMatrixService.new(self).get_data 
+    }
+  end
+
   def get_listings filter_params, type='active', load_more_params={}
     Filter::Listings.new(self, 
                          load_more_params, 

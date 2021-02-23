@@ -14,12 +14,12 @@ module ImageableConcern
   end
 
 	def image_uploads assets = nil
-    return uploads.with_image unless assets.present?
-    assets.with_image
+    return uploads.with_image.includes(:imageable) unless assets.present?
+    assets.with_image.includes(:imageable)
   end
 
   def cached_image_uploads assets
-    Rails.cache.fetch([self, 'imageUploads']) { image_uploads(assets).to_a }
+    Rails.cache.fetch([self, 'imageUploads']) { image_uploads(assets) }
   end
 
   def doc_uploads assets

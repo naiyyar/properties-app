@@ -4,7 +4,7 @@
 		%ul.pop-list
 			- nearby_nbs.each_pair do |key, nb_hash|
 				- sub_neighbohoods = nb_hash[:hoods]
-				- area 						 = nb_hash[:area]
+				- area = nb_hash[:area]
 				%li
 					- if ['Queens','Bronx','Brooklyn'].include?(key)
 						= link_to nearby_link_text(area), "/no-fee-apartments-nyc-city/#{key.downcase}-ny", class: 'hyper-link'

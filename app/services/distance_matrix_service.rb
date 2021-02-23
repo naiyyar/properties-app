@@ -44,13 +44,16 @@ class DistanceMatrixService
   end
 
   def parsed_api_url destination_station
-    dis_matrix_api = "#{API_URL}&origins=#{@address}&destinations=#{destination_station}"
     begin
-      dis_matrix_api = URI.parse(dis_matrix_api)
+      dis_matrix_api = URI.parse(dis_matrix_api_url(destination_station))
     rescue URI::InvalidURIError
-      dis_matrix_api = URI.parse(URI.escape(dis_matrix_api))
+      dis_matrix_api = URI.parse(URI.escape(dis_matrix_api_url(destination_station)))
     end
     dis_matrix_api
+  end
+
+  def dis_matrix_api_url station
+    "#{API_URL}&origins=#{@address}&destinations=#{station}"
   end
 
 end
