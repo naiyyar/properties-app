@@ -26,7 +26,12 @@
                   - if listing.address.present?
                     =link_to listing.full_address, object_show_path(listing)
                 %td= listing.unit
-                %td= neighborhood_link(listing.try(:neighborhood))
+                %td
+                  - nb = listing.try(:neighborhood)
+                  - if Building::CITIES.include?(nb)
+                    = link_to nb, "/no-fee-apartments-nyc-city/#{nb.downcase}-ny", target: '_blank'
+                  - else
+                    = neighborhood_link(nb)
                 %td= listing.uploads_count
                 %td= start_date(listing)
                 %td= end_date(listing)
