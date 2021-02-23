@@ -26,7 +26,12 @@ class FeaturedAgentsController < ApplicationController
   def contact_agent
     UserMailer.contact_agent(@featured_agent, params[:contact]).deliver
     UserMailer.contact_agent_sender_copy(@featured_agent, params[:contact]).deliver
-    redirect_to :back, notice: 'Messsage successfully sent.'
+    respond_to do |format|
+      format.html{
+        redirect_to :back, notice: 'Messsage successfully sent.'
+      }
+      format.js
+    end
   end
 
   def get_images

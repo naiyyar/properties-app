@@ -7,7 +7,7 @@
 			%p.font-14=@featured_agent.broker_firm
 			%p.font-14= phone_with_area_code_link(@featured_agent)
 
-	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'agent-contact-form', id: 'contact-agent-form' do
+	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'agent-contact-form', id: 'contact-agent-form', authenticity_token: true do
 		.row
 			.col-xs-12.col-sm-12.col-md-12.col-lg-6
 				%label
@@ -106,8 +106,9 @@
 	$('input[type=submit]').on('click', function(){
 		var nb = $('#contact_neighborhoods').val();
 		var elems = $(this).find('.validate');
+		console.log(elems)
 		var elem;
-		var submit;
+		var submit = true;
 		if(nb == '' || nb == null){
 			$('.btn-custom-multiselect').addClass('error');
 			submit = false;
@@ -116,13 +117,16 @@
 			submit = true;
 		}
 		
-		for(var i = 0; i <= elems.length; i++){
-			elem = $(elems[i]);
-			if(elem.val() == '' || elem.val() == null){
-				elem.addClass('error');
-				submit = false;
+		if(elems.length > 0){
+			for(var i = 0; i <= elems.length; i++){
+				elem = $(elems[i]);
+				if(elem.val() == '' || elem.val() == null){
+					elem.addClass('error');
+					submit = false;
+				}
 			}
 		}
+		console.log(submit)
 		return submit;
 	});
 
