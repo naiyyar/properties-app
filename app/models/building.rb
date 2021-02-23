@@ -200,6 +200,18 @@ class Building < ApplicationRecord
     }
   end
 
+  def cached_listings
+    Rails.cache.fetch([self, 'active_listings']) { 
+      self.listings
+    }
+  end
+
+  def cached_past_listings
+    Rails.cache.fetch([self, 'past_listings']) { 
+      self.past_listings
+    }
+  end
+
   def get_listings filter_params, type='active', load_more_params={}
     Filter::Listings.new(self, 
                          load_more_params, 

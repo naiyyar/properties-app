@@ -8,39 +8,22 @@ module BuildingsConcern
 
   def show
     @half_footer = true
-    # reviews
-    @reviews_count = @building.reviews_count.to_i
-    # comps
-    @similar_properties_count = 0
-    if @building.active_comps.size > 0
-      @similar_properties = Building.buildings_with_active_comps(@building.id)
-      @similar_properties_count = @similar_properties.size
-    end
-    # 
-    @gmaphash = Building.buildings_json_hash((@similar_properties.to_a + [@building]), 'featured_comps')
-    # Current listings
-    @listings              = @building.listings
-    @active_listings       = @listings.order_by_rent_asc
-    @building.act_listings = @active_listings
-    @active_listings_count = @active_listings.count
-    # Past listings
-    @past_listings         = @building.past_listings
-    @last5_past_listings   = @past_listings.order_by_date_active_desc.limit(5)
-    @past_listings_count   = @past_listings.count
-    # Tour
-    @building_tours        = @building.video_tours
-    @building_tours_count  = @building_tours.size
-    @video_tours, @category = VideoTour.videos_by_categories(@building_tours, limit: 2)
-    
     @neighbohood = @building.neighbohoods
-    @nearby_nbs  = NYCBorough.nearby_neighborhoods(@building.nearby_neighborhood)
-
-    @reviews = @building.building_reviews
-    @reviews = @reviews.includes(:reviewable) if @review.present?
+    @b_management_company = @building.management_company
+    # comps
+    set_featured_comps
+    # For Map
+    set_json_data_hash
+    # Active and Past Listings
+    set_listings_data
+    set_tour_data
+    set_reviews_data
+    # Listing all nearby neighborhoods of the current building's neighborhood
+    set_nearby_neighborhoods
+    
     @price_ranges = @building.price_ranges
     @saved_amounts = @building.broker_fee_savings
     @distance_results = @building.get_subway_lines
-    @b_management_company = @building.management_company
     
     @meta_desc = meta_description
     
@@ -105,8 +88,44 @@ module BuildingsConcern
   end
 
   private
-  def get_neighborhood
-    @building.get_and_save_neighborhood(params[:selected_manually])
+
+  def set_featured_comps
+    @similar_properties_count = 0
+    if @building.active_comps.size > 0
+      @similar_properties = Building.buildings_with_active_comps(@building.id)
+      @similar_properties_count = @similar_properties.size
+    end
+  end
+
+  def set_json_data_hash
+    @gmaphash = Building.buildings_json_hash((@similar_properties.to_a + [@building]), 'featured_comps')
+  end
+
+  def set_listings_data
+    @listings              = @building.cached_listings
+    @active_listings       = @listings.order_by_rent_asc
+    @building.act_listings = @active_listings
+    @active_listings_count = @building.listings_count.to_i
+    # Past listings
+    @past_listings         = @building.cached_past_listings
+    @last5_past_listings   = @past_listings.order_by_date_active_desc.limit(5)
+    @past_listings_count   = @past_listings.size
+  end
+
+  def set_tour_data
+    @building_tours        = @building.video_tours
+    @building_tours_count  = @building_tours.size
+    @video_tours, @category = VideoTour.videos_by_categories(@building_tours, limit: 2)
+  end
+
+  def set_reviews_data
+    @reviews_count = @building.reviews_count.to_i
+    @reviews = @building.building_reviews
+    @reviews = @reviews.includes(:reviewable) if @review.present?
+  end
+
+  def set_nearby_neighborhoods
+    @nearby_nbs  = NYCBorough.nearby_neighborhoods(@building.nearby_neighborhood)
   end
 
   def save_as_favourite

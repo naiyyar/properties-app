@@ -61,17 +61,17 @@ class BuildingsController < ApplicationController
 
   def contribute
     session[:form_data] = nil if session[:form_data].present?
-    @search_type        = 'building'
+    @search_type = 'building'
     if params[:management].present?
-      @buildings    = @buildings.where('management_company_id is null')
-      @search_type  = 'companies'
+      @buildings = @buildings.where('management_company_id is null')
+      @search_type = 'companies'
     end
     @feature_comp_search_type = params[:featured_on].present? ? 'feature_comp_on' : 'feature_comp_as'
-    @buildings                = @buildings.text_search(params[:term])
-                                          .reorder('building_street_address ASC')
-                                          .limit(10).includes(:units, :management_company)
-    @building                 = @buildings.where(id: params[:building_id]).first  if params[:building_id].present?
-    @search_bar_hidden        = :hidden
+    @buildings = @buildings.text_search(params[:term])
+                           .reorder('building_street_address ASC')
+                           .limit(10).includes(:units, :management_company)
+    @building = @buildings.where(id: params[:building_id]).first  if params[:building_id].present?
+    @search_bar_hidden = :hidden
   end
 
   def import
@@ -140,6 +140,10 @@ class BuildingsController < ApplicationController
 
   def find_buildings
     @buildings = Building.all
+  end
+
+  def get_neighborhood
+    @building.get_and_save_neighborhood(params[:selected_manually])
   end
 
   def set_image_counts
