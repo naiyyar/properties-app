@@ -30,7 +30,7 @@ class Upload < ApplicationRecord
   
   # scopes
   default_scope { order('sort asc') }
-  scope :with_image, -> { where.not(image_file_name: nil).includes(:imageable) }
+  scope :with_image, -> { where.not(image_file_name: nil) }
   scope :with_doc,   -> { where.not(document_file_name: nil) }
 
   # callbacks

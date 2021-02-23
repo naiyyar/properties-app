@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         @imageable = @featured_listing
         @new_video_tour = VideoTour.new
         @video_tours = @imageable.video_tours.where(category: 'featured_listing')
-        @photos = @imageable.uploads.with_image
+        @photos = @imageable.uploads.with_image.includes([:imageable, :user])
         session[:back_to] = request.fullpath
       when :payment
         @object      = @featured_listing
