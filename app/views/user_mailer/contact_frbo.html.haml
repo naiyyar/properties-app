@@ -2,7 +2,7 @@
 	You have a new inquiry through
 	%a{href: 'https://www.transparentcity.co/?utm_source=email&utm_medium=receiver', target: '_blank'} Transparentcity
 	for 
-	%a{href: "https://www.transparentcity.co/rent/#{@listing.id}/#{"#{@listing.address}-#{@listing.unit}-#{@listing.city}".parameterize}?utm_source=email&utm_medium=receiver",  target: '_blank'}= "#{@address_with_unit}."
+	%a{href: "#{ENV['SERVER_ROOT']}/rent/#{@listing.id}/#{"#{@listing.address}-#{@listing.unit}-#{@listing.city}".parameterize}?utm_source=email&utm_medium=receiver",  target: '_blank'}= "#{@address_with_unit}."
 
 %table
 	%tr

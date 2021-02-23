@@ -76,6 +76,7 @@ class UserMailer < ApplicationMailer
 			from: DEFAULT_EMAIL,
 			reply_to: @from_email,
 			to: @to_email,
+			bcc: 'hello@transparentcity.co',
 			subject: frbo_subject
 		)
 	end
