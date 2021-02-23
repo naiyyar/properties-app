@@ -101,10 +101,25 @@ module LinksHelper
 		'Next →'
 	end
 
-	def neighborhood_link nb
+	def neighborhood_link nb, target: 'self'
 		nb = 'Midtown' if nb == 'Midtown Manhattan'
 		return '' if nb.blank?
-    search_by_neighborhood_link(nb, 'MANHATTAN', false) 
+    search_by_neighborhood_link(nb, 'MANHATTAN', target: target,  show_count: false) 
+	end
+
+	def search_by_neighborhood_link nb, area, target: 'self' , show_count: true
+		link_to search_link(nb, area), target: target, data: { nbname: nb, st: searchable_text(nb, area) } do
+			if show_count
+				neighborhood = @pop_nb_hash[nb]
+				if neighborhood.present?
+					"#{nb} (<span>#{neighborhood[0].buildings_count}</span>)".html_safe
+				else
+					"#{nb} (#{parent_neighborhoods_count(nb)})"
+				end
+			else
+				nb
+			end
+		end
 	end
 
 	def action_link_styles

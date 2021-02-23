@@ -30,7 +30,7 @@
                 %td=agent.full_name
                 %td=agent.user.try(:email)
                 %td=agent.try(:email)
-                %td=neighborhood_link(agent.try(:neighborhood))
+                %td=neighborhood_link(agent.try(:neighborhood), target: '_blank')
                 %td=agent.try(:broker_firm)
                 %td=agent.try(:license_number)
                 %td=number_to_phone(agent.try(:phone), area_code: true)
