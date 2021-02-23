@@ -35,7 +35,7 @@ module Search
 
     def filter_by_amenities
       return @buildings unless @amenities.present?
-      @buildings.where("amenities @> ARRAY[?]::varchar[]", @amenities)
+      @buildings.with_amenities(@amenities)
     end
     
     def filter_by_prices
@@ -48,7 +48,7 @@ module Search
     end
 
     def filter_by_beds
-      @buildings.where("bedroom_types @> ARRAY[?]::varchar[]", @beds) rescue nil
+      @buildings.with_bed(@beds) rescue nil
     end
 
     def filter_by_listing_prices

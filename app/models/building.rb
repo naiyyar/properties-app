@@ -107,25 +107,11 @@ class Building < ApplicationRecord
   scope :random,                -> (ids) { where(id: ids) }
   
   # popular searches
-  scope :luxury_rentals, -> { where.not(building_street_address: nil).doorman.elevator }
+  scope :luxury_rentals, -> { with_amenities(['doorman', 'elevator']) }
   scope :penthouses_luxury_rentals, -> (ids) { where(id: ids) }
-  
-  scope :studio,    -> { where(studio: 0)        }
-  scope :one_bed,   -> { where(one_bed: 1)       }
-  scope :two_bed,   -> { where(two_bed: 2)       }
-  scope :three_bed, -> { where(three_bed: 3)     }
-  scope :four_bed,  -> { where(four_plus_bed: 4) }
-  scope :co_living,  ->{ where(co_living: Building::COLIVING_NUM) }
   scope :penthouse, -> { where('max_listing_price >= ?', PENTHOUSES_MIN_PRICE) }
-  
-  # amenities scopes
-  AMENITIES.each do |item|
-    unless item == :elevator
-      scope item,  -> { where(item => true) }
-    else
-      scope item, -> { where.not(item => nil) }
-    end
-  end
+  scope :with_bed, -> (beds) { where("bedroom_types @> ARRAY[?]::varchar[]", beds) }
+  scope :with_amenities, -> (amenities) { where("amenities @> ARRAY[?]::varchar[]", amenities) }
 
   # pgsearch
   pg_search_scope :search, against: [:building_name, :building_street_address],
