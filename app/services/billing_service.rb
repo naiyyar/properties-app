@@ -28,7 +28,7 @@ class BillingService
 			customer.create_source(cust_id, { source: @payment_token })
 		rescue StandardError, AnotherError => e
 			# when No such customer
-			Struct.new(id: set_customer_id)
+			OpenStruct.new(id: set_customer_id)
 		end
 	end
 
