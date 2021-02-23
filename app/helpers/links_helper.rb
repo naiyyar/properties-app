@@ -101,13 +101,13 @@ module LinksHelper
 		'Next →'
 	end
 
-	def neighborhood_link nb, target: 'self'
+	def neighborhood_link nb, target: ''
 		nb = 'Midtown' if nb == 'Midtown Manhattan'
 		return '' if nb.blank?
     search_by_neighborhood_link(nb, 'MANHATTAN', target: target,  show_count: false) 
 	end
 
-	def search_by_neighborhood_link nb, area, target: 'self' , show_count: true
+	def search_by_neighborhood_link nb, area, target: '' , show_count: true
 		link_to search_link(nb, area), target: target, data: { nbname: nb, st: searchable_text(nb, area) } do
 			if show_count
 				neighborhood = @pop_nb_hash[nb]
