@@ -45,22 +45,22 @@ module BedRanges
   end
 
   def has_only_studio? filters
-    show_bed_range = show_bed_ranges(filters)
-    return show_bed_range.length == 1 && show_bed_range[0] == 'Studio'
+    show_range = show_bed_range(filters)
+    return show_range.length == 1 && show_range[0] == 'Studio'
   end
 
   def has_only_room? filters
-    show_bed_range = show_bed_ranges(filters)
-    return show_bed_range.length == 1 && show_bed_range[0] == 'Room'
+    show_range = show_bed_range(filters)
+    return show_range.length == 1 && show_range[0] == 'Room'
+  end
+
+  def show_bed_range filters
+    @show_bed_range ||= show_bed_ranges(filters)
   end
 
   def show_bed_ranges(filter_params)
-    beds = []
     bed_ranges, modal_type = bedroom_ranges(filter_params)
-    bed_ranges.each do |bed|
-      beds << set_bed_type(bed, modal_type)
-    end
-    beds
+    return bed_ranges.map{|bed| set_bed_type(bed, modal_type)}
   end
 
   def set_bed_type bed, modal_type
@@ -93,7 +93,7 @@ module BedRanges
   end
 
   def coliving_with_building_beds?
-    !listings_beds? && coliving
+    !listings_beds? && coliving?
   end
 
   def listings_beds?
@@ -104,7 +104,7 @@ module BedRanges
     building_beds.present?
   end
 
-  def coliving
+  def coliving?
     building_beds.include?(Building::COLIVING_NUM)
   end
 end

@@ -207,7 +207,7 @@ module BuildingsHelper
 	end
 
 	def with_bed_text b, filters
-		return '' if b.has_only_studio?(filters) || b.has_only_room?(filters) || b.coliving
+		return '' if b.has_only_studio?(filters) || b.has_only_room?(filters) || b.coliving?
 		"#{'Bed' if b.bedroom_types? || (b.listings_count > 0)}"
 	end
 
