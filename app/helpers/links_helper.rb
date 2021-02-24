@@ -122,6 +122,53 @@ module LinksHelper
 		end
 	end
 
+	def check_availability_link building, sl_class=nil
+		if building.active_web_url?
+			bt_block_class = sl_class.present? ? sl_class : 'btn-block'
+      link_to 'Check Availability', building.web_url, 
+      														onclick: "window.open(this.href,'_blank');return false;",
+      														class: "btn #{bt_block_class} btn-primary txt-color-white font-bolder btn-round",
+      														style: "padding: #{bt_block_class.include?('btn-xs') ? '8px 0px' : ''}"
+    else
+      link_to check_availability, building_url(building), class: 'btn btn-block btn-primary invisible'
+    end
+	end
+
+	def check_availability_button web_url, klass
+		link_to 'Check Availability', web_url, 
+																	onclick: "window.open(this.href,'_blank');return false;",
+																	class: "btn btn-primary #{klass} btn-round ca"
+	end
+
+	def contact_leasing_button building, event, klass
+		link_to 'Contact Leasing', 'javascript:;', 
+																onclick: "showLeasingContactPopup(#{building.id})", 
+																 class: "btn btn-primary #{klass} btn-round"
+	end
+
+	def active_listings_button building, event, klass, listings_count
+		link_to "#{listings_count} Active Listings" , 'javascript:;', 
+																									onclick: "showActiveListingsPopup(#{building.id})", 
+																									class: "btn btn-primary active-listing-link #{klass} btn-round"
+	end
+
+	def apply_online_link building
+		link_to 'Apply Online', building.online_application_link, 
+														class: 'btn btn-primary btn-o btn-block font-bolder btn-round', 
+														target: '_blank'
+	end
+
+	def contact_leasing_link building, bg_col='', sl_class=''
+		bt_block_class = sl_class.present? ? sl_class : 'btn-block'
+		link_to 'Contact Leasing Team', new_contact_path(building_id: building.id), 
+																		class: "btn btn-primary #{bg_col} #{bt_block_class} txt-color-white font-bolder btn-round sh-contact-leasing", 
+																		remote: true
+	end
+
+	def check_availability
+		'<b>Check Availability</b>'.html_safe
+	end
+
 	def action_link_styles
 		"width: #{browser.device.mobile? ? '8em' : '10em'};"
 	end

@@ -124,53 +124,6 @@ module BuildingsHelper
 		(@current_user.present? && object.favorite_by?(@current_user)) ? 'filled-heart' : 'unfilled-heart'
 	end
 
-	def check_availability_link building, sl_class=nil
-		if building.active_web_url?
-			bt_block_class = sl_class.present? ? sl_class : 'btn-block'
-      link_to 'Check Availability', building.web_url, 
-      														onclick: "window.open(this.href,'_blank');return false;",
-      														class: "btn #{bt_block_class} btn-primary txt-color-white font-bolder btn-round",
-      														style: "padding: #{bt_block_class.include?('btn-xs') ? '8px 0px' : ''}"
-    else
-      link_to check_availability, building_url(building), class: 'btn btn-block btn-primary invisible'
-    end
-	end
-
-	def check_availability_button web_url, klass
-		link_to 'Check Availability', web_url, 
-																	onclick: "window.open(this.href,'_blank');return false;",
-																	class: "btn btn-primary #{klass} btn-round ca"
-	end
-
-	def contact_leasing_button building, event, klass
-		link_to 'Contact Leasing', 'javascript:;', 
-																onclick: "showLeasingContactPopup(#{building.id})", 
-																 class: "btn btn-primary #{klass} btn-round"
-	end
-
-	def active_listings_button building, event, klass, listings_count
-		link_to "#{listings_count} Active Listings" , 'javascript:;', 
-																									onclick: "showActiveListingsPopup(#{building.id})", 
-																									class: "btn btn-primary active-listing-link #{klass} btn-round"
-	end
-
-	def apply_online_link building
-		link_to 'Apply Online', building.online_application_link, 
-														class: 'btn btn-primary btn-o btn-block font-bolder btn-round', 
-														target: '_blank'
-	end
-
-	def contact_leasing_link building, bg_col='', sl_class=''
-		bt_block_class = sl_class.present? ? sl_class : 'btn-block'
-		link_to 'Contact Leasing Team', new_contact_path(building_id: building.id), 
-																		class: "btn btn-primary #{bg_col} #{bt_block_class} txt-color-white font-bolder btn-round sh-contact-leasing", 
-																		remote: true
-	end
-
-	def check_availability
-		'<b>Check Availability</b>'.html_safe
-	end
-
 	def date_uploaded object
 		"<b>#{ associated_object(object.imageable) }</b>" +
 		"<p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>" +
@@ -248,13 +201,14 @@ module BuildingsHelper
   	end
   end
 
-	def types_col b, filters
+  def types_col b, filters
 		"<span> #{'|' if b.show_bed_ranges(filters).present?} #{b.show_bed_ranges(filters).join(', ')} </span>" +
 		"#{with_bed_text(b, filters)}"
 	end
 
 	def with_bed_text b, filters
-		"#{'Bed' if b.bedroom_types? && (!b.has_only_studio?(filters) && !b.has_only_room?(filters) && !b.coliving)}"
+		return '' if b.has_only_studio?(filters) || b.has_only_room?(filters) || b.coliving
+		"#{'Bed' if b.bedroom_types? || (b.listings_count > 0)}"
 	end
 
 	def nearby_link_text nb
