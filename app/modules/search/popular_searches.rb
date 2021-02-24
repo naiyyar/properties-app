@@ -98,10 +98,10 @@ module Search
 					buildings 			= queens_buildings.with_bed(STUDIOS)
 					filters[:beds] 	= STUDIOS
 				when '2-bedroom-apartments-in-brooklyn-for-rent'
-					buildings 			= brooklyn_buildings.two_bed
+					buildings 			= brooklyn_buildings.with_bed(['2'])
 					filters[:beds] 	= ['2']
 				when '2-bedroom-apartments-in-queens-for-rent'
-					buildings 			= queens_buildings.two_bed
+					buildings 			= queens_buildings.with_bed(['2'])
 					filters[:beds] 	= ['2']
 				when 'harlem-studio-apartments'
 					buildings 		 = buildings_in_neighborhood('harlem').with_bed(STUDIOS)
