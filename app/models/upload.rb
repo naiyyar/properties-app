@@ -92,7 +92,7 @@ class Upload < ApplicationRecord
   # class Methods
   ##################################
 
-  def self.building_photos property_ids, type
+  def self.building_photos property_ids, type='Building'
     where(imageable_id: property_ids, imageable_type: type)
   end
 

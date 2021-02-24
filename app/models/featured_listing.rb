@@ -141,4 +141,10 @@ class FeaturedListing < ApplicationRecord
     ]
   end
 
+  def get_subway_lines
+    Rails.cache.fetch([self, 'subway_lines']) { 
+      DistanceMatrixService.new(self).get_data 
+    }
+  end
+
 end

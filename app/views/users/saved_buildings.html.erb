@@ -14,7 +14,7 @@
         <%if @buildings.present? %>
           <div class="resultsList">
             <div class="row" id="load-more-buildings">
-              <%= render partial: 'buildings/building', :collection => @buildings, :as => :building, cache: true %>
+              <%= render partial: 'buildings/building', :collection => @buildings, :as => :object, cache: true %>
             </div>
           </div>
           

@@ -31,7 +31,7 @@ class FeaturedListingsController < ApplicationController
     @neighborhood = @featured_listing.neighborhood1
     @nearby_nbs = NYCBorough.nearby_neighborhoods(@neighborhood)
     @uploaded_images_count = @featured_listing.uploads_count
-    @distance_results = DistanceMatrixService.new(@featured_listing).get_data
+    @distance_results = @featured_listing.get_subway_lines
     @gmaphash = [@featured_listing.as_json] # for map
     @meta_desc = meta_description
   end
