@@ -1,11 +1,10 @@
 module RenewPlan
   
   def create_billing(user, card, customer_id, billable)
-    Billing.create_billing( user:         user, 
-                            card:         card, 
-                            customer_id:  customer_id, 
-                            id:           billable.id,
-                            type:         billable.class.name)
+    Billing.create_billing( user:        user, 
+                            card:        card, 
+                            customer_id: customer_id, 
+                            billable:    billable )
   end
 
   def renew_and_deactivate_featured_plan

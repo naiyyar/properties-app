@@ -7,6 +7,8 @@ class FeaturedAgent < ApplicationRecord
   extend RenewPlan
 
   FEATURING_WEEKS = 'four'
+  FEATURING_DAYS = 28
+  AMOUNT = 9
   # validations
   FIELDS_TO_VALIDATES = [ :first_name,
                           :last_name,

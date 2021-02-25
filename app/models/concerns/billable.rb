@@ -5,7 +5,15 @@ module Billable
 		has_many :billings, as: :billable, dependent: :destroy
 	end
 
-  DEV_HOSTS = %w(http://localhost:3000 https://aptreviews-app.herokuapp.com)
+  DEV_HOSTS = %w(http://localhost:3003 https://aptreviews-app.herokuapp.com)
+
+  def model_class
+    @model_class ||= self.class.name.constantize
+  end
+
+  def charging_amount
+    model_class::AMOUNT
+  end
 
 	def featured_by_manager?
     featured_by == 'manager'
@@ -40,7 +48,15 @@ module Billable
   end
 
    def _end_date renew_date
-    DEV_HOSTS.include?(ENV['SERVER_ROOT']) ? set_end_date(renew_date, 2.days) : set_end_date(renew_date, 27.days)
+    set_end_date(renew_date, days_count)
+  end
+
+  def days_count
+    if DEV_HOSTS.include?(ENV['SERVER_ROOT']) 
+      2.days
+    else
+      (model_class::FEATURING_DAYS - 1).days
+    end
   end
 
   def set_end_date renew_date, days

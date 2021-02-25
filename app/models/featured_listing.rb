@@ -9,6 +9,8 @@ class FeaturedListing < ApplicationRecord
 
   # constant
   FEATURING_WEEKS = 'two'
+  FEATURING_DAYS = 14
+  AMOUNT = 14
   
   APARTMENT_TYPE = [
     'Co-op',

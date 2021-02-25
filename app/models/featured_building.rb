@@ -5,6 +5,8 @@ class FeaturedBuilding < ApplicationRecord
   extend RenewPlan
 
   FEATURING_WEEKS = 'four'
+  FEATURING_DAYS = 28
+  AMOUNT = 49
   
   belongs_to :user
   belongs_to :building, touch: true

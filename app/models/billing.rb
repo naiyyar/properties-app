@@ -70,20 +70,18 @@ class Billing < ApplicationRecord
 	  end
 	end
 
-	def self.create_billing options={}
-		user 		 	 = options[:user]
-		card 		 	 = options[:card]
-		user_email = user.email
-    billing  	 = Billing.new({email:           user_email,
-                              amount:          prices(options[:type]),
-                              billable_id: 		 options[:id],
-                              billable_type:   options[:type],
-                              user_id:         user.id,
-                              renew_date:      Time.zone.now,
-                              billing_card_id: card.id,
-                              brand:           card.brand
-                            })
-    unless billing.save_and_charge_existing_card!(user: user, customer_id: options[:customer_id], card_id: card.id)
+	def self.create_billing user:, card:, customer_id:, billable:
+    billing = Billing.new({ email:           user.email,
+                            amount:          billable.charging_amount,
+                            billable_id: 		 billable.id,
+                            billable_type:   billable.class.name,
+                            user_id:         user.id,
+                            renew_date:      Time.zone.now,
+                            billing_card_id: card.id,
+                            brand:           card.brand
+                          })
+    
+    unless billing.save_and_charge_existing_card!(user: user, customer_id: customer_id, card_id: card.id)
       billing.status = 'Failed'
       billing.save
     end
@@ -92,11 +90,7 @@ class Billing < ApplicationRecord
 	def 
 
 	def price
-		billing_amount(billable_type)
-	end
-
-	def self.prices(type)
-		billing_amount(type)
+		FEATURED_PRICES[billable_type]
 	end
 	
 	def billing_description
@@ -131,10 +125,6 @@ class Billing < ApplicationRecord
 	def set_end_date
 		klass = self.billable_type.constantize
 		klass.find(billable_id).set_expiry_date(self.renew_date)
-	end
-
-	def billing_amount type
-		FEATURED_PRICES[type]
 	end
 
 	def inv_description
