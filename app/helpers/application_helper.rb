@@ -70,22 +70,6 @@ module ApplicationHelper
     controller_name == 'sessions' || controller_name == 'registrations'
   end
 
-  def seo_title_after_pipe
-    if featured_listing_show_page?
-      ' | Apartment For Rent In NYC'
-    else
-      if search_page? || management_show_page?
-        ' | All No Fee Apartments'
-      elsif building_show_page?
-        ' | Transparentcity'
-      end
-    end
-  end
-
-  def seo_tab_title text
-    content_for :page_title { "#{text} | Transparentcity" }
-  end
-
   def saved_buildings_page?
     action_name == 'saved_buildings'
   end
