@@ -4,11 +4,14 @@ module HomeHelper
 		unless current_user
       '/users/sign_up'
     else
-      unless type == 'agents'
-        managertools_user_path(current_user, type: 'featured')
-      else
-        agenttools_user_path(current_user, type: 'featured')
-      end
+    	case type
+    	when 'agents'
+    		agenttools_user_path(current_user, type: 'featured')
+    	when 'property-manager'
+    		managertools_user_path(current_user, type: 'featured')
+    	when 'for-rent-by-owner'
+    		frbotools_user_path(current_user, type: 'featured')
+     	end
     end
 	end
 

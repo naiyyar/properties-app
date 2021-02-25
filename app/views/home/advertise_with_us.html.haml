@@ -1,6 +1,11 @@
-- if params[:type] == 'agents'
+- if @type == 'agents'
+	- seo_tab_title('Advertising For NYC Real Estate Rental Agents')
 	= render 'home/partials/agent_advertising'
+- elsif @type == 'for-rent-by-owner'
+	- seo_tab_title('Advertising For NYC Individual Landlords For Rent By Owners (FRBO)')
+	= render 'layouts/shared/frbo_advertising'
 - else
+	- seo_tab_title('Advertising For NYC Property Managers And Management Companies')
 	.advertise-with-us
 		.top-section
 			.row
@@ -27,7 +32,7 @@
 					%p 
 						%b Featured Buildings 
 						are interchangeable and can be adjusted throughout the featured time period.
-					%a.btn.btn-primary.btn-round.font-bold.visible-xs{href: @self_service_btn_link}='$49 / Building / 4 Weeks'
+					%a.btn.btn-primary.btn-round.font-bold.visible-xs{href: self_service_btn_link(@type)}='$49 / Building / 4 Weeks'
 
 				.col-lg-6.col-md-6.col-xs-12
 					%h4 Managed Service Featuring
@@ -40,7 +45,7 @@
 			
 			.row.hidden-xs
 				.col-lg-6.col-md-6
-					%a.btn.btn-primary.btn-round.font-bold{href: @self_service_btn_link}='$49 / Building / 4 Weeks'
+					%a.btn.btn-primary.btn-round.font-bold{href: self_service_btn_link(@type)}='$49 / Building / 4 Weeks'
 				.col-lg-6.col-md-6
 					%a.btn.btn-primary.btn-round.font-bold{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
 

@@ -78,20 +78,13 @@ class HomeController < ApplicationController
   end
 
   def tos
+    @meta_desc = 'Terms of service for Transparentcity'
   end
 
   def advertise_with_us
     @type = params[:type]
-    @self_service_btn_link =  unless current_user
-                                '/users/sign_up'
-                              else
-                                unless @type == 'agents'
-                                  managertools_user_path(current_user, type: 'featured')
-                                else
-                                  agenttools_user_path(current_user, type: 'featured')
-                                end
-                              end
     @search_bar_hidden = :hidden
+    @meta_desc = advertise_meta_description
   end
 
   private
@@ -130,6 +123,17 @@ class HomeController < ApplicationController
   # def set_min_save_amount
   #   @min_save_amount = @building.min_save_amount(@rent_medians, @broker_percent)
   # end
+
+  def advertise_meta_description
+    case @type
+    when 'agents'
+      'Transparentcity connects Tenant Agents to prospective renters who are looking for personal guidance on navigating the complex rental process.'
+    when 'property-manager'
+      'Transparentcity advertises exclusively for NYC area landlords and property managers.'
+    when 'for-rent-by-owner'
+      'Transparentcity connects prospective renters to individual NYC landlord owners.'
+    end
+  end
 
   def tab_title_tag
     @tab_title_tag ||= 'Apartments For Rent in NYC'

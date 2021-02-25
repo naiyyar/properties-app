@@ -72,10 +72,18 @@ module ApplicationHelper
 
   def seo_title_after_pipe
     if featured_listing_show_page?
-      'Apartment For Rent In NYC'
+      ' | Apartment For Rent In NYC'
     else
-      action_name == 'show' ? 'Transparentcity' : 'All No Fee Apartments'
+      if search_page? || management_show_page?
+        ' | All No Fee Apartments'
+      elsif building_show_page?
+        ' | Transparentcity'
+      end
     end
+  end
+
+  def seo_tab_title text
+    content_for :page_title { "#{text} | Transparentcity" }
   end
 
   def saved_buildings_page?

@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <title>
   <% if content_for? :page_title %>
-    <%= yield :page_title %> | <%= seo_title_after_pipe %>
+    <%= yield :page_title %> <%= seo_title_after_pipe %>
   <% else %>
     <%= @tab_title_text = 'Apartments For Rent in NYC | All No Fee Apartments' %>
   <% end %>

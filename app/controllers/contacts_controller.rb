@@ -13,6 +13,7 @@ class ContactsController < ApplicationController
   end
 
   def about
+    @meta_desc = "NYC's listing platform that connects Renters directly to Management Companies, Property Managers and Individual Landlords."
     @search_bar_hidden = :hidden
   end
 

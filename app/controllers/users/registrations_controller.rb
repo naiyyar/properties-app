@@ -6,6 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
   def new
     @search_bar_hidden = :hidden
+    @meta_desc = 'Sign up for Transparentcity'
     super
   end
 
