@@ -48,6 +48,13 @@
 			font-size: 16px;
 		}
 
+		.sub-section{
+			display: inline-block;
+			width: 48%;
+			padding: 4px;
+			vertical-align: middle;
+		}
+
 		.who-www{
 			margin: 0px;
     	padding: 0px;
@@ -97,6 +104,12 @@
 			h3 {
 				font-size: 30px;
 				font-weight: bold;
+			}
+
+			.sub-section{
+				display: block;
+				width: 100%;
+				padding: 0px;
 			}
 			
 			#why-wwt{
