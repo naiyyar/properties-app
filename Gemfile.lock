@@ -1316,7 +1316,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     statistics2 (0.54)
     stripe (5.22.0)
     stripe_event (2.3.1)
@@ -1444,7 +1443,6 @@ DEPENDENCIES
   sitemap_generator
   social-share-button
   spring
-  sqlite3
   stripe
   stripe_event
   thumbs_up
