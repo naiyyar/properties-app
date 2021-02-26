@@ -1,9 +1,9 @@
 <% content_for :page_title do%><%= @tab_title_text if @tab_title_text.present? %><%end %>
 
 <% content_for :neighborhoods_modal do %>
-  <%= render partial: 'layouts/shared/pop_neighborhoods_list' %>
+  <%= render 'layouts/shared/pop_neighborhoods_list' %>
 <%end%>
 
 <%= render 'buildings/partials/map_data_field' %>
 
-<%= render partial: 'search_wrapper' %>
+<%= render 'search_wrapper' %>

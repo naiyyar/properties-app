@@ -30,7 +30,7 @@ class FeaturedAgent < ApplicationRecord
 	scope :inactive,    -> { where(active: false) }
 	scope :by_manager,  -> { where(featured_by: 'manager') }
 
-	pg_search_scope :search_query, 
+	pg_search_scope :search_query,
                   against: [:first_name, :last_name, :neighborhood]
 
   filterrific(

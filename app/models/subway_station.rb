@@ -4,7 +4,7 @@ class SubwayStation < ApplicationRecord
 	attr_accessor :address
 	include PgSearch::Model
   pg_search_scope :search, against: [:name],
-     							:using => { :tsearch => { prefix: true }, 
+     							:using => { :tsearch => { prefix: true },
      						 	:trigram => { :threshold => 0.3 }  }
 
   reverse_geocoded_by :latitude, :longitude

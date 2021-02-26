@@ -8,5 +8,5 @@
 
 <% @tag.recent_posts.each_with_index do |post, index| %>
 	<% @count = index %>
-  <%= render :partial => 'buttercms/posts/post', :locals => {:post => post} %>
+  <%= render 'buttercms/posts/post', :post => post %>
 <% end %>

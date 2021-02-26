@@ -89,6 +89,11 @@ module BuildingsConcern
 
   private
 
+  def unit_params
+    params[:unit] = params[:building][:units_attributes]['0']
+    params.require(:unit).permit(:name, :square_feet, :number_of_bathrooms, :number_of_bedrooms)
+  end
+
   def set_featured_comps
     @similar_properties_count = 0
     if @building.active_comps.size > 0

@@ -1,6 +1,6 @@
 class PastListingsController < ApplicationController
 	load_and_authorize_resource   	only: [:index, :export]
-	before_action :set_listing,   	only: [:show, :edit, :update, :destroy]
+	before_action :set_listing,   	only: [:edit, :update, :destroy]
 	before_action :filter_listings, only: :index
 	before_action :format_date, 		only: :export
   

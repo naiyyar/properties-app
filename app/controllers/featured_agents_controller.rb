@@ -118,12 +118,6 @@ class FeaturedAgentsController < ApplicationController
     @first_image  = @featured_agent.uploads.first rescue nil
     @images_count = @featured_agent.uploads_count
   end
-
-  def redirect_path
-    @featured_agent.featured_by_manager? ? 
-    billing_or_featured_list_path : 
-    featured_agent_steps_path(agent_id: @featured_agent.id)
-  end
   
   #featured_agent_steps_path(agent_id: @featured_agent.id)
   def billing_or_featured_list_path

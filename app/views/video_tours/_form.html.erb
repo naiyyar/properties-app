@@ -30,10 +30,10 @@
         <div id="<%=category[1]%>-form" class="category-forms-container">
           <% if video_tours.present? %>
             <% video_tours.each do |tour| %>
-              <%= render partial: 'form_fields', locals: { object: @tourable, video_tour: tour, category: category, index: tour.sort } %>
+              <%= render 'form_fields', object: @tourable, video_tour: tour, category: category, index: tour.sort %>
             <%end%>
           <%else%>
-            <%= render partial: 'form_fields', locals: { object: @tourable, video_tour: @video_tour, category: category, index: index } %>
+            <%= render 'form_fields', object: @tourable, video_tour: @video_tour, category: category, index: index %>
           <%end%>
         </div>
       <%end%>

@@ -84,7 +84,7 @@ module HomeHelper
 	def searched_term
 		if @management_company.blank?
 			if @building.present?
-				if @building.building_name.present? && @building.building_name != @building.building_street_address
+				if @building.building_name? && @building.building_name != @building.building_street_address
 					"#{@building.building_name} - #{@building.street_address}"
 				else
 					"#{@building.street_address}"

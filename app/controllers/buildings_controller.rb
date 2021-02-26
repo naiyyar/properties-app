@@ -133,11 +133,6 @@ class BuildingsController < ApplicationController
     params.require(:building).permit!
   end
 
-  def unit_params
-    params[:unit] = params[:building][:units_attributes]['0']
-    params.require(:unit).permit(:name, :square_feet, :number_of_bathrooms, :number_of_bedrooms)
-  end
-
   def find_buildings
     @buildings = Building.all
   end

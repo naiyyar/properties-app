@@ -62,10 +62,6 @@ module BuildingsHelper
 		building.uploads.present? ? building.uploads.last.image.url : 'no-photo-available.jpg'
 	end
 
-	def contribution? params
-		action_name == 'contribute' || params[:contribution].present?
-	end
-
 	def disabled(current_user, val)
 		val.present? && current_user && !current_user.has_role?(:admin)
 	end
@@ -76,6 +72,10 @@ module BuildingsHelper
 
 	def contribute_wrapper params
 		'contribute-wrapper' if contribution?(params)
+	end
+
+	def contribution? params
+		action_name == 'contribute' || params[:contribution].present?
 	end
 
 	def recommended_percent object

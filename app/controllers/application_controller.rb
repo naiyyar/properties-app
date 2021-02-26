@@ -17,8 +17,6 @@ class ApplicationController < ActionController::Base
   include CreateReviewConcern
   include SetTimezoneConcern
   include WickedPdfConcern
-
-  # rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
   
   def store_location
     # store last url as long as it isn't a /users path
@@ -57,13 +55,13 @@ class ApplicationController < ActionController::Base
     (action_name == 'search' && controller_name == 'home') || action_name == 'saved_buildings'
   end
 
-  def controllers
-    ['users/sessions', 'users/registrations', 'buildings', 'reviews']
-  end
+  # def controllers
+  #   ['users/sessions', 'users/registrations', 'buildings', 'reviews']
+  # end
 
-  def actions
-    %w(new contribute index)
-  end
+  # def actions
+  #   %w(new contribute index)
+  # end
 
   rescue_from CanCan::AccessDenied do |exception|
     unless exception.message == 'You are not authorized to access this page.'
@@ -98,9 +96,6 @@ class ApplicationController < ActionController::Base
 
   def skip_store_location
     request.format.json? || request.format.js?
-  end
-
-  def resource_not_found
   end
 
 end

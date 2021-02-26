@@ -1,6 +1,6 @@
 class BillingsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_billing,     only: [:show, :edit, :update, :destroy]
+  before_action :set_billing,     only: [:show, :update, :destroy]
   before_action :set_customer_id, only: [:show, :pay_using_saved_card]
   before_action :get_card,        only: :show
   

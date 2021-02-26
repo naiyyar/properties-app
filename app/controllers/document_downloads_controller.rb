@@ -63,11 +63,6 @@ class DocumentDownloadsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_document_download
-      @document_download = DocumentDownload.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_download_params
       params.require(:document_download).permit(:upload_id, :user_id)

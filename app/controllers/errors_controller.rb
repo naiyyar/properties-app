@@ -29,9 +29,6 @@ class ErrorsController < ApplicationController
     end
   end
 
-  def not_route_match
-  end
-
   private
 
   def hide_search_bar

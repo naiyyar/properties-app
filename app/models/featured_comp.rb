@@ -10,8 +10,8 @@ class FeaturedComp < ApplicationRecord
 	scope :active, -> { where(active: true) }
 	scope :inactive, -> { where(active: false) }
 
-  pg_search_scope :search_query, 
-  								against: [:id], 
+  pg_search_scope :search_query,
+  								against: [:id],
   								associated_against: {
 								    building: [:building_name, :building_street_address]
 								  }

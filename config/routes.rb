@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/video_tours/new/:tourable_type/:tourable_id', to: 'video_tours#new', as: :new_video_tour
   get '/video_tours/show_tour/:tourable_id', to: 'video_tours#show_tour', as: :show_tour
   
-  resources :billings do
+  resources :billings, except: :edit do
     member do
       post :email_receipt
     end
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   post :create_new_card,      to: 'billings#create_new_card',       as: :create_new_card
   post :pay_using_saved_card, to: 'billings#pay_using_saved_card',  as: :pay_using_saved_card
   
-  resources :past_listings do
+  resources :past_listings, except: [:show, :new, :create] do
     collection do
       post :export
       get :show_more
@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :broker_fee_percents, only: [:new, :create, :update, :edit]
+  resources :broker_fee_percents, only: [:create, :update]
 
   resources :featured_buildings, :prices
   resources :featured_comps do
@@ -122,7 +122,7 @@ Rails.application.routes.draw do
   
   resources :useful_reviews
 
-  resources :uploads do
+  resources :uploads, except: :show do
     member do 
       get :rotate
     end
@@ -150,10 +150,10 @@ Rails.application.routes.draw do
   end
 
   # multisteps Forms
-  resources :user_steps, 
-            :building_steps, 
-            :unit_steps, 
-            :featured_agent_steps
+  resources :user_steps, only: :show
+  resources :building_steps, only: [:show, :update]
+  resources :unit_steps, only: [:show , :update]
+  resources :featured_agent_steps, only: [:show, :update]
   
   resources :featured_agents do
     resources :uploads, only: [:new, :create, :index]
