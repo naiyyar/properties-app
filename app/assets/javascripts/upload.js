@@ -14,7 +14,7 @@ $(document).ready(function(){
 	}
 	dz_elem.dropzone({
 		// restrict image size to a maximum 1MB
-		maxFilesize: 1,
+		maxFilesize: 10,
 		// changed the passed param to one accepted by
 		// our rails app
 		paramName: param_name,
