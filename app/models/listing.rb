@@ -18,7 +18,7 @@ class Listing < ApplicationRecord
   AMENITIES = {
     months_free:     'Months Free Rent',
     owner_paid:      'Owner Paid',
-    rent_stabilized: 'Rent Stabilized'
+    rent_stabilize:  'Rent Stabilized'
   }.freeze
 
   # validations
