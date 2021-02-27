@@ -13,7 +13,7 @@ class BuildingsController < ApplicationController
   include Searchable
 
   def index
-    @buildings = filterrific_search_results.includes(:management_company, :uploads)
+    @buildings = filterrific_search_results.includes(:management_company, :uploads, :featured_comps)
     @buildings_count = @buildings.count
     
     respond_to do |format|

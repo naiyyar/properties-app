@@ -17,6 +17,14 @@ module ApplicationHelper
     ]
   end
 
+  def advertise_with_us_items
+    @addvertise_with_us_items ||= [
+      { title: 'Agents',            type: 'agents' },
+      { title: 'For Rent By Owner', type: 'for-rent-by-owner' },
+      { title: 'Property Managers', type: 'property-managers' }
+    ]
+  end
+
   def tbl_cell_width lg_width, sm_width=''
     browser.device.mobile? ? (sm_width.present? ? sm_width : lg_width) : lg_width
   end

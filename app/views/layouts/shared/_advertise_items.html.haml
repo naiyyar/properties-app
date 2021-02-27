@@ -1,7 +1,3 @@
-%ul
-	%li
-		%a.font-16{href: advertise_with_us_path(type: 'agents')} Agents
-	%li
-		%a.font-16{href: advertise_with_us_path(type: 'for-rent-by-owner')} For Rent By Owner
-	%li
-		%a.font-16{href: advertise_with_us_path(type: 'property-managers')} Property Managers
+%ul{class: classes, style: styles}
+	- advertise_with_us_items.each do |item|
+		%li= link_to item[:title], advertise_with_us_path(type: item[:type]), class: 'font-16'
