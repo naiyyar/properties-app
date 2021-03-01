@@ -4,22 +4,16 @@ module Buildings
 		FEATURED_AGENT_THUMBNAIL_POS = 4
 
 		def with_featured_buildings buildings, featured_listings=nil, agent=nil
-	    final_results      = {all_buildings: nil, map_hash: nil}
-	    top2_featured      = top2_featured_buildings(buildings)
-	    non_featured       = non_featured_buildings(buildings, top2_featured)
-	    per_page_buildings = non_featured.paginate(:page => page_num, :per_page => PER_PAGE)
-	    all_buildings      = buildings_with_featured_on_top(top2_featured, per_page_buildings)
-	    
+	    final_results = { all_buildings: nil, map_hash: nil }
+	    @buildings = buildings
+	    @featured_listings = featured_listings
+	    @agent = agent
 	    buildings = top2_featured + non_featured if top2_featured.present?
 	    # when there are only top two featured buildings after filter
 	    # then per_page_buildings will be blank due to fitering featured buildings
 	    if per_page_buildings.blank? && all_buildings.present?
 	      per_page_buildings = all_buildings.paginate(:page => page_num, :per_page => PER_PAGE)
 	    end
-	    featured_buildings_count 				 = top2_featured.length
-	    with_featured_listings 					 = buildings_with_featured_listings(all_buildings, featured_listings, featured_buildings_count)
-	    with_featured_listings_and_agent = buildings_with_featured_agent(with_featured_listings, agent, featured_buildings_count, featured_listings&.size)
-	    
 	    final_results.merge!({
 	    	all_buildings: with_featured_listings_and_agent,
 	    	map_hash: Building.buildings_json_hash(buildings)
@@ -30,19 +24,47 @@ module Buildings
 
 	  private
 
-	  def buildings_with_featured_agent buildings, agent=nil, top2_featured_count=0, featured_listings_count=0
-	  	return buildings if agent.blank?
-	  	total_featured_property = top2_featured_count + featured_listings_count
-	  	insert_at_index = total_featured_property + (FEATURED_AGENT_THUMBNAIL_POS - total_featured_property)
-	  	return buildings.to_a.insert(insert_at_index, agent)
+	  def with_featured_listings_and_agent
+	  	buildings_with_featured_agent
 	  end
 
-	  def buildings_with_featured_listings buildings, featured_listings, top2_featured_count = 0
-	  	if featured_listings.present?
-	  		buildings = buildings.to_a
-	  		featured_listings.each_with_index{|fl, index| buildings.insert(top2_featured_count + index, fl)}
+	  def buildings_with_featured_agent
+	  	return buildings_with_featured_listings if @agent.blank?
+	  	insert_at_index = total_featured_property + (FEATURED_AGENT_THUMBNAIL_POS - total_featured_property)
+	  	
+	  	return buildings_with_featured_listings.to_a.insert(insert_at_index, @agent)
+	  end
+
+	  def total_featured_property
+	  	(featured_buildings_count + @featured_listings&.size)
+	  end
+
+	  def buildings_with_featured_listings 
+	  	if @featured_listings.present?
+	  		buildings = all_buildings.to_a
+	  		@featured_listings.each_with_index{|fl, index| buildings.insert(featured_buildings_count + index, fl)}
 	  	end
 	  	return buildings
+	  end
+
+	  def all_buildings 
+	  	@all_buildings ||= buildings_with_featured_on_top(top2_featured, per_page_buildings)
+	  end
+
+	  def per_page_buildings
+	  	@per_page_buildings ||= non_featured.paginate(:page => page_num, :per_page => PER_PAGE)
+	  end
+
+	  def non_featured
+	  	@non_featured ||= non_featured_buildings(@buildings, top2_featured)
+	  end
+
+	  def top2_featured
+	  	@top2_featured ||= top2_featured_buildings(@buildings)
+	  end
+
+	  def featured_buildings_count
+	  	@featured_buildings_count ||= top2_featured.length
 	  end
 	  
 	  # putting featured building on top
