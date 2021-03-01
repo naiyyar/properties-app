@@ -48,7 +48,7 @@ module Buildings
 	  end
 
 	  def all_buildings 
-	  	@all_buildings ||= buildings_with_featured_on_top
+	  	buildings_with_featured_on_top
 	  end
 
 	  def non_featured
