@@ -58,7 +58,7 @@ module Search
     def buildings_with_listing_amenities
       @buildings = @buildings.months_free    if has_amenity?('months_free')
       @buildings = @buildings.owner_paid     if has_amenity?('owner_paid')
-      @buildings = @buildings.rent_stabilize if has_amenity?('rent_stabilized')
+      @buildings = @buildings.rent_stabilize if has_amenity?('rent_stabilize')
       @buildings
     end
 
