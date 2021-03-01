@@ -68,7 +68,8 @@ module Billable
   end
 
   def not_already_renewed? host=nil
-    DEV_HOSTS.include?(ENV['SERVER_ROOT']) ? renew_time(1.day) : renew_time(2.day)
+    host = host || ENV['SERVER_ROOT']
+    DEV_HOSTS.include?(host) ? renew_time(1.day) : renew_time(2.day)
   end
 
   private
