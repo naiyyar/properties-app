@@ -13,14 +13,13 @@
 					%th.hidden-xs OP
 					%th.hidden-xs{width: '5%'} Rent Stabilize
 			%tbody.table.table-borders
-				- if listings.size > 0
-					- colspan = browser.device.mobile? ? '6' : '9'
-					/ - cache listings do
+				- if listings&.size > 0
 					= render 'listings/partials/listing_rows', listings: listings, type: type
 					
 					- if type == 'past' && @past_listings_count.to_i > 5  && request.format.html?
 						%tr
-							%td.text-center{colspan: colspan}=link_to 'Show More Past Listings...', show_more_listings_path(building_id: @building.id, listing_type: 'past'), remote: true
+							%td.text-center{colspan: browser.device.mobile? ? '6' : '9'}
+								= link_to 'Show More Past Listings...', show_more_past_listings_path(building_id: @building.id, listing_type: 'past'), remote: true
 
 - if type == 'past' && @building.past_listings.count > PastListing::LIMIT && request.format.js?
 	.row

@@ -31,12 +31,12 @@ Rails.application.routes.draw do
   resources :past_listings, except: [:show, :new, :create] do
     collection do
       post :export
-      get :show_more
+      get :show_more, xhr: true
       post :load_more
     end
   end
 
-  resources :listings do
+  resources :listings, except: :show do
     collection do
       post :import
       post :export

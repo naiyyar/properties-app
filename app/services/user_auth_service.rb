@@ -1,4 +1,4 @@
-class UserAuth
+class UserAuthService
 	def initialize auth, current_user
 		@auth 			  = auth
 		@info 				= @auth.info

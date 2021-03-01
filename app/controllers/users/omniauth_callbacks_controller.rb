@@ -3,7 +3,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # devise :omniauthable, omniauth_providers: [:twitter]
 
   def all
-    auth = UserAuth.new(request.env['omniauth.auth'], current_user)
+    auth = UserAuthService.new(request.env['omniauth.auth'], current_user)
     user = auth.from_omniauth.user
     user.set_timezone(browser_time_zone.name)
     if user.persisted?

@@ -1,18 +1,8 @@
 class PastListingsController < ApplicationController
-	load_and_authorize_resource   	only: [:index, :export]
-	before_action :set_listing,   	only: [:edit, :update, :destroy]
-	before_action :filter_listings, only: :index
-	before_action :format_date, 		only: :export
-  
-  def index
-  	@export_listings_path = export_past_listings_path
-    @type = 'past'
-  	respond_to do |format|
-      format.html
-      format.js
-    end
-  end
+	before_action :set_listing, only: [:edit, :update, :destroy]
 
+  include ListingsActionConcern
+  
   def load_more
     @building        = Building.find(params[:building_id])
     load_more_params = { date_active: params[:date_active], loaded_ids: params[:loaded_ids]}
@@ -23,18 +13,10 @@ class PastListingsController < ApplicationController
     end
   end
 
-  def edit
+  def transfer
   end
 
-  def export
-    @listings = PastListing.between(@from_date, @to_date)
-    file_name = "Past_listings_#{params[:date_from]}_to_#{params[:date_to]}.#{params[:format]}"
-    case params[:format]
-      when 'xls'  then render xls:  'export'
-      when 'xlsx' then render xlsx: 'export', filename: file_name
-      when 'csv'  then render csv:  'export'
-      else render action: 'index'
-    end
+  def edit
   end
 
   def update
@@ -64,26 +46,7 @@ class PastListingsController < ApplicationController
   end
 
   def past_listing_params
-      params.require(:past_listing).permit( :building_id,:unit,:building_id,
-                                            :rent,:bed,:bath,:free_months,:owner_paid,
-                                            :date_available,:rent_stabilize,:active,
-                                            :building_address, :management_company,
-                                            :date_active)
-    end
-
-  def filter_listings
-      @filterrific = initialize_filterrific(
-        PastListing,
-        params[:filterrific],
-        available_filters: [:default_listing_order, :search_query]
-      ) or return
-      @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
-                                   .includes(:building, building: [:management_company])
-                                   .default_listing_order
-    end
-
-  def format_date
-    @from_date = Date.parse(params[:date_from])
-    @to_date   = params[:date_to].present? ? Date.parse(params[:date_to]) : (@from_date + 1.month)
+    params.require(:past_listing).permit!
   end
+
 end

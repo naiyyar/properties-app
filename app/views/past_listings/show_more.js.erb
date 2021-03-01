@@ -13,8 +13,9 @@ var opened = true;
     return false;
   });
 <%end%>
-
 var lm_height = 736
 setTimeout(function(){
 	$('.past-listing-modal').css('max-height', lm_height);	
 }, 500);
+
+$('#showPastListing, .past-listing-modal').find('.table.listings.show-section').attr('id', 'past-listings');
