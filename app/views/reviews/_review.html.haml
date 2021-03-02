@@ -1,18 +1,9 @@
 - reviewable = review.reviewable
 .comment.record{'data-id' => "#{review.id}", id: "comment#{review.id}"}
-  - if current_user and current_user.has_role?(:admin)
-    = link_to '<span class="fa fa-times"></span>'.html_safe, review_path(review), method: :delete, remote: true, class: 'pull-right text-danger daleteReview', title: 'Delete'
+  = delete_link(review_path(review), remote: true, classes: 'pull-right daleteReview') if current_user&.admin?
   
   .commentAvatar
-    - unless review.anonymous
-      - if review.user.avatar.present?
-        = image_tag review.user.avatar, class: 'avatar', width: '40', height: '40'
-      - elsif review.user.image_url.present?
-        = image_tag review.user.image_url, class: 'avatar', width: '40', height: '40'
-      - else
-        .firstLetter= review.user.user_name.split('')[0].capitalize
-    - else
-      = image_tag 'anonymous1.png', class: 'avatar', width: '40', height: '40'
+    = reviewer_avatar(review)
     .commentArrow
       %span.fa.fa-caret-left
   
@@ -21,9 +12,7 @@
       - if @management_company.present?
         = link_to building_path(reviewable), class: 'hyper-link' do
           %p.hyper-link= reviewable.building_name_or_address
-        %p.text-muted
-          = reviewable.street_address
-          , #{reviewable.zipcode}
+        %p.text-muted= "#{reviewable.street_address}, #{reviewable.zipcode}"
       %p.review-header-item= review.anonymous ? 'Anonymous' : review.user_name.capitalize
     
     .commentBody
@@ -46,48 +35,34 @@
           = rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id
         .favLink
           = icon_pipe_helper
-          - if review.user_votes?
-            %span.fa.fa-thumbs-up.recommended
-          - else
-            %span.fa.fa-thumbs-down
+          = thumb_icons(review)
       %p
       .prosCons
         - if review.pros.present?
           %b Pros:
-          %span
-            = simple_format(review.pros)
+          %span= simple_format(review.pros)
         - if review.cons.present?
           %b Cons:
-          %span
-            = simple_format(review.cons)
+          %span= simple_format(review.cons)
         - if review.other_advice.present?
           %b Other comments:
-          %span
-            = simple_format(review.other_advice)
+          %span= simple_format(review.other_advice)
       
       .commentActions{style: 'padding: 0px 0px 8px;'}
         %h4
         .row
           - review.uploads.each do |asset|
-            - img_url = asset.image.url
             .col-lg-3.image-gallery
-              %a.propWidget-1{'data-fancybox' => 'gallery', href: 'javascript:;', 'data-src' => img_url }
-                = image_tag img_url, alt: 'Image', style: 'height: 100px;width: 100%;'
+              %a.propWidget-1{'data-fancybox' => 'gallery', href: 'javascript:;', 'data-src' => asset.image.url }= image_tag asset.image.url, alt: 'Image', style: 'height: 100px;width: 100%;'
 
     .commentActions
       %ul.list-inline.ricons.pull-left
         %li= social_share_button_tag(review.review_title, :url => "https://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}")
+      
       %ul.list-inline.ricons.pull-right
-        %li
-          - if current_user.present?
-            = link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe, "#flagDescription#{review.id}", 'data-toggle' => 'modal', class: "#{review.marked_flag?(current_user) ? 'no-pointer flagged' : ''}", title: 'Flag as inappropriate'
-          - else
-            = link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe,'#signin', 'data-toggle' => 'modal' , title: 'Flag as inappropriate'
-        %li.helpful
-          - if current_user.present?
-            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'javascript:;', class: "btn btn-o btn-blue btn-xs btn-round usefulButton #{review.marked_useful?(current_user) ? 'disabled' : ''}", 'data-reviewid' => "#{review.id}", 'data-userid' => current_user.id
-          - else
-            = link_to "Useful (<span class='ur-count'>#{review.useful_reviews.count}</span>)".html_safe,'#signin', class: 'btn btn-o btn-blue btn-xs btn-round', 'data-toggle' => 'modal'
+        %li= flag_review_link(review)
+        %li.helpful= useful_review_link(review)
       .clearfix
   .clearfix
+
 = render 'review_flags/form', review: review if current_user.present?

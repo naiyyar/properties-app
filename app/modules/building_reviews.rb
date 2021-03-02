@@ -2,7 +2,7 @@ module BuildingReviews
 	include Rails.application.routes.url_helpers
 	
   def building_reviews
-    self.reviews.includes(:user, :uploads).order(created_at: :desc)
+    self.reviews.includes(:user, :uploads, :reviewable).order(created_at: :desc)
   end
 
 	def create_review current_user, form_params, review_params

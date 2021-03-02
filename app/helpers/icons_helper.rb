@@ -25,6 +25,10 @@ module IconsHelper
 		span_tag(klasses: 'icon-pipe')
 	end
 
+	def flag_icon
+		span_tag(klasses: 'icon-flag')
+	end
+
 	def heart_icon
 		span_tag(klasses: 'fa fa-heart')
 	end
@@ -56,8 +60,6 @@ module IconsHelper
 	def globe_icon_helper
 		span_tag(klasses: 'fa fa-globe')
 	end
-
-	private
 	
 	def thumb_icon_helper klass
 		span_tag(klasses: "fa #{klass}")

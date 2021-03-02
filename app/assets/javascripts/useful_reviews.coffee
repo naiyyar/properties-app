@@ -3,9 +3,10 @@ jQuery ->
 	if $('.usefulButton').length > 0
 		$(document).on 'click', '.usefulButton', (e)->
 			e.preventDefault()
-			review_id = $(this).data('reviewid')
-			user_id = $(this).data('userid')
 			$this = $(this)
+			review_id = $this.data('reviewid')
+			user_id = $this.data('userid')
+			
 			$.ajax
 					url: '/useful_reviews'
 					type: 'POST',

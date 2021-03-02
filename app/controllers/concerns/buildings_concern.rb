@@ -126,7 +126,6 @@ module BuildingsConcern
   def set_reviews_data
     @reviews_count = @building.reviews_count.to_i
     @reviews = @building.building_reviews
-    @reviews = @reviews.includes(:reviewable) if @review.present?
   end
 
   def set_nearby_neighborhoods

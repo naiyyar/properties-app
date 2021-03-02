@@ -181,6 +181,15 @@ module LinksHelper
 		browser.device.mobile? ? 'text-center' : 'text-right'
 	end
 
+	def delete_link url, remote: false, classes: ''
+		link_to '<span class="fa fa-times"></span>'.html_safe, 
+						url, 
+						method: :delete, 
+						remote: remote, 
+						class: "text-danger #{classes}", 
+						title: 'Delete'
+	end
+
 	def site_link_h text: '', url: '#', klasses: '', style: ''
 		link_to text, url, class: klasses, style: style
 	end
