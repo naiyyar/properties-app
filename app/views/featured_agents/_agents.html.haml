@@ -34,7 +34,7 @@
                 %td=agent.try(:broker_firm)
                 %td=agent.try(:license_number)
                 %td=number_to_phone(agent.try(:phone), area_code: true)
-                %td=link_to '<span class="fa fa-globe"></span>'.html_safe, agent.website, target: '_blank' if agent.website.present?
+                %td=link_to globe_icon_helper, agent.website, target: '_blank' if agent.website.present?
                 %td=agent.uploads_count.to_i
                 %td=start_date(agent)
                 %td=end_date(agent)

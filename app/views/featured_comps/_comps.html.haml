@@ -24,7 +24,8 @@
                 %td=link_to comp.id, edit_featured_comp_path(comp)
                 %td=link_to building.building_name_or_address, building_path(building)
                 %td=link_to building.management_company.try(:name), '#'
-                %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
+                %td
+                  = link_to globe_icon_helper, building.web_url, target: '_blank' if building.web_url.present?
                 %td= link_to comp.buildings.count, featured_comp_path(comp) , class: 'hyper-link'
                 %td= comp.start_date
                 %td= comp.end_date

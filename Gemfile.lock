@@ -1011,6 +1011,7 @@ GEM
       sass (>= 3.3.4)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
+    brakeman (5.0.0)
     browser (4.2.0)
     builder (3.2.4)
     bullet (6.1.0)
@@ -1381,6 +1382,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-sass (~> 3.3.6)
   bootstrap3-datetimepicker-rails (~> 4.17.47)
+  brakeman
   browser
   bullet
   buttercms-rails

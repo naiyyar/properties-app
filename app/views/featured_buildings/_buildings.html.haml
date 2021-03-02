@@ -31,7 +31,8 @@
                 %td=link_to building.try(:neighborhood), '#'
                 %td=link_to building.try(:neighborhood3), '#'
                 
-                %td= link_to '<span class="fa fa-globe"></span>'.html_safe, building.web_url, target: '_blank' if building.web_url.present?
+                %td
+                  = link_to globe_icon_helper.html_safe, building.web_url, target: '_blank' if building.web_url.present?
                 %td= start_date(featured_building)
                 %td= end_date(featured_building)
                 - unless params[:type] == 'featured'

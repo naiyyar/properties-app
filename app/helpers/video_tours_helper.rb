@@ -8,7 +8,7 @@ module VideoToursHelper
 	end
 
 	def tour_link_title tourable
-		"<span class='fa fa-play'></span> Launch 3D / Video Tours #{seo_text}".html_safe
+		"<span class='fa fa-play'></span> Launch 3D / Video Tours #{seo_text(tourable)}".html_safe
 	end
 
 	def seo_text object

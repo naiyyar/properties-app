@@ -53,6 +53,10 @@ module IconsHelper
 		span_tag(klasses: 'fa fa-repeat')
 	end
 
+	def globe_icon_helper
+		span_tag(klasses: 'fa fa-globe')
+	end
+
 	private
 	
 	def thumb_icon_helper klass

@@ -4,7 +4,7 @@
     %span.propName
       %b= link_to company.name, no_fee_company_path(id: company)
   %td.text-center
-    = link_to '<span class="fa fa-globe"></span>'.html_safe, company.website, target: '_blank' if company.website.present?
+    = link_to globe_icon_helper, company.website, target: '_blank' if company.website.present?
   %td.text-center
     = link_to buildings.size, managed_buildings_management_company_path(company), class: 'hyper-link' if buildings.present?
   %td.star-sm
