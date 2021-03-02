@@ -1,9 +1,9 @@
 %a.card{href: building_path(building), style: 'margin-bottom: 0px;'}
   .figure
     - if building.image_uploads.present?
-      = image_tag building.image_uploads.first.image, alt: 'Image', style: 'width: 229px !important; height: 137px;'
+      = image_tag building.image_uploads.first.image, alt: building.street_address, style: 'width: 229px !important; height: 137px;'
     - else
-      = image_tag 'prop/1-1.png', alt: "image"
+      = image_tag 'prop/1-1.png', alt: building.street_address
   %h2= building.building_name_or_address
   .cardAddress
     %span.fa.fa.map-marker

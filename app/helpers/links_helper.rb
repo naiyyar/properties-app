@@ -123,7 +123,7 @@ module LinksHelper
 	end
 
 	def neighborhood_link_link_title nb, count=0
-		"#{nb} (<span>#{count}</span>) <span class='hidden'>#{nb} Apartments For Rent - All No Fee</span>".html_safe
+		"#{nb} (<span>#{count}</span>)".html_safe
 	end
 
 	def check_availability_link building, sl_class=nil

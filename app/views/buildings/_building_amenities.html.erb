@@ -7,7 +7,7 @@
     <% @building.sorted_amenities.each do |amenity| %>
       <% value = Building.building_amenities[amenity.to_sym] %>
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 amItem font-14">
-        <span><%= image_tag "amenities_icons/#{amenity}.png", width: '16', height: '16', alt: value %></span>
+        <span><%= image_tag "amenities_icons/#{amenity}.png", width: '16', height: '16', alt: "#{@building.street_address} #{value}" %></span>
         <% if value == 'Elevator' %>
           <%= "#{value}(#{@building.elevator})" %>
         <%else%> 
