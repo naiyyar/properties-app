@@ -1,10 +1,18 @@
 module VideoToursHelper
 	
 	def launch_tour_link tourable
-		link_to '<span class="fa fa-play"></span> Launch 3D / Video Tours'.html_safe, 
+		link_to tour_link_title(tourable), 
 						show_tour_path(tourable_id: tourable.id, tourable_type: tourable.class.name),
 						class: 'btn btn-o btn-primary btn-sm btn-round font-bold btn-block font-14', 
 						remote: true
+	end
+
+	def tour_link_title tourable
+		"<span class='fa fa-play'></span> Launch 3D / Video Tours #{seo_text}".html_safe
+	end
+
+	def seo_text object
+		"<span class='hidden'>#{object.name} #{object.street_address}</span>".html_safe
 	end
 
 	def show_tour_icon? object

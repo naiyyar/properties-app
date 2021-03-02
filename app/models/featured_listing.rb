@@ -106,6 +106,10 @@ class FeaturedListing < ApplicationRecord
     self.class.name
   end
 
+  def name
+    ''
+  end
+
   def featured?
     self.active && !expired?
   end

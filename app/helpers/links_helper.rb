@@ -112,7 +112,7 @@ module LinksHelper
 			if show_count
 				neighborhood = @pop_nb_hash[nb]
 				if neighborhood.present?
-					"#{nb} (<span>#{neighborhood[0].buildings_count}</span>)".html_safe
+					neighborhood_link_link_title(nb, neighborhood[0].buildings_count)
 				else
 					"#{nb} (#{parent_neighborhoods_count(nb)})"
 				end
@@ -120,6 +120,10 @@ module LinksHelper
 				nb
 			end
 		end
+	end
+
+	def neighborhood_link_link_title nb, count=0
+		"#{nb} (<span>#{count}</span>) <span class='hidden'>#{nb} Apartments For Rent - All No Fee</span>".html_safe
 	end
 
 	def check_availability_link building, sl_class=nil
