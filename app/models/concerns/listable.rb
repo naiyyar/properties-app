@@ -1,5 +1,7 @@
 module Listable
-	EXPORT_SHEET_HEADER_ROW = ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free',
+  extend ActiveSupport::Concern
+	
+  EXPORT_SHEET_HEADER_ROW = ['Date active','Building address','Unit','Rent','Bed','Bath','Months Free',
                              'Owner Paid','Rent Stabilized','Zip Code','Building Price Range','Neighborhood',
                              'Parent Neighborhood', 'Neighborhood3', 'Property Manager','Number of Floors',
                              'Number of Units','Year Built','Active','Amenities']

@@ -8,6 +8,7 @@
       <%= hidden_field_tag :sort_by, params[:sort_by] || '0' %>
       <%= hidden_field_tag :latitude, params[:latitude] if params[:latitude].present? %>
       <%= hidden_field_tag :longitude, params[:longitude] if params[:longitude].present? %>
+      <%= hidden_field_tag :zoomlevel, params[:zoomlevel] || 14 if params[:search_term] == 'custom' %>
       <div id='filter-container'>
         <!-- Listing Price -->
         <div class="row">

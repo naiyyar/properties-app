@@ -1,4 +1,6 @@
 module Voteable
+	extend ActiveSupport::Concern
+
 	def upvotes_count
     votes.where(vote: true).count
   end
@@ -14,4 +16,5 @@ module Voteable
   def suggested_percent
     Vote.recommended_percent(self)
   end
+
 end

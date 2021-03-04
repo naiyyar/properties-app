@@ -86,7 +86,7 @@ class UsersController < ApplicationController
 
 	def frbotools
 		unless @type == 'billing'
-			@featured_listings = filterific_results(FeaturedListing)
+			@featured_listings = filterific_results(FeaturedListing).includes(:user)
 	  	@photos_count = @featured_listings.sum(:uploads_count)
 	  else
 	  	@billings = get_billings_for('FeaturedListing')

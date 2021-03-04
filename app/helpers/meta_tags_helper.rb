@@ -20,6 +20,8 @@ module MetaTagsHelper
   end
 
   def seo_tab_title text
-    content_for :page_title { "#{text} | Transparentcity" }
+    content_for :page_title do 
+      "#{text} | Transparentcity"
+    end
   end
 end
