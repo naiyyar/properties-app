@@ -184,8 +184,10 @@ var ready = function(){
     
       createRedoButtonObject(map);
       google.maps.event.addListener(map, 'dragend', function(){
-        dragged = true;
-        setRedoButtonPosition(map);
+        if(!dragged){
+          dragged = true;
+          setRedoButtonPosition(map);
+        }
       });
 
       if(polylines){
