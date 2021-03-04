@@ -104,7 +104,7 @@
         $(this).hide();
         $('.mapHandler').show();
         draggedOnce = false;
-        redoControlUI.remove();
+        // redoControlUI.remove();
         listMapView([...e.currentTarget.classList]);
         $('.sorted_by_option').show();
         // Only when redo search
