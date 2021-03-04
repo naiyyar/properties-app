@@ -212,6 +212,8 @@ var ready = function(){
         }
         localStorage.mapZoom = zoom_val;
       });
+
+      map.setZoom(zoomLevel);
       
     }, 300);
   }
@@ -219,14 +221,12 @@ var ready = function(){
   setTimeout(function() {
     if(map){
       setMapCenter(map);
-      setMapzoom(map)
     }
   }, 400);
 
   function setCustomSearchCenter(map){
     setTimeout(function() {
       setMapCenter(map);
-      setMapzoom(map)
       redo_search = true;
     }, 500);
   }
@@ -235,20 +235,6 @@ var ready = function(){
     if(map){
       map.setCenter(new google.maps.LatLng(lat,lng));
     }
-  }
-
-  function setMapzoom(map){
-    if(map){
-      map.setZoom(zoomNum());
-    }
-  }
-
-  function zoomNum(){
-    var zoomNum = zoomLevel;
-    if(zoomLevel < 13 || zoomLevel > 18){
-      zoomNum = 13
-    } 
-    return zoomNum;
   }
 
   var windowHeight;
