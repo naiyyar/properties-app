@@ -26,7 +26,7 @@ module IconsHelper
 	end
 
 	def flag_icon
-		span_tag(klasses: 'icon-flag')
+		span_tag(klasses: 'icon-flag font-16')
 	end
 
 	def heart_icon
