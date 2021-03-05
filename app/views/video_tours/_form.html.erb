@@ -25,15 +25,15 @@
         <% video_tours = @video_tours.where(category: category[1]) %>
         <h4 class="font-bold">
           <%= cat = category[0] %> 
-          <%= append_tour_link(@tourable, cat, last_tour: video_tours.last )%>
+          <%= append_tour_link(@tourable, category[1], last_tour: video_tours.last )%>
         </h4>
         <div id="<%=category[1]%>-form" class="category-forms-container">
           <% if video_tours.present? %>
             <% video_tours.each do |tour| %>
-              <%= render 'form_fields', object: @tourable, video_tour: tour, category: category, index: tour.sort %>
+              <%= render 'form_fields', object: @tourable, video_tour: tour, category: category[1], index: tour.sort %>
             <%end%>
           <%else%>
-            <%= render 'form_fields', object: @tourable, video_tour: @video_tour, category: category, index: index %>
+            <%= render 'form_fields', object: @tourable, video_tour: @video_tour, category: category[1], index: index %>
           <%end%>
         </div>
       <%end%>

@@ -28,8 +28,8 @@ module LinksHelper
 						class='#{switch_button_classes} renew #{disabled_class} #{object_class(object)}' 
 						style='margin: 0px;' 
 						data-field='renew'
-						data-fbid=#{object.id} 
-						#{checked} #{disabled_class} />".html_safe
+						#{checked} #{disabled_class}
+						data-fbid=#{object.id} />".html_safe
 	end
 
 	def active_switch_button object, fbby: '', showbillingurl: false
@@ -40,8 +40,8 @@ module LinksHelper
 						data-fbid=#{object.id} 
 						data-fbby='#{fbby}'
 						data-expired=#{object.expired? ? 'expired' : ''}
-						data-billingurl=#{billing_url(object) if showbillingurl }
-						#{checked} />".html_safe
+						#{checked}
+						data-billingurl=#{billing_url(object) if showbillingurl } />".html_safe
 	end
 
 	def switch_button_classes
