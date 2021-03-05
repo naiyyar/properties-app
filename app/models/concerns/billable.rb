@@ -2,7 +2,9 @@ module Billable
 	extend ActiveSupport::Concern
 	
   included do
-		has_many :billings, as: :billable, dependent: :destroy
+		has_many :billings, as: :billable #, dependent: :destroy
+
+    after_destroy :destroy_billings
 	end
 
   DEV_HOSTS = %w(http://localhost:3003 https://aptreviews-app.herokuapp.com)
@@ -76,5 +78,9 @@ module Billable
 
   def make_active
     update_columns(active: true) if has_start_and_end_date? && end_date >= Time.zone.now
+  end
+
+  def destroy_billings
+    self.billings.destroy_all
   end
 end

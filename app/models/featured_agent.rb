@@ -19,7 +19,6 @@ class FeaturedAgent < ApplicationRecord
                         ]
 
 	belongs_to :user
-	has_many   :billings
 
   # validations
   FIELDS_TO_VALIDATES.each do |field|

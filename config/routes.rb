@@ -150,10 +150,10 @@ Rails.application.routes.draw do
   end
 
   # multisteps Forms
-  resources :user_steps, only: :show
-  resources :building_steps, only: [:show, :update]
-  resources :unit_steps, only: [:show , :update]
-  resources :featured_agent_steps, only: [:show, :update]
+  resources :user_steps #, only: :show
+  resources :building_steps #, only: [:show, :update]
+  resources :unit_steps #, only: [:show , :update]
+  resources :featured_agent_steps #, only: [:show, :update]
   
   resources :featured_agents do
     resources :uploads, only: [:new, :create, :index]
