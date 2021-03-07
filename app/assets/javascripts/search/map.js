@@ -116,12 +116,10 @@ var ready = function(){
               // default opening first fetured building marker
               google.maps.event.addListener(marker, 'load', (function(marker, i) {
                 var object = json_array[i];
-                if(object.featured){
+                if(object.featured && prop.property_type == 'Building'){
                   featured_building_id = object.id
                   featured_marker = marker;
-                  return function() {
-                    loadMarkerWindow(object.id, map, marker, prop.property_type);
-                  }
+                  loadMarkerWindow(object.id, map, marker, prop.property_type);
                 }
               })(marker, i));
             }
