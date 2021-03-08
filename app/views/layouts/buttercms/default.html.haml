@@ -10,6 +10,7 @@
     %meta{content: "#{content_for?(:meta_description) ? content_for(:meta_description) : 'Transparentcity Blog is the place to find the latest rental housing research, market data, news, and stories on renting and living in New York City.'}", name: 'description'}/
     %link{href: buttercms_blog_atom_path, rel: 'alternate', title: 'Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City - Atom', type: 'application/atom+xml'}/
     %link{href: buttercms_blog_rss_path, rel: 'alternate', title: 'Transparentcity Blog No Fee Apartments NYC and Apartment Reviews New York City - RSS', type: 'application/rss+xml'}/
+    %link{rel: 'alternate', href: 'https://transparentcity.com/', hreflang: 'en-US'}
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'blog'
     = favicon_link_tag 'favicon.png'
