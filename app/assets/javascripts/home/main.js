@@ -110,7 +110,6 @@ Transparentcity = {
 			buttons: ['thumbs', 'close']
 		});
 	},
-
 	loadTourVideos: function(elem, ids){
 		var $this  = elem;
 		var cat 	 = $this.dataset.category;
@@ -127,16 +126,14 @@ Transparentcity = {
 		})
 	},
 	showHideCTALinks: function(elem){
-		var $this  		 = elem;
-		var scroll_top = $this.scrollTop;
-		var cta_div 	 = $('.cta-buttons.show-mob');
+		var scroll_top = elem.scrollTop;
+		var cta_div = $('.cta-buttons.show-mob');
 		if(scroll_top >= 685 ){
 			cta_div.show();
 		}else{
 			cta_div.hide();
 		}
 	},
-
 	lazyLoadShowPageContent: function(id){
 		$.ajax({
 			url: '/buildings/'+id+'/lazy_load_content',
@@ -147,7 +144,6 @@ Transparentcity = {
 			}
 		})
 	}
-
 };
 
 $('.btn').click(function() {

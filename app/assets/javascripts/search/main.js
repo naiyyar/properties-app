@@ -17,6 +17,7 @@
 //= require search_modal
 //= require featured_listings
 //= require ./redo_button
+//= require ./slide_header_on_scroll
 
 
 // Avoid dropdown menu close on click inside

@@ -9,6 +9,10 @@ module ApplicationHelper
     end
   end
 
+  def wrapper_classes
+    "#{contribute_wrapper(params)} #{screen_class} #{@search_bar_hidden == :hidden ? 'mt0' : ''}"
+  end
+
   def tool_nav_helper
     @tool_nav ||= [
       { title: 'Agent Tools',   url: agenttools_user_path(current_user,   type: 'featured') },
@@ -50,7 +54,7 @@ module ApplicationHelper
 
   def search_placeholder_input_helper
     text_field_tag 'search-input-placeholder', 
-                    searched_term, 
+                    nil, 
                     class: "border-top-lr-radius border-bottom-lr-radius #{search_placeholder_input_form_ctrl_class}", 
                     placeholder: search_input_placeholders, 
                     style: search_placeholder_input_styles, 

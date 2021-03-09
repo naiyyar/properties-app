@@ -1,11 +1,11 @@
 <div class="apt-search <%= @home_view ? 'home' : 'other' %>" id="apt-search-form">
 	<% if action_name == 'index' && controller_name == 'home' %>
 		<%= icon_search_helper %>
-		<%= text_field_tag 'search_term', searched_term, class: "form-control border-top-lr-radius border-bottom-lr-radius #{screen_class}", placeholder: search_input_placeholders, style: 'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 5px rgba(0,0,0,0.6);', autocomplete: 'off' %>
+		<%= text_field_tag 'search_term', '', class: "form-control border-top-lr-radius border-bottom-lr-radius #{screen_class}", placeholder: search_input_placeholders, style: 'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 5px rgba(0,0,0,0.6);', autocomplete: 'off' %>
 	<%else%>
 		<form action='#' autocomplete='off'>
 			<%= icon_search_helper %>
-			<%= text_field_tag 'search_term', searched_term, class: "apt-search-text-shared border-top-lr-radius border-bottom-lr-radius #{screen_class}", placeholder: search_input_placeholders, autocomplete: 'off' %>
+			<%= text_field_tag 'search_term', '', class: "apt-search-text-shared border-top-lr-radius border-bottom-lr-radius #{screen_class}", placeholder: search_input_placeholders, autocomplete: 'off' %>
 		</form>
 	<%end%>
 	<div id="clear-icon" style="display: none;"><span class="fa fa-times fa-2x"></span></div>

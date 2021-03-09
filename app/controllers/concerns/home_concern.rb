@@ -2,7 +2,7 @@ module HomeConcern
   extend ActiveSupport::Concern
   DEFAULT_LAT = 40.7812
   DEFAULT_LNG = -73.9665
-
+  
   included do
     before_action :format_search_string,  only: :search
   end
@@ -80,9 +80,9 @@ module HomeConcern
   def format_search_string
     @search_term = params[:search_term]
     if @search_term.present?
-      terms_arr      =  @search_term.split('-')
+      terms_arr =  @search_term.split('-')
       @borough_city  = terms_arr.last
-      @search_string = terms_arr.pop
+      @search_string = terms_arr.pop unless params[:searched_by] == 'nyc'
       @search_string = terms_arr.join(' ').titleize
       @search_string = @search_string.gsub('  ', ' -') if @search_string == 'Flatbush   Ditmas Park'
       @search_string = @search_string.gsub(' ', '-')   if @search_string == 'Bedford Stuyvesant'
@@ -91,7 +91,7 @@ module HomeConcern
       @borough_city           = (@borough_city == 'newyork' ? 'New York' : @borough_city.capitalize)
       @searched_neighborhoods = "#{@search_string}"
       @search_input_value     = "#{@searched_neighborhoods} - #{@borough_city}, NY"
-      @search_input_value     = 'Custom'               if params[:searched_by] == 'latlng'
+      @search_input_value     = 'Custom' if params[:searched_by] == 'latlng'
       @desc_text              = "#{@search_string}"
       @tab_title_text         = "#{@desc_text} #{tab_title_tag}"
     end

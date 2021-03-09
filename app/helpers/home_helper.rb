@@ -25,6 +25,11 @@ module HomeHelper
   	@search_input_placeholders ||= 'Neighborhood, ZipCode, Address, Building, Management Company'
   end
 
+  def split_view_header
+  	return @searched_neighborhoods if params[:searched_by] == 'nyc'
+		"#{@searched_neighborhoods} Apartments For Rent" 
+	end
+
 	def spv_count_header_style
 		if browser.device.mobile? 
 			'color: #0075c8; font-size: 21px;'

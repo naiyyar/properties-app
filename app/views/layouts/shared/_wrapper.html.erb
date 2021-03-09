@@ -8,7 +8,7 @@
 <%end%>
 <%= render partial: 'layouts/shared/filters' if action_name == 'search'%>
 <div class="closeLeftSide"></div>
-<div id="wrapper" class="<%=contribute_wrapper(params)%> <%=screen_class%> <%= @search_bar_hidden == :hidden ? 'mt0' : ''%>" onscroll="Transparentcity.showHideCTALinks(this)">
+<div id="wrapper" class="<%=wrapper_classes%>" onscroll="Transparentcity.showHideCTALinks(this)">
   <%= render partial: 'layouts/shared/filter_buttons' if action_name == 'search' && screen_class != 'screen-lg' %>
   <div class="content <%= controller_name + action_name %>">
     <%= render 'layouts/shared/pop_neighborhoods_list' %>
