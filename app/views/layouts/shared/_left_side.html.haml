@@ -62,7 +62,7 @@
           
           %ul
             - tool_nav_helper.each do |item|
-              %li=link_to item[:title], item[:url]
+              %li=link_to item[:title], item[:url], class: 'font-16'
 
         %li.btn_contribute
           %a{href: edit_user_path(current_user)}

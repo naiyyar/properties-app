@@ -1,0 +1,11 @@
+.row
+	.col-lg-6.col-xs-12
+		%h2
+		.tabsWidget{style: "margin-left: #{'14px' unless browser.device.mobile?}" }
+			%ul.nav.nav-tabs.nav-justified.tab-inline{role: 'tablist'}
+				%li{class: @type == 'featured' ? 'active' : ''}
+					%a{href: featured_url}
+						%b= title
+				%li{class: @type == 'billing' ? 'active' : ''}
+					%a{href: billing_url}
+						%b Billing

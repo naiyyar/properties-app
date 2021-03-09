@@ -1,15 +1,5 @@
 - if @user.present?
-	.row
-		.col-lg-6.col-xs-12
-			%h2
-			.tabsWidget{style: "margin-left: #{'14px' unless browser.device.mobile?}" }
-				%ul.nav.nav-tabs.nav-justified.tab-inline{role: 'tablist'}
-					%li{class: @type == 'featured' ? 'active' : ''}
-						%a{href: frbotools_user_path(current_user, type: 'featured')}
-							%b Featured Listings 
-					%li{class: @type == 'billing' ? 'active' : ''}
-						%a{href: frbotools_user_path(current_user, type: 'billing')}
-							%b Billing
+	= render 'layouts/shared/tools_widget', title: 'Featured Listings', featured_url: frbotools_user_path(current_user, type: 'featured'), billing_url: frbotools_user_path(current_user, type: 'billing')
       
 	.tab-content
 		- if @type == 'featured'

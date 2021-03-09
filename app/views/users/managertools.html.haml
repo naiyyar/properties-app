@@ -1,15 +1,5 @@
 - if @user.present?
-	.row
-		.col-lg-6.col-xs-12
-			%h2
-			.tabsWidget
-				%ul.nav.nav-tabs.nav-justified{role: 'tablist'}
-					%li{class: @type == 'featured' ? 'active' : ''}
-						%a{href: managertools_user_path(current_user, type: 'featured')}
-							%b Featured Buildings 
-					%li{class: @type == 'billing' ? 'active' : ''}
-						%a{href: managertools_user_path(current_user, type: 'billing')}
-							%b Billing
+	= render 'layouts/shared/tools_widget', title: 'Featured Buildings', featured_url: managertools_user_path(current_user, type: 'featured'), billing_url: managertools_user_path(current_user, type: 'billing')
       
 	.tab-content
 		- if @type == 'featured'
@@ -17,16 +7,12 @@
 				.row
 					.col-lg-6
 						.pull-left
-							%h4=@type == 'featured' ? "#{current_user.name}'s Featured Buildings" : "#{current_user.name}'s Billing"
+							%h4= @type == 'featured' ? 'Featured Buildings' : 'Billing'
 					.col-lg-6
 						.pull-right
-							=link_to 'Add New Featured Building', new_manager_featured_building_user_path(current_user, type: 'featured'), class: 'btn btn-primary'
-							
-							- if @filterrific.present?
-								%p
-								= render 'layouts/shared/filterrific_form'
+							= link_to 'Add New Featured Building', new_manager_featured_building_user_path(current_user, type: 'featured'), class: 'btn btn-primary'
 
-					=render 'featured_buildings/buildings'
+					= render 'featured_buildings/buildings'
 					.text-center
 						= will_paginate @featured_buildings, renderer: BootstrapPagination::Rails
       

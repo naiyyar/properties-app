@@ -5,4 +5,4 @@
 .dropdown-menu.userMenu.admin{role: 'menu'}
 	%ul
 		- tool_nav_helper.each do |item|
-			%li=link_to item[:title], item[:url]
+			%li= link_to item[:title], item[:url], class: 'font-16'
