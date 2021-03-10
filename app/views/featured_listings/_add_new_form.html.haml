@@ -1,0 +1,3 @@
+= form_for FeaturedListing.new do |f|
+	= f.hidden_field :featured_by, value: params[:type].present? ? 'manager' : 'admin'
+	= f.submit 'Add New Featured Listing', class: 'btn btn-primary'

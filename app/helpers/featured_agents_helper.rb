@@ -5,6 +5,12 @@ module FeaturedAgentsHelper
     managertools_user_path(current_user, type: 'featured')
   end
 
+  def new_featured_agent_link
+    link_to 'Add New Featured Agent', 
+            new_manager_featured_agent_user_path(current_user, type: 'featured'), 
+            class: 'btn btn-primary'
+  end
+
   def done_or_next_path
   	if !@featured_agent.active && @featured_agent.featured_by_manager?
   		wizard_path(:payment, agent_id: @featured_agent.id) 

@@ -32,7 +32,6 @@ module HomeHelper
 
 	def popular_search_string
 		@searched_neighborhoods.gsub('Nyc', 'NYC')
-		# @searched_neighborhoods.split(' ').map{|x| x == 'Nyc' ? 'NYC' : x}.join(' ')
 	end
 
 	def spv_count_header_style

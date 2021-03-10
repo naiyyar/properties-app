@@ -6,7 +6,7 @@
         %table.table.table-striped#sortable1{style: browser.device.mobile? ? 'width: 80em; max-width: 100%;' : ''}
           %thead
             %tr
-              %th{width: tbl_cell_width('10%', '8%')} Feature ID(#{featured_listings.count})
+              %th{width: tbl_cell_width('10%', '8%')} Feature ID(#{featured_objects.count})
               %th{width: tbl_cell_width('16%', '16%')} Address
               %th{width: tbl_cell_width('18%', '8%')} Unit
               %th{width: tbl_cell_width('12%')} Neighborhood
@@ -19,7 +19,7 @@
               %th{width: tbl_cell_width('6%')} Active
           
           %tbody.table
-            - featured_listings.each do |listing|
+            - featured_objects.each do |listing|
               %tr
                 %td= listing.id
                 %td

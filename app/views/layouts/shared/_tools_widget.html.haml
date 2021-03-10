@@ -9,3 +9,47 @@
 				%li{class: @type == 'billing' ? 'active' : ''}
 					%a{href: billing_url}
 						%b Billing
+
+.tab-content
+	- if @type == 'featured'
+		.tab-pane.fade.in.active
+			- unless browser.device.mobile?
+				.row
+					.col-lg-6
+						.pull-left
+							%h4= @type == 'featured' ? title : 'Billing'
+
+					.col-lg-6
+						.pull-right
+							- unless title == 'Featured Listings'
+								= add_new_link
+							- else
+								= render 'featured_listings/add_new_form'
+								
+			- else
+				.row
+					.col-xs-12
+						- unless title == 'Featured Listings'
+							= add_new_link
+						- else
+							= render 'featured_listings/add_new_form'
+				
+				%br
+				
+				.row
+					.col-xs-12
+						%h4= @type == 'featured' ? title : 'Billing'
+				
+			= render partial_file_path, featured_objects: featured_objects
+			.text-center= will_paginate featured_objects, renderer: BootstrapPagination::Rails
+    
+	- else
+		.tab-pane.fade.in.active
+			%h2
+			= render 'billings/saved_cards', add_new_card_url: add_new_card_url
+			
+			%h2 Billing Transactions
+
+			= render 'billings/billings'
+			
+			.text-center= will_paginate @billings, renderer: BootstrapPagination::Rails
