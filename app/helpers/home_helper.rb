@@ -26,15 +26,20 @@ module HomeHelper
   end
 
   def split_view_header
-  	return @searched_neighborhoods if params[:searched_by] == 'nyc'
+  	return popular_search_string if params[:searched_by] == 'nyc'
 		"#{@searched_neighborhoods} Apartments For Rent" 
+	end
+
+	def popular_search_string
+		@searched_neighborhoods.gsub('Nyc', 'NYC')
+		# @searched_neighborhoods.split(' ').map{|x| x == 'Nyc' ? 'NYC' : x}.join(' ')
 	end
 
 	def spv_count_header_style
 		if browser.device.mobile? 
 			'color: #0075c8; font-size: 21px;'
 		else
-			'color: #000; font-size: 21px;'
+			'color: #000; font-size: 21px;margin: 0px;'
 		end
 	end
 
