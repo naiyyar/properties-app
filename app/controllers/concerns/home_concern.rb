@@ -42,7 +42,7 @@ module HomeConcern
       building = if buildings.present?
                   buildings.first
                 else
-                  Building.buildings_in_neighborhood(@search_string.downcase).first
+                  Building.buildings_in_neighborhood(@search_string&.downcase).first
                 end
       @lat, @lng = building_latlng(building)
     end

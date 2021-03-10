@@ -18,7 +18,7 @@ function getLocation(){
 }
 
 function showPosition(position) {
-  var loc_link = $('.ui-autocomplete li.curr-location a');
+  var loc_link = $('li.curr-location a.location');
   var url_to_render = render_url(position);
   if(loc_link.attr('href') == 'javascript:void(0);'){
     setTimeout(function(){document.location.href = url_to_render}, 250);
