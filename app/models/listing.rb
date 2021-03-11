@@ -117,6 +117,7 @@ class Listing < ApplicationRecord
 
   def self.filtered_listings_count buildings, per_page_buildings, filter_params
     listings_count = 0
+    taken_building_ids = []
     per_page_buildings.each do |b|
       if b.kind_of?(Building)
         act_listings       = b.get_listings(filter_params)
@@ -125,10 +126,11 @@ class Listing < ApplicationRecord
         b.min_price        = listings_with_rent.first.rent rescue nil
         b.max_price        = listings_with_rent.last.rent  rescue nil
         listings_count    += act_listings.size
+        taken_building_ids << b.id
       end
     end
 
-    taken_building_ids = per_page_buildings.map{|b| b.id if b.kind_of?(Building)}.compact
+    # taken_building_ids = per_page_buildings.map{|b| b.id if b.kind_of?(Building)}.compact
     buildings.where.not(id: taken_building_ids).each do |b|
       act_listings    = b.get_listings(filter_params)
       listings_count += act_listings.size
