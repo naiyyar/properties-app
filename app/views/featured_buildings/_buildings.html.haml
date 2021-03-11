@@ -26,7 +26,7 @@
               - building = featured_building.building
               %tr
                 %td=link_to featured_building.id, edit_featured_building_path(featured_building, featured_by: @featured_by)
-                %td=link_to building.building_name_or_address, building_path(building)
+                %td=link_to building.street_address, building_path(building)
                 %td=link_to building.management_company.try(:name), '#'
                 %td=link_to building.try(:neighborhood), '#'
                 %td=link_to building.try(:neighborhood3), '#'
