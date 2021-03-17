@@ -10,9 +10,8 @@
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' if browser.device.mobile? %>
     <%= render partial: 'layouts/shared/search_modal' %>
-
+    <%= render 'layouts/home/header' %>
     <div class="content-wrapper <%= controller_name + action_name %>">
-      <%= render 'layouts/home/header' %>
       <%= yield %>
       <%= render 'layouts/home/footer' if browser.device.mobile? %>
     </div>
@@ -27,7 +26,7 @@
     <%= javascript_include_tag 'home' %>
 
     <script type="text/javascript">
-      //$(function(){ new app.apartments; });
+      $(function(){ new app.apartments; });
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->

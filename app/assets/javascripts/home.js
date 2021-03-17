@@ -7,6 +7,7 @@
 
     setTimeout(function() {
         $('body').removeClass('notransition');
+        $('.HeaderBlock, .mainSearchWrap').removeClass('hidden')
     }, 300);
 
     $('.dropdown-select li a').click(function() {
@@ -94,8 +95,8 @@
 
     //To changes the size of search field on mobile device orientation changed
     window.addEventListener('resize', function() {
-        var homeSearchContainer  = $('.home-search-form  .easy-autocomplete');
-        var splitSearchContainer = $('.split-view-seach  .easy-autocomplete');
+        var homeSearchContainer  = $('.home-search-form .easy-autocomplete');
+        var splitSearchContainer = $('.split-view-seach .easy-autocomplete');
         setTimeout(function(){
             if(window.innerWidth > 500 && window.innerWidth <= 667){
                 homeSearchContainer.css('width','649px');

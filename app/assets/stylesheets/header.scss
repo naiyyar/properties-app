@@ -6,7 +6,6 @@ $header-height: 59px;
   position: fixed;
   top: 0;
   z-index: 1000;
-  height: $header-height;
   
   .Header.home-page {
     box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
@@ -17,7 +16,6 @@ $header-height: 59px;
   }
   .Header {
     background: #fff;
-    font-family: 'Open Sans', sans-serif;
     position: relative;
     height: 100%;
 
@@ -25,13 +23,13 @@ $header-height: 59px;
       display: block;
       margin-right: auto;
       margin-left: auto;
-      padding-left: 0px;
-      padding-right: 0px;
-      height: $header-height;
-      
+      padding-left: 100px;
+      padding-right: 100px;
+
       .Header-logoDesktop {
         display: inline-block;
         vertical-align: top;
+        width: 190px;
         
         .Logo {
           height: $header-height;
@@ -47,17 +45,15 @@ $header-height: 59px;
         margin-right: auto;
         margin-left: auto;
         padding-right: 0px;
-        padding-left: 38px;
+        padding-left: 0px;
         display: inline-block;
-        min-width: 26em;
       }
 
       .Header-nav {
-        margin: 0 -15px 0 0;
         position: relative;
         text-align: right;
-        vertical-align: top;
-        padding: 3px;
+        margin: 0px;
+        padding: 0px;
 
         .Header-navListItem {
           display: inline-block;
@@ -112,10 +108,20 @@ $header-height: 59px;
   .HeaderBlock {
     .Header {
       .Container {
-        width: 1024px;
+        
       }
       .Logo {
         display: inline-block;
+      }
+    }
+  }
+}
+
+@media (min-width: 1278px){
+  .HeaderBlock {
+    .Header {
+      .Container {
+        
       }
     }
   }
