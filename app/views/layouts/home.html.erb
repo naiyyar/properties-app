@@ -6,17 +6,13 @@
   </head>
   
   <body class="notransition no-hidden home" style="margin: 0px; padding: 0px;">
+    <%#= render partial: 'layouts/home/header' %>
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render partial: 'layouts/shared/left_side' if browser.device.mobile? %>
-    
-    <!-- <div id="apt-ajax-loader" style='display: none;'>
-      <div><span class="fa fa-spin fa-4x fa-spinner"></span></div>
-    </div> -->
-    
     <%= render partial: 'layouts/shared/search_modal' %>
-    
+
     <div class="content-wrapper <%= controller_name + action_name %>">
-      <%= render partial: 'layouts/home/header' %>
+      <%= render 'layouts/home/header' %>
       <%= yield %>
       <%= render 'layouts/home/footer' if browser.device.mobile? %>
     </div>
@@ -31,7 +27,7 @@
     <%= javascript_include_tag 'home' %>
 
     <script type="text/javascript">
-      $(function(){ new app.apartments; });
+      //$(function(){ new app.apartments; });
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->

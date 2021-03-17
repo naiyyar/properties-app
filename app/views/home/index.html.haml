@@ -2,24 +2,29 @@
   = @tab_title_text
 
 #home-content-wrapper
-  #hero-container
-    = image_tag hero_image, width: '100%', height: '100%'
-    .search-panel
-      .home-about-nyc-apt
-        %h1 No Fee Apartments For Rent In NYC
-        %h2 Helping You Find Your NYC Home
-      .home-search-form
-      - unless browser.device.mobile?
-        = render 'home/search_form'
-      - else
-        .apt-search.home#apt-search-form
-          = icon_search_helper
-          = search_placeholder_input_helper
+  = render 'home/partials/hero_container'
+  
+  - if false
+    #hero-container{style: "height: #{hero_elems_height}px;"}
+      #hero-img-container{style: "height: #{hero_elems_height}px;"}
+        = image_tag hero_image, width: '100%', height: hero_elems_height
+      .search-panel
+        .home-about-nyc-apt
+          %h1 No Fee Apartments For Rent In NYC
+          %h2 Helping You Find Your NYC Home
+        
+        .home-search-form
+          - unless browser.device.mobile?
+            = render 'home/search_form'
+          - else
+            .apt-search.home#apt-search-form
+              = icon_search_helper
+              = search_placeholder_input_helper
 
-      .home-quick-links
-        %ul.list-inline
-          - home_quick_links.each do |nb|
-            %li=link_to quick_link_name(nb), nb[:url]
+        .home-quick-links
+          %ul.list-inline
+            - home_quick_links.each do |nb|
+              %li=link_to quick_link_name(nb), nb[:url]
   
   .home-wrapper{style: 'background: #FBFBFF;'}
     .home-content.featured-section
@@ -46,7 +51,7 @@
         .col-lg-10.col-sm-12
           %h2{style: 'font-weight: bolder;text-align: left;'} What We Do
           %p Transparentcity standardizes and aggregates information from websites of NYC landlords and property management companies, all of whom apartments can be rented directly from without working through a broker.
-          = link_to 'Learn More <span class="fa fa-arrow-right"></span>'.html_safe, '/about', style: 'font-size: 18px;font-weight: bolder;color: #2b78e4;', title: 'About'
+          = link_to 'Learn More <span class="fa fa-arrow-right"></span>'.html_safe, '/about', style: 'font-size: 18px;font-weight: bolder;color: #2b78e4;'
         .col-lg-1.col-sm-12
   
   .home-wrapper{style: 'background: #FBFBFF;'}

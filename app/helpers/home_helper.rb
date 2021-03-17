@@ -21,8 +21,12 @@ module HomeHelper
 	  end
   end
 
+  def hero_elems_height
+  	browser.device.mobile? ? 510 : 600
+  end
+
   def search_input_placeholders
-  	@search_input_placeholders ||= 'Neighborhood, ZipCode, Address, Building, Management Company'
+  	'Neighborhood, ZipCode, Address, Building, Management Company'
   end
 
   def split_view_header

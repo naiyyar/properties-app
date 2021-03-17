@@ -1,45 +1,50 @@
 - if screen_class == 'screen-sm' && !home_page? && !blog_view?
   = render 'layouts/shared/mobile_header'
 - else
-  .home-header#app-header{class: home_page? ? 'home-page' : 'other-page'}
-    .pull-left
-      - unless blog_view?
-        - if browser.device.mobile?
-          %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
-            %span.fa.fa-bars
-      - else
-        %a.home-navHandler{href: '/blog'}
-          %span.fa.fa-home
-          %strong.hidden-xs blog
-
-
-    .home-logo.osLight
-      %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40'
-    .home-nav.pull-left
-      %ul.homeNavUl
-        %li.no-hover-underline.parent=link_to 'About', '/about'
-        %li.no-hover-underline.parent
-          %a.dropdown-toggle.no-hover-underline{href: '#', 'data-toggle' => 'dropdown'} 
-            Advertise
-            %span.fa.fa-chevron-down
-
-          .dropdown-menu.userMenu.admin.advertise-menu{role: 'menu'}
-            = render 'layouts/shared/advertise_items', classes: '', styles: '', font: 'font-16'
-        %li.no-hover-underline.parent=link_to 'Blog', '/blog'
-        %li.no-hover-underline.parent=link_to 'Write Review', contribute_buildings_path
-    
-    / for large devices
-    .home-nav.pull-right
-      %ul.homeNavUl{style: 'position: relative;'}
-        - unless user_signed_in?
-          %li.no-hover-underline.parent
-            %a{href: '/users/sign_in'} Sign In
-            &nbsp;
-            %a{href: '/users/sign_up'} Sign Up
+  = render partial: 'layouts/shared/new_header'
+  
+  - if false
+    .home-header#app-header{class: (home_page? ? 'home-page' : 'other-page')}
+      .pull-left
+        - unless blog_view?
+          - if browser.device.mobile?
+            %a.home-navHandler.ssm-toggle-nav1.visible-xs.visible-sm{href: 'javascript:void(0);'}
+              %span.fa.fa-bars
         - else
-          %li.no-hover-underline.parent= render 'layouts/shared/admin_nav_items'
-          %li.no-hover-underline.parent= render 'layouts/shared/tools_nav'
-          %li.no-hover-underline.parent= render 'layouts/shared/user_profile'
+          %a.home-navHandler{href: '/blog'}
+            %span.fa.fa-home
+            %strong.hidden-xs blog
 
-  - if user_signed_in? && browser.device.mobile?
-    .mobView.visible-xs.visible-sm= render partial: 'layouts/shared/user_profile'
+      %section
+        .col-lg-2
+          .home-logo.osLight
+            %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40'
+        
+        .col-lg-7
+          .home-nav
+            %ul.homeNavUl
+              %li.no-hover-underline.parent= link_to 'About', '/about'
+              %li.no-hover-underline.parent
+                %a.dropdown-toggle.no-hover-underline{href: '#', 'data-toggle' => 'dropdown'} 
+                  Advertise
+                  %span.fa.fa-chevron-down
+
+                .dropdown-menu.userMenu.admin.advertise-menu{role: 'menu'}
+                  = render 'layouts/shared/advertise_items', classes: '', styles: '', font: 'font-16'
+              %li.no-hover-underline.parent= link_to 'Blog', '/blog'
+              %li.no-hover-underline.parent= link_to 'Write Review', contribute_buildings_path
+        
+        .col-lg-3
+          .home-nav
+            %ul.homeNavUl.rightNav
+              - unless user_signed_in?
+                %li.no-hover-underline.parent
+                  %a{href: '/users/sign_in', style: 'margin-right: 6px;'} Sign In
+                  %a{href: '/users/sign_up'} Sign Up
+              - else
+                %li.no-hover-underline.parent= render 'layouts/shared/admin_nav_items'
+                %li.no-hover-underline.parent= render 'layouts/shared/tools_nav'
+                %li.no-hover-underline.parent= render 'layouts/shared/user_profile'
+
+      - if user_signed_in? && browser.device.mobile?
+        .mobView.visible-xs.visible-sm= render partial: 'layouts/shared/user_profile'

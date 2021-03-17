@@ -1,0 +1,32 @@
+<section class="homepageHero" title="Apartments for rent in NYC at transparentcity.co">
+  <div class="mainSearchWrap" id="mainSearchWrap">
+    <div class='heroTitles'>
+      <h1 class="mainTitle" id="quickSearchMainTitle">No Fee Apartments For Rent In NYC</h1>
+      <h2 id="quickSearchSubTitle">Helping You Find Your NYC Home</h2>
+    </div>
+
+    <section id="quickSearch" class="quickSearch">
+      <div class="quickSearchWrapper">
+        <div class="inputWrapper home-search-form">
+          <% unless browser.device.mobile? %>
+            <%= render 'home/search_form' %>
+          <%else%>
+            <div class="apt-search home" id='apt-search-form'>
+              <%= icon_search_helper %>
+              <%= search_placeholder_input_helper %>
+            </div>
+          <%end%>
+        </div>
+      </div>
+
+      <div class="quickLinks">
+        <ul class="list-inline">
+          <% home_quick_links.each do |nb| %>
+            <li><%= link_to quick_link_name(nb), nb[:url] %></li>
+          <%end%>
+        </ul>
+      </div>
+    </section>
+  </div>
+  <div class="heroImage" style="background-image: url(<%=hero_image%>);"></div>
+</section>

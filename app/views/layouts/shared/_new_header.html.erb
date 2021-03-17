@@ -1,0 +1,59 @@
+<header class="HeaderBlock">       
+  <div class="Header <%=home_page? ? 'home-page' : 'other-page'%>">
+    <a href='javascript:void(0);' class="home-navHandler visible-xs visible-sm" data-toggle="menu">
+      <span class="fa fa-bars"></span>
+    </a>
+
+    <div class="Container">
+      <div class="Header-logoDesktop">
+        <a href="/" class="Logo">
+          <%= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40 ', class: 'Logo-image' %>
+        </a>
+      </div>
+
+      <div id='Left-navContainer' class="hidden-xs">
+        <ul class="Header-nav pull-left">
+          <li class="Header-navListItem">
+            <%= link_to 'About', '/about', class: 'Header-navText' %>
+          </li>
+          <li class="Header-navListItem">
+            <%= link_to 'Blog', '/blog', class: 'Header-navText' %>
+          </li>
+          <li class="Header-navListItem">
+            <a href="#" class="dropdown-toggle no-hover-underline Header-navText" data-toggle='dropdown'>
+              Advertise
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <div class="dropdown-menu userMenu admin advertise-menu" role='menu'>
+              <%= render 'layouts/shared/advertise_items', classes: '', styles: '', font: 'font-16' %>
+            </div>
+          </li>
+          <li class="Header-navListItem">
+            <%= link_to 'Write Review', contribute_buildings_path, class: 'Header-navText' %>
+          </li>
+        </ul>
+      </div>
+
+      <ul class="Header-nav pull-right hidden-xs">
+        <% unless user_signed_in? %>
+          <li class="Header-navListItem">
+            <a href='/users/sign_in' class="Header-navText"> Sign In</a>
+          </li>
+          <li class="Header-navListItem">
+            <a href='/users/sign_up' class="Header-navText"> Sign Up</a>
+          </li>
+        <%else%>
+          <li class="Header-navListItem">
+            <%= render 'layouts/shared/admin_nav_items' %>
+          </li>
+          <li class="Header-navListItem">
+            <%= render 'layouts/shared/tools_nav' %>
+          </li>
+          <li class="Header-navListItem">
+            <%= render 'layouts/shared/user_profile' %>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</header>
