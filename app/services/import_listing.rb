@@ -32,7 +32,7 @@ class ImportListing < ImportService
     listing[:building_id]         = building.id
     listing[:management_company]  = building.management_company_name if building.management_company.present?
     if listing.save
-      building.update_rent(building.listings)
+      building.update_rent(building.listings.active)
     else
       listing.errors.full_messages.each do |message|
         @errors << "Issue line #{line_num}, column #{message}."
