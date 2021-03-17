@@ -129,7 +129,7 @@ module LinksHelper
 	def check_availability_link building, sl_class=nil
 		if building.active_web_url?
 			bt_block_class = sl_class.present? ? sl_class : 'btn-block'
-      link_to 'Check Availability', building.web_url, 
+      link_to check_availability, building.web_url, 
       														onclick: "window.open(this.href,'_blank');return false;",
       														class: "btn #{bt_block_class} btn-primary txt-color-white font-bolder btn-round",
       														style: "padding: #{bt_block_class.include?('btn-xs') ? '8px 0px' : ''}"
@@ -138,10 +138,19 @@ module LinksHelper
     end
 	end
 
+	#
 	def check_availability_button web_url, klass
-		link_to 'Check Availability', web_url, 
-																	onclick: "window.open(this.href,'_blank');return false;",
-																	class: "btn btn-primary #{klass} btn-round ca"
+		unless browser.device.mobile?
+			link_to check_availability, 
+						  web_url,
+						  class: "btn btn-primary #{klass} btn-round ca",
+						  target: '_blank'
+		else
+			link_to check_availability, 
+						  web_url,
+						  class: "btn btn-primary #{klass} btn-round ca",
+						  onclick: "window.open(this.href,'_blank');return false;"
+		end
 	end
 
 	def contact_leasing_button building, event, klass
