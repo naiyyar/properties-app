@@ -6,7 +6,7 @@ class FeaturedCompsController < ApplicationController
   include Searchable
 
   def index
-    @featured_comps = filterrific_search_results.includes(:building => [:management_company])
+    @featured_comps = filterrific_search_results.paginate(:page => params[:page], :per_page => 100).includes(:building => [:management_company])
 
     respond_to do |format|
       format.html

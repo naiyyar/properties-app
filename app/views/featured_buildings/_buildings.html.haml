@@ -6,14 +6,14 @@
         %table.table.table-striped#sortable
           %thead
             %tr
-              %th{width: '10%'} Feature ID(#{@featured_buildings.count})
+              %th{width: '9%'} Feature ID(#{@featured_buildings.count})
               %th{width: '16%'} Building
-              %th{width: '18%'} Management
-              %th{width: '12%'} Neighborhood1
-              %th{width: '12%'} Neighborhood3
-              %th{width: '8%'} Website
-              %th{width: '15%'} Start Date
-              %th{width: '15%'} End Date
+              %th{width: '16%'} Management
+              %th{width: '10%'} Neighborhood1
+              %th{width: '10%'} Neighborhood3
+              %th{width: '6%'} Website
+              %th{style: 'width: 110px;'} Start Date
+              %th{style: 'width: 110px;'} End Date
               - unless params[:type] == 'featured'
                 %th='Email' 
               %th{width: '6%'}

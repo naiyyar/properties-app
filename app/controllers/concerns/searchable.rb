@@ -9,9 +9,6 @@ module Searchable
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @filterrific.find
-    						.paginate(:page => params[:page], :per_page => 100)
-               	.order('created_at desc')
-
+    @filterrific.find.order('created_at desc')
   end
 end

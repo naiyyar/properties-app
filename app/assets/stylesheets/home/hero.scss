@@ -3,6 +3,18 @@
   background-color: #f4f4f4;
   font-size: 1rem;
   height: 59.3125rem;
+  width: 100%;
+  
+  .heroImage {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
 }
 
 #mainSearchWrap.mainSearchWrap {
@@ -65,19 +77,6 @@
   font-size: 14px;
   text-decoration: underline;
   font-weight: bolder;
-}
-
-.homepageHero {
-  .heroImage {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-  }
 }
 
 /* ================================== */
