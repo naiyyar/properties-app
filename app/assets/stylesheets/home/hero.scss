@@ -68,7 +68,7 @@
 
 .quickLinks{
   z-index: 999;
-  padding: 5px 0px;
+  padding: 12px 0px;
   text-align: center;
 }
 
@@ -83,19 +83,20 @@
 /* ========= MEDIA QUERY ============ */
 /* ================================== */
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   #mainSearchWrap.mainSearchWrap{
     padding: 0px 11px;
+    top: 55%;
   }
   #quickSearch.quickSearch, .heroTitles, .quickLinks {
     width: 760px;
     max-width: 100%
   }
   #quickSearch .inputWrapper input {
-    width: calc(100% - 1.125rem);
+    width: 100%;
   }
   .quickLinks{
-    text-align: left;
+    text-align: center;
     .list-inline > li {
       padding-left: 3px;
       padding-right: 3px;
