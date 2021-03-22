@@ -1,10 +1,21 @@
 <header class="HeaderBlock hidden">       
   <div class="Header <%=home_page? ? 'home-page' : 'other-page'%>">
-    <a href='javascript:void(0);' class="home-navHandler visible-xs visible-sm" data-toggle="menu">
-      <span class="fa fa-bars"></span>
-    </a>
+    <% unless blog_view? %>
+      <a href='javascript:void(0);' class="home-navHandler visible-xs visible-sm" data-toggle="menu">
+        <span class="fa fa-bars"></span>
+      </a>
+    <%end%>
 
     <div class="Container">
+      <% if blog_view? %>
+        <div class="blog-header-icon pull-left">
+          <a href='/blog' class="home-navHandler">
+            <span class='fa fa-home'></span>
+            <strong class='hidden-xs'>blog</strong>
+          </a>
+        </div>
+      <%end%>
+      
       <div class="Header-logoDesktop">
         <a href="/" class="Logo">
           <%= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40 ', class: 'Logo-image' %>
@@ -28,7 +39,7 @@
           <li class="Header-navListItem">
             <%= link_to 'Blog', '/blog', class: 'Header-navText' %>
           </li>
-          
+
           <li class="Header-navListItem">
             <%= link_to 'Write Review', contribute_buildings_path, class: 'Header-navText' %>
           </li>

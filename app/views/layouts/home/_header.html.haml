@@ -1,7 +1,7 @@
 - if screen_class == 'screen-sm' && !home_page? && !blog_view?
   = render 'layouts/shared/mobile_header'
 - else
-  = render partial: 'layouts/shared/new_header'
+  = render 'layouts/shared/new_header'
   
   - if false
     .home-header#app-header{class: (home_page? ? 'home-page' : 'other-page')}

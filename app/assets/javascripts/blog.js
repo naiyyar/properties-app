@@ -6,6 +6,7 @@
 
   setTimeout(function() {
     $('body').removeClass('notransition');
+    $('.HeaderBlock').removeClass('hidden');
   }, 300);
 
   if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
