@@ -17,9 +17,6 @@
             <%= link_to 'About', '/about', class: 'Header-navText' %>
           </li>
           <li class="Header-navListItem">
-            <%= link_to 'Blog', '/blog', class: 'Header-navText' %>
-          </li>
-          <li class="Header-navListItem">
             <a href="#" class="dropdown-toggle no-hover-underline Header-navText" data-toggle='dropdown'>
               Advertise
               <span class="fa fa-chevron-down"></span>
@@ -28,6 +25,10 @@
               <%= render 'layouts/shared/advertise_items', classes: '', styles: '', font: 'font-16' %>
             </div>
           </li>
+          <li class="Header-navListItem">
+            <%= link_to 'Blog', '/blog', class: 'Header-navText' %>
+          </li>
+          
           <li class="Header-navListItem">
             <%= link_to 'Write Review', contribute_buildings_path, class: 'Header-navText' %>
           </li>
