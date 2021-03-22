@@ -35,87 +35,6 @@ body, .content-wrapper.homeindex{
 	max-width: 2560px;
 }
 
-/* HOME HEADER NAV */
-
-.home-nav{
-	height: 59px;
-	position: relative;
-	ul.homeNavUl{
-		margin: 0px;
-    padding: 19px 0px;
-    list-style-type: none;
-    height: 100%;
-
-		li.parent{
-			float: left;
-	    margin: 0px 10px;
-	    padding: 0px;
-	    color: #777;
-			&:not(.no-hover-underline):hover{
-				border-bottom: 1px solid #ffffff;
-			}
-			a{
-				color: #000;
-    		font-size: 15px;
-				&:hover{
-					border-bottom: 2px solid #333;
-				}
-			}
-		}
-	}
-
-	ul.homeNavUl.shared{
-		li a{
-			color: #000;
-			&:hover{
-				color: #000;
-				border-bottom: 2px solid #000;
-			}
-		}
-	}
-
-	ul.homeNavUl.rightNav{
-		display: flex;
-    justify-content: flex-end;
-	}
-}
-
-.home-header.home-page{
-	box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
-}
-
-.home-header.other-page {
-	box-shadow: none;
-	border-bottom: 1px solid #ddd;
-}
-
-.home-header {
-  position: fixed;
-  width: 100%;
-  padding: 0px 69px 0px;
-  color: #000;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  background-color: #fff;
-  height: 59px;
-  .home-logo {
-	  float: left;
-	  width: 176px;
-	  height: 44px;
-	}
-}
-
-.home-header.map {
-  background: rgba(0, 0, 0, 0.50);
-}
-
-.no-touch {
-	.home-nav ul.homeNavUl li a:hover {
-    color: #000;
-  }
-}
-
 /* 
 ==========
 ========== POPULAR NEIGHBORHOODS =========
@@ -178,60 +97,6 @@ body, .content-wrapper.homeindex{
 }
 
 #home-content-wrapper{
-	#hero-container {
-	  background-color: #fff;
-	  height: 600px;
-	  position: relative;
-	  img{
-	  	height: 600px;
-		}
-	  .search-panel {
-	    position: absolute;
-	    left: 50%;
-	    top: 50%;
-	    transform: translate(-50%, -50%);
-	    width: 63%;
-	    
-	    form {
-	    	text-align: center;
-			}
-			.form-group {
-			  margin: 0 5px 20px 5px;
-			  position: relative;
-			}
-			.home-about-nyc-apt {
-		    margin-bottom: 16px;
-		    z-index: 999;
-		    text-align: left;
-		    position: relative;
-			}
-		}
-	}
-	#hero-container-map {
-	  background-color: #fff;
-	  height: 600px;
-	  position: relative;
-	}
-	#hero-container-blog {
-	  position: relative;
-	}
-	.home-about-nyc-apt h2{
-    font-size: 21px;
-    padding: 0px;
-    margin:0px;
-    line-height: 40px;
-    color: #fff;
-	}
-	.home-about-nyc-apt h1{
-	  font-size: 40px;
-	  margin: 0px 0px;
-	  color: #fff;
-	  font-weight: bold;
-	}
-	#home-map {
-	  width: 100%;
-	  height: 600px;
-	}
 	.home-wrapper {
 	  margin: 0 auto;
 	  .home-content.featured-section{
@@ -254,23 +119,6 @@ body, .content-wrapper.homeindex{
 		  	text-align: right;
 			}
 	  }
-	}
-
-	.home-quick-links {
-		z-index: 999;
-		padding: 5px 0px;
-		text-align: center;
-		position: relative;
-		ul{
-			margin: 0px;
-			padding: 8px;
-			li a{
-				color: #fff;
-				font-size: 14px;
-				text-decoration: underline;
-				font-weight: bolder;
-			}
-		}
 	}
 }
 
@@ -300,44 +148,10 @@ body, .content-wrapper.homeindex{
   }
 
   .pop-list {
-		b {
-			color: #fff;
-		}
+		b { color: #fff; }
 	}
   
   #home-content-wrapper {
-		#hero-container {
-			height: 510px;
-			img{
-	  		height: 510px;
-			}
-			.search-panel {
-	      width: 94%;
-	      top: 54%;
-	      padding: 0px;
-	      .home-about-nyc-apt {
-	      	text-align: left;
-	      }
-	    }
-		}
-
-		.home-quick-links {
-			text-align: left !important;
-			.list-inline > li {
-			  padding-left: 3px;
-			  padding-right: 1px;
-			}
-    }
-    
-    .home-about-nyc-apt {
-      h1 {
-        font-size: 26px;
-      }
-      h2 {
-        font-size: 18px;
-      }
-    }
-
     .home-wrapper {
 	  	padding: 20px;
 	  	.home-content.featured-section{
@@ -356,58 +170,6 @@ body, .content-wrapper.homeindex{
 		}
   }
 
-  .home-header {
-  	display: flex;
-    justify-content: center;
-    
-    .home-logo {
-      width: 180px !important;
-      text-align: center;
-    }
-  }
-
-  .home-nav {
-      position: absolute;
-      width: 45%;
-      right: 0%;
-      overflow-y: scroll;
-      overflow-x:hidden;
-      z-index: 1100;
-      min-height: 150px;
-      float: none;
-      background-color: rgba(0, 0, 0, 0);
-    }
-    .home-header .home-nav{
-      left: 0;
-      top: 64px;
-    }
-    #header .home-nav{
-      top: 143px;
-    }
-    .home-nav ul.homeNavUl {
-      position: relative;
-      top: 0;
-      left: -121%;
-      float: left;
-      padding: 0px;
-      z-index: 1100;
-    }
-    .home-nav.active {
-      background-color: rgba(25, 25, 25, 0.90);
-    }
-    .home-nav.active ul {
-      left: 0;
-      width: 100%;
-    }
-    .home-nav.active ul li {
-      float: none;
-      margin-left: 0px;
-      padding: 12px;
-    }
-    .home-nav.active ul li:hover{
-      background-color: rgba(0, 0, 0, 0.57)
-    }
-
   .expended {
     .leftNav {
       ul {
@@ -420,57 +182,11 @@ body, .content-wrapper.homeindex{
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-		#home-content-wrapper {
-  		#hero-container{
-  			.search-panel {
-      		width: 100%;
-  			}
-  		}
-
-  		.home-wrapper {
-  			padding: 0px 20px;
-  		}
-  	}
-
-  	.home-nav {
-        position: absolute;
-        width: 25%;
-        right: 0%;
-        overflow-y: scroll;
-        overflow-x:hidden;
-        z-index: 1100;
-        min-height: 85px;
-        float: none;
-        background-color: rgba(0, 0, 0, 0);
-    }
-    .home-header .home-nav{
-        left: 0;
-        top: 64px;
-    }
-   
-    .home-nav ul.homeNavUl {
-        position: relative;
-        top: 0;
-        left: -121%;
-        float: left;
-        padding: 0px;
-        z-index: 1100;
-    }
-    .home-nav.active {
-        background-color: rgba(0, 0, 0, 0.50);
-    }
-    .home-nav.active ul {
-        left: 0;
-        width: 100%;
-    }
-    .home-nav.active ul li {
-        float: none;
-        margin-left: 0px;
-        padding: 12px;
-    }
-    .home-nav.active ul li:hover{
-        background-color: rgba(0, 0, 0, 0.57)
-    }
+	#home-content-wrapper {
+		.home-wrapper {
+			padding: 0px 20px;
+		}
+	}
 }
 
 @media screen and (min-width: 992px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
@@ -484,20 +200,14 @@ body, .content-wrapper.homeindex{
 }
 
 @media screen and (max-width: 1199px) {
-    .home-wrapper {
-        width: 100%;
-        margin: 0;
-    }
+  .home-wrapper {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1024px) {
  #home-content-wrapper {
-		#hero-container {
-	   	.search-panel {
-	      width: 78%;
-	    }
-	  }
-
 	  .home-wrapper {
 			padding: 0px 20px;
 		}
@@ -508,55 +218,4 @@ body, .content-wrapper.homeindex{
   #leftSide.home {
     display: block;
   }
-}
-
-@media screen and (min-width: 1367px) and (max-width: 1600px) {
-  #home-content-wrapper {
-		#hero-container {
-	   	.search-panel {
-	      width: 57%;
-	    }
-	  }
-	}
-}
-
-
-@media screen and (min-width: 1601px) and (max-width: 1900px){
-  #home-content-wrapper {
-		#hero-container {
-	   	.search-panel {
-	      width: 50%;
-	    }
-	  }
-	}
-}
-
-@media screen and (min-width: 1920px) and (max-width: 2200px){
-   #home-content-wrapper {
-		#hero-container {
-	   	.search-panel {
-	      width: 45%;
-	    }
-	  }
-	}
-}
-
-@media screen and (min-width: 2201px) {
-   #home-content-wrapper {
-		#hero-container {
-	   	.search-panel {
-	      width: 35%;
-	    }
-	  }
-	}
-}
-
-@media screen and (min-width: 2561px) {
-	#home-content-wrapper {
-		#hero-container {
-	   	.search-panel {
-	      width: 22%;
-	    }
-	  }
-	}
 }

@@ -87,8 +87,6 @@ class Billing < ApplicationRecord
     end
 	end
 
-	def 
-
 	def price
 		FEATURED_PRICES[billable_type]
 	end

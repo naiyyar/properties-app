@@ -47,9 +47,12 @@ module RenewPlan
         if customer_id.present?
           cards = get_cards(user, customer_id)
           if cards.present?
-            if billable.not_already_renewed?(ENV['SERVER_ROOT'])
+            if billable.not_already_renewed?
               card = cards.last rescue nil
               create_billing(user, card, customer_id, billable) if card.present?
+            else
+              set_time_zone(user)
+              update_status(billable) if billable.expired? && billable.active
             end
           else
             # Updating plan status to false when no customer found

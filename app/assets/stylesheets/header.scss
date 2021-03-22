@@ -94,11 +94,13 @@ $header-height: 59px;
 @media screen and (max-width: 767px) {
   .HeaderBlock {
     height: 59px;
+    
     .Header {
       .Container {
         .Header-logoDesktop {
           display: block;
           text-align: center;
+          width: 100%;
         }
       }
     }
@@ -108,21 +110,8 @@ $header-height: 59px;
 @media (min-width: 1024px){
   .HeaderBlock {
     .Header {
-      .Container {
-        
-      }
       .Logo {
         display: inline-block;
-      }
-    }
-  }
-}
-
-@media (min-width: 1278px){
-  .HeaderBlock {
-    .Header {
-      .Container {
-        
       }
     }
   }

@@ -3,29 +3,6 @@
 
 #home-content-wrapper
   = render 'home/partials/hero_container'
-  
-  - if false
-    #hero-container{style: "height: #{hero_elems_height}px;"}
-      #hero-img-container{style: "height: #{hero_elems_height}px;"}
-        = image_tag hero_image, width: '100%', height: hero_elems_height
-      .search-panel
-        .home-about-nyc-apt
-          %h1 No Fee Apartments For Rent In NYC
-          %h2 Helping You Find Your NYC Home
-        
-        .home-search-form
-          - unless browser.device.mobile?
-            = render 'home/search_form'
-          - else
-            .apt-search.home#apt-search-form
-              = icon_search_helper
-              = search_placeholder_input_helper
-
-        .home-quick-links
-          %ul.list-inline
-            - home_quick_links.each do |nb|
-              %li=link_to quick_link_name(nb), nb[:url]
-  
   .home-wrapper{style: 'background: #FBFBFF;'}
     .home-content.featured-section
       %h2.osLight1.text-center{style: 'font-weight: bolder; color: #000;'} No Fee Apartments That May Interest You
@@ -65,5 +42,5 @@
         .col-lg-1.col-sm-12
       %br
 
-=javascript_include_tag 'home/sections'
+= javascript_include_tag 'home/sections'
   

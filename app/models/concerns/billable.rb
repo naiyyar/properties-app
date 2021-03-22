@@ -10,7 +10,7 @@ module Billable
   DEV_HOSTS = %w(http://localhost:3003 https://aptreviews-app.herokuapp.com)
 
   def model_class
-    @model_class ||= self.class.name.constantize
+    self.class.name.constantize
   end
 
   def charging_amount
