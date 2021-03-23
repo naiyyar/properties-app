@@ -6,10 +6,9 @@
   </head>
   
   <body class="notransition no-hidden home" style="margin: 0px; padding: 0px;">
-    <%#= render partial: 'layouts/home/header' %>
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
-    <%= render partial: 'layouts/shared/left_side' if browser.device.mobile? %>
-    <%= render partial: 'layouts/shared/search_modal' %>
+    <%= render 'layouts/shared/left_side' if browser.device.mobile? %>
+    <%= render 'layouts/shared/search_modal' %>
     <%= render 'layouts/home/header' %>
     <div class="content-wrapper <%= controller_name + action_name %>">
       <%= yield %>
