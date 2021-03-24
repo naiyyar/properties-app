@@ -184,6 +184,7 @@ module ApplicationHelper
   end
 
   private
+  
   def search_placeholder_input_styles
     return 'border: 0px solid #333; -webkit-appearance: none;' if screen_class == 'screen-sm' 
     'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 5px rgba(0,0,0,0.6);'

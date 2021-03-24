@@ -7,7 +7,6 @@
 
     setTimeout(function() {
         $('body').removeClass('notransition');
-        $('.HeaderBlock, .mainSearchWrap').removeClass('hidden')
     }, 300);
 
     $('.dropdown-select li a').click(function() {
