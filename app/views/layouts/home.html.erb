@@ -5,7 +5,7 @@
     <%= layout_stylesheet_link 'home/main' %>
   </head>
   
-  <body class="notransition no-hidden home" style="margin: 0px; padding: 0px;">
+  <body class="notransition no-hidden home">
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
     <%= render 'layouts/shared/left_side' if browser.device.mobile? %>
     <%= render 'layouts/shared/search_modal' %>

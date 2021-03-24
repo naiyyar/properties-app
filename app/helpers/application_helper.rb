@@ -175,11 +175,12 @@ module ApplicationHelper
   end
 
   def layout_stylesheet_link sheet_path
-    if browser.chrome?
-      stylesheet_link_tag sheet_path, media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'"
-    else
-      stylesheet_link_tag sheet_path, media: 'all'
-    end
+    stylesheet_link_tag sheet_path, media: 'all'
+    # if browser.chrome?
+    #   stylesheet_link_tag sheet_path, media: 'all', rel: 'preload', as: 'style', onload: "this.rel='stylesheet'"
+    # else
+    #   stylesheet_link_tag sheet_path, media: 'all'
+    # end
   end
 
   private
