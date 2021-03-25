@@ -204,33 +204,31 @@ manhattan_neightborhoods_hash = [
 	{ key: 'Manhattan Valley', 		url: dropbox_url+'7hhqs4vu8gqelsa/manhattan_valley.kml?dl=1'}
 ]
 
-function brooklyn_and_queens_neighborhoods(term, city, map){
-	url = '';
+function add_nyc_neighborhood_boundaries(term, city, map){
+	var url = '';
   if(term != null && city != 'Bronx'){
-		$.each(manhattan_neightborhoods_hash, function(index, value ) {
-		  if(term == value.key){
-				url = value.url;
-			}
-		});
-		
-		if(url == '' || url == undefined){
-			$.each(brooklyn_and_queens_neighborhoods_hash, function(index, value ) {
-			  if(term == value.key){
-					url = value.url;
-				}
-			});
+  	url = kml_file_url(manhattan_neightborhoods_hash, term);
+
+		if(!url){
+			url = kml_file_url(brooklyn_and_queens_neighborhoods_hash, term);
 		}
 
-		if(url == '' || url == undefined){
-			term = term.split(' - ')[0]
-			$.each(brooklyn_and_queens_zipcodes_hash, function(index, value ) {
-			  if(term == value.key){
-					url = value.url;
-				}
-			});
+		if(!url){
+			url = kml_file_url(brooklyn_and_queens_zipcodes_hash, term.split(' - ')[0]);
 		}
 	}	
 	add_kml(url, map);
+}
+
+function kml_file_url(area_arr, term){
+	var file_url;
+	$.each(area_arr, function(index, value ) {
+	  if(term == value.key){
+	  	file_url = value.url;
+	  	return false;
+	  } 
+	});
+	return file_url;
 }
 
 function add_kml(url, map){

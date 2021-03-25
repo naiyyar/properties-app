@@ -6,7 +6,7 @@
 = content_tag 'div', '', id: 'boundary_coords', data: { coords: @boundary_coords.to_json }
 
 = hidden_field_tag :searched_by, params[:searched_by]
-= hidden_field_tag :search_term, params[:search_term]
+= hidden_field_tag :search_term, params[:search_term], id: 'nb-search-term'
 = hidden_field_tag :search_string, @search_string
 = hidden_field_tag :cu, current_user&.id
 

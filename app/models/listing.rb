@@ -21,25 +21,29 @@ class Listing < ApplicationRecord
     rent_stabilize:  'Rent Stabilized'
   }.freeze
 
+  # When max_price > 15500 then using MAX_RENT
+  # Assuming Listing rent can not be more than 10_00_000
+  MAX_RENT = 10_00_000
+
   # validations
   validates_presence_of :building_address, :unit, :date_active
-  validates :rent,        :numericality => true, :allow_nil => true
-  validates :bed,         :numericality => true, :allow_nil => true
-  validates :bath,        :numericality => true, :allow_nil => true
+  validates :rent, :numericality => true, :allow_nil => true
+  validates :bed, :numericality => true, :allow_nil => true
+  validates :bath, :numericality => true, :allow_nil => true
   validates :free_months, :numericality => true, :allow_nil => true
-  validates_date :date_active,    :on => :create, :message => 'Formatting is off, must be yyyy/mm/dd'
+  validates_date :date_active, :on => :create, :message => 'Formatting is off, must be yyyy/mm/dd'
   validates_date :date_available, :on => :create, allow_nil: true, allow_blank: true, :message => 'Formatting is off, must be yyyy/mm/dd'
   
 
   # scopes
-  scope :active,          -> { where(active: true) }
-  scope :inactive,        -> { where(active: false) }
-  scope :between,         -> (from, to) { where('date_active >= ? AND date_active <= ?', from, to) }
-  scope :months_free,     -> { where('free_months > ?', 0) }
-  scope :owner_paid,      -> { where.not(owner_paid: nil) }
-  scope :rent_stabilize,  -> { where(rent_stabilize: ['true', 't']) }
-  scope :between_prices,  -> (min, max) { where('rent >= ? AND rent <= ?', min.to_i, max.to_i) }
-  scope :with_beds,       -> (beds) { where(bed: beds) }
+  scope :active,         -> { where(active: true) }
+  scope :inactive,       -> { where(active: false) }
+  scope :between,        -> (from, to) { where('date_active >= ? AND date_active <= ?', from, to) }
+  scope :months_free,    -> { where('free_months > ?', 0) }
+  scope :owner_paid,     -> { where.not(owner_paid: nil) }
+  scope :rent_stabilize, -> { where(rent_stabilize: ['true', 't']) }
+  scope :between_prices, -> (min, max) { where('rent >= ? AND rent <= ?', min.to_i, max.to_i) }
+  scope :with_beds,      -> (beds) { where(bed: beds) }
 
   pg_search_scope :search_query, 
                   against: [:building_address, :management_company],
@@ -48,11 +52,11 @@ class Listing < ApplicationRecord
                             },
                   associated_against: { building: [:building_name] }
 
-  scope :default_listing_order,     -> { reorder(date_active: :desc, 
-                                                 management_company: :asc, 
-                                                 building_address: :asc,
-                                                 rent: :asc,
-                                                 unit: :asc) 
+  scope :default_listing_order, -> { reorder(date_active: :desc, 
+                                             management_company: :asc, 
+                                             building_address: :asc,
+                                             rent: :asc,
+                                             unit: :asc) 
                                         }
   scope :order_by_date_active_desc, -> { reorder(date_active: :desc, rent: :asc) }
   scope :order_by_rent_asc,         -> { reorder(rent: :asc, unit: :asc) }
@@ -80,10 +84,6 @@ class Listing < ApplicationRecord
     else
       buildings.sum(:listings_count)
     end
-  end
-
-  def self.max_rent
-    @max_rent ||= self.maximum('rent')
   end
 
   def self.transfer_to_past_listings_table listings

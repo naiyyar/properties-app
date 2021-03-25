@@ -12,7 +12,7 @@ var ready = function(){
   lat = $('#lat').data('lat');
   lng = $('#lng').data('lng');
   var serched_by    = $('#searched_by').val();
-  var searched_term = $('#search_term').val();
+  var searched_term = $('#nb-search-term').val();
   var search_string = $('#search_string').val();
   var city          = '';
   var header_id     = $('#app-header').length > 0 ? 'app-header' : 'header-mob';
@@ -167,7 +167,7 @@ var ready = function(){
 
     polylines = new google.maps.Polygon(polylineoptons);
     var set_boundaries = function(map){
-      brooklyn_and_queens_neighborhoods(searched_term, city, map)
+      add_nyc_neighborhood_boundaries(searched_term, city, map)
     }
   
     setTimeout(function() {

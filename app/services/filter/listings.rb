@@ -12,7 +12,7 @@ module Filter
 				@bedrooms = bedroom_filters
 				@amenities = amenities_filters
 		    @min_price, @max_price = min_max_prices
-		    @max_price  = Listing.max_rent if @max_price.to_i == 15500
+		    @max_price  = Listing::MAX_RENT if @max_price.to_i == 15500
 		  end
 		end
 
