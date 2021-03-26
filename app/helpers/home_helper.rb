@@ -230,7 +230,7 @@ module HomeHelper
 	end
 
 	def popular_search_link category, link_text
-		link_to link_text, popular_search_url(link_text), class: 'hyper-link'
+		link_to link_text, popular_search_url(link_text)
 	end
 
 	def home_quick_links

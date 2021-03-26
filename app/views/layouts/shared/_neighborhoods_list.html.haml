@@ -17,10 +17,11 @@
       %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Flatiron District', area)
       %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Gramercy Park', area)
       %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link("Hell's Kitchen", area)
+      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Kips Bay', area)
+
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
   %ul.pop-list
     .child-borough-container
-      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Kips Bay', area)
       %li.parent{'data-parent' => 'midtown'}
         = search_by_neighborhood_link('Midtown East', area)
         %ul
@@ -49,14 +50,16 @@
     %b#upper_manhattan= search_by_neighborhood_link('Upper Manhattan', area)
     .child-borough-container
       %li.parent{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('East Harlem', area)
+      %li.parent{'data-parent' => 'upper_manhattan'}
+        = search_by_neighborhood_link('Harlem', area)
+        %ul
+          %li{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('South Harlem', area)
 
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
   %ul.pop-list
     .child-borough-container
       %li.parent{'data-parent' => 'upper_manhattan'}
-        = search_by_neighborhood_link('Harlem', area)
         %ul
-          %li{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('South Harlem', area)
           %li{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Central Harlem', area)
           %li{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Hamilton Heights', area)
       %li.parent{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Inwood', area)
@@ -77,13 +80,12 @@
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Crown Heights', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Downtown Brooklyn', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Dumbo', area)
-      / %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Fort Greene', area)
+      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Fort Greene', area)
+      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Greenpoint', area)
       
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
   %ul.pop-list
     .child-borough-container
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Fort Greene', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Greenpoint', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Park Slope', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Sheepshead Bay', area)
       %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Williamsburg', area)

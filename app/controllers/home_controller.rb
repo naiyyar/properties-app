@@ -3,12 +3,12 @@ class HomeController < ApplicationController
   before_action :reset_session,         only: [:index, :auto_search]
   before_action :find_property,         only: [:load_infobox, :get_images]
   before_action :save_as_favourite,     only: [:index, :search]
-  #before_action :set_rent_medians,      only: [:search, :load_infobox]
+  # before_action :set_rent_medians,      only: [:search, :load_infobox]
   before_action :set_device_view,       only: [:index, :load_featured_buildings]
   before_action :set_fav_color_class,   only: :load_infobox
-  #before_action :set_min_save_amount,   only: :load_infobox
+  # before_action :set_min_save_amount,   only: :load_infobox
   
-  include HomeConcern #search
+  include HomeConcern # search
 
   def index
     @home_view        = true
@@ -25,7 +25,7 @@ class HomeController < ApplicationController
   end
 
   def set_split_view_type
-    #setting to know on split view in which view user is on list view OR Map View
+    # setting to know on split view in which view user is on list view OR Map View
     session[:view_type] = params[:view_type] if params[:view_type].present?
     render json: { view: session[:view_type] }
   end
@@ -71,7 +71,7 @@ class HomeController < ApplicationController
     @city           = buildings.text_search_by_city(@search_phrase).to_a.uniq(&:city)
     
     respond_to do |format|
-      #format.html: because if login from search split view after searching something session was saving auto_search path as looking for auto_search template
+      # format.html: because if login from search split view after searching something session was saving auto_search path as looking for auto_search template
       format.html { redirect_to root_url }
       format.json
     end
@@ -128,7 +128,7 @@ class HomeController < ApplicationController
     case @type
     when 'agents'
       'Transparentcity connects Tenant Agents to prospective renters who are looking for personal guidance on navigating the complex rental process.'
-    when 'property-manager'
+    when 'property-managers'
       'Transparentcity advertises exclusively for NYC area landlords and property managers.'
     when 'for-rent-by-owner'
       'Transparentcity connects prospective renters to individual NYC landlord owners.'
