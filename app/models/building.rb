@@ -58,7 +58,7 @@ class Building < ApplicationRecord
 
   belongs_to :user
   belongs_to :management_company, touch: true
-  has_many :reviews,                as: :reviewable
+  has_many :reviews, as: :reviewable
   # has_one  :featured_comp,          foreign_key: :building_id,  dependent: :destroy
   has_many :featured_comp_buildings
   has_many :featured_comps, through: :featured_comp_buildings, dependent: :destroy
@@ -88,23 +88,24 @@ class Building < ApplicationRecord
     joins(:featured_comps).where('featured_comps.building_id = ? AND featured_comps.active is true', building_id)
   end
 
-  scope :with_active_listing,   -> { where('listings_count > ?', 0) }
-  scope :with_listings_bed,     -> (beds) { where('listings.bed in (?) AND listings.active is true', beds) }
-  scope :between_prices,        -> (min, max) { where('listings.rent >= ? AND listings.rent <= ?', min, max) }
-  scope :join_with_listings,    -> { left_outer_joins(:listings).distinct
+  scope :with_active_listing, -> { where('listings_count > ?', 0) }
+  scope :with_listings_bed, -> (beds) { where('listings.bed in (?) AND listings.active is true', beds) }
+  scope :between_prices, -> (min, max) { where('listings.rent >= ? AND listings.rent <= ?', min, max) }
+  scope :join_with_listings,  -> { left_outer_joins(:listings).distinct
                                                                 .select('buildings.*, COUNT(listings.*) as lists_count')
                                                                 .group('buildings.id, listings.id')
                                     }
-  scope :months_free,           -> { where('listings.active is true AND listings.free_months > ?', 0)}
-  scope :owner_paid,            -> { where('listings.active is true AND listings.owner_paid is not null')}
-  scope :rent_stabilize,        -> { where('listings.active is true AND listings.rent_stabilize in (?)', ['t', 'true'])}
+  scope :months_free, -> { where('listings.active is true AND listings.free_months > ?', 0)}
+  scope :owner_paid, -> { where('listings.active is true AND listings.owner_paid is not null')}
+  scope :rent_stabilize, -> { where('listings.active is true AND listings.rent_stabilize in (?)', ['t', 'true'])}
   
-  scope :with_active_web,       -> { where('active_web is true and web_url is not null') }
-  scope :with_active_email,     -> { where('active_email is true and email is not null') }
-  scope :with_application_link, -> { where('show_application_link is true and online_application_link is not null') }
-  scope :with_pets,             -> { where('pets_allowed_cats is true OR pets_allowed_dogs is true') }
+  scope :with_active_web, -> { where('active_web is true AND web_url is not null') }
+  scope :with_active_email, -> { where('active_email is true AND email is not null') }
+  scope :with_application_link, -> { where('show_application_link is true AND online_application_link is not null') }
+  scope :with_schedule_tour, -> { where('schedule_tour_active is true AND schedule_tour_url is not null') }
+  scope :with_pets, -> { where('pets_allowed_cats is true OR pets_allowed_dogs is true') }
 
-  scope :random,                -> (ids) { where(id: ids) }
+  scope :random, -> (ids) { where(id: ids) }
   
   # popular searches
   scope :luxury_rentals, -> { with_amenities(['doorman', 'elevator']) }

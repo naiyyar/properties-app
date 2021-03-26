@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210222152357) do
+ActiveRecord::Schema.define(version: 20210326100709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,8 @@ ActiveRecord::Schema.define(version: 20210222152357) do
     t.string   "amenities",                default: [],                array: true
     t.string   "bedroom_types",            default: [],                array: true
     t.integer  "elevator"
+    t.string   "schedule_tour_url"
+    t.boolean  "schedule_tour_active",     default: true
     t.index ["amenities"], name: "index_buildings_on_amenities", using: :gin
     t.index ["bedroom_types"], name: "index_buildings_on_bedroom_types", using: :gin
     t.index ["building_name"], name: "index_buildings_on_building_name", using: :btree

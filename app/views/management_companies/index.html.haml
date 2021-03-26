@@ -1,30 +1,32 @@
-- if current_user.present?
-  .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-12
-      .pull-right= link_to "Add New Management", new_management_company_path, class: 'btn btn-blue'
-  
-  %h2
-
-.row
-  .col-xs-12.col-sm-12.col-md-12.col-lg-12
-    .table-overflow
-      %table#sortable.table
-        %thead
-          %tr
-            %th Management Name (#{@management_companies.size})
-            %th Website
-            %th Buildings
-            %th{width: "12%"} Rating
-            %th Reviews
-            %th Creation Date
-            %th Edit
-            %th Delete
-            %th{width: '8%'} Availability
-            %th{width: '6%'} Contact
-            %th{width: '6%'} Apply
+- if current_user&.admin?
+  %div{style: 'padding: 0px 10px;'}
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+        .row
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            .pull-right= link_to "Add New Management", new_management_company_path, class: 'btn btn-blue'
         
-        %tbody.table
-          =render partial: 'management_company', collection: @management_companies, as: :company, cache: false
-              
-.text-center
-  = will_paginate @management_companies, renderer: BootstrapPagination::Rails
+        %h2
+
+        .row
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            .table-overflow
+              %table.table
+                %thead
+                  %tr
+                    %th Management Name (#{@management_companies.size})
+                    %th Website
+                    %th Buildings
+                    %th{width: "12%"} Rating
+                    %th Reviews
+                    %th Creation Date
+                    %th Edit
+                    %th Delete
+                    %th{width: '8%'} Availability
+                    %th{width: '6%'} Contact
+                    %th{width: '6%'} Apply
+                    %th{width: '6%'} Tour
+                
+                %tbody.table= render partial: 'management_company', collection: @management_companies, as: :company, cache: false
+                      
+        .text-center= will_paginate @management_companies, renderer: BootstrapPagination::Rails

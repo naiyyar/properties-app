@@ -49,7 +49,7 @@
                     = f.select :neighborhood3, options_for_select(@neighborhood3, f.object.neighborhood3), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhood3.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood3.present?
                     = hidden_field_tag :selected_manually, 'automatic'
 
-            - if current_user and current_user.has_role? :admin
+            - if current_user&.has_role?(:admin)
               .row
                 .col-xs-12.col-sm-12.col-md-12.col-lg-12
                   .form-group
@@ -65,6 +65,14 @@
                     .pull-right
                       %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.show_application_link, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'application_link' } }
                     = f.text_field :online_application_link, class: 'form-control'
+
+              .row
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  .form-group
+                    %label Schedule Tour Website
+                    .pull-right
+                      %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.schedule_tour_active, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'schedule_tour' } }
+                    = f.text_field :schedule_tour_url, class: 'form-control'
 
               .row
                 .col-xs-12.col-sm-12.col-md-6.col-lg-6

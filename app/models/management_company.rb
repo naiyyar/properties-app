@@ -33,7 +33,9 @@ class ManagementCompany < ApplicationRecord
   end
 
   def company_buildings
-  	buildings.reorder(neighborhood: :asc, building_name: :asc, building_street_address: :asc)
+  	@company_buildings ||= buildings.reorder(neighborhood: :asc, 
+  																					 building_name: :asc, 
+  																					 building_street_address: :asc)
   end
 
   def active_email_buildings?
@@ -46,6 +48,10 @@ class ManagementCompany < ApplicationRecord
 
   def apply_link?
     company_buildings.with_application_link.present?
+  end
+
+  def schedule_tour?
+    company_buildings.with_schedule_tour.present?
   end
 
   def cached_buildings
