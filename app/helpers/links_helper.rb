@@ -171,6 +171,12 @@ module LinksHelper
 														target: '_blank'
 	end
 
+	def schedule_tour_link building, klasses
+		link_to 'Schedule Tour', building.schedule_tour_url,
+														class: "btn btn-primary #{klasses} btn-round", 
+														target: '_blank'
+	end
+
 	def contact_leasing_link building, bg_col='', sl_class=''
 		bt_block_class = sl_class.present? ? sl_class : 'btn-block'
 		link_to 'Contact Leasing Team', new_contact_path(building_id: building.id), 
