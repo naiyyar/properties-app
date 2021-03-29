@@ -23,6 +23,10 @@ module CTALinks
     apply_and_availability? && schedule_tour?
   end
 
+  def apply_and_tour_and_leasing?
+    apply_and_leasing? && schedule_tour?
+  end
+
   def apply_and_leasing?
     show_apply_link? && show_contact_leasing?
   end
@@ -37,6 +41,10 @@ module CTALinks
 
   def availability_and_tour?
     availability? && schedule_tour?
+  end
+
+  def apply_and_tour?
+    apply? && schedule_tour?
   end
 
   def availability?
