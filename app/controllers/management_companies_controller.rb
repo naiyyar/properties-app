@@ -19,10 +19,13 @@ class ManagementCompaniesController < ApplicationController
       @buildings.update_all(active_web: params[:active_web])
     elsif params[:apply_link].present?
       @buildings.update_all(show_application_link: params[:apply_link])
-    else
+    elsif params[:active_email].present?
       @buildings.update_all(active_email: params[:active_email])
+    elsif params[:schedule_tour].present?
+      @buildings.update_all(schedule_tour_active: params[:schedule_tour])
     end
-    @management_company.update(updated_at: Time.zone.now)
+    @management_company.update_column('updated_at', Time.zone.now)
+    render json: { success: true }
   end
 
   def load_more_reviews
