@@ -22,7 +22,7 @@ class ManagementCompaniesController < ApplicationController
       @buildings.update_all(show_application_link: params[:apply_link])
     elsif params[:active_email].present?
       @buildings.update_all(active_email: params[:active_email])
-    elsif params[:schedule_tour].present?
+    elsif params[:schedule_tour_active].present?
       @buildings.update_all(schedule_tour_active: params[:schedule_tour])
     end
     @management_company.update_column('updated_at', Time.zone.now)

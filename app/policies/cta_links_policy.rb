@@ -54,7 +54,7 @@ class CTALinksPolicy
   end
 
   def apply?
-    building.show_apply_link? && !(leasing_and_availability?)
+    show_apply_link? && !(leasing_and_availability?)
   end
 
   def leasing_and_availability?

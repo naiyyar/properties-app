@@ -37,7 +37,7 @@ $(document).on 'click', '.apple-switch.company', (e) ->
 	else if(ftype == 'application_link')
 		params = { show_application_link: status }
 	else if(ftype == 'schedule_tour')
-		params = { schedule_tour: status }
+		params = { schedule_tour_active: status }
 	else if(ftype == 'apply')
 		params = { apply_link: status }
 	else
