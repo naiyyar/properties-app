@@ -154,7 +154,8 @@ class HomeController < ApplicationController
                      :locals => {  property:       @property,
                                    size_class:     '',
                                    on_click:       false,
-                                   filter_params:  params[:filter_params]
+                                   filter_params:  params[:filter_params],
+                                   cta_link_policy: CTALinksPolicy.new(@property)
                                 }
                   )
   end

@@ -11,7 +11,6 @@ class Building < ApplicationRecord
   include BuildingReviews
   include Voteable
   include BedRanges
-  include CTALinks
   include Tourable
 
   # Search and filtering

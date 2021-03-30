@@ -139,7 +139,7 @@ module BuildingsHelper
 	end
 
 	def show_slider_cta_links imageable
-		imageable.show_contact_leasing? ? contact_leasing_link(imageable, '', 'btn-slider') : check_availability_link(imageable, 'btn-slider')
+		CTALinksPolicy.new(imageable).show_contact_leasing? ? contact_leasing_link(imageable, '', 'btn-slider') : check_availability_link(imageable, 'btn-slider')
 	end
 
 	def sort_options

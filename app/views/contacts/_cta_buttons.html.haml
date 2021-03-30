@@ -5,39 +5,40 @@
 	
 	- else
 		- listings_count = @listings.blank? ? property.get_listings(filter_params).size : @listings.size
-		- if property.all_three_cta?(listings_count)
+		
+		- if cta_link_policy.all_three_cta?(listings_count)
 			.c-links
 				%section=check_availability_button(property.web_url, 'btn-o')
 				%section=active_listings_button(property, on_click, 'btn-o', listings_count)
 
 			.d-block=contact_leasing_button(property, on_click, 'btn-block')
 
-		- elsif property.availability_and_contacts_cta? && listings_count <= 0
+		- elsif cta_link_policy.availability_and_contacts_cta? && listings_count <= 0
 			.d-block.h-42
 			.c-links
 				%section= contact_leasing_button(property, on_click, 'btn-block')
 				%section=check_availability_button(property.web_url, 'btn-o')
 
-		- elsif property.active_web_url? && listings_count > 0 and !property.has_active_email?
+		- elsif cta_link_policy.active_web_url? && listings_count > 0 and !cta_link_policy.has_active_email?
 			.d-block.h-42
 			.c-links
 				%section=check_availability_button(property.web_url, 'btn-block')
 				%section=active_listings_button(property, on_click, 'btn-o', listings_count)
 
-		- elsif !property.active_web_url? && listings_count > 0 and property.has_active_email?
+		- elsif !cta_link_policy.active_web_url? && listings_count > 0 and cta_link_policy.has_active_email?
 			.d-block.h-42
 			.c-links
 				%section= contact_leasing_button(property, on_click, 'btn-block')
 				%section=active_listings_button(property, on_click, 'btn-o', listings_count)
 
-		- elsif property.active_web_url? && listings_count <= 0 and !property.has_active_email?
+		- elsif cta_link_policy.active_web_url? && listings_count <= 0 and !cta_link_policy.has_active_email?
 			.c-links.h-42
 			.d-block=check_availability_button(property.web_url, 'btn-block')
 
-		- elsif !property.active_web_url? && listings_count <= 0 and property.has_active_email?
+		- elsif !cta_link_policy.active_web_url? && listings_count <= 0 and cta_link_policy.has_active_email?
 			.c-links.h-42
 			.d-block= contact_leasing_button(property, on_click, 'btn-block')
-		- elsif property.active_web_url?
+		- elsif cta_link_policy.active_web_url?
 			.d-block.h-42.invisible=check_availability_button(property.web_url, 'btn-block')
 			.c-links
 		- elsif listings_count > 0

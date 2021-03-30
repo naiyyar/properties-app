@@ -20,6 +20,8 @@ module BuildingsConcern
     set_reviews_data
     # Listing all nearby neighborhoods of the current building's neighborhood
     set_nearby_neighborhoods
+
+    @cta_link_policy = CTALinksPolicy.new(@building)
     
     @price_ranges = @building.price_ranges
     @saved_amounts = @building.broker_fee_savings
