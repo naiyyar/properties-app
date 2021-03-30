@@ -8,6 +8,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies.json
   def index
     @management_companies = ManagementCompany.includes(:buildings)
+                                             .order(name: :asc)
                                              .paginate(:page => params[:page], :per_page => 100)
   end
 
