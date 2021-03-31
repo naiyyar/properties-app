@@ -132,7 +132,7 @@ class ManagementCompaniesController < ApplicationController
     end
 
     def set_company_buildings
-      @buildings = @management_company.company_buildings
+      @buildings = @management_company.cached_buildings
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

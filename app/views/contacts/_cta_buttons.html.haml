@@ -5,6 +5,7 @@
 	
 	- else
 		- listings_count = @listings.blank? ? property.get_listings(filter_params).size : @listings.size
+		- cta_link_policy = CTALinksPolicy.new(property)
 		
 		- if cta_link_policy.all_three_cta?(listings_count)
 			.c-links

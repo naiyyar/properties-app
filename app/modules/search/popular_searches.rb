@@ -33,7 +33,7 @@ module Search
 		
 		def buildings_by_popular_search search_term, buildings
 			filters = {}
-			search_nb = search_term.split('-')[0..-3].join(' ')
+			search_nb = search_hood(search_term)
 			
 			if LUXURY_APTS_NEIGHBORHOODS.include?(search_nb.titleize)
 				buildings = buildings_in_neighborhood(search_nb).luxury_rentals
@@ -147,6 +147,10 @@ module Search
 			end
 
 			return buildings, filters
+		end
+
+		def search_hood search_term
+			search_term.split('-')[0..-3].join(' ')
 		end
 
 		def manhattan_buildings
