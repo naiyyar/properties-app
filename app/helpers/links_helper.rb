@@ -33,15 +33,19 @@ module LinksHelper
 	end
 
 	def active_switch_button object, fbby: '', showbillingurl: false
-		checked = object.active ? 'checked' : ''
-		return "<input type='checkbox' 
-						class='#{switch_button_classes} #{object_class(object)}' 
-						style='margin: 0px;' 
-						data-fbid=#{object.id} 
-						data-fbby='#{fbby}'
-						data-expired=#{object.expired? ? 'expired' : ''}
-						#{checked}
-						data-billingurl=#{billing_url(object) if showbillingurl } />".html_safe
+		content_tag(:input, 
+								nil, 
+								:type => 'checkbox',
+								checked: object.active,
+								:class => "#{switch_button_classes} #{object_class(object)}",
+								:style => 'margin: 0px;',
+								data: { 
+												fbid: object.id, 
+												fbby: fbby, 
+												expired: (object.expired? ? 'expired' : ''),
+												billingurl: (showbillingurl ? billing_url(object) : '')
+											}
+								)
 	end
 
 	def switch_button_classes

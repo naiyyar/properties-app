@@ -19,7 +19,7 @@ $(document).on 'click', '.apple-switch.featured-agent', (e) ->
 
 
 changeFeaturedAgentStatus = (status, elem) ->
-	agent_id = elem.data('agentid')
+	agent_id = elem.data('fbid')
 	$.ajax
 		url: '/featured_agents/'+agent_id
 		dataType: 'json'
@@ -31,7 +31,7 @@ changeFeaturedAgentStatus = (status, elem) ->
 			console.log(response)
 
 setPaymentRenewStatus = (status, elem) ->
-	agent_id = elem.data('agentid')
+	agent_id = elem.data('fbid')
 	$.ajax
 		url: '/featured_agents/'+agent_id
 		dataType: 'json'
