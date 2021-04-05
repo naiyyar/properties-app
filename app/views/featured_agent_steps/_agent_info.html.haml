@@ -22,7 +22,7 @@
 			- if @featured_agent.website.present?
 				%tr
 					%td Profile Website:
-					%td=link_to 'Profile Website', @featured_agent.website, target: '_blank'
+					%td=link_to 'Profile Website', @featured_agent.website, target: '_blank', rel: rel
 			%tr
 				%td Featured In:
 				%td=@featured_agent.try(:neighborhood)

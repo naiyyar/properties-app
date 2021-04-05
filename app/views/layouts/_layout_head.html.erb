@@ -9,10 +9,10 @@
   <% end %>
 </title>
 <meta name="description" content="<%=@meta_desc%>">
-<meta property="og:url" content="https://www.transparentcity.co" />
+<meta property="og:url" content="<%=ENV['SERVER_ROOT']%>" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="<%=@tab_title_text%>" />
-<meta property="og:site_name" content="transparentcity.co" />
+<meta property="og:site_name" content="<%=ENV['DOMAIN_NAME']%>" />
 <meta property="og:description" content="<%=@meta_desc%>" />
 <%= javascript_include_tag js_path %>
 <%= favicon_link_tag 'favicon.png' %>
@@ -20,4 +20,4 @@
 <link rel="preload" as='font' type="font/woff2" crossorigin="anonymous" href="<%=font_path('OpenSans-SemiBold-Latin600.woff2')%>">
 <link rel="preload" as='font' type="font/woff2" crossorigin="anonymous" href="<%=font_path('OpenSans-Regular-Latin400.woff2')%>">
 <link rel="preload" as='font' type="font/woff2" crossorigin="anonymous" href="<%=asset_path('fontawesome-webfont.woff2')%>">
-<link rel="alternate" href="https://transparentcity.com/" hreflang="en-US"/>
+<link rel="alternate" href="<%=ENV['SERVER_ROOT']%>" hreflang="en-US"/>

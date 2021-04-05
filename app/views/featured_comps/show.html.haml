@@ -28,6 +28,6 @@
                 %td.star-sm= rating_for building, 'building', disabled_after_rate: true, readonly: true 
                 %td= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id)
                 %td
-                  = link_to globe_icon_helper, building.web_url, target: '_blank' if building.web_url.present?
+                  = link_to globe_icon_helper, building.web_url, target: '_blank', rel: rel if building.web_url.present?
                 %td= link_to 'Disconnect', disconnect_building_featured_comp_path(id: @featured_comp.id, building_id: building.id), data: {confirm: 'Are you sure you want to disconnect this building?'}, class: 'text-danger'
                 

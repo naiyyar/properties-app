@@ -1,6 +1,8 @@
 @import "bootstrap-custom";
 @import "awesome-bootstrap-checkbox";
 
+$hbo-color: #2272e2;
+
 a:active, a:hover, a:focus { 
   text-decoration: none;
 }
@@ -94,13 +96,13 @@ body {
 
 .btn-primary {
   color: #fff;
-  background-color: #2b78e4;
-  border-color: #2b78e4;
+  background-color: $hbo-color;
+  border-color: $hbo-color;
 }
 .btn-o.btn-primary {
-  color: #2b78e4;
+  color: $hbo-color;
   background-color: transparent;
-  border-color: #2b78e4;
+  border-color: $hbo-color;
 }
 .no-touch .btn-primary:hover,
 .btn-primary:focus,
@@ -108,8 +110,8 @@ body {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #2b78e4;
-  border-color: #2b78e4;
+  background-color: $hbo-color;
+  border-color: $hbo-color;
 }
 .btn-primary:active,
 .btn-primary.active,

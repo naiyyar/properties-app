@@ -1,5 +1,7 @@
 @import "fonts";
 
+$hbo-color: #2272e2;
+
 *:focus {
     outline: none;
 }
@@ -34,15 +36,15 @@
 #search-row .btn-dp-toggle button, 
 #search-row .btn-dp-toggle.closed button{
     background-color: transparent;
-    color: #2b78e4; 
-    border-color: #2b78e4;
+    color: $hbo-color; 
+    border-color: $hbo-color;
 }
 
 #search-row .btn-dp-toggle.open button, 
 #search-row .btn-dp-toggle:hover button{
-  background-color: #2b78e4;
+  background-color: $hbo-color;
   color: #fff; 
-  border-color: #2b78e4;
+  border-color: $hbo-color;
 }
 
 .address_font{
@@ -136,7 +138,7 @@ a.dt-card-link {
   display: none;
 }
 .sorted-by{
-  color: #2b78e4;
+  color: $hbo-color;
 }
 .building-detail-card{
   width: 100%;
@@ -248,7 +250,7 @@ form fieldset, .smart-form fieldset{
 }
 
 .hyper-link{
-    color: #2b78e4 !important;
+    color: #2272E2 !important;
 }
 
 .font-blue{
@@ -610,25 +612,25 @@ a.link_underlined:hover, .underline{
 .btn-o.btn-green:active,
 .btn-o.btn-green.active,
 .open > .dropdown-toggle.btn-o.btn-green {
-    background-color: #2b78e4;
+    background-color: $hbo-color;
     color: #fff;
 }
 
 .btn-blue {
-    background-color: #2b78e4;
+    background-color: $hbo-color;
     color: #fff;
 }
 .btn-o.btn-blue {
     background-color: transparent;
-    color: #2b78e4;
-    border-color: #2b78e4;
+    color: $hbo-color;
+    border-color: $hbo-color;
 }
 .no-touch .btn-blue:hover,
 .btn-blue:focus,
 .btn-blue:active,
 .btn-blue.active,
 .open > .dropdown-toggle.btn-blue {
-    background-color: #2b78e4;
+    background-color: $hbo-color;
     color: #fff !important;
 }
 .no-touch .btn-o.btn-blue:hover,
@@ -636,7 +638,7 @@ a.link_underlined:hover, .underline{
 .btn-o.btn-blue:active,
 .btn-o.btn-blue.active,
 .open > .dropdown-toggle.btn-o.btn-blue {
-    background-color: #2b78e4;
+    background-color: $hbo-color;
     color: #fff!important;
 }
 .btn-facebook {
@@ -1440,13 +1442,13 @@ a.card h2, div.card h2 {
     text-decoration: none;
 }
 .no-touch a.card:hover h2, .no-touch div.card:hover h2 {
-    color: #2b78e4;
+    color: $hbo-color;
     text-decoration: none;
 }
 a.card .cardAddress, div.card .cardAddress {
     font-size: 12px;
     line-height: 13px;
-    color: #999;
+    color: #757575;
     padding: 0 0 5px 10px;
     margin: 0 10px 0 0;
     overflow: hidden;
@@ -2139,7 +2141,7 @@ select.custom-arrow{
     #header-mob .col-xs-6.h-filter{
         padding-right: 0px;
         padding-left: 0px;
-        background: #2b78e4;
+        background: $hbo-color;
     }
     #header-mob .col-xs-6.hood{
         width: 46%;

@@ -11,14 +11,14 @@
 
         = tour_icon_helper if show_tour_icon?(object) && object.video_tours.any?
 
-      %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 270px;', data: { objectid: "#{object.id}", view_type: 'split', path: show_path, resource: resource } }
+      %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 270px;', data: { objectid: object.id, view_type: 'split', path: show_path, resource: resource } }
         %li
           = link_to show_path, style: 'cursor: pointer;' do
-            .h-lg.bg-size-cover.bg-pos-30{style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: "#{first_image.id}" } }
+            .h-lg.bg-size-cover.bg-pos-center{ style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: first_image.id } }
 
         - if images_count > 1
-          - 1.upto(images_count-1) do |count|
-            %li{data: { listindex: "#{count}" } }
+          - 1.upto(images_count - 1) do |count|
+            %li{data: { listindex: count } }
 - else
   %a{ href: show_path, style: 'cursor: pointer;' }
     = featured_badge_helper if @similar_properties.present? || object.featured?

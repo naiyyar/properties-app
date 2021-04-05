@@ -42,7 +42,7 @@
                   / = rating_for building, "building", disabled_after_rate: true, readonly: true
                 %td= link_to "Reviews(#{building.reviews_count})", building_reviews_path(building_id: building.id)
                 %td
-                  = link_to globe_icon_helper, building.web_url, target: '_blank' if building.web_url.present?
+                  = link_to globe_icon_helper, building.web_url, target: '_blank', rel: rel if building.web_url.present?
                 %td= building.uploads.with_doc.count
                 %td= link_to building.featured_comps.count, featured_by_building_path(building)
                 - if current_user

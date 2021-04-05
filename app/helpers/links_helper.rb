@@ -148,12 +148,12 @@ module LinksHelper
 			link_to check_availability, 
 						  web_url,
 						  class: "btn btn-primary #{klass} btn-round ca",
-						  target: '_blank'
+						  target: '_blank', rel: rel
 		else
 			link_to check_availability, 
 						  web_url,
 						  class: "btn btn-primary #{klass} btn-round ca",
-						  onclick: "window.open(this.href,'_blank');return false;"
+						  onclick: "window.open(this.href,'_blank');return false;", rel: rel
 		end
 	end
 
@@ -172,13 +172,13 @@ module LinksHelper
 	def apply_online_link building
 		link_to 'Apply Online', building.online_application_link, 
 														class: 'btn btn-primary btn-o btn-block font-bolder btn-round', 
-														target: '_blank'
+														target: '_blank', rel: rel
 	end
 
 	def schedule_tour_link building, klasses
 		link_to 'Schedule Tour', building.schedule_tour_url,
 														class: "btn btn-primary #{klasses} btn-round", 
-														target: '_blank'
+														target: '_blank', rel: rel
 	end
 
 	def contact_leasing_link building, bg_col='', sl_class=''
@@ -223,5 +223,9 @@ module LinksHelper
 
 	def btn_default_h
 		'btn btn-default'
+	end
+
+	def rel
+		'noreferrer'
 	end
 end
