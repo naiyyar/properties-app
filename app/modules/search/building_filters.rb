@@ -12,22 +12,26 @@ module Search
       @buildings = filter_by_beds      if @beds.present?
       
       # listings filters
-      listings_filters = filter_params[:listings]
-      if listings_filters.present?
-        listing_beds = listings_filters[:listing_bedrooms]
-        @amenities   = listings_filters[:amenities]
-        @max_price   = listings_filters[:max_price].to_i
-        @max_price   = Listing::MAX_RENT if @max_price == 15500
-        @min_price   = listings_filters[:min_price]
-        @buildings   = @buildings.with_active_listing.join_with_listings
-        @buildings   = @buildings.with_listings_bed(listing_beds) if listing_beds.present?
-        @buildings   = filter_by_listing_prices                   if @min_price.present? && @max_price.present?
-        @buildings   = buildings_with_listing_amenities           if listing_amenity?
+      @listings_filters = filter_params[:listings]
+      if @listings_filters.present?
+        @amenities = @listings_filters[:amenities]
+        @max_price = @listings_filters[:max_price].to_i
+        @max_price = Listing::MAX_RENT if @max_price == 15500
+        @min_price = @listings_filters[:min_price]
+        @buildings = @buildings.with_active_listing.join_with_listings
+        @buildings = @buildings.with_listings_bed(listing_beds) if listing_beds.present?
+        @buildings = filter_by_listing_prices if @min_price.present? && @max_price.present?
+        @buildings = buildings_with_listing_amenities if listing_amenity?
       end 
       @buildings
     end
 
     private
+
+    def listing_beds
+      return @listings_filters[:listing_bedrooms].values unless @listings_filters[:listing_bedrooms].kind_of?(Array)
+      @listings_filters[:listing_bedrooms]
+    end
     
     def has_building_amenities?
       (Building::AMENITIES & @amenities.map(&:to_sym)).present?
