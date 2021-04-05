@@ -51,7 +51,7 @@ module Filter
 
 	  def listing_beds
 	  	return @filter_params[:listing_bedrooms] unless listings_params.present?
-	  	return listings_params[:listing_bedrooms].values unless listings_params[:listing_bedrooms].kind_of?(Array)
+	  	return listings_params[:listing_bedrooms]&.values unless listings_params[:listing_bedrooms].kind_of?(Array)
 			listings_params[:listing_bedrooms]
 		end
 

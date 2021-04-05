@@ -29,7 +29,7 @@ module Search
     private
 
     def listing_beds
-      return @listings_filters[:listing_bedrooms].values unless @listings_filters[:listing_bedrooms].kind_of?(Array)
+      return @listings_filters[:listing_bedrooms]&.values unless @listings_filters[:listing_bedrooms].kind_of?(Array)
       @listings_filters[:listing_bedrooms]
     end
     
