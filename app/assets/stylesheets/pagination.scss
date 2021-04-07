@@ -31,6 +31,18 @@
   border-color: #2c78e4 !important;
 }
 
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #757575;
+  background-color: #fff;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
 @media screen and (max-width: 767px) {
   .screen-sm {
     .pages-container{
