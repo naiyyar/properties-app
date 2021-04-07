@@ -22,9 +22,8 @@
 }
 
 .pop-list{
-    list-style: none;
     padding: 0px;
-    li{
+    .parent{
         padding: 2px 0px;
         font-size: 14px;
         a:hover{

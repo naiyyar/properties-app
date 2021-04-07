@@ -1,47 +1,47 @@
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
-  %ul.pop-list
+  .pop-list
     - area = 'MANHATTAN'
     %b#lower_manhattan
       = search_by_neighborhood_link('Lower Manhattan', area)
     .child-borough-container
       - NYCBorough.lower_manhattan_sub_borough.each do |borough|
         - if borough != 'West Village'
-          %li.parent{'data-parent' => 'lower_manhattan'}
+          .parent{'data-parent' => 'lower_manhattan'}
             = search_by_neighborhood_link(borough, area)
             - if borough == 'Greenwich Village'
               %ul
                 %li{'data-parent' => 'lower_manhattan'}= search_by_neighborhood_link('West Village', area)
     %b#midtown= search_by_neighborhood_link('Midtown', area)
     .child-borough-container
-      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Chelsea', area)
-      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Flatiron District', area)
-      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Gramercy Park', area)
-      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link("Hell's Kitchen", area)
-      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Kips Bay', area)
+      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Chelsea', area)
+      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Flatiron District', area)
+      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Gramercy Park', area)
+      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link("Hell's Kitchen", area)
+      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Kips Bay', area)
 
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
-  %ul.pop-list
+  .pop-list
     .child-borough-container
-      %li.parent{'data-parent' => 'midtown'}
+      .parent{'data-parent' => 'midtown'}
         = search_by_neighborhood_link('Midtown East', area)
         %ul
           %li{'data-parent' => 'midtown'}= search_by_neighborhood_link('Sutton Place', area)
-      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Midtown West', area)
-      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Murray Hill', area)
-      %li.parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Roosevelt Island', area)
+      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Midtown West', area)
+      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Murray Hill', area)
+      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Roosevelt Island', area)
     %b#uptown_manhattan
       %a{href: '#'}
         Uptown Manhattan (
         %span>= uptown_count
         )
     .child-borough-container
-      %li.parent{'data-parent' => 'uptown_manhattan'}
+      .parent{'data-parent' => 'uptown_manhattan'}
         = search_by_neighborhood_link('Upper East Side', area)
         %ul
           %li{'data-parent' => 'uptown_manhattan'}= search_by_neighborhood_link('Carnegie Hill', area)
           %li{'data-parent' => 'uptown_manhattan'}= search_by_neighborhood_link('Lenox Hill', area)
           %li{'data-parent' => 'uptown_manhattan'}= search_by_neighborhood_link('Yorkville', area)
-      %li.parent{'data-parent' => 'uptown_manhattan'}
+      .parent{'data-parent' => 'uptown_manhattan'}
         = search_by_neighborhood_link('Upper West Side', area)
         %ul
           %li{'data-parent' => 'uptown_manhattan'}= search_by_neighborhood_link('Lincoln Square', area)
@@ -49,22 +49,22 @@
     
     %b#upper_manhattan= search_by_neighborhood_link('Upper Manhattan', area)
     .child-borough-container
-      %li.parent{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('East Harlem', area)
-      %li.parent{'data-parent' => 'upper_manhattan'}
+      .parent{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('East Harlem', area)
+      .parent{'data-parent' => 'upper_manhattan'}
         = search_by_neighborhood_link('Harlem', area)
         %ul
           %li{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('South Harlem', area)
 
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
-  %ul.pop-list
+  .pop-list
     .child-borough-container
-      %li.parent{'data-parent' => 'upper_manhattan'}
+      .parent{'data-parent' => 'upper_manhattan'}
         %ul
           %li{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Central Harlem', area)
           %li{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Hamilton Heights', area)
-      %li.parent{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Inwood', area)
-      %li.parent{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Morningside Heights', area)
-      %li.parent{'data-parent' => 'upper_manhattan'}
+      .parent{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Inwood', area)
+      .parent{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Morningside Heights', area)
+      .parent{'data-parent' => 'upper_manhattan'}
         = search_by_neighborhood_link('Washington Heights', area)
         %ul
           %li.parent{'data-parent' => 'upper_manhattan'}= search_by_neighborhood_link('Hudson Heights', area)
@@ -72,33 +72,33 @@
       %b#brooklyn
         - area = 'Brooklyn'
         = link_to "Brooklyn (#{brooklyn_count})", '/no-fee-apartments-nyc-city/brooklyn-ny'
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Bedford-Stuyvesant', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Boerum Hill', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Brooklyn Heights', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Bushwick', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Clinton Hill', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Crown Heights', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Downtown Brooklyn', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Dumbo', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Fort Greene', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Greenpoint', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Bedford-Stuyvesant', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Boerum Hill', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Brooklyn Heights', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Bushwick', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Clinton Hill', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Crown Heights', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Downtown Brooklyn', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Dumbo', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Fort Greene', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Greenpoint', area)
       
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
-  %ul.pop-list
+  .pop-list
     .child-borough-container
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Park Slope', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Sheepshead Bay', area)
-      %li.parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Williamsburg', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Park Slope', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Sheepshead Bay', area)
+      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Williamsburg', area)
     
     - area = 'Queens'
     %b#queens= link_to "Queens (#{queens_count})", '/no-fee-apartments-nyc-city/queens-ny'
     .child-borough-container
       - NYCBorough.queens_sub_borough.each do |borough|
-        %li.parent{'data-parent' => 'queens'}= search_by_neighborhood_link(borough, area)
+        .parent{'data-parent' => 'queens'}= search_by_neighborhood_link(borough, area)
     %b#bronx
       - area = 'Bronx'
       = link_to "Bronx (#{bronx_count})", '/no-fee-apartments-nyc-city/bronx-ny'
     .child-borough-container
-      %li.parent{'data-parent' => 'bronx'}= search_by_neighborhood_link('East Bronx', area)
-      %li.parent{'data-parent' => 'bronx'}= search_by_neighborhood_link('Morris Heights', area)
-      %li.parent{'data-parent' => 'bronx'}= search_by_neighborhood_link('Riverdale', area)
+      .parent{'data-parent' => 'bronx'}= search_by_neighborhood_link('East Bronx', area)
+      .parent{'data-parent' => 'bronx'}= search_by_neighborhood_link('Morris Heights', area)
+      .parent{'data-parent' => 'bronx'}= search_by_neighborhood_link('Riverdale', area)
