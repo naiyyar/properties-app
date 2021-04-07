@@ -7,11 +7,10 @@
 #content.searched-properties{style: "#{'width: 55%;' unless mobile}", class: (custom_search? && mobile) ? 'invisible' : nil}
   .tabsWidget.tabsWidgetSearch{style: "#{@buildings.blank? ? 'height: 60vh' : ''}"}
     - unless mobile
-      %ul.nav.nav-tabs1.nav-justified.hidden-xs{role: 'tablist'}
-        %li.active
-          .text-center{style: 'padding: 8px 0px;'}
-            %h1.font-21.font-bold{style: 'margin: 2px;'}= split_view_header
-            %p.font-21{style: spv_count_header_style}= "#{@listings_count.to_i} Rentals | #{@buildings_count.to_i} Buildings"
+      .search-cards-header{style: 'padding: 8px 0px;width: 100%;margin: 0;'}
+        .text-center
+          %h1.font-21.font-bold{style: 'margin: 2px;'}= split_view_header
+          %p.font-21{style: spv_count_header_style}= "#{@listings_count.to_i} Rentals | #{@buildings_count.to_i} Buildings"
       
     .tab-content.tab-scroll11{style: 'background-color: #f3f3f3;'}
       #buildings.tab-pane.fade.in.active
