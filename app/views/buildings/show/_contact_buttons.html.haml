@@ -12,7 +12,7 @@
 			.col-lg-12.col-sm-12.col-xs-12.margin-top-10= contact_leasing_link(@building)
 
 		- elsif @cta_link_policy.availability_tour_and_leasing?
-			.col-lg-12.col-sm-12.col-xs-12.margin-top-10{style: 'padding-right: 0px;'}= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
+			.col-lg-12.col-sm-12.col-xs-12.margin-top-10= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
 			.col-lg-12.col-sm-12.col-xs-12.margin-top-10= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
 			.col-lg-12.col-sm-12.col-xs-12.margin-top-10= contact_leasing_link(@building)
 

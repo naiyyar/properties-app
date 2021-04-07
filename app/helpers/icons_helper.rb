@@ -1,6 +1,6 @@
 module IconsHelper
 	def featured_badge_helper
-	  content_tag 'h4', '', class: 'comp featured round' do
+	  content_tag 'div', '', class: 'comp featured round' do
 	  	span_tag(klasses: 'icon-badge font-14')
 	  end
 	end
