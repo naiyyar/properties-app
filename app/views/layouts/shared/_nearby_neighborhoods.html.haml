@@ -1,15 +1,15 @@
 - if nearby_nbs.present?
 	.show-section{style: 'margin-bottom: 30px;'}
 		%h3= "Nearby #{@neighbohood}"
-		%ul.pop-list
+		.pop-list
 			- nearby_nbs.each_pair do |key, nb_hash|
 				- sub_neighbohoods = nb_hash[:hoods]
 				- area = nb_hash[:area]
-				%li
+				.parent
 					- if ['Queens','Bronx','Brooklyn'].include?(key)
 						= link_to nearby_link_text(area), "/no-fee-apartments-nyc-city/#{key.downcase}-ny", class: 'hyper-link'
 					- else
 						= link_to nearby_link_text(key), search_link(key, area), class: 'hyper-link'
 				
 				- (sub_neighbohoods).each do |neighbohood|
-					%li=link_to nearby_link_text(neighbohood), search_link(neighbohood, area), class: 'hyper-link'
+					.parent=link_to nearby_link_text(neighbohood), search_link(neighbohood, area), class: 'hyper-link'

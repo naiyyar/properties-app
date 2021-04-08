@@ -15,7 +15,8 @@ module UploadsHelper
 	def seel_all_link object, images_count, see_all_class=nil
 		link_to see_all_link_title(images_count), 
 						see_all_url(object), 
-						class: "btn btn-o btn-sm #{see_all_class}"
+						class: "btn btn-o btn-sm #{see_all_class}",
+						style: 'color: #2272e2;'
 	end
 
 	def see_all_link_title images_count

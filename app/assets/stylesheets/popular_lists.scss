@@ -41,7 +41,8 @@
             margin-bottom: -1px;
         }
     }
-    #home-content-wrapper .neighborhood-container h2,
+    #home-content-wrapper 
+    .neighborhood-container h2,
     .popular-searches-container h2 {
         font-size: 22px !important;
     }
@@ -55,17 +56,16 @@
     .pop-list {
         background-color: #fff;
         margin-bottom: 0px;
-        li {
+        .parent {
             padding: 6px !important;
             font-size: 16px !important;
+            border-bottom: 1px solid #ddd !important;
+            margin: 0px;
             a {
                 font-size: 18px !important;
             }
         }
-        li.parent {
-            border-bottom: 1px solid #ddd !important;
-            margin: 0px;
-        }
+        
         div.child-borough-container {
             border-left: 1px solid #ddd;
             border-right: 1px solid #ddd;

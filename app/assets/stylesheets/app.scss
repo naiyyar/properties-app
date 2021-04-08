@@ -17,6 +17,10 @@ $hbo-color: #1D6FE2;
   transition: none !important;
 }
 
+.text-muted{
+  color: #757575 !important;
+}
+
 .btn.btn-primary, 
 .btn.btn-blue, 
 .btn.btn-success, 
@@ -642,6 +646,13 @@ a.link_underlined:hover, .underline{
     background-color: $hbo-color;
     color: #fff!important;
 }
+
+.btn-warning {
+  color: #fff;
+  background-color: #A5660D !important;
+  border-color: #eea236;
+}
+
 .btn-facebook {
     background-color: #43609c;
     color: #fff;
