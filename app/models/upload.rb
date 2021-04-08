@@ -115,7 +115,7 @@ class Upload < ApplicationRecord
     return no_image if uploads.blank?
     image_obj = uploads.first
     if image_obj.present?
-      image_obj.image_file_name.present? ? image_obj.uploaded_img_url : no_image
+      image_obj.image_file_name.present? ? image_obj.uploaded_img_url(:original) : no_image
     end
   end
 

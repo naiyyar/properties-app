@@ -14,7 +14,7 @@
       %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 270px;', data: { objectid: object.id, view_type: 'split', path: show_path, resource: resource } }
         %li
           %a{href: show_path, style: 'cursor: pointer;'}
-            .h-lg.bg-size-cover.bg-pos-center{ style: "background-image: url(#{first_image.uploaded_img_url});", data: { imageid: first_image.id } }
+            .h-lg.bg-size-cover.bg-pos-center{ style: "background-image: url(#{first_image.uploaded_img_url(:original)});", data: { imageid: first_image.id } }
 
         - if images_count > 1
           - 1.upto(images_count - 1) do |count|
