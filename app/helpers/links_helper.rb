@@ -189,7 +189,7 @@ module LinksHelper
 	end
 
 	def check_availability
-		'<b>Check Availability</b>'.html_safe
+		'Check Availability'
 	end
 
 	def action_link_styles
