@@ -37,6 +37,15 @@
       dragging = false;
   });
 
+  // When not using anchor tag
+  //
+  $('.clickable').click(function(e){
+      if(e.target.tagName !== 'A'){
+        window.location = $(this).attr('data-href');
+        return false;
+      }
+  });
+
   // calculations for elements that changes size on window resize
   var windowResizeHandler = function() {
       windowHeight = window.innerHeight;

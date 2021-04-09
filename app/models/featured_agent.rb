@@ -50,6 +50,8 @@ class FeaturedAgent < ApplicationRecord
   def featured?
     false
   end
+  
+  def property_name_or_address;end
 
   private
   def check_active_status

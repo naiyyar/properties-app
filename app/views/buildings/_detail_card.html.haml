@@ -15,15 +15,15 @@
         %h4.comp.featured.round Featured
       .bg-size-cover.h-lg{ style: "background-image: url(#{feature_comp_bg_img_url(@last_uploads)});" }
     
-    =render 'home/partials/building_header', building: building
+    = render 'home/partials/building_header', building: building
 
   %div{style: 'float: right; margin-top: -43px;'}= render 'buildings/favourite', building: building
   
-  %div.font-14{style: 'padding: 0px 0px 0px 11px; height: 22px; white-space: nowrap;'}= render 'home/building_detail', building: building
+  .clickable{'data-href' => @show_path, style: 'color: #000; display: block;', 'area-label' => building.property_name_or_address }
+    .font-14{style: 'padding: 0px 0px 0px 11px; height: 22px; white-space: nowrap;'}= render 'home/building_detail', building: building
   
-  = link_to @show_path, style: 'color: #000', 'area-label' => building.property_name_or_address do
     .pb-8.font-14{style: 'margin-left: 10px;'}=set_bed_ranges(building, @filter_params)
-    
-    .cta_buttons{id: "cta-links#{building.id}"}
+  
+  .cta_buttons{id: "cta-links#{building.id}"}
       
 .clearfix
