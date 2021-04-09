@@ -101,7 +101,8 @@ module BuildingsHelper
 												remote: remote(object), class: fav_classes(object), 
 												title: heart_link_title(object), 
 												data: { objectid: object.id }, 
-												method: :post
+												method: :post,
+												'area-label' => heart_link_title(object)
 	end
 
 	def fav_classes object

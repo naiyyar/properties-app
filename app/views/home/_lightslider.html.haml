@@ -2,7 +2,7 @@
   - resource = object.class.to_s.tableize
   .item
     .clearfix{ style: 'width:100%;' }
-      = link_to show_path, style: 'cursor: pointer;' do
+      = link_to show_path, style: 'cursor: pointer;', 'aria-label' => object.property_name_or_address do
         = featured_badge_helper if @similar_properties.present? || object.featured?
         
         .lightslider-slides-counts.round
@@ -13,13 +13,13 @@
 
       %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 270px;', data: { objectid: object.id, view_type: 'split', path: show_path, resource: resource } }
         %li
-          %a{href: show_path, style: 'cursor: pointer;'}
+          %a{href: show_path, style: 'cursor: pointer;', 'aria-label' => object.property_name_or_address}
             .h-lg.bg-size-cover.bg-pos-center{ style: "background-image: url(#{first_image.uploaded_img_url(:original)});", data: { imageid: first_image.id } }
 
         - if images_count > 1
           - 1.upto(images_count - 1) do |count|
             %li{data: { listindex: count } }
 - else
-  %a{ href: show_path, style: 'cursor: pointer;' }
+  %a{ href: show_path, style: 'cursor: pointer;', 'aria-label' => object.property_name_or_address }
     = featured_badge_helper if @similar_properties.present? || object.featured?
     .bg-size-cover.h-lg.bg-pos-center{style: "background-image: url(#{image_url('no-photo.jpg') })"}
