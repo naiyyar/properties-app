@@ -46,6 +46,13 @@
       }
   });
 
+  // When not using anchor tag
+  //
+  $('.check_availability_mob').click(function(e){
+    window.open(this.href, '_blank');
+    return false;
+  });
+
   // calculations for elements that changes size on window resize
   var windowResizeHandler = function() {
       windowHeight = window.innerHeight;

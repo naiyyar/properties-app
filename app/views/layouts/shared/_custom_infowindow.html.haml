@@ -2,7 +2,7 @@
   - @show_path = object_show_path(property)
   - thumb_icon = "<span class='fa fa-thumbs-up recommended'></span>"
   - if property_type == 'Building'
-    = link_to @show_path, style: 'color: #333;' do
+    = link_to @show_path, style: 'color: #333;', 'area-label' => property.building_name_or_address do
       .infoW-property-info{'data-href' => "#{@show_path}"}
         .propImg
           = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?
@@ -21,12 +21,14 @@
           
           %a{'data-objectid' => "#{property.id}", href: 'javascript:;', title: 'Save', class: "favourite save_link_#{property.id} #{fav_color_class}", onclick: click_action, onmouseover: hover_action}
             %span.fa.fa-heart
+        = content_tag 'div', heart_icon, class: "save_link_#{property.id} favourite #{saved_color_class(property)}", onclick: "openSuModal(event,#{property.id});" if !current_user.present?
         
-        = link_to heart_icon, 'javascript:;', class: "save_link_#{property.id} favourite #{fav_color_class}", onclick: "openSuModal(event, #{property.id})" if !current_user.present?
+        / = link_to heart_icon, 'javascript:;', class: "save_link_#{property.id} favourite #{fav_color_class}", onclick: "openSuModal(event, #{property.id})" if !current_user.present?
 
 
-    = link_to @show_path do
-      %div{style: 'margin-left: 6px;'}= render 'home/building_detail', building: property
+    = link_to @show_path, 'area-label' => property.building_name_or_address do
+      %p{style: 'margin: 0px 0px 0px 6px; padding: 0px;'}= render 'home/building_detail', building: property
+    
     - property.act_listings = @listings
     - property.min_price    = @listings&.first&.rent
     - property.max_price    = @listings.with_rent&.last&.rent
@@ -36,7 +38,7 @@
     .infoButtons.no-padding= render 'contacts/cta_buttons', property: property, size_class: 'btn-xs btn-block', on_click: true
   
   - else
-    = link_to @show_path, style: 'color: #333;' do
+    = link_to @show_path, style: 'color: #333;', 'area-label' => property.building_name_or_address do
       .infoW-property-info{'data-href' => "#{@show_path}"}
         .propImg
           = image_tag image, alt: 'Image', style: 'width: 100% !important; height: 137px;' if image.present?

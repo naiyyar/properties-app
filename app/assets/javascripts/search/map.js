@@ -92,18 +92,12 @@ var ready = function(){
       if(props != null){
         markers_added = true;
         $.each(props, function(i,prop) {
-            var default_icon = ''
-            var price  = (prop.price == '' || prop.price == null) ? 0 : prop.price
-              // default icon only when no price info available
-              default_icon = new google.maps.MarkerImage(markerIcon(price, 'red'),
-                    null,null,null, null)
-
             var latlng = new google.maps.LatLng(prop.latitude, prop.longitude);
             var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                icon: default_icon,
-                draggable: false
+              position: latlng,
+              map: map,
+              icon: setMarkerImage(prop_price(prop)),
+              draggable: false
             });
             bounds.extend(marker.position);
             

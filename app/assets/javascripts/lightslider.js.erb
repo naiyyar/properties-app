@@ -978,6 +978,7 @@
         
         //Custom
         $el.fetchAssets = function(){
+            var area_label  = this.data('label');
       		var object_id   = this.data('objectid');
             var resource    = this.data('resource');
             var view_type   = this.data('viewType');
@@ -1001,7 +1002,7 @@
                             var orig_img = upload.orig_image_url;
                             var left_item = '';
                             if(view_type == 'split'){
-                        	    left_item = '<a href="'+path+'"><div class="bg-size-cover h-lg" style="background-image: url('+orig_img+');"></div></a>';
+                        	    left_item = '<a href="'+path+'" area-label="'+area_label+'"><div class="bg-size-cover h-lg" style="background-image: url('+orig_img+');"></div></a>';
                             }else{
                                 left_item = '<a href="'+orig_img+'" data-fancybox="gallery" data-caption="'+date_uploaded+'"><div class="bg-size-cover" style="background-image: url('+orig_img+');"></div></a>';
                             }

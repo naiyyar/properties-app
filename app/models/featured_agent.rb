@@ -51,7 +51,9 @@ class FeaturedAgent < ApplicationRecord
     false
   end
   
-  def property_name_or_address;end
+  def property_name_or_address
+    full_name
+  end
 
   private
   def check_active_status

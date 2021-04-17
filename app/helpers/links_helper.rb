@@ -152,8 +152,7 @@ module LinksHelper
 		else
 			link_to check_availability, 
 						  web_url,
-						  class: "btn btn-primary #{klass} btn-round ca",
-						  onclick: "window.open(this.href,'_blank');return false;", rel: rel
+						  class: "btn btn-primary #{klass} btn-round ca check_availability_mob", rel: rel
 		end
 	end
 

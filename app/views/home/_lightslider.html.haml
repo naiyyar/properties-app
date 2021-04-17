@@ -11,7 +11,7 @@
 
         = tour_icon_helper if show_tour_icon?(object) && object.video_tours.any?
 
-      %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 270px;', data: { objectid: object.id, view_type: 'split', path: show_path, resource: resource } }
+      %ul.gallery.list-unstyled{ id: "image-gallery#{object.id}", style: 'height: 270px;', data: { objectid: object.id, view_type: 'split', path: show_path, resource: resource, label: object.property_name_or_address } }
         %li
           %a{href: show_path, style: 'cursor: pointer;', 'aria-label' => object.property_name_or_address}
             .h-lg.bg-size-cover.bg-pos-center{ style: "background-image: url(#{first_image.uploaded_img_url(:original)});", data: { imageid: first_image.id } }
