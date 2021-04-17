@@ -21,10 +21,10 @@ function loadMarkerWindow(building_id, map, marker, current_object_type){
 function setMarkerImage(price, color='red'){
   return {
           url: markerIcon(price, color),
-          size: new google.maps.Size(71, 71),
+          // size: new google.maps.Size(71, 71),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(25, 40)
+          scaledSize: new google.maps.Size(50, 50)
         };
 }
 
