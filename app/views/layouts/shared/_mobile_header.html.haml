@@ -1,14 +1,14 @@
 #header-mob.split-view-header{class: "sm-#{action_name} sm-#{action_name}_#{controller_name} #{mob_header_bg_color_class_helper}"}
   .row{style: 'margin-right: 0px;'}
     .col-xs-1
-      %a.navHandler{href: 'javascript:void(0)'}
+      %a.navHandler{href: 'javascript:void(0)', 'aria-label'=> 'Nav Handler'}
         %span.fa.fa-bars
     
     %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
       - if show_and_search_page_header?
         .split-view-seach{class: "#{search_bar(:hidden)}"}
           - unless browser.device.mobile?
-            = render partial: 'home/search_form'
+            = render 'home/search_form'
           - else
             .apt-search.other#apt-search-form
               = icon_search_helper(other_class: 'hidden-xs')

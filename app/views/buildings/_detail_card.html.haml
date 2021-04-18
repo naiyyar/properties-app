@@ -17,7 +17,7 @@
     
     = render 'home/partials/building_header', building: building
 
-  %div{style: 'float: right; margin-top: -43px;'}= render 'buildings/favourite', building: building
+  %div{style: 'float: right; margin-top: -37px;'}= render 'buildings/favourite', building: building
   
   .clickable{'data-href' => @show_path, style: 'color: #000; display: block;', 'area-label' => building.property_name_or_address }
     .font-14{style: 'padding: 0px 0px 0px 11px; height: 22px; white-space: nowrap;'}= render 'home/building_detail', building: building

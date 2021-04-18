@@ -1,4 +1,4 @@
-<%= render partial: 'layouts/home/header' %>
+<%= render 'layouts/home/header' %>
 <% unless home_page? %>
 	<% unless screen_class == 'screen-sm' %>
   	<div id="search-row" class="search <%=search_bar(:hidden) %>" style="margin-top: 60px;">

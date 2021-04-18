@@ -102,7 +102,8 @@ module BuildingsHelper
 												title: heart_link_title(object), 
 												data: { objectid: object.id }, 
 												method: :post,
-												'area-label' => heart_link_title(object)
+												'area-label' => heart_link_title(object),
+												style: 'padding: 9px;'
 	end
 
 	def fav_classes object
