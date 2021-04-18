@@ -23,8 +23,8 @@ function setMarkerImage(price, color='red'){
           url: markerIcon(price, color),
           // size: new google.maps.Size(71, 71),
           origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(50, 50)
+          // anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(45, 45)
         };
 }
 
@@ -37,7 +37,6 @@ function openInfoBox(map, marker){
 }
 
 function bindElemToMarker(elem, marker, object, map){
-  // var price = prop_price(object) // (object.price == '' || object.price == null) ? 0 : object.price
   var card = elem.parent().parent().parent();
   card.on('mouseover', function(){
     marker.setIcon(setMarkerImage(prop_price(object), 'green'));
