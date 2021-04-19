@@ -99,7 +99,7 @@ module BuildingsConcern
   def set_featured_comps
     @similar_properties_count = 0
     if @building.active_comps.size > 0
-      @similar_properties = Building.buildings_with_active_comps(@building.id)
+      @similar_properties = Building.where(id: @building.featured_comps.active.pluck(:building_id))
       @similar_properties_count = @similar_properties.size
     end
   end

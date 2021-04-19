@@ -47,6 +47,9 @@
 = hidden_field_tag :similar_property_id, @similar_properties&.first&.id
 = hidden_field_tag :cu_object_type, 'Building'
 
+- 0.upto(4) do |num|
+	= content_tag 'div', '', id: "red-marker-asset-#{num}", data: { path: asset_path("markers/red_pin_p#{num}.png") }
+
 .addNewUnit= render 'new_unit_modal'
 
 - if session[:after_contribute].present? || params[:from_uploaded].present?
