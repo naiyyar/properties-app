@@ -7,9 +7,9 @@
   
   <body class="notransition no-hidden" >
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
-    <%= render partial: 'layouts/shared/left_side' %>
+    <%= render 'layouts/shared/left_side' if mobile? %>
     
-    <%= render partial: 'layouts/shared/search_modal'%>
+    <%= render 'layouts/shared/search_modal'%>
 
     <%= render 'layouts/shared/wrapper' %>
 
@@ -24,8 +24,6 @@
     <%= javascript_include_tag 'zapp'%>
     
     <script defer src='<%=gmap_url_helper%>'></script>
-
-    <%= javascript_include_tag 'search/map', defer: true %>
 
     <script type="text/javascript">
       $(function(){ new app.apartments; })

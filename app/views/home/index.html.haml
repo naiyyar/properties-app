@@ -10,7 +10,7 @@
         .col-lg-12
           .row
             #featured-buildings-section
-              - unless browser.device.mobile?
+              - unless mobile?
                 - 1.upto(4) do
                   .col-lg-3= render 'home/partials/placeholder_cards'
               - else

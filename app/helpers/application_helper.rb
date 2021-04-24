@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def tbl_cell_width lg_width, sm_width=''
-    browser.device.mobile? ? (sm_width.present? ? sm_width : lg_width) : lg_width
+    mobile? ? (sm_width.present? ? sm_width : lg_width) : lg_width
   end
 
   # adding last page custom class to pagination ul
@@ -44,7 +44,11 @@ module ApplicationHelper
   end
 
   def screen_class
-    browser.device.mobile? ? 'screen-sm' : 'screen-lg'
+    mobile? ? 'screen-sm' : 'screen-lg'
+  end
+
+  def mobile?
+    browser.device.mobile?
   end
 
   # logo image

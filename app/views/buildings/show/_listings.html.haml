@@ -18,7 +18,7 @@
 					
 					- if type == 'past' && @past_listings_count.to_i > 5  && request.format.html?
 						%tr
-							%td.text-center{colspan: browser.device.mobile? ? '6' : '9'}
+							%td.text-center{colspan: mobile? ? '6' : '9'}
 								= link_to 'Show More Past Listings...', show_more_past_listings_path(building_id: @building.id, listing_type: 'past'), remote: true, class: 'hyper-link'
 
 - if type == 'past' && @building.past_listings.count > PastListing::LIMIT && request.format.js?

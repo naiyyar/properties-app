@@ -3,7 +3,7 @@
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
     #filterrific_results{style: 'margin-top: 10px;'}
       .table-overflow
-        %table.table.table-striped#sortable1{style: browser.device.mobile? ? 'width: 80em; max-width: 100%;' : ''}
+        %table.table.table-striped#sortable1{style: mobile? ? 'width: 80em; max-width: 100%;' : ''}
           %thead
             %tr
               %th{width: tbl_cell_width('10%', '8%')} Feature ID(#{featured_objects.count})

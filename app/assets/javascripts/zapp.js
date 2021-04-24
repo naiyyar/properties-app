@@ -49,7 +49,7 @@
   // calculations for elements that changes size on window resize
   var windowResizeHandler = function() {
       windowHeight = window.innerHeight;
-      headerHeight = $('#header').height();
+      headerHeight = $('#header').height(); //.HeaderBlock
       contentHeight = windowHeight - headerHeight;
       contentWidth = $('#content').width();
 

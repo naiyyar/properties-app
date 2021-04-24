@@ -8,7 +8,7 @@
     <section id="quickSearch" class="quickSearch">
       <div class="quickSearchWrapper">
         <div class="inputWrapper home-search-form">
-          <% unless browser.device.mobile? %>
+          <% unless mobile? %>
             <%= render 'home/search_form' %>
           <%else%>
             <div class="apt-search home" id='apt-search-form'>

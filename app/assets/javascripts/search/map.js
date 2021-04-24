@@ -1,46 +1,52 @@
-var ready = function(){
-  var position;
-  var currentLocation;
-  var props;
-  var bounds;
-  var newMarker;
-  var markers;
-  var options;
-  var json_array = $('#json-hash').data('buildingshash');
-  zoom = parseInt($('.zoom').val());
-  localStorage.setItem('mapZoom', zoom);
-  lat = $('#lat').data('lat');
-  lng = $('#lng').data('lng');
-  var serched_by    = $('#searched_by').val();
-  var searched_term = $('#nb-search-term').val();
-  var search_string = $('#search_string').val();
-  var city          = '';
-  var header_id     = $('#app-header').length > 0 ? 'app-header' : 'header-mob';
-  var boundary_coords = $('#boundary_coords').data('coords');
-  var polylines;
-  var transitLayer;
-  map_init_count = 0;
-  current_user_id   = $('#cu').val();
-  redo_search       = false;
-  dragged           = false;
-  draggedOnce       = false;
-  zoomLevel         = zoom;
-  featured_building_id = null;
-  featured_marker = null;
-  infobox_data_html = null;
-  infobox_opened = false;
-  map = null;
+var windowHeight;
+var windowWidth;
+var contentHeight;
+var contentWidth;
+var isDevice = true;
+var position;
+var currentLocation;
+var props;
+var bounds;
+var newMarker;
+var markers;
+var options;
+var json_array = $('#json-hash').data('buildingshash');
+zoom = parseInt($('.zoom').val());
+localStorage.setItem('mapZoom', zoom);
+lat = $('#lat').data('lat');
+lng = $('#lng').data('lng');
+var serched_by    = $('#searched_by').val();
+var searched_term = $('#nb-search-term').val();
+var search_string = $('#search_string').val();
+var city          = '';
+var header_id     = $('#app-header').length > 0 ? 'app-header' : 'header-mob';
+var boundary_coords = $('#boundary_coords').data('coords');
+var polylines;
+var transitLayer;
+map_init_count = 0;
+current_user_id   = $('#cu').val();
+redo_search       = false;
+dragged           = false;
+draggedOnce       = false;
+zoomLevel         = zoom;
+featured_building_id = null;
+featured_marker = null;
+infobox_data_html = null;
+infobox_opened = false;
+map = null;
   
-  if(searched_term && search_string){
-    searched_term = search_string;
-    if(searched_term && searched_term == 'Little Italy'){
-      var city = searched_term.includes('newyork') ? 'New York' : 'Bronx'
-    }
+if(searched_term && search_string){
+  searched_term = search_string;
+  if(searched_term && searched_term == 'Little Italy'){
+    var city = searched_term.includes('newyork') ? 'New York' : 'Bronx'
   }
+}
 
-  // Custom options for map
-  window.initialize = function(sidebar = true) {
+SearchMapObject = {
+  initializeMap: function(sidebar = true) {
     var zoom_ctrl = true;
+    var _this = this; // current object
+
     if(mobile){
       position  = google.maps.ControlPosition.TOP_LEFT;
       zoom_ctrl = false;
@@ -141,9 +147,6 @@ var ready = function(){
         });
       }
       map.fitBounds(bounds);
-      // var listener = google.maps.event.addListener(map, "idle", function () {
-      //     google.maps.event.removeListener(listener);
-      // });
     }
       
     var polylineoptons = {};
@@ -160,21 +163,21 @@ var ready = function(){
     }
 
     polylines = new google.maps.Polygon(polylineoptons);
+    
     var set_boundaries = function(map){
       add_nyc_neighborhood_boundaries(searched_term, city, map)
     }
-  
+    
     setTimeout(function() {
       $('body').removeClass('notransition');
       if(!map){
         map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
       }
-    
-      createRedoButtonObject(map);
+      RedoButtonObj.createRedoButtonObject(map);
       google.maps.event.addListener(map, 'dragend', function(){
         if(!dragged){
           dragged = true;
-          setRedoButtonPosition(map);
+          RedoButtonObj.setRedoButtonPosition(map);
         }
       });
 
@@ -183,107 +186,111 @@ var ready = function(){
       }
       // Setting up boundaries using kml file
       set_boundaries(map);
-      if(!markers_added){
-        addMarkers(props, map);
-      }
-      if(!transitLayer){
-        transitLayer = new google.maps.TransitLayer();
-      }
-      transitLayer.setMap(map);
-      windowResizeHandler(map);
+      
+      if(!markers_added){ addMarkers(props, map); }
+      _this.addTransitLayer(map);
+      _this.windowResizeHandler(map);
       if(map && serched_by == 'latlng'){
-        setCustomSearchCenter(map);
+        _this.setCustomSearchCenter(map);
       }
-      google.maps.event.addListener(map, 'zoom_changed', function() {
-        var zoom_val = parseInt(map.getZoom());
-        zoomLevel = zoom_val;
-        if( zoom_val < zoom) {
-          zoom_val = zoom
-        }
-        localStorage.mapZoom = zoom_val;
-      });
+      _this.saveZoom(map); // Saving zoom value in localStorage
       map.setZoom(13);
+
     }, 300);
-  }
-
-  setTimeout(function() {
-    if(map){
-      setMapCenter(map);
-      setMapzoom(map)
+  },
+  
+  saveZoom: function(map){
+    google.maps.event.addListener(map, 'zoom_changed', function() {
+      var zoom_val = parseInt(map.getZoom());
+      zoomLevel = zoom_val;
+      if( zoom_val < zoom) {
+        zoom_val = zoom
+      }
+      localStorage.mapZoom = zoom_val;
+    });
+  },
+  
+  addTransitLayer: function(map){
+    if(!transitLayer){
+      transitLayer = new google.maps.TransitLayer();
     }
-  }, 400);
+    transitLayer.setMap(map);
+  },
 
-  function setCustomSearchCenter(map){
+  setCustomSearchCenter: function(map) {
+    var _this = this;
     setTimeout(function() {
-      setMapCenter(map);
-      setMapzoom(map)
+      _this.setMapCenter(map);
+      _this.setMapzoom(map)
       redo_search = true;
     }, 500);
-  }
-
-  function setMapCenter(map){
+  },
+  
+  setMapCenter: function(map){
     if(map){
       map.setCenter(new google.maps.LatLng(lat,lng));
     }
-  }
-
-  function setMapzoom(map){
+  },
+  
+  setMapzoom: function(map){
     if(map){
-      map.setZoom(zoomNum());
+      map.setZoom(this.zoomNum());
     }
-  }
-
-  function zoomNum(){
+  },
+  
+  zoomNum: function(){
     var zoomNum = zoomLevel;
     if(zoomLevel < 13 || zoomLevel > 18){
       zoomNum = 13
     } 
     return zoomNum;
-  }
-
-  var windowHeight;
-  var windowWidth;
-  var contentHeight;
-  var contentWidth;
-  var isDevice = true;
-  // calculations for elements that changes size on window resize
-  var resizeElements = function() {
+  },
+  
+  resizeElements: function(){
     windowHeight = window.innerHeight;
     windowWidth = $(window).width();
-    contentHeight = windowHeight - $('#header').height();
+    contentHeight = windowHeight - $('.HeaderBlock, #header-mob').height();
     contentWidth = $('#content').width();
     $('#leftSide').height(contentHeight);
     $('.closeLeftSide').height(contentHeight);
     $('#wrapper').height(contentHeight);
     $('#mapViewSearch').height(contentHeight);
     $('#content').height(contentHeight);
-  }
-
-  var windowResizeHandler = function(map) {
+  },
+  
+  windowResizeHandler: function(map){
     if(map){
-      resizeElements();
+      this.resizeElements();
       google.maps.event.trigger(map, 'resize');
     }
   }
-  //google.maps.event.addDomListener(window, 'load', initialize);
-  if($('#mapViewSearch').length > 0){
-    initialize();
-  }
+}; // SearchMapObject
 
-  // setting up building and agent image on search view card
-  var cards = $('.searched-properties .search-view-card');
-  if(cards.length > 0){
-    cards.each(function(i, j){
+var ready = function(){
+  if($("#mapViewSearch").length > 0){
+    SearchMapObject.initializeMap();
+
+    setTimeout(function() {
+      if(map){
+        SearchMapObject.setMapCenter(map);
+        SearchMapObject.setMapzoom(map)
+      }
+    }, 400);
+
+    // Displaying property and agent image on search view card
+    var cards = $('.searched-properties .search-view-card');
+    if(cards.length > 0){
+      cards.each(function(i, j){
         var agentid = $(j).data('agentid');
         if(agentid){
           Card.loadFeaturedAgentImagesAndCTALinks(agentid);
         }else{
           Card.loadDisplayImageAndCTALinks($(j));
         }
-    });
-  }
+      });
+    }
+  }; // if
+}; // ready
 
-}
-
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).ready(ready);
+$(document).on('page:load', ready);

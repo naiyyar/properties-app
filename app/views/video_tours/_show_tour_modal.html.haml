@@ -1,4 +1,4 @@
-- if !browser.device.mobile?
+- unless mobile?
   #showTourModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
     .modal-dialog.modal-md
       .modal-content{style: 'background-color: #333;'}

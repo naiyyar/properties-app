@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
   before_action :update_last_sign_in_at
 
   def gmap_url_helper
-    @gmap_url_helper ||= "https://maps.google.com/maps/api/js?v=3.42&key=#{ENV['GEOCODER_API_KEY']}&libraries=places"
+    "https://maps.google.com/maps/api/js?v=3.44&key=#{ENV['GEOCODER_API_KEY']}&libraries=places"
   end
 
   protected

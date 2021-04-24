@@ -31,7 +31,7 @@ $('.show-map-handler').click(function() {
 var showWindowResizeHandler = function(map) {
   windowHeight = window.innerHeight;
   windowWidth = $(window).width();
-  contentHeight = windowHeight - $('#header').height();
+  contentHeight = windowHeight - $('.HeaderBlock, #header-mob').height();
   contentWidth = $('#content').width();
   $('#leftSide').height(contentHeight);
   $('.closeLeftSide').height(contentHeight);

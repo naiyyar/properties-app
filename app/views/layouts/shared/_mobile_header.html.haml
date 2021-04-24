@@ -7,7 +7,7 @@
     %div{class: "col-xs-#{header_center_col}", style: "padding-right: #{current_view == 'other-view' ? '6px' : '2px'}; padding-left: #{current_view == 'other-view' ? '6px' : '2px'}"}
       - if show_and_search_page_header?
         .split-view-seach{class: "#{search_bar(:hidden)}"}
-          - unless browser.device.mobile?
+          - unless mobile?
             = render 'home/search_form'
           - else
             .apt-search.other#apt-search-form
@@ -35,7 +35,7 @@
                   Filter
                   %span.filter-counts
 
-- if browser.device.mobile?
+- if mobile?
   %div{style: 'position: fixed; bottom: 10px;left: 50%;transform: translate(-50%, 0%);z-index: 99;'}
     - if action_name == 'search' || @show_map_btn
       %a.mapHandler.btn.btn-round{href: 'javascript:void(0);', style: custom_search? ? 'display: none;' : ''}

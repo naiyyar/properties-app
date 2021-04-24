@@ -1,4 +1,4 @@
-- if !browser.device.mobile?
+- if !mobile?
   .similar{style: "#{@featured_buildings.present? ? 'padding: 0px;' : ''}"}
     / carousel for medium & large devices
     - unless action_name == 'load_featured_buildings'

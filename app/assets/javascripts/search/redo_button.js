@@ -6,41 +6,43 @@ var controlText;
 var centerControlDiv;
 var centerControl;
 
-function setRedoButtonPosition(map){
-  redoControlUI.style.display = 'block';
-  if(!draggedOnce){
-    centerControlDiv.index = 1;
-    if(mobile){       
-      map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-    }else{
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+RedoButtonObj = {
+  setRedoButtonPosition: function(map){
+    redoControlUI.style.display = 'block';
+    if(!draggedOnce){
+      centerControlDiv.index = 1;
+      if(mobile){       
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+      }else{
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+      }
+      draggedOnce = true;
     }
-    draggedOnce = true;
-  }
-}
+  },
 
-function getMoveData(map){
-  if(dragged){
-    currentLocation = map.getCenter();
-    lat = currentLocation.lat();
-    lng = currentLocation.lng();
-    var query_strings = window.location.search;
-    var orginal_url = '/custom_search';
-    var new_loc_url = '';
-    var q_params = 'latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
-    if(query_strings.includes('sort_by') || query_strings.includes('filter')){
-      new_loc_url = orginal_url+query_strings+'&'+q_params;
-    }else{
-      new_loc_url = orginal_url+'?'+q_params;
+  getMoveData: function(map){
+    if(dragged){
+      currentLocation = map.getCenter();
+      lat = currentLocation.lat();
+      lng = currentLocation.lng();
+      var query_strings = window.location.search;
+      var orginal_url = '/custom_search';
+      var new_loc_url = '';
+      var q_params = 'latitude='+lat+'&longitude='+lng+'&zoomlevel='+zoomLevel;
+      if(query_strings.includes('sort_by') || query_strings.includes('filter')){
+        new_loc_url = orginal_url+query_strings+'&'+q_params;
+      }else{
+        new_loc_url = orginal_url+'?'+q_params;
+      }
+      location.href = new_loc_url+'&searched_by=latlng&search_term=custom';
     }
-    location.href = new_loc_url+'&searched_by=latlng&search_term=custom';
-  }
-}
+  },
 
-function createRedoButtonObject(map){
-  centerControlDiv = document.createElement('div');
-  centerControl = new RedoButton(centerControlDiv, map);
-}
+  createRedoButtonObject: function(map){
+    centerControlDiv = document.createElement('div');
+    centerControl = new RedoButton(centerControlDiv, map);
+  }
+} // end redoObj
 
 function RedoButton(controlDiv, map) {
   // Set CSS for the control border.
@@ -67,7 +69,7 @@ function RedoButton(controlDiv, map) {
   redoControlUI.appendChild(controlText);
 
   redoControlUI.addEventListener('click', function() {
-    getMoveData(map);
+    RedoButtonObj.getMoveData(map);
   });
 }
 

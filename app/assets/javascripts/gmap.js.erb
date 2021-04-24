@@ -39,7 +39,6 @@ function openInfoBox(map, marker){
 function bindElemToMarker(elem, marker, object, map){
   var card = elem.parent().parent().parent();
   card.on('mouseover', function(){
-    console.log(prop_price(object))
     marker.setIcon(setMarkerImage(prop_price(object), 'green'));
   }).on('mouseout', function(){
     marker.setIcon(setMarkerImage(prop_price(object)));

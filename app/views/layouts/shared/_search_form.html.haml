@@ -1,6 +1,6 @@
-.searchContainer.pull-left.split-view-seach{class: browser.device.mobile? ? 'mobile': ''}
-  = render partial: 'home/search_form'
-- unless @pop_neighborhoods.blank? && browser.device.mobile?
+.searchContainer.pull-left.split-view-seach{class: mobile? ? 'mobile': ''}
+  = render 'home/search_form'
+- unless @pop_neighborhoods.blank? && mobile?
   .pull-left.neighborhoods-dropdown.hidden-xs{style: 'margin-top: 3px;margin-left: 8px;'}
     .btn-group.btn-dp-toggle
       %button#lr2.btn.btn-o.btn-primary.dropdown-toggle.btn-round{'data-toggle' => 'dropdown', style: 'min-width: 121px;'}
@@ -9,7 +9,7 @@
         %span.caret
       .dropdown-menu.dropdown-select.dropdown-menu-right1{'area-labelledby' => 'lr2'}
         .row
-          = render partial: 'layouts/shared/neighborhoods_list'
+          = render 'layouts/shared/neighborhoods_list'
   
   - if show_filters?
     .lg-action-buttons.hidden-xs
@@ -19,7 +19,7 @@
             %span.fa.fa-sort
              #{params[:sort_by].present? ? sort_string : 'Recently Updated'}
            
-        = render partial: 'layouts/shared/sort_list'
+        = render 'layouts/shared/sort_list'
 
       .btn-filter.btn-dp-toggle.pull-right
         %button{class: "btn sc-lg btn-o btn-primary btn-round dropdown-toggle handleFilter #{params[:filter].present? ? 'active' : ''}", 'data-toggle' => 'dropdown'}

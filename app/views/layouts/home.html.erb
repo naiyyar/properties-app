@@ -7,15 +7,15 @@
   
   <body class="notransition no-hidden home">
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
-    <%= render 'layouts/shared/left_side' if browser.device.mobile? %>
+    <%= render 'layouts/shared/left_side' if mobile? %>
     <%= render 'layouts/shared/search_modal' %>
     <%= render 'layouts/home/header' %>
     <div class="content-wrapper <%= controller_name + action_name %>">
       <%= yield %>
-      <%= render 'layouts/home/footer' if browser.device.mobile? %>
+      <%= render 'layouts/home/footer' if mobile? %>
     </div>
 
-    <%= render 'layouts/home/footer' unless browser.device.mobile? %>
+    <%= render 'layouts/home/footer' unless mobile? %>
     
     <div id="remote-container"></div>
     <div id="auth-form"></div>
