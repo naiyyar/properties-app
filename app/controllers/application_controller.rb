@@ -52,7 +52,9 @@ class ApplicationController < ActionController::Base
   end
 
   def search_layout?
-    (action_name == 'search' && controller_name == 'home') || action_name == 'saved_buildings'
+    (action_name == 'search' && controller_name == 'home') || 
+    action_name == 'saved_buildings' ||
+    (action_name == 'show' && controller_name == 'management_companies')
   end
 
   # def controllers
