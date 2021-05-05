@@ -4,7 +4,7 @@ $(document).on('keyup', '#featured_building_field', function(){
   }
 });
 
-$(window).load(function(){
+$(window).on('load', function(){
   if($('#featured_building_field').val() != ''){
     setSubmitButtonStatus(false)
   }
