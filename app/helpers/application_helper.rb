@@ -141,7 +141,7 @@ module ApplicationHelper
   end
 
   def header_center_col
-    show_filters? ? '7' : '9'
+    show_filters? ? '6' : '8'
   end
 
   def header_right_col

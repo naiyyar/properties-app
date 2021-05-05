@@ -40,3 +40,9 @@ if(svc.length > 0){
     Card.loadDisplayImageAndCTALinks($(j));
   });
 }
+if($('.ca.mobile').length > 0){
+  $('.ca.mobile').on('click', function(){
+    window.open(this.href, '_blank');
+    return false;
+  });
+}

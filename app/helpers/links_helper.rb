@@ -133,9 +133,8 @@ module LinksHelper
 	def check_availability_link building, sl_class=nil
 		if CTALinksPolicy.new(building).active_web_url?
 			bt_block_class = sl_class.present? ? sl_class : 'btn-block'
-      link_to check_availability, building.web_url, 
-      														onclick: "window.open(this.href,'_blank');return false;",
-      														class: "btn #{bt_block_class} btn-primary txt-color-white font-bolder btn-round",
+      link_to check_availability, building.web_url,
+      														class: "btn #{bt_block_class} btn-primary txt-color-white font-bolder btn-round ca mobile",
       														style: "padding: #{bt_block_class.include?('btn-xs') ? '8px 0px' : ''}"
     else
       link_to check_availability, building_url(building), class: 'btn btn-block btn-primary invisible'
