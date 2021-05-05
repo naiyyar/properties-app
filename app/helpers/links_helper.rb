@@ -144,7 +144,7 @@ module LinksHelper
 
 	#
 	def check_availability_button web_url, klass
-		unless browser.device.mobile?
+		unless mobile?
 			link_to check_availability, 
 						  web_url,
 						  class: "btn btn-primary #{klass} btn-round ca",
@@ -152,9 +152,8 @@ module LinksHelper
 		else
 			link_to check_availability, 
 						  web_url,
-						  class: "btn btn-primary #{klass} btn-round ca", 
-						  rel: rel,
-						  onclick: "window.open(this.href, '_blank');return false;"
+						  class: "btn btn-primary #{klass} btn-round ca mobile", 
+						  rel: rel
 		end
 	end
 
