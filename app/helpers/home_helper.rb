@@ -1,18 +1,19 @@
 module HomeHelper
 
 	def self_service_btn_link type
-		unless current_user
-      '/users/sign_up'
-    else
-    	case type
-    	when 'agents'
-    		agenttools_user_path(current_user, type: 'featured')
-    	when 'property-managers'
-    		managertools_user_path(current_user, type: 'featured')
-    	when 'for-rent-by-owner'
-    		frbotools_user_path(current_user, type: 'featured')
-     	end
-    end
+		return '/users/sign_up' unless current_user
+  	return featured_page_path(type)
+	end
+
+	def featured_page_path type
+		case type
+  	when 'agents'
+  		agenttools_user_path(current_user, type: 'featured')
+  	when 'property-managers'
+  		managertools_user_path(current_user, type: 'featured')
+  	when 'for-rent-by-owner'
+  		frbotools_user_path(current_user, type: 'featured')
+   	end
 	end
 
 	def hero_image
