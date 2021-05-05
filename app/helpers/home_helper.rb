@@ -7,7 +7,7 @@ module HomeHelper
     	case type
     	when 'agents'
     		agenttools_user_path(current_user, type: 'featured')
-    	when 'property-manager'
+    	when 'property-managers'
     		managertools_user_path(current_user, type: 'featured')
     	when 'for-rent-by-owner'
     		frbotools_user_path(current_user, type: 'featured')
