@@ -2126,6 +2126,9 @@ select.custom-arrow{
         top: 13px;
         color: #7e7e7e;
       }
+      .icon-search-shared.search-placeholder-input {
+        top: 7px;
+      }
     }
     
     #header-mob {
@@ -2181,7 +2184,7 @@ select.custom-arrow{
     #header-mob .apt-search input {
         width: 100%;
         border-radius: 1.5em;
-        padding: 11px;
+        padding: 11px 4px 11px 26px;
         margin: 0px;
         background: #fff;
         border: 0px solid #333; 
