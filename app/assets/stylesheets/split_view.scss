@@ -192,12 +192,33 @@ a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
   a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 4px 8px 0 rgba(0,0,0,0.20);
   }
-  .homesearch, .management_companiesshow{
+  .homesearch, .management_companiesshow {
     #content {
       overflow-y: scroll;
     }
   }
+
+  .search-view-card{
+    height: 468px;
+  }
+  
+  .contact-links {
+    .h-42 {
+      height: 50px;
+    }
+    .c-links { 
+      section {
+        a, a.ca {
+          padding: 14px;
+        }
+      }
+    }
+    .d-block a{
+      padding: 14px;
+    }
+  }
 }
+
 @media screen and (min-width: 992px) and (max-width: 1199px){
   .btn-filter .btn.sc-lg, .btn-sort .btn.sc-lg{
     width: 12em;
