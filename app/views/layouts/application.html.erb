@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%= render partial: 'layouts/layout_head', locals: { js_path: 'application' } %>
+    <%= render 'layouts/layout_head', js_path: 'application', defer_flag: false %>
+    
     <% if action_name == 'managertools' %>
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.1.2/css/paymentfont.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
     <%end%>
@@ -27,8 +28,7 @@
     
     <div id="remote-container"></div>
     <div id="auth-form"></div>
-
-    <%= render 'buildings/favourite_script' %>
+    
     <%= javascript_include_tag 'zapp' %>
     
     <%if @lat.present? && @lng.present? %>

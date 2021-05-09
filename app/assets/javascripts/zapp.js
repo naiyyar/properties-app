@@ -1,4 +1,4 @@
-(function($) {
+document.addEventListener('DOMContentLoaded', function() {
   "use strict";
   var documentHeight, headerHeight;
   var windowHeight;
@@ -210,4 +210,4 @@
     });
   });
 
-})(jQuery);
+}, false);

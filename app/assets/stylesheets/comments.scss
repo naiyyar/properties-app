@@ -86,3 +86,22 @@
   border-radius: 50%;
   font-size: 25px;
 }
+
+.commentBody .show-review-images{
+    display: inline-block; 
+    width: 90%;
+}
+
+.commentBody .show-review-images div{
+    width: 100px; 
+    height: auto; 
+    margin-left: 4px; 
+    border: 1px solid #ddd;
+}
+
+.commentBody .show-review-images div img{
+    width: 100%;
+    height: 90px;
+    object-fit: contain;
+    overflow: hidden;
+}

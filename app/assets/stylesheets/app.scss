@@ -73,28 +73,6 @@ a.dt-card-link {
 .active-listing-link.ml {
   margin-left: 159px;
 }
-.card.search-view-card .figure {
-  height: 270px;
-}
-.search-view-card {
-  position: relative;
-  height: 453px;
-  a ul.cardRating {
-    margin-bottom: 4px;
-  }
-}
-
-.video-tour-icon {
-  position: absolute;
-  bottom: 2px;
-  left: 2px;
-  z-index: 999;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 4px 12px;
-  border-radius: 20px;
-  -webkit-transform: translate3d(0, 0, 0);
-}
 
 /* location related */
 .location-loader {
@@ -258,25 +236,6 @@ form fieldset, .smart-form fieldset{
     color: #2C79E4 !important;
 }
 
-.commentBody .show-review-images{
-    display: inline-block; 
-    width: 90%;
-}
-
-.commentBody .show-review-images div{
-    width: 100px; 
-    height: auto; 
-    margin-left: 4px; 
-    border: 1px solid #ddd;
-}
-
-.commentBody .show-review-images div img{
-    width: 100%;
-    height: 90px;
-    object-fit: contain;
-    overflow: hidden;
-}
-
 .pagination{
     box-shadow: none !important;
 }
@@ -301,21 +260,7 @@ form fieldset, .smart-form fieldset{
 }
 
 .star-xs .star img{
-    height: 14px !important;
-}
-
-.comp.featured{
-  margin: 2px 0px 2px 2px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  background: #000;
-  z-index: 999;
-  color: #fff;
-  padding: .4em .45em;
-  font-size: 13px;
-  -webkit-transform: translate3d(0, 0, 0);
-  line-height: 1.1;
+  height: 14px !important;
 }
 
 /* custom */
@@ -325,7 +270,7 @@ form fieldset, .smart-form fieldset{
 .social-share-button a{
     margin: 0px 5px;
 }
-
+/* 
 #apt-ajax-loader{
     width: 100%;
     height: 100%;
@@ -351,20 +296,7 @@ form fieldset, .smart-form fieldset{
     position: relative;
     top: 23%;
     color: #0075c9;
-}
-
-.search-loader{
-    position: absolute;
-    right: 10px;
-    width: 24px;
-    height: 24px;
-    top: 14px;
-    display: none;
-}
-
-.search-loader img{
-    width: 100%;
-}
+} */
 
 .image-gallery {
     position: relative;
@@ -866,26 +798,11 @@ a.navHandler {
 }
 
 .pb-info{
-    padding: 0px 0px 0px 11px;height: 22px;color: #333;
-}
-.search-view-card .pb-info span{
-    font-size: 12px;
+  padding: 0px 0px 0px 11px;height: 22px;color: #333;
 }
 .bd-types span{
-    font-size: 11px;
+  font-size: 11px;
 }
-
-.search-view-card .pb-info .col-lg-5, 
-.search-view-card .pb-info .col-md-5{
-    padding: 0px 19px 0px 3px;
-}
-
-.search-view-card .pb-info .col-lg-7,
-.search-view-card .pb-info .col-xs-7,
-.search-view-card .pb-info .col-sm-7{
-    padding-right: 2px !important;
-}
-
 
 .icon-search-shared{
     position: absolute;
@@ -1345,156 +1262,6 @@ a.color-default:hover{
     color: #1a0dab !important;
 }
 
-a.card, div.card {
-    display: block;
-    background-color: #fff;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
-    margin-bottom: 20px;
-    cursor: pointer;
-    text-decoration: none;
-}
-a.card.home, div.card.home {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.18);
-}
-a.card.bordered, div.card.bordered{
-    border: 1px solid #ddd;
-}
-.figure {
-    background-color: #fff;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-}
-.figure img {
-    position: relative;
-    display: block;
-    opacity: 1;
-    margin: 0 auto;
-}
-
-.no-touch a.card:hover img, .no-touch div.card:hover img {
-    opacity: 0.8;
-}
-.figCaption {
-    position: absolute;
-    z-index: 2;
-    top: auto;
-    bottom: 0;
-    padding: 10px;
-    width: 100%;
-    color: #fff;
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.5)));
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%);
-    background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%);
-    background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#80000000',GradientType=0 );
-}
-.no-touch .figCaption {
-    -webkit-transition: -webkit-transform 0.35s;
-    transition: transform 0.35s;
-    -webkit-transform: translate3d(0,100%,0);
-    transform: translate3d(0,100%,0);
-}
-.figCaption div {
-    float: left;
-    font-size: 12px;
-    line-height: 12px;
-    font-weight: normal;
-}
-.carousel-col .figCaption div {
-    float: left;
-    font-size: 13px;
-    line-height: 14px;
-    font-weight: bold;
-}
-.figCaption > span {
-    float: right;
-    font-size: 11px;
-    line-height: 12px;
-    font-weight: normal;
-    margin-left: 5px;
-}
-.carousel-col .figCaption > span {
-    display: none;
-}
-.figCaption > span::before {
-    color: rgba(255, 255, 255, 0.70);
-}
-.no-touch .figCaption div,
-.no-touch .figCaption > span {
-    -webkit-transition: -webkit-transform 0.35s;
-    transition: transform 0.35s;
-    -webkit-transform: translate3d(0,200%,0);
-    transform: translate3d(0,200%,0);
-}
-.figCaption div {
-    display: inline-block;
-}
-a.card h2, div.card h2 {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 16px;
-    margin: 0 10px 0 0;
-    padding: 10px 0 3px 10px;
-    color: #333;
-    text-decoration: none;
-    white-space: nowrap;
-    overflow: hidden;
-    float: none;
-    width: 90%;
-    text-overflow: ellipsis;
-}
-.no-touch a.card:hover, .no-touch div.card:hover {
-    text-decoration: none;
-}
-.no-touch a.card:hover h2, .no-touch div.card:hover h2 {
-    color: $hbo-color;
-    text-decoration: none;
-}
-a.card .cardAddress, div.card .cardAddress {
-    font-size: 12px;
-    line-height: 13px;
-    color: #757575;
-    padding: 0 0 5px 10px;
-    margin: 0 10px 0 0;
-    overflow: hidden;
-    white-space: nowrap;
-}
-a.card .cardAddress span, div.card .cardAddress span {
-    font-size: 13px;
-    line-height: 13px;
-}
-a.card .cardRating, div.card .cardRating {
-    padding: 0px 8px 0px 8px;
-    font-size: 12px;
-    line-height: 12px;
-    color: #333;
-}
-a.card .cardRating span, div.card .cardRating span {
-    color: #eab134;
-    padding-right: 2px;
-    display: inline-block;
-    font-size: 12px;
-}
-a.card ul.cardFeat, div.card ul.cardFeat {
-    list-style-type: none;
-    margin: 0;
-    padding: 0 10px 10px 10px;
-}
-a.card ul.cardFeat li, div.card ul.cardFeat li {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 11px;
-    line-height: 11px;
-    color: #333;
-}
-a.card ul.cardFeat li span, div.card ul.cardFeat li span {
-    color: #999;
-}
-
 h1.pageTitle {
     margin: 0;
     padding: 0;
@@ -1855,16 +1622,6 @@ ol {
   margin-bottom: 20px;
 }
 
-/*setting up search input field radius*/
-.border-top-lr-radius{
-  border-top-left-radius: 25px !important;
-  border-top-right-radius: 25px !important;
-}
-.border-bottom-lr-radius{
-  border-bottom-left-radius: 25px !important;
-  border-bottom-right-radius: 25px !important;
-}
-
 .no-hover-underline:hover{
   border-bottom: 1px solid transparent !important;
 }
@@ -1910,58 +1667,6 @@ a.home-navHandler.active {
 }
 .pb40 {
   padding-bottom: 40px;
-}
-
-/* Footer */
-
-.home-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-}
-.footer-header {
-    font-size: 21px;
-    line-height: 16px;
-    padding-bottom: 20px;
-    color: #fff;
-    font-weight: bold;
-}
-.footer-nav {
-    margin: 0;
-    padding: 0 0 20px 0;
-    list-style-type: none;
-}
-.footer-nav li {
-    line-height: 13px;
-    padding-bottom: 10px;
-}
-.footer-nav li a {
-    color: #fff;
-    font-size: 16px;
-}
-.no-touch .footer-nav li a:hover {
-    color: #999;
-}
-.footer-nav li.footer-phone {
-    font-size: 20px;
-    line-height: 20px;
-    padding-bottom: 15px;
-}
-.footer-nav li.footer-address {
-    padding-bottom: 15px;
-}
-.footer-nav li.footer-address p {
-    line-height: 13px;
-    margin: 0 0 5px;
-}
-.copyright {
-    text-align: center;
-    color: #cecece;
-    font-size: 12px;
-}
-
-.copyright a:hover, .copyright a:visited{
-    color: #999 !important;
 }
 
 .help-block {
@@ -2017,6 +1722,16 @@ select.custom-arrow{
     height: 51px !important;
     padding: 10px 14px 10px 30px !important;
   }
+}
+
+.border-top-lr-radius{
+  border-top-left-radius: 25px !important;
+  border-top-right-radius: 25px !important;
+}
+
+.border-bottom-lr-radius{
+  border-bottom-left-radius: 25px !important;
+  border-bottom-right-radius: 25px !important;
 }
 
 /* Media Queries */
@@ -2263,10 +1978,6 @@ select.custom-arrow{
         font-size: 17px;
     }
     
-    a.card, div.card {
-        margin-bottom: 15px;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    }
     .form-container{
         padding: 10px;
         margin-left: 0px;
