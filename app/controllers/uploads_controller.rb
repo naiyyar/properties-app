@@ -93,6 +93,7 @@ class UploadsController < ApplicationController
     if @upload.save
       respond_to do |format|
         format.html
+        format.js
         format.json { 
           render json: { 
             message: 'success', 
