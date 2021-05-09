@@ -84,8 +84,8 @@ class UploadsController < ApplicationController
 
 	def create
     unless upload_params[:file_uid].present?
-      @imageable      = find_imageable
-      @upload         = @imageable.uploads.build(upload_params)
+      @imageable = find_imageable
+      @upload = @imageable.uploads.build(upload_params)
       @upload.user_id = current_user.id if current_user.present?
     else
       @upload = Upload.new(upload_params)
