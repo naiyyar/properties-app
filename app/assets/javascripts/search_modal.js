@@ -1,4 +1,4 @@
-var ready = function(){
+document.addEventListener('DOMContentLoaded', function() {
 	if(Device.type.mobile){
 			  history_ul    = $('#search-modal #ui-id-50') || null;
 		var search_box 		= $('#search_term');
@@ -72,7 +72,7 @@ var ready = function(){
 		});
 	}
 
-} // close ready
+}); // close ready
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+//$(document).ready(ready);
+//$(document).on('page:load', ready);

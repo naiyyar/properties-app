@@ -21,9 +21,9 @@ setTimeout(function(){
 	$('.alert').slideUp(300);
 }, 3000);
 
-//finding device type
+// finding device type
 var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-const Device = {
+Device = {
 	type: { mobile: mobile}
 };
 
