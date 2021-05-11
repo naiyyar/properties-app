@@ -8,14 +8,17 @@ module ListingsActionConcern
   end
 
 	def index
-    @filterrific = initialize_filterrific(
-        model_class,
-        params[:filterrific],
-        available_filters: [:default_listing_order, :search_query]
-      ) or return
-      @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
-                                   .includes(building: [:management_company])
-                                   .default_listing_order
+    @listings = filterrific_search_results([:default_listing_order]).paginate(:page => params[:page], :per_page => 100)
+                                          .includes(building: [:management_company])
+                                          .default_listing_order
+    # @filterrific = initialize_filterrific(
+    #     model_class,
+    #     params[:filterrific],
+    #     available_filters: [:default_listing_order, :search_query]
+    #   ) or return
+    #   @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
+    #                                .includes(building: [:management_company])
+    #                                .default_listing_order
 
     unless model_class.to_s == 'Listing'
       @type = 'past'

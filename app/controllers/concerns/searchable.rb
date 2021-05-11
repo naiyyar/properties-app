@@ -1,13 +1,14 @@
 module Searchable
-	extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
-	private
+  private
 
-	def filterrific_search_results
+  def filterrific_search_results other_filter=[]
+    available_filters = other_filter + [:search_query]
     @filterrific = initialize_filterrific(
       model_class,
       params[:filterrific],
-      available_filters: [:search_query]
+      available_filters: available_filters
     ) or return
     @filterrific.find.order('created_at desc')
   end
