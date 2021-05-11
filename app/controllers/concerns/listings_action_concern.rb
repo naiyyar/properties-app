@@ -5,6 +5,7 @@ module ListingsActionConcern
     load_and_authorize_resource only: [:index, :export]
     before_action :set_building, only: :show_more
     before_action :find_listings_between_dates,  only: [:export, :transfer]
+    include Searchable
   end
 
 	def index
