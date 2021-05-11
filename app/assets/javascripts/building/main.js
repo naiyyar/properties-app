@@ -46,3 +46,13 @@ if($('.ca.mobile').length > 0){
     return false;
   });
 }
+
+// Prevent remote: true links opening in new tabs or windows
+$.each($("a[data-remote='true']"), function(i, val) {
+  $(val).data("url", $(val).attr("href")).attr("href", "javascript:void(0);")
+});
+
+$.rails.href = function(el) {
+  var $el = $(el);
+  return $el.data('url') || $el.data('href') || $el.attr('href');
+}
