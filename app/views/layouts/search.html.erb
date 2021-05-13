@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: false %>
+    <%= layout_stylesheet_link 'split_view/main' %>
   </head>
   
   <body class="notransition no-hidden" >
@@ -15,7 +16,6 @@
     <div id="remote-container"></div>
     <div id="auth-form"></div>
     
-    <%= layout_stylesheet_link 'split_view/main' %>
     <%= javascript_include_tag 'home/main'%>
     <%= javascript_include_tag 'search/main'%>
     <%= javascript_include_tag 'zapp'%>

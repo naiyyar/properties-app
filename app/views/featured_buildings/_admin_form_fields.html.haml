@@ -1,7 +1,7 @@
 - @submit_text = 'Save'
 .row
   .col-xs-6.col-sm-6.col-md-6.col-lg-6
-    - picker_class = @featured_by == 'admin' ? 'datetimepicker1' : 'datepicker'
+    - picker_class = @featured_by == 'admin' ? 'datetimepicker' : 'datepicker'
     .form-group
       %label Start Date
       = f.text_field :start_date, value: object.start_date.present? ? object.start_date&.to_s(:no_timezone) : nil,  class: "form-control #{picker_class}", :autocomplete => :off, disabled: object.featured_by_manager?
@@ -32,7 +32,11 @@
     .col-lg-12
       %label When active, the card on file wil be charged #{price} two days before the end date for the next four week feature cycle.
 
+%script{ src: "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js", integrity: "sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==", crossorigin: "anonymous"}
+%link{ rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css", integrity: "sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==",crossorigin:"anonymous"}
+
 :javascript
-  $('.datetimepicker1').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm'
-  });
+  $('.datetimepicker').datetimepicker({
+    startDate: new Date(),
+    format: 'Y-m-d H:i'
+  })

@@ -17,7 +17,8 @@ gem 'axlsx_rails' # has renamed to caxlsx_rails
 # B
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+# Not compatible with jquery 3
+# gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'browser'
 gem 'buttercms-rails'
 
