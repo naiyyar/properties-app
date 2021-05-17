@@ -2,6 +2,14 @@ $font-fam: 'Open Sans';
 $font-st: normal;
 $font-disp: swap;
 
+@font-face {
+  font-family: 'FontAwesome';
+  font-style: $font-st;
+  font-weight: 400;
+  font-display: $font-disp;
+  src: local('Open Sans Regular'),local('OpenSans-Regular'), url(asset-path('fontawesome-webfont.woff2')) format('woff2');
+}
+
 /* cyrillic-ext */
 @font-face {
   font-family: $font-fam;

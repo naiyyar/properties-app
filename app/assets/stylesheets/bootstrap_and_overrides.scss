@@ -1,5 +1,7 @@
 @import "bootstrap-custom";
 @import "awesome-bootstrap-checkbox";
+@import "fonts";
+@import "font-awesome";
 
 $hbo-color: #2272e2;
 
@@ -23,7 +25,7 @@ body {
   height: 100%;
   width: 100%;
   -webkit-font-smoothing: antialiased;
-  font-family: 'Open Sans', sans-serif !important;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   background-color: #fff !important;
   padding: 0px !important;

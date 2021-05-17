@@ -21,7 +21,7 @@ class HomeController < ApplicationController
   end
 
   def load_featured_buildings
-    @featured_buildings ||= FeaturedBuilding.get_random_buildings(pop_nb_buildings)
+    @featured_buildings = FeaturedBuilding.get_random_buildings(pop_nb_buildings)
   end
 
   def set_split_view_type
