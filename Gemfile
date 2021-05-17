@@ -42,7 +42,7 @@ gem 'email_verifier'
 # F
 gem 'figaro'
 gem 'filterrific', '~> 5.0'
-gem 'font-awesome-rails'
+# gem 'font-awesome-rails' # Warning: performance issue
 gem 'friendly_id', '~> 5.2.4'
 # G
 gem 'geocoder', '1.4.5'
