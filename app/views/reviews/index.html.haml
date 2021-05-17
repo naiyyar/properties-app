@@ -16,6 +16,6 @@
   
   %h2
   
-  = render partial: 'reviews/property_reviews', locals: { reviews: @reviews }
+  = render 'reviews/property_reviews', reviews: @reviews
   
   .text-center= will_paginate @reviews, renderer: BootstrapPagination::Rails

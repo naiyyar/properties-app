@@ -1,8 +1,12 @@
 module IconsHelper
 	def featured_badge_helper
 	  content_tag 'div', '', class: 'comp featured round' do
-	  	span_tag(klasses: 'icon-badge font-14')
+	  	span_tag(klasses: 'fa fa-certificate font-14')
 	  end
+	end
+
+	def flag_icon
+		span_tag(klasses: 'fa fa-flag-o font-16')
 	end
 
 	def tour_icon_helper
@@ -19,14 +23,6 @@ module IconsHelper
 		content_tag 'div', '', class: "icon-search-shared #{other_class}" do
 			span_tag(klasses: 'fa fa-search')
 	  end
-	end
-
-	def icon_pipe_helper
-		span_tag(klasses: 'icon-pipe')
-	end
-
-	def flag_icon
-		span_tag(klasses: 'icon-flag font-16')
 	end
 
 	def heart_icon

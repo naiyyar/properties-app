@@ -34,7 +34,7 @@
         %ul.rating.pull-left.star-sm{style: 'margin: 0px;padding: 0px;'}
           = rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id
         .favLink
-          = icon_pipe_helper
+          = '|'
           = thumb_icons(review)
       %p
       .prosCons

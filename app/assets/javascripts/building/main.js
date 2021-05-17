@@ -6,6 +6,8 @@
 //= require search_modal
 //= require featured_listings
 //= require useful_reviews
+//= require jquery.raty
+//= require ratyrate
 //= require ./show_map_handler
 
 

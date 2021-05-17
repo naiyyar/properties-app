@@ -1299,8 +1299,6 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.15.0)
-    simple-line-icons-rails (0.1.6)
-      railties (>= 3.2, < 7)
     simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -1441,7 +1439,6 @@ DEPENDENCIES
   rubycritic
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  simple-line-icons-rails
   sitemap_generator
   social-share-button
   spring

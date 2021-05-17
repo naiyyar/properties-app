@@ -43,7 +43,7 @@ class UnitsController < ApplicationController
     #   marker.lng building.longitude
     #   building_link = view_context.link_to building.building_name, building_path(building)
     #   marker.title "#{@unit.name}-#{building.building_name}"
-    #   marker.infowindow render_to_string(:partial => '/layouts/shared/marker_infowindow', 
+    #   marker.infowindow render_to_string(:partial => '/layouts/shared/custom_infowindow', 
     #                                      :locals => { 
     #                                                   building_link: building_link, 
     #                                                   building: building,

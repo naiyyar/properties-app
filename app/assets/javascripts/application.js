@@ -22,8 +22,6 @@
 //= require jquery.slimscroll.min
 //= require jquery.tagsinput.min
 //= require underscore
-//= require jquery.raty
-//= require ratyrate
 //= require bootstrap-datepicker
 //= require jquery.validate
 //= require jquery.touchSwipe.min

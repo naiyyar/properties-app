@@ -36,12 +36,12 @@
             = review.resident_to.to_i == Date.today.year ? 'Present' : review.resident_to if review.resident_to.present?
           - else
             = 'Visitor'
-      %div{style: "display: inline-block;"}
+      %div{style: 'display: inline-block;'}
         %p.review-header-item
-        %ul.rating.pull-left.star-sm{style: "margin: 0px;padding: 0px;"}
+        %ul.rating.pull-left.star-sm{style: 'margin: 0px;padding: 0px;'}
           = rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id
         .favLink
-          = icon_pipe_helper
+          = '|'
           - if review.user.votes.where(vote: true, review_id: review.id).present?
             %span.fa.fa-thumbs-up.recommended
           - else
