@@ -3,7 +3,7 @@ module ReviewsHelper
 	def reviewer_avatar review
 		unless review.anonymous
       if review.user.avatar.present?
-        avatar_image_tag(review.user.avatar)
+        avatar_image_tag(review.user.avatar.url)
       elsif review.user.image_url.present?
       	avatar_image_tag(review.user.image_url)
       else
