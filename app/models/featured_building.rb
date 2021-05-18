@@ -44,7 +44,7 @@ class FeaturedBuilding < ApplicationRecord
 
   FBS_COUNT = 4
   def self.get_random_buildings buildings
-    featured_buildings = self.active.limit(FBS_COUNT).order('RANDOM()')
+    featured_buildings = self.active.limit(FBS_COUNT).order(Arel.sql('random()'))
     building_ids       = featured_buildings.pluck(:building_id).uniq
     if building_ids.length < FBS_COUNT
       building_ids += active_buildings_ids_without_featured(buildings, building_ids)
@@ -56,7 +56,7 @@ class FeaturedBuilding < ApplicationRecord
     buildings.where.not(id: building_ids)
              .with_active_listing
              .limit(FBS_COUNT - building_ids.length)
-             .order('RANDOM()').pluck(:id)
+             .order(Arel.sql('random()')).pluck(:id)
   end
 
   # Using when no buildings found after appling filters
@@ -66,7 +66,7 @@ class FeaturedBuilding < ApplicationRecord
         .where('buildings.neighborhood @@ :q OR 
                 buildings.neighborhoods_parent @@ :q OR
                 buildings.neighborhood3 @@ :q', q: search_query)
-        .order('RANDOM()').limit(2)
+        .order(Arel.sql('random()')).limit(2)
   end
 
   private

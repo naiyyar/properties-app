@@ -34,7 +34,8 @@ module SearchFiltersHelper
 	end
 
 	def filter_params
-		params[:filter].present? ? params[:filter].to_query('filter') : nil
+		return unless permitted_filter_params[:filter].present?
+		permitted_filter_params[:filter].to_query('filter')
 	end
 
 	def listings_filters
@@ -100,5 +101,15 @@ module SearchFiltersHelper
 
 	def price_locked? val
 		(@filters.present? && @filters[:price].present? && @filters[:price].include?(val)) ? 'disabled' : ''
+	end
+
+	private
+	
+	# def filter_params
+	# 	@filter_params ||= params[:filter]
+	# end
+
+	def permitted_filter_params
+		params.permit!
 	end
 end
