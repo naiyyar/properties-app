@@ -195,21 +195,21 @@ class Building < ApplicationRecord
   end
 
   def get_subway_lines
-    Rails.cache.fetch([self, 'subway_lines']) { 
-      DistanceMatrixService.new(self).get_data 
-    }
+    CacheService.new( records: DistanceMatrixService.new(self).get_data,
+                      key: "subway_lines_#{self.id}"
+                    ).fetch
   end
 
   def cached_listings
-    Rails.cache.fetch([self, 'active_listings']) { 
-      self.listings
-    }
+    CacheService.new( records: self.listings,
+                      key: "active_listings_#{self.id}"
+                    ).fetch
   end
 
   def cached_past_listings
-    Rails.cache.fetch([self, 'past_listings']) { 
-      self.past_listings
-    }
+    CacheService.new( records: self.past_listings,
+                      key: "past_listings_#{self.id}"
+                    ).fetch
   end
 
   def get_listings filter_params, type='active', load_more_params={}
@@ -337,9 +337,9 @@ class Building < ApplicationRecord
   end
 
   def self.transparentcity_buildings
-    Rails.cache.fetch([self, 'transparentcity_buildings']) { 
-      where.not(building_street_address: nil)
-    }
+    CacheService.new( records: where.not(building_street_address: nil),
+                      key: 'transparentcity_buildings.all'
+                    ).fetch
   end
 
   def self.neighborhood1

@@ -55,7 +55,8 @@ class ManagementCompany < ApplicationRecord
   end
 
   def cached_buildings
-  	Rails.cache.fetch([self, 'company_buildings']) { company_buildings }
+    CacheService.new(records: company_buildings, 
+                     key: "company_buildings_#{self.id}").fetch
   end
 	
 	def add_building building_ids

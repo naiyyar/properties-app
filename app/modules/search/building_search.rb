@@ -77,9 +77,9 @@ module Search
     end
 
     def city_count buildings, city, sub_boroughs = nil
-      Rails.cache.fetch([self, city, 'city_count']) {
-        buildings.where('city = ? OR neighborhood in (?)', city, sub_boroughs).size
-      }
+     CacheService.new( records: buildings.cached_buildings_by_city_or_nb(city, sub_boroughs).size,
+                        key: "city_count_#{city}"
+                      ).fetch
     end
   end
 end

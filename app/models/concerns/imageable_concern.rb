@@ -19,7 +19,9 @@ module ImageableConcern
   end
 
   def cached_image_uploads assets
-    Rails.cache.fetch([self, 'imageUploads']) { image_uploads(assets) }
+    CacheService.new(records: image_uploads(assets), 
+                     key: "imageUploads_#{self.id}"
+                     ).fetch
   end
 
   def doc_uploads assets

@@ -97,8 +97,9 @@ class Upload < ApplicationRecord
   end
 
   def self.cached_property_photos property_ids, type
-    key = property_ids.present? ? property_ids.join('_') : '1'
-    Rails.cache.fetch([self, "#{type}_photos", key]) { building_photos(property_ids, type) }
+    @property_ids = property_ids
+    CacheService.new(records: building_photos(@property_ids, type) , 
+                     key: "#{type}_photos_#{self.id}_#{cache_key}").fetch
   end
 
   def self.uploads_json_hash(uploads)
@@ -120,6 +121,11 @@ class Upload < ApplicationRecord
   end
 
   private
+
+  def cache_key
+    return '1' unless @property_ids.present?
+    @property_ids.join('_')
+  end
   
   def set_defaults
     self.rotation ||= 0

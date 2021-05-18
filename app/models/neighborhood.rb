@@ -32,9 +32,9 @@ class Neighborhood < ApplicationRecord
   end
 
   def self.nb_buildings_count hoods, name
-    Rails.cache.fetch([self, name, 'hoods_count']) {
-      hoods.where(name: name).sum(:buildings_count) 
-    }
+    CacheService.new( records: hoods.where(name: name).sum(:buildings_count),
+                      key: "hoods_count_#{name}"
+                    ).fetch
   end
 
   def self.cached_nb_buildings_count name
