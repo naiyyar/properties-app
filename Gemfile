@@ -7,15 +7,12 @@ ruby '2.6.6'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.5'
 
 # A
-# gem 'activesupport-json_encoder'
 gem 'american_date'
 gem 'aws-sdk', '~> 3'
 
 # B
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
-# Not compatible with jquery 3
-# gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'browser'
 gem 'buttercms-rails'
 
@@ -41,13 +38,12 @@ gem 'email_verifier'
 # F
 gem 'figaro'
 gem 'filterrific', '~> 5.0'
-# gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.2.4'
 # G
 gem 'geocoder', '1.4.5'
 
 # H
-gem 'haml' #, git: 'https://github.com/haml/haml'
+gem 'haml'
 gem 'httparty'
 
 # I
@@ -69,12 +65,11 @@ gem 'kgio'
 # M
 gem 'memcachier'
 gem 'momentjs-rails'
-# gem 'multi_fetch_fragments'
 
 # N
 
 # O
-gem 'oj' #, '~> 2.16.1' # Oj for JSON serialization
+gem 'oj' # Oj for JSON serialization
 gem 'omniauth', '1.9.1'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
@@ -88,9 +83,8 @@ gem 'puma', '~> 3.11'
 # Q
 
 # R
-# gem 'rack-cache'
 gem 'ratyrate', github: 'wazery/ratyrate'
-gem 'react-rails'
+# gem 'react-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'rolify'
 gem 'roo'
@@ -107,7 +101,6 @@ gem 'stripe_event'
 
 # T
 gem 'thumbs_up'
-# gem 'turbolinks', '~> 5.2.0'
 
 # U
 gem 'underscore-rails'
@@ -132,9 +125,6 @@ gem 'wkhtmltopdf-binary' #, '0.12.4'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -175,7 +165,6 @@ group :production do
   gem 'rails_12factor'
   gem 'wkhtmltopdf-heroku', '2.12.4.0'
 end
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
