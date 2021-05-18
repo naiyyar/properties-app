@@ -25,5 +25,7 @@
 
 .byebug_history
 /public/deploy
-/public/sitemaps
+#ignoring sitemaps
+/public/sitemaps/*
+/public/sitemaps/sitemap.xml
 /public/assets
