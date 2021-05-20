@@ -249,7 +249,7 @@ input {
   border-bottom-right-radius: 0;
 }
 
-[data-toggle="buttons"]>.btn>input[type="radio"], [data-toggle="buttons"]>.btn>input[type="checkbox"] {
+[data-bs-toggle="buttons"]>.btn>input[type="radio"], [data-bs-toggle="buttons"]>.btn>input[type="checkbox"] {
   position: absolute;
   z-index: -1;
   filter: alpha(opacity=0);

@@ -2,8 +2,7 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button{type: "button", class: "close", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}
-          &times;
+        %button.btn-close{'aria-label' => 'Close', 'data-bs-dismiss' => 'modal', type: 'button'}
       
       .modal-body.no-padding
         = form_for broker_fee_percent, html: { class: 'form-horizontal1' } do |f|
@@ -16,5 +15,5 @@
                  
                 
           %footer
-            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
+            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-bs-dismiss' => 'modal'
             = f.submit 'Submit', class: 'btn btn-primary'

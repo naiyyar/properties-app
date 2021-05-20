@@ -2,8 +2,7 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button{type: "button", class: "close", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}
-          &times;
+        %button{type: 'button', class: 'btn-close', 'data-bs-dismiss'=>'modal', 'aria-hidden'=>'true'}
       
       .modal-body.no-padding
         = form_tag '/add_or_update_rent_medians' do
@@ -25,7 +24,7 @@
                       = text_field_tag "price[#{bt_range}][rent_price]", @rent_medians.present? ? RentMedian.rent_price(bt_range, @rent_medians) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Price'
                 
           %footer
-            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
+            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-bs-dismiss' => 'modal'
             = submit_tag 'Submit', class: 'btn btn-primary'
 
 :css

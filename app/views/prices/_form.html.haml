@@ -2,8 +2,7 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button{type: "button", class: "close", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}
-          &times;
+        %button{type: 'button', class: 'btn-close', 'data-bs-dismiss'=>"modal", 'aria-hidden'=>'true'}
       
       .modal-body.no-padding
         = form_tag '/add_or_update_prices' do
@@ -31,7 +30,7 @@
                       = text_field_tag "price[#{bt_range}][max_price]", @range_prices.present? ? Price.max_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Max'
                 
           %footer
-            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
+            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-bs-dismiss' => 'modal'
             = submit_tag 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
 
 :css

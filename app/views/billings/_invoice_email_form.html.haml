@@ -2,9 +2,8 @@
 	.modal-dialog
 		.modal-content
 			.modal-header
-				%button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
-					%span{"aria-hidden" => "true"} &times;
 				%h4 Email Receipt
+				%button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
       
 			.modal-body
 				= form_tag email_receipt_billing_path(@billing), method: :post, id: 'email-form', class: 'form-horizontal' do

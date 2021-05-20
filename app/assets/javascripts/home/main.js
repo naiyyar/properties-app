@@ -52,17 +52,17 @@ Transparentcity = {
 		}else{
 			cta_div.hide();
 		}
-	},
-	lazyLoadShowPageContent: function(id){
-		$.ajax({
-			url: '/buildings/'+id+'/lazy_load_content',
-			dataType: 'script',
-			type: 'get',
-			success: function(){
-				//console.log('thumb images loaded')
-			}
-		})
 	}
+	// lazyLoadShowPageContent: function(id){
+	// 	$.ajax({
+	// 		url: '/buildings/'+id+'/lazy_load_content',
+	// 		dataType: 'script',
+	// 		type: 'get',
+	// 		success: function(){
+	// 			//console.log('thumb images loaded')
+	// 		}
+	// 	})
+	// }
 };
 
 $('.btn').click(function() {

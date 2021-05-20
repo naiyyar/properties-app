@@ -13,7 +13,7 @@
       <% if user_signed_in? %>
         <%= link_to 'Add Photo', new_building_upload_path(building_id: @building, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm' %>
       <%else%>
-        <%= link_to 'Add Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm'  %>
+        <%= link_to 'Add Photo', '#signin', 'data-bs-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm'  %>
       <%end%>  
     </div>
   <%end%>

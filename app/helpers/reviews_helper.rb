@@ -81,7 +81,7 @@ module ReviewsHelper
 	end
 
 	def flag_as_inappropriate href, classes: ''
-		link_to flag_icon, href, 'data-toggle' => 'modal', title: 'Flag as inappropriate', class: classes
+		link_to flag_icon, href, 'data-bs-toggle' => 'modal', title: 'Flag as inappropriate', class: classes
 	end
 
 	def flagged_classes review
@@ -113,7 +113,7 @@ module ReviewsHelper
 	end
 
 	def data_attributes review
-		return { toggle: 'modal'} unless current_user
+		return { 'bs-toggle' => 'modal'} unless current_user
 		{ reviewid: review.id, userid: current_user.id }
 	end
 

@@ -548,7 +548,7 @@ a.link_underlined:hover, .underline{
 }
 
 .btn-blue {
-    background-color: $hbo-color;
+    background-color: $hbo-color !important;
     color: #fff;
 }
 .btn-o.btn-blue {

@@ -6,7 +6,7 @@
           <% if user_signed_in? %>
             <%= link_to '+ Rent Information', "/user_steps/next_page?contribution_for=unit_price_history&unit_id=#{object.id}", class: 'btn btn-o btn-primary btn-block' %>
           <%else%>
-            <%= link_to '+ Rent Information', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary btn-block'  %>
+            <%= link_to '+ Rent Information', '#signin', 'data-bs-toggle' => 'modal', class: 'btn btn-o btn-primary btn-block'  %>
           <%end%>
         </li>
       <%end%>
@@ -19,7 +19,7 @@
         <div class="btn-group1 btn-group-justified">
           <div class="btn-group">
             <%# if user_signed_in? %>
-              <%= link_to '+ Unit', '#new_unit_modal', 'data-toggle' => 'modal', class: 'add_unit', class: 'btn btn-o btn-primary btn-block'  %>
+              <%= link_to '+ Unit', '#new_unit_modal', 'data-bs-toggle' => 'modal', class: 'add_unit', class: 'btn btn-o btn-primary btn-block'  %>
             <%#end%>  
           </div>
 
@@ -27,7 +27,7 @@
             <% if user_signed_in? %>
               <%= link_to '+ Documents', new_building_upload_path(building_id: object, upload_type: 'documents'), 'data-no-turbolink' => false , class: 'btn btn-o btn-primary' %>
             <%else%>
-              <%= link_to '+ Documents', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary'  %>
+              <%= link_to '+ Documents', '#signin', 'data-bs-toggle' => 'modal', class: 'btn btn-o btn-primary'  %>
             <%end%>  
           </div>
           
@@ -41,14 +41,14 @@
             <% if user_signed_in? %>
               <%= link_to '+ Photo', new_building_upload_path(building_id: object, upload_type: 'photos'), class: 'btn btn-o btn-primary btn-sm' %>
             <%else%>
-              <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm'  %>
+              <%= link_to '+ Photo', '#signin', 'data-bs-toggle' => 'modal', class: 'btn btn-o btn-primary btn-sm'  %>
             <%end%>  
           </div>
           <div class="btn-group">
             <% if user_signed_in? %>
               <%= link_to '+ Amenities', edit_building_path(contribution: 'building_amenities', user_id: current_user.id, id: object.id), class: 'btn btn-o btn-primary' %>
             <%else%>
-              <%= link_to '+ Amenities', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary'  %>
+              <%= link_to '+ Amenities', '#signin', 'data-bs-toggle' => 'modal', class: 'btn btn-o btn-primary'  %>
             <%end%> 
           </div>
         </div>
@@ -61,14 +61,14 @@
             <% if user_signed_in? %>
               <%= link_to '+ Photo', new_unit_upload_path(unit_id: object), 'data-no-turbolink' => false , class: 'btn btn-o btn-primary' %>
             <%else%>
-              <%= link_to '+ Photo', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary'  %>
+              <%= link_to '+ Photo', '#signin', 'data-bs-toggle' => 'modal', class: 'btn btn-o btn-primary'  %>
             <%end%>   
           </div>
           <div class="btn-group">
             <% if user_signed_in? %>
               <%= link_to '+ Amenities', "/user_steps/next_page?contribution_for=unit_amenities&unit_id=#{object.id}", class: 'btn btn-o btn-primary' %>
             <%else%>
-              <%= link_to '+ Amenities', '#signin', 'data-toggle' => 'modal', class: 'btn btn-o btn-primary'  %>
+              <%= link_to '+ Amenities', '#signin', 'data-bs-toggle' => 'modal', class: 'btn btn-o btn-primary'  %>
             <%end%> 
           </div>
         </div>

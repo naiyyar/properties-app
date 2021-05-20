@@ -22,7 +22,7 @@
         - unless hide_hood_dropdown?
           .hood.col-xs-6
             .btn-hoods{class: current_view}
-              %button.btn.btn-primary.dropdown-toggle-neighborhoods.btn-round{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-toggle' => 'dropdown1'}
+              %button.btn.btn-primary.dropdown-toggle-neighborhoods.btn-round{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-bs-toggle' => 'dropdown1'}
                 %span.dropdown-label Hood
                 %span.caret
 

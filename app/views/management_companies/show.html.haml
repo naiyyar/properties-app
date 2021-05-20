@@ -30,11 +30,11 @@
     = hidden_field_tag :total_reviews, @total_reviews
     %ul.nav.nav-tabs.nav-justified{role: 'tablist'}
       %li.active
-        %a{'data-toggle' => 'tab', href: '#building_managed', role: 'tab'}
+        %a{'data-bs-toggle' => 'tab', href: '#building_managed', role: 'tab'}
           = 'BUILDINGS MANAGED'
           (#{@buildings_count})
       %li
-        %a{'data-toggle' => 'tab', href: '#buildings_reviews_tab', role: 'tab'}= "BUILDING REVIEWS (#{ @total_reviews })"
+        %a{'data-bs-toggle' => 'tab', href: '#buildings_reviews_tab', role: 'tab'}= "BUILDING REVIEWS (#{ @total_reviews })"
     
     .tab-content.split-view
       #buildings_reviews_tab.tab-pane.fade{style: 'overflow-y: scroll; height: 500px;'}

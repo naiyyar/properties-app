@@ -1,8 +1,7 @@
-%a.dropdown-toggle.no-hover-underline.Header-navText{href: '#', 'data-toggle' => 'dropdown'} 
+%a.dropdown-toggle.no-hover-underline.Header-navText#ToolsMenu{href: '#', 'data-bs-toggle' => 'dropdown'} 
 	Tools
-	%span.fa.fa-chevron-down
 
-.dropdown-menu.userMenu.admin{role: 'menu'}
+.dropdown-menu.userMenu.admin{role: 'menu', 'aria-labelledby' => 'ToolsMenu'}
 	%ul
 		- tool_nav_helper.each do |item|
 			%li= link_to item[:title], item[:url], class: 'font-16'

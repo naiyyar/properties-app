@@ -23,7 +23,7 @@
         <label>Square feet* </label>
         <div class="input-group">
           <%= text_field_tag 'unit_square_feet', nil, name: 'building[units_attributes][0][square_feet]', class: 'form-control validate' %>
-          <span class="input-group-addon" data-toggle="tooltip" data-placement="left" aria-hidden="true" title="Provide best estimate if unsure
+          <span class="input-group-addon" data-bs-toggle="tooltip" data-placement="left" aria-hidden="true" title="Provide best estimate if unsure
           studio range: 350-600, 
           1 bdrm range: 500-800,
           2 bdrm range: 800-1200">
@@ -37,7 +37,7 @@
         <label>Bedrooms* </label>
         <div class="input-group">
           <%= text_field_tag 'unit_number_of_bedrooms',nil, name: "building[units_attributes][0][number_of_bedrooms]", class: "form-control validate" %>
-          <span class="input-group-addon" data-toggle="tooltip" data-placement="left" aria-hidden="true" title="Use 0 for a studio.">
+          <span class="input-group-addon" data-bs-toggle="tooltip" data-placement="left" aria-hidden="true" title="Use 0 for a studio.">
             <i class="fa fa-question-circle" ></i>
           </span>
         </div>
@@ -56,7 +56,7 @@
       	<%# if user_signed_in? %>
           <%= submit_tag 'Next', class: 'btn btn-primary' %>
         <%#else%>
-          <%#= link_to 'Next','#signin', 'data-toggle' => 'modal', class: 'btn btn-primary'%>
+          <%#= link_to 'Next','#signin', 'data-bs-toggle' => 'modal', class: 'btn btn-primary'%>
         <%#end%>
       </div>
     </div>

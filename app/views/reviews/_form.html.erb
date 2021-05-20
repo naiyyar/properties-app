@@ -35,7 +35,7 @@
 		<div class="form-group">
 			<label>Reviewer Type* </label>
 			<br />
-			<div class="btn-group" data-toggle="buttons">
+			<div class="btn-group" data-bs-toggle="buttons">
 			  <label class="btn btn-default reviewer_type">
 			  	<%= f.radio_button :tenant_status,'current', id: 'current_tenant', class: 'reviewer_status' %> Current Tenant
 			  </label>
@@ -115,7 +115,7 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 		<div class="form-group">
 			<label>Would you recommend this building?*</label>
 			<br />
-			<div class="btn-group" data-toggle="buttons">
+			<div class="btn-group" data-bs-toggle="buttons">
 			  <label class="btn btn-default">
 			  	<%= radio_button_tag 'vote', true %> <span class='fa fa-thumbs-o-up'></span>
 			  </label>
