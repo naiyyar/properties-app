@@ -1,14 +1,7 @@
-- if current_user.present?
-  .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-12
-      .pull-right= link_to 'Add new building', new_building_path, class: 'btn btn-blue'
-  
-  %h2
-
-.pull-right= render 'layouts/shared/filterrific_form'
+= render 'layouts/shared/admin_page_header', link_title: 'Add new building', link_url: new_building_path
 
 - cache [@buildings, params[:page]] do
-  = render 'buildings/buildings', buildings: @buildings
+	= render 'buildings/buildings', buildings: @buildings
 
 .text-center
-  = will_paginate @buildings, renderer: BootstrapPagination::Rails
+	= render 'layouts/shared/add_pagination', objects: @buildings

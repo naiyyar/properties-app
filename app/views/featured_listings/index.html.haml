@@ -1,6 +1,7 @@
 - if current_user.has_role? :admin
-
-  .pull-right= render 'layouts/shared/filterrific_form'
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      .float-end= render 'layouts/shared/filterrific_form'
   
   %h2
 
@@ -8,7 +9,7 @@
     .col-xs-12.col-sm-12.col-md-12.col-lg-12
       #filterrific_results{style: 'margin-top: 10px;'}
         .table-overflow
-          %table.table.table-striped#sortable
+          %table.table
             %thead
               %tr
                 %th{width: '6%'} Feature ID
@@ -23,6 +24,7 @@
                 %th{width: '6%'} Delete
                 %th{width: '6%'} Renew
                 %th{width: '6%'} Active
+                %th
             
             %tbody.table
               - @featured_listings.each do |listing|
@@ -41,6 +43,7 @@
                     %input.apple-switch.sb-sm.featured-listing.renew.disabled{type: 'checkbox', checked: listing.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => listing.id, disabled: true }
                   %td
                     %input.apple-switch.sb-sm.featured-listing{type: 'checkbox', checked: listing.active, style: 'margin: 0px;', data: { fbid: listing.id } }
+                  %td
 
   .text-center= will_paginate @featured_listings, renderer: BootstrapPagination::Rails
 

@@ -1,16 +1,11 @@
 - if current_user&.has_role? :admin
   - if current_user.present?
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-        .pull-right= link_to 'Add New Featured Comp', new_featured_comp_path, class: 'btn btn-blue'
-    
-    %h2
-  
-    .pull-right= render 'layouts/shared/filterrific_form'
+    = render 'layouts/shared/admin_page_header', link_title: 'Add new Fetured Comp', link_url: new_featured_comp_path
   
   = render 'featured_comps/comps'
   
-  .text-center= will_paginate @featured_comps, renderer: BootstrapPagination::Rails
+  .text-center
+    = render 'layouts/shared/add_pagination', objects: @featured_comps
 
 :css
   #sortable_filter{

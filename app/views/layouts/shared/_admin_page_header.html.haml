@@ -1,0 +1,10 @@
+- if current_user.present?
+	.row
+		.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.float-end= link_to link_title, link_url, class: 'btn btn-blue txt-color-white'
+  
+	%h2
+
+.row
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.float-end= render 'layouts/shared/filterrific_form'
