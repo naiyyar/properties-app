@@ -13,10 +13,6 @@
 //= require ./home/jquery.init
 //= require ./home/main
 //= require rails.validations
-//= require bootstrap/tooltip
-//= require bootstrap/carousel
-//= require bootstrap/button
-//= require bootstrap/collapse
 //= require jquery.bstransitions
 //= require jquery-placeholder
 //= require jquery.slimscroll.min

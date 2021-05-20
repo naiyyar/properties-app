@@ -50,8 +50,8 @@ bapp.buildings.prototype = {
   _render: function(ul, item) {
     search_type = item.search_type
     $("#buildings-search-no-results").css('display','none');
-    if($(".no-match-link").hasClass('hidden')){
-      $(".no-match-link").removeClass('hidden');
+    if($(".no-match-link").hasClass('d-none')){
+      $(".no-match-link").removeClass('d-none');
     }
     var building_name = ''
     if(item.building_name == '' || item.building_name == undefined){
@@ -74,8 +74,8 @@ bapp.buildings.prototype = {
 
   _select: function(e, ui) {
     $('#units-search-txt').val('');
-    if(!$('.no-match-link').hasClass('hidden')){
-      $('.no-match-link').addClass('hidden');
+    if(!$('.no-match-link').hasClass('d-none')){
+      $('.no-match-link').addClass('d-none');
     }
     
     $("#new_unit_building").addClass('hide');
@@ -160,8 +160,8 @@ bapp.buildings.prototype = {
         $("ul.ui-autocomplete").show();
       }
       else{
-        if(!$('.no-match-link').hasClass('hidden')){
-          setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
+        if(!$('.no-match-link').hasClass('d-none')){
+          setTimeout(function(){ $('.no-match-link').addClass('d-none') }, 400);
         }
       }
   },

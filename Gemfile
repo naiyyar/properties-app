@@ -12,7 +12,8 @@ gem 'aws-sdk', '~> 3'
 
 # B
 gem 'bootstrap-datepicker-rails'
-gem 'bootstrap-sass', '~> 3.3.6'
+# gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap', '~> 5.0.1'
 gem 'browser'
 gem 'buttercms-rails'
 

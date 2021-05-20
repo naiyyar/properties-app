@@ -1,4 +1,4 @@
-@import "bootstrap-custom";
+@import "bootstrap";
 @import "awesome-bootstrap-checkbox";
 @import "fonts";
 @import "font-awesome";
@@ -24,12 +24,15 @@ html{
 body {
   height: 100%;
   width: 100%;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased !important;
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   background-color: #fff !important;
   padding: 0px !important;
   margin: 0px !important;
+}
+.hidden, .hide {
+  display: none;
 }
 
 .row {
@@ -149,6 +152,10 @@ body {
 
 .btn-round {
   border-radius: 50px !important;
+}
+
+.btn-block {
+  width: 100%;
 }
 
 label {
@@ -411,13 +418,13 @@ input[type="radio"], input[type="checkbox"] {
   min-width: 202px;
 }
 
+textarea.form-control{
+  height: auto;
+}
+
 /* Media Query */
 
 @media screen and (max-width: 767px) {
-  textarea.form-control{
-    height: 100px;
-  }
-
   .carousel-caption {
     position: relative;
     right: 0%;

@@ -1,11 +1,11 @@
 - if !mobile?
-  #newConactModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
+  #newConactModal.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'ContactModal', role: 'dialog', tabindex: '-1'}
     .modal-dialog.modal-md
       .modal-content
         .modal-header
-          %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
-            %span{'aria-hidden' => 'true'} ×
-          %h4.modal-title Contact Property Manager
+          %h5.modal-title#ContactModal Contact Property Manager
+          %button.btn-close{'aria-label' => 'Close', 'data-bs-dismiss' => 'modal', type: 'button'}
+        
         .modal-body.no-padding
           = render 'contacts/contact_building_form'
 - else

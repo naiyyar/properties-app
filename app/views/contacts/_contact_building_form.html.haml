@@ -1,14 +1,14 @@
 = form_for @contact, html: { class: 'smart-form pm-contact-form' } do |f|
   %fieldset
-    .form-group
+    .form-group.mb-3
       / = f.text_field :email, class: 'form-control validate', placeholder: 'Email*', pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$", title: 'Invalid email address'
       = f.text_field :email, class: 'form-control validate', placeholder: 'Email*', pattern: "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}", required: true, title: 'Email Format should be xyz@abc.com'
-    .form-group
+    .form-group.mb-3
       = f.text_field :phone, class: 'form-control phone_number', placeholder: 'Phone', id: 'uintTextBoxPhone', maxlength: '10'
       = f.hidden_field :building_id, value: @building.id if @building.present?
       = f.hidden_field :user_id, value: current_user.id if current_user.present?
-    .form-group
-      = f.text_area :comment, value: "I'm interested in availabilities at #{@building.building_name_or_address}.", class: "form-control validate", rows: 5, style: 'color: #777777;'
+    .form-group.mb-3
+      = f.text_area :comment, value: "I'm interested in availabilities at #{@building.building_name_or_address}.", class: 'form-control validate', rows: 5, style: 'color: #777777;'
   
     = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder', style: 'font-size: 18px;'
     
