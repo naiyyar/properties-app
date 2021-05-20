@@ -2,15 +2,15 @@
   .row
     .col-lg-3.col-xs-5.col-md-5
     .col-sm-3.col-lg-9.col-xs-7.col-md-7
-      .text-right= seel_all_link(@building, @uploaded_images_count, 'see-all')
+      .text-end= seel_all_link(@building, @uploaded_images_count, 'see-all')
 - else
   .row
     - if current_user.admin?
-      .col-lg-3.col-md-3.col-xs-4= add_tour_link(@building, klass: 'btn-block')
-      .col-lg-3.col-md-3.col-xs-4= add_photos_link(@building, klass: 'btn-block')
+      .col-lg-3.col-md-3.col-xs-4= add_tour_link(@building, klass: 'd-block')
+      .col-lg-3.col-md-3.col-xs-4= add_photos_link(@building, klass: 'd-block')
       .col-lg-6.col-md-6.col-xs-4
-        .text-right= seel_all_link(@building, @uploaded_images_count)
+        .text-end= seel_all_link(@building, @uploaded_images_count)
     - else
       .col-lg-3.col-xs-5.col-md-5
       .col-sm-3.col-lg-9.col-xs-7.col-md-7
-        .text-right= seel_all_link(@building, @uploaded_images_count, 'see-all')
+        .text-end= seel_all_link(@building, @uploaded_images_count, 'see-all')

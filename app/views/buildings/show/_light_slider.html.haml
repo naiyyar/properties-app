@@ -1,6 +1,8 @@
 .sh-slider-container
-	.col.col-lg-12.col-md-12.col-sm-12.col-xs-12
+	%section{style: 'width: 100%;'}
 		- unless mobile?
-			#thumb-pager
-				.col-lg-5.col-md-5= render 'buildings/show/ls_pager'
-		%div{ class: "#{'col-lg-7 col-md-7' unless mobile?}" }= render 'buildings/show/lightslider', building: @building
+			#thumb-pager{style: 'width: 30%;'}
+				= render 'buildings/show/ls_pager'
+		
+		%div{ class: "#{'col-lg-7 col-md-7' unless mobile?}" }
+			= render 'buildings/show/lightslider', building: @building

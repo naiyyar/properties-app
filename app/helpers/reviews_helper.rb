@@ -117,4 +117,10 @@ module ReviewsHelper
 		{ reviewid: review.id, userid: current_user.id }
 	end
 
+	def write_review_link building
+		link_to 'Write a Review', 
+						new_building_review_path(building_id: building, contribution: 'building_review'), 
+						class: 'btn btn-warning no-review btn-round txt-color-white'
+	end
+
 end
