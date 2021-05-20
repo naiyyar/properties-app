@@ -1,11 +1,11 @@
 - if !mobile?
-  #showPastListing.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'NewUnitLabel', role: 'dialog'}
+  #showPastListing.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'ListingModal', role: 'dialog'}
     .modal-dialog.modal-md
       .modal-content
         .modal-header{style: 'padding: 15px 15px 0px;'}
-          %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
-            %span{'aria-hidden' => 'true'} ×
-          %div.modal-title= listing_header_title(@rentals).html_safe
+          %div.modal-title#ListingModal= listing_header_title(@rentals).html_safe
+          = close_button
+         
         .modal-body.no-padding
           = render 'buildings/show/listings', listings: @listings, type: @rentals
 - else
@@ -15,7 +15,7 @@
         .text-left.title-header{style: 'border-bottom: 1px solid #ddd;'}
           %h4.text-left{style: 'margin-top: 10px; margin-bottom: 10px;'}= listing_header_title(@rentals).html_safe
 
-      %div.text-right.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
+      .header.text-right.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
         = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeContact'
     
     = render 'buildings/show/listings', listings: @listings, type: @rentals

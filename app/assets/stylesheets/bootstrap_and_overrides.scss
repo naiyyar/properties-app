@@ -158,6 +158,10 @@ body {
   width: 100%;
 }
 
+.txt-color-white{
+  color: #fff !important; 
+}
+
 label {
   display: inline-block;
   max-width: 100%;
@@ -418,6 +422,11 @@ input[type="radio"], input[type="checkbox"] {
   min-width: 202px;
 }
 
+.dropdown-toggle.no-caret::after{
+  content: '';
+  border: none;
+}
+
 textarea.form-control{
   height: auto;
 }
@@ -439,6 +448,6 @@ textarea.form-control{
 
 @media screen and (min-width: 992px){
   .modal-md {
-    width: 640px;
+    max-width: 640px;
   }
 }

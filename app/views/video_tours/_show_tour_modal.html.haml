@@ -3,11 +3,11 @@
     .modal-dialog.modal-md
       .modal-content{style: 'background-color: #333;'}
         .modal-header
-          %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button', style: 'color: #fff;opacity: 1;'}
-            %span{'aria-hidden' => 'true'} ×
           %h4.modal-title{style: 'color: #fff;'}
             .pageTitle.font-bold{style: 'font-size: 16px;'}= @tourable.property_name_or_address
             .address{style: 'font-size: 14px;'}= @tourable.full_street_address
+          = close_button(color: 'btn-close-white')
+          
         .modal-body.no-padding
           - @vd_height = '190'
           #first-category
