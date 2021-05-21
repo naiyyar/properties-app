@@ -21,7 +21,7 @@
           <br />
           
           <div class="pages-container">
-            <%= will_paginate @buildings, renderer: BootstrapPagination::Rails %>
+            <%= render 'layouts/shared/add_pagination', objects: @buildings %>
           </div>
         <%end%>
       </div>

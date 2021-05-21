@@ -41,7 +41,8 @@
 						%h4= @type == 'featured' ? title : 'Billing'
 				
 			= render partial_file_path, featured_objects: featured_objects
-			.text-center= will_paginate featured_objects, renderer: BootstrapPagination::Rails
+			.text-center
+				= render 'layouts/shared/add_pagination', objects: featured_objects
     
 	- else
 		.tab-pane.fade.in.active
@@ -52,4 +53,5 @@
 
 			= render 'billings/billings'
 			
-			.text-center= will_paginate @billings, renderer: BootstrapPagination::Rails
+			.text-center
+				= render 'layouts/shared/add_pagination', objects: @billings

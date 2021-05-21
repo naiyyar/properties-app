@@ -45,7 +45,8 @@
                     %input.apple-switch.sb-sm.featured-listing{type: 'checkbox', checked: listing.active, style: 'margin: 0px;', data: { fbid: listing.id } }
                   %td
 
-  .text-center= will_paginate @featured_listings, renderer: BootstrapPagination::Rails
+  .text-center
+    = render 'layouts/shared/add_pagination', objects: @featured_listings
 
   :css
     #sortable_filter{

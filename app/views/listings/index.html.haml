@@ -30,7 +30,8 @@
               %tbody.table#listings-body
                 = render 'listings/partials/listings'
 
-  .text-center= will_paginate @listings, renderer: BootstrapPagination::Rails
+  .text-center
+    = render 'layouts/shared/add_pagination', objects: @listings
 
 :css
   #sortable_filter{

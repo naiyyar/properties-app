@@ -30,7 +30,7 @@
   </div>
 
   <div class="text-center">
-    <%= will_paginate @contacts, renderer: BootstrapPagination::Rails %>
+    <%= render 'layouts/shared/add_pagination', objects: @contacts %>
   </div>
 <%end%>
 

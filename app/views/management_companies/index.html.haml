@@ -29,4 +29,5 @@
                 
                 %tbody.table= render partial: 'management_company', collection: @management_companies, as: :company, cache: false
                       
-        .text-center= will_paginate @management_companies, renderer: BootstrapPagination::Rails
+        .text-center
+          = render 'layouts/shared/add_pagination', objects: @management_companies

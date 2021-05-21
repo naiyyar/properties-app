@@ -47,7 +47,7 @@
 <%end%>
 
 <div class="text-center">
-  <%= will_paginate @neighborhood_links, renderer: BootstrapPagination::Rails %>
+  <%= render 'layouts/shared/add_pagination', objects: @neighborhood_links %>
 </div>
 
 
