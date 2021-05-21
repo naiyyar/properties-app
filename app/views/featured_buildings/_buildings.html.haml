@@ -20,6 +20,7 @@
               %th{width: '6%'}
               %th{width: '6%'} Renew
               %th{width: '6%'} Active
+              %th
           
           %tbody.table
             - @featured_buildings.each do |featured_building|
@@ -56,3 +57,4 @@
                     = link_to 'Delete', featured_building_path(featured_building), method: :delete, data: {confirm: 'Are you sure you want to delete this featured building?'}, class: 'text-danger' if featured_building.draft?
                   %td=renew_switch_button(featured_building, disabled: true)
                   %td=active_switch_button(featured_building, fbby: 'manager', showbillingurl: true)
+                %td

@@ -3,11 +3,11 @@
 		%h2
 		.tabsWidget{style: "margin-left: #{'14px' unless mobile?}" }
 			%ul.nav.nav-tabs.nav-justified.tab-inline{role: 'tablist'}
-				%li{class: @type == 'featured' ? 'active' : ''}
-					%a{href: featured_url}
+				%li.nav-item{class: @type == 'featured' ? 'active' : ''}
+					%a.nav-link.font-14{href: featured_url}
 						%b= title
-				%li{class: @type == 'billing' ? 'active' : ''}
-					%a{href: billing_url}
+				%li.nav-item{class: @type == 'billing' ? 'active' : ''}
+					%a.nav-link.font-14{href: billing_url}
 						%b Billing
 
 .tab-content
