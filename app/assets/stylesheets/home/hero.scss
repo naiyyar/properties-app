@@ -61,23 +61,16 @@
     color: #4c4c4c;
   }
 
-  .quickLinks{
+  .quickLinks {
     z-index: 999;
     padding: 9px 0px;
     text-align: center;
-  }
 
-  .quickLinks ul {
-    list-style: none;
-    li { 
-      padding-left: 5px;
-      padding-right: 5px;
-      a {
-        color: #fff;
-        font-size: 14px;
-        text-decoration: underline;
-        font-weight: bolder;
-      }
+    div a { 
+      color: #fff;
+      font-size: 14px;
+      text-decoration: underline;
+      font-weight: bolder;
     }
   }
 }
@@ -90,7 +83,7 @@
   .homepageHero {
     #mainSearchWrap.mainSearchWrap{
       padding: 0px 11px;
-      top: 55%;
+      top: 49%;
     }
     #quickSearch.quickSearch, .heroTitles, .quickLinks {
       width: 760px;
@@ -101,13 +94,10 @@
     }
     .quickLinks{
       text-align: center;
-      .list-inline > li {
-        padding: 14px 3px;
-      }
     }
     #mainSearchWrap h1 {
-      font-size: 2.9999rem;
-      line-height: 2.9999rem;
+      font-size: 1.2em;
+      line-height: 1.99rem;
     }
   }
 }
