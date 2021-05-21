@@ -1,10 +1,10 @@
 #header-mob.split-view-header{class: "sm-#{action_name} sm-#{action_name}_#{controller_name} #{mob_header_bg_color_class_helper}"}
   .row{style: 'margin-right: 0px;'}
-    .col-xs-2
+    .col-2
       %a.navHandler{href: 'javascript:void(0)', 'aria-label'=> 'Nav Handler'}
         %span.fa.fa-bars
     
-    %div{class: "col-xs-#{header_center_col}", style: 'padding-right: 2px; padding-left: 2px;'}
+    %div{class: "col-#{header_center_col}", style: 'padding-right: 1px; padding-left: 2px;'}
       - if show_and_search_page_header?
         .split-view-seach{class: "#{search_bar(:hidden)}"}
           - unless mobile?
@@ -17,14 +17,14 @@
         .home-logo.osLight{style: 'text-align: center;margin-top: -10px;'}
           %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40', style: 'margin-left: 40px;'
    
-    %div{class: "col-xs-#{header_right_col}"}
+    %div{class: "col-#{header_right_col}"}
       .row{style: 'margin-right: -1px;'}
         - unless hide_hood_dropdown?
           .hood.col-xs-6
             .btn-hoods{class: current_view}
               %button.btn.btn-primary.dropdown-toggle-neighborhoods.btn-round{class: "#{params[:neighborhoods].present? ? 'active' : ''}", 'data-bs-toggle' => 'dropdown1'}
                 %span.dropdown-label Hood
-                %span.caret
+                %span.fa.fa-caret-down
 
         - if show_filters?
           .col-xs-6.h-filter
