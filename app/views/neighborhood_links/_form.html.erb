@@ -44,7 +44,7 @@
           </div>
           
           <div class="form-group">
-            <div class="text-right">
+            <div class="text-end">
               <%= link_to 'Delete', neighborhood_link, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' unless neighborhood_link.new_record? %>
               <%= f.submit 'Submit', class: "btn btn-primary" %>
             </div>

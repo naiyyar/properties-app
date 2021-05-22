@@ -12,7 +12,7 @@
 		  	<tbody>
 			  	<% @documents.each do |doc| %>
 						<tr>
-							<td class="text-left">
+							<td class="text-start">
 								<% if doc.document_content_type == 'application/pdf' %>
 									<span class="fa fa-file-pdf-o fa-2x"></span>
 								<%elsif ['xlsx', 'xls'].include? doc.document_file_name.split('.')[1] %>
@@ -32,7 +32,7 @@
 								</td>
 
 								<% if current_user.present? and current_user.has_role? :admin %>
-									<td class="text-right">
+									<td class="text-end">
 										<%#= link_to 'update'.html_safe, "#updateDoc#{doc.id}", 'data-bs-toggle' => 'modal' %>
 										<%#= link_to 'Rename'.html_safe, "#renameDoc#{doc.id}", 'data-bs-toggle' => 'modal' %>
 										<%#= render partial: 'uploads/rename_doc_form', locals: { upload: doc } %>

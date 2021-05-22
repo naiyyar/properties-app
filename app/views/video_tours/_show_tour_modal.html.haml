@@ -18,11 +18,11 @@
     .row{style: 'position: relative;'}
       .col-lg-12
         .text-center{style: 'border-bottom: 1px solid #ddd;'}
-          %h4.text-left{style: 'margin-top: 10px; margin-bottom: 10px;'}
+          %h4.text-start{style: 'margin-top: 10px; margin-bottom: 10px;'}
             .pageTitle.font-bold{style: 'font-size: 16px;'}= @tourable.property_name_or_address
             .address{style: 'font-size: 14px;'}= @tourable.full_street_address
 
-      %div.text-right.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
+      %div.text-end.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
         = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, 'javascript:;', class: 'closeTour', style: 'color: #fff;'
     - @vd_height = '200'
     #first-category

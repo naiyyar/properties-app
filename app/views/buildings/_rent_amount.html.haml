@@ -19,9 +19,9 @@
               %td.text-center= link_to unit.name, unit_path(unit), class: 'link_underlined', 'data-no-turbolink' => false
               %td= rental_price.res_start_year if rental_price.res_start_year.present?
               %td= rental_price.res_end_year if rental_price.res_end_year.present?
-              %td.text-right= number_to_currency(rental_price.monthly_rent, precision: 0)
-              %td.text-right= number_to_currency(rental_price.rent_upfront, precision: 0)
-              %td.text-right= number_to_currency(rental_price.refundable_deposits, precision: 0)
-              %td.text-right= number_to_currency(rental_price.broker_fee, precision: 0)
-              %td.text-right= number_to_currency(rental_price.non_refundable_costs, precision: 0)
-              %td.text-right= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits, precision: 0)
+              %td.text-end= number_to_currency(rental_price.monthly_rent, precision: 0)
+              %td.text-end= number_to_currency(rental_price.rent_upfront, precision: 0)
+              %td.text-end= number_to_currency(rental_price.refundable_deposits, precision: 0)
+              %td.text-end= number_to_currency(rental_price.broker_fee, precision: 0)
+              %td.text-end= number_to_currency(rental_price.non_refundable_costs, precision: 0)
+              %td.text-end= number_to_currency(rental_price.rent_upfront + rental_price.non_refundable_costs + rental_price.broker_fee + rental_price.refundable_deposits, precision: 0)
