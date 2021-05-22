@@ -5,7 +5,7 @@
         .row
           .col-xs-12.col-sm-12.col-md-12.col-lg-6
             %p.font-bold.font-14 Saved Cards
-            %table.table
+            %table.table{style: 'width: 100%;'}
               - @saved_cards.each do |card|
                 - exp_month = card[:exp_month].to_s.length == 2 ? card[:exp_month] : "0#{card[:exp_month]}"
                 - last4     = card[:last4]
@@ -84,3 +84,27 @@
                 .col-lg-1
                   %a{href: 'https://stripe.com/privacy', target: '_blank'}
                     %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400 Privacy
+
+:css
+  .panel-default {
+    border-color: #ddd !important;
+  }
+  .panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+  }
+  .panel-default>.panel-heading {
+    color: #fff;
+    background-color: #2b78e4;
+    border-color: #ddd;
+  }
+  .panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+  }

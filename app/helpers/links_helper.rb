@@ -204,7 +204,7 @@ module LinksHelper
 	end
 
 	def action_links_alignment_class
-		browser.device.mobile? ? 'text-center' : 'text-right'
+		browser.device.mobile? ? 'text-center' : 'text-end'
 	end
 
 	def delete_link url, remote: false, classes: ''
