@@ -20,7 +20,7 @@
 			%br
 			.row
 				.col-lg-6.col-xs-9
-					%ul#gallery.list-inline{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing', style: 'margin-left: 0px;'}
+					%ul#gallery.d-inline-flex{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing', style: 'margin-left: 0px;list-style: none; padding: 0px;margin: 0px;'}
 						- @photos.each do |upload|
 							= render 'uploads/gallery', upload: upload, featured_image: true 
 

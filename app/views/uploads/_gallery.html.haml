@@ -4,7 +4,7 @@
 	
 	- if current_user
 		- if type_featured_listing?(upload)
-			.pull-left.fl-featured-badge
+			.pull-start.fl-featured-badge
 				= featured_badge_helper if upload.sort.to_i == 0
 		
 		- if user_can_take_action?(upload)

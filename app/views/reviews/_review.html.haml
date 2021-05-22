@@ -56,10 +56,10 @@
               %a.propWidget-1{'data-fancybox' => 'gallery', href: 'javascript:;', 'data-src' => asset.image.url }= image_tag asset.image.url, alt: 'Image', style: 'height: 100px;width: 100%;'
 
     .commentActions
-      %ul.list-inline.ricons.pull-left
+      %ul.d-inline.ricons.pull-left
         %li= social_share_button_tag(review.review_title, :url => "https://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}")
       
-      %ul.list-inline.ricons.pull-right
+      %ul.d-inline.ricons.pull-right
         %li= flag_review_link(review)
         %li.helpful= useful_review_link(review)
       .clearfix

@@ -42,7 +42,10 @@ module UploadsHelper
 	end
 
 	def delete_upload_link upload
-		link_to trash_icon_helper, upload_path(upload), method: :delete, remote: true, class: 'btn btn-danger btn-xs delete_image'
+		link_to trash_icon_helper, 
+						upload_path(upload), 
+						method: :delete, 
+						remote: true, class: 'btn btn-danger btn-xs delete_image'
 	end
 
 	def edit_upload_link upload

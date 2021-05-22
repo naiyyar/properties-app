@@ -69,9 +69,9 @@
                 %a.fancybox{href: "#{asset.image.url}"}
                   = image_tag asset.image, alt: 'Image'
     .commentActions
-      %ul.list-inline.ricons.pull-left
+      %ul.d-inline.ricons.pull-left
         %li= social_share_button_tag(review.review_title, :url => "https://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}")
-      %ul.list-inline.ricons.pull-right
+      %ul.d-inline.ricons.pull-right
         %li
           - if current_user.present?
             = link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe, "#flagDescription#{review.id}", 'data-bs-toggle' => 'modal', class: "#{current_user.marked_flag?(review.id) ? 'no-pointer flagged' : ''}", title: 'Flag as inappropriate'

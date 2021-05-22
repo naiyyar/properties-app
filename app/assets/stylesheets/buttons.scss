@@ -148,6 +148,12 @@ $hbo-color: #1D6FE2;
 .btn.active > .state, .btn > .state-active {
     display: none;
 }
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
 #search-row {
   .btn-dp-toggle button, .btn-dp-toggle.closed button {
     background-color: transparent;
