@@ -99,7 +99,7 @@ module ReviewsHelper
 	def useful_link review, href: '#signin'
 		link_to useful_title(review), 
 					  href, 
-					  class: "btn btn-o btn-blue btn-xs btn-round #{useful_classes(review)}",
+					  class: "btn btn-o btn-blue btn-xs btn-round text-white #{useful_classes(review)}",
 					  data: data_attributes(review)
 
 	end
