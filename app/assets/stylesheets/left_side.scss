@@ -1,0 +1,231 @@
+#leftSide {
+    background-color: rgb(44, 120, 228);
+    position: absolute;
+    top: 59px;
+    left: -50px;
+    width: 0px;
+    z-index: 9999 !important;
+}
+#leftSide.home{
+  display: none;
+}
+#leftSide.expanded {
+    width: 210px;
+    left: 0px;
+}
+.closeLeftSide {
+    display: none;
+}
+.leftNav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.leftNav ul li {
+    position: relative;
+    width: 0px;
+}
+.expanded .leftNav ul li {
+    width: 200px;
+}
+.leftNav ul li a {
+    display: block;
+    font-size: 16px;
+    color: #fff;
+    width: 0px;
+    height: 60px;
+    overflow: hidden;
+    text-decoration: none;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    text-decoration: none;
+}
+.expanded .leftNav ul li a {
+    width: 210px;
+    height: auto;
+    padding: 10px 18px;
+}
+.leftNav ul li a span {
+    position: absolute;
+    width: 0px;
+    display: block;
+    text-align: center;
+    z-index: 110;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    text-decoration: none;
+}
+.expanded .leftNav ul li a span {
+    position: relative;
+    width: auto;
+    display: inline-block;
+    text-align: left;
+}
+.no-touch .leftNav ul li:hover a, .leftNav ul li.onTap a {
+    background-color: #ffffff;
+    color: #0075c9;
+}
+.expanded .leftNav > ul > li.onTap > a {
+    background-color: transparent;
+    color: #adc8c7;
+}
+.expanded .leftNav > ul > li.active > a {
+    background-color: #000;
+    color: #fff;
+}
+.leftNav ul li a span.navLabel {
+    font-size: 16px;
+    bottom: 0px;
+    left: -81px;
+}
+.leftNav ul li.btn_contribute a span.navLabel {
+    bottom: 0px;
+}
+
+.expanded .leftNav ul li a span.navLabel {
+    bottom: 2px;
+    left: 0;
+}
+.no-touch .leftNav ul li:hover a span.navLabel, .leftNav ul li.onTap a span.navLabel {
+    left: 0;
+    text-decoration: none;
+}
+.leftNav > ul > li > a > span.arrowRight {
+    display: none;
+}
+.expanded .leftNav > ul > li > a > span.arrowRight {
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+.leftNav ul li ul {
+    background-color: #132120;
+    position: absolute;
+    top: 0;
+    width: 200px;
+    display: none;
+    left: 50px;
+    z-index: 1100;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.no-touch .leftNav ul li ul {
+    background-color: #2a2a2a;
+    position: absolute;
+    display: block;
+    top: 0;
+    width: 200px;
+    visibility: hidden;
+    opacity: 0;
+    left: 50px;
+    z-index: 1100;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.expanded .leftNav ul li ul {
+    position: relative;
+    left: 0;
+    display: block;
+    max-height: 0;
+    z-index: 1;
+    top: auto;
+    overflow: hidden;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.no-touch .expanded .leftNav ul li ul {
+    position: relative;
+    left: 0;
+    visibility: visible;
+    opacity: 1;
+    max-height: 0;
+    z-index: 1;
+    top: auto;
+    overflow: hidden;
+    -webkit-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.expanded .leftNav ul li ul.bigList {
+    max-height: 600px;
+}
+.no-touch .leftNav ul li:hover ul {
+    left: 100%;
+    visibility: visible;
+    opacity: 1;
+}
+.leftNav ul li.onTap ul {
+    left: 70px;
+    display: block;
+}
+.no-touch .expanded .leftNav ul li:hover ul, .expanded .leftNav ul li.onTap ul {
+    left: 0;
+}
+.leftNav ul li ul li {
+    width: 100%;
+}
+.leftNav ul li ul li a {
+    width: 100%;
+    font-size: 12px;
+    height: auto;
+    padding: 7px 20px;
+}
+.no-touch .leftNav ul li:hover ul li a, .leftNav ul li.onTap ul li a {
+    color: #fff;
+    background-color: #2a2a2a;
+    width: 100%;
+    font-size: 12px;
+    height: auto;
+}
+.no-touch .leftNav ul li ul li a:hover {
+    color: #fff;
+    background-color: #2a2a2a;
+    padding-left: 30px;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 767px) {
+    #leftSide{
+        top: 59px;
+        visibility: hidden;
+        opacity: 0;
+        margin-left: -87%;
+        -webkit-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        min-height: 265px !important;
+    }
+    #leftSide.home{
+        display: block;
+        top: 60px !important;
+    }
+    #leftSide.expanded {
+        width: 87%;
+        opacity: 1;
+        visibility: visible;
+        margin-left: 0;
+        z-index: 9999;
+        position: fixed;
+        overflow-y: scroll;
+        height: 92%;
+    }
+    .closeLeftSide {
+        width: 13%;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        z-index: 100;
+    }
+    .expanded .leftNav ul li,
+    .expanded .leftNav ul li a,
+    .expanded .leftNav > ul > li > ul {
+        width: 100%;
+    }
+}
