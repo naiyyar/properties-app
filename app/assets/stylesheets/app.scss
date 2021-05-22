@@ -56,24 +56,21 @@ a.dt-card-link {
 }
 
 form fieldset{
-    display: block;
-    padding: 25px 14px 5px;
-    border: none;
-    background: rgba(255,255,255,.9);
-    position: relative;
+  display: block;
+  padding: 25px 14px 5px;
+  border: none;
+  background: rgba(255,255,255,.9);
+  position: relative;
 }
-
 .no-padding, .modal-body.no-padding{
     padding: 0px !important;
 }
-
 .fa-heart, .fa-heart:focus{
     color: #b1b3b6;
 }
 .filled-heart .fa-heart, .unfilled-heart .fa-heart.hover:hover{
     color: #EC555B !important;
 }
-
 .bg-size-cover{
     width: 100%;
     overflow: hidden;

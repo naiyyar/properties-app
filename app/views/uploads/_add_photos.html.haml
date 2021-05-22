@@ -6,7 +6,7 @@
 - else
   .row
     - if current_user.admin?
-      .col-lg-3.col-md-3.col-xs-4= add_tour_link(@building, klass: 'd-block')
+      .col-lg-3.col-md-3.col-xs-4= add_tour_link(@building, klass: 'd-block btn-round')
       .col-lg-3.col-md-3.col-xs-4= add_photos_link(@building, klass: 'd-block')
       .col-lg-6.col-md-6.col-xs-4
         .text-end= seel_all_link(@building, @uploaded_images_count)

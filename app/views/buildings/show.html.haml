@@ -15,14 +15,12 @@
 				.mapPlaceholder
 					%span.fa.fa-spin.fa-spinner 
 					Loading map...
-	.row
-		.col-lg-3
-		
-		.col-lg-6
-			#show-content{style: 'width: 100%;'}
-				= render 'buildings/show/content', show_summary: true
-		
-		.col-lg-3
+	
+	#show-content{style: 'width: 100%;'}
+		.row
+			.col-3
+			.col-6= render 'buildings/show/content', show_summary: true
+			.col-3
 
 - else
 	%a.listHandler.closeMap{href: 'javascript:;'}
