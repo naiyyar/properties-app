@@ -1,54 +1,56 @@
 .form-container
   .row
     .col-xs-12.col-sm-12.col-md-12.col-lg-6
-      .panel.panel-default
-        .panel-heading
-          %b= @management_company.new_record? ? 'New Management' : 'Edit Management'
-        .panel-body
-          = form_for @management_company, html: { class: 'form-horizontal1 management-company-form' } do |f|
+      %p.font-21= @management_company.new_record? ? 'New Management' : 'Edit Management'
+      
+      = form_for @management_company, html: { class: 'form-horizontal1 management-company-form' } do |f|
+        .mb-3
+          .form-group
+            %label Management Name
+            = f.text_field :name, class: 'form-control validate1', required: true
+        
+        .row.mb-3
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
             .form-group
-              %label Management Name
-              = f.text_field :name, class: "form-control validate1", required: true
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  %label Property Website
-                  = f.text_field :website, class: 'form-control'
-            - unless @management_company.new_record?
-              .row
-                .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                  .form-group
-                    %label Connected Buildings Website
-                    %input.apple-switch.sb-sm.company{type: 'checkbox', checked: @management_company.active_website_buildings?, style: 'margin: 0px 7px -5px;', data: { companyid: @management_company.id, fieldtype: 'website' } }
-                
-                .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                  .form-group
-                    %label Connected Buildings Email
-                    %input.apple-switch.sb-sm.company{type: 'checkbox', checked: @management_company.active_email_buildings?, style: 'margin: 0px 7px -5px;', data: { companyid: @management_company.id, fieldtype: 'email' } }
+              %label Property Website
+              = f.text_field :website, class: 'form-control'
+        
+        - unless @management_company.new_record?
+          .row.mb-3
+            .col-xs-12.col-sm-12.col-md-6.col-lg-6
+              .form-group
+                %label Connected Buildings Website
+                %input.apple-switch.sb-sm.company{type: 'checkbox', checked: @management_company.active_website_buildings?, style: 'margin: 0px 7px -5px;', data: { companyid: @management_company.id, fieldtype: 'website' } }
+            
+            .col-xs-12.col-sm-12.col-md-6.col-lg-6
+              .form-group
+                %label Connected Buildings Email
+                %input.apple-switch.sb-sm.company{type: 'checkbox', checked: @management_company.active_email_buildings?, style: 'margin: 0px 7px -5px;', data: { companyid: @management_company.id, fieldtype: 'email' } }
 
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  %label Connected Buildings
-                  .buttonsWrapper
-                    - if @manage_buildings.present?
-                      - @manage_buildings.each do |building|
-                        %a.btn.btn-default{href: "#{building_path(building)}"}= building.building_name_or_address
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  %label Connect buildings
-                  = hidden_field_tag 'managed_building_id', nil, class: 'form-control', name: 'managed_building_id[]'
-                  = text_field_tag 'buildings-search-txt',nil, class: 'form-control', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?management=true' }, :autocomplete => :off
-                  #buildings-search-results.results{style: "position: relative;"}
+        .row.mb-3
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
             .form-group
-              .col-sm-12
-                .pull-right
-                  = link_to 'Cancel', management_companies_path, class: 'btn btn-default'
-                  = f.submit 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
-    - if @buildings.present?
-      #content.mob-max.user_property_listing
-        = render partial: 'users/listed_properties'
+              %label Connected Buildings
+              .buttonsWrapper
+                - if @manage_buildings.present?
+                  - @manage_buildings.each do |building|
+                    %a.btn.btn-blue{href: "#{building_path(building)}"}= building.building_name_or_address
+        .row.mb-3
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            .form-group
+              %label Connect buildings
+              = hidden_field_tag 'managed_building_id', nil, class: 'form-control', name: 'managed_building_id[]'
+              = text_field_tag 'buildings-search-txt',nil, class: 'form-control', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?management=true' }, :autocomplete => :off
+              #buildings-search-results.results{style: "position: relative;"}
+        .form-group
+          .col-sm-12
+            .pull-right
+              = link_to 'Cancel', management_companies_path, class: 'btn btn-default'
+              = f.submit 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
+
+- if @buildings.present?
+  #content.mob-max.user_property_listing= render 'users/listed_properties'
+
 :javascript
   $(function() {
     new bapp.buildings;

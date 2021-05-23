@@ -141,7 +141,7 @@ bapp.buildings.prototype = {
     }else{
       item = ui.item.building_street_address;
     }
-    $('.buttonsWrapper').append('<a href="#" class="btn btn-success">'+item+'</a>');
+    $('.buttonsWrapper').append('<a href="#" class="btn btn-green btn-round text-white">'+item+'</a>');
     if($('#managed_building_id').length > 0){
       $('.management-company-form').append('<input type="hidden" name="managed_building_ids[]" id="managed_building_id" class="form-control" value="'+ui.item.id+'">');
       this._input.val('');
