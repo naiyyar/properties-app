@@ -116,7 +116,7 @@ class UsersController < ApplicationController
 
 	def update
 		if @user.update_attributes(user_params)
-			redirect_to user_path(@user), notice: 'User updated successfully'
+			redirect_to edit_user_path(@user), notice: 'User updated successfully'
 		else
 			flash[:error] = @user.errors.messages.values[0][0]
 			redirect_back(fallback_location: user_path(@user))
