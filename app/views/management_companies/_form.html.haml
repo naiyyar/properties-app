@@ -42,9 +42,10 @@
               = hidden_field_tag 'managed_building_id', nil, class: 'form-control', name: 'managed_building_id[]'
               = text_field_tag 'buildings-search-txt',nil, class: 'form-control', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?management=true' }, :autocomplete => :off
               #buildings-search-results.results{style: "position: relative;"}
+        
         .form-group
           .col-sm-12
-            .pull-right
+            .float-end
               = link_to 'Cancel', management_companies_path, class: 'btn btn-default'
               = f.submit 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
 

@@ -7,13 +7,15 @@
       .modal-body.no-padding
         = form_for broker_fee_percent, html: { class: 'form-horizontal1' } do |f|
           %fieldset
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
                   %label Percent
                   = f.number_field :percent_amount, class: 'form-control', min: 0
                  
                 
-          %footer
-            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-bs-dismiss' => 'modal'
-            = f.submit 'Submit', class: 'btn btn-primary'
+            .row.mb-3
+              .col-lg-12
+                .float-end
+                  = link_to 'Cancel', '#', class: 'btn btn-default', 'data-bs-dismiss' => 'modal'
+                  = f.submit 'Submit', class: 'btn btn-primary'
