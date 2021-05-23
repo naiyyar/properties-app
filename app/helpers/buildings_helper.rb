@@ -59,7 +59,7 @@ module BuildingsHelper
 	end
 
 	def single_image(building)
-		building.uploads.present? ? building.uploads.last.image.url : 'no-photo-available.jpg'
+		building.uploads.present? ? building.uploads.last.image.url : 'no-photo.jpg'
 	end
 
 	def disabled(current_user, val)

@@ -1,34 +1,30 @@
-<div class="panel panel-default">
-  <div class="panel-heading"><b>User Details</b></div>
-  <div class="panel-body"> 
-    <%= form_for @user, class: 'form-horizontal' do |f| %>
-      <div class="form-group">
-        <label>Email</label>
-         <%= f.text_field :email, class: 'form-control', readonly: true%>
-      </div>
-
-      <div class="form-group">
-        <label>Name</label>
-         <%= f.text_field :name, value: @user.logged_in_user_name, class: 'form-control'%>
-      </div>
-        
-      <div class="form-group">
-        <label>phone</label>
-        <%= f.text_field :phone, class: 'form-control'%>
-      </div>
-    
-      <div class="form-group">
-        <label>Image</label>
-        <%= f.file_field :avatar, class: 'form-control'%>
-      </div>
-        
-      <div class="form-group">
-        <div class="col-sm-12">
-          <div class="pull-right">
-            <%= f.submit 'Save', class: "btn btn-blue" %>
-          </div>
-        </div>
-      </div>  
-    <% end %>
+<p class="font-21">User Details</b>
+<%= form_for @user, class: 'form-horizontal' do |f| %>
+  <div class="form-group mb-3">
+    <label>Email</label>
+     <%= f.text_field :email, class: 'form-control', readonly: true%>
   </div>
-</div>
+
+  <div class="form-group mb-3">
+    <label>Name</label>
+     <%= f.text_field :name, value: @user.logged_in_user_name, class: 'form-control'%>
+  </div>
+    
+  <div class="form-group mb-3">
+    <label>phone</label>
+    <%= f.text_field :phone, class: 'form-control'%>
+  </div>
+
+  <div class="form-group mb-3">
+    <label>Image</label>
+    <%= f.file_field :avatar, class: 'form-control'%>
+  </div>
+    
+  <div class="form-group">
+    <div class="col-sm-12">
+      <div class="float-end">
+        <%= f.submit 'Save', class: "btn btn-blue" %>
+      </div>
+    </div>
+  </div>  
+<% end %>
