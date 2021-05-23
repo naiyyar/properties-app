@@ -29,7 +29,7 @@
                 %b.font-16.hyper-link Listing Contact
             %br
             
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
                   %label First Name*
@@ -40,7 +40,7 @@
                   %label Last Name*
                   = f.text_field :last_name, class: 'form-control validate'
 
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Email*
@@ -57,13 +57,13 @@
                 %b.font-16.hyper-link Listing Location
             %br
 
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Neighborhood To Be Featured In*
                   = f.select :neighborhood, options_for_select(StaticData::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
 
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Address*
@@ -74,7 +74,7 @@
                   %label Unit Number*
                   = f.text_field :unit, class: 'form-control validate'
 
-            .row
+            .row.mb-3
               .col-xs-8.col-sm-6.col-md-3.col-lg-4
                 .form-group
                   %label City*
@@ -89,7 +89,7 @@
                 .form-group
                   %label Zip Code*
                   = f.text_field :zipcode, class: 'form-control validate'
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Neighborhood*
@@ -103,13 +103,13 @@
                 %b.font-16.hyper-link Listing Information
             %br
 
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Monthly Rent $*
                   = f.number_field :rent,  class: 'form-control validate'
 
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Number of Bedrooms*
@@ -120,7 +120,7 @@
                   %label Number of Bathrooms*
                   = f.number_field :bath,  class: 'form-control validate'
 
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-6.col-md-3.col-lg-6
                 .form-group
                   %label Size In Square Feet
@@ -131,12 +131,12 @@
                   %label Apartment Type*
                   = f.select :apartment_type, options_for_select(FeaturedListing::APARTMENT_TYPE, f.object.apartment_type), { prompt: 'Select Apartment Type'}, { class: 'form-control validate', required: true }
             
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-6.col-md-6.col-lg-6
                 .form-group
                   %label Date Available
                   = f.text_field :date_available,  class: 'form-control datepicker', :autocomplete => :off
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group
                   %label Description
@@ -145,7 +145,7 @@
             %br
             %br
 
-            .row
+            .row.mb-3
               .col-sm-12
                 %div{class: action_links_alignment_class}= submit_link(f, title: next_text)
             

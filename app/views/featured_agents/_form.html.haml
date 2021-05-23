@@ -10,7 +10,7 @@
       .row
         .col-xs-12.col-sm-12.col-md-12.col-lg-9
           = form_for @featured_agent, html: { class: 'featured_agent_form' } do |f|
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
                   %label First Name*
@@ -20,7 +20,7 @@
                 .form-group
                   %label Last Name*
                   =f.text_field :last_name, class: 'form-control validate', required: true
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
                   %label Email*
@@ -31,7 +31,7 @@
                   %label Phone Number
                   =f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
 
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-6.col-lg-6
                 .form-group
                   %label Broker Firm Name*
@@ -42,18 +42,18 @@
                   %label License Number*
                   =f.text_field :license_number, class: 'form-control validate', required: true
 
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group
                   %label Profile Website
                   =f.text_field :website, class: 'form-control'
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group
                   %label Neighborhood To Be Featured In*
                   = f.select :neighborhood, options_for_select(StaticData::FEATURED_IN_NEIGHBORHOODS, f.object.neighborhood), { prompt: 'Select Neighborhood'}, { class: 'form-control validate', required: true }
               
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 - if @featured_agent.draft_edit? || @featured_by == 'admin'
                   = render 'featured_buildings/admin_form_fields', f: f, object: f.object
@@ -63,14 +63,14 @@
             
             %br
 
-            .row
+            .row.mb-3
               .col-md-12.col-sm-12.col-xs-12
-                .pull-left
+                .float-start
                   - if @featured_agent.new_record?
                     = cancel_link(params[:type].blank? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'))
                   - else
                     = cancel_link(!@featured_agent.featured_by_manager? ? featured_agents_path : agenttools_user_path(current_user, type: 'featured'))
-                .pull-right
+                .float-end
                   = submit_link(f, title: next_text)
 
             %br
