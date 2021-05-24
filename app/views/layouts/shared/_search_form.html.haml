@@ -8,11 +8,17 @@
         %span.dropdown-label= params[:searched_by] == 'neighborhoods' ? @searched_neighborhoods : 'Neighborhoods'
          
       .dropdown-menu.dropdown-select.dropdown-menu-right1{'area-labelledby' => 'lr2'}
-        .row
-          = render 'layouts/shared/neighborhoods_list'
+        .row= render 'layouts/shared/neighborhoods_list'
   
   - if show_filters?
-    .lg-action-buttons.d-none.d-lg-block.d-md-block
+    .btn-filter.btn-dp-toggle.float-end.me-2.mt-1
+      %button.no-caret{class: "btn sc-lg btn-o btn-primary btn-round dropdown-toggle handleFilter #{params[:filter].present? ? 'active' : ''}", 'data-bs-toggle' => 'dropdown'}
+        %span.dropdown-label
+          %span.fa.fa-filter 
+          Filter
+          %span.filter-counts
+
+    .lg-action-buttons.me-2.mt-1
       .btn-sort.btn-dp-toggle.float-end.dropdown
         %button.no-caret#sortMenu{class: "btn sc-lg btn-o btn-primary btn-round dropdown-toggle #{params[:sort_by].present? ? 'active' : ''}", 'data-bs-toggle' => 'dropdown', style: 'padding: 10px 3px !important;'}
           %span.dropdown-label
@@ -21,9 +27,4 @@
            
         = render 'layouts/shared/sort_list'
 
-      .btn-filter.btn-dp-toggle.float-end
-        %button.no-caret{class: "btn sc-lg btn-o btn-primary btn-round dropdown-toggle handleFilter #{params[:filter].present? ? 'active' : ''}", 'data-bs-toggle' => 'dropdown'}
-          %span.dropdown-label
-            %span.fa.fa-filter 
-            Filter
-            %span.filter-counts
+      
