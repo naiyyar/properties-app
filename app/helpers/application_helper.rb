@@ -117,7 +117,7 @@ module ApplicationHelper
   end
 
   def search_bar(status)
-    @search_bar_hidden == status ? 'hidden' : ''
+    @search_bar_hidden == status ? 'd-none' : ''
   end
 
   def search_page? 
@@ -185,7 +185,7 @@ module ApplicationHelper
   private
   
   def search_placeholder_input_styles
-    return 'border: 0px solid #333; -webkit-appearance: none;' if screen_class == 'screen-sm' 
+    return 'border: 0px solid #333; -webkit-appearance: none;' if mobile?
     'border: 0px solid #333; -webkit-appearance: none; box-shadow: 1px 1px 5px rgba(0,0,0,0.6);'
   end
 

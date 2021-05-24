@@ -10,20 +10,20 @@ jQuery ->
 		end_year = $(".resident_to_year").val()
 		
 		if(start_year > end_year )
-			$('.validation_error_message').removeClass('hidden')
+			$('.validation_error_message').removeClass('d-none')
 			$("#resident_to_year").val('')
 		else
-			$('.validation_error_message').addClass('hidden');
+			$('.validation_error_message').addClass('d-none');
 
 	$('.resident_from_year').on 'change',(e) ->
 		start_year = $(".resident_from_year").val()
 		end_year = $(".resident_to_year").val()
 		
 		if(start_year > end_year && end_year != '')
-			$('.start_validation_error_message').removeClass('hidden');
+			$('.start_validation_error_message').removeClass('d-none');
 			$("#resident_from_year").val('')
 		else
-			$('.start_validation_error_message').addClass('hidden');
+			$('.start_validation_error_message').addClass('d-none');
 
 	# dismiss datepicker on mobile touch
 	$("form#new_rental_price_history").on 'touchstart', (e) ->

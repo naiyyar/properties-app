@@ -2,14 +2,14 @@
 <% unless home_page? %>
 	<% unless screen_class == 'screen-sm' %>
   	<div id="search-row" class="search <%=search_bar(:hidden) %>" style="margin-top: 60px;">
-  		<%= render partial: 'layouts/shared/search_form' %>
+  		<%= render 'layouts/shared/search_form' %>
   	</div>
   <%end%>
 <%end%>
-<%= render partial: 'layouts/shared/filters' if action_name == 'search'%>
+<%= render 'layouts/shared/filters' if action_name == 'search'%>
 <div class="closeLeftSide"></div>
 <div id="wrapper" class="<%=wrapper_classes%>" onscroll="Transparentcity.showHideCTALinks(this)">
-  <%= render partial: 'layouts/shared/filter_buttons' if action_name == 'search' && screen_class != 'screen-lg' %>
+  <%= render 'layouts/shared/filter_buttons' if action_name == 'search' && mobile? %>
   <div class="content <%= controller_name + action_name %>">
     <%= render 'layouts/shared/pop_neighborhoods_list' %>
     <%= yield %>

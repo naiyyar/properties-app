@@ -78,7 +78,7 @@ bapp.buildings.prototype = {
       $('.no-match-link').addClass('d-none');
     }
     
-    $("#new_unit_building").addClass('hide');
+    $("#new_unit_building").addClass('d-none');
     $("#search_item_form").find('#next_btn').removeClass('disabled')
     
     if($('.no-result-li').length == 1){
@@ -105,13 +105,13 @@ bapp.buildings.prototype = {
       || contribution_for == 'unit_amenities' 
       || contribution_for == 'unit_price_history'){
 
-      if(!$('#next_btn').hasClass('hidden')){
-        $('#next_btn').addClass('hidden');
+      if(!$('#next_btn').hasClass('d-none')){
+        $('#next_btn').addClass('d-none');
       }
     }
     else{
-      if($('#next_btn').hasClass('hidden')){
-        $('#next_btn').removeClass('hidden');
+      if($('#next_btn').hasClass('d-none')){
+        $('#next_btn').removeClass('d-none');
       }
     }
 
@@ -124,8 +124,8 @@ bapp.buildings.prototype = {
       $('#new_unit_building #building_zipcode').val(ui.item.zipcode);
       $("#new_unit_building #building_building_name").val(ui.item.building_name);
       $(".unit-search").removeAttr('readonly');
-      if(!$("#unit_name").parent().parent().hasClass('hide')){
-        $("#unit_name").parent().parent().addClass('hide');
+      if(!$("#unit_name").parent().parent().hasClass('d-none')){
+        $("#unit_name").parent().parent().addClass('d-none');
       }
     }
 

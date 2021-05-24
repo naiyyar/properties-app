@@ -1,6 +1,6 @@
 .row
 	.col-lg-12
-		%table.table.listings.show-section
+		%table.table.table-bordered.listings.show-section
 			%thead
 				%tr
 					%th Date
@@ -9,10 +9,12 @@
 					%th Beds
 					%th Baths
 					%th Months Free
-					%th.hidden-xs{width: '16%'} Date Available
-					%th.hidden-xs OP
-					%th.hidden-xs{width: '5%'} Rent Stabilize
-			%tbody.table.table-borders
+					- unless mobile?
+						%th{width: '16%'} Date Available
+						%th OP
+						%th{width: '5%'} Rent Stabilize
+			
+			%tbody
 				- if listings&.size > 0
 					= render 'listings/partials/listing_rows', listings: listings, type: type
 					

@@ -2,7 +2,7 @@
   = render 'home/search_form'
 
 - unless @pop_neighborhoods.blank? && mobile?
-  .float-start.neighborhoods-dropdown.hidden-xs{style: 'margin-top: 3px;margin-left: 8px;'}
+  .float-start.neighborhoods-dropdown{style: 'margin-top: 3px;margin-left: 8px;'}
     .btn-group.btn-dp-toggle.dropdown
       %button#lr2.btn.btn-o.btn-primary.dropdown-toggle.btn-round{'data-bs-toggle' => 'dropdown', style: 'min-width: 121px;', type: 'button', 'aria-expanded' => 'false'}
         %span.dropdown-label= params[:searched_by] == 'neighborhoods' ? @searched_neighborhoods : 'Neighborhoods'
@@ -12,7 +12,7 @@
           = render 'layouts/shared/neighborhoods_list'
   
   - if show_filters?
-    .lg-action-buttons.hidden-xs
+    .lg-action-buttons.d-none.d-lg-block.d-md-block
       .btn-sort.btn-dp-toggle.float-end.dropdown
         %button.no-caret#sortMenu{class: "btn sc-lg btn-o btn-primary btn-round dropdown-toggle #{params[:sort_by].present? ? 'active' : ''}", 'data-bs-toggle' => 'dropdown', style: 'padding: 10px 3px !important;'}
           %span.dropdown-label

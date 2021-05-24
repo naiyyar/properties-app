@@ -161,7 +161,7 @@
 
         <div class="formField filter-action">
           <div class="row">
-            <%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden', name: nil %>
+            <%= submit_tag 'Submit', class: 'btn-submit-filter-form d-none', name: nil %>
           </div>
         </div>
         <%= hidden_field_tag :searched_by, params[:searched_by] if params[:searched_by].present? %>
@@ -177,7 +177,7 @@
     <div class="filter-action-btns" style="position: relative;">
       <div class="text-center">
         <div class="filter-action-btns2 filter-action">
-          <%= link_to '<b>Cancel</b>'.html_safe,'javascript:;', class: 'closeFilter hidden-xs' %>
+          <%= link_to '<b>Cancel</b>'.html_safe,'javascript:;', class: 'closeFilter d-none d-lg-block d-md-block' %>
           <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-xlg clearFilter' %>
           <a href="#" class="applyFilter btn btn-green btn-xlg btn-round txt-color-white" style="background: #59BB44;">Apply</a>
         </div>

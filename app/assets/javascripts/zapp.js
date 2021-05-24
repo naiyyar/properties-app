@@ -160,15 +160,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
 
-  
   $('.applyFilter').click(function(e) {
       e.preventDefault();
       $('.btn-submit-filter-form').click();
-  });
-
-  // Rotating image overlay...
-  $('.rotate').click(function(){
-    $('.loading').removeClass('hidden');
   });
 
   // Removing thumb slider from similar proprties gallery
@@ -179,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
           }
       })
   }, 500);
-  
 
   $(".btn-dp-toggle").on("hide.bs.dropdown", function(){
       $(this).addClass('closed');

@@ -1,10 +1,10 @@
 = content_for :html_title, @post.seo_title
 = content_for :meta_description, @post.meta_description
 
-.hidden-xs= render partial: 'buttercms/authors/author'
+.d-none.d-lg-block.d-md-block= render partial: 'buttercms/authors/author'
 
 .post-content
-  .visible-xs= render partial: 'buttercms/authors/author'
+  .d-block.d-lg-none.d-md-none= render partial: 'buttercms/authors/author'
   %p= @post.body.html_safe
 
 .f-pn-articles

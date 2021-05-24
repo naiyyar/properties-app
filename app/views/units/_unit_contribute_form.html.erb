@@ -1,4 +1,4 @@
-<%= form_tag '/buildings', method: :post, id: 'new_unit_building', class: 'hide' do %>
+<%= form_tag '/buildings', method: :post, id: 'new_unit_building', class: 'd-none' do %>
   <%= hidden_field_tag 'selection_type' %>
 	<div id="new_unit_fields">
 		<div class="col-sm-12">
@@ -9,7 +9,7 @@
       <%= hidden_field_tag 'building[zipcode]', @building.present? ? @building.zipcode : nil, class: "form-control" %>
 		</div>
 
-    <div class="col-sm-6 hide">
+    <div class="col-sm-6 d-none">
       <div class="form-group">
         <label>Unit name*</label>
         <%= text_field_tag 'unit_name', nil, name: 'building[units_attributes][0][name]', class: 'form-control validate' %>

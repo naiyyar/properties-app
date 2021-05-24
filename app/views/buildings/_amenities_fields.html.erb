@@ -51,7 +51,7 @@
                 <% if @building.sorted_amenities.include?('elevator') %>
                   <%= f.number_field :elevator, class: 'form-control' %>
                 <%else%>
-                  <%= f.number_field :elevator, class: 'form-control hide', placeholder: '#Elevators' %>
+                  <%= f.number_field :elevator, class: 'form-control d-none', placeholder: '#Elevators' %>
                 <%end%>
               </div>
             <%end%>
@@ -61,7 +61,7 @@
                 <% if @building.sorted_amenities.include?('deposit_free') %>
                   <%= f.text_field :deposit_free_company, class: 'form-control' %>
                 <%else%>
-                  <%= f.text_field :deposit_free_company, class: 'form-control hide', placeholder: 'Company name that offers service' %>
+                  <%= f.text_field :deposit_free_company, class: 'form-control d-none', placeholder: 'Company name that offers service' %>
                 <%end%>
               </div>
             <%end%>
