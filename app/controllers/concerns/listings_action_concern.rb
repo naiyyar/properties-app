@@ -9,7 +9,7 @@ module ListingsActionConcern
   end
 
 	def index
-    @listings = filterrific_search_results([:default_listing_order]).paginate(:page => params[:page], :per_page => 100)
+    @listings = filterrific_search_results.paginate(:page => params[:page], :per_page => 100)
                                           .includes(building: [:management_company])
                                           .default_listing_order
     # @filterrific = initialize_filterrific(
