@@ -18,7 +18,7 @@ class FeaturedListingsController < ApplicationController
       format.html { 
         UserMailer.contact_frbo(@featured_listing, params[:contact_owner]).deliver
         UserMailer.send_frbo_email_to_renter(@featured_listing, params[:contact_owner]).deliver
-        redirect_to :back, notice: '' 
+        redirect_to request.referer, notice: '' 
       }
       format.js
     end
@@ -59,7 +59,7 @@ class FeaturedListingsController < ApplicationController
       else
         format.html { 
           flash[:error] = @featured_listing.errors.full_messages
-          redirect_to :back
+          redirect_to request.referer
         }
       end
     end
@@ -73,7 +73,7 @@ class FeaturedListingsController < ApplicationController
       else
         format.html { 
           flash[:error] = @featured_listing.errors.full_messages
-          redirect_to :back 
+          redirect_to request.referer
         }
       end
     end
@@ -82,7 +82,7 @@ class FeaturedListingsController < ApplicationController
   def destroy
     @featured_listing.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Featured listing was successfully destroyed.' }
+      format.html { redirect_to request.referer, notice: 'Featured listing was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

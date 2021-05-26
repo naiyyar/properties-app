@@ -50,4 +50,4 @@
                   - if current_user.has_role?(:admin)
                     %td
                       = link_to 'Delete', building_path(building), method: :delete, data: {confirm: 'Are you sure you want to delete this building?'}, class: 'text-danger' if @management_company.blank?
-                      = link_to 'Disconnect', disconnect_building_building_path(building), class: 'text-danger', data: {confirm: 'Are you sure you want to discconect this building?'} if @management_company.present?
+                      = link_to 'Disconnect', disconnect_building_building_path(building), class: 'text-danger', data: {confirm: 'Are you sure you want to discconect this building?'}, remote: true if @management_company.present?

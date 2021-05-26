@@ -43,7 +43,7 @@ class PricesController < ApplicationController
       end
     end
 
-    redirect_to :back
+    redirect_to request.referer
   end
 
   # POST /prices

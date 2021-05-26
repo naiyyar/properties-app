@@ -13,7 +13,7 @@ class BillingsController < ApplicationController
     @view     = 'pdf'
     file_name = "invoice_#{@billing.created_at.strftime('%d-%m-%Y')}"
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to request.referer }
       format.js
       format.pdf do
         render wicked_pdf_options(file_name, 'billings/show')
@@ -33,7 +33,7 @@ class BillingsController < ApplicationController
     else
       flash[:error] = 'No email specified.'
     end
-    redirect_to :back
+    redirect_to request.referer
   end
 
   def new
@@ -41,7 +41,7 @@ class BillingsController < ApplicationController
   end
 
   def create_new_card
-    card_id         = params[:billing][:stripe_card_id]
+    card_id = params[:billing][:stripe_card_id]
     billing_service = BillingService.new(current_user, card_id)
     begin
       customer_id = billing_service.get_customer_id
@@ -76,7 +76,7 @@ class BillingsController < ApplicationController
       else
         format.html { 
           flash[:error] = @billing.errors.messages[:credit_card][0]
-          redirect_to :back
+          redirect_to request.referer
         }
       end
     end
@@ -93,7 +93,7 @@ class BillingsController < ApplicationController
       else
         format.html { 
           flash[:error] = @billing.errors.messages[:credit_card][0]
-          redirect_to :back 
+          redirect_to request.referer
         }
         format.json { render json: @billing.errors, status: :unprocessable_entity }
       end

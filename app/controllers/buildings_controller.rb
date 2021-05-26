@@ -57,7 +57,10 @@ class BuildingsController < ApplicationController
   # disconnecting building from a management company
   def disconnect_building
     Building.where(id: params[:id]).update_all(management_company_id: nil)
-    redirect_to :back, notice: 'Building disconnected'
+    flash[:notice] = 'Building disconnected'
+    respond_to do |format|
+      format.js
+    end
   end
 
   def contribute
@@ -77,7 +80,8 @@ class BuildingsController < ApplicationController
 
   def import
     ImportReviews.new(params[:file]).import_reviews
-    redirect_to :back, notice: 'File imported.'
+    flash[:notice] = 'File imported.'
+    redirect_back(fallback_location: reviews_path)
   end
 
   def new

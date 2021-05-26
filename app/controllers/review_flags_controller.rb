@@ -28,7 +28,7 @@ class ReviewFlagsController < ApplicationController
     respond_to do |format|
       if @review_flag.save
         UserMailer.review_marked_flag(@review_flag).deliver
-        format.html { redirect_to :back, notice: 'Review has been flagged successfully. we will review the flagged post and reply back to you with a decision.' }
+        format.html { redirect_to request.referer, notice: 'Review has been flagged successfully. we will review the flagged post and reply back to you with a decision.' }
         format.json { render :show, status: :created, location: @review_flag }
       else
         format.html { render :new }

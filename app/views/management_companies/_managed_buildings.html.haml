@@ -22,4 +22,4 @@
             %td= building.uploads.count if building.uploads.present?
             %td.text-center
               = link_to globe_icon_helper, building.web_url, target: '_blank', rel: rel if building.web_url.present?
-            %td.text-center= link_to 'Disconnect', disconnect_building_building_path(building), class: 'text-danger', data: {confirm: 'Are you sure you want to discconect this building?'}
+            %td.text-center= link_to 'Disconnect', disconnect_building_building_path(building), class: 'text-danger', remote: true, data: {confirm: 'Are you sure you want to discconect this building?'}

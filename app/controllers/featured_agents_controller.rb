@@ -28,7 +28,7 @@ class FeaturedAgentsController < ApplicationController
     UserMailer.contact_agent_sender_copy(@featured_agent, params[:contact]).deliver
     respond_to do |format|
       format.html{
-        redirect_to :back, notice: 'Messsage successfully sent.'
+        redirect_to request.referer, notice: 'Messsage successfully sent.'
       }
       format.js
     end
@@ -100,7 +100,7 @@ class FeaturedAgentsController < ApplicationController
     else
       flash[:notice] = 'Featured agent was successfully deleted.'
     end
-    redirect_to :back
+    redirect_to request.referer
   end
 
   private

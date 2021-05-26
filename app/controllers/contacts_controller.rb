@@ -37,10 +37,10 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.save
         notice = @contact.building_id.present? ? 'Email' : 'Feedback'
-        format.html { redirect_to :back, notice: "#{notice} successfully sent." }
+        format.html { redirect_to request.referer, notice: "#{notice} successfully sent." }
         format.json { render :show, status: :created, location: @contact }
       else
-        format.html { redirect_to :back, flash[:error] => @contact.errors }
+        format.html { redirect_to request.referer, flash[:error] => @contact.errors }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end

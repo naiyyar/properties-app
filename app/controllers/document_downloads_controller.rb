@@ -34,7 +34,7 @@ class DocumentDownloadsController < ApplicationController
     @document_download = DocumentDownload.new(document_download_params)
     respond_to do |format|
       if @document_download.save
-        format.html { redirect_to :back, notice: 'Successfully created.' }
+        format.html { redirect_to request.referer, notice: 'Successfully created.' }
         format.json { render :json => @document_download }
       else
         format.html { render :new }
@@ -57,7 +57,7 @@ class DocumentDownloadsController < ApplicationController
   def destroy
     @document_download.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Successfully destroyed.' }
+      format.html { redirect_to request.referer, notice: 'Successfully destroyed.' }
       format.json { head :no_content }
     end
   end

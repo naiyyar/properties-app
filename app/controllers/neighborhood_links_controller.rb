@@ -24,7 +24,7 @@ class NeighborhoodLinksController < ApplicationController
     respond_to do |format|
       if @neighborhood_link.save
         @neighborhood_link.save_parent_neighborhood
-        format.html { redirect_to :back, notice: 'Neighborhood link was successfully created.' }
+        format.html { redirect_to request.referer, notice: 'Neighborhood link was successfully created.' }
         format.json { render :show, status: :created, location: @neighborhood_link }
       else
         format.html { render :new }
@@ -37,7 +37,7 @@ class NeighborhoodLinksController < ApplicationController
     @neighborhood_link.save_parent_neighborhood
     respond_to do |format|
       if @neighborhood_link.update(neighborhood_link_params)
-        format.html { redirect_to :back, notice: 'Neighborhood link was successfully updated.' }
+        format.html { redirect_to request.referer, notice: 'Neighborhood link was successfully updated.' }
         format.json { render :show, status: :ok, location: @neighborhood_link }
       else
         format.html { render :edit }
@@ -49,7 +49,7 @@ class NeighborhoodLinksController < ApplicationController
   def destroy
     @neighborhood_link.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Neighborhood link was successfully destroyed.' }
+      format.html { redirect_to request.referer, notice: 'Neighborhood link was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

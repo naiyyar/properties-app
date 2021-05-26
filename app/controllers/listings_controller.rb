@@ -11,7 +11,8 @@ class ListingsController < ApplicationController
       list.update(active: params[:active])
       building.update_rent(building.listings.active)
     end
-    redirect_to :back
+    
+    redirect_back(fallback_location: listings_path)
   end
   
   def delete_all
@@ -20,7 +21,7 @@ class ListingsController < ApplicationController
     else
       @listings.delete_all
     end
-    redirect_to :back
+    redirect_back(fallback_location: listings_path)
   end
 
   def transfer_all
@@ -29,7 +30,7 @@ class ListingsController < ApplicationController
     else
       flash[:error] = 'Please select the listings to transfer.'
     end
-    redirect_to :back
+    redirect_back(fallback_location: listings_path)
   end
 
   def import
@@ -41,7 +42,7 @@ class ListingsController < ApplicationController
     else
       flash[:notice] = 'File Succesfully Imported.'
     end
-    redirect_to :back
+    redirect_back(fallback_location: listings_path)
   end
 
   def transfer
@@ -51,7 +52,7 @@ class ListingsController < ApplicationController
     else
       flash[:error] = ["No Listings found between #{params[:date_from]} and #{params[:date_to]}."]
     end
-    redirect_to :back
+    redirect_back(fallback_location: listings_path)
   end
 
   def new

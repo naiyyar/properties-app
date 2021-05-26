@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
   def destroy_scraped_reviews
     Review.where(scraped: true).destroy_all
 
-    redirect_to :back, notice: 'Destroyed successfully'
+    redirect_to request.referer, notice: 'Destroyed successfully'
   end
 
   def show
@@ -67,7 +67,7 @@ class ReviewsController < ApplicationController
         end
       else
         flash.now[:error] = "Error in creating review. #{@review.errors.messages[:tos_agreement].first}"
-        redirect_to :back
+        redirect_to request.referer
       end
     end
   end

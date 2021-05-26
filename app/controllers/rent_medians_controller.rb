@@ -12,7 +12,7 @@ class RentMediansController < ApplicationController
         end
       end
     end
-    redirect_to :back
+    redirect_to request.referer
   end
 
 end

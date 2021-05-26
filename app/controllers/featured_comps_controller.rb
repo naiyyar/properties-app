@@ -22,7 +22,8 @@ class FeaturedCompsController < ApplicationController
   def disconnect_building
     buildings = @featured_comp.featured_comp_buildings.where(building_id: params[:building_id])
     buildings.first.delete if buildings.present?
-    redirect_to :back, notice: 'Building disconnected'
+    flash[:notice] = 'Building disconnected'
+    redirect_to request.referer
   end
 
   def new

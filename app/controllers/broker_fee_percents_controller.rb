@@ -5,10 +5,10 @@ class BrokerFeePercentsController < ApplicationController
     @broker_fee_percent = BrokerFeePercent.new(broker_fee_percent_params)
     respond_to do |format|
       if @broker_fee_percent.save
-        format.html { redirect_to :back, notice: 'Fee percent was successfully created.' }
+        format.html { redirect_to request.referer, notice: 'Fee percent was successfully created.' }
       else
         flash[:error] = @broker_fee_percent.errors.join(',')
-        format.html { redirect_to :back }
+        format.html { redirect_to request.referer }
       end
     end
   end
@@ -16,10 +16,10 @@ class BrokerFeePercentsController < ApplicationController
   def update
     respond_to do |format|
       if @broker_fee_percent.update(broker_fee_percent_params)
-        format.html { redirect_to :back, notice: 'Fee percent was successfully updated.' }
+        format.html { redirect_to request.referer, notice: 'Fee percent was successfully updated.' }
       else
         flash[:error] = @broker_fee_percent.errors.join(',')
-        format.html { redirect_to :back }
+        format.html { redirect_to request.referer }
       end
     end
   end

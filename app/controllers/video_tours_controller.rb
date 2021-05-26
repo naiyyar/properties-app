@@ -43,7 +43,7 @@ class VideoToursController < ApplicationController
     respond_to do |format|
       if @video_tour.save
         @category = @video_tour.category
-        format.html { redirect_to :back }
+        format.html { redirect_to request.referer }
         format.js
       else
         @errors = @video_tour.errors
@@ -58,7 +58,7 @@ class VideoToursController < ApplicationController
   def update
     respond_to do |format|
       if @video_tour.update(video_tour_params)
-        format.html { redirect_to :back }
+        format.html { redirect_to request.referer }
         format.js
       else
         format.html { render :edit }

@@ -60,8 +60,8 @@ class UploadsController < ApplicationController
     rotation ||= 90 # Optional, otherwise, check for nil!
     
     @image.rotate!(rotation)
-
-    redirect_to :back, flash[:notice] => 'The image has been rotated'
+    flash[:notice] = 'The image has been rotated'
+    redirect_to request.referer
   end
 
   def edit
@@ -114,7 +114,7 @@ class UploadsController < ApplicationController
   def update
     if @upload.update(upload_params)
       respond_to do |format|  
-        format.html{ redirect_to :back, notice: 'File Updated.' }
+        format.html{ redirect_to request.referer, notice: 'File Updated.' }
         format.js
         format.json { render json: { message: 'success' }, :status => 200 }
       end
@@ -126,7 +126,7 @@ class UploadsController < ApplicationController
 	def destroy
     if @upload.destroy
       respond_to do |format|  
-        format.html{ redirect_to :back, notice: 'File deleted.' }
+        format.html{ redirect_to request.referer, notice: 'File deleted.' }
         format.json { render json: { message: 'File deleted from server' } }
         format.js
       end
