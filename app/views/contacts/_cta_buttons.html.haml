@@ -1,6 +1,5 @@
 .contact-links
 	- if property.kind_of?(FeaturedListing)
-		.c-links.h-42
 		.d-block=featured_listing_contact_owner_button(property, size_class: 'btn-block')
 	
 	- else
