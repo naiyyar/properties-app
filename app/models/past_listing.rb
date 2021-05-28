@@ -33,8 +33,8 @@ class PastListing < ApplicationRecord
   scope :order_by_rent_asc,         -> { reorder(rent: :asc) }
 
   filterrific(
-    default_filter_params: { default_listing_order: :default_listing_order },
-    available_filters: [:default_listing_order, :search_query]
+    default_filter_params: { },
+    available_filters: [:search_query]
   )
 
   # delegates
