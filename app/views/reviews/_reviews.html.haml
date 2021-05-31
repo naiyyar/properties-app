@@ -1,6 +1,6 @@
 .comment{id: "comment#{review.id}"}
   - if current_user and current_user.has_role?(:admin)
-    = link_to '<span class="fa fa-times"></span>'.html_safe, review_path(review), method: :delete, remote: true, class: 'pull-right text-danger daleteReview', title: 'Delete'
+    = link_to '<span class="fa fa-times"></span>'.html_safe, review_path(review), method: :delete, remote: true, class: 'float-end text-danger daleteReview', title: 'Delete'
   .commentAvatar
     - unless review.anonymous
       - if review.user.avatar.present?
@@ -38,7 +38,7 @@
             = 'Visitor'
       %div{style: 'display: inline-block;'}
         %p.review-header-item
-        %ul.rating.pull-left.star-sm{style: 'margin: 0px;padding: 0px;'}
+        %ul.rating.float-start.star-sm{style: 'margin: 0px;padding: 0px;'}
           = rating_for_user reviewable, review.user, reviewable.class.name.downcase, disable_after_rate: true, review_id: review.id
         .favLink
           = '|'
@@ -65,13 +65,13 @@
           %h4
           - if review.uploads.present?
             - review.uploads.each do |asset|
-              .pull-left
+              .float-start
                 %a.fancybox{href: "#{asset.image.url}"}
                   = image_tag asset.image, alt: 'Image'
     .commentActions
-      %ul.d-inline.ricons.pull-left
+      %ul.d-inline.ricons.float-start
         %li= social_share_button_tag(review.review_title, :url => "https://www.transparentcity.co/buildings/#{params[:id]}#comment#{review.id}")
-      %ul.d-inline.ricons.pull-right
+      %ul.d-inline.ricons.float-end
         %li
           - if current_user.present?
             = link_to '<i class="glyphicon glyphicon-flag"></i>'.html_safe, "#flagDescription#{review.id}", 'data-bs-toggle' => 'modal', class: "#{current_user.marked_flag?(review.id) ? 'no-pointer flagged' : ''}", title: 'Flag as inappropriate'

@@ -25,13 +25,13 @@
         
         .form-group.footer
           .col-md-12.col-sm-12.col-xs-12
-            .pull-left
+            .float-start
               - if @featured_building.new_record?
                 = cancel_link(params[:type].blank? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'))
               - else
                 = cancel_link(!@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'))
               
-            .pull-right
+            .float-end
               / = link_to 'Back', !@featured_building.featured_by_manager? ? featured_buildings_path : managertools_user_path(current_user, type: 'featured'), class: 'btn btn-default font-18 pl-28 pr-28'
               = submit_link(f, title: @submit_text, disabled: true)
   

@@ -65,7 +65,7 @@
 
             .form-group
               .col-sm-12
-                .pull-right
+                .float-end
                   = link_to 'Cancel', 'javascript:;', class: 'btn btn-default cancel-form', 'data-model' => @listing.class.name
                   - if @listing.new_record?
                     = f.submit 'Save', class: 'btn btn-primary disabled'

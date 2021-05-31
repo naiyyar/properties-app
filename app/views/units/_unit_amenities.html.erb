@@ -1,6 +1,6 @@
 <div class="amenities">
   <h3>Unit Amenities
-    <%= link_to 'Edit', "/unit_steps/unit_information?unit_id=#{@unit.id}", class: "btn btn-o btn-default btn-xs pull-right" if current_user.present? %>
+    <%= link_to 'Edit', "/unit_steps/unit_information?unit_id=#{@unit.id}", class: "btn btn-o btn-default btn-xs float-end" if current_user.present? %>
   </h3>
   <div class="row">
     <% unit_amenities.each_pair do |k, v| %>

@@ -32,20 +32,20 @@
             .col-xs-12.col-sm-12.col-md-4.col-lg-4
               .form-group
                 %label Neighborhood1
-                .pull-right
-                = f.select :neighborhood, options_for_select(@neighborhood_options, f.object.neighborhood), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhood.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood_options.present?
+                .float-end
+                  = f.select :neighborhood, options_for_select(@neighborhood_options, f.object.neighborhood), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhood.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood_options.present?
 
             .col-xs-12.col-sm-12.col-md-4.col-lg-4
               .form-group
                 %label Neighborhood2
-                .pull-right
-                = f.select :neighborhoods_parent, options_for_select(@neighborhood2, f.object.neighborhoods_parent), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhoods_parent.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood2.present?
+                .float-end
+                  = f.select :neighborhoods_parent, options_for_select(@neighborhood2, f.object.neighborhoods_parent), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhoods_parent.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood2.present?
 
             .col-xs-12.col-sm-12.col-md-4.col-lg-4
               .form-group
                 %label Neighborhood3
-                .pull-right
-                = f.select :neighborhood3, options_for_select(@neighborhood3, f.object.neighborhood3), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhood3.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood3.present?
+                .float-end
+                  = f.select :neighborhood3, options_for_select(@neighborhood3, f.object.neighborhood3), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhood3.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood3.present?
                 = hidden_field_tag :selected_manually, 'automatic'
 
         - if current_user&.has_role?(:admin)
@@ -53,7 +53,7 @@
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
               .form-group
                 %label Property Website
-                .pull-right
+                .float-end
                   %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.active_web, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'web_url' } }
                 = f.text_field :web_url, class: 'form-control'
 
@@ -61,7 +61,7 @@
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
               .form-group
                 %label Online Application Website
-                .pull-right
+                .float-end
                   %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.show_application_link, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'application_link' } }
                 = f.text_field :online_application_link, class: 'form-control'
 
@@ -69,7 +69,7 @@
             .col-xs-12.col-sm-12.col-md-12.col-lg-12
               .form-group
                 %label Schedule Tour Website
-                .pull-right
+                .float-end
                   %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.schedule_tour_active, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'schedule_tour' } }
                 = f.text_field :schedule_tour_url, class: 'form-control'
 
@@ -77,7 +77,7 @@
             .col-xs-12.col-sm-12.col-md-6.col-lg-6
               .form-group
                 %label Email
-                .pull-right
+                .float-end
                   %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.active_email, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'email' } }
                 = f.email_field :email, class: 'form-control'
 
@@ -120,7 +120,7 @@
                 = f.select :price, options_for_select(prices_options, f.object.price), {include_blank: '-Select-' }, { class: 'form-control custom-arrow' }
         .form-group
           .col-sm-12
-            .pull-right
+            .float-end
               - if @building.present? and @building.id.present?
                 = link_to 'Cancel', building_path(@building), class: 'btn btn-default'
                 = f.submit 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'

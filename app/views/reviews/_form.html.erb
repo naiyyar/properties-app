@@ -61,7 +61,7 @@
 	<div class="col-sm-12 mb-3">
 		<div class="form-group">
 			<label>Pros* &nbsp;&nbsp;&nbsp;<small>(10 words minimum)</small></label>
-			<div class="checkbox custom-checkbox pull-right" style="margin: 0px;"><label><%= check_box_tag :no_pros %> <span class="fa fa-check"></span> No Pros</label></div>
+			<div class="checkbox custom-checkbox float-end" style="margin: 0px;"><label><%= check_box_tag :no_pros %> <span class="fa fa-check"></span> No Pros</label></div>
 			<%= f.text_area :pros,  class: 'form-control', placeholder: 'Example: The building is great for families, newly grads, students, singles, couples, dog lovers, people on a tight budget
  
 Great for finance bros, fashionistas, musicians, writers, retirees, software geeks, aspiring models and actresses
@@ -74,7 +74,7 @@ Only building that allows my 100lb Rottweiler', rows: 8 %>
 		<div class="form-group">
 			<label>Cons* &nbsp;&nbsp;&nbsp;<small>(10 words minimum)</small></label>
 			<!-- removing adding validation rules in zapp.js -->
-			<div class="checkbox custom-checkbox pull-right" style="margin: 0px;"><label><%= check_box_tag :no_cons %> <span class="fa fa-check"></span> No Cons</label></div>
+			<div class="checkbox custom-checkbox float-end" style="margin: 0px;"><label><%= check_box_tag :no_cons %> <span class="fa fa-check"></span> No Cons</label></div>
 			<%= f.text_area :cons,  class: 'form-control', placeholder: "Example: There are too many tourists, frat bros, loud bars, and cockroaches EVERYWHERE!!!
 Not close enough to a Trader Joe's, Whole Foods
 The rent increases are kiling my seamless and alcohol budget
@@ -103,7 +103,7 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
   	<label>Upload photos</label>
   	<br />
 		<div class="form-group images-container">
-			<div class="pull-left attachment-icon">
+			<div class="float-start attachment-icon">
         <a href="javascript:void(0)" onclick="$('#upload_images').trigger('click'); return false;" >  
           <%= image_tag 'camera_grey_64.png', alt: 'Add images' %>
         </a>

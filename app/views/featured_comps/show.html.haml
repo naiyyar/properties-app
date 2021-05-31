@@ -1,6 +1,6 @@
 .row
   .col-lg-12
-    .pull-left
+    .float-start
       %h3
         = "Comp #{@featured_comp.id} - #{@featured_comp.building.building_name_or_address}"
         %input.apple-switch.sb-sm{type: 'checkbox', checked: @featured_comp.active, style: 'margin: 0px;', data: { compid: @featured_comp.id } }

@@ -18,7 +18,7 @@
 		
 		<% if show_done %>
 			<div class="form-group">
-				<div class="pull-right" style="padding: 8px 0px;">
+				<div class="float-end" style="padding: 8px 0px;">
 					<% if @imageable.kind_of? Unit %>
 						<%= link_to 'Done', unit_path(@imageable, :from_uploaded => 'yes'), class: 'btn btn-primary btn-done' %>
 					<%else%>

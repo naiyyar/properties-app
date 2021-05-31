@@ -28,9 +28,9 @@
 
 			.row
 				.col-lg-6.col-xs-12
-					.pull-left
+					.float-start
 						= cancel_link(@featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path)
-					.pull-right
+					.float-end
 						= previous_link(edit_featured_agent_path(@imageable))
 						- unless @imageable.live?
 							= next_link(wizard_path(:payment, agent_id: @imageable.id))

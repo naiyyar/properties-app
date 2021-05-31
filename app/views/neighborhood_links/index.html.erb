@@ -1,7 +1,7 @@
 <%if current_user and current_user.has_role?(:admin) %>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="pull-right">
+      <div class="float-end">
         <%= link_to 'Add New Link', '#newNeighnorhood', class: 'btn btn-blue', 'data-bs-toggle' => 'modal' %>
       </div>
     </div>

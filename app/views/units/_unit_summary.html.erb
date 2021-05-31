@@ -5,7 +5,7 @@
           <h1 class="pageTitle">
             <%= "#{@unit.name}" %>
             <% if user_signed_in? %>
-                <%= link_to 'Edit', edit_unit_path(@unit), class: 'btn btn-o btn-default btn-xs pull-right' %>
+                <%= link_to 'Edit', edit_unit_path(@unit), class: 'btn btn-o btn-default btn-xs float-end' %>
             <%end%>
           </h1>
           <div class="property_information">

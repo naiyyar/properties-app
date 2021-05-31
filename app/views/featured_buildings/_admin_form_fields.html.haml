@@ -23,7 +23,7 @@
           %label Featured Agent Renewal
     .col-xs-6.col-sm-6.col-md-6.col-lg-6
       .form-group
-        .pull-right
+        .float-end
           - if object.kind_of?(FeaturedBuilding)
             %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: object.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => object.id }
           - else

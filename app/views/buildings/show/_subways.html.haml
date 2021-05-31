@@ -4,7 +4,7 @@
 		- distance = st[:distance].to_f
 		- if distance.present?
 			.col-lg-6
-				.transport-lines.pull-left
+				.transport-lines.float-start
 					- if st[:lines].present?
 						- st[:lines].map do |line|
 							.st-transport-line.circled{style: "background-color: #{line['color']}"}=line['line']

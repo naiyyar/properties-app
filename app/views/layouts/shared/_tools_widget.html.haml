@@ -16,11 +16,11 @@
 			- unless mobile?
 				.row
 					.col-lg-6
-						.pull-left
+						.float-start
 							%h4= @type == 'featured' ? title : 'Billing'
 
 					.col-lg-6
-						.pull-right
+						.float-end
 							- unless title == 'Featured Listings'
 								= add_new_link
 							- else
