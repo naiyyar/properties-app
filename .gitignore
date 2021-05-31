@@ -29,3 +29,4 @@
 /public/sitemaps/*
 /public/sitemaps/sitemap.xml
 /public/assets
+/node_modules
