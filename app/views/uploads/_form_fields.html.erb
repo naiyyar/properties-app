@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-6">
-		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: "dropzone form-horizontal #{@imageable.class.name}", id: "new_upload_#{params[:upload_type]}", style: 'margin: 0px;' }) do |f|  %>
+		<%= form_for([@imageable, Upload.new], html: { multipart: true, class: "dropzone form-horizontal #{@imageable.class.name}", id: "new_upload_#{params[:upload_type]}", style: 'margin: 0px;position: relative;' }) do |f|  %>
 		  <div class="fallback">
 		  	<% unless params[:upload_type] == 'documents' %>
 		    	<%= f.file_field :image %>

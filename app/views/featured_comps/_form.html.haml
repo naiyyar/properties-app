@@ -1,56 +1,54 @@
 .form-container
   .row
     .col-xs-12.col-sm-12.col-md-12.col-lg-6
-      .panel.panel-default
-        .panel-heading
-          %b= @featured_comp.new_record? ? 'New Featured Comp' : 'Edit Featured Comp'
-        .panel-body
-          = form_for @featured_comp, html: { class: 'management-company-form' } do |f|
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  %label Feature This Building As Comp
-                  = text_field_tag 'feature_building_as_comp', @featured_comp.building.present? ? @featured_comp.building.building_name_or_address : nil, class: 'form-control buildings-search-txt', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?featured_as=true' }, :autocomplete => :off
-                  #as-comp-buildings-search-results.results{style: "position: relative;"}
-                  
-              = f.hidden_field :building_id
-            .row
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                .form-group
-                  %label Start Date
-                  = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
+      %p.font-21= @featured_comp.new_record? ? 'New Featured Comp' : 'Edit Featured Comp'
+        
+      = form_for @featured_comp, html: { class: 'management-company-form' } do |f|
+        .row.mb-3
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            .form-group
+              %label Feature This Building As Comp
+              = text_field_tag 'feature_building_as_comp', @featured_comp.building.present? ? @featured_comp.building.building_name_or_address : nil, class: 'form-control buildings-search-txt', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?featured_as=true' }, :autocomplete => :off
+              #as-comp-buildings-search-results.results{style: "position: relative;"}
+              
+          = f.hidden_field :building_id
+        .row.mb-3
+          .col-xs-6.col-sm-6.col-md-6.col-lg-6
+            .form-group
+              %label Start Date
+              = f.text_field :start_date, value: f.object.start_date.present? ? f.object.start_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
 
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
-                .form-group
-                  %label End Date
-                  = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
+          .col-xs-6.col-sm-6.col-md-6.col-lg-6
+            .form-group
+              %label End Date
+              = f.text_field :end_date, value: f.object.end_date.present? ? f.object.end_date.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker'
 
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  %label Select Comparable Buildings to Feature On
-                  = hidden_field_tag 'comparable_building_ids', nil, class: 'form-control', name: 'comparable_building_ids[]'
-                  = text_field_tag 'buildings-search-txt',nil, class: 'form-control', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?featured_on=true' }, :autocomplete => :off
-                  #buildings-search-results.results{style: "position: relative;"}
+        .row.mb-3
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            .form-group
+              %label Select Comparable Buildings to Feature On
+              = hidden_field_tag 'comparable_building_ids', nil, class: 'form-control', name: 'comparable_building_ids[]'
+              = text_field_tag 'buildings-search-txt',nil, class: 'form-control', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?featured_on=true' }, :autocomplete => :off
+              #buildings-search-results.results{style: "position: relative;"}
 
-            .row
-              .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                .form-group
-                  %label
-                    = "Buildings Featured On"
-                    (
-                    %span.seleted-count="#{@featured_on_buildings.present? ? @featured_on_buildings.count : 0 }"
-                    )
-                  .buttonsWrapper
-                    - if @featured_on_buildings.present?
-                      - @featured_on_buildings.each do |building|
-                        %a.btn.btn-default{href: "#{building_path(building)}"}= building.building_name_or_address
-            
-            .form-group.footer
-              .col-sm-12
-                .pull-right
-                  = link_to 'Cancel', featured_comps_path, class: 'btn btn-default'
-                  = f.submit 'Save', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
+        .row.mb-3
+          .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            .form-group
+              %label
+                = 'Buildings Featured On'
+                (
+                %span.seleted-count="#{@featured_on_buildings.present? ? @featured_on_buildings.count : 0 }"
+                )
+              .buttonsWrapper
+                - if @featured_on_buildings.present?
+                  - @featured_on_buildings.each do |building|
+                    %a.btn.btn-default{href: "#{building_path(building)}"}= building.building_name_or_address
+        
+        .form-group
+          .col-sm-12
+            .pull-right
+              = link_to 'Cancel', featured_comps_path, class: 'btn btn-default'
+              = f.submit 'Save', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
 
     - if @featured_on_buildings.present?
       #content.mob-max.user_property_listing

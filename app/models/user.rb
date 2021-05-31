@@ -24,7 +24,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, 
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: [:create, :update]
 
   DEFAULT_TIMEZONE = 'Eastern Time (US & Canada)'
   US_ZONES         = ['UTC', 'America/Havana']

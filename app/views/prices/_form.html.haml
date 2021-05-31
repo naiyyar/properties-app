@@ -2,18 +2,17 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button{type: "button", class: "close", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}
-          &times;
+        %button{type: 'button', class: 'btn-close', 'data-bs-dismiss'=>"modal", 'aria-hidden'=>'true'}
       
       .modal-body.no-padding
         = form_tag '/add_or_update_prices' do
           %fieldset
-            .row
+            .row.mb-3
               .col-xs-12.col-sm-12.col-md-12.col-lg-12
                 .form-group.price-range
                   = hidden_field_tag :range, range
                   - 0.upto(4) do |bt_range|
-                    .row
+                    .row.mb-3
                       .col-lg-3=bedroom_type(bt_range)
                       .col-lg-4
                         = text_field_tag "price[#{bt_range}][min_price]", @range_prices.present? ? Price.min_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Min'
@@ -22,7 +21,7 @@
                         = text_field_tag "price[#{bt_range}][max_price]", @range_prices.present? ? Price.max_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Max'
                   / for coliving bed type 9
                   - bt_range = Building::COLIVING_NUM
-                  .row
+                  .row.mb-3
                     .col-lg-3=bedroom_type(bt_range)
                     .col-lg-4
                       = text_field_tag "price[#{bt_range}][min_price]", @range_prices.present? ? Price.min_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Min'
@@ -30,9 +29,11 @@
                     .col-lg-4
                       = text_field_tag "price[#{bt_range}][max_price]", @range_prices.present? ? Price.max_price(bt_range, @range_prices) : nil, class: "form-control price_range_#{bt_range}", placeholder: 'Max'
                 
-          %footer
-            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
-            = submit_tag 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
+                .row.mb-3
+                  .col-lg-12
+                    .float-end
+                      = link_to 'Cancel', '#', class: 'btn btn-default', 'data-bs-dismiss' => 'modal'
+                      = submit_tag 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
 
 :css
   .form-group.price-range input{

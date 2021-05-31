@@ -17,10 +17,19 @@
         %span.font-bold= rent_with_currency(featured_listing)
         %span= " | #{featured_listing.bed} Bed #{featured_listing.bath} Bath"
 
-  .clearfix
   = link_to @show_path, style: 'color: #000' do
-    %br
-    %p
-    .cta_buttons{id: "cta-links#{featured_listing.id}"}
+    .cta_buttons.featuredListing{id: "cta-links#{featured_listing.id}"}
       
 .clearfix
+
+:css
+  .cta_buttons.featuredListing{
+    min-height: 111px;
+    max-height: 111px;
+    position: relative;
+  }
+  .cta_buttons.featuredListing .contact-links {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+  }

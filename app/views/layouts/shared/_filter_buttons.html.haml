@@ -1,18 +1,30 @@
 - if mobile?
-  .visible-xs.header2
+  .header2
     - if show_filters?
       .row
         .col-xs-12
           %h1.font-14.font-bold{style: 'margin: 3px 0px;'}= split_view_header
 
-      %section.sorted_by_option.row{style: "padding: 1px 0px;display: inline-block;width: 100%;background: #fff;margin: 0px 0px 3px 0px; display: #{custom_search? ? 'none' : 'block'}"}
-        %section.col-xs-6{style: 'padding-left: 0px;padding-right: 1px;width: 53%;'}
+      .sorted_by_option{style: "width: 100%;background: #fff; display: #{custom_search? ? 'none' : 'block'}"}
+        .row
+          .col-6.count
+            %div.counts= "#{@listings_count.to_i} Rentals | #{@buildings_count.to_i} Buildings"
+          
+          .col-6.sort-options
+            .sorted-by.d-inline{style: 'margin-bottom: 1px;'} Sorted By:
+            %label.d-inline{style: 'margin-bottom: 1px;'}
+              = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, style: 'color: #2272e2;border-color: transparent;height: 25px; padding: 0px 0px;width: 114px;' }
+              %i.sort
+
+            
+      
+      - if false
+        %section.d-inline{style: 'padding-left: 0px;padding-right: 1px;width: 53%;'}
           %label{style: 'margin-bottom: 1px; padding: 2px 0px;'}
-            %div.counts= "#{@listings_count.to_i} Rentals |"
-            %div.counts= "#{@buildings_count.to_i} Buildings"
+            %div.counts= "#{@listings_count.to_i} Rentals | #{@buildings_count.to_i} Buildings"
         
-        %section.col-xs-6{style: 'padding-left: 0px;padding-right: 0px;width: 47%;'}
-          %section.tbl-cell.pull-left{style: 'width: 67px;padding: 3px 0px;'}
+        %section.d-inline{style: 'padding-left: 0px;padding-right: 0px;width: 47%;'}
+          %section.tbl-cell{style: 'width: 67px;padding: 3px 0px;'}
             %span.sorted-by{style: 'margin-bottom: 1px;'} Sorted By:
           %section.tbl-cell{style: 'display: table-cell;'}
             %label.select.sort-select{style: 'margin-bottom: 1px;'}
@@ -27,4 +39,12 @@
       box-shadow: 0px 2px 6px rgb(0 0 0 / 20%);
       -webkit-box-shadow: 0px 2px 6px rgb(0 0 0 / 20%);
       -moz-box-shadow: 0px 2px 6px rgb(0 0 0 / 20%);
+    }
+    .sorted_by_option .col-6.count{
+      padding-right: 0px;
+    }
+
+    .sorted_by_option .col-6.sort-options{
+      padding-left: 0px;
+      padding-right: 0px;
     }

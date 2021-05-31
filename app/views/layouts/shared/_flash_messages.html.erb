@@ -1,8 +1,8 @@
 <% flash.each do |key, value| %>
 	<% if value.present? %>
 		<div class="alert <%= flash_class(key) %> alert-dismissable fade in">
-			<a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		  <b><%= value %></b>
+		  <!-- <a href="javascript:void(0)" class="btn-close" data-bs-dismiss="alert" aria-label="close"></a> -->
 		</div>
 	<%end%>
 <% end %>

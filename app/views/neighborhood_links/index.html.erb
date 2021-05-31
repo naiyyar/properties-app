@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="pull-right">
-        <%= link_to 'Add New Link', '#newNeighnorhood', class: 'btn btn-blue', 'data-toggle' => 'modal' %>
+        <%= link_to 'Add New Link', '#newNeighnorhood', class: 'btn btn-blue', 'data-bs-toggle' => 'modal' %>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@
 <%end%>
 
 <div class="text-center">
-  <%= will_paginate @neighborhood_links, renderer: BootstrapPagination::Rails %>
+  <%= render 'layouts/shared/add_pagination', objects: @neighborhood_links %>
 </div>
 
 

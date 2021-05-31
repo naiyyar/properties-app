@@ -191,12 +191,20 @@ module LinksHelper
 		'Check Availability'
 	end
 
+	def close_button color: ''
+		content_tag(:button, nil, type: 'button', 
+													class: "btn-close #{color}", 
+													'data-bs-dismiss' => 'modal', 
+													'aria-label' => 'Close'
+								)
+	end
+
 	def action_link_styles
 		"width: #{browser.device.mobile? ? '8em' : '10em'};"
 	end
 
 	def action_links_alignment_class
-		browser.device.mobile? ? 'text-center' : 'text-right'
+		browser.device.mobile? ? 'text-center' : 'text-end'
 	end
 
 	def delete_link url, remote: false, classes: ''

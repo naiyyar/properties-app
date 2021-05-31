@@ -1,13 +1,13 @@
 #property-photos
 	.row
-		.col-lg-12.col-xs-12.col-lg-offset-3
-			.row
+		.col-lg-12.col-xs-12.offset-3
+			.row.mb-3
 				.col-lg-4.col-sm-10.col-xs-8= render 'agent_info'
 
 				.col-lg-2.col-sm-2.col-xs-2
-					.text-right=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success font-16 font-bold', remote: true
+					.text-end=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-green btn-round text-white font-16 font-bold', remote: true
 			
-			.row
+			.row.mb-1
 				.col-lg-12
 					%p.font-bold.font-16.font-blue Add Photos
 			
@@ -20,10 +20,9 @@
 			
 			.row
 				.col-lg-6.col-xs-9
-					%ul#gallery.list-inline{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
+					%ul#gallery.d-inline-flex.uploads{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
 						- @uploads.each do |upload|
 							= render 'uploads/gallery', upload: upload, featured_image: false 
-			%br
 			%br
 			%br
 
@@ -44,8 +43,7 @@
 		.modal-dialog.modal-md
 			.modal-content{style: 'background-color: #f3f3f3;'}
 				.modal-header
-					%button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
-						%span{'aria-hidden' => 'true'} ×
+					%button.btn-close{'aria-label' => 'Close', 'data-bs-dismiss' => 'modal', type: 'button'}
 					%h4.modal-title.font-18 Preview Agent
 				.modal-body.no-padding
 					= render 'featured_agents/thumbnail_preview'

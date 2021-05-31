@@ -3,9 +3,9 @@
     .modal-dialog.modal-md
       .modal-content
         .modal-header
-          %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
-            %span{'aria-hidden' => 'true'} ×
           %h4.modal-title Contact Owner
+          %button.btn-close{'aria-label' => 'Close', 'data-bs-dismiss' => 'modal', type: 'button'}
+          
         .modal-body.no-padding
           = render 'featured_listings/contact_form'
 - else
@@ -15,7 +15,7 @@
         .text-center{style: 'border-bottom: 1px solid #ddd;'}
           %h4.text-center{style: 'margin-top: 10px; margin-bottom: 10px;'} Contact Owner
 
-      %div.text-right.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
+      %div.text-end.header.visible-xs{style: 'position: absolute; right: 15px; top: -1px;'}
         = link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, 'javascript:;', class: 'closeContact'
     
     = render 'featured_listings/contact_form'

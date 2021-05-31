@@ -1,14 +1,7 @@
-.tables
-  - if current_user.present?
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-        .pull-right
-          = link_to 'Add new unit', new_unit_path, class: 'btn btn-blue'
-    %h2
+= render 'layouts/shared/admin_page_header', link_title: 'Add new unit', link_url: new_unit_path
   
-  .pull-right= render 'layouts/shared/filterrific_form'
-  
-  - cache [@units, params[:page]] do
-    = render 'units/units', :@units => @units
+- cache [@units, params[:page]] do
+  = render 'units/units', :@units => @units
+
 .text-center
-  = will_paginate @units, renderer: BootstrapPagination::Rails
+  = render 'layouts/shared/add_pagination', objects: @units

@@ -1,4 +1,5 @@
 @import "./home/main";
+@import "./building/show";
 @import "about";
 @import "advertise";
 @import "blog";
@@ -29,4 +30,7 @@
 @import "split_view";
 @import "comments";
 @import "sortable";
-@import "./building/show";
+@import "tabs";
+@import "authentication";
+@import "buttons";
+@import "shared-search";

@@ -1,132 +1,131 @@
 .form-container
   .row
     .col-xs-12.col-sm-12.col-md-12.col-lg-6
-      .panel.panel-default
-        .panel-heading
-          %b= @building.new_record? ? 'New Building' : 'Edit Building'
-        .panel-body
-          = form_for @building, class: 'form-horizontal' do |f|
+      %p.font-21= @building.new_record? ? 'New Building' : 'Edit Building'
+        
+      = form_for @building, class: 'form-horizontal' do |f|
+        .form-group.mb-3
+          %label.form-label{for: 'building_building_name'} Building Name
+          = f.text_field :building_name, class: 'form-control', readonly: disabled(current_user, f.object.building_name), id: 'building_building_name'
+        
+        .row.mb-3
+          .col-xs-12.col-sm-12.col-md-6.col-lg-6
             .form-group
-              %label Building Name
-              = f.text_field :building_name, class: 'form-control', readonly: disabled(current_user, f.object.building_name)
-            .row
-              .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                .form-group
-                  %label Address*
-                  = f.text_field :building_street_address, class: 'form-control validate', readonly: disabled(current_user, f.object.building_street_address)
-              .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                .form-group
-                  %label City*
-                  = f.text_field :city, class: 'form-control validate', readonly: disabled(current_user, f.object.city)
-            .row
-              .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                .form-group
-                  %label State*
-                  = f.text_field :state, class: 'form-control validate', readonly: disabled(current_user, f.object.state)
-              .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                .form-group
-                  %label Zip*
-                  = f.text_field :zipcode, class: 'form-control validate', readonly: disabled(current_user, f.object.zipcode)
-            
-            - if current_user and current_user.has_role?(:admin) and !@building.new_record?
-              .row
-                .col-xs-12.col-sm-12.col-md-4.col-lg-4
-                  .form-group
-                    %label Neighborhood1
-                    .pull-right
-                    = f.select :neighborhood, options_for_select(@neighborhood_options, f.object.neighborhood), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhood.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood_options.present?
-
-                .col-xs-12.col-sm-12.col-md-4.col-lg-4
-                  .form-group
-                    %label Neighborhood2
-                    .pull-right
-                    = f.select :neighborhoods_parent, options_for_select(@neighborhood2, f.object.neighborhoods_parent), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhoods_parent.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood2.present?
-
-                .col-xs-12.col-sm-12.col-md-4.col-lg-4
-                  .form-group
-                    %label Neighborhood3
-                    .pull-right
-                    = f.select :neighborhood3, options_for_select(@neighborhood3, f.object.neighborhood3), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhood3.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood3.present?
-                    = hidden_field_tag :selected_manually, 'automatic'
-
-            - if current_user&.has_role?(:admin)
-              .row
-                .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                  .form-group
-                    %label Property Website
-                    .pull-right
-                      %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.active_web, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'web_url' } }
-                    = f.text_field :web_url, class: 'form-control'
-
-              .row
-                .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                  .form-group
-                    %label Online Application Website
-                    .pull-right
-                      %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.show_application_link, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'application_link' } }
-                    = f.text_field :online_application_link, class: 'form-control'
-
-              .row
-                .col-xs-12.col-sm-12.col-md-12.col-lg-12
-                  .form-group
-                    %label Schedule Tour Website
-                    .pull-right
-                      %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.schedule_tour_active, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'schedule_tour' } }
-                    = f.text_field :schedule_tour_url, class: 'form-control'
-
-              .row
-                .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                  .form-group
-                    %label Email
-                    .pull-right
-                      %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.active_email, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'email' } }
-                    = f.email_field :email, class: 'form-control'
-
-                .col-xs-12.col-sm-12.col-md-6.col-lg-6
-                  .form-group
-                    %label Phone Number
-                    = f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
-              
-              .row
-                .col-xs-12.col-sm-12.col-md-3.col-lg-2
-                  .form-group
-                    %label # of Floors
-                    = f.number_field :floors, class: "form-control", min: 0, placeholder: 'Optional'
-                .col-xs-12.col-sm-12.col-md-3.col-lg-3
-                  .form-group
-                    %label Built in year
-                    = f.text_field :built_in, class: "form-control", placeholder: 'Built in 2002(optional)'
-                .col-xs-12.col-sm-12.col-md-3.col-lg-2
-                  .form-group
-                    %label # of Units
-                    = f.text_field :number_of_units, class: "form-control", min: 0, placeholder: 'Optional'
-                .col-xs-12.col-sm-12.col-md-3.col-lg-5
-                  .form-group
-                    %label Building Type
-                    = f.select :building_type, options_for_select(['Rental Building','Condo Building','Coop Building'], f.object.building_type), { prompt: 'Select type' }, { class: 'form-control custom-arrow' }
-              .row
-                .col-xs-12.col-sm-12.col-md-3.col-lg-6
-                  .form-group
-                    %label Bedroom Types
-                    - Building::BEDROOMS.each do |bd_type|
-                      .checkbox.custom-checkbox.bedroom-types-checkbox
-                        %label
-                          = f.check_box :bedroom_types, {name: 'building[bedroom_types][]'}, bd_type[0], ''
-                          %span.fa.fa-check
-                          = bd_type[1]
-                
-                .col-xs-12.col-sm-12.col-md-3.col-lg-6
-                  .form-group
-                    %label Price
-                    = f.select :price, options_for_select(prices_options, f.object.price), {include_blank: '-Select-' }, { class: 'form-control custom-arrow' }
+              %label Address*
+              = f.text_field :building_street_address, class: 'form-control validate', readonly: disabled(current_user, f.object.building_street_address)
+          .col-xs-12.col-sm-12.col-md-6.col-lg-6
             .form-group
-              .col-sm-12
+              %label City*
+              = f.text_field :city, class: 'form-control validate', readonly: disabled(current_user, f.object.city)
+        .row.mb-3
+          .col-xs-12.col-sm-12.col-md-6.col-lg-6
+            .form-group
+              %label State*
+              = f.text_field :state, class: 'form-control validate', readonly: disabled(current_user, f.object.state)
+          .col-xs-12.col-sm-12.col-md-6.col-lg-6
+            .form-group
+              %label Zip*
+              = f.text_field :zipcode, class: 'form-control validate', readonly: disabled(current_user, f.object.zipcode)
+        
+        - if current_user and current_user.has_role?(:admin) and !@building.new_record?
+          .row.mb-3
+            .col-xs-12.col-sm-12.col-md-4.col-lg-4
+              .form-group
+                %label Neighborhood1
                 .pull-right
-                  - if @building.present? and @building.id.present?
-                    = link_to 'Cancel', building_path(@building), class: 'btn btn-default'
-                    = f.submit 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
-                  - else
-                    = f.submit 'Next', class: 'btn btn-primary', id: 'new_building_submit'
+                = f.select :neighborhood, options_for_select(@neighborhood_options, f.object.neighborhood), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhood.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood_options.present?
+
+            .col-xs-12.col-sm-12.col-md-4.col-lg-4
+              .form-group
+                %label Neighborhood2
+                .pull-right
+                = f.select :neighborhoods_parent, options_for_select(@neighborhood2, f.object.neighborhoods_parent), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhoods_parent.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood2.present?
+
+            .col-xs-12.col-sm-12.col-md-4.col-lg-4
+              .form-group
+                %label Neighborhood3
+                .pull-right
+                = f.select :neighborhood3, options_for_select(@neighborhood3, f.object.neighborhood3), { prompt: 'Select Neighborhood', :include_blank => f.object.neighborhood3.blank? ? nil : 'Select None' }, { class: 'form-control custom-arrow b-nb-dropdown' } if @neighborhood3.present?
+                = hidden_field_tag :selected_manually, 'automatic'
+
+        - if current_user&.has_role?(:admin)
+          .row.mb-3
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              .form-group
+                %label Property Website
+                .pull-right
+                  %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.active_web, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'web_url' } }
+                = f.text_field :web_url, class: 'form-control'
+
+          .row.mb-3
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              .form-group
+                %label Online Application Website
+                .pull-right
+                  %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.show_application_link, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'application_link' } }
+                = f.text_field :online_application_link, class: 'form-control'
+
+          .row.mb-3
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              .form-group
+                %label Schedule Tour Website
+                .pull-right
+                  %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.schedule_tour_active, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'schedule_tour' } }
+                = f.text_field :schedule_tour_url, class: 'form-control'
+
+          .row.mb-3
+            .col-xs-12.col-sm-12.col-md-6.col-lg-6
+              .form-group
+                %label Email
+                .pull-right
+                  %input.apple-switch.sb-sm.building{type: 'checkbox', checked: @building.active_email, style: 'margin: 0px;', data: { fbid: @building.id, ftype: 'email' } }
+                = f.email_field :email, class: 'form-control'
+
+            .col-xs-12.col-sm-12.col-md-6.col-lg-6
+              .form-group
+                %label Phone Number
+                = f.text_field :phone, class: 'form-control phone_number', id: 'uintTextBoxPhone'
+          
+          .row.mb-3
+            .col-xs-12.col-sm-12.col-md-3.col-lg-2
+              .form-group
+                %label # of Floors
+                = f.number_field :floors, class: "form-control", min: 0, placeholder: 'Optional'
+            .col-xs-12.col-sm-12.col-md-3.col-lg-3
+              .form-group
+                %label Built in year
+                = f.text_field :built_in, class: "form-control", placeholder: 'Built in 2002(optional)'
+            .col-xs-12.col-sm-12.col-md-3.col-lg-2
+              .form-group
+                %label # of Units
+                = f.text_field :number_of_units, class: "form-control", min: 0, placeholder: 'Optional'
+            .col-xs-12.col-sm-12.col-md-3.col-lg-5
+              .form-group
+                %label Building Type
+                = f.select :building_type, options_for_select(['Rental Building','Condo Building','Coop Building'], f.object.building_type), { prompt: 'Select type' }, { class: 'form-control custom-arrow' }
+          .row.mb-3
+            .col-xs-12.col-sm-12.col-md-3.col-lg-6
+              .form-group
+                %label Bedroom Types
+                - Building::BEDROOMS.each do |bd_type|
+                  .checkbox.custom-checkbox.bedroom-types-checkbox
+                    %label
+                      = f.check_box :bedroom_types, {name: 'building[bedroom_types][]'}, bd_type[0], ''
+                      %span.fa.fa-check
+                      = bd_type[1]
+            
+            .col-xs-12.col-sm-12.col-md-3.col-lg-6
+              .form-group
+                %label Price
+                = f.select :price, options_for_select(prices_options, f.object.price), {include_blank: '-Select-' }, { class: 'form-control custom-arrow' }
+        .form-group
+          .col-sm-12
+            .pull-right
+              - if @building.present? and @building.id.present?
+                = link_to 'Cancel', building_path(@building), class: 'btn btn-default'
+                = f.submit 'Submit', class: 'btn btn-primary', name: 'subaction', id: 'new_building_submit'
+              - else
+                = f.submit 'Next', class: 'btn btn-primary', id: 'new_building_submit'
 
 :css
   .form-group.price-range input{

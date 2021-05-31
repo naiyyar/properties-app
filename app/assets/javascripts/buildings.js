@@ -50,8 +50,8 @@ bapp.buildings.prototype = {
   _render: function(ul, item) {
     search_type = item.search_type
     $("#buildings-search-no-results").css('display','none');
-    if($(".no-match-link").hasClass('hidden')){
-      $(".no-match-link").removeClass('hidden');
+    if($(".no-match-link").hasClass('d-none')){
+      $(".no-match-link").removeClass('d-none');
     }
     var building_name = ''
     if(item.building_name == '' || item.building_name == undefined){
@@ -74,11 +74,11 @@ bapp.buildings.prototype = {
 
   _select: function(e, ui) {
     $('#units-search-txt').val('');
-    if(!$('.no-match-link').hasClass('hidden')){
-      $('.no-match-link').addClass('hidden');
+    if(!$('.no-match-link').hasClass('d-none')){
+      $('.no-match-link').addClass('d-none');
     }
     
-    $("#new_unit_building").addClass('hide');
+    $("#new_unit_building").addClass('d-none');
     $("#search_item_form").find('#next_btn').removeClass('disabled')
     
     if($('.no-result-li').length == 1){
@@ -105,13 +105,13 @@ bapp.buildings.prototype = {
       || contribution_for == 'unit_amenities' 
       || contribution_for == 'unit_price_history'){
 
-      if(!$('#next_btn').hasClass('hidden')){
-        $('#next_btn').addClass('hidden');
+      if(!$('#next_btn').hasClass('d-none')){
+        $('#next_btn').addClass('d-none');
       }
     }
     else{
-      if($('#next_btn').hasClass('hidden')){
-        $('#next_btn').removeClass('hidden');
+      if($('#next_btn').hasClass('d-none')){
+        $('#next_btn').removeClass('d-none');
       }
     }
 
@@ -124,8 +124,8 @@ bapp.buildings.prototype = {
       $('#new_unit_building #building_zipcode').val(ui.item.zipcode);
       $("#new_unit_building #building_building_name").val(ui.item.building_name);
       $(".unit-search").removeAttr('readonly');
-      if(!$("#unit_name").parent().parent().hasClass('hide')){
-        $("#unit_name").parent().parent().addClass('hide');
+      if(!$("#unit_name").parent().parent().hasClass('d-none')){
+        $("#unit_name").parent().parent().addClass('d-none');
       }
     }
 
@@ -141,7 +141,7 @@ bapp.buildings.prototype = {
     }else{
       item = ui.item.building_street_address;
     }
-    $('.buttonsWrapper').append('<a href="#" class="btn btn-success">'+item+'</a>');
+    $('.buttonsWrapper').append('<a href="#" class="btn btn-green btn-round text-white">'+item+'</a>');
     if($('#managed_building_id').length > 0){
       $('.management-company-form').append('<input type="hidden" name="managed_building_ids[]" id="managed_building_id" class="form-control" value="'+ui.item.id+'">');
       this._input.val('');
@@ -160,8 +160,8 @@ bapp.buildings.prototype = {
         $("ul.ui-autocomplete").show();
       }
       else{
-        if(!$('.no-match-link').hasClass('hidden')){
-          setTimeout(function(){ $('.no-match-link').addClass('hidden') }, 400);
+        if(!$('.no-match-link').hasClass('d-none')){
+          setTimeout(function(){ $('.no-match-link').addClass('d-none') }, 400);
         }
       }
   },

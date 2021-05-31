@@ -2,7 +2,7 @@
   .similar{style: "#{@featured_buildings.present? ? 'padding: 0px;' : ''}"}
     / carousel for medium & large devices
     - unless action_name == 'load_featured_buildings'
-      =render 'layouts/shared/slick_slider', slides_to_show: 2
+      = render 'layouts/shared/slick_slider', slides_to_show: 2
     - else
       #carouselSimilar-1.carousel.slide.carousel-col
         .carousel-inner

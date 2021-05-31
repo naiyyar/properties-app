@@ -1,0 +1,75 @@
+.tabsWidget {
+    display: block;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
+    text-decoration: none;
+    border-radius: 3px;
+}
+.nav-tabs, .nav-tabs.nav-justified {
+    border-bottom: none;
+    background-color: #e8e8e8;
+}
+.nav-tabs.nav-justified > .active > a,
+.no-touch .nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+    border: 0 none;
+}
+.nav-tabs > li {
+    text-align: center;
+    margin-bottom: 0;
+}
+.tabsWidget .nav-tabs > li {
+    width: 50%;
+}
+.nav-tabs > li.active {
+    background-color: #fff;
+}
+
+.tabsWidgetSearch .nav-tabs > li.active {
+    background-color: transparent;
+}
+.tabsWidgetSearch{
+    margin-top: -3px;
+}
+.tabsWidgetSearch ul li a{
+    font-size: 14px;
+
+}
+.nav-tabs > li > a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 0 none;
+    border-radius: 0;
+    color: #999;
+    font-size: 12px;
+    padding: 15px 0;
+    background-color: #e8e8e8;
+    border-bottom: 1px solid #d9d9d9;
+}
+.no-touch .nav-tabs > li > a:hover {
+    border-color: transparent;
+    background-color: transparent;
+    color: #333;
+    border-bottom: 1px solid #d9d9d9;
+}
+.nav-tabs > li.active > a,
+.no-touch .nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    color: #0eaaa6;
+    cursor: default;
+    background-color: #fff;
+    border: 0 none;
+    border-bottom: 1px solid #fff;
+}
+.tabsWidget .tab-pane {
+  padding: 0;
+}
+.tabsContainer {
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
+    margin-bottom: 0px;
+}
+.tab-pane {
+    padding: 15px;
+    font-size: 13px;
+}

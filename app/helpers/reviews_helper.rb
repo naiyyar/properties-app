@@ -81,7 +81,7 @@ module ReviewsHelper
 	end
 
 	def flag_as_inappropriate href, classes: ''
-		link_to flag_icon, href, 'data-toggle' => 'modal', title: 'Flag as inappropriate', class: classes
+		link_to flag_icon, href, 'data-bs-toggle' => 'modal', title: 'Flag as inappropriate', class: classes
 	end
 
 	def flagged_classes review
@@ -99,7 +99,7 @@ module ReviewsHelper
 	def useful_link review, href: '#signin'
 		link_to useful_title(review), 
 					  href, 
-					  class: "btn btn-o btn-blue btn-xs btn-round #{useful_classes(review)}",
+					  class: "btn btn-o btn-blue btn-xs btn-round text-white #{useful_classes(review)}",
 					  data: data_attributes(review)
 
 	end
@@ -113,8 +113,14 @@ module ReviewsHelper
 	end
 
 	def data_attributes review
-		return { toggle: 'modal'} unless current_user
+		return { 'bs-toggle' => 'modal'} unless current_user
 		{ reviewid: review.id, userid: current_user.id }
+	end
+
+	def write_review_link building
+		link_to 'Write a Review', 
+						new_building_review_path(building_id: building, contribution: 'building_review'), 
+						class: 'btn btn-warning no-review btn-round txt-color-white'
 	end
 
 end

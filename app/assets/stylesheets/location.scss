@@ -1,0 +1,39 @@
+.location-loader {
+  background-color: rgba(255,255,255,0.1);
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none;
+  .location-loader {
+    margin-top: 5%;
+  }
+}
+
+.current-location {
+  background: #fff;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  a{
+    font-size: 14px;
+  }
+}
+
+.current-location.loc-allowed{
+  background-color: #0075c9;
+   a{
+      color: #fff;
+  }
+}
+
+.icon-location{
+  position: absolute;
+  right: 17px;
+  top: 10px;
+  font-size: 2.2rem;
+}

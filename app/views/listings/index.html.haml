@@ -1,36 +1,38 @@
 .row
   = render 'listings/partials/listings_header'
 
-  %div{style: 'padding: 0px 8px;'}
-    .pull-right= render 'layouts/shared/filterrific_form'
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    .float-end= render 'layouts/shared/filterrific_form'
   
-    .row
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-        #filterrific_results{style: 'margin-top: 10px;'}
-          .table-overflow
-            %table.table.table-striped#sortable
-              %thead
-                %tr
-                  %th.no-sort.text-center=check_box_tag 'check_all_listing', nil, nil, class: 'check_all_listing'
-                  %th Date Active
-                  %th Management
-                  %th{width: '15%'} Building Address
-                  %th{width: '5%'} Unit
-                  %th Rent
-                  %th{width: '5%'} Bed
-                  %th{width: '5%'} Bath
-                  %th.text-center{width: '5%'} Months Free
-                  %th.text-center{width: '5%'} OP
-                  %th.text-center{width: '5%'} RS
-                  %th Date Available
-                  %th.no-sort 
-                  %th.no-sort 
-                  %th.no-sort Active
-              
-              %tbody.table#listings-body
-                = render 'listings/partials/listings'
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    #filterrific_results{style: 'margin-top: 10px;'}
+      .table-overflow
+        %table.table.table-striped#sortable
+          %thead
+            %tr
+              %th.no-sort.text-center=check_box_tag 'check_all_listing', nil, nil, class: 'check_all_listing'
+              %th Date Active
+              %th Management
+              %th{width: '15%'} Building Address
+              %th{width: '5%'} Unit
+              %th Rent
+              %th{width: '5%'} Bed
+              %th{width: '5%'} Bath
+              %th.text-center{width: '5%'} Months Free
+              %th.text-center{width: '5%'} OP
+              %th.text-center{width: '5%'} RS
+              %th Date Available
+              %th.no-sort 
+              %th.no-sort 
+              %th.no-sort Active
+          
+          %tbody.table#listings-body
+            = render 'listings/partials/listings'
 
-  .text-center= will_paginate @listings, renderer: BootstrapPagination::Rails
+.text-center
+= render 'layouts/shared/add_pagination', objects: @listings
 
 :css
   #sortable_filter{

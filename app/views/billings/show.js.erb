@@ -1,8 +1,8 @@
 <%-if params[:type] == 'email' %>
-	$('#remote-container').html("<%=j render partial: 'billings/invoice_email_form' %>");
+	$('#remote-container').html("<%=j render 'billings/invoice_email_form' %>");
 	$('#emailInvoice').modal('show');
-	$('[data-toggle="tooltip"]').tooltip();
+	$('[data-bs-toggle="tooltip"]').tooltip();
 <%else%>
-	$('#remote-container').html("<%=j render partial: 'billings/preview_invoice' %>");
+	$('#remote-container').html("<%=j render 'billings/preview_invoice' %>");
 	$('#showInvoice').modal('show');
 <%end%>

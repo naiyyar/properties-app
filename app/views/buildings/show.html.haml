@@ -2,24 +2,26 @@
 	= "#{@building.building_name}" if @building.building_name.present?
 	= "#{@building.building_street_address}"
 
-#street_view_btn.hidden-xs
+#street_view_btn.d-none.d-lg-block.d-md-block
 
-- if screen_class == 'screen-lg'
+- unless mobile?
 	.row
 		.col-lg-9.col-md-9{style: 'padding-right: 1px;'}
-			#content{class: screen_class}= render 'buildings/show/top_summary_section', show_summary: false
-			.clearfix
-			#show-content
-				#thumb-pager
-					.col-lg-5.col-md-5
-				.col-lg-8.col-md-8{style: 'width: 68%;'}
-					= render 'buildings/show/content', show_summary: true
+			#content{class: screen_class}
+				= render 'buildings/show/top_summary_section', show_summary: false
 		
 		.col-lg-3.col-md-3{style: 'padding-left: 0px;'}
 			#mapView.apt-map{class: screen_class}
 				.mapPlaceholder
 					%span.fa.fa-spin.fa-spinner 
 					Loading map...
+	
+	#show-content{style: 'width: 100%;'}
+		.row
+			.col-3
+			.col-6= render 'buildings/show/content', show_summary: true
+			.col-3
+
 - else
 	%a.listHandler.closeMap{href: 'javascript:;'}
 		%span.fa.fa-times.fa-3x

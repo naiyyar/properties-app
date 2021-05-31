@@ -9,7 +9,7 @@
         = link_to '<span class="fa fa-edit" />'.html_safe, edit_upload_path(upload, upload_type: 'image'), remote: true, class: 'btn btn-primary btn-xs pull-right1 edit_image'
 
     / jquery click function in zapp.js
-    .loading.hidden Loading…
+    .loading.d-none Loading…
   - if photo_counts > 1
     %h4 Drag images to reorder.
 - else

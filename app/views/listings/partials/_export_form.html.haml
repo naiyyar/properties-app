@@ -2,8 +2,7 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
-          %span{"aria-hidden" => "true"} &times;
+        %button.btn-close{'aria-label' => 'Close', 'data-bs-dismiss' => 'modal', type: 'button'}
       
       .modal-body.no-padding
         = form_tag export_path, class: 'form-horizontal' do
@@ -31,5 +30,5 @@
                 
           
           %footer
-            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-dismiss' => 'modal'
+            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-bs-dismiss' => 'modal'
             = button_tag 'Export', class: 'btn btn-blue', controller: 'listings', action: 'export'

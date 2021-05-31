@@ -1,12 +1,12 @@
 //= require ./home/jquery.init
-//= require bootstrap/dropdown
+//= require bootstrap
 
 (function($) {
   "use strict";
 
   setTimeout(function() {
     $('body').removeClass('notransition');
-    $('.HeaderBlock').removeClass('hidden');
+    $('.HeaderBlock').removeClass('d-none');
   }, 300);
 
   if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {

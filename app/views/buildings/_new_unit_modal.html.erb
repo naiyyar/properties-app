@@ -2,8 +2,8 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="contirbuteMoreLabel">Create a new unit?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-12">
-          <%= render partial: 'units/unit_contribute_form', locals: { page: 'show' } %>
+          <%= render 'units/unit_contribute_form', page: 'show' %>
         </div>
       </div>
     </div>

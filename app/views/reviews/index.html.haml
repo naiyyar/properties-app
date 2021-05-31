@@ -4,7 +4,7 @@
       %h2= "Total reviews: #{@reviews.count}"
     .pull-right
       - if current_user and current_user.has_role?(:admin)
-        = link_to 'Import excel', '#importReviews', class: 'btn btn-blue pull-right', 'data-toggle' => 'modal'
+        = link_to 'Import excel', '#importReviews', class: 'btn btn-blue pull-right', 'data-bs-toggle' => 'modal'
         = render 'reviews/import_reviews_form', import_path: import_buildings_path
       = link_to 'Destroy scraped reviews', destroy_scraped_reviews_reviews_path, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
        

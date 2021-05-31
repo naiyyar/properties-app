@@ -12,31 +12,31 @@
 	.billing-table
 		%table.billing-detail
 			%tr
-				%th.text-left AMOUNT PAID
-				%th.text-left DATE PAID
-				%th.text-left PAYMENT METHOD
+				%th.text-start AMOUNT PAID
+				%th.text-start DATE PAID
+				%th.text-start PAYMENT METHOD
 
 			%tr
-				%td.text-left= number_to_currency(amount = @billing.amount, precision: 2)
-				%td.text-left=@billing.created_at&.strftime("%b %-d, %Y")
-				%td.text-left
+				%td.text-start= number_to_currency(amount = @billing.amount, precision: 2)
+				%td.text-start=@billing.created_at&.strftime("%b %-d, %Y")
+				%td.text-start
 					- if @billing.payment_detail?
 						="#{@billing.brand} - #{@billing.last4}"
 					- else
 						="#{@card.brand} - #{@card.last4}" if @card.present?
 
 		.summary-section
-			%p.text-left SUMMARY
+			%p.text-start SUMMARY
 			.inner
 				%table
 					%tr
-						%td.text-left{width: '70%', style: 'border-bottom: 1px solid #ddd;'}=@billing.billing_description
-						%td.text-right{style: 'border-bottom: 1px solid #ddd;'}= number_to_currency(amount = @billing.amount, precision: 2)
+						%td.text-start{width: '70%', style: 'border-bottom: 1px solid #ddd;'}=@billing.billing_description
+						%td.text-end{style: 'border-bottom: 1px solid #ddd;'}= number_to_currency(amount = @billing.amount, precision: 2)
 
 					%tfoot
 						%tr
-							%th.font-md.text-left Total Amount paid
-							%th.font-md.text-right= number_to_currency(amount, precision: 2)
+							%th.font-md.text-start Total Amount paid
+							%th.font-md.text-end= number_to_currency(amount, precision: 2)
 		%br
 		=render 'billing_mailer/help_block'
 
@@ -67,10 +67,10 @@
 	#billing-invoice .text-center {
 		text-align: center !important;
 	}
-	#billing-invoice .text-right {
+	#billing-invoice .text-end {
 		text-align: right !important;
 	}
-	#billing-invoice .text-left {
+	#billing-invoice .text-start {
 		text-align: left !important;
 	}
 	#billing-invoice .font-md {

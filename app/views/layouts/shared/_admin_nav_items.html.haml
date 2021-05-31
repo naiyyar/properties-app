@@ -1,9 +1,8 @@
 - if current_user&.admin?
-	%a{href: '#', class: 'no-hover-underline dropdown-toggle Header-navText', 'data-toggle' => 'dropdown'} 
+	%a#AdminMenu{href: '#', class: 'no-hover-underline dropdown-toggle Header-navText', 'data-bs-toggle' => 'dropdown'} 
 		Admin
-		%span.fa.fa-chevron-down
 
-	.dropdown-menu.userMenu.admin{role: 'menu'}
+	.dropdown-menu.userMenu.admin{role: 'menu', 'aria-labelledby' => 'AdminMenu'}
 		%ul
 			- StaticData::ADMIN_NAV_MENU.each do |nav|
 				%li= link_to nav[:title], nav[:url]

@@ -2,7 +2,7 @@
   <div class="filter" style="display: none;">
     <div class="clearfix"></div>
     <form action="/<%=params[:searched_by]%>/<%=params[:search_term]%>" class="filterForm">
-      <div class="text-right header visible-xs" style="padding: 4px; cursor: pointer;">
+      <div class="text-end header d-block d-lg-none d-md-none" style="padding: 4px; cursor: pointer;">
         <%= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeFilter' %>
       </div>
       <%= hidden_field_tag :sort_by, params[:sort_by] || '0' %>
@@ -161,7 +161,7 @@
 
         <div class="formField filter-action">
           <div class="row">
-            <%= submit_tag 'Submit', class: 'btn-submit-filter-form hidden', name: nil %>
+            <%= submit_tag 'Submit', class: 'btn-submit-filter-form d-none', name: nil %>
           </div>
         </div>
         <%= hidden_field_tag :searched_by, params[:searched_by] if params[:searched_by].present? %>
@@ -177,9 +177,9 @@
     <div class="filter-action-btns" style="position: relative;">
       <div class="text-center">
         <div class="filter-action-btns2 filter-action">
-          <%= link_to '<b>Cancel</b>'.html_safe,'javascript:;', class: 'closeFilter hidden-xs' %>
-          <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-xlg clearFilter' %>
-          <a href="#" class="applyFilter btn btn-green btn-xlg btn-round" style="background: #59BB44;">Apply</a>
+          <%= link_to 'Cancel', 'javascript:;', class: 'closeFilter font-bold font-14' unless mobile? %>
+          <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-round btn-xlg clearFilter font-bold font-14' %>
+          <a href="#" class="applyFilter btn btn-green btn-xlg btn-round txt-color-white font-bold font-14" style="background: #59BB44;">Apply</a>
         </div>
       </div>
     </div>

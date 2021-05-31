@@ -4,8 +4,8 @@ $(document).on 'click', '.add_new_building',(e) ->
 	if(search_value == '')
 		$('#buildings-search-txt').parent().addClass('has-error')
 	else
-		$("#search-form").addClass('hide')
-		$("#new_building").removeClass('hide')
+		$("#search-form").addClass('d-none')
+		$("#new_building").removeClass('d-none')
 		$('#building_building_street_address').val(search_value)
 
 $(document).on 'click', '#add_new_building.no-match', (e) ->
@@ -30,8 +30,8 @@ $(document).on 'click', '#building_amenities_elevator',(e) ->
 	showHideAmenitiesInfoField($('#building_elevator'))
 
 @showHideAmenitiesInfoField = (elem) ->
-	elem.toggleClass('hide')
-	if(elem.hasClass('hide'))
+	elem.toggleClass('d-none')
+	if(elem.hasClass('d-none'))
 		elem.val('')
 		elem.removeAttr('required')
 	else
@@ -46,25 +46,25 @@ $(document).on 'click', '.reviewer_type',(e) ->
 	element_year_from = $('#review_resident_from')
 
 	# when current is selected... Removing default current year from Resident To
-	$('#review_resident_to option:eq(1)').prop('selected', false).removeClass('hidden')
+	$('#review_resident_to option:eq(1)').prop('selected', false).removeClass('d-none')
 	
 	if(id == 'visitor')
-		label_year_from.addClass('hide')
-		label_year_to.addClass('hide')
+		label_year_from.addClass('d-none')
+		label_year_to.addClass('d-none')
 		
 		#removing validation rules
 		element_year_from.rules('remove', 'required')
 		element_year_to.rules('remove', 'required')
 
 	else if(id == 'former_tenant') 
-		label_year_from.removeClass('hide')
-		label_year_to.removeClass('hide')
+		label_year_from.removeClass('d-none')
+		label_year_to.removeClass('d-none')
 		element_year_from.rules('add', 'required')
 		element_year_to.rules('add', 'required')
 	else
 		$('#review_resident_to option:eq(1)').prop('selected', true)
-		label_year_to.addClass('hide')
-		label_year_from.removeClass('hide')
+		label_year_to.addClass('d-none')
+		label_year_from.removeClass('d-none')
 		element_year_from.rules('add', 'required')
 		element_year_to.rules('remove', 'required')
 

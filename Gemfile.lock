@@ -1172,11 +1172,12 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.7.5)
       msgpack (~> 1.0)
+    bootstrap (5.0.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 2.9.2, < 3)
+      sassc-rails (>= 2.0.0)
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
     browser (5.3.1)
     builder (3.2.4)
     bullet (6.1.4)
@@ -1381,6 +1382,7 @@ GEM
     pg_search (2.3.5)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    popper_js (2.9.2)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -1483,6 +1485,14 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -1564,8 +1574,8 @@ GEM
       railties (>= 3.0.7)
     wicked_pdf (1.1.0)
     will_paginate (3.3.0)
-    will_paginate-bootstrap (1.0.2)
-      will_paginate (>= 3.0.3)
+    will_paginate-bootstrap4 (0.2.2)
+      will_paginate (~> 3.0, >= 3.0.0)
     wkhtmltopdf-binary (0.12.6.5)
     wkhtmltopdf-heroku (2.12.4.0)
 
@@ -1579,8 +1589,8 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap (>= 1.1.0)
+  bootstrap (~> 5.0.1)
   bootstrap-datepicker-rails
-  bootstrap-sass (~> 3.3.6)
   browser
   bullet
   buttercms-rails
@@ -1655,7 +1665,7 @@ DEPENDENCIES
   whenever
   wicked
   wicked_pdf (= 1.1.0)
-  will_paginate-bootstrap
+  will_paginate-bootstrap4
   wkhtmltopdf-binary
   wkhtmltopdf-heroku (= 2.12.4.0)
 
@@ -1663,4 +1673,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.2.11
+   2.2.17

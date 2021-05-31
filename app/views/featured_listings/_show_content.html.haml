@@ -8,7 +8,7 @@
 							.row
 								.col-lg-3.col-xs-5.col-md-5
 								.col-sm-3.col-lg-9.col-xs-7.col-md-7
-									.text-right=seel_all_link(@featured_listing, @uploaded_images_count, 'see-all')
+									.text-end=seel_all_link(@featured_listing, @uploaded_images_count, 'see-all')
 				.row
 					.col-xs-11.col-sm-8.col-md-8.col-lg-9
 						%p.pageTitle.font-bold.font-24{style: 'width: 100%; margin: 10px 0px 0px;'}
@@ -22,7 +22,7 @@
 							.address{style: 'margin-left: -1px;'}= listing_address(@featured_listing)
 							= render 'featured_listings/property_detail', featured_listing: @featured_listing
 						%br
-						= featured_listing_contact_owner_button(@featured_listing, size_class: 'btn-block')
+						= featured_listing_contact_owner_button(@featured_listing, size_class: 'btn-block btn-round')
 
 	.clearfix
 	- if @video_tours_count > 0

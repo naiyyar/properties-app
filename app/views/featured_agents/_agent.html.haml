@@ -13,8 +13,6 @@
           =link_to "#{number_to_phone(phone, area_code: true)}", "tel:#{phone}", class: 'hyper-link'
         - else
           %span.invisible 9899123456
-      %br
-      %br
-      
-      .cta_buttons{id: "agent-cta-links#{agent.id}"}
+          
+      .cta_buttons.featuredAgent{id: "agent-cta-links#{agent.id}"}
         

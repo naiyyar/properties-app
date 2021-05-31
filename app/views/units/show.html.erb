@@ -1,4 +1,4 @@
-<div id="street_view_btn" class="hidden-xs">
+<div id="street_view_btn" class="d-none d-lg-block d-md-block">
   <input type="button" id="toggleStreetView" value="Street View" class="btn btn-info"></input>
 </div>
 <div id="mapView" class="mob-min"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
@@ -25,9 +25,9 @@
   
   <div class="tabsContainer" style="margin-top: 8px;" id="reviewsContainer">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li class="active"><a href="#ur" role="tab" data-toggle="tab"><%='Unit Reviews'.upcase %> (<%= @unit.reviews.count %>)</a></li>
-        <li class=""><a href="#br" role="tab" data-toggle="tab"><%='Building Reviews'.upcase %> (<%= @unit.building.reviews_count %>)</a></li>
-        <li><a href="#ph" role="tab" data-toggle="tab"><%='Rent Information'.upcase %> (<%= @unit.rental_price_histories.count %>)</a></li>
+        <li class="active"><a href="#ur" role="tab" data-bs-toggle="tab"><%='Unit Reviews'.upcase %> (<%= @unit.reviews.count %>)</a></li>
+        <li class=""><a href="#br" role="tab" data-bs-toggle="tab"><%='Building Reviews'.upcase %> (<%= @unit.building.reviews_count %>)</a></li>
+        <li><a href="#ph" role="tab" data-bs-toggle="tab"><%='Rent Information'.upcase %> (<%= @unit.rental_price_histories.count %>)</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade active in" id="ur">

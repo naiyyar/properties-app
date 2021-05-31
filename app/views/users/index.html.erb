@@ -42,7 +42,7 @@
     </div>
   </div>
   <div class="text-center">
-    <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+    <%= render 'layouts/shared/add_pagination', objects: @users %>
   </div>
 <%end%>
 

@@ -1,0 +1,168 @@
+/* Variables */
+
+$hbo-color: #1D6FE2;
+
+/* Styles */
+
+.btn {
+  border-radius: 2px !important;
+  text-decoration: none !important;
+}
+.btn.btn-primary, 
+.btn.btn-blue, 
+.btn.btn-success, 
+.btn.btn-default, 
+.btn.btn-danger{
+    border-radius: 50px !important;
+}
+.btn-round {
+  border-radius: 50px !important;
+}
+.btn-o {
+  border-width: 1px;
+  border-style: solid;
+}
+.btn-gray {
+  background-color: #999;
+  color: #fff;
+}
+.btn-o.btn-gray {
+  background-color: transparent;
+  color: #999;
+  border-color: #999;
+}
+.btn-xlg{
+  padding: 14px 26px !important;
+  font-size: 18px !important;
+}
+.no-touch .btn-gray:hover,
+.btn-gray:focus,
+.btn-gray:active,
+.btn-gray.active,
+.open > .dropdown-toggle.btn-gray {
+  background-color: #333;
+  color: #fff;
+}
+.no-touch .btn-o.btn-gray:hover,
+.btn-o.btn-gray:focus,
+.btn-o.btn-gray:active,
+.btn-o.btn-gray.active,
+.open > .dropdown-toggle.btn-o.btn-gray {
+    background-color: #999;
+    color: #fff;
+}
+.btn-o.btn-filter{
+    color: #fff;
+    border-color: #d3d3d3;
+}
+.btn-white.btn-clear:hover, 
+.btn-white.btn-clear:focus, 
+.btn-white.btn-clear:active{
+    background-color: #016ebd !important;
+}
+.btn-green {
+    background-color: #83c11f;
+}
+.btn-o.btn-green {
+    background-color: transparent;
+    color: #0075c9;
+    border-color: #0075c9;
+}
+.no-touch .btn-green:hover,
+.btn-green:focus,
+.btn-green:active,
+.btn-green.active,
+.open > .dropdown-toggle.btn-green {
+    background-color: #7aaf25;
+    color: #fff !important;
+}
+.no-touch .btn-o.btn-green:hover,
+.btn-o.btn-green:focus,
+.btn-o.btn-green:active,
+.btn-o.btn-green.active,
+.open > .dropdown-toggle.btn-o.btn-green {
+    background-color: $hbo-color;
+    color: #fff;
+}
+
+.btn-blue {
+    background-color: $hbo-color !important;
+    color: #fff;
+}
+.btn-o.btn-blue {
+    background-color: transparent;
+    color: $hbo-color;
+    border-color: $hbo-color;
+}
+.no-touch .btn-blue:hover,
+.btn-blue:focus,
+.btn-blue:active,
+.btn-blue.active,
+.open > .dropdown-toggle.btn-blue {
+    background-color: $hbo-color;
+    color: #fff !important;
+}
+.no-touch .btn-o.btn-blue:hover,
+.btn-o.btn-blue:focus,
+.btn-o.btn-blue:active,
+.btn-o.btn-blue.active,
+.open > .dropdown-toggle.btn-o.btn-blue {
+    background-color: $hbo-color;
+    color: #fff!important;
+}
+.btn-warning {
+  color: #fff;
+  background-color: #A5660D !important;
+  border-color: #eea236;
+}
+.btn-facebook {
+    background-color: #43609c;
+    color: #fff;
+}
+.btn-o.btn-facebook {
+    background-color: transparent;
+    color: #43609c;
+    border-color: #43609c;
+}
+.btn-icon {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 36px;
+    text-align: center;
+}
+.btn-icon.btn-lg {
+    width: 41px;
+}
+.btn-icon.btn-sm {
+    width: 31px;
+}
+.btn-icon.btn-xs {
+    width: 22px;
+}
+.btn-icon.btn-round {
+    border-radius: 50%;
+}
+.btn > .state, .btn.active > .state-active {
+    display: inline-block;
+}
+.btn.active > .state, .btn > .state-active {
+    display: none;
+}
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+#search-row {
+  .btn-dp-toggle button, .btn-dp-toggle.closed button {
+    background-color: transparent;
+    color: $hbo-color; 
+    border-color: $hbo-color;
+  }
+  .btn-dp-toggle.open button, .btn-dp-toggle:hover button{
+    background-color: $hbo-color;
+    color: #fff; 
+    border-color: $hbo-color;
+  }
+}

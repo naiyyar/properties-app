@@ -1,4 +1,4 @@
-<%= form_tag '/buildings', method: :post, id: 'new_unit_building', class: 'hide' do %>
+<%= form_tag '/buildings', method: :post, id: 'new_unit_building', class: 'd-none' do %>
   <%= hidden_field_tag 'selection_type' %>
 	<div id="new_unit_fields">
 		<div class="col-sm-12">
@@ -9,7 +9,7 @@
       <%= hidden_field_tag 'building[zipcode]', @building.present? ? @building.zipcode : nil, class: "form-control" %>
 		</div>
 
-    <div class="col-sm-6 hide">
+    <div class="col-sm-6 d-none">
       <div class="form-group">
         <label>Unit name*</label>
         <%= text_field_tag 'unit_name', nil, name: 'building[units_attributes][0][name]', class: 'form-control validate' %>
@@ -23,7 +23,7 @@
         <label>Square feet* </label>
         <div class="input-group">
           <%= text_field_tag 'unit_square_feet', nil, name: 'building[units_attributes][0][square_feet]', class: 'form-control validate' %>
-          <span class="input-group-addon" data-toggle="tooltip" data-placement="left" aria-hidden="true" title="Provide best estimate if unsure
+          <span class="input-group-addon" data-bs-toggle="tooltip" data-placement="left" aria-hidden="true" title="Provide best estimate if unsure
           studio range: 350-600, 
           1 bdrm range: 500-800,
           2 bdrm range: 800-1200">
@@ -37,7 +37,7 @@
         <label>Bedrooms* </label>
         <div class="input-group">
           <%= text_field_tag 'unit_number_of_bedrooms',nil, name: "building[units_attributes][0][number_of_bedrooms]", class: "form-control validate" %>
-          <span class="input-group-addon" data-toggle="tooltip" data-placement="left" aria-hidden="true" title="Use 0 for a studio.">
+          <span class="input-group-addon" data-bs-toggle="tooltip" data-placement="left" aria-hidden="true" title="Use 0 for a studio.">
             <i class="fa fa-question-circle" ></i>
           </span>
         </div>
@@ -56,7 +56,7 @@
       	<%# if user_signed_in? %>
           <%= submit_tag 'Next', class: 'btn btn-primary' %>
         <%#else%>
-          <%#= link_to 'Next','#signin', 'data-toggle' => 'modal', class: 'btn btn-primary'%>
+          <%#= link_to 'Next','#signin', 'data-bs-toggle' => 'modal', class: 'btn btn-primary'%>
         <%#end%>
       </div>
     </div>

@@ -3,11 +3,11 @@
 		%h2
 		.tabsWidget{style: "margin-left: #{'14px' unless mobile?}" }
 			%ul.nav.nav-tabs.nav-justified.tab-inline{role: 'tablist'}
-				%li{class: @type == 'featured' ? 'active' : ''}
-					%a{href: featured_url}
+				%li.nav-item{class: @type == 'featured' ? 'active' : ''}
+					%a.nav-link.font-14{href: featured_url}
 						%b= title
-				%li{class: @type == 'billing' ? 'active' : ''}
-					%a{href: billing_url}
+				%li.nav-item{class: @type == 'billing' ? 'active' : ''}
+					%a.nav-link.font-14{href: billing_url}
 						%b Billing
 
 .tab-content
@@ -41,7 +41,8 @@
 						%h4= @type == 'featured' ? title : 'Billing'
 				
 			= render partial_file_path, featured_objects: featured_objects
-			.text-center= will_paginate featured_objects, renderer: BootstrapPagination::Rails
+			.text-center
+				= render 'layouts/shared/add_pagination', objects: featured_objects
     
 	- else
 		.tab-pane.fade.in.active
@@ -52,4 +53,5 @@
 
 			= render 'billings/billings'
 			
-			.text-center= will_paginate @billings, renderer: BootstrapPagination::Rails
+			.text-center
+				= render 'layouts/shared/add_pagination', objects: @billings

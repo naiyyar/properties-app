@@ -28,7 +28,7 @@ module FeaturedListingsHelper
 		link_to 'Contact Owner', 
 						'javascript:;',
 						onclick: "FEATURED_LISTING.showContactOwnerFormModal(#{object.id})", 
-						class: "btn btn-primary #{size_class} font-14 font-bold", 
+						class: "btn btn-primary #{size_class} font-14 font-bold btn-round", 
 						remote: true
 	end
 

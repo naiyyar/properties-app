@@ -1,17 +1,17 @@
 <header class="HeaderBlock">       
   <div class="Header <%=home_page? ? 'home-page' : 'other-page'%>">
     <% unless blog_view? %>
-      <a href='javascript:void(0);' class="home-navHandler visible-xs visible-sm" data-toggle="menu" aria-label="Nav Handler">
+      <a href='javascript:void(0);' class="home-navHandler d-block d-lg-none d-md-none" data-bs-toggle="menu" aria-label="Nav Handler">
         <span class="fa fa-bars"></span>
       </a>
     <%end%>
 
     <div class="Container">
       <% if blog_view? %>
-        <div class="blog-header-icon pull-left">
+        <div class="blog-header-icon float-start">
           <a href='/blog' class="home-navHandler">
             <span class='fa fa-home'></span>
-            <strong class='hidden-xs'>blog</strong>
+            <strong class='d-none d-md-block'>blog</strong>
           </a>
         </div>
       <%end%>
@@ -22,17 +22,18 @@
         </a>
       </div>
 
-      <div id='Left-navContainer' class="hidden-xs">
-        <ul class="Header-nav pull-left">
+      <div id='Left-navContainer' class="d-none d-md-inline-block">
+        <ul class="Header-nav float-start">
           <li class="Header-navListItem">
             <%= link_to 'About', '/about', class: 'Header-navText' %>
           </li>
-          <li class="Header-navListItem">
-            <a href="#" class="dropdown-toggle no-hover-underline Header-navText" data-toggle='dropdown'>
+          
+          <li class="Header-navListItem dropdown">
+            <a href="#" class="dropdown-toggle no-hover-underline Header-navText" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuLink">
               Advertise
-              <span class="fa fa-chevron-down"></span>
+              <!-- <span class="fa fa-chevron-down"></span> -->
             </a>
-            <div class="dropdown-menu userMenu admin advertise-menu" role='menu'>
+            <div class="dropdown-menu userMenu admin advertise-menu" role='menu' aria-labelledby="dropdownMenuLink">
               <%= render 'layouts/shared/advertise_items', classes: '', styles: '', font: 'font-16' %>
             </div>
           </li>
@@ -46,7 +47,7 @@
         </ul>
       </div>
 
-      <ul class="Header-nav pull-right hidden-xs">
+      <ul class="Header-nav float-end d-none d-md-inline-block">
         <% unless user_signed_in? %>
           <li class="Header-navListItem">
             <a href='/users/sign_in' class="Header-navText"> Sign In</a>

@@ -229,7 +229,7 @@
 
 		.add--assets{
 			padding: 0px;
-			.text-right a.see-all{
+			.text-end a.see-all{
 				padding: 16px 0px;
 			}
 		}
@@ -241,7 +241,7 @@
 			-webkit-overflow-scrolling: touch;
 			.singleTop{
 				.sh-slider-container{
-					padding: 0px 9px !important;
+					padding: 0px 0px !important;
 				}
 			}
 			.section-container, .singleTop .summary{

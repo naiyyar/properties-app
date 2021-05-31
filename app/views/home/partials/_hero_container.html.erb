@@ -20,11 +20,10 @@
       </div>
 
       <div class="quickLinks">
-        <ul class="list-inline" style="margin: 0px;">
-          <% home_quick_links.each do |nb| %>
-            <li><%= link_to quick_link_name(nb), nb[:url] %></li>
-          <%end%>
-        </ul>
+        <% padding = mobile? ? 2 : 1 %>
+        <% home_quick_links.each do |nb| %>
+          <div class="d-inline p-<%=padding%> text-white"><%= link_to quick_link_name(nb), nb[:url] %></div>
+        <%end%>
       </div>
     </section>
   </div>

@@ -1,12 +1,12 @@
 - @imageable = featured_listing
 #property-photos
 	.row
-		.col-lg-12.col-xs-12.col-lg-offset-3
+		.col-lg-12.col-xs-12.offset-3
 			.row
 				.col-lg-4.col-xs-8
 					%p.font-21 Featured Listing
 				.col-lg-2.col-xs-4
-					= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-success btn-block font-16 font-bold', target: 'blank'
+					= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-green btn-block font-16 font-bold text-white btn-round', target: 'blank'
 			%br
 
 			.row
@@ -20,7 +20,7 @@
 			%br
 			.row
 				.col-lg-6.col-xs-9
-					%ul#gallery.list-inline{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing', style: 'margin-left: 0px;'}
+					%ul#gallery.d-inline-flex.uploads{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing'}
 						- @photos.each do |upload|
 							= render 'uploads/gallery', upload: upload, featured_image: true 
 

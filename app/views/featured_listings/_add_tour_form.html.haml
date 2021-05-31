@@ -7,7 +7,7 @@
     
     .row
       - if !video_tour.new_record?
-        .col-lg-2.col-xs-1.hidden-xs
+        .col-lg-2.col-xs-1.d-none.d-lg-block.d-md-block
           %label Sort
           = f.text_field :sort, id: "video_tour_sort_#{cat}", class: 'form-control video_tour_sort'
       - else

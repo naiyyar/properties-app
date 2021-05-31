@@ -1,4 +1,3 @@
-//= require bootstrap/button
 //= require underscore
 //= require jquery.fancybox
 //= require lightslider
@@ -29,7 +28,9 @@ $(document).ready(function() {
       dataType: 'script',
       type: 'get',
       data: { object_type: type },
-      success: function(){}
+      success: function(){
+        // console.log('lazy_load_images success')
+      }
     });
   }
 });

@@ -1,4 +1,4 @@
-.dropdown-menu.dropdown-select.userMenu.sc-lg{role: 'menu'}
+.dropdown-menu.dropdown-select.userMenu.sc-lg{role: 'menu', 'aria-labelledby' => 'sortMenu'}
   %ul.sortMenu
     - if params[:sort_by].present? and params[:sort_by] != '0'
       %li{class: active('0')}

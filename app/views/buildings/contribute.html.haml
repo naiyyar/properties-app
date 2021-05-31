@@ -5,7 +5,7 @@
   .row
     .col-xs-12.col-sm-12.col-md-6.col-lg-6
       .panel-body
-        #search-form{class: "#{params[:results].present? ? 'hide' : ''}"}
+        #search-form{class: "#{params[:results].present? ? 'd-none' : ''}"}
           = form_tag '/reviews/new', method: :get, id: 'search_item_form', class: 'form-horizontal' do
             / adding value on the basis of selected radio button
             %h4 Find Your Building To Review
@@ -25,21 +25,21 @@
                 = link_to 'Next','javascript:;', id: 'next_to_review_btn', class: 'btn btn-primary add_new_building btn-xlg btn-lg btn-xs-block'
                 / when correct building is selected
                 %p
-                = submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary hidden btn-xlg btn-xs-block'
+                = submit_tag 'Next', id: 'next_btn', class: 'btn btn-primary d-none btn-xlg btn-xs-block'
           .buildings-search.unit-search{style: "margin-top: 10px;"}
             .form-group
               - unless @building.present?
-                = text_field_tag 'units-search-txt', nil, class: 'form-control unit-search hide', placeholder: 'Search unit number'
+                = text_field_tag 'units-search-txt', nil, class: 'form-control unit-search d-none', placeholder: 'Search unit number'
               - else
                 = text_field_tag 'units-search-txt', nil, class: 'form-control unit-search', placeholder: 'Search unit number'
             #units-search-results.results
             .col-xs-12
               %ul#units-search-no-results.search-no-result
       
-      = form_tag '/buildings', method: :post, id: 'new_building', class: "#{ params[:results].present? ? '' : 'hide' }" do
+      = form_tag '/buildings', method: :post, id: 'new_building', class: "#{ params[:results].present? ? '' : 'd-none' }" do
         = hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution'
         = hidden_field_tag 'building[user_id]', current_user.id, class: 'form-control' if current_user.present?
-        = render partial: 'buildings/building_contribute_form'
+        = render 'buildings/building_contribute_form'
         .col-sm-12
           .next_btn_container
             = submit_tag 'Next', class: 'btn btn-primary btn-xlg btn-xs-block', id: 'new_building_submit'
@@ -47,14 +47,14 @@
     .col-xs-12.col-sm-12.col-md-6.col-lg-6
       .panel-body
         %h4.h5 Everything you add helps others find an apartment they’ll love. Thanks!
-        .list-inline.contribute_guidelines_emojis
+        .d-inline.contribute_guidelines_emojis
           = image_tag 'star1-sm.png'
           = image_tag 'star2-sm.png'
           = image_tag 'star3-sm.png'
           = image_tag 'star4-sm.png'
           = image_tag 'star5-sm.png'
 
-=javascript_include_tag 'contribute'
+= javascript_include_tag 'contribute'
 
 :css
   .contribute_guidelines_emojis img{
@@ -70,7 +70,7 @@
     if(e.keyCode == 40 || e.keyCode == 38){
       if(!$("ul.ui-autocomplete").is(":visible")) {
         $("ul.ui-autocomplete").show();
-        $('.no-match-link').removeClass('hidden');
+        $('.no-match-link').removeClass('d-none');
       }
     }
   })
