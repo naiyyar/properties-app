@@ -11,7 +11,7 @@
         <div class="blog-header-icon float-start">
           <a href='/blog' class="home-navHandler">
             <span class='fa fa-home'></span>
-            <strong class='d-none d-md-block'>blog</strong>
+            <!-- <strong class='d-none d-md-block'>blog</strong> -->
           </a>
         </div>
       <%end%>
@@ -38,7 +38,7 @@
             </div>
           </li>
           <li class="Header-navListItem">
-            <%= link_to 'Blog', '/blog', class: 'Header-navText' %>
+            <%= link_to 'Blog', '/blog', class: "Header-navText #{blog_view? ? 'hyper-link' : ''}" %>
           </li>
 
           <li class="Header-navListItem">

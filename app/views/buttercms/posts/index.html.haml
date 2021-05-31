@@ -7,5 +7,5 @@
   - if @next_page
     = link_to "<span class='fa fa-angle-left'></span> Older Articles".html_safe, buttercms_blog_path(:page => @next_page), class: "btn btn-o btn-round btn-green"
   - if @previous_page
-    = link_to "Newer Articles <span class='fa fa-angle-right'></span>".html_safe, buttercms_blog_path(:page => @previous_page), class: "btn btn-o btn-round btn-green pull-right"
+    = link_to "Newer Articles <span class='fa fa-angle-right'></span>".html_safe, buttercms_blog_path(:page => @previous_page), class: "btn btn-o btn-round btn-green float-end"
   .clearfix
