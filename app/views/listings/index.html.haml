@@ -31,8 +31,9 @@
           %tbody.table#listings-body
             = render 'listings/partials/listings'
 
-.text-center
-= render 'layouts/shared/add_pagination', objects: @listings
+.row.mt-5
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    .text-center= render 'layouts/shared/add_pagination', objects: @listings
 
 :css
   #sortable_filter{
