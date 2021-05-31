@@ -32,7 +32,7 @@
 					%p 
 						%b Featured Buildings 
 						are interchangeable and can be adjusted throughout the featured time period.
-					%a.btn.btn-primary.btn-round.font-bold.visible-xs{href: self_service_btn_link(@type)}='$49 / Building / 4 Weeks'
+					%a.btn.btn-primary.btn-round.font-bold.d-block.d-lg-none.d-md-none{href: self_service_btn_link(@type)}='$49 / Building / 4 Weeks'
 
 				.col-lg-6.col-md-6.col-xs-12
 					%h4 Managed Service Featuring
@@ -41,13 +41,16 @@
 						%b Feature 
 						based on vacancies or desired brand exposure for your portfolio.
 					%p Month to month payments. No contracts or long term commitments. Cancel and resubscribe anytime.
-					%a.btn.btn-primary.btn-round.font-bold.visible-xs{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
+					%a.btn.btn-primary.btn-round.font-bold.d-block.d-lg-none.d-md-none{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
 			
-			.row.d-none.d-lg-block.d-md-block
-				.col-lg-6.col-md-6
-					%a.btn.btn-primary.btn-round.font-bold{href: self_service_btn_link(@type)}='$49 / Building / 4 Weeks'
-				.col-lg-6.col-md-6
-					%a.btn.btn-primary.btn-round.font-bold{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
+			.row
+				.col-lg-6.col-6
+					.d-none.d-lg-block.d-md-block
+						%a.btn.btn-primary.btn-round.font-bold{href: self_service_btn_link(@type)}='$49 / Building / 4 Weeks'
+				
+				.col-lg-6.col-6
+					.d-none.d-lg-block.d-md-block
+						%a.btn.btn-primary.btn-round.font-bold{href: 'mailto: hello@transparentcity.co'} Contact Us For Details
 
 			%hr
 
