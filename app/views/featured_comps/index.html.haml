@@ -1,13 +1,14 @@
 - if current_user&.has_role? :admin
-  - if current_user.present?
-    = render 'layouts/shared/admin_page_header', link_title: 'Add new Fetured Comp', link_url: new_featured_comp_path
+	- if current_user.present?
+		= render 'layouts/shared/admin_page_header', link_title: 'Add new Fetured Comp', link_url: new_featured_comp_path
   
-  = render 'featured_comps/comps'
+	.mb-5
+		= render 'featured_comps/comps'
   
-  .text-center
-    = render 'layouts/shared/add_pagination', objects: @featured_comps
+	.text-center
+		= render 'layouts/shared/add_pagination', objects: @featured_comps
 
 :css
-  #sortable_filter{
-    display: none;
-  }
+	#sortable_filter{
+		display: none;
+	}

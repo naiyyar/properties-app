@@ -1,9 +1,10 @@
 - if current_user&.admin?
   .row
     .col-xs-12.col-sm-12.col-md-12.col-lg-12
-      .float-end= link_to 'Add New Management', new_management_company_path, class: 'btn btn-blue txt-color-white'
+      .float-end
+        = link_to 'Add New Management', new_management_company_path, class: 'btn btn-blue txt-color-white'
 
-  .row
+  .row.mt-4
     .col-xs-12.col-sm-12.col-md-12.col-lg-12
       .table-overflow
         %table.table
