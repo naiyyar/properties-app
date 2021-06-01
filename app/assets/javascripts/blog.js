@@ -12,4 +12,11 @@
   if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
     $('body').addClass('no-touch');
   }
+
+  setTimeout(function() {
+   	$('.alert').slideUp(300, function(){
+			$(this).remove()
+   	});
+ 	}, 1000);
+ 	
 })(jQuery);

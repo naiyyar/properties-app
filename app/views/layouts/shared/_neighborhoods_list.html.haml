@@ -13,11 +13,8 @@
                 %li{'data-parent' => 'lower_manhattan'}= search_by_neighborhood_link('West Village', area)
     %b#midtown= search_by_neighborhood_link('Midtown', area)
     .child-borough-container
-      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Chelsea', area)
-      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Flatiron District', area)
-      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Gramercy Park', area)
-      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link("Hell's Kitchen", area)
-      .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link('Kips Bay', area)
+      - ['Chelsea', 'Flatiron District', 'Gramercy Park', "Hell's Kitchen", 'Kips Bay'].each do |nb|
+        .parent{'data-parent' => 'midtown'}= search_by_neighborhood_link(nb, area)
 
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
   .pop-list
@@ -72,16 +69,9 @@
       %b#brooklyn
         - area = 'Brooklyn'
         = link_to "Brooklyn (#{brooklyn_count})", '/no-fee-apartments-nyc-city/brooklyn-ny'
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Bedford-Stuyvesant', area)
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Boerum Hill', area)
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Brooklyn Heights', area)
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Bushwick', area)
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Clinton Hill', area)
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Crown Heights', area)
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Downtown Brooklyn', area)
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Dumbo', area)
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Fort Greene', area)
-      .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link('Greenpoint', area)
+      
+      - ['Bedford-Stuyvesant','Boerum Hill','Brooklyn Heights', 'Bushwick','Clinton Hill','Crown Heights','Downtown Brooklyn','Dumbo','Fort Greene', 'Greenpoint'].each do |nb|
+        .parent{'data-parent' => 'brooklyn'}= search_by_neighborhood_link(nb, area)
       
 .col-xs-12.col-sm-6.col-md-3.col-lg-3
   .pop-list

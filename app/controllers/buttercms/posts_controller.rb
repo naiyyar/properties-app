@@ -8,20 +8,25 @@ class Buttercms::PostsController < Buttercms::BaseController
   end
 
   def show
-    @post            = ButterCMS::Post.find(params[:slug])
-    # @embed_body_code = ActiveSupport::SafeBuffer.new(%Q{#{@post.body}})
-    @categories      = ButterCMS::Category.all
-    @post_categories = @post.categories
-    @related_posts   = ButterCMS::Post.all
-    @tags            = @post.tags
-    @has_related_posts = false
-    @related_posts.each do |post|
-      if post.slug != @post.slug && @post.categories.map(&:name) == post.categories.map(&:name)
-        @has_related_posts = true
+    begin
+      @post            = ButterCMS::Post.find(params[:slug])
+      # @embed_body_code = ActiveSupport::SafeBuffer.new(%Q{#{@post.body}})
+      @categories      = ButterCMS::Category.all
+      @post_categories = @post.categories
+      @related_posts   = ButterCMS::Post.all
+      @tags            = @post.tags
+      @has_related_posts = false
+      @related_posts.each do |post|
+        if post.slug != @post.slug && @post.categories.map(&:name) == post.categories.map(&:name)
+          @has_related_posts = true
+        end
       end
+      @next_post     = @post.meta.next_post
+      @previous_post = @post.meta.previous_post
+    rescue
+      flash[:error] = 'No Post found!'
+      redirect_to '/blog'
     end
-    @next_post     = @post.meta.next_post
-    @previous_post = @post.meta.previous_post
   end
 
 end
