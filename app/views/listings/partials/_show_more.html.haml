@@ -2,8 +2,8 @@
   #showPastListing.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'ListingModal', role: 'dialog'}
     .modal-dialog.modal-md
       .modal-content
-        .modal-header{style: 'padding: 15px 15px 0px;'}
-          %div.modal-title#ListingModal= listing_header_title(@rentals).html_safe
+        .modal-header
+          .modal-title#ListingModal= listing_header_title(@rentals).html_safe
           = close_button
          
         .modal-body.no-padding
@@ -24,4 +24,4 @@
       .past-listing-modal .title-header{
         padding: 0px 4px;
       }
-=javascript_include_tag 'load_more'
+= javascript_include_tag 'load_more'

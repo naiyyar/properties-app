@@ -144,6 +144,12 @@ body {
   width: 100%;
 }
 
+.modal-header > .btn-close{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 .txt-color-white{
   color: #fff !important; 
 }
