@@ -14,7 +14,7 @@
     <%= render 'layouts/shared/left_side' if mobile? %>
     <%= render 'layouts/shared/search_modal' %>
     <%= render 'layouts/home/header' %>
-    <div class="<%= controller_name + action_name %>">
+    <div class="content-wrapper <%= controller_name + action_name %>">
       <%= yield %>
       <%= render 'layouts/home/footer' if mobile? %>
     </div>
