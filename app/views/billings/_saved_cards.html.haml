@@ -1,4 +1,4 @@
-.row
+.row.mb-4
 	.col-xs-12.col-sm-12.col-md-6.col-lg-4
 		- if @saved_cards.present?
 			%p.bolder.font-md Credit cards
@@ -10,4 +10,5 @@
 						%td.text-center
 							=link_to 'Delete', 'javascript:;', class: 'btn btn-danger btn-sm delete-card', data: { disable_with: 'Deleting...', cid:  card[:id]}
 		
-		.float-start=link_to 'Add New Card', add_new_card_url, class: 'btn btn-primary btn-sm'
+		.float-start.mt-4
+			=link_to 'Add New Card', add_new_card_url, class: 'btn btn-primary btn-sm'

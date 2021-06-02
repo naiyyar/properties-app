@@ -42,12 +42,12 @@
     
 	- else
 		.tab-pane.fade.in.active
-			%h2
 			= render 'billings/saved_cards', add_new_card_url: add_new_card_url
 			
-			%h2 Billing Transactions
-
-			= render 'billings/billings'
+			%h2.mb-4 Billing Transactions
+			
+			.mb-4
+				= render 'billings/billings'
 			
 			.text-center
 				= render 'layouts/shared/add_pagination', objects: @billings
