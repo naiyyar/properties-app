@@ -944,6 +944,10 @@ select.custom-arrow{
   width: 96%;
 }
 
+.form-group{
+  margin-top: 1rem;
+}
+
 @media screen and (max-width: 767px) {
     #wrapper .content{
       padding: 10px;
@@ -968,7 +972,6 @@ select.custom-arrow{
           margin-top: 10px;
         }
       }
-
       .apt-search.other #search_term {
         height: 51px !important;
         padding: 10px 14px 10px 30px !important;
