@@ -36,7 +36,7 @@ class Review < ApplicationRecord
   
   after_destroy :destroy_dependents
 
-  default_scope { order('created_at DESC') }
+  # default_scope { order('created_at DESC') }
 
   pg_search_scope :search_query, against: [:review_title, :pros, :cons],
      :using => { :tsearch => { prefix: true } }
@@ -53,7 +53,7 @@ class Review < ApplicationRecord
           reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
   end
 
-  #reviewer
+  # reviewer
   def user_name
   	self.user.name ? self.user.name : self.user.email[/[^@]+/]
   end

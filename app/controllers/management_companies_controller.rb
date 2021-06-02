@@ -30,12 +30,11 @@ class ManagementCompaniesController < ApplicationController
   end
 
   def load_more_reviews
-    @reviews = Review.where(reviewable_id:   @buildings.pluck(:id), 
-                            reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
+    @reviews = Review.buildings_reviews(@buildings).order(id: :asc)
     @reviews = @reviews.where('id < ?', params[:object_id]).limit(10) if params[:object_id].present?
     
     respond_to do |format|
-      format.html{render nothing: true}
+      format.html{ render nothing: true }
       format.js
     end
   end

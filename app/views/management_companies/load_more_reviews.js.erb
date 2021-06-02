@@ -1,9 +1,8 @@
-var total_reviews = <%=@reviews.count%>;
 <% if @reviews.present? %>
-	$('.objects-container').append('<%=escape_javascript(render partial: @reviews) %>');
-	if(total_reviews < 10){
+	$('.objects-container').append('<%= j render @reviews %>');
+	<% if @reviews.count < 10 %>
 		$('a.load-more').hide();
-	}
+	<%end%>
 <%end%>
 
-load_rating_stars();
+Ratings.load_rating_stars();
