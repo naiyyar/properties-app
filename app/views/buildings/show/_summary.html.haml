@@ -1,7 +1,7 @@
 .summary
 	.row
 		.col-lg-12
-			.add--assets{class: current_user&.admin? ? 'admin' : ''}=render 'uploads/add_photos', object: @building
+			.add--assets{class: current_user&.admin? ? 'admin' : ''}= render 'uploads/add_photos', object: @building
 	
 	.row
 		.col-11.col-md-8.col-lg-9
@@ -16,7 +16,7 @@
 			= render 'buildings/favourite', building: @building
 	
 	.row
-		.col-12.col-lg-12=render 'buildings/show/contact_buttons'
+		.col-12.col-lg-12= render 'buildings/show/contact_buttons'
   
 	- unless @uploaded_images_count > 0
 		.sliderLink
