@@ -35,12 +35,14 @@ module ApplicationHelper
 
   # adding last page custom class to pagination ul
   def last_page_class collection
-    collection.total_pages == collection.current_page ? 'last-page' : ''
+    return unless collection.total_pages == collection.current_page
+    'last-page'
   end
 
   # adding first page custom class to pagination ul
   def first_page_class collection
-    'first-page' if collection.current_page == 1
+    return unless collection.current_page == 1
+    'first-page'
   end
 
   def screen_class

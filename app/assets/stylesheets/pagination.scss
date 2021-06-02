@@ -55,16 +55,16 @@
       }
       li > a, li > span {
         font-size: 18px !important;
-        padding: 16px 53px;
+        padding: 16px 51px;
       }
-      .prev.disabled, .next.disabled {
+      .page-item.disabled {
         display: none;
       }
-      li.next > a {
+      li.page-item > a[rel='next'] {
         color: #fff;
         background-color: #2272e2;
       }
-      li.prev > a {
+      li.prev > a[rel='prev'] {
         color: #333;
       }
     }

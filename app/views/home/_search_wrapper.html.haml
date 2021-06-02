@@ -14,7 +14,7 @@
     .tab-content.tab-scroll11{style: 'background-color: #f3f3f3;'}
       #buildings.tab-pane.fade.in.active
         .resultsList
-          #load-more-buildings.row
+          .row#load-more-buildings
             = render partial: 'buildings/building', :collection => @all_buildings, :as => :object
         
         - if @per_page_buildings.present?
@@ -28,7 +28,7 @@
     = content_tag 'div', '', id: 'filter-params', data: { filterParams: @filter_params.as_json }
 
     %section.spv-pop-search{style: 'padding: 0px 16px;'}
-      = render 'layouts/home/popular_searches', bg_col: '#fff'
+      = render 'layouts/home/popular_searches', bg_col: '#fff', other_classes: 'mt-3 mb-3'
   
     = render 'layouts/home/footer'
 .clearfix
