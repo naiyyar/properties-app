@@ -106,7 +106,7 @@ class User < ApplicationRecord
 
   def user_favorite favorable
     favorites.find_by(favorable_id:    favorable.id, 
-                      favorable_type: favorable.class.base_class.name)
+                      favorable_type: favorable.class.name)
   end
 
   def favorite?(favorable)
@@ -114,8 +114,7 @@ class User < ApplicationRecord
   end  
 
   def favorite(favorable)
-    favorites.create(favorable_id:   favorable.id, 
-                     favorable_type: favorable.class.base_class.name) unless favorite?(favorable)
+    favorites.create(favorable_id: favorable.id, favorable_type: favorable.class.name) unless favorite?(favorable)
   end
 
   def unfavorite(favorable)

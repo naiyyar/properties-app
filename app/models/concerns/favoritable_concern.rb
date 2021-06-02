@@ -10,7 +10,7 @@ module FavoritableConcern
 
   def user_favorites favoriter
     favorites.where(favoriter_id:   favoriter.id, 
-                    favoriter_type: favoriter.class.base_class.name)
+                    favoriter_type: favoriter.class.name)
   end
 
   def fav_color_class user_id = nil
