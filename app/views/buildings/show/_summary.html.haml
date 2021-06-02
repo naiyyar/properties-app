@@ -1,13 +1,14 @@
 .summary
 	.row
-		.col-lg-12.col-md-12
+		.col-lg-12
 			.add--assets{class: current_user&.admin? ? 'admin' : ''}=render 'uploads/add_photos', object: @building
 	
 	.row
-		.col-xs-11.col-sm-8.col-md-8.col-lg-9
+		.col-11.col-md-8.col-lg-9
 			%p.pageTitle{style: 'width: 100%;'}= @building.building_name_or_address
+			= render 'property_info', object: @building 
 		
-		.col-xs-1.col-sm-4.col-md-4.col-lg-3
+		.col-1.col-md-4.col-lg-3
 			- if current_user&.admin?
 				= link_to 'Edit', edit_building_path(@building), class: 'btn btn-o btn-default btn-xs float-end btn-round', style: 'padding: 7px 16px;'
 				= link_to 'Disconnect', disconnect_building_building_path(@building), class: 'float-end btn btn-danger btn-o btn-xs btn-round', data: {confirm: 'Are you sure you want to discconect this building?'}, remote: true if @manage_buildings.present?
@@ -15,7 +16,7 @@
 			= render 'buildings/favourite', building: @building
 	
 	.row
-		.col-xs-12.col-sm-12.col-md-12.col-lg-12= render 'property_info', object: @building 
+		.col-12.col-lg-12=render 'buildings/show/contact_buttons'
   
 	- unless @uploaded_images_count > 0
 		.sliderLink
