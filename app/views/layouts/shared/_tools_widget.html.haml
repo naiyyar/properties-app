@@ -1,16 +1,12 @@
-.row
+.row.mt-3
 	.col-lg-6.col-xs-12
-		%h2
-		.tabsWidget{style: "margin-left: #{'14px' unless mobile?}" }
-			%ul.nav.nav-tabs.nav-justified.tab-inline{role: 'tablist'}
-				%li.nav-item{class: @type == 'featured' ? 'active' : ''}
-					%a.nav-link.font-14{href: featured_url}
-						%b= title
-				%li.nav-item{class: @type == 'billing' ? 'active' : ''}
-					%a.nav-link.font-14{href: billing_url}
-						%b Billing
+		%ul.nav.nav-tabs.nav-justified.tab-inline{role: 'tablist', style: "margin-left: #{'14px' unless mobile?}" }
+			%li.nav-item
+				%a.nav-link.font-14.font-bolder{href: featured_url, class: @type == 'featured' ? 'active hyper-link' : '', 'aria-current'=>"page"}= title
+			%li.nav-item
+				%a.nav-link.font-14.font-bolder{href: billing_url, class: @type == 'billing' ? 'active hyper-link' : '', 'aria-current'=>"page"} Billing
 
-.tab-content
+.tab-content.mt-5
 	- if @type == 'featured'
 		.tab-pane.fade.in.active
 			- unless mobile?

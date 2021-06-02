@@ -250,14 +250,15 @@ input[type="radio"], input[type="checkbox"] {
     padding-right: 50px;
 }
 
-.nav-tabs.nav-justified > li > a {
-	border-bottom: 1px solid #ddd;
-	border-radius: 0px;
-  margin-bottom: 1px;
-}
-
-.nav-tabs.nav-justified > li.active > a, .nav-tabs.nav-justified > li.active:hover > a {
-	color: #0075c9;
+.nav-tabs{
+  .nav-link{
+    color: #333 !important;
+  }
+  .nav-link.active {
+    color: #2272e2 !important;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+  }
 }
 
 .media-body{
