@@ -105,6 +105,7 @@ class BuildingsController < ApplicationController
   end
 
   def update
+    @building.user = current_user
     if @building.update(building_params)
       session[:after_contribute] = 'amenities' if params[:contribution].present?
       respond_to do |format|
@@ -118,8 +119,8 @@ class BuildingsController < ApplicationController
         format.json {render json: @building}
       end
     else
-      flash.now[:error] = 'Error Updating'
-      render :edit
+      flash[:error] = "Error Updating: #{@building.errors.messages}"
+      redirect_back(fallback_location: edit_building_path(@building))
     end
   end
 

@@ -27,7 +27,7 @@
               %label Zip*
               = f.text_field :zipcode, class: 'form-control validate', readonly: disabled(current_user, f.object.zipcode)
         
-        - if current_user and current_user.has_role?(:admin) and !@building.new_record?
+        - if current_user&.has_role?(:admin) && !@building.new_record?
           .row.mb-3
             .col-xs-12.col-sm-12.col-md-4.col-lg-4
               .form-group

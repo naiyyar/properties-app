@@ -56,7 +56,7 @@ class Building < ApplicationRecord
   attr_accessor :address, :min_price, :max_price, :act_listings
 
   belongs_to :user
-  belongs_to :management_company, touch: true
+  belongs_to :management_company, touch: true, optional: true
   has_many :reviews, as: :reviewable
   # has_one  :featured_comp,          foreign_key: :building_id,  dependent: :destroy
   has_many :featured_comp_buildings
