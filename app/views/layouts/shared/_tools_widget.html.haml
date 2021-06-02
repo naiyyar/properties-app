@@ -6,7 +6,7 @@
 			%li.nav-item
 				%a.nav-link.font-14.font-bolder{href: billing_url, class: @type == 'billing' ? 'active hyper-link' : '', 'aria-current'=>"page"} Billing
 
-.tab-content.mt-5
+.tab-content.mt-2
 	- if @type == 'featured'
 		.tab-pane.fade.in.active
 			- unless mobile?
