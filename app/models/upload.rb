@@ -111,12 +111,11 @@ class Upload < ApplicationRecord
   end
 
   def self.marker_image object
-    no_image = 'no-photo.jpg'
     uploads  = object.image_uploads
-    return no_image if uploads.blank?
+    return Building::NO_PHOTO if uploads.blank?
     image_obj = uploads.first
     if image_obj.present?
-      image_obj.image_file_name.present? ? image_obj.uploaded_img_url(:original) : no_image
+      image_obj.image_file_name.present? ? image_obj.uploaded_img_url(:original) : Building::NO_PHOTO
     end
   end
 

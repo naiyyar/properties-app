@@ -5,15 +5,14 @@
       .figure{style: 'position: relative;', id: "figure#{building.id}"}
         .shimmer
       - if action_name == 'load_featured_buildings'
-        =render 'home/partials/building_header', building: building
+        = render 'home/partials/building_header', building: building
       - else
         .building-detail-card{id: "building_details#{building.id}"}
         
   - else
     .figure.featured-comps{style: 'position: relative;', id: "figure#{building.id}", data: { show_url: @show_path }}
-      - if building.featured?
-        %h4.comp.featured.round Featured
-      .bg-size-cover.h-lg{ style: "background-image: url(#{feature_comp_bg_img_url(@last_uploads)});" }
+      = featured_badge_helper if building.featured?
+      .bg-size-cover.bg-pos-center{ style: "background-image: url(#{feature_comp_bg_img_url(@last_uploads)});" }
     
     = render 'home/partials/building_header', building: building
 

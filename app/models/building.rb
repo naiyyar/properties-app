@@ -23,6 +23,7 @@ class Building < ApplicationRecord
   # constants
   RANGE_PRICE = ['$', '$$', '$$$', '$$$$'].freeze
   COLIVING_NUM = 9
+  NO_PHOTO = 'no-photo.jpg'
   
   PENTHOUSES_MIN_PRICE = 8000
   

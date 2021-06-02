@@ -22,4 +22,4 @@
 - else
   %a{ href: show_path, style: 'cursor: pointer;', 'aria-label' => object.property_name_or_address }
     = featured_badge_helper if @similar_properties.present? || object.featured?
-    .bg-size-cover.h-lg.bg-pos-center{style: "background-image: url(#{image_url('no-photo.jpg') })"}
+    .bg-size-cover.h-lg.bg-pos-center{style: "background-image: url(#{image_url(Building::NO_PHOTO) })"}

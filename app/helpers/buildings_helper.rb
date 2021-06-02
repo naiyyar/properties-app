@@ -59,7 +59,11 @@ module BuildingsHelper
 	end
 
 	def single_image(building)
-		building.uploads.present? ? building.uploads.last.image.url : 'no-photo.jpg'
+		building.uploads.present? ? building.uploads.last.image.url : Building::NO_PHOTO
+	end
+
+	def feature_comp_bg_img_url uploads
+		uploads.present? ? uploads.uploaded_img_url(:original) : image_url(Building::NO_PHOTO)
 	end
 
 	def disabled(current_user, val)
@@ -155,10 +159,6 @@ module BuildingsHelper
 
 	def sort_string
 		['1','2','3','4'].include?(params[:sort_by]) ? sort_options[params[:sort_by].to_i][0] : 'Recently updated'
-	end
-
-	def feature_comp_bg_img_url uploads
-		uploads.present? ? uploads.uploaded_img_url(:original) : image_url('no-photo.png')
 	end
 
 	def set_ranges building_price, price
