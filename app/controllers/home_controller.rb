@@ -77,6 +77,13 @@ class HomeController < ApplicationController
     end
   end
 
+  # Static Content Only
+  def lazy_load_content
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def tos
     @meta_desc = 'Terms of service for Transparentcity'
   end

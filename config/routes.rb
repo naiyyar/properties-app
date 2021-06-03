@@ -103,7 +103,6 @@ Rails.application.routes.draw do
       get :units
       get '/disconnect_building', to: 'buildings#disconnect_building', as: :disconnect_building
       get :featured_by
-      get :lazy_load_content
     end
 
     collection do
@@ -185,6 +184,7 @@ Rails.application.routes.draw do
   post '/set_split_view_type',      to: 'home#set_split_view_type'
   get '/get_images',                to: 'home#get_images'
   get '/load_featured_buildings',   to: 'home#load_featured_buildings'
+  get '/lazy_load_content',         to: 'home#lazy_load_content'
   
   post '/favorite',                 to: 'buildings#favorite',       as: :favorite
   get '/unfavorite',                to: 'buildings#unfavorite',     as: :unfavorite

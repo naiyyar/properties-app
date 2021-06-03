@@ -13,7 +13,7 @@
 <div id="wrapper" class="<%=wrapper_classes%>" onscroll="Transparentcity.showHideCTALinks(this)">
   <%= render 'layouts/shared/filter_buttons' if action_name == 'search' && mobile? %>
   <div class="content <%= controller_name + action_name %>">
-    <%= render 'layouts/shared/pop_neighborhoods_list' %>
+    <div id="popular-nyc-neighborhoods"><%#= render 'layouts/shared/pop_neighborhoods_list' %></div>
     <%= yield %>
   </div>
   <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>

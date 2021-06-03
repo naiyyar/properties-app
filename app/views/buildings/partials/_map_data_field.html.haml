@@ -10,6 +10,6 @@
 = hidden_field_tag :search_string, @search_string
 = hidden_field_tag :cu, current_user&.id
 
--0.upto(4) do |num|
+- 0.upto(4) do |num|
   = content_tag 'div', '', id: "red-marker-asset-#{num}", data: { path: asset_path("markers/red_pin_p#{num}.png") }
   = content_tag 'div', '', id: "green-marker-asset-#{num}", data: { path: asset_path("markers/green_pin_p#{num}.png") }

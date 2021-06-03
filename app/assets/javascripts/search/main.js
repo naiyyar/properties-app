@@ -53,3 +53,13 @@ $(document).click(function(e) {
 $('.handleSort').click(function(e) {
     $('.sortMenu').slideToggle(200);
 });
+
+$(document).ready(function() {
+    setTimeout(function(){
+        $.ajax({
+          url: '/lazy_load_content',
+          type: 'get',
+          dataType: 'script'
+        });
+    }, 3000);
+});
