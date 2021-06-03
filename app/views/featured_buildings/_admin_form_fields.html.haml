@@ -1,19 +1,19 @@
 - @submit_text = 'Save'
 .row
-  .col-xs-6.col-sm-6.col-md-6.col-lg-6
+  .col-6.col-md-6.col-lg-6
     - picker_class = @featured_by == 'admin' ? 'datetimepicker' : 'datepicker'
     .form-group
       %label Start Date
       = f.text_field :start_date, value: object.start_date.present? ? object.start_date&.to_s(:no_timezone) : nil,  class: "form-control #{picker_class}", :autocomplete => :off, disabled: object.featured_by_manager?
 
-  .col-xs-6.col-sm-6.col-md-6.col-lg-6
+  .col-6.col-md-6.col-lg-6
     .form-group
       %label End Date
       = f.text_field :end_date, value: object.end_date.present? ? object.end_date.to_s(:no_timezone) : nil,  class: "form-control #{picker_class}", :autocomplete => :off, disabled: object.featured_by_manager?
 
 - if @featured_by != 'admin'
   .row
-    .col-xs-6.col-sm-6.col-md-6.col-lg-6
+    .col-6.col-md-6.col-lg-6
       .form-group
         - if object.kind_of?(FeaturedBuilding)
           - price = '$49.00'
@@ -21,13 +21,10 @@
         - else
           - price = '$9.00'
           %label Featured Agent Renewal
-    .col-xs-6.col-sm-6.col-md-6.col-lg-6
+    .col-6.col-md-6.col-lg-6
       .form-group
-        .float-end
-          - if object.kind_of?(FeaturedBuilding)
-            %input.apple-switch.sb-sm.feature-building.renew{type: 'checkbox', checked: object.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-fbid' => object.id }
-          - else
-            %input.apple-switch.sb-sm.feature-agent.renew{type: 'checkbox', checked: object.renew, style: 'margin: 0px;', 'data-field' => 'renew', 'data-agentid' => object.id }
+        .float-end= renew_switch_button(object)
+  
   .row
     .col-lg-12
       %label When active, the card on file wil be charged #{price} two days before the end date for the next four week feature cycle.
