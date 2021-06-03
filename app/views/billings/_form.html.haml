@@ -1,9 +1,9 @@
 %div{style: 'padding: 8px 14px;'}
   .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-10.offset-lg-3
+    .col-12.col-md-12.col-lg-10.offset-lg-3
       - if @saved_cards.present?
         .row
-          .col-xs-12.col-sm-12.col-md-12.col-lg-7
+          .col-12.col-md-12.col-lg-7
             %p.font-bold.font-14 Saved Cards
             %table.table{style: 'width: 100%;'}
               - @saved_cards.each do |card|
@@ -26,11 +26,11 @@
                       = submit_tag "Pay $#{@price}.00", class: 'btn btn-primary btn-sm font-bold', data: { disable_with: "Pay $#{@price}.00" }
         
         .row.mt-4
-          .col-xs-12.col-sm-12.col-md-12.col-lg-7
+          .col-12.col-md-12.col-lg-7
             .text-center OR
       %br
       .row
-        .col-xs-12.col-sm-12.col-md-12.col-lg-7
+        .col-12.col-md-12.col-lg-7
           .panel.panel-default
             .panel-heading
               %b Payment
@@ -38,11 +38,11 @@
               #example-2.cell.example.example2
                 = form_tag create_charge_path, method: :post, id: 'stripe-billing-form' do
                   .row.error
-                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                    .col-12.col-md-12.col-lg-12
                       .payment-errors.text-danger.message
                   
                   .row
-                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                    .col-12.col-md-12.col-lg-12
                       = hidden_field_tag 'billing[email]', current_user.email
                       = hidden_field_tag 'billing[amount]', @price
                       = hidden_field_tag 'billing[billable_id]', @object_id
@@ -62,11 +62,11 @@
                   
                   %br
                   %br
+
                   .form-group
-                    .col-sm-12
+                    .col-12
                       %div{class: action_links_alignment_class}
                         = previous_link(previous_page_path(@object, @object_type))
-                        / = link_to 'Back', previous_page_path(@object, @object_type), class: 'btn btn-default font-bold'
                         = submit_tag "Pay $#{@price}.00", class: 'btn btn-primary font-bold font-16 btn_submit btn_submit_stripe-form', 'data-tid' => "elements_examples.form.pay_button", style: action_link_styles
                   
               %br
@@ -78,10 +78,10 @@
                       %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400
                         Powered by
                         =image_tag 'https://js.stripe.com/v3/fingerprinted/img/stripe-8ad2522ef8799d5985038700f8a07027.svg', class: 'Icon Footer-PoweredBy-Icon Icon--md'
-                .col-lg-1.col-xs-2
+                .col-2.col-lg-1
                   %a{href: 'https://stripe.com/checkout/legal', target: '_blank'}
                     %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400 Terms
-                .col-lg-1
+                .col-1.col-lg-1
                   %a{href: 'https://stripe.com/privacy', target: '_blank'}
                     %span.Text.Text-color--gray400.Text-fontSize--12.Text-fontWeight--400 Privacy
 

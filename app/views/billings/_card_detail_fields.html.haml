@@ -13,7 +13,8 @@
     %label{"data-tid" => "elements_examples.form.card_expiry_label", for: "example2-card-expiry"} Expiration
     .baseline
   
-  .field{style: 'width: 0%;'}
+  - unless mobile?
+    .field{style: 'width: 0%;'}
 
   .field{style: 'width: 37%;'}
     #example2-card-cvc.input.empty
