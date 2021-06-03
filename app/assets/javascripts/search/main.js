@@ -16,6 +16,7 @@
 //= require home
 //= require search_modal
 //= require featured_listings
+//= require ./slide_header_on_scroll
 //= require ./redo_button
 //= require ./map
 
