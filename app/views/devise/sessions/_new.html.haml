@@ -8,7 +8,9 @@
   .form-group
     .btn-group-justified
       = render partial: 'layouts/shared/social_auth_buttons', locals: {resource: resource, btn_title: 'Sign In with Google', button_type: 'google'}
-  .signOr OR
+  
+  .signOr.mt-4 OR
+  
   .form-group
     = f.email_field :email, class: 'form-control', placeholder: 'Email', autocomplete: 'off'
     %p.help-block
