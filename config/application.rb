@@ -33,7 +33,6 @@ module AptreviewApp
     #config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
     config.exceptions_app = self.routes
     config.active_job.queue_adapter = :delayed_job
-    config.skylight.environments += ["development", "staging"]
 
     # Don't generate system test files.
     config.generators.system_tests = nil
