@@ -9,7 +9,7 @@ module UploadsHelper
 	end
 
 	def user_can_drag?
-		current_user && current_user.admin?
+		current_user&.admin?
 	end
 
 	def seel_all_link object, images_count, see_all_class=nil
@@ -28,17 +28,13 @@ module UploadsHelper
 	end
 
 	def object_upload_path object
-		if object.kind_of? Building
-			new_building_upload_path(building_id: object)
-		else
-			new_unit_upload_path(unit_id: object)
-		end
+		return new_building_upload_path(building_id: object) if object.kind_of?(Building)
+		new_unit_upload_path(unit_id: object)
 	end
 	
 	def associated_object imageable
-		if imageable.class.name == 'Unit'
-			imageable.name
-		end
+		return '' unless imageable.class.name == 'Unit'
+		imageable.name
 	end
 
 	def delete_upload_link upload

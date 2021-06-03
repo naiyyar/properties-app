@@ -1,41 +1,13 @@
 module BuildingsHelper
-	def rating_for_user(rateable_obj, rating_user, dimension = nil, options = {})
-	  star = options[:star] || 5
-	   #readonly = true
-	  if rating_user.present?
-		  @object = rateable_obj
-		  @user = rating_user
-		  review_id = options[:review_id] || nil
-		  @rating = Rate.find_by_rater_id_and_rateable_id_and_dimension_and_review_id(@user.id, @object.id, dimension,review_id)
-		  stars = @rating ? @rating.stars : 0
+	SORT_INDEXES = ['1','2','3','4']
 
-		  disable_after_rate = options[:disable_after_rate] || false
-		  target       = options[:target]       || ''
-	    targetText   = options[:targetText]   || ''
-	    targetType   = options[:targetType]   || 'hint'
-	    targetFormat = options[:targetFormat] || '{score}'
-	    targetScore  = options[:targetScore]  || ''
-
-		  if disable_after_rate
-		    readonly = rating_user.present? ? !rateable_obj.can_rate?(rating_user, dimension) : true
-		  end
-
-		  content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => stars,
-		  "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
-		  "data-disable-after-rate" => disable_after_rate,
-		  "data-readonly" => readonly,
-		  "data-star-count" => star,
-      "data-target" => target,
-      "data-target-text" => targetText,
-      "data-target-format" => targetFormat,
-      "data-target-score" => targetScore
-		else
-			content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => 0,
-		  "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
-		  "data-disable-after-rate" => disable_after_rate,
-		  "data-readonly" => readonly,
-		  "data-star-count" => star
-		end
+	def sort_options
+		@sort_options ||= [	['Recently Updated', '0'],
+			['Least Expensive - Listing', '1'],
+			['Most Expensive - Listing', '2'],
+			['Least Expensive - Building', '3'],
+			['Most Expensive - Building', '4']
+		]
 	end
 
 	def imageable upload
@@ -97,43 +69,10 @@ module BuildingsHelper
 		"#{recommended} &nbsp;"
 	end
 
-	def heart_link object, user
-		# To save as favourite sending js request
-		# to unsave as favourite sending json request
-		@current_user = current_user || user
-		link_to heart_icon, saved_object_url(object), 
-												remote: remote(object), class: fav_classes(object), 
-												title: heart_link_title(object), 
-												data: { objectid: object.id }, 
-												method: :post,
-												'area-label' => heart_link_title(object),
-												style: 'padding: 9px;'
-	end
-
-	def fav_classes object
-		"favourite save_link_#{object.id} #{saved_color_class(object)}"
-	end
-
-	def remote object
-		(object.favorite_by?(@current_user) ? false : true)
-	end
-
-	def saved_object_url object
-		object.favorite_by?(@current_user) ? 'javascript:;' : favorite_path(object_id: object.id)
-	end
-
-	def heart_link_title(object)
-		(@current_user.present? && object.favorite_by?(@current_user)) ? 'Unsave' : 'Save'
-	end
-
-	def saved_color_class(object)
-		(@current_user.present? && object.favorite_by?(@current_user)) ? 'filled-heart' : 'unfilled-heart'
-	end
-
 	def date_uploaded object
 		"<b>#{ associated_object(object.imageable) }</b>" +
 		"<p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>" +
-		"<p>" + fancybox_cta_buttons(object.imageable) + "</p>".html_safe # if @building.present?
+		"<p>" + fancybox_cta_buttons(object.imageable) + "</p>".html_safe
 	end
 
 	def fancybox_cta_buttons imageable
@@ -148,17 +87,9 @@ module BuildingsHelper
 		CTALinksPolicy.new(imageable).show_contact_leasing? ? contact_leasing_link(imageable, '', 'btn-slider') : check_availability_link(imageable, 'btn-slider')
 	end
 
-	def sort_options
-		@sort_options ||= [	['Recently Updated', '0'],
-			['Least Expensive - Listing', '1'],
-			['Most Expensive - Listing', '2'],
-			['Least Expensive - Building', '3'],
-			['Most Expensive - Building', '4']
-		]
-	end
-
 	def sort_string
-		['1','2','3','4'].include?(params[:sort_by]) ? sort_options[params[:sort_by].to_i][0] : 'Recently updated'
+		return 'Recently updated' unless SORT_INDEXES.include?(params[:sort_by])
+		sort_options[params[:sort_by].to_i][0]
 	end
 
 	def set_ranges building_price, price

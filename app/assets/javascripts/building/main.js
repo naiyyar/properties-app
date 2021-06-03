@@ -7,6 +7,7 @@
 //= require useful_reviews
 //= require jquery.raty
 //= require ratyrate
+//= require property_card_actions
 //= require ./show_map_handler
 
 

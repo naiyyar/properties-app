@@ -104,6 +104,13 @@ class User < ApplicationRecord
     end
   end
 
+  def get_rating_by property_id, dimension, review_id
+    Rate.where(rater_id: self.id, 
+               rateable_id: property_id, 
+               dimension: dimension, 
+               review_id: review_id).first rescue nil
+  end
+
   def user_favorite favorable
     favorites.find_by(favorable_id:    favorable.id, 
                       favorable_type: favorable.class.name)

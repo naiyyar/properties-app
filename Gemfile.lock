@@ -1508,6 +1508,8 @@ GEM
       unf (~> 0.1.4)
     sitemap_generator (6.1.2)
       builder (~> 3.0)
+    skylight (5.1.1)
+      activesupport (>= 5.2.0)
     social-share-button (1.2.4)
       coffee-rails
     sorted_set (1.0.3)
@@ -1650,6 +1652,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sitemap_generator
+  skylight
   social-share-button
   spring
   spring-watcher-listen (~> 2.0.0)
