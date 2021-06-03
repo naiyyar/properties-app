@@ -1,5 +1,11 @@
 - if @pop_nb_hash
-	.popular-neighborhoods{style: 'display: none'}
-		.float-end{style: "padding: 4px; cursor: pointer;"}
-			= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeHoods'
+	.popular-neighborhoods{style: 'display: none;'}
+		.float-end{style: 'padding: 4px; cursor: pointer;'}
+			= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, 'javascript:;', class: 'closeHoods'
 		= render 'layouts/home/popular_neighborhoods', :@modal_type => 'neighborhoods'
+
+
+	:javascript
+		$('.closeHoods').click(function(){
+			$(this).parent().parent().slideToggle(200, 'linear');
+		})

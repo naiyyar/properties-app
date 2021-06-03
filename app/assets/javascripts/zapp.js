@@ -179,9 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   $(".btn-dp-toggle").on("show.bs.dropdown", function(){
-      if($(this).hasClass('closed')){
-          $(this).removeClass('closed');
-      }
+    if($(this).hasClass('closed')){
+      $(this).removeClass('closed');
+    }
   });
 
   $(document).on('click', function(e){
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   //
   // For mobile neighborhoods dropdown toggle
-  $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
+  $('.dropdown-toggle-neighborhoods').on('click', function(e) {
     $('.popular-neighborhoods').slideToggle(200, 'linear', function(){
       var elem = $('#wrapper.screen-sm');
       var toggleable_class = 'no-touch-scroll'

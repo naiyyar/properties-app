@@ -1,5 +1,11 @@
-if($('#pop-nyc-neighborhoods-list').length > 0){
-	$('#pop-nyc-neighborhoods-list').html("<%= j render 'layouts/shared/neighborhoods_list' %>");
+var nyc_list_container = $('#pop-nyc-neighborhoods-list');
+
+if(nyc_list_container.length > 0){
+	if(mobile){
+		nyc_list_container.html("<%= j render 'layouts/shared/pop_neighborhoods_list' %>");	
+	}else{
+		nyc_list_container.html("<%= j render 'layouts/shared/neighborhoods_list' %>");	
+	}	
 }
 
 if($('.spv-pop-search').length > 0){
