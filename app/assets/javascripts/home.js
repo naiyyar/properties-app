@@ -5,9 +5,9 @@
         $('body').addClass('no-touch');
     }
 
-    // setTimeout(function() {
-    //     $('body').removeClass('notransition');
-    // }, 300);
+    setTimeout(function() {
+        $('body').removeClass('notransition');
+    }, 300);
 
     $('.dropdown-select li a').click(function() {
         var $self = $(this);
