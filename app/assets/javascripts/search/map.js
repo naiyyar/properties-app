@@ -169,7 +169,6 @@ SearchMapObject = {
     }
     
     setTimeout(function() {
-      $('body').removeClass('notransition');
       if(!map){
         map = new google.maps.Map(document.getElementById('mapViewSearch'), options);
       }

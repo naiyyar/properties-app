@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   before_action :set_device_view,       only: [:index, :load_featured_buildings]
   before_action :set_fav_color_class,   only: :load_infobox
   # before_action :set_min_save_amount,   only: :load_infobox
+  before_action :set_neighborhood_counts, only: [:lazy_load_content, :load_featured_buildings]
   
   include HomeConcern # search
 
@@ -164,5 +165,13 @@ class HomeController < ApplicationController
                                    filter_params:  params[:filter_params]
                                 }
                   )
+  end
+
+  # Setting up buildings counts for uptown, brooklyn, queens, bronx
+  def set_neighborhood_counts
+    @uptown_count = Neighborhood.nb_buildings_count(pop_neighborhoods, NYCBorough.uptown_sub_borough)
+    @brooklyn_count = Building.city_count(pop_nb_buildings, 'Brooklyn', NYCBorough.brooklyn_sub_borough)
+    @queens_count = Building.city_count(pop_nb_buildings, 'Queens', NYCBorough.queens_borough)
+    @bronx_count = Building.city_count(pop_nb_buildings, 'Bronx', NYCBorough.bronx_sub_borough)
   end
 end

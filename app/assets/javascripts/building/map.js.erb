@@ -116,7 +116,6 @@ MapObject = {
     }
     
     setTimeout(function() {
-      $('body').removeClass('notransition');
       if(desktop_map.length == 1){
         map = new google.maps.Map(document.getElementById('mapView'), options);
         if(map){

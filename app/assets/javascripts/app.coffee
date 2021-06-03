@@ -1,5 +1,5 @@
 jQuery ->
-	#from uploads/index page
+	# from uploads/index page
 	$(document).on 'click', '.delete_image',(e) ->
 		parent = $(this).parent();
 		if parent.hasClass('actions-links')

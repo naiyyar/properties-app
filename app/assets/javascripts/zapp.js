@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // For mobile neighborhoods dropdown toggle
   $('.dropdown-toggle-neighborhoods, .closeHoods').click(function(e) {
     $('.popular-neighborhoods').slideToggle(200, 'linear', function(){
-      var elem             = $('#wrapper.screen-sm');
+      var elem = $('#wrapper.screen-sm');
       var toggleable_class = 'no-touch-scroll'
       $(this).is(':hidden') ? elem.removeClass(toggleable_class) : elem.addClass(toggleable_class);
     });

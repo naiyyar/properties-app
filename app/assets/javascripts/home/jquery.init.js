@@ -6,3 +6,4 @@
 //= require bootstrap
 //= require favourite
 //= require cta_actions
+//= require jquery.lazyload

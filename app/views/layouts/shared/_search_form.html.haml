@@ -3,12 +3,14 @@
 
 - unless @pop_neighborhoods.blank? && mobile?
   .float-start.neighborhoods-dropdown{style: 'margin-top: 3px;margin-left: 8px;'}
-    .btn-group.btn-dp-toggle.dropdown
-      %button#lr2.btn.btn-o.btn-primary.dropdown-toggle.btn-round{'data-bs-toggle' => 'dropdown', style: 'min-width: 121px;', type: 'button', 'aria-expanded' => 'false'}
-        %span.dropdown-label= params[:searched_by] == 'neighborhoods' ? @searched_neighborhoods : 'Neighborhoods'
+    .dropdown
+      %button.btn.btn-o.btn-primary.dropdown-toggle.btn-round#neighborhoodsList{'data-bs-toggle' => 'dropdown', style: 'min-width: 121px;', type: 'button', 'aria-expanded' => 'false'}
+        %span.dropdown-label
+          = params[:searched_by] == 'neighborhoods' ? @searched_neighborhoods : 'Neighborhoods'
          
-      .dropdown-menu.dropdown-select.dropdown-menu-right1{'area-labelledby' => 'lr2'}
-        .row= render 'layouts/shared/neighborhoods_list'
+      .dropdown-menu.dropdown-select{'area-labelledby' => 'neighborhoodsList', role: 'menu' }
+        #pop-nyc-neighborhoods-list
+          / = render 'layouts/shared/neighborhoods_list'
   
   - if show_filters?
     .btn-filter.btn-dp-toggle.float-end.me-2.mt-1

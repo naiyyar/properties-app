@@ -1,19 +1,19 @@
 var DPButtons = (function(){
 	var elm_filter;
-	var dp_neighborhoods;
+	//var dp_neighborhoods;
 	var dp_sort;
 	var dp_filter;
-	var btn_dp_neighborhoods;
+	//var btn_dp_neighborhoods;
 	var btn_dp_sort;
 	var btn_dp_filter;
 	var dp_t;
 	
 	var init = function(){
 		elm_filter 					 = $('.filter');
-		dp_neighborhoods 		 = $('.neighborhoods-dropdown');
+		//dp_neighborhoods 		 = $('.neighborhoods-dropdown');
 		dp_sort 				 		 = $('.btn-sort');
 		dp_filter 			 		 = $('.btn-filter');
-		btn_dp_neighborhoods = dp_neighborhoods.find('button.dropdown-toggle');
+		//btn_dp_neighborhoods = dp_neighborhoods.find('button.dropdown-toggle');
 		btn_dp_sort 				 = dp_sort.find('button.dropdown-toggle');
 		btn_dp_filter 			 = dp_filter.find('button.dropdown-toggle');
 		dp_t 								 = $('#search-row .dropdown-toggle');
@@ -37,8 +37,8 @@ var DPButtons = (function(){
 	};
 
 	return {
-		init: 									init,
-		handleFilter: 					handleFilter,
-		closeDropdowns: 				closeDropdowns
+		init: 					init,
+		handleFilter: 	handleFilter,
+		closeDropdowns: closeDropdowns
 	};
 })();

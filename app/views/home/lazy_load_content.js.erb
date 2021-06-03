@@ -1,2 +1,7 @@
-$('popular-nyc-neighborhoods').html("<%= j render 'layouts/shared/pop_neighborhoods_list' %>")
-$('.spv-pop-search').html("<%= j render 'layouts/home/popular_searches', bg_col: '#fff', other_classes: 'mt-3 mb-3' %>")
+if($('#pop-nyc-neighborhoods-list').length > 0){
+	$('#pop-nyc-neighborhoods-list').html("<%= j render 'layouts/shared/neighborhoods_list' %>");
+}
+
+if($('.spv-pop-search').length > 0){
+	$('.spv-pop-search').html("<%= j render 'layouts/home/popular_searches', bg_col: '#fff', other_classes: 'mt-3 mb-3' %>")
+}
