@@ -9,9 +9,10 @@
       = f.hidden_field :user_id, value: current_user.id if current_user.present?
     
     .form-group.mb-3
-      = f.text_area :comment, value: "I'm interested in availabilities at #{@building.building_name_or_address}.", class: 'form-control validate', rows: 5, style: 'color: #777777;'
-  
-    = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder btn-round', style: 'font-size: 18px;'
+      = f.text_area :comment, value: "I'm interested in availabilities at #{@building.building_name_or_address}.", class: 'form-control validate', rows: 10, style: 'color: #777777;'
+    
+    .form-group.mt-5
+      = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder btn-round', style: 'font-size: 18px;'
     
   %fieldset{style: 'color: #333;'}
     %p.font-18 Contact Info
