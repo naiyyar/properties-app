@@ -7,28 +7,13 @@
 
       .sorted_by_option{style: "width: 100%;background: #fff; display: #{custom_search? ? 'none' : 'block'}"}
         .row
-          .col-6.count{style: 'padding-left: 0px;padding-right: 1px;width: 53%;'}
+          .col-6.count{style: 'padding-right: 1px;width: 53%;'}
             %div.counts= "#{@listings_count.to_i} Rentals | #{@buildings_count.to_i} Buildings"
           
           .col-6.sort-options{style: 'width: 47%;'}
             .sorted-by.d-inline-flex{style: 'margin-bottom: 1px;'} Sorted By:
             %label.select.d-inline-flex{style: 'margin-bottom: 1px;'}
               = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, style: 'color: #2272e2;border-color: transparent;height: 25px; padding: 0px 0px;width: 114px;' }
-              %i.sort
-
-            
-      
-      - if false
-        %section.d-inline{style: 'padding-left: 0px;padding-right: 1px;width: 53%;'}
-          %label{style: 'margin-bottom: 1px; padding: 2px 0px;'}
-            %div.counts= "#{@listings_count.to_i} Rentals | #{@buildings_count.to_i} Buildings"
-        
-        %section.d-inline{style: 'padding-left: 0px;padding-right: 0px;width: 47%;'}
-          %section.tbl-cell{style: 'width: 67px;padding: 3px 0px;'}
-            %span.sorted-by{style: 'margin-bottom: 1px;'} Sorted By:
-          %section.tbl-cell{style: 'display: table-cell;'}
-            %label.select.sort-select{style: 'margin-bottom: 1px;'}
-              = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, style: 'color: #2272e2;border-color: transparent;height: 25px; padding: 0px 0px;' }
               %i.sort
 
   :css

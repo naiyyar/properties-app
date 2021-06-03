@@ -6,7 +6,9 @@
   	</div>
   <%end%>
 <%end%>
-<%= render 'layouts/shared/filters' if action_name == 'search'%>
+
+<%= render 'layouts/shared/filters' if action_name == 'search' %>
+
 <div class="closeLeftSide"></div>
 <div id="wrapper" class="<%=wrapper_classes%>" onscroll="Transparentcity.showHideCTALinks(this)">
   <%= render 'layouts/shared/filter_buttons' if action_name == 'search' && mobile? %>
