@@ -29,6 +29,11 @@
 	#property-photos{
 		margin: 0px 8px;
 	}
+	#gallery li.ui-state-default {
+		height: 120px;
+		width: 100%;
+	}
+	
 	.ui-state-default {
 		height: 200px;
 		width: 100%;

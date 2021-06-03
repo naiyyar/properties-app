@@ -6,29 +6,29 @@
     = f.hidden_field :category, value: category,  id: "video_tour_category_#{cat}"
     
     .row
-      - if !video_tour.new_record?
-        .col-lg-2.col-xs-1.d-none.d-lg-block.d-md-block
+      - unless video_tour.new_record?
+        .col-lg-2.col-1.d-none.d-lg-block.d-md-block
           %label Sort
           = f.text_field :sort, id: "video_tour_sort_#{cat}", class: 'form-control video_tour_sort'
       - else
         = f.hidden_field :sort, value: index, id: "video_tour_sort_#{cat}", class: 'video_tour_sort'
 
-      .col-lg-5.col-xs-5
+      .col-lg-5.col-5
         %label Url*
         = f.text_field :url, class: 'form-control validate', id: "video_tour_url_#{cat}", required: true
       
-      .col-lg-1.col-xs-2
+      .col-lg-1.col-2
         %label.invisible AddAdd*
         = f.submit 'Add', class: 'btn btn-success btn-sm', style: 'margin-top: 8px;'
       
-      .col-lg-3.col-xs-3
+      .col-lg-3.col-3
         .video-preview{style: 'height: 100px;'}
           - unless video_tour.image.present?
             %iframe{src: video_tour.new_record? ? '' : video_tour.url, style: 'height: 100%;width: 100%;border: none;', id: "video-preview-#{cat}"}
           - else
             =image_tag video_tour.image.url, style: 'height: 100%;width: 100%;border: none;'
 
-      .col-lg-1.col-xs-2{style: 'height: 80px;'}
+      .col-lg-1.col-2{style: 'height: 80px;'}
         %label.invisible AddAdd*
         .text-center.vertically-middle{id: "remove-fields-#{cat}", style: 'margin-top: 8px;'}
-          =render 'video_tours/delete_link', video_tour: video_tour
+          = render 'video_tours/delete_link', video_tour: video_tour

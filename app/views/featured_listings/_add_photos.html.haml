@@ -1,11 +1,11 @@
 - @imageable = featured_listing
 #property-photos
 	.row
-		.col-lg-12.col-xs-12.offset-lg-3
+		.col-lg-12.col-12.offset-lg-3
 			.row
-				.col-lg-4.col-xs-8
+				.col-lg-4.col-8
 					%p.font-21 Featured Listing
-				.col-lg-2.col-xs-4
+				.col-lg-2.col-4
 					= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-green btn-block font-16 font-bold text-white btn-round', target: 'blank'
 			%br
 
@@ -14,22 +14,21 @@
 					%p.font-bold.font-16.font-blue Add Photos
 			
 			.row
-				.col-lg-12.col-xs-12
+				.col-lg-12.col-12
 					%p{style: 'margin: 4px 0px;'} First image will be Featured
 					.dz-short= render 'uploads/form_fields', show_done: false
 			%br
+			
 			.row
-				.col-lg-6.col-xs-9
+				.col-lg-6.col-12
 					%ul#gallery.d-inline-flex.uploads{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing'}
 						- @photos.each do |upload|
 							= render 'uploads/gallery', upload: upload, featured_image: true 
-
-			%br
-			%br
 			
 			- tour_category = 'featured_listing'
-			.row
-				.col-lg-6.col-xs-12
+			
+			.row.mt-5
+				.col-lg-6.col-12
 					%h4.font-bold.font-16
 						= append_tour_link(@imageable, tour_category, last_tour: @video_tours.last)
 					
@@ -40,12 +39,8 @@
 						- else
 							= render 'featured_listings/add_tour_form', video_tour: @new_video_tour, category: tour_category, index: 0, object: @imageable
 
-			%br
-			%br
-			%br
-
-			.row
-				.col-lg-6.col-xs-12
+			.row.mt-5
+				.col-lg-6.col-12
 					%div{class: action_links_alignment_class}
 						= previous_link(next_prev_step_url(@imageable, step: 'add_amenities'))
 						- unless @imageable.live?
@@ -53,5 +48,4 @@
 						- else
 							= done_link(frbotools_user_path(current_user, type: 'featured'))
 
-			%br
 			%br
