@@ -45,8 +45,8 @@ class StaticData
     { title: 'Featured buildings',   url: '/featured_buildings'},
     { title: 'Featured agents',      url: '/featured_agents'},
     { title: 'Featured Listings',    url: '/featured_listings'}
-  ]
+  ].freeze
 
-  FeaturedObjects = ['FeaturedBuilding', 'FeaturedAgent', 'FeaturedListing']
+  FeaturedObjects = ['FeaturedBuilding', 'FeaturedAgent', 'FeaturedListing'].freeze
 
 end

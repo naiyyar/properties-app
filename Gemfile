@@ -150,7 +150,6 @@ group :development do
   gem 'meta_request'
   gem 'pry'
   gem 'rack-mini-profiler', require: false
-  # gem 'rails-footnotes', '~> 4.0'
   gem 'rubocop', '~> 0.75.1', require: false
   gem 'rubycritic', require: false
   # Spring speeds up development by keeping your application running in the background. 

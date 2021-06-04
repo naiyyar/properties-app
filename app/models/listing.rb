@@ -13,12 +13,12 @@ class Listing < ApplicationRecord
               ['2', '2 Bed'],
               ['3', '3 Bed'],
               ['4', '4+ Bed']
-            ]
+            ].freeze
 
   AMENITIES = {
-    months_free:     'Months Free Rent',
-    owner_paid:      'Owner Paid',
-    rent_stabilize:  'Rent Stabilized'
+    months_free: 'Months Free Rent',
+    owner_paid: 'Owner Paid',
+    rent_stabilize: 'Rent Stabilized'
   }.freeze
 
   # When max_price > 15500 then using MAX_RENT

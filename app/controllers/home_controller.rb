@@ -12,13 +12,13 @@ class HomeController < ApplicationController
   include HomeConcern # search
 
   def index
-    @home_view        = true
-    @buildings_count  ||= pop_nb_buildings&.size
-    @meta_desc        = "Rent directly from management companies or landlords in any of these 
-                         #{@buildings_count} no fee apartment rental buildings in NYC and 
-                         save on broker fees."
+    @home_view = true
+    @buildings_count = pop_nb_buildings&.size
+    @meta_desc = "Rent directly from management companies or landlords in any of these 
+                  #{@buildings_count} no fee apartment rental buildings in NYC and 
+                  save on broker fees."
     
-    @tab_title_text   = tab_title_tag
+    @tab_title_text = tab_title_tag
   end
 
   def load_featured_buildings

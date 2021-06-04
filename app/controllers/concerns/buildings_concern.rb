@@ -42,6 +42,7 @@ module BuildingsConcern
     else
       if @building.blank?
         @building = Building.create(building_params)
+        @building.user = current_user
         if @building.save
           if params[:unit_contribution]
             contribute = params[:unit_contribution]
