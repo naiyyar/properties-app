@@ -21,7 +21,7 @@
 			
 			.row
 				.col-lg-6.col-12
-					%ul#gallery.d-inline-flex.uploads{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing'}
+					%ul#gallery.d-lg-inline-flex.uploads{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing'}
 						- @photos.each do |upload|
 							= render 'uploads/gallery', upload: upload, featured_image: true 
 			

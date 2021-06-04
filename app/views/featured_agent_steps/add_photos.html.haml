@@ -20,7 +20,7 @@
 			
 			.row
 				.col-lg-6.col-xs-9
-					%ul#gallery.d-inline-flex.uploads{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
+					%ul#gallery.d-lg-inline-flex.uploads{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
 						- @uploads.each do |upload|
 							= render 'uploads/gallery', upload: upload, featured_image: false 
 			%br
