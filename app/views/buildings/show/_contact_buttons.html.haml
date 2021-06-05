@@ -1,60 +1,60 @@
 .contact-buttons
 	.row
 		- if @cta_link_policy.all_contact_link?
-			.col-lg-6.col-sm-6.col-xs-6.mt-2= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
-			.col-lg-6.col-sm-6.col-xs-6.mt-2= apply_online_link(@building)
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= contact_leasing_link(@building)
+			.col-lg-6.col-sm-6.col-6.mt-2= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
+			.col-lg-6.col-sm-6.col-6.mt-2= apply_online_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
+			.col-lg-12.col-sm-12.col-12.mt-2= contact_leasing_link(@building)
 		
 		- elsif @cta_link_policy.apply_and_availability_and_leasing?
-			.col-lg-6.col-sm-6.col-xs-6.mt-2= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
-			.col-lg-6.col-sm-6.col-xs-6.mt-2= apply_online_link(@building)
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= contact_leasing_link(@building)
+			.col-lg-6.col-sm-6.col-6.mt-2= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
+			.col-lg-6.col-sm-6.col-6.mt-2= apply_online_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= contact_leasing_link(@building)
 
 		- elsif @cta_link_policy.availability_tour_and_leasing?
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= contact_leasing_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
+			.col-lg-12.col-sm-12.col-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
+			.col-lg-12.col-sm-12.col-12.mt-2= contact_leasing_link(@building)
 
 		- elsif @cta_link_policy.apply_and_tour_and_availability?
-			.col-lg-6.col-sm-6.col-xs-6.mt-2= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
-			.col-lg-6.col-sm-6.col-xs-6.mt-2= apply_online_link(@building)
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= schedule_tour_link(@building, 'font-bolder btn-block')
+			.col-lg-6.col-sm-6.col-6.mt-2= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
+			.col-lg-6.col-sm-6.col-6.mt-2= apply_online_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= schedule_tour_link(@building, 'font-bolder btn-block')
 
 		- elsif @cta_link_policy.apply_and_tour_and_leasing?
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= apply_online_link(@building)
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= contact_leasing_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= apply_online_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
+			.col-lg-12.col-sm-12.col-12.mt-2= contact_leasing_link(@building)
 
 		- elsif @cta_link_policy.apply_and_availability?
-			.col-lg-12.col-sm-12.col-xs-12= apply_online_link(@building)
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= check_availability_link(@building)
+			.col-lg-12.col-sm-12.col-12= apply_online_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= check_availability_link(@building)
 
 		- elsif @cta_link_policy.apply_and_tour?
-			.col-lg-12.col-sm-12.col-xs-12= apply_online_link(@building)
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
+			.col-lg-12.col-sm-12.col-12= apply_online_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
 
 		- elsif @cta_link_policy.availability_and_tour?
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= check_availability_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= schedule_tour_link(@building, 'btn-o font-bolder btn-block')
+			.col-lg-12.col-sm-12.col-12.mt-2= check_availability_link(@building)
 		
 		- elsif @cta_link_policy.leasing_and_availability?
-			.col-lg-12.col-sm-12.col-xs-12= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= contact_leasing_link(@building)
+			.col-lg-12.col-sm-12.col-12= check_availability_button(@building.web_url, 'btn-o font-bolder btn-block')
+			.col-lg-12.col-sm-12.col-12.mt-2= contact_leasing_link(@building)
 		
 		- elsif @cta_link_policy.apply_and_leasing?
-			.col-lg-12.col-sm-12.col-xs-12= apply_online_link(@building)
-			.col-lg-12.col-sm-12.col-xs-12.mt-2= contact_leasing_link(@building)
+			.col-lg-12.col-sm-12.col-12= apply_online_link(@building)
+			.col-lg-12.col-sm-12.col-12.mt-2= contact_leasing_link(@building)
 		
 		- elsif @cta_link_policy.show_contact_leasing?
-			.col-lg-12.col-sm-12.col-xs-12= contact_leasing_link(@building)
+			.col-lg-12.col-sm-12.col-12= contact_leasing_link(@building)
 		
 		- elsif @cta_link_policy.availability?
-			.col-lg-12.col-sm-12.col-xs-12= check_availability_button(@building.web_url, 'font-bolder btn-block')
+			.col-lg-12.col-sm-12.col-12= check_availability_button(@building.web_url, 'font-bolder btn-block')
 		
 		- elsif @cta_link_policy.apply?
-			.col-lg-12.col-sm-12.col-xs-12= apply_online_link(@building)
+			.col-lg-12.col-sm-12.col-12= apply_online_link(@building)
 		
 		- elsif @cta_link_policy.schedule_tour?
-			.col-lg-12.col-sm-12.col-xs-12= schedule_tour_link(@building)
+			.col-lg-12.col-sm-12.col-12= schedule_tour_link(@building)
 			
