@@ -74,7 +74,7 @@ $(document).ready(function(){
 		
 		if(sort_index == 0 && response.type == 'FeaturedListing') {
 			featured_icon_class = 'fl-featured-image';
-			badge_icon = '<h4 class="comp featured round"><span class="icon-badge font-14"></span></h4>';
+			badge_icon = '<h4 class="comp featured round"><span class="fa fa-certificate font-14"></span></h4>';
 		}
 		
 		var html =  '<li class="featured-gallery ui-state-default '+featured_icon_class+'" data-id="'+upload_id+'" data-index="'+sort_index+'">' +
