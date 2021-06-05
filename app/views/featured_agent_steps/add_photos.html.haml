@@ -1,25 +1,25 @@
 #property-photos
 	.row
-		.col-lg-12.col-xs-12.offset-lg-3
+		.col-lg-12.col-12.offset-lg-3
 			.row.mb-3
-				.col-lg-4.col-sm-10.col-xs-8= render 'agent_info'
+				.col-lg-4.col-sm-10.col-8= render 'agent_info'
 
-				.col-lg-2.col-sm-2.col-xs-2
-					.text-end=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-green btn-round text-white font-16 font-bold', remote: true
+				.col-lg-2.col-sm-2.col-2
+					.text-end=link_to 'See Preview', preview_featured_agent_path(@featured_agent), class: 'btn btn-success btn-round text-white font-16 font-bold', remote: true
 			
 			.row.mb-1
 				.col-lg-12
 					%p.font-bold.font-16.font-blue Add Photos
 			
 			.row
-				.col-lg-12.col-xs-12
+				.col-lg-12.col-12
 					%p{style: 'margin: 4px 0px;'} Upload a profile image of yourself here.
 					.dz-short= render 'uploads/form_fields', show_done: false
 			
 			%br
 			
 			.row
-				.col-lg-6.col-xs-9
+				.col-lg-6.col-9
 					%ul#gallery.d-lg-inline-flex.uploads{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
 						- @uploads.each do |upload|
 							= render 'uploads/gallery', upload: upload, featured_image: false 
@@ -27,7 +27,7 @@
 			%br
 
 			.row
-				.col-lg-6.col-xs-12
+				.col-lg-6.col-12
 					.float-start
 						= cancel_link(@featured_agent.featured_by_manager? ? agenttools_user_path(current_user, type: 'featured') : featured_agents_path)
 					.float-end

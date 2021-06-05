@@ -1,6 +1,6 @@
 .form-container
   .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-6
+    .col-12.col-sm-12.col-md-12.col-lg-6
       .panel.panel-default
         .panel-heading
           %b New Card
@@ -8,11 +8,11 @@
           #example-2.cell.example.example2
             = form_tag create_new_card_path, method: :post, id: 'stripe-billing-form' do
               .row.error
-                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .col-12.col-sm-12.col-md-12.col-lg-12
                   .payment-errors.text-danger.message
               
               .row
-                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                .col-12.col-sm-12.col-md-12.col-lg-12
                   .form-group
                     = hidden_field_tag :email, current_user.email, class: 'form-control', id: 'user-email', placeholder: 'Email'
                   

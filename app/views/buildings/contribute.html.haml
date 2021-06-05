@@ -3,14 +3,15 @@
 
 .contribute
   .row
-    .col-xs-12.col-sm-12.col-md-6.col-lg-6
+    .col-12.col-sm-12.col-md-6.col-lg-6
       .panel-body
         #search-form{class: "#{params[:results].present? ? 'd-none' : ''}"}
           = form_tag '/reviews/new', method: :get, id: 'search_item_form', class: 'form-horizontal' do
             / adding value on the basis of selected radio button
-            %h4 Find Your Building To Review
+            %h4.mb-2 Find Your Building To Review
             = hidden_field_tag :contribution, 'building_review', class: 'form-control building_contribution', id: 'building_contribution'
             = hidden_field_tag :user_id, current_user.present? ? current_user.id : ''
+            
             %section.app-content
               .buildings-search
                 = text_field_tag 'buildings-search-txt', @building.present? ? @building.building_street_address : nil, class: 'form-control', placeholder: 'Search building by name or address', 'data-buildingid' => @building.present? ? @building.id : '', required: 'required'
@@ -18,9 +19,9 @@
                 #buildings-search-results.results{style: "position: relative;"}
                   
                 %ul#buildings-search-no-results.search-no-result
+            
             .next_btn_container
               - if params[:contribution_for].blank?
-                %h2.visible-xs{style: "margin-top: 25px;"}
                 / when wrong building is selected
                 = link_to 'Next','javascript:;', id: 'next_to_review_btn', class: 'btn btn-primary add_new_building btn-xlg btn-lg btn-xs-block'
                 / when correct building is selected
@@ -33,7 +34,7 @@
               - else
                 = text_field_tag 'units-search-txt', nil, class: 'form-control unit-search', placeholder: 'Search unit number'
             #units-search-results.results
-            .col-xs-12
+            .col-12
               %ul#units-search-no-results.search-no-result
       
       = form_tag '/buildings', method: :post, id: 'new_building', class: "#{ params[:results].present? ? '' : 'd-none' }" do
@@ -44,7 +45,7 @@
           .next_btn_container
             = submit_tag 'Next', class: 'btn btn-primary btn-xlg btn-xs-block', id: 'new_building_submit'
     
-    .col-xs-12.col-sm-12.col-md-6.col-lg-6
+    .col-12.col-sm-12.col-md-6.col-lg-6
       .panel-body
         %h4.h5 Everything you add helps others find an apartment they’ll love. Thanks!
         .d-inline.contribute_guidelines_emojis
