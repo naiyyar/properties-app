@@ -13,7 +13,7 @@
           .col-6.sort-options{style: 'width: 47%;'}
             .sorted-by.d-inline-flex{style: 'margin-bottom: 1px;'} Sorted By:
             %label.select.d-inline-flex{style: 'margin-bottom: 1px;'}
-              = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, style: 'color: #2272e2;border-color: transparent;height: 25px; padding: 0px 0px;width: 114px;' }
+              = select_tag :sort, options_for_select(sort_options, params[:sort_by]), { data: {search_term: params[:search_term], neighborhoods: params[:neighborhoods] }, style: 'color: #2272e2;border-color: transparent;height: 25px; padding: 0px 0px;width: 117px;margin-left: -4px;' }
               %i.sort
 
   :css
