@@ -48,8 +48,14 @@ class Review < ApplicationRecord
     ]
   )
 
-  def self.buildings_reviews buildings
-    where(reviewable_id: buildings.pluck(:id), 
+  def self.buildings_reviews buildings, company_id=''
+    CacheService.new( records: get_reviews(buildings.pluck(:id)),
+                      key: "#{company_id}_buildings_reviews"
+                    ).fetch
+  end
+
+  def self.get_reviews ids
+    where(reviewable_id: ids, 
           reviewable_type: 'Building').includes(:user, :uploads, :reviewable)
   end
 

@@ -49,7 +49,7 @@ class ManagementCompaniesController < ApplicationController
     @all_buildings       = final_results[0]
     
     # Reviews
-    @reviews             = Review.buildings_reviews(@buildings)
+    @reviews             = Review.buildings_reviews(@buildings, @management_company.id)
     @total_reviews       = @reviews.size rescue 0
     @reviews             = @reviews.limit(10)
 

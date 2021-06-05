@@ -2,14 +2,13 @@
 #property-photos
 	.row
 		.col-lg-12.col-12.offset-lg-3
-			.row
+			.row.mt-2
 				.col-lg-4.col-8
 					%p.font-21 Featured Listing
 				.col-lg-2.col-4
 					= link_to 'Preview', object_show_path(featured_listing), class: 'btn btn-success btn-block font-16 font-bold text-white btn-round', target: 'blank'
-			%br
 
-			.row
+			.row.mt-2
 				.col-lg-12
 					%p.font-bold.font-16.font-blue Add Photos
 			
@@ -20,7 +19,7 @@
 			%br
 			
 			.row
-				.col-lg-6.col-12
+				.col-lg-6.col-9
 					%ul#gallery.d-lg-inline-flex.uploads{'data-imageable-id' => featured_listing.id, 'data-imageable-type' => 'FeaturedListing'}
 						- @photos.each do |upload|
 							= render 'uploads/gallery', upload: upload, featured_image: true 
