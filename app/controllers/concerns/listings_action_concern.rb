@@ -44,7 +44,9 @@ module ListingsActionConcern
                         @listings.size
                       end
     respond_to do |format|
-      format.html
+      format.html{
+        redirect_back(fallback_location: building_path(@building))
+      }
       format.js
     end
   end

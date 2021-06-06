@@ -22,6 +22,13 @@ class VideoToursController < ApplicationController
                   else 
                     [['Featured Listing', 'featured_listing']]
                   end
+
+    respond_to do |format|
+      format.html{
+        redirect_back(fallback_location: building_path(@video_tours.values.first.first.tourable))
+      }
+      format.js
+    end
   end
 
   # GET /video_tours/new

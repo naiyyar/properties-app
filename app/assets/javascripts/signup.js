@@ -4,11 +4,12 @@
     if(!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)) {
         $('body').addClass('no-touch');
     }
-
-    $('#signup').modal({
-        backdrop: 'static',
-        keyboard: false
-    }).modal('show');
+    if($('#signup').length > 0){
+	    $('#signup').modal({
+	        backdrop: 'static',
+	        keyboard: false
+	    }).modal('show');
+	  };
 
 })(jQuery);
 

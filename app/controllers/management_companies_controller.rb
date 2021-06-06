@@ -1,6 +1,6 @@
 class ManagementCompaniesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_management_company,  only: [:show, :edit, :update, :destroy, :managed_buildings, :set_availability_link]
+  before_action :set_management_company,  only: [:show, :edit, :update, :destroy, :managed_buildings, :set_availability_link, :load_more_reviews]
   before_action :save_as_favourite,       only: [:show]
   before_action :set_company_buildings,   only: [:show, :edit, :managed_buildings, :set_availability_link, :load_more_reviews]
   
@@ -34,7 +34,7 @@ class ManagementCompaniesController < ApplicationController
     @reviews = @reviews.where('id < ?', params[:object_id]).limit(10) if params[:object_id].present?
     
     respond_to do |format|
-      format.html{ render nothing: true }
+      format.html{ redirect_back(fallback_location: management_companies_path(@management_company)) }
       format.js
     end
   end

@@ -4,13 +4,15 @@ $(document).ready(function () {
     $('a.load-more').click(function (e) {
         e.preventDefault()
         var last_date_active = null;
-        var last_id          = null;
-        var loaded_ids       = [];
-        var past_listings_count    = $('#past_listings_count').val();
-        var total_reviews          = $('#total_reviews').val();
+        var last_id = null;
+        var loaded_ids = [];
+        var past_listings_count = $('#past_listings_count').val();
+        var total_reviews = $('#total_reviews').val();
         var loaded_listings_count;
-        var req_type  = $(this).data('type') || 'GET'
+        var req_type = $(this).data('type') || 'GET'
         var url;
+        var management_company_id =$('#management_company_id').val();
+        
         if(req_type == 'post' || req_type == 'POST'){
             url = $(this).data('url');
         }else{
@@ -45,7 +47,8 @@ $(document).ready(function () {
             data: {
                 object_id:   last_id,
                 date_active: last_date_active,
-                loaded_ids:  loaded_ids
+                loaded_ids:  loaded_ids,
+                id: management_company_id
             },
             // the response will be a script
             dataType: "script",

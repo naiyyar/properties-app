@@ -4,11 +4,13 @@ class PastListingsController < ApplicationController
   include ListingsActionConcern
   
   def load_more
-    @building        = Building.find(params[:building_id])
+    @building = Building.find(params[:building_id])
     load_more_params = { date_active: params[:date_active], loaded_ids: params[:loaded_ids]}
-    @past_listings   = @building.get_listings(nil, 'past', load_more_params)
+    @past_listings = @building.get_listings(nil, 'past', load_more_params)
     respond_to do |format|
-      format.html{ render nothing: true }
+      format.html{
+        redirect_back(fallback_location: building_path(@building))
+      }
       format.js
     end
   end
