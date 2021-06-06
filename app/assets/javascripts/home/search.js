@@ -27,7 +27,7 @@ AutocompleteLI = {
 
   reorderHistory: function(elem){
     var item = JSON.parse(JSON.stringify(elem.dataset));
-    item.search_term = elem.text
+    item.search_term = elem.text;
     this._save_search(item);
   },
 
@@ -49,7 +49,7 @@ AutocompleteLI = {
 
 prev_search_items = [];
 app.apartments = function() {
-  $that = this
+  $that = this;
   $that._input = $('#search_term');
   let prev_searches = JSON.parse(localStorage.getItem('prevSearches'));
   if(prev_searches) {
@@ -65,9 +65,9 @@ app.apartments = function() {
     }
   }
   if($that._input.length > 0){
-    if(!mobile) {
-      $that._initAutocomplete(prev_search_items);
-    }
+    //if(!mobile) {
+    //  $that._initAutocomplete(prev_search_items);
+    //}
     $that._initCatAutocomplete();
   }
 };
