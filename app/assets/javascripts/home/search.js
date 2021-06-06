@@ -65,9 +65,9 @@ app.apartments = function() {
     }
   }
   if($that._input.length > 0){
-    //if(!mobile) {
-    //  $that._initAutocomplete(prev_search_items);
-    //}
+    if(!mobile) {
+      $that._initAutocomplete(prev_search_items);
+    }
     $that._initCatAutocomplete();
   }
 };
