@@ -3,19 +3,19 @@
     - if @imageable.present?
       %div{ style: 'padding: 8px;'}
         %h1.pageTitle{style: 'font-size: 30px;'}
-          = link_to @imageable.property_name_or_address, object_show_path(@imageable), 'data-no-turbolink' => false
+          = link_to @imageable.property_name_or_address, object_show_path(@imageable)
         .address.text-muted
-          = link_to object_show_path(@imageable), 'data-no-turbolink' => false do
+          = link_to object_show_path(@imageable) do
             =  @imageable.full_street_address
             %br/
             = @imageable.neighborhood
 %hr/
 
 - if user_can_drag?
-  %ul#gallery.d-inline{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
+  %ul#gallery.d-lg-inline-flex.d-md-inline-flex.flex-wrap.list-unstyled{'data-imageable-id' => @imageable.id, 'data-imageable-type' => @imageable.class.name}
     = render 'uploads/image_gallery', uploads: @uploads, featured_image: false
 - else
-  %ul.d-inline
+  %ul.d-lg-inline-flex.flex-wrap.list-unstyled.d-md-inline-flex
     - @uploads.each do |upload|
       %li.ui-state-default
         %a{'data-caption' => "#{date_uploaded(upload)}", 'data-fancybox' => 'gallery', 'data-imageable' => "#{imageable(upload)}", href: "#{upload.image.url}", 'data-role' => 'slider'}
