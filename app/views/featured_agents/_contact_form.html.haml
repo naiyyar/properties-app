@@ -1,54 +1,53 @@
 #agent-info
 	.row
-		.col-lg-2.col-xs-4
+		.col-lg-2.col-4
 			=image_tag agent_image(@featured_agent.uploads.first), style: 'width: 100%;height: 100%;'
-		.col-lg-10.col-xs-8
+		.col-lg-10.col-8
 			%p.font-bold.font-18=@featured_agent.full_name
 			%p.font-14=@featured_agent.broker_firm
 			%p.font-14= phone_with_area_code_link(@featured_agent)
 
 	=form_tag contact_agent_featured_agent_path(@featured_agent), class: 'agent-contact-form', id: 'contact-agent-form', authenticity_token: true do
 		.row
-			.col-xs-12.col-sm-12.col-md-12.col-lg-6
+			.col-12.col-sm-12.col-md-12.col-lg-6
 				%label
 				= text_field_tag 'contact[email]', nil,  class: 'form-control', placeholder: 'Email*', autocomplete: 'off', role: 'email'
 
-			.col-xs-12.col-sm-12.col-md-12.col-lg-6
+			.col-12.col-sm-12.col-md-12.col-lg-6
 				%label
 				= text_field_tag 'contact[phone]', nil, class: 'form-control phone_number', placeholder: 'Phone'
 
 		.row
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.col-12.col-sm-12.col-md-12.col-lg-12
 				%label
 				= select_tag 'contact[neighborhoods]', options_for_select(@neighborhoods), class: 'form-control multiselect validate', multiple: true, required: mobile
 		.row
-			.col-xs-12.col-sm-12.col-md-12.col-lg-6
+			.col-12.col-sm-12.col-md-12.col-lg-6
 				%label
 				= select_tag 'contact[bedrooms]', options_for_select(StaticData::BEDROOMS), class: 'validate form-control col-grey cst', prompt: 'Bedrooms*', required: true
 
-			.col-xs-12.col-sm-12.col-md-12.col-lg-6
+			.col-12.col-sm-12.col-md-12.col-lg-6
 				%label
 				= select_tag 'contact[budget]', options_for_select(StaticData::BUDGET), class: 'validate form-control col-grey cst', prompt: 'Budget*', required: true
 		.row
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.col-12.col-sm-12.col-md-12.col-lg-12
 				%label
 				= text_area_tag 'contact[message]', message, class: 'form-control', rows: 7, style: 'color: #777777;'
 		%br
 
 		.row
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
-				%div= submit_tag 'Send Message', class: 'btn btn-blue btn-block font-bold font-14 submit'
+			.col-12.col-sm-12.col-md-12.col-lg-12
+				%div= submit_tag 'Send Message', class: 'btn btn-primary btn-round btn-block font-bold font-14 submit'
 
 		.row
-			.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.col-12.col-sm-12.col-md-12.col-lg-12
 				%p.font-14{style: 'padding: 18px 0px;'} Agents typically charge a commission rate equal to 1 months rent or more for services.
 
 = javascript_include_tag 'mask'
 
 :javascript
-	var non_selected_text = 'Neighborhood Interested In*';
 	$('#contact_neighborhoods.multiselect').multiselect({
-		nonSelectedText: non_selected_text,
+		nonSelectedText: 'Neighborhood Interested In*',
 		buttonWidth: '100%',
 		buttonClass: 'btn-custom-multiselect validate',
 		templates: {
@@ -86,6 +85,9 @@
 
 	});
 
+	// Replacing data-toggle with data-bs-toggle due to bootstrap4-5
+	$('.btn-custom-multiselect.multiselect').removeAttr('data-toggle').attr('data-bs-toggle', 'dropdown');
+
 	$("#contact-agent-form").validate({
 		rules: {
 			'contact[email]': {
@@ -108,7 +110,6 @@
 	$('input[type=submit]').on('click', function(){
 		var nb = $('#contact_neighborhoods').val();
 		var elems = $(this).find('.validate');
-		console.log(elems)
 		var elem;
 		var submit = true;
 		if(nb == '' || nb == null){
@@ -128,7 +129,6 @@
 				}
 			}
 		}
-		console.log(submit)
 		return submit;
 	});
 
@@ -201,7 +201,7 @@
 		white-space: nowrap;
 	}
 	.multiselect-container div.checkbox {
-		padding: 5px 15px 5px 35px;
+		padding: 0px 15px 0px 35px;
 	}
 	.checkbox label {
 		width: 100%;
