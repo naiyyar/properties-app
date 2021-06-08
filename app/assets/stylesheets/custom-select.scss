@@ -47,7 +47,7 @@
 .select i.sort {
     position: absolute;
     top: 8px;
-    right: -2px;
+    right: 6px;
     width: 5px;
     height: 11px;
     background: #fff;
@@ -70,4 +70,10 @@ i:after, .select i:before {
     right: 0;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
+}
+
+@media screen and (max-width: 375px) {
+  .select i.sort {
+    right: 11px;
+  }
 }

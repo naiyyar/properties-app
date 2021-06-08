@@ -131,11 +131,8 @@ app.apartments.prototype = {
             }
           }
         });
-        if(mobile){
-          ui_elem = $('#ui-id-1');
-        }else{
-          ui_elem = $('#ui-id-2');
-        }
+        
+        ui_elem = (mobile ? $('#ui-id-1') : $('#ui-id-2'));
         ui_elem.prepend(LOC_LINK.locationLinkLi('ui-autocomplete-group'));
       },
 
@@ -167,11 +164,16 @@ app.apartments.prototype = {
       select: $.proxy(this._select, this),
       open: $.proxy(this._open, this),
       search: $.proxy(this._search, this),
-      close: $.proxy(this._close, this)
+      close: $.proxy(this._close, this),
+      focus: $.proxy(this._focus, this),
     });
   },
 
   _search: function(e, ui){ },
+
+  _focus: function(e, ui){
+    // e.relatedTarget.style.background = 'grey';
+  },
 
   _open: function(event, ui) {
     var history_ui      = $('#ui-id-1');

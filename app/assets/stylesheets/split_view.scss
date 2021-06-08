@@ -163,21 +163,17 @@ a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
   }
-  #mapView.min, #mapView.mob-min {
-      width: 0%;
-  }
-  #content.min, #mapViewSearch.mob-min {
-      width: 0%;
-  }
-  #mapViewSearch.max, #content.mob-max {
-      width: 100%;
-  }
-  #mapView.mob-max, #mapViewSearch.mob-max {
-      width: 100%;
-  }
+  #mapView.min, #mapView.mob-min, 
+  #content.min, #mapViewSearch.mob-min,
   #content.mob-min {
       width: 0%;
   }
+   
+  #mapViewSearch.max, #content.mob-max, 
+  #mapView.mob-max, #mapViewSearch.mob-max {
+      width: 100%;
+  }
+   
   #mapView.mob-min .mapPlaceholder, #mapViewSearch.mob-min .mapPlaceholder {
       display: none;
   }
