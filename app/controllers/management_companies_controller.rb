@@ -23,7 +23,7 @@ class ManagementCompaniesController < ApplicationController
     elsif params[:active_email].present?
       @buildings.update_all(active_email: params[:active_email])
     elsif params[:schedule_tour_active].present?
-      @buildings.update_all(schedule_tour_active: params[:schedule_tour])
+      @buildings.update_all(schedule_tour_active: params[:schedule_tour_active])
     end
     @management_company.update_column('updated_at', Time.zone.now)
     render json: { success: true }
