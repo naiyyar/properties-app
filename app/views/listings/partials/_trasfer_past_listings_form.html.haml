@@ -8,14 +8,17 @@
         = form_tag transfer_listings_path, class: 'form-horizontal' do
           %fieldset
             .row
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+              .col-6.col-sm-6.col-md-6.col-lg-6
                 %label Date From
                 = text_field_tag :date_from, Date.today,  class: 'form-control datepicker validate', :autocomplete => :off
 
-              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+              .col-6.col-sm-6.col-md-6.col-lg-6
                 %label Date To
                 = text_field_tag :date_to, nil, class: 'form-control datepicker', :autocomplete => :off
           
-          %footer
-            = link_to 'Cancel', '#', class: 'btn btn-default', 'data-bs-dismiss' => 'modal'
-            = button_tag 'Transfer', class: 'btn btn-blue', controller: 'listings', action: 'export'
+          .row.mb-3.me-3
+            .col-12.col-lg-12
+              .form-group
+                .float-end
+                  = link_to 'Cancel', '#', class: 'btn btn-default', 'data-bs-dismiss' => 'modal'
+                  = button_tag 'Transfer', class: 'btn btn-blue', controller: 'listings', action: 'export'

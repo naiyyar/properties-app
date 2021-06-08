@@ -21,6 +21,8 @@ class Listing < ApplicationRecord
     rent_stabilize: 'Rent Stabilized'
   }.freeze
 
+  EXPORT_FORMATS = %w(xlsx csv)
+
   # When max_price > 15500 then using MAX_RENT
   # Assuming Listing rent can not be more than 10_00_000
   MAX_RENT = 10_00_000
