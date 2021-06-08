@@ -1,5 +1,5 @@
 - if @count % 2 == 0
-  .col-xs-12.col-sm-12.col-md-6.col-lg-6
+  .col-12.col-sm-12.col-md-6.col-lg-6
     .article
       %a.image{href: "#{buttercms_post_path(post.slug)}"}
         .bg-size-cover{style: "background-image: url('#{post.featured_image}')"}
@@ -14,7 +14,7 @@
           = "#{post.author.first_name} #{post.author.last_name}, " if post.author.present? and post.author.first_name.present?
           = Time.parse(post.published).strftime('%B %d, %Y')
 - elsif @count % 2 == 1
-  .col-xs-12.col-sm-12.col-md-6.col-lg-6
+  .col-12.col-sm-12.col-md-6.col-lg-6
     .article
       %a.image{href: buttercms_post_path(post.slug) }
         - if post.featured_image

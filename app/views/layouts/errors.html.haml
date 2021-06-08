@@ -13,8 +13,8 @@
       font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
 
   %body{style: 'background-color: #fff !important;', class: 'no-hidden no-touch' }
-    =render partial: 'layouts/home/header'
-    =render partial: 'layouts/shared/left_side'
+    = render 'layouts/home/header'
+    = render 'layouts/shared/left_side'
     = yield
     %br
     = render 'layouts/home/footer'

@@ -17,9 +17,8 @@
     </div>  
   </div>
 
-  <h2></h2>
-  <div class="row">
-    <div class="col-lg-12">
+  <div class="row mt-5">
+    <div class="col-12 col-lg-12">
       <% VideoTour::CATEGORIES.each do |category| %>
         <% index = 0 %>
         <% video_tours = @video_tours.where(category: category[1]) %>

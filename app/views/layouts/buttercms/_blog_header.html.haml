@@ -1,5 +1,5 @@
 .row
-  .col-lg-12.col-sm-12.col-xs-12
+  .col-lg-12.col-sm-12.col-12
     #blog-header-section.text-center
       %p= @post_categories.first.try(:name)
       %h1= @post.title if @post.title.present?

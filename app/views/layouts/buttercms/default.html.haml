@@ -22,9 +22,9 @@
     .blog-content{class: action_name}
       .home-wrapper
         .row
-          .col-xs-12.col-sm-12.col-md-9.col-lg-9
+          .col-12.col-sm-12.col-md-9.col-lg-9
             = yield
-          = render partial: 'buttercms/posts/category_panel'
+          = render 'buttercms/posts/category_panel'
     = render 'layouts/home/footer'
     %script{src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bb8502a693bfcd8', type: 'text/javascript'}
 

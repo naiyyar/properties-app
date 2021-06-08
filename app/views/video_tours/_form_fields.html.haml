@@ -8,42 +8,36 @@
     
     .row
       - if !video_tour.new_record?
-        .col-lg-1
+        .col-2.col-lg-1
           %label Sort
           = f.text_field :sort, id: "video_tour_sort_#{cat}", class: 'form-control video_tour_sort'
       
-      .col-lg-2
+      .col-10.col-lg-2.mb-3
         %label Description
         = f.text_field :description, class: 'form-control', id: "video_tour_description_#{cat}"
-      
-      %div{style: 'width: 20px;'}
 
-      .col-lg-3
+      .col-6.col-lg-3.mb-3
         %label Url*
         = f.text_field :url, class: 'form-control validate', id: "video_tour_url_#{cat}", required: true
-      
-      %div{style: 'width: 20px;'}
 
-      .col-lg-2
+      .col-6.col-lg-2.mb-3
         %label Placeholder Image
         = f.file_field :image, class: 'form-control', id: "video_tour_image_#{cat}"
-      
-      %div{style: 'width: 20px;'}
 
-      %div.visible-xs
+      %div.d-block.d-lg-none.d-md-none
         %br
       
-      .col-lg-1.col-xs-4
+      .col-lg-1.col-3
         %label.invisible.d-none.d-md-block AddAdd*
         = f.submit 'Add', class: 'btn btn-success btn-sm'
       
-      .col-lg-2.col-xs-4
+      .col-lg-2.col-6
         .video-preview
           - unless video_tour.image.present?
             %iframe{src: video_tour.new_record? ? '' : video_tour.url, style: 'height: 100%;width: 100%;border: none;', id: "video-preview-#{cat}"}
           - else
             =image_tag video_tour.image.url, style: 'height: 100%;width: 100%;border: none;'
 
-      .col-lg-1.col-xs-4{style: 'height: 80px;'}
+      .col-lg-1.col-3{style: 'height: 80px;'}
         .text-center.vertically-middle{id: "remove-fields-#{cat}"}
-          =render 'delete_link', video_tour: video_tour
+          = render 'delete_link', video_tour: video_tour

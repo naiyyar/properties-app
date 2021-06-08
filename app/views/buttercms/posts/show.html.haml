@@ -1,10 +1,10 @@
 = content_for :html_title, @post.seo_title
 = content_for :meta_description, @post.meta_description
 
-.d-none.d-lg-block.d-md-block= render partial: 'buttercms/authors/author'
+.d-none.d-lg-block.d-md-block= render 'buttercms/authors/author'
 
 .post-content
-  .d-block.d-lg-none.d-md-none= render partial: 'buttercms/authors/author'
+  .d-block.d-lg-none.d-md-none= render 'buttercms/authors/author'
   %p= @post.body.html_safe
 
 .f-pn-articles
@@ -27,7 +27,7 @@
   .row.pb20
     - @related_posts.each do |post|
       - if post.slug != @post.slug and @post.categories.map(&:name) == post.categories.map(&:name)
-        .col-xs-12.col-sm-4.col-md-4.col-lg-4
+        .col-12.col-sm-4.col-md-4.col-lg-4
           .article.bg-w
             %a.image{href: buttercms_post_path(post.slug)}
               - if post.featured_image
