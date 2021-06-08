@@ -16,7 +16,6 @@
 //= require jquery.bstransitions
 //= require jquery-placeholder
 //= require jquery.slimscroll.min
-//= require jquery.tagsinput.min
 //= require underscore
 //= require bootstrap-datepicker
 //= require jquery.validate
