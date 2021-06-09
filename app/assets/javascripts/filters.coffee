@@ -21,9 +21,12 @@ jQuery ->
 	#Clear filters
 	$(document).on 'click', '.clearFilter', (e) ->
 		e.preventDefault
-		$('.filterForm input[type=checkbox]').not(":disabled").attr('checked', false)
-		$('.filterForm input[type=radio]').not(":disabled").attr('checked', false)
 		initSlider()
+		resetListingBed()
+		resetListingPrice()
+		resetAmenities()
+		resetBuildingBed()
+		resetBuildingPrice()
 
 	#when building_bed checkbox checked and then listing_bed is selected then mark building_beds to false
 	$(document).on 'click', '.listing_bed_filter', (e) ->
@@ -62,19 +65,23 @@ jQuery ->
 
 	resetBuildingBed=->
 		if $('.building_bed_filter:checked').length > 0
-			$('.building_bed_filter').prop('checked', false)
+			$('.building_bed_filter').not(":disabled").prop('checked', false)
 
 	resetBuildingPrice=->
 		if $('.building_price_filter:checked').length > 0
-			$('.building_price_filter').prop('checked', false)
+			$('.building_price_filter').not(":disabled").prop('checked', false)
 
 	resetListingPrice=->
 		if $('.listing_price_filter:checked').length > 0
-			$('.listing_price_filter').prop('checked', false)
+			$('.listing_price_filter').not(":disabled").prop('checked', false)
 
 	resetListingBed=->
 		if $('.listing_bed_filter:checked').length > 0
-			$('.listing_bed_filter').prop('checked', false)
+			$('.listing_bed_filter').not(":disabled").prop('checked', false)
+
+	resetAmenities=->
+		if $('.filterForm .amenity:checked').length > 0
+			$('.filterForm .amenity').not(":disabled").prop('checked', false)
 	
 	initSlider=->
 		$('.priceSlider').slider

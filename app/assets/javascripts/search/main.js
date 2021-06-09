@@ -1,11 +1,11 @@
 //= require jquery-ui/widgets/slider
 //= require jquery-ui/widgets/menu
+//= require jquery-ui-touch-punch
 //= require underscore
 //= require jquery.touchSwipe.min
 //= require jquery.slimscroll.min
 //= require jquery.add_kml
 //= require jquery.fancybox
-//= require filters
 //= require gmap
 //= require back_to_scroll_position
 //= require infobubble
@@ -13,6 +13,7 @@
 //= require dropdown_buttons
 //= require jquery.validate
 //= require price_slider
+//= require filters
 //= require home
 //= require search_modal
 //= require featured_listings

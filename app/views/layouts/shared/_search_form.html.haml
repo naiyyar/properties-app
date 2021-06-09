@@ -14,7 +14,7 @@
   
   - if show_filters?
     .btn-filter.btn-dp-toggle.float-end.me-2.mt-1
-      %button.no-caret{class: "btn sc-lg btn-o btn-primary btn-round dropdown-toggle handleFilter #{params[:filter].present? ? 'active' : ''}", 'data-bs-toggle' => 'dropdown'}
+      %button.no-caret{class: "btn sc-lg btn-o btn-primary btn-round handleFilter #{params[:filter].present? ? 'active' : ''}"}
         %span.dropdown-label
           %span.fa.fa-filter 
           Filter
