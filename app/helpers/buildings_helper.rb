@@ -10,6 +10,10 @@ module BuildingsHelper
 		]
 	end
 
+	# Using in image tag's alt attribute
+	def name_with_address building
+	end
+
 	def imageable upload
 		if upload.imageable.present?
 			if upload.imageable_type == 'Building'

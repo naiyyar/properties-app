@@ -262,6 +262,10 @@ class Building < ApplicationRecord
     neighbohoods
   end
 
+  def name_with_address
+    "#{name} #{street_address}"
+  end
+
   def name
     self.building_name
   end

@@ -80,6 +80,10 @@ class FeaturedListing < ApplicationRecord
 
   alias_method :full_street_address, :full_address
 
+  def name_with_address
+    street_address
+  end
+
   def street_address
     address
   end
