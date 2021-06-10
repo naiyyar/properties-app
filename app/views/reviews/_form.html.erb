@@ -118,7 +118,7 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 		</div>
 	</div>
 	<div class="col-sm-12 tos-agreement" style="margin-top: 15px;">
-	  <div class="form-group">
+	  <div class="form-group" style="margin: 0px; padding: 10px 0px;">
 	    <div class="checkbox custom-checkbox">
 	    	<label>
 	    		<%= f.check_box :tos_agreement, {}, true, false %> <span class="fa fa-check"></span>I agree to the transparentcity <a href='https://www.transparentcity.co/terms_of_service' target='_blank' class="tos-link">Terms of Service. </a> This review is truthful.*
@@ -127,7 +127,7 @@ Water Pressure never works, Elevators are too slow, Walls are too thin and I hea
 		</div>
 	</div>
 	
-	<div class="footer">
+	<div class="row mb-4">
 	  <div class="col-sm-12">
 	  	<div class="btn-block-container">
 			  <% if current_user %>

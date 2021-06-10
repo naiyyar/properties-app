@@ -1,21 +1,20 @@
 .row
-  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+  .col-12.col-sm-12.col-md-12.col-lg-12
     .float-start
       %h2= "Total reviews: #{@reviews.count}"
     .float-end
-      - if current_user and current_user.has_role?(:admin)
+      - if current_user&.has_role?(:admin)
         = link_to 'Import excel', '#importReviews', class: 'btn btn-blue float-end', 'data-bs-toggle' => 'modal'
         = render 'reviews/import_reviews_form', import_path: import_buildings_path
       = link_to 'Destroy scraped reviews', destroy_scraped_reviews_reviews_path, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
        
 .row
-  .float-end
-    = form_for_filterrific @filterrific do |f|
-      .form-field
-        = f.text_field :search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search'
-  
-  %h2
+  .col-12.col-sm-12.col-md-12.col-lg-12
+    .float-end= render 'layouts/shared/filterrific_form'
   
   = render 'reviews/property_reviews', reviews: @reviews
   
-  .text-center= will_paginate @reviews, renderer: BootstrapPagination::Rails
+  .row.mt-5
+    .col-12.col-sm-12.col-md-12.col-lg-12
+      .text-center
+        = render 'layouts/shared/add_pagination', objects: @reviews

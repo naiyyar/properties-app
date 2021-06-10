@@ -3,29 +3,29 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!,    :except => [:new, :index, :create]
   after_action :update_reviewable_info, only: :create
   after_action :clear_cache,            only: [:create, :destroy]
+
+  include Searchable
   
   # from production
   def index
-    @filterrific = initialize_filterrific(
-      Review,
-      params[:filterrific],
-      available_filters: [:search_query]
-    ) or return
-    @reviews = @filterrific.find
-                           .paginate(:page => params[:page], :per_page => 100)
-                           .order('created_at desc').includes(:reviewable, :user)
-
+    @reviews = filterrific_search_results.where(reviewable_type: 'Building')
+                                         .paginate(:page => params[:page], :per_page => 100)
+                                         .includes(:reviewable, :user)
+    
     if params[:building_id].present?
-      @reviews =  @reviews.where(reviewable_id: params[:building_id])
-    elsif params[:unit_id].present?
-      @reviews =  @reviews.where(reviewable_id: params[:unit_id])
+      @reviews = @reviews.where(reviewable_id: params[:building_id])
     end
   end
 
   def destroy_scraped_reviews
-    Review.where(scraped: true).destroy_all
+    if current_user.admin?
+      Review.where(scraped: true).destroy_all
+      flash[:notice] = 'Destroyed successfully'
+    else
+      flash[:error] = 'You are not authorize to delete reviews.'
+    end
 
-    redirect_to request.referer, notice: 'Destroyed successfully'
+    redirect_to request.referer
   end
 
   def show

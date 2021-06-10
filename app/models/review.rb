@@ -77,23 +77,18 @@ class Review < ApplicationRecord
   end
 
   def property_name
-    if reviewable_object.kind_of? Building
-      reviewable_object.name ? reviewable_object.name : reviewable_object.building_street_address
-    elsif reviewable_object.kind_of? Unit
-      reviewable_object.name
-    end
-  end
-
-  def reviewable_object
-    self.reviewable
+    return if reviewable_object.blank?
+    return reviewable_object.building_street_address unless reviewable_object.name
+    reviewable_object.name
   end
 
   def property_address
-    if reviewable_object.kind_of? Building
-      "#{reviewable_object.street_address} #{reviewable_object.zipcode}"
-    elsif reviewable_object.kind_of? Unit
-      "#{reviewable_object.building.street_address} #{reviewable_object.building.zipcode}"
-    end
+    return if reviewable_object.blank?
+    "#{reviewable_object.street_address} #{reviewable_object.zipcode}"
+  end
+
+  def reviewable_object
+    @reviewable_object ||= self.reviewable
   end
 
   def set_votes vote, current_user, reviewable
