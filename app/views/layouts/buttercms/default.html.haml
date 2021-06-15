@@ -27,9 +27,7 @@
           = render 'buttercms/posts/category_panel'
     = render 'layouts/home/footer'
     %script{src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bb8502a693bfcd8', type: 'text/javascript'}
-
-    %script{async: '', src: "https://www.googletagmanager.com/gtag/js?id=#{ENV['GOOGLE_TRACKING_ID']}"}
-
+    / = render 'layouts/shared/gtag_script'
     :javascript
       $('.post-content p a').attr('target', '_blank');
 
@@ -37,9 +35,3 @@
         e.preventDefault();
         window.location.href = '/blog';
       })
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', "#{ENV['GOOGLE_TRACKING_ID']}");

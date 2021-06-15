@@ -4,9 +4,9 @@ module Buildings
 		FEATURED_AGENT_THUMBNAIL_POS = 4
 
 		def with_featured_buildings buildings, featured_listings=nil, agent=nil
-	    final_results      = {all_buildings: nil, map_hash: nil}
+	    final_results = { all_buildings: nil, map_hash: nil }
 	    per_page_buildings = non_featured(buildings).paginate(:page => page_num, :per_page => PER_PAGE)
-	    all_buildings      = buildings_with_featured_on_top(top2_featured(buildings), per_page_buildings)
+	    all_buildings = buildings_with_featured_on_top(top2_featured(buildings), per_page_buildings)
 	    
 	    buildings = top2_featured(buildings) + non_featured(buildings) if top2_featured(buildings).present?
 	    # when there are only top two featured buildings after filter
@@ -66,15 +66,15 @@ module Buildings
 	  end
 
 	  def top2_featured_buildings buildings
-	    fb_ids = featured_building_ids(buildings.pluck(:id))
-	    return [] if fb_ids.blank?
-	    buildings.random(fb_ids.shuffle[0..1])
+	  	@buildings = buildings
+	    return [] if featured_building_ids.blank?
+	    buildings.random(featured_building_ids.shuffle[0..1])
 	  end
 
-	  def featured_building_ids ids
-	    FeaturedBuilding.active
-	    								.where(building_id: ids)
-	    								.pluck(:building_id)
+	  def featured_building_ids
+	    @featured_building_ids ||= FeaturedBuilding.active
+	    																					 .where(building_id: @buildings.pluck(:id))
+	    																					 .pluck(:building_id)
 	  end
   end
 end

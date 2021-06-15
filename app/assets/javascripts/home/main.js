@@ -1,4 +1,3 @@
-//= require jquery-ui-touch-punch
 //= require lightslider
 //= require slick.min
 //= require location

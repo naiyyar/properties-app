@@ -5,7 +5,6 @@
 //= require jquery.touchSwipe.min
 //= require jquery.slimscroll.min
 //= require jquery.add_kml
-//= require jquery.fancybox
 //= require gmap
 //= require back_to_scroll_position
 //= require infobubble
@@ -15,8 +14,6 @@
 //= require price_slider
 //= require filters
 //= require home
-//= require search_modal
-//= require featured_listings
 //= require ./slide_header_on_scroll
 //= require ./redo_button
 //= require ./map

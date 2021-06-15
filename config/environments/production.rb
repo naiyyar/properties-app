@@ -21,6 +21,10 @@ Rails.application.configure do
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.headers = {
+    'Cache-Control' => 'public, s-maxage=31536000, max-age=15552000',
+    'Expires' => "#{1.year.from_now.to_formatted_s(:rfc822)}"
+  }
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(:harmony => true)
@@ -47,7 +51,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  # config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -102,7 +106,8 @@ Rails.application.configure do
       access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
       secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
       s3_region: ENV.fetch('AWS_REGION'),
-    }
+    },
+    s3_headers: { 'Cache-Control' => 'public, max-age=15552000, immutable' }
   }
 
   config.action_mailer.default_url_options = { host: ENV['SERVER_ROOT'] }
@@ -132,10 +137,4 @@ Rails.application.configure do
                         :failover => true,
                         :socket_timeout => 1.5,
                         :socket_failure_delay => 0.2 }]
-  
-  config.public_file_server.enabled = true
-  config.public_file_server.headers = {
-    'Cache-Control' => 'public, s-maxage=31536000, max-age=15552000',
-    'Expires' => "#{1.year.from_now.to_formatted_s(:rfc822)}"
-  }
 end

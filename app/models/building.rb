@@ -104,7 +104,7 @@ class Building < ApplicationRecord
   scope :with_application_link, -> { where('show_application_link is true AND online_application_link is not null') }
   scope :with_schedule_tour, -> { where('schedule_tour_active is true AND schedule_tour_url is not null') }
   scope :with_pets, -> { where('pets_allowed_cats is true OR pets_allowed_dogs is true') }
-
+  
   scope :random, -> (ids) { where(id: ids) }
   
   # popular searches

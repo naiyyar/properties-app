@@ -1,16 +1,13 @@
 module SplitViewFeaturedCard
   def get_random_objects nb, searched_by, limit: 1
-    return random_objects_with_neighborhood(nb) unless searched_by == 'nyc'
-    random_objects.limit(limit)
+    return [] unless self.active.exists?
+    records = self.active.reorder(Arel.sql('random()'))
+    records = records.where(neighborhood: neighborhood(nb)) unless searched_by == 'nyc'
+    return records.limit(limit)
   end
 
-  def random_objects_with_neighborhood nb
-    random_objects.where(neighborhood: neighborhood(nb))
-  end
 
-  def random_objects
-    self.active.reorder(Arel.sql('random()'))
-  end
+  private
 
   def neighborhood nb
     if ['Lincoln Square', 'Manhattan Valley'].include?(nb)

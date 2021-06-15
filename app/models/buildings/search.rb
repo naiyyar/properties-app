@@ -53,7 +53,7 @@ module Buildings
 				buildings, @results[:filters] = Building.buildings_by_popular_search(@search_term, @buildings)
 				@results[:zoom] = 12
 			else
-				buildings 			= self.search_by_city_or_nb
+				buildings = self.search_by_city_or_nb
 				@results[:zoom] = 12
 			end
 			
@@ -61,7 +61,7 @@ module Buildings
 		end
 
 		def search_by_city_or_nb
-			@buildings.cached_buildings_by_city_or_nb(@search_string, sub_borough)
+			@buildings.buildings_by_city_or_nb(@search_string, sub_borough)
 		end
 
 		private

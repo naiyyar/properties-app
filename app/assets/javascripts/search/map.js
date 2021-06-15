@@ -265,20 +265,21 @@ SearchMapObject = {
   }
 }; // SearchMapObject
 
-var ready = function(){
-  if($("#mapViewSearch").length > 0){
-    SearchMapObject.initializeMap();
+//var ready = function(){
+if($("#mapViewSearch").length > 0){
+  SearchMapObject.initializeMap();
 
+  setTimeout(function() {
+    if(map){
+      SearchMapObject.setMapCenter(map);
+      SearchMapObject.setMapzoom(map)
+    }
+  }, 400);
+
+  // Displaying property and agent image on search view card
+  var cards = $('.searched-properties .search-view-card');
+  if(cards.length > 0){
     setTimeout(function() {
-      if(map){
-        SearchMapObject.setMapCenter(map);
-        SearchMapObject.setMapzoom(map)
-      }
-    }, 400);
-
-    // Displaying property and agent image on search view card
-    var cards = $('.searched-properties .search-view-card');
-    if(cards.length > 0){
       cards.each(function(i, j){
         var agentid = $(j).data('agentid');
         if(agentid){
@@ -287,9 +288,10 @@ var ready = function(){
           Card.loadDisplayImageAndCTALinks($(j));
         }
       });
-    }
-  }; // if
-}; // ready
+    }, 2000);
+  }
+}; // if
+//}; // ready
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+//$(document).ready(ready);
+//$(document).on('page:load', ready);

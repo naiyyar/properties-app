@@ -37,10 +37,6 @@ class Neighborhood < ApplicationRecord
                     ).fetch
   end
 
-  def self.cached_nb_buildings_count name
-    nb_buildings_count(name)
-  end
-
   def self.pop_neighborhoods
     self.select(:id, :name, :buildings_count)
   end

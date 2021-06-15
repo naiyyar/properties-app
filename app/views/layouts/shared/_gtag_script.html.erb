@@ -1,0 +1,14 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script> 
+  function deferGoogleJS() { 
+    var d = document.createElement("script"); 
+    d.src = "https://www.googletagmanager.com/gtag/js?id=<%=ENV['GOOGLE_TRACKING_ID']%>", 
+    document.body.appendChild(d) 
+  } 
+  window.addEventListener ? window.addEventListener("load", deferGoogleJS, !1) : window.attachEvent ? window.attachEvent("onload", deferGoogleJS) : window.onload = deferGoogleJS; 
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() { dataLayer.push(arguments); } 
+  gtag('js', new Date()); 
+  gtag('config', "<%=ENV['GOOGLE_TRACKING_ID']%>");
+</script>

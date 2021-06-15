@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: false %>
+    <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: Rails.env.production? %>
     <%= layout_stylesheet_link 'split_view/main' %>
+    <%= javascript_include_tag 'home/main', defer: true %>
+    <%= javascript_include_tag 'search/main', defer: true %>
+    <%= javascript_include_tag 'zapp', defer: true %>
   </head>
   
   <body class="notransition no-hidden" >
@@ -15,10 +18,6 @@
     <div id="remote-container"></div>
     <div id="auth-form"></div>
     
-    <%= javascript_include_tag 'home/main'%>
-    <%= javascript_include_tag 'search/main'%>
-    <%= javascript_include_tag 'zapp'%>
-
     <% if listings_filters.present? %>
       <%= hidden_field_tag :list_amenities, listings_filters[:amenities] %>
       <%= hidden_field_tag :list_bedrooms,  listings_filters[:listing_bedrooms] %>
@@ -27,24 +26,19 @@
         <%= hidden_field_tag :list_max_price, listings_filters[:max_price] %>
       <%end%>
     <%end%>
-
-    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js'></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">
     
-    <script defer src='<%=gmap_url_helper%>'></script>
+    <script src='<%=gmap_url_helper%>'></script>
 
     <script type="text/javascript">
-      $(function(){ new app.apartments; })
+      document.addEventListener('DOMContentLoaded', function() {
+        new app.apartments; 
+      }, false);
     </script>
+
+    <script defer type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['GOOGLE_TRACKING_ID']%>"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', "<%=ENV['GOOGLE_TRACKING_ID']%>");
-    </script>
+    <%= render 'layouts/shared/gtag_script' %>
   </body>
 </html>

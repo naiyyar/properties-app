@@ -33,7 +33,7 @@ module Search
       where('zipcode = ?', term)
     end
 
-    def cached_buildings_by_city_or_nb term, sub_borough
+    def buildings_by_city_or_nb term, sub_borough
       where('city = ? OR neighborhood in (?)', term, sub_borough)
     end
 
@@ -77,7 +77,7 @@ module Search
     end
 
     def city_count buildings, city, sub_boroughs = nil
-     CacheService.new( records: buildings.cached_buildings_by_city_or_nb(city, sub_boroughs).size,
+     CacheService.new( records: buildings.buildings_by_city_or_nb(city, sub_boroughs).size,
                         key: "city_count_#{city}"
                       ).fetch
     end
