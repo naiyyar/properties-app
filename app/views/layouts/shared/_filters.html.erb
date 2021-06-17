@@ -1,6 +1,5 @@
 <% if params[:searched_by].present? %>
   <div class="filter" style="display: none;">
-    <div class="clearfix"></div>
     <form action="/<%=params[:searched_by]%>/<%=params[:search_term]%>" class="filterForm">
       <div class="text-end header d-block d-lg-none d-md-none" style="padding: 4px; cursor: pointer;">
         <%= link_to '<span class="fa fa-times fa-3x"></span>'.html_safe, '#', class: 'closeFilter' %>
@@ -13,52 +12,49 @@
         <!-- Listing Price -->
         <div class="row">
           <div class="col-12 col-md-12 col-lg-12 formItem">
-            <div class="formField">
-              <div class="volume">
-                <div class="col-12 col-md-12 col-lg-12">
-                  <label><b>Listing Price</b></label>
-                  <!-- price slider -->
-                  <div class="slider-filter-container">
-                    <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_price_filter" name="filter[listings][price][]" id="listings_price_box" <%= listing_price_box_checked %> ><span class="fa fa-check"></span> </label></div>
-                    <div class="slider priceSlider">
-                      <div class="sliderTooltip">
-                        <div class="stArrow"></div>
-                        <div class="stLabel"></div>
-                      </div>
+            <!-- <div class="formField"> -->
+              <!-- <div class="volume"> -->
+              <div class="col-12 col-md-12 col-lg-12">
+                <label class="font-bold">Listing Price</label>
+                <!-- price slider -->
+                <div class="slider-filter-container">
+                  <div class="checkbox custom-checkbox"><label><input type="checkbox" class="listing_price_filter" name="filter[listings][price][]" id="listings_price_box" <%= listing_price_box_checked %> ><span class="fa fa-check"></span> </label></div>
+                  <div class="slider priceSlider">
+                    <div class="sliderTooltip">
+                      <div class="stArrow"></div>
+                      <div class="stLabel"></div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <!-- </div> -->
+            <!-- </div> -->
           </div>
           
-          <div class='row'>
-            <div class="col-12 col-md-12 col-lg-12 formItem" style='padding-bottom: 14px;'></div>
-          </div>
           <!-- Listing Bedrooms -->
-          <div class="col-12 col-md-12 col-lg-12 formItem" style="padding-right: 0px;">
-            <div class="formField">
-              <div class="volume">
-                <div class="col-md-12 col-lg-12">
-                  <label><b>Listing Bedrooms</b></label>
-                  <% Listing::BEDROOMS.map do |beds| %>
-                    <% val, text  = beds[0], beds[1] %>
-                    <div class="ck-button">
-                      <label>
-                        <input type="checkbox" class="listing_bed_filter" name="filter[listings][listing_bedrooms][]" value="<%=val%>" id="listings_<%=val%>beds" <%= listing_bed_checked(val) %> > <span><%=text%></span>
-                      </label>
-                    </div>
-                  <%end%>
+          <div class="col-12 col-md-12 col-lg-12 formItem mt-3" style="padding-right: 0px;">
+            <!-- <div class="formField"> -->
+              <!-- <div class="volume"> -->
+            <div class="col-md-12 col-lg-12">
+              <label class="font-bold">Listing Bedrooms</label>
+              <% Listing::BEDROOMS.map do |beds| %>
+                <% val, text = beds[0], beds[1] %>
+                <div class="ck-button">
+                  <label>
+                    <input type="checkbox" class="listing_bed_filter" name="filter[listings][listing_bedrooms][]" value="<%=val%>" id="listings_<%=val%>beds" <%= listing_bed_checked(val) %> > <span><%=text%></span>
+                  </label>
                 </div>
-              </div>
+              <%end%>
             </div>
+              <!-- </div> -->
+            <!-- </div> -->
           </div>
           <!-- Popular Amenities -->
-          <div class="col-6 col-md-6 col-lg-6 formItem">
-            <div class="formField">
-              <div class="volume">
+          <div class="col-6 col-md-6 col-lg-6 formItem mt-3">
+            <!-- <div class="formField"> -->
+              <!-- <div class="volume"> -->
                 <div class="col-md-12 col-lg-12">
-                  <label><b>Popular Amenities</b></label>
+                  <label class="font-bold">Popular Amenities</label>
                   <% BuildingAmenities.col1_popular_building_amenities.each_pair do |k, v| %>
                     <div class="checkbox custom-checkbox">
                       <label>
@@ -67,15 +63,15 @@
                     </div>
                   <%end%>                  
                 </div>
-              </div>
-            </div>
+              <!-- </div> -->
+            <!-- </div> -->
           </div>
 
           <div class="col-6 col-md-6 col-lg-6 formItem">
-            <div class="formField">
-              <div class="volume">
+            <!-- <div class="formField"> -->
+              <!-- <div class="volume"> -->
                 <div class="col-md-12 col-lg-12">
-                  <label class='invisible'><b>Popular Amenities</b></label>
+                  <label class="font-bold invisible">Popular Amenities</label>
                   <% BuildingAmenities.col2_popular_building_amenities.each_pair do |k, v| %>
                     <div class="checkbox custom-checkbox <%= v == 'Courtyard' ? 'invisible' : '' %>">
                       <label>
@@ -84,17 +80,17 @@
                     </div>
                   <%end%>                         
                 </div>
-              </div>
-            </div>
+              <!-- </div> -->
+            <!-- </div> -->
           </div>
           
-          <div class="col-12 col-md-12 col-lg-12 formItem"><div class="divider"></div></div>
+          <div class="divider mb-3 mt-2"></div>
 
           <div class="col-6 col-md-6 col-lg-6 formItem">
-            <div class="formField">
-              <div class="volume">
+            <!-- <div class="formField"> -->
+              <!-- <div class="volume"> -->
                 <div class="col-md-12 col-lg-12">
-                  <label><b>Other Amenities</b></label>
+                  <label class="font-bold">Other Amenities</label>
                   <% BuildingAmenities.other_building_amenities.each_pair do |k, v| %>
                     <div class="checkbox custom-checkbox">
                       <label>
@@ -103,16 +99,16 @@
                     </div>
                   <%end%>
                 </div>
-              </div>
-            </div>
+              <!-- </div> -->
+            <!-- </div> -->
           </div>
 
           <!-- Listing Amenities -->
           <div class="col-6 col-md-6 col-lg-6 formItem">
-            <div class="formField">
-              <div class="volume">
+            <!-- <div class="formField"> -->
+              <!-- <div class="volume"> -->
                 <div class="col-md-12 col-lg-12">
-                  <label><b>Listing Amenities</b></label>
+                  <label class="font-bold">Listing Amenities</label>
                   <% Listing::AMENITIES.each_pair do |k, v| %>
                     <div class="checkbox custom-checkbox">
                       <label>
@@ -121,42 +117,40 @@
                     </div>
                   <%end%>                         
                 </div>
-              </div>
-            </div>
+              <!-- </div> -->
+            <!-- </div> -->
           </div>
 
-          <div class="col-12 col-md-12 col-lg-12 formItem"></div>
-
           <!-- Bedrooms -->
-          <div class="col-6 col-md-6 col-lg-6 formItem">
-            <div class="formField">
-              <div class="volume">
+          <div class="col-6 col-md-6 col-lg-6 formItem mt-3">
+            <!-- <div class="formField"> -->
+              <!-- <div class="volume"> -->
                 <div class="col-md-12 col-lg-12">
-                  <label><b>Building Bedrooms</b></label>
+                  <label class="font-bold">Building Bedrooms</label>
                   <% Building::BEDROOMS.map do |beds| %>
-                    <% val, text  = beds[0], beds[1] %>
+                    <% val, text = beds[0], beds[1] %>
                     <div class="checkbox custom-checkbox">
                       <label><input type="checkbox" class="building_bed_filter" name="filter[bedrooms][]" value="<%=val%>" id="beds_<%=val%>" <%= bed_checked(val) %> <%=bed_locked?(val)%>><span class="fa fa-check"></span> <%=text%></label>
                     </div>
                   <%end%>
                 </div>
-              </div>
-            </div>
+              <!-- </div> -->
+            <!-- </div> -->
           </div>
 
-          <div class="col-6 col-md-4 col-lg-4 formItem">
-            <div class="formField">
-              <div class="volume">
+          <div class="col-6 col-md-4 col-lg-4 formItem mt-3">
+            <!-- <div class="formField"> -->
+              <!-- <div class="volume"> -->
                 <div class="col-md-12 col-lg-12">
                   <!-- prices_options: in buildings_helper -->
-                  <label><b>Building Price Range</b></label>
+                  <label class="font-bold">Building Price Range</label>
                   <% prices_options.map do |obj| %>
                     <div class="checkbox custom-checkbox"><label><input type="checkbox" class="building_price_filter" name="filter[price][]" value="<%=obj[1]%>" id="<%=obj[1]%>prices" <%= price_checked(obj[1])%> <%=price_locked?(obj[1])%>><span class="fa fa-check"></span><%=obj[0]%></label></div>
                   <%end%>
                 </div>
               </div>
-            </div>
-          </div>
+            <!-- </div> -->
+          <!-- </div> -->
         </div>
 
         <div class="formField filter-action">
@@ -175,12 +169,10 @@
     </form>
 
     <div class="filter-action-btns" style="position: relative;">
-      <div class="text-center">
-        <div class="filter-action-btns2 filter-action">
-          <%= link_to 'Cancel', 'javascript:;', class: 'closeFilter font-bold font-14' unless mobile? %>
-          <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-round btn-xlg clearFilter font-bold font-14' %>
-          <a href="#" class="applyFilter btn btn-green btn-xlg btn-round txt-color-white font-bold font-14" style="background: #59BB44;">Apply</a>
-        </div>
+      <div class="filter-action-btns2 filter-action text-center">
+        <%= link_to 'Cancel', 'javascript:;', class: 'closeFilter font-bold font-14' unless mobile? %>
+        <%= link_to 'Reset','javascript:;', class: 'btn btn-default btn-round btn-xlg clearFilter font-bold font-14' %>
+        <a href="#" class="applyFilter btn btn-green btn-xlg btn-round txt-color-white font-bold font-14" style="background: #59BB44;">Apply</a>
       </div>
     </div>
   </div>
