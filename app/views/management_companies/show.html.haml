@@ -40,7 +40,7 @@
       #buildings_reviews_tab.tab-pane.fade{style: 'overflow-y: scroll; height: 500px;'}
         .comments.objects-container{style: 'padding: 15px 14px 0px 20px;'}
           - if @reviews.present?
-            = render :partial => 'reviews/review', :collection => @reviews, :as => :review
+            = render :partial => 'reviews/review', :collection => @reviews, :as => :review, cached: true
         .load-more-container.text-center{style: 'margin-bottom: 20px;'}
           / hide our loading gif image so that we show it when making ajax call via jquery
           = image_tag 'loader.gif', style: 'display:none;', class: 'loading-gif'
@@ -49,7 +49,7 @@
         = render 'layouts/home/footer'
       #building_managed.tab-pane.fade.in.active.no-padding
         .resultsList.searched-properties{class: controller_name}
-          #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :object
+          #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :object, cached: true
         
         .pages-container{style: 'padding: 15px'}= render 'layouts/shared/add_pagination', objects: @manage_buildings
 

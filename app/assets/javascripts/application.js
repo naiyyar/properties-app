@@ -15,7 +15,6 @@
 //= require rails.validations
 //= require jquery.bstransitions
 //= require jquery-placeholder
-//= require jquery.slimscroll.min
 //= require underscore
 //= require bootstrap-datepicker
 //= require jquery.validate
