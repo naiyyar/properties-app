@@ -51,7 +51,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -107,7 +107,7 @@ Rails.application.configure do
       secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
       s3_region: ENV.fetch('AWS_REGION'),
     },
-    s3_headers: { 'Cache-Control' => 'public, max-age=15552000, immutable' }
+    s3_headers: { 'Cache-Control' => 'public, max-age=15552000' }
   }
 
   config.action_mailer.default_url_options = { host: ENV['SERVER_ROOT'] }

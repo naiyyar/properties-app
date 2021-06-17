@@ -11,7 +11,7 @@
           %h1.font-21.font-bold{style: 'margin: 2px;'}= split_view_header
           %p.font-21{style: spv_count_header_style}= "#{@listings_count.to_i} Rentals | #{@buildings_count.to_i} Buildings"
       
-    .tab-content.tab-scroll11{style: 'background-color: #f3f3f3;'}
+    .tab-content{style: 'background-color: #f3f3f3;'}
       #buildings.tab-pane.fade.in.active
         .resultsList
           .row#load-more-buildings
@@ -29,7 +29,6 @@
 
     %section.spv-pop-search{style: 'padding: 0px 16px;'}
       / lazy load content
-      / = render 'layouts/home/popular_searches', bg_col: '#fff', other_classes: 'mt-3 mb-3'
   
     = render 'layouts/home/footer'
 .clearfix

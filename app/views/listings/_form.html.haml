@@ -1,78 +1,80 @@
 .form-container
   .row
-    .col-xs-12.col-sm-12.col-md-12.col-lg-6
-      .panel.panel-default
-        .panel-heading
-          %b= @listing.new_record? ? 'New Listing' : 'Edit Listing'
-        .panel-body
-          = form_for @listing do |f|
-            .row
-              .col-xs-6.col-sm-6.col-md-8.col-lg-8
-                .form-group
-                  %label Building
-                  = text_field_tag 'listing_building_field', @listing.building.present? ? @listing.building.building_name_or_address : nil, class: 'form-control buildings-search-txt', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?featured_as=true' }, :autocomplete => :off
-                  #as-comp-buildings-search-results.results{style: "position: relative;"}
-
-              .col-xs-6.col-sm-6.col-md-4.col-lg-4
-                .form-group
-                  %label Unit*
-                  = f.text_field :unit,  class: 'form-control validate'
-                  
-              =f.hidden_field :building_id, id: 'listing_building_id'
-              =f.hidden_field :building_address, value: @listing.building.present? ? @listing.building.building_street_address : nil, id: 'listing_building_address'
-              =f.hidden_field :management_company, value: (@listing.building.present? ? @listing.management_company_name : nil), id: 'listing_management_company'
-            
-            .row
-              .col-xs-6.col-sm-6.col-md-3.col-lg-3
-                .form-group
-                  %label Rent
-                  = f.number_field :rent,  class: 'form-control'
-
-              .col-xs-6.col-sm-6.col-md-3.col-lg-2
-                .form-group
-                  %label Bed
-                  = f.number_field :bed, class: 'form-control'
-
-              .col-xs-6.col-sm-6.col-md-3.col-lg-2
-                .form-group
-                  %label Bath
-                  = f.text_field :bath,  class: 'form-control'
-
-              .col-xs-6.col-sm-6.col-md-3.col-lg-3
-                .form-group
-                  %label Months Free
-                  = f.text_field :free_months,  class: 'form-control'
-
-              .col-xs-6.col-sm-6.col-md-3.col-lg-2
-                .form-group
-                  %label Owner Paid
-                  = f.text_field :owner_paid,  class: 'form-control'
-            .row
-              .col-xs-6.col-sm-6.col-md-6.col-lg-4
-                .form-group
-                  %label Date Active*
-                  = f.text_field :date_active, value: f.object.date_active.present? ? f.object.date_active.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker validate', :autocomplete => :off
-
-              .col-xs-6.col-sm-6.col-md-6.col-lg-4
-                .form-group
-                  %label Date Available
-                  = f.text_field :date_available, value: f.object.date_available.present? ? f.object.date_available.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
-
-              .col-xs-6.col-sm-6.col-md-4.col-lg-4
-                .form-group
-                  %label Rent Stabilize
-                  = f.select :rent_stabilize, options_for_select([['Please select', ''], ['Yes', 'true'], ['No', 'false']], f.object.rent_stabilize),{},{class: 'form-control'}
-
+    .col-12.col-sm-12.col-md-12.col-lg-6
+      %p.font-21= @listing.new_record? ? 'New Listing' : 'Edit Listing'
+        
+      = form_for @listing do |f|
+        - if @listing.errors.any?
+          .text-danger= @listing.errors.messages
+        
+        .row
+          .col-6.col-sm-6.col-md-8.col-lg-8
             .form-group
-              .col-sm-12
-                .float-end
-                  = link_to 'Cancel', 'javascript:;', class: 'btn btn-default cancel-form', 'data-model' => @listing.class.name
-                  - if @listing.new_record?
-                    = f.submit 'Save', class: 'btn btn-primary disabled'
-                  - else
-                    = f.submit 'Update', class: 'btn btn-primary'
+              %label Building
+              = text_field_tag 'listing_building_field', @listing.building.present? ? @listing.building.building_name_or_address : nil, class: 'form-control buildings-search-txt', placeholder: 'Search building by name or address', data: { src: '/buildings/contribute?featured_as=true' }, :autocomplete => :off
+              #as-comp-buildings-search-results.results{style: 'position: relative;'}
+
+          .col-6.col-sm-6.col-md-4.col-lg-4
+            .form-group
+              %label Unit*
+              = f.text_field :unit,  class: 'form-control validate'
+              
+          =f.hidden_field :building_id, id: 'listing_building_id'
+          =f.hidden_field :building_address, value: @listing.building.present? ? @listing.building.building_street_address : nil, id: 'listing_building_address'
+          =f.hidden_field :management_company, value: (@listing.building.present? ? @listing.management_company_name : nil), id: 'listing_management_company'
+        
+        .row
+          .col-6.col-sm-6.col-md-3.col-lg-3
+            .form-group
+              %label Rent
+              = f.number_field :rent,  class: 'form-control'
+
+          .col-6.col-sm-6.col-md-3.col-lg-2
+            .form-group
+              %label Bed
+              = f.number_field :bed, class: 'form-control'
+
+          .col-6.col-sm-6.col-md-3.col-lg-2
+            .form-group
+              %label Bath
+              = f.text_field :bath,  class: 'form-control'
+
+          .col-6.col-sm-6.col-md-3.col-lg-3
+            .form-group
+              %label Months Free
+              = f.text_field :free_months,  class: 'form-control'
+
+          .col-6.col-sm-6.col-md-3.col-lg-2
+            .form-group
+              %label Owner Paid
+              = f.text_field :owner_paid,  class: 'form-control'
+        .row
+          .col-6.col-sm-6.col-md-6.col-lg-4
+            .form-group
+              %label Date Active*
+              = f.text_field :date_active, value: f.object.date_active.present? ? f.object.date_active.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker validate', :autocomplete => :off
+
+          .col-6.col-sm-6.col-md-6.col-lg-4
+            .form-group
+              %label Date Available
+              = f.text_field :date_available, value: f.object.date_available.present? ? f.object.date_available.strftime("%Y-%m-%d") : nil,  class: 'form-control datepicker', :autocomplete => :off
+
+          .col-6.col-sm-6.col-md-4.col-lg-4
+            .form-group
+              %label Rent Stabilize
+              = f.select :rent_stabilize, options_for_select([['Please select', ''], ['Yes', 'true'], ['No', 'false']], f.object.rent_stabilize),{},{class: 'form-control'}
+
+        .row.mt-5.mb-5
+          .col-12
+            .float-end
+              = link_to 'Cancel', 'javascript:;', class: 'btn btn-default cancel-form me-2', 'data-model' => @listing.class.name
+              - if @listing.new_record?
+                = f.submit 'Save', class: 'btn btn-primary disabled save_listing', data: {disable_with: 'Saving...'}
+              - else
+                = f.submit 'Update', class: 'btn btn-primary'
     
-=javascript_include_tag 'featured_as_building'
+= javascript_include_tag 'featured_as_building'
+/ = javascript_include_tag 'form_validations'
 
 :javascript
   $(function() {
@@ -80,8 +82,8 @@
   });
 
   $('#listing_building_field').on('keyup', function(){
-    if($(this).val() == ''){
-      $('#new_listing input[type="submit"]').addClass('disabled');
+    if($(this).val() != ''){
+      $('#new_listing input[type="submit"]').removeClass('disabled');
     }
   });
 

@@ -1,9 +1,9 @@
 $(document).ready(function() {
-  //setTimeout(function(){
-  $.ajax({
-    url: '/lazy_load_content',
-    type: 'get',
-    dataType: 'script'
-  });
-  //}, 2000);
+	if($('#pop-nyc-neighborhoods-list').length > 0){
+	  $.ajax({
+	    url: '/lazy_load_content',
+	    type: 'get',
+	    dataType: 'script'
+	  });
+	}
 });

@@ -71,7 +71,7 @@ Rails.application.configure do
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       s3_region: ENV['AWS_REGION']
     },
-    s3_headers: { 'Cache-Control' => 'public, max-age=315576000, immutable' }
+    s3_headers: { 'Cache-Control' => 'public, max-age=315576000' }
     #:path => '/:class/:attachment/:id_partition/:style/:filename'
   }
   config.action_mailer.delivery_method = :letter_opener

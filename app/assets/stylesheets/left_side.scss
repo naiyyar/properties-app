@@ -75,20 +75,20 @@
     background-color: #000;
     color: #fff;
 }
-.leftNav ul li a span.navLabel {
+.leftNav ul li a.navLabel {
     font-size: 16px;
     bottom: 0px;
     left: -81px;
 }
-.leftNav ul li.btn_contribute a span.navLabel {
+.leftNav ul li.btn_contribute a.navLabel {
     bottom: 0px;
 }
 
-.expanded .leftNav ul li a span.navLabel {
+.expanded .leftNav ul li a.navLabel {
     bottom: 2px;
     left: 0;
 }
-.no-touch .leftNav ul li:hover a span.navLabel, .leftNav ul li.onTap a span.navLabel {
+.no-touch .leftNav ul li:hover a.navLabel, .leftNav ul li.onTap a.navLabel {
     left: 0;
     text-decoration: none;
 }
