@@ -63,14 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if(split_view_length == 0){
       windowResizeHandler();
   }
-  // Header search icon transition
-  $('.search input').focus(function() {
-      $('.searchIcon').addClass('active');
-  });
-  $('.search input').blur(function() {
-      $('.searchIcon').removeClass('active');
-  });
-
+  
   // functionality for map manipulation icon on mobile devices
   var listMapView = function(target_class_list){
       if ($('#mapViewSearch').hasClass('mob-min') || 
@@ -149,16 +142,16 @@ document.addEventListener('DOMContentLoaded', function() {
       })
   }
 
-  // functionality for custom dropdown select list
-  $('.dropdown-select li a').click(function() {
-      var dp_s = $(this).parent();
-      if (!(dp_s.hasClass('disabled'))) {
-          $(this).prev().prop("checked", true);
-          dp_s.siblings().removeClass('active');
-          dp_s.addClass('active');
-          dp_s.parent().siblings('.dropdown-toggle').children('.dropdown-label').html($(this).text());
-      }
-  });
+  // // functionality for custom dropdown select list
+  // $('.dropdown-select li a').click(function() {
+  //     var dp_s = $(this).parent();
+  //     if (!(dp_s.hasClass('disabled'))) {
+  //         $(this).prev().prop("checked", true);
+  //         dp_s.siblings().removeClass('active');
+  //         dp_s.addClass('active');
+  //         dp_s.parent().siblings('.dropdown-toggle').children('.dropdown-label').html($(this).text());
+  //     }
+  // });
 
   $('.applyFilter').click(function(e) {
       e.preventDefault();

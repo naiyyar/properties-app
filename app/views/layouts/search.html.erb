@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: Rails.env.production? %>
-    <%= layout_stylesheet_link 'split_view/main' %>
     <%= javascript_include_tag 'home/main', defer: true %>
     <%= javascript_include_tag 'search/main', defer: true %>
     <%= javascript_include_tag 'zapp', defer: true %>
+    <script defer src='<%=gmap_url_helper%>'></script>
   </head>
   
   <body class="notransition no-hidden" >
@@ -26,8 +26,8 @@
         <%= hidden_field_tag :list_max_price, listings_filters[:max_price] %>
       <%end%>
     <%end%>
-    
-    <script src='<%=gmap_url_helper%>'></script>
+
+    <%= layout_stylesheet_link 'split_view/main' %>
 
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {

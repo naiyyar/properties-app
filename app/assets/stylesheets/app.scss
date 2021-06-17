@@ -1417,17 +1417,7 @@ select.custom-arrow{
         float: none;
         padding: 10px 20px 10px 20px;
     }
-    .searchIcon {
-        font-size: 16px;
-        color: #adc8c7;
-        margin-left: 0;
-        padding-top: 0;
-        line-height: 42px;
-        margin-top: 11px;
-    }
-    .searchIcon.active {
-        color: #333;
-    }
+    
     #apt-search-form{
         width: 99%;
     }
@@ -1651,9 +1641,7 @@ select.custom-arrow{
       right: auto;
       left: -350px;
     }
-    .searchIcon{
-        margin-left: 10px;
-    }  
+    
     .logo, .logo.expanded {
         left: 39% !important;
     }

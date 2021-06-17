@@ -3,14 +3,11 @@
 //= require jquery-ui-touch-punch
 //= require underscore
 //= require jquery.touchSwipe.min
-//= require jquery.slimscroll.min
 //= require jquery.add_kml
 //= require gmap
 //= require back_to_scroll_position
 //= require infobubble
-//= require swiper.jquery
 //= require dropdown_buttons
-//= require jquery.validate
 //= require price_slider
 //= require filters
 //= require home

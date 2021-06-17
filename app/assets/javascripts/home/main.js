@@ -9,7 +9,6 @@
 //= require saved_buildings
 //= require bootbox.min
 //= require jquery.mask.min
-//= require mask
 //= require find_device
 //= require property_card_actions
 //= require search_modal
@@ -52,16 +51,6 @@ Transparentcity = {
 			cta_div.hide();
 		}
 	}
-	// lazyLoadShowPageContent: function(id){
-	// 	$.ajax({
-	// 		url: '/buildings/'+id+'/lazy_load_content',
-	// 		dataType: 'script',
-	// 		type: 'get',
-	// 		success: function(){
-	// 			//console.log('thumb images loaded')
-	// 		}
-	// 	})
-	// }
 };
 
 $('.btn').click(function() {

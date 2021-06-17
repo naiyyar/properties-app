@@ -1,5 +1,6 @@
 module BedRanges
-
+  MONTHS_IN_YEAR = 12
+  
   def price_ranges filters=nil
     ranges = {}
     prices = Price.where(range: price)
@@ -15,7 +16,7 @@ module BedRanges
   def broker_fee_savings
     saved_amounts = {}
     rent_median_prices.as_json.each do |mp| 
-      saved_amounts[mp['bed_type']] = (((mp['price'].to_i * 12) * broker_percent)/100).to_i
+      saved_amounts[mp['bed_type']] = (((mp['price'].to_i * MONTHS_IN_YEAR) * broker_percent)/100).to_i
     end
     saved_amounts
   end
@@ -64,15 +65,10 @@ module BedRanges
   end
 
   def set_bed_type bed, modal_type
-    if bed == -1
-      'Room'
-    elsif bed == 0
-      'Studio'
-    elsif bed == Building::COLIVING_NUM && modal_type == 'building'
-      'CoLiving'
-    else
-      bed
-    end
+    return 'Room' if bed == -1
+    return 'Studio' if bed == 0
+    return 'CoLiving' if bed == Building::COLIVING_NUM && modal_type == 'building'
+    bed
   end
 
   def bedroom_ranges(filter_params=nil)
