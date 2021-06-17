@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <%= layout_stylesheet_link 'split_view/main' %>
     <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: Rails.env.production? %>
     <%= javascript_include_tag 'home/main', defer: true %>
     <%= javascript_include_tag 'search/main', defer: true %>
@@ -26,8 +27,6 @@
         <%= hidden_field_tag :list_max_price, listings_filters[:max_price] %>
       <%end%>
     <%end%>
-
-    <%= layout_stylesheet_link 'split_view/main' %>
 
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
