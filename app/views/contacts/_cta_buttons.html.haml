@@ -8,28 +8,28 @@
 		
 		- if cta_link_policy.all_three_cta?(listings_count)
 			.c-links
-				%section=check_availability_button(property.web_url, 'btn-o')
-				%section=active_listings_button(property, on_click, 'btn-o', listings_count)
+				=check_availability_button(property.web_url, 'btn-o')
+				=active_listings_button(property, on_click, 'btn-o', listings_count)
 
 			.d-block=contact_leasing_button(property, on_click, 'btn-block')
 
 		- elsif cta_link_policy.availability_and_contacts_cta? && listings_count <= 0
 			.d-block.h-42
 			.c-links
-				%section= contact_leasing_button(property, on_click, 'btn-block')
-				%section=check_availability_button(property.web_url, 'btn-o')
+				= contact_leasing_button(property, on_click, 'btn-block')
+				=check_availability_button(property.web_url, 'btn-o')
 
 		- elsif cta_link_policy.active_web_url? && listings_count > 0 and !cta_link_policy.has_active_email?
 			.d-block.h-42
 			.c-links
-				%section=check_availability_button(property.web_url, 'btn-block')
-				%section=active_listings_button(property, on_click, 'btn-o', listings_count)
+				=check_availability_button(property.web_url, 'btn-block')
+				=active_listings_button(property, on_click, 'btn-o', listings_count)
 
 		- elsif !cta_link_policy.active_web_url? && listings_count > 0 and cta_link_policy.has_active_email?
 			.d-block.h-42
 			.c-links
-				%section= contact_leasing_button(property, on_click, 'btn-block')
-				%section=active_listings_button(property, on_click, 'btn-o', listings_count)
+				= contact_leasing_button(property, on_click, 'btn-block')
+				=active_listings_button(property, on_click, 'btn-o', listings_count)
 
 		- elsif cta_link_policy.active_web_url? && listings_count <= 0 and !cta_link_policy.has_active_email?
 			.c-links.h-42
@@ -45,8 +45,9 @@
 			.c-links.h-42
 			.d-block=active_listings_button(property, on_click, 'btn-block', listings_count)
 
-:javascript
-	$('.ca.mobile').on('click', function(){
-		window.open(this.href, '_blank');
-		return false;
-	})
+- if mobile?
+	:javascript
+		$('.ca.mobile').on('click', function(){
+			window.open(this.href, '_blank');
+			return false;
+		})

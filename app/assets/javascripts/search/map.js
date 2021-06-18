@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Card.loadDisplayImageAndCTALinks($(j));
           }
         });
-      }, 2500);
+      }, 3000);
     }
   };
 }, false);

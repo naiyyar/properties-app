@@ -1,0 +1,76 @@
+.logo {
+    width: 146px;
+    height: 59px;
+    overflow: hidden;
+    margin: 0px;
+}
+
+.logo a {
+    display: block;
+    width: 70px;
+    height: 60px;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+}
+
+.logo a span {
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+    .logo.expanded {
+        width: 149px;
+    }
+
+    .logo.expanded a {
+        width: 200px;
+    }
+
+    .logo.expanded a span {
+        -webkit-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
+    a.navHandler {
+        position: absolute;
+        padding-top: 13px;
+        padding-left: 0px;
+        height: 50px;
+        width: 30px;
+        color: #fff;
+        font-size: 24px;
+        z-index: 9999;
+        display: block;
+        text-align: center;
+        -webkit-transition: all .5s ease-in-out;
+        -o-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+    }
+
+    .no-touch a.navHandler:hover {
+        background-color: transparent;
+        color: #c6e4e3;
+        text-decoration: none;
+    }
+
+    .expanded .leftNav ul li a {
+        padding: 10px 0px 10px 10px;
+    }
+  
+    .logo, .logo.expanded {
+        width: 100%;
+        background-color: transparent;
+        cursor: pointer !important;
+        a {
+            width: 70px;
+            height: 50px;
+            width: 100%;
+            cursor: pointer !important;
+        }
+    }
+    li.logo { z-index: 999; }
+}

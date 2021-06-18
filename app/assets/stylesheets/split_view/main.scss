@@ -1,6 +1,5 @@
-@import "app";
-@import "autocompletesearch.min";
 @import "bootstrap_and_overrides";
+@import "autocompletesearch.min";
 @import "cta_buttons";
 @import "jquery-ui.min";
 @import "home";
@@ -22,3 +21,284 @@
 @import "shared-search";
 @import "ios_switch";
 @import "comments";
+@import "user-menu";
+@import "nav-handler";
+
+.building-detail-card {
+  width: 100%;
+}
+.font-bolder, .font-bold {
+  font-weight: bolder !important;
+}
+.no-padding, .modal-body.no-padding {
+  padding: 0px !important;
+}
+
+.fa-heart, .fa-heart:focus {
+  color: #b1b3b6;
+}
+
+.filled-heart .fa-heart, .unfilled-heart .fa-heart.hover:hover {
+  color: #EC555B !important;
+}
+
+.bg-size-cover {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-pos-center {
+  background-position: center center;
+}
+
+.bg-size-cover.h-lg {
+  height: 270px !important;
+}
+
+.pages-container {
+  text-align: center !important;
+}
+
+.hyper-link {
+  color: #2272E2 !important;
+}
+.pagination {
+  box-shadow: none !important;
+}
+
+#wrapper .content.homesearch, #wrapper .content.buildingsshow, #wrapper .content.management_companiesshow, #wrapper .content.featured_listingsshow {
+  padding: 0px 0px;
+}
+.searchContainer {
+  position: relative;
+  width: 45%;
+}
+#apt-search-form {
+  width: 100%;
+}
+.icon-search-shared {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 18px;
+  z-index: 999;
+  color: #5b78e4;
+}
+.apt-search {
+  position: relative;
+}
+#wrapper {
+  left: 0px;
+  top: 0px;
+  margin: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /*overflow-x hidden : Getting grey/blank map issue on mobile devices ios13 when moving or zooming*/
+}
+#wrapper.screen-lg {
+    margin: 0px;
+    width: 100%;
+}
+#content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #fff;
+  width: 50%;
+  height: 100px;
+  float: left;
+  -webkit-overflow-scrolling: touch;
+}
+.filter, .modal-full {
+  position: absolute;
+  right: 0px;
+  top: 110px;
+  bottom: 0px;
+  z-index: 2147483638;
+  height: 100%;
+}
+.dropdown-label {
+  float: left;
+}
+.dropdown-select {
+  border-radius: 2px;
+  border: 1px solid #dfdfdf;
+  transition: all .2s ease-in-out;
+}
+.resultsList {
+  padding: 15px 15px 0 15px;
+}
+.font-14 {
+  font-size: 14px !important;
+}
+.font-21 {
+  font-size: 21px !important;
+}
+.pb20 {
+  padding-bottom: 20px;
+}
+.round {
+  border-radius: 100px;
+}
+.padding-top-20 {
+  padding-top: 20px;
+}
+body.no-hidden {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+a.home-navHandler {
+  display: block;
+  float: right;
+  text-align: center;
+  font-size: 24px;
+  line-height: 24px;
+  color: #333;
+  padding: 11px 17px 10px 13px;
+  transition: all .5s ease-in-out;
+}
+.border-top-lr-radius {
+  border-top-left-radius: 25px !important;
+  border-top-right-radius: 25px !important;
+}
+.border-bottom-lr-radius {
+  border-bottom-left-radius: 25px !important;
+  border-bottom-right-radius: 25px !important;
+}
+
+.icon-search-shared {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 18px;
+  z-index: 999;
+  color: #5b78e4;
+}
+
+@media screen and (max-width: 767px) {
+	#wrapper .content {
+    padding: 10px;
+  }
+  #search-modal {
+      background: #fff;
+      height: 100%;
+      overflow: hidden;
+  }
+	#apt-search-form {
+		.icon-search-shared {
+	    top: 13px;
+	    color: #7e7e7e;
+	  }
+	  .icon-search-shared.search-placeholder-input {
+	    top: 7px;
+		}
+	}
+
+  #header-mob {
+      background-color: #2272e2;
+      width: 100%;
+      padding: 10px 7px 10px 1px;
+      z-index: 1040;
+      border-bottom: 1px solid #ddd;
+      a.navHandler {
+        padding: 6px 0px 0px;
+        height: 48px;
+        width: 48px;
+        color: #fff;
+    }
+  }
+  a.nb-link {
+    padding: 16px 0px 13px 0px;
+  }
+  #header-mob {
+  	.col-xs-6.hood, .col-xs-6.h-filter {
+	    padding-right: 0px;
+	    padding-left: 0px;
+	    background: #1D6FE2;
+	    button{
+	    	border: 1px solid #fff;
+	    }
+	  }
+	  .col-xs-6.hood {
+      width: 50%;
+    }
+    .col-xs-6.h-filter {
+      width: 45%;
+    }
+    .apt-search input {
+      width: 100%;
+      border-radius: 1.5em;
+      padding: 11px 4px 11px 26px;
+      margin: 0px;
+      background: #fff;
+      border: 0px solid #333;
+      -webkit-appearance: none;
+      font-size: 13px;
+    }
+  }
+	.btn.btn-filter.handleFilter {
+    padding: 11px 0px;
+    width: 5.3em;
+	}
+  .btn-hoods button {
+    padding: 11px 9px;
+  }
+  .home-content{ 
+	  h2, .h2 {
+	    font-size: 20px;
+	  }
+	}
+  
+  a {transition: none;}
+  .filter, .modal-full {
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 9999;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    bottom: 0px;
+  }
+  .btn_contribute {
+    z-index: 333;
+  }
+  #wrapper {
+    margin: 0px 0 0 0;
+  }
+	#content, #show-content {
+	  overflow-x: hidden;
+	  overflow-y: hidden;
+	  background-color: #fff;
+	  width: 100%;
+	  float: right;
+	  transition: all .2s ease-in-out;
+	  height: 100%;
+	  -webkit-overflow-scrolling: touch;
+	  -webkit-transform: translate3d(0, 0, 0);
+	  -webkit-backface-visibility: hidden;
+	  -webkit-perspective: 1000;
+	}
+	#apt-search-form {
+    width: 99%;
+  	.form-control {
+      height: 51px !important;
+      padding: 10px 14px 10px 30px !important;
+    }
+    .icon-search-shared{
+      top: 13px;
+      color: #7e7e7e;
+    }
+    .icon-search-shared.search-placeholder-input {
+      top: 7px;
+    }
+  }
+  .apt-search{
+    position: relative;
+	}
+}
+
+

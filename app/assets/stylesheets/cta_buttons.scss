@@ -1,3 +1,6 @@
+.cta_buttons{
+	margin-top: 4px;
+}
 .contact-links {
 	padding: 0px 8px;
 	.c-links {
@@ -6,16 +9,13 @@
 	  -moz-column-count: 2;
 	  height: 100%;
 	  padding-bottom: 7px;
-	  section {
-		  a { width: 100%;}
-	  	a.ca {
-		  	padding: 10px 8px;
-		  }
+	  a { 
+	  	width: 100%;
+	  	display: block;
+	  	padding: 15px 8px;
 	  }
 	}
-
 	a{ font-weight: bolder; font-size: 14px; }
-
   .h-42{
   	height: 44px;
   }

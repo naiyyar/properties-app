@@ -314,96 +314,6 @@ a.link_underlined:hover, .underline{
     background-color: #068b85;
 }
 
-/* Header */
-
-.logo {
-    width: 146px;
-    height: 59px;
-    overflow: hidden;
-    margin: 0px;
-}
-.logo.expanded {
-    width: 149px;
-}
-.logo a {
-    display: block;
-    width: 70px;
-    height: 60px;
-    color: #fff;
-    text-decoration: none;
-    position: relative;
-}
-.logo.expanded a {
-    width: 200px;
-}
-.logo a span {
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
-.logo.expanded a span {
-    -webkit-transition: none;
-    -o-transition: none;
-    transition: none;
-}
-.logo a span.marker {
-    font-size: 29px;
-    position: absolute;
-    display: block;
-    width: 19px;
-    height: 28px;
-    top: 15px;
-    left: 21px;
-}
-.logo.expanded a span.marker {
-    color: #fff;
-    left: 20px;
-}
-.no-touch .logo a:hover span.marker {
-    color: rgba(255, 255, 255, 0);
-    top: 10px;
-    text-decoration: none;
-}
-.no-touch .logo.expanded a:hover span.marker {
-    color: rgba(255, 255, 255, 1);
-    top: 15px;
-    text-decoration: none;
-}
-.logo a span.logoText {
-    color: #fff;
-    position: absolute;
-    font-size: 14px;
-    top: -40px;
-    left: 13px;
-}
-.logo.expanded a span.logoText {
-    top: 20px;
-    left: 54px;
-}
-.no-touch .logo a:hover span.logoText {
-    color: #fff;
-    top: 20px;
-    text-decoration: none;
-}
-a.navHandler {
-    position: absolute;
-    z-index: 9999;
-    display: block;
-    float: right;
-    text-align: center;
-    font-size: 24px;
-    line-height: 24px;
-    color: #fff;
-    padding: 18px 0px 0px 24px;
-    -webkit-transition: all .5s ease-in-out;
-    -o-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
-}
-
-.no-touch a.navHandler:hover {
-    background-color: transparent;
-    text-decoration: none;
-}
 #wrapper .content.homesearch, 
 #wrapper .content.buildingsshow, 
 #wrapper .content.management_companiesshow,
@@ -452,51 +362,9 @@ a.navHandler {
     border-radius: 3px;
     border: 1px solid #dfdfdf;
 }
-
-.userMenu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.userMenu ul > li > a {
-    padding: 7px 13px;
-    display: block;
-    font-size: 13px;
-    color: #333;
-    text-decoration: none;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
-.userMenu ul > li > a > span {
-    margin-right: 5px;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
-.userMenu ul > li > a > span.badge {
-    font-size: 12px;
-    font-weight: normal;
-    margin-right: 0;
-}
-.no-touch .userMenu ul > li > a:hover > span.badge, .no-touch .userMenu ul > li > a:focus > span.badge {
-    color: #333;
-}
-.no-touch .userMenu ul > li:hover{
-    background-color: #f3f3f3;
-}
-.no-touch .userMenu ul > li:hover > a, .no-touch .userMenu ul > li > a:focus {
-    text-decoration: none;
-    color: #333 !important;
-    border-bottom: 0px solid #f3f3f3 !important;
-}
 .no-touch .homeUserMenu ul > li > a:hover, .no-touch .homeUserMenu ul > li > a:focus {
     background-color: #2c2d2e !important;
     text-decoration: none !important;
-}
-
-.no-touch .userMenu ul > li > a:hover > span, .no-touch .userMenu ul > li > a:focus > span {
-    color: #0075c9;
 }
 a.userHandler {
     position: relative;
@@ -1288,49 +1156,12 @@ select.custom-arrow{
         text-align: center;
     }
     
-    .logo, .logo.expanded {
-        width: 100%;
-        background-color: transparent; 
-        cursor: pointer !important;
-    }
-    .logo a, .logo.expanded a{
-        cursor: pointer !important;
-    }
-    
-    li.logo{
-        z-index: 999;
-    }
-    
     .btn_contribute{
         z-index: 333;
     }
     
     .headerLinks {
         padding: 8px 3px 6px 4px;
-    }
-
-    .logo a, .logo.expanded a {
-        width: 70px;
-        height: 50px;
-        width: 100%;
-    }
-    .logo a span.marker, .logo.expanded a span.marker {
-        left: 0;
-        top: 10px;
-        -webkit-transition: none;
-        -o-transition: none;
-        transition: none;
-    }
-    .no-touch .logo a:hover span.marker, .no-touch .logo.expanded a:hover span.marker {
-        color: rgba(255, 255, 255, 1);
-        top: 10px;
-    }
-    .logo a span.logoText, .logo.expanded a span.logoText {
-        top: 14px;
-        left: 34px;
-    }
-    .no-touch .logo a:hover span.logoText, .no-touch .logo.expanded a:hover span.logoText {
-        top: 14px;
     }
     
     .contribute{
@@ -1345,14 +1176,6 @@ select.custom-arrow{
         z-index: 9999;
         font-size: 15px;
     }
-    a.navHandler {
-        font-size: 24px;
-        padding-top: 13px;
-        padding-left: 0px;
-        height: 50px;
-        width: 30px;
-        color: #fff;
-    }
     a.userHandler {
         display: block;
         padding-top: 8px;
@@ -1360,14 +1183,6 @@ select.custom-arrow{
     .no-touch a.userHandler:hover {
         color: #c6e4e3;
         text-decoration: none;
-    }
-    .no-touch a.navHandler:hover {
-        background-color: transparent;
-        color: #c6e4e3;
-        text-decoration: none;
-    }
-    .userMenu {
-        width: 100%;
     }
     #wrapper {
         margin: 0px 0 0 0;
@@ -1555,9 +1370,6 @@ select.custom-arrow{
         left: auto;
     }
     .contribute_links{
-        width: 100%;
-    }
-    .userMenu {
         width: 100%;
     }
     .mobAvatar {

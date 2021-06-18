@@ -1,0 +1,43 @@
+.userMenu {
+    width: 100%;
+}
+.userMenu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.userMenu ul > li > a {
+    padding: 7px 13px;
+    display: block;
+    font-size: 13px;
+    color: #333;
+    text-decoration: none;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.userMenu ul > li > a > span {
+    margin-right: 5px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.userMenu ul > li > a > span.badge {
+    font-size: 12px;
+    font-weight: normal;
+    margin-right: 0;
+}
+.no-touch .userMenu ul > li > a:hover > span.badge, .no-touch .userMenu ul > li > a:focus > span.badge {
+    color: #333;
+}
+.no-touch .userMenu ul > li:hover{
+    background-color: #f3f3f3;
+}
+.no-touch .userMenu ul > li:hover > a, .no-touch .userMenu ul > li > a:focus {
+    text-decoration: none;
+    color: #333 !important;
+    border-bottom: 0px solid #f3f3f3 !important;
+}
+.no-touch .userMenu ul > li > a:hover > span, .no-touch .userMenu ul > li > a:focus > span {
+    color: #0075c9;
+}

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: Rails.env.production? %>
     <%= layout_stylesheet_link 'home/main' %>
+    <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: Rails.env.production? %>
     <%= javascript_include_tag 'home/main', defer: true %>
     <!-- lazyloading home page featured and popular secitions -->
     <%= javascript_include_tag 'home/sections', defer: true %>
