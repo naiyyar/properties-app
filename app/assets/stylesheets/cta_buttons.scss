@@ -1,5 +1,5 @@
 .cta_buttons{
-	margin-top: 4px;
+	margin-top: 2px;
 }
 .contact-links {
 	padding: 0px 8px;
@@ -73,6 +73,9 @@
 }
 
 @media screen and (max-width: 767px) {
+	.cta_buttons{
+		margin-top: 4px;
+	}
 	.contact-links .c-links a, 
 	.contact-links .c-links a.ca {
     padding: 16px 14px;
