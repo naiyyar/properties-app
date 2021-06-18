@@ -32,7 +32,7 @@
     <%= javascript_include_tag 'zapp' %>
     
     <%if @lat.present? && @lng.present? %>
-      <script defer src='<%=gmap_url_helper%>'></script>
+      <script async src='<%=gmap_url_helper%>'></script>
     <%end%>
 
     <script type="text/javascript">

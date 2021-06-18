@@ -936,8 +936,10 @@ select.custom-arrow{
   color: #7e7e7e;
 }
 
-#signup .modal-sm, #signin .modal-sm{
+#signup .apt-modal-sm, 
+#signin .apt-modal-sm{
   width: 335px;
+  max-wdith: 500px;
 }
 
 #filter-container {

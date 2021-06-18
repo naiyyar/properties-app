@@ -3,6 +3,7 @@
   <head>
     <%= layout_stylesheet_link 'building/main' %>
     <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: false %>
+    <script async defer src="<%=gmap_url_helper('MapObject.initialize')%>"></script>
   </head>
   
   <body class="notransition no-hidden touch-scroll">
@@ -19,7 +20,6 @@
     <%= javascript_include_tag 'building/main'%>
     <%= javascript_include_tag 'home'%>
     <%= javascript_include_tag 'home/main' %>
-    <script defer src='<%=gmap_url_helper%>'></script>
     <%= javascript_include_tag 'infobubble'%>
     <%= javascript_include_tag 'building/map'%>
 
