@@ -2,7 +2,7 @@
   = render 'home/search_form'
 
 - unless @pop_neighborhoods.blank? && mobile?
-  .float-start.neighborhoods-dropdown{style: 'margin-top: 3px;margin-left: 8px;'}
+  .float-start.neighborhoods-dropdown.ms-3{style: 'margin-top: 3px;'}
     .dropdown
       %button.btn.btn-o.btn-primary.dropdown-toggle.btn-round#neighborhoodsList{'data-bs-toggle' => 'dropdown', style: 'min-width: 121px;', type: 'button', 'aria-expanded' => 'false'}
         %span.dropdown-label
@@ -20,8 +20,8 @@
           Filter
           %span.filter-counts
 
-    .lg-action-buttons.me-2.mt-1
-      .btn-sort.btn-dp-toggle.float-end.dropdown
+    .lg-action-buttons.mt-1
+      .btn-sort.btn-dp-toggle.float-end.dropdown.me-2
         %button.no-caret#sortMenu{class: "btn sc-lg btn-o btn-primary btn-round dropdown-toggle #{params[:sort_by].present? ? 'active' : ''}", 'data-bs-toggle' => 'dropdown', style: 'padding: 10px 3px !important;'}
           %span.dropdown-label
             %span.fa.fa-sort
