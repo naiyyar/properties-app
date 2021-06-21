@@ -5,11 +5,10 @@ module Buildings
 
 		# modules
 		include NYCBorough
-		include Buildings::FeaturedBuildings
+		# include Buildings::FeaturedBuildings
 		
 		# Methods
 		def initialize params, buildings=nil, search_string=''
-			@page 										 = params[:page]
 			@sort_by 									 = params[:sort_by]
 			@filters_params 					 = params[:filter]
 			@search_string 						 = search_string
@@ -26,7 +25,7 @@ module Buildings
 		end
 
 		def fetch
-			@results[:zoom]      = set_zoom
+			@results[:zoom] = set_zoom
 			@results[:buildings] = unless @lat.present? && @lng.present?
 																unless @search_string == 'New York'
 																	self.searched_buildings
@@ -85,10 +84,6 @@ module Buildings
 			else
 				@search_string == 'New York' ? 12 : 14
 			end
-		end
-
-	  def page_num
-			@page.present? ? @page.to_i : 1
 		end
 	end
 end

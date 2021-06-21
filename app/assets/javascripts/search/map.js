@@ -266,7 +266,7 @@ SearchMapObject = {
 }; // SearchMapObject
 
 document.addEventListener('DOMContentLoaded', function() {
-  if($("#mapViewSearch").length > 0){
+  if($("#mapViewSearch").length > 0 && typeof google != 'undefined') {
     SearchMapObject.initializeMap();
 
     setTimeout(function() {

@@ -81,8 +81,9 @@ class Listing < ApplicationRecord
   end
 
   def self.listings_count buildings, per_page_buildings, filter_params={}
-    if listing_or_building_filter?(filter_params)
-      filtered_listings_count(buildings, per_page_buildings, filter_params)
+    @filter_params = filter_params
+    if listing_or_building_filter?
+      filtered_listings_count(buildings, per_page_buildings)
     else
       buildings.sum(:listings_count)
     end
@@ -104,8 +105,8 @@ class Listing < ApplicationRecord
   
   private
 
-  def self.listing_or_building_filter? filter_params
-    filter_params.present? || (filter_params.present? && filter_params[:listings].present?)
+  def self.listing_or_building_filter?
+    @filter_params.present? || (@filter_params.present? && @filter_params[:listings].present?)
   end
   
   def create_unit
@@ -117,12 +118,12 @@ class Listing < ApplicationRecord
                 })
   end
 
-  def self.filtered_listings_count buildings, per_page_buildings, filter_params
+  def self.filtered_listings_count buildings, per_page_buildings
     listings_count = 0
     taken_building_ids = []
     per_page_buildings.each do |b|
       if b.kind_of?(Building)
-        act_listings       = b.get_listings(filter_params)
+        act_listings       = b.get_listings(@filter_params)
         listings_with_rent = act_listings.with_rent
         b.act_listings     = act_listings
         b.min_price        = listings_with_rent.first.rent rescue nil
@@ -134,7 +135,7 @@ class Listing < ApplicationRecord
 
     # taken_building_ids = per_page_buildings.map{|b| b.id if b.kind_of?(Building)}.compact
     buildings.where.not(id: taken_building_ids).each do |b|
-      act_listings    = b.get_listings(filter_params)
+      act_listings    = b.get_listings(@filter_params)
       listings_count += act_listings.size
     end
     listings_count
