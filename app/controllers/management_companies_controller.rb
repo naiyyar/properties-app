@@ -42,20 +42,18 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1
   # GET /management_companies/1.json
   def show
-    @show_map_btn        = @half_footer = true
-    search_buildings     = Buildings::Search.new(params)
-    final_results        = search_buildings.with_featured_buildings(@buildings)
-    @manage_buildings    = final_results[2] if !params[:object_id].present?
-    @all_buildings       = final_results[0]
+    @show_map_btn = @half_footer = true
+    @manage_buildings = @buildings.paginate(:page => params[:page], :per_page => 20) unless params[:object_id].present?
+    @all_buildings = AddFeaturedObjectService.new(@buildings).return_buildings
     
     # Reviews
-    @reviews             = Review.buildings_reviews(@buildings, @management_company.id)
-    @total_reviews       = @reviews.size rescue 0
-    @reviews             = @reviews.limit(10)
+    @reviews = Review.buildings_reviews(@buildings, @management_company.id)
+    @total_reviews = @reviews.size rescue 0
+    @reviews = @reviews.limit(10)
 
     # json hash for rendering map
     if @buildings.present?
-      @hash            = final_results[1]
+      @hash = Building.buildings_json_hash(@buildings)
       @buildings_count = @hash.length
       if @buildings_count > 0
         @lat = @hash.last['latitude']

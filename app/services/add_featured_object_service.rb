@@ -3,7 +3,7 @@ class AddFeaturedObjectService
 	FEATURED_BUILDINGS_CARD_INDEX = 0
 	FEATURED_AGENT_CARD_INDEX = 4.freeze
 
-	def initialize buildings, search_string, searched_by = ''
+	def initialize buildings, search_string='', searched_by = ''
 		@buildings = buildings.to_a
 		@search_string = search_string
 		@searched_by = searched_by
@@ -35,10 +35,12 @@ class AddFeaturedObjectService
   end
 
   def featured_listings
+    return if @search_string.blank?
   	@featured_listings ||= FeaturedObjectService.new(@search_string, @searched_by).get_listings
   end
 
   def featured_agent
+    return if @search_string.blank?
   	@featured_agent ||= FeaturedObjectService.new(@search_string, @searched_by).get_agent
   end
 
