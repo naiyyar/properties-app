@@ -2,7 +2,8 @@
   %nav.leftNav.scrollable
     %ul
       %li.logo.d-block.d-lg-none.d-md-none.text-center
-        %a{href: '/'}= image_tag 'transparentcity-logo-white-gray.png', alt: alt_text, width: '170', height: '50'
+        %a{href: '/'}
+          %img{'data-src' => "<%= asset_path('transparentcity-logo-white-gray.png') %>", alt: alt_text, width: '170', height: '50'}
       
       - if current_user.blank?
         %li
