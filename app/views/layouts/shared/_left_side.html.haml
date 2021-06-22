@@ -3,7 +3,7 @@
     %ul
       %li.logo.d-block.d-lg-none.d-md-none.text-center
         %a{href: '/'}
-          %img{'data-src' => "<%= asset_path('transparentcity-logo-white-gray.png') %>", alt: alt_text, width: '170', height: '50'}
+          %img.lazyload{'data-src' => asset_path('transparentcity-logo-white-gray.png'), alt: alt_text, width: '170', height: '50'}
       
       - if current_user.blank?
         %li
