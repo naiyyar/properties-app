@@ -17,7 +17,7 @@
       
       <div class="Header-logoDesktop">
         <a href="/" class="Logo">
-          <%= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40', class: 'Logo-image' %>
+          <img data-src="<%= asset_path('transparentcity-logo-black-blue.png') %>" alt="<%=alt_text%>" width='146' height='40' class='Logo-image lazyload'>
         </a>
       </div>
 

@@ -15,7 +15,8 @@
               = search_placeholder_input_helper
       - else
         .home-logo.osLight{style: 'text-align: center;margin-top: -10px;'}
-          %a{href: '/'}= image_tag 'transparentcity-logo-black-blue.png', alt: alt_text, width: '146', height: '40', style: 'margin-left: 40px;'
+          %a{href: '/'}
+            %img{ 'data-src' => asset_path('transparentcity-logo-black-blue.png'), alt: alt_text, width: '146', height: '40', style: 'margin-left: 40px;', class: 'lazyload' }
    
     %div{class: "col-#{header_right_col}"}
       .row{style: 'margin-right: -1px;'}
