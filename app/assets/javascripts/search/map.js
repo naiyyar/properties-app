@@ -266,7 +266,7 @@ SearchMapObject = {
 }; // SearchMapObject
 
 document.addEventListener('DOMContentLoaded', function() {
-  if($("#mapViewSearch").length > 0 && typeof google != 'undefined') {
+  if($("#mapViewSearch").length > 0) {
     SearchMapObject.initializeMap();
 
     setTimeout(function() {
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Card.loadDisplayImageAndCTALinks($(j));
           }
         });
-      }, 3000);
+      }, 2000);
     }
   };
 }, false);

@@ -6,7 +6,7 @@
     <%= javascript_include_tag 'home/main', defer: true %>
     <%= javascript_include_tag 'search/main', defer: true %>
     <%= javascript_include_tag 'zapp', defer: true %>
-    <script async defer src='<%=gmap_url_helper%>'></script>
+    <script defer src='<%=gmap_url_helper%>'></script>
   </head>
   
   <body class="notransition no-hidden" >
@@ -36,6 +36,10 @@
 
     <script defer type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js'></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">
+    
+    <% %w(autocompletesearch.min jquery-ui.min left_side infowindow comments).each do |file_name| %>
+      <%= stylesheet_link_tag file_name %>
+    <%end%>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <%= render 'layouts/shared/gtag_script' %>
