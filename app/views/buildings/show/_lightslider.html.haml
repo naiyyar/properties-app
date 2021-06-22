@@ -11,7 +11,8 @@
           - img_url = upload.image.url(:original)
           %li{ data: { thumb: upload.slider_thumb_image(:medium), alttext: property.name_with_address } }
             %a{ href: img_url, 'data-role' => 'slider', 'data-caption' => date_uploaded(upload), style: 'display: block;height: 450px;width: 100%;' } 
-              = image_tag img_url, alt: property.name_with_address, class: "img-thumbnail #{thumb_hidden_class}", width: '750', height: '460'
+              %img.lazyload.img-thumbnail{'data-src' => img_url, alt: property.name_with_address, width: '750', height: '460'}
+              / = image_tag img_url, alt: property.name_with_address, class: "img-thumbnail #{thumb_hidden_class}", width: '750', height: '460'
 - else
   .item
     .clearfix{ style: 'width:100%;' }

@@ -363,7 +363,7 @@
                             // pagers += '<li style="width:100%;' + property + ':' + thumbWidth + 'px;' + gutter + ':' + settings.thumbMargin + 'px"><a href="#"><div class="img-wrapper"><img src="' + thumb + '" /></div></a></li>';
                             if(thumb != undefined){
                                 pagers += '<li style="width:100%;' + gutter + ':' + settings.thumbMargin + 'px">' +
-                                            '<a href="#"><div class="img-wrapper"><img src="' + thumb + '" alt="'+alttext+'" /></div></a>' +
+                                            '<a href="#"><div class="img-wrapper"><img class="lazyload" data-src="' + thumb + '" alt="'+alttext+'" /></div></a>' +
                                           '</li>'; 
                             }
                         } else {
