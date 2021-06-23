@@ -1,18 +1,17 @@
 .col-xs-12.col-sm-12.col-md-6.col-lg-6
   .card.search-view-card.bordered{'data-agentid' => agent.id}
     .figure{style: 'position: relative;', id: "figure#{agent.id}"}
-      .shimmer
           
     .building-detail-card.ps-2.mt-2
-      %h2.name-or-add=agent.full_name
+      %h2.pb-1=agent.full_name
       .cardAddress="#{agent.neighborhood} Expert"
-      .cardAddress.font-14{style: 'color: #000;'}= agent.broker_firm
-      .cardAddress.font-14
+      .cardAddress.font-14.mt-1{style: 'color: #000;'}= agent.broker_firm
+      .cardAddress.font-14.mt-1
         - phone = agent.try(:phone)
         - if phone.present?
           =link_to "#{number_to_phone(phone, area_code: true)}", "tel:#{phone}", class: 'hyper-link'
         - else
           %span.invisible 9899123456
           
-      .cta_buttons.featuredAgent.mt-2{id: "agent-cta-links#{agent.id}"}
+      .cta_buttons.featuredAgent{id: "agent-cta-links#{agent.id}"}
         
