@@ -1,6 +1,6 @@
 <div class="home-wrapper">
   <div class="home-content neighborhood-container">
-    <h2 class="osLight1 text-center" style="font-weight: bolder;color: #000;">Popular NYC Neighborhoods To Rent In</h2>
+    <h2 class="section-header text-center">Popular NYC Neighborhoods To Rent In</h2>
     <div class="pb20 <%= !@home_view ? 'scrollable' : '' %> <%=@modal_type || 'other'%>">
       <%= render 'layouts/shared/neighborhoods_list' %>
     </div>

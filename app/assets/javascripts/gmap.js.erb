@@ -71,8 +71,8 @@ function createSidebarElemForBuilding(json){
     building_name = address
   }
   
-  return ("<h2>" + building_name + "</h2>" +
-  "<div class='cardAddress'><span class='fa fa-map-marker'></span> "+full_address+"</div>" );
+  return ("<h2 class='mb-1'>" + building_name + "</h2>" +
+  "<div class='cardAddress mb-1'><span class='fa fa-map-marker'></span> "+full_address+"</div>" );
 };
 
 function markerIcon(price, type='red'){

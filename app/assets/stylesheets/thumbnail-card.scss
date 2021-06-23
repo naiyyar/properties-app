@@ -20,6 +20,12 @@ $hbo-color: #1D6FE2;
 			padding-right: 2px !important;
 		}
 	}
+  .fav-div{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 22px;
+  }
 }
 
 a.card, div.card {
@@ -44,17 +50,15 @@ a.card.bordered, div.card.bordered{
 
 a.card h2, div.card h2 {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 16px !important;
   line-height: 16px;
-  margin: 0 10px 0 0;
-  padding: 10px 0 3px 10px;
   color: #333;
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
   float: none;
-  width: 90%;
   text-overflow: ellipsis;
+  text-align: left !important;
 }
 .no-touch a.card:hover, .no-touch div.card:hover {
     text-decoration: none;
@@ -67,8 +71,6 @@ a.card .cardAddress, div.card .cardAddress {
     font-size: 12px;
     line-height: 13px;
     color: #757575;
-    padding: 0 0 5px 10px;
-    margin: 0 10px 0 0;
     overflow: hidden;
     white-space: nowrap;
 }

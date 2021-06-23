@@ -3,7 +3,7 @@
     .figure{style: 'position: relative;', id: "figure#{agent.id}"}
       .shimmer
           
-    .building-detail-card
+    .building-detail-card.ps-2.mt-2
       %h2.name-or-add=agent.full_name
       .cardAddress="#{agent.neighborhood} Expert"
       .cardAddress.font-14{style: 'color: #000;'}= agent.broker_firm
@@ -14,5 +14,5 @@
         - else
           %span.invisible 9899123456
           
-      .cta_buttons.featuredAgent{id: "agent-cta-links#{agent.id}"}
+      .cta_buttons.featuredAgent.mt-2{id: "agent-cta-links#{agent.id}"}
         

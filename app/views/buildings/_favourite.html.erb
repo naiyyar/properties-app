@@ -1,4 +1,4 @@
-<div class="float-end" style="font-size: 22px;">
+<div class="fav-div">
   <%= heart_link(building, current_user) if user_signed_in? %>
   <%= content_tag 'div', heart_icon, class: "save_link_#{building.id} favourite #{saved_color_class(building)}", onclick: "openSuModal(event,#{building.id});", style: 'padding: 0px 9px;' if !user_signed_in?%>
 </div>

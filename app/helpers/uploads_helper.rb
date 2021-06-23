@@ -57,8 +57,7 @@ module UploadsHelper
 	end
 
 	def object_show_path object
-		object.kind_of?(Building) ? 
-		building_path(object) : 
+		return building_path(object) if object.kind_of?(Building)
 		show_featured_listing_path(id: object.id, address: url_address(object))
 	end
 

@@ -11,12 +11,9 @@ apt_home = {
   },
 
   loadImages: function() {
-    var figure;
     var figures = $('.figure');
-    
     for(var i = 0; i < figures.length; i++) {
-      figure = figures[i];
-      Card.loadDisplayImageAndCTALinks($(figure.parentNode.parentNode));
+      Card.loadDisplayImageAndCTALinks($(figures[i].parentNode));
     }
   }
 }
@@ -25,6 +22,6 @@ window.onload = function() {
   if($('.home-wrapper > .featured-section').length > 0){
     setTimeout(function(){
       apt_home.loadFeaturedBuildings();
-    }, 3000);
+    }, 2000);
   }
 }

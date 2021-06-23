@@ -4,21 +4,21 @@
     .figure{style: 'position: relative;', id: "figure#{featured_listing.id}"}
       .shimmer
         
-    .building-detail-card{ data: { show_url: @show_path } }
-      %h2.name-or-add= featured_listing.address_with_unit
+    .building-detail-card.ps-2.mt-2{ data: { show_url: @show_path } }
+      %h2.name-or-add.mb-1= featured_listing.address_with_unit
       .cardAddress
         = map_marker_icon_helper
         = featured_listing.city_state_zip
   
   = link_to @show_path, style: 'color: #000' do
-    %div.font-14{style: 'padding: 0px 0px 0px 11px; height: 22px; white-space: nowrap;'}
-      %div.pbt= "#{featured_listing.apartment_type} in #{featured_listing.neighborhood1}" if featured_listing.apartment_type.present?
-      %div.pbt
+    .font-14.ps-2.mt-1.text-nowrap
+      %div= "#{featured_listing.apartment_type} in #{featured_listing.neighborhood1}" if featured_listing.apartment_type.present?
+      %div
         %span.font-bold= rent_with_currency(featured_listing)
         %span= " | #{featured_listing.bed} Bed #{featured_listing.bath} Bath"
 
   = link_to @show_path, style: 'color: #000' do
-    .cta_buttons.featuredListing{id: "cta-links#{featured_listing.id}"}
+    .cta_buttons.featuredListing.mt-2{id: "cta-links#{featured_listing.id}"}
       
 .clearfix
 
@@ -26,7 +26,6 @@
   .cta_buttons.featuredListing{
     min-height: 111px;
     max-height: 111px;
-    position: relative;
   }
   .cta_buttons.featuredListing .contact-links {
     position: absolute;
