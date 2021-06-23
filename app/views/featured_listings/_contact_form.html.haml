@@ -10,17 +10,14 @@
 		.mb-3
 			.form-group
 				= text_area_tag :message, "I'm interested in availabilities at #{@featured_listing.full_address} #{@featured_listing.unit}.", class: "form-control validate", rows: 5, style: 'color: #777777;', name: 'contact_owner[message]'
-  
 		.mb-3
 			= submit_tag 'Send Message', class: 'btn btn-primary btn-block font-bolder btn-round', style: 'font-size: 18px;'
 	
-	%fieldset{style: 'color: #333;'}
+	%fieldset.mt-3{style: 'color: #333;'}
 		%p.font-18 Contact Info
-		%div.font-14= @featured_listing.name_with_last_initial
-		%div.font-14
+		.font-14= @featured_listing.name_with_last_initial
+		.font-14
 			Phone Number:
 			= phone_with_area_code_link(@featured_listing)
 
-%br
-%br
 = javascript_include_tag 'mask'

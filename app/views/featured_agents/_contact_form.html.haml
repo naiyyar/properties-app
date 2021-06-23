@@ -33,11 +33,9 @@
 			.col-12.col-sm-12.col-md-12.col-lg-12
 				%label
 				= text_area_tag 'contact[message]', message, class: 'form-control', rows: 7, style: 'color: #777777;'
-		%br
 
-		.row
-			.col-12.col-sm-12.col-md-12.col-lg-12
-				%div= submit_tag 'Send Message', class: 'btn btn-primary btn-round btn-block font-bold font-14 submit'
+		.form-group.mt-3
+			= submit_tag 'Send Message', class: 'btn btn-primary btn-round btn-block font-bold font-14 submit'
 
 		.row
 			.col-12.col-sm-12.col-md-12.col-lg-12
