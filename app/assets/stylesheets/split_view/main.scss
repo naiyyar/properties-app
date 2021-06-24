@@ -183,9 +183,33 @@ a.home-navHandler {
     padding: 10px;
   }
   #search-modal {
-      background: #fff;
-      height: 100%;
-      overflow: hidden;
+    background: #fff;
+    height: 100%;
+    overflow: hidden;
+    .header {
+      height: 71px;
+      width: 100%;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 8px 0;
+      span.fa-arrow-left{
+        color: #2b78e4;
+        margin-top: 10px;
+      }
+    }
+    .apt-search.other #search_term {
+      height: 51px !important;
+      padding: 10px 14px 10px 30px !important;
+      border: 0px solid #333;
+      -webkit-appearance: none;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+      width: 100%;
+    }
+    .apt-search #search_term{
+      font-size: 14px;
+    }
+    .apt-search.other #search-input-placeholder {
+      width: 100%;
+    }
   }
 	#apt-search-form {
 		.icon-search-shared {
