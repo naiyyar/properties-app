@@ -11,8 +11,8 @@
     .form-group.mb-3
       = f.text_area :comment, value: "I'm interested in availabilities at #{@building.building_name_or_address}.", class: 'form-control validate', rows: 10, style: 'color: #777777;'
     
-    .form-group.mt-3
-      = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder btn-round', style: 'font-size: 18px;'
+    .form-group.mt-5
+      = f.submit 'Send Message', class: 'btn btn-primary btn-block font-bolder btn-round font-14'
     
   %fieldset.mt-4{style: 'color: #333;'}
     %p.font-18 Contact Info
