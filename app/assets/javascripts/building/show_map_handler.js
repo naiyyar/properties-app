@@ -4,8 +4,8 @@ var showListMapView = function(){
       $('#mapView').hasClass('mob-max') || 
       $('#content').hasClass('mob-min') || 
       $('#content').hasClass('mob-max')) {
-      $('#mapView').toggleClass('mob-max');
-      $('#content').toggleClass('mob-min');
+      $('#mapView').toggleClass('mob-max mob-min');
+      $('#content').toggleClass('mob-min mob-max');
   } else {
       $('#content').toggleClass('min');
       $('#mapView').toggleClass('max');

@@ -23,7 +23,7 @@
 			%h3="3D / Video Tour (#{@building_tours_count})"
 			= launch_tour_link(@building)
 
-	- unless screen_class == 'screen-lg'
+	- if mobile?
 		.show-section.show-map-handler{style: 'height: 200px; width: 100%; margin-bottom: 20px;margin-top: 20px;'}
 			%br
 			#mob-map{style: 'height: 100%; width: 100%;'}
@@ -33,18 +33,14 @@
 		
 	.clearfix
 		%br
-		#price_ranges
-			= render 'buildings/show/price_ranges' 
-		#broker_fee_savings
-			= render 'buildings/show/broker_fee_savings'
+		#price_ranges= render 'buildings/show/price_ranges' 
+		#broker_fee_savings= render 'buildings/show/broker_fee_savings'
 
-	#building-documents
-		= render 'uploads/documents'
+	#building-documents= render 'uploads/documents'
 
 	.clearfix
 	
-	#subways.show-section
-		= render 'buildings/show/subways'
+	#subways.show-section= render 'buildings/show/subways'
 
 	.clearfix
 	- if @similar_properties_count > 0
@@ -56,8 +52,7 @@
 	- if @building.rating_cache?
 		.aggregate-ratings.show-section
 			%h3 Aggregate Ratings
-			%ul.star-sm#ratings
-				= render 'buildings/show/rating_list'
+			%ul.star-sm#ratings= render 'buildings/show/rating_list'
 				
 	.clearfix
 	.comments.font-14.show-section

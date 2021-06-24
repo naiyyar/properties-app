@@ -8,7 +8,9 @@
 //= require jquery.raty
 //= require ratyrate
 //= require property_card_actions
+//= require infobubble
 //= require ./show_map_handler
+//= require ./map
 
 
 // For mobile neighborhoods dropdown toggle

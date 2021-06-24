@@ -819,6 +819,11 @@ select.custom-arrow{
 }
 
 @media screen and (max-width: 767px) {
+    #signup .apt-modal-sm, 
+    #signin .apt-modal-sm{
+      width: 100%;
+      max-wdith: 100%;
+    }
     #wrapper .content{
       padding: 10px;
     }

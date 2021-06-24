@@ -1,4 +1,4 @@
-var ready = function(){
+document.addEventListener('DOMContentLoaded', function() {
 	// setting timezone
 	$('.user_time_zone').set_timezone(); 
 	const timezone = $('.user_time_zone').val(); 
@@ -8,9 +8,5 @@ var ready = function(){
 	  expires.setTime(expires.getTime() + (24 * 60 * 60 * 1000))
 	  document.cookie = name + '=' + value + ';expires=' + expires.toUTCString()
 	}
-
 	setCookie("timezone", timezone);
-}
-
-$(document).ready(ready);
-$(document).on("page:load", ready);
+}, false);

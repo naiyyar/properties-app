@@ -166,16 +166,16 @@ a.mapHandler, a.listHandler, a.mapHandlerShow, a.listHandlerShow  {
   #mapView.min, #mapView.mob-min, 
   #content.min, #mapViewSearch.mob-min,
   #content.mob-min {
-      width: 0%;
+    width: 0%;
   }
    
   #mapViewSearch.max, #content.mob-max, 
   #mapView.mob-max, #mapViewSearch.mob-max {
-      width: 100%;
+    width: 100%;
   }
    
   #mapView.mob-min .mapPlaceholder, #mapViewSearch.mob-min .mapPlaceholder {
-      display: none;
+    display: none;
   }
   a.mapHandler, a.mapHandlerShow {
     display: block;

@@ -2,13 +2,16 @@
 <html lang="en">
   <head>
     <%= layout_stylesheet_link 'building/main' %>
-    <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: false %>
-    <script defer src="<%=gmap_url_helper('MapObject.initialize')%>"></script>
+    <%= render 'layouts/layout_head', js_path: 'home/jquery.init', defer_flag: Rails.env.production? %>
+    <%= javascript_include_tag 'building/main', defer: true %>
+    <%= javascript_include_tag 'home', defer: true%>
+    <%= javascript_include_tag 'home/main', defer: true %>
+    <script defer src="<%=gmap_url_helper%>"></script>
   </head>
   
   <body class="notransition no-hidden touch-scroll">
     <%= render 'layouts/shared/flash_messages', flash: flash  %>
-    <%= render 'layouts/shared/left_side' unless screen_class == 'screen-lg' %>
+    <%= render 'layouts/shared/left_side' if mobile? %>
     <%= render 'layouts/shared/search_modal' %>
     <%= render 'layouts/shared/wrapper' %>
 
@@ -17,29 +20,25 @@
     <div id="remote-container"></div>
     <div id="auth-form"></div>
 
-    <%= javascript_include_tag 'building/main'%>
-    <%= javascript_include_tag 'home'%>
-    <%= javascript_include_tag 'home/main' %>
-    <%= javascript_include_tag 'infobubble'%>
-    <%= javascript_include_tag 'building/map'%>
-
     <script type="text/javascript">
-      $(function(){ new app.apartments; })
-      // hiding autocomplete search results when no input given
-      if($('#buildings-search-txt').length > 0){
-        $(document).on('keyup', '#buildings-search-txt', function(e) {
-          q = $(this).val();
-          if (q == '') {
-            $(".ui-autocomplete").hide();
-            $(".no-match-link").addClass('d-none');
-          }
-        })
-      }
-      var slides_to_show = 1;
-      if(!Device.type.mobile){
-        slides_to_show = 2;
-      }
-      Card.initSlick(slides_to_show)
+      document.addEventListener('DOMContentLoaded', function() {
+        new app.apartments;
+        // hiding autocomplete search results when no input given
+        if($('#buildings-search-txt').length > 0){
+          $(document).on('keyup', '#buildings-search-txt', function(e) {
+            q = $(this).val();
+            if (q == '') {
+              $(".ui-autocomplete").hide();
+              $(".no-match-link").addClass('d-none');
+            }
+          })
+        }
+        var slides_to_show = 1;
+        if(!Device.type.mobile){
+          slides_to_show = 2;
+        }
+        Card.initSlick(slides_to_show);
+      }, false);
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
