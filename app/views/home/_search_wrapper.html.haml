@@ -25,7 +25,7 @@
         - else
           .text-center{style: 'padding: 12px 4px;'}= no_search_result_text
 
-    = content_tag 'div', '', id: 'filter-params', data: { filterParams: @filter_params.as_json }
+    = content_tag 'div', '', id: 'filter-params', data: { filterParams: @filter_params.as_json, sortedby: params[:sort_by].as_json }
 
     %section.spv-pop-search{style: 'padding: 0px 16px;'}
       / lazy load content

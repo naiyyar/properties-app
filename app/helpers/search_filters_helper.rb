@@ -8,25 +8,16 @@ module SearchFiltersHelper
 	# To retain filters when switching neighborhoods
 	# /no-fee-apartments-nyc-neighborhoods/lower-manhattan-newyork?sort_by=4&filter%5Bprice%5D%5B%5D=2&searched_by=no-fee-apartments-nyc-neighborhoods
 	def search_link neighborhood, borough
-		unless borough == 'BRONX'
-			search_url = search_url(neighborhood, borough)
-			if sort_by.present? and params[:filter].present?
-				"#{search_url}?sort_by=#{sort_by}&#{filter_params}"
-			elsif sort_by.present?
-				"#{search_url}?sort_by=#{sort_by}"
-			elsif params[:filter].present?
-				"#{search_url}"
-			else
-				filter_params.present? ? "#{search_url}?#{filter_params}" : "#{search_url}"
-			end
-		else
-			'javascript:void(0)'
-		end
+		return 'javascript:void(0)' if borough == 'BRONX'
+		search_url = search_url(neighborhood, borough)
+		return "#{search_url}?sort_by=#{sort_by}&#{filter_params}" if sort_and_filter_params?
+		return "#{search_url}?sort_by=#{sort_by}" if sort_by.present? && sort_by != '0'
+		return "#{search_url}?#{filter_params}" if filter_params.present?
+		search_url
 	end
 
 	def search_url neighborhood, borough
-		borough = (borough == 'MANHATTAN' ? 'newyork' : borough.remove_blanks)
-		return "/no-fee-apartments-nyc-neighborhoods/#{neighborhood.remove_blanks}-#{borough}"	
+		"/no-fee-apartments-nyc-neighborhoods/#{neighborhood.remove_blanks}-#{borough_city(borough)}"
 	end
 
 	def sort_by
@@ -108,6 +99,14 @@ module SearchFiltersHelper
 	# def filter_params
 	# 	@filter_params ||= params[:filter]
 	# end
+
+	def borough_city borough
+		(borough == 'MANHATTAN' ? 'newyork' : borough.remove_blanks)
+	end
+
+	def sort_and_filter_params?
+		sort_by.present? && params[:filter].present?
+	end
 
 	def permitted_filter_params
 		params.permit!
