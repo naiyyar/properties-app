@@ -95,10 +95,6 @@ module SearchFiltersHelper
 	end
 
 	private
-	
-	# def filter_params
-	# 	@filter_params ||= params[:filter]
-	# end
 
 	def borough_city borough
 		(borough == 'MANHATTAN' ? 'newyork' : borough.remove_blanks)
