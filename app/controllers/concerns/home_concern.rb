@@ -9,31 +9,31 @@ module HomeConcern
   end
 
   def search
-    if @searched_by == 'address'
-      @building = Building.find_by(building_street_address: @search_term.strip)
-      redirect_to building_path(@building) if @building.present?
-    elsif COMPANY_SEARCH_STRINGS.include?(@searched_by)
-      redirect_to management_company_path(search_company) if search_company.present?
-    else
-      searched_results
-      build_instance_variables
-      set_tab_title_text
-    end
+    redirect_to building_path(search_building) if @searched_by == 'address'
+    redirect_to management_company_path(search_company) if COMPANY_SEARCH_STRINGS.include?(@searched_by)
     
-    if @buildings.present?
-      @per_page_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
-    else
-      @buildings = pop_nb_buildings.where(id: featured_buildings.pluck(:building_id))
-    end
+    # Split View 
+    build_instance_variables
+    set_tab_title_text
+    @hash = buildings_hash # Must be before applying pagination
+
+    @buildings = if @buildings.present?
+                    @buildings.paginate(:page => params[:page], :per_page => 20)
+                 else
+                    pop_nb_buildings.where(id: featured_buildings.pluck(:building_id))
+                 end
     
     @all_buildings = AddFeaturedObjectService.new(@buildings, @search_string, @searched_by).return_buildings
     @listings_count = Listing.listings_count(@buildings, @all_buildings, @filter_params)
-    @hash = buildings_hash
     @buildings_count = @hash.length rescue 0
     @lat, @lng = set_latlng
   end
 
   private
+
+  def search_building
+    @building = Building.find_by(building_street_address: @search_term.strip)
+  end
 
   def search_company
     @search_company ||= ManagementCompany.find_by(name: @search_term.strip)
