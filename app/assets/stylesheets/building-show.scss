@@ -1,3 +1,12 @@
+@import "home-main";
+@import "comments";
+@import "fancybox_overlay";
+@import "social-share-button";
+@import "lg-transitions.min";
+@import "lightgallery.min";
+@import "split_view";
+@import "shared-search";
+
 .touch-scroll {
 	#wrapper.screen-sm {
 		-webkit-overflow-scrolling: touch !important;

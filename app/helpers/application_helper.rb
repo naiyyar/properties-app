@@ -181,7 +181,7 @@ module ApplicationHelper
   end
 
   def layout_stylesheet_link sheet_path
-    stylesheet_link_tag sheet_path, media: 'all', rel: 'stylesheet', as: 'style'
+    stylesheet_link_tag sheet_path, media: 'all', as: 'style', rel: "preload stylesheet", crossorigin: "anonymous"
   end
 
   private
