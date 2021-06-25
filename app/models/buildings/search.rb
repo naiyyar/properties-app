@@ -5,27 +5,21 @@ module Buildings
 
 		# modules
 		include NYCBorough
-		# include Buildings::FeaturedBuildings
 		
 		# Methods
 		def initialize params, buildings=nil, search_string=''
-			@sort_by 									 = params[:sort_by]
-			@filters_params 					 = params[:filter]
-			@search_string 						 = search_string
-			@searched_by               = params[:searched_by]
-	    @search_term               = params[:search_term]
-	    @buildings 								 = buildings
-	    @results                   = {}
-	    @results[:filters]         = nil
-	    @results[:zoom]            = 14
-	    @results[:boundary_coords] = []
-	    @lat 											 = params[:latitude]
-	    @lng 											 = params[:longitude]
-	    @zoomlevel 								 = params[:zoomlevel]
+			@sort_by = params[:sort_by]
+			@filters_params = params[:filter]
+			@searched_by = params[:searched_by]
+	    @search_term = params[:search_term]
+	    @lat, @lng = params[:latitude], params[:longitude]
+	    @zoomlevel = params[:zoomlevel]
+	    @search_string = search_string
+	    @buildings = buildings
+	    @results = { filters: nil, zoom: set_zoom, boundary_coords: [] }
 		end
 
 		def fetch
-			@results[:zoom] = set_zoom
 			@results[:buildings] = unless @lat.present? && @lng.present?
 																unless @search_string == 'New York'
 																	self.searched_buildings
@@ -35,8 +29,7 @@ module Buildings
 															else
 																@buildings.redo_search_buildings([@lat.to_f, @lng.to_f], @zoomlevel)
 															end
-															
-			@results[:buildings] = @buildings.filtered_buildings(@results[:buildings], @filters_params) if @filters_params.present?
+			@results[:buildings] = Building.sort_buildings(properties, @sort_by, @filters_params)
 			return @results
 		end
 
@@ -64,6 +57,11 @@ module Buildings
 		end
 
 		private
+
+		def properties
+			return @results[:buildings] unless @filters_params.present? 
+			@buildings.filtered_buildings(@results[:buildings], @filters_params)
+		end
 
 		def sub_borough
 			unless CITY_SEARCH_STRINGS.include?(@searched_by)

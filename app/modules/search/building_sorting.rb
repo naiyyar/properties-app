@@ -6,7 +6,7 @@ module Search
     def sort_buildings(buildings, sort_params, filters = {})
       @listing_filters = filters.present? ? filters[:listings] : nil
       @filter_keys = @listing_filters&.keys
-      @buildings   = buildings
+      @buildings = buildings
       @sort_params = sort_params
       
       return @buildings.updated_recently unless @sort_params.present?

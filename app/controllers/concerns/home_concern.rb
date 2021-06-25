@@ -22,7 +22,6 @@ module HomeConcern
                  else
                     pop_nb_buildings.where(id: featured_buildings.pluck(:building_id))
                  end
-    
     @all_buildings = AddFeaturedObjectService.new(@buildings, @search_string, @searched_by).return_buildings
     @listings_count = Listing.listings_count(@buildings, @all_buildings, @filter_params)
     @buildings_count = @hash.length rescue 0
