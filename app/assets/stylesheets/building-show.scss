@@ -217,7 +217,31 @@
 }
 
 @media screen and (max-width: 767px) {
-	.buildingsshow, .featured_listingsshow{
+		.buildingsshow, .featured_listingsshow {
+			#mapView, #mapViewSearch {
+	    width: 0%;
+	    -webkit-transition: all .2s ease-in-out;
+	    -o-transition: all .2s ease-in-out;
+	    transition: all .2s ease-in-out;
+	  }
+	  #mapView.min, #mapView.mob-min, 
+	  #content.min, #mapViewSearch.mob-min,
+	  #content.mob-min {
+	    width: 0%;
+	  }
+	   
+	  #mapViewSearch.max, #content.mob-max, 
+	  #mapView.mob-max, #mapViewSearch.mob-max {
+	    width: 100%;
+	  }
+	   
+	  #mapView.mob-min .mapPlaceholder, #mapViewSearch.mob-min .mapPlaceholder {
+	    display: none;
+	  }
+	  a.mapHandler, a.mapHandlerShow {
+	    display: block;
+	  }
+
 		#mapView{
 	    float: right;
 		}
