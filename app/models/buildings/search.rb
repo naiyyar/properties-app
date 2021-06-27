@@ -16,7 +16,7 @@ module Buildings
 	    @zoomlevel = params[:zoomlevel]
 	    @search_string = search_string
 	    @buildings = buildings
-	    @results = { filters: nil, zoom: set_zoom, boundary_coords: [] }
+	    @results = { filters: nil, zoom: 14, boundary_coords: [] }
 		end
 
 		def fetch
@@ -29,6 +29,7 @@ module Buildings
 															else
 																@buildings.redo_search_buildings([@lat.to_f, @lng.to_f], @zoomlevel)
 															end
+			@results[:zoom] = set_zoom
 			@results[:buildings] = Building.sort_buildings(properties, @sort_by, @filters_params)
 			return @results
 		end
