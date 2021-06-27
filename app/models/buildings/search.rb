@@ -65,16 +65,16 @@ module Buildings
 		end
 
 		def sub_borough
-			unless CITY_SEARCH_STRINGS.include?(@searched_by)
-				@sub_borough = {
-					'Queens' 		=> queens_borough,
-					'Brooklyn' 	=> brooklyn_sub_borough,
-					'Bronx' 		=> bronx_sub_borough
-				}
-       	return @sub_borough[@search_string]
-      else
-      	nil
-      end
+			return if CITY_SEARCH_STRINGS.include?(@searched_by)
+      sub_borough_hash[@search_string]
+		end
+
+		def sub_borough_hash
+			{
+				'Queens' 		=> queens_borough,
+				'Brooklyn' 	=> brooklyn_sub_borough,
+				'Bronx' 		=> bronx_sub_borough
+			}
 		end
 
 		def set_zoom

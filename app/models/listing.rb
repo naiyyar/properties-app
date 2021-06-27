@@ -80,13 +80,11 @@ class Listing < ApplicationRecord
     EXPORT_SHEET_HEADER_ROW.map{|item| style}
   end
 
-  def self.listings_count buildings, per_page_buildings, filter_params={}
+  def self.listings_count buildings, filter_params={}
     @filter_params = filter_params
-    if listing_or_building_filter?
-      filtered_listings_count(buildings, per_page_buildings)
-    else
-      buildings.sum(:listings_count)
-    end
+    @buildings = buildings.select{|b| b.kind_of?(Building)}
+    return @buildings.pluck(:listings_count).reduce(:+) unless listing_or_building_filter?
+    filtered_listings_count
   end
 
   def self.transfer_to_past_listings_table listings
@@ -118,25 +116,15 @@ class Listing < ApplicationRecord
                 })
   end
 
-  def self.filtered_listings_count buildings, per_page_buildings
+  def self.filtered_listings_count
     listings_count = 0
-    taken_building_ids = []
-    per_page_buildings.each do |b|
-      if b.kind_of?(Building)
-        act_listings       = b.get_listings(@filter_params)
-        listings_with_rent = act_listings.with_rent
-        b.act_listings     = act_listings
-        b.min_price        = listings_with_rent.first.rent rescue nil
-        b.max_price        = listings_with_rent.last.rent  rescue nil
-        listings_count    += act_listings.size
-        taken_building_ids << b.id
-      end
-    end
-
-    # taken_building_ids = per_page_buildings.map{|b| b.id if b.kind_of?(Building)}.compact
-    buildings.where.not(id: taken_building_ids).each do |b|
-      act_listings    = b.get_listings(@filter_params)
-      listings_count += act_listings.size
+    @buildings.each do |b|
+      act_listings       = b.get_listings(@filter_params)
+      listings_with_rent = act_listings.with_rent
+      b.act_listings     = act_listings
+      b.min_price        = listings_with_rent.first.rent rescue nil
+      b.max_price        = listings_with_rent.last.rent  rescue nil
+      listings_count    += act_listings.size
     end
     listings_count
   end
