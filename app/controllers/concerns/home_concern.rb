@@ -17,20 +17,14 @@ module HomeConcern
     set_tab_title_text
     buildings_hash # Must be before applying pagination
     @buildings = pop_nb_buildings.where(id: featured_buildings.pluck(:building_id)) if @buildings.blank?
+    @listings_count = Listing.listings_count(@buildings, @filter_params)
+    @buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
     @all_buildings = AddFeaturedObjectService.new(@buildings, @search_string, @searched_by).return_buildings
-    @listings_count = Listing.listings_count(@all_buildings, @filter_params)
-    @all_buildings = @all_buildings.paginate(:page => params[:page], :per_page => per_page_count)
     @buildings_count = @hash.length rescue 0
     @lat, @lng = set_latlng
   end
 
   private
-
-  def per_page_count
-    per_page = 20
-    @all_buildings.first(5).compact.each{|b| per_page += 1 if b.kind_of?(FeaturedAgent) || b.featured? }
-    return per_page
-  end
 
   def search_building
     @building = Building.find_by(building_street_address: @search_term.strip)

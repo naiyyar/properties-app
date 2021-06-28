@@ -21,7 +21,7 @@
           - if @all_buildings.blank? && @buildings.total_pages == @buildings.current_page
             .text-center{style: 'padding: 12px 4px;'}= no_search_result_text
           
-          .pages-container{style: 'padding: 15px'}= render 'layouts/shared/add_pagination', objects: @all_buildings
+          .pages-container{style: 'padding: 15px'}= render 'layouts/shared/add_pagination', objects: @buildings
         - else
           .text-center{style: 'padding: 12px 4px;'}= no_search_result_text
 
