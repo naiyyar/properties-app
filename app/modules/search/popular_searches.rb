@@ -1,13 +1,13 @@
 module Search
 	module PopularSearches
 		QUEENS_CITIES 				  = [ 'Queens','Astoria','Corona','Flushing','Forest Hills',
-															  'Kew Gardens','Long Island City','Rego Park']
+															  'Kew Gardens','Long Island City','Rego Park'].freeze
 		LUXURY_APTS_AMENITIES   = %w(doorman elevator)
-		LUXURY_APTS_PRICES 			= [3,4]
-		AFFORDABLE_APTS_PRICES  = [1,2]
-		AFFORDABLE_LUXURY_APTS_PRICES  = [2]
-		STUDIOS 								= ['0']
-		PET_AMENITITES = %w(pets_allowed_cats pets_allowed_dogs)
+		LUXURY_APTS_PRICES 			= [3,4].freeze
+		AFFORDABLE_APTS_PRICES  = [1,2].freeze
+		AFFORDABLE_LUXURY_APTS_PRICES  = [2].freeze
+		STUDIOS = ['0'].freeze
+		PET_AMENITITES = %w(pets_allowed_cats pets_allowed_dogs).freeze
 		LUXURY_APTS_NEIGHBORHOODS = [
 			'Battery Park City',
 			'Chelsea',
@@ -29,7 +29,7 @@ module Search
 			'Upper West Side',
 			'West Village',
 			'Williamsburg'
-		]
+		].freeze
 		
 		def buildings_by_popular_search search_term, buildings
 			filters = {}

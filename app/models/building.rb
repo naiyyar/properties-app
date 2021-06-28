@@ -35,7 +35,7 @@ class Building < ApplicationRecord
                  ['4',  '4+ Bed'  ],
                  ['9',  'CoLiving']
                 ].freeze
-  CITIES      = ['New York', 'Brooklyn', 'Bronx', 'Queens']
+  CITIES      = ['New York', 'Brooklyn', 'Bronx', 'Queens'].freeze
   AMENITIES   = [:doorman, :courtyard, :laundry_facility, :parking, :elevator, :roof_deck, :swimming_pool,
                 :management_company_run, :gym, :live_in_super,:pets_allowed_cats,
                 :pets_allowed_dogs, :walk_up,:childrens_playroom,:no_fee]
