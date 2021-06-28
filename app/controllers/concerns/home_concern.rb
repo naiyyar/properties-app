@@ -2,8 +2,8 @@ module HomeConcern
   extend ActiveSupport::Concern
   DEFAULT_LAT = 40.7812
   DEFAULT_LNG = -73.9665
-  COMPANY_SEARCH_STRINGS = %w(no-fee-management-companies-nyc management_companies)
-  
+  COMPANY_SEARCH_STRINGS = %w(no-fee-management-companies-nyc management_companies).freeze
+
   included do
     before_action :format_search_string, only: :search
   end
@@ -15,17 +15,22 @@ module HomeConcern
     # Split View 
     build_instance_variables
     set_tab_title_text
-    @hash = buildings_hash # Must be before applying pagination
-    searched_buildings = @buildings
+    buildings_hash # Must be before applying pagination
     @buildings = pop_nb_buildings.where(id: featured_buildings.pluck(:building_id)) if @buildings.blank?
     @all_buildings = AddFeaturedObjectService.new(@buildings, @search_string, @searched_by).return_buildings
-    @buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
     @listings_count = Listing.listings_count(@all_buildings, @filter_params)
+    @all_buildings = @all_buildings.paginate(:page => params[:page], :per_page => per_page_count)
     @buildings_count = @hash.length rescue 0
     @lat, @lng = set_latlng
   end
 
   private
+
+  def per_page_count
+    per_page = 20
+    @all_buildings.first(5).compact.each{|b| per_page += 1 if b.kind_of?(FeaturedAgent) || b.featured? }
+    return per_page
+  end
 
   def search_building
     @building = Building.find_by(building_street_address: @search_term.strip)
@@ -67,16 +72,16 @@ module HomeConcern
   end
 
   def first_building
-    @buildings.first if @buildings.present?
+    return @buildings.first if @buildings.present?
     Building.buildings_in_neighborhood(@search_string&.downcase).first rescue nil
   end
 
   def buildings_hash
-    Building.buildings_json_hash(@buildings)
+    @hash = Building.buildings_json_hash(@buildings)
   end
 
   def featured_buildings 
-    FeaturedObjectService.new(@search_string).get_buildings
+    @featured_buildings ||= FeaturedObjectService.new(@search_string).get_buildings
   end
 
   def build_instance_variables
