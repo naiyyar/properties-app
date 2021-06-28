@@ -19,9 +19,9 @@ class AddFeaturedObjectService
 	private
 
   def append_featured_buildings
-    featured_buildings.includes(:building).each_with_index do |fb, index| 
-      @buildings.delete(fb.building) # removing dupicate building if same building is featured building
-      @buildings.insert(FEATURED_BUILDINGS_CARD_INDEX + index, fb.building)
+    featured_buildings.each_with_index do |building, index| 
+      @buildings.delete(building) # removing dupicate building if same building is featured building
+      @buildings.insert(FEATURED_BUILDINGS_CARD_INDEX + index, building)
     end
   end
 

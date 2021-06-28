@@ -61,12 +61,13 @@ class FeaturedBuilding < ApplicationRecord
 
   # Using when no buildings found after appling filters
   def self.active_in_neighborhood search_query
-    self.active
-        .joins(:building)
-        .where('buildings.neighborhood @@ :q OR 
-                buildings.neighborhoods_parent @@ :q OR
-                buildings.neighborhood3 @@ :q', q: search_query)
-        .order(Arel.sql('random()')).limit(2)
+    Building.joins(:featured_buildings)
+            .where('featured_buildings.active is true AND 
+                  (buildings.neighborhood @@ :q OR 
+                   buildings.neighborhoods_parent @@ :q OR 
+                   buildings.neighborhood3 @@ :q 
+                   OR city @@ :q)', q: search_query)
+            .order(Arel.sql('random()')).limit(2)
   end
 
   private
