@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   #helpers
   helper_method :gmap_url_helper
+
+  include Pagy::Backend
   
   # modules
   include BuildingsCountConcern

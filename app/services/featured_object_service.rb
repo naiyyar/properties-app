@@ -5,8 +5,8 @@ class FeaturedObjectService
 		@searched_by = searched_by
 	end
 
-	def get_buildings
-  	FeaturedBuilding.active_in_neighborhood(@search_string)
+	def get_buildings buildings
+  	FeaturedBuilding.active_in_neighborhood(@search_string, buildings)
   end
 
   def get_listings

@@ -106,6 +106,13 @@ class Building < ApplicationRecord
   scope :with_pets, -> { where('pets_allowed_cats is true OR pets_allowed_dogs is true') }
   
   scope :random, -> (ids) { where(id: ids) }
+  scope :random_order, -> { order(Arel.sql('random()')) }
+  scope :with_search_term, -> (term) { where('featured_buildings.active is true AND 
+                                              (buildings.neighborhood @@ :q OR 
+                                               buildings.neighborhoods_parent @@ :q OR 
+                                               buildings.neighborhood3 @@ :q 
+                                               OR city @@ :q)', q: term)
+                                      }
   
   # popular searches
   scope :luxury_rentals, -> { with_amenities(['doorman', 'elevator']) }

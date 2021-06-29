@@ -34,10 +34,6 @@ class FeaturedBuilding < ApplicationRecord
   after_save :make_active, unless: :featured_by_manager?
   before_destroy :check_active_status, unless: Proc.new{ |obj| obj.expired? }
 
-  def self.active_featured_buildings building_ids
-    where(building_id: building_ids).active
-  end
-
   def self.active_building_ids building_ids
     active_featured_buildings(building_ids).pluck(:building_id)
   end
@@ -60,17 +56,22 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   # Using when no buildings found after appling filters
-  def self.active_in_neighborhood search_query
-    Building.joins(:featured_buildings)
-            .where('featured_buildings.active is true AND 
-                  (buildings.neighborhood @@ :q OR 
-                   buildings.neighborhoods_parent @@ :q OR 
-                   buildings.neighborhood3 @@ :q 
-                   OR city @@ :q)', q: search_query)
-            .order(Arel.sql('random()')).limit(2)
+  def self.active_in_neighborhood search_query, buildings=nil
+    @buildings = buildings || Building.all
+    return searched_featured_buildings(search_query)
+  end
+
+  def self.active_featured_buildings building_ids
+    where(building_id: building_ids).active
   end
 
   private
+
+  def self.searched_featured_buildings search_query
+    @buildings.joins(:featured_buildings)
+              .with_search_term(search_query)
+              .random_order.limit(2)
+  end
   
   def check_active_status
     errors.add :base, 'Cannot delete unexpired featured buildings.'

@@ -1,4 +1,3 @@
-require 'will_paginate/array'
 class HomeController < ApplicationController
   before_action :reset_session,         only: [:index, :auto_search]
   before_action :find_property,         only: [:load_infobox, :get_images]
