@@ -51,7 +51,7 @@
         .resultsList.searched-properties{class: controller_name}
           #load-more-buildings.row= render partial: 'buildings/building', :collection => @all_buildings, :as => :object, cached: true
         
-        .pages-container{style: 'padding: 15px'}= pagy_bootstrap_nav(@pagy).html_safe
+        .pages-container{style: 'padding: 15px'}= render 'layouts/shared/pagination', pagy: @pagy
 
         = render 'layouts/home/footer'
 
