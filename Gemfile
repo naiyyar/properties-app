@@ -77,6 +77,7 @@ gem 'omniauth-google-oauth2'
 
 # P
 gem 'paperclip', '~> 5.0.0'
+gem 'pagy' # pagination
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pg_search'
 gem 'puma', '~> 3.11'
@@ -116,7 +117,7 @@ gem 'validates_timeliness', '~> 5.0.0.alpha3'
 # gem 'webpacker'
 gem 'wicked'
 gem 'wicked_pdf', '1.1.0'
-gem 'will_paginate-bootstrap4'
+# gem 'will_paginate-bootstrap4'
 gem 'wkhtmltopdf-binary' #, '0.12.4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # Use Redis adapter to run Action Cable in production
