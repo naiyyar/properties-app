@@ -1,7 +1,8 @@
 - link = pagy_link_proc(pagy, 'class="page-link"')
+- first_or_last_page_class = pagy.page == 1 ? 'first-page' : (pagy.page == pagy.last ? 'last-page' : '')
 
 %nav.pagy-bootstrap-nav{"aria-label" => "pager", :role => "navigation"}
-	%ul.pagination
+	%ul.pagination{class: first_or_last_page_class}
 		- if pagy.prev
 			%li.page-item.prev.text-center!= link.call(pagy.prev, '← Prev', 'aria-label="previous"')
 		- else
