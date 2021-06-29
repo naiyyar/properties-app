@@ -82,7 +82,7 @@ class Listing < ApplicationRecord
 
   def self.listings_count buildings, filter_params={}
     @filter_params = filter_params
-    @buildings = buildings
+    @buildings = buildings.select{|b| b.kind_of? Building}
     return @buildings.pluck(:listings_count).compact.reduce(:+) unless listing_or_building_filter?
     filtered_listings_count
   end
@@ -118,7 +118,7 @@ class Listing < ApplicationRecord
 
   def self.filtered_listings_count
     listings_count = 0
-    @buildings.select{|b| b.kind_of? Building}.each do |b|
+    @buildings.each do |b|
       act_listings = b.get_listings(@filter_params)
       listings_with_rent = act_listings.with_rent
       b.act_listings  = act_listings
