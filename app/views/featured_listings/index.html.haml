@@ -45,8 +45,7 @@
                     %input.apple-switch.sb-sm.featured-listing{type: 'checkbox', checked: listing.active, style: 'margin: 0px;', data: { fbid: listing.id } }
                   %td
 
-  .text-center
-    = render 'layouts/shared/add_pagination', objects: @featured_listings
+  .text-center.mt-5= pagy_bootstrap_nav(@pagy).html_safe
 
   :css
     #sortable_filter{

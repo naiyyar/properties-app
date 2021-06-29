@@ -20,4 +20,4 @@
         %div.text-center{style: 'padding: 8px;'}
           = link_to 'Disconnect', disconnect_building_featured_comp_path(id: @featured_comp.id, building_id: building.id), data: {confirm: 'Are you sure you want to disconnect this building?'}, class: 'btn btn-danger btn-block'
 
-= render 'layouts/shared/add_pagination', objects: @featured_on_buildings
+= pagy_bootstrap_nav(@pagy).html_safe

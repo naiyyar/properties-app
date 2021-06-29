@@ -6,9 +6,7 @@ class UsersController < ApplicationController
 	before_action :get_saved_cards, :set_type_and_back_to_url, only: [:managertools, :agenttools, :frbotools]
 
 	def index
-		@users = User.order('created_at desc')
-								 .includes(:buildings, :favorites)
-								 .paginate(:page => params[:page], :per_page => 100)
+		@pagy, @users = pagy(User.order('created_at desc').includes(:buildings, :favorites), items: 100)
 	end
 
 	def contribution
@@ -45,21 +43,18 @@ class UsersController < ApplicationController
 	def saved_buildings
 		# @rent_medians 	= RentMedian.all
 		# @broker_percent = BrokerFeePercent.first.percent_amount
-		@buildings 		= Building.saved_favourites(@user)
-												 		.paginate(:page => params[:page], :per_page => 20)
-												 		.includes(:featured_buildings)
-    
-    @photos 			= Upload.building_photos(@buildings.pluck(:id))
-		@hash 				= Building.buildings_json_hash(@buildings)
-    @zoom 				= 12
+		@pagy, @buildings = pagy(Building.saved_favourites(@user).includes(:featured_buildings))
+    @photos = Upload.building_photos(@buildings.pluck(:id))
+		@hash = Building.buildings_json_hash(@buildings)
+    @zoom = 12
     @show_map_btn = @half_footer = true
 	end
 
 	def managertools
 		unless @type == 'billing'
-			@featured_buildings = filterific_results(FeaturedBuilding).includes(:billings, 
-																																						:building => [:management_company]
-																																						)
+			@pagy, @featured_buildings = pagy(filterific_results(FeaturedBuilding).includes(:billings, 
+																																											:building => [:management_company]
+																																											), items: 100)
 	  else
 	  	@billings = get_billings_for('FeaturedBuilding')
 	  end
@@ -72,7 +67,7 @@ class UsersController < ApplicationController
 
 	def agenttools
 		unless @type == 'billing'
-			@featured_agents = filterific_results(FeaturedAgent)
+			@pagy, @featured_agents = pagy(filterific_results(FeaturedAgent), items: 100)
 	  	@photos_count = @featured_agents.sum(:uploads_count)
 	  else
 	  	@billings = get_billings_for('FeaturedAgent')
@@ -86,7 +81,7 @@ class UsersController < ApplicationController
 
 	def frbotools
 		unless @type == 'billing'
-			@featured_listings = filterific_results(FeaturedListing).includes(:user)
+			@pagy, @featured_listings = pagy(filterific_results(FeaturedListing).includes(:user), items: 100)
 	  	@photos_count = @featured_listings.sum(:uploads_count)
 	  else
 	  	@billings = get_billings_for('FeaturedListing')
@@ -106,9 +101,7 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@buildings = @user.buildings
-											.includes(:uploads, :building_average, :units)
-											.paginate(:page => params[:page], :per_page => 20)
+		@pagy, @buildings = pagy(@user.buildings.includes(:uploads))
 	end
 
 	def create
@@ -144,9 +137,8 @@ class UsersController < ApplicationController
 	end
 
 	def get_billings_for model_type
-		@current_user.billings
-								 .for_type(model_type)
-    						 .paginate(:page => params[:page], :per_page => 100)
+		@pagy, billings = pagy(@current_user.billings.for_type(model_type), items: 100)
+		return billings
 	end
 
 	def set_type_and_back_to_url
@@ -163,7 +155,6 @@ class UsersController < ApplicationController
 
     return @filterrific.find
 							  			 .where(user_id: @user.id).by_manager
-							  			 .paginate(:page => params[:page], :per_page => 100)
 							  			 .order('created_at desc')
 	end
 end

@@ -5,8 +5,7 @@
   
   = render 'featured_agents/agents'
   
-  .text-center
-    = render 'layouts/shared/add_pagination', objects: @featured_agents
+  .text-center.mt-4= pagy_bootstrap_nav(@pagy).html_safe
 
 
 :css

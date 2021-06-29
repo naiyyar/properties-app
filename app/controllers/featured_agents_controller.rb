@@ -7,7 +7,8 @@ class FeaturedAgentsController < ApplicationController
   include Searchable
 
   def index
-    @featured_agents = filterrific_search_results.paginate(:page => params[:page], :per_page => 100).includes(:user)
+    @featured_agents = filterrific_search_results.includes(:user)
+    @pagy, @featured_agents = pagy(@featured_agents, items: 100)
     @photos_count = @featured_agents.sum(:uploads_count)
     respond_to do |format|
       format.html

@@ -9,17 +9,8 @@ module ListingsActionConcern
   end
 
 	def index
-    @listings = filterrific_search_results.paginate(:page => params[:page], :per_page => 100)
-                                          .includes(building: [:management_company])
-                                          .default_listing_order
-    # @filterrific = initialize_filterrific(
-    #     model_class,
-    #     params[:filterrific],
-    #     available_filters: [:default_listing_order, :search_query]
-    #   ) or return
-    #   @listings = @filterrific.find.paginate(:page => params[:page], :per_page => 100)
-    #                                .includes(building: [:management_company])
-    #                                .default_listing_order
+    @listings = filterrific_search_results.includes(building: [:management_company]).default_listing_order
+    @pagy, @listings = pagy(@listings, items: 100)
 
     unless model_class.to_s == 'Listing'
       @type = 'past'

@@ -8,10 +8,9 @@ class ReviewsController < ApplicationController
   
   # from production
   def index
-    @reviews = filterrific_search_results.where(reviewable_type: 'Building')
-                                         .paginate(:page => params[:page], :per_page => 100)
-                                         .includes(:reviewable, :user)
+    @reviews = filterrific_search_results.where(reviewable_type: 'Building').includes(:reviewable, :user)
     
+    @pagy, @reviews = pagy(@reviews, items: 100)
     if params[:building_id].present?
       @reviews = @reviews.where(reviewable_id: params[:building_id])
     end

@@ -25,5 +25,5 @@
   <%end%>
 </div>
 
-<%= render 'layouts/shared/add_pagination', objects: @buildings %>
+<%= pagy_bootstrap_nav(@pagy).html_safe%>
       

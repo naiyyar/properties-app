@@ -35,7 +35,7 @@ class UploadsController < ApplicationController
   end
 
   def photos
-    @photos = Upload.where('image_file_name is not null').paginate(params[:page], per_page: 50)
+    @pagy, @photos = pagy(Upload.where('image_file_name is not null'), items: 50)
   end
 
   def lazy_load_images

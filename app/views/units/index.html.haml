@@ -3,5 +3,4 @@
 - cache [@units, params[:page]] do
   = render 'units/units', :@units => @units
 
-.text-center
-  = render 'layouts/shared/add_pagination', objects: @units
+.text-center= pagy_bootstrap_nav(@pagy).html_safe

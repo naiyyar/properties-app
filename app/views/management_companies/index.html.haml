@@ -28,5 +28,4 @@
                 
   .row.mt-5
     .col-xs-12.col-sm-12.col-md-12.col-lg-12
-      .text-center
-        = render 'layouts/shared/add_pagination', objects: @management_companies
+      .text-center= pagy_bootstrap_nav(@pagy).html_safe

@@ -6,8 +6,8 @@ class FeaturedCompsController < ApplicationController
   include Searchable
 
   def index
-    @featured_comps = filterrific_search_results.paginate(:page => params[:page], :per_page => 100).includes(:building => [:management_company])
-
+    @featured_comps = filterrific_search_results.includes(:building => [:management_company])
+    @pagy, @featured_comps = pagy(@featured_comps, items: 100)
     respond_to do |format|
       format.html
       format.js
@@ -31,7 +31,7 @@ class FeaturedCompsController < ApplicationController
   end
 
   def edit
-    @featured_on_buildings = @comp_buildings.paginate(:page => params[:page], :per_page => 20)
+    @pagy, @featured_on_buildings = pagy(@comp_buildings)
   end
 
   def create

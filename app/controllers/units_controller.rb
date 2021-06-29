@@ -10,7 +10,7 @@ class UnitsController < ApplicationController
       params[:filterrific],
       available_filters: [:search_query]
     ) or return
-    @units = @filterrific.find.reorder('created_at desc').includes(:building).paginate(:page => params[:page], :per_page => 100)
+    @pagy, @units = pagy(@filterrific.find.reorder('created_at desc'))
 
     respond_to do |format|
       format.html

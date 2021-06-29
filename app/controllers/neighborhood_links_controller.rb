@@ -4,7 +4,7 @@ class NeighborhoodLinksController < ApplicationController
   before_action :set_neighborhoods, only: [:index, :edit]
   
   def index
-    @neighborhood_links = NeighborhoodLink.order({ date: :desc }, { title: :asc }).paginate(:page => params[:page], :per_page => 100)
+    @pagy, @neighborhood_links = pagy(NeighborhoodLink.order({ date: :desc }, { title: :asc }))
     @neighborhood_link = NeighborhoodLink.new
   end
 

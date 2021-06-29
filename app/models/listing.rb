@@ -80,11 +80,10 @@ class Listing < ApplicationRecord
     EXPORT_SHEET_HEADER_ROW.map{|item| style}
   end
 
-  def self.listings_count buildings, filter_params={}, per_page: nil
+  def self.listings_count buildings, filter_params={}
     @filter_params = filter_params
     @buildings = buildings
-    @per_page_buildings = per_page
-    return @buildings.pluck(:listings_count).reduce(:+) unless listing_or_building_filter?
+    return @buildings.pluck(:listings_count).compact.reduce(:+) unless listing_or_building_filter?
     filtered_listings_count
   end
 

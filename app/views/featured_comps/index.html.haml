@@ -6,7 +6,7 @@
 		= render 'featured_comps/comps'
   
 	.text-center
-		= render 'layouts/shared/add_pagination', objects: @featured_comps
+		= pagy_bootstrap_nav(@pagy).html_safe
 
 :css
 	#sortable_filter{

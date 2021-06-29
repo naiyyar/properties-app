@@ -6,8 +6,10 @@ class FeaturedListingsController < ApplicationController
   include Searchable
   
   def index
-  	@featured_listings = filterrific_search_results.paginate(:page => params[:page], :per_page => 100).includes([:user])
-  	respond_to do |format|
+  	@featured_listings = filterrific_search_results.includes([:user])
+    @pagy, @featured_listings = pagy(@featured_listings, items: 100)
+  	
+    respond_to do |format|
       format.html
       format.js
     end

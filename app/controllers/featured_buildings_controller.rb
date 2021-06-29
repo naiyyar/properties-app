@@ -5,9 +5,9 @@ class FeaturedBuildingsController < ApplicationController
   include Searchable
 
   def index
-    @featured_buildings = filterrific_search_results.paginate(:page => params[:page], :per_page => 100)
-                                                    .includes(:user, 
+    @featured_buildings = filterrific_search_results.includes(:user, 
                                                               :building => [:management_company])
+    @pagy, @featured_buildings = pagy(@featured_buildings, items: 100)
     respond_to do |format|
       format.html
       format.js

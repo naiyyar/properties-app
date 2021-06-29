@@ -9,7 +9,7 @@ class ManagementCompaniesController < ApplicationController
   def index
     @management_companies = ManagementCompany.includes(:buildings)
                                              .order(name: :asc)
-                                             .paginate(:page => params[:page], :per_page => 100)
+    @pagy, @management_companies = pagy(@management_companies, items: 100)
   end
 
   def managed_buildings
@@ -43,7 +43,7 @@ class ManagementCompaniesController < ApplicationController
   # GET /management_companies/1.json
   def show
     @show_map_btn = @half_footer = true
-    @manage_buildings = @buildings.paginate(:page => params[:page], :per_page => 20) unless params[:object_id].present?
+    @pagy, @manage_buildings = pagy(@buildings) unless params[:object_id].present?
     @all_buildings = AddFeaturedObjectService.new(@buildings).return_buildings
     
     # Reviews
@@ -77,7 +77,8 @@ class ManagementCompaniesController < ApplicationController
 
   # GET /management_companies/1/edit
   def edit
-    @buildings = @manage_buildings = @buildings.paginate(:page => params[:page], :per_page => 20)
+    @pagy, @buildings = pagy(@buildings)
+    @manage_buildings = @buildings
   end
 
   # POST /management_companies

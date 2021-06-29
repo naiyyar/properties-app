@@ -4,8 +4,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.order(created_at: :desc)
-                       .paginate(:page => params[:page], :per_page => 100)
+    @pagy, @contacts = pagy(Contact.order(created_at: :desc), items: 100)
   end
 
   # GET /contacts/1
