@@ -7,3 +7,4 @@
 //= require favourite
 //= require cta_actions
 //= require jquery.lazyload
+//= require find_device

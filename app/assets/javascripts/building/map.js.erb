@@ -15,7 +15,7 @@ var header_elem     = document.getElementById('header');
 
 MapObject = {
   initialize: function(){
-    if(mobile){
+    if(Device.type.mobile){
       fullscreen_ctrl = false;
     }
     var options = {
