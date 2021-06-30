@@ -80,10 +80,11 @@ class Listing < ApplicationRecord
     EXPORT_SHEET_HEADER_ROW.map{|item| style}
   end
 
-  def self.listings_count buildings, filter_params={}
+  def self.listings_count all_buildings, filter_params, per_page_buildings: buildings
     @filter_params = filter_params
-    @buildings = buildings.select{|b| b.kind_of? Building}
-    return @buildings.pluck(:listings_count).compact.reduce(:+) unless listing_or_building_filter?
+    @per_page_buildings = per_page_buildings.select{|b| b.kind_of? Building}
+    
+    return all_buildings.pluck(:listings_count).compact.reduce(:+) unless listing_or_building_filter?
     filtered_listings_count
   end
 
@@ -118,7 +119,7 @@ class Listing < ApplicationRecord
 
   def self.filtered_listings_count
     listings_count = 0
-    @buildings.each do |b|
+    @per_page_buildings.each do |b|
       act_listings = b.get_listings(@filter_params)
       listings_with_rent = act_listings.with_rent
       b.act_listings  = act_listings
@@ -126,6 +127,8 @@ class Listing < ApplicationRecord
       b.max_price = listings_with_rent.last.rent  rescue nil
       listings_count += act_listings.size
     end
+
+    #(@buildings - @per_page_buildings).each{ |building| listings_count += b.get_listings(@filter_params).size }
 
     listings_count
   end

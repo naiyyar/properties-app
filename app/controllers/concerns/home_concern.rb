@@ -16,10 +16,11 @@ module HomeConcern
     build_instance_variables
     set_tab_title_text
     buildings_hash # Must be before applying pagination
+    searched_buildings = @buildings
     @buildings = pop_nb_buildings.where(id: featured_buildings.pluck(:building_id)) if @buildings.blank?
     @pagy, @buildings = pagy(@buildings)
     @all_buildings = AddFeaturedObjectService.new(@buildings, @search_string, params).return_buildings
-    @listings_count = Listing.listings_count(@all_buildings, @filter_params)
+    @listings_count = Listing.listings_count(searched_buildings, @filter_params, per_page_buildings: @all_buildings)
     @buildings_count = @hash.length rescue 0
     @lat, @lng = set_latlng
   end
