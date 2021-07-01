@@ -52,7 +52,7 @@ class AddFeaturedObjectService
   end
 
   def featured_buildings
-  	@featured_buildings ||= FeaturedObjectService.new(@search_string).get_buildings(@buildings)
+  	@featured_buildings ||= FeaturedObjectService.new(@search_string, @searched_by).get_buildings(@buildings)
   end
 
   def featured_listings

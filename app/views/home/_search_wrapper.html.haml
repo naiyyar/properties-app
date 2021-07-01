@@ -18,7 +18,7 @@
             = render partial: 'buildings/building', :collection => @all_buildings, :as => :object
         
         - if @buildings.present?
-          - if @all_buildings.blank? && @buildings.total_pages == @buildings.current_page
+          - if @all_buildings.blank? && @pagy.pages == @pagy.page
             .text-center{style: 'padding: 12px 4px;'}= no_search_result_text
           
           .pages-container{style: 'padding: 15px'}

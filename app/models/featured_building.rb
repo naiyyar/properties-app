@@ -56,8 +56,12 @@ class FeaturedBuilding < ApplicationRecord
   end
 
   # Using when no buildings found after appling filters
-  def self.active_in_neighborhood search_query, buildings=nil
-    @buildings = buildings || Building.all
+  def self.active_in_neighborhood buildings, search_query, search_by=''
+    @buildings = if search_by == 'nyc' && search_query != 'New York'
+                  buildings
+                else
+                  Building.transparentcity_buildings
+                end
     return searched_featured_buildings(search_query)
   end
 
