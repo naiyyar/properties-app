@@ -161,6 +161,7 @@ class HomeController < ApplicationController
                      :locals => {  property:       @property,
                                    size_class:     '',
                                    on_click:       false,
+                                   info_window: false,
                                    filter_params:  params[:filter_params]
                                 }
                   )

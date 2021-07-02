@@ -1,3 +1,8 @@
+function openLinkInNewTab(e){
+  window.open(this.href, '_blank');
+  return false;
+}
+
 function agentContactForm(agent_id){
   $.ajax({
     url: '/featured_agents/'+agent_id+'/contact',
