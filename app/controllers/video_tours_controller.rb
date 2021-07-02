@@ -90,7 +90,7 @@ class VideoToursController < ApplicationController
     end
 
     def find_tourable
-      klass = params[:tourable_type] || 'Building'
+      klass = params[:tourable_type].titleize || 'Building'
       @tourable = klass.constantize.find(params[:tourable_id])
     end
     
