@@ -19,7 +19,7 @@ module HomeConcern
     searched_buildings = @buildings
     @buildings = pop_nb_buildings.where(id: featured_buildings.pluck(:building_id)) if @buildings.blank?
     @pagy, @buildings = pagy(@buildings)
-    @all_buildings = AddFeaturedObjectService.new(@buildings, @search_string, params).return_buildings
+    @all_buildings = AddFeaturedObjectService.new(@buildings, searched_buildings, @search_string, @searched_by).return_buildings
     @listings_count = Listing.listings_count(searched_buildings, @filter_params, per_page_buildings: @all_buildings)
     @buildings_count = @hash.length rescue 0
     @lat, @lng = set_latlng

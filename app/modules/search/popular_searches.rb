@@ -46,54 +46,54 @@ module Search
 					# No use of filters hash here. It's only to fix the SEO tab title
 					filters[:amenities] = ['man']
 				when 'manhattan-apartments-for-rent-cheap'
-					buildings 			= manhattan_buildings.where(price: AFFORDABLE_APTS_PRICES)
+					buildings = manhattan_buildings.where(price: AFFORDABLE_APTS_PRICES)
 					filters[:price] = AFFORDABLE_APTS_PRICES
 				when 'coliving-spaces-in-nyc-for-rent'
-					buildings 			= @buildings.with_bed([Building::COLIVING_NUM.to_s])
-					filters[:beds] 	= [Building::COLIVING_NUM]
+					buildings = @buildings.with_bed([Building::COLIVING_NUM.to_s])
+					filters[:beds] = [Building::COLIVING_NUM]
 				when 'studio-apartments-in-nyc-for-rent'
-					buildings 			= @buildings.with_bed(STUDIOS)
-					filters[:beds] 	= STUDIOS
+					buildings = @buildings.with_bed(STUDIOS)
+					filters[:beds] = STUDIOS
 				when 'affordable-apartments-for-rent-in-nyc'
-					buildings 			= @buildings.where(price: AFFORDABLE_APTS_PRICES)
+					buildings = @buildings.where(price: AFFORDABLE_APTS_PRICES)
 					filters[:price] = AFFORDABLE_APTS_PRICES
 				when 'cheap-apartments-in-nyc-for-rent'
-					buildings 			= @buildings.where(price: 1)
+					buildings = @buildings.where(price: 1)
 					filters[:price] = [1]
 				when '2-bedroom-apartments-in-nyc'
-					buildings 			= @buildings.with_bed(['2'])
+					buildings = @buildings.with_bed(['2'])
 					filters[:beds] 	= ['2']
 				when '3-bedroom-apartments-for-rent-in-nyc'
-					buildings 			= @buildings.with_bed(['3'])
-					filters[:beds] 	= ['3']
+					buildings = @buildings.with_bed(['3'])
+					filters[:beds] = ['3']
 				when 'one-bedroom-apartments-in-nyc-for-rent'
-					buildings 			= @buildings.with_bed(['1'])
-					filters[:beds] 	= ['1']
+					buildings = @buildings.with_bed(['1'])
+					filters[:beds] = ['1']
 				when 'cheap-studio-apartments-in-nyc-for-rent'
-					buildings 			= @buildings.with_bed(STUDIOS).where(price: 1)
+					buildings = @buildings.with_bed(STUDIOS).where(price: 1)
 					filters[:price] = [1]
-					filters[:beds] 	= STUDIOS
+					filters[:beds] = STUDIOS
 				# amenities
 				when 'pet-friendly-apartments-in-nyc'
-					buildings 					= @buildings.with_amenities(PET_AMENITITES)
+					buildings = @buildings.with_amenities(PET_AMENITITES)
 					filters[:amenities] = PET_AMENITITES
 				when 'nyc-apartments-with-pool'
-					buildings 					= @buildings.with_amenities(['swimming_pool'])
+					buildings = @buildings.with_amenities(['swimming_pool'])
 					filters[:amenities] = ['swimming_pool']
 				when 'walk-up-apartments-nyc'
-					buildings 					= @buildings.with_amenities(['walk_up'])
+					buildings = @buildings.with_amenities(['walk_up'])
 					filters[:amenities] = ['walk_up']
 				when 'affordable-doorman-buildings-nyc'
-					buildings 					= @buildings.where(price: AFFORDABLE_APTS_PRICES).with_amenities(['doorman'])
+					buildings = @buildings.where(price: AFFORDABLE_APTS_PRICES).with_amenities(['doorman'])
 					filters[:amenities] = ['doorman']
-					filters[:price] 		= AFFORDABLE_APTS_PRICES
+					filters[:price] = AFFORDABLE_APTS_PRICES
 				when 'nyc-apartments-with-gyms'
-					buildings 					= @buildings.with_amenities(['gym'])
+					buildings = @buildings.with_amenities(['gym'])
 					filters[:amenities] = ['gym']
 				# neighborhoods
 				when 'studio-apartments-in-brooklyn-for-rent'
-					buildings 			= brooklyn_buildings.with_bed(STUDIOS)
-					filters[:beds] 	= STUDIOS
+					buildings = brooklyn_buildings.with_bed(STUDIOS)
+					filters[:beds] = STUDIOS
 				when 'studios-for-rent-in-queens'
 					buildings 			= queens_buildings.with_bed(STUDIOS)
 					filters[:beds] 	= STUDIOS

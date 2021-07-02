@@ -6,7 +6,7 @@ class FeaturedObjectService
 	end
 
 	def get_buildings buildings=nil
-  	FeaturedBuilding.active_in_neighborhood(buildings, @search_string, @searched_by)
+  	FeaturedBuilding.active_in_neighborhood(buildings, @search_string)
   end
 
   def get_listings
