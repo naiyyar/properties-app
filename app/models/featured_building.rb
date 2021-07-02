@@ -58,7 +58,8 @@ class FeaturedBuilding < ApplicationRecord
   # Using when no buildings found after appling filters
   def self.active_in_neighborhood buildings, search_query
     @buildings = buildings
-    return searched_featured_buildings(search_query)
+    return if @buildings.blank?
+    searched_featured_buildings(search_query)
   end
 
   def self.active_featured_buildings building_ids
