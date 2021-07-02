@@ -44,7 +44,7 @@ class ManagementCompaniesController < ApplicationController
   def show
     @show_map_btn = @half_footer = true
     @pagy, @manage_buildings = pagy(@buildings) unless params[:object_id].present?
-    @all_buildings = AddFeaturedObjectService.new(@buildings).return_buildings
+    @all_buildings = AddFeaturedObjectService.new(@manage_buildings, @buildings).return_buildings
     
     # Reviews
     @reviews = Review.buildings_reviews(@buildings, @management_company.id)
