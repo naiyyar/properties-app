@@ -8,8 +8,6 @@ class AddFeaturedObjectService
     @buildings_arr = per_page_buildings.to_a
 		@search_string = search_string
 		@searched_by = searched_by
-    # @search_term = params[:search_term] # For popular searches
-    #@search_string = popular_search_neighborhood if by_popular_search?
 	end
 
 	def return_buildings
@@ -20,21 +18,6 @@ class AddFeaturedObjectService
 	end
 
 	private
-
-  # def popular_search_neighborhood
-  #   nb = Building.search_hood(@search_term)
-  #   return popular_search_city.first if popular_search_city.present?
-  #   return 'New York' unless Search::PopularSearches::LUXURY_APTS_NEIGHBORHOODS.include?(nb.titleize)
-  #   nb
-  # end
-
-  # def popular_search_city
-  #   @search_term.split('-').select{|item| Building::CITIES.include?(item.titleize)}
-  # end
-
-  # def by_popular_search?
-  #   @searched_by == 'nyc'
-  # end
 
   def append_featured_buildings
     featured_buildings.each_with_index do |building, index| 

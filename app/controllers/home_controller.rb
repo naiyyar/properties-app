@@ -36,8 +36,6 @@ class HomeController < ApplicationController
       filters  = params[:filter_params]
       listings = @property.get_listings(filters)
       building_type_locals = {
-        recomended_per: @property.recommended_percent,
-        rating_cache:   @property.rating_cache,
         filters:  filters,
         :@listings => listings,
         fav_color_class:  @fav_color_class

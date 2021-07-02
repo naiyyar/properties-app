@@ -23,6 +23,7 @@ var header_id     = $('#app-header').length > 0 ? 'app-header' : 'header-mob';
 var boundary_coords = $('#boundary_coords').data('coords');
 var polylines;
 var transitLayer;
+var open_featured_building_infowindow = false;
 map_init_count = 0;
 current_user_id   = $('#cu').val();
 redo_search       = false;
@@ -112,11 +113,12 @@ SearchMapObject = {
               createSidebar(prop, marker, map);
             }
             
-            if(i == 0 || i == '0'){
+            if(!open_featured_building_infowindow){
               // default opening first fetured building marker
               google.maps.event.addListener(marker, 'load', (function(marker, i) {
                 var object = json_array[i];
-                if(object.featured && prop.property_type == 'Building'){
+                if(object.featured_buildings_count > 0 && prop.property_type == 'Building'){
+                  open_featured_building_infowindow = true;
                   featured_building_id = object.id
                   featured_marker = marker;
                   loadMarkerWindow(object.id, map, marker, prop.property_type);

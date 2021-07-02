@@ -15,12 +15,12 @@ module HomeConcern
     # Split View 
     build_instance_variables
     set_tab_title_text
-    buildings_hash # Must be before applying pagination
     searched_buildings = @buildings
     @buildings = display_featured_buildings if @buildings.blank? && featured_buildings.present?
     @pagy, @buildings = pagy(@buildings)
     @all_buildings = AddFeaturedObjectService.new(@buildings, searched_buildings, @search_string, @searched_by).return_buildings
     @listings_count = Listing.listings_count(searched_buildings, @filter_params, per_page_buildings: @all_buildings)
+    @hash = Building.buildings_json_hash(searched_buildings)
     @buildings_count = @hash.length rescue 0
     @lat, @lng = set_latlng
   end
@@ -73,10 +73,6 @@ module HomeConcern
   def first_building
     return @buildings.first if @buildings.present?
     Building.buildings_in_neighborhood(@search_string&.downcase).first rescue nil
-  end
-
-  def buildings_hash
-    @hash = Building.buildings_json_hash(@buildings)
   end
 
   def featured_buildings 
