@@ -141,26 +141,26 @@ class HomeController < ApplicationController
   end
 
   def tab_title_tag
-    @tab_title_tag ||= 'Apartments For Rent in NYC'
+    'Apartments For Rent in NYC'
   end
 
   def render_slider_partial
     render_to_string(:partial => '/home/lightslider', 
-                     :locals => { object:       @property,
+                     :locals => { object: @property,
                                   images_count: @image_uploads.size,
-                                  first_image:  @image_uploads[0],
-                                  show_path:    view_context.object_show_path(@property)
+                                  first_image: @image_uploads[0],
+                                  show_path: view_context.object_show_path(@property)
                                 }
                     )
   end
 
   def render_cta_partial
     render_to_string(:partial => '/contacts/cta_buttons', 
-                     :locals => {  property:       @property,
-                                   size_class:     '',
-                                   on_click:       false,
+                     :locals => {  property: @property,
+                                   size_class: '',
+                                   on_click: false,
                                    info_window: false,
-                                   filter_params:  params[:filter_params]
+                                   filter_params: params[:filter_params]
                                 }
                   )
   end

@@ -49,6 +49,7 @@ class AddFeaturedObjectService
   end
 
   def featured_listing_card_index
+    return FEATURED_BUILDINGS_CARD_INDEX if featured_buildings.blank?
   	FEATURED_BUILDINGS_CARD_INDEX + featured_buildings.size
   end
 end

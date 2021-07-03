@@ -1,11 +1,11 @@
 module Search
 	module PopularSearches
-		QUEENS_CITIES 				  = [ 'Queens','Astoria','Corona','Flushing','Forest Hills',
-															  'Kew Gardens','Long Island City','Rego Park'].freeze
-		LUXURY_APTS_AMENITIES   = %w(doorman elevator)
-		LUXURY_APTS_PRICES 			= [3,4].freeze
-		AFFORDABLE_APTS_PRICES  = [1,2].freeze
-		AFFORDABLE_LUXURY_APTS_PRICES  = [2].freeze
+		QUEENS_CITIES = [ 'Queens','Astoria','Corona','Flushing','Forest Hills',
+											'Kew Gardens','Long Island City','Rego Park'].freeze
+		LUXURY_APTS_AMENITIES = %w(doorman elevator).freeze
+		LUXURY_APTS_PRICES = [3,4].freeze
+		AFFORDABLE_APTS_PRICES = [1,2].freeze
+		AFFORDABLE_LUXURY_APTS_PRICES = [2].freeze
 		STUDIOS = ['0'].freeze
 		PET_AMENITITES = %w(pets_allowed_cats pets_allowed_dogs).freeze
 		LUXURY_APTS_NEIGHBORHOODS = [
@@ -95,51 +95,51 @@ module Search
 					buildings = brooklyn_buildings.with_bed(STUDIOS)
 					filters[:beds] = STUDIOS
 				when 'studios-for-rent-in-queens'
-					buildings 			= queens_buildings.with_bed(STUDIOS)
-					filters[:beds] 	= STUDIOS
+					buildings = queens_buildings.with_bed(STUDIOS)
+					filters[:beds] = STUDIOS
 				when '2-bedroom-apartments-in-brooklyn-for-rent'
-					buildings 			= brooklyn_buildings.with_bed(['2'])
-					filters[:beds] 	= ['2']
+					buildings = brooklyn_buildings.with_bed(['2'])
+					filters[:beds] = ['2']
 				when '2-bedroom-apartments-in-queens-for-rent'
-					buildings 			= queens_buildings.with_bed(['2'])
-					filters[:beds] 	= ['2']
+					buildings = queens_buildings.with_bed(['2'])
+					filters[:beds] = ['2']
 				when 'harlem-studio-apartments'
-					buildings 		 = buildings_in_neighborhood('harlem').with_bed(STUDIOS)
+					buildings = buildings_in_neighborhood('harlem').with_bed(STUDIOS)
 					filters[:beds] = STUDIOS
 				when 'long-island-city-studios'
-					buildings 		 = buildings_in_neighborhood('long island city').with_bed(STUDIOS)
+					buildings = buildings_in_neighborhood('long island city').with_bed(STUDIOS)
 					filters[:beds] = STUDIOS
 				when 'upper-east-side-studio-apartments'
-					buildings 		 = buildings_in_neighborhood('upper east side').with_bed(STUDIOS)
+					buildings = buildings_in_neighborhood('upper east side').with_bed(STUDIOS)
 					filters[:beds] = STUDIOS
 				when 'upper-west-side-studio-apartments'
-					buildings 		 = buildings_in_neighborhood('upper west side').with_bed(STUDIOS)
+					buildings = buildings_in_neighborhood('upper west side').with_bed(STUDIOS)
 					filters[:beds] = STUDIOS
 				when "hell's-kitchen-studios"
-					buildings 		 = buildings_in_neighborhood("hell's kitchen").with_bed(STUDIOS)
+					buildings = buildings_in_neighborhood("hell's kitchen").with_bed(STUDIOS)
 					filters[:beds] = STUDIOS
 				when 'west-village-studios'
-					buildings 		 = buildings_in_neighborhood('west village').with_bed(STUDIOS)
+					buildings = buildings_in_neighborhood('west village').with_bed(STUDIOS)
 					filters[:beds] = STUDIOS
 				when '2-bedroom-apartments-upper-east-side'
-					buildings 		 = buildings_in_neighborhood('upper east side').with_bed(['2'])
+					buildings = buildings_in_neighborhood('upper east side').with_bed(['2'])
 					filters[:beds] = ['2']
 				#Luxury
 				when 'penthouses-for-rent-in-nyc'
 					buildings = @buildings.penthouse
 					filters[:list_min_price] = [Building::PENTHOUSES_MIN_PRICE]
 				when 'luxury-apartments-for-rent-in-nyc'
-					buildings 					= @buildings.luxury_rentals
+					buildings = @buildings.luxury_rentals
 					filters[:amenities] = LUXURY_APTS_AMENITIES
 				when 'affordable-luxury-apartments-in-nyc'
-					buildings 					= @buildings.where(price: AFFORDABLE_LUXURY_APTS_PRICES).luxury_rentals
-					filters[:price] 		= AFFORDABLE_LUXURY_APTS_PRICES
+					buildings = @buildings.where(price: AFFORDABLE_LUXURY_APTS_PRICES).luxury_rentals
+					filters[:price] = AFFORDABLE_LUXURY_APTS_PRICES
 					filters[:amenities] = LUXURY_APTS_AMENITIES
 				when 'brooklyn-luxury-rentals'
-					buildings 					= brooklyn_buildings.luxury_rentals
+					buildings = brooklyn_buildings.luxury_rentals
 					filters[:amenities] = LUXURY_APTS_AMENITIES
 				when 'luxury-apartments-in-manhattan-for-rent'
-					buildings 					= manhattan_buildings.luxury_rentals
+					buildings = manhattan_buildings.luxury_rentals
 					filters[:amenities] = LUXURY_APTS_AMENITIES
 				else
 					buildings = @buildings

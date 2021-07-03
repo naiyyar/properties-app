@@ -109,11 +109,11 @@ class Building < ApplicationRecord
   scope :random_order, -> { order(Arel.sql('random()')) }
   
   # popular searches
+  scope :with_amenities, -> (amenities) { where("amenities @> ARRAY[?]::varchar[]", amenities) }
   scope :luxury_rentals, -> { with_amenities(['doorman', 'elevator']) }
   scope :penthouses_luxury_rentals, -> (ids) { where(id: ids) }
   scope :penthouse, -> { where('max_listing_price >= ?', PENTHOUSES_MIN_PRICE) }
   scope :with_bed, -> (beds) { where("bedroom_types @> ARRAY[?]::varchar[]", beds) }
-  scope :with_amenities, -> (amenities) { where("amenities @> ARRAY[?]::varchar[]", amenities) }
 
   # pgsearch
   pg_search_scope :search, against: [:building_name, :building_street_address],

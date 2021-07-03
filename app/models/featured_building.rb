@@ -69,9 +69,17 @@ class FeaturedBuilding < ApplicationRecord
   private
 
   def self.searched_featured_buildings search_query
-    @buildings.joins(:featured_buildings)
-              .where('featured_buildings.active is true')
-              .random_order.limit(2)
+    # TOFIX: select and Ordering issue when filtering with listings filters
+    # @buildings.joins(:featured_buildings)
+    #           .where('featured_buildings.active is true')
+    #           .random_order.limit(2)
+    @buildings.where(id: random_two_active_featured_buildings.pluck(:building_id))
+  end
+
+  def self.random_two_active_featured_buildings
+    FeaturedBuilding.active
+                    .where(building_id: @buildings.pluck(:id))
+                    .order(Arel.sql('random()')).limit(2)
   end
   
   def check_active_status
