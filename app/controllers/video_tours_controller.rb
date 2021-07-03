@@ -22,10 +22,10 @@ class VideoToursController < ApplicationController
                   else 
                     [['Featured Listing', 'featured_listing']]
                   end
-
+    
     respond_to do |format|
       format.html{
-        redirect_back(fallback_location: building_path(@video_tours.values.first.first.tourable))
+        redirect_back(fallback_location: tourable_object_path )
       }
       format.js
     end
@@ -90,7 +90,7 @@ class VideoToursController < ApplicationController
     end
 
     def find_tourable
-      klass = params[:tourable_type].titleize || 'Building'
+      klass = params[:tourable_type] || 'Building'
       @tourable = klass.constantize.find(params[:tourable_id])
     end
     
@@ -100,5 +100,11 @@ class VideoToursController < ApplicationController
 
     def video_tour_params
       params.require(:video_tour).permit(:tourable_type, :tourable_id, :sort, :description, :category, :url, :image)
+    end
+
+    def tourable_object_path
+      tourable = (@tourable || @video_tours.values.first.first.tourable)
+      return featured_listing_path(tourable) if @tourable_type == 'FeaturedListing'
+      building_path(tourable)
     end
 end

@@ -65,9 +65,9 @@ class ManagementCompaniesController < ApplicationController
       @zoom = 13
     end
     @building_photos_count = @buildings.sum(:uploads_count)
-    @meta_desc             = "#{@management_company.name} manages #{@buildings_count} no fee apartment, 
-                              no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
-                              Click to view #{@building_photos_count} photos and #{@total_reviews} reviews."
+    @meta_desc = "#{@management_company.name} manages #{@buildings_count} no fee apartment, 
+                  no fee rental, for rent by owner buildings in NYC you can rent directly from and pay no broker fees. 
+                  Click to view #{@building_photos_count} photos and #{@total_reviews} reviews."
   end
 
   # GET /management_companies/new

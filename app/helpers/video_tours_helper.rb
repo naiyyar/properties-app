@@ -39,9 +39,9 @@ module VideoToursHelper
 		end
 	end
 
-	def youtube_url? url
-		url.include?('youtube') || url.match('youtube').present?
-	end
+	# def youtube_url? url
+	# 	url.include?('youtube') || url.match('youtube').present?
+	# end
 
 	def matterport_url? url
 		url.include?('matterport') || url.match('matterport').present?

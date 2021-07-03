@@ -209,16 +209,16 @@ module HomeHelper
 
 	def col1_popular_searches
 		{ 
-			'Manhattan' 		=> manhattan_searches, 
-			'NYC' 					=> nyc_searches, 
-			'Amenities' 		=> amenities_searches,
+			'Manhattan' => manhattan_searches, 
+			'NYC' => nyc_searches, 
+			'Amenities' => amenities_searches,
 			'Neighborhoods' => neighborhoods_searches
 		}
 	end
 
 	def col2_popular_searches
 		{ 
-			'Luxury' 							 => luxury_searches,
+			'Luxury' => luxury_searches,
 		 	'Luxury Neighborhoods' => luxury_neighborhoods
 		}
 	end
