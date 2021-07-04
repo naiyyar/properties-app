@@ -39,7 +39,7 @@ module Search
 
     def filter_by_amenities
       return @buildings unless @amenities.present?
-      @buildings.with_amenities(@amenities.select{|amenity| amenity != 'no_fee'})
+      @buildings.with_amenities(@amenities)
     end
     
     def filter_by_prices

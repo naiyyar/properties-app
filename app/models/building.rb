@@ -106,7 +106,7 @@ class Building < ApplicationRecord
   scope :with_pets, -> { where('pets_allowed_cats is true OR pets_allowed_dogs is true') }
   
   scope :random, -> (ids) { where(id: ids) }
-  scope :random_order, -> { order(Arel.sql('random()')) }
+  # scope :random_order, -> { order(Arel.sql('random()')) }
   
   # popular searches
   scope :with_amenities, -> (amenities) { where("amenities @> ARRAY[?]::varchar[]", amenities) }
