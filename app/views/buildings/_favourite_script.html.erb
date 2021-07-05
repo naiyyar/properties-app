@@ -1,8 +1,0 @@
-<% if listings_filters.present? %>
-  <%= hidden_field_tag :list_amenities, listings_filters[:amenities] %>
-  <%= hidden_field_tag :list_bedrooms,  listings_filters[:listing_bedrooms] %>
-  <% if listings_filters[:min_price].present? %>
-    <%= hidden_field_tag :list_min_price, listings_filters[:min_price] %>
-    <%= hidden_field_tag :list_max_price, listings_filters[:max_price] %>
-  <%end%>
-<%end%>

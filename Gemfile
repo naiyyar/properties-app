@@ -7,7 +7,6 @@ ruby '2.6.6'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.5'
 
 # A
-gem 'american_date'
 gem 'aws-sdk', '~> 3'
 
 # B
@@ -15,7 +14,6 @@ gem 'bootstrap-datepicker-rails'
 # gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap', '~> 5.0.1'
 gem 'browser'
-gem 'buttercms-rails'
 
 # C
 gem 'cancancan'
@@ -24,14 +22,12 @@ gem 'caxlsx_rails'
 gem 'client_side_validations'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
-gem 'counter_cache_with_conditions'
 
 # D
 gem 'dalli'
 gem 'delayed_job_active_record'
 gem 'detect_timezone_rails'
 gem 'devise', '4.4.3'
-gem 'dynamic_form'
 
 # E
 gem 'email_verifier'
@@ -52,8 +48,6 @@ gem 'iconv', '~> 1.0.3'
 
 # J
 gem 'jbuilder', '~> 2.5'
-gem 'jquery-fileupload-rails', github: 'Springest/jquery-fileupload-rails'
-gem 'jquery-placeholder-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -72,7 +66,6 @@ gem 'momentjs-rails'
 # O
 gem 'oj' # Oj for JSON serialization
 gem 'omniauth', '1.9.1'
-gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 
 # P
@@ -86,17 +79,12 @@ gem 'puma', '~> 3.11'
 
 # R
 gem 'ratyrate', github: 'wazery/ratyrate'
-# gem 'react-rails'
-gem 'recaptcha', require: 'recaptcha/rails'
 gem 'rolify'
-gem 'roo'
-gem 'rollbar'
 
 # S
 gem 'sass-rails', '~> 5.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'sitemap_generator'
 gem 'social-share-button'
 gem 'stripe'
 gem 'stripe_event'

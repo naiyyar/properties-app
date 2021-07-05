@@ -1,34 +1,19 @@
 class BillingsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_billing,     only: [:show, :update, :destroy]
-  before_action :set_customer_id, only: [:show, :pay_using_saved_card]
-  before_action :get_card,        only: :show
+  before_action :set_billing,     only: [:update, :destroy]
+  before_action :set_customer_id, only: [:pay_using_saved_card]
   
   def index
-    @limit    = 51
-    @billings = @current_user.billings.limit(@limit)
+    @billings = @current_user.billings.limit(50)
   end
 
-  def show
-    @view     = 'pdf'
-    file_name = "invoice_#{@billing.created_at.strftime('%d-%m-%Y')}"
-    respond_to do |format|
-      format.html { redirect_to request.referer }
-      format.js
-      format.pdf do
-        render wicked_pdf_options(file_name, 'billings/show')
-      end
-    end
-  end
+  def show;end
 
   def email_receipt
     if params[:email_to].present?
-      params[:email_to].split(',').each do |email|
-        Billings::SendPaymentReceiptJob.perform_later( params[:id],
-                                                       current_user.id,
-                                                       email.gsub(' ', ''), 
-                                                       params[:view])
-      end
+      Billings::SendPaymentReceiptJob.perform_later( params[:id],
+                                                     current_user.id,
+                                                     params[:email_to])
       flash[:notice] = 'Invoice successfully sent.'
     else
       flash[:error] = 'No email specified.'
@@ -41,11 +26,9 @@ class BillingsController < ApplicationController
   end
 
   def create_new_card
-    card_id = params[:billing][:stripe_card_id]
-    billing_service = BillingService.new(current_user, card_id)
+    billing_service = BillingService.new(current_user, params[:billing][:stripe_card_id])
     begin
-      customer_id = billing_service.get_customer_id
-      billing_service.create_source(customer_id)
+      billing_service.create_source(billing_service.get_customer_id)
     rescue Stripe::CardError => e
       puts "ERROR: #{e.message}"
     end
@@ -66,9 +49,9 @@ class BillingsController < ApplicationController
   def pay_using_saved_card
     @billing = Billing.new(billing_params)
     respond_to do |format|
-      if @billing.save_and_charge_existing_card!( user:         current_user,
-                                                  customer_id:  @customer_id,
-                                                  card_id:      billing_params[:billing_card_id]
+      if @billing.save_and_charge_existing_card!( user: current_user,
+                                                  customer_id: @customer_id,
+                                                  card_id: billing_params[:billing_card_id]
                                                 )
         format.html {
           redirect_to redirect_path, notice: 'Billing was successfully created.'
@@ -145,10 +128,5 @@ class BillingsController < ApplicationController
 
     def redirect_path
       view_context.redirect_url(@billing.billable_type)
-    end
-
-    # TODO: TO REMOVE WHEN MERGING WITH PRODUCTION
-    def get_card
-      @card = @billing.card(current_user, @customer_id)
     end
 end

@@ -1,43 +1,37 @@
-<% if current_user.has_role?(:admin) %>
-  <div class="tables1">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="table-overflow">
-          <table class="table table-striped table-bordered">
-            <thead>
+<% if current_user.admin? %>
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="table-overflow">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email (<%=@all_users.count%>)</th>
+              <th>Mobile</th>
+              <th>Phone</th>
+              <th>Listed properties</th>
+              <th>favorites</th>
+              <th>Creation date</th>
+              <th>Last login</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
               <tr>
-                <th>Name</th>
-                <th>Email (<%=@users.count%>)</th>
-                <th>Mobile</th>
-                <th>Phone</th>
-                <th>Listed properties</th>
-                <th>favorites</th>
-                <th>Creation date</th>
-                <th>Last login</th>
-                <th></th>
+                <td><%= user.name %></td>
+                <td><%= link_to user.email, user_path(user) %></td>
+                <td class='text-center'><%= user.try(:mobile)  %></td>
+                <td class='text-center'><%= user.try(:phone) %></td>
+                <td class='text-center'><%= user.buildings.count %></td>
+                <td class='text-center'><%= user.favorites.count if user.favorites.present? %></td>
+                <td class='text-center'><%= user.created_at.strftime("%Y-%m-%d") %></td>
+                <td class='text-center'><%= user.last_sign_in_at.strftime("%Y-%m-%d") if user.last_sign_in_at? %></td>
+                <td class='text-center'><%=link_to 'Contribution', contribution_user_path(user) %></td>
               </tr>
-            </thead>
-            <tbody>
-              <% cache @users do%>
-                <% @users.each do |user| %>
-                  <% cache user do%>
-                    <tr>
-                      <td><%= user.name %></td>
-                      <td><%= link_to user.email, user_path(user) %></td>
-                      <td class='text-center'><%= "#{user.mobile}" %></td>
-                      <td class='text-center'><%= "#{user.phone}" %></td>
-                      <td class='text-center'><%= user.buildings.present? ? user.buildings.count : '' %></td>
-                      <td class='text-center'><%= user.favorites.count if user.favorites.present? %></td>
-                      <td class='text-center'><%= user.created_at.strftime("%Y-%m-%d") %></td>
-                      <td class='text-center'><%= user.last_sign_in_at.strftime("%Y-%m-%d") if user.last_sign_in_at? %></td>
-                      <td class='text-center'><%=link_to 'Contribution', contribution_user_path(user) %></td>
-                    </tr>
-                  <%end%>
-                <%end%>
-              <%end%>
-            </tbody>
-          </table>
-        </div>
+            <%end%>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

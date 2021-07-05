@@ -1,4 +1,0 @@
-<% @building.reviews.order('created_at desc').each do |review| %>
-  <%= render partial: 'reviews/reviews', locals: { review: review, reviewable: @building } %>
-  <hr />
-<% end %>

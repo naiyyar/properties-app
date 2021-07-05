@@ -30,3 +30,4 @@
 /public/sitemaps/sitemap.xml
 /public/assets
 /node_modules
+/db/*

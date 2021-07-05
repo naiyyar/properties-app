@@ -8,12 +8,4 @@ class FeaturedObjectService
 	def get_buildings buildings=nil
   	FeaturedBuilding.active_in_neighborhood(buildings, @search_string)
   end
-
-  def get_listings
-  	FeaturedListing.get_random_objects(@search_string, @searched_by, limit: 2)
-  end
-
-  def get_agent
-  	FeaturedAgent.get_random_objects(@search_string, @searched_by, limit: 1).first
-  end
 end

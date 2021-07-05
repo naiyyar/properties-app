@@ -1,9 +1,0 @@
-.price-ranges.show-section
-	%h3 Building Price Range
-	- @price_ranges.reject{|r| r > 4 && r != Building::COLIVING_NUM}.each_pair do |bed_range, price|
-		.row
-			.col-lg-6.col-6
-				.font-14=bedroom_type(bed_range)
-			.col-lg-6.col-6
-				.font-14= set_ranges(@building.price, price) if price.present?
-                

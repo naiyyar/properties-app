@@ -2,11 +2,9 @@ class ReviewsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!,    :except => [:new, :index, :create]
   after_action :update_reviewable_info, only: :create
-  after_action :clear_cache,            only: [:create, :destroy]
 
-  include Searchable
+  include Filterrificable
   
-  # from production
   def index
     @reviews = filterrific_search_results.where(reviewable_type: 'Building').includes(:reviewable, :user)
     
@@ -16,34 +14,13 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def destroy_scraped_reviews
-    if current_user.admin?
-      Review.where(scraped: true).destroy_all
-      flash[:notice] = 'Destroyed successfully'
-    else
-      flash[:error] = 'You are not authorize to delete reviews.'
-    end
-
-    redirect_to request.referer
-  end
-
   def show
     @review = Review.find(params[:id])
   end
 
   def new
     @uid = Time.now.to_i
-    if params['buildings-search-txt'].present?
-      address     = params['buildings-search-txt'].split(',')[0]
-      @reviewable = Building.find_by_building_street_address_and_zipcode(address, params[:zip])
-      @reviewable = Building.find_by_building_street_address(address) if @reviewable.blank?
-    else
-      @reviewable = if params[:building_id].present?
-                      Building.find(params[:building_id])
-                    else
-                      Unit.find(params[:unit_id])
-                    end
-    end
+    @reviewable = Building.find(params[:building_id])
     @search_bar_hidden = :hidden
   end
 
@@ -57,15 +34,14 @@ class ReviewsController < ApplicationController
     else
       @reviewable = find_reviewable
       if @reviewable.create_review(current_user, params, review_params)
-        flash[:notice]             = 'Review Created Successfully.'
-        session[:after_contribute] = 'reviews'
+        flash[:notice] = 'Review Created Successfully.'
         if @reviewable.kind_of? Unit
           redirect_to unit_path(@reviewable)
         else
           redirect_to building_path(@reviewable)
         end
       else
-        flash.now[:error] = "Error in creating review. #{@review.errors.messages[:tos_agreement].first}"
+        flash.now[:error] = "Error in creating review. #{@review.errors.messages}"
         redirect_to request.referer
       end
     end
@@ -115,10 +91,6 @@ class ReviewsController < ApplicationController
     return unless @reviewable.kind_of?(Building)
     @reviewable.update(recommended_percent: @reviewable.suggested_percent, 
                        reviews_count: @reviewable.reviews.count)
-  end
-
-  def clear_cache
-    @reviewable&.update(updated_at: Time.now)
   end
 
 end

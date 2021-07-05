@@ -7,11 +7,11 @@ module BuildingsCountConcern
   end
 
   def popular_neighborhoods
-    @pop_nb_hash ||= pop_neighborhoods.group_by(&:name)
+    @pop_hash ||= pop_neighborhoods.group_by(&:name)
   end
 
   def pop_nb_buildings
-    @pop_nb_buildings ||= Building.transparentcity_buildings.select(*Building::ATTRS)
+    @pop_buildings ||= Building.app_buildings
   end
 
   def pop_neighborhoods
@@ -21,13 +21,6 @@ module BuildingsCountConcern
   protected
   
   def show_neighborhoods?
-    view_context.show_filters? || 
-    view_context.search_page? || 
-    view_context.building_show_page? ||
-    view_context.featured_listing_show_page? || 
-    view_context.management_show_page? ||
-    action_name == 'load_featured_buildings' || 
-    action_name == 'saved_buildings' ||
-    action_name == 'lazy_load_content'
+    helpers.search_page? || helpers.building_show_page? || helpers.management_show_page? ||
   end
 end

@@ -1,8 +1,0 @@
-<% if @reviews.present? %>
-	$('.objects-container').append('<%= j render @reviews %>');
-	<% if @reviews.count < 10 %>
-		$('a.load-more').hide();
-	<%end%>
-<%end%>
-
-Ratings.load_rating_stars();

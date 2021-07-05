@@ -12,7 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'no-reply@transparentcity.com'
+  config.mailer_sender = 'no-reply@myapp.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -240,7 +240,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  config.omniauth :facebook, ENV['FB_APP_ID'], ENV['FB_SECRET_ID'], callback_url: ENV['SERVER_ROOT']+'/users/auth/facebook/callback', scope: 'email', token_params: { parse: :json }
+  # config.omniauth :facebook, ENV['FB_APP_ID'], ENV['FB_SECRET_ID'], callback_url: ENV['SERVER_ROOT']+'/users/auth/facebook/callback', scope: 'email', token_params: { parse: :json }
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], { redirect_uri: ENV['SERVER_ROOT']+'/users/auth/google_oauth2/callback' }
 
   # ==> Warden configuration

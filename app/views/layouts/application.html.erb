@@ -1,56 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%= render 'layouts/layout_head', js_path: 'application', defer_flag: false %>
-    
-    <% if action_name == 'managertools' %>
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.1.2/css/paymentfont.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
-    <%end%>
-    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0">
+    <title>
+      <% if content_for? :page_title %>
+        <%= yield :page_title %> <%= seo_title_helper %>
+      <% else %>
+        <%= @tab_title_text = 'Apartments For Rent | All No Fee Apartments' %>
+      <% end %>
+    </title>
+    <meta name="description" content="<%=@meta_desc%>">
+
+    <%= javascript_include_tag 'application' %>
+    <%= favicon_link_tag 'favicon.png' %>
     <%= tag :meta, name: 'stripe-key', content: STRIPE_PUBLIC_KEY %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= layout_stylesheet_link 'jquery.fancybox.min' %>
+    <%if action_name == 'search' %>
+      <script async src="https://maps.google.com/maps/api/js?v=3.44&key=<%=ENV['GEOCODER_API_KEY']%>&libraries=places"></script>
+    <%end%>
+    <%= csrf_meta_tags %>
   </head>
   
-  <body class="notransition no-hidden">
+  <body>
     <%= render partial: 'layouts/shared/flash_messages', flash: flash  %>
-    <%= render 'layouts/shared/left_side' if mobile? %>
-    <% unless hide_search_bar? %>
-      <%= render 'layouts/shared/search_modal'%>
-      <%= render 'layouts/shared/wrapper' %>
-    <%else%>
-      <%= render 'layouts/home/header' if hide_search_bar? %>
-      <div class="content-wrapper <%= controller_name + action_name %>">
-        <%= render 'layouts/shared/pop_neighborhoods_list' %>
-        <%= yield %>
-      </div>
-      <%= render 'layouts/home/footer' if show_full_width_footer? && !contribute_page? %>
-    <%end%>
-    
-    <div id="remote-container"></div>
-    <div id="auth-form"></div>
-    
-    <%= javascript_include_tag 'zapp' %>
-    
-    <%if @lat.present? && @lng.present? %>
-      <script async src='<%=gmap_url_helper%>'></script>
-    <%end%>
-
-    <script type="text/javascript">
-      // hiding autocomplete search results when no input given
-      if($('#buildings-search-txt').length > 0){
-        $(document).on('keyup', '#buildings-search-txt', function(e) {
-          q = $(this).val();
-          if (q == '') {
-            $(".ui-autocomplete").hide();
-            $(".no-match-link").addClass('d-none');
-          }
-        })
-      }
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" integrity="sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <%= render 'layouts/shared/gtag_script' %>
+    <%= render 'layouts/shared/header'%>
+    <div class="content-wrapper">
+      <%= yield %>
+    </div>
   </body>
 </html>

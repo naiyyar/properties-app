@@ -2,7 +2,7 @@ class FeaturedBuildingsController < ApplicationController
   load_and_authorize_resource
   before_action :set_featured_building, only: [:show, :edit, :update, :destroy]
 
-  include Searchable
+  include Filterrificable
 
   def index
     @featured_buildings = filterrific_search_results.includes(:user, 
@@ -22,22 +22,22 @@ class FeaturedBuildingsController < ApplicationController
   # GET /featured_buildings/new
   def new
     session[:back_to] = request.fullpath if params[:type] != 'billing'
-    @object_id        = params[:object_id] || params[:fb_id]
+    @object_id = params[:object_id] || params[:fb_id]
     unless @object_id
       @featured_building = FeaturedBuilding.new
     else
       @featured_by = params[:featured_by] 
       @object_type = 'FeaturedBuilding'
-      @object      = FeaturedBuilding.find(@object_id)
-      @price       = Billing::FEATURED_PRICES[@object_type]
+      @object = FeaturedBuilding.find(@object_id)
+      @price = Billing::FEATURED_PRICES[@object_type]
       @saved_cards = BillingService.new(current_user).get_saved_cards rescue nil
     end
   end
 
   # GET /featured_buildings/1/edit
   def edit
-    @featured_by       = params[:featured_by]
-    session[:back_to]  = request.fullpath if params[:type] != 'billing'
+    @featured_by = params[:featured_by]
+    session[:back_to] = request.fullpath if params[:type] != 'billing'
   end
 
   # POST /featured_buildings

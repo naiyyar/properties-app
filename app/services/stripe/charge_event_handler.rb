@@ -26,10 +26,6 @@ module Stripe
 
     def handle_charge_failed(event)
       puts 'handle_charge_failed'
-      #object        = event.data.object
-      #user          = billing_user(object.customer)
-      #card          = object.payment_method_details.card
-      #BillingMailer.payment_failed(brand: card.brand, last4: card.last4, to_email: user.email).deliver
     end
 
     def handle_charge_succeeded(event)

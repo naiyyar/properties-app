@@ -31,18 +31,12 @@ class Upload < ApplicationRecord
   # scopes
   default_scope { order('sort asc') }
   scope :with_image, -> { where.not(image_file_name: nil) }
-  scope :with_doc,   -> { where.not(document_file_name: nil) }
+  scope :with_doc, -> { where.not(document_file_name: nil) }
 
   # callbacks
   before_save :set_sort_index
-  after_save :update_counter_cache, :if => Proc.new{ |obj| obj.image_file_name.present? }
-  after_destroy :update_counter_cache
 
   # Methods
-
-  def date_uploaded
-    created_at.strftime("%m/%d/%Y")
-  end
 
   def orig_image_url
     image.url
@@ -54,12 +48,6 @@ class Upload < ApplicationRecord
 
   def uploaded_img_url style = :medium
     image.url(style)
-    #!Warning: Exists checking taking too much time
-    # if self.image.exists?(:medium)
-    #   self.image.url(:medium)
-    # else
-    #   self.image.url(:original)
-    # end
   end
 
   def slider_thumb_image style = :medium
@@ -90,16 +78,13 @@ class Upload < ApplicationRecord
   end
 
   # class Methods
-  ##################################
+
+  def self.cached_property_photos property_ids, type
+    building_photos(property_ids, type)
+  end
 
   def self.building_photos property_ids, type='Building'
     where(imageable_id: property_ids, imageable_type: type)
-  end
-
-  def self.cached_property_photos property_ids, type
-    @property_ids = property_ids
-    CacheService.new(records: building_photos(@property_ids, type) , 
-                     key: "#{type}_photos_#{self.id}_#{cache_key}").fetch
   end
 
   def self.uploads_json_hash(uploads)
@@ -130,28 +115,7 @@ class Upload < ApplicationRecord
     self.rotation ||= 0
   end
 
-  def update_counter_cache
-    begin
-      self.imageable.update_column('uploads_count', uploads_count)
-    rescue Exception => e
-      puts "SQL error in #{ __method__ }"
-      ActiveRecord::Base.connection.execute 'ROLLBACK'
-
-      raise e
-    end
-  end
-
-  def uploads_count
-    Upload.where('image_file_name is not null AND 
-                  imageable_id = ? AND 
-                  imageable_type = ?', imageable.id, imageable.class.name).size
-  end
-
   def set_sort_index
     self.sort = self.imageable.uploads_count
   end
-
-  # def is_video?
-  #   image.instance.attachment_content_type =~ %r(video)
-  # end
 end

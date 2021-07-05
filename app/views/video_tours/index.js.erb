@@ -1,4 +1,0 @@
-var container = $('#tour-videos-<%=@category%>');
-if(container.children().length == 0){
-	$('#tour-videos-<%=@category%>').html("<%= j render 'video_tours/tour_videos', video_tours: @video_tours %>");
-}

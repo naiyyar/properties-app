@@ -10,32 +10,8 @@ module BuildingsHelper
 		]
 	end
 
-	def imageable upload
-		if upload.imageable.present?
-			if upload.imageable_type == 'Building'
-				upload.imageable.building_name
-			elsif upload.imageable_type == 'Unit'
-				upload.imageable.name
-			else
-				''
-			end
-		end
-	end
-
-	def reviewable_path review
-		if review.reviewable_object.kind_of? Building
-      building_path(review.reviewable_object)
-    elsif review.reviewable_object.kind_of? Unit
-      unit_path(review.reviewable_object)
-    end
-	end
-
 	def single_image(building)
 		building.uploads.present? ? building.uploads.last.image.url : Building::NO_PHOTO
-	end
-
-	def feature_comp_bg_img_url uploads
-		uploads.present? ? uploads.uploaded_img_url(:original) : image_url(Building::NO_PHOTO)
 	end
 
 	def disabled(current_user, val)
@@ -54,21 +30,6 @@ module BuildingsHelper
 		action_name == 'contribute' || params[:contribution].present?
 	end
 
-	def recommended_percent object
-		recommended = ''
-		if object&.recommended_percent.present?
-			rec_percent = object.recommended_percent
-			recommended = if rec_percent.nan? 
-											"#{thumbs_up_icon_helper} --%"
-										elsif rec_percent == 0
-											"#{thumbs_up_icon_helper} 0%"
-										else
-											"#{thumbs_up_icon_helper} #{rec_percent.to_i}%"
-										end
-		end
-		"#{recommended} &nbsp;"
-	end
-
 	def date_uploaded object
 		"<b>#{ associated_object(object.imageable) }</b>" +
 		"<p>Date uploaded: #{ object.created_at.strftime('%m/%d/%Y') }</p>" +
@@ -81,10 +42,6 @@ module BuildingsHelper
 		else
 			imageable && imageable.class.name == 'Building' ? show_slider_cta_links(imageable) : ''
 		end
-	end
-
-	def show_slider_cta_links imageable
-		CTALinksPolicy.new(imageable).show_contact_leasing? ? contact_leasing_link(imageable, '', 'btn-slider') : check_availability_link(imageable, 'btn-slider')
 	end
 
 	def sort_string

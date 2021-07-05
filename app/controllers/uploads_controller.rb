@@ -4,18 +4,7 @@ class UploadsController < ApplicationController
 	before_action :authenticate_user!, only: [:destroy]
 
 	def index
-    if params[:building_id].present?
-      @imageable = Building.find(params[:building_id])
-    elsif params[:unit_id]
-      @imageable = Unit.find(params[:unit_id])
-    elsif params[:featured_agent_id]
-      @imageable = FeaturedAgent.find(params[:featured_agent_id])
-    elsif params[:featured_listing_id]
-      @imageable = FeaturedListing.find(params[:featured_listing_id])
-    else
-      @uploads = Upload.order('created_at desc').limit(52)
-    end
-    @uploads = @imageable.uploads.with_image if @imageable.present?
+    @uploads = Upload.order('created_at desc').limit(52)
 
     respond_to do |format|
       format.html
@@ -30,28 +19,11 @@ class UploadsController < ApplicationController
     params[:order].each_pair do |key, value|
       uploads.find(value[:id]).update_columns(sort: key, updated_at: Time.now)
     end
-    Rails.cache.clear();
     render json: { message: 'success' }, :status => 200
   end
 
   def photos
     @pagy, @photos = pagy(Upload.where('image_file_name is not null'), items: 50)
-  end
-
-  def lazy_load_images
-    object_klass = params[:object_type].constantize
-    @property = object_klass.find(params[:object_id])
-    assets = @property.get_uploads
-    @uploads, @documents = assets[:image_uploads], assets[:doc_uploads]
-    @uploaded_images_count = @property.uploads_count.to_i
-    
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def documents
-    @documents = Upload.with_doc
   end
 
   def rotate
@@ -69,17 +41,7 @@ class UploadsController < ApplicationController
 
 	def new
     @upload_type = params[:upload_type]
-    if params['buildings-search-txt'].present?
-      address = params['buildings-search-txt'].split(',')[0]
-      zipcode = params[:zip].present? ? params[:zip] : params['buildings-search-txt'].split('NY ').last 
-      @imageable = Building.find_by_building_street_address_and_zipcode(address, zipcode)
-  	else	
-      if params[:building_id].present?
-  			@imageable = Building.find(params[:building_id])
-  		else
-  			@imageable = Unit.find(params[:unit_id])
-  		end
-    end
+    @imageable = Building.find(params[:building_id])
   end
 
 	def create
@@ -105,8 +67,6 @@ class UploadsController < ApplicationController
         }
       end
     else
-      #  you need to send an error header, otherwise Dropzone
-      #  will not interpret the response as an error:
       render json: { error: @upload.errors.full_messages.join(',')}, :status => 400
     end     
 	end

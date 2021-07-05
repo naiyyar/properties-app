@@ -1,7 +1,0 @@
-%div{style: "padding: 10px; color: ##{cat_color};"}
-	- @categories.each do |category|
-		- video_tours = @video_tours[category[1]]
-		- if video_tours.present?
-			%p.font-16.font-bold
-				= category[0] if tourable_type == 'Building'
-			.row= render 'video_tours/tour_videos', video_tours: video_tours

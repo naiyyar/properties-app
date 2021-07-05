@@ -1,4 +1,4 @@
-- if screen_class == 'screen-sm' && !home_page? && !blog_view?
+- if mobile? && !home_page? && !blog_view?
   = render 'layouts/shared/mobile_header'
 - else
   = render 'layouts/shared/new_header'

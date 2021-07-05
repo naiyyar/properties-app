@@ -14,59 +14,12 @@ module ApplicationHelper
     "#{contribute_wrapper(params)} #{screen_class} #{@search_bar_hidden == :hidden ? 'mt0' : ''}"
   end
 
-  def tool_nav_helper
-    @tool_nav ||= [
-      { title: 'Agent Tools',   url: agenttools_user_path(current_user,   type: 'featured') },
-      { title: 'FRBO Tools',    url: frbotools_user_path(current_user,    type: 'featured') },
-      { title: 'Manager Tools', url: managertools_user_path(current_user, type: 'featured') }
-    ]
-  end
-
-  def advertise_with_us_items
-    @addvertise_with_us_items ||= [
-      { title: 'Agents',            type: 'agents' },
-      { title: 'For Rent By Owner', type: 'for-rent-by-owner' },
-      { title: 'Property Managers', type: 'property-managers' }
-    ]
-  end
-
-  def tbl_cell_width lg_width, sm_width=''
-    mobile? ? (sm_width.present? ? sm_width : lg_width) : lg_width
-  end
-
-  # adding last page custom class to pagination ul
-  def last_page_class collection
-    return unless collection.total_pages == collection.current_page
-    'last-page'
-  end
-
-  # adding first page custom class to pagination ul
-  def first_page_class collection
-    return unless collection.current_page == 1
-    'first-page'
-  end
-
   def screen_class
     mobile? ? 'screen-sm' : 'screen-lg'
   end
 
   def mobile?
     browser.device.mobile?
-  end
-
-  # logo image
-  def alt_text
-    'No Fee Apartments For Rent In NYC | Transparentcity.co'
-  end
-
-  def search_placeholder_input_helper
-    text_field_tag 'search-input-placeholder', 
-                    nil, 
-                    class: "border-top-lr-radius border-bottom-lr-radius #{search_placeholder_input_form_ctrl_class}", 
-                    placeholder: search_input_placeholders, 
-                    style: search_placeholder_input_styles, 
-                    readonly: true,
-                    onclick: 'SearchModal.showSearchModal()'
   end
 
   def home_page?

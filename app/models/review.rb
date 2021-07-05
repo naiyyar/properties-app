@@ -1,43 +1,11 @@
-# == Schema Information
-#
-# Table name: reviews
-#
-#  id               :integer          not null, primary key
-#  review_title     :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  building_id      :integer
-#  user_id          :integer
-#  reviewable_id    :integer
-#  reviewable_type  :string
-#  building_address :string
-#  tenant_status    :string
-#  resident_to      :string
-#  pros             :string
-#  cons             :string
-#  other_advice     :string
-#  anonymous        :boolean          default(FALSE)
-#  tos_agreement    :boolean          default(FALSE)
-#  resident_from    :string
-#  scraped          :boolean          default(FALSE)
-#
-
 class Review < ApplicationRecord
 	resourcify
-  belongs_to :reviewable, polymorphic: true, counter_cache: true, :touch => true
-  belongs_to :user, counter_cache: true
-  has_many :useful_reviews
-  has_many :review_flags
-  
   include ImageableConcern
   include PgSearch::Model
-  
-  validates :tos_agreement, :allow_nil => false, :acceptance => { :accept => true }, :on => :create #, message: 'Terms not accepted.'
-  
-  after_destroy :destroy_dependents
 
-  # default_scope { order('created_at DESC') }
-
+  belongs_to :reviewable, polymorphic: true, counter_cache: true, :touch => true
+  belongs_to :user, counter_cache: true
+  
   pg_search_scope :search_query, against: [:review_title, :pros, :cons],
      :using => { :tsearch => { prefix: true } }
 
@@ -82,11 +50,6 @@ class Review < ApplicationRecord
     reviewable_object.name
   end
 
-  def property_address
-    return if reviewable_object.blank?
-    "#{reviewable_object.street_address} #{reviewable_object.zipcode}"
-  end
-
   def reviewable_object
     @reviewable_object ||= self.reviewable
   end
@@ -109,18 +72,6 @@ class Review < ApplicationRecord
 
   def set_imageable uid
     Upload.where(file_uid: uid).update_all(imageable_id: self.id, imageable_type: 'Review')
-  end
-
-  private
-  # To remove rating and votes
-  def destroy_dependents
-    Vote.where(review_id: self.id).destroy_all
-    rate = Rate.where(review_id: self.id).destroy_all
-    # update stars
-    rating_caches = RatingCache.where(cacheable_id: self.reviewable_id, cacheable_type: self.reviewable_type)
-    
-    # updating avg ratign for all dimensions
-    rating_caches.map{ |rc| RatingCache.update_rating_cache(rc) }
   end
 
 end

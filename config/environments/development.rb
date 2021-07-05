@@ -17,7 +17,7 @@ Rails.application.configure do
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
-    config.cache_store = :dalli_store, nil, { :namespace => 'dev_apt_reviews', :expires_in => 1.day, :compress => true }
+    config.cache_store = :dalli_store, nil, { :namespace => 'properties_app', :expires_in => 1.day, :compress => true }
     # config.cache_store = :mem_cache_store
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
@@ -63,8 +63,8 @@ Rails.application.configure do
   config.paperclip_defaults = {
     storage: :s3,
     s3_protocol: 'https',
-    s3_region: 'us-west-2',
-    :s3_host_name => 's3-us-west-2.amazonaws.com',
+    s3_region: ENV['AWS_S3_REGION'],
+    :s3_host_name => ENV['AWS_S3_HOST_NAME'],
     s3_credentials: {
       bucket: ENV['AWS_S3_BUCKET'],
       access_key_id: ENV['AWS_ACCESS_KEY_ID'],
@@ -72,7 +72,6 @@ Rails.application.configure do
       s3_region: ENV['AWS_REGION']
     },
     s3_headers: { 'Cache-Control' => 'public, max-age=315576000' }
-    #:path => '/:class/:attachment/:id_partition/:style/:filename'
   }
   config.action_mailer.delivery_method = :letter_opener
 

@@ -1,2 +1,0 @@
-- if @user.present?
-	= render 'layouts/shared/tools_widget', title: 'Featured Listings', featured_url: frbotools_user_path(current_user, type: 'featured'), billing_url: frbotools_user_path(current_user, type: 'billing'), add_new_link: new_featured_building_link, featured_objects: @featured_listings, partial_file_path: 'featured_listings/featured_listing', add_new_card_url: new_manager_featured_listing_user_path(current_user, type: 'add_new_card')

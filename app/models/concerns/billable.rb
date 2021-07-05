@@ -2,12 +2,10 @@ module Billable
 	extend ActiveSupport::Concern
 	
   included do
-		has_many :billings, as: :billable #, dependent: :destroy
-
+		has_many :billings, as: :billable
+    
     after_destroy :destroy_billings
 	end
-
-  DEV_HOSTS = %w(http://localhost:3003 https://aptreviews-app.herokuapp.com)
 
   def model_class
     self.class.name.constantize
@@ -54,15 +52,12 @@ module Billable
   end
 
   def days_count
-    if DEV_HOSTS.include?(ENV['SERVER_ROOT']) 
-      2.days
-    else
-      (model_class::FEATURING_DAYS - 1).days
-    end
+    (model_class::FEATURING_DAYS - 1).days
   end
 
   def set_end_date renew_date, days
-    renew_date.present? ? (renew_date + days) : (_start_date + days)
+    renew_date + days if renew_date.present?
+    _start_date + days
   end
 
   def renew_time day_before

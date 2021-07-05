@@ -1,14 +1,10 @@
 class Billing < ApplicationRecord
 	FEATURED_PRICES = {
-		'FeaturedAgent' => 9,
-		'FeaturedBuilding' => 49,
-		'FeaturedListing' => 14
-	}
+		'FeaturedBuilding' => 49
+	}.freeze
 
 	TYPE_TOOLS = {
-		'FeaturedAgent' => 'Agent',
-		'FeaturedBuilding' => 'Manager',
-		'FeaturedListing' => 'FRBO'
+		'FeaturedBuilding' => 'Manager'
 	}.freeze
 	
 	belongs_to :billable, polymorphic: true
@@ -31,11 +27,14 @@ class Billing < ApplicationRecord
 		billing_card_id && brand && last4
 	end
 
+	def price
+		FEATURED_PRICES[billable_type]
+	end
+
 	def save_and_make_payment!
 		if valid?
       begin
-      	#stripe_card_id is same as payment_token
-      	billing_service 			= BillingService.new(user, stripe_card_id)
+      	billing_service 			= BillingService.new(user, payment_token)
       	customer_id 					= billing_service.get_customer_id
       	card 									= billing_service.create_source(customer_id)
       	self.billing_card_id 	= card.id
@@ -51,23 +50,6 @@ class Billing < ApplicationRecord
     else
     	errors.add(:base, 'Email can not be blank.')  if email.blank?
     end
-	end
-
-	def save_and_charge_existing_card! options={}
-		if valid?
-			begin
-				billing_service = BillingService.new(options[:user], nil)
-				if save
-					options.merge!(billing: self)
-					billing_service.create_charge!(options)
-				end
-			rescue Stripe::CardError => e
-	      errors.add :credit_card, e.message
-	      false
-	    end
-	  else
-	  	errors.add(:base, 'Email can not be blank.')  if email.blank?
-	  end
 	end
 
 	def self.create_billing user:, card:, customer_id:, billable:
@@ -87,14 +69,26 @@ class Billing < ApplicationRecord
     end
 	end
 
-	def price
-		FEATURED_PRICES[billable_type]
+	def save_and_charge_existing_card! options={}
+		if valid?
+			begin
+				billing_service = BillingService.new(options[:user], nil)
+				if save
+					options.merge!(billing: self)
+					billing_service.create_charge!(options)
+				end
+			rescue Stripe::CardError => e
+	      errors.add :credit_card, e.message
+	      false
+	    end
+	  else
+	  	errors.add(:base, 'Email can not be blank.')  if email.blank?
+	  end
 	end
 	
 	def billing_description
-		billable = self.billable
 		unless renew_date
-			"ID #{billable_id} #{inv_description} #{billing_start_date(billable&.start_date)}"
+			"ID #{billable_id} #{inv_description} #{billing_start_date(self.billable&.start_date)}"
 		else
 			"ID #{billable_id} Renewed #{inv_description} #{billing_start_date(renew_date + 2.day)}"
 		end
@@ -102,7 +96,7 @@ class Billing < ApplicationRecord
 
 	def card current_user, stripe_customer_id
 		billing_service = BillingService.new(current_user)
-		charge_obj 			= billing_service.get_charge(stripe_charge_id)
+		charge_obj = billing_service.get_charge(stripe_charge_id)
 		billing_service.get_card(stripe_customer_id, charge_obj.payment_method) if charge_obj.present?
 	end
 

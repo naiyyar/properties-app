@@ -95,46 +95,15 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  
-  config.paperclip_defaults = {
-    storage: :s3,
-    s3_protocol: 'https',
-    s3_region: 'us-west-2',
-    :s3_host_name => 's3-us-west-2.amazonaws.com',
-    s3_credentials: {
-      bucket: ENV.fetch('AWS_S3_BUCKET'),
-      access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
-      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
-      s3_region: ENV.fetch('AWS_REGION'),
-    },
-    s3_headers: { 'Cache-Control' => 'public, max-age=15552000' }
-  }
 
   config.action_mailer.default_url_options = { host: ENV['SERVER_ROOT'] }
   config.action_mailer.asset_host = ENV['SERVER_ROOT']
   config.action_mailer.delivery_method = :smtp
 
-  ActionMailer::Base.smtp_settings = {
-    :user_name => 'apikey',
-    :password => ENV['SENDGRID_API_KEY'],
-    :domain => 'transparentcity-dev.herokuapp.com',
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-  }
-
-  # client = Dalli::Client.new((ENV["MEMCACHIER_SERVERS"] || "").split(","),
-  #                          :username => ENV["MEMCACHIER_USERNAME"],
-  #                          :password => ENV["MEMCACHIER_PASSWORD"],
-  #                          :failover => true,
-  #                          :socket_timeout => 1.5,
-  #                          :socket_failure_delay => 0.2,
-  #                          :value_max_bytes => 10485760)
-  config.cache_store = [:mem_cache_store, (ENV["MEMCACHIER_SERVERS"] || "").split(","),
-                      { :username => ENV["MEMCACHIER_USERNAME"],
-                        :password => ENV["MEMCACHIER_PASSWORD"],
-                        :failover => true,
-                        :socket_timeout => 1.5,
-                        :socket_failure_delay => 0.2 }]
+  # config.cache_store = [:mem_cache_store, (ENV["MEMCACHIER_SERVERS"] || "").split(","),
+  #                     { :username => ENV["MEMCACHIER_USERNAME"],
+  #                       :password => ENV["MEMCACHIER_PASSWORD"],
+  #                       :failover => true,
+  #                       :socket_timeout => 1.5,
+  #                       :socket_failure_delay => 0.2 }]
 end
